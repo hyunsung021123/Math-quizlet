@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>심층 학습 노트 · Problem-Driven Learning</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+<!-- KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+<style>
+:root{
+  --paper:#F4F6F1;
+  --grid:rgba(28,35,51,.045);
+  --surface:#FFFFFF;
+  --surface-2:#FBFCF9;
+  --ink:#1B2333;
+  --ink-soft:#48506A;
+  --ink-faint:#8A90A3;
+  --line:#E4E7E0;
+  --line-strong:#D3D7CC;
+  --primary:#2E4374;
+  --primary-soft:#EDF0F8;
+  --intuition-bg:#EDF1FA;
+  --intuition-accent:#3E63A8;
+  --intuition-ink:#2B4372;
+  --insight-bg:#FBF4E4;
+  --insight-accent:#D6A23E;
+  --insight-ink:#7C5514;
+  --ok:#2F7D5B; --ok-bg:#E9F4EE;
+  --no:#B0483C; --no-bg:#F8ECEA;
+  --radius:14px;
+  --serif:"Noto Serif KR", Georgia, "Times New Roman", serif;
+  --sans:"Pretendard","Pretendard Variable",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+*{ box-sizing:border-box; }
+h1,h2,h3,p,ol,ul{ margin:0; }
+button{ font:inherit; }
+
+body{
+  margin:0; font-family:var(--sans); color:var(--ink); line-height:1.65;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:27px 27px;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); outline-offset:2px; }
+
+/* ---------- Header ---------- */
+.app-header{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:16px; justify-content:space-between;
+  padding:11px clamp(16px,4vw,40px);
+  background:rgba(244,246,241,.85); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{ display:flex; align-items:center; gap:11px; min-width:0; }
+.brand-mark{ width:27px; height:27px; color:var(--primary); flex:0 0 auto; }
+.brand-text{ font-family:var(--serif); font-weight:700; font-size:1.02rem; letter-spacing:-.01em; color:var(--ink); line-height:1.1; }
+.brand-sub{ color:var(--ink-faint); font-size:.66rem; font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase; margin-top:2px; }
+.topic-wrap{ display:flex; align-items:center; gap:9px; min-width:0; }
+.topic-label{ font-size:.68rem; font-family:var(--mono); color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
+.topic-select{
+  font-family:var(--sans); font-size:.88rem; color:var(--ink);
+  background:var(--surface); border:1px solid var(--line-strong); border-radius:10px;
+  padding:8px 34px 8px 12px; max-width:min(54vw,340px);
+  appearance:none; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A90A3' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center;
+}
+.topic-label.hide-sm{}
+@media (max-width:520px){ .topic-label{ display:none; } }
+
+/* ---------- Layout ---------- */
+.layout{ display:grid; grid-template-columns:264px minmax(0,1fr); max-width:1200px; margin:0 auto; align-items:start; }
+@media (max-width:960px){ .layout{ grid-template-columns:1fr; } }
+
+/* ---------- Rail ---------- */
+.rail{ position:sticky; top:63px; align-self:start; padding:26px 6px 40px 0; }
+.rail-inner{ display:flex; flex-direction:column; gap:4px; }
+.rail-title{ font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); padding:0 12px 8px; }
+.rail-list{ display:flex; flex-direction:column; gap:4px; }
+.rail-item{
+  display:flex; align-items:flex-start; gap:10px; text-align:left;
+  font-family:var(--sans); font-size:.86rem; color:var(--ink-soft);
+  background:transparent; border:1px solid transparent; border-radius:10px;
+  padding:9px 12px; cursor:pointer; width:100%;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.rail-item:hover{ background:var(--surface); color:var(--ink); }
+.rail-item.active{ background:var(--surface); color:var(--ink); border-color:var(--line-strong); box-shadow:0 1px 2px rgba(27,35,51,.05); font-weight:600; }
+.rail-num{ font-family:var(--mono); font-size:.74rem; color:var(--ink-faint); flex:0 0 auto; margin-top:1px; }
+.rail-item.active .rail-num{ color:var(--primary); }
+.rail-item.done .rail-num{ color:var(--ok); }
+.rail-label{ overflow:hidden; text-overflow:ellipsis; }
+.rail-sep{ height:1px; background:var(--line); margin:10px 12px; }
+.rail-review .rail-num{ color:var(--insight-accent); }
+
+@media (max-width:960px){
+  .rail{ position:sticky; top:56px; padding:0; z-index:40; background:rgba(244,246,241,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  .rail-inner{ flex-direction:row; align-items:center; gap:6px; overflow-x:auto; padding:9px clamp(12px,4vw,24px); -webkit-overflow-scrolling:touch; }
+  .rail-title, .rail-sep{ display:none; }
+  .rail-list{ flex-direction:row; gap:6px; }
+  .rail-item{ width:auto; flex:0 0 auto; white-space:nowrap; align-items:center; }
+  .rail-label{ white-space:nowrap; }
+}
+
+/* ---------- Content ---------- */
+.content{ min-width:0; padding:26px clamp(16px,4vw,44px) 80px; }
+.chapter-banner, .section, .review-block, .navbtns{ max-width:760px; margin-left:auto; margin-right:auto; }
+
+.chapter-banner{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 2px rgba(27,35,51,.03); }
+.chapter-eyebrow{ font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; color:var(--ink-faint); }
+.chapter-title{ font-family:var(--serif); font-weight:700; font-size:clamp(1.35rem,3.4vw,1.7rem); line-height:1.3; margin-top:6px; color:var(--ink); letter-spacing:-.01em; }
+.chapter-goal{ margin-top:13px; color:var(--ink-soft); font-size:.98rem; line-height:1.7; }
+.chapter-source{ margin-top:12px; font-size:.78rem; color:var(--ink-faint); font-family:var(--mono); }
+
+.section-head{ margin-bottom:22px; }
+.section-kicker{ font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--primary); }
+.section-title{ font-family:var(--serif); font-weight:600; font-size:clamp(1.2rem,3vw,1.45rem); line-height:1.35; margin-top:6px; color:var(--ink); }
+
+/* ---------- Step flow ---------- */
+.flow{ position:relative; }
+.step{ position:relative; padding-left:52px; margin-bottom:26px; }
+.step::before{ content:''; position:absolute; left:17px; top:40px; bottom:-26px; width:2px; background:linear-gradient(var(--line-strong), var(--line)); }
+.step:last-child::before, .step.step-last::before{ display:none; }
+.step-badge{ position:absolute; left:0; top:0; width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font-family:var(--mono); font-weight:600; font-size:.95rem; color:#fff; background:var(--primary); box-shadow:0 2px 8px rgba(46,67,116,.24); }
+.step-head{ display:flex; align-items:center; min-height:36px; margin-bottom:12px; }
+.step-eyebrow{ font-family:var(--mono); font-size:.66rem; letter-spacing:.14em; color:var(--ink-faint); }
+.step-name{ font-family:var(--serif); font-weight:600; font-size:1.02rem; color:var(--ink); margin-top:1px; }
+
+.prose{ font-size:1rem; color:var(--ink); line-height:1.75; }
+p.prose{ margin:0; }
+.prose + .prose{ margin-top:12px; }
+.muted{ color:var(--ink-faint); font-size:.92rem; }
+
+.intuition{ margin-top:14px; background:var(--intuition-bg); border:1px solid #DCE3F2; border-radius:12px; padding:14px 16px; }
+.intuition-head{ font-family:var(--serif); font-weight:600; font-size:.9rem; color:var(--intuition-ink); margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+.intuition-head::before{ content:''; width:9px; height:9px; background:var(--intuition-accent); transform:rotate(45deg); border-radius:2px; }
+.intuition .prose{ color:#2C3550; }
+
+/* accordion */
+.accordion-toggle{ display:flex; align-items:center; gap:10px; width:100%; font-family:var(--sans); font-size:.92rem; font-weight:600; color:var(--primary); background:var(--primary-soft); border:1px solid #DDE3F1; border-radius:10px; padding:11px 14px; cursor:pointer; transition:background .15s; }
+.accordion-toggle:hover{ background:#E5EAF6; }
+.chevron{ font-size:.8rem; transition:transform .2s ease; display:inline-block; }
+.accordion-toggle.is-open .chevron{ transform:rotate(90deg); }
+
+/* collapse (height animation, robust) */
+.collapse{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .28s ease; }
+.collapse.open{ grid-template-rows:1fr; }
+.collapse > .collapse-inner{ overflow:hidden; min-height:0; }
+
+.blocks{ margin-top:12px; display:flex; flex-direction:column; gap:16px; }
+.claim{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; box-shadow:0 1px 2px rgba(27,35,51,.03); }
+.claim-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.claim-type{ font-family:var(--mono); font-size:.7rem; font-weight:500; letter-spacing:.03em; padding:3px 9px; border-radius:999px; white-space:nowrap; }
+.claim-name{ font-family:var(--serif); font-weight:600; font-size:.95rem; color:var(--ink); }
+.claim-statement{ padding-left:14px; border-left:3px solid var(--line-strong); }
+.type-def{ background:#EAF0FA; color:#2C4B86; }
+.type-thm{ background:var(--primary); color:#fff; }
+.type-lem, .type-prop, .type-cor{ background:#E7F1EC; color:#2C6B52; }
+.type-rem{ background:#EFEFEC; color:#5B6072; }
+.type-ex{ background:#F3EFE6; color:#7A5A22; }
+
+.insight{ margin-top:14px; background:var(--insight-bg); border:1px solid #EDDCB4; border-left:3px solid var(--insight-accent); border-radius:10px; padding:13px 15px; }
+.insight-head{ font-family:var(--serif); font-weight:600; font-size:.88rem; color:var(--insight-ink); margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+.insight-head::before{ content:''; width:9px; height:9px; background:var(--insight-accent); transform:rotate(45deg); border-radius:2px; }
+.insight .prose{ color:#6A4E1E; }
+
+.proof{ margin-top:14px; }
+.proof-head{ font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:9px; }
+.proof-list{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+.proof-list li{ position:relative; padding-left:17px; color:var(--ink); font-size:.97rem; line-height:1.7; }
+.proof-list li::before{ content:''; position:absolute; left:1px; top:12px; width:6px; height:6px; border-radius:50%; background:var(--line-strong); }
+
+/* checkpoint / QA */
+.qa{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; box-shadow:0 1px 2px rgba(27,35,51,.03); }
+.qa + .qa{ margin-top:14px; }
+.qa-q{ display:flex; gap:10px; align-items:flex-start; }
+.qa-tag{ font-family:var(--mono); font-size:.72rem; font-weight:600; color:var(--primary); background:var(--primary-soft); border-radius:6px; padding:3px 7px; flex:0 0 auto; margin-top:2px; }
+.qa-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.btn{ font-family:var(--sans); font-size:.85rem; font-weight:600; border-radius:9px; padding:8px 14px; cursor:pointer; border:1px solid var(--primary); background:var(--primary); color:#fff; transition:filter .15s,background .15s; }
+.btn:hover{ filter:brightness(1.06); }
+.btn.ghost{ background:transparent; color:var(--primary); border-color:#CBD4E8; }
+.btn.ghost:hover{ background:var(--primary-soft); filter:none; }
+.box{ margin-top:12px; border-radius:10px; padding:13px 15px; }
+.box-label{ font-family:var(--mono); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
+.box.hint{ background:#F4F2EC; border:1px solid #E6E2D6; }
+.box.hint .box-label{ color:#8A7A4E; }
+.box.sol{ background:var(--surface-2); border:1px solid var(--line-strong); }
+.box.sol .box-label{ color:var(--ink-faint); }
+
+/* review */
+.review-block{ margin-bottom:28px; }
+.review-h{ font-family:var(--serif); font-weight:600; font-size:1.12rem; margin-bottom:4px; color:var(--ink); }
+.review-sub{ color:var(--ink-faint); font-size:.88rem; margin-bottom:14px; }
+.ox-grid{ display:grid; grid-template-columns:1fr; gap:12px; }
+@media (min-width:640px){ .ox-grid{ grid-template-columns:1fr 1fr; } }
+.ox{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; box-shadow:0 1px 2px rgba(27,35,51,.03); display:flex; flex-direction:column; }
+.ox-q{ font-size:.98rem; }
+.ox-btn{ margin-top:12px; align-self:flex-start; }
+.ox-ans{ margin-top:12px; display:flex; gap:12px; align-items:flex-start; }
+.ox-badge{ flex:0 0 auto; width:38px; height:38px; border-radius:10px; display:grid; place-items:center; font-family:var(--serif); font-weight:700; font-size:1.25rem; }
+.ox-O{ background:var(--ok-bg); color:var(--ok); border:1.5px solid #BFE0CD; }
+.ox-X{ background:var(--no-bg); color:var(--no); border:1.5px solid #E9C6C0; }
+.ox-exp{ font-size:.93rem; color:var(--ink-soft); line-height:1.7; }
+.collapse.open .ox-badge{ animation:pop .32s ease; }
+@keyframes pop{ 0%{ transform:scale(.55); opacity:0; } 60%{ transform:scale(1.08); } 100%{ transform:scale(1); opacity:1; } }
+
+/* nav */
+.navbtns{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:30px; padding-top:20px; border-top:1px solid var(--line); }
+.btn-nav{ font-family:var(--sans); font-size:.9rem; font-weight:600; border-radius:10px; padding:10px 16px; cursor:pointer; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft); transition:background .15s,color .15s; }
+.btn-nav:hover{ background:var(--surface-2); color:var(--ink); }
+.btn-nav.primary, .btn-nav.primary:hover{ background:var(--primary); border-color:var(--primary); color:#fff; }
+.btn-nav.primary:hover{ filter:brightness(1.06); }
+
+/* states */
+.state{ max-width:620px; margin:64px auto; text-align:center; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:34px 28px; }
+.state-title{ font-family:var(--serif); font-weight:600; font-size:1.15rem; color:var(--ink); }
+.state-loading .state-title{ color:var(--ink-faint); }
+.state-msg{ margin-top:12px; color:var(--ink-soft); font-size:.94rem; text-align:left; line-height:1.75; }
+.state-msg code{ font-family:var(--mono); font-size:.85em; background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:1px 5px; }
+.state-msg ul{ margin-top:10px; padding-left:20px; }
+.state-msg li{ margin-top:5px; }
+
+/* KaTeX */
+.katex{ font-size:1.04em; }
+.katex-display{ margin:.7em 0; overflow-x:auto; overflow-y:hidden; padding:2px 0; }
+
+/* visualization figures */
+.figure{ margin-top:16px; }
+.figure-svg{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:6px; overflow:hidden; box-shadow:0 1px 2px rgba(27,35,51,.03); }
+.figure-svg svg{ display:block; width:100%; height:auto; }
+.figure-caption{ margin-top:9px; font-size:.86rem; color:var(--ink-soft); text-align:center; line-height:1.65; }
+
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2.4 20 7v10l-8 4.6L4 17V7z"/>
+      <path d="M12 2.4v9.2l8-4.6M12 11.6 4 7M12 11.6v10" stroke-width="1.1" opacity=".5"/>
+    </svg>
+    <div>
+      <div class="brand-text">심층 학습 노트</div>
+      <div class="brand-sub">Problem-Driven Learning</div>
+    </div>
+  </div>
+  <div class="topic-wrap">
+    <span class="topic-label">주제</span>
+    <select id="topicSelect" class="topic-select" aria-label="학습 주제 선택"></select>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="rail" id="rail"></aside>
+  <main class="content" id="content"></main>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ===== 시각화 엔진 (viz_core) ===== */
+  /* =========================================================================
+     viz_core.js — 코드 기반 수학 시각화 엔진 (순수 함수, DOM 비의존)
+     설계 원칙: 데이터(생성벡터/점/법선)만 받아서 기하를 계산 → 정확한 SVG 문자열 반환.
+     지원 type: zonotope_2d, hyperplane_arrangement_2d, convex_hull_2d, vectors_2d, custom_2d
+     ========================================================================= */
+
+  /* ---------- 벡터/기하 헬퍼 ---------- */
+  function _cross(o, a, b){ return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0]); }
+  function _norm(a){ a = a % (2*Math.PI); if(a < 0) a += 2*Math.PI; return a; }
+  function _escXML(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function _sub2(s){ // x_1 또는 x_{1} → x₁
+    var subs='₀₁₂₃₄₅₆₇₈₉';
+    return String(s).replace(/_\{?([0-9])\}?/g, function(m,d){ return subs[+d]; });
+  }
+
+  /* ---------- 볼록껍질 (Andrew monotone chain), 반시계 방향 ---------- */
+  function convexHull(points){
+    var pts = points.map(function(p){ return [+p[0], +p[1]]; })
+                    .sort(function(a,b){ return a[0]-b[0] || a[1]-b[1]; });
+    if(pts.length < 3) return pts;
+    var lower=[], i, p;
+    for(i=0;i<pts.length;i++){ p=pts[i]; while(lower.length>=2 && _cross(lower[lower.length-2],lower[lower.length-1],p)<=0) lower.pop(); lower.push(p); }
+    var upper=[];
+    for(i=pts.length-1;i>=0;i--){ p=pts[i]; while(upper.length>=2 && _cross(upper[upper.length-2],upper[upper.length-1],p)<=0) upper.pop(); upper.push(p); }
+    lower.pop(); upper.pop();
+    return lower.concat(upper);
+  }
+
+  /* ---------- 조노곤(2D 조노토프): 생성벡터 v_i에 대한 Σ[-v_i, v_i] ----------
+     구성: 2n개의 모서리 벡터 {±v_i}를 각도순으로 정렬해 tip-to-tail로 이으면
+     닫힌 중심대칭 볼록다각형(zonogon)이 된다. 자동 맞춤이 스케일을 처리한다. */
+  function zonogon(gens){
+    var edges=[], k, v;
+    for(k=0;k<gens.length;k++){ v=gens[k]; edges.push([+v[0],+v[1]]); edges.push([-v[0],-v[1]]); }
+    edges.sort(function(a,b){ return Math.atan2(a[1],a[0]) - Math.atan2(b[1],b[0]); });
+    var pts=[], x=0, y=0, e;
+    for(k=0;k<edges.length;k++){ e=edges[k]; x+=e[0]; y+=e[1]; pts.push([x,y]); }
+    var cx=0, cy=0;
+    for(k=0;k<pts.length;k++){ cx+=pts[k][0]; cy+=pts[k][1]; }
+    cx/=pts.length; cy/=pts.length;
+    return pts.map(function(p){ return [p[0]-cx, p[1]-cy]; });
+  }
+
+  /* ---------- 좌표 자동 맞춤기 (world → pixel, y축 뒤집기) ---------- */
+  function makeFit(pts, W, H, M){
+    var minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity, i, p;
+    if(!pts.length){ minX=minY=-1; maxX=maxY=1; }
+    for(i=0;i<pts.length;i++){ p=pts[i];
+      if(p[0]<minX)minX=p[0]; if(p[0]>maxX)maxX=p[0];
+      if(p[1]<minY)minY=p[1]; if(p[1]>maxY)maxY=p[1];
+    }
+    var wW=maxX-minX, wH=maxY-minY;
+    if(wW<1e-9)wW=1; if(wH<1e-9)wH=1;
+    var padX=wW*0.10, padY=wH*0.10;
+    minX-=padX; maxX+=padX; minY-=padY; maxY+=padY; wW=maxX-minX; wH=maxY-minY;
+    var availW=W-2*M, availH=H-2*M;
+    var s=Math.min(availW/wW, availH/wH);
+    var offX=M+(availW-wW*s)/2, offY=M+(availH-wH*s)/2;
+    return {
+      s:s, bbox:[minX,minY,maxX,maxY],
+      map:function(q){ return [ offX+(q[0]-minX)*s, H-(offY+(q[1]-minY)*s) ]; }
+    };
+  }
+
+  /* ---------- SVG 프리미티브 ---------- */
+  function _n(v){ return (Math.round(v*10)/10); }
+  function _poly(mp, fill, stroke, sw){
+    return '<polygon points="'+mp.map(function(p){return _n(p[0])+','+_n(p[1]);}).join(' ')+
+           '" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'" stroke-linejoin="round"/>';
+  }
+  function _segEl(a,b,stroke,sw,dash){
+    return '<line x1="'+_n(a[0])+'" y1="'+_n(a[1])+'" x2="'+_n(b[0])+'" y2="'+_n(b[1])+
+           '" stroke="'+stroke+'" stroke-width="'+sw+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+' stroke-linecap="round"/>';
+  }
+  function _dot(p,r,fill,stroke){
+    return '<circle cx="'+_n(p[0])+'" cy="'+_n(p[1])+'" r="'+r+'" fill="'+fill+'"'+
+           (stroke?' stroke="'+stroke+'" stroke-width="1.2"':'')+'/>';
+  }
+  function _text(p,str,fill,anchor,size){
+    return '<text x="'+_n(p[0])+'" y="'+_n(p[1])+'" fill="'+fill+
+           '" font-family="\'JetBrains Mono\', ui-monospace, monospace" font-size="'+(size||13)+
+           '" text-anchor="'+(anchor||'middle')+'">'+_escXML(_sub2(str))+'</text>';
+  }
+  function _arrow(a,b,color,sw){
+    var dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1, ux=dx/L, uy=dy/L, hs=8;
+    var base=[b[0]-ux*hs, b[1]-uy*hs], nx=-uy, ny=ux;
+    var p1=[base[0]+nx*hs*0.55, base[1]+ny*hs*0.55];
+    var p2=[base[0]-nx*hs*0.55, base[1]-ny*hs*0.55];
+    return _segEl(a,base,color,sw)+
+           '<polygon points="'+_n(b[0])+','+_n(b[1])+' '+_n(p1[0])+','+_n(p1[1])+' '+_n(p2[0])+','+_n(p2[1])+'" fill="'+color+'"/>';
+  }
+  function _axes(fit,C){
+    var bb=fit.bbox, out=[];
+    if(bb[0]<=0 && bb[2]>=0) out.push(_segEl(fit.map([0,bb[1]]),fit.map([0,bb[3]]),C.axis,1));
+    if(bb[1]<=0 && bb[3]>=0) out.push(_segEl(fit.map([bb[0],0]),fit.map([bb[2],0]),C.axis,1));
+    return out.join('');
+  }
+
+  /* ---------- 유형별 렌더러 ---------- */
+  function _vizZono(viz,W,H,M,C){
+    var gens=(viz.generators||[]).map(function(v){return [+v[0],+v[1]];});
+    var poly=zonogon(gens);
+    var show=viz.show_generators!==false;
+    var tips=gens.map(function(v){return [v[0]/2, v[1]/2];});
+    var bb=poly.slice(); if(show){ tips.forEach(function(t){bb.push(t);}); bb.push([0,0]); }
+    var fit=makeFit(bb,W,H,M), P=[];
+    P.push(_axes(fit,C));
+    P.push(_poly(poly.map(fit.map), C.primaryFill, C.primary, 2));
+    poly.forEach(function(p){ P.push(_dot(fit.map(p),3,C.primary)); });
+    if(show){
+      var O=fit.map([0,0]);
+      tips.forEach(function(t,i){
+        var T=fit.map(t);
+        P.push(_arrow(O,T,C.amber,2));
+        var lbl=(viz.labels&&viz.labels[i])||('v_'+(i+1));
+        P.push(_text([T[0]+(T[0]>=O[0]?9:-9), T[1]+(T[1]<=O[1]?-5:13)], lbl, C.amber, T[0]>=O[0]?'start':'end', 13));
+      });
+      P.push(_dot(O,2.6,C.ink));
+    }
+    return P.join('');
+  }
+
+  function _vizArr(viz,W,H,M,C){
+    var normals=(viz.normals||[]).map(function(n){return [+n[0],+n[1]];});
+    var fit=makeFit([[-1.15,-1.15],[1.15,1.15]],W,H,M), P=[];
+    var dirs=normals.map(function(n){ return Math.atan2(n[0], -n[1]); }); // 직선 방향 = perp(n)=(-n_y,n_x)
+    var Rbig=4;
+    if(viz.shade_chambers!==false && normals.length>=2){
+      var rset={}; dirs.forEach(function(a){ rset[_norm(a).toFixed(6)]=1; rset[_norm(a+Math.PI).toFixed(6)]=1; });
+      var rays=Object.keys(rset).map(Number).sort(function(x,y){return x-y;});
+      for(var i=0;i<rays.length;i++){
+        var r0=rays[i], r1=(i+1<rays.length)?rays[i+1]:rays[0]+2*Math.PI;
+        var O=fit.map([0,0]);
+        var A=fit.map([Rbig*Math.cos(r0), Rbig*Math.sin(r0)]);
+        var B=fit.map([Rbig*Math.cos(r1), Rbig*Math.sin(r1)]);
+        var fill=(i%2===0)?C.chamberA:C.chamberB;
+        P.push('<polygon points="'+_n(O[0])+','+_n(O[1])+' '+_n(A[0])+','+_n(A[1])+' '+_n(B[0])+','+_n(B[1])+'" fill="'+fill+'"/>');
+      }
+    }
+    dirs.forEach(function(a){
+      var d=[Math.cos(a),Math.sin(a)];
+      P.push(_segEl(fit.map([-Rbig*d[0],-Rbig*d[1]]), fit.map([Rbig*d[0],Rbig*d[1]]), C.blue, 1.8));
+    });
+    dirs.forEach(function(a,i){
+      var d=[Math.cos(a),Math.sin(a)], lp=fit.map([1.02*d[0],1.02*d[1]]);
+      var lbl=(viz.labels&&viz.labels[i])||('\u2113_'+(i+1));
+      P.push(_text(lp, lbl, C.blue, d[0]>=0?'start':'end', 12));
+    });
+    P.push(_dot(fit.map([0,0]),3,C.ink));
+    return P.join('');
+  }
+
+  function _vizHull(viz,W,H,M,C){
+    var pts=(viz.points||[]).map(function(p){return [+p[0],+p[1]];});
+    var hull=convexHull(pts);
+    var fit=makeFit(pts.length?pts:[[-1,-1],[1,1]],W,H,M), P=[];
+    P.push(_axes(fit,C));
+    if(hull.length>=3) P.push(_poly(hull.map(fit.map),C.primaryFill,C.primary,2));
+    else if(hull.length===2) P.push(_segEl(fit.map(hull[0]),fit.map(hull[1]),C.primary,2));
+    var hs={}; hull.forEach(function(p){ hs[p[0]+','+p[1]]=1; });
+    pts.forEach(function(p,i){
+      var on=hs[p[0]+','+p[1]]===1;
+      P.push(_dot(fit.map(p), on?4:3, on?C.primary:C.faint));
+      var lbl=viz.labels&&viz.labels[i];
+      if(lbl){ var q=fit.map(p); P.push(_text([q[0],q[1]-9],lbl,C.ink,'middle',12)); }
+    });
+    return P.join('');
+  }
+
+  function _vizVec(viz,W,H,M,C){
+    var vecs=(viz.vectors||[]).map(function(v){return [+v[0],+v[1]];});
+    var pts=(viz.points||[]).map(function(p){return [+p[0],+p[1]];});
+    var segs=(viz.segments||[]).map(function(s){return [[+s[0][0],+s[0][1]],[+s[1][0],+s[1][1]]];});
+    var bb=[[0,0]]; vecs.forEach(function(v){bb.push(v);}); pts.forEach(function(p){bb.push(p);}); segs.forEach(function(s){bb.push(s[0],s[1]);});
+    var fit=makeFit(bb,W,H,M), P=[];
+    P.push(_axes(fit,C));
+    segs.forEach(function(s){ P.push(_segEl(fit.map(s[0]),fit.map(s[1]),C.primary,2)); });
+    var O=fit.map([0,0]);
+    vecs.forEach(function(v,i){
+      P.push(_arrow(O,fit.map(v),C.amber,2));
+      var lbl=(viz.vector_labels&&viz.vector_labels[i])||('v_'+(i+1));
+      var T=fit.map(v); P.push(_text([T[0]+7,T[1]-6],lbl,C.amber,'start',13));
+    });
+    pts.forEach(function(p,i){
+      P.push(_dot(fit.map(p),3.5,C.primary));
+      var lbl=viz.point_labels&&viz.point_labels[i];
+      if(lbl){ var q=fit.map(p); P.push(_text([q[0],q[1]-9],lbl,C.ink,'middle',12)); }
+    });
+    if(vecs.length) P.push(_dot(O,2.6,C.ink));
+    return P.join('');
+  }
+
+  function _vizCustom(viz,W,H,M,C){
+    var prims=viz.primitives||[], bb=[];
+    prims.forEach(function(pr){
+      if(pr.points) pr.points.forEach(function(p){bb.push([+p[0],+p[1]]);});
+      if(pr.from) bb.push([+pr.from[0],+pr.from[1]]);
+      if(pr.to) bb.push([+pr.to[0],+pr.to[1]]);
+      if(pr.at) bb.push([+pr.at[0],+pr.at[1]]);
+      if(pr.center) bb.push([+pr.center[0],+pr.center[1]]);
+    });
+    var fit=makeFit(bb.length?bb:[[-1,-1],[1,1]],W,H,M), P=[];
+    P.push(_axes(fit,C));
+    prims.forEach(function(pr){
+      var col=pr.color||C.primary;
+      switch(pr.shape){
+        case 'polygon': P.push(_poly((pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}), pr.fill||C.primaryFill, col, 2)); break;
+        case 'polyline': { var mp=(pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}); for(var i=0;i+1<mp.length;i++) P.push(_segEl(mp[i],mp[i+1],col,2)); break; }
+        case 'segment': P.push(_segEl(fit.map(pr.from),fit.map(pr.to),col,2,pr.dash)); break;
+        case 'arrow': P.push(_arrow(fit.map(pr.from||[0,0]),fit.map(pr.to),pr.color||C.amber,2)); break;
+        case 'point': P.push(_dot(fit.map(pr.at),pr.r||3.5,col)); break;
+        case 'arc': {
+          var a0=fit.map(pr.from), a1=fit.map(pr.to);
+          var mx=(a0[0]+a1[0])/2, my=(a0[1]+a1[1])/2;
+          var dx=a1[0]-a0[0], dy=a1[1]-a0[1], L=Math.hypot(dx,dy)||1;
+          var nx=-dy/L, ny=dx/L, bulge=(pr.bulge==null?0.5:pr.bulge)*Math.max(L,40);
+          // self-loop (from == to): draw a small loop using two control points
+          var isLoop = Math.abs(dx)<0.5 && Math.abs(dy)<0.5;
+          if(isLoop){
+            var r=(pr.loop_radius||0.5)*fit.s;
+            var cx=a0[0]+r, cy=a0[1]-r;
+            P.push('<path d="M '+_n(a0[0])+' '+_n(a0[1])+' C '+_n(cx+r*0.9)+' '+_n(cy-r*0.9)+', '+_n(cx-r*0.9)+' '+_n(cy-r*0.9)+', '+_n(a0[0])+' '+_n(a0[1])+'" fill="none" stroke="'+col+'" stroke-width="2"/>');
+            if(pr.arrow) P.push(_dot([a0[0]-2,a0[1]-2*r-2],2.2,col));
+          } else {
+            var cx2=mx+nx*bulge, cy2=my+ny*bulge;
+            var d='M '+_n(a0[0])+' '+_n(a0[1])+' Q '+_n(cx2)+' '+_n(cy2)+' '+_n(a1[0])+' '+_n(a1[1]);
+            P.push('<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>');
+            if(pr.arrow){
+              var t=0.5, qx=(1-t)*(1-t)*a0[0]+2*(1-t)*t*cx2+t*t*a1[0], qy=(1-t)*(1-t)*a0[1]+2*(1-t)*t*cy2+t*t*a1[1];
+              var tx=2*(1-t)*(cx2-a0[0])+2*t*(a1[0]-cx2), ty=2*(1-t)*(cy2-a0[1])+2*t*(a1[1]-cy2);
+              var tl=Math.hypot(tx,ty)||1; P.push(_arrow([qx-tx/tl*10,qy-ty/tl*10],[qx+tx/tl*2,qy+ty/tl*2],col,2));
+            }
+          }
+          break;
+        }
+        case 'circle': { var c=fit.map(pr.center), rr=(pr.r||1)*fit.s; P.push('<circle cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" r="'+_n(rr)+'" fill="none" stroke="'+col+'" stroke-width="2"/>'); break; }
+        case 'label': P.push(_text(fit.map(pr.at), pr.text||'', pr.color||C.ink, pr.anchor||'middle', pr.size||13)); break;
+      }
+    });
+    return P.join('');
+  }
+
+  function _outward(p, center, d){ var dx=p[0]-center[0], dy=p[1]-center[1], L=Math.hypot(dx,dy)||1; return [p[0]+dx/L*d, p[1]+dy/L*d]; }
+
+  /* 변 동일시 다이어그램 (torus, Klein bottle, RP^2, sphere ...) */
+  function _vizIdent(viz,W,H,M,C){
+    var edges=viz.edges||[], n=edges.length||4, i;
+    var rot=(n===4)?Math.PI/4:Math.PI/2;   // 정사각형은 축정렬로
+    var pts=[];
+    for(i=0;i<n;i++){ var a=rot+2*Math.PI*i/n; pts.push([Math.cos(a),Math.sin(a)]); }
+    var fit=makeFit(pts,W,H,M), P=[], O=fit.map([0,0]);
+    P.push(_poly(pts.map(fit.map),'rgba(46,67,116,0.05)','#D3D7CC',1));
+    var palette=['#2E4374','#B77F27','#3E7D5B','#9B3B7A','#4A6FB0','#B0483C'];
+    var lc={}, ci=0;
+    edges.forEach(function(e){ var L=e.label||''; if(!(L in lc)){ lc[L]=palette[ci%palette.length]; ci++; } });
+    for(i=0;i<n;i++){
+      var A=fit.map(pts[i]), B=fit.map(pts[(i+1)%n]);
+      var e=edges[i]||{}, col=lc[e.label||'']||C.primary, dir=(e.dir==null?1:e.dir);
+      P.push(_segEl(A,B,col,3));
+      var mx=(A[0]+B[0])/2, my=(A[1]+B[1])/2;
+      var vx=B[0]-A[0], vy=B[1]-A[1], vl=Math.hypot(vx,vy)||1; vx/=vl; vy/=vl;
+      if(dir<0){ vx=-vx; vy=-vy; }
+      P.push(_arrow([mx-vx*8,my-vy*8],[mx+vx*8,my+vy*8],col,3));
+      P.push(_text(_outward([mx,my],O,16), e.label||'', col,'middle',14));
+    }
+    return P.join('');
+  }
+
+  /* 일반 복합체 (CW / 단체 복합체): 0-셀(vertices), 1-셀(edges; 직선·곡선·자기루프), 2-셀(faces) */
+  function _vizComplex(viz,W,H,M,C){
+    var V=(viz.vertices||[]).map(function(p){return [+p[0],+p[1]];});
+    var E=viz.edges||[], F=viz.faces||[];
+    var fit=makeFit(V.length?V:[[-1,-1],[1,1]],W,H,M), P=[];
+    F.forEach(function(f){
+      var idx=f.vertices||f;
+      P.push(_poly(idx.map(function(i){return fit.map(V[i]);}), (f.fill||'rgba(46,67,116,0.08)'),'none',0));
+    });
+    E.forEach(function(e){
+      var i=(e.from!=null?e.from:e[0]), j=(e.to!=null?e.to:e[1]);
+      var col=e.color||C.primary, a=fit.map(V[i]), b=fit.map(V[j]);
+      if(i===j){
+        var r=(e.loop_radius||0.35)*fit.s;
+        P.push('<path d="M '+_n(a[0])+' '+_n(a[1])+' C '+_n(a[0]+r*1.5)+' '+_n(a[1]-r*2.4)+', '+_n(a[0]-r*1.5)+' '+_n(a[1]-r*2.4)+', '+_n(a[0])+' '+_n(a[1])+'" fill="none" stroke="'+col+'" stroke-width="2"/>');
+      } else if(e.arc){
+        var mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,bulge=(+e.arc)*Math.max(L,40)*0.5;
+        P.push('<path d="M '+_n(a[0])+' '+_n(a[1])+' Q '+_n(mx+nx*bulge)+' '+_n(my+ny*bulge)+' '+_n(b[0])+' '+_n(b[1])+'" fill="none" stroke="'+col+'" stroke-width="2"/>');
+      } else {
+        P.push(_segEl(a,b,col,2));
+      }
+      if(e.label){ var mm=fit.map([(V[i][0]+V[j][0])/2,(V[i][1]+V[j][1])/2]); P.push(_text([mm[0],mm[1]-7],e.label,col,'middle',12)); }
+    });
+    V.forEach(function(p,idx){
+      P.push(_dot(fit.map(p),4,C.primary,'#fff'));
+      var lbl=viz.vertex_labels&&viz.vertex_labels[idx];
+      if(lbl){ var q=fit.map(p); P.push(_text([q[0]+8,q[1]-8],lbl,C.ink,'start',12)); }
+    });
+    return P.join('');
+  }
+
+  /* ---------- 진입점 ---------- */
+  function buildVizSVG(viz){
+    var W=520, H=360, M=30;
+    var C={ primary:'#2E4374', primaryFill:'rgba(46,67,116,0.10)', amber:'#B77F27', blue:'#3E63A8',
+            ink:'#1B2333', faint:'#8A90A3', axis:'#C7CCD6', bg:'#FCFCFA',
+            chamberA:'rgba(62,99,168,0.08)', chamberB:'rgba(183,127,39,0.10)' };
+    var body='';
+    try{
+      switch(viz && viz.type){
+        case 'zonotope_2d': body=_vizZono(viz,W,H,M,C); break;
+        case 'hyperplane_arrangement_2d': body=_vizArr(viz,W,H,M,C); break;
+        case 'convex_hull_2d': body=_vizHull(viz,W,H,M,C); break;
+        case 'vectors_2d': body=_vizVec(viz,W,H,M,C); break;
+        case 'custom_2d': body=_vizCustom(viz,W,H,M,C); break;
+        case 'identification_polygon_2d': body=_vizIdent(viz,W,H,M,C); break;
+        case 'complex_2d': body=_vizComplex(viz,W,H,M,C); break;
+        default: body=_text([W/2,H/2],'지원하지 않는 시각화 유형: '+String(viz&&viz.type),C.faint,'middle',13);
+      }
+    }catch(e){ body=_text([W/2,H/2],'그림을 그릴 수 없습니다',C.faint,'middle',12); }
+    return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" preserveAspectRatio="xMidYMid meet" '+
+           'xmlns="http://www.w3.org/2000/svg" role="img" style="display:block">'+
+           '<rect x="0.5" y="0.5" width="'+(W-1)+'" height="'+(H-1)+'" rx="12" fill="'+C.bg+'" stroke="#E4E7E0"/>'+
+           body+'</svg>';
+  }
+
+  if(typeof module !== 'undefined' && module.exports){
+    module.exports = { buildVizSVG:buildVizSVG, zonogon:zonogon, convexHull:convexHull };
+  }
+
+  var DATA_DIR = 'data/';
+  var TYPE_MAP = {
+    Definition:['정의','def'], Theorem:['정리','thm'], Lemma:['보조정리','lem'],
+    Proposition:['명제','prop'], Corollary:['따름정리','cor'], Remark:['참고','rem'], Example:['예시','ex']
+  };
+
+  var state = { topics:[], topicId:null, data:null, view:{type:'section',index:0}, visited:new Set(), uid:0 };
+
+  var railEl   = document.getElementById('rail');
+  var mainEl   = document.getElementById('content');
+  var selectEl = document.getElementById('topicSelect');
+
+  /* ---------- helpers ---------- */
+  function esc(s){
+    return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function fmt(s){ return esc(s).replace(/\r?\n/g,'<br>'); }
+  function uid(p){ state.uid++; return (p||'id') + '-' + state.uid; }
+
+  function typeset(node){
+    if(window.renderMathInElement){
+      try{
+        window.renderMathInElement(node, {
+          delimiters:[ {left:'$$',right:'$$',display:true}, {left:'$',right:'$',display:false} ],
+          throwOnError:false,
+          ignoredTags:['script','noscript','style','textarea','pre']
+        });
+      }catch(e){/* degrade to raw text */}
+    }
+  }
+
+  function fetchJSON(url){
+    return fetch(url, {cache:'no-cache'}).then(function(res){
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    });
+  }
+
+  /* ---------- state screens ---------- */
+  function renderState(kind, title, msg){
+    mainEl.innerHTML =
+      '<div class="state state-' + kind + '">' +
+        '<div class="state-title">' + esc(title) + '</div>' +
+        (msg ? '<div class="state-msg">' + msg + '</div>' : '') +
+      '</div>';
+  }
+  function showLoadError(e){
+    var isFile = location.protocol === 'file:';
+    var msg;
+    if(isFile){
+      msg = '브라우저에서 <code>file://</code> 로 파일을 직접 열면 보안 정책상 JSON을 불러올 수 없습니다.<br>다음 중 하나로 실행하세요:' +
+        '<ul>' +
+          '<li>이 폴더에서 <code>python -m http.server</code> 실행 후 <code>http://localhost:8000</code> 접속</li>' +
+          '<li>또는 GitHub Pages에 업로드 (권장)</li>' +
+        '</ul>';
+    } else {
+      msg = '데이터를 불러오지 못했습니다 (<code>' + esc(String(e && e.message || e)) + '</code>).<br>' +
+        '<code>data/manifest.json</code> 과 그 안에서 참조하는 파일이 올바른 위치에 있는지 확인하세요.';
+    }
+    renderState('error', '불러오기에 실패했어요', msg);
+  }
+
+  /* ---------- boot & topic loading ---------- */
+  function boot(){
+    renderState('loading', '학습 데이터를 불러오는 중…', '');
+    fetchJSON(DATA_DIR + 'manifest.json').then(function(manifest){
+      state.topics = Array.isArray(manifest.topics) ? manifest.topics : [];
+      populateSelect();
+      if(state.topics.length){ return loadTopic(state.topics[0].id); }
+      renderState('empty', '등록된 주제가 없습니다', 'data/manifest.json 의 topics 배열에 항목을 추가하세요.');
+    }).catch(showLoadError);
+  }
+
+  function populateSelect(){
+    selectEl.innerHTML = state.topics.map(function(t){
+      return '<option value="' + esc(t.id) + '">' + esc(t.title) + '</option>';
+    }).join('');
+  }
+
+  function loadTopic(id){
+    var t = null;
+    for(var i=0;i<state.topics.length;i++){ if(state.topics[i].id===id){ t=state.topics[i]; break; } }
+    if(!t) return Promise.resolve();
+    selectEl.value = id;
+    renderState('loading', '불러오는 중…', '');
+    return fetchJSON(DATA_DIR + t.file).then(function(data){
+      state.topicId = id;
+      state.data = data;
+      state.view = { type:'section', index:0 };
+      state.visited = new Set([0]);
+      renderRail();
+      renderMain();
+      window.scrollTo(0,0);
+    }).catch(showLoadError);
+  }
+
+  /* ---------- rail ---------- */
+  function renderRail(){
+    var d = state.data;
+    if(!d){ railEl.innerHTML=''; return; }
+    var secs = d.learning_flow || [];
+    var items = secs.map(function(s,i){
+      var active = state.view.type==='section' && state.view.index===i;
+      var done = state.visited.has(i) && !active;
+      return '<button class="rail-item' + (active?' active':'') + (done?' done':'') + '" data-goto="section:' + i + '">' +
+               '<span class="rail-num">' + pad(i+1) + '</span>' +
+               '<span class="rail-label">' + esc(s.section_title || ('Section ' + (i+1))) + '</span>' +
+             '</button>';
+    }).join('');
+    var reviewActive = state.view.type==='review';
+    var review = '<button class="rail-item rail-review' + (reviewActive?' active':'') + '" data-goto="review">' +
+                   '<span class="rail-num">&#10022;</span>' +
+                   '<span class="rail-label">최종 복습</span>' +
+                 '</button>';
+    railEl.innerHTML =
+      '<div class="rail-inner">' +
+        '<div class="rail-title">학습 흐름</div>' +
+        '<div class="rail-list">' + items + '</div>' +
+        '<div class="rail-sep"></div>' + review +
+      '</div>';
+  }
+  function pad(n){ return (n<10?'0':'') + n; }
+
+  /* ---------- banner ---------- */
+  function renderBanner(){
+    var ci = (state.data && state.data.chapter_info) || {};
+    return '<div class="chapter-banner">' +
+             '<div class="chapter-eyebrow">CHAPTER</div>' +
+             '<h1 class="chapter-title">' + esc(ci.title || '제목 없음') + '</h1>' +
+             (ci.overall_goal ? '<p class="chapter-goal">' + fmt(ci.overall_goal) + '</p>' : '') +
+             (ci.source ? '<p class="chapter-source">' + esc(ci.source) + '</p>' : '') +
+           '</div>';
+  }
+
+  /* ---------- visualization figure ---------- */
+  function renderViz(v){
+    if(!v || !v.type) return '';
+    return '<figure class="figure"><div class="figure-svg">' + buildVizSVG(v) + '</div>' +
+             (v.caption ? '<figcaption class="figure-caption prose">' + fmt(v.caption) + '</figcaption>' : '') +
+           '</figure>';
+  }
+
+  /* ---------- main dispatch ---------- */
+  function renderMain(){
+    if(state.view.type==='review') return renderReview();
+    return renderSection(state.view.index);
+  }
+
+  /* ---------- section (Step 1-3) ---------- */
+  function renderSection(i){
+    var d = state.data, secs = d.learning_flow || [], sec = secs[i];
+    if(!sec){ renderState('empty', '내용이 없습니다', ''); return; }
+    var total = secs.length;
+
+    /* Step 1 */
+    var bp = sec.step1_big_picture || {};
+    var step1 =
+      '<div class="step">' + head(1,'STEP 01','숲 보기 · Big Picture') +
+        '<div class="step-body">' +
+          (bp.context ? '<p class="prose">' + fmt(bp.context) + '</p>' : '') +
+          (bp.hidden_intuition ?
+            '<div class="intuition"><div class="intuition-head">한눈에 보는 직관</div><p class="prose">' + fmt(bp.hidden_intuition) + '</p></div>' : '') +
+          renderViz(bp.visualization) +
+        '</div>' +
+      '</div>';
+
+    /* Step 2 (collapsed accordion) */
+    var blocks = (sec.step2_rigorous_logic || []).map(renderBlock).join('');
+    var s2id = uid('s2');
+    var step2 =
+      '<div class="step">' + head(2,'STEP 02','엄밀한 논리 · Rigorous Logic') +
+        '<div class="step-body">' +
+          '<button class="accordion-toggle" data-action="toggle" data-target="' + s2id + '" data-more="엄밀한 정의·증명 펼치기" data-less="접기" aria-expanded="false">' +
+            '<span class="chevron">&#9656;</span><span class="acc-label">엄밀한 정의·증명 펼치기</span>' +
+          '</button>' +
+          '<div class="collapse" id="' + s2id + '"><div class="collapse-inner">' +
+            '<div class="blocks">' + (blocks || '<p class="muted">이 절에는 별도의 정의·정리가 없습니다.</p>') + '</div>' +
+          '</div></div>' +
+        '</div>' +
+      '</div>';
+
+    /* Step 3 */
+    var cps = (sec.step3_checkpoint || []).map(renderCheckpoint).join('');
+    var step3 =
+      '<div class="step step-last">' + head(3,'STEP 03','체크포인트 · Checkpoint') +
+        '<div class="step-body">' + (cps || '<p class="muted">이 절에는 체크포인트 문제가 없습니다.</p>') + '</div>' +
+      '</div>';
+
+    /* nav */
+    var prev = i>0 ? '<button class="btn-nav" data-goto="section:' + (i-1) + '">← 이전 단원</button>' : '<span></span>';
+    var next = (i < total-1)
+      ? '<button class="btn-nav primary" data-goto="section:' + (i+1) + '">다음 단원 →</button>'
+      : '<button class="btn-nav primary" data-goto="review">최종 복습 시작 →</button>';
+
+    mainEl.innerHTML =
+      renderBanner() +
+      '<section class="section">' +
+        '<div class="section-head">' +
+          '<div class="section-kicker">단원 ' + (i+1) + ' / ' + total + '</div>' +
+          '<h2 class="section-title">' + esc(sec.section_title || '') + '</h2>' +
+        '</div>' +
+        '<div class="flow">' + step1 + step2 + step3 + '</div>' +
+        '<div class="navbtns">' + prev + next + '</div>' +
+      '</section>';
+    typeset(mainEl);
+  }
+
+  function head(n, eyebrow, name){
+    return '<span class="step-badge">' + n + '</span>' +
+           '<div class="step-head"><div>' +
+             '<div class="step-eyebrow">' + eyebrow + '</div>' +
+             '<div class="step-name">' + name + '</div>' +
+           '</div></div>';
+  }
+
+  function renderBlock(b){
+    var t = b.type || 'Remark';
+    var m = TYPE_MAP[t] || ['정리','thm'];
+    var ko = m[0], cls = m[1];
+    var idea = b.idea_behind_proof
+      ? '<div class="insight"><div class="insight-head">핵심 아이디어 · Idea behind the proof</div><p class="prose">' + fmt(b.idea_behind_proof) + '</p></div>'
+      : '';
+    var steps = (Array.isArray(b.proof_steps) && b.proof_steps.length)
+      ? '<div class="proof"><div class="proof-head">증명</div><ol class="proof-list">' +
+          b.proof_steps.map(function(s){ return '<li>' + fmt(s) + '</li>'; }).join('') +
+        '</ol></div>'
+      : '';
+    return '<article class="claim">' +
+             '<div class="claim-top">' +
+               '<span class="claim-type type-' + cls + '">' + ko + ' · ' + esc(t) + '</span>' +
+               (b.name ? '<span class="claim-name">' + esc(b.name) + '</span>' : '') +
+             '</div>' +
+             '<div class="claim-statement prose">' + fmt(b.formal_statement || '') + '</div>' +
+             idea + steps + renderViz(b.visualization) +
+           '</article>';
+  }
+
+  function renderCheckpoint(c, idx){
+    var hid = uid('hint'), sid = uid('sol');
+    return '<div class="qa">' +
+             '<div class="qa-q"><span class="qa-tag">Q' + (idx+1) + '</span><div class="prose">' + fmt(c.problem || '') + '</div></div>' +
+             renderViz(c.visualization) +
+             '<div class="qa-actions">' +
+               (c.hint ? '<button class="btn ghost" data-action="toggle" data-target="' + hid + '" data-more="힌트 보기" data-less="힌트 숨기기">힌트 보기</button>' : '') +
+               (c.solution ? '<button class="btn" data-action="toggle" data-target="' + sid + '" data-more="정답 확인" data-less="정답 숨기기">정답 확인</button>' : '') +
+             '</div>' +
+             (c.hint ? '<div class="collapse" id="' + hid + '"><div class="collapse-inner"><div class="box hint"><div class="box-label">힌트</div><div class="prose">' + fmt(c.hint) + '</div></div></div></div>' : '') +
+             (c.solution ? '<div class="collapse" id="' + sid + '"><div class="collapse-inner"><div class="box sol"><div class="box-label">풀이</div><div class="prose">' + fmt(c.solution) + '</div></div></div></div>' : '') +
+           '</div>';
+  }
+
+  /* ---------- review (Step 4) ---------- */
+  function renderReview(){
+    var d = state.data, fr = d.step4_final_review || {};
+    var ox = (fr.ox_quizzes || []).map(renderOX).join('');
+    var cq = (fr.conceptual_questions || []).map(renderConceptual).join('');
+    var secs = d.learning_flow || [];
+    var back = secs.length
+      ? '<button class="btn-nav" data-goto="section:' + (secs.length-1) + '">← 마지막 단원으로</button>'
+      : '<span></span>';
+
+    mainEl.innerHTML =
+      renderBanner() +
+      '<section class="section">' +
+        '<div class="section-head">' +
+          '<div class="section-kicker">STEP 04</div>' +
+          '<h2 class="section-title">최종 복습 · Final Review</h2>' +
+        '</div>' +
+        (ox ? '<div class="review-block"><h3 class="review-h">O / X 퀴즈</h3><p class="review-sub">참·거짓을 먼저 판단한 뒤, 정답 버튼을 눌러 해설을 확인하세요.</p><div class="ox-grid">' + ox + '</div></div>' : '') +
+        (cq ? '<div class="review-block"><h3 class="review-h">개념 질문</h3><p class="review-sub">단원 전체를 관통하는 심화 질문입니다.</p><div>' + cq + '</div></div>' : '') +
+        ((!ox && !cq) ? '<p class="muted">복습 콘텐츠가 없습니다.</p>' : '') +
+        '<div class="navbtns">' + back + '<span></span></div>' +
+      '</section>';
+    typeset(mainEl);
+  }
+
+  function renderOX(q){
+    var aid = uid('ox');
+    var ans = String(q.answer || '').trim().toUpperCase() === 'O' ? 'O' : 'X';
+    return '<div class="ox">' +
+             '<div class="ox-q prose">' + fmt(q.question || '') + '</div>' +
+             '<button class="btn ghost ox-btn" data-action="toggle" data-target="' + aid + '" data-more="정답 확인" data-less="다시 숨기기">정답 확인</button>' +
+             '<div class="collapse" id="' + aid + '"><div class="collapse-inner">' +
+               '<div class="ox-ans"><span class="ox-badge ox-' + ans + '">' + ans + '</span><div class="ox-exp prose">' + fmt(q.explanation || '') + '</div></div>' +
+             '</div></div>' +
+           '</div>';
+  }
+
+  function renderConceptual(q, idx){
+    var hid = uid('chint'), aid = uid('cans');
+    return '<div class="qa">' +
+             '<div class="qa-q"><span class="qa-tag">Q' + (idx+1) + '</span><div class="prose">' + fmt(q.question || '') + '</div></div>' +
+             '<div class="qa-actions">' +
+               (q.hint ? '<button class="btn ghost" data-action="toggle" data-target="' + hid + '" data-more="힌트 보기" data-less="힌트 숨기기">힌트 보기</button>' : '') +
+               (q.answer ? '<button class="btn" data-action="toggle" data-target="' + aid + '" data-more="모범 답안" data-less="답안 숨기기">모범 답안</button>' : '') +
+             '</div>' +
+             (q.hint ? '<div class="collapse" id="' + hid + '"><div class="collapse-inner"><div class="box hint"><div class="box-label">힌트</div><div class="prose">' + fmt(q.hint) + '</div></div></div></div>' : '') +
+             (q.answer ? '<div class="collapse" id="' + aid + '"><div class="collapse-inner"><div class="box sol"><div class="box-label">모범 답안</div><div class="prose">' + fmt(q.answer) + '</div></div></div></div>' : '') +
+           '</div>';
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener('click', function(ev){
+    var nav = ev.target.closest('[data-goto]');
+    if(nav){ handleGoto(nav.getAttribute('data-goto')); return; }
+    var tog = ev.target.closest('[data-action="toggle"]');
+    if(tog){ handleToggle(tog); return; }
+  });
+
+  selectEl.addEventListener('change', function(){ loadTopic(selectEl.value); });
+
+  function handleGoto(g){
+    if(g === 'review'){ state.view = { type:'review' }; }
+    else if(g.indexOf('section:') === 0){
+      var idx = parseInt(g.split(':')[1], 10);
+      state.view = { type:'section', index:idx };
+      state.visited.add(idx);
+    }
+    renderRail();
+    renderMain();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  function handleToggle(btn){
+    var el = document.getElementById(btn.getAttribute('data-target'));
+    if(!el) return;
+    var open = el.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.classList.toggle('is-open', open);
+    var more = btn.getAttribute('data-more'), less = btn.getAttribute('data-less');
+    if(more || less){
+      var text = open ? (less || more) : (more || less);
+      var lbl = btn.querySelector('.acc-label');
+      if(lbl){ lbl.textContent = text; } else { btn.textContent = text; }
+    }
+  }
+
+  /* ---------- go ---------- */
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+</body>
+</html>
