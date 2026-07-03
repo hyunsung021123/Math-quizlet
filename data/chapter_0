@@ -1,0 +1,1139 @@
+{
+  "chapter_info": {
+    "title": "Chapter 0. Introduction and Examples",
+    "source": "Günter M. Ziegler, Lectures on Polytopes, GTM 152, Chapter 0 (Springer)",
+    "overall_goal": "볼록 폴리토프(convex polytope)를 바라보는 두 가지 쌍대적 방식—점들의 볼록껍질($V$-표현)과 반공간들의 교집합($H$-표현)—을 이해하고, 면(face)·꼭짓점(vertex)·모서리(edge)·패싯(facet)과 조합적 동치(combinatorial equivalence) 같은 핵심 조합 개념을 익힌다. 나아가 단체(simplex)·입방체(cube)·교차폴리토프(crosspolytope)·순환폴리토프(cyclic polytope) 같은 기본 예시족과 피라미드·쌍피라미드·곱·각기둥 같은 재활용 연산을 손에 익혀, 고차원 폴리토프를 다룰 도구의 필요성을 절감한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "0. 서론과 예시 (Introduction and Examples)",
+      "step1_big_picture": {
+        "context": "이 책의 첫 장은 앞선 지식을 요구하지 않는 출발점이다. 저자는 폴리토프 이론을 백과사전식으로 나열하기보다 조합적 측면(combinatorial aspects)에 초점을 맞춰 기본 방법과 현대적 도구, 그리고 대표적 하이라이트를 소개하려 한다. 이 도입부는 이후 모든 강의가 딛고 설 공용 언어—표기법, 볼록성(convexity), 폴리토프의 두 정의, 면(face) 구조—를 깔고, 앞으로 반복해 등장할 예시족(단체·입방체·교차폴리토프·순환폴리토프)을 미리 손에 쥐어 주는 역할을 한다.",
+        "hidden_intuition": "이 장의 진짜 메시지는 두 가지다. 첫째, 폴리토프는 안에서 점으로 채워 만드는 것($V$-표현)과 밖에서 반공간(halfspace)으로 깎아 만드는 것($H$-표현)이라는, 서로 뒤집힌 두 시선으로 볼 수 있다. 조각가가 진흙을 붙여 형상을 빚는 것과 대리석을 깎아 형상을 드러내는 것의 차이다. 같은 폴리토프인데도 이 둘이 '같다'는 사실은 결코 자명하지 않으며(계산 복잡도 관점에서는 심지어 서로 다르다), 바로 이 동치성이 Lecture 1의 주정리다. 둘째, 저자의 엄중한 경고: 우리의 기하 직관은 3차원 삶에서 길러졌지만 고차원에서는 이 직관이 배신한다. 3차원에서 성립하는 정리가 고차원에서 처참히 무너지는 일이 흔하다. 그래서 폴리토프 이론의 핵심 과제는 고차원 도형을 어떻게든 눈에 보이게 만드는 도구—슐레겔 다이어그램(Schlegel diagram), 게일 다이어그램(Gale diagram), 로런스 구성(Lawrence construction)—를 벼리는 일이 된다.",
+        "visualization": {
+          "type": "convex_hull_2d",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              2,
+              -0.3
+            ],
+            [
+              3.5,
+              1
+            ],
+            [
+              3.3,
+              3
+            ],
+            [
+              1.8,
+              4
+            ],
+            [
+              -0.3,
+              3.5
+            ],
+            [
+              -1,
+              1.5
+            ],
+            [
+              1.5,
+              2
+            ]
+          ],
+          "caption": "평면의 점집합 $K$(검은 점들)와 그 볼록껍질 $\\operatorname{conv}(K)$. 안쪽에 갇힌 점 $(1.5,2)$는 다른 점들의 볼록조합이라 꼭짓점이 아니다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "표기 0.0 (좌표변환에 불변인 표기법)",
+          "formal_statement": "$\\mathbb{R}^d$는 실수 성분을 갖는 길이 $d$의 열벡터(column vector) 전체가 이루는 벡터공간이고, 그 쌍대공간 $(\\mathbb{R}^d)^*$는 선형함수 $\\mathbb{R}^d \\to \\mathbb{R}$ 전체, 즉 길이 $d$의 행벡터(row vector) 전체다. 열벡터 $\\mathbf{x},\\mathbf{y},\\mathbf{z}$는 (아핀) 점을 나타내고, 행벡터 $\\mathbf{a},\\mathbf{b},\\mathbf{c}$는 선형형식(linear form) $\\ell_{\\mathbf{a}}:\\mathbf{x}\\mapsto \\mathbf{a}\\mathbf{x}$를 나타낸다. 여기서 $\\mathbf{a}\\mathbf{x}$는 $(1\\times d)$ 행벡터와 $(d\\times 1)$ 열벡터의 행렬곱으로 얻는 스칼라다. 모든 성분이 $1$인 행벡터 $\\mathbb{1}=(1,\\dots,1)$에 대해 $\\mathbb{1}\\mathbf{x}$는 좌표들의 합이다. 이 관례 덕분에 우리가 쓰는 식들은 좌표변환에 대해 깨끗하게 불변으로 남는다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (볼록집합과 볼록껍질)",
+          "formal_statement": "집합 $K\\subseteq\\mathbb{R}^d$가 볼록(convex)이라 함은 임의의 두 점 $\\mathbf{x},\\mathbf{y}\\in K$에 대해 선분 $[\\mathbf{x},\\mathbf{y}]=\\{\\,\\lambda\\mathbf{x}+(1-\\lambda)\\mathbf{y} : 0\\le\\lambda\\le 1\\,\\}$을 통째로 포함하는 것이다. 볼록집합들의 교집합은 다시 볼록이고 $\\mathbb{R}^d$ 자신도 볼록이므로, $K$를 포함하는 가장 작은 볼록집합인 볼록껍질(convex hull)을 $$\\operatorname{conv}(K):=\\bigcap\\{\\,K'\\subseteq\\mathbb{R}^d : K\\subseteq K',\\ K'\\text{ 볼록}\\,\\}$$ 로 정의한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (볼록껍질 = 볼록조합 전체)",
+          "formal_statement": "임의의 $K\\subseteq\\mathbb{R}^d$에 대하여 $$\\operatorname{conv}(K)=\\Big\\{\\,\\lambda_1\\mathbf{x}_1+\\dots+\\lambda_k\\mathbf{x}_k : \\{\\mathbf{x}_1,\\dots,\\mathbf{x}_k\\}\\subseteq K,\\ \\lambda_i\\ge 0,\\ \\sum_{i=1}^k\\lambda_i=1\\,\\Big\\}.$$ 특히 $K=\\{\\mathbf{x}_1,\\dots,\\mathbf{x}_n\\}$가 유한이면 우변에서 $k=n$으로 두어도 된다.",
+          "idea_behind_proof": "핵심 관찰은 '볼록조합을 하나 더 붙이는 일'이 '이미 만든 볼록조합과 새 점을 잇는 선분 위의 점을 고르는 일'로 분해된다는 것이다. 즉 $k$개 점의 볼록조합은 $k-1$개로 만든 볼록조합(귀납가정)과 마지막 점을 잇는 선분 위에 놓인다. 이 재귀 구조가 곧바로 $k$에 대한 귀납법을 부르고, 볼록집합의 정의(선분을 포함)와 정확히 맞물린다.",
+          "proof_steps": [
+            "($\\supseteq$) 우변의 각 볼록조합이 $\\operatorname{conv}(K)$에 들어감을 $k$에 대한 귀납법으로 보인다. $k=1$이면 $\\lambda_1=1$이라 점 자신이므로 자명하다.",
+            "귀납단계($\\lambda_k<1$): $$\\lambda_1\\mathbf{x}_1+\\dots+\\lambda_k\\mathbf{x}_k=(1-\\lambda_k)\\Big(\\tfrac{\\lambda_1}{1-\\lambda_k}\\mathbf{x}_1+\\dots+\\tfrac{\\lambda_{k-1}}{1-\\lambda_k}\\mathbf{x}_{k-1}\\Big)+\\lambda_k\\mathbf{x}_k.$$ 괄호 안은 계수 합이 $1$인 $k-1$개 점의 볼록조합이라 귀납가정에 의해 $\\operatorname{conv}(K)$의 점 $\\mathbf{p}$다. 그러면 전체는 선분 $[\\mathbf{p},\\mathbf{x}_k]$ 위의 점이고, $\\operatorname{conv}(K)$가 볼록이므로 그 안에 있다. ($\\lambda_k=1$이면 점 $\\mathbf{x}_k$ 자신이다.)",
+            "($\\subseteq$) 반대로 우변의 집합이 볼록임을 직접 확인하면(두 볼록조합의 볼록조합은 다시 볼록조합), 이 집합은 $K$를 포함하는 볼록집합이므로 최소 볼록집합 $\\operatorname{conv}(K)$를 포함한다. 두 포함이 합쳐져 등식을 준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 0.1 ($V$-폴리토프, $H$-폴리헤드론, $H$-폴리토프)",
+          "formal_statement": "$V$-폴리토프($V$-polytope)는 어떤 $\\mathbb{R}^d$ 안의 유한 점집합의 볼록껍질이다. $H$-폴리헤드론($H$-polyhedron)은 유한 개의 닫힌 반공간(closed halfspace)의 교집합이다. $H$-폴리토프($H$-polytope)는 유계(bounded)인 $H$-폴리헤드론, 즉 어떤 $\\mathbf{y}\\neq\\mathbf{0}$에 대해서도 반직선 $\\{\\mathbf{x}+t\\mathbf{y}:t\\ge 0\\}$을 품지 않는 $H$-폴리헤드론이다. (이 '유계' 정의는 계량이나 내적에 의존하지 않고 아핀 좌표변환에 불변이라는 장점이 있다.)",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [
+              [
+                0,
+                1
+              ],
+              [
+                1.6,
+                0
+              ],
+              [
+                3.2,
+                1
+              ],
+              [
+                2.6,
+                2.7
+              ],
+              [
+                0.6,
+                2.7
+              ]
+            ],
+            "caption": "다섯 점의 볼록껍질로 태어난 오각형($V$-표현). 같은 오각형을 다섯 개의 닫힌 반공간의 교집합으로도($H$-표현) 그려낼 수 있다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($V=H$의 동치성 — Lecture 1의 주정리 예고)",
+          "formal_statement": "정의 0.1의 두 방식은 수학적으로는 동치다: $P\\subseteq\\mathbb{R}^d$가 $V$-폴리토프인 것과 $H$-폴리토프인 것은 서로 동치이며, 이때 그냥 폴리토프(polytope)라 부른다. 그러나 이 동치성은 알고리즘적으로는 동치가 아니다—한 표현에서 다른 표현을 뽑아내는 계산은 사소하지 않다. 이 동치성의 증명은 결코 자명하지 않고 Lecture 1에서 본격적으로 다룬다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (차원, $d$-폴리토프, 아핀 동형)",
+          "formal_statement": "폴리토프의 차원(dimension)은 그 아핀껍질(affine hull)의 차원이다. $d$-폴리토프는 어떤 $\\mathbb{R}^e$($e\\ge d$) 안에서 차원이 $d$인 폴리토프다. 두 폴리토프 $P\\subseteq\\mathbb{R}^d$, $Q\\subseteq\\mathbb{R}^e$가 아핀 동형(affinely isomorphic, $P\\cong Q$)이라 함은 두 폴리토프의 점들 사이에 전단사가 되는 아핀사상 $f:\\mathbb{R}^d\\to\\mathbb{R}^e$가 존재하는 것이다. (이 사상이 주변 공간 전체에서 단사·전사일 필요는 없다.) 보통 일반성을 잃지 않고 폴리토프를 완전차원(full-dimensional)으로 두어 $d$가 폴리토프의 차원이자 주변 공간의 차원이 되게 한다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (면, 꼭짓점·모서리·패싯, 조합적 동치)",
+          "formal_statement": "폴리토프의 면(face)은, 폴리토프가 어떤 초평면이 정하는 두 반공간 중 하나에 통째로 들어갈 때 그 초평면과의 교집합이다. 폴리토프 자신은 자명한 면(trivial face)이고 나머지는 진(proper) 면이며, 공집합도 모든 폴리토프의 면으로 친다. $0$차원 면을 꼭짓점(vertex), $1$차원 면을 모서리(edge), 그리고 극대인 진 면—차원이 폴리토프보다 $1$ 작은 면—을 패싯(facet)이라 한다. 두 폴리토프 $P,Q$가 조합적 동치(combinatorially equivalent, $P\\simeq Q$)라 함은 면들 사이에 포함관계를 보존하는 전단사가 존재하는 것이다. 이는 계량을 전혀 쓰지 않고 오직 조합 구조만 보는 동치 개념이다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.2 (저차원 폴리토프와 $n$-각형)",
+          "formal_statement": "$0$차원 폴리토프는 점, $1$차원 폴리토프는 선분이므로 임의의 두 $0$-폴리토프는(또 임의의 두 $1$-폴리토프도) 서로 아핀 동형이다. $2$차원에서는 두 $2$-폴리토프가 조합적 동치일 필요충분조건이 꼭짓점 개수가 같은 것이다. 그래서 꼭짓점이 정확히 $n$개인 볼록 $2$-폴리토프의 조합적 동치류를 볼록 $n$-각형(convex $n$-gon)이라 부르며, 그 대표로 정$n$각형 $$P_2(n):=\\operatorname{conv}\\Big\\{\\big(\\cos\\tfrac{2\\pi k}{n},\\ \\sin\\tfrac{2\\pi k}{n}\\big):0\\le k<n\\Big\\}\\subseteq\\mathbb{R}^2$$ 를 쓸 수 있다. 주의: 정$n$각형과 일그러진 $n$각형은 조합적으로는 동치지만 아핀 동형은 아닐 수 있다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.3 (단체 simplex)",
+          "formal_statement": "$d$-단체($d$-simplex)는 차원이 $d$이고 꼭짓점이 $d+1$개인 폴리토프다. 임의의 두 $d$-단체는 아핀 동형이다. 표준 $d$-단체는 $\\mathbb{R}^{d+1}$ 안에서 $$\\Delta_d:=\\{\\mathbf{x}\\in\\mathbb{R}^{d+1}:\\mathbb{1}\\mathbf{x}=1,\\ x_i\\ge 0\\}=\\operatorname{conv}\\{\\mathbf{e}_1,\\dots,\\mathbf{e}_{d+1}\\}$$ 로 둔다. 예컨대 $\\Delta_2$는 $\\mathbb{R}^3$의 초평면 $\\mathbb{1}\\mathbf{x}=1$ 위에 놓인 삼각형이다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                2.4,
+                0
+              ],
+              [
+                1.2,
+                2
+              ]
+            ],
+            "labels": [
+              "e_1",
+              "e_2",
+              "e_3"
+            ],
+            "caption": "표준 단체 $\\Delta_2=\\operatorname{conv}\\{\\mathbf{e}_1,\\mathbf{e}_2,\\mathbf{e}_3\\}$의 조합형: 꼭짓점 $3$개짜리 삼각형."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.4 (입방체와 교차폴리토프, 그리고 쌍대성)",
+          "formal_statement": "$d$-입방체($d$-cube)는 $$C_d:=\\{\\mathbf{x}\\in\\mathbb{R}^d:-1\\le x_i\\le 1\\}=\\operatorname{conv}\\{+1,-1\\}^d$$ 이고, $d$-교차폴리토프($d$-crosspolytope)는 $$C_d^{\\Delta}:=\\Big\\{\\mathbf{x}\\in\\mathbb{R}^d:\\textstyle\\sum_i|x_i|\\le 1\\Big\\}=\\operatorname{conv}\\{\\mathbf{e}_1,-\\mathbf{e}_1,\\dots,\\mathbf{e}_d,-\\mathbf{e}_d\\}$$ 이다. 원점 대칭으로 잡은 이 두 폴리토프는 서로 폴라(polar), 즉 쌍대다: $C_d^{\\Delta}\\cong\\{\\mathbf{a}\\in(\\mathbb{R}^d)^*:\\mathbf{a}\\mathbf{x}\\le 1\\ \\forall\\mathbf{x}\\in C_d\\}$이고 그 역도 성립한다. 교차폴리토프는 단체적(simplicial, 모든 진 면이 단체)이고, 입방체는 단순(simple, 모든 꼭짓점이 정확히 $d$개의 패싯에 속함)이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -1,
+                    -1
+                  ],
+                  [
+                    1,
+                    -1
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    -1,
+                    1
+                  ]
+                ]
+              },
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    -1,
+                    0
+                  ],
+                  [
+                    0,
+                    -1
+                  ]
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.25,
+                  1.2
+                ],
+                "text": "C_2 (cube)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.75,
+                  0.75
+                ],
+                "text": "crosspolytope"
+              }
+            ],
+            "caption": "$2$차원에서 입방체 $C_2=[-1,1]^2$(바깥 정사각형)와 교차폴리토프 $C_2^{\\Delta}=\\operatorname{conv}\\{\\pm\\mathbf{e}_1,\\pm\\mathbf{e}_2\\}$(안쪽 마름모). 서로 폴라 쌍대다."
+          }
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (단순·단체적 폴리토프, 일반위치)",
+          "formal_statement": "폴리토프가 단체적(simplicial)이라 함은 모든 진 면이 단체인 것—동치로 모든 패싯이 최소 개수인 $d$개의 꼭짓점을 갖는 것이다. 단순(simple)이라 함은 모든 꼭짓점이 최소 개수인 $d$개의 패싯에만 속하는 것이다. 이 둘은 폴라(쌍대)로 연결된다: $P$와 $P^{\\Delta}$가 폴라면 한쪽이 단순인 것과 다른 쪽이 단체적인 것이 동치다. 일반위치(general position)의 편의적 기준으로는, $\\mathbb{R}^d$의 점 $n>d$개가 어느 $d+1$개도 공통 아핀 초평면 위에 있지 않을 때 일반위치라 하고, 부등식 $n>d$개가 어느 점도 그중 $d$개보다 많은 것을 등식으로 만족시키지 않을 때 제네릭(generic)이라 한다. 일반위치 점들의 볼록껍질은 단체적, 제네릭 부등식들의 (유계) 교집합은 단순 폴리토프다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.5 (헌 폴리토프로 새것 만들기: 피라미드·쌍피라미드·곱·각기둥)",
+          "formal_statement": "$P$가 $d$-폴리토프이고 $\\mathbf{x}_0$가 $\\operatorname{aff}(P)$ 밖의 점이면 피라미드(pyramid) $\\operatorname{pyr}(P):=\\operatorname{conv}(P\\cup\\{\\mathbf{x}_0\\})$는 $(d+1)$-폴리토프이고, 그 면은 $P$의 면들과 $P$의 면들 위의 피라미드들이다. 쌍피라미드(bipyramid) $\\operatorname{bipyr}(P)$는 $\\operatorname{aff}(P)$ 밖의 두 점 $\\mathbf{x}_+,\\mathbf{x}_-$를 잡아 선분 $[\\mathbf{x}_+,\\mathbf{x}_-]$의 내부점이 $P$의 내부점이 되게 한 것이며, 교차폴리토프는 점에서 시작한 반복 쌍피라미드다($\\operatorname{bipyr}(C_d^{\\Delta})=C_{d+1}^{\\Delta}$). 곱(product) $P\\times Q$는 차원이 $\\dim P+\\dim Q$이고 그 비어 있지 않은 면들은 $P$의 면과 $Q$의 면의 곱이다. 각기둥(prism) $\\operatorname{prism}(P):=P\\times\\Delta_1$은 쌍피라미드의 폴라이며, 입방체는 점에서 시작한 반복 각기둥이다($C_d\\times[-1,1]=C_{d+1}$)."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (두 삼각형의 곱 $\\Delta_2\\times\\Delta_2$: 3차원에 없는 현상)",
+          "formal_statement": "두 삼각형의 곱 $\\Delta_2\\times\\Delta_2$는 꼭짓점 $9$개, 패싯 $6$개인 $4$-폴리토프다. 각 패싯은 '한 삼각형의 모서리 $\\times$ 다른 삼각형' 꼴이라 모두 삼각기둥이고, 두 패싯의 교집합은 항상 $2$차원이라 임의의 두 패싯이 인접(adjacent)한다. 따라서 그 폴라 $(\\Delta_2\\times\\Delta_2)^{\\Delta}$는 꼭짓점 $6$개 중 어느 둘도 서로 인접한, 단체가 아닌 $2$-이웃(2-neighborly) $4$-폴리토프다. 이런 현상은 $3$차원 공간에는 존재하지 않는다—저차원 직관이 왜 위험한지를 보여주는 대표 사례다."
+        },
+        {
+          "type": "Example",
+          "name": "예 (모멘트곡선과 순환폴리토프 cyclic polytope)",
+          "formal_statement": "모멘트곡선(moment curve)은 $\\mathbf{x}(t):=(t,t^2,\\dots,t^d)^{\\top}\\in\\mathbb{R}^d$로 주어진다. 서로 다른 매개변수 $t_1<t_2<\\dots<t_n$($n>d$)에 대해 순환폴리토프(cyclic polytope)를 $$C_d(t_1,\\dots,t_n):=\\operatorname{conv}\\{\\mathbf{x}(t_1),\\dots,\\mathbf{x}(t_n)\\}$$ 로 정의한다. '게일의 짝수성 조건(Gale's evenness condition)'으로부터 각 $\\mathbf{x}(t_i)$가 실제로 꼭짓점이며 폴리토프의 조합적 동치류가 매개변수 선택에 의존하지 않음이 드러난다. 그래서 이를 그냥 $C_d(n)$—꼭짓점 $n$개짜리 순환 $d$-폴리토프—라 부른다. 순환폴리토프는 $3$차원에서는 별로 특별해 보이지 않지만 고차원에서 놀랄 만큼 높은 이웃성(neighborliness)을 지녀, 저차원 직관이 왜 위험한지를 다시 한번 보여준다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [
+              [
+                -2,
+                4
+              ],
+              [
+                -1,
+                1
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                4
+              ]
+            ],
+            "caption": "모멘트곡선 위 점 $\\mathbf{x}(t)=(t,t^2)$($t=-2,-1,0,1,2$)의 볼록껍질. 곡선(포물선) 위의 점들이라 모두 꼭짓점이 된다."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "닫힌 반공간 $\\{(x,y)\\in\\mathbb{R}^2:x\\ge 0\\}$ 하나로 이루어진 집합은 $H$-폴리헤드론인가? $H$-폴리토프인가? 이유와 함께 답하라.",
+          "hint": "정의 0.1을 그대로 대입하라. '유계'란 어떤 방향 $\\mathbf{y}\\neq\\mathbf{0}$의 반직선도 품지 않는다는 뜻이다.",
+          "solution": "이 집합은 유한 개(여기서는 하나)의 닫힌 반공간의 교집합이므로 $H$-폴리헤드론이다. 그러나 예컨대 반직선 $\\{(t,0):t\\ge 0\\}$을 통째로 품으므로 유계가 아니다. 따라서 $H$-폴리토프는 아니다. 일반화: $H$-폴리토프 $=$ 유계인 $H$-폴리헤드론이며, 유계성이 폴리토프와 그냥 폴리헤드론을 가르는 결정적 조건이다."
+        },
+        {
+          "problem": "$\\mathbb{R}^2$에서 점집합 $K=\\{(0,0),(2,0),(0,2),(1,1)\\}$의 볼록껍질 $\\operatorname{conv}(K)$를 구하고 그 꼭짓점을 모두 말하라. $(1,1)$은 꼭짓점인가?",
+          "hint": "각 점이 나머지 점들의 볼록조합으로 표현되는지 확인하라. 다른 점들의 볼록조합이 되는 점은 꼭짓점이 아니다.",
+          "solution": "$(1,1)=\\tfrac12(2,0)+\\tfrac12(0,2)$이므로 $(1,1)$은 $(2,0)$과 $(0,2)$를 잇는 선분(빗변 $x+y=2$) 위에 있다. 따라서 꼭짓점이 아니다. 결국 $\\operatorname{conv}(K)$는 꼭짓점이 $(0,0),(2,0),(0,2)$인 삼각형이다. 일반화: 점 $\\mathbf{x}$가 꼭짓점일 필요충분조건은 $\\mathbf{x}$가 나머지 점들의 볼록조합으로 표현되지 않는 것이다."
+        },
+        {
+          "problem": "$3$-입방체 $C_3$와 $3$-교차폴리토프(정팔면체) $C_3^{\\Delta}$ 각각에 대해 꼭짓점 수·모서리 수·패싯 수를 세고, 두 결과가 폴라 쌍대성과 어떻게 맞아떨어지는지 설명하라.",
+          "hint": "$C_3=\\operatorname{conv}\\{\\pm 1\\}^3$의 꼭짓점은 $\\pm1$ 성분들의 조합이다. 폴라를 취하면 꼭짓점과 패싯이 뒤바뀐다. 검산에는 오일러 공식 $V-E+F=2$를 쓰라.",
+          "solution": "$C_3$: 꼭짓점 $2^3=8$개, 패싯 $6$개(각 축의 $x_i=\\pm1$), 모서리 $12$개. $C_3^{\\Delta}$: 꼭짓점 $6$개($\\pm\\mathbf{e}_i$), 패싯 $8$개(부호 조합 $\\pm x_1\\pm x_2\\pm x_3=1$), 모서리 $12$개. 폴라 쌍대성 때문에 꼭짓점 수와 패싯 수가 정확히 맞바뀌고($8\\leftrightarrow 6$), 모서리 수는 보존된다($12$). 검산: $8-12+6=2$, $6-12+8=2$로 둘 다 오일러 공식을 만족한다."
+        },
+        {
+          "problem": "$C_3$의 꼭짓점 $(1,1,1)$은 몇 개의 패싯에 속하는가? 이로부터 $C_3$가 단순(simple)임을 설명하고, 대응하여 $C_3^{\\Delta}$의 한 패싯이 꼭짓점을 몇 개 갖는지 말하라.",
+          "hint": "$(1,1,1)$이 어떤 부등식들을 등식으로 만족하는지 세라. $d=3$임에 유의.",
+          "solution": "$(1,1,1)$은 $x_1=1,\\,x_2=1,\\,x_3=1$이라는 세 패싯에 속하므로 정확히 $d=3$개의 패싯에 속한다. 모든 꼭짓점이 이렇게 최소 개수 $d=3$개의 패싯에만 속하므로 $C_3$는 단순이다. 폴라로 넘어가면 이는 $C_3^{\\Delta}$의 각 패싯(예: $x_1+x_2+x_3=1$ 위의 면)이 $\\mathbf{e}_1,\\mathbf{e}_2,\\mathbf{e}_3$ 세 꼭짓점, 즉 최소 개수 $d=3$개의 꼭짓점을 가진 삼각형이라는 사실로 옮겨간다—즉 $C_3^{\\Delta}$는 단체적이며, 단순과 단체적이 폴라로 대응함을 확인해 준다."
+        }
+      ]
+    },
+    {
+      "section_title": "0. 서론과 예시 — 순환폴리토프의 조합구조, 이웃성, 사영, 그리고 예시족 (part 2)",
+      "step1_big_picture": {
+        "context": "파트 1에서 우리는 모멘트곡선(moment curve) 위의 점들로 순환폴리토프(cyclic polytope) $C_d(n)$를 정의만 해 두고, PORTA로 $C_4(8)$의 패싯 부등식 목록을 뽑는 실험 직전에서 멈췄다. 이 파트는 그 실험 결과를 읽어내는 데서 출발한다: $C_4(8)$은 패싯이 $20$개, 게다가 임의의 두 꼭짓점이 서로 인접하는 놀라운 폴리토프다. 저자는 '도입부에서는 증명을 하지 않겠다'는 약속을 여기서 깨는데, 증명이 재미있고 결과가 놀랍기 때문이다. 이어서 파트 1의 두 축—$V$-폴리토프(정의 0.1)와 볼록조합 표현(파트 1의 명제)—을 '사영(projection)'이라는 하나의 렌즈로 다시 묶고, 그 렌즈로 조노토프(zonotope, 입방체의 사영)·중심대칭 폴리토프(교차폴리토프의 사영)를 바라본 뒤, 퍼뮤타헤드론·$0/1$-폴리토프·버코프 폴리토프·TSP 폴리토프 같은 조합론의 명작들을 소개한다.",
+        "hidden_intuition": "이 파트의 두 축을 관통하는 직관은 '한 매개변수의 다항식이 부호를 바꾸는 방식'과 '차원을 낮추는 그림자(사영)'다. 첫째, 순환폴리토프의 모든 조합정보는 결국 '모멘트곡선 위를 미끄러지는 점이 초평면을 몇 번 가로지르는가'라는 다항식의 부호 문제로 환원된다—패싯 여부는 다항식이 남은 점들에서 같은 부호냐(=사이에 근이 짝수 개냐)로 결정되고, 이것이 그대로 게일의 짝수성 조건(Gale's evenness condition)이다. 둘째, 파트 1의 명제 '볼록껍질 = 볼록조합 전체'는 곧 '$\\operatorname{conv}\\{\\mathbf{x}_1,\\dots,\\mathbf{x}_n\\}$은 표준단체 $\\Delta_{n-1}$을 $\\mathbf{e}_i\\mapsto\\mathbf{x}_i$로 보내는 선형사상의 그림자'라는 사실과 같은 말이다. 그래서 '$V$-폴리토프 = 단체의 사영'이 되고, 여기에 어떤 도형을 사영하느냐만 바꾸면—입방체를 사영하면 조노토프, 교차폴리토프를 사영하면 중심대칭 폴리토프가—전혀 다른 폴리토프족이 태어난다. 하나의 그림자놀이가 이토록 많은 대상을 낳는다는 것이 이 절의 숨은 통일 원리다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "참고 (실험: $C_4(8)$의 꼭짓점-패싯 접합 행렬이 말해 주는 것)",
+          "formal_statement": "PORTA로 계산한 $C_4(8)$은 패싯이 $20$개다. 꼭짓점-패싯 접합 행렬(vertex-facet incidence matrix)을 읽으면 세 가지가 드러난다. (1) 모든 패싯(행)이 정확히 $4$개의 꼭짓점을 가지므로 $C_4(8)$은 단체적(simplicial)이다. (2) 모든 꼭짓점(열)이 정확히 $10$개의 패싯에 속한다. (3) 각 행에서 연속된 접합($*$)의 마디는, 처음이나 끝의 마디가 아닌 한(즉 양옆이 비접합인 한) 길이가 짝수다—이것이 게일의 짝수성 조건(Gale's evenness condition)이다. 여기서 $C_d(n)$의 꼭짓점은 $1,\\dots,n$으로 이름 붙이고 $i$는 $\\mathbf{x}(t_i)$에 대응시킨다. 나아가 임의의 두 꼭짓점이 서로 인접(adjacent)함을 직접 확인할 수 있으며, 정점 $i$를 $9-i$로 보내는 조합 대칭(combinatorial symmetry)도 관찰된다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (순환폴리토프의 패싯 = 게일의 짝수성 조건)",
+          "formal_statement": "$t_1<t_2<\\dots<t_n$에 대해 $C_d(n)=\\operatorname{conv}\\{\\mathbf{x}(t_1),\\dots,\\mathbf{x}(t_n)\\}$는 단체적 $d$-폴리토프다. $d$-부분집합 $S\\subseteq[n]$이 $C_d(n)$의 패싯을 이룰 필요충분조건은 다음 짝수성 조건이다: $S$에 속하지 않는 $i<j$에 대하여 $S$의 원소 중 $i$와 $j$ 사이에 놓인 것의 개수 $\\#\\{k\\in S: i<k<j\\}$가 항상 짝수다.",
+          "idea_behind_proof": "열쇠는 판데르몬드 행렬식(Vandermonde determinant)이다. 모멘트곡선의 매개변수 $t$에 대한 판데르몬드 값이 $\\prod_{i<j}(t_j-t_i)$라서 서로 다른 매개변수에서는 절대 $0$이 되지 않는다는 사실이, 곧 '곡선 위 어느 $d+1$개 점도 아핀 종속이 아니다'로 번역된다. 이 비종속성이 단체성을 공짜로 주고, 동시에 $d$개의 점을 지나는 초평면을 하나의 선형함수 $F_S$로 명시할 수 있게 한다. 그다음 착상은 '점을 곡선 위에서 미끄러뜨리기'다. $F_S(\\mathbf{x}(t))$는 $t$에 대한 $d$차 다항식이라, 그 부호가 근(=$S$의 원소)을 지날 때마다 바뀐다. 패싯이려면 남은 모든 꼭짓점이 초평면의 한쪽에 몰려야 하고, 이는 '두 비원소 사이의 부호 변화 횟수가 짝수'라는 조건이 된다—그게 바로 짝수성 조건이다.",
+          "proof_steps": [
+            "1단계 (판데르몬드). 행이 $1,\\ t,\\ t^2,\\dots,t^d$이고 열이 $t_0,\\dots,t_d$인 $(d+1)\\times(d+1)$ 행렬의 행렬식은 $\\prod_{0\\le i<j\\le d}(t_j-t_i)$와 같다. (양변 모두 다항식이고, 어떤 $t_i=t_j$일 때 행렬식이 소멸하므로 인수분해가 강제된다.) 따라서 서로 다른 $t_i$들에 대해 $\\mathbf{x}(t_0),\\dots,\\mathbf{x}(t_d)$는 아핀 독립이다. 특히 어느 $d+1$개 점도 한 초평면 위에 있지 않으므로 $C_d(n)$은 단체적이다.",
+            "2단계 (패싯 후보 초평면). $S=\\{i_1,\\dots,i_d\\}\\subseteq[n]$에 대해 $F_S(\\mathbf{x}):=\\det[\\,\\mathbf{1}\\mid \\mathbf{x},\\ \\mathbf{x}(t_{i_1}),\\dots,\\mathbf{x}(t_{i_d})\\,]$—맨 윗줄이 모두 $1$인 $(d+1)\\times(d+1)$ 행렬식—을 둔다. 이는 $\\mathbf{x}$에 대한 선형(아핀)함수이며 $\\mathbf{x}=\\mathbf{x}(t_{i_s})$에서 소멸하므로, $H_S=\\{\\mathbf{x}:F_S(\\mathbf{x})=0\\}$은 그 $d$개 점이 스팬하는 초평면이다.",
+            "3단계 (다항식으로 환원). 점을 곡선 위에서 움직여 $g(t):=F_S(\\mathbf{x}(t))$를 보면, 이는 $t$에 대한 $d$차 다항식이고 그 근은 정확히 $t_{i_1},\\dots,t_{i_d}$, 즉 $S$의 원소들이다.",
+            "4단계 (패싯 판정). $S$가 패싯일 필요충분조건은 남은 꼭짓점 $\\mathbf{x}(t_i)\\ (i\\in[n]\\setminus S)$이 모두 $H_S$의 같은 (닫힌) 쪽에 놓이는 것, 즉 $g(t_i)$가 모든 $i\\notin S$에서 같은 부호를 갖는 것이다.",
+            "5단계 (짝수성). $g$는 근을 지날 때마다 부호가 바뀌므로, $g(t_i)$와 $g(t_j)$가 같은 부호일 필요충분조건은 $t_i$와 $t_j$ 사이의 근($=S$의 원소) 개수가 짝수인 것이다. 이를 모든 비원소 쌍 $i<j$에 대해 요구한 것이 곧 짝수성 조건이다. 또한 이 판정은 $t_i$의 구체적 값이 아니라 순서에만 의존하므로, $C_d(n)$의 조합형이 매개변수 선택에 무관함이 함께 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 0.8 (순환폴리토프는 이웃polytope이다)",
+          "formal_statement": "순환폴리토프 $C_d(n)$은 $\\lfloor d/2\\rfloor$-이웃($\\lfloor d/2\\rfloor$-neighborly)이다: 즉 $|S|\\le d/2$인 임의의 부분집합 $S\\subseteq[n]$이 하나의 면(face)을 이룬다.",
+          "idea_behind_proof": "정리의 '부호가 근을 지날 때 바뀐다'는 논리를 재사용하되, 이번엔 근을 일부러 쌍(pair)으로 만드는 것이 핵심 트릭이다. 원하는 $k$개 정점 각각에 대해 $t_i$와 $t_i+\\varepsilon$이라는 인접한 두 근을 심어 두면, 어떤 두 평가점 사이를 보더라도 이 근들이 항상 짝수 개(쌍 단위)로 들어오게 된다. 남은 자리는 곡선의 '저 멀리' 있는 더미(dummy) 점으로 채워 다항식 차수를 $d$로 맞춘다. 그러면 짝수성이 자동으로 성립해 $S$가 면이 된다.",
+          "proof_steps": [
+            "$T=\\{i_1,\\dots,i_k\\}\\subseteq[n]$, $k\\le d/2$라 하자. $t_i<t_i+\\varepsilon<t_{i+1}$이 되도록 작은 $\\varepsilon>0$을, 그리고 $M>t_n+\\varepsilon$을 고른다.",
+            "$F_T(\\mathbf{x}):=\\det[\\,\\mathbf{1}\\mid \\mathbf{x},\\ \\mathbf{x}(t_{i_1}),\\mathbf{x}(t_{i_1}{+}\\varepsilon),\\dots,\\mathbf{x}(t_{i_k}),\\mathbf{x}(t_{i_k}{+}\\varepsilon),\\ \\mathbf{x}(M{+}1),\\dots,\\mathbf{x}(M{+}d{-}2k)\\,]$로 둔다. 열의 개수는 $1+2k+(d-2k)=d+1$이라 $(d+1)\\times(d+1)$ 행렬식이며, $\\mathbf{x}$의 선형함수이고 $i\\in T$인 $\\mathbf{x}(t_i)$에서 소멸한다.",
+            "$F_T(\\mathbf{x}(t))$는 $t$에 대한 $d$차 다항식으로, '뻔한' 서로 다른 근 $t_{i_1},t_{i_1}{+}\\varepsilon,\\dots,t_{i_k},t_{i_k}{+}\\varepsilon,\\ M{+}1,\\dots,M{+}d{-}2k$를 갖는다.",
+            "임의의 $i,j\\in[n]\\setminus T$에 대해 $t_i$와 $t_j$ 사이의 근 개수는 짝수다: $T$에서 온 근은 언제나 $t_\\ell$과 $t_\\ell+\\varepsilon$이 쌍으로 들어오고, 더미 근 $M{+}\\cdot$는 모두 $t_n$ 너머라서 두 평가점 사이에 끼지 않기 때문이다.",
+            "따라서 $F_T$는 모든 $\\mathbf{x}(t_i)\\ (i\\notin T)$에서 같은 부호를 가지므로 $T$의 점들은 초평면 $\\{F_T=0\\}$과의 교집합, 즉 하나의 면 위에 놓인다. $|T|=k\\le\\lfloor d/2\\rfloor$가 임의였으므로 $C_d(n)$은 $\\lfloor d/2\\rfloor$-이웃이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 ($k$-이웃 폴리토프, 이웃polytope)",
+          "formal_statement": "$d$-폴리토프 $P$가 $k$-이웃($k$-neighborly)이라 함은 $k$개 이하의 꼭짓점으로 이루어진 임의의 집합이 $P$의 한 면의 꼭짓점 집합이 되는 것이다. 단체(simplex)를 제외하면 어떤 폴리토프도 $\\lfloor d/2\\rfloor$보다 더 이웃일 수 없으므로(Exercise 0.10), $\\lfloor d/2\\rfloor$-이웃 폴리토프를 이웃polytope(neighborly polytope)이라 부른다. 따라서 따름정리 0.8에 의해 순환폴리토프는 이웃polytope이다. 이 개념이 중요한 이유 하나는 극값성이다: 매컬런(McMullen)의 상계정리(upper bound theorem)에 따르면 꼭짓점이 $n$개인 $d$-폴리토프 중 이웃polytope(즉 순환폴리토프 $C_d(n)$)이 패싯을 가장 많이 가진다."
+        },
+        {
+          "type": "Proposition",
+          "name": "예 0.9 ($V$-폴리토프 = 단체의 사영, 그리고 사영의 폐쇄성)",
+          "formal_statement": "폴리토프 $P$에 아핀사상 $\\pi$를 적용하면 다시 폴리토프 $\\pi(P)$를 얻는다($V$-폴리토프의 정의 0.1에서 곧바로 나온다). $\\pi$가 단사면 $\\pi(P)\\cong P$로 새로울 것이 없지만, 저차원으로 떨구는 사영(projection)일 수도 있다. 특히 볼록껍질 $\\operatorname{conv}\\{\\mathbf{x}_1,\\dots,\\mathbf{x}_n\\}\\subseteq\\mathbb{R}^d$는 선형사상 $\\pi:\\mathbb{R}^n\\to\\mathbb{R}^d,\\ \\mathbf{e}_i\\mapsto\\mathbf{x}_i$에 의한 표준단체 $\\Delta_{n-1}$의 상 $\\pi(\\Delta_{n-1})$과 같다. 결론적으로 ($V$-)폴리토프는 단체의 사영과 같은 것이며, 폴리토프의 임의의 사영은 다시 폴리토프다.",
+          "idea_behind_proof": "이 명제의 증명은 실은 파트 1의 명제 '볼록껍질 = 볼록조합 전체'를 좌표로 다시 읽은 것이다. $\\Delta_{n-1}$의 점은 $\\lambda_i\\ge 0,\\ \\sum\\lambda_i=1$인 $\\boldsymbol{\\lambda}$이고, $\\pi(\\boldsymbol{\\lambda})=\\sum_i\\lambda_i\\mathbf{x}_i$는 정확히 $\\mathbf{x}_i$들의 볼록조합 전체를 훑는다. 즉 '단체 위의 무게중심 좌표(barycentric coordinate)'가 곧 '볼록조합의 계수'라는 한 줄 관찰이 전부다.",
+          "proof_steps": [
+            "$\\Delta_{n-1}=\\operatorname{conv}\\{\\mathbf{e}_1,\\dots,\\mathbf{e}_n\\}=\\{\\boldsymbol{\\lambda}\\in\\mathbb{R}^n:\\lambda_i\\ge 0,\\ \\textstyle\\sum_i\\lambda_i=1\\}$임을 상기한다(파트 1, 예 0.3).",
+            "선형성에서 $\\pi(\\boldsymbol{\\lambda})=\\sum_i\\lambda_i\\,\\pi(\\mathbf{e}_i)=\\sum_i\\lambda_i\\mathbf{x}_i$.",
+            "파트 1의 명제에 의해 우변이 $\\boldsymbol{\\lambda}$를 훑으며 만드는 집합은 정확히 $\\operatorname{conv}\\{\\mathbf{x}_i\\}$이다. 따라서 $\\pi(\\Delta_{n-1})=\\operatorname{conv}\\{\\mathbf{x}_i\\}$. 임의의 $V$-폴리토프가 이 꼴이므로 모든 $V$-폴리토프는 단체의 사영이고, 사영은 다시 유한 점집합의 볼록껍질이라 폴리토프다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (중심대칭 폴리토프, 조노토프 zonotope)",
+          "formal_statement": "폴리토프 $P\\subseteq\\mathbb{R}^d$가 중심대칭(centrally symmetric)이라 함은 중심(center) $\\mathbf{x}_0$가 존재하여 $\\mathbf{x}_0+\\mathbf{x}\\in P\\iff\\mathbf{x}_0-\\mathbf{x}\\in P$인 것이다. 교차폴리토프의 임의의 아핀 사영 $P=\\{A\\mathbf{x}+\\mathbf{x}_0:\\mathbf{x}\\in C_d^{\\Delta}\\}$은 $\\mathbf{x}_0$에 대해 중심대칭이며, 역으로 모든 중심대칭 폴리토프는 교차폴리토프의 사영이다(Exercise 0.2). 한편 입방체(cube)의 사영을 조노토프(zonotope)라 부른다. 조노토프는 선형 초평면 배열(linear hyperplane arrangement)의 구조를 encode하는 매우 흥미로운 폴리토프족으로, Lecture 7에서 본격적으로 다룬다.",
+          "visualization": {
+            "type": "zonotope_2d",
+            "generators": [
+              [
+                1,
+                0
+              ],
+              [
+                0.5,
+                0.87
+              ],
+              [
+                -0.5,
+                0.87
+              ]
+            ],
+            "show_generators": true,
+            "labels": [
+              "v_1",
+              "v_2",
+              "v_3"
+            ],
+            "caption": "세 방향의 선분을 민코프스키 합한 조노곤(zonogon): 중심대칭 육각형. 입방체 $[-1,1]^3$을 평면으로 사영한 그림자다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.10 (퍼뮤타헤드론 permutahedron)",
+          "formal_statement": "퍼뮤타헤드론 $\\Pi_{d-1}\\subseteq\\mathbb{R}^d$은 벡터 $(1,2,\\dots,d)^{\\top}$의 좌표를 모든 방식으로 치환하여 얻는 점들의 볼록껍질이다(Schoute, 1911). 이는 드문 예인 단순 조노토프(simple zonotope)다. 그 꼭짓점은 대칭군 $\\mathcal{S}_d$의 순열과 동일시되며(성분 $x_i$에 $i$를 대응시키는 순열), 두 꼭짓점이 모서리로 이어질 필요충분조건은 대응 순열이 인접 호환(adjacent transposition) 하나만큼 다른 것이다. 더 일반적으로 $\\Pi_{d-1}$의 $k$-면은 $[d]$를 $d-k$개의 비어 있지 않은 부분으로 나눈 순서분할(ordered partition)에 대응한다. 따라서 꼭짓점은 순열, 패싯은 $\\emptyset\\subset S\\subset[d]$에 대한 분할 $(S,[d]\\setminus S)$에 대응한다. 예로 $\\Pi_2$는 육각형이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -0.87,
+                    0.5
+                  ],
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    0.87,
+                    0.5
+                  ],
+                  [
+                    0.87,
+                    -0.5
+                  ],
+                  [
+                    0,
+                    -1
+                  ],
+                  [
+                    -0.87,
+                    -0.5
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -0.87,
+                  0.5
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.87,
+                  0.5
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.87,
+                  -0.5
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -0.87,
+                  -0.5
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.35,
+                  0.6
+                ],
+                "text": "123"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.28
+                ],
+                "text": "132"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.32,
+                  0.6
+                ],
+                "text": "312"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.32,
+                  -0.6
+                ],
+                "text": "321"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.3
+                ],
+                "text": "231"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.35,
+                  -0.6
+                ],
+                "text": "213"
+              }
+            ],
+            "caption": "퍼뮤타헤드론 $\\Pi_2$: $(1,2,3)$의 순열 $6$개가 꼭짓점인 육각형. 이웃한 꼭짓점은 인접 호환 하나만큼 다르다(예: $123\\leftrightarrow 132$)."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (아소시아헤드론과 퍼뮤토-아소시아헤드론)",
+          "formal_statement": "퍼뮤타헤드론의 훨씬 최근 짝으로 아소시아헤드론(associahedron) $K_{n-2}$이 있다. 그 꼭짓점은 $n$개 문자열 $a_1a_2\\cdots a_n$에 괄호를 치는(비결합적 곱셈의 계산 순서를 정하는) $\\frac{1}{n}\\binom{2n-2}{n-1}$가지 방법에 대응하고, 두 꼭짓점은 결합법칙을 한 번 적용해 옮겨 갈 수 있을 때 인접한다($n=4$이면 오각형). 카프라노프(Kapranov)는 두 대상을 결합한 퍼뮤토-아소시아헤드론(permuto-associahedron) $K\\Pi_{n-1}$을 도입했으며($K\\Pi_2$는 $12$각형), 이것이 볼록 폴리토프로 실현될 수 있는가라는 물음은 저자와 Reiner의 공동연구에서 해결되었다(Section 9.3에서 다룸)."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.11 ($0/1$-폴리토프와 하이퍼심플렉스 hypersimplex)",
+          "formal_statement": "꼭짓점 좌표가 모두 $0$ 또는 $1$인 폴리토프를 $0/1$-폴리토프라 하며, 이는 (단위) 입방체 꼭짓점들의 어떤 부분집합의 볼록껍질과 같다. 예컨대 $(d-1)$-단체 $\\Delta_{d-1}=\\operatorname{conv}\\{\\mathbf{e}_1,\\dots,\\mathbf{e}_d\\}\\subseteq\\mathbb{R}^d$가 $0/1$-폴리토프다. 이를 일반화한 하이퍼심플렉스(hypersimplex)는 $1\\le k\\le d-1$에 대해 $$\\Delta_{d-1}(k)=\\operatorname{conv}\\Big\\{\\mathbf{v}\\in\\{0,1\\}^d:\\textstyle\\sum_{i=1}^d v_i=k\\Big\\}=\\Big\\{\\mathbf{x}\\in\\mathbb{R}^d:0\\le x_i\\le 1,\\ \\textstyle\\sum_{i=1}^d x_i=k\\Big\\}$$ 로 정의된다. 예로 $3$차원 하이퍼심플렉스 $\\Delta_3(2)\\subseteq\\mathbb{R}^4$은 정팔면체(octahedron)와 조합적으로 동치다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.12 (버코프 폴리토프 Birkhoff polytope)",
+          "formal_statement": "순열 $\\sigma\\in\\mathcal{S}_d$에 대해 $X^{\\sigma}_{ij}=1\\ (\\sigma(i)=j),\\ =0$(그 밖)로 정의되는 순열행렬 $X^{\\sigma}$—각 행·각 열에 $1$이 정확히 하나인 $0/1$-행렬—들의 볼록껍질 $P(d):=\\operatorname{conv}\\{X^{\\sigma}:\\sigma\\in\\mathcal{S}_d\\}\\subseteq\\mathbb{R}^{d\\times d}$을 버코프 폴리토프(Birkhoff polytope, 또는 이중확률행렬 폴리토프·배정 폴리토프)라 한다. $P(d)$는 꼭짓점 $d!$개, 패싯 $d^2$개, 차원 $(d-1)^2$을 가지며, 완전한 선형 기술은 $$P(d)=\\Big\\{X\\in\\mathbb{R}^{d\\times d}:x_{ij}\\ge 0,\\ \\textstyle\\sum_{k=1}^d x_{ik}=1\\ (\\forall i),\\ \\sum_{k=1}^d x_{kj}=1\\ (\\forall j)\\Big\\}$$ 이다(버코프–폰 노이만 정리). 즉 꼭짓점(순열행렬)과 패싯을 모두 아는 잘 기술된 폴리토프이며, 중심점은 모든 성분이 $1/d$인 이중확률행렬이다."
+        },
+        {
+          "type": "Example",
+          "name": "예 (외판원 폴리토프 traveling salesman polytope)",
+          "formal_statement": "완전그래프 $K_n$의 각 순회(tour)를 변의 부분집합 $T\\subseteq E(K_n)$으로 보고, 그 특성벡터 $\\chi^T\\in\\{0,1\\}^{\\binom{n}{2}}$을 취해 외판원 폴리토프 $Q_T(n):=\\operatorname{conv}\\{\\chi^T:T\\text{는 }K_n\\text{의 순회}\\}$를 정의한다. $Q_T(n)$은 차원 $\\binom{n}{2}-n=\\tfrac{n(n-3)}{2}$이고, 꼭짓점은 $(n-1)!/2$개의 해밀턴 순회다. 그래서 최단 순회 찾기는 $Q_T(n)$ 위에서 선형함수를 최소화하는 선형계획 문제가 된다. 그러나 이 폴리토프들은 고약하다: Billera–Sarangarajan에 의해 충분히 큰 $n$에서 임의의 $0/1$-폴리토프가 비대칭 외판원 폴리토프 $Q'_T(n)$의 한 면과 동형이다. 선형계획으로 풀 수 있으려면 패싯 부등식을 알아야 하는데, 그것을 우리는 모르고 게다가 개수도 너무 많다—이 문제를 다루는 분야가 다면체 조합론(polyhedral combinatorics)이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "$C_4(8)$에서 두 후보 $S_1=\\{1,2,6,7\\}$과 $S_2=\\{1,3,5,7\\}$ 중 어느 것이 패싯을 이루는지 게일의 짝수성 조건으로 판정하라.",
+          "hint": "$S$에 속하지 않는 모든 쌍 $i<j$에 대해 $i,j$ 사이에 있는 $S$의 원소 수를 세라. 하나라도 홀수면 패싯이 아니다. 여기서 $[n]=\\{1,\\dots,8\\}$이고 $d=4$이다.",
+          "solution": "$S_1=\\{1,2,6,7\\}$의 비원소는 $\\{3,4,5,8\\}$. 쌍별 사이 원소 수: $(3,4)\\to 0,\\ (3,5)\\to 0,\\ (4,5)\\to 0,\\ (3,8)\\to\\{6,7\\}=2,\\ (4,8)\\to 2,\\ (5,8)\\to 2$—모두 짝수이므로 $S_1$은 패싯이다. $S_2=\\{1,3,5,7\\}$의 비원소는 $\\{2,4,6,8\\}$. 그런데 $(2,4)\\to\\{3\\}=1$로 홀수라, $S_2$는 패싯이 아니다. 일반화: 짝수성 조건은 '중간 마디의 접합이 짝수 길이'라는 접합행렬의 패턴과 정확히 같은 말이다."
+        },
+        {
+          "problem": "따름정리 0.8에 따르면 $C_4(8)$은 $2$-이웃이다. 이 사실로부터 $C_4(8)$의 모서리(edge) 수를 구하고, 8개 꼭짓점이 서로 모두 인접한다는 것이 왜 $3$차원 폴리토프에서는 불가능한 현상인지 설명하라.",
+          "hint": "$k$-이웃의 정의를 $k=2$에 적용하라. $3$차원에서는 $\\lfloor 3/2\\rfloor=1$이며, 단체 외에는 아무 폴리토프도 $\\lfloor d/2\\rfloor$보다 더 이웃일 수 없다(Exercise 0.10).",
+          "solution": "$2$-이웃이므로 임의의 두 꼭짓점 집합이 면(모서리)을 이룬다. 따라서 모서리 수는 $\\binom{8}{2}=28$개다. $3$차원에서는 $\\lfloor d/2\\rfloor=1$이라 '모든 쌍이 인접'($2$-이웃)은 단체(정점 $4$개인 사면체)에서만 가능하다. 정점이 $8$개인 $3$-폴리토프가 이를 만족하려면 그래프가 완전그래프 $K_8$이어야 하는데, $3$-폴리토프의 그래프는 평면적(Steinitz)이라 $K_5$조차 담을 수 없다—그래서 불가능하다. $C_4(8)$은 $4$-폴리토프라 이 평면성 제약을 벗어난다. 일반화: 고차원일수록 이웃성이 폭발적으로 커질 수 있다는 것이 저차원 직관이 배신하는 대표 사례다."
+        },
+        {
+          "problem": "버코프 폴리토프 $P(3)$의 꼭짓점 수·패싯 수·차원을 공식으로 구하고, 이중확률행렬의 선형 기술로부터 차원 $(d-1)^2$이 왜 나오는지 확인하라.",
+          "hint": "$d=3$을 공식 $d!,\\ d^2,\\ (d-1)^2$에 대입하라. 차원은 '자유 성분 수 $-$ 독립 제약 수'로 세라. 행합과 열합 제약은 하나가 서로 종속이다.",
+          "solution": "$P(3)$: 꼭짓점 $3!=6$개(순열행렬), 패싯 $3^2=9$개(각 $x_{ij}\\ge 0$), 차원 $(3-1)^2=4$. 확인: $3\\times 3$ 행렬은 성분 $9$개. 행합 $=1$ 제약 $3$개와 열합 $=1$ 제약 $3$개 중 총합이 겹치므로 독립 제약은 $3+3-1=5$개. 따라서 아핀차원 $9-5=4=(d-1)^2$. 중심점은 모든 성분이 $1/3$인 이중확률행렬이다."
+        },
+        {
+          "problem": "하이퍼심플렉스 $\\Delta_3(2)\\subseteq\\mathbb{R}^4$의 꼭짓점을 모두 나열하고, 이 폴리토프가 정팔면체(=$3$-교차폴리토프 $C_3^{\\Delta}$)와 조합적으로 동치임을 인접관계로 보여라.",
+          "hint": "꼭짓점은 성분 합이 $2$인 $\\{0,1\\}^4$ 벡터, 즉 $\\mathbf{e}_i+\\mathbf{e}_j$ 꼴이다. 두 꼭짓점이 '대척점(비인접)'이 되는 조건은 지지집합(support)이 서로소인 것이다.",
+          "solution": "꼭짓점은 $\\mathbf{e}_i+\\mathbf{e}_j\\ (1\\le i<j\\le 4)$로 $\\binom{4}{2}=6$개다. 지지집합이 서로소인 쌍—$\\{1,2\\}\\&\\{3,4\\},\\ \\{1,3\\}\\&\\{2,4\\},\\ \\{1,4\\}\\&\\{2,3\\}$—은 공통 패싯을 갖지 않는 대척점이고, 그 외 모든 쌍은 인접하다. 즉 꼭짓점 $6$개가 $3$쌍의 대척 구조를 이루고 각 꼭짓점이 나머지 $4$개와 인접하므로, 이는 정확히 정팔면체(3-교차폴리토프)의 조합구조다. 따라서 $\\Delta_3(2)\\simeq C_3^{\\Delta}$."
+        }
+      ]
+    },
+    {
+      "section_title": "0.ex 연습문제 (Problems and Exercises)",
+      "step1_big_picture": {
+        "context": "이 소단원은 챕터 0을 닫는 연습문제 모음이다. 새 이론이 아니라, 앞선 두 파트에서 깔아 둔 개념들을 손으로 직접 굴려 보며 체화하는 자리다: 단순·단체적(0.0, 0.1), 중심대칭과 조노토프(0.2), 입방체의 면격자(0.5), 순환폴리토프와 게일의 짝수성 조건(0.6~0.11), 버코프 폴리토프·퍼뮤타헤드론(0.12, 0.16), 아소시아헤드론(0.13), 외판원 폴리토프(0.14, 0.17), 그리고 아직 열려 있는 난제들(0.11*, 0.15)까지 챕터 전체가 한 번에 소환된다. 파트 1의 정의 0.1과 '볼록껍질 = 볼록조합' 명제, 파트 2의 게일 짝수성 정리·따름정리 0.8·이웃polytope 정의가 여기서 문제 풀이의 도구로 재사용된다.",
+        "hidden_intuition": "이 문제들을 관통하는 메타 기술은 '기하학적 물음을 세는 문제 또는 부호 기록(sign bookkeeping)으로 환원하기'다. 반복 등장하는 무기가 다섯 개 있다. (1) 오일러 관계식 $V-E+F=2$와 $3$-폴리토프 그래프의 평면성—$3$차원 특유의 강한 제약을 주는 열쇠(0.0). (2) 라돈 정리(Radon's theorem)—$e$차원에서 점 $e+2$개는 반드시 두 볼록껍질이 겹치도록 쪼개지며, 이것이 이웃성의 상한($\\lfloor d/2\\rfloor$)을 강제한다(0.10). (3) 부호벡터 $\\{+,-,0\\}^d$—입방체의 모든 면을 좌표별 '켜짐/꺼짐/자유'로 코드화하며, 이는 뒤에 나올 유향 매트로이드(oriented matroid)의 첫 예고편이다(0.5). (4) 게일의 짝수성 조건을 통한 조합적 세기—패싯 개수 공식이 이항계수로 떨어진다(0.9). (5) 폴라(쌍대)성—단순↔단체적, 꼭짓점↔패싯을 뒤집어 절반의 수고를 더는 지렛대(0.1, 0.12). 결국 대부분의 문제가 '겉보기엔 기하, 속은 조합'이라는 이 챕터의 정신을 되풀이한다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "명제 (연습 0.0: 모든 꼭짓점이 서로 인접한 $3$-폴리토프는 사면체다)",
+          "formal_statement": "$3$-폴리토프 $P$의 임의의 두 꼭짓점이 서로 인접(모서리로 연결)하면 $P$는 사면체(tetrahedron), 즉 $\\Delta_3$이다.",
+          "idea_behind_proof": "$3$차원은 특별하다: $3$-폴리토프의 $1$-골격(그래프)은 평면적이고, 그래서 오일러 관계식이 모서리 수에 강한 상한 $E\\le 3V-6$을 씌운다. '모든 쌍이 인접'은 $E=\\binom{V}{2}$를 뜻하니, 이 두 식을 부딪치면 $V$가 좁은 범위로 갇힌다. 이차부등식 하나로 끝난다.",
+          "proof_steps": [
+            "모든 꼭짓점이 서로 인접하므로 모서리 수는 $E=\\binom{V}{2}=\\tfrac{V(V-1)}{2}$이다.",
+            "$3$-폴리토프의 모든 $2$-면(facet)은 최소 $3$개의 모서리를 가지고 각 모서리는 정확히 두 면에 속하므로 $2E\\ge 3F$. 오일러 관계식 $V-E+F=2$에서 $F=2-V+E$를 대입하면 $2E\\ge 3(2-V+E)$, 정리하여 $E\\le 3V-6$.",
+            "두 식을 결합하면 $\\tfrac{V(V-1)}{2}\\le 3V-6$, 즉 $V^2-7V+12\\le 0$, 곧 $(V-3)(V-4)\\le 0$이라 $3\\le V\\le 4$.",
+            "$3$-폴리토프는 꼭짓점이 최소 $4$개이므로 $V=4$. 서로 인접한 $4$개의 꼭짓점을 갖는 $3$-폴리토프는 사면체뿐이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습 0.5: 입방체의 면 = 부호벡터, 그리고 최적화·분리 문제)",
+          "formal_statement": "$d$-입방체 $C_d=[-1,1]^d$의 (공집합이 아닌) 면들은 부호벡터 $\\sigma\\in\\{+,-,0\\}^d$와 일대일 대응한다: $\\sigma$에 대응하는 면은 $F_\\sigma=\\{\\mathbf{x}\\in C_d:\\ x_i=+1\\ (\\sigma_i=+),\\ x_i=-1\\ (\\sigma_i=-),\\ -1\\le x_i\\le 1\\ (\\sigma_i=0)\\}$이며 그 차원은 $\\#\\{i:\\sigma_i=0\\}$이다. 따라서 공집합을 포함한 면의 총수는 $3^d+1$이다.",
+          "idea_behind_proof": "입방체의 결정적 성질은 '좌표들이 서로 완전히 독립'이라는 것이다. 각 좌표가 독립적으로 위 끝($+1$)·아래 끝($-1$)·자유($[-1,1]$) 세 상태 중 하나를 고르면 면 하나가 정해진다—$3^d$가지. 이 독립성이 최적화와 분리도 좌표별 문제로 쪼개 준다.",
+          "proof_steps": [
+            "차원별 세기: $\\sigma_i=0$인 자유 좌표를 $k$개 고르고($\\binom{d}{k}$가지) 나머지 $d-k$개에 부호를 매기면($2^{d-k}$가지) $k$차원 면들이 나온다. 합하면 $\\sum_{k=0}^d\\binom{d}{k}2^{d-k}=(1+2)^d=3^d$. 꼭짓점($k=0$)은 $2^d$개, 패싯($k=d-1$)은 $\\binom{d}{d-1}\\cdot 2=2d$개로 알려진 값과 일치한다. 공집합을 더해 $3^d+1$.",
+            "최적화(주어진 $\\mathbf{c}$에 대해 $\\mathbf{c}\\mathbf{x}$ 최대화): 좌표 독립성에서 $x_i=+1\\ (c_i>0),\\ x_i=-1\\ (c_i<0)$로 두면 되며, 최적 꼭짓점은 $\\mathbf{x}^*=(\\operatorname{sign} c_i)_i$이다(최댓값 $\\sum_i|c_i|$).",
+            "분리(주어진 $\\mathbf{y}$가 $C_d$에 드는가): $\\mathbf{y}\\in C_d\\iff \\max_i|y_i|\\le 1$. 만약 어떤 $j$에서 $y_j>1$이면 $x_j\\le 1$이, $y_j<-1$이면 $-x_j\\le 1$이 $C_d$에는 유효하지만 $\\mathbf{y}$를 위반하는 분리 부등식이다. $\\qquad\\blacksquare$",
+            "일반화: '꼭짓점을 모두 아는' 폴리토프(임의의 $V$-폴리토프)는 꼭짓점 비교로 최적화가 쉽고, '패싯을 모두 아는' 폴리토프(입방체·교차폴리토프·단체 등)는 부등식 검사로 분리가 쉽다. 두 문제의 난이도는 어떤 표현을 손에 쥐고 있느냐에 달려 있다."
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -1,
+                    -1
+                  ],
+                  [
+                    1,
+                    -1
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    -1,
+                    1
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1,
+                  -1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1,
+                  1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.35,
+                  -1.28
+                ],
+                "text": "(-,-)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.35,
+                  -1.28
+                ],
+                "text": "(+,-)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.35,
+                  1.22
+                ],
+                "text": "(+,+)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.35,
+                  1.22
+                ],
+                "text": "(-,+)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.32
+                ],
+                "text": "(0,-)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.45,
+                  0
+                ],
+                "text": "(+,0)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.28
+                ],
+                "text": "(0,+)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.45,
+                  0
+                ],
+                "text": "(-,0)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "(0,0)"
+              }
+            ],
+            "caption": "$2$-입방체 $C_2$의 면과 부호벡터. 꼭짓점(부호에 $0$ 없음) $4$개, 모서리($0$ 하나) $4$개, 정사각형 자신 $(0,0)$ $1$개. 공집합을 더하면 $3^2+1=10$개 면."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습 0.10: 이웃성과 단체성 — 라돈 정리)",
+          "formal_statement": "폴리토프 $P$가 $k$-이웃($k$-neighborly)이면 $P$의 모든 $(2k-1)$-면은 단체(simplex)다. 특히 $d$-폴리토프가 $(\\lfloor d/2\\rfloor+1)$-이웃이면 $P$는 단체다.",
+          "idea_behind_proof": "핵심 도구는 라돈 정리다: $e$차원 공간의 점 $e+2$개는 언제나 두 부분 $A,B$로 쪼개져 $\\operatorname{conv}(A)\\cap\\operatorname{conv}(B)\\neq\\varnothing$가 된다. 그 겹치는 점은 $A$의 볼록조합인 동시에 $B$의 (계수가 양인) 볼록조합인데, 만약 $A$가 하나의 면을 이룬다면 '면 위의 점은 그 면의 꼭짓점들로만 표현된다'는 성질과 정면충돌한다. $k$-이웃성은 작은 쪽($|A|\\le k$)이 언제나 면이 되게 보장하므로, 꼭짓점이 너무 많으면 모순—즉 면은 단체일 수밖에 없다.",
+          "proof_steps": [
+            "$F$를 $(2k-1)$-면이라 하고 $F$가 단체가 아니라고 가정하면, $\\dim F=2k-1$인 단체는 꼭짓점이 $2k$개이므로 $F$는 꼭짓점을 $\\ge 2k+1$개 갖는다.",
+            "$F$의 꼭짓점 중 $2k+1$개를 고른다. 이들은 $\\operatorname{aff}(F)$($\\dim=2k-1$) 안에 있고 $2k+1=(2k-1)+2$이므로 라돈 정리에 의해 $A\\sqcup B$로 쪼개져 $\\operatorname{conv}(A)\\cap\\operatorname{conv}(B)\\neq\\varnothing$이다. $|A|+|B|=2k+1$이라 $\\min(|A|,|B|)\\le k$; 편의상 $|A|\\le k$로 둔다.",
+            "$P$가 $k$-이웃이므로 $A$는 $P$의 한 면 $G=\\operatorname{conv}(A)$를 이룬다. 그런데 겹치는 점 $\\mathbf{p}\\in\\operatorname{conv}(A)\\cap\\operatorname{conv}(B)$는 $G$ 위의 점이면서 동시에 $B$의 꼭짓점들의 양의 계수 볼록조합이다.",
+            "면 위의 점은 오직 그 면의 꼭짓점들의 볼록조합으로만 표현되는데, $B$의 꼭짓점 중 일부는 $A(=G$의 꼭짓점)에 속하지 않는다—모순. 따라서 $F$의 꼭짓점은 $\\le 2k$개, 즉 $F$는 단체다.",
+            "둘째 주장: $P$가 $(\\lfloor d/2\\rfloor+1)$-이웃이라 하자. $P$의 꼭짓점이 $\\ge d+2$개라면 그중 $d+2$개를 라돈 분할($\\dim P=d$, $d+2=d+2$)하면 $\\min(|A|,|B|)\\le\\lfloor (d+2)/2\\rfloor=\\lfloor d/2\\rfloor+1$이라 작은 쪽 $A$가 면이 되고, 위와 같은 모순이 생긴다. 그러므로 꼭짓점은 $\\le d+1$개, 곧 $P$는 단체다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습 0.12: 버코프 폴리토프의 차원 $(d-1)^2$과 패싯 수 $d^2$)",
+          "formal_statement": "버코프 폴리토프 $P(d)=\\operatorname{conv}\\{X^\\sigma:\\sigma\\in\\mathcal{S}_d\\}$는 이중확률행렬 전체 $\\{X:x_{ij}\\ge 0,\\ \\sum_k x_{ik}=1,\\ \\sum_k x_{kj}=1\\}$과 같고(버코프–폰 노이만), 그 차원은 $(d-1)^2$이다. $d\\ge 3$이면 부등식 $x_{ij}\\ge 0$들이 각각 서로 다른 패싯을 정의하여 패싯 수는 $d^2$이다.",
+          "idea_behind_proof": "차원은 '자유 성분에서 독립 제약을 뺀' 것이다. $d^2$개 성분에 행합·열합 제약이 $2d$개 걸리지만, 모든 행합의 합 $=$ 모든 열합의 합 $=$ 총합이라는 관계 하나가 제약을 종속으로 묶어 유효 제약은 $2d-1$개다. 중심 $\\tfrac1d J$가 모든 $x_{ij}>0$을 만족하는 내부점이라 폴리토프가 그 아핀공간을 꽉 채운다. 패싯은 부등식이 $x_{ij}\\ge 0$뿐이라는 버코프–폰 노이만 기술에서 곧바로 센다.",
+          "proof_steps": [
+            "차원: 아핀껍질은 $\\{X:\\ \\sum_k x_{ik}=1\\ (\\forall i),\\ \\sum_k x_{kj}=1\\ (\\forall j)\\}$. $2d$개 방정식 중 $\\sum_i(\\text{행합}_i)=\\sum_j(\\text{열합}_j)$이 유일한 선형종속이라 계수행렬의 랭크는 $2d-1$. 따라서 아핀껍질 차원 $=d^2-(2d-1)=(d-1)^2$.",
+            "완전차원성: 중심점 $\\tfrac1d J$(모든 성분 $1/d$)는 이중확률행렬이고 모든 $x_{ij}=1/d>0$이라 아핀공간 안에서 내부점이다. 그러므로 $P(d)$는 아핀껍질을 완전히 채우고 $\\dim P(d)=(d-1)^2$.",
+            "패싯: 버코프–폰 노이만 정리로 $P(d)$의 부등식 기술은 $x_{ij}\\ge 0$들뿐이다. $d\\ge 3$이면 각 면 $\\{x_{ij}=0\\}$은 서로 다른 $(d-1)^2-1$차원 면(패싯)이 되어 총 $d^2$개다.",
+            "주의(연습 0.16과의 연결): 각 꼭짓점(순열행렬)은 각 행·열에 $1$이 정확히 하나이므로 완전이분그래프 $K_{d,d}$의 완전매칭과 대응한다. 또한 $d=2$는 퇴화 사례로, 네 부등식이 두 패싯으로 합쳐져 $d^2=4$가 성립하지 않는다(선분, 패싯 $2$개). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (열린 문제들: 연습 0.11*와 0.15)",
+          "formal_statement": "이 챕터의 연습에는 아직 답이 완전히 정리되지 않은 문제도 섞여 있다. (0.11*) 유리좌표 점 $\\mathbf{x}$가 순환폴리토프 $C_d(1,2,\\dots,n)$에 드는지 빠르고 간단하게 판정하는 방법이 있는가? 그뢰첼–로바스–슈라이버(Grötschel–Lovász–Schrijver)의 '최적화와 분리의 다항 등가성'에 의해 다항시간 알고리즘은 존재한다(순환폴리토프 위 최적화는 꼭짓점 비교로 쉬우므로). 다만 타원체법(ellipsoid method)을 쓰지 않는 간단한 조합적 판정법은 별도의 물음이다. (0.15) $d$차원 $0/1$-폴리토프가 가질 수 있는 최대 패싯 수 $f(d)$는 얼마인가? 알려진 것은 $2^d\\le f(d)\\le d!+2d$(Bárány의 상계 관찰)와 작은 값 $f(1)=2,\\ f(2)=4,\\ f(3)=8,\\ f(4)=16,\\ f(5)=40,\\ 121\\le f(6)\\le 610$이며, 점근적으로 $(3.6)^d< f(d)\\le 30\\,(d-2)!$이다. 하계와 상계 사이 간격은 여전히 크게 열려 있다. (연습 0.17은 열린 문제는 아니며, 비대칭 외판원 폴리토프 $Q'_T(d)$가 버코프 폴리토프 $P(d)$ 안에 들어감을 보이는 문제다—순환순열의 순열행렬이 모든 순열행렬의 부분집합이라는 관찰에서 시작한다.)"
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "연습 0.1: 어떤 폴리토프가 단순(simple)이면서 동시에 단체적(simplicial)이면, 그것은 단체(simplex)이거나 ($2$차원의) $n$-각형임을 보여라.",
+          "hint": "$2$차원에서는 모든 폴리토프가 단순이자 단체적임을 먼저 확인하라($d=2$면 각 꼭짓점이 $2$개 면, 각 패싯이 $2$개 꼭짓점). $d\\ge 3$일 때, 단체적이면 모든 $2$-면이 삼각형이고, 단순이면 한 꼭짓점의 이웃 두 개가 항상 하나의 $2$-면을 이룸을 이용해 '한 꼭짓점의 모든 이웃이 서로 인접'함을 끌어내라.",
+          "solution": "$d=2$: 모든 $2$-폴리토프는 각 꼭짓점이 정확히 $d=2$개 모서리(=면)에 속해 단순이고, 각 패싯(모서리)이 정확히 $d=2$개 꼭짓점을 가져 단체적이다. 따라서 모든 $n$-각형이 후보다. $d\\ge 3$: 단체적이므로 모든 $2$-면은 삼각형이다. 단순한 $d$-폴리토프의 꼭짓점 도형(vertex figure)은 $(d-1)$-단체라, 한 꼭짓점 $v$에는 정확히 $d$개의 이웃이 있고 그중 임의의 두 이웃 $u,w$는 $v$와 함께 하나의 $2$-면을 이룬다. 이 $2$-면이 삼각형이므로 $u,w$는 서로 인접하고 $\\{v,u,w\\}$가 삼각형 면이다. 즉 $v$의 모든 이웃은 서로 인접하며 $v$까지 합쳐 $d+1$개의 꼭짓점이 쌍마다 인접한 $d$-단체 $S$를 이룬다. 단순성 때문에 $v$의 이웃은 이 $d$개뿐이고, 같은 논리가 각 이웃에도 적용되어 그들의 이웃도 전부 $S$ 안에 있다. 그래프가 연결이므로 $S$가 폴리토프 전체이고, 결국 꼭짓점 $d+1$개짜리 단체다. 정리하면 $d\\ge 3$이면 단체, $d=2$이면 $n$-각형. (덧붙임: 같은 골격으로 '단순+cubical(모든 패싯이 $(d-1)$-입방체)'이면 모든 $2$-면이 사각형이 되어 같은 논증이 $d$-입방체 또는 $n$-각형을 강제한다.)"
+        },
+        {
+          "problem": "연습 0.2: (a) 폴리토프가 교차폴리토프(crosspolytope)의 아핀상(affine image)으로 표현될 필요충분조건이 중심대칭(centrally symmetric)임을 증명하라. (b) $P$가 조노토프(zonotope, $d$-입방체의 아핀상)이면 $P$의 모든 면이 중심대칭임을 보이고, 그 역을 논하라.",
+          "hint": "(a) 중심대칭이면 꼭짓점이 중심에 대해 $\\mathbf{x}_0\\pm\\mathbf{v}_i$ 쌍으로 나온다는 사실과, 교차폴리토프 $C_m^\\Delta=\\operatorname{conv}\\{\\pm\\mathbf{e}_i\\}$를 연결하라. (b) 조노토프의 면은 다시 조노토프(부분 민코프스키 합)임을 이용하라.",
+          "solution": "(a) ($\\Leftarrow$) $P$가 중심 $\\mathbf{x}_0$에 대해 중심대칭이면 $\\mathbf{x}\\mapsto 2\\mathbf{x}_0-\\mathbf{x}$가 $P$의 대칭이라 꼭짓점이 $\\mathbf{x}_0\\pm\\mathbf{v}_1,\\dots,\\mathbf{x}_0\\pm\\mathbf{v}_m$로 쌍을 이룬다. 선형사상 $A:\\mathbb{R}^m\\to\\mathbb{R}^d,\\ \\mathbf{e}_i\\mapsto\\mathbf{v}_i$를 두면 $A(C_m^\\Delta)+\\mathbf{x}_0=\\operatorname{conv}\\{\\mathbf{x}_0\\pm\\mathbf{v}_i\\}=P$. ($\\Rightarrow$) 역으로 $P=A(C_d^\\Delta)+\\mathbf{x}_0$이면, $C_d^\\Delta$가 원점 대칭($\\mathbf{x}\\mapsto-\\mathbf{x}$)이므로 $A\\mathbf{x}+\\mathbf{x}_0\\in P\\iff A(-\\mathbf{x})+\\mathbf{x}_0=2\\mathbf{x}_0-(A\\mathbf{x}+\\mathbf{x}_0)\\in P$, 즉 $P$는 $\\mathbf{x}_0$에 대해 중심대칭. (b) 조노토프는 선분들의 민코프스키 합이고, 방향 $\\mathbf{c}$에 대한 그 면은 각 선분의 '$\\mathbf{c}$-최대 부분'들의 민코프스키 합—즉 다시 (부분) 조노토프다. 조노토프는 중심대칭이므로 모든 면이 중심대칭이다. 역: 일반 폴리토프가 '모든 면이 중심대칭'이라 해서 곧장 조노토프인 것은 아니지만, 고전적 특징화(Bolker–McMullen)에 따르면 폴리토프가 조노토프일 필요충분조건은 그 모든 $2$-면이 중심대칭인 것이다. 따라서 $2$-면 수준에서 역이 성립하며, 이것이 조노토프를 조합적으로 특징짓는다."
+        },
+        {
+          "problem": "연습 0.4: 실수 $a_1\\ge a_2\\ge\\dots\\ge a_d$(전부 같지는 않음)에 대해 일반화 퍼뮤타헤드론(궤도polytope) $\\Pi_{d-1}(a_1,\\dots,a_d)$을 다중집합 $\\{a_1,\\dots,a_d\\}$의 모든 순열의 볼록껍질로 정의한다. (i) 차원이 $d-1$임을 보여라. (ii) 항상 단순(simple)한가? (iii) 모든 모서리의 길이가 같아지는 조건은?",
+          "hint": "(i) 모든 순열이 같은 좌표합을 가진다는 점과, 두 성분을 맞바꾼 차가 $\\mathbf{e}_i-\\mathbf{e}_j$에 비례한다는 점을 쓰라. (ii) 값에 중복이 있으면 어떤 도형이 되는지—$\\{1,1,0,0\\}$을 시험해 보라. (iii) 모서리는 정렬된 값에서 이웃한 두 값의 맞바꿈에 대응한다.",
+          "solution": "(i) 모든 순열은 좌표합 $\\sum_i a_i$가 같아 초평면 $\\{\\sum x_i=\\sum a_i\\}$(차원 $d-1$) 안에 있다. 전부 같지는 않으므로 이웃 값을 맞바꾼 차 벡터들이 $\\mathbf{e}_i-\\mathbf{e}_j$ 방향들을 주고, 이들은 $\\{\\sum x_i=0\\}$($d-1$차원)을 스팬한다. 따라서 $\\dim=d-1$. (ii) 아니다. 다중집합에 중복이 있으면 꼭짓점이 병합되고 면이 퇴화한다. 예로 $\\{1,1,0,0\\}$($d=4$)은 $\\Delta_3(2)$, 곧 정팔면체이며 각 꼭짓점이 $4>d-1=3$개 패싯에 속해 단순이 아니다(오히려 단체적). 값이 모두 다를 때에만 보통의 퍼뮤타헤드론이 되어 단순하다. (iii) 모서리는 정렬된 값에서 이웃한 $a_i,a_{i+1}$을 맞바꾼 두 순열을 잇고, 그 두 점은 정확히 두 좌표에서 $\\pm(a_i-a_{i+1})$만큼 다르므로 길이 $=(a_i-a_{i+1})\\sqrt{2}$이다. 모든 모서리가 같은 길이일 필요충분조건은 연속한 차 $a_i-a_{i+1}$이 모두 같은 것, 즉 $a_1,\\dots,a_d$가 등차수열(arithmetic progression)을 이루는 것이다(Schoute). 그 대표가 $a_i=i$인 고전적 퍼뮤타헤드론이다."
+        },
+        {
+          "problem": "연습 0.6: (a) $d+2$개 꼭짓점을 갖는 순환 $d$-폴리토프 $C_d(d+2)$를 조합적으로 기술하라. (b) 파트 2의 $2$-이웃 폴리토프 $(\\Delta_2\\times\\Delta_2)^\\Delta$가 $C_4(6)$과 조합적으로 동치인가?",
+          "hint": "(a) 게일 짝수성으로 패싯 수를 세라. 파트 2 연습 0.9의 닫힌 공식 $d=2k$: $\\tfrac{n}{n-k}\\binom{n-k}{k}$를 $n=d+2$에 적용해 보라. (b) 두 폴리토프의 꼭짓점 수·패싯 수·단체성·이웃성을 비교하라. $\\Delta_2\\times\\Delta_2$는 단순인가?",
+          "solution": "(a) $C_d(d+2)$는 꼭짓점 $d+2$개짜리 단체적 이웃 $d$-폴리토프로, 패싯은 게일 짝수성 조건으로 결정된다. 짝수 $d=2k$, $n=d+2=2k+2$이면 패싯 수 $=\\tfrac{n}{n-k}\\binom{n-k}{k}=\\tfrac{2k+2}{k+2}\\binom{k+2}{2}=(k+1)^2$. 예: $C_2(4)$는 사각형(패싯 $4=(1+1)^2$), $C_4(6)$은 패싯 $9=(2+1)^2$. 홀수 $d=2k+1$이면 $C_3(5)$처럼 꼭짓점 $5$개·삼각형 패싯 $6$개(삼각쌍뿔형)이 된다. (b) 그렇다. $\\Delta_2\\times\\Delta_2$는 단체들의 곱이라 단순(simple)이고, 그 폴라 $(\\Delta_2\\times\\Delta_2)^\\Delta$는 단체적이다. 꼭짓점은 $\\Delta_2\\times\\Delta_2$의 패싯 $6$개에 대응해 $6$개, 패싯은 그 꼭짓점 $9$개에 대응해 $9$개이며 $2$-이웃이다. $C_4(6)$ 역시 단체적·$\\lfloor4/2\\rfloor=2$-이웃, 꼭짓점 $6$개, 패싯 $9$개다. $6$개 꼭짓점을 가진 $2$-이웃 단체적 $4$-폴리토프의 분류상 이 조합형은 유일하므로 두 폴리토프는 조합적으로 동치다: $(\\Delta_2\\times\\Delta_2)^\\Delta\\simeq C_4(6)$."
+        },
+        {
+          "problem": "연습 0.7: 순환폴리토프 $C_d(n)=\\operatorname{conv}\\{\\mathbf{x}(t_1),\\dots,\\mathbf{x}(t_n)\\}$(예: $t_i=i-1$)에 대해, $i\\leftrightarrow n+1-i$(즉 $\\mathbf{x}(t_i)\\leftrightarrow\\mathbf{x}(t_{n+1-i})$)를 유도하는 아핀 대칭(아핀 반사)이 존재함을 보이고, 그로부터 대응하는 조합 대칭을 이끌어라.",
+          "hint": "매개변수를 중심 $c$에 대해 대칭이 되게 잡고($t_i+t_{n+1-i}=c$), 치환 $t\\mapsto c-t$가 모멘트곡선에 어떤 사상을 유도하는지 보라. $\\mathbf{x}(c-t)$의 각 성분은 $t$의 다항식이다.",
+          "solution": "매개변수를 중심 $c$에 대해 대칭이 되도록 잡는다(예: $t_i=i-1$이면 $c=n-1$이라 $t_i+t_{n+1-i}=n-1=c$). 치환 $t\\mapsto c-t$를 보면, $\\mathbf{x}(c-t)$의 $j$번째 성분 $(c-t)^j=\\sum_{\\ell=0}^{j}\\binom{j}{\\ell}c^{\\,j-\\ell}(-t)^\\ell$은 $1,t,\\dots,t^j$의 선형결합이다. 따라서 어떤 고정된 (하삼각) 아핀 가역사상 $A$가 있어 $A\\mathbf{x}(t)=\\mathbf{x}(c-t)$ 모든 $t$에서 성립한다. 이 $A$는 $\\mathbf{x}(t_i)\\mapsto\\mathbf{x}(c-t_i)=\\mathbf{x}(t_{n+1-i})$로 꼭짓점을 맞바꾸는 아핀 대칭(반사)이다. 아핀사상은 면·인접 구조를 보존하므로 $i\\leftrightarrow n+1-i$의 조합 대칭이 따라온다. 순환폴리토프의 조합형이 매개변수 선택에 무관하므로(파트 2 정리), 이 대칭은 모든 $C_d(n)$에서 성립한다."
+        },
+        {
+          "problem": "연습 0.9: 게일 짝수성으로부터 $C_d(n)$의 패싯 수 공식 $f_{d-1}(C_d(n))=\\binom{n-\\lceil d/2\\rceil}{\\lfloor d/2\\rfloor}+\\binom{n-1-\\lceil (d-1)/2\\rceil}{\\lfloor (d-1)/2\\rfloor}$를 유도하고, 짝·홀 닫힌 형태를 쓴 뒤, $C_{10}(20),\\ C_{10}(100),\\ C_{50}(100)$의 패싯 수를 (근사적으로) 구하라.",
+          "hint": "짝수성 조건은 '연속 접합 마디가 (초·말 마디 빼고) 짝수'다. 첫 블록이 짝수인 경우와 홀수인 경우로 나눠 세면 두 이항계수가 나온다. 닫힌 형태: $d=2k$이면 $\\tfrac{n}{n-k}\\binom{n-k}{k}$, $d=2k+1$이면 $2\\binom{n-k-1}{k}$.",
+          "solution": "짝수성 조건을 만족하는 $d$-부분집합을 '첫 블록(초기 접합 마디)이 짝수/홀수'로 분류하면 각각 하나의 이항계수로 세어져 위 합 공식이 나온다. 정리하면 $d=2k$(짝수): $f_{d-1}=\\dfrac{n}{n-k}\\dbinom{n-k}{k}$, $d=2k+1$(홀수): $f_{d-1}=2\\dbinom{n-k-1}{k}$. 계산: (1) $C_{10}(20)$: $d=10\\Rightarrow k=5$, $n=20$. $f=\\tfrac{20}{15}\\binom{15}{5}=\\tfrac{4}{3}\\cdot 3003=4004$개. (2) $C_{10}(100)$: $k=5,\\ n=100$. $f=\\tfrac{100}{95}\\binom{95}{5}=\\tfrac{20}{19}\\cdot 57{,}940{,}519=60{,}990{,}020$개(약 $6.1\\times 10^{7}$). (3) $C_{50}(100)$: $d=50\\Rightarrow k=25,\\ n=100$. $f=\\tfrac{100}{75}\\binom{75}{25}=\\tfrac{4}{3}\\binom{75}{25}$. $\\binom{75}{25}\\approx 5.26\\times 10^{19}$이므로 $f\\approx 7.0\\times 10^{19}$개. 꼭짓점 수가 같아도(각각 $20,100,100$개) 차원이 커질수록 패싯 수가 폭발함을 보여 준다(상계정리의 극단)."
+        },
+        {
+          "problem": "연습 0.13: 아소시아헤드론(associahedron) $K_{n-2}$의 꼭짓점 수 공식 $\\dfrac{1}{n}\\dbinom{2n-2}{n-1}$(카탈란 수)을 정당화하고, $3$차원 아소시아헤드론 $K_3$을 조합적으로 기술하라.",
+          "hint": "꼭짓점은 $a_1\\cdots a_n$의 완전 괄호치기(또는 $(n+1)$-각형의 삼각분할, 잎이 $n$개인 이진트리)에 대응한다. 가장 바깥 곱셈이 어디서 갈리는지로 재귀식을 세워라.",
+          "solution": "꼭짓점 수를 $f(n)$이라 하자. $a_1\\cdots a_n$의 완전 괄호치기는 가장 바깥 곱셈이 앞 $k$개와 뒤 $n-k$개로 갈리는 지점에 따라 분류되므로 $f(n)=\\sum_{k=1}^{n-1}f(k)f(n-k)$, $f(1)=1$. 이는 카탈란 수의 재귀식이라 $f(n)=C_{n-1}=\\dfrac{1}{n}\\dbinom{2n-2}{n-1}$. $K_3$은 $n-2=3\\Rightarrow n=5$이므로 $3$차원이고 꼭짓점은 $C_4=\\tfrac15\\binom{8}{4}=\\tfrac15\\cdot 70=14$개다. 조합적으로 $K_3$은 꼭짓점 $14$·모서리 $21$·$2$-면 $9$개(정사각형 $3$개와 오각형 $6$개)를 가진 단순 $3$-폴리토프로, 오일러 $14-21+9=2$를 만족한다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    -0.95,
+                    0.31
+                  ],
+                  [
+                    -0.59,
+                    -0.81
+                  ],
+                  [
+                    0.59,
+                    -0.81
+                  ],
+                  [
+                    0.95,
+                    0.31
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -0.95,
+                  0.31
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -0.59,
+                  -0.81
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.59,
+                  -0.81
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.95,
+                  0.31
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.25
+                ],
+                "text": "(a(bc))d"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.5,
+                  0.35
+                ],
+                "text": "((ab)c)d"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.1,
+                  -1.05
+                ],
+                "text": "(ab)(cd)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.05,
+                  -1.05
+                ],
+                "text": "a(b(cd))"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.45,
+                  0.35
+                ],
+                "text": "a((bc)d)"
+              }
+            ],
+            "caption": "가장 작은 아소시아헤드론 $K_2$($n=4$): $4$개 문자의 괄호치기 $C_3=5$가지가 꼭짓점인 오각형. 인접 = 결합법칙 $1$회 적용. $K_3$은 이 오각형(들)과 사각형으로 둘러싸인 $3$차원판이다."
+          }
+        },
+        {
+          "problem": "연습 0.14: 외판원 폴리토프 $Q_T(3),\\ Q_T(4),\\ Q_T(5)$의 조합구조를 기술하라(꼭짓점·차원·인접·단순/단체 여부). 비대칭판 $Q'_T(3),\\ Q'_T(4)$도 간단히 다루라.",
+          "hint": "$Q_T(n)$의 꼭짓점은 $(n-1)!/2$개의 해밀턴 순회, 차원은 $\\binom{n}{2}-n=\\tfrac{n(n-3)}{2}$. $Q'_T(n)$은 꼭짓점 $(n-1)!$개, 차원 $n^2-3n+1$($n\\ge 3$).",
+          "solution": "$Q_T(3)$: 꼭짓점 $\\tfrac{2!}{2}=1$개, 차원 $\\tfrac{3\\cdot 0}{2}=0$—단 하나의 삼각형 순회뿐이라 한 점(point)이다. $Q_T(4)$: 꼭짓점 $\\tfrac{3!}{2}=3$개, 차원 $\\tfrac{4\\cdot 1}{2}=2$—$K_4$의 서로 다른 해밀턴 순회 $3$개가 꼭짓점인 삼각형이며, $2$-폴리토프라 단순이자 단체적이고 세 꼭짓점이 모두 인접하다. $Q_T(5)$: 꼭짓점 $\\tfrac{4!}{2}=12$개, 차원 $\\tfrac{5\\cdot 2}{2}=5$—꼭짓점 $12$개인 $5$-폴리토프로, 여기서부터 패싯 기술이 자명하지 않다(부분순회 제거 부등식 등이 등장하는 다면체 조합론의 출발점). 비대칭판: $Q'_T(3)$은 꼭짓점 $2!=2$개, 차원 $9-9+1=1$—시계/반시계 두 방향 순회를 잇는 선분이다. $Q'_T(4)$는 꼭짓점 $3!=6$개, 차원 $16-12+1=5$인 $5$-폴리토프다. 요지: 꼭짓점(순회)은 쉽게 세지만 패싯은 급격히 복잡해진다는 것이 TSP를 어렵게 만드는 핵심이다."
+        },
+        {
+          "problem": "연습 0.16: 특성벡터(예 0.12) 구성을 이용해 버코프 폴리토프 $P(n)$의 꼭짓점이 완전이분그래프 $K_{n,n}$의 완전매칭(perfect matching)과 일대일 대응함을 보여라.",
+          "hint": "순열행렬에서 $1$이 놓인 위치 $(i,\\sigma(i))$가 무엇을 의미하는지, 행을 왼쪽 정점·열을 오른쪽 정점으로 보면 어떤 변집합이 되는지 생각하라.",
+          "solution": "$P(n)$의 꼭짓점은 순열행렬 $X^\\sigma$이고, 각 행·각 열에 $1$이 정확히 하나다. 행을 왼쪽 정점 $u_1,\\dots,u_n$, 열을 오른쪽 정점 $w_1,\\dots,w_n$으로 보면, $X^\\sigma$에서 $1$이 놓인 위치 $(i,\\sigma(i))$들은 변 $u_i\\!-\\!w_{\\sigma(i)}$의 집합이다. 각 왼쪽·오른쪽 정점이 정확히 한 번씩 덮이므로 이는 $K_{n,n}$의 완전매칭이다. 역으로 임의의 완전매칭은 전단사 $i\\mapsto\\sigma(i)$, 즉 하나의 순열이라 순열행렬 하나를 준다. 따라서 꼭짓점 $\\leftrightarrow$ 완전매칭이 일대일 대응하며, 꼭짓점 수가 $n!$(=완전매칭 수)임과도 맞아떨어진다. (이어지는 연습 0.17은 순환순열의 순열행렬만 모으면 $Q'_T(n)$이 $P(n)$ 안에 들어옴을 이용한다.)"
+        }
+      ]
+    }
+  ],
+  "step4_final_review": {
+    "ox_quizzes": [
+      {
+        "question": "모든 $H$-폴리헤드론은 폴리토프다.",
+        "answer": "X",
+        "explanation": "$H$-폴리헤드론은 유계일 필요가 없다. 반직선을 품는 무계 예(예: 반공간 하나)는 폴리토프가 아니다. 폴리토프는 유계인 $H$-폴리헤드론($H$-폴리토프)에 한한다."
+      },
+      {
+        "question": "꼭짓점 개수가 같은 두 $2$-폴리토프는 반드시 아핀 동형이다.",
+        "answer": "X",
+        "explanation": "꼭짓점 수가 같으면 조합적으로는 동치이지만 아핀 동형은 아닐 수 있다. 예컨대 정육각형과 일그러진 육각형은 조합 동치이나 아핀 동형이 아니다."
+      },
+      {
+        "question": "$d$-입방체 $C_d$는 단순(simple) 폴리토프다.",
+        "answer": "O",
+        "explanation": "$C_d$의 각 꼭짓점은 정확히 최소 개수 $d$개의 패싯에만 속하므로 단순이다."
+      },
+      {
+        "question": "$d$-교차폴리토프 $C_d^{\\Delta}$는 단순(simple) 폴리토프다.",
+        "answer": "X",
+        "explanation": "교차폴리토프는 단체적(simplicial)이다. 단순인 것은 그 폴라 쌍대인 입방체 $C_d$다."
+      },
+      {
+        "question": "$n$개의 점이 아핀 독립이면 그 아핀껍질의 차원은 $n$이다.",
+        "answer": "X",
+        "explanation": "아핀 독립인 $n$개 점의 아핀껍질 차원은 $n-1$이다. 예: 삼각형의 세 꼭짓점($n=3$)은 $2$차원 평면을 스팬한다."
+      },
+      {
+        "question": "조합적 동치(combinatorial equivalence)를 판정하려면 거리(계량)가 필요하다.",
+        "answer": "X",
+        "explanation": "조합적 동치는 면들 사이 포함관계를 보존하는 전단사만 요구하는 비계량(nonmetric) 개념으로, 거리·각도·좌표를 전혀 쓰지 않는다."
+      },
+      {
+        "question": "표준 $d$-단체 $\\Delta_d$는 $\\mathbb{R}^d$가 아니라 $\\mathbb{R}^{d+1}$ 안에 자연스럽게 놓인다.",
+        "answer": "O",
+        "explanation": "$\\Delta_d=\\{\\mathbf{x}\\in\\mathbb{R}^{d+1}:\\mathbb{1}\\mathbf{x}=1,\\ x_i\\ge 0\\}$로, 초평면 $\\mathbb{1}\\mathbf{x}=1$ 위에 놓인 $d$차원 도형이다."
+      },
+      {
+        "question": "$3$차원에서 성립하는 폴리토프 정리는 모든 고차원에서도 성립한다.",
+        "answer": "X",
+        "explanation": "$2$-이웃 $4$-폴리토프 $(\\Delta_2\\times\\Delta_2)^{\\Delta}$처럼 $3$차원에는 유례없는 현상이 고차원에 존재한다. 저차원 직관은 종종 배신하며, 이것이 저자의 핵심 경고다."
+      },
+      {
+        "question": "순환폴리토프 $C_d(n)$의 조합구조는 매개변수 $t_1<\\dots<t_n$의 구체적 수치 선택에 의존한다.",
+        "answer": "X",
+        "explanation": "짝수성 조건은 $t_i$들의 순서(대소관계)에만 의존하고 구체적 값에는 무관하다. 그래서 $C_d(n)$은 하나의 조합적 동치류로 잘 정의된다."
+      },
+      {
+        "question": "단체(simplex)를 제외하면 어떤 $d$-폴리토프도 $\\lfloor d/2\\rfloor$보다 더 이웃(neighborly)일 수 없다.",
+        "answer": "O",
+        "explanation": "이것이 이웃성의 상한(Exercise 0.10)이며, 그래서 $\\lfloor d/2\\rfloor$-이웃 폴리토프를 특별히 이웃polytope이라 부른다. 순환폴리토프가 그 대표다."
+      },
+      {
+        "question": "$\\lfloor d/2\\rfloor$-이웃인 $d$-폴리토프는 반드시 순환폴리토프(cyclic polytope)와 조합적으로 동치다.",
+        "answer": "X",
+        "explanation": "이웃성은 성질이고 순환폴리토프는 그 성질을 갖는 대표 예일 뿐이다. $d\\ge 4$에서는 순환폴리토프와 조합적으로 다른 이웃polytope들도 존재한다."
+      },
+      {
+        "question": "모든 조노토프(zonotope)는 어떤 입방체(cube)의 사영(projection)이다.",
+        "answer": "O",
+        "explanation": "조노토프는 정의상 입방체의 아핀 사영이다. 이 그림자 구조가 조노토프를 선형 초평면 배열과 연결해 준다(Lecture 7)."
+      },
+      {
+        "question": "버코프 폴리토프 $P(d)$의 차원은 $d^2$이다.",
+        "answer": "X",
+        "explanation": "$P(d)$는 $\\mathbb{R}^{d\\times d}$($=\\mathbb{R}^{d^2}$) 안에 놓이지만 행합·열합 제약 때문에 차원은 $(d-1)^2$이다. 패싯 수가 $d^2$개다."
+      },
+      {
+        "question": "임의의 $V$-폴리토프 $\\operatorname{conv}\\{\\mathbf{x}_1,\\dots,\\mathbf{x}_n\\}$은 표준단체 $\\Delta_{n-1}$의 선형 사영으로 볼 수 있다.",
+        "answer": "O",
+        "explanation": "$\\pi:\\mathbf{e}_i\\mapsto\\mathbf{x}_i$로 두면 단체 위의 무게중심좌표가 볼록조합의 계수가 되어 $\\pi(\\Delta_{n-1})=\\operatorname{conv}\\{\\mathbf{x}_i\\}$. 이는 파트 1의 '볼록껍질 = 볼록조합 전체'를 좌표로 다시 읽은 것이다."
+      },
+      {
+        "question": "퍼뮤타헤드론 $\\Pi_{d-1}$은 단순(simple) 폴리토프이면서 동시에 조노토프다.",
+        "answer": "O",
+        "explanation": "퍼뮤타헤드론은 단순 조노토프라는 드문 조합을 이루며, 그 꼭짓점은 순열, 모서리는 인접 호환에 대응한다."
+      },
+      {
+        "question": "게일의 짝수성 조건에서, $S$에 속하지 않는 두 정점 $i<j$ 사이에 있는 $S$의 원소가 홀수 개여도 $S$는 패싯일 수 있다.",
+        "answer": "X",
+        "explanation": "그 개수가 홀수면 초평면 $H_S$의 다항식 $F_S(\\mathbf{x}(t))$가 $t_i$와 $t_j$에서 반대 부호가 되어, 남은 꼭짓점들이 한쪽에 몰리지 못한다—즉 $S$는 패싯이 아니다."
+      },
+      {
+        "question": "임의의 두 꼭짓점이 서로 인접한 $3$-폴리토프는 사면체(tetrahedron)뿐이다.",
+        "answer": "O",
+        "explanation": "오일러 관계식에서 나오는 $E\\le 3V-6$과 $E=\\binom{V}{2}$를 결합하면 $(V-3)(V-4)\\le 0$, 즉 $V\\le 4$. $3$-폴리토프는 $V\\ge 4$이므로 $V=4$, 곧 사면체다(연습 0.0)."
+      },
+      {
+        "question": "단순(simple)이면서 동시에 단체적(simplicial)인 $d$-폴리토프는 $d\\ge 3$이면 반드시 단체(simplex)다.",
+        "answer": "O",
+        "explanation": "$d\\ge 3$에서는 단체적이라 $2$-면이 삼각형이고 단순이라 한 꼭짓점의 이웃들이 서로 인접해, 폴리토프가 $d+1$개 꼭짓점의 단체로 강제된다. 단 $d=2$이면 모든 $n$-각형이 두 성질을 함께 만족한다(연습 0.1)."
+      },
+      {
+        "question": "$k$-이웃(neighborly) 폴리토프의 모든 $(2k-1)$-면은 단체다.",
+        "answer": "O",
+        "explanation": "라돈 정리로 $(2k-1)$-면이 꼭짓점을 $2k+1$개 이상 가지면 작은 쪽($\\le k$개)이 면이 되면서 '면 위의 점은 그 면의 꼭짓점으로만 표현'된다는 성질과 모순이 된다. 그래서 면은 단체다(연습 0.10)."
+      },
+      {
+        "question": "$(\\lfloor d/2\\rfloor+1)$-이웃인 $d$-폴리토프는 단체가 아닐 수도 있다.",
+        "answer": "X",
+        "explanation": "연습 0.10의 결론에 따라 그런 폴리토프는 반드시 단체다. 순환폴리토프가 $\\lfloor d/2\\rfloor$-이웃까지만 갈 수 있고 그 이상은 단체뿐이라는 이웃성 상한의 정확한 경계다."
+      },
+      {
+        "question": "$d$-입방체 $C_d$의 (공집합을 포함한) 면의 총수는 $3^d+1$이다.",
+        "answer": "O",
+        "explanation": "각 좌표가 $+1,-1,$ 자유($0$) 세 상태 중 하나를 독립적으로 고르므로 비어 있지 않은 면이 $3^d$개, 공집합을 더해 $3^d+1$개다. 면은 부호벡터 $\\{+,-,0\\}^d$와 대응한다(연습 0.5)."
+      },
+      {
+        "question": "버코프 폴리토프 $P(d)$의 꼭짓점은 완전이분그래프 $K_{d,d}$의 완전매칭과 일대일 대응한다.",
+        "answer": "O",
+        "explanation": "순열행렬의 $1$들이 $(i,\\sigma(i))$ 위치에 놓여 각 행·열을 한 번씩 덮으므로 $K_{d,d}$의 완전매칭이 되고, 역도 성립한다(연습 0.16). 그래서 꼭짓점 수가 $d!$이다."
+      },
+      {
+        "question": "일반화 퍼뮤타헤드론 $\\Pi_{d-1}(a_1,\\dots,a_d)$은 언제나 단순(simple)하다.",
+        "answer": "X",
+        "explanation": "값에 중복이 있으면 단순하지 않다. 예로 $\\{1,1,0,0\\}$은 정팔면체 $\\Delta_3(2)$가 되어 각 꼭짓점이 $4$개 패싯에 속한다—단순이 아니라 오히려 단체적이다(연습 0.4)."
+      },
+      {
+        "question": "$C_4(6)$과 $(\\Delta_2\\times\\Delta_2)^\\Delta$는 조합적으로 동치다.",
+        "answer": "O",
+        "explanation": "둘 다 꼭짓점 $6$개·패싯 $9$개인 단체적 $2$-이웃 $4$-폴리토프이고, 그 조합형은 유일하므로 $(\\Delta_2\\times\\Delta_2)^\\Delta\\simeq C_4(6)$이다(연습 0.6)."
+      },
+      {
+        "question": "유계인 $H$-폴리헤드론은 언제나 어떤 $V$-폴리토프와 같지만, 두 표현을 서로 변환하는 계산은 크기가 지수적으로 폭발할 수 있다.",
+        "answer": "O",
+        "explanation": "$V=H$는 수학적으로 동치(Lecture 1의 주정리)이나 알고리즘적으로는 동치가 아니다. 예로 $C_d$는 꼭짓점 $2^d$개인데 패싯은 $2d$개뿐이라, $V\\leftrightarrow H$ 변환에서 표현 크기가 지수적으로 달라진다."
+      },
+      {
+        "question": "$2$-폴리토프에서는 조합적 동치(combinatorial equivalence)와 아핀 동형(affine isomorphism)이 같은 관계다.",
+        "answer": "X",
+        "explanation": "꼭짓점 수가 같은 두 $n$-각형은 조합적으로 동치이지만 아핀 동형은 아닐 수 있다(정육각형 대 일그러진 육각형). 조합적 동치는 면격자만, 아핀 동형은 아핀 구조까지 보존한다."
+      },
+      {
+        "question": "폴리토프가 단순(simple)일 필요충분조건은 그 폴라 쌍대가 단체적(simplicial)인 것이다.",
+        "answer": "O",
+        "explanation": "폴라성은 $k$-면을 $(d-1-k)$-면으로 뒤집어 꼭짓점↔패싯을 맞바꾼다. 그래서 '모든 꼭짓점이 $d$개 패싯에 속함'(단순)이 '모든 패싯이 $d$개 꼭짓점을 가짐'(단체적)으로 옮겨간다. 입방체↔교차폴리토프가 그 예다."
+      },
+      {
+        "question": "$d$-입방체 $C_d$는 단체적(simplicial)이고 $d$-교차폴리토프 $C_d^{\\Delta}$는 단순(simple)이다.",
+        "answer": "X",
+        "explanation": "반대다. 입방체는 단순(각 꼭짓점이 $d$개 패싯), 교차폴리토프는 단체적(각 패싯이 $d$개 꼭짓점)이다. 둘은 서로 폴라 쌍대라 성질도 맞바뀐다."
+      },
+      {
+        "question": "순환폴리토프 $C_d(n)$은 꼭짓점이 $n$개인 $d$-폴리토프 중 패싯을 가장 많이 갖는 유일한 폴리토프다.",
+        "answer": "X",
+        "explanation": "상계정리(upper bound theorem)에 따르면 패싯 최대는 이웃polytope들이 달성하며 순환폴리토프가 그중 하나다. 하지만 $d\\ge 4$에서는 순환폴리토프와 조합적으로 다른 이웃polytope도 존재하므로 '유일한' 최대자는 아니다."
+      },
+      {
+        "question": "조노토프(zonotope)의 모든 $2$-면은 중심대칭(centrally symmetric)이다.",
+        "answer": "O",
+        "explanation": "조노토프는 선분들의 민코프스키 합이고 그 면 또한 (부분) 조노토프라 중심대칭이다. 실제로 '모든 $2$-면이 중심대칭'이라는 성질이 조노토프를 특징짓는다(Bolker–McMullen)."
+      },
+      {
+        "question": "$\\mathbb{R}^3$에서 꼭짓점 $6$개가 모두 서로 인접한 폴리토프를 만들 수 있다.",
+        "answer": "X",
+        "explanation": "$3$-폴리토프에서 모든 쌍이 인접한 것은 사면체(꼭짓점 $4$개)뿐이다(오일러+평면성, 연습 0.0). 꼭짓점 $6$개가 모두 인접하려면 그래프가 $K_6$이어야 하나 이는 비평면적이다. 그런 현상은 $C_4(6)$처럼 $4$차원에서만 가능하다."
+      },
+      {
+        "question": "라돈 정리(Radon's theorem)는 '단체를 제외한 어떤 폴리토프도 $\\lfloor d/2\\rfloor$보다 더 이웃(neighborly)일 수 없다'는 사실의 증명 핵심이다.",
+        "answer": "O",
+        "explanation": "$e$차원 점 $e+2$개의 라돈 분할에서 작은 쪽이 $k$-이웃성으로 면이 되면 '면 위의 점은 그 면 꼭짓점만으로 표현'된다는 성질과 모순이 생긴다. 이것이 이웃성 상한 $\\lfloor d/2\\rfloor$를 강제한다(연습 0.10)."
+      },
+      {
+        "question": "$d$-입방체의 면들은 부호벡터 $\\{+,-,0\\}^d$와 일대일 대응하며, 이 부호벡터 관점은 뒤에 나올 유향 매트로이드(oriented matroid)의 예고편이다.",
+        "answer": "O",
+        "explanation": "각 좌표가 위 끝($+$)·아래 끝($-$)·자유($0$)를 독립적으로 고르면 면 하나가 정해져 비어 있지 않은 면이 $3^d$개다(연습 0.5). '부호로 기하를 코드화'하는 이 방식이 유향 매트로이드의 코벡터 개념으로 이어진다(Lecture 7)."
+      },
+      {
+        "question": "버코프 폴리토프 $P(d)$는 $\\mathbb{R}^{d^2}$ 안에 놓이며 차원이 $d^2$이고, 행합·열합 방정식이 그 패싯을 준다.",
+        "answer": "X",
+        "explanation": "차원은 $(d-1)^2$이다($2d-1$개 독립 제약을 뺌). 행합·열합은 아핀껍질을 정하는 등식이지 패싯이 아니며, 패싯은 부등식 $x_{ij}\\ge 0$($d\\ge 3$일 때 $d^2$개)이 준다(연습 0.12)."
+      }
+    ],
+    "conceptual_questions": [
+      {
+        "question": "$V$-폴리토프와 $H$-폴리토프가 '같은 대상'이라는 사실은 왜 수학적으로 자명하지 않으며, 왜 알고리즘적으로는 동치가 아니라고 말하는가?",
+        "hint": "한 표현에서 다른 표현으로 넘어가는 계산의 크기를 생각하라—입방체의 패싯 수 대 꼭짓점 수를 비교해 보라.",
+        "answer": "수학적 동치는 '유한 점집합의 볼록껍질 = 유한 반공간 교집합의 유계'라는 존재 진술이지만, 그 증명에는 볼록껍질로부터 패싯 부등식을 뽑아내거나(또는 그 역) 하는 구성이 필요해 사소하지 않다(Lecture 1의 주정리). 알고리즘적으로 동치가 아니라는 것은 한 표현의 크기가 다른 표현의 크기와 다항적으로 비례하지 않을 수 있다는 뜻이다. 예컨대 $C_d$는 꼭짓점이 $2^d$개지만 패싯은 $2d$개뿐이라, $V$↔$H$ 변환은 지수적으로 폭발하거나 축소될 수 있다."
+      },
+      {
+        "question": "폴라(쌍대)성은 단순(simple)과 단체적(simplicial) 폴리토프를 어떻게 연결하는가? 입방체와 교차폴리토프를 예로 설명하라.",
+        "hint": "폴라를 취하면 $k$차원 면과 $(d-1-k)$차원 면의 역할이 뒤바뀐다—특히 꼭짓점과 패싯이 맞바뀐다.",
+        "answer": "폴라를 취하면 $k$차원 면이 $(d-1-k)$차원 면으로 뒤집혀 꼭짓점↔패싯이 맞바뀐다. 그래서 '모든 패싯이 최소 꼭짓점 수 $d$를 가짐'(단체적)은 폴라에서 '모든 꼭짓점이 최소 패싯 수 $d$에만 속함'(단순)으로 정확히 옮겨간다. 즉 $P$가 단순 $\\iff$ $P^{\\Delta}$가 단체적이다. 입방체 $C_d$는 단순이고 그 폴라 교차폴리토프 $C_d^{\\Delta}$는 단체적이라는 것이 이 대응의 대표 예다."
+      },
+      {
+        "question": "저자는 '$3$차원 직관을 고차원에 함부로 옮기지 말라'고 경고한다. $\\Delta_2\\times\\Delta_2$의 폴라나 순환폴리토프를 근거로 이 경고가 왜 정당한지 논하고, 저자가 이에 대응해 예고한 도구들을 들라.",
+        "hint": "이웃성(neighborliness)과 게일·슐레겔 다이어그램을 떠올려라.",
+        "answer": "$(\\Delta_2\\times\\Delta_2)^{\\Delta}$는 임의의 두 꼭짓점이 서로 인접한 $2$-이웃 $4$-폴리토프인데, $3$차원에는 단체를 제외하면 이런 도형이 없다. 순환폴리토프 역시 고차원에서 매우 높은 이웃성을 지녀 '차원은 낮은데 이웃 관계가 과하게 촘촘한' 상황이 벌어진다—$3$차원 눈으로는 상상하기 어렵다. 이런 고차원 현상을 눈에 보이게 만들기 위해 저자는 슐레겔 다이어그램(Schlegel diagram), 게일 다이어그램(Gale diagram), 로런스 구성(Lawrence construction)을 도구로 예고한다."
+      },
+      {
+        "question": "판데르몬드 행렬식(Vandermonde determinant)은 순환폴리토프 정리의 증명에서 어떤 두 가지 역할을 하는가? '단체성'과 '짝수성 조건'이 각각 어떻게 그로부터 흘러나오는지 설명하라.",
+        "hint": "판데르몬드 값이 $\\prod_{i<j}(t_j-t_i)$라 서로 다른 매개변수에서 $0$이 되지 않는다는 점을 먼저 쓰고, 그 다음 $F_S(\\mathbf{x}(t))$가 $d$차 다항식이라는 점을 쓰라.",
+        "answer": "첫째 역할: 서로 다른 $t_i$에서 판데르몬드 값이 $0$이 아니므로 모멘트곡선 위 어느 $d+1$개 점도 아핀 종속이 아니다. 그래서 어떤 초평면도 $d+1$개 이상의 꼭짓점을 담지 못하고, 모든 패싯이 정확히 $d$개 꼭짓점을 가지는 단체성이 나온다. 둘째 역할: $d$개 점을 지나는 초평면을 선형함수 $F_S$의 영집합으로 명시할 수 있고, 점을 곡선 위에서 미끄러뜨린 $F_S(\\mathbf{x}(t))$가 근이 정확히 $S$인 $d$차 다항식이 된다. 다항식의 부호가 근을 지날 때 바뀐다는 성질에서, '남은 꼭짓점이 모두 한쪽'(=패싯)이 '두 비원소 사이 근 개수가 짝수'와 동치가 되어 짝수성 조건이 태어난다."
+      },
+      {
+        "question": "이웃polytope(neighborly polytope)이란 무엇이며, 왜 조합론에서 중요한가? 상계정리(upper bound theorem)와 엮어 설명하라.",
+        "hint": "$k$-이웃의 정의와 $\\lfloor d/2\\rfloor$라는 상한을 먼저 정리하고, '꼭짓점 수가 고정될 때 패싯을 최대로' 갖는 폴리토프가 무엇인지 떠올려라.",
+        "answer": "$P$가 $k$-이웃이라 함은 $k$개 이하 꼭짓점의 임의 집합이 면을 이루는 것이고, 단체를 빼면 $\\lfloor d/2\\rfloor$가 도달 가능한 최대 이웃도이므로 $\\lfloor d/2\\rfloor$-이웃 폴리토프를 이웃polytope이라 한다. 순환폴리토프가 그 전형이다. 중요성은 극값성에 있다: 매컬런의 상계정리에 따르면 꼭짓점이 $n$개인 $d$-폴리토프 중 이웃polytope(순환폴리토프 $C_d(n)$)이 패싯을 가장 많이 가진다. 즉 이웃성은 '조합적으로 가장 복잡한/촘촘한' 극단을 특징짓는 성질이며, 저차원 직관으로는 상상하기 어려운 고차원 현상의 원천이다."
+      },
+      {
+        "question": "이 파트는 여러 폴리토프족(조노토프, 중심대칭 폴리토프, 일반 $V$-폴리토프)을 '사영(projection)'이라는 하나의 관점으로 묶는다. 이 통일 관점을 서술하고, 파트 1의 정의 0.1 및 '볼록껍질 = 볼록조합' 명제와 어떻게 이어지는지 밝혀라.",
+        "hint": "무엇을 사영하면 무엇이 나오는지 표로 정리해 보라: 단체→?, 입방체→?, 교차폴리토프→?.",
+        "answer": "핵심 명제는 '($V$-)폴리토프 = 단체의 사영이며 폴리토프의 임의의 사영은 다시 폴리토프'다. 이는 파트 1의 정의 0.1($V$-폴리토프 = 유한점의 볼록껍질)과 명제(볼록껍질 = 볼록조합 전체)를 좌표로 다시 읽은 것으로, $\\pi:\\mathbf{e}_i\\mapsto\\mathbf{x}_i$가 표준단체 $\\Delta_{n-1}$을 $\\operatorname{conv}\\{\\mathbf{x}_i\\}$로 보낸다는 한 줄이 전부다. 이제 '무엇을 사영하는가'만 바꾸면 새로운 족이 나온다: 단체를 사영하면 임의의 $V$-폴리토프, 입방체 $C_d$를 사영하면 조노토프, 교차폴리토프 $C_d^{\\Delta}$를 사영하면 중심대칭 폴리토프(역도 성립). 즉 서로 무관해 보이던 대상들이 '어떤 표준 폴리토프의 그림자인가'라는 한 축으로 정렬된다."
+      },
+      {
+        "question": "라돈 정리(Radon's theorem)는 이웃성의 상한 $\\lfloor d/2\\rfloor$를 어떻게 강제하는가? 연습 0.10의 논증을 재구성해 설명하라.",
+        "hint": "$e$차원 점 $e+2$개의 라돈 분할과, '면 위의 점은 그 면의 꼭짓점들의 볼록조합으로만 표현된다'는 성질을 충돌시켜라.",
+        "answer": "라돈 정리는 $e$차원의 점 $e+2$개가 언제나 $A\\sqcup B$로 쪼개져 $\\operatorname{conv}(A)\\cap\\operatorname{conv}(B)\\neq\\varnothing$가 되게 한다. $d$-폴리토프가 $(\\lfloor d/2\\rfloor+1)$-이웃이고 꼭짓점이 $d+2$개 이상이라면, 그중 $d+2$개를 라돈 분할해 작은 쪽 $|A|\\le\\lfloor d/2\\rfloor+1$이 되게 할 수 있다. $k$-이웃성이 이 $A$를 면으로 만들어 주는데, 겹치는 점은 $\\operatorname{conv}(A)$(면) 위에 있으면서 $B$의 꼭짓점들의 양의 계수 조합이기도 하다. '면 위의 점은 그 면의 꼭짓점만으로 표현된다'는 성질에 모순이므로 꼭짓점은 $d+1$개 이하, 곧 단체다. 같은 논리를 $(2k-1)$-면에 적용하면 모든 $(2k-1)$-면이 단체가 되어, 단체가 아닌 폴리토프는 $\\lfloor d/2\\rfloor$-이웃을 넘을 수 없다는 상한이 나온다."
+      },
+      {
+        "question": "입방체의 면을 부호벡터 $\\{+,-,0\\}^d$로 코드화하는 관점(연습 0.5)이 왜 강력하며, 이것이 뒤에 나올 유향 매트로이드(oriented matroid)와 어떻게 이어지는가?",
+        "hint": "각 좌표의 세 상태($+1$ 끝, $-1$ 끝, 자유)를 면격자와 대응시키고, 부호 패턴의 조합이 곧 기하가 된다는 점을 짚어라.",
+        "answer": "입방체는 좌표가 완전히 독립이라, 각 좌표가 '위 끝($+$)·아래 끝($-$)·자유($0$)' 세 상태 중 하나를 고르는 것만으로 면 하나가 정해진다. 그래서 면격자 전체가 부호벡터 $\\{+,-,0\\}^d$의 자연스러운 순서구조로 완전히 기술되고, 기하학적 질문(어느 면이 어느 면에 포함되는가, 차원은 얼마인가)이 부호 패턴의 조합 문제로 바뀐다. 이 '부호로 기하를 기록한다'는 발상이 정확히 유향 매트로이드의 코벡터(covector) 개념의 원형이다—초평면 배열이 공간을 자르며 각 영역에 부여하는 부호벡터가 조노토프·입방체의 면구조와 대응한다(Lecture 7). 즉 연습 0.5는 좌표별 부호 기록이 조합적 기하 전체를 담을 수 있음을 보여 주는 첫 예고편이다."
+      },
+      {
+        "question": "'최적화 문제'와 '분리 문제'는 무엇이며(연습 0.5), 폴리토프를 어떤 표현으로 아느냐에 따라 각 문제의 난이도가 어떻게 달라지는가? 그뢰첼–로바스–슈라이버의 등가성과도 엮어 설명하라.",
+        "hint": "'꼭짓점을 안다' vs '패싯을 안다'로 나눠 생각하고, 순환폴리토프와 TSP 폴리토프를 대비하라.",
+        "answer": "최적화 문제는 주어진 선형함수 $\\mathbf{c}$를 폴리토프 위에서 최대화하는 꼭짓점을 찾는 것이고, 분리 문제는 주어진 점 $\\mathbf{y}$가 폴리토프에 드는지 판정하고, 아니라면 이를 위반하는 유효 부등식을 하나 제시하는 것이다. 꼭짓점을 명시적으로 아는 폴리토프($V$-표현, 예: 순환폴리토프·TSP 폴리토프)는 꼭짓점을 훑어 최적화가 쉽다. 반대로 패싯을 명시적으로 아는 폴리토프($H$-표현, 예: 입방체·교차폴리토프·버코프 폴리토프)는 부등식을 하나씩 검사해 분리가 쉽다. 그뢰첼–로바스–슈라이버의 정리는 이 두 문제가 (타원체법을 통해) 다항시간에서 서로 등가임을 말한다—그래서 순환폴리토프 $C_d(1,\\dots,n)$처럼 최적화가 쉬운 대상은 분리도 다항시간에 가능하지만(연습 0.11*), 타원체법을 피한 '간단한 조합적' 분리 판정은 여전히 별개의 도전이다. TSP가 어려운 이유도 여기 있다: 꼭짓점(순회)은 알지만 패싯을 모르고 그 수가 지수적이라, 분리를 실용적으로 수행하기 어렵다."
+      },
+      {
+        "question": "'볼록껍질 = 볼록조합 = 단체의 사영'이라는 하나의 실을 파트 1부터 파트 2까지 따라가고, 사영하는 대상(단체·입방체·교차폴리토프)을 바꾸면 어떻게 서로 다른 폴리토프족(일반 $V$-폴리토프·조노토프·중심대칭 폴리토프)이 태어나는지 설명하라.",
+        "hint": "파트 1의 명제(볼록껍질=볼록조합)를 좌표로 다시 읽으면 무게중심좌표가 볼록조합 계수가 된다는 점, 그리고 '무엇을 사영하는가'가 새 분류축이 된다는 점을 짚어라.",
+        "answer": "파트 1의 명제는 $\\operatorname{conv}(K)$가 $K$-점들의 볼록조합 전체라고 말한다. 좌표로 읽으면(파트 2, 예 0.9) 볼록조합 $\\sum_i\\lambda_i\\mathbf{x}_i$는 $\\boldsymbol{\\lambda}\\in\\Delta_{n-1}$에 대한 $\\pi(\\boldsymbol{\\lambda})$($\\pi:\\mathbf{e}_i\\mapsto\\mathbf{x}_i$)이므로 $\\operatorname{conv}\\{\\mathbf{x}_i\\}=\\pi(\\Delta_{n-1})$: 모든 $V$-폴리토프는 단체의 그림자이고, 폴리토프의 사영은 다시 폴리토프다. 이제 '무엇을 사영하는가'만 바꾸면 새로운 족이 나온다. 단체를 사영하면 임의의 $V$-폴리토프, 입방체 $C_d$를 사영하면 조노토프(zonotope), 교차폴리토프 $C_d^{\\Delta}$를 사영하면 중심대칭 폴리토프가 되며 후자는 역도 성립한다. 즉 서로 무관해 보이던 대상들이 '어떤 표준 폴리토프의 선형 그림자인가'라는 한 축으로 정렬된다—챕터 전체를 관통하는 통일 원리다."
+      },
+      {
+        "question": "이 챕터는 '저차원 직관이 고차원에서 배신한다'고 거듭 경고한다. 최소 세 개의 챕터 결과를 근거로 이 경고를 정당화하고, 저자가 이에 대응해 예고한 도구들을 들라.",
+        "hint": "연습 0.0(사면체), $(\\Delta_2\\times\\Delta_2)^{\\Delta}$의 $2$-이웃성, 따름정리 0.8(순환폴리토프의 이웃성)과 그 상한(연습 0.10)을 엮어라.",
+        "answer": "근거 셋: (1) 연습 0.0—$\\mathbb{R}^3$에서 모든 꼭짓점이 인접한 폴리토프는 사면체(꼭짓점 $4$개)뿐이지만, $\\mathbb{R}^4$의 순환폴리토프 $C_4(n)$은 $n\\gg 4$개 꼭짓점이 모두 인접한다. (2) $(\\Delta_2\\times\\Delta_2)^{\\Delta}$—꼭짓점 $6$개가 모두 인접한 $2$-이웃 $4$-폴리토프로, $3$차원에는 없는 현상이다. (3) 따름정리 0.8—순환폴리토프는 $\\lfloor d/2\\rfloor$-이웃이라 차원이 커질수록 이웃성이 폭발하며, 연습 0.10(라돈)은 이 $\\lfloor d/2\\rfloor$가 (단체 말고는) 넘을 수 없는 천장임을 보인다. 이런 고차원 현상을 눈에 보이게 만들려고 저자는 슐레겔 다이어그램(Schlegel diagram), 게일 다이어그램(Gale diagram), 로런스 구성(Lawrence construction)을 도구로 예고하며, 여기에 부호벡터·폴라성 같은 조합적 장부 정리가 보조한다."
+      },
+      {
+        "question": "폴라(쌍대)성은 챕터 0의 개념들을 어떻게 조직하는가? 단순↔단체적, 꼭짓점↔패싯, 입방체↔교차폴리토프의 대응을 설명하고, 이 대응이 왜 증명의 수고를 절반으로 줄여 주는지 논하라.",
+        "hint": "$k$-면이 $(d-1-k)$-면으로 뒤집힌다는 면격자 반전에서 출발하라. 상계정리(이웃polytope)와 그 쌍대 극단도 언급하라.",
+        "answer": "폴라 $P\\leftrightarrow P^{\\Delta}$는 면격자를 반전시켜 $k$-면을 $(d-1-k)$-면으로 보낸다. 그 결과 꼭짓점($0$-면)↔패싯($(d-1)$-면)이 맞바뀌고, '모든 꼭짓점이 $d$개 패싯에 속함'(단순)이 '모든 패싯이 $d$개 꼭짓점을 가짐'(단체적)과 동치가 된다. 구체적으로 입방체 $C_d$(단순)의 폴라는 교차폴리토프 $C_d^{\\Delta}$(단체적)다. 이 대칭 덕분에 한 성질에 대한 증명을 하면 쌍대 성질은 공짜로 얻는다—저자가 Lecture 1에서 푸리에–모츠킨 소거의 두 판본(폴라로 연결)을 언급하는 이유다. 극단성도 폴라로 짝지어진다: 상계정리에서 '면(패싯)을 최대로' 갖는 이웃polytope(순환폴리토프)의 쌍대 쪽에는 하계 정리가 다루는 단순/쌓기(stacked) 폴리토프가 놓인다. 즉 폴라성은 정의·예·정리 전반을 쌍으로 접어 관리하게 해 주는 챕터의 뼈대다."
+      },
+      {
+        "question": "'최적화 문제'와 '분리 문제'를 정의하고, 폴리토프를 $V$-표현으로 아느냐 $H$-표현으로 아느냐가 두 문제의 난이도를 어떻게 가르는지 설명하라. 이를 근거로 순환폴리토프의 소속판정은 (이론상) 다룰 만한데 외판원 폴리토프(TSP)는 왜 어려운지 논하라.",
+        "hint": "'꼭짓점을 안다→최적화 쉬움', '패싯을 안다→분리 쉬움'을 축으로 삼고, 그뢰첼–로바스–슈라이버의 최적화·분리 등가성을 끌어오라.",
+        "answer": "최적화 문제는 $P$ 위에서 선형함수 $\\mathbf{c}\\mathbf{x}$를 최대화하는 (꼭짓점) 해를 찾는 것, 분리 문제는 주어진 $\\mathbf{y}$가 $P$에 드는지 판정하고 아니면 위반되는 유효 부등식을 하나 내놓는 것이다(연습 0.5). 꼭짓점을 아는 $V$-표현은 꼭짓점을 훑어 최적화가 쉽고, 패싯을 아는 $H$-표현은 부등식을 검사해 분리가 쉽다. 그뢰첼–로바스–슈라이버 정리는 이 두 문제가 (타원체법으로) 다항시간에서 등가임을 말한다. 순환폴리토프 $C_d(1,\\dots,n)$은 최적화가 꼭짓점 비교로 쉬우므로 이 등가성에 의해 소속판정도 다항시간에 가능하다(다만 타원체법을 피한 간단한 조합적 판정은 별개의 물음—연습 0.11*). 반면 TSP 폴리토프 $Q_T(n)$은 꼭짓점(순회)은 알지만 패싯을 모르고 그 수가 지수적이라, 분리를 실용적으로 수행할 수 없다—$V$는 알고 $H$는 모르는 비대칭이 TSP를 어렵게 만드는 근본 이유다."
+      },
+      {
+        "question": "판데르몬드 행렬식과 게일의 짝수성 조건이 순환폴리토프 이야기 전체—패싯 구조, 이웃성, 패싯 개수 공식—를 어떻게 하나로 꿰는지 설명하라.",
+        "hint": "판데르몬드가 주는 '아핀 비종속'에서 출발해 $F_S(\\mathbf{x}(t))$가 $d$차 다항식이 되는 흐름, 근을 쌍으로 심는 트릭(따름정리 0.8), 첫 블록 짝/홀로 세는 계산(연습 0.9)을 차례로 엮어라.",
+        "answer": "출발점은 판데르몬드 행렬식 $\\prod_{i<j}(t_j-t_i)\\neq 0$(서로 다른 매개변수)이다. 이는 '모멘트곡선 위 어느 $d+1$개 점도 아핀 종속이 아니다'로 번역되어 (a) $C_d(n)$이 단체적임과 (b) $d$개 점을 지나는 초평면을 선형함수 $F_S$의 영집합으로 명시할 수 있음을 준다. 점을 곡선 위에서 미끄러뜨린 $F_S(\\mathbf{x}(t))$는 근이 정확히 $S$인 $d$차 다항식이라, 부호가 근을 지날 때 바뀐다. '남은 꼭짓점이 모두 한쪽'(=패싯) $\\iff$ '두 비원소 사이 근 개수가 짝수'가 되어 이것이 게일의 짝수성 조건이다(파트 2 정리, 패싯 구조). 여기서 세 갈래가 뻗는다: (i) 근을 $t_i,t_i+\\varepsilon$의 쌍으로 심으면 사이 근이 항상 짝수가 되어 $\\lfloor d/2\\rfloor$-이웃성이 따라오고(따름정리 0.8), 라돈 정리(연습 0.10)가 이 $\\lfloor d/2\\rfloor$가 상한임을 보인다. (ii) 짝수성을 만족하는 $d$-부분집합을 '첫 블록 짝/홀'로 나눠 세면 패싯 개수가 이항계수 공식으로 떨어진다(연습 0.9). (iii) 그 공식의 폭발적 증가가 상계정리를 예시한다. 결국 하나의 대수적 사실(판데르몬드)이 부호변화 조합(짝수성)으로 번역되고, 거기서 구조·극한·세기가 모두 흘러나온다."
+      }
+    ]
+  }
+}
