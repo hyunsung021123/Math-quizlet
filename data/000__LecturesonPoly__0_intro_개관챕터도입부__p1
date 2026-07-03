@@ -1,0 +1,208 @@
+{
+  "chapter_info": {
+    "title": "Chapter 0. Introduction and Examples",
+    "source": "Günter M. Ziegler, Lectures on Polytopes, GTM 152, Chapter 0 (Springer)",
+    "overall_goal": "볼록 폴리토프(convex polytope)를 바라보는 두 가지 쌍대적 방식—점들의 볼록껍질($V$-표현)과 반공간들의 교집합($H$-표현)—을 이해하고, 면(face)·꼭짓점(vertex)·모서리(edge)·패싯(facet)과 조합적 동치(combinatorial equivalence) 같은 핵심 조합 개념을 익힌다. 나아가 단체(simplex)·입방체(cube)·교차폴리토프(crosspolytope)·순환폴리토프(cyclic polytope) 같은 기본 예시족과 피라미드·쌍피라미드·곱·각기둥 같은 재활용 연산을 손에 익혀, 고차원 폴리토프를 다룰 도구의 필요성을 절감한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "0. 서론과 예시 (Introduction and Examples)",
+      "step1_big_picture": {
+        "context": "이 책의 첫 장은 앞선 지식을 요구하지 않는 출발점이다. 저자는 폴리토프 이론을 백과사전식으로 나열하기보다 조합적 측면(combinatorial aspects)에 초점을 맞춰 기본 방법과 현대적 도구, 그리고 대표적 하이라이트를 소개하려 한다. 이 도입부는 이후 모든 강의가 딛고 설 공용 언어—표기법, 볼록성(convexity), 폴리토프의 두 정의, 면(face) 구조—를 깔고, 앞으로 반복해 등장할 예시족(단체·입방체·교차폴리토프·순환폴리토프)을 미리 손에 쥐어 주는 역할을 한다.",
+        "hidden_intuition": "이 장의 진짜 메시지는 두 가지다. 첫째, 폴리토프는 안에서 점으로 채워 만드는 것($V$-표현)과 밖에서 반공간(halfspace)으로 깎아 만드는 것($H$-표현)이라는, 서로 뒤집힌 두 시선으로 볼 수 있다. 조각가가 진흙을 붙여 형상을 빚는 것과 대리석을 깎아 형상을 드러내는 것의 차이다. 같은 폴리토프인데도 이 둘이 '같다'는 사실은 결코 자명하지 않으며(계산 복잡도 관점에서는 심지어 서로 다르다), 바로 이 동치성이 Lecture 1의 주정리다. 둘째, 저자의 엄중한 경고: 우리의 기하 직관은 3차원 삶에서 길러졌지만 고차원에서는 이 직관이 배신한다. 3차원에서 성립하는 정리가 고차원에서 처참히 무너지는 일이 흔하다. 그래서 폴리토프 이론의 핵심 과제는 고차원 도형을 어떻게든 눈에 보이게 만드는 도구—슐레겔 다이어그램(Schlegel diagram), 게일 다이어그램(Gale diagram), 로런스 구성(Lawrence construction)—를 벼리는 일이 된다.",
+        "visualization": {
+          "type": "convex_hull_2d",
+          "points": [[0, 0], [2, -0.3], [3.5, 1], [3.3, 3], [1.8, 4], [-0.3, 3.5], [-1, 1.5], [1.5, 2]],
+          "caption": "평면의 점집합 $K$(검은 점들)와 그 볼록껍질 $\\operatorname{conv}(K)$. 안쪽에 갇힌 점 $(1.5,2)$는 다른 점들의 볼록조합이라 꼭짓점이 아니다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "표기 0.0 (좌표변환에 불변인 표기법)",
+          "formal_statement": "$\\mathbb{R}^d$는 실수 성분을 갖는 길이 $d$의 열벡터(column vector) 전체가 이루는 벡터공간이고, 그 쌍대공간 $(\\mathbb{R}^d)^*$는 선형함수 $\\mathbb{R}^d \\to \\mathbb{R}$ 전체, 즉 길이 $d$의 행벡터(row vector) 전체다. 열벡터 $\\mathbf{x},\\mathbf{y},\\mathbf{z}$는 (아핀) 점을 나타내고, 행벡터 $\\mathbf{a},\\mathbf{b},\\mathbf{c}$는 선형형식(linear form) $\\ell_{\\mathbf{a}}:\\mathbf{x}\\mapsto \\mathbf{a}\\mathbf{x}$를 나타낸다. 여기서 $\\mathbf{a}\\mathbf{x}$는 $(1\\times d)$ 행벡터와 $(d\\times 1)$ 열벡터의 행렬곱으로 얻는 스칼라다. 모든 성분이 $1$인 행벡터 $\\mathbb{1}=(1,\\dots,1)$에 대해 $\\mathbb{1}\\mathbf{x}$는 좌표들의 합이다. 이 관례 덕분에 우리가 쓰는 식들은 좌표변환에 대해 깨끗하게 불변으로 남는다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (볼록집합과 볼록껍질)",
+          "formal_statement": "집합 $K\\subseteq\\mathbb{R}^d$가 볼록(convex)이라 함은 임의의 두 점 $\\mathbf{x},\\mathbf{y}\\in K$에 대해 선분 $[\\mathbf{x},\\mathbf{y}]=\\{\\,\\lambda\\mathbf{x}+(1-\\lambda)\\mathbf{y} : 0\\le\\lambda\\le 1\\,\\}$을 통째로 포함하는 것이다. 볼록집합들의 교집합은 다시 볼록이고 $\\mathbb{R}^d$ 자신도 볼록이므로, $K$를 포함하는 가장 작은 볼록집합인 볼록껍질(convex hull)을 $$\\operatorname{conv}(K):=\\bigcap\\{\\,K'\\subseteq\\mathbb{R}^d : K\\subseteq K',\\ K'\\text{ 볼록}\\,\\}$$ 로 정의한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (볼록껍질 = 볼록조합 전체)",
+          "formal_statement": "임의의 $K\\subseteq\\mathbb{R}^d$에 대하여 $$\\operatorname{conv}(K)=\\Big\\{\\,\\lambda_1\\mathbf{x}_1+\\dots+\\lambda_k\\mathbf{x}_k : \\{\\mathbf{x}_1,\\dots,\\mathbf{x}_k\\}\\subseteq K,\\ \\lambda_i\\ge 0,\\ \\sum_{i=1}^k\\lambda_i=1\\,\\Big\\}.$$ 특히 $K=\\{\\mathbf{x}_1,\\dots,\\mathbf{x}_n\\}$가 유한이면 우변에서 $k=n$으로 두어도 된다.",
+          "idea_behind_proof": "핵심 관찰은 '볼록조합을 하나 더 붙이는 일'이 '이미 만든 볼록조합과 새 점을 잇는 선분 위의 점을 고르는 일'로 분해된다는 것이다. 즉 $k$개 점의 볼록조합은 $k-1$개로 만든 볼록조합(귀납가정)과 마지막 점을 잇는 선분 위에 놓인다. 이 재귀 구조가 곧바로 $k$에 대한 귀납법을 부르고, 볼록집합의 정의(선분을 포함)와 정확히 맞물린다.",
+          "proof_steps": [
+            "($\\supseteq$) 우변의 각 볼록조합이 $\\operatorname{conv}(K)$에 들어감을 $k$에 대한 귀납법으로 보인다. $k=1$이면 $\\lambda_1=1$이라 점 자신이므로 자명하다.",
+            "귀납단계($\\lambda_k<1$): $$\\lambda_1\\mathbf{x}_1+\\dots+\\lambda_k\\mathbf{x}_k=(1-\\lambda_k)\\Big(\\tfrac{\\lambda_1}{1-\\lambda_k}\\mathbf{x}_1+\\dots+\\tfrac{\\lambda_{k-1}}{1-\\lambda_k}\\mathbf{x}_{k-1}\\Big)+\\lambda_k\\mathbf{x}_k.$$ 괄호 안은 계수 합이 $1$인 $k-1$개 점의 볼록조합이라 귀납가정에 의해 $\\operatorname{conv}(K)$의 점 $\\mathbf{p}$다. 그러면 전체는 선분 $[\\mathbf{p},\\mathbf{x}_k]$ 위의 점이고, $\\operatorname{conv}(K)$가 볼록이므로 그 안에 있다. ($\\lambda_k=1$이면 점 $\\mathbf{x}_k$ 자신이다.)",
+            "($\\subseteq$) 반대로 우변의 집합이 볼록임을 직접 확인하면(두 볼록조합의 볼록조합은 다시 볼록조합), 이 집합은 $K$를 포함하는 볼록집합이므로 최소 볼록집합 $\\operatorname{conv}(K)$를 포함한다. 두 포함이 합쳐져 등식을 준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 0.1 ($V$-폴리토프, $H$-폴리헤드론, $H$-폴리토프)",
+          "formal_statement": "$V$-폴리토프($V$-polytope)는 어떤 $\\mathbb{R}^d$ 안의 유한 점집합의 볼록껍질이다. $H$-폴리헤드론($H$-polyhedron)은 유한 개의 닫힌 반공간(closed halfspace)의 교집합이다. $H$-폴리토프($H$-polytope)는 유계(bounded)인 $H$-폴리헤드론, 즉 어떤 $\\mathbf{y}\\neq\\mathbf{0}$에 대해서도 반직선 $\\{\\mathbf{x}+t\\mathbf{y}:t\\ge 0\\}$을 품지 않는 $H$-폴리헤드론이다. (이 '유계' 정의는 계량이나 내적에 의존하지 않고 아핀 좌표변환에 불변이라는 장점이 있다.)",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [[0, 1], [1.6, 0], [3.2, 1], [2.6, 2.7], [0.6, 2.7]],
+            "caption": "다섯 점의 볼록껍질로 태어난 오각형($V$-표현). 같은 오각형을 다섯 개의 닫힌 반공간의 교집합으로도($H$-표현) 그려낼 수 있다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($V=H$의 동치성 — Lecture 1의 주정리 예고)",
+          "formal_statement": "정의 0.1의 두 방식은 수학적으로는 동치다: $P\\subseteq\\mathbb{R}^d$가 $V$-폴리토프인 것과 $H$-폴리토프인 것은 서로 동치이며, 이때 그냥 폴리토프(polytope)라 부른다. 그러나 이 동치성은 알고리즘적으로는 동치가 아니다—한 표현에서 다른 표현을 뽑아내는 계산은 사소하지 않다. 이 동치성의 증명은 결코 자명하지 않고 Lecture 1에서 본격적으로 다룬다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (차원, $d$-폴리토프, 아핀 동형)",
+          "formal_statement": "폴리토프의 차원(dimension)은 그 아핀껍질(affine hull)의 차원이다. $d$-폴리토프는 어떤 $\\mathbb{R}^e$($e\\ge d$) 안에서 차원이 $d$인 폴리토프다. 두 폴리토프 $P\\subseteq\\mathbb{R}^d$, $Q\\subseteq\\mathbb{R}^e$가 아핀 동형(affinely isomorphic, $P\\cong Q$)이라 함은 두 폴리토프의 점들 사이에 전단사가 되는 아핀사상 $f:\\mathbb{R}^d\\to\\mathbb{R}^e$가 존재하는 것이다. (이 사상이 주변 공간 전체에서 단사·전사일 필요는 없다.) 보통 일반성을 잃지 않고 폴리토프를 완전차원(full-dimensional)으로 두어 $d$가 폴리토프의 차원이자 주변 공간의 차원이 되게 한다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (면, 꼭짓점·모서리·패싯, 조합적 동치)",
+          "formal_statement": "폴리토프의 면(face)은, 폴리토프가 어떤 초평면이 정하는 두 반공간 중 하나에 통째로 들어갈 때 그 초평면과의 교집합이다. 폴리토프 자신은 자명한 면(trivial face)이고 나머지는 진(proper) 면이며, 공집합도 모든 폴리토프의 면으로 친다. $0$차원 면을 꼭짓점(vertex), $1$차원 면을 모서리(edge), 그리고 극대인 진 면—차원이 폴리토프보다 $1$ 작은 면—을 패싯(facet)이라 한다. 두 폴리토프 $P,Q$가 조합적 동치(combinatorially equivalent, $P\\simeq Q$)라 함은 면들 사이에 포함관계를 보존하는 전단사가 존재하는 것이다. 이는 계량을 전혀 쓰지 않고 오직 조합 구조만 보는 동치 개념이다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.2 (저차원 폴리토프와 $n$-각형)",
+          "formal_statement": "$0$차원 폴리토프는 점, $1$차원 폴리토프는 선분이므로 임의의 두 $0$-폴리토프는(또 임의의 두 $1$-폴리토프도) 서로 아핀 동형이다. $2$차원에서는 두 $2$-폴리토프가 조합적 동치일 필요충분조건이 꼭짓점 개수가 같은 것이다. 그래서 꼭짓점이 정확히 $n$개인 볼록 $2$-폴리토프의 조합적 동치류를 볼록 $n$-각형(convex $n$-gon)이라 부르며, 그 대표로 정$n$각형 $$P_2(n):=\\operatorname{conv}\\Big\\{\\big(\\cos\\tfrac{2\\pi k}{n},\\ \\sin\\tfrac{2\\pi k}{n}\\big):0\\le k<n\\Big\\}\\subseteq\\mathbb{R}^2$$ 를 쓸 수 있다. 주의: 정$n$각형과 일그러진 $n$각형은 조합적으로는 동치지만 아핀 동형은 아닐 수 있다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.3 (단체 simplex)",
+          "formal_statement": "$d$-단체($d$-simplex)는 차원이 $d$이고 꼭짓점이 $d+1$개인 폴리토프다. 임의의 두 $d$-단체는 아핀 동형이다. 표준 $d$-단체는 $\\mathbb{R}^{d+1}$ 안에서 $$\\Delta_d:=\\{\\mathbf{x}\\in\\mathbb{R}^{d+1}:\\mathbb{1}\\mathbf{x}=1,\\ x_i\\ge 0\\}=\\operatorname{conv}\\{\\mathbf{e}_1,\\dots,\\mathbf{e}_{d+1}\\}$$ 로 둔다. 예컨대 $\\Delta_2$는 $\\mathbb{R}^3$의 초평면 $\\mathbb{1}\\mathbf{x}=1$ 위에 놓인 삼각형이다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [[0, 0], [2.4, 0], [1.2, 2]],
+            "labels": ["e_1", "e_2", "e_3"],
+            "caption": "표준 단체 $\\Delta_2=\\operatorname{conv}\\{\\mathbf{e}_1,\\mathbf{e}_2,\\mathbf{e}_3\\}$의 조합형: 꼭짓점 $3$개짜리 삼각형."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.4 (입방체와 교차폴리토프, 그리고 쌍대성)",
+          "formal_statement": "$d$-입방체($d$-cube)는 $$C_d:=\\{\\mathbf{x}\\in\\mathbb{R}^d:-1\\le x_i\\le 1\\}=\\operatorname{conv}\\{+1,-1\\}^d$$ 이고, $d$-교차폴리토프($d$-crosspolytope)는 $$C_d^{\\Delta}:=\\Big\\{\\mathbf{x}\\in\\mathbb{R}^d:\\textstyle\\sum_i|x_i|\\le 1\\Big\\}=\\operatorname{conv}\\{\\mathbf{e}_1,-\\mathbf{e}_1,\\dots,\\mathbf{e}_d,-\\mathbf{e}_d\\}$$ 이다. 원점 대칭으로 잡은 이 두 폴리토프는 서로 폴라(polar), 즉 쌍대다: $C_d^{\\Delta}\\cong\\{\\mathbf{a}\\in(\\mathbb{R}^d)^*:\\mathbf{a}\\mathbf{x}\\le 1\\ \\forall\\mathbf{x}\\in C_d\\}$이고 그 역도 성립한다. 교차폴리토프는 단체적(simplicial, 모든 진 면이 단체)이고, 입방체는 단순(simple, 모든 꼭짓점이 정확히 $d$개의 패싯에 속함)이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {"shape": "polygon", "points": [[-1, -1], [1, -1], [1, 1], [-1, 1]]},
+              {"shape": "polygon", "points": [[1, 0], [0, 1], [-1, 0], [0, -1]]},
+              {"shape": "label", "at": [1.25, 1.2], "text": "C_2 (cube)"},
+              {"shape": "label", "at": [0.75, 0.75], "text": "crosspolytope"}
+            ],
+            "caption": "$2$차원에서 입방체 $C_2=[-1,1]^2$(바깥 정사각형)와 교차폴리토프 $C_2^{\\Delta}=\\operatorname{conv}\\{\\pm\\mathbf{e}_1,\\pm\\mathbf{e}_2\\}$(안쪽 마름모). 서로 폴라 쌍대다."
+          }
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (단순·단체적 폴리토프, 일반위치)",
+          "formal_statement": "폴리토프가 단체적(simplicial)이라 함은 모든 진 면이 단체인 것—동치로 모든 패싯이 최소 개수인 $d$개의 꼭짓점을 갖는 것이다. 단순(simple)이라 함은 모든 꼭짓점이 최소 개수인 $d$개의 패싯에만 속하는 것이다. 이 둘은 폴라(쌍대)로 연결된다: $P$와 $P^{\\Delta}$가 폴라면 한쪽이 단순인 것과 다른 쪽이 단체적인 것이 동치다. 일반위치(general position)의 편의적 기준으로는, $\\mathbb{R}^d$의 점 $n>d$개가 어느 $d+1$개도 공통 아핀 초평면 위에 있지 않을 때 일반위치라 하고, 부등식 $n>d$개가 어느 점도 그중 $d$개보다 많은 것을 등식으로 만족시키지 않을 때 제네릭(generic)이라 한다. 일반위치 점들의 볼록껍질은 단체적, 제네릭 부등식들의 (유계) 교집합은 단순 폴리토프다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.5 (헌 폴리토프로 새것 만들기: 피라미드·쌍피라미드·곱·각기둥)",
+          "formal_statement": "$P$가 $d$-폴리토프이고 $\\mathbf{x}_0$가 $\\operatorname{aff}(P)$ 밖의 점이면 피라미드(pyramid) $\\operatorname{pyr}(P):=\\operatorname{conv}(P\\cup\\{\\mathbf{x}_0\\})$는 $(d+1)$-폴리토프이고, 그 면은 $P$의 면들과 $P$의 면들 위의 피라미드들이다. 쌍피라미드(bipyramid) $\\operatorname{bipyr}(P)$는 $\\operatorname{aff}(P)$ 밖의 두 점 $\\mathbf{x}_+,\\mathbf{x}_-$를 잡아 선분 $[\\mathbf{x}_+,\\mathbf{x}_-]$의 내부점이 $P$의 내부점이 되게 한 것이며, 교차폴리토프는 점에서 시작한 반복 쌍피라미드다($\\operatorname{bipyr}(C_d^{\\Delta})=C_{d+1}^{\\Delta}$). 곱(product) $P\\times Q$는 차원이 $\\dim P+\\dim Q$이고 그 비어 있지 않은 면들은 $P$의 면과 $Q$의 면의 곱이다. 각기둥(prism) $\\operatorname{prism}(P):=P\\times\\Delta_1$은 쌍피라미드의 폴라이며, 입방체는 점에서 시작한 반복 각기둥이다($C_d\\times[-1,1]=C_{d+1}$)."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (두 삼각형의 곱 $\\Delta_2\\times\\Delta_2$: 3차원에 없는 현상)",
+          "formal_statement": "두 삼각형의 곱 $\\Delta_2\\times\\Delta_2$는 꼭짓점 $9$개, 패싯 $6$개인 $4$-폴리토프다. 각 패싯은 '한 삼각형의 모서리 $\\times$ 다른 삼각형' 꼴이라 모두 삼각기둥이고, 두 패싯의 교집합은 항상 $2$차원이라 임의의 두 패싯이 인접(adjacent)한다. 따라서 그 폴라 $(\\Delta_2\\times\\Delta_2)^{\\Delta}$는 꼭짓점 $6$개 중 어느 둘도 서로 인접한, 단체가 아닌 $2$-이웃(2-neighborly) $4$-폴리토프다. 이런 현상은 $3$차원 공간에는 존재하지 않는다—저차원 직관이 왜 위험한지를 보여주는 대표 사례다."
+        },
+        {
+          "type": "Example",
+          "name": "예 (모멘트곡선과 순환폴리토프 cyclic polytope)",
+          "formal_statement": "모멘트곡선(moment curve)은 $\\mathbf{x}(t):=(t,t^2,\\dots,t^d)^{\\top}\\in\\mathbb{R}^d$로 주어진다. 서로 다른 매개변수 $t_1<t_2<\\dots<t_n$($n>d$)에 대해 순환폴리토프(cyclic polytope)를 $$C_d(t_1,\\dots,t_n):=\\operatorname{conv}\\{\\mathbf{x}(t_1),\\dots,\\mathbf{x}(t_n)\\}$$ 로 정의한다. '게일의 짝수성 조건(Gale's evenness condition)'으로부터 각 $\\mathbf{x}(t_i)$가 실제로 꼭짓점이며 폴리토프의 조합적 동치류가 매개변수 선택에 의존하지 않음이 드러난다. 그래서 이를 그냥 $C_d(n)$—꼭짓점 $n$개짜리 순환 $d$-폴리토프—라 부른다. 순환폴리토프는 $3$차원에서는 별로 특별해 보이지 않지만 고차원에서 놀랄 만큼 높은 이웃성(neighborliness)을 지녀, 저차원 직관이 왜 위험한지를 다시 한번 보여준다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [[-2, 4], [-1, 1], [0, 0], [1, 1], [2, 4]],
+            "caption": "모멘트곡선 위 점 $\\mathbf{x}(t)=(t,t^2)$($t=-2,-1,0,1,2$)의 볼록껍질. 곡선(포물선) 위의 점들이라 모두 꼭짓점이 된다."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "닫힌 반공간 $\\{(x,y)\\in\\mathbb{R}^2:x\\ge 0\\}$ 하나로 이루어진 집합은 $H$-폴리헤드론인가? $H$-폴리토프인가? 이유와 함께 답하라.",
+          "hint": "정의 0.1을 그대로 대입하라. '유계'란 어떤 방향 $\\mathbf{y}\\neq\\mathbf{0}$의 반직선도 품지 않는다는 뜻이다.",
+          "solution": "이 집합은 유한 개(여기서는 하나)의 닫힌 반공간의 교집합이므로 $H$-폴리헤드론이다. 그러나 예컨대 반직선 $\\{(t,0):t\\ge 0\\}$을 통째로 품으므로 유계가 아니다. 따라서 $H$-폴리토프는 아니다. 일반화: $H$-폴리토프 $=$ 유계인 $H$-폴리헤드론이며, 유계성이 폴리토프와 그냥 폴리헤드론을 가르는 결정적 조건이다."
+        },
+        {
+          "problem": "$\\mathbb{R}^2$에서 점집합 $K=\\{(0,0),(2,0),(0,2),(1,1)\\}$의 볼록껍질 $\\operatorname{conv}(K)$를 구하고 그 꼭짓점을 모두 말하라. $(1,1)$은 꼭짓점인가?",
+          "hint": "각 점이 나머지 점들의 볼록조합으로 표현되는지 확인하라. 다른 점들의 볼록조합이 되는 점은 꼭짓점이 아니다.",
+          "solution": "$(1,1)=\\tfrac12(2,0)+\\tfrac12(0,2)$이므로 $(1,1)$은 $(2,0)$과 $(0,2)$를 잇는 선분(빗변 $x+y=2$) 위에 있다. 따라서 꼭짓점이 아니다. 결국 $\\operatorname{conv}(K)$는 꼭짓점이 $(0,0),(2,0),(0,2)$인 삼각형이다. 일반화: 점 $\\mathbf{x}$가 꼭짓점일 필요충분조건은 $\\mathbf{x}$가 나머지 점들의 볼록조합으로 표현되지 않는 것이다."
+        },
+        {
+          "problem": "$3$-입방체 $C_3$와 $3$-교차폴리토프(정팔면체) $C_3^{\\Delta}$ 각각에 대해 꼭짓점 수·모서리 수·패싯 수를 세고, 두 결과가 폴라 쌍대성과 어떻게 맞아떨어지는지 설명하라.",
+          "hint": "$C_3=\\operatorname{conv}\\{\\pm 1\\}^3$의 꼭짓점은 $\\pm1$ 성분들의 조합이다. 폴라를 취하면 꼭짓점과 패싯이 뒤바뀐다. 검산에는 오일러 공식 $V-E+F=2$를 쓰라.",
+          "solution": "$C_3$: 꼭짓점 $2^3=8$개, 패싯 $6$개(각 축의 $x_i=\\pm1$), 모서리 $12$개. $C_3^{\\Delta}$: 꼭짓점 $6$개($\\pm\\mathbf{e}_i$), 패싯 $8$개(부호 조합 $\\pm x_1\\pm x_2\\pm x_3=1$), 모서리 $12$개. 폴라 쌍대성 때문에 꼭짓점 수와 패싯 수가 정확히 맞바뀌고($8\\leftrightarrow 6$), 모서리 수는 보존된다($12$). 검산: $8-12+6=2$, $6-12+8=2$로 둘 다 오일러 공식을 만족한다."
+        },
+        {
+          "problem": "$C_3$의 꼭짓점 $(1,1,1)$은 몇 개의 패싯에 속하는가? 이로부터 $C_3$가 단순(simple)임을 설명하고, 대응하여 $C_3^{\\Delta}$의 한 패싯이 꼭짓점을 몇 개 갖는지 말하라.",
+          "hint": "$(1,1,1)$이 어떤 부등식들을 등식으로 만족하는지 세라. $d=3$임에 유의.",
+          "solution": "$(1,1,1)$은 $x_1=1,\\,x_2=1,\\,x_3=1$이라는 세 패싯에 속하므로 정확히 $d=3$개의 패싯에 속한다. 모든 꼭짓점이 이렇게 최소 개수 $d=3$개의 패싯에만 속하므로 $C_3$는 단순이다. 폴라로 넘어가면 이는 $C_3^{\\Delta}$의 각 패싯(예: $x_1+x_2+x_3=1$ 위의 면)이 $\\mathbf{e}_1,\\mathbf{e}_2,\\mathbf{e}_3$ 세 꼭짓점, 즉 최소 개수 $d=3$개의 꼭짓점을 가진 삼각형이라는 사실로 옮겨간다—즉 $C_3^{\\Delta}$는 단체적이며, 단순과 단체적이 폴라로 대응함을 확인해 준다."
+        }
+      ]
+    }
+  ],
+  "step4_final_review": {
+    "ox_quizzes": [
+      {
+        "question": "모든 $H$-폴리헤드론은 폴리토프다.",
+        "answer": "X",
+        "explanation": "$H$-폴리헤드론은 유계일 필요가 없다. 반직선을 품는 무계 예(예: 반공간 하나)는 폴리토프가 아니다. 폴리토프는 유계인 $H$-폴리헤드론($H$-폴리토프)에 한한다."
+      },
+      {
+        "question": "꼭짓점 개수가 같은 두 $2$-폴리토프는 반드시 아핀 동형이다.",
+        "answer": "X",
+        "explanation": "꼭짓점 수가 같으면 조합적으로는 동치이지만 아핀 동형은 아닐 수 있다. 예컨대 정육각형과 일그러진 육각형은 조합 동치이나 아핀 동형이 아니다."
+      },
+      {
+        "question": "$d$-입방체 $C_d$는 단순(simple) 폴리토프다.",
+        "answer": "O",
+        "explanation": "$C_d$의 각 꼭짓점은 정확히 최소 개수 $d$개의 패싯에만 속하므로 단순이다."
+      },
+      {
+        "question": "$d$-교차폴리토프 $C_d^{\\Delta}$는 단순(simple) 폴리토프다.",
+        "answer": "X",
+        "explanation": "교차폴리토프는 단체적(simplicial)이다. 단순인 것은 그 폴라 쌍대인 입방체 $C_d$다."
+      },
+      {
+        "question": "$n$개의 점이 아핀 독립이면 그 아핀껍질의 차원은 $n$이다.",
+        "answer": "X",
+        "explanation": "아핀 독립인 $n$개 점의 아핀껍질 차원은 $n-1$이다. 예: 삼각형의 세 꼭짓점($n=3$)은 $2$차원 평면을 스팬한다."
+      },
+      {
+        "question": "조합적 동치(combinatorial equivalence)를 판정하려면 거리(계량)가 필요하다.",
+        "answer": "X",
+        "explanation": "조합적 동치는 면들 사이 포함관계를 보존하는 전단사만 요구하는 비계량(nonmetric) 개념으로, 거리·각도·좌표를 전혀 쓰지 않는다."
+      },
+      {
+        "question": "표준 $d$-단체 $\\Delta_d$는 $\\mathbb{R}^d$가 아니라 $\\mathbb{R}^{d+1}$ 안에 자연스럽게 놓인다.",
+        "answer": "O",
+        "explanation": "$\\Delta_d=\\{\\mathbf{x}\\in\\mathbb{R}^{d+1}:\\mathbb{1}\\mathbf{x}=1,\\ x_i\\ge 0\\}$로, 초평면 $\\mathbb{1}\\mathbf{x}=1$ 위에 놓인 $d$차원 도형이다."
+      },
+      {
+        "question": "$3$차원에서 성립하는 폴리토프 정리는 모든 고차원에서도 성립한다.",
+        "answer": "X",
+        "explanation": "$2$-이웃 $4$-폴리토프 $(\\Delta_2\\times\\Delta_2)^{\\Delta}$처럼 $3$차원에는 유례없는 현상이 고차원에 존재한다. 저차원 직관은 종종 배신하며, 이것이 저자의 핵심 경고다."
+      }
+    ],
+    "conceptual_questions": [
+      {
+        "question": "$V$-폴리토프와 $H$-폴리토프가 '같은 대상'이라는 사실은 왜 수학적으로 자명하지 않으며, 왜 알고리즘적으로는 동치가 아니라고 말하는가?",
+        "hint": "한 표현에서 다른 표현으로 넘어가는 계산의 크기를 생각하라—입방체의 패싯 수 대 꼭짓점 수를 비교해 보라.",
+        "answer": "수학적 동치는 '유한 점집합의 볼록껍질 = 유한 반공간 교집합의 유계'라는 존재 진술이지만, 그 증명에는 볼록껍질로부터 패싯 부등식을 뽑아내거나(또는 그 역) 하는 구성이 필요해 사소하지 않다(Lecture 1의 주정리). 알고리즘적으로 동치가 아니라는 것은 한 표현의 크기가 다른 표현의 크기와 다항적으로 비례하지 않을 수 있다는 뜻이다. 예컨대 $C_d$는 꼭짓점이 $2^d$개지만 패싯은 $2d$개뿐이라, $V$↔$H$ 변환은 지수적으로 폭발하거나 축소될 수 있다."
+      },
+      {
+        "question": "폴라(쌍대)성은 단순(simple)과 단체적(simplicial) 폴리토프를 어떻게 연결하는가? 입방체와 교차폴리토프를 예로 설명하라.",
+        "hint": "폴라를 취하면 $k$차원 면과 $(d-1-k)$차원 면의 역할이 뒤바뀐다—특히 꼭짓점과 패싯이 맞바뀐다.",
+        "answer": "폴라를 취하면 $k$차원 면이 $(d-1-k)$차원 면으로 뒤집혀 꼭짓점↔패싯이 맞바뀐다. 그래서 '모든 패싯이 최소 꼭짓점 수 $d$를 가짐'(단체적)은 폴라에서 '모든 꼭짓점이 최소 패싯 수 $d$에만 속함'(단순)으로 정확히 옮겨간다. 즉 $P$가 단순 $\\iff$ $P^{\\Delta}$가 단체적이다. 입방체 $C_d$는 단순이고 그 폴라 교차폴리토프 $C_d^{\\Delta}$는 단체적이라는 것이 이 대응의 대표 예다."
+      },
+      {
+        "question": "저자는 '$3$차원 직관을 고차원에 함부로 옮기지 말라'고 경고한다. $\\Delta_2\\times\\Delta_2$의 폴라나 순환폴리토프를 근거로 이 경고가 왜 정당한지 논하고, 저자가 이에 대응해 예고한 도구들을 들라.",
+        "hint": "이웃성(neighborliness)과 게일·슐레겔 다이어그램을 떠올려라.",
+        "answer": "$(\\Delta_2\\times\\Delta_2)^{\\Delta}$는 임의의 두 꼭짓점이 서로 인접한 $2$-이웃 $4$-폴리토프인데, $3$차원에는 단체를 제외하면 이런 도형이 없다. 순환폴리토프 역시 고차원에서 매우 높은 이웃성을 지녀 '차원은 낮은데 이웃 관계가 과하게 촘촘한' 상황이 벌어진다—$3$차원 눈으로는 상상하기 어렵다. 이런 고차원 현상을 눈에 보이게 만들기 위해 저자는 슐레겔 다이어그램(Schlegel diagram), 게일 다이어그램(Gale diagram), 로런스 구성(Lawrence construction)을 도구로 예고한다."
+      }
+    ]
+  }
+}
