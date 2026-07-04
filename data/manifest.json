@@ -4,12 +4,14 @@
     {
       "id": "chapter_0_introduction_and_examples",
       "title": "Chapter 0. Introduction and Examples",
-      "file": "chapter_0_introduction_and_examples.json"
+      "file": "chapter_0_introduction_and_examples.json",
+      "book": "Ziegler — Lectures on Polytopes"
     },
     {
       "id": "zonotopes",
       "title": "Ch 7. Minkowski Sums & Zonotopes",
-      "file": "sample_data.json"
+      "file": "sample_data.json",
+      "book": "Ziegler — Lectures on Polytopes"
     }
   ]
 }
