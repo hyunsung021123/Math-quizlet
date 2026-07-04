@@ -117,6 +117,7 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   .rail-list{ flex-direction:row; gap:6px; }
   .rail-item{ width:auto; flex:0 0 auto; white-space:nowrap; align-items:center; }
   .rail-label{ white-space:nowrap; }
+  .card{ min-height:min(52vh,440px); }
 }
 
 /* ---------- Content ---------- */
@@ -269,7 +270,7 @@ p.prose{ margin:0; }
   background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
   padding:clamp(18px,3.5vw,26px) clamp(16px,3.5vw,28px);
   box-shadow:0 6px 24px rgba(27,35,51,.07), 0 1px 2px rgba(27,35,51,.04);
-  min-height:min(52vh,440px);
+  min-height:170px;
   display:flex; flex-direction:column;
 }
 .card.is-turning{ animation:cardTurn .34s cubic-bezier(.2,.7,.25,1) both; }
