@@ -48,6 +48,7 @@ button{ font:inherit; }
 
 body{
   margin:0; font-family:var(--sans); color:var(--ink); line-height:1.65;
+  overflow-x:hidden;
   background-color:var(--paper);
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
@@ -65,11 +66,12 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   background:rgba(244,246,241,.85); backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.brand{ display:flex; align-items:center; gap:11px; min-width:0; }
+.brand{ display:flex; align-items:center; gap:11px; min-width:0; flex:1 1 auto; }
+.brand > div{ min-width:0; }
 .brand-mark{ width:27px; height:27px; color:var(--primary); flex:0 0 auto; }
-.brand-text{ font-family:var(--serif); font-weight:700; font-size:1.02rem; letter-spacing:-.01em; color:var(--ink); line-height:1.1; }
-.brand-sub{ color:var(--ink-faint); font-size:.66rem; font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase; margin-top:2px; }
-.topic-wrap{ display:flex; align-items:center; gap:9px; min-width:0; }
+.brand-text{ font-family:var(--serif); font-weight:700; font-size:1.02rem; letter-spacing:-.01em; color:var(--ink); line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.brand-sub{ color:var(--ink-faint); font-size:.66rem; font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topic-wrap{ display:flex; align-items:center; gap:9px; min-width:0; flex:0 0 auto; }
 .topic-label{ font-size:.68rem; font-family:var(--mono); color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; }
 .topic-select{
   font-family:var(--sans); font-size:.88rem; color:var(--ink);
@@ -77,14 +79,15 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   padding:8px 34px 8px 12px; max-width:min(54vw,340px);
   appearance:none; cursor:pointer;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A90A3' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 12px center;
+  background-repeat:no-repeat; background-position:right 12px center; min-width:0;
 }
 .topic-label.hide-sm{}
 @media (max-width:520px){ .topic-label{ display:none; } }
+@media (max-width:400px){ .topic-select{ max-width:48vw; } }
 
 /* ---------- Layout ---------- */
 .layout{ display:grid; grid-template-columns:264px minmax(0,1fr); max-width:1200px; margin:0 auto; align-items:start; }
-@media (max-width:960px){ .layout{ grid-template-columns:1fr; } }
+@media (max-width:960px){ .layout{ grid-template-columns:minmax(0,1fr); } }
 
 /* ---------- Rail ---------- */
 .rail{ position:sticky; top:63px; align-self:start; padding:26px 6px 40px 0; }
@@ -108,8 +111,8 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 .rail-review .rail-num{ color:var(--insight-accent); }
 
 @media (max-width:960px){
-  .rail{ position:sticky; top:56px; padding:0; z-index:40; background:rgba(244,246,241,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
-  .rail-inner{ flex-direction:row; align-items:center; gap:6px; overflow-x:auto; padding:9px clamp(12px,4vw,24px); -webkit-overflow-scrolling:touch; }
+  .rail{ position:sticky; top:56px; padding:0; z-index:40; background:rgba(244,246,241,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); min-width:0; }
+  .rail-inner{ flex-direction:row; align-items:center; gap:6px; overflow-x:auto; padding:9px clamp(12px,4vw,24px); -webkit-overflow-scrolling:touch; min-width:0; }
   .rail-title, .rail-sep{ display:none; }
   .rail-list{ flex-direction:row; gap:6px; }
   .rail-item{ width:auto; flex:0 0 auto; white-space:nowrap; align-items:center; }
@@ -117,8 +120,8 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 }
 
 /* ---------- Content ---------- */
-.content{ min-width:0; padding:26px clamp(16px,4vw,44px) 80px; }
-.chapter-banner, .section, .review-block, .navbtns{ max-width:760px; margin-left:auto; margin-right:auto; }
+.content{ min-width:0; padding:22px clamp(14px,4vw,44px) 132px; }
+.chapter-banner, .review-block, .navbtns{ max-width:760px; margin-left:auto; margin-right:auto; }
 
 .chapter-banner{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; margin-bottom:26px; box-shadow:0 1px 2px rgba(27,35,51,.03); }
 .chapter-eyebrow{ font-family:var(--mono); font-size:.68rem; letter-spacing:.14em; color:var(--ink-faint); }
@@ -130,11 +133,8 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 .section-kicker{ font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--primary); }
 .section-title{ font-family:var(--serif); font-weight:600; font-size:clamp(1.2rem,3vw,1.45rem); line-height:1.35; margin-top:6px; color:var(--ink); }
 
-/* ---------- Step flow ---------- */
-.flow{ position:relative; }
-.step{ position:relative; padding-left:52px; margin-bottom:26px; }
-.step::before{ content:''; position:absolute; left:17px; top:40px; bottom:-26px; width:2px; background:linear-gradient(var(--line-strong), var(--line)); }
-.step:last-child::before, .step.step-last::before{ display:none; }
+/* ---------- Step head (reused inside cards) ---------- */
+.step{ position:relative; padding-left:52px; }
 .step-badge{ position:absolute; left:0; top:0; width:36px; height:36px; border-radius:10px; display:grid; place-items:center; font-family:var(--mono); font-weight:600; font-size:.95rem; color:#fff; background:var(--primary); box-shadow:0 2px 8px rgba(46,67,116,.24); }
 .step-head{ display:flex; align-items:center; min-height:36px; margin-bottom:12px; }
 .step-eyebrow{ font-family:var(--mono); font-size:.66rem; letter-spacing:.14em; color:var(--ink-faint); }
@@ -244,9 +244,107 @@ p.prose{ margin:0; }
 .figure-svg svg{ display:block; width:100%; height:auto; }
 .figure-caption{ margin-top:9px; font-size:.86rem; color:var(--ink-soft); text-align:center; line-height:1.65; }
 
+/* ============================================================
+   Card deck — one card at a time, flip through on any device
+   ============================================================ */
+.deck{ max-width:760px; margin:0 auto; }
+
+/* context strip above the card */
+.deck-context{
+  display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  margin-bottom:14px; padding:0 2px;
+}
+.deck-context .dc-chapter{
+  font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.deck-context .dc-sep{ color:var(--line-strong); }
+.deck-context .dc-section{
+  font-family:var(--sans); font-size:.82rem; color:var(--ink-soft); font-weight:600;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%;
+}
+
+/* the card itself */
+.card{
+  background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
+  padding:clamp(18px,3.5vw,26px) clamp(16px,3.5vw,28px);
+  box-shadow:0 6px 24px rgba(27,35,51,.07), 0 1px 2px rgba(27,35,51,.04);
+  min-height:min(52vh,440px);
+  display:flex; flex-direction:column;
+}
+.card.is-turning{ animation:cardTurn .34s cubic-bezier(.2,.7,.25,1) both; }
+@keyframes cardTurn{
+  0%{ opacity:0; transform:perspective(1400px) rotateY(7deg) translateX(14px); }
+  100%{ opacity:1; transform:none; }
+}
+.card.turn-back .is-turning, .card.is-turning.rev{ }
+
+/* card kind accents on the left step badge */
+.card .step-badge.badge-frame{ background:var(--intuition-accent); box-shadow:0 2px 8px rgba(62,99,168,.24); }
+.card .step-badge.badge-check{ background:var(--insight-accent); box-shadow:0 2px 8px rgba(214,162,62,.28); }
+.card .step-badge.badge-review{ background:var(--insight-accent); box-shadow:0 2px 8px rgba(214,162,62,.28); }
+
+.card-body{ margin-top:2px; }
+.card-body > .prose:first-child{ margin-top:2px; }
+
+/* reveal (answer / proof) — reuses .collapse mechanics, adds a soft turn-in */
+.reveal-face{ margin-top:16px; }
+.reveal-face .collapse.open > .collapse-inner > *{ animation:faceIn .34s ease both; }
+@keyframes faceIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+.reveal-cue{
+  display:flex; align-items:center; gap:8px; margin-top:16px;
+  font-family:var(--mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);
+}
+.reveal-cue::before, .reveal-cue::after{ content:''; height:1px; background:var(--line); flex:1; }
+
+/* Q&A prompt inside a card sits on the surface directly (no nested box) */
+.card .qa, .card .claim{ background:transparent; border:none; box-shadow:none; padding:0; }
+.card .qa + .qa{ margin-top:0; }
+
+/* ---------- Deck navigation (persistent control strip) ---------- */
+.deck-nav{
+  position:fixed; left:0; right:0; bottom:0; z-index:45;
+  background:rgba(244,246,241,.9); backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  padding:10px clamp(14px,4vw,24px);
+  padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+}
+.deck-nav-inner{
+  max-width:760px; margin:0 auto;
+  display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px;
+}
+.nav-btn{
+  font-family:var(--sans); font-size:.9rem; font-weight:600;
+  border-radius:11px; padding:11px 16px; cursor:pointer; min-height:44px;
+  border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft);
+  display:inline-flex; align-items:center; gap:7px; transition:background .15s,color .15s,border-color .15s,opacity .15s;
+  white-space:nowrap;
+}
+.nav-btn:hover{ background:var(--surface-2); color:var(--ink); }
+.nav-btn.primary, .nav-btn.primary:hover{ background:var(--primary); border-color:var(--primary); color:#fff; }
+.nav-btn.primary:hover{ filter:brightness(1.06); }
+.nav-btn:disabled{ opacity:.4; cursor:default; pointer-events:none; }
+.nav-btn .nav-btn-label{ }
+
+.deck-meter{ display:flex; flex-direction:column; align-items:center; gap:6px; min-width:0; }
+.deck-count{ font-family:var(--mono); font-size:.72rem; color:var(--ink-faint); letter-spacing:.04em; }
+.deck-count b{ color:var(--primary); font-weight:600; }
+.deck-bar{ width:100%; max-width:220px; height:4px; border-radius:999px; background:var(--line); overflow:hidden; }
+.deck-bar-fill{ height:100%; border-radius:999px; background:var(--primary); transition:width .3s ease; }
+
+@media (max-width:520px){
+  .nav-btn{ padding:11px 13px; }
+  .nav-btn .nav-btn-label{ display:none; }
+  .deck-bar{ max-width:160px; }
+}
+
+/* review sub-grids collapse to single card flow inside the deck */
+.card .ox{ background:transparent; border:none; box-shadow:none; padding:0; }
+
 @media (prefers-reduced-motion:reduce){
   *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
 }
+
 </style>
 </head>
 <body>
@@ -272,6 +370,21 @@ p.prose{ margin:0; }
   <aside class="rail" id="rail"></aside>
   <main class="content" id="content"></main>
 </div>
+
+<nav class="deck-nav" id="deckNav" hidden aria-label="카드 이동">
+  <div class="deck-nav-inner">
+    <button class="nav-btn" id="navPrev" type="button">
+      <span aria-hidden="true">←</span><span class="nav-btn-label">이전</span>
+    </button>
+    <div class="deck-meter">
+      <div class="deck-count" id="deckCount"></div>
+      <div class="deck-bar"><div class="deck-bar-fill" id="deckFill"></div></div>
+    </div>
+    <button class="nav-btn primary" id="navNext" type="button">
+      <span class="nav-btn-label" id="navNextLabel">다음</span><span aria-hidden="true">→</span>
+    </button>
+  </div>
+</nav>
 
 <script>
 (function(){
@@ -612,11 +725,17 @@ p.prose{ margin:0; }
     Proposition:['명제','prop'], Corollary:['따름정리','cor'], Remark:['참고','rem'], Example:['예시','ex']
   };
 
-  var state = { topics:[], topicId:null, data:null, view:{type:'section',index:0}, visited:new Set(), uid:0 };
+  var state = { topics:[], topicId:null, data:null, view:{type:'section',index:0}, cardIndex:0, deck:[], visited:new Set(), uid:0 };
 
   var railEl   = document.getElementById('rail');
   var mainEl   = document.getElementById('content');
   var selectEl = document.getElementById('topicSelect');
+  var deckNav  = document.getElementById('deckNav');
+  var navPrev  = document.getElementById('navPrev');
+  var navNext  = document.getElementById('navNext');
+  var navNextLabel = document.getElementById('navNextLabel');
+  var deckCount = document.getElementById('deckCount');
+  var deckFill  = document.getElementById('deckFill');
 
   /* ---------- helpers ---------- */
   function esc(s){
@@ -646,6 +765,7 @@ p.prose{ margin:0; }
 
   /* ---------- state screens ---------- */
   function renderState(kind, title, msg){
+    if(deckNav) deckNav.hidden = true;
     mainEl.innerHTML =
       '<div class="state state-' + kind + '">' +
         '<div class="state-title">' + esc(title) + '</div>' +
@@ -695,6 +815,7 @@ p.prose{ margin:0; }
       state.topicId = id;
       state.data = data;
       state.view = { type:'section', index:0 };
+      state.cardIndex = 0;
       state.visited = new Set([0]);
       renderRail();
       renderMain();
@@ -748,77 +869,213 @@ p.prose{ margin:0; }
            '</figure>';
   }
 
-  /* ---------- main dispatch ---------- */
-  function renderMain(){
-    if(state.view.type==='review') return renderReview();
-    return renderSection(state.view.index);
-  }
+  /* =========================================================================
+     Card deck engine — 한 번에 한 장씩. 좌우로 넘기며 학습.
+     한 절(section)의 카드 = [표지(0절만)] → 숲 보기 → 개념들 → 체크포인트.
+     최종 복습 덱 = O/X 카드들 → 개념 질문 카드들.
+     ========================================================================= */
 
-  /* ---------- section (Step 1-3) ---------- */
-  function renderSection(i){
-    var d = state.data, secs = d.learning_flow || [], sec = secs[i];
-    if(!sec){ renderState('empty', '내용이 없습니다', ''); return; }
-    var total = secs.length;
-
-    /* Step 1 */
-    var bp = sec.step1_big_picture || {};
-    var step1 =
-      '<div class="step">' + head(1,'STEP 01','숲 보기 · Big Picture') +
-        '<div class="step-body">' +
-          (bp.context ? '<p class="prose">' + fmt(bp.context) + '</p>' : '') +
-          (bp.hidden_intuition ?
-            '<div class="intuition"><div class="intuition-head">한눈에 보는 직관</div><p class="prose">' + fmt(bp.hidden_intuition) + '</p></div>' : '') +
-          renderViz(bp.visualization) +
-        '</div>' +
-      '</div>';
-
-    /* Step 2 (collapsed accordion) */
-    var blocks = (sec.step2_rigorous_logic || []).map(renderBlock).join('');
-    var s2id = uid('s2');
-    var step2 =
-      '<div class="step">' + head(2,'STEP 02','엄밀한 논리 · Rigorous Logic') +
-        '<div class="step-body">' +
-          '<button class="accordion-toggle" data-action="toggle" data-target="' + s2id + '" data-more="엄밀한 정의·증명 펼치기" data-less="접기" aria-expanded="false">' +
-            '<span class="chevron">&#9656;</span><span class="acc-label">엄밀한 정의·증명 펼치기</span>' +
-          '</button>' +
-          '<div class="collapse" id="' + s2id + '"><div class="collapse-inner">' +
-            '<div class="blocks">' + (blocks || '<p class="muted">이 절에는 별도의 정의·정리가 없습니다.</p>') + '</div>' +
-          '</div></div>' +
-        '</div>' +
-      '</div>';
-
-    /* Step 3 */
-    var cps = (sec.step3_checkpoint || []).map(renderCheckpoint).join('');
-    var step3 =
-      '<div class="step step-last">' + head(3,'STEP 03','체크포인트 · Checkpoint') +
-        '<div class="step-body">' + (cps || '<p class="muted">이 절에는 체크포인트 문제가 없습니다.</p>') + '</div>' +
-      '</div>';
-
-    /* nav */
-    var prev = i>0 ? '<button class="btn-nav" data-goto="section:' + (i-1) + '">← 이전 단원</button>' : '<span></span>';
-    var next = (i < total-1)
-      ? '<button class="btn-nav primary" data-goto="section:' + (i+1) + '">다음 단원 →</button>'
-      : '<button class="btn-nav primary" data-goto="review">최종 복습 시작 →</button>';
-
-    mainEl.innerHTML =
-      renderBanner() +
-      '<section class="section">' +
-        '<div class="section-head">' +
-          '<div class="section-kicker">단원 ' + (i+1) + ' / ' + total + '</div>' +
-          '<h2 class="section-title">' + esc(sec.section_title || '') + '</h2>' +
-        '</div>' +
-        '<div class="flow">' + step1 + step2 + step3 + '</div>' +
-        '<div class="navbtns">' + prev + next + '</div>' +
-      '</section>';
-    typeset(mainEl);
-  }
-
-  function head(n, eyebrow, name){
-    return '<span class="step-badge">' + n + '</span>' +
+  function head(badge, cls, eyebrow, name){
+    return '<span class="step-badge' + (cls ? ' ' + cls : '') + '">' + badge + '</span>' +
            '<div class="step-head"><div>' +
              '<div class="step-eyebrow">' + eyebrow + '</div>' +
-             '<div class="step-name">' + name + '</div>' +
+             (name ? '<div class="step-name">' + name + '</div>' : '') +
            '</div></div>';
+  }
+
+  function prefersReduced(){
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  /* ---------- build the ordered card list for the current view ---------- */
+  function buildDeck(){
+    var d = state.data; if(!d) return [];
+    var deck = [];
+    if(state.view.type === 'review'){
+      var fr = d.step4_final_review || {};
+      (fr.ox_quizzes || []).forEach(function(q,i){ deck.push({ k:'ox', q:q, idx:i }); });
+      (fr.conceptual_questions || []).forEach(function(q,i){ deck.push({ k:'cq', q:q, idx:i }); });
+      return deck;
+    }
+    var secs = d.learning_flow || [], i = state.view.index, sec = secs[i];
+    if(!sec) return [];
+    if(i === 0) deck.push({ k:'cover' });
+    deck.push({ k:'frame', bp: sec.step1_big_picture || {} });
+    (sec.step2_rigorous_logic || []).forEach(function(b){ deck.push({ k:'concept', block:b }); });
+    (sec.step3_checkpoint || []).forEach(function(c,idx){ deck.push({ k:'check', c:c, idx:idx }); });
+    return deck;
+  }
+
+  /* ---------- main dispatch: (re)build deck, clamp index, render card ---------- */
+  function renderMain(dir){
+    if(!state.data) return;
+    state.deck = buildDeck();
+    if(!state.deck.length){ renderState('empty', '내용이 없습니다', ''); return; }
+    if(state.cardIndex < 0) state.cardIndex = 0;
+    if(state.cardIndex > state.deck.length - 1) state.cardIndex = state.deck.length - 1;
+    renderCard(dir);
+  }
+
+  function renderCard(dir){
+    var card = state.deck[state.cardIndex];
+    mainEl.innerHTML =
+      '<div class="deck">' + deckContextHTML() +
+        '<div class="card' + (dir && !prefersReduced() ? ' is-turning' : '') + '">' + cardBodyHTML(card) + '</div>' +
+      '</div>';
+    typeset(mainEl);
+    updateDeckNav();
+    window.scrollTo({ top:0, behavior: prefersReduced() ? 'auto' : 'smooth' });
+  }
+
+  function deckContextHTML(){
+    var d = state.data, ci = (d && d.chapter_info) || {};
+    var counter, section;
+    if(state.view.type === 'review'){
+      counter = '복습'; section = '최종 복습 · Final Review';
+    } else {
+      var secs = d.learning_flow || [], i = state.view.index, sec = secs[i] || {};
+      counter = '단원 ' + (i+1) + '/' + secs.length;
+      section = sec.section_title || '';
+    }
+    return '<div class="deck-context">' +
+             '<span class="dc-chapter">' + esc(ci.title || '') + '</span>' +
+             '<span class="dc-sep">·</span>' +
+             '<span class="dc-chapter">' + esc(counter) + '</span>' +
+             '<span class="dc-sep">·</span>' +
+             '<span class="dc-section" title="' + esc(section) + '">' + esc(section) + '</span>' +
+           '</div>';
+  }
+
+  /* ---------- per-card bodies ---------- */
+  function cardBodyHTML(card){
+    switch(card.k){
+      case 'cover':   return coverCardHTML();
+      case 'frame':   return frameCardHTML(card.bp);
+      case 'concept': return conceptCardHTML(card.block);
+      case 'check':   return checkCardHTML(card.c, card.idx);
+      case 'ox':      return oxCardHTML(card.q, card.idx);
+      case 'cq':      return cqCardHTML(card.q, card.idx);
+    }
+    return '';
+  }
+
+  function coverCardHTML(){
+    var ci = (state.data && state.data.chapter_info) || {};
+    return '<div class="card-body">' +
+             '<div class="chapter-eyebrow">CHAPTER</div>' +
+             '<h1 class="chapter-title">' + esc(ci.title || '제목 없음') + '</h1>' +
+             (ci.overall_goal ? '<p class="chapter-goal">' + fmt(ci.overall_goal) + '</p>' : '') +
+             (ci.source ? '<p class="chapter-source">' + esc(ci.source) + '</p>' : '') +
+           '</div>';
+  }
+
+  function frameCardHTML(bp){
+    return head('1', 'badge-frame', 'STEP 01 · 숲 보기 · Big Picture', '') +
+      '<div class="card-body">' +
+        (bp.context ? '<p class="prose">' + fmt(bp.context) + '</p>' : '') +
+        (bp.hidden_intuition
+          ? '<div class="intuition"><div class="intuition-head">한눈에 보는 직관</div><p class="prose">' + fmt(bp.hidden_intuition) + '</p></div>'
+          : '') +
+        renderViz(bp.visualization) +
+      '</div>';
+  }
+
+  /* 개념 카드: 진술은 앞면에 늘 보이고, 증명·아이디어는 뒤집어(펼쳐) 확인 */
+  function conceptCardHTML(b){
+    var t = b.type || 'Remark', m = TYPE_MAP[t] || ['정리','thm'], ko = m[0], cls = m[1];
+    var idea = b.idea_behind_proof
+      ? '<div class="insight"><div class="insight-head">핵심 아이디어 · Idea behind the proof</div><p class="prose">' + fmt(b.idea_behind_proof) + '</p></div>'
+      : '';
+    var steps = (Array.isArray(b.proof_steps) && b.proof_steps.length)
+      ? '<div class="proof"><div class="proof-head">증명</div><ol class="proof-list">' +
+          b.proof_steps.map(function(s){ return '<li>' + fmt(s) + '</li>'; }).join('') +
+        '</ol></div>'
+      : '';
+    var reveal = '';
+    if(idea || steps){
+      var rid = uid('rev');
+      reveal =
+        '<div class="qa-actions">' +
+          '<button class="btn" data-action="toggle" data-target="' + rid + '" data-more="증명·핵심 아이디어 보기" data-less="증명 접기" aria-expanded="false">' +
+            '<span class="acc-label">증명·핵심 아이디어 보기</span>' +
+          '</button>' +
+        '</div>' +
+        '<div class="collapse reveal-face" id="' + rid + '"><div class="collapse-inner">' + idea + steps + '</div></div>';
+    }
+    return head('2', '', 'STEP 02 · 엄밀한 논리 · Rigorous Logic', '') +
+      '<div class="card-body">' +
+        '<article class="claim">' +
+          '<div class="claim-top">' +
+            '<span class="claim-type type-' + cls + '">' + ko + ' · ' + esc(t) + '</span>' +
+            (b.name ? '<span class="claim-name">' + esc(b.name) + '</span>' : '') +
+          '</div>' +
+          '<div class="claim-statement prose">' + fmt(b.formal_statement || '') + '</div>' +
+          renderViz(b.visualization) +
+        '</article>' +
+        reveal +
+      '</div>';
+  }
+
+  function checkCardHTML(c, idx){
+    return head('3', 'badge-check', 'STEP 03 · 체크포인트 · Checkpoint', '') +
+      '<div class="card-body">' + renderCheckpoint(c, idx) + '</div>';
+  }
+
+  function oxCardHTML(q, idx){
+    return head('&#10022;', 'badge-review', 'O / X 퀴즈 · ' + (idx+1) + '번', '') +
+      '<div class="card-body">' + renderOX(q) + '</div>';
+  }
+
+  function cqCardHTML(q, idx){
+    return head('&#10022;', 'badge-review', '개념 질문 · ' + (idx+1) + '번', '') +
+      '<div class="card-body">' + renderConceptual(q, idx) + '</div>';
+  }
+
+  /* ---------- deck navigation ---------- */
+  function deckNavInfo(){
+    var len = state.deck.length, pos = state.cardIndex;
+    var isReview = state.view.type === 'review';
+    var secs = (state.data && state.data.learning_flow) || [];
+    var i = state.view.index, total = secs.length;
+    var atLast = pos >= len - 1;
+    var hasPrev = !(!isReview && i === 0 && pos === 0);
+    var hasNext = !(isReview && atLast);
+    var nextLabel = '다음';
+    if(atLast){
+      if(isReview) nextLabel = '완료';
+      else if(i < total - 1) nextLabel = '다음 단원';
+      else nextLabel = '최종 복습';
+    }
+    return { len:len, pos:pos, isReview:isReview, i:i, total:total, atLast:atLast,
+             hasPrev:hasPrev, hasNext:hasNext, nextLabel:nextLabel };
+  }
+
+  function updateDeckNav(){
+    var n = deckNavInfo();
+    deckNav.hidden = false;
+    deckCount.innerHTML = '<b>' + (n.pos + 1) + '</b> / ' + n.len;
+    deckFill.style.width = n.len ? (((n.pos + 1) / n.len) * 100) + '%' : '0%';
+    navPrev.disabled = !n.hasPrev;
+    navNext.disabled = !n.hasNext;
+    navNextLabel.textContent = n.nextLabel;
+  }
+
+  function goNext(){
+    var n = deckNavInfo(); if(!n.hasNext) return;
+    if(!n.atLast){ state.cardIndex++; renderCard('fwd'); return; }
+    if(n.i < n.total - 1){ state.view = { type:'section', index:n.i + 1 }; state.visited.add(n.i + 1); state.cardIndex = 0; }
+    else { state.view = { type:'review' }; state.cardIndex = 0; }
+    renderRail(); renderMain('fwd');
+  }
+
+  function goPrev(){
+    var n = deckNavInfo(); if(!n.hasPrev) return;
+    if(n.pos > 0){ state.cardIndex--; renderCard('back'); return; }
+    var target = n.isReview ? n.total - 1 : n.i - 1;
+    state.view = { type:'section', index:target };
+    state.visited.add(target);
+    state.cardIndex = 1e9;            // renderMain clamps to the last card
+    renderRail(); renderMain('back');
   }
 
   function renderBlock(b){
@@ -857,31 +1114,7 @@ p.prose{ margin:0; }
            '</div>';
   }
 
-  /* ---------- review (Step 4) ---------- */
-  function renderReview(){
-    var d = state.data, fr = d.step4_final_review || {};
-    var ox = (fr.ox_quizzes || []).map(renderOX).join('');
-    var cq = (fr.conceptual_questions || []).map(renderConceptual).join('');
-    var secs = d.learning_flow || [];
-    var back = secs.length
-      ? '<button class="btn-nav" data-goto="section:' + (secs.length-1) + '">← 마지막 단원으로</button>'
-      : '<span></span>';
-
-    mainEl.innerHTML =
-      renderBanner() +
-      '<section class="section">' +
-        '<div class="section-head">' +
-          '<div class="section-kicker">STEP 04</div>' +
-          '<h2 class="section-title">최종 복습 · Final Review</h2>' +
-        '</div>' +
-        (ox ? '<div class="review-block"><h3 class="review-h">O / X 퀴즈</h3><p class="review-sub">참·거짓을 먼저 판단한 뒤, 정답 버튼을 눌러 해설을 확인하세요.</p><div class="ox-grid">' + ox + '</div></div>' : '') +
-        (cq ? '<div class="review-block"><h3 class="review-h">개념 질문</h3><p class="review-sub">단원 전체를 관통하는 심화 질문입니다.</p><div>' + cq + '</div></div>' : '') +
-        ((!ox && !cq) ? '<p class="muted">복습 콘텐츠가 없습니다.</p>' : '') +
-        '<div class="navbtns">' + back + '<span></span></div>' +
-      '</section>';
-    typeset(mainEl);
-  }
-
+  /* ---------- review Q&A renderers (reused by the deck) ---------- */
   function renderOX(q){
     var aid = uid('ox');
     var ans = String(q.answer || '').trim().toUpperCase() === 'O' ? 'O' : 'X';
@@ -917,6 +1150,34 @@ p.prose{ margin:0; }
 
   selectEl.addEventListener('change', function(){ loadTopic(selectEl.value); });
 
+  navPrev.addEventListener('click', goPrev);
+  navNext.addEventListener('click', goNext);
+
+  document.addEventListener('keydown', function(ev){
+    if(deckNav.hidden) return;
+    if(ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    var tag = (ev.target && ev.target.tagName) || '';
+    if(tag === 'SELECT' || tag === 'INPUT' || tag === 'TEXTAREA') return;
+    if(ev.key === 'ArrowRight'){ ev.preventDefault(); goNext(); }
+    else if(ev.key === 'ArrowLeft'){ ev.preventDefault(); goPrev(); }
+  });
+
+  /* swipe left/right to flip through cards on touch devices */
+  var swX = 0, swY = 0, swipeOn = false;
+  mainEl.addEventListener('touchstart', function(ev){
+    if(deckNav.hidden || ev.touches.length !== 1){ swipeOn = false; return; }
+    if(ev.target.closest('button, a, select, .katex-display, .figure-svg')){ swipeOn = false; return; }
+    swX = ev.touches[0].clientX; swY = ev.touches[0].clientY; swipeOn = true;
+  }, { passive:true });
+  mainEl.addEventListener('touchend', function(ev){
+    if(!swipeOn) return; swipeOn = false;
+    var dx = ev.changedTouches[0].clientX - swX;
+    var dy = ev.changedTouches[0].clientY - swY;
+    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.3){
+      if(dx < 0) goNext(); else goPrev();
+    }
+  }, { passive:true });
+
   function handleGoto(g){
     if(g === 'review'){ state.view = { type:'review' }; }
     else if(g.indexOf('section:') === 0){
@@ -924,9 +1185,9 @@ p.prose{ margin:0; }
       state.view = { type:'section', index:idx };
       state.visited.add(idx);
     }
+    state.cardIndex = 0;
     renderRail();
-    renderMain();
-    window.scrollTo({ top:0, behavior:'smooth' });
+    renderMain('fwd');
   }
 
   function handleToggle(btn){
