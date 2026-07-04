@@ -92,30 +92,52 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 /* ---------- Rail ---------- */
 .rail{ position:sticky; top:63px; align-self:start; padding:26px 6px 40px 0; }
 .rail-inner{ display:flex; flex-direction:column; gap:4px; }
-.rail-title{ font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); padding:0 12px 8px; }
+.rail-title-row{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:0 12px 8px; }
+.rail-title{ font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); }
+.rail-progress{ font-family:var(--mono); font-size:.68rem; color:var(--ink-faint); white-space:nowrap; }
+.rail-progress b{ color:var(--ok); font-weight:600; }
 .rail-list{ display:flex; flex-direction:column; gap:4px; }
 .rail-item{
-  display:flex; align-items:flex-start; gap:10px; text-align:left;
-  font-family:var(--sans); font-size:.86rem; color:var(--ink-soft);
-  background:transparent; border:1px solid transparent; border-radius:10px;
-  padding:9px 12px; cursor:pointer; width:100%;
+  display:flex; align-items:flex-start; gap:6px;
+  border:1px solid transparent; border-radius:10px;
   transition:background .15s,color .15s,border-color .15s;
 }
-.rail-item:hover{ background:var(--surface); color:var(--ink); }
-.rail-item.active{ background:var(--surface); color:var(--ink); border-color:var(--line-strong); box-shadow:0 1px 2px rgba(27,35,51,.05); font-weight:600; }
+.rail-item.active{ background:var(--surface); color:var(--ink); border-color:var(--line-strong); box-shadow:0 1px 2px rgba(27,35,51,.05); }
+.rail-item:hover{ background:var(--surface); }
+.rail-item.complete{ background:var(--ok-bg); }
+.rail-item.complete:hover{ background:var(--ok-bg); }
+.rail-item.complete.active{ border-color:#BFE0CD; }
+.rail-item-nav{
+  display:flex; align-items:flex-start; gap:10px; text-align:left; flex:1 1 auto; min-width:0;
+  font-family:var(--sans); font-size:.86rem; color:var(--ink-soft);
+  background:none; border:none; padding:9px 4px 9px 12px; margin:0; font:inherit; cursor:pointer;
+}
+.rail-item:hover .rail-item-nav{ color:var(--ink); }
+.rail-item.active .rail-item-nav{ color:var(--ink); font-weight:600; }
 .rail-num{ font-family:var(--mono); font-size:.74rem; color:var(--ink-faint); flex:0 0 auto; margin-top:1px; }
 .rail-item.active .rail-num{ color:var(--primary); }
 .rail-item.done .rail-num{ color:var(--ok); }
 .rail-label{ overflow:hidden; text-overflow:ellipsis; }
 .rail-sep{ height:1px; background:var(--line); margin:10px 12px; }
 .rail-review .rail-num{ color:var(--insight-accent); }
+.rail-check{
+  flex:0 0 auto; width:22px; height:22px; margin:9px 10px 9px 0; align-self:flex-start;
+  border-radius:50%; border:1.5px solid var(--line-strong); background:var(--surface);
+  display:flex; align-items:center; justify-content:center; padding:0; cursor:pointer;
+  color:transparent; transition:background .15s,border-color .15s,color .15s;
+}
+.rail-check:hover{ border-color:var(--ok); }
+.rail-check svg{ width:12px; height:12px; }
+.rail-check.is-done{ background:var(--ok); border-color:var(--ok); color:#fff; }
 
 @media (max-width:960px){
   .rail{ position:sticky; top:56px; padding:0; z-index:40; background:rgba(244,246,241,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); min-width:0; }
   .rail-inner{ flex-direction:row; align-items:center; gap:6px; overflow-x:auto; padding:9px clamp(12px,4vw,24px); -webkit-overflow-scrolling:touch; min-width:0; }
-  .rail-title, .rail-sep{ display:none; }
+  .rail-title-row, .rail-sep{ display:none; }
   .rail-list{ flex-direction:row; gap:6px; }
   .rail-item{ width:auto; flex:0 0 auto; white-space:nowrap; align-items:center; }
+  .rail-item-nav{ align-items:center; padding:8px 2px 8px 10px; }
+  .rail-check{ width:20px; height:20px; margin:0 8px 0 0; align-self:center; }
   .rail-label{ white-space:nowrap; }
   .card{ min-height:min(52vh,440px); }
 }
@@ -726,7 +748,7 @@ p.prose{ margin:0; }
     Proposition:['명제','prop'], Corollary:['따름정리','cor'], Remark:['참고','rem'], Example:['예시','ex']
   };
 
-  var state = { topics:[], topicId:null, data:null, view:{type:'section',index:0}, cardIndex:0, deck:[], visited:new Set(), uid:0 };
+  var state = { topics:[], topicId:null, data:null, view:{type:'section',index:0}, cardIndex:0, deck:[], visited:new Set(), completedMap:{}, uid:0 };
 
   var railEl   = document.getElementById('rail');
   var mainEl   = document.getElementById('content');
@@ -762,6 +784,27 @@ p.prose{ margin:0; }
       if(!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     });
+  }
+
+  /* ---------- completion tracking (persisted per topic in localStorage) ---------- */
+  var COMPLETE_KEY = 'pdl_completed_v1';
+  function loadCompletedStore(){
+    try{ return JSON.parse(localStorage.getItem(COMPLETE_KEY) || '{}'); }
+    catch(e){ return {}; }
+  }
+  function saveCompletedStore(store){
+    try{ localStorage.setItem(COMPLETE_KEY, JSON.stringify(store)); }
+    catch(e){ /* private mode / storage disabled — degrade silently */ }
+  }
+  function toggleComplete(key){
+    if(!state.topicId) return;
+    var store = loadCompletedStore();
+    var m = store[state.topicId] || {};
+    if(m[key]) delete m[key]; else m[key] = true;
+    store[state.topicId] = m;
+    saveCompletedStore(store);
+    state.completedMap = m;
+    renderRail();
   }
 
   /* ---------- state screens ---------- */
@@ -801,8 +844,17 @@ p.prose{ margin:0; }
   }
 
   function populateSelect(){
-    selectEl.innerHTML = state.topics.map(function(t){
-      return '<option value="' + esc(t.id) + '">' + esc(t.title) + '</option>';
+    var groups = [], byName = {};
+    state.topics.forEach(function(t){
+      var name = t.book || '미분류';
+      if(!byName[name]){ byName[name] = []; groups.push(name); }
+      byName[name].push(t);
+    });
+    selectEl.innerHTML = groups.map(function(g){
+      var opts = byName[g].map(function(t){
+        return '<option value="' + esc(t.id) + '">' + esc(t.title) + '</option>';
+      }).join('');
+      return '<optgroup label="' + esc(g) + '">' + opts + '</optgroup>';
     }).join('');
   }
 
@@ -818,6 +870,7 @@ p.prose{ margin:0; }
       state.view = { type:'section', index:0 };
       state.cardIndex = 0;
       state.visited = new Set([0]);
+      state.completedMap = loadCompletedStore()[id] || {};
       renderRail();
       renderMain();
       window.scrollTo(0,0);
@@ -825,37 +878,68 @@ p.prose{ margin:0; }
   }
 
   /* ---------- rail ---------- */
+  var CHECK_ICON = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+
   function renderRail(){
     var d = state.data;
     if(!d){ railEl.innerHTML=''; return; }
+    var prevInner = railEl.querySelector('.rail-inner');
+    var prevScroll = prevInner ? prevInner.scrollLeft : 0;
     var secs = d.learning_flow || [];
+    var cm = state.completedMap || {};
+    var doneCount = 0;
     var items = secs.map(function(s,i){
       var active = state.view.type==='section' && state.view.index===i;
-      var done = state.visited.has(i) && !active;
-      return '<button class="rail-item' + (active?' active':'') + (done?' done':'') + '" data-goto="section:' + i + '">' +
-               '<span class="rail-num">' + pad(i+1) + '</span>' +
-               '<span class="rail-label">' + esc(s.section_title || ('Section ' + (i+1))) + '</span>' +
-             '</button>';
+      var visited = state.visited.has(i) && !active;
+      var complete = !!cm['section:' + i];
+      if(complete) doneCount++;
+      return '<div class="rail-item' + (active?' active':'') + (visited?' done':'') + (complete?' complete':'') + '">' +
+               '<button class="rail-item-nav" data-goto="section:' + i + '">' +
+                 '<span class="rail-num">' + pad(i+1) + '</span>' +
+                 '<span class="rail-label">' + esc(s.section_title || ('Section ' + (i+1))) + '</span>' +
+               '</button>' +
+               '<button class="rail-check' + (complete?' is-done':'') + '" data-complete="section:' + i + '" ' +
+                 'aria-pressed="' + (complete?'true':'false') + '" title="학습 완료 체크" aria-label="' + esc(s.section_title || ('Section '+(i+1))) + ' 완료 체크">' +
+                 CHECK_ICON +
+               '</button>' +
+             '</div>';
     }).join('');
     var reviewActive = state.view.type==='review';
-    var review = '<button class="rail-item rail-review' + (reviewActive?' active':'') + '" data-goto="review">' +
-                   '<span class="rail-num">&#10022;</span>' +
-                   '<span class="rail-label">최종 복습</span>' +
-                 '</button>';
+    var reviewComplete = !!cm['review'];
+    if(reviewComplete) doneCount++;
+    var review = '<div class="rail-item rail-review' + (reviewActive?' active':'') + (reviewComplete?' complete':'') + '">' +
+                   '<button class="rail-item-nav" data-goto="review">' +
+                     '<span class="rail-num">&#10022;</span>' +
+                     '<span class="rail-label">최종 복습</span>' +
+                   '</button>' +
+                   '<button class="rail-check' + (reviewComplete?' is-done':'') + '" data-complete="review" ' +
+                     'aria-pressed="' + (reviewComplete?'true':'false') + '" title="학습 완료 체크" aria-label="최종 복습 완료 체크">' +
+                     CHECK_ICON +
+                   '</button>' +
+                 '</div>';
+    var total = secs.length + 1;
     railEl.innerHTML =
       '<div class="rail-inner">' +
-        '<div class="rail-title">학습 흐름</div>' +
+        '<div class="rail-title-row">' +
+          '<div class="rail-title">학습 흐름</div>' +
+          '<div class="rail-progress"><b>' + doneCount + '</b>/' + total + ' 완료</div>' +
+        '</div>' +
         '<div class="rail-list">' + items + '</div>' +
         '<div class="rail-sep"></div>' + review +
       '</div>';
+    var newInner = railEl.querySelector('.rail-inner');
+    if(newInner && prevScroll) newInner.scrollLeft = prevScroll;
   }
   function pad(n){ return (n<10?'0':'') + n; }
 
   /* ---------- banner ---------- */
   function renderBanner(){
     var ci = (state.data && state.data.chapter_info) || {};
+    var t = null;
+    for(var i=0;i<state.topics.length;i++){ if(state.topics[i].id===state.topicId){ t=state.topics[i]; break; } }
+    var eyebrow = (t && t.book) ? t.book : 'CHAPTER';
     return '<div class="chapter-banner">' +
-             '<div class="chapter-eyebrow">CHAPTER</div>' +
+             '<div class="chapter-eyebrow">' + esc(eyebrow.toUpperCase()) + '</div>' +
              '<h1 class="chapter-title">' + esc(ci.title || '제목 없음') + '</h1>' +
              (ci.overall_goal ? '<p class="chapter-goal">' + fmt(ci.overall_goal) + '</p>' : '') +
              (ci.source ? '<p class="chapter-source">' + esc(ci.source) + '</p>' : '') +
@@ -1143,6 +1227,8 @@ p.prose{ margin:0; }
 
   /* ---------- events ---------- */
   document.addEventListener('click', function(ev){
+    var comp = ev.target.closest('[data-complete]');
+    if(comp){ toggleComplete(comp.getAttribute('data-complete')); return; }
     var nav = ev.target.closest('[data-goto]');
     if(nav){ handleGoto(nav.getAttribute('data-goto')); return; }
     var tog = ev.target.closest('[data-action="toggle"]');
