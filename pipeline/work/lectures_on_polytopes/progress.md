@@ -16,13 +16,13 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 003 | [ ] | 1.1 The "Main Theorem" | section | `003__LecturesonPoly__1_1_TheMainTheorem.txt` |
-| 004 | [ ] | 1.2 Fourier-Motzkin Elimination: An Affine Sketch | section | `004__LecturesonPoly__1_2_Fourier-MotzkinElimination.txt` |
-| 005 | [ ] | 1.3 Fourier-Motzkin Elimination for Cones | section | `005__LecturesonPoly__1_3_Fourier-MotzkinElimination.txt` |
-| 006 | [ ] | 1.4 The Farkas Lemma | section | `006__LecturesonPoly__1_4_TheFarkasLemma.txt` |
-| 007 | [ ] | 1.5 Recession Cone and Homogenization | section | `007__LecturesonPoly__1_5_RecessionConeandHomogeniza.txt` |
-| 008 | [ ] | 1.6 Carathéodory's Theorem | section | `008__LecturesonPoly__1_6_CarathodorysTheorem.txt` |
-| 009 | [ ] | 1.ex Problems and Exercises | exercises | `009__LecturesonPoly__1_ex_ProblemsandExercises__EX.txt` |
+| 003 | [x] | 1.1 The "Main Theorem" | section | `003__LecturesonPoly__1_1_TheMainTheorem.txt` |
+| 004 | [x] | 1.2 Fourier-Motzkin Elimination: An Affine Sketch | section | `004__LecturesonPoly__1_2_Fourier-MotzkinElimination.txt` |
+| 005 | [x] | 1.3 Fourier-Motzkin Elimination for Cones | section | `005__LecturesonPoly__1_3_Fourier-MotzkinElimination.txt` |
+| 006 | [x] | 1.4 The Farkas Lemma | section | `006__LecturesonPoly__1_4_TheFarkasLemma.txt` |
+| 007 | [x] | 1.5 Recession Cone and Homogenization | section | `007__LecturesonPoly__1_5_RecessionConeandHomogeniza.txt` |
+| 008 | [x] | 1.6 Carathéodory's Theorem | section | `008__LecturesonPoly__1_6_CarathodorysTheorem.txt` |
+| 009 | [x] | 1.ex Problems and Exercises | exercises | `009__LecturesonPoly__1_ex_ProblemsandExercises__EX.txt` |
 
 ## 2. Faces of Polytopes
 

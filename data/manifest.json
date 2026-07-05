@@ -12,12 +12,6 @@
       "title": "Chapter 1. Polytopes, Polyhedra, and Cones",
       "file": "chapter_1_polytopes_polyhedra_and_cones.json",
       "book": "Ziegler — Lectures on Polytopes"
-    },
-    {
-      "id": "zonotopes",
-      "title": "Ch 7. Minkowski Sums & Zonotopes",
-      "file": "sample_data.json",
-      "book": "Ziegler — Lectures on Polytopes"
     }
   ]
 }

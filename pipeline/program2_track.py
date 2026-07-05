@@ -16,6 +16,14 @@
 
 검증은 section_merger.html 규칙을 그대로 이식한 lib/merger.py 를 쓴다.
 'err' 이 있으면 저장/완료 처리하지 않고 경고만 보고한다('경고나 위험 공지' 요구사항).
+
+여러 책 지원: 상태는 work/<책 슬러그>/ 로 책마다 분리되어 있다(program1_split.py 참고).
+--book 으로 어느 책인지 지정하고, 생략하면 work/ 안에 책 폴더가 하나뿐일 때만 자동으로 그 책을 쓴다
+(여러 책이 있으면 목록을 보여주고 --book 을 요구한다). --work-dir 을 직접 주면 그 값이 최우선이다.
+
+순서 보장: 같은 챕터 안에서는 소단원을 반드시 순서대로(seq 오름차순) 완성해야 한다 — next_section.py의
+헤더 보강(enrich_prev_summary)이 '직전 최대 3개 소단원'의 chapter_raw 결과를 참조하기 때문이다. submit 은
+같은 챕터에서 더 앞선 seq가 아직 미완료인데 뒤의 seq를 제출하면 경고를 낸다(막지는 않되 반드시 알린다).
 """
 
 import os, re, sys, json, argparse
@@ -30,8 +38,26 @@ import merger as M              # noqa: E402
 
 
 # ----------------------------- 경로 -----------------------------
-def paths(work_dir=None, data_dir=None):
-    work_dir = work_dir or os.path.join(HERE, "work")
+def resolve_work_dir(work_dir=None, book=None):
+    """--work-dir > --book > 자동감지(책 폴더가 하나뿐일 때만) 순으로 상태 폴더를 정한다."""
+    if work_dir:
+        return work_dir
+    base = os.path.join(HERE, "work")
+    if book:
+        return os.path.join(base, M.slug_id(book))
+    candidates = sorted(d for d in os.listdir(base)) if os.path.isdir(base) else []
+    candidates = [d for d in candidates if os.path.isdir(os.path.join(base, d))]
+    if len(candidates) == 1:
+        return os.path.join(base, candidates[0])
+    if not candidates:
+        print(f"✗ '{base}' 에 책 상태 폴더가 없습니다. 프로그램 1을 먼저 실행하세요.")
+        sys.exit(1)
+    print(f"△ 여러 책이 있습니다 — --book 으로 지정하세요: {', '.join(candidates)}")
+    sys.exit(1)
+
+
+def paths(work_dir=None, data_dir=None, book=None):
+    work_dir = resolve_work_dir(work_dir, book)
     return {
         "work": work_dir,
         "sections": os.path.join(work_dir, "sections_out"),
@@ -263,6 +289,14 @@ def cmd_submit(P, json_path, seq=None, chapter=None, force=False):
     if row["done"] and not force:
         print(f"\nℹ seq {row['seq']} 는 이미 완료 상태입니다 — 재업로드로 덮어씁니다.")
 
+    earlier = _earlier_incomplete(rows, row)
+    if earlier:
+        print("\n⚠ 순서 경고: 같은 챕터에서 이보다 앞선 소단원이 아직 미완료입니다.")
+        print("   이 소단원의 헤더가 참조해야 했던 '이전 소단원 핵심 결과'가 비어 있거나 불완전했을 수 있습니다:")
+        for r in earlier:
+            print(f"   - seq {r['seq']} | {r['section']} (미완료)")
+        print("   먼저 위 항목들을 완료한 뒤, 이 소단원을 헤더를 다시 받아 재생성하는 것을 권장합니다.")
+
     stem = re.sub(r'\.txt$', '', row["file"], flags=re.I)
     os.makedirs(P["raw"], exist_ok=True)
     with open(os.path.join(P["raw"], stem + ".json"), "w", encoding="utf-8") as f:
@@ -272,6 +306,22 @@ def cmd_submit(P, json_path, seq=None, chapter=None, force=False):
     print(f"✓ seq {row['seq']} — {row['section']} 저장 완료.")
 
     _after_change(P, _chapter_no(row["chapter"]))
+
+
+def _earlier_incomplete(rows, row):
+    """row와 같은 챕터에서, row보다 seq가 앞서면서(작으면서) 아직 미완료인 행들.
+    seq는 모두 같은 자리수로 0-패딩되어 있어 문자열 비교만으로 순서가 맞다."""
+    out = []
+    for r in rows:
+        if r["chapter"] != row["chapter"] or r is row:
+            continue
+        if r["seq"] >= row["seq"]:
+            continue
+        if any(sk in r["role"] for sk in N.SKIP_ROLES):
+            continue
+        if not r["done"]:
+            out.append(r)
+    return out
 
 
 def _guess_review_chapter(json_path, rows):
@@ -346,7 +396,10 @@ def cmd_merge(P, chapter):
 # ----------------------------- main -----------------------------
 def main():
     ap = argparse.ArgumentParser(description="프로그램 2 — 작업 추적/수집/병합기")
-    ap.add_argument("--work-dir", default=None, help="상태 폴더(기본 pipeline/work)")
+    ap.add_argument("--work-dir", default=None,
+                    help="상태 폴더 강제 지정(기본은 --book 이나 자동감지로 pipeline/work/<책 슬러그> 를 씀)")
+    ap.add_argument("--book", default=None,
+                    help="책 이름(또는 슬러그). work/ 안에 책 폴더가 여러 개면 반드시 지정해야 함")
     ap.add_argument("--data-dir", default=None, help="병합본 출력 폴더(기본 data/)")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
@@ -367,9 +420,9 @@ def main():
     smg.add_argument("--chapter", required=True)
 
     args = ap.parse_args()
-    P = paths(args.work_dir, args.data_dir)
+    P = paths(args.work_dir, args.data_dir, args.book)
     if not os.path.exists(P["progress"]):
-        print(f"✗ 상태를 찾을 수 없습니다: {P['progress']}\n  프로그램 1을 먼저 실행했는지, --work-dir 가 맞는지 확인하세요.")
+        print(f"✗ 상태를 찾을 수 없습니다: {P['progress']}\n  프로그램 1을 먼저 실행했는지, --work-dir/--book 이 맞는지 확인하세요.")
         sys.exit(1)
 
     if args.cmd == "next":
