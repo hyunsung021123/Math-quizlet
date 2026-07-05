@@ -1,0 +1,9 @@
+# 대화에서 확정: 텍스트 상태만 커밋한다.
+# 분할 PDF와 전달용 zip은 용량이 크고 zip으로 직접 전송하므로 git 에서 제외.
+work/sections_out/*.pdf
+work/_delivery/
+work/_review_input_*.txt
+
+# python 캐시
+__pycache__/
+*.pyc
