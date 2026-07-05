@@ -1,0 +1,682 @@
+{
+  "book": "Lectures on Polytopes",
+  "author": "Günter M. Ziegler",
+  "chapters": [
+    {
+      "chapter_no": "0",
+      "chapter_title": "Introduction and Examples",
+      "printed_page": 1
+    },
+    {
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 27
+    },
+    {
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 51
+    },
+    {
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 77
+    },
+    {
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 103
+    },
+    {
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 127
+    },
+    {
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 149
+    },
+    {
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 191
+    },
+    {
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 231
+    },
+    {
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 291
+    }
+  ],
+  "sections": [
+    {
+      "number": "0.notes",
+      "title": "Notes",
+      "chapter_no": "0",
+      "chapter_title": "Introduction and Examples",
+      "printed_page": 22,
+      "role": "drop"
+    },
+    {
+      "number": "0.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "0",
+      "chapter_title": "Introduction and Examples",
+      "printed_page": 23,
+      "role": "exercises"
+    },
+    {
+      "number": "1.1",
+      "title": "The \"Main Theorem\"",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 27,
+      "role": "section"
+    },
+    {
+      "number": "1.2",
+      "title": "Fourier-Motzkin Elimination: An Affine Sketch",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 32,
+      "role": "section"
+    },
+    {
+      "number": "1.3",
+      "title": "Fourier-Motzkin Elimination for Cones",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 37,
+      "role": "section"
+    },
+    {
+      "number": "1.4",
+      "title": "The Farkas Lemma",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 39,
+      "role": "section"
+    },
+    {
+      "number": "1.5",
+      "title": "Recession Cone and Homogenization",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 43,
+      "role": "section"
+    },
+    {
+      "number": "1.6",
+      "title": "Carathéodory's Theorem",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 45,
+      "role": "section"
+    },
+    {
+      "number": "1.notes",
+      "title": "Notes",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 47,
+      "role": "drop"
+    },
+    {
+      "number": "1.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "1",
+      "chapter_title": "Polytopes, Polyhedra, and Cones",
+      "printed_page": 49,
+      "role": "exercises"
+    },
+    {
+      "number": "2.1",
+      "title": "Vertices, Faces, and Facets",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 51,
+      "role": "section"
+    },
+    {
+      "number": "2.2",
+      "title": "The Face Lattice",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 55,
+      "role": "section"
+    },
+    {
+      "number": "2.3",
+      "title": "Polarity",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 59,
+      "role": "section"
+    },
+    {
+      "number": "2.4",
+      "title": "The Representation Theorem for Polytopes",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 64,
+      "role": "section"
+    },
+    {
+      "number": "2.5",
+      "title": "Simplicial and Simple Polytopes",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 65,
+      "role": "section"
+    },
+    {
+      "number": "2.6",
+      "title": "Appendix: Projective Transformations",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 67,
+      "role": "appendix"
+    },
+    {
+      "number": "2.notes",
+      "title": "Notes",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 69,
+      "role": "drop"
+    },
+    {
+      "number": "2.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "2",
+      "chapter_title": "Faces of Polytopes",
+      "printed_page": 70,
+      "role": "exercises"
+    },
+    {
+      "number": "3.1",
+      "title": "Lines and Linear Functions in General Position",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 77,
+      "role": "section"
+    },
+    {
+      "number": "3.2",
+      "title": "Directing the Edges (\"Linear Programming for Geometers\")",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 80,
+      "role": "section"
+    },
+    {
+      "number": "3.3",
+      "title": "The Hirsch Conjecture",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 83,
+      "role": "section"
+    },
+    {
+      "number": "3.4",
+      "title": "Kalai's Simple Way to Tell a Simple Polytope from Its Graph",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 93,
+      "role": "section"
+    },
+    {
+      "number": "3.5",
+      "title": "Balinski's Theorem: The Graph is d-Connected",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 95,
+      "role": "section"
+    },
+    {
+      "number": "3.notes",
+      "title": "Notes",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 96,
+      "role": "drop"
+    },
+    {
+      "number": "3.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "3",
+      "chapter_title": "Graphs of Polytopes",
+      "printed_page": 97,
+      "role": "exercises"
+    },
+    {
+      "number": "4.1",
+      "title": "3-Connected Planar Graphs",
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 104,
+      "role": "section"
+    },
+    {
+      "number": "4.2",
+      "title": "Simple ΔY Transformations Preserve Realizability",
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 107,
+      "role": "section"
+    },
+    {
+      "number": "4.3",
+      "title": "Planar Graphs are ΔY Reducible",
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 109,
+      "role": "section"
+    },
+    {
+      "number": "4.4",
+      "title": "Extensions of Steinitz' Theorem",
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 113,
+      "role": "section"
+    },
+    {
+      "number": "4.notes",
+      "title": "Notes",
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 115,
+      "role": "drop"
+    },
+    {
+      "number": "4.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "4",
+      "chapter_title": "Steinitz' Theorem for 3-Polytopes",
+      "printed_page": 119,
+      "role": "exercises"
+    },
+    {
+      "number": "5.1",
+      "title": "Polyhedral Complexes",
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 127,
+      "role": "section"
+    },
+    {
+      "number": "5.2",
+      "title": "Schlegel Diagrams",
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 132,
+      "role": "section"
+    },
+    {
+      "number": "5.3",
+      "title": "d-Diagrams",
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 138,
+      "role": "section"
+    },
+    {
+      "number": "5.4",
+      "title": "Three Examples",
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 139,
+      "role": "section"
+    },
+    {
+      "number": "5.notes",
+      "title": "Notes",
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 143,
+      "role": "drop"
+    },
+    {
+      "number": "5.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "5",
+      "chapter_title": "Schlegel Diagrams for 4-Polytopes",
+      "printed_page": 145,
+      "role": "exercises"
+    },
+    {
+      "number": "6.1",
+      "title": "Circuits and Cocircuits",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 150,
+      "role": "section"
+    },
+    {
+      "number": "6.1.a",
+      "title": "Affine Dependences",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 150,
+      "role": "section"
+    },
+    {
+      "number": "6.1.b",
+      "title": "Affine Functions",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 153,
+      "role": "section"
+    },
+    {
+      "number": "6.2",
+      "title": "Vector Configurations",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 156,
+      "role": "section"
+    },
+    {
+      "number": "6.3",
+      "title": "Oriented Matroids",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 157,
+      "role": "section"
+    },
+    {
+      "number": "6.3.a",
+      "title": "Axiomatics",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 159,
+      "role": "section"
+    },
+    {
+      "number": "6.3.b",
+      "title": "Equivalence",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 160,
+      "role": "section"
+    },
+    {
+      "number": "6.3.c",
+      "title": "Duality",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 163,
+      "role": "section"
+    },
+    {
+      "number": "6.3.d",
+      "title": "Deletion and Contraction",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 163,
+      "role": "section"
+    },
+    {
+      "number": "6.4",
+      "title": "Dual Configurations and Gale Diagrams",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 165,
+      "role": "section"
+    },
+    {
+      "number": "6.5",
+      "title": "Polytopes with Few Vertices",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 171,
+      "role": "section"
+    },
+    {
+      "number": "6.5.a",
+      "title": "A Nonrational 8-Polytope",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 172,
+      "role": "section"
+    },
+    {
+      "number": "6.5.b",
+      "title": "Facets of 4-Polytopes Cannot be Prescribed",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 173,
+      "role": "section"
+    },
+    {
+      "number": "6.5.c",
+      "title": "2-Faces of 5-Polytopes Cannot be Prescribed",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 175,
+      "role": "section"
+    },
+    {
+      "number": "6.5.d",
+      "title": "Polytopes Violating the Isotopy Conjecture",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 177,
+      "role": "section"
+    },
+    {
+      "number": "6.6",
+      "title": "Rigidity and Universality",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 179,
+      "role": "section"
+    },
+    {
+      "number": "6.notes",
+      "title": "Notes",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 183,
+      "role": "drop"
+    },
+    {
+      "number": "6.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "6",
+      "chapter_title": "Duality, Gale Diagrams, and Applications",
+      "printed_page": 184,
+      "role": "exercises"
+    },
+    {
+      "number": "7.1",
+      "title": "Fans",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 191,
+      "role": "section"
+    },
+    {
+      "number": "7.2",
+      "title": "Projections and Minkowski Sums",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 195,
+      "role": "section"
+    },
+    {
+      "number": "7.3",
+      "title": "Zonotopes",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 198,
+      "role": "section"
+    },
+    {
+      "number": "7.4",
+      "title": "Nonrealizable Oriented Matroids",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 208,
+      "role": "section"
+    },
+    {
+      "number": "7.5",
+      "title": "Zonotopal Tilings",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 217,
+      "role": "section"
+    },
+    {
+      "number": "7.notes",
+      "title": "Notes",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 224,
+      "role": "drop"
+    },
+    {
+      "number": "7.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "7",
+      "chapter_title": "Fans, Arrangements, Zonotopes, and Tilings",
+      "printed_page": 225,
+      "role": "exercises"
+    },
+    {
+      "number": "8.1",
+      "title": "Shellable and Nonshellable Complexes",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 232,
+      "role": "section"
+    },
+    {
+      "number": "8.2",
+      "title": "Shelling Polytopes",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 239,
+      "role": "section"
+    },
+    {
+      "number": "8.3",
+      "title": "h-Vectors and Dehn-Sommerville Equations",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 246,
+      "role": "section"
+    },
+    {
+      "number": "8.4",
+      "title": "The Upper Bound Theorem",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 254,
+      "role": "section"
+    },
+    {
+      "number": "8.5",
+      "title": "Some Extremal Set Theory",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 258,
+      "role": "section"
+    },
+    {
+      "number": "8.6",
+      "title": "The g-Theorem and Its Consequences",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 268,
+      "role": "section"
+    },
+    {
+      "number": "8.notes",
+      "title": "Notes",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 275,
+      "role": "drop"
+    },
+    {
+      "number": "8.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "8",
+      "chapter_title": "Shellability and the Upper Bound Theorem",
+      "printed_page": 281,
+      "role": "exercises"
+    },
+    {
+      "number": "9.1",
+      "title": "Polyhedral Subdivisions and Fiber Polytopes",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 292,
+      "role": "section"
+    },
+    {
+      "number": "9.2",
+      "title": "Some Examples",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 299,
+      "role": "section"
+    },
+    {
+      "number": "9.3",
+      "title": "Constructing the Permuto-Associahedron",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 310,
+      "role": "section"
+    },
+    {
+      "number": "9.4",
+      "title": "Toward a Category of Polytopes?",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 319,
+      "role": "section"
+    },
+    {
+      "number": "9.notes",
+      "title": "Notes",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 320,
+      "role": "drop"
+    },
+    {
+      "number": "9.ex",
+      "title": "Problems and Exercises",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 321,
+      "role": "exercises"
+    },
+    {
+      "number": "9.ref",
+      "title": "References",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 325,
+      "role": "drop"
+    },
+    {
+      "number": "9.index",
+      "title": "Index",
+      "chapter_no": "9",
+      "chapter_title": "Fiber Polytopes, and Beyond",
+      "printed_page": 367,
+      "role": "drop"
+    }
+  ]
+}
