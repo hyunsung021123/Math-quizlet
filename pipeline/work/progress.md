@@ -8,9 +8,9 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 000 | [ ] | 0.intro 개관 (챕터 도입부) (분할 part 1) _(원본 #000)_ | intro | `000__LecturesonPoly__0_intro_개관챕터도입부__p1.txt` |
-| 001 | [ ] | 0.intro 개관 (챕터 도입부) (분할 part 2) _(원본 #001)_ | intro | `001__LecturesonPoly__0_intro_개관챕터도입부__p2.txt` |
-| 002 | [ ] | 0.ex Problems and Exercises | exercises | `002__LecturesonPoly__0_ex_ProblemsandExercises__EX.txt` |
+| 000 | [x] | 0.intro 개관 (챕터 도입부) (분할 part 1) _(원본 #000)_ | intro | `000__LecturesonPoly__0_intro_개관챕터도입부__p1.txt` |
+| 001 | [x] | 0.intro 개관 (챕터 도입부) (분할 part 2) _(원본 #001)_ | intro | `001__LecturesonPoly__0_intro_개관챕터도입부__p2.txt` |
+| 002 | [x] | 0.ex Problems and Exercises | exercises | `002__LecturesonPoly__0_ex_ProblemsandExercises__EX.txt` |
 
 ## 1. Polytopes, Polyhedra, and Cones
 
