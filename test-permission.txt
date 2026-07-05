@@ -1,2 +1,0 @@
-Permission test file - testing write capability
-Created at: 2026-07-05
