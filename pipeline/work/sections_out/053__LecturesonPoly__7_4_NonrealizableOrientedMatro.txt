@@ -1,0 +1,370 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 7. Fans, Arrangements, Zonotopes, and Tilings
+현재 소단원: 7.4 Nonrealizable Oriented Matroids
+직전 소단원: 「7.3 Zonotopes」
+[본문]
+208
+7. Fans, Arrangements, Zonotopes, and Tilings
+Every essential arrangement A of n hyperplanes in Rd has at least 2n
+simplicial regions.
+More precisely, adjacent to every hyperplane there are at least 2d
+simplicial regions, and nonadjacent to any given hyperplane there
+are at least 2(n −d) simplicial regions.
+(Note that the simplicial regions come in pairs, since the opposite of a
+simplicial cone is simplicial as well). From Shannon’s theorem, we derive
+the following theorem about zonotopes.
+Theorem 7.20 (Shannon’s theorem for zonotopes).
+Every d-zonotope with n zones has at least 2n simple vertices.
+More precisely, on every zone there are at least 2d simple vertices, and
+disjoint from any given zone there are at least 2(n −d) simple vertices.
+The proof for Shannon’s theorem for arrangements is not diﬃcult: we
+refer to Roudneﬀ& Sturmfels [467], where several diﬀerent proofs are pre-
+sented, and to [96, Thm. 2.1.5]. The interesting thing is that there is no
+“entirely combinatorial” proof. In fact, the corresponding statement for
+oriented matroids is false. As we will see below, this translates into very
+interesting eﬀects for “zonotopal tilings.”
+7.4
+Nonrealizable Oriented Matroids
+We have by now seen so many oriented matroids around that you shouldn’t
+be scared any more if you hit their axiomatic deﬁnition a few lines down.
+In fact, the axioms below just describe abstractly the “most important”
+properties shared by the sign vector systems of — equivalently —
+• hyperplane arrangements
+• zonotopes
+• vector conﬁgurations
+• aﬃne point conﬁgurations (vertices of polytopes!).
+We have seen that in each of these cases we get a sign vector system of the
+form V∗= SIGN(U), for a linear subspace U ⊆Rn.
+For the following, choose V∗to arise from any one of the above models:
+perhaps it is best to take A = {H1, . . . , Hn} to be an oriented, essential
+arrangement of hyperplanes, and let V∗be the set of sign vectors of all its
+cones. (For example, take the one sketched in the proof of Theorem 7.16.)
+We need the following operations on sign vectors. The zero vector 0 and
+the negative −u of a sign vector u have their obvious meanings. The support
+
+7.4 Nonrealizable Oriented Matroids
+209
+of a sign vector u is supp(u) := {i : ui̸ = 0}. The composition of two vectors
+u, v is deﬁned componentwise by
+(u ◦v)i :=
+
+ui
+if ui̸ = 0,
+vi
+otherwise.
+The separation set for u, v is deﬁned by
+S(u, v) := {i : ui = −vi̸ = 0}.
+Finally, if j ∈S(u, v), we say that w eliminates j between u and v if
+wj = 0 and wi = (u ◦v)i for all i /∈S(u, v).
+This may look like a lot of deﬁnitions, but they all have very concrete
+meanings for (sets) of sign vectors, and a concrete geometric interpretation,
+as follows.
+Deﬁnition 7.21 (Oriented matroids).
+A collection V∗⊆{+, −, 0}n is the set of covectors of an oriented matroid
+if it satisﬁes the following covector axioms:
+(V0) 0 ∈V∗
+(“The zero covector is always a covector”)
+(V1) u ∈V∗=⇒−u ∈V∗
+(“The negative of a covector is always a covector”)
+(V2) u, v ∈V∗=⇒u ◦v ∈V∗
+(“The set of covectors is closed under composition”)
+(V3) u, v ∈V∗, j ∈S(u, v) =⇒∃w ∈V∗: w eliminates j between u and v
+(“The set of covectors admits elimination”)
+The rank of the oriented matroid V∗is the largest number r such that V∗
+contains a chain of covectors of length r:
+0 < X1 < X2 < · · · < Xr
+with Xi ∈V∗.
+In this case, we write r(V∗) = r for the rank of V∗.
+Proposition 7.22.
+Consider a linear subspace U ⊆Rn of dimension r.
+Then the set of column sign vectors
+SIGN(U) = {sign(u) : u ∈U} ⊆{+, −, 0}n
+is the covector set of an oriented matroid of rank r.
+(This proves that the realizable oriented matroids M(V ), as given by
+Deﬁnition 6.5, are indeed oriented matroids of rank r in the sense of Deﬁ-
+nition 7.21, if we use U := Val(V ) to derive the covector system V∗.)
+
+210
+7. Fans, Arrangements, Zonotopes, and Tilings
+Proof. This is easy, but important, because it provides the “geometric
+meaning” of the axioms and of the operations on sign vectors.
+The hyperplanes {xi = 0} induce an essential hyperplane arrangement
+in U, via Hi := {x ∈U : xi = 0}. For these hyperplanes within U,
+positive sides are uniquely determined via H+
+i = {x ∈U : xi ≥0}. With
+this construction, we see that (V∗, ≤) is the face poset of the essential,
+oriented hyperplane arrangement H = {H1, . . . , Hn} in U. Thus this poset
+has length r.
+For axiom (V0), we note that 0 ∈U has the sign 0 = sign(0) ∈SIGN(U).
+For (V1), take u = sign(u) for some u ∈U. From u ∈U =⇒−u ∈U we
+get −u = −sign(u) = sign(−u) ∈SIGN(U).
+The idea for the composition operation in (V2) is that if u, v ∈U, then
+for any ε ∈R we have u + εv ∈U.
+u
+v
+u + εv
+Now, for any u, v ∈Rn, if ε > 0 is small enough, then we get sign(u) ◦
+sign(v) = sign(u + εv) — this is easy to see by looking at the sign vectors
+componentwise. From this we obtain sign(u) ◦sign(v) ∈SIGN(U).
+For elimination as in (V3), we use that with u, v ∈U, general linear
+combinations of u and v are contained in U, in particular the combination
+w := ujv −vju. Now if uj > 0 and vj < 0, then this is a positive linear
+combination of the two vectors u and v.
+u
+v
+w = ujv −vju
+Hj
+Considering the individual components of the sign vectors, we see that the
+jth coordinate of w is zero. Similarly, if the ith coordinates of u and v
+don’t have opposite sign, then the ith coordinate of any positive linear
+combination has the sign sign(wi) = (u ◦v)i, as required.
+
+7.4 Nonrealizable Oriented Matroids
+211
+The axioms of Deﬁnition 7.21 provide an entirely combinatorial model
+for the geometry of hyperplane arrangements, vector conﬁgurations, point
+conﬁgurations, or zonotopes. There are two (closely related) questions that
+we will not avoid here:
+• How good is this model — how closely do the combinatorics of ori-
+ented matroids represent a situation of an actual geometric object in
+real space?
+• What is this model good for?
+In the following, we try to answer both questions.
+Remark 7.23: “How good is the oriented matroid model?”
+• The model is excellent. All the basic structural properties that we
+have proved in the realizable case in Section 6.3 extend to the case
+of general oriented matroids. In particular, we have
+• duality (as in Deﬁnition 6.10)
+• equivalence of various types of data (as in Corollary 6.9)
+• deletion and contraction as basic operations (as in Proposi-
+tion 6.11).
+• The topological representation theorem of Lawrence [207] [96, Ch. 5]
+shows that every oriented matroid is “nearly” realizable: it may not
+correspond to a real hyperplane arrangement, but it does correspond
+to an arrangement of pseudohyperplanes, which need not be straight
+but may be topologically deformed in some mild way.
+The rest of this section will sketch this in the case of r = 3, which
+corresponds to “arrangements of pseudolines” in the plane, as inves-
+tigated by Gr¨unbaum [255]; see also [96, Ch. 6].
+• For certain ranges of parameters, in particular for r ≤2, for r ≥n−2,
+and for n ≤7, every oriented matroid is realizable, so the model is
+perfect.
+• Even the nonrealizable oriented matroids come up “in practice.” We
+will present one example for this in the next section, where nonreal-
+izable oriented matroids appear in the study of zonotopal tilings.
+Remark 7.24: “What are oriented matroids good for?”
+• Oriented matroids explain constructions like Gale diagrams and the
+Lawrence construction (Lecture 6), which are clearly useful and have
+various applications.
+
+212
+7. Fans, Arrangements, Zonotopes, and Tilings
+• Oriented matroids provide a unifying framework, consistent termi-
+nology, and widely applicable tools for several areas of geometry.
+• Within the last twenty years, an extensive theory for oriented ma-
+troids was developed, with many nontrivial results. Results about
+oriented matroids are easily transported from one ﬁeld of applications
+(e.g., hyperplane arrangements) to another one (like polytopes). For
+the existing body of theory, we refer to the book by Bj¨orner et al. [96],
+and the handbook chapter by Bokowski [112].
+• The theory of oriented matroids allows us to handle, in a precise
+sense, the combinatorics of objects that are geometric (like certain
+simplicial spheres) but that cannot be represented in real “Euclidean
+space” (or at least not as polytopes).
+• Thus, oriented matroids appear as a natural intermediate step in the
+classiﬁcation of (simplicial) spheres into polytopes and nonpolytopes:
+this approach was pioneered by Bokowski; see [20] [16] [117] and the
+monograph by Bokowski & Sturmfels [118].
+We will now start to discuss one topic where nonrealizable oriented ma-
+troids come up — the study of pseudoline arrangements. To make the
+connection, consider an arrangement A of n hyperplanes in Rd (all hyper-
+planes through the origin!). To draw and represent this, we consider the
+intersection with an aﬃne hyperplane: a hyperplane not through the origin,
+but parallel to one of the hyperplanes in the arrangement. Thus we get an
+aﬃne hyperplane arrangement Aaﬀ, consisting of n −1 aﬃne hyperplanes.
+(Thus, an aﬃne hyperplane need not contain the origin 0, but if we talk
+only about a hyperplane, then we mean a linear hyperplane, which contains
+the origin.)
+The entire geometric combinatorial structure of the hyperplane arrange-
+ment A can easily be reconstructed from its “aﬃne picture” Aaﬀ, up to
+linear isomorphism, so nothing is lost by this reduction to aﬃne space. In
+particular, one can read oﬀthe oriented matroid of A from the arrangement
+Aaﬀ, assuming that the hyperplanes in Aaﬀare labeled and that positive
+sides are determined.
+So in our drawing, for the case d = 3, we obtain an aﬃne arrangement Aaﬀ
+of n−1 = 4 lines in the aﬃne (dotted) plane, from an original arrangement
+
+7.4 Nonrealizable Oriented Matroids
+213
+of 5 hyperplanes, namely the horizontal one, and the 4 planes determined
+as the aﬃne hull of the 4 lines together with the origin.
+This is how — in the case d = 3 — aﬃne arrangements of lines in R2
+represent 3-dimensional (hyper)plane arrangements. Every arrangement of
+lines in the plane determines an oriented matroid of rank 3.
+However, it turns out that if we have an arrangement of “nonstraight”
+lines in the plane, then we can also, in the same way, read oﬀan oriented
+matroid of rank 3. There are various — quite general — ways to deﬁne such
+“nonstraight” lines. Basically, any type of two-way unbounded topological
+curves will do. See Gr¨unbaum [255] or [96, Ch. 6] for general versions. Here,
+for simplicity, we will use a simpler version, with the same combinatorial
+results.
+Deﬁnition 7.25.
+A pseudoline is a polygonal curve without self-intersec-
+tions, with ﬁnitely many break points in R2, and whose ends “head oﬀto
+inﬁnity” in opposite directions.
+An arrangement of pseudolines is a ﬁnite set of pseudolines in the plane
+such that
+(i) any two pseudolines either are disjoint (then we call them parallel), or
+they meet in a single point and cross in this point, and
+(ii) being parallel is transitive (that is, if a pseudoline intersects one pseu-
+doline of a parallel pair, then it also has to intersect the other one).
+ℓ1
+ℓ2
+ℓ3
+ℓ4
+ℓ5
+Now let P be an arrangement of n −1 pseudolines, which have been
+labeled ℓ1, . . . , ℓn−1, and where a positive side has been chosen for each of
+them. For every X ∈{+, −, 0}n−1, let F X be the set of all those points
+x ∈R2 which lie on the positive side of ℓi if XF
+i = +, on the negative side
+of ℓi if XF
+i = −, and on the pseudoline ℓi if XF
+i = 0. This set F X may be
+empty: if not, it is called the face of P associated with X.
+
+214
+7. Fans, Arrangements, Zonotopes, and Tilings
+For example, in our next drawing small arrows are used to indicate the
+positive side for each pseudoline. The shaded region (without its bound-
+ary) is the face associated with X = (−++−−), the bold edge (without
+endpoints) is the face associated with (−0+−−), whereas (−+0−−) does
+not correspond to a face.
+ℓ1
+ℓ2
+ℓ3
+ℓ4
+ℓ5
+Similarly, we assign labels to the faces at inﬁnity: namely, we get a “face at
+inﬁnity” for every unbounded face in P, where we have to take into account
+that “parallel lines meet at inﬁnity.” Thus, in the following drawing, the
+two bold edges F1, F2 and the shaded unbounded face F, with XF1 =
+(−−0−−), XF2 = (−−+0−), and XF = (−−+−−), all determine the
+same face GY at inﬁnity, with Y = (−−00−).
+ℓ1
+ℓ2
+ℓ3
+ℓ4
+ℓ5
+F1
+F2
+F
+Theorem 7.26.
+Let P = {ℓ1, . . . , ℓn−1} be a labeled arrangement of
+pseudolines, for which positive sides have been chosen. Then the family of
+sign vectors
+V∗(P)
+:=
+{ (XF , +) : F is a face of P}
+∪
+{ (Y G, 0 ) : G is a face at inﬁnity for P} ∪{(0, 0)}
+∪
+{(−XF, −) : F is a face of P}
+⊆{+, −, 0}n
+is an oriented matroid of rank 3.
+
+7.4 Nonrealizable Oriented Matroids
+215
+Proof. From an arrangement P of n −1 pseudolines, the previous proce-
+dure reconstructs a linear arrangement of n “pseudoplanes” through the
+origin in R3, where the nth pseudoplane is a straight plane, corresponding
+to the line at inﬁnity in P.
+The following drawing shows two pseudoplanes of the resulting arrangement
+in R3: the ﬂat one corresponds to the line at inﬁnity for P, and the nonﬂat
+one corresponds to a pseudoline in P.
+The oriented matroid V∗(P) ⊆{+, −, 0}n arises from this arrangement
+in the same way as in the case of a straight arrangement of planes in R3.
+Similarly, the proof that the system V∗(P) is an oriented matroid is anal-
+ogous to the realizable case in Proposition 7.22 — except that the “linear
+algebra arguments” of that proof have to be replaced by “combinatorial
+arguments” that remain valid in the nonlinear case.
+We leave the details to the reader, and refer to [96, Sect. 5.1], where the
+proof is nicely done in even greater generality.
+In fact, there is a surprisingly strong theorem available here: Lawrence’s
+topological representation theorem states that
+every linear arrangement of n pseudohyperplanes in Rd yields an
+oriented matroid V∗⊆{+, −, 0}n of rank d.
+Theorem 7.26 just presents the case d = 3 of this statement. (We do not
+intend to give a precise deﬁnition of arrangements of pseudohyperplanes
+here. Intuitively this should be clear; see [96, Ch. 5] for a careful expla-
+nation.) The topological representation theorem, however, also includes a
+converse:
+every oriented matroid on n elements of rank d can be represented
+by an arrangement of n linear pseudohyperplanes in Rd, which is
+essentially unique.
+
+216
+7. Fans, Arrangements, Zonotopes, and Tilings
+Thus we have a bijection
+oriented matroids
+←→
+(equivalence classes of) pseudoarrangements.
+The second half of the theorem, constructing a pseudoarrangement for a
+given oriented matroid, is by far the harder part to prove: it is not easy
+even in the special case of d = 3.
+Complete proofs of the topological representation theorem have been
+given by Folkman & Lawrence [207], by Edmonds & Mandel [191] (who ﬁrst
+proved the stronger piecewise linear version corresponding to our version
+of polygonal pseudolines), in Bachem & Kern [35], and in Bj¨orner et al.
+[96, Chs. 4 and 5].
+Deﬁnition 7.27.
+Two arrangements of pseudolines are combinatorially
+equivalent if — possibly after relabeling, and after change of the positive
+sides — they have the same oriented matroid.
+An arrangement of pseudolines P is realizable (or stretchable) if it is
+combinatorially equivalent to a (straight) arrangement of lines, that is, if
+the oriented matroid V∗(P) is realizable.
+Are pseudoline arrangements really more general than line arrangements?
+Or is every pseudoline arrangement stretchable? Well, nonrealizable pseu-
+doline arrangements do exist, and they are not even that hard to construct.
+The following construction of a nonrealizable pseudoline arrangement al-
+ready appeared in Levi’s 1926 paper [362], the ﬁrst paper on pseudoline
+arrangements ever written (as far as I know).
+Example 7.28.
+(Levi [362]) Consider the following arrangement of 8 lines
+in the plane, the well-known Pappus conﬁguration.
+Pappus’ theorem states that the three black dots are collinear in every line
+arrangement that is combinatorially equivalent to this arrangement. This
+implies that there is no straight representation of the following pseudoline
+
+7.5 Zonotopal Tilings
+217
+arrangement, the non-Pappus conﬁguration.
+However, this pseudoline arrangement does give an oriented matroid via
+Theorem 7.26 (uniquely, if we number the pseudolines and specify a positive
+side for each of them), the non-Pappus oriented matroid MnP . This is an
+oriented matroid of rank 3 on 10 elements. However, if we delete the element
+that corresponds to the line at inﬁnity, then we get an oriented matroid
+M′
+nP on 9 elements which is nonrealizable as well, since the line at inﬁnity
+was not needed for the nonrealizability argument.
+There are even nonrealizable pseudoline arrangements that are simple (no
+three pseudolines cross in a point or are parallel) — see Ringel [463] [255,
+p. 42] and Exercise 7.16 for an example with only 9 pseudolines in the
+plane. In fact, all (simple or nonsimple) arrangements of pseudolines with
+at most 8 pseudolines are realizable (for this count the line at inﬁnity, if
+it is there), and Ringel’s example is essentially the unique simple one with
+9 pseudolines, according to Richter [455].
+7.5
+Zonotopal Tilings
+What do you “see” if you “look at” a d-dimensional zonotope? You see its
+“front facets,” which are (d −1)-dimensional facets and which ﬁll a shape
+that is a projection of a zonotope, and thus is a zonotope itself.
+If d = 3 (where this is most likely to happen to you anyway), and you
+look from a point very far away, the picture might look like the drawing on
+the next page. Here the shape you see is a 10-gon, ﬁlled “face to face” by
+quadrilaterals and hexagons.
+In general, the shape you see is a (parallel) projection of a zonotope,
+which is a zonotope itself. It is covered by the images of the front facets of
+the zonotope, which are also zonotopes.

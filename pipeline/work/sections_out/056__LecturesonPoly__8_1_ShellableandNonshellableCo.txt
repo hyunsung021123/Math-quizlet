@@ -1,0 +1,385 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 8. Shellability and the Upper Bound Theorem
+현재 소단원: 8.1 Shellable and Nonshellable Complexes
+직전 소단원: 「7.ex Problems and Exercises」
+[본문]
+8
+Shellability and
+the Upper Bound Theorem
+Perhaps the most famous result about convex polytopes is the Euler-
+Poincar´e formula:
+−f−1 + f0 −f1 + f2 + · · · + (−1)d−1fd−1 + (−1)dfd = 0,
+where fi denotes the number of i-dimensional faces of a d-polytope P. Here
+f−1 = 1 and fd = 1 correspond to the trivial faces (the empty face and
+the polytope itself), and f0, f1, fd−2, and fd−1 are the numbers of vertices,
+edges, ridges, and facets, respectively. So for 2-polytopes we obtain that
+f0 −f1 = 0, the number of vertices equals the number of edges (not much
+of a surprise). For 3-polytopes we get “Euler’s formula”
+v −e + f = 2
+for a 3-polytope with v = f0 vertices, e = f1 edges, and f = f2 facets.
+For d ≤3 the Euler-Poincar´e formula is easy to prove, but for higher
+dimensions care is needed. As Gr¨unbaum [252] observed, all the classical
+inductive proofs (starting with Schl¨aﬂi’s [473] proof from 1852; see also
+Sommerville [506, p. 147], Schoute [480, p. 61], and the references in [252,
+p. 141]) assume that the boundary of every polytope can be built up induc-
+tively in a nice way, that is, it can be “shelled.” That this is in fact possible
+was only proved by Bruggesser & Mani in 1970. A striking application of
+shellability was McMullen’s proof of the “upper bound theorem” in the
+same year, 1970.
+In this lecture we have several big goals. We start with shellability for
+polyhedral complexes, a concept that is both useful and nontrivial. We will
+show that
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_9, © Springer Science+Business Media New York 2007 
+ 
+231
+
+232
+8. Shellability and the Upper Bound Theorem
+• polytopes are shellable,
+• subdivisions of polytopes are not shellable in general, and
+• while shelling polytopes, one can get stuck (that’s a new result).
+Then, we’ll present McMullen’s proof for the upper bound theorem, give
+a glimpse of extremal set theory, and end with the famous g-theorem, and
+derive some of its surprising consequences. So, there’s a lot to do: let’s get
+going.
+. . . wait, here is one more remark. This lecture has a distinctive “topo-
+logical” ﬂavor. In fact, already the ﬁrst correct and complete proof of the
+Euler-Poincar´e formula, by Poincar´e [444, 445], was done using tools of al-
+gebraic topology that Poincar´e had developed himself. Here we will avoid
+most topological subtleties, for example by restricting our attention to poly-
+hedral subdivisions of polytopes and their boundaries, instead of subdivided
+topological balls and spheres. Thus, for this lecture no knowledge is needed
+of the wonderful subtleties of piecewise linear topology, nor of the powerful
+machinery of algebraic topology. Nevertheless, it is helpful and desirable,
+and good for your intuition, if you take, at least, an excursion into these
+worlds. I recommend Stillwell [528], Munkres [418], Daverman [179], and
+Bj¨orner [89] as guides to diﬀerent points of view.
+8.1
+Shellable and Nonshellable Complexes
+A polytopal complex (see Deﬁnition 5.1) is a ﬁnite, nonempty collection C
+of polytopes (called the faces of C) in Rd that contains all the faces of its
+polytopes, and such that the intersection of two of its polytopes is a face
+of each of them.
+The dimension dim(C) of a polytopal complex is the largest dimension of
+a polytope in C. A polytopal complex is pure if each of its faces is contained
+in a face of dimension dim(C), that is, if all the inclusion-maximal faces of C,
+called the facets of C, have the same dimension. A complex is simplicial if
+all its faces (equivalently, all its facets) are simplices. The underlying set
+of C is the union of its faces, |C| := S
+F ∈C F.
+For example, a graph represents a polytopal complex if it is drawn in the
+plane or in R3 with straight lines that do not cross. It has dimension 1 if
+the graph has at least one edge, and then it is pure if the graph does not
+have an isolated vertex.
+In Lecture 5 we met ﬁve important classes of polytopal complexes:
+(i) Every polytope P together with all its faces forms the polytopal com-
+plex C(P). The only maximal face (“facet”) of this complex is P itself.
+(ii) All the proper faces of P form the boundary complex C(∂P), whose
+facets are just the facets of P. This is a pure polytopal complex of
+dimension dim(P) −1. This complex is simplicial if and only if the
+polytope is simplicial.
+
+8.1 Shellable and Nonshellable Complexes
+233
+(iii) Any Schlegel diagram of P with respect to a facet F (remember
+Lecture 5?) forms a pure polytopal complex D(P, F), and the facets
+of this complex correspond to the facets of P that are diﬀerent from F.
+(iv) Every d-diagram D is a polytopal complex.
+(v) The pile of cubes Pd(z1, . . . , zd), as deﬁned in Example 5.4, is a pure
+polytopal complex, with z1·z2· . . . ·zd facets.
+All of these complexes are pure. In the following picture gallery, the ﬁrst
+complex is pure 1-dimensional (a graph), the second one is not pure, and
+the third one is pure 2-dimensional.
+We now proceed to deﬁne shellability, in a version that is slightly more
+restrictive than the original one used by Bruggesser & Mani [139]. Several
+variations are discussed in Danaraj & Klee [171]. It turned out in the work
+of Bj¨orner & Wachs [98] [85] [96, Sect. 4.7] that the following one is the
+one that “works” in very general geometric and combinatorial contexts.
+Deﬁnition 8.1.
+Let C be a pure k-dimensional polytopal complex. A
+shelling of C is a linear ordering F1, F2, . . . , Fs of the facets of C such that
+either C is 0-dimensional (and thus the facets are points), or it satisﬁes the
+following conditions:
+(i) The boundary complex C(∂F1) of the ﬁrst facet F1 has a shelling.
+(ii) For 1 < j ≤s the intersection of the facet Fj with the union of the
+previous facets is nonempty and is a beginning segment of a shelling
+of the (k −1)-dimensional boundary complex of Fj, that is,
+Fj ∩(
+j−1
+[
+i=1
+Fi)
+=
+G1 ∪G2 ∪· · · ∪Gr
+for some shelling G1, G2, . . . , Gr, . . . , Gt of C(∂Fj), and 1 ≤r ≤t.
+(In particular, this requires that Fj ∩(Sj−1
+i=1 Fi) has a shelling, so it
+has to be pure (k−1)-dimensional, and connected for k > 1.)
+A polytopal complex is shellable if it is pure and has a shelling.
+Thus shellability is not deﬁned for complexes that are not pure, although
+it turned out in recent work by Bj¨orner & Wachs [99] that an extension of
+the concept to nonpure complexes is possible and useful.
+
+234
+8. Shellability and the Upper Bound Theorem
+Examples 8.2.
+(i) Every 0-dimensional complex is shellable, by deﬁnition. A 1-dimen-
+sional complex (a graph) is shellable if and only if it is connected. In
+particular, this means that it is pure (i.e., has no isolated vertices). A
+shelling order is an ordering of the edges e1, e2, . . . , es in such a way
+that the set {e1, . . . , ej} describes a connected subgraph for every j:
+this comes from the condition that the intersection of the edge ej
+with the earlier edges has to be 0-dimensional, and thus nonempty.
+(ii) The following are three 2-complexes in the plane R2.
+2
+3
+5
+1
+1
+2
+3
+4
+5
+4
+1
+2
+The ﬁrst two are not shellable, but the third one is. (Check this!) In
+each of them, there is a beginning of a shelling indicated, that is, the
+complex given by the numbered facets together with their faces is
+shellable. However, if you try to add the last facet in any of the ﬁrst
+two examples, you violate condition (ii) of Deﬁnition 8.1.
+(iii) Every simplex is shellable, and every ordering of its facets is a shelling
+order. This immediately follows by induction on the dimension, since
+the intersection of Fj with Fi (i < j) is always a facet of Fj in this
+case.
+(iv) The d-cubes are shellable: by induction on dimension one can show
+that every ordering of the 2d facets F1, F2, . . . , F2d such that the
+ﬁrst and the last facet are opposite, F1 = −F2d, is a shelling or-
+der. (The condition F1 = −F2d is suﬃcient, but not necessary, see
+Exercise 8.1(i)!)
+(v) The pile of cubes Pd(a1, . . . , ad), see Example 5.4, is shellable for
+arbitrary ﬁnite ai ≥1. For this, we use part (iv) to see that the
+lexicographic order on the little cubes in the pile is a shelling order.
+Remarks 8.3.
+(i)
+We will see in the next section that condition 8.1(i) is in fact redun-
+dant: the boundary complex C(∂F1) of every polytope is shellable.
+However, if one deﬁnes shellability more generally for cell complexes
+rather than polytopes, as in Bj¨orner [85], then this is necessary.
+(ii)
+For simplicial complexes condition 8.1(i) is redundant because of Ex-
+ample 8.2(iii). In this situation, condition 8.1(ii) can also be simpliﬁed
+considerably: it can be replaced by
+
+8.1 Shellable and Nonshellable Complexes
+235
+8.1(ii′) For 1 < j ≤s the intersection of the facet Fj with the previ-
+ous facets is nonempty and pure (k −1)-dimensional.
+In other words, for every i < j there exists some l < j such that
+the intersection Fi ∩Fj is contained in Fl ∩Fj, and such that
+Fl ∩Fj is a facet of Fj.
+(iii)
+One might be tempted to weaken condition 8.1(ii), and only require
+the following:
+8.1(ii′′) For 1 < j ≤s the intersection of the facet Fj with the
+previous facets
+Fj ∩(
+j−1
+[
+i=1
+Fi) = G1 ∪. . . ∪Gr
+is nonempty, pure (k −1)-dimensional, and shellable.
+This can be done. It yields the original deﬁnition by Bruggesser &
+Mani [139], which is weaker than Deﬁnition 8.2. Although the main
+conclusions of shellability one wants remain valid, this weaker version
+does not have the nice combinatorial characterization that is possible
+for the stronger version [98].
+We continue, with more examples.
+Examples 8.4.
+(i) Every polytopal subdivision of a 2-polytope is shellable — see Exer-
+cise 8.0.
+(ii) The boundary of every 3-polytope is shellable. This follows from (i):
+for this we ﬁrst shell a Schlegel diagram D(P, F) of P, which is a sub-
+division of a 2-polytope. This corresponds to a shelling of the whole
+boundary ∂P except for the facet F. The shelling can be completed
+by taking F as its last facet.
+Subdivisions of 2-polytopes and boundaries of 3-polytopes are easy to
+shell. One reason is that no matter how we start the shelling, we can’t get
+stuck. Let’s introduce some fancy terminology for this.
+Deﬁnition 8.5.
+(Danaraj & Klee [172, p. 37])
+A polyhedral complex is extendably shellable if every partial shelling can be
+continued, that is, if for every shellable subcomplex of the same dimension
+there is a shelling of the whole complex that shells the subcomplex ﬁrst.
+In this sense, we see from Examples 8.4 that subdivisions of 2-polytopes
+as well as the boundaries of 3-polytopes are extendably shellable. Similarly,
+one can show that the d-cubes are extendably shellable (Exercise 8.1(i)).
+
+236
+8. Shellability and the Upper Bound Theorem
+Lemma 8.6.
+The pile of cubes P3(9, 9, 4) is not extendably shellable.
+Proof. For this, consider the picture below. It depicts a subcomplex of
+the pile, broken into layers (so you can see what happens inside). The
+subcomplex is easily seen to be shellable (for example, ﬁrst shell the bottom
+layer, then the next layer and the walls, then add the central axis, then the
+top layer of the interior part, then the six remaining cubes).
+A diﬀerent way to draw this type of complex (more abstractly) shows
+the four layers, top to bottom, from left to right.
+If we try to add any new cube of the pile P3(9, 9, 4) to the subcomplex,
+then the intersection with what is already there is not pure 2-dimensional,
+or not connected, or both. Thus, this is a shellable part of P3(9, 9, 4), and
+we are stuck: so P3(9, 9, 4) is not extendably shellable.
+
+8.1 Shellable and Nonshellable Complexes
+237
+For a polyhedral complex C, deﬁne the star star(v, C) of the vertex v to
+be the polytopal subcomplex of all faces that contain v, and their faces.
+Let the link be the subcomplex link(v, C) of all faces G ∈star(v, C) of the
+star that do not have v as a vertex.
+link(v, C)
+star(v, C)
+v
+If C is pure of dimension d, then so is star(v, C), and link(v, C) is then pure
+of dimension d−1.
+The following lemma is a quite trivial, but important, piece of infor-
+mation about the “local structure” of shellable simplicial complexes. For
+nonsimplicial complexes, it becomes nontrivial (if it is true: Problem 8.4*).
+Lemma 8.7.
+Let C be a shellable simplicial complex, with shelling or-
+der F1, F2, . . . , Fs. Then the restriction of this order to star(v, C) yields a
+shelling order for the star, and also for link(v, C).
+Proof. We directly verify condition 8.1(ii′): let Fj be a facet in the star
+(so v ∈Fj), and let Fi be an earlier facet that also lies in the star (with
+i < j and v ∈Fi). Since we have a shelling of C, there is a facet Fl with
+l < j such that Fi ∩Fj ⊆Fl ∩Fj. But this implies that v ∈Fl, so Fl is in
+the star of v.
+The same proof also shows that we get a shelling of the link, since (in
+the simplicial case) we have a bijection between k-faces G ∈link(v, C) and
+(k+1)-faces bG = conv(G ∪v) ∈star(v, C).
+Theorem 8.8.
+(Rudin [468])
+The 3-simplex ∆3 can be triangulated in a nonshellable way.
+The ﬁrst nonshellable triangulation of a tetrahedron (with 14 vertices,
+41 facets, all vertices on the boundary) was constructed by Rudin [468]
+in 1958. Her construction is subtle and hard to visualize, and it seems to
+be the only one in the literature. So, instead of reproducing it, here is a
+diﬀerent construction that shows that the tetrahedron and the 3-cube have
+nonshellable triangulations.
+Example 8.9 (The Danzer cube).
+Let C3 be our standard cube in R3,
+and let V 12 be the set of 12 midpoints of the edges of C3, that is, the set
+of all points in R3 with one coordinate 0 and the others equal to ±1. The
+twelve points lie on the boundary of the cube C3, but also on the boundary
+
+238
+8. Shellability and the Upper Bound Theorem
+of the tetrahedron
+T3
+:=
+
+
+
+
+
+
+
+x ∈R3 :
++x + y + z ≤2
++x −y −z ≤2
+−x + y −z ≤2
+−x −y + z ≤2
+
+
+
+
+
+
+
+=
+conv
+
+
+
+
+
+−2
+−2
+−2
+
+,
+
+
+−2
++2
++2
+
+,
+
+
++2
+−2
++2
+
+,
+
+
++2
++2
+−2
+
+
+
+
+.
+Next we construct a set E12 of 12 edges between the points in V 12. For
+this, take one edge that connects the midpoints of two skew edges of the
+cube, as well as all the images of that edge under the 12 symmetries of the
+cube which correspond to orientation-preserving symmetries of the tetra-
+hedron T3.
+It turns out that the 12 edges we get (see the drawing) are grouped into
+four disjoint triangles. The key property is that every edge is surrounded
+by a triangle. By symmetry, it is in fact suﬃcient to verify this for one
+single edge e ∈E12.
+The next step is to construct a triangulation of the cube C3, respectively
+of the tetrahedron T3, which contains the edges in E12 as faces (not sub-
+divided!). While this can be done explicitly, here we resort to a powerful
+tool: Whitehead’s completion lemma [560, Thm. 5], according to which ev-
+ery partial triangulation of R3 can be completed. (In fact, the same is true
+in Rd, according to Bing [80, Lemma 6]. See Bing [82, Sect. I.2] for a text-
+book version.) Hence, we can take any triangulation of the boundary of C3,
+respectively T3, that uses the vertices in V 12, plus the twelve edges in E12,
+and complete this simplicial complex to a triangulation of C3, respectively
+T3. There will be additional interior vertices necessary for this.
+
+8.2 Shelling Polytopes
+239
+Now assume that the resulting simplicial complex C is shellable. We start
+with one tetrahedron F1, and then add new ones, F2, F3, . . .. At every step,
+except possibly the ﬁrst, not more than one new edge from the set E12 can
+be added, since the edges in one of the triangles cannot be in a common
+simplex, and if two skew edges were new, then this would contradict a
+characteristic property of shellings of simplicial complexes: there has to be
+a unique minimal new face at each step, which is nonempty after the ﬁrst
+step (see Exercise 8.2).
+Now let Fj+1 be the tetrahedron by which the last edge e from E12 is
+added. At this point of the shelling the complex Cj := C(F1, . . . , Fj) already
+contains the three edges e1, e2, e3 that surround e. In fact, the circle formed
+in Cj by C := e1 ∪e2 ∪e3 can be contracted within the complex Cj: this is
+a property of shellable complexes of dimension at least 2, which is easy to
+verify by induction (they are “simply connected”).
+v
+e
+Since the circle C surrounds the edge e, we have to “pass over” a vertex
+v ⊆e when we contract C in Cj. Also, the link of this vertex v in the
+complex Cj, link(v, Cj), is a 2-dimensional shellable complex, by Lemma 8.7.
+However, we can contract our circle C within |Cj| until it lies in link(v, Cj),
+but it cannot be contracted within the link, because then it would not pass
+over v. This shows that the link is not shellable: contradiction.
+8.2
+Shelling Polytopes
+The complex of a polytope C(P) is shellable if and only if the boundary
+complex C(∂P) is shellable. Thus, “shelling a polytope” means ﬁnding a
+shelling order for the facets of P. How do we do this? Is there an obvious

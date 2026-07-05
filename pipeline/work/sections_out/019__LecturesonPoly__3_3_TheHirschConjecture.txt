@@ -1,0 +1,525 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 3. Graphs of Polytopes
+현재 소단원: 3.3 The Hirsch Conjecture
+직전 소단원: 「3.2 Directing the Edges ("Linear Programming for Geometers")」
+[본문]
+3.3 The Hirsch Conjecture
+83
+3.3
+The Hirsch Conjecture
+The diameter of a graph G will be denoted by δ(G): the smallest number δ
+such that any two vertices in G can be connected by a path with at most
+δ edges.
+For n > d ≥2, let ∆(d, n) be the maximal diameter of the graph of
+an d-dimensional polytope P with at most n facets. Similarly, let ∆u(d, n)
+denote this maximal diameter in the unbounded case, for a d-dimensional
+pointed polyhedron P with at most n facets (n ≥d ≥2). For example,
+∆(2, n) = ⌊n
+2 ⌋,
+∆u(2, n) = n −2.
+Our sketch illustrates the extreme cases for d = 2 and n = 8.
+It is a long-standing problem to determine the behavior of the function
+∆(d, n). The value of ∆(d, n) is a lower bound for the number of iterations
+needed for the simplex algorithm with any pivot rule. Thus the question
+of whether ∆(d, n) grows polynomially in n and d is closely related to the
+question of whether there is any pivot rule for which the simplex algo-
+rithm is a strongly polynomial algorithm for linear programming; see [327,
+Sect. 3].
+A notorious, very speciﬁc, question connected with the graphs of poly-
+topes was ﬁrst posed by Warren M. Hirsch in 1957 (see Dantzig [174,
+pp. 160, 168]) and has become known as the Hirsch conjecture.
+Conjecture 3.8 (Hirsch conjecture).
+[174, p. 168]
+For n > d ≥2, let ∆(d, n) denote the largest possible diameter of the graph
+of a d-polytope with n facets. Then
+∆(d, n) ≤n −d.
+Is this plausible? Here are a few observations, most of them due to Klee
+& Walkup [331].
+
+84
+3. Graphs of Polytopes
+• The Hirsch conjecture is true for d ≤3 and all n (even in the mono-
+tone and unbounded versions discussed below, by Klee [321]), and for
+n −d ≤5, by Klee & Walkup [331].
+• For Conjecture 3.8 it is suﬃcient to consider simple polytopes (see
+Exercise 3.5), so assume that P is simple, whenever that is helpful.
+• If n < 2d, then any two vertices lie on a common facet. From this we
+get ∆(d, n) ≤∆(d −1, n −1); iterating this, we get
+∆(d, n) ≤∆(n −d, 2(n −d))
+for
+n < 2d.
+Similarly, we get ∆u(d, n) ≤∆u(n −d, 2(n −d)). In both cases these
+inequalities hold with equality [331]: this is quite obvious in the un-
+bounded case. Thus we restrict our attention to the case n ≥2d.
+• More surprisingly [331], the Hirsch conjecture for all dimensions would
+follow if one could prove it for n = 2d for all dimensions. The special
+case n = 2d has become known as the d-step conjecture.
+Consider two vertices that do not lie on a common facet. Since each
+of them lies on d facets, we see that the d-step conjecture concerns
+a very special geometric situation: after a change of coordinates we
+can assume that the ﬁrst vertex v is given by v = 0, where the facets
+it lies on are given by xi ≥0, which describes the positive orthant
+x ≥0. Then the other vertex u can be assumed to be u = 1, and its
+facets describe an aﬃne image of the positive orthant.
+v
+u
+In this situation there are d edges leaving from u, whose other end-
+points are on the hyperplanes {x : xi = 0}. The claim is that we can
+get from u to v in d steps.
+From the special case of the d-cube we get that ∆(d, 2d) ≥d. Thus the
+bound suggested by the d-step conjecture is certainly the best possi-
+ble, if it holds at all. Furthermore, Holt & Klee [280] and Fritzsche &
+Holt [210] have shown that
+∆(d, n)
+≥
+n −d
+for n > d ≥8,
+that is, the Hirsch conjecture is also best possible for all n, if the
+dimension is high enough.
+
+3.3 The Hirsch Conjecture
+85
+• If you look for counterexamples, a natural guess would be to con-
+sider the polars of cyclic polytopes Cd(n)∆, or more generally the
+polars of neighborly polytopes — since they have the largest num-
+bers of vertices for given n and d (according to the upper bound
+theorem; see Section 8.4). However, Klee [325] has shown that the
+polars of cyclic polytopes satisfy the Hirsch conjecture. Beyond that,
+Kalai [304] could prove that if P is the polar neighborly d-polytope
+with n facets, then one has at least a polynomial diameter bound
+δ(G) ≤d2(n −d)2 log(n).
+• The nonrevisiting path conjecture, due to Victor Klee and Philip
+Wolfe, states the following: for any two vertices u, v of a (simple)
+polytope, there is a path from u to v that does not revisit any facet
+it has left before.
+To illustrate this conjecture, the following drawing shows the graph of
+a simple 3-polytope with nine facets (due to Barnette [40]) in which
+for two vertices u and v the unique shortest path (of length 3) makes
+a revisit:
+u
+v
+However, there is a nonrevisiting path: just follow the boundary of
+the ﬁgure.
+It is easy to see that the nonrevisiting path conjecture implies the
+Hirsch conjecture. In fact, the starting vertex of a nonrevisiting path
+lies on at least d facets, and with every vertex the path reaches at
+least one new facet it hasn’t visited before. Thus the length of a
+nonrevisiting path cannot be more than n −d.
+The nonrevisiting path conjecture may seem much stronger than the
+Hirsch conjecture. However, Klee & Walkup [331] proved that the two
+conjectures are in fact equivalent.
+• The convexity assumption is essential: the Hirsch conjecture is false
+for some topological cell complexes that are combinatorial spheres,
+as Mani & Walkup [377] demonstrated. It is also false for simplicial
+2-manifolds, see Barnette [49].
+
+86
+3. Graphs of Polytopes
+• Klee & Walkup [331] showed that the Hirsch conjecture is also false
+for unbounded polyhedra — although Hirsch’s original conjecture
+was asked for unbounded polyhedra. They proved that for n ≥2d,
+∆u(d, n) ≥n −d + ⌊d/5⌋. This is the best lower bound known for
+∆u(d, n).
+Even stronger, the monotone Hirsch conjecture is false, as Todd [544]
+demonstrated: it is not true that if cx is a linear function on P and v is a
+vertex, then there is a monotone path with at most n −d edges from v to
+a vertex vmax of P that maximizes cx.
+In fact, consider any d-polyhedron P ⊆Rd with at most n facets, and
+let cx be a linear function. To avoid complications, we will assume for the
+following that the linear function cx is in general position with respect
+to P, that cx is bounded on P, and that the polyhedron is pointed (i.e.,
+it has a vertex, and its lineality space is lineal(P) = {0}). From these
+assumptions we get that there is a vertex u of P on which cx achieves its
+unique maximum.
+Now deﬁne Hu(d, n) to be the smallest number such that in the situation
+above, for every vertex v of P, there is a (strictly) monotone path of length
+at most Hu(d, n) from v to the top, that is, a path from v to u along which
+cx increases in every single step. Similarly, let H(d, n) be the same number
+under the additional assumption that P is a polytope.
+The monotone (bounded) Hirsch conjecture would require that
+Hu(d, n) ≤n −d,
+respectively
+H(d, n) ≤n −d.
+Disproving that, Todd [544] showed that
+n −d + min{
+d
+4
+
+,
+n −d
+4
+
+}
+≤
+H(d, n) ≤Hu(d, n).
+In particular, there is a 4-polytope with n = 8 facets for which every mono-
+tone path to the top needs at least ﬁve steps. However, in Todd’s example
+there is a two-step nonmonotone path, which ﬁrst goes to the bottom, and
+then directly to the top! This motivates the following, more restrictive,
+version of the monotone Hirsch conjecture, which might as well be true
+and which would imply the Hirsch conjecture (via a simple argument using
+projective transformations; see Exercise 2.17).
+Conjecture 3.9 (Strict monotone Hirsch conjecture).
+Let P be a d-dimensional polytope with n facets, and let cx be a linear
+function that is in general position with respect to P.
+Then there is a strictly increasing path with respect to cx, from the
+(unique) vertex vmin that minimizes cx, to the (unique) vertex vmax that
+maximizes cx, of length at most n −d.
+
+3.3 The Hirsch Conjecture
+87
+vmin
+vmax
+cx
+To illustrate this for a trivial case, observe that for an n-gon the length
+of a shortest monotone path “to the top” can be n −2 = ∆u(2, n), but if
+we start “from the bottom,” then we need at most ⌊n
+2 ⌋= ∆(2, n) steps.
+What about upper bounds on ∆(d, n) and ∆u(d, n)?
+In 1967 Barnette [40, 252] proved that ∆u(d, n) ≤n3d−3. An improved
+bound, ∆u(d, n) ≤n2d−3, was proved in 1970 by Larman [349]. Barnette’s
+and Larman’s bounds are linear in n but exponential in the dimension d.
+After that, nothing happened for a long time. In short, we might summarize
+the history by saying that the experts thought that the conjecture was
+plausible until they tried to prove it and couldn’t; therefore now they think
+it is false, and can’t prove that. However, in the long run Kalai might prove
+to be right, when he writes about “the author’s guess (which is as good as
+the reader’s)” [305]. The existence of a polynomial (or even linear) bound
+for ∆(d, n) is still a major open problem. . .
+However, recently Gil Kalai achieved a substantial breakthrough: in a
+sequence of papers (each simpler and more striking than the preceding
+one) he established the ﬁrst subexponential bounds for the diameter of a
+polytope. In November 1990 he proved Hu(d, n) ≤n2√n [305, Sect. 3].
+In March 1991 he derived a “pseudopolynomial” bound for the diameter
+problem [305]:
+∆u(d, n) < n2 log2(d)+3.
+A substantial simpliﬁcation, which also strengthened the result slightly to
+∆u(d, n) < nlog2(d)+2, was subsequently found by Kalai & Kleitman [309].
+The proof we give here is (essentially) the modiﬁcation of this proof given
+by Kalai in [306, Sect. 2]. It is equally (surprisingly!) simple but establishes
+a stronger result: the existence of a “pseudopolynomial” monotone path to
+the top.
+Theorem 3.10.
+(Kalai [306, Sect. 2])
+Let P ⊆Rd be a d-dimensional polyhedron with at most n facets, and let
+cx be a generic linear function which achieves its maximum on P in the
+vertex w.
+
+88
+3. Graphs of Polytopes
+Then from any starting vertex v ∈vert(P), there is a monotone path to
+the top vertex w, whose length is bounded by
+Hu(d, n) ≤
+2n
+d + ⌊log2 n⌋−1
+d −1
+
+≤2 nlog2(d)+1 = 2 (2d)log2(n).
+Proof. The key to this is the notion of an active facet: given any vertex v
+of a polyhedron P, and a linear function cx, a facet of P is active (for v)
+if it contains a point that is higher than v (that is, either the facet is
+unbounded with respect to cx, or it has a top vertex w with cv < cw).
+For this proof, we also admit problems for which cx is not bounded
+on P, and where the last step “to the top” takes a ray (unbounded 1-
+face) on which cx has no upper bound. (You may think of the top as an
+extra vertex u∞in this case, which is adjoined to the directed graph of the
+problem.)
+Let ¯H(d, n) be the number of steps that may be required to get to the top
+vertex on a monotone path if we start from a vertex v for which the poly-
+hedron has at most n active facets (and an arbitrary number of nonactive
+ones!).
+Since Hu(d, n) is monotone in n we immediately get
+∆(d, n)
+≤
+∆u(d, n)
+≤
+Hu(d, n)
+≤
+¯H(d, n).
+Thus it suﬃces to prove the bounds of the theorem for ¯H(d, n). In the
+following we require d ≥2 and n ≥0. In the “boundary cases” we get
+¯H(2, n)
+=
+n
+(all the edges on a monotone path to the top are active facets, and this
+may be all of them if the problem is not bounded), and
+¯H(d, 0) =
+¯H(d, 1)
+=
+. . .
+=
+¯H(d, d −2)
+=
+0,
+(if v is not the top vertex, then it has an increasing edge, which lies on
+d −1 active facets).
+To get a recursion for ¯H(d, n), we verify a sequence of four simple facts:
+1. Given any set F of k active facets of P, we can reach from v either the
+top vertex, or a vertex in some facet of F, in at most ¯H(d, n−k) monotone
+steps.
+Let “Ax ≤z” be a minimal system that deﬁnes P (having one inequality
+for each facet of P), and let P ′ := P(A′, z′) be the polyhedron obtained
+by deleting the inactive constraints that don’t contain v as well as all the
+inequalities that correspond to facets in F. Then v is a vertex of P ′ (unless
+v lies on a facet in F, in which case we have nothing to prove), and it has
+at most n −k active facets in P ′.
+
+3.3 The Hirsch Conjecture
+89
+Now consider a shortest monotone path from v to the top in P ′. This
+path makes at most ¯H(d, n −k) steps, by deﬁnition. If it touches a facet
+in F after at most ¯H(d, n −k) steps on P, then we are done. If it doesn’t,
+then the top vertex of P ′ is also the top vertex of P, and the path to it in
+P ′ also yields a path to the top vertex on P, of length at most ¯H(d, n −k).
+2. If we cannot reach the top in ¯H(d, n−k) monotone steps, then the collec-
+tion G of all active facets that we can reach from v by at most ¯H(d, n −k)
+monotone steps contains at least n −k + 1 active facets.
+If there are k facets that cannot be reached, we can delete these facets
+together with all the inactive facets, and get a problem where we can reach
+the top in at most ¯H(d, n −k) steps; however, the path in this reduced
+problem corresponds to the same path in the original problem, leading to
+the same top vertex: Contradiction.
+3. Starting at v, we can reach the highest vertex w0 contained in any facet
+F ∈G within at most ¯H(d, n −k) + ¯H(d −1, n −1) monotone steps.
+We need at most ¯H(d, n −k) steps to reach any facet of G; this facet (of
+dimension d −1) has at most n −1 facets, thus in it we can ﬁnd a path to
+its top of length at most ¯H(d −1, n −1).
+4. From w0 we can reach the top in at most ¯H(d, k −1) steps.
+This is because none of the facets in G is active for w0, and thus w0 has
+at most n −(n −k + 1) = k −1 active facets.
+Putting the monotone paths together, we get a bound
+¯H(d, n)
+≤
+¯H(d, n −k) + ¯H(d −1, n −1) + ¯H(d, k −1)
+for the shortest monotone path from v to the top.
+Now we choose k :=
+ n
+2
+
+. Using the fact that by deﬁnition ¯H(d, n) is a
+(weakly) increasing function in n, we get
+¯H(d, n)
+≤
+¯H(d −1, n −1) + 2 ¯H(d,
+jn
+2
+k
+).
+This recursion reminds us of the recursion for binomial coeﬃcients — and
+we make a substitution to transform it into that. For this, we deﬁne
+f(d, t) := 2−t ¯H(d, 2t)
+for t ≥0 and d ≥2,
+and with this substitution the recursion simpliﬁes to “what we want”:
+f(d, t)
+≤
+f(d −1, t) + f(d, t −1).
+From the boundary conditions f(2, t) = 2−t ¯H(2, 2t) = 2−t2t = 1 =
+ t−1
+0
+
+for t ≥1 and f(d, 0) = ¯H(d, 1) = 0 =
+ d−3
+d−2
+
+for d ≥3, we obtain
+f(d, t)
+≤
+d + t −3
+d −2
+
+
+90
+3. Graphs of Polytopes
+for (d, t)̸ = (2, 0), by induction on t ≥0 and d ≥2. From this we derive
+Hu(d, n)
+≤
+¯H(d, n)
+≤
+¯H(d, 21+⌊log2 n⌋)
+=
+21+⌊log2 n⌋f(d, 1 + ⌊log2 n⌋)
+≤
+2n
+d + ⌊log2 n⌋−2
+d −2
+
+≤
+2n (d −1)log2(n)
+=
+2 n1+log2(d−1),
+for n, d ≥2, using the inequality
+ a+b
+a
+
+≤(a + 1)b, which follows by induc-
+tion over a ≥0 and b ≥0.
+(In fact, there are various ways to derive bounds on ¯H(d, n) from the
+recursion. This is a standard type of gymnastics for which you should get
+training at your “analysis of algorithms” class. Here is another way to pro-
+ceed, which obtains the original Kalai-Kleitman bound. We use the starting
+values ¯H(2, n) = n and ¯H(d, 0) = 0. Since ¯H(d, n) grows monotonically
+in n, we get a simple recursion
+¯H(d, n) ≤
+¯H(d −1, n) + 2 ¯H(d, ⌊n
+2 ⌋)
+for n > 0 and d ≥3. This we can iterate, to get
+¯H(d, n)
+≤
+¯H(2, n) + 2
+d
+X
+i=3
+¯H(i, ⌊n
+2 ⌋)
+≤
+n + 2(d −2) · (2d)log(n/2)
+≤
+2d · (2d)log(n)−1
+=
+(2d)log(n) ,
+using n < 4log2 n ≤4 (2d)log2 n−1.)
+It would be tricky and probably unnatural to formulate this proof in
+such a way that it stays within the family of polytopes: even if P is a
+polytope, the polyhedron P ′ will not, in general, be bounded. This is why
+this theorem and proof were done in the generality of polyhedra.
+Also the proof does not stay within the class of polyhedra P with only
+2 dim(P) facets, as considered by the d-step conjecture (see Exercise 3.7).
+However, we can specialize the result to ﬁt this situation, and get ∆(d, 2d) ≤
+(2d)log2 d+1. In fact, in the special case of n = 2d one can modify/sharpen
+the computation of upper bounds to get
+∆(d, 2d) ≤dlog9 d+2,
+according to Kalai [306]. Still, this is far away from the conjectured bound
+of ∆(d, 2d) = d.
+What’s the problem? Why can’t we do much better? There is some ev-
+idence in Matouˇsek’s work [381] that the above analysis is essentially the
+
+3.3 The Hirsch Conjecture
+91
+best possible, that is, any proof for a substantially better upper bound has
+to use more of the speciﬁc geometry of the problem. Not much of the geom-
+etry was used in the preceding proof. (In fact, Kalai [305] describes a very
+general abstract framework, of a “simplicial complex with a ﬁxed shelling
+order” (see Lecture 8), in which such upper bounds can be proved.)
+Finally, let us mention that the diameter bounds can indeed (not quite
+directly) be used to construct algorithms for linear programming. In his
+research, Kalai [306, Sect. 3] found randomized pivot rules for linear pro-
+gramming that roughly require an expected number of n4
+√
+d arithmetic
+operations for every linear programming problem of dimension d with n
+facets. See Exercise 3.9(ii) for a simple sketch, and [308] for the latest ver-
+sion.
+Very similar results were reached independently and nearly simultane-
+ously (on a completely diﬀerent path) by Matouˇsek, Sharir & Welzl [383],
+in the setting of a “dual simplex method.”
+For 0/1-polytopes (Example 0.11), the Hirsch conjecture is quite trivial
+— however, it took quite a time until Naddef [419] realized this. A more
+general result that also bounds the diameter of integral polytopes was given
+by Kleinschmidt & Onn [336]. We will give a slightly sharpened form of
+Naddef’s theorem. (To get the Hirsch conjecture for 0/1-polytopes from it,
+we use the argument of the third bullet on page 84.)
+Before that, here are some examples of 0/1-polytopes P in Rd: for each
+of them we list the space dimension d, the dimension k = dim(P) of the
+polytope itself, and the diameter δ(G(P)).
+d = 2
+d = 2
+d = 2
+dim(P) = 1
+dim(P) = 2
+dim(P) = 2
+δ(G(P)) = 1
+δ(G(P)) = 1
+δ(G(P)) = 2
+d = 3
+d = 3
+d = 3
+dim(P) = 2
+dim(P) = 3
+dim(P) = 3
+δ(G(P)) = 2
+δ(G(P)) = 2
+δ(G(P)) = 3
+
+92
+3. Graphs of Polytopes
+Theorem 3.11.
+Let P = conv(V ) be a 0/1-polytope, V ⊆{0, 1}d. Then
+P satisﬁes the Hirsch conjecture. In fact, the diameter of G(P) is bounded
+by
+δ(G(P)) ≤dim(P),
+with equality if and only if P is aﬃnely isomorphic to a regular cube.
+Proof. Let P have two vertices v, u of distance δ(u, v) ≥d. We use the
+symmetry of the cube
+Id := [0, 1]d = conv({0, 1}d)
+to reduce to the case where v = 0 and u ∈{0, 1}d.
+Using induction on the dimension d we can assume that P is full-dimen-
+sional: otherwise let ax = z be an equation that is valid for P. We get
+z = 0 from 0 ∈P, and thus a̸ = 0. By permuting coordinates we may
+assume ad̸ = 0. Then the projection map
+π : Rd −→Rd−1,
+ x
+xd
+
+7−→x
+(deleting the last coordinate) maps the 0/1-polytope P ⊆Rd to an aﬃnely
+isomorphic 0/1-polytope π(P) ⊆Rd−1. Thus we may assume P ⊆Rd with
+dim(P) = d.
+Now assume that ui = 0 for some i. Then 0 and u are both vertices of
+the face F(i) := P ∩{x ∈Rd : xi = 0} of P, which corresponds to the valid
+inequality xi ≥0. Thus we get
+δ(0, u) ≤δ(G(F(i))) ≤d −1
+by induction on d. Therefore we may assume that u = 1.
+Now if any neighbor w ∈N(1) of 1 has k > 1 components that are 0,
+then we get
+δ(0, 1) ≤δ(0, w) + δ(w, 1) ≤(d −k) + 1 < d,
+where we use that the face
+Fw := P ∩{x ∈Rd : xi = 0 whenever wi = 0}
+has diameter at most d −k, by induction.
+Thus if δ(0, 1) ≥d, then all the neighbors of 1 have exactly one 0-
+component. Since 1 has at least d neighbors (see Lemma 3.6), we ﬁnd that
+N(1) = {1 −ei : 1 ≤i ≤d}.
+Also, again considering the faces
+F(i) = P ∩{x ∈Rd : xi = 0}
+
+3.4 Kalai’s Simple Way to Tell a Simple Polytope from Its Graph
+93
+of P, we get that 0 and 1−ei have distance d−1 in G(F(i)), so by induction
+on d we get
+F(i) = conv{x ∈{0, 1}d : xi = 0}.
+Collecting all the vertices that we now know have to be in P, we get P =
+conv({0, 1}d) = Id and δ(G(P)) = d.
+The bound δ(G(P)) ≤dim(P) can also be proved (with the same kind
+of argument) in the monotone version, where we ask for the shortest path
+“to the top” with respect to a given linear function. If we restrict to the
+strictly monotone version of Conjecture 3.9, then the characterization of
+the equality case also remains valid (with the same proof).
+3.4
+Kalai’s Simple Way to Tell a Simple Polytope
+from Its Graph
+In this section we consider simple polytopes and their graphs. Our treat-
+ment is based on a striking (and strikingly simple) paper by Gil Kalai.
+To be honest — the situation is even worse: the following is copied quite
+directly from his paper “A simple way to tell a simple polytope from
+its graph” [299].
+Let P be a simple d-dimensional polytope and let G(P) be the graph
+of P. Thus, G(P) is an abstract graph deﬁned on the set of vertices vert(P)
+of P. Two vertices v and u in vert(P) are adjacent in G(P) if [v, u] is a
+one-dimensional face of P.
+Perles [435] conjectured the following result.
+Theorem 3.12.
+(Blind & Mani [108])
+If P is a simple polytope, then the graph G(P) determines the entire com-
+binatorial structure of P.
+In other words, if two simple polytopes have isomorphic graphs, then
+their face lattices are isomorphic as well.
+Proof. Here is Kalai’s [299] simple proof of this result.
+We consider the set of all acyclic orientations (i.e., edge orientations with
+no oriented cycles) of G(P). We will not distinguish between an orientation
+O of G(P) and the partial order induced by O on vert(P), which is deﬁned
+by v ≤O u whenever there is an O-directed path from v to u.
+Note that if O is an acyclic orientation of G(P), then the induced sub-
+graph obtained by restriction of G(P) to any nonempty subset A of vert(P)
+has a sink (an element with out-degree zero) with respect to O.
+An acyclic orientation O of G(P) is called good if for every nonempty
+face F of P, the graph G(F) has exactly one sink. Otherwise, O is bad.

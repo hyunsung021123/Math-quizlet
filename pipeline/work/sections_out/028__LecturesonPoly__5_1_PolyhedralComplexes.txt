@@ -1,0 +1,214 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 5. Schlegel Diagrams for 4-Polytopes
+현재 소단원: 5.1 Polyhedral Complexes
+직전 소단원: 「4.ex Problems and Exercises」
+[본문]
+5
+Schlegel Diagrams for 4-Polytopes
+Now that we understand the combinatorics of 3-polytopes (do we?), the
+next step is to investigate 4-polytopes. Those are harder to understand,
+since we (i.e., most of us) lack a genuine geometric intuition for the geome-
+try of 4-dimensional Euclidean space. Nevertheless, there are various tools
+available. The most prominent one is the “Schlegel diagram” of a polytope,
+a polytopal complex that represents most of the geometry of a 4-polytope.
+We will discuss polytopal complexes in some detail (they will be needed for
+other purposes as well), and then we get to discuss Schlegel diagrams, and
+some of the traps involved.
+5.1
+Polyhedral Complexes
+Deﬁnition 5.1.
+A polyhedral complex C is a ﬁnite collection of polyhedra
+in Rd such that
+(i) the empty polyhedron is in C,
+(ii) if P ∈C, then all the faces of P are also in C,
+(iii) the intersection P ∩Q of two polyhedra P, Q ∈C is a face both of P
+and of Q.
+The dimension dim(C) is the largest dimension of a polyhedron in C. The
+underlying set of C is the point set |C| := S
+P ∈C P.
+C is a polytopal complex if all the polyhedra in C are bounded (polytopes).
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_6, © Springer Science+Business Media New York 2007 
+ 
+127
+
+128
+5. Schlegel Diagrams for 4-Polytopes
+In these lectures we will almost exclusively consider polytopal complexes.
+The reader can work out generalizations whenever he or she feels that this
+is interesting.
+Our sketch shows a polyhedral (in fact, polytopal) complex C0 of di-
+mension 2, containing the empty polytope, 9 zero-dimensional polytopes
+(vertices), 11 one-dimensional polytopes (edges), and 2 two-dimensional
+polytopes (a triangle and a quadrangle).
+Sometimes we can identify a polytopal complex C with its underlying
+set |C|. For example, this makes sense for a polytope, since we can recon-
+struct the whole collection of faces from the point set P. However, often (see
+below) we are really interested in subdivisions of polytopes and polytopal
+complexes, and then C contains decisive extra information that cannot be
+recovered from the point set |C|.
+The combinatorial structure of a polytopal complex C is captured by
+its face poset L(C) := (C, ⊆): the ﬁnite set of polytopes in C, ordered by
+inclusion. Assuming that we have a polytopal complex, we can read oﬀthe
+dimension function from the rank function of the face poset, by dim(F) =
+r(F)−1 for F ∈C. We deﬁne two polytopal complexes to be combinatorially
+equivalent if their face posets are isomorphic as posets.
+Our drawing shows the poset L(C0) for the complex C0 above. Note that
+L(C) does not have a unique maximal element, unless C is the complex
+of all faces of one single convex polytope. Thus, L(C) is not a lattice in
+general (although it is a ﬁnite meet-semilattice: it has a minimal element,
+and meets exist). If we adjoin an artiﬁcial maximal element ˆ1, then we get
+a lattice bL(C) := L(C) ∪{ˆ1}.
+The maps f : C −→D between polyhedral complexes are all the maps
+f : |C| −→|D| that are aﬃne maps when restricted to polytopes in C. Two
+complexes are aﬃnely isomorphic if there is such a map f : C −→D which
+is a bijection between C and D = {f(F) : F ∈C}. Equivalently, f has to
+
+5.1 Polyhedral Complexes
+129
+be a bijection on the underlying sets, such that f(F) is a polytope in D for
+every F ∈C. A subcomplex of a polytopal complex is a subset C′ ⊆C that
+itself is a polytopal complex.
+Examples 5.2. Let P be a polytope.
+(i) The complex C(P) of the polytope P is the complex of all faces of P.
+The face poset of C(P) is the face lattice L(P).
+(ii) The boundary complex C(∂P) is the subcomplex of C(P) formed by
+all proper faces of P. Thus its underlying set is |C(∂P)| = ∂P =
+P\relint(P). Its face poset is L(∂P) := L(P)\{P}.
+(iii) A (polytopal) subdivision of a polytope P is a polytopal complex C
+with the underlying space |C| = P. The subdivision is a triangulation
+if all the polytopes in C are simplices. In particular, one is interested
+in subdivisions and triangulations without new vertices, that is, where
+the only zero-dimensional polytopes in the complex are the vertices
+of P.
+Our drawing shows (from left to right, everybody smile, please!) a poly-
+topal subdivision of a hexagon, a subdivision without new vertices, a tri-
+angulation, and a triangulation without new vertices.
+The study of subdivisions of polytopes has received an enormous amount
+of attention in recent years, motivated by applications that range from the
+theory of generalized hypergeometric functions (initiated by I. M. Gel’fand;
+see [228]) to spline theory and to questions in computational geometry. We
+refer to, for example, Billera [69], Edelsbrunner [190], Pach [431], Gel’fand,
+Kapranov & Zelevinsky [232], Lee [354, 357], and the references in these
+papers.
+A basic and central concept is that of “regular” subdivisions.
+Deﬁnition 5.3.
+A subdivision C of a polytope Q ⊆Rd is regular if and
+only if it arises from a polytope P ⊆Rd+1 in the following way.
+(i)
+The polytope Q is the image π(P) = Q of the polytope P, via the
+canonical projection map
+π : Rd+1 −→Rd
+ x
+xd+1
+
+7−→x,
+which “deletes the last coordinate.”
+
+130
+5. Schlegel Diagrams for 4-Polytopes
+(ii)
+C is the set of all lower faces of P, projected down to Q, that is,
+C =
+
+π(F) : F is a lower face of P
+	
+,
+where the lower faces of P are the faces F that satisfy x−λed+1 /∈P
+for each x ∈F and λ > 0. Equivalently (by the Farkas lemma!), the
+lower faces are the faces of P of the form
+F = {x ∈P : cx = c0},
+cx ≤c0 valid for P,
+cd+1 < 0.
+In other words, C is the family of all faces of P that can be “seen” from
+−Ted+1, for T −→∞large enough.
+If the polytope projection π : P −→Q is given, then we denote the
+subdivision C of Q it determines via part (ii) by ΣP (Q).
+For d = 1 (subdivision of a line segment Q) this looks as follows, where
+the lower faces of P (4 vertices and 3 edges) are indicated by thick lines:
+Q
+P
+It suggests a reformulation: regular subdivisions arise from piecewise linear
+convex functions in the following way. Given the projection π : P −→Q,
+the function
+f : Q −→R,
+f(x) = min{y ∈R :
+x
+y
+
+∈P}
+is piecewise linear and convex. (A function f : Q −→R is piecewise linear
+if Q can be written as a ﬁnite union of polytopes on which f is a linear
+function.) For a converse, note that every piecewise linear convex function
+over a polytope Q determines a polytope projection, by setting
+P := conv{
+ x
+f(x)
+
+: x ∈Q}.
+The projection of the lower envelope of this P determines a regular subdi-
+vision C of Q.
+Clearly, every subdivision of a line segment (d = 1) is regular. For d = 2,
+this is still true for subdivisions without interior points, that is, all subdi-
+visions of a convex n-gon without new vertices are regular (Exercise 5.0).
+
+5.1 Polyhedral Complexes
+131
+Example 5.4. For integers z1, . . . , zd ≥1, the pile of cubes Pd(z1, . . . , zd)
+is the polytopal complex formed by all unit cubes with integer vertices in
+the d-box
+B(z1, . . . , zd) := {x ∈Rd : 0 ≤xi ≤zi for 0 ≤i ≤d},
+that is, the polyhedral complex formed by the set of all cubes
+C(k1, . . . , kd) = {x ∈Rd : ki ≤xi ≤ki + 1}
+for integers 0 ≤ki < zi, together with all their faces. So, our drawing
+represents the piles of cubes P2(6, 4) and P3(6, 4, 3).
+P2(6, 4)
+P3(6, 4, 3)
+In particular, the pile of cubes Pd(z1, . . . , zd) has (z1+1)· . . . ·(zd+1) ver-
+tices, which are given by
+vert(Pd(z1, . . . , zd)) = B(z1, . . . , zd) ∩Zd.
+The pile of cubes is a regular subdivision of B(z1, . . . , zd). This is true
+because the pile is a “product” (Exercise 5.4) of 1-dimensional regular
+subdivisions. In particular, all convex functions of the form
+f : Rd −→R,
+x 7−→f(x) = f1(x1) + . . . + fd(xd)
+for convex functions fi will produce suitable polytopes
+ePd+1(z1, . . . , zd)
+:=
+conv
+n v
+f(v)
+
+: v ∈B(z1, . . . , zd) ∩Zdo
+.
+
+132
+5. Schlegel Diagrams for 4-Polytopes
+A canonical choice for f is the function f(x) = x2
+1 + . . . + x2
+d = ||x||2. Our
+sketch tries to illustrate the construction of the 3-polytope eP3(6, 4).
+To end this section, we give the following ﬁgure as a small example of a
+subdivision that is not regular. To see this, note that we can assume that
+f(v4) = f(v5) = f(v6) = 0 for the three interior vertices (by subtracting a
+linear function from f), and then we get a cycle f(v1) > f(v2) > f(v3) >
+f(v1) of conditions for the three outer vertices.
+ 1
+2
+3
+4
+6
+ 5
+Note that the subdivision ΣP (Q) encodes a lot of information about P,
+but essentially we “see only half of P” in ΣP (Q). Now, we’ll “take a closer
+look” — in order to “see more.”
+5.2
+Schlegel Diagrams
+For a “close look” at polytopes, we choose a point of view yF beyond facet F
+(see Section 3.1 for the deﬁnition of “beyond”) and use the facet F as a
+“projection screen” for everything we “see” behind it.
+Deﬁnition 5.5.
+Let P be a d-polytope in Rd, and let F ∈L(P) be a
+facet of P, deﬁned by the valid inequality ax ≤z. We denote by
+H := aﬀ(F) = {x ∈Rd : ax = z}

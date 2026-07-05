@@ -1,0 +1,201 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 2. Faces of Polytopes
+현재 소단원: 2.1 Vertices, Faces, and Facets
+직전 소단원: 「1.ex Problems and Exercises」
+[본문]
+2
+Faces of Polytopes
+In this lecture we will discuss faces, and the face lattice. Here we restrict
+our attention entirely to polytopes, although nearly everything can quite
+easily be generalized to polyhedra; see the exercises.
+I hope that the reader enjoys the ease with which we will get the results
+in this lecture. In fact, nearly all results are “geometrically clear,” and
+as far as we need algebra to verify them, we get by with straightforward
+computations and the Farkas lemmas.
+2.1
+Vertices, Faces, and Facets
+Deﬁnition 2.1.
+Let P ⊆Rd be a convex polytope. A linear inequality
+cx ≤c0 is valid for P if it is satisﬁed for all points x ∈P. A face of P is
+any set of the form
+F = P ∩{x ∈Rd : cx = c0}
+where cx ≤c0 is a valid inequality for P. The dimension of a face is the
+dimension of its aﬃne hull: dim(F) := dim(aﬀ(F)).
+For the valid inequality Ox ≤0, we get that P itself is a face of P. All
+other faces of P, satisfying F ⊂P, are called proper faces.
+For the inequality Ox ≤1, we see that ∅is always a face of P.
+The faces of dimensions 0, 1, dim(P) −2, and dim(P) −1 are called ver-
+tices, edges, ridges, and facets, respectively. Thus, in particular, the vertices
+are the minimal nonempty faces, and the facets are the maximal proper
+faces. The set of all vertices of P, the vertex set, will be denoted by vert(P).
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_3, © Springer Science+Business Media New York 2007 
+ 
+51
+
+52
+2. Faces of Polytopes
+The following sketches show two valid inequalities for a 2-polytope; they
+deﬁne a vertex and an edge, respectively.
+In the following two propositions we collect some simple but basic facts
+about faces.
+Proposition 2.2.
+Let P ⊆Rd be a polytope.
+(i) Every polytope is the convex hull of its vertices: P = conv(vert(P)).
+(ii) If a polytope can be written as the convex hull of a ﬁnite point set,
+then the set contains all the vertices of the polytope: P = conv(V )
+implies that vert(P) ⊆V .
+Proof. Let P = conv(V ). Now if any vector vi ∈V can be written as a
+convex combination of the other vectors in V , then we can clearly substitute
+that representation into any convex combination of vectors in V , and thus
+get a smaller set of points V ′ := V \vi, whose convex hull is conv(V ′) = P.
+Now we claim that if vi cannot be expressed as a convex combination
+of V ′ = V \vi, then it is a vertex of P. Using Farkas lemma II (Proposi-
+tion 1.8), we get
+vi /∈conv(V ′)
+⇐⇒
+/∃t ≥0 : vi = V ′t, 1l t = 1
+⇐⇒
+/∃t ≥0 :
+
+1l
+V ′
+
+t =
+
+1
+vi
+
+FL II
+⇐⇒
+∃a : a
+
+1l
+V ′
+
+≥O, a
+
+1
+vi
+
+< 0
+⇐⇒
+∃(β, −b) = a : bV ′ ≤β1l , bvi > β
+⇐⇒
+∃β, b : bvj ≤β for j̸ = i,
+bvi > β.
+Thus vi is a vertex, deﬁned by the valid inequality bx ≤bvi.
+Finally we observe that a vertex vi of P can never be written as a
+convex combination of points in P\vi, which ﬁnishes the proof of both (i)
+and (ii).
+
+2.1 Vertices, Faces, and Facets
+53
+Proposition 2.3.
+Let P ⊆Rd be a polytope, and V := vert(P). Let F
+be a face of P.
+(i) The face F is a polytope, with vert(F) = F ∩V .
+(ii) Every intersection of faces of P is a face of P.
+(iii) The faces of F are exactly the faces of P that are contained in F.
+(iv) F = P ∩aﬀ(F).
+Proof. Let F be deﬁned by the valid inequality cx ≤c0.
+For the ﬁrst assertion of part (i), we see that F is a polytope from the
+characterization of polytopes as bounded intersections of halfspaces: F is
+the intersection of a polytope P with a polyhedron (hyperplane)
+H := {x ∈Rd : cx = c0}.
+Furthermore, we ﬁnd that F ⊆aﬀ(F) ⊆H, which proves (iv).
+For the second assertion of (i), note that vert(F) ⊇F ∩V =: V0. For
+the converse inclusion, let x ∈F, so that x can be represented as x = V t,
+with t ≥0, 1l t = 1. We compute
+c0 = cx = c(V t) = (cV )t ≤c01l t = c0,
+thus (cvi −c0)ti = 0 for all i. This implies that ti = 0 for all i with
+vi /∈V0, and thus x ∈conv(V0). From this we see F = conv(V0), and thus
+vert(F) ⊆V0 by Proposition 2.2(ii). This completes the proof of (i).
+For (ii), let
+F = P ∩{x ∈Rd : cx = c0}
+and
+G = P ∩{x ∈Rd : bx = b0}
+for inequalities cx ≤c0 and bx ≤b0 that are valid for P. Then the in-
+equality (c + b)x ≤c0 + b0 is valid for P, and
+P ∩{x ∈Rd : (c + b)x = c0 + b0} = F ∩G.
+For (iii), if G ⊆F is a face of P, then it is a face of F as well. For the
+converse let F = P ∩{x ∈Rd : cx = c0} and G = F ∩{x ∈Rd : bx =
+b0} ⊆F, where cx ≤c0 is valid for P, and bx ≤b0 is valid for F, but not
+necessarily for P.
+Let V0 := vert(F) as before, and V1 := V \V0. We can assume that
+F̸ = P, and thus V1̸ = ∅. Now (b+λc)x ≤b0 +λc0 is valid for F, for every
+λ ∈R, and deﬁnes G as a face of F.
+Now choose λ large enough to satisfy λ > −b0 −bv
+c0 −cv for all v ∈V1. Then
+we get that (b+λc)x ≤b0+λc0 is valid with strict inequality for all v ∈V1.
+
+54
+2. Faces of Polytopes
+We conclude that G is a face of P. (The sketch below might tell you what
+was “really going on” during this algebraic manipulation.)
+F
+G
+P
+cx ≤c0
+bx ≤b0
+We need another construction: the “vertex ﬁgure” obtained by cutting a
+polytope by a hyperplane that cuts oﬀa single vertex.
+For this, we consider a polytope P with V = vert(P), and a vertex v ∈V .
+Let cx ≤c0 be a valid inequality with
+{v} = P ∩{x : cx = c0}.
+Furthermore, we choose some c1 < c0 with cv′ < c1 for all v′ ∈vert(P)\v.
+Then we deﬁne a vertex ﬁgure of P at v as the polytope
+P/v := P ∩{x : cx = c1}.
+Note that the construction of P/v depends on the choice of c1 and of the
+inequality cx ≤c0; however, the following result shows that the combina-
+torial type of P/v is independent of this.
+
+2.2 The Face Lattice
+55
+Proposition 2.4.
+There is a bijection between the k-dimensional faces
+of P that contain v, and the (k −1)-dimensional faces of P/v, given by
+π :
+F
+7−→
+F ∩{x : cx = c1},
+σ :
+P ∩aﬀ({v} ∪F ′)
+←−
+F ′.
+Proof. Denote the “cutting hyperplane” by H := {x : cx = c1}.
+The map π is well deﬁned: let F = P ∩{x : bx = b0}; then we get
+F ∩H = (P ∩H) ∩{x : bx = b0}, where bx ≤b0 is valid for P and thus
+also for P/v.
+To see that σ is well deﬁned, let F ′ = (P ∩H) ∩{x : bx = b0}, where
+bx ≤b0 is valid for P/v. Then (b + λc)x ≤b0 + λc1 is valid for P/v, for
+all λ ∈R. Now a simple computation shows that for
+λ0 := b0 −bv
+c0 −c1
+,
+the inequality is valid on P, with equality for v. In fact, if we consider
+v′ ∈V \v, then we know cv′ < c1 and cv = c0 > c1, so
+v′′ := (cv −c1)v′ + (c1 −cv′)v
+cv −cv′
+∈P ∩H = P/v.
+Now v′′ is a convex combination of v and v′, and from (b + λ0c)v′′ ≤
+b0 + λ0c1 and (b + λ0c)v = b0 + λ0c1 we get (b + λ0c)v′ ≤b0 + λ0c1.
+Now we check that the maps σ and π are inverses of each other: we
+compute
+π◦σ(F ′) = H∩P ∩aﬀ({v}∪F ′) = P ∩H∩aﬀ(F ′) = P/v∩aﬀ(F ′) = F ′,
+where the last equality is from Proposition 2.3(iv). Similarly,
+σ ◦π(F) = P ∩aﬀ({v} ∪(F ∩H))
+∗= P ∩aﬀ(F) = F,
+where for the equality ∗we use that every vertex v′ of F can be obtained
+as an aﬃne combination of v and a point v′′ ∈F ∩H.
+Finally we observe that if F ′ is a face of P/v of dimension k−1, then
+the associated face F of P has dimension k, since its aﬃne hull is aﬀ(F) =
+aﬀ(F ′ ∪{v}), where v /∈aﬀ(F ′) by construction.
+2.2
+The Face Lattice
+In this section we translate some of our results on polytopes into purely
+combinatorial statements. For this we need some terminology about ﬁnite
+partially ordered sets (“posets,” for short). We refer to Stanley’s book [517,
+Sects. 3.1–3.3] for more information on that subject and its ramiﬁcations.
+For simplicity, and to unify terminology, we deﬁne the key concepts here.

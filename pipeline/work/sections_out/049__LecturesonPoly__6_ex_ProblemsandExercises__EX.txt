@@ -1,0 +1,368 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.ex Problems and Exercises
+직전 소단원: 「6.6 Rigidity and Universality」
+[연습문제]
+184
+6. Duality, Gale Diagrams, and Applications
+For issues related to the isotopy conjecture, we refer to [96, Sect. 8.6].
+The Lawrence construction is due to Jim Lawrence (surprise), but he
+never published it. It appears in Billera & Munson [77, Sect. 2] and is also
+explained in detail (in oriented matroid terms) in [96, Sect. 9.3].
+A “σ-construction” to produce rigid 6-polytopes from planar conﬁgura-
+tions was given by Sturmfels in [530]. However, we found the arguments
+in [530] to be incorrect. (Speciﬁcally, the claim that the orientation of all
+the “outer simplices” of a polytope is determined by the combinatorics of
+the face lattice is only true for simplicial polytopes: for this, consider the
+cone over a nonrigid polytope, where all simplices are outer; however, the
+polytopes produced by the σ-construction are not simplicial, and they turn
+out not to be rigid in general.)
+Problems and Exercises
+6.0
+Prove Radon’s theorem: given any set V of d + 2 points in Rd, we
+can ﬁnd disjoint nonempty subsets V1, V2 ⊆V such that relint(V1) ∩
+relint(V2)̸ = ∅. Why can we assume that conv(Vi) are simplices?
+6.1
+Show that if two conﬁgurations of n points in Rd have the same set
+of minimal aﬃne dependences, then they are aﬃnely isomorphic.
+6.2
+List all the circuits and cocircuits for the hexagon discussed in Sec-
+tion 6.1. How many vectors and covectors are there? (Don’t list them
+all, there are many.)
+6.3
+Show that the deﬁnitions of vectors, circuits, and so on, for the aﬃne
+and linear cases are consistent: if V =
+
+1l
+X
+
+, then
+a-Dep(X) = Dep(V )
+and
+a-Val(X) = Val(V ),
+and thus we get the same oriented matroid (the same circuits, cocir-
+cuits, etc.) for X and for V .
+6.4
+Let D = (V, A) be a directed graph with arc set A = {1, 2, . . . , n}.
+Deﬁne the signed circuits of D to be the sign vectors u ∈{0, +, −}n
+that correspond to circuits in D together with a chosen orientation,
+as follows: if the arc i is not contained in the circuit, then ui = 0;
+if it is in the circuit and directed according to the orientation, then
+ui = +; and if it is directed opposite to the orientation, then ui = −.
+
+Problems and Exercises
+185
+1
+2
+3
+4
+5
+6
+7
+8
+9
+u =
+
+
+
+
+
+
+
+
+
+
+0
+0
+0
++
+−
+−
+−
++
+0
+
+
+
+
+
+
+
+
+
+
+For example, for the digraph drawn here and the oriented circuit
+marked in it we read oﬀthe signed circuit u next to the drawing.
+Show that the signed circuits we get that way are from a realizable
+oriented matroid (as in Deﬁnition 6.5), whose cocircuits correspond
+to the minimal directed cuts in the graph. Interpret the vectors and
+the covectors of this oriented matroid in terms of the graph.
+(Hint: Associate a vector conﬁguration with D. A canonical choice is
+vij = ei −ej for an arc from the node j to the node i.)
+6.5
+Prove that our two characterizations of acyclic vector conﬁgurations
+are equivalent. Prove that the dual of an acyclic conﬁguration is to-
+tally cyclic (Corollary 6.16).
+Describe a small vector conﬁguration that is neither acyclic nor to-
+tally cyclic.
+6.6
+A d-polytope with n vertices is simplicial if and only if every non-
+empty coface has at least n −d elements. Derive from this a char-
+acterization of the (aﬃne) Gale diagrams that represent simplicial
+polytopes.
+6.7
+Given a Gale diagram, how can one (computationally) enumerate the
+facets of the corresponding polytope?
+6.8
+Show that the following diagrams represent the four diﬀerent combi-
+natorial types of 4-polytopes with 6 vertices.
+Describe the polytopes.
+How many facets, and how many edges do they have? Which poly-
+topes are simple or simplicial? Which is bipyr(∆3)? Which is C4(6)?
+6.9
+Describe all the 4-polytopes with 7 vertices. For this, use all the
+“visualization tools” that we have developed so far:
+• Schlegel diagrams
+• Gale diagrams
+• combinatorial descriptions (vertex-facet matrix)
+and show how the various types of data correspond to each other.
+
+186
+6. Duality, Gale Diagrams, and Applications
+6.10* What is the smallest number of vertices for a nonrational 4-polytopes?
+(Non-rational 4-polytopes exist by Richter-Gebert’s universality the-
+orem, see the Notes for this chapter. The smallest (explicit) example
+by Richter-Gebert has 33 vertices and ?? facets [459, p. 80]. The
+minimal number of vertices and facets is not known.)
+6.11
+Analyze the 4-dimensional polytope X∗with 8 facets and 12 vertices
+whose polar is given by the aﬃne Gale diagram
+Show that X∗has a hexagon 2-face whose shape cannot be prescribed.
+Verify that X∗is combinatorially equivalent to the polytope whose
+Schlegel diagram is given by Exercise 5.11.
+6.12
+Draw an arbitrary “nice” conﬁguration of black and white points into
+the plane, and analyze:
+(i) Is this the Gale diagram of a polytope? (If not, add points to
+get one.)
+(ii) What is its dimension and its number of facets?
+(iii) Is it simple or simplicial? Can you describe its facets?
+(iv) Are there vertices that are not adjacent? Can you compute the
+graph?
+6.13
+For n ≥d ≥2, consider the moment curve in Rn−d−2, and place on
+it n points, alternating between negative and positive points.
+Show that the oriented matroid of this is dual to the oriented ma-
+troid of the cyclic polytope Cd(n): so it is the Gale diagram of a
+polytope that is combinatorially equivalent to Cd(n). Is this really a
+Gale transform of Cd(n)?
+6.14
+Show that the following conditions are equivalent for a 2d-dimensional
+polytope P with n vertices:
+(i) P is neighborly.
+(ii) Every set of n −d points forms is a positive covector.
+
+Problems and Exercises
+187
+(iii) Every circuit of P contains exactly d + 1 positive and d + 1 neg-
+ative elements.
+Derive the corresponding criteria to detect whether a Gale diagram
+represents an (even-dimensional) neighborly polytope.
+6.15
+Show that of the following two ﬁgures, the left is a Gale diagram
+for C4(8), while the second is the Gale diagram of a 2-neighborly
+4-polytope with 8 vertices that is not cyclic (due to [531, p. 543]).
+2
+8
+7
+6
+5
+4
+3
+1
+3
+2
+8
+7
+6
+5
+4
+1
+“Many” noncyclic neighborly polytopes can be constructed this way,
+by “small” modiﬁcation of the Gale diagram of a cyclic polytope.
+(More were constructed by Shemer [494].)
+6.16* Perles conjectured that every simplicial polytope is combinatorially
+equivalent to a face ﬁgure (iterated vertex ﬁgure) of an even-dimen-
+sional neighborly polytope. (Equivalently, every simple polytope is a
+face of a polar of a neighborly polytope.)
+(i)
+Deﬁne that a (ﬁnite) conﬁguration of vectors in R3 is uniform if
+any 3 of the vectors span R3. Say that it is balanced if for every
+plane spanned by two vectors, the number of vectors on the two
+sides are equal.
+Show that for simplicial d-polytopes with d+4 vertices, the Gale
+diagram construction reduces Perles’ problem to the “embedding
+problem” of whether every uniform conﬁguration of d+4 vectors
+in R3 can be extended to a uniform balanced conﬁguration.
+(ii)
+Using part (i), solve Perles’ problem for simplicial d-polytopes
+with n = d + 4 vertices: every simplicial d-polytope with d +
+4 vertices is a quotient (i.e., combinatorially equivalent to an
+iterated vertex ﬁgure) of a neighborly (2d+4)-polytope with 2d+
+8 vertices.
+(Hint: For part (i) you will need the characterization of Exercise 6.14.
+The Gale diagram formulation of Perles’ problem is due to Sturm-
+fels. See Sturmfels [532, Sect. 7], where some partial results are also
+derived. Part (ii) was done by Kortenkamp [341].)
+
+188
+6. Duality, Gale Diagrams, and Applications
+6.17
+Show that the ﬁgure
+2
+6
+1
+3
+5
+4
+8
+7
+is an aﬃne Gale diagram of a 4-polytope P with 8 vertices, and verify
+the following facts. The polytope has 9 facets, four tetrahedra, four
+square pyramids, and an octahedron 235678. Every Gale diagram G′
+with the same set of positive circuits has 7 and 8 on the same point:
+so for every combinatorially equivalent polytope to P the vertices
+2356 of the octahedron facet 235678 are coplanar. Thus the shape of
+the octahedron facet cannot be prescribed. However, show that the
+oriented matroid of P is not rigid.
+6.18
+Show that the ﬁgure below is the aﬃne Gale diagram of a 4-polytope
+with 8 vertices and 11 facets, the Kleinschmidt polytope K4(8), and
+verify the following facts.
+Except for the facet 235678, which is an octahedron, the facets of
+K4(8) are tetrahedra. The octahedron facet is not regular. No Gale
+diagram G′ with the same set of positive circuits can have 136, 125,
+and 178 on lines: so there is no combinatorially equivalent polytope
+to K4(8) such that the octahedron facet is regular.
+3
+4
+1
+7
+8
+5
+2
+6
+Show that the oriented matroid of K4(8) is not rigid.
+(Kleinschmidt [332] [203], Sturmfels [532, Fig. 6(a)])
+6.19
+(i)
+Construct a simple polytope for which the shape of a facet can-
+not be prescribed. For example, you might examine the polar of
+
+Problems and Exercises
+189
+the simplicial 6-polytope with 10 vertices, given by
+(ii)* Can you prescribe the shape of a facet for simple 4-polytopes?
+6.20
+Let a centrally symmetric polytope with 2n vertices in Rd be given
+as P = conv(X) for
+X = {u ± v1, u ± v2, . . . , u ± vn}.
+Show that the dependences and the value vectors of X can be recon-
+structed from those of the following set of only n + 1 points in Rd:
+X0 = {u, u + v1, u + v2, . . . , u + vn}.
+Thus the combinatorics of P can be read oﬀfrom the dual conﬁgu-
+ration G0 ⊆(Rn−d)∗to V0, the central (Gale) diagram of P, due to
+McMullen & Shephard [402].
+Use central diagrams to classify the centrally symmetric polytopes
+with at most 2d + 2 vertices for small values of d. (The case d = 4
+was done by Gr¨unbaum [252, Sect. 6.4].)
+Argue that a complete classiﬁcation of centrally symmetric polytopes
+with at most 2d + 2 vertices is out of reach.
+Show that the metric properties of this diagram are important, and
+that no further reduction to aﬃne diagrams is possible.
+Similarly, show that the signed circuits of X0 do not determine those
+of X, so we cannot simply reduce to oriented matroid data [402].
+6.21
+Apply the Lawrence construction to three points on a line, either all
+three distinct, or two coinciding. What polytopes do you obtain? List
+all circuits and cocircuits both for the original conﬁguration and for
+the Lawrence lifting.
+6.22
+Consider the prisms over simplices, prism(∆d), and construct their
+Gale diagrams. Show that they all arise as Lawrence polytopes.
+6.23
+Show that the oriented matroid given as an example for a 5-polytope
+with a nonprescribable 2-face is not rigid. (Use the fact that one can
+perturb the point 1 without changing any positive circuit.)
+Is Perles’ example of a nonrational 8-polytope rigid?
+
+190
+6. Duality, Gale Diagrams, and Applications
+6.24
+A polytope is projectively unique if any combinatorially equivalent
+polytope can be obtained by a projective transformation.
+(i) Show that in the plane, triangles and quadrilaterals are projec-
+tively unique, but n-gons with n ≥5 are not projectively unique.
+(ii) Show that, more generally, d-polytopes with n ≤d + 2 vertices
+are projectively unique.
+(iii) Show that if P is projectively unique, then so is P ∆. Conclude
+that d-polytopes with n ≤d + 2 facets are projectively unique.
+(iv) Derive from part (iii) that 3-polytopes with f1 ≤9 edges are
+projectively unique. (Use Euler’s formula v −e + f = 2 from
+Exercise 4.6 or Lecture 8.)
+Prove the converse, too.
+(v) Show that if P is projectively unique, and F is a face of P, then
+the face need not be projectively unique. In this situation, the
+face F cannot be arbitrarily prescribed.
+6.25
+How many (positive and negative) points do you need to create the
+Gale diagram of a rigid polytope from Suvorov’s conﬁguration?
+6.26* What is the smallest number of points in a planar point conﬁguration
+that violates the isotopy conjecture?
+(At the moment the smallest known conﬁgurations have 14 points; see
+Example 6.24. In contrast, isotopy is known for n ≤9 points, but only
+in the case of general position conﬁgurations, by Richter [455] [96,
+Sect. 8.2].
+6.27
+Show that the polytope P of Example 6.23 can be constructed, via
+three Lawrence extensions, from the conﬁguration of Pascal’s Theo-
+rem (“the vertices of a hexagon lie on an ellipse if and only if the three
+intersection points of opposite sides are colinear”). This is indicated
+in the following picture.
+Deduce from this construction method that this is a 5-polytope for
+which the shape of a 2-face cannot be prescribed.
+(See Richter-Gebert [459, Example 3.4.3] for a detailed discussion.)
+
+7
+Fans, Arrangements, Zonotopes,
+and Tilings
+Zonotopes are the images of n-cubes under aﬃne projection maps. Since
+for most aspects of polytope theory n-cubes are not very complicated, this
+deﬁnition may hide the complexity and richness of this concept. Zonotopes
+are interesting from various points of view. Their combinatorial structure
+is closely linked to (and in a precise sense equivalent to) that of real linear
+hyperplane arrangements.
+The aim of this lecture is to provide basic geometric intuition and the
+tools for a combinatorial description of zonotopes. We will see how zono-
+topes again are modeled by oriented matroids, and discuss the surprising
+appearance of general (“nonrealizable”) oriented matroids in the study of
+zonotopal tilings, and of hyperplane arrangements.
+7.1
+Fans
+Deﬁnition 7.1.
+A fan in Rd is a family
+F
+=
+{C1, C2, . . . , CN}
+of nonempty polyhedral cones, with the following two properties:
+(i) Every nonempty face of a cone in F is also a cone in F.
+(ii) The intersection of any two cones in F is a face of both.
+The fan F is complete if the union S F := C1 ∪. . . ∪CN of F is Rd, that
+is, if SN
+i=1 Ci = Rd. We will consider only complete fans here, and thus we
+will omit the word “complete” most of the time.
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_8, © Springer Science+Business Media New York 2007 
+ 
+191

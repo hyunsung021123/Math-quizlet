@@ -1,0 +1,306 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 8. Shellability and the Upper Bound Theorem
+현재 소단원: 8.2 Shelling Polytopes
+직전 소단원: 「8.1 Shellable and Nonshellable Complexes」
+[본문]
+8.2 Shelling Polytopes
+239
+Now assume that the resulting simplicial complex C is shellable. We start
+with one tetrahedron F1, and then add new ones, F2, F3, . . .. At every step,
+except possibly the ﬁrst, not more than one new edge from the set E12 can
+be added, since the edges in one of the triangles cannot be in a common
+simplex, and if two skew edges were new, then this would contradict a
+characteristic property of shellings of simplicial complexes: there has to be
+a unique minimal new face at each step, which is nonempty after the ﬁrst
+step (see Exercise 8.2).
+Now let Fj+1 be the tetrahedron by which the last edge e from E12 is
+added. At this point of the shelling the complex Cj := C(F1, . . . , Fj) already
+contains the three edges e1, e2, e3 that surround e. In fact, the circle formed
+in Cj by C := e1 ∪e2 ∪e3 can be contracted within the complex Cj: this is
+a property of shellable complexes of dimension at least 2, which is easy to
+verify by induction (they are “simply connected”).
+v
+e
+Since the circle C surrounds the edge e, we have to “pass over” a vertex
+v ⊆e when we contract C in Cj. Also, the link of this vertex v in the
+complex Cj, link(v, Cj), is a 2-dimensional shellable complex, by Lemma 8.7.
+However, we can contract our circle C within |Cj| until it lies in link(v, Cj),
+but it cannot be contracted within the link, because then it would not pass
+over v. This shows that the link is not shellable: contradiction.
+8.2
+Shelling Polytopes
+The complex of a polytope C(P) is shellable if and only if the boundary
+complex C(∂P) is shellable. Thus, “shelling a polytope” means ﬁnding a
+shelling order for the facets of P. How do we do this? Is there an obvious
+
+240
+8. Shellability and the Upper Bound Theorem
+way? If we polarize, then the problem is to ﬁnd a good ordering on the
+vertices of the polar polytope P ∆. For this an obvious thing to do is to
+take a linear function in general position (see Sections 3.1 and 3.4), and
+to order the vertices according to that linear function. This works: it does
+yield a shelling (in fact, many shellings) for the boundary of P.
+Below we describe these shellings directly on P, without polarization. In
+Exercise 8.10 you are asked to check that the constructions on P and P ∆
+really are equivalent.
+Lemma 8.10.
+If F1, F2, . . . , Fs is a shelling order for the boundary of a
+polytope P, then so is the reverse order Fs, Fs−1, . . . , F1.
+Proof. Let Fj be one of the facets in the shelling, then for every facet G of
+Fj there is a unique other facet Fi of P such that G = Fj ∩Fi. This other
+facet Fi can be either earlier (i < j) or later (i > j) than Fj. These roles
+are interchanged if, while reversing the shelling of ∂P, we also reverse the
+shellings of the boundaries of its facets: and this we may do, by induction
+on the dimension.
+Theorem 8.11.
+(Bruggesser & Mani [139])
+Polytopes are shellable.
+Well, this is the essence. However, what one actually needs is that there
+are shellings with very speciﬁc properties. These are obtained from the
+Bruggesser-Mani construction, which yields the much more speciﬁc theorem
+below (which includes later reﬁnements by McMullen [389], Danaraj & Klee
+[171], and by Bj¨orner & Wachs [98]). Also, this is the technical statement
+that has an easy proof by induction on the dimension.
+x
+Theorem 8.12.
+[139]
+Let P ⊆Rd be a d-polytope, and let x ∈Rd be a
+point outside P. If x lies in general position (that is, not in the aﬃne hull
+of a facet of P), then the boundary complex C(∂P) has a shelling in which
+the facets of P that are visible from x come ﬁrst.
+
+8.2 Shelling Polytopes
+241
+Here we can use our intuition to understand what visible means: a facet
+F ⊆P is visible from x if for every y ∈F the closed line segment [x, y]
+intersects P only in the point y. Equivalently, F is visible from x if and
+only if x and int(P) are on diﬀerent sides of the hyperplane aﬀ(F) spanned
+by F. For example, if xG is beyond the face G (in the sense of Section 3.1),
+then the facets that contain G are exactly those that are visible from xG.
+Proof. Given x, we choose a line ℓthrough x and through a point in
+general position in P. The properties we need are that ℓcontains x, hits
+the interior of P, and the intersection points with the facet hyperplanes
+ℓ∩aﬀ(F) are distinct. For simplicity, assume that the line is not parallel to
+any of the facet hyperplanes, so we have no intersection point “at inﬁnity.”
+We orient the line ℓfrom P to x.
+F1
+F1
+F1
+F2
+aﬀ(F2)
+Now imagine P to be a little polyhedral planet, and have a rocket start
+on its surface at the point where the oriented line ℓleaves the planet. This
+point lies on a unique facet F1, and for the ﬁrst few minutes of the ﬂight
+only this one facet F1 is visible from the rocket.
+F1
+F2
+F3
+F5
+F4
+
+242
+8. Shellability and the Upper Bound Theorem
+After a while, a new facet will appear on the horizon: the rocket passes
+through a hyperplane aﬀ(F2), and we label the corresponding facet F2.
+Continuing this, we label the facets F3, F4, . . . in the order in which the
+rocket passes through their hyperplanes, that is, in the order in which the
+facets appear on the horizon, becoming visible from the rocket. Now we pass
+through inﬁnity, and imagine that the rocket comes back to the planet from
+the opposite side. We continue the shelling by taking the facets in the order
+in which we pass through the hyperplanes aﬀ(Fi), that is, in the order in
+which the corresponding facets disappear on the horizon.
+This “rocket ﬂight” clearly gives us a well-deﬁned ordering on the whole
+set of facets. Also, the facets that are visible from x form a beginning
+segment, since we see exactly those at the point where the rocket passes
+through x.
+To see that the ordering is a shelling, we consider the intersection ∂Fj ∩
+(F1 ∪· · · ∪Fj−1). If Fj is added before we pass through inﬁnity, then this
+intersection is exactly the set of those facets of Fj that are visible from the
+point ℓ∩aﬀ(Fj), at which Fj appears on the horizon. Thus, we know by
+induction on the dimension that this collection of facets of Fj is shellable,
+and can be continued to a shelling of the whole boundary ∂Fj.
+3
+2
+1
+Fj
+aﬀ(Fj)
+After passing through inﬁnity, the intersection is the family of nonvisible
+facets. This is shellable, too, because reversing the orientation of the line ℓ
+yields the shelling with the reversed ordering of the facets.
+Shellings that arise by Bruggesser & Mani’s construction are also known
+as line shellings. Note that in this construction, reversing the orientation
+
+8.2 Shelling Polytopes
+243
+of the line ℓalso reverses the line shelling. Thus the reverse of every line
+shelling is not only a shelling (by Lemma 8.10), but a line shelling as well.
+The Bruggesser-Mani construction has a lot of ﬂexibility: we can get
+shellings with special properties by suitable choice of the shelling line ℓ.
+Corollary 8.13.
+For any two facets F and F ′ of a polytope P, there is a
+shelling of ∂P in which F is the ﬁrst facet and F ′ is the last one.
+For every vertex v of P, there is a shelling such that the facets that
+contain v form a beginning segment of the shelling, that is, the star of the
+vertex v is shelled ﬁrst.
+F ′
+F
+F1
+F2
+v
+Proof. For the ﬁrst claim, choose any shelling line ℓwhich intersects the
+boundary of P in the facets F and F ′. (For example, choose x beyond F,
+choose x′ beyond F ′, and let ℓbe the line determined by x and x′. Perturb
+ℓto general position, if necessary.)
+For the second claim, let xv be a point beyond the vertex v, and choose
+the shelling line to contain this xv.
+Corollary 8.14.
+Every Schlegel diagram is shellable.
+More generally, every regular subdivision of a polytope is shellable.
+Proof. For any Schlegel diagram D(P, F), choose a shelling of the polytope
+P such that the facet F comes last. Thus the shelling of P also induces a
+shelling of the Schlegel diagram D(P, F).
+Every regular subdivision ΣP (Q) of a d-polytope Q is, by Deﬁnition 5.3,
+isomorphic to the complex of faces of a (d+1)-polytope P that are vis-
+ible from a certain point x = −Ted+1: and thus we can apply Theo-
+rem 8.12.
+This corollary applies to piles of cubes (Example 8.2(v)), for example. It
+suggests that every d-diagram is shellable. Is that true? (Problem 8.3*)
+Knowing that polytopes are shellable, one might ask whether they are
+extendably shellable. Here we answer this question in the negative, and
+give in fact several proofs.
+Theorem 8.15.
+Not all 4-polytopes are extendably shellable.
+In particular, eP4(7, 7, 3) and eP4(7, 5, 5) are not extendably shellable.
+
+244
+8. Shellability and the Upper Bound Theorem
+Proof. (1)
+Consider the 4-polytope P4 := eP4(9, 9, 4), which contains
+a combinatorially equivalent copy of the pile of cubes P3(9, 9, 4) on its
+boundary. Now we start a shelling of ∂P4 with the facets that correspond
+to the nonextendable partial shelling of P3(9, 9, 4) given in Lemma 8.6. This
+partial shelling has two connected parts in common with the boundary of
+the box B := |P3(9, 9, 4)|. Any facet of P4 that we can add to continue
+the partial shelling of ∂P4 will be connected to one of these parts of the
+boundary of the box, but not to both. Thus, the “missing cubes” from the
+box cannot be added to the partial shelling of ∂P4 at a later time, either.
+This proves that eP4(9, 9, 4) is not extendably shellable. In fact, it also
+proves that any 4-polytope that contains an isomorphic copy of P3(9, 9, 4)
+in its boundary complex is not extendably shellable. So, eP4(z1, z2, z3) is
+not extendably shellable for z1 ≥9, z2 ≥9, and z3 ≥4.
+(2) We delete the “bottom layer” and the “walls” of the pile P3(9, 9, 4),
+to obtain P3(7, 7, 3). Now consider the Schlegel diagram of eP4(7, 7, 3), and
+start shelling it by ﬁrst shelling the 5 facets below and next to the pile
+of cubes. (This replaces the little cubes in the bottom and the walls of
+our previous example.) We continue the shelling by the 49 little cubes
+that correspond to the interior cubes in the not-extendable conﬁguration
+of Lemma 8.6. If we lift this partial shelling of the Schlegel diagram to the
+boundary of eP4(7, 7, 3), then we can also add the facet on which the dia-
+gram was based: after that we are stuck. Thus eP4(7, 7, 3) is not extendably
+shellable.
+(3) Start a shelling of P ′
+4 := eP4(7, 5, 5) at the facet F1 that is completely
+disjoint from the pile of cubes. Then the remaining facets are the ones in
+the Schlegel diagram D(P ′
+4, F1). Of this Schlegel diagram we next add the
+bottom and the top facet to the shelling, as F2 and F3. Then, from the
+pile of cubes isomorphic to P3(7, 5, 5), we take little cubes F4, F5, . . . along
+a knotted curve that connects the bottom facet to the top facet of the
+Schlegel diagram, as suggested by the drawing on the next page. All this
+yields legal shelling steps, until one reaches the last (white) cube, which is
+in the top layer of the pile of boxes.
+However, now the complex contains a knotted curve, for which all edges
+except for one are on the boundary of the subcomplex that we have shelled
+at this point. This knotted curve would be completed by the little white
+cube from the top layer. Now if we continue the shelling elsewhere, then
+there remains to be a knotted curve of this type: so the little white cube
+in the drawing cannot be added to the shelling in a later step, either. Thus
+this partial shelling of eP4(7, 5, 5) cannot be completed.
+The third proof for Theorem 8.15 can also be adapted to see that nei-
+ther simple polytopes, nor simplicial polytopes, are extendably shellable in
+general. Also, it can be generalized to see that “most” 4-polytopes are not
+extendably shellable. We refer to [575].
+
+8.2 Shelling Polytopes
+245
+4
+5
+6
+8
+9
+....
+10
+ 11
+7
+Shellings of polytopes allow us to “build up” the boundary of a poly-
+tope step by step, adding one facet at a time. Thus one can do proofs by
+induction on the number j of facets in the complex
+Cj := C(F1 ∪F2 ∪· · · ∪Fj),
+which represents a shellable part of the boundary of a polytope.
+Our ﬁrst, simple but classical, application of this technique will prove
+the Euler-Poincar´e formula.
+Deﬁnition 8.16.
+The f-vector of a d-dimensional polyhedral complex C
+is the vector
+f(C)
+=
+(f−1, f0, f1, . . . , fd) ∈Nd+2,
+where fk = fk(C) denotes the number of k-dimensional faces in C.
+By the f-vector of a d-polytope we mean the f-vector of its boundary
+complex:
+f(P)
+:=
+f(C(∂P)) = (f−1, f0, f1, . . . , fd−1) ∈Nd+1.
+Note that all the f-vectors we consider start with the entry f−1 = 1,
+corresponding to the empty face. The f-vectors of polytopes satisfy only
+one nontrivial linear equation: the Euler-Poincar´e formula.
+
+246
+8. Shellability and the Upper Bound Theorem
+Corollary 8.17 (Euler-Poincar´e formula).
+For every d-dimensional polytope,
+f0 −f1 + · · · + (−1)d−1fd−1
+=
+1 −(−1)d.
+Proof. In order to do induction, we need to consider the alternating sum
+of face numbers for general polytopal complexes. For this we deﬁne the
+(reduced) Euler characteristic χ(D) of a polyhedral complex of dimension
+at most d, by
+χ(D)
+:=
+−f−1 + f0 −f1 + · · · + (−1)dfd.
+Now if D and D′ are polytopal complexes such that the union is a polytopal
+complex too (that is, if F ∩F ′ ∈D ∩D′ for F ∈D, F ′ ∈D′), then the
+Euler characteristic is additive:
+χ(D) + χ(D′)
+=
+χ(D ∪D′) + χ(D ∩D′).
+We prove by induction on d that the complex of a polytope C(P) always
+has Euler characteristic 0, and thus its boundary has Euler characteristic
+(−1)d−1:
+χ(C(P)) = 0,
+χ(C(∂P)) = (−1)d−1.
+This is clear for d ≤1. Now if P is a d-polytope with shelling order
+F1, F2, . . ., then we have more precisely that
+χ(C(F1 ∪F2 ∪· · · ∪Fj))
+=
+ 0
+for 1 ≤j < fd−1
+(−1)d−1
+for j = fd−1
+— which follows by induction on j and dimension, since the facets Fj
+that we add in are (d −1)-polytopes, the Euler characteristic is additive,
+and the intersection Fj ∩(S
+i<j Fi) is a shellable part of, but not the whole
+boundary of Fj, for j < fd−1. This last fact is immediate from Lemma 8.10,
+or geometrically in the special case of a line shelling.
+8.3
+h-Vectors and Dehn-Sommerville Equations
+From now on, to the end of this lecture, all polytopes are simplicial.
+For simplicial polytopes, the combinatorics of shellings can be described
+even more concretely. For the following let P be a simplicial d-polytope, so
+its boundary is a simplicial complex C := C(∂P) of dimension d −1. Let
+V := vert(P) be the vertex set of P of size n := f0(P).
+We identify the proper faces of P with their vertex sets — that is, we
+identify the “geometric simplicial complex C” with the “abstract simplicial

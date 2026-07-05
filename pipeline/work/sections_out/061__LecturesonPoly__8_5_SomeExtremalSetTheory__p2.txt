@@ -1,0 +1,55 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 8. Shellability and the Upper Bound Theorem
+현재 소단원: 8.5 Some Extremal Set Theory (분할 part 2)
+직전 소단원: 「8.4 The Upper Bound Theorem」
+[본문]
+268
+8. Shellability and the Upper Bound Theorem
+Macaulay’s contribution [372] was, essentially, the equivalence (i)⇐⇒(ii)
+of Theorem 8.34. We have combined it with important work by Stanley
+[512, 513] and by Bj¨orner, Frankl & Stanley [93].
+The sequences characterized in Theorem 8.34 are called M-sequences
+(dial “M” for “Macaulay”) or “O-sequences” (“O” for whatever). They
+are of fundamental importance, as we will also see in the next section.
+Here are a few examples of M-sequences, for d = 3. The sequence
+(1, 3, 3, h3) is an M-sequence for 0 ≤h3 ≤4. In fact, part (ii) of Macaulay’s
+theorem suggests that for this we can take the multicomplex
+
+∅, 1, 2, 3 , 11, 12, 22
+	
+together with the ﬁrst h3 sets from the list
+F1(3) = 111,
+F2(3) = 112,
+F3(3) = 122,
+F4(3) = 222.
+Since F5(3) = 113 contains the submultiset 13 that is not among the 1-
+faces we listed, we get that (1, 3, 3, 5) is no longer an M-sequence. Note
+that among these, for h3 = 1 we get (1, 3, 3, 1) as an M-sequence: this is
+the h-vector of the boundary of an octahedron; see Example 8.22.
+8.6
+The g-Theorem and Its Consequences
+From the last section, I hope we gathered some intuition for “what an
+M-sequence is.” All kinds of interpretations are useful: so, the best is to
+alternate between various explanations, between
+• the f-vector of a multicomplex,
+• the h-vector of a shellable complex, and
+• a sequence of nonnegative integers satisfying ∂k(hk) ≤hk−1.
+Here comes one big reason why M-sequences are useful. It yields a com-
+plete characterization of the f-vectors of simplicial d-polytopes P. What
+do we know about them so far? Forgetting about fd = 1, we know they can
+be encoded by their h-vectors h(P) = (h0, h1, . . . , hd), which satisfy the
+Dehn-Sommerville equations hk = hd−k for 0 ≤k ≤d. Also, we know that
+h(P) is an M-sequence from Macaulay’s Theorem 8.34(iv), which implies
+the upper bound inequality
+hk ≤
+h1
+k
+
+=
+h1 + k −1
+k
+
+.
+In quite a daring step, McMullen in 1970 combined all the then available
+information (including the lower bound theorem by Barnette, see below)

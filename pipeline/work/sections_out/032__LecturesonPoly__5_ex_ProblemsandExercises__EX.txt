@@ -1,0 +1,207 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 5. Schlegel Diagrams for 4-Polytopes
+현재 소단원: 5.ex Problems and Exercises
+직전 소단원: 「5.4 Three Examples」
+[연습문제]
+Problems and Exercises
+145
+Problems and Exercises
+5.0
+Prove that every polytopal subdivision of a polygon without new
+vertices is regular.
+5.1
+Show that the following 3-polytope (the capped prism) has a nonreg-
+ular triangulation without new vertices.
+(Kleinschmidt and Lee, see Lee [357, Sect. 6])
+5.2
+Let C be any polytopal subdivision of a d-polytope in Rd.
+(i) Show that the decision of whether C is regular can be reduced
+to a linear programming feasibility problem. How do you get rid
+of the strict inequalities that come up?
+(ii) If C is a Schlegel diagram, show that it can be obtained from a
+“lower faces” construction as in Deﬁnition 5.3.
+(Use a projective transformation that moves yF “to inﬁnity”;
+compare to Exercise 2.18.)
+(iii) If C is a d-diagram, show that the question of whether it is a
+Schlegel diagram can also be reduced to a linear programming
+feasibility problem.
+5.3
+Produce examples of polytopes that have nonregular triangulations
+without new vertices.
+(i)
+The 4-cube C4 has nonregular triangulations without new ver-
+tices.
+(It was an open problem for a long time whether Cd has non-
+regular triangulations for any d. Now De Loera [182] has shown
+that there are even such triangulations with 24 maximal sim-
+plices, all of which have volume 1/4!.)
+(ii)
+The second hypersimplices ∆d−1(2) have nonregular triangula-
+tions without new vertices, for d ≥9.
+(These were constructed with combinatorial tools by De Loera,
+Sturmfels & Thomas [183]; you are allowed to use the computer,
+via part (i) of the previous exercise. This might in particular be
+useful in the next two parts, which are unsolved problems.)
+
+146
+5. Schlegel Diagrams for 4-Polytopes
+(iii)
+Can products ∆m−1 × ∆n−1 of two simplices have nonregular
+triangulations?
+(Answer: ∆3 × ∆3 is the product to look at – De Loera [182]).
+(iv)* Consider the triangulations of the square [0, n]2 with vertex
+set {0, 1, . . . , n} × {0, 1, . . . , n}. Estimate the numbers f(n) and
+freg(n) of all triangulations resp. of all regular triangulations, as
+precisely as possible. (Compare your results to those in [298].)
+Is it true that “most of” the triangulations are non-regular, when
+n gets large, that is, that the ratio freg(n)/f(n) tends to 0 for
+n −→∞?
+5.4
+Deﬁne the product of two polyhedral complexes, in such a way that
+the product of subdivisions of two polytopes P and Q is a subdivision
+of the product P × Q.
+Prove that the product subdivision is regular if and only if the original
+subdivisions of P and Q were regular.
+5.5
+Compute the numbers fk of k-faces for the polytope eP4(z1, z2, z3).
+5.6
+A “default” convex function is given by the paraboloid function
+f : Rd −→R,
+x 7→
+d
+X
+i=1
+x2
+i .
+Let V ⊆Rd be a ﬁnite set of points (vertices). Show that the regular
+subdivision of Q := conv(V ) associated with this f has the following
+property: for every facet of the subdivision there is a sphere that
+contains all its vertices, but no other vertices from V .
+(This subdivision is known as the Delaunay triangulation of the point
+set V . It is of great importance for many aspects of computational
+geometry; see for example Edelsbrunner [190].)
+5.7
+Show that the following 2-diagram is regular, but not Schlegel:
+5.8
+Show that in general the polytopal complex C(∂P)\{F} and the
+Schlegel diagram D(P, F) are not aﬃnely isomorphic. (For this, it
+suﬃces to consider the 3-cube!)
+However, show that p : G −→p(G) is a projective transformation,
+for all proper faces G of P.
+
+Problems and Exercises
+147
+5.9
+Construct a Schlegel diagram for the polar of a product
+P = (∆2 × ∆2)∆.
+Construct Schlegel diagrams for the cyclic polytopes C3(6) and C4(7).
+5.10* What is the smallest number f(d) of d-simplices that is suﬃcient to
+triangulate a d-cube?
+Combining results by Hughes and Anderson [285] [287] [286] [288]
+and Haiman [267], we know that
+f(2) = 2
+f(3) = 5
+f(4) = 16
+f(5) = 67
+f(6) = 308
+f(7) = 1493
+and
+5522 ≤f(8) ≤11944.
+For large d a method due to Smith [505], using volume estimates in
+hyperbolic geometry, yields the best lower bounds on f(d) so far.
+Is it true that the smallest number is always/only achieved by a
+triangulation without new vertices?
+What is the maximal number of simplices that may be needed to
+triangulate any 0/1-polytope: Is this the same number you get in
+case of the d-cube?
+(“Eﬃcient” triangulations of d-cubes, with few facets, have been stud-
+ied extensively, for example for use in ﬁnite element methods for
+solving diﬀerential equations. Thus, a lot is known about such trian-
+gulations. For example, one knows that asymptotically, at most ρdd!
+simplices are needed for large d, for some constant ρ < 1. We refer to
+Haiman [267] and Todd & Tun¸cel [545] for more information.)
+5.11
+For a 4-polytope, one cannot prescribe the shape of a 2-face! Namely,
+Richter-Gebert [459, p. 91] [462] provides the following diagram of a
+4-dimensional polytope X∗:
+Show that this represents the Schlegel diagram of a 4-polytope with
+8 facets and 12 vertices. Show that the shape of the hexagon at the
+base cannot be prescribed arbitrarily: three lines, determined by two
+opposite edges and by the diagonal between them, must (projectively)
+meet in a point. (See also Exercise 6.11)
+
+148
+5. Schlegel Diagrams for 4-Polytopes
+5.12
+Show that 2d simplices can be arranged in Rd in such a way that any
+two are adjacent (that is, the intersections are (d −1)-dimensional).
+5.13
+The smallest triangulation of the torus surface has 7 vertices, 21 edges
+and 14 triangles. Construct it, and show that it can be embedded as a
+subcomplex into C(C7(4)), and thus as a simplicial complex into R3.
+(Cs´asz´ar [169], Gr¨unbaum [252, p. 253]; see also Altshuler [14] and
+Bokowski & Eggert [113])
+5.14* Can every triangulation of the torus be realized by a simplicial com-
+plex C in R3?
+(This is a classical problem of Gr¨unbaum [252, p. 253], which is
+still wide open. See Ewald, Kleinschmidt, Pachner & Schulz [203,
+p. 153],qq Altshuler, Bokowski & Schuchert [15] and their references.)
+5.15
+Show that every d-dimensional simplicial complex can be realized as
+a subcomplex of a simplicial (2d+2)-polytope, and thus has a straight
+realization as a simplicial complex in R2d+1.
+(Hint: Take a suitable cyclic polytope and its Schlegel diagram.)
+5.16
+Show that there are polyhedral complexes that are not subcomplexes
+of polytopes. Namely, show that the subdivision of the M¨obius band
+drawn below with 6 vertices, 10 edges, and 4 facets can be realized as
+a polyhedral complex in R3, but not as a subcomplex of any polytope.
+(This is due to Betke, Schulz & Wills [68]; see Barnette [48] for a
+similar, but simplicial, M¨obius strip that serves as an “impediment
+for polyhedrality.” It is not even true that every triangulated M¨obius
+strip has a straight embedding into R3: see Brehm [129]. However,
+the Schlegel diagram construction shows that no such M¨obius strip
+can appear in the boundary of a 4-polytope.)
+5.17
+Modify Schulz’ 3-diagram D1 from Example 5.10 by subdividing the
+bipyramid A into three tetrahedra, [2, 3, 6], [2, 5, 6], and [2, 6, 7]. Show
+that this yields a new 3-diagram D′
+1 with 8 vertices and 12 facets,
+which contains the M¨obius band of the previous exercise as a sub-
+complex.
+Derive that D′
+1 is not polytopal, either.
+
+6
+Duality, Gale Diagrams,
+and Applications
+More about life in high dimensions: after “successfully” dealing with poly-
+topes in four dimensions, we now study polytopes with few vertices, that is,
+d-polytopes with only d-plus-a-few vertices. For this, we develop a duality
+theory, which describes them in terms of structures in low dimensions.
+This duality theory (developed by Perles in the 1960s, and recorded
+by Gr¨unbaum [252]) is classically known as Gale diagrams. Later it was
+realized (apparently ﬁrst by McMullen [394]) that Gale diagrams are a
+manifestation of “oriented matroid duality.”
+Thus behind the construction of Gale diagrams one ﬁnds (barely hidden)
+oriented matroids. Their theory was initiated in the 1970s by at least four
+independent authors, Jon Folkman, Jim Lawrence, Robert G. Bland, and
+Michel Las Vergnas; see [207] and [100].
+By now oriented matroids form a theory with many facets, extensive
+enough to ﬁll thick books [96]. One aim of our lectures is to give a sim-
+ple introduction to a few topics that help understand polytopes. Keys to
+this include the description of the relative position of vertices in terms of
+“circuits” and “cocircuits,” as well as the simple duality between these two
+descriptions, oriented matroid duality, which in polytope theory manifests
+itself in (linear and aﬃne) Gale diagrams.
+Thus this lecture includes a brief crash (?) course on oriented matroids.
+(This will be continued in Lecture 7, when we discuss hyperplane arrange-
+ments and zonotopes.) Although oriented matroids need some amount of
+new notation and terminology, there is little magic involved: just don’t be
+scared of names. For further reading, we refer to the “Orientation Session”
+in Bj¨orner et al. [96, Ch. 1].
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_7, © Springer Science+Business Media New York 2007 
+ 
+149

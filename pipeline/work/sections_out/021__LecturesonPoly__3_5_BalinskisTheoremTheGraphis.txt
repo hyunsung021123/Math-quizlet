@@ -1,0 +1,103 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 3. Graphs of Polytopes
+현재 소단원: 3.5 Balinski's Theorem: The Graph is d-Connected
+직전 소단원: 「3.4 Kalai's Simple Way to Tell a Simple Polytope from Its Graph」
+[본문]
+3.5 Balinski’s Theorem: The Graph is d-Connected
+95
+respect to O. (Remember: vert(H) is an initial set with respect to O.) Thus,
+vert(F) ⊆vert(H). Since both H and G(F) are k-regular and connected,
+vert(F) = vert(H) and G(F) = H. This completes the proof.
+Remarks 3.13.
+0.
+You could ask: do these parameters hO
+i actually mean anything? They
+do: we will come back to this when we study shellability, in Lecture 8.
+1.
+We do not have a practical way to distinguish between good and
+bad orientations. The algorithm suggested by the preceding proof is
+exponential in |vert(P)|, but it can be made to “work” in practice: see
+Achatz & Kleinschmidt [1]. Is there a really eﬃcient way to compute,
+for example, the number of facets of P from G(P)?
+2.
+General polytopes cannot be reconstructed from their graphs — this
+can be seen, for example, from the existence of neighborly (simplicial)
+polytopes. However, Joswig [293] has an extension of Kalai’s result
+and proof to non-simple polytopes.
+Perles [435, 437] proved that simplicial d-polytopes are determined
+by their ⌊d/2⌋-skeleta; see Kalai [307]. General d-polytopes are deter-
+mined by their (d−2)-skeleta, and this is best possible even for quasi-
+simplicial polytopes (all of whose facets are simplicial polytopes); see
+Gr¨unbaum [252, Ch. 12].
+3.5
+Balinski’s Theorem: The Graph is d-Connected
+A very fundamental fact about the graphs of d-polytopes is that they are
+d-connected, a theorem due to Balinski [37].
+Here we use the deﬁnition that a simple graph G(P) is d-connected if the
+removal of any d −1 or fewer vertices (and all the edges they are incident
+with) leaves a connected graph.
+The theorem is certainly plausible, since it is easy to see (using Lemma
+3.6) that every vertex of G(P) has degree at least d. We have adapted the
+following simple proof from Gr¨unbaum [252]. Two diﬀerent proofs appear
+in Brøndsted & Maxwell [134] and in Barnette [50]. Two extensions, which
+answer the questions of how many components the graph may have if you
+remove k vertices, or if you remove a k-face, appear in Klee [322] and in
+Perles & Prabhu [439]. A stronger, “directed” version of Balinski’s theorem
+is hidden in Holt & Klee [282].
+Theorem 3.14 (Balinski’s theorem).
+[37]
+The graph G(P) is d-connected for every d-polytope P.
+Proof. Let P = conv(V ) ⊆Rd, where the vertex set V of P and of the
+graph G(P) has at least d+1 elements. We delete a subset of d−1 of them,
+S = {v1, . . . , vd−1} ⊆V ; then we have to show that the graph G(P)\S
+induced on the remaining vertices is connected.
+
+96
+3. Graphs of Polytopes
+Let s :=
+1
+d−1
+Pd−1
+i=1 vi ∈P denote the barycenter of the vertex set S.
+We know by Lemma 2.9(i) that s is contained in the relative interior of a
+face F. We consider two cases.
+Case 1. If s is contained in a proper face F ∈L(P)\{P}, then all points
+vi ∈S are also contained in this face F — this is the usual computation.
+Let cx ≤c0 be a valid inequality that deﬁnes F. Then c0 is the largest value
+that cx can achieve on P, while the smallest value is some g0 < c0. In this
+case, every vertex in V \S either lies in the face F0 = {x ∈P : cx = g0}, or
+it has a neighbor whose cx-value is smaller (this follows from Lemma 3.6),
+and which therefore also lies in V \S. Thus every vertex in V \S has a
+decreasing path, within V \S, which connects it to a vertex in F0. Finally,
+the graph of F0 is connected, by induction on d.
+Case 2. If s is contained in the interior of P, then we choose a linear
+function cx on Rd such that the hyperplane {x ∈Rd : cx = c0} contains
+both S and at least one other vertex v0 ∈V \S. This is possible because
+every set of d points is contained in a hyperplane.
+Now let cmax and cmin denote the largest and the smallest value, respec-
+tively, that cx takes on P, and let Fmax and Fmin denote the corresponding
+faces. Then the graphs G(Fmax) and G(Fmin) are again connected, by induc-
+tion. Every vertex v ∈V \S is connected either by a strictly cx-increasing
+path which avoids S to Fmax (if it satisﬁes cv ≥c0), or by a strictly de-
+creasing path to Fmin (if cv ≤c0). Finally, the extra vertex v0 is connected
+to both Fmax and Fmin, so the whole graph G(P)\S is connected.
+Notes
+The graph of a polytope is treated with care in Gr¨unbaum’s book [252,
+Chapters 11, 13 and 16].
+As for linear programming, this is usually described in a much less geo-
+metric way, which is better suited for algorithmic treatment. Also, there is
+of course much more to say than our simpliﬁed sketch in Section 3.2. We re-
+fer to the books by Dantzig [174], Chv´atal [158], Schrijver [484], Gr¨otschel,
+Lov´asz & Schrijver [246], Padberg [434], and Borgwardt [125], and to [96,
+Ch. 10] for various diﬀerent aspects of the matter. As for “Dantzig’s sim-
+plex algorithm” [174], let us just mention that it was already developed by
+Kantorovich in the 1920s, but could not published in any reasonable form
+for reasons that were equally ideological and stupid [312].
+Klee & Kleinschmidt [327] is an inspiring survey on the Hirsch conjec-
+ture and its relatives; see also Kleinschmidt [335]. The material in Section
+3.3 is derived from the papers by Kalai & Kleitman [305, 309, 306]. In
+particular, the proof of Theorem 3.10 is from Kalai [306, Sect. 2]. Our dis-
+cussion of 0/1-polytopes is based on ideas by Naddef [419] and by Klein-
+schmidt [336]. The observation in Theorem 3.11 that the extreme case here
+is only achieved for d-cubes seems to be new (although not deep).

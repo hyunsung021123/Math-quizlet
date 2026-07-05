@@ -1,0 +1,88 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.5 Polytopes with Few Vertices
+직전 소단원: 「6.4 Dual Configurations and Gale Diagrams」
+[본문]
+6.5 Polytopes with Few Vertices
+171
+It yields a criterion that is very easy to check “by inspection” for the
+interesting case n −d = 4; see below.
+Corollary 6.20 (Characterization of Gale diagrams of polytopes).
+A conﬁguration A = {a1, . . . , an} points in (Rn−d−2)∗, each of them de-
+clared to be either “positive” or “negative,” that aﬃnely spans (Rn−d−2)∗,
+is the Gale diagram of a d-polytope with n vertices if and only if the fol-
+lowing condition is satisﬁed: for every oriented hyperplane H in (Rn−d−2)∗
+spanned by points of A, the number of positive A-points on the positive
+side of H, plus the number of negative A-points on the negative side of H,
+is at least 2.
+In our descriptions we have disregarded the case of “special” points:
+they are just the cone points, so adding k special points to the diagram
+G corresponds to taking the k-fold pyramid over the polytope represented
+by G.
+6.5
+Polytopes with Few Vertices
+Any d-polytope with d + 1 vertices is a d-simplex: this we know and have
+seen before. In this case the Gale diagram is in 0-dimensional space, so all
+vectors are 0-vectors trivially.
+Next consider the case of d-polytopes with d + 2 vertices. The result is
+that there are ⌊d2/4⌋combinatorial types of d-polytopes with d+2 vertices.
+Of those, ⌊d/2⌋represent simplicial polytopes, and the others are (multiple)
+pyramids over simplicial polytopes of this type. The case of d + 2 vertices
+is classic and can be found in Schoute [480] and Sommerville [506]; see also
+Gr¨unbaum [252, Sect. 6.1] or Ewald [201, Sect. 2.6].
+The aﬃne Gale diagrams representing d-polytopes with d + 2 vertices
+are 0-dimensional and may be represented by a “cloud” of positive points
+(black), negative points (white), and special points (grey). The condition of
+Corollary 6.20 requires that there are at least 2 black and at least 2 white
+points. Furthermore, interchanging black and white points does not change
+the combinatorial type of the polytope.
+Thus we get the following complete enumeration for d = 3, n = 5:
+represents the bipyramid over a triangle (this is a simplicial polytope with
+6 facets), and
+yields the square pyramid (a nonsimplicial polytope with 5 facets).
+Similarly, you should analyze and classify the 4-polytopes with 6 vertices
+in Exercises 6.8.
+
+172
+6. Duality, Gale Diagrams, and Applications
+For polytopes with d + 3 vertices, the complete classiﬁcation becomes
+diﬃcult, but not out of reach. Their aﬃne Gale diagrams are conﬁgurations
+of signed points on a line. The main problem is to decide which diﬀerent
+diagrams represent combinatorially equivalent polytopes. First results were
+due to Gale, while Perles developed the (Gale diagram) techniques neces-
+sary to analyze polytopes with d+3 vertices. The special case of simplicial
+polytopes was done in Gr¨unbaum [252, Sect. 6.2]; the work was completed
+by Mani [376] and Kleinschmidt [333]. Explicit formulas for the number of
+d-polytopes with d + 3 vertices were obtained by Perles [252] for the sim-
+plicial case and by Fusy [217] for the general case (correcting an error in an
+earlier solution by Lloyd [370]). Note that the octahedra that we considered
+before have d + 3 vertices, for d = 3.
+The polytopes with d+3 vertices still do not have any unusual properties.
+Finally, we arrive at the case of polytopes with d + 4 vertices: here is
+the threshold for counterexamples, as Sturmfels [532] calls it. They can be
+analyzed in terms of planar point conﬁgurations — which can be arbitrarily
+complicated. In particular, for high enough d there are
+• d-polytopes with d + 4 vertices that do not have a realization with
+rational coordinates,
+• d-polytopes with d + 4 vertices for which the shape of a facet cannot
+be prescribed, and
+• d-polytopes with d + 4 vertices that have disconnected realization
+spaces.
+We will now describe Gale diagram approaches to these three phenomena.
+(a) A Nonrational 8-Polytope
+Using Gale diagrams, Perles has shown that there are nonrational poly-
+topes, that is, polytopes for which there are no combinatorially equivalent
+polytopes with rational coordinates.
+Example 6.21 (Perles).
+[252, p. 95] [96, Fig. 8.4.1]
+There is a nonrational 8-polytope with 12 vertices.,
+To see this, one veriﬁes that the conﬁguration G in the ﬁgure on the next
+page has three properties:
+1. G cannot be realized with rational coordinates “as a matroid”: there
+is no rational planar conﬁguration of 12 points such that the same sets
+of points as in G coincide, respectively are collinear. (Essentially, there
+is a golden ratio involved in the construction of a regular pentagon,
+so it can only be realized with coordinates in a ﬁeld containing
+√
+5.)

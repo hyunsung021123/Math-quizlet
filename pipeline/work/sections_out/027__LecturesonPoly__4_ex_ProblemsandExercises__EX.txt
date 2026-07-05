@@ -1,0 +1,332 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 4. Steinitz' Theorem for 3-Polytopes
+현재 소단원: 4.ex Problems and Exercises
+직전 소단원: 「4.4 Extensions of Steinitz' Theorem」
+[연습문제]
+Problems and Exercises
+119
+We don’t try to do details here: They are “too non-linear for this book.”
+However, a recent explicit variational principle for circle packing found by
+Bobenko and Springborn [109] yields a very elegant proof for Theorem 4.13.
+This is worked out in detail in [580]; for the uniqueness part see also Spring-
+born [510].
+Still a diﬀerent polytope realization algorithm, for simplicial 3-polytopes,
+was given by Das & Goodrich [178]: it essentially works by doing “many
+inverse Steinitz operations on independent vertices in one step,” and thus
+yields a linear-time realization algorithm that produces realizations with a
+singly-exponential bound on the size of the integer coordinates (as does the
+Onn–Sturmfels algorithm [428] [459, Sect. 13.2] for general 3-polytopes).
+Elementary semialgebraic sets are basic objects. Exercise 4.22 indicates
+that they can have very complicated structure. General semialgebraic sets
+(for which also nonstrict inequalities are admitted in the deﬁning system)
+can be written as ﬁnite unions of elementary semialgebraic sets.
+In this chapter we only met realization spaces that are quite trivial (con-
+tractible); this will change as soon as we have developed the theory to
+analyze the realization spaces of some high-dimensional polytopes, in Lec-
+ture 6. The study of semialgebraic sets is called real algebraic geometry —
+a very active and fascinating ﬁeld of research. We refer to Bochnak, Coste
+& Roy [110] and Becker [65] for more information.
+Problems and Exercises
+4.0
+Show that the complete graph K5, and the complete bipartite graphs
+K3,n, are ∆Y -reducible. Considering the graphs that are ∆Y -equiv-
+alent to K6, show that Kn is not ∆Y -reducible, for n ≥6, and that
+Km,n is not ∆Y -reducible for m, n ≥4.
+4.1
+If G is a 3-connected graph with n ≥4 edges, show that it contains
+a subdivision of K4.
+4.2
+Show that the deﬁnition of k-connectivity given in the notes to this
+lecture specialize to our deﬁnitions in Section 4.1 of 2-connectivity
+(for graphs with more than 1 edge) and of 3-connectivity (for graphs
+with more than 3 edges).
+4.3
+What is the problem with the construction of P from P ′, if G −→G′
+is a simple Y -to-∆transformation? For this, try to prove the Y -to-∆
+part of Lemma 4.3.
+If you are comfortable with projective transformations (Section 2.7),
+explain how to do this without using polarity (as we did).
+4.4
+Check how to do the reduction theorem for grid graphs entirely within
+the framework of 3-connected graphs. Where are the problems? How
+
+120
+4. Steinitz’ Theorem for 3-Polytopes
+do you make grid graphs 3-connected? How many “basic operations”
+do you need?
+4.5
+Characterize the graphs of centrally symmetric 3-polytopes.
+(Gr¨unbaum [252, Thm. 13.2.5])
+4.6
+Let G be any ﬁnite graph drawn into the plane without crossings, and
+let v be its number of vertices, e its number of edges, c its number
+of connected components, and f the number of connected regions
+determined by it. For example, the graph
+has v = 10, e = 11, f = 5, and c = 3.
+Show that in general v −e + f = 1 + c. Deduce Euler’s formula
+v −e + f
+=
+2
+for the number of vertices v, the number of edges e, and the number
+of facets f of a 3-polytope.
+4.7
+Deduce from Steinitz’ theorem (from Corollary 4.9) that every planar
+graph has a straight line drawing in the plane without intersections.
+(In graph theory literature, this appears as a result of Wagner [554],
+rediscovered by F´ary [205]. It is also quite easy to prove this directly
+by induction on the number of vertices; see, for example, Hartsﬁeld
+& Ringel [273, p. 167].)
+4.8
+Conclude from Exercise 4.6 that for every 3-polytope P, either the
+polytope P itself or its polar P ∆has a facet that is a simplex.
+(This is not true for 4-polytopes — for these read about the regular
+24-cell, whose facets are octahedra and whose vertex ﬁgures are cubes;
+see, for example, Coxeter [164, Sect. 8.2].)
+4.9
+The graph of the 3-cube, G(C3), has cycles that go through all the
+vertices (“Hamiltonian cycles”).
+
+Problems and Exercises
+121
+Take such a cycle, and then construct a realization of a combinatorial
+cube in 3-space such that the usual projection π : R3 −→R2 carries
+the cube to an 8-gon, and the cycle to the boundary cycle of the
+8-gon. Then do the same for the 3-dimensional permutahedron Π3,
+and for the (regular) dodecahedron.
+4.10
+Show that we cannot prescribe the shape of two facets of a 3-polytope
+(even if they have congruent intersection). In fact, in a triangular
+prism
+c
+b
+a
+if one square face is prescribed such that the edges a and b are parallel,
+then the other square faces have to have b and c respectively a and c
+parallel.
+4.11
+One cannot prescribe two disjoint facets of a 3-polytope either. For
+this, analyze the prism over an n-gon, and show the following. If
+we prescribe the bottom n-gon, then the coordinatizations of the
+completed prism are prescribed by n + 3 linear parameters (“degrees
+of freedom”), while we have 2n −3 choices for the shape of the top
+facet. Thus, if we prescribe two generic n-gons, then they cannot be
+built into a prism, if n ≥7.
+
+122
+4. Steinitz’ Theorem for 3-Polytopes
+4.12
+Show that we cannot prescribe the shape of the shadow boundary of
+a 3-polytope.
+(J¨urgen Richter-Gebert, who noted that from a triangular prism, you
+can get a hexagon as a projection, but the shape of the hexagon can-
+not be prescribed: see page 141! Earlier, Barnette [46] gave a proof for
+the case where the 3-polytope is a tetrahedron with a stellar subdi-
+vision on every facet, and Q is a regular 8-gon. Also, you can use the
+prisms of the previous exercise, and again count degrees of freedom.)
+4.13
+Show that not all 3-polytopes can be represented in such a way that
+all facets touch the unit sphere, or that all vertices are on the unit
+sphere. Which 3-polytopes can be represented this way?
+(Remark: This is a classical problem that goes back to 1832; see
+Steiner [523], Steinitz [525], and Schulte [486]. The characterization
+problem was solved very recently by Hodgson, Rivin & Smith [277].)
+4.14
+Show that if an n-gon is represented in R2 in such a way that all of
+its edges touch S1 in their midpoints, then the n-gon is regular.
+If the edges just touch S1, but not necessarily with their midpoints,
+then the n-gon need not be regular, even if we require that the sum
+of the vectors of the contact points is 0.
+4.15
+Let f2(n) ∈N be the smallest number such that the convex n-gon
+P2(n) can be represented on an f2(n) × f2(n) grid, that is, with all
+vertices in {0, 1, . . . , f2(n)}2. For example, we have f2(3) = f2(4) = 1,
+f2(5) = f2(6) = 2, f2(7) = f2(8) = 3, f2(9) = 4, but f(10) = 5 (see
+the ﬁgure).
+(i) Show that f2(n) ≤c n3/2 for some c > 0.
+(In fact, Thiele [539, Satz 4.1.10] proved that the bound
+f2(n)
+=
+2π
+ n
+12
+3/2
++ O(n log n)
+is sharp.)
+(ii) Using part (i), show that the cyclic 3-polytope C3(n) with n
+vertices can be represented on a k × k × 3 grid, where k =
+f2(n −1).
+
+Problems and Exercises
+123
+(iii) Using part (i), show that the polar cyclic 3-polytope C3(m)∆
+with n vertices (where n = 2m −4) can be represented on a
+k′ × k′ × k′ grid, where k′ = f2( n
+2 + 1).
+4.16* For n ≥4 let f3(n) be the smallest positive integer such that every
+3-dimensional polytope with n vertices can be represented with inte-
+gral vertices in {0, 1, . . . , f3(n)}3. Let f s
+3(n) be the same function for
+simplicial 3-polytopes.
+Determine the asymptotic behavior of the functions f3(n) and f s
+3(n).
+(Work by Goodman, Pollack & Sturmfels [238, Sect. 5] shows that
+for d-dimensional simplicial polytopes with d + 4 vertices one needs
+vertex coordinates that grow doubly exponentially in d,
+f s
+d(d + 4)
+≥
+22cd
+for some constant c > 0. However, there is no such result that applies
+to simplicial polytopes for any constant dimension d.
+The case d = 3 might be special: it is quite possible that there is a
+quadratic upper bound on f3(n); up to now only exponential upper
+bounds f s
+3(n) ≤28.45n and f3(n) ≤533n2 are known, due to Onn &
+Sturmfels [428], Richter-Gebert [459, p. 143], and ﬁnally Rib´o Mor &
+Rote [454, Chap. 6].
+4.17* For n ≥4, let g(n) ∈N be the smallest number such that every
+3-connected planar graph with n vertices can be represented in the
+plane in such a way that the vertices are on the g(n) × g(n) grid,
+the edges are straight, and the bounded regions determined by the
+graph embedding, as well as the union of all these regions, are strictly
+convex (i.e., all interior angles are smaller than π). How large is g(n)?
+(If one just requires straight-line embeddings, without the convexity
+assumptions, then one can embed the graph on a (2n−4)×(n−2) grid;
+see de Fraysseix, Pach & Pollack [209], and even on an (n−1)×(n−1)
+grid, by Schnyder [479]. Chrobak & Kant [157] [311, Section 10.2.2]
+have is a convex (but not strictly convex) drawing algorithm that runs
+in linear time and only needs a grid on (n−1)×(n−1) vertices! Note
+that the superlinear lower bounds of Problem 4.15 apply here. With
+the strict convexity assumption, the currently best upper bound is
+O(n3) × O(n3), due to Chrobak, Goodrich & Tomassia [156].)
+4.18* Does every 3-polytope have a realization with rational edge-lengths?
+4.19* Can every (simple) convex 3-polytope P be represented in such a way
+that a combinatorially polar polytope Q ∼= P ∆can be constructed
+as the convex hull of vertices that are chosen on the corresponding
+facets of P?
+
+124
+4. Steinitz’ Theorem for 3-Polytopes
+Can you do this for the 3-polytope obtained by cutting oﬀthe vertices
+of a tetrahedron?
+That is, can you represent this polytope in such a way, with points on
+its facets, that adjacent facets of P correspond to adjacent vertices
+on the convex hull P of the points?
+(For the special polytope P above J¨urgen Richter-Gebert saw in 1993
+that this can be done. In 2004, Andreas Paﬀenholz has constructed
+a POLYMAKE model for it.
+The general problem is suggested by the misleading description of
+polar polytopes in the book by Bartels [55, p. 74]. Gr¨unbaum &
+Shephard posed the question as Problem 3 in [259]. Gr¨unbaum sent
+me the following e-mail message:
+As far as I know, the problem is still open. I am inclined
+to believe that the answer is negative, and that once some
+counterexamples are found, we will all be saying how obvious
+that is.
+I agree.)
+4.20
+Which subsets of R are elementary semialgebraic?
+4.21
+Show that for every convex d-polytope with n-vertices, the realiza-
+tion space is an elementary semialgebraic set in Rd×n.
+(For this, embed the polytope into Rd+1, consider the maximal deter-
+minants of a realization matrix, and note that the condition that d+1
+points have to be on a common facet says that a certain subdetermi-
+nant is 0. Similarly, two points being on the same side of the facet
+spanned by some basis means that the product of two determinants
+is positive.)
+4.22
+Let S ⊆Rd be a polyhedral set: a ﬁnite union of convex polytopes.
+Show that there is an open semialgebraic set M ⊆Rd that is a
+neighborhood for S, such that S is a deformation retract of M.
+(Hint: First show that the relative interior, and the exterior, of any
+ball is an open elementary semialgebraic set. Also the intersection of
+two elementary semialgebraic sets is elementary semialgebraic. Thus
+
+Problems and Exercises
+125
+M can be constructed, for example, by deleting a ﬁnite number of
+small closed balls from a larger open ball.
+In the drawing, S is a union of a line segment and the boundary of a
+triangle; the set M appears shaded.)
+4.23
+The following problems discuss diﬀerent ways in which a planar graph
+can be represented by objects in the plane.
+(i)
+Prove that the vertices of a planar bipartite graph can be rep-
+resented by horizontal and vertical closed line segments in the
+plane, such that the segments intersect if and only if the corre-
+sponding vertices are adjacent.
+(Hartman, Newman & Ziv [272])
+(ii)
+In fact, every planar bipartite graph can be represented by dis-
+joint horizontal and vertical open line segments in the plane,
+which touch if and only if the corresponding vertices are adja-
+cent.
+(de Fraysseix, Ossona de Mendez & Pach [429, Sect. 6.3] [208])
+(iii)* Can every planar graph be represented by a family of line seg-
+ments in the plane such that every vertex corresponds to a seg-
+ment and adjacent vertices correspond to intersecting edges?
+4.24
+Describe a “fast” algorithm to test whether two 3-polytopes are com-
+binatorially equivalent.
+For this, assume that the combinatorial structure is given by the
+vertex-facet incidence matrices of the polytopes; from these, construct
+the graphs. Then use that graph isomorphism can be tested “in linear
+time” for planar graphs, according to Hopcroft & Wong [283].
+
+126
+4. Steinitz’ Theorem for 3-Polytopes
+(As a theoretical concept of fast algorithms one has the theory of poly-
+nomial algorithms and NP-completeness; see Garey & Johnson [223].
+The question of whether a polynomial algorithm exists for isomor-
+phism of general graphs is one of the prominent open problems in
+this theory [223, pp. 155–158].)
+4.25* A simple planar representation of a 3-polytope is obtained if we
+“cut it open” along a spanning tree in its graph, lay out the result-
+ing structure in the plane. Thus we obtain nets of 3-polytopes. The
+following sketches show nets for a symmetric square pyramid, for a
+not-so-symmetric square pyramid, and for a symmetric cube.
+Not every way to open a 3-polytope leads to a valid net without
+overlaps. For example, the following drawing shows a “bad” way to
+unfold a 3-polytope that is combinatorially equivalent to the 3-cube.
+Can every 3-polytope be represented by a planar net without over-
+laps?
+(This problem appears in Shephard [496], see also [168, Problem B21].
+Nets of 3-polytopes were studied extensively in Alexandrow [11].
+Combinatorially diﬀerent 3-polytopes may have the same net — thus
+we cannot really “represent” 3-polytopes by nets; an example for this
+was given by Shephard [496]. Another surprising fact in this connec-
+tion can be found in Namiki, Matsui & Fukuda [420]: even tetrahedra
+may have overlapping nets!)
+4.26* Characterize the graphs of 4-dimensional polytopes.
+
+5
+Schlegel Diagrams for 4-Polytopes
+Now that we understand the combinatorics of 3-polytopes (do we?), the
+next step is to investigate 4-polytopes. Those are harder to understand,
+since we (i.e., most of us) lack a genuine geometric intuition for the geome-
+try of 4-dimensional Euclidean space. Nevertheless, there are various tools
+available. The most prominent one is the “Schlegel diagram” of a polytope,
+a polytopal complex that represents most of the geometry of a 4-polytope.
+We will discuss polytopal complexes in some detail (they will be needed for
+other purposes as well), and then we get to discuss Schlegel diagrams, and
+some of the traps involved.
+5.1
+Polyhedral Complexes
+Deﬁnition 5.1.
+A polyhedral complex C is a ﬁnite collection of polyhedra
+in Rd such that
+(i) the empty polyhedron is in C,
+(ii) if P ∈C, then all the faces of P are also in C,
+(iii) the intersection P ∩Q of two polyhedra P, Q ∈C is a face both of P
+and of Q.
+The dimension dim(C) is the largest dimension of a polyhedron in C. The
+underlying set of C is the point set |C| := S
+P ∈C P.
+C is a polytopal complex if all the polyhedra in C are bounded (polytopes).
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_6, © Springer Science+Business Media New York 2007 
+ 
+127

@@ -1,0 +1,183 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 1. Polytopes, Polyhedra, and Cones
+현재 소단원: 1.5 Recession Cone and Homogenization
+직전 소단원: 「1.4 The Farkas Lemma」
+[본문]
+1.5 Recession Cone and Homogenization
+43
+Proof. The “either” condition can be stated as
+∃
+
+t
+u
+
+≥
+
+0
+0
+
+:
+
+1l
+O
+V
+Y
+ 
+t
+u
+
+=
+
+1
+x
+
+which by version II of the Farkas lemma is equivalent to
+FL II
+⇐⇒
+/∃(α, −a) ∈(Rd+1)∗:
+(α, −a)
+
+1l
+O
+V
+Y
+
+≥(O, O),
+(α, −a)
+
+1
+x
+
+< 0
+⇐⇒
+/∃(α, −a) ∈(Rd+1)∗:
+α1l −aV ≥O, aY ≤O, ax > α,
+which is equivalent to the negation of the “or” condition.
+1.5
+Recession Cone and Homogenization
+Using the Farkas lemma, we can give an invariant description of some very
+important constructions (notably the recession cone and the homogeniza-
+tion of a convex set) and establish their basic properties. In Proposition 1.14
+we will see that the homogenization homog(P) of a polyhedron coincides
+with the “associated cone” C(P) that we used in Section 1.1.
+Deﬁnition 1.11.
+Let P ⊆Rd be a convex set. Then the lineality space
+of P is deﬁned as
+lineal(P) := {y ∈Rd : x + ty ∈P for all x ∈P, t ∈R},
+and the recession cone (or characteristic cone) of P is deﬁned as
+rec(P) := {y ∈Rd : x + ty ∈P for all x ∈P, t ≥0}.
+Directly from the deﬁnition we can derive that lineal(P) is a linear sub-
+space of Rd. If we choose a complementary subspace U to lineal(P) (i.e.,
+U ∩lineal(P) = {0} and U + lineal(P) = Rd), then P can be decomposed
+as the Minkowski sum
+P
+=
+lineal(P) + (P ∩U)
+of a linear subspace L and a convex set P ∩U whose lineality space is zero:
+lineal(P ∩U) = {0}.
+This reduction usually makes it possible to consider only polyhedra with
+lineality space {0}, known as pointed polyhedra (if they are nonempty).
+For H-polyhedra we compute lineal(P(A, z)) = {x ∈Rd : Ax = 0}.
+So, except for a trivial linear summand we can usually consider polyhedra
+P(A, z) ⊆Rd for which A has full rank d.
+
+44
+1. Polytopes, Polyhedra, and Cones
+Similarly, we see that rec(P) is a convex cone: it contains 0, any positive
+multiple of a vector, and any convex combination of any two of its vectors.
+P
+rec(P)
+Proposition 1.12.
+Let P ⊆Rd be a convex set.
+(i) If P = P(A, z) is an H-polyhedron, then so is its recession cone:
+rec(P) = P(A, 0).
+(ii) If P = conv(V ) + cone(Y ) is a V-polyhedron, then so is its recession
+cone:
+rec(P) = cone(Y ).
+Proof. Both parts are “clear,” aren’t they? Not quite: on close inspection
+we see that in part (ii) the direction rec(P) ⊆cone(Y ) is not entirely
+obvious; it needs the Farkas lemma. Using version IV (for V = 0), we see
+that if y /∈cone(Y ), then there exists a linear functional a with aY ≤O
+and ay > 0.
+Now consider some z = V t + Y u ∈conv(V ) + cone(Y ), with t, u ≥0,
+1l t = 1. For this we get
+az = aV t + aY u ≤aV t =
+X
+1≤i≤n
+tiavi ≤
+max
+1≤i≤n avi =: K,
+where K only depends on a and V . However, we get that a(z + ty) =
+az + t(ay) −→+∞for t −→+∞, so we have z + ty /∈P for t large
+enough, and thus y /∈rec(P).
+Deﬁnition 1.13.
+Let P ⊆Rd be a convex set. Then the homogenization
+of P is deﬁned as
+homog(P)
+:=
+{t
+
+1
+x
+
+: x ∈P, t > 0} + {
+
+0
+y
+
+: y ∈rec(P)}.
+
+1.6 Carath´eodory’s Theorem
+45
+Again it is quite easy to see that for every convex set P, the homogeniza-
+tion homog(P) is a convex cone in Rd+1. Furthermore, any P can be easily
+recovered from its homogenization (if we don’t mess with the coordinate
+system) as
+P = {x ∈Rd :
+1
+x
+
+∈homog(P)}.
+x0 = 0
+x0 = 1
+homog(P)
+rec(P)
+P
+Proposition 1.14.
+Let P ⊆Rd be a convex set.
+(i) If P = P(A, z) is an H-polyhedron, then its homogenization is also
+an H-polyhedron:
+homog(P) = P
+ 
+−1
+O
+−z
+A
+
+,
+
+0
+0
+ 
+= C(P).
+(ii) If P = conv(V ) + cone(Y ) is a V-polyhedron, then so is its homoge-
+nization:
+homog(P) = cone
+
+1l
+O
+V
+Y
+
+= C(P).
+Proof. This now follows from Proposition 1.12.
+1.6
+Carath´eodory’s Theorem
+The following proposition states two versions (linear and aﬃne) of another
+basic tool, known as Carath´eodory’s theorem. We want to emphasize that
+in contrast to the Farkas lemma this is completely elementary and also
+computationally quite trivial. However, it can be successfully applied, for
+example, to sharpen the Farkas lemmas, as well as the main theorems and
+representation theorems for polytopes, cones, and polyhedra; see the next
+lecture.

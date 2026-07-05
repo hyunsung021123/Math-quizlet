@@ -1,0 +1,144 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 3. Graphs of Polytopes
+현재 소단원: 3.4 Kalai's Simple Way to Tell a Simple Polytope from Its Graph
+직전 소단원: 「3.3 The Hirsch Conjecture」
+[본문]
+3.4 Kalai’s Simple Way to Tell a Simple Polytope from Its Graph
+93
+of P, we get that 0 and 1−ei have distance d−1 in G(F(i)), so by induction
+on d we get
+F(i) = conv{x ∈{0, 1}d : xi = 0}.
+Collecting all the vertices that we now know have to be in P, we get P =
+conv({0, 1}d) = Id and δ(G(P)) = d.
+The bound δ(G(P)) ≤dim(P) can also be proved (with the same kind
+of argument) in the monotone version, where we ask for the shortest path
+“to the top” with respect to a given linear function. If we restrict to the
+strictly monotone version of Conjecture 3.9, then the characterization of
+the equality case also remains valid (with the same proof).
+3.4
+Kalai’s Simple Way to Tell a Simple Polytope
+from Its Graph
+In this section we consider simple polytopes and their graphs. Our treat-
+ment is based on a striking (and strikingly simple) paper by Gil Kalai.
+To be honest — the situation is even worse: the following is copied quite
+directly from his paper “A simple way to tell a simple polytope from
+its graph” [299].
+Let P be a simple d-dimensional polytope and let G(P) be the graph
+of P. Thus, G(P) is an abstract graph deﬁned on the set of vertices vert(P)
+of P. Two vertices v and u in vert(P) are adjacent in G(P) if [v, u] is a
+one-dimensional face of P.
+Perles [435] conjectured the following result.
+Theorem 3.12.
+(Blind & Mani [108])
+If P is a simple polytope, then the graph G(P) determines the entire com-
+binatorial structure of P.
+In other words, if two simple polytopes have isomorphic graphs, then
+their face lattices are isomorphic as well.
+Proof. Here is Kalai’s [299] simple proof of this result.
+We consider the set of all acyclic orientations (i.e., edge orientations with
+no oriented cycles) of G(P). We will not distinguish between an orientation
+O of G(P) and the partial order induced by O on vert(P), which is deﬁned
+by v ≤O u whenever there is an O-directed path from v to u.
+Note that if O is an acyclic orientation of G(P), then the induced sub-
+graph obtained by restriction of G(P) to any nonempty subset A of vert(P)
+has a sink (an element with out-degree zero) with respect to O.
+An acyclic orientation O of G(P) is called good if for every nonempty
+face F of P, the graph G(F) has exactly one sink. Otherwise, O is bad.
+
+94
+3. Graphs of Polytopes
+The existence of good acyclic orientations of G(P) follows from The-
+orem 3.7: if cx is in general position for P, then it is also for all faces
+of P. Our ﬁrst goal is to distinguish intrinsically between good and bad
+orientations of G(P).
+good (one sink)
+bad (two sinks)
+Let O be an acyclic orientation of G(P). Let hO
+k be the number of vertices
+of G(P) with in-degree k in O. Deﬁne
+f O :=
+hO
+0 + 2hO
+1 + 4hO
+2 + · · · + 2khO
+k + · · · + 2dhO
+d .
+If x is a vertex of G(P) of in-degree k with respect to O, then x is a sink in
+2k faces of P. (Since P is simple, every i edges incident to x determine an
+i-face F of P which includes them.) Let f denote the number of nonempty
+faces of P. Since each face has at least one sink, we see that
+I.)
+f O ≥f, and
+II.)
+O is good if and only if f O = f.
+To distinguish between good and bad orientations from the knowledge of
+G(P) only, compute f O for every acyclic orientation O. The good acyclic
+orientations of G(P) are those having the minimal value of f O.
+Now we will show how to identify the faces of P. The graphs of simple k-
+polytopes are k-regular: they have exactly k edges incident to every vertex,
+by Proposition 2.16. With this, the criterion is very simple: an induced
+connected k-regular subgraph H of G(P) is the graph of some k-face of P
+if and only if its vertices are initial with respect to some good acyclic
+orientation O of G(P). Indeed, if F is a face of P, it is well known that
+vert(F) is an initial set for some good acyclic orientation: a set of vertices
+such that no directed edge leads into the set. For this just consider a linear
+function with respect to which the vertices of F lie below all other vertices,
+which can be obtained by choosing a linear function cx that deﬁnes F, and
+perturbing it according to Lemma 3.4.
+On the other hand, let H be a connected k-regular subgraph of G(P)
+and let O be a good acyclic orientation with respect to which vert(H)
+is an initial set. Let x be a sink of H with respect to O. There are k
+edges containing x in H, all oriented toward x. Therefore x is a sink in
+the k-face F that contains these k edges. Since the orientation O is good,
+x is the unique sink of F, and therefore all vertices of F are ≤x, with
+respect to O. But vert(H) includes the set of all vertices that are ≤x with
+
+3.5 Balinski’s Theorem: The Graph is d-Connected
+95
+respect to O. (Remember: vert(H) is an initial set with respect to O.) Thus,
+vert(F) ⊆vert(H). Since both H and G(F) are k-regular and connected,
+vert(F) = vert(H) and G(F) = H. This completes the proof.
+Remarks 3.13.
+0.
+You could ask: do these parameters hO
+i actually mean anything? They
+do: we will come back to this when we study shellability, in Lecture 8.
+1.
+We do not have a practical way to distinguish between good and
+bad orientations. The algorithm suggested by the preceding proof is
+exponential in |vert(P)|, but it can be made to “work” in practice: see
+Achatz & Kleinschmidt [1]. Is there a really eﬃcient way to compute,
+for example, the number of facets of P from G(P)?
+2.
+General polytopes cannot be reconstructed from their graphs — this
+can be seen, for example, from the existence of neighborly (simplicial)
+polytopes. However, Joswig [293] has an extension of Kalai’s result
+and proof to non-simple polytopes.
+Perles [435, 437] proved that simplicial d-polytopes are determined
+by their ⌊d/2⌋-skeleta; see Kalai [307]. General d-polytopes are deter-
+mined by their (d−2)-skeleta, and this is best possible even for quasi-
+simplicial polytopes (all of whose facets are simplicial polytopes); see
+Gr¨unbaum [252, Ch. 12].
+3.5
+Balinski’s Theorem: The Graph is d-Connected
+A very fundamental fact about the graphs of d-polytopes is that they are
+d-connected, a theorem due to Balinski [37].
+Here we use the deﬁnition that a simple graph G(P) is d-connected if the
+removal of any d −1 or fewer vertices (and all the edges they are incident
+with) leaves a connected graph.
+The theorem is certainly plausible, since it is easy to see (using Lemma
+3.6) that every vertex of G(P) has degree at least d. We have adapted the
+following simple proof from Gr¨unbaum [252]. Two diﬀerent proofs appear
+in Brøndsted & Maxwell [134] and in Barnette [50]. Two extensions, which
+answer the questions of how many components the graph may have if you
+remove k vertices, or if you remove a k-face, appear in Klee [322] and in
+Perles & Prabhu [439]. A stronger, “directed” version of Balinski’s theorem
+is hidden in Holt & Klee [282].
+Theorem 3.14 (Balinski’s theorem).
+[37]
+The graph G(P) is d-connected for every d-polytope P.
+Proof. Let P = conv(V ) ⊆Rd, where the vertex set V of P and of the
+graph G(P) has at least d+1 elements. We delete a subset of d−1 of them,
+S = {v1, . . . , vd−1} ⊆V ; then we have to show that the graph G(P)\S
+induced on the remaining vertices is connected.

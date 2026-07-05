@@ -1,0 +1,84 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.5.a A Nonrational 8-Polytope
+직전 소단원: 「6.5 Polytopes with Few Vertices」
+[본문]
+172
+6. Duality, Gale Diagrams, and Applications
+For polytopes with d + 3 vertices, the complete classiﬁcation becomes
+diﬃcult, but not out of reach. Their aﬃne Gale diagrams are conﬁgurations
+of signed points on a line. The main problem is to decide which diﬀerent
+diagrams represent combinatorially equivalent polytopes. First results were
+due to Gale, while Perles developed the (Gale diagram) techniques neces-
+sary to analyze polytopes with d+3 vertices. The special case of simplicial
+polytopes was done in Gr¨unbaum [252, Sect. 6.2]; the work was completed
+by Mani [376] and Kleinschmidt [333]. Explicit formulas for the number of
+d-polytopes with d + 3 vertices were obtained by Perles [252] for the sim-
+plicial case and by Fusy [217] for the general case (correcting an error in an
+earlier solution by Lloyd [370]). Note that the octahedra that we considered
+before have d + 3 vertices, for d = 3.
+The polytopes with d+3 vertices still do not have any unusual properties.
+Finally, we arrive at the case of polytopes with d + 4 vertices: here is
+the threshold for counterexamples, as Sturmfels [532] calls it. They can be
+analyzed in terms of planar point conﬁgurations — which can be arbitrarily
+complicated. In particular, for high enough d there are
+• d-polytopes with d + 4 vertices that do not have a realization with
+rational coordinates,
+• d-polytopes with d + 4 vertices for which the shape of a facet cannot
+be prescribed, and
+• d-polytopes with d + 4 vertices that have disconnected realization
+spaces.
+We will now describe Gale diagram approaches to these three phenomena.
+(a) A Nonrational 8-Polytope
+Using Gale diagrams, Perles has shown that there are nonrational poly-
+topes, that is, polytopes for which there are no combinatorially equivalent
+polytopes with rational coordinates.
+Example 6.21 (Perles).
+[252, p. 95] [96, Fig. 8.4.1]
+There is a nonrational 8-polytope with 12 vertices.,
+To see this, one veriﬁes that the conﬁguration G in the ﬁgure on the next
+page has three properties:
+1. G cannot be realized with rational coordinates “as a matroid”: there
+is no rational planar conﬁguration of 12 points such that the same sets
+of points as in G coincide, respectively are collinear. (Essentially, there
+is a golden ratio involved in the construction of a regular pentagon,
+so it can only be realized with coordinates in a ﬁeld containing
+√
+5.)
+
+6.5 Polytopes with Few Vertices
+173
+2. G is the Gale diagram of an 8-dimensional polytope with 12 vertices
+(check this!); a polytope represented by G cannot have all coordinates
+rational.
+1
+5
+3
+4
+2
+12
+7
+10
+6  9
+8
+11
+3. Consider any spanning conﬁguration G′ of 12 signed points in the
+plane (an aﬃne Gale diagram in R2). If G′ has the the same positive
+circuits as G, then the three pairs of points that coincide in G have
+to coincide in G′ as well, and the triples and quadruples that are
+collinear in G have to be collinear in G′ as well, because they are all
+positive vectors (unions of positive circuits).
+Thus also G′ cannot be realized with rational coordinates.
+Thus G is the Gale diagram of a nonrational polytope P. If P ′ is a polytope
+that is combinatorially equivalent to P, then its Gale diagram G′ has the
+same positive circuits as the Gale diagram G, hence with part 3. above G′
+and P ′ cannot be rational either.
+(b) Facets of 4-Polytopes Cannot be Prescribed
+Perles apparently ﬁrst observed that the shape of a facet of a d-polytope
+cannot in general prescribed; see Gr¨unbaum [252, p. 96, Ex. 3]. Klein-
+schmidt [332] ﬁnally constructed a 4-polytope with 8 vertices for which the
+shape of a facet cannot be prescribed — this is the smallest dimension and
+the minimal number of vertices for such an example, because all facets can
+be prescribed for 3-polytopes, and for all d-polytope with at most d+3 ver-
+tices. With d = 4 and n = 8, Kleinschmidt’s polytope can be constructed

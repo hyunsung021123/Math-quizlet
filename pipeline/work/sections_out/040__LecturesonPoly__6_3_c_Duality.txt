@@ -1,0 +1,42 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.3.c Duality
+직전 소단원: 「6.3.b Equivalence」
+[본문]
+6.3 Oriented Matroids
+163
+Proof. We get this by applying Proposition 6.8 both to Dep(V ) and to
+Val(V ), which are dual to each other by Proposition 6.4.
+Therefore two (labeled) conﬁgurations of vectors or points have the same
+oriented matroid if they have the same set of circuits, or (equivalently) the
+same set of cocircuits, the same set of vectors, or the same set of covectors.
+(c) Duality
+A concept of duality is built into the whole structure of oriented matroids.
+In fact, since the vectors and the covectors of an oriented matroid M(V )
+arise in the same way as the sign vectors of a subspace, they also satisfy
+the same axioms (ignoring a switch from row vectors to column vectors).
+Deﬁnition 6.10.
+The dual of an oriented matroid M is the oriented
+matroid M∗with the following properties:
+• The vectors of M∗are the covectors of M, and thus
+the circuits of M∗are the cocircuits of M.
+• The covectors of M∗are the vectors of M, and thus
+the cocircuits of M∗are the circuits of M.
+From the way we have deﬁned (realizable) oriented matroids, it is clear
+that for every oriented matroid M, there is a unique dual oriented matroid
+M∗, whose dual is
+(M∗)∗= M.
+In fact, M = M(U) is realizable with U ⊆Rn, then M∗= M(U ⊥), for
+the orthogonal space
+U ⊥:= {c ∈(Rn)∗: cx = 0 for all x ∈U}.
+So existence and uniqueness of the dual follow from Proposition 6.4 (in the
+realizable case):
+M∗= M(Dep(V ))
+for
+M := M(Val(V )).
+Furthermore, if M has rank r, then M∗has rank n −r, and conversely.
+(d) Deletion and Contraction
+There are two very natural and fundamental operations on point conﬁg-
+urations: deletion and contraction. They are dual to each other, and they
+directly translate into oriented matroid language and terminology.

@@ -1,0 +1,116 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 4. Steinitz' Theorem for 3-Polytopes
+현재 소단원: 4.4 Extensions of Steinitz' Theorem
+직전 소단원: 「4.3 Planar Graphs are ΔY Reducible」
+[본문]
+4.4 Extensions of Steinitz’ Theorem
+113
+This way we have deleted the ﬁrst square in the last row; similarly, we can
+delete the second square in this row, and so on; the last square is deleted
+by two series reductions and one parallel reduction.
+We can delete all the squares in the ﬁrst column of our board symmetrically,
+if n ≥4.
+At the end, this leaves us with the grid G(3, 3) with one short corner, which
+is easily reduced ﬁrst to the “wheel” graph W4 of a square pyramid, and
+then to K4.
+Corollary 4.7.
+Every 3-connected planar graph G can be reduced to K4
+by a sequence of simple ∆Y transformations.
+Proof. The three lemmas together show that G is ∆Y -reducible. We follow
+this reduction to the ﬁrst point where parallel or series edges are created.
+These can be reduced immediately, which also results in a 3-connected
+planar graph G by Lemma 4.2. The graph we now have has fewer edges:
+hence we are done by induction on size.
+Corollary 4.7 also completes our proof of Steinitz’ Theorem 4.1.
+4.4
+Extensions of Steinitz’ Theorem
+Corollary 4.8.
+For every 3-polytope, there is a rational 3-polytope that
+is combinatorially equivalent.
+Proof. This follows from our proof of Steinitz’ theorem: we have shown
+in fact that every 3-polytope can be reduced to a simplex by two types of
+operations P −→P ′:
+• constructing a combinatorially polar polytope,
+• “cutting oﬀ” a vertex of degree 3.
+In both cases, if we have a rational realization of P ′, then we can also
+construct P with rational vertices and inequalities.
+
+114
+4. Steinitz’ Theorem for 3-Polytopes
+Corollary 4.9.
+Every 3-connected planar graph has a representation in
+the plane such that all edges are straight, and all the bounded regions
+determined by it, as well as the union of all the bounded regions, are convex
+polygons.
+Proof. This we get by representing G as the graph of a 3-polytope, and
+then choosing a point x beyond one of the facets. “Viewing” the polytope
+from this perspective (and projecting it to the facet along the “rays of
+vision”) gives us the required representation.
+This proof contains the construction of a “Schlegel diagram” for the
+3-polytope: see the next lecture. There are various results in graph the-
+ory related to this. There are other proofs, like the one by Tutte [549],
+which use less geometry and more graph theory. A reduction method by
+Thomassen [540] leads to a very short proof [268, Anhang 1]. See also Ex-
+ercise 4.7.
+There are various other strengthenings of Steinitz’ theorem, which say
+that we can prescribe a lot about the polytope to be constructed. For
+example, one can prescribe the shape of a facet of P in advance, by Barnette
+& Gr¨unbaum [52]. That is, given a 3-polytope P with a k-gon facet K, and
+given any k-gon K′ ⊆R3, we can “redraw” P so that we get a polytope P ′ ⊆
+R3 which is combinatorially equivalent to P, and such that K′ is the facet
+of P ′ which corresponds to K ⊆P.
+Similarly, we can prescribe the shadow boundary, by Barnette [41]: for
+every cycle in G(P) we can ﬁnd a realization of P and a projection of P
+to the plane that carries the cycle to the boundary of the image polygon.
+This is quite amazing: just try to verify this on your favorite 3-polytope; see
+Exercise 4.9. However, one shouldn’t get too greedy at this point: the shape
+of the image polygon cannot be prescribed for this — see Exercise 4.12.
+Also, for every symmetric graph there is a polytope that realizes the full
+symmetry group of the graph, see Mani [375] – and Theorem 4.13 below.
+The following is perhaps the more important extension, and is what
+properly should be taken as a part of the Steinitz theorem. It says that
+the space of all ways to ﬁnd coordinates for a 3-polytope is connected
+(modulo reﬂections). For the stronger statement below, we have to consider
+all coordinatizations “modulo rotations and reﬂections.” For this, we need
+a few deﬁnitions.
+Deﬁnition 4.10.
+Let P be a d-polytope on n > d vertices. We can
+label the vertices vert(P) = {x1, x2, . . . , xn} such that {x1, x2, . . . , xd+1}
+
+Notes
+115
+determines a ﬂag, that is, aﬀ({x1, . . . , xk}) ∩P is a (k−1)-face of P, for
+1 ≤k ≤d+1.
+The realization space
+R(P) ⊆Rd×n
+of P is the set of all matrices Y ∈Rd×n such that yk = xk for 1 ≤k ≤d+1,
+and such that P is combinatorially equivalent to Q := conv{y1, . . . , yn}
+under the correspondence xi −→yi.
+It is easy to see that the realization space is an elementary semialge-
+braic set deﬁned over Z, that is, a subset of a real vector space that can
+be deﬁned in terms of polynomial equations and strict inequalities with
+integer coeﬃcients. Such semialgebraic sets can be arbitrarily complicated
+as topological spaces, in general (see Exercise 4.22). The following assumes
+that you know what contractible means for a topological space: if not, just
+accept that it says that the space has “no holes”; in particular, contractible
+spaces are connected.
+Theorem 4.11 (Steinitz’ theorem).
+[527, 524]
+For every 3-polytope P, the realization space R(P) is contractible, and
+thus connected.
+All of these theorems — on prescribed facets, shadow boundary, sym-
+metry, realization space, and so on — were proved with basically the same
+technique, and some clever variations. Like Steinitz’ original theorem, they
+are far from trivial. One way to see this is that they all fail “one dimension
+up,” for d = 4. We will construct explicit examples in the next two lectures.
+Notes
+The reason for this version of the deﬁnitions for graph connectivity is that
+they ﬁt into a larger and very natural pattern. Namely, following Tutte [550,
+551] (see Truemper [547, p. 15]) one deﬁnes a k-separation (for k ≥1) of
+a graph G = (V, E) as a partition into two graphs, G1 = (V1, E1) and
+G2 = (V2, E2), which have exactly k vertices but no edges in common, and
+which have at least k edges each. Thus, our sketch
+shows a 4-separation, if each side has at least 4 edges (and thus at least
+one cycle, or a nonseparating vertex, or both). For any k ≥2, a connected
+graph is k-connected if it has no l-separation for 1 ≤l < k.

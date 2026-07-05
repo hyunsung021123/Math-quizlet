@@ -1,0 +1,221 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 5. Schlegel Diagrams for 4-Polytopes
+현재 소단원: 5.4 Three Examples
+직전 소단원: 「5.3 d-Diagrams」
+[본문]
+5.4 Three Examples
+139
+Proof. A simple combinatorial argument implies that the graph of every
+2-diagram is 3-connected (it is simple and planar by construction). Thus the
+theorem follows from Steinitz’ Theorem 4.1, together with the construction
+of Schlegel diagrams of 3-polytopes.
+Proposition 5.9.
+If a diagram D is Schlegel, then D is a regular subdi-
+vision of F = |D|. The converse is true in the case where F is a simplex,
+but not in general.
+We omit the proof — see Exercises 5.2(ii) and 5.7.
+There are other properties that separate Schlegel diagrams from some
+non-Schlegel diagrams. For example, let D be a d-diagram, and let L be
+the “reconstructed” face lattice of the (d + 1)-polytope P, if it exists. The
+combinatorial information about D is then contained in the pair (L, F),
+where F is a distinguished coatom of L. Now we call a diagram invertible
+if for every coatom F ′ of L, there is a d-diagram corresponding to the pair
+(L, F ′). We know that every Schlegel diagram is invertible. It turns out
+that a part of the non-Schlegel diagrams is not invertible.
+Similarly, we say that D has a combinatorial polar if there is a diagram
+whose combinatorial data are given by the pair (Lop, A), where A is a vertex
+of D (corresponding to an atom of L, and thus to a coatom of Lop). Again,
+every Schlegel diagram has a polar diagram (which is Schlegel), and some
+non-Schlegel diagrams have polars, some do not.
+5.4
+Three Examples
+Examples of interesting Schlegel diagrams, and of 3-diagrams that are not
+Schlegel diagrams, are not too hard to come by. In the following we will de-
+scribe three strikingly simple examples, where two are due to Barnette [47],
+and one is from Schulz [487]. See also Ewald [201, Sect. IV.4] for the “clas-
+sical” examples of Br¨uckner and Barnette (see the notes), and Schulz [488]
+for some other interesting constructions.
+From general theory (namely the technique of “Gale diagrams,” which
+we will soon get to) one can see that every d-diagram with at most d + 4
+vertices is always Schlegel. Therefore, the minimal counterexamples that
+we can hope for are 3-diagrams with 8 vertices.
+Here we go: the following construction produces a 3-diagram that is not
+combinatorially equivalent to the Schlegel diagram of any 4-polytope.
+Example 5.10 (Schulz’ 3-diagram).
+[487]
+We start with a 3-polytope Q with 6 vertices, labeled 1, 2, . . . , 6 in our
+drawing. The 3-polytope can be realized by starting with a tetrahedron,
+cutting oﬀthe top to get a triangular prism, and then cutting oﬀan extra
+triangle [2, 3, 5] as in the ﬁgure, where 3, 5 were vertices of the truncated
+prism, and 2 was on an edge of it.
+
+140
+5. Schlegel Diagrams for 4-Polytopes
+1
+2
+3
+6
+5
+4
+8
+7
+Now we choose extra points: 7 in general position inside Q, but outside the
+tetrahedron [2, 3, 5, 6], and 8 above the top of the original pyramid, so that
+all facets of Q, except for the base [4, 5, 6], can be “seen” from 8.
+The diagram D1, based on the tetrahedron G = [4, 5, 6, 8], consists of the
+following ten 3-polytopes in R3, and their faces:
+A:
+[2, 3, 5, 6, 7], a bipyramid over the triangle 357,
+B, C:
+[1, 2, 3, 7] and [4, 5, 6, 7], two tetrahedra, and
+D, E:
+[1, 2, 4, 5, 7] and [1, 3, 4, 6, 7], two square pyramids,
+where B, C, D, E together cover the interior of Q\A, by using 7 as a
+cone point,
+F, K, L:
+[1, 2, 3, 8], [2, 3, 5, 8] and [3, 5, 6, 8], three tetrahedra, and
+H, I:
+[1, 2, 4, 5, 8] and [1, 3, 4, 6, 8], two square pyramids,
+where F, K, L, H, I together cover the interior of G\Q, by using 8 as
+a cone point.
+It is easy to see now that this is a valid 3-diagram. Why is it not combi-
+natorially equivalent to a Schlegel diagram? Assuming it is, then there is a
+4-polytope P whose vertex set we can label 1, 2 . . . , 8, and whose Schlegel
+diagram is equivalent to D1.
+Now all vertices of Q are contained in the union of the two 2-faces
+[1, 2, 4, 5] and [1, 3, 4, 6], which share an edge [1, 4]. Thus the aﬃne span
+R := aﬀ{1, 2, 3, 4, 5, 6} of the vertices of Q has dimension 3 in R4. Further-
+more, the triangles [2, 3, 5] and [3, 5, 6] are contained in R. Thus the facet
+A has two 2-faces in R, and therefore it must be contained in R. Thus
+the vertex 7 and all of its neighbors are contained in R ⊂R4, which is
+a contradiction (to the fact that diﬀerent facets of P must span diﬀerent
+hyperplanes in R4, or to Lemma 3.6).
+
+5.4 Three Examples
+141
+Our next example, D2, is a Schlegel diagram for which the total space
+F = |D2| cannot be prescribed. This shows that for a 4-polytope, we cannot
+prescribe the shape of a facet — in contrast to the situation for 3-polytopes,
+as discussed in Section 4.4.
+Example 5.11 (Barnette’s ﬁrst diagram).
+[47]
+For this, we consider the Schlegel diagram for the prism over the square
+pyramid I ×Pyr3. This Schlegel diagram can be constructed from a regular
+cube, and two vertices on the vertical axis of symmetry.
+E
+E1
+E2
+E3
+E4
+Now consider any 3-diagram that is combinatorially equivalent to this.
+Then the lines determined by the edges E1, E2, and E belong to a pencil of
+lines, that is, either they are all parallel, or they have a common point of in-
+tersection. To see this, just consider the plane R = aﬀ(E1 ∪E2) determined
+by the lines E1 and E2, and the intersection point with the line aﬀ(E),
+which may be “at inﬁnity.” Using that aﬀ(E∪E1) is a plane, we get that the
+intersection point is contained in the line aﬀ(E∪E1)∩aﬀ(E1∪E2) = aﬀ(E1),
+and similarly it is contained in the line aﬀ(E2).
+E
+E2
+E1
+From symmetric arguments for Ei, Ei+1, and E, we see that for every
+3-diagram that is combinatorially equivalent to the given one, the four
+lines E1, E2, E3, E4 are parallel, or else they intersect in a common point.
+Thus if we start with a “skew” combinatorial cube that does not satisfy
+this (such a cube is easy to get), then we cannot even complete it to a
+
+142
+5. Schlegel Diagrams for 4-Polytopes
+3-diagram that is isomorphic to the given one. In particular, such a skew
+cube is never a facet of a prism over a square pyramid.
+Steinitz’ theorem can be stated in the following way: any “reasonable”
+cell decomposition of the 2-sphere (technically, we can consider regular
+CW-complexes with the intersection property; see [96, Sect. 4.7]) can be
+realized as the boundary complex of a convex 3-polytope. It is a weaker
+statement that, after deleting the interior of a 2-face, the rest can be realized
+by a 2-diagram.
+This formulation of Steinitz’ theorem has an obvious generalization to
+3-spheres and 4-polytopes — and Schulz’ Example 5.10 showed that this
+generalization is false. In fact, it is not hard to see that any d-diagram
+deﬁnes a “reasonable” cell decomposition of the d-sphere. Thus, diagram
+D1 represents a 3-sphere that can be realized by a 3-diagram, but not by
+a 4-polytope.
+Our next example shows that some 3-spheres cannot even be represented
+by a 3-diagram (at least not with a speciﬁed simplex as its base).
+Example 5.12 (Barnette’s topological diagram).
+[47]
+Barnette’s example, D3, is a “curved,” topological 3-diagram that cannot
+be straightened at all. This suggests that an eﬀective combinatorial char-
+acterization of d-diagrams and Schlegel diagrams is too much to hope for.
+For this, we start with a tetrahedron T3. Into this tetrahedron, we glue
+a subdivision of a quadrangle Q2, as indicated in our drawing, in such a
+way that the boundary E1, E2, E3, E4 of the quadrangle is identiﬁed with a
+circuit of four edges E1, E2, E3, E4 on the boundary of the tetrahedron, and
+the interior of Q2 gets mapped into the interior of T3, along a curved surface
+(which you may think of as a soap ﬁlm bounded by the four edges Ei).
+E1
+E2
+E3
+E4
+E1
+E2
+E3
+E4
+F2
+F4
+T3 :
+Q2 :
+The curved quadrangle partitions the interior of T3 into two “3-cell re-
+gions.” Into each of them we place a new vertex and then perform a “stellar
+subdivision”: each vertex is joined to all the faces on the boundary of the
+respective 3-cell, so each 3-cell is replaced by the (topological) pyramids
+over four triangles and two quadrangles each, and their faces.
+But we ﬁnd that this “topological 3-diagram” is not realizable. In fact,
+any two realizations of the tetrahedron are equivalent. Now we try to realize
+the quadrangles F2 and F4 in Q2 by planar convex quadrangles. Then the
+plane H2 := aﬀ(F2) contains E2 and a (unique) point of E4. Similarly,
+
+Notes
+143
+the plane H4 := aﬀ(F4) then contains E4 and a point of E2. Thus the
+intersection H2 ∩H4 connects a point on E2 with a point on E4. This
+means that the four points of F2 are not in convex position in T3.
+Notes
+Schlegel diagrams are the most direct, and probably the most eﬀective, tool
+to visualize 4-dimensional objects. Of course, there is a certain amount of
+training necessary to develop the geometric intuition. Don’t let yourself get
+discouraged, not even by statements like the following:
+Here, however, a word of warning may be in order: do not try to
+visualize n-dimensional objects for n ≥4. Such an eﬀort is not
+only doomed to failure—it may be dangerous to your mental
+health. (If you do succeed, then you are in trouble.) To speak
+of n-dimensional geometry with n ≥4 simply means to speak
+of a certain part of algebra.
+(Chv´atal [158, p. 252])
+This is wrong, and even Chv´atal acknowledges the fact that the correspon-
+dence between intuitive geometric terms and algebraic machinery can be
+used in both ways [158, p. 250].
+The technique of Schlegel diagrams was already used extensively in work
+of Br¨uckner [137] early this century, where the distinction between Schlegel
+diagrams and 3-diagrams was not made.
+There are also simplicial examples known of 3-diagrams that are not
+Schlegel diagrams, and not even combinatorially equivalent to such. The
+ﬁrst one was described by Gr¨unbaum’s abstract [251], which started the
+subject. The ﬁrst non-Schlegel 3-diagram with 8 vertices was found by
+Gr¨unbaum & Sreedharan [260], showing that one of Br¨uckner’s 3-diagrams
+does not, as Br¨uckner thought, represent the combinatorial type of a 4-
+polytope. It is now known as the Br¨uckner sphere [252, p. 222]. A second
+example of a simplicial 3-diagram that is not equivalent to a Schlegel dia-
+gram — the Barnette sphere — was found by Barnette [39] a little later.
+There are also simplicial 3-spheres that can be represented by topological
+diagrams (as in our Example 5.12), but not by straight 3-diagrams. Both
+kinds of examples are nicely presented in Ewald [201, Sect. IV.4 and IV.5].
+However, there is something special happening in the case of simple dia-
+grams. In fact, every simple d-diagram with d ≥3 is the Schlegel diagram
+of a (d + 1)-polytope. Thus, there are also things true in 3-space that are
+false in 2 dimensions. This was proved by Whiteley [563], and in an even
+stronger version by Rybnikov [470]. (They use a quite general setting for
+“liftability”; see Crapo & Whiteley [165, 166, 167].) Earlier results of Davis
+[180] and Aurenhammer [26] did not include the “boundary” conditions
+that pose extra constraints (as in Exercise 5.7).

@@ -1,0 +1,174 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 4. Steinitz' Theorem for 3-Polytopes
+현재 소단원: 4.3 Planar Graphs are ΔY Reducible
+직전 소단원: 「4.2 Simple ΔY Transformations Preserve Realizability」
+[본문]
+4.3 Planar Graphs are ∆Y Reducible
+109
+Proof. By duality, respectively polarity, we have to treat only the four
+types of ∆-to-Y transformations. For these, the transformation from P ′
+to P just corresponds to “cutting oﬀa vertex” by some suitable plane.
+(To visualize this, consider our sketch of the four types of simple ∆-to-Y
+transformations, interpreting them as pictures of 3-polytopes.)
+4.3
+Planar Graphs are ∆Y Reducible
+In this section we show that every 3-connected planar graph (with n ≥4
+edges) can be reduced to K4 by a sequence of simple ∆Y transformations.
+This is a special case of a much more powerful theorem (for 2-connected pla-
+nar graphs plus a “return edge”) that was ﬁrst established by Epifanov [198]
+and has a clever and simple proof by Truemper [546]. In this section, we
+follow his expositions in [546] and [547, Sect. 4.3].
+For a while, we will only require that the graphs considered are 2-
+connected; in particular, we admit ∆Y operations if they keep our graphs
+2-connected.
+In the simplicity of Truemper’s approach to Epifanov’s theorem, the
+reader should appreciate the “power of a normal form theorem” (in this
+case: the embedding of a planar graph as a minor of a grid graph, which is
+also at the heart of Robertson & Seymour’s work [464] on graph minors).
+Here come three lemmas and a corollary, which together prove every-
+thing. [Working through this, you can practice “three levels of reading”:
+ﬁrst read only the lemmas, and try to understand what they mean and
+how much is trivial. Second glance over the proofs, and try to see whether
+you know how to do them yourself. If you know, just do it. If you don’t,
+try to ﬁnd counterexamples. In the third step, work your way through the
+proofs until you are conﬁdent that you found all the errors I made and the
+shortcuts I missed. Tell me about them.]
+
+110
+4. Steinitz’ Theorem for 3-Polytopes
+For the following, we will call a 2-connected graph G ∆Y -reducible if it
+can be transformed into the graph C2 with two parallel edges by a sequence
+of ∆Y transformations and SP reductions.
+Lemma 4.4.
+If a planar graph G is ∆Y -reducible, then so is every
+2-connected minor H of G.
+Proof. We use an induction on the number of reduction steps that are
+necessary to reduce G. We can assume that H has no series or parallel
+edges, otherwise we can make the corresponding reductions. Now if the
+reduction for G starts with a series-parallel reduction step, then H is a
+minor of the reduced graph as well, because it does not contain both of the
+series or parallel edges.
+Therefore, we can assume that the reduction of G starts with a ∆Y
+reduction step. Exploiting duality, we may assume that this is a ∆-to-Y
+step G −→G′.
+G :
+G′ :
+e
+f
+g
+e
+f
+g
+Let e, f, g be the three edges of G that are involved. One possibility is that
+all three edges are contained in H: then they form a nonseparating triangle
+in H as well, and we can perform the corresponding ∆-to-Y step H −→H′.
+Then by induction we get that H′ is ∆Y -reducible, and hence so is H.
+In the other case, some of the three edges e, f, g do not appear in H.
+What happened to them? Since H is simple, it is not possible that only
+one or two of them were contracted. If all three were contracted, then we
+can assume that ﬁrst one edge was deleted, then the others were contracted.
+Using that deletions and contractions commute, and possibly relabeling, we
+can thus assume that the ﬁrst edge that disappears when H is formed from
+G, say e, is deleted.
+But then we get the same minor H from G′, by contracting the corre-
+sponding edge from G′, because the deletion of e from G and the contraction
+of e in G′ result in the same graph. Again we are ﬁnished by induction.
+Denote the grid graph with mn vertices and m(n−1) + n(m−1) edges by
+G(m, n). Clearly the grid graphs G(m, n) and G(n, m) are isomorphic.
+
+4.3 Planar Graphs are ∆Y Reducible
+111
+Our sketch shows the grid graph G(5, 6).
+Lemma 4.5.
+If G is planar, then it is a minor of a grid graph.
+Proof. For this, ﬁx an embedding of G into the plane R2; now split the
+vertices of G in order to get a graph G′ of which G is a minor, such that
+all vertices of G have degree at most 3.
+Then we can construct an embedding of G′ (with subdivided edges) into
+a ﬁnite grid that is combinatorially equivalent to the given embedding (in
+the sense that the vertices at a given edge come in the same cyclic order).
+For that we draw one edge at a time on the grid. Whenever our grid is too
+coarse, we can reﬁne it by taking half the grid size.
+1
+2
+3
+4
+5
+7
+8
+6
+9
+10
+11
+3
+4
+5
+6
+9
+2
+1
+7
+10
+8
+11
+Once a subdivision graph G′ is represented as a subgraph of the grid graph
+this way, it is clear that G is a minor of the grid graph.
+This is quite trivial. Much more sophisticated versions of this, restricting
+the size of the grid we embed into, are interesting and important for applica-
+tions in VLSI-layout problems. We refer to Lawler et al. [350, Sect. 3.4.5],
+Lengauer [359, Ch. 5], and Kant [311] for further information as well as
+more precise and sophisticated versions of such “grid layout” and “graph
+drawing” results.
+
+112
+4. Steinitz’ Theorem for 3-Polytopes
+Lemma 4.6.
+All grid graphs G(m, n) with m, n ≥3 are ∆Y -reducible
+to K4.
+Proof. We use two basic observations. First, if an edge connects two neigh-
+bors of a vertex of degree 3, then we can delete it, by performing ﬁrst a
+∆-to-Y transformation and then a series reduction.
+Second, if an edge connects two neighbors of a vertex of degree 4, then we
+can move the edge over to “the other side,” using ﬁrst a ∆-to-Y transfor-
+mation and then a Y -to-∆transformation.
+Using these two observations, we can reduce any grid graph G(m, n) to K4,
+as follows.
+First perform a series reduction in the upper-right corner. Then, assum-
+ing that m ≥4, we take the two edges in the lower-left corner and perform
+a series reduction to get a single edge. We can move this single edge across
+the whole grid in a sequence of degree-4 moves until we “hit the boundary.”
+There either the edge is parallel to the diagonal corner edge and we can
+parallel-delete, or it can be deleted according to our degree-3 move.
+
+4.4 Extensions of Steinitz’ Theorem
+113
+This way we have deleted the ﬁrst square in the last row; similarly, we can
+delete the second square in this row, and so on; the last square is deleted
+by two series reductions and one parallel reduction.
+We can delete all the squares in the ﬁrst column of our board symmetrically,
+if n ≥4.
+At the end, this leaves us with the grid G(3, 3) with one short corner, which
+is easily reduced ﬁrst to the “wheel” graph W4 of a square pyramid, and
+then to K4.
+Corollary 4.7.
+Every 3-connected planar graph G can be reduced to K4
+by a sequence of simple ∆Y transformations.
+Proof. The three lemmas together show that G is ∆Y -reducible. We follow
+this reduction to the ﬁrst point where parallel or series edges are created.
+These can be reduced immediately, which also results in a 3-connected
+planar graph G by Lemma 4.2. The graph we now have has fewer edges:
+hence we are done by induction on size.
+Corollary 4.7 also completes our proof of Steinitz’ Theorem 4.1.
+4.4
+Extensions of Steinitz’ Theorem
+Corollary 4.8.
+For every 3-polytope, there is a rational 3-polytope that
+is combinatorially equivalent.
+Proof. This follows from our proof of Steinitz’ theorem: we have shown
+in fact that every 3-polytope can be reduced to a simplex by two types of
+operations P −→P ′:
+• constructing a combinatorially polar polytope,
+• “cutting oﬀ” a vertex of degree 3.
+In both cases, if we have a rational realization of P ′, then we can also
+construct P with rational vertices and inequalities.

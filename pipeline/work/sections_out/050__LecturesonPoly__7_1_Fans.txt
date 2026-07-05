@@ -1,0 +1,181 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 7. Fans, Arrangements, Zonotopes, and Tilings
+현재 소단원: 7.1 Fans
+직전 소단원: 「6.ex Problems and Exercises」
+[본문]
+7
+Fans, Arrangements, Zonotopes,
+and Tilings
+Zonotopes are the images of n-cubes under aﬃne projection maps. Since
+for most aspects of polytope theory n-cubes are not very complicated, this
+deﬁnition may hide the complexity and richness of this concept. Zonotopes
+are interesting from various points of view. Their combinatorial structure
+is closely linked to (and in a precise sense equivalent to) that of real linear
+hyperplane arrangements.
+The aim of this lecture is to provide basic geometric intuition and the
+tools for a combinatorial description of zonotopes. We will see how zono-
+topes again are modeled by oriented matroids, and discuss the surprising
+appearance of general (“nonrealizable”) oriented matroids in the study of
+zonotopal tilings, and of hyperplane arrangements.
+7.1
+Fans
+Deﬁnition 7.1.
+A fan in Rd is a family
+F
+=
+{C1, C2, . . . , CN}
+of nonempty polyhedral cones, with the following two properties:
+(i) Every nonempty face of a cone in F is also a cone in F.
+(ii) The intersection of any two cones in F is a face of both.
+The fan F is complete if the union S F := C1 ∪. . . ∪CN of F is Rd, that
+is, if SN
+i=1 Ci = Rd. We will consider only complete fans here, and thus we
+will omit the word “complete” most of the time.
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_8, © Springer Science+Business Media New York 2007 
+ 
+191
+
+192
+7. Fans, Arrangements, Zonotopes, and Tilings
+F is pointed if {0} is a cone in F (and thus is a face of every cone in F).
+It is simplicial if all its cones are simplicial cones, that is, cones spanned by
+linearly independent vectors. Simplicial cones and fans are automatically
+pointed.
+The following ﬁgure shows three complete fans in R2, with N = 13,
+N = 11, and N = 3 cones, of which 6, 5, and 2, respectively, are full-
+dimensional. The ﬁrst two fans are pointed (for d = 2 this implies they are
+simplicial); the third one is not.
+There are various equivalent or similar ways to deﬁne fans (see also the
+notes to this lecture). What we have given here essentially just describes
+a polyhedral complex of cones (as in Deﬁnition 5.1) whose union is Rd.
+In particular, the deﬁnition implies that the relative interiors of the cones
+in F form a partition of space:
+N
+]
+i=1
+relint(Ci)
+=
+Rd.
+Now comes the ﬁrst reason why we look at fans in the theory of polytopes.
+Example 7.2. Let P be a polytope in Rd with 0 ∈relint(P). We deﬁne
+the face fan of P as the set of all the cones spanned by proper faces of P:
+F(P)
+:=
+{cone(F) : F ∈L(P)\P}.
+F(P) is a pointed fan in lin(P): its union is the linear hull lin(P). It is a
+complete fan in Rd if P is a d-polytope, with 0 ∈int(P).
+P
+
+7.1 Fans
+193
+Our ﬁgure indicates the construction of the face fan, for a 2-polytope with
+a given origin in it. Note that the geometry of the face fan does depend on
+the position of the origin in P.
+Example 7.3. Let P be a nonempty polytope in Rd. For the normal fan
+of P we take the cones of those linear functions which are maximal on a
+ﬁxed face of P. That is, for every nonempty face F of P we deﬁne
+NF :=
+n
+c ∈(Rd)∗: F ⊆{x ∈P : cx = max cy : y ∈P}
+o
+,
+and with this we deﬁne
+N(P)
+:=
+{NF : F ∈L(P)\∅}.
+N(P) is a complete fan in (Rd)∗. If P is d-dimensional, then the fan is
+pointed, since then {0} = NP is in the fan.
+P
+The above ﬁgure illustrates the construction of the normal fan of a 2-
+polytope: for this we have identiﬁed R2 with (R2)∗via the usual scalar
+product, which accounts for the right angles in the ﬁgure.
+The face fan and the normal fans are very natural objects associated
+with a polytope. In particular, they come up in the theory of optimization.
+For this note that the question “Which cone of N(P) does c lie in?” is
+the linear programming problem max cx : x ∈P. Similarly, the question
+“Which cone of F(P) does v lie in?” is the separation problem of ﬁnding
+one single valid inequality that determines whether αv ∈P, for various
+α > 0.
+Example 7.4.
+Let A := {H1, . . . , Hp} be a ﬁnite set of linear hyperplanes
+in Rd, where each Hi is of the form Hi = {x ∈Rd : cix = 0} for some
+ci ∈(Rd)∗.
+Clearly, the arrangement A decomposes Rd into a complete fan FA. The
+cones of the fan are also referred to as the faces of the (linear) hyperplane
+
+194
+7. Fans, Arrangements, Zonotopes, and Tilings
+arrangement A. The combinatorics of the fan encodes a lot about the con-
+ﬁguration of row vectors C = {c1, . . . , cp} — it is quite easy to see that the
+cones in F are in natural correspondence with the covectors of C. We’ll see
+details about this in Theorem 7.16 and Corollary 7.18.
+In the ﬁgure after Deﬁnition 7.1, the ﬁrst and the third fan are given by
+hyperplane arrangements, the second one is not.
+Example 7.5. There are also complete simplicial fans F0 in R3 that are
+nonpolytopal, that is, not of the form F(P) for any polytope P.
+For one possible construction, we start from a simplicial 2-diagram D
+that is not a Schlegel diagram, for example the one we constructed before
+Theorem 5.7. This we place into an aﬃne plane, and take all the cones
+over faces of the diagram. We complete F0 by adding one extra ray and
+the simplicial cones that are spanned by this ray together with the cones
+generated by the boundary of the diagram D. Our ﬁgure illustrates the
+construction:
+This fan F0 is not polytopal. In fact, assume that P is a polytope with
+F0 = F(P). Now consider the polytope P ′ given by the convex hull of
+all vertices of P except for the one on the “extra ray.” Then the origin is
+beyond a triangular facet of P ′, and the corresponding Schlegel diagram
+would be (projectively) equivalent to the one we started with. This yields
+a contradiction.
+This example shows by far not the worst that can happen: for example,
+there exists a (nonsimplicial) fan that is not even the face fan of a starshaped
+sphere (with ﬂat facets); see Eikelberg [194]. We also refer to Ewald [201,
+Sect. III.5] and the examples and references he gives.
+We continue with three more “trivial” operations on fans, which will turn
+out to be very valuable soon.
+Deﬁnition 7.6.
+If F is a fan in Rp, and G is a fan in Rq, then their direct
+sum is the fan
+F ⊕G
+:=
+{C × C′ : C ∈F, C′ ∈G}.
+
+7.2 Projections and Minkowski Sums
+195
+If F and G are both fans in the same space Rd, then we deﬁne their
+common reﬁnement as
+F ∧G
+:=
+{C ∩C′ : C ∈F, C′ ∈G}.
+If F is a fan in Rd and V ⊆Rd is a vector subspace, then the restriction
+of F to V is the fan
+F
+V
+:=
+{C ∩V : C ∈F}.
+It is easy to check that all three constructions are again fans in the
+sense of Deﬁnition 7.1. If you want, you can consider GV := {V } as a
+(noncomplete) fan in Rd: then the restriction to V is the intersection with
+GV , that is, F
+V = F ∧GV .
+Lemma 7.7.
+Let P ⊆Rp and Q ⊆Rq be two polytopes. Then the normal
+fan of the product P × Q ⊆Rp+q is the direct sum
+N(P×Q) = N(P) ⊕N(Q).
+Example 7.8. The normal fan of the cube Cd = {x ∈Rd : −1 ≤xi ≤1}
+coincides with the face fan of its polar, the d-crosspolytope (cf. Exercise 7.1
+for the general case of this).
+We ﬁnd that the normal fan is given by the arrangement of coordinate
+hyperplanes in (Rd)∗. This is quite trivial (since it is trivial to optimize
+over a cube), and it also conﬁrms Lemma 7.7: the fan of the arrangement
+of coordinate hyperplanes is the direct sum of 1-dimensional fans.
+⊕
+=
+Also, the cones in the fan are characterized by the sign function: each cone
+in the fan can be identiﬁed with a vector in {+, −, 0}d, and the orthants
+correspond to the sign vectors in {+, −}d.
+7.2
+Projections and Minkowski Sums
+Let P ⊆Rp be a p-polytope, and let π : Rp −→Rd be an aﬃne map,
+π(x) = Ax −z,

@@ -1,0 +1,179 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 4. Steinitz' Theorem for 3-Polytopes
+현재 소단원: 4.1 3-Connected Planar Graphs
+직전 소단원: 「3.ex Problems and Exercises」
+[본문]
+4
+Steinitz’ Theorem for 3-Polytopes
+The combinatorial structure of 2-polytopes is not much of a mystery. For an
+illustrated journey into the wonderful world of 3-dimensional convex (and
+nonconvex) polyhedra, we direct the reader’s attention to the conference
+volume [492]. See also Barnette’s book [45] for a nice elementary discussion
+of combinatorics and graph theory related to convex 3-polytopes.
+In this lecture we will establish the basic theory for 3-polytopes, by
+proving Steinitz’ theorem. The basic version reads as follows.
+Theorem 4.1 (Steinitz’ theorem).
+[524, 527]
+G is the graph of a 3-dimensional polytope if and only if it is simple, planar,
+and 3-connected.
+Polytopal graphs are certainly simple: they have no loops or multiple
+edges. The graph G(P) is planar for every 3-polytope (use radial projec-
+tion to a sphere from an interior point, or a linear projection to a plane
+from a point beyond a facet). Also, G(P) is 3-connected by Balinski’s Theo-
+rem 3.14. Thus, the diﬃcult part is the “if” part of the theorem: it requires
+that we show how, given a 3-connected planar graph, one can construct a
+3-polytope.
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_5, © Springer Science+Business Media New York 2007 
+ 
+103
+
+104
+4. Steinitz’ Theorem for 3-Polytopes
+Here are four observations to indicate to this claim is nontrivial:
+1. No similar theorem is known, and it seems that no similarly eﬀective
+theorem is possible, in higher dimensions.
+2. There are lots of interesting consequences and various strengthenings
+that follow by the same proof technique (see Section 4.4).
+3. Many of the higher-dimensional analogues of these strengthenings are
+false (we’ll see this in Lectures 5 and 6).
+4. There is no extremely simple proof known.
+All the combinatorial (“classical”) proofs of Steinitz’ theorem [524] [527,
+§§54,63] [252, Sect. 13.1] [51] basically follow the same pattern: arguing
+that every 3-connected planar graph can be “built up” from K4 by some
+well-deﬁned operations, which preserve realizability. (See the notes at the
+end of this lecture for a diﬀerent, “nonlinear” line of reasoning.)
+The reason why we can give a “nicer than usual” combinatorial proof
+here is that we will be more elegant in dealing with the graph theory:
+using Truemper’s clever treatment [546, 547] of “∆Y reductions.” This will
+be done in the next three sections of this lecture, which together imply
+Theorem 4.1.
+– In Section 4.1, we discuss the little graph theory we need, concentrat-
+ing on 3-connected graphs and ∆Y reductions.
+– In Section 4.2, we prove that Steinitz’ theorem is true for 3-connected
+planar graphs which have a “∆Y reduction.”
+– In Section 4.3, we show that if a 3-connected planar graph G has a
+∆Y reduction, then so does every minor of G.
+– Finally, we show that every planar graph is a minor of a grid graph,
+and every grid graph has a ∆Y reduction.
+We close the lecture in Section 4.4 with a list of strengthenings, extensions,
+and corollaries of Steinitz’ theorem.
+4.1
+3-Connected Planar Graphs
+Again we need some basic graph theory. Let us, for a while, admit nonsimple
+graphs as well, that is, graphs that can have loops and parallel edges.
+Such a graph G is connected if there is a path between any two distinct
+vertices of G. All the graphs we consider will be connected.
+A graph G with at least 2 edges is 2-connected if it is connected, has
+no loops, and cannot be disconnected by removing one vertex and all the
+
+4.1 3-Connected Planar Graphs
+105
+edges incident with it. A graph G with at least 4 edges is 3-connected if it
+is simple and cannot be disconnected by removing 1 or 2 vertices from G.
+Under this deﬁnition, the smallest 2-connected graph is the graph C2 with
+two parallel edges
+and the smallest 3-connected graph is K4,
+the complete graph with 4 vertices and 6 edges.
+The reason for this version of the deﬁnitions is that it is invariant under
+duality. That is, if we embed a graph into the sphere S2 and draw the
+dual graph G∗, then G is k-connected if and only if G∗is k-connected (for
+k = 2, 3). We do not review the construction of a dual graph here, but trust
+that the following picture — which you may interpret as being drawn in
+the plane, or on the 2-sphere — explains it all.
+At this point, observe that the combinatorial structure of a 3-polytope
+is completely determined by its graph — this is a special case of a fact
+we noted in Remark 3.13(2). It follows from Whitney’s theorem [564] that
+the embedding of a 3-connected planar graph into the sphere is unique.
+To prove it, note that for every 3-connected planar graph the regions of
+an embedding are bounded by chordless cycles that do not separate the
+graph. Any other cycle has more than one region on either of its sides, so
+either the cycle has a chord, or it separates two vertices, or both. Note that
+Perles’ question of Problem 3.13∗asks for a higher-dimensional version of
+Whitney’s theorem.
+
+106
+4. Steinitz’ Theorem for 3-Polytopes
+Two very basic “local” operations on graphs are the deletion of edges
+and the contraction of edges,
+for which the two vertices of the edge are identiﬁed. Any graph that can
+be obtained from G by a sequence of deletions and contractions of edges
+is called a minor of G. Note that the edges of a minor can be viewed as a
+subset of the edge set of G.
+A special case occurs if we contract only edges that are in series with oth-
+ers, being adjacent to a vertex of degree 2 (this is equivalent to “removing
+a subdivision point”)
+f
+f
+e
+or delete edges that are in parallel with others (this is the usual operation
+for “making a graph simple”).
+f
+f
+e
+We will refer to any sequence of such operations as series-parallel reduc-
+tions, or SP reductions.
+A Delta-Wye operation, or ∆Y operation, replaces a triangle that bounds
+a face (i.e., a nonseparating triangle) by a 3-star that connects the same
+vertices, or vice versa. If we want to specify the direction of the transfor-
+mation, then we will call it a ∆-to-Y transformation, respectively a Y -to-∆
+transformation.
+e
+f
+g
+e
+f
+g
+We refer to the ﬁgure for the “natural” correspondence between the edges
+of the triangle and the edges of the 3-star. Note that these operations,
+replacing a K3 by a K1,3, preserve the number of edges in the graph.
+
+4.2 Simple ∆Y Transformations Preserve Realizability
+107
+However, a ∆Y transformation might create series or parallel edges, which
+can then be SP-reduced.
+We note here a simple lemma, characterizing when connectivity is pre-
+served under Y -to-∆operations.
+Lemma 4.2.
+(i) Let G be a 2-connected graph, and let {e, f, g} be the edges at a
+vertex v of degree 3 in G.
+If none of its edges are parallel (i.e., if v has three diﬀerent neighbors),
+then the result of a Y -to-∆operation is again 2-connected.
+(ii) Let G be a 3-connected graph (in particular, there are no parallel
+edges; all vertex degrees are at least 3) that is not K4. Let {e, f, g}
+be the edges at a vertex v in G of degree 3.
+If we perform a Y -to-∆operation on this 3-star, and then delete all
+parallel edges created by this (i.e., all edges that originally connected
+neighbors of v), then the resulting graph is again 3-connected.
+Proof. This follows directly from the deﬁnitions: for this consider a Y -to-∆
+operation G −→G′. Then for any set of one or two separating vertices
+in G′, the same set is separating in G as well. The only problem is that a
+Y -to-∆operation can create parallel edges; if we delete them, the operation
+preserves 3-connectedness.
+The nice thing now is that, because of duality, we immediately get a dual
+statement, Lemma 4.2∗, about connectivity after a ∆-to-Y transformation.
+For this we use that under duality, we have
+embedded planar graph G
+←→
+dual graph G∗,
+contracting series edges
+←→
+deleting parallel edges,
+k-connected
+←→
+k-connected,
+nonseparating triangle
+←→
+3-star,
+∆-to-Y transformation
+←→
+Y -to-∆transformation.
+This duality can be carried into our reduction for polytopes, because the
+graph of a 3-polytope is exactly the dual graph of the polar polytope:
+G(P)∗= G(P ∆).
+4.2
+Simple ∆Y Transformations Preserve
+Realizability
+By a simple ∆Y reduction we mean any ∆Y operation followed immediately
+by all the SP reductions that are then possible. By Lemma 4.2 and its dual,

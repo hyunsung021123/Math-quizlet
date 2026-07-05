@@ -1,0 +1,88 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 5. Schlegel Diagrams for 4-Polytopes
+현재 소단원: 5.3 d-Diagrams
+직전 소단원: 「5.2 Schlegel Diagrams」
+[본문]
+138
+5. Schlegel Diagrams for 4-Polytopes
+5.3
+d-Diagrams
+Schlegel diagrams were studied extensively around the turn of this century;
+however, no one realized that there is a problem: not everything that “looks
+like” a Schlegel diagram actually is one. (See the notes below.) Now we
+deﬁne looks like.
+Deﬁnition 5.7.
+A d-diagram is a polytopal subdivision D of a d-polytope,
+P = |D| ⊆Rd, such that G ∩∂P is a face of P for each G ∈D.
+A d-diagram D is simplicial if |D| and all the polytopes in D are sim-
+plices. The diagram is simple if every vertex of |D| is contained in exactly
+d diﬀerent d-polytopes of D, and every other vertex of D is contained in
+exactly d + 1 diﬀerent d-polytopes in D.
+Check that every Schlegel diagram of a d-polytope is a (d −1)-diagram!
+We deﬁne the face poset L(D), and combinatorial equivalence, of d-diagrams
+as a special case of the deﬁnitions for polyhedral complexes. With this, a
+Schlegel (d −1)-diagram D(P, F) is simplicial, respectively simple (accord-
+ing to Deﬁnition 5.7), if and only if the polytope P is simplicial, respectively
+simple. In fact, a diagram D is simplicial if and only if its face lattice bL(D)
+“looks like” the face lattice of a simplicial polytope, in that all the lower
+intervals [∅, G] are boolean for G̸ = ˆ1; similarly, D is simple if and only if
+all upper intervals [G, ˆ1] are boolean for G̸ = ∅.
+Here are a few trivial examples: a Schlegel diagram (of a triangular
+prism), a 2-diagram that is not a Schlegel diagram, and a polytopal subdi-
+vision that is not a 2-diagram.
+We note that the question of whether a given d-diagram is a Schlegel
+diagram can be reduced to a linear programming problem (Exercise 5.2)
+— but the question of whether it is combinatorially equivalent to a Schlegel
+diagram is much harder; the task can be split into the enumeration problem
+for oriented matroid spheres, and the oriented matroid realizability problem
+(see the notes at the end of this lecture). So, the following is a decidedly
+nontrivial theorem, accompanied by a trivial proof.
+Theorem 5.8.
+Every 2-diagram is combinatorially equivalent to a Schlegel diagram.
+
+5.4 Three Examples
+139
+Proof. A simple combinatorial argument implies that the graph of every
+2-diagram is 3-connected (it is simple and planar by construction). Thus the
+theorem follows from Steinitz’ Theorem 4.1, together with the construction
+of Schlegel diagrams of 3-polytopes.
+Proposition 5.9.
+If a diagram D is Schlegel, then D is a regular subdi-
+vision of F = |D|. The converse is true in the case where F is a simplex,
+but not in general.
+We omit the proof — see Exercises 5.2(ii) and 5.7.
+There are other properties that separate Schlegel diagrams from some
+non-Schlegel diagrams. For example, let D be a d-diagram, and let L be
+the “reconstructed” face lattice of the (d + 1)-polytope P, if it exists. The
+combinatorial information about D is then contained in the pair (L, F),
+where F is a distinguished coatom of L. Now we call a diagram invertible
+if for every coatom F ′ of L, there is a d-diagram corresponding to the pair
+(L, F ′). We know that every Schlegel diagram is invertible. It turns out
+that a part of the non-Schlegel diagrams is not invertible.
+Similarly, we say that D has a combinatorial polar if there is a diagram
+whose combinatorial data are given by the pair (Lop, A), where A is a vertex
+of D (corresponding to an atom of L, and thus to a coatom of Lop). Again,
+every Schlegel diagram has a polar diagram (which is Schlegel), and some
+non-Schlegel diagrams have polars, some do not.
+5.4
+Three Examples
+Examples of interesting Schlegel diagrams, and of 3-diagrams that are not
+Schlegel diagrams, are not too hard to come by. In the following we will de-
+scribe three strikingly simple examples, where two are due to Barnette [47],
+and one is from Schulz [487]. See also Ewald [201, Sect. IV.4] for the “clas-
+sical” examples of Br¨uckner and Barnette (see the notes), and Schulz [488]
+for some other interesting constructions.
+From general theory (namely the technique of “Gale diagrams,” which
+we will soon get to) one can see that every d-diagram with at most d + 4
+vertices is always Schlegel. Therefore, the minimal counterexamples that
+we can hope for are 3-diagrams with 8 vertices.
+Here we go: the following construction produces a 3-diagram that is not
+combinatorially equivalent to the Schlegel diagram of any 4-polytope.
+Example 5.10 (Schulz’ 3-diagram).
+[487]
+We start with a 3-polytope Q with 6 vertices, labeled 1, 2, . . . , 6 in our
+drawing. The 3-polytope can be realized by starting with a tetrahedron,
+cutting oﬀthe top to get a triangular prism, and then cutting oﬀan extra
+triangle [2, 3, 5] as in the ﬁgure, where 3, 5 were vertices of the truncated
+prism, and 2 was on an edge of it.

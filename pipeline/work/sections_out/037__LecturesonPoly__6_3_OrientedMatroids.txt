@@ -1,0 +1,197 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.3 Oriented Matroids
+직전 소단원: 「6.2 Vector Configurations」
+[본문]
+6.3 Oriented Matroids
+157
+The space of linear dependences of the vector conﬁguration V is
+Dep(V ) := {v ∈Rn : V v = 0} ⊆Rn.
+This is a linear subspace of Rn of dimension n −r. The signed vectors of V
+are given by
+V(V ) := {sign(v) ∈{+, −, 0}n : v ∈Rn, V v = 0} = SIGN(Dep(V )),
+and the signed circuits are the signed vectors of minimal nonempty support.
+Dually, the space of value vectors on a vector conﬁguration, which cor-
+respond to linear functions c ∈(Rr)∗, is constructed as
+Val(V ) := {cV : c ∈(Rr)∗} ⊆(Rn)∗.
+This is a linear subspace of (Rn)∗of dimension r. From it, we derive the
+set of signed covectors of the conﬁguration V :
+V∗(V ) := {sign(cV ) : c ∈(Rr)∗} = SIGN(Val(V )).
+Here we get the signed cocircuits as the signed covectors of minimal non-
+empty support: they correspond to the linear functions such that the vec-
+tors v ∈V which have value 0 linearly span a hyperplane in Rr.
+Note that these deﬁnitions are consistent with our conventions for the
+aﬃne case; see Exercise 6.3.
+Proposition 6.4.
+Let V ∈Rr×n represent a spanning conﬁguration of n
+vectors in Rr.
+Then Val(V ) is the set of all linear functions that vanish on all the vectors
+in Dep(V ), and Dep(V ) is the set of all vectors on which all the functions
+in Val(V ) vanish.
+Proof. This follows from the dimension counts dim(Dep(V )) = n −r,
+dim(Val(V )) = r, with the computation (cV )v = c(V v) = c0 = 0.
+(If we identify Rn and (Rn)∗via the standard scalar product, then by
+the same argument we get that Dep(V ) is the orthogonal complement of
+Val(V ) in Rn.)
+6.3
+Oriented Matroids
+In this section, we meet oriented matroids for the ﬁrst time. Just to keep
+things more exciting (and to make sure that the timid reader isn’t over-
+whelmed by the ﬁrst sight), we won’t lift all the veils on the ﬁrst encounter.
+So we won’t even deﬁne oriented matroids this time, but we promise more
+for later.
+
+158
+6. Duality, Gale Diagrams, and Applications
+For application to Gale diagrams, it is suﬃcient to know some basic facts
+in the case of realizable oriented matroids; and we will only do proofs for
+those below, with the Farkas lemma as a basic ingredient. The general case
+is similar, but it relies on more notation and on the precise version of the
+axioms to work with. So the main gain we get from oriented matroid theory
+for the moment is some notation and terminology (that’s where “circuit,”
+“cocircuit,” “covector,” and so on are from) and the right intuition. Don’t
+underestimate the value of that.
+Deﬁnition 6.5.
+Let V ∈Rr×n be a set of vectors that spans Rr.
+The oriented matroid M(V ) of V is the combinatorial structure encoded
+by the following four collections of sign vectors:
+• the set of circuits of C(V ),
+• the set of vectors of V(V ),
+• the set of cocircuits of C∗(V ),
+• the set of covectors of V∗(V ).
+The families of sign vectors arising from a vector conﬁguration V in this
+way are called a realizable oriented matroid.
+In the following, we will use small capitals, like x, u, v ∈{+, −, 0}n and
+c ∈({+, −, 0}n)∗, to denote (column or row) sign vectors.
+For a simple 2-dimensional conﬁguration V we read oﬀas follows:
+circuits: C(V ) =
+n
+
+
++
+−
++
+
+,
+
+
+−
++
+−
+
+
+o
+,
+1
+2
+3
+vectors: V(V ) =
+n
+
+
++
+−
++
+
+,
+
+
+−
++
+−
+
+,
+
+
+0
+0
+0
+
+
+o
+,
+cocircuits: C∗(V ) = {(0++), (0−−), (+0−), (−0+), (++0), (−−0)}
+covectors: V∗(V ) =
+=
+
+
+
+(+++),
+(−−−),
+(++−),
+(−−+),
+(+−−),
+(−++),
+(0++),
+(0−−),
+(+0−),
+(−0+),
+(++0),
+(−−0),
+(000)
+
+
+
+In this section, we want to make four main points:
+• The data of an oriented matroid are highly structured.
+• All four sets of data are equivalent.
+• Duality is built into the system.
+• The basic constructions of “deletion” and “contraction” are oriented
+matroid operations that are dual to each other.
+
+6.3 Oriented Matroids
+159
+(a) Axiomatics
+The collections of sign vectors that make up an oriented matroid are highly
+structured, and not just random collections. In fact, they arise in the fol-
+lowing way.
+For any linear subspace U ⊆Rn, we deﬁne the operator SIGN as
+SIGN(U)
+:=
+{sign(x) : x ∈U}
+⊆
+{+, −, 0}n.
+There is a natural partial order on the set of signs {+, −, 0}: we set 0 < +
+and 0 < −, while + and −are incomparable:
+0
+Q
+Q
+Q
+
+
+−
++
+This corresponds to the fact that a number that is slightly perturbed either
+keeps its sign, unless it is zero, in which case its sign can change to +, or
+to −, or remain 0.
+On sets of sign vectors S ⊆{+, −, 0}n, we use componentwise partial
+ordering: u ≤u′ if and only if ui ≤u′
+i holds for all positions i. Thus we
+get, for example,
+(0+0+000−−+−)
+<
+(0+−+−+0−−+−)
+but
+(0+0+000−−+−)̸
+≤
+(00−+−+0−−+−)
+because of the second position, where +̸ ≤0.
+We use the componentwise partial order to deﬁne the operator MIN,
+which takes all the minimal nonzero sign vectors in S:
+MIN(S)
+:=
+{u ∈S\0 : there is no u′ < u with u′ ∈S\0}.
+We will apply the operator SIGN equally to sets of row vectors and of
+column vectors. Similarly, we apply MIN both to sets of row sign vectors
+and of column sign vectors.
+With these conventions, we can describe the oriented matroid data for V
+as follows:
+V(V ) = SIGN(Dep(V ))
+C(V ) = MIN(SIGN(Dep(V ))) = MIN(V(V ))
+V∗(V ) = SIGN(Val(V ))
+C∗(V ) = MIN(SIGN(Val(V ))) = MIN(V∗(V ))
+Furthermore, the spaces Dep(V ) and Val(V ) determine each other by Prop-
+osition 6.4, so all four sets of data are determined by U := Val(V ). In this
+sense, we talk about “the oriented matroid M = M(U) of the subspace
+U ⊆Rn.” The dimension r := dim(U) is called the rank of M. So what we

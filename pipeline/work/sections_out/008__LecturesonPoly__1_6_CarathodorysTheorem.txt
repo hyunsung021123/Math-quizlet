@@ -1,0 +1,152 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 1. Polytopes, Polyhedra, and Cones
+현재 소단원: 1.6 Carathéodory's Theorem
+직전 소단원: 「1.5 Recession Cone and Homogenization」
+[본문]
+1.6 Carath´eodory’s Theorem
+45
+Again it is quite easy to see that for every convex set P, the homogeniza-
+tion homog(P) is a convex cone in Rd+1. Furthermore, any P can be easily
+recovered from its homogenization (if we don’t mess with the coordinate
+system) as
+P = {x ∈Rd :
+1
+x
+
+∈homog(P)}.
+x0 = 0
+x0 = 1
+homog(P)
+rec(P)
+P
+Proposition 1.14.
+Let P ⊆Rd be a convex set.
+(i) If P = P(A, z) is an H-polyhedron, then its homogenization is also
+an H-polyhedron:
+homog(P) = P
+ 
+−1
+O
+−z
+A
+
+,
+
+0
+0
+ 
+= C(P).
+(ii) If P = conv(V ) + cone(Y ) is a V-polyhedron, then so is its homoge-
+nization:
+homog(P) = cone
+
+1l
+O
+V
+Y
+
+= C(P).
+Proof. This now follows from Proposition 1.12.
+1.6
+Carath´eodory’s Theorem
+The following proposition states two versions (linear and aﬃne) of another
+basic tool, known as Carath´eodory’s theorem. We want to emphasize that
+in contrast to the Farkas lemma this is completely elementary and also
+computationally quite trivial. However, it can be successfully applied, for
+example, to sharpen the Farkas lemmas, as well as the main theorems and
+representation theorems for polytopes, cones, and polyhedra; see the next
+lecture.
+
+46
+1. Polytopes, Polyhedra, and Cones
+Proposition 1.15 (Carath´eodory’s theorem).
+Let X ∈Rd×n and x ∈Rd.
+(i) If x ∈cone(X), then x ∈cone(X′) holds for a subset X′ ⊆X of at
+most rank(X) = dim(cone(X)) vectors in X.
+(ii) If x ∈conv(X), then x ∈conv(X′) holds for a subset X′ ⊆X of at
+most rank
+
+1l
+X
+
+= dim(conv(X)) + 1 vectors in X.
+We ﬁrst describe the geometric idea (linear version). For this let cone(X)
+have dimension k; assume that k′ ≥k + 1 is the smallest number such that
+x ∈cone(X) can be represented as a positive sum k′ vectors in X. (We
+obtain k′ ≤n from x ∈cone(X).)
+The cone cone(X′) spanned by such a set X′ ⊆X of k′ vectors in X
+can be interpreted as a projection of the positive orthant in Rk′. Since k′
+is minimal, the point x lies in the image of the interior of the orthant,
+{t ∈Rk′ : t > 0}. From k′ > k we get that the preimage of x under
+that projection is at least 1-dimensional. Thus the preimage contains the
+intersection of a line with the orthant {t ∈Rk′ : t ≥0}. Since the orthant
+does not contain a whole line, the preimage contains a boundary point of
+the orthant, and thus x can be represented as a conical combination of
+fewer than k′ vectors.
+Similarly (aﬃne version), we consider the projection of a simplex to the
+polytope conv(X). If the image polytope has smaller dimension than the
+simplex, then any point of the polytope has as preimage the intersection
+of the simplex with a line. But the simplex does not contain a whole line,
+so the line must contain a boundary point of the simplex, which leads to a
+representation with fewer nonzero coeﬃcients.
+We will now give an algebraic proof.
+Proof. For (i), without loss of generality we assume that X has full rank,
+rank(X) = d, by passing to the linear hull of X. Now let x ∈cone(X) and
+
+Notes
+47
+let x = Xt with a vector t ≥0 of minimal support supp(t) = {i : ti > 0},
+that is, minimal number |{i : ti > 0}| of nonzero components. Now if
+|supp(t)| > d, then {xi : ti > 0} is linearly dependent. This means that
+there is a linear dependence of the form 0 = Pn
+i=1 λitixi with all λi̸ = 0.
+By multiplying this with a nonzero α ∈R we may assume that λi > 0 for
+some i ∈supp(t), and that max{λi : ti > 0} = 1. But then we get
+x =
+X
+i
+tixi =
+X
+i
+(1 −λi)tixi,
+which is a representation with smaller support, contradicting the minimal-
+ity of t.
+Now (ii) follows directly from
+x ∈conv(X) ⇐⇒
+
+1
+x
+
+∈cone
+
+1l
+X
+
+.
+Notes
+The material of this lecture is classical — our discussion is inspired by
+Gr¨otschel’s treatment in [245].
+We recommend Schrijver’s book [484, Sect. 12.2] for more historical
+comments, as a superb guide to the historical sources, with references
+to the original papers by Fourier, Dines, and Motzkin, and also those by
+Minkowski, Weyl, Farkas, Carath´eodory, and others.
+The elimination method was developed by Motzkin in his 1936 doctoral
+thesis [414]. We quote from Dantzig & Eaves [175]:
+For years the method was referred to as the Motzkin Elimination
+Method. However, because of the odd grave-digging custom of
+looking for artifacts in long forgotten papers, it is now known
+as the Fourier-Motzkin Elimination Method and perhaps will
+eventually be known as the Fourier-Dines-Motzkin Elimination
+Method.
+The Fourier-Motzkin elimination method is not only a theoretical tool
+— with some care it can also be used for computations. “In practice,”
+however, one has to deal with an eﬀect known as combinatorial explosion:
+every elimination step may transform m inequalities into up to ⌊m2/4⌋new
+ones, which means that after a few steps the number of inequalities in the
+system can increase dramatically. However, many of the inequalities we get
+by elimination are redundant: they can be deleted without changing the
+polyhedron that is described by the system. Thus it is important to elimi-
+nate redundant inequalities from the system, and in fact to detect many of
+them quickly, in order to keep the problem size and the computation times
+down.

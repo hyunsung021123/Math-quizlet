@@ -1,0 +1,104 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 4. Steinitz' Theorem for 3-Polytopes
+현재 소단원: 4.2 Simple ΔY Transformations Preserve Realizability
+직전 소단원: 「4.1 3-Connected Planar Graphs」
+[본문]
+4.2 Simple ∆Y Transformations Preserve Realizability
+107
+However, a ∆Y transformation might create series or parallel edges, which
+can then be SP-reduced.
+We note here a simple lemma, characterizing when connectivity is pre-
+served under Y -to-∆operations.
+Lemma 4.2.
+(i) Let G be a 2-connected graph, and let {e, f, g} be the edges at a
+vertex v of degree 3 in G.
+If none of its edges are parallel (i.e., if v has three diﬀerent neighbors),
+then the result of a Y -to-∆operation is again 2-connected.
+(ii) Let G be a 3-connected graph (in particular, there are no parallel
+edges; all vertex degrees are at least 3) that is not K4. Let {e, f, g}
+be the edges at a vertex v in G of degree 3.
+If we perform a Y -to-∆operation on this 3-star, and then delete all
+parallel edges created by this (i.e., all edges that originally connected
+neighbors of v), then the resulting graph is again 3-connected.
+Proof. This follows directly from the deﬁnitions: for this consider a Y -to-∆
+operation G −→G′. Then for any set of one or two separating vertices
+in G′, the same set is separating in G as well. The only problem is that a
+Y -to-∆operation can create parallel edges; if we delete them, the operation
+preserves 3-connectedness.
+The nice thing now is that, because of duality, we immediately get a dual
+statement, Lemma 4.2∗, about connectivity after a ∆-to-Y transformation.
+For this we use that under duality, we have
+embedded planar graph G
+←→
+dual graph G∗,
+contracting series edges
+←→
+deleting parallel edges,
+k-connected
+←→
+k-connected,
+nonseparating triangle
+←→
+3-star,
+∆-to-Y transformation
+←→
+Y -to-∆transformation.
+This duality can be carried into our reduction for polytopes, because the
+graph of a 3-polytope is exactly the dual graph of the polar polytope:
+G(P)∗= G(P ∆).
+4.2
+Simple ∆Y Transformations Preserve
+Realizability
+By a simple ∆Y reduction we mean any ∆Y operation followed immediately
+by all the SP reductions that are then possible. By Lemma 4.2 and its dual,
+
+108
+4. Steinitz’ Theorem for 3-Polytopes
+these reductions preserve 3-connectedness, if applied to any 3-connected
+graph other than K4.
+We get four diﬀerent types of simple ∆-to-Y reductions: for this we
+consider a triangle and distinguish whether it has zero, one, two, or three
+vertices of degree 3.
+Here the dotted lines in our sketch denote edges that may or may not be
+present, and are not aﬀected by the simple ∆-to-Y reduction.
+Similarly, we get four types of simple Y -to-∆transformations when we
+consider a vertex v of degree 3 and distinguish how many of its neighbors
+are already connected:
+These four transformations are exactly the “polar operations” (opera-
+tions in the dual graph) for the simple ∆-to-Y reductions.
+Lemma 4.3.
+Let G be a 3-connected planar graph, and let the graph G′
+be derived from G by a simple ∆Y transformation.
+If G′ is the graph of a 3-polytope, then so is G.
+
+4.3 Planar Graphs are ∆Y Reducible
+109
+Proof. By duality, respectively polarity, we have to treat only the four
+types of ∆-to-Y transformations. For these, the transformation from P ′
+to P just corresponds to “cutting oﬀa vertex” by some suitable plane.
+(To visualize this, consider our sketch of the four types of simple ∆-to-Y
+transformations, interpreting them as pictures of 3-polytopes.)
+4.3
+Planar Graphs are ∆Y Reducible
+In this section we show that every 3-connected planar graph (with n ≥4
+edges) can be reduced to K4 by a sequence of simple ∆Y transformations.
+This is a special case of a much more powerful theorem (for 2-connected pla-
+nar graphs plus a “return edge”) that was ﬁrst established by Epifanov [198]
+and has a clever and simple proof by Truemper [546]. In this section, we
+follow his expositions in [546] and [547, Sect. 4.3].
+For a while, we will only require that the graphs considered are 2-
+connected; in particular, we admit ∆Y operations if they keep our graphs
+2-connected.
+In the simplicity of Truemper’s approach to Epifanov’s theorem, the
+reader should appreciate the “power of a normal form theorem” (in this
+case: the embedding of a planar graph as a minor of a grid graph, which is
+also at the heart of Robertson & Seymour’s work [464] on graph minors).
+Here come three lemmas and a corollary, which together prove every-
+thing. [Working through this, you can practice “three levels of reading”:
+ﬁrst read only the lemmas, and try to understand what they mean and
+how much is trivial. Second glance over the proofs, and try to see whether
+you know how to do them yourself. If you know, just do it. If you don’t,
+try to ﬁnd counterexamples. In the third step, work your way through the
+proofs until you are conﬁdent that you found all the errors I made and the
+shortcuts I missed. Tell me about them.]

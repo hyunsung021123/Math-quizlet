@@ -1,0 +1,296 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.5.b Facets of 4-Polytopes Cannot be Prescribed
+직전 소단원: 「6.5.a A Nonrational 8-Polytope」
+[본문]
+6.5 Polytopes with Few Vertices
+173
+2. G is the Gale diagram of an 8-dimensional polytope with 12 vertices
+(check this!); a polytope represented by G cannot have all coordinates
+rational.
+1
+5
+3
+4
+2
+12
+7
+10
+6  9
+8
+11
+3. Consider any spanning conﬁguration G′ of 12 signed points in the
+plane (an aﬃne Gale diagram in R2). If G′ has the the same positive
+circuits as G, then the three pairs of points that coincide in G have
+to coincide in G′ as well, and the triples and quadruples that are
+collinear in G have to be collinear in G′ as well, because they are all
+positive vectors (unions of positive circuits).
+Thus also G′ cannot be realized with rational coordinates.
+Thus G is the Gale diagram of a nonrational polytope P. If P ′ is a polytope
+that is combinatorially equivalent to P, then its Gale diagram G′ has the
+same positive circuits as the Gale diagram G, hence with part 3. above G′
+and P ′ cannot be rational either.
+(b) Facets of 4-Polytopes Cannot be Prescribed
+Perles apparently ﬁrst observed that the shape of a facet of a d-polytope
+cannot in general prescribed; see Gr¨unbaum [252, p. 96, Ex. 3]. Klein-
+schmidt [332] ﬁnally constructed a 4-polytope with 8 vertices for which the
+shape of a facet cannot be prescribed — this is the smallest dimension and
+the minimal number of vertices for such an example, because all facets can
+be prescribed for 3-polytopes, and for all d-polytope with at most d+3 ver-
+tices. With d = 4 and n = 8, Kleinschmidt’s polytope can be constructed
+
+174
+6. Duality, Gale Diagrams, and Applications
+as a 2-dimensional aﬃne Gale diagram (Exercise 6.18). It has the special
+property that all facets except the “bad” one are simplicial.
+In Example 5.11 we saw “Barnette’s example,” which has a minimal
+number of facets, namely 7. In fact, if P is a prism over a square pyramid,
+then the shape of its cubical facet cannot be prescribed. The square pyra-
+mid Pyr3 is isomorphic to its polar. Thus we get that P ∆, a bipyramid
+over a square pyramid, is a 4-polytope with 7 vertices for which a vertex
+ﬁgure cannot be prescribed.
+The following constructs an (equivalent) Gale diagram description of
+Barnette’s example [47], which Sturmfels [532] found independently of Bar-
+nette’s work.
+Example 6.22.
+[532, Prop. 5.1]
+There is a 4-polytope P with 7 facets for which the shape of a facet cannot
+be prescribed.
+For this, let P ∆be the bipyramid over a square pyramid, as given by
+V
+=
+
+
+
+
+
+
+1
+1
+1
+1
+1
+1
+1
+1
+0 −1
+0
+0
+0
+0
+0
+1
+0 −1
+0
+0
+0
+0
+0
+0
+0
+1
+1
+0
+0
+0
+0
+0
+0
+1
+−1
+
+
+
+
+
+
+∼
+
+
+
+
+
+
+0
+0
+2
+2
+0
+0
+1
+1
+0 −1
+0
+0
+0
+0
+0
+1
+0 −1
+0
+0
+0
+0
+0 −2 −2
+1
+0
+0
+0
+0
+2
+2
+0
+1
+0
+
+
+
+
+
+
+,
+from which we read oﬀa Gale diagram
+G =
+
+
+
+
+
+
+
+
+
+
+1
+0
+0
+1
+1
+0
+0
+1
+2
+2
+−2
+−2
+−2
+−2
+
+
+
+
+
+
+
+
+
+
+2
+4
+1
+3
+5
+6
+7
+5
+24
+1 3
+6 7
+Now we observe that the vertex ﬁgure at the vertex 5 is an octahedron.
+Its Gale diagram is obtained by deleting the point 5 from the diagram: it
+corresponds to a regular octahedron (compare to Example 6.18).
+Now for P ∆we see that 56 and 57 are positive cofacets, which requires
+that the points 6 and 7 coincide on the aﬃne Gale diagram of the vertex
+ﬁgure P ∆/5. Thus, if we start with the nonregular octahedron with Gale
+diagram
+24
+1 3
+7
+6
+
+6.5 Polytopes with Few Vertices
+175
+then this is not the vertex ﬁgure of a 4-polytope that is combinatorially
+equivalent to P ∆.
+(c) 2-Faces of 5-Polytopes Cannot be Prescribed
+We have now seen the second proof that the shape of a facet cannot be
+prescribed for 4-polytopes, so we’ll have to start and accept it.
+But perhaps this was the wrong generalization of the 3-dimensional the-
+orem that a facet can be prescribed. What about prescribing the shape of
+a 2-face for a d-polytope? The case d = 4 was an open problem in the ﬁrst
+edition of this book (Problem 6.11*), now you can ﬁnd it as Exercise 6.11.
+For d = 5 we have the following counterexample from the ﬁrst edition. It is
+the type of analysis that Gale diagrams “were made for”: however, the con-
+struction of this example may have been the ﬁrst time that a 3-dimensional
+aﬃne Gale diagram was seriously used.
+Example 6.23. There is a 5-polytope P with 10 facets and 12 vertices,
+for which the shape of a 2-face cannot be prescribed.
+To prove this, we construct the polar polytope Q := P ∆, a 5-polytope
+with 10 vertices and 12 facets, and verify that for one contraction (face
+ﬁgure, see Exercise 2.9) of a 2-face, the shape cannot be prescribed.
+For this consider the signed point conﬁguration given by the vertices of
+a triangular prism as positive points, labeled 2, 3, . . . , 7, the centers of the
+square facets of the prism as negative points 8, 9, 10, and the center of the
+whole prism as another negative point 1. See the ﬁgure for how we label
+this.
+6
+3
+7
+4
+2
+5
+9
+8
+10
+1
+It is easy to give coordinates. In fact, the corresponding vector conﬁguration
+in R4 could be taken to be
+
+
+
+
+−1
+1
+1
+1
+1
+1
+1
+−1
+−1
+−1
+−1
+2
+2
+2
+0
+0
+0
+−1
+−1
+−1
+−2
+0
+0
+6
+0
+0
+6
+0
+−3
+−3
+−2
+0
+6
+0
+0
+6
+0
+−3
+−3
+0
+
+
+
+.

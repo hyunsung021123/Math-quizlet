@@ -1,0 +1,96 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 2. Faces of Polytopes
+현재 소단원: 2.4 The Representation Theorem for Polytopes
+직전 소단원: 「2.3 Polarity」
+[본문]
+64
+2. Faces of Polytopes
+where for the last equality, “⊇” is clear, while for “⊆” we have to work.
+In fact, for this we can choose some x ∈relint(F), which satisﬁes A′x = 1
+and A′′x < 1, and rewrite cA = c′A′ + c′′A′′. Then by
+1 = (cA)x = (c′A′+c′′A′′)x = c′(A′x)+c′′(A′′x) ≤c′1+c′′1 = c1 = 1
+we have c′′(A′′x) = c′′1, which by A′′x < 1 implies c′′ = O.
+Corollary 2.13.
+Let P be a polytope with 0 ∈int(P), and let F, G ∈
+L(P) be faces of P. Then
+(i) F 3 is a face of P ∆,
+(ii) F 33 = F, and
+(iii) F ⊆G holds if and only if F 3 ⊇G3.
+Corollary 2.14.
+The face lattice of P ∆is the opposite of the face lattice
+of P:
+L(P ∆) ∼= L(P)op.
+This, in particular, completes the proof of Theorem 2.7, the last two parts
+of which we had deferred (remember?). It means that for every statement
+about the combinatorial structure of polytopes, there is a “polar state-
+ment,” where the translation reverses inclusion of faces, and interchanges
+∅= ˆ0
+←→
+ˆ1 = P
+vertices
+←→
+facets
+edges
+←→
+ridges
+. . .
+←→
+. . .,
+etc.
+Note that polarity also identiﬁes the face lattices of facets with (the oppo-
+sites of) the face lattices of vertex ﬁgures. Finally, it says that the “polar”
+combinatorial descriptions of polytopes, as V-polytopes in terms of vertices,
+and as H-polytopes in terms of facets, are logically equivalent.
+Nevertheless, the metric properties of the polarity construction depend
+on the location of 0 in P, whereas the combinatorial ones do not. This
+motivates to deﬁne that two polytopes P and Q are combinatorially polar
+if L(P) ∼= L(Q)op. Thus the construction of P ∆establishes the existence
+of a combinatorially polar polytope for every polytope P.
+2.4
+The Representation Theorem for Polytopes
+This section has a (by now) simple task: to state and prove the general
+representation theorem for polytopes. There is no real work left to do: we
+have assembled all the ingredients, notably Fourier-Motzkin elimination,
+the Farkas lemmas, Carath´eodory’s theorem, and polarity. One new term
+appears in its statement: the k-skeleton of a polytope is the union of its
+k-dimensional faces.
+
+2.5 Simplicial and Simple Polytopes
+65
+Theorem 2.15 (Representation theorem for polytopes).
+A subset P ⊆Rd is a polytope if and only if it can be described in any of
+the following (equivalent) ways:
+(1) an aﬃne projection of a simplex,
+(2) all the convex combinations of a ﬁnite point set,
+(3) all the convex combinations of the vertex set vert(P),
+(4) the union of all simplices spanned by a ﬁnite set of points,
+(5) the projection of the d-skeleton of a simplex,
+(6) a bounded intersection of (closed) halfspaces,
+(7) a bounded intersection of facet-deﬁning (closed) halfspaces, one for
+each facet, and of the aﬃne hull of P.
+Proof. The equivalence of (1) and (2) is from the deﬁnitions of a con-
+vex hull and a simplex. It is just an example of translation of a geometric
+statement (1) into an algebraic one (2). Similarly, (4)⇐⇒(5) is such a trans-
+lation.
+The equivalence of (2) and (3) is from Proposition 2.2, while the equiv-
+alence of (1) and (5) is from Carath´eodory’s theorem 1.15(ii).
+The equivalence of (2) and (6) is the main theorem on polytopes, The-
+orem 1.1, which we proved by Fourier-Motzkin elimination. Instead, we
+could also argue that (2)⇐⇒(6) follows from polarity.
+Finally, for (3)⇐⇒(7) we reduce this to the full-dimensional case, and
+then use that the facets of P ∆correspond to the vertices of P under po-
+larity, by Theorem 2.12 and its corollaries. In particular, the facet-deﬁning
+inequalities are uniquely determined (if we write them as aix ≤1), and
+none of them can be deleted.
+2.5
+Simplicial and Simple Polytopes
+Proposition 2.16.
+For any d-dimensional polytope P, the following con-
+ditions are equivalent:
+(i) every facet of P is a simplex, i.e., P is simplicial,
+(ii) every proper face of P is a simplex,
+(iii) every facet has d vertices,
+(iv) every k-face has k + 1 vertices, for k ≤d −1,
+(v) every lower interval [ˆ0, F] ⊆L(P) in the face lattice with F̸ = ˆ1 is a
+boolean poset.

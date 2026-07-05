@@ -1,0 +1,105 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 9. Fiber Polytopes, and Beyond
+현재 소단원: 9.4 Toward a Category of Polytopes?
+직전 소단원: 「9.3 Constructing the Permuto-Associahedron」
+[본문]
+9.4 Toward a Category of Polytopes ?
+319
+9.4
+Toward a Category of Polytopes ?
+Fiber polytopes form an important ﬁrst step in investigating a “category
+of polytopes,” a program suggested by Louis Billera. In fact, this category
+should have interesting properties that are fundamental to many geometric
+questions. It is surprising that the basic “universal constructions” for such
+a category have hardly been studied. Among them are the ﬁber polytopes,
+which form “kernel objects”; the mapping polytopes discussed below, which
+are “spaces of maps”; and coﬁber polytopes that should play the role of “co-
+kernel objects” — for which we lack even a good deﬁnition (Problem 9.16*).
+Deﬁnition 9.16.
+Let P ⊆Rp and Q ⊆Rq be full-dimensional polytopes
+(of dimensions p and q). Then the set of aﬃne maps f A,z : Rp −→Rq,
+x 7−→Ax + z can be identiﬁed with Rq×p × Rq ∼= R(p+1)q. The subset
+Φ(P, Q)
+:=
+{(A, z) ∈R(p+1)q : f A,z(P) ⊆Q}
+is a polytope in R(p+1)q of dimension (p + 1)q: the mapping polytope of the
+pair (P, Q).
+We omit the (easy) proof that Φ(P, Q) actually is a full-dimensional
+polytope (see [450]). Also there is a natural generalization to polyhedra.
+Here we note a few important examples.
+Examples 9.17.
+(i) When P is a point (p = 0), then Φ(P, Q) is isomorphic to Q. More
+generally, if P = ∆p is a simplex with p + 1 vertices, then the aﬃne
+image of the vertices of P can be chosen independently in Q, which
+proves an aﬃne equivalence
+Φ(∆p, Q)
+∼=
+Qp+1.
+(ii) In particular, take the (d−1)-simplex ∆d−1 = conv{e1, . . . , ed} ⊆Rd
+on the hyperplane H := {x ∈Rd : 1l x = 1}, as before. Then we
+can identify aﬃne maps with H −→H with linear maps Rd −→Rd
+that ﬁx 0. Such maps are given by a matrix V = (v1, . . . , vd) ∈Rd×d,
+where ei 7−→vi. Thus the mapping polytope Φ(∆d−1, ∆d−1) turns
+out to be
+Φ(∆d−1, ∆d−1)
+=
+{(v1, . . . , vd) ∈Rd×d : vi ∈∆d−1 for 1 ≤i ≤d}
+=
+{(vij) ∈Rd×d : vi,j ≥0 for 1 ≤i, j ≤d,
+X
+j
+vij = 1 for 1 ≤i ≤d}
+=
+(∆d−1)d.
+
+320
+9. Fiber Polytopes, and Beyond
+(iii) Now we will consider the subset of all maps that preserve barycenters,
+that is, map the barycenter 1
+d1 of ∆d−1 to itself. But the map takes
+this to 1
+d(v1 + . . . + vd), so we get extra conditions
+d
+X
+i=1
+vij = 1,
+for 1 ≤i ≤d.
+Thus the relative mapping polytope of all maps from (∆d−1, 1
+d1) to
+itself turns out to be
+Φ((∆d−1, 1
+d1), (∆d−1, 1
+d1))
+=
+n
+(vij) ∈Rd×d :
+vij ≥0,
+P
+i vij = 1 for all i,
+P
+j vij = 1 for all j
+o
+— and this is the Birkhoﬀpolytope of all doubly stochastic matrices,
+as in Deﬁnition 0.11.
+The full version of a theory of “Universal Constructions for Polytopes”
+will, I suspect, need two important extensions (both of which correspond
+to fundamental features in the modern development of algebraic topology):
+1. There should be an equivariant set-up, which takes into account the
+study of group actions and symmetries on the polytopes. So, for ex-
+ample, our construction of the permuto-associahedra relies on a sub-
+tle interaction of ﬁber polytopes and a symmetry group action, and
+this should be collected in a general construction of equivariant ﬁber
+polytopes.
+2. It should admit polytope pairs rather than polytopes as the primary
+objects: for example, unbounded polyhedra can often be treated in
+terms of pairs formed by a polytope together with a facet. Also, the
+maps of simplices ∆p −→∆q that preserve the barycenter of Exam-
+ple 9.17(iii) ﬁt this pattern, as do those of Exercise 9.15.
+Notes
+The original motivation for the constructions of secondary polytopes and of
+ﬁber polytopes did not come from polytope theory, but from the theory of
+A-hypergeometric functions [228, 230], and from state polytopes in commu-
+tative algebra [58] [535]. It turns out that also there are strong connections
+to constructions in algebraic geometry [314] and elimination theory [315]. A
+survey was given by Loeser [367] in the “Bourbaki seminar.” We especially

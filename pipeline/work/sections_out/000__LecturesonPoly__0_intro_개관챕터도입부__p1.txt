@@ -1,0 +1,487 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 0. Introduction and Examples
+현재 소단원: 0.intro 개관 (챕터 도입부) (분할 part 1)
+[본문]
+0
+Introduction and Examples
+Convex polytopes are fundamental geometric objects: to a large extent the
+geometry of polytopes is just that of Rd itself. (In the following, the letter d
+usually denotes dimension.)
+The “classic text” on convex polytopes by Branko Gr¨unbaum [252] has
+recently celebrated its twenty-ﬁfth anniversary — and is still inspiring read-
+ing. Some more recent books, concentrating on f-vector questions, are
+McMullen & Shephard [403], Brøndsted [133], and Yemelichev, Kovalev
+& Kravtsov [570]. See also Stanley [515] and Hibi [274]. For very recent
+developments, some excellent surveys are available, notably the handbook
+articles by Klee & Kleinschmidt [329] and by Bayer & Lee [63]. See also
+Ewald [201] for a lot of interesting material, and Croft, Falconer & Guy [168]
+for more research problems.
+Our aim is the following: rather than being encyclopedic, we try to
+present an introduction to some basic methods and modern tools of poly-
+tope theory, together with some highlights (mostly with proofs) of the
+theory. The fact that we can start from scratch and soon reach some ex-
+citing points is due to recent progress on several aspects of the theory that
+is unique in its simplicity. For example, there are several striking papers
+by Gil Kalai (see Lecture 3!) that are short, novel, and probably instant
+classics. (They are also slightly embarrassing, pointing us to “obvious” (?)
+ideas that have long been overlooked.)
+For these lectures we concentrate on combinatorial aspects of polytope
+theory. Of course, much of our geometric intuition is derived from life in R3
+(which some of us might mistake for the “real world,” with disastrous
+results, as everybody should know). However, here is a serious warning:
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152, 
+1
+  
+DOI 10.1007/978-1-4613-8431-1_1, © Springer Science+Business Media New York 2007 
+ 
+
+2
+0. Introduction and Examples
+part of the work (and fun) consists in seeing how intuition from life in
+three dimensions can lead one (i.e., everyone, but not us) astray: there are
+many theorems about 3-dimensional polytopes whose analogues in higher
+dimensions fail badly. Thus, one of the main tasks for polytope theory is
+to develop tools to analyze and, if possible, “visualize” the geometry of
+higher-dimensional polytopes. Schlegel diagrams, Gale diagrams, and the
+Lawrence construction are prominent tools in this direction — tools for a
+more solid analysis of what polytopes in d-space “really look like.”
+Notation 0.0.
+We stick to some special notational conventions. They are
+designed in such a way that all the expressions we write down are “clearly”
+invariant under change of coordinates.
+In the following Rd represents the vector space of all column vectors of
+length d with real entries. Similarly, (Rd)∗denotes the dual vector space,
+that is, the real vector space of all linear functions Rd −→R. These are
+given by the real row vectors of length d.
+The symbols x, x0, x1, . . . , y, z always denote column vectors in Rd (or
+in Rd±1) and represent (aﬃne) points. Matrices X, Y, Z, . . . represent sets
+of column vectors; thus they are usually (d × m)- or (d × n)-matrices. The
+order of the columns is not important for such a set of column vectors.
+Also, we need the unit vectors ei in Rd, which are column vectors, and
+the column vectors 0 and 1 = P
+i ei of all zeroes, respectively all ones.
+The symbols a, a0, a1, . . . , b, c, . . . always denote row vectors in (Rd)∗,
+and represent linear forms. In fact, the row vector a ∈(Rd)∗represents the
+linear form ℓ= ℓa : Rd −→R, x 7−→ax. Here ax is the scalar obtained as
+the matrix product of a row vector (i.e., a (1 × d)-matrix) with a column
+vector (a (d × 1)-matrix). Matrices like A, A′, B, . . . represent a set of row
+vectors; thus they are usually (n × d)- or (m × d)-matrices. Furthermore,
+the order of the rows is not important.
+We use 1l = (1, . . . , 1) to denote the all-ones row vector in (Rd)∗, or
+in (Rd±1)∗. Thus, 1lx is the sum of the coordinates of the column vector x.
+Similarly, O = (0, . . . , 0) denotes the all-zeroes row vector.
+Boldface type is reserved for vectors; scalars appear as italic symbols,
+such as a, b, c, d, x, y . . .. Thus the coordinates of a column vector x will be
+x1, . . . , xd ∈R, and the coordinates of a row vector a will be a1, . . . , ad.
+Basic objects for any discussion of geometry are points, lines, planes and
+so forth, which are aﬃne subspaces, also called ﬂats. Among them, the
+vector subspaces of Rd (which contain the origin 0 ∈Rd) are referred to as
+linear subspaces. Thus the nonempty aﬃne subspaces are the translates of
+linear subspaces.
+The dimension of an aﬃne subspace is the dimension of the corresponding
+linear vector space. Aﬃne subspaces of dimensions 0, 1, 2, and d −1 in Rd
+are called points, lines, planes, and hyperplanes, respectively.
+For these lectures we need no special mathematical requirements: we just
+assume that the listener/reader feels (at least a little bit) at home in the
+
+0. Introduction and Examples
+3
+real aﬃne space Rd, with the construction of coordinates, and with aﬃne
+maps x 7−→Ax + x0, which represent an aﬃne change of coordinates if A
+is a nonsingular square matrix, or an arbitrary aﬃne map in the general
+case.
+Most of what we do will, in fact, be invariant under any aﬃne change
+of coordinates. In particular, the precise dimension of the ambient space is
+usually not really important. If we usually consider “a d-polytope in Rd,”
+then the reason is that this feels more concrete than any description starting
+with “Let V be a ﬁnite-dimensional aﬃne space over an ordered ﬁeld,
+and . . . .”
+We take for granted the fact that aﬃne subspaces can be described by
+aﬃne equations, as the aﬃne image of some real vector space Rk, or as the
+set of all aﬃne combinations of a ﬁnite set of points,
+F = {x ∈Rd : x = λ0x0 + . . . + λnxn for λi ∈R,
+n
+X
+i=1
+λi = 1}.
+That is, every aﬃne subspace can be described both as an intersection of
+aﬃne hyperplanes, and as the aﬃne hull of a ﬁnite point set (i.e., as the
+intersection of all aﬃne ﬂats that contain the set). A set of n ≥0 points is
+aﬃnely independent if its aﬃne hull has dimension n −1, that is, if every
+proper subset has a smaller aﬃne hull.
+A point set K ⊆Rd is convex if with any two points x, y ∈K it also
+contains the straight line segment [x, y] = {λx + (1 −λ)y : 0 ≤λ ≤1}
+between them. For example, in the drawings below the shaded set on the
+right is convex, the set on the left is not. (This is one of very few nonconvex
+sets in this book.)
+Clearly, every intersection of convex sets is convex, and Rd itself is convex.
+Thus for any K ⊆Rd, the “smallest” convex set containing K, called the
+convex hull of K, can be constructed as the intersection of all convex sets
+that contain K:
+conv(K) :=
+\ 
+K′ ⊆Rd : K ⊆K′, K′ convex
+	
+.
+Our sketch shows a subset K of the plane (in black), and its convex hull
+conv(K), a convex 7-gon (including the shaded part).
+
+4
+0. Introduction and Examples
+For any ﬁnite set {x1, . . . , xk} ⊆K and parameters λ1, . . . , λk ≥0 with
+λ1 + . . . + λk = 1, the convex hull conv(K) must contain the point λ1x1 +
+. . . + λkxk: this can be seen by induction on k, using
+λ1x1 + . . . + λkxk = (1 −λk)
+
+λ1
+1 −λk
+x1 + . . . + λk−1
+1 −λk
+xk−1
+
++ λkxk
+for λk < 1. For example, the following sketch shows the lines spanned by
+four points in the plane, and the convex hull (shaded).
+Geometrically, this says that with any ﬁnite subset K0 ⊆K the convex
+hull conv(K) must also contain the projected simplex spanned by K0. This
+proves the inclusion “⊇” of
+conv(K) =
+
+λ1x1 + . . . + λkxk : {x1, . . . , xk} ⊆K, λi ≥0,
+k
+X
+i=1
+λi = 1
+	
+.
+But the right-hand side of this equation is easily seen to be convex, which
+proves the equality.
+Now if K = {x1, . . . , xn} ⊆Rd is itself ﬁnite, then we see that its convex
+hull is
+conv(K) =
+
+λ1x1 + . . . + λnxn : n ≥1, λi ≥0,
+n
+X
+i=1
+λi = 1
+	
+.
+The following gives two diﬀerent versions of the deﬁnition of a polytope.
+(We follow Gr¨unbaum and speak of polytopes without including the word
+“convex”: we do not consider nonconvex polytopes in this book.) The two
+versions are mathematically — but not algorithmically — equivalent. The
+proof of equivalence between the two concepts is nontrivial, and will occupy
+us in Lecture 1.
+Deﬁnition 0.1.
+A V-polytope is the convex hull of a ﬁnite set of points
+in some Rd.
+An H-polyhedron is an intersection of ﬁnitely many closed halfspaces in
+some Rd. An H-polytope is an H-polyhedron that is bounded in the sense
+that it does not contain a ray {x + ty : t ≥0} for any y̸ = 0.
+(This
+deﬁnition of “bounded” has the advantage over others that it does not rely
+on a metric or scalar product, and that it is obviously invariant under aﬃne
+change of coordinates.)
+
+0. Introduction and Examples
+5
+A polytope is a point set P ⊆Rd which can be presented either as a
+V-polytope or as an H-polytope.
+The dimension of a polytope is the dimension of its aﬃne hull.
+A d-polytope is a polytope of dimension d in some Re (e ≥d).
+Two polytopes P ⊆Rd and Q ⊆Re are aﬃnely isomorphic, denoted
+by P ∼= Q, if there is an aﬃne map f : Rd −→Re that is a bijection
+between the points of the two polytopes. (Note that such a map need not
+be injective or surjective on the “ambient spaces.”)
+Our sketches try to illustrate the two concepts: the left ﬁgure shows a
+pentagon constructed as a V-polytope as the convex hull of ﬁve points; the
+right ﬁgure shows the same pentagon as an H-polytope, constructed by
+intersecting ﬁve lightly shaded halfspaces (bounded by the ﬁve fat lines).
+Usually we assume (without loss of generality) that the polytopes we
+study are full-dimensional, so that d denotes both the dimension of the
+polytope we are studying, and the dimension of the ambient space Rd.
+The emphasis of these lectures is on combinatorial properties of the faces
+of polytopes: the intersections with hyperplanes for which the polytope is
+entirely contained in one of the two halfspaces determined by the hyper-
+plane. We will give precise deﬁnitions and characterizations of faces of
+polytopes in the next two lectures. For the moment, we rely on intuition
+from “life in low dimensions”: using the fact that we know quite well what
+a 2- or 3-polytope “looks like.” We consider the polytope itself as a trivial
+face; all other faces are called proper faces. Also the empty set is a face for
+every polytope. Less trivially, one has as faces the vertices of the polytope,
+which are single points, the edges, which are 1-dimensional line segments,
+and the facets, i.e., the maximal proper faces, whose dimension is one less
+than that of the polytope itself.
+We deﬁne two polytopes P, Q to be combinatorially equivalent (and de-
+note this by P ≃Q) if there is a bijection between their faces that preserves
+the inclusion relation. This is the obvious, nonmetric concept of equiva-
+lence that only considers the combinatorial structure of a polytope; see
+Section 2.2 for a thorough discussion.
+Example 0.2. Zero-dimensional polytopes are points, one-dimensional
+polytopes are line segments. Thus any two 0-polytopes are aﬃnely iso-
+morphic, as are any two 1-polytopes.
+
+6
+0. Introduction and Examples
+Two-dimensional polytopes are called polygons. A polygon with n ver-
+tices is called an n-gon. Convexity here requires that the interior angles (at
+the vertices) are all smaller than π. The following drawing shows a convex
+6-gon, or hexagon.
+Two 2-polytopes are combinatorially equivalent if and only if they have
+the same number of vertices. Therefore, we can use the term “the convex
+n-gon” for the combinatorial equivalence class of a convex 2-polytope with
+exactly n vertices. There is, in fact, a nice representative for this class: the
+regular n-gon,
+P2(n) := conv
+
+(cos( 2πk
+n ), sin( 2πk
+n )) : 0 ≤k < n
+	
+⊆R2.
+The following drawing shows the regular hexagon P2(6) in R2. It is com-
+binatorially equivalent, but not aﬃnely isomorphic, to the hexagon drawn
+above.
+x
+y
+Example 0.3. The tetrahedron is a familiar geometric object (a 3-dimen-
+sional polytope) in R3:
+Similarly, its d-dimensional generalization forms the ﬁrst (and simplest)
+inﬁnite family of higher-dimensional polytopes we want to consider. We
+
+0. Introduction and Examples
+7
+deﬁne a d-simplex as the convex hull of any d + 1 aﬃnely independent
+points in some Rn (n ≥d).
+Thus a d-simplex is a polytope of dimension d with d + 1 vertices. Nat-
+urally the various possible notations for the d-simplex lead to confusion,
+in particular since various authors of books and papers have their own, in-
+consistent ideas about whether a lower index denotes dimension or number
+of vertices. In the following, we consistently use lower indices to denote
+dimension of a polytope (which should account for our awkward P2(n) for
+an n-gon. . . ).
+It is easy to see that any two d-simplices are aﬃnely isomorphic. However,
+it is often convenient to specify a canonical model. For the d-simplex, we
+use the standard d-simplex ∆d with d + 1 vertices in Rd+1,
+∆d :=
+n
+x ∈Rd+1 : 1l x = 1, xi ≥0
+o
+= conv{e1, . . . , ed+1}
+Our ﬁgures illustrate the construction of ∆2 in R3:
+z
+y
+x
+z
+y
+x
+Example 0.4. The three-dimensional cube C3 and the octahedron C3∆are
+familiar objects as well:
+Their generalization to d dimensions is straightforward. We arrive at the
+d-dimensional hypercube (or the d-cube, for short):
+Cd := {x ∈Rd : −1 ≤xi ≤1} = conv
+
+{+1, −1}d},
+
+8
+0. Introduction and Examples
+and the d-dimensional crosspolytope:
+Cd
+∆:= {x ∈Rd :
+X
+i
+|xi| ≤1} = conv{e1, −e1, . . . , ed, −ed}.
+We have chosen our “standard models” in such a way that they are
+symmetric with respect to the origin. In this version there is a very close
+connection between the two polytopes Cd and Cd∆: they satisfy
+Cd
+∆
+∼=
+{a ∈(Rd)∗: ax ≤1 for all x ∈Cd }
+Cd
+∼=
+{a ∈(Rd)∗: ax ≤1 for all x ∈Cd
+∆},
+that is, these two polytopes are polar to each other (see Section 2.3).
+Now it is easy to see that the d-dimensional crosspolytope is a simplicial
+polytope, all of whose proper faces are simplices, that is, every facet has
+the minimal number of d vertices. Similarly, the d-dimensional hypercube
+is a simple polytope: every vertex is contained in the minimal number of
+only d facets.
+These two classes, simple and simplicial polytopes, are very important. In
+fact, the convex hull of any set of points that are in general position in Rd
+is a simplicial polytope. Similarly, if we consider any set of inequalities
+in Rd that are generic (i.e., they deﬁne hyperplanes in general position)
+and whose intersection is bounded, then this deﬁnes a simple polytope.
+Finally the two concepts are linked by polarity: if P and P ∆are polar,
+then one is simple if and only if the other one is simplicial.
+(The terms “general position” and “generic” are best handled with some
+amount of ﬂexibility — you supply a precise deﬁnition only when it becomes
+clear how much “general position” or “genericity” is really needed. One can
+even speak of “suﬃciently general position”! For our purposes, it is usually
+suﬃcient to require the following: a set of n > d points in Rd is in general
+position if no d + 1 of them lie on a common aﬃne hyperplane. Similarly, a
+set of n > d inequalities is generic if no point satisﬁes more than d of them
+with equality. More about this in Section 3.1.)
+Here is one more aspect that makes the d-cubes and d-crosspolytopes
+remarkable: they are regular polytopes — polytopes with maximal symme-
+try. (We will not give a precise deﬁnition here.) There is an extensive and
+very beautiful theory of regular polytopes, which includes a complete clas-
+siﬁcation of all regular and semi-regular polytopes in all dimensions. A lot
+can be learned from the combinatorics and the geometry of these highly
+regular conﬁgurations (“wayside shrines at which one should worship on
+the way to higher things,” according to Peter McMullen).
+At home (so to speak) in 3-space, the classiﬁcation of regular polytopes
+yields the well-known ﬁve platonic solids: the tetrahedron, cube and oc-
+tahedron, dodecahedron and icosahedron. We do not include here a draw-
+ing of the icosahedron or the dodecahedron, but we refer the reader to
+
+0. Introduction and Examples
+9
+Gr¨unbaum’s article [257] for an amusing account of how diﬃcult it is to
+get a correct drawing (and a “How to” as well).
+The classic account of regular polytopes is Coxeter’s book [164]; see also
+Martini [379, 380], Blind & Blind [103], and McMullen & Schulte [404] for
+recent progress. The topic is interesting not only for “aesthetic” reasons,
+but also because of its close relationship to other parts of mathematics,
+such as crystallography (see Senechal [491]), the theory of ﬁnite reﬂection
+groups (“Coxeter groups,” see Grove & Benson [249] or Humphreys [289]),
+and root systems and buildings (see Brown [135]), among others.
+Example 0.5. There are a few simple but very useful recycling operations
+that produce “new polytopes from old ones.”
+If P is a d-polytope and x0 is a point outside the aﬃne hull of P (for
+this we embed P into Rn for some n > d), then the convex hull
+pyr(P) := conv(P ∪{x0})
+is a (d + 1)-dimensional polytope called the pyramid over P. Clearly the
+aﬃne and combinatorial type of pyr(P) does not depend on the particular
+choice of x0 — just change the coordinate system. The faces of pyr(P) are
+the faces of P itself, and all the pyramids over faces of P.
+Especially familiar examples of pyramids are the simplices (the pyra-
+mid over ∆d is ∆d+1), and the Egyptian pyramid Pyr3 = pyr(P2(4)): the
+pyramid over a square.
+Similarly we construct the bipyramid bipyr(P) by choosing two points x+
+and x−outside aﬀ(P) such that an interior point of the segment [x+, x−]
+is an interior point of P. As examples, we get the bipyramid over a triangle
+x−
+x+
+and the crosspolytopes, which are iterated bipyramids over a point,
+bipyr(Cd
+∆) = Cd+1
+∆.
+Especially important, it is quite obvious how to deﬁne the product of two
+(or more) polytopes: for this we consider polytopes P ⊆Rp and Q ⊆Rq,
+
+10
+0. Introduction and Examples
+and set
+P×Q
+:=
+{
+x
+y
+
+: x ∈P, y ∈Q}.
+We get a polytope of dimension dim(P) + dim(Q), whose nonempty faces
+are the products of nonempty faces of P and nonempty faces of Q.
+In particular
+• The prism over a polytope P is the product of P with a segment,
+prism(P)
+:=
+P×∆1.
+This is polar to the bipyramid:
+prism(P)
+=
+(bipyr(P ∆))∆.
+The smallest interesting prism is the one over a triangle, ∆2 × ∆1,
+also known as the triangular prism.
+• The cubes can be interpreted as iterated prisms, starting with a point.
+In particular, we get Cd×[−1, 1] = Cd+1.
+• Products of simplices are interesting polytopes and more complicated
+than one might think (see Problem 5.3(iii)*, an unsolved conjecture).
+Just consider P := ∆2×∆2, the product of two triangles. This is a
+4-polytope with 9 vertices. It has 6 facets, of the form “edge of one
+triangle × the other triangle”: thus they all are triangular prisms.
+Furthermore, the intersection of two of them is either “one of the
+triangles × a vertex of the other triangle,” or it is “an edge × an
+edge.” In either case the intersection is 2-dimensional. Hence any two
+facets of P are adjacent, and P ∆= (∆2 × ∆2)∆is a 4-polytope with
+6 vertices such that any two of them are adjacent. Thus P ∆is a
+2-neighborly 4-polytope that is not a simplex: there is no analogue to
+this “phenomenon” in 3-space (Exercise 0.0).
+• Taking products of several convex polygons, we can construct poly-
+topes “with many vertices.” Namely, assuming that d is even, we can
+construct a d
+2-fold product of m-gons, which yields a d-dimensional
+polytope with “only” dm
+2
+facets, but with md/2 vertices. If d is odd,
+we can use a prism over such a product.
+(For ﬁxed dimension d, this simple construction of polytopes with
+many vertices is asymptotically optimal, as we will see in Section 8.4.)
+
+0. Introduction and Examples
+11
+Example 0.6. The moment curve in Rd is deﬁned by
+x : R −→Rd,
+t 7−→x(t) :=
+
+
+
+
+t
+t2
+...
+td
+
+
+
+∈Rd.
+The cyclic polytope Cd(t1, . . . , tn) is the convex hull
+Cd(t1, . . . , tn) := conv {x(t1), x(t2), . . . , x(tn)}
+of n > d distinct points x(ti), with t1 < t2 . . . < tn, on the moment
+curve. We will see from “Gale’s evenness condition” ahead that the points
+x(ti) are vertices, and the combinatorial equivalence class of the polytope
+does not depend on the speciﬁc choice of the parameters ti. This justiﬁes
+denoting the polytope by Cd(n) and calling it “the” cyclic d-polytope with
+n vertices. Our drawing shows C3(6).
+x(t1)
+x(t2)
+x(t3)
+x(t4)
+x(t5)
+x(t6)
+The problem is that in dimension 3 we cannot really see why cyclic
+polytopes are so interesting. They are. Before we prove a few things about
+them, let’s do some “experiments.”
+We use the program “PORTA” by Thomas Christof [150, 151], which
+produces a complete system of facet-deﬁning inequalities from the list of
+vertices. Let’s do the 4-dimensional cyclic polytope C4(8). We use param-
+eters ti = i −1 for 1 ≤i ≤8. The input ﬁle for PORTA is
+DIM = 4
+CONV_SECTION
+0
+0
+0
+0
+1
+1
+1
+1
+2
+4
+8
+16
+3
+9
+27
+81
+4 16
+64
+256
+5 25 125
+625
+6 36 216 1296
+7 49 343 2401
+END

@@ -1,0 +1,698 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 0. Introduction and Examples
+현재 소단원: 0.intro 개관 (챕터 도입부) (분할 part 2)
+[본문]
+12
+0. Introduction and Examples
+The output of PORTA yields (after 0.11 seconds of computation time) a
+complete minimal system of inequalities for the convex hull of these points,
+namely
+DIM = 4
+VALID
+7 49 343 2401
+INEQUALITIES_SECTION
+(
+1) -210x1+107x2-18x3+x4 <=
+0
+(
+2) -140x1+ 83x2-16x3+x4 <=
+0
+(
+3) - 84x1+ 61x2-14x3+x4 <=
+0
+(
+4) - 42x1+ 41x2-12x3+x4 <=
+0
+(
+5) - 14x1+ 23x2-10x3+x4 <=
+0
+(
+6) +
+6x1- 11x2+ 6x3-x4 <=
+0
+(
+7) + 12x1- 19x2+ 8x3-x4 <=
+0
+(
+8) + 20x1- 29x2+10x3-x4 <=
+0
+(
+9) + 30x1- 41x2+12x3-x4 <=
+0
+( 10) + 42x1- 55x2+14x3-x4 <=
+0
+( 11) + 50x1- 35x2+10x3-x4 <=
+24
+( 12) + 78x1- 49x2+12x3-x4 <=
+40
+( 13) +112x1- 65x2+14x3-x4 <=
+60
+( 14) +152x1- 83x2+16x3-x4 <=
+84
+( 15) +154x1- 71x2+14x3-x4 <= 120
+( 16) +216x1- 91x2+16x3-x4 <= 180
+( 17) +288x1-113x2+18x3-x4 <= 252
+( 18) +342x1-119x2+18x3-x4 <= 360
+( 19) +450x1-145x2+20x3-x4 <= 504
+( 20) +638x1-179x2+22x3-x4 <= 840
+END
+In particular, this polytope has 20 facets.
+The “-v” option of the PORTA program produces also the vertex-facet
+incidence matrix given on the next page, from which we can derive the
+complete combinatorial structure of the polytope.
+In this matrix, the vertex-facet incidences are denoted by *’s. From the
+matrix we can determine that C4(8) is simplicial, since every facet has
+exactly 4 vertices, corresponding to exactly 4 *’s in every row — this is
+also recorded in the last column. We also see that every vertex is on exactly
+10 facets: there are 10 *’s in every column; see the bottom row of the matrix.
+From the rows of the matrix we can observe the following pattern, known
+as Gale’s evenness condition: every segment of consecutive *’s is of even
+length if it is not an initial or a ﬁnal segment, that is, if it is preceded and
+followed by a dot. (For this, the vertices of Cd(n) are labeled 1, . . . , n, with
+i corresponding to x(ti).)
+
+0. Introduction and Examples
+13
+\ P
+|
+|
+\ O
+|
+|
+I \ I
+|
+|
+N \ N
+| 1
+6
+| #
+E \ T
+|
+|
+Q \ S |
+|
+S \
+|
+|
+\ |
+|
+-------------------------
+1
+| *.... *** :
+4
+2
+| *...* *.* :
+4
+3
+| *..** ..* :
+4
+4
+| *.**. ..* :
+4
+5
+| ***.. ..* :
+4
+6
+| ****. ... :
+4
+7
+| **.** ... :
+4
+8
+| **..* *.. :
+4
+9
+| **... **. :
+4
+10
+| **... .** :
+4
+11
+| .**** ... :
+4
+12
+| .**.* *.. :
+4
+13
+| .**.. **. :
+4
+14
+| .**.. .** :
+4
+15
+| ..*** *.. :
+4
+16
+| ..**. **. :
+4
+17
+| ..**. .** :
+4
+18
+| ...** **. :
+4
+19
+| ...** .** :
+4
+20
+| ....* *** :
+4
+...............
+#
+| 11111 111
+| 00000 000
+From this pattern, one can derive that any two vertices of the polytope
+are adjacent. We can also check this directly: every pair of vertices is con-
+tained in at least 3 facets. So, the edge 12 is contained in the facets (5) =
+1238, (6) = 1234, (7) = 1245, (8) = 1256, (9) = 1267, and (10) = 1278.
+Similarly, the edge [1, 3] is contained in the facets (4) = 1348, (5) = 1238
+and (6) = 1234.
+Finally, we can note that there is a combinatorial symmetry that sends
+vertex i to vertex 9 −i; see Exercise 0.7.
+The following theorem and corollary contain a complete description of
+the combinatorial structure of the cyclic polytopes — as suggested by our
+computation. Here we break our promise not to do any proofs in this in-
+troduction: mainly because the proofs are fun, and the results are a little
+surprising (see Corollary 0.8!).
+
+14
+0. Introduction and Examples
+Theorem 0.7 (Gale’s evenness condition).
+(Gale [221])
+Let n > d ≥2. We will use [n] to denote the set {1, . . . , n}, and choose real
+parameters t1 < t2 < . . . < tn.
+The cyclic polytope
+Cd(n) = conv{x(t1), . . . , x(tn)}
+is a simplicial d-polytope. A d-subset S ⊆[n] forms a facet of Cd(n) if and
+only if the following “evenness condition” is satisﬁed:
+If i < j are not in S, then the number of k ∈S between i and j is even:
+2
+ #{k : k ∈S, i < k < j}
+for i, j /∈S.
+Proof. Recall the famous Vandermonde determinant identity
+det
+
+1
+1
+. . .
+1
+x(t0)
+x(t1)
+. . .
+x(td)
+
+=
+det
+
+
+
+
+
+
+
+1
+1
+. . .
+1
+t0
+t1
+. . .
+td
+...
+...
+...
+...
+td−1
+0
+td−1
+1
+. . .
+td−1
+d
+td
+0
+td
+1
+. . .
+td
+d
+
+
+
+
+
+
+
+=
+Y
+0≤i<j≤d
+(tj −ti).
+This is easily proved by observing that both sides are polynomials and that
+the determinants vanish whenever we have ti = tj for some i̸ = j. From
+the identity, one sees that no d+1 points on the moment curve are aﬃnely
+dependent. In particular, this shows that Cd(n) is a simplicial d-polytope.
+Now let S = {i1, . . . , id} ⊆[n]. Then the hyperplane HS through the
+corresponding points x(tis) is given by
+HS
+=
+{x ∈Rd : FS(x) = 0},
+where
+FS(x)
+:=
+det
+
+1
+1
+. . .
+1
+x
+x(ti1)
+. . .
+x(tid)
+
+In fact, FS(x) is a linear function in x, and it vanishes on the prescribed
+points.
+(The reader should check, at least for one or two examples, that the
+inequalities that we have computed for C4(8) have the form “±FS(x) ≤rS”
+for some rS ∈R.)
+Now we let the point x(t) move on the moment curve {x(t) : t ∈R}.
+Note that FS(x(t)) is a polynomial in t of degree d. It vanishes for t = tis:
+
+0. Introduction and Examples
+15
+thus it has d diﬀerent zeroes, and changes the sign at each of them. The
+following sketch is supposed to illustrate this.
+Now S forms a facet if and only if FS(x(ti)) has the same sign for all the
+points x(ti) with i ∈[n]\S; that is, if FS(x(t)) has an even number of sign
+changes between t = ti and t = tj, for i < j and i, j ∈[n]\S.
+In particular, this criterion shows that the combinatorics of Cd(t1, . . . , tn)
+do not depend on the speciﬁc choice of the parameters ti, so Cd(n) is well
+deﬁned as a combinatorial equivalence class of polytopes.
+It is quite easy to extend the evenness condition to a characterization of
+all the faces of Cd(n). This characterization then also shows the following
+corollary (Exercise 0.8), for which we give an independent proof.
+Corollary 0.8.
+The cyclic polytope Cd(n) is ⌊d
+2⌋-neighborly, that is, any
+subset S ⊆[n] of |S| ≤d
+2 vertices forms a face.
+Proof. Let Cd(n) = Cd(t1, . . . , tn) with t1 < . . . < tn, and let T =
+{i1, . . . , ik} ⊆[n] have cardinality k ≤d
+2. Choose some ε > 0 small enough
+such that ti < ti + ε < ti+1 for all i < n, and some M > tn + ε.
+Using x(M +1), x(M +2), . . . as dummy points “far out there,” we deﬁne
+a linear function FT (x) as
+det
+ 1
+1
+1
+· · ·
+1
+1
+1
+· · ·
+1
+x x(ti1) x(ti1+ε) · · · x(tik) x(tik+ε) x(M+1) · · · x(M+d−2k)
+
+.
+This is a linear function in x, which vanishes on the points x(ti) for i ∈T.
+If we consider FT (x(t)), then this is a polynomial in t of degree d, and has
+d “obvious” distinct zeroes
+ti1, ti1 + ε, . . . , tik, tik + ε, M + 1, . . . , M + d −2k.
+There is an even number of zeroes between t = ti and t = tj for i, j ∈[n]\T,
+because a zero at t = tl always comes in a pair with a zero at t = tl + ε.
+Thus FT (x) has the same sign on all the points x(ti) : i ∈[n]\T.
+For d ≤3 Corollary 0.8 just says that the points x(ti) form vertices of
+Cd(n): the points on the moment curve are in convex position. However,
+
+16
+0. Introduction and Examples
+for d ≥4 Corollary 0.8 yields something “counterintuitive”: it describes
+a property that does not manifest itself in d ≤3 dimensions. Namely, for
+d ≥4 the polytope Cd(n) has n pairwise adjacent vertices, where n may
+be much larger than d.
+More generally, one deﬁnes a d-polytope to be k-neighborly if any subset
+of k or less vertices is the vertex set of a face of P. In Exercise 0.10, we see
+that, except for simplices, no polytope is more than ⌊d
+2⌋-neighborly. There-
+fore, polytopes that are ⌊d
+2⌋-neighborly are known as neighborly polytopes.
+Thus, by Corollary 0.8, cyclic polytopes are neighborly.
+The neighborly polytopes are the solution of various extremal properties.
+This is one reason why they are important. For example, the famous upper
+bound theorem of McMullen (which we will state and prove in Section 8.4)
+implies that among all d-polytopes with n vertices, the neighborly ones
+have the greatest number of facets. In particular, no d-polytope with n
+vertices has more facets than the cyclic polytope Cn(d).
+Example 0.9. If we apply an aﬃne map π to a polytope P, then we get a
+new polytope π(P): this is quite obvious from the deﬁnition of a V-polytope
+in Deﬁnition 0.1. If the aﬃne map is injective, then the image polytope
+π(P) is (aﬃnely) isomorphic to the original one — nothing interesting has
+happened.
+However, one can also take aﬃne maps that project P to a polytope
+f(P) of lower dimension.
+In particular, the convex hull
+conv{x1, . . . , xn}
+⊆
+Rd
+can be interpreted as the image of the standard simplex ∆n−1 ⊆Rn, under
+the linear map π : Rn −→Rd, mapping ei 7−→xi. This is usually in-
+terpreted geometrically as a projection of polytopes (which suggests some
+special choice of coordinates, where Rd is embedded as a subspace of Rn).
+
+0. Introduction and Examples
+17
+We conclude that a (V-)polytope is the same thing as the projection of a
+simplex, and that every projection of a polytope is a polytope as well.
+A polytope P ⊆Rd is centrally symmetric if it has a center: a point
+x0 ∈Rd such that x0 + x ∈P holds if and only if x0 −x ∈P. Every
+aﬃne image (projection) of a crosspolytope is centrally symmetric: if P =
+{Ax +x0 : x ∈Cd∆}, then P is centrally symmetric with respect to x0. In
+fact, every centrally symmetric polytope is the projection of a crosspolytope
+(Exercise 0.2).
+The projections of cubes, called zonotopes, form an especially interest-
+ing class of polytopes. For example, they encode the structure of linear
+hyperplane arrangements; see Lecture 7.
+Example 0.10. The permutahedron Πd−1 ⊆Rd is deﬁned as the convex
+hull of all vectors that are obtained by permuting the coordinates of the
+vector
+
+
+
+
+1
+2
+...
+d
+
+
+
+. It was apparently ﬁrst investigated by Schoute [481] in 1911:
+we have taken the following drawing from his paper [481, Fig. 4].
+The permutahedron is a very interesting polytope. In fact, it is a simple
+zonotope (Exercise 0.3), which is rare. Its vertices can be identiﬁed with the
+permutations in Sd (namely, by associating with
+
+
+
+
+x1
+x2
+...
+xd
+
+
+
+the permutation
+that maps xi 7→i) in such a way that two vertices are connected by an
+edge if and only if the corresponding permutations diﬀer by an adjacent
+transposition. Check this in our drawing of Π2:
+123
+213
+132
+231
+321
+312
+
+18
+0. Introduction and Examples
+and that of Π3:
+4132
+4123
+1423
+1243
+1432
+1342
+4312
+3412
+3142
+3421
+3124
+1324
+2134
+1234
+2143
+2314
+3214
+3241
+There is a simple combinatorial description of all the faces of Πd−1: its
+k-faces correspond to ordered partitions of the set [d] into d −k nonempty
+parts. Thus the vertices are permutations, and the facets are partitions
+of [d] into parts (S, [d]\S) with ∅⊂S ⊂[d].
+The permutahedron is a classical object; see [96, Example 2.2.5] for fur-
+ther references. We’ll meet it again as a zonotope in Section 7.3, and as a
+ﬁber polytope (the monotone path polytope of the cube) in Section 9.2.
+There is a much more recent counterpart, the associahedron Kn−2, ﬁrst
+described as a combinatorial object by Stasheﬀ[522] in 1964, and con-
+structed as a convex polytope by John Milnor (unpublished, unrecorded),
+by Mark Haiman [266], and by Carl Lee [355]. The vertices of this (simple)
+polytope correspond to all the 1
+n
+ 2n−2
+n−1
+
+diﬀerent ways of bracketing a string
+of n-letters, that is, of multiplying an expression a1a2 . . . an when multi-
+plication is not associative. Two vertices are adjacent if they correspond
+to a single application of the associative law. Our ﬁgure depicts the 5-gon,
+which we get as Kn−2 for n = 4:
+J
+J
+J
+J
+J
+
+
+
+
+
+
+
+
+
+
+QQQQQ
+(∗∗)(∗∗)
+(∗(∗∗))∗
+∗((∗∗)∗)
+((∗∗)∗)∗
+∗(∗(∗∗))
+
+0. Introduction and Examples
+19
+Whereas the ﬁrst constructions of the associahedra were very much “ad
+hoc,” in Lecture 9 we will get an associahedron from a very natural con-
+struction due to Gel’fand, Zelevinsky & Kapranov [231, 232]: as the “sec-
+ondary polytope” of the n-gon [231, Rem. 7c)]. More generally, we will con-
+struct “ﬁber polytopes” there, a concept due to Billera & Sturmfels [78, 79].
+Recently, Mikhail M. Kapranov [313] constructed a new combinatorial
+object KΠn−1, the permuto-associahedron, which combines the permuta-
+hedron and the associahedron. (Kapranov denotes it “KPn”.) Its vertices
+correspond to the diﬀerent ways of multiplying n terms a1, a2, . . . , an in
+arbitrary order, assuming that multiplication is neither commutative nor
+associative — and again there is a natural way to describe all the faces.
+Our drawing shows KΠ2, a 12-gon.
+1(2.3)
+1(3.2)                    (1.3)2
+(3.1)2
+3(1.2)
+3(2.1)
+(3.2)1
+(2.3)1
+2(3.1)
+2(1.3)
+(2.1)3
+(1.2)3
+Kapranov [313] showed that the combinatorially deﬁned object KΠn−1
+can for every n ≥2 be realized by a cell complex that is a topological ball.
+The question of whether the permuto-associahedron (or “Kapranotope”)
+can be realized as a convex polytope was answered in joint work with Vic
+Reiner [453] while I was ﬁrst giving this course; see Section 9.3.
+Example 0.11. A class of very interesting polytopes appears in combi-
+natorial optimization: 0/1-polytopes, all of whose vertex coordinates are 0
+or 1 (cf. Schrijver [484], and Ziegler [577]). In other words, a 0/1-polytope
+is the convex hull of a subset of the vertices of a (unit) cube.
+Note that the (d −1)-simplex ∆d−1 ⊆Rd is a 0/1-polytope. Similarly,
+one can study the hypersimplex ∆d−1(k) in Rd, by
+∆d−1(k)
+=
+conv{v ∈{0, 1}d :
+d
+X
+i=1
+vi = k}
+=
+{x ∈Rd : 0 ≤xi ≤1 for 1 ≤i ≤d,
+d
+X
+i=1
+xi = k}
+for 1 ≤k ≤d −1.
+
+20
+0. Introduction and Examples
+This family includes the standard simplex as ∆d−1 = ∆d−1(1). The
+hypersimplex ∆d−1(k) has
+ d
+k
+
+vertices, and 2d facets, if 2 ≤k ≤d −2
+(but only d facets for k = 1 or k = d −1). For example, the 3-dimensional
+hypersimplex ∆3(2) ⊆R4 is combinatorially equivalent to an octahedron.
+It seems that the hypersimplices ﬁrst appeared in Gabri´elov, Gel’fand
+& Losik [218, Sect. 1.6] — in the theory of characteristic classes. See also
+Gel’fand, Goresky, MacPherson & Serganova [229], and Exercise 5.3(i).
+These interesting polytopes certainly deserve more study!
+Example 0.12. A very “classical” class of 0/1-polytopes (introduced by
+Birkhoﬀ[83] in 1946) arises from the following construction. Let Sd denote
+the set of all permutations of the set [d]. With every permutation σ in Sd,
+we associate the matrix Xσ, given by
+Xσ
+ij
+:=
+n 1
+if σ(i) = j,
+0
+otherwise.
+The matrices Xσ are the 0/1-matrices with exactly one 1 per row and per
+column. If we identify Rd2 with the set of all real (d×d)-matrices, then
+the matrices Xσ are 0/1-vectors in Rd×d, and their convex hull forms a
+0/1-polytope
+P(d)
+:=
+conv{Xσ : σ ∈Sd}
+⊆
+Rd2.
+This is an interesting polytope with many names: the Birkhoﬀpolytope, the
+perfect matching polytope of Kd,d, the assignment polytope, the polytope of
+doubly stochastic matrices, and so forth.
+The polytope P(d) has d! vertices (by construction), d2 facets, and di-
+mension (d −1)2. In fact, a complete linear description is given by
+P(d)
+=
+{X ∈Rd×d :
+xij ≥0, for 1 ≤i, j ≤d,
+d
+X
+k=1
+xik = 1 for 1 ≤i ≤d,
+d
+X
+k=1
+xkj = 1 for 1 ≤j ≤d.}
+This is not hard to prove (just do it!): it is a classical result due to
+Birkhoﬀ[83] and von Neumann [421] independently. (See the treatment
+by Lov´asz & Plummer [369].) With this the Birkhoﬀpolytopes are “well
+described” — that is, we know all the vertices and all the facets. Among
+many other interesting properties, we note here that P(d) has a canonical
+center point, given by xij = 1
+d for all i and j.
+Brualdi and Gibson undertook a detailed study of the Birkhoﬀpolytopes
+in a series of four papers [136]. Still, there are questions left.
+
+0. Introduction and Examples
+21
+Example 0.13. For a class of nastier 0/1-polytopes, consider the famous
+traveling salesman problem [350], which asks for the shortest possible tour
+through a complete graph Kn on n vertices, where every edge has a length
+given. For example, in the graph drawn here (n = 6), the length is given
+by Euclidean distance, and the shortest tour is shown in thick lines.
+Every traveling salesman tour can be considered as a subset of n edges,
+T ⊆E(Kn), of the graph. We associate with every tour T its “character-
+istic vector” χT ∈{0, 1}(
+n
+2) ⊆R(
+n
+2), that is, the 0/1-vector whose entries
+indicate which edges are in T, and which are not. Now the traveling sales-
+man polytope QT (n) is deﬁned as
+QT (n)
+:=
+conv
+n
+χT ∈{0, 1}(
+n
+2) : χT is a tour through Kn
+o
+.
+It is not hard to see that QT (n) is a polytope of dimension
+ n
+2
+
+−n =
+n(n−3)/2. We know the vertices of QT (n): they are the (n−1)!/2 diﬀerent
+Hamilton tours through Kn. Now the question for the shortest tour is
+answered if we ﬁnd a vertex that minimizes a linear function: thus the
+traveling salesman problem is a linear programming problem over QT (n).
+Similarly, one can deﬁne the polytopes Q′
+T (n) corresponding to the asym-
+metric traveling salesman problem, which seeks to ﬁnd the shortest possible
+directed tour through a complete directed graph K′
+n on n vertices, where
+each of the n(n −1) arcs has a given length. The corresponding polytope
+Q′
+T (n) ⊆Rn2−n has dimension n2−3n+1 (for n ≥3), and (n−1)! vertices.
+To illustrate that these polytopes are nasty, we just mention the recent
+result of Billera & Sarangarajan [76] that every 0/1-polytope is isomorphic
+to a face of Q′
+T (n), for large enough n. A little trick of Karp [317] [295] shows
+that (an isomorphic copy of) the asymmetric travelling salesman polytope
+Q′
+T (n) appears as a face of the symmetric travelling salesman polytope
+QT (2n). Thus, the result of Billera & Sarangarajan [76] also applies to the
+symmetric TSP polytope.
+Using linear programming, we could solve the traveling salesman prob-
+lems eﬃciently, if we could deal with two major obstacles: we do not know
+the facet-deﬁning inequalities of QT (n), respectively of Q′
+T (n), and there
+are simply too many of them.
+In the next lecture we will describe a general method for ﬁnding the
+facets of a polytope given in the form Q = conv(V ). It is the method that
+makes the PORTA program work. It has successfully been applied to get
+complete descriptions of the traveling salesman polytopes up to QT (8) and
+
+22
+0. Introduction and Examples
+Q′
+T (6); see Exercises 0.14 and 1.1(iv). However, it seems that the method
+does not go beyond that: in general the algorithmic determination of all the
+facets of Q is certainly much harder and more strenuous than examining
+all the vertices of Q.
+The problem of ﬁnding some of the facets, by using the combinatorial
+properties of the traveling salesman problem, is a central problem for a
+whole branch of mathematics, called “polyhedral combinatorics” — see
+Gr¨otschel & Padberg [247] and J¨unger, Reinelt & Rinaldi [295] for solid
+introductions, including detailed information about the structure of the
+polytopes QT (n) and Q′
+T (n).
+Notes
+The principal historical “classics” in the theory of polytopes are the 1852
+treatment by Schl¨aﬂi [473] published in 1901, the books by Br¨uckner [138]
+(1900), Schoute [480] (1905), and Sommerville [506] (1929), and the vol-
+ume by Steinitz & Rademacher [527] (1934) about 3-dimensional polytopes.
+(A very helpful bibliography is Sommerville [507].) The modern theory of
+polytopes was established by Gr¨unbaum’s 1967 book [252]. It should be
+stressed that not only did Gr¨unbaum present the major part of what was
+known at the time, but his book also contains various pieces of progress
+and substantial original contributions, and has been an inspiring source
+of problems, ideas, and references to everyone working on polytopes since
+then.
+There are more recent books and surveys on polytopes. Many of them
+concentrate on aspects related to the upper and lower bound theorems and
+the g-theorem (among them McMullen & Shephard [403], Brøndsted [133],
+Stanley [515], and Hibi [274]) and on the various methods of f-vector the-
+ory; see Lecture 8. Other aspects are treated in Barnette’s exposition on
+3-polytopes [45], Schrijver’s book on optimization [484], and the handbook
+chapters by Kleinschmidt & Klee [329], and Bayer & Lee [63]. Also, the
+reader might ﬁnd Pach’s volume [431] inspiring.
+In our lectures we avoid any larger discussion of general convex sets and
+bodies, as well as of most of the convex-geometric aspects of polytopes.
+We refer to Bonnesen & Fenchel [124], Schneider [476], and Ewald [201],
+— the point is that for a convex polytope, we can describe and discuss
+everything in terms of vertices, edges, facets, etc. (i.e., a ﬁnite collection
+of combinatorial data) and bypass the apparatus of support functionals,
+nearest point maps, distances, volume, and integration, etc. Correspond-
+ingly, in this book we disregard all metric properties of polytopes, such as
+volume, surface area, and width, which are part of a very interesting theory
+of their own.

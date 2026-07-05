@@ -1,0 +1,145 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 3. Graphs of Polytopes
+현재 소단원: 3.2 Directing the Edges ("Linear Programming for Geometers")
+직전 소단원: 「3.1 Lines and Linear Functions in General Position」
+[본문]
+80
+3. Graphs of Polytopes
+Lemma 3.4.
+Let P = P(A, 1), and let c ∈(Rd)∗\O. If λ > 0 is small
+enough, then the linear function c(λ)x is in general position with respect
+to P, for
+c(λ) := c + (λ, λ2, . . . , λd).
+3.2
+Directing the Edges
+(“Linear Programming for Geometers”)
+Deﬁnition 3.5.
+Let P be a convex polytope. The vertices and the edges
+of P form an abstract, ﬁnite, undirected, simple graph, called the graph
+of P and denoted by G(P).
+For every face F ∈L(P), we denote by G(F) the induced subgraph
+of G(P) on the subset vert(F) ⊆vert(P) of the vertices of G(P), that
+is, the graph of all vertices in F, and all edges of P between them. This
+coincides with the graph of F, if F is itself considered as a polytope.
+(In this whole course we need very little graph theory, only some ter-
+minology. When in doubt, look it up in any graph theory book. For that
+purpose, even a mediocre book would do. As for good ones, we recommend
+Bondy & Murty [123], Bollob´as [121], or Tutte [551].)
+We will consider orientations of G(P), which assign a direction to every
+edge. An orientation is acyclic if there is no directed cycle in it. This implies
+(because all our graphs are ﬁnite) that there is a sink: a vertex that does
+not have an edge directed away from it. (Proof: Start at any vertex, and
+keep on walking along directed edges until you close a directed cycle or get
+stuck in a sink.)
+Linear programming is (in a geometer’s version) the task to ﬁnd a point
+x0 ∈P that maximizes a linear function cx, that is, such that cx0 =
+max{cx : x ∈P} =: c0. Now we easily see that the maximum is achieved
+in a vertex. In fact, F0 := {x ∈P : cx = c0} is a face of P, and thus every
+vertex of F0 maximizes cx.
+F0
+
+Dantzig’s simplex algorithm [174] in its “ﬁrst phase” ﬁnds a vertex v of P.
+Then it proceeds to ﬁnd a better vertex w that is a neighbor of v. We use
+N(v) to denote the set of neighbors of v, that is, the set of all w ∈vert(P)
+such that conv{v, w} is an edge of P. This improvement step is iterated
+until the algorithm stops at an optimal vertex.
+u
+w
+v
+Now if c is in general position, then this gives us a well-deﬁned way to
+direct the graph of P, by directing an edge conv{vi, vj} from vi to vj if
+cvi < cvj. (Because of the general position assumption, ties cannot occur.)
+We call this the orientation of G(P) induced by c.
+With this construction monotone paths on P (edge paths for which the
+objective function increases strictly in each step) translate into directed
+paths in the orientation of G(P) induced by c.
+Lemma 3.6.
+Let v ∈vert(P) be a vertex, and let N(v) be the set of its
+neighbors in G(P). Then the cone (based at v) spanned by the neighbors
+of v contains P:
+P ⊆v + cone{u −v : u ∈N(v)}.
+3.2
+81
+Directing the Edges
+
+82
+3. Graphs of Polytopes
+Proof. This follows from our proof of Proposition 2.4: the neighbors of v
+are in one-to-one correspondence with the vertices of the vertex ﬁgure P/v,
+and thus it is equivalent to say that those vertices span a cone that contains
+P. But we have also seen there that every ray emanating from v to any
+other point x ∈P contains a point of the vertex ﬁgure. This yields
+P
+⊆
+{v + t(u −v) : u ∈P/v, t ≥0}
+⊆
+v + cone{u −v : u ∈vert(P/v)}
+=
+v + cone{u −v : u ∈N(v)}.
+Theorem 3.7.
+If cx is a linear function in general position for P, then
+the orientation of G(P) induced by c is acyclic, with a unique sink. This
+sink is the unique point in P where cx achieves its maximum.
+Proof. Along any directed path v0, v1, . . . , vk in G(P), the value of cx
+increases strictly. Thus a directed path cannot return to its starting vertex,
+and there are no directed cycles. Therefore the induced orientation of G(P)
+is acyclic, and it has a sink.
+Now assume that v is a sink: then all of its neighbors w ∈N(v) satisfy
+cw < cv. By Lemma 3.6 this implies that cx < cv holds for all x ∈P
+with x̸ = v; that is, v maximizes cx over P, and it is the only point in P
+that achieves the maximum.
+This proves that for any starting vertex v ∈vert(P), and for any linear
+function cx that is in general position with respect to P, every strictly in-
+creasing edge path will eventually lead to the unique vertex that maximizes
+cx over P.
+With this crude description, the problem of linear programming is, of
+course, not solved. This starts with the fact that, for eﬃcient treatment,
+we have to consider bases and pivots instead of vertices and edges. (See
+Exercise 3.10 for a brief sketch.) Here we run into problems of degeneracy
+if the polytope is not simple, or if the linear function is not in general
+position. One way to treat this is through “perturbation,” implicitly or
+explicitly. For example, if we know an interior point (this is not a natural
+assumption for practical problems!), then we can rewrite P as P(A, 1), and
+then (implicitly rather than explicitly) optimize over P(A, 1λ) for small
+enough λ > 0, which is nondegenerate. This leads to lexicographic pivot
+rules; see Chv´atal [158, pp. 34–36]. Furthermore, to construct a simplex
+algorithm we have to determine “which edge to take”; this leads to the
+question of pivot rules. All this is combinatorial geometry. Later in the
+game, numerical questions dominate the picture.
+Anyway, this discussion was only meant as a sketch of the geometric
+situation — a very simple and special picture of the world according to a
+discrete geometer.
+
+3.3 The Hirsch Conjecture
+83
+3.3
+The Hirsch Conjecture
+The diameter of a graph G will be denoted by δ(G): the smallest number δ
+such that any two vertices in G can be connected by a path with at most
+δ edges.
+For n > d ≥2, let ∆(d, n) be the maximal diameter of the graph of
+an d-dimensional polytope P with at most n facets. Similarly, let ∆u(d, n)
+denote this maximal diameter in the unbounded case, for a d-dimensional
+pointed polyhedron P with at most n facets (n ≥d ≥2). For example,
+∆(2, n) = ⌊n
+2 ⌋,
+∆u(2, n) = n −2.
+Our sketch illustrates the extreme cases for d = 2 and n = 8.
+It is a long-standing problem to determine the behavior of the function
+∆(d, n). The value of ∆(d, n) is a lower bound for the number of iterations
+needed for the simplex algorithm with any pivot rule. Thus the question
+of whether ∆(d, n) grows polynomially in n and d is closely related to the
+question of whether there is any pivot rule for which the simplex algo-
+rithm is a strongly polynomial algorithm for linear programming; see [327,
+Sect. 3].
+A notorious, very speciﬁc, question connected with the graphs of poly-
+topes was ﬁrst posed by Warren M. Hirsch in 1957 (see Dantzig [174,
+pp. 160, 168]) and has become known as the Hirsch conjecture.
+Conjecture 3.8 (Hirsch conjecture).
+[174, p. 168]
+For n > d ≥2, let ∆(d, n) denote the largest possible diameter of the graph
+of a d-polytope with n facets. Then
+∆(d, n) ≤n −d.
+Is this plausible? Here are a few observations, most of them due to Klee
+& Walkup [331].

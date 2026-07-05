@@ -1,0 +1,117 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.3.d Deletion and Contraction
+직전 소단원: 「6.3.c Duality」
+[본문]
+6.3 Oriented Matroids
+163
+Proof. We get this by applying Proposition 6.8 both to Dep(V ) and to
+Val(V ), which are dual to each other by Proposition 6.4.
+Therefore two (labeled) conﬁgurations of vectors or points have the same
+oriented matroid if they have the same set of circuits, or (equivalently) the
+same set of cocircuits, the same set of vectors, or the same set of covectors.
+(c) Duality
+A concept of duality is built into the whole structure of oriented matroids.
+In fact, since the vectors and the covectors of an oriented matroid M(V )
+arise in the same way as the sign vectors of a subspace, they also satisfy
+the same axioms (ignoring a switch from row vectors to column vectors).
+Deﬁnition 6.10.
+The dual of an oriented matroid M is the oriented
+matroid M∗with the following properties:
+• The vectors of M∗are the covectors of M, and thus
+the circuits of M∗are the cocircuits of M.
+• The covectors of M∗are the vectors of M, and thus
+the cocircuits of M∗are the circuits of M.
+From the way we have deﬁned (realizable) oriented matroids, it is clear
+that for every oriented matroid M, there is a unique dual oriented matroid
+M∗, whose dual is
+(M∗)∗= M.
+In fact, M = M(U) is realizable with U ⊆Rn, then M∗= M(U ⊥), for
+the orthogonal space
+U ⊥:= {c ∈(Rn)∗: cx = 0 for all x ∈U}.
+So existence and uniqueness of the dual follow from Proposition 6.4 (in the
+realizable case):
+M∗= M(Dep(V ))
+for
+M := M(Val(V )).
+Furthermore, if M has rank r, then M∗has rank n −r, and conversely.
+(d) Deletion and Contraction
+There are two very natural and fundamental operations on point conﬁg-
+urations: deletion and contraction. They are dual to each other, and they
+directly translate into oriented matroid language and terminology.
+
+164
+6. Duality, Gale Diagrams, and Applications
+Consider a vector conﬁguration V ∈Rr×n, and let ui ∈V . We can
+certainly delete ui from V , to get the new conﬁguration V \ui.
+ui
+We get value vectors on V \ui from those on V by simply deleting the
+components corresponding to ui, while dependences and circuits of V \ui
+are those dependences, respectively circuits, of V which do not involve ui
+(i.e., have zero i-component). This proves the following result, where we
+label the vectors in V (the “ground set” of M(V )) by {1, . . . , n}, so we
+write M\i for M(V \ui).
+Proposition 6.11.
+The oriented matroid M(V )\i of V \ui is given as
+follows:
+V(V \ui) = {v\i : v ∈V(V ), vi = 0}
+V∗(V \ui) = {v\i : v ∈V∗(V )}
+C(V \ui) = {c\i : c ∈C(V ), ci = 0}
+C∗(V \ui) = MIN{c\i : c ∈C∗(V )}.
+The dual operation is the contraction of ui: for this we project V parallel
+to ui to some hyperplane that does not contain ui. If ui = 0, then we just
+delete ui.
+ui
+Algebraically, we can do this by choosing a linear function c ∈(Rr)∗
+such that cui̸ = 0 (for example, c := ut
+i will do), and map
+uj
+7−→
+¯uj := uj −cuj
+cui
+ui.
+This yields the new conﬁguration
+V/ui
+:=
+{¯u1, . . . , ¯ui−1, ¯ui+1, . . . , ¯un}
+
+6.4 Dual Conﬁgurations and Gale Diagrams
+165
+in the hyperplane {v ∈Rr : cv = 0}.
+We get dependences on V/ui from those on V by simply deleting the
+components corresponding to ui, while value vectors of V/ui are those
+value vectors V which are zero on ui (i.e., have zero i-component).
+Proposition 6.12.
+The oriented matroid M(V )/i of V/ui is given as
+follows:
+V(V/ui) = {v\i : v ∈V(V )}
+V∗(V/ui) = {v\i : v ∈V∗(V ), vi = 0}
+C(V/ui) = MIN{c\i : c ∈C(V )}
+C∗(V/ui) = {c\i : c ∈C∗(V ), ci = 0}.
+Let us mention two examples that show how deletion and contraction
+appear in connection with polytopes.
+Examples 6.13. Let P ⊆Rd be a polytope, let X := vert(P) be its
+vertex set, and let V ∈Rr×n be the corresponding vector conﬁguration
+in Rr (r = d+1).
+If F is a face of P, then the vector conﬁguration for F is obtained by
+deleting from V all the vertices that do not lie on F.
+If x ∈vert(P) ⊆Rd is a vertex of P and v ∈V ⊆Rr is the corresponding
+vector, then the vector conﬁguration of the vertex ﬁgure P/x is the con-
+traction V/v. (In this case the projection hyperplane for the contraction
+can be taken parallel to the hyperplane spanned by P.)
+P/x
+P
+v
+ui
+¯ui
+Note that by contracting we get a vector conﬁguration that may also rep-
+resent a lot of interior points of the vertex ﬁgure, corresponding to vertices
+w ∈vert(P) such that [w, v] is not an edge of P.
+6.4
+Dual Conﬁgurations and Gale Diagrams
+Now observe that Dep(V ) ⊆Rn determines the conﬁguration V ∈Rr×n
+of column vectors uniquely up to coordinate transformations in Rr, which
+correspond to row operations on the matrix V . Thus the dual space Val(V )
+determines a conﬁguration of row vectors in (Rn−r)∗, which completely
+encodes the vector conﬁguration V .

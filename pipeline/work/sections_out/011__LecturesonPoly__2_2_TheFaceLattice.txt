@@ -1,0 +1,233 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 2. Faces of Polytopes
+현재 소단원: 2.2 The Face Lattice
+직전 소단원: 「2.1 Vertices, Faces, and Facets」
+[본문]
+2.2 The Face Lattice
+55
+Proposition 2.4.
+There is a bijection between the k-dimensional faces
+of P that contain v, and the (k −1)-dimensional faces of P/v, given by
+π :
+F
+7−→
+F ∩{x : cx = c1},
+σ :
+P ∩aﬀ({v} ∪F ′)
+←−
+F ′.
+Proof. Denote the “cutting hyperplane” by H := {x : cx = c1}.
+The map π is well deﬁned: let F = P ∩{x : bx = b0}; then we get
+F ∩H = (P ∩H) ∩{x : bx = b0}, where bx ≤b0 is valid for P and thus
+also for P/v.
+To see that σ is well deﬁned, let F ′ = (P ∩H) ∩{x : bx = b0}, where
+bx ≤b0 is valid for P/v. Then (b + λc)x ≤b0 + λc1 is valid for P/v, for
+all λ ∈R. Now a simple computation shows that for
+λ0 := b0 −bv
+c0 −c1
+,
+the inequality is valid on P, with equality for v. In fact, if we consider
+v′ ∈V \v, then we know cv′ < c1 and cv = c0 > c1, so
+v′′ := (cv −c1)v′ + (c1 −cv′)v
+cv −cv′
+∈P ∩H = P/v.
+Now v′′ is a convex combination of v and v′, and from (b + λ0c)v′′ ≤
+b0 + λ0c1 and (b + λ0c)v = b0 + λ0c1 we get (b + λ0c)v′ ≤b0 + λ0c1.
+Now we check that the maps σ and π are inverses of each other: we
+compute
+π◦σ(F ′) = H∩P ∩aﬀ({v}∪F ′) = P ∩H∩aﬀ(F ′) = P/v∩aﬀ(F ′) = F ′,
+where the last equality is from Proposition 2.3(iv). Similarly,
+σ ◦π(F) = P ∩aﬀ({v} ∪(F ∩H))
+∗= P ∩aﬀ(F) = F,
+where for the equality ∗we use that every vertex v′ of F can be obtained
+as an aﬃne combination of v and a point v′′ ∈F ∩H.
+Finally we observe that if F ′ is a face of P/v of dimension k−1, then
+the associated face F of P has dimension k, since its aﬃne hull is aﬀ(F) =
+aﬀ(F ′ ∪{v}), where v /∈aﬀ(F ′) by construction.
+2.2
+The Face Lattice
+In this section we translate some of our results on polytopes into purely
+combinatorial statements. For this we need some terminology about ﬁnite
+partially ordered sets (“posets,” for short). We refer to Stanley’s book [517,
+Sects. 3.1–3.3] for more information on that subject and its ramiﬁcations.
+For simplicity, and to unify terminology, we deﬁne the key concepts here.
+
+56
+2. Faces of Polytopes
+Deﬁnition 2.5 (Poset terminology).
+A poset (S, ≤) is a ﬁnite partially ordered set, that is, a ﬁnite set S
+equipped with a relation “≤” which is reﬂexive (x ≤x for all x ∈S),
+transitive (x ≤y and y ≤z imply x ≤z), and antisymmetric (x ≤y and
+y ≤x imply x = y).
+Usually we denote such a poset by S, when the partial order is clear.
+Any subset of S is also a poset, with the induced partial order. A chain
+in S is a totally ordered subset of S; its length is its number of elements
+minus 1.
+For elements x, y ∈S with x ≤y, we denote by
+[x, y]
+:=
+{w ∈S : x ≤w ≤y}
+the interval between x and y. An interval in S is boolean if it is isomorphic
+to the poset Bk = (2[k], ⊆) of all subsets of a k-element set, for some k.
+A poset is bounded if it has a unique minimal element, denoted ˆ0, and a
+unique maximal element, denoted ˆ1. The proper part of a bounded poset S
+is S := S\{ˆ0, ˆ1}.
+A poset is graded if it is bounded, and every maximal chain has the same
+length. In this case the length of a maximal chain in the interval [ˆ0, x] is the
+rank of x, denoted by r(x). The rank r(S) := r(ˆ1) is also called the length
+of S. For example, every chain is a graded poset, with r(C) = |C| −1, and
+the boolean posets Bk are graded of length r(Bk) = k, for all k ≥−1.
+A poset is a lattice if it is bounded, and every two elements x, y ∈S have
+a unique minimal upper bound in S, called the join x ∨y, and every two
+elements x, y ∈S have a unique maximal lower bound in S, called the meet
+x ∧y. (In fact, any two of these three conditions imply the third; also, if
+every pair of elements has a join respectively meet, then also every ﬁnite
+subset has a join respectively meet.)
+If S is a graded lattice, then we call the minimal elements of S\ˆ0 its
+atoms, and the maximal elements of S\ˆ1 its coatoms. Equivalently, the
+atoms are the elements of rank 1, and the coatoms are the elements of rank
+r(S) −1.
+A lattice is atomic if every element is a join x = a1 ∨. . . ∨ak of k ≥0
+of atoms, where we obtain x = ˆ0 for k = 0, and an atom x = a1 for k = 1.
+Similarly, a lattice is coatomic if every element is a meet of coatoms.
+We deﬁne the opposite poset Sop (or order dual) to have the same under-
+lying set as S, with x ≤y in Sop if and only if y ≤x holds in S.
+We use the graphical representation of posets by Hasse diagrams, that
+is, graphs drawn in the plane so that the elements correspond to vertices,
+where x ≤y holds if and only if there is an increasing path from x to y.
+Here we only include the edges corresponding to cover relations, that is, if
+x < y and [x, y] = {x, y}.
+Of the posets in the following ﬁgure, the ﬁrst one is not bounded, but
+all others are. The second one is a lattice, but not graded. The third one
+
+2.2 The Face Lattice
+57
+is graded (of length 3), but it is not a lattice. The fourth poset is a graded
+lattice (of length 3), and the ﬁfth one is even boolean (isomorphic to B3).
+The fourth poset is neither atomic nor coatomic, but the ﬁfth one is.
+Why is all this interesting for us? Because we want to study the set of
+faces of a convex polytope, ordered by inclusion.
+Deﬁnition 2.6.
+The face lattice of a convex polytope P is the poset
+L := L(P) of all faces of P, partially ordered by inclusion.
+The following ﬁgure shows, as an example, the face lattice of a convex
+pentagon. Here the minimal element corresponds to the empty face, the ﬁve
+atoms in the layer above correspond to the ﬁve vertices, the layer above
+this represents the ﬁve edges (each containing two vertices), and the top
+element represents the pentagon itself.
+In Theorem 2.7 we collect the main structural properties of face lattices,
+starting with the fact that they are lattices, justifying the terminology of
+Deﬁnition 2.6.
+Theorem 2.7.
+Let P be a convex polytope.
+(i) For every polytope P the face poset L(P) is a graded lattice of length
+dim(P) + 1, with rank function r(F) = dim(F) + 1.
+(ii) Every interval [G, F] of L(P) is the face lattice of a convex polytope
+of dimension r(F) −r(G) −1.
+(iii) (“Diamond property”) Every interval of length 2 has exactly four
+elements. That is, if G ⊆F with r(F) −r(G) = 2, then there are
+exactly two faces H with G ⊂H ⊂F, and the interval [G, F] looks
+like
+(iv) The opposite poset L(P)op is also the face poset of a convex polytope.
+(v) The face lattice L(P) is both atomic and coatomic.
+
+58
+2. Faces of Polytopes
+Proof. To see that L(P) is a lattice it suﬃces to see that it has a unique
+maximal element ˆ1 = P and a unique minimal element ˆ0 = ∅, and that
+meets exist, with F ∧G = F ∩G; this is true because F ∩G is a face of F
+and of G, and thus of P, by Proposition 2.3(ii). And clearly every face of P
+that is contained in F and in G must be contained in F ∩G.
+We continue with part (ii). For this we can assume that F = P, by
+Proposition 2.3(iii). Now if G = ∅, then everything is clear. If G̸ = ∅,
+then it has a vertex v ∈G by Proposition 2.2(i), which is a vertex of P
+by Proposition 2.3(iii). Now the face lattice of P/v is isomorphic to the
+interval [{v}, P] of the face lattice L(P), by Proposition 2.4. Thus we are
+done by induction on dim(G).
+For part (i) it remains to see that the lattice L(P) is graded. If G ⊂F
+are faces of P, then from G = P ∩aﬀ(G) ⊆P ∩aﬀ(F) = F, which holds by
+Proposition 2.3(iv), we can conclude that aﬀ(G) ⊂aﬀ(F), and thus that
+dim(G) < dim(F). So it suﬃces to show that if dim(F)−dim(G) ≥2, then
+there is a face H ∈L(P) with G ⊂H ⊂F. But by part (ii) the interval
+[G, F] is the face lattice of a polytope of dimension at least 1, so it has a
+vertex, which yields the desired H.
+Part (iii) is a special case of (ii): the “diamond” is the face lattice of a
+1-dimensional polytope.
+We don’t prove part (iv) here — but we will do so in the next section.
+Finally, for part (v), the ﬁrst part is immediate from Proposition 2.2(i),
+where the atoms of L(P) correspond to the vertices of P, and the sec-
+ond part follows from this by taking the opposite poset, according to
+part (iv).
+This theorem contains quite restrictive information on the structure of
+polytope face lattices (Exercise 2.3). We will get even more precise infor-
+mation later.
+We note here that the face lattice is the proper framework to deﬁne com-
+binatorial equivalence of polytopes. In fact, our previous deﬁnition (before
+Example 0.2) can be restated as saying that P and Q are combinatorially
+equivalent, P ≃Q, if and only if L(P) ∼= L(Q): if their face lattices are
+isomorphic.
+By Proposition 2.2(i), this is equivalent to a bijection vert(P) ↔vert(Q)
+between the vertices of P and Q, in such a way that the vertex sets of faces
+of P correspond (under this bijection) to the vertex sets of faces of Q. A
+general observation is that in this context it is enough to deal with vertices
+and facets, because the faces are exactly the intersections of facets, and the
+vertex sets of faces are exactly the intersections of vertex sets of facets —
+see Exercise 2.7. (Abstractly, the key properties are that face lattices are
+atomic and coatomic.)
+Topologically, combinatorial equivalence corresponds to the existence of
+a (piecewise linear) homeomorphism between the polytopes P ∼= Q that
+restricts to homeomorphisms between the facets (and hence all the faces)
+
+2.3 Polarity
+59
+of P and Q. In other words, P ∼= Q if and only if P and Q deﬁne isomorphic
+cell complexes (CW-balls) — see Munkres [418] or Bj¨orner [89, Sect. 12]
+[96, Sect. 4.7] for these concepts.
+2.3
+Polarity
+We proceed to construct polar polytopes: this is what (nearly) everybody
+else calls the “dual” of a polytope. We will use the term “polar” in or-
+der to distinguish polarity from duality in the sense of (oriented) matroid
+theory, which we will see later in Lecture 6 in the form of Gale diagrams,
+the Lawrence construction, and others. (In this, we follow the conventions
+of [96, pp. 44–45].)
+A key observation one should not miss is the step into dual space we
+take in this section. Equivalently, one could just ﬁx a scalar product on Rd,
+and this way we could construct a polar polytope in the same space as the
+original. However, there is a lot of choice in any case because the location
+of the origin is essential for our construction. If we wanted to avoid this, we
+would have to linearize, and develop “cone polarity” — using some methods
+of Lecture 1. We will not do this here (in order to keep the principle of
+making this a lecture on polytopes), but see Exercise 2.13.
+Lemma 2.8.
+Let P be a polytope in Rd. Then the following conditions
+are equivalent for y ∈P.
+(i) y is not contained in a face of P of dimension smaller than d,
+(ii) if ay = a0 and a̸ = 0, then ax ≤a0 is not valid for P,
+(iii) y can be represented in the form y = Pd
+i=0 λixi for d + 1 aﬃnely
+independent points x0, . . . , xd ∈P and for parameters λi > 0 with
+Pd
+i=0 λi = 1,
+(iv) y can be represented as y =
+1
+d+1
+Pd
+i=0 xi for d+1 aﬃnely independent
+points x0, . . . , xd ∈P.
+Proof. Part (i) implies that P is full-dimensional. From this we get that
+part (ii) holds: if ax ≤a0 were valid for P, then y would be contained in
+the face P ∩{x ∈Rd : ax = a0} of smaller dimension. Conversely, if part
+(ii) holds, then no inequality can deﬁne a facet that contains y.
+Part (iv) trivially implies part (iii), and from this we get part (ii) by an
+easy calculation:
+a0 = ay =
+d
+X
+i=0
+λiaxi ≤
+d
+X
+i=0
+λia0 = a0.

@@ -1,0 +1,219 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.6 Rigidity and Universality
+직전 소단원: 「6.5.d Polytopes Violating the Isotopy Conjecture」
+[본문]
+6.6 Rigidity and Universality
+179
+Another nonisotopic point conﬁguration, of 21 points, is explicitly con-
+structed in White [559]. A general construction method is due to Mn¨ev [408].
+In particular, Mn¨ev’s universality theorem (see below) shows that the “real-
+ization space” for planar point conﬁguration can be arbitrarily complicated.
+Suvorov [537] and Jaggi et al. [290] furthermore construct non-isotopic
+conﬁgurations whose points are in general position. From these, one can —
+using a technique of Sturmfels [117, Thm. 6.5] — get simplicial polytopes
+that violate the isotopy conjecture. This yields examples for a much more
+general “universality theorem for polytopes,” described in the next section.
+6.6
+Rigidity and Universality
+We have characterized Gale diagrams of polytopes in Corollary 6.20. To
+make statements about polytopes of a ﬁxed combinatorial type, however,
+it is not suﬃcient to look at a speciﬁc Gale diagram: we have to make
+sure that the statement we make holds for all polytopes combinatorially
+equivalent to the given polytope.
+Here we have to deal with two diﬀerent notions of equivalence. We have
+noted that two polytopes may be combinatorially equivalent but have dif-
+ferent oriented matroids. (See, for example, the octahedra of Example 6.3.)
+However, any two polytopes with the same oriented matroid are combina-
+torially equivalent: they have the same covectors, hence the same positive
+covectors, and hence the same cofaces, and thus the same faces.
+To make Gale diagrams useful for high-dimensional polytopes, we have
+to get a hold on all Gale diagrams representing a combinatorial equivalence
+class of polytopes. This is not simple, and it would lead into a discussion of
+“partial oriented matroids” that we want to avoid (there is not much theory
+for that, either). Instead, we restrict ourselves to an important special case:
+when only one oriented matroid is possible for a given convex polytope.
+Deﬁnition 6.25.
+The oriented matroid of a d-polytope P ⊆Rd is rigid
+if every polytope P ′ that is combinatorially equivalent to P has the same
+oriented matroid.
+Here our convention is to identify the vertex sets of P and of P ′ with [n]
+in a way that is compatible with the combinatorial equivalence. With this,
+combinatorial equivalence means that the oriented matroids M(P) and
+M(P ′) have the same set of positive cocircuits, and rigidity means that
+this implies that all cocircuits of P and of P ′ coincide:
+C∗(P) ∩{+, 0}n = C∗(P ′) ∩{+, 0}n
+=⇒
+C∗(P) = C∗(P ′).
+For example, triangular prisms are rigid, but octahedra are not. The con-
+cept of rigidity is only interesting because there are some rigid polytopes
+around, although “most” polytopes are not rigid. Here is one construction
+to get rigid polytopes.
+
+180
+6. Duality, Gale Diagrams, and Applications
+Theorem and Deﬁnition 6.26 (The “Lawrence construction”).
+Let V ∈Rr×n be a vector conﬁguration in Rr, possibly obtained from a
+point conﬁguration X ∈Rd×n in Rd with r = d + 1. (To avoid trouble, we
+assume V has no coloops: even if we delete one of its vectors, the others
+still span Rr.)
+If G ∈Rn×(n−r) is a Gale diagram of V , then adding the opposite to
+every vector of G we get the Gale diagram
+bG :=
+ G
+−G
+
+∈R2n×(n−r)
+of a polytope with 2n vertices in R2n−(n−r)−1 = Rn+d; this polytope is
+denoted by Λ(V ) ⊆Rn+d and called the Lawrence polytope of V .
+Equivalently, we get the Lawrence polytope Λ(V ) by successive Lawrence
+extensions V −→σi(V ): for this we replace each vector “vi” in V by two
+new vectors
+vi+ := vi + er+i
+and
+vi−:= vi + 2er+i,
+to get an acyclic vector conﬁguration in Rr+n, from which we pass to aﬃne
+space Rd+n.
+If we start with an aﬃne point conﬁguration X, we can perform the
+Lawrence liftings directly on the point conﬁguration, without linearization.
+Our ﬁgures illustrate both the “linear picture” of a single Lawrence lifting
+applied to a vector conﬁguration
+i
+i+
+i−
+and the “aﬃne picture,” where a Lawrence lifting is performed on a single
+point in a ﬁnite point conﬁguration, thus increasing the dimension of the
+conﬁguration by 1:
+i
+i+
+i−
+
+6.6 Rigidity and Universality
+181
+Proof. It is easy to check that the Lawrence construction in fact yields a
+convex polytope and that the two descriptions are equivalent.
+As a very trivial example, consider three nonzero vectors in R1 (r = 1,
+n = 3). The Lawrence construction applied to them yields a triangular
+prism in R3: we show the aﬃne picture for this.
+Theorem 6.27.
+Lawrence polytopes are rigid, that is, if P ′ is combinato-
+rially equivalent to Λ(V ), then the oriented matroid of P ′ is also isomorphic
+to that of P. In particular, the Gale diagrams of P ′ and of Λ(V ) are iso-
+morphic.
+Proof. In the Gale diagram G of the Lawrence polytope Λ(V ), and in
+every Gale diagram G′ with the same positive circuits, the points come
+in pairs of positive and negative points, since those pairs form positive
+circuits.
+Furthermore, if we take any other circuit, then it contains at most one
+point from every such pair. Hence we get all the circuits from the positive
+ones by replacing a positive point by the negative “other point” of its pair.
+Thus all circuits of the diagram are determined by the positive ones, and
+thus the conﬁguration V is rigid.
+The Lawrence construction has numerous applications. Perhaps the most
+striking one is the “universality theorem” for polytopes, which we want to
+describe now.
+For this, one needs a suitable equivalence relation for semialgebraic sets;
+we use Richter-Gebert’s version from [459]. Two semialgebraic sets S and
+T are stably equivalent if they can be related by a sequence of “rational
+changes of coordinates” (such that f and f −1 are both rational functions
+with Q-coeﬃcients, and induce homeomorphisms of the sets that we con-
+sider) and “stable projections” (whose ﬁbers are the relative interiors of
+rational polyhedra) — see Richter-Gebert [459, Sect. 2.5] for the precise
+deﬁnitions and more details. Stable equivalence is a very “restrictive” con-
+cept. In fact, stably equivalent sets S and T
+• have the same homotopy type (in particular, S is connected if and only
+if T is connected)
+
+182
+6. Duality, Gale Diagrams, and Applications
+• have the same algebraic complexity (in particular, S contains rational
+points if and only if T has rational points),
+• have comparable singularity structure (in particular, S is a manifold if
+and only if T is a manifold.
+Universality Theorem for Polytopes 6.28.
+(Mn¨ev [408])
+Every elementary semialgebraic set deﬁned over Z is stably equivalent to
+the realization space of some polytope.
+Every open elementary semialgebraic set deﬁned over Z is stably equiv-
+alent to the realization space of some simplicial polytope.
+Essentially, this means that the realization space of a polytope can be
+“arbitrarily complicated”: it can be disconnected with many components,
+it can consist of circles and spheres (can have “homology” in all dimen-
+sions), and can have all kinds of complicated singularities — in general it
+is certainly not a manifold, as claimed in [465, p. 18].
+The theorem on which all of this is based is Mn¨ev’s universality theo-
+rem: the realization space for planar point conﬁgurations (i.e., for oriented
+matroids of rank 3) can be any semialgebraic set, up to stable equivalence.
+For a long time, there was no detailed proof available for this theorem.
+Mn¨ev’s paper [408] only provides a sketch of the basic ideas for the “local”
+version of the theorem; two further sketches are in Shor [499, Sect. 4] and
+in Goodman & Pollack [237, Sect. 7]; see also Bj¨orner et al. [96, Sect. 8.6].
+Finally, a complete, detailed proof was provided by G¨unzel [261]. His proof
+also covers the far-reaching extension announced in Mn¨ev [409], the “uni-
+versal partition theorem” for oriented matroids.
+On the other hand, it is much easier to see (using the “van Staudt con-
+structions” for addition and multiplication of points, of classical projective
+geometry [276, Sect. VI.7] [118, Sect. 2.1] [558, Sect. 7]) that the smallest
+subﬁeld of R over which all planar point conﬁgurations can be realized is
+the ﬁeld of all algebraic numbers A ⊆R. This means with Theorem 6.28
+that A is also the smallest ﬁeld over which all polytopes can be realized.
+There is a great new development: Richter-Gebert’s Universality Theo-
+rem for 4-Polytopes, and the (even stronger) Universal Partition Theorem
+for 4-Polytopes, with all their corollaries and extensions.
+Universality Theorem for 4-Polytopes 6.29.
+(Richter-Gebert [459])
+Every elementary semialgebraic set deﬁned over Z is stably equivalent to
+the realization space of some 4-dimensional polytope.
+In the course of this work — done after the ﬁrst version of this book
+appeared — Richter-Gebert solved quite a number of basic open problems
+(see Problems 5.11*, 6.10*, and 6.11*). There is neither time nor space
+to explain Richter-Gebert’s work [459] here (see also G¨unzel [262]); an
+announcement appeared as [462], a survey is Richter-Gebert [460].
+
+Notes
+183
+Notes
+For all information about oriented matroids, we rely on the monograph by
+Bj¨orner et al. [96]. Other expositions that include surveys on oriented ma-
+troids are Bachem [34], Bachem & Kern [35], Bokowski & Sturmfels [118],
+and Bokowski [112].
+As you may have noticed, we have deliberately tried to keep linear algebra
+concepts low-key. You may reformulate all of the basic constructions in
+more advanced language. For that, the vector conﬁguration V ∈Rr×n is
+considered as a linear map V : Rn −→Rr, the space Dep(V ) is the kernel
+of this map, Val(V ) is the image of the dual map, and so forth.
+Deletion and contraction of an “element” are fundamental operations
+in many areas: for graphs (see Section 4.1), for vector conﬁgurations and
+oriented matroids (see Section 6.3(d)), and for arrangements and zono-
+topes (see the next lecture). In fact, there is a tremendous power in proofs
+“by deletion and contraction,” which proceed by induction on the num-
+ber of elements, and by putting a structure together from the information
+given by deletion and contraction of the same element. Zaslavsky’s work
+on hyperplane arrangements [572] is the classic source for that approach.
+Gale diagrams are a tool that emerged from work of Gale [220] and
+were developed to their full power and beauty by Perles, as documented in
+Gr¨unbaum’s book [252]. Additional sources are the book by McMullen &
+Shephard [403, Ch. 3], McMullen’s survey [394], and the treatment (with
+nice illustrations and examples) in Ewald’s book [201]. See Eisenbud &
+Popescu [195] for an algebraic geometry perspective. It seems that the
+close connection between the Gale diagram technique and oriented matroid
+duality was ﬁrst mentioned in [394], and the explicit identiﬁcation was
+worked out by Sturmfels [531].
+The reduction to aﬃne Gale diagrams is implicit in Perles’ work (see
+Gr¨unbaum [252, p. 59]) and also used by Bokowski [116]; it appears as a tool
+of its own standing in Sturmfels’ work [532]. We mention for completeness
+that any two aﬃne Gale diagrams of the same polytope are connected by
+a projective transformation and the corresponding reorientation.
+Many interesting properties of polytopes can be proﬁtably studied from
+the oriented matroid point of view, not only via Gale diagrams. Surveys of
+applications are in Gr¨unbaum’s book [252], in Bokowski & Sturmfels [118],
+and in Bayer & Lee [63, Sect. 4].
+Some authors distinguish between “Gale diagrams” and “Gale trans-
+forms.” We did not make this distinction, but essentially what we con-
+structed here were Gale transforms, while any conﬁguration that represents
+the dual oriented matroid is a Gale diagram. We also just note that there
+are several useful reformulations and variations of the Gale diagram con-
+struction, among them a “coordinate-free” formulation [202] [394], which
+was useful in the investigation of inﬁnite-dimensional polytopes by Klein-
+schmidt & Wood [338, 569].

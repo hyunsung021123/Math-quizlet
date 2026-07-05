@@ -1,0 +1,191 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.5.c 2-Faces of 5-Polytopes Cannot be Prescribed
+직전 소단원: 「6.5.b Facets of 4-Polytopes Cannot be Prescribed」
+[본문]
+6.5 Polytopes with Few Vertices
+175
+then this is not the vertex ﬁgure of a 4-polytope that is combinatorially
+equivalent to P ∆.
+(c) 2-Faces of 5-Polytopes Cannot be Prescribed
+We have now seen the second proof that the shape of a facet cannot be
+prescribed for 4-polytopes, so we’ll have to start and accept it.
+But perhaps this was the wrong generalization of the 3-dimensional the-
+orem that a facet can be prescribed. What about prescribing the shape of
+a 2-face for a d-polytope? The case d = 4 was an open problem in the ﬁrst
+edition of this book (Problem 6.11*), now you can ﬁnd it as Exercise 6.11.
+For d = 5 we have the following counterexample from the ﬁrst edition. It is
+the type of analysis that Gale diagrams “were made for”: however, the con-
+struction of this example may have been the ﬁrst time that a 3-dimensional
+aﬃne Gale diagram was seriously used.
+Example 6.23. There is a 5-polytope P with 10 facets and 12 vertices,
+for which the shape of a 2-face cannot be prescribed.
+To prove this, we construct the polar polytope Q := P ∆, a 5-polytope
+with 10 vertices and 12 facets, and verify that for one contraction (face
+ﬁgure, see Exercise 2.9) of a 2-face, the shape cannot be prescribed.
+For this consider the signed point conﬁguration given by the vertices of
+a triangular prism as positive points, labeled 2, 3, . . . , 7, the centers of the
+square facets of the prism as negative points 8, 9, 10, and the center of the
+whole prism as another negative point 1. See the ﬁgure for how we label
+this.
+6
+3
+7
+4
+2
+5
+9
+8
+10
+1
+It is easy to give coordinates. In fact, the corresponding vector conﬁguration
+in R4 could be taken to be
+
+
+
+
+−1
+1
+1
+1
+1
+1
+1
+−1
+−1
+−1
+−1
+2
+2
+2
+0
+0
+0
+−1
+−1
+−1
+−2
+0
+0
+6
+0
+0
+6
+0
+−3
+−3
+−2
+0
+6
+0
+0
+6
+0
+−3
+−3
+0
+
+
+
+.
+
+176
+6. Duality, Gale Diagrams, and Applications
+Now we check the following facts, which together imply all we need to know.
+1.
+This signed point conﬁguration is the aﬃne Gale diagram of a 5-
+polytope Q with 10 vertices.
+For this we check that every cocircuit of this conﬁguration has at least
+two negative and two positive elements.
+2. The triple (8, 9, 10) describes a triangle F = [8, 9, 10] which is a 2-face
+of the 5-polytope Q.
+The point 1 is in the interior of the prism, so the points diﬀerent from
+8, 9, 10 support a positive circuit (+++++++000).
+3. The face ﬁgure Q/F is a hexagon whose diagonals cross.
+In fact, we get the aﬃne Gale diagram of Q/F by deleting the points
+8, 9, 10 from the diagram for Q. But what is left then is the aﬃne Gale
+diagram of a hexagon [2, 6, 4, 5, 3, 7] with 1 as the intersection point of the
+long diagonals:
+2
+6
+4
+5
+3
+7
+1
+4. Q is a polytope with 12 facets.
+The facets are the (convex hulls of the points corresponding to the)
+complements of the positive circuits in the diagram, which are easily enu-
+merated as
+286
+385
+2107
+4105
+397
+496
+23157
+23167
+24156
+24167
+34156
+34157
+5. Every Gale diagram G′ with the same positive circuits contains the
+diagram of the hexagon with crossing diagonals.
+Consider any other (linear) Gale diagram G′ on 10 points with the same
+positive circuits. From the 3-point circuits we see that the sets 2′4′5′7′10′,
+2′3′5′6′8′, and 3′4′6′7′9′ have to be planar. However, they cannot collapse to
+be on a line, because then the whole diagram would collapse to a plane and
+couldn’t have 5-point circuits. From this one can show (using projective
+uniqueness of the triangular prism — here we are skipping the detailed
+arguments) that in suitable coordinates G′\1′ coincides with G\1: the Gale
+diagram G′ consists of a triangular prism and its facet centers as well.
+Now the 5-point circuits imply that the point 1′ has to be in the interior
+of this triangular prism. Hence, if we consider the diagram G′\{8′, 9′, 10′},
+then this has the 5-point circuits listed above (so it describes the right
+hexagon), and it has 3-point cocircuits 1′, 2′, 5′, 1′, 3′, 6′, and 1′, 4′, 7′ (so
+the long diagonals of the hexagon cross in 1′, as required).
+
+6.5 Polytopes with Few Vertices
+177
+An explicit geometric description of the polytope P = Q∆is given in
+Exercise 6.27.
+(d) Polytopes Violating the Isotopy Conjecture
+Recall from Section 4.4 that the “realization space” of a polytope is an
+elementary semialgebraic set, and that elementary semialgebraic sets can
+be arbitrarily complicated spaces: they can be disconnected, with holes,
+and so forth (Exercise 4.22).
+However, Steinitz’ Theorem 4.11 states that for every 3-dimensional poly-
+tope the realization space R(P) is contractible, and thus connected. (To
+get this right, we had to ﬁx an aﬃne basis in our Deﬁnition 4.10 of real-
+ization spaces, to make sure that the “reﬂection” doesn’t create a second
+component of the realization space.)
+In other words, any two 3-polytopes of the same combinatorial type and
+orientation can always be continuously deformed into each other, such that
+each intermediate object is a 3-polytope of the same combinatorial type.
+The same is not hard to show for d-polytopes with at most d + 3 vertices,
+using Gale diagrams.
+However, this “isotopy property” fails even for 4-polytopes: Kleinschmidt
+constructed a 4-dimensional example with 10 vertices [114]; its combina-
+torial type is obtained by glueing two copies of the 8-vertex Kleinschmidt
+polytope of Exercise 6.18 in their octahedron facets in an “incompatible
+way.” See Mn¨ev [408, p. 530] and Bokowski & Guedes de Oliveira [115].
+A systematic construction method for 4-dimensional counterexamples is
+provided by Richter-Gebert’s Universality Theorem for 4-polytopes [459].
+Here we start a construction with a planar point conﬁguration, where the
+isotopy conjecture [463] [234] fails — and transfer this result to polytopes.
+Example 6.24 (A nonisotopic 24-polytope with 28 vertices).
+The “isotopy property” fails for d-polytopes with d+4 vertices: for that, we
+can start from a planar point conﬁguration that does not satisfy isotopy.
+The smallest nonisotopic planar point conﬁgurations that are currently
+known have 14 points. The ﬁrst such conﬁguration was found by Suvorov
+[537] [96, p. 363]. Here we present the nicest and newest one, found by
+Richter-Gebert [458].
+For this we refer to the ﬁgure on the next page: it represents Richter-
+Gebert’s example, with two points drawn “at inﬁnity” (which we interpret
+as “very far away,” to get an aﬃne conﬁguration).
+The key property of the ﬁgure can be seen as follows. Try to construct a
+new conﬁguration of 14 points in the (projective) plane, with the condition
+that point sets that are collinear in the old ﬁgure also have to be collinear in
+the new ﬁgure. After a projective transformation, we may assume that the
+points 1, 2, 3, and 4 (a “projective basis”) are positioned as in the old ﬁgure.

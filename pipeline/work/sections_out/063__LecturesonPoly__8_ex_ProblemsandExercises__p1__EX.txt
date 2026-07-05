@@ -1,0 +1,612 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 8. Shellability and the Upper Bound Theorem
+현재 소단원: 8.ex Problems and Exercises (분할 part 1)
+직전 소단원: 「8.6 The g-Theorem and Its Consequences」
+[연습문제]
+Problems and Exercises
+281
+(5) The structure of polytopal complexes is far from understood. Even
+polytopal subdivisions of 3-polytopes pose more problems than there are
+answers in the moment. The reader will ﬁnd some open problems among
+the exercises; we refer also to Bayer [60, 61] and to Lee [354, 357]. The
+space of all regular subdivisions of a polytope will reappear in the next
+lecture, in a completely diﬀerent setting. There are challenging questions
+in the study of f-vectors of subdivisions and their properties as well. We
+just mention Stanley’s local h-vector as a new tool; see Stanley [520] and
+Chan [145].
+Problems and Exercises
+8.0
+Show that every polyhedral subdivision of a 2-polytope is extendably
+shellable: We can start with an arbitrary 2-face, and never get stuck.
+(This is classical, see Newman [422], but also [173] and [239].) Show
+that one cannot, however, prescribe the last 2-face of a shelling.
+8.1
+(i) Show that a set of facets of the d-cube determines a shellable
+subcomplex of ∂Cd if and only if it contains no facets (is empty),
+or all facets, or if it contains at least one facet such that the
+opposite facet is not in the complex. Deduce that the boundary
+complexes of the d-cubes are extendably shellable.
+(ii) Describe a shelling of the d-dimensional crosspolytope. Use it
+to compute the f-vector and the h-vector of the d-dimensional
+crosspolytope.
+(iii) Given the h-vector of a simplicial polytope P, how can one derive
+the h-vector of the bipyramid bipyr(P)?
+(iv) Verify that the d-dimensional crosspolytopes Cd∆are extend-
+ably shellable for d ≤4. (Surprisingly, they are not extendably
+shellable for d ≥12, as proved by Hall [269]!)
+8.2
+Show that an ordering F1, F2, . . . , Fs of the facets of a pure simplicial
+complex is a shelling order if and only if for every i ≥1, the facet Fi
+contains a unique minimal face which is not contained in an earlier
+facet Fj with j < i.
+Show that the permutation F1, . . . , Ft is a shelling of ∆if and only if
+∆is partitionable with a partition such that
+Ri ⊆Fj
+=⇒
+i ≤j.
+8.3* Is every d-diagram shellable? What can you say about the case d = 3?
+(For d = 2 this is true, by Exercise 8.0. If you want a guess for d ≥3,
+I’d vote for “no,” because of the rule of thumb, “if Bruggesser-Mani
+doesn’t shell it, then it isn’t shellable.”)
+
+282
+8. Shellability and the Upper Bound Theorem
+8.4* If a polytopal complex C is shellable, but not necessarily simplicial,
+is it still true that its stars and links are shellable?
+(Be careful: results of Pachner [433] show that the boundary of a
+shellable ball need not be shellable. The answer is “yes” for stars
+according to Courdurier [163], but it might still be “no” for the links.)
+8.5
+Show that for every vertex v of a d-polytope P, there is a polytopal
+complex C that subdivides the boundary complex of the vertex ﬁgure,
+|C| = P/v, and that is combinatorially equivalent to link(v, C).
+(The face fan of the complex C is a ﬂattening of the boundary complex
+of P at the vertex v; see MacPherson [373].)
+8.6
+If C = C(∂P) is the boundary complex of a (nonsimplicial) polytope
+and v is a vertex of P, then link(v, C) is shellable. To prove this, show
+that the links are isomorphic to the boundary complexes of polytopes.
+(Hint: Use a point beyond v.)
+8.7* What is the smallest possible number of vertices for a nonshellable
+triangulation of a 3-polytope?
+(Rudin [468] claims that one needs 14 vertices if the complex is re-
+alizable as a simplicial geometric subdivision of a simplex. Is that
+true?)
+How many vertices are needed for a simplicial, nonshellable 3-sphere?
+8.8* Beat Lemma 8.6: is this the smallest pile of cubes that is not extend-
+ably shellable?
+8.9
+Every shelling F1, F2, . . . , Fs of the facets of a polytope P also in-
+duces, for every facet Fi, an ordering of the facets of Fi. Namely, one
+can take facets of Fi in the order in which they appear in the list
+F1 ∩Fi, . . . , Fi−1 ∩Fi, Fi+1 ∩Fi, . . . , Fs ∩Fi. A shelling is perfect if
+this ordering is a shelling order of the boundary of Fi, for all i.
+For example, shellings of simplicial polytopes are always perfect.
+(i)
+Show that Bruggesser-Mani shellings are not perfect in general.
+(ii)
+Show that the d-cubes Cd have perfect shellings, for all d ≥1.
+(iii)
+Show that all 3-polytopes have perfect shellings.
+(iv)
+Show that the polars of cyclic polytopes Cd(n)∆have perfect
+shellings.
+(v)* Does every polytope have a perfect shelling? (Kalai)
+8.10
+For a d-polytope P, show that the linear functions on P ∆in general
+position really correspond to the Bruggesser-Mani line shellings of P.
+If P is simplicial, verify that under this correspondence the vertices vj
+of in-degree k on P ∆correspond to the facets with restriction set of
+size |Rj| = d −k.
+
+Problems and Exercises
+283
+In particular, the formula
+f O = hO
+0 + 2hO
+1 + 4hO
+2 + . . . + 2khO
+k + . . . + 2dhO
+d ,
+which we used for the total number of faces of P ∆in Section 3.4,
+amounts to the evaluation of f(1) = h(2) for the polytope P.
+Using this, show that Kalai’s “good orientations” on the graph G(P ∆)
+are exactly the shelling orders for ∂P.
+8.11
+Prove the upper bound theorem for simple d-polytopes with n facets.
+For this, consider a linear function c ∈(Rd) in general position on a
+simple d-polytope P ⊆Rd with n facets. For t ∈R deﬁne hk∆(P, t)
+to be the number of vertices in {x ∈P : cx ≤t} that are the highest
+point for k diﬀerent edges (as suggested by the previous exercise).
+By letting t increase, show that for all t ∈R,
+(d−k)hk
+∆(P, t) + (k+1)hk+1
+∆(t) =
+X
+F
+hk
+∆(F, t) ≤n hk+1
+∆(P, t),
+where the sum is over all the n facets of P, and the second inequality
+follows from consideration of a linear function c for which the vertices
+of F are smaller than all other vertices of P. Deduce from this that
+hk
+∆(P)
+≤
+n −k −1
+d −k
+
+,
+for d ≥k ≥d −⌊d
+2⌋, and from this the upper bound theorem.
+(This is the “dual proof” of the upper bound theorem 8.23, from
+McMullen [389, Note added in proof].)
+8.12
+For a simple d-polytope P ⊆Rd with n vertices, a numbering of the
+vertices by 1, 2, . . . , n is called completely unimodal if every k-face
+(2 ≤k ≤d) has a unique local minimum, that is, every face F has
+only one vertex such that all its neighbors on F get a larger number.
+(i) Show that the completely unimodal numberings of P exactly
+correspond to the shelling orders of the (simplicial) polar poly-
+tope P ∆(Williamson Hoke [566, Prop. 1]; see also [279]).
+(ii) Show that if P is the d-dimensional cube, then it suﬃces to
+assume that the numbering has a unique local minimum on every
+2-face. (Hammer, Simeone, Liebling & de Werra [270]; see [566,
+Prop. 2]).
+(iii) Show that the 4-cube has a numbering that is not completely
+unimodal, but for which every k-face with k̸ = 2 has a unique
+local minimum.
+
+284
+8. Shellability and the Upper Bound Theorem
+(iv) Construct a simple 3-polytope P with a numbering such that
+every 2-face has a unique local minimum, but there are two
+local minima on P.
+(Hint: First construct an acyclic orientation of a 3-polytopal
+graph such that there are two sinks, but only one sink if one
+restricts to one of the facets.)
+8.13
+Let f = (1, 23, 47, 52, 38, 12).
+(i) Is f the f-vector of a simplicial complex?
+(ii) Is f the f-vector of a shellable complex?
+(iii) Is f the f-vector of a simplicial polytope?
+8.14
+Show that ∂k(n) is a monotonically increasing function of n (for
+ﬁxed k).
+Characterize the values n for which ∂k(n) = ∂k(n + 1).
+8.15
+Characterize the f-vectors of connected simplicial complexes, as fol-
+lows. The sequence f = (1, f0, f1, f2, . . . , fd) is the f-vector of a
+connected simplicial complex if and only if it satisﬁes the condi-
+tions of the Kruskal-Katona Theorem 8.32 and the additional relation
+∂3(f2) ≤f1 −f0 + 1.
+(This is due to Bj¨orner [91].)
+8.16* Characterize the f-vectors of pure simplicial complexes.
+(i) Start in low dimensions, with 2-dimensional and 3-dimensional
+simplicial complexes. Note that there are gaps: for example, a
+2-dimensional pure simplicial complex with f2 = 4 facets has at
+least f1 ≥6 edges, and at most f1 ≤12 edges — but f1 = 7 is
+impossible.
+(See Leck [351].)
+(ii) In general, this is probably an intractable problem, since a com-
+plete answer would solve virtually all basic problems in design
+theory — this observation may originally be due to Singhi &
+Shrikhande [501, p. 67]: it is called “trivial” there. (See [67] for
+more on design theory.)
+As an example, show that the existence of a projective plane of
+order d is equivalent to the existence of a pure simplicial com-
+plex (of dimension d) with f0 = d2 + d + 1 = fd and f1 =
+ f0
+2
+
+.
+(It is a notorious problem to show that such an object can exist
+only if d is a power of a prime. The nonexistence is classical for
+d = 6. It was only recently proved for d = 10, by Lam, Thiel &
+Swiercz and a CRAY 1A [348]. It is completely open for d = 12.
+Don’t try! Try!)
+
+Problems and Exercises
+285
+8.17
+For the standard octahedron C3∆⊆R3, ﬁnd a shelling line ℓ∈R3
+that generates the shellings of Example 8.22.
+(Hint: Use Exercise 8.10).
+Show that the facet ordering of the octahedron (labeled as in Exam-
+ple 8.22)
+123,
+234,
+345,
+135,
+246,
+126,
+156,
+456,
+is a shelling order for the octahedron. Prove that, however, it is not
+a Bruggesser-Mani shelling for any realization of the octahedron.
+(Smilansky [504])
+8.18
+Derive
+fk−1
+=
+d
+X
+i=k
+(−1)d−i
+i
+k
+
+fi−1
+for k = 0, 1, . . . , d
+for the f-vector of a simplicial polytopes from the Dehn-Sommerville
+equations of Theorem 8.21.
+In particular, how does the “obvious” equation 2fd−2 = dfd−1 follow
+from the Dehn-Sommerville equations?
+8.19
+Prove Stanley’s trick: give a formula for the (i, j)-entry of Stanley’s
+diﬀerence table, and show that the last row correctly computes the
+h-vector.
+Why are all the entries of the table nonnegative for a shellable com-
+plex?
+8.20
+(i) Prove that for 0 ≤j ≤k ≤d, one has
+d
+X
+i=j
+d −i
+k −i
+
+=
+d + 1 −j
+d + 1 −k
+
+.
+(ii) Prove directly that for 0 ≤j ≤d < n, we have
+j
+X
+i=0
+(−1)j−i
+d −i
+d −j
+n
+i
+
+=
+n −d −1 + j
+j
+
+.
+For this, verify that the equation is true for d = j (by induction)
+and for j = 0, and then use induction on d, where the left-hand
+side and the right-hand side satisfy the same simple recursion.
+(See [252, p. 149], and also [240, p. 169].)
+Use this to compute the h-vector for simplicial neighborly poly-
+topes, directly from Deﬁnition 8.18.
+
+286
+8. Shellability and the Upper Bound Theorem
+8.21
+Use Exercise 2.20 to show that one need not consider unbounded
+polyhedra for the upper bound theorem, as follows.
+For every unbounded d-polyhedron P with at least two vertices, there
+exists a d-polytope with the same number of facets, but with more
+vertices than P.
+What happens in the cases where P has at most one vertex?
+8.22
+Give natural bijections between
+• the k-multisets with elements from [n],
+• the monomials of degree k in the variables x1, x2, . . . , xn, and
+• vectors z ∈Nn
+0 with 1lz = k.
+Show that under these bijections, inclusion of multisets corresponds
+to divisibility of monomials and to the componentwise ordering of
+vectors.
+Give three more proofs of
+  n
+k
+
+=
+ n+k−1
+k
+
+. For example,
+(i) Show that every k-multiset with elements in [n] corresponds to
+a sequence like ∗∗|∗||∗∗∗|∗| with n stars and k−1 bars, where
+the number of stars between the ith bar and the (i−1)st bar
+is the multiplicity of i in the multiset. Then count the star-bar
+strings.
+(ii) Use induction on n, and a basic identity for binomial coeﬃcients.
+For inspiration, see also Stanley [517, Sect. 1.2].
+8.23
+On the vertex set [3n] = {1, 2, . . . , 3n}, consider the pure complex of
+dimension d = 3n −4 generated by the n facets [3n]\{3i−2, 3i−1, 3i}
+for i = 1, . . . , n. There are 3n minimal nonfaces: the sets of cardinality
+n that contain exactly one of 3i−2, 3i−1, 3i for each i.
+By comparing this complex to an (n+1)-neighborly one, show that
+we have
+fi−1 =
+ 3n
+i
+
+hi =
+ i+3
+3
+
+for i < n
+fn−1 =
+ 3n
+i
+
+−3n
+hn =
+ n+3
+3
+
+−3n
+fn =
+ 3n
+i
+
+−n·3n
+hn+1 =
+ n+4
+3
+
++ (n −4)3n
+so that for n ≥6 we have hn < 0, and the upper bound condition
+of Lemma 8.26 is violated for hn+1 (where n + 1 ≤⌊d
+2⌋) for a pure
+complex. (Wistuba & Ziegler [567])
+8.24
+Show that the k-skeleta of d-polytopes are shellable polyhedral com-
+plexes.
+
+Problems and Exercises
+287
+(i)
+Show that r-lex order deﬁnes a shelling order F1(k), F2(k), . . .
+for the (k−1)-skeleton of the d-simplex, by directly verifying
+condition 8.1(ii′).
+(ii)
+Show that in fact the k-skeleta of all shellable polyhedral com-
+plexes are shellable.
+(iii)* Is the (k−1)-skeleton of every d-simplex extendably shellable?
+(This is the shelling extension conjecture, due to Simon [500,
+Ch. 5]; the conjecture is known to be true for k ≤3, by Bj¨orner
+& Eriksson [92], and for k ≥d −1, by Kalai.)
+8.25
+Show the following weaker version of Macaulay’s theorem, which esti-
+mates the M-sequence h = (h0, h1, . . . , hd) without using the subtle
+operator ∂k. If hk =
+ x
+k
+
+for some real x ∈R and if k ≥1, then
+hk−1 ≥
+ x−1
+k−1
+
+.
+(Bj¨orner, Frankl & Stanley [93, Thm. 3])
+8.26* What combinatorial conditions on a simplicial complex imply that
+hi ≤
+ n−d−1+i
+i
+
+?
+(The result is known for shellable complexes, but only with algebraic
+tools, like Kalai’s “algebraic shifting.” Is there a fully combinatorial
+rule that with every shellable complex would associate a multicom-
+plex whose f-vector is the h-vector of the complex? Can one prove it
+for pure complexes satisfying the Dehn-Sommerville equations, like
+Eulerian complexes [324] [62] ?)
+8.27
+Show that the maximal number of vertices of a d-polytope with 2d
+facets is larger than the number of vertices of the d-cube, for d ≥4.
+For large d, the maximal number is roughly
+3⌊d
+2⌋
+⌊d
+2⌋
+
+≈
+27
+4
+⌊d
+2 ⌋
+,
+considerably more than 2d.
+8.28
+Show that the f-vectors of general 3-polytopes are exactly the vectors
+of the form
+f(P3)
+=
+(1, 4, 6, 4) + a(0, 1, 1, 0) + b(0, 0, 1, 1),
+with 2a ≥b ≥0, 2b ≥a ≥0,
+and the f-vectors of simplicial 3-polytopes are given by b = 2a, i.e.,
+f(P3) = (1, 4, 6, 4) + g1(0, 1, 3, 2),
+with g1 ≥0.
+8.29* Characterize the f-vectors of d-polytopes.
+
+288
+8. Shellability and the Upper Bound Theorem
+(The f-vectors for 3-polytopes were characterized by Steinitz [526]:
+see the previous exercise. This is a big unsolved research problem for
+every d ≥4. See Ehrenborg [193] for a recent account.
+For d = 4, much more is known. For example, the possible pairs
+(fi, fj) have been characterized for all i < j (see Bayer [59], Bayer &
+Lee [63, Sect. 3.8], and H¨oppner & Ziegler [278]). According to [578]
+the fatness parameter F(P) := f1+f2−20
+f0+f1−10 plays a crucial role: Can it
+be arbitrarily large? Polytopes with F(P) arbitrarily close to 9 were
+constructed in [579], with further analysis in [472].)
+8.30
+Prove Bj¨orner’s Theorem 8.39.
+For the ﬁrst half, you need a lemma that veriﬁes the monotonicity of
+the rows of Md, and shows that the peak lies between j = ⌊d
+2⌋and
+j = ⌊3(d−1)
+4
+⌋.
+For the second half, you can use g-vectors of the form
+g
+=
+
+1, g1,
+g1
+2
+
+,
+g1
+3
+
+, . . . ,
+g1
+k
+
+, 0, . . . , 0
+
+,
+such that the kth row of Md peaks at mkp. Now let g1 get very large.
+8.31
+Let P be a simplicial d-polytope P, and let P ′ be obtained by a
+stellar subdivision (as deﬁned in Exercise 3.0: erecting a “pyramidal
+cap” over a facet). Show that
+f(∂P ′)
+=
+f(∂P) + f(∂∆d) + f(∂∆d−1) −2f(∆d−1).
+8.32
+Consider the polytopes Cd(n)<r> obtained by r stellar subdivisions
+from cyclic ones. Using the previous exercise, show that the g-vector
+of Cd(n)<r> is given by (1, g1 +r, g2, . . . , g⌊d
+2 ⌋), where gi =
+ n+d−2+i
+i
+
+represents the g-vector of the cyclic polytope Cd(n).
+8.33* Are the f-vectors of (general) polytopes unimodal for d ≤7?
+(Connected sums of the form P#P ∆have unimodal f-vectors in di-
+mension d ≤7, see Bj¨orner [90, Sect. 3].)
+Similarly, what is the smallest number of vertices for a d-polytope
+with nonunimodal f-vector?
+(Eckhoﬀ[188] has nonunimodal f-vectors for 8-polytopes with 6375
+vertices and for 9-polytopes with only 1393 vertices (Example 8.41).
+Can you do with less? In the case of simplicial polytopes, Eckhoﬀ
+proved d0 = 19, but the smallest number of vertices is not known,
+either: here f0 = 1320 is the current record, see Example 8.40.)
+8.34
+For simplicial d-polytopes, show that fk < fd−2−k and fk ≤fd−1−k,
+for 0 ≤k ≤⌊(d−3)
+2
+⌋.
+(Bj¨orner [86, 90])
+8.35* Does f0 < f1 < f2 < . . . < f⌊d/4⌋hold for all d-polytopes?
+
+Problems and Exercises
+289
+8.36* Every centrally symmetric d-polytope has at least 3d proper faces.
+(This is known in the case of simplicial and of simple polytopes,
+proved by Stanley [518]. However, even to show that every simpli-
+cial centrally symmetric polytope has at least 2d facets — a fact ﬁrst
+proved by B´ar´any & Lov´asz [38] — one knows of no simple, “ele-
+mentary” argument. Centrally symmetric d-polytopes with exactly
+3d proper faces exist: take for example the d-cubes, and all the poly-
+topes which one can construct from k-cubes by taking products and
+polars. Kalai [302] conjectures that this yields all the polytopes with
+exactly 3d proper faces.)
+8.37* For every integer k ≥1, is there an integer f(k) such that every
+d-polytope with d ≥f(k) has a k-face that is either a simplex, or
+combinatorially equivalent to a k-cube?
+For every integer k ≥1, is there an integer g(k) such that every
+d-polytope with d ≥g(k) has a quotient that is a k-simplex, that is,
+it has faces G1 ⊆G2 such that [G1, G2] ∼= L(∆k) = Bk (that is, the
+k-simplex arises as an iterated vertex ﬁgure of a face; cf. Exercise 2.9)?
+(The ﬁrst question is due to Gil Kalai [303], who even conjectures that
+“in some sense” a “typical” k-face of a “typical” simple d-polytopes
+with n facets will be combinatorially equivalent to the k-cube, if d
+and n −d are both large enough compared with k.
+In [303], Kalai proves that f(2) is ﬁnite — in fact, f(2) = 5.
+The second question is due to Micha Perles [438], who remarks that
+g(0) = 0, g(1) = 1, g(2) = 3 (by Euler’s equation), and g(3) ≥5
+(from the 24-cell).)
+8.38
+Investigate the face numbers of cubical d-polytopes.
+In particular, show the following:
+(i) Every 3-dimensional cubical polytope has more vertices than
+facets (in fact, f2 = f0 −2).
+(ii) If P is a cubical zonotope with n zones, then
+f0 = 2
+ n−1
+0
+
++
+ n−1
+1
+
++ . . . +
+ n−1
+d−1
+
+,
+fd−1 = 2
+  n
+d−1
+
+.
+In particular, P has more vertices than facets for d ≥3.
+(iii) If P is a cubical d-polytope, then fk(P) ≥fk(Cd) holds for all k.
+(Blind & Blind [102])
+(iv) Study the possible f-vectors of 4-dimensional cubical polytopes.
+In particular, they can have more facets than vertices. (Jockusch
+[291])
+(v)* Does every cubical d-polytope with d ≥4 have an even number
+of vertices? (For even d this was shown by Blind & Blind [104].)
+8.39* Is every cubical polytope rational?
+
+290
+8. Shellability and the Upper Bound Theorem
+8.40
+The twisted lexicographic ordering on the facets of Cd(n) is deﬁned as
+follows. Consider facets F = {i1, . . . , id} and G = {j1, . . . , jd}, and let
+k be the smallest index where they diﬀer, ik̸ = jk. Setting i0 = j0 = 0,
+deﬁne that F ≺′ G holds either if ik < jk and ik−1 = jk−1 is even, or
+if ik > jk and ik−1 = jk−1 is odd. Otherwise we set F ⪰′ G.
+(i) Show that every facet is adjacent to the previous one.
+(ii) Show that ≺′ is a shelling order for Cd(n), if d ≤4.
+(iii) Show that ≺′ is not a shelling order in general.
+(Hint: list the ﬁrst 8 facets in the ordering for C7(10).)
+(This linear ordering is from G¨artner, Henk & Ziegler [219, Sect. 5],
+motivated by Klee’s construction [325, Thm. 1.1] of a Hamilton cycle
+in the graph of Cd(n)∆. Part (iii) was observed by Robert Hebble.)
+8.41* Show that for n ≥8 the cyclic polytope C4(n) cannot be realized
+in such a way that it has a Bruggesser-Mani shelling for which every
+facet is adjacent to the previous one. Equivalently, the polar C4(n)∆
+cannot be realized with a monotone path through all the vertices.
+(Indeed, Pfeiﬂe [441] veriﬁed that for 8 ≤n ≤12 there is no Hamilton
+path that would satisfy the known combinatorial conditions:
+(i) induce a unique sink on each face [566] and
+(ii) satisfy the Holt-Klee condition [282] that there are d vertex-
+disjoint graphs from source to sink in any orientation of the
+graph of a simple d-polytope that is induced by a linear function.
+Thus it is an entirely combinatorial problem to show that no such
+ordering on the vertices of C4(n)∆exists for any n ≥8. There is no
+dual-to-neighborly polytope of dimension d = 6 with n = 9 facets
+and an monotone path through all its f0(C6(9)∆) = 30 vertices [443].
+Thus, in general M(d, n) is smaller than the value f0(Cd(n)∆) pro-
+vided by the upper bound theorem. Compare Problem 3.11*.)
+8.42* It seems to be an open problem to show that all f-vectors of cyclic
+polytopes are unimodal. Are they?
+8.43
+For n > d ≥2, a stacked polytope Std(n) is a simplicial d-polytope
+with n vertices that is obtained by starting with a d-simplex and
+successively adding n −d −1 vertices “beyond a facet.”
+(i) Show that every stacked polytope Std(n) is a connected sum of
+d-simplices.
+(ii) Show that every polytope that is combinatorially isomorphic to
+Std(n) is a stacked polytope. (In the terminology of [459], this
+is since the glueing simplex is “necessarily ﬂat.”)
+(iii) Compute the f-vector of Std(n), and show that for each ﬁxed
+d ≥2, it grows linearly with n.
+(iv) Show that for every d ≥3, the number of combinatorial types
+stacked polytopes Std(n) grows exponentially with n.

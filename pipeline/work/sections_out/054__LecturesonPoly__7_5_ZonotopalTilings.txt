@@ -1,0 +1,285 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 7. Fans, Arrangements, Zonotopes, and Tilings
+현재 소단원: 7.5 Zonotopal Tilings
+직전 소단원: 「7.4 Nonrealizable Oriented Matroids」
+[본문]
+7.5 Zonotopal Tilings
+217
+arrangement, the non-Pappus conﬁguration.
+However, this pseudoline arrangement does give an oriented matroid via
+Theorem 7.26 (uniquely, if we number the pseudolines and specify a positive
+side for each of them), the non-Pappus oriented matroid MnP . This is an
+oriented matroid of rank 3 on 10 elements. However, if we delete the element
+that corresponds to the line at inﬁnity, then we get an oriented matroid
+M′
+nP on 9 elements which is nonrealizable as well, since the line at inﬁnity
+was not needed for the nonrealizability argument.
+There are even nonrealizable pseudoline arrangements that are simple (no
+three pseudolines cross in a point or are parallel) — see Ringel [463] [255,
+p. 42] and Exercise 7.16 for an example with only 9 pseudolines in the
+plane. In fact, all (simple or nonsimple) arrangements of pseudolines with
+at most 8 pseudolines are realizable (for this count the line at inﬁnity, if
+it is there), and Ringel’s example is essentially the unique simple one with
+9 pseudolines, according to Richter [455].
+7.5
+Zonotopal Tilings
+What do you “see” if you “look at” a d-dimensional zonotope? You see its
+“front facets,” which are (d −1)-dimensional facets and which ﬁll a shape
+that is a projection of a zonotope, and thus is a zonotope itself.
+If d = 3 (where this is most likely to happen to you anyway), and you
+look from a point very far away, the picture might look like the drawing on
+the next page. Here the shape you see is a 10-gon, ﬁlled “face to face” by
+quadrilaterals and hexagons.
+In general, the shape you see is a (parallel) projection of a zonotope,
+which is a zonotope itself. It is covered by the images of the front facets of
+the zonotope, which are also zonotopes.
+
+218
+7. Fans, Arrangements, Zonotopes, and Tilings
+Thus, “looking at zonotopes” leads to zonotopal tilings, which one can
+formally deﬁne as follows.
+Deﬁnition 7.29.
+A zonotopal tiling of rank d is a (d −1)-dimensional
+polyhedral complex C such that both the union |C| and the faces F ∈C are
+zonotopes.
+The zonotopal tiling is regular if it arises from “viewing” a d-dimensional
+zonotope from a point at inﬁnity, that is, if it arises from a projection
+π : Z −→|C| of a zonotope Z via the construction of Deﬁnition 5.3.
+Now if this zonotopal tiling is regular, then it encodes a d-dimensional
+zonotope, and thus it corresponds to an oriented matroid of rank d.
+However, not all zonotopal tilings are regular. To see this, ﬁrst observe
+that in the case d = 3, there is an obvious way to “draw” an arrangement
+of pseudolines into the zonotopal tiling, as on the next page.
+Note that there is no similar (systematic) way to draw an arrangement
+of straight lines into the picture — although this is the picture of an ac-
+tual 3-dimensional zonotope! So we see arrangements of pseudolines, in the
+polygonal version of Deﬁnition 7.25, coming up quite naturally.
+Do you recognize the pseudoline arrangement we have just drawn? It
+is combinatorially equivalent to the Pappus line arrangement that we had
+constructed before, with an extra horizontal line added through the three
+special points that have to be collinear anyway, because of Pappus’ theorem.
+Thus this pseudoline arrangement is certainly realizable!
+Lemma 7.30.
+All the pseudoline arrangements that come from a regular
+zonotopal tiling of rank 3 are realizable.
+
+7.5 Zonotopal Tilings
+219
+Proof. Assume (without loss of generality) that the projected 3-zonotope
+has a “special” summand in the direction of projection. Consider the asso-
+ciated hyperplane arrangement, which contains a dual to the special sum-
+mand.
+Now construct the aﬃne arrangement by intersecting with an aﬃne plane
+that is parallel to the special one. The resulting arrangement of straight
+lines is combinatorially equivalent to our pseudoline arrangement; they have
+the same oriented matroid by construction.
+For the zonotopal tiling above, the construction in the proof of Lem-
+ma 7.30 produces the line arrangement we had used to illustrate Pappus’
+theorem, with the horizontal line through the three dots added.
+Now let’s modify the zonotopal tiling just a little, with all the worst
+intentions, so this will also modify the pseudoline arrangement. We obtain
+a zonotopal tiling, depicted on the next page, which “realizes” the non-
+Pappus pseudoline arrangement, which is nonrealizable, inside a zonotopal
+tiling! What happened?
+We are about to hit a quite remarkable result, the Bohne-Dress theorem.
+It claims that every zonotopal tiling of rank d represents an oriented ma-
+troid of rank d, and conversely it characterizes the oriented matroids that
+can be represented by tilings of a given zonotope Z.
+Now it is diﬃcult here to supply the details for the two-way path from
+zonotopal tilings to pseudoarrangements, which the pictures suggest, since
+we have not even deﬁned pseudoarrangements and do not intend to do this
+here (in order to avoid undue topological subtleties). However, everything
+
+220
+7. Fans, Arrangements, Zonotopes, and Tilings
+we discuss here has a higher-dimensional version, and we want to supply
+at least the basic tools to describe them.
+Thus, we work in a diﬀerent direction: in view of the topological represen-
+tation theorem it is suﬃcient to construct the oriented matroid associated
+with a zonotopal tiling — and this is just a system of sign vectors, without
+any topology! Here we go.
+The following provides the basic construction and shows how the faces in
+a zonotopal tiling get sign vectors associated with them, almost canonically.
+Construction (with Deﬁnitions) 7.31.
+([111], [461, Sect. 1])
+Let Z be a zonotopal tiling in Rd.
+Two edges e, e′ ∈Z are deﬁned to be equivalent if there is a sequence
+e = e0, e1, . . . , et = e′ of edges in Z such that ei−1 and ei are opposite
+edges in a 2-face of Z, for 1 ≤i ≤t.
+If this divides the edges in Z into n equivalence classes, then n is the
+number of zones of Z. Let E1, E2, . . . , En enumerate the corresponding equiv-
+alence classes of edges. The ith zone of Z, denoted Zi, is the collection of
+all those F ∈Z which have a face in Ei.
+The edges of an equivalence class are all translates of each other, so we
+can choose vectors vi ∈Rd such that the edges in Ei are translates of the
+edge [−vi, vi] ⊆Rd. In this situation, we say that the vector conﬁgura-
+
+7.5 Zonotopal Tilings
+221
+tion V := (v1, . . . , vn) ∈Rn×d corresponds to the tiling Z. This vector
+conﬁguration is unique, up to relabeling and to reversal of signs.
+The vector conﬁguration V is a multiset: it may contain parallel or an-
+tiparallel vectors. It is not hard to see that the zonotope Z(V ) it generates
+is (a translate of) |Z|.
+The choice of a vector vi also determines a positive side and a negative
+side of the zone Zi. Thus we can associate a sign vector XF ∈{+, −, 0}n
+with every face F ∈Z, via
+XF
+i
+=
+( +
+if F is on the positive side of the zone Zi,
+0
+if F ∈Zi,
+−
+if F is on the negative side of the zone Zi.
+The set
+O(Z)
+:=
+{XF : F ∈Z}
+is the family of aﬃne sign vectors of Z.
+The following sketch shows one zone Z1 in the Pappus zonotopal tiling.
+The zone consists of the bold edges (they form the set E1) and the shaded
+2-faces. One possible vector v1 is indicated, and both the positive and the
+negative sides depend on this choice: if we replace v1 by −v1, then the
+sides of Z1 are exchanged.
+v1
+positive side
+of the zone Z1
+negative side
+of the zone Z1
+Z1
+In the next sketch, all zones have been labeled and directed. The associ-
+ated sign vector is indicated for one vertex, one edge, and one 2-face of the
+tiling.
+
+222
+7. Fans, Arrangements, Zonotopes, and Tilings
+(+++−0 +−0 −)
+(+++−0 +−+−)
+(+++−++−+−)
+V :
+234
+5
+6
+7
+8
+9
+1
+5
+6
+7
+8
+9
+4
+3
+2
+1
+The Bohne-Dress Theorem 7.32.
+[111, Thms. 4.1, 4.2] [461, Thm. 1.7]
+Let V ∈Rd·n be a vector conﬁguration of rank d, let Z := Z(V ) be its
+zonotope, and let V∗:= V∗(V ) be its oriented matroid. If Z is a zonotopal
+tiling of Z for which V corresponds to Z, then the family of sign vectors
+c
+V∗
+:=
+{ (X, +) : X ∈O(Z)}
+∪
+{ (Y, 0 ) : Y ∈V∗(V )}
+∪
+{(−X, −) : X ∈O(Z)}.
+is an oriented matroid of rank d+1. Furthermore, the construction Z−→c
+V∗
+induces a canonical bijection between
+• the zonotopal tilings Z of Z(V ) with associated vector conﬁgura-
+tion V , and
+• the oriented matroids c
+V∗⊆{+, −, 0}n+1 with
+{X ∈{+, −, 0}n : (X, 0) ∈c
+V∗}
+=
+V∗(V ).
+Proof. This is the correspondence suggested by the pseudoarrangement of
+hyperplanes one can draw into every zonotopal tiling. We have certainly
+seen that this is plausible, at least in rank 3.
+The actual proof of Theorem 7.32, together with the proof that Con-
+struction 7.31 works correctly as claimed, is surprisingly diﬃcult. We re-
+fer to Bohne’s thesis [111], and to the new proof by Richter-Gebert &
+Ziegler [461].
+
+7.5 Zonotopal Tilings
+223
+With the Bohne-Dress theorem, we can translate results about oriented
+matroids into facts about zonotopal tilings, and back. In the following we
+describe one (striking) instance.
+Deﬁnition 7.33.
+A vertex in a zonotopal tiling Z of rank d is simple if
+it has degree d −1 and is a vertex of Z = |Z|, or if it has degree d and is
+not a vertex of Z.
+From Shannon’s Theorem 7.20 we get the following estimate.
+Corollary 7.34.
+Every regular zonotopal tiling of rank d with n−1 zones
+has at least d simple vertices on the boundary of Z := |Z|, and at least
+n −d simple vertices in the interior of Z.
+One can see by elementary arguments that every zonotopal tiling of
+rank 3 satisﬁes these estimates, even if it is not regular (cf. Exercise 7.15).
+For example, the nonsimple vertices of the non-Pappus zonotopal tiling are
+marked in the following ﬁgure — all the other vertices are simple.
+However, in the framework of pseudoarrangements one can construct ori-
+ented matroids (in terms of arrangements of pseudohyperplanes) that have
+fewer than 2n simplicial regions. The ﬁrst example of this kind was pre-
+sented by Roudneﬀ& Sturmfels [467].
+The current “world records” about simple vertices are due to Richter-
+Gebert [456, Thm. 2.2], who constructed oriented matroids of rank 4 on 4n
+elements that have only 6n simplicial regions. Furthermore, from Richter-
+Gebert’s example [456, Thm. 2.3] we get an oriented matroid R(20) of rank
+4 which has a pseudohyperplane “8” that is not adjacent to any simplicial
+region. Furthermore, the restriction to the pseudohyperplane 8 (the con-
+traction R(20)/8 of the oriented matroid) is realizable. Via the Bohne-Dress
+theorem, these results translate into the following theorem.
+
+224
+7. Fans, Arrangements, Zonotopes, and Tilings
+Theorem 7.35.
+(i) [467]
+There is a zonotopal tiling of rank 4 (in R3), with 7 zones
+(n = 8), which has only 7 simple vertices, and only 3 of them are on
+the boundary.
+(ii) [456, Thm. 2.2] For k ≥2 there are zonotopal tilings of rank 4 (in R3),
+with 4k −1 zones (n = 4k), which have only 3k + 1 = 3
+4n + 1 simple
+vertices.
+(iii) [456, Thm. 2.3]
+There is a 3-dimensional zonotopal tiling with 19
+zones, which has no simple vertex on the boundary.
+You should try to visualize these — in view of the “geometric” descrip-
+tion of the pseudoplane arrangements in Richter-Gebert’s paper with many
+drawings this is not out of reach. A photo of a geometric model for the ori-
+ented matroid of part (i), built by Bokowski and Richter-Gebert, can be
+found in [112, p. 562].
+Notes
+The permutahedron was ﬁrst written about by Schoute in 1911 [481], it
+seems. General zonotopes were known to Blaschke [101, p. 250]. The ﬁrst
+systematic investigation of zonotopes was in Bolker [119], followed imme-
+diately by Schneider [475], and then by McMullen [392], who developed
+zonal diagrams — a version of Gale diagrams suitable for “zonotopes with
+few summands” (see Exercise 7.7). There is a revived interest now, due to
+the connection to oriented matroids, hyperplane arrangements, aspects of
+optimization, computational geometry and convexity, and so on. We refer
+to the surveys by McMullen [394] and by Schneider & Weil [478], to [96,
+Sect. 2.2], and to the paper by Gritzmann & Sturmfels [244] and the refer-
+ences therein. More on Minkowski sums can also be found in [244].
+The subject of hyperplane arrangements has a lot of diﬀerent aspects,
+and we do not even try to give an introduction here. We refer to [96] for the
+case of real hyperplane arrangements and their oriented matroids, and for
+further references. Arrangements of lines and pseudolines (corresponding
+to arrangements of rank 3) are beautifully discussed by Gr¨unbaum in [255].
+Fans, polytopal or not, are of great interest for algebraic geometry. In
+particular they represent toric varieties. In this case, the interest is re-
+stricted to fans that are pointed (i.e., {0} ∈F) and rational (every cone
+is generated by rational vectors). We refer to books by Fulton [215] and
+Oda [426], and in particular to the combinatorial treatment in Ewald [201].
+Simple zonotopes exist, but they are rare. As we have seen, they cor-
+respond to simplicial arrangements of hyperplanes. Examples of such ar-
+rangements arise naturally in the theory of Coxeter groups, root systems,

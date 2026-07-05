@@ -1,0 +1,104 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.3.a Axiomatics
+직전 소단원: 「6.3 Oriented Matroids」
+[본문]
+6.3 Oriented Matroids
+159
+(a) Axiomatics
+The collections of sign vectors that make up an oriented matroid are highly
+structured, and not just random collections. In fact, they arise in the fol-
+lowing way.
+For any linear subspace U ⊆Rn, we deﬁne the operator SIGN as
+SIGN(U)
+:=
+{sign(x) : x ∈U}
+⊆
+{+, −, 0}n.
+There is a natural partial order on the set of signs {+, −, 0}: we set 0 < +
+and 0 < −, while + and −are incomparable:
+0
+Q
+Q
+Q
+
+
+−
++
+This corresponds to the fact that a number that is slightly perturbed either
+keeps its sign, unless it is zero, in which case its sign can change to +, or
+to −, or remain 0.
+On sets of sign vectors S ⊆{+, −, 0}n, we use componentwise partial
+ordering: u ≤u′ if and only if ui ≤u′
+i holds for all positions i. Thus we
+get, for example,
+(0+0+000−−+−)
+<
+(0+−+−+0−−+−)
+but
+(0+0+000−−+−)̸
+≤
+(00−+−+0−−+−)
+because of the second position, where +̸ ≤0.
+We use the componentwise partial order to deﬁne the operator MIN,
+which takes all the minimal nonzero sign vectors in S:
+MIN(S)
+:=
+{u ∈S\0 : there is no u′ < u with u′ ∈S\0}.
+We will apply the operator SIGN equally to sets of row vectors and of
+column vectors. Similarly, we apply MIN both to sets of row sign vectors
+and of column sign vectors.
+With these conventions, we can describe the oriented matroid data for V
+as follows:
+V(V ) = SIGN(Dep(V ))
+C(V ) = MIN(SIGN(Dep(V ))) = MIN(V(V ))
+V∗(V ) = SIGN(Val(V ))
+C∗(V ) = MIN(SIGN(Val(V ))) = MIN(V∗(V ))
+Furthermore, the spaces Dep(V ) and Val(V ) determine each other by Prop-
+osition 6.4, so all four sets of data are determined by U := Val(V ). In this
+sense, we talk about “the oriented matroid M = M(U) of the subspace
+U ⊆Rn.” The dimension r := dim(U) is called the rank of M. So what we
+
+160
+6. Duality, Gale Diagrams, and Applications
+were studying in Sections 6.1 and 6.2 were the vectors and circuits of two
+realizable oriented matroids of rank r respectively n −r,
+M = M(Val(X))
+and
+M∗= M(Dep(X)).
+It is easy to write down extensive lists of axioms that are satisﬁed by any
+collection SIGN(U). So one gets to axiom systems for oriented matroids.
+We’ll get to that in Lecture 7, but without much detail. In fact, the proofs
+relating various axiom systems for oriented matroids tend to involve hard
+work, something we try to avoid on this show. (This is, however, at the
+basis of oriented matroid theory; we refer to [96, Ch. 3]).
+The oriented matroid of a point conﬁguration is a delicate model for its
+geometry. It provides a much ﬁner model than what the matroid encodes
+about a vector conﬁguration. (If you want to know what a matroid is, see
+Welsh [555], White [557], or Oxley [430].) One can prove that in fact the ap-
+proximation of the combinatorial model to “geometric reality” is extremely
+good — this is made precise in Lawrence’s “topological representation the-
+orem.” We’ll get back to this in Lecture 7.
+This means also that all the main features of the geometry of vector
+conﬁgurations can be derived from formal properties (the axioms). In fact
+there are very few geometric statements that would be true for vector
+conﬁgurations but fail for oriented matroids — so whatever we ﬁnd in that
+direction is even more exciting. (See Theorem 7.20 for an example.)
+(b) Equivalence
+Diﬀerent sets of data “A” and “B” about a geometric situation are equiv-
+alent if any two conﬁgurations with the same data A also have the same
+data B, and conversely. This means that (at least in principle) one can
+construct the data A from the data B. Any set of data that is equivalent
+to the set of circuits is referred to as the oriented matroid of V .
+We now want to show that the four sets of data for an oriented ma-
+troid given by Deﬁnition 6.5 are equivalent. For that we need to deﬁne the
+combinatorial analogue of the condition cx = 0.
+Deﬁnition 6.6.
+Let x ∈{+, −, 0}n and c ∈({+, −, 0}n)∗be two sign
+vectors. Then we deﬁne that “c·x = 0” if
+• for each i, we have ci = 0 or xi = 0,
+• or there are indices i, j with ci = xi̸ = 0 and cj = −xj̸ = 0.
+For a family of sign vectors S ⊆{+, −, 0}n, we deﬁne
+S⊥:= {c ∈({+, −, 0}n)∗: c·u = 0 for all u ∈S},
+and analogously for collections of row vectors.

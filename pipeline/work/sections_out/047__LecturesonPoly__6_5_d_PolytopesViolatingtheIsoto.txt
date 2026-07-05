@@ -1,0 +1,140 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.5.d Polytopes Violating the Isotopy Conjecture
+직전 소단원: 「6.5.c 2-Faces of 5-Polytopes Cannot be Prescribed」
+[본문]
+6.5 Polytopes with Few Vertices
+177
+An explicit geometric description of the polytope P = Q∆is given in
+Exercise 6.27.
+(d) Polytopes Violating the Isotopy Conjecture
+Recall from Section 4.4 that the “realization space” of a polytope is an
+elementary semialgebraic set, and that elementary semialgebraic sets can
+be arbitrarily complicated spaces: they can be disconnected, with holes,
+and so forth (Exercise 4.22).
+However, Steinitz’ Theorem 4.11 states that for every 3-dimensional poly-
+tope the realization space R(P) is contractible, and thus connected. (To
+get this right, we had to ﬁx an aﬃne basis in our Deﬁnition 4.10 of real-
+ization spaces, to make sure that the “reﬂection” doesn’t create a second
+component of the realization space.)
+In other words, any two 3-polytopes of the same combinatorial type and
+orientation can always be continuously deformed into each other, such that
+each intermediate object is a 3-polytope of the same combinatorial type.
+The same is not hard to show for d-polytopes with at most d + 3 vertices,
+using Gale diagrams.
+However, this “isotopy property” fails even for 4-polytopes: Kleinschmidt
+constructed a 4-dimensional example with 10 vertices [114]; its combina-
+torial type is obtained by glueing two copies of the 8-vertex Kleinschmidt
+polytope of Exercise 6.18 in their octahedron facets in an “incompatible
+way.” See Mn¨ev [408, p. 530] and Bokowski & Guedes de Oliveira [115].
+A systematic construction method for 4-dimensional counterexamples is
+provided by Richter-Gebert’s Universality Theorem for 4-polytopes [459].
+Here we start a construction with a planar point conﬁguration, where the
+isotopy conjecture [463] [234] fails — and transfer this result to polytopes.
+Example 6.24 (A nonisotopic 24-polytope with 28 vertices).
+The “isotopy property” fails for d-polytopes with d+4 vertices: for that, we
+can start from a planar point conﬁguration that does not satisfy isotopy.
+The smallest nonisotopic planar point conﬁgurations that are currently
+known have 14 points. The ﬁrst such conﬁguration was found by Suvorov
+[537] [96, p. 363]. Here we present the nicest and newest one, found by
+Richter-Gebert [458].
+For this we refer to the ﬁgure on the next page: it represents Richter-
+Gebert’s example, with two points drawn “at inﬁnity” (which we interpret
+as “very far away,” to get an aﬃne conﬁguration).
+The key property of the ﬁgure can be seen as follows. Try to construct a
+new conﬁguration of 14 points in the (projective) plane, with the condition
+that point sets that are collinear in the old ﬁgure also have to be collinear in
+the new ﬁgure. After a projective transformation, we may assume that the
+points 1, 2, 3, and 4 (a “projective basis”) are positioned as in the old ﬁgure.
+
+178
+6. Duality, Gale Diagrams, and Applications
+Then we choose the point 5 on the diagonal through 3 and 4. Thus we have
+ﬁve points which then successively determine the points 6, 7, . . . , 13. The
+fourteenth point 14 is then placed at the intersection of the lines 1, 3 and
+2, 4, but not on the line 12, 13: this is possible if the point 5 had been drawn
+slightly Southeast of the center, as in our ﬁgure, or if it is taken slightly
+Northwest of the center, which results in a ﬁgure that is a reﬂection of our
+ﬁgure; however, it is impossible (it results in a diﬀerent conﬁguration, with
+12, 13, 14 collinear) to get a realization of the same conﬁguration which is
+itself symmetric with respect to the x = y diagonal: for that we’d have to
+choose 5 in the center, and would get 12, 13 and 14 collinear.
+→1
+2
+↑
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+A conﬁguration with this eﬀect is not too hard to construct, but this
+example has a stronger property: If the point 5 is chosen close enough
+to the midpoint of the segment [3, 4], then the “Southeast” and “North-
+west” realizations not only have the same collinearities (and thus the same
+unsigned cocircuits, the same matroid), but they have the same signed co-
+circuits — both realizations yield the same oriented matroid. We do not
+know whether one really needs 14 points for this eﬀect: can you do with
+less (Problem 6.26*)?
+From this, one can easily construct an aﬃne planar Gale diagram that
+has a disconnected realization space. However, we must also make sure
+that every polytope that is (only!) combinatorially equivalent to the one we
+construct has the same diagram. A very “aggressive” method is to replace
+every point of the diagram by a pair of positive and negative points: this
+yields the aﬃne Gale diagram of a 24-polytope with only 28 vertices that
+has two isotopy classes of realizations. Implicitly, this is what the “Lawrence
+construction” does, which we will discuss below.
+
+6.6 Rigidity and Universality
+179
+Another nonisotopic point conﬁguration, of 21 points, is explicitly con-
+structed in White [559]. A general construction method is due to Mn¨ev [408].
+In particular, Mn¨ev’s universality theorem (see below) shows that the “real-
+ization space” for planar point conﬁguration can be arbitrarily complicated.
+Suvorov [537] and Jaggi et al. [290] furthermore construct non-isotopic
+conﬁgurations whose points are in general position. From these, one can —
+using a technique of Sturmfels [117, Thm. 6.5] — get simplicial polytopes
+that violate the isotopy conjecture. This yields examples for a much more
+general “universality theorem for polytopes,” described in the next section.
+6.6
+Rigidity and Universality
+We have characterized Gale diagrams of polytopes in Corollary 6.20. To
+make statements about polytopes of a ﬁxed combinatorial type, however,
+it is not suﬃcient to look at a speciﬁc Gale diagram: we have to make
+sure that the statement we make holds for all polytopes combinatorially
+equivalent to the given polytope.
+Here we have to deal with two diﬀerent notions of equivalence. We have
+noted that two polytopes may be combinatorially equivalent but have dif-
+ferent oriented matroids. (See, for example, the octahedra of Example 6.3.)
+However, any two polytopes with the same oriented matroid are combina-
+torially equivalent: they have the same covectors, hence the same positive
+covectors, and hence the same cofaces, and thus the same faces.
+To make Gale diagrams useful for high-dimensional polytopes, we have
+to get a hold on all Gale diagrams representing a combinatorial equivalence
+class of polytopes. This is not simple, and it would lead into a discussion of
+“partial oriented matroids” that we want to avoid (there is not much theory
+for that, either). Instead, we restrict ourselves to an important special case:
+when only one oriented matroid is possible for a given convex polytope.
+Deﬁnition 6.25.
+The oriented matroid of a d-polytope P ⊆Rd is rigid
+if every polytope P ′ that is combinatorially equivalent to P has the same
+oriented matroid.
+Here our convention is to identify the vertex sets of P and of P ′ with [n]
+in a way that is compatible with the combinatorial equivalence. With this,
+combinatorial equivalence means that the oriented matroids M(P) and
+M(P ′) have the same set of positive cocircuits, and rigidity means that
+this implies that all cocircuits of P and of P ′ coincide:
+C∗(P) ∩{+, 0}n = C∗(P ′) ∩{+, 0}n
+=⇒
+C∗(P) = C∗(P ′).
+For example, triangular prisms are rigid, but octahedra are not. The con-
+cept of rigidity is only interesting because there are some rigid polytopes
+around, although “most” polytopes are not rigid. Here is one construction
+to get rigid polytopes.

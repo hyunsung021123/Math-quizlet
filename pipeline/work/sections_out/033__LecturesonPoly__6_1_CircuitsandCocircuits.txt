@@ -1,0 +1,88 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.1 Circuits and Cocircuits
+직전 소단원: 「5.ex Problems and Exercises」
+[본문]
+6
+Duality, Gale Diagrams,
+and Applications
+More about life in high dimensions: after “successfully” dealing with poly-
+topes in four dimensions, we now study polytopes with few vertices, that is,
+d-polytopes with only d-plus-a-few vertices. For this, we develop a duality
+theory, which describes them in terms of structures in low dimensions.
+This duality theory (developed by Perles in the 1960s, and recorded
+by Gr¨unbaum [252]) is classically known as Gale diagrams. Later it was
+realized (apparently ﬁrst by McMullen [394]) that Gale diagrams are a
+manifestation of “oriented matroid duality.”
+Thus behind the construction of Gale diagrams one ﬁnds (barely hidden)
+oriented matroids. Their theory was initiated in the 1970s by at least four
+independent authors, Jon Folkman, Jim Lawrence, Robert G. Bland, and
+Michel Las Vergnas; see [207] and [100].
+By now oriented matroids form a theory with many facets, extensive
+enough to ﬁll thick books [96]. One aim of our lectures is to give a sim-
+ple introduction to a few topics that help understand polytopes. Keys to
+this include the description of the relative position of vertices in terms of
+“circuits” and “cocircuits,” as well as the simple duality between these two
+descriptions, oriented matroid duality, which in polytope theory manifests
+itself in (linear and aﬃne) Gale diagrams.
+Thus this lecture includes a brief crash (?) course on oriented matroids.
+(This will be continued in Lecture 7, when we discuss hyperplane arrange-
+ments and zonotopes.) Although oriented matroids need some amount of
+new notation and terminology, there is little magic involved: just don’t be
+scared of names. For further reading, we refer to the “Orientation Session”
+in Bj¨orner et al. [96, Ch. 1].
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_7, © Springer Science+Business Media New York 2007 
+ 
+149
+
+150
+6. Duality, Gale Diagrams, and Applications
+In this lecture, we give several striking applications of Gale diagrams and
+oriented matroid duality, among them
+• the construction of an 8-polytope with 12 vertices that is nonrational,
+meaning that it cannot be realized with rational vertex coordinates
+(due to Perles),
+• the construction of a 5-polytope for which the shape of a 2-dimen-
+sional face cannot be prescribed (new!), and
+• the construction of a 24-polytope with 28 vertices for which the real-
+ization space is not connected.
+These examples are “easily” derived from special low-dimensional point
+conﬁgurations via Gale diagrams.
+Finally, we develop the “Lawrence construction,” a systematic method
+by which properties of arbitrary point conﬁgurations can be encoded into
+polytopes. This makes it possible to provide the corresponding “universality
+theorems,” which say that the realization spaces of convex polytopes can
+be arbitrarily bad, in a sense that we make precise ahead.
+6.1
+Circuits and Cocircuits
+For this section, let X = {x1, . . . , xn} ⊆Rd be a ﬁnite set of n points
+in aﬃne space Rd — for example, the vertices of a d-polytope. There is
+no problem with multiple points, but we always assume that the points
+in X aﬃnely span Rd. We continue our habit to interpret X as a matrix
+X ∈Rd×n when this is convenient.
+We now explore two “dual” ways to derive combinatorial data from such
+a point conﬁguration.
+(a) Aﬃne Dependences
+The aﬃne dependences of the point conﬁguration X are the vectors z ∈Rn
+with 1l z = 0 such that Xz = 0. These vectors z form a vector subspace
+of Rn,
+a-Dep(X) := {z ∈Rn : Xz = 0, 1l z = 0}.
+Geometrically, let z̸ = 0 be an aﬃne dependence. Then we can look at the
+sets of negative and positive coeﬃcients of z, N(z) := {i : zi < 0} and
+P(z) := {i : zi > 0}. We get that Λ := P
+i∈P (z) zi = −P
+i∈N(z) zi > 0. By
+multiplying with 1
+Λ we can rewrite the aﬃne dependence z as
+X
+i∈P (z)
+zi
+Λ xi =
+X
+i∈N(z)
+−zi
+Λ xi
+=:
+y,

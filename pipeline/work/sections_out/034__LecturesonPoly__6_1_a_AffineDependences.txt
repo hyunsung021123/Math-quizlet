@@ -1,0 +1,369 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 6. Duality, Gale Diagrams, and Applications
+현재 소단원: 6.1.a Affine Dependences
+직전 소단원: 「6.1 Circuits and Cocircuits」
+[본문]
+150
+6. Duality, Gale Diagrams, and Applications
+In this lecture, we give several striking applications of Gale diagrams and
+oriented matroid duality, among them
+• the construction of an 8-polytope with 12 vertices that is nonrational,
+meaning that it cannot be realized with rational vertex coordinates
+(due to Perles),
+• the construction of a 5-polytope for which the shape of a 2-dimen-
+sional face cannot be prescribed (new!), and
+• the construction of a 24-polytope with 28 vertices for which the real-
+ization space is not connected.
+These examples are “easily” derived from special low-dimensional point
+conﬁgurations via Gale diagrams.
+Finally, we develop the “Lawrence construction,” a systematic method
+by which properties of arbitrary point conﬁgurations can be encoded into
+polytopes. This makes it possible to provide the corresponding “universality
+theorems,” which say that the realization spaces of convex polytopes can
+be arbitrarily bad, in a sense that we make precise ahead.
+6.1
+Circuits and Cocircuits
+For this section, let X = {x1, . . . , xn} ⊆Rd be a ﬁnite set of n points
+in aﬃne space Rd — for example, the vertices of a d-polytope. There is
+no problem with multiple points, but we always assume that the points
+in X aﬃnely span Rd. We continue our habit to interpret X as a matrix
+X ∈Rd×n when this is convenient.
+We now explore two “dual” ways to derive combinatorial data from such
+a point conﬁguration.
+(a) Aﬃne Dependences
+The aﬃne dependences of the point conﬁguration X are the vectors z ∈Rn
+with 1l z = 0 such that Xz = 0. These vectors z form a vector subspace
+of Rn,
+a-Dep(X) := {z ∈Rn : Xz = 0, 1l z = 0}.
+Geometrically, let z̸ = 0 be an aﬃne dependence. Then we can look at the
+sets of negative and positive coeﬃcients of z, N(z) := {i : zi < 0} and
+P(z) := {i : zi > 0}. We get that Λ := P
+i∈P (z) zi = −P
+i∈N(z) zi > 0. By
+multiplying with 1
+Λ we can rewrite the aﬃne dependence z as
+X
+i∈P (z)
+zi
+Λ xi =
+X
+i∈N(z)
+−zi
+Λ xi
+=:
+y,
+
+6.1 Circuits and Cocircuits
+151
+so that
+y
+∈
+conv{xi : i ∈P(z)} ∩conv{xi : i ∈N(z)}
+represents a point that lies both in the convex hull of the points with
+positive coeﬃcients and in the convex hull of the points with negative
+coeﬃcients.
+For example, let X =
+
+0
+3
+5
+5
+2
+0
+0
+0
+1
+2
+2
+1
+
+be the vertex set of a
+hexagon
+6
+1
+2
+3
+4
+5
+Then the aﬃne dependence
+z =
+
+
+
+
+
+
+
+
+1
+−4
+6
+−4
+1
+0
+
+
+
+
+
+
+
+
+represents y =
+4
+1
+
+∈conv{x1, x3, x5} ∩conv{x2, x4}.
+y
+6
+1
+2
+3
+4
+5
+In particular, we are interested in the special case of aﬃne dependences
+involving a minimal set of points from X, that is, dependences of nonempty
+point sets such that every proper subset is aﬃnely independent.
+We deﬁne the support of a vector as the set of components that are not
+zero. Thus the minimal aﬃnely dependent point sets correspond to the
+dependences with inclusion-minimal supports.
+For the minimal dependences, we see that conv{xi : i ∈P(z)} and
+conv{xi : i ∈N(z)} are simplices whose relative interiors intersect in a
+unique point y. Such conﬁgurations are known as “minimal Radon parti-
+tions” because of Radon’s theorem, a quite trivial but basic lemma from
+convexity theory; see Exercise 6.0.
+It is not hard to show that every aﬃne dependence z is a ﬁnite sum of
+such minimal dependences, z′ + z′′ + . . . + z(k). By Carath´eodory’s The-
+orem 1.15 (see Lemma 6.7 below) the minimal dependences z(i) can be
+chosen consistent with z, that is, such that the jth component of each z(i)
+either has the same sign as zj or else it vanishes. Finally, the minimal aﬃne
+dependences determine the point conﬁguration X up to aﬃne coordinate
+
+152
+6. Duality, Gale Diagrams, and Applications
+change (Exercise 6.1). Together these three facts mean that the minimal
+aﬃne dependences completely determine the structure of the point conﬁg-
+uration.
+For the hexagon we considered before, the linear dependence can be
+written as a sum 
+
+
+
+
+
+
+
+1
+−4
+6
+−4
+1
+0
+
+
+
+
+
+
+
+
+=
+
+
+
+
+
+
+
+
+1
+−5
+2
+3
+−3
+2
+0
+0
+
+
+
+
+
+
+
+
++
+
+
+
+
+
+
+
+
+0
+−3
+2
+3
+−5
+2
+1
+0
+
+
+
+
+
+
+
+
+which writes it as a sum of the two minimal dependences depicted here:
+y′
+y′′
+6
+1
+2
+6
+1
+2
+3
+4
+5
+3
+4
+5
+To distill the “combinatorial essence,” we use the sign function
+sign : R −→{+, −, 0},
+z 7−→sign(z) =
+( +
+if z > 0,
+0
+if z = 0,
+−
+if z < 0.
+We will apply the sign function componentwise to vectors, so for a column
+vector z ∈Rn we get a column sign vector sign(z) ∈{+, −, 0}n, and for a
+row vector c ∈(Rn)∗we get a row sign vector sign(c).
+Deﬁnition 6.1.
+Let X = {x1, . . . , xn} ⊆Rd be a set of n points in aﬃne
+space Rd.
+The signed vectors of X are the column sign vectors sign(z) correspond-
+ing to aﬃne dependences of the points in X,
+V(X) := {sign(z) : z ∈Rn, Xz = 0, 1l z = 0} = SIGN(a-Dep(X)),
+where SIGN(U) denotes {sign(x) : x ∈U} for any subset U ⊆Rn.
+The signed circuits of X are the column sign vectors sign(x) correspond-
+ing to minimal aﬃne dependences of the points in X. The set of signed
+circuits of X is denoted by C = C(X).
+For example, the 6-point conﬁguration discussed above has
+the vector
+
+
+
+
+
+
+
+
++
+−
++
+−
++
+0
+
+
+
+
+
+
+
+
+,
+and the circuits
+
+
+
+
+
+
+
+
++
+−
++
+−
+0
+0
+
+
+
+
+
+
+
+
+and
+
+
+
+
+
+
+
+
+0
+−
++
+−
++
+0
+
+
+
+
+
+
+
+
+,
+
+6.1 Circuits and Cocircuits
+153
+corresponding to the nonminimal dependence (“the segment [2, 4] intersects
+the triangle [1, 3, 5]”) and to the two minimal dependences (“the segment
+[2, 4] intersects the segment [1, 3], respectively the segment [3, 5]”) that we
+have calculated above.
+The sets C(X) and V(X) of signed circuits and vectors thus are combi-
+natorial data associated with any aﬃne point conﬁguration. We will now
+proceed to extract the natural “dual data,” called signed cocircuits and
+signed covectors. In Section 6.2 we will derive the theoretical framework
+that shows that these four types of data are all “equivalent,” and that
+makes the “duality” precise.
+(b) Aﬃne Functions
+From every aﬃne function f on Rd, of the form x 7−→f(x) = cx −z, for
+c ∈(Rd)∗, z ∈R, we get a row vector, called an aﬃne value vector,
+(f(x1), . . . , f(xn)) = (cx1 −z, . . . , cxn −z) = cX −z1l ,
+which records the values of cx −z on the points xi of X. For the hexagon
+from our example, the aﬃne function f(x) = x1 + 2x2 −3 generates the
+aﬃne value vector (−3, 0, 4, 6, 3, −1):
+1 (f = −3)
+2 (f = 0)
+Hf
+3 (f = 4)
+4 (f = 6)
+5 (f = 3)
+6 (f = −1)
+where our drawing lists the values of f in brackets, and illustrates the
+hyperplane Hf := {x ∈Rd : f(x) = 0} as a dashed line.
+We note that the set
+a-Val(X) := {cX −z1l ∈(Rn)∗: c ∈(Rd)∗, z ∈R}
+of aﬃne value vectors is a vector subspace of (Rn)∗.
+Geometrically, the row vector f(X) := cX −z1l records “signed dis-
+tances” of the points xi from the oriented hyperplane Hf. Thus the row
+sign vector sign(f(X)) records which points of X are on the positive side
+H+
+f \Hf = {x ∈Rn : f(x) > 0} of the hyperplane Hf, on Hf itself, or on
+the negative side of Hf.
+For example, for the hexagon and the aﬃne function illustrated above, we
+have f(X) = (−3, 0, 4, 6, 3, −1), and thus sign(f(X)) = (−, 0, +, +, +, −).

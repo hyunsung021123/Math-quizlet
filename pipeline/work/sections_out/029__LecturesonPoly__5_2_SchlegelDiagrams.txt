@@ -1,0 +1,201 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 5. Schlegel Diagrams for 4-Polytopes
+현재 소단원: 5.2 Schlegel Diagrams
+직전 소단원: 「5.1 Polyhedral Complexes」
+[본문]
+132
+5. Schlegel Diagrams for 4-Polytopes
+A canonical choice for f is the function f(x) = x2
+1 + . . . + x2
+d = ||x||2. Our
+sketch tries to illustrate the construction of the 3-polytope eP3(6, 4).
+To end this section, we give the following ﬁgure as a small example of a
+subdivision that is not regular. To see this, note that we can assume that
+f(v4) = f(v5) = f(v6) = 0 for the three interior vertices (by subtracting a
+linear function from f), and then we get a cycle f(v1) > f(v2) > f(v3) >
+f(v1) of conditions for the three outer vertices.
+ 1
+2
+3
+4
+6
+ 5
+Note that the subdivision ΣP (Q) encodes a lot of information about P,
+but essentially we “see only half of P” in ΣP (Q). Now, we’ll “take a closer
+look” — in order to “see more.”
+5.2
+Schlegel Diagrams
+For a “close look” at polytopes, we choose a point of view yF beyond facet F
+(see Section 3.1 for the deﬁnition of “beyond”) and use the facet F as a
+“projection screen” for everything we “see” behind it.
+Deﬁnition 5.5.
+Let P be a d-polytope in Rd, and let F ∈L(P) be a
+facet of P, deﬁned by the valid inequality ax ≤z. We denote by
+H := aﬀ(F) = {x ∈Rd : ax = z}
+
+5.2 Schlegel Diagrams
+133
+the hyperplane spanned by F. Choose a point yF beyond F. For x ∈P,
+we deﬁne
+p(x) := yF + z −ayF
+ax −ayF
+(x −yF ).
+x
+p(x)
+H
+yF
+The Schlegel diagram of P based at the facet F, denoted as D(P, F), is the
+image under p of all proper faces of P other than F; that is, it is the set
+system
+D(P, F)
+:=
+n
+p(G) : G ∈L(P)\{P, F}
+o
+,
+contained in the hyperplane H.
+The map p is nonlinear, and in general we cannot replace “combinato-
+rially equivalent” with “aﬃnely isomorphic” in the following proposition;
+see Exercise 5.8. Now comes the reason why this construction makes sense.
+Proposition 5.6.
+The Schlegel diagram of P based at the facet F is a
+polytopal subdivision of F that is combinatorially equivalent to the complex
+C((∂P)\{F}) of all proper faces of P other than F.
+Proof. We use the notation of Deﬁnition 5.5. For every face G of P, the
+set
+CG := {yF + λ(x −yF ) : x ∈G, λ ≥0}
+is a cone with vertex yF : in fact, ayF > ax for all x ∈P by construction
+of yF .
+H
+yF
+CG
+G
+If G is a proper face of P, then it is contained in a hyperplane
+Hi = {x ∈Rd : aix = bi}
+that does not contain yF . Thus we ﬁnd that the face lattice of CG is iso-
+morphic to L(G). Now if we intersect CG with a hyperplane such as H,
+which has a bounded, nonempty intersection with CG, then we have that
+
+134
+5. Schlegel Diagrams for 4-Polytopes
+the face lattice of the intersection is isomorphic to that of CG. Here we
+have p(G) = CG ∩H (the formula for p(x) is derived from this condition),
+and thus L(G) = L(CG) = L(p(G)).
+(Actually, the map p : G −→p(G) is a projective transformation, very
+much like the version we have in Section 2.6: see Exercise 5.8.)
+Let us note here one very important property of Schlegel diagrams: that
+G ∩∂F is a face of F = |D|, for all G ∈D.
+Schlegel diagrams are, sure enough, named after a mathematician, Victor
+Schlegel [474]. It seems that Sommerville coined the name with his 1929
+book [506]. In the next section we will get a more general deﬁnition of a
+d-diagram and then use “Schlegel” as an adjective for a d-diagram that is
+a Schlegel diagram.
+If a Schlegel diagram of P is given as a polytopal complex D, then we can
+reconstruct the corresponding facet F of P as F = |D|. So with Proposi-
+tion 5.6 we see that every Schlegel diagram D determines the combinatorial
+isomorphism type of P: we can reconstruct the face lattice of P from it.
+For this we recover F = |D|, and get
+L(P)
+∼=
+(D ∪{F, ˆ1}, ≤),
+where the partial order “≤” is by inclusion on D, we have G ≤F if and
+only if G ∈D is a face of F, and ˆ1 is an artiﬁcial maximal element.
+The interesting property of the Schlegel diagram is that it completely
+encodes the combinatorial structure of a d-dimensional polytope into a
+(d −1)-dimensional object; after all, D(P, F) is a polytopal complex con-
+tained in the (d −1)-dimensional hyperplane H = aﬀ(F).
+This reduction in dimension makes Schlegel diagrams especially useful
+in the case d = 4, where the Schlegel diagram of a 4-dimensional polytope
+is a 3-dimensional polytopal complex, for which we have a ﬁghting chance
+for a geometric visualization.
+To illustrate how Schlegel’s construction works, we start, however, at
+d = 3. The following drawings show the construction of the Schlegel dia-
+gram, and the (2-dimensional) Schlegel diagram itself, for a 3-dimensional
+simplex
+where the center vertex in the diagram represents the (unique) vertex of
+the tetrahedron which is not on the facet we project to. Similarly, here are
+
+5.2 Schlegel Diagrams
+135
+the drawings for the 3-dimensional cube.
+Next we consider the 3-dimensional prism (the product of a triangle with
+a 1-polytope): this has nonisomorphic facets, and thus we get diﬀerent
+Schlegel diagrams for points of view beyond diﬀerent facets (a square facet
+and a triangle facet).
+And ﬁnally, here is an attempt to illustrate how you construct the Schlegel
+diagram of a lifted pile of boxes, based on the big square facet on its top.
+The drawing is not metrically correct in any sense — just an attempt
+to understand the geometric situation. Speciﬁcally, we go for the Schlegel
+
+136
+5. Schlegel Diagrams for 4-Polytopes
+diagram of eP3(6, 4), from a point of view “above the polytope”:
+Now we go for the 3-dimensional Schlegel diagrams for 4-dimensional
+polytopes: these are all the “pictures” of 4-polytopes you will get! For
+example, here is (a 2-dimensional drawing of) the (3-dimensional) Schlegel
+diagram of the 4-dimensional simplex,
+where the center vertex in the diagram represents the (unique) vertex of
+the 4-simplex which is not on the tetrahedron we project to; here is the
+drawing for the 4-cube,
+
+5.2 Schlegel Diagrams
+137
+and here’s the Schlegel diagram for a product of two simplices P = ∆2×∆2,
+a decomposition of a triangular prism into ﬁve triangular prisms — compare
+this to our description in Example 0.5.
+We close with an attempted sketch of the Schlegel diagram of a 4-dimen-
+sional lifted pile of boxes, namely eP4(2, 2, 2).
+Although this sketch is quite sketchy, the picture might try to tell you about
+the combinatorial structure of (the Schlegel diagram of) the 4-polytopes
+eP4(z1, z2, z3). In fact, from the Schlegel diagram (compare also to the 3-
+dimensional case) we see that eP4(z1, z2, z3) has exactly z1z2z3 + 7 facets.
+The seven “big ones” are the big cubical facet on which the diagram is
+based and the six 3-dimensional facets that are lifted piles of cubes: two
+copies of eP2(z1, z2) at the bottom and the top of the diagram, two copies
+of eP2(z1, z3) at the front and the back of the diagram, and two copies
+of eP2(z2, z3) at the left and right sides of the Schlegel diagram. Between
+these six big facets, we have the subcomplex formed by z1z2z3 little cubes,
+which is isomorphic to the pile P3(z1, z2, z3) from which we started the
+construction.
+Make sure that you “see” this: it will be useful later (in Section 8.2)
+when we study the lifted piles of cubes again. More interesting structure
+connected with the “piles of cubes” polytopes constructed and studied here
+has recently been uncovered by Athanasiadis [25].
+
+138
+5. Schlegel Diagrams for 4-Polytopes
+5.3
+d-Diagrams
+Schlegel diagrams were studied extensively around the turn of this century;
+however, no one realized that there is a problem: not everything that “looks
+like” a Schlegel diagram actually is one. (See the notes below.) Now we
+deﬁne looks like.
+Deﬁnition 5.7.
+A d-diagram is a polytopal subdivision D of a d-polytope,
+P = |D| ⊆Rd, such that G ∩∂P is a face of P for each G ∈D.
+A d-diagram D is simplicial if |D| and all the polytopes in D are sim-
+plices. The diagram is simple if every vertex of |D| is contained in exactly
+d diﬀerent d-polytopes of D, and every other vertex of D is contained in
+exactly d + 1 diﬀerent d-polytopes in D.
+Check that every Schlegel diagram of a d-polytope is a (d −1)-diagram!
+We deﬁne the face poset L(D), and combinatorial equivalence, of d-diagrams
+as a special case of the deﬁnitions for polyhedral complexes. With this, a
+Schlegel (d −1)-diagram D(P, F) is simplicial, respectively simple (accord-
+ing to Deﬁnition 5.7), if and only if the polytope P is simplicial, respectively
+simple. In fact, a diagram D is simplicial if and only if its face lattice bL(D)
+“looks like” the face lattice of a simplicial polytope, in that all the lower
+intervals [∅, G] are boolean for G̸ = ˆ1; similarly, D is simple if and only if
+all upper intervals [G, ˆ1] are boolean for G̸ = ∅.
+Here are a few trivial examples: a Schlegel diagram (of a triangular
+prism), a 2-diagram that is not a Schlegel diagram, and a polytopal subdi-
+vision that is not a 2-diagram.
+We note that the question of whether a given d-diagram is a Schlegel
+diagram can be reduced to a linear programming problem (Exercise 5.2)
+— but the question of whether it is combinatorially equivalent to a Schlegel
+diagram is much harder; the task can be split into the enumeration problem
+for oriented matroid spheres, and the oriented matroid realizability problem
+(see the notes at the end of this lecture). So, the following is a decidedly
+nontrivial theorem, accompanied by a trivial proof.
+Theorem 5.8.
+Every 2-diagram is combinatorially equivalent to a Schlegel diagram.

@@ -1,0 +1,298 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 2. Faces of Polytopes
+현재 소단원: 2.3 Polarity
+직전 소단원: 「2.2 The Face Lattice」
+[본문]
+2.3 Polarity
+59
+of P and Q. In other words, P ∼= Q if and only if P and Q deﬁne isomorphic
+cell complexes (CW-balls) — see Munkres [418] or Bj¨orner [89, Sect. 12]
+[96, Sect. 4.7] for these concepts.
+2.3
+Polarity
+We proceed to construct polar polytopes: this is what (nearly) everybody
+else calls the “dual” of a polytope. We will use the term “polar” in or-
+der to distinguish polarity from duality in the sense of (oriented) matroid
+theory, which we will see later in Lecture 6 in the form of Gale diagrams,
+the Lawrence construction, and others. (In this, we follow the conventions
+of [96, pp. 44–45].)
+A key observation one should not miss is the step into dual space we
+take in this section. Equivalently, one could just ﬁx a scalar product on Rd,
+and this way we could construct a polar polytope in the same space as the
+original. However, there is a lot of choice in any case because the location
+of the origin is essential for our construction. If we wanted to avoid this, we
+would have to linearize, and develop “cone polarity” — using some methods
+of Lecture 1. We will not do this here (in order to keep the principle of
+making this a lecture on polytopes), but see Exercise 2.13.
+Lemma 2.8.
+Let P be a polytope in Rd. Then the following conditions
+are equivalent for y ∈P.
+(i) y is not contained in a face of P of dimension smaller than d,
+(ii) if ay = a0 and a̸ = 0, then ax ≤a0 is not valid for P,
+(iii) y can be represented in the form y = Pd
+i=0 λixi for d + 1 aﬃnely
+independent points x0, . . . , xd ∈P and for parameters λi > 0 with
+Pd
+i=0 λi = 1,
+(iv) y can be represented as y =
+1
+d+1
+Pd
+i=0 xi for d+1 aﬃnely independent
+points x0, . . . , xd ∈P.
+Proof. Part (i) implies that P is full-dimensional. From this we get that
+part (ii) holds: if ax ≤a0 were valid for P, then y would be contained in
+the face P ∩{x ∈Rd : ax = a0} of smaller dimension. Conversely, if part
+(ii) holds, then no inequality can deﬁne a facet that contains y.
+Part (iv) trivially implies part (iii), and from this we get part (ii) by an
+easy calculation:
+a0 = ay =
+d
+X
+i=0
+λiaxi ≤
+d
+X
+i=0
+λia0 = a0.
+
+60
+2. Faces of Polytopes
+This can hold only if axi = a0 holds for all i, so either a = 0, or the
+points xi are not aﬃnely independent.
+Now assume that part (ii) holds. We write P in the form P = P(A, z).
+No equality ax = a0 with a̸ = 0 is valid for P, so P is full-dimensional. We
+claim that for every u ∈Rd we have y + αu ∈P, if α > 0 is small enough.
+In fact, this is true unless one of the inequalities that deﬁne P is satisﬁed
+with equality for y, which is excluded by part (ii). But now we can choose
+d + 1 possible α-values for u = e1, . . . , ed, −(e1 + . . . + ed), let α′ > 0 be
+the minimum of those, and write
+y =
+1
+d + 1 {(y −α′(e1 + . . . + ed)) + (y + α′e1) + . . . + (y + α′ed)} ,
+which is a representation of the desired form.
+If the conditions of Lemma 2.8 are satisﬁed for y, we say that y is an
+interior point of P. Moreover, we use the notation int(P) for the interior
+of P, which is the set of all interior points of P. (It is easy to verify that
+this coincides with the usual (topological) deﬁnition of the interior of the
+point set P ⊆Rd.)
+The problem is that the interior of a polytope is not invariant under
+aﬃne equivalence of polytopes: the center of a triangle is an interior point
+if the triangle is embedded in R2, but not if it is embedded in R3. In fact,
+int(P) = ∅if P is not full-dimensional in Rd.
+Thus, we deﬁne the relative interior relint(P) of a polytope, deﬁned
+as the interior of P with respect to the embedding of P into its aﬃne
+hull aﬀ(P), in which P is full-dimensional. Analogous to Lemma 2.8, the
+following lemma characterizes relative interior points of P.
+Lemma 2.9.
+Let P be a polytope of dimension k := dim(P) in some Rd
+(k ≤d). Then the following conditions are equivalent for y ∈P.
+(i) y is not contained in a proper face of P,
+(ii) if ax ≤a0 is valid for P, with equality for y, then ax = a0 holds for
+all x ∈P,
+(iii) y can be represented in the form y = Pk
+i=0 λixi for k + 1 aﬃnely
+independent points x0, . . . , xk ∈P and for parameters λi > 0, with
+Pk
+i=0 λi = 1,
+(iv) y can be represented as y =
+1
+k+1
+Pk
+i=0 xi for k + 1 aﬃnely indepen-
+dent points x0, . . . , xk ∈P.
+Note that if P is nonempty, then its relative interior contains a point,
+relint(P)̸ = ∅. To see this, we can take the barycenter of the vertex set of P,
+as y :=
+1
+N
+PN
+i=1 vi for vert(P) = {v1, . . . , vN}, or the barycenter of any
+set of dim(P)+1 aﬃnely independent points (e.g., vertices) in P according
+to Lemma 2.9(iv).
+
+2.3 Polarity
+61
+Furthermore, we get a decomposition of P into a disjoint union of the
+relative interiors of its faces, from the characterization of Lemma 2.9(i):
+P =
+]
+F ∈L(P )
+relint(F).
+For many problems, in particular for the polarity construction we want
+to do now, it is convenient to assume that 0 ∈int(P) without loss of
+generality (“w.l.o.g.”). This can be achieved, if P is nonempty, by an aﬃne
+map. In fact, for this we project to aﬀ(P) and then translate any interior
+point to 0. Now it is easy to see (with Lemma 2.8) that P satisﬁes this
+condition if and only if it can be represented as P = P(A, 1).
+Deﬁnition 2.10.
+For any subset P ⊆Rd, the polar set is deﬁned by
+P ∆:= {c ∈(Rd)∗: cx ≤1 for all x ∈P} ⊆(Rd)∗.
+The following shows a convex pentagon P in the plane, determined by
+its ﬁve vertices, and its polar P ∆, a pentagon given by ﬁve inequalities.
+2
+3
+2
+1
+5
+4
+3
+1
+5
+4
+P
+P ∆
+Clearly, the construction of the polar can be iterated, and thus we get
+the polar of the polar, or double-polar, as
+P ∆∆= {y ∈Rd : cx ≤1 for all x ∈P implies cy ≤1, for c ∈(Rd)∗},
+where we have identiﬁed Rd and (Rd)∗∗in the natural way. Now let’s ex-
+amine the nearly obvious (?) basic properties of the polar and double-polar
+constructions.
+
+62
+2. Faces of Polytopes
+Theorem 2.11.
+(i) P ⊆Q implies P ∆⊇Q∆and P ∆∆⊆Q∆∆,
+(ii) P ⊆P ∆∆,
+(iii) P ∆and P ∆∆are convex,
+(iv) O ∈P ∆, and 0 ∈P ∆∆,
+(v) if P is a polytope and 0 ∈P, then P = P ∆∆,
+(vi) if a polytope P with 0 ∈int(P) is given by P = conv(V ), then
+P ∆
+=
+{a : aV ≤1l },
+(vii) if a polytope P with 0 ∈int(P) is given by P = P(A, 1), then
+P ∆= {cA : c ≥O, c1 = 1}.
+In part (vi), the representation P = conv(V ) means that P is a polytope,
+and the representation P = P(A, 1) in part (vii) implies that 0 ∈int(P).
+Extending the deﬁnition of convex hulls and inequality systems to the dual
+space (i.e., for row vectors), the statements of (vi) and (vii) can be rewritten
+and combined as
+P ∆= conv(A) = P(V, 1l ).
+Proof. Parts (i) to (iv) we can safely leave to the reader: these are routine
+exercises that should not need note paper.
+For part (v), we rely on the conscientious reader to get his or her note
+pad and do the proof. It also follows from part (vi), for which we compute
+P ∆
+=
+{a : ax ≤1 for all x ∈P}
+=
+{a : av ≤1 for all v ∈V },
+where for the last equality “⊆” is trivial, while “⊇” follows from convexity
+(or from a trivial computation).
+For part (vii), we compute
+P ∆
+=
+{a : ax ≤1 for all x : Ax ≤1}
+=
+{cA : c ≥O, c1 = 1},
+where for the last equality “⊇” follows from a simple computation (cA)x =
+c(Ax) ≤c1 = 1, while “⊆” is a little harder. For this note that Ax ≤1 has
+a solution. Thus by Farkas lemma III the validity of ax ≤1 implies that
+there exists a c′ ≥O with c′A = a and c′1 ≤1. Now since P is bounded,
+there is no x with Ax ≤−1, otherwise x̸ = 0 and λx is in P for all λ ≥0.
+
+2.3 Polarity
+63
+From this, by Farkas lemma I, there exists a c′′ ≥O with c′′A = O and
+c′′1 > 0. With this we can put
+c := c′ + 1 −c′1
+c′′1
+c′′,
+which satisﬁes c ≥O, cA = c′A = a, and c1 = c′1 + (1 −c′1) = 1.
+For illustration of polarity, we also refer the reader to the “classical”
+pairs of the (regular) cube and octahedron, as sketched in Example 0.4,
+and of the regular dodecahedron and icosahedron — assuming that they
+are represented in such a way that 0 is the center of symmetry. Furthermore,
+the polar of any simplex is a simplex (Exercise 2.12).
+In fact, it turns out that the combinatorial structure of P ∆is independent
+of the exact embedding in Rd, as long as we have 0 ∈int(P), as we will see
+from the next theorem.
+For this, we assume that P ⊆Rd is again a d-polytope with 0 in its
+interior. In this situation we study, for all faces F of P, the subsets of P ∆
+of the form
+F 3 := {c ∈(Rd)∗:
+cx ≤1 for all x ∈P,
+cx = 1 for all x ∈F}
+⊆(Rd)∗.
+Theorem 2.12.
+Assume that P = conv(V ) = P(A, 1) is a polytope
+in Rd, and that
+F = conv(V ′) = {x ∈Rd : A′′x ≤1, A′x = 1}
+is a face of P, with V = V ′⊎V ′′ and A = A′⊎A′′.
+(Here we need that all the inequalities ax ≤1 in the system “Ax ≤1”
+that satisfy F ⊆{x ∈Rd : ax = 1} are included in “A′x ≤1.”)
+Then
+F 3 = {c′A′ : c′ ≥O, c′1 = 1} = {a : aV ′′ ≤1l , aV ′ = 1l }.
+Proof. We compute
+F 3
+=
+{a : ax ≤1 for all x ∈P, ax = 1 for all x ∈F}
+=
+{a : av ≤1 for all v ∈V, av = 1 for all v ∈V ′}
+=
+{a : av ≤1 for all v ∈V ′′, av = 1 for all v ∈V ′}
+=
+{a : aV ′′ ≤1l , aV ′ = 1l }.
+For the other half, we use the description of P ∆in parts (vi) and (vii) of
+Theorem 2.11, and get
+F 3
+=
+{a : ax ≤1 for all x ∈P, ax = 1 for all x ∈F}
+=
+{cA : c ≥O, c1 = 1, cAx = 1 for all x ∈F}
+=
+{c′A′ : c′ ≥O, c′1 = 1},
+
+64
+2. Faces of Polytopes
+where for the last equality, “⊇” is clear, while for “⊆” we have to work.
+In fact, for this we can choose some x ∈relint(F), which satisﬁes A′x = 1
+and A′′x < 1, and rewrite cA = c′A′ + c′′A′′. Then by
+1 = (cA)x = (c′A′+c′′A′′)x = c′(A′x)+c′′(A′′x) ≤c′1+c′′1 = c1 = 1
+we have c′′(A′′x) = c′′1, which by A′′x < 1 implies c′′ = O.
+Corollary 2.13.
+Let P be a polytope with 0 ∈int(P), and let F, G ∈
+L(P) be faces of P. Then
+(i) F 3 is a face of P ∆,
+(ii) F 33 = F, and
+(iii) F ⊆G holds if and only if F 3 ⊇G3.
+Corollary 2.14.
+The face lattice of P ∆is the opposite of the face lattice
+of P:
+L(P ∆) ∼= L(P)op.
+This, in particular, completes the proof of Theorem 2.7, the last two parts
+of which we had deferred (remember?). It means that for every statement
+about the combinatorial structure of polytopes, there is a “polar state-
+ment,” where the translation reverses inclusion of faces, and interchanges
+∅= ˆ0
+←→
+ˆ1 = P
+vertices
+←→
+facets
+edges
+←→
+ridges
+. . .
+←→
+. . .,
+etc.
+Note that polarity also identiﬁes the face lattices of facets with (the oppo-
+sites of) the face lattices of vertex ﬁgures. Finally, it says that the “polar”
+combinatorial descriptions of polytopes, as V-polytopes in terms of vertices,
+and as H-polytopes in terms of facets, are logically equivalent.
+Nevertheless, the metric properties of the polarity construction depend
+on the location of 0 in P, whereas the combinatorial ones do not. This
+motivates to deﬁne that two polytopes P and Q are combinatorially polar
+if L(P) ∼= L(Q)op. Thus the construction of P ∆establishes the existence
+of a combinatorially polar polytope for every polytope P.
+2.4
+The Representation Theorem for Polytopes
+This section has a (by now) simple task: to state and prove the general
+representation theorem for polytopes. There is no real work left to do: we
+have assembled all the ingredients, notably Fourier-Motzkin elimination,
+the Farkas lemmas, Carath´eodory’s theorem, and polarity. One new term
+appears in its statement: the k-skeleton of a polytope is the union of its
+k-dimensional faces.

@@ -1,0 +1,36 @@
+[문서 맥락]
+책: Lectures on Polytopes / 저자: Günter M. Ziegler
+챕터: 8. Shellability and the Upper Bound Theorem
+현재 소단원: 8.ex Problems and Exercises (분할 part 2)
+직전 소단원: 「8.6 The g-Theorem and Its Consequences」
+[연습문제]
+9
+Fiber Polytopes, and Beyond
+The secondary polytopes of Gel’fand, Kapranov & Zelevinsky [231] are a
+quite recent development that grew out of their theory of “A-hypergeo-
+metric functions.” After Izrail M. Gel’fand and Andrei Zelevinsky presented
+the miraculous construction at the 1989 Symposium on Combinatorics and
+Geometry in Stockholm, a lot of eﬀort was put into understanding what is
+going on geometrically. It seems that the deﬁnitive answer — unexpectedly
+simple — is the one supplied by Louis Billera and Bernd Sturmfels [78,
+79, 534], who introduced the ﬁber polytope of a projection of polytopes and
+showed that secondary polytopes arise in the special case where we project
+the (n −1)-simplex to a given polytope with n vertices.
+The main goal in this lecture is to develop geometric intuition for the ﬁber
+polytope construction. Many interesting examples have been studied, and
+among them we will concentrate on the construction of the permutahedron
+and the associahedron as ﬁber polytopes. With “ﬁber polytopes intuition”
+we then construct the permuto-associahedra: nice new polytopes proposed
+by Kapranov [313] as combinatorial objects and realized as polytopes in
+Reiner & Ziegler [453].
+So ﬁber polytopes help to solve special cases of a diﬃcult general prob-
+lem: the construction of polytopes with speciﬁed combinatorics. Using the
+Lawrence construction (Lecture 6), one can see that the solution for any
+speciﬁed face lattice is diﬃcult: this “algorithmic Steinitz problem” is as
+diﬃcult as the solution of general polynomial systems over the reals; see [96,
+p. 407]. (The inverse problem, the complete description of the face lattice
+of a given polytope, is not trivial either: see Lecture 1 and Exercise 9.0).
+ G.M. Ziegler, Lectures on Polytopes, Graduate Texts in Mathematics 152,   
+DOI 10.1007/978-1-4613-8431-1_10, © Springer Science+Business Media New York 2007 
+ 
+291
