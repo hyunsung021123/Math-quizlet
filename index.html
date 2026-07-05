@@ -352,8 +352,18 @@ p.prose{ margin:0; }
 .deck-meter{ display:flex; flex-direction:column; align-items:center; gap:6px; min-width:0; }
 .deck-count{ font-family:var(--mono); font-size:.72rem; color:var(--ink-faint); letter-spacing:.04em; }
 .deck-count b{ color:var(--primary); font-weight:600; }
-.deck-bar{ width:100%; max-width:220px; height:4px; border-radius:999px; background:var(--line); overflow:hidden; }
-.deck-bar-fill{ height:100%; border-radius:999px; background:var(--primary); transition:width .3s ease; }
+.deck-bar{ position:relative; width:100%; max-width:220px; height:4px; border-radius:999px; background:var(--line); cursor:pointer; touch-action:none; transition:height .12s ease; }
+.deck-bar:hover, .deck-bar.is-scrubbing{ height:8px; }
+.deck-bar-fill{ height:100%; border-radius:999px; background:var(--primary); transition:width .3s ease; pointer-events:none; }
+.deck-bar-thumb{
+  position:absolute; top:50%; left:0; width:12px; height:12px; margin-left:-6px;
+  border-radius:50%; background:var(--primary); border:2px solid var(--surface);
+  box-shadow:0 1px 3px rgba(27,35,51,.25); transform:translateY(-50%);
+  opacity:0; pointer-events:none; transition:left .3s ease, opacity .12s ease;
+}
+.deck-bar:hover .deck-bar-thumb, .deck-bar.is-scrubbing .deck-bar-thumb{ opacity:1; }
+.deck-bar.is-scrubbing{ cursor:grabbing; }
+.deck-bar.is-scrubbing .deck-bar-fill, .deck-bar.is-scrubbing .deck-bar-thumb{ transition:none; }
 
 @media (max-width:520px){
   .nav-btn{ padding:11px 13px; }
@@ -401,7 +411,10 @@ p.prose{ margin:0; }
     </button>
     <div class="deck-meter">
       <div class="deck-count" id="deckCount"></div>
-      <div class="deck-bar"><div class="deck-bar-fill" id="deckFill"></div></div>
+      <div class="deck-bar" id="deckBar" role="slider" tabindex="0" aria-label="카드 위치" aria-valuemin="1">
+        <div class="deck-bar-fill" id="deckFill"></div>
+        <div class="deck-bar-thumb" id="deckThumb"></div>
+      </div>
     </div>
     <button class="nav-btn primary" id="navNext" type="button">
       <span class="nav-btn-label" id="navNextLabel">다음</span><span aria-hidden="true">→</span>
@@ -758,7 +771,9 @@ p.prose{ margin:0; }
   var navNext  = document.getElementById('navNext');
   var navNextLabel = document.getElementById('navNextLabel');
   var deckCount = document.getElementById('deckCount');
+  var deckBar   = document.getElementById('deckBar');
   var deckFill  = document.getElementById('deckFill');
+  var deckThumb = document.getElementById('deckThumb');
 
   /* ---------- helpers ---------- */
   function esc(s){
@@ -1139,10 +1154,24 @@ p.prose{ margin:0; }
     var n = deckNavInfo();
     deckNav.hidden = false;
     deckCount.innerHTML = '<b>' + (n.pos + 1) + '</b> / ' + n.len;
-    deckFill.style.width = n.len ? (((n.pos + 1) / n.len) * 100) + '%' : '0%';
+    var pct = n.len ? (((n.pos + 1) / n.len) * 100) : 0;
+    deckFill.style.width = pct + '%';
+    deckThumb.style.left = pct + '%';
+    deckBar.setAttribute('aria-valuemax', n.len);
+    deckBar.setAttribute('aria-valuenow', n.pos + 1);
     navPrev.disabled = !n.hasPrev;
     navNext.disabled = !n.hasNext;
     navNextLabel.textContent = n.nextLabel;
+  }
+
+  /* jump straight to an arbitrary card in the current deck (used by the seek bar) */
+  function goToIndex(idx){
+    if(!state.deck.length) return;
+    idx = Math.max(0, Math.min(state.deck.length - 1, idx));
+    if(idx === state.cardIndex) return;
+    var dir = idx > state.cardIndex ? 'fwd' : 'back';
+    state.cardIndex = idx;
+    renderCard(dir);
   }
 
   function goNext(){
@@ -1239,6 +1268,36 @@ p.prose{ margin:0; }
 
   navPrev.addEventListener('click', goPrev);
   navNext.addEventListener('click', goNext);
+
+  /* ---------- seek bar: click or drag to jump to any card ---------- */
+  function indexFromBarEvent(ev){
+    var rect = deckBar.getBoundingClientRect();
+    var frac = rect.width ? (ev.clientX - rect.left) / rect.width : 0;
+    frac = Math.max(0, Math.min(1, frac));
+    return Math.round(frac * (state.deck.length - 1));
+  }
+  var scrubbing = false, scrubRaf = null;
+  deckBar.addEventListener('pointerdown', function(ev){
+    if(state.deck.length < 2) return;
+    scrubbing = true;
+    deckBar.classList.add('is-scrubbing');
+    deckBar.setPointerCapture(ev.pointerId);
+    goToIndex(indexFromBarEvent(ev));
+  });
+  deckBar.addEventListener('pointermove', function(ev){
+    if(!scrubbing || scrubRaf) return;
+    scrubRaf = requestAnimationFrame(function(){
+      scrubRaf = null;
+      goToIndex(indexFromBarEvent(ev));
+    });
+  });
+  function stopScrub(){
+    if(!scrubbing) return;
+    scrubbing = false;
+    deckBar.classList.remove('is-scrubbing');
+  }
+  deckBar.addEventListener('pointerup', stopScrub);
+  deckBar.addEventListener('pointercancel', stopScrub);
 
   document.addEventListener('keydown', function(ev){
     if(deckNav.hidden) return;
