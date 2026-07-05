@@ -1,0 +1,181 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. Polytopes, Polyhedra, and Cones",
+    "source": "Ziegler, Lectures on Polytopes (GTM 152), §1.1 The \"Main Theorem\"",
+    "overall_goal": "폴리토프의 두 표현 — 꼭짓점으로 주는 $V$-표현과 부등식(벽)으로 주는 $H$-표현 — 이 같은 대상을 가리킨다는 주정리(Main Theorem)를 이해하고, 이를 폴리헤드론(Theorem 1.2)과 뿔(cone, Theorem 1.3)로 일반화한 뒤, 동차화(homogenization)와 Fourier–Motzkin 소거라는 두 무기로 증명을 어떻게 조직하는지 큰 그림을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.4 The Farkas Lemma",
+      "step1_big_picture": {
+        "context": "1.3에서 Fourier–Motzkin(FM) 소거로 주정리 1.1–1.3을 완결했다. Kuhn의 관찰(그리고 이 절의 핵심): FM 소거가 종료된다는 사실만으로 우리는 이미 Farkas 보조정리의 증명을 다 해 둔 셈이다. Farkas 보조정리는 '부등식계가 풀리는가'를 특성화하는 극히 중요한 결과로, 대안정리(theorem of the alternative)·전치정리·쌍대성정리·good characterization·분리정리 등 여러 옷을 입고 나타나지만 서로 쉽게 변환된다. 이 절은 그 네 가지 버전(Prop 1.7–1.10)을 세우는데, 증명 도구는 오롯이 이전 절들이다: 동차화 $Q=P((-z,A),0)$는 1.1의 결합뿔 $C(P)$ 그 자체이고, FM 소거의 각 단계가 '두 유효 부등식의 양의 결합'을 만든다는 1.2–1.3의 관찰이 인증서(certificate)를 낳는다. 앞으로 선형계획 쌍대성(§3)과 분리정리의 뿌리가 여기에 있다.",
+        "hidden_intuition": "Farkas 보조정리의 알맹이는 '대안(alternative)'이다: 계 $Ax\\le z$는 해를 갖거나, 아니면 '불능 인증서'를 갖는다 — 즉 비음 계수 $c\\ge0$로 부등식들을 결합해 $0=(cA)x\\le cz<0$, 곧 '$0\\le$ 음수'라는 모순을 만든다. 왜 불능일 때 그런 인증서가 항상 있는가? FM 소거가 바로 '비음 결합을 만드는' 과정이기 때문이다. 모든 변수를 소거하면 상수들 사이의 부등식만 남고, 불능은 '$0\\le$(음수)' 형태로 표면에 떠오르며, 그 결과를 만든 비음 부기행렬 $C=C_1\\cdots C_d$가 곧 인증서 $c$다. 요컨대 Farkas는 'FM 소거는 늘 해 아니면 모순을 찾아내고, 그 모순은 비음 결합이다'라는 문장이다. 메타 관점: 대안·전치·쌍대·good characterization·분리 등 'Farkas형' 정리들은 근본적으로 같은 사실이 옷만 갈아입은 것이며, 등식↔두 부등식, 자유변수↔두 비음변수의 차, 부호제약↔부등식, 슬랙변수 도입 같은 표준 재작성으로 서로 넘나든다. 기하적으로는 분리(separation)다: $x\\notin\\mathrm{conv}(V)+\\mathrm{cone}(Y)$이면 초평면 하나로 $x$를 껍질에서 떼어낼 수 있다 — 유한차원 Hahn–Banach. 그리고 'good characterization'의 맛: 해가 있으면 해 벡터가, 없으면 Farkas 인증서가 각각 짧고 검증 가능한 증거가 된다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  -1,
+                  1
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                5,
+                3
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                1,
+                5
+              ],
+              "to": [
+                6,
+                0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                3.5,
+                2.5
+              ],
+              "to": [
+                4.3,
+                3.3
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.2,
+                1.2
+              ],
+              "text": "conv(V)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                5.25,
+                3.1
+              ],
+              "text": "x"
+            },
+            {
+              "shape": "label",
+              "at": [
+                4.4,
+                3.5
+              ],
+              "text": "a"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.7,
+                4.7
+              ],
+              "text": "ay = alpha"
+            }
+          ],
+          "caption": "Farkas IV(분리)의 그림: $x\\notin\\mathrm{conv}(V)$일 때, 모든 꼭짓점이 $av_i\\le\\alpha$를 만족하지만 $ax>\\alpha$인 초평면(법선 $a$)이 $x$를 껍질에서 분리한다. 유한차원 Hahn–Banach."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "참고 (Farkas 보조정리라는 '한 사실의 여러 얼굴')",
+          "formal_statement": "Farkas 보조정리는 부등식계의 풀림(solvability)을 특성화하며, 표준형(등식/부등식/엄격부등식, 비음/양/자유 변수 등)에 따라 여러 변형이 있다. 'Farkas형' 정리를 서술하는 방식도 여럿이다: (a) 대안정리 — 한 계가 해를 가짐 $\\Leftrightarrow$ 다른 한 계가 해를 갖지 않음; (b) 전치정리 — 둘째 계는 첫째의 행렬·벡터를 전치해 얻어짐; (c) 쌍대성정리 — 선형계획 쌍대성이 Farkas형이다; (d) good characterization — 해가 있으면 해 벡터가, 없으면 쌍대 벡터(인증서)가 그 사실을 증명한다; (e) 분리정리 — (d)의 쌍대로, 점이 볼록–원뿔 껍질 밖에 있으면 선형범함수로 분리된다. 분리형은 볼록체(convex body)에도 성립하며, 무한차원판이 함수해석의 Hahn–Banach 정리다. 아래 네 버전은 모두 FM 소거(1.2–1.3)로 증명되고 서로 변환된다."
+        },
+        {
+          "type": "Proposition",
+          "name": "Proposition 1.7 (Farkas lemma I)",
+          "formal_statement": "$A\\in\\mathbb{R}^{m\\times d}$, $z\\in\\mathbb{R}^m$에 대해 다음 중 정확히 하나가 성립한다: (1) $Ax\\le z$인 점 $x\\in\\mathbb{R}^d$가 존재한다; (2) $c\\ge O$, $cA=O$, $cz<0$인 행벡터 $c\\in(\\mathbb{R}^m)^{*}$가 존재한다.",
+          "idea_behind_proof": "인증서는 마법이 아니라 FM 소거의 부기(bookkeeping)다. 계를 1.1의 동차화로 뿔 $Q=P((-z,A),0)$로 올리면 '$Ax\\le z$가 풀림'은 '$Q$가 $x_0=1$인 점을 가짐'과 같아진다. 이제 $x_1,\\dots,x_d$를 FM으로 모두 소거한다. 1.2–1.3에서 보았듯 각 소거 단계의 새 부등식은 원래 부등식들의 (행이 최대 둘 관여하는) 양의 결합이므로, 그 단계를 비음 행렬 $C_i$(행마다 비음 성분 최대 2개)로 기록할 수 있다. 이들을 곱하면 전체 결합이 하나의 비음 행렬 $C=C_1\\cdots C_d$로 요약되고, 불능일 때 남는 '$0\\le$ 음수'를 만든 그 행이 바로 인증서 $c$다.",
+          "proof_steps": [
+            "1단계(양립 불가): 두 조건이 동시에 성립하면 $0=Ox=(cA)x=c(Ax)\\le cz<0$ ($c\\ge O$와 $Ax\\le z$ 사용)이 되어 모순. 따라서 둘이 함께 성립할 수는 없다.",
+            "2단계(동차화): $Q:=P\\big((-z,A),0\\big)=\\{(x_0,x):Ax-x_0 z\\le O\\}$ (H-cone, 1.1의 $C(P)$). $Ax\\le z$가 풀림 $\\Leftrightarrow$ $Q$가 $x_0=1$인 점을 가짐.",
+            "3단계(소거): $x_1,\\dots,x_d$를 차례로 FM 소거한다. 각 단계 $\\mathrm{elim}_i P(D,0)=P(D^{/i},0)$의 새 행은 $D$의 행 최대 2개의 양의 결합이라 $D^{/i}=C_i D$($C_i\\ge O$)로 쓰인다. 반복하면 $\\mathrm{elim}_1\\cdots\\mathrm{elim}_d(Q)=P\\big(C(-z,A),0\\big)$, $C=C_1\\cdots C_d\\ge O$. 남은 변수는 $x_0$뿐이라 모든 부등식은 $\\gamma_{i0}x_0\\le0$ 꼴이다.",
+            "4단계(불능이면 인증서): (1)이 거짓, 즉 $P=\\varnothing$이면 $Q$에 $x_0>0$인 점이 없으므로 $Q\\subseteq\\{x_0\\le0\\}$, 따라서 소거된 뿔도 $\\{x_0\\le0\\}$에 포함된다. 이는 어떤 $\\gamma_{i0}>0$이 있어 $\\gamma_{i0}x_0\\le0$이 있음을 뜻한다. 그 행은 $C$의 어떤 비음 행 $c$에 대해 $c(-z,A)=(-cz,cA)=(\\gamma_{i0},O)$, 즉 $cA=O$이고 $cz=-\\gamma_{i0}<0$. 이 $c\\ge O$가 (2)의 인증서다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "Proposition 1.8 (Farkas lemma II)",
+          "formal_statement": "$A\\in\\mathbb{R}^{m\\times d}$, $z\\in\\mathbb{R}^m$에 대해 다음 중 정확히 하나가 성립한다: (1) $Ax=z,\\ x\\ge0$인 점 $x\\in\\mathbb{R}^d$가 존재한다; (2) $cA\\ge O$, $cz<0$인 행벡터 $c\\in(\\mathbb{R}^m)^{*}$가 존재한다.",
+          "idea_behind_proof": "새 정리가 아니라 Farkas I을 표준 재작성 기법으로 갈아입힌 것이다. 등식 $Ax=z$는 $Ax\\le z$와 $-Ax\\le -z$ 두 부등식으로, 부호제약 $x\\ge0$은 $-x\\le0$으로 바꾸어 하나의 큰 부등식계로 만든 뒤 Farkas I을 적용한다. 그러면 나오는 쌍대 승수 $(c_1,c_2,b)\\ge0$에서 자유벡터 $c:=c_1-c_2$(두 비음벡터의 차)와 슬랙 $b\\ge0$($cA=b\\Rightarrow cA\\ge O$)이 자연스럽게 등장한다.",
+          "proof_steps": [
+            "1단계: $\\exists x:Ax=z,\\ x\\ge0 \\iff \\exists x:Ax\\le z,\\ (-A)x\\le -z,\\ -x\\le0 \\iff \\exists x:\\begin{pmatrix}A\\\\ -A\\\\ -I_d\\end{pmatrix}x\\le\\begin{pmatrix}z\\\\ -z\\\\ 0\\end{pmatrix}.$",
+            "2단계(FL I): 위가 거짓 $\\iff$ $\\exists(c_1,c_2,b)\\ge O:\\ (c_1,c_2,b)\\begin{pmatrix}A\\\\ -A\\\\ -I_d\\end{pmatrix}=O,\\ (c_1,c_2,b)\\begin{pmatrix}z\\\\ -z\\\\ 0\\end{pmatrix}<0.$",
+            "3단계(정리): 첫 등식은 $(c_1-c_2)A-b=O$, 둘째는 $(c_1-c_2)z<0$. $c:=c_1-c_2$(자유벡터), $b\\ge0$(슬랙)로 두면 $cA=b\\ge O$ 즉 $cA\\ge O$, 그리고 $cz<0$.",
+            "4단계: 따라서 (1)의 부정 $\\iff \\exists c:\\ cA\\ge O,\\ cz<0$, 곧 (2). 정확히 하나만 성립한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "Proposition 1.9 (Farkas lemma III, 저자의 최애 버전)",
+          "formal_statement": "$A\\in\\mathbb{R}^{m\\times d}$, $z\\in\\mathbb{R}^m$, $a_0\\in(\\mathbb{R}^d)^{*}$, $z_0\\in\\mathbb{R}$라 하자. 그러면 '$a_0 x\\le z_0$이 $Ax\\le z$를 만족하는 모든 $x$에 대해 유효하다'는 것은 다음 중 적어도 하나와 동치다: (i) $c\\ge O$이며 $cA=a_0$, $cz\\le z_0$인 $c$가 존재한다; (ii) $c\\ge O$이며 $cA=O$, $cz<0$인 $c$가 존재한다.",
+          "idea_behind_proof": "직관: 폴리헤드론에서 유효한 부등식은 (i) 정의 부등식들의 양의 결합이거나, (ii) 폴리헤드론이 공집합이라 아무 부등식이나 공허하게 유효한 경우(그땐 $Ox\\le-1$조차 양의 결합으로 얻어진다)뿐이다. 이 버전은 Farkas I을 특수경우로 포함한다: $a_0=O,\\ z_0=-1$로 두면 '$Ox\\le-1$이 항상 유효' $\\Leftrightarrow$ '$Ax\\le z$ 무해'가 된다. 증명은 Farkas I과 II를 두 번 적용해, (i)·(ii)가 모두 거짓이면 $P$ 안에 $a_0x>z_0$인 점을 실제로 만들어 유효성에 모순시킨다.",
+          "proof_steps": [
+            "1단계('if'): (i)이면 $a_0x=(cA)x=c(Ax)\\le cz\\le z_0$ ($c\\ge O,\\ Ax\\le z$). (ii)이면 Farkas I에 의해 $Ax\\le z$가 무해라 $P=\\varnothing$, 따라서 $a_0x\\le z_0$은 공허하게 유효.",
+            "2단계('only if', 대우): (i),(ii)가 모두 거짓이라 하자. 그러면 $bA=\\beta a_0,\\ bz<\\beta z_0$인 $(\\beta,b)\\ge(0,O)$이 없다(있다면 $\\beta>0$일 때 $c:=b/\\beta$로 (i), $\\beta=0$일 때 (ii)가 성립하기 때문).",
+            "3단계(FL I 적용): 위 부존재는 $\\exists w:\\ \\begin{pmatrix}-a_0\\\\ A\\end{pmatrix}w\\le\\begin{pmatrix}-z_0\\\\ z\\end{pmatrix}$, 즉 $Aw\\le z$이고 $a_0w\\ge z_0$인 $w$의 존재와 동치다.",
+            "4단계(FL II 적용): $\\lnot$(i)을 슬랙 $\\gamma$로 재작성해 FL II를 적용하면 $\\exists\\,y_0\\ge0,\\ y:\\ Ay\\le y_0 z,\\ a_0y>y_0 z_0$을 얻는다.",
+            "5단계(모순): $y_0>0$이면 $x:=y/y_0$가 $Ax\\le z,\\ a_0x>z_0$; $y_0=0$이면 $x:=w+y$가 $Ax=Aw+Ay\\le z,\\ a_0x=a_0w+a_0y>z_0$. 어느 쪽이든 $P$ 안에 $a_0x>z_0$인 점이 생겨 유효성에 모순. 따라서 (i) 또는 (ii). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "Proposition 1.10 (Farkas lemma IV, 분리정리)",
+          "formal_statement": "$V\\in\\mathbb{R}^{d\\times n}$, $Y\\in\\mathbb{R}^{d\\times n'}$, $x\\in\\mathbb{R}^d$라 하자. 다음 중 정확히 하나가 성립한다: (1) $\\mathbf{1}^{\\!\\top}t=1$, $x=Vt+Yu$인 $t,u\\ge0$이 존재한다(즉 $x\\in\\mathrm{conv}(V)+\\mathrm{cone}(Y)$); (2) $av_i\\le\\alpha$ ($\\forall i\\le n$), $ay_j\\le0$ ($\\forall j\\le n'$)이면서 $ax>\\alpha$인 행벡터 $(\\alpha,a)\\in(\\mathbb{R}^{d+1})^{*}$가 존재한다.",
+          "idea_behind_proof": "$x\\in\\mathrm{conv}(V)+\\mathrm{cone}(Y)$는 $\\begin{pmatrix}\\mathbf{1}&O\\\\ V&Y\\end{pmatrix}\\begin{pmatrix}t\\\\ u\\end{pmatrix}=\\begin{pmatrix}1\\\\ x\\end{pmatrix},\\ (t,u)\\ge0$ 꼴의 '비음 해' 문제라 곧장 Farkas II를 부를 수 있다. 그 쌍대가 정확히 분리 초평면이다: $\\alpha$는 절편, $-a$는 $x$-성분에 대응하는 쌍대변수다. 조건 $av_i\\le\\alpha$는 '초평면이 모든 꼭짓점 위(또는 위)에 있다', $ay_j\\le0$은 '모든 광선 방향으로 값이 커지지 않는다', $ax>\\alpha$는 '$x$만 초평면 반대편'을 뜻한다.",
+          "proof_steps": [
+            "1단계: (1) $\\iff \\exists(t,u)\\ge0:\\ \\begin{pmatrix}\\mathbf{1}&O\\\\ V&Y\\end{pmatrix}\\begin{pmatrix}t\\\\ u\\end{pmatrix}=\\begin{pmatrix}1\\\\ x\\end{pmatrix}$. 이는 Farkas II의 '$A'x'=z',\\ x'\\ge0$' 형태다.",
+            "2단계(FL II): (1)의 부정 $\\iff \\exists(\\alpha,-a):\\ (\\alpha,-a)\\begin{pmatrix}\\mathbf{1}&O\\\\ V&Y\\end{pmatrix}\\ge(O,O),\\ (\\alpha,-a)\\begin{pmatrix}1\\\\ x\\end{pmatrix}<0.$",
+            "3단계(전개): 첫 조건은 $\\alpha\\mathbf{1}-aV\\ge O$ (즉 $av_i\\le\\alpha\\ \\forall i$)와 $-aY\\ge O$ (즉 $ay_j\\le0\\ \\forall j$); 둘째 조건은 $\\alpha-ax<0$ (즉 $ax>\\alpha$).",
+            "4단계: 이는 정확히 (2)이므로, (1)과 (2) 중 하나만 성립한다. 기하적으로 $x\\notin P$이면 $P$를 떠받치고 $x$만 넘어가는 분리 초평면이 존재한다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "$\\mathbb{R}^2$의 계 (1) $x_1+x_2\\le1$, (2) $-x_1\\le-1$, (3) $-x_2\\le-1$이 해를 갖지 않음을 보이고, Farkas I의 인증서 $c\\ge O$ ($cA=O,\\ cz<0$)를 명시적으로 구하라.",
+          "hint": "$x_1\\ge1$과 $x_2\\ge1$을 (1)과 함께 놓고 모순을 찾아라. 인증서는 세 부등식을 어떤 비음 계수로 더하면 '$0\\le$ 음수'가 나오는지를 찾는 것과 같다. $cA=O$가 되도록 계수를 맞춰라.",
+          "solution": "(2),(3)에서 $x_1\\ge1,\\ x_2\\ge1$이므로 $x_1+x_2\\ge2$, 그런데 (1)은 $x_1+x_2\\le1$을 요구 — $2\\le1$ 모순이라 무해. 인증서: $a_1=(1,1),a_2=(-1,0),a_3=(0,-1)$, $z=(1,-1,-1)$. $c=(c_1,c_2,c_3)\\ge0$에 대해 $cA=(c_1-c_2,\\ c_1-c_3)=O\\Rightarrow c_2=c_1,\\ c_3=c_1$. $c=(1,1,1)$을 택하면 $cA=(0,0)$, $cz=1\\cdot1+1\\cdot(-1)+1\\cdot(-1)=-1<0$. 확인: 세 부등식을 그대로 더하면 $(x_1+x_2)+(-x_1)+(-x_2)\\le1-1-1$, 즉 $0\\le-1$이라는 모순 — 인증서가 이 모순을 만든 비음 결합이다. 일반화: 불능계의 Farkas 인증서는 '부등식들을 비음 계수로 더해 $0\\le$(음수)를 만드는 방법'이며, FM 소거가 이를 자동으로 찾아낸다."
+        },
+        {
+          "problem": "박스 $P=\\{x\\in\\mathbb{R}^2:\\ x_1\\le2,\\ x_2\\le3,\\ -x_1\\le0,\\ -x_2\\le0\\}$($=[0,2]\\times[0,3]$)에서 $a_0x=x_1+x_2\\le5$가 유효함을 확인하고, Farkas III (i)의 $c\\ge O$ ($cA=a_0,\\ cz\\le z_0$)를 구해 양의 결합으로 표현하라.",
+          "hint": "$P$가 공집합이 아니므로 (ii)가 아니라 (i)가 성립해야 한다. 어느 정의 부등식들을 더하면 $x_1+x_2$가 나오는지 보라. 상한 부등식들만 필요할 것이다.",
+          "solution": "$P$의 최댓값은 $(2,3)$에서 $x_1+x_2=5$이므로 $x_1+x_2\\le5$은 유효. 행: $a_1=(1,0),a_2=(0,1),a_3=(-1,0),a_4=(0,-1)$, $z=(2,3,0,0)$, $a_0=(1,1),z_0=5$. $c=(c_1,c_2,c_3,c_4)\\ge0$에 대해 $cA=(c_1-c_3,\\ c_2-c_4)=(1,1)$. $c=(1,1,0,0)$을 택하면 $cA=(1,1)=a_0$, $cz=1\\cdot2+1\\cdot3=5\\le5=z_0$. 즉 $x_1+x_2\\le5$은 $1\\cdot(x_1\\le2)+1\\cdot(x_2\\le3)$이라는 정의 부등식들의 양의 결합이다. 일반화: 비어 있지 않은 폴리헤드론에서 유효한 부등식은 항상 정의 부등식들의 비음 결합으로 '증명'되며, 그 계수 $c$가 유효성의 인증서다."
+        },
+        {
+          "problem": "삼각형 $P=\\mathrm{conv}\\{(0,0),(2,0),(0,2)\\}$과 점 $x=(2,2)$에 대해 $x\\notin P$임을 보이는 분리 부등식(Farkas IV의 $(\\alpha,a)$)을 하나 구하라. ($Y=\\varnothing$이므로 광선 조건은 공허하다.)",
+          "hint": "모든 꼭짓점에서 $av_i\\le\\alpha$, 점에서 $ax>\\alpha$가 되도록 법선 $a$를 잡아라. $a=(1,1)$을 시도해 꼭짓점 값들과 $ax$를 비교하고, 그 사이에서 $\\alpha$를 골라라.",
+          "solution": "$a=(1,1)$로 두면 꼭짓점 값 $a(0,0)=0,\\ a(2,0)=2,\\ a(0,2)=2$이라 최댓값은 $2$, 반면 $ax=a(2,2)=4$. $\\alpha=3$($2<\\alpha<4$)을 택하면 모든 꼭짓점이 $av_i\\le3$을 만족하고 $ax=4>3$이므로, 초평면 $x_1+x_2=3$이 $x$를 $P$에서 분리한다. 즉 $x_1+x_2\\le3$은 $P$의 모든 점이 만족하지만 $x=(2,2)$는 어긴다. 일반화: $x\\notin\\mathrm{conv}(V)+\\mathrm{cone}(Y)$이면 꼭짓점들을 떠받치고($av_i\\le\\alpha$) 광선 방향으로 커지지 않으며($ay_j\\le0$) $x$만 넘어서는($ax>\\alpha$) 분리 초평면이 존재한다."
+        }
+      ]
+    }
+  ]
+}

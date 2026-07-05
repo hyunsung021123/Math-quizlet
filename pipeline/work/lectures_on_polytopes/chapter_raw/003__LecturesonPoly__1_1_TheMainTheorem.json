@@ -1,0 +1,374 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. Polytopes, Polyhedra, and Cones",
+    "source": "Ziegler, Lectures on Polytopes (GTM 152), §1.1 The \"Main Theorem\"",
+    "overall_goal": "폴리토프의 두 표현 — 꼭짓점으로 주는 $V$-표현과 부등식(벽)으로 주는 $H$-표현 — 이 같은 대상을 가리킨다는 주정리(Main Theorem)를 이해하고, 이를 폴리헤드론(Theorem 1.2)과 뿔(cone, Theorem 1.3)로 일반화한 뒤, 동차화(homogenization)와 Fourier–Motzkin 소거라는 두 무기로 증명을 어떻게 조직하는지 큰 그림을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.1 The \"Main Theorem\"",
+      "step1_big_picture": {
+        "context": "0장에서 우리는 폴리토프를 두 가지 방식으로 정의했다. 하나는 유한 점집합의 볼록껍질 $P=\\mathrm{conv}(V)$ (이른바 $V$-폴리토프), 다른 하나는 유한 개의 닫힌 반공간의 교집합으로 유계인 것 ($H$-폴리토프)이다. 0장 마지막의 문제들(0.ex)에서 우리는 이 두 관점을 오가며 감을 익혔지만, '두 정의가 정말 같은 대상을 규정하는가'는 아직 증명하지 않았다. 1장은 바로 이 동등성을 정면으로 증명한다. 저자의 표현대로 결과 자체는 '기하학적으로 명백'하지만, 그 증명 과정에서 Fourier–Motzkin 소거법이라는 폴리토프를 다루는 기본 알고리즘 도구가 등장하고, 뒤에서 계속 쓸 기하학적 직관과 극성(polarity)의 씨앗이 자연스럽게 심어진다. 이것이 굳이 '뻔한' 정리를 힘들여 증명하는 이유다.",
+        "hidden_intuition": "핵심 직관은 '한 도형을 코너로 묘사할 것인가, 벽으로 묘사할 것인가'의 쌍대성이다. 같은 사각형을 '네 꼭짓점의 볼록껍질'이라 할 수도 있고 '네 개의 벽(반공간)의 교집합'이라 할 수도 있다. 그런데 어떤 질문은 한쪽 표현에선 거저 풀리고 다른 쪽에선 진땀을 뺀다 — 예컨대 '아핀 부분공간과 잘랐을 때 폴리토프인가?'는 벽($H$) 표현에서는 부등식을 그냥 더하면 끝나지만, 코너($V$) 표현에서는 새 꼭짓점을 일일이 계산해야 한다. 주정리는 '두 언어가 같은 세계를 기술한다'는 번역 사전이지만, 번역 비용(계산량)은 결코 공짜가 아니다 — 그래서 '수학적으로는 동등하지만 알고리즘적으로는 아니다'라는 단서가 붙는다. 또 하나의 숨은 무기는 동차화(homogenization)다. $\\mathrm{conv}(V)+\\mathrm{cone}(Y)$ 같은 아핀 대상은 '계수 합이 1'이라는 아핀 제약과 '계수가 음이 아님'이라는 원뿔 제약이 뒤섞여 다루기 지저분하다. 점 $x$를 한 차원 위로 들어 올려 $\\binom{1}{x}$로 보내면, 그 '$1$'이라는 여분 좌표가 아핀 제약을 대신 짊어져 준다. 결과적으로 지저분한 아핀 도형이 깔끔한 순수 뿔(cone)로 바뀌고, 원래 도형은 '높이 $1$에서 자른 단면'으로 되살아난다. 그래서 폴리토프 정리(1.1) → 폴리헤드론 정리(1.2) → 뿔 정리(1.3)로 문제가 점점 단순해진다.",
+        "visualization": {
+          "type": "convex_hull_2d",
+          "points": [
+            [
+              0,
+              0
+            ],
+            [
+              2.2,
+              0.3
+            ],
+            [
+              2.6,
+              1.7
+            ],
+            [
+              1.1,
+              2.4
+            ],
+            [
+              -0.4,
+              1.3
+            ]
+          ],
+          "labels": [
+            "v_1",
+            "v_2",
+            "v_3",
+            "v_4",
+            "v_5"
+          ],
+          "caption": "같은 폴리토프를 두 언어로 읽기: 다섯 점 $v_1,\\dots,v_5$의 볼록껍질($V$-표현 $P=\\mathrm{conv}(V)$)인 동시에, 다섯 변을 담은 반공간들의 교집합($H$-표현 $P=P(A,z)$)이다. 주정리는 이 두 묘사가 늘 일치함을 보증한다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (H-폴리헤드론)",
+          "formal_statement": "닫힌 반공간들의 교집합으로 주어지는 집합을 $H$-폴리헤드론(H-polyhedron)이라 한다. 즉 어떤 $A\\in\\mathbb{R}^{m\\times d}$, $z\\in\\mathbb{R}^{m}$에 대하여 $$P=P(A,z)=\\{\\, x\\in\\mathbb{R}^{d} \\mid Ax\\le z \\,\\}.$$ 여기서 $Ax\\le z$는 부등식 계 $a_1 x\\le z_1,\\ \\dots,\\ a_m x\\le z_m$의 축약 표기이며, $a_1,\\dots,a_m$은 $A$의 행이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (뿔(cone)과 원뿔껍질(conical hull))",
+          "formal_statement": "뿔(cone)이란, 임의의 유한 개 벡터에 대해 그들의 음이 아닌 계수 선형결합을 모두 포함하는 공집합이 아닌 벡터 집합 $C\\subseteq\\mathbb{R}^{d}$이다. 특히 모든 뿔은 $0$을 포함한다(빈 결합 또는 $0$배). 임의의 부분집합 $Y\\subseteq\\mathbb{R}^{d}$의 원뿔껍질(양의 껍질) $\\mathrm{cone}(Y)$는 $Y$를 포함하는 모든 뿔의 교집합으로 정의되며 $$\\mathrm{cone}(Y)=\\{\\, \\lambda_1 y_1+\\dots+\\lambda_k y_k \\mid \\{y_1,\\dots,y_k\\}\\subseteq Y,\\ \\lambda_i\\ge 0 \\,\\}.$$ 유한집합 $Y=\\{y_1,\\dots,y_n\\}$인 경우 $$\\mathrm{cone}(Y)=\\{\\, t_1 y_1+\\dots+t_n y_n \\mid t_i\\ge 0 \\,\\}=\\{\\, Yt \\mid t\\ge 0 \\,\\},$$ 그리고 $Y=\\varnothing$(즉 $n=0$)일 때는 $\\mathrm{cone}(\\varnothing)=\\{0\\}$으로 약속한다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (Minkowski 합과 V-폴리헤드론)",
+          "formal_statement": "두 집합 $P,Q\\subseteq\\mathbb{R}^{d}$의 벡터합(Minkowski 합)은 $$P+Q:=\\{\\, x+y \\mid x\\in P,\\ y\\in Q \\,\\}$$ 로 정의된다. 유한 점집합의 볼록껍질과 유한 벡터집합이 생성하는 뿔의 Minkowski 합으로 표현되는 집합 $$P=\\mathrm{conv}(V)+\\mathrm{cone}(Y),\\qquad V\\in\\mathbb{R}^{d\\times n},\\ Y\\in\\mathbb{R}^{d\\times n'}$$ 을 $V$-폴리헤드론(V-polyhedron)이라 한다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    1.4,
+                    0.2
+                  ],
+                  [
+                    0.9,
+                    1.3
+                  ]
+                ]
+              },
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    1.4,
+                    0.2
+                  ],
+                  [
+                    3.1,
+                    1.7
+                  ],
+                  [
+                    1.7,
+                    1.5
+                  ]
+                ]
+              },
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    0.9,
+                    1.3
+                  ],
+                  [
+                    1.7,
+                    1.5
+                  ],
+                  [
+                    3.1,
+                    1.7
+                  ],
+                  [
+                    2.6,
+                    2.8
+                  ]
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.4,
+                  0.2
+                ],
+                "to": [
+                  3.1,
+                  1.7
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.9,
+                  1.3
+                ],
+                "to": [
+                  2.6,
+                  2.8
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.6,
+                  0.4
+                ],
+                "text": "conv(V)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.2,
+                  1
+                ],
+                "text": "+ cone(Y)"
+              }
+            ],
+            "caption": "$V$-폴리헤드론 $\\mathrm{conv}(V)+\\mathrm{cone}(Y)$: 유계인 볼록껍질(왼쪽 삼각형)을 뿔 방향으로 '쓸어(sweep)' 무한히 뻗은 도형. $Y=\\varnothing$이면 뿔이 $\\{0\\}$이라 유계인 $V$-폴리토프만 남는다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "관찰 (V-폴리토프는 유계인 V-폴리헤드론이다)",
+          "formal_statement": "볼록껍질 $\\mathrm{conv}(V)$은 항상 유계이다. 따라서 $V$-폴리토프는 $\\mathrm{cone}(Y)=\\{0\\}$인 $V$-폴리헤드론, 즉 유계인 $V$-폴리헤드론과 정확히 같다. 마찬가지로 $H$-폴리토프는 유계인 $H$-폴리헤드론과 같다.",
+          "idea_behind_proof": "볼록결합은 좌표별로 보면 '주어진 값들의 가중평균'일 뿐이므로 최솟값과 최댓값 사이를 벗어날 수 없다. 이 좌표별 상자(box) 가둠이 유계성의 전부다. 반대로 뿔 성분 $\\mathrm{cone}(Y)$에 $0$ 아닌 벡터 $v$가 있으면 $\\{u+tv:t\\ge0\\}$라는 무한 반직선이 들어가므로 도형은 유계일 수 없다. 그래서 '유계 $\\Leftrightarrow$ 뿔 성분이 $\\{0\\}$'이 된다.",
+          "proof_steps": [
+            "1단계: $x\\in\\mathrm{conv}(V)$이면 $x=\\sum_i \\lambda_i v_i$, $\\lambda_i\\ge0$, $\\sum_i\\lambda_i=1$로 쓸 수 있다.",
+            "2단계: 각 좌표 $k$에 대해 가중평균은 최솟값과 최댓값 사이에 있으므로 $$\\min_{1\\le i\\le n} v_{ki}\\ \\le\\ x_k\\ \\le\\ \\max_{1\\le i\\le n} v_{ki}.$$",
+            "3단계: 따라서 $\\mathrm{conv}(V)$은 유한한 상자 $\\prod_k [\\min_i v_{ki},\\ \\max_i v_{ki}]$ 안에 갇히므로 유계이다.",
+            "4단계: 반대로 $\\mathrm{cone}(Y)$이 $0$ 아닌 벡터를 포함하면 그 방향의 반직선이 $P$에 들어가 $P$는 무계가 된다. 그러므로 $V$-폴리헤드론이 유계일 필요충분조건은 $\\mathrm{cone}(Y)=\\{0\\}$, 즉 $V$-폴리토프인 것이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.1 (폴리토프에 대한 주정리)",
+          "formal_statement": "집합 $P\\subseteq\\mathbb{R}^{d}$가 유한 점집합의 볼록껍질($V$-폴리토프) $$P=\\mathrm{conv}(V)\\quad(\\exists\\,V\\in\\mathbb{R}^{d\\times n})$$ 인 것과, 유계인 반공간들의 교집합($H$-폴리토프) $$P=P(A,z)\\quad(\\exists\\,A\\in\\mathbb{R}^{m\\times d},\\ z\\in\\mathbb{R}^{m})$$ 인 것은 서로 동치이다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (두 표현의 서로 다른 '위력')",
+          "formal_statement": "정리 1.1이 중요한 이유는, 폴리토프에 대한 서로 독립적인 두 특성화를 주되 문제에 따라 위력이 다르기 때문이다. 예를 들어 다음 네 명제를 보라: (a) 폴리토프와 아핀 부분공간의 교집합은 폴리토프다; (b) 폴리토프와 폴리헤드론의 교집합은 폴리토프다; (c) 두 폴리토프의 Minkowski 합은 폴리토프다; (d) 폴리토프의 모든 사영(projection)은 폴리토프다. 앞의 두 명제 (a),(b)는 $H$-표현 $P=P(A,z)$에서는 (부등식을 추가·합치기만 하면 되므로) 자명하지만 $V$-표현에서는 비자명하다((a)는 (b)의 특수한 경우). 반대로 뒤의 두 명제 (c),(d)는 $V$-표현에서는 쉽지만 유계 반공간 교집합($H$-표현)에서는 비자명하다. 정리 1.1은 이 둘을 잇는 다리이므로, 어느 표현에서든 성립함을 한 번에 얻게 해 준다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.2 (폴리헤드론에 대한 주정리, Motzkin)",
+          "formal_statement": "집합 $P\\subseteq\\mathbb{R}^{d}$가 볼록껍질과 원뿔의 합($V$-폴리헤드론) $$P=\\mathrm{conv}(V)+\\mathrm{cone}(Y)\\quad(\\exists\\,V\\in\\mathbb{R}^{d\\times n},\\ Y\\in\\mathbb{R}^{d\\times n'})$$ 인 것과, 닫힌 반공간들의 교집합($H$-폴리헤드론) $$P=P(A,z)\\quad(\\exists\\,A\\in\\mathbb{R}^{m\\times d},\\ z\\in\\mathbb{R}^{m})$$ 인 것은 서로 동치이다.",
+          "idea_behind_proof": "정리 1.1을 정리 1.2에서 끌어내는 것은 앞의 관찰 하나로 끝난다: 폴리토프는 $V$-측에서도 $H$-측에서도 '유계인 폴리헤드론'이기 때문이다. 즉 유계라는 조건을 양쪽에 얹으면 정리 1.2가 곧바로 정리 1.1로 특수화된다. 그래서 우리는 더 일반적인(그러나 오히려 다루기 좋은) 정리 1.2를 목표로 삼는다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.3 (뿔(cone)에 대한 주정리)",
+          "formal_statement": "뿔 $C\\subseteq\\mathbb{R}^{d}$가 유한 생성 원뿔 $$C=\\mathrm{cone}(Y)\\quad(\\exists\\,Y\\in\\mathbb{R}^{d\\times n})$$ 인 것과, 유한 개의 닫힌 '선형' 반공간(원점을 지나는 반공간)의 교집합 $$C=P(A,0)\\quad(\\exists\\,A\\in\\mathbb{R}^{m\\times d})$$ 인 것은 서로 동치이다. (이 정리는 §1.3에서 증명한다. 이후 이 정리로 특성화되는 다면적 뿔을 그냥 '뿔'이라 부른다.)"
+        },
+        {
+          "type": "Proposition",
+          "name": "핵심 장치 (동차화: 정리 1.2를 정리 1.3으로 환원)",
+          "formal_statement": "각 폴리헤드론 $P\\subseteq\\mathbb{R}^{d}$에 다음의 뿔 $C(P)\\subseteq\\mathbb{R}^{d+1}$을 대응시킨다(여분 좌표를 0번째 좌표로 삼는다). $P=P(A,z)$가 $H$-폴리헤드론이면 $$C(P):=P\\!\\left(\\begin{pmatrix}-1 & O\\\\ -z & A\\end{pmatrix},\\ \\begin{pmatrix}0\\\\ 0\\end{pmatrix}\\right),$$ $P=\\mathrm{conv}(V)+\\mathrm{cone}(Y)$가 $V$-폴리헤드론이면 $$C(P):=\\mathrm{cone}\\!\\begin{pmatrix}\\mathbf{1} & O\\\\ V & Y\\end{pmatrix}.$$ 두 경우 모두 $C(P)$는 다시 각각 $H$-뿔, $V$-뿔이고 $$P=\\Big\\{\\, x\\in\\mathbb{R}^{d} \\;\\Big|\\; \\tbinom{1}{x}\\in C(P) \\,\\Big\\}.$$ 따라서 정리 1.3을 $C(P)$에 적용하면 정리 1.2가 곧바로 따라 나온다.",
+          "idea_behind_proof": "지저분함의 근원은 볼록껍질에 붙는 아핀 제약 $\\sum_i\\lambda_i=1$이 원뿔의 $\\lambda_i\\ge0$과 뒤섞여 있다는 점이다. 착상은 '그 합 $=1$이라는 정보를 별도의 좌표에게 맡기자'는 것이다. 점 $x$를 $\\binom{1}{x}$로 들어 올리면, 0번째 좌표가 '가중치들의 총합'을 기록하는 회계장부가 된다. $V$-측에서 각 꼭짓점 $v_i$는 $\\binom{1}{v_i}$로, 각 방향 $y_j$는 $\\binom{0}{y_j}$로 올라간다. 이들의 음이 아닌 결합에서 0번째 좌표를 $1$로 고정하면, 꼭짓점 쪽 계수들의 합이 자동으로 $1$이 되어(볼록결합) 방향 쪽은 계수 제약 없이 남는다 — 즉 $\\mathrm{conv}(V)+\\mathrm{cone}(Y)$가 정확히 되살아난다. $H$-측에서는 $Ax\\le z$가 $Ax\\le x_0 z$, $x_0\\ge0$ 이라는 동차 부등식으로 바뀐다. 결국 정리 1.2와 정리 1.3은 '$x_0=1$에서 단면을 취한다'는 한 줄로 이어지는 같은 문장이다. 덤으로, $H$-동차화와 $V$-동차화가 서로 대칭으로 짝지어지는 데서 극성(polarity)이 자연스럽게 고개를 든다.",
+          "proof_steps": [
+            "1단계 ($H$-측): $Ax\\le z$를 스케일 변수 $x_0$로 동차화하면 $Ax-x_0 z\\le 0$이고 $x_0\\ge0$, 즉 행렬 $\\begin{pmatrix}-1&O\\\\ -z&A\\end{pmatrix}$가 $\\binom{x_0}{x}$에 작용해 우변 $0$인 선형 부등식계가 된다. 여기에 $x_0=1$을 대입하면 정확히 $Ax\\le z$로 돌아오므로 $P=\\{x:\\binom{1}{x}\\in C(P)\\}$.",
+            "2단계 ($V$-측): 생성행렬 $\\begin{pmatrix}\\mathbf{1}&O\\\\ V&Y\\end{pmatrix}$의 열은 각 꼭짓점에 대해 $\\binom{1}{v_i}$, 각 방향에 대해 $\\binom{0}{y_j}$이다. 이 뿔에서 $x_0=1$인 원소는 $\\sum_i\\lambda_i \\binom{1}{v_i}+\\sum_j t_j\\binom{0}{y_j}$ 꼴이며 $\\lambda_i,t_j\\ge0$, $\\sum_i\\lambda_i=1$을 강제하므로 그 하단 성분은 $\\sum_i\\lambda_i v_i+\\sum_j t_j y_j\\in\\mathrm{conv}(V)+\\mathrm{cone}(Y)$이다.",
+            "3단계: 어떤 $H$-폴리헤드론 $P$가 주어지면, 정리 1.3을 $C(P)$(이것은 $H$-뿔이며 $\\{x_0\\ge0\\}$에 포함)에 적용해 $C(P)$가 $V$-뿔임을 얻는다. $x_0=1$ 단면을 취하면 $P$가 $V$-폴리헤드론임이 나온다.",
+            "4단계: 역으로 $P$가 $V$-폴리헤드론이면 정리 1.3에 의해 $C(P)$는 $H$-뿔이고, 단면을 취해 $P$가 $H$-폴리헤드론임을 얻는다. 두 방향을 합치면 정리 1.2가 성립한다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    2.6,
+                    -1.3
+                  ],
+                  [
+                    2.6,
+                    2
+                  ]
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.6,
+                  2
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.6,
+                  -1.3
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  -1.4
+                ],
+                "to": [
+                  1,
+                  2.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  -0.5
+                ],
+                "to": [
+                  1,
+                  0.77
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  -0.5
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  0.77
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.15,
+                  -0.2
+                ],
+                "text": "0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.05,
+                  2.45
+                ],
+                "text": "x_0 = 1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.62,
+                  0.15
+                ],
+                "text": "P"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2,
+                  0.35
+                ],
+                "text": "C(P)"
+              }
+            ],
+            "caption": "동차화의 2차원 도식(가로축 $x_0$, 세로축은 $\\mathbb{R}^d$ 방향 하나): 원래 폴리헤드론 $P$는 뿔 $C(P)$를 높이 $x_0=1$에서 자른 단면이다. 원점에서 $P$의 각 점을 지나는 반직선을 모으면 $C(P)$가 생긴다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (직접 증명의 전략: 사영과 Fourier–Motzkin)",
+          "formal_statement": "정리 1.2를 동차화 없이 직접 증명할 수도 있다. 정방향('모든 $V$-폴리헤드론은 $H$-폴리헤드론')은 다음 관찰에서 출발한다: $$\\mathrm{conv}(V)+\\mathrm{cone}(Y)=\\{\\, x \\mid \\exists\\,t\\ge0,\\ u\\ge0:\\ x=Vt+Yu,\\ \\mathbf{1}^{\\!\\top} t=1 \\,\\}$$ 은, 명백히 $H$-폴리헤드론인 집합 $\\{(x,t,u): x=Vt+Yu,\\ t\\ge0,\\ u\\ge0,\\ \\mathbf{1}^{\\!\\top}t=1\\}$ 을 $(t,u)$ 방향으로 사영(projection)한 것으로 볼 수 있다. 따라서 남은 것은 다음 사실이다: (I) $H$-폴리헤드론의 어떤 사영도 다시 $H$-폴리헤드론이다. 이는 한 번에 한 좌표씩 없애는 Fourier–Motzkin 소거법으로 증명된다. 좌표 $x_k$ 방향의 사영과 소거는 $$\\mathrm{proj}_k(P):=\\{\\,x-x_k e_k \\mid x\\in P\\,\\},\\qquad \\mathrm{elim}_k(P):=\\{\\,x-t e_k \\mid x\\in P,\\ t\\in\\mathbb{R}\\,\\}$$ 로 정의되며, $\\mathrm{elim}_k(P)\\cong\\mathrm{proj}_k(P)\\times\\mathbb{R}$의 관계가 성립한다. 구체적 소거 계산은 §1.2–§1.3에서 뿔에 대해 수행한다(여기서는 전략만 밝힌다)."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "삼각형 $P=\\mathrm{conv}\\{(0,0),(1,0),(0,1)\\}\\subseteq\\mathbb{R}^2$을 동차화하라. 즉 $C(P)\\subseteq\\mathbb{R}^3$을 생성벡터로 명시하고, $C(P)$의 $x_0=1$ 단면이 다시 $P$가 됨을 확인하라.",
+          "hint": "$V$-측 규칙에서 각 꼭짓점 $v_i$는 $\\binom{1}{v_i}$로 올라간다. 여기에는 뿔 방향 $Y$가 없으니($Y=\\varnothing$) $\\binom{0}{y_j}$ 성분은 없다. 단면을 취할 땐 0번째 좌표를 $1$로 고정해 계수 합이 $1$이 되는지 보라.",
+          "solution": "각 꼭짓점을 올리면 $\\binom{1}{(0,0)}=(1,0,0)$, $\\binom{1}{(1,0)}=(1,1,0)$, $\\binom{1}{(0,1)}=(1,0,1)$. 따라서 $$C(P)=\\mathrm{cone}\\{(1,0,0),(1,1,0),(1,0,1)\\}=\\{\\,\\lambda_1(1,0,0)+\\lambda_2(1,1,0)+\\lambda_3(1,0,1)\\mid \\lambda_i\\ge0\\,\\}.$$ 일반 원소는 $(\\lambda_1+\\lambda_2+\\lambda_3,\\ \\lambda_2,\\ \\lambda_3)$이다. $x_0=1$ 단면을 취하면 $\\lambda_1+\\lambda_2+\\lambda_3=1$이 강제되고 $\\lambda_i\\ge0$이므로, 하단 두 좌표 $(\\lambda_2,\\lambda_3)$은 $\\lambda_2,\\lambda_3\\ge0$, $\\lambda_2+\\lambda_3\\le1$을 만족한다 — 이는 정확히 삼각형 $P=\\mathrm{conv}\\{(0,0),(1,0),(0,1)\\}$이다. 일반화: 유계 $V$-폴리토프의 동차화는 꼭짓점을 높이 $1$로 올려 만든 '위로 열린 뿔'이며, 원래 폴리토프는 그 뿔을 $x_0=1$에서 자른 단면이다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "labels": [
+              "v_1",
+              "v_2",
+              "v_3"
+            ],
+            "caption": "$x_0=1$ 단면에서 되살아나는 삼각형 $P=\\mathrm{conv}\\{(0,0),(1,0),(0,1)\\}$."
+          }
+        },
+        {
+          "problem": "다음 중 유계인 것은 어느 것인가? (a) $\\mathrm{conv}\\{(0,0),(2,0),(1,1)\\}$, (b) $\\mathrm{conv}\\{(0,0),(1,0)\\}+\\mathrm{cone}\\{(0,1)\\}$. 유계성 여부를 판정하고, 그 이유를 정리 1.2의 관찰과 연결해 설명하라.",
+          "hint": "$V$-폴리헤드론이 유계일 필요충분조건은 뿔 성분 $\\mathrm{cone}(Y)$가 $\\{0\\}$인 것이다. 각 집합에 $0$ 아닌 방향의 반직선이 들어 있는지 보라.",
+          "solution": "(a)는 $Y=\\varnothing$이므로 뿔 성분이 $\\{0\\}$이고, 볼록껍질은 좌표별 상자 $[0,2]\\times[0,1]$ 안에 갇히므로 유계이다 — 즉 진짜 $V$-폴리토프(삼각형)이다. (b)는 $\\mathrm{cone}\\{(0,1)\\}=\\{(0,t):t\\ge0\\}$이라는 $0$ 아닌 방향의 반직선을 포함하므로, 선분 $\\mathrm{conv}\\{(0,0),(1,0)\\}$을 위쪽으로 무한히 쓸어 올린 반무한 띠 $[0,1]\\times[0,\\infty)$가 되어 무계이다. 일반화: '유계 $\\Leftrightarrow$ $\\mathrm{cone}(Y)=\\{0\\}$'이므로, 폴리토프란 곧 뿔 성분이 소멸한 폴리헤드론이다. 이것이 정리 1.1이 정리 1.2의 유계 특수화인 이유다."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. Polytopes, Polyhedra, and Cones",
+    "source": "Ziegler, Lectures on Polytopes (GTM 152), §1.1 The \"Main Theorem\"",
+    "overall_goal": "폴리토프의 두 표현 — 꼭짓점으로 주는 $V$-표현과 부등식(벽)으로 주는 $H$-표현 — 이 같은 대상을 가리킨다는 주정리(Main Theorem)를 이해하고, 이를 폴리헤드론(Theorem 1.2)과 뿔(cone, Theorem 1.3)로 일반화한 뒤, 동차화(homogenization)와 Fourier–Motzkin 소거라는 두 무기로 증명을 어떻게 조직하는지 큰 그림을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.6 Carathéodory's Theorem",
+      "step1_big_picture": {
+        "context": "1장은 도구를 차곡차곡 쌓았다: 주정리(1.1), Fourier–Motzkin 소거(1.2–1.3), Farkas 보조정리(1.4), recession cone과 동차화(1.5). 이 마지막 절은 Carathéodory 정리 — '표현에 생성원(또는 꼭짓점)이 몇 개나 필요한가'에 대한 상한 — 를 더한다. Farkas가 FM 소거라는 무거운 기계에 기댔던 것과 달리, Carathéodory는 완전히 초등적이다: 선형종속과 최소받침(minimal support) 논증만으로 끝난다. 그럼에도 이 정리는 뿔·폴리토프·폴리헤드론의 표현정리를 더 날카롭게 만들고(생성원 개수를 차원으로 제한), Farkas 보조정리도 예리하게 다듬는 데 쓰인다. 아핀판은 1.5의 동차화 $x\\in\\mathrm{conv}(X)\\iff\\binom{1}{x}\\in\\mathrm{cone}\\binom{\\mathbf{1}}{X}$로 선형판에서 곧바로 유도된다.",
+        "hidden_intuition": "표어: '차원이 필요한 생성원의 수를 상한한다.' $k$차원 뿔에서 원뿔결합은 결코 $k$개보다 많은 생성원을 요구하지 않고, $m$차원 폴리토프에서 볼록결합은 결코 $m+1$개보다 많은 꼭짓점을 요구하지 않는다($+1$은 동차화 세금이다). 왜? 표현이 필요 이상 많은 벡터를 쓰면 그들은 (선형/아핀) 종속일 수밖에 없고, 종속관계는 '$x$를 바꾸지 않고 계수를 밀 수 있는 자유 방향'이다 — 그 방향으로 밀어 어떤 계수를 $0$으로 만들어 하나를 떨궈낸다. 기하적 알맹이: $x$를 $k'$개 벡터로 표현한다는 것은 $x$가 비음 직교공간 $\\mathbb{R}^{k'}_{\\ge0}$의 사상 $t\\mapsto Xt$에 의한 상(image)이라는 뜻이다. $k'>k=\\dim\\mathrm{cone}(X)$이면 $x$의 원상(fiber)은 차원 $k'-k\\ge1$인 아핀공간과 직교공간의 교집합이라, 양의 차원을 가진 아핀 조각이 직교공간 안에 놓인다. 직교공간은 통째 직선을 담지 못하므로 그 조각은 반드시 경계(어떤 $t_i=0$)에 닿고 — 그 경계점이 생성원 하나를 뺀 표현이다. 반복하면 $\\le k$개로 줄어든다. 아핀판은 이를 한 차원 올린 것: $\\mathrm{conv}(X)\\subseteq\\mathbb{R}^d$를 $\\mathrm{cone}\\binom{\\mathbf1}{X}\\subseteq\\mathbb{R}^{d+1}$로 보면 상한 $d$가 $d+1$이 된다. Farkas와의 대조: Farkas는 FM 소거가 필요한 깊은 대안정리인데, Carathéodory는 '종속이면 줄일 수 있다'는 한 줄짜리 선형대수 사실이면서도 Farkas가 증명을 도왔던 바로 그 표현정리들을 더 날카롭게 만든다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  2,
+                  3.5
+                ],
+                [
+                  -1,
+                  2
+                ]
+              ]
+            },
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  2,
+                  3.5
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.5,
+                1.5
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                3,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                3.5
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.62,
+                1.55
+              ],
+              "text": "x"
+            },
+            {
+              "shape": "label",
+              "at": [
+                3.35,
+                2.35
+              ],
+              "text": "conv(X)"
+            }
+          ],
+          "caption": "Carathéodory(아핀판): 평면($d=2$)의 볼록껍질 안 점 $x$는 $X$의 점 중 $\\le d+1=3$개(강조된 삼각형)의 볼록결합으로 표현된다 — 꼭짓점 5개가 주어져도 3개면 충분하다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "Carathéodory 정리 (선형판과 아핀판)",
+          "formal_statement": "$X\\subseteq\\mathbb{R}^d$가 유한 벡터집합일 때: (i) $x\\in\\mathrm{cone}(X)$이면, $X$의 부분집합 $X'\\subseteq X$ 중 $|X'|\\le\\mathrm{rank}(X)=\\dim\\mathrm{cone}(X)$인 것에 대해 $x\\in\\mathrm{cone}(X')$이다. (ii) $x\\in\\mathrm{conv}(X)$이면, $X'\\subseteq X$ 중 $|X'|\\le\\mathrm{rank}\\binom{\\mathbf{1}}{X}=\\dim\\mathrm{conv}(X)+1$인 것에 대해 $x\\in\\mathrm{conv}(X')$이다.",
+          "idea_behind_proof": "기하적으로 (선형판): $x$를 $k'$개 벡터의 양의 결합으로 쓰는 것은 $x$가 비음 직교공간 $\\{t\\in\\mathbb{R}^{k'}:t\\ge0\\}$을 $t\\mapsto X't$로 사영한 상 안에 있다는 것이다. $k'$가 최소이면 $x$는 직교공간의 내부 $\\{t>0\\}$의 상에 놓이고, $k'>k=\\dim\\mathrm{cone}(X)$이면 $x$의 원상은 최소 $1$차원이라 '직선과 직교공간의 교집합'을 품는다. 직교공간은 통째 직선을 담지 못하므로 원상은 직교공간의 경계점($t_i=0$)을 포함하고, 그러면 $x$는 $k'$개보다 적은 벡터의 원뿔결합이 되어 최소성에 모순. (아핀판)은 단체(simplex)를 $\\mathrm{conv}(X)$로 사영하는 같은 논증을 한 차원 올려 한 것이다. 아래는 대수적 증명이다.",
+          "proof_steps": [
+            "1단계 (i): 일반성을 잃지 않고 $X$의 선형생성공간으로 옮겨 $\\mathrm{rank}(X)=d$라 하자. $x\\in\\mathrm{cone}(X)$을 $x=\\sum_{i=1}^n t_i x_i$ ($t\\ge0$)로 쓰되, 받침 $\\mathrm{supp}(t)=\\{i:t_i>0\\}$이 최소인 표현을 택한다.",
+            "2단계: $|\\mathrm{supp}(t)|>d$라 가정하면, $\\{x_i:t_i>0\\}$은 $\\mathbb{R}^d$의 $d$개 초과 벡터라 선형종속이다. 따라서 $0=\\sum_i \\lambda_i t_i x_i$ (모든 $i$에서, $\\lambda_i$는 받침 밖에서 $0$)인 종속관계가 있고 $\\lambda_i$가 모두 $0$은 아니다.",
+            "3단계: 적당한 $0\\ne\\alpha\\in\\mathbb{R}$을 곱해 $\\lambda_i>0$인 $i\\in\\mathrm{supp}(t)$가 있고 $\\max\\{\\lambda_i:t_i>0\\}=1$이 되게 정규화한다. 그러면 $$x=\\sum_i t_i x_i=\\sum_i t_i x_i-\\sum_i\\lambda_i t_i x_i=\\sum_i(1-\\lambda_i)t_i x_i.$$",
+            "4단계: 계수 $(1-\\lambda_i)t_i$는 $\\lambda_i\\le1,\\ t_i\\ge0$이라 모두 $\\ge0$이고, $\\lambda_{i^\\ast}=1$인 지표 $i^\\ast$에서는 $(1-\\lambda_{i^\\ast})t_{i^\\ast}=0$이라 그 항이 사라진다. 즉 받침이 더 작은 비음 표현을 얻어 최소성에 모순. 따라서 $|\\mathrm{supp}(t)|\\le d=\\mathrm{rank}(X)$. $\\qquad\\blacksquare$",
+            "5단계 (ii): $x\\in\\mathrm{conv}(X)\\iff\\binom{1}{x}\\in\\mathrm{cone}\\binom{\\mathbf{1}}{X}$ (1.5의 동차화). 오른쪽에 (i)을 적용하면 $\\binom{1}{x}$는 $\\le\\mathrm{rank}\\binom{\\mathbf{1}}{X}=\\dim\\mathrm{conv}(X)+1$개의 $\\binom{1}{x_i}$의 원뿔결합이고, $0$번째 좌표가 계수 합을 $1$로 강제하므로 그 $x_i$들은 $x$의 볼록결합을 준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (응용: 표현정리와 Farkas의 예리화, 그리고 Farkas와의 대조)",
+          "formal_statement": "Carathéodory 정리는 1장의 표현정리들을 더 날카롭게 만든다: $d$차원 뿔의 점은 $\\le d$개 생성원의 원뿔결합, $m$차원 폴리토프($=\\dim\\mathrm{conv}(X)$)의 점은 $\\le m+1$개 꼭짓점의 볼록결합으로 표현된다. 또한 Farkas 보조정리를 예리하게 다듬는 데도 쓰인다(인증서·분리 벡터의 받침 크기 제한 등). Farkas가 FM 소거에 기댄 깊은 대안정리인 데 비해, Carathéodory는 선형종속 하나로 끝나는 초등적·계산상 사소한 결과라는 점이 대조적이다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (역사와 실무: Fourier–(Dines)–Motzkin, 그리고 잉여 부등식)",
+          "formal_statement": "1장의 재료는 고전적이다. 소거법은 Motzkin의 1936년 학위논문에서 개발되었고, 오랫동안 'Motzkin 소거법'으로, 이후 'Fourier–Motzkin 소거법'으로 불려 왔다(Dantzig–Eaves는 언젠가 'Fourier–Dines–Motzkin'으로 불릴지도 모른다고 농했다). FM 소거는 이론적 도구일 뿐 아니라 실제 계산에도 쓰이지만, '조합 폭발'을 겪는다: 한 소거 단계가 $m$개 부등식을 최대 $\\lfloor m^2/4\\rfloor$개로 바꿀 수 있어 몇 단계 만에 급증한다. 다만 소거로 생기는 부등식 상당수는 잉여(redundant)라 폴리헤드론을 바꾸지 않고 지울 수 있으므로, 문제 크기와 계산 시간을 억제하려면 잉여 부등식을 빠르게 탐지·제거하는 것이 관건이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "problem": "$\\mathbb{R}^2$에서 $x=(2,2)$를 $(2,2)=1\\cdot(1,0)+1\\cdot(0,1)+1\\cdot(1,1)$로, 즉 세 생성원의 원뿔결합으로 썼다. Carathéodory(선형판, $\\mathrm{rank}=2$)에 따라 $\\le2$개로 줄여라. 증명의 방식($x=\\sum(1-\\lambda_i)t_i x_i$)을 그대로 사용하라.",
+          "hint": "세 벡터 $(1,0),(0,1),(1,1)$의 선형종속을 찾아라: $(1,0)+(0,1)=(1,1)$. 이를 $0=\\sum\\lambda_i t_i x_i$ 꼴로 만들고 $\\max\\{\\lambda_i\\}=1$이 되게 맞춘 뒤 대입하라.",
+          "solution": "종속관계 $(1,0)+(0,1)-(1,1)=0$, 즉 $\\mu=(1,1,-1)$. $t=(1,1,1)$이므로 $\\lambda_i=\\mu_i/t_i=(1,1,-1)$, 이미 $\\max\\{\\lambda_i\\}=1$(지표 $1,2$에서). 대입하면 $$x=\\sum_i(1-\\lambda_i)t_i x_i=(1-1)(1,0)+(1-1)(0,1)+(1-(-1))(1,1)=2\\,(1,1)=(2,2).$$ 받침이 $\\{3\\}$으로 줄어 $(2,2)=2\\,(1,1)$ — 실제로는 $1$개 생성원이면 충분하다($\\le\\mathrm{rank}=2$ 만족). 일반화: 종속관계는 계수를 미는 자유 방향이고, $\\max\\{\\lambda_i\\}=1$로 맞추면 해당 항이 정확히 $0$이 되어 하나가 떨어진다."
+        },
+        {
+          "problem": "단위정사각형 $\\mathrm{conv}\\{(0,0),(1,0),(1,1),(0,1)\\}$($d=2$) 안의 점 $x=(0.6,0.3)$을 Carathéodory(아핀판) 상한 $\\le d+1=3$개의 꼭짓점의 볼록결합으로 표현하라. 왜 상한이 $2$가 아니라 $3$인지 동차화와 연결해 설명하라.",
+          "hint": "$x$가 대각선 $y=x$의 어느 쪽에 있는지 보고 세 꼭짓점으로 이루어진 삼각형을 골라라. 그 뒤 $x=a v_1+b v_2+c v_3,\\ a+b+c=1$을 풀어라.",
+          "solution": "$y=0.3<x=0.6$이므로 $x$는 대각선 아래, 삼각형 $\\{(0,0),(1,0),(1,1)\\}$ 안에 있다. $x=a(0,0)+b(1,0)+c(1,1)$, $a+b+c=1$: $x$-좌표 $b+c=0.6$, $y$-좌표 $c=0.3\\Rightarrow c=0.3,\\ b=0.3,\\ a=0.4$. 따라서 $x=0.4(0,0)+0.3(1,0)+0.3(1,1)$ — 꼭짓점 3개($=d+1$). 왜 $3$인가: $x\\in\\mathrm{conv}(X)\\iff\\binom{1}{x}\\in\\mathrm{cone}\\binom{\\mathbf{1}}{X}$로 올리면 $\\binom{1}{x}\\in\\mathbb{R}^{3}$이고 $\\dim\\mathrm{cone}\\binom{\\mathbf{1}}{X}=d+1=3$이라, 선형판 상한 $3$이 곧 아핀판 상한이 된다. 여분의 $+1$은 '계수 합 $=1$'이라는 아핀 제약을 짊어질 $0$번째 좌표의 몫이다."
+        },
+        {
+          "problem": "$\\mathbb{R}^3$에서, (a) $x\\in\\mathrm{cone}(X)$을 표현하는 데 필요한 생성원 수의 상한, (b) $x\\in\\mathrm{conv}(X)$을 표현하는 데 필요한 꼭짓점 수의 상한은 각각 얼마인가? 그리고 상한보다 적은 개수로 충분한 경우를 하나 설명하라.",
+          "hint": "선형판 상한은 $\\dim\\mathrm{cone}(X)$, 아핀판 상한은 $\\dim\\mathrm{conv}(X)+1$이다. $x$가 어떤 저차원 면(face)에 놓이면 어떻게 되는가?",
+          "solution": "(a) 최대 $\\dim\\mathrm{cone}(X)\\le3$개. (b) 최대 $\\dim\\mathrm{conv}(X)+1\\le4$개. 상한 미만으로 충분한 예: $x$가 뿔(또는 폴리토프)의 저차원 면 위에 있으면, 그 면을 생성하는 더 적은 벡터만으로 표현된다. 예컨대 $x$가 한 생성원 $x_i$의 양의 배수이면 $1$개면 충분하고($x=t\\,x_i$), $x$가 두 꼭짓점을 잇는 모서리 위에 있으면 볼록결합에 $2$개면 충분하다. 일반화: Carathéodory 상한은 최악의 경우(전차원 내부 점)에 대한 것이며, $x$가 놓인 최소 면의 차원이 실제 필요한 개수를 결정한다."
+        }
+      ]
+    }
+  ]
+}
