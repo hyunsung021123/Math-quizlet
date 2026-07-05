@@ -78,6 +78,7 @@ python pipeline/program2_track.py merge --chapter <N>        # 강제 병합(보
 | `lib/next_section.py` | 다음 작업·헤더 안내, 진행 체크 (원본 그대로) |
 | `lib/make_review_input.py` | 최종복습 입력 생성 (원본 그대로) |
 | `lib/merger.py` | `section_merger.html`의 검증·병합을 Python으로 이식 (신규) |
+| `prompts/toc_classify_prompt.md` | 목차 이미지 → `toc_data.json` 분류용 (외부 AI에 붙여넣는 사용자용 자료) |
+| `prompts/system_prompt.md` | 소단원 PDF → 학습용 JSON 변환용 (외부 AI에 붙여넣는 사용자용 자료) |
 
 의존성: `pymupdf` (`pip install pymupdf`).
-관련 프롬프트(`toc_classify_prompt.md`, `system_prompt.md`)는 외부 AI에 붙여넣어 사용하는 사용자용 자료입니다.
