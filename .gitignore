@@ -1,0 +1,2 @@
+# 세션별 로컬 권한 승인 기록 — 사람/세션마다 다르므로 커밋하지 않는다.
+.claude/settings.local.json

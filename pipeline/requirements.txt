@@ -1,0 +1,2 @@
+# 파이프라인 실행에 필요한 유일한 의존성 (pipeline/lib/pdf_splitter.py 의 `import fitz`)
+pymupdf
