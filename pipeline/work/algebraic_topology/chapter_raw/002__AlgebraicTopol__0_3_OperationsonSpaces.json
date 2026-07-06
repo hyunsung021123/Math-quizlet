@@ -1,0 +1,434 @@
+{
+  "chapter_info": {
+    "title": "Chapter 0. Some Underlying Geometric Notions",
+    "source": "Allen Hatcher, Algebraic Topology, Ch. 0",
+    "overall_goal": "위상수학에서 '같은 모양'을 위상동형(homeomorphism)보다 훨씬 넓게 보는 관점을 세운다. 변형수축(deformation retraction)·사상원기둥(mapping cylinder)에서 출발해, 호모토피(homotopy)와 호모토피 동치(homotopy equivalence, homotopy type)라는 핵심 동치 개념을 정의하고, 수축가능(contractible) 공간과 그 미묘함(한 점으로의 변형수축과의 차이)까지 이해한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "0.3 Operations on Spaces",
+      "step1_big_picture": {
+        "context": "0.2에서 세포복합체(cell complex)는 강체성(cell-by-cell 조합 논증)과 유연성(여러 구성을 허용)을 겸비한 조립 언어임을 보았다. 이 소단원은 그 유연성의 실체 — 세포복합체에서 세포복합체를 만들어 내는 표준 연산들 — 을 목록으로 정리한다. 곱(product), 몫(quotient), 뿔(cone)과 현수(suspension), 조인(join), 쐐기합(wedge sum), 스매시곱(smash product)이 그것이다. 이들은 앞으로 대수적 위상수학 전체에서 쓰이는 기본 어휘다. 앞 내용과의 연결은 곳곳에서 드러난다. 곱 구조는 0.2의 토러스 세포구조 $S^1\\times S^1$을 표준 $S^1$ 구조로부터 다시 유도하고, 몫 구조에서는 0.2 예 0.3의 $D^n/\\partial D^n=S^n$이 $D^n/S^{n-1}=S^n$으로 재등장한다. 또한 이 소단원 서두는 지금까지 호모토피 동치를 만드는 주된 도구가 0.1의 '사상원기둥이 목표 끝으로 변형수축한다'는 사실이었음을 상기시키며, 그것만으로는 번거로우니 다른 기법이 필요하다고 예고한다(이는 다음 소단원 「Two Criteria for Homotopy Equivalence」로 이어진다).",
+        "hidden_intuition": "이 연산들은 겉보기엔 제각각이지만 하나의 공통 제작법을 공유한다: '곱(또는 서로소 합)을 취하고, 필요하면 구간 $I$로 두껍게 한 뒤, 고른 부분공간을 붕괴시킨다'. 그래서 각 연산의 개성은 '무엇을 붕괴시키는가'에 담긴다. 뿔 $CX$는 공간 전체를 하나의 꼭짓점으로 끌어올려 모든 위상을 죽인다(그래서 항상 수축가능). 현수 $SX$는 위·아래 두 꼭짓점을 갖는 이중뿔로 차원을 하나 올린다($SS^n=S^{n+1}$). 조인 $X\\ast Y$는 $X$의 점과 $Y$의 점을 잇는 모든 선분을 채우며, 점들을 형식적 결합 $t_1x+t_2y$($t_1+t_2=1$)로 적으면 조인의 결합법칙과 단체(simplex)의 출현이 한눈에 보인다. 쐐기합 $X\\vee Y$는 한 점에서 붙인 꽃다발이고, 스매시곱 $X\\wedge Y$는 곱에서 '진짜 곱이 아닌 축들'($X\\vee Y$)을 붕괴시켜 남긴 축약판이다($S^m\\wedge S^n=S^{m+n}$). 요컨대 0.2의 몫(quotient)이 이 모든 연산의 일꾼이며, 항상 부분복합체를 붕괴시키므로 결과가 다시 세포복합체 안에 머문다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -1.4,
+                0
+              ],
+              "to": [
+                1.4,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                1.8
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                -1.8
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                -1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                -0.7,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                0.7,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                -1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                -0.7,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                0.7,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.7,
+                0
+              ],
+              "text": "X"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                2.05
+              ],
+              "text": "north"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                -2.05
+              ],
+              "text": "south"
+            }
+          ],
+          "caption": "현수 $SX$는 이중뿔이다. 가운데가 $X$, 위 꼭짓점은 $X\\times\\{1\\}$을, 아래 꼭짓점은 $X\\times\\{0\\}$을 각각 한 점으로 붕괴시켜 얻는다. $X=S^n$이면 $SX=S^{n+1}$."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (곱, product)",
+          "formal_statement": "$X,Y$가 세포복합체이면 $X\\times Y$도 세포복합체이며, 그 세포는 곱 $e^m_\\alpha\\times e^n_\\beta$들이다($e^m_\\alpha$는 $X$의 세포, $e^n_\\beta$는 $Y$의 세포). 예로 0.2 서두의 토러스 $S^1\\times S^1$의 세포구조는 표준 $S^1$ 구조로부터 이렇게 얻어진다. 점집합 위상적 주의점: 일반적인 CW 복합체 $X,Y$에서 $X\\times Y$의 세포복합체 위상은 곱위상(product topology)보다 미세할(finer) 수 있다. 단, $X$나 $Y$ 중 하나가 유한 개의 세포만 갖거나 둘 다 가산 개의 세포를 가지면 두 위상은 일치한다(부록 참고). 실제로는 이 미묘함이 문제를 일으키는 경우는 드물다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (몫, quotient)",
+          "formal_statement": "CW 쌍 $(X,A)$(세포복합체 $X$와 부분복합체 $A$)에 대해 몫공간 $X/A$는 $X$로부터 자연스러운 세포구조를 물려받는다. $X/A$의 세포는 $X-A$의 세포들에 새 $0$-세포 하나($A$가 $X/A$에서 대응되는 점)를 더한 것이다. $X-A$의 세포 $e^n_\\alpha$가 $\\varphi_\\alpha:S^{n-1}\\to X^{n-1}$로 붙었다면, $X/A$에서 대응 세포의 부착사상은 합성 $S^{n-1}\\to X^{n-1}\\to X^{n-1}/A^{n-1}$이다. 예1: $S^{n-1}$에 아무 세포구조나 주고 $n$-세포를 붙여 $D^n$을 만들면 $D^n/S^{n-1}=S^n$(0.2의 표준 구조). 예2: $X$를 단일 $2$-세포를 갖는 닫힌 유향곡면, $A$를 그 $2$-세포의 여집합($1$-뼈대)이라 하면, $X/A$는 $0$-세포에 $2$-세포 하나를 붙인 것이고 $0$-세포에 세포를 붙이는 방법은 상수사상뿐이므로 $X/A=S^2$이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (뿔, cone / 현수, suspension)",
+          "formal_statement": "공간 $X$에 대해 뿔은 $CX=(X\\times I)/(X\\times\\{0\\})$, 즉 $X\\times\\{0\\}$을 한 점(꼭짓점)으로 붕괴시킨 것이다. 현수 $SX$는 $X\\times I$에서 $X\\times\\{0\\}$을 한 점으로, $X\\times\\{1\\}$을 또 다른 점으로 붕괴시킨 몫공간이며, $X$ 위의 이중뿔 — 두 개의 뿔 $CX$를 붙인 것 — 로 볼 수 있다. $X$가 CW 복합체이면 $CX,SX$도 (구간 $I$에 '두 $0$-세포를 한 $1$-세포로 이은' 표준 구조를 주고 곱 세포구조를 취해) CW 복합체다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [
+              [
+                0,
+                1.3
+              ],
+              [
+                -1.2,
+                -0.8
+              ],
+              [
+                1.2,
+                -0.8
+              ]
+            ],
+            "labels": [
+              "x_1",
+              "x_2",
+              "x_3"
+            ],
+            "caption": "조인 미리보기: 세 점 $x_1,x_2,x_3$의 조인은 삼각형 $\\Delta^2$이다(뿔·현수는 각각 한 점·두 점을 외부 꼭짓점으로 잇는 특수한 조인으로 볼 수 있다)."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($SS^n=S^{n+1}$과 사상의 현수)",
+          "formal_statement": "현수의 원형 예는 $X=S^n$일 때로, 이때 $SX=S^{n+1}$이며 두 '현수점'은 $S^{n+1}$의 북극·남극 $(0,\\dots,0,\\pm1)$이다. 현수의 유용한 성질 하나는 공간뿐 아니라 사상도 현수할 수 있다는 것이다: 사상 $f:X\\to Y$는 $f\\times\\mathrm{id}:X\\times I\\to Y\\times I$의 몫사상으로서 현수 $Sf:SX\\to SY$를 낳는다. 현수는 대수적 위상수학으로 깊이 들어갈수록 점점 중요해지는데, 그 이유가 미리 자명하지는 않다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (조인, join)",
+          "formal_statement": "공간 $X,Y$에 대해 조인 $X\\ast Y$는 $X\\times Y\\times I$를 관계 $(x,y_1,0)\\sim(x,y_2,0)$과 $(x_1,y,1)\\sim(x_2,y,1)$로 나눈 몫공간이다. 즉 $X\\times Y\\times\\{0\\}$을 $X$로, $X\\times Y\\times\\{1\\}$을 $Y$로 붕괴시킨다. 점을 형식적 결합 $t_1x+t_2y$ ($0\\le t_i\\le1,\\ t_1+t_2=1$, 규칙 $0x+1y=y,\\ 1x+0y=x$)로 적을 수 있고, 반복 조인 $X_1\\ast\\cdots\\ast X_n$은 $t_1x_1+\\cdots+t_nx_n$ ($t_i\\ge0,\\ \\sum t_i=1$, $0t_i$ 항은 생략 가능)으로 본다. 이 관점에서 조인이 결합적(associative)임이 쉽게 보인다. $X,Y$가 CW 복합체이면 $X\\ast Y$에도 $X,Y$를 부분복합체로 갖는 자연스러운 CW 구조가 있고, 나머지 세포는 $X\\times Y\\times(0,1)$의 곱 세포들이다."
+        },
+        {
+          "type": "Example",
+          "name": "예 (점들의 조인 = 단체, simplex)",
+          "formal_statement": "각 $X_i$가 한 점인 특수한 경우가 중요하다. 두 점의 조인은 선분, 세 점의 조인은 삼각형, 네 점의 조인은 사면체다. 일반적으로 $n$개의 점의 조인은 차원 $n-1$의 볼록 다면체 $\\Delta^{n-1}$, 곧 단체(simplex)다. 구체적으로 그 $n$개의 점을 $\\mathbb{R}^n$의 표준기저벡터로 잡으면 조인은 $$\\Delta^{n-1}=\\{(t_1,\\dots,t_n)\\in\\mathbb{R}^n\\mid t_1+\\cdots+t_n=1,\\ t_i\\ge0\\}$$ 이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 ($S^0$의 반복 조인은 구다)",
+          "formal_statement": "각 $X_i=S^0$을 $\\mathbb{R}^n$의 $i$번째 좌표축을 따른 두 단위벡터 $\\pm e_i$로 실현하면, 조인 $X_1\\ast\\cdots\\ast X_n$은 $2^n$개의 $\\Delta^{n-1}$ 복사본의 합집합이고, 원점으로부터의 방사사영(radial projection)이 $X_1\\ast\\cdots\\ast X_n$과 $S^{n-1}$ 사이의 위상동형을 준다. 특히 $\\underbrace{S^0\\ast\\cdots\\ast S^0}_{n}\\cong S^{n-1}$.",
+          "idea_behind_proof": "형식적 결합 모델이 열쇠다. 조인의 점은 $\\sum_i t_ix_i$ ($x_i\\in\\{+e_i,-e_i\\}$, $t_i\\ge0$, $\\sum t_i=1$)인데, 각 $i$의 부호를 $x_i$에 흡수해 $s_i=\\pm t_i$로 쓰면 점이 곧 좌표 $(s_1,\\dots,s_n)$이고 조건은 $\\sum_i|s_i|=1$이 된다. 이는 정확히 교차다포체(cross-polytope)의 경계, 즉 $\\ell^1$-단위구다. 부호 패턴 하나가 한 개의 $\\Delta^{n-1}$을 주므로 $2^n$개, 그리고 이 $\\ell^1$-구를 방사 방향으로 밀어 $\\ell^2$-구 $S^{n-1}$에 겹치는 것이 위상동형이다.",
+          "proof_steps": [
+            "1단계: 조인의 점 $\\sum_i t_ix_i$에서 $x_i\\in\\{+e_i,-e_i\\}$의 부호를 흡수해 $s_i=\\pm t_i$로 두면, 점은 $(s_1,\\dots,s_n)\\in\\mathbb{R}^n$이고 $\\sum_i|s_i|=\\sum_i t_i=1$.",
+            "2단계: 따라서 조인은 집합 $\\{s\\in\\mathbb{R}^n:\\sum_i|s_i|=1\\}$, 곧 교차다포체(팔면체류)의 경계다. 부호 패턴 $2^n$가지 각각이 한 개의 $\\Delta^{n-1}$을 주므로 $2^n$개의 단체로 이루어진다.",
+            "3단계: 방사사영 $s\\mapsto s/\\lVert s\\rVert_2$는 원점에서 나온 각 반직선이 $\\ell^1$-구와 $\\ell^2$-구를 각각 정확히 한 번씩 만나므로, 이 경계를 유클리드 단위구 $S^{n-1}$ 위로 전단사이며 양쪽 연속으로 보낸다.",
+            "4단계: 그러므로 $X_1\\ast\\cdots\\ast X_n\\cong S^{n-1}$. 조인이 차원을 하나 올림을 보여 주는 대표적 사례다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (쐐기합, wedge sum)",
+          "formal_statement": "점을 하나씩 고른 공간 $(X,x_0)$, $(Y,y_0)$에 대해 쐐기합 $X\\vee Y$는 서로소 합 $X\\sqcup Y$에서 $x_0$과 $y_0$을 한 점으로 동일시한 몫공간이다. 예로 $S^1\\vee S^1$은 두 원이 한 점에서 만나는 팔자(figure-8)와 위상동형이다. 일반적으로 임의의 공간 모음 $\\{X_\\alpha\\}$에 대해 $\\bigsqcup_\\alpha X_\\alpha$에서 점들 $x_\\alpha$를 한 점으로 동일시해 $\\bigvee_\\alpha X_\\alpha$를 만든다. 각 $X_\\alpha$가 세포복합체이고 $x_\\alpha$가 $0$-세포이면 $\\bigvee_\\alpha X_\\alpha$는 세포복합체다(세포복합체 $\\bigsqcup_\\alpha X_\\alpha$에서 부분복합체를 한 점으로 붕괴시킨 것이므로).",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.35
+                ],
+                "text": "basepoint"
+              }
+            ],
+            "caption": "$S^1\\vee S^1$: 두 원을 각자의 기준점에서 하나로 붙인 팔자(figure-8)."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (뼈대 몫은 구의 쐐기합)",
+          "formal_statement": "임의의 세포복합체 $X$에 대해 몫 $X^n/X^{n-1}$은 구들의 쐐기합 $\\bigvee_\\alpha S^n_\\alpha$이며, $X$의 각 $n$-세포마다 구 하나씩 대응한다.",
+          "idea_behind_proof": "$(n-1)$-뼈대 전체를 한 점으로 붕괴시키면 모든 부착사상이 무력화된다는 관찰이 핵심이다. 각 $n$-세포는 $D^n$을 경계 $\\partial D^n=S^{n-1}$을 따라 $X^{n-1}$에 붙인 것인데, $X^{n-1}$이 한 점이 되면 각 세포는 0.2 예 0.3의 $D^n/\\partial D^n=S^n$이 되고, 이 구들은 모두 그 한 점을 공유한다. 따라서 몫은 $n$-세포 개수만큼의 구로 된 꽃다발이다.",
+          "proof_steps": [
+            "1단계: $X^n=X^{n-1}\\sqcup\\big(\\coprod_\\alpha D^n_\\alpha\\big)$을 $\\varphi_\\alpha:\\partial D^n_\\alpha\\to X^{n-1}$로 붙인 것이다. $X^n/X^{n-1}$에서 부분복합체 $X^{n-1}$은 한 점 $\\ast$가 된다.",
+            "2단계: 각 세포의 경계 $\\partial D^n_\\alpha$는 $X^{n-1}$로 가므로 몫에서 $\\ast$로 간다. 따라서 $D^n_\\alpha$의 상은 $D^n_\\alpha/\\partial D^n_\\alpha\\cong S^n_\\alpha$이고 $\\ast$를 기준점으로 한다(0.2 예 0.3 사용).",
+            "3단계: 서로 다른 세포는 $\\ast$만 공유하므로 $X^n/X^{n-1}=\\bigvee_\\alpha S^n_\\alpha$, $n$-세포마다 구 하나씩. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (스매시곱, smash product)",
+          "formal_statement": "곱공간 $X\\times Y$ 안에는 $X\\times\\{y_0\\}$과 $\\{x_0\\}\\times Y$라는 $X,Y$의 복사본이 있고, 이 둘은 점 $(x_0,y_0)$에서만 만나므로 그 합집합을 쐐기합 $X\\vee Y$와 동일시할 수 있다. 스매시곱은 $X\\wedge Y=(X\\times Y)/(X\\vee Y)$로 정의된다. 이는 $X\\times Y$에서 '진짜 곱이 아닌 부분(따로 놓인 인자 $X,Y$)'을 붕괴시켜 얻는 축약판으로 볼 수 있다. $X,Y$가 CW 복합체이고 $x_0,y_0$이 $0$-세포이면(곱위상과 다를 때는 곱 세포복합체 위상을 준다는 전제 아래) $X\\wedge Y$도 CW 복합체다."
+        },
+        {
+          "type": "Example",
+          "name": "예 ($S^m\\wedge S^n=S^{m+n}$)",
+          "formal_statement": "$S^m\\wedge S^n$은 차원 $0$과 $m+n$의 세포 단 두 개를 갖는 세포구조를 가지며, 따라서 $S^m\\wedge S^n=S^{m+n}$이다. 특히 $m=n=1$일 때, 토러스의 경선(longitude)과 위선(meridian) 두 원을 한 점으로 붕괴시키면 $2$-구가 나온다.",
+          "idea_behind_proof": "$S^m,S^n$에 각각 최소 두-세포 구조($e^0,e^m$)와 ($e^0,e^n$)를 주고 기준점을 $0$-세포로 잡으면, 곱 $S^m\\times S^n$의 세포는 $e^0\\times e^0,\\ e^m\\times e^0,\\ e^0\\times e^n,\\ e^m\\times e^n$의 네 개다. 그런데 쐐기합 $S^m\\vee S^n$은 정확히 이 중 꼭대기 세포 $e^m\\times e^n$을 뺀 부분복합체다. 그것을 붕괴시키면 $0$-세포 하나와 꼭대기 $(m+n)$-세포 하나만 남고, 0.2 예 0.3에 의해 이는 $S^{m+n}$이다.",
+          "proof_steps": [
+            "1단계: $S^m$은 세포 $e^0,e^m$, $S^n$은 $e^0,e^n$, 기준점은 각 $0$-세포. 곱 세포는 $e^0\\times e^0,\\ e^m\\times e^0,\\ e^0\\times e^n,\\ e^m\\times e^n$로 차원 $0,m,n,m+n$.",
+            "2단계: $S^m\\vee S^n=(S^m\\times\\{y_0\\})\\cup(\\{x_0\\}\\times S^n)$은 꼭대기 세포를 제외한 부분복합체 $e^0\\times e^0\\cup e^m\\times e^0\\cup e^0\\times e^n$이다.",
+            "3단계: $S^m\\wedge S^n=(S^m\\times S^n)/(S^m\\vee S^n)$은 그 부분복합체를 한 $0$-세포로 붕괴시켜, 차원 $0$과 $m+n$의 세포만 남긴다.",
+            "4단계: $0$-세포 하나와 (상수사상으로 붙는) $(m+n)$-세포 하나로 된 CW 복합체는 $S^{m+n}$이다(0.2 예 0.3). 따라서 $S^m\\wedge S^n=S^{m+n}$; $m=n=1$이면 토러스의 두 원을 붕괴시켜 $S^2$를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "임의의 공간 $X$에 대해 뿔 $CX=(X\\times I)/(X\\times\\{0\\})$이 수축가능(contractible)함을 보여라.",
+          "hint": "$CX$의 점을 $[x,s]$($s\\in[0,1]$, $s=0$은 모두 꼭짓점 $v$로 동일시)로 쓰자. 모든 점을 꼭짓점 쪽으로 '$s$-좌표를 줄이며' 끌어당기는 사상족을 생각하라. 변형수축의 세 조건 $f_0=\\mathrm{id}$, $f_1(CX)=\\{v\\}$, $f_t|_{\\{v\\}}=\\mathrm{id}$을 확인하라.",
+          "solution": "$f_t([x,s])=[x,(1-t)s]$로 정의하자. $s=0$인 점(꼭짓점)에서는 $x$에 무관하게 $[x,0]=v$이므로 잘 정의되고, $(x,s,t)\\mapsto[x,(1-t)s]$는 연속이다. (i) $f_0([x,s])=[x,s]$이므로 $f_0=\\mathrm{id}$. (ii) $f_1([x,s])=[x,0]=v$이므로 $f_1(CX)=\\{v\\}$. (iii) 꼭짓점은 $f_t(v)=f_t([x,0])=[x,0]=v$로 모든 $t$에서 고정. 따라서 $f_t$는 $CX$의 꼭짓점 $\\{v\\}$로의 변형수축이고 $CX\\simeq\\text{점}$, 즉 수축가능하다. 이것이 '뿔은 위상을 죽인다'는 직관의 정확한 근거다. 일반화: 어떤 공간이든 뿔로 씌우면 항상 수축가능해진다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -1.5,
+                  -1.2
+                ],
+                "to": [
+                  1.5,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  1.6
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  -1.5,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  1.5,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  -0.75,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  0.75,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -0.9,
+                  -0.72
+                ],
+                "to": [
+                  -0.45,
+                  0.16
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.9,
+                  -0.72
+                ],
+                "to": [
+                  0.45,
+                  0.16
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.85
+                ],
+                "text": "apex v"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.8,
+                  -1.2
+                ],
+                "text": "X"
+              }
+            ],
+            "caption": "뿔 $CX$: 각 점을 자신이 놓인 선분을 따라 꼭짓점 $v$로 끌어올린다. $f_t([x,s])=[x,(1-t)s]$가 $CX$를 $v$로 변형수축시킨다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "토러스 $T^2=S^1\\times S^1$에 표준 세포구조($0$-세포 $1$개, $1$-세포 $a,b$ 두 개, $2$-세포 $1$개)를 준다. $1$-뼈대 $T^1$으로 나눈 몫 $T^2/T^1$을 구의 쐐기합으로 표현하고, 그것이 어떤 익숙한 공간인지 밝혀라.",
+          "hint": "명제 '뼈대 몫은 구의 쐐기합'($X^n/X^{n-1}=\\bigvee_\\alpha S^n_\\alpha$, $n$-세포마다 구 하나)을 $n=2$에 적용하라. 토러스에는 $2$-세포가 몇 개인가?",
+          "solution": "명제에 의해 $T^2/T^1=T^2/(T^2)^{1}=\\bigvee_\\alpha S^2_\\alpha$이며 토러스의 $2$-세포마다 구 하나씩 대응한다. 표준 세포구조에서 토러스의 $2$-세포는 정확히 하나뿐이므로 쐐기합은 구 하나, 즉 $T^2/T^1=S^2$이다. 이는 0.3 몫(quotient) 예의 '단일 $2$-세포 곡면을 그 $1$-뼈대로 나누면 $S^2$'라는 결과와 정확히 일치한다($1$-뼈대 $T^1$ 자체는 $S^1\\vee S^1$, 곧 팔자임에 유의). 일반화: 종수 $g$ 곡면 $M_g$도 $2$-세포가 하나이므로 $M_g/M_g^1=S^2$."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 공간 $X$에 대해 뿔 $CX$는 항상 수축가능하다.",
+          "answer": "O",
+          "explanation": "참이다. $f_t([x,s])=[x,(1-t)s]$가 $CX$를 꼭짓점으로 변형수축시키므로 $CX$는 어떤 $X$에 대해서도 한 점의 호모토피형을 갖는다. 이것이 뿔이 '위상을 죽이는' 연산인 이유이며, 현수 $SX$가 두 뿔의 합집합인 것과 대비된다."
+        },
+        {
+          "type": "ox",
+          "question": "스매시곱은 $S^m\\wedge S^n=S^{mn}$을 만족한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 올바른 관계는 $S^m\\wedge S^n=S^{m+n}$으로, 차원이 곱해지는 것이 아니라 더해진다. 세포 개수를 세면, 곱 $S^m\\times S^n$의 꼭대기 세포 $e^m\\times e^n$의 차원이 $m+n$이고 스매시곱은 이 세포와 $0$-세포만 남기므로 결과가 $S^{m+n}$이 된다. 예컨대 $S^1\\wedge S^1=S^2$ ($=1\\cdot1$이 아니라 $1+1$)."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원의 연산들(뿔·현수·조인·쐐기합·스매시곱)은 겉보기엔 다르지만 공통의 제작법을 공유한다. 그 공통 패턴은 무엇이며, 각 연산은 '무엇을 붕괴시키는가'로 어떻게 구별되는가?",
+          "hint": "각 연산의 정의를 '먼저 무엇을 만들고(곱? 서로소 합? $\\times I$?), 그다음 무엇을 한 점(또는 인자)으로 붕괴시키는가'의 두 단계로 다시 써 보라. 그리고 왜 결과가 항상 세포복합체 안에 머무는지 0.2의 몫 구조와 연결하라.",
+          "answer": "공통 제작법은 '곱(또는 서로소 합)을 취하고, 필요하면 구간 $I$로 두껍게 한 뒤, 고른 부분공간을 붕괴시킨다'이다. 각 연산의 개성은 정확히 '무엇을 붕괴시키는가'에 있다. 뿔 $CX=X\\times I$에서 한 끝 $X\\times\\{0\\}$을 한 점으로. 현수 $SX=X\\times I$에서 두 끝 $X\\times\\{0\\},X\\times\\{1\\}$을 각각 (서로 다른) 한 점으로 — 두 개의 뿔. 조인 $X\\ast Y=X\\times Y\\times I$에서 한 끝을 $X$로, 다른 끝을 $Y$로 붕괴(모든 선분을 채움). 쐐기합 $X\\vee Y=X\\sqcup Y$에서 두 기준점 $\\{x_0,y_0\\}$을 한 점으로. 스매시곱 $X\\wedge Y=X\\times Y$에서 곱 안의 '축들'인 쐐기합 $X\\vee Y$를 한 점으로. 곱만 하고 아무것도 붕괴시키지 않으면 그냥 곱공간이다. 이처럼 모든 연산이 '곱/합 + 부분복합체 붕괴(몫)'의 형태이므로, 0.2에서 본 대로 부분복합체를 붕괴시킨 몫은 다시 세포복합체가 되어 — 결과가 항상 세포복합체 범주 안에 머문다. 즉 몫(quotient)이 이 모든 연산을 관통하는 하나의 일꾼이다."
+        }
+      ]
+    }
+  ]
+}
