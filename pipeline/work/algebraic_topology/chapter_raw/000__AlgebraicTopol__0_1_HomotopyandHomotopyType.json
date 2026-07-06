@@ -1,0 +1,567 @@
+{
+  "chapter_info": {
+    "title": "Chapter 0. Some Underlying Geometric Notions",
+    "source": "Allen Hatcher, Algebraic Topology, Ch. 0",
+    "overall_goal": "위상수학에서 '같은 모양'을 위상동형(homeomorphism)보다 훨씬 넓게 보는 관점을 세운다. 변형수축(deformation retraction)·사상원기둥(mapping cylinder)에서 출발해, 호모토피(homotopy)와 호모토피 동치(homotopy equivalence, homotopy type)라는 핵심 동치 개념을 정의하고, 수축가능(contractible) 공간과 그 미묘함(한 점으로의 변형수축과의 차이)까지 이해한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "0.1 Homotopy and Homotopy Type",
+      "step1_big_picture": {
+        "context": "지금까지 두 공간이 '같다'는 것은 위상동형($X \\cong Y$), 즉 연속 전단사와 그 연속 역이 존재함을 뜻했다. 그런데 이는 지나치게 빡빡하다. 알파벳 글자를 얇은 선분들의 합집합으로 쓰든, 두께가 있는 평면 부분곡면으로 쓰든 우리는 직관적으로 '같은 글자'라고 느낀다. 두꺼운 글자 $X$를 그 안의 얇은 글자 $\\bar X$로 연속적으로 오그라뜨릴 수 있기 때문이다. 이 장의 목표는 바로 이 '연속적으로 오그라뜨린다'는 감각을 엄밀한 개념(변형수축·호모토피·호모토피 동치)으로 승격시키는 것이다. 이후 챕터 1에서 대수적 불변량을 붙일 때, 우리가 실제로 구별하려는 것은 위상동형류가 아니라 바로 이 호모토피형(homotopy type)이 된다.",
+        "hidden_intuition": "핵심 이미지는 '시간에 따라 흐르는 변형'이다. 두꺼운 글자 $X$를, 바깥 경계의 각 점을 얇은 글자 $\\bar X$의 한 점에 잇는 선분들로 잘게 분해해 두면, 시간 $t\\in[0,1]$ 동안 각 점을 그 선분을 따라 일정한 속력으로 안쪽으로 밀어 넣을 수 있다. 이미 $\\bar X$ 안에 있던 점은 가만히 둔다. 그러면 $t=0$에서는 항등사상, $t=1$에서는 $\\bar X$로의 축약(retraction)이 된다. 여기서 결정적인 것은 두 가지다. 첫째, '동형'과 달리 이 과정은 정보를 잃어도 된다 — 서로 다른 점이 도중에 합쳐져도 괜찮다(그래서 대칭적이지 않다). 둘째, 시간 변수 $t$와 공간 변수 $x$에 대해 '동시에' 연속이어야 한다는 요구, 즉 $X\\times I\\to X$의 연속성이 이 변형을 하나의 위상적 대상으로 묶어 준다. 이 한 장의 그림 — 공간 전체가 시간에 따라 미끄러져 들어가는 장면 — 이 뒤에 나오는 모든 정의의 원천이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 2.2
+            },
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 1.0
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                2.2,
+                0
+              ],
+              "to": [
+                1.0,
+                0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                0,
+                2.2
+              ],
+              "to": [
+                0,
+                1.0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -2.2,
+                0
+              ],
+              "to": [
+                -1.0,
+                0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                0,
+                -2.2
+              ],
+              "to": [
+                0,
+                -1.0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                1.556,
+                1.556
+              ],
+              "to": [
+                0.707,
+                0.707
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.556,
+                1.556
+              ],
+              "to": [
+                -0.707,
+                0.707
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                1.556,
+                -1.556
+              ],
+              "to": [
+                0.707,
+                -0.707
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.556,
+                -1.556
+              ],
+              "to": [
+                -0.707,
+                -0.707
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                1.0
+              ],
+              "text": "core circle"
+            }
+          ],
+          "caption": "고리(annulus)가 시간에 따라 각 점을 반지름 방향으로 안쪽 원 위로 밀어 넣어 심원(core circle)으로 변형수축하는 모습. 뫼비우스 띠(Mobius band)가 중심원으로 변형수축하는 그림과 같은 원리다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (변형수축, deformation retraction)",
+          "formal_statement": "공간 $X$의 부분공간 $A$로의 변형수축이란, 사상족 $f_t:X\\to X$ ($t\\in I=[0,1]$)로서 다음을 만족하는 것이다. (i) $f_0=\\mathrm{id}_X$, (ii) $f_1(X)=A$, (iii) 모든 $t$에 대해 $f_t|_A=\\mathrm{id}_A$. 또한 이 사상족은 연관 사상 $X\\times I\\to X,\\ (x,t)\\mapsto f_t(x)$가 연속이라는 의미에서 연속이어야 한다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (사상원기둥, mapping cylinder)",
+          "formal_statement": "사상 $f:X\\to Y$에 대하여 사상원기둥 $M_f$는 서로소 합집합 $(X\\times I)\\sqcup Y$의 몫공간으로, 각 $(x,1)\\in X\\times I$을 $f(x)\\in Y$와 동일시하여 얻는다. 즉 $M_f=\\big((X\\times I)\\sqcup Y\\big)\\big/\\big((x,1)\\sim f(x)\\big)$.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -2,
+                  1.5
+                ],
+                "to": [
+                  2,
+                  1.5
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1,
+                  -1
+                ],
+                "to": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -2,
+                  1.5
+                ],
+                "to": [
+                  -1,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1,
+                  1.5
+                ],
+                "to": [
+                  -0.5,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.5
+                ],
+                "to": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  1.5
+                ],
+                "to": [
+                  0.5,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  1.5
+                ],
+                "to": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.5,
+                  1.5
+                ],
+                "text": "X x 0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.6,
+                  -1
+                ],
+                "text": "Y"
+              }
+            ],
+            "caption": "사상원기둥의 도식. 위쪽 $X\\times\\{0\\}$의 각 점이 세로 섬유 $\\{x\\}\\times I$를 따라 내려와 $t=1$에서 $f(x)\\in Y$에 붙는다. 서로 다른 점이 같은 $f(x)$로 모이면 섬유들이 아래에서 합쳐진다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (사상원기둥은 항상 $Y$로 변형수축한다)",
+          "formal_statement": "임의의 $f:X\\to Y$에 대해 $M_f$는 부분공간 $Y$로 변형수축한다. 각 점 $(x,t)$를 섬유 $\\{x\\}\\times I\\subset M_f$를 따라 끝점 $f(x)\\in Y$로 미끄러뜨리면 되기 때문이다. (앞의 얇은 글자 예시에서 $X$는 두꺼운 글자의 바깥 경계, $Y$는 얇은 글자, $f$는 각 선분의 바깥 끝점을 안쪽 끝점으로 보내는 사상에 해당한다.)"
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (호모토피, homotopy / 호모토픽, homotopic)",
+          "formal_statement": "호모토피란 사상족 $f_t:X\\to Y$ ($t\\in I$)로서 연관 사상 $F:X\\times I\\to Y,\\ F(x,t)=f_t(x)$가 연속인 것을 말한다. 두 사상 $f_0,f_1:X\\to Y$가 이런 호모토피로 연결되면 호모토픽하다고 하고 $f_0\\simeq f_1$로 쓴다. 변형수축은 이 일반 개념의 특수한 경우다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (축약, retraction)",
+          "formal_statement": "$X$의 부분공간 $A$로의 축약이란 사상 $r:X\\to X$로서 $r(X)=A$이고 $r|_A=\\mathrm{id}_A$인 것이다. 이는 정확히 $r^2=r$과 동치인데, 이 식은 곧 $r$가 자신의 상 위에서 항등이라는 뜻이기 때문이다. 축약은 수학 다른 분야의 사영작용소(projection operator)의 위상적 대응물이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (상대 호모토피, homotopy rel $A$)",
+          "formal_statement": "부분공간 $A\\subset X$로의 제한이 $t$에 무관한 호모토피 $f_t:X\\to Y$를 $A$에 상대적인 호모토피(homotopy rel $A$)라 한다. 이 언어로 다시 쓰면, $X$의 $A$로의 변형수축이란 항등사상 $\\mathrm{id}_X$에서 $A$로의 축약으로 가는 $A$에 상대적인 호모토피다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (호모토피 동치, homotopy equivalence / 호모토피형, homotopy type)",
+          "formal_statement": "사상 $f:X\\to Y$가 호모토피 동치라는 것은 어떤 사상 $g:Y\\to X$가 존재하여 $fg\\simeq\\mathrm{id}_Y$이고 $gf\\simeq\\mathrm{id}_X$인 것이다. 이때 $X$와 $Y$는 호모토피 동치이다 또는 같은 호모토피형(homotopy type)을 갖는다고 하고 $X\\simeq Y$로 쓴다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              }
+            ],
+            "caption": "구멍 두 개짜리 원판이 변형수축할 수 있는 세 그래프(도넛 손잡이꼴, 세타꼴 $\\theta$, 두 원을 붙인 팔자꼴)는 서로 위상동형은 아니지만 모두 이 팔자(figure-eight, 두 원의 쐐기합)와 같은 호모토피형을 갖는다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (변형수축은 호모토피 동치를 준다)",
+          "formal_statement": "$X$가 부분공간 $A$로 $f_t$를 통해 변형수축하면, 축약 $r:X\\to A$와 포함사상 $i:A\\to X$에 대해 $ri=\\mathrm{id}_A$이고 $ir\\simeq\\mathrm{id}_X$이다. 따라서 $i$(및 $r$)는 호모토피 동치이고, 특히 $X\\simeq A$이다.",
+          "idea_behind_proof": "변형수축의 세 조건이 호모토피 동치의 두 조건으로 '거의 그대로' 번역된다는 것이 핵심이다. $A$ 위에서 $r$가 항등이라는 조건 (iii)은 곧 한쪽 합성 $ri=\\mathrm{id}_A$을 공짜로 주고, 나머지 합성 $ir\\simeq\\mathrm{id}_X$을 증명해 줄 호모토피는 애써 새로 만들 필요 없이 변형수축 $f_t$ 그 자체다. 즉 '변형수축'이라는 데이터가 이미 '호모토피 동치'의 증거를 품고 있다.",
+          "proof_steps": [
+            "1단계: $A$의 점은 축약 $r$가 고정하므로 $ri=\\mathrm{id}_A$.",
+            "2단계: 변형수축 $f_t$는 $f_0=\\mathrm{id}_X$에서 $f_1=ir$로 가는 호모토피이므로 $ir\\simeq\\mathrm{id}_X$.",
+            "3단계: 따라서 $i:A\\to X$는 $r$를 호모토피 역으로 갖는 호모토피 동치이고 $X\\simeq A$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (호모토피 동치 $\\simeq$는 동치관계다)",
+          "formal_statement": "공간들 위의 관계 $X\\simeq Y$(호모토피 동치)는 반사적·대칭적·추이적이다. 즉 동치관계다. (이는 비대칭적인 변형수축 관계와 대조된다.)",
+          "idea_behind_proof": "열쇠가 되는 관찰은 '호모토피가 합성과 양립한다'는 사실 하나다. 즉 $a\\simeq a'$이면 임의의 연속사상 $h,g$에 대해 $ha\\simeq ha'$, $ag\\simeq a'g$이다(고정된 사상을 호모토피에 그냥 합성하면 되니까). 이 한 줄만 있으면 반사·대칭·추이가 기계적으로 따라 나온다. 특히 대칭성은 거의 자명한데, 호모토피 동치의 정의 $fg\\simeq\\mathrm{id},\\ gf\\simeq\\mathrm{id}$ 자체가 $f$와 $g$에 대해 이미 대칭이기 때문이다.",
+          "proof_steps": [
+            "1단계(합성과의 양립): $a\\simeq a'$을 주는 호모토피가 $a_s$라면, 연속사상 $h$에 대해 $h\\circ a_s$는 $ha\\simeq ha'$을 주는 호모토피이고, $a_s\\circ g$는 $ag\\simeq a'g$을 준다.",
+            "2단계(반사성): $\\mathrm{id}_X$는 자기 자신을 호모토피 역으로 갖는 호모토피 동치이므로 $X\\simeq X$.",
+            "3단계(대칭성): $f:X\\to Y$가 역 $g$를 갖는 호모토피 동치이면, 조건 $fg\\simeq\\mathrm{id}_Y,\\ gf\\simeq\\mathrm{id}_X$가 $f,g$에 대해 대칭이므로 $g:Y\\to X$ 또한 호모토피 동치이고 $Y\\simeq X$.",
+            "4단계(추이성): $f:X\\to Y$(역 $g$), $h:Y\\to Z$(역 $k$)가 호모토피 동치라 하자. $hf:X\\to Z$를 생각하면 1단계를 써서 $(hf)(gk)=h(fg)k\\simeq h\\,\\mathrm{id}_Y\\,k=hk\\simeq\\mathrm{id}_Z$. 마찬가지로 $(gk)(hf)\\simeq\\mathrm{id}_X$. 따라서 $hf$는 $gk$를 역으로 갖는 호모토피 동치이고 $X\\simeq Z$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (공통의 변형수축 모공간에 의한 특징화)",
+          "formal_statement": "두 공간 $X,Y$가 호모토피 동치일 필요충분조건은, $X$와 $Y$를 모두 변형수축 부분공간으로 포함하는 공간 $Z$가 존재하는 것이다.",
+          "idea_behind_proof": "쉬운 방향(⇐)은 앞 명제의 즉각적 결과다. 어려운 방향(⇒)에서 '$Z$를 어떻게 찾을까?'라는 물음의 답이 바로 앞서 정의한 사상원기둥이다. 호모토피 동치 $f:X\\to Y$에 대해 $Z=M_f$를 잡으면, $M_f$는 무조건 $Y$로 변형수축한다(앞의 참고). 남은 것은 '$f$가 호모토피 동치일 때는 $M_f$가 반대쪽 끝 $X$로도 변형수축한다'는 사실인데, 이 비자명한 부분은 이 절 이후의 결과(따름정리 0.21)로 미뤄진다.",
+          "proof_steps": [
+            "1단계(⇐): $Z$가 $X,Y$를 각각 변형수축 부분공간으로 가지면 앞 명제로 $X\\simeq Z$, $Y\\simeq Z$. 동치관계의 추이성으로 $X\\simeq Y$.",
+            "2단계(⇒): 호모토피 동치 $f:X\\to Y$에 대해 $Z=M_f$로 둔다. 사상원기둥은 항상 $Y$로 변형수축한다.",
+            "3단계: $f$가 호모토피 동치일 때 $M_f$가 반대쪽 끝 $X$로도 변형수축한다는 사실은 (따름정리 0.21 — 이 절 이후에 증명됨)에서 보인다. 따라서 $Z=M_f$가 원하는 공간이다. $\\qquad\\blacksquare$ (⇒ 방향은 이후 결과를 인용)"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (수축가능, contractible)",
+          "formal_statement": "한 점의 호모토피형을 갖는 공간을 수축가능(contractible)이라 한다. 이는 그 공간의 항등사상이 영호모토픽(nullhomotopic)임, 즉 어떤 상수사상과 호모토픽함과 동치다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (한 점으로 변형수축하면 경로연결이다)",
+          "formal_statement": "공간 $X$가 한 점 $x_0$으로 변형수축하면, $X$는 경로연결(path-connected)이다.",
+          "idea_behind_proof": "변형수축은 공간 전체가 시간에 따라 흐르는 하나의 연속 운동이다. 여기서 시선을 단 한 점 $x$에 고정하고 그 점이 시간 $t\\in[0,1]$ 동안 어디로 가는지만 따라가면, 그것이 곧 하나의 경로가 된다. 그런데 '한 점으로' 변형수축한다는 특수성 때문에 모든 점의 이 경로가 같은 종점 $x_0$에서 끝난다 — 이것이 정확히 경로연결의 정의다.",
+          "proof_steps": [
+            "1단계: $f_t:X\\to X$를 $f_0=\\mathrm{id}_X$, $f_1\\equiv x_0$인 변형수축이라 하자. 연관 사상 $F:X\\times I\\to X,\\ F(x,t)=f_t(x)$는 연속이다.",
+            "2단계: 각 $x\\in X$에 대해 $\\gamma_x:I\\to X,\\ \\gamma_x(t)=F(x,t)=f_t(x)$를 정의한다. $F$의 연속성에서 $\\gamma_x$는 $t$에 대해 연속이다.",
+            "3단계: $\\gamma_x(0)=x$이고 $\\gamma_x(1)=x_0$이므로 $\\gamma_x$는 $x$와 $x_0$을 잇는 경로다.",
+            "4단계: 임의의 두 점 $x,y\\in X$는 각각 $x_0$과 이어지므로 $x_0$을 경유해 서로 이어진다. 따라서 $X$는 경로연결이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 (두 방을 가진 집, house with two rooms)",
+          "formal_statement": "$\\mathbb{R}^3$ 안의 2차원 부분공간 '두 방을 가진 집' $X$는 수축가능하다(사실 한 점으로 변형수축한다). 그러나 그 변형을 눈으로 직접 보기는 대단히 어렵다. $X$는 세 개의 수평 조각(고리와 위상동형)과 두 방의 벽을 이루는 수직 직사각형들, 그리고 두 개의 수직 터널로 이루어진다.",
+          "idea_behind_proof": "$X$를 직접 변형시키려 하지 말고, '살을 붙이는' 전략을 쓰는 것이 핵심 아이디어다. 충분히 작은 닫힌 $\\varepsilon$-근방 $N(X)$를 생각하면, (a) $N(X)$는 다시 $X$로 변형수축하고, (b) 덜 자명하게도 $N(X)$는 solid 공 $D^3$과 위상동형이다. (b)는 점토 공에 손가락을 밀어 넣어 위쪽 터널을 만들고 아래 방을 파낸 뒤, 다시 아래 터널을 밀어 넣고 위 방을 파내는 매장족 $h_t:D^3\\to\\mathbb{R}^3$으로 이해할 수 있다. $D^3$은 한 점과 호모토피 동치이므로, 동치관계의 추이성으로 $X\\simeq N(X)\\cong D^3\\simeq\\text{점}$이 된다.",
+          "proof_steps": [
+            "1단계: 충분히 작은 $\\varepsilon$에 대해 닫힌 근방 $N(X)$는 $X$로 변형수축한다(그래서 $X\\simeq N(X)$).",
+            "2단계: 점토 공을 눌러 두 터널을 만들고 두 방을 파내는 매장족을 통해 $N(X)\\cong D^3$.",
+            "3단계: $D^3$은 한 점으로 변형수축하므로 $D^3\\simeq\\text{점}$, 따라서 $X\\simeq\\text{점}$ — $X$는 수축가능.",
+            "4단계(더 강하게): $N(X)$의 한 점 $x_0\\in X$로의 변형수축 $f_t$와 축약 $r:N(X)\\to X$을 잡아 합성 $r f_t$를 $X$로 제한하면, 이것이 $X$의 $x_0$으로의 변형수축을 준다. 다만 그 변형이 구체적으로 어떤 모습인지 보는 것은 도전적인 문제다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (수축가능은 '한 점으로의 변형수축'보다 약하다)",
+          "formal_statement": "'수축가능하다(항등사상이 영호모토픽하다)'는 것은 일반적으로 '한 점으로 변형수축한다'보다 약간 더 약한 조건이다. 실제로 한 점으로 변형수축하지는 않으면서 수축가능한 공간이 존재한다(챕터 말미의 연습문제 참고). 따라서 두 개념을 혼동하지 않도록 주의해야 한다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{R}^n$이 수축가능함을 보여라. 원점 $0$으로의 변형수축을 명시적으로 구성하면 된다.",
+          "hint": "각 점을 원점 쪽으로 '직선을 따라 일정 속력으로' 끌어당기는 사상족을 생각하라. 즉 $t$에 따라 점의 위치를 원점과 자기 자신 사이에서 선형보간하라. 변형수축의 세 조건 $f_0=\\mathrm{id}$, $f_1(X)=\\{0\\}$, $f_t|_{\\{0\\}}=\\mathrm{id}$을 각각 확인하라.",
+          "solution": "$f_t(x)=(1-t)x$로 정의하자. 이는 $(x,t)\\mapsto (1-t)x$가 연속이므로 연속인 사상족이다. (i) $f_0(x)=x$이므로 $f_0=\\mathrm{id}_{\\mathbb{R}^n}$. (ii) $f_1(x)=0$이므로 $f_1(\\mathbb{R}^n)=\\{0\\}$. (iii) $x=0$이면 모든 $t$에 대해 $f_t(0)=0$이므로 $f_t|_{\\{0\\}}=\\mathrm{id}$. 따라서 $f_t$는 $\\mathbb{R}^n$의 $\\{0\\}$으로의 변형수축이고, $\\mathbb{R}^n\\simeq\\text{점}$, 즉 $\\mathbb{R}^n$은 수축가능하다. 일반화: 임의의 볼록집합(convex set) $C\\subseteq\\mathbb{R}^n$은 임의의 점 $x_0\\in C$에 대해 $f_t(x)=(1-t)x+t x_0$으로 같은 방식의 변형수축을 가지므로 수축가능하다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  2,
+                  1
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.5,
+                  2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -2,
+                  -1
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1,
+                  -2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  2.2,
+                  -0.6
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -0.6,
+                  -2.2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "0"
+              }
+            ],
+            "caption": "직선 호모토피 $f_t(x)=(1-t)x$: 모든 점이 원점을 향해 직선을 따라 끌려 들어간다. $t=1$에서 공간 전체가 한 점 $0$으로 모인다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "구멍 뚫린 평면 $\\mathbb{R}^2\\setminus\\{0\\}$이 단위원 $S^1$으로 변형수축함을 보이고, 이로써 $\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$임을 결론지어라.",
+          "hint": "각 점 $x\\neq 0$을 원점 방향의 반직선을 따라 단위원 위의 점 $x/\\lVert x\\rVert$까지 밀어 넣어라. 다만 원점을 통과해서는 안 되므로, $x$와 $x/\\lVert x\\rVert$ 사이를 선형보간하면서 그 값이 결코 $0$이 되지 않음을 확인해야 한다. 그리고 이미 $S^1$ 위에 있는 점($\\lVert x\\rVert=1$)은 움직이지 않아야 한다.",
+          "solution": "$f_t(x)=(1-t)\\,x+t\\,\\dfrac{x}{\\lVert x\\rVert}$로 정의하자($t\\in[0,1]$, $x\\in\\mathbb{R}^2\\setminus\\{0\\}$). 이는 $\\big((1-t)+t/\\lVert x\\rVert\\big)x$의 꼴로, 계수가 양수이고 $x\\neq0$이므로 값이 결코 $0$이 아니어서 상이 $\\mathbb{R}^2\\setminus\\{0\\}$ 안에 머문다. (i) $f_0(x)=x$이므로 $f_0=\\mathrm{id}$. (ii) $f_1(x)=x/\\lVert x\\rVert\\in S^1$이므로 $f_1(\\mathbb{R}^2\\setminus\\{0\\})=S^1$. (iii) $\\lVert x\\rVert=1$이면 $x/\\lVert x\\rVert=x$이므로 모든 $t$에서 $f_t(x)=x$, 즉 $f_t|_{S^1}=\\mathrm{id}$. 연관 사상은 연속이다. 따라서 $f_t$는 $\\mathbb{R}^2\\setminus\\{0\\}$의 $S^1$으로의 변형수축이고, 앞의 '변형수축은 호모토피 동치를 준다'는 명제에 의해 $\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$. 일반화: 같은 논법으로 $\\mathbb{R}^n\\setminus\\{0\\}\\simeq S^{n-1}$.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.8,
+                  1.2
+                ],
+                "to": [
+                  0.832,
+                  0.555
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.6,
+                  0.6
+                ],
+                "to": [
+                  -0.936,
+                  0.351
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.5,
+                  -1.9
+                ],
+                "to": [
+                  0.254,
+                  -0.967
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.3,
+                  -1.3
+                ],
+                "to": [
+                  -0.707,
+                  -0.707
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "hole"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.05,
+                  0.7
+                ],
+                "text": "S^1"
+              }
+            ],
+            "caption": "$\\mathbb{R}^2\\setminus\\{0\\}$의 각 점 $x$가 반직선을 따라 단위원 위의 $x/\\lVert x\\rVert$로 밀려 들어간다. 원점의 구멍 때문에 한 점으로는 오그라들 수 없고 $S^1$에서 멈춘다."
+          }
+        },
+        {
+          "type": "ox",
+          "question": "모든 수축가능(contractible) 공간은 반드시 한 점으로 변형수축(deformation retract)한다.",
+          "answer": "X",
+          "explanation": "거짓이다. '수축가능'(항등사상이 영호모토픽)은 '한 점으로 변형수축'보다 약간 더 약한 조건이다. 한 점으로 변형수축하지는 않으면서 수축가능한 공간이 실제로 존재한다(본문에서 이 차이를 명시하고 챕터 말 연습문제로 예를 제시한다). 두 개념의 이 미묘한 차이를 혼동하지 않아야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "변형수축은 대칭적 관계다. 즉 $X$가 $A$로 변형수축하면 $A$도 $X$로 변형수축한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 변형수축은 본질적으로 비대칭적이다($A$는 애초에 $X$의 부분공간이어야 하고, 예컨대 세 그래프는 같은 공간의 변형수축이지만 어느 것도 다른 것의 변형수축은 아니다). 대칭성을 갖는 것은 변형수축이 아니라 그로부터 유도되는 호모토피 동치 관계 $\\simeq$이며, 본문은 이 대조를 명시적으로 지적한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "변형수축(deformation retraction), 축약(retraction), 호모토피 동치(homotopy equivalence)는 서로 어떻게 관련되며, 왜 호모토피 동치가 이 중 가장 '넓은' 동치 개념이라 할 수 있는가?",
+          "hint": "각 개념이 요구하는 데이터가 무엇인지, 그리고 어느 것이 어느 것을 함의하는지 화살표로 정리해 보라. 특히 '변형수축은 호모토피 동치를 준다'는 명제와, $\\simeq$가 동치관계인 반면 변형수축은 비대칭이라는 사실을 대비하라. 축약만으로는 왜 부족한지도 생각하라.",
+          "answer": "세 개념은 요구하는 데이터의 강도 순으로 정렬된다. (1) 축약 $r:X\\to X$($r^2=r$)은 단 하나의 사상만 요구하며 시간(변형)이라는 정보가 없다 — 항상 존재할 수 있고(예: 임의의 점으로의 상수사상) 공간의 모양을 거의 반영하지 못한다. (2) 변형수축은 축약에 더해 '항등사상에서 그 축약으로 가는 상대 호모토피 $f_t$'라는 시간 정보를 요구한다. 이는 $X$와 부분공간 $A$ 사이의 강한 관계지만, $A\\subset X$라는 포함을 전제하므로 본질적으로 비대칭이다. (3) 변형수축이 있으면 포함사상과 축약이 서로 호모토피 역이 되어 $X\\simeq A$가 되므로, 변형수축은 호모토피 동치를 함의한다. 그러나 호모토피 동치는 부분공간 포함을 요구하지 않고 두 사상 $f,g$가 양방향으로 항등과 호모토픽하기만 하면 되므로 훨씬 유연하다. 그 결과 $\\simeq$는 반사·대칭·추이를 모두 만족하는 진짜 동치관계가 되고, '두 공간이 호모토피 동치일 필요충분조건은 둘을 함께 변형수축 부분공간으로 담는 공간 $Z$(예: 사상원기둥)가 존재하는 것'이라는 대칭적 특징화까지 얻는다. 요컨대 호모토피 동치는 비대칭적이고 국소적인 변형수축 관계들을 대칭적으로 '봉합'한 것이며, 대수적 위상수학이 실제로 구별하려는 불변량의 단위가 바로 이 호모토피형이다."
+        }
+      ]
+    }
+  ]
+}
