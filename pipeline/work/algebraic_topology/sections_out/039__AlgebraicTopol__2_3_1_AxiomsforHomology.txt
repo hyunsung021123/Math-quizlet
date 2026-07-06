@@ -1,0 +1,239 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.3.1 Axioms for Homology
+직전 소단원: 「2.3 The Formal Viewpoint」
+[본문]
+160
+Chapter 2
+Homology
+Sometimes it is good to step back from the forest of details and look for gen-
+eral patterns. In this rather brief section we will ﬁrst describe the general pattern
+of homology by axioms, then we will look at some common formal features shared
+by many of the constructions we have made, using the language of categories and
+functors which has become common in much of modern mathematics.
+Axioms for Homology
+For simplicity let us restrict attention to CW complexes and focus on reduced ho-
+mology to avoid mentioning relative homology. A (reduced) homology theory assigns
+to each nonempty CW complex X a sequence of abelian groups ehn(X) and to each map
+f : X→Y between CW complexes a sequence of homomorphisms f∗: ehn(X)→ehn(Y)
+such that (f g)∗= f∗g∗and 11∗= 11, and so that the following three axioms are
+satisﬁed.
+(1) If f ≃g : X→Y , then f∗= g∗: ehn(X)→ehn(Y).
+(2) There are boundary homomorphisms ∂: ehn(X/A)→ehn−1(A) deﬁned for each CW
+pair (X, A), ﬁtting into an exact sequence
+···
+∂-----→ehn(A)
+i∗
+-----→ehn(X)
+q∗
+-----→ehn(X/A)
+∂-----→ehn−1(A)
+i∗
+-----→···
+where i is the inclusion and q is the quotient map. Furthermore the boundary
+maps are natural: For f : (X, A)→(Y, B) inducing a quotient map f : X/A→Y/B ,
+there are commutative diagrams
+Y/
+X/
+-
+n 1
+-
+n 1
+∂
+∂
+A
+−−−−−→
+−−−−−→
+h n(
+) −−−−−−−→
+−−−−−−−→
+B
+h n
+A
+h
+(
+)
+B
+h
+(
+)
+(
+)
+f∗
+f∗
+∼
+∼
+∼
+∼
+−
+(3) For a wedge sum X =
+W
+α Xα with inclusions iα : Xα > X , the direct sum map
+L
+α iα∗:
+L
+α ehn(Xα)→ehn(X) is an isomorphism for each n.
+Negative values for the subscripts n are permitted. Ordinary singular homology is
+zero in negative dimensions by deﬁnition, but interesting homology theories with
+nontrivial groups in negative dimensions do exist.
+The third axiom may seem less substantial than the ﬁrst two, and indeed for ﬁnite
+wedge sums it can be deduced from the ﬁrst two axioms, though not in general for
+inﬁnite wedge sums, as an example in the Exercises shows.
+It is also possible, and not much more difﬁcult, to give axioms for unreduced
+homology theories. One supposes one has relative groups hn(X, A) deﬁned, special-
+izing to absolute groups by setting hn(X) = hn(X, ∅). Axiom (1) is replaced by its
+
+The Formal Viewpoint
+Section 2.3
+161
+obvious relative form, and axiom (2) is broken into two parts, the ﬁrst hypothesizing
+a long exact sequence involving these relative groups, with natural boundary maps,
+the second stating some version of excision, for example hn(X, A) ≈hn(X/A, A/A)
+if one is dealing with CW pairs. In axiom (3) the wedge sum is replaced by disjoint
+union.
+These axioms for unreduced homology are essentially the same as those origi-
+nally laid out in the highly inﬂuential book [Eilenberg & Steenrod 1952], except that
+axiom (3) was omitted since the focus there was on ﬁnite complexes, and there was
+another axiom specifying that the groups hn(point) are zero for n ≠0, as is true
+for singular homology. This axiom was called the ‘dimension axiom,’ presumably be-
+cause it speciﬁes that a point has nontrivial homology only in dimension zero. It can
+be regarded as a normalization axiom, since one can trivially deﬁne a homology the-
+ory where it fails by setting hn(X, A) = Hn+k(X, A) for a ﬁxed nonzero integer k. At
+the time there were no interesting homology theories known for which the dimension
+axiom did not hold, but soon thereafter topologists began studying a homology theory
+called ‘bordism’ having the property that the bordism groups of a point are nonzero in
+inﬁnitely many dimensions. Axiom (3) seems to have appeared ﬁrst in [Milnor 1962].
+Reduced and unreduced homology theories are essentially equivalent. From an
+unreduced theory h one gets a reduced theory eh by setting ehn(X) equal to the
+kernel of the canonical map hn(X)→hn(point).
+In the other direction, one sets
+hn(X) = ehn(X+) where X+ is the disjoint union of X with a point.
+We leave it
+as an exercise to show that these two transformations between reduced and unre-
+duced homology are inverses of each other. Just as with ordinary homology, one has
+hn(X) ≈ehn(X)⊕hn(x0) for any point x0 ∈X , since the long exact sequence of the
+pair (X, x0) splits via the retraction of X onto x0 . Note that ehn(x0) = 0 for all n,
+as can be seen by looking at the long exact sequence of reduced homology groups of
+the pair (x0, x0).
+The groups hn(x0) ≈ehn(S0) are called the coefﬁcients of the homology theo-
+ries h and eh, by analogy with the case of singular homology with coefﬁcients. One
+can trivially realize any sequence of abelian groups Gi as the coefﬁcient groups of a
+homology theory by setting hn(X, A) =
+L
+i Hn−i(X, A; Gi).
+In general, homology theories are not uniquely determined by their coefﬁcient
+groups, but this is true for singular homology: If h is a homology theory deﬁned
+for CW pairs, whose coefﬁcient groups hn(x0) are zero for n ≠0, then there are
+natural isomorphisms hn(X, A) ≈Hn(X, A; G) for all CW pairs (X, A) and all n,
+where G = h0(x0). This will be proved in Theorem 4.59.
+We have seen how Mayer–Vietoris sequences can be quite useful for singular ho-
+mology, and in fact every homology theory has Mayer–Vietoris sequences, at least
+for CW complexes. These can be obtained directly from the axioms in the follow-
+
+162
+Chapter 2
+Homology
+ing way. For a CW complex X = A ∪B with A and B subcomplexes, the inclusion
+(B, A ∩B)> (X, A) induces a commutative diagram of exact sequences
+n
+n
+...
+...
+...
+...
+−−→
+−−→
+−−−→
+−−−→
+−−−→
+−−−→
+B A
+B
+h
+(
+)
+−−→
+−−→
+B
+h n
+n
+(
+)
+h (
+)
+,
+−−−−−→
+−−−−−−→
+−−−−−→
+−−−−−−→
+−−−−→
+−−−−−−→
+h
+(
+)
+X
+h n
+n
+h (
+)
+h (
+)
+(
+)
+A
+h (
+)
+≈
+≈
+∩
+B A
+B
+,
+∩
+A
+B
+∩
+n 1
++
+n 1
++
+A
+X,
+A
+X,
+The vertical maps between relative groups are isomorphisms since B/(A ∩B) = X/A.
+Then it is a purely algebraic fact, whose proof is Exercise 38 at the end of the previous
+section, that a diagram such as this with every third vertical map an isomorphism
+gives rise to a long exact sequence involving the remaining nonisomorphic terms. In
+the present case this takes the form of a Mayer-Vietoris sequence
+··· -→hn(A ∩B)
+ϕ--→hn(A) ⊕hn(B)
+ψ--→hn(X)
+∂--→hn−1(A ∩B) -→···
+Categories and Functors
+Formally, singular homology can be regarded as a sequence of functions Hn that
+assign to each space X an abelian group Hn(X) and to each map f : X→Y a homo-
+morphism Hn(f ) = f∗: Hn(X)→Hn(Y), and similarly for relative homology groups.
+This sort of situation arises quite often, and not just in algebraic topology, so it is
+useful to introduce some general terminology for it. Roughly speaking, ‘functions’
+like Hn are called ‘functors,’ and the domains and ranges of these functors are called
+‘categories.’ Thus for Hn the domain category consists of topological spaces and con-
+tinuous maps, or in the relative case, pairs of spaces and continuous maps of pairs,
+and the range category consists of abelian groups and homomorphisms. A key point
+is that one is interested not only in the objects in the category, for example spaces or
+groups, but also in the maps, or ‘morphisms,’ between these objects.
+Now for the precise deﬁnitions. A category C consists of three things:
+(1) A collection Ob(C) of objects.
+(2) Sets Mor(X, Y) of morphisms for each pair X, Y ∈Ob(C), including a distin-
+guished ‘identity’ morphism 11 = 11X ∈Mor(X, X) for each X .
+(3) A ‘composition of morphisms’ function ◦: Mor(X, Y)×Mor(Y, Z)→Mor(X, Z) for
+each triple X, Y, Z ∈Ob(C), satisfying f ◦11 = f , 11◦f = f , and (f ◦g)◦h =
+f ◦(g ◦h).
+There are plenty of obvious examples, such as:
+The category of topological spaces, with continuous maps as the morphisms. Or
+we could restrict to special classes of spaces such as CW complexes, keeping
+continuous maps as the morphisms. We could also restrict the morphisms, for
+example to homeomorphisms.
+The category of groups, with homomorphisms as morphisms. Or the subcategory
+of abelian groups, again with homomorphisms as the morphisms. Generalizing

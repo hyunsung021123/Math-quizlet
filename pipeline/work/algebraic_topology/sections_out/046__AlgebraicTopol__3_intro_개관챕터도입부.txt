@@ -1,0 +1,336 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.intro 개관 (챕터 도입부)
+직전 소단원: 「2.C Simplicial Approximation」
+[본문]
+Cohomology is an algebraic variant of homology, the result of a simple dualiza-
+tion in the deﬁnition. Not surprisingly, the cohomology groups Hi(X) satisfy axioms
+much like the axioms for homology, except that induced homomorphisms go in the
+opposite direction as a result of the dualization. The basic distinction between homol-
+ogy and cohomology is thus that cohomology groups are contravariant functors while
+homology groups are covariant. In terms of intrinsic information, however, there is
+not a big difference between homology groups and cohomology groups. The homol-
+ogy groups of a space determine its cohomology groups, and the converse holds at
+least when the homology groups are ﬁnitely generated.
+What is a little surprising is that contravariance leads to extra structure in co-
+homology. This ﬁrst appears in a natural product, called cup product, which makes
+the cohomology groups of a space into a ring. This is an extremely useful piece of
+additional structure, and much of this chapter is devoted to studying cup products,
+which are considerably more subtle than the additive structure of cohomology.
+How does contravariance lead to a product in cohomology that is not present in
+homology? Actually there is a natural product in homology, but it takes the somewhat
+different form of a map Hi(X)×Hj(Y) -→Hi+j(X×Y) called the cross product. If both
+X and Y are CW complexes, this cross product in homology is induced from a map
+of cellular chains sending a pair (ei, ej) consisting of a cell of X and a cell of Y to
+the product cell ei×ej in X×Y . The details of the construction are described in §3.B.
+Taking X = Y , we thus have the ﬁrst half of a hypothetical product
+Hi(X)×Hj(X) -→Hi+j(X×X) -→Hi+j(X)
+The difﬁculty is in deﬁning the second map. The natural thing would be for this to be
+induced by a map X×X→X . The multiplication map in a topological group, or more
+generally an H–space, is such a map, and the resulting Pontryagin product can be quite
+useful when studying these spaces, as we show in §3.C. But for general X , the only
+
+186
+Chapter 3
+Cohomology
+natural maps X×X→X are the projections onto one of the factors, and since these
+projections collapse the other factor to a point, the resulting product in homology is
+rather trivial.
+With cohomology, however, the situation is better. One still has a cross product
+Hi(X)×Hj(Y) -→Hi+j(X×Y) constructed in much the same way as in homology, so
+one can again take X = Y and get the ﬁrst half of a product
+Hi(X)×Hj(X) -→Hi+j(X×X) -→Hi+j(X)
+But now by contravariance the second map would be induced by a map X→X×X ,
+and there is an obvious candidate for this map, the diagonal map ∆(x) = (x, x). This
+turns out to work very nicely, giving a well-behaved product in cohomology, the cup
+product.
+Another sort of extra structure in cohomology whose existence is traceable to
+contravariance is provided by cohomology operations. These make the cohomology
+groups of a space into a module over a certain rather complicated ring. Cohomology
+operations lie at a depth somewhat greater than the cup product structure, so we
+defer their study to §4.L.
+The extra layer of algebra in cohomology arising from the dualization in its def-
+inition may seem at ﬁrst to be separating it further from topology, but there are
+many topological situations where cohomology arises quite naturally. One of these is
+Poincar´e duality, the topic of the third section of this chapter. Another is obstruction
+theory, covered in §4.3. Characteristic classes in vector bundle theory (see [Milnor &
+Stasheff 1974] or [VBKT]) provide a further instance.
+From the viewpoint of homotopy theory, cohomology is in some ways more basic
+than homology. As we shall see in §4.3, cohomology has a description in terms of
+homotopy classes of maps that is very similar to, and in a certain sense dual to, the
+deﬁnition of homotopy groups. There is an analog of this for homology, described in
+§4.F, but the construction is more complicated.
+The Idea of Cohomology
+Let us look at a few low-dimensional examples to get an idea of how one might be
+led naturally to consider cohomology groups, and to see what properties of a space
+they might be measuring. For the sake of simplicity we consider simplicial cohomology
+of ∆complexes, rather than singular cohomology of more general spaces.
+Taking the simplest case ﬁrst, let X be a 1 dimensional ∆complex, or in other
+words an oriented graph. For a ﬁxed abelian group G, the set of all functions from ver-
+tices of X to G also forms an abelian group, which we denote by ∆0(X; G). Similarly
+the set of all functions assigning an element of G to each edge of X forms an abelian
+group ∆1(X; G). We will be interested in the homomorphism δ : ∆0(X; G)→∆1(X; G)
+sending ϕ ∈∆0(X; G) to the function δϕ ∈∆1(X; G) whose value on an oriented
+
+The Idea of Cohomology
+187
+edge [v0, v1] is the difference ϕ(v1) −ϕ(v0). For example, X might be the graph
+formed by a system of trails on a mountain, with vertices at the junctions between
+trails. The function ϕ could then assign to each junction its elevation above sea level,
+in which case δϕ would measure the net change in elevation along the trail from one
+junction to the next. Or X might represent a simple electrical circuit with ϕ mea-
+suring voltages at the connection points, the vertices, and δϕ measuring changes in
+voltage across the components of the circuit, represented by edges.
+Regarding the map δ : ∆0(X; G)→∆1(X; G) as a chain complex with 0’s before and
+after these two terms, the homology groups of this chain complex are by deﬁnition
+the simplicial cohomology groups of X , namely H0(X; G) = Ker δ ⊂∆0(X; G) and
+H1(X; G) = ∆1(X; G)/ Im δ. For simplicity we are using here the same notation as will
+be used for singular cohomology later in the chapter, in anticipation of the theorem
+that the two theories coincide for ∆complexes, as we show in §3.1.
+The group H0(X; G) is easy to describe explicitly. A function ϕ ∈∆0(X; G) has
+δϕ = 0 iff ϕ takes the same value at both ends of each edge of X . This is equivalent
+to saying that ϕ is constant on each component of X . So H0(X; G) is the group of all
+functions from the set of components of X to G. This is a direct product of copies
+of G, one for each component of X .
+The cohomology group H1(X; G) = ∆1(X; G)/ Im δ will be trivial iff the equation
+δϕ = ψ has a solution ϕ ∈∆0(X; G) for each ψ ∈∆1(X; G). Solving this equation
+means deciding whether specifying the change in ϕ across each edge of X determines
+an actual function ϕ ∈∆0(X; G). This is rather like the calculus problem of ﬁnding a
+function having a speciﬁed derivative, with the difference operator δ playing the role
+of differentiation. As in calculus, if a solution of δϕ = ψ exists, it will be unique up
+to adding an element of the kernel of δ, that is, a function that is constant on each
+component of X .
+The equation δϕ = ψ is always solvable if X is a tree since if we choose arbitrarily
+a value for ϕ at a basepoint vertex v0 , then if the change in ϕ across each edge of
+X is speciﬁed, this uniquely determines the value of ϕ at every other vertex v by
+induction along the unique path from v0 to v in the tree. When X is not a tree, we
+ﬁrst choose a maximal tree in each component of X . Then, since every vertex lies
+in one of these maximal trees, the values of ψ on the edges of the maximal trees
+determine ϕ uniquely up to a constant on each component of X . But in order for
+the equation δϕ = ψ to hold, the value of ψ on each edge not in any of the maximal
+trees must equal the difference in the already-determined values of ϕ at the two ends
+of the edge. This condition need not be satisﬁed since ψ can have arbitrary values on
+these edges. Thus we see that the cohomology group H1(X; G) is a direct product of
+copies of the group G, one copy for each edge of X not in one of the chosen maximal
+trees. This can be compared with the homology group H1(X; G) which consists of a
+direct sum of copies of G, one for each edge of X not in one of the maximal trees.
+
+188
+Chapter 3
+Cohomology
+Note that the relation between H1(X; G) and H1(X; G) is the same as the relation
+between H0(X; G) and H0(X; G), with H0(X; G) being a direct product of copies of
+G and H0(X; G) a direct sum, with one copy for each component of X in either case.
+Now let us move up a dimension, taking X to be a 2 dimensional ∆complex.
+Deﬁne ∆0(X; G) and ∆1(X; G) as before, as functions from vertices and edges of X
+to the abelian group G, and deﬁne ∆2(X; G) to be the functions from 2 simplices of
+X to G. A homomorphism δ : ∆1(X; G)→∆2(X; G) is deﬁned by δψ([v0, v1, v2]) =
+ψ([v0, v1]) + ψ([v1, v2]) −ψ([v0, v2]), a signed sum of the values of ψ on the three
+edges in the boundary of [v0, v1, v2], just as δϕ([v0, v1]) for ϕ ∈∆0(X; G) was a
+signed sum of the values of ϕ on the boundary of [v0, v1]. The two homomorphisms
+∆0(X; G)
+δ--→∆1(X; G)
+δ--→∆2(X; G) form a chain complex since for ϕ ∈∆0(X; G) we
+have δδϕ =
+ ϕ(v1)−ϕ(v0)
+
++
+ ϕ(v2)−ϕ(v1)
+
+−
+ ϕ(v2)−ϕ(v0)
+
+= 0. Extending this
+chain complex by 0’s on each end, the resulting homology groups are by deﬁnition
+the cohomology groups Hi(X; G).
+The formula for the map δ : ∆1(X; G)→∆2(X; G) can be looked at from several
+different viewpoints.
+Perhaps the simplest is the observation that δψ = 0 iff ψ
+satisﬁes the additivity property ψ([v0, v2]) = ψ([v0, v1]) + ψ([v1, v2]), where we
+think of the edge [v0, v2] as the sum of the edges [v0, v1] and [v1, v2]. Thus δψ
+measures the deviation of ψ from being additive.
+From another point of view, δψ can be regarded as an obstruction to ﬁnding
+ϕ ∈∆0(X; G) with ψ = δϕ, for if ψ = δϕ then δψ = 0 since δδϕ = 0 as we saw
+above. We can think of δψ as a local obstruction to solving ψ = δϕ since it depends
+only on the values of ψ within individual 2 simplices of X . If this local obstruction
+vanishes, then ψ deﬁnes an element of H1(X; G) which is zero iff ψ = δϕ has
+an actual solution. This class in H1(X; G) is thus the global obstruction to solving
+ψ = δϕ. This situation is similar to the calculus problem of determining whether a
+given vector ﬁeld is the gradient vector ﬁeld of some function. The local obstruction
+here is the vanishing of the curl of the vector ﬁeld, and the global obstruction is the
+vanishing of all line integrals around closed loops in the domain of the vector ﬁeld.
+The condition δψ = 0 has an interpretation of a more geometric nature when X
+is a surface and the group G is Z or Z2 . Consider ﬁrst the simpler case G = Z2 . The
+condition δψ = 0 means that the number of times that ψ takes the value 1 on the
+edges of each 2 simplex is even, either 0 or 2. This means we can associate to ψ a
+collection Cψ of disjoint curves in X crossing the
+1 skeleton transversely, such that the number of
+intersections of Cψ with each edge is equal to the
+value of ψ on that edge. If ψ = δϕ for some ϕ,
+then the curves of Cψ divide X into two regions
+X0 and X1 where the subscript indicates the value
+of ϕ on all vertices in the region.
+
+The Idea of Cohomology
+189
+When G = Z we can reﬁne this construction by building Cψ from a number of
+arcs in each 2 simplex, each arc having a transverse orientation, the orientation which
+agrees or disagrees with the orientation
+of each edge according to the sign of the
+value of ψ on the edge, as in the ﬁgure
+at the right. The resulting collection Cψ
+of disjoint curves in X can be thought
+of as something like level curves for a
+function ϕ with δϕ = ψ, if such a func-
+tion exists. The value of ϕ changes by
+1 each time a curve of Cψ is crossed.
+For example, if X is a disk then we will
+v
+5
+2
+3
+0
+v1
+v2
+v
+1
+3
+-
+2
+0
+v1
+v2
+4
+4
+3
+2
+1
+1
+0
+1
+0
+1
+0
+0
+show that H1(X; Z) = 0, so δψ = 0 im-
+plies ψ = δϕ for some ϕ, hence every
+transverse curve system Cψ forms the level curves of a function ϕ. On the other
+hand, if X is an annulus then this need no longer be true, as
+illustrated in the example shown in the ﬁgure at the left, where
+the equation ψ = δϕ obviously has no solution even though
+δψ = 0. By identifying the inner and outer boundary circles
+of this annulus we obtain a similar example on the torus. Even
+with G = Z2 the equation ψ −δϕ has no solution since the
+curve Cψ does not separate X into two regions X0 and X1 .
+1
+1
+?
+?
+0
+0
+The key to relating cohomology groups to homology groups is the observation
+that a function from i simplices of X to G is equivalent to a homomorphism from the
+simplicial chain group ∆i(X) to G. This is because ∆i(X) is free abelian with basis the
+i simplices of X , and a homomorphism with domain a free abelian group is uniquely
+determined by its values on basis elements, which can be assigned arbitrarily. Thus we
+have an identiﬁcation of ∆i(X; G) with the group Hom(∆i(X), G) of homomorphisms
+∆i(X)→G, which is called the dual group of ∆i(X). There is also a simple relationship
+of duality between the homomorphism δ : ∆i(X; G)→∆i+1(X; G) and the boundary
+homomorphism ∂: ∆i+1(X)→∆i(X). The general formula for δ is
+δϕ([v0, ··· , vi+1]) =
+X
+j
+(−1)jϕ([v0, ··· , bvj, ··· , vi+1])
+and the latter sum is just ϕ(∂[v0, ··· , vi+1]). Thus we have δϕ = ϕ∂. In other words,
+δ sends each ϕ ∈Hom(∆i(X), G) to the composition ∆i+1(X)
+∂--→∆i(X)
+ϕ--→G, which
+in the language of linear algebra means that δ is the dual map of ∂.
+Thus we have the algebraic problem of understanding the relationship between
+the homology groups of a chain complex and the homology groups of the dual complex
+obtained by applying the functor C,Hom(C, G). This is the ﬁrst topic of the chapter.
+
+190
+Chapter 3
+Cohomology
+Homology groups Hn(X) are the result of a two-stage process: First one forms a
+chain complex ··· --→Cn
+∂--→Cn−1 --→··· of singular, simplicial, or cellular chains,
+then one takes the homology groups of this chain complex, Ker ∂/ Im ∂. To obtain
+the cohomology groups Hn(X; G) we interpolate an intermediate step, replacing the
+chain groups Cn by the dual groups Hom(Cn, G) and the boundary maps ∂by their
+dual maps δ, before forming the cohomology groups Ker δ/ Im δ. The plan for this
+section is ﬁrst to sort out the algebra of this dualization process and show that the
+cohomology groups are determined algebraically by the homology groups, though
+in a somewhat subtle way.
+Then after this algebraic excursion we will deﬁne the
+cohomology groups of spaces and show that these satisfy basic properties very much
+like those for homology. The payoff for all this formal work will begin to be apparent
+in subsequent sections.
+The Universal Coefﬁcient Theorem
+Let us begin with a simple example. Consider the chain complex
+−−−−−→
+0
+Z
+Z −−−−−→
+2
+Z −−−−−→
+0
+Z−−−−→
+−−−−→
+0
+0
+=
+C3
+=
+C2
+=
+C1
+=
+C0
+where Z
+2--→Z is the map x , 2x . If we dualize by taking Hom(−, G) with G = Z,
+we obtain the cochain complex
+0
+Z
+Z
+2
+Z
+0
+Z
+−−−−→
+−−−−→
+−−−−→
+−−−−→−−−−→
+0
+0
+=
+C3
+=
+C2
+=
+C1
+=
+C0
+∗
+∗
+∗
+∗
+In the original chain complex the homology groups are Z’s in dimensions 0 and 3,
+together with a Z2 in dimension 1. The homology groups of the dual cochain com-
+plex, which are called cohomology groups to emphasize the dualization, are again Z’s
+in dimensions 0 and 3, but the Z2 in the 1 dimensional homology of the original
+complex has shifted up a dimension to become a Z2 in 2 dimensional cohomology.
+More generally, consider any chain complex of ﬁnitely generated free abelian
+groups. Such a chain complex always splits as the direct sum of elementary com-
+plexes of the forms 0→Z→0 and 0→Z
+m--→Z→0, according to Exercise 43 in §2.2.
+Applying Hom(−, Z) to this direct sum of elementary complexes, we obtain the direct
+sum of the corresponding dual complexes 0←Z←0 and 0←Z
+m
+←--- Z←0. Thus the
+cohomology groups are the same as the homology groups except that torsion is shifted
+up one dimension. We will see later in this section that the same relation between ho-
+mology and cohomology holds whenever the homology groups are ﬁnitely generated,
+even when the chain groups are not ﬁnitely generated. It would also be quite easy to

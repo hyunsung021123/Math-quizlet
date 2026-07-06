@@ -1,0 +1,589 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.1.5 Exact Sequences and Excision (분할 part 1)
+직전 소단원: 「2.1.4 Homotopy Invariance」
+[본문]
+Simplicial and Singular Homology
+Section 2.1
+113
+Now we can ﬁnish the proof of the theorem. If α ∈Cn(X) is a cycle, then we
+have g♯(α) −f♯(α) = ∂P(α) + P∂(α) = ∂P(α) since ∂α = 0. Thus g♯(α) −f♯(α) is
+a boundary, so g♯(α) and f♯(α) determine the same homology class, which means
+that g∗equals f∗on the homology class of α.
+⊔⊓
+The relationship ∂P +P∂= g♯−f♯is expressed by saying P is a chain homotopy
+between the chain maps f♯and g♯. We have just shown:
+Proposition 2.12. Chain-homotopic chain maps induce the same homomorphism on
+homology.
+⊔⊓
+There are also induced homomorphisms f∗: eHn(X)→eHn(Y) for reduced homol-
+ogy groups since f♯ε = εf♯. The properties of induced homomorphisms we proved
+above hold equally well in the setting of reduced homology, with the same proofs.
+Exact Sequences and Excision
+It would be nice if there was always a simple relationship between the homology
+groups of a space X , a subspace A, and the quotient space X/A. For then one could
+hope to understand the homology groups of spaces such as CW complexes that can be
+built inductively from successively more complicated subspaces. Perhaps the simplest
+possible relationship would be if Hn(X) contained Hn(A) as a subgroup and the
+quotient group Hn(X)/Hn(A) was isomorphic to Hn(X/A).
+While this does hold
+in some cases, if it held in general then homology theory would collapse totally since
+every space X can be embedded as a subspace of a space with trivial homology groups,
+namely the cone CX = (X×I)/(X×{0}), which is contractible.
+It turns out that this overly simple model does not have to be modiﬁed too much
+to get a relationship that is valid in fair generality. The novel feature of the actual
+relationship is that it involves the groups Hn(X), Hn(A), and Hn(X/A) for all values
+of n simultaneously. In practice this is not as bad as it might sound, and in addition
+it has the pleasant side effect of sometimes allowing higher-dimensional homology
+groups to be computed in terms of lower-dimensional groups, which may already be
+known by induction for example.
+In order to formulate the relationship we are looking for, we need an algebraic
+deﬁnition which is central to algebraic topology. A sequence of homomorphisms
+··· ----→An+1
+αn+1
+------------→An
+αn
+---------→An−1 ----→···
+is said to be exact if Ker αn = Im αn+1 for each n. The inclusions Im αn+1 ⊂Ker αn
+are equivalent to αnαn+1 = 0, so the sequence is a chain complex, and the opposite
+inclusions Ker αn ⊂Im αn+1 say that the homology groups of this chain complex are
+trivial.
+
+114
+Chapter 2
+Homology
+A number of basic algebraic concepts can be expressed in terms of exact se-
+quences, for example:
+(i) 0 -→A
+α--→B is exact iff Ker α = 0, i.e., α is injective.
+(ii) A
+α--→B -→0 is exact iff Im α = B , i.e., α is surjective.
+(iii) 0 -→A
+α--→B -→0 is exact iff α is an isomorphism, by (i) and (ii).
+(iv) 0 -→A
+α--→B
+β--→C -→0 is exact iff α is injective, β is surjective, and Ker β =
+Im α, so β induces an isomorphism C ≈B/ Im α. This can be written C ≈B/A if
+we think of α as an inclusion of A as a subgroup of B .
+An exact sequence 0→A→B→C→0 as in (iv) is called a short exact sequence.
+Exact sequences provide the right tool to relate the homology groups of a space,
+a subspace, and the associated quotient space:
+Theorem 2.13. If X is a space and A is a nonempty closed subspace that is a defor-
+mation retract of some neighborhood in X , then there is an exact sequence
+··· --→eHn(A)
+i∗
+-----→eHn(X)
+j∗
+-----→eHn(X/A)
+∂--→eHn−1(A)
+i∗
+-----→eHn−1(X) --→···
+··· --→eH0(X/A) --→0
+where i is the inclusion A > X and j is the quotient map X→X/A.
+The map ∂will be constructed in the course of the proof. The idea is that an
+element x ∈eHn(X/A) can be represented by a chain α in X with ∂α a cycle in A
+whose homology class is ∂x ∈eHn−1(A).
+Pairs of spaces (X, A) satisfying the hypothesis of the theorem will be called
+good pairs. For example, if X is a CW complex and A is a nonempty subcomplex,
+then (X, A) is a good pair by Proposition A.5 in the Appendix.
+Corollary 2.14.
+eHn(Sn) ≈Z and eHi(Sn) = 0 for i ≠n.
+Proof: For n > 0 take (X, A) = (Dn, Sn−1) so X/A = Sn . The terms eHi(Dn) in the
+long exact sequence for this pair are zero since Dn is contractible. Exactness of the
+sequence then implies that the maps eHi(Sn)
+∂--→eHi−1(Sn−1) are isomorphisms for
+i > 0 and that eH0(Sn) = 0. The result now follows by induction on n, starting with
+the case of S0 where the result holds by Propositions 2.6 and 2.8.
+⊔⊓
+As an application of this calculation we have the following classical theorem of
+Brouwer, the 2 dimensional case of which was proved in §1.1.
+Corollary 2.15. ∂Dn is not a retract of Dn . Hence every map f : Dn→Dn has a
+ﬁxed point.
+Proof: If r : Dn→∂Dn is a retraction, then ri = 11 for i : ∂Dn→Dn the inclusion map.
+The composition eHn−1(∂Dn)
+i∗
+-----→eHn−1(Dn)
+r∗
+-----→eHn−1(∂Dn) is then the identity map
+
+Simplicial and Singular Homology
+Section 2.1
+115
+on eHn−1(∂Dn) ≈Z. But i∗and r∗are both 0 since eHn−1(Dn) = 0, and we have a
+contradiction. The statement about ﬁxed points follows as in Theorem 1.9.
+⊔⊓
+The derivation of the exact sequence of homology groups for a good pair (X, A)
+will be rather a long story. We will in fact derive a more general exact sequence which
+holds for arbitrary pairs (X, A), but with the homology groups of the quotient space
+X/A replaced by relative homology groups, denoted Hn(X, A). These turn out to be
+quite useful for many other purposes as well.
+Relative Homology Groups
+It sometimes happens that by ignoring a certain amount of data or structure one
+obtains a simpler, more ﬂexible theory which, almost paradoxically, can give results
+not readily obtainable in the original setting. A familiar instance of this is arithmetic
+mod n, where one ignores multiples of n. Relative homology is another example. In
+this case what one ignores is all singular chains in a subspace of the given space.
+Relative homology groups are deﬁned in the following way. Given a space X and
+a subspace A ⊂X , let Cn(X, A) be the quotient group Cn(X)/Cn(A). Thus chains in
+A are trivial in Cn(X, A). Since the boundary map ∂: Cn(X)→Cn−1(X) takes Cn(A)
+to Cn−1(A), it induces a quotient boundary map ∂: Cn(X, A)→Cn−1(X, A). Letting n
+vary, we have a sequence of boundary maps
+··· -→Cn(X, A)
+∂-----→Cn−1(X, A) -→···
+The relation ∂2 = 0 holds for these boundary maps since it holds before passing to
+quotient groups. So we have a chain complex, and the homology groups Ker ∂/ Im ∂
+of this chain complex are by deﬁnition the relative homology groups Hn(X, A). By
+considering the deﬁnition of the relative boundary map we see:
+Elements of Hn(X, A) are represented by relative cycles: n chains α ∈Cn(X)
+such that ∂α ∈Cn−1(A).
+A relative cycle α is trivial in Hn(X, A) iff it is a relative boundary: α = ∂β + γ
+for some β ∈Cn+1(X) and γ ∈Cn(A).
+These properties make precise the intuitive idea that Hn(X, A) is ‘homology of X
+modulo A.’
+The quotient Cn(X)/Cn(A) could also be viewed as a subgroup of Cn(X), the
+subgroup with basis the singular n simplices σ : ∆n→X whose image is not con-
+tained in A. However, the boundary map does not take this subgroup of Cn(X) to
+the corresponding subgroup of Cn−1(X), so it is usually better to regard Cn(X, A) as
+a quotient rather than a subgroup of Cn(X).
+Our goal now is to show that the relative homology groups Hn(X, A) for any pair
+(X, A) ﬁt into a long exact sequence
+··· -→Hn(A) -→Hn(X) -→Hn(X, A) -→Hn−1(A) -→Hn−1(X) -→···
+··· -→H0(X, A) -→0
+
+116
+Chapter 2
+Homology
+This will be entirely a matter of algebra. To start the process, consider the diagram
+−−−−−→
+−−−−−→
+−−−−−−→
+−−−−−−→
+−−−−−−→
+−−−−−−→
+i
+j
+i
+j
+A
+A
+C
+0
+(
+)
+−−−−−→
+X
+C
+0
+n
+n
+n
+(
+)
+X
+C (
+)
+∂
+∂
+∂
+,
+−−−−−−→
+−−−−−−→
+−−−−−−→
+−−−−−−→
+-
+A
+A
+C
+0
+(
+)
+X
+C
+0
+n 1
+-
+n 1
+-
+n 1
+(
+)
+X
+C
+(
+)
+,
+where i is inclusion and j is the quotient map. The diagram is commutative by the def-
+inition of the boundary maps. Letting n vary, and drawing these short exact sequences
+vertically rather than horizontally, we
+have a large commutative diagram of
+the form shown at the right, where the
+columns are exact and the rows are
+chain complexes which we denote A,
+−−−→
+−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+j
+j
+j
+-
+Bn 1
++
+−−−→
+Bn 1
+Bn
+∂
+∂
+...
+...
+−→
+−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+-
+Cn 1
++
+−→
+−→
+−→
+−→
+Cn 1
+Cn
+∂
+∂
+...
+...
+−−−→
+−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+i
+i
+i
+-
+An 1
++
+−−−→
+An 1
+A
+0
+0
+0
+0
+0
+0
+n
+∂
+∂
+...
+...
+B , and C . Such a diagram is called a
+short exact sequence of chain com-
+plexes.
+We will show that when we
+pass to homology groups, this short
+exact sequence of chain complexes stretches out into a long exact sequence of homol-
+ogy groups
+··· -→Hn(A)
+i∗
+-----→Hn(B)
+j∗
+-----→Hn(C)
+∂--→Hn−1(A)
+i∗
+-----→Hn−1(B) -→···
+where Hn(A) denotes the homology group Ker ∂/ Im ∂at An in the chain complex A,
+and Hn(B) and Hn(C) are deﬁned similarly.
+The commutativity of the squares in the short exact sequence of chain complexes
+means that i and j are chain maps.
+These therefore induce maps i∗and j∗on
+homology. To deﬁne the boundary map ∂: Hn(C)→Hn−1(A), let c ∈Cn be a cycle.
+Since j is onto, c = j(b) for some b ∈Bn . The element ∂b ∈Bn−1
+is in Ker j since j(∂b) = ∂j(b) = ∂c = 0. So ∂b = i(a) for some
+a ∈An−1 since Ker j = Im i. Note that ∂a = 0 since i(∂a) =
+∂i(a) = ∂∂b = 0 and i is injective. We deﬁne ∂: Hn(C)→Hn−1(A)
+by sending the homology class of c to the homology class of a,
+∂[c] = [a]. This is well-deﬁned since:
+Cn
+B
+B
+n
+A
+-
+n 1
+-
+n 1
+−−→
+−−−→
+−−−→
+−−−→
+a
+b
+b
+c
+∂
+∂
+- −−−→
+-
+−−−→
+-
+i
+j
+The element a is uniquely determined by ∂b since i is injective.
+A different choice b′ for b would have j(b′) = j(b), so b′ −b is in Ker j = Im i.
+Thus b′ −b = i(a′) for some a′ , hence b′ = b + i(a′). The effect of replacing b
+by b+i(a′) is to change a to the homologous element a+∂a′ since i(a+∂a′) =
+i(a) + i(∂a′) = ∂b + ∂i(a′) = ∂(b + i(a′)).
+A different choice of c within its homology class would have the form c + ∂c′ .
+Since c′ = j(b′) for some b′ , we then have c + ∂c′ = c + ∂j(b′) = c + j(∂b′) =
+j(b + ∂b′), so b is replaced by b + ∂b′ , which leaves ∂b and therefore also a
+unchanged.
+
+Simplicial and Singular Homology
+Section 2.1
+117
+The map ∂: Hn(C)→Hn−1(A) is a homomorphism since if ∂[c1] = [a1] and ∂[c2] =
+[a2] via elements b1 and b2 as above, then j(b1 + b2) = j(b1) + j(b2) = c1 + c2 and
+i(a1 + a2) = i(a1) + i(a2) = ∂b1 + ∂b2 = ∂(b1 + b2), so ∂([c1] + [c2]) = [a1] + [a2].
+Theorem 2.16. The sequence of homology groups
+··· -→Hn(A)
+i∗
+-----→Hn(B)
+j∗
+-----→Hn(C)
+∂--→Hn−1(A)
+i∗
+-----→Hn−1(B) -→···
+is exact.
+Proof: There are six things to verify:
+Im i∗⊂Ker j∗. This is immediate since ji = 0 implies j∗i∗= 0.
+Im j∗⊂Ker ∂. We have ∂j∗= 0 since in this case ∂b = 0 in the deﬁnition of ∂.
+Im ∂⊂Ker i∗. Here i∗∂= 0 since i∗∂takes [c] to [∂b] = 0.
+Ker j∗⊂Im i∗. A homology class in Ker j∗is represented by a cycle b ∈Bn with
+j(b) a boundary, so j(b) = ∂c′ for some c′ ∈Cn+1 . Since j is surjective, c′ = j(b′)
+for some b′ ∈Bn+1 . We have j(b −∂b′) = j(b) −j(∂b′) = j(b) −∂j(b′) = 0 since
+∂j(b′) = ∂c′ = j(b). So b −∂b′ = i(a) for some a ∈An . This a is a cycle since
+i(∂a) = ∂i(a) = ∂(b −∂b′) = ∂b = 0 and i is injective. Thus i∗[a] = [b −∂b′] = [b],
+showing that i∗maps onto Ker j∗.
+Ker ∂⊂Im j∗. In the notation used in the deﬁnition of ∂, if c represents a homology
+class in Ker ∂, then a = ∂a′ for some a′ ∈An . The element b −i(a′) is a cycle
+since ∂(b −i(a′)) = ∂b −∂i(a′) = ∂b −i(∂a′) = ∂b −i(a) = 0. And j(b −i(a′)) =
+j(b) −ji(a′) = j(b) = c , so j∗maps [b −i(a′)] to [c].
+Ker i∗⊂Im ∂. Given a cycle a ∈An−1 such that i(a) = ∂b for some b ∈Bn , then
+j(b) is a cycle since ∂j(b) = j(∂b) = ji(a) = 0, and ∂takes [j(b)] to [a].
+⊔⊓
+This theorem represents the beginnings of the subject of homological algebra.
+The method of proof is sometimes called diagram chasing.
+Returning to topology, the preceding algebraic theorem yields a long exact se-
+quence of homology groups:
+··· -→Hn(A)
+i∗
+-----→Hn(X)
+j∗
+-----→Hn(X, A)
+∂--→Hn−1(A)
+i∗
+-----→Hn−1(X) -→···
+··· -→H0(X, A) -→0
+The boundary map ∂: Hn(X, A)→Hn−1(A) has a very simple description: If a class
+[α] ∈Hn(X, A) is represented by a relative cycle α, then ∂[α] is the class of the
+cycle ∂α in Hn−1(A). This is immediate from the algebraic deﬁnition of the boundary
+homomorphism in the long exact sequence of homology groups associated to a short
+exact sequence of chain complexes.
+This long exact sequence makes precise the idea that the groups Hn(X, A) mea-
+sure the difference between the groups Hn(X) and Hn(A). In particular, exactness
+
+118
+Chapter 2
+Homology
+implies that if Hn(X, A) = 0 for all n, then the inclusion A>X induces isomorphisms
+Hn(A) ≈Hn(X) for all n, by the remark (iii) following the deﬁnition of exactness. The
+converse is also true according to an exercise at the end of this section.
+There is a completely analogous long exact sequence of reduced homology groups
+for a pair (X, A) with A ≠∅. This comes from applying the preceding algebraic ma-
+chinery to the short exact sequence of chain complexes formed by the short exact se-
+quences 0→Cn(A)→Cn(X)→Cn(X, A)→0 in nonnegative dimensions, augmented
+by the short exact sequence 0 -→Z
+11--→Z -→0 -→0 in dimension −1. In particular
+this means that eHn(X, A) is the same as Hn(X, A) for all n, when A ≠∅.
+Example 2.17. In the long exact sequence of reduced homology groups for the pair
+(Dn, ∂Dn), the maps Hi(Dn, ∂Dn)
+∂--→eHi−1(Sn−1) are isomorphisms for all i > 0
+since the remaining terms eHi(Dn) are zero for all i. Thus we obtain the calculation
+Hi(Dn, ∂Dn) ≈
+
+Z
+for i = n
+0
+otherwise
+Example 2.18. Applying the long exact sequence of reduced homology groups to a
+pair (X, x0) with x0 ∈X yields isomorphisms Hn(X, x0) ≈eHn(X) for all n since
+eHn(x0) = 0 for all n.
+There are induced homomorphisms for relative homology just as there are in the
+nonrelative, or ‘absolute,’ case. A map f : X→Y with f (A) ⊂B , or more concisely
+f : (X, A)→(Y, B), induces homomorphisms f♯: Cn(X, A)→Cn(Y, B) since the chain
+map f♯: Cn(X)→Cn(Y) takes Cn(A) to Cn(B), so we get a well-deﬁned map on quo-
+tients, f♯: Cn(X, A)→Cn(Y, B). The relation f♯∂= ∂f♯holds for relative chains since
+it holds for absolute chains. By Proposition 2.9 we then have induced homomorphisms
+f∗: Hn(X, A)→Hn(Y, B).
+Proposition 2.19. If two maps f , g : (X, A)→(Y, B) are homotopic through maps of
+pairs (X, A)→(Y, B), then f∗= g∗: Hn(X, A)→Hn(Y, B).
+Proof: The prism operator P from the proof of Theorem 2.10 takes Cn(A) to Cn+1(B),
+hence induces a relative prism operator P : Cn(X, A)→Cn+1(Y, B). Since we are just
+passing to quotient groups, the formula ∂P + P∂= g♯−f♯remains valid. Thus the
+maps f♯and g♯on relative chain groups are chain homotopic, and hence they induce
+the same homomorphism on relative homology groups.
+⊔⊓
+An easy generalization of the long exact sequence of a pair (X, A) is the long
+exact sequence of a triple (X, A, B), where B ⊂A ⊂X :
+··· -→Hn(A, B) -→Hn(X, B) -→Hn(X, A) -→Hn−1(A, B) -→···
+This is the long exact sequence of homology groups associated to the short exact
+sequence of chain complexes formed by the short exact sequences
+0 -→Cn(A, B) -→Cn(X, B) -→Cn(X, A) -→0
+
+Simplicial and Singular Homology
+Section 2.1
+119
+For example, taking B to be a point, the long exact sequence of the triple (X, A, B)
+becomes the long exact sequence of reduced homology for the pair (X, A).
+Excision
+A fundamental property of relative homology groups is given by the following
+Excision Theorem, describing when the relative groups Hn(X, A) are unaffected by
+deleting, or excising, a subset Z ⊂A.
+Theorem 2.20. Given subspaces Z ⊂A ⊂X such that the closure of Z is contained
+in the interior of A, then the inclusion (X −Z, A −Z) > (X, A) induces isomor-
+phisms Hn(X −Z, A−Z)→Hn(X, A) for all n. Equivalently, for subspaces A, B ⊂X
+whose interiors cover X , the inclusion (B, A ∩B) > (X, A) induces isomorphisms
+Hn(B, A ∩B)→Hn(X, A) for all n.
+A
+Z
+X
+The translation between the two versions is obtained by
+setting B = X −Z and Z = X −B . Then A∩B = A−Z and the
+condition cl Z ⊂int A is equivalent to X = int A ∪int B since
+X −int B = cl Z .
+The proof of the excision theorem will involve a rather lengthy technical detour
+involving a construction known as barycentric subdivision, which allows homology
+groups to be computed using small singular simplices. In a metric space ‘smallness’
+can be deﬁned in terms of diameters, but for general spaces it will be deﬁned in terms
+of covers.
+For a space X , let U = {Uj} be a collection of subspaces of X whose interiors
+form an open cover of X , and let CU
+n(X) be the subgroup of Cn(X) consisting of
+chains
+P
+i niσi such that each σi has image contained in some set in the cover U. The
+boundary map ∂: Cn(X)→Cn−1(X) takes CU
+n(X) to CU
+n−1(X), so the groups CU
+n(X)
+form a chain complex.
+We denote the homology groups of this chain complex by
+HU
+n(X).
+Proposition 2.21. The inclusion ι : CU
+n(X) > Cn(X) is a chain homotopy equiva-
+lence, that is, there is a chain map ρ : Cn(X)→CU
+n(X) such that ιρ and ρι are chain
+homotopic to the identity. Hence ι induces isomorphisms HU
+n(X) ≈Hn(X) for all n.
+Proof: The barycentric subdivision process will be performed at four levels, beginning
+with the most geometric and becoming increasingly algebraic.
+(1) Barycentric Subdivision of Simplices. The points of a simplex [v0, ··· , vn] are the
+linear combinations
+P
+i tivi with
+P
+i ti = 1 and ti ≥0 for each i. The barycenter or
+‘center of gravity’ of the simplex [v0, ··· , vn] is the point b =
+P
+i tivi whose barycen-
+tric coordinates ti are all equal, namely ti = 1/(n + 1) for each i. The barycentric
+subdivision of [v0, ··· , vn] is the decomposition of [v0, ··· , vn] into the n simplices
+[b, w0, ··· , wn−1] where, inductively, [w0, ··· , wn−1] is an (n −1) simplex in the
+
+120
+Chapter 2
+Homology
+barycentric subdivision of a face [v0, ··· , bvi, ··· , vn]. The induction starts with the
+case n = 0 when the barycentric subdivision of [v0] is deﬁned to be just [v0] itself.
+The next two cases n = 1, 2 and
+part of the case n = 3 are shown
+in the ﬁgure. It follows from the
+inductive deﬁnition that the ver-
+v
+v0
+v
+b
+b
+b
+0
+1
+v2
+v1
+v0
+v1
+v2
+v3
+tices of simplices in the barycen-
+tric subdivision of [v0, ··· , vn]
+are exactly the barycenters of all
+the k dimensional faces [vi0, ··· , vik] of [v0, ··· , vn] for 0 ≤k ≤n. When k = 0 this
+gives the original vertices vi since the barycenter of a 0 simplex is itself. The barycen-
+ter of [vi0, ··· , vik] has barycentric coordinates ti = 1/(k + 1) for i = i0, ··· , ik and
+ti = 0 otherwise.
+The n simplices of the barycentric subdivision of ∆n , together with all their faces,
+do in fact form a ∆complex structure on ∆n , indeed a simplicial complex structure,
+though we shall not need to know this in what follows.
+A fact we will need is that the diameter of each simplex of the barycentric subdivi-
+sion of [v0, ··· , vn] is at most n/(n+1) times the diameter of [v0, ··· , vn]. Here the
+diameter of a simplex is by deﬁnition the maximum distance between any two of its
+points, and we are using the metric from the ambient Euclidean space Rm containing
+[v0, ··· , vn]. The diameter of a simplex equals the maximum distance between any
+of its vertices because the distance between two points v and
+P
+i tivi of [v0, ··· , vn]
+satisﬁes the inequality
+v −
+P
+itivi
+ =
+P
+iti(v −vi)
+ ≤
+P
+iti|v −vi| ≤
+P
+iti max |v −vi| = max |v −vi|
+To obtain the bound n/(n + 1) on the ratio of diameters, we therefore need to verify
+that the distance between any two vertices wj and wk of a simplex [w0, ··· , wn] of
+the barycentric subdivision of [v0, ··· , vn] is at most n/(n+1) times the diameter of
+[v0, ··· , vn]. If neither wi nor wj is the barycenter b of [v0, ··· , vn], then these two
+points lie in a proper face of [v0, ··· , vn] and we are done by induction on n. So we
+may suppose wj , say, is the barycenter b, and then by the previous displayed inequal-
+ity we may take wk to be a vertex vi . Let bi be the barycenter of [v0, ··· , bvi, ··· , vn],
+with all barycentric coordinates equal to 1/n except
+for ti = 0. Then we have b =
+1
+n+1 vi +
+n
+n+1 bi . The
+b
+b
+vi
+i
+sum of the two coefﬁcients is 1, so b lies on the line
+segment [vi, bi] from vi to bi , and the distance from
+b to vi is n/(n + 1) times the length of [vi, bi]. Hence the distance from b to vi is
+bounded by n/(n + 1) times the diameter of [v0, ··· , vn].
+The signiﬁcance of the factor n/(n+1) is that by repeated barycentric subdivision
+we can produce simplices of arbitrarily small diameter since
+ n/(n+1)
+r approaches

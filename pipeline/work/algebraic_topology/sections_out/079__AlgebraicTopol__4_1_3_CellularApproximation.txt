@@ -1,0 +1,255 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.1.3 Cellular Approximation
+직전 소단원: 「4.1.2 Whitehead's Theorem」
+[본문]
+348
+Chapter 4
+Homotopy Theory
+Whitehead’s theorem does not say that two CW complexes X and Y with iso-
+morphic homotopy groups are homotopy equivalent, since there is a big difference
+between saying that X and Y have isomorphic homotopy groups and saying that
+there is a map X→Y inducing isomorphisms on homotopy groups. For example,
+consider X = RP2 and Y = S2×RP∞. These both have fundamental group Z2 , and
+Proposition 4.1 implies that their higher homotopy groups are isomorphic since their
+universal covers S2 and S2×S∞are homotopy equivalent, S∞being contractible.
+But RP2 and S2×RP∞are not homotopy equivalent since their homology groups are
+vastly different, S2×RP∞having nonvanishing homology in inﬁnitely many dimen-
+sions since it retracts onto RP∞. Another pair of CW complexes that are not homotopy
+equivalent but have isomorphic homotopy groups is S2 and S3×CP∞, as we shall see
+in Example 4.51.
+One very special case when the homotopy type of a CW complex is determined by
+its homotopy groups is when all the homotopy groups are trivial, for then the inclusion
+map of a 0 cell into the complex induces an isomorphism on homotopy groups, so
+the complex deformation retracts to the 0 cell.
+Somewhat similar in spirit to the compression lemma is the following rather basic
+extension lemma:
+Lemma 4.7. Given a CW pair (X, A) and a map f : A→Y with Y path-connected,
+then f can be extended to a map X→Y if πn−1(Y) = 0 for all n such that X −A
+has cells of dimension n.
+Proof: Assume inductively that f has been extended over the (n−1) skeleton. Then
+an extension over an n cell exists iff the composition of the cell’s attaching map
+Sn−1→Xn−1 with f : Xn−1→Y is nullhomotopic.
+⊔⊓
+Cellular Approximation
+When we showed that π1(Sk) = 0 for k > 1 in Proposition 1.14, we ﬁrst showed
+that every loop in Sk can be deformed to miss at least one point if k > 1, then we used
+the fact that the complement of a point in Sk is contractible to ﬁnish the proof. The
+same strategy could be used to show that πn(Sk) = 0 for n < k if we could do the
+ﬁrst step of deforming a map Sn→Sk to be nonsurjective. One might at ﬁrst think
+this step was unnecessary, that no continuous map Sn→Sk could be surjective when
+n < k, but it is not hard to use space-ﬁlling curves from point-set topology to produce
+such maps. Some work must then be done to construct homotopies eliminating this
+rather strange behavior.
+For maps between CW complexes it turns out to be sufﬁcient for this and many
+other purposes in homotopy theory to require just that cells map to cells of the same
+or lower dimension. Such a map f : X→Y , satisfying f (Xn) ⊂Y n for all n, is called
+
+Homotopy Groups
+Section 4.1
+349
+a cellular map. It is a fundamental fact that arbitrary maps can always be deformed
+to be cellular. This is the cellular approximation theorem:
+Theorem 4.8. Every map f : X→Y of CW complexes is homotopic to a cellular map.
+If f is already cellular on a subcomplex A ⊂X , the homotopy may be taken to be
+stationary on A.
+Corollary 4.9. πn(Sk) = 0 for n < k.
+Proof: If Sn and Sk are given their usual CW structures, with the 0 cells as basepoints,
+then every basepoint-preserving map Sn→Sk can be homotoped, ﬁxing the basepoint,
+to be cellular, and hence constant if n < k.
+⊔⊓
+Linear maps cannot increase dimension, so one might to try to show that arbi-
+trary maps can be homotoped to maps with some sort of linearity properties. One
+of the oldest results of this sort is the simplicial approximation theorem in §2.C.
+Cellular approximation can be regarded as an analog for CW complexes of simplicial
+approximation for simplicial complexes since simplicial maps are cellular. However,
+simplicial maps are much more rigid than cellular maps, which perhaps explains why
+subdivision of the domain is required for simplicial approximation but not for cellular
+approximation. The core of the proof of cellular approximation will be a weak form of
+simplicial approximation that can be proved by a rather elementary direct argument.
+Proof of 4.8: Suppose inductively that f : X→Y is already cellular on the skeleton
+Xn−1 , and let en be an n cell of X . The closure of en in X is compact, being the
+image of a characteristic map for en , so f takes the closure of en to a compact
+set in Y . Since a compact set in a CW complex can meet only ﬁnitely many cells by
+Proposition A.1 in the Appendix, it follows that f (en) meets only ﬁnitely many cells
+of Y . Let ek ⊂Y be a cell of highest dimension meeting f (en). We may assume
+k > n, otherwise f is already cellular on en . We will show below that it is possible to
+deform f ||Xn−1 ∪en , staying ﬁxed on Xn−1 , so that f (en) misses some point p ∈ek .
+Then we can deform f ||Xn−1 ∪en rel Xn−1 so that f (en) misses the whole cell ek
+by composing with a deformation retraction of Y k −{p} onto Y k −ek . By ﬁnitely
+many iterations of this process we eventually make f (en) miss all cells of dimension
+greater than n. Doing this for all n cells, staying ﬁxed on n cells in A where f is
+already cellular, we obtain a homotopy of f ||Xn rel Xn−1 ∪An to a cellular map. The
+induction step is then completed by appealing to the homotopy extension property
+in Proposition 0.16 to extend this homotopy, together with the constant homotopy
+on A, to a homotopy deﬁned on all of X . Letting n go to ∞, the resulting possibly
+inﬁnite string of homotopies can be realized as a single homotopy by performing the
+nth homotopy during the t interval [1 −1/2n, 1 −1/2n+1]. This makes sense since
+each point of X lies in some Xn , which is eventually stationary in the inﬁnite chain
+of homotopies.
+
+350
+Chapter 4
+Homotopy Theory
+To ﬁll in the missing step in this argument we will use the following technical
+statement:
+Lemma 4.10. Let f : In→Z be a map, where Z is obtained from a subspace W by
+attaching a cell ek . Then f is homotopic rel f −1(W) to a map f1 for which there
+is a simplex ∆k ⊂ek with f −1
+1 (∆k) a union (possibly empty) of ﬁnitely many convex
+polyhedra, on each of which f1 is the restriction of a linear surjection Rn→Rk .
+Here a convex polyhedron in In ⊂Rn is any subspace that can be obtained as
+the intersection of a ﬁnite number of half-spaces deﬁned by linear inequalities of the
+form
+P
+i aixi ≤b.
+Before proving the lemma, let us see how it ﬁnishes the proof of the cellular
+approximation theorem. Composing the given map f : Xn−1 ∪en→Y k with a char-
+acteristic map In→X for en , we obtain a map f as in the lemma, with Z = Y k and
+W = Y k −ek . The homotopy given by the lemma is ﬁxed on ∂In , hence induces a
+homotopy ft of f ||Xn−1 ∪en ﬁxed on Xn−1 . If k > n, there are no surjective linear
+maps Rn→Rk , so f −1
+1 (∆k) must be empty, and we can choose p to be any point
+of ∆k .
+⊔⊓
+Proof of 4.10: Identifying ek with Rk , let B1, B2 ⊂ek be the closed balls of radius 1
+and 2 centered at the origin. Since f −1(B2) is closed and therefore compact in In , it
+follows that f is uniformly continuous on f −1(B2). Thus there exists ε > 0 such that
+|x −y| < ε implies |f (x) −f (y)| < 1/2 for all x, y ∈f −1(B2). Subdivide the interval
+I so that the induced subdivision of In into cubes has each cube lying in a ball of
+diameter less than ε. Let K1 be the union of all the closed cubes meeting f −1(B1),
+and let K2 be the union of all the closed cubes meeting K1 . Then we have inclusions
+f −1(B1) ⊂K1 ⊂K2 ⊂f −1(B2), the last one because points of f (K2) have distance
+less than 1/2 from f (K1) and points of f (K1) have distance less than 1/2 from B1 .
+K
+K
+1
+K1
+f
+2
+B
+B
+1
+2
+f
+1
+_
+(
+)
+(
+)
+K2
+f (
+)
+B1
+f
+1
+_
+(
+)
+B2
+We can view K2 as a CW complex whose i cells are i dimensional open cubes, the
+interiors of the i dimensional faces of the k dimensional cubes of K2 for i ≤k. The
+barycentric subdivision of this cubical cell structure is a simplicial complex structure
+on K2 whose vertices are the center points of the cells. One can build this simplicial
+structure inductively over skeleta of the cubical cell structure, the induction step being
+
+Homotopy Groups
+Section 4.1
+351
+to cone off the simplicial structure on the boundary of each cubical cell to the center
+point of the cell.
+Let g : K2→ek = Rk be the map that equals f on all vertices of simplices of
+the subdivision and is linear on each simplex. Deﬁne a homotopy ft : K2→ek by the
+formula (1 −tϕ)f + (tϕ)g where ϕ : K2→[0, 1] is a map with ϕ(∂K2) = 0 and
+ϕ(K1) = 1. Thus f0 = f and f1 ||K1 = g||K1 . Since ft is the constant homotopy on
+∂K2 , we may extend ft to be the constant homotopy of f on the rest of In .
+We claim that there is a neighborhood N of 0 in B1 such that f −1
+1 (N) ⊂K1 .
+This is equivalent to saying that f1 sends the complement of K1 to the complement
+of N . Points in the complement of K2 are no problem since f1 = f on such points
+and f sends the complement of K2 to the complement of B1 . For points of K2 −K1
+consider a simplex σ of the subdivision of K2 . This is mapped by f into a ball Bσ
+of radius 1/2. Since Bσ is convex, g also maps σ into Bσ , and therefore so does f1 .
+If σ is not contained in K1 , then Bσ meets the exterior of B1 and hence is disjoint
+from a neighborhood of 0 in B1 . Since there are only ﬁnitely many σ ’s, there is a
+neighborhood N of 0 in B1 disjoint from f1(σ) for all σ not contained in K1 . For
+this N we have f −1
+1 (N) ⊂K1 .
+For a simplex ∆k ⊂N , the preimage f −1
+1 (∆k) ⊂K1 is the union of its intersections
+with simplices σ of K1 , and each such intersection is a convex polyhedron since it
+is the intersection of σ with the convex polyhedron L−1
+σ (∆k) where Lσ : Rn→Rk is
+the linear map restricting to g on σ .
+(Recall that f1 = g on K1 .)
+To ﬁnish the
+proof it therefore sufﬁces to choose ∆k to be disjoint from the images of all the
+nonsurjective Lσ ’s, which is certainly possible since these images consist of ﬁnitely
+many hyperplanes of dimension less than k.
+⊔⊓
+Example 4.11: Cellular Approximation for Pairs. Every map f : (X, A)→(Y, B) of
+CW pairs can be deformed through maps (X, A)→(Y, B) to a cellular map.
+This
+follows from the theorem by ﬁrst deforming the restriction f : A→B to be cellular,
+then extending this to a homotopy of f on all of X , then deforming the resulting map
+to be cellular staying ﬁxed on A. As a further reﬁnement, the homotopy of f can be
+taken to be stationary on any subcomplex of X where f is already cellular.
+An easy consequence of this is:
+Corollary 4.12. A CW pair (X, A) is n connected if all the cells in X −A have
+dimension greater than n. In particular the pair (X, Xn) is n connected, hence the
+inclusion Xn > X induces isomorphisms on πi for i < n and a surjection on πn .
+Proof: Applying cellular approximation to maps (Di, ∂Di)→(X, A) with i ≤n gives
+the ﬁrst statement. The last statement comes from the long exact sequence of the
+pair (X, Xn).
+⊔⊓
+
+352
+Chapter 4
+Homotopy Theory
+CW Approximation
+A map f : X→Y is called a weak homotopy equivalence if it induces isomor-
+phisms πn(X, x0)→πn
+ Y, f(x0)
+
+for all n ≥0 and all choices of basepoint x0 .
+Whitehead’s theorem can be restated as saying that a weak homotopy equivalence
+between CW complexes is a homotopy equivalence. It follows easily that this holds
+also for spaces homotopy equivalent to CW complexes. In general, however, weak
+homotopy equivalence is strictly weaker than homotopy equivalence. For example,
+there exist noncontractible spaces whose homotopy groups are all trivial, such as the
+‘quasi-circle’ according to an exercise at the end of this section, and for such spaces a
+map to a point is a weak homotopy equivalence that is not a homotopy equivalence.
+One of the more important results in this subsection is that for every space X
+there is a CW complex Z and a weak homotopy equivalence f : Z→X . Such a map
+f : Z→X is called a CW approximation to X . A weak homotopy equivalence induces
+isomorphisms on all homology and cohomology groups, as we will show, so CW ap-
+proximations allow many general statements in algebraic topology to be reduced to
+the case of CW complexes, where one can often make cell-by-cell arguments.
+The technique for constructing CW approximations can be used to do other things
+as well. For a start, one could try for a relative version in which X is assumed to
+contain a subspace A which is already a CW complex and Z is constructed to contain
+A as a subcomplex, with f : Z→X restricting to the identity map on A. Next, if (X, A)
+is n connected, one could try to make (Z, A) n connected in the strong geometric
+sense that all cells of Z −A have dimension greater than n. In fact, it turns out to
+be possible to do a construction satisfying the latter condition even if (X, A) is not
+n connected, but in this case πi(Z) for i < n will be isomorphic to πi(A) rather than
+to πi(X).
+Here is a deﬁnition that is sufﬁciently general to cover all these situations. Given
+a pair (X, A) where the subspace A ⊂X is a nonempty CW complex, an n connected
+CW model for (X, A) is an n connected CW pair (Z, A) and a map f : Z→X with
+f ||A the identity, such that f∗: πi(Z)→πi(X) is an isomorphism for i > n and an
+injection for i = n, for all choices of basepoint. Since (Z, A) is n connected, the map
+πi(A)→πi(Z) is an isomorphism for i < n and a surjection for i = n. In the critical
+dimension n, the maps A> Z
+f--→X induce a composition πn(A)→πn(Z)→πn(X)
+factoring the map πn(A)→πn(X) as a surjection followed by an injection, just as any
+homomorphism ϕ : G→H can be factored (uniquely) as a surjection ϕ : G→Im ϕ
+followed by an injection Im ϕ > H .
+One can think of Z as a sort of homotopy-
+theoretic hybrid of A and X . As n increases, the hybrid looks more and more like
+A, and less and less like X .
+This deﬁnition specializes to the earlier notion of a CW approximation by taking
+n = 0 and letting A consist of one point in each path-component of X . This forces
+f∗: π0(Z)→π0(X) to be surjective as well as injective.

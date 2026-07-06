@@ -1,0 +1,383 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 0. Some Underlying Geometric Notions
+현재 소단원: 0.5 The Homotopy Extension Property
+직전 소단원: 「0.4 Two Criteria for Homotopy Equivalence」
+[본문]
+14
+Chapter 0
+Some Underlying Geometric Notions
+complex X and a subcomplex A, then X/A ≃X ∪CA, the mapping cone of the
+inclusion A>X . For we have X/A = (X∪CA)/CA ≃X∪CA since CA is a contractible
+subcomplex of X ∪CA.
+Example 0.14. If (X, A) is a CW pair and A is contractible in X , that is, the inclusion
+A>X is homotopic to a constant map, then X/A ≃X ∨SA. Namely, by the previous
+example we have X/A ≃X ∪CA, and then since A is contractible in X , the mapping
+cone X ∪CA of the inclusion A> X is homotopy equivalent to the mapping cone of
+a constant map, which is X ∨SA. For example, Sn/Si ≃Sn ∨Si+1 for i < n, since
+Si is contractible in Sn if i < n. In particular this gives S2/S0 ≃S2 ∨S1 , which is
+Example 0.8 again.
+The Homotopy Extension Property
+In this ﬁnal section of the chapter we will actually prove a few things. In partic-
+ular we prove the two criteria for homotopy equivalence described above, along with
+the fact that any two homotopy equivalent spaces can be embedded as deformation
+retracts of the same space.
+The proofs depend upon a technical property that arises in many other contexts
+as well. Consider the following problem. Suppose one is given a map f0 : X→Y , and
+on a subspace A ⊂X one is also given a homotopy ft : A→Y of f0 ||A that one would
+like to extend to a homotopy ft : X→Y of the given f0 . If the pair (X, A) is such that
+this extension problem can always be solved, one says that (X, A) has the homotopy
+extension property. Thus (X, A) has the homotopy extension property if every map
+X×{0} ∪A×I→Y can be extended to a map X×I→Y .
+In particular, the homotopy extension property for (X, A) implies that the iden-
+tity map X×{0} ∪A×I→X×{0} ∪A×I extends to a map X×I→X×{0} ∪A×I , so
+X×{0} ∪A×I is a retract of X×I . The converse is also true: If there is a retraction
+X×I→X×{0} ∪A×I , then by composing with this retraction we can extend every
+map X×{0} ∪A×I→Y to a map X×I→Y . Thus the homotopy extension property
+for (X, A) is equivalent to X×{0} ∪A×I being a retract of X×I . This implies for ex-
+ample that if (X, A) has the homotopy extension property, then so does (X×Z, A×Z)
+for any space Z , a fact that would not be so easy to prove directly from the deﬁnition.
+If (X, A) has the homotopy extension property, then A must be a closed subspace
+of X , at least when X is Hausdorff. For if r : X×I→X×I is a retraction onto the
+subspace X×{0} ∪A×I , then the image of r is the set of points z ∈X×I with
+r(z) = z, a closed set if X is Hausdorff, so X×{0}∪A×I is closed in X×I and hence
+A is closed in X .
+A simple example of a pair (X, A) with A closed for which the homotopy exten-
+sion property fails is the pair (I, A) where A = {0, 1,1/2,1/3,1/4, ···}. It is not hard to
+show that there is no continuous retraction I×I→I×{0} ∪A×I . The breakdown of
+homotopy extension here can be attributed to the bad structure of (X, A) near 0.
+
+The Homotopy Extension Property
+Chapter 0
+15
+With nicer local structure the homotopy extension property does hold, as the next
+example shows.
+Example 0.15. A pair (X, A) has the homotopy extension property if A has a map-
+ping cylinder neighborhood in X , by which we mean a closed
+neighborhood N containing a subspace B , thought of as the
+boundary of N , with N −B an open neighborhood of A,
+such that there exists a map f : B→A and a homeomorphism
+h : Mf→N with h||A ∪B = 11. Mapping cylinder neighbor-
+X
+A
+B
+N
+hoods like this occur fairly often. For example, the thick let-
+ters discussed at the beginning of the chapter provide such
+neighborhoods of the thin letters, regarded as subspaces of the plane. To verify the
+homotopy extension property, notice ﬁrst that I×I retracts onto I×{0}∪∂I×I , hence
+B×I×I retracts onto B×I×{0} ∪B×∂I×I , and this retraction induces a retraction
+of Mf ×I onto Mf ×{0} ∪(A ∪B)×I . Thus (Mf , A ∪B) has the homotopy exten-
+sion property. Hence so does the homeomorphic pair (N, A ∪B). Now given a map
+X→Y and a homotopy of its restriction to A, we can take the constant homotopy on
+X −(N −B) and then extend over N by applying the homotopy extension property
+for (N, A ∪B) to the given homotopy on A and the constant homotopy on B .
+Proposition 0.16. If (X, A) is a CW pair, then X×{0}∪A×I is a deformation retract
+of X×I , hence (X, A) has the homotopy extension property.
+Proof: There is a retraction r : Dn×I→Dn×{0} ∪∂Dn×I , for ex-
+ample the radial projection from the point (0, 2) ∈Dn×R. Then
+setting rt = tr + (1 −t)11 gives a deformation retraction of Dn×I
+onto Dn×{0} ∪∂Dn×I . This deformation retraction gives rise to
+a deformation retraction of Xn×I onto Xn×{0} ∪(Xn−1 ∪An)×I
+since Xn×I is obtained from Xn×{0} ∪(Xn−1 ∪An)×I by attach-
+ing copies of Dn×I along Dn×{0} ∪∂Dn×I . If we perform the deformation retrac-
+tion of Xn×I onto Xn×{0} ∪(Xn−1 ∪An)×I during the t interval [1/2n+1, 1/2n],
+this inﬁnite concatenation of homotopies is a deformation retraction of X×I onto
+X×{0} ∪A×I . There is no problem with continuity of this deformation retraction
+at t = 0 since it is continuous on Xn×I , being stationary there during the t interval
+[0, 1/2n+1], and CW complexes have the weak topology with respect to their skeleta
+so a map is continuous iff its restriction to each skeleton is continuous.
+⊔⊓
+Now we can prove a generalization of the earlier assertion that collapsing a con-
+tractible subcomplex is a homotopy equivalence.
+Proposition 0.17. If the pair (X, A) satisﬁes the homotopy extension property and
+A is contractible, then the quotient map q : X→X/A is a homotopy equivalence.
+
+16
+Chapter 0
+Some Underlying Geometric Notions
+Proof: Let ft : X→X be a homotopy extending a contraction of A, with f0 = 11. Since
+ft(A) ⊂A for all t , the composition qft : X→X/A sends A to a point and hence fac-
+tors as a composition X
+q--→X/A→X/A. Denoting the latter map by f t : X/A→X/A,
+we have qft = f tq in the ﬁrst of the two
+diagrams at the right. When t = 1 we have
+X
+X/
+X
+A
+X/A
+q
+q
+ft
+ft
+X
+X/
+X
+A
+X/A
+q
+g
+q
+f1
+f1
+−−−−−−−−−−−−→
+−−−−−−−−→
+−−−−−−→
+−−−−−−→
+−−−−−−−−−−−−→
+−−−−−−−−−−−−→
+−−−−−−−−→
+−−−−−−→
+−−−−−−→
+−
+−
+f1(A) equal to a point, the point to which A
+contracts, so f1 induces a map g : X/A→X
+with gq = f1 , as in the second diagram. It
+follows that qg = f 1 since qg(x) = qgq(x) = qf1(x) = f 1q(x) = f 1(x). The
+maps g and q are inverse homotopy equivalences since gq = f1 ≃f0 = 11 via ft and
+qg = f 1 ≃f 0 = 11 via f t .
+⊔⊓
+Another application of the homotopy extension property, giving a slightly more
+reﬁned version of one of our earlier criteria for homotopy equivalence, is the following:
+Proposition 0.18. If (X1, A) is a CW pair and we have attaching maps f , g : A→X0
+that are homotopic, then X0 ⊔f X1 ≃X0 ⊔g X1 rel X0 .
+Here the deﬁnition of W ≃Z rel Y for pairs (W, Y) and (Z, Y) is that there are
+maps ϕ : W→Z and ψ : Z→W restricting to the identity on Y , such that ψϕ ≃11
+and ϕψ ≃11 via homotopies that restrict to the identity on Y at all times.
+Proof: If F : A×I→X0 is a homotopy from f to g, consider the space X0 ⊔F (X1×I).
+This contains both X0 ⊔f X1 and X0 ⊔g X1 as subspaces. A deformation retraction
+of X1×I onto X1×{0}∪A×I as in Proposition 0.16 induces a deformation retraction
+of X0 ⊔F (X1×I) onto X0 ⊔f X1 . Similarly X0 ⊔F (X1×I) deformation retracts onto
+X0⊔gX1 . Both these deformation retractions restrict to the identity on X0 , so together
+they give a homotopy equivalence X0 ⊔f X1 ≃X0 ⊔g X1 rel X0 .
+⊔⊓
+We ﬁnish this chapter with a technical result whose proof will involve several
+applications of the homotopy extension property:
+Proposition 0.19. Suppose (X, A) and (Y, A) satisfy the homotopy extension prop-
+erty, and f : X→Y is a homotopy equivalence with f ||A = 11. Then f is a homotopy
+equivalence rel A.
+Corollary 0.20. If (X, A) satisﬁes the homotopy extension property and the inclusion
+A > X is a homotopy equivalence, then A is a deformation retract of X .
+Proof: Apply the proposition to the inclusion A > X .
+⊔⊓
+Corollary 0.21. A map f : X→Y is a homotopy equivalence iff X is a deformation
+retract of the mapping cylinder Mf .
+Hence, two spaces X and Y are homotopy
+equivalent iff there is a third space containing both X and Y as deformation retracts.
+
+The Homotopy Extension Property
+Chapter 0
+17
+Proof: In the diagram at the right the maps i and j are the inclu-
+sions and r is the canonical retraction, so f = ri and i ≃jf . Since
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+f
+j
+r
+X
+Y
+f
+M
+i
+j and r are homotopy equivalences, it follows that f is a homotopy
+equivalence iff i is a homotopy equivalence, since the composition
+of two homotopy equivalences is a homotopy equivalence and a map homotopic to a
+homotopy equivalence is a homotopy equivalence. Now apply the preceding corollary
+to the pair (Mf , X), which satisﬁes the homotopy extension property by Example 0.15
+using the neighborhood X×[0, 1/2] of X in Mf .
+⊔⊓
+Proof of 0.19: Let g : Y→X be a homotopy inverse for f . There will be three steps
+to the proof:
+(1) Construct a homotopy from g to a map g1 with g1 ||A = 11.
+(2) Show g1f ≃11 rel A.
+(3) Show f g1 ≃11 rel A.
+(1) Let ht : X→X be a homotopy from gf = h0 to 11 = h1 . Since f ||A = 11, we
+can view ht ||A as a homotopy from g||A to 11. Then since we assume (Y, A) has the
+homotopy extension property, we can extend this homotopy to a homotopy gt : Y→X
+from g = g0 to a map g1 with g1 ||A = 11.
+(2) A homotopy from g1f to 11 is given by the formulas
+kt =
+(
+g1−2tf ,
+0 ≤t ≤1/2
+h2t−1,
+1/2 ≤t ≤1
+Note that the two deﬁnitions agree when t = 1/2. Since f ||A = 11 and gt = ht on A,
+the homotopy kt ||A starts and ends with the identity, and its second half simply re-
+traces its ﬁrst half, that is, kt = k1−t on A. We will deﬁne a ‘homotopy of homotopies’
+ktu : A→X by means of the ﬁgure at the right showing the param-
+g f
+gf
+1
+1
+1
+eter domain I×I for the pairs (t, u), with the t axis horizontal
+and the u axis vertical. On the bottom edge of the square we de-
+ﬁne kt0 = kt ||A. Below the ‘V’ we deﬁne ktu to be independent
+of u, and above the ‘V’ we deﬁne ktu to be independent of t .
+This is unambiguous since kt = k1−t on A. Since k0 = 11 on A,
+we have ktu = 11 for (t, u) in the left, right, and top edges of the square. Next we
+extend ktu over X , as follows. Since (X, A) has the homotopy extension property,
+so does (X×I, A×I) by a remark in the paragraph following the deﬁnition of the ho-
+motopy extension property. Viewing ktu as a homotopy of kt ||A, we can therefore
+extend ktu : A→X to ktu : X→X with kt0 = kt . If we restrict this ktu to the left, top,
+and right edges of the (t, u) square, we get a homotopy g1f ≃11 rel A.
+(3) Since g1 ≃g, we have f g1 ≃f g ≃11, so f g1 ≃11 and steps (1) and (2) can be
+repeated with the pair f , g replaced by g1, f . The result is a map f1 : X→Y with
+f1 ||A = 11 and f1g1 ≃11 rel A. Hence f1 ≃f1(g1f ) = (f1g1)f ≃f rel A. From this
+we deduce that f g1 ≃f1g1 ≃11 rel A.
+⊔⊓
+
+18
+Chapter 0
+Some Underlying Geometric Notions
+Exercises
+1. Construct an explicit deformation retraction of the torus with one point deleted
+onto a graph consisting of two circles intersecting in a point, namely, longitude and
+meridian circles of the torus.
+2. Construct an explicit deformation retraction of Rn −{0} onto Sn−1 .
+3. (a) Show that the composition of homotopy equivalences X→Y and Y→Z is a
+homotopy equivalence X→Z . Deduce that homotopy equivalence is an equivalence
+relation.
+(b) Show that the relation of homotopy among maps X→Y is an equivalence relation.
+(c) Show that a map homotopic to a homotopy equivalence is a homotopy equivalence.
+4. A deformation retraction in the weak sense of a space X to a subspace A is a
+homotopy ft : X→X such that f0 = 11, f1(X) ⊂A, and ft(A) ⊂A for all t . Show
+that if X deformation retracts to A in this weak sense, then the inclusion A > X is
+a homotopy equivalence.
+5.
+Show that if a space X deformation retracts to a point x ∈X , then for each
+neighborhood U of x in X there exists a neighborhood V ⊂U of x such that the
+inclusion map V > U is nullhomotopic.
+6. (a) Let X be the subspace of R2 consisting of the horizontal segment
+[0, 1]×{0} together with all the vertical segments {r}×[0, 1 −r] for
+r a rational number in [0, 1]. Show that X deformation retracts to
+any point in the segment [0, 1]×{0}, but not to any other point. [See
+the preceding problem.]
+(b) Let Y be the subspace of R2 that is the union of an inﬁnite number of copies of X
+arranged as in the ﬁgure below. Show that Y is contractible but does not deformation
+retract onto any point.
+(c) Let Z be the zigzag subspace of Y homeomorphic to R indicated by the heavier
+line. Show there is a deformation retraction in the weak sense (see Exercise 4) of Y
+onto Z , but no true deformation retraction.
+7. Fill in the details in the following construction from
+[Edwards 1999] of a compact space Y ⊂R3 with the
+same properties as the space Y in Exercise 6, that is, Y
+is contractible but does not deformation retract to any
+point. To begin, let X be the union of an inﬁnite se-
+X
+Y
+quence of cones on the Cantor set arranged end-to-end,
+as in the ﬁgure. Next, form the one-point compactiﬁca-
+tion of X×R. This embeds in R3 as a closed disk with curved ‘ﬁns’ attached along
+
+Exercises
+Chapter 0
+19
+circular arcs, and with the one-point compactiﬁcation of X as a cross-sectional slice.
+The desired space Y is then obtained from this subspace of R3 by wrapping one more
+cone on the Cantor set around the boundary of the disk.
+8. For n > 2, construct an n room analog of the house with two rooms.
+9. Show that a retract of a contractible space is contractible.
+10. Show that a space X is contractible iff every map f : X→Y , for arbitrary Y , is
+nullhomotopic. Similarly, show X is contractible iff every map f : Y→X is nullho-
+motopic.
+11. Show that f : X→Y is a homotopy equivalence if there exist maps g, h : Y→X
+such that f g ≃11 and hf ≃11. More generally, show that f is a homotopy equiva-
+lence if f g and hf are homotopy equivalences.
+12. Show that a homotopy equivalence f : X→Y induces a bijection between the set
+of path-components of X and the set of path-components of Y , and that f restricts to
+a homotopy equivalence from each path-component of X to the corresponding path-
+component of Y . Prove also the corresponding statements with components instead
+of path-components. Deduce that if the components of a space X coincide with its
+path-components, then the same holds for any space Y homotopy equivalent to X .
+13.
+Show that any two deformation retractions r 0
+t
+and r 1
+t
+of a space X onto a
+subspace A can be joined by a continuous family of deformation retractions r s
+t ,
+0 ≤s ≤1, of X onto A, where continuity means that the map X×I×I→X sending
+(x, s, t) to r s
+t (x) is continuous.
+14. Given positive integers v , e, and f satisfying v −e + f = 2, construct a cell
+structure on S2 having v 0 cells, e 1 cells, and f 2 cells.
+15. Enumerate all the subcomplexes of S∞, with the cell structure on S∞that has Sn
+as its n skeleton.
+16. Show that S∞is contractible.
+17. (a) Show that the mapping cylinder of every map f : S1→S1 is a CW complex.
+(b) Construct a 2 dimensional CW complex that contains both an annulus S1×I and
+a M¨obius band as deformation retracts.
+18. Show that S1 ∗S1 = S3 , and more generally Sm ∗Sn = Sm+n+1 .
+19. Show that the space obtained from S2 by attaching n 2 cells along any collection
+of n circles in S2 is homotopy equivalent to the wedge sum of n + 1 2 spheres.
+20.
+Show that the subspace X ⊂R3 formed by a Klein bottle
+intersecting itself in a circle, as shown in the ﬁgure, is homotopy
+equivalent to S1 ∨S1 ∨S2 .
+21. If X is a connected space that is a union of a ﬁnite number of 2 spheres, any
+two of which intersect in at most one point, show that X is homotopy equivalent to a
+wedge sum of S1 ’s and S2 ’s.
+
+20
+Chapter 0
+Some Underlying Geometric Notions
+22. Let X be a ﬁnite graph lying in a half-plane P ⊂R3 and intersecting the edge
+of P in a subset of the vertices of X . Describe the homotopy type of the ‘surface of
+revolution’ obtained by rotating X about the edge line of P .
+23.
+Show that a CW complex is contractible if it is the union of two contractible
+subcomplexes whose intersection is also contractible.
+24. Let X and Y be CW complexes with 0 cells x0 and y0 . Show that the quotient
+spaces X ∗Y/(X ∗{y0}∪{x0}∗Y) and S(X ∧Y)/S({x0}∧{y0}) are homeomorphic,
+and deduce that X ∗Y ≃S(X ∧Y).
+25. If X is a CW complex with components Xα , show that the suspension SX is
+homotopy equivalent to Y
+W
+α SXα for some graph Y . In the case that X is a ﬁnite
+graph, show that SX is homotopy equivalent to a wedge sum of circles and 2 spheres.
+26. Use Corollary 0.20 to show that if (X, A) has the homotopy extension property,
+then X×I deformation retracts to X×{0} ∪A×I . Deduce from this that Proposi-
+tion 0.18 holds more generally for any pair (X1, A) satisfying the homotopy extension
+property.
+27. Given a pair (X, A) and a homotopy equivalence f : A→B , show that the natural
+map X→B⊔f X is a homotopy equivalence if (X, A) satisﬁes the homotopy extension
+property. [Hint: Consider X ∪Mf and use the preceding problem.] An interesting
+case is when f is a quotient map, hence the map X→B ⊔f X is the quotient map
+identifying each set f −1(b) to a point. When B is a point this gives another proof of
+Proposition 0.17.
+28. Show that if (X1, A) satisﬁes the homotopy extension property, then so does every
+pair (X0 ⊔f X1, X0) obtained by attaching X1 to a space X0 via a map f : A→X0 .
+29. In case the CW complex X is obtained from a subcomplex A by attaching a single
+cell en , describe exactly what the extension of a homotopy ft : A→Y to X given by
+the proof of Proposition 0.16 looks like. That is, for a point x ∈en , describe the path
+ft(x) for the extended ft .
+
+Algebraic topology can be roughly deﬁned as the study of techniques for forming
+algebraic images of topological spaces. Most often these algebraic images are groups,
+but more elaborate structures such as rings, modules, and algebras also arise. The
+mechanisms that create these images — the ‘lanterns’ of algebraic topology, one might
+say — are known formally as functors and have the characteristic feature that they
+form images not only of spaces but also of maps. Thus, continuous maps between
+spaces are projected onto homomorphisms between their algebraic images, so topo-
+logically related spaces have algebraically related images.
+With suitably constructed lanterns one might hope to be able to form images with
+enough detail to reconstruct accurately the shapes of all spaces, or at least of large
+and interesting classes of spaces. This is one of the main goals of algebraic topology,
+and to a surprising extent this goal is achieved. Of course, the lanterns necessary to
+do this are somewhat complicated pieces of machinery. But this machinery also has
+a certain intrinsic beauty.
+This ﬁrst chapter introduces one of the simplest and most important functors
+of algebraic topology, the fundamental group, which creates an algebraic image of a
+space from the loops in the space, the paths in the space starting and ending at the
+same point.
+The Idea of the Fundamental Group
+To get a feeling for what the fundamental group is about, let us look at a few
+preliminary examples before giving the formal deﬁnitions.

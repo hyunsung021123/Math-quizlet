@@ -5,6 +5,9 @@ work/*/sections_out/*.pdf
 work/*/_delivery/
 work/*/_review_input_*.txt
 
+# 사용자가 올린 원본 PDF/toc_data를 프로그램 1에 넘기기 전 잠시 두는 곳(임시, 커밋 안 함)
+_inbox/
+
 # python 캐시
 __pycache__/
 *.pyc

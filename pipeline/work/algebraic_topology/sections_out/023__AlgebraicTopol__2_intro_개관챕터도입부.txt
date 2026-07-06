@@ -1,0 +1,322 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.intro 개관 (챕터 도입부)
+직전 소단원: 「1.B K(G,1) Spaces and Graphs of Groups」
+[본문]
+The fundamental group π1(X) is especially useful when studying spaces of low
+dimension, as one would expect from its deﬁnition which involves only maps from
+low-dimensional spaces into X , namely loops I→X and homotopies of loops, maps
+I×I→X . The deﬁnition in terms of objects that are at most 2 dimensional manifests
+itself for example in the fact that when X is a CW complex, π1(X) depends only on
+the 2 skeleton of X . In view of the low-dimensional nature of the fundamental group,
+we should not expect it to be a very reﬁned tool for dealing with high-dimensional
+spaces. Thus it cannot distinguish between spheres Sn with n ≥2. This limitation
+to low dimensions can be removed by considering the natural higher-dimensional
+analogs of π1(X), the homotopy groups πn(X), which are deﬁned in terms of maps
+of the n dimensional cube In into X and homotopies In×I→X of such maps. Not
+surprisingly, when X is a CW complex, πn(X) depends only on the (n + 1) skeleton
+of X . And as one might hope, homotopy groups do indeed distinguish spheres of all
+dimensions since πi(Sn) is 0 for i < n and Z for i = n.
+However, the higher-dimensional homotopy groups have the serious drawback
+that they are extremely difﬁcult to compute in general. Even for simple spaces like
+spheres, the calculation of πi(Sn) for i > n turns out to be a huge problem. For-
+tunately there is a more computable alternative to homotopy groups: the homology
+groups Hn(X). Like πn(X), the homology group Hn(X) for a CW complex X de-
+pends only on the (n + 1) skeleton. For spheres, the homology groups Hi(Sn) are
+isomorphic to the homotopy groups πi(Sn) in the range 1 ≤i ≤n, but homology
+groups have the advantage that Hi(Sn) = 0 for i > n.
+The computability of homology groups does not come for free, unfortunately.
+The deﬁnition of homology groups is decidedly less transparent than the deﬁnition
+of homotopy groups, and once one gets beyond the deﬁnition there is a certain amount
+of technical machinery to be set up before any real calculations and applications can
+be given. In the exposition below we approach the deﬁnition of Hn(X) by two prelim-
+inary stages, ﬁrst giving a few motivating examples nonrigorously, then constructing
+
+98
+Chapter 2
+Homology
+a restricted model of homology theory called simplicial homology, before plunging
+into the general theory, known as singular homology. After the deﬁnition of singular
+homology has been assimilated, the real work of establishing its basic properties be-
+gins. This takes close to 20 pages, and there is no getting around the fact that it is a
+substantial effort. This takes up most of the ﬁrst section of the chapter, with small
+digressions only for two applications to classical theorems of Brouwer: the ﬁxed point
+theorem and ‘invariance of dimension.’
+The second section of the chapter gives more applications, including the ho-
+mology deﬁnition of Euler characteristic and Brouwer’s notion of degree for maps
+Sn→Sn . However, the main thrust of this section is toward developing techniques
+for calculating homology groups efﬁciently. The maximally efﬁcient method is known
+as cellular homology, whose power comes perhaps from the fact that it is ‘homology
+squared’ — homology deﬁned in terms of homology. Another quite useful tool is
+Mayer–Vietoris sequences, the analog for homology of van Kampen’s theorem for the
+fundamental group.
+An interesting feature of homology that begins to emerge after one has worked
+with it for a while is that it is the basic properties of homology that are used most
+often, and not the actual deﬁnition itself. This suggests that an axiomatic approach
+to homology might be possible. This is indeed the case, and in the third section of
+the chapter we list axioms which completely characterize homology groups for CW
+complexes. One could take the viewpoint that these rather algebraic axioms are all that
+really matters about homology groups, that the geometry involved in the deﬁnition of
+homology is secondary, needed only to show that the axiomatic theory is not vacuous.
+The extent to which one adopts this viewpoint is a matter of taste, and the route taken
+here of postponing the axioms until the theory is well-established is just one of several
+possible approaches.
+The chapter then concludes with three optional sections of Additional Topics. The
+ﬁrst is rather brief, relating H1(X) to π1(X), while the other two contain a selection
+of classical applications of homology. These include the n dimensional version of the
+Jordan curve theorem and the ‘invariance of domain’ theorem, both due to Brouwer,
+along with the Lefschetz ﬁxed point theorem.
+The Idea of Homology
+The difﬁculty with the higher homotopy groups πn is that they are not directly
+computable from a cell structure as π1 is. For example, the 2-sphere has no cells in
+dimensions greater than 2, yet its n dimensional homotopy group πn(S2) is nonzero
+for inﬁnitely many values of n.
+Homology groups, by contrast, are quite directly
+related to cell structures, and may indeed be regarded as simply an algebraization of
+the ﬁrst layer of geometry in cell structures: how cells of dimension n attach to cells
+of dimension n −1.
+
+The Idea of Homology
+99
+Let us look at some examples to see what the idea is. Consider the graph X1 shown
+in the ﬁgure, consisting of two vertices joined by four edges.
+When studying the fundamental group of X1 we consider
+d
+a
+x
+y
+c
+b
+loops formed by sequences of edges, starting and ending
+at a ﬁxed basepoint. For example, at the basepoint x , the
+loop ab−1 travels forward along the edge a, then backward
+along b, as indicated by the exponent −1. A more compli-
+cated loop would be ac−1bd−1ca−1 . A salient feature of the
+fundamental group is that it is generally nonabelian, which both enriches and compli-
+cates the theory. Suppose we simplify matters by abelianizing. Thus for example the
+two loops ab−1 and b−1a are to be regarded as equal if we make a commute with
+b−1 . These two loops ab−1 and b−1a are really the same circle, just with a different
+choice of starting and ending point: x for ab−1 and y for b−1a. The same thing
+happens for all loops: Rechoosing the basepoint in a loop just permutes its letters
+cyclically, so a byproduct of abelianizing is that we no longer have to pin all our loops
+down to a ﬁxed basepoint. Thus loops become cycles, without a chosen basepoint.
+Having abelianized, let us switch to additive notation, so cycles become linear
+combinations of edges with integer coefﬁcients, such as a −b + c −d. Let us call
+these linear combinations chains of edges.
+Some chains can be decomposed into
+cycles in several different ways, for example (a −c) + (b −d) = (a −d) + (b −c),
+and if we adopt an algebraic viewpoint then we do not want to distinguish between
+these different decompositions. Thus we broaden the meaning of the term ‘cycle’ to
+be simply any linear combination of edges for which at least one decomposition into
+cycles in the previous more geometric sense exists.
+What is the condition for a chain to be a cycle in this more algebraic sense? A
+geometric cycle, thought of as a path traversed in time, is distinguished by the prop-
+erty that it enters each vertex the same number of times that it leaves the vertex. For
+an arbitrary chain ka + ℓb + mc + nd, the net number of times this chain enters y
+is k + ℓ+ m + n since each of a, b, c , and d enters y once. Similarly, each of the
+four edges leaves x once, so the net number of times the chain ka + ℓb + mc + nd
+enters x is −k −ℓ−m −n. Thus the condition for ka + ℓb + mc + nd to be a cycle
+is simply k + ℓ+ m + n = 0.
+To describe this result in a way that would generalize to all graphs, let C1 be the
+free abelian group with basis the edges a, b, c, d and let C0 be the free abelian group
+with basis the vertices x, y . Elements of C1 are chains of edges, or 1 dimensional
+chains, and elements of C0 are linear combinations of vertices, or 0 dimensional
+chains. Deﬁne a homomorphism ∂: C1→C0 by sending each basis element a, b, c, d
+to y −x , the vertex at the head of the edge minus the vertex at the tail. Thus we have
+∂(ka + ℓb + mc + nd) = (k + ℓ+ m + n)y −(k + ℓ+ m + n)x , and the cycles are
+precisely the kernel of ∂. It is a simple calculation to verify that a−b, b−c , and c −d
+
+100
+Chapter 2
+Homology
+form a basis for this kernel. Thus every cycle in X1 is a unique linear combination of
+these three most obvious cycles. By means of these three basic cycles we convey the
+geometric information that the graph X1 has three visible ‘holes,’ the empty spaces
+between the four edges.
+Let us now enlarge the preceding graph X1 by attaching a 2 cell A along the
+cycle a −b, producing a 2 dimensional cell complex X2 . If
+x
+y
+d
+c
+a
+b
+A
+we think of the 2 cell A as being oriented clockwise, then
+we can regard its boundary as the cycle a −b. This cycle is
+now homotopically trivial since we can contract it to a point
+by sliding over A. In other words, it no longer encloses a
+hole in X2 .
+This suggests that we form a quotient of the
+group of cycles in the preceding example by factoring out
+the subgroup generated by a −b. In this quotient the cycles a −c and b −c , for
+example, become equivalent, consistent with the fact that they are homotopic in X2 .
+Algebraically, we can deﬁne now a pair of homomorphisms C2
+∂2
+-----→C1
+∂1
+-----→C0
+where C2 is the inﬁnite cyclic group generated by A and ∂2(A) = a −b. The map
+∂1 is the boundary homomorphism in the previous example.
+The quotient group
+we are interested in is Ker ∂1/ Im ∂2 , the 1 dimensional cycles modulo those that are
+boundaries, the multiples of a−b. This quotient group is the homology group H1(X2).
+The previous example can be ﬁt into this scheme too by taking C2 to be zero since
+there are no 2 cells in X1 , so in this case H1(X1) = Ker ∂1/ Im ∂2 = Ker ∂1 , which as
+we saw was free abelian on three generators. In the present example, H1(X2) is free
+abelian on two generators, b −c and c −d, expressing the geometric fact that by
+ﬁlling in the 2 cell A we have reduced the number of ‘holes’ in our space from three
+to two.
+Suppose we enlarge X2 to a space X3 by attaching a second 2 cell B along the
+same cycle a−b. This gives a 2 dimensional chain group C2
+x
+y
+d
+a
+c
+b
+consisting of linear combinations of A and B , and the bound-
+ary homomorphism ∂2 : C2→C1 sends both A and B to a−b.
+The homology group H1(X3) = Ker ∂1/ Im ∂2 is the same as
+for X2 , but now ∂2 has a nontrivial kernel, the inﬁnite cyclic
+group generated by A−B . We view A−B as a 2 dimensional
+cycle, generating the homology group H2(X3) = Ker ∂2 ≈Z.
+Topologically, the cycle A −B is the sphere formed by the cells A and B together
+with their common boundary circle. This spherical cycle detects the presence of a
+‘hole’ in X3 , the missing interior of the sphere. However, since this hole is enclosed
+by a sphere rather than a circle, it is of a different sort from the holes detected by
+H1(X3) ≈Z×Z, which are detected by the cycles b −c and c −d.
+Let us continue one more step and construct a complex X4 from X3 by attaching
+a 3 cell C along the 2 sphere formed by A and B . This creates a chain group C3
+
+The Idea of Homology
+101
+generated by this 3 cell C , and we deﬁne a boundary homomorphism ∂3 : C3→C2
+sending C to A −B since the cycle A −B should be viewed as the boundary of C
+in the same way that the 1 dimensional cycle a −b is the boundary of A. Now we
+have a sequence of three boundary homomorphisms C3
+∂3
+-----→C2
+∂2
+-----→C1
+∂1
+-----→C0 and
+the quotient H2(X4) = Ker ∂2/ Im ∂3 has become trivial. Also H3(X4) = Ker ∂3 = 0.
+The group H1(X4) is the same as H1(X3), namely Z×Z, so this is the only nontrivial
+homology group of X4 .
+It is clear what the general pattern of the examples is. For a cell complex X one
+has chain groups Cn(X) which are free abelian groups with basis the n cells of X ,
+and there are boundary homomorphisms ∂n : Cn(X)→Cn−1(X), in terms of which
+one deﬁnes the homology group Hn(X) = Ker ∂n/ Im ∂n+1 . The major difﬁculty is
+how to deﬁne ∂n in general. For n = 1 this is easy: The boundary of an oriented
+edge is the vertex at its head minus the vertex at its tail. The next case n = 2 is also
+not hard, at least for cells attached along cycles that are simply loops of edges, for
+then the boundary of the cell is this cycle of edges, with the appropriate signs taking
+orientations into account. But for larger n, matters become more complicated. Even
+if one restricts attention to cell complexes formed from polyhedral cells with nice
+attaching maps, there is still the matter of orientations to sort out.
+The best solution to this problem seems to be to adopt an indirect approach.
+Arbitrary polyhedra can always be subdivided into special polyhedra called simplices
+(the triangle and the tetrahedron are the 2 dimensional and 3 dimensional instances)
+so there is no loss of generality, though initially there is some loss of efﬁciency, in
+restricting attention entirely to simplices. For simplices there is no difﬁculty in deﬁn-
+ing boundary maps or in handling orientations. So one obtains a homology theory,
+called simplicial homology, for cell complexes built from simplices. Still, this is a
+rather restricted class of spaces, and the theory itself has a certain rigidity that makes
+it awkward to work with.
+The way around these obstacles is to step back from the geometry of spaces
+decomposed into simplices and to consider instead something which at ﬁrst glance
+seems wildly more complicated, the collection of all possible continuous maps of
+simplices into a given space X . These maps generate tremendously large chain groups
+Cn(X), but the quotients Hn(X) = Ker ∂n/ Im ∂n+1 , called singular homology groups,
+turn out to be much smaller, at least for reasonably nice spaces X . In particular, for
+spaces like those in the four examples above, the singular homology groups coincide
+with the homology groups we computed from the cellular chains. And as we shall
+see later in this chapter, singular homology allows one to deﬁne these nice cellular
+homology groups for all cell complexes, and in particular to solve the problem of
+deﬁning the boundary maps for cellular chains.
+
+102
+Chapter 2
+Homology
+The most important homology theory in algebraic topology, and the one we shall
+be studying almost exclusively, is called singular homology. Since the technical appa-
+ratus of singular homology is somewhat complicated, we will ﬁrst introduce a more
+primitive version called simplicial homology in order to see how some of the apparatus
+works in a simpler setting before beginning the general theory.
+The natural domain of deﬁnition for simplicial homology is a class of spaces we
+call ∆complexes, which are a mild generalization of the more classical notion of
+a simplicial complex. Historically, the modern deﬁnition of singular homology was
+ﬁrst given in [Eilenberg 1944], and ∆complexes were introduced soon thereafter in
+[Eilenberg-Zilber 1950] where they were called semisimplicial complexes. Within a
+few years this term came to be applied to what Eilenberg and Zilber called complete
+semisimplicial complexes, and later there was yet another shift in terminology as
+the latter objects came to be called simplicial sets. In theory this frees up the term
+semisimplicial complex to have its original meaning, but to avoid potential confusion
+it seems best to introduce a new name, and the term ∆complex has at least the virtue
+of brevity.
+∆–Complexes
+The torus, the projective plane, and the Klein bottle can each be obtained from a
+square by identifying opposite edges in the way indicated by the arrows in the follow-
+ing ﬁgures:
+b
+b
+a
+a
+c
+v
+v
+v
+v
+U
+L
+b
+b
+a
+a
+c
+w
+v
+w
+v
+U
+L
+b
+b
+a
+a
+c
+v
+v
+v
+v
+U
+L
+RP
+2
+T
+:
+:
+−−
+K :
+−−
+−−−
+Cutting a square along a diagonal produces two triangles, so each of these surfaces
+can also be built from two triangles by identifying their edges in pairs. In similar
+fashion a polygon with any number of sides can be cut along
+diagonals into triangles, so in fact all closed surfaces can be
+constructed from triangles by identifying edges. Thus we have
+b
+b
+a
+a
+c
+c
+d
+d
+a single building block, the triangle, from which all surfaces can
+be constructed. Using only triangles we could also construct a
+large class of 2 dimensional spaces that are not surfaces in the
+strict sense, by allowing more than two edges to be identiﬁed
+together at a time.

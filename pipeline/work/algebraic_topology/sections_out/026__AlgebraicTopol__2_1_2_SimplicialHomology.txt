@@ -1,0 +1,308 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.1.2 Simplicial Homology
+직전 소단원: 「2.1.1 Δ-Complexes」
+[본문]
+104
+Chapter 2
+Homology
+Among other things, this last condition rules out trivialities like regarding all the
+points of X as individual vertices. The earlier decompositions of the torus, projective
+plane, and Klein bottle into two triangles, three edges, and one or two vertices deﬁne
+∆complex structures with a total of six σα ’s for the torus and Klein bottle and seven
+for the projective plane. The orientations on the edges in the pictures are compatible
+with a unique ordering of the vertices of each simplex, and these orderings determine
+the maps σα .
+A consequence of (iii) is that X can be built as a quotient space of a collection
+of disjoint simplices ∆n
+α , one for each σα : ∆n→X , the quotient space obtained by
+identifying each face of a ∆n
+α with the ∆n−1
+β
+corresponding to the restriction σβ of
+σα to the face in question, as in condition (ii). One can think of building the quotient
+space inductively, starting with a discrete set of vertices, then attaching edges to
+these to produce a graph, then attaching 2 simplices to the graph, and so on. From
+this viewpoint we see that the data specifying a ∆complex can be described purely
+combinatorially as collections of n simplices ∆n
+α for each n together with functions
+associating to each face of each n simplex ∆n
+α an (n −1) simplex ∆n−1
+β
+.
+More generally, ∆complexes can be built from collections of disjoint simplices by
+identifying various subsimplices spanned by subsets of the vertices, where the iden-
+tiﬁcations are performed using the canonical linear homeomorphisms that preserve
+the orderings of the vertices. The earlier ∆complex structures on a torus, projective
+plane, or Klein bottle can be obtained in this way, by identifying pairs of edges of
+two 2 simplices. If one starts with a single 2 simplex and identiﬁes all three edges
+to a single edge, preserving the orientations given by the ordering of the vertices,
+this produces a ∆complex known as the ‘dunce cap.’ By contrast, if the three edges
+of a 2 simplex are identiﬁed preserving a cyclic orientation of the three edges, as in
+the ﬁrst ﬁgure at the right, this does not produce a
+∆complex structure, although if the 2 simplex is
+subdivided into three smaller 2 simplices about a
+central vertex, then one does obtain a ∆complex
+structure on the quotient space.
+Thinking of a ∆complex X as a quotient space of a collection of disjoint sim-
+plices, it is not hard to see that X must be a Hausdorff space. Condition (iii) then
+implies that each restriction σα ||
+◦∆n is a homeomorphism onto its image, which is
+thus an open simplex in X . It follows from Proposition A.2 in the Appendix that
+these open simplices σα(
+◦∆n) are the cells en
+α of a CW complex structure on X with
+the σα ’s as characteristic maps. We will not need this fact at present, however.
+Simplicial Homology
+Our goal now is to deﬁne the simplicial homology groups of a ∆complex X . Let
+∆n(X) be the free abelian group with basis the open n simplices en
+α of X . Elements
+
+Simplicial and Singular Homology
+Section 2.1
+105
+of ∆n(X), called n chains, can be written as ﬁnite formal sums
+P
+α nαen
+α with co-
+efﬁcients nα ∈Z. Equivalently, we could write
+P
+α nασα where σα : ∆n→X is the
+characteristic map of en
+α , with image the closure of en
+α as described above. Such a
+sum
+P
+α nασα can be thought of as a ﬁnite collection, or ‘chain,’ of n simplices in X
+with integer multiplicities, the coefﬁcients nα .
+As one can see in the next ﬁgure, the boundary of the n simplex [v0, ··· , vn] con-
+sists of the various (n−1) dimensional simplices [v0, ··· , bvi, ··· , vn], where the ‘hat’
+symbol b over vi indicates that this vertex is deleted from the sequence v0, ··· , vn .
+In terms of chains, we might then wish to say that the boundary of [v0, ··· , vn] is the
+(n −1) chain formed by the sum of the faces [v0, ··· , bvi, ··· , vn]. However, it turns
+out to be better to insert certain signs and instead let the boundary of [v0, ··· , vn] be
+P
+i(−1)i[v0, ··· , bvi, ··· , vn]. Heuristically, the signs are inserted to take orientations
+into account, so that all the faces of a simplex are coherently oriented, as indicated in
+the following ﬁgure:
+v0
+v1
+v2
+v3
+v
+v0
+1
+v2
+v0
+v1
++
+-
+∂[v0, v1] = [v1] −[v0]
+∂[v0, v1, v2] = [v1, v2] −[v0, v2] + [v0, v1]
+∂[v0, v1, v2, v3] = [v1, v2, v3] −[v0, v2, v3]
++ [v0, v1, v3] −[v0, v1, v2]
+In the last case, the orientations of the two hidden faces are also counterclockwise
+when viewed from outside the 3 simplex.
+With this geometry in mind we deﬁne for a general ∆complex X a boundary
+homomorphism ∂n : ∆n(X)→∆n−1(X) by specifying its values on basis elements:
+∂n(σα) =
+X
+i
+(−1)iσα ||[v0, ··· , bvi, ··· , vn]
+Note that the right side of this equation does indeed lie in ∆n−1(X) since each restric-
+tion σα ||[v0, ··· , bvi, ··· , vn] is the characteristic map of an (n −1) simplex of X .
+Lemma 2.1. The composition ∆n(X)
+∂n
+-----→∆n−1(X)
+∂n−1
+---------→∆n−2(X) is zero.
+Proof: We have ∂n(σ) =
+P
+i(−1)iσ ||[v0, ··· , bvi, ··· , vn], and hence
+∂n−1∂n(σ) =
+X
+j<i
+(−1)i(−1)jσ||[v0, ··· , bvj, ··· , bvi, ··· , vn]
++
+X
+j>i
+(−1)i(−1)j−1σ||[v0, ··· , bvi, ··· , bvj, ··· , vn]
+
+106
+Chapter 2
+Homology
+The latter two summations cancel since after switching i and j in the second sum, it
+becomes the negative of the ﬁrst.
+⊔⊓
+The algebraic situation we have now is a sequence of homomorphisms of abelian
+groups
+··· -→Cn+1
+∂n+1
+--------→Cn
+∂n
+-----→Cn−1 -→··· -→C1
+∂1
+-----→C0
+∂0
+-----→0
+with ∂n∂n+1 = 0 for each n. Such a sequence is called a chain complex. Note that we
+have extended the sequence by a 0 at the right end, with ∂0 = 0. From ∂n∂n+1 = 0
+it follows that Im ∂n+1 ⊂Ker ∂n , where Im and Ker denote image and kernel. So we
+can deﬁne the nth homology group of the chain complex to be the quotient group
+Hn = Ker ∂n/ Im ∂n+1 . Elements of Ker ∂n are called cycles and elements of Im ∂n+1
+are boundaries. Elements of Hn are cosets of Im ∂n+1 , called homology classes. Two
+cycles representing the same homology class are said to be homologous. This means
+their difference is a boundary.
+Returning to the case that Cn = ∆n(X), the homology group Ker ∂n/ Im ∂n+1 will
+be denoted H∆
+n(X) and called the nth simplicial homology group of X .
+Example 2.2. X = S1 , with one vertex v and one edge e. Then ∆0(S1)
+v
+e
+and ∆1(S1) are both Z and the boundary map ∂1 is zero since ∂e = v −v .
+The groups ∆n(S1) are 0 for n ≥2 since there are no simplices in these
+dimensions. Hence
+H∆
+n(S1) ≈
+
+Z
+for n = 0, 1
+0
+for n ≥2
+This is an illustration of the general fact that if the boundary maps in a chain complex
+are all zero, then the homology groups of the complex are isomorphic to the chain
+groups themselves.
+Example 2.3. X = T , the torus with the ∆complex structure pictured earlier, having
+one vertex, three edges a, b, and c , and two 2 simplices U and L. As in the previous
+example, ∂1 = 0 so H∆
+0(T) ≈Z. Since ∂2U = a + b −c = ∂2L and {a, b, a + b −c} is
+a basis for ∆1(T), it follows that H∆
+1(T) ≈Z⊕Z with basis the homology classes [a]
+and [b]. Since there are no 3 simplices, H∆
+2(T) is equal to Ker ∂2 , which is inﬁnite
+cyclic generated by U −L since ∂(pU + qL) = (p + q)(a + b −c) = 0 only if p = −q.
+Thus
+H∆
+n(T) ≈
+
+
+
+Z ⊕Z
+for n = 1
+Z
+for n = 0, 2
+0
+for n ≥3
+Example 2.4. X = RP2 , as pictured earlier, with two vertices v and w , three edges
+a, b, and c , and two 2 simplices U and L. Then Im ∂1 is generated by w −v , so
+H∆
+0(X) ≈Z with either vertex as a generator. Since ∂2U = −a+b+c and ∂2L = a−b+c ,
+we see that ∂2 is injective, so H∆
+2(X) = 0. Further, Ker ∂1 ≈Z⊕Z with basis a−b and
+c , and Im ∂2 is an index-two subgroup of Ker ∂1 since we can choose c and a −b + c
+
+Simplicial and Singular Homology
+Section 2.1
+107
+as a basis for Ker ∂1 and a −b + c and 2c = (a −b + c) + (−a + b + c) as a basis for
+Im ∂2 . Thus H∆
+1(X) ≈Z2 .
+Example 2.5. We can obtain a ∆complex structure on Sn by taking two copies of ∆n
+and identifying their boundaries via the identity map. Labeling these two n simplices
+U and L, then it is obvious that Ker ∂n is inﬁnite cyclic generated by U −L. Thus
+H∆
+n(Sn) ≈Z for this ∆complex structure on Sn . Computing the other homology
+groups would be more difﬁcult.
+Many similar examples could be worked out without much trouble, such as the
+other closed orientable and nonorientable surfaces. However, the calculations do tend
+to increase in complexity before long, particularly for higher-dimensional complexes.
+Some obvious general questions arise: Are the groups H∆
+n(X) independent of
+the choice of ∆complex structure on X ? In other words, if two ∆complexes are
+homeomorphic, do they have isomorphic homology groups? More generally, do they
+have isomorphic homology groups if they are merely homotopy equivalent? To answer
+such questions and to develop a general theory it is best to leave the rather rigid
+simplicial realm and introduce the singular homology groups. These have the added
+advantage that they are deﬁned for all spaces, not just ∆complexes. At the end of
+this section, after some theory has been developed, we will show that simplicial and
+singular homology groups coincide for ∆complexes.
+Traditionally, simplicial homology is deﬁned for simplicial complexes, which are
+the ∆complexes whose simplices are uniquely determined by their vertices. This
+amounts to saying that each n simplex has n + 1 distinct vertices, and that no other
+n simplex has this same set of vertices. Thus a simplicial complex can be described
+combinatorially as a set X0 of vertices together with sets Xn of n simplices, which
+are (n+1) element subsets of X0 . The only requirement is that each (k+1) element
+subset of the vertices of an n simplex in Xn is a k simplex, in Xk . From this combi-
+natorial data a ∆complex X can be constructed, once we choose a partial ordering
+of the vertices X0 that restricts to a linear ordering on the vertices of each simplex
+in Xn . For example, we could just choose a linear ordering of all the vertices. This
+might perhaps involve invoking the Axiom of Choice for large vertex sets.
+An exercise at the end of this section is to show that every ∆complex can be
+subdivided to be a simplicial complex. In particular, every ∆complex is then homeo-
+morphic to a simplicial complex.
+Compared with simplicial complexes, ∆complexes have the advantage of simpler
+computations since fewer simplices are required. For example, to put a simplicial
+complex structure on the torus one needs at least 14 triangles, 21 edges, and 7 vertices,
+and for RP2 one needs at least 10 triangles, 15 edges, and 6 vertices. This would slow
+down calculations considerably!
+
+108
+Chapter 2
+Homology
+Singular Homology
+A singular n simplex in a space X is by deﬁnition just a map σ : ∆n→X . The
+word ‘singular’ is used here to express the idea that σ need not be a nice embedding
+but can have ‘singularities’ where its image does not look at all like a simplex. All that
+is required is that σ be continuous. Let Cn(X) be the free abelian group with basis
+the set of singular n simplices in X . Elements of Cn(X), called n chains, or more
+precisely singularn chains, are ﬁnite formal sums
+P
+i niσi for ni ∈Z and σi : ∆n→X .
+A boundary map ∂n : Cn(X)→Cn−1(X) is deﬁned by the same formula as before:
+∂n(σ) =
+X
+i
+(−1)iσ ||[v0, ··· , bvi, ··· , vn]
+Implicit in this formula is the canonical identiﬁcation of [v0, ··· , bvi, ··· , vn] with
+∆n−1 , preserving the ordering of vertices, so that σ ||[v0, ··· , bvi, ··· , vn] is regarded
+as a map ∆n−1→X , that is, a singular (n −1) simplex.
+Often we write the boundary map ∂n from Cn(X) to Cn−1(X) simply as ∂when
+this does not lead to serious ambiguities. The proof of Lemma 2.1 applies equally well
+to singular simplices, showing that ∂n∂n+1 = 0 or more concisely ∂2 = 0, so we can
+deﬁne the singular homology group Hn(X) = Ker ∂n/ Im ∂n+1 .
+It is evident from the deﬁnition that homeomorphic spaces have isomorphic sin-
+gular homology groups Hn , in contrast with the situation for H∆
+n . On the other hand,
+since the groups Cn(X) are so large, the number of singular n simplices in X usually
+being uncountable, it is not at all clear that for a ∆complex X with ﬁnitely many sim-
+plices, Hn(X) should be ﬁnitely generated for all n, or that Hn(X) should be zero
+for n larger than the dimension of X — two properties that are trivial for H∆
+n(X).
+Though singular homology looks so much more general than simplicial homology,
+it can actually be regarded as a special case of simplicial homology by means of the
+following construction. For an arbitrary space X , deﬁne the singular complex S(X)
+to be the ∆complex with one n simplex ∆n
+σ for each singular n simplex σ : ∆n→X ,
+with ∆n
+σ attached in the obvious way to the (n −1) simplices of S(X) that are the
+restrictions of σ to the various (n −1) simplices in ∂∆n . It is clear from the deﬁni-
+tions that H∆
+n
+ S(X)
+
+is identical with Hn(X) for all n, and in this sense the singular
+homology group Hn(X) is a special case of a simplicial homology group. One can
+regard S(X) as a ∆complex model for X , although it is usually an extremely large
+object compared to X .
+Cycles in singular homology are deﬁned algebraically, but they can be given a
+somewhat more geometric interpretation in terms of maps from ﬁnite ∆complexes.
+To see this, note ﬁrst that a singular n chain ξ can always be written in the form
+P
+i εiσi with εi = ±1, allowing repetitions of the singular n simplices σi . Given such
+an n chain ξ =
+P
+i εiσi , when we compute ∂ξ as a sum of singular (n −1) simplices
+with signs ±1, there may be some canceling pairs consisting of two identical singu-
+lar (n −1) simplices with opposite signs.
+Choosing a maximal collection of such

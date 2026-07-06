@@ -1,0 +1,231 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.C Minimal Cell Structures
+직전 소단원: 「4.B The Hopf Invariant」
+[본문]
+Minimal Cell Structures
+Section 4.C
+429
+We can apply the homology version of Whitehead’s theorem, Corollary 4.33, to
+show that a simply-connected CW complex with ﬁnitely generated homology groups
+is always homotopy equivalent to a CW complex having the minimum number of cells
+consistent with its homology, namely, one n cell for each Z summand of Hn and a
+pair of cells of dimension n and n + 1 for each Zk summand of Hn .
+Proposition 4C.1. Given a simply-connected CW complex X and a decomposition
+of each of its homology groups Hn(X) as a direct sum of cyclic groups with speci-
+ﬁed generators, then there is a CW complex Z and a cellular homotopy equivalence
+f : Z→X such that each cell of Z is either :
+(a) a ‘generator’ n cell en
+α , which is a cycle in cellular homology mapped by f to
+a cellular cycle representing the speciﬁed generator α of one of the cyclic sum-
+mands of Hn(X); or
+(b) a ‘relator’ (n + 1) cell en+1
+α
+, with cellular boundary equal to a multiple of the
+generator n cell en
+α , in the case that α has ﬁnite order.
+In the nonsimply-connected case this result can easily be false, counterexamples
+being provided by acyclic spaces and the space X = (S1 ∨Sn) ∪en+1 constructed
+in Example 4.35, which has the same homology as S1 but which must have cells of
+dimension greater than 1 in order to have πn nontrivial.
+Proof: We build Z inductively over skeleta, starting with Z1 a point since X is simply-
+connected. For the inductive step, suppose we have constructed f : Zn→X inducing
+an isomorphism on Hi for i < n and a surjection on Hn . For the mapping cylinder
+Mf we then have Hi(Mf , Zn) = 0 for i ≤n and Hn+1(Mf , Zn) ≈πn+1(Mf , Zn) by
+the Hurewicz theorem. To construct Zn+1 we use the following diagram:
+n
+X
+Hn 1(
+)
+X
+Hn(
+)
++
+n 1(
+)
++
+M
+Hn 1(
+)
++
+π
+f
+M
+Z
+Hn 1(
+)
+n
+Z
+Hn(
+H
+0
+n(
+)
+)
++
+n 1
++
+f
+Mf
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+,
+n
+Hn 1(
+)
++
+Z
+Z
+n 1
++
+Z
+n 1
++
+Z
+Hn 1(
+)
+n
+Z
+Hn(
+H
+0
+n(
+)
+)
++
+−−−−−→
+−−−−−→
+−→
+−→
+−→
+−−−−−→
+−−−−−→
+,
+n
+M
+Z
+f ,
+==
+≈
+≈
+≈
+By induction we know the map Hn(Zn)→Hn(Mf ) ≈Hn(X) exactly, namely, Zn has
+generator n cells, which are cellular cycles mapping to the given generators of Hn(X),
+along with relator n cells that do not contribute to Hn(Zn). Thus Hn(Zn) is free with
+basis the generator n cells, and the kernel of Hn(Zn)→Hn(X) is free with basis given
+by certain multiples of some of the generator n cells. Choose ‘relator’ elements ρi in
+Hn+1(Mf , Zn) mapping to this basis for the kernel, and let the ‘generator’ elements
+γi ∈Hn+1(Mf , Zn) be the images of the chosen generators of Hn+1(Mf ) ≈Hn+1(X).
+Via the Hurewicz isomorphism Hn+1(Mf , Zn) ≈πn+1(Mf , Zn), the homology
+classes ρi and γi are represented by maps ri, gi : (Dn+1, Sn)→(Mf , Zn). We form
+
+430
+Chapter 4
+Homotopy Theory
+Zn+1 from Zn by attaching (n + 1) cells via the restrictions of the maps ri and
+gi to Sn . The maps ri and gi themselves then give an extension of the inclusion
+Zn>Mf to a map Zn+1→Mf , whose composition with the retraction Mf→X is the
+extended map f : Zn+1→X . This gives us the lower row of the preceding diagram,
+with commutative squares. By construction, the subgroup of Hn+1(Zn+1, Zn) gener-
+ated by the relator (n + 1) cells maps injectively to Hn(Zn), with image the kernel
+of Hn(Zn)→Hn(X), so f∗: Hn(Zn+1)→Hn(X) is an isomorphism. The elements of
+Hn+1(Zn+1, Zn) represented by the generator (n+1) cells map to the γi ’s, hence map
+to zero in Hn(Zn), so by exactness of the second row these generator (n + 1) cells
+are cellular cycles representing elements of Hn+1(Zn+1) mapped by f∗to the given
+generators of Hn+1(X). In particular, f∗: Hn+1(Zn+1)→Hn+1(X) is surjective, and
+the induction step is ﬁnished.
+Doing this for all n, we produce a CW complex Z and a map f : Z→X with the
+desired properties.
+⊔⊓
+Example 4C.2. Suppose X is a simply-connected CW complex such that for some
+n ≥2, the only nonzero reduced homology groups of X are Hn(X), which is ﬁnitely
+generated, and Hn+1(X), which is ﬁnitely generated and free. Then the proposition
+says that X is homotopy equivalent to a CW complex Z obtained from a wedge sum
+of n spheres by attaching (n + 1) cells. The attaching maps of these cells are de-
+termined up to homotopy by the cellular boundary map Hn+1(Zn+1, Zn)→Hn(Zn)
+since πn(Zn) ≈Hn(Zn). So the attaching maps are either trivial, in the case of gen-
+erator (n + 1) cells, or they represent some multiple of an inclusion of one of the
+wedge summands, in the case of a relator (n + 1) cell. Hence Z is the wedge sum of
+spheres Sn and Sn+1 together with Moore spaces M(Zm, n) of the form Sn ∪en+1 . In
+particular, the homotopy type of X is uniquely determined by its homology groups.
+Proposition 4C.3. Let X be a simply-connected space homotopy equivalent to a CW
+complex, such that the only nontrivial reduced homology groups of X are H2(X) ≈
+Zm and H4(X) ≈Z. Then the homotopy type of X is uniquely determined by the
+cup product ring H∗(X; Z). In particular, this applies to any simply-connected closed
+4 manifold.
+Proof: By the previous proposition we may assume X is a complex Xϕ obtained from
+a wedge sum
+W
+j S2
+j of m 2 spheres S2
+j by attaching a cell e4 via a map ϕ : S3→
+W
+j S2
+j .
+As shown in Example 4.52, π3(
+W
+j S2
+j ) is free with basis the Hopf maps ηj : S3→S2
+j and
+the Whitehead products [ij, ik], j < k, where ij is the inclusion S2
+j >
+W
+j S2
+j . Since
+a homotopy of ϕ does not change the homotopy type of Xϕ , we may assume ϕ is
+a linear combination
+P
+j ajηj +
+P
+j<k ajk[ij, ik]. We need to see how the coefﬁcients
+aj and ajk determine the cup product H2(X; Z)×H2(X; Z)→H4(X; Z).
+This cup product can be represented by an m×m symmetric matrix (bjk) where
+the cup product of the cohomology classes dual to the j th and kth 2-cells is bjk
+
+Cohomology of Fiber Bundles
+Section 4.D
+431
+times the class dual to the 4 cell. We claim that bjk = ajk for j < k and bjj = aj .
+If ϕ is one of the generators ηi or [ij, ik] this is clear, since if ϕ = ηj then Xϕ is
+the wedge sum of CP2 with m −1 2 spheres, while if ϕ = [ij, ik] then Xϕ is the
+wedge sum of S2
+j ×S2
+k with m −2 2 spheres. The claim is also true when ϕ is −ηj
+or −[ij, ik] since changing the sign of ϕ amounts to composing ϕ with a reﬂection
+of S3 , and this changes the generator of H4(Xϕ; Z) to its negative. The general case
+now follows by induction from the assertion that the matrix (bjk) for Xϕ+ψ is the
+sum of the corresponding matrices for Xϕ and Xψ . This assertion can be proved as
+follows. By attaching two 4 cells to
+W
+j S2
+j by ϕ and ψ we obtain a complex Xϕ,ψ
+which we can view as Xϕ ∪Xψ . There is a quotient map q : Xϕ+ψ -→Xϕ,ψ that is a
+homeomorphism on the 2 skeleton and collapses the closure of an equatorial 3 disk
+in the 4 cell of Xϕ+ψ to a point. The induced map q∗: H4(Xϕ,ψ)→H4(Xϕ+ψ) sends
+each of the two generators corresponding to the 4 cells of Xϕ,ψ to a generator, and
+the assertion follows.
+Now suppose Xϕ and Xψ have isomorphic cup product rings. This means bases
+for H∗(Xϕ; Z) and H∗(Xψ; Z) can be chosen so that the matrices specifying the cup
+product H2×H2→H4 with respect to these bases are the same. The preceding propo-
+sition says that any choice of basis can be realized as the dual basis to a cell structure
+on a CW complex homotopy equivalent to the given complex. Therefore we may as-
+sume the matrices (bjk) for Xϕ and Xψ are the same. By what we have shown in
+the preceding paragraph, this means ϕ and ψ are homotopic, hence Xϕ and Xψ are
+homotopy equivalent.
+For the statement about simply-connected closed 4 manifolds, Corollaries A.8
+and A.9 and Proposition A.11 in the Appendix say that such a manifold M has the ho-
+motopy type of a CW complex with ﬁnitely generated homology groups. Then Poincar´e
+duality and the universal coefﬁcient theorem imply that the only nontrivial homology
+groups Hi(M) are Z for i = 0, 4 and Zm for i = 2, for some m ≥0.
+⊔⊓
+This result and the example preceding it are special cases of a homotopy classi-
+ﬁcation by Whitehead of simply-connected CW complexes with positive-dimensional
+cells in three adjacent dimensions n, n + 1, and n + 2; see [Baues 1996] for a full
+treatment of this.
+While the homotopy groups of the three spaces in a ﬁber bundle ﬁt into a long
+exact sequence, the relation between their homology or cohomology groups is much
+more complicated. The K¨unneth formula shows that there are some subtleties even
+for a product bundle, and for general bundles the machinery of spectral sequences,

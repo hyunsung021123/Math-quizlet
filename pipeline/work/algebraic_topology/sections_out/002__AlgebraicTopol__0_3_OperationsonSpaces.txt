@@ -1,0 +1,155 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 0. Some Underlying Geometric Notions
+현재 소단원: 0.3 Operations on Spaces
+직전 소단원: 「0.2 Cell Complexes」
+[본문]
+8
+Chapter 0
+Some Underlying Geometric Notions
+In the examples of cell complexes given so far, the closure of each cell is a sub-
+complex, and more generally the closure of any collection of cells is a subcomplex.
+Most naturally arising cell structures have this property, but it need not hold in gen-
+eral. For example, if we start with S1 with its minimal cell structure and attach to this
+a 2 cell by a map S1→S1 whose image is a nontrivial subarc of S1 , then the closure
+of the 2 cell is not a subcomplex since it contains only a part of the 1 cell.
+Operations on Spaces
+Cell complexes have a very nice mixture of rigidity and ﬂexibility, with enough
+rigidity to allow many arguments to proceed in a combinatorial cell-by-cell fashion
+and enough ﬂexibility to allow many natural constructions to be performed on them.
+Here are some of those constructions.
+Products.
+If X and Y are cell complexes, then X×Y has the structure of a cell
+complex with cells the products em
+α ×en
+β where em
+α
+ranges over the cells of X and
+en
+β ranges over the cells of Y . For example, the cell structure on the torus S1×S1
+described at the beginning of this section is obtained in this way from the standard
+cell structure on S1 . For completely general CW complexes X and Y there is one
+small complication: The topology on X×Y as a cell complex is sometimes ﬁner than
+the product topology, with more open sets than the product topology has, though the
+two topologies coincide if either X or Y has only ﬁnitely many cells, or if both X
+and Y have countably many cells. This is explained in the Appendix. In practice this
+subtle issue of point-set topology rarely causes problems, however.
+Quotients. If (X, A) is a CW pair consisting of a cell complex X and a subcomplex A,
+then the quotient space X/A inherits a natural cell complex structure from X . The
+cells of X/A are the cells of X −A plus one new 0 cell, the image of A in X/A. For a
+cell en
+α of X −A attached by ϕα : Sn−1→Xn−1 , the attaching map for the correspond-
+ing cell in X/A is the composition Sn−1→Xn−1→Xn−1/An−1 .
+For example, if we give Sn−1 any cell structure and build Dn from Sn−1 by attach-
+ing an n cell, then the quotient Dn/Sn−1 is Sn with its usual cell structure. As another
+example, take X to be a closed orientable surface with the cell structure described at
+the beginning of this section, with a single 2 cell, and let A be the complement of this
+2 cell, the 1 skeleton of X . Then X/A has a cell structure consisting of a 0 cell with
+a 2 cell attached, and there is only one way to attach a cell to a 0 cell, by the constant
+map, so X/A is S2 .
+Suspension. For a space X , the suspension SX is the quotient of
+X×I obtained by collapsing X×{0} to one point and X×{1} to an-
+other point. The motivating example is X = Sn , when SX = Sn+1
+with the two ‘suspension points’ at the north and south poles of
+Sn+1 , the points (0, ··· , 0, ±1). One can regard SX as a double cone
+
+Operations on Spaces
+Chapter 0
+9
+on X , the union of two copies of the cone CX = (X×I)/(X×{0}). If X is a CW com-
+plex, so are SX and CX as quotients of X×I with its product cell structure, I being
+given the standard cell structure of two 0 cells joined by a 1 cell.
+Suspension becomes increasingly important the farther one goes into algebraic
+topology, though why this should be so is certainly not evident in advance.
+One
+especially useful property of suspension is that not only spaces but also maps can be
+suspended. Namely, a map f : X→Y suspends to Sf : SX→SY , the quotient map of
+f ×11 : X×I→Y ×I .
+Join. The cone CX is the union of all line segments joining points of X to an external
+vertex, and similarly the suspension SX is the union of all line segments joining points
+of X to two external vertices. More generally, given X and a second space Y , one can
+deﬁne the space of all lines segments joining points in X to points in Y . This is
+the join X ∗Y , the quotient space of X×Y ×I under the identiﬁcations (x, y1, 0) ∼
+(x, y2, 0) and (x1, y, 1) ∼(x2, y, 1). Thus we are collapsing the subspace X×Y ×{0}
+to X and X×Y ×{1} to Y . For example, if
+X and Y are both closed intervals, then we
+are collapsing two opposite faces of a cube
+onto line segments so that the cube becomes
+a tetrahedron.
+In the general case, X ∗Y
+X
+I
+Y
+contains copies of X and Y at its two ‘ends,’
+and every other point (x, y, t) in X ∗Y is on a unique line segment joining the point
+x ∈X ⊂X ∗Y to the point y ∈Y ⊂X ∗Y , the segment obtained by ﬁxing x and y
+and letting the coordinate t in (x, y, t) vary.
+A nice way to write points of X ∗Y is as formal linear combinations t1x + t2y
+with 0 ≤ti ≤1 and t1+t2 = 1, subject to the rules 0x+1y = y and 1x+0y = x that
+correspond exactly to the identiﬁcations deﬁning X ∗Y . In much the same way, an
+iterated join X1 ∗···∗Xn can be regarded as the space of formal linear combinations
+t1x1 + ··· + tnxn with 0 ≤ti ≤1 and t1 + ··· + tn = 1, with the convention that
+terms 0ti can be omitted. This viewpoint makes it easy to see that the join operation
+is associative. A very special case that plays a central role in algebraic topology is
+when each Xi is just a point. For example, the join of two points is a line segment, the
+join of three points is a triangle, and the join of four points is a tetrahedron. The join
+of n points is a convex polyhedron of dimension n −1 called a simplex. Concretely,
+if the n points are the n standard basis vectors for Rn , then their join is the space
+∆n−1 = { (t1, ··· , tn) ∈Rn || t1 + ··· + tn = 1 and ti ≥0 }.
+Another interesting example is when each Xi is S0 , two points. If we take the two
+points of Xi to be the two unit vectors along the ith coordinate axis in Rn , then the
+join X1 ∗···∗Xn is the union of 2n copies of the simplex ∆n−1 , and radial projection
+from the origin gives a homeomorphism between X1 ∗··· ∗Xn and Sn−1 .
+
+10
+Chapter 0
+Some Underlying Geometric Notions
+If X and Y are CW complexes, then there is a natural CW structure on X ∗Y
+having the subspaces X and Y as subcomplexes, with the remaining cells being the
+product cells of X×Y ×(0, 1). As usual with products, the CW topology on X ∗Y may
+be weaker than the quotient of the product topology on X×Y ×I .
+Wedge Sum. This is a rather trivial but still quite useful operation. Given spaces X and
+Y with chosen points x0 ∈X and y0 ∈Y , then the wedge sum X ∨Y is the quotient
+of the disjoint union X ⨿Y obtained by identifying x0 and y0 to a single point. For
+example, S1 ∨S1 is homeomorphic to the ﬁgure ‘8,’ two circles touching at a point.
+More generally one could form the wedge sum
+W
+α Xα of an arbitrary collection of
+spaces Xα by starting with the disjoint union
+`
+α Xα and identifying points xα ∈Xα
+to a single point. In case the spaces Xα are cell complexes and the points xα are
+0 cells, then
+W
+α Xα is a cell complex since it is obtained from the cell complex
+`
+α Xα
+by collapsing a subcomplex to a point.
+For any cell complex X , the quotient Xn/Xn−1 is a wedge sum of n spheres
+W
+α Sn
+α ,
+with one sphere for each n cell of X .
+Smash Product. Like suspension, this is another construction whose importance be-
+comes evident only later. Inside a product space X×Y there are copies of X and Y ,
+namely X×{y0} and {x0}×Y for points x0 ∈X and y0 ∈Y . These two copies of X
+and Y in X×Y intersect only at the point (x0, y0), so their union can be identiﬁed
+with the wedge sum X ∨Y . The smash product X ∧Y is then deﬁned to be the quo-
+tient X×Y/X ∨Y . One can think of X ∧Y as a reduced version of X×Y obtained
+by collapsing away the parts that are not genuinely a product, the separate factors X
+and Y .
+The smash product X ∧Y is a cell complex if X and Y are cell complexes with x0
+and y0 0 cells, assuming that we give X×Y the cell-complex topology rather than the
+product topology in cases when these two topologies differ. For example, Sm∧Sn has
+a cell structure with just two cells, of dimensions 0 and m+n, hence Sm∧Sn = Sm+n .
+In particular, when m = n = 1 we see that collapsing longitude and meridian circles
+of a torus to a point produces a 2 sphere.
+Two Criteria for Homotopy Equivalence
+Earlier in this chapter the main tool we used for constructing homotopy equiva-
+lences was the fact that a mapping cylinder deformation retracts onto its ‘target’ end.
+By repeated application of this fact one can often produce homotopy equivalences be-
+tween rather different-looking spaces. However, this process can be a bit cumbersome
+in practice, so it is useful to have other techniques available as well. We will describe
+two commonly used methods here. The ﬁrst involves collapsing certain subspaces to
+points, and the second involves varying the way in which the parts of a space are put
+together.

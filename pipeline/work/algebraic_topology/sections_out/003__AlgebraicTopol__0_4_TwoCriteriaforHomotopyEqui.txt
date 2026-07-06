@@ -1,0 +1,257 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 0. Some Underlying Geometric Notions
+현재 소단원: 0.4 Two Criteria for Homotopy Equivalence
+직전 소단원: 「0.3 Operations on Spaces」
+[본문]
+10
+Chapter 0
+Some Underlying Geometric Notions
+If X and Y are CW complexes, then there is a natural CW structure on X ∗Y
+having the subspaces X and Y as subcomplexes, with the remaining cells being the
+product cells of X×Y ×(0, 1). As usual with products, the CW topology on X ∗Y may
+be weaker than the quotient of the product topology on X×Y ×I .
+Wedge Sum. This is a rather trivial but still quite useful operation. Given spaces X and
+Y with chosen points x0 ∈X and y0 ∈Y , then the wedge sum X ∨Y is the quotient
+of the disjoint union X ⨿Y obtained by identifying x0 and y0 to a single point. For
+example, S1 ∨S1 is homeomorphic to the ﬁgure ‘8,’ two circles touching at a point.
+More generally one could form the wedge sum
+W
+α Xα of an arbitrary collection of
+spaces Xα by starting with the disjoint union
+`
+α Xα and identifying points xα ∈Xα
+to a single point. In case the spaces Xα are cell complexes and the points xα are
+0 cells, then
+W
+α Xα is a cell complex since it is obtained from the cell complex
+`
+α Xα
+by collapsing a subcomplex to a point.
+For any cell complex X , the quotient Xn/Xn−1 is a wedge sum of n spheres
+W
+α Sn
+α ,
+with one sphere for each n cell of X .
+Smash Product. Like suspension, this is another construction whose importance be-
+comes evident only later. Inside a product space X×Y there are copies of X and Y ,
+namely X×{y0} and {x0}×Y for points x0 ∈X and y0 ∈Y . These two copies of X
+and Y in X×Y intersect only at the point (x0, y0), so their union can be identiﬁed
+with the wedge sum X ∨Y . The smash product X ∧Y is then deﬁned to be the quo-
+tient X×Y/X ∨Y . One can think of X ∧Y as a reduced version of X×Y obtained
+by collapsing away the parts that are not genuinely a product, the separate factors X
+and Y .
+The smash product X ∧Y is a cell complex if X and Y are cell complexes with x0
+and y0 0 cells, assuming that we give X×Y the cell-complex topology rather than the
+product topology in cases when these two topologies differ. For example, Sm∧Sn has
+a cell structure with just two cells, of dimensions 0 and m+n, hence Sm∧Sn = Sm+n .
+In particular, when m = n = 1 we see that collapsing longitude and meridian circles
+of a torus to a point produces a 2 sphere.
+Two Criteria for Homotopy Equivalence
+Earlier in this chapter the main tool we used for constructing homotopy equiva-
+lences was the fact that a mapping cylinder deformation retracts onto its ‘target’ end.
+By repeated application of this fact one can often produce homotopy equivalences be-
+tween rather different-looking spaces. However, this process can be a bit cumbersome
+in practice, so it is useful to have other techniques available as well. We will describe
+two commonly used methods here. The ﬁrst involves collapsing certain subspaces to
+points, and the second involves varying the way in which the parts of a space are put
+together.
+
+Two Criteria for Homotopy Equivalence
+Chapter 0
+11
+Collapsing Subspaces
+The operation of collapsing a subspace to a point usually has a drastic effect
+on homotopy type, but one might hope that if the subspace being collapsed already
+has the homotopy type of a point, then collapsing it to a point might not change the
+homotopy type of the whole space. Here is a positive result in this direction:
+If (X, A) is a CW pair consisting of a CW complex X and a contractible subcomplex A,
+then the quotient map X→X/A is a homotopy equivalence.
+A proof will be given later in Proposition 0.17, but for now let us look at some examples
+showing how this result can be applied.
+Example 0.7: Graphs. The three graphs
+are homotopy equivalent since
+each is a deformation retract of a disk with two holes, but we can also deduce this
+from the collapsing criterion above since collapsing the middle edge of the ﬁrst and
+third graphs produces the second graph.
+More generally, suppose X is any graph with ﬁnitely many vertices and edges. If
+the two endpoints of any edge of X are distinct, we can collapse this edge to a point,
+producing a homotopy equivalent graph with one fewer edge. This simpliﬁcation can
+be repeated until all edges of X are loops, and then each component of X is either
+an isolated vertex or a wedge sum of circles.
+This raises the question of whether two such graphs, having only one vertex in
+each component, can be homotopy equivalent if they are not in fact just isomorphic
+graphs. Exercise 12 at the end of the chapter reduces the question to the case of
+connected graphs. Then the task is to prove that a wedge sum
+W
+m S1 of m circles is not
+homotopy equivalent to
+W
+n S1 if m ≠n. This sort of thing is hard to do directly. What
+one would like is some sort of algebraic object associated to spaces, depending only
+on their homotopy type, and taking different values for
+W
+m S1 and
+W
+n S1 if m ≠n. In
+fact the Euler characteristic does this since
+W
+m S1 has Euler characteristic 1−m. But it
+is a rather nontrivial theorem that the Euler characteristic of a space depends only on
+its homotopy type. A different algebraic invariant that works equally well for graphs,
+and whose rigorous development requires less effort than the Euler characteristic, is
+the fundamental group of a space, the subject of Chapter 1.
+Example 0.8. Consider the space X obtained
+from S2 by attaching the two ends of an arc
+A to two distinct points on the sphere, say the
+north and south poles. Let B be an arc in S2
+joining the two points where A attaches. Then
+X can be given a CW complex structure with
+the two endpoints of A and B as 0 cells, the
+interiors of A and B as 1 cells, and the rest of
+S2 as a 2 cell. Since A and B are contractible,
+A
+X
+X/
+X/
+B
+A
+B
+
+12
+Chapter 0
+Some Underlying Geometric Notions
+X/A and X/B are homotopy equivalent to X . The space X/A is the quotient S2/S0 ,
+the sphere with two points identiﬁed, and X/B is S1 ∨S2 . Hence S2/S0 and S1 ∨S2
+are homotopy equivalent, a fact which may not be entirely obvious at ﬁrst glance.
+Example 0.9.
+Let X be the union of a torus with n meridional disks.
+To obtain
+a CW structure on X , choose a longitudinal circle in the torus, intersecting each of
+the meridional disks in one point. These intersection points are then the 0 cells, the
+1 cells are the rest of the longitudinal circle and the boundary circles of the meridional
+disks, and the 2 cells are the remaining regions of the torus and the interiors of
+the meridional disks. Collapsing each meridional disk to a point yields a homotopy
+X
+Y
+Z
+W 
+equivalent space Y consisting of n 2 spheres, each tangent to its two neighbors, a
+‘necklace with n beads.’ The third space Z in the ﬁgure, a strand of n beads with a
+string joining its two ends, collapses to Y by collapsing the string to a point, so this
+collapse is a homotopy equivalence. Finally, by collapsing the arc in Z formed by the
+front halves of the equators of the n beads, we obtain the fourth space W , a wedge
+sum of S1 with n 2 spheres. (One can see why a wedge sum is sometimes called a
+‘bouquet’ in the older literature.)
+Example 0.10: Reduced Suspension. Let X be a CW complex and x0 ∈X a 0 cell.
+Inside the suspension SX we have the line segment {x0}×I , and collapsing this to a
+point yields a space ΣX homotopy equivalent to SX , called the reduced suspension
+of X . For example, if we take X to be S1 ∨S1 with x0 the intersection point of the
+two circles, then the ordinary suspension SX is the union of two spheres intersecting
+along the arc {x0}×I , so the reduced suspension ΣX is S2 ∨S2 , a slightly simpler
+space. More generally we have Σ(X ∨Y) = ΣX ∨ΣY for arbitrary CW complexes X
+and Y . Another way in which the reduced suspension ΣX is slightly simpler than SX
+is in its CW structure. In SX there are two 0 cells (the two suspension points) and an
+(n + 1) cell en×(0, 1) for each n cell en of X , whereas in ΣX there is a single 0 cell
+and an (n + 1) cell for each n cell of X other than the 0 cell x0 .
+The reduced suspension ΣX is actually the same as the smash product X ∧S1
+since both spaces are the quotient of X×I with X×∂I ∪{x0}×I collapsed to a point.
+Attaching Spaces
+Another common way to change a space without changing its homotopy type in-
+volves the idea of continuously varying how its parts are attached together. A general
+deﬁnition of ‘attaching one space to another’ that includes the case of attaching cells
+
+Two Criteria for Homotopy Equivalence
+Chapter 0
+13
+is the following. We start with a space X0 and another space X1 that we wish to
+attach to X0 by identifying the points in a subspace A ⊂X1 with points of X0 . The
+data needed to do this is a map f : A→X0 , for then we can form a quotient space
+of X0 ⨿X1 by identifying each point a ∈A with its image f (a) ∈X0 . Let us de-
+note this quotient space by X0 ⊔f X1 , the space X0 with X1 attached along A via f .
+When (X1, A) = (Dn, Sn−1) we have the case of attaching an n cell to X0 via a map
+f : Sn−1→X0 .
+Mapping cylinders are examples of this construction, since the mapping cylinder
+Mf of a map f : X→Y is the space obtained from Y by attaching X×I along X×{1}
+via f . Closely related to the mapping cylinder Mf is the mapping cone Cf = Y ⊔f CX
+where CX is the cone (X×I)/(X×{0}) and we attach this to Y
+along X×{1} via the identiﬁcations (x, 1) ∼f (x). For exam-
+ple, when X is a sphere Sn−1 the mapping cone Cf is the space
+obtained from Y by attaching an n cell via f : Sn−1→Y .
+A
+mapping cone Cf can also be viewed as the quotient Mf /X of
+the mapping cylinder Mf with the subspace X = X×{0} collapsed to a point.
+CX
+Y
+If one varies an attaching map f by a homotopy ft , one gets a family of spaces
+whose shape is undergoing a continuous change, it would seem, and one might expect
+these spaces all to have the same homotopy type. This is often the case:
+If (X1, A) is a CW pair and the two attaching maps f , g : A→X0 are homotopic, then
+X0 ⊔f X1 ≃X0 ⊔g X1 .
+Again let us defer the proof and look at some examples.
+Example 0.11. Let us rederive the result in Example 0.8 that a sphere with two points
+A
+S
+1
+S
+2
+identiﬁed is homotopy equivalent to S1 ∨S2 . The sphere
+with two points identiﬁed can be obtained by attaching S2
+to S1 by a map that wraps a closed arc A in S2 around S1 ,
+as shown in the ﬁgure. Since A is contractible, this attach-
+ing map is homotopic to a constant map, and attaching S2
+to S1 via a constant map of A yields S1 ∨S2 . The result
+then follows since (S2, A) is a CW pair, S2 being obtained from A by attaching a
+2 cell.
+Example 0.12.
+In similar fashion we can see that the necklace in Example 0.9 is
+homotopy equivalent to the wedge sum of a circle with n 2 spheres. The necklace
+can be obtained from a circle by attaching n 2 spheres along arcs, so the necklace
+is homotopy equivalent to the space obtained by attaching n 2 spheres to a circle
+at points. Then we can slide these attaching points around the circle until they all
+coincide, producing the wedge sum.
+Example 0.13. Here is an application of the earlier fact that collapsing a contractible
+subcomplex is a homotopy equivalence: If (X, A) is a CW pair, consisting of a cell
+
+14
+Chapter 0
+Some Underlying Geometric Notions
+complex X and a subcomplex A, then X/A ≃X ∪CA, the mapping cone of the
+inclusion A>X . For we have X/A = (X∪CA)/CA ≃X∪CA since CA is a contractible
+subcomplex of X ∪CA.
+Example 0.14. If (X, A) is a CW pair and A is contractible in X , that is, the inclusion
+A>X is homotopic to a constant map, then X/A ≃X ∨SA. Namely, by the previous
+example we have X/A ≃X ∪CA, and then since A is contractible in X , the mapping
+cone X ∪CA of the inclusion A> X is homotopy equivalent to the mapping cone of
+a constant map, which is X ∨SA. For example, Sn/Si ≃Sn ∨Si+1 for i < n, since
+Si is contractible in Sn if i < n. In particular this gives S2/S0 ≃S2 ∨S1 , which is
+Example 0.8 again.
+The Homotopy Extension Property
+In this ﬁnal section of the chapter we will actually prove a few things. In partic-
+ular we prove the two criteria for homotopy equivalence described above, along with
+the fact that any two homotopy equivalent spaces can be embedded as deformation
+retracts of the same space.
+The proofs depend upon a technical property that arises in many other contexts
+as well. Consider the following problem. Suppose one is given a map f0 : X→Y , and
+on a subspace A ⊂X one is also given a homotopy ft : A→Y of f0 ||A that one would
+like to extend to a homotopy ft : X→Y of the given f0 . If the pair (X, A) is such that
+this extension problem can always be solved, one says that (X, A) has the homotopy
+extension property. Thus (X, A) has the homotopy extension property if every map
+X×{0} ∪A×I→Y can be extended to a map X×I→Y .
+In particular, the homotopy extension property for (X, A) implies that the iden-
+tity map X×{0} ∪A×I→X×{0} ∪A×I extends to a map X×I→X×{0} ∪A×I , so
+X×{0} ∪A×I is a retract of X×I . The converse is also true: If there is a retraction
+X×I→X×{0} ∪A×I , then by composing with this retraction we can extend every
+map X×{0} ∪A×I→Y to a map X×I→Y . Thus the homotopy extension property
+for (X, A) is equivalent to X×{0} ∪A×I being a retract of X×I . This implies for ex-
+ample that if (X, A) has the homotopy extension property, then so does (X×Z, A×Z)
+for any space Z , a fact that would not be so easy to prove directly from the deﬁnition.
+If (X, A) has the homotopy extension property, then A must be a closed subspace
+of X , at least when X is Hausdorff. For if r : X×I→X×I is a retraction onto the
+subspace X×{0} ∪A×I , then the image of r is the set of points z ∈X×I with
+r(z) = z, a closed set if X is Hausdorff, so X×{0}∪A×I is closed in X×I and hence
+A is closed in X .
+A simple example of a pair (X, A) with A closed for which the homotopy exten-
+sion property fails is the pair (I, A) where A = {0, 1,1/2,1/3,1/4, ···}. It is not hard to
+show that there is no continuous retraction I×I→I×{0} ∪A×I . The breakdown of
+homotopy extension here can be attributed to the bad structure of (X, A) near 0.

@@ -1,0 +1,652 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.3.4 Obstruction Theory
+직전 소단원: 「4.3.3 Postnikov Towers」
+[본문]
+Connections with Cohomology
+Section 4.3
+415
+π
+X
+X
+n 1(
+)
++
+π
+Y
+n 1(
+)
++
+π
+X
+n(
+)
+π
+Y
+n(
+)
+π
+Y
+n 1(
+)
++
+,
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+π
+Z
+Z
+n 1(
+)
++
+n 1
++
+π
+Y
+n 1(
+)
++
+π
+Z
+n(
+)
+π
+Y
+n(
+)
+π
+Y
+n 1(
+)
++
+n 1
++
+n 1
++
+,
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+π
+Z
+Z
+n 1(
+)
++
+n 1
++
+π
+Z
+n 1(
+)
++
+π
+Z
+n
+n
+n
+(
+)
+π
+Z
+n
+n
+(
+)
+π
+Z
+n 1(
+)
++
+n 1
++
+n 1
++
+,
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+−→
+−→
+−→
+−→
+−→
+−→
+−→
+−→
+−→
+−→
+=
+=
+=
+=
+≈
+≈
+The upper-right vertical map is injective and the lower-left vertical map is surjective,
+so the ﬁve-lemma implies that the two middle vertical maps are isomorphisms. Since
+the homotopy ﬁber of an inclusion A > B has πi equal to πi+1(B, A), we see that
+condition (3) is satisﬁed.
+The statement about a tower of principal ﬁbrations can be obtained as an appli-
+cation of Lemma 4.70. As we saw in the previous paragraph, there are isomorphisms
+πn+1(Y, X) ≈πn+1(Zn, Zn+1), and these respect the action of π1(X) ≈π1(Zn+1), so
+Lemma 4.70 gives the result.
+⊔⊓
+Besides the case that Y is a point, which yields Postnikov towers, another in-
+teresting special case of Moore–Postnikov towers is when X is a
+point. In this case the space Zn is an n connected covering of
+Y , as in Example 4.20. The n connected covering of Y can also
+be obtained as the homotopy ﬁber of the nth stage Y→Yn of
+a Postnikov tower for Y . The tower of n connected coverings
+−→
+−→
+−→
+−−−−→
+Y
+K
+Z1
+Z2
+...
+Y,
+π1
+(
+)
+1
+−−→K
+Y,
+π2
+(
+)
+2
+−−→K
+Y,
+π3
+(
+)
+3
+of Y can be realized by principal ﬁbrations by taking Zn to be
+the homotopy ﬁber of the map Zn−1→K(πnY, n) that is the ﬁrst
+nontrivial stage in a Postnikov tower for Zn−1 .
+A generalization of the preceding theory allowing nontrivial actions of π1 can be
+found in [Robinson 1972].
+Obstruction Theory
+It is very common in algebraic topology to encounter situations where one would
+like to extend or lift a given map. Obvious examples are the homotopy extension and
+homotopy lifting properties. In their simplest forms, extension and lifting questions
+can often be phrased in one of the following two ways:
+The Extension Problem. Given a CW pair (W, A) and a map
+A→X , does this extend to a map W→X ?
+−−−−−→
+−−−−−→
+>
+A
+W
+X
+The Lifting Problem.
+Given a ﬁbration X→Y and a map
+W→Y , is there a lift W→X ?
+−→
+−−−−−→
+−−−−−→
+W
+Y
+X
+In order for the lifting problem to include things like the homotopy lifting property,
+it should be generalized to a relative form:
+
+416
+Chapter 4
+Homotopy Theory
+The Relative Lifting Problem. Given a CW pair (W, A), a ﬁbra-
+tion X→Y , and a map W→Y , does there exist a lift W→X
+extending a given lift on A?
+−→
+−−−−−→
+−−−−−→
+−−−−−→
+>
+A
+W
+Y
+X
+Besides reducing to the absolute lifting problem when A = ∅, this includes the exten-
+sion problem by taking Y to be a point. Of course, one could broaden these questions
+by dropping the requirements that (W, A) be a CW pair and that the map X→Y be a
+ﬁbration. However, these conditions are often satisﬁed in cases of interest, and they
+make the task of ﬁnding solutions much easier.
+The term ‘obstruction theory’ refers to a procedure for deﬁning a sequence of
+cohomology classes that are the obstructions to ﬁnding a solution to the extension,
+lifting, or relative lifting problem. In the most favorable cases these obstructions lie
+in cohomology groups that are all zero, so the problem has a solution. But even when
+the obstructions are nonzero it can be very useful to have the problem expressed in
+cohomological terms.
+There are two ways of developing obstruction theory, which produce essentially
+the same result in the end. In the more elementary approach one tries to construct
+the extension or lifting one cell of W at a time, proceeding inductively over skeleta of
+W . This approach has an appealing directness, but the technical details of working at
+the level of cochains are perhaps a little tedious. Instead of pursuing this direct line
+we shall follow the second approach, which is slightly more sophisticated but has the
+advantage that the theory becomes an almost trivial application of Postnikov towers
+for the extension problem, or Moore–Postnikov towers for the lifting problem. The
+cellular viewpoint is explained in [VBKT], where it appears in the study of characteristic
+classes of vector bundles.
+Let us consider the extension problem ﬁrst, where we wish to extend a map A→X
+to the larger complex W . Suppose that X has a Postnikov tower of principal ﬁbrations.
+Then we have a commutative diagram as shown below, where we have enlarged the
+tower by adjoining the space X0 , which is just a point, at the
+−→
+−→
+−→
+−→
+−−−−−→
+>
+A
+W
+X
+−−−−−−−−−−−→
+−−
+−−−−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+X
+K
+1
+X0
+X2
+X3
+...
+−−−−−−−−−−−−→
+X,
+π2
+(
+)
+3
+k1
+−−−−−−−→K
+X,
+π3
+(
+)
+4
+k2
+−−−−−−−→K
+X,
+π4
+(
+)
+5
+k3
+−−−−−−−→K
+X,
+π1
+(
+)
+2
+k0
+bottom. The map X1→X0 is then a ﬁbration, and to say it is
+principal says that X1 , which in any case is a K(π1X, 1),
+is the loopspace of K(π1X, 2), hence π1(X) must be
+abelian. Conversely, if π1(X) is abelian and acts triv-
+ially on all the higher homotopy groups of X ,
+then there is an extended Postnikov tower of
+principal ﬁbrations as shown.
+Our strategy will be to try to lift the constant map W→X0 to maps W→Xn for
+n = 1, 2, ··· in succession, extending the given maps A→Xn . If we are able to ﬁnd
+all these lifts W→Xn , there will then be no difﬁculty in constructing the desired
+extension W→X .
+
+Connections with Cohomology
+Section 4.3
+417
+For the inductive step we have a com-
+mutative diagram as at the right. Since Xn
+−→
+−→
+−−−−−→
+−−−−−→
+−−−−−→
+>
+A
+W
+X −−−−−−−→
+X
+K
+K
+PK
+X,
+π
+(
+)
+=
+n
+n
+n 1
++
+-
+n 1
+is the pullback, its points are pairs consist-
+ing of a point in Xn−1 and a path from its image in K to the basepoint. A lift W→Xn
+therefore amounts to a nullhomotopy of the composition W→Xn−1→K . We already
+have such a lift deﬁned on A, hence a nullhomotopy of A→K , and we want a nullho-
+motopy of W→K extending this nullhomotopy on A.
+The map W→K together with the nullhomotopy on A gives a map W ∪CA→K ,
+where CA is the cone on A.
+Since K is a K(πnX, n + 1), the map W ∪CA→K
+determines an obstruction class ωn ∈Hn+1(W ∪CA; πnX) ≈Hn+1(W, A; πnX).
+Proposition 4.72. A lift W→Xn extending the given A→Xn exists iff ωn = 0.
+Proof: We need to show that the map W ∪CA→K extends to a map CW→K iff
+ωn = 0, or in other words, iff W ∪CA→K is homotopic to a constant map.
+Suppose that gt : W ∪CA→K is such a homotopy. The constant map g1 then
+extends to the constant map g1 : CW→K , so by the homotopy extension property for
+the pair (CW, W ∪CA), applied to the reversed homotopy g1−t , we have a homotopy
+gt : CW→K extending the previous homotopy gt : W ∪CA→K . The map g0 : CW→K
+then extends the given map W ∪CA→K .
+Conversely, if we have an extension CW→K , then this is nullhomotopic since the
+cone CW is contractible, and we may restrict such a nullhomotopy to W ∪CA.
+⊔⊓
+If we succeed in extending the lifts A→Xn to lifts W→Xn for all n, then we ob-
+tain a map W→lim
+←-- Xn extending the given A→X→lim
+←-- Xn . Let M be the mapping
+cylinder of X→lim
+←-- Xn . Since the restriction of W→lim
+←-- Xn ⊂M to A factors through
+X , this gives a homotopy of this restriction to the map A→X ⊂M . Extend this to a
+homotopy of W→M , producing a map (W, A)→(M, X). Since the map X→lim
+←-- Xn is
+a weak homotopy equivalence, πi(M, X) = 0 for all i, so by Lemma 4.6, the compres-
+sion lemma, the map (W, A)→(M, X) can be homotoped to a map W→X extending
+the given A→X , and we have solved the extension problem.
+Thus if it happens that at each stage of the inductive process of constructing
+lifts W→Xn the obstruction ωn ∈Hn+1(W, A; πnX) vanishes, then the extension
+problem has a solution. In particular, this yields:
+Corollary 4.73. If X is a connected abelian CW complex and (W, A) is a CW pair
+such that Hn+1(W, A; πnX) = 0 for all n, then every map A→X can be extended to
+a map W→X .
+⊔⊓
+This is a considerable improvement on the more elementary result that extensions
+exist if πn(X) = 0 for all n such that W −A has cells of dimension n + 1, which is
+an exercise for §4.1.
+
+418
+Chapter 4
+Homotopy Theory
+We can apply the Hurewicz theorem and obstruction theory to extend the homol-
+ogy version of Whitehead’s theorem to CW complexes with trivial action of π1 on all
+homotopy groups:
+Proposition 4.74. If X and Y are connected abelian CW complexes, then a map
+f : X→Y inducing isomorphisms on all homology groups is a homotopy equivalence.
+Proof: Taking the mapping cylinder of f reduces us to the case of an inclusion X>Y
+of a subcomplex. If we can show that π1(X) acts trivially on πn(Y, X) for all n, then
+the relative Hurewicz theorem will imply that πn(Y, X) = 0 for all n, so X→Y will
+be a weak homotopy equivalence. The assumptions guarantee that π1(X)→π1(Y) is
+an isomorphism, so we know at least that π1(Y, X) = 0.
+We can use obstruction theory to extend the identity map X→X to a retraction
+Y→X . To apply the theory we need π1(X) acting trivially on πn(X), which holds by
+hypothesis. Since the inclusion X > Y induces isomorphisms on homology, we have
+H∗(Y, X) = 0, hence Hn+1(Y, X; πn(X)) = 0 for all n by the universal coefﬁcient
+theorem. So there are no obstructions, and a retraction Y→X exists. This implies
+that the maps πn(Y)→πn(Y, X) are onto, so trivial action of π1(X) on πn(Y) implies
+trivial action on πn(Y, X) by naturality of the action.
+⊔⊓
+The generalization of the preceding analysis of the extension problem to the rela-
+tive lifting problem is straightforward. Assuming the ﬁbration p : X→Y in the state-
+ment of the lifting problem has a Moore–Postnikov tower of
+principal ﬁbrations, we have the diagram shown at the right.
+The ﬁrst step is to lift the map W→Y to Z1 , extending the
+given lift on A. We may take Z1 to be the cov-
+−→
+−→
+−→
+−−−→
+>
+A
+W
+X
+−−
+−−−−−−→
+−−−−−−−→
+−−−−→
+−−−−−−−→
+Z
+K
+1
+Y
+Z2
+...
+−−−−−−−−−−−−→
+F,
+π1
+(
+)
+2
+−−−−→K
+F,
+π2
+(
+)
+3
+p
+ering space of Y corresponding to the subgroup
+p∗(π1(X)) of π1(Y), so covering space theory
+tells us when we can lift W→Y to Z1 , and the unique lifting property for covering
+spaces can be used to see whether a lift can be chosen to agree with the lift on A given
+by the diagram; this could only be a problem when A has more than one component.
+Having a lift to Z1 , the analysis proceeds exactly as before. One encounters a
+sequence of obstructions ωn ∈Hn+1(W, A; πnF), assuming π1F is abelian in the
+case n = 1. A lift to X exists, extending the given lift on A, if each successive ωn is
+zero.
+One can ask the converse question: If a lift exists, must the obstructions ωn
+all be zero? Since Proposition 4.72 is an if and only if statement, one might expect
+the answer to be yes, but upon closer inspection the matter becomes less clear. The
+difﬁculty is that, even if at some stage the obstruction ωn is zero, so a lift to Zn+1
+exists, there may be many choices of such a lift, and different choices could lead
+to different ωn+1 ’s, some zero and others nonzero. Examples of such ambiguities
+are not hard to produce, for both the lifting and the extension problems, and the
+
+Connections with Cohomology
+Section 4.3
+419
+ambiguities only become worse with each subsequent choice of a lift. So it is only
+in rather special circumstances that one can say that
+there are well-deﬁned obstructions. A simple case
+is when πi(F) = 0 for i < n, so the Moore–
+Postnikov factorization begins with Zn
+as in the diagram at the right.
+In this
+−→
+−→
+−
+→
+−−−→
+>
+A
+W
+X
+−−
+−−−−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+Z
+Y
+Z
+Z
+...
+−−−−−−−−−−−−→
+−−−−−−−→
+−−−→K
+F,
+π
+(
+)
+p
+=
+n 1
+n
+n
++
+n 1
++
+n 2
+n 1
++
+n 2
++
++
+K
+F,
+π
+(
+)
+n 2
++
+K
+F,
+π
+(
+)
+n 3
++
+case the composition across the bottom
+of the diagram gives a well-deﬁned primary obstruction ωn ∈Hn+1(W, A; πnF).
+Exercises
+1.
+Show there is a map RP∞→CP∞= K(Z, 2) which induces the trivial map on
+eH∗(−; Z) but a nontrivial map on eH∗(−; Z). How is this consistent with the universal
+coefﬁcient theorem?
+2. Show that the group structure on S1 coming from multiplication in C induces a
+group structure on ⟨X, S1⟩such that the bijection ⟨X, S1⟩→H1(X; Z) of Theorem 4.57
+is an isomorphism.
+3. Suppose that a CW complex X contains a subcomplex S1 such that the inclusion
+S1 > X induces an injection H1(S1; Z)→H1(X; Z) with image a direct summand of
+H1(X; Z). Show that S1 is a retract of X .
+4. Given abelian groups G and H and CW complexes K(G, n) and K(H, n), show
+that the map ⟨K(G, n), K(H, n)⟩→Hom(G, H) sending a homotopy class [f ] to the
+induced homomorphism f∗: πn(K(G, n))→πn(K(H, n)) is a bijection.
+5. Show that [X, Sn] ≈Hn(X; Z) if X is an n dimensional CW complex. [Build a
+K(Z, n) from Sn by attaching cells of dimension ≥n + 2.]
+6. For an abelian group G, Theorem 4.57 gives a map µ : K(G, n)×K(G, n)→K(G, n)
+with µ∗(α) = α×1 + 1×α where α is a fundamental class for K(G, n). Show that µ
+deﬁnes an H–space structure on K(G, n) that is commutative and associative, up to
+homotopy. Show also that the H–space multiplication µ is unique up to homotopy.
+7. Using an H–space multiplication µ on K(G, n), deﬁne an addition in ⟨X, K(G, n)⟩
+by [f ] + [g] = [µ(f , g)] and show that under the bijection Hn(X; G) ≈⟨X, K(G, n)⟩
+this addition corresponds to the usual addition in cohomology.
+8. Show that a map p : E→B is a ﬁbration iff the map π : EI→Ep , π(γ) = (γ(0), pγ),
+has a section, that is, a map s : Ep→EI such that ps = 11.
+9. Show that a linear projection of a 2 simplex onto one of its edges is a ﬁbration but
+not a ﬁber bundle. [Use the preceding problem.]
+10. Given a ﬁbration F→E→B , use the homotopy lifting property to deﬁne an action
+of π1(E) on πn(F), a homomorphism π1(E)→Aut
+ πn(F)
+
+, such that the composi-
+tion π1(F)→π1(E)→Aut
+ πn(F)
+
+is the usual action of π1(F) on πn(F). Deduce
+that if π1(E) = 0, then the action of π1(F) on πn(F) is trivial.
+
+420
+Chapter 4
+Homotopy Theory
+11. For a space B , let F(B) be the set of ﬁber homotopy equivalence classes of ﬁbra-
+tions E→B . Show that a map f : B1→B2 induces f ∗:F(B2)→F(B1) depending only
+on the homotopy class of f , with f ∗a bijection if f is a homotopy equivalence.
+12. Show that for homotopic maps f , g : A→B the ﬁbrations Ef→B and Eg→B are
+ﬁber homotopy equivalent.
+13. Given a map f : A→B and a homotopy equivalence g : C→A, show that the ﬁ-
+brations Ef→B and Ef g→B are ﬁber homotopy equivalent. [One approach is to use
+Corollary 0.21 to reduce to the case of deformation retractions.]
+14. For a space B , let M(B) denote the set of equivalence classes of maps f : A→B
+where f1 : A1→B is equivalent to f2 : A2→B if there exists a homotopy equivalence
+g : A1→A2 such that f1 ≃f2g. Show the natural map F(B)→M(B) is a bijection.
+[See Exercises 11 and 13.]
+15. If the ﬁbration p : E→B is a homotopy equivalence, show that p is a ﬁber homo-
+topy equivalence of E with the trivial ﬁbration 11 : B→B .
+16. Show that a map f : X→Y of connected CW complexes is a homotopy equivalence
+if it induces an isomorphism on π1 and its homotopy ﬁber Ff has eH∗(Ff ; Z) = 0.
+17. Show that ΩX is an H–space with multiplication the composition of loops.
+18. Show that a ﬁbration sequence ···→ΩB→F→E→B induces a long exact se-
+quence ···→⟨X, ΩB⟩→⟨X, F⟩→⟨X, E⟩→⟨X, B⟩, with groups and group homomor-
+phisms except for the last three terms, abelian groups except for the last six terms.
+19. Given a ﬁbration F -→E
+p--→B , deﬁne a natural action of ΩB on the homotopy
+ﬁber Fp and use this to show that exactness at ⟨X, F⟩in the long exact sequence in
+the preceding problem can be improved to the statement that two elements of ⟨X, F⟩
+have the same image in ⟨X, E⟩iff they are in the same orbit of the induced action of
+⟨X, ΩB⟩on ⟨X, F⟩.
+20.
+Show that by applying the loopspace functor to a Postnikov tower for X one
+obtains a Postnikov tower of principal ﬁbrations for ΩX .
+21. Show that in the Postnikov tower of an H–space, all the spaces are H–spaces and
+the maps are H–maps, commuting with the multiplication, up to homotopy.
+22. Show that a principal ﬁbration ΩC -→E
+p--→B is ﬁber homotopy equivalent to the
+product ΩC×B iff it has a section, a map s : B→E with ps = 11.
+23. Prove the following uniqueness result for the Quillen plus construction: Given
+a connected CW complex X , if there is an abelian CW complex Y and a map X→Y
+inducing an isomorphism H∗(X; Z) ≈H∗(Y; Z), then such a Y is unique up to homo-
+topy equivalence. [Use Corollary 4.73 with W the mapping cylinder of X→Y .]
+24. In the situation of the relative lifting problem, suppose one has two different lifts
+W→X that agree on the subspace A ⊂W . Show that the obstructions to ﬁnding a
+homotopy rel A between these two lifts lie in the groups Hn(W, A; πnF).
+
+Basepoints and Homotopy
+Section 4.A
+421
+In the ﬁrst part of this section we will use the action of π1 on πn to describe
+the difference between πn(X, x0) and the set of homotopy classes of maps Sn→X
+without conditions on basepoints. More generally, we will compare the set ⟨Z, X⟩of
+basepoint-preserving homotopy classes of maps (Z, z0)→(X, x0) with the set [Z, X]
+of unrestricted homotopy classes of maps Z→X , for Z any CW complex with base-
+point z0 a 0 cell.
+Then the section concludes with an extended example exhibit-
+ing some rather subtle nonﬁnite generation phenomena in homotopy and homology
+groups.
+We begin by constructing an action of π1(X, x0) on ⟨Z, X⟩when Z is a CW
+complex with basepoint 0 cell z0 .
+Given a loop γ in X based at x0 and a map
+f0 : (Z, z0)→(X, x0), then by the homotopy extension property there is a homotopy
+fs : Z→X of f0 such that fs(z0) is the loop γ . We might try to deﬁne an action of
+π1(X, x0) on ⟨Z, X⟩by [γ][f0] = [f1], but this deﬁnition encounters a small problem
+when we compose loops. For if η is another loop at x0 , then by applying the homo-
+topy extension property a second time we get a homotopy of f1 restricting to η on
+x0 , and the two homotopies together give the relation
+ [γ][η]
+
+[f0] = [η]
+ [γ][f0]
+
+,
+in view of our convention that the product γη means ﬁrst γ , then η. This is not
+quite the relation we want, but the problem is easily corrected by letting the action be
+an action on the right rather than on the left. Thus we set [f0][γ] = [f1], and then
+[f0]
+ [γ][η]
+
+=
+ [f0][γ]
+
+[η].
+Let us check that this right action is well-deﬁned. Suppose we start with maps
+f0, g0 : (Z, z0)→(X, x0) representing the same class in ⟨Z, X⟩, together with homo-
+topies fs and gs of f0 and g0 such that fs(z0) and gs(z0) are homotopic loops.
+These various homotopies deﬁne a map H : Z×I×∂I ∪Z×{0}×I ∪{z0}×I×I -→X
+which is fs on Z×I×{0}, gs on Z×I×{1}, the basepoint-preserving homotopy from
+f0 to g0 on Z×{0}×I , and the homotopy from fs(z0) to gs(z0) on {z0}×I×I .
+We would like to extend H over Z×I×I . The pair (I×I, I×∂I ∪{0}×I) is homeo-
+morphic to (I×I, I×{0}), and via this homeomorphism we can view H as a map
+Z×I×{0} ∪{z0}×I×I -→X , that is, a map Z×I→X with a homotopy on the sub-
+complex {z0}×I . This means the homotopy extension property can be applied to
+produce an extension of the original H to Z×I×I . Restricting this extended H to
+Z×{1}×I gives a basepoint-preserving homotopy f1 ≃g1 , which shows that [f0][γ]
+is well-deﬁned.
+Note that in this argument we did not have to assume the homotopies fs and gs
+were constructed by applying the homotopy extension property. Thus we have proved

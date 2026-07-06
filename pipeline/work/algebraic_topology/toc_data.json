@@ -1,0 +1,745 @@
+{
+  "book": "Algebraic Topology",
+  "author": "Allen Hatcher",
+  "chapters": [
+    {
+      "chapter_no": "0",
+      "chapter_title": "Some Underlying Geometric Notions",
+      "printed_page": 1
+    },
+    {
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 21
+    },
+    {
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 97
+    },
+    {
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 185
+    },
+    {
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 337
+    }
+  ],
+  "sections": [
+    {
+      "number": "0.1",
+      "title": "Homotopy and Homotopy Type",
+      "chapter_no": "0",
+      "chapter_title": "Some Underlying Geometric Notions",
+      "printed_page": 1,
+      "role": "section"
+    },
+    {
+      "number": "0.2",
+      "title": "Cell Complexes",
+      "chapter_no": "0",
+      "chapter_title": "Some Underlying Geometric Notions",
+      "printed_page": 5,
+      "role": "section"
+    },
+    {
+      "number": "0.3",
+      "title": "Operations on Spaces",
+      "chapter_no": "0",
+      "chapter_title": "Some Underlying Geometric Notions",
+      "printed_page": 8,
+      "role": "section"
+    },
+    {
+      "number": "0.4",
+      "title": "Two Criteria for Homotopy Equivalence",
+      "chapter_no": "0",
+      "chapter_title": "Some Underlying Geometric Notions",
+      "printed_page": 10,
+      "role": "section"
+    },
+    {
+      "number": "0.5",
+      "title": "The Homotopy Extension Property",
+      "chapter_no": "0",
+      "chapter_title": "Some Underlying Geometric Notions",
+      "printed_page": 14,
+      "role": "section"
+    },
+    {
+      "number": "1.1",
+      "title": "Basic Constructions",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 25,
+      "role": "section"
+    },
+    {
+      "number": "1.1.1",
+      "title": "Paths and Homotopy",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 25,
+      "role": "section"
+    },
+    {
+      "number": "1.1.2",
+      "title": "The Fundamental Group of the Circle",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 29,
+      "role": "section"
+    },
+    {
+      "number": "1.1.3",
+      "title": "Induced Homomorphisms",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 34,
+      "role": "section"
+    },
+    {
+      "number": "1.2",
+      "title": "Van Kampen's Theorem",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 40,
+      "role": "section"
+    },
+    {
+      "number": "1.2.1",
+      "title": "Free Products of Groups",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 41,
+      "role": "section"
+    },
+    {
+      "number": "1.2.2",
+      "title": "The van Kampen Theorem",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 43,
+      "role": "section"
+    },
+    {
+      "number": "1.2.3",
+      "title": "Applications to Cell Complexes",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 50,
+      "role": "section"
+    },
+    {
+      "number": "1.3",
+      "title": "Covering Spaces",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 56,
+      "role": "section"
+    },
+    {
+      "number": "1.3.1",
+      "title": "Lifting Properties",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 60,
+      "role": "section"
+    },
+    {
+      "number": "1.3.2",
+      "title": "The Classification of Covering Spaces",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 63,
+      "role": "section"
+    },
+    {
+      "number": "1.3.3",
+      "title": "Deck Transformations and Group Actions",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 70,
+      "role": "section"
+    },
+    {
+      "number": "1.A",
+      "title": "Graphs and Free Groups",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 83,
+      "role": "section"
+    },
+    {
+      "number": "1.B",
+      "title": "K(G,1) Spaces and Graphs of Groups",
+      "chapter_no": "1",
+      "chapter_title": "The Fundamental Group",
+      "printed_page": 87,
+      "role": "section"
+    },
+    {
+      "number": "2.1",
+      "title": "Simplicial and Singular Homology",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 102,
+      "role": "section"
+    },
+    {
+      "number": "2.1.1",
+      "title": "Δ-Complexes",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 102,
+      "role": "section"
+    },
+    {
+      "number": "2.1.2",
+      "title": "Simplicial Homology",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 104,
+      "role": "section"
+    },
+    {
+      "number": "2.1.3",
+      "title": "Singular Homology",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 108,
+      "role": "section"
+    },
+    {
+      "number": "2.1.4",
+      "title": "Homotopy Invariance",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 110,
+      "role": "section"
+    },
+    {
+      "number": "2.1.5",
+      "title": "Exact Sequences and Excision",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 113,
+      "role": "section"
+    },
+    {
+      "number": "2.1.6",
+      "title": "The Equivalence of Simplicial and Singular Homology",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 128,
+      "role": "section"
+    },
+    {
+      "number": "2.2",
+      "title": "Computations and Applications",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 134,
+      "role": "section"
+    },
+    {
+      "number": "2.2.1",
+      "title": "Degree",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 134,
+      "role": "section"
+    },
+    {
+      "number": "2.2.2",
+      "title": "Cellular Homology",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 137,
+      "role": "section"
+    },
+    {
+      "number": "2.2.3",
+      "title": "Mayer-Vietoris Sequences",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 149,
+      "role": "section"
+    },
+    {
+      "number": "2.2.4",
+      "title": "Homology with Coefficients",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 153,
+      "role": "section"
+    },
+    {
+      "number": "2.3",
+      "title": "The Formal Viewpoint",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 160,
+      "role": "section"
+    },
+    {
+      "number": "2.3.1",
+      "title": "Axioms for Homology",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 160,
+      "role": "section"
+    },
+    {
+      "number": "2.3.2",
+      "title": "Categories and Functors",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 162,
+      "role": "section"
+    },
+    {
+      "number": "2.A",
+      "title": "Homology and Fundamental Group",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 166,
+      "role": "section"
+    },
+    {
+      "number": "2.B",
+      "title": "Classical Applications",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 169,
+      "role": "section"
+    },
+    {
+      "number": "2.C",
+      "title": "Simplicial Approximation",
+      "chapter_no": "2",
+      "chapter_title": "Homology",
+      "printed_page": 177,
+      "role": "section"
+    },
+    {
+      "number": "3.1",
+      "title": "Cohomology Groups",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 190,
+      "role": "section"
+    },
+    {
+      "number": "3.1.1",
+      "title": "The Universal Coefficient Theorem",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 190,
+      "role": "section"
+    },
+    {
+      "number": "3.1.2",
+      "title": "Cohomology of Spaces",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 197,
+      "role": "section"
+    },
+    {
+      "number": "3.2",
+      "title": "Cup Product",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 206,
+      "role": "section"
+    },
+    {
+      "number": "3.2.1",
+      "title": "The Cohomology Ring",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 211,
+      "role": "section"
+    },
+    {
+      "number": "3.2.2",
+      "title": "A Künneth Formula",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 218,
+      "role": "section"
+    },
+    {
+      "number": "3.2.3",
+      "title": "Spaces with Polynomial Cohomology",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 224,
+      "role": "section"
+    },
+    {
+      "number": "3.3",
+      "title": "Poincaré Duality",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 230,
+      "role": "section"
+    },
+    {
+      "number": "3.3.1",
+      "title": "Orientations and Homology",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 233,
+      "role": "section"
+    },
+    {
+      "number": "3.3.2",
+      "title": "The Duality Theorem",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 239,
+      "role": "section"
+    },
+    {
+      "number": "3.3.3",
+      "title": "Connection with Cup Product",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 249,
+      "role": "section"
+    },
+    {
+      "number": "3.3.4",
+      "title": "Other Forms of Duality",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 252,
+      "role": "section"
+    },
+    {
+      "number": "3.A",
+      "title": "Universal Coefficients for Homology",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 261,
+      "role": "section"
+    },
+    {
+      "number": "3.B",
+      "title": "The General Künneth Formula",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 268,
+      "role": "section"
+    },
+    {
+      "number": "3.C",
+      "title": "H-Spaces and Hopf Algebras",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 281,
+      "role": "section"
+    },
+    {
+      "number": "3.D",
+      "title": "The Cohomology of SO(n)",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 292,
+      "role": "section"
+    },
+    {
+      "number": "3.E",
+      "title": "Bockstein Homomorphisms",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 303,
+      "role": "section"
+    },
+    {
+      "number": "3.F",
+      "title": "Limits and Ext",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 311,
+      "role": "section"
+    },
+    {
+      "number": "3.G",
+      "title": "Transfer Homomorphisms",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 321,
+      "role": "section"
+    },
+    {
+      "number": "3.H",
+      "title": "Local Coefficients",
+      "chapter_no": "3",
+      "chapter_title": "Cohomology",
+      "printed_page": 327,
+      "role": "section"
+    },
+    {
+      "number": "4.1",
+      "title": "Homotopy Groups",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 339,
+      "role": "section"
+    },
+    {
+      "number": "4.1.1",
+      "title": "Definitions and Basic Constructions",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 340,
+      "role": "section"
+    },
+    {
+      "number": "4.1.2",
+      "title": "Whitehead's Theorem",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 346,
+      "role": "section"
+    },
+    {
+      "number": "4.1.3",
+      "title": "Cellular Approximation",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 348,
+      "role": "section"
+    },
+    {
+      "number": "4.1.4",
+      "title": "CW Approximation",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 352,
+      "role": "section"
+    },
+    {
+      "number": "4.2",
+      "title": "Elementary Methods of Calculation",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 360,
+      "role": "section"
+    },
+    {
+      "number": "4.2.1",
+      "title": "Excision for Homotopy Groups",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 360,
+      "role": "section"
+    },
+    {
+      "number": "4.2.2",
+      "title": "The Hurewicz Theorem",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 366,
+      "role": "section"
+    },
+    {
+      "number": "4.2.3",
+      "title": "Fiber Bundles",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 375,
+      "role": "section"
+    },
+    {
+      "number": "4.2.4",
+      "title": "Stable Homotopy Groups",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 384,
+      "role": "section"
+    },
+    {
+      "number": "4.3",
+      "title": "Connections with Cohomology",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 393,
+      "role": "section"
+    },
+    {
+      "number": "4.3.1",
+      "title": "The Homotopy Construction of Cohomology",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 393,
+      "role": "section"
+    },
+    {
+      "number": "4.3.2",
+      "title": "Fibrations",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 405,
+      "role": "section"
+    },
+    {
+      "number": "4.3.3",
+      "title": "Postnikov Towers",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 410,
+      "role": "section"
+    },
+    {
+      "number": "4.3.4",
+      "title": "Obstruction Theory",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 415,
+      "role": "section"
+    },
+    {
+      "number": "4.A",
+      "title": "Basepoints and Homotopy",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 421,
+      "role": "section"
+    },
+    {
+      "number": "4.B",
+      "title": "The Hopf Invariant",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 427,
+      "role": "section"
+    },
+    {
+      "number": "4.C",
+      "title": "Minimal Cell Structures",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 429,
+      "role": "section"
+    },
+    {
+      "number": "4.D",
+      "title": "Cohomology of Fiber Bundles",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 431,
+      "role": "section"
+    },
+    {
+      "number": "4.E",
+      "title": "The Brown Representability Theorem",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 448,
+      "role": "section"
+    },
+    {
+      "number": "4.F",
+      "title": "Spectra and Homology Theories",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 452,
+      "role": "section"
+    },
+    {
+      "number": "4.G",
+      "title": "Gluing Constructions",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 456,
+      "role": "section"
+    },
+    {
+      "number": "4.H",
+      "title": "Eckmann-Hilton Duality",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 460,
+      "role": "section"
+    },
+    {
+      "number": "4.I",
+      "title": "Stable Splittings of Spaces",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 466,
+      "role": "section"
+    },
+    {
+      "number": "4.J",
+      "title": "The Loopspace of a Suspension",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 470,
+      "role": "section"
+    },
+    {
+      "number": "4.K",
+      "title": "The Dold-Thom Theorem",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 475,
+      "role": "section"
+    },
+    {
+      "number": "4.L",
+      "title": "Steenrod Squares and Powers",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 487,
+      "role": "section"
+    },
+    {
+      "number": "4.appendix",
+      "title": "Appendix",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 519,
+      "role": "appendix"
+    },
+    {
+      "number": "4.appendix.1",
+      "title": "Topology of Cell Complexes",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 519,
+      "role": "appendix"
+    },
+    {
+      "number": "4.appendix.2",
+      "title": "The Compact-Open Topology",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 529,
+      "role": "appendix"
+    },
+    {
+      "number": "4.bib",
+      "title": "Bibliography",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 533,
+      "role": "drop"
+    },
+    {
+      "number": "4.index",
+      "title": "Index",
+      "chapter_no": "4",
+      "chapter_title": "Homotopy Theory",
+      "printed_page": 539,
+      "role": "drop"
+    }
+  ]
+}

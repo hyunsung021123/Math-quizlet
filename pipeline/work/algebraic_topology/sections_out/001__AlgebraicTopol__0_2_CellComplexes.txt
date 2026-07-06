@@ -1,0 +1,254 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 0. Some Underlying Geometric Notions
+현재 소단원: 0.2 Cell Complexes
+직전 소단원: 「0.1 Homotopy and Homotopy Type」
+[본문]
+Cell Complexes
+Chapter 0
+5
+Cell Complexes
+A familiar way of constructing the torus S1×S1 is by identifying opposite sides
+of a square. More generally, an orientable surface Mg of genus g can be constructed
+from a polygon with 4g sides
+by identifying pairs of edges,
+as shown in the ﬁgure in the
+ﬁrst three cases g = 1, 2, 3.
+The 4g edges of the polygon
+a
+b
+a
+a
+b
+b
+b
+b
+b
+b
+c
+a
+a
+a
+d
+a
+c
+c
+c
+c
+b
+d
+d
+d
+d
+e
+e
+f
+f
+a
+e
+f
+d
+c
+b
+a
+become a union of 2g circles
+in the surface, all intersect-
+ing in a single point. The in-
+terior of the polygon can be
+thought of as an open disk,
+or a 2 cell, attached to the
+union of the 2g circles. One
+can also regard the union of
+the circles as being obtained
+from their common point of
+intersection, by attaching 2g
+open arcs, or 1 cells.
+Thus
+the surface can be built up in stages: Start with a point, attach 1 cells to this point,
+then attach a 2 cell.
+A natural generalization of this is to construct a space by the following procedure:
+(1) Start with a discrete set X0 , whose points are regarded as 0 cells.
+(2) Inductively, form the n skeleton Xn from Xn−1 by attaching n cells en
+α via maps
+ϕα : Sn−1→Xn−1 . This means that Xn is the quotient space of the disjoint union
+Xn−1`
+α Dn
+α of Xn−1 with a collection of n disks Dn
+α under the identiﬁcations
+x ∼ϕα(x) for x ∈∂Dn
+α . Thus as a set, Xn = Xn−1`
+α en
+α where each en
+α is an
+open n disk.
+(3) One can either stop this inductive process at a ﬁnite stage, setting X = Xn for
+some n < ∞, or one can continue indeﬁnitely, setting X =
+S
+n Xn . In the latter
+case X is given the weak topology: A set A ⊂X is open (or closed) iff A ∩Xn is
+open (or closed) in Xn for each n.
+A space X constructed in this way is called a cell complex or CW complex.
+The
+explanation of the letters ‘CW’ is given in the Appendix, where a number of basic
+topological properties of cell complexes are proved. The reader who wonders about
+various point-set topological questions lurking in the background of the following
+discussion should consult the Appendix for details.
+
+6
+Chapter 0
+Some Underlying Geometric Notions
+If X = Xn for some n, then X is said to be ﬁnite-dimensional, and the smallest
+such n is the dimension of X , the maximum dimension of cells of X .
+Example 0.1. A 1 dimensional cell complex X = X1 is what is called a graph in
+algebraic topology. It consists of vertices (the 0 cells) to which edges (the 1 cells) are
+attached. The two ends of an edge can be attached to the same vertex.
+Example 0.2.
+The house with two rooms, pictured earlier, has a visually obvious
+2 dimensional cell complex structure. The 0 cells are the vertices where three or more
+of the depicted edges meet, and the 1 cells are the interiors of the edges connecting
+these vertices. This gives the 1 skeleton X1 , and the 2 cells are the components of
+the remainder of the space, X −X1 . If one counts up, one ﬁnds there are 29 0 cells,
+51 1 cells, and 23 2 cells, with the alternating sum 29 −51 + 23 equal to 1. This is
+the Euler characteristic, which for a cell complex with ﬁnitely many cells is deﬁned
+to be the number of even-dimensional cells minus the number of odd-dimensional
+cells. As we shall show in Theorem 2.44, the Euler characteristic of a cell complex
+depends only on its homotopy type, so the fact that the house with two rooms has the
+homotopy type of a point implies that its Euler characteristic must be 1, no matter
+how it is represented as a cell complex.
+Example 0.3. The sphere Sn has the structure of a cell complex with just two cells, e0
+and en , the n cell being attached by the constant map Sn−1→e0 . This is equivalent
+to regarding Sn as the quotient space Dn/∂Dn .
+Example 0.4. Real projective n space RPn is deﬁned to be the space of all lines
+through the origin in Rn+1 . Each such line is determined by a nonzero vector in Rn+1 ,
+unique up to scalar multiplication, and RPn is topologized as the quotient space of
+Rn+1 −{0} under the equivalence relation v ∼λv for scalars λ ≠0. We can restrict
+to vectors of length 1, so RPn is also the quotient space Sn/(v ∼−v), the sphere
+with antipodal points identiﬁed. This is equivalent to saying that RPn is the quotient
+space of a hemisphere Dn with antipodal points of ∂Dn identiﬁed. Since ∂Dn with
+antipodal points identiﬁed is just RPn−1 , we see that RPn is obtained from RPn−1 by
+attaching an n cell, with the quotient projection Sn−1→RPn−1 as the attaching map.
+It follows by induction on n that RPn has a cell complex structure e0 ∪e1 ∪··· ∪en
+with one cell ei in each dimension i ≤n.
+Example 0.5. Since RPn is obtained from RPn−1 by attaching an n cell, the inﬁnite
+union RP∞=
+S
+n RPn becomes a cell complex with one cell in each dimension. We
+can view RP∞as the space of lines through the origin in R∞=
+S
+n Rn .
+Example 0.6. Complex projective n space CPn is the space of complex lines through
+the origin in Cn+1 , that is, 1 dimensional vector subspaces of Cn+1 . As in the case
+of RPn , each line is determined by a nonzero vector in Cn+1 , unique up to scalar
+multiplication, and CPn is topologized as the quotient space of Cn+1 −{0} under the
+
+Cell Complexes
+Chapter 0
+7
+equivalence relation v ∼λv for λ ≠0. Equivalently, this is the quotient of the unit
+sphere S2n+1 ⊂Cn+1 with v ∼λv for |λ| = 1. It is also possible to obtain CPn as a
+quotient space of the disk D2n under the identiﬁcations v ∼λv for v ∈∂D2n , in the
+following way. The vectors in S2n+1 ⊂Cn+1 with last coordinate real and nonnegative
+are precisely the vectors of the form (w,
+p
+1 −|w|2 ) ∈Cn×C with |w| ≤1. Such
+vectors form the graph of the function w ,
+p
+1 −|w|2 . This is a disk D2n
++
+bounded
+by the sphere S2n−1 ⊂S2n+1 consisting of vectors (w, 0) ∈Cn×C with |w| = 1. Each
+vector in S2n+1 is equivalent under the identiﬁcations v ∼λv to a vector in D2n
++ , and
+the latter vector is unique if its last coordinate is nonzero. If the last coordinate is
+zero, we have just the identiﬁcations v ∼λv for v ∈S2n−1 .
+From this description of CPn as the quotient of D2n
++
+under the identiﬁcations
+v ∼λv for v ∈S2n−1 it follows that CPn is obtained from CPn−1 by attaching a
+cell e2n via the quotient map S2n−1→CPn−1 . So by induction on n we obtain a cell
+structure CPn = e0 ∪e2 ∪··· ∪e2n with cells only in even dimensions. Similarly, CP∞
+has a cell structure with one cell in each even dimension.
+After these examples we return now to general theory.
+Each cell en
+α in a cell
+complex X has a characteristic map Φα : Dn
+α→X which extends the attaching map
+ϕα and is a homeomorphism from the interior of Dn
+α onto en
+α . Namely, we can take
+Φα to be the composition Dn
+α > Xn−1`
+α Dn
+α→Xn > X where the middle map is
+the quotient map deﬁning Xn . For example, in the canonical cell structure on Sn
+described in Example 0.3, a characteristic map for the n cell is the quotient map
+Dn→Sn collapsing ∂Dn to a point. For RPn a characteristic map for the cell ei is
+the quotient map Di→RPi ⊂RPn identifying antipodal points of ∂Di , and similarly
+for CPn .
+A subcomplex of a cell complex X is a closed subspace A ⊂X that is a union
+of cells of X . Since A is closed, the characteristic map of each cell in A has image
+contained in A, and in particular the image of the attaching map of each cell in A is
+contained in A, so A is a cell complex in its own right. A pair (X, A) consisting of a
+cell complex X and a subcomplex A will be called a CW pair.
+For example, each skeleton Xn of a cell complex X is a subcomplex. Particular
+cases of this are the subcomplexes RPk ⊂RPn and CPk ⊂CPn for k ≤n. These are
+in fact the only subcomplexes of RPn and CPn .
+There are natural inclusions S0 ⊂S1 ⊂··· ⊂Sn , but these subspheres are not
+subcomplexes of Sn in its usual cell structure with just two cells. However, we can give
+Sn a different cell structure in which each of the subspheres Sk is a subcomplex, by
+regarding each Sk as being obtained inductively from the equatorial Sk−1 by attaching
+two k cells, the components of Sk−Sk−1 . The inﬁnite-dimensional sphere S∞=
+S
+n Sn
+then becomes a cell complex as well. Note that the two-to-one quotient map S∞→RP∞
+that identiﬁes antipodal points of S∞identiﬁes the two n cells of S∞to the single
+n cell of RP∞.
+
+8
+Chapter 0
+Some Underlying Geometric Notions
+In the examples of cell complexes given so far, the closure of each cell is a sub-
+complex, and more generally the closure of any collection of cells is a subcomplex.
+Most naturally arising cell structures have this property, but it need not hold in gen-
+eral. For example, if we start with S1 with its minimal cell structure and attach to this
+a 2 cell by a map S1→S1 whose image is a nontrivial subarc of S1 , then the closure
+of the 2 cell is not a subcomplex since it contains only a part of the 1 cell.
+Operations on Spaces
+Cell complexes have a very nice mixture of rigidity and ﬂexibility, with enough
+rigidity to allow many arguments to proceed in a combinatorial cell-by-cell fashion
+and enough ﬂexibility to allow many natural constructions to be performed on them.
+Here are some of those constructions.
+Products.
+If X and Y are cell complexes, then X×Y has the structure of a cell
+complex with cells the products em
+α ×en
+β where em
+α
+ranges over the cells of X and
+en
+β ranges over the cells of Y . For example, the cell structure on the torus S1×S1
+described at the beginning of this section is obtained in this way from the standard
+cell structure on S1 . For completely general CW complexes X and Y there is one
+small complication: The topology on X×Y as a cell complex is sometimes ﬁner than
+the product topology, with more open sets than the product topology has, though the
+two topologies coincide if either X or Y has only ﬁnitely many cells, or if both X
+and Y have countably many cells. This is explained in the Appendix. In practice this
+subtle issue of point-set topology rarely causes problems, however.
+Quotients. If (X, A) is a CW pair consisting of a cell complex X and a subcomplex A,
+then the quotient space X/A inherits a natural cell complex structure from X . The
+cells of X/A are the cells of X −A plus one new 0 cell, the image of A in X/A. For a
+cell en
+α of X −A attached by ϕα : Sn−1→Xn−1 , the attaching map for the correspond-
+ing cell in X/A is the composition Sn−1→Xn−1→Xn−1/An−1 .
+For example, if we give Sn−1 any cell structure and build Dn from Sn−1 by attach-
+ing an n cell, then the quotient Dn/Sn−1 is Sn with its usual cell structure. As another
+example, take X to be a closed orientable surface with the cell structure described at
+the beginning of this section, with a single 2 cell, and let A be the complement of this
+2 cell, the 1 skeleton of X . Then X/A has a cell structure consisting of a 0 cell with
+a 2 cell attached, and there is only one way to attach a cell to a 0 cell, by the constant
+map, so X/A is S2 .
+Suspension. For a space X , the suspension SX is the quotient of
+X×I obtained by collapsing X×{0} to one point and X×{1} to an-
+other point. The motivating example is X = Sn , when SX = Sn+1
+with the two ‘suspension points’ at the north and south poles of
+Sn+1 , the points (0, ··· , 0, ±1). One can regard SX as a double cone

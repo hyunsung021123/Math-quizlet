@@ -1,0 +1,256 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 0. Some Underlying Geometric Notions
+현재 소단원: 0.1 Homotopy and Homotopy Type
+[본문]
+The aim of this short preliminary chapter is to introduce a few of the most com-
+mon geometric concepts and constructions in algebraic topology. The exposition is
+somewhat informal, with no theorems or proofs until the last couple pages, and it
+should be read in this informal spirit, skipping bits here and there. In fact, this whole
+chapter could be skipped now, to be referred back to later for basic deﬁnitions.
+To avoid overusing the word ‘continuous’ we adopt the convention that maps be-
+tween spaces are always assumed to be continuous unless otherwise stated.
+Homotopy and Homotopy Type
+One of the main ideas of algebraic topology is to consider two spaces to be equiv-
+alent if they have ‘the same shape’ in a sense that is much broader than homeo-
+morphism.
+To take an everyday example, the letters of the alphabet can be writ-
+ten either as unions of ﬁnitely many
+straight and curved line segments, or
+in thickened forms that are compact
+subsurfaces of the plane bounded by
+simple closed curves. In each case the
+thin letter is a subspace of the thick
+letter, and we can continuously shrink the thick letter to the thin one. A nice way to
+do this is to decompose a thick letter, call it X, into line segments connecting each
+point on the outer boundary of X to a unique point of the thin subletter X, as indi-
+cated in the ﬁgure. Then we can shrink X to X by sliding each point of X −X into X
+along the line segment that contains it. Points that are already in X do not move.
+We can think of this shrinking process as taking place during a time interval
+0 ≤t ≤1, and then it deﬁnes a family of functions ft : X→X parametrized by t ∈I =
+[0, 1], where ft(x) is the point to which a given point x ∈X has moved at time t .
+
+2
+Chapter 0
+Some Underlying Geometric Notions
+Naturally we would like ft(x) to depend continuously on both t and x , and this will
+be true if we have each x ∈X −X move along its line segment at constant speed so
+as to reach its image point in X at time t = 1, while points x ∈X are stationary, as
+remarked earlier.
+Examples of this sort lead to the following general deﬁnition. A deformation
+retraction of a space X onto a subspace A is a family of maps ft : X→X , t ∈I , such
+that f0 = 11 (the identity map), f1(X) = A, and ft ||A = 11 for all t . The family ft
+should be continuous in the sense that the associated map X×I→X , (x, t), ft(x),
+is continuous.
+It is easy to produce many more examples similar to the letter examples, with the
+deformation retraction ft obtained by sliding along line segments. The ﬁgure on the
+left below shows such a deformation retraction of a M¨obius band onto its core circle.
+The three ﬁgures on the right show deformation retractions in which a disk with two
+smaller open subdisks removed shrinks to three different subspaces.
+In all these examples the structure that gives rise to the deformation retraction can
+be described by means of the following deﬁnition. For a map f : X→Y , the mapping
+cylinder Mf is the quotient space of the disjoint union (X×I) ⨿Y obtained by iden-
+tifying each (x, 1) ∈X×I
+with f (x) ∈Y . In the let-
+X × I
+X
+Y
+Y
+Mf
+f X
+(
+)
+ter examples, the space X
+is the outer boundary of the
+thick letter, Y is the thin
+letter, and f : X→Y sends
+the outer endpoint of each line segment to its inner endpoint. A similar description
+applies to the other examples. Then it is a general fact that a mapping cylinder Mf
+deformation retracts to the subspace Y by sliding each point (x, t) along the segment
+{x}×I ⊂Mf to the endpoint f (x) ∈Y .
+Not all deformation retractions arise in this way from mapping cylinders, how-
+ever.
+For example, the thick X deformation retracts to the thin X, which in turn
+deformation retracts to the point of intersection of its two crossbars. The net result
+is a deformation retraction of X onto a point, during which certain pairs of points
+follow paths that merge before reaching their ﬁnal destination. Later in this section
+we will describe a considerably more complicated example, the so-called ‘house with
+two rooms,’ where a deformation retraction to a point can be constructed abstractly,
+but seeing the deformation with the naked eye is a real challenge.
+
+Homotopy and Homotopy Type
+Chapter 0
+3
+A deformation retraction ft : X→X is a special case of the general notion of a
+homotopy, which is simply any family of maps ft : X→Y , t ∈I , such that the asso-
+ciated map F : X×I→Y given by F(x, t) = ft(x) is continuous. One says that two
+maps f0, f1 : X→Y are homotopic if there exists a homotopy ft connecting them,
+and one writes f0 ≃f1 .
+In these terms, a deformation retraction of X onto a subspace A is a homotopy
+from the identity map of X to a retraction of X onto A, a map r : X→X such that
+r(X) = A and r ||A = 11. One could equally well regard a retraction as a map X→A
+restricting to the identity on the subspace A ⊂X . From a more formal viewpoint a
+retraction is a map r : X→X with r 2 = r , since this equation says exactly that r is the
+identity on its image. Retractions are the topological analogs of projection operators
+in other parts of mathematics.
+Not all retractions come from deformation retractions. For example, a space X
+always retracts onto any point x0 ∈X via the constant map sending all of X to x0 ,
+but a space that deformation retracts onto a point must be path-connected since a
+deformation retraction of X to x0 gives a path joining each x ∈X to x0 . It is less
+trivial to show that there are path-connected spaces that do not deformation retract
+onto a point. One would expect this to be the case for the letters ‘with holes,’ A, B,
+D, O, P, Q, R. In Chapter 1 we will develop techniques to prove this.
+A homotopy ft : X→X that gives a deformation retraction of X onto a subspace
+A has the property that ft ||A = 11 for all t . In general, a homotopy ft : X→Y whose
+restriction to a subspace A ⊂X is independent of t is called a homotopy relative
+to A, or more concisely, a homotopy rel A. Thus, a deformation retraction of X onto
+A is a homotopy rel A from the identity map of X to a retraction of X onto A.
+If a space X deformation retracts onto a subspace A via ft : X→X , then if
+r : X→A denotes the resulting retraction and i : A→X the inclusion, we have ri = 11
+and ir ≃11, the latter homotopy being given by ft . Generalizing this situation, a
+map f : X→Y is called a homotopy equivalence if there is a map g : Y→X such that
+fg ≃11 and gf ≃11. The spaces X and Y are said to be homotopy equivalent or to
+have the same homotopy type. The notation is X ≃Y . It is an easy exercise to check
+that this is an equivalence relation, in contrast with the nonsymmetric notion of de-
+formation retraction. For example, the three graphs
+are all homotopy
+equivalent since they are deformation retracts of the same space, as we saw earlier,
+but none of the three is a deformation retract of any other.
+It is true in general that two spaces X and Y are homotopy equivalent if and only
+if there exists a third space Z containing both X and Y as deformation retracts. For
+the less trivial implication one can in fact take Z to be the mapping cylinder Mf of
+any homotopy equivalence f : X→Y . We observed previously that Mf deformation
+retracts to Y , so what needs to be proved is that Mf also deformation retracts to its
+other end X if f is a homotopy equivalence. This is shown in Corollary 0.21.
+
+4
+Chapter 0
+Some Underlying Geometric Notions
+A space having the homotopy type of a point is called contractible. This amounts
+to requiring that the identity map of the space be nullhomotopic, that is, homotopic
+to a constant map. In general, this is slightly weaker than saying the space deforma-
+tion retracts to a point; see the exercises at the end of the chapter for an example
+distinguishing these two notions.
+Let us describe now an example of a 2 dimensional subspace of R3 , known as the
+house with two rooms, which is contractible but not in any obvious way. To build this
+=
+∪
+∪
+space, start with a box divided into two chambers by a horizontal rectangle, where by a
+‘rectangle’ we mean not just the four edges of a rectangle but also its interior. Access to
+the two chambers from outside the box is provided by two vertical tunnels. The upper
+tunnel is made by punching out a square from the top of the box and another square
+directly below it from the middle horizontal rectangle, then inserting four vertical
+rectangles, the walls of the tunnel. This tunnel allows entry to the lower chamber
+from outside the box. The lower tunnel is formed in similar fashion, providing entry
+to the upper chamber. Finally, two vertical rectangles are inserted to form ‘support
+walls’ for the two tunnels. The resulting space X thus consists of three horizontal
+pieces homeomorphic to annuli plus all the vertical rectangles that form the walls of
+the two chambers.
+To see that X is contractible, consider a closed ε neighborhood N(X) of X .
+This clearly deformation retracts onto X if ε is sufﬁciently small.
+In fact, N(X)
+is the mapping cylinder of a map from the boundary surface of N(X) to X . Less
+obvious is the fact that N(X) is homeomorphic to D3 , the unit ball in R3 . To see
+this, imagine forming N(X) from a ball of clay by pushing a ﬁnger into the ball to
+create the upper tunnel, then gradually hollowing out the lower chamber, and similarly
+pushing a ﬁnger in to create the lower tunnel and hollowing out the upper chamber.
+Mathematically, this process gives a family of embeddings ht : D3→R3 starting with
+the usual inclusion D3 > R3 and ending with a homeomorphism onto N(X).
+Thus we have X ≃N(X) = D3 ≃point , so X is contractible since homotopy
+equivalence is an equivalence relation. In fact, X deformation retracts to a point. For
+if ft is a deformation retraction of the ball N(X) to a point x0 ∈X and if r : N(X)→X
+is a retraction, for example the end result of a deformation retraction of N(X) to X ,
+then the restriction of the composition rft to X is a deformation retraction of X to
+x0 . However, it is quite a challenging exercise to see exactly what this deformation
+retraction looks like.
+
+Cell Complexes
+Chapter 0
+5
+Cell Complexes
+A familiar way of constructing the torus S1×S1 is by identifying opposite sides
+of a square. More generally, an orientable surface Mg of genus g can be constructed
+from a polygon with 4g sides
+by identifying pairs of edges,
+as shown in the ﬁgure in the
+ﬁrst three cases g = 1, 2, 3.
+The 4g edges of the polygon
+a
+b
+a
+a
+b
+b
+b
+b
+b
+b
+c
+a
+a
+a
+d
+a
+c
+c
+c
+c
+b
+d
+d
+d
+d
+e
+e
+f
+f
+a
+e
+f
+d
+c
+b
+a
+become a union of 2g circles
+in the surface, all intersect-
+ing in a single point. The in-
+terior of the polygon can be
+thought of as an open disk,
+or a 2 cell, attached to the
+union of the 2g circles. One
+can also regard the union of
+the circles as being obtained
+from their common point of
+intersection, by attaching 2g
+open arcs, or 1 cells.
+Thus
+the surface can be built up in stages: Start with a point, attach 1 cells to this point,
+then attach a 2 cell.
+A natural generalization of this is to construct a space by the following procedure:
+(1) Start with a discrete set X0 , whose points are regarded as 0 cells.
+(2) Inductively, form the n skeleton Xn from Xn−1 by attaching n cells en
+α via maps
+ϕα : Sn−1→Xn−1 . This means that Xn is the quotient space of the disjoint union
+Xn−1`
+α Dn
+α of Xn−1 with a collection of n disks Dn
+α under the identiﬁcations
+x ∼ϕα(x) for x ∈∂Dn
+α . Thus as a set, Xn = Xn−1`
+α en
+α where each en
+α is an
+open n disk.
+(3) One can either stop this inductive process at a ﬁnite stage, setting X = Xn for
+some n < ∞, or one can continue indeﬁnitely, setting X =
+S
+n Xn . In the latter
+case X is given the weak topology: A set A ⊂X is open (or closed) iff A ∩Xn is
+open (or closed) in Xn for each n.
+A space X constructed in this way is called a cell complex or CW complex.
+The
+explanation of the letters ‘CW’ is given in the Appendix, where a number of basic
+topological properties of cell complexes are proved. The reader who wonders about
+various point-set topological questions lurking in the background of the following
+discussion should consult the Appendix for details.

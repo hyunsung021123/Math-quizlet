@@ -1,0 +1,510 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.D Cohomology of Fiber Bundles (분할 part 2)
+직전 소단원: 「4.C Minimal Cell Structures」
+[본문]
+Cohomology of Fiber Bundles
+Section 4.D
+439
+statement can be made more precise by bringing in the machinery of obstruction
+theory, as explained in [Milnor & Stasheff 1974] or [VBKT].
+Before deriving the Gysin sequence let us look at some examples of how it can be
+used to compute cup products.
+Example 4D.5. Consider a bundle Sn−1 -→E
+p--→B with E contractible, for exam-
+ple the bundle S1→S∞→CP∞or its real or quaternionic analogs. The long exact
+sequence of homotopy groups for the bundle shows that B is (n −1) connected.
+Thus if n > 1, B is simply-connected and we have a Gysin sequence for cohomology
+with Z coefﬁcients. For n = 1 we take Z2 coefﬁcients. If n > 1 then since E is
+contractible, the Gysin sequence implies that Hi(B; Z) = 0 for 0 < i < n and that
+⌣e : Hi(B; Z)→Hi+n(B; Z) is an isomorphism for i ≥0. It follows that H∗(B; Z) is
+the polynomial ring Z[e]. When n = 1 the map p∗: Hn−1(B; Z2)→Hn−1(E; Z2) in the
+Gysin sequence is surjective, so we see that ⌣e : Hi(B; Z2)→Hi+n(B; Z2) is again an
+isomorphism for all i ≥0, and hence H∗(B; Z2) ≈Z2[e]. Thus the Gysin sequence
+gives a new derivation of the cup product structure in projective spaces. Also, since
+polynomial rings Z[e] are realizable as H∗(X; Z) only when e has dimension 2 or 4,
+as we show in Corollary 4L.10, we can conclude that there exist bundles Sn−1→E→B
+with E contractible only when n is 1, 2, or 4.
+Example 4D.6.
+For the Grassmann manifold Gn = Gn(R∞) we have π1(Gn) ≈
+π0O(n) ≈Z2 , so the universal cover of Gn gives a bundle S0→eGn→Gn . One can
+view eGn as the space of oriented n planes in R∞, which is obviously a 2 sheeted
+covering space of Gn , hence the universal cover since it is path-connected, being the
+quotient Vn(R∞)/SO(n) of the contractible space Vn(R∞). A portion of the Gysin
+sequence for the bundle S0→eGn→Gn is H0(Gn; Z2) ⌣e
+-----→H1(Gn; Z2) -→H1( eGn; Z2).
+This last group is zero since
+eGn is simply-connected, and H1(Gn; Z2) ≈Z2 since
+H∗(Gn; Z2) ≈Z2[w1, ··· , wn] as we showed earlier in this section, so e = w1 and
+the map ⌣e : H∗(Gn; Z2)→H∗(Gn; Z2) is injective. The Gysin sequence then breaks
+up into short exact sequences 0→Hi(Gn; Z2) ⌣e
+-----→Hi+1(Gn; Z2)→Hi+1( eGn; Z2)→0,
+from which it follows that H∗( eGn; Z2) is the quotient ring Z2[w1, ··· , wn]/(w1) ≈
+Z2[w2, ··· , wn].
+Example 4D.7. The complex analog of the bundle in the preceding example is a bundle
+S1→eGn(C∞)→Gn(C∞) with eGn(C∞) 2 connected. This can be constructed in the
+following way. There is a determinant homomorphism U(n)→S1 with kernel SU(n),
+the unitary matrices of determinant 1, so S1 is the coset space U(n)/SU(n), and by
+restricting the action of U(n) on Vn(C∞)
+to SU(n) we obtain the second row of the
+commutative diagram at the right. The
+)
+(
+V
+)
+(
+SU n
+)
+(
+U n
+n C
+∞
+−−−−−−−−−→
+)
+(
+Gn C
+∞
+)
+(
+G
+S
+n C
+∞
+)
+(
+Vn C
+∞
+−−−−−−−−−−→
+−−−−−→
+−−−−−→
+−→
+−→
+==
+1
+/
+second row is a ﬁber bundle by the usual
+argument of choosing continuously varying orthonormal bases in n planes near a
+
+440
+Chapter 4
+Homotopy Theory
+given n plane. One sees that the space eGn(C∞) = Vn(C∞)/SU(n) is 2 connected
+by looking at the relevant portion of the diagram of homotopy groups associated to
+these two bundles:
+)
+(
+U n
+−−−−−→
+−−−−−→
+−−−−−→
+−→
+==
+)
+π1(
+)
+Gn
+π2(
+0
+0
+)
+Gn
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+π1(
+)
+S
+π1
+1
+(
+∼
+)
+Gn
+π2(
+)
+G
+0
+0
+n
+π2(∼
+∂
+∂
+≈
+≈
+The second vertical map is an isomorphism since S1 embeds in U(n) as the subgroup
+U(1). Since the boundary map in the upper row is an isomorphism, so also is the
+boundary map in the lower row, and then exactness implies that eGn is 2 connected.
+The Gysin sequence for S1→eGn(C∞)→Gn(C∞) can be analyzed just as in the
+preceding example. Part of the sequence is H0(Gn; Z) ⌣e
+-----→H2(Gn; Z) -→H2( eGn; Z),
+and this last group is zero since eGn is 2 connected, so e must be a generator of
+H2(Gn; Z) ≈Z.
+Since H∗(Gn; Z) is a polynomial algebra Z[c1, ··· , cn], we must
+have e = ±c1 , so the map ⌣e : H∗(Gn; Z)→H∗(Gn; Z) is injective, the Gysin se-
+quence breaks up into short exact sequences, and H∗( eGn; Z) is the quotient ring
+Z[c1, ··· , cn]/(c1) ≈Z[c2, ··· , cn].
+The spaces eGn in the last two examples are often denoted BSO(n) and BSU(n),
+expressing the fact that they are related to the groups SO(n) and SU(n) via bundles
+SO(n)→Vn(R∞)→BSO(n) and SU(n)→Vn(C∞)→BSU(n) with contractible total
+spaces Vn . There is no quaternion analog of BSO(n) and BSU(n) since for n = 2
+this would give a space with cohomology ring Z[x] on an 8 dimensional generator,
+which is impossible by Corollary 4L.10.
+Now we turn to the derivation of the Gysin sequence, which follows a rather
+roundabout route:
+(1) Deduce a relative version of the Leray–Hirsch theorem from the absolute case.
+(2) Specialize this to the case of bundles with ﬁber a disk, yielding a basic result
+called the Thom isomorphism.
+(3) Show this applies to all orientable disk bundles.
+(4) Deduce the Gysin sequence by plugging the Thom isomorphism into the long
+exact sequence of cohomology groups for the pair consisting of a disk bundle
+and its boundary sphere bundle.
+(1) A ﬁber bundle pair consists of a ﬁber bundle p : E→B with ﬁber F , together with
+a subspace E′ ⊂E such that p : E′→B is a bundle with ﬁber a subspace F′ ⊂F ,
+with local trivializations for E′ obtained by restricting local trivializations for E . For
+example, if E→B is a bundle with ﬁber Dn and E′ ⊂E is the union of the boundary
+spheres of the ﬁbers, then (E, E′) is a ﬁber bundle pair since local trivializations of E
+restrict to local trivializations of E′ , in view of the fact that homeomorphisms from
+an n disk to an n disk restrict to homeomorphisms between their boundary spheres,
+boundary and interior points of Dn being distinguished by the local homology groups
+Hn(Dn, Dn −{x}; Z).
+
+Cohomology of Fiber Bundles
+Section 4.D
+441
+Theorem 4D.8. Suppose that (F, F′)→(E, E′)
+p--→B is a ﬁber bundle pair such that
+H∗(F, F′; R) is a free R module, ﬁnitely generated in each dimension. If there exist
+classes cj ∈H∗(E, E′; R) whose restrictions form a basis for H∗(F, F′; R) in each
+ﬁber (F, F′), then H∗(E, E′; R), as a module over H∗(B; R), is free with basis {cj}.
+The module structure is deﬁned just as in the absolute case by bc = p∗(b) ⌣c ,
+but now we use the relative cup product H∗(E; R)×H∗(E, E′; R)→H∗(E, E′; R).
+Proof: Construct a bundle bE→B from E by attaching the mapping cylinder M of
+p : E′→B to E by identifying the subspaces E′ ⊂E and E′ ⊂M . Thus the ﬁbers
+bF of bE are obtained from the ﬁbers F by attaching cones CF′ on the subspaces
+F′ ⊂F . Regarding B as the subspace of bE at one end of the mapping cylinder M , we
+have H∗( bE, M; R) ≈H∗( bE −B, M −B; R) ≈H∗(E, E′; R) via excision and the obvious
+deformation retraction of bE −B onto E . The long exact sequence of a triple gives
+H∗( bE, M; R) ≈H∗( bE, B; R) since M deformation retracts to B . All these isomorphisms
+are H∗(B; R) module isomorphisms. Since B is a retract of bE via the bundle projection
+bE→B , we have a splitting H∗( bE; R) ≈H∗( bE, B; R)
+L
+H∗(B; R) as H∗(B; R) modules.
+Let bcj ∈H∗( bE; R) correspond to cj ∈H∗(E, E′; R) ≈H∗( bE, B; R) in this splitting.
+The classes bcj together with 1 restrict to a basis for H∗( bF; R) in each ﬁber bF =
+F ∪CF′ , so the absolute form of the Leray–Hirsch theorem implies that H∗( bE; R) is
+a free H∗(B; R) module with basis {1, bcj}. It follows that {cj} is a basis for the free
+H∗(B; R) module H∗(E, E′; R).
+⊔⊓
+(2) Now we specialize to the case of a ﬁber bundle pair (Dn, Sn−1) -→(E, E′)
+p--→B .
+An element c ∈Hn(E, E′; R) whose restriction to each ﬁber (Dn, Sn−1) is a gener-
+ator of Hn(Dn, Sn−1; R) ≈R is called a Thom class for the bundle. We are mainly
+interested in the cases R = Z and Z2 , but R could be any commutative ring with
+identity, in which case a ‘generator’ is an element with a multiplicative inverse, so
+all elements of R are multiples of the generator. A Thom class with Z coefﬁcients
+gives rise to a Thom class with any other coefﬁcient ring R under the homomorphism
+Hn(E, E′; Z)→Hn(E, E′; R) induced by the homomorphism Z→R sending 1 to the
+identity element of R.
+Corollary 4D.9. If the disk bundle (Dn, Sn−1) -→(E, E′)
+p--→B has a Thom class
+c ∈Hn(E, E′; R), then the map Φ : Hi(B; R)→Hi+n(E, E′; R), Φ(b) = p∗(b) ⌣c , is
+an isomorphism for all i ≥0, and Hi(E, E′; R) = 0 for i < n.
+⊔⊓
+The isomorphism Φ is called the Thom isomorphism. The corollary can be made
+into a statement about absolute cohomology by deﬁning the Thom space T(E) to be
+the quotient E/E′ . Each disk ﬁber Dn of E becomes a sphere Sn in T(E), and all
+these spheres coming from different ﬁbers are disjoint except for the common base-
+point x0 = E′/E′ . A Thom class can be regarded as an element of Hn(T(E), x0; R) ≈
+
+442
+Chapter 4
+Homotopy Theory
+Hn(T(E); R) that restricts to a generator of Hn(Sn; R) in each ‘ﬁber’ Sn in T(E), and
+the Thom isomorphism becomes Hi(B; R) ≈eHn+i(T(E); R).
+(3) The major remaining step in the derivation of the Gysin sequence is to relate the
+existence of a Thom class for a disk bundle Dn→E→B to a notion of orientability
+of the bundle. First we deﬁne orientability for a sphere bundle Sn−1→E′→B . In
+the proof of Proposition 4.61 we described a procedure for lifting paths γ in B to
+homotopy equivalences Lγ between the ﬁbers above the endpoints of γ . We did this
+for ﬁbrations rather than ﬁber bundles, but the method applies equally well to ﬁber
+bundles whose ﬁber is a CW complex since the homotopy lifting property was used
+only for the ﬁber and for the product of the ﬁber with I . In the case of a sphere
+bundle Sn−1→E′→B , if γ is a loop in B then Lγ is a homotopy equivalence from
+the ﬁber Sn−1 over the basepoint of γ to itself, and we deﬁne the sphere bundle to
+be orientable if Lγ induces the identity map on Hn−1(Sn−1; Z) for each loop γ in B .
+For example, the Klein bottle, regarded as a bundle over S1 with ﬁber S1 , is
+nonorientable since as we follow a path looping once around the base circle, the cor-
+responding ﬁber circles sweep out the full Klein bottle, ending up where they started
+but with orientation reversed. The same reasoning shows that the torus, viewed as a
+circle bundle over S1 , is orientable. More generally, any sphere bundle that is a prod-
+uct is orientable since the maps Lγ can be taken to be the identity for all loops γ .
+Also, sphere bundles over simply-connected base spaces are orientable since γ ≃η
+implies Lγ ≃Lη , hence all Lγ ’s are homotopic to the identity when all loops γ are
+nullhomotopic.
+One could deﬁne orientability for a disk bundle Dn→E→B by relativizing the
+previous deﬁnition, constructing lifts Lγ which are homotopy equivalences of the
+ﬁber pairs (Dn, Sn−1). However, since Hn(Dn, Sn−1; Z) is canonically isomorphic to
+Hn−1(Sn−1; Z) via the coboundary map in the long exact sequence of the pair, it is
+simpler and amounts to the same thing just to deﬁne E to be orientable if its boundary
+sphere subbundle E′ is orientable.
+Theorem 4D.10. Every disk bundle has a Thom class with Z2 coefﬁcients, and ori-
+entable disk bundles have Thom classes with Z coefﬁcients.
+An exercise at the end of the section is to show that the converse of the last state-
+ment is also true: A disk bundle is orientable if it has a Thom class with Z coefﬁcients.
+Proof: The case of a non-CW base space B reduces to the CW case by pulling back over
+a CW approximation to B , as in the Leray–Hirsch theorem, applying the ﬁve-lemma
+to say that the pullback bundle has isomorphic homotopy groups, hence isomorphic
+absolute and relative cohomology groups. From the deﬁnition of the pullback bundle
+it is immediate that the pullback of an orientable sphere bundle is orientable. There
+is also no harm in assuming the base CW complex B is connected. We will show:
+
+Cohomology of Fiber Bundles
+Section 4.D
+443
+(∗)
+If the disk bundle Dn→E→B is orientable and B is a connected CW complex,
+then the restriction map Hi(E, E′; Z)→Hi(Dn
+x, Sn−1
+x
+; Z) is an isomorphism for
+all ﬁbers Dn
+x , x ∈B , and for all i ≤n.
+For Z2 coefﬁcients we will see that (∗) holds without any orientability hypothesis.
+Hence with either Z or Z2 coefﬁcients, a generator of Hn(E, E′) ≈Hn(Dn
+x, Sn−1
+x
+) is a
+Thom class.
+If the disk bundle Dn→E→B is orientable, then if we choose an isomorphism
+Hn(Dn
+x, Sn−1
+x
+; Z) ≈Z for one ﬁber Dn
+x , this determines such isomorphisms for all
+ﬁbers by composing with the isomorphisms L∗
+γ , which depend only on the endpoints
+of γ . Having made such a choice, then if (∗) is true, we have a preferred isomorphism
+Hn(E, E′; Z) ≈Z which restricts to the chosen isomorphism Hn(Dn
+x, Sn−1
+x
+; Z) ≈Z for
+each ﬁber. This is because for a path γ from x to y , the inclusion (Dn
+x, Sn−1
+x
+)>(E, E′)
+is homotopic to the composition of Lγ with the inclusion (Dn
+y, Sn−1
+y
+) > (E, E′). We
+will use this preferred isomorphism Hn(E, E′; Z) ≈Z in the inductive proof of (∗)
+given below. In the case of Z2 coefﬁcients, there can be only one isomorphism of
+a group with Z2 so no choices are necessary and orientability is irrelevant. We will
+prove (∗) in the Z coefﬁcient case, leaving it to the reader to replace all Z’s in the
+proof by Z2 ’s to obtain a proof in the Z2 case.
+Suppose ﬁrst that the CW complex B has ﬁnite dimension k. Let U ⊂B be the
+subspace obtained by deleting one point from the interior of each k cell of B , and let
+V ⊂B be the union of the open k cells. Thus B = U ∪V . For a subspace A ⊂B let
+EA→A and E′
+A→A be the disk and sphere bundles obtained by taking the subspaces
+of E and E′ projecting to A.
+Consider the following portion of a Mayer–Vietoris
+sequence, with Z coefﬁcients implicit from now on:
+Hn(E, E′) -→Hn(EU, E′
+U)
+L
+Hn(EV, E′
+V)
+Ψ-----→Hn(EU∩V, E′
+U∩V)
+The ﬁrst map is injective since the preceding term in the sequence is zero by induction
+on k, since U ∩V deformation retracts onto a disjoint union of (k −1) spheres
+and we can apply Lemma 4D.2 to replace EU∩V by the part of E over this union
+of (k −1) spheres. By exactness we then have an isomorphism Hn(E, E′) ≈Ker Ψ .
+Similarly, by Lemma 4D.2 and induction each of the terms Hn(EU, E′
+U), Hn(EV, E′
+V),
+and Hn(EU∩V, E′
+U∩V) is a product of Z’s, with one Z factor for each component of the
+spaces involved, projection onto the Z factor being given by restriction to any ﬁber in
+the component. Elements of Ker Ψ are pairs (α, β) ∈Hn(EU, E′
+U)
+L
+Hn(EV, E′
+V) having
+the same restriction to Hn(EU∩V, E′
+U∩V). Since B is connected, this means that all the
+Z coordinates of α and β in the previous direct product decompositions must be
+equal, since between any two components of U or V one can interpolate a ﬁnite
+sequence of components of U and V alternately, each component in the sequence
+having nontrivial intersection with its neighbors. Thus Ker Ψ is a copy of Z, with
+restriction to a ﬁber being the isomorphism Hn(E, E′) ≈Z.
+
+444
+Chapter 4
+Homotopy Theory
+To ﬁnish proving (∗) for ﬁnite-dimensional B it remains to see that Hi(E, E′) = 0
+for i < n, but this follows immediately by looking at an earlier stage of the Mayer–
+Vietoris sequence, where the two terms adjacent to Hi(E, E′) vanish by induction.
+Proving (∗) for an inﬁnite-dimensional CW complex B reduces to the ﬁnite-
+dimensional case as in the Leray–Hirsch theorem since we are only interested in co-
+homology in a ﬁnite range of dimensions.
+⊔⊓
+(4) Now we can derive the Gysin sequence for a sphere bundle Sn−1→E
+p--→B . Con-
+sider the mapping cylinder Mp , which is a disk bundle Dn→Mp
+p--→B with E as its
+boundary sphere bundle. Assuming that a Thom class c ∈Hn(Mp, E; R) exists, as is
+the case if E is orientable or if R = Z2 , then the long exact sequence of cohomology
+groups for the pair (Mp, E) gives the ﬁrst row of the following commutative diagram,
+with R coefﬁcients implicit:
+M
+E
+H (
+)
+−−→
+,
+H (
+)
+−−−−→
+−−−−−→
+−−−−→
+...
+...
+−−→
+−−→
+Φ
+−−→
+Φ
+i
+i
+E
+H (
+) −−−−−→
+i
+p
+M
+E
+H
+(
+)
+,
+i 1
+p
+Mp
+j
++
++
+B
+H
+(
+)
+−−−→
+H (
+)
+−−−−−−−→
+−−−−−→
+−−−−→
+...
+...
+i n
+i
+E
+H (
+) −−−−−→
+i
+B
+p
+e
+-
+B
+H
+(
+)
+i n 1
+-
+∗
+∗
+p∗
+==
+≈
+≈
+≈
+The maps Φ are the Thom isomorphism, and the vertical map p∗is an isomorphism
+since Mp deformation retracts onto B . The Euler class e ∈Hn(B; R) is deﬁned to be
+(p∗)−1j∗(c), c being a Thom class. The square containing the map ⌣e commutes
+since for b ∈Hi−n(B; R) we have j∗Φ(b) = j∗(p∗(b) ⌣c) = p∗(b) ⌣j∗(c), which
+equals p∗(b ⌣e) = p∗(b) ⌣p∗(e) since p∗(e) = j∗(c). Another way of deﬁning e
+is as the class corresponding to c ⌣c under the Thom isomorphism, since Φ(e) =
+p∗(e) ⌣c = j∗(c) ⌣c = c ⌣c .
+Finally, the lower row of the diagram is by deﬁnition the Gysin sequence.
+⊔⊓
+To conclude this section we will use the following rather specialized application
+of the Gysin sequence to compute a few more examples of spaces with polynomial
+cohomology.
+Proposition 4D.11. Suppose that S2k−1 -→E
+p--→B is an orientable sphere bundle
+such that H∗(E; R) is a polynomial ring R[x1, ··· , xℓ] on even-dimensional genera-
+tors xi . Then H∗(B; R) = R[y1, ··· , yℓ, e] where e is the Euler class of the bundle
+and p∗(yi) = xi for each i.
+Proof: Consider the three terms Hi(B; R)
+⌣e
+-----→Hi+2k(B; R) --→Hi+2k(E; R) of the
+Gysin sequence. If i is odd, the third term is zero since E has no odd-dimensional
+cohomology. Hence the map ⌣e is surjective, and by induction on dimension this
+implies that H∗(B; R) is zero in odd dimensions. This means the Gysin sequence
+reduces to short exact sequences
+0 -→H2i(B; R)
+⌣e
+--------→H2i+2k(B; R)
+p∗
+-----→H2i+2k(E; R) -→0
+
+Cohomology of Fiber Bundles
+Section 4.D
+445
+Since p∗is surjective, we can choose elements yj ∈H∗(B; R) with p∗(yj) = xj . It
+remains to check that H∗(B; R) = R[y1, ··· , yℓ, e], which is elementary algebra: Given
+b ∈H∗(B; R), p∗(b) must be a polynomial f (x1, ··· , xℓ), so b −f (y1, ··· , yℓ) is in
+the kernel of p∗and exactness gives an equation b −f (y1, ··· , yℓ) = b′ ⌣e for some
+b′ ∈H∗(B; R). Since b′ has lower dimension than b, we may assume by induction that
+b′ is a polynomial in y1, ··· , yℓ, e. Hence b = f (y1, ··· , yℓ) + b′ ⌣e is also a polyno-
+mial in y1, ··· , yℓ, e. Thus the natural map R[y1, ··· , yℓ, e]→H∗(B; R) is surjective.
+To see that it is injective, suppose there is a polynomial relation f (y1, ··· , yℓ, e) = 0 in
+H∗(B; R). Applying p∗, we get f (x1, ··· , xℓ, 0) = 0 since p∗(yi) = xi and p∗(e) = 0
+from the short exact sequence. The relation f (x1, ··· , xℓ, 0) = 0 takes place in the
+polynomial ring R[x1, ··· , xℓ], so f (y1, ··· , yℓ, 0) = 0 in R[y1, ··· , yℓ, e], hence
+f(y1, ··· , yℓ, e) must be divisible by e, say f = ge for some polynomial g. The
+relation f (y1, ··· , yℓ, e) = 0 in H∗(B; R) then has the form g(y1, ··· , yℓ, e) ⌣e = 0.
+Since ⌣e is injective, this gives a polynomial relation g(y1, ··· , yℓ, e) = 0 with g hav-
+ing lower degree than f . By induction we deduce that g must be the zero polynomial,
+hence also f .
+⊔⊓
+Example 4D.12.
+Let us apply this to give another proof that H∗(Gn(C∞); Z) is a
+polynomial ring Z[c1, ··· , cn] with |ci| = 2i. We use two ﬁber bundles:
+S2n−1 -→E -→Gn(C∞)
+S∞-→E -→Gn−1(C∞)
+The total space E in both cases is the space of pairs (P, v) where P is an n plane in
+C∞and v is a unit vector in P . In the ﬁrst bundle the map E→Gn(C∞) is (P, v),P ,
+with ﬁber S2n−1 , and for the second bundle the map E→Gn−1(C∞) sends (P, v) to the
+(n −1) plane in P orthogonal to v , with ﬁber S∞consisting of all the unit vectors in
+C∞orthogonal to a given (n−1) plane. Local triviality for the two bundles is veriﬁed in
+the usual way. Since S∞is contractible, the map E→Gn−1(C∞) induces isomorphisms
+on all homotopy groups, hence also on all cohomology groups. By induction on n we
+then have H∗(E; Z) ≈Z[c1, ··· , cn−1]. The ﬁrst bundle is orientable since Gn(C∞) is
+simply-connected, so the corollary gives H∗(Gn(C∞); Z) ≈Z[c1, ··· , cn] with cn = e.
+The same argument works in the quaternionic case. For a version of this argument
+in the real case see §3.3 of [VBKT].
+Before giving our next example, let us observe that the Gysin sequence with a
+ﬁxed coefﬁcient ring R is valid for any orientable ﬁber bundle F -→E
+p¨--→B whose
+ﬁber is a CW complex F with H∗(F; R) ≈H∗(Sn−1; R). Orientability is deﬁned just
+as before in terms of induced maps L∗
+γ : Hn−1(F; R)→Hn−1(F; R). No changes are
+needed in the derivation of the Gysin sequence to get this more general case, if the
+associated ‘disk’ bundle is again taken to be the mapping cylinder CF→Mp→B .
+Example 4D.13. We have computed the cohomology of eGn(R∞) with Z2 coefﬁcients,
+ﬁnding it to be a polynomial ring on generators in dimensions 2 through n, and now

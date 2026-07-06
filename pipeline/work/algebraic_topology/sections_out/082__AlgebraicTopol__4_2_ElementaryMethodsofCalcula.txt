@@ -1,0 +1,41 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.2 Elementary Methods of Calculation
+직전 소단원: 「4.1.4 CW Approximation」
+[본문]
+360
+Chapter 4
+Homotopy Theory
+23. If f : X→Y is a map with X and Y homotopy equivalent to CW complexes, show
+that the pair (Mf , X) is homotopy equivalent to a CW pair, where Mf is the mapping
+cylinder. Deduce that the mapping cone Cf has the homotopy type of a CW complex.
+We have not yet computed any nonzero homotopy groups πn(X) with n ≥2.
+In Chapter 1 the two main tools we used for computing fundamental groups were
+van Kampen’s theorem and covering spaces.
+In the present section we will study
+the higher-dimensional analogs of these: the excision theorem for homotopy groups,
+and ﬁber bundles. Both of these are quite a bit weaker than their fundamental group
+analogs, in that they do not directly compute homotopy groups but only give relations
+between the homotopy groups of different spaces. Their applicability is thus more
+limited, but sufﬁces for a number of interesting calculations, such as πn(Sn) and more
+generally the Hurewicz theorem relating the ﬁrst nonzero homotopy and homology
+groups of a space. Another noteworthy application is the Freudenthal suspension
+theorem, which leads to stable homotopy groups and in fact the whole subject of
+stable homotopy theory.
+Excision for Homotopy Groups
+What makes homotopy groups so much harder to compute than homology groups
+is the failure of the excision property. However, there is a certain dimension range,
+depending on connectivities, in which excision does hold for homotopy groups:
+Theorem 4.23. Let X be a CW complex decomposed as the union of subcomplexes
+A and B with nonempty connected intersection C = A ∩B . If (A, C) is m connected
+and (B, C) is n connected, m, n ≥0, then the map πi(A, C)→πi(X, B) induced by
+inclusion is an isomorphism for i < m + n and a surjection for i = m + n.
+This yields the Freudenthal suspension theorem:
+Corollary 4.24. The suspension map πi(Sn)→πi+1(Sn+1) is an isomorphism for
+i < 2n −1 and a surjection for i = 2n −1.
+More generally this holds for the
+suspension πi(X)→πi+1(SX) whenever X is an (n −1) connected CW complex.
+Proof: Decompose the suspension SX as the union of two cones C+X and C−X
+intersecting in a copy of X . The suspension map is the same as the map
+πi(X) ≈πi+1(C+X, X) -→πi+1(SX, C−X) ≈πi+1(SX)

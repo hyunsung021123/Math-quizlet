@@ -1,0 +1,89 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.1 Simplicial and Singular Homology
+직전 소단원: 「2.intro 개관 (챕터 도입부)」
+[본문]
+102
+Chapter 2
+Homology
+The most important homology theory in algebraic topology, and the one we shall
+be studying almost exclusively, is called singular homology. Since the technical appa-
+ratus of singular homology is somewhat complicated, we will ﬁrst introduce a more
+primitive version called simplicial homology in order to see how some of the apparatus
+works in a simpler setting before beginning the general theory.
+The natural domain of deﬁnition for simplicial homology is a class of spaces we
+call ∆complexes, which are a mild generalization of the more classical notion of
+a simplicial complex. Historically, the modern deﬁnition of singular homology was
+ﬁrst given in [Eilenberg 1944], and ∆complexes were introduced soon thereafter in
+[Eilenberg-Zilber 1950] where they were called semisimplicial complexes. Within a
+few years this term came to be applied to what Eilenberg and Zilber called complete
+semisimplicial complexes, and later there was yet another shift in terminology as
+the latter objects came to be called simplicial sets. In theory this frees up the term
+semisimplicial complex to have its original meaning, but to avoid potential confusion
+it seems best to introduce a new name, and the term ∆complex has at least the virtue
+of brevity.
+∆–Complexes
+The torus, the projective plane, and the Klein bottle can each be obtained from a
+square by identifying opposite edges in the way indicated by the arrows in the follow-
+ing ﬁgures:
+b
+b
+a
+a
+c
+v
+v
+v
+v
+U
+L
+b
+b
+a
+a
+c
+w
+v
+w
+v
+U
+L
+b
+b
+a
+a
+c
+v
+v
+v
+v
+U
+L
+RP
+2
+T
+:
+:
+−−
+K :
+−−
+−−−
+Cutting a square along a diagonal produces two triangles, so each of these surfaces
+can also be built from two triangles by identifying their edges in pairs. In similar
+fashion a polygon with any number of sides can be cut along
+diagonals into triangles, so in fact all closed surfaces can be
+constructed from triangles by identifying edges. Thus we have
+b
+b
+a
+a
+c
+c
+d
+d
+a single building block, the triangle, from which all surfaces can
+be constructed. Using only triangles we could also construct a
+large class of 2 dimensional spaces that are not surfaces in the
+strict sense, by allowing more than two edges to be identiﬁed
+together at a time.

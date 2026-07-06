@@ -1,0 +1,524 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.H Eckmann-Hilton Duality
+직전 소단원: 「4.G Gluing Constructions」
+[본문]
+460
+Chapter 4
+Homotopy Theory
+Let us conclude this section with a few comments about terminology. For some
+diagrams of spaces such as sequences X1→X2→··· the amalgamation
+X can be
+regarded as the direct limit of the vertex spaces Xv with respect to the edge maps
+fe . Following this cue, the space
+X is commonly called the direct limit for arbitrary
+diagrams, even ﬁnite ones. If one views
+X as a direct limit, then ∆X becomes a sort
+of homotopy direct limit. For reasons that are explained in the next section, direct
+limits are often called ‘colimits.’ This has given rise to the rather unfortunate name of
+‘hocolim’ for ∆X , short for ‘homotopy colimit.’ In preference to this we have chosen
+the term ‘realization,’ both for its intrinsic merits and because ∆X is closely related
+to what is called the geometric realization of a simplicial space.
+Exercises
+1. Show that for a sequence of maps X0
+f1--→X1
+f2--→···, the inﬁnite iterated mapping
+cylinder M(f1, f2, ···), which is the union of the ﬁnite iterated mapping cylinders
+M(f1, ··· , fn), deformation retracts onto the mapping telescope.
+2. Show that if X is a complex of spaces in which all the maps are homeomorphisms,
+then the projection ∆X→Γ is a ﬁber bundle.
+3. What is the nerve of the cover of a simplicial complex by the open stars of its
+vertices? [See Lemma 2C.2.]
+4. Show that Proposition 4G.2 and its corollary hold also for CW complexes and covers
+by families of subcomplexes. [CW complexes are paracompact; see [VBKT].]
+There is a very nice duality principle in homotopy theory, called Eckmann–Hilton
+duality in its more reﬁned and systematic aspects, but which in its most basic form
+involves the simple idea of reversing the direction of all arrows in a given construc-
+tion. For example, if in the deﬁnition of a ﬁbration as a map satisfying the homotopy
+lifting property we reverse the direction of all the arrows, we obtain the dual notion of
+a coﬁbration. This is a map i : A→B satisfying the following prop-
+erty: Given eg0 : B→X and a homotopy gt : A→X such that eg0i = g0 ,
+−−−−−→
+−−−−−−→
+−→
+A
+B
+X
+i
+gt
+g0
+∼
+there exists a homotopy egt : B→X such that egti = gt . In the special
+case that i is the inclusion of a subspace, this is the homotopy extension property,
+and the next proposition says that this is indeed the general case. So a coﬁbration is
+the same as an inclusion satisfying the homotopy extension property.
+Proposition 4H.1. If i : A→B is a coﬁbration, then i is injective, and in fact a homeo-
+morphism onto its image.
+
+Eckmann–Hilton Duality
+Section 4.H
+461
+Proof: Consider the mapping cylinder Mi , the quotient of A×I ⨿B in which (a, 1) is
+identiﬁed with i(a). Let gt : A→Mi be the homotopy mapping a ∈A to the image of
+(a, 1 −t) ∈A×I in Mi , and let eg0 be the inclusion B> Mi . The coﬁbration property
+gives egt : B→Mi with egti = gt . Restricting to a ﬁxed t > 0, this implies i is injective
+since gt is. Furthermore, since gt is a homeomorphism onto its image A×{1 −t},
+the relation egti = gt implies that the map g−1
+t
+egt : i(A)→A is a continuous inverse of
+i : A→i(A).
+⊔⊓
+Many constructions for ﬁbrations have analogs for coﬁbrations, and vice versa.
+For example, for an arbitrary map f : A→B the inclusion A > Mf is readily seen to
+be a coﬁbration, so the analog of the factorization A> Ef→B of f into a homotopy
+equivalence followed by a ﬁbration is the factorization A>Mf→B into a coﬁbration
+followed by a homotopy equivalence. Even the deﬁnition of Mf is in some way dual to
+the deﬁnition of Ef , since Ef can be deﬁned as a pullback and Mf can be deﬁned as
+a dual pushout. In general, the pushout of maps
+−−−−−→
+−−−−→
+−−→
+−−→
+A
+M
+A
+I
+B
+f
+×
+−−−−−→
+−−−−→
+−→
+−−→
+E
+B
+A
+I
+B
+f
+f : Z→X and g : Z→Y is deﬁned as the quotient
+of X ⨿Y under the identiﬁcations f (z) ∼g(z).
+Thus the pushout is a quotient of X ⨿Y , while the pullback of maps X→Z and Y→Z
+is a subobject of X×Y , so we see here two instances of duality: a duality between
+disjoint union and product, and a duality between subobjects and quotients. The ﬁrst
+of these is easily explained, since a collection of maps Xα→X is equivalent to a map
+`
+αXα→X , while a collection of maps X→Xα is equivalent to a map X→
+Q
+αXα . The
+notation
+`
+for the ‘coproduct’ was chosen to indicate that it is dual to
+Q
+. If we were
+dealing with basepointed spaces and maps, the coproduct would be wedge sum. In
+the category of abelian groups the coproduct is direct sum.
+The duality between subobjects and quotient objects is clear for abelian groups,
+where subobjects are kernels and quotient objects cokernels. The strict topological
+analog of a kernel is a ﬁber of a ﬁbration. Dually, the topological analog of a cokernel
+is the coﬁber B/A of a coﬁbration A>B . If we make an arbitrary map f : A→B into
+a coﬁbration A > Mf , the coﬁber is the mapping cone Cf = Mf /(A×{0}).
+In the diagram showing Ef and Mf as pullback and pushout, there also appears to
+be some sort of duality involving the terms A×I and BI . This leads us to ask whether
+X×I and XI are in some way dual. Indeed, if we ignore topology and just think set-
+theoretically, this is an instance of the familiar product–coproduct duality since the
+product of copies of X indexed by I is XI , all functions I→X , while the coproduct
+of copies of X indexed by I is X×I , the disjoint union of the sets X×{t} for t ∈I .
+Switching back from the category of sets to the topological category, we can view XI
+as a ‘continuous product’ of copies of X and X×I as a ‘continuous coproduct.’
+On a less abstract level, the fact that maps A×I→B are the same as maps A→BI
+indicates a certain duality between A×I and BI .
+This leads to a duality between
+
+462
+Chapter 4
+Homotopy Theory
+suspension and loopspace, since ΣA is a quotient of A×I and ΩB is a subspace
+of BI . This duality is expressed in the adjoint relation ⟨ΣX, Y⟩= ⟨X, ΩY⟩from §4.3.
+Combining this duality between Σ and Ωwith the duality between ﬁbers and coﬁbers,
+we see a duality relationship between the ﬁbration and coﬁbration sequences of §4.3:
+··· -→ΩF -→ΩE -→ΩB -→F -→E -→B
+A→X→X/A→ΣA→ΣX→Σ(X/A)→···
+Pushout and pullback constructions can be generalized to arbitrary diagrams. In
+the case of pushouts, this was done in §4.G where we associated a space
+X to a dia-
+gram of spaces X . This was the quotient of the coproduct
+`
+v Xv , with v ranging over
+vertices of the diagram, under the identiﬁcations x ∼fe(x) for all maps fe associated
+to edges e of the diagram. The dual construction
+X would be the subspace of the
+product
+Q
+v Xv consisting of tuples (xv) with fe(xv) = xw for all maps fe : Xv→Xw
+in the diagram. Perhaps more useful in algebraic topology is the homotopy variant of
+this notion obtained by dualizing the deﬁnition of ∆X in the previous section. This
+is the space ∇X consisting of all choices of a point xv in each Xv and a path γe in
+the target space of each edge map fe : Xv→Xw , with γe(0) = f (xv) and γe(1) = xw .
+The subspace with all paths constant is
+X . In the case of a diagram ···→X2→X1
+such as a Postnikov tower this construction gives something slightly different from
+simply turning each successive map into a ﬁbration via the usual pathspace construc-
+tion, starting with X2→X1 and proceeding up the tower, as we did in §4.3. The latter
+construction is rather the dual of an iterated mapping cylinder, involving spaces of
+maps ∆n→Xv instead of simply pathspaces. One could use such mapping spaces to
+generalize the deﬁnition of ∇X from diagrams of spaces to complexes of spaces.
+As special cases of the constructions
+X and
+X we have direct limits and
+inverse limits for diagrams X0→X1→··· and ···→X1→X0 , respectively.
+Since
+inverse limit is related to product and direct limit to coproduct, it is common practice
+in some circles to use reverse logic and call inverse limit simply ‘limit’ and direct limit
+‘colimit.’ The homotopy versions are then called ‘holim’ for ∇X and ‘hocolim’ for
+∆X . This terminology is frequently used for more general diagrams as well.
+Homotopy Groups with Coefﬁcients
+There is a somewhat deeper duality between homotopy groups and cohomology,
+which one can see in the fact that cohomology groups are homotopy classes of maps
+into a space with a single nonzero homotopy group, while homotopy groups are ho-
+motopy classes of maps from a space with a single nonzero cohomology group. This
+duality is in one respect incomplete, however, in that the cohomology statement holds
+for an arbitrary coefﬁcient group, but we have not yet deﬁned homotopy groups with
+coefﬁcients. In view of the duality, one would be tempted to deﬁne πn(X; G) to be the
+set of basepoint-preserving homotopy classes of maps from the cohomology analog
+of a Moore space M(G, n) to X . The cohomology analog of M(G, n) would be a space
+
+Eckmann–Hilton Duality
+Section 4.H
+463
+Y whose only nonzero cohomology group eHi(Y; Z) is G for i = n. Unfortunately,
+such a space does not exist for arbitrary G, for example for G = Q, since we showed
+in Proposition 3F.12 that if the cohomology groups of a space are all countable, then
+they are all ﬁnitely generated..
+As a ﬁrst approximation to πn(X; G) let use consider ⟨M(G, n), X⟩, the set of
+basepoint-preserving homotopy classes of maps M(G, n)→X . To give this set a more
+suggestive name, let us call it µn(X; G).
+We should assume n > 1 to guarantee
+that the homotopy type of M(G, n) is well-deﬁned, as shown in Example 4.34. For
+n > 1, µn(X; G) is a group since we can choose M(G, n) to be the suspension of an
+M(G, n −1). And if n > 2 then µn(X; G) is abelian since we can choose M(G, n) to
+be a double suspension.
+There is something like a universal coefﬁcient theorem for these groups µn(X; G):
+Proposition 4H.2. For n > 1 there are natural short exact sequences
+0 -→Ext(G, πn+1(X)) -→µn(X; G) -→Hom(G, πn(X)) -→0.
+The similarity with the universal coefﬁcient theorem for cohomology is apparent,
+but with a reversal of the variables in the Ext and Hom terms, reﬂecting the fact that
+µn(X; G) is covariant as a functor of X and contravariant as a functor of G, just like
+the Ext and Hom terms.
+Proof: Let 0→R
+i--→F -→G→0 be a free resolution of G. The inclusion map i is
+realized by a map M(R, n)→M(F, n), where M(R, n) and M(F, n) are wedges of Sn ’s
+corresponding to bases for F and R. Converting this map into a coﬁbration via the
+mapping cylinder, the coﬁber is an M(G, n), as one sees from the long exact sequence
+of homology groups. As in §4.3, the coﬁbration sequence
+M(R, n)→M(F, n)→M(G, n)→M(R, n + 1)→M(F, n + 1)
+gives rise to the exact sequence across the top of the following diagram:
+µ
+X F
+n 1(
+)
++
+;
+−−−−−−−−→
+−−−→
+µ
+X R
+n 1(
+)
++
+;
+F
+(
+)
+,
+−−−−→µ
+X G
+n(
+)
+;
+−−−−→µ
+X F
+n(
+)
+;
+µ
+X R
+n(
+)
+;
+−−−−−−→
+Hom
+X
+n 1(
+)
++
+π
+R
+(
+)
+,
+Hom
+X
+n 1(
+)
++
+π
+==
+==
+i∗
+−−−→
+F
+(
+)
+,
+Hom
+X
+n(
+)
+π
+R
+(
+)
+,
+Hom
+X
+n(
+)
+π
+==
+==
+i∗
+The four outer terms of the exact sequence can be identiﬁed with the indicated Hom
+terms since mapping a wedge sum of Sn ’s into X amounts to choosing an element of
+πn(X) for each wedge summand. The kernel and cokernel of i∗are Hom(G, −) and
+Ext(G, −) by deﬁnition, and so we obtain the short exact sequence we are looking for.
+Naturality will be left for the reader to verify.
+⊔⊓
+Unlike in the universal coefﬁcient theorems for homology and cohomology, the
+short exact sequence in this proposition does not split in general. For an example,
+take G = Z2 and X = M(Z2, n) for n ≥2, where the identity map of M(Z2, n)
+
+464
+Chapter 4
+Homotopy Theory
+deﬁnes an element of µn(M(Z2, n); Z2) = ⟨M(Z2, n), M(Z2, n)⟩having order 4, as
+we show in Example 4L.7, whereas the two outer terms in the short exact sequence
+can only contain elements of order 2 since G = Z2 . This example shows also that
+µn(X; Zm) need not be a module over Zm , as homology and cohomology groups with
+Zm coefﬁcients are.
+The proposition implies that the ﬁrst nonzero µi(Sn; Zm) is µn−1(Sn; Zm) = Zm ,
+from the Ext term. This result would look more reasonable if we changed notation to
+replace the subscript n −1 by n. So let us make the deﬁnition
+πn(X; Zm) = ⟨M(Zm, n −1), X⟩= µn−1(X; Zm)
+There are two good reasons to expect this to be the right deﬁnition. The ﬁrst is formal:
+M(Zm, n −1) is a ‘cohomology M(Zm, n)’ since its only nontrivial cohomology group
+eHi(M(Zm, n −1); Z) is Zm in dimension n. The second reason is more geometric:
+Elements of πn(X; Zm) should be homotopy classes of ‘homotopy-theoretic cycles
+mod m,’ meaning maps Dm→X whose boundary is not necessarily a constant map as
+would be the case for πn(X), but rather whose boundary is m times a cycle Sn−1→X .
+This is precisely what a map M(Zm, n −1)→X is, if we choose M(Zm, n −1) to be
+Sn−1 with a cell en attached by a map of degree m.
+Besides the calculation πn(Sn; Zm) ≈Zm , the proposition also yields an isomor-
+phism πn(M(Zm, n); Zm) ≈Ext(Zm, Zm) = Zm . Both these results are in fact special
+cases of a Hurewicz-type theorem relating πn(X; Zm) and Hn(X; Zm), which is proved
+in [Neisendorfer 1980].
+Along with Z and Zm , another extremely useful coefﬁcient group for homology
+and cohomology is Q.
+We pointed out above the difﬁculty that there is no coho-
+mology analog of M(Q, n). The groups µn(X; Q) are also problematic. For example
+the proposition gives µn−1(Sn; Q) ≈Ext(Q, Z), which is a somewhat complicated un-
+countable group as we showed in §3.F. However, there is an alternative approach
+that turns out to work rather well. One deﬁnes rational homotopy groups simply as
+πn(X)⊗Q, analogous to the isomorphism Hn(X; Q) ≈Hn(X; Z)⊗Q from the univer-
+sal coefﬁcient theorem for homology. See [SSAT] for more on this.
+Homology Decompositions
+Eckmann–Hilton duality can be extremely helpful as an organizational principle,
+reducing signiﬁcantly what one has to remember, and providing valuable hints on how
+to proceed in various situations. To illustrate, let us consider what would happen if
+we dualized the notion of a Postnikov tower of principal ﬁbrations, where a space is
+represented as an inverse limit of a sequence of ﬁbers of maps to Eilenberg–MacLane
+spaces. In the dual representation, a space would be realized as a direct limit of a
+sequence of coﬁbers of maps from Moore spaces.
+In more detail, suppose we are given a sequence of abelian groups Gn , n ≥1,
+and we build a CW complex X with Hn(X) ≈Gn for all n by constructing inductively
+
+Eckmann–Hilton Duality
+Section 4.H
+465
+an increasing sequence of subcomplexes X1 ⊂X2 ⊂··· with Hi(Xn) ≈Gi for i ≤n
+and Hi(Xn) = 0 for i > n, where:
+(1) X1 is a Moore space M(G1, 1).
+(2) Xn+1 is the mapping cone of a cellular map hn : M(Gn+1, n)→Xn such that the
+induced map hn∗: Hn
+ M(Gn+1, n)
+→Hn(Xn) is trivial.
+(3) X =
+S
+n Xn .
+One sees inductively that Xn+1 has the desired homology groups by comparing the
+long exact sequences of the pairs (Xn+1, Xn) and (CM, M) where M = M(Gn+1, n)
+and CM is the cone M×I/M×{0}:
+X
+X
+H
+n
+(
+)
+,
+n 1
++
+H
+0
+(
+)
+n 1
++
+n 1
++
+X
+H
+n
+(
+)
+n
+X
+H
+0
+(
+)
+n
+n
+n 1
++
+n 1
++
+Xn 1
++ −−−−−→
+−−−−−→
+−−−→
+−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+∂
+M
+CM
+H
+(
+)
+,
+n 1
++
+M
+H (
+)
+n
+G
+−−−−−→
+∂
+≈
+≈
+≈
+∗
+h
+The assumption that hn∗is trivial means that the boundary map in the upper row
+is zero, hence Hn+1(Xn+1) ≈Gn+1 .
+The other homology groups of Xn+1 are the
+same as those of Xn since Hi(Xn+1, Xn) ≈Hi(CM, M) for all i by excision, and
+Hi(CM, M) ≈eHi−1(M) since CM is contractible.
+In case all the maps hn are trivial, X is the wedge sum of the Moore spaces
+M(Gn, n) since in this case the mapping cone construction in (2) produces a wedge
+sum with the suspension of M(Gn+1, n), a Moore space M(Gn+1, n + 1).
+For a space Y , a homotopy equivalence f : X→Y where X is constructed as in
+(1)–(3) is called a homology decomposition of Y .
+Theorem 4H.3. Every simply-connected CW complex has a homology decomposition.
+Proof: Given a simply-connected CW complex Y , let Gn = Hn(Y).
+Suppose in-
+ductively that we have constructed Xn via maps hi as in (2), together with a map
+f : Xn→Y inducing an isomorphism on Hi for i ≤n. The induction can start with
+X1 a point since Y is simply-connected. To construct Xn+1 we ﬁrst replace Y by
+the mapping cylinder of f : Xn→Y , converting f into an inclusion. By the Hurewicz
+theorem and the homology exact sequence of the pair (Y, Xn) we have πn+1(Y, Xn) ≈
+Hn+1(Y, Xn) ≈Hn+1(Y) = Gn+1 . We will use this isomorphism to construct a map
+hn : M(Gn+1, n)→Xn and an extension f : Xn+1→Y .
+The standard construction of an M(Gn+1, n) consists of a wedge of spheres
+Sn
+α corresponding to generators gα of Gn+1 , with cells en+1
+β
+attached according to
+certain linear combinations rβ =
+P
+α nαβgα that are zero in Gn+1 . Under the iso-
+morphism Gn+1 ≈πn+1(Y, Xn) each gα corresponds to a basepoint-preserving map
+fα : (CSn, Sn)→(Y, Xn) where CSn is the cone on Sn . The restrictions of these fα ’s
+to Sn deﬁne hn :
+W
+α Sn
+α→Xn , and the maps fα : CSn→Y themselves give an exten-
+sion of f : Xn→Y to the mapping cone of hn :
+W
+α Sn
+α→Xn . Each relation rβ gives a
+homotopy Fβ : (CSn, Sn)×I→(Y, Xn) from
+P
+α nαβfα to the constant map. We use
+
+466
+Chapter 4
+Homotopy Theory
+Fβ ||Sn×{0} to attach en+1
+β
+, and then Fβ ||Sn×I gives hn on en+1
+β
+and Fβ gives an
+extension of f over the cone on en+1
+β
+.
+This construction assures that f∗: Hn+1(Xn+1, Xn)→Hn+1(Y, Xn) is an isomor-
+phism, so from the ﬁve-lemma applied to the long exact sequences of these pairs we
+deduce that f∗: Hi(Xn+1)→Hi(Y) is an isomorphism for i ≤n + 1. This ﬁnishes the
+induction step. We may assume the maps fα and Fβ are cellular, so X =
+S
+n Xn is
+a CW complex with subcomplexes Xn . Since f : X→Y is a homology isomorphism
+between simply-connected CW complexes, it is a homotopy equivalence.
+⊔⊓
+As an example, suppose that Y is a simply-connected CW complex having all its
+homology groups free. Then the Moore spaces used in the construction of X can
+be taken to be wedges of spheres, and so Xn is obtained from Xn−1 by attaching an
+n cell for each Z summand of Hn(Y). The attaching maps may be taken to be cellular,
+making X into a CW complex whose cellular chain complex has trivial boundary maps.
+Similarly, ﬁnite cyclic summands of Hn(Y) can be realized by wedge summands of
+the form Sn−1 ∪en in M(Hn(Y), n −1), contributing an n cell and an (n + 1) cell to
+X . This is Proposition 4C.1, but the present result is stronger because it tells us that
+a ﬁnite cyclic summand of Hn can be realized in one step by attaching the cone on a
+Moore space M(Zk, n −1), rather than in two steps of attaching an n cell and then
+an (n + 1) cell.
+Exercises
+1. Show that if A>X is a coﬁbration of compact Hausdorff spaces, then for any space
+Y , the map Y X→Y A obtained by restriction of functions is a ﬁbration. [If A > X is
+a coﬁbration, so is A×Y > X×Y for any space Y .]
+2.
+Consider a pushout diagram as at the right, where B ⊔f X
+−−−−−→
+−−−−→
+A
+B
+X
+X
+B
+f
+f
+>
+>
+⊔
+is B with X attached along A via f . Show that if A > X is a
+coﬁbration, so is B > B ⊔f X .
+3. For ﬁbrations E1→B and E2→B , show that a ﬁber-preserving map E1→E2 that
+is a homotopy equivalence is in fact a ﬁber homotopy equivalence. [This is dual to
+Proposition 0.19.]
+4. Deﬁne the dual of an iterated mapping cylinder precisely, in terms of maps from
+∆n , and use this to give a deﬁnition of ∇X , the dual of ∆X , for X a complex of spaces.
+It sometimes happens that suspending a space has the effect of simplifying its
+homotopy type, as the suspension becomes homotopy equivalent to a wedge sum of

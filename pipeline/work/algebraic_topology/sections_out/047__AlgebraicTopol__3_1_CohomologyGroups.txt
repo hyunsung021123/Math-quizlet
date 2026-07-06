@@ -1,0 +1,89 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.1 Cohomology Groups
+직전 소단원: 「3.intro 개관 (챕터 도입부)」
+[본문]
+190
+Chapter 3
+Cohomology
+Homology groups Hn(X) are the result of a two-stage process: First one forms a
+chain complex ··· --→Cn
+∂--→Cn−1 --→··· of singular, simplicial, or cellular chains,
+then one takes the homology groups of this chain complex, Ker ∂/ Im ∂. To obtain
+the cohomology groups Hn(X; G) we interpolate an intermediate step, replacing the
+chain groups Cn by the dual groups Hom(Cn, G) and the boundary maps ∂by their
+dual maps δ, before forming the cohomology groups Ker δ/ Im δ. The plan for this
+section is ﬁrst to sort out the algebra of this dualization process and show that the
+cohomology groups are determined algebraically by the homology groups, though
+in a somewhat subtle way.
+Then after this algebraic excursion we will deﬁne the
+cohomology groups of spaces and show that these satisfy basic properties very much
+like those for homology. The payoff for all this formal work will begin to be apparent
+in subsequent sections.
+The Universal Coefﬁcient Theorem
+Let us begin with a simple example. Consider the chain complex
+−−−−−→
+0
+Z
+Z −−−−−→
+2
+Z −−−−−→
+0
+Z−−−−→
+−−−−→
+0
+0
+=
+C3
+=
+C2
+=
+C1
+=
+C0
+where Z
+2--→Z is the map x , 2x . If we dualize by taking Hom(−, G) with G = Z,
+we obtain the cochain complex
+0
+Z
+Z
+2
+Z
+0
+Z
+−−−−→
+−−−−→
+−−−−→
+−−−−→−−−−→
+0
+0
+=
+C3
+=
+C2
+=
+C1
+=
+C0
+∗
+∗
+∗
+∗
+In the original chain complex the homology groups are Z’s in dimensions 0 and 3,
+together with a Z2 in dimension 1. The homology groups of the dual cochain com-
+plex, which are called cohomology groups to emphasize the dualization, are again Z’s
+in dimensions 0 and 3, but the Z2 in the 1 dimensional homology of the original
+complex has shifted up a dimension to become a Z2 in 2 dimensional cohomology.
+More generally, consider any chain complex of ﬁnitely generated free abelian
+groups. Such a chain complex always splits as the direct sum of elementary com-
+plexes of the forms 0→Z→0 and 0→Z
+m--→Z→0, according to Exercise 43 in §2.2.
+Applying Hom(−, Z) to this direct sum of elementary complexes, we obtain the direct
+sum of the corresponding dual complexes 0←Z←0 and 0←Z
+m
+←--- Z←0. Thus the
+cohomology groups are the same as the homology groups except that torsion is shifted
+up one dimension. We will see later in this section that the same relation between ho-
+mology and cohomology holds whenever the homology groups are ﬁnitely generated,
+even when the chain groups are not ﬁnitely generated. It would also be quite easy to

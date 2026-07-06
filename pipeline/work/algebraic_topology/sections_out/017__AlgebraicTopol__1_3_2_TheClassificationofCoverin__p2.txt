@@ -1,0 +1,50 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 1. The Fundamental Group
+현재 소단원: 1.3.2 The Classification of Covering Spaces (분할 part 2)
+직전 소단원: 「1.3.1 Lifting Properties」
+[본문]
+70
+Chapter 1
+The Fundamental Group
+Notice that the deﬁnition of eXρ makes sense whenever we are given an action
+ρ of π1(X, x0) on a set F . There is a natural projection eXρ→X sending ([γ], ex0)
+to γ(1), and this is a covering space since if U ⊂X is an open set over which the
+universal cover eX0 is a product U ×π1(X, x0), then the identiﬁcations deﬁning eXρ
+simply collapse U ×π1(X, x0)×F to U ×F .
+Returning to our given covering space eX→X with associated action ρ, the map
+eXρ→eX induced by h is a bijection and therefore a homeomorphism since h was a
+local homeomorphism. Since this homeomorphism eXρ→eX takes each ﬁber of eXρ to
+the corresponding ﬁber of eX , it is an isomorphism of covering spaces.
+If two covering spaces p1 : eX1→X and p2 : eX2→X are isomorphic, one may ask
+how the corresponding actions of π1(X, x0) on the ﬁbers F1 and F2 over x0 are
+related. An isomorphism h : eX1→eX2 restricts to a bijection F1→F2 , and evidently
+Lγ(h( ex0)) = h(Lγ( ex0)). Using the less cumbersome notation γ ex0 for Lγ( ex0), this
+relation can be written more concisely as γh( ex0) = h(γ ex0). A bijection F1→F2 with
+this property is what one would naturally call an isomorphism of sets with π1(X, x0)
+action.
+Thus isomorphic covering spaces have isomorphic actions on ﬁbers.
+The
+converse is also true, and easy to prove. One just observes that for isomorphic actions
+ρ1 and ρ2 , an isomorphism h : F1→F2 induces a map eXρ1→eXρ2 and h−1 induces a
+similar map in the opposite direction, such that the compositions of these two maps,
+in either order, are the identity.
+This shows that n sheeted covering spaces of X are classiﬁed by equivalence
+classes of homomorphisms π1(X, x0)→Σn , where Σn is the symmetric group on n
+symbols and the equivalence relation identiﬁes a homomorphism ρ with each of its
+conjugates h−1ρh by elements h ∈Σn . The study of the various homomorphisms
+from a given group to Σn is a very classical topic in group theory, so we see that this
+algebraic question has a nice geometric interpretation.
+Deck Transformations and Group Actions
+For a covering space p : eX→X the isomorphisms eX→eX are called deck transfor-
+mations or covering transformations. These form a group G( eX) under composition.
+For example, for the covering space p : R→S1 projecting a vertical helix onto a circle,
+the deck transformations are the vertical translations taking the helix onto itself, so
+G( eX) ≈Z in this case. For the n sheeted covering space S1→S1 , z , zn , the deck
+transformations are the rotations of S1 through angles that are multiples of 2π/n,
+so G( eX) = Zn .
+By the unique lifting property, a deck transformation is completely determined
+by where it sends a single point, assuming eX is path-connected. In particular, only
+the identity deck transformation can ﬁx a point of eX .
+A covering space p : eX→X is called normal if for each x ∈X and each pair of lifts
+ex, ex′ of x there is a deck transformation taking ex to ex′. For example, the covering

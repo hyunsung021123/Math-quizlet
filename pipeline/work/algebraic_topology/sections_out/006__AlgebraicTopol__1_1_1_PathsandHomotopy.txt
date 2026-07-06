@@ -1,0 +1,272 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 1. The Fundamental Group
+현재 소단원: 1.1.1 Paths and Homotopy
+직전 소단원: 「1.1 Basic Constructions」
+[본문]
+Basic Constructions
+Section 1.1
+25
+This ﬁrst section begins with the basic deﬁnitions and constructions, and then
+proceeds quickly to an important calculation, the fundamental group of the circle,
+using notions developed more fully in §1.3. More systematic methods of calculation
+are given in §1.2. These are sufﬁcient to show for example that every group is realized
+as the fundamental group of some space. This idea is exploited in the Additional
+Topics at the end of the chapter, which give some illustrations of how algebraic facts
+about groups can be derived topologically, such as the fact that every subgroup of a
+free group is free.
+Paths and Homotopy
+The fundamental group will be deﬁned in terms of loops and deformations of
+loops. Sometimes it will be useful to consider more generally paths and their defor-
+mations, so we begin with this slight extra generality.
+By a path in a space X we mean a continuous map f : I→X where I is the unit
+interval [0, 1].
+The idea of continuously deforming a path, keeping its endpoints
+ﬁxed, is made precise by the following deﬁnition. A homotopy of paths in X is a
+family ft : I→X , 0 ≤t ≤1, such that
+(1) The endpoints ft(0) = x0 and ft(1) = x1
+are independent of t .
+x1
+1
+x0
+0
+f
+f
+(2) The associated map F : I×I→X deﬁned by
+F(s, t) = ft(s) is continuous.
+When two paths f0 and f1 are connected in this way by a homotopy ft , they are said
+to be homotopic. The notation for this is f0 ≃f1 .
+Example 1.1: Linear Homotopies. Any two paths f0 and f1 in Rn having the same
+endpoints x0 and x1 are homotopic via the homotopy ft(s) = (1 −t)f0(s) + tf1(s).
+During this homotopy each point f0(s) travels along the line segment to f1(s) at con-
+stant speed. This is because the line through f0(s) and f1(s) is linearly parametrized
+as f0(s) + t[f1(s) −f0(s)] = (1 −t)f0(s) + tf1(s), with the segment from f0(s) to
+f1(s) covered by t values in the interval from 0 to 1. If f1(s) happens to equal f0(s)
+then this segment degenerates to a point and ft(s) = f0(s) for all t . This occurs in
+particular for s = 0 and s = 1, so each ft is a path from x0 to x1 . Continuity of
+the homotopy ft as a map I×I→Rn follows from continuity of f0 and f1 since the
+algebraic operations of vector addition and scalar multiplication in the formula for ft
+are continuous.
+This construction shows more generally that for a convex subspace X ⊂Rn , all
+paths in X with given endpoints x0 and x1 are homotopic, since if f0 and f1 lie in
+X then so does the homotopy ft .
+
+26
+Chapter 1
+The Fundamental Group
+Before proceeding further we need to verify a technical property:
+Proposition 1.2. The relation of homotopy on paths with ﬁxed endpoints in any space
+is an equivalence relation.
+The equivalence class of a path f under the equivalence relation of homotopy
+will be denoted [f ] and called the homotopy class of f .
+Proof: Reﬂexivity is evident since f ≃f by the constant homotopy ft = f . Symmetry
+is also easy since if f0 ≃f1 via ft , then f1 ≃f0 via the inverse homotopy f1−t . For
+transitivity, if f0 ≃f1 via ft and if f1 = g0 with g0 ≃g1
+via gt , then f0 ≃g1 via the homotopy ht that equals f2t for
+0 ≤t ≤1/2 and g2t−1 for 1/2 ≤t ≤1. These two deﬁnitions
+0
+f
+1
+g
+1
+f
+0
+g
+agree for t = 1/2 since we assume f1 = g0 . Continuity of the
+associated map H(s, t) = ht(s) comes from the elementary
+fact, which will be used frequently without explicit mention, that a function deﬁned
+on the union of two closed sets is continuous if it is continuous when restricted to
+each of the closed sets separately. In the case at hand we have H(s, t) = F(s, 2t) for
+0 ≤t ≤1/2 and H(s, t) = G(s, 2t −1) for 1/2 ≤t ≤1 where F and G are the maps
+I×I→X associated to the homotopies ft and gt . Since H is continuous on I×[0, 1/2]
+and on I×[1/2, 1], it is continuous on I×I .
+⊔⊓
+Given two paths f , g : I→X such that f (1) = g(0), there is a composition or
+product path f g that traverses ﬁrst f and then g, deﬁned by the formula
+f g(s) =
+(
+f (2s),
+0 ≤s ≤1/2
+g(2s −1),
+1/2 ≤s ≤1
+Thus f and g are traversed twice as fast in order for f
+g to be traversed in unit
+time. This product operation respects homotopy classes
+since if f0 ≃f1 and g0 ≃g1 via homotopies ft and gt ,
+and if f0(1) = g0(0) so that f0 g0 is deﬁned, then ft gt
+0
+f
+1
+g
+1
+f
+0
+g
+is deﬁned and provides a homotopy f0 g0 ≃f1 g1 .
+In particular, suppose we restrict attention to paths f : I→X with the same start-
+ing and ending point f (0) = f (1) = x0 ∈X . Such paths are called loops, and the
+common starting and ending point x0 is referred to as the basepoint. The set of all
+homotopy classes [f ] of loops f : I→X at the basepoint x0 is denoted π1(X, x0).
+Proposition 1.3. π1(X, x0) is a group with respect to the product [f ][g] = [f g].
+This group is called the fundamental group of X at the basepoint x0 .
+We
+will see in Chapter 4 that π1(X, x0) is the ﬁrst in a sequence of groups πn(X, x0),
+called homotopy groups, which are deﬁned in an entirely analogous fashion using the
+n dimensional cube In in place of I .
+
+Basic Constructions
+Section 1.1
+27
+Proof: By restricting attention to loops with a ﬁxed basepoint x0 ∈X we guarantee
+that the product f
+g of any two such loops is deﬁned. We have already observed
+that the homotopy class of f g depends only on the homotopy classes of f and g,
+so the product [f ][g] = [f g] is well-deﬁned. It remains to verify the three axioms
+for a group.
+As a preliminary step, deﬁne a reparametrization of a path f to be a composi-
+tion f ϕ where ϕ : I→I is any continuous map such that ϕ(0) = 0 and ϕ(1) = 1.
+Reparametrizing a path preserves its homotopy class since f ϕ ≃f via the homotopy
+fϕt where ϕt(s) = (1 −t)ϕ(s) + ts so that ϕ0 = ϕ and ϕ1(s) = s . Note that
+(1 −t)ϕ(s) + ts lies between ϕ(s) and s , hence is in I , so the composition f ϕt is
+deﬁned.
+If we are given paths f , g, h with f (1) = g(0) and g(1) = h(0), then both prod-
+ucts (f g) h and f (g h) are deﬁned, and f (g h) is a reparametrization
+of (f g) h by the piecewise linear function ϕ whose graph is shown
+in the ﬁgure at the right. Hence (f g) h ≃f (g h). Restricting atten-
+tion to loops at the basepoint x0 , this says the product in π1(X, x0) is
+associative.
+Given a path f : I→X , let c be the constant path at f (1), deﬁned by c(s) = f (1)
+for all s ∈I . Then f c is a reparametrization of f via the function ϕ whose graph is
+shown in the ﬁrst ﬁgure at the right, so f c ≃f . Similarly,
+c f ≃f where c is now the constant path at f (0), using
+the reparametrization function in the second ﬁgure. Taking
+f to be a loop, we deduce that the homotopy class of the
+constant path at x0 is a two-sided identity in π1(X, x0).
+For a path f from x0 to x1 , the inverse path f from x1 back to x0 is deﬁned
+by f (s) = f (1 −s). To see that f
+f is homotopic to a constant path we use the
+homotopy ht = ft gt where ft is the path that equals f on the interval [0, 1 −t]
+and that is stationary at f (1 −t) on the interval [1 −t, 1], and gt is the inverse path
+of ft . We could also describe ht in terms of the associated function
+H : I×I→X using the decomposition of I×I shown in the ﬁgure. On
+the bottom edge of the square H is given by f f and below the ‘V’ we
+let H(s, t) be independent of t , while above the ‘V’ we let H(s, t) be
+independent of s . Going back to the ﬁrst description of ht , we see that since f0 = f
+and f1 is the constant path c at x0 , ht is a homotopy from f f to c c = c . Replacing
+f by f gives f
+f ≃c for c the constant path at x1 . Taking f to be a loop at the
+basepoint x0 , we deduce that [f ] is a two-sided inverse for [f ] in π1(X, x0).
+⊔⊓
+Example 1.4. For a convex set X in Rn with basepoint x0 ∈X we have π1(X, x0) = 0,
+the trivial group, since any two loops f0 and f1 based at x0 are homotopic via the
+linear homotopy ft(s) = (1 −t)f0(s) + tf1(s), as described in Example 1.1.
+
+28
+Chapter 1
+The Fundamental Group
+It is not so easy to show that a space has a nontrivial fundamental group since one
+must somehow demonstrate the nonexistence of homotopies between certain loops.
+We will tackle the simplest example shortly, computing the fundamental group of the
+circle.
+It is natural to ask about the dependence of π1(X, x0) on the choice of the base-
+point x0 . Since π1(X, x0) involves only the path-component of X containing x0 , it
+is clear that we can hope to ﬁnd a relation between π1(X, x0) and π1(X, x1) for two
+basepoints x0 and x1 only if x0 and x1 lie in the same path-component of X . So
+let h : I→X be a path from x0 to x1 , with the inverse path
+h(s) = h(1−s) from x1 back to x0 . We can then associate
+x1
+x0
+h
+f
+to each loop f based at x1 the loop h f
+h based at x0 .
+Strictly speaking, we should choose an order of forming the product h f
+h, either
+(h f ) h or h (f h), but the two choices are homotopic and we are only interested in
+homotopy classes here. Alternatively, to avoid any ambiguity we could deﬁne a gen-
+eral n fold product f1
+··· fn in which the path fi is traversed in the time interval
+ i−1
+n , i
+n
+
+.
+Proposition 1.5. The map βh : π1(X, x1)→π1(X, x0) deﬁned by βh[f ] = [h f h]
+is an isomorphism.
+Proof: If ft is a homotopy of loops based at x1 then h ft
+h is a homotopy of
+loops based at x0 , so βh is well-deﬁned.
+Further, βh is a homomorphism since
+βh[f g] = [h f g h] = [h f h h g h] = βh[f ]βh[g]. Finally, βh is an isomorphism
+with inverse βh since βhβh[f ] = βh[h f h] = [h h f h h] = [f ], and similarly
+βhβh[f ] = [f ].
+⊔⊓
+Thus if X is path-connected, the group π1(X, x0) is, up to isomorphism, inde-
+pendent of the choice of basepoint x0 . In this case the notation π1(X, x0) is often
+abbreviated to π1(X), or one could go further and write just π1X .
+In general, a space is called simply-connected if it is path-connected and has
+trivial fundamental group. The following result explains the name.
+Proposition 1.6. A space X is simply-connected iff there is a unique homotopy class
+of paths connecting any two points in X .
+Proof: Path-connectedness is the existence of paths connecting every pair of points,
+so we need be concerned only with the uniqueness of connecting paths.
+Suppose
+π1(X) = 0. If f and g are two paths from x0 to x1 , then f ≃f
+g g ≃g since
+the loops g g and f g are each homotopic to constant loops, using the assumption
+π1(X, x0) = 0 in the latter case. Conversely, if there is only one homotopy class of
+paths connecting a basepoint x0 to itself, then all loops at x0 are homotopic to the
+constant loop and π1(X, x0) = 0.
+⊔⊓
+
+Basic Constructions
+Section 1.1
+29
+The Fundamental Group of the Circle
+Our ﬁrst real theorem will be the calculation π1(S1) ≈Z. Besides its intrinsic
+interest, this basic result will have several immediate applications of some substance,
+and it will be the starting point for many more calculations in the next section. It
+should be no surprise then that the proof will involve some genuine work. To max-
+imize the payoff for this work, the proof is written so that its main technical steps
+apply in the more general setting of covering spaces, the main topic of §1.3.
+Theorem 1.7. The map Φ : Z→π1(S1) sending an integer n to the homotopy class
+of the loop ωn(s) = (cos 2πns, sin 2πns) based at (1, 0) is an isomorphism.
+Proof: The idea is to compare paths in S1 with paths in R via the map
+p : R→S1 given by p(s) = (cos 2πs, sin 2πs). This map can be visu-
+alized geometrically by embedding R in R3 as the helix parametrized
+by s , (cos 2πs, sin 2πs, s), and then p is the restriction to the he-
+lix of the projection of R3 onto R2 , (x, y, z) , (x, y), as in the
+ﬁgure. Observe that the loop ωn is the composition pf
+ωn where
+p
+f
+ωn : I→R is the path f
+ωn(s) = ns , starting at 0 and ending at n,
+winding around the helix |n| times, upward if n > 0 and downward
+if n < 0. The relation ωn = pf
+ωn is expressed by saying that f
+ωn is
+a lift of ωn .
+The deﬁnition of Φ can be reformulated by setting Φ(n) equal to the homotopy
+class of the loop p ef for ef any path in R from 0 to n. Such an ef is homotopic to
+f
+ωn via the linear homotopy (1 −t) ef + tf
+ωn , hence p ef is homotopic to pf
+ωn = ωn
+and the new deﬁnition of Φ(n) agrees with the old one.
+To verify that Φ is a homomorphism, let τm : R→R be the translation τm(x) =
+x + m. Then f
+ωm (τmf
+ωn) is a path in R from 0 to m + n, so Φ(m + n) is the
+homotopy class of the loop in S1 that is the image of this path under p. This image
+is just ωm ωn , so Φ(m + n) = Φ(m) Φ(n).
+To show that Φ is an isomorphism we shall use two facts:
+(a) For each path f : I→S1 starting at a point x0 ∈S1 and each ex0 ∈p−1(x0) there
+is a unique lift ef : I→R starting at ex0 .
+(b) For each homotopy ft : I→S1 of paths starting at x0 and each ex0 ∈p−1(x0)
+there is a unique lifted homotopy eft : I→R of paths starting at ex0 .
+Before proving these facts, let us see how they imply the theorem. To show that Φ is
+surjective, let f : I→S1 be a loop at the basepoint (1, 0), representing a given element
+of π1(S1). By (a) there is a lift ef starting at 0. This path ef ends at some integer n
+since p ef (1) = f (1) = (1, 0) and p−1(1, 0) = Z ⊂R. By the extended deﬁnition of Φ
+we then have Φ(n) = [p ef ] = [f ]. Hence Φ is surjective.

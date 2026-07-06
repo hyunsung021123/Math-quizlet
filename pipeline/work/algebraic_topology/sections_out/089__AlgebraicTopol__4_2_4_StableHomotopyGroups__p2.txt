@@ -1,0 +1,90 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.2.4 Stable Homotopy Groups (분할 part 2)
+직전 소단원: 「4.2.3 Fiber Bundles」
+[본문]
+392
+Chapter 4
+Homotopy Theory
+(c) If ℓ1 ··· ℓn ≡±ℓ′
+1 ··· ℓ′
+n mod m, choose d so that k1 ··· kn +dm = ±1 and show
+this implies that g induces an isomorphism on all homotopy groups, hence is a
+homotopy equivalence. [For πi with i > 1, consider a lift of g to the universal
+cover.]
+30. Let E be a subspace of R2 obtained by deleting a subspace of {0}×R. For which
+such spaces E is the projection E→R, (x, y) , x , a ﬁber bundle?
+31. For a ﬁber bundle F→E→B such that the inclusion F>E is homotopic to a con-
+stant map, show that the long exact sequence of homotopy groups breaks up into split
+short exact sequences giving isomorphisms πn(B) ≈πn(E) ⊕πn−1(F). In particular,
+for the Hopf bundles S3→S7→S4 and S7→S15→S8 this yields isomorphisms
+πn(S4) ≈πn(S7) ⊕πn−1(S3)
+πn(S8) ≈πn(S15) ⊕πn−1(S7)
+Thus π7(S4) and π15(S8) contain Z summands.
+32. Show that if Sk→Sm→Sn is a ﬁber bundle, then k = n −1 and m = 2n −1.
+[Look at the long exact sequence of homotopy groups.]
+33. Show that if there were ﬁber bundles Sn−1→S2n−1→Sn for all n, then the groups
+πi(Sn) would be ﬁnitely generated free abelian groups computable by induction, and
+nonzero for i ≥n ≥2.
+34. Let p : S3→S2 be the Hopf bundle and let q : T 3→S3 be the quotient map collaps-
+ing the complement of a ball in the 3 dimensional torus T 3 = S1×S1×S1 to a point.
+Show that pq : T 3→S2 induces the trivial map on π∗and eH∗, but is not homotopic
+to a constant map.
+35. Show that the ﬁber bundle S3→S4n+3→HPn gives rise to a quotient ﬁber bundle
+S2→CP2n+1→HPn by factoring out the action of S1 on S4n+3 by complex scalar
+multiplication.
+36. For basepoint-preserving maps f : S1→X and g : Sn→X with n > 1, show that
+the Whitehead product [f , g] is ±(g −f g), where f g denotes the action of f on g.
+37. Show that all Whitehead products in a path-connected H–space are trivial.
+38. Show π3(S1∨S2) is not ﬁnitely generated as a module over Z[π1(S1∨S2)] by con-
+sidering Whitehead products in the universal cover, using the results in Example 4.52.
+Generalize this to πi+j−1(S1 ∨Si ∨Sj) for i, j > 1.
+39. Show that the indeterminacy of a Toda bracket ⟨f , g, h⟩with f ∈πs
+i , g ∈πs
+j ,
+h ∈πs
+k is the subgroup f πs
+j+k+1 + h πs
+i+j+1 of πs
+i+j+k+1 .
+
+Connections with Cohomology
+Section 4.3
+393
+The Hurewicz theorem provides a strong link between homotopy groups and ho-
+mology, and hence also an indirect relation with cohomology. But there is a more di-
+rect connection with cohomology of a quite different sort. We will show that for every
+CW complex X there is a natural bijection between Hn(X; G) and the set ⟨X, K(G, n)⟩
+of basepoint-preserving homotopy classes of maps from X to a K(G, n). We will also
+deﬁne a natural group structure on ⟨X, K(G, n)⟩that makes the bijection a group iso-
+morphism. The mere fact that there is any connection at all between cohomology and
+homotopy classes of maps is the ﬁrst surprise here, and the second is that Eilenberg–
+MacLane spaces are involved, since their deﬁnition is entirely in terms of homotopy
+groups, which on the face of it have nothing to do with cohomology.
+After proving this basic isomorphism Hn(X; G) ≈⟨X, K(G, n)⟩and describing a
+few of its immediate applications, the later parts of this section aim toward a further
+study of Postnikov towers, which were introduced brieﬂy in §4.1. These provide a
+general theoretical method for realizing an arbitrary CW complex as a sort of twisted
+product of Eilenberg–MacLane spaces, up to homotopy equivalence.
+The most ge-
+ometric interpretation of the phrase ‘twisted product’ is the notion of ﬁber bundle
+introduced in the previous section, but here we need the more homotopy-theoretic
+notion of a ﬁbration, so before we begin the discussion of Postnikov towers we ﬁrst
+take a few pages to present some basic constructions and results about ﬁbrations.
+As we shall see, Postnikov towers can be expressed as sequences of ﬁbrations
+with ﬁbers Eilenberg–MacLane spaces, so we can again expect close connections with
+cohomology. One such connection is provided by k invariants, which describe, at
+least in principle, how Postnikov towers for a broad class of spaces are determined
+by a sequence of cohomology classes. Another application of these ideas, described
+at the end of the section, is a technique for factoring basic extension and lifting prob-
+lems in homotopy theory into a sequence of smaller problems whose solutions are
+equivalent to the vanishing of certain cohomology classes. This technique goes under
+the somewhat grandiose title of Obstruction Theory, though it is really quite a simple
+idea when expressed in terms of Postnikov towers.
+The Homotopy Construction of Cohomology
+The main result of this subsection is the following fundamental relationship be-
+tween singular cohomology and Eilenberg–MacLane spaces:
+Theorem 4.57. There are natural bijections T : ⟨X, K(G, n)⟩→Hn(X; G) for all CW
+complexes X and all n > 0, with G any abelian group. Such a T has the form
+T([f ]) = f ∗(α) for a certain distinguished class α ∈Hn(K(G, n); G).
