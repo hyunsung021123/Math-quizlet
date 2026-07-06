@@ -54,7 +54,7 @@ label.book-label{font-size:.82rem;color:var(--ink-soft);display:flex;align-items
 
   <div class="card">
     <h2>1. 소단원 JSON 추가</h2>
-    <textarea id="pasteArea" placeholder='여기에 채팅 AI가 출력한 JSON 하나를 붙여넣고 "추가" 클릭. 최종복습 전용 출력({"ox_quizzes":...,"conceptual_questions":...})도 그대로 붙여넣으면 됩니다.'></textarea>
+    <textarea id="pasteArea" placeholder='여기에 채팅 AI가 출력한 소단원 JSON 하나를 붙여넣고 "추가" 클릭.'></textarea>
     <div class="row">
       <button id="addBtn">+ 추가</button>
       <button class="ghost" id="fileBtn">파일로 여러 개 추가</button>
@@ -92,6 +92,7 @@ label.book-label{font-size:.82rem;color:var(--ink-soft);display:flex;align-items
 
 var VIZ_WHITELIST = ['zonotope_2d','hyperplane_arrangement_2d','convex_hull_2d','vectors_2d','custom_2d','identification_polygon_2d','complex_2d'];
 var RESULT_TYPES = ['Definition','Theorem','Lemma','Proposition','Corollary','Remark','Example'];
+var CHECKPOINT_TYPES = ['checkpoint','ox','conceptual'];
 
 var items = []; // {id, raw, parsed, kind, msgs:[{level,text}], label}
 var uid = 0;
@@ -101,34 +102,10 @@ function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,
 /* ---------- 검증 ---------- */
 function validateItem(parsed){
   var msgs = [];
-  var kind = null;
 
-  if(parsed && Array.isArray(parsed.ox_quizzes || parsed.conceptual_questions) ||
-     (parsed && (parsed.ox_quizzes || parsed.conceptual_questions) && !parsed.learning_flow)){
-    kind = 'review';
-  } else if(parsed && parsed.learning_flow){
-    kind = 'chapter_or_section';
-  } else {
-    msgs.push({level:'err', text:'인식할 수 없는 형식: learning_flow도, ox_quizzes/conceptual_questions도 없습니다.'});
+  if(!(parsed && parsed.learning_flow)){
+    msgs.push({level:'err', text:'인식할 수 없는 형식: learning_flow가 없습니다.'});
     return {kind:'unknown', msgs:msgs};
-  }
-
-  if(kind === 'review'){
-    var ox = parsed.ox_quizzes || [];
-    var cq = parsed.conceptual_questions || [];
-    if(!Array.isArray(ox)) msgs.push({level:'err', text:'ox_quizzes가 배열이 아닙니다.'});
-    else {
-      ox.forEach(function(q,i){
-        if(!q.question) msgs.push({level:'warn', text:'ox_quizzes['+i+']에 question이 없습니다.'});
-        if(String(q.answer||'').trim().toUpperCase() !== 'O' && String(q.answer||'').trim().toUpperCase() !== 'X')
-          msgs.push({level:'err', text:'ox_quizzes['+i+'].answer가 "O"/"X"가 아닙니다: '+JSON.stringify(q.answer)});
-        if(!q.explanation) msgs.push({level:'warn', text:'ox_quizzes['+i+']에 explanation이 없습니다.'});
-      });
-    }
-    if(!Array.isArray(cq)) msgs.push({level:'err', text:'conceptual_questions가 배열이 아닙니다.'});
-    if(!ox.length && !cq.length) msgs.push({level:'warn', text:'복습 문제가 하나도 없습니다.'});
-    if(!msgs.some(function(m){return m.level==='err';})) msgs.push({level:'ok', text:'복습(review) 블록으로 인식됨 — OX '+ox.length+'개, 개념질문 '+cq.length+'개'});
-    return {kind:'review', msgs:msgs};
   }
 
   // chapter_or_section
@@ -162,18 +139,35 @@ function validateItem(parsed){
     });
     var cps = sec.step3_checkpoint || [];
     if(!cps.length) msgs.push({level:'warn', text:tag+': step3_checkpoint가 비어 있습니다.'});
+    var nOx = 0;
     cps.forEach(function(c, ci){
       var ctag = tag+'.step3['+ci+']';
-      if(!c.problem) msgs.push({level:'err', text:ctag+': problem이 없습니다.'});
-      if(!c.solution) msgs.push({level:'warn', text:ctag+': solution이 없습니다.'});
-      checkViz(c.visualization, ctag, msgs);
+      var rawType = c.type;
+      var ctype = rawType || 'checkpoint';
+      if(CHECKPOINT_TYPES.indexOf(ctype) === -1){
+        msgs.push({level:'warn', text:ctag+': type "'+rawType+'"이 표준 목록(checkpoint/ox/conceptual)에 없습니다 — checkpoint로 취급합니다.'});
+        ctype = 'checkpoint';
+      }
+      if(ctype === 'ox'){
+        nOx++;
+        if(!c.question) msgs.push({level:'warn', text:ctag+': question이 없습니다.'});
+        var ans = String(c.answer||'').trim().toUpperCase();
+        if(ans !== 'O' && ans !== 'X') msgs.push({level:'err', text:ctag+': answer가 "O"/"X"가 아닙니다: '+JSON.stringify(c.answer)});
+        if(!c.explanation) msgs.push({level:'warn', text:ctag+': explanation이 없습니다.'});
+      } else if(ctype === 'conceptual'){
+        if(!c.question) msgs.push({level:'warn', text:ctag+': question이 없습니다.'});
+        if(!c.answer) msgs.push({level:'warn', text:ctag+': answer가 없습니다.'});
+      } else {
+        if(!c.problem) msgs.push({level:'err', text:ctag+': problem이 없습니다.'});
+        if(!c.solution) msgs.push({level:'warn', text:ctag+': solution이 없습니다.'});
+        checkViz(c.visualization, ctag, msgs);
+      }
     });
+    if(cps.length && nOx === 0) msgs.push({level:'warn', text:tag+': ox 타입 항목이 하나도 없습니다(이 소단원의 복습이 빠졌을 수 있음).'});
     checkKatexBalance(sec, tag, msgs);
   });
   if(parsed.step4_final_review){
-    var fr = parsed.step4_final_review;
-    if(!(fr.ox_quizzes||[]).length && !(fr.conceptual_questions||[]).length)
-      msgs.push({level:'warn', text:'step4_final_review가 비어 있습니다.'});
+    msgs.push({level:'warn', text:'step4_final_review 키는 더 이상 쓰지 않습니다 — ox/conceptual 항목은 각 섹션의 step3_checkpoint 안에 type으로 넣어야 합니다. 이 필드는 무시되고 병합되지 않습니다.'});
   }
   if(!msgs.some(function(m){return m.level==='err';}))
     msgs.push({level:'ok', text:'섹션 '+flow.length+'개 인식됨: '+flow.map(function(s){return s.section_title;}).join(', ')});
@@ -214,8 +208,7 @@ function addItem(raw, labelHint){
     var v = validateItem(parsed);
     var label = labelHint;
     if(!label){
-      if(v.kind==='review') label = '최종복습';
-      else label = (parsed.learning_flow||[]).map(function(s){return s.section_title;}).join(' / ') || ('항목 '+uid);
+      label = (parsed.learning_flow||[]).map(function(s){return s.section_title;}).join(' / ') || ('항목 '+uid);
     }
     items.push({id:id, raw:raw, parsed:parsed, kind:v.kind, msgs:v.msgs, label:label});
   }
@@ -243,7 +236,7 @@ function renderSlots(){
   el.innerHTML = items.map(function(it, idx){
     var lvl = worstLevel(it.msgs);
     var badgeTxt = lvl==='err' ? '오류' : (lvl==='warn' ? '경고' : '정상');
-    var kindTxt = {review:'최종복습', section:'섹션/챕터', invalid:'파싱 실패', unknown:'형식 불명'}[it.kind] || it.kind;
+    var kindTxt = {section:'섹션/챕터', invalid:'파싱 실패', unknown:'형식 불명'}[it.kind] || it.kind;
     return '<div class="slot">' +
       '<div class="slot-head">' +
         '<div><span class="handle">#'+(idx+1)+'</span> <b>'+esc(it.label)+'</b> <span class="hint">('+kindTxt+')</span></div>' +
@@ -295,27 +288,20 @@ function cmpKey(a,b){
 
 function doMerge(){
   var valid = items.filter(function(it){ return worstLevel(it.msgs) !== 'err'; });
-  var chapterInfo = null, flow = [], reviewOx = [], reviewCq = [];
+  var chapterInfo = null, flow = [];
   valid.forEach(function(it){
-    if(it.kind === 'review'){
-      reviewOx = reviewOx.concat(it.parsed.ox_quizzes || []);
-      reviewCq = reviewCq.concat(it.parsed.conceptual_questions || []);
-    } else if(it.kind === 'section'){
+    if(it.kind === 'section'){
       if(!chapterInfo && it.parsed.chapter_info) chapterInfo = it.parsed.chapter_info;
       (it.parsed.learning_flow || []).forEach(function(s){ flow.push(s); });
-      if(it.parsed.step4_final_review){
-        reviewOx = reviewOx.concat(it.parsed.step4_final_review.ox_quizzes || []);
-        reviewCq = reviewCq.concat(it.parsed.step4_final_review.conceptual_questions || []);
-      }
     }
   });
   // 소단원 번호 기준 정렬(제목에서 "7.2" 같은 패턴을 추출)
   flow.sort(function(a,b){ return cmpKey(numKey(a.section_title), numKey(b.section_title)); });
 
+  // 각 섹션의 ox/conceptual은 이미 step3_checkpoint 안에 들어있으므로 별도로 모을 것이 없다.
   var chapter = {
     chapter_info: chapterInfo || {title:"제목 미상 (직접 수정 필요)"},
-    learning_flow: flow,
-    step4_final_review: { ox_quizzes: reviewOx, conceptual_questions: reviewCq }
+    learning_flow: flow
   };
   return chapter;
 }

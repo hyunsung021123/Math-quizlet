@@ -35,9 +35,13 @@ Single IIFE, no framework. The parts worth knowing before touching it:
 - **Boot**: `boot()` → fetches `manifest.json` → `populateSelect()` groups the dropdown by each topic's
   `book` field → `loadTopic()` fetches that chapter's JSON into `state.data`.
 - **Card-deck engine**: `buildDeck()` flattens one chapter's `learning_flow` into a linear list of cards
-  (`cover` → `frame` (big picture) → one `concept` card per `step2_rigorous_logic` block → one `check` card
-  per `step3_checkpoint` item), and a separate `review` deck built from `step4_final_review`
-  (`ox_quizzes` + `conceptual_questions`). `renderCard()` renders `state.deck[state.cardIndex]`.
+  (`cover` → `frame` (big picture) → one `concept` card per `step2_rigorous_logic` block → one card per
+  `step3_checkpoint` item, dispatched by that item's `type` — `checkpoint`/`ox`/`conceptual` render as
+  `check`/`ox`/`cq` cards respectively). `renderCard()` renders `state.deck[state.cardIndex]`.
+- **Legacy final-review deck**: older chapters may still carry a chapter-level `step4_final_review`
+  (`ox_quizzes` + `conceptual_questions`) from before review questions were folded into `step3_checkpoint`.
+  `hasLegacyReview()` gates a separate "최종 복습" rail item and deck for those chapters only — new chapters
+  never have this key, so it doesn't appear for them.
 - **Seek bar**: the bottom progress bar (`#deckBar`/`#deckFill`/`#deckThumb`) supports click-to-jump and
   drag-to-scrub via pointer events (`goToIndex()`), not just prev/next.
 - **Visualization engine** (`viz_core`, inlined near the top of the `<script>`): renders SVG figures from
@@ -60,10 +64,20 @@ learning_flow: [
     step1_big_picture: { context, hidden_intuition, visualization? },
     step2_rigorous_logic: [ { type: Definition|Theorem|Lemma|Proposition|Corollary|Remark|Example,
                                name?, formal_statement, idea_behind_proof?, proof_steps?, visualization? } ],
-    step3_checkpoint: [ { problem, hint, solution, visualization? } ] }
+    step3_checkpoint: [
+      { type: "checkpoint" (default), problem, hint, solution, visualization? } |
+      { type: "ox", question, answer: "O"|"X", explanation } |
+      { type: "conceptual", question, hint, answer }
+    ] }
 ]
-step4_final_review: { ox_quizzes: [{question,answer,explanation}], conceptual_questions: [{question,hint,answer}] }
 ```
+
+There is no chapter-level `step4_final_review` anymore — each section's own `ox`/`conceptual` review items
+live inside that section's `step3_checkpoint`, generated together with it (see `pipeline/prompts/system_prompt.md`
+for why: accumulating review questions chapter-wide degraded quality as chapters grew). Merging a chapter is
+just concatenating its sections' `learning_flow` entries; there's no separate review-merge step. A handful of
+already-completed chapters predate this change and still carry a top-level `step4_final_review` — that's
+legacy-only (see `index.html`'s `hasLegacyReview()`), not a currently-supported way to author new content.
 
 All math is KaTeX (`$...$` / `$$...$$`); LaTeX backslashes must be double-escaped in the JSON strings.
 
@@ -90,9 +104,10 @@ Key architectural points (span multiple files, easy to miss):
   up to 3 preceding sections in the same chapter. Submitting sections out of order silently produces
   incomplete headers for later ones. `program2_track.py submit` warns (but doesn't block) when an earlier
   same-chapter section is still incomplete.
-- **A chapter is "complete" only once every section *and* the final-review JSON exist** in `chapter_raw/`
-  (`sections_complete()` / `try_finalize_chapter()` in `program2_track.py`). Completion auto-merges into
-  `data/<slug>.json` and updates `data/manifest.json` — this is the only code path that writes to `data/`.
+- **A chapter is "complete" once every one of its sections exists** in `chapter_raw/` (`sections_complete()` /
+  `try_finalize_chapter()` in `program2_track.py`) — there is no separate final-review submission to wait for.
+  Completion auto-merges into `data/<slug>.json` and updates `data/manifest.json` — this is the only code
+  path that writes to `data/`.
 - **Validation** (`lib/merger.py`) is a Python port of the original browser tool `pipeline/section_merger.html`
   (kept in the repo for manual/offline use) — both must stay consistent, e.g. the `VIZ_WHITELIST` and the
   requirement that `manifest` entries carry a `book` field.

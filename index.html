@@ -919,20 +919,24 @@ p.prose{ margin:0; }
                '</button>' +
              '</div>';
     }).join('');
-    var reviewActive = state.view.type==='review';
-    var reviewComplete = !!cm['review'];
-    if(reviewComplete) doneCount++;
-    var review = '<div class="rail-item rail-review' + (reviewActive?' active':'') + (reviewComplete?' complete':'') + '">' +
-                   '<button class="rail-item-nav" data-goto="review">' +
-                     '<span class="rail-num">&#10022;</span>' +
-                     '<span class="rail-label">최종 복습</span>' +
-                   '</button>' +
-                   '<button class="rail-check' + (reviewComplete?' is-done':'') + '" data-complete="review" ' +
-                     'aria-pressed="' + (reviewComplete?'true':'false') + '" title="학습 완료 체크" aria-label="최종 복습 완료 체크">' +
-                     CHECK_ICON +
-                   '</button>' +
-                 '</div>';
-    var total = secs.length + 1;
+    var legacyReview = hasLegacyReview(d);
+    var review = '';
+    if(legacyReview){
+      var reviewActive = state.view.type==='review';
+      var reviewComplete = !!cm['review'];
+      if(reviewComplete) doneCount++;
+      review = '<div class="rail-item rail-review' + (reviewActive?' active':'') + (reviewComplete?' complete':'') + '">' +
+                     '<button class="rail-item-nav" data-goto="review">' +
+                       '<span class="rail-num">&#10022;</span>' +
+                       '<span class="rail-label">최종 복습</span>' +
+                     '</button>' +
+                     '<button class="rail-check' + (reviewComplete?' is-done':'') + '" data-complete="review" ' +
+                       'aria-pressed="' + (reviewComplete?'true':'false') + '" title="학습 완료 체크" aria-label="최종 복습 완료 체크">' +
+                       CHECK_ICON +
+                     '</button>' +
+                   '</div>';
+    }
+    var total = secs.length + (legacyReview ? 1 : 0);
     railEl.innerHTML =
       '<div class="rail-inner">' +
         '<div class="rail-title-row">' +
@@ -940,7 +944,7 @@ p.prose{ margin:0; }
           '<div class="rail-progress"><b>' + doneCount + '</b>/' + total + ' 완료</div>' +
         '</div>' +
         '<div class="rail-list">' + items + '</div>' +
-        '<div class="rail-sep"></div>' + review +
+        (legacyReview ? '<div class="rail-sep"></div>' + review : '') +
       '</div>';
     var newInner = railEl.querySelector('.rail-inner');
     if(newInner && prevScroll) newInner.scrollLeft = prevScroll;
@@ -971,9 +975,18 @@ p.prose{ margin:0; }
 
   /* =========================================================================
      Card deck engine — 한 번에 한 장씩. 좌우로 넘기며 학습.
-     한 절(section)의 카드 = [표지(0절만)] → 숲 보기 → 개념들 → 체크포인트.
-     최종 복습 덱 = O/X 카드들 → 개념 질문 카드들.
+     한 절(section)의 카드 = [표지(0절만)] → 숲 보기 → 개념들 → 체크포인트
+     (체크포인트 안에는 문제 카드뿐 아니라 그 절의 O/X 퀴즈·개념 질문도 `type` 필드로
+     구분되어 함께 들어있다 — 절이 끝날 때마다 그 절의 복습까지 바로 이어진다).
+     구방식으로 만들어진 챕터(레거시)에만 존재하는 `step4_final_review`는 별도의
+     "최종 복습" 덱으로 계속 지원한다 — 새 챕터는 이 키 자체가 없다.
      ========================================================================= */
+
+  /* 레거시 챕터 전용: 챕터 최상위에 남아있는 step4_final_review에 내용이 있는가 */
+  function hasLegacyReview(d){
+    var fr = (d && d.step4_final_review) || {};
+    return !!((fr.ox_quizzes && fr.ox_quizzes.length) || (fr.conceptual_questions && fr.conceptual_questions.length));
+  }
 
   function head(badge, cls, eyebrow, name){
     return '<span class="step-badge' + (cls ? ' ' + cls : '') + '">' + badge + '</span>' +
@@ -1002,7 +1015,12 @@ p.prose{ margin:0; }
     if(i === 0) deck.push({ k:'cover' });
     deck.push({ k:'frame', bp: sec.step1_big_picture || {} });
     (sec.step2_rigorous_logic || []).forEach(function(b){ deck.push({ k:'concept', block:b }); });
-    (sec.step3_checkpoint || []).forEach(function(c,idx){ deck.push({ k:'check', c:c, idx:idx }); });
+    (sec.step3_checkpoint || []).forEach(function(c,idx){
+      var t = c.type || 'checkpoint';
+      if(t === 'ox') deck.push({ k:'ox', q:c, idx:idx });
+      else if(t === 'conceptual') deck.push({ k:'cq', q:c, idx:idx });
+      else deck.push({ k:'check', c:c, idx:idx });
+    });
     return deck;
   }
 
@@ -1138,13 +1156,15 @@ p.prose{ margin:0; }
     var secs = (state.data && state.data.learning_flow) || [];
     var i = state.view.index, total = secs.length;
     var atLast = pos >= len - 1;
+    var legacyReview = hasLegacyReview(state.data);
+    var isLastSection = !isReview && i === total - 1;
     var hasPrev = !(!isReview && i === 0 && pos === 0);
-    var hasNext = !(isReview && atLast);
+    var hasNext = !(isReview && atLast) && !(isLastSection && atLast && !legacyReview);
     var nextLabel = '다음';
     if(atLast){
       if(isReview) nextLabel = '완료';
       else if(i < total - 1) nextLabel = '다음 단원';
-      else nextLabel = '최종 복습';
+      else nextLabel = legacyReview ? '최종 복습' : '완료';
     }
     return { len:len, pos:pos, isReview:isReview, i:i, total:total, atLast:atLast,
              hasPrev:hasPrev, hasNext:hasNext, nextLabel:nextLabel };
