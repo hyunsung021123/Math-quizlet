@@ -90,6 +90,9 @@ python pipeline/program1_split.py --pdf <책.pdf> --toc <toc_data.json> --offset
 - **오프셋**: `(그 페이지의 1-based PDF 쪽번호) − (그 페이지에 인쇄된 책 쪽수)`. 실행 시 사용자가 알려줍니다.
 - 산출물: `work/<책>/sections_out/`(txt+pdf), `work/<책>/progress.md`, `work/<책>/state.json`,
   `work/<책>/toc_data.json` 사본, `work/<책>/_delivery/<책>_sections.zip`
+  - `sections_out/`에는 `.txt`(헤더 파싱·진행 트래커용 내부 상태)와 `.pdf`가 함께 생기지만,
+    사용자에게 전달되는 `_delivery/*.zip`에는 **`.pdf`만** 담긴다 — 헤더는 이제 `next_section.py`가
+    이전 소단원의 `chapter_raw/*.json`을 읽어 동적으로 만들어 주므로 `.txt`를 사용자가 볼 필요가 없다.
 - 로그 끝의 `⚠️⚠️⚠️` 경고(페이지 범위 누락 등)는 그대로 사용자에게 공지합니다.
 
 ## 프로그램 2 — 추적/수집/병합기

@@ -822,6 +822,23 @@ p.prose{ margin:0; }
     renderRail();
   }
 
+  /* ---------- last-position bookmark (persisted in localStorage) ----------
+     "어디까지 봤는지" 를 카드 하나 단위로 계속 기록해서, 다음에 사이트를 열면
+     (같은 브라우저 안에서는) 마지막으로 보던 카드로 자동으로 이어서 연다. */
+  var LASTPOS_KEY = 'pdl_lastpos_v1';
+  function loadLastPos(){
+    try{ return JSON.parse(localStorage.getItem(LASTPOS_KEY) || 'null'); }
+    catch(e){ return null; }
+  }
+  function saveLastPos(){
+    if(!state.topicId) return;
+    try{
+      localStorage.setItem(LASTPOS_KEY, JSON.stringify({
+        topicId: state.topicId, view: state.view, cardIndex: state.cardIndex
+      }));
+    }catch(e){ /* private mode / storage disabled — degrade silently */ }
+  }
+
   /* ---------- state screens ---------- */
   function renderState(kind, title, msg){
     if(deckNav) deckNav.hidden = true;
@@ -853,8 +870,14 @@ p.prose{ margin:0; }
     fetchJSON(DATA_DIR + 'manifest.json').then(function(manifest){
       state.topics = Array.isArray(manifest.topics) ? manifest.topics : [];
       populateSelect();
-      if(state.topics.length){ return loadTopic(state.topics[0].id); }
-      renderState('empty', '등록된 주제가 없습니다', 'data/manifest.json 의 topics 배열에 항목을 추가하세요.');
+      if(!state.topics.length){
+        renderState('empty', '등록된 주제가 없습니다', 'data/manifest.json 의 topics 배열에 항목을 추가하세요.');
+        return;
+      }
+      var last = loadLastPos();
+      var hasLastTopic = last && state.topics.some(function(t){ return t.id === last.topicId; });
+      if(hasLastTopic){ return loadTopic(last.topicId, last); }
+      return loadTopic(state.topics[0].id);
     }).catch(showLoadError);
   }
 
@@ -873,7 +896,7 @@ p.prose{ margin:0; }
     }).join('');
   }
 
-  function loadTopic(id){
+  function loadTopic(id, resume){
     var t = null;
     for(var i=0;i<state.topics.length;i++){ if(state.topics[i].id===id){ t=state.topics[i]; break; } }
     if(!t) return Promise.resolve();
@@ -882,10 +905,21 @@ p.prose{ margin:0; }
     return fetchJSON(DATA_DIR + t.file).then(function(data){
       state.topicId = id;
       state.data = data;
-      state.view = { type:'section', index:0 };
-      state.cardIndex = 0;
-      state.visited = new Set([0]);
       state.completedMap = loadCompletedStore()[id] || {};
+      var secs = data.learning_flow || [];
+      var view = { type:'section', index:0 };
+      var cardIndex = 0;
+      if(resume && resume.view){
+        if(resume.view.type === 'section' && resume.view.index >= 0 && resume.view.index < secs.length){
+          view = { type:'section', index: resume.view.index };
+        } else if(resume.view.type === 'review' && hasLegacyReview(data)){
+          view = { type:'review' };
+        }
+        if(typeof resume.cardIndex === 'number' && resume.cardIndex >= 0){ cardIndex = resume.cardIndex; }
+      }
+      state.view = view;
+      state.cardIndex = cardIndex;
+      state.visited = new Set([view.type==='section' ? view.index : 0]);
       renderRail();
       renderMain();
       window.scrollTo(0,0);
@@ -1042,6 +1076,7 @@ p.prose{ margin:0; }
       '</div>';
     typeset(mainEl);
     updateDeckNav();
+    saveLastPos();
     window.scrollTo({ top:0, behavior: prefersReduced() ? 'auto' : 'smooth' });
   }
 

@@ -8,7 +8,8 @@
   2) make_tracker 로 진행 체크리스트 생성                  → work/<책 슬러그>/progress.md
   3) work/<책 슬러그>/chapter_raw/ (완성 JSON 보관함) 준비
   4) 상태 메타(state.json) 및 toc_data.json 사본 기록
-  5) 전달용 zip 생성 (txt+pdf 전부)                        → work/<책 슬러그>/_delivery/<book>_sections.zip
+  5) 전달용 zip 생성 (pdf만 — .txt는 내부 상태로만 남고 사용자에게 전달하지 않음)
+                                                          → work/<책 슬러그>/_delivery/<book>_sections.zip
 
 여러 책을 동시에 다룰 수 있도록, 상태 폴더는 책마다 분리된다: work/<책 슬러그>/...
 책 슬러그는 toc_data.json의 "book" 필드(또는 --book-name)에서 만든다(lib/merger.slug_id).
@@ -23,7 +24,7 @@
         --offset-override '{"App.A": 13}'
 """
 
-import os, sys, json, shutil, argparse
+import os, sys, json, shutil, argparse, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(HERE)
@@ -88,9 +89,13 @@ def run(pdf, toc, offset, offset_overrides=None, work_dir=None, book_name=None):
     with open(os.path.join(work_dir, "state.json"), "w", encoding="utf-8") as f:
         json.dump(state, f, ensure_ascii=False, indent=2)
 
-    # --- 4) 전달용 zip (txt+pdf 전부) ---
+    # --- 4) 전달용 zip (pdf만 — .txt는 헤더 동적 생성용 내부 상태일 뿐 사용자에게는 불필요) ---
     zip_stem = slug_id(book) + "_sections"
-    zip_path = shutil.make_archive(os.path.join(delivery, zip_stem), "zip", sections_out)
+    zip_path = os.path.join(delivery, zip_stem + ".zip")
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for name in sorted(os.listdir(sections_out)):
+            if name.endswith(".pdf"):
+                zf.write(os.path.join(sections_out, name), name)
 
     n_pdf = len([f for f in os.listdir(sections_out) if f.endswith(".pdf")])
     n_txt = len([f for f in os.listdir(sections_out) if f.endswith(".txt")])
