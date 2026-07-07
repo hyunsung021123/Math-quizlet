@@ -104,10 +104,12 @@ Key architectural points (span multiple files, easy to miss):
   up to 3 preceding sections in the same chapter. Submitting sections out of order silently produces
   incomplete headers for later ones. `program2_track.py submit` warns (but doesn't block) when an earlier
   same-chapter section is still incomplete.
-- **A chapter is "complete" once every one of its sections exists** in `chapter_raw/` (`sections_complete()` /
-  `try_finalize_chapter()` in `program2_track.py`) — there is no separate final-review submission to wait for.
-  Completion auto-merges into `data/<slug>.json` and updates `data/manifest.json` — this is the only code
-  path that writes to `data/`.
+- **`data/<slug>.json` is republished on every `submit`/`undo`, not just on completion**: `publish_chapter()` in
+  `program2_track.py` merges whatever sections currently exist in `chapter_raw/` for that chapter — even just
+  the first one — and overwrites the same `data/<slug>.json` + `data/manifest.json` each time (this is the only
+  code path that writes to `data/`). `sections_complete()` only decides whether the result counts as
+  `status: "merged"` (chapter fully done) vs `"partial"` (still missing sections) for the CLI's `[[PUBLISHED ...]]`
+  marker — there's no separate final-review submission to wait for and no separate "completion" file.
 - **Validation** (`lib/merger.py`) is a Python port of the original browser tool `pipeline/section_merger.html`
   (kept in the repo for manual/offline use) — both must stay consistent, e.g. the `VIZ_WHITELIST` and the
   requirement that `manifest` entries carry a `book` field.

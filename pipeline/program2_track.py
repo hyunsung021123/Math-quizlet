@@ -10,10 +10,12 @@
   · status      : 챕터별 진행 현황 요약
   · merge       : 특정 챕터를 강제로 병합해 data/ 에 반영(보통은 submit 이 자동 처리)
 
-챕터 '완료' 기준: 그 챕터의 모든 소단원 JSON이 갖춰지면 완료다. 최종복습을 위한 별도 JSON은 더 이상
-없다 — 복습(ox/conceptual) 문제는 system_prompt.md 의 새 규칙에 따라 각 소단원 JSON 자신의
-step3_checkpoint 안에 이미 들어있으므로, 소단원들을 이어붙이는 것 자체가 곧 챕터 완성본이다.
-완료 시: 병합본을 data/<slug>.json 으로 쓰고 data/manifest.json 을 갱신한다.
+즉시 반영: submit 할 때마다(완료 여부와 무관하게) 그 챕터에 지금까지 존재하는 소단원만으로
+data/<slug>.json 을 곧바로 갱신하고 manifest.json 에 등록한다 — 챕터의 첫 소단원만 있어도 그 순간부터
+사이트에서 열람 가능하다. 최종복습을 위한 별도 JSON은 없다 — 복습(ox/conceptual) 문제는
+system_prompt.md 의 새 규칙에 따라 각 소단원 JSON 자신의 step3_checkpoint 안에 이미 들어있으므로,
+지금까지 만들어진 소단원들을 이어붙이는 것 자체가 그 시점의 최신본이고, 챕터가 다 갖춰지면 같은 파일이
+그대로 완성본이 된다(별도 '완료 단계'가 파일을 새로 만들지 않는다).
         (git commit/push 와 사용자 전송은 오케스트레이터(Claude)가 담당 — 이 스크립트는 파일만 만든다.)
 
 검증은 section_merger.html 규칙을 그대로 이식한 lib/merger.py 를 쓴다.
@@ -168,21 +170,24 @@ def _count_review_items(flow):
     return n_check, n_ox, n_cq
 
 
-def try_finalize_chapter(P, chno):
-    """그 챕터의 소단원이 모두 준비됐으면 병합해 data/ 에 반영한다(최종복습 단계는 없다 —
-    각 소단원 JSON 자신의 step3_checkpoint 안에 그 소단원 몫의 ox/conceptual이 이미 들어있다).
-    반환 dict: {"status": "merged"|"incomplete", ...}"""
+def publish_chapter(P, chno):
+    """그 챕터에 '지금까지' chapter_raw/ 에 실제로 존재하는 소단원만으로 data/ 를 즉시 갱신한다.
+    챕터가 다 갖춰지길 기다리지 않는다 — 첫 소단원 하나만 있어도 그 순간부터 사이트에서 보이도록,
+    매 submit/undo 후 항상 호출된다. 완료 여부는 결과의 "status"로만 구분한다
+    (완료="merged", 진행 중="partial", 아직 하나도 없음="empty") — 파일 자체는 같은 경로를
+    그대로 덮어써서 갱신할 뿐, 완료 시 별도 파일을 새로 만들지 않는다.
+    반환 dict: {"status": "merged"|"partial"|"empty", ...}"""
     rows = N.load_rows(P["progress"])
-    done, crows, missing = sections_complete(P, rows, chno)
-    if not done:
-        return {"status": "incomplete", "missing": [f"{r['seq']} {r['section']}" for r in missing]}
-
+    crows = chapter_rows(rows, chno)
     items = []
     for r in crows:
         stem = re.sub(r'\.txt$', '', r["file"], flags=re.I)
         jp = os.path.join(P["raw"], stem + ".json")
-        with open(jp, encoding="utf-8") as f:
-            items.append({"kind": "section", "parsed": json.load(f)})
+        if os.path.exists(jp):
+            with open(jp, encoding="utf-8") as f:
+                items.append({"kind": "section", "parsed": json.load(f)})
+    if not items:
+        return {"status": "empty"}
 
     chapter = M.merge(items)
     title = chapter.get("chapter_info", {}).get("title") or f"Chapter {chno}"
@@ -194,10 +199,14 @@ def try_finalize_chapter(P, chno):
 
     manifest_changed = update_manifest(P, cid, title, cid + ".json")
     n_check, n_ox, n_cq = _count_review_items(chapter.get("learning_flow", []))
-    return {"status": "merged", "file": out_file, "id": cid, "title": title,
+    done, _, missing = sections_complete(P, rows, chno)
+    return {"status": "merged" if done else "partial",
+            "file": out_file, "id": cid, "title": title,
             "manifest_changed": manifest_changed,
             "n_sections": len(chapter.get("learning_flow", [])),
-            "n_check": n_check, "n_ox": n_ox, "n_cq": n_cq}
+            "n_total": len(crows),
+            "n_check": n_check, "n_ox": n_ox, "n_cq": n_cq,
+            "missing": [f"{r['seq']} {r['section']}" for r in missing]}
 
 
 def update_manifest(P, cid, title, filename):
@@ -307,21 +316,25 @@ def _earlier_incomplete(rows, row):
 
 
 def _after_change(P, chno):
-    """저장 후: 챕터 완료 여부 점검 + 다음 작업 안내."""
+    """저장 후: 지금까지의 소단원만으로 data/ 즉시 갱신 + 다음 작업 안내.
+    챕터가 아직 안 끝났어도(status=="partial") 매번 이 갱신이 일어난다 — 첫 소단원만 있어도
+    바로 사이트에서 보이게 하기 위함. status=="merged"일 때만 '완료' 배너를 띄운다."""
     if chno:
-        res = try_finalize_chapter(P, chno)
+        res = publish_chapter(P, chno)
         print("\n" + "-" * 56)
-        if res["status"] == "merged":
-            print(f"🎉 챕터 {chno} 완료 · 병합본 생성!")
+        if res["status"] in ("merged", "partial"):
+            complete = res["status"] == "merged"
+            print(("🎉 챕터 " + str(chno) + " 완료 · 최종본 갱신!") if complete
+                  else (f"📤 챕터 {chno} 진행 중 — 지금까지 만든 소단원 {res['n_sections']}/{res['n_total']}개를 사이트에 바로 반영"))
             print(f"   · 제목: {res['title']}")
             print(f"   · 파일: {res['file']}")
-            print(f"   · 소단원 {res['n_sections']}개 (체크포인트 {res['n_check']}개 · OX {res['n_ox']}개 · 개념질문 {res['n_cq']}개)")
+            print(f"   · 지금까지 소단원 {res['n_sections']}개 (체크포인트 {res['n_check']}개 · OX {res['n_ox']}개 · 개념질문 {res['n_cq']}개)")
             print(f"   · manifest {'갱신됨' if res['manifest_changed'] else '변화 없음'}")
-            print("   → 오케스트레이터가 data/ 변경을 dev 에 커밋·푸시하고 병합본을 전송합니다.")
-            print(f"   [[MERGED chapter={chno} file={res['file']} id={res['id']}]]")
-        else:
-            miss = ", ".join(res.get("missing", [])[:6])
-            print(f"챕터 {chno} 진행 중 — 남은 소단원: {miss}")
+            if not complete:
+                miss = ", ".join(res.get("missing", [])[:6])
+                print(f"   · 아직 안 만든 소단원: {miss}")
+            print("   → 오케스트레이터가 data/ 변경을 dev 에 커밋·푸시하고 최신본을 전송합니다.")
+            print(f"   [[PUBLISHED chapter={chno} file={res['file']} id={res['id']} status={res['status']}]]")
         print("-" * 56)
     print()
     N.show_next(P["sections"], P["progress"], raw_dir=P["raw"])
@@ -329,7 +342,16 @@ def _after_change(P, chno):
 
 # ----------------------------- 명령: undo -----------------------------
 def cmd_undo(P, seq):
+    rows = N.load_rows(P["progress"])
+    row = next((r for r in rows if r["seq"] == str(seq).zfill(len(rows[0]["seq"])) or r["seq"] == str(seq)), None)
+    chno = _chapter_no(row["chapter"]) if row else None
     N.mark_undone(P["progress"], seq, raw_dir=P["raw"], delete_json=True)
+    if chno:
+        res = publish_chapter(P, chno)
+        if res["status"] in ("merged", "partial"):
+            print(f"↺ 되돌린 뒤 data/ 도 다시 갱신했습니다 — 지금까지 소단원 {res['n_sections']}/{res['n_total']}개.")
+        elif res["status"] == "empty":
+            print("ℹ 이 챕터의 소단원이 모두 없어져 data/ 는 그대로 남아 있습니다(자동 삭제하지 않음).")
     print()
     N.show_next(P["sections"], P["progress"], raw_dir=P["raw"])
 
@@ -354,7 +376,7 @@ def cmd_status(P):
 
 # ----------------------------- 명령: merge (수동) -----------------------------
 def cmd_merge(P, chapter):
-    res = try_finalize_chapter(P, str(chapter))
+    res = publish_chapter(P, str(chapter))
     print(json.dumps(res, ensure_ascii=False, indent=2))
 
 
