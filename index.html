@@ -119,12 +119,13 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 @media (max-width:400px){ .topic-select{ max-width:48vw; } }
 
 /* ---------- Sticky header + ink strip, stuck together as one unit ---------- */
-:root{ --sticky-h: 195px; } /* 대략값 — 레이아웃 후 JS가 정확히 다시 계산해 덮어쓴다 */
+:root{ --sticky-h: 108px; } /* 대략값 — 레이아웃 후 JS가 정확히 다시 계산해 덮어쓴다 */
 .sticky-top{ position:sticky; top:0; z-index:50; }
 
 /* ---------- Ink / handwriting (펜 필기) ----------
-   심층 학습 노트/주제 선택 줄 바로 아래에 붙는 가로줄 형태의 고정 메모 영역. 카드 위에 겹치지
-   않으므로 카드 본문을 절대 가리지 않는다. */
+   도구줄은 심층 학습 노트/주제 선택 줄 바로 아래 고정된 가로줄(.ink-strip)에 있고, 실제로
+   그리는 캔버스는 이전처럼 지금 보이는 카드 위에 정확히 겹쳐서(position:absolute) 생긴다
+   (attach()가 renderCard() 직후 카드에 붙인다). */
 .pen-toggle-btn{
   flex:0 0 auto; width:34px; height:34px; border-radius:9px; padding:0;
   display:grid; place-items:center; cursor:pointer;
@@ -135,16 +136,13 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 .pen-toggle-btn svg{ width:17px; height:17px; }
 .pen-toggle-btn.is-on{ background:var(--primary-soft); border-color:var(--primary); color:var(--primary); }
 
-/* 삼성 노트처럼 도구줄은 위, 캔버스는 그 아래 — 세로로 쌓는다(도구줄을 좁은 세로 칸에
-   가로로 욱여넣으면 넘쳐서 캔버스를 침범한다, 이전 버그). */
 .ink-strip{
-  display:flex; flex-direction:column; height:132px;
   background:rgba(244,246,241,.94); backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
 .ink-toolbar{
-  flex:0 0 auto; display:flex; flex-direction:row; align-items:center; gap:10px;
-  padding:6px 12px; border-bottom:1px solid var(--line); overflow-x:auto;
+  display:flex; flex-direction:row; align-items:center; gap:10px;
+  padding:6px 12px; overflow-x:auto;
 }
 .ink-sep{ flex:0 0 auto; width:1px; align-self:stretch; background:var(--line); }
 .ink-swatches, .ink-widths{ display:flex; flex-direction:row; align-items:center; gap:6px; flex:0 0 auto; }
@@ -179,12 +177,8 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   border-radius:7px; padding:9px 10px; cursor:pointer;
 }
 .ink-trash-menu button:hover{ background:var(--surface-2); }
-.ink-canvas{
-  flex:1 1 auto; min-height:0; min-width:0; display:block; width:100%; height:100%;
-  cursor:crosshair; touch-action:none;
-}
+.ink-canvas{ position:absolute; left:0; top:0; cursor:crosshair; touch-action:none; }
 @media (max-width:640px){
-  .ink-strip{ height:104px; }
   .ink-toolbar{ gap:7px; padding:5px 8px; }
   .ink-swatch{ width:16px; height:16px; }
   .ink-width{ width:18px; height:16px; }
@@ -558,7 +552,6 @@ p.prose{ margin:0; }
       </div>
     </div>
   </div>
-  <canvas class="ink-canvas" id="inkCanvas"></canvas>
 </div>
 </div>
 
@@ -1164,15 +1157,20 @@ p.prose{ margin:0; }
   })();
 
   /* ---------- ink / handwriting (펜 필기, 삼성 노트 스타일 펜/손가락 구분) ----------
-     심층 학습 노트 제목·주제 선택 줄 바로 아래 붙는 고정 가로줄(.ink-strip) 안의 <canvas> 하나로
-     필기를 받는다 — 카드 위에 겹치지 않으므로 카드 본문을 가리지 않는다. 획은 그 캔버스 좌표에
-     대한 0~1 정규화 비율로 저장하므로 화면 크기가 달라져도 항상 같은 상대 위치로 다시 그려진다.
+     도구줄(색상·두께·지우개·되돌리기·휴지통)은 심층 학습 노트 제목·주제 선택 줄 바로 아래 붙는
+     고정 가로줄(.ink-strip)에 있다. 실제로 그리는 <canvas>는 지금 보이는 카드 위에 정확히
+     겹치도록(position:absolute) attach()가 renderCard() 직후 그 카드에 붙인다 — 카드가 바뀔
+     때마다 새 카드로 옮겨 붙고, 카드 전체 높이(스크롤 포함)만큼 리사이즈된다. 획은 카드 좌표에
+     대한 0~1 정규화 비율로 저장하므로 카드 크기가 달라져도(접기/펼치기, 회전, 다른 기기) 항상
+     같은 상대 위치로 다시 그려진다.
 
      펜/손가락/마우스 구분(삼성 노트 방식):
        - 펜(pointerType 'pen')은 항상 필기, 마우스는 항상 필기(펜이 없는 PC를 대신함).
        - 손가락(touch)은, 이 세션에서 실제 펜 입력을 한 번이라도 감지하기 전까지는(=아직 폰/PC로
          간주) 필기하고, 펜을 한 번이라도 쓰면(=태블릿으로 간주) 그 뒤로는 스크롤로 취급한다.
-       - 상단 📖 버튼(책보기 모드)을 켜면 모든 입력이 스크롤로 취급된다(필기 없이 훑어보기용).
+       - 상단 📖 버튼(책보기 모드)을 켜면 모든 입력이 스크롤/탭으로 취급된다(필기 없이 훑어보기·
+         카드 안의 버튼 누르기용 — 캔버스가 카드 전체를 덮으므로, 스크롤이 아니라 제자리를 살짝
+         두드리기만 한 "탭"은 캔버스 밑 실제 버튼으로 클릭을 그대로 전달한다).
      캔버스는 touch-action:none 을 고정해 두고, "스크롤이어야 하는" 포인터는 우리가 직접
      window.scrollBy 로 스크롤을 흉내낸다 — 브라우저 touch-action 은 포인터 타입별로 나눠 줄 수
      없어서, 펜은 막고 손가락만 통과시키는 걸 CSS만으로는 안정적으로 구현할 수 없기 때문이다.
@@ -1188,7 +1186,7 @@ p.prose{ margin:0; }
     var bookMode = false, erasing = false;
     var color = '#1B2333', penWidth = 4;
     var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null;
-    var scrollPointerId = null, lastScrollY = 0;
+    var scrollPointerId = null, lastScrollY = 0, scrollStartX = 0, scrollStartY = 0, scrollMoved = false;
     var penEverSeen = false;
     var dpr = window.devicePixelRatio || 1;
 
@@ -1233,9 +1231,15 @@ p.prose{ margin:0; }
     }
 
     function resize(){
-      if(!canvas) return;
-      var rect = canvas.getBoundingClientRect();
-      var w = Math.max(1, rect.width), h = Math.max(1, rect.height);
+      var card = canvas && canvas.parentElement;
+      if(!card) return;
+      // 측정 전에 캔버스 자신을 0으로 줄여 둔다 — 안 그러면 이전 카드에서 물려받은(더 클 수도 있는)
+      // 캔버스 크기가 이 카드의 scrollHeight 측정치를 오염시켜, 키가 절대 줄어들지 않는 버그가 난다.
+      canvas.style.width = '0px';
+      canvas.style.height = '0px';
+      var w = Math.max(1, card.clientWidth), h = Math.max(1, card.scrollHeight);
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
       canvas.width = Math.max(1, Math.round(w * dpr));
       canvas.height = Math.max(1, Math.round(h * dpr));
       ctx = canvas.getContext('2d');
@@ -1307,6 +1311,7 @@ p.prose{ margin:0; }
       if(!shouldDraw(ev.pointerType)){
         scrollPointerId = ev.pointerId;
         lastScrollY = ev.clientY;
+        scrollStartX = ev.clientX; scrollStartY = ev.clientY; scrollMoved = false;
         try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
         return;
       }
@@ -1328,6 +1333,7 @@ p.prose{ margin:0; }
     function onPointerMove(ev){
       if(scrollPointerId === ev.pointerId){
         var dy = ev.clientY - lastScrollY;
+        if(Math.abs(ev.clientX - scrollStartX) > 6 || Math.abs(ev.clientY - scrollStartY) > 6) scrollMoved = true;
         window.scrollBy(0, -dy);
         lastScrollY = ev.clientY;
         return;
@@ -1354,6 +1360,14 @@ p.prose{ margin:0; }
       if(scrollPointerId === ev.pointerId){
         try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
         scrollPointerId = null;
+        if(!scrollMoved){
+          // 드래그가 아니라 탭이었다 — 캔버스가 가리고 있는 실제 버튼(펼치기 등)으로 클릭을 넘겨준다.
+          var x = ev.clientX, y = ev.clientY;
+          canvas.style.pointerEvents = 'none';
+          var el = document.elementFromPoint(x, y);
+          canvas.style.pointerEvents = 'auto';
+          if(el) el.click();
+        }
         return;
       }
       if(!drawing) return;
@@ -1416,14 +1430,23 @@ p.prose{ margin:0; }
       if(el) document.documentElement.style.setProperty('--sticky-h', el.offsetHeight + 'px');
     }
 
-    function init(){
-      canvas = document.getElementById('inkCanvas');
-      if(!canvas) return;
+    function createCanvasEl(){
+      canvas = document.createElement('canvas');
+      canvas.className = 'ink-canvas';
       canvas.addEventListener('pointerdown', onPointerDown);
       canvas.addEventListener('pointermove', onPointerMove);
       canvas.addEventListener('pointerup', onPointerUp);
       canvas.addEventListener('pointercancel', onPointerUp);
+    }
 
+    function observeCard(card){
+      if(ro) ro.disconnect();
+      if(typeof ResizeObserver === 'undefined') return;
+      ro = new ResizeObserver(function(){ resize(); redraw(); });
+      ro.observe(card);
+    }
+
+    function init(){
       var toggleBtn = document.getElementById('penToggleBtn');
       if(toggleBtn) toggleBtn.addEventListener('click', function(){ setBookMode(!bookMode); });
 
@@ -1462,16 +1485,17 @@ p.prose{ margin:0; }
 
       updateToolbarUI();
       updateStickyOffset();
-      resize();
-      redraw();
-      if(typeof ResizeObserver !== 'undefined'){
-        ro = new ResizeObserver(function(){ resize(); redraw(); });
-        ro.observe(canvas);
-      }
       window.addEventListener('resize', function(){ updateStickyOffset(); resize(); redraw(); });
     }
 
-    function attach(){ redraw(); }
+    function attach(){
+      if(!canvas) createCanvasEl();
+      var card = mainEl.querySelector('.card');
+      if(!card){ if(canvas.parentElement) canvas.remove(); return; }
+      card.style.position = 'relative';
+      card.appendChild(canvas);
+      requestAnimationFrame(function(){ resize(); redraw(); observeCard(card); });
+    }
 
     return { init: init, attach: attach };
   })();
