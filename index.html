@@ -83,6 +83,40 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 }
 .topic-label.hide-sm{}
 @media (max-width:520px){ .topic-label{ display:none; } }
+
+/* GitHub sync */
+.gh-sync-btn{
+  flex:0 0 auto; width:34px; height:34px; border-radius:9px; padding:0;
+  display:grid; place-items:center; cursor:pointer;
+  border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-faint);
+  transition:color .15s,border-color .15s;
+}
+.gh-sync-btn:hover{ color:var(--ink); }
+.gh-sync-btn svg{ width:17px; height:17px; }
+.gh-sync-btn.is-on{ color:var(--ok); border-color:#BFE0CD; background:var(--ok-bg); }
+.gh-sync-btn.is-err{ color:var(--no); border-color:#E9C6C0; background:var(--no-bg); }
+.gh-modal-overlay{
+  position:fixed; inset:0; background:rgba(20,24,35,.42); z-index:100;
+  align-items:center; justify-content:center; padding:20px;
+}
+.gh-modal-overlay:not([hidden]){ display:flex; }
+.gh-modal{
+  width:100%; max-width:440px; background:var(--surface); border-radius:14px;
+  border:1px solid var(--line); box-shadow:0 12px 40px rgba(20,24,35,.22);
+  padding:22px 22px 18px;
+}
+.gh-modal-title{ font-family:var(--serif); font-weight:700; font-size:1.08rem; color:var(--ink); }
+.gh-modal-desc{ margin-top:10px; font-size:.85rem; line-height:1.65; color:var(--ink-soft); }
+.gh-modal-desc code{ font-family:var(--mono); font-size:.85em; background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:1px 5px; }
+.gh-modal-warn{ margin-top:10px; font-size:.8rem; line-height:1.6; color:#7C5514; background:var(--insight-bg); border:1px solid #EDDCB4; border-radius:8px; padding:9px 11px; }
+.gh-token-input{
+  margin-top:14px; width:100%; font-family:var(--mono); font-size:.85rem;
+  border:1px solid var(--line-strong); border-radius:9px; padding:9px 11px; color:var(--ink);
+}
+.gh-modal-actions{ margin-top:16px; display:flex; justify-content:flex-end; gap:8px; }
+.gh-modal-status{ margin-top:10px; font-size:.82rem; min-height:1.2em; }
+.gh-modal-status.ok{ color:var(--ok); }
+.gh-modal-status.err{ color:var(--no); }
 @media (max-width:400px){ .topic-select{ max-width:48vw; } }
 
 /* ---------- Layout ---------- */
@@ -396,8 +430,35 @@ p.prose{ margin:0; }
   <div class="topic-wrap">
     <span class="topic-label">주제</span>
     <select id="topicSelect" class="topic-select" aria-label="학습 주제 선택"></select>
+    <button class="gh-sync-btn" id="ghSyncBtn" type="button" title="GitHub 동기화 설정" aria-label="GitHub 동기화 설정">
+      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+    </button>
   </div>
 </header>
+
+<div class="gh-modal-overlay" id="ghModalOverlay" hidden>
+  <div class="gh-modal">
+    <div class="gh-modal-title">GitHub 동기화</div>
+    <p class="gh-modal-desc">
+      체크박스·마지막으로 보던 카드 위치를 이 브라우저뿐 아니라 <strong>GitHub 저장소</strong>에도 저장해,
+      다른 기기·브라우저에서도 이어서 볼 수 있게 합니다. 읽기는 토큰 없이도 항상 동작하고,
+      쓰기(저장)만 아래 토큰이 있어야 동작합니다.
+    </p>
+    <p class="gh-modal-warn">
+      GitHub → Settings → Developer settings → Fine-grained personal access tokens 에서
+      <strong>이 저장소(<code>hyunsung021123/Math-quizlet</code>) 하나에만</strong>,
+      권한은 <strong>Contents: Read and write</strong> 하나만 준 토큰을 만들어 붙여넣으세요.
+      토큰은 이 브라우저의 localStorage에만 저장되고 코드로 전송되지 않지만, 공유 컴퓨터에서는 사용을 피하세요.
+    </p>
+    <input type="password" class="gh-token-input" id="ghTokenInput" placeholder="github_pat_... 붙여넣기" autocomplete="off" spellcheck="false">
+    <div class="gh-modal-actions">
+      <button class="btn ghost" id="ghModalClear" type="button">연결 해제</button>
+      <button class="btn ghost" id="ghModalClose" type="button">닫기</button>
+      <button class="btn" id="ghModalSave" type="button">저장</button>
+    </div>
+    <div class="gh-modal-status" id="ghModalStatus"></div>
+  </div>
+</div>
 
 <div class="layout">
   <aside class="rail" id="rail"></aside>
@@ -820,6 +881,7 @@ p.prose{ margin:0; }
     saveCompletedStore(store);
     state.completedMap = m;
     renderRail();
+    ghSync.scheduleSave();
   }
 
   /* ---------- last-position bookmark (persisted in localStorage) ----------
@@ -838,6 +900,142 @@ p.prose{ margin:0; }
       }));
     }catch(e){ /* private mode / storage disabled — degrade silently */ }
   }
+
+  /* ---------- GitHub sync (optional cross-device backup of the two localStorage stores above) ----------
+     localStorage는 브라우저·기기마다 따로 논다. 이를 보완하기 위해 완료 체크·마지막 위치를
+     지정된 GitHub 저장소의 progress-state 브랜치에 있는 JSON 파일에도 함께 저장한다.
+     그 저장소는 public이라 "읽기"는 토큰 없이 항상 되고, "쓰기"만 아래 토큰이 있어야 동작한다.
+     토큰은 이 브라우저의 localStorage에만 남고, 코드에는 절대 들어가지 않는다. */
+  var ghSync = (function(){
+    var OWNER = 'hyunsung021123', REPO = 'Math-quizlet', BRANCH = 'progress-state', PATH = 'state/progress.json';
+    var TOKEN_KEY = 'pdl_gh_token_v1';
+    var API = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/' + PATH;
+    var sha = null;   // 마지막으로 읽은 원격 파일의 sha — PUT 시 충돌 감지를 위해 필요
+    var timer = null; // 저장 debounce (카드 넘길 때마다 커밋하지 않도록)
+
+    function getToken(){
+      try{ return localStorage.getItem(TOKEN_KEY) || ''; }catch(e){ return ''; }
+    }
+    function setToken(t){
+      try{ if(t) localStorage.setItem(TOKEN_KEY, t); else localStorage.removeItem(TOKEN_KEY); }
+      catch(e){ /* private mode / storage disabled — degrade silently */ }
+      updateButtonState();
+    }
+    function b64encode(str){ return btoa(unescape(encodeURIComponent(str))); }
+    function b64decode(str){ return decodeURIComponent(escape(atob(str))); }
+
+    function pullRemoteState(){
+      return fetch(API + '?ref=' + BRANCH, { cache:'no-cache' }).then(function(res){
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }).then(function(json){
+        sha = json.sha;
+        var remote = JSON.parse(b64decode(json.content.replace(/\n/g,'')));
+        if(remote && remote.completed && Object.keys(remote.completed).length){
+          try{ localStorage.setItem(COMPLETE_KEY, JSON.stringify(remote.completed)); }catch(e){}
+        }
+        if(remote && remote.lastPos){
+          try{ localStorage.setItem(LASTPOS_KEY, JSON.stringify(remote.lastPos)); }catch(e){}
+        }
+      }).catch(function(){ /* 오프라인/차단 등 — 로컬 캐시로 계속 진행 */ });
+    }
+
+    function ensureSha(token){
+      if(sha) return Promise.resolve();
+      return fetch(API + '?ref=' + BRANCH, { headers:{ 'Authorization':'Bearer ' + token, 'Accept':'application/vnd.github+json' } })
+        .then(function(res){ return res.ok ? res.json() : null; })
+        .then(function(json){ if(json) sha = json.sha; })
+        .catch(function(){ /* 파일이 아직 없으면(404) sha 없이 새로 생성 — 그대로 진행 */ });
+    }
+
+    function pushNow(){
+      var token = getToken();
+      if(!token) return;
+      ensureSha(token).then(function(){
+        var body = { completed: loadCompletedStore(), lastPos: loadLastPos(), updatedAt: new Date().toISOString() };
+        var payload = { message:'progress update', content: b64encode(JSON.stringify(body, null, 2)), branch: BRANCH };
+        if(sha) payload.sha = sha;
+        return fetch(API, {
+          method:'PUT',
+          headers:{ 'Authorization':'Bearer ' + token, 'Content-Type':'application/json', 'Accept':'application/vnd.github+json' },
+          body: JSON.stringify(payload)
+        });
+      }).then(function(res){
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }).then(function(json){
+        sha = json.content.sha;
+        updateButtonState();
+      }).catch(function(){
+        sha = null; // sha가 어긋났을 수 있으니 다음 저장 때 다시 받아오게 초기화 (ensureSha가 자동 복구)
+        updateButtonState('err');
+      });
+    }
+
+    function scheduleSave(){
+      if(!getToken()) return;
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(pushNow, 4000);
+    }
+
+    function updateButtonState(mode){
+      var btn = document.getElementById('ghSyncBtn');
+      if(!btn) return;
+      btn.classList.remove('is-on','is-err');
+      if(mode === 'err') btn.classList.add('is-err');
+      else if(getToken()) btn.classList.add('is-on');
+    }
+
+    function setStatus(text, cls){
+      var el = document.getElementById('ghModalStatus');
+      if(!el) return;
+      el.textContent = text;
+      el.className = 'gh-modal-status' + (cls ? ' ' + cls : '');
+    }
+
+    function testToken(token){
+      return fetch(API + '?ref=' + BRANCH, {
+        headers:{ 'Authorization':'Bearer ' + token, 'Accept':'application/vnd.github+json' }
+      }).then(function(res){
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }).then(function(json){ sha = json.sha; });
+    }
+
+    function initUI(){
+      var btn = document.getElementById('ghSyncBtn');
+      var overlay = document.getElementById('ghModalOverlay');
+      var input = document.getElementById('ghTokenInput');
+      var saveBtn = document.getElementById('ghModalSave');
+      var clearBtn = document.getElementById('ghModalClear');
+      var closeBtn = document.getElementById('ghModalClose');
+      if(!btn || !overlay) return;
+      function open(){ input.value = getToken(); setStatus('', ''); overlay.hidden = false; }
+      function close(){ overlay.hidden = true; }
+      btn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', function(ev){ if(ev.target === overlay) close(); });
+      clearBtn.addEventListener('click', function(){
+        setToken('');
+        input.value = '';
+        setStatus('연결을 해제했습니다. 이후로는 이 브라우저에만 저장됩니다.', 'ok');
+      });
+      saveBtn.addEventListener('click', function(){
+        var t = input.value.trim();
+        if(!t){ setStatus('토큰을 입력하세요.', 'err'); return; }
+        setStatus('확인 중…', '');
+        testToken(t).then(function(){
+          setToken(t);
+          setStatus('연결되었습니다 — 앞으로 체크·카드 위치가 자동으로 저장됩니다.', 'ok');
+        }).catch(function(){
+          setStatus('토큰을 확인하지 못했습니다 — 저장소 권한(Contents: Read and write)을 확인하세요.', 'err');
+        });
+      });
+      updateButtonState();
+    }
+
+    return { pullRemoteState: pullRemoteState, scheduleSave: scheduleSave, initUI: initUI };
+  })();
 
   /* ---------- state screens ---------- */
   function renderState(kind, title, msg){
@@ -866,8 +1064,9 @@ p.prose{ margin:0; }
 
   /* ---------- boot & topic loading ---------- */
   function boot(){
+    ghSync.initUI();
     renderState('loading', '학습 데이터를 불러오는 중…', '');
-    fetchJSON(DATA_DIR + 'manifest.json').then(function(manifest){
+    ghSync.pullRemoteState().then(function(){ return fetchJSON(DATA_DIR + 'manifest.json'); }).then(function(manifest){
       state.topics = Array.isArray(manifest.topics) ? manifest.topics : [];
       populateSelect();
       if(!state.topics.length){
@@ -1077,6 +1276,7 @@ p.prose{ margin:0; }
     typeset(mainEl);
     updateDeckNav();
     saveLastPos();
+    ghSync.scheduleSave();
     window.scrollTo({ top:0, behavior: prefersReduced() ? 'auto' : 'smooth' });
   }
 
