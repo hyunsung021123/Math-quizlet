@@ -1,8 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 pipeline/program2_track.py next)",
-      "Bash(python3 pipeline/program2_track.py status)"
+      "Bash(python3 pipeline/*)",
+      "Bash(cp *)",
+      "Bash(mkdir -p *)",
+      "Bash(git *)",
+      "SendUserFile"
     ]
   },
   "hooks": {
