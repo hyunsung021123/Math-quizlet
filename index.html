@@ -119,6 +119,52 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 .gh-modal-status.err{ color:var(--no); }
 @media (max-width:400px){ .topic-select{ max-width:48vw; } }
 
+/* ---------- Ink / handwriting (펜 필기) ---------- */
+.pen-toggle-btn{
+  flex:0 0 auto; width:34px; height:34px; border-radius:9px; padding:0;
+  display:grid; place-items:center; cursor:pointer;
+  border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-faint);
+  transition:color .15s,border-color .15s,background .15s;
+}
+.pen-toggle-btn:hover{ color:var(--ink); }
+.pen-toggle-btn svg{ width:17px; height:17px; }
+.pen-toggle-btn.is-on{ color:#fff; background:var(--primary); border-color:var(--primary); }
+
+.ink-canvas{ position:absolute; left:0; top:0; touch-action:auto; }
+
+.ink-toolbar{
+  position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:60;
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
+  padding:12px 9px; box-shadow:0 8px 28px rgba(20,24,35,.18);
+}
+.ink-swatches, .ink-widths{ display:flex; flex-direction:column; gap:7px; }
+.ink-swatch{
+  width:24px; height:24px; border-radius:50%; padding:0; cursor:pointer;
+  border:2px solid transparent; box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
+}
+.ink-swatch.is-active{ border-color:var(--ink-faint); }
+.ink-widths{ margin-top:2px; }
+.ink-width{
+  width:30px; height:24px; border-radius:8px; padding:0; cursor:pointer; display:grid; place-items:center;
+  border:1px solid var(--line-strong); background:var(--surface-2);
+}
+.ink-width span{ display:block; width:16px; border-radius:999px; background:var(--ink-soft); }
+.ink-width[data-width="2"] span{ height:2px; }
+.ink-width[data-width="4"] span{ height:4px; }
+.ink-width[data-width="7"] span{ height:7px; }
+.ink-width.is-active{ background:var(--primary-soft); border-color:var(--primary); }
+.ink-tool{
+  width:30px; height:30px; border-radius:9px; padding:0; cursor:pointer; font-size:.95rem;
+  display:grid; place-items:center; border:1px solid var(--line-strong); background:var(--surface-2); color:var(--ink-soft);
+}
+.ink-tool.is-active{ background:var(--no-bg); border-color:#E9C6C0; color:var(--no); }
+@media (max-width:640px){
+  .ink-toolbar{ right:6px; padding:9px 6px; gap:8px; }
+  .ink-swatch{ width:20px; height:20px; }
+  .ink-width{ width:26px; height:20px; }
+}
+
 /* ---------- Layout ---------- */
 .layout{ display:grid; grid-template-columns:264px minmax(0,1fr); max-width:1200px; margin:0 auto; align-items:start; }
 @media (max-width:960px){ .layout{ grid-template-columns:minmax(0,1fr); } }
@@ -433,6 +479,9 @@ p.prose{ margin:0; }
     <button class="gh-sync-btn" id="ghSyncBtn" type="button" title="GitHub 동기화 설정" aria-label="GitHub 동기화 설정">
       <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
     </button>
+    <button class="pen-toggle-btn" id="penToggleBtn" type="button" title="펜으로 필기하기" aria-label="펜으로 필기하기" aria-pressed="false">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 1.5 14 4l-8.5 8.5-3 1 1-3z"/><path d="M9.5 3.5 12 6"/></svg>
+    </button>
   </div>
 </header>
 
@@ -458,6 +507,23 @@ p.prose{ margin:0; }
     </div>
     <div class="gh-modal-status" id="ghModalStatus"></div>
   </div>
+</div>
+
+<div class="ink-toolbar" id="inkToolbar" hidden>
+  <div class="ink-swatches">
+    <button class="ink-swatch" data-color="#1B2333" style="background:#1B2333" type="button" title="검정" aria-label="검정"></button>
+    <button class="ink-swatch" data-color="#B0483C" style="background:#B0483C" type="button" title="빨강" aria-label="빨강"></button>
+    <button class="ink-swatch" data-color="#2E4374" style="background:#2E4374" type="button" title="파랑" aria-label="파랑"></button>
+    <button class="ink-swatch" data-color="#2F7D5B" style="background:#2F7D5B" type="button" title="초록" aria-label="초록"></button>
+  </div>
+  <div class="ink-widths">
+    <button class="ink-width" data-width="2" type="button" title="얇게" aria-label="얇게"><span></span></button>
+    <button class="ink-width" data-width="4" type="button" title="보통" aria-label="보통"><span></span></button>
+    <button class="ink-width" data-width="7" type="button" title="굵게" aria-label="굵게"><span></span></button>
+  </div>
+  <button class="ink-tool" id="inkEraseBtn" type="button" title="지우개" aria-label="지우개" aria-pressed="false">⌫</button>
+  <button class="ink-tool" id="inkUndoBtn" type="button" title="되돌리기" aria-label="되돌리기">↶</button>
+  <button class="ink-tool" id="inkClearBtn" type="button" title="이 카드 필기 전체 지우기" aria-label="이 카드 필기 전체 지우기">🗑</button>
 </div>
 
 <div class="layout">
@@ -1037,6 +1103,213 @@ p.prose{ margin:0; }
     return { pullRemoteState: pullRemoteState, scheduleSave: scheduleSave, initUI: initUI };
   })();
 
+  /* ---------- ink / handwriting (펜 필기, 태블릿 스타일러스 대응) ----------
+     카드마다 그 카드 위에 직접 겹치는 <canvas> 하나로 필기를 받는다. 획은 카드 좌표에 대한
+     0~1 정규화 비율로 저장하므로 카드 크기가 달라져도(접기/펼치기, 화면 회전, 다른 기기의 다른
+     너비) 항상 같은 상대 위치에 다시 그려진다. 지금은 로컬 저장만 한다(기기 간 동기화는 별도 논의 필요
+     — 그림 데이터는 체크박스보다 훨씬 커서 그대로 GitHub 동기화에 얹으면 요청이 무거워진다). */
+  var inkPad = (function(){
+    var KEY = 'pdl_ink_v1';
+    var enabled = false, erasing = false;
+    var color = '#1B2333', penWidth = 4;
+    var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null;
+    var dpr = window.devicePixelRatio || 1;
+
+    function loadStore(){ try{ return JSON.parse(localStorage.getItem(KEY) || '{}'); }catch(e){ return {}; } }
+    function saveStore(store){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){ /* degrade silently */ } }
+
+    function cardKey(){
+      var v = state.view;
+      return (v.type === 'review' ? 'review' : ('sec' + v.index)) + ':' + state.cardIndex;
+    }
+    function currentStrokes(){
+      var store = loadStore();
+      var byTopic = state.topicId && store[state.topicId];
+      return (byTopic && byTopic[cardKey()]) || [];
+    }
+    function pushStroke(stroke){
+      if(!state.topicId) return;
+      var store = loadStore();
+      var byTopic = store[state.topicId] || (store[state.topicId] = {});
+      var key = cardKey();
+      (byTopic[key] || (byTopic[key] = [])).push(stroke);
+      saveStore(store);
+    }
+
+    function createCanvasEl(){
+      canvas = document.createElement('canvas');
+      canvas.className = 'ink-canvas';
+      canvas.addEventListener('pointerdown', onPointerDown);
+      canvas.addEventListener('pointermove', onPointerMove);
+      canvas.addEventListener('pointerup', onPointerUp);
+      canvas.addEventListener('pointercancel', onPointerUp);
+    }
+
+    function resize(){
+      var card = canvas && canvas.parentElement;
+      if(!card) return;
+      var w = card.clientWidth, h = card.scrollHeight;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      canvas.width = Math.max(1, Math.round(w * dpr));
+      canvas.height = Math.max(1, Math.round(h * dpr));
+      ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+    }
+
+    function redraw(){
+      if(!ctx || !canvas) return;
+      var w = canvas.clientWidth, h = canvas.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      currentStrokes().forEach(function(s){
+        ctx.globalCompositeOperation = s.mode === 'erase' ? 'destination-out' : 'source-over';
+        ctx.strokeStyle = s.color; ctx.fillStyle = s.color;
+        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.lineWidth = Math.max(1, s.widthNorm * w);
+        if(s.pts.length < 2){
+          var p = s.pts[0];
+          ctx.beginPath();
+          ctx.arc(p[0] * w, p[1] * h, Math.max(0.5, (s.widthNorm * w) / 2), 0, Math.PI * 2);
+          ctx.fill();
+          return;
+        }
+        ctx.beginPath();
+        s.pts.forEach(function(p, i){
+          if(i === 0) ctx.moveTo(p[0] * w, p[1] * h); else ctx.lineTo(p[0] * w, p[1] * h);
+        });
+        ctx.stroke();
+      });
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function observeCard(card){
+      if(ro) ro.disconnect();
+      if(typeof ResizeObserver === 'undefined') return;
+      ro = new ResizeObserver(function(){ resize(); redraw(); });
+      ro.observe(card);
+    }
+
+    function attach(){
+      if(!canvas) createCanvasEl();
+      var card = mainEl.querySelector('.card');
+      if(!card){ if(canvas.parentElement) canvas.remove(); return; }
+      card.style.position = 'relative';
+      card.appendChild(canvas);
+      updateInteractivity();
+      requestAnimationFrame(function(){ resize(); redraw(); observeCard(card); });
+    }
+
+    function updateInteractivity(){
+      if(!canvas) return;
+      canvas.style.pointerEvents = enabled ? 'auto' : 'none';
+      canvas.style.touchAction = enabled ? 'none' : 'auto';
+    }
+
+    function onPointerDown(ev){
+      if(!enabled || (ev.pointerType === 'mouse' && ev.button !== 0)) return;
+      ev.preventDefault();
+      try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
+      drawing = true;
+      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
+      var pressure = ev.pressure > 0 ? ev.pressure : 0.5;
+      curStroke = {
+        mode: erasing ? 'erase' : 'draw', color: color,
+        widthNorm: (penWidth * (0.5 + 0.5 * pressure)) / w,
+        pts: [[(ev.clientX - rect.left) / w, (ev.clientY - rect.top) / h]]
+      };
+      ctx.globalCompositeOperation = curStroke.mode === 'erase' ? 'destination-out' : 'source-over';
+      ctx.strokeStyle = curStroke.color;
+      ctx.lineWidth = Math.max(1, curStroke.widthNorm * w);
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    }
+    function onPointerMove(ev){
+      if(!drawing || !curStroke) return;
+      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
+      var events = (ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
+      events.forEach(function(e){
+        var x = (e.clientX - rect.left) / w, y = (e.clientY - rect.top) / h;
+        var last = curStroke.pts[curStroke.pts.length - 1];
+        curStroke.pts.push([x, y]);
+        ctx.beginPath();
+        ctx.moveTo(last[0] * w, last[1] * h);
+        ctx.lineTo(x * w, y * h);
+        ctx.stroke();
+      });
+    }
+    function onPointerUp(ev){
+      if(!drawing || !curStroke) return;
+      drawing = false;
+      if(curStroke.pts.length === 1){
+        var rect = canvas.getBoundingClientRect(), p = curStroke.pts[0];
+        ctx.globalCompositeOperation = curStroke.mode === 'erase' ? 'destination-out' : 'source-over';
+        ctx.fillStyle = curStroke.color;
+        ctx.beginPath();
+        ctx.arc(p[0] * rect.width, p[1] * rect.height, Math.max(0.5, (curStroke.widthNorm * rect.width) / 2), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+      pushStroke(curStroke);
+      curStroke = null;
+      try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
+    }
+
+    function undoStroke(){
+      if(!state.topicId) return;
+      var store = loadStore();
+      var byTopic = store[state.topicId];
+      var arr = byTopic && byTopic[cardKey()];
+      if(arr && arr.length){ arr.pop(); saveStore(store); redraw(); }
+    }
+    function clearCard(){
+      if(!state.topicId) return;
+      if(!confirm('이 카드의 필기를 전부 지울까요?')) return;
+      var store = loadStore();
+      var byTopic = store[state.topicId];
+      if(byTopic){ delete byTopic[cardKey()]; saveStore(store); }
+      redraw();
+    }
+
+    function updateToolbarUI(){
+      document.querySelectorAll('.ink-swatch').forEach(function(b){
+        b.classList.toggle('is-active', !erasing && b.getAttribute('data-color') === color);
+      });
+      document.querySelectorAll('.ink-width').forEach(function(b){
+        b.classList.toggle('is-active', parseFloat(b.getAttribute('data-width')) === penWidth);
+      });
+      var eb = document.getElementById('inkEraseBtn');
+      if(eb){ eb.classList.toggle('is-active', erasing); eb.setAttribute('aria-pressed', erasing ? 'true' : 'false'); }
+    }
+
+    function setEnabled(v){
+      enabled = v;
+      var btn = document.getElementById('penToggleBtn');
+      if(btn){ btn.classList.toggle('is-on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); }
+      var tb = document.getElementById('inkToolbar');
+      if(tb) tb.hidden = !v;
+      updateInteractivity();
+    }
+
+    function init(){
+      var toggleBtn = document.getElementById('penToggleBtn');
+      if(toggleBtn) toggleBtn.addEventListener('click', function(){ setEnabled(!enabled); });
+      document.querySelectorAll('.ink-swatch').forEach(function(b){
+        b.addEventListener('click', function(){ color = b.getAttribute('data-color'); erasing = false; updateToolbarUI(); });
+      });
+      document.querySelectorAll('.ink-width').forEach(function(b){
+        b.addEventListener('click', function(){ penWidth = parseFloat(b.getAttribute('data-width')); updateToolbarUI(); });
+      });
+      var eraseBtn = document.getElementById('inkEraseBtn');
+      if(eraseBtn) eraseBtn.addEventListener('click', function(){ erasing = !erasing; updateToolbarUI(); });
+      var undoBtn = document.getElementById('inkUndoBtn');
+      if(undoBtn) undoBtn.addEventListener('click', undoStroke);
+      var clearBtn = document.getElementById('inkClearBtn');
+      if(clearBtn) clearBtn.addEventListener('click', clearCard);
+      updateToolbarUI();
+    }
+
+    return { init: init, attach: attach };
+  })();
+
   /* ---------- state screens ---------- */
   function renderState(kind, title, msg){
     if(deckNav) deckNav.hidden = true;
@@ -1065,6 +1338,7 @@ p.prose{ margin:0; }
   /* ---------- boot & topic loading ---------- */
   function boot(){
     ghSync.initUI();
+    inkPad.init();
     renderState('loading', '학습 데이터를 불러오는 중…', '');
     ghSync.pullRemoteState().then(function(){ return fetchJSON(DATA_DIR + 'manifest.json'); }).then(function(manifest){
       state.topics = Array.isArray(manifest.topics) ? manifest.topics : [];
@@ -1277,6 +1551,7 @@ p.prose{ margin:0; }
     updateDeckNav();
     saveLastPos();
     ghSync.scheduleSave();
+    inkPad.attach();
     window.scrollTo({ top:0, behavior: prefersReduced() ? 'auto' : 'smooth' });
   }
 
