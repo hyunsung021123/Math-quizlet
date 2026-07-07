@@ -1,5 +1,22 @@
 {
-  "completed": {},
-  "lastPos": null,
-  "updatedAt": null
+  "completed": {
+    "chapter_0_introduction_and_examples": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
+    },
+    "chapter_1_polytopes_polyhedra_and_cones": {
+      "section:0": true,
+      "section:1": true
+    }
+  },
+  "lastPos": {
+    "topicId": "chapter_1_polytopes_polyhedra_and_cones",
+    "view": {
+      "type": "section",
+      "index": 2
+    },
+    "cardIndex": 5
+  },
+  "updatedAt": "2026-07-07T15:20:10.562Z"
 }
