@@ -1,6 +1,5 @@
 {
-  "topics": 
-  [
+  "topics": [
     {
       "id": "chapter_0_introduction_and_examples",
       "title": "Chapter 0. Introduction and Examples",
@@ -12,6 +11,12 @@
       "title": "Chapter 1. Polytopes, Polyhedra, and Cones",
       "file": "chapter_1_polytopes_polyhedra_and_cones.json",
       "book": "Ziegler — Lectures on Polytopes"
+    },
+    {
+      "id": "chapter_0_some_underlying_geometric_noti",
+      "title": "Chapter 0. Some Underlying Geometric Notions",
+      "file": "chapter_0_some_underlying_geometric_noti.json",
+      "book": "Hatcher — Algebraic Topology"
     }
   ]
 }

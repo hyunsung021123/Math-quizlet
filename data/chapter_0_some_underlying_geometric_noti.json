@@ -1,0 +1,1917 @@
+{
+  "chapter_info": {
+    "title": "Chapter 0. Some Underlying Geometric Notions",
+    "source": "Allen Hatcher, Algebraic Topology, Ch. 0",
+    "overall_goal": "위상수학에서 '같은 모양'을 위상동형(homeomorphism)보다 훨씬 넓게 보는 관점을 세운다. 변형수축(deformation retraction)·사상원기둥(mapping cylinder)에서 출발해, 호모토피(homotopy)와 호모토피 동치(homotopy equivalence, homotopy type)라는 핵심 동치 개념을 정의하고, 수축가능(contractible) 공간과 그 미묘함(한 점으로의 변형수축과의 차이)까지 이해한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "0.1 Homotopy and Homotopy Type",
+      "step1_big_picture": {
+        "context": "지금까지 두 공간이 '같다'는 것은 위상동형($X \\cong Y$), 즉 연속 전단사와 그 연속 역이 존재함을 뜻했다. 그런데 이는 지나치게 빡빡하다. 알파벳 글자를 얇은 선분들의 합집합으로 쓰든, 두께가 있는 평면 부분곡면으로 쓰든 우리는 직관적으로 '같은 글자'라고 느낀다. 두꺼운 글자 $X$를 그 안의 얇은 글자 $\\bar X$로 연속적으로 오그라뜨릴 수 있기 때문이다. 이 장의 목표는 바로 이 '연속적으로 오그라뜨린다'는 감각을 엄밀한 개념(변형수축·호모토피·호모토피 동치)으로 승격시키는 것이다. 이후 챕터 1에서 대수적 불변량을 붙일 때, 우리가 실제로 구별하려는 것은 위상동형류가 아니라 바로 이 호모토피형(homotopy type)이 된다.",
+        "hidden_intuition": "핵심 이미지는 '시간에 따라 흐르는 변형'이다. 두꺼운 글자 $X$를, 바깥 경계의 각 점을 얇은 글자 $\\bar X$의 한 점에 잇는 선분들로 잘게 분해해 두면, 시간 $t\\in[0,1]$ 동안 각 점을 그 선분을 따라 일정한 속력으로 안쪽으로 밀어 넣을 수 있다. 이미 $\\bar X$ 안에 있던 점은 가만히 둔다. 그러면 $t=0$에서는 항등사상, $t=1$에서는 $\\bar X$로의 축약(retraction)이 된다. 여기서 결정적인 것은 두 가지다. 첫째, '동형'과 달리 이 과정은 정보를 잃어도 된다 — 서로 다른 점이 도중에 합쳐져도 괜찮다(그래서 대칭적이지 않다). 둘째, 시간 변수 $t$와 공간 변수 $x$에 대해 '동시에' 연속이어야 한다는 요구, 즉 $X\\times I\\to X$의 연속성이 이 변형을 하나의 위상적 대상으로 묶어 준다. 이 한 장의 그림 — 공간 전체가 시간에 따라 미끄러져 들어가는 장면 — 이 뒤에 나오는 모든 정의의 원천이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 2.2
+            },
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 1.0
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                2.2,
+                0
+              ],
+              "to": [
+                1.0,
+                0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                0,
+                2.2
+              ],
+              "to": [
+                0,
+                1.0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -2.2,
+                0
+              ],
+              "to": [
+                -1.0,
+                0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                0,
+                -2.2
+              ],
+              "to": [
+                0,
+                -1.0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                1.556,
+                1.556
+              ],
+              "to": [
+                0.707,
+                0.707
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.556,
+                1.556
+              ],
+              "to": [
+                -0.707,
+                0.707
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                1.556,
+                -1.556
+              ],
+              "to": [
+                0.707,
+                -0.707
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.556,
+                -1.556
+              ],
+              "to": [
+                -0.707,
+                -0.707
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                1.0
+              ],
+              "text": "core circle"
+            }
+          ],
+          "caption": "고리(annulus)가 시간에 따라 각 점을 반지름 방향으로 안쪽 원 위로 밀어 넣어 심원(core circle)으로 변형수축하는 모습. 뫼비우스 띠(Mobius band)가 중심원으로 변형수축하는 그림과 같은 원리다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (변형수축, deformation retraction)",
+          "formal_statement": "공간 $X$의 부분공간 $A$로의 변형수축이란, 사상족 $f_t:X\\to X$ ($t\\in I=[0,1]$)로서 다음을 만족하는 것이다. (i) $f_0=\\mathrm{id}_X$, (ii) $f_1(X)=A$, (iii) 모든 $t$에 대해 $f_t|_A=\\mathrm{id}_A$. 또한 이 사상족은 연관 사상 $X\\times I\\to X,\\ (x,t)\\mapsto f_t(x)$가 연속이라는 의미에서 연속이어야 한다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (사상원기둥, mapping cylinder)",
+          "formal_statement": "사상 $f:X\\to Y$에 대하여 사상원기둥 $M_f$는 서로소 합집합 $(X\\times I)\\sqcup Y$의 몫공간으로, 각 $(x,1)\\in X\\times I$을 $f(x)\\in Y$와 동일시하여 얻는다. 즉 $M_f=\\big((X\\times I)\\sqcup Y\\big)\\big/\\big((x,1)\\sim f(x)\\big)$.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -2,
+                  1.5
+                ],
+                "to": [
+                  2,
+                  1.5
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1,
+                  -1
+                ],
+                "to": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -2,
+                  1.5
+                ],
+                "to": [
+                  -1,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1,
+                  1.5
+                ],
+                "to": [
+                  -0.5,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.5
+                ],
+                "to": [
+                  0,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  1.5
+                ],
+                "to": [
+                  0.5,
+                  -1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  1.5
+                ],
+                "to": [
+                  1,
+                  -1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.5,
+                  1.5
+                ],
+                "text": "X x 0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.6,
+                  -1
+                ],
+                "text": "Y"
+              }
+            ],
+            "caption": "사상원기둥의 도식. 위쪽 $X\\times\\{0\\}$의 각 점이 세로 섬유 $\\{x\\}\\times I$를 따라 내려와 $t=1$에서 $f(x)\\in Y$에 붙는다. 서로 다른 점이 같은 $f(x)$로 모이면 섬유들이 아래에서 합쳐진다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (사상원기둥은 항상 $Y$로 변형수축한다)",
+          "formal_statement": "임의의 $f:X\\to Y$에 대해 $M_f$는 부분공간 $Y$로 변형수축한다. 각 점 $(x,t)$를 섬유 $\\{x\\}\\times I\\subset M_f$를 따라 끝점 $f(x)\\in Y$로 미끄러뜨리면 되기 때문이다. (앞의 얇은 글자 예시에서 $X$는 두꺼운 글자의 바깥 경계, $Y$는 얇은 글자, $f$는 각 선분의 바깥 끝점을 안쪽 끝점으로 보내는 사상에 해당한다.)"
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (호모토피, homotopy / 호모토픽, homotopic)",
+          "formal_statement": "호모토피란 사상족 $f_t:X\\to Y$ ($t\\in I$)로서 연관 사상 $F:X\\times I\\to Y,\\ F(x,t)=f_t(x)$가 연속인 것을 말한다. 두 사상 $f_0,f_1:X\\to Y$가 이런 호모토피로 연결되면 호모토픽하다고 하고 $f_0\\simeq f_1$로 쓴다. 변형수축은 이 일반 개념의 특수한 경우다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (축약, retraction)",
+          "formal_statement": "$X$의 부분공간 $A$로의 축약이란 사상 $r:X\\to X$로서 $r(X)=A$이고 $r|_A=\\mathrm{id}_A$인 것이다. 이는 정확히 $r^2=r$과 동치인데, 이 식은 곧 $r$가 자신의 상 위에서 항등이라는 뜻이기 때문이다. 축약은 수학 다른 분야의 사영작용소(projection operator)의 위상적 대응물이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (상대 호모토피, homotopy rel $A$)",
+          "formal_statement": "부분공간 $A\\subset X$로의 제한이 $t$에 무관한 호모토피 $f_t:X\\to Y$를 $A$에 상대적인 호모토피(homotopy rel $A$)라 한다. 이 언어로 다시 쓰면, $X$의 $A$로의 변형수축이란 항등사상 $\\mathrm{id}_X$에서 $A$로의 축약으로 가는 $A$에 상대적인 호모토피다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (호모토피 동치, homotopy equivalence / 호모토피형, homotopy type)",
+          "formal_statement": "사상 $f:X\\to Y$가 호모토피 동치라는 것은 어떤 사상 $g:Y\\to X$가 존재하여 $fg\\simeq\\mathrm{id}_Y$이고 $gf\\simeq\\mathrm{id}_X$인 것이다. 이때 $X$와 $Y$는 호모토피 동치이다 또는 같은 호모토피형(homotopy type)을 갖는다고 하고 $X\\simeq Y$로 쓴다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              }
+            ],
+            "caption": "구멍 두 개짜리 원판이 변형수축할 수 있는 세 그래프(도넛 손잡이꼴, 세타꼴 $\\theta$, 두 원을 붙인 팔자꼴)는 서로 위상동형은 아니지만 모두 이 팔자(figure-eight, 두 원의 쐐기합)와 같은 호모토피형을 갖는다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (변형수축은 호모토피 동치를 준다)",
+          "formal_statement": "$X$가 부분공간 $A$로 $f_t$를 통해 변형수축하면, 축약 $r:X\\to A$와 포함사상 $i:A\\to X$에 대해 $ri=\\mathrm{id}_A$이고 $ir\\simeq\\mathrm{id}_X$이다. 따라서 $i$(및 $r$)는 호모토피 동치이고, 특히 $X\\simeq A$이다.",
+          "idea_behind_proof": "변형수축의 세 조건이 호모토피 동치의 두 조건으로 '거의 그대로' 번역된다는 것이 핵심이다. $A$ 위에서 $r$가 항등이라는 조건 (iii)은 곧 한쪽 합성 $ri=\\mathrm{id}_A$을 공짜로 주고, 나머지 합성 $ir\\simeq\\mathrm{id}_X$을 증명해 줄 호모토피는 애써 새로 만들 필요 없이 변형수축 $f_t$ 그 자체다. 즉 '변형수축'이라는 데이터가 이미 '호모토피 동치'의 증거를 품고 있다.",
+          "proof_steps": [
+            "1단계: $A$의 점은 축약 $r$가 고정하므로 $ri=\\mathrm{id}_A$.",
+            "2단계: 변형수축 $f_t$는 $f_0=\\mathrm{id}_X$에서 $f_1=ir$로 가는 호모토피이므로 $ir\\simeq\\mathrm{id}_X$.",
+            "3단계: 따라서 $i:A\\to X$는 $r$를 호모토피 역으로 갖는 호모토피 동치이고 $X\\simeq A$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (호모토피 동치 $\\simeq$는 동치관계다)",
+          "formal_statement": "공간들 위의 관계 $X\\simeq Y$(호모토피 동치)는 반사적·대칭적·추이적이다. 즉 동치관계다. (이는 비대칭적인 변형수축 관계와 대조된다.)",
+          "idea_behind_proof": "열쇠가 되는 관찰은 '호모토피가 합성과 양립한다'는 사실 하나다. 즉 $a\\simeq a'$이면 임의의 연속사상 $h,g$에 대해 $ha\\simeq ha'$, $ag\\simeq a'g$이다(고정된 사상을 호모토피에 그냥 합성하면 되니까). 이 한 줄만 있으면 반사·대칭·추이가 기계적으로 따라 나온다. 특히 대칭성은 거의 자명한데, 호모토피 동치의 정의 $fg\\simeq\\mathrm{id},\\ gf\\simeq\\mathrm{id}$ 자체가 $f$와 $g$에 대해 이미 대칭이기 때문이다.",
+          "proof_steps": [
+            "1단계(합성과의 양립): $a\\simeq a'$을 주는 호모토피가 $a_s$라면, 연속사상 $h$에 대해 $h\\circ a_s$는 $ha\\simeq ha'$을 주는 호모토피이고, $a_s\\circ g$는 $ag\\simeq a'g$을 준다.",
+            "2단계(반사성): $\\mathrm{id}_X$는 자기 자신을 호모토피 역으로 갖는 호모토피 동치이므로 $X\\simeq X$.",
+            "3단계(대칭성): $f:X\\to Y$가 역 $g$를 갖는 호모토피 동치이면, 조건 $fg\\simeq\\mathrm{id}_Y,\\ gf\\simeq\\mathrm{id}_X$가 $f,g$에 대해 대칭이므로 $g:Y\\to X$ 또한 호모토피 동치이고 $Y\\simeq X$.",
+            "4단계(추이성): $f:X\\to Y$(역 $g$), $h:Y\\to Z$(역 $k$)가 호모토피 동치라 하자. $hf:X\\to Z$를 생각하면 1단계를 써서 $(hf)(gk)=h(fg)k\\simeq h\\,\\mathrm{id}_Y\\,k=hk\\simeq\\mathrm{id}_Z$. 마찬가지로 $(gk)(hf)\\simeq\\mathrm{id}_X$. 따라서 $hf$는 $gk$를 역으로 갖는 호모토피 동치이고 $X\\simeq Z$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (공통의 변형수축 모공간에 의한 특징화)",
+          "formal_statement": "두 공간 $X,Y$가 호모토피 동치일 필요충분조건은, $X$와 $Y$를 모두 변형수축 부분공간으로 포함하는 공간 $Z$가 존재하는 것이다.",
+          "idea_behind_proof": "쉬운 방향(⇐)은 앞 명제의 즉각적 결과다. 어려운 방향(⇒)에서 '$Z$를 어떻게 찾을까?'라는 물음의 답이 바로 앞서 정의한 사상원기둥이다. 호모토피 동치 $f:X\\to Y$에 대해 $Z=M_f$를 잡으면, $M_f$는 무조건 $Y$로 변형수축한다(앞의 참고). 남은 것은 '$f$가 호모토피 동치일 때는 $M_f$가 반대쪽 끝 $X$로도 변형수축한다'는 사실인데, 이 비자명한 부분은 이 절 이후의 결과(따름정리 0.21)로 미뤄진다.",
+          "proof_steps": [
+            "1단계(⇐): $Z$가 $X,Y$를 각각 변형수축 부분공간으로 가지면 앞 명제로 $X\\simeq Z$, $Y\\simeq Z$. 동치관계의 추이성으로 $X\\simeq Y$.",
+            "2단계(⇒): 호모토피 동치 $f:X\\to Y$에 대해 $Z=M_f$로 둔다. 사상원기둥은 항상 $Y$로 변형수축한다.",
+            "3단계: $f$가 호모토피 동치일 때 $M_f$가 반대쪽 끝 $X$로도 변형수축한다는 사실은 (따름정리 0.21 — 이 절 이후에 증명됨)에서 보인다. 따라서 $Z=M_f$가 원하는 공간이다. $\\qquad\\blacksquare$ (⇒ 방향은 이후 결과를 인용)"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (수축가능, contractible)",
+          "formal_statement": "한 점의 호모토피형을 갖는 공간을 수축가능(contractible)이라 한다. 이는 그 공간의 항등사상이 영호모토픽(nullhomotopic)임, 즉 어떤 상수사상과 호모토픽함과 동치다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (한 점으로 변형수축하면 경로연결이다)",
+          "formal_statement": "공간 $X$가 한 점 $x_0$으로 변형수축하면, $X$는 경로연결(path-connected)이다.",
+          "idea_behind_proof": "변형수축은 공간 전체가 시간에 따라 흐르는 하나의 연속 운동이다. 여기서 시선을 단 한 점 $x$에 고정하고 그 점이 시간 $t\\in[0,1]$ 동안 어디로 가는지만 따라가면, 그것이 곧 하나의 경로가 된다. 그런데 '한 점으로' 변형수축한다는 특수성 때문에 모든 점의 이 경로가 같은 종점 $x_0$에서 끝난다 — 이것이 정확히 경로연결의 정의다.",
+          "proof_steps": [
+            "1단계: $f_t:X\\to X$를 $f_0=\\mathrm{id}_X$, $f_1\\equiv x_0$인 변형수축이라 하자. 연관 사상 $F:X\\times I\\to X,\\ F(x,t)=f_t(x)$는 연속이다.",
+            "2단계: 각 $x\\in X$에 대해 $\\gamma_x:I\\to X,\\ \\gamma_x(t)=F(x,t)=f_t(x)$를 정의한다. $F$의 연속성에서 $\\gamma_x$는 $t$에 대해 연속이다.",
+            "3단계: $\\gamma_x(0)=x$이고 $\\gamma_x(1)=x_0$이므로 $\\gamma_x$는 $x$와 $x_0$을 잇는 경로다.",
+            "4단계: 임의의 두 점 $x,y\\in X$는 각각 $x_0$과 이어지므로 $x_0$을 경유해 서로 이어진다. 따라서 $X$는 경로연결이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 (두 방을 가진 집, house with two rooms)",
+          "formal_statement": "$\\mathbb{R}^3$ 안의 2차원 부분공간 '두 방을 가진 집' $X$는 수축가능하다(사실 한 점으로 변형수축한다). 그러나 그 변형을 눈으로 직접 보기는 대단히 어렵다. $X$는 세 개의 수평 조각(고리와 위상동형)과 두 방의 벽을 이루는 수직 직사각형들, 그리고 두 개의 수직 터널로 이루어진다.",
+          "idea_behind_proof": "$X$를 직접 변형시키려 하지 말고, '살을 붙이는' 전략을 쓰는 것이 핵심 아이디어다. 충분히 작은 닫힌 $\\varepsilon$-근방 $N(X)$를 생각하면, (a) $N(X)$는 다시 $X$로 변형수축하고, (b) 덜 자명하게도 $N(X)$는 solid 공 $D^3$과 위상동형이다. (b)는 점토 공에 손가락을 밀어 넣어 위쪽 터널을 만들고 아래 방을 파낸 뒤, 다시 아래 터널을 밀어 넣고 위 방을 파내는 매장족 $h_t:D^3\\to\\mathbb{R}^3$으로 이해할 수 있다. $D^3$은 한 점과 호모토피 동치이므로, 동치관계의 추이성으로 $X\\simeq N(X)\\cong D^3\\simeq\\text{점}$이 된다.",
+          "proof_steps": [
+            "1단계: 충분히 작은 $\\varepsilon$에 대해 닫힌 근방 $N(X)$는 $X$로 변형수축한다(그래서 $X\\simeq N(X)$).",
+            "2단계: 점토 공을 눌러 두 터널을 만들고 두 방을 파내는 매장족을 통해 $N(X)\\cong D^3$.",
+            "3단계: $D^3$은 한 점으로 변형수축하므로 $D^3\\simeq\\text{점}$, 따라서 $X\\simeq\\text{점}$ — $X$는 수축가능.",
+            "4단계(더 강하게): $N(X)$의 한 점 $x_0\\in X$로의 변형수축 $f_t$와 축약 $r:N(X)\\to X$을 잡아 합성 $r f_t$를 $X$로 제한하면, 이것이 $X$의 $x_0$으로의 변형수축을 준다. 다만 그 변형이 구체적으로 어떤 모습인지 보는 것은 도전적인 문제다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (수축가능은 '한 점으로의 변형수축'보다 약하다)",
+          "formal_statement": "'수축가능하다(항등사상이 영호모토픽하다)'는 것은 일반적으로 '한 점으로 변형수축한다'보다 약간 더 약한 조건이다. 실제로 한 점으로 변형수축하지는 않으면서 수축가능한 공간이 존재한다(챕터 말미의 연습문제 참고). 따라서 두 개념을 혼동하지 않도록 주의해야 한다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{R}^n$이 수축가능함을 보여라. 원점 $0$으로의 변형수축을 명시적으로 구성하면 된다.",
+          "hint": "각 점을 원점 쪽으로 '직선을 따라 일정 속력으로' 끌어당기는 사상족을 생각하라. 즉 $t$에 따라 점의 위치를 원점과 자기 자신 사이에서 선형보간하라. 변형수축의 세 조건 $f_0=\\mathrm{id}$, $f_1(X)=\\{0\\}$, $f_t|_{\\{0\\}}=\\mathrm{id}$을 각각 확인하라.",
+          "solution": "$f_t(x)=(1-t)x$로 정의하자. 이는 $(x,t)\\mapsto (1-t)x$가 연속이므로 연속인 사상족이다. (i) $f_0(x)=x$이므로 $f_0=\\mathrm{id}_{\\mathbb{R}^n}$. (ii) $f_1(x)=0$이므로 $f_1(\\mathbb{R}^n)=\\{0\\}$. (iii) $x=0$이면 모든 $t$에 대해 $f_t(0)=0$이므로 $f_t|_{\\{0\\}}=\\mathrm{id}$. 따라서 $f_t$는 $\\mathbb{R}^n$의 $\\{0\\}$으로의 변형수축이고, $\\mathbb{R}^n\\simeq\\text{점}$, 즉 $\\mathbb{R}^n$은 수축가능하다. 일반화: 임의의 볼록집합(convex set) $C\\subseteq\\mathbb{R}^n$은 임의의 점 $x_0\\in C$에 대해 $f_t(x)=(1-t)x+t x_0$으로 같은 방식의 변형수축을 가지므로 수축가능하다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  2,
+                  1
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.5,
+                  2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -2,
+                  -1
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1,
+                  -2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  2.2,
+                  -0.6
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -0.6,
+                  -2.2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "0"
+              }
+            ],
+            "caption": "직선 호모토피 $f_t(x)=(1-t)x$: 모든 점이 원점을 향해 직선을 따라 끌려 들어간다. $t=1$에서 공간 전체가 한 점 $0$으로 모인다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "구멍 뚫린 평면 $\\mathbb{R}^2\\setminus\\{0\\}$이 단위원 $S^1$으로 변형수축함을 보이고, 이로써 $\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$임을 결론지어라.",
+          "hint": "각 점 $x\\neq 0$을 원점 방향의 반직선을 따라 단위원 위의 점 $x/\\lVert x\\rVert$까지 밀어 넣어라. 다만 원점을 통과해서는 안 되므로, $x$와 $x/\\lVert x\\rVert$ 사이를 선형보간하면서 그 값이 결코 $0$이 되지 않음을 확인해야 한다. 그리고 이미 $S^1$ 위에 있는 점($\\lVert x\\rVert=1$)은 움직이지 않아야 한다.",
+          "solution": "$f_t(x)=(1-t)\\,x+t\\,\\dfrac{x}{\\lVert x\\rVert}$로 정의하자($t\\in[0,1]$, $x\\in\\mathbb{R}^2\\setminus\\{0\\}$). 이는 $\\big((1-t)+t/\\lVert x\\rVert\\big)x$의 꼴로, 계수가 양수이고 $x\\neq0$이므로 값이 결코 $0$이 아니어서 상이 $\\mathbb{R}^2\\setminus\\{0\\}$ 안에 머문다. (i) $f_0(x)=x$이므로 $f_0=\\mathrm{id}$. (ii) $f_1(x)=x/\\lVert x\\rVert\\in S^1$이므로 $f_1(\\mathbb{R}^2\\setminus\\{0\\})=S^1$. (iii) $\\lVert x\\rVert=1$이면 $x/\\lVert x\\rVert=x$이므로 모든 $t$에서 $f_t(x)=x$, 즉 $f_t|_{S^1}=\\mathrm{id}$. 연관 사상은 연속이다. 따라서 $f_t$는 $\\mathbb{R}^2\\setminus\\{0\\}$의 $S^1$으로의 변형수축이고, 앞의 '변형수축은 호모토피 동치를 준다'는 명제에 의해 $\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$. 일반화: 같은 논법으로 $\\mathbb{R}^n\\setminus\\{0\\}\\simeq S^{n-1}$.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.8,
+                  1.2
+                ],
+                "to": [
+                  0.832,
+                  0.555
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.6,
+                  0.6
+                ],
+                "to": [
+                  -0.936,
+                  0.351
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.5,
+                  -1.9
+                ],
+                "to": [
+                  0.254,
+                  -0.967
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.3,
+                  -1.3
+                ],
+                "to": [
+                  -0.707,
+                  -0.707
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "hole"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.05,
+                  0.7
+                ],
+                "text": "S^1"
+              }
+            ],
+            "caption": "$\\mathbb{R}^2\\setminus\\{0\\}$의 각 점 $x$가 반직선을 따라 단위원 위의 $x/\\lVert x\\rVert$로 밀려 들어간다. 원점의 구멍 때문에 한 점으로는 오그라들 수 없고 $S^1$에서 멈춘다."
+          }
+        },
+        {
+          "type": "ox",
+          "question": "모든 수축가능(contractible) 공간은 반드시 한 점으로 변형수축(deformation retract)한다.",
+          "answer": "X",
+          "explanation": "거짓이다. '수축가능'(항등사상이 영호모토픽)은 '한 점으로 변형수축'보다 약간 더 약한 조건이다. 한 점으로 변형수축하지는 않으면서 수축가능한 공간이 실제로 존재한다(본문에서 이 차이를 명시하고 챕터 말 연습문제로 예를 제시한다). 두 개념의 이 미묘한 차이를 혼동하지 않아야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "변형수축은 대칭적 관계다. 즉 $X$가 $A$로 변형수축하면 $A$도 $X$로 변형수축한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 변형수축은 본질적으로 비대칭적이다($A$는 애초에 $X$의 부분공간이어야 하고, 예컨대 세 그래프는 같은 공간의 변형수축이지만 어느 것도 다른 것의 변형수축은 아니다). 대칭성을 갖는 것은 변형수축이 아니라 그로부터 유도되는 호모토피 동치 관계 $\\simeq$이며, 본문은 이 대조를 명시적으로 지적한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "변형수축(deformation retraction), 축약(retraction), 호모토피 동치(homotopy equivalence)는 서로 어떻게 관련되며, 왜 호모토피 동치가 이 중 가장 '넓은' 동치 개념이라 할 수 있는가?",
+          "hint": "각 개념이 요구하는 데이터가 무엇인지, 그리고 어느 것이 어느 것을 함의하는지 화살표로 정리해 보라. 특히 '변형수축은 호모토피 동치를 준다'는 명제와, $\\simeq$가 동치관계인 반면 변형수축은 비대칭이라는 사실을 대비하라. 축약만으로는 왜 부족한지도 생각하라.",
+          "answer": "세 개념은 요구하는 데이터의 강도 순으로 정렬된다. (1) 축약 $r:X\\to X$($r^2=r$)은 단 하나의 사상만 요구하며 시간(변형)이라는 정보가 없다 — 항상 존재할 수 있고(예: 임의의 점으로의 상수사상) 공간의 모양을 거의 반영하지 못한다. (2) 변형수축은 축약에 더해 '항등사상에서 그 축약으로 가는 상대 호모토피 $f_t$'라는 시간 정보를 요구한다. 이는 $X$와 부분공간 $A$ 사이의 강한 관계지만, $A\\subset X$라는 포함을 전제하므로 본질적으로 비대칭이다. (3) 변형수축이 있으면 포함사상과 축약이 서로 호모토피 역이 되어 $X\\simeq A$가 되므로, 변형수축은 호모토피 동치를 함의한다. 그러나 호모토피 동치는 부분공간 포함을 요구하지 않고 두 사상 $f,g$가 양방향으로 항등과 호모토픽하기만 하면 되므로 훨씬 유연하다. 그 결과 $\\simeq$는 반사·대칭·추이를 모두 만족하는 진짜 동치관계가 되고, '두 공간이 호모토피 동치일 필요충분조건은 둘을 함께 변형수축 부분공간으로 담는 공간 $Z$(예: 사상원기둥)가 존재하는 것'이라는 대칭적 특징화까지 얻는다. 요컨대 호모토피 동치는 비대칭적이고 국소적인 변형수축 관계들을 대칭적으로 '봉합'한 것이며, 대수적 위상수학이 실제로 구별하려는 불변량의 단위가 바로 이 호모토피형이다."
+        }
+      ]
+    },
+    {
+      "section_title": "0.2 Cell Complexes",
+      "step1_big_picture": {
+        "context": "0.1에서 우리는 공간을 호모토피형(homotopy type)으로 비교하는 눈을 얻었다. 그런데 그 눈으로 실제 무언가를 '계산'하려면, 공간을 다루기 쉬운 표준 조각들로 조립하는 방법이 필요하다. 이 소단원은 그 조립 언어인 세포복합체(cell complex, CW complex)를 도입한다. 원형은 정사각형의 마주 보는 변을 붙여 토러스 $S^1\\times S^1$을 만드는 익숙한 구성이다. 더 일반적으로 종수 $g$의 유향곡면 $M_g$는 $4g$각형의 변들을 쌍으로 동일시해 얻는다. 세포복합체는 이런 '점 → 1-세포 → 2-세포' 식 조립을 임의 차원으로 일반화한 것으로, 조합적(cell-by-cell) 논증을 가능케 하는 강체성(rigidity)과 여러 구성을 허용하는 유연성(flexibility)을 동시에 지닌다. 0.1과의 직접적 연결은 '두 방을 가진 집(house with two rooms)'에서 드러난다. 0.1에서 이 공간이 한 점의 호모토피형을 가짐(수축가능)을 보았는데, 여기서는 이를 명시적인 2차원 세포복합체로 다시 표현하고, 그 오일러 지표(Euler characteristic)가 호모토피 불변량이라는 사실(정리 2.44 — 이후 챕터에서 증명됨)로부터 어떤 세포구조를 쓰든 $\\chi=1$일 수밖에 없음을 확인한다.",
+        "hidden_intuition": "머릿속 그림은 '경계를 접착제로 발라 원반을 붙여 나가기'다. 먼저 낮은 차원의 뼈대(skeleton)를 만들어 두고, 새 $n$-세포를 붙일 때는 표준 원반 $D^n$을 가져와 그 경계 구 $S^{n-1}$을 부착사상(attaching map) $\\varphi_\\alpha:S^{n-1}\\to X^{n-1}$을 따라 뼈대 위에 '감아 붙인다'. 결정적 통찰은 세포 자체는 아무 정보도 없는 표준 원반일 뿐이고, 공간의 모든 위상적 개성은 '경계를 어떻게 붙였는가', 곧 부착사상에 담긴다는 점이다. 실제로 정사각형의 변을 $aba^{-1}b^{-1}$로 붙이면 토러스, $abab^{-1}$로 붙이면 클라인 병이 된다 — 세포 재료(하나의 2-세포와 뼈대)는 같지만 부착 방식만 바꿔도 전혀 다른 공간이 태어난다. 또 하나의 감각: 각 세포의 '내부'는 손대지 않은 열린 원반으로 그대로 남고(내부로의 위상동형), 모든 접착은 오직 경계에서만 일어난다. 그래서 집합으로서 $X^n = X^{n-1}\\sqcup\\big(\\coprod_\\alpha e^n_\\alpha\\big)$처럼 열린 세포들의 서로소 합으로 분해된다.",
+        "visualization": {
+          "type": "identification_polygon_2d",
+          "edges": [
+            {
+              "label": "a",
+              "dir": 1
+            },
+            {
+              "label": "b",
+              "dir": 1
+            },
+            {
+              "label": "a",
+              "dir": -1
+            },
+            {
+              "label": "b",
+              "dir": -1
+            }
+          ],
+          "caption": "토러스 $T^2=S^1\\times S^1$을 정사각형(2-세포)의 변을 $aba^{-1}b^{-1}$로 동일시해 얻는다. 네 변은 한 점에서 만나는 두 원($a,b$, 곧 1-세포)이 되고, 정사각형 내부가 그 위에 붙는 하나의 2-세포다. 즉 점 → 1-세포 두 개 → 2-세포 하나의 순서로 조립된 세포복합체."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (세포복합체, cell complex / CW complex)",
+          "formal_statement": "다음 절차로 만든 공간 $X$를 세포복합체(CW 복합체)라 한다. (1) 이산집합 $X^0$에서 시작한다. 그 점들을 $0$-세포로 본다. (2) 귀납적으로, $n$-세포들 $e^n_\\alpha$를 부착사상 $\\varphi_\\alpha:S^{n-1}\\to X^{n-1}$을 통해 붙여 $(n-1)$-뼈대 $X^{n-1}$로부터 $n$-뼈대 $X^n$을 만든다. 즉 $X^n$은 서로소 합집합 $X^{n-1}\\sqcup\\big(\\coprod_\\alpha D^n_\\alpha\\big)$을 관계 $x\\sim\\varphi_\\alpha(x)$ ($x\\in\\partial D^n_\\alpha$)로 나눈 몫공간이다. 집합으로서 $X^n=X^{n-1}\\sqcup\\big(\\coprod_\\alpha e^n_\\alpha\\big)$이며 각 $e^n_\\alpha$는 열린 $n$-원반이다. (3) 유한 단계에서 멈춰 $X=X^n$으로 두거나, 무한히 계속해 $X=\\bigcup_n X^n$으로 둔다. 후자의 경우 $X$에 약위상(weak topology)을 준다: $A\\subset X$가 열린(닫힌) 집합일 필요충분조건은 각 $n$에 대해 $A\\cap X^n$이 $X^n$에서 열린(닫힌) 것이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (차원, dimension)",
+          "formal_statement": "어떤 $n$에 대해 $X=X^n$이면 $X$를 유한차원(finite-dimensional)이라 하고, 그러한 최소의 $n$을 $X$의 차원이라 한다. 이는 $X$의 세포들의 최대 차원과 같다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.1 (그래프, graph)",
+          "formal_statement": "$1$차원 세포복합체 $X=X^1$을 대수적 위상수학에서는 그래프라 부른다. 이는 꼭짓점들($0$-세포)에 변들($1$-세포)을 붙여 이루어진다. 한 변의 두 끝을 같은 꼭짓점에 붙일 수도 있다(고리, loop).",
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                -1.2,
+                0
+              ],
+              [
+                1.2,
+                0
+              ]
+            ],
+            "vertex_labels": [
+              "v_0",
+              "v_1"
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "label": "e_1"
+              },
+              {
+                "from": 0,
+                "to": 0,
+                "label": "e_2"
+              }
+            ],
+            "caption": "간단한 그래프: 두 $0$-세포 $v_0,v_1$과 두 $1$-세포. $e_1$은 두 꼭짓점을 잇고, $e_2$는 두 끝이 같은 꼭짓점 $v_0$에 붙은 고리다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.2 (두 방을 가진 집과 오일러 지표)",
+          "formal_statement": "0.1의 '두 방을 가진 집'은 눈에 보이는 자연스러운 $2$차원 세포구조를 갖는다. 세 개 이상의 변이 만나는 지점이 $0$-세포, 그것들을 잇는 변의 내부가 $1$-세포, 나머지 $X-X^1$의 성분들이 $2$-세포다. 세어 보면 $0$-세포 $29$개, $1$-세포 $51$개, $2$-세포 $23$개이고 교대합 $29-51+23=1$이다. 유한 세포복합체의 오일러 지표(Euler characteristic)는 (짝수차원 세포의 개수) $-$ (홀수차원 세포의 개수)로 정의된다. 정리 2.44(이후 챕터에서 증명됨)에 의해 오일러 지표는 호모토피형에만 의존하므로, 0.1에서 이 집이 한 점의 호모토피형을 가짐(수축가능)을 보인 사실로부터, 어떤 세포구조로 표현하든 그 오일러 지표는 반드시 $1$이어야 한다.",
+          "idea_behind_proof": "여기서 되짚어야 할 것은 0.1의 결과가 어떻게 재사용되는가다. 0.1에서 '두 방을 가진 집' $X$는 $X\\simeq N(X)\\cong D^3\\simeq\\text{점}$을 통해 한 점의 호모토피형을 가짐을 보았다. 이 소단원의 새 재료는 (a) $X$를 구체적 세포복합체로 표현할 수 있다는 것과 (b) 오일러 지표라는 조합적 수 $\\chi$다. 정리 2.44(호모토피 불변성)와 0.1의 결론(수축가능)을 결합하면, $\\chi(X)=\\chi(\\text{점})=1$이 세포 개수 세는 방식과 무관하게 강제된다 — 실제로 $29-51+23=1$이 이를 확인해 준다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.3 (구 $S^n$)",
+          "formal_statement": "구 $S^n$은 단 두 개의 세포 $e^0$와 $e^n$만으로 이루어진 세포구조를 갖는다. $n$-세포는 상수사상 $S^{n-1}\\to e^0$을 부착사상으로 하여 붙인다. 이는 $S^n$을 몫공간 $D^n/\\partial D^n$으로 보는 것과 동치다.",
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                0,
+                -1.2
+              ]
+            ],
+            "vertex_labels": [
+              "e^0"
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 0,
+                "label": "e^1"
+              }
+            ],
+            "caption": "$n=1$인 경우의 그림: $S^1=e^0\\cup e^1$. 하나의 $0$-세포에 $1$-세포의 두 끝을 모두 붙이면 원이 된다. 일반적으로 $S^n=e^0\\cup e^n$이며 $n$-세포는 상수사상으로 붙는다($S^n=D^n/\\partial D^n$)."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.4 (실사영공간 $\\mathbb{RP}^n$)",
+          "formal_statement": "실사영 $n$-공간 $\\mathbb{RP}^n$은 $\\mathbb{R}^{n+1}$에서 원점을 지나는 모든 직선의 공간이다. 각 직선은 $\\mathbb{R}^{n+1}$의 영 아닌 벡터로 결정되며 스칼라배까지만 유일하므로, $\\mathbb{RP}^n$은 $(\\mathbb{R}^{n+1}\\setminus\\{0\\})/(v\\sim\\lambda v,\\ \\lambda\\neq0)$이다. 길이 $1$의 벡터로 제한하면 $\\mathbb{RP}^n=S^n/(v\\sim -v)$, 곧 대척점(antipodal point)을 동일시한 구다. 귀납적으로 $\\mathbb{RP}^n$은 $\\mathbb{RP}^{n-1}$에 $n$-세포 하나를 몫사영 $S^{n-1}\\to\\mathbb{RP}^{n-1}$을 부착사상으로 붙여 얻으며, 따라서 각 차원 $i\\le n$마다 세포 하나씩을 갖는 구조 $\\mathbb{RP}^n=e^0\\cup e^1\\cup\\cdots\\cup e^n$을 갖는다.",
+          "idea_behind_proof": "세포구조 전체가 단 하나의 재귀적 관찰에서 나온다: $\\mathbb{RP}^n$은 문자 그대로 $\\mathbb{RP}^{n-1}$에 $n$-세포를 붙인 것이다. 이유는, $\\mathbb{RP}^n$을 반구 $D^n$에서 경계의 대척점만 동일시한 것으로 표현하면, 원반 내부는 대표원소가 유일해 하나의 열린 $n$-세포가 되고, 경계 $\\partial D^n=S^{n-1}$에서 살아남는 관계 $v\\sim -v$가 정확히 $\\mathbb{RP}^{n-1}$의 정의이기 때문이다. 즉 '경계를 대척 몫사상으로 뼈대에 감아 붙인다'가 바로 세포 부착이다.",
+          "proof_steps": [
+            "1단계: $\\mathbb{RP}^n=S^n/(v\\sim -v)$를 반구 $D^n$(예: 마지막 좌표 $\\ge 0$)으로 제한한다. 모든 직선은 이 반구와 만나고, 내부의 점은 유일한 대표이며, 경계 $\\partial D^n=S^{n-1}$에서는 여전히 대척점이 동일시된다.",
+            "2단계: 경계 위의 관계 $v\\sim -v$는 정확히 $\\mathbb{RP}^{n-1}$을 준다. 따라서 $\\mathbb{RP}^n$은 $D^n$을 몫사상 $q:S^{n-1}\\to\\mathbb{RP}^{n-1}$로 경계 접착한 것이다.",
+            "3단계: 그러므로 $\\mathbb{RP}^n$은 $\\mathbb{RP}^{n-1}$에 $q$를 부착사상으로 하는 $n$-세포 $e^n$ 하나를 붙여 얻는다. $D^n$의 내부는 $e^n$ 위로 위상동형으로 보내진다.",
+            "4단계: 기저 $\\mathbb{RP}^0=\\text{점}=e^0$. 귀납에 의해 $\\mathbb{RP}^n=e^0\\cup e^1\\cup\\cdots\\cup e^n$, 각 차원 $0,\\dots,n$마다 세포가 정확히 하나씩. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.5
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.5,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.5,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.06,
+                  1.06
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.06,
+                  -1.06
+                ]
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  1.5,
+                  0
+                ],
+                "to": [
+                  -1.5,
+                  0
+                ],
+                "bulge": 0.35,
+                "arrow": true
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  1.06,
+                  1.06
+                ],
+                "to": [
+                  -1.06,
+                  -1.06
+                ],
+                "bulge": 0.35,
+                "arrow": true
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.5
+                ],
+                "text": "identify antipodes"
+              }
+            ],
+            "caption": "$\\mathbb{RP}^2$은 원반 $D^2$의 경계 위 대척점을 동일시한 것이다. 경계 $\\partial D^2=S^1$에서 $v\\sim -v$로 붙은 결과가 $\\mathbb{RP}^1$이고, 원반 내부가 하나의 $2$-세포가 된다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.5 (무한 실사영공간 $\\mathbb{RP}^\\infty$)",
+          "formal_statement": "$\\mathbb{RP}^n$이 $\\mathbb{RP}^{n-1}$에 $n$-세포를 붙여 얻어지므로, 무한 합집합 $\\mathbb{RP}^\\infty=\\bigcup_n\\mathbb{RP}^n$은 각 차원마다 세포 하나씩을 갖는 세포복합체가 된다. $\\mathbb{RP}^\\infty$는 $\\mathbb{R}^\\infty=\\bigcup_n\\mathbb{R}^n$에서 원점을 지나는 직선들의 공간으로 볼 수 있다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.6 (복소사영공간 $\\mathbb{CP}^n$)",
+          "formal_statement": "복소사영 $n$-공간 $\\mathbb{CP}^n$은 $\\mathbb{C}^{n+1}$에서 원점을 지나는 복소직선(1차원 복소부분공간)들의 공간으로, $(\\mathbb{C}^{n+1}\\setminus\\{0\\})/(v\\sim\\lambda v,\\ \\lambda\\neq0)$이다. 동치로 단위구 $S^{2n+1}\\subset\\mathbb{C}^{n+1}$을 $|\\lambda|=1$인 $v\\sim\\lambda v$로 나눈 몫이다. $\\mathbb{CP}^n$은 $\\mathbb{CP}^{n-1}$에 몫사상 $S^{2n-1}\\to\\mathbb{CP}^{n-1}$을 부착사상으로 하는 세포 $e^{2n}$을 붙여 얻으며, 따라서 짝수 차원에만 세포를 갖는 구조 $\\mathbb{CP}^n=e^0\\cup e^2\\cup\\cdots\\cup e^{2n}$을 갖는다. 마찬가지로 $\\mathbb{CP}^\\infty$는 각 짝수 차원마다 세포 하나씩을 갖는다.",
+          "idea_behind_proof": "$\\mathbb{RP}^n$과 완전히 같은 재귀 틀을 쓰되, '반구' 역할을 $D^{2n}$이 맡고 스칼라가 $\\pm1$ 대신 모든 단위 복소수 $|\\lambda|=1$가 된다. 영리한 구체 모델은 이렇다: $S^{2n+1}$의 단위벡터 중 마지막 좌표가 실수이며 음이 아닌 대표를 고르면 $\\big(w,\\sqrt{1-|w|^2}\\big)$ ($|w|\\le1$) 꼴이고, 이들은 함수 $w\\mapsto\\sqrt{1-|w|^2}$의 그래프, 즉 $S^{2n-1}=\\{(w,0):|w|=1\\}$을 경계로 하는 원반 $D^{2n}_+$을 이룬다. 내부의 점은 유일한 대표라 열린 $2n$-세포가 되고, 경계 $S^{2n-1}$에서 살아남는 관계 $v\\sim\\lambda v$가 정확히 $\\mathbb{CP}^{n-1}$이다.",
+          "proof_steps": [
+            "1단계: $\\mathbb{CP}^n=S^{2n+1}/(v\\sim\\lambda v,\\ |\\lambda|=1)$. 각 동치류에서 마지막 좌표가 실수 $\\ge0$인 대표 $\\big(w,\\sqrt{1-|w|^2}\\big)$ ($|w|\\le1$)를 고른다. 이들은 $D^{2n}_+\\cong D^{2n}$을 이루고 경계는 $S^{2n-1}=\\{(w,0):|w|=1\\}$이다.",
+            "2단계: 마지막 좌표가 양수인 내부 대표는 유일 → 열린 $2n$-세포. 마지막 좌표가 $0$인 경계에서는 관계 $v\\sim\\lambda v$ ($|\\lambda|=1$)가 그대로 남아 $\\mathbb{CP}^{n-1}$을 준다.",
+            "3단계: 따라서 $\\mathbb{CP}^n$은 $D^{2n}$을 몫사상 $S^{2n-1}\\to\\mathbb{CP}^{n-1}$로 경계 접착한 것, 즉 $\\mathbb{CP}^{n-1}$에 $2n$-세포를 붙인 것이다.",
+            "4단계: 기저 $\\mathbb{CP}^0=\\text{점}=e^0$. 귀납에 의해 $\\mathbb{CP}^n=e^0\\cup e^2\\cup\\cdots\\cup e^{2n}$ — 세포는 짝수 차원에만 존재하고, $\\mathbb{CP}^\\infty$는 각 짝수 차원마다 하나씩 갖는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (특성사상, characteristic map)",
+          "formal_statement": "세포복합체 $X$의 각 세포 $e^n_\\alpha$는 특성사상 $\\Phi_\\alpha:D^n_\\alpha\\to X$를 갖는다. 이는 부착사상 $\\varphi_\\alpha$를 확장하며 $D^n_\\alpha$의 내부에서 $e^n_\\alpha$ 위로의 위상동형이다. 구체적으로 $\\Phi_\\alpha$는 합성 $D^n_\\alpha\\hookrightarrow X^{n-1}\\sqcup\\big(\\coprod_\\alpha D^n_\\alpha\\big)\\to X^n\\hookrightarrow X$로 잡을 수 있으며, 가운데 사상은 $X^n$을 정의하는 몫사상이다. 예를 들어 예 0.3의 $S^n$에서 $n$-세포의 특성사상은 $\\partial D^n$을 한 점으로 붕괴시키는 몫사상 $D^n\\to S^n$이고, $\\mathbb{RP}^n$에서 세포 $e^i$의 특성사상은 $\\partial D^i$의 대척점을 동일시하는 몫사상 $D^i\\to\\mathbb{RP}^i\\subset\\mathbb{RP}^n$이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (부분복합체, subcomplex / CW 쌍, CW pair)",
+          "formal_statement": "세포복합체 $X$의 부분복합체란, $X$의 세포들의 합집합인 닫힌 부분공간 $A\\subset X$이다. $A$가 닫혀 있으므로 $A$의 각 세포의 특성사상의 상은 $A$에 포함되고, 특히 각 세포의 부착사상의 상도 $A$에 포함되어 $A$는 그 자체로 하나의 세포복합체가 된다. 세포복합체 $X$와 그 부분복합체 $A$로 이루어진 쌍 $(X,A)$를 CW 쌍(CW pair)이라 한다. 예로 각 뼈대 $X^n$은 부분복합체이며, $\\mathbb{RP}^k\\subset\\mathbb{RP}^n$과 $\\mathbb{CP}^k\\subset\\mathbb{CP}^n$ ($k\\le n$)도 부분복합체다(사실 이들이 유일한 부분복합체다)."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (부분구와 $S^\\infty\\to\\mathbb{RP}^\\infty$)",
+          "formal_statement": "자연스러운 포함 $S^0\\subset S^1\\subset\\cdots\\subset S^n$이 있지만, 두 세포만 갖는 통상적 구조에서는 이 부분구들이 $S^n$의 부분복합체가 아니다. 그러나 각 $S^k$를 적도 $S^{k-1}$에서 두 개의 $k$-세포($S^k-S^{k-1}$의 두 성분)를 붙여 귀납적으로 얻는 다른 세포구조를 주면 모든 부분구 $S^k$가 부분복합체가 된다. 이때 무한차원 구 $S^\\infty=\\bigcup_n S^n$도 세포복합체가 된다. 대척점을 동일시하는 이대일 몫사상 $S^\\infty\\to\\mathbb{RP}^\\infty$는 $S^\\infty$의 두 $n$-세포를 $\\mathbb{RP}^\\infty$의 유일한 $n$-세포로 동일시한다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (세포의 폐포가 부분복합체가 아닐 수 있다)",
+          "formal_statement": "지금까지의 예에서는 각 세포의 폐포(그리고 임의의 세포 모음의 폐포)가 부분복합체였지만, 일반적으로 이것이 성립할 필요는 없다. 예를 들어 최소 세포구조를 준 $S^1$에서 시작해, 상이 $S^1$의 자명하지 않은 부분호(subarc)인 사상 $S^1\\to S^1$을 부착사상으로 하여 $2$-세포 하나를 붙이면, 이 $2$-세포의 폐포는 $1$-세포의 일부만 포함하므로 부분복합체가 아니다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "구 $S^2$의 오일러 지표를 두 가지 세포구조로 계산해 서로 일치함을 확인하라. (a) 최소 세포구조 $e^0\\cup e^2$, (b) 정사면체(tetrahedron)의 경계 구조: 꼭짓점 $4$개, 변 $6$개, 면 $4$개.",
+          "hint": "오일러 지표는 (짝수차원 세포 개수) $-$ (홀수차원 세포 개수)다. (a)에는 홀수차원 세포가 없다. (b)에서는 $0$-세포($V$)와 $2$-세포($F$)가 짝수차원, $1$-세포($E$)가 홀수차원이므로 $V-E+F$를 계산하면 된다. 두 값이 왜 같아야 하는지도 생각하라.",
+          "solution": "(a) 세포는 $e^0$(짝수), $e^2$(짝수)뿐이고 홀수차원 세포는 없으므로 $\\chi(S^2)=2-0=2$. (b) $V=4,\\ E=6,\\ F=4$이고 짝수차원은 $V+F$, 홀수차원은 $E$이므로 $\\chi=V-E+F=4-6+4=2$. 두 값이 일치한다. 이는 우연이 아니다 — 정리 2.44에 따라 오일러 지표는 호모토피형에만 의존하므로, 같은 공간 $S^2$의 어떤 유한 세포구조를 택하든 $\\chi$는 항상 $2$다. 일반화: 임의의 유한 세포복합체 $X$에 대해 $\\chi(X)$는 세포 개수를 세는 방식과 무관한 호모토피 불변량이다.",
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                0,
+                1.5
+              ],
+              [
+                -1.3,
+                -0.9
+              ],
+              [
+                1.3,
+                -0.9
+              ],
+              [
+                0,
+                -0.1
+              ]
+            ],
+            "vertex_labels": [
+              "v_1",
+              "v_2",
+              "v_3",
+              "v_4"
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1
+              },
+              {
+                "from": 1,
+                "to": 2
+              },
+              {
+                "from": 2,
+                "to": 0
+              },
+              {
+                "from": 0,
+                "to": 3
+              },
+              {
+                "from": 1,
+                "to": 3
+              },
+              {
+                "from": 2,
+                "to": 3
+              }
+            ],
+            "caption": "정사면체의 $1$-뼈대(완전그래프 $K_4$): 꼭짓점 $4$개, 변 $6$개. 네 삼각형 영역을 $2$-세포로 채우면 $S^2$가 되고, $\\chi=4-6+4=2$."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "표준 세포구조를 이용해 $\\mathbb{RP}^3$과 $\\mathbb{CP}^2$의 세포를 각각 적고, 두 공간의 오일러 지표를 계산하라.",
+          "hint": "예 0.4에서 $\\mathbb{RP}^n$은 차원 $0,1,\\dots,n$마다 세포가 하나씩, 예 0.6에서 $\\mathbb{CP}^n$은 짝수 차원 $0,2,\\dots,2n$마다 세포가 하나씩이다. 각 세포를 짝수/홀수 차원으로 분류해 개수를 빼라.",
+          "solution": "$\\mathbb{RP}^3=e^0\\cup e^1\\cup e^2\\cup e^3$. 짝수차원 세포는 $e^0,e^2$로 $2$개, 홀수차원은 $e^1,e^3$로 $2$개이므로 $\\chi(\\mathbb{RP}^3)=2-2=0$. $\\mathbb{CP}^2=e^0\\cup e^2\\cup e^4$. 모두 짝수차원 세포이고 홀수차원 세포는 없으므로 $\\chi(\\mathbb{CP}^2)=3-0=3$. 일반화: $\\chi(\\mathbb{CP}^n)=n+1$이고, $\\chi(\\mathbb{RP}^n)$은 $n$이 짝수면 $1$, 홀수면 $0$이다(홀수차원 세포와 짝수차원 세포의 개수가 어떻게 대응되는지 세어 보면 알 수 있다)."
+        },
+        {
+          "type": "ox",
+          "question": "구 $S^n$의 통상적 두-세포 구조 $e^0\\cup e^n$에서, 자연스러운 부분구들 $S^0\\subset S^1\\subset\\cdots\\subset S^n$은 모두 이 세포복합체의 부분복합체(subcomplex)다.",
+          "answer": "X",
+          "explanation": "거짓이다. 두-세포 구조에서 $S^n$의 세포는 $e^0$와 $e^n$뿐이므로, 중간 차원의 부분구 $S^k$ ($0<k<n$)는 세포들의 합집합이 아니어서 부분복합체가 될 수 없다. 부분구들을 부분복합체로 만들려면, 각 $S^k$를 적도 $S^{k-1}$에서 두 개의 $k$-세포를 붙여 얻는 '다른' 세포구조를 주어야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "세포복합체에서 임의의 한 세포의 폐포(closure)는 항상 부분복합체가 된다.",
+          "answer": "X",
+          "explanation": "거짓이다. 자연스럽게 나타나는 대부분의 세포구조는 이 성질을 갖지만 일반적으로 성립하지는 않는다. 반례: 최소 구조의 $S^1$에 상이 $S^1$의 자명하지 않은 부분호인 사상으로 $2$-세포를 붙이면, 이 $2$-세포의 폐포는 $1$-세포의 일부만 포함하므로 세포들의 합집합이 아니어서 부분복합체가 아니다."
+        },
+        {
+          "type": "conceptual",
+          "question": "세포복합체를 만들 때 부착사상(attaching map) $\\varphi_\\alpha:S^{n-1}\\to X^{n-1}$이 왜 공간의 위상적 정체성을 결정하는 핵심인가? 같은 세포 재료라도 부착 방식에 따라 전혀 다른 공간이 됨을 구체적 예로 설명하라.",
+          "hint": "세포 자체($D^n$)는 위상적으로 아무 개성이 없는 표준 원반이라는 점에서 출발하라. 그렇다면 결과 공간의 차이는 어디서 오는가? 하나의 $2$-세포를 뼈대에 붙이는 방식만 바꿔 서로 다른 공간(예: $S^2$, $\\mathbb{RP}^2$, 토러스, 클라인 병)을 만들어 보라.",
+          "answer": "세포 $D^n$ 자체는 위상적으로 완전히 표준적이고 개성이 없다 — 모든 정보는 그 경계 구 $S^{n-1}$을 낮은 차원 뼈대 $X^{n-1}$에 '어떻게 감아 붙이는가', 곧 부착사상 $\\varphi_\\alpha$에 들어 있다. 그래서 대수적 위상수학은 세포 자체가 아니라 부착사상(그리고 나중에는 그 호모토피류 $[\\varphi_\\alpha]\\in\\pi_{n-1}(X^{n-1})$)에 주목한다. 예: 한 개의 $0$-세포와 한 개의 $2$-세포($D^2$)라는 같은 재료를 두고, 경계 $S^1$을 상수사상으로 붙이면 $D^2/\\partial D^2=S^2$가 되고, 대척 몫사상 $S^1\\to\\mathbb{RP}^1=S^1$로 붙이면 $\\mathbb{RP}^2$가 된다. 또 뼈대를 두 원의 쐐기합(1-세포 $a,b$)으로 두고 $2$-세포를 $aba^{-1}b^{-1}$로 붙이면 토러스, $abab^{-1}$로 붙이면 클라인 병이 된다. 세포의 개수와 차원(따라서 오일러 지표 계산의 재료)은 같아도 부착사상만 바꾸면 근본적으로 다른 공간이 태어난다 — 이것이 부착사상이 세포복합체 이론의 심장인 이유다."
+        }
+      ]
+    },
+    {
+      "section_title": "0.3 Operations on Spaces",
+      "step1_big_picture": {
+        "context": "0.2에서 세포복합체(cell complex)는 강체성(cell-by-cell 조합 논증)과 유연성(여러 구성을 허용)을 겸비한 조립 언어임을 보았다. 이 소단원은 그 유연성의 실체 — 세포복합체에서 세포복합체를 만들어 내는 표준 연산들 — 을 목록으로 정리한다. 곱(product), 몫(quotient), 뿔(cone)과 현수(suspension), 조인(join), 쐐기합(wedge sum), 스매시곱(smash product)이 그것이다. 이들은 앞으로 대수적 위상수학 전체에서 쓰이는 기본 어휘다. 앞 내용과의 연결은 곳곳에서 드러난다. 곱 구조는 0.2의 토러스 세포구조 $S^1\\times S^1$을 표준 $S^1$ 구조로부터 다시 유도하고, 몫 구조에서는 0.2 예 0.3의 $D^n/\\partial D^n=S^n$이 $D^n/S^{n-1}=S^n$으로 재등장한다. 또한 이 소단원 서두는 지금까지 호모토피 동치를 만드는 주된 도구가 0.1의 '사상원기둥이 목표 끝으로 변형수축한다'는 사실이었음을 상기시키며, 그것만으로는 번거로우니 다른 기법이 필요하다고 예고한다(이는 다음 소단원 「Two Criteria for Homotopy Equivalence」로 이어진다).",
+        "hidden_intuition": "이 연산들은 겉보기엔 제각각이지만 하나의 공통 제작법을 공유한다: '곱(또는 서로소 합)을 취하고, 필요하면 구간 $I$로 두껍게 한 뒤, 고른 부분공간을 붕괴시킨다'. 그래서 각 연산의 개성은 '무엇을 붕괴시키는가'에 담긴다. 뿔 $CX$는 공간 전체를 하나의 꼭짓점으로 끌어올려 모든 위상을 죽인다(그래서 항상 수축가능). 현수 $SX$는 위·아래 두 꼭짓점을 갖는 이중뿔로 차원을 하나 올린다($SS^n=S^{n+1}$). 조인 $X\\ast Y$는 $X$의 점과 $Y$의 점을 잇는 모든 선분을 채우며, 점들을 형식적 결합 $t_1x+t_2y$($t_1+t_2=1$)로 적으면 조인의 결합법칙과 단체(simplex)의 출현이 한눈에 보인다. 쐐기합 $X\\vee Y$는 한 점에서 붙인 꽃다발이고, 스매시곱 $X\\wedge Y$는 곱에서 '진짜 곱이 아닌 축들'($X\\vee Y$)을 붕괴시켜 남긴 축약판이다($S^m\\wedge S^n=S^{m+n}$). 요컨대 0.2의 몫(quotient)이 이 모든 연산의 일꾼이며, 항상 부분복합체를 붕괴시키므로 결과가 다시 세포복합체 안에 머문다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -1.4,
+                0
+              ],
+              "to": [
+                1.4,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                1.8
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                -1.8
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                -1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                -0.7,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                1.8
+              ],
+              "to": [
+                0.7,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                -1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                1.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                -0.7,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -1.8
+              ],
+              "to": [
+                0.7,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.7,
+                0
+              ],
+              "text": "X"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                2.05
+              ],
+              "text": "north"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                -2.05
+              ],
+              "text": "south"
+            }
+          ],
+          "caption": "현수 $SX$는 이중뿔이다. 가운데가 $X$, 위 꼭짓점은 $X\\times\\{1\\}$을, 아래 꼭짓점은 $X\\times\\{0\\}$을 각각 한 점으로 붕괴시켜 얻는다. $X=S^n$이면 $SX=S^{n+1}$."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (곱, product)",
+          "formal_statement": "$X,Y$가 세포복합체이면 $X\\times Y$도 세포복합체이며, 그 세포는 곱 $e^m_\\alpha\\times e^n_\\beta$들이다($e^m_\\alpha$는 $X$의 세포, $e^n_\\beta$는 $Y$의 세포). 예로 0.2 서두의 토러스 $S^1\\times S^1$의 세포구조는 표준 $S^1$ 구조로부터 이렇게 얻어진다. 점집합 위상적 주의점: 일반적인 CW 복합체 $X,Y$에서 $X\\times Y$의 세포복합체 위상은 곱위상(product topology)보다 미세할(finer) 수 있다. 단, $X$나 $Y$ 중 하나가 유한 개의 세포만 갖거나 둘 다 가산 개의 세포를 가지면 두 위상은 일치한다(부록 참고). 실제로는 이 미묘함이 문제를 일으키는 경우는 드물다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (몫, quotient)",
+          "formal_statement": "CW 쌍 $(X,A)$(세포복합체 $X$와 부분복합체 $A$)에 대해 몫공간 $X/A$는 $X$로부터 자연스러운 세포구조를 물려받는다. $X/A$의 세포는 $X-A$의 세포들에 새 $0$-세포 하나($A$가 $X/A$에서 대응되는 점)를 더한 것이다. $X-A$의 세포 $e^n_\\alpha$가 $\\varphi_\\alpha:S^{n-1}\\to X^{n-1}$로 붙었다면, $X/A$에서 대응 세포의 부착사상은 합성 $S^{n-1}\\to X^{n-1}\\to X^{n-1}/A^{n-1}$이다. 예1: $S^{n-1}$에 아무 세포구조나 주고 $n$-세포를 붙여 $D^n$을 만들면 $D^n/S^{n-1}=S^n$(0.2의 표준 구조). 예2: $X$를 단일 $2$-세포를 갖는 닫힌 유향곡면, $A$를 그 $2$-세포의 여집합($1$-뼈대)이라 하면, $X/A$는 $0$-세포에 $2$-세포 하나를 붙인 것이고 $0$-세포에 세포를 붙이는 방법은 상수사상뿐이므로 $X/A=S^2$이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (뿔, cone / 현수, suspension)",
+          "formal_statement": "공간 $X$에 대해 뿔은 $CX=(X\\times I)/(X\\times\\{0\\})$, 즉 $X\\times\\{0\\}$을 한 점(꼭짓점)으로 붕괴시킨 것이다. 현수 $SX$는 $X\\times I$에서 $X\\times\\{0\\}$을 한 점으로, $X\\times\\{1\\}$을 또 다른 점으로 붕괴시킨 몫공간이며, $X$ 위의 이중뿔 — 두 개의 뿔 $CX$를 붙인 것 — 로 볼 수 있다. $X$가 CW 복합체이면 $CX,SX$도 (구간 $I$에 '두 $0$-세포를 한 $1$-세포로 이은' 표준 구조를 주고 곱 세포구조를 취해) CW 복합체다.",
+          "visualization": {
+            "type": "convex_hull_2d",
+            "points": [
+              [
+                0,
+                1.3
+              ],
+              [
+                -1.2,
+                -0.8
+              ],
+              [
+                1.2,
+                -0.8
+              ]
+            ],
+            "labels": [
+              "x_1",
+              "x_2",
+              "x_3"
+            ],
+            "caption": "조인 미리보기: 세 점 $x_1,x_2,x_3$의 조인은 삼각형 $\\Delta^2$이다(뿔·현수는 각각 한 점·두 점을 외부 꼭짓점으로 잇는 특수한 조인으로 볼 수 있다)."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($SS^n=S^{n+1}$과 사상의 현수)",
+          "formal_statement": "현수의 원형 예는 $X=S^n$일 때로, 이때 $SX=S^{n+1}$이며 두 '현수점'은 $S^{n+1}$의 북극·남극 $(0,\\dots,0,\\pm1)$이다. 현수의 유용한 성질 하나는 공간뿐 아니라 사상도 현수할 수 있다는 것이다: 사상 $f:X\\to Y$는 $f\\times\\mathrm{id}:X\\times I\\to Y\\times I$의 몫사상으로서 현수 $Sf:SX\\to SY$를 낳는다. 현수는 대수적 위상수학으로 깊이 들어갈수록 점점 중요해지는데, 그 이유가 미리 자명하지는 않다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (조인, join)",
+          "formal_statement": "공간 $X,Y$에 대해 조인 $X\\ast Y$는 $X\\times Y\\times I$를 관계 $(x,y_1,0)\\sim(x,y_2,0)$과 $(x_1,y,1)\\sim(x_2,y,1)$로 나눈 몫공간이다. 즉 $X\\times Y\\times\\{0\\}$을 $X$로, $X\\times Y\\times\\{1\\}$을 $Y$로 붕괴시킨다. 점을 형식적 결합 $t_1x+t_2y$ ($0\\le t_i\\le1,\\ t_1+t_2=1$, 규칙 $0x+1y=y,\\ 1x+0y=x$)로 적을 수 있고, 반복 조인 $X_1\\ast\\cdots\\ast X_n$은 $t_1x_1+\\cdots+t_nx_n$ ($t_i\\ge0,\\ \\sum t_i=1$, $0t_i$ 항은 생략 가능)으로 본다. 이 관점에서 조인이 결합적(associative)임이 쉽게 보인다. $X,Y$가 CW 복합체이면 $X\\ast Y$에도 $X,Y$를 부분복합체로 갖는 자연스러운 CW 구조가 있고, 나머지 세포는 $X\\times Y\\times(0,1)$의 곱 세포들이다."
+        },
+        {
+          "type": "Example",
+          "name": "예 (점들의 조인 = 단체, simplex)",
+          "formal_statement": "각 $X_i$가 한 점인 특수한 경우가 중요하다. 두 점의 조인은 선분, 세 점의 조인은 삼각형, 네 점의 조인은 사면체다. 일반적으로 $n$개의 점의 조인은 차원 $n-1$의 볼록 다면체 $\\Delta^{n-1}$, 곧 단체(simplex)다. 구체적으로 그 $n$개의 점을 $\\mathbb{R}^n$의 표준기저벡터로 잡으면 조인은 $$\\Delta^{n-1}=\\{(t_1,\\dots,t_n)\\in\\mathbb{R}^n\\mid t_1+\\cdots+t_n=1,\\ t_i\\ge0\\}$$ 이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 ($S^0$의 반복 조인은 구다)",
+          "formal_statement": "각 $X_i=S^0$을 $\\mathbb{R}^n$의 $i$번째 좌표축을 따른 두 단위벡터 $\\pm e_i$로 실현하면, 조인 $X_1\\ast\\cdots\\ast X_n$은 $2^n$개의 $\\Delta^{n-1}$ 복사본의 합집합이고, 원점으로부터의 방사사영(radial projection)이 $X_1\\ast\\cdots\\ast X_n$과 $S^{n-1}$ 사이의 위상동형을 준다. 특히 $\\underbrace{S^0\\ast\\cdots\\ast S^0}_{n}\\cong S^{n-1}$.",
+          "idea_behind_proof": "형식적 결합 모델이 열쇠다. 조인의 점은 $\\sum_i t_ix_i$ ($x_i\\in\\{+e_i,-e_i\\}$, $t_i\\ge0$, $\\sum t_i=1$)인데, 각 $i$의 부호를 $x_i$에 흡수해 $s_i=\\pm t_i$로 쓰면 점이 곧 좌표 $(s_1,\\dots,s_n)$이고 조건은 $\\sum_i|s_i|=1$이 된다. 이는 정확히 교차다포체(cross-polytope)의 경계, 즉 $\\ell^1$-단위구다. 부호 패턴 하나가 한 개의 $\\Delta^{n-1}$을 주므로 $2^n$개, 그리고 이 $\\ell^1$-구를 방사 방향으로 밀어 $\\ell^2$-구 $S^{n-1}$에 겹치는 것이 위상동형이다.",
+          "proof_steps": [
+            "1단계: 조인의 점 $\\sum_i t_ix_i$에서 $x_i\\in\\{+e_i,-e_i\\}$의 부호를 흡수해 $s_i=\\pm t_i$로 두면, 점은 $(s_1,\\dots,s_n)\\in\\mathbb{R}^n$이고 $\\sum_i|s_i|=\\sum_i t_i=1$.",
+            "2단계: 따라서 조인은 집합 $\\{s\\in\\mathbb{R}^n:\\sum_i|s_i|=1\\}$, 곧 교차다포체(팔면체류)의 경계다. 부호 패턴 $2^n$가지 각각이 한 개의 $\\Delta^{n-1}$을 주므로 $2^n$개의 단체로 이루어진다.",
+            "3단계: 방사사영 $s\\mapsto s/\\lVert s\\rVert_2$는 원점에서 나온 각 반직선이 $\\ell^1$-구와 $\\ell^2$-구를 각각 정확히 한 번씩 만나므로, 이 경계를 유클리드 단위구 $S^{n-1}$ 위로 전단사이며 양쪽 연속으로 보낸다.",
+            "4단계: 그러므로 $X_1\\ast\\cdots\\ast X_n\\cong S^{n-1}$. 조인이 차원을 하나 올림을 보여 주는 대표적 사례다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (쐐기합, wedge sum)",
+          "formal_statement": "점을 하나씩 고른 공간 $(X,x_0)$, $(Y,y_0)$에 대해 쐐기합 $X\\vee Y$는 서로소 합 $X\\sqcup Y$에서 $x_0$과 $y_0$을 한 점으로 동일시한 몫공간이다. 예로 $S^1\\vee S^1$은 두 원이 한 점에서 만나는 팔자(figure-8)와 위상동형이다. 일반적으로 임의의 공간 모음 $\\{X_\\alpha\\}$에 대해 $\\bigsqcup_\\alpha X_\\alpha$에서 점들 $x_\\alpha$를 한 점으로 동일시해 $\\bigvee_\\alpha X_\\alpha$를 만든다. 각 $X_\\alpha$가 세포복합체이고 $x_\\alpha$가 $0$-세포이면 $\\bigvee_\\alpha X_\\alpha$는 세포복합체다(세포복합체 $\\bigsqcup_\\alpha X_\\alpha$에서 부분복합체를 한 점으로 붕괴시킨 것이므로).",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.35
+                ],
+                "text": "basepoint"
+              }
+            ],
+            "caption": "$S^1\\vee S^1$: 두 원을 각자의 기준점에서 하나로 붙인 팔자(figure-8)."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (뼈대 몫은 구의 쐐기합)",
+          "formal_statement": "임의의 세포복합체 $X$에 대해 몫 $X^n/X^{n-1}$은 구들의 쐐기합 $\\bigvee_\\alpha S^n_\\alpha$이며, $X$의 각 $n$-세포마다 구 하나씩 대응한다.",
+          "idea_behind_proof": "$(n-1)$-뼈대 전체를 한 점으로 붕괴시키면 모든 부착사상이 무력화된다는 관찰이 핵심이다. 각 $n$-세포는 $D^n$을 경계 $\\partial D^n=S^{n-1}$을 따라 $X^{n-1}$에 붙인 것인데, $X^{n-1}$이 한 점이 되면 각 세포는 0.2 예 0.3의 $D^n/\\partial D^n=S^n$이 되고, 이 구들은 모두 그 한 점을 공유한다. 따라서 몫은 $n$-세포 개수만큼의 구로 된 꽃다발이다.",
+          "proof_steps": [
+            "1단계: $X^n=X^{n-1}\\sqcup\\big(\\coprod_\\alpha D^n_\\alpha\\big)$을 $\\varphi_\\alpha:\\partial D^n_\\alpha\\to X^{n-1}$로 붙인 것이다. $X^n/X^{n-1}$에서 부분복합체 $X^{n-1}$은 한 점 $\\ast$가 된다.",
+            "2단계: 각 세포의 경계 $\\partial D^n_\\alpha$는 $X^{n-1}$로 가므로 몫에서 $\\ast$로 간다. 따라서 $D^n_\\alpha$의 상은 $D^n_\\alpha/\\partial D^n_\\alpha\\cong S^n_\\alpha$이고 $\\ast$를 기준점으로 한다(0.2 예 0.3 사용).",
+            "3단계: 서로 다른 세포는 $\\ast$만 공유하므로 $X^n/X^{n-1}=\\bigvee_\\alpha S^n_\\alpha$, $n$-세포마다 구 하나씩. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (스매시곱, smash product)",
+          "formal_statement": "곱공간 $X\\times Y$ 안에는 $X\\times\\{y_0\\}$과 $\\{x_0\\}\\times Y$라는 $X,Y$의 복사본이 있고, 이 둘은 점 $(x_0,y_0)$에서만 만나므로 그 합집합을 쐐기합 $X\\vee Y$와 동일시할 수 있다. 스매시곱은 $X\\wedge Y=(X\\times Y)/(X\\vee Y)$로 정의된다. 이는 $X\\times Y$에서 '진짜 곱이 아닌 부분(따로 놓인 인자 $X,Y$)'을 붕괴시켜 얻는 축약판으로 볼 수 있다. $X,Y$가 CW 복합체이고 $x_0,y_0$이 $0$-세포이면(곱위상과 다를 때는 곱 세포복합체 위상을 준다는 전제 아래) $X\\wedge Y$도 CW 복합체다."
+        },
+        {
+          "type": "Example",
+          "name": "예 ($S^m\\wedge S^n=S^{m+n}$)",
+          "formal_statement": "$S^m\\wedge S^n$은 차원 $0$과 $m+n$의 세포 단 두 개를 갖는 세포구조를 가지며, 따라서 $S^m\\wedge S^n=S^{m+n}$이다. 특히 $m=n=1$일 때, 토러스의 경선(longitude)과 위선(meridian) 두 원을 한 점으로 붕괴시키면 $2$-구가 나온다.",
+          "idea_behind_proof": "$S^m,S^n$에 각각 최소 두-세포 구조($e^0,e^m$)와 ($e^0,e^n$)를 주고 기준점을 $0$-세포로 잡으면, 곱 $S^m\\times S^n$의 세포는 $e^0\\times e^0,\\ e^m\\times e^0,\\ e^0\\times e^n,\\ e^m\\times e^n$의 네 개다. 그런데 쐐기합 $S^m\\vee S^n$은 정확히 이 중 꼭대기 세포 $e^m\\times e^n$을 뺀 부분복합체다. 그것을 붕괴시키면 $0$-세포 하나와 꼭대기 $(m+n)$-세포 하나만 남고, 0.2 예 0.3에 의해 이는 $S^{m+n}$이다.",
+          "proof_steps": [
+            "1단계: $S^m$은 세포 $e^0,e^m$, $S^n$은 $e^0,e^n$, 기준점은 각 $0$-세포. 곱 세포는 $e^0\\times e^0,\\ e^m\\times e^0,\\ e^0\\times e^n,\\ e^m\\times e^n$로 차원 $0,m,n,m+n$.",
+            "2단계: $S^m\\vee S^n=(S^m\\times\\{y_0\\})\\cup(\\{x_0\\}\\times S^n)$은 꼭대기 세포를 제외한 부분복합체 $e^0\\times e^0\\cup e^m\\times e^0\\cup e^0\\times e^n$이다.",
+            "3단계: $S^m\\wedge S^n=(S^m\\times S^n)/(S^m\\vee S^n)$은 그 부분복합체를 한 $0$-세포로 붕괴시켜, 차원 $0$과 $m+n$의 세포만 남긴다.",
+            "4단계: $0$-세포 하나와 (상수사상으로 붙는) $(m+n)$-세포 하나로 된 CW 복합체는 $S^{m+n}$이다(0.2 예 0.3). 따라서 $S^m\\wedge S^n=S^{m+n}$; $m=n=1$이면 토러스의 두 원을 붕괴시켜 $S^2$를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "임의의 공간 $X$에 대해 뿔 $CX=(X\\times I)/(X\\times\\{0\\})$이 수축가능(contractible)함을 보여라.",
+          "hint": "$CX$의 점을 $[x,s]$($s\\in[0,1]$, $s=0$은 모두 꼭짓점 $v$로 동일시)로 쓰자. 모든 점을 꼭짓점 쪽으로 '$s$-좌표를 줄이며' 끌어당기는 사상족을 생각하라. 변형수축의 세 조건 $f_0=\\mathrm{id}$, $f_1(CX)=\\{v\\}$, $f_t|_{\\{v\\}}=\\mathrm{id}$을 확인하라.",
+          "solution": "$f_t([x,s])=[x,(1-t)s]$로 정의하자. $s=0$인 점(꼭짓점)에서는 $x$에 무관하게 $[x,0]=v$이므로 잘 정의되고, $(x,s,t)\\mapsto[x,(1-t)s]$는 연속이다. (i) $f_0([x,s])=[x,s]$이므로 $f_0=\\mathrm{id}$. (ii) $f_1([x,s])=[x,0]=v$이므로 $f_1(CX)=\\{v\\}$. (iii) 꼭짓점은 $f_t(v)=f_t([x,0])=[x,0]=v$로 모든 $t$에서 고정. 따라서 $f_t$는 $CX$의 꼭짓점 $\\{v\\}$로의 변형수축이고 $CX\\simeq\\text{점}$, 즉 수축가능하다. 이것이 '뿔은 위상을 죽인다'는 직관의 정확한 근거다. 일반화: 어떤 공간이든 뿔로 씌우면 항상 수축가능해진다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -1.5,
+                  -1.2
+                ],
+                "to": [
+                  1.5,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  1.6
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  -1.5,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  1.5,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  -0.75,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1.6
+                ],
+                "to": [
+                  0.75,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -0.9,
+                  -0.72
+                ],
+                "to": [
+                  -0.45,
+                  0.16
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.9,
+                  -0.72
+                ],
+                "to": [
+                  0.45,
+                  0.16
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.85
+                ],
+                "text": "apex v"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.8,
+                  -1.2
+                ],
+                "text": "X"
+              }
+            ],
+            "caption": "뿔 $CX$: 각 점을 자신이 놓인 선분을 따라 꼭짓점 $v$로 끌어올린다. $f_t([x,s])=[x,(1-t)s]$가 $CX$를 $v$로 변형수축시킨다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "토러스 $T^2=S^1\\times S^1$에 표준 세포구조($0$-세포 $1$개, $1$-세포 $a,b$ 두 개, $2$-세포 $1$개)를 준다. $1$-뼈대 $T^1$으로 나눈 몫 $T^2/T^1$을 구의 쐐기합으로 표현하고, 그것이 어떤 익숙한 공간인지 밝혀라.",
+          "hint": "명제 '뼈대 몫은 구의 쐐기합'($X^n/X^{n-1}=\\bigvee_\\alpha S^n_\\alpha$, $n$-세포마다 구 하나)을 $n=2$에 적용하라. 토러스에는 $2$-세포가 몇 개인가?",
+          "solution": "명제에 의해 $T^2/T^1=T^2/(T^2)^{1}=\\bigvee_\\alpha S^2_\\alpha$이며 토러스의 $2$-세포마다 구 하나씩 대응한다. 표준 세포구조에서 토러스의 $2$-세포는 정확히 하나뿐이므로 쐐기합은 구 하나, 즉 $T^2/T^1=S^2$이다. 이는 0.3 몫(quotient) 예의 '단일 $2$-세포 곡면을 그 $1$-뼈대로 나누면 $S^2$'라는 결과와 정확히 일치한다($1$-뼈대 $T^1$ 자체는 $S^1\\vee S^1$, 곧 팔자임에 유의). 일반화: 종수 $g$ 곡면 $M_g$도 $2$-세포가 하나이므로 $M_g/M_g^1=S^2$."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 공간 $X$에 대해 뿔 $CX$는 항상 수축가능하다.",
+          "answer": "O",
+          "explanation": "참이다. $f_t([x,s])=[x,(1-t)s]$가 $CX$를 꼭짓점으로 변형수축시키므로 $CX$는 어떤 $X$에 대해서도 한 점의 호모토피형을 갖는다. 이것이 뿔이 '위상을 죽이는' 연산인 이유이며, 현수 $SX$가 두 뿔의 합집합인 것과 대비된다."
+        },
+        {
+          "type": "ox",
+          "question": "스매시곱은 $S^m\\wedge S^n=S^{mn}$을 만족한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 올바른 관계는 $S^m\\wedge S^n=S^{m+n}$으로, 차원이 곱해지는 것이 아니라 더해진다. 세포 개수를 세면, 곱 $S^m\\times S^n$의 꼭대기 세포 $e^m\\times e^n$의 차원이 $m+n$이고 스매시곱은 이 세포와 $0$-세포만 남기므로 결과가 $S^{m+n}$이 된다. 예컨대 $S^1\\wedge S^1=S^2$ ($=1\\cdot1$이 아니라 $1+1$)."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원의 연산들(뿔·현수·조인·쐐기합·스매시곱)은 겉보기엔 다르지만 공통의 제작법을 공유한다. 그 공통 패턴은 무엇이며, 각 연산은 '무엇을 붕괴시키는가'로 어떻게 구별되는가?",
+          "hint": "각 연산의 정의를 '먼저 무엇을 만들고(곱? 서로소 합? $\\times I$?), 그다음 무엇을 한 점(또는 인자)으로 붕괴시키는가'의 두 단계로 다시 써 보라. 그리고 왜 결과가 항상 세포복합체 안에 머무는지 0.2의 몫 구조와 연결하라.",
+          "answer": "공통 제작법은 '곱(또는 서로소 합)을 취하고, 필요하면 구간 $I$로 두껍게 한 뒤, 고른 부분공간을 붕괴시킨다'이다. 각 연산의 개성은 정확히 '무엇을 붕괴시키는가'에 있다. 뿔 $CX=X\\times I$에서 한 끝 $X\\times\\{0\\}$을 한 점으로. 현수 $SX=X\\times I$에서 두 끝 $X\\times\\{0\\},X\\times\\{1\\}$을 각각 (서로 다른) 한 점으로 — 두 개의 뿔. 조인 $X\\ast Y=X\\times Y\\times I$에서 한 끝을 $X$로, 다른 끝을 $Y$로 붕괴(모든 선분을 채움). 쐐기합 $X\\vee Y=X\\sqcup Y$에서 두 기준점 $\\{x_0,y_0\\}$을 한 점으로. 스매시곱 $X\\wedge Y=X\\times Y$에서 곱 안의 '축들'인 쐐기합 $X\\vee Y$를 한 점으로. 곱만 하고 아무것도 붕괴시키지 않으면 그냥 곱공간이다. 이처럼 모든 연산이 '곱/합 + 부분복합체 붕괴(몫)'의 형태이므로, 0.2에서 본 대로 부분복합체를 붕괴시킨 몫은 다시 세포복합체가 되어 — 결과가 항상 세포복합체 범주 안에 머문다. 즉 몫(quotient)이 이 모든 연산을 관통하는 하나의 일꾼이다."
+        }
+      ]
+    },
+    {
+      "section_title": "0.4 Two Criteria for Homotopy Equivalence",
+      "step1_big_picture": {
+        "context": "이 챕터에서 지금까지 호모토피 동치를 만드는 주된 도구는 단 하나, 0.1의 '사상원기둥 $M_f$가 목표 끝 $Y$로 변형수축한다'는 사실이었다. 이것을 반복 적용하면 꽤 달라 보이는 공간들 사이의 호모토피 동치를 얻을 수 있지만 실제로는 번거롭다. 그래서 이 소단원은 재사용 가능한 두 가지 실용 기준을 제시한다. 첫째(붕괴 기준)는 '어떤 부분공간을 한 점으로 붕괴시키기', 둘째(부착 기준)는 '부품을 이어 붙이는 방식을 연속적으로 바꾸기'다. 두 기준 모두 이 절에서는 증명하지 않고(명제 0.17 및 다음 소단원 「Homotopy Extension Property」에서 증명) 결과만 도구로 쓰며, 그 위력을 여러 예제(그래프, 두 점 붙인 구, 목걸이, 환원현수 등)로 보여 준다. 재료는 앞 소단원에서 모두 갖춰졌다. 0.2의 CW 쌍(CW pair), 0.3의 몫(quotient)·뿔(cone)·현수(suspension)·쐐기합(wedge)·스매시곱(smash), 그리고 0.1의 수축가능(contractible)·사상원기둥이 그것이다.",
+        "hidden_intuition": "두 기준의 밑바닥 직감은 이렇다. 한 부분공간을 한 점으로 붕괴시키면 보통 호모토피형이 크게 바뀐다 — 하지만 그 부분공간이 이미 '한 점의 호모토피형'(수축가능)이라면, 그것을 진짜 한 점으로 줄여도 전체 모양은 그대로일 것이라 기대할 만하다(붕괴 기준). 또, 한 공간을 다른 공간에 붙이는 부착사상 $f$를 호모토피 $f_t$로 연속적으로 흔들면 붙여진 공간의 모양도 연속적으로 변할 뿐 호모토피형은 유지될 것이라 기대할 만하다(부착 기준). 이 둘을 잇는 하나의 경첩이 사상뿔(mapping cone) $C_f=Y\\sqcup_f CX$다. '$A$를 붕괴시키기'는 사실 '$A$에 뿔을 씌우기'와 호모토피적으로 같고($X/A\\simeq X\\cup CA$), 그 뿔의 부착사상을 부착 기준으로 흔들 수 있다. 그래서 붕괴 기준은 붕괴를 '뿔 씌우기'로 번역하고, 부착 기준은 그 뿔의 부착을 자유롭게 호모토프시킨다 — 두 기준이 사상뿔에서 만난다.",
+        "visualization": {
+          "type": "complex_2d",
+          "vertices": [
+            [
+              -1.4,
+              0
+            ],
+            [
+              1.4,
+              0
+            ]
+          ],
+          "vertex_labels": [
+            "v_0",
+            "v_1"
+          ],
+          "edges": [
+            {
+              "from": 0,
+              "to": 1,
+              "label": "collapse"
+            },
+            {
+              "from": 0,
+              "to": 0,
+              "label": "a"
+            },
+            {
+              "from": 1,
+              "to": 1,
+              "label": "b"
+            }
+          ],
+          "caption": "붕괴 기준의 대표 장면(예 0.7): 두 꼭짓점을 잇는 가운데 변은 수축가능하므로 한 점으로 붕괴시켜도 호모토피형이 보존된다. 붕괴 후 두 고리 $a,b$가 한 점에서 만나는 팔자 $S^1\\vee S^1$가 된다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "기준 1 (수축가능한 부분복합체의 붕괴)",
+          "formal_statement": "$(X,A)$가 CW 복합체 $X$와 수축가능(contractible)한 부분복합체 $A$로 이루어진 CW 쌍이면, 몫사상 $X\\to X/A$는 호모토피 동치다. (증명은 명제 0.17에서 주어지며, 여기서는 결과만 도구로 사용한다.) 핵심 가설은 '$A$가 수축가능'과 '$(X,A)$가 CW 쌍'이라는 두 조건이며, 이것이 없으면 일반적으로 붕괴는 호모토피형을 크게 바꾼다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.7 (그래프)",
+          "formal_statement": "유한개의 꼭짓점과 변을 갖는 그래프 $X$에서, 어떤 변의 두 끝점이 서로 다르면 그 변(수축가능)을 한 점으로 붕괴시켜 변이 하나 적은 호모토피 동치 그래프를 얻는다. 이 단순화를 반복하면 모든 변이 고리(loop)가 되고, 그러면 $X$의 각 성분은 고립된 꼭짓점이거나 원들의 쐐기합 $\\bigvee_m S^1$이 된다. 서로 동형이 아닌 두 그래프가 그래도 호모토피 동치일 수 있는지가 문제인데, 이는 결국 $m\\neq n$일 때 $\\bigvee_m S^1\\not\\simeq\\bigvee_n S^1$을 보이는 것으로 환원된다.",
+          "idea_behind_proof": "붕괴 기준의 첫 적용이다. 변 하나(양 끝점이 다른)는 닫힌구간과 위상동형이라 수축가능하고 그래프의 부분복합체이므로, 기준 1에 의해 그것을 붕괴시킨 몫이 원래와 호모토피 동치가 된다. 이를 반복하면 모든 변이 고리인 표준형에 도달한다. 남은 구별 문제는 직접 손으로 풀기 어렵고, '호모토피형에만 의존하며 서로 다른 값을 주는 대수적 불변량'을 요구한다 — 이것이 오일러 지표(정리 2.44로 호모토피 불변)와, 계산이 더 쉬운 기본군(fundamental group, 챕터 1)의 동기다.",
+          "proof_steps": [
+            "1단계: 양 끝점이 다른 변 $e$는 $[0,1]$과 위상동형이라 수축가능한 부분복합체다. 기준 1로 $X\\simeq X/e$이고, $X/e$는 변이 하나 적다.",
+            "2단계: 이 붕괴를 반복하면 모든 변이 고리인 그래프에 도달하고, 연결 성분마다 한 꼭짓점에 여러 고리가 붙은 $\\bigvee_m S^1$ 형태가 된다.",
+            "3단계: 구별은 불변량으로. $\\bigvee_m S^1$은 $0$-세포 $1$개와 $1$-세포 $m$개를 가지므로 오일러 지표 $\\chi=1-m$이고(0.2의 정의), $\\chi$가 호모토피 불변(정리 2.44)이므로 $m\\neq n$이면 $\\bigvee_m S^1\\not\\simeq\\bigvee_n S^1$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 0.8 ($S^2/S^0\\simeq S^1\\vee S^2$)",
+          "formal_statement": "$S^2$의 북극·남극 두 점에 호 $A$의 양 끝을 붙여 만든 공간 $X$를 생각하고, $A$가 붙는 두 점을 잇는 $S^2$ 위의 호를 $B$라 하자. $A,B$의 끝점을 $0$-세포, 내부를 $1$-세포, 나머지 $S^2$를 $2$-세포로 하는 CW 구조를 준다. $A,B$가 모두 수축가능하므로 $X/A,X/B$는 각각 $X$와 호모토피 동치다. 그런데 $X/A$는 두 점을 동일시한 구 $S^2/S^0$이고 $X/B$는 $S^1\\vee S^2$이다. 따라서 $S^2/S^0\\simeq S^1\\vee S^2$ — 첫눈에 자명하지는 않은 사실이다.",
+          "idea_behind_proof": "같은 공간 $X$를 서로 다른 수축가능 부분복합체 두 개($A$와 $B$)로 붕괴시키면, 기준 1에 의해 두 몫이 모두 $X$와 호모토피 동치가 되어 서로 연결된다. 관건은 각 몫이 무엇인지 알아보는 것이다.",
+          "proof_steps": [
+            "1단계: $A$는 수축가능한 부분복합체 → 기준 1로 $X\\simeq X/A$. $A$를 붕괴시키면 $A$가 붙었던 북극·남극이 한 점이 되므로 $X/A=S^2/S^0$(두 점 동일시한 구).",
+            "2단계: $B$도 수축가능한 부분복합체 → 기준 1로 $X\\simeq X/B$. $B$를 붕괴시키면 호 $A$는 하나의 원($S^1$)이 되고 구 부분은 $S^2$가 되어 한 점에서 만나므로 $X/B=S^1\\vee S^2$.",
+            "3단계: 호모토피 동치는 추이적이므로 $S^2/S^0\\simeq X\\simeq S^1\\vee S^2$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 0.9 (목걸이)",
+          "formal_statement": "$X$를 토러스에 $n$개의 자오선 원판(meridional disk)을 붙인 공간이라 하자. 경선 원(longitudinal circle)이 각 원판을 한 점에서 만나게 잡아, 그 교점들을 $0$-세포, 경선 원의 나머지와 원판들의 경계원을 $1$-세포, 토러스의 남은 영역과 원판 내부를 $2$-세포로 하는 CW 구조를 준다. 각 자오선 원판을 한 점으로 붕괴시키면, 이웃끼리 접하는 $n$개의 $2$-구로 된 '구슬 $n$개짜리 목걸이' $Y$를 얻고 $X\\simeq Y$이다. 다시 목걸이의 끈에 해당하는 호들을 붕괴시켜 나가면, 최종적으로 원 $S^1$과 $n$개의 $2$-구의 쐐기합 $S^1\\vee(\\bigvee_n S^2)$을 얻는다(쐐기합을 옛 문헌에서 '부케(bouquet)'라 부른 이유를 짐작하게 한다).",
+          "idea_behind_proof": "각 자오선 원판은 원판($=D^2$)이라 수축가능한 부분복합체다. 기준 1을 원판마다 적용해 하나씩 점으로 붕괴시키면 토러스가 접혀 구슬 목걸이가 된다. 이후 남은 수축가능한 호(끈)들도 같은 기준으로 붕괴시켜 쐐기합까지 단순화한다.",
+          "proof_steps": [
+            "1단계: 자오선 원판 $D^2$는 수축가능한 부분복합체 → 기준 1로 붕괴해도 호모토피형 보존. $n$개를 모두 붕괴시키면 이웃과 접하는 $n$개의 $2$-구, 곧 목걸이 $Y$이고 $X\\simeq Y$.",
+            "2단계: 목걸이를 잇는 끈(수축가능한 호)이나 구슬 적도의 앞쪽 절반이 이루는 호를 마저 붕괴시키면, 원 하나에 $n$개의 $2$-구가 한 점에서 붙은 쐐기합 $S^1\\vee\\big(\\bigvee_n S^2\\big)$이 된다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -3,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  3,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -2,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  0
+                ]
+              }
+            ],
+            "caption": "구슬 $4$개짜리 목걸이 $Y$: 이웃끼리 한 점에서 접하는 $2$-구($S^2$)들의 사슬. 끈을 마저 붕괴시키면 $S^1\\vee(\\bigvee_4 S^2)$이 된다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 0.10 (환원현수, reduced suspension)",
+          "formal_statement": "CW 복합체 $X$와 $0$-세포 $x_0\\in X$에 대해, 현수 $SX$ 안의 선분 $\\{x_0\\}\\times I$를 한 점으로 붕괴시켜 얻는 공간 $\\Sigma X$를 환원현수라 하며 $\\Sigma X\\simeq SX$이다. 예로 $X=S^1\\vee S^1$($x_0$은 두 원의 교점)이면 통상 현수 $SX$는 호 $\\{x_0\\}\\times I$를 따라 만나는 두 구인 반면, 환원현수 $\\Sigma X$는 조금 더 단순한 $S^2\\vee S^2$이다. 일반적으로 $\\Sigma(X\\vee Y)=\\Sigma X\\vee\\Sigma Y$이다. 또한 $\\Sigma X$는 스매시곱 $X\\wedge S^1$과 같다 — 둘 다 $X\\times I$에서 $X\\times\\partial I\\cup\\{x_0\\}\\times I$를 한 점으로 붕괴시킨 몫이기 때문이다. CW 구조도 더 단순하다: $SX$는 $0$-세포 $2$개(두 현수점)와 $X$의 각 $n$-세포 $e^n$마다 $(n+1)$-세포 $e^n\\times(0,1)$을 갖지만, $\\Sigma X$는 $0$-세포 $1$개와 $x_0$을 제외한 $X$의 각 $n$-세포마다 $(n+1)$-세포를 갖는다.",
+          "idea_behind_proof": "선분 $\\{x_0\\}\\times I$는 $I$와 위상동형이라 수축가능한 부분복합체다. 그러니 기준 1을 적용하면 그것을 점으로 붕괴시켜도 호모토피형이 보존되어 $\\Sigma X\\simeq SX$. 그리고 $\\Sigma X=X\\wedge S^1$은 0.3의 스매시곱·현수 정의를 몫의 관점에서 겹쳐 보면 두 몫이 문자 그대로 같은 붕괴로 정의됨에서 나온다.",
+          "proof_steps": [
+            "1단계: $\\{x_0\\}\\times I\\cong I$는 수축가능한 부분복합체 → 기준 1로 $\\Sigma X=SX/(\\{x_0\\}\\times I)\\simeq SX$.",
+            "2단계: $S^1=I/\\partial I$이므로 $X\\wedge S^1=(X\\times S^1)/(X\\vee S^1)$은 $X\\times I$에서 $X\\times\\partial I\\cup\\{x_0\\}\\times I$를 붕괴시킨 것과 같고, 이는 정확히 $\\Sigma X$의 정의다. 따라서 $\\Sigma X=X\\wedge S^1$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (공간 붙이기: 부착공간·사상원기둥·사상뿔)",
+          "formal_statement": "공간 $X_0$에 다른 공간 $X_1$을, 그 부분공간 $A\\subset X_1$의 점을 $X_0$의 점과 동일시하여 붙이려 한다. 필요한 데이터는 사상 $f:A\\to X_0$이며, 이때 $X_0\\sqcup X_1$에서 각 $a\\in A$를 $f(a)\\in X_0$과 동일시한 몫공간을 $X_0\\sqcup_f X_1$('$f$를 따라 $A$를 따라 붙인 공간')로 쓴다. $(X_1,A)=(D^n,S^{n-1})$이면 이는 $f:S^{n-1}\\to X_0$을 통해 $X_0$에 $n$-세포를 붙이는 경우다. 사상원기둥은 이 구성의 예다: $f:X\\to Y$의 사상원기둥 $M_f$는 $Y$에 $X\\times I$를 $X\\times\\{1\\}$을 따라 $f$로 붙인 것이다. 이와 밀접한 것이 사상뿔(mapping cone) $C_f=Y\\sqcup_f CX$로, 뿔 $CX=(X\\times I)/(X\\times\\{0\\})$을 $X\\times\\{1\\}$을 따라 $(x,1)\\sim f(x)$로 $Y$에 붙인 것이다. 동치로 $C_f=M_f/X$($X=X\\times\\{0\\}$을 한 점으로 붕괴). $X=S^{n-1}$이면 $C_f$는 $Y$에 $f$로 $n$-세포를 붙인 공간이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "기준 2 (호모토픽한 부착사상)",
+          "formal_statement": "$(X_1,A)$가 CW 쌍이고 두 부착사상 $f,g:A\\to X_0$이 호모토픽($f\\simeq g$)하면, $X_0\\sqcup_f X_1\\simeq X_0\\sqcup_g X_1$이다. (증명은 다음 소단원에서 주어지며, 여기서는 결과만 도구로 사용한다.) 즉 부착사상을 호모토피로 흔드는 것은 붙여진 공간의 호모토피형을 바꾸지 않는다."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.11 (부착 기준으로 다시 본 예 0.8)",
+          "formal_statement": "두 점을 동일시한 구 $S^2/S^0$가 $S^1\\vee S^2$와 호모토피 동치임을 부착 기준으로 다시 유도한다. 두 점을 동일시한 구는, $S^2$의 닫힌 호 $A$를 $S^1$에 감는 사상으로 $S^2$를 $S^1$에 붙여 얻을 수 있다.",
+          "idea_behind_proof": "부착 기준의 전형적 사용이다. 붙이는 데 쓰인 호 $A$가 수축가능하므로 그 부착사상은 상수사상과 호모토픽하다. 기준 2로 부착사상을 상수사상으로 바꿔도 호모토피형이 보존되는데, 상수사상으로 $S^2$를 $S^1$에 붙이면 두 공간이 한 점에서만 만나는 쐐기합이 된다.",
+          "proof_steps": [
+            "1단계: 호 $A$는 수축가능 → $A$를 $S^1$에 감는 부착사상 $f:A\\to S^1$은 상수사상 $c$와 호모토픽($f\\simeq c$).",
+            "2단계: $(S^2,A)$는 CW 쌍($S^2$는 $A$에 $2$-세포를 붙여 얻음)이므로 기준 2 적용: $S^1\\sqcup_f S^2\\simeq S^1\\sqcup_c S^2$.",
+            "3단계: 상수사상으로 붙이면 $S^1\\sqcup_c S^2=S^1\\vee S^2$. 좌변은 두 점 동일시한 구 $S^2/S^0$이므로 $S^2/S^0\\simeq S^1\\vee S^2$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 0.12 (부착 기준으로 다시 본 목걸이)",
+          "formal_statement": "예 0.9의 목걸이가 원과 $n$개의 $2$-구의 쐐기합과 호모토피 동치임을 부착 기준으로 본다. 목걸이는 원에 $n$개의 $2$-구를 호를 따라 붙인 것이므로, 원에 $2$-구들을 점에서 붙인 공간과 호모토피 동치다. 그런 다음 부착점들을 원 위에서 미끄러뜨려 모두 한 점에 모으면 쐐기합 $S^1\\vee(\\bigvee_n S^2)$을 얻는다.",
+          "idea_behind_proof": "$2$-구가 붙는 호(수축가능)를 통한 부착사상은 한 점에서의 부착사상과 호모토픽하고, 나아가 원 위에서 부착점을 옮기는 것도 부착사상을 호모토프시키는 일이다. 기준 2에 의해 이 모든 변형이 호모토피형을 보존한다.",
+          "proof_steps": [
+            "1단계: 각 $2$-구가 붙는 호는 수축가능 → 호를 따른 부착사상은 한 점에서의 부착사상과 호모토픽. 기준 2로 목걸이 $\\simeq$ (원에 $2$-구들을 점에서 붙인 공간).",
+            "2단계: 원 위에서 $n$개의 부착점을 미끄러뜨려 한 점에 모으는 것은 부착사상들의 호모토피다. 기준 2로 다시 호모토피형 보존, 결과는 $S^1\\vee\\big(\\bigvee_n S^2\\big)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 0.13 ($X/A\\simeq X\\cup CA$, 포함사상의 사상뿔)",
+          "formal_statement": "$(X,A)$가 CW 쌍이면 $X/A\\simeq X\\cup CA$이며, 우변은 포함사상 $A\\hookrightarrow X$의 사상뿔이다.",
+          "idea_behind_proof": "붕괴 기준을 사상뿔에 되먹이는 깔끔한 논증이다. $X\\cup CA$ 안에서 뿔 $CA$는 수축가능한 부분복합체다(뿔은 항상 수축가능, 0.3). 그리고 $X\\cup CA$에서 이 $CA$를 붕괴시키면 정확히 $X/A$가 남는다. 즉 '$A$를 붕괴'와 '$A$에 뿔을 씌우기'가 호모토피적으로 같다.",
+          "proof_steps": [
+            "1단계: $X\\cup CA$에서 뿔 $CA$는 수축가능한 부분복합체다(0.3: 임의의 공간의 뿔은 수축가능).",
+            "2단계: $CA$를 붕괴시키면 $A$(뿔의 밑면)가 한 점이 되어 $(X\\cup CA)/CA=X/A$.",
+            "3단계: 기준 1을 $(X\\cup CA,\\,CA)$에 적용하면 $(X\\cup CA)/CA\\simeq X\\cup CA$. 따라서 $X/A\\simeq X\\cup CA$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 0.14 ($A$가 $X$ 안에서 수축가능하면 $X/A\\simeq X\\vee SA$)",
+          "formal_statement": "$(X,A)$가 CW 쌍이고 $A$가 $X$ 안에서 수축가능(즉 포함사상 $A\\hookrightarrow X$가 상수사상과 호모토픽)하면 $X/A\\simeq X\\vee SA$이다. 예로 $i<n$일 때 $S^i$는 $S^n$ 안에서 수축가능하므로 $S^n/S^i\\simeq S^n\\vee S^{i+1}$이고, 특히 $S^2/S^0\\simeq S^2\\vee S^1$ — 예 0.8을 또 한 번 되찾는다.",
+          "idea_behind_proof": "예 0.13과 부착 기준을 잇는다. 먼저 $X/A\\simeq X\\cup CA$(포함사상 $i$의 사상뿔). $A$가 $X$ 안에서 수축가능하다는 것은 $i$가 상수사상 $c$와 호모토픽하다는 뜻이므로, 기준 2에 의해 $i$의 사상뿔과 $c$의 사상뿔이 호모토피 동치다. 그런데 상수사상의 사상뿔은 뿔 $CA$의 테두리 $A\\times\\{1\\}$이 한 점에 붙는 꼴이라 그 테두리가 붕괴되어 $SA$가 되고, 그것이 $X$에 한 점으로 붙어 $X\\vee SA$가 된다.",
+          "proof_steps": [
+            "1단계: 예 0.13으로 $X/A\\simeq X\\cup CA=C_i$, 포함사상 $i:A\\hookrightarrow X$의 사상뿔.",
+            "2단계: $A$가 $X$ 안에서 수축가능 → $i\\simeq c$(상수사상). 기준 2로 사상뿔끼리 호모토피 동치: $C_i\\simeq C_c$.",
+            "3단계: 상수사상의 사상뿔 $C_c$에서는 뿔 $CA$의 테두리 $A\\times\\{1\\}$이 한 점 $x_0$으로 붙으므로, $CA$의 양 끝($A\\times\\{0\\}$의 꼭짓점과 $A\\times\\{1\\}$)이 각각 점이 되어 $SA$가 되고, $X$에 한 점으로 붙어 $C_c=X\\vee SA$.",
+            "4단계: 따라서 $X/A\\simeq X\\vee SA$. $i<n$에서 $S^i\\hookrightarrow S^n$은 상수사상과 호모토픽하므로 $S^n/S^i\\simeq S^n\\vee S^{i+1}$. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예 0.14를 이용해 $S^4/S^1$의 호모토피형을 구하라. 왜 이 기준을 쓸 수 있는지(어떤 부분공간이 어디서 수축가능한지)도 밝혀라.",
+          "hint": "예 0.14의 결론 $S^n/S^i\\simeq S^n\\vee S^{i+1}$($i<n$)을 떠올리고, $S^i$가 $S^n$ 안에서 수축가능하려면 $i<n$이어야 함을 확인하라. 여기서 $n=4,\\ i=1$이다.",
+          "solution": "$i=1<4=n$이므로 $S^1$은 $S^4$ 안에서 수축가능하다(저차원 구는 고차원 구 안에서 상수사상과 호모토픽). 따라서 예 0.14의 $S^n/S^i\\simeq S^n\\vee S^{i+1}$에 $n=4,i=1$을 넣으면 $$S^4/S^1\\simeq S^4\\vee S^{1+1}=S^4\\vee S^2.$$ 논리 사슬은: 예 0.13으로 $S^4/S^1\\simeq S^4\\cup CS^1$(포함사상의 사상뿔) → 포함사상이 상수와 호모토픽(기준 2) → 상수사상의 사상뿔 $S^4\\vee S(S^1)=S^4\\vee S^2$($SS^1=S^2$, 0.3). 일반화: $i<n$이면 언제나 $S^n/S^i\\simeq S^n\\vee S^{i+1}$.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1,
+                  0
+                ],
+                "text": "S^4"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  0
+                ],
+                "text": "S^2"
+              }
+            ],
+            "caption": "$S^4/S^1\\simeq S^4\\vee S^2$: 큰 구 $S^4$와 작은 구 $S^2$가 한 점에서 만나는 쐐기합(도식적 표현)."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$m$개 원의 쐐기합 $\\bigvee_m S^1$의 오일러 지표가 $1-m$임을 세포를 세어 확인하고, 이를 근거로 $\\bigvee_2 S^1$과 $\\bigvee_3 S^1$이 호모토피 동치가 아님을 논증하라.",
+          "hint": "$\\bigvee_m S^1$을 CW 복합체로 보면 $0$-세포는 공통점 하나, $1$-세포는 각 원마다 하나(고리)다. 오일러 지표는 (짝수차원 세포 수) $-$ (홀수차원 세포 수)이며, 정리 2.44에 의해 호모토피 불변이다.",
+          "solution": "$\\bigvee_m S^1$은 $0$-세포 $1$개와 $1$-세포 $m$개(각 원이 공통 꼭짓점에 붙은 고리)를 가지므로 $\\chi=1-m$. 오일러 지표는 호모토피 불변량이므로(정리 2.44), 만약 $\\bigvee_2 S^1\\simeq\\bigvee_3 S^1$이라면 $\\chi$가 같아야 한다. 그러나 $\\chi(\\bigvee_2 S^1)=1-2=-1$이고 $\\chi(\\bigvee_3 S^1)=1-3=-2$로 다르다. 모순이므로 $\\bigvee_2 S^1\\not\\simeq\\bigvee_3 S^1$. 일반화: $m\\neq n$이면 $\\chi=1-m\\neq 1-n$이므로 $\\bigvee_m S^1\\not\\simeq\\bigvee_n S^1$ — 예 0.7이 제기한 구별 문제가 오일러 지표로 해결된다(챕터 1의 기본군도 같은 일을 더 적은 노력으로 해낸다)."
+        },
+        {
+          "type": "ox",
+          "question": "어떤 부분공간이든 한 점으로 붕괴시키기만 하면 전체 공간의 호모토피형은 보존된다.",
+          "answer": "X",
+          "explanation": "거짓이다. 붕괴 기준(기준 1)은 붕괴되는 $A$가 '수축가능한 부분복합체'이고 $(X,A)$가 CW 쌍일 때만 몫사상이 호모토피 동치임을 보장한다. 이 가설이 없으면 붕괴는 보통 호모토피형을 크게 바꾼다. 예컨대 $S^1$에서 수축가능하지 않은 부분(원 전체)을 점으로 붕괴시키면 한 점이 되어 원래와 전혀 다르다."
+        },
+        {
+          "type": "ox",
+          "question": "환원현수 $\\Sigma X$는 통상적 현수 $SX$와 위상동형(homeomorphic)이다.",
+          "answer": "X",
+          "explanation": "거짓이다. $\\Sigma X$는 $SX$에서 수축가능한 선분 $\\{x_0\\}\\times I$를 한 점으로 붕괴시킨 것으로, 기준 1에 의해 $\\Sigma X\\simeq SX$(호모토피 동치)일 뿐 일반적으로 위상동형은 아니다. 실제로 CW 구조가 다르다($SX$는 $0$-세포 $2$개, $\\Sigma X$는 $1$개). 또 $\\Sigma X=X\\wedge S^1$로 스매시곱과 일치한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원의 두 기준(수축가능한 부분복합체 붕괴 / 호모토픽한 부착사상)은 0.1에서 유일한 도구였던 '사상원기둥의 변형수축'에 비해 무엇을 더 해 주는가? 그리고 두 기준이 사상뿔(mapping cone)을 통해 어떻게 하나로 연결되는지 예 0.13·0.14로 설명하라.",
+          "hint": "0.1에서 호모토피 동치를 만드는 방법이 사실상 하나뿐이었음을 떠올리고, 두 기준이 각각 '붕괴'와 '부착 흔들기'라는 독립적 자유도를 준다는 점에 주목하라. 그다음 $X/A\\simeq X\\cup CA$(예 0.13)와 $X/A\\simeq X\\vee SA$(예 0.14)에서 사상뿔이 어떻게 두 기준을 잇는 경첩이 되는지 추적하라.",
+          "answer": "0.1에서는 호모토피 동치를 만드는 길이 사실상 '사상원기둥 $M_f$가 목표 끝으로 변형수축한다'는 것 하나뿐이어서, 이를 반복 적용해야 했고 번거로웠다. 두 기준은 재사용 가능한 독립적 지름길을 준다. 기준 1은 '수축가능한 부분복합체는 마음대로 점으로 붕괴시켜도 된다'는 붕괴의 자유를, 기준 2는 '부착사상을 호모토픽한 것으로 바꿔도 된다'는 부착의 자유를 준다. 이 둘을 잇는 경첩이 사상뿔이다. 예 0.13: $X\\cup CA$ 안의 뿔 $CA$는 수축가능하므로 기준 1로 붕괴시켜 $X/A=(X\\cup CA)/CA\\simeq X\\cup CA=C_i$ — 즉 '$A$ 붕괴'가 '포함사상 $i:A\\hookrightarrow X$에 뿔 씌우기'와 호모토피적으로 같아진다(기준 1이 붕괴를 뿔로 번역). 예 0.14: 이제 그 사상뿔의 부착사상 $i$를 흔든다. $A$가 $X$ 안에서 수축가능하면 $i\\simeq c$(상수)이고, 기준 2로 $C_i\\simeq C_c=X\\vee SA$ — 즉 기준 2가 뿔의 부착사상을 자유롭게 호모토프시킨다. 결국 $X/A\\simeq X\\cup CA\\simeq X\\vee SA$라는 계산은, 기준 1(붕괴→뿔)과 기준 2(뿔의 부착 흔들기)가 사상뿔이라는 한 대상 위에서 맞물려 돌아간 결과다."
+        }
+      ]
+    },
+    {
+      "section_title": "0.5 The Homotopy Extension Property",
+      "step1_big_picture": {
+        "context": "이 챕터의 마지막 절은 드디어 무언가를 '증명'한다. 특히 0.4에서 결과만 쓰고 미뤄 둔 두 기준(수축가능한 부분복합체 붕괴 / 호모토픽한 부착사상)을, 그리고 0.1에서 따름정리 0.21로 미뤄 둔 사실(두 공간이 호모토피 동치일 필요충분조건은 둘을 함께 변형수축 부분공간으로 담는 제3의 공간이 존재하는 것)을 실제로 증명한다. 이 모든 증명이 의존하는 하나의 기술적 성질이 호모토피 확장 성질(homotopy extension property, HEP)이다. 문제 상황은 이렇다: 사상 $f_0:X\\to Y$가 있고 부분공간 $A\\subset X$ 위에서만 $f_0|_A$의 호모토피 $f_t:A\\to Y$가 주어졌을 때, 이를 $X$ 전체의 호모토피 $f_t:X\\to Y$로 확장할 수 있는가? 이것이 항상 가능한 쌍 $(X,A)$가 HEP를 가진다고 말한다. 재료는 앞 소단원에서 모두 갖춰졌다 — 0.1의 사상원기둥, 0.2의 세포복합체·뼈대·약위상, 0.3의 뿔·현수, 0.4의 부착공간·사상뿔.",
+        "hidden_intuition": "HEP의 위력은 한 줄의 재해석에서 나온다: $(X,A)$가 HEP를 가질 필요충분조건은 $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)이라는 것. 왜냐하면 '밑면 $X\\times\\{0\\}$과 벽 $A\\times I$ 위의 데이터를 사각기둥 $X\\times I$ 전체로 확장'하는 문제는, 사각기둥을 그 'ㄴ자 모서리'로 되접는 축약사상 $r$이 있으면 그냥 $r$와 합성하는 기계적 조작으로 풀리기 때문이다. 그래서 증명들은 대개 이렇게 흘러간다: (1) 필요한 축약을 기하적으로 만들고(명제 0.16의 반지름 사영), (2) 그 축약과 합성해 호모토피·사상을 원하는 대로 '고쳐' 붙인다. 특히 명제 0.16은 모든 CW 쌍이 HEP를 가짐을 보증하므로, 이후의 모든 정리가 세포복합체 위에서 자유롭게 작동한다. 즉 HEP는 이 챕터가 약속만 하고 미뤄 둔 사실들을 갚는 공통 엔진이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  -2,
+                  0
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1.5
+                ],
+                [
+                  -2,
+                  1.5
+                ]
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2,
+                0
+              ],
+              "to": [
+                2,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2,
+                0
+              ],
+              "to": [
+                -2,
+                1.5
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                -0.28
+              ],
+              "text": "X x 0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.35,
+                0.75
+              ],
+              "text": "A x I"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.3,
+                0.85
+              ],
+              "text": "extend to X x I ?"
+            }
+          ],
+          "caption": "HEP: 밑면 $X\\times\\{0\\}$과 벽 $A\\times I$ 위에 주어진 데이터를 사각기둥 $X\\times I$ 전체로 언제나 확장할 수 있는가? 이는 'ㄴ자' $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)임과 동치다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (호모토피 확장 성질, HEP)",
+          "formal_statement": "쌍 $(X,A)$가 호모토피 확장 성질(HEP)을 가진다는 것은, 사상 $f_0:X\\to Y$와 부분공간 $A\\subset X$ 위의 호모토피 $f_t:A\\to Y$($f_0|_A$의 호모토피)가 주어질 때마다 이를 $X$ 전체의 호모토피 $f_t:X\\to Y$로 항상 확장할 수 있음을 뜻한다. 동치로, 모든 사상 $X\\times\\{0\\}\\cup A\\times I\\to Y$가 사상 $X\\times I\\to Y$로 확장되는 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (HEP는 축약과 동치)",
+          "formal_statement": "$(X,A)$가 HEP를 가질 필요충분조건은 $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)인 것이다.",
+          "idea_behind_proof": "정의 자체를 '가장 어려운 확장 문제' 하나에 적용해 보는 것이 열쇠다. 확장해야 할 대상 중 가장 보편적인 것은 바로 항등사상이다. 항등사상을 확장하면 그 확장이 곧 축약이 되고, 거꾸로 축약이 있으면 임의의 사상을 그것과 합성해 확장할 수 있다.",
+          "proof_steps": [
+            "(⇐) 축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$가 있으면, 임의의 사상 $\\varphi:X\\times\\{0\\}\\cup A\\times I\\to Y$에 대해 $\\varphi\\circ r:X\\times I\\to Y$가 $\\varphi$의 확장이다($r$가 부분공간 위에서 항등이므로). 따라서 HEP 성립.",
+            "(⇒) $(X,A)$가 HEP를 가지면, 항등사상 $X\\times\\{0\\}\\cup A\\times I\\to X\\times\\{0\\}\\cup A\\times I$을 $X\\times I\\to X\\times\\{0\\}\\cup A\\times I$로 확장할 수 있고, 이 확장이 바로 축약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (HEP의 세 가지 따름 사실)",
+          "formal_statement": "축약 특징화로부터 세 가지가 따른다. (1) $(X,A)$가 HEP를 가지면 임의의 공간 $Z$에 대해 $(X\\times Z,A\\times Z)$도 HEP를 가진다(정의에서 직접 보이기는 쉽지 않은 사실). (2) $X$가 하우스도르프(Hausdorff)일 때 $(X,A)$가 HEP를 가지면 $A$는 $X$의 닫힌 부분공간이어야 한다: 축약 $r:X\\times I\\to X\\times I$의 상은 고정점 집합 $\\{z:r(z)=z\\}$로 하우스도르프에서 닫혀 있으므로 $X\\times\\{0\\}\\cup A\\times I$가 닫혀 있고 따라서 $A$가 $X$에서 닫힌다. (3) $A$가 닫혀 있어도 HEP가 실패할 수 있다: $A=\\{0,1,\\tfrac12,\\tfrac13,\\tfrac14,\\dots\\}\\subset I$인 쌍 $(I,A)$에는 축약 $I\\times I\\to I\\times\\{0\\}\\cup A\\times I$이 존재하지 않는다($0$ 근방의 나쁜 국소 구조 때문)."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.15 (사상원기둥 근방을 가지면 HEP)",
+          "formal_statement": "$A$가 $X$ 안에서 사상원기둥 근방(mapping cylinder neighborhood)을 가지면 $(X,A)$는 HEP를 가진다. 여기서 사상원기둥 근방이란, 경계 $B$를 포함하는 닫힌 근방 $N$으로서 $N-B$가 $A$의 열린 근방이고, 어떤 사상 $f:B\\to A$와 위상동형 $h:M_f\\to N$이 $h|_{A\\cup B}=\\mathrm{id}$을 만족하는 것을 말한다. 이런 근방은 꽤 자주 나타난다 — 예컨대 챕터 서두의 두꺼운 글자는 얇은 글자의 사상원기둥 근방을 준다.",
+          "idea_behind_proof": "저차원 축약을 곱하고 옮겨 고차원 축약을 조립하는 전형적 수법이다. 가장 기본인 정사각형의 축약 $I\\times I\\to I\\times\\{0\\}\\cup\\partial I\\times I$에서 출발해 $B$를 곱하고, 그것을 사상원기둥 $M_f$ 위로 옮기면 $(M_f,A\\cup B)$의 HEP가 나온다. 그다음 $N\\cong M_f$이므로 $(N,A\\cup B)$도 HEP를 갖고, $N$ 바깥에서는 상수 호모토피를 써서 전체로 확장한다.",
+          "proof_steps": [
+            "1단계: $I\\times I$는 $I\\times\\{0\\}\\cup\\partial I\\times I$로 축약된다. 이를 $B$와 곱하면 $B\\times I\\times I$가 $B\\times I\\times\\{0\\}\\cup B\\times\\partial I\\times I$로 축약되고, 이 축약이 $M_f\\times I$의 $M_f\\times\\{0\\}\\cup(A\\cup B)\\times I$로의 축약을 유도한다. 따라서 $(M_f,A\\cup B)$는 HEP를 가진다.",
+            "2단계: 위상동형 $h:M_f\\to N$으로 옮기면 $(N,A\\cup B)$도 HEP를 가진다.",
+            "3단계: 사상 $X\\to Y$와 $A$ 위의 호모토피가 주어지면, $X-(N-B)$에서는 상수 호모토피를 취하고, $N$ 위에서는 $(N,A\\cup B)$의 HEP를 $A$의 주어진 호모토피와 $B$의 상수 호모토피에 적용해 확장한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.16 (CW 쌍은 HEP를 가진다)",
+          "formal_statement": "$(X,A)$가 CW 쌍이면 $X\\times\\{0\\}\\cup A\\times I$는 $X\\times I$의 변형수축(deformation retract)이며, 따라서 $(X,A)$는 HEP를 가진다.",
+          "idea_behind_proof": "한 개의 세포 $D^n$ 위에서 축약을 손으로 만들고, 그것을 뼈대(skeleton)를 따라 귀납적으로 온 공간에 붙여 나가는 것이 전략이다. 세포 위의 축약은 반지름 사영 하나로 충분하다: $D^n\\times I$ 위쪽 점 $(0,2)$에서 방사로 쏘면 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$('옆면과 밑면')로 떨어진다. 무한 차원까지 이어 붙일 때 생기는 연속성 문제는 CW의 약위상(weak topology)이 정확히 해결해 준다 — 각 뼈대 위에서 연속이면 전체에서 연속이므로.",
+          "proof_steps": [
+            "1단계: 축약 $r:D^n\\times I\\to D^n\\times\\{0\\}\\cup\\partial D^n\\times I$이 존재한다(예: $D^n\\times\\mathbb{R}$의 점 $(0,2)$에서의 반지름 사영). $r_t=tr+(1-t)\\mathrm{id}$은 $D^n\\times I$를 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$로 보내는 변형수축이다.",
+            "2단계: $X^n\\times I$는 $X^n\\times\\{0\\}\\cup(X^{n-1}\\cup A^n)\\times I$에 $D^n\\times I$의 복사본을 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$을 따라 붙여 얻어지므로, 1단계의 변형수축이 $X^n\\times I$의 $X^n\\times\\{0\\}\\cup(X^{n-1}\\cup A^n)\\times I$로의 변형수축을 유도한다.",
+            "3단계: $n$번째 변형수축을 시간 구간 $t\\in[\\tfrac1{2^{n+1}},\\tfrac1{2^n}]$ 동안 수행하도록 배치해 무한히 이어 붙이면, 이 무한 합성이 $X\\times I$의 $X\\times\\{0\\}\\cup A\\times I$로의 변형수축이 된다.",
+            "4단계: $t=0$에서의 연속성 문제 없음: 각 $X^n\\times I$ 위에서 이 사상은 구간 $[0,\\tfrac1{2^{n+1}}]$ 동안 정지해 있어 연속이고, CW 복합체는 뼈대에 대한 약위상을 가지므로 각 뼈대 위 제한이 연속이면 전체가 연속이다. 따라서 $(X,A)$는 HEP를 가진다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -1,
+                    0
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    -1,
+                    1
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  -1,
+                  0.55
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  1,
+                  0.55
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  -0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  2.25
+                ],
+                "text": "(0,2)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.28
+                ],
+                "text": "D^n x 0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.45,
+                  0.5
+                ],
+                "text": "boundary x I"
+              }
+            ],
+            "caption": "명제 0.16의 핵심(그림은 $n=1$): 점 $(0,2)$에서의 반지름 사영이 사각기둥 $D^n\\times I$를 밑면과 옆면 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$(윗변만 제외한 'ㄷ'자)로 되접는다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.17 (0.4 기준 1의 증명)",
+          "formal_statement": "쌍 $(X,A)$가 HEP를 만족하고 $A$가 수축가능(contractible)하면, 몫사상 $q:X\\to X/A$는 호모토피 동치다. (CW 쌍은 명제 0.16으로 HEP를 가지므로, 이는 0.4의 기준 1 '수축가능한 부분복합체의 붕괴는 호모토피 동치'를 증명한다.)",
+          "idea_behind_proof": "$A$의 수축(항등에서 상수로 가는 호모토피)을 HEP로 $X$ 전체의 호모토피 $f_t:X\\to X$로 끌어올리는 것이 출발점이다. 이 $f_t$는 $A$를 항상 $A$ 안에 두므로 몫으로 잘 내려가 $\\bar f_t:X/A\\to X/A$를 유도하고, $t=1$에서 $A$가 한 점으로 뭉쳐진다는 사실이 몫 $X/A$에서 $X$로 되돌아가는 역사상 $g$를 만들어 준다. 결국 $q$와 $g$가 서로 호모토피 역이 된다.",
+          "proof_steps": [
+            "1단계: $A$의 수축을 HEP로 확장해 $f_0=\\mathrm{id}$이고 $f_t(A)\\subset A$인 호모토피 $f_t:X\\to X$를 얻는다.",
+            "2단계: $f_t(A)\\subset A$이므로 $qf_t:X\\to X/A$는 $A$를 한 점으로 보내 $qf_t=\\bar f_t q$ 꼴로 몫사상을 통해 분해된다($\\bar f_t:X/A\\to X/A$).",
+            "3단계: $t=1$에서 $f_1(A)$가 (수축이 도달한) 한 점이므로 $f_1$은 사상 $g:X/A\\to X$를 유도해 $gq=f_1$. 그러면 $qg(\\bar x)=qgq(x)=qf_1(x)=\\bar f_1 q(x)=\\bar f_1(\\bar x)$이므로 $qg=\\bar f_1$.",
+            "4단계: $gq=f_1\\simeq f_0=\\mathrm{id}$(호모토피 $f_t$)이고 $qg=\\bar f_1\\simeq\\bar f_0=\\mathrm{id}$(호모토피 $\\bar f_t$)이므로 $q,g$는 서로 호모토피 역, 즉 $q$는 호모토피 동치. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.18 (0.4 기준 2의 정련된 증명)",
+          "formal_statement": "$(X_1,A)$가 CW 쌍이고 부착사상 $f,g:A\\to X_0$이 호모토픽하면 $X_0\\sqcup_f X_1\\simeq X_0\\sqcup_g X_1$이며, 나아가 $X_0$에 상대적(rel $X_0$)으로 성립한다. 여기서 $(W,Y),(Z,Y)$에 대해 $W\\simeq Z$ rel $Y$란, $Y$ 위에서 항등인 사상 $\\varphi:W\\to Z$, $\\psi:Z\\to W$가 존재해 $\\psi\\varphi\\simeq\\mathrm{id}$, $\\varphi\\psi\\simeq\\mathrm{id}$이되 그 호모토피들이 매 순간 $Y$ 위에서 항등인 것을 뜻한다. (이는 0.4의 기준 2를 rel $X_0$으로 정련해 증명한다.)",
+          "idea_behind_proof": "호모토피 $F:f\\simeq g$ 자체로 만든 '두꺼운' 공간 $X_0\\sqcup_F(X_1\\times I)$이 양 끝에 $X_0\\sqcup_f X_1$과 $X_0\\sqcup_g X_1$을 모두 담고 있다는 관찰이 핵심이다. 명제 0.16의 변형수축($X_1\\times I\\to X_1\\times\\{0\\}\\cup A\\times I$)을 양쪽으로 흘려보내면 이 두꺼운 공간이 두 끝으로 각각 변형수축하고, 두 변형수축이 모두 $X_0$을 고정하므로 rel $X_0$ 호모토피 동치가 된다.",
+          "proof_steps": [
+            "1단계: 호모토피 $F:A\\times I\\to X_0$($f\\to g$)로 공간 $W=X_0\\sqcup_F(X_1\\times I)$을 만든다. $W$는 $X_0\\sqcup_f X_1$(레벨 $0$)과 $X_0\\sqcup_g X_1$(레벨 $1$)을 부분공간으로 포함한다.",
+            "2단계: 명제 0.16의 변형수축 $X_1\\times I\\to X_1\\times\\{0\\}\\cup A\\times I$가 $W$의 $X_0\\sqcup_f X_1$로의 변형수축을 유도한다. 마찬가지로 $W$는 $X_0\\sqcup_g X_1$로도 변형수축한다.",
+            "3단계: 두 변형수축은 모두 $X_0$ 위에서 항등이므로, 이들을 이어 붙이면 $X_0\\sqcup_f X_1\\simeq X_0\\sqcup_g X_1$ rel $X_0$을 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.19 (rel $A$ 승격)",
+          "formal_statement": "$(X,A)$와 $(Y,A)$가 HEP를 만족하고 $f:X\\to Y$가 $f|_A=\\mathrm{id}$인 호모토피 동치이면, $f$는 rel $A$ 호모토피 동치다.",
+          "idea_behind_proof": "호모토피 역 $g$와 두 호모토피 $gf\\simeq\\mathrm{id}$, $fg\\simeq\\mathrm{id}$는 $A$를 존중하지 않을 수 있다. HEP가 바로 이 결함을 '수선'하는 도구다. 먼저 (Y,A)의 HEP로 $g$를 $A$ 위에서 항등이 되도록 고치고($g_1|_A=\\mathrm{id}$), 다음으로 $(X\\times I,A\\times I)$의 HEP를 이용한 '호모토피의 호모토피'로 $g_1f\\simeq\\mathrm{id}$을 rel $A$로 끌어올리며, 대칭적으로 $fg_1$도 처리한다.",
+          "proof_steps": [
+            "1단계($g\\to g_1$, $g_1|_A=\\mathrm{id}$): $h_t:X\\to X$를 $gf=h_0$에서 $\\mathrm{id}=h_1$로 가는 호모토피라 하자. $f|_A=\\mathrm{id}$이므로 $h_t|_A$는 $g|_A\\simeq\\mathrm{id}$의 호모토피다. $(Y,A)$의 HEP로 이를 확장해 $g=g_0$에서 $g_1|_A=\\mathrm{id}$인 $g_1$까지의 호모토피 $g_t:Y\\to X$를 얻는다.",
+            "2단계($g_1f\\simeq\\mathrm{id}$ rel $A$): $k_t=g_{1-2t}f$ ($0\\le t\\le\\tfrac12$), $h_{2t-1}$ ($\\tfrac12\\le t\\le1$)로 두면 $A$ 위에서 $k_t=k_{1-t}$(전반부를 후반부가 되짚음). 이를 바탕으로 '호모토피의 호모토피' $k_{tu}:A\\to X$를 V자 도식으로 정의하면 $(t,u)$-사각형의 좌·우·상 변에서 $k_{tu}=\\mathrm{id}$. $(X,A)$의 HEP는 $(X\\times I,A\\times I)$의 HEP를 주므로 $k_{tu}$를 $X$ 위로 확장할 수 있고, 좌·상·우 변으로 제한하면 $g_1f\\simeq\\mathrm{id}$ rel $A$.",
+            "3단계($fg_1\\simeq\\mathrm{id}$ rel $A$): $g_1\\simeq g$이므로 $fg_1\\simeq fg\\simeq\\mathrm{id}$. 위 (1),(2)를 쌍 $(f,g)$ 대신 $(g_1,f)$로 반복하면 $f_1|_A=\\mathrm{id}$이고 $f_1g_1\\simeq\\mathrm{id}$ rel $A$인 $f_1$을 얻는다. 그러면 $f_1\\simeq f_1(g_1f)=(f_1g_1)f\\simeq f$ rel $A$이므로 $fg_1\\simeq f_1g_1\\simeq\\mathrm{id}$ rel $A$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 0.20 (포함사상이 호모토피 동치이면 변형수축)",
+          "formal_statement": "$(X,A)$가 HEP를 만족하고 포함사상 $A\\hookrightarrow X$가 호모토피 동치이면, $A$는 $X$의 변형수축(deformation retract)이다.",
+          "idea_behind_proof": "명제 0.19를 포함사상 $A\\hookrightarrow X$에 그대로 적용하면 된다 — 포함사상은 $A$ 위에서 자동으로 항등이므로 가설이 딱 맞는다.",
+          "proof_steps": [
+            "1단계: 포함사상 $i:A\\hookrightarrow X$는 $A$ 위에서 항등이고 가정에 의해 호모토피 동치다. 명제 0.19를 적용하면 $i$는 rel $A$ 호모토피 동치.",
+            "2단계: 그 rel $A$ 호모토피 역 $r:X\\to A$는 $A$ 위에서 항등인 축약이며 $ir\\simeq\\mathrm{id}_X$ rel $A$. 이는 곧 $X$의 $A$로의 변형수축이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 0.21 (0.1의 약속을 갚음)",
+          "formal_statement": "사상 $f:X\\to Y$가 호모토피 동치일 필요충분조건은 $X$가 사상원기둥 $M_f$의 변형수축인 것이다. 따라서 두 공간 $X,Y$가 호모토피 동치일 필요충분조건은 $X$와 $Y$를 모두 변형수축 부분공간으로 담는 제3의 공간이 존재하는 것이다. (이것이 0.1에서 미뤄 둔 사실이다.)",
+          "idea_behind_proof": "사상원기둥이 무대다. $M_f$ 안에는 두 포함 $i:X\\hookrightarrow M_f$, $j:Y\\hookrightarrow M_f$와 표준 축약 $r:M_f\\to Y$가 있고 $f=ri$, $i\\simeq jf$가 성립한다. $j,r$는 이미 호모토피 동치($M_f\\simeq Y$)이므로 $f$가 호모토피 동치인지는 $i$가 그러한지와 동치가 된다. 그리고 $(M_f,X)$는 예 0.15로 HEP를 가지므로 따름정리 0.20을 적용하면 '$i$가 호모토피 동치 ⟺ $X$가 $M_f$의 변형수축'이 나온다.",
+          "proof_steps": [
+            "1단계: $M_f$에서 포함 $i:X\\hookrightarrow M_f$, $j:Y\\hookrightarrow M_f$와 표준 축약 $r:M_f\\to Y$에 대해 $f=ri$, $i\\simeq jf$. $M_f$는 $Y$로 변형수축하므로 $j,r$는 호모토피 동치.",
+            "2단계: 호모토피 동치의 합성·호모토피 불변성에 의해 $f=ri$가 호모토피 동치일 필요충분조건은 $i$가 호모토피 동치인 것.",
+            "3단계: $(M_f,X)$는 $M_f$ 안 $X$의 근방 $X\\times[0,\\tfrac12]$을 사상원기둥 근방으로 삼아 예 0.15에 의해 HEP를 가진다. 따름정리 0.20을 적용하면 '$i$가 호모토피 동치 ⟺ $X$가 $M_f$의 변형수축'.",
+            "4단계: 두 결과를 합치면 '$f$가 호모토피 동치 ⟺ $X$가 $M_f$의 변형수축'. $M_f$는 항상 $Y$로도 변형수축하므로, $M_f$가 $X$와 $Y$를 모두 변형수축으로 담는 제3의 공간이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)이면 $(X,A)$가 HEP를 가짐을 정의에 따라 직접 보여라(명제의 쉬운 방향).",
+          "hint": "축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$이 주어졌다. 확장해야 할 임의의 사상 $\\varphi:X\\times\\{0\\}\\cup A\\times I\\to Y$를 $r$와 어떻게 합성하면 $X\\times I$ 위로 확장되는지 생각하라. $r$가 부분공간 위에서 무엇을 하는지 기억하라.",
+          "solution": "축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$이 있다고 하자. HEP를 보이려면 임의의 사상 $\\varphi:X\\times\\{0\\}\\cup A\\times I\\to Y$가 $X\\times I\\to Y$로 확장됨을 보이면 된다. $\\Phi=\\varphi\\circ r:X\\times I\\to Y$로 정의하자. $r$는 축약이므로 부분공간 $X\\times\\{0\\}\\cup A\\times I$ 위에서 항등, 즉 그 위의 점 $z$에 대해 $\\Phi(z)=\\varphi(r(z))=\\varphi(z)$. 따라서 $\\Phi$는 $\\varphi$의 확장이고 $(X,A)$는 HEP를 가진다. (거꾸로 HEP ⟹ 축약은, 항등사상 $\\mathrm{id}:X\\times\\{0\\}\\cup A\\times I\\to X\\times\\{0\\}\\cup A\\times I$을 확장하면 그 확장이 곧 축약임에서 나온다.) 요점: HEP의 '확장'은 축약과의 합성이라는 기계적 조작으로 환원된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$(X,A)$가 HEP를 가지면 임의의 공간 $Z$에 대해 $(X\\times Z,\\ A\\times Z)$도 HEP를 가짐을 축약 특징화를 이용해 보여라.",
+          "hint": "HEP ⟺ '$X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약'을 쓰라. 그 축약을 $Z$와 곱한 뒤, 좌표의 순서를 바꿔 $(X\\times Z)\\times I$와 $(X\\times Z)\\times\\{0\\}\\cup(A\\times Z)\\times I$ 꼴로 다시 읽어라.",
+          "solution": "명제(HEP ⟺ 축약)에 의해 축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$이 존재한다. $Z$와 곱하면 $r\\times\\mathrm{id}_Z:\\ X\\times I\\times Z\\to (X\\times\\{0\\}\\cup A\\times I)\\times Z$을 얻는다. 좌표를 재배열하면 $X\\times I\\times Z\\cong (X\\times Z)\\times I$이고 $(X\\times\\{0\\}\\cup A\\times I)\\times Z\\cong (X\\times Z)\\times\\{0\\}\\cup (A\\times Z)\\times I$이다. 이 동일시 아래에서 $r\\times\\mathrm{id}_Z$는 $(X\\times Z)\\times I$를 $(X\\times Z)\\times\\{0\\}\\cup(A\\times Z)\\times I$로 보내는 축약이다(부분공간 위에서 항등임은 $r$가 그러함에서 유지된다). 다시 명제를 적용하면 $(X\\times Z,A\\times Z)$가 HEP를 가진다. 이 사실은 정의에서 직접 확장 문제를 풀려 하면 다루기 까다롭지만, 축약 언어로 옮기면 곱과 좌표 재배열만으로 즉시 나온다 — 축약 특징화의 유용함을 보여 주는 예다."
+        },
+        {
+          "type": "ox",
+          "question": "$X$가 하우스도르프(Hausdorff)일 때 $(X,A)$가 HEP를 가지면 $A$는 반드시 $X$의 닫힌 부분공간이다.",
+          "answer": "O",
+          "explanation": "참이다. HEP ⟺ 축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$의 존재이고, 이 축약을 $X\\times I\\to X\\times I$로 볼 때 그 상은 고정점 집합 $\\{z:r(z)=z\\}$다. 하우스도르프 공간에서 연속사상의 고정점 집합은 닫혀 있으므로 $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$에서 닫히고, 따라서 $A$가 $X$에서 닫힌다."
+        },
+        {
+          "type": "ox",
+          "question": "$A$가 $X$의 닫힌 부분공간이기만 하면 쌍 $(X,A)$는 항상 HEP를 만족한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 닫힘은 (하우스도르프에서) HEP의 필요조건일 뿐 충분조건이 아니다. 반례로 $A=\\{0,1,\\tfrac12,\\tfrac13,\\tfrac14,\\dots\\}\\subset I$인 쌍 $(I,A)$는 $A$가 닫혀 있지만 축약 $I\\times I\\to I\\times\\{0\\}\\cup A\\times I$이 존재하지 않아 HEP가 실패한다. 원인은 $0$ 근방에서 점들이 무한히 몰리는 나쁜 국소 구조다. 좋은 국소 구조(예: 예 0.15의 사상원기둥 근방, 명제 0.16의 CW 쌍)에서는 HEP가 성립한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원은 0.1·0.4에서 '증명은 나중에'로 미뤄 둔 여러 사실을 실제로 증명한다. HEP가 어떻게 그 모든 증명의 공통 엔진이 되는지, 그리고 명제 0.16·0.17·0.18·0.21이 각각 앞의 어떤 약속을 갚는지 설명하라.",
+          "hint": "먼저 HEP를 실제로 쓸 수 있게 만드는 명제가 무엇인지 찾아라(어떤 쌍이 HEP를 갖는가?). 그다음 각 명제가 0.4의 기준 1·기준 2, 또는 0.1의 미뤄 둔 사실 중 무엇을 증명하는지 대응시켜라. 축약 특징화가 '확장'을 어떻게 기계적 조작으로 바꾸는지도 언급하라.",
+          "answer": "HEP는 이 절의 유일한 기술적 엔진이며, 그 힘은 축약 특징화에서 나온다: $(X,A)$가 HEP를 가짐 ⟺ $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약. 이 한 줄이 '호모토피를 확장하라'는 문제를 '축약과 합성하라'는 기계적 조작으로 바꿔 준다. 엔진을 실제로 켜 주는 것은 명제 0.16으로, 모든 CW 쌍이 HEP를 가짐을 보인다(각 $D^n\\times I$의 반지름 사영 축약을 뼈대를 따라 조립하고, 약위상으로 연속성을 확보). 그 위에서 약속들이 갚인다. 명제 0.17은 0.4의 기준 1(수축가능한 부분복합체 붕괴는 호모토피 동치)을 증명한다 — $A$의 수축을 HEP로 $f_t:X\\to X$로 확장한 뒤 몫에서 역사상 $g$를 읽어 낸다. 명제 0.18은 0.4의 기준 2(호모토픽한 부착사상은 호모토피 동치를 준다)를 rel $X_0$으로 정련해 증명한다 — 호모토피 $F$로 만든 두꺼운 공간 $X_0\\sqcup_F(X_1\\times I)$을 명제 0.16의 축약으로 양 끝으로 변형수축시킨다. 마지막으로 명제 0.19(+따름정리 0.20)는 '$A$ 위에서 항등인 호모토피 동치'를 '변형수축'으로 승격시키고, 따름정리 0.21이 이를 $(M_f,X)$에 적용해 'f가 호모토피 동치 ⟺ X가 $M_f$의 변형수축'을 얻는다 — 이것이 0.1에서 미뤄 둔 사실, 곧 '두 공간이 호모토피 동치일 필요충분조건은 둘을 함께 변형수축으로 담는 제3의 공간이 존재함'을 마침내 증명한다. 요약하면 HEP → (0.16이 사용 가능하게 함) → (0.17·0.18이 두 기준을 갚음) → (0.19·0.20·0.21이 0.1의 약속을 갚음)."
+        }
+      ]
+    }
+  ]
+}

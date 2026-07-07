@@ -12,7 +12,7 @@
 | 001 | [x] | 0.2 Cell Complexes | section | `001__AlgebraicTopol__0_2_CellComplexes.txt` |
 | 002 | [x] | 0.3 Operations on Spaces | section | `002__AlgebraicTopol__0_3_OperationsonSpaces.txt` |
 | 003 | [x] | 0.4 Two Criteria for Homotopy Equivalence | section | `003__AlgebraicTopol__0_4_TwoCriteriaforHomotopyEqui.txt` |
-| 004 | [ ] | 0.5 The Homotopy Extension Property | section | `004__AlgebraicTopol__0_5_TheHomotopyExtensionProper.txt` |
+| 004 | [x] | 0.5 The Homotopy Extension Property | section | `004__AlgebraicTopol__0_5_TheHomotopyExtensionProper.txt` |
 
 ## 1. The Fundamental Group
 
