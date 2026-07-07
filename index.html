@@ -60,7 +60,6 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 
 /* ---------- Header ---------- */
 .app-header{
-  position:sticky; top:0; z-index:50;
   display:flex; align-items:center; gap:16px; justify-content:space-between;
   padding:11px clamp(16px,4vw,40px);
   background:rgba(244,246,241,.85); backdrop-filter:blur(10px);
@@ -119,50 +118,68 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 .gh-modal-status.err{ color:var(--no); }
 @media (max-width:400px){ .topic-select{ max-width:48vw; } }
 
-/* ---------- Ink / handwriting (펜 필기) ---------- */
+/* ---------- Sticky header + ink strip, stuck together as one unit ---------- */
+:root{ --sticky-h: 195px; } /* 대략값 — 레이아웃 후 JS가 정확히 다시 계산해 덮어쓴다 */
+.sticky-top{ position:sticky; top:0; z-index:50; }
+
+/* ---------- Ink / handwriting (펜 필기) ----------
+   심층 학습 노트/주제 선택 줄 바로 아래에 붙는 가로줄 형태의 고정 메모 영역. 카드 위에 겹치지
+   않으므로 카드 본문을 절대 가리지 않는다. */
 .pen-toggle-btn{
-  flex:0 0 auto; width:34px; height:34px; border-radius:9px; padding:0;
+  flex:0 0 auto; width:34px; height:34px; border-radius:9px; padding:0; font-size:1rem; line-height:1;
   display:grid; place-items:center; cursor:pointer;
   border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-faint);
   transition:color .15s,border-color .15s,background .15s;
 }
 .pen-toggle-btn:hover{ color:var(--ink); }
-.pen-toggle-btn svg{ width:17px; height:17px; }
-.pen-toggle-btn.is-on{ color:#fff; background:var(--primary); border-color:var(--primary); }
+.pen-toggle-btn.is-on{ background:var(--primary-soft); border-color:var(--primary); }
 
-.ink-canvas{ position:absolute; left:0; top:0; touch-action:auto; }
-
-.ink-toolbar{
-  position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:60;
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-  background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
-  padding:12px 9px; box-shadow:0 8px 28px rgba(20,24,35,.18);
+.ink-strip{
+  display:flex; align-items:stretch; height:132px;
+  background:rgba(244,246,241,.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
-.ink-swatches, .ink-widths{ display:flex; flex-direction:column; gap:7px; }
+.ink-toolbar{
+  flex:0 0 auto; width:76px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:7px; padding:8px 6px; border-right:1px solid var(--line); overflow-y:auto;
+}
+.ink-swatches, .ink-widths{ display:flex; align-items:center; gap:6px; }
 .ink-swatch{
-  width:24px; height:24px; border-radius:50%; padding:0; cursor:pointer;
+  width:20px; height:20px; border-radius:50%; padding:0; cursor:pointer; flex:0 0 auto;
   border:2px solid transparent; box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
 }
 .ink-swatch.is-active{ border-color:var(--ink-faint); }
-.ink-widths{ margin-top:2px; }
 .ink-width{
-  width:30px; height:24px; border-radius:8px; padding:0; cursor:pointer; display:grid; place-items:center;
+  width:22px; height:20px; border-radius:7px; padding:0; cursor:pointer; display:grid; place-items:center; flex:0 0 auto;
   border:1px solid var(--line-strong); background:var(--surface-2);
 }
-.ink-width span{ display:block; width:16px; border-radius:999px; background:var(--ink-soft); }
+.ink-width span{ display:block; width:12px; border-radius:999px; background:var(--ink-soft); }
 .ink-width[data-width="2"] span{ height:2px; }
 .ink-width[data-width="4"] span{ height:4px; }
 .ink-width[data-width="7"] span{ height:7px; }
 .ink-width.is-active{ background:var(--primary-soft); border-color:var(--primary); }
 .ink-tool{
-  width:30px; height:30px; border-radius:9px; padding:0; cursor:pointer; font-size:.95rem;
+  width:28px; height:28px; border-radius:8px; padding:0; cursor:pointer; font-size:.85rem;
   display:grid; place-items:center; border:1px solid var(--line-strong); background:var(--surface-2); color:var(--ink-soft);
 }
 .ink-tool.is-active{ background:var(--no-bg); border-color:#E9C6C0; color:var(--no); }
+.ink-trash-wrap{ position:relative; }
+.ink-trash-menu{
+  position:fixed; z-index:70; min-width:180px; background:var(--surface); border:1px solid var(--line-strong);
+  border-radius:10px; box-shadow:0 8px 24px rgba(20,24,35,.2); padding:6px; display:flex; flex-direction:column; gap:2px;
+}
+.ink-trash-menu button{
+  text-align:left; font-family:var(--sans); font-size:.85rem; color:var(--ink); background:none; border:none;
+  border-radius:7px; padding:9px 10px; cursor:pointer;
+}
+.ink-trash-menu button:hover{ background:var(--surface-2); }
+.ink-canvas{ flex:1 1 auto; display:block; width:100%; height:100%; cursor:crosshair; touch-action:none; }
 @media (max-width:640px){
-  .ink-toolbar{ right:6px; padding:9px 6px; gap:8px; }
-  .ink-swatch{ width:20px; height:20px; }
-  .ink-width{ width:26px; height:20px; }
+  .ink-strip{ height:104px; }
+  .ink-toolbar{ width:58px; gap:5px; padding:6px 4px; }
+  .ink-swatch{ width:16px; height:16px; }
+  .ink-width{ width:18px; height:16px; }
+  .ink-tool{ width:24px; height:24px; }
 }
 
 /* ---------- Layout ---------- */
@@ -170,7 +187,7 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 @media (max-width:960px){ .layout{ grid-template-columns:minmax(0,1fr); } }
 
 /* ---------- Rail ---------- */
-.rail{ position:sticky; top:63px; align-self:start; padding:26px 6px 40px 0; }
+.rail{ position:sticky; top:var(--sticky-h); align-self:start; padding:26px 6px 40px 0; }
 .rail-inner{ display:flex; flex-direction:column; gap:4px; }
 .rail-title-row{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:0 12px 8px; }
 .rail-title{ font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); }
@@ -462,6 +479,7 @@ p.prose{ margin:0; }
 </head>
 <body>
 
+<div class="sticky-top" id="stickyTop">
 <header class="app-header">
   <div class="brand">
     <svg class="brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
@@ -479,11 +497,36 @@ p.prose{ margin:0; }
     <button class="gh-sync-btn" id="ghSyncBtn" type="button" title="GitHub 동기화 설정" aria-label="GitHub 동기화 설정">
       <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
     </button>
-    <button class="pen-toggle-btn" id="penToggleBtn" type="button" title="펜으로 필기하기" aria-label="펜으로 필기하기" aria-pressed="false">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.5 1.5 14 4l-8.5 8.5-3 1 1-3z"/><path d="M9.5 3.5 12 6"/></svg>
-    </button>
+    <button class="pen-toggle-btn" id="penToggleBtn" type="button" title="스크롤 모드 (펜으로도 스크롤하기)" aria-label="스크롤 모드" aria-pressed="false">📖</button>
   </div>
 </header>
+
+<div class="ink-strip" id="inkStrip">
+  <div class="ink-toolbar" id="inkToolbar">
+    <div class="ink-swatches">
+      <button class="ink-swatch" data-color="#1B2333" style="background:#1B2333" type="button" title="검정" aria-label="검정"></button>
+      <button class="ink-swatch" data-color="#B0483C" style="background:#B0483C" type="button" title="빨강" aria-label="빨강"></button>
+      <button class="ink-swatch" data-color="#2E4374" style="background:#2E4374" type="button" title="파랑" aria-label="파랑"></button>
+      <button class="ink-swatch" data-color="#2F7D5B" style="background:#2F7D5B" type="button" title="초록" aria-label="초록"></button>
+    </div>
+    <div class="ink-widths">
+      <button class="ink-width" data-width="2" type="button" title="얇게" aria-label="얇게"><span></span></button>
+      <button class="ink-width" data-width="4" type="button" title="보통" aria-label="보통"><span></span></button>
+      <button class="ink-width" data-width="7" type="button" title="굵게" aria-label="굵게"><span></span></button>
+    </div>
+    <button class="ink-tool" id="inkEraseBtn" type="button" title="지우개(획 단위)" aria-label="지우개" aria-pressed="false">⌫</button>
+    <button class="ink-tool" id="inkUndoBtn" type="button" title="되돌리기" aria-label="되돌리기">↶</button>
+    <div class="ink-trash-wrap">
+      <button class="ink-tool" id="inkTrashBtn" type="button" title="필기 지우기" aria-label="필기 지우기">🗑</button>
+      <div class="ink-trash-menu" id="inkTrashMenu" hidden>
+        <button type="button" data-scope="card">이 카드 필기 지우기</button>
+        <button type="button" data-scope="section">이 소단원 전체 필기 지우기</button>
+      </div>
+    </div>
+  </div>
+  <canvas class="ink-canvas" id="inkCanvas"></canvas>
+</div>
+</div>
 
 <div class="gh-modal-overlay" id="ghModalOverlay" hidden>
   <div class="gh-modal">
@@ -507,23 +550,6 @@ p.prose{ margin:0; }
     </div>
     <div class="gh-modal-status" id="ghModalStatus"></div>
   </div>
-</div>
-
-<div class="ink-toolbar" id="inkToolbar" hidden>
-  <div class="ink-swatches">
-    <button class="ink-swatch" data-color="#1B2333" style="background:#1B2333" type="button" title="검정" aria-label="검정"></button>
-    <button class="ink-swatch" data-color="#B0483C" style="background:#B0483C" type="button" title="빨강" aria-label="빨강"></button>
-    <button class="ink-swatch" data-color="#2E4374" style="background:#2E4374" type="button" title="파랑" aria-label="파랑"></button>
-    <button class="ink-swatch" data-color="#2F7D5B" style="background:#2F7D5B" type="button" title="초록" aria-label="초록"></button>
-  </div>
-  <div class="ink-widths">
-    <button class="ink-width" data-width="2" type="button" title="얇게" aria-label="얇게"><span></span></button>
-    <button class="ink-width" data-width="4" type="button" title="보통" aria-label="보통"><span></span></button>
-    <button class="ink-width" data-width="7" type="button" title="굵게" aria-label="굵게"><span></span></button>
-  </div>
-  <button class="ink-tool" id="inkEraseBtn" type="button" title="지우개" aria-label="지우개" aria-pressed="false">⌫</button>
-  <button class="ink-tool" id="inkUndoBtn" type="button" title="되돌리기" aria-label="되돌리기">↶</button>
-  <button class="ink-tool" id="inkClearBtn" type="button" title="이 카드 필기 전체 지우기" aria-label="이 카드 필기 전체 지우기">🗑</button>
 </div>
 
 <div class="layout">
@@ -1103,17 +1129,36 @@ p.prose{ margin:0; }
     return { pullRemoteState: pullRemoteState, scheduleSave: scheduleSave, initUI: initUI };
   })();
 
-  /* ---------- ink / handwriting (펜 필기, 태블릿 스타일러스 대응) ----------
-     카드마다 그 카드 위에 직접 겹치는 <canvas> 하나로 필기를 받는다. 획은 카드 좌표에 대한
-     0~1 정규화 비율로 저장하므로 카드 크기가 달라져도(접기/펼치기, 화면 회전, 다른 기기의 다른
-     너비) 항상 같은 상대 위치에 다시 그려진다. 지금은 로컬 저장만 한다(기기 간 동기화는 별도 논의 필요
-     — 그림 데이터는 체크박스보다 훨씬 커서 그대로 GitHub 동기화에 얹으면 요청이 무거워진다). */
+  /* ---------- ink / handwriting (펜 필기, 삼성 노트 스타일 펜/손가락 구분) ----------
+     심층 학습 노트 제목·주제 선택 줄 바로 아래 붙는 고정 가로줄(.ink-strip) 안의 <canvas> 하나로
+     필기를 받는다 — 카드 위에 겹치지 않으므로 카드 본문을 가리지 않는다. 획은 그 캔버스 좌표에
+     대한 0~1 정규화 비율로 저장하므로 화면 크기가 달라져도 항상 같은 상대 위치로 다시 그려진다.
+
+     펜/손가락/마우스 구분(삼성 노트 방식):
+       - 펜(pointerType 'pen')은 항상 필기, 마우스는 항상 필기(펜이 없는 PC를 대신함).
+       - 손가락(touch)은, 이 세션에서 실제 펜 입력을 한 번이라도 감지하기 전까지는(=아직 폰/PC로
+         간주) 필기하고, 펜을 한 번이라도 쓰면(=태블릿으로 간주) 그 뒤로는 스크롤로 취급한다.
+       - 상단 📖 버튼(책보기 모드)을 켜면 모든 입력이 스크롤로 취급된다(필기 없이 훑어보기용).
+     캔버스는 touch-action:none 을 고정해 두고, "스크롤이어야 하는" 포인터는 우리가 직접
+     window.scrollBy 로 스크롤을 흉내낸다 — 브라우저 touch-action 은 포인터 타입별로 나눠 줄 수
+     없어서, 펜은 막고 손가락만 통과시키는 걸 CSS만으로는 안정적으로 구현할 수 없기 때문이다.
+
+     지우개는 오브젝트(획) 단위다 — 픽셀을 지우지 않고, 지우개가 스친 획 전체를 배열에서 제거한다.
+
+     지금은 로컬 저장만 한다(기기 간 동기화는 별도 논의 필요 — 그림 데이터는 체크박스보다 훨씬
+     커서 그대로 GitHub 동기화에 얹으면 요청이 무거워진다). */
   var inkPad = (function(){
     var KEY = 'pdl_ink_v1';
-    var enabled = false, erasing = false;
+    var PEN_SEEN_KEY = 'pdl_pen_seen_v1';
+    var ERASE_RADIUS = 16; // px, 지우개 히트 판정 반경
+    var bookMode = false, erasing = false;
     var color = '#1B2333', penWidth = 4;
     var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null;
+    var scrollPointerId = null, lastScrollY = 0;
+    var penEverSeen = false;
     var dpr = window.devicePixelRatio || 1;
+
+    try{ penEverSeen = localStorage.getItem(PEN_SEEN_KEY) === '1'; }catch(e){}
 
     function loadStore(){ try{ return JSON.parse(localStorage.getItem(KEY) || '{}'); }catch(e){ return {}; } }
     function saveStore(store){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){ /* degrade silently */ } }
@@ -1122,35 +1167,41 @@ p.prose{ margin:0; }
       var v = state.view;
       return (v.type === 'review' ? 'review' : ('sec' + v.index)) + ':' + state.cardIndex;
     }
+    function sectionPrefix(){
+      var v = state.view;
+      return (v.type === 'review' ? 'review' : ('sec' + v.index)) + ':';
+    }
     function currentStrokes(){
       var store = loadStore();
       var byTopic = state.topicId && store[state.topicId];
       return (byTopic && byTopic[cardKey()]) || [];
     }
-    function pushStroke(stroke){
+    function setCurrentStrokes(arr){
       if(!state.topicId) return;
       var store = loadStore();
       var byTopic = store[state.topicId] || (store[state.topicId] = {});
-      var key = cardKey();
-      (byTopic[key] || (byTopic[key] = [])).push(stroke);
+      byTopic[cardKey()] = arr;
       saveStore(store);
     }
+    function pushStroke(stroke){
+      setCurrentStrokes(currentStrokes().concat([stroke]));
+    }
 
-    function createCanvasEl(){
-      canvas = document.createElement('canvas');
-      canvas.className = 'ink-canvas';
-      canvas.addEventListener('pointerdown', onPointerDown);
-      canvas.addEventListener('pointermove', onPointerMove);
-      canvas.addEventListener('pointerup', onPointerUp);
-      canvas.addEventListener('pointercancel', onPointerUp);
+    function shouldDraw(pointerType){
+      if(bookMode) return false;
+      if(pointerType === 'touch') return !penEverSeen;
+      return true; // pen, mouse
+    }
+    function markPenSeen(){
+      if(penEverSeen) return;
+      penEverSeen = true;
+      try{ localStorage.setItem(PEN_SEEN_KEY, '1'); }catch(e){}
     }
 
     function resize(){
-      var card = canvas && canvas.parentElement;
-      if(!card) return;
-      var w = card.clientWidth, h = card.scrollHeight;
-      canvas.style.width = w + 'px';
-      canvas.style.height = h + 'px';
+      if(!canvas) return;
+      var rect = canvas.getBoundingClientRect();
+      var w = Math.max(1, rect.width), h = Math.max(1, rect.height);
       canvas.width = Math.max(1, Math.round(w * dpr));
       canvas.height = Math.max(1, Math.round(h * dpr));
       ctx = canvas.getContext('2d');
@@ -1161,71 +1212,100 @@ p.prose{ margin:0; }
       if(!ctx || !canvas) return;
       var w = canvas.clientWidth, h = canvas.clientHeight;
       ctx.clearRect(0, 0, w, h);
-      currentStrokes().forEach(function(s){
-        ctx.globalCompositeOperation = s.mode === 'erase' ? 'destination-out' : 'source-over';
-        ctx.strokeStyle = s.color; ctx.fillStyle = s.color;
-        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-        ctx.lineWidth = Math.max(1, s.widthNorm * w);
-        if(s.pts.length < 2){
-          var p = s.pts[0];
-          ctx.beginPath();
-          ctx.arc(p[0] * w, p[1] * h, Math.max(0.5, (s.widthNorm * w) / 2), 0, Math.PI * 2);
-          ctx.fill();
-          return;
-        }
+      currentStrokes().forEach(function(s){ drawStroke(s, w, h); });
+    }
+    function drawStroke(s, w, h){
+      ctx.strokeStyle = s.color; ctx.fillStyle = s.color;
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.lineWidth = Math.max(1, s.widthNorm * w);
+      if(s.pts.length < 2){
+        var p = s.pts[0];
         ctx.beginPath();
-        s.pts.forEach(function(p, i){
-          if(i === 0) ctx.moveTo(p[0] * w, p[1] * h); else ctx.lineTo(p[0] * w, p[1] * h);
-        });
-        ctx.stroke();
+        ctx.arc(p[0] * w, p[1] * h, Math.max(0.5, (s.widthNorm * w) / 2), 0, Math.PI * 2);
+        ctx.fill();
+        return;
+      }
+      ctx.beginPath();
+      s.pts.forEach(function(p, i){
+        if(i === 0) ctx.moveTo(p[0] * w, p[1] * h); else ctx.lineTo(p[0] * w, p[1] * h);
       });
-      ctx.globalCompositeOperation = 'source-over';
+      ctx.stroke();
     }
 
-    function observeCard(card){
-      if(ro) ro.disconnect();
-      if(typeof ResizeObserver === 'undefined') return;
-      ro = new ResizeObserver(function(){ resize(); redraw(); });
-      ro.observe(card);
+    function distToSegmentSq(px, py, x1, y1, x2, y2){
+      var dx = x2 - x1, dy = y2 - y1;
+      var lenSq = dx * dx + dy * dy;
+      var t = lenSq === 0 ? 0 : ((px - x1) * dx + (py - y1) * dy) / lenSq;
+      t = Math.max(0, Math.min(1, t));
+      var cx = x1 + t * dx, cy = y1 + t * dy;
+      var ddx = px - cx, ddy = py - cy;
+      return ddx * ddx + ddy * ddy;
     }
-
-    function attach(){
-      if(!canvas) createCanvasEl();
-      var card = mainEl.querySelector('.card');
-      if(!card){ if(canvas.parentElement) canvas.remove(); return; }
-      card.style.position = 'relative';
-      card.appendChild(canvas);
-      updateInteractivity();
-      requestAnimationFrame(function(){ resize(); redraw(); observeCard(card); });
-    }
-
-    function updateInteractivity(){
-      if(!canvas) return;
-      canvas.style.pointerEvents = enabled ? 'auto' : 'none';
-      canvas.style.touchAction = enabled ? 'none' : 'auto';
+    function eraseAt(clientX, clientY){
+      // 점 목록이 성긴 경우(빠른 스트로크, 합성 이벤트 등)에도 놓치지 않도록 각 점이 아니라
+      // 점들 사이 "선분"까지의 거리로 판정한다 — 눈에 보이는 획 경로 전체가 히트 대상이다.
+      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
+      var ex = clientX - rect.left, ey = clientY - rect.top;
+      var r2 = ERASE_RADIUS * ERASE_RADIUS;
+      var strokes = currentStrokes();
+      var changed = false;
+      var kept = strokes.filter(function(s){
+        var hit = false;
+        if(s.pts.length < 2){
+          var p = s.pts[0], dx = p[0] * w - ex, dy = p[1] * h - ey;
+          hit = (dx * dx + dy * dy) <= r2;
+        } else {
+          for(var i = 1; i < s.pts.length; i++){
+            var x1 = s.pts[i - 1][0] * w, y1 = s.pts[i - 1][1] * h;
+            var x2 = s.pts[i][0] * w, y2 = s.pts[i][1] * h;
+            if(distToSegmentSq(ex, ey, x1, y1, x2, y2) <= r2){ hit = true; break; }
+          }
+        }
+        if(hit) changed = true;
+        return !hit;
+      });
+      if(changed){ setCurrentStrokes(kept); redraw(); }
     }
 
     function onPointerDown(ev){
-      if(!enabled || (ev.pointerType === 'mouse' && ev.button !== 0)) return;
+      if(ev.pointerType === 'mouse' && ev.button !== 0) return;
+      if(ev.pointerType === 'pen') markPenSeen();
+      if(!shouldDraw(ev.pointerType)){
+        scrollPointerId = ev.pointerId;
+        lastScrollY = ev.clientY;
+        try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
+        return;
+      }
       ev.preventDefault();
       try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
       drawing = true;
-      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
+      if(erasing){ eraseAt(ev.clientX, ev.clientY); return; }
+      var rect = canvas.getBoundingClientRect(), w = rect.width;
       var pressure = ev.pressure > 0 ? ev.pressure : 0.5;
       curStroke = {
-        mode: erasing ? 'erase' : 'draw', color: color,
+        color: color,
         widthNorm: (penWidth * (0.5 + 0.5 * pressure)) / w,
-        pts: [[(ev.clientX - rect.left) / w, (ev.clientY - rect.top) / h]]
+        pts: [[(ev.clientX - rect.left) / w, (ev.clientY - rect.top) / rect.height]]
       };
-      ctx.globalCompositeOperation = curStroke.mode === 'erase' ? 'destination-out' : 'source-over';
       ctx.strokeStyle = curStroke.color;
       ctx.lineWidth = Math.max(1, curStroke.widthNorm * w);
       ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     }
     function onPointerMove(ev){
-      if(!drawing || !curStroke) return;
-      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
+      if(scrollPointerId === ev.pointerId){
+        var dy = ev.clientY - lastScrollY;
+        window.scrollBy(0, -dy);
+        lastScrollY = ev.clientY;
+        return;
+      }
+      if(!drawing) return;
       var events = (ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
+      if(erasing){
+        events.forEach(function(e){ eraseAt(e.clientX, e.clientY); });
+        return;
+      }
+      if(!curStroke) return;
+      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
       events.forEach(function(e){
         var x = (e.clientX - rect.left) / w, y = (e.clientY - rect.top) / h;
         var last = curStroke.pts[curStroke.pts.length - 1];
@@ -1237,35 +1317,46 @@ p.prose{ margin:0; }
       });
     }
     function onPointerUp(ev){
-      if(!drawing || !curStroke) return;
+      if(scrollPointerId === ev.pointerId){
+        try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
+        scrollPointerId = null;
+        return;
+      }
+      if(!drawing) return;
       drawing = false;
+      try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
+      if(erasing || !curStroke){ curStroke = null; return; }
       if(curStroke.pts.length === 1){
         var rect = canvas.getBoundingClientRect(), p = curStroke.pts[0];
-        ctx.globalCompositeOperation = curStroke.mode === 'erase' ? 'destination-out' : 'source-over';
         ctx.fillStyle = curStroke.color;
         ctx.beginPath();
         ctx.arc(p[0] * rect.width, p[1] * rect.height, Math.max(0.5, (curStroke.widthNorm * rect.width) / 2), 0, Math.PI * 2);
         ctx.fill();
-        ctx.globalCompositeOperation = 'source-over';
       }
       pushStroke(curStroke);
       curStroke = null;
-      try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
     }
 
     function undoStroke(){
-      if(!state.topicId) return;
-      var store = loadStore();
-      var byTopic = store[state.topicId];
-      var arr = byTopic && byTopic[cardKey()];
-      if(arr && arr.length){ arr.pop(); saveStore(store); redraw(); }
+      var arr = currentStrokes();
+      if(arr.length){ setCurrentStrokes(arr.slice(0, -1)); redraw(); }
     }
     function clearCard(){
       if(!state.topicId) return;
       if(!confirm('이 카드의 필기를 전부 지울까요?')) return;
+      setCurrentStrokes([]);
+      redraw();
+    }
+    function clearSection(){
+      if(!state.topicId) return;
+      if(!confirm('이 소단원 전체의 필기를 모두 지울까요?')) return;
       var store = loadStore();
       var byTopic = store[state.topicId];
-      if(byTopic){ delete byTopic[cardKey()]; saveStore(store); }
+      if(byTopic){
+        var prefix = sectionPrefix();
+        Object.keys(byTopic).forEach(function(k){ if(k.indexOf(prefix) === 0) delete byTopic[k]; });
+        saveStore(store);
+      }
       redraw();
     }
 
@@ -1280,18 +1371,28 @@ p.prose{ margin:0; }
       if(eb){ eb.classList.toggle('is-active', erasing); eb.setAttribute('aria-pressed', erasing ? 'true' : 'false'); }
     }
 
-    function setEnabled(v){
-      enabled = v;
+    function setBookMode(v){
+      bookMode = v;
       var btn = document.getElementById('penToggleBtn');
       if(btn){ btn.classList.toggle('is-on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); }
-      var tb = document.getElementById('inkToolbar');
-      if(tb) tb.hidden = !v;
-      updateInteractivity();
+    }
+
+    function updateStickyOffset(){
+      var el = document.getElementById('stickyTop');
+      if(el) document.documentElement.style.setProperty('--sticky-h', el.offsetHeight + 'px');
     }
 
     function init(){
+      canvas = document.getElementById('inkCanvas');
+      if(!canvas) return;
+      canvas.addEventListener('pointerdown', onPointerDown);
+      canvas.addEventListener('pointermove', onPointerMove);
+      canvas.addEventListener('pointerup', onPointerUp);
+      canvas.addEventListener('pointercancel', onPointerUp);
+
       var toggleBtn = document.getElementById('penToggleBtn');
-      if(toggleBtn) toggleBtn.addEventListener('click', function(){ setEnabled(!enabled); });
+      if(toggleBtn) toggleBtn.addEventListener('click', function(){ setBookMode(!bookMode); });
+
       document.querySelectorAll('.ink-swatch').forEach(function(b){
         b.addEventListener('click', function(){ color = b.getAttribute('data-color'); erasing = false; updateToolbarUI(); });
       });
@@ -1302,10 +1403,41 @@ p.prose{ margin:0; }
       if(eraseBtn) eraseBtn.addEventListener('click', function(){ erasing = !erasing; updateToolbarUI(); });
       var undoBtn = document.getElementById('inkUndoBtn');
       if(undoBtn) undoBtn.addEventListener('click', undoStroke);
-      var clearBtn = document.getElementById('inkClearBtn');
-      if(clearBtn) clearBtn.addEventListener('click', clearCard);
+
+      var trashBtn = document.getElementById('inkTrashBtn');
+      var trashMenu = document.getElementById('inkTrashMenu');
+      if(trashBtn && trashMenu){
+        trashBtn.addEventListener('click', function(ev){
+          ev.stopPropagation();
+          var r = trashBtn.getBoundingClientRect();
+          trashMenu.style.left = r.left + 'px';
+          trashMenu.style.top = (r.bottom + 6) + 'px';
+          trashMenu.hidden = !trashMenu.hidden;
+        });
+        trashMenu.querySelectorAll('button').forEach(function(b){
+          b.addEventListener('click', function(){
+            trashMenu.hidden = true;
+            var scope = b.getAttribute('data-scope');
+            if(scope === 'section') clearSection(); else clearCard();
+          });
+        });
+        document.addEventListener('click', function(ev){
+          if(!trashMenu.hidden && ev.target !== trashBtn && !trashMenu.contains(ev.target)) trashMenu.hidden = true;
+        });
+      }
+
       updateToolbarUI();
+      updateStickyOffset();
+      resize();
+      redraw();
+      if(typeof ResizeObserver !== 'undefined'){
+        ro = new ResizeObserver(function(){ resize(); redraw(); });
+        ro.observe(canvas);
+      }
+      window.addEventListener('resize', function(){ updateStickyOffset(); resize(); redraw(); });
     }
+
+    function attach(){ redraw(); }
 
     return { init: init, attach: attach };
   })();
