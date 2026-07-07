@@ -17,6 +17,12 @@
       "title": "Chapter 0. Some Underlying Geometric Notions",
       "file": "chapter_0_some_underlying_geometric_noti.json",
       "book": "Hatcher — Algebraic Topology"
+    },
+    {
+      "id": "chapter_1_the_fundamental_group",
+      "title": "Chapter 1. The Fundamental Group",
+      "file": "chapter_1_the_fundamental_group.json",
+      "book": "Hatcher — Algebraic Topology"
     }
   ]
 }

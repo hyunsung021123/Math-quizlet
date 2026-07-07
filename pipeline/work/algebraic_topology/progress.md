@@ -18,7 +18,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 005 | [ ] | 1.1 Basic Constructions | section | `005__AlgebraicTopol__1_1_BasicConstructions.txt` |
+| 005 | [x] | 1.1 Basic Constructions | section | `005__AlgebraicTopol__1_1_BasicConstructions.txt` |
 | 006 | [ ] | 1.1.1 Paths and Homotopy | section | `006__AlgebraicTopol__1_1_1_PathsandHomotopy.txt` |
 | 007 | [ ] | 1.1.2 The Fundamental Group of the Circle | section | `007__AlgebraicTopol__1_1_2_TheFundamentalGroupoftheCi.txt` |
 | 008 | [ ] | 1.1.3 Induced Homomorphisms | section | `008__AlgebraicTopol__1_1_3_InducedHomomorphisms.txt` |
