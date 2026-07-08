@@ -1180,13 +1180,20 @@ p.prose{ margin:0; }
      처리한다(수직 이동은 곧장 스크롤, 손을 뗄 때 수평 이동이 더 크면 goNext/goPrev). 한 손가락은
      펜모드(책보기 모드가 아닐 때)에서 무조건 필기만 한다 — 스크롤/스와이프로 새지 않는다.
 
-     태블릿에서 펜으로 필기하다가 그 움직임이 카드 전체 스와이프(다른 기존 기능)로도 겹쳐 잡혀
-     옆 카드로 넘어가 버리는 문제가 있었다 — 그 스와이프 리스너는 Pointer Events가 아니라 별도의
-     레거시 Touch Events를 쓰는데, 그 API는 손가락/펜을 구분하지 않고 좌표만 준다. `Touch.touchType`
-     ('stylus'|'direct')을 지원하는 브라우저에서는 잉크 캔버스 위의 스타일러스 접촉에 한해 그
-     스와이프를 꺼서 고쳤다(아래 쪽 "swipe left/right" 리스너 참고). 손가락 스와이프는 그대로 둔다.
+     태블릿 펜/폰 한 손가락으로 필기하는 도중에도 그 움직임이 카드 전체 스와이프(다른 기존 기능)로
+     같이 잡혀 옆 카드로 넘어가 버리는 문제가 있었다 — 그 스와이프 리스너는 Pointer Events가 아니라
+     별도의 레거시 Touch Events(`touchstart`/`touchend`)를 쓰는데, Pointer Event 쪽에서 `preventDefault()`를
+     불러도 이 레거시 리스너의 실행은 막히지 않는다(서로 독립된 API라서). `Touch.touchType`으로 스타일러스만
+     가려내는 예전 수정은 손가락 드로잉엔 적용되지 않아 불충분했다 — 지금은 잉크 캔버스 위에서 시작한
+     터치는 펜이든 손가락이든 이 레거시 스와이프 리스너 자체를 완전히 건너뛴다(아래 쪽 "swipe left/right"
+     리스너 참고). 캔버스 위의 모든 단일 포인터 상호작용(필기·지우개·스크롤·탭 전달)과 두 손가락 스크롤/
+     스와이프는 전부 이 inkPad 모듈이 Pointer Events만으로 직접 처리하므로, 레거시 리스너가 관여할 이유가
+     없다.
 
      지우개는 오브젝트(획) 단위다 — 픽셀을 지우지 않고, 지우개가 스친 획 전체를 배열에서 제거한다.
+     펜의 옆면(배럴) 버튼을 누른 채 필기하면 도구모음 토글과 무관하게 그 획 하나만 임시로 지우개
+     모드가 된다(`PointerEvent.buttons`의 2번 비트, pointerdown 시점에 한 번만 판정해 그 스트로크
+     내내 유지 — Samsung Notes의 펜 버튼 동작과 동일).
 
      지금은 로컬 저장만 한다(기기 간 동기화는 별도 논의 필요 — 그림 데이터는 체크박스보다 훨씬
      커서 그대로 GitHub 동기화에 얹으면 요청이 무거워진다). */
@@ -1196,7 +1203,7 @@ p.prose{ margin:0; }
     var ERASE_RADIUS = 16; // px, 지우개 히트 판정 반경
     var bookMode = false, erasing = false;
     var color = '#1B2333', penWidth = 4;
-    var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null;
+    var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null, curStrokeErasing = false;
     var scrollPointerId = null, lastScrollY = 0, scrollStartX = 0, scrollStartY = 0, scrollMoved = false;
     var penEverSeen = false;
     // 폰에서 손가락 두 개 이상 = 필기 대신 스크롤/카드 넘기기(삼성 노트와 동일). 손가락 pointerId를
@@ -1349,7 +1356,9 @@ p.prose{ margin:0; }
       ev.preventDefault();
       try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
       drawing = true;
-      if(erasing){ eraseAt(ev.clientX, ev.clientY); return; }
+      // 펜 배럴 버튼은 그 스트로크 시작 시점에 한 번만 판정해 끝까지 유지한다(도구모음 토글과 별개).
+      curStrokeErasing = ev.pointerType === 'pen' ? !!(ev.buttons & 2) : erasing;
+      if(curStrokeErasing){ eraseAt(ev.clientX, ev.clientY); return; }
       var rect = canvas.getBoundingClientRect(), w = rect.width;
       var pressure = ev.pressure > 0 ? ev.pressure : 0.5;
       curStroke = {
@@ -1379,7 +1388,7 @@ p.prose{ margin:0; }
       }
       if(!drawing) return;
       var events = (ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
-      if(erasing){
+      if(curStrokeErasing){
         events.forEach(function(e){ eraseAt(e.clientX, e.clientY); });
         return;
       }
@@ -1427,7 +1436,7 @@ p.prose{ margin:0; }
       if(!drawing) return;
       drawing = false;
       try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
-      if(erasing || !curStroke){ curStroke = null; return; }
+      if(curStrokeErasing || !curStroke){ curStroke = null; return; }
       if(curStroke.pts.length === 1){
         var rect = canvas.getBoundingClientRect(), p = curStroke.pts[0];
         ctx.fillStyle = curStroke.color;
@@ -2087,9 +2096,9 @@ p.prose{ margin:0; }
   mainEl.addEventListener('touchstart', function(ev){
     if(deckNav.hidden || ev.touches.length !== 1){ swipeOn = false; return; }
     if(ev.target.closest('button, a, select, .katex-display, .figure-svg')){ swipeOn = false; return; }
-    // 태블릿에서 펜으로 필기하다가 그 움직임이 이 카드 스와이프로도 잡혀 옆으로 넘어가 버리는 문제 —
-    // 스타일러스 접촉은 touchType으로 구분되는 브라우저에서는 잉크 캔버스 위일 때 스와이프를 끈다.
-    if(ev.touches[0].touchType === 'stylus' && ev.target.closest('.ink-canvas')){ swipeOn = false; return; }
+    // 잉크 캔버스 위의 모든 단일 터치(펜이든 손가락이든)는 inkPad가 Pointer Events로 전담한다 —
+    // 이 레거시 스와이프 리스너가 같이 반응하면 필기 중 카드가 같이 넘어가 버리므로 여기서 완전히 뺀다.
+    if(ev.target.closest('.ink-canvas')){ swipeOn = false; return; }
     swX = ev.touches[0].clientX; swY = ev.touches[0].clientY; swipeOn = true;
   }, { passive:true });
   mainEl.addEventListener('touchend', function(ev){
