@@ -625,7 +625,8 @@ p.prose{ margin:0; }
   /* =========================================================================
      viz_core.js — 코드 기반 수학 시각화 엔진 (순수 함수, DOM 비의존)
      설계 원칙: 데이터(생성벡터/점/법선)만 받아서 기하를 계산 → 정확한 SVG 문자열 반환.
-     지원 type: zonotope_2d, hyperplane_arrangement_2d, convex_hull_2d, vectors_2d, custom_2d
+     지원 type: zonotope_2d, hyperplane_arrangement_2d, convex_hull_2d, vectors_2d, custom_2d,
+                identification_polygon_2d, complex_2d, torus_2d, cylinder_2d
      ========================================================================= */
 
   /* ---------- 벡터/기하 헬퍼 ---------- */
@@ -688,9 +689,9 @@ p.prose{ margin:0; }
 
   /* ---------- SVG 프리미티브 ---------- */
   function _n(v){ return (Math.round(v*10)/10); }
-  function _poly(mp, fill, stroke, sw){
+  function _poly(mp, fill, stroke, sw, dash){
     return '<polygon points="'+mp.map(function(p){return _n(p[0])+','+_n(p[1]);}).join(' ')+
-           '" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'" stroke-linejoin="round"/>';
+           '" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+' stroke-linejoin="round"/>';
   }
   function _segEl(a,b,stroke,sw,dash){
     return '<line x1="'+_n(a[0])+'" y1="'+_n(a[1])+'" x2="'+_n(b[0])+'" y2="'+_n(b[1])+
@@ -718,6 +719,36 @@ p.prose{ margin:0; }
     if(bb[0]<=0 && bb[2]>=0) out.push(_segEl(fit.map([0,bb[1]]),fit.map([0,bb[3]]),C.axis,1));
     if(bb[1]<=0 && bb[3]>=0) out.push(_segEl(fit.map([bb[0],0]),fit.map([bb[2],0]),C.axis,1));
     return out.join('');
+  }
+
+  /* 픽셀 좌표 점열을 지나는 부드러운 곡선(Catmull-Rom → 3차 베지어 변환). closed=true면 닫힌 루프.
+     "펜으로 자유롭게 그린 듯한" 곡선(임베딩된 매듭·구불구불한 호모토피 경로 등)이 필요할 때,
+     저자는 점만 나열하고 나머지 곡률 계산은 여기서 한다 — 다른 프리미티브와 같은 설계 원칙. */
+  function _catmullRom2bezier(pts, closed){
+    var n=pts.length;
+    if(n<2) return '';
+    if(n===2) return 'M '+_n(pts[0][0])+' '+_n(pts[0][1])+' L '+_n(pts[1][0])+' '+_n(pts[1][1]);
+    function P(i){
+      if(closed) return pts[((i%n)+n)%n];
+      if(i<0) return pts[0];
+      if(i>=n) return pts[n-1];
+      return pts[i];
+    }
+    var d=['M '+_n(pts[0][0])+' '+_n(pts[0][1])];
+    var last = closed ? n : n-1;
+    for(var i=0;i<last;i++){
+      var p0=P(i-1), p1=P(i), p2=P(i+1), p3=P(i+2);
+      var c1=[p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6];
+      var c2=[p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6];
+      d.push('C '+_n(c1[0])+' '+_n(c1[1])+', '+_n(c2[0])+' '+_n(c2[1])+', '+_n(p2[0])+' '+_n(p2[1]));
+    }
+    if(closed) d.push('Z');
+    return d.join(' ');
+  }
+  function _ellipsePts(cx,cy,rx,ry,a0,a1,n){
+    n = n||24; var pts=[];
+    for(var i=0;i<=n;i++){ var t=a0+(a1-a0)*i/n; pts.push([cx+rx*Math.cos(t), cy+ry*Math.sin(t)]); }
+    return pts;
   }
 
   /* ---------- 유형별 렌더러 ---------- */
@@ -821,15 +852,31 @@ p.prose{ margin:0; }
       if(pr.from) bb.push([+pr.from[0],+pr.from[1]]);
       if(pr.to) bb.push([+pr.to[0],+pr.to[1]]);
       if(pr.at) bb.push([+pr.at[0],+pr.at[1]]);
-      if(pr.center) bb.push([+pr.center[0],+pr.center[1]]);
+      if(pr.center){
+        var ex=pr.rx!=null?+pr.rx:(pr.r!=null?+pr.r:1), ey=pr.ry!=null?+pr.ry:ex;
+        bb.push([+pr.center[0]-ex,+pr.center[1]-ey]); bb.push([+pr.center[0]+ex,+pr.center[1]+ey]);
+      }
     });
     var fit=makeFit(bb.length?bb:[[-1,-1],[1,1]],W,H,M), P=[];
     P.push(_axes(fit,C));
     prims.forEach(function(pr){
       var col=pr.color||C.primary;
       switch(pr.shape){
-        case 'polygon': P.push(_poly((pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}), pr.fill||C.primaryFill, col, 2)); break;
-        case 'polyline': { var mp=(pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}); for(var i=0;i+1<mp.length;i++) P.push(_segEl(mp[i],mp[i+1],col,2)); break; }
+        case 'polygon': P.push(_poly((pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}), pr.fill||C.primaryFill, col, 2, pr.dash)); break;
+        case 'polyline': { var mp=(pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}); for(var i=0;i+1<mp.length;i++) P.push(_segEl(mp[i],mp[i+1],col,2,pr.dash)); break; }
+        case 'curve': {
+          var cp=(pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);});
+          P.push('<path d="'+_catmullRom2bezier(cp,!!pr.closed)+'" fill="'+(pr.closed?(pr.fill||'none'):'none')+
+                 '" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+' stroke-linecap="round" stroke-linejoin="round"/>');
+          break;
+        }
+        case 'ellipse': {
+          var ec=fit.map(pr.center), erx=(pr.rx||1)*fit.s, ery=(pr.ry||pr.rx||1)*fit.s, erot=pr.rotation||0;
+          P.push('<ellipse cx="'+_n(ec[0])+'" cy="'+_n(ec[1])+'" rx="'+_n(erx)+'" ry="'+_n(ery)+'"'+
+                 (erot?' transform="rotate('+erot+' '+_n(ec[0])+' '+_n(ec[1])+')"':'')+
+                 ' fill="'+(pr.fill||'none')+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>');
+          break;
+        }
         case 'segment': P.push(_segEl(fit.map(pr.from),fit.map(pr.to),col,2,pr.dash)); break;
         case 'arrow': P.push(_arrow(fit.map(pr.from||[0,0]),fit.map(pr.to),pr.color||C.amber,2)); break;
         case 'point': P.push(_dot(fit.map(pr.at),pr.r||3.5,col)); break;
@@ -857,7 +904,7 @@ p.prose{ margin:0; }
           }
           break;
         }
-        case 'circle': { var c=fit.map(pr.center), rr=(pr.r||1)*fit.s; P.push('<circle cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" r="'+_n(rr)+'" fill="none" stroke="'+col+'" stroke-width="2"/>'); break; }
+        case 'circle': { var c=fit.map(pr.center), rr=(pr.r||1)*fit.s; P.push('<circle cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" r="'+_n(rr)+'" fill="'+(pr.fill||'none')+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>'); break; }
         case 'label': P.push(_text(fit.map(pr.at), pr.text||'', pr.color||C.ink, pr.anchor||'middle', pr.size||13)); break;
       }
     });
@@ -866,7 +913,9 @@ p.prose{ margin:0; }
 
   function _outward(p, center, d){ var dx=p[0]-center[0], dy=p[1]-center[1], L=Math.hypot(dx,dy)||1; return [p[0]+dx/L*d, p[1]+dy/L*d]; }
 
-  /* 변 동일시 다이어그램 (torus, Klein bottle, RP^2, sphere ...) */
+  /* 변 동일시 다이어그램 (torus, Klein bottle, RP^2, 구, 뫼비우스 띠 등).
+     edge에 label이 없거나 free:true면 "동일시 안 된 실제 경계"로 취급해 화살표·라벨 없이 회색
+     점선으로만 그린다 — 뫼비우스 띠(한 쌍만 뒤집어 동일시, 나머지 한 쌍은 자유 경계)가 바로 이 경우다. */
   function _vizIdent(viz,W,H,M,C){
     var edges=viz.edges||[], n=edges.length||4, i;
     var rot=(n===4)?Math.PI/4:Math.PI/2;   // 정사각형은 축정렬로
@@ -876,16 +925,18 @@ p.prose{ margin:0; }
     P.push(_poly(pts.map(fit.map),'rgba(46,67,116,0.05)','#D3D7CC',1));
     var palette=['#2E4374','#B77F27','#3E7D5B','#9B3B7A','#4A6FB0','#B0483C'];
     var lc={}, ci=0;
-    edges.forEach(function(e){ var L=e.label||''; if(!(L in lc)){ lc[L]=palette[ci%palette.length]; ci++; } });
+    edges.forEach(function(e){ if(!e || e.free || !e.label) return; if(!(e.label in lc)){ lc[e.label]=palette[ci%palette.length]; ci++; } });
     for(i=0;i<n;i++){
       var A=fit.map(pts[i]), B=fit.map(pts[(i+1)%n]);
-      var e=edges[i]||{}, col=lc[e.label||'']||C.primary, dir=(e.dir==null?1:e.dir);
+      var e=edges[i]||{};
+      if(e.free || !e.label){ P.push(_segEl(A,B,'#B7BCC4',2,'4,3')); continue; }
+      var col=lc[e.label]||C.primary, dir=(e.dir==null?1:e.dir);
       P.push(_segEl(A,B,col,3));
       var mx=(A[0]+B[0])/2, my=(A[1]+B[1])/2;
       var vx=B[0]-A[0], vy=B[1]-A[1], vl=Math.hypot(vx,vy)||1; vx/=vl; vy/=vl;
       if(dir<0){ vx=-vx; vy=-vy; }
       P.push(_arrow([mx-vx*8,my-vy*8],[mx+vx*8,my+vy*8],col,3));
-      P.push(_text(_outward([mx,my],O,16), e.label||'', col,'middle',14));
+      P.push(_text(_outward([mx,my],O,16), e.label, col,'middle',14));
     }
     return P.join('');
   }
@@ -921,6 +972,74 @@ p.prose{ margin:0; }
     return P.join('');
   }
 
+  /* 도넛 모양 토러스 개관도: 바깥/안쪽 테두리 타원 + (선택) 능선(경선)과 관 단면 루프(자오선).
+     자오선은 도넛 몸통 바깥쪽 절반은 실선(보이는 면), 구멍 쪽 절반은 점선(가려진 면)으로 그려
+     "관을 한 바퀴 도는 고리"라는 입체감을 스키마틱하게 전달한다. */
+  function _vizTorus(viz,W,H,M,C){
+    var R=(viz.R==null?2:+viz.R), r=(viz.r==null?0.8:+viz.r);
+    var sq=(viz.squash==null?0.42:+viz.squash);
+    var bb=[[-(R+r),-(R+r)*sq],[R+r,(R+r)*sq]];
+    var fit=makeFit(bb,W,H,M), P=[];
+    function ell(cx,cy,rx,ry,dash,strokeCol){
+      var c=fit.map([cx,cy]);
+      return '<ellipse cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" rx="'+_n(rx*fit.s)+'" ry="'+_n(ry*fit.s)+
+             '" fill="none" stroke="'+(strokeCol||C.primary)+'" stroke-width="2"'+(dash?' stroke-dasharray="5,4"':'')+'/>';
+    }
+    var rInX=Math.max(R-r,0.05), rInY=rInX*sq;
+    // 바깥/안쪽 테두리 사이(도넛 몸통)를 옅게 채워야 "동심원 두 개"가 아니라 "가운데 구멍 뚫린 도넛"으로 읽힌다.
+    var outerRing=_ellipsePts(0,0,R+r,(R+r)*sq,0,2*Math.PI,60).map(fit.map);
+    var innerRing=_ellipsePts(0,0,rInX,rInY,0,2*Math.PI,60).map(fit.map);
+    P.push('<path d="'+_catmullRom2bezier(outerRing,true)+' '+_catmullRom2bezier(innerRing,true)+
+           '" fill="'+C.primaryFill+'" fill-rule="evenodd" stroke="none"/>');
+    P.push(ell(0,0,R+r,(R+r)*sq));
+    P.push(ell(0,0,rInX,rInY));
+    if(viz.show_longitude!==false){
+      P.push(ell(0,0,R,R*sq));
+      if(viz.labels && viz.labels.longitude) P.push(_text(fit.map([0,-R*sq*1.18]), viz.labels.longitude, C.primary,'middle',13));
+    }
+    if(viz.show_meridian!==false){
+      var th=((viz.meridian_angle==null?0:+viz.meridian_angle))*Math.PI/180;
+      var cx=R*Math.cos(th), cy=R*sq*Math.sin(th), mrx=r, mry=r*sq;
+      function half(a0,a1){ return _ellipsePts(cx,cy,mrx,mry,a0,a1,16).map(fit.map); }
+      P.push('<path d="'+_catmullRom2bezier(half(-Math.PI/2,Math.PI/2),false)+'" fill="none" stroke="'+C.amber+'" stroke-width="2"/>');
+      P.push('<path d="'+_catmullRom2bezier(half(Math.PI/2,3*Math.PI/2),false)+'" fill="none" stroke="'+C.amber+'" stroke-width="2" stroke-dasharray="5,4"/>');
+      if(viz.labels && viz.labels.meridian) P.push(_text(fit.map([cx+mrx*1.6,cy]), viz.labels.meridian, C.amber,'start',13));
+    }
+    if(viz.mark){
+      var mp=fit.map(viz.mark);
+      P.push(_dot(mp,4,C.ink));
+      if(viz.mark_label) P.push(_text([mp[0],mp[1]-10], viz.mark_label, C.ink,'middle',12));
+    }
+    return P.join('');
+  }
+
+  /* 원기둥/사상원기둥 개관도: 위쪽 타원(열린 끝, 완전히 보임) + 옆면 두 접선 + 아래쪽 타원
+     (몸통에 가려지는 뒤쪽 절반은 점선). mapping cylinder M_f처럼 "위 원판=X, 아래 원판=Y,
+     옆면=X×I"로 쓰는 그림이 챕터 0 전반에서 계속 나오므로 이 스키마가 그 자리를 직접 대신한다. */
+  function _vizCylinder(viz,W,H,M,C){
+    var h=(viz.height==null?3:+viz.height), rx=(viz.rx==null?1.2:+viz.rx), ry=(viz.ry==null?0.4:+viz.ry);
+    var bb=[[-rx,-ry],[rx,h+ry]];
+    var fit=makeFit(bb,W,H,M), P=[];
+    var topC=fit.map([0,h]), botC=fit.map([0,0]);
+    var rxp=rx*fit.s, ryp=ry*fit.s;
+    P.push(_segEl([topC[0]-rxp,topC[1]],[botC[0]-rxp,botC[1]],C.primary,2));
+    P.push(_segEl([topC[0]+rxp,topC[1]],[botC[0]+rxp,botC[1]],C.primary,2));
+    var backBot=_ellipsePts(botC[0],botC[1],rxp,ryp,Math.PI,2*Math.PI,20);
+    var frontBot=_ellipsePts(botC[0],botC[1],rxp,ryp,0,Math.PI,20);
+    P.push('<path d="'+_catmullRom2bezier(backBot,false)+'" fill="none" stroke="'+C.primary+'" stroke-width="2" stroke-dasharray="5,4"/>');
+    P.push('<path d="'+_catmullRom2bezier(frontBot,false)+'" fill="none" stroke="'+C.primary+'" stroke-width="2"/>');
+    (viz.rungs||[]).forEach(function(t){
+      var cc=fit.map([0,h*(+t)]);
+      P.push('<ellipse cx="'+_n(cc[0])+'" cy="'+_n(cc[1])+'" rx="'+_n(rxp)+'" ry="'+_n(ryp)+'" fill="none" stroke="'+C.faint+'" stroke-width="1.4" stroke-dasharray="3,3"/>');
+    });
+    P.push('<ellipse cx="'+_n(topC[0])+'" cy="'+_n(topC[1])+'" rx="'+_n(rxp)+'" ry="'+_n(ryp)+'" fill="'+C.primaryFill+'" stroke="'+C.primary+'" stroke-width="2"/>');
+    if(viz.top_label) P.push(_text([topC[0],topC[1]-ryp-10], viz.top_label, C.ink,'middle',13));
+    if(viz.bottom_label) P.push(_text([botC[0],botC[1]+ryp+16], viz.bottom_label, C.ink,'middle',13));
+    if(viz.mark_top){ var u=viz.mark_top[0]||0, v=viz.mark_top[1]||0; P.push(_dot(fit.map([u*rx,h+v*ry]),3.5,C.amber)); }
+    if(viz.mark_bottom){ var u2=viz.mark_bottom[0]||0, v2=viz.mark_bottom[1]||0; P.push(_dot(fit.map([u2*rx,v2*ry]),3.5,C.amber)); }
+    return P.join('');
+  }
+
   /* ---------- 진입점 ---------- */
   function buildVizSVG(viz){
     var W=520, H=360, M=30;
@@ -937,6 +1056,8 @@ p.prose{ margin:0; }
         case 'custom_2d': body=_vizCustom(viz,W,H,M,C); break;
         case 'identification_polygon_2d': body=_vizIdent(viz,W,H,M,C); break;
         case 'complex_2d': body=_vizComplex(viz,W,H,M,C); break;
+        case 'torus_2d': body=_vizTorus(viz,W,H,M,C); break;
+        case 'cylinder_2d': body=_vizCylinder(viz,W,H,M,C); break;
         default: body=_text([W/2,H/2],'지원하지 않는 시각화 유형: '+String(viz&&viz.type),C.faint,'middle',13);
       }
     }catch(e){ body=_text([W/2,H/2],'그림을 그릴 수 없습니다',C.faint,'middle',12); }

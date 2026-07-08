@@ -20,7 +20,8 @@ step3_checkpoint 안에 {"type": "checkpoint"|"ox"|"conceptual", ...} 항목으�
 import re
 
 VIZ_WHITELIST = ['zonotope_2d', 'hyperplane_arrangement_2d', 'convex_hull_2d',
-                 'vectors_2d', 'custom_2d', 'identification_polygon_2d', 'complex_2d']
+                 'vectors_2d', 'custom_2d', 'identification_polygon_2d', 'complex_2d',
+                 'torus_2d', 'cylinder_2d']
 RESULT_TYPES = ['Definition', 'Theorem', 'Lemma', 'Proposition', 'Corollary', 'Remark', 'Example']
 CHECKPOINT_TYPES = ('checkpoint', 'ox', 'conceptual')
 

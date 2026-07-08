@@ -93,14 +93,22 @@
   `{ "type":"convex_hull_2d", "points":[[x,y],...], "labels":[...], "caption":"..." }`
 - `vectors_2d` — 원점 화살표(vectors)·점(points)·선분(segments) 그리기.
   `{ "type":"vectors_2d", "vectors":[[x,y]], "points":[[x,y]], "segments":[[[x1,y1],[x2,y2]]], "vector_labels":[...], "point_labels":[...], "caption":"..." }`
-- `custom_2d` — 위 유형으로 안 될 때의 저수준 프리미티브.
-  `{ "type":"custom_2d", "primitives":[ {"shape":"polygon","points":[...]}, {"shape":"segment","from":[..],"to":[..]}, {"shape":"arrow","from":[..],"to":[..]}, {"shape":"arc","from":[..],"to":[..],"bulge":0.5,"arrow":true}, {"shape":"point","at":[..]}, {"shape":"circle","center":[..],"r":1}, {"shape":"label","at":[..],"text":"..."} ], "caption":"..." }`
-- `identification_polygon_2d` — 변 동일시 다이어그램(토러스·클라인병·사영평면·구 등). `edges`는 다각형의 변을 도는 순서대로. 같은 `label`은 동일시, `dir`(±1)은 방향.
-  `{ "type":"identification_polygon_2d", "edges":[{"label":"a","dir":1},{"label":"b","dir":1},{"label":"a","dir":-1},{"label":"b","dir":-1}], "caption":"토러스 $T^2 = aba^{-1}b^{-1}$" }` (예시는 토러스; 클라인병은 마지막 `dir`을 `1`로)
+- `custom_2d` — 위 유형으로 안 될 때의 저수준 프리미티브. `dash`(예: `"4,3"`)는 polygon/circle/ellipse/segment/arc/curve 어디에나 붙일 수 있다(가려진 뒷면·경계 등을 점선으로).
+  `{ "type":"custom_2d", "primitives":[ {"shape":"polygon","points":[...]}, {"shape":"segment","from":[..],"to":[..]}, {"shape":"arrow","from":[..],"to":[..]}, {"shape":"arc","from":[..],"to":[..],"bulge":0.5,"arrow":true}, {"shape":"point","at":[..]}, {"shape":"circle","center":[..],"r":1}, {"shape":"ellipse","center":[..],"rx":1,"ry":0.4,"rotation":0}, {"shape":"curve","points":[[..],...],"closed":false}, {"shape":"label","at":[..],"text":"..."} ], "caption":"..." }`
+  - `ellipse`: 원근이 들어간 "입체처럼 보이는" 2D 스키마(관 단면, 기울어진 원판 등)에 쓴다. `rotation`은 도(degree) 단위.
+  - `curve`: 점 목록을 매끄러운 곡선(Catmull-Rom)으로 잇는다 — 자유롭게 구불거리는 호모토피 경로, 임베딩된 매듭·고리처럼 `polyline`(직선 연결이라 각져 보임)이나 `arc`(두 점 사이 한 번만 휘는 곡선)로는 어색한 곡선에 쓴다. `closed:true`면 시작·끝을 이어 닫힌 곡선(`fill` 지정 가능).
+- `identification_polygon_2d` — 변 동일시 다이어그램(토러스·클라인병·사영평면·구·뫼비우스 띠 등). `edges`는 다각형의 변을 도는 순서대로. 같은 `label`은 동일시, `dir`(±1)은 방향. **`label`이 없거나 `free:true`인 변은 동일시되지 않은 실제 경계**로, 화살표 없이 회색 점선으로만 그려진다(뫼비우스 띠처럼 경계가 남는 곡면에 필수).
+  `{ "type":"identification_polygon_2d", "edges":[{"label":"a","dir":1},{"label":"b","dir":1},{"label":"a","dir":-1},{"label":"b","dir":-1}], "caption":"토러스 $T^2 = aba^{-1}b^{-1}$" }` (토러스; 클라인병은 마지막 `dir`을 `1`로)
+  `{ "type":"identification_polygon_2d", "edges":[{"label":"a","dir":1},{"free":true},{"label":"a","dir":1},{"free":true}], "caption":"뫼비우스 띠: 한 쌍만 뒤집어 동일시, 나머지 한 쌍은 자유 경계" }` (뫼비우스 띠 — 마주보는 두 변을 **같은** `dir`로 동일시하면 뒤틀린 접착이 된다; 토러스처럼 반대 `dir`을 쓰면 뒤틀리지 않은 원기둥이 되니 주의)
 - `complex_2d` — CW/단체 복합체. `vertices`(0-셀 좌표), `edges`(1-셀; `from`/`to`는 정점 인덱스, `arc`로 곡선, `from==to`면 자기 루프), `faces`(2-셀; 정점 인덱스 목록).
   `{ "type":"complex_2d", "vertices":[[0,0],[2,0],[1,1.6]], "vertex_labels":["v_0","v_1","v_2"], "edges":[{"from":0,"to":1,"label":"e_1"},{"from":1,"to":2},{"from":2,"to":0},{"from":0,"to":0,"label":"loop"}], "faces":[{"vertices":[0,1,2]}], "caption":"..." }`
+  - 그래프(1-차원 CW 복합체) 자체를 보여줘야 하는 경우 — 자유군의 그래프, 그래프의 군(1.B), Δ-복합체의 뼈대 등 — `faces` 없이 `vertices`+`edges`만 써도 된다.
+- `torus_2d` — 도넛 모양 토러스 개관도(바깥/안쪽 테두리, 안쪽은 옅게 뚫린 구멍으로 채색됨). 자오선(관을 감는 고리, 절반은 가려져 점선)·경선(구멍을 도는 능선, 전체가 보여 실선) 표시 가능 — 기본군의 두 생성원 $a,b$를 짚어 줄 때 특히 유용하다.
+  `{ "type":"torus_2d", "R":2, "r":0.8, "squash":0.42, "show_meridian":true, "show_longitude":true, "meridian_angle":0, "labels":{"meridian":"b","longitude":"a"}, "mark":[x,y], "mark_label":"x_0", "caption":"..." }` (`R`=중심에서 관 중심까지, `r`=관 반지름, `meridian_angle`은 자오선 위치를 도 단위로; `mark`는 world 좌표의 기준점)
+- `cylinder_2d` — 원기둥/사상원기둥(mapping cylinder) 개관도. 위쪽 원판은 완전히 보이는 열린 끝, 아래쪽 원판은 몸통에 가려지는 뒤쪽 절반이 점선으로 처리된다. `rungs`로 중간 단면 $X\times\{t\}$ 표시. 0장 전반의 사상원기둥·변형수축·HEP 논의에 직접 대응한다.
+  `{ "type":"cylinder_2d", "height":3, "rx":1.2, "ry":0.4, "top_label":"X", "bottom_label":"Y", "rungs":[0.3,0.6], "mark_top":[u,v], "mark_bottom":[u,v], "caption":"..." }` (`mark_top`/`mark_bottom`은 그 원판 내부의 상대좌표 `[-1,1]×[-1,1]`)
 
-> **유형 확장에 대하여**: 위 목록은 화이트리스트다. 목록에 없는 도형이 필요하면 (1) 우선 `complex_2d`나 `custom_2d`의 저수준 프리미티브로 표현을 시도하고, (2) 그래도 안 되면 그 개념은 `visualization` 없이 텍스트만으로 서술하라(억지 그림 금지). 새 전용 유형은 렌더러(`viz_core.js`)에 함수를 추가해야 지원된다.
+> **유형 확장에 대하여**: 위 목록은 화이트리스트다. 목록에 없는 도형이 필요하면 (1) 먼저 이 목록 전체(특히 `torus_2d`/`cylinder_2d`/`identification_polygon_2d`의 `free` 경계 — 위상수학 도형 대부분이 여기 걸린다)를 검토하고, (2) 그래도 안 맞으면 `complex_2d`나 `custom_2d`의 저수준 프리미티브(`ellipse`/`curve` 포함)로 표현을 시도하고, (3) 그래도 안 되면 그 개념은 `visualization` 없이 텍스트만으로 서술하라(억지 그림 금지). 새 전용 유형은 렌더러(`viz_core.js`)에 함수를 추가해야 지원된다.
 
 ## 자동 분할 파이프라인 입력 규약
 입력은 전공서를 **소단원 단위로 잘라 주는 자동 분할기**에서 온다. 각 입력은 보통 아래 형식의 맥락 헤더로 시작한다.
