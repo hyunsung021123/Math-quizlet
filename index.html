@@ -1175,6 +1175,17 @@ p.prose{ margin:0; }
      window.scrollBy 로 스크롤을 흉내낸다 — 브라우저 touch-action 은 포인터 타입별로 나눠 줄 수
      없어서, 펜은 막고 손가락만 통과시키는 걸 CSS만으로는 안정적으로 구현할 수 없기 때문이다.
 
+     폰에서 손가락 두 개 이상(삼성 노트와 동일): 두 번째 손가락이 닿는 순간 진행 중이던 한손가락
+     획/지우개를 취소하고, 그 뒤로는 마지막 손가락이 떨어질 때까지 전부 스크롤·카드 스와이프로
+     처리한다(수직 이동은 곧장 스크롤, 손을 뗄 때 수평 이동이 더 크면 goNext/goPrev). 한 손가락은
+     펜모드(책보기 모드가 아닐 때)에서 무조건 필기만 한다 — 스크롤/스와이프로 새지 않는다.
+
+     태블릿에서 펜으로 필기하다가 그 움직임이 카드 전체 스와이프(다른 기존 기능)로도 겹쳐 잡혀
+     옆 카드로 넘어가 버리는 문제가 있었다 — 그 스와이프 리스너는 Pointer Events가 아니라 별도의
+     레거시 Touch Events를 쓰는데, 그 API는 손가락/펜을 구분하지 않고 좌표만 준다. `Touch.touchType`
+     ('stylus'|'direct')을 지원하는 브라우저에서는 잉크 캔버스 위의 스타일러스 접촉에 한해 그
+     스와이프를 꺼서 고쳤다(아래 쪽 "swipe left/right" 리스너 참고). 손가락 스와이프는 그대로 둔다.
+
      지우개는 오브젝트(획) 단위다 — 픽셀을 지우지 않고, 지우개가 스친 획 전체를 배열에서 제거한다.
 
      지금은 로컬 저장만 한다(기기 간 동기화는 별도 논의 필요 — 그림 데이터는 체크박스보다 훨씬
@@ -1188,6 +1199,10 @@ p.prose{ margin:0; }
     var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null;
     var scrollPointerId = null, lastScrollY = 0, scrollStartX = 0, scrollStartY = 0, scrollMoved = false;
     var penEverSeen = false;
+    // 폰에서 손가락 두 개 이상 = 필기 대신 스크롤/카드 넘기기(삼성 노트와 동일). 손가락 pointerId를
+    // 누른 순서대로 담아 둔다 — 두 번째가 닿는 순간 진행 중이던 한손가락 획을 취소하고 전환한다.
+    var activeTouchIds = [], multiTouch = false, mtLeaderId = null;
+    var mtStartX = 0, mtStartY = 0, mtLastY = 0, mtCurX = 0;
     var dpr = window.devicePixelRatio || 1;
 
     try{ penEverSeen = localStorage.getItem(PEN_SEEN_KEY) === '1'; }catch(e){}
@@ -1308,6 +1323,22 @@ p.prose{ margin:0; }
     function onPointerDown(ev){
       if(ev.pointerType === 'mouse' && ev.button !== 0) return;
       if(ev.pointerType === 'pen') markPenSeen();
+
+      if(ev.pointerType === 'touch'){
+        activeTouchIds.push(ev.pointerId);
+        if(activeTouchIds.length >= 2){
+          // 두 번째 손가락 도착 — 진행 중이던 한손가락 획/지우개를 취소하고 스크롤·스와이프 제스처로 전환.
+          drawing = false; curStroke = null;
+          redraw();
+          multiTouch = true;
+          mtLeaderId = ev.pointerId;
+          mtStartX = mtCurX = ev.clientX; mtStartY = mtLastY = ev.clientY;
+          try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
+          return;
+        }
+      }
+      if(multiTouch) return; // 이미 멀티터치 제스처 중 — 추가 손가락은 무시(개수만 추적)
+
       if(!shouldDraw(ev.pointerType)){
         scrollPointerId = ev.pointerId;
         lastScrollY = ev.clientY;
@@ -1331,6 +1362,14 @@ p.prose{ margin:0; }
       ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     }
     function onPointerMove(ev){
+      if(multiTouch){
+        if(ev.pointerId !== mtLeaderId) return; // 리더 손가락의 움직임만 스크롤에 반영(중복 방지)
+        var mdy = ev.clientY - mtLastY;
+        window.scrollBy(0, -mdy);
+        mtLastY = ev.clientY;
+        mtCurX = ev.clientX;
+        return;
+      }
       if(scrollPointerId === ev.pointerId){
         var dy = ev.clientY - lastScrollY;
         if(Math.abs(ev.clientX - scrollStartX) > 6 || Math.abs(ev.clientY - scrollStartY) > 6) scrollMoved = true;
@@ -1357,6 +1396,21 @@ p.prose{ margin:0; }
       });
     }
     function onPointerUp(ev){
+      if(ev.pointerType === 'touch'){
+        var idx = activeTouchIds.indexOf(ev.pointerId);
+        if(idx !== -1) activeTouchIds.splice(idx, 1);
+        if(multiTouch){
+          if(ev.pointerId === mtLeaderId){ try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){} }
+          if(activeTouchIds.length === 0){
+            multiTouch = false; mtLeaderId = null;
+            var mdx = mtCurX - mtStartX, mdyTotal = mtLastY - mtStartY;
+            if(Math.abs(mdx) > 60 && Math.abs(mdx) > Math.abs(mdyTotal) * 1.3){
+              if(mdx < 0) goNext(); else goPrev();
+            }
+          }
+          return;
+        }
+      }
       if(scrollPointerId === ev.pointerId){
         try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
         scrollPointerId = null;
@@ -2033,6 +2087,9 @@ p.prose{ margin:0; }
   mainEl.addEventListener('touchstart', function(ev){
     if(deckNav.hidden || ev.touches.length !== 1){ swipeOn = false; return; }
     if(ev.target.closest('button, a, select, .katex-display, .figure-svg')){ swipeOn = false; return; }
+    // 태블릿에서 펜으로 필기하다가 그 움직임이 이 카드 스와이프로도 잡혀 옆으로 넘어가 버리는 문제 —
+    // 스타일러스 접촉은 touchType으로 구분되는 브라우저에서는 잉크 캔버스 위일 때 스와이프를 끈다.
+    if(ev.touches[0].touchType === 'stylus' && ev.target.closest('.ink-canvas')){ swipeOn = false; return; }
     swX = ev.touches[0].clientX; swY = ev.touches[0].clientY; swipeOn = true;
   }, { passive:true });
   mainEl.addEventListener('touchend', function(ev){
