@@ -1327,6 +1327,53 @@ p.prose{ margin:0; }
       if(changed){ setCurrentStrokes(kept); redraw(); }
     }
 
+    function effectiveErasing(e){
+      // 펜의 옆면(배럴) 버튼은 "누르고 있는 동안"만 임시 지우개로 전환되고 떼는 즉시 되돌아와야
+      // 하므로, 스트로크 시작 시점에 한 번만 고정하지 않고 매 이벤트(down/move)마다 매번 다시
+      // 판정한다. e.buttons 는 button(단수, down/up 이벤트에서 "이번에 눌리거나 떼진 버튼"만
+      // 가리킴)과 달리 "현재 눌려 있는 모든 버튼"의 실시간 비트마스크라서 move 중에도 유효하다.
+      // 비트 2 = 보조 버튼(펜 배럴 버튼이 여기 매핑됨). 마우스/손가락은 도구모음 토글을 그대로 따른다.
+      if(e.pointerType === 'pen') return !!(e.buttons & 2);
+      return erasing;
+    }
+    function beginStroke(clientX, clientY, pressureRaw){
+      var rect = canvas.getBoundingClientRect(), w = rect.width;
+      var pressure = pressureRaw > 0 ? pressureRaw : 0.5;
+      curStroke = {
+        color: color,
+        widthNorm: (penWidth * (0.5 + 0.5 * pressure)) / w,
+        pts: [[(clientX - rect.left) / w, (clientY - rect.top) / rect.height]]
+      };
+      ctx.strokeStyle = curStroke.color;
+      ctx.lineWidth = Math.max(1, curStroke.widthNorm * w);
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    }
+    function appendStrokePoint(clientX, clientY){
+      if(!curStroke) return;
+      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
+      var x = (clientX - rect.left) / w, y = (clientY - rect.top) / h;
+      var last = curStroke.pts[curStroke.pts.length - 1];
+      curStroke.pts.push([x, y]);
+      ctx.beginPath();
+      ctx.moveTo(last[0] * w, last[1] * h);
+      ctx.lineTo(x * w, y * h);
+      ctx.stroke();
+    }
+    function commitCurStroke(){
+      // 배럴 버튼을 눌러 지우개로 전환되는 순간에도 호출된다 — 그때까지 그린 부분을 유실하지
+      // 않고 정식 획으로 저장을 마무리한 뒤에 지우개로 넘어가기 위함.
+      if(!curStroke) return;
+      if(curStroke.pts.length === 1){
+        var rect = canvas.getBoundingClientRect(), p = curStroke.pts[0];
+        ctx.fillStyle = curStroke.color;
+        ctx.beginPath();
+        ctx.arc(p[0] * rect.width, p[1] * rect.height, Math.max(0.5, (curStroke.widthNorm * rect.width) / 2), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      pushStroke(curStroke);
+      curStroke = null;
+    }
+
     function onPointerDown(ev){
       if(ev.pointerType === 'mouse' && ev.button !== 0) return;
       if(ev.pointerType === 'pen') markPenSeen();
@@ -1356,19 +1403,9 @@ p.prose{ margin:0; }
       ev.preventDefault();
       try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
       drawing = true;
-      // 펜 배럴 버튼은 그 스트로크 시작 시점에 한 번만 판정해 끝까지 유지한다(도구모음 토글과 별개).
-      curStrokeErasing = ev.pointerType === 'pen' ? !!(ev.buttons & 2) : erasing;
-      if(curStrokeErasing){ eraseAt(ev.clientX, ev.clientY); return; }
-      var rect = canvas.getBoundingClientRect(), w = rect.width;
-      var pressure = ev.pressure > 0 ? ev.pressure : 0.5;
-      curStroke = {
-        color: color,
-        widthNorm: (penWidth * (0.5 + 0.5 * pressure)) / w,
-        pts: [[(ev.clientX - rect.left) / w, (ev.clientY - rect.top) / rect.height]]
-      };
-      ctx.strokeStyle = curStroke.color;
-      ctx.lineWidth = Math.max(1, curStroke.widthNorm * w);
-      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      curStrokeErasing = effectiveErasing(ev);
+      if(curStrokeErasing) eraseAt(ev.clientX, ev.clientY);
+      else beginStroke(ev.clientX, ev.clientY, ev.pressure);
     }
     function onPointerMove(ev){
       if(multiTouch){
@@ -1388,20 +1425,16 @@ p.prose{ margin:0; }
       }
       if(!drawing) return;
       var events = (ev.getCoalescedEvents && ev.getCoalescedEvents()) || [ev];
-      if(curStrokeErasing){
-        events.forEach(function(e){ eraseAt(e.clientX, e.clientY); });
-        return;
-      }
-      if(!curStroke) return;
-      var rect = canvas.getBoundingClientRect(), w = rect.width, h = rect.height;
       events.forEach(function(e){
-        var x = (e.clientX - rect.left) / w, y = (e.clientY - rect.top) / h;
-        var last = curStroke.pts[curStroke.pts.length - 1];
-        curStroke.pts.push([x, y]);
-        ctx.beginPath();
-        ctx.moveTo(last[0] * w, last[1] * h);
-        ctx.lineTo(x * w, y * h);
-        ctx.stroke();
+        var wantErase = effectiveErasing(e);
+        if(wantErase !== curStrokeErasing){
+          // 배럴 버튼을 누르거나 뗀 순간 — 지금까지의 획을 그 자리에서 마무리하고 모드를 전환한다.
+          if(!curStrokeErasing) commitCurStroke();
+          curStrokeErasing = wantErase;
+          if(!curStrokeErasing) beginStroke(e.clientX, e.clientY, e.pressure);
+        }
+        if(curStrokeErasing) eraseAt(e.clientX, e.clientY);
+        else appendStrokePoint(e.clientX, e.clientY);
       });
     }
     function onPointerUp(ev){
@@ -1436,16 +1469,8 @@ p.prose{ margin:0; }
       if(!drawing) return;
       drawing = false;
       try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
-      if(curStrokeErasing || !curStroke){ curStroke = null; return; }
-      if(curStroke.pts.length === 1){
-        var rect = canvas.getBoundingClientRect(), p = curStroke.pts[0];
-        ctx.fillStyle = curStroke.color;
-        ctx.beginPath();
-        ctx.arc(p[0] * rect.width, p[1] * rect.height, Math.max(0.5, (curStroke.widthNorm * rect.width) / 2), 0, Math.PI * 2);
-        ctx.fill();
-      }
-      pushStroke(curStroke);
-      curStroke = null;
+      if(curStrokeErasing){ curStroke = null; return; }
+      commitCurStroke();
     }
 
     function undoStroke(){
@@ -1500,6 +1525,9 @@ p.prose{ margin:0; }
       canvas.addEventListener('pointermove', onPointerMove);
       canvas.addEventListener('pointerup', onPointerUp);
       canvas.addEventListener('pointercancel', onPointerUp);
+      // 일부 브라우저/기기는 펜 배럴 버튼을 누른 채 화면에서 떼면 네이티브 우클릭 메뉴를 띄운다 —
+      // 지우개로 쓰던 도중 메뉴가 튀어나오는 것을 막는다.
+      canvas.addEventListener('contextmenu', function(e){ e.preventDefault(); });
     }
 
     function observeCard(card){
