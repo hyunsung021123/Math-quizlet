@@ -8,15 +8,18 @@
     "chapter_1_polytopes_polyhedra_and_cones": {
       "section:0": true,
       "section:1": true
+    },
+    "chapter_0_some_underlying_geometric_noti": {
+      "section:0": true
     }
   },
   "lastPos": {
     "topicId": "chapter_0_some_underlying_geometric_noti",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 1
     },
-    "cardIndex": 14
+    "cardIndex": 0
   },
-  "updatedAt": "2026-07-08T09:30:03.997Z"
+  "updatedAt": "2026-07-08T13:19:48.047Z"
 }
