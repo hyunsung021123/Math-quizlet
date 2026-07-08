@@ -1,0 +1,343 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Hatcher, Algebraic Topology",
+    "overall_goal": "공간에 대수적 그림자(군·환 등)를 씌우는 함자(functor)라는 대수적 위상수학의 큰 그림을 이해하고, 그중 가장 단순하면서 근본적인 함자인 기본군(fundamental group)을 정의한다. 나아가 원의 기본군이 무한순환군임을 보이고, 이를 통해 '기본군이 다르면 두 공간은 위상동형이 아니다'라는 강력한 판별법을 손에 넣는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.1 Exercises — §1.1 종합 연습문제",
+      "step1_big_picture": {
+        "context": "이 절은 §1.1 전체(경로·호모토피, 원의 기본군, 유도 준동형)의 연습문제 모음이다. 앞선 절들에서 세운 도구 — 곱의 호모토피 불변성, 밑점 변경 동형 $\\beta_h$(1.1.1), $\\pi_1(S^1)\\cong\\mathbb{Z}$와 응용들(1.1.2), 유도 준동형과 함자성·명제 1.17·보조정리 1.19(1.1.3) — 을 실제로 손에 쥐고 돌려 보는 자리다. 문제들은 몇 주제로 묶인다: (i) $\\beta_h$의 성질과 가환성(연습문제 2,3,15,20), (ii) 곱·경로성분 같은 구조적 사실(10,11), (iii) 유도 준동형의 계산과 되추림의 부재(12,13,16,17), (iv) Borsuk–Ulam의 확장과 반례(8,9), (v) 명제 1.14의 밀어내기 기법을 CW 복합체로 확장(18,19). 절 끝의 $\\mathbb{Z}*\\mathbb{Z}$ 논의는 §1.2 van Kampen 정리의 예고편이라 여기서는 다루지 않는다.",
+        "hidden_intuition": "이 문제들을 관통하는 한 문장은 '위상적 관계를 $\\pi_1$의 대수적 관계로 번역하면 무엇이 강제되는가'이다. 되추림 문제(16)는 $r_*i_*=\\mathrm{id}$라는 대수 조건이 얼마나 까다로운지 보여 준다 — 특히 뫼비우스 띠(16(f))는 $i_*$가 단사($\\times2$)임에도 되추림이 없다는 미묘함으로 '단사만으로는 부족하다'는 교훈을 준다. $\\beta_h$ 관련 문제(2,3,20)는 '밑점을 옮기는 켤레(conjugation)'가 가환성·중심(center)과 정확히 맞물림을 드러낸다. Borsuk–Ulam 문제(8,9)는 같은 정리가 토러스에서는 왜 깨지고(널호모토픽한 적도 고리가 없다) $\\mathbb{R}^3$의 부피 이등분(햄 샌드위치)에서는 왜 통하는지를 대비시킨다. 밀어내기 기법(18,19)은 '$\\pi_1$의 생성원은 1-셀에서, 관계는 2-셀에서'라는 CW 복합체의 큰 그림을 예고하며, 이는 곧 van Kampen 정리로 이어진다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                -1,
+                0
+              ],
+              "r": 1
+            },
+            {
+              "shape": "circle",
+              "center": [
+                1,
+                0
+              ],
+              "r": 1
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1,
+                0
+              ],
+              "text": "a"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1,
+                0
+              ],
+              "text": "b"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.05,
+                -0.42
+              ],
+              "text": "x_0"
+            }
+          ],
+          "caption": "한 점에서 만나는 두 원의 쐐기합 $S^1\\vee S^1$(연습문제 16(d),17에 등장). 그 기본군 $\\mathbb{Z}*\\mathbb{Z}$(자유곱, free product)는 §1.2 van Kampen 정리의 첫 예다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "연습문제 11 (경로성분 포함은 $\\pi_1$ 동형을 유도)",
+          "formal_statement": "$X_0$을 밑점 $x_0$을 포함하는 $X$의 경로성분(path-component)이라 하면, 포함사상 $X_0\\hookrightarrow X$은 동형 $\\pi_1(X_0,x_0)\\to\\pi_1(X,x_0)$을 유도한다.",
+          "idea_behind_proof": "고리와 그 호모토피는 밑점을 포함하는 연결 조각을 결코 벗어날 수 없다는 단순한 사실이다. $I$와 $I\\times I$가 연결이고 연속상은 연결이므로, $x_0$에서 출발한 고리·호모토피의 상은 통째로 $X_0$ 안에 있다.",
+          "proof_steps": [
+            "전사: $X$의 $x_0$ 고리 $f$에 대해 $f(I)$는 연결이고 $x_0$을 포함하므로 $f(I)\\subset X_0$. 즉 $f$는 이미 $X_0$의 고리라 그 류가 $i_*$의 상에 있다.",
+            "단사: $X_0$의 두 고리 $f_0,f_1$이 $X$ 안에서 호모토픽하면, 호모토피 $F:I\\times I\\to X$의 상은 연결이고 $x_0$을 포함하므로 $F(I\\times I)\\subset X_0$. 따라서 호모토피가 이미 $X_0$ 안에서 일어나 $f_0\\simeq f_1$이 $X_0$에서도 성립. 그러므로 $i_*$는 전단사, 곧 동형. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "연습문제 2 ($\\beta_h$는 $h$의 호모토피류에만 의존)",
+          "formal_statement": "$h,h'$이 $x_0$에서 $x_1$로 가는 (끝점 고정) 호모토픽한 경로이면 $\\beta_h=\\beta_{h'}:\\pi_1(X,x_1)\\to\\pi_1(X,x_0)$이다.",
+          "idea_behind_proof": "$\\beta_h[\\gamma]=[h\\cdot\\gamma\\cdot\\bar h]$의 정의에 $h\\simeq h'$을 곱의 호모토피 불변성으로 대입하면 끝이다. $h\\simeq h'$이면 역경로도 $\\bar h\\simeq\\bar h'$임을 함께 쓴다.",
+          "proof_steps": [
+            "$h\\simeq h'$(끝점 고정)이면 시간축은 그대로 두고 $s$만 뒤집어 $\\bar h\\simeq\\bar h'$을 얻는다.",
+            "곱이 호모토피류에 잘 정의되므로 임의의 $x_1$ 고리 $\\gamma$에 대해 $h\\cdot\\gamma\\cdot\\bar h\\simeq h'\\cdot\\gamma\\cdot\\bar h'$. 따라서 $\\beta_h[\\gamma]=[h\\cdot\\gamma\\cdot\\bar h]=[h'\\cdot\\gamma\\cdot\\bar h']=\\beta_{h'}[\\gamma]$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "연습문제 3 ($\\pi_1$의 가환성과 $\\beta_h$)",
+          "formal_statement": "경로연결 공간 $X$에 대해, $\\pi_1(X)$이 아벨군일 필요충분조건은 모든 밑점 변경 $\\beta_h$가 경로 $h$의 끝점에만 의존하는(같은 끝점을 갖는 두 경로 $h,h'$에 대해 항상 $\\beta_h=\\beta_{h'}$인) 것이다.",
+          "idea_behind_proof": "같은 끝점을 갖는 $h,h'$에 대해 $\\beta_h$와 $\\beta_{h'}$의 차이는 $x_0$ 고리 $h'\\cdot\\bar h$로 켤레를 취하는 것이다. 그러니 '끝점만으로 결정' $\\iff$ '모든 켤레가 자명' $\\iff$ '가환'으로 정확히 맞물린다. 특히 $x_0=x_1$인 고리의 경우만 따져도 충분하다.",
+          "proof_steps": [
+            "밑점 $x_0=x_1$인 고리 $h$에 대해서는 $\\beta_h[\\gamma]=[h\\cdot\\gamma\\cdot\\bar h]=[h][\\gamma][h]^{-1}$, 즉 $[h]$로의 켤레다. 상수경로 $c$에 대해서는 $\\beta_c=\\mathrm{id}$.",
+            "($\\pi_1$ 아벨 $\\Rightarrow$ 끝점 의존): 아벨이면 모든 켤레가 자명하다. 같은 끝점의 $h,h'$에 대해 $\\beta_{h'}$는 $\\beta_h$에 $[h'\\cdot\\bar h]$로의 켤레를 합성한 것인데 그 켤레가 자명하므로 $\\beta_h=\\beta_{h'}$.",
+            "(끝점 의존 $\\Rightarrow$ 아벨): $x_0$ 고리 $h$와 상수경로 $c$는 같은 끝점 $x_0,x_0$을 가지므로 가정에 의해 $\\beta_h=\\beta_c=\\mathrm{id}$. 즉 $[h][\\gamma][h]^{-1}=[\\gamma]$가 모든 $\\gamma$에서 성립하여 $[h]$가 중심에 있다. $h$가 임의였으므로 $\\pi_1(X,x_0)$은 아벨. (경로연결이라 밑점은 무관.) $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "연습문제 15 (밑점 변경의 자연성 $f_*\\beta_h=\\beta_{fh}f_*$)",
+          "formal_statement": "사상 $f:X\\to Y$와 $x_0$에서 $x_1$로 가는 경로 $h:I\\to X$에 대해 $f_*\\beta_h=\\beta_{fh}\\,f_*$가 성립한다. 좌변은 $\\pi_1(X,x_1)\\xrightarrow{\\beta_h}\\pi_1(X,x_0)\\xrightarrow{f_*}\\pi_1(Y,f x_0)$, 우변은 $\\pi_1(X,x_1)\\xrightarrow{f_*}\\pi_1(Y,f x_1)\\xrightarrow{\\beta_{fh}}\\pi_1(Y,f x_0)$이다.",
+          "idea_behind_proof": "$f$가 곱과 역경로를 합성으로 보존한다는 사실 하나로 끝난다: $f(h\\cdot\\gamma\\cdot\\bar h)=(fh)\\cdot(f\\gamma)\\cdot\\overline{(fh)}$.",
+          "proof_steps": [
+            "$x_1$ 고리 $\\gamma$에 대해 $f_*\\beta_h[\\gamma]=f_*[h\\cdot\\gamma\\cdot\\bar h]=[f(h\\cdot\\gamma\\cdot\\bar h)]$.",
+            "$f$는 합성이라 분수구간 정의를 보존하므로 $f(h\\cdot\\gamma\\cdot\\bar h)=(fh)\\cdot(f\\gamma)\\cdot\\overline{(fh)}$이고 $\\overline{fh}=f\\bar h$. 따라서 $[f(h\\cdot\\gamma\\cdot\\bar h)]=\\beta_{fh}[f\\gamma]=\\beta_{fh}f_*[\\gamma]$. 곧 $f_*\\beta_h=\\beta_{fh}f_*$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "연습문제 10 (곱공간의 두 축 고리는 교환한다)",
+          "formal_statement": "곱공간 $X\\times Y$에서 $X\\times\\{y_0\\}$ 안의 고리 $a$와 $\\{x_0\\}\\times Y$ 안의 고리 $b$는 $\\pi_1(X\\times Y,(x_0,y_0))$에서 교환한다: $[a][b]=[b][a]$. 명시적 호모토피가 이를 보인다.",
+          "idea_behind_proof": "성분 관점(명제 1.12)에서 $a=(\\alpha,\\text{상수}),\\ b=(\\text{상수},\\beta)$로 쓰면, $a\\cdot b$와 $b\\cdot a$는 둘 다 사각형을 채우는 사상 $\\Gamma(u,v)=(\\alpha(u),\\beta(v))$의 두 경계경로다. 정의역 사각형이 볼록이라 두 경계경로가 호모토픽하고, $\\Gamma$를 합성하면 곧 $a\\cdot b\\simeq b\\cdot a$가 된다.",
+          "proof_steps": [
+            "$a(s)=(\\alpha(s),y_0),\\ b(s)=(x_0,\\beta(s))$로 두자($\\alpha$는 $x_0$ 고리, $\\beta$는 $y_0$ 고리).",
+            "사상 $\\Gamma:I\\times I\\to X\\times Y,\\ \\Gamma(u,v)=(\\alpha(u),\\beta(v))$를 생각하자. 사각형의 아래변→오른변 경로 $(0,0)\\to(1,0)\\to(1,1)$을 $\\Gamma$로 보내면 $a\\cdot b$가, 왼변→위변 경로 $(0,0)\\to(0,1)\\to(1,1)$을 보내면 $b\\cdot a$가 된다.",
+            "정의역 사각형 $I\\times I$은 볼록이라 두 경계경로가 끝점 $(0,0),(1,1)$을 고정한 채 호모토픽하다(예제 1.1). 이 호모토피에 $\\Gamma$를 합성하면 $X\\times Y$ 안에서 $a\\cdot b\\simeq b\\cdot a$. 따라서 $[a][b]=[b][a]$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  0
+                ],
+                "to": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  1
+                ],
+                "to": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.5,
+                  -0.14
+                ],
+                "text": "alpha"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.16,
+                  0.5
+                ],
+                "text": "beta"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.16,
+                  0.5
+                ],
+                "text": "beta"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.5,
+                  1.14
+                ],
+                "text": "alpha"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.2,
+                  -0.16
+                ],
+                "text": "(x_0,y_0)"
+              }
+            ],
+            "caption": "$\\Gamma(u,v)=(\\alpha(u),\\beta(v))$가 채우는 사각형. 아래→오른(먼저 $a$ 뒤 $b$)과 왼→위(먼저 $b$ 뒤 $a$) 두 경계경로는 볼록 사각형 안에서 대각선을 따라 호모토픽하므로 $a\\cdot b\\simeq b\\cdot a$."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "연습문제 20 (중심 원소를 주는 고리)",
+          "formal_statement": "$f_t:X\\to X$가 호모토피이고 $f_0=f_1=\\mathrm{id}$이면, 임의의 $x_0\\in X$에 대해 고리 $t\\mapsto f_t(x_0)$은 $\\pi_1(X,x_0)$의 중심(center)의 원소를 나타낸다. (즉 사상들의 고리 $X\\to X$로 확장되는 고리는 중심에 있다.)",
+          "idea_behind_proof": "$f_0=f_1=\\mathrm{id}$이면 유도사상이 양끝에서 $\\mathrm{id}_*=\\mathrm{id}$이다. 보조정리 1.19를 이 호모토피에 적용하면 $\\mathrm{id}=\\beta_h$가 되어, 밑점 자취 $h$로의 켤레가 항등 — 곧 $[h]$가 모든 원소와 교환 — 이라는 뜻이 된다.",
+          "proof_steps": [
+            "$h(t)=f_t(x_0)$은 $f_0(x_0)=x_0$에서 $f_1(x_0)=x_0$로 가는 $x_0$ 고리다.",
+            "보조정리 1.19를 $f_t$에 적용하면 $f_{0*}=\\beta_h f_{1*}$. 그런데 $f_0=f_1=\\mathrm{id}$이라 $f_{0*}=f_{1*}=\\mathrm{id}$이므로 $\\mathrm{id}=\\beta_h\\circ\\mathrm{id}=\\beta_h$.",
+            "즉 모든 $[\\gamma]\\in\\pi_1(X,x_0)$에 대해 $[h][\\gamma][h]^{-1}=\\beta_h[\\gamma]=[\\gamma]$. 이는 $[h]$가 모든 원소와 교환함, 곧 $[h]$가 중심 원소임을 뜻한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "연습문제 18 (셀 부착과 $\\pi_1$의 전사)",
+          "formal_statement": "경로연결 부분공간 $A$에 $n\\ge2$인 셀 $e^n$을 하나 붙여 $X$를 얻으면, 포함 $A\\hookrightarrow X$이 유도하는 $\\pi_1(A)\\to\\pi_1(X)$은 전사(surjection)다. 이로부터: (a) 쐐기합 $S^1\\vee S^2$의 기본군은 $\\mathbb{Z}$이다. (b) 경로연결 CW 복합체 $X$에 대해 1-골격의 포함 $X^1\\hookrightarrow X$은 전사 $\\pi_1(X^1)\\to\\pi_1(X)$을 유도한다.",
+          "idea_behind_proof": "명제 1.14의 밀어내기 기법을 그대로 쓴다. $X$의 고리를 붙인 셀 $e^n$ 내부의 한 점 $x$를 피하도록 밀어내면($n\\ge2$이라 셀 경계가 경로연결이라 가능), 그 고리는 $X-\\{x\\}$ 안에 있고 $X-\\{x\\}$는 $A$로 변형되추림된다. 따라서 모든 고리류가 $A$에서 온다.",
+          "proof_steps": [
+            "붙인 셀 내부의 한 점 $x$를 잡는다. $X$의 밑점 고리 $f$에 명제 1.14의 논증(작은 공 안에서 $x$를 지나는 조각을 경계 $(n-1)$차원 구 — $n\\ge2$이라 경로연결 — 로 밀어냄)을 적용하면, $f$를 상이 $x$를 지나지 않는 고리로 호모토프할 수 있다.",
+            "$X-\\{x\\}$는 $A$ 위로 변형되추림된다(셀에서 중심 $x$를 뺀 부분이 경계로 방사상 수축). 따라서 $x$를 피하는 고리는 $A$ 안의 고리와 호모토픽하고 그 류는 $i_*$의 상에 있다. 그러므로 $i_*$는 전사.",
+            "(a) $S^2=e^0\\cup e^2$이므로 $S^1\\vee S^2$은 $A=S^1$에 $2$-셀 하나를 붙인 것으로 볼 수 있다. 위 결과로 $\\pi_1(S^1)\\to\\pi_1(S^1\\vee S^2)$이 전사이고, $S^2$을 밑점으로 뭉개는 되추림이 있어 명제 1.17로 $i_*$가 단사이기도 하다. 따라서 동형, $\\pi_1(S^1\\vee S^2)\\cong\\mathbb{Z}$.",
+            "(b) $X$는 $X^1$에 차원 $\\ge2$의 셀들을 붙여 만들어지므로, 각 부착마다 위 전사가 유지되어 합성 $\\pi_1(X^1)\\to\\pi_1(X)$도 전사다(무한 개의 셀은 부록 A.1). $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 12) 모든 준동형 $\\pi_1(S^1)\\to\\pi_1(S^1)$이 어떤 사상 $\\varphi:S^1\\to S^1$의 유도 준동형 $\\varphi_*$로 실현됨을 보여라.",
+          "hint": "$\\pi_1(S^1)\\cong\\mathbb{Z}$(정리 1.7)이라 준동형 $\\mathbb{Z}\\to\\mathbb{Z}$은 어떤 정수 $m$에 대한 '곱하기 $m$'뿐이다. 원을 $m$번 감는 사상은 무엇인가?",
+          "solution": "$\\pi_1(S^1)\\cong\\mathbb{Z}$이므로 임의의 준동형은 어떤 정수 $m$에 대해 $n\\mapsto mn$(곱하기 $m$)이다. 사상 $\\varphi_m:S^1\\to S^1$을 $\\varphi_m(z)=z^m$(즉 $\\varphi_m(\\cos\\theta,\\sin\\theta)=(\\cos m\\theta,\\sin m\\theta)$)으로 택하자. 표준 생성원 $\\omega_1$(한 바퀴)을 $\\varphi_m$과 합성하면 $\\varphi_m\\omega_1=\\omega_m$($m$바퀴)이므로 $\\varphi_{m*}[\\omega_1]=[\\omega_m]=m[\\omega_1]$. 즉 $\\varphi_{m*}$은 곱하기 $m$이다. $m$이 임의의 정수였으므로 모든 준동형 $\\mathbb{Z}\\to\\mathbb{Z}$이 $\\varphi_{m*}$로 실현된다($m=0$이면 상수사상, $m=\\pm1$이면 항등·반사)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 16) 다음 경우에 되추림 $r:X\\to A$이 없음을 보여라. (b) $X=S^1\\times D^2$, $A=$ 경계 토러스 $S^1\\times S^1$. (f) $X=$ 뫼비우스 띠(Möbius band), $A=$ 그 경계원.",
+          "hint": "명제 1.17: 되추림이 있으면 $i_*:\\pi_1(A)\\to\\pi_1(X)$이 단사여야 한다. 두 경우 모두 $\\pi_1$을 계산하라. (f)에서는 경계원이 중심원(core)을 몇 바퀴 감는지, 그리고 단사만으로 충분한지를 따져 보라.",
+          "solution": "(b) $\\pi_1(X)=\\pi_1(S^1\\times D^2)\\cong\\pi_1(S^1)\\times\\pi_1(D^2)\\cong\\mathbb{Z}\\times0\\cong\\mathbb{Z}$이고 $\\pi_1(A)=\\pi_1(S^1\\times S^1)\\cong\\mathbb{Z}\\times\\mathbb{Z}$. 단사 준동형 $\\mathbb{Z}\\times\\mathbb{Z}\\to\\mathbb{Z}$은 존재할 수 없다($D^2$ 방향 생성원이 $0$으로 가 커널이 자명하지 않다). 명제 1.17로 되추림 없음.\n(f) 뫼비우스 띠 $X$는 중심원 $c$로 변형되추림되므로 $\\pi_1(X)\\cong\\mathbb{Z}=\\langle[c]\\rangle$. 경계원 $A$는 이 중심원을 두 바퀴 감으므로 포함이 유도하는 $i_*:\\pi_1(A)=\\mathbb{Z}\\to\\pi_1(X)=\\mathbb{Z}$은 곱하기 $2$($1\\mapsto2$)다. 이는 단사이지만, 되추림이 있으려면 $r_*i_*=\\mathrm{id}$, 즉 준동형 $r_*:\\mathbb{Z}\\to\\mathbb{Z}$이 $r_*(2)=1$을 만족해야 한다. 그런데 $r_*(2)=2\\,r_*(1)$은 항상 짝수라 $1$이 될 수 없다. 모순이므로 되추림 없음. (핵심: 여기서는 $i_*$의 단사성만으로는 부족하고, $r_*i_*=\\mathrm{id}$라는 더 강한 조건이 깨진다.)",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 0.8
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.5
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "core c"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.72
+                ],
+                "text": "boundary ~ 2c"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.95
+                ],
+                "text": "i_*: 1 |-> 2,  r_*(2)=1 impossible"
+              }
+            ],
+            "caption": "(f) 뫼비우스 띠는 중심원 $c$로 변형되추림된다. 경계원은 $c$를 두 바퀴 감아 $i_*$가 곱하기 $2$가 되므로, $r_*i_*=\\mathrm{id}$($r_*(2)=1$)가 불가능하다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 8) Borsuk–Ulam 정리가 토러스에서도 성립하는가? 즉 모든 사상 $f:S^1\\times S^1\\to\\mathbb{R}^2$에 대해 $f(x,y)=f(-x,-y)$인 $(x,y)$가 반드시 존재하는가?",
+          "hint": "성립하지 않는다. 한 좌표만 보는 아주 단순한 사상을 반례로 만들어 보라. $S^1\\subset\\mathbb{R}^2$에서 $z$와 $-z$는 항상 다르다.",
+          "solution": "성립하지 않는다. $S^1\\subset\\mathbb{C}=\\mathbb{R}^2$로 보고 첫 좌표만 취하는 사상 $f:S^1\\times S^1\\to\\mathbb{R}^2,\\ f(z,w)=z$를 택하자. 그러면 $f(-z,-w)=-z$인데 $S^1$ 위에서 $z=-z$인 점은 없으므로 항상 $f(z,w)=z\\ne -z=f(-z,-w)$. 즉 대척점에서 값이 일치하는 점이 하나도 없어 토러스에서는 Borsuk–Ulam이 실패한다. (본질적 이유: $S^2$의 증명은 적도 고리가 $S^2$에서 널호모토픽이라는 사실에 기댔는데, 토러스의 대응 고리는 널호모토픽이 아니라 그 논증이 통하지 않는다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 9) $A_1,A_2,A_3$이 $\\mathbb{R}^3$의 콤팩트집합일 때, 세 집합을 동시에 각각 부피가 같은 두 조각으로 나누는 평면 $P\\subset\\mathbb{R}^3$이 존재함을 Borsuk–Ulam 정리로 보여라. (햄 샌드위치 정리)",
+          "hint": "방향 $u\\in S^2$마다 $A_3$을 이등분하는 평면을 하나 정하고, 그 평면 양쪽에서 $A_1,A_2$의 부피를 재는 사상 $g:S^2\\to\\mathbb{R}^2$을 만들어 정리 1.10을 적용하라. $u$를 $-u$로 바꾸면 '양의 쪽'이 어떻게 바뀌는가?",
+          "solution": "각 단위벡터 $u\\in S^2$에 대해 $u$에 수직인 평면들 중 $A_3$을 이등분하는 것을 하나 고른다($A_3$의 부피를 반씩 나누는 평면 높이의 집합은 구간이고, 그 중점을 택하면 $u\\mapsto$ 평면이 연속으로 정의된다). 이 평면의 $u$ 방향 쪽('양의 쪽')에 든 $A_1,A_2$의 부피를 재어 $g(u)=(\\mathrm{vol}^+(A_1),\\mathrm{vol}^+(A_2))\\in\\mathbb{R}^2$로 둔다. $u$를 $-u$로 바꾸면 평면 자체는 그대로지만 '양의 쪽'이 반대쪽으로 뒤바뀌므로 $g(-u)$는 $A_1,A_2$의 나머지 쪽 부피가 된다. Borsuk–Ulam(정리 1.10)으로 $g(u)=g(-u)$인 $u$가 존재하는데, 이는 그 평면이 $A_1,A_2$의 양쪽 부피를 같게 만든다는 뜻(각각 이등분)이다. $A_3$은 구성상 이미 이등분되어 있으므로, 이 하나의 평면 $P$가 세 집합을 동시에 이등분한다. $\\qquad\\blacksquare$"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 13) 밑점 $x_0$을 포함하는 경로연결 부분공간 $A\\subset X$에 대해, 포함 $A\\hookrightarrow X$이 유도하는 $\\pi_1(A,x_0)\\to\\pi_1(X,x_0)$이 전사일 필요충분조건은 '$X$의 끝점이 모두 $A$에 있는 모든 경로가 $A$ 안의 경로와 (끝점 고정) 호모토픽'임을 보여라.",
+          "hint": "전사성은 '$X$의 모든 고리가 $A$ 고리와 호모토픽'이라는 뜻이다. 끝점이 $A$에 있는 임의의 경로를, $A$가 경로연결임을 이용해 $A$ 안의 경로로 앞뒤를 이어 $x_0$ 고리로 바꿔 보라.",
+          "solution": "($\\Leftarrow$) $X$의 $x_0$ 고리 $f$는 끝점 $x_0\\in A$를 갖는 경로이므로 가정에 의해 $A$ 안의 경로 $g$와 호모토픽하다. $g$의 끝점도 $x_0$이라 $g$는 $A$ 고리이고 $[f]=[g]=i_*[g]$. 따라서 $i_*$는 전사.\n($\\Rightarrow$) $i_*$가 전사라 하자. $X$의 경로 $\\gamma$가 끝점 $\\gamma(0),\\gamma(1)\\in A$를 갖는다고 하자. $A$가 경로연결이므로 $A$ 안에서 $x_0$을 $\\gamma(0)$에 잇는 경로 $p$와 $\\gamma(1)$을 $x_0$에 잇는 경로 $q$를 잡으면 $p\\cdot\\gamma\\cdot q$는 $x_0$ 고리다. 전사성으로 이 고리는 어떤 $A$ 고리 $\\ell$과 호모토픽하다. 그러면 $\\gamma\\simeq\\bar p\\cdot\\ell\\cdot\\bar q$이고 우변은 $p,q,\\ell$이 모두 $A$ 안이라 $A$ 안의 경로다. 즉 $\\gamma$가 $A$ 안 경로와 호모토픽하다. $\\qquad\\blacksquare$"
+        },
+        {
+          "type": "ox",
+          "question": "곱공간 $X\\times Y$에서 $X\\times\\{y_0\\}$의 고리와 $\\{x_0\\}\\times Y$의 고리는 $\\pi_1(X\\times Y)$에서 항상 서로 교환한다.",
+          "answer": "O",
+          "explanation": "연습문제 10이 정확히 이것을 보인다. 두 고리를 $a=(\\alpha,\\text{상수}),\\ b=(\\text{상수},\\beta)$로 쓰면 $a\\cdot b$와 $b\\cdot a$는 사상 $\\Gamma(u,v)=(\\alpha(u),\\beta(v))$가 채우는 사각형의 두 경계경로이고, 정의역 사각형이 볼록이라 대각선을 따라 호모토픽하다. 따라서 $[a][b]=[b][a]$. (이는 $\\pi_1(X\\times Y)\\cong\\pi_1(X)\\times\\pi_1(Y)$에서 두 인자가 서로 교환하는 것과 같은 사실이다.)"
+        },
+        {
+          "type": "ox",
+          "question": "부분공간 $A\\subset X$에 대해 포함이 유도하는 $i_*:\\pi_1(A)\\to\\pi_1(X)$이 단사이면, $X$는 반드시 $A$ 위로 되추림된다.",
+          "answer": "X",
+          "explanation": "단사성은 되추림의 필요조건일 뿐 충분조건이 아니다. 뫼비우스 띠 $X$와 그 경계원 $A$가 반례다(연습문제 16(f)): 경계원이 중심원을 두 바퀴 감아 $i_*:\\mathbb{Z}\\to\\mathbb{Z}$이 곱하기 $2$로 단사지만, 되추림이 있으려면 $r_*i_*=\\mathrm{id}$, 즉 $r_*(2)=1$이어야 하는데 $r_*(2)=2r_*(1)$은 짝수라 불가능하다. 되추림이 요구하는 것은 '$i_*$가 단사'가 아니라 '$i_*$가 왼쪽 역을 갖는다'는 더 강한 조건이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.14의 '밀어내기(push-off)' 기법이 연습문제 18·19에서 어떻게 재사용되는가? 이 기법이 CW 복합체의 기본군을 다루는 방식을, 특히 '차원이 다른 셀은 $\\pi_1$을 어떻게 바꾸는가'라는 관점에서 논하라.",
+          "hint": "명제 1.14의 증명에서 고리를 '한 점을 피하도록' 민 뒤 무엇에 수축시켰는지 되짚어라. 셀 $e^n$에서 내부 점 하나를 뺀 것은 무엇으로 변형되추림되는가? $n=1$과 $n\\ge2$의 차이는?",
+          "answer": "명제 1.14의 핵심은 고리를 셀 내부의 한 점 $x$를 피하도록 밀어내는 것이었고, 가능한 이유는 작은 공의 경계($(n-1)$차원 구)가 $n\\ge2$일 때 경로연결이라 우회로가 있기 때문이었다. 연습문제 18은 이 기법을 그대로 옮겨, 경로연결 $A$에 $n\\ge2$ 셀을 붙인 $X$에서 임의의 고리를 셀 중심 $x$를 피하게 민 뒤 $X-\\{x\\}\\simeq A$(방사상 변형되추림)로 수축시켜 $\\pi_1(A)\\to\\pi_1(X)$이 전사임을 보인다. 결론적으로 '2차원 이상의 셀을 붙이는 것은 새 생성원을 만들지 않는다'(전사) — 오직 관계(relation)를 추가할 뿐이고, 그 관계는 van Kampen 정리가 정확히 기술한다. 그래서 CW 복합체에서 $\\pi_1$의 생성원은 1-셀에서, 관계는 2-셀에서 온다는 그림이 서고, 1-골격의 포함 $\\pi_1(X^1)\\to\\pi_1(X)$이 전사가 된다. 연습문제 19는 반대 극단($1$차원 CW)에서 같은 밀어내기로 '모든 고리가 모서리를 단조롭게 지나는 경로와 호모토픽'임을 보여 $\\pi_1(S^1)$이 표준 고리로 생성되는 순환군임을 초등적으로 재증명한다 — $n=1$에서는 경계($S^0$, 두 점)가 경로연결이 아니라 밀어낼 수 없고, 그래서 원은 지울 수 없는 1차원 구멍을 남긴다. 즉 밀어내기 기법은 '셀의 차원이 $\\pi_1$에 미치는 영향'을 차원별로 정확히 가르는 도구다."
+        }
+      ]
+    }
+  ]
+}
