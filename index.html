@@ -178,6 +178,14 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 }
 .ink-trash-menu button:hover{ background:var(--surface-2); }
 .ink-canvas{ position:absolute; left:0; top:0; cursor:crosshair; touch-action:none; }
+.ink-float-toggle{
+  position:fixed; z-index:60; width:44px; height:44px; border-radius:50%; padding:0; cursor:pointer;
+  display:grid; place-items:center; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft);
+  box-shadow:0 3px 12px rgba(20,24,35,.22); transition:background .12s,border-color .12s,color .12s;
+}
+.ink-float-toggle svg{ width:20px; height:20px; }
+.ink-float-toggle.is-active{ background:var(--no-bg); border-color:#E9C6C0; color:var(--no); }
+.ink-float-toggle[hidden]{ display:none; }
 @media (max-width:640px){
   .ink-toolbar{ gap:7px; padding:5px 8px; }
   .ink-swatch{ width:16px; height:16px; }
@@ -554,6 +562,13 @@ p.prose{ margin:0; }
   </div>
 </div>
 </div>
+
+<button class="ink-float-toggle" id="inkFloatToggle" type="button" title="지우개 전환" aria-label="지우개 전환" aria-pressed="false" hidden>
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="5.5" width="10" height="6" rx="1.3"/>
+    <path d="M3 8.5h10"/>
+  </svg>
+</button>
 
 <div class="gh-modal-overlay" id="ghModalOverlay" hidden>
   <div class="gh-modal">
@@ -1205,6 +1220,7 @@ p.prose{ margin:0; }
     var color = '#1B2333', penWidth = 4;
     var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null, curStrokeErasing = false;
     var lastCtxMenuTs = 0;
+    var floatBtn = null;
     var scrollPointerId = null, lastScrollY = 0, scrollStartX = 0, scrollStartY = 0, scrollMoved = false;
     var penEverSeen = false;
     // 폰에서 손가락 두 개 이상 = 필기 대신 스크롤/카드 넘기기(삼성 노트와 동일). 손가락 pointerId를
@@ -1476,6 +1492,7 @@ p.prose{ margin:0; }
       if(!drawing) return;
       drawing = false;
       try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
+      showFloatToggle(ev.clientX, ev.clientY);
       if(curStrokeErasing){ curStroke = null; return; }
       commitCurStroke();
     }
@@ -1512,12 +1529,29 @@ p.prose{ margin:0; }
       });
       var eb = document.getElementById('inkEraseBtn');
       if(eb){ eb.classList.toggle('is-active', erasing); eb.setAttribute('aria-pressed', erasing ? 'true' : 'false'); }
+      if(floatBtn){ floatBtn.classList.toggle('is-active', erasing); floatBtn.setAttribute('aria-pressed', erasing ? 'true' : 'false'); }
+    }
+
+    // S펜 배럴 버튼을 실기기에서 감지할 방법이 없어(위 contextmenu 리스너 참고) 그 대안으로 만든,
+    // 방금 필기하던 위치 옆에 뜨는 지우개 전환 버블 — 매번 위 도구모음까지 손을 옮기지 않아도 된다.
+    function showFloatToggle(clientX, clientY){
+      if(!floatBtn || bookMode) return;
+      var size = 44, margin = 8, offset = 34;
+      var x = Math.min(Math.max(clientX + offset, margin), window.innerWidth - size - margin);
+      var y = Math.min(Math.max(clientY - offset, margin), window.innerHeight - size - margin);
+      floatBtn.style.left = x + 'px';
+      floatBtn.style.top = y + 'px';
+      floatBtn.hidden = false;
+    }
+    function hideFloatToggle(){
+      if(floatBtn) floatBtn.hidden = true;
     }
 
     function setBookMode(v){
       bookMode = v;
       var btn = document.getElementById('penToggleBtn');
       if(btn){ btn.classList.toggle('is-on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); }
+      if(v) hideFloatToggle();
     }
 
     function updateStickyOffset(){
@@ -1590,12 +1624,16 @@ p.prose{ margin:0; }
         });
       }
 
+      floatBtn = document.getElementById('inkFloatToggle');
+      if(floatBtn) floatBtn.addEventListener('click', function(){ erasing = !erasing; updateToolbarUI(); });
+
       updateToolbarUI();
       updateStickyOffset();
       window.addEventListener('resize', function(){ updateStickyOffset(); resize(); redraw(); });
     }
 
     function attach(){
+      hideFloatToggle(); // 카드가 바뀌면 이전 카드 기준 위치는 의미가 없다 — 다시 필기할 때 새로 뜬다.
       if(!canvas) createCanvasEl();
       var card = mainEl.querySelector('.card');
       if(!card){ if(canvas.parentElement) canvas.remove(); return; }
