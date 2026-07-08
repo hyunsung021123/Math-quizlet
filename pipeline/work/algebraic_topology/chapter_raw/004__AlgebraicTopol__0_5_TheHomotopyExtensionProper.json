@@ -1,0 +1,338 @@
+{
+  "chapter_info": {
+    "title": "Chapter 0. Some Underlying Geometric Notions",
+    "source": "Allen Hatcher, Algebraic Topology, Ch. 0",
+    "overall_goal": "위상수학에서 '같은 모양'을 위상동형(homeomorphism)보다 훨씬 넓게 보는 관점을 세운다. 변형수축(deformation retraction)·사상원기둥(mapping cylinder)에서 출발해, 호모토피(homotopy)와 호모토피 동치(homotopy equivalence, homotopy type)라는 핵심 동치 개념을 정의하고, 수축가능(contractible) 공간과 그 미묘함(한 점으로의 변형수축과의 차이)까지 이해한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "0.5 The Homotopy Extension Property",
+      "step1_big_picture": {
+        "context": "이 챕터의 마지막 절은 드디어 무언가를 '증명'한다. 특히 0.4에서 결과만 쓰고 미뤄 둔 두 기준(수축가능한 부분복합체 붕괴 / 호모토픽한 부착사상)을, 그리고 0.1에서 따름정리 0.21로 미뤄 둔 사실(두 공간이 호모토피 동치일 필요충분조건은 둘을 함께 변형수축 부분공간으로 담는 제3의 공간이 존재하는 것)을 실제로 증명한다. 이 모든 증명이 의존하는 하나의 기술적 성질이 호모토피 확장 성질(homotopy extension property, HEP)이다. 문제 상황은 이렇다: 사상 $f_0:X\\to Y$가 있고 부분공간 $A\\subset X$ 위에서만 $f_0|_A$의 호모토피 $f_t:A\\to Y$가 주어졌을 때, 이를 $X$ 전체의 호모토피 $f_t:X\\to Y$로 확장할 수 있는가? 이것이 항상 가능한 쌍 $(X,A)$가 HEP를 가진다고 말한다. 재료는 앞 소단원에서 모두 갖춰졌다 — 0.1의 사상원기둥, 0.2의 세포복합체·뼈대·약위상, 0.3의 뿔·현수, 0.4의 부착공간·사상뿔.",
+        "hidden_intuition": "HEP의 위력은 한 줄의 재해석에서 나온다: $(X,A)$가 HEP를 가질 필요충분조건은 $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)이라는 것. 왜냐하면 '밑면 $X\\times\\{0\\}$과 벽 $A\\times I$ 위의 데이터를 사각기둥 $X\\times I$ 전체로 확장'하는 문제는, 사각기둥을 그 'ㄴ자 모서리'로 되접는 축약사상 $r$이 있으면 그냥 $r$와 합성하는 기계적 조작으로 풀리기 때문이다. 그래서 증명들은 대개 이렇게 흘러간다: (1) 필요한 축약을 기하적으로 만들고(명제 0.16의 반지름 사영), (2) 그 축약과 합성해 호모토피·사상을 원하는 대로 '고쳐' 붙인다. 특히 명제 0.16은 모든 CW 쌍이 HEP를 가짐을 보증하므로, 이후의 모든 정리가 세포복합체 위에서 자유롭게 작동한다. 즉 HEP는 이 챕터가 약속만 하고 미뤄 둔 사실들을 갚는 공통 엔진이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  -2,
+                  0
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1.5
+                ],
+                [
+                  -2,
+                  1.5
+                ]
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2,
+                0
+              ],
+              "to": [
+                2,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2,
+                0
+              ],
+              "to": [
+                -2,
+                1.5
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                -0.28
+              ],
+              "text": "X x 0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.35,
+                0.75
+              ],
+              "text": "A x I"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.3,
+                0.85
+              ],
+              "text": "extend to X x I ?"
+            }
+          ],
+          "caption": "HEP: 밑면 $X\\times\\{0\\}$과 벽 $A\\times I$ 위에 주어진 데이터를 사각기둥 $X\\times I$ 전체로 언제나 확장할 수 있는가? 이는 'ㄴ자' $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)임과 동치다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (호모토피 확장 성질, HEP)",
+          "formal_statement": "쌍 $(X,A)$가 호모토피 확장 성질(HEP)을 가진다는 것은, 사상 $f_0:X\\to Y$와 부분공간 $A\\subset X$ 위의 호모토피 $f_t:A\\to Y$($f_0|_A$의 호모토피)가 주어질 때마다 이를 $X$ 전체의 호모토피 $f_t:X\\to Y$로 항상 확장할 수 있음을 뜻한다. 동치로, 모든 사상 $X\\times\\{0\\}\\cup A\\times I\\to Y$가 사상 $X\\times I\\to Y$로 확장되는 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (HEP는 축약과 동치)",
+          "formal_statement": "$(X,A)$가 HEP를 가질 필요충분조건은 $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)인 것이다.",
+          "idea_behind_proof": "정의 자체를 '가장 어려운 확장 문제' 하나에 적용해 보는 것이 열쇠다. 확장해야 할 대상 중 가장 보편적인 것은 바로 항등사상이다. 항등사상을 확장하면 그 확장이 곧 축약이 되고, 거꾸로 축약이 있으면 임의의 사상을 그것과 합성해 확장할 수 있다.",
+          "proof_steps": [
+            "(⇐) 축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$가 있으면, 임의의 사상 $\\varphi:X\\times\\{0\\}\\cup A\\times I\\to Y$에 대해 $\\varphi\\circ r:X\\times I\\to Y$가 $\\varphi$의 확장이다($r$가 부분공간 위에서 항등이므로). 따라서 HEP 성립.",
+            "(⇒) $(X,A)$가 HEP를 가지면, 항등사상 $X\\times\\{0\\}\\cup A\\times I\\to X\\times\\{0\\}\\cup A\\times I$을 $X\\times I\\to X\\times\\{0\\}\\cup A\\times I$로 확장할 수 있고, 이 확장이 바로 축약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (HEP의 세 가지 따름 사실)",
+          "formal_statement": "축약 특징화로부터 세 가지가 따른다. (1) $(X,A)$가 HEP를 가지면 임의의 공간 $Z$에 대해 $(X\\times Z,A\\times Z)$도 HEP를 가진다(정의에서 직접 보이기는 쉽지 않은 사실). (2) $X$가 하우스도르프(Hausdorff)일 때 $(X,A)$가 HEP를 가지면 $A$는 $X$의 닫힌 부분공간이어야 한다: 축약 $r:X\\times I\\to X\\times I$의 상은 고정점 집합 $\\{z:r(z)=z\\}$로 하우스도르프에서 닫혀 있으므로 $X\\times\\{0\\}\\cup A\\times I$가 닫혀 있고 따라서 $A$가 $X$에서 닫힌다. (3) $A$가 닫혀 있어도 HEP가 실패할 수 있다: $A=\\{0,1,\\tfrac12,\\tfrac13,\\tfrac14,\\dots\\}\\subset I$인 쌍 $(I,A)$에는 축약 $I\\times I\\to I\\times\\{0\\}\\cup A\\times I$이 존재하지 않는다($0$ 근방의 나쁜 국소 구조 때문)."
+        },
+        {
+          "type": "Example",
+          "name": "예 0.15 (사상원기둥 근방을 가지면 HEP)",
+          "formal_statement": "$A$가 $X$ 안에서 사상원기둥 근방(mapping cylinder neighborhood)을 가지면 $(X,A)$는 HEP를 가진다. 여기서 사상원기둥 근방이란, 경계 $B$를 포함하는 닫힌 근방 $N$으로서 $N-B$가 $A$의 열린 근방이고, 어떤 사상 $f:B\\to A$와 위상동형 $h:M_f\\to N$이 $h|_{A\\cup B}=\\mathrm{id}$을 만족하는 것을 말한다. 이런 근방은 꽤 자주 나타난다 — 예컨대 챕터 서두의 두꺼운 글자는 얇은 글자의 사상원기둥 근방을 준다.",
+          "idea_behind_proof": "저차원 축약을 곱하고 옮겨 고차원 축약을 조립하는 전형적 수법이다. 가장 기본인 정사각형의 축약 $I\\times I\\to I\\times\\{0\\}\\cup\\partial I\\times I$에서 출발해 $B$를 곱하고, 그것을 사상원기둥 $M_f$ 위로 옮기면 $(M_f,A\\cup B)$의 HEP가 나온다. 그다음 $N\\cong M_f$이므로 $(N,A\\cup B)$도 HEP를 갖고, $N$ 바깥에서는 상수 호모토피를 써서 전체로 확장한다.",
+          "proof_steps": [
+            "1단계: $I\\times I$는 $I\\times\\{0\\}\\cup\\partial I\\times I$로 축약된다. 이를 $B$와 곱하면 $B\\times I\\times I$가 $B\\times I\\times\\{0\\}\\cup B\\times\\partial I\\times I$로 축약되고, 이 축약이 $M_f\\times I$의 $M_f\\times\\{0\\}\\cup(A\\cup B)\\times I$로의 축약을 유도한다. 따라서 $(M_f,A\\cup B)$는 HEP를 가진다.",
+            "2단계: 위상동형 $h:M_f\\to N$으로 옮기면 $(N,A\\cup B)$도 HEP를 가진다.",
+            "3단계: 사상 $X\\to Y$와 $A$ 위의 호모토피가 주어지면, $X-(N-B)$에서는 상수 호모토피를 취하고, $N$ 위에서는 $(N,A\\cup B)$의 HEP를 $A$의 주어진 호모토피와 $B$의 상수 호모토피에 적용해 확장한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.16 (CW 쌍은 HEP를 가진다)",
+          "formal_statement": "$(X,A)$가 CW 쌍이면 $X\\times\\{0\\}\\cup A\\times I$는 $X\\times I$의 변형수축(deformation retract)이며, 따라서 $(X,A)$는 HEP를 가진다.",
+          "idea_behind_proof": "한 개의 세포 $D^n$ 위에서 축약을 손으로 만들고, 그것을 뼈대(skeleton)를 따라 귀납적으로 온 공간에 붙여 나가는 것이 전략이다. 세포 위의 축약은 반지름 사영 하나로 충분하다: $D^n\\times I$ 위쪽 점 $(0,2)$에서 방사로 쏘면 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$('옆면과 밑면')로 떨어진다. 무한 차원까지 이어 붙일 때 생기는 연속성 문제는 CW의 약위상(weak topology)이 정확히 해결해 준다 — 각 뼈대 위에서 연속이면 전체에서 연속이므로.",
+          "proof_steps": [
+            "1단계: 축약 $r:D^n\\times I\\to D^n\\times\\{0\\}\\cup\\partial D^n\\times I$이 존재한다(예: $D^n\\times\\mathbb{R}$의 점 $(0,2)$에서의 반지름 사영). $r_t=tr+(1-t)\\mathrm{id}$은 $D^n\\times I$를 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$로 보내는 변형수축이다.",
+            "2단계: $X^n\\times I$는 $X^n\\times\\{0\\}\\cup(X^{n-1}\\cup A^n)\\times I$에 $D^n\\times I$의 복사본을 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$을 따라 붙여 얻어지므로, 1단계의 변형수축이 $X^n\\times I$의 $X^n\\times\\{0\\}\\cup(X^{n-1}\\cup A^n)\\times I$로의 변형수축을 유도한다.",
+            "3단계: $n$번째 변형수축을 시간 구간 $t\\in[\\tfrac1{2^{n+1}},\\tfrac1{2^n}]$ 동안 수행하도록 배치해 무한히 이어 붙이면, 이 무한 합성이 $X\\times I$의 $X\\times\\{0\\}\\cup A\\times I$로의 변형수축이 된다.",
+            "4단계: $t=0$에서의 연속성 문제 없음: 각 $X^n\\times I$ 위에서 이 사상은 구간 $[0,\\tfrac1{2^{n+1}}]$ 동안 정지해 있어 연속이고, CW 복합체는 뼈대에 대한 약위상을 가지므로 각 뼈대 위 제한이 연속이면 전체가 연속이다. 따라서 $(X,A)$는 HEP를 가진다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -1,
+                    0
+                  ],
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    -1,
+                    1
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  -1,
+                  0.55
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  1,
+                  0.55
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  -0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  2.25
+                ],
+                "text": "(0,2)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.28
+                ],
+                "text": "D^n x 0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.45,
+                  0.5
+                ],
+                "text": "boundary x I"
+              }
+            ],
+            "caption": "명제 0.16의 핵심(그림은 $n=1$): 점 $(0,2)$에서의 반지름 사영이 사각기둥 $D^n\\times I$를 밑면과 옆면 $D^n\\times\\{0\\}\\cup\\partial D^n\\times I$(윗변만 제외한 'ㄷ'자)로 되접는다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.17 (0.4 기준 1의 증명)",
+          "formal_statement": "쌍 $(X,A)$가 HEP를 만족하고 $A$가 수축가능(contractible)하면, 몫사상 $q:X\\to X/A$는 호모토피 동치다. (CW 쌍은 명제 0.16으로 HEP를 가지므로, 이는 0.4의 기준 1 '수축가능한 부분복합체의 붕괴는 호모토피 동치'를 증명한다.)",
+          "idea_behind_proof": "$A$의 수축(항등에서 상수로 가는 호모토피)을 HEP로 $X$ 전체의 호모토피 $f_t:X\\to X$로 끌어올리는 것이 출발점이다. 이 $f_t$는 $A$를 항상 $A$ 안에 두므로 몫으로 잘 내려가 $\\bar f_t:X/A\\to X/A$를 유도하고, $t=1$에서 $A$가 한 점으로 뭉쳐진다는 사실이 몫 $X/A$에서 $X$로 되돌아가는 역사상 $g$를 만들어 준다. 결국 $q$와 $g$가 서로 호모토피 역이 된다.",
+          "proof_steps": [
+            "1단계: $A$의 수축을 HEP로 확장해 $f_0=\\mathrm{id}$이고 $f_t(A)\\subset A$인 호모토피 $f_t:X\\to X$를 얻는다.",
+            "2단계: $f_t(A)\\subset A$이므로 $qf_t:X\\to X/A$는 $A$를 한 점으로 보내 $qf_t=\\bar f_t q$ 꼴로 몫사상을 통해 분해된다($\\bar f_t:X/A\\to X/A$).",
+            "3단계: $t=1$에서 $f_1(A)$가 (수축이 도달한) 한 점이므로 $f_1$은 사상 $g:X/A\\to X$를 유도해 $gq=f_1$. 그러면 $qg(\\bar x)=qgq(x)=qf_1(x)=\\bar f_1 q(x)=\\bar f_1(\\bar x)$이므로 $qg=\\bar f_1$.",
+            "4단계: $gq=f_1\\simeq f_0=\\mathrm{id}$(호모토피 $f_t$)이고 $qg=\\bar f_1\\simeq\\bar f_0=\\mathrm{id}$(호모토피 $\\bar f_t$)이므로 $q,g$는 서로 호모토피 역, 즉 $q$는 호모토피 동치. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.18 (0.4 기준 2의 정련된 증명)",
+          "formal_statement": "$(X_1,A)$가 CW 쌍이고 부착사상 $f,g:A\\to X_0$이 호모토픽하면 $X_0\\sqcup_f X_1\\simeq X_0\\sqcup_g X_1$이며, 나아가 $X_0$에 상대적(rel $X_0$)으로 성립한다. 여기서 $(W,Y),(Z,Y)$에 대해 $W\\simeq Z$ rel $Y$란, $Y$ 위에서 항등인 사상 $\\varphi:W\\to Z$, $\\psi:Z\\to W$가 존재해 $\\psi\\varphi\\simeq\\mathrm{id}$, $\\varphi\\psi\\simeq\\mathrm{id}$이되 그 호모토피들이 매 순간 $Y$ 위에서 항등인 것을 뜻한다. (이는 0.4의 기준 2를 rel $X_0$으로 정련해 증명한다.)",
+          "idea_behind_proof": "호모토피 $F:f\\simeq g$ 자체로 만든 '두꺼운' 공간 $X_0\\sqcup_F(X_1\\times I)$이 양 끝에 $X_0\\sqcup_f X_1$과 $X_0\\sqcup_g X_1$을 모두 담고 있다는 관찰이 핵심이다. 명제 0.16의 변형수축($X_1\\times I\\to X_1\\times\\{0\\}\\cup A\\times I$)을 양쪽으로 흘려보내면 이 두꺼운 공간이 두 끝으로 각각 변형수축하고, 두 변형수축이 모두 $X_0$을 고정하므로 rel $X_0$ 호모토피 동치가 된다.",
+          "proof_steps": [
+            "1단계: 호모토피 $F:A\\times I\\to X_0$($f\\to g$)로 공간 $W=X_0\\sqcup_F(X_1\\times I)$을 만든다. $W$는 $X_0\\sqcup_f X_1$(레벨 $0$)과 $X_0\\sqcup_g X_1$(레벨 $1$)을 부분공간으로 포함한다.",
+            "2단계: 명제 0.16의 변형수축 $X_1\\times I\\to X_1\\times\\{0\\}\\cup A\\times I$가 $W$의 $X_0\\sqcup_f X_1$로의 변형수축을 유도한다. 마찬가지로 $W$는 $X_0\\sqcup_g X_1$로도 변형수축한다.",
+            "3단계: 두 변형수축은 모두 $X_0$ 위에서 항등이므로, 이들을 이어 붙이면 $X_0\\sqcup_f X_1\\simeq X_0\\sqcup_g X_1$ rel $X_0$을 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 0.19 (rel $A$ 승격)",
+          "formal_statement": "$(X,A)$와 $(Y,A)$가 HEP를 만족하고 $f:X\\to Y$가 $f|_A=\\mathrm{id}$인 호모토피 동치이면, $f$는 rel $A$ 호모토피 동치다.",
+          "idea_behind_proof": "호모토피 역 $g$와 두 호모토피 $gf\\simeq\\mathrm{id}$, $fg\\simeq\\mathrm{id}$는 $A$를 존중하지 않을 수 있다. HEP가 바로 이 결함을 '수선'하는 도구다. 먼저 $(Y,A)$의 HEP로 $g$를 $A$ 위에서 항등이 되도록 고치고($g_1|_A=\\mathrm{id}$), 다음으로 $(X\\times I,A\\times I)$의 HEP를 이용한 '호모토피의 호모토피'(V자 도식)로 $g_1f\\simeq\\mathrm{id}$을 rel $A$로 끌어올리며, 대칭적으로 $fg_1$도 처리한다. 핵심 장치는 두 번, 그것도 한 번은 $(X\\times I,A\\times I)$ 위에서 쓰이는 HEP다.",
+          "proof_steps": [
+            "호모토피 역 $g:Y\\to X$를 잡는다. 증명은 세 단계다: (1) $g$를 $g_1|_A=\\mathrm{id}$인 $g_1$으로 잇는 호모토피 만들기, (2) $g_1f\\simeq\\mathrm{id}$ rel $A$, (3) $fg_1\\simeq\\mathrm{id}$ rel $A$.",
+            "(1) $h_t:X\\to X$를 $gf=h_0$에서 $\\mathrm{id}=h_1$로 가는 호모토피라 하자. $f|_A=\\mathrm{id}$이므로 $h_t|_A$는 $g|_A$에서 $\\mathrm{id}$로 가는 호모토피로 볼 수 있다. $(Y,A)$가 HEP를 가지므로 이를 확장해 $g=g_0$에서 $g_1|_A=\\mathrm{id}$인 $g_1$까지의 호모토피 $g_t:Y\\to X$를 얻는다.",
+            "(2) $g_1f$에서 $\\mathrm{id}$로 가는 호모토피를 $k_t=g_{1-2t}f$ ($0\\le t\\le\\tfrac12$), $k_t=h_{2t-1}$ ($\\tfrac12\\le t\\le1$)로 정의한다($t=\\tfrac12$에서 $g_0f=gf=h_0$로 두 정의가 일치). $f|_A=\\mathrm{id}$이고 $A$ 위에서 $g_t=h_t$이므로 $k_t|_A$는 항등에서 시작해 항등으로 끝나며 후반부가 전반부를 되짚는다: $A$ 위에서 $k_t=k_{1-t}$.",
+            "(2 계속) '호모토피의 호모토피' $k_{tu}:A\\to X$를 매개변수 사각형 $I\\times I$($t$ 가로, $u$ 세로) 위의 'V'자 도식으로 정의한다. 아래변에서 $k_{t0}=k_t|_A$; V자 아래에서는 $k_{tu}$를 $u$에 무관하게, V자 위에서는 $t$에 무관하게 둔다($A$ 위에서 $k_t=k_{1-t}$이므로 모순 없음). $A$ 위에서 $k_0=\\mathrm{id}$이므로 사각형의 좌·우·상 변에서 $k_{tu}=\\mathrm{id}$.",
+            "(2 계속) $(X,A)$가 HEP를 가지므로 $(X\\times I,A\\times I)$도 HEP를 가진다(정의 직후의 참고). $k_{tu}$를 $k_t|_A$의 호모토피로 보아 $k_{tu}:A\\to X$를 $k_{tu}:X\\to X$($k_{t0}=k_t$)로 확장하고, 이 확장을 좌·상·우 변으로 제한하면 $g_1f\\simeq\\mathrm{id}$ rel $A$.",
+            "(3) $g_1\\simeq g$이므로 $fg_1\\simeq fg\\simeq\\mathrm{id}$. (1),(2)를 쌍 $(f,g)$ 대신 $(g_1,f)$로 반복하면 $f_1|_A=\\mathrm{id}$이고 $f_1g_1\\simeq\\mathrm{id}$ rel $A$인 $f_1:X\\to Y$를 얻는다. 그러면 $f_1\\simeq f_1(g_1f)=(f_1g_1)f\\simeq f$ rel $A$이므로 $fg_1\\simeq f_1g_1\\simeq\\mathrm{id}$ rel $A$. 따라서 $f$는 rel $A$ 호모토피 동치. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 0.20 (포함사상이 호모토피 동치이면 변형수축)",
+          "formal_statement": "$(X,A)$가 HEP를 만족하고 포함사상 $A\\hookrightarrow X$가 호모토피 동치이면, $A$는 $X$의 변형수축(deformation retract)이다.",
+          "idea_behind_proof": "명제 0.19를 포함사상 $A\\hookrightarrow X$에 그대로 적용하면 된다 — 포함사상은 $A$ 위에서 자동으로 항등이므로 가설이 딱 맞는다.",
+          "proof_steps": [
+            "1단계: 포함사상 $i:A\\hookrightarrow X$는 $A$ 위에서 항등이고 가정에 의해 호모토피 동치다. 명제 0.19를 적용하면 $i$는 rel $A$ 호모토피 동치.",
+            "2단계: 그 rel $A$ 호모토피 역 $r:X\\to A$는 $A$ 위에서 항등인 축약이며 $ir\\simeq\\mathrm{id}_X$ rel $A$. 이는 곧 $X$의 $A$로의 변형수축이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 0.21 (0.1의 약속을 갚음)",
+          "formal_statement": "사상 $f:X\\to Y$가 호모토피 동치일 필요충분조건은 $X$가 사상원기둥 $M_f$의 변형수축인 것이다. 따라서 두 공간 $X,Y$가 호모토피 동치일 필요충분조건은 $X$와 $Y$를 모두 변형수축 부분공간으로 담는 제3의 공간이 존재하는 것이다. (이것이 0.1에서 미뤄 둔 사실이다.)",
+          "idea_behind_proof": "사상원기둥이 무대다. $M_f$ 안에는 두 포함 $i:X\\hookrightarrow M_f$, $j:Y\\hookrightarrow M_f$와 표준 축약 $r:M_f\\to Y$가 있고 $f=ri$, $i\\simeq jf$가 성립한다. $j,r$는 이미 호모토피 동치($M_f\\simeq Y$)이므로 $f$가 호모토피 동치인지는 $i$가 그러한지와 동치가 된다. 그리고 $(M_f,X)$는 예 0.15로 HEP를 가지므로 따름정리 0.20을 적용하면 '$i$가 호모토피 동치 ⟺ $X$가 $M_f$의 변형수축'이 나온다.",
+          "proof_steps": [
+            "1단계: $M_f$에서 포함 $i:X\\hookrightarrow M_f$, $j:Y\\hookrightarrow M_f$와 표준 축약 $r:M_f\\to Y$에 대해 $f=ri$, $i\\simeq jf$. $M_f$는 $Y$로 변형수축하므로 $j,r$는 호모토피 동치.",
+            "2단계: 호모토피 동치의 합성·호모토피 불변성에 의해 $f=ri$가 호모토피 동치일 필요충분조건은 $i$가 호모토피 동치인 것.",
+            "3단계: $(M_f,X)$는 $M_f$ 안 $X$의 근방 $X\\times[0,\\tfrac12]$을 사상원기둥 근방으로 삼아 예 0.15에 의해 HEP를 가진다. 따름정리 0.20을 적용하면 '$i$가 호모토피 동치 ⟺ $X$가 $M_f$의 변형수축'.",
+            "4단계: 두 결과를 합치면 '$f$가 호모토피 동치 ⟺ $X$가 $M_f$의 변형수축'. $M_f$는 항상 $Y$로도 변형수축하므로, $M_f$가 $X$와 $Y$를 모두 변형수축으로 담는 제3의 공간이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약(retract)이면 $(X,A)$가 HEP를 가짐을 정의에 따라 직접 보여라(명제의 쉬운 방향).",
+          "hint": "축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$이 주어졌다. 확장해야 할 임의의 사상 $\\varphi:X\\times\\{0\\}\\cup A\\times I\\to Y$를 $r$와 어떻게 합성하면 $X\\times I$ 위로 확장되는지 생각하라. $r$가 부분공간 위에서 무엇을 하는지 기억하라.",
+          "solution": "축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$이 있다고 하자. HEP를 보이려면 임의의 사상 $\\varphi:X\\times\\{0\\}\\cup A\\times I\\to Y$가 $X\\times I\\to Y$로 확장됨을 보이면 된다. $\\Phi=\\varphi\\circ r:X\\times I\\to Y$로 정의하자. $r$는 축약이므로 부분공간 $X\\times\\{0\\}\\cup A\\times I$ 위에서 항등, 즉 그 위의 점 $z$에 대해 $\\Phi(z)=\\varphi(r(z))=\\varphi(z)$. 따라서 $\\Phi$는 $\\varphi$의 확장이고 $(X,A)$는 HEP를 가진다. (거꾸로 HEP ⟹ 축약은, 항등사상 $\\mathrm{id}:X\\times\\{0\\}\\cup A\\times I\\to X\\times\\{0\\}\\cup A\\times I$을 확장하면 그 확장이 곧 축약임에서 나온다.) 요점: HEP의 '확장'은 축약과의 합성이라는 기계적 조작으로 환원된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$(X,A)$가 HEP를 가지면 임의의 공간 $Z$에 대해 $(X\\times Z,\\ A\\times Z)$도 HEP를 가짐을 축약 특징화를 이용해 보여라.",
+          "hint": "HEP ⟺ '$X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약'을 쓰라. 그 축약을 $Z$와 곱한 뒤, 좌표의 순서를 바꿔 $(X\\times Z)\\times I$와 $(X\\times Z)\\times\\{0\\}\\cup(A\\times Z)\\times I$ 꼴로 다시 읽어라.",
+          "solution": "명제(HEP ⟺ 축약)에 의해 축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$이 존재한다. $Z$와 곱하면 $r\\times\\mathrm{id}_Z:\\ X\\times I\\times Z\\to (X\\times\\{0\\}\\cup A\\times I)\\times Z$을 얻는다. 좌표를 재배열하면 $X\\times I\\times Z\\cong (X\\times Z)\\times I$이고 $(X\\times\\{0\\}\\cup A\\times I)\\times Z\\cong (X\\times Z)\\times\\{0\\}\\cup (A\\times Z)\\times I$이다. 이 동일시 아래에서 $r\\times\\mathrm{id}_Z$는 $(X\\times Z)\\times I$를 $(X\\times Z)\\times\\{0\\}\\cup(A\\times Z)\\times I$로 보내는 축약이다(부분공간 위에서 항등임은 $r$가 그러함에서 유지된다). 다시 명제를 적용하면 $(X\\times Z,A\\times Z)$가 HEP를 가진다. 이 사실은 정의에서 직접 확장 문제를 풀려 하면 다루기 까다롭지만, 축약 언어로 옮기면 곱과 좌표 재배열만으로 즉시 나온다 — 축약 특징화의 유용함을 보여 주는 예다."
+        },
+        {
+          "type": "ox",
+          "question": "$X$가 하우스도르프(Hausdorff)일 때 $(X,A)$가 HEP를 가지면 $A$는 반드시 $X$의 닫힌 부분공간이다.",
+          "answer": "O",
+          "explanation": "참이다. HEP ⟺ 축약 $r:X\\times I\\to X\\times\\{0\\}\\cup A\\times I$의 존재이고, 이 축약을 $X\\times I\\to X\\times I$로 볼 때 그 상은 고정점 집합 $\\{z:r(z)=z\\}$다. 하우스도르프 공간에서 연속사상의 고정점 집합은 닫혀 있으므로 $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$에서 닫히고, 따라서 $A$가 $X$에서 닫힌다."
+        },
+        {
+          "type": "ox",
+          "question": "$A$가 $X$의 닫힌 부분공간이기만 하면 쌍 $(X,A)$는 항상 HEP를 만족한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 닫힘은 (하우스도르프에서) HEP의 필요조건일 뿐 충분조건이 아니다. 반례로 $A=\\{0,1,\\tfrac12,\\tfrac13,\\tfrac14,\\dots\\}\\subset I$인 쌍 $(I,A)$는 $A$가 닫혀 있지만 축약 $I\\times I\\to I\\times\\{0\\}\\cup A\\times I$이 존재하지 않아 HEP가 실패한다. 원인은 $0$ 근방에서 점들이 무한히 몰리는 나쁜 국소 구조다. 좋은 국소 구조(예: 예 0.15의 사상원기둥 근방, 명제 0.16의 CW 쌍)에서는 HEP가 성립한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원은 0.1·0.4에서 '증명은 나중에'로 미뤄 둔 여러 사실을 실제로 증명한다. HEP가 어떻게 그 모든 증명의 공통 엔진이 되는지, 그리고 명제 0.16·0.17·0.18·0.21이 각각 앞의 어떤 약속을 갚는지 설명하라.",
+          "hint": "먼저 HEP를 실제로 쓸 수 있게 만드는 명제가 무엇인지 찾아라(어떤 쌍이 HEP를 갖는가?). 그다음 각 명제가 0.4의 기준 1·기준 2, 또는 0.1의 미뤄 둔 사실 중 무엇을 증명하는지 대응시켜라. 축약 특징화가 '확장'을 어떻게 기계적 조작으로 바꾸는지도 언급하라.",
+          "answer": "HEP는 이 절의 유일한 기술적 엔진이며, 그 힘은 축약 특징화에서 나온다: $(X,A)$가 HEP를 가짐 ⟺ $X\\times\\{0\\}\\cup A\\times I$가 $X\\times I$의 축약. 이 한 줄이 '호모토피를 확장하라'는 문제를 '축약과 합성하라'는 기계적 조작으로 바꿔 준다. 엔진을 실제로 켜 주는 것은 명제 0.16으로, 모든 CW 쌍이 HEP를 가짐을 보인다(각 $D^n\\times I$의 반지름 사영 축약을 뼈대를 따라 조립하고, 약위상으로 연속성을 확보). 그 위에서 약속들이 갚인다. 명제 0.17은 0.4의 기준 1(수축가능한 부분복합체 붕괴는 호모토피 동치)을 증명한다 — $A$의 수축을 HEP로 $f_t:X\\to X$로 확장한 뒤 몫에서 역사상 $g$를 읽어 낸다. 명제 0.18은 0.4의 기준 2(호모토픽한 부착사상은 호모토피 동치를 준다)를 rel $X_0$으로 정련해 증명한다 — 호모토피 $F$로 만든 두꺼운 공간 $X_0\\sqcup_F(X_1\\times I)$을 명제 0.16의 축약으로 양 끝으로 변형수축시킨다. 마지막으로 명제 0.19(+따름정리 0.20)는 '$A$ 위에서 항등인 호모토피 동치'를 '변형수축'으로 승격시키고, 따름정리 0.21이 이를 $(M_f,X)$에 적용해 'f가 호모토피 동치 ⟺ X가 $M_f$의 변형수축'을 얻는다 — 이것이 0.1에서 미뤄 둔 사실, 곧 '두 공간이 호모토피 동치일 필요충분조건은 둘을 함께 변형수축으로 담는 제3의 공간이 존재함'을 마침내 증명한다. 요약하면 HEP → (0.16이 사용 가능하게 함) → (0.17·0.18이 두 기준을 갚음) → (0.19·0.20·0.21이 0.1의 약속을 갚음)."
+        }
+      ]
+    }
+  ]
+}
