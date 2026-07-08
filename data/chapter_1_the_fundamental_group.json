@@ -1678,6 +1678,567 @@
           "answer": "올림은 원 위의 '몇 바퀴 감았는가'라는 기하 정보를 직선 위 경로의 끝점이라는 정수로 정확히 번역한다. (a) 경로의 유일한 올림과 (b) 호모토피의 유일한 올림 덕분에, 서로 다른 감음수의 고리는 결코 호모토픽할 수 없고(단사) 모든 감음수가 실현되어(전사) $\\Phi:\\mathbb{Z}\\to\\pi_1(S^1)$이 동형이 된다. 핵심 결론은 $\\pi_1(S^1)\\ne0$ — 원을 한 바퀴 이상 감는 고리는 원 안에서 결코 수축되지 않는다는 것이다. 세 응용은 모두 같은 모순을 만든다: 어떤 고리가 한편으로는 자명해야 하고(다항식의 $f_0$이 상수, 적도 고리 $\\eta$가 $S^2$에서 자명, 되추림을 통해 $S^1$ 고리가 수축) 다른 한편으로는 감음수가 $0$이 아니어야 한다. 만약 $\\pi_1(S^1)=0$이었다면 '감음수가 $0$이 아님'이라는 절반이 무너져 세 정리가 모두 성립하지 못한다. 즉 '원에는 지울 수 없는 구멍이 하나 있다'는 단 하나의 대수적 사실이 세 정리를 떠받치는 공통 엔진이다."
         }
       ]
+    },
+    {
+      "section_title": "1.1.3 Induced Homomorphisms — 유도 준동형과 함자성",
+      "step1_big_picture": {
+        "context": "1.1.2에서 $\\pi_1(S^1)\\cong\\mathbb{Z}$(정리 1.7)와 곱공식(명제 1.12)으로 처음으로 자명하지 않은 기본군을 계산했다. 그런데 기본군이 '함자(functor)'로서 힘을 발휘하려면 공간뿐 아니라 사상도 옮겨야 한다. 이 절은 밑점을 보존하는 사상 $\\varphi$가 군 준동형 $\\varphi_*$를 유도함을 보이고, 그 두 기본 성질 $(\\varphi\\psi)_*=\\varphi_*\\psi_*$와 $\\mathrm{id}_*=\\mathrm{id}$(함자성)를 확립한다. 이 함자성 하나로 위상동형은 동형을, 되추림은 단사(명제 1.17)를, 호모토피 동치는 동형(명제 1.18)을 자동으로 유도한다. 그 위력을 $\\pi_1(S^n)=0$($n\\ge2$, 명제 1.14), $\\pi_1(\\mathbb{R}^n-\\{x\\})$(예제 1.15), 그리고 $\\mathbb{R}^2\\not\\cong\\mathbb{R}^n$($n\\ne2$, 따름정리 1.16)로 보인다. 증명 곳곳에서 1.1.1의 명제 1.6(단순연결의 특징)과 밑점 변경 동형 $\\beta_h$가 재사용된다 — 특히 보조정리 1.19와 명제 1.18은 $\\beta_h$ 없이는 성립하지 않는다.",
+        "hidden_intuition": "함자성을 '충실한 번역기'로 상상하자. 위상의 세계에서 벌어지는 일(합성·항등·위상동형·되추림·변형)을 군의 세계로 한 치의 왜곡 없이 옮긴다. 이 번역이 충실하기에 반대 방향 추론이 가능해진다: 어떤 위상적 사상(예: $D^2$에서 $S^1$으로의 되추림)이 존재한다면 번역된 대수적 사상($\\mathbb{Z}$를 $0$ 안으로 넣는 단사 준동형)도 존재해야 하는데, 그런 군 준동형이 불가능하므로 처음의 위상적 사상도 불가능하다. 즉 '대수의 불가능'이 '위상의 불가능'을 증명한다. 밑점 문제는 성가신 각주처럼 보이지만 실은 깊다: 밑점을 옮기는 호모토피는 도착 군 자체를 바꿔 버리는데, 그 어긋남을 정확히 메우는 것이 밑점의 자취 $h$를 따라 켤레를 취하는 $\\beta_h$다(보조정리 1.19). 이 보정 덕분에 호모토피 동치에서는 밑점 조건을 아예 잊어도 된다(명제 1.18) — 위상적으로 같은 모양이면 어느 점을 밑점으로 삼든 같은 군이 나온다는 안심되는 결론이다. $\\pi_1(S^n)=0$($n\\ge2$)의 직관은 '2차원 이상의 구에는 고리가 걸릴 구멍이 없다'는 것이다: 어떤 고리든 구 위의 한 점을 비켜 가게 밀어낼 수 있고, 점 하나를 뺀 구는 $\\mathbb{R}^n$처럼 납작하게 펴져 수축한다. 오직 원($S^1$)만이 고리를 가두는 1차원 구멍을 지닌다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                -2.3,
+                0.3
+              ],
+              "r": 0.75
+            },
+            {
+              "shape": "point",
+              "at": [
+                -2.3,
+                -0.45
+              ]
+            },
+            {
+              "shape": "circle",
+              "center": [
+                2.3,
+                0.3
+              ],
+              "r": 0.75
+            },
+            {
+              "shape": "point",
+              "at": [
+                2.3,
+                -0.45
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.2,
+                0.1
+              ],
+              "to": [
+                1.2,
+                0.1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.3,
+                0.3
+              ],
+              "text": "f"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.25,
+                0.3
+              ],
+              "text": "phi f"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.35,
+                -0.78
+              ],
+              "text": "x_0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.3,
+                -0.78
+              ],
+              "text": "y_0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                0.3
+              ],
+              "text": "phi"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.3,
+                1.35
+              ],
+              "text": "X"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.3,
+                1.35
+              ],
+              "text": "Y"
+            }
+          ],
+          "caption": "밑점을 보존하는 사상 $\\varphi:(X,x_0)\\to(Y,y_0)$은 고리 $f$를 고리 $\\varphi f$로 보낸다. 이로써 유도 준동형 $\\varphi_*[f]=[\\varphi f]$가 정의되고, 합성과 항등을 존중해 $\\pi_1$을 함자로 만든다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (유도 준동형 $\\varphi_*$)",
+          "formal_statement": "밑점을 보존하는 사상 $\\varphi:(X,x_0)\\to(Y,y_0)$(즉 $\\varphi(x_0)=y_0$)에 대해, 유도 준동형(induced homomorphism) $\\varphi_*:\\pi_1(X,x_0)\\to\\pi_1(Y,y_0)$을 고리를 $\\varphi$와 합성하여 $\\varphi_*[f]=[\\varphi f]$로 정의한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (유도 준동형의 기본 성질과 함자성)",
+          "formal_statement": "유도 준동형은 다음을 만족한다. (i) 잘 정의됨: 류에만 의존한다. (ii) 준동형: $\\varphi_*([f][g])=\\varphi_*[f]\\,\\varphi_*[g]$. (iii) 함자성: 합성 $(X,x_0)\\xrightarrow{\\psi}(Y,y_0)\\xrightarrow{\\varphi}(Z,z_0)$에 대해 $(\\varphi\\psi)_*=\\varphi_*\\psi_*$이고, 항등사상에 대해 $\\mathrm{id}_*=\\mathrm{id}$이다.",
+          "idea_behind_proof": "세 성질 모두 '합성이 곱과 호모토피를 존중한다'는 한 가지 사실의 그림자다. $\\varphi$를 고리에 씌우는 것 자체가 합성이므로, 곱 $f\\cdot g$의 분수구간 정의를 그대로 보존하고($\\varphi(f\\cdot g)=(\\varphi f)\\cdot(\\varphi g)$), 합성의 결합성 $(\\varphi\\psi)f=\\varphi(\\psi f)$가 곧 $(\\varphi\\psi)_*=\\varphi_*\\psi_*$를 준다.",
+          "proof_steps": [
+            "(i) $f_0\\simeq f_1$이 밑점 고리들의 호모토피 $f_t$로 주어지면 $\\varphi f_t$는 $y_0$ 밑점 고리들의 호모토피이므로 $\\varphi_*[f_0]=[\\varphi f_0]=[\\varphi f_1]=\\varphi_*[f_1]$.",
+            "(ii) $\\varphi(f\\cdot g)$와 $(\\varphi f)\\cdot(\\varphi g)$는 둘 다 $0\\le s\\le\\tfrac12$에서 $\\varphi f(2s)$, $\\tfrac12\\le s\\le1$에서 $\\varphi g(2s-1)$이라 같은 함수다. 따라서 $\\varphi_*[f\\cdot g]=[(\\varphi f)\\cdot(\\varphi g)]=\\varphi_*[f]\\,\\varphi_*[g]$.",
+            "(iii) $(\\varphi\\psi)f=\\varphi(\\psi f)$(합성의 결합성)이므로 $(\\varphi\\psi)_*[f]=[\\varphi\\psi f]=\\varphi_*[\\psi f]=\\varphi_*\\psi_*[f]$. 또 $\\mathrm{id}\\,f=f$이라 $\\mathrm{id}_*=\\mathrm{id}$. 이 두 성질이 기본군을 함자(functor)로 만든다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 (위상동형은 동형을 유도한다)",
+          "formal_statement": "$\\varphi:X\\to Y$가 위상동형사상이고 그 역사상이 $\\psi$이면, $\\varphi_*:\\pi_1(X,x_0)\\to\\pi_1(Y,\\varphi x_0)$은 역사상 $\\psi_*$를 갖는 동형사상이다. 따라서 기본군은 위상동형 불변량(topological invariant)이다.",
+          "idea_behind_proof": "함자성에 위상동형 관계 $\\varphi\\psi=\\mathrm{id},\\ \\psi\\varphi=\\mathrm{id}$를 그대로 대입하는 것이 전부다.",
+          "proof_steps": [
+            "$\\varphi_*\\psi_*=(\\varphi\\psi)_*=\\mathrm{id}_*=\\mathrm{id}$이고 마찬가지로 $\\psi_*\\varphi_*=(\\psi\\varphi)_*=\\mathrm{id}$. 따라서 $\\varphi_*$는 역사상 $\\psi_*$를 갖는 동형사상이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.14 ($\\pi_1(S^n)=0$, $n\\ge2$)",
+          "formal_statement": "$n\\ge2$이면 $\\pi_1(S^n)=0$이다. 즉 $S^n$($n\\ge2$)은 단순연결이다.",
+          "idea_behind_proof": "핵심은 '고리가 $S^n$의 어떤 점 $x$를 아예 지나지 않게 만들 수 있다'는 것이다. 그러면 $S^n-\\{x\\}\\cong\\mathbb{R}^n$이 단순연결이라 고리가 수축한다. 문제는 고리가 $x$ 근처를 아주 복잡하게(심지어 공간채움곡선처럼) 지날 수 있다는 점인데, $n\\ge2$이면 작은 공 $B$ 안에서 $x$를 지나는 조각들을 $B$의 경계($(n-1)$차원 구, $n\\ge2$이면 경로연결)로 밀어내 $x$를 피하게 할 수 있다. 여기서 1.1.1의 명제 1.6(단순연결 공간에서 같은 끝점 경로의 호모토피류가 유일함)이 조각을 갈아 끼우는 근거로 쓰인다. 이 '밀어내기' 기법은 연습문제 18·19에서 셀 부착·CW 복합체로 확장된다.",
+          "proof_steps": [
+            "$f$를 밑점 $x_0$에서의 $S^n$ 고리라 하자. $f$의 상이 어떤 점 $x\\ne x_0$을 지나지 않으면, $S^n-\\{x\\}\\cong\\mathbb{R}^n$은 단순연결이므로 $f$는 널호모토픽(nullhomotopic)이다. 따라서 $f$를 비전사(nonsurjective)로 호모토프하면 충분하다.",
+            "$x\\ne x_0$ 둘레의 작은 열린 공 $B$를 잡자. $f^{-1}(B)$는 $(0,1)$의 열린집합이라 서로소 열린구간 $(a_i,b_i)$들의 합집합이고, 콤팩트집합 $f^{-1}(x)$는 그중 유한개에 덮인다.",
+            "$f^{-1}(x)$를 만나는 한 구간 $(a_i,b_i)$에 대해 $f_i=f|[a_i,b_i]$는 $\\bar B$ 안에 있고 그 끝점 $f(a_i),f(b_i)$는 $B$의 경계에 놓인다. $n\\ge2$이면 그 경계는 $(n-1)$차원 구로 경로연결이므로, $f(a_i)$에서 $f(b_i)$로 가되 $x$를 피하는 경로 $g_i$(예: 경계 위의 경로)를 잡을 수 있다.",
+            "$\\bar B$는 $\\mathbb{R}^n$의 볼록집합과 위상동형이라 단순연결이므로 명제 1.6에 의해 $f_i\\simeq g_i$(끝점 고정). 이 호모토피로 $f_i$를 $g_i$로 갈아 끼우면 나머지는 그대로 둔 채 $f$를 변형할 수 있다.",
+            "$f^{-1}(x)$를 만나는 유한개의 구간마다 이 과정을 반복하면, 원래 $f$와 호모토픽하면서 상이 $x$를 지나지 않는 고리 $g$를 얻는다. 1단계에 의해 $g$는 널호모토픽, 따라서 $\\pi_1(S^n)=0$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -0.94,
+                  0.34
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  0.94,
+                  0.34
+                ]
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  -0.94,
+                  0.34
+                ],
+                "to": [
+                  0.94,
+                  0.34
+                ],
+                "bulge": 0.75
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -0.94,
+                  0.34
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.94,
+                  0.34
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.05,
+                  -0.22
+                ],
+                "text": "x"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.62
+                ],
+                "text": "f_i"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.05
+                ],
+                "text": "g_i"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.05,
+                  -0.7
+                ],
+                "text": "B"
+              }
+            ],
+            "caption": "$n\\ge2$일 때, $x$를 지나는 조각 $f_i$(아래로 꺾인 경로)를 경계를 따라 $x$를 피하는 $g_i$(위쪽 호)로 갈아 끼운다. $\\bar B$가 단순연결이라 명제 1.6으로 $f_i\\simeq g_i$."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.15 ($\\pi_1(\\mathbb{R}^n-\\{x\\})$)",
+          "formal_statement": "점 $x\\in\\mathbb{R}^n$에 대해 여집합 $\\mathbb{R}^n-\\{x\\}$는 $S^{n-1}\\times\\mathbb{R}$와 위상동형이다. 따라서 명제 1.12로 $\\pi_1(\\mathbb{R}^n-\\{x\\})\\cong\\pi_1(S^{n-1})\\times\\pi_1(\\mathbb{R})$이고, 결과적으로 $\\pi_1(\\mathbb{R}^n-\\{x\\})$은 $n=2$이면 $\\mathbb{Z}$, $n>2$이면 자명군이다.",
+          "idea_behind_proof": "$x$를 원점으로 두고 극좌표로 분해하면, 방향은 $S^{n-1}$, 반지름은 $(0,\\infty)\\cong\\mathbb{R}$을 이룬다 — 이것이 위상동형 $S^{n-1}\\times\\mathbb{R}$이다. 나머지는 명제 1.12·1.14와 정리 1.7의 대입이다.",
+          "proof_steps": [
+            "$x=0$으로 두면 $y\\mapsto(y/|y|,\\,|y|)$는 $\\mathbb{R}^n-\\{0\\}\\to S^{n-1}\\times(0,\\infty)$의 위상동형이고 $(0,\\infty)\\cong\\mathbb{R}$이다.",
+            "명제 1.12로 $\\pi_1(\\mathbb{R}^n-\\{0\\})\\cong\\pi_1(S^{n-1})\\times\\pi_1(\\mathbb{R})=\\pi_1(S^{n-1})\\times0\\cong\\pi_1(S^{n-1})$.",
+            "$n=2$: $\\pi_1(S^1)\\cong\\mathbb{Z}$(정리 1.7). $n>2$: $n-1\\ge2$이므로 $\\pi_1(S^{n-1})=0$(명제 1.14). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.16 ($\\mathbb{R}^2\\not\\cong\\mathbb{R}^n$, $n\\ne2$)",
+          "formal_statement": "$\\mathbb{R}^2$은 $n\\ne2$인 어떤 $\\mathbb{R}^n$과도 위상동형이 아니다.",
+          "idea_behind_proof": "위상동형은 점 하나를 빼도 위상동형을 보존한다. 그러니 한 점을 뺀 여집합의 위상적 불변량을 비교하면 된다. $n=1$은 경로성분 개수로, $n>2$은 예제 1.15가 준 기본군으로 구별된다.",
+          "proof_steps": [
+            "위상동형 $f:\\mathbb{R}^2\\to\\mathbb{R}^n$이 있다고 가정하면 $f$는 위상동형 $\\mathbb{R}^2-\\{0\\}\\to\\mathbb{R}^n-\\{f(0)\\}$을 준다.",
+            "$n=1$: $\\mathbb{R}^2-\\{0\\}$은 경로연결이나 $\\mathbb{R}^1-\\{f(0)\\}$은 두 성분으로 갈라져 경로연결이 아니다. 모순.",
+            "$n>2$: 예제 1.15로 $\\pi_1(\\mathbb{R}^2-\\{0\\})\\cong\\mathbb{Z}$이지만 $\\pi_1(\\mathbb{R}^n-\\{f(0)\\})=0$이다. 위상동형은 기본군의 동형을 유도해야 하는데 $\\mathbb{Z}\\not\\cong0$이라 모순. 따라서 그런 위상동형은 없다. (일반 $\\mathbb{R}^m\\not\\cong\\mathbb{R}^n$, $m\\ne n$은 고차 호모토피군이나 호몰로지로 정리 2.19에서 증명된다.) $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.17 (되추림·변형되추림과 유도사상)",
+          "formal_statement": "공간 $X$가 부분공간 $A$ 위로 되추림(retract)되면, 포함사상 $i:A\\hookrightarrow X$가 유도하는 $i_*:\\pi_1(A,x_0)\\to\\pi_1(X,x_0)$은 단사다. 나아가 $A$가 $X$의 변형되추림(deformation retract)이면 $i_*$는 동형사상이다.",
+          "idea_behind_proof": "되추림 $r:X\\to A$는 $ri=\\mathrm{id}_A$를 만족한다. 함자성을 씌우면 $r_*i_*=\\mathrm{id}$가 되어 $i_*$가 왼쪽 역사상을 가지므로 자동으로 단사가 된다 — 위상 관계 $ri=\\mathrm{id}$를 대수 관계 $r_*i_*=\\mathrm{id}$로 옮기는 함자성의 전형적 사용이다. 변형되추림은 여기에 '모든 고리를 $A$ 안으로 밀어 넣는' 호모토피를 더해 전사성까지 얻는다.",
+          "proof_steps": [
+            "되추림 $r:X\\to A$는 $ri=\\mathrm{id}_A$. 함자성으로 $r_*i_*=(ri)_*=\\mathrm{id}$. 왼쪽 역사상을 가진 $i_*$는 단사다.",
+            "$r_t:X\\to X$가 $A$ 위로의 변형되추림($r_0=\\mathrm{id},\\ r_t|A=\\mathrm{id},\\ r_1(X)\\subset A$)이라 하자. $A$의 밑점 $x_0$ 고리 $f$에 대해 $r_t f$는 $f$에서 $A$ 안의 고리 $r_1 f$로 가는 호모토피이며 $r_t|A=\\mathrm{id}$이라 밑점을 $x_0$에 고정한다.",
+            "따라서 $X$의 임의의 고리류가 $A$의 고리류에서 오므로 $i_*$는 전사이기도 하다. 단사·전사이므로 $i_*$는 동형사상이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($S^1$은 $D^2$의 되추림이 아니다; 되추림의 군론적 대응)",
+          "formal_statement": "명제 1.17로부터 $S^1$은 $D^2$의 되추림이 아니다(브라우어 정리 증명에서 이미 본 사실): 포함이 유도하는 $\\pi_1(S^1)\\to\\pi_1(D^2)$은 $\\mathbb{Z}\\to0$인 준동형이라 결코 단사일 수 없다. 군론적으로 되추림에 대응하는 것은 군 $G$에서 부분군 $H$로 가되 $H$ 위에서 항등인 준동형 $\\rho:G\\to H$이다. 이런 $\\rho$의 존재는 $H$에 강한 조건이다: $H$가 정규부분군이면 $G\\cong H\\times\\ker\\rho$(직접곱), 정규가 아니면 $G$는 $H$와 $\\ker\\rho$의 반직접곱(semi-direct product)이 된다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (밑점 보존 호모토피 불변성)",
+          "formal_statement": "$\\varphi_t:(X,x_0)\\to(Y,y_0)$가 밑점을 보존하는 호모토피(모든 $t$에서 $\\varphi_t(x_0)=y_0$)이면 $\\varphi_{0*}=\\varphi_{1*}$이다.",
+          "proof_steps": [
+            "임의의 밑점 고리 $f$에 대해 $\\varphi_t f$는 $y_0$에 밑점을 둔 고리들의 호모토피이므로 $\\varphi_{0*}[f]=[\\varphi_0 f]=[\\varphi_1 f]=\\varphi_{1*}[f]$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.19 (밑점을 고정하지 않는 호모토피)",
+          "formal_statement": "$\\varphi_t:X\\to Y$가 호모토피이고 $h(t)=\\varphi_t(x_0)$가 밑점의 자취로 이루는 경로라 하자. 그러면 $\\varphi_{0*}=\\beta_h\\,\\varphi_{1*}:\\pi_1(X,x_0)\\to\\pi_1(Y,\\varphi_0(x_0))$이 성립한다. (여기서 $\\beta_h$는 1.1.1의 밑점 변경 동형사상 $[\\,\\gamma\\,]\\mapsto[h\\cdot\\gamma\\cdot\\bar h]$.)",
+          "idea_behind_proof": "$\\varphi_t$가 밑점을 고정하지 않으면 $\\varphi_{0*}$와 $\\varphi_{1*}$의 도착 군이 서로 다르다($\\varphi_0(x_0)$ vs $\\varphi_1(x_0)$). 이 둘을 잇는 다리가 밑점의 자취 $h$이고, $h$를 따라 켤레($=\\beta_h$)를 취하면 정확히 보정된다. 증명은 고리 $\\varphi_t f$를 $h$의 앞부분 $h_t$로 감싸 밑점을 항상 $\\varphi_0(x_0)$에 묶어 두는 호모토피 $h_t\\cdot(\\varphi_t f)\\cdot\\bar h_t$를 만드는 것이다.",
+          "proof_steps": [
+            "$h_t(s)=h(ts)$를 $h$를 $[0,t]$로 제한해 $[0,1]$로 재매개화한 경로라 하자($h_0$은 상수, $h_1=h$).",
+            "$X$의 밑점 $x_0$ 고리 $f$에 대해 $t\\mapsto h_t\\cdot(\\varphi_t f)\\cdot\\bar h_t$는 모두 $\\varphi_0(x_0)$에 밑점을 둔 고리들의 호모토피다: 가운데 $\\varphi_t f$는 $\\varphi_t(x_0)=h(t)$에 밑점을 두고, $h_t,\\bar h_t$가 그것을 $\\varphi_0(x_0)$까지 데려갔다 데려온다.",
+            "$t=0$에서 이 고리는 $\\varphi_0 f$(상수 $h_0$는 무시 가능), $t=1$에서 $h\\cdot(\\varphi_1 f)\\cdot\\bar h$다. 따라서 $[\\varphi_0 f]=[h\\cdot(\\varphi_1 f)\\cdot\\bar h]=\\beta_h[\\varphi_1 f]$, 곧 $\\varphi_{0*}[f]=\\beta_h\\varphi_{1*}[f]$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  3,
+                  0.4
+                ]
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  3,
+                  0.4
+                ],
+                "bulge": 0.35,
+                "arrow": true
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  3.85,
+                  0.4
+                ],
+                "r": 0.85
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.55,
+                  0
+                ],
+                "text": "phi_0(x_0)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.7,
+                  -0.35
+                ],
+                "text": "phi_1(x_0)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.5,
+                  0.65
+                ],
+                "text": "h"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  4.85,
+                  0.4
+                ],
+                "text": "phi_1 f"
+              }
+            ],
+            "caption": "밑점을 고정하지 않는 호모토피에서 밑점은 경로 $h(t)=\\varphi_t(x_0)$를 따라 움직인다. 도착 군이 달라진 만큼을 $h$로 켤레($=\\beta_h$)를 취해 보정하여 $\\varphi_{0*}=\\beta_h\\varphi_{1*}$을 얻는다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.18 (호모토피 동치는 $\\pi_1$의 동형을 유도한다)",
+          "formal_statement": "$\\varphi:X\\to Y$가 호모토피 동치(homotopy equivalence)이면, 임의의 $x_0\\in X$에 대해 유도사상 $\\varphi_*:\\pi_1(X,x_0)\\to\\pi_1(Y,\\varphi(x_0))$은 동형사상이다. (밑점 조건은 필요 없다.)",
+          "idea_behind_proof": "호모토피 역사상 $\\psi$를 합성하면 $\\psi\\varphi\\simeq\\mathrm{id}$지만 밑점이 자취를 따라 움직이므로 $\\psi_*\\varphi_*$는 정확한 항등이 아니라 보조정리 1.19에 의해 $\\beta_h$(동형)가 된다. '동형인 합성' 사이에 낀 사상은 단사여야 한다는 순수 대수적 논법을, 밑점을 옮겨 가며 세 사상을 늘어놓아 두 번 적용하면 $\\varphi_*$가 동형임을 짜낼 수 있다.",
+          "proof_steps": [
+            "호모토피 역사상 $\\psi:Y\\to X$($\\varphi\\psi\\simeq\\mathrm{id},\\ \\psi\\varphi\\simeq\\mathrm{id}$)를 잡고 세 유도사상을 늘어놓는다: $$\\pi_1(X,x_0)\\xrightarrow{\\varphi_*}\\pi_1(Y,\\varphi x_0)\\xrightarrow{\\psi_*}\\pi_1(X,\\psi\\varphi x_0)\\xrightarrow{\\varphi_*}\\pi_1(Y,\\varphi\\psi\\varphi x_0).$$",
+            "$\\psi\\varphi\\simeq\\mathrm{id}$이므로 보조정리 1.19로 $\\psi_*\\varphi_*=\\beta_h$(어떤 $h$)이고 이는 동형이다. 특히 처음 두 사상의 합성이 동형(전단사)이므로 첫 사상 $\\varphi_*$는 단사다.",
+            "같은 논법을 둘째·셋째 사상에 적용하면 $\\varphi_*\\psi_*$도 $\\beta_{h'}$ 꼴의 동형이라 둘째 사상 $\\psi_*$가 단사다.",
+            "이제 $\\varphi_*,\\psi_*$가 모두 단사이고 그 합성 $\\psi_*\\varphi_*$가 동형(전사)이다. 합성이 전사이므로 $\\psi_*$도 전사, 따라서 $\\psi_*$는 동형이다. 그러면 $\\varphi_*=\\psi_*^{-1}\\circ(\\psi_*\\varphi_*)$가 동형들의 합성이라 동형이다. 밑점 $x_0$은 임의였으므로 증명이 끝난다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 14) 명제 1.12의 동형 $\\pi_1(X\\times Y)\\cong\\pi_1(X)\\times\\pi_1(Y)$이 두 사영 $p_1:X\\times Y\\to X,\\ p_2:X\\times Y\\to Y$에 대해 $[f]\\mapsto(p_{1*}[f],\\,p_{2*}[f])$로 주어짐을 보여라.",
+          "hint": "$X\\times Y$의 고리 $f$를 성분으로 $f(s)=(g(s),h(s))$로 적으면, $g$와 $h$가 각각 어떤 사영과 $f$의 합성인지 확인하라.",
+          "solution": "$X\\times Y$의 밑점 고리 $f$는 $f(s)=(g(s),h(s))$로 쓰이고, 여기서 $g=p_1 f$, $h=p_2 f$가 각각 성분이다. 즉 $[g]=[p_1 f]=p_{1*}[f]$, $[h]=[p_2 f]=p_{2*}[f]$. 명제 1.12의 동형은 $[f]\\mapsto([g],[h])$였으므로, 이는 정확히 $[f]\\mapsto(p_{1*}[f],p_{2*}[f])$이다. 즉 곱의 동형은 두 사영이 유도하는 준동형의 짝으로 자연스럽게 기술된다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 0.7
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.1,
+                  0.4
+                ],
+                "to": [
+                  -2.2,
+                  0.9
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.1,
+                  0.4
+                ],
+                "to": [
+                  2.2,
+                  0.9
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -2.7,
+                  1.05
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2.7,
+                  1.05
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "f"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.05
+                ],
+                "text": "X x Y"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.6,
+                  0.95
+                ],
+                "text": "p_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.6,
+                  0.95
+                ],
+                "text": "p_2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.95,
+                  1.35
+                ],
+                "text": "g=p_1 f"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.95,
+                  1.35
+                ],
+                "text": "h=p_2 f"
+              }
+            ],
+            "caption": "곱공간의 고리 $f$를 두 사영으로 눌러 얻는 성분 고리 $p_1 f,\\ p_2 f$가 동형의 두 좌표를 이룬다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 16(a)) $X=\\mathbb{R}^3$이고 $A$가 $S^1$과 위상동형인 부분공간일 때, 되추림 $r:X\\to A$이 존재하지 않음을 보여라.",
+          "hint": "명제 1.17을 대우로 쓴다. 되추림이 있으면 포함 $i:A\\hookrightarrow X$가 유도하는 $i_*$가 단사여야 한다. 두 공간의 기본군을 계산해 그 단사가 가능한지 보라.",
+          "solution": "되추림 $r:\\mathbb{R}^3\\to A$이 있다고 가정하자. 명제 1.17에 의해 포함 $i:A\\hookrightarrow\\mathbb{R}^3$이 유도하는 $i_*:\\pi_1(A)\\to\\pi_1(\\mathbb{R}^3)$은 단사여야 한다. 그런데 $\\mathbb{R}^3$은 볼록이라 단순연결이므로 $\\pi_1(\\mathbb{R}^3)=0$이고, $A\\cong S^1$이라 위상동형 불변성(위 따름정리)으로 $\\pi_1(A)\\cong\\pi_1(S^1)\\cong\\mathbb{Z}$(정리 1.7). 단사 준동형 $\\mathbb{Z}\\to0$은 존재할 수 없다($1\\in\\mathbb{Z}$의 상이 $0$이 되어 $1\\ne0$과 충돌). 모순이므로 되추림은 없다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "A ~ S^1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.55
+                ],
+                "text": "X = R^3"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.5
+                ],
+                "text": "pi_1: Z --> 0 (single, impossible)"
+              }
+            ],
+            "caption": "$A\\cong S^1$의 $\\pi_1$은 $\\mathbb{Z}$, 둘러싼 $\\mathbb{R}^3$의 $\\pi_1$은 $0$. 되추림이 강제하는 단사 $\\mathbb{Z}\\hookrightarrow0$은 불가능하다."
+          }
+        },
+        {
+          "type": "ox",
+          "question": "명제 1.14에 따르면 모든 구 $S^n$의 기본군은 자명하다.",
+          "answer": "X",
+          "explanation": "명제 1.14는 $n\\ge2$일 때만 $\\pi_1(S^n)=0$을 말한다. $n=1$인 원 $S^1$은 예외로 $\\pi_1(S^1)\\cong\\mathbb{Z}\\ne0$이다(정리 1.7). '밀어내기' 논증의 핵심 단계 — 작은 공의 경계($(n-1)$차원 구)가 경로연결이라 조각을 우회시킬 수 있다 — 가 $n-1\\ge1$, 즉 $n\\ge2$에서만 작동하기 때문이다. $S^1$에서는 경계가 두 점($S^0$)이라 우회로가 없다."
+        },
+        {
+          "type": "ox",
+          "question": "$\\varphi:X\\to Y$가 호모토피 동치이면 $\\varphi_*:\\pi_1(X,x_0)\\to\\pi_1(Y,\\varphi x_0)$은 동형이며, 이때 $\\varphi\\psi\\simeq\\mathrm{id}$의 호모토피가 반드시 밑점을 고정할 필요는 없다.",
+          "answer": "O",
+          "explanation": "명제 1.18의 핵심이 바로 이것이다. 밑점을 고정하지 않는 호모토피는 밑점을 경로 $h(t)=\\varphi_t(x_0)$를 따라 옮기지만, 보조정리 1.19가 그 어긋남을 밑점 변경 동형 $\\beta_h$로 정확히 보정해 준다. 그래서 $\\psi_*\\varphi_*=\\beta_h$(동형)가 되고, 순수 대수적 논법으로 $\\varphi_*$가 동형임을 얻는다. 결국 호모토피 동치에서는 밑점 조건을 신경 쓰지 않아도 된다."
+        },
+        {
+          "type": "conceptual",
+          "question": "유도 준동형의 두 성질 $(\\varphi\\psi)_*=\\varphi_*\\psi_*$와 $\\mathrm{id}_*=\\mathrm{id}$가 '기본군은 함자(functor)'라는 말의 핵심인 이유를 설명하고, 이 함자성이 어떻게 '공간 사이의 관계'를 '군 사이의 관계'로 옮겨 정리들(예: $\\mathbb{R}^2\\not\\cong\\mathbb{R}^n$, $S^1$은 $D^2$의 되추림이 아님)을 증명하게 해 주는지 논하라.",
+          "hint": "위상동형·되추림·호모토피 동치라는 위상적 관계를 $\\pi_1$에 통과시키면 각각 어떤 대수적 관계(동형·단사·동형)가 되는지 대응시켜 보라. 그 대수적 관계가 군론적으로 불가능하다면?",
+          "answer": "함자성이란 '합성을 합성으로, 항등을 항등으로' 옮긴다는 두 규칙이다. 이로부터 위상동형은 동형($\\varphi_*\\psi_*=\\mathrm{id}_*=\\mathrm{id}$)으로, 되추림은 단사($r_*i_*=\\mathrm{id}$)로, 호모토피 동치는 동형(명제 1.18)으로 자동 번역된다. 즉 $\\pi_1$은 위상적 구조를 군의 구조로 충실히 옮기는 번역기다. 증명 전략은 늘 대우다: 목표 위상 관계(예: 되추림 $D^2\\to S^1$, 또는 위상동형 $\\mathbb{R}^2\\cong\\mathbb{R}^n$)가 존재한다고 가정하면 함자성이 그것을 특정 대수적 관계(단사 $\\mathbb{Z}\\hookrightarrow0$, 또는 동형 $\\pi_1(\\mathbb{R}^2-0)\\cong\\pi_1(\\mathbb{R}^n-0)$, 곧 $\\mathbb{Z}\\cong0$)로 옮긴다. 그런데 그 대수적 관계가 군론적으로 불가능하므로 처음의 위상 관계도 존재할 수 없다. '대수의 불가능'이 '위상의 불가능'을 증명하는 이 되먹임이 대수적 위상수학의 방법론이며, 함자성은 그 되먹임이 성립하도록 보장하는 접착제다. 만약 $\\varphi_*$가 합성·항등을 존중하지 않았다면 위 등식들이 무너져 어떤 결론도 끌어낼 수 없었을 것이다."
+        }
+      ]
     }
   ]
 }

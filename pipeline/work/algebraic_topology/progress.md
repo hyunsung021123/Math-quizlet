@@ -21,7 +21,7 @@
 | 005 | [x] | 1.1 Basic Constructions | section | `005__AlgebraicTopol__1_1_BasicConstructions.txt` |
 | 006 | [x] | 1.1.1 Paths and Homotopy | section | `006__AlgebraicTopol__1_1_1_PathsandHomotopy.txt` |
 | 007 | [x] | 1.1.2 The Fundamental Group of the Circle | section | `007__AlgebraicTopol__1_1_2_TheFundamentalGroupoftheCi.txt` |
-| 008 | [ ] | 1.1.3 Induced Homomorphisms | section | `008__AlgebraicTopol__1_1_3_InducedHomomorphisms.txt` |
+| 008 | [x] | 1.1.3 Induced Homomorphisms | section | `008__AlgebraicTopol__1_1_3_InducedHomomorphisms.txt` |
 | 009 | [ ] | 1.2 Van Kampen's Theorem | section | `009__AlgebraicTopol__1_2_VanKampensTheorem.txt` |
 | 010 | [ ] | 1.2.1 Free Products of Groups | section | `010__AlgebraicTopol__1_2_1_FreeProductsofGroups.txt` |
 | 011 | [ ] | 1.2.2 The van Kampen Theorem (분할 part 1) _(원본 #011)_ | section | `011__AlgebraicTopol__1_2_2_ThevanKampenTheorem__p1.txt` |
