@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>S펜 버튼 진단</title>
+<style>
+  html, body { margin:0; padding:0; height:100%; font-family: -apple-system, sans-serif; background:#111; color:#eee; overflow:hidden; }
+  #pad {
+    height: 45vh; touch-action: none; background:#1c2b1c;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-size: 18px; padding: 12px; box-sizing:border-box; color:#9c9;
+  }
+  #pad.erase { background:#3a1c1c; color:#e99; }
+  #log {
+    height: 55vh; overflow-y:auto; font-family: monospace; font-size: 13px;
+    padding: 8px; box-sizing:border-box; white-space:pre-wrap; line-height:1.5;
+  }
+  .hit { color:#6f6; font-weight:bold; }
+  .row { border-bottom: 1px solid #333; padding: 2px 0; }
+  #bar { display:flex; gap:8px; padding:8px; background:#222; }
+  button { flex:1; padding:10px; font-size:15px; }
+</style>
+</head>
+<body>
+  <div id="pad">
+    <div>
+      ① 버튼 안 누르고 이 영역을 펜으로 그어보세요<br>
+      ② 버튼을 <b>누른 채로</b> 그어보세요<br>
+      ③ 버튼을 <b>먼저 누르고</b> 그 상태로 화면에 대 보세요<br>
+      (배경이 빨간색으로 바뀌면 buttons&amp;2 감지 성공)
+    </div>
+  </div>
+  <div id="bar"><button id="clear">로그 지우기</button></div>
+  <div id="log"></div>
+<script>
+  var pad = document.getElementById('pad');
+  var log = document.getElementById('log');
+  var n = 0;
+  function line(ev, extra){
+    n++;
+    var barrel = (ev.pointerType === 'pen') && !!(ev.buttons & 2);
+    if(barrel) pad.classList.add('erase'); else if(ev.type === 'pointerup' || ev.type === 'pointercancel') pad.classList.remove('erase');
+    var msg = '#' + n + ' ' + ev.type +
+      '  type=' + ev.pointerType +
+      '  button=' + ev.button +
+      '  buttons=' + ev.buttons +
+      (barrel ? '  <span class="hit">[buttons&2 감지됨]</span>' : '') +
+      '  pressure=' + ev.pressure.toFixed(2) +
+      (extra || '');
+    var d = document.createElement('div');
+    d.className = 'row';
+    d.innerHTML = msg;
+    log.insertBefore(d, log.firstChild);
+  }
+  ['pointerdown','pointermove','pointerup','pointercancel'].forEach(function(type){
+    pad.addEventListener(type, function(ev){
+      if(type !== 'pointermove' || n % 3 === 0) line(ev); // move는 너무 많으니 솎아서 기록
+      if(type === 'pointerdown') ev.preventDefault();
+    }, { passive:false });
+  });
+  pad.addEventListener('contextmenu', function(ev){
+    ev.preventDefault();
+    n++;
+    var d = document.createElement('div');
+    d.className = 'row';
+    d.innerHTML = '#' + n + ' <span class="hit">contextmenu 이벤트 발생!</span> (배럴 버튼이 buttons로 안 잡히고 이걸로 새는 경우가 있음)';
+    log.insertBefore(d, log.firstChild);
+  });
+  document.getElementById('clear').addEventListener('click', function(){ log.innerHTML=''; n=0; });
+  var ua = document.createElement('div');
+  ua.className = 'row';
+  ua.textContent = 'UA: ' + navigator.userAgent;
+  log.insertBefore(ua, log.firstChild);
+</script>
+</body>
+</html>
