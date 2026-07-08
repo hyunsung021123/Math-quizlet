@@ -1,0 +1,204 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.1.ex Exercises
+직전 소단원: 「2.1.6 The Equivalence of Simplicial and Singular Homology」
+[연습문제]
+Simplicial and Singular Homology
+Section 2.1
+131
+in a 1944 paper of Eilenberg, after contributions from quite a few others, particularly
+Alexander and Lefschetz. Within the next few years the rest of the basic structure
+of homology theory as we have presented it fell into place, and the ﬁrst deﬁnitive
+treatment appeared in the classic book [Eilenberg & Steenrod 1952].
+Exercises
+1. What familiar space is the quotient ∆complex of a 2 simplex [v0, v1, v2] obtained
+by identifying the edges [v0, v1] and [v1, v2], preserving the ordering of vertices?
+2. Show that the ∆complex obtained from ∆3 by performing the edge identiﬁcations
+[v0, v1] ∼[v1, v3] and [v0, v2] ∼[v2, v3] deformation retracts onto a Klein bottle.
+Find other pairs of identiﬁcations of edges that produce ∆complexes deformation
+retracting onto a torus, a 2 sphere, and RP2 .
+3. Construct a ∆complex structure on RPn as a quotient of a ∆complex structure
+on Sn having vertices the two vectors of length 1 along each coordinate axis in Rn+1 .
+4. Compute the simplicial homology groups of the triangular parachute obtained from
+∆2 by identifying its three vertices to a single point.
+5. Compute the simplicial homology groups of the Klein bottle using the ∆complex
+structure described at the beginning of this section.
+6. Compute the simplicial homology groups of the ∆complex obtained from n + 1
+2 simplices ∆2
+0, ··· , ∆2
+n by identifying all three edges of ∆2
+0 to a single edge, and for
+i > 0 identifying the edges [v0, v1] and [v1, v2] of ∆2
+i to a single edge and the edge
+[v0, v2] to the edge [v0, v1] of ∆2
+i−1 .
+7. Find a way of identifying pairs of faces of ∆3 to produce a ∆complex structure
+on S3 having a single 3 simplex, and compute the simplicial homology groups of this
+∆complex.
+8. Construct a 3 dimensional ∆complex X from n tetrahe-
+dra T1, ··· , Tn by the following two steps. First arrange the
+tetrahedra in a cyclic pattern as in the ﬁgure, so that each Ti
+shares a common vertical face with its two neighbors Ti−1
+and Ti+1 , subscripts being taken mod n. Then identify the
+bottom face of Ti with the top face of Ti+1 for each i. Show the simplicial homology
+groups of X in dimensions 0, 1, 2, 3 are Z, Zn , 0, Z, respectively. [The space X is
+an example of a lens space; see Example 2.43 for the general case.]
+9. Compute the homology groups of the ∆complex X obtained from ∆n by identi-
+fying all faces of the same dimension. Thus X has a single k simplex for each k ≤n.
+10. (a) Show the quotient space of a ﬁnite collection of disjoint 2 simplices obtained
+by identifying pairs of edges is always a surface, locally homeomorphic to R2 .
+(b) Show the edges can always be oriented so as to deﬁne a ∆complex structure on
+the quotient surface. [This is more difﬁcult.]
+
+132
+Chapter 2
+Homology
+11. Show that if A is a retract of X then the map Hn(A)→Hn(X) induced by the
+inclusion A ⊂X is injective.
+12. Show that chain homotopy of chain maps is an equivalence relation.
+13. Verify that f ≃g implies f∗= g∗for induced homomorphisms of reduced
+homology groups.
+14. Determine whether there exists a short exact sequence 0→Z4→Z8⊕Z2→Z4→0.
+More generally, determine which abelian groups A ﬁt into a short exact sequence
+0→Zpm→A→Zpn→0 with p prime. What about the case of short exact sequences
+0→Z→A→Zn→0?
+15. For an exact sequence A→B→C→D→E show that C = 0 iff the map A→B
+is surjective and D→E is injective. Hence for a pair of spaces (X, A), the inclusion
+A > X induces isomorphisms on all homology groups iff Hn(X, A) = 0 for all n.
+16. (a) Show that H0(X, A) = 0 iff A meets each path-component of X .
+(b) Show that H1(X, A) = 0 iff H1(A)→H1(X) is surjective and each path-component
+of X contains at most one path-component of A.
+17. (a) Compute the homology groups Hn(X, A) when X is S2 or S1×S1 and A is a
+ﬁnite set of points in X .
+(b) Compute the groups Hn(X, A) and Hn(X, B) for X
+a closed orientable surface of genus two with A and B
+A
+B
+the circles shown. [What are X/A and X/B ?]
+18. Show that for the subspace Q ⊂R, the relative homology group H1(R, Q) is free
+abelian and ﬁnd a basis.
+19. Compute the homology groups of the subspace of I×I consisting of the four
+boundary edges plus all points in the interior whose ﬁrst coordinate is rational.
+20. Show that eHn(X) ≈eHn+1(SX) for all n, where SX is the suspension of X . More
+generally, thinking of SX as the union of two cones CX with their bases identiﬁed,
+compute the reduced homology groups of the union of n cones CX with their bases
+identiﬁed.
+21.
+Making the preceding problem more concrete, construct explicit chain maps
+s : Cn(X)→Cn+1(SX) inducing isomorphisms eHn(X)→eHn+1(SX).
+22. Prove by induction on dimension the following facts about the homology of a
+ﬁnite-dimensional CW complex X , using the observation that Xn/Xn−1 is a wedge
+sum of n spheres:
+(a) If X has dimension n then Hi(X) = 0 for i > n and Hn(X) is free.
+(b) Hn(X) is free with basis in bijective correspondence with the n cells if there are
+no cells of dimension n −1 or n + 1.
+(c) If X has k n cells, then Hn(X) is generated by at most k elements.
+
+Simplicial and Singular Homology
+Section 2.1
+133
+23.
+Show that the second barycentric subdivision of a ∆complex is a simplicial
+complex. Namely, show that the ﬁrst barycentric subdivision produces a ∆complex
+with the property that each simplex has all its vertices distinct, then show that for a
+∆complex with this property, barycentric subdivision produces a simplicial complex.
+24. Show that each n simplex in the barycentric subdivision of ∆n is deﬁned by n
+inequalities ti0 ≤ti1 ≤··· ≤tin in its barycentric coordinates, where (i0, ··· , in) is a
+permutation of (0, ··· , n).
+25. Find an explicit, noninductive formula for the barycentric subdivision operator
+S : Cn(X)→Cn(X).
+26. Show that H1(X, A) is not isomorphic to eH1(X/A) if X = [0, 1] and A is the
+sequence 1, 1/2, 1/3, ··· together with its limit 0. [See Example 1.25.]
+27.
+Let f : (X, A)→(Y, B) be a map such that both f : X→Y and the restriction
+f : A→B are homotopy equivalences.
+(a) Show that f∗: Hn(X, A)→Hn(Y, B) is an isomorphism for all n.
+(b) For the case of the inclusion f : (Dn, Sn−1) > (Dn, Dn −{0}), show that f is not
+a homotopy equivalence of pairs — there is no g : (Dn, Dn −{0})→(Dn, Sn−1) such
+that f g and gf are homotopic to the identity through maps of pairs. [Observe that
+a homotopy equivalence of pairs (X, A)→(Y, B) is also a homotopy equivalence for
+the pairs obtained by replacing A and B by their closures.]
+28. Let X be the cone on the 1 skeleton of ∆3 , the union of all line segments joining
+points in the six edges of ∆3 to the barycenter of ∆3 . Compute the local homology
+groups Hn(X, X −{x}) for all x ∈X . Deﬁne ∂X to be the subspace of points x
+such that Hn(X, X −{x}) = 0 for all n, and compute the local homology groups
+Hn(∂X, ∂X −{x}). Use these calculations to determine which subsets A ⊂X have the
+property that f (A) ⊂A for all homeomorphisms f : X→X .
+29.
+Show that S1×S1 and S1 ∨S1 ∨S2 have isomorphic homology groups in all
+dimensions, but their universal covering spaces do not.
+30. In each of the following commutative diagrams assume that all maps but one are
+isomorphisms. Show that the remaining map must be an isomorphism as well.
+A
+B
+−−−−−→
+C
+D
+−−−−−→
+−−−→
+−−−→
+A
+B
+−−−−−→
+C
+−−−−−→
+−−−−−→
+A
+B
+−−−−−→
+C
+D
+−−−−−→
+−−−→
+−−−→
+31. Using the notation of the ﬁve-lemma, give an example where the maps α, β, δ,
+and ε are zero but γ is nonzero. This can be done with short exact sequences in
+which all the groups are either Z or 0.
+
+134
+Chapter 2
+Homology
+Now that the basic properties of homology have been established, we can begin
+to move a little more freely. Our ﬁrst topic, exploiting the calculation of Hn(Sn), is
+Brouwer’s notion of degree for maps Sn→Sn . Historically, Brouwer’s introduction of
+this concept in the years 1910–12 preceded the rigorous development of homology,
+so his deﬁnition was rather different, using the technique of simplicial approximation
+which we explain in §2.C. The later deﬁnition in terms of homology is certainly more
+elegant, though perhaps with some loss of geometric intuition. More in the spirit of
+Brouwer’s deﬁnition is a third approach using differential topology, presented very
+lucidly in [Milnor 1965].
+Degree
+For a map f : Sn→Sn with n > 0, the induced map f∗: Hn(Sn)→Hn(Sn) is a
+homomorphism from an inﬁnite cyclic group to itself and so must be of the form
+f∗(α) = dα for some integer d depending only on f .
+This integer is called the
+degree of f , with the notation deg f . Here are some basic properties of degree:
+(a) deg 11 = 1, since 11∗= 11.
+(b) deg f = 0 if f is not surjective. For if we choose a point x0 ∈Sn −f (Sn) then f
+can be factored as a composition Sn→Sn −{x0} > Sn and Hn(Sn −{x0}) = 0
+since Sn −{x0} is contractible. Hence f∗= 0.
+(c) If f ≃g then deg f = deg g since f∗= g∗. The converse statement, that f ≃g
+if deg f = deg g, is a fundamental theorem of Hopf from around 1925 which we
+prove in Corollary 4.25.
+(d) deg f g = deg f deg g, since (f g)∗= f∗g∗. As a consequence, deg f = ±1 if f
+is a homotopy equivalence since f g ≃11 implies deg f deg g = deg 11 = 1.
+(e) deg f = −1 if f is a reﬂection of Sn , ﬁxing the points in a subsphere Sn−1
+and interchanging the two complementary hemispheres. For we can give Sn a
+∆complex structure with these two hemispheres as its two n simplices ∆n
+1 and
+∆n
+2 , and the n chain ∆n
+1 −∆n
+2 represents a generator of Hn(Sn) as we saw in
+Example 2.23, so the reﬂection interchanging ∆n
+1 and ∆n
+2 sends this generator to
+its negative.
+(f) The antipodal map −11 : Sn→Sn , x , −x , has degree (−1)n+1 since it is the
+composition of n + 1 reﬂections, each changing the sign of one coordinate in
+Rn+1 .
+(g) If f : Sn→Sn has no ﬁxed points then deg f = (−1)n+1 . For if f (x) ≠x then the
+line segment from f (x) to −x , deﬁned by t , (1 −t)f (x) −tx for 0 ≤t ≤1,
+does not pass through the origin. Hence if f has no ﬁxed points, the formula
+ft(x) = [(1 −t)f (x) −tx]/|(1 −t)f (x) −tx| deﬁnes a homotopy from f to

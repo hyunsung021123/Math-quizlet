@@ -1,0 +1,82 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 1. The Fundamental Group
+현재 소단원: 1.B.ex Exercises
+직전 소단원: 「1.B K(G,1) Spaces and Graphs of Groups」
+[연습문제]
+96
+Chapter 1
+The Fundamental Group
+usually taken to be slightly more restrictive than the one we have given here, namely,
+one considers only oriented graphs obtained from an unoriented graph by subdividing
+each edge by adding a vertex at its midpoint, then orienting the two resulting edges
+outward, away from the new vertex.
+Exercises
+1. Suppose a group G acts simplicially on a ∆complex X , where ‘simplicially’ means
+that each element of G takes each simplex of X onto another simplex by a linear
+homeomorphism. If the action is free, show it is a covering space action.
+2. Let X be a connected CW complex and G a group such that every homomorphism
+π1(X)→G is trivial. Show that every map X→K(G, 1) is nullhomotopic.
+3. Show that every graph product of trivial groups is free.
+4. Use van Kampen’s theorem to compute A∗C as a quotient of A ∗Z, as stated in
+the text.
+5. Consider the graph of groups Γ having one vertex, Z, and one edge, the map Z→Z
+that is multiplication by 2, realized by the 2 sheeted covering space S1→S1 . Show
+that π1(KΓ) has presentation
+
+a, b |||| bab−1a−2 
+and describe the universal cover
+of KΓ explicitly as a product T ×R with T a tree. [The group π1(KΓ) is the ﬁrst in
+a family of groups called Baumslag-Solitar groups, having presentations of the form
+
+a, b |||| bamb−1a−n 
+. These are HNN extensions Z∗Z .]
+6. Show that for a graph of groups all of whose edge homomorphisms are injective
+maps Z→Z, we can choose KΓ to have universal cover a product T ×R with T a
+tree. Work out in detail the case that the graph of groups is the inﬁnite sequence
+Z
+2--→Z
+3--→Z
+4--→Z -→··· where the map Z
+n--→Z is multiplication by n. Show
+that π1(KΓ) is isomorphic to Q in this case. How would one modify this example
+to get π1(KΓ) isomorphic to the subgroup of Q consisting of rational numbers with
+denominator a power of 2?
+7. Show that every graph product of groups can be realized by a graph whose vertices
+are partitioned into two subsets, with every oriented edge going from a vertex in the
+ﬁrst subset to a vertex in the second subset.
+8. Show that a ﬁnite graph product of ﬁnitely generated groups is ﬁnitely generated,
+and similarly for ﬁnitely presented groups.
+9. Show that a ﬁnite graph product of ﬁnite groups has a free subgroup of ﬁnite
+index, by constructing a ﬁnite-sheeted covering space of KΓ from universal covers of
+the mapping cylinders of KΓ . [The converse is also true for ﬁnitely generated groups;
+see [Scott & Wall 1979] for more on this.]
+
+The fundamental group π1(X) is especially useful when studying spaces of low
+dimension, as one would expect from its deﬁnition which involves only maps from
+low-dimensional spaces into X , namely loops I→X and homotopies of loops, maps
+I×I→X . The deﬁnition in terms of objects that are at most 2 dimensional manifests
+itself for example in the fact that when X is a CW complex, π1(X) depends only on
+the 2 skeleton of X . In view of the low-dimensional nature of the fundamental group,
+we should not expect it to be a very reﬁned tool for dealing with high-dimensional
+spaces. Thus it cannot distinguish between spheres Sn with n ≥2. This limitation
+to low dimensions can be removed by considering the natural higher-dimensional
+analogs of π1(X), the homotopy groups πn(X), which are deﬁned in terms of maps
+of the n dimensional cube In into X and homotopies In×I→X of such maps. Not
+surprisingly, when X is a CW complex, πn(X) depends only on the (n + 1) skeleton
+of X . And as one might hope, homotopy groups do indeed distinguish spheres of all
+dimensions since πi(Sn) is 0 for i < n and Z for i = n.
+However, the higher-dimensional homotopy groups have the serious drawback
+that they are extremely difﬁcult to compute in general. Even for simple spaces like
+spheres, the calculation of πi(Sn) for i > n turns out to be a huge problem. For-
+tunately there is a more computable alternative to homotopy groups: the homology
+groups Hn(X). Like πn(X), the homology group Hn(X) for a CW complex X de-
+pends only on the (n + 1) skeleton. For spheres, the homology groups Hi(Sn) are
+isomorphic to the homotopy groups πi(Sn) in the range 1 ≤i ≤n, but homology
+groups have the advantage that Hi(Sn) = 0 for i > n.
+The computability of homology groups does not come for free, unfortunately.
+The deﬁnition of homology groups is decidedly less transparent than the deﬁnition
+of homotopy groups, and once one gets beyond the deﬁnition there is a certain amount
+of technical machinery to be set up before any real calculations and applications can
+be given. In the exposition below we approach the deﬁnition of Hn(X) by two prelim-
+inary stages, ﬁrst giving a few motivating examples nonrigorously, then constructing

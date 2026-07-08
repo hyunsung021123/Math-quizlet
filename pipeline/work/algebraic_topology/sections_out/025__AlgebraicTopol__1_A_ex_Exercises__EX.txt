@@ -1,0 +1,87 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 1. The Fundamental Group
+현재 소단원: 1.A.ex Exercises
+직전 소단원: 「1.A Graphs and Free Groups」
+[연습문제]
+86
+Chapter 1
+The Fundamental Group
+For each vertex v of X there is exactly one edge leading downward from v , so
+by following these downward edges we obtain a path from v to the base vertex v0 .
+This is an example of an edgepath, which is a composition of ﬁnitely many paths each
+consisting of a single edge traversed monotonically. For any edgepath joining v to v0
+other than the downward edgepath, the height function would not be monotone and
+hence would have local maxima, occurring when the edgepath backtracked, retracing
+some edge it had just crossed.
+Thus in a tree there is a unique nonbacktracking
+edgepath joining any two points. All the vertices and edges along this edgepath are
+distinct.
+A tree can contain no subgraph homeomorphic to a circle, since two vertices
+in such a subgraph could be joined by more than one nonbacktracking edgepath.
+Conversely, if a connected graph X contains no circle subgraph, then it must be a
+tree. For if T is a maximal tree in X that is not equal to X , then the union of an edge
+of X −T with the nonbacktracking edgepath in T joining the endpoints of this edge is
+a circle subgraph of X . So if there are no circle subgraphs of X , we must have X = T ,
+a tree.
+For an arbitrary connected graph X and a pair of vertices v0 and v1 in X there is
+a unique nonbacktracking edgepath in each homotopy class of paths from v0 to v1 .
+This can be seen by lifting to the universal cover eX , which is a tree since it is simply-
+connected. Choosing a lift ev0 of v0 , a homotopy class of paths from v0 to v1 lifts to
+a homotopy class of paths starting at ev0 and ending at a unique lift ev1 of v1 . Then
+the unique nonbacktracking edgepath in eX from ev0 to ev1 projects to the desired
+nonbacktracking edgepath in X .
+Exercises
+1. Let X be a graph in which each vertex is an endpoint of only ﬁnitely many edges.
+Show that the weak topology on X is a metric topology.
+2. Show that a connected graph retracts onto any connected subgraph.
+3.
+For a ﬁnite graph X deﬁne the Euler characteristic χ(X) to be the number of
+vertices minus the number of edges. Show that χ(X) = 1 if X is a tree, and that the
+rank (number of elements in a basis) of π1(X) is 1 −χ(X) if X is connected.
+4. If X is a ﬁnite graph and Y is a subgraph homeomorphic to S1 and containing the
+basepoint x0 , show that π1(X, x0) has a basis in which one element is represented
+by the loop Y .
+5. Construct a connected graph X and maps f , g : X→X such that f g = 11 but f
+and g do not induce isomorphisms on π1 . [Note that f∗g∗= 11 implies that f∗is
+surjective and g∗is injective.]
+6. Let F be the free group on two generators and let F′ be its commutator subgroup.
+Find a set of free generators for F′ by considering the covering space of the graph
+S1 ∨S1 corresponding to F′ .
+
+K(G,1) Spaces and Graphs of Groups
+Section 1.B
+87
+7. If F is a ﬁnitely generated free group and N is a nontrivial normal subgroup of
+inﬁnite index, show, using covering spaces, that N is not ﬁnitely generated.
+8. Show that a ﬁnitely generated group has only a ﬁnite number of subgroups of a
+given ﬁnite index. [First do the case of free groups, using covering spaces of graphs.
+The general case then follows since every group is a quotient group of a free group.]
+9. Using covering spaces, show that an index n subgroup H of a group G has at most
+n conjugate subgroups gHg−1 in G. Apply this to show that there exists a normal
+subgroup K ⊂G of ﬁnite index with K ⊂H .
+[For the latter statement, consider
+the intersection of all the conjugate subgroups gHg−1 . This is the maximal normal
+subgroup of G contained in H .]
+10. Let X be the wedge sum of n circles, with its natural graph structure, and let
+eX→X be a covering space with Y ⊂eX a ﬁnite connected subgraph. Show there is
+a ﬁnite graph Z ⊃Y having the same vertices as Y , such that the projection Y→X
+extends to a covering space Z→X .
+11. Apply the two preceding problems to show that if F is a ﬁnitely generated free
+group and x ∈F is not the identity element, then there is a normal subgroup H ⊂F
+of ﬁnite index such that x ∉H . Hence x has nontrivial image in a ﬁnite quotient
+group of F . In this situation one says F is residually ﬁnite.
+12. Let F be a ﬁnitely generated free group, H ⊂F a ﬁnitely generated subgroup, and
+x ∈F −H . Show there is a subgroup K of ﬁnite index in F such that K ⊃H and
+x ∉K . [Apply Exercise 10.]
+13. Let x be a nontrivial element of a ﬁnitely generated free group F . Show there is
+a ﬁnite-index subgroup H ⊂F in which x is one element of a basis. [Exercises 4 and
+10 may be helpful.]
+14. Show that the existence of maximal trees is equivalent to the Axiom of Choice.
+In this section we introduce a class of spaces whose homotopy type depends only
+on their fundamental group. These spaces arise many places in topology, especially
+in its interactions with group theory.
+A path-connected space whose fundamental group is isomorphic to a given group
+G and which has a contractible universal covering space is called a K(G,1) space. The
+‘1’ here refers to π1 . More general K(G, n) spaces are studied in §4.2. All these spaces
+are called Eilenberg–MacLane spaces, though in the case n = 1 they were studied by

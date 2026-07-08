@@ -1,0 +1,254 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 1. The Fundamental Group
+현재 소단원: 1.1 Basic Constructions
+직전 소단원: 「0.ex Exercises」
+[본문]
+Algebraic topology can be roughly deﬁned as the study of techniques for forming
+algebraic images of topological spaces. Most often these algebraic images are groups,
+but more elaborate structures such as rings, modules, and algebras also arise. The
+mechanisms that create these images — the ‘lanterns’ of algebraic topology, one might
+say — are known formally as functors and have the characteristic feature that they
+form images not only of spaces but also of maps. Thus, continuous maps between
+spaces are projected onto homomorphisms between their algebraic images, so topo-
+logically related spaces have algebraically related images.
+With suitably constructed lanterns one might hope to be able to form images with
+enough detail to reconstruct accurately the shapes of all spaces, or at least of large
+and interesting classes of spaces. This is one of the main goals of algebraic topology,
+and to a surprising extent this goal is achieved. Of course, the lanterns necessary to
+do this are somewhat complicated pieces of machinery. But this machinery also has
+a certain intrinsic beauty.
+This ﬁrst chapter introduces one of the simplest and most important functors
+of algebraic topology, the fundamental group, which creates an algebraic image of a
+space from the loops in the space, the paths in the space starting and ending at the
+same point.
+The Idea of the Fundamental Group
+To get a feeling for what the fundamental group is about, let us look at a few
+preliminary examples before giving the formal deﬁnitions.
+
+22
+Chapter 1
+The Fundamental Group
+Consider two linked circles A and B in R3 , as shown
+in the ﬁgure. Our experience with actual links and chains
+A
+B
+tells us that since the two circles are linked, it is impossi-
+ble to separate B from A by any continuous motion of B ,
+such as pushing, pulling, or twisting. We could even take
+B to be made of rubber or stretchable string and allow completely general continu-
+ous deformations of B , staying in the complement of A at all times, and it would
+still be impossible to pull B off A. At least that is what intuition suggests, and the
+fundamental group will give a way of making this intuition mathematically rigorous.
+Instead of having B link with A just once, we could
+make it link with A two or more times, as in the ﬁgures to the
+right. As a further variation, by assigning an orientation to B
+A
+A
+B−3
+B 2
+we can speak of B linking A a positive or a negative number
+of times, say positive when B comes forward through A and
+negative for the reverse direction. Thus for each nonzero
+integer n we have an oriented circle Bn linking A n times,
+where by ‘circle’ we mean a curve homeomorphic to a circle.
+To complete the scheme, we could let B0 be a circle not
+linked to A at all.
+Now, integers not only measure quantity, but they form a group under addition.
+Can the group operation be mimicked geometrically with some sort of addition op-
+eration on the oriented circles B linking A? An oriented circle B can be thought
+of as a path traversed in time, starting and ending at the same point x0 , which we
+can choose to be any point on the circle.
+Such a path starting and ending at the
+same point is called a loop. Two different loops B and B′ both starting and end-
+ing at the same point x0 can be ‘added’ to form a new loop B + B′ that travels ﬁrst
+around B , then around B′ . For example, if B1 and B′
+1 are loops each linking A once in
+A
+B1
+B1
+x0
+A
+B2
+x0
+′
+A
+B1
+x0
+A
+B0
+x0
+B−1
+the positive direction,
+then their sum B1 +B′
+1
+is deformable to B2 ,
+linking A twice. Simi-
+larly, B1 + B−1 can be
+deformed to the loop
+B0 , unlinked from A.
+More generally, we see
+that Bm + Bn can be
+deformed to Bm+n for
+arbitrary integers m and n.
+Note that in forming sums of loops we produce loops that pass through the base-
+point more than once. This is one reason why loops are deﬁned merely as continuous
+
+The Idea of the Fundamental Group
+23
+paths, which are allowed to pass through the same point many times. So if one is
+thinking of a loop as something made of stretchable string, one has to give the string
+the magical power of being able to pass through itself unharmed. However, we must
+be sure not to allow our loops to intersect the ﬁxed circle A at any time, otherwise we
+could always unlink them from A.
+Next we consider a slightly more complicated sort of linking, involving three cir-
+cles forming a conﬁguration known as the Borromean rings, shown at the left in the ﬁg-
+ure below. The interesting feature here is that if any one of the three circles is removed,
+the other two are not
+linked.
+In the same
+A
+A
+B
+B
+C
+C
+spirit as before, let us
+regard one of the cir-
+cles, say C , as a loop
+in the complement of
+the other two, A and
+B , and we ask whether C can be continuously deformed to unlink it completely from
+A and B , always staying in the complement of A and B during the deformation. We
+can redraw the picture by pulling A and B apart, dragging C along, and then we see
+C winding back and forth between A and B as shown in the second ﬁgure above.
+In this new position, if we start at the point of C indicated by the dot and proceed
+in the direction given by the arrow, then we pass in sequence: (1) forward through
+A, (2) forward through B , (3) backward through A, and (4) backward through B . If
+we measure the linking of C with A and B by two integers, then the ‘forwards’ and
+‘backwards’ cancel and both integers are zero. This reﬂects the fact that C is not
+linked with A or B individually.
+To get a more accurate measure of how C links with A and B together, we re-
+gard the four parts (1)–(4) of C as an ordered sequence.
+Taking into account the
+directions in which these segments of C pass
+through A and B , we may deform C to the sum
+a + b −a −b of four loops as in the ﬁgure. We
+A
+B
+a
+b
+−b
+−a
+A
+B
+a
+b
+−b
+−a
+write the third and fourth loops as the nega-
+tives of the ﬁrst two since they can be deformed
+to the ﬁrst two, but with the opposite orienta-
+tions, and as we saw in the preceding exam-
+ple, the sum of two oppositely oriented loops
+is deformable to a trivial loop, not linked with
+anything. We would like to view the expression
+a + b −a −b as lying in a nonabelian group, so that it is not automatically zero.
+Changing to the more usual multiplicative notation for nonabelian groups, it would
+be written aba−1b−1 , the commutator of a and b.
+
+24
+Chapter 1
+The Fundamental Group
+To shed further light on this example, suppose we modify it slightly so that the cir-
+cles A and B are now linked, as in the next ﬁgure. The circle C can then be deformed
+A
+B
+C
+A
+B
+C
+into the position shown at
+the right, where it again rep-
+resents the composite loop
+aba−1b−1 , where a and b
+are loops linking A and B .
+But from the picture on the
+left it is apparent that C can
+actually be unlinked completely from A and B . So in this case the product aba−1b−1
+should be trivial.
+The fundamental group of a space X will be deﬁned so that its elements are
+loops in X starting and ending at a ﬁxed basepoint x0 ∈X , but two such loops
+are regarded as determining the same element of the fundamental group if one loop
+can be continuously deformed to the other within the space X . (All loops that occur
+during deformations must also start and end at x0 .) In the ﬁrst example above, X is
+the complement of the circle A, while in the other two examples X is the complement
+of the two circles A and B . In the second section in this chapter we will show:
+The fundamental group of the complement of the circle A in the ﬁrst example is
+inﬁnite cyclic with the loop B as a generator. This amounts to saying that every
+loop in the complement of A can be deformed to one of the loops Bn , and that
+Bn cannot be deformed to Bm if n ≠m.
+The fundamental group of the complement of the two unlinked circles A and B in
+the second example is the nonabelian free group on two generators, represented
+by the loops a and b linking A and B . In particular, the commutator aba−1b−1
+is a nontrivial element of this group.
+The fundamental group of the complement of the two linked circles A and B in
+the third example is the free abelian group on two generators, represented by the
+loops a and b linking A and B .
+As a result of these calculations, we have two ways to tell when a pair of circles A
+and B is linked. The direct approach is given by the ﬁrst example, where one circle
+is regarded as an element of the fundamental group of the complement of the other
+circle. An alternative and somewhat more subtle method is given by the second and
+third examples, where one distinguishes a pair of linked circles from a pair of unlinked
+circles by the fundamental group of their complement, which is abelian in one case and
+nonabelian in the other. This method is much more general: One can often show that
+two spaces are not homeomorphic by showing that their fundamental groups are not
+isomorphic, since it will be an easy consequence of the deﬁnition of the fundamental
+group that homeomorphic spaces have isomorphic fundamental groups.
+
+Basic Constructions
+Section 1.1
+25
+This ﬁrst section begins with the basic deﬁnitions and constructions, and then
+proceeds quickly to an important calculation, the fundamental group of the circle,
+using notions developed more fully in §1.3. More systematic methods of calculation
+are given in §1.2. These are sufﬁcient to show for example that every group is realized
+as the fundamental group of some space. This idea is exploited in the Additional
+Topics at the end of the chapter, which give some illustrations of how algebraic facts
+about groups can be derived topologically, such as the fact that every subgroup of a
+free group is free.
+Paths and Homotopy
+The fundamental group will be deﬁned in terms of loops and deformations of
+loops. Sometimes it will be useful to consider more generally paths and their defor-
+mations, so we begin with this slight extra generality.
+By a path in a space X we mean a continuous map f : I→X where I is the unit
+interval [0, 1].
+The idea of continuously deforming a path, keeping its endpoints
+ﬁxed, is made precise by the following deﬁnition. A homotopy of paths in X is a
+family ft : I→X , 0 ≤t ≤1, such that
+(1) The endpoints ft(0) = x0 and ft(1) = x1
+are independent of t .
+x1
+1
+x0
+0
+f
+f
+(2) The associated map F : I×I→X deﬁned by
+F(s, t) = ft(s) is continuous.
+When two paths f0 and f1 are connected in this way by a homotopy ft , they are said
+to be homotopic. The notation for this is f0 ≃f1 .
+Example 1.1: Linear Homotopies. Any two paths f0 and f1 in Rn having the same
+endpoints x0 and x1 are homotopic via the homotopy ft(s) = (1 −t)f0(s) + tf1(s).
+During this homotopy each point f0(s) travels along the line segment to f1(s) at con-
+stant speed. This is because the line through f0(s) and f1(s) is linearly parametrized
+as f0(s) + t[f1(s) −f0(s)] = (1 −t)f0(s) + tf1(s), with the segment from f0(s) to
+f1(s) covered by t values in the interval from 0 to 1. If f1(s) happens to equal f0(s)
+then this segment degenerates to a point and ft(s) = f0(s) for all t . This occurs in
+particular for s = 0 and s = 1, so each ft is a path from x0 to x1 . Continuity of
+the homotopy ft as a map I×I→Rn follows from continuity of f0 and f1 since the
+algebraic operations of vector addition and scalar multiplication in the formula for ft
+are continuous.
+This construction shows more generally that for a convex subspace X ⊂Rn , all
+paths in X with given endpoints x0 and x1 are homotopic, since if f0 and f1 lie in
+X then so does the homotopy ft .
