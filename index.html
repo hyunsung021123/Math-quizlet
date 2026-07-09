@@ -627,6 +627,8 @@ p.prose{ margin:0; }
      설계 원칙: 데이터(생성벡터/점/법선)만 받아서 기하를 계산 → 정확한 SVG 문자열 반환.
      지원 type: zonotope_2d, hyperplane_arrangement_2d, convex_hull_2d, vectors_2d, custom_2d,
                 identification_polygon_2d, complex_2d, torus_2d, cylinder_2d
+     custom_2d의 점 좌표는 [x,y,z](길이 3)도 받는다 — _project3()가 고정 각도 평행투영으로 2D에
+     내린 뒤 나머지는 평범한 2D 프리미티브와 똑같이 처리된다(회전·가려짐 자동 계산은 없음).
      ========================================================================= */
 
   /* ---------- 벡터/기하 헬퍼 ---------- */
@@ -751,6 +753,21 @@ p.prose{ margin:0; }
     return pts;
   }
 
+  /* 고정 카메라 평행(정사) 투영 — 진짜 3D 엔진이 아니라, "3/4 각도에서 본 것처럼" 좌표만 한 번
+     돌려서 2D로 내리는 도구다. 회전·원근(거리에 따른 크기 변화)은 없다 — 저자가 [x,y,z] 점을
+     주면 여기서 고정된 각도로 눌러 2D 점을 만들고, 그 다음은 기존 2D 파이프라인(bbox, fit.map)을
+     그대로 탄다. 가려짐 자동 처리도 없으므로, 뒤에 그릴 것을 앞서 그리는 순서는 저자가 정한다
+     (지금 render 순서 = 그리는 순서 = 쌓이는 순서, painter's algorithm을 손으로 하는 셈). */
+  function _project3(p, cam){
+    var az = ((cam && cam.azimuth != null) ? cam.azimuth : 35) * Math.PI/180;
+    var el = ((cam && cam.elevation != null) ? cam.elevation : 22) * Math.PI/180;
+    var x=+p[0], y=+p[1], z=+p[2]||0;
+    var x1 = x*Math.cos(az) + z*Math.sin(az);
+    var z1 = -x*Math.sin(az) + z*Math.cos(az);
+    var y2 = y*Math.cos(el) - z1*Math.sin(el);
+    return [x1, y2];
+  }
+
   /* ---------- 유형별 렌더러 ---------- */
   function _vizZono(viz,W,H,M,C){
     var gens=(viz.generators||[]).map(function(v){return [+v[0],+v[1]];});
@@ -847,14 +864,18 @@ p.prose{ margin:0; }
 
   function _vizCustom(viz,W,H,M,C){
     var prims=viz.primitives||[], bb=[];
+    // pr.points/from/to/at/center에 [x,y,z]가 오면(길이 3) 고정 카메라로 2D 투영하고, [x,y]는 그대로
+    // 둔다 — 기존 2D 콘텐츠는 손댈 필요 없이 그대로 호환된다. viz.camera로 각도 조정 가능.
+    function to2(p){ return (p && p.length >= 3) ? _project3(p, viz.camera) : [+p[0], +p[1]]; }
     prims.forEach(function(pr){
-      if(pr.points) pr.points.forEach(function(p){bb.push([+p[0],+p[1]]);});
-      if(pr.from) bb.push([+pr.from[0],+pr.from[1]]);
-      if(pr.to) bb.push([+pr.to[0],+pr.to[1]]);
-      if(pr.at) bb.push([+pr.at[0],+pr.at[1]]);
+      if(pr.points) pr.points.forEach(function(p){bb.push(to2(p));});
+      if(pr.from) bb.push(to2(pr.from));
+      if(pr.to) bb.push(to2(pr.to));
+      if(pr.at) bb.push(to2(pr.at));
       if(pr.center){
         var ex=pr.rx!=null?+pr.rx:(pr.r!=null?+pr.r:1), ey=pr.ry!=null?+pr.ry:ex;
-        bb.push([+pr.center[0]-ex,+pr.center[1]-ey]); bb.push([+pr.center[0]+ex,+pr.center[1]+ey]);
+        var cc=to2(pr.center);
+        bb.push([cc[0]-ex,cc[1]-ey]); bb.push([cc[0]+ex,cc[1]+ey]);
       }
     });
     var fit=makeFit(bb.length?bb:[[-1,-1],[1,1]],W,H,M), P=[];
@@ -862,26 +883,26 @@ p.prose{ margin:0; }
     prims.forEach(function(pr){
       var col=pr.color||C.primary;
       switch(pr.shape){
-        case 'polygon': P.push(_poly((pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}), pr.fill||C.primaryFill, col, 2, pr.dash)); break;
-        case 'polyline': { var mp=(pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);}); for(var i=0;i+1<mp.length;i++) P.push(_segEl(mp[i],mp[i+1],col,2,pr.dash)); break; }
+        case 'polygon': P.push(_poly((pr.points||[]).map(function(p){return fit.map(to2(p));}), pr.fill||C.primaryFill, col, 2, pr.dash)); break;
+        case 'polyline': { var mp=(pr.points||[]).map(function(p){return fit.map(to2(p));}); for(var i=0;i+1<mp.length;i++) P.push(_segEl(mp[i],mp[i+1],col,2,pr.dash)); break; }
         case 'curve': {
-          var cp=(pr.points||[]).map(function(p){return fit.map([+p[0],+p[1]]);});
+          var cp=(pr.points||[]).map(function(p){return fit.map(to2(p));});
           P.push('<path d="'+_catmullRom2bezier(cp,!!pr.closed)+'" fill="'+(pr.closed?(pr.fill||'none'):'none')+
                  '" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+' stroke-linecap="round" stroke-linejoin="round"/>');
           break;
         }
         case 'ellipse': {
-          var ec=fit.map(pr.center), erx=(pr.rx||1)*fit.s, ery=(pr.ry||pr.rx||1)*fit.s, erot=pr.rotation||0;
+          var ec=fit.map(to2(pr.center)), erx=(pr.rx||1)*fit.s, ery=(pr.ry||pr.rx||1)*fit.s, erot=pr.rotation||0;
           P.push('<ellipse cx="'+_n(ec[0])+'" cy="'+_n(ec[1])+'" rx="'+_n(erx)+'" ry="'+_n(ery)+'"'+
                  (erot?' transform="rotate('+erot+' '+_n(ec[0])+' '+_n(ec[1])+')"':'')+
                  ' fill="'+(pr.fill||'none')+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>');
           break;
         }
-        case 'segment': P.push(_segEl(fit.map(pr.from),fit.map(pr.to),col,2,pr.dash)); break;
-        case 'arrow': P.push(_arrow(fit.map(pr.from||[0,0]),fit.map(pr.to),pr.color||C.amber,2)); break;
-        case 'point': P.push(_dot(fit.map(pr.at),pr.r||3.5,col)); break;
+        case 'segment': P.push(_segEl(fit.map(to2(pr.from)),fit.map(to2(pr.to)),col,2,pr.dash)); break;
+        case 'arrow': P.push(_arrow(fit.map(to2(pr.from||[0,0])),fit.map(to2(pr.to)),pr.color||C.amber,2)); break;
+        case 'point': P.push(_dot(fit.map(to2(pr.at)),pr.r||3.5,col)); break;
         case 'arc': {
-          var a0=fit.map(pr.from), a1=fit.map(pr.to);
+          var a0=fit.map(to2(pr.from)), a1=fit.map(to2(pr.to));
           var mx=(a0[0]+a1[0])/2, my=(a0[1]+a1[1])/2;
           var dx=a1[0]-a0[0], dy=a1[1]-a0[1], L=Math.hypot(dx,dy)||1;
           var nx=-dy/L, ny=dx/L, bulge=(pr.bulge==null?0.5:pr.bulge)*Math.max(L,40);
@@ -904,8 +925,8 @@ p.prose{ margin:0; }
           }
           break;
         }
-        case 'circle': { var c=fit.map(pr.center), rr=(pr.r||1)*fit.s; P.push('<circle cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" r="'+_n(rr)+'" fill="'+(pr.fill||'none')+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>'); break; }
-        case 'label': P.push(_text(fit.map(pr.at), pr.text||'', pr.color||C.ink, pr.anchor||'middle', pr.size||13)); break;
+        case 'circle': { var c=fit.map(to2(pr.center)), rr=(pr.r||1)*fit.s; P.push('<circle cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" r="'+_n(rr)+'" fill="'+(pr.fill||'none')+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>'); break; }
+        case 'label': P.push(_text(fit.map(to2(pr.at)), pr.text||'', pr.color||C.ink, pr.anchor||'middle', pr.size||13)); break;
       }
     });
     return P.join('');

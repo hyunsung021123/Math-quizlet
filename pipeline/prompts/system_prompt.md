@@ -97,6 +97,11 @@
   `{ "type":"custom_2d", "primitives":[ {"shape":"polygon","points":[...]}, {"shape":"segment","from":[..],"to":[..]}, {"shape":"arrow","from":[..],"to":[..]}, {"shape":"arc","from":[..],"to":[..],"bulge":0.5,"arrow":true}, {"shape":"point","at":[..]}, {"shape":"circle","center":[..],"r":1}, {"shape":"ellipse","center":[..],"rx":1,"ry":0.4,"rotation":0}, {"shape":"curve","points":[[..],...],"closed":false}, {"shape":"label","at":[..],"text":"..."} ], "caption":"..." }`
   - `ellipse`: 원근이 들어간 "입체처럼 보이는" 2D 스키마(관 단면, 기울어진 원판 등)에 쓴다. `rotation`은 도(degree) 단위.
   - `curve`: 점 목록을 매끄러운 곡선(Catmull-Rom)으로 잇는다 — 자유롭게 구불거리는 호모토피 경로, 임베딩된 매듭·고리처럼 `polyline`(직선 연결이라 각져 보임)이나 `arc`(두 점 사이 한 번만 휘는 곡선)로는 어색한 곡선에 쓴다. `closed:true`면 시작·끝을 이어 닫힌 곡선(`fill` 지정 가능).
+  - **3D 좌표**: `points`/`from`/`to`/`at`/`center`에 `[x,y,z]`(길이 3)를 쓰면 고정된 3/4 각도 카메라로 2D에 투영해 그려 준다 — `torus_2d`/`cylinder_2d`가 다루지 못하는 임의의 3D 도형(정육면체·구체·나선형 피복공간 등)에 쓴다. `[x,y]`(길이 2)는 그대로 평범한 2D 점으로 취급되니 기존 콘텐츠와 완전히 호환된다.
+    - 진짜 3D 엔진이 아니라 **회전·원근 없는 고정 평행투영**이다. 가려짐을 자동으로 계산하지 않으므로, 프리미티브를 나열하는 순서가 곧 쌓이는 순서다 — 뒤에 있어야 할 면·선을 먼저 적어라(다른 도형이 그 위를 덮도록).
+    - `circle`/`ellipse`는 `center`만 3D로 투영될 뿐 원판 자체가 기울어지지 않는다(항상 평범한 원/타원으로 그려짐) — 3D 공간에 놓인 원을 제대로 기울여 보이려면 그 원의 둘레를 3D로 샘플링한 `curve`(`closed:true`)를 써라.
+    - 카메라 각도는 필요하면 `viz.camera:{"azimuth":35,"elevation":22}`(도 단위, 생략 시 기본값)로 도형별로 조정할 수 있다.
+    - 예: 정육면체 한 모서리 `{"shape":"segment","from":[0,0,0],"to":[2,0,0]}`, 피복공간 나선(원 $S^1$ 위를 감는 나선) `{"shape":"curve","points":[[1,0,0],[0,1,0.5],[-1,0,1],[0,-1,1.5],[1,0,2]]}`.
 - `identification_polygon_2d` — 변 동일시 다이어그램(토러스·클라인병·사영평면·구·뫼비우스 띠 등). `edges`는 다각형의 변을 도는 순서대로. 같은 `label`은 동일시, `dir`(±1)은 방향. **`label`이 없거나 `free:true`인 변은 동일시되지 않은 실제 경계**로, 화살표 없이 회색 점선으로만 그려진다(뫼비우스 띠처럼 경계가 남는 곡면에 필수).
   `{ "type":"identification_polygon_2d", "edges":[{"label":"a","dir":1},{"label":"b","dir":1},{"label":"a","dir":-1},{"label":"b","dir":-1}], "caption":"토러스 $T^2 = aba^{-1}b^{-1}$" }` (토러스; 클라인병은 마지막 `dir`을 `1`로)
   `{ "type":"identification_polygon_2d", "edges":[{"label":"a","dir":1},{"free":true},{"label":"a","dir":1},{"free":true}], "caption":"뫼비우스 띠: 한 쌍만 뒤집어 동일시, 나머지 한 쌍은 자유 경계" }` (뫼비우스 띠 — 마주보는 두 변을 **같은** `dir`로 동일시하면 뒤틀린 접착이 된다; 토러스처럼 반대 `dir`을 쓰면 뒤틀리지 않은 원기둥이 되니 주의)
