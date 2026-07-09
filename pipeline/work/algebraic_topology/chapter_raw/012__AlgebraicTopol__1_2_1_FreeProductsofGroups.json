@@ -1,0 +1,413 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Hatcher, Algebraic Topology",
+    "overall_goal": "공간에 대수적 그림자(군·환 등)를 씌우는 함자(functor)라는 대수적 위상수학의 큰 그림을 이해하고, 그중 가장 단순하면서 근본적인 함자인 기본군(fundamental group)을 정의한다. 나아가 원의 기본군이 무한순환군임을 보이고, 이를 통해 '기본군이 다르면 두 공간은 위상동형이 아니다'라는 강력한 판별법을 손에 넣는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.2.1 Free Products of Groups — 자유군·랭크와 보편성질",
+      "step1_big_picture": {
+        "context": "1.2에서 자유곱 $\\ast_\\alpha G_\\alpha$을 축약어로 정의하고 결합법칙을 좌곱셈 치환표현으로 증명했다(정의 (자유곱), 명제 (결합법칙)). 이 절은 그 구조를 더 깊이 판다. (i) 모든 인자가 $\\mathbb{Z}$인 특수경우가 자유군(free group)이며, 그 기저(basis)와 랭크(rank)를 정의하고 아벨화(abelianization)로 랭크가 잘 정의됨을 본다. (ii) 자유군이 아닌 자유곱의 대표 예 $\\mathbb{Z}_2*\\mathbb{Z}_2$ — 무한이면군(infinite dihedral group). (iii) 각 $G_\\alpha$이 $\\ast_\\alpha G_\\alpha$의 부분군으로 자연히 박히고, 임의 곱의 축약형이 유일함(결합법칙의 귀결). (iv) 자유곱의 보편성질(universal property): 각 $G_\\alpha\\to H$ 준동형들이 $\\ast_\\alpha G_\\alpha\\to H$로 유일하게 확장된다. 이 보편성질이 곧이어 나올 van Kampen 정리에서 $\\Phi:\\ast_\\alpha\\pi_1(A_\\alpha)\\to\\pi_1(X)$를 만드는 엔진이다(정리 1.20 자체는 다음 조각). 재사용: 1.2의 자유곱 정의·결합법칙, 그리고 $\\pi_1(S^1)\\cong\\mathbb{Z}$(정리 1.7)가 각 원의 기본군을 준다.",
+        "hidden_intuition": "'자유(free)'를 두 층위로 이해하자. 첫째, 자유군은 '관계가 전혀 없는 군'이다 — 기저 원소들 사이에 부과된 방정식이 하나도 없어 축약어가 곧 유일한 정규형이다. 랭크가 잘 정의되는 비결은 아벨화라는 '납작하게 누르기'다: 비가환 자유군은 직접 비교하기 어렵지만 교환자를 모두 죽여 $\\mathbb{Z}^n$으로 만들면 선형대수의 차원처럼 랭크가 불변량으로 튀어나온다. 둘째, 보편성질로서의 자유: $\\ast_\\alpha G_\\alpha$은 '$G_\\alpha$들을 담되 최소한의 관계만 갖는' 군이라, 임의의 목표 $H$로 가는 조각별 준동형이 유일하게 전체로 확장된다 — 이것이 범주론적 의미의 자유(자유대상, free object)다. $\\mathbb{Z}_2*\\mathbb{Z}_2$이 무한군이라는 놀라움엔 기하가 있다: $a^2=b^2=e$인 두 반사(reflection)를 잇따라 적용한 $ab$는 회전·평행이동이 되어 무한위수가 된다 — 두 거울을 번갈아 비추면 영원히 제자리로 안 오는 무한이면군. 그리고 축약형 유일성의 실전적 의미는 '괄호 무관성'이다: 곱을 어떤 순서로 줄이든 결합법칙이 같은 결과를 보장한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -3.5,
+                0
+              ],
+              "to": [
+                3.5,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -2,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                3,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -0.55
+              ],
+              "to": [
+                0,
+                0.55
+              ],
+              "dash": "4,3"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                1,
+                -0.55
+              ],
+              "to": [
+                1,
+                0.55
+              ],
+              "dash": "4,3"
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                0.15,
+                0.85
+              ],
+              "to": [
+                2.15,
+                0.85
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                -0.8
+              ],
+              "text": "a"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1,
+                -0.8
+              ],
+              "text": "b"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.15,
+                1.1
+              ],
+              "text": "ab (shift by 2)"
+            }
+          ],
+          "caption": "무한이면군 $D_\\infty\\cong\\mathbb{Z}_2*\\mathbb{Z}_2$의 기하. 두 반사 $a,b$(수직 거울)를 잇따라 적용한 $ab$는 평행이동(무한위수)이 된다. $\\langle ab\\rangle\\cong\\mathbb{Z}$가 정규부분군이고 $\\langle a\\rangle\\cong\\mathbb{Z}_2$와 반직접곱을 이룬다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (자유군, 기저, 랭크)",
+          "formal_statement": "자유군(free group)은 임의 개수(유한 또는 무한)의 $\\mathbb{Z}$ 복사본들의 자유곱이다. 각 $\\mathbb{Z}$마다 생성원을 하나씩 두면, 자유군의 원소는 이 생성원들의 거듭제곱으로 이루어진 축약어로 유일하게 표현된다($\\mathbb{Z}*\\mathbb{Z}$의 경우와 같다). 이 생성원들의 집합을 자유군의 기저(basis), 그 개수를 랭크(rank)라 한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (자유군의 랭크는 잘 정의된다)",
+          "formal_statement": "자유군의 랭크는 기저 선택에 무관하게 잘 정의된다.",
+          "idea_behind_proof": "비가환 자유군을 직접 다루는 대신 아벨화(abelianization)로 눌러 자유아벨군으로 바꾸면, 랭크가 선형대수적 차원처럼 불변량으로 드러난다.",
+          "proof_steps": [
+            "자유군 $F$의 아벨화 $F^{\\mathrm{ab}}=F/[F,F]$는 같은 기저를 갖는 자유아벨군(free abelian group)이다 — 교환자를 죽이면 각 생성원이 서로 독립적으로 하나의 $\\mathbb{Z}$를 이룬다.",
+            "자유아벨군의 랭크는 잘 정의된다(예: $\\mathbb{Q}\\otimes F^{\\mathrm{ab}}$의 벡터공간 차원은 기저 선택과 무관). 따라서 $F^{\\mathrm{ab}}$의 랭크, 나아가 $F$의 랭크도 기저 선택에 무관하게 결정된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 ($\\mathbb{Z}_2*\\mathbb{Z}_2$ = 무한이면군)",
+          "formal_statement": "$\\mathbb{Z}_2*\\mathbb{Z}_2=\\langle a,b\\mid a^2=b^2=e\\rangle$은 자유군이 아닌 자유곱의 대표 예다. $a^2=b^2=e$이라 거듭제곱이 필요 없고, 원소는 $a,b$가 번갈아 나오는 낱말 $a,b,ab,ba,aba,bab,abab,\\dots$과 빈 낱말이다. 이 군은 무한군이며, 무한이면군(infinite dihedral group) $D_\\infty\\cong\\mathbb{Z}\\rtimes\\mathbb{Z}_2$이다.",
+          "idea_behind_proof": "낱말의 길이를 $2$로 나눈 나머지를 재는 준동형 $\\varphi:\\mathbb{Z}_2*\\mathbb{Z}_2\\to\\mathbb{Z}_2$로 구조를 드러낸다. 그 커널(짝수 길이 낱말)은 $ab$가 생성하는 무한순환군이고, 나머지 $\\mathbb{Z}_2=\\langle a\\rangle$이 켤레로 작용해 반직접곱이 된다.",
+          "proof_steps": [
+            "낱말 길이를 $\\bmod\\,2$로 보내는 사상 $\\varphi:\\mathbb{Z}_2*\\mathbb{Z}_2\\to\\mathbb{Z}_2$은 전사 준동형이고, 그 커널은 짝수 길이 낱말 전체다.",
+            "짝수 길이 낱말은 $ab$로 생성된다. $(ab)(ba)=a(bb)a=a\\,a=e$이므로 $ba=(ab)^{-1}$이고, $(ab)^n$($n\\ge1$)은 항상 축약어라 자명하지 않으므로 $\\ker\\varphi=\\langle ab\\rangle\\cong\\mathbb{Z}$(무한순환군).",
+            "따라서 $\\mathbb{Z}_2*\\mathbb{Z}_2$은 정규부분군 $\\langle ab\\rangle\\cong\\mathbb{Z}$와 부분군 $\\langle a\\rangle\\cong\\mathbb{Z}_2$의 반직접곱 $\\mathbb{Z}\\rtimes\\mathbb{Z}_2$이며, 켤레 관계는 $a(ab)a^{-1}=(ab)^{-1}$이다($a^{-1}=a$이므로 $a(ab)a=(aa)(ba)=ba=(ab)^{-1}$). 이 군을 무한이면군 $D_\\infty$이라 한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (각 $G_\\alpha$의 부분군 매장과 축약형의 유일성)",
+          "formal_statement": "각 $G_\\alpha$은 $\\ast_\\alpha G_\\alpha$의 부분군과 자연히 동일시된다 — 빈 낱말과 한 글자 낱말 $g\\in G_\\alpha$($g\\ne 1$)로 이루어진 부분군. 이 관점에서 빈 낱말은 모든 $G_\\alpha$의 공통 항등원이고, 서로 다른 $G_\\alpha$은 그 항등원 외에는 서로소다. 또한 결합법칙의 귀결로, 원소 $g_i\\in G_{\\alpha_i}$들의 임의의 곱 $g_1\\cdots g_m$은 곱셈을 어떤 순서로 수행하든 같은 유일한 축약형을 갖는다.",
+          "idea_behind_proof": "축약은 '괄호를 어디에 넣어 곱하느냐'의 문제로 볼 수 있다. 1.2의 결합법칙이 괄호 위치 무관을 보장하므로, 인접 글자를 어떤 순서로 합치거나 소거하든 결과가 같다.",
+          "proof_steps": [
+            "$g\\mapsto$(한 글자 낱말 $g$, 단 $g=1$이면 빈 낱말)은 $G_\\alpha\\to\\ast_\\alpha G_\\alpha$의 단사 준동형이라 $G_\\alpha$을 부분군으로 동일시한다. 서로 다른 $\\alpha,\\beta$의 부분군은 한 글자 낱말의 소속 군이 다르므로 오직 빈 낱말(공통 항등원)에서만 만난다.",
+            "축약되지 않은 곱 $g_1\\cdots g_m$에 대한 임의의 축약 연산열(인접한 같은 군 글자 합치기, 항등원 글자 지우기)은 $g_1\\cdots g_m$에 괄호를 삽입해 그 순서로 곱을 수행하는 것으로 볼 수 있다. 결합법칙에 의해 어느 괄호 방식이든 같은 원소를 주므로, 서로 다른 두 축약 연산열은 항상 같은 축약어로 귀결된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (자유곱의 보편성질, universal property)",
+          "formal_statement": "자유곱 $\\ast_\\alpha G_\\alpha$은 다음 보편성질을 갖는다: 임의의 군 $H$와 준동형들의 모임 $\\varphi_\\alpha:G_\\alpha\\to H$에 대해, 이들을 모두 확장하는(각 $G_\\alpha$에서 $\\varphi_\\alpha$와 일치하는) 준동형 $\\varphi:\\ast_\\alpha G_\\alpha\\to H$이 유일하게 존재한다. 구체적으로 $g_i\\in G_{\\alpha_i}$에 대해 $\\varphi(g_1\\cdots g_n)=\\varphi_{\\alpha_1}(g_1)\\cdots\\varphi_{\\alpha_n}(g_n)$이다.",
+          "idea_behind_proof": "값을 낱말의 글자별 상으로 정의하는 것 외에 다른 선택지가 없다(그래서 유일). 잘 정의됨의 관건은 '축약이 상을 바꾸지 않는다'는 것인데, 같은 $G_\\alpha$의 인접 글자를 합치거나 항등원을 지우는 조작이 $\\varphi_\\alpha$의 준동형성 덕분에 $H$에서도 그대로 성립하기 때문이다. 이 성질이 곧 '자유(free)'의 범주론적 정의이며, van Kampen 정리에서 포함유도사상 $j_\\alpha:\\pi_1(A_\\alpha)\\to\\pi_1(X)$로부터 $\\Phi:\\ast_\\alpha\\pi_1(A_\\alpha)\\to\\pi_1(X)$를 만드는 엔진이 된다.",
+          "proof_steps": [
+            "유일성: 확장 $\\varphi$가 있으면 각 $g_i$가 $G_{\\alpha_i}$의 원소이고 $\\varphi|G_\\alpha=\\varphi_\\alpha$이므로 $\\varphi(g_1\\cdots g_n)=\\varphi_{\\alpha_1}(g_1)\\cdots\\varphi_{\\alpha_n}(g_n)$이어야 한다. 따라서 확장은 이 공식으로 유일하게 결정된다.",
+            "존재·잘 정의됨: 이 공식으로 $\\varphi$를 정의하면, 축약 조작(같은 $G_\\alpha$의 인접 글자 $g_i g_{i+1}$을 곱 하나로 합치기, 항등원 글자 지우기)이 $\\varphi_\\alpha$의 준동형성 때문에 $H$에서의 상을 바꾸지 않으므로 잘 정의된다. 이어 붙이기 곱과도 양립하므로 $\\varphi$는 준동형이다.",
+            "예: $G*H$에서 포함 $G\\hookrightarrow G\\times H$($g\\mapsto(g,e)$)와 $H\\hookrightarrow G\\times H$($h\\mapsto(e,h)$)가 유도하는 확장 $G*H\\to G\\times H$은 전사다(상이 $G\\times\\{e\\}$와 $\\{e\\}\\times H$를 포함해 전체를 생성). 이 사상이 바로 '서로 다른 인자를 교환시키는' 관계를 부과하는 몫사상이다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.8,
+                  0.15
+                ],
+                "to": [
+                  -0.3,
+                  1.05
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.7,
+                  -0.05
+                ],
+                "to": [
+                  1.7,
+                  -0.05
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.4,
+                  1.0
+                ],
+                "to": [
+                  1.75,
+                  0.15
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.1,
+                  0
+                ],
+                "text": "G_alpha"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.25
+                ],
+                "text": "*_alpha G_alpha"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.1,
+                  0
+                ],
+                "text": "H"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.35,
+                  0.75
+                ],
+                "text": "incl"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.28
+                ],
+                "text": "phi_alpha"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.35,
+                  0.75
+                ],
+                "text": "phi (unique)"
+              }
+            ],
+            "caption": "보편성질(가환 삼각형): 각 $\\varphi_\\alpha:G_\\alpha\\to H$은 포함 $G_\\alpha\\hookrightarrow\\ast_\\alpha G_\\alpha$를 통해 유일한 $\\varphi:\\ast_\\alpha G_\\alpha\\to H$로 확장된다. 이것이 '자유대상'의 정의이자 van Kampen의 $\\Phi$를 만드는 원리다."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{Z}_2*\\mathbb{Z}_2=\\langle a,b\\mid a^2=b^2=e\\rangle$에서 다음을 하라. (1) 길이 $\\le 4$인 축약어를 모두 나열하라. (2) $ba=(ab)^{-1}$을 확인하고 $ab$가 무한위수임을 보여라. (3) $a(ab)a^{-1}=(ab)^{-1}$을 확인하라.",
+          "hint": "$a^2=b^2=e$라 같은 글자가 연달아 오면 소거된다 — 축약어는 $a,b$가 번갈아 나오는 낱말뿐이다. 또 $a^{-1}=a,\\ b^{-1}=b$임을 이용하라.",
+          "solution": "(1) 빈 낱말, $a,b$(길이 1), $ab,ba$(길이 2), $aba,bab$(길이 3), $abab,baba$(길이 4). (2) $(ab)(ba)=a(bb)a=a\\,a=e$이므로 $ba=(ab)^{-1}$. $(ab)^n$은 $a,b$가 번갈아 $2n$개인 축약어라 어떤 $n\\ge1$에서도 빈 낱말이 아니므로 $ab$는 무한위수. (3) $a^{-1}=a$이므로 $a(ab)a^{-1}=a(ab)a=(aa)(ba)=e\\cdot ba=ba=(ab)^{-1}$. 이 켤레 관계 $a(ab)a^{-1}=(ab)^{-1}$가 $\\mathbb{Z}_2*\\mathbb{Z}_2\\cong\\mathbb{Z}\\rtimes\\mathbb{Z}_2=D_\\infty$(무한이면군)의 반직접곱 구조를 준다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -3,
+                  0
+                ],
+                "to": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -2,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  -0.5
+                ],
+                "to": [
+                  0,
+                  0.5
+                ],
+                "dash": "4,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  -0.5
+                ],
+                "to": [
+                  1,
+                  0.5
+                ],
+                "dash": "4,3"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.15,
+                  0.8
+                ],
+                "to": [
+                  2.15,
+                  0.8
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.75
+                ],
+                "text": "a"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  -0.75
+                ],
+                "text": "b"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.15,
+                  1.05
+                ],
+                "text": "ab"
+              }
+            ],
+            "caption": "두 반사 $a,b$의 합성 $ab$는 거리 $2$의 평행이동이라 무한위수. $(ab)^n$은 $2n$만큼 이동하므로 결코 항등이 되지 않는다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "보편성질을 이용해 $\\mathbb{Z}*\\mathbb{Z}=\\langle a,b\\rangle$에서 $\\mathbb{Z}\\times\\mathbb{Z}$로 가는 자연스러운 전사 준동형을 구성하고, 그것이 단사가 아님을 구체적 원소로 보여라.",
+          "hint": "$G*H\\to G\\times H$ 예를 $G=H=\\mathbb{Z}$에 적용하라: $a\\mapsto(1,0),\\ b\\mapsto(0,1)$. 교환자 $aba^{-1}b^{-1}$은 어디로 가는가?",
+          "solution": "두 준동형 $\\varphi_1:\\langle a\\rangle=\\mathbb{Z}\\to\\mathbb{Z}\\times\\mathbb{Z},\\ a\\mapsto(1,0)$과 $\\varphi_2:\\langle b\\rangle=\\mathbb{Z}\\to\\mathbb{Z}\\times\\mathbb{Z},\\ b\\mapsto(0,1)$을 보편성질로 확장하면 $\\varphi:\\mathbb{Z}*\\mathbb{Z}\\to\\mathbb{Z}\\times\\mathbb{Z}$을 얻는다 — 낱말의 $a$-지수합을 첫 성분, $b$-지수합을 둘째 성분으로 보내는 준동형이다. 상이 $(1,0),(0,1)$을 포함해 $\\mathbb{Z}\\times\\mathbb{Z}$를 생성하므로 전사다. 그러나 교환자 $aba^{-1}b^{-1}$은 $\\varphi$ 아래 $(1,0)+(0,1)-(1,0)-(0,1)=(0,0)$으로 가는데, $\\mathbb{Z}*\\mathbb{Z}$에서는 $ab\\ne ba$라 $aba^{-1}b^{-1}$이 자명하지 않은 축약어다. 따라서 $\\varphi$는 단사가 아니며 그 커널은 교환자부분군 $[\\mathbb{Z}*\\mathbb{Z},\\mathbb{Z}*\\mathbb{Z}]$ — 즉 $\\varphi$는 아벨화 사상이고, 이것이 앞 명제의 랭크 논증($F^{\\mathrm{ab}}$)에서 쓴 바로 그 눌러 펴기다."
+        },
+        {
+          "type": "ox",
+          "question": "자유곱 $G*H$에서 $G$와 $H$는 각각 부분군으로 박히며, 두 부분군은 오직 항등원에서만 만난다.",
+          "answer": "O",
+          "explanation": "한 글자 낱말들이 각 인자를 부분군으로 실현한다($g\\mapsto g$, $g=1$이면 빈 낱말). 서로 다른 인자의 한 글자 낱말은 소속 군이 달라 겹칠 수 없고, 두 부분군은 공통 항등원인 빈 낱말에서만 만난다. (이것이 앞 명제의 '서로소' 진술이다.)"
+        },
+        {
+          "type": "ox",
+          "question": "$\\mathbb{Z}_2*\\mathbb{Z}_2$는 원소가 유한개인 유한군이다.",
+          "answer": "X",
+          "explanation": "각 인자 $\\mathbb{Z}_2$만 유한할 뿐 자유곱은 무한군이다. 원소는 $a,b$가 번갈아 나오는 임의 길이의 축약어라 무한히 많고, $ab$가 무한위수인 무한이면군 $D_\\infty\\cong\\mathbb{Z}\\rtimes\\mathbb{Z}_2$이다. 두 유한군의 자유곱이 무한군이 될 수 있다는 점이 곱군·직합과 결정적으로 다른 대목이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "자유곱의 보편성질(각 $G_\\alpha\\to H$가 $\\ast_\\alpha G_\\alpha\\to H$로 유일하게 확장)이 왜 '자유(free)'라는 이름을 정당화하는가? 그리고 이 성질이 곧이어 나올 van Kampen 정리에서 어떤 역할을 할 것으로 예상되는가?",
+          "hint": "'자유'는 '관계를 최소한만 부과' 또는 '어떤 목표로도 유일하게 사상 가능'을 뜻한다. van Kampen에서 각 조각 $A_\\alpha$의 $\\pi_1(A_\\alpha)$이 전체 $\\pi_1(X)$로 어떻게 들어가는지 생각하라.",
+          "answer": "보편성질은 '$\\ast_\\alpha G_\\alpha$이 $G_\\alpha$들을 담는 가장 자유로운(=관계를 최소한만 부과한) 군'이라는 범주론적 의미의 자유(자유대상, free object)를 정확히 표현한다: $G_\\alpha$들에서 임의의 목표 $H$로 가는 준동형 데이터가 주어지면 그것을 실현하는 방법이 정확히 하나 있다. 관계가 더 많은 군은 이런 보편적 수용성을 갖지 못한다 — 어떤 $\\varphi_\\alpha$들은 확장되지 못하므로, 그런 의미에서 자유곱은 '제약이 없다'. van Kampen 정리에서는 $X=\\bigcup_\\alpha A_\\alpha$의 각 조각이 주는 포함유도사상 $j_\\alpha:\\pi_1(A_\\alpha)\\to\\pi_1(X)$이 바로 그 준동형 데이터이고, 보편성질이 이들을 하나의 사상 $\\Phi:\\ast_\\alpha\\pi_1(A_\\alpha)\\to\\pi_1(X)$로 유일하게 묶어 준다. 자유곱이 '가장 큰 후보'이므로 $\\Phi$는 (적당한 경로연결 가정 아래) 전사가 되고, 남은 일은 조각들의 교집합 $A_\\alpha\\cap A_\\beta$에서 오는 관계 — 즉 $\\Phi$의 커널 — 를 알아내는 것뿐이다. 요컨대 보편성질은 van Kampen이 '생성원은 조각들에서, 관계는 교집합에서'라는 형태를 갖게 만드는 대수적 토대다."
+        }
+      ]
+    }
+  ]
+}

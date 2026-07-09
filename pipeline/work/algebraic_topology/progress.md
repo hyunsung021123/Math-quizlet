@@ -25,7 +25,7 @@
 | 009 | [x] | 1.1.3 Induced Homomorphisms | section | `009__AlgebraicTopol__1_1_3_InducedHomomorphisms.txt` |
 | 010 | [x] | 1.1.ex Exercises | exercises | `010__AlgebraicTopol__1_1_ex_Exercises__EX.txt` |
 | 011 | [x] | 1.2 Van Kampen's Theorem | section | `011__AlgebraicTopol__1_2_VanKampensTheorem.txt` |
-| 012 | [ ] | 1.2.1 Free Products of Groups | section | `012__AlgebraicTopol__1_2_1_FreeProductsofGroups.txt` |
+| 012 | [x] | 1.2.1 Free Products of Groups | section | `012__AlgebraicTopol__1_2_1_FreeProductsofGroups.txt` |
 | 013 | [ ] | 1.2.2 The van Kampen Theorem (분할 part 1) _(원본 #013)_ | section | `013__AlgebraicTopol__1_2_2_ThevanKampenTheorem__p1.txt` |
 | 014 | [ ] | 1.2.2 The van Kampen Theorem (분할 part 2) _(원본 #014)_ | section | `014__AlgebraicTopol__1_2_2_ThevanKampenTheorem__p2.txt` |
 | 015 | [ ] | 1.2.3 Applications to Cell Complexes | section | `015__AlgebraicTopol__1_2_3_ApplicationstoCellComplexe.txt` |
