@@ -1,0 +1,178 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Hatcher, Algebraic Topology",
+    "overall_goal": "공간에 대수적 그림자(군·환 등)를 씌우는 함자(functor)라는 대수적 위상수학의 큰 그림을 이해하고, 그중 가장 단순하면서 근본적인 함자인 기본군(fundamental group)을 정의한다. 나아가 원의 기본군이 무한순환군임을 보이고, 이를 통해 '기본군이 다르면 두 공간은 위상동형이 아니다'라는 강력한 판별법을 손에 넣는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.2.2 The van Kampen Theorem (part 2) — 셀 복합체에의 응용: 2-셀 부착",
+      "step1_big_picture": {
+        "context": "part 1에서 van Kampen 정리(1.20)와 여러 응용을 봤다. 이 조각은 두 가지를 잇는다. 먼저 하와이 귀걸이(예제 1.25)의 뒷이야기: $\\pi_1(X)$은 단지 비가산일 뿐 아니라 비가환이며(작은 원들을 뭉개는 되추림이 유한계수 자유군으로 전사한다), Shelah의 이분법 정리(경로연결·국소경로연결 콤팩트 거리공간의 $\\pi_1$은 유한생성이거나 비가산)가 성립한다. 그다음 이 절의 마지막 주제 '셀 복합체에의 응용': 2-셀을 붙이면 $\\pi_1$이 어떻게 변하는가. 3차원 이상 셀은 $\\pi_1$에 영향이 없으므로(part 1의 밀어내기, 명제 1.14와 같은 이유 — 절 끝 연습문제) 모든 관심은 2-셀 부착에 있다. 핵심은 명제 1.26이다: 경로연결 $X$에 부착사상 $\\varphi_\\alpha:S^1\\to X$로 2-셀들을 붙여 $Y$를 얻으면 $\\pi_1(Y)\\cong\\pi_1(X)/N$이고, $N$은 부착 고리 $\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha$들이 생성하는 정규부분군이다. 재사용: van Kampen(1.20), 변형되추림 동형(명제 1.17·1.18), 밀어내기(명제 1.14), 곱·쐐기 계산.",
+        "hidden_intuition": "'생성원은 그대로, 2-셀은 관계를 붙인다.' 2-셀을 원판 $D^2$로 $S^1$을 따라 붙이면 그 부착 고리 $\\varphi_\\alpha$가 이제 원판을 채워 널호모토픽해진다 — 즉 $[\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha]=1$이라는 관계가 $\\pi_1$에 추가된다. 고차원 셀($n\\ge3$)은 고리를 가둘 1차원 구멍을 만들지 못해 $\\pi_1$을 건드리지 못한다(part 1 밀어내기와 같은 이유). 이 명제는 '군의 표시(presentation)'와 위상을 잇는 다리다: 생성원 = 1-셀(또는 $X$의 $\\pi_1$), 관계 = 2-셀의 부착사상. 그래서 임의의 표시 $\\langle$생성원$\\mid$관계$\\rangle$로부터 그 군을 기본군으로 갖는 2-복합체를 만들 수 있고(모든 군이 어떤 공간의 $\\pi_1$이 된다 — $X_G$), 곡면의 $\\pi_1$도 이렇게 계산된다. 증명의 기술적 요령: $Y$에는 van Kampen에 필요한 열린집합이 부족하므로, 각 셀에 직사각형 '손잡이 띠(strip)'를 붙여 살짝 부풀린 $Z\\simeq Y$를 만든다. 띠의 자유로운 위 모서리가 $Z\\to Y$ 변형되추림을 보장하고, 왼 모서리들을 한데 동일시해 공통 밑점을 만들어 밑점 어긋남 문제까지 한꺼번에 해결한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                -0.6,
+                0.4
+              ],
+              "r": 1.2
+            },
+            {
+              "shape": "circle",
+              "center": [
+                3.2,
+                0.7
+              ],
+              "r": 0.85
+            },
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  0.5,
+                  0.55
+                ],
+                [
+                  2.35,
+                  0.9
+                ],
+                [
+                  2.35,
+                  1.7
+                ],
+                [
+                  0.5,
+                  1.35
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.5,
+                0.55
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2.35,
+                0.9
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.1,
+                1.05
+              ],
+              "text": "X"
+            },
+            {
+              "shape": "label",
+              "at": [
+                3.2,
+                0.7
+              ],
+              "text": "e2_alpha"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.4,
+                1.32
+              ],
+              "text": "S_alpha"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.4,
+                0.5
+              ],
+              "text": "gamma_alpha"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.35,
+                0.3
+              ],
+              "text": "x_0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.55,
+                0.72
+              ],
+              "text": "y"
+            }
+          ],
+          "caption": "명제 1.26 증명의 확장공간 $Z$. 각 2-셀 $e^2_\\alpha$에 직사각형 띠 $S_\\alpha$를 붙인다 — 아래 모서리는 $\\gamma_\\alpha$를 따라, 오른 모서리는 셀 안 호를 따라 붙이고, 모든 띠의 왼 모서리는 한 점($x_0$)에 동일시. 위 모서리가 자유로워 $Z$는 $Y$로 변형되추림되고, 열린집합이 충분해져 van Kampen을 적용할 수 있다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "참고 (하와이 귀걸이, 이어서: 비가환성과 Shelah 이분법)",
+          "formal_statement": "예제 1.25의 하와이 귀걸이 $X$의 기본군은 $\\prod_{n=1}^\\infty\\mathbb{Z}$보다도 훨씬 복잡하다. 우선 $\\pi_1(X)$은 비가환이다: $C_n$보다 작은 원들을 모두 밑점으로 뭉개는 되추림 $X\\to C_1\\cup\\cdots\\cup C_n$이 $\\pi_1(X)$에서 계수 $n$ 자유군으로의 전사를 유도하므로, 임의로 큰 비가환 자유군을 몫으로 가져 자신도 비가환이다(완전한 기술은 [Cannon–Conner 2000]). 또한 Shelah(1988)의 정리: 경로연결·국소경로연결 콤팩트 거리공간 $X$의 $\\pi_1(X)$은 유한생성이거나 비가산이다 — '가산 무한생성'이라는 중간 단계는 이런 공간에서 나올 수 없다. 반면 가산 개 원의 쐐기합은 (밑점에서 국소경로연결이 유지되어) $\\pi_1$이 가산 생성 자유군이라 가산이며, 하와이 귀걸이와 결정적으로 다르다."
+        },
+        {
+          "type": "Remark",
+          "name": "설정 (2-셀 부착과 정규부분군 $N$)",
+          "formal_statement": "경로연결 공간 $X$에 부착사상 $\\varphi_\\alpha:S^1\\to X$로 2-셀 $e^2_\\alpha$들을 붙여 $Y$를 만든다. $\\varphi_\\alpha$는 $\\varphi_\\alpha(s_0)$에 밑점을 둔 고리를 정하는데 $\\alpha$마다 이 밑점이 다를 수 있다. 밑점 $x_0\\in X$과 각 $\\alpha$에 대해 $x_0$에서 $\\varphi_\\alpha(s_0)$로 가는 경로 $\\gamma_\\alpha$를 잡으면 $\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha$는 $x_0$ 고리다. 이 고리는 $X$에서는 널호모토픽이 아닐 수 있으나 셀 $e^2_\\alpha$을 붙인 뒤에는 확실히 널호모토픽이다. 따라서 이들이 생성하는 정규부분군 $N\\subset\\pi_1(X,x_0)$은 포함 $X\\hookrightarrow Y$가 유도하는 $\\pi_1(X,x_0)\\to\\pi_1(Y,x_0)$의 커널에 든다. $N$은 $\\gamma_\\alpha$의 선택과 무관하다: $\\gamma_\\alpha$를 같은 끝점의 다른 경로 $\\eta_\\alpha$로 바꾸면 $\\eta_\\alpha\\varphi_\\alpha\\bar\\eta_\\alpha=(\\eta_\\alpha\\bar\\gamma_\\alpha)(\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha)(\\gamma_\\alpha\\bar\\eta_\\alpha)$이라 켤레만 달라져 같은 정규부분군을 생성한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.26 (2-셀 부착과 $\\pi_1$)",
+          "formal_statement": "경로연결 $X$에 부착사상 $\\varphi_\\alpha:S^1\\to X$로 2-셀들을 붙여 $Y$를 얻으면, 포함 $X\\hookrightarrow Y$은 전사 $\\pi_1(X,x_0)\\to\\pi_1(Y,x_0)$을 유도하고 그 커널은 $N$이다. 따라서 $$\\pi_1(Y)\\cong\\pi_1(X)/N,$$ 여기서 $N$은 고리 $\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha$들이 생성하는 정규부분군이다.",
+          "idea_behind_proof": "$Y$ 자체에는 van Kampen에 쓸 좋은 열린집합이 없다(2-셀 경계가 $X$에 딱 붙어 있어 밑점·열린성 문제). 그래서 각 셀에 직사각형 띠 $S_\\alpha$를 붙여 살짝 부풀린 $Z\\simeq Y$를 만든다. 그러면 '셀 중심을 뺀 부분'($\\simeq X$)과 '셀+띠'(축약가능) 두 종류 열린집합으로 덮을 수 있고, 그 교집합이 원($\\pi_1=\\mathbb{Z}$)이 되어 그 생성원이 정확히 부착 고리 $\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha$를 준다. van Kampen이 이 고리를 죽이는 관계만 부과하므로 $N$이 커널이 된다.",
+          "proof_steps": [
+            "확장공간 $Z$: $Y$에 각 셀마다 직사각형 띠 $S_\\alpha=I\\times I$를 붙인다 — 아래 모서리 $I\\times\\{0\\}$은 $\\gamma_\\alpha$를 따라, 오른 모서리 $\\{1\\}\\times I$는 셀 $e^2_\\alpha$ 안의 한 호를 따라 붙이고, 모든 띠의 왼 모서리 $\\{0\\}\\times I$는 한 점에 동일시한다. 위 모서리는 자유로우므로 $Z$는 $Y$로 변형되추림된다($\\pi_1(Z)\\cong\\pi_1(Y)$). 왼 모서리들이 만난 점을 밑점으로 삼으면 밑점 어긋남이 해소된다.",
+            "열린덮개: $A=Z$에서 각 셀 $e^2_\\alpha$의 중심점을 뺀 것으로 두면, $A$는 $X$(와 띠·셀 경계)로 변형되추림되어 $\\pi_1(A)\\cong\\pi_1(X)$. 각 $\\alpha$에 대해 $B_\\alpha=$(열린 셀 $e^2_\\alpha$와 그 띠 $S_\\alpha$를 포함하는 축약가능 열린집합)으로 두면 $B_\\alpha$는 원판+띠라 축약가능하여 $\\pi_1(B_\\alpha)=0$.",
+            "교집합: $A\\cap B_\\alpha$는 '중심 뺀 셀'과 띠라 원환(annulus) 모양이라 원 $S^1$으로 변형되추림되어 $\\pi_1(A\\cap B_\\alpha)\\cong\\mathbb{Z}$. 그 생성원은 셀 경계 고리이고, $A$ 안에서는 $\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha$(밑점으로 끌어온 부착 고리)와 호모토픽, $B_\\alpha$ 안에서는 셀을 채워 자명하다. 서로 다른 $B_\\alpha,B_\\beta$는 공통 왼 모서리 근방에서만 만나 축약가능하고 삼중교집합도 경로연결이라 van Kampen이 적용된다.",
+            "van Kampen: $\\pi_1(B_\\alpha)=0$이므로 $\\pi_1(Z)\\cong\\pi_1(A)\\big/N'$, 여기서 관계는 각 $A\\cap B_\\alpha$의 생성원이 $A$에서 $[\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha]$, $B_\\alpha$에서 $1$이 되어 강제되는 $[\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha]=1$이다. 즉 $N'$은 $[\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha]$들의 정규폐포 $N$이다.",
+            "$\\pi_1(A)\\cong\\pi_1(X)$이고 $\\pi_1(Z)\\cong\\pi_1(Y)$이므로 $\\pi_1(Y)\\cong\\pi_1(X)/N$이며, 이 동형은 포함 $X\\hookrightarrow Y$가 유도하는 사상(전사, 커널 $N$)이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$S^1$에 부착사상 $\\varphi:S^1\\to S^1,\\ z\\mapsto z^n$($n\\ge1$)으로 2-셀 하나를 붙여 만든 공간 $Y$의 기본군을 명제 1.26으로 구하라. $n=2$이면 어떤 유명한 공간인가?",
+          "hint": "$\\pi_1(S^1)=\\langle a\\rangle\\cong\\mathbb{Z}$. 부착사상 $z\\mapsto z^n$은 $S^1$을 $n$바퀴 감으므로 부착 고리가 $a^n$이다. 명제 1.26의 $N=\\langle\\!\\langle a^n\\rangle\\!\\rangle$.",
+          "solution": "$X=S^1$이라 $\\pi_1(X)=\\langle a\\rangle\\cong\\mathbb{Z}$. 부착사상 $z\\mapsto z^n$의 유도 고리는 $a^n$이다(밑점이 하나뿐이라 $\\gamma$는 상수로 택함). 명제 1.26으로 $\\pi_1(Y)\\cong\\mathbb{Z}\\big/\\langle\\!\\langle a^n\\rangle\\!\\rangle=\\langle a\\mid a^n\\rangle\\cong\\mathbb{Z}/n\\mathbb{Z}$. $n=2$이면 $\\pi_1(Y)\\cong\\mathbb{Z}/2$이고, 이 $Y$는 실사영평면 $\\mathbb{RP}^2$이다(원판 경계를 두 바퀴 감아 붙인 것). 일반 $n$에 대해서는 무어 공간(Moore space) $M(\\mathbb{Z}/n,1)$의 2-골격이 된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "쐐기 $S^1\\vee S^1$($\\pi_1=\\langle a,b\\rangle$ 자유군)에 2-셀 하나를 부착 낱말이 $abab^{-1}$이 되도록 붙여 클라인 병 $K$를 만든다. $\\pi_1(K)$의 표시를 쓰고 그 아벨화($=H_1$)를 구하라. 부착 낱말을 $aba^{-1}b^{-1}$로 바꾸면 무엇이 달라지는가?",
+          "hint": "명제 1.26으로 $\\pi_1(K)=\\langle a,b\\mid abab^{-1}\\rangle$. 아벨화는 관계를 덧셈으로 바꿔($a+b+a-b=0$) 정리하라.",
+          "solution": "명제 1.26으로 $\\pi_1(K)=\\langle a,b\\mid abab^{-1}\\rangle$. 아벨화하면 관계 $abab^{-1}=1$이 $a+b+a-b=2a=0$이 되므로 $H_1(K)\\cong\\langle a,b\\mid 2a=0\\rangle_{\\mathrm{ab}}\\cong\\mathbb{Z}\\oplus\\mathbb{Z}/2$($b$는 자유, $a$는 위수 $2$). 비틀림 $\\mathbb{Z}/2$의 출현이 클라인 병이 방향불가능임을 대수적으로 보여 준다. 부착 낱말을 $aba^{-1}b^{-1}$로 바꾸면 토러스가 되어 $\\pi_1=\\langle a,b\\mid aba^{-1}b^{-1}\\rangle\\cong\\mathbb{Z}\\times\\mathbb{Z}$, $H_1\\cong\\mathbb{Z}^2$(비틀림 없음, 방향가능)."
+        },
+        {
+          "type": "ox",
+          "question": "3차원 이상의 셀을 붙이면 기본군이 바뀔 수 있다.",
+          "answer": "X",
+          "explanation": "부착사상이 $S^{n-1}\\to X$인 $n\\ge3$ 셀은 $\\pi_1$을 바꾸지 않는다. part 1의 밀어내기 논증(명제 1.14)과 같은 이유로, 임의의 고리를 붙인 셀의 내부 한 점을 피하도록 밀어낼 수 있고 그 여집합은 $X$로 변형되추림되기 때문이다. 정리하면 생성원은 1-셀에서, 관계는 2-셀에서 오고, 3차원 이상 셀은 $\\pi_1$에 아무 영향이 없다 — 그래서 명제 1.26이 2-셀만 다루는 것이다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 1.26의 정규부분군 $N$은 경로 $\\gamma_\\alpha$의 선택에 의존한다.",
+          "answer": "X",
+          "explanation": "$N$은 $\\gamma_\\alpha$ 선택과 무관하다. $\\gamma_\\alpha$를 같은 끝점의 다른 경로 $\\eta_\\alpha$로 바꾸면 $\\eta_\\alpha\\varphi_\\alpha\\bar\\eta_\\alpha=(\\eta_\\alpha\\bar\\gamma_\\alpha)(\\gamma_\\alpha\\varphi_\\alpha\\bar\\gamma_\\alpha)(\\gamma_\\alpha\\bar\\eta_\\alpha)$로 켤레만 달라진다. 정규부분군은 켤레에 대해 닫혀 있으므로 생성되는 $N$이 같다. (그래서 $\\pi_1(Y)\\cong\\pi_1(X)/N$이 잘 정의된다.)"
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.26이 '군의 표시(presentation)'와 위상을 잇는 방식을 설명하라. 특히 '생성원은 1-셀에서, 관계는 2-셀에서'가 무슨 뜻이며, 이로부터 왜 모든 군이 어떤 공간의 기본군이 되는가?",
+          "hint": "표시 $\\langle g_\\alpha\\mid r_\\beta\\rangle$의 생성원과 관계를 각각 어떤 셀로 실현할지 생각하라. 원들의 쐐기의 $\\pi_1$은 무엇이고, 2-셀을 낱말 $r_\\beta$를 따라 붙이면 명제 1.26이 무엇을 준다고 하는가?",
+          "answer": "명제 1.26은 셀 복합체의 층위와 군 표시의 두 요소를 정확히 대응시킨다. 1-셀들의 쐐기(원들의 쐐기)는 예제 1.21로 자유군을 주므로 각 1-셀이 생성원 하나에 대응한다 — '생성원은 1-셀에서'. 2-셀을 부착 낱말 $r_\\beta$를 따라 붙이면 명제 1.26이 그 낱말을 죽이는 관계 $r_\\beta=1$을 부과하므로, 각 2-셀이 관계 하나에 대응한다 — '관계는 2-셀에서'. 따라서 임의의 군 표시 $G=\\langle g_\\alpha\\mid r_\\beta\\rangle$가 주어지면, 생성원마다 원 하나를 쐐기로 붙여 자유군 $F=\\langle g_\\alpha\\rangle$을 만들고, 관계 $r_\\beta$마다 그 낱말을 따라 2-셀을 붙이면, 명제 1.26으로 만들어진 2-복합체 $X_G$의 기본군이 정확히 $F\\big/\\langle\\!\\langle r_\\beta\\rangle\\!\\rangle=G$가 된다. 모든 군은 (생성원과 관계로) 표시를 가지므로, 결국 모든 군이 어떤 공간의 기본군으로 실현된다. 이것이 기본군 함자가 '군 이론 전체를 위상으로 번역'할 만큼 풍부하다는 증거이며, 곡면($aba^{-1}b^{-1}$, $abab^{-1}$ 등)의 $\\pi_1$ 계산도 이 원리의 특수한 경우다."
+        }
+      ]
+    }
+  ]
+}
