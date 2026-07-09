@@ -11,7 +11,8 @@
     },
     "chapter_0_some_underlying_geometric_noti": {
       "section:0": true,
-      "section:1": true
+      "section:1": true,
+      "section:2": true
     }
   },
   "lastPos": {
@@ -22,5 +23,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-07-09T05:46:12.378Z"
+  "updatedAt": "2026-07-09T05:46:20.713Z"
 }
