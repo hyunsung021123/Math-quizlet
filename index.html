@@ -80,7 +80,6 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A90A3' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat:no-repeat; background-position:right 12px center; min-width:0;
 }
-.topic-label.hide-sm{}
 @media (max-width:520px){ .topic-label{ display:none; } }
 
 /* GitHub sync */
@@ -405,7 +404,6 @@ p.prose{ margin:0; }
   0%{ opacity:0; transform:perspective(1400px) rotateY(7deg) translateX(14px); }
   100%{ opacity:1; transform:none; }
 }
-.card.turn-back .is-turning, .card.is-turning.rev{ }
 
 /* card kind accents on the left step badge */
 .card .step-badge.badge-frame{ background:var(--intuition-accent); box-shadow:0 2px 8px rgba(62,99,168,.24); }
@@ -452,7 +450,6 @@ p.prose{ margin:0; }
 .nav-btn.primary, .nav-btn.primary:hover{ background:var(--primary); border-color:var(--primary); color:#fff; }
 .nav-btn.primary:hover{ filter:brightness(1.06); }
 .nav-btn:disabled{ opacity:.4; cursor:default; pointer-events:none; }
-.nav-btn .nav-btn-label{ }
 
 .deck-meter{ display:flex; flex-direction:column; align-items:center; gap:6px; min-width:0; }
 .deck-count{ font-family:var(--mono); font-size:.72rem; color:var(--ink-faint); letter-spacing:.04em; }
@@ -1078,10 +1075,6 @@ p.prose{ margin:0; }
            body+'</svg>';
   }
 
-  if(typeof module !== 'undefined' && module.exports){
-    module.exports = { buildVizSVG:buildVizSVG, zonogon:zonogon, convexHull:convexHull };
-  }
-
   var DATA_DIR = 'data/';
   var TYPE_MAP = {
     Definition:['정의','def'], Theorem:['정리','thm'], Lemma:['보조정리','lem'],
@@ -1315,32 +1308,23 @@ p.prose{ margin:0; }
        - 펜(pointerType 'pen')은 항상 필기, 마우스는 항상 필기(펜이 없는 PC를 대신함).
        - 손가락(touch)은, 이 세션에서 실제 펜 입력을 한 번이라도 감지하기 전까지는(=아직 폰/PC로
          간주) 필기하고, 펜을 한 번이라도 쓰면(=태블릿으로 간주) 그 뒤로는 스크롤로 취급한다.
-       - 상단 📖 버튼(책보기 모드)을 켜면 모든 입력이 스크롤/탭으로 취급된다(필기 없이 훑어보기·
-         카드 안의 버튼 누르기용 — 캔버스가 카드 전체를 덮으므로, 스크롤이 아니라 제자리를 살짝
-         두드리기만 한 "탭"은 캔버스 밑 실제 버튼으로 클릭을 그대로 전달한다).
-     캔버스는 touch-action:none 을 고정해 두고, "스크롤이어야 하는" 포인터는 우리가 직접
-     window.scrollBy 로 스크롤을 흉내낸다 — 브라우저 touch-action 은 포인터 타입별로 나눠 줄 수
-     없어서, 펜은 막고 손가락만 통과시키는 걸 CSS만으로는 안정적으로 구현할 수 없기 때문이다.
+       - 상단 📖 버튼(책보기 모드, 기본값)을 켜면 모든 입력이 스크롤/탭으로 취급된다(필기 없이
+         훑어보기·카드 안의 버튼 누르기용 — 캔버스가 카드 전체를 덮으므로, 스크롤이 아니라 제자리를
+         살짝 두드리기만 한 "탭"은 캔버스 밑 실제 버튼으로 클릭을 그대로 전달한다). 필기 모드 중에도
+         증명/힌트/정답 보기 버튼 등 상호작용 컨트롤 위는 항상 탭으로 취급한다(isOverInteractive).
+     캔버스의 touch-action은 pinch-zoom만 허용한다 — 한 손가락 패닝(=스크롤)은 우리가 직접
+     window.scrollBy 로 흉내내고, 두 손가락 확대/축소는 브라우저 네이티브 핀치줌에 그대로 맡긴다
+     (touch-action은 포인터 개수별로 나눠 줄 수 없지만, 제스처 종류별로는 pinch-zoom만 선택적으로
+     허용할 수 있다). 카드 스와이프로 다음/이전 카드를 넘기는 기능은 없다 — 카드 이동은 하단
+     내비게이션 버튼/시크바로만 한다.
 
-     폰에서 손가락 두 개 이상(삼성 노트와 동일): 두 번째 손가락이 닿는 순간 진행 중이던 한손가락
-     획/지우개를 취소하고, 그 뒤로는 마지막 손가락이 떨어질 때까지 전부 스크롤·카드 스와이프로
-     처리한다(수직 이동은 곧장 스크롤, 손을 뗄 때 수평 이동이 더 크면 goNext/goPrev). 한 손가락은
-     펜모드(책보기 모드가 아닐 때)에서 무조건 필기만 한다 — 스크롤/스와이프로 새지 않는다.
-
-     태블릿 펜/폰 한 손가락으로 필기하는 도중에도 그 움직임이 카드 전체 스와이프(다른 기존 기능)로
-     같이 잡혀 옆 카드로 넘어가 버리는 문제가 있었다 — 그 스와이프 리스너는 Pointer Events가 아니라
-     별도의 레거시 Touch Events(`touchstart`/`touchend`)를 쓰는데, Pointer Event 쪽에서 `preventDefault()`를
-     불러도 이 레거시 리스너의 실행은 막히지 않는다(서로 독립된 API라서). `Touch.touchType`으로 스타일러스만
-     가려내는 예전 수정은 손가락 드로잉엔 적용되지 않아 불충분했다 — 지금은 잉크 캔버스 위에서 시작한
-     터치는 펜이든 손가락이든 이 레거시 스와이프 리스너 자체를 완전히 건너뛴다(아래 쪽 "swipe left/right"
-     리스너 참고). 캔버스 위의 모든 단일 포인터 상호작용(필기·지우개·스크롤·탭 전달)과 두 손가락 스크롤/
-     스와이프는 전부 이 inkPad 모듈이 Pointer Events만으로 직접 처리하므로, 레거시 리스너가 관여할 이유가
-     없다.
+     손가락 두 개 이상이 닿으면 진행 중이던 한손가락 획/지우개를 취소하고, 그 뒤로는 마지막 손가락이
+     떨어질 때까지 아무것도 하지 않는다(포인터 캡처도 하지 않으므로 브라우저의 네이티브 핀치줌이
+     그대로 동작한다).
 
      지우개는 오브젝트(획) 단위다 — 픽셀을 지우지 않고, 지우개가 스친 획 전체를 배열에서 제거한다.
-     펜의 옆면(배럴) 버튼을 누른 채 필기하면 도구모음 토글과 무관하게 그 획 하나만 임시로 지우개
-     모드가 된다(`PointerEvent.buttons`의 2번 비트, pointerdown 시점에 한 번만 판정해 그 스트로크
-     내내 유지 — Samsung Notes의 펜 버튼 동작과 동일).
+     지우개/펜 전환은 도구모음의 지우개 버튼 하나로만 한다(펜 옆면 버튼 감지로 자동 전환하는 방식은
+     실기기에서 신뢰할 수 없어 시도 후 제거함).
 
      지금은 로컬 저장만 한다(기기 간 동기화는 별도 논의 필요 — 그림 데이터는 체크박스보다 훨씬
      커서 그대로 GitHub 동기화에 얹으면 요청이 무거워진다). */
@@ -2134,28 +2118,6 @@ p.prose{ margin:0; }
     state.visited.add(target);
     state.cardIndex = 1e9;            // renderMain clamps to the last card
     renderRail(); renderMain('back');
-  }
-
-  function renderBlock(b){
-    var t = b.type || 'Remark';
-    var m = TYPE_MAP[t] || ['정리','thm'];
-    var ko = m[0], cls = m[1];
-    var idea = b.idea_behind_proof
-      ? '<div class="insight"><div class="insight-head">핵심 아이디어 · Idea behind the proof</div><p class="prose">' + fmt(b.idea_behind_proof) + '</p></div>'
-      : '';
-    var steps = (Array.isArray(b.proof_steps) && b.proof_steps.length)
-      ? '<div class="proof"><div class="proof-head">증명</div><ol class="proof-list">' +
-          b.proof_steps.map(function(s){ return '<li>' + fmt(s) + '</li>'; }).join('') +
-        '</ol></div>'
-      : '';
-    return '<article class="claim">' +
-             '<div class="claim-top">' +
-               '<span class="claim-type type-' + cls + '">' + ko + ' · ' + esc(t) + '</span>' +
-               (b.name ? '<span class="claim-name">' + esc(b.name) + '</span>' : '') +
-             '</div>' +
-             '<div class="claim-statement prose">' + fmt(b.formal_statement || '') + '</div>' +
-             idea + steps + renderViz(b.visualization) +
-           '</article>';
   }
 
   function renderCheckpoint(c, idx){
