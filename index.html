@@ -141,30 +141,30 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   border-bottom:1px solid var(--line);
 }
 .ink-toolbar{
-  display:flex; flex-direction:row; align-items:center; gap:10px;
-  padding:6px 12px; overflow-x:auto;
+  display:flex; flex-direction:row; align-items:center; justify-content:flex-end; gap:11px;
+  padding:7px 14px; overflow-x:auto;
 }
 .ink-sep{ flex:0 0 auto; width:1px; align-self:stretch; background:var(--line); }
-.ink-swatches, .ink-widths{ display:flex; flex-direction:row; align-items:center; gap:6px; flex:0 0 auto; }
+.ink-swatches, .ink-widths{ display:flex; flex-direction:row; align-items:center; gap:7px; flex:0 0 auto; }
 .ink-swatch{
-  width:20px; height:20px; border-radius:50%; padding:0; cursor:pointer; flex:0 0 auto;
+  width:23px; height:23px; border-radius:50%; padding:0; cursor:pointer; flex:0 0 auto;
   border:2px solid transparent; box-shadow:inset 0 0 0 1px rgba(0,0,0,.12);
 }
 .ink-swatch.is-active{ border-color:var(--ink-faint); }
 .ink-width{
-  width:22px; height:20px; border-radius:7px; padding:0; cursor:pointer; display:grid; place-items:center; flex:0 0 auto;
+  width:25px; height:23px; border-radius:7px; padding:0; cursor:pointer; display:grid; place-items:center; flex:0 0 auto;
   border:1px solid var(--line-strong); background:var(--surface-2);
 }
-.ink-width span{ display:block; width:12px; border-radius:999px; background:var(--ink-soft); }
+.ink-width span{ display:block; width:13px; border-radius:999px; background:var(--ink-soft); }
 .ink-width[data-width="2"] span{ height:2px; }
 .ink-width[data-width="4"] span{ height:4px; }
 .ink-width[data-width="7"] span{ height:7px; }
 .ink-width.is-active{ background:var(--primary-soft); border-color:var(--primary); }
 .ink-tool{
-  flex:0 0 auto; width:28px; height:28px; border-radius:8px; padding:0; cursor:pointer;
+  flex:0 0 auto; width:32px; height:32px; border-radius:9px; padding:0; cursor:pointer;
   display:grid; place-items:center; border:1px solid var(--line-strong); background:var(--surface-2); color:var(--ink-soft);
 }
-.ink-tool svg{ width:15px; height:15px; }
+.ink-tool svg{ width:17px; height:17px; }
 .ink-tool.is-active{ background:var(--no-bg); border-color:#E9C6C0; color:var(--no); }
 .ink-trash-wrap{ position:relative; flex:0 0 auto; }
 .ink-trash-menu{
@@ -177,20 +177,14 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
   border-radius:7px; padding:9px 10px; cursor:pointer;
 }
 .ink-trash-menu button:hover{ background:var(--surface-2); }
-.ink-canvas{ position:absolute; left:0; top:0; cursor:crosshair; touch-action:none; }
-.ink-float-toggle{
-  position:fixed; z-index:60; width:44px; height:44px; border-radius:50%; padding:0; cursor:pointer;
-  display:grid; place-items:center; border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft);
-  box-shadow:0 3px 12px rgba(20,24,35,.22); transition:background .12s,border-color .12s,color .12s;
-}
-.ink-float-toggle svg{ width:20px; height:20px; }
-.ink-float-toggle.is-active{ background:var(--no-bg); border-color:#E9C6C0; color:var(--no); }
-.ink-float-toggle[hidden]{ display:none; }
+/* pinch-zoom은 브라우저 네이티브로 남겨 두고, 한 손가락 패닝만 이 요소가 직접 처리한다
+   (touch-action은 포인터 개수별로 나눠 줄 수 없지만, 제스처 종류별로는 가능하다). */
+.ink-canvas{ position:absolute; left:0; top:0; cursor:crosshair; touch-action:pinch-zoom; }
 @media (max-width:640px){
-  .ink-toolbar{ gap:7px; padding:5px 8px; }
-  .ink-swatch{ width:16px; height:16px; }
-  .ink-width{ width:18px; height:16px; }
-  .ink-tool{ width:24px; height:24px; }
+  .ink-toolbar{ gap:8px; padding:6px 10px; }
+  .ink-swatch{ width:18px; height:18px; }
+  .ink-width{ width:20px; height:18px; }
+  .ink-tool{ width:27px; height:27px; }
 }
 
 /* ---------- Layout ---------- */
@@ -198,7 +192,10 @@ button:focus-visible, select:focus-visible{ outline:2px solid var(--primary); ou
 @media (max-width:960px){ .layout{ grid-template-columns:minmax(0,1fr); } }
 
 /* ---------- Rail ---------- */
-.rail{ position:sticky; top:var(--sticky-h); align-self:start; padding:26px 6px 40px 0; }
+.rail{
+  position:sticky; top:var(--sticky-h); align-self:start; padding:26px 6px 40px 0;
+  max-height:calc(100vh - var(--sticky-h)); overflow-y:auto;
+}
 .rail-inner{ display:flex; flex-direction:column; gap:4px; }
 .rail-title-row{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:0 12px 8px; }
 .rail-title{ font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); }
@@ -562,13 +559,6 @@ p.prose{ margin:0; }
   </div>
 </div>
 </div>
-
-<button class="ink-float-toggle" id="inkFloatToggle" type="button" title="지우개 전환" aria-label="지우개 전환" aria-pressed="false" hidden>
-  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <rect x="3" y="5.5" width="10" height="6" rx="1.3"/>
-    <path d="M3 8.5h10"/>
-  </svg>
-</button>
 
 <div class="gh-modal-overlay" id="ghModalOverlay" hidden>
   <div class="gh-modal">
@@ -1358,17 +1348,15 @@ p.prose{ margin:0; }
     var KEY = 'pdl_ink_v1';
     var PEN_SEEN_KEY = 'pdl_pen_seen_v1';
     var ERASE_RADIUS = 16; // px, 지우개 히트 판정 반경
-    var bookMode = false, erasing = false;
+    var bookMode = true, erasing = false;
     var color = '#1B2333', penWidth = 4;
     var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null, curStrokeErasing = false;
-    var lastCtxMenuTs = 0;
-    var floatBtn = null;
     var scrollPointerId = null, lastScrollY = 0, scrollStartX = 0, scrollStartY = 0, scrollMoved = false;
     var penEverSeen = false;
-    // 폰에서 손가락 두 개 이상 = 필기 대신 스크롤/카드 넘기기(삼성 노트와 동일). 손가락 pointerId를
-    // 누른 순서대로 담아 둔다 — 두 번째가 닿는 순간 진행 중이던 한손가락 획을 취소하고 전환한다.
-    var activeTouchIds = [], multiTouch = false, mtLeaderId = null;
-    var mtStartX = 0, mtStartY = 0, mtLastY = 0, mtCurX = 0;
+    // 손가락 두 개 이상이 닿으면 진행 중이던 한손가락 획을 취소하고, 그 뒤로는 아무것도 하지 않고
+    // 완전히 손을 뗀다 — pinch-zoom은 브라우저 네이티브 제스처로 그대로 넘긴다(카드 스와이프 기능
+    // 자체를 없앴으므로 여기서 손가락 개수/이동 거리를 추적해 스와이프를 만들 필요도 없다).
+    var activeTouchIds = [], multiTouch = false;
     var dpr = window.devicePixelRatio || 1;
 
     try{ penEverSeen = localStorage.getItem(PEN_SEEN_KEY) === '1'; }catch(e){}
@@ -1404,6 +1392,14 @@ p.prose{ margin:0; }
       if(bookMode) return false;
       if(pointerType === 'touch') return !penEverSeen;
       return true; // pen, mouse
+    }
+    var ALWAYS_INTERACTIVE_SEL = 'button, a, select, input, label, summary';
+    function isOverInteractive(x, y){
+      if(!canvas) return false;
+      canvas.style.pointerEvents = 'none';
+      var el = document.elementFromPoint(x, y);
+      canvas.style.pointerEvents = 'auto';
+      return !!(el && el.closest(ALWAYS_INTERACTIVE_SEL));
     }
     function markPenSeen(){
       if(penEverSeen) return;
@@ -1487,14 +1483,8 @@ p.prose{ margin:0; }
     }
 
     function effectiveErasing(e){
-      // 실기기(갤럭시 탭 S9 FE+, 크롬·삼성 인터넷 둘 다) 확인 결과, 이 플랫폼은 펜 배럴 버튼을
-      // PointerEvent.buttons로 전혀 전달하지 않는다 — 대신 contextmenu 이벤트 하나로만 새어 나온다
-      // (진단 페이지로 직접 로그를 찍어 확인함). 그래서 "누르는 동안만" 방식은 이 기기에서 원천적으로
-      // 불가능하고, 대신 contextmenu를 "버튼 눌림"으로 해석해 지우개 토글(erasing)을 뒤집는 방식으로
-      // 바꿨다 — 아래 canvas의 'contextmenu' 리스너 참고. buttons&2 검사는 그래도 남겨 둔다: 다른
-      // 기기/브라우저(예: 데스크톱 크롬 + Wacom류 디지타이저)는 buttons로 정상 전달될 수 있으므로,
-      // 그런 환경에서는 "누르는 동안만" 임시 전환이 그대로 추가로 작동한다(두 신호는 OR로 합쳐진다).
-      if(e.pointerType === 'pen') return erasing || !!(e.buttons & 2);
+      // 지우개/펜 전환은 도구모음의 지우개 버튼 하나로만 한다(펜 버튼 감지·자동 전환 관련 코드는
+      // 실기기에서 신뢰할 수 없어 전부 제거함).
       return erasing;
     }
     function beginStroke(clientX, clientY, pressureRaw){
@@ -1521,8 +1511,6 @@ p.prose{ margin:0; }
       ctx.stroke();
     }
     function commitCurStroke(){
-      // 배럴 버튼을 눌러 지우개로 전환되는 순간에도 호출된다 — 그때까지 그린 부분을 유실하지
-      // 않고 정식 획으로 저장을 마무리한 뒤에 지우개로 넘어가기 위함.
       if(!curStroke) return;
       if(curStroke.pts.length === 1){
         var rect = canvas.getBoundingClientRect(), p = curStroke.pts[0];
@@ -1542,19 +1530,19 @@ p.prose{ margin:0; }
       if(ev.pointerType === 'touch'){
         activeTouchIds.push(ev.pointerId);
         if(activeTouchIds.length >= 2){
-          // 두 번째 손가락 도착 — 진행 중이던 한손가락 획/지우개를 취소하고 스크롤·스와이프 제스처로 전환.
+          // 두 번째 손가락 도착 — 진행 중이던 한손가락 획을 취소하고, 이후로는 아무것도 하지 않고
+          // 완전히 손을 뗀다. 캡처하지 않으므로 pinch-zoom은 브라우저가 네이티브로 처리한다.
           drawing = false; curStroke = null;
           redraw();
           multiTouch = true;
-          mtLeaderId = ev.pointerId;
-          mtStartX = mtCurX = ev.clientX; mtStartY = mtLastY = ev.clientY;
-          try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
           return;
         }
       }
       if(multiTouch) return; // 이미 멀티터치 제스처 중 — 추가 손가락은 무시(개수만 추적)
 
-      if(!shouldDraw(ev.pointerType)){
+      // 필기 모드 중이라도 실제 상호작용 컨트롤(핵심 아이디어/정답/힌트 보기 버튼 등) 위를 짚었으면
+      // 캔버스가 그 위를 덮고 있을 뿐, 항상 탭으로 취급해 아래 버튼에 클릭을 넘긴다(스크롤 경로 재사용).
+      if(!shouldDraw(ev.pointerType) || isOverInteractive(ev.clientX, ev.clientY)){
         scrollPointerId = ev.pointerId;
         lastScrollY = ev.clientY;
         scrollStartX = ev.clientX; scrollStartY = ev.clientY; scrollMoved = false;
@@ -1569,14 +1557,7 @@ p.prose{ margin:0; }
       else beginStroke(ev.clientX, ev.clientY, ev.pressure);
     }
     function onPointerMove(ev){
-      if(multiTouch){
-        if(ev.pointerId !== mtLeaderId) return; // 리더 손가락의 움직임만 스크롤에 반영(중복 방지)
-        var mdy = ev.clientY - mtLastY;
-        window.scrollBy(0, -mdy);
-        mtLastY = ev.clientY;
-        mtCurX = ev.clientX;
-        return;
-      }
+      if(multiTouch) return; // 두 손가락 이상이면 아무것도 하지 않는다 — 브라우저의 pinch-zoom에 맡긴다.
       if(scrollPointerId === ev.pointerId){
         var dy = ev.clientY - lastScrollY;
         if(Math.abs(ev.clientX - scrollStartX) > 6 || Math.abs(ev.clientY - scrollStartY) > 6) scrollMoved = true;
@@ -1591,13 +1572,6 @@ p.prose{ margin:0; }
       var coalesced = ev.getCoalescedEvents ? ev.getCoalescedEvents() : [];
       var events = coalesced.length ? coalesced : [ev];
       events.forEach(function(e){
-        var wantErase = effectiveErasing(e);
-        if(wantErase !== curStrokeErasing){
-          // 배럴 버튼을 누르거나 뗀 순간 — 지금까지의 획을 그 자리에서 마무리하고 모드를 전환한다.
-          if(!curStrokeErasing) commitCurStroke();
-          curStrokeErasing = wantErase;
-          if(!curStrokeErasing) beginStroke(e.clientX, e.clientY, e.pressure);
-        }
         if(curStrokeErasing) eraseAt(e.clientX, e.clientY);
         else appendStrokePoint(e.clientX, e.clientY);
       });
@@ -1607,14 +1581,7 @@ p.prose{ margin:0; }
         var idx = activeTouchIds.indexOf(ev.pointerId);
         if(idx !== -1) activeTouchIds.splice(idx, 1);
         if(multiTouch){
-          if(ev.pointerId === mtLeaderId){ try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){} }
-          if(activeTouchIds.length === 0){
-            multiTouch = false; mtLeaderId = null;
-            var mdx = mtCurX - mtStartX, mdyTotal = mtLastY - mtStartY;
-            if(Math.abs(mdx) > 60 && Math.abs(mdx) > Math.abs(mdyTotal) * 1.3){
-              if(mdx < 0) goNext(); else goPrev();
-            }
-          }
+          if(activeTouchIds.length === 0) multiTouch = false;
           return;
         }
       }
@@ -1634,7 +1601,6 @@ p.prose{ margin:0; }
       if(!drawing) return;
       drawing = false;
       try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
-      showFloatToggle(ev.clientX, ev.clientY);
       if(curStrokeErasing){ curStroke = null; return; }
       commitCurStroke();
     }
@@ -1671,29 +1637,12 @@ p.prose{ margin:0; }
       });
       var eb = document.getElementById('inkEraseBtn');
       if(eb){ eb.classList.toggle('is-active', erasing); eb.setAttribute('aria-pressed', erasing ? 'true' : 'false'); }
-      if(floatBtn){ floatBtn.classList.toggle('is-active', erasing); floatBtn.setAttribute('aria-pressed', erasing ? 'true' : 'false'); }
-    }
-
-    // S펜 배럴 버튼을 실기기에서 감지할 방법이 없어(위 contextmenu 리스너 참고) 그 대안으로 만든,
-    // 방금 필기하던 위치 옆에 뜨는 지우개 전환 버블 — 매번 위 도구모음까지 손을 옮기지 않아도 된다.
-    function showFloatToggle(clientX, clientY){
-      if(!floatBtn || bookMode) return;
-      var size = 44, margin = 8, offset = 34;
-      var x = Math.min(Math.max(clientX + offset, margin), window.innerWidth - size - margin);
-      var y = Math.min(Math.max(clientY - offset, margin), window.innerHeight - size - margin);
-      floatBtn.style.left = x + 'px';
-      floatBtn.style.top = y + 'px';
-      floatBtn.hidden = false;
-    }
-    function hideFloatToggle(){
-      if(floatBtn) floatBtn.hidden = true;
     }
 
     function setBookMode(v){
       bookMode = v;
       var btn = document.getElementById('penToggleBtn');
       if(btn){ btn.classList.toggle('is-on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); }
-      if(v) hideFloatToggle();
     }
 
     function updateStickyOffset(){
@@ -1708,18 +1657,9 @@ p.prose{ margin:0; }
       canvas.addEventListener('pointermove', onPointerMove);
       canvas.addEventListener('pointerup', onPointerUp);
       canvas.addEventListener('pointercancel', onPointerUp);
-      // 펜 배럴 버튼이 buttons로 안 잡히는 기기(위 effectiveErasing 주석 참고)에서는 이 이벤트가
-      // 곧 "배럴 버튼 눌림" 신호다 — 누를 때마다 지우개 모드를 토글한다(도구모음 버튼을 누른 것과
-      // 동일하게 취급). 실기기 로그 상 한 번 누를 때 이 이벤트가 두 번 연달아 발사되는 경우가
-      // 있었으므로, 아주 짧은 시간 안의 중복은 같은 눌림으로 보고 한 번만 반영한다.
-      canvas.addEventListener('contextmenu', function(e){
-        e.preventDefault();
-        var now = Date.now();
-        if(now - lastCtxMenuTs < 400) return;
-        lastCtxMenuTs = now;
-        erasing = !erasing;
-        updateToolbarUI();
-      });
+      // 펜 배럴 버튼을 누른 채 화면에서 손을 떼면 일부 브라우저가 네이티브 우클릭 메뉴를 띄운다 —
+      // 필기 중 메뉴가 튀어나오는 것을 막는다(지우개 전환은 도구모음 버튼으로만 한다).
+      canvas.addEventListener('contextmenu', function(e){ e.preventDefault(); });
     }
 
     function observeCard(card){
@@ -1732,6 +1672,7 @@ p.prose{ margin:0; }
     function init(){
       var toggleBtn = document.getElementById('penToggleBtn');
       if(toggleBtn) toggleBtn.addEventListener('click', function(){ setBookMode(!bookMode); });
+      setBookMode(bookMode); // 기본값(책보기/탐색 모드)을 버튼 표시에도 반영
 
       document.querySelectorAll('.ink-swatch').forEach(function(b){
         b.addEventListener('click', function(){ color = b.getAttribute('data-color'); erasing = false; updateToolbarUI(); });
@@ -1766,16 +1707,12 @@ p.prose{ margin:0; }
         });
       }
 
-      floatBtn = document.getElementById('inkFloatToggle');
-      if(floatBtn) floatBtn.addEventListener('click', function(){ erasing = !erasing; updateToolbarUI(); });
-
       updateToolbarUI();
       updateStickyOffset();
       window.addEventListener('resize', function(){ updateStickyOffset(); resize(); redraw(); });
     }
 
     function attach(){
-      hideFloatToggle(); // 카드가 바뀌면 이전 카드 기준 위치는 의미가 없다 — 다시 필기할 때 새로 뜬다.
       if(!canvas) createCanvasEl();
       var card = mainEl.querySelector('.card');
       if(!card){ if(canvas.parentElement) canvas.remove(); return; }
@@ -2314,25 +2251,6 @@ p.prose{ margin:0; }
     if(ev.key === 'ArrowRight'){ ev.preventDefault(); goNext(); }
     else if(ev.key === 'ArrowLeft'){ ev.preventDefault(); goPrev(); }
   });
-
-  /* swipe left/right to flip through cards on touch devices */
-  var swX = 0, swY = 0, swipeOn = false;
-  mainEl.addEventListener('touchstart', function(ev){
-    if(deckNav.hidden || ev.touches.length !== 1){ swipeOn = false; return; }
-    if(ev.target.closest('button, a, select, .katex-display, .figure-svg')){ swipeOn = false; return; }
-    // 잉크 캔버스 위의 모든 단일 터치(펜이든 손가락이든)는 inkPad가 Pointer Events로 전담한다 —
-    // 이 레거시 스와이프 리스너가 같이 반응하면 필기 중 카드가 같이 넘어가 버리므로 여기서 완전히 뺀다.
-    if(ev.target.closest('.ink-canvas')){ swipeOn = false; return; }
-    swX = ev.touches[0].clientX; swY = ev.touches[0].clientY; swipeOn = true;
-  }, { passive:true });
-  mainEl.addEventListener('touchend', function(ev){
-    if(!swipeOn) return; swipeOn = false;
-    var dx = ev.changedTouches[0].clientX - swX;
-    var dy = ev.changedTouches[0].clientY - swY;
-    if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.3){
-      if(dx < 0) goNext(); else goPrev();
-    }
-  }, { passive:true });
 
   function handleGoto(g){
     if(g === 'review'){ state.view = { type:'review' }; }
