@@ -1,0 +1,646 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Hatcher, Algebraic Topology",
+    "overall_goal": "공간에 대수적 그림자(군·환 등)를 씌우는 함자(functor)라는 대수적 위상수학의 큰 그림을 이해하고, 그중 가장 단순하면서 근본적인 함자인 기본군(fundamental group)을 정의한다. 나아가 원의 기본군이 무한순환군임을 보이고, 이를 통해 '기본군이 다르면 두 공간은 위상동형이 아니다'라는 강력한 판별법을 손에 넣는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.2.2 The van Kampen Theorem (part 1) — 정리·증명과 응용",
+      "step1_big_picture": {
+        "context": "1.2.1에서 자유곱의 보편성질로 포함유도사상들 $j_\\alpha:\\pi_1(A_\\alpha)\\to\\pi_1(X)$을 하나의 $\\Phi:\\ast_\\alpha\\pi_1(A_\\alpha)\\to\\pi_1(X)$로 묶었다. 이제 van Kampen 정리(정리 1.20)가 그 $\\Phi$의 정체를 밝힌다: 알맞은 경로연결 조건 아래 $\\Phi$는 전사이고, 커널은 교집합에서 오는 관계들이 생성하는 정규부분군 $N$이라, $\\pi_1(X)\\cong\\ast_\\alpha\\pi_1(A_\\alpha)/N$이다. 이로써 공간을 분해해 기본군을 계산하는 일반 도구가 완성된다. 응용은 폭발적이다: 쐐기합·그래프의 기본군이 자유군이 되고(예제 1.21·1.22), $\\mathbb{R}^3$ 속 원 얽힘이 $\\mathbb{Z}*\\mathbb{Z}$ 대 $\\mathbb{Z}\\times\\mathbb{Z}$로 갈리며(예제 1.23), 토러스 매듭군 $G_{m,n}=\\langle a,b\\mid a^m=b^n\\rangle$이 계산되고(예제 1.24), 무한 조각의 병리(하와이 귀걸이, 예제 1.25)도 드러난다. 재사용: 보편성질(1.2.1), 자유곱·자유군(1.2·1.2.1), $\\pi_1(S^1)\\cong\\mathbb{Z}$(정리 1.7), $\\pi_1(S^n)=0$($n\\ge2$, 명제 1.14), 곱공식(명제 1.12), 변형되추림 동형(명제 1.17·1.18).",
+        "hidden_intuition": "van Kampen을 한 문장으로 요약하면 '생성원은 조각에서, 관계는 겹침에서'다. $\\Phi$의 전사성은 '어떤 고리든 조각별 고리들의 곱으로 쪼갤 수 있다'는 것 — 고리를 시간 분할해 각 토막을 한 조각 $A_i$ 안에 넣고, 토막 경계점을 교집합 $A_i\\cap A_{i+1}$ 안의 경로로 밑점에 붙들어 매면 된다(그래서 이중교집합의 경로연결이 필요). 커널이 정확히 $N$이라는 것은 '같은 겹침 고리를 $A_\\alpha$에서 보든 $A_\\beta$에서 보든 같아야 한다'는 관계 외에 다른 관계가 없다는 뜻이다. 왜 삼중교집합까지 경로연결이어야 하나? 두 인수분해를 잇는 호모토피 $F:I\\times I\\to X$를 작은 사각형으로 자르면 한 점에 최대 세 사각형이 모이고, 그 세 조각의 교집합에서 보정 경로를 잡아야 하기 때문이다. 조건이 깨지면 정리가 실제로 틀린다: $S^1$을 두 열린 호로 덮으면 교집합이 두 조각이라 $\\Phi$가 전사가 아니고($\\mathbb{Z}\\ne0$), 세 점의 현수는 삼중교집합이 끊겨 억지 세 집합 덮개가 $\\mathbb{Z}*\\mathbb{Z}*\\mathbb{Z}$이라는 틀린 답을 준다. 큰 그림에서 이 정리는 '모든 군이 어떤 공간의 기본군'($X_G$)임을 가능케 하고, 매듭·그래프·곡면의 기본군을 손에 쥐게 해 준다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                -0.8,
+                0
+              ],
+              "r": 1.5
+            },
+            {
+              "shape": "circle",
+              "center": [
+                0.8,
+                0
+              ],
+              "r": 1.5
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  -1.0,
+                  0.7
+                ],
+                [
+                  -0.5,
+                  -0.6
+                ],
+                [
+                  0.5,
+                  0.6
+                ],
+                [
+                  1.0,
+                  -0.5
+                ],
+                [
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.5,
+                1.25
+              ],
+              "text": "A_alpha"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.5,
+                1.25
+              ],
+              "text": "A_beta"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.05,
+                -0.32
+              ],
+              "text": "x_0"
+            }
+          ],
+          "caption": "공간을 겹치는 두 열린집합 $A_\\alpha,A_\\beta$로 분해. 밑점 $x_0$은 교집합에 있고, 고리는 두 조각을 오간다. 각 토막을 $A_\\alpha\\cap A_\\beta$의 경로로 밑점에 묶어 조각별 고리들의 곱으로 쪼갠다(전사). 겹침에서 오는 관계가 커널 $N$이다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "설정 ($\\Phi$와 정규부분군 $N$의 구성)",
+          "formal_statement": "$X=\\bigcup_\\alpha A_\\alpha$이 밑점 $x_0$을 포함하는 경로연결 열린집합들의 합집합이라 하자. 포함 $A_\\alpha\\hookrightarrow X$이 유도하는 $j_\\alpha:\\pi_1(A_\\alpha)\\to\\pi_1(X)$은 보편성질로 하나의 준동형 $\\Phi:\\ast_\\alpha\\pi_1(A_\\alpha)\\to\\pi_1(X)$로 확장된다. 포함 $A_\\alpha\\cap A_\\beta\\hookrightarrow A_\\alpha$이 유도하는 $i_{\\alpha\\beta}:\\pi_1(A_\\alpha\\cap A_\\beta)\\to\\pi_1(A_\\alpha)$에 대해, $j_\\alpha i_{\\alpha\\beta}=j_\\beta i_{\\beta\\alpha}$(둘 다 $A_\\alpha\\cap A_\\beta\\hookrightarrow X$가 유도)이므로 모든 $\\omega\\in\\pi_1(A_\\alpha\\cap A_\\beta)$에 대해 $i_{\\alpha\\beta}(\\omega)\\,i_{\\beta\\alpha}(\\omega)^{-1}\\in\\ker\\Phi$이다. 이런 원소들이 생성하는 정규부분군을 $N$이라 한다. 정리는 이 '자명한 관계들'이 커널 전부임을 주장한다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.20 (van Kampen)",
+          "formal_statement": "$X$가 밑점 $x_0$을 포함하는 경로연결 열린집합 $A_\\alpha$들의 합집합이라 하자. (i) 각 이중교집합 $A_\\alpha\\cap A_\\beta$이 경로연결이면 $\\Phi:\\ast_\\alpha\\pi_1(A_\\alpha)\\to\\pi_1(X)$은 전사다. (ii) 게다가 각 삼중교집합 $A_\\alpha\\cap A_\\beta\\cap A_\\gamma$도 경로연결이면 $\\ker\\Phi=N$이고, 따라서 $\\Phi$는 동형 $\\pi_1(X)\\cong\\ast_\\alpha\\pi_1(A_\\alpha)/N$을 유도한다.",
+          "idea_behind_proof": "전사성은 '고리를 조각별로 잘라 붙이기'다: 콤팩트성으로 고리를 각 토막이 한 조각에 드는 유한 분할로 나누고, 토막 경계를 교집합 경로로 밑점에 묶는다. 커널이 $N$임을 보이는 것이 어려운 부분인데, 두 인수분해(factorization)를 잇는 호모토피 $F:I\\times I\\to X$를 사각형으로 잘게 나눠 좌→우 경로를 사각형 하나씩 넘겨 가며 인수분해를 '동치 변형'만으로 바꿀 수 있음을 보인다. 한 점이 최대 세 사각형에 닿으므로 삼중교집합의 경로연결이 바로 여기서 쓰인다.",
+          "proof_steps": [
+            "전사성 (분할): 고리 $f:I\\to X$에 대해 연속성과 $I$의 콤팩트성으로 분할 $0=s_0<\\cdots<s_m=1$을 잡아 각 $f([s_{i-1},s_i])$가 한 조각 $A_i$ 안에 들게 한다. $f_i=f|[s_{i-1},s_i]$라 하면 $f=f_1\\cdots f_m$.",
+            "전사성 (밑점에 묶기): $f(s_i)\\in A_i\\cap A_{i+1}$이고 이 교집합이 경로연결이므로 그 안에서 $x_0$에서 $f(s_i)$로 가는 경로 $g_i$를 잡는다. 그러면 $f\\simeq(f_1 g_1)(\\bar g_1 f_2 g_2)(\\bar g_2 f_3 g_3)\\cdots(\\bar g_{m-1}f_m)$이고 괄호 안 각 고리는 한 $A_i$ 안의 밑점 고리다. 따라서 $[f]$가 $\\Phi$의 상에 들어 $\\Phi$는 전사.",
+            "커널 (용어): $[f]$의 인수분해란 각 $f_i$가 어떤 $A_\\alpha$ 안의 밑점 고리이고 $f\\simeq f_1\\cdots f_k$인 형식적 곱 $[f_1]\\cdots[f_k]$, 즉 $\\Phi$로 $[f]$에 가는 $\\ast_\\alpha\\pi_1(A_\\alpha)$의 (축약 안 된) 낱말이다. 두 인수분해가 동치라 함은 다음 두 이동(과 역)으로 이어지는 것이다: (I) 같은 $\\pi_1(A_\\alpha)$의 인접 항 $[f_i][f_{i+1}]$을 $[f_i f_{i+1}]$로 합치기, (II) $A_\\alpha\\cap A_\\beta$ 고리인 항을 $\\pi_1(A_\\alpha)$ 대신 $\\pi_1(A_\\beta)$의 원소로 보기. (I)은 $\\ast_\\alpha\\pi_1(A_\\alpha)$의 원소를, (II)는 몫 $Q=\\ast_\\alpha\\pi_1(A_\\alpha)/N$의 원소를 바꾸지 않는다.",
+            "커널 (호모토피 격자): 두 인수분해 $[f_1]\\cdots[f_k]$, $[f_1']\\cdots[f_\\ell']$은 $f_1\\cdots f_k\\simeq f_1'\\cdots f_\\ell'$을 주는 호모토피 $F:I\\times I\\to X$를 갖는다. 콤팩트성으로 $I\\times I$를 사각형 $R_{ij}$들로 나눠 각 $F(R_{ij})$가 한 조각 $A_{ij}$에 들게 하고, 세로변을 살짝 흔들어 한 점이 최대 세 사각형에만 닿게 한다(여기서 삼중교집합의 경로연결이 필요).",
+            "커널 (경로 밀기): 좌변에서 우변으로 가는 경로 $\\gamma_r$($\\gamma_0$=아래변, $\\gamma_{mn}$=위변)을 사각형 $R_{r+1}$을 하나씩 넘겨 이동시킨다. 각 꼭짓점 $v$($F(v)\\ne x_0$)에서 $x_0$로 가는 경로 $g_v$를 그 점이 닿는 두세 $A_{ij}$의 교집합 안에서 잡아 $F|\\gamma_r$의 인수분해를 만들면, $\\gamma_r\\to\\gamma_{r+1}$의 변화가 $R_{r+1}$에 대응하는 한 조각 $A_{ij}$ 안의 호모토피라 인수분해가 동치로 유지된다.",
+            "커널 (마무리): $\\gamma_0$의 인수분해를 $[f_1]\\cdots[f_k]$과, $\\gamma_{mn}$의 것을 $[f_1']\\cdots[f_\\ell']$과 동치로 맞출 수 있다(아래·위변 꼭짓점의 $g_v$를 알맞게 선택). 모든 $\\gamma_r$의 인수분해가 동치이므로 두 인수분해가 동치다. 이는 $Q\\to\\pi_1(X)$가 단사임을 뜻하니 $\\ker\\Phi=N$이고 $\\Phi$는 동형 $\\pi_1(X)\\cong\\ast_\\alpha\\pi_1(A_\\alpha)/N$을 유도한다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  3,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  3,
+                  0
+                ],
+                "to": [
+                  3,
+                  3
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  3,
+                  3
+                ],
+                "to": [
+                  0,
+                  3
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  3
+                ],
+                "to": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1,
+                  0
+                ],
+                "to": [
+                  1,
+                  3
+                ],
+                "dash": "3,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  0
+                ],
+                "to": [
+                  2,
+                  3
+                ],
+                "dash": "3,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  1
+                ],
+                "to": [
+                  3,
+                  1
+                ],
+                "dash": "3,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  3,
+                  2
+                ],
+                "dash": "3,3"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    0,
+                    1
+                  ],
+                  [
+                    1,
+                    1
+                  ],
+                  [
+                    1,
+                    2
+                  ],
+                  [
+                    2,
+                    2
+                  ],
+                  [
+                    3,
+                    2
+                  ]
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.25,
+                  1.5
+                ],
+                "text": "x_0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.28,
+                  1.5
+                ],
+                "text": "x_0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.5,
+                  1.5
+                ],
+                "text": "gamma_r"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.5,
+                  3.25
+                ],
+                "text": "F: IxI -> X"
+              }
+            ],
+            "caption": "커널 증명의 심장부. 두 인수분해를 잇는 호모토피 $F:I\\times I\\to X$를 사각형들로 나눈다. 좌→우 경로 $\\gamma_r$을 사각형 하나씩 넘겨 밀면 인수분해가 동치로 유지된다(좌·우변은 $F$로 $x_0$에 감). 한 점이 최대 세 사각형에 닿으므로 삼중교집합 경로연결이 필요하다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.21 (쐐기합)",
+          "formal_statement": "각 밑점 $x_\\alpha$이 $X_\\alpha$ 안 열린이웃 $U_\\alpha$의 변형되추림점이면, 쐐기합 $\\bigvee_\\alpha X_\\alpha$에 대해 $\\Phi:\\ast_\\alpha\\pi_1(X_\\alpha)\\to\\pi_1(\\bigvee_\\alpha X_\\alpha)$은 동형이다. 특히 원들의 쐐기합 $\\bigvee_\\alpha S^1_\\alpha$의 기본군은 자유군(각 원마다 $\\mathbb{Z}$ 하나의 자유곱)이고 $\\pi_1(S^1\\vee S^1)\\cong\\mathbb{Z}*\\mathbb{Z}$이다.",
+          "idea_behind_proof": "쐐기합을 van Kampen에 맞는 열린덮개로 감싼다: $A_\\alpha=X_\\alpha\\vee\\bigvee_{\\beta\\ne\\alpha}U_\\beta$은 $X_\\alpha$로 변형되추림되고, 둘 이상의 교집합 $\\bigvee_\\alpha U_\\alpha$은 한 점으로 변형되추림(단순연결)된다. 교집합이 단순연결이라 관계 $N$이 자명해져 $\\Phi$가 동형이 된다.",
+          "proof_steps": [
+            "$A_\\alpha=X_\\alpha\\vee\\bigvee_{\\beta\\ne\\alpha}U_\\beta$은 $X_\\alpha$의 열린이웃이고 그로 변형되추림되므로 $\\pi_1(A_\\alpha)\\cong\\pi_1(X_\\alpha)$(명제 1.17/1.18).",
+            "서로 다른 둘 이상의 $A_\\alpha$의 교집합은 $\\bigvee_\\alpha U_\\alpha$이고 한 점으로 변형되추림되어 단순연결이다. 이중·삼중 교집합이 모두 경로연결이라 van Kampen 정리가 적용된다.",
+            "교집합이 단순연결($\\pi_1=0$)이라 관계군 $N$이 자명하다. 따라서 $\\Phi$가 동형이고 $\\pi_1(\\bigvee_\\alpha X_\\alpha)\\cong\\ast_\\alpha\\pi_1(X_\\alpha)$. 원의 쐐기면 각 $\\pi_1(S^1)=\\mathbb{Z}$이라 자유군을 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.22 (그래프: 정육면체의 모서리)",
+          "formal_statement": "정육면체의 열두 모서리로 이루어진 그래프 $X$를 보자. 모든 꼭짓점을 포함하는 축약가능 부분그래프인 극대나무(maximal tree) $T$는 일곱 모서리로 이루어진다. 그러면 $\\pi_1(X)$은 $T$에 없는 다섯 모서리마다 하나씩, $\\mathbb{Z}$ 다섯 개의 자유곱(계수 $5$의 자유군)이다. 일반적으로 연결그래프의 기본군은 항상 자유군이다(§1.A).",
+          "idea_behind_proof": "각 여분 모서리 $e_\\alpha$마다 $T\\cup e_\\alpha$로 변형되추림되는 열린이웃 $A_\\alpha$를 잡으면, 둘 이상의 교집합은 $T$로 변형되추림되어 축약가능(단순연결)하다. 예제 1.21과 같은 논리로 $N$이 자명해져 $\\pi_1(X)\\cong\\ast_\\alpha\\pi_1(A_\\alpha)$이고, 각 $A_\\alpha$가 원으로 변형되추림되어 $\\pi_1=\\mathbb{Z}$.",
+          "proof_steps": [
+            "$X-T$의 각 모서리 $e_\\alpha$에 대해 $T\\cup e_\\alpha$로 변형되추림되는 열린이웃 $A_\\alpha$를 잡는다. $A_\\alpha$는 원으로 변형되추림되므로 $\\pi_1(A_\\alpha)\\cong\\mathbb{Z}$.",
+            "둘 이상의 $A_\\alpha$의 교집합은 $T$로 변형되추림되어 축약가능(단순연결)하다. 이중·삼중 교집합이 단순연결이라 van Kampen으로 $N$이 자명하고 $\\pi_1(X)\\cong\\ast_\\alpha\\pi_1(A_\\alpha)$.",
+            "$T$에 없는 모서리가 다섯 개(열두 − 일곱)이므로 $\\pi_1(X)$은 계수 $5$의 자유군이다. 생성원은 각 $e_\\alpha$마다 '$T$를 따라 $e_\\alpha$의 한 끝으로 가 $e_\\alpha$를 건너 다시 $T$를 따라 밑점으로 돌아오는' 고리 $f_\\alpha$로 택할 수 있다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0,
+                  0
+                ],
+                "to": [
+                  2,
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  0,
+                  0
+                ],
+                "to": [
+                  2,
+                  2,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  2,
+                  0
+                ],
+                "to": [
+                  0,
+                  2,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0,
+                  0
+                ],
+                "to": [
+                  0,
+                  0,
+                  2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  0,
+                  0
+                ],
+                "to": [
+                  2,
+                  0,
+                  2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  2,
+                  0
+                ],
+                "to": [
+                  2,
+                  2,
+                  2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2,
+                  0
+                ],
+                "to": [
+                  0,
+                  2,
+                  2
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2,
+                  0
+                ],
+                "to": [
+                  0,
+                  0,
+                  0
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0,
+                  2
+                ],
+                "to": [
+                  2,
+                  0,
+                  2
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  0,
+                  2
+                ],
+                "to": [
+                  2,
+                  2,
+                  2
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2,
+                  2,
+                  2
+                ],
+                "to": [
+                  0,
+                  2,
+                  2
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2,
+                  2
+                ],
+                "to": [
+                  0,
+                  0,
+                  2
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  2,
+                  0
+                ],
+                "text": "T (solid)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  0,
+                  2
+                ],
+                "text": "e (dashed)"
+              }
+            ],
+            "caption": "정육면체 그래프. 실선 일곱 모서리가 극대나무 $T$(모든 꼭짓점을 잇는 축약가능 부분그래프), 점선 다섯 모서리가 $T$ 밖 모서리다. $\\pi_1(X)$은 이 다섯 모서리마다 생성원 하나씩을 갖는 계수 $5$ 자유군이다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (두 집합 덮개; 경로연결 가정의 필요성)",
+          "formal_statement": "덮개가 두 집합 $A_\\alpha,A_\\beta$뿐이면 삼중교집합 조건이 불필요하여, $A_\\alpha\\cap A_\\beta$이 경로연결이라는 가정만으로 $\\pi_1(X)\\cong(\\pi_1(A_\\alpha)*\\pi_1(A_\\beta))/N$을 얻는다(증명은 일반 경우와 사실상 동일). 가정의 필요성은 반례로 확인된다. (a) 이중교집합: $S^1$을 두 열린 호의 합집합으로 쓰면 교집합이 두 조각이라 경로연결이 아니고, 실제로 $\\Phi$가 전사가 아니다 — 각 호가 단순연결이라 $\\ast_\\alpha\\pi_1(A_\\alpha)=0$인데 $\\pi_1(S^1)=\\mathbb{Z}\\ne0$이기 때문. (b) 삼중교집합: 세 점 $a,b,c$의 현수(suspension) $X$에서 $A_\\alpha,A_\\beta,A_\\gamma$를 각 점의 여집합으로 잡으면 이중교집합은 축약가능이나 삼중교집합은 끊긴다. 두 집합 덮개 $\\{A_\\alpha,A_\\beta\\}$로는 $\\pi_1(X)\\cong\\mathbb{Z}*\\mathbb{Z}$을 옳게 얻지만, 삼중교집합이 끊긴 세 집합 덮개를 억지로 쓰면 $\\mathbb{Z}*\\mathbb{Z}*\\mathbb{Z}$이라는 틀린 답(아벨화가 달라 $\\mathbb{Z}*\\mathbb{Z}$과 비동형)이 나온다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.23 (원의 얽힘)",
+          "formal_statement": "$\\mathbb{R}^3$ 속 원들의 여집합. (a) 원 하나 $A$: $\\mathbb{R}^3-A$는 $S^1\\vee S^2$로 변형되추림되어 $\\pi_1(\\mathbb{R}^3-A)\\cong\\mathbb{Z}$이다($\\pi_1(S^2)=0$). (b) 풀린(unlinked) 두 원 $A,B$: 여집합이 $S^1\\vee S^1\\vee S^2\\vee S^2$로 변형되추림되어 $\\pi_1\\cong\\mathbb{Z}*\\mathbb{Z}$. (c) 얽힌(linked) 두 원 $A,B$: 여집합이 두 원을 가르는 토러스 $S^1\\times S^1$과 $S^2$의 쐐기합으로 변형되추림되어 $\\pi_1\\cong\\pi_1(S^1\\times S^1)\\cong\\mathbb{Z}\\times\\mathbb{Z}$.",
+          "idea_behind_proof": "각 여집합이 어떤 표준 공간으로 변형되추림되는지 기하로 파악한 뒤(원 하나면 $S^2$와 지름 → 지름 끝을 붙여 $S^1\\vee S^2$), 변형되추림 동형(명제 1.17/1.18)과 이미 아는 기본군($\\pi_1(S^1)=\\mathbb{Z},\\ \\pi_1(S^2)=0$, 곱공식)을 대입한다. 핵심 대비: 풀림은 자유곱 $\\mathbb{Z}*\\mathbb{Z}$(비가환), 얽힘은 곱 $\\mathbb{Z}\\times\\mathbb{Z}$(가환) — 기본군의 가환성 여부가 얽힘을 감지한다.",
+          "proof_steps": [
+            "(a) $\\mathbb{R}^3-A$는 $S^2$와 그 지름의 합집합으로 변형되추림되고, 지름의 두 끝을 적도에서 붙이면 $S^1\\vee S^2$이 된다. 예제 1.21로 $\\pi_1(S^1\\vee S^2)\\cong\\mathbb{Z}*0=\\mathbb{Z}$.",
+            "(b) 풀린 두 원이면 여집합이 $S^1\\vee S^1\\vee S^2\\vee S^2$로 변형되추림되어 $\\pi_1\\cong\\mathbb{Z}*\\mathbb{Z}*0*0=\\mathbb{Z}*\\mathbb{Z}$.",
+            "(c) 얽힌 두 원이면 여집합이 두 원을 가르는 토러스 $S^1\\times S^1$과 $S^2$의 쐐기합으로 변형되추림되어 $\\pi_1\\cong\\pi_1(S^1\\times S^1)*0\\cong\\mathbb{Z}\\times\\mathbb{Z}$. 풀림($\\mathbb{Z}*\\mathbb{Z}$)과 얽힘($\\mathbb{Z}\\times\\mathbb{Z}$)이 대수적으로 구별된다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "torus_2d",
+            "R": 2,
+            "r": 0.8,
+            "squash": 0.42,
+            "show_meridian": true,
+            "show_longitude": true,
+            "meridian_angle": 0,
+            "labels": {
+              "meridian": "b",
+              "longitude": "a"
+            },
+            "caption": "얽힌 경우 (c): $\\mathbb{R}^3-(A\\cup B)$는 두 원을 가르는 토러스 $S^1\\times S^1$(과 $S^2$)로 변형되추림되어 $\\pi_1\\cong\\mathbb{Z}\\times\\mathbb{Z}$(가환). 두 생성원 $a$(경선), $b$(자오선)가 서로 교환한다 — 풀린 경우의 $\\mathbb{Z}*\\mathbb{Z}$(비가환)와 대비된다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.24 (토러스 매듭)",
+          "formal_statement": "서로소인 양의 정수 $m,n$에 대해 토러스 매듭 $K=K_{m,n}\\subset\\mathbb{R}^3$은 $f(z)=(z^m,z^n)$로 표준 토러스 $S^1\\times S^1$에 박힌 원의 상이다(경도 방향 $m$번, 자오선 방향 $n$번 감김). 그 여집합의 기본군은 $$\\pi_1(\\mathbb{R}^3-K)\\cong\\pi_1(S^3-K)\\cong G_{m,n}=\\langle a,b\\mid a^m=b^n\\rangle$$ 이다. $m,n>1$이면 $G_{m,n}$의 중심(center)은 $a^m=b^n$이 생성하는 순환군 $C$이고, $G_{m,n}/C\\cong\\mathbb{Z}_m*\\mathbb{Z}_n$이며, 정수 $m,n$은 군 $G_{m,n}$에 의해 유일하게 결정된다.",
+          "idea_behind_proof": "여집합을 2차원 복합체 $X_{m,n}$ — 원기둥 $S^1\\times I$의 두 끝을 각각 $(z,0)\\sim(e^{2\\pi i/m}z,0)$, $(z,1)\\sim(e^{2\\pi i/n}z,1)$로 붙인 것 — 로 변형되추림시킨 뒤, $X=X_m\\cup X_n$(두 사상원기둥)에 van Kampen을 적용한다. 세 조각 $X_m,X_n,X_m\\cap X_n$이 모두 원($\\pi_1=\\mathbb{Z}$)이고, 교집합 원의 생성원이 $X_m$에서 $m$배·$X_n$에서 $n$배가 되어 관계 $a^m=b^n$을 낳는다.",
+          "proof_steps": [
+            "$\\mathbb{R}^3$ 대신 일점컴팩트화 $S^3$로 바꿔도 $\\pi_1$은 변하지 않는다: $S^3-K=(\\mathbb{R}^3-K)\\cup B$에서 $B$와 $B\\cap(\\mathbb{R}^3-K)\\cong S^2\\times\\mathbb{R}$가 모두 단순연결이라 van Kampen으로 포함이 $\\pi_1$ 동형을 유도한다.",
+            "$S^3=(S^1\\times D^2)\\cup(D^2\\times S^1)$(두 솔리드 토러스) 분해에서, 각 솔리드 토러스 속 $K$의 여집합이 사상원기둥 $X_m$($z\\mapsto z^m$)·$X_n$($z\\mapsto z^n$)으로 변형되추림된다. 이어 붙여 $S^3-K\\simeq X=X_m\\cup X_n$이고 $X_m\\cap X_n=S^1\\times\\{1/2\\}$은 원이다.",
+            "$X_m,X_n$은 원으로 변형되추림되어 $\\pi_1=\\mathbb{Z}=\\langle a\\rangle,\\langle b\\rangle$이고 교집합도 원 $\\pi_1=\\mathbb{Z}$. 교집합 생성원이 $X_m$에서 $a^m$, $X_n$에서 $b^n$에 대응하므로 van Kampen으로 $\\pi_1(X)=\\langle a,b\\mid a^m=b^n\\rangle=G_{m,n}$(자유군 $\\langle a,b\\rangle$을 $a^m b^{-n}$이 생성하는 정규부분군으로 나눈 것).",
+            "중심: $a^m=b^n$은 $a,b$ 모두와 교환하므로 그것이 생성하는 순환군 $C$는 중심에 들고 정규다. $G_{m,n}/C\\cong\\mathbb{Z}_m*\\mathbb{Z}_n$인데, 자명하지 않은 군들의 자유곱은 중심이 자명하므로(연습문제 1) $C$가 정확히 중심이다.",
+            "$m,n$의 유일 결정: $\\mathbb{Z}_m*\\mathbb{Z}_n$의 아벨화는 $\\mathbb{Z}_m\\times\\mathbb{Z}_n$(위수 $mn$)이라 곱 $mn$이 정해지고, 그 비틀림원소는 $\\mathbb{Z}_m,\\mathbb{Z}_n$의 켤레뿐이라 최대 위수가 $\\max(m,n)$이다. $mn$과 $\\max(m,n)$에서 $m,n$이 유일하게 결정된다. (예: $m$ 또는 $n$이 $1$이면 관계가 한 생성원을 다른 것의 거듭제곱으로 만들어 $G_{m,n}\\cong\\mathbb{Z}$.) $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.25 (수축하는 원들의 쐐기 — 하와이 귀걸이)",
+          "formal_statement": "$X\\subset\\mathbb{R}^2$를 반지름 $1/n$, 중심 $(1/n,0)$인 원 $C_n$들($n=1,2,\\dots$)의 합집합이라 하자. 겉보기와 달리 $X$는 원들의 쐐기합보다 훨씬 큰 기본군을 갖는다: $\\pi_1(X)$은 비가산(uncountable)이며, $\\rho:\\pi_1(X)\\to\\prod_{n=1}^\\infty\\mathbb{Z}$(직합이 아닌 직접곱)로 전사한다.",
+          "idea_behind_proof": "각 $C_n$으로의 되추림 $r_n:X\\to C_n$(나머지 원을 원점으로 뭉갬)이 전사 $\\rho_n:\\pi_1(X)\\to\\mathbb{Z}$를 주고, 이를 모으면 $\\rho:\\pi_1(X)\\to\\prod_\\infty\\mathbb{Z}$가 된다. 임의의 정수열을 실현하는 '무한 합성 고리'가 밑점 근방의 성질 덕에 시각 $1$에서도 연속이라 $\\rho$가 전사가 되고, $\\prod_\\infty\\mathbb{Z}$이 비가산이라 결론이 나온다. 이것은 van Kampen의 '유한·열린 덮개' 가정이 무한 얽힘에는 통하지 않음을 보여주는 병리다.",
+          "proof_steps": [
+            "각 $n$에 대해 $C_n$만 남기고 나머지를 원점으로 뭉개는 되추림 $r_n:X\\to C_n$이 전사 $\\rho_n:\\pi_1(X)\\to\\pi_1(C_n)\\cong\\mathbb{Z}$를 유도한다.",
+            "곱 $\\rho=(\\rho_n):\\pi_1(X)\\to\\prod_{n=1}^\\infty\\mathbb{Z}$을 생각한다. 임의의 정수열 $(k_n)$에 대해, $C_n$을 시간구간 $[1-\\tfrac1n,\\,1-\\tfrac1{n+1}]$에서 $k_n$번 감는 고리 $f:I\\to X$를 만들 수 있다.",
+            "$f$는 시각 $1$ 미만에서 명백히 연속이고, 밑점의 임의의 이웃이 유한개를 제외한 모든 $C_n$을 포함하므로 시각 $1$에서도 연속이다. 따라서 $\\rho([f])=(k_n)$이라 $\\rho$가 전사.",
+            "$\\prod_{n=1}^\\infty\\mathbb{Z}$은 비가산이므로 $\\pi_1(X)$도 비가산이다. 특히 가산 생성 자유군인 쐐기합 $\\bigvee_n S^1$의 기본군과 결코 같지 않다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  1.0,
+                  0
+                ],
+                "r": 1.0
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.5,
+                  0
+                ],
+                "r": 0.5
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.3333,
+                  0
+                ],
+                "r": 0.3333
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.25,
+                  0
+                ],
+                "r": 0.25
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.2,
+                  0
+                ],
+                "r": 0.2
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.1667,
+                  0
+                ],
+                "r": 0.1667
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.1429,
+                  0
+                ],
+                "r": 0.1429
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.15,
+                  -0.2
+                ],
+                "text": "0"
+              }
+            ],
+            "caption": "하와이 귀걸이: 반지름 $1/n$ 원 $C_n$들이 모두 원점에서 접한다. 원점 근방이 무한히 많은 원을 담기 때문에 쐐기합과 달리 $\\pi_1$이 비가산이 된다."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "van Kampen 정리로 토러스 $T^2$의 기본군이 $\\langle a,b\\mid aba^{-1}b^{-1}\\rangle\\cong\\mathbb{Z}\\times\\mathbb{Z}$임을 보여라. (힌트에 제시된 두 집합 덮개를 사용하라.)",
+          "hint": "$T^2$을 정사각형의 변 동일시 $aba^{-1}b^{-1}$로 본다. $A=T^2-\\{p\\}$(한 점을 뺀 것, 1-골격 $S^1\\vee S^1$로 변형되추림), $B=$ 그 점 둘레 열린 원판(단순연결)으로 덮어라. $A\\cap B$는 무엇으로 변형되추림되며, 그 생성원이 $A$에서 어떤 낱말이 되는가?",
+          "solution": "$T^2$을 정사각형 $aba^{-1}b^{-1}$로 놓고, 내부 한 점 $p$를 잡는다. $A=T^2-\\{p\\}$은 1-골격(두 원의 쐐기) $S^1\\vee S^1$로 변형되추림되므로 $\\pi_1(A)\\cong\\mathbb{Z}*\\mathbb{Z}=\\langle a,b\\rangle$(자유군). $B=$ $p$ 둘레의 열린 원판은 단순연결이라 $\\pi_1(B)=0$. 교집합 $A\\cap B$는 $p$ 둘레의 뚫린 원판이라 원 $S^1$으로 변형되추림되어 $\\pi_1(A\\cap B)\\cong\\mathbb{Z}$. 이 원의 생성원은 정사각형 경계를 도는 고리라 $A$ 안에서 $aba^{-1}b^{-1}$이라는 낱말과 호모토픽하고, $B$ 안에서는 원판을 채워 자명하다. 두 집합 덮개이므로 van Kampen: $\\pi_1(T^2)\\cong(\\langle a,b\\rangle*0)/N$, $N=$ $i_{AB}(\\omega)i_{BA}(\\omega)^{-1}=aba^{-1}b^{-1}\\cdot 1^{-1}$이 생성하는 정규부분군. 즉 $\\pi_1(T^2)=\\langle a,b\\mid aba^{-1}b^{-1}\\rangle$, 곧 $a,b$가 교환하는 자유아벨군 $\\mathbb{Z}\\times\\mathbb{Z}$. (곱공식 명제 1.12의 결과와 일치한다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "삼엽매듭(trefoil) $K_{2,3}$의 여집합 기본군 $G_{2,3}=\\langle a,b\\mid a^2=b^3\\rangle$에 대해, (1) 그 중심을 구하고, (2) 중심으로 나눈 몫이 무엇인지 밝히고, (3) $m$ 또는 $n$이 $1$인 경우 $G_{m,n}$이 왜 무한순환군이 되는지 설명하라.",
+          "hint": "$a^2=b^3$은 $a,b$ 모두와 교환한다. 자명하지 않은 군들의 자유곱은 중심이 자명하다는 사실(연습문제 1)을 몫에 적용하라. (3)에서는 관계 $a^m=b^n$에 $m=1$을 넣어 보라.",
+          "solution": "(1) $c=a^2=b^3$은 $a,b$와 교환하므로 $C=\\langle c\\rangle$은 중심에 든다. $G_{2,3}/C=\\langle a,b\\mid a^2=b^3=1\\rangle=\\mathbb{Z}_2*\\mathbb{Z}_3$인데 자명하지 않은 군들의 자유곱은 중심이 자명하므로, $C$가 정확히 $G_{2,3}$의 중심이다. (2) 따라서 $G_{2,3}/C\\cong\\mathbb{Z}_2*\\mathbb{Z}_3$이다(이는 모듈러군 $\\mathrm{PSL}_2(\\mathbb{Z})$과 동형인 유명한 군). (3) $m=1$이면 관계 $a^1=b^n$이 $a=b^n$이라 $a$를 $b$의 거듭제곱으로 소거할 수 있어 $G_{1,n}=\\langle b\\rangle\\cong\\mathbb{Z}$(무한순환). $n=1$도 대칭적으로 마찬가지다. 즉 $m$이나 $n$이 $1$이면 매듭이 자명해져($K_{1,n}$은 풀린 원) 여집합 기본군이 원의 것과 같은 $\\mathbb{Z}$가 된다."
+        },
+        {
+          "type": "ox",
+          "question": "van Kampen 정리에서 이중교집합 $A_\\alpha\\cap A_\\beta$이 경로연결이 아니어도 $\\Phi$는 항상 전사다.",
+          "answer": "X",
+          "explanation": "이중교집합의 경로연결은 전사성 증명에서 본질적으로 쓰인다 — 고리 토막의 경계점 $f(s_i)\\in A_i\\cap A_{i+1}$를 그 교집합 안의 경로로 밑점에 묶어야 하기 때문이다. 반례: $S^1$을 두 열린 호로 덮으면 교집합이 두 조각(경로연결 아님)이고, 각 호는 단순연결이라 $\\ast_\\alpha\\pi_1(A_\\alpha)=0$인데 $\\pi_1(S^1)=\\mathbb{Z}\\ne0$이므로 $\\Phi$는 전사가 아니다."
+        },
+        {
+          "type": "ox",
+          "question": "얽힌 두 원의 여집합과 풀린 두 원의 여집합은 기본군이 서로 동형이다.",
+          "answer": "X",
+          "explanation": "풀린 두 원의 여집합은 $\\pi_1\\cong\\mathbb{Z}*\\mathbb{Z}$(비가환 자유군)이고, 얽힌 두 원의 여집합은 $\\pi_1\\cong\\mathbb{Z}\\times\\mathbb{Z}$(가환)이다(예제 1.23). 하나는 아벨, 다른 하나는 비아벨이라 결코 동형일 수 없다. 바로 이 가환성의 차이가 두 원의 얽힘이라는 기하를 대수적으로 감지한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "van Kampen 정리가 왜 '생성원은 조각에서, 관계는 겹침에서'라는 형태($\\pi_1(X)\\cong\\ast_\\alpha\\pi_1(A_\\alpha)/N$)를 갖는지 설명하고, 삼중교집합의 경로연결 가정이 증명의 어느 지점에서 본질적으로 쓰이는지 밝혀라.",
+          "hint": "$\\Phi$는 어디서 왔는가(1.2.1의 보편성질), $N$의 생성원 $i_{\\alpha\\beta}(\\omega)i_{\\beta\\alpha}(\\omega)^{-1}$은 무엇을 뜻하는가? 커널 증명에서 호모토피 $F:I\\times I\\to X$를 사각형으로 자를 때 한 점에 몇 개의 조각이 모이는가?",
+          "answer": "생성원이 조각에서 오는 이유: 자유곱 $\\ast_\\alpha\\pi_1(A_\\alpha)$은 각 조각의 기본군을 관계 없이 담는 가장 자유로운 군이고(1.2.1 보편성질), $\\Phi$는 포함유도사상 $j_\\alpha$들을 이 자유곱에서 유일하게 확장한 것이다 — 전사성이 '모든 고리가 조각별 고리들의 곱'임을 보장하므로 조각들의 생성원이 곧 $\\pi_1(X)$의 생성원이 된다. 관계가 겹침에서 오는 이유: 겹침 $A_\\alpha\\cap A_\\beta$의 한 고리 $\\omega$는 $A_\\alpha$에서 본 것 $i_{\\alpha\\beta}(\\omega)$과 $A_\\beta$에서 본 것 $i_{\\beta\\alpha}(\\omega)$이 $X$에서는 같은 고리이므로, 자유곱에서는 다른 두 낱말이던 것이 $\\pi_1(X)$에서 같아진다 — 이 강제된 등식 $i_{\\alpha\\beta}(\\omega)=i_{\\beta\\alpha}(\\omega)$들이 정규부분군 $N$을 이루고, 정리는 이것이 커널의 전부라고 말한다. 삼중교집합 가정이 쓰이는 곳: 커널이 $N$임을 보이려면 두 인수분해를 잇는 호모토피 $F:I\\times I\\to X$를 사각형 $R_{ij}$들로 잘게 나누는데, 세로변을 흔들어도 한 점에는 최대 세 사각형이 모인다. 그 꼭짓점에서 보정 경로 $g_v$를 '그 점이 닿는 두세 조각의 교집합' 안에서 잡아야 인수분해가 동치로 유지되므로, 삼중교집합이 경로연결이어야 한다. 이 가정이 깨지면(세 점의 현수 예처럼) 실제로 틀린 답이 나온다."
+        }
+      ]
+    }
+  ]
+}
