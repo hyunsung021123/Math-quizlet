@@ -1,0 +1,117 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 9. An Introduction to Elliptic Functions
+현재 소단원: 9.4 Problems
+직전 소단원: 「9.3 Exercises」
+[연습문제]
+4. Problems
+281
+4 Problems
+1. Besides the approach in Section 1.2, there are several alternate ways of deal-
+ing with the sum  1/(z + ω)2, where ω = n + mτ. For example, one may sum
+either (a) circularly, (b) ﬁrst in n then in m, (c) or ﬁrst in m then in n.
+(a) Prove that if z /∈Λ, then
+lim
+R→∞
+
+n2+m2≤R2
+1
+(z + n + mτ)2 = S1(z)
+exists and S1(z) = ℘(z) + c1.
+(b) Similarly,
+
+m
+
+n
+1
+(z + n + mτ)2
+
+= S2(z)
+exists and S2(z) = ℘(z) + c2, where c2 = F(τ), and F is the forbidden Eisen-
+stein series.
+(c) Also
+
+n
+
+m
+1
+(z + n + mτ)2
+
+= S3(z)
+exists with S3(z) = ℘(z) + c3, and c3 = ˜F(τ), the reverse of F.
+[Hint: To prove (a), it suﬃces to show that limR→∞,
+
+1≤n2+m2≤R2
+1/(n + mτ)2 = c1
+exists. This is proved by a comparision with
+
+1≤x2+y2≤R2
+dx
+(x+yτ)2 = I(R). It can
+be shown that I(R) = 0, which follows because (x + yτ)−2 = −(∂/∂x)(x + yτ)−1.]
+2. Show that
+℘(z) = c + π2
+∞
+
+m=−∞
+1
+sin2((z + mτ)π)
+where c is an appropriate constant. In fact, by part (b) of the previous problem
+c = −F(τ).
+3.∗Suppose Ωis a simply connected domain that excludes the three roots of the
+polynomial 4z3 −g2z −g3. For ω0 ∈Ωand ω0 ﬁxed, deﬁne the function I on Ωby
+I(ω) =
+ ω
+ω0
+dz
+	
+4z3 −g2z −g3
+ω ∈Ω.
+Then the function I has an inverse given by ℘(z + α) for some constant α; that is,
+I(℘(z + α)) = z
+
+282
+Chapter 9. AN INTRODUCTION TO ELLIPTIC FUNCTIONS
+for appropriate α.
+[Hint: Prove that (I(℘(z + α)))′ = ±1, and use the fact that ℘is even.]
+4.∗Suppose τ is purely imaginary, say τ = it with t > 0. Consider the division
+of the complex plane into congruent rectangles obtained by considering the lines
+x = n/2, y = tm/2 as n and m range over the integers. (An example is the rect-
+angle whose vertices are 0, 1/2, 1/2 + τ/2, and τ/2.)
+(a) Show that ℘is real-valued on all these lines, and hence on the boundaries
+of all these rectangles.
+(b) Prove that ℘maps the interior of each rectangle conformally to the upper
+(or lower) half-plane.
+
+10 Applications of Theta
+Functions
+The problem of the representation of an integer n as
+the sum of a given number k of integral squares is one
+of the most celebrated in the theory of numbers. Its
+history may be traced back to Diophantus, but begins
+eﬀectively with Girard’s (or Fermat’s) theorem that a
+prime 4m + 1 is the sum of two squares. Almost every
+arithmetician of note since Fermat has contributed to
+the solution of the problem, and it has its puzzles for
+us still.
+G. H. Hardy, 1940
+This chapter is devoted to a closer look at the theory of theta functions
+and some of its applications to combinatorics and number theory.
+The theta function is given by the series
+Θ(z|τ) =
+∞
+
+n=−∞
+eπin2τe2πinz,
+which converges for all z ∈C, and τ in the upper half-plane.
+A remarkable feature of the theta function is its dual nature. When
+viewed as a function of z, we see it in the arena of elliptic functions, since
+Θ is periodic with period 1 and “quasi-period” τ. When considered as
+a function of τ, Θ reveals its modular nature and close connection with
+the partition function and the problem of representation of integers as
+sums of squares.
+The two main tools allowing us to exploit these links are the triple-
+product for Θ and its transformation law. Once we have proved these
+theorems, we give a brief introduction to the connection with partitions,
+and then pass to proofs of the celebrated theorems about representation
+of integers as sums of two or four squares.

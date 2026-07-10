@@ -1,0 +1,394 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.3 The Riemann mapping theorem
+직전 소단원: 「8.2 The Schwarz lemma; automorphisms of the disc and upper half-plane」
+[본문]
+224
+Chapter 8. CONFORMAL MAPPINGS
+3 The Riemann mapping theorem
+3.1 Necessary conditions and statement of the theorem
+We now come to the promised cornerstone of this chapter. The basic
+problem is to determine conditions on an open set Ωthat guarantee the
+existence of a conformal map F : Ω→D.
+A series of simple observations allow us to ﬁnd necessary conditions
+on Ω. First, if Ω= C there can be no conformal map F : Ω→D, since
+by Liouville’s theorem F would have to be a constant.
+Therefore, a
+necessary condition is to assume that Ω̸ = C. Since D is connected, we
+must also impose the requirement that Ωbe connected. There is still
+one more condition that is forced upon us: since D is simply connected,
+the same must be true of Ω(see Exercise 3).
+It is remarkable that
+these conditions on Ωare also suﬃcient to guarantee the existence of a
+biholomorpism from Ωto D.
+For brevity, we shall call a subset Ωof C proper if it is non-empty
+and not the whole of C.
+Theorem 3.1 (Riemann mapping theorem) Suppose Ωis proper and
+simply connected. If z0 ∈Ω, then there exists a unique conformal map
+F : Ω→D such that
+F(z0) = 0
+and
+F ′(z0) > 0.
+Corollary 3.2 Any two proper simply connected open subsets in C are
+conformally equivalent.
+Clearly, the corollary follows from the theorem, since we can use as
+an intermediate step the unit disc. Also, the uniqueness statement in
+the theorem is straightforward, since if F and G are conformal maps
+from Ωto D that satisfy these two conditions, then H = F ◦G−1 is an
+automorphism of the disc that ﬁxes the origin. Therefore H(z) = eiθz,
+and since H′(0) > 0, we must have eiθ = 1, from which we conclude that
+F = G.
+The rest of this section is devoted to the proof of the existence of the
+conformal map F. The idea of the proof is as follows. We consider all
+injective holomorphic maps f : Ω→D with f(z0) = 0. From these we
+wish to choose an f so that its image ﬁlls out all of D, and this can be
+achieved by making f ′(z0) as large as possible. In doing this, we shall
+need to be able to extract f as a limit from a given sequence of functions.
+We turn to this point ﬁrst.
+
+3. The Riemann mapping theorem
+225
+3.2 Montel’s theorem
+Let Ωbe an open subset of C. A family F of holomorphic functions on
+Ωis said to be normal if every sequence in F has a subsequence that
+converges uniformly on every compact subset of Ω(the limit need not be
+in F).
+The proof that a family of functions is normal is, in practice, the con-
+sequence of two related properties, uniform boundedness and equiconti-
+nuity. These we shall now deﬁne.
+The family F is said to be uniformly bounded on compact subsets
+of Ωif for each compact set K ⊂Ωthere exists B > 0, such that
+|f(z)| ≤B
+for all z ∈K and f ∈F.
+Also, the family F is equicontinuous on a compact set K if for every
+ϵ > 0 there exists δ > 0 such that whenever z, w ∈K and |z −w| < δ,
+then
+|f(z) −f(w)| < ϵ
+for all f ∈F.
+Equicontinuity is a strong condition, which requires uniform continuity,
+uniformly in the family. For instance, any family of diﬀerentiable func-
+tions on [0, 1] whose derivatives are uniformly bounded is equicontinuous.
+This follows directly from the mean value theorem. On the other hand,
+note that the family {fn} on [0, 1] given by fn(x) = xn is not equicon-
+tinuous since for any ﬁxed 0 < x0 < 1 we have |fn(1) −fn(x0)| →1 as n
+tends to inﬁnity.
+The theorem that follows puts together these new concepts and is an
+important ingredient in the proof of the Riemann mapping theorem.
+Theorem 3.3 Suppose F is a family of holomorphic functions on Ωthat
+is uniformly bounded on compact subsets of Ω. Then:
+(i)
+F is equicontinuous on every compact subset of Ω.
+(ii)
+F is a normal family.
+The theorem really consists of two separate parts. The ﬁrst part says
+that F is equicontinuous under the assumption that F is a family of
+holomorphic functions that is uniformly bounded on compact subsets of
+Ω. The proof follows from an application of the Cauchy integral formula
+and hence relies on the fact that F consists of holomorphic functions.
+This conclusion is in sharp contrast with the real situation as illustrated
+by the family of functions given by fn(x) = sin(nx) on (0, 1), which is
+
+226
+Chapter 8. CONFORMAL MAPPINGS
+uniformly bounded. However, this family is not equicontinuous and has
+no convergent subsequence on any compact subinterval of (0, 1).
+The second part of the theorem is not complex-analytic in nature.
+Indeed, the fact that F is a normal family follows from assuming only
+that F is uniformly bounded and equicontinuous on compact subsets of
+Ω. This result is sometimes known as the Arzela-Ascoli theorem and its
+proof consists primarily of a diagonalization argument.
+We are required to prove convergence on arbitrary compact subsets of
+Ω, therefore it is useful to introduce the following notion. A sequence
+{Kℓ}∞
+ℓ=1 of compact subsets of Ωis called an exhaustion if
+(a) Kℓis contained in the interior of Kℓ+1 for all ℓ= 1, 2, . . ..
+(b) Any compact set K ⊂Ωis contained in Kℓfor some ℓ. In particular
+Ω=
+∞
+
+ℓ=1
+Kℓ.
+Lemma 3.4 Any open set Ωin the complex plane has an exhaustion.
+Proof.
+If Ωis bounded, we let Kℓdenote the set of all points in Ω
+at distance ≥1/ℓfrom the boundary of Ω. If Ωis not bounded, let Kℓ
+denote the same set as above except that we also require |z| ≤ℓfor all
+z ∈Kℓ.
+We may now begin the proof of Montel’s theorem. Let K be a compact
+subset of Ωand choose r > 0 so small that D3r(z) is contained in Ωfor
+all z ∈K. It suﬃces to choose r so that 3r is less than the distance
+from K to the boundary of Ω. Let z, w ∈K with |z −w| < r, and let
+γ denote the boundary circle of the disc D2r(w). Then, by Cauchy’s
+integral formula, we have
+f(z) −f(w) =
+1
+2πi
+
+γ
+f(ζ)
+
+1
+ζ −z −
+1
+ζ −w
+
+dζ.
+Observe that
+
+1
+ζ −z −
+1
+ζ −w
+ =
+|z −w|
+|ζ −z| |ζ −w| ≤|z −w|
+r2
+since ζ ∈γ and |z −w| < r. Therefore
+|f(z) −f(w)| ≤1
+2π
+2πr
+r2 B|z −w|,
+
+3. The Riemann mapping theorem
+227
+where B denotes the uniform bound for the family F in the compact
+set consisting of all points in Ωat a distance ≤2r from K. Therefore
+|f(z) −f(w)| < C|z −w|, and this estimate is true for all z, w ∈K with
+|z −w| < r and f ∈F; thus this family is equicontinuous, as was to be
+shown.
+To prove the second part of the theorem, we argue as follows. Let
+{fn}∞
+n=1 be a sequence in F and K a compact subset of Ω. Choose a
+sequence of points {wj}∞
+j=1 that is dense in Ω. Since {fn} is uniformly
+bounded, there exists a subsequence {fn,1} = {f1,1, f2,1, f3,1, . . .} of {fn}
+such that fn,1(w1) converges.
+From {fn,1} we can extract a subsequence {fn,2} = {f1,2, f2,2, f3,2, . . .}
+so that fn,2(w2) converges. We may continue this process, and extract a
+subsequence {fn,j} of {fn,j−1} such that fn,j(wj) converges.
+Finally, let gn = fn,n and consider the diagonal subsequence {gn}. By
+construction, gn(wj) converges for each j, and we claim that equiconti-
+nuity implies that gn converges uniformly on K. Given ϵ > 0, choose δ
+as in the deﬁnition of equicontinuity, and note that for some J, the set
+K is contained in the union of the discs Dδ(w1), . . . , Dδ(wJ). Pick N so
+large that if n, m > N, then
+|gm(wj) −gn(wj)| < ϵ
+for all j = 1, . . . , J.
+So if z ∈K, then z ∈Dδ(wj) for some 1 ≤j ≤J. Therefore,
+|gn(z) −gm(z)| ≤|gn(z) −gn(wj)| + |gn(wj) −gm(wj)| +
++ |gm(wj) −gm(z)| < 3ϵ
+whenever n, m > N. Hence {gn} converges uniformly on K.
+Finally, we need one more diagonalization argument to obtain a sub-
+sequence that converges uniformly on every compact subset of Ω. Let
+K1 ⊂K2 ⊂· · · ⊂Kℓ⊂· · · be an exhaustion of Ω, and suppose {gn,1} is
+a subsequence of the original sequence {fn} that converges uniformly on
+K1. Extract from {gn,1} a subsequence {gn,2} that converges uniformly
+on K2, and so on. Then, {gn,n} is a subsequence of {fn} that converges
+uniformly on every Kℓand since the Kℓexhaust Ω, the sequence {gn,n}
+converges uniformly on any compact subset of Ω, as was to be shown.
+We need one further result before we can give the proof of the Riemann
+mapping theorem.
+Proposition 3.5 If Ωis a connected open subset of C and {fn} a se-
+quence of injective holomorphic functions on Ωthat converges uniformly
+
+228
+Chapter 8. CONFORMAL MAPPINGS
+on every compact subset of Ωto a holomorphic function f, then f is
+either injective or constant.
+Proof.
+We argue by contradiction and suppose that f is not injective,
+so there exist distinct complex numbers z1 and z2 in Ωsuch that f(z1) =
+f(z2). Deﬁne a new sequence by gn(z) = fn(z) −fn(z1), so that gn has
+no other zero besides z1, and the sequence {gn} converges uniformly on
+compact subsets of Ωto g(z) = f(z) −f(z1). If g is not identically zero,
+then z2 is an isolated zero for g (because Ωis connected); therefore
+1 =
+1
+2πi
+
+γ
+g′(ζ)
+g(ζ) dζ,
+where γ is a small circle centered at z2 chosen so that g does not vanish
+on γ or at any point of its interior besides z2. Therefore, 1/gn converges
+uniformly to 1/g on γ, and since g′
+n →g′ uniformly on γ we have
+1
+2πi
+
+γ
+g′
+n(ζ)
+gn(ζ) dζ →
+1
+2πi
+
+γ
+g′(ζ)
+g(ζ) dζ.
+But this is a contradiction since gn has no zeros inside γ, and hence
+1
+2πi
+
+γ
+g′
+n(ζ)
+gn(ζ) dζ = 0
+for all n .
+3.3 Proof of the Riemann mapping theorem
+Once we have established the technical results above, the rest of the
+proof of the Riemann mapping theorem is very elegant. It consists of
+three steps, which we isolate.
+Step 1. Suppose that Ωis a simply connected proper open subset of
+C. We claim that Ωis conformally equivalent to an open subset of the
+unit disc that contains the origin. Indeed, choose a complex number α
+that does not belong to Ω, (recall that Ωis proper), and observe that
+z −α never vanishes on the simply connected set Ω. Therefore, we can
+deﬁne a holomorphic function
+f(z) = log(z −α)
+with the desired properties of the logarithm. As a consequence one has,
+ef(z) = z −α, which proves in particular that f is injective. Pick a point
+w ∈Ω, and observe that
+f(z)̸ = f(w) + 2πi
+for all z ∈Ω
+
+3. The Riemann mapping theorem
+229
+for otherwise, we exponentiate this relation to ﬁnd that z = w, hence
+f(z) = f(w), a contradiction. In fact, we claim that f(z) stays strictly
+away from f(w) + 2πi, in the sense that there exists a disc centered at
+f(w) + 2πi that contains no points of the image f(Ω). Otherwise, there
+exists a sequence {zn} in Ωsuch that f(zn) →f(w) + 2πi. We exponen-
+tiate this relation, and, since the exponential function is continuous, we
+must have zn →w. But this implies f(zn) →f(w), which is a contra-
+diction. Finally, consider the map
+F(z) =
+1
+f(z) −(f(w) + 2πi).
+Since f is injective, so is F, hence F : Ω→F(Ω) is a conformal map.
+Moreover, by our analysis, F(Ω) is bounded. We may therefore translate
+and rescale the function F in order to obtain a conformal map from Ω
+to an open subset of D that contains the origin.
+Step 2. By the ﬁrst step, we may assume that Ωis an open subset of D
+with 0 ∈Ω. Consider the family F of all injective holomorphic functions
+on Ωthat map into the unit disc and ﬁx the origin:
+F = {f : Ω→D holomorphic, injective and f(0) = 0}.
+First, note that F is non-empty since it contains the identity.
+Also,
+this family is uniformly bounded by construction, since all functions are
+required to map into the unit disc.
+Now, we turn to the question of ﬁnding a function f ∈F that max-
+imizes |f ′(0)|. First, observe that the quantities |f ′(0)| are uniformly
+bounded as f ranges in F.
+This follows from the Cauchy inequality
+(Corollary 4.3 in Chapter 2) for f ′ applied to a small disc centered at
+the origin.
+Next, we let
+s = sup
+f∈F
+|f ′(0)|,
+and we choose a sequence {fn} ⊂F such that |f ′
+n(0)| →s as n →∞. By
+Montel’s theorem (Theorem 3.3), this sequence has a subsequence that
+converges uniformly on compact sets to a holomorphic function f on Ω.
+Since s ≥1 (because z 	→z belongs to F), f is non-constant, hence injec-
+tive,
+by
+Proposition
+3.5.
+Also,
+by
+continuity
+we
+have
+|f(z)| ≤1 for all z ∈Ωand from the maximum modulus principle we
+see that |f(z)| < 1. Since we clearly have f(0) = 0, we conclude that
+f ∈F with |f ′(0)| = s.
+
+230
+Chapter 8. CONFORMAL MAPPINGS
+Step 3. In this last step, we demonstrate that f is a conformal map
+from Ωto D. Since f is already injective, it suﬃces to prove that f is
+also surjective. If this were not true, we could construct a function in F
+with derivative at 0 greater than s. Indeed, suppose there exists α ∈D
+such that f(z)̸ = α, and consider the automorphism ψα of the disc that
+interchanges 0 and α, namely
+ψα(z) = α −z
+1 −αz .
+Since Ωis simply connected, so is U = (ψα ◦f)(Ω), and moreover, U
+does not contain the origin. It is therefore possible to deﬁne a square
+root function on U by
+g(w) = e
+1
+2 log w.
+Next, consider the function
+F = ψg(α) ◦g ◦ψα ◦f.
+We claim that F ∈F. Clearly F is holomorphic and it maps 0 to 0.
+Also F maps into the unit disc since this is true of each of the functions
+in the composition. Finally, F is injective. This is clearly true for the
+automorphisms ψα and ψg(α); it is also true for the square root g and
+the function f, since the latter is injective by assumption. If h denotes
+the square function h(w) = w2, then we must have
+f = ψ−1
+α
+◦h ◦ψ−1
+g(α) ◦F = Φ ◦F.
+But Φ maps D into D with Φ(0) = 0, and is not injective because F is
+and h is not. By the last part of the Schwarz lemma, we conclude that
+|Φ′(0)| < 1. The proof is complete once we observe that
+f ′(0) = Φ′(0)F ′(0),
+and thus
+|f ′(0)| < |F ′(0)|,
+contradicting the maximality of |f ′(0)| in F.
+Finally, we multiply f by a complex number of absolute value 1 so
+that f ′(0) > 0, which ends the proof.
+For a variant of this proof, see Problem 7.
+
+4. Conformal mappings onto polygons
+231
+Remark. It is worthwhile to point out that the only places where
+the hypothesis of simple-connectivity entered in the proof were in the
+uses of the logarithm and the square root.
+Thus it would have suf-
+ﬁced to have assumed (in addition to the hypothesis that Ωis proper)
+that Ωis holomorphically simply connected in the sense that for
+any holomorphic function f in Ωand any closed curve γ in Ω, we have
+
+γ f(z) dz = 0. Further discussion of this point, and various equivalent
+properties of simple-connectivity, are given in Appendix B.
+4 Conformal mappings onto polygons
+The Riemann mapping theorem guarantees the existence of a conformal
+map from any proper, simply connected open set to the disc, or equiv-
+alently to the upper half-plane, but this theorem gives little insight as
+to the exact form of this map.
+In Section 1 we gave various explicit
+formulas in the case of regions that have symmetries, but it is of course
+unreasonable to ask for an explicit formula in the general case. There
+is, however, another class of open sets for which there are nice formulas,
+namely the polygons. Our aim in this last section is to give a proof of
+the Schwarz-Christoﬀel formula, which describes the nature of conformal
+maps from the disc (or upper half-plane) to polygons.
+4.1 Some examples
+We begin by studying some motivating examples. The ﬁrst two corre-
+spond to easy (but inﬁnite and degenerate) cases.
+Example 1. First, we investigate the conformal map from the upper
+half-plane to the sector {z : 0 < arg z < απ}, with 0 < α < 2, given in
+Section 1 by f(z) = zα.
+Anticipating the Schwarz-Christoﬀel formula
+below, we write
+zα = f(z) =
+ z
+0
+f ′(ζ) dζ = α
+ z
+0
+ζ−β dζ
+with α + β = 1, and where the integral is taken along any path in the
+upper half-plane. In fact, by continuity and Cauchy’s theorem, we may
+take the path of integration to lie in the closure of the upper half-plane.
+Although the behavior of f follows immediately from the original deﬁ-
+nition, we study it in terms of the integral expression above, since this
+provides insight for the general case treated later.
+Note ﬁrst that ζ−β is integrable near 0 since β < 1, therefore f(0) = 0.
+Observe that when z is real and positive (z = x), then f ′(x) = αxα−1 is

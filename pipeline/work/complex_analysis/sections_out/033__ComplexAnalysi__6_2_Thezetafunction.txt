@@ -1,0 +1,433 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 6. The Gamma and Zeta Functions
+현재 소단원: 6.2 The zeta function
+직전 소단원: 「6.1 The gamma function」
+[본문]
+168
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+the fact that Γ(1) = 1 yields
+e−A =
+∞
+
+n=1
+
+1 + 1
+n
+
+e−1/n
+= lim
+N→∞
+N
+
+n=1
+
+1 + 1
+n
+
+e−1/n
+= lim
+N→∞e
+ N
+n=1[log(1+1/n)−1/n]
+= lim
+N→∞e−(
+ N
+n=1 1/n)+log N+log(1+1/N)
+= e−γ.
+Therefore A = γ + 2πik for some integer k. Since Γ(s) is real whenever
+s is real, we must have k = 0, and the argument is complete.
+Note that the proof shows that the function 1/Γ is essentially char-
+acterized (up to two normalizing constants) as the entire function that
+has:
+(i)
+simple zeros at s = 0, −1, −2, . . . and vanishes nowhere else, and
+(ii)
+order of growth ≤1.
+Observe that sin πs has a similar characterization (except the zeros are
+now at all the integers). However, while sin πs has a stricter growth esti-
+mate of the form sin πs = O 
+ec|s|
+, this estimate (without the logarithm
+in the exponent) does not hold for 1/Γ(s) as Exercise 12 demonstrates.
+2 The zeta function
+The Riemann zeta function is initially deﬁned for real s > 1 by the
+convergent series
+ζ(s) =
+∞
+
+n=1
+1
+ns .
+As in the case of the gamma function, ζ can be continued into the com-
+plex plane. There are several proofs of this fact, and we present in the
+next section the one that relies on the functional equation of ζ.
+2.1 Functional equation and analytic continuation
+In parallel to the gamma function, we ﬁrst provide a simple extension of
+ζ to a half-plane in C.
+
+2. The zeta function
+169
+Proposition 2.1 The series deﬁning ζ(s) converges for Re(s) > 1, and
+the function ζ is holomorphic in this half-plane.
+Proof.
+If s = σ + it where σ and t are real, then
+|n−s| = |e−s log n| = e−σ log n = n−σ.
+As a consequence, if σ > 1 + δ > 1 the series deﬁning ζ is uniformly
+bounded by ∞
+n=1 1/n1+δ, which converges. Therefore, the series  1/ns
+converges uniformly on every half-plane Re(s) > 1 + δ > 1, and therefore
+deﬁnes a holomorphic function in Re(s) > 1.
+The analytic continuation of ζ to a meromorphic function in C is more
+subtle than in the case of the gamma function. The proof we present
+here relates ζ to Γ and another important function.
+Consider the theta function, already introduced in Chapter 4, which
+is deﬁned for real t > 0 by
+ϑ(t) =
+∞
+
+n=−∞
+e−πn2t.
+An application of the Poisson summation formula (Theorem 2.4 in Chap-
+ter 4) gave the functional equation satisﬁed by ϑ, namely
+ϑ(t) = t−1/2ϑ(1/t).
+The growth and decay of ϑ we shall need are
+ϑ(t) ≤Ct−1/2
+as t →0,
+and
+|ϑ(t) −1| ≤Ce−πt
+for some C > 0, and all t ≥1.
+The inequality for t tending to zero follows from the functional equation,
+while the behavior as t tends to inﬁnity follows from the fact that
+
+n≥1
+e−πn2t ≤
+
+n≥1
+e−πnt ≤Ce−πt
+for t ≥1.
+We are now in a position to prove an important relation among ζ, Γ
+and ϑ.
+
+170
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+Theorem 2.2 If Re(s) > 1, then
+π−s/2Γ(s/2)ζ(s) = 1
+2
+ ∞
+0
+u(s/2)−1[ϑ(u) −1] du.
+Proof.
+This and further arguments are based on the observation that
+(6)
+ ∞
+0
+e−πn2uu(s/2)−1 du = π−s/2Γ(s/2)n−s,
+if n ≥1.
+Indeed, if we make the change of variables u = t/πn2 in the integral, the
+left-hand side becomes
+ ∞
+0
+e−tt(s/2)−1 dt
+
+(πn2)−s/2,
+which is precisely π−s/2Γ(s/2)n−s. Next, note that
+ϑ(u) −1
+2
+=
+∞
+
+n=1
+e−πn2u.
+The estimates for ϑ given before the statement of the theorem justify an
+interchange of the inﬁnite sum with the integral, and thus
+1
+2
+ ∞
+0
+u(s/2)−1[ϑ(u) −1] du =
+∞
+
+n=1
+ ∞
+0
+u(s/2)−1e−πn2u du
+= π−s/2Γ(s/2)
+∞
+
+n=1
+n−s
+= π−s/2Γ(s/2)ζ(s),
+as was to be shown.
+In view of this, we now consider the modiﬁcation of the ζ function
+called the xi function, which makes the former appear more symmetric.
+It is deﬁned for Re(s) > 1 by
+(7)
+ξ(s) = π−s/2Γ(s/2)ζ(s).
+Theorem 2.3 The function ξ is holomorphic for Re(s) > 1 and has an
+analytic continuation to all of C as a meromorphic function with simple
+poles at s = 0 and s = 1. Moreover,
+ξ(s) = ξ(1 −s)
+for all s ∈C.
+
+2. The zeta function
+171
+Proof.
+The idea of the proof is to use the functional equation for ϑ,
+namely
+∞
+
+n=−∞
+e−πn2u = u−1/2
+∞
+
+n=−∞
+e−πn2/u,
+u > 0.
+We then could multiply both sides by u(s/2)−1 and try to integrate in
+u. Disregarding the terms corresponding to n = 0 (which produce inﬁni-
+ties in both sums), we would get the desired equality once we invoked
+formula (6), and the parallel formula obtained by making the change of
+variables u 	→1/u. The actual proof requires a little more work and goes
+as follows.
+Let ψ(u) = [ϑ(u) −1]/2. The functional equation for the theta func-
+tion, namely ϑ(u) = u−1/2ϑ(1/u), implies
+ψ(u) = u−1/2ψ(1/u) +
+1
+2u1/2 −1
+2.
+Now, by Theorem 2.2 for Re(s) > 1, we have
+π−s/2Γ(s/2)ζ(s)
+=
+ ∞
+0
+u(s/2)−1ψ(u) du
+=
+ 1
+0
+u(s/2)−1ψ(u) du +
+ ∞
+1
+u(s/2)−1ψ(u) du
+=
+ 1
+0
+u(s/2)−1
+
+u−1/2ψ(1/u) +
+1
+2u1/2 −1
+2
+
+du +
++
+ ∞
+1
+u(s/2)−1ψ(u) du
+=
+1
+s −1 −1
+s +
+ ∞
+1
+
+u(−s/2)−1/2 + u(s/2)−1
+ψ(u) du
+whenever Re(s) > 1. Therefore
+ξ(s) =
+1
+s −1 −1
+s +
+ ∞
+1
+
+u(−s/2)−1/2 + u(s/2)−1
+ψ(u) du.
+Since the function ψ has exponential decay at inﬁnity, the integral above
+deﬁnes an entire function, and we conclude that ξ has an analytic con-
+tinuation to all of C with simple poles at s = 0 and s = 1. Moreover, it is
+
+172
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+immediate that the integral remains unchanged if we replace s by 1 −s,
+and the same is true for the sum of the two terms 1/(s −1) −1/s. We
+conclude that ξ(s) = ξ(1 −s) as was to be shown.
+From the identity we have proved for ξ we obtain the desired result for
+the zeta function: its analytic continuation and its functional equation.
+Theorem 2.4 The zeta function has a meromorphic continuation into
+the entire complex plane, whose only singularity is a simple pole at s = 1.
+Proof.
+A look at (7) provides the meromorphic continuation of ζ,
+namely
+ζ(s) = πs/2 ξ(s)
+Γ(s/2).
+Recall that 1/Γ(s/2) is entire with simple zeros at 0, −2, −4, . . ., so the
+simple pole of ξ(s) at the origin is cancelled by the corresponding zero
+of 1/Γ(s/2). As a consequence, the only singularity of ζ is a simple pole
+at s = 1.
+We shall now present a more elementary approach to the analytic
+continuation of the zeta function, which easily leads to its extension in
+the half-plane Re(s) > 0. This method will be useful in studying the
+growth properties of ζ near the line Re(s) = 1 (which will be needed in
+the next chapter). The idea behind it is to compare the sum ∞
+n=1 n−s
+with the integral  ∞
+1
+x−s dx.
+Proposition 2.5 There is a sequence of entire functions {δn(s)}∞
+n=1
+that satisfy the estimate |δn(s)| ≤|s|/nσ+1, where s = σ + it, and such
+that
+(8)
+
+1≤n<N
+1
+ns −
+ N
+1
+dx
+xs =
+
+1≤n<N
+δn(s),
+whenever N is an integer > 1.
+This proposition has the following consequence.
+Corollary 2.6 For Re(s) > 0 we have
+ζ(s) −
+1
+s −1 = H(s),
+where H(s) = ∞
+n=1 δn(s) is holomorphic in the half-plane Re(s) > 0.
+
+2. The zeta function
+173
+To
+prove
+the
+proposition
+we
+compare
+
+1 ≤n < N n−s
+with
+
+1≤n<N
+ n+1
+n
+x−s dx, and set
+(9)
+δn(s) =
+ n+1
+n
+ 1
+ns −1
+xs
+
+dx.
+The mean-value theorem applied to f(x) = x−s yields
+
+1
+ns −1
+xs
+ ≤
+|s|
+nσ+1 ,
+whenever n ≤x ≤n + 1.
+Therefore |δn(s)| ≤|s|/nσ+1, and since
+ N
+1
+dx
+xs =
+
+1≤n<N
+ n+1
+n
+dx
+xs ,
+the proposition is proved.
+Turning to the corollary, we assume ﬁrst that Re(s) > 1. We let N
+tend to inﬁnity in formula (8) of the proposition, and observe that by the
+estimate |δn(s)| ≤|s|/nσ+1 we have the uniform convergence of the se-
+ries  δn(s) (in any half-plane Re(s) ≥δ when δ > 0). Since Re(s) > 1,
+the series  n−s converges to ζ(s), and this proves the assertion when
+Re(s) > 1. The uniform convergence also shows that  δn(s) is holo-
+morphic when Re(s) > 0, and thus shows that ζ(s) is extendable to that
+half-plane, and that the identity continues to hold there.
+Remark. The idea described above can be developed step by step to
+yield the continuation of ζ into the entire complex plane, as shown in
+Problems 2 and 3. Another argument giving the full analytic continua-
+tion of ζ is outlined in Exercises 15 and 16.
+As an application of the proposition we can show that the growth
+of ζ(s) near the line Re(s) = 1 is “mild.” Recall that when Re(s) > 1,
+we have |ζ(s)| ≤∞
+n=1 n−σ, and so ζ(s) is bounded in any half-plane
+Re(s) ≥1 + δ, with δ > 0. We shall see that on the line Re(s) = 1, |ζ(s)|
+is majorized by |t|ϵ, for every ϵ > 0, and that the growth near the line is
+not much worse. The estimates below are not optimal. In fact, they are
+rather crude but suﬃce for what is needed later on.
+Proposition 2.7 Suppose s = σ + it with σ, t ∈R. Then for each σ0,
+0 ≤σ0 ≤1, and every ϵ > 0, there exists a constant cϵ so that
+(i)
+|ζ(s)| ≤cϵ|t|1−σ0+ϵ, if σ0 ≤σ and |t| ≥1.
+
+174
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+(ii)
+|ζ′(s)| ≤cϵ|t|ϵ, if 1 ≤σ and |t| ≥1.
+In particular, the proposition implies that ζ(1 + it) = O(|t|ϵ) as |t|
+tends to inﬁnity,3 and the same estimate also holds for ζ′. For the proof,
+we use Corollary 2.6. Recall the estimate |δn(s)| ≤|s|/nσ+1. We also
+have the estimate |δn(s)| ≤2/nσ, which follows from the expression for
+δn(s) given by (9) and the fact that |n−s| = n−σ and |x−s| ≤n−σ if
+x ≥n. We then combine these two estimates for |δn(s)| via the observa-
+tion that A = AδA1−δ, to obtain the bound
+|δn(s)| ≤
+
+|s|
+nσ0+1
+δ  2
+nσ0
+1−δ
+≤2|s|δ
+nσ0+δ ,
+as long as δ ≥0. Now choose δ = 1 −σ0 + ϵ and apply the identity in
+Corollary 2.6. Then, with σ = Re(s) ≥σ0, we ﬁnd
+|ζ(s)| ≤
+
+1
+s −1
+ + 2|s|1−σ0+ϵ
+∞
+
+n=1
+1
+n1+ϵ,
+and conclusion (i) is proved. The second conclusion is actually a conse-
+quence of the ﬁrst by a slight modiﬁcation of Exercise 8 in Chapter 2. For
+completeness we sketch the argument. By the Cauchy integral formula,
+ζ′(s) =
+1
+2πr
+ 2π
+0
+ζ(s + reiθ)eiθ dθ,
+where the integration is taken over a circle of radius r centered at the
+point s. Now choose r = ϵ and observe that this circle lies in the half-
+plane Re(s) ≥1 −ϵ, and so (ii) follows as a consequence of (i) on replac-
+ing 2ϵ by ϵ.
+3 Exercises
+1. Prove that
+Γ(s) = lim
+n→∞
+nsn!
+s(s + 1) · · · (s + n)
+whenever s̸ = 0, −1, −2, . . ..
+[Hint: Use the product formula for 1/Γ, and the deﬁnition of the Euler constant γ.]
+2. Prove that
+∞
+
+n=1
+n(n + a + b)
+(n + a)(n + b) = Γ(a + 1)Γ(b + 1)
+Γ(a + b + 1)
+3The reader should recall the O notation which was introduced at the end of Chapter 1.

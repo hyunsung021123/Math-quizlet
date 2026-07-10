@@ -1,0 +1,91 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.1 Conformal equivalence and examples (분할 part 2)
+직전 소단원: 「7.4 Problems」
+[본문]
+1. Conformal equivalence and examples
+217
+bijection of the boundary of the disc to the boundary of Ω), then ˜f =
+f ◦F is deﬁned on the circle, and we can solve the Dirichlet problem
+for the disc with boundary data ˜f. The solution is given by the Poisson
+integral formula
+˜u(reiθ) = 1
+2π
+ 2π
+0
+Pr(θ −ϕ) ˜f(eiϕ) dϕ,
+where Pr is the Poisson kernel. Then, one can expect that the solution
+of the original problem is given by u = ˜u ◦F −1.
+Success with this approach requires that we are able to resolve aﬃr-
+matively two questions:
+• Does there exist a conformal map Φ = F −1 from Ωto D?
+• If so, does this map extend to a continuous bijection from the
+boundary of Ωto the boundary of D?
+The ﬁrst question, that of existence, is settled by the Riemann mapping
+theorem, which we prove in the next section. It is completely general
+(assuming only that Ωis a proper subset of C that is simply connected),
+and necessitates no regularity of the boundary of Ω. A positive answer
+to the second question requires some regularity of ∂Ω. A particular case,
+when Ωis the interior of a polygon, is treated below in Section 4.3. (See
+Exercise 18 and Problem 6 for more general assertions.)
+It is interesting to note that in Riemann’s original approach to the
+mapping problem, the chain of implications was reversed: his idea was
+that the existence of the conformal map Φ from Ωto D is a consequence
+of the solvability of the Dirichlet problem in Ω. He argued as follows.
+Suppose we wish to ﬁnd such a Φ, with the property that a given point
+z0 ∈Ωis mapped to 0. Then Φ must be of the form
+Φ(z) = (z −z0)G(z),
+where G is holomorphic and non-vanishing in Ω. Hence we can take
+Φ(z) = (z −z0)eH(z),
+for suitable H. Now if u(z) is the harmonic function given by u = Re(H),
+then the fact that |Φ(z)| = 1 on ∂Ωmeans that u must satisfy the bound-
+ary condition u(z) = log(1/|z −z0|) for z ∈∂Ω. So if we can ﬁnd such a
+solution u of the Dirichlet problem,4 we can construct H, and from this
+the mapping function Φ.
+4The harmonic function u(z) is also known as the Green’s function with source z0 for
+the region Ω.
+
+218
+Chapter 8. CONFORMAL MAPPINGS
+However, there are several shortcomings to this method. First, one
+has to verify that Φ is a bijection. In addition, to succeed, this method
+requires some regularity of the boundary of Ω. Moreover, one is still
+faced with the question of solving the Dirichlet problem for Ω. At this
+stage Riemann proposed using the “Dirichlet principle.” But applying
+this idea involves diﬃculties that must be overcome.5
+Nevertheless, using diﬀerent methods, one can prove the existence of
+the mapping in the general case. This approach is carried out below in
+Section 3.
+2 The Schwarz lemma; automorphisms of the disc and
+upper half-plane
+The statement and proof of the Schwarz lemma are both simple, but the
+applications of this result are far-reaching. We recall that a rotation is
+a map of the form z 	→cz with |c| = 1, namely c = eiθ, where θ ∈R is
+called the angle of rotation and is well-deﬁned up to an integer multiple
+of 2π.
+Lemma 2.1 Let f : D →D be holomorphic with f(0) = 0. Then
+(i)
+|f(z)| ≤|z| for all z ∈D.
+(ii)
+If for some z0̸ = 0 we have |f(z0)| = |z0|, then f is a rotation.
+(iii)
+|f ′(0)| ≤1, and if equality holds, then f is a rotation.
+Proof.
+We ﬁrst expand f in a power series centered at 0 and conver-
+gent in all of D
+f(z) = a0 + a1z + a2z2 + · · · .
+Since f(0) = 0 we have a0 = 0, and therefore f(z)/z is holomorphic in
+D (since it has a removable singularity at 0). If |z| = r < 1, then since
+|f(z)| ≤1 we have
+
+f(z)
+z
+ ≤1
+r,
+and by the maximum modulus principle, we can conclude that this is
+true whenever |z| ≤r. Letting r →1 gives the ﬁrst result.
+For (ii), we see that f(z)/z attains its maximum in the interior of D and
+must therefore be constant, say f(z) = cz. Evaluating this expression
+5An implementation of Dirichlet’s principle in the present two-dimensional situation is
+taken up in Book III.

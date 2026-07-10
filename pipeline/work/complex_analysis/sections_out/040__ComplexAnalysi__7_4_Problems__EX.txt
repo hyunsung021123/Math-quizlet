@@ -1,0 +1,145 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.4 Problems
+직전 소단원: 「7.3 Exercises」
+[연습문제]
+4. Problems
+203
+(b) Reﬁne the previous analysis by showing that for every integer N > 0 one
+has the following asymptotic expansion
+Li(x) =
+x
+log x +
+x
+(log x)2 + 2
+x
+(log x)3 · · · + (N −1)!
+x
+(log x)N + O
+
+x
+(log x)N+1
+
+as x →∞.
+11. Let
+ϕ(x) =
+
+p≤x
+log p
+where the sum is taken over all primes ≤x. Prove that the following are equivalent
+as x →∞:
+(i) ϕ(x) ∼x,
+(ii) π(x) ∼x/ log x,
+(iii) ψ(x) ∼x,
+(iv) ψ1(x) ∼x2/2.
+12.
+If pn denotes the nth prime, the prime number theorem implies that
+pn ∼n log n as n →∞.
+(a) Show that π(x) ∼x/ log x implies that
+log π(x) + log log x ∼log x.
+(b) As a consequence, prove that log π(x) ∼log x, and take x = pn to conclude
+the proof.
+4 Problems
+1. Let F(s) = ∞
+n=1 an/ns, where |an| ≤M for all n.
+(a) Then
+lim
+T →∞
+1
+2T
+ T
+−T
+|F(σ + it)|2 dt =
+∞
+
+n=1
+|an|2
+n2σ
+if σ > 1.
+How is this reminiscent of the Parseval-Plancherel theorem? See e.g. Chap-
+ter 3 in Book I.
+
+204
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+(b) Show as a consequence the uniqueness of Dirichlet series: If F(s)=∞
+n=1ann−s,
+where the coeﬃcients are assumed to satisfy |an| ≤cnk for some k, and
+F(s) ≡0, then an = 0 for all n.
+Hint: For part (a) use the fact that
+1
+2T
+ T
+−T
+(nm)−σn−itmit dt →
+ n−2σ
+if n = m,
+0
+if n̸ = m.
+2.∗One of the “explicit formulas” in the theory of primes is as follows: if ψ1 is the
+integrated Tchebychev function considered in Section 2, then
+ψ1(x) = x2
+2 −
+
+ρ
+xρ
+ρ(ρ + 1) −E(x)
+where the sum is taken over all zeros ρ of the zeta function in the critical strip.
+The error term is given by E(x) = c1x + c0 + ∞
+k=1 x1−2k/(2k(2k −1)), where
+c1 = ζ′(0)/ζ(0) and c0 = ζ′(−1)/ζ(−1).
+Note that 
+ρ 1/|ρ|1+ϵ < ∞for every
+ϵ > 0, because (1 −s)ζ(s) has order of growth 1. (See Exercise 8.) Also, obvi-
+ously E(x) = O(x) as x →∞.
+3.∗Using the previous problem one can show that
+π(x) −Li(x) = O(xα+ϵ)
+as x →∞
+for every ϵ > 0, where α is ﬁxed and 1/2 ≤α < 1 if and only if ζ(s) has no zeros in
+the strip α < Re(s) < 1. The case α = 1/2 corresponds to the Riemann hypothesis.
+4.∗One can combine ideas from the prime number theorem with the proof of
+Dirichlet’s theorem about primes in arithmetic progression (given in Book I) to
+prove the following. Let q and ℓbe relatively prime integers. We consider the
+primes belonging to the arithmetic progression {qk + ℓ}∞
+k=1, and let πq,ℓ(x) denote
+the number of such primes ≤x. Then one has
+πq,ℓ(x) ∼
+x
+ϕ(q) log x
+as x →∞,
+where ϕ(q) denotes the number of positive integers less than q and relatively prime
+to q.
+
+8 Conformal Mappings
+The results I found for polygons can be extended un-
+der very general assumptions. I have undertaken this
+research because it is a step towards a deeper un-
+derstanding of the mapping problem, for which not
+much has happened since Riemann’s inaugural disser-
+tation; this, even though the theory of mappings, with
+its close connection with the fundamental theorems of
+Riemann’s function theory, deserves in the highest de-
+gree to be developed further.
+E. B. Christoﬀel, 1870
+The problems and ideas we present in this chapter are more geomet-
+ric in nature than the ones we have seen so far. In fact, here we will
+be primarily interested in mapping properties of holomorphic functions.
+In particular, most of our results will be “global,” as opposed to the
+more “local” analytical results proved in the ﬁrst three chapters. The
+motivation behind much of our presentation lies in the following simple
+question:
+Given two open sets U and V in C, does there exist a holo-
+morphic bijection between them?
+By a holomorphic bijection we simply mean a function that is both
+holomorphic and bijective. (It will turn out that the inverse map is then
+automatically holomorphic.) A solution to this problem would permit
+a transfer of questions about analytic functions from one open set with
+little geometric structure to another with possibly more useful properties.
+The prime example consists in taking V = D the unit disc, where many
+ideas have been developed to study analytic functions.1 In fact, since
+the disc seems to be the most fruitful choice for V we are led to a variant
+of the above question:
+Given an open subset Ωof C, what conditions on Ωguarantee
+that there exists a holomorphic bijection from Ωto D?
+1For the corresponding problem when V = C, the solution is trivial: only U = C is
+possible. See Exercise 14 in Chapter 3.

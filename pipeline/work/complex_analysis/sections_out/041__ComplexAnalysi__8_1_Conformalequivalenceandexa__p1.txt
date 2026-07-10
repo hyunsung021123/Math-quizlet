@@ -1,0 +1,564 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.1 Conformal equivalence and examples (분할 part 1)
+직전 소단원: 「7.4 Problems」
+[본문]
+8 Conformal Mappings
+The results I found for polygons can be extended un-
+der very general assumptions. I have undertaken this
+research because it is a step towards a deeper un-
+derstanding of the mapping problem, for which not
+much has happened since Riemann’s inaugural disser-
+tation; this, even though the theory of mappings, with
+its close connection with the fundamental theorems of
+Riemann’s function theory, deserves in the highest de-
+gree to be developed further.
+E. B. Christoﬀel, 1870
+The problems and ideas we present in this chapter are more geomet-
+ric in nature than the ones we have seen so far. In fact, here we will
+be primarily interested in mapping properties of holomorphic functions.
+In particular, most of our results will be “global,” as opposed to the
+more “local” analytical results proved in the ﬁrst three chapters. The
+motivation behind much of our presentation lies in the following simple
+question:
+Given two open sets U and V in C, does there exist a holo-
+morphic bijection between them?
+By a holomorphic bijection we simply mean a function that is both
+holomorphic and bijective. (It will turn out that the inverse map is then
+automatically holomorphic.) A solution to this problem would permit
+a transfer of questions about analytic functions from one open set with
+little geometric structure to another with possibly more useful properties.
+The prime example consists in taking V = D the unit disc, where many
+ideas have been developed to study analytic functions.1 In fact, since
+the disc seems to be the most fruitful choice for V we are led to a variant
+of the above question:
+Given an open subset Ωof C, what conditions on Ωguarantee
+that there exists a holomorphic bijection from Ωto D?
+1For the corresponding problem when V = C, the solution is trivial: only U = C is
+possible. See Exercise 14 in Chapter 3.
+
+206
+Chapter 8. CONFORMAL MAPPINGS
+In some instances when a bijection exists it can be given by explicit
+formulas, and we turn to this aspect of the theory ﬁrst. For example, the
+upper half-plane can be mapped by a holomorphic bijection to the disc,
+and this is given by a fractional linear transformation. From there, one
+can construct many other examples, by composing simple maps already
+encountered earlier, such as rational functions, trigonometric functions,
+logarithms, etc. As an application, we discuss the consequence of these
+constructions to the solution of the Dirichlet problem for the Laplacian
+in some particular domains.
+Next, we pass from the speciﬁc examples to prove the ﬁrst general
+result of the chapter, namely the Schwarz lemma, with an immediate
+application to the determination of all holomorphic bijections (“auto-
+morphisms” of the disc to itself). These are again given by fractional
+linear transformations.
+Then comes the heart of the matter: the Riemann mapping theorem,
+which states that Ωcan be mapped to the unit disc whenever it is simply
+connected and not all of C. This is a remarkable theorem, since little
+is assumed about Ω, not even regularity of its boundary ∂Ω.
+(After
+all, the boundary of the disc is smooth.) In particular, the interiors of
+triangles, squares, and in fact any polygon can be mapped via a bijective
+holomorphic function to the disc. A precise description of the mapping
+in the case of polygons, called the Schwarz-Christoﬀel formula, will be
+taken up in the last section of the chapter. It is interesting to note that
+the mapping functions for rectangles are given by “elliptic integrals,” and
+these lead to doubly-periodic functions. The latter are the subject of the
+next chapter.
+1 Conformal equivalence and examples
+We ﬁx some terminology that we shall use in the rest of this chapter.
+A bijective holomorphic function f : U →V is called a conformal map
+or biholomorphism. Given such a mapping f, we say that U and V
+are conformally equivalent or simply biholomorphic. An important
+fact is that the inverse of f is then automatically holomorphic.
+Proposition 1.1 If f : U →V
+is holomorphic and injective,
+then
+f ′(z)̸ = 0 for all z ∈U. In particular, the inverse of f deﬁned on its
+range is holomorphic, and thus the inverse of a conformal map is also
+holomorphic.
+
+1. Conformal equivalence and examples
+207
+Proof.
+We argue by contradiction, and suppose that f ′(z0) = 0 for
+some z0 ∈U. Then
+f(z) −f(z0) = a(z −z0)k + G(z)
+for all z near z0,
+with a̸ = 0, k ≥2 and G vanishing to order k + 1 at z0. For suﬃciently
+small w, we write
+f(z) −f(z0) −w = F(z) + G(z),
+where F(z) = a(z −z0)k −w.
+Since |G(z)| < |F(z)| on a small circle centered at z0, and F has at
+least two zeros inside that circle, Rouch´e’s theorem implies that f(z) −
+f(z0) −w has at least two zeros there. Since f ′(z)̸ = 0 for all z̸ = z0 but
+suﬃciently close to z0 it follows that the roots of f(z) −f(z0) −w are
+distinct, hence f is not injective, a contradiction.
+Now let g = f −1 denote the inverse of f on its range, which we can
+assume is V . Suppose w0 ∈V and w is close to w0. Write w = f(z) and
+w0 = f(z0). If w̸ = w0, we have
+g(w) −g(w0)
+w −w0
+=
+1
+w−w0
+g(w)−g(w0)
+=
+1
+f(z)−f(z0)
+z−z0
+.
+Since f ′(z0)̸ = 0, we may let z →z0 and conclude that g is holomorphic
+at w0 with g′(w0) = 1/f ′(g(w0)).
+From this proposition we conclude that two open sets U and V are
+conformally equivalent if and only if there exist holomorphic functions
+f : U →V and g : V →U such that g(f(z)) = z and f(g(w)) = w for all
+z ∈U and w ∈V .
+We point out that the terminology adopted here is not universal. Some
+authors call a holomorphic map f : U →V conformal if f ′(z)̸ = 0 for all
+z ∈U. This deﬁnition is clearly less restrictive than ours; for example,
+f(z) = z2 on the punctured disc C −{0} satisﬁes f ′(z)̸ = 0, but is not
+injective. However, the condition f ′(z)̸ = 0 is tantamount to f being a
+local bijection (Exercise 1). There is a geometric consequence of the con-
+dition f ′(z)̸ = 0 and it is at the root of this discrepency of terminology in
+the deﬁnitions. A holomorphic map that satisﬁes this condition preserves
+angles. Loosely speaking, if two curves γ and η intersect at z0, and α is
+the oriented angle between the tangent vectors to these curves, then the
+image curves f ◦γ and f ◦η intersect at f(z0), and their tangent vectors
+form the same angle α. Problem 2 develops this idea.
+We begin our study of conformal mappings by looking at a number
+of speciﬁc examples. The ﬁrst gives the conformal equivalence between
+
+208
+Chapter 8. CONFORMAL MAPPINGS
+the unit disc and the upper half-plane, which plays an important role in
+many problems.
+1.1 The disc and upper half-plane
+The upper half-plane, which we denote by H, consists of those complex
+numbers with positive imaginary part; that is,
+H = {z ∈C : Im(z) > 0}.
+A remarkable fact, which at ﬁrst seems surprising, is that the unbounded
+set H is conformally equivalent to the unit disc. Moreover, an explicit
+formula giving this equivalence exists. Indeed, let
+F(z) = i −z
+i + z
+and
+G(w) = i1 −w
+1 + w.
+Theorem 1.2 The map F : H →D is a conformal map with inverse
+G : D →H.
+Proof.
+First we observe that both maps are holomorphic in their
+respective domains.
+Then we note that any point in the upper half-
+plane is closer to i than to −i, so |F(z)| < 1 and F maps H into D. To
+prove that G maps into the upper half-plane, we must compute Im(G(w))
+for w ∈D. To this end we let w = u + iv, and note that
+Im(G(w)) = Re
+1 −u −iv
+1 + u + iv
+
+= Re
+(1 −u −iv)(1 + u −iv)
+(1 + u)2 + v2
+
+= 1 −u2 −v2
+(1 + u)2 + v2 > 0
+since |w| < 1. Therefore G maps the unit disc to the upper half-plane.
+Finally,
+F(G(w)) =
+i −i 1−w
+1+w
+i + i 1−w
+1+w
+= 1 + w −1 + w
+1 + w + 1 −w = w,
+and similarly G(F(z)) = z. This proves the theorem.
+An interesting aspect of these functions is their behavior on the bound-
+aries of our open sets.2 Observe that F is holomorphic everywhere on C
+2The boundary behavior of conformal maps is a recurrent theme that plays an impor-
+tant role in this chapter.
+
+1. Conformal equivalence and examples
+209
+except at z = −i, and in particular it is continuous everywhere on the
+boundary of H, namely the real line. If we take z = x real, then the
+distance from x to i is the same as the distance from x to −i, there-
+fore |F(x)| = 1. Thus F maps R onto the boundary of D. We get more
+information by writing
+F(x) = i −x
+i + x = 1 −x2
+1 + x2 + i
+2x
+1 + x2 ,
+and parametrizing the real line by x = tan t with t ∈(−π/2, π/2). Since
+sin 2a =
+2 tana
+1 + tan2 a
+and
+cos 2a = 1 −tan2 a
+1 + tan2 a,
+we have F(x) = cos 2t + i sin 2t = ei2t. Hence the image of the real line
+is the arc consisting of the circle omitting the point −1. Moreover, as x
+travels from −∞to ∞, F(x) travels along that arc starting from −1 and
+ﬁrst going through that part of the circle that lies in the lower half-plane.
+The point −1 on the circle corresponds to the “point at inﬁnity” of
+the upper half-plane.
+Remark. Mappings of the form
+z 	→az + b
+cz + d,
+where a, b, c, and d are complex numbers, and where the denominator is
+assumed not to be a multiple of the numerator, are usually referred to
+as fractional linear transformations. Other instances occur as the
+automorphisms of the disc and of the upper half-plane in Theorems 2.1
+and 2.4.
+1.2 Further examples
+We gather here several illustrations of conformal mappings. In certain
+cases we discuss the behavior of the map on the boundary of the relevant
+domain. Some of the mappings are pictured in Figure 1.
+Example 1. Translations and dilations provide the ﬁrst simple examples.
+Indeed, if h ∈C, the translation z 	→z + h is a conformal map from C
+to itself whose inverse is w 	→w −h. If h is real, then this translation is
+also a conformal map from the upper half-plane to itself.
+For any non-zero complex number c, the map f : z 	→cz is a conformal
+map from the complex plane to itself, whose inverse is simply g : w 	→
+c−1w. If c has modulus 1, so that c = eiϕ for some real ϕ, then f is
+
+210
+Chapter 8. CONFORMAL MAPPINGS
+a rotation by ϕ. If c > 0 then f corresponds to a dilation. Finally, if
+c < 0 the map f consists of a dilation by |c| followed by a rotation of π.
+Example 2. If n is a positive integer, then the map z 	→zn is conformal
+from the sector S = {z ∈C : 0 < arg(z) < π/n} to the upper half-plane.
+The inverse of this map is simply w 	→w1/n, deﬁned in terms of the
+principal branch of the logarithm.
+More generally, if 0 < α < 2 the map f(z) = zα takes the upper half-
+plane to the sector S = {w ∈C : 0 < arg(w) < απ}. Indeed, if we choose
+the branch of the logarithm obtained by deleting the positive real axis,
+and z = reiθ with r > 0 and 0 < θ < π, then
+f(z) = zα = |z|αeiαθ.
+Therefore f maps H into S. Moreover, a simple veriﬁcation shows that
+the inverse of f is given by g(w) = w1/α, where the branch of the loga-
+rithm is chosen so that 0 < arg w < απ.
+By composing the map just discussed with the translations and rota-
+tions in the previous example, we may map the upper half-plane confor-
+mally to any (inﬁnite) sector in C.
+Let us note the boundary behavior of f. If x travels from −∞to 0 on
+the real line, then f(x) travels from ∞eiαπ to 0 on the half-line deter-
+mined by arg z = απ. As x goes from 0 to ∞on the real line, the image
+f(x) goes from 0 to ∞on the real line as well.
+Example 3.
+The map f(z) = (1 + z)/(1 −z) takes the upper half-
+disc {z = x + iy : |z| < 1 and y > 0} conformally to the ﬁrst quadrant
+{w = u + iv : u > 0 and v > 0}. Indeed, if z = x + iy we have
+f(z) = 1 −(x2 + y2)
+(1 −x)2 + y2 + i
+2y
+(1 −x)2 + y2 ,
+so f maps the half-disc in the upper half-plane into the ﬁrst quadrant.
+The inverse map, given by g(w) = (w −1)/(w + 1), is clearly holomor-
+phic in the ﬁrst quadrant. Moreover, |w + 1| > |w −1| for all w in the
+ﬁrst quadrant because the distance from w to −1 is greater than the
+distance from w to 1; thus g maps into the unit disc. Finally, an easy
+calculation shows that the imaginary part of g(w) is positive whenever w
+is in the ﬁrst quadrant.
+So g transforms the ﬁrst quadrant into the
+desired half-disc and we conclude that f is conformal because g is the
+inverse of f.
+To examine the action of f on the boundary, note that if z = eiθ be-
+
+1. Conformal equivalence and examples
+211
+longs to the upper half-circle, then
+f(z) = 1 + eiθ
+1 −eiθ = e−iθ/2 + eiθ/2
+e−iθ/2 −eiθ/2 =
+i
+tan(θ/2).
+As θ travels from 0 to π we see that f(eiθ) travels along the imaginary
+axis from inﬁnity to 0. Moreover, if z = x is real, then
+f(z) = 1 + x
+1 −x
+is also real; and one sees from this, that f is actually a bijection from
+(−1, 1) to the positive real axis, with f(x) increasing from 0 to inﬁnity
+as x travels from −1 to 1. Note also that f(0) = 1.
+Example 4. The map z 	→log z, deﬁned as the branch of the logarithm
+obtained by deleting the negative imaginary axis, takes the upper half-
+plane to the strip {w = u + iv : u ∈R, 0 < v < π}. This is immediate
+from the fact that if z = reiθ with −π/2 < θ < 3π/2, then by deﬁnition,
+log z = log r + iθ.
+The inverse map is then w 	→ew.
+As x travels from −∞to 0, the point f(x) travels from ∞+ iπ to
+−∞+ iπ on the line {x + iπ : −∞< x < ∞}. When x travels from 0
+to ∞on the real line, its image f(x) then goes from −∞to ∞along the
+reals.
+Example 5.
+With the previous example in mind, we see that
+z 	→log z also deﬁnes a conformal map from the half-disc {z = x + iy :
+|z| < 1, y > 0} to the half-strip {w = u + iv : u < 0, 0 < v < π}. As x
+travels from 0 to 1 on the real line, then log x goes from −∞to 0.
+When x goes from 1 to −1 on the half-circle in the upper half-plane,
+then the point log x travels from 0 to πi on the vertical segment of the
+strip. Finally, as x goes from −1 to 0, the point log x goes from πi to
+−∞+ iπ on the top half-line of the strip.
+Example 6.
+The map f(z) = eiz takes the half-strip {z = x + iy :
+−π/2 < x < π/2,
+y > 0} conformally to the half-disc {w = u + iv :
+|w| < 1, u > 0}.
+This is immediate from the fact that if z = x + iy,
+then
+eiz = e−yeix.
+
+212
+Chapter 8. CONFORMAL MAPPINGS
+If x goes from π/2 + i∞to π/2, then f(x) goes from 0 to i, and as x
+goes from π/2 to −π/2, then f(x) travels from i to −i on the half-circle.
+Finally, as x goes from −π/2 to −π/2 + i∞, we see that f(x) travels
+from −i back to 0.
+The mapping f is closely related to the inverse of the map in Exam-
+ple 5.
+Example 7. The function f(z) = −1
+2(z + 1/z) is a conformal map from
+the half-disc {z = x + iy : |z| < 1, y > 0} to the upper half-plane (Exer-
+cise 5).
+The boundary behavior of f is as follows. If x travels from 0 to 1, then
+f(x) goes from ∞to 1 on the real axis. If z = eiθ, then f(z) = cos θ and
+as x travels from 1 to −1 along the unit half-circle in the upper half-
+plane, the f(x) goes from 1 to −1 on the real segment. Finally, when x
+goes from −1 to 0, f(x) goes from −1 to −∞along the real axis.
+Example 8. The map f(z) = sin z takes the upper half-plane confor-
+mally onto the half-strip {w = x + iy : −π/2 < x < π/2 y > 0}. To see
+this, note that if ζ = eiz, then
+sin z = eiz −e−iz
+2i
+= −1
+2
+
+iζ + 1
+iζ
+
+,
+and therefore f is obtained ﬁrst by applying the map in Example 6, then
+multiplying by i (that is, rotating by π/2), and ﬁnally applying the map
+in Example 7.
+As x travels from −π/2 + i∞to −π/2, the point f(x) goes from −∞
+to −1. When x is real, between −π/2 and π/2, then f(x) is also real
+between −1 and 1. Finally, if x goes from π/2 to π/2 + i∞, then f(x)
+travels from 1 to ∞on the real axis.
+1.3 The Dirichlet problem in a strip
+The Dirichlet problem in the open set Ωconsists of solving
+(1)
+
+△u
+=
+0
+in Ω,
+u
+=
+f
+on ∂Ω,
+where △denotes the Laplacian ∂2/∂x2 + ∂2/∂y2, and f is a given func-
+tion on the boundary of Ω. In other words, we wish to ﬁnd a harmonic
+function in Ωwith prescribed boundary values f. This problem was al-
+ready considered in Book I in the cases where Ωis the unit disc or the
+
+1. Conformal equivalence and examples
+213
+f(z) = zα
+f(z) = 1+z
+1−z
+f(z) = log z
+f(z) = sin z
+−π
+2
+0
+0
+iπ
+0
+0
+1
+0
+0
+1
+0
+0
+iπ
+π
+2
+1
+i
+0
+0
+f(z) = log z
+f1(z) = eiz
+f2(z) = iz
+f3(z) = −1
+2
+z + 1
+z
+
+Figure 1. Explicit conformal maps
+upper half-plane, where it arose in the solution of the steady-state heat
+equation. In these speciﬁc examples, explicit solutions were obtained in
+terms of convolutions with the Poisson kernels.
+Our goal here is to connect the Dirichlet problem with the conformal
+maps discussed so far. We begin by providing a formula for a solution to
+the problem (1) in the special case where Ωis a strip. In fact, this exam-
+
+214
+Chapter 8. CONFORMAL MAPPINGS
+ple was studied in Problem 3 of Chapter 5, Book I, where the problem
+was solved using the Fourier transform. Here, we recover this solution
+using only conformal mappings and the known solution in the disc.
+The ﬁrst important fact that we use is that the composition of a har-
+monic function with a holomorphic function is still harmonic.
+Lemma 1.3 Let V and U be open sets in C and F : V →U a holo-
+morphic function. If u : U →C is a harmonic function, then u ◦F is
+harmonic on V .
+Proof.
+The thrust of the lemma is purely local, so we may assume
+that U is an open disc. We let G be a holomorphic function in U whose
+real part is u (such a G exists by Exercise 12 in Chapter 2, and is deter-
+mined up to an additive constant). Let H = G ◦F and note that u ◦F
+is the real part of H. Hence u ◦F is harmonic because H is holomorphic.
+For an alternate (computational) proof of this lemma, see Exercise 6.
+With this result in hand, we may now consider the problem (1) when
+Ωconsists of the horizontal strip
+Ω= {x + iy : x ∈R, 0 < y < 1},
+whose boundary is the union of the two horizontal lines R and i + R. We
+express the boundary data as two functions f0 and f1 deﬁned on R, and
+ask for a solution u(x, y) in Ωof △u = 0 that satisﬁes
+u(x, 0) = f0(x)
+and
+u(x, 1) = f1(x).
+We shall assume that f0 and f1 are continuous and vanish at inﬁnity,
+that is, that lim|x|→∞fj(x) = 0 for j = 0, 1.
+The method we shall follow consists of relocating the problem from
+the strip to the unit disc via a conformal map. In the disc the solution
+˜u is then expressed in terms of a convolution with the Poisson kernel.
+Finally, ˜u is moved back to the strip using the inverse of the previous
+conformal map, thereby giving our ﬁnal answer to the problem.
+To achieve our goal, we introduce the mappings F : D →Ωand
+G : Ω→D, that are deﬁned by
+F(w) = 1
+π log
+
+i1 −w
+1 + w
+
+and
+G(z) = i −eπz
+i + eπz .
+These two functions, which are obtained from composing mappings from
+examples in the previous sections, are conformal and inverses to one
+
+1. Conformal equivalence and examples
+215
+u = f0
+u = f1
+z = iy
+Ω
+Figure 2. The Dirichlet problem in a strip
+another. Tracing through the boundary behavior of F, we ﬁnd that it
+maps the lower half-circle to the line i + R, and the upper half-circle to
+R. More precisely, as ϕ travels from −π to 0, then F(eiϕ) goes from
+i + ∞to i −∞, and as ϕ travels from 0 to π, then F(eiϕ) goes from −∞
+to ∞on the real line.
+With the behavior of F on the circle in mind, we deﬁne
+˜f1(ϕ) = f1(F(eiϕ) −i)
+whenever −π < ϕ < 0,
+and
+˜f0(ϕ) = f0(F(eiϕ))
+whenever 0 < ϕ < π.
+Then, since f0 and f1 vanish at inﬁnity, the function ˜f that is equal
+to ˜f1 on the lower semi-circle, ˜f0 on the upper semi-circle, and 0 at the
+points ϕ = ±π, 0, is continuous on the whole circle. The solution to the
+Dirichlet problem in the unit disc with boundary data ˜f is given by the
+Poisson integral3
+˜u(w) = 1
+2π
+ π
+−π
+Pr(θ −ϕ) ˜f(ϕ) dϕ
+= 1
+2π
+ 0
+−π
+Pr(θ −ϕ) ˜f1(ϕ) dϕ + 1
+2π
+ π
+0
+Pr(θ −ϕ) ˜f0(ϕ) dϕ,
+where w = reiθ, and
+Pr(θ) =
+1 −r2
+1 −2r cos θ + r2
+3We refer the reader to Chapter 2 in Book I for a detailed discussion of the Dirichlet
+problem in the disc and the Poisson integral formula. Also, the Poisson integral formula
+is deduced in Exercise 12 of Chapter 2 and Problem 2 in Chapter 3 of this book.
+
+216
+Chapter 8. CONFORMAL MAPPINGS
+is the Poisson kernel. Lemma 1.3 guarantees that the function u, deﬁned
+by
+u(z) = ˜u(G(z)),
+is harmonic in the strip. Moreover, our construction also insures that u
+has the correct boundary values.
+A formula for u in terms of f0 and f1 is ﬁrst obtained at the points z =
+iy with 0 < y < 1. The appropriate change of variables (see Exercise 7)
+shows that if reiθ = G(iy), then
+1
+2π
+ π
+0
+Pr(θ −ϕ) ˜f0(ϕ) dϕ = sin πy
+2
+ ∞
+−∞
+f0(t)
+cosh πt −cos πy dt.
+A similar calculation also establishes
+1
+2π
+ π
+0
+Pr(θ −ϕ) ˜f1(ϕ) dϕ = sin πy
+2
+ ∞
+−∞
+f1(t)
+cosh πt + cos πy dt.
+Adding these last two integrals provides a formula for u(0, y). In gen-
+eral, we recall from Exercise 13 in Chapter 5 of Book I, that a solution to
+the Dirichlet problem in the strip vanishing at inﬁnity is unique. Conse-
+quently, a translation of the boundary condition by x results in a trans-
+lation of the solution by x as well. We may therefore apply the same
+argument to f0(x + t) and f1(x + t) (with x ﬁxed), and a ﬁnal change of
+variables shows that
+u(x, y) = sin πy
+2
+ ∞
+−∞
+f0(x −t)
+cosh πt −cos πy dt +
+ ∞
+−∞
+f1(x −t)
+cosh πt + cos πy dt
+
+,
+which gives a solution to the Dirichlet problem in the strip. In partic-
+ular, we ﬁnd that the solution is given in terms of convolutions with
+the functions f0 and f1. Also, note that at the mid-point of the strip
+(y = 1/2), the solution is given by integration with respect to the func-
+tion 1/ cosh πt; this function happens to be its own Fourier transform,
+as we saw in Example 3, Chapter 3.
+Remarks about the Dirichlet problem
+The example above leads us to envisage the solution of the more general
+Dirichlet problem for Ω(a suitable region), if we know a conformal map F
+from the disc D to Ω. That is, suppose we wish to solve (1), where f is
+an assigned continuous function and ∂Ωis the boundary of Ω. Assuming
+we have a conformal map F from D to Ω(that extends to a continuous

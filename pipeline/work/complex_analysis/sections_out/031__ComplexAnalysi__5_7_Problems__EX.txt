@@ -1,0 +1,172 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 5. Entire Functions
+현재 소단원: 5.7 Problems
+직전 소단원: 「5.6 Exercises」
+[연습문제]
+156
+Chapter 5. ENTIRE FUNCTIONS
+points, then there exists a meromorphic function in the whole complex plane that
+vanishes exactly at {an} and has poles exactly at {bn}.
+16. Suppose that
+Qn(z) =
+Nn
+
+k=1
+cn
+k zk
+are given polynomials for n = 1, 2, . . .. Suppose also that we are given a sequence of
+complex numbers {an} without limit points. Prove that there exists a meromorphic
+function f(z) whose only poles are at {an}, and so that for each n, the diﬀerence
+f(z) −Qn
+
+1
+z −an
+
+is holomorphic near an. In other words, f has a prescribed poles and principal
+parts at each of these poles. This result is due to Mittag-Leﬄer.
+17.
+Given two countably inﬁnite sequences of complex numbers {ak}∞
+k=0 and
+{bk}∞
+k=0, with limk→∞|ak| = ∞, it is always possible to ﬁnd an entire function F
+that satisﬁes F(ak) = bk for all k.
+(a) Given n distinct complex numbers a1, . . . , an, and another n complex num-
+bers b1, . . . , bn, construct a polynomial P of degree ≤n −1 with
+P(ai) = bi
+for i = 1, . . . , n.
+(b) Let {ak}∞
+k=0 be a sequence of distinct complex numbers such that a0 = 0
+and limk→∞|ak| = ∞, and let E(z) denote a Weierstrass product associated
+with {ak}. Given complex numbers {bk}∞
+k=0, show that there exist integers
+mk ≥1 such that the series
+F(z) =
+b0
+E′(z)
+E(z)
+z
++
+∞
+
+k=1
+bk
+E′(ak)
+E(z)
+z −ak
+ z
+ak
+mk
+deﬁnes an entire function that satisﬁes
+F(ak) = bk
+for all k ≥0.
+This is known as the Pringsheim interpolation formula.
+7 Problems
+1. Prove that if f is holomorphic in the unit disc, bounded and not identically
+zero, and z1, z2, . . . , zn, . . . are its zeros (|zk| < 1), then
+
+n
+(1 −|zn|) < ∞.
+
+7. Problems
+157
+[Hint: Use Jensen’s formula.]
+2.∗In this problem, we discuss Blaschke products, which are bounded analogues
+in the disc of the Weierstrass products for entire functions.
+(a) Show that for 0 < |α| < 1 and |z| ≤r < 1 the inequality
+
+α + |α|z
+(1 −αz)α
+ ≤1 + r
+1 −r
+holds.
+(b) Let {αn} be a sequence in the unit disc such that αn̸ = 0 for all n and
+∞
+
+n=1
+(1 −|αn|) < ∞.
+Note that this will be the case if {αn} are the zeros of a bounded holomorphic
+function on the unit disc (see Problem 1). Show that the product
+f(z) =
+∞
+
+n=1
+αn −z
+1 −αnz
+|αn|
+αn
+converges uniformly for |z| ≤r < 1, and deﬁnes a holomorphic function on
+the unit disc having precisely the zeros αn and no other zeros. Show that
+|f(z)| ≤1.
+3.∗Show that
+
+zn
+(n!)α is an entire function of order 1/α.
+4.∗Let F(z) = ∞
+n=0 anzn be an entire function of ﬁnite order. Then the growth
+order of F is intimately linked with the growth of the coeﬃcients an as n →∞.
+In fact:
+(a) Suppose |F(z)| ≤Aea|z|ρ. Then
+(8)
+lim sup
+n→∞
+|an|1/nn1/ρ < ∞.
+(b) Conversely, if (8) holds, then |F(z)| ≤Aϵeaϵ|z|ρ+ϵ, for every ϵ > 0.
+[Hint: To prove (a), use Cauchy’s inequality
+|an| ≤A
+rn earρ,
+and the fact that the function u−neuρ, 0 < u < ρ, attains its minimum value
+en/ρ(ρ/n)n/ρ at u = n1/ρ/ρ1/ρ. Then, choose r in terms of n to achieve this mini-
+mum.
+
+158
+Chapter 5. ENTIRE FUNCTIONS
+To establish (b), note that for |z| = r,
+|F(z)| ≤
+ cnrn
+nn/ρ ≤
+
+cnrn
+(n!)1/ρ
+for some constant c, since nn ≥n!. This yields a reduction to Problem 3.]
+
+6 The Gamma and Zeta
+Functions
+It is no exaggeration to say that the gamma and zeta functions are
+among the most important nonelementary functions in mathematics.
+The gamma function Γ is ubiquitous in nature. It arises in a host of
+calculations and is featured in a large number of identities that occur in
+analysis. Part of the explanation for this probably lies in the basic struc-
+tural property of the gamma function, which essentially characterizes
+it: 1/Γ(s) is the (simplest) entire function1 which has zeros at exactly
+s = 0, −1, −2, . . ..
+The zeta function ζ (whose study, like that of the gamma function,
+was initiated by Euler) plays a fundamental role in the analytic theory
+of numbers. Its intimate connection with prime numbers comes about
+via the identity for ζ(s):
+
+p
+1
+1 −p−s =
+∞
+
+n=1
+1
+ns ,
+where the product is over all primes. The behavior of ζ(s) for real s > 1,
+with s tending to 1, was used by Euler to prove that 
+p 1/p diverges,
+and a similar reasoning for L-functions is at the starting point of the
+proof of Dirichlet’s theorem on primes in arithmetic progression, as we
+saw in Book I.
+While there is no diﬃculty in seeing that ζ(s) is well-deﬁned (and
+analytic) when Re(s) > 1, it was Riemann who realized that the further
+study of primes was bound up with the analytic (in fact, meromorphic)
+continuation of ζ into the rest of the complex plane. Beyond this, we also
+consider its remarkable functional equation, which reveals a symmetry
+about the line Re(s) = 1/2, and whose proof is based on a corresponding
+identity for the theta function. We also make a more detailed study of
+the growth of ζ(s) near the line Re(s) = 1, which will be required in the
+proof of the prime number theorem given in the next chapter.
+1In keeping with the standard notation of the subject, we denote by s (instead of z)
+the argument of the functions Γ and ζ.

@@ -1,0 +1,954 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.appendix-a Appendix A: Asymptotics (분할 part 2)
+직전 소단원: 「10.5 Problems」
+[본문]
+332
+Appendix A: ASYMPTOTICS
+(a) Im(F) = 0 on Γ.
+(b) Re(F) has a minimum on Γ at some point z0, and this function
+is non-degenerate in the sense that the second derivative of Re(F)
+along Γ is strictly positive at z0.
+Conditions (a) and (b) imply of course that F ′(z0) = 0.
+If as above,
+F ′′(z0)̸ = 0, then there are two curves Γ1 and Γ2 passing through z0
+which are orthogonal, so that F|Γi is real for i = 1, 2, with Re(F) re-
+stricted to Γ1 having a minimum at z0; and Re(F) restricted to Γ2 hav-
+ing a maximum at z0 (see Exercise 2 in Chapter 8). We therefore try to
+deform our original contour of integration to Γ = Γ1. This approach is
+usually referred to as the method of steepest descent, because at z0
+the function −Re(F(z)) has a saddle point, and starting at this point and
+following the path of Γ1, one has the greatest decrease of this function.
+Let us return to our special case, F(z) = −i(z3/3 + z). We note that
+
+Re(F)
+=
+x2y −y3/3 + y,
+Im(F)
+=
+−x3/3 + xy2 −x.
+We observe also that F ′(z) = −i(z2 + 1), so we have two non-real critical
+points z0 = ±i at which F ′(z0) = 0. If we choose z0 = i, then the two
+curves passing through this point where Im(F) = 0 are
+Γ1 = {(x, y) : y2 = x2/3 + 1}
+and
+Γ2 = {(x, y) : x = 0}.
+On Γ2, the function Re(F) clearly has a maximum at the point z0 = i,
+and so we reject this curve. We choose Γ = Γ1, which is a branch of a hy-
+perbola, and which can be written as y = (x2/3 + 1)1/2; it is asymptotic
+to the rays z = reiπ/6, and z = rei5π/6 at inﬁnity. See Figure 4.
+z = reiπ/6
+z = reiπ/6
+i
+0
+Γ
+Figure 4. The curve of steepest descent
+
+3. The Airy function
+333
+Next, we see that
+(21)
+1
+2π
+ ∞
+−∞
+e−sF(x) dx = 1
+2π
+
+Γ
+e−sF(z) dz.
+This identity is justiﬁed by applying the Cauchy theorem to e−sF(z)
+on the contour ΓR that consists of four arc segments: the parts of the
+real axis and Γ that lie inside the circle of radius R, and the two arcs
+of this circle joining the axis with Γ.
+Since in this region e−sF(z) =
+O(e−cyx2) as x →±∞, the contributions of the two arcs of the circle are
+O( π
+0 e−cR2 sin θ dθ) = O(1/R), and letting R →∞establishes (21).
+We now observe that on Γ
+Φ(x) = Re(F) = y(x2 −y2/3 + 1) = (8
+9x2 + 2
+3)(x2/3 + 1)1/2,
+since y2 = x2/3 + 1 there.
+Also, on Γ we have that dz = dx + idy =
+dx + i(x/3)(x2/3 + 1)−1/2dx. Thus,
+(22)
+1
+2π
+
+Γ
+e−sF(z) dz = 1
+2π
+ ∞
+−∞
+e−sΦ(x) dx,
+in view of the fact that Φ(x) is even, while x(x2/3 + 1)−1/2 is odd.
+We note next that since (1 + u)1/2 = 1 + u/2 + O(u2) as u →0,
+Φ(x) = (8
+9x2 + 2
+3) + 2
+3
+1
+2
+x2
+3 + O(x4) = x2 + 2
+3 + O(x4),
+and so Φ′′(0) = 2. We now apply Proposition 2.1 to estimate the main
+part of the right-hand side of (22), by
+1
+2π
+ c
+−c
+e−sΦ(x) dx,
+where c is a small positive constant. Since Φ(0) = 2/3, Φ′′(0) = 2, and
+ψ(0) = 1/2π, we obtain that this term contributes
+e−2
+3 s
+
+1
+2π1/2
+1
+s1/2 + O
+1
+s
+
+.
+The term
+ ∞
+c
+e−sΦ(x) dx is dominated by e−2s/3  ∞
+c
+e−c1sx2 dx, which is
+O(e−2s/3e−δs) for some δ > 0, as soon as c > 0. A similar estimate holds
+for  −c
+−∞e−sΦ(x) dx. Altogether, then,
+I+(s) = e−2
+3 s
+
+1
+2π1/2
+1
+s1/2 + O
+1
+s
+
+as s →∞,
+and this gives the desired asymptotic (ii) for the Airy function.
+
+334
+Appendix A: ASYMPTOTICS
+4 The partition function
+Our last illustration of the techniques developed in this appendix is in
+their application to the partition function p(n), which was discussed in
+Chapter 10. We derive for it the main term of the remarkable asymptotic
+formula of Hardy-Ramanujan.
+Theorem 4.1 If p denotes the partition function, then
+(i) p(n) ∼
+1
+4
+√
+3n
+eKn1/2 as n →∞, where K = π
+&
+2
+3.
+(ii) A much more precise assertion is that
+p(n) =
+1
+2π
+√
+2
+d
+dn
+
+eK(n−1
+24 )1/2
+(n −1
+24)1/2
+
++ O(e
+K
+2 n1/2).
+Note.
+Observe that (n −1
+24)1/2 −n1/2 = O(n−1/2), by the mean-
+value
+theorem;
+hence
+eK(n−1
+24 )1/2 = eKn1/2(1 + O(n−1/2)),
+thus
+eK(n−1
+24 )1/2 ∼eKn1/2, as n →∞. Of course, clearly (n −1
+24)1/2 ∼n1/2,
+and in particular (ii) implies (i).
+We shall discuss ﬁrst, in a more general setting, how we might derive
+the asymptotic behavior of a sequence {Fn} from the analytic properties
+of its generating function F(w) = ∞
+n=0 Fnwn. Assuming for the sake of
+simplicity that  Fnwn has the unit disc as its disc of convergence, we
+can set forth the following heuristic principle: the asymptotic behavior
+of Fn is determined by the location and nature of the “singularities” of
+F on the unit circle, and the contribution to the asymptotic formula
+due to each singularity corresponds in magnitude to the “order” of that
+singularity.
+A very simple example in which this principle is unambiguous and can
+be veriﬁed occurs when F is meromorphic in a larger disc, but has only
+one singularity on the circle, a pole of order r at the point w = 1. Then
+there is a polynomial P of degree r −1 so that Fn = P(n) + O(e−ϵn) as
+n →∞, for some ϵ > 0. In fact, ∞
+n=0 P(n)wn is a good approximation
+to F(w) near w = 1; it is the principal part of the pole of F. (See also
+Problem 4.)
+For the partition function the analysis is not as simple as this ex-
+ample, but the principle stated above is still applicable when properly
+interpreted. To this task we now turn.
+We recall the formula
+∞
+
+n=0
+p(n) wn =
+∞
+
+n=1
+1
+1 −wn ,
+
+4. The partition function
+335
+established in Theorem 2.1, Chapter 10. This identity implies that the
+generating function is holomorphic in the unit disc. In what follows, it
+will be convenient to pass from the unit disc to the upper half-plane by
+writing w = e2πiz, z = x + iy, and taking y > 0. We therefore have
+∞
+
+n=0
+p(n)e2πinz = f(z),
+with
+f(z) =
+∞
+
+n=1
+1
+1 −e2πinz ,
+and
+(23)
+p(n) =
+
+γ
+f(z)e−2πinz dz.
+Here γ is the segment in the upper half-plane joining −1/2 + iδ to
+1/2 + iδ, with δ > 0; the height δ will be ﬁxed later in terms of n.
+To proceed further, we look ﬁrst at where the main contribution to
+the integral (23) might be, in terms of the relative size of f(x + iy), as
+y →0.
+Notice that f
+is largest near z = 0.
+This is because
+|f(x + iy)| ≤f(iy), and moreover f(iy) increases as y decreases, in view
+of the fact that the coeﬃcients p(n) are positive. Alternatively, we ob-
+serve that each factor 1 −e2πinz, appearing in the product for f, vanishes
+as z →0, but the same is true for any other point (mod 1) on the real
+axis. Thus in analogy with the simple example considered above, we seek
+an elementary function f1, which has much the same behavior as f at
+z = 0, and try to replace f by f1 in (23).
+It is here that we are very fortunate, because the generating function
+is just a variant of the Dedekind eta function,
+η(z) = eiπz/12
+∞
+
+n=1
+(1 −e2πinz).
+From this, it is obvious that
+f(z) = e
+iπz
+12 (η(z))−1.
+(Incidentally, the fraction 1/12 arising above will explain the occurrence
+of the fraction 1/24 in the asymptotic formula for p(n).)
+
+336
+Appendix A: ASYMPTOTICS
+Since η satisﬁes the functional equation η(−1/z) =
+	
+z/i η(z) (see
+Proposition 1.9 in Chapter 10), it follows that
+(24)
+f(z) =
+	
+z/i e
+iπ
+12z e
+iπz
+12 f(−1/z).
+Notice also that if z is appropriately restricted and z →0, then
+Im(−1/z) →∞, from which it follows that f(−1/z) →1 rapidly, because
+(25)
+f(z) = 1 + O(e−2πy),
+z = x + iy, y ≥1.
+Thus it is natural to choose f1(z) =
+	
+z/i e
+iπ
+12z e
+iπz
+12 as the function which
+approximates well the generating function f(z) (at z = 0), and write
+(because of (24))
+p(n) = p1(n) + E(n),
+with
+
+
+
+
+
+
+
+
+
+
+
+p1(n)
+=
+
+γ
+	
+z/i e
+iπ
+12z e
+iπz
+12 e−2πinz dz,
+E(n)
+=
+
+γ
+	
+z/i e
+iπ
+12z e
+iπz
+12 e−2πinz(f(−1/z) −1) dz.
+We ﬁrst take care of the error term E(n), and in doing so we specify
+γ by choosing its height in terms of n. In estimating E(n) we replace its
+integrand by its absolute value and note that if z ∈γ, then
+(26)
+
+	
+z/i e
+iπ
+12z e
+iπz
+12 e−2πinz ≤ce2πnδe
+π
+12
+δ
+δ2+x2 ,
+since z = x + iy, and Re(i/z) = δ/(δ2 + x2).
+On the other hand, we can make two estimates for f(−1/z) −1. The
+ﬁrst arises from (25) by replacing z by −1/z, and gives
+(27)
+|f(−1/z) −1| ≤ce−2π
+δ
+δ2+x2
+if
+δ
+δ2+x2 ≥1.
+For the second, we observe that |f(z)| ≤f(iy) ≤Ce
+π
+12y , when y ≤1,
+because of the functional equation (24), and hence
+(28)
+|f(−1/z) −1| ≤O
+
+e
+π
+12
+δ2+x2
+δ
+
+= O 
+e
+π
+48δ 
+if
+δ
+δ2+x2 ≤1, since |x| ≤1/2.
+
+4. The partition function
+337
+Therefore in the integral deﬁning E(n) we use (26) and (27) when
+δ
+δ2+x2 ≥1, and (26) and (28) when
+δ
+δ2+x2 ≤1. The ﬁrst leads to a con-
+tribution of O(e2πnδ), since 2π > π/12. The second gives a contribution
+of O(e2πnδe
+π
+48δ ). Hence E(n) = O(e2πnδe
+π
+48δ ), and we choose δ so as to
+minimize the right-hand side, that is, 2πnδ =
+π
+48δ; this means we take
+δ =
+1
+4
+√
+6 n1/2 , and we get
+E(n) = O
+
+e
+4π
+4
+√
+6 n1/2
+= O
+
+e
+K
+2 n1/2
+,
+which is the desired size of the error term.
+We turn to the main term p1(n). To simplify later calculations we
+“improve” the contour γ by adding to it two small end-segments; these
+are the segment joining −1/2 to −1/2 + iδ and that joining 1/2 + iδ to
+1/2. We call this new contour γ′ (see Figure 5).
+γ
+γ′
+−1/2
+1/2
+1/2
+−1/2
+Figure 5. γ and the improved contour γ′
+Notice that since
+	
+z/i e
+iπ
+12z is O(1) on the two added segments (for
+the integral deﬁning p1(n)), the modiﬁcation contributes O(e2πnδ) =
+O(e
+2π
+4
+√
+6 n1/2
+) = O(e
+K
+4 n1/2), which is even smaller than the allowed error,
+and therefore can be incorporated in E(n). So without introducing fur-
+ther notation we will rewrite p1(n) replacing the contour γ by γ′ in the
+integration deﬁning p1, namely
+(29)
+p1(n) =
+
+γ′
+	
+z/i e
+iπ
+12z e
+iπz
+12 e−2πinz dz.
+
+338
+Appendix A: ASYMPTOTICS
+Next we simplify the triad of exponentials appearing in (29) by making
+a change of variables z 	→µz so that their combination takes the form
+eAi( 1
+z −z).
+This can be achieved under the two conditions A = 2πµ(n −1
+24) and
+A =
+π
+12µ, which means that
+A = π
+√
+6
+(n −1
+24)1/2
+and
+µ =
+1
+2
+√
+6
+(n −1
+24)−1/2.
+Making the indicated change of variables we now have
+(30)
+p1(n) = µ3/2
+
+Γ
+e−sF(z) 	
+z/i dz,
+with F(z) = i(z −1/z), s =
+π
+√
+6 (n −1
+24)1/2. The curve Γ (see Figure 6).
+is now the union of three segments [−an, −an + iδ′], [−an + iδ′, an + iδ′],
+and [an + iδ′, an]; we can write Γ = µ−1γ′.
+−an
+an
+−an + iδ′
+an + iδ′
+Γ
+Figure 6. The curve Γ
+Here
+an = 1
+2µ−1 =
+√
+6 (n −1
+24)1/2 ≈n1/2,
+while
+δ′ = δµ−1 =
+2
+√
+6
+4
+√
+6n1/2 (n −1
+24)1/2 ∼1/2, as n →∞.
+We apply the method of steepest descent to the integral (30). In doing
+this, we note that F(z) = i(z −1/z) has one (complex) critical point
+z = i, in the upper half-plane. Moreover, the two curves passing through
+i on which F is real are: the imaginary axis, on which F has a maximum
+at z = i, which we reject, and the unit circle, on which F has a minimum
+at z = i. Thus using Cauchy’s theorem we replace the integration on Γ
+by the integration over our ﬁnal curve Γ∗, which consists of the segment
+[−an, −1], [1, an], together with the upper semicircle joining −1 to 1.
+
+4. The partition function
+339
+Γ∗
+Γ
+i
+Figure 7. The ﬁnal curve Γ∗
+We therefore have
+p1(n) = µ3/2
+
+Γ∗e−sF(z)	
+z/i dz.
+The contributions on the segments [−an, −1] and [1, an] are relatively
+very small, because on the real axis the exponential has absolute value
+1, and hence the integrand is bounded by sup|z|≤an |z|1/2, and this leads
+to two terms which are O(a3/2
+n µ3/2) = O(1).
+Finally, we come to the principal part, which is the integration over the
+semicircle, taken with the orientation on the ﬁgure. Here we write z =
+eiθ, dz = ieiθ dθ. Since i(z −1/z) = −2 sin θ, this gives a contribution
+−µ3/2
+ π
+0
+e2s sin θei3θ/2 √
+i dθ = µ3/2
+ π/2
+−π/2
+e2s cos θ(cos(3θ/2) + i sin(3θ/2))dθ.
+In applying Proposition 2.1, Laplace’s method, we take Φ(θ) = −cos θ,
+θ0 = 0, so Φ(θ0) = −1, Φ′′(θ0) = 1 and we choose ψ(θ) = cos(3θ/2) +
+i sin(3θ/2), so that ψ(θ0) = 1. Therefore, the above contributes
+µ3/2e2s
+√
+2π
+(2s)1/2
+
+1 + O(s−1/2)
+.
+Now since s =
+π
+√
+6 (n −1
+24)1/2, 2π
+√
+6 = π
+&
+2
+3 = K, and µ =
+√
+6
+12 (n −1
+24)−1/2,
+we obtain
+p(n) =
+1
+4n
+√
+3
+eK n1/2 
+1 + O 
+n−1/4
+,
+
+340
+Appendix A: ASYMPTOTICS
+and the ﬁrst conclusion of the theorem is established.
+To obtain the more exact conclusion (ii), we retrace our steps and use
+an additional device, which allows us to evaluate rather precisely the key
+integral. With p1(n) deﬁned by (29), which is an integral taken over
+γ′ = γ′
+n, we write
+p1(n) = d
+dnq(n) + e(n),
+where
+q(n) = 1
+2π
+
+γ′(z/i)−1/2e
+iπ
+12z e
+iπz
+12 e−2πinz dz,
+and e(n) is the term due to the variation of the contour γ′ = γ′
+n, when
+forming the derivative in n. By Cauchy’s theorem this is easily seen to
+be dominated by O(e2πnδ), which we have seen is O(e
+K
+4 n1/2), and can be
+subsumed in the error term. To analyze q(n), we proceed as before, ﬁrst
+making the change of variables z 	→µz, and then replacing the resulting
+contour Γ by Γ∗. As a consequence, we have
+(31)
+q(n) = µ1/2
+2π
+
+Γ∗e−sF(z)(z/i)−1/2 dz,
+with F(z) = i(z −1/z), s =
+π
+√
+6 (n −1
+24)1/2, and µ =
+1
+2
+√
+6 (n −1
+24)−1/2.
+Now the two segments [−an, −1] and [1, an] of the contour Γ∗make
+harmless contributions to
+d
+dnq(n), since F is purely imaginary on the real
+axis. Indeed, they yield terms which are O(a1/2
+n µ1/2) = O(1).
+The main part of (31) is the term arising from the integration on the
+semicircle. Thus setting z = eiθ, dz = ieiθ dθ, and i(z −1/z) = −2 sin θ,
+it equals
+−µ1/2
+2π
+ π
+0
+e2s sin θeiθ/2i3/2 dθ = µ1/2
+2π
+ π/2
+−π/2
+e2s cos θ(cos(θ/2) + i sin(θ/2))dθ
+= µ1/2
+2π
+ π/2
+−π/2
+e2s cos θ cos(θ/2)dθ,
+where we have used the fact that the integral  π/2
+−π/2 e2s cos θ sin(θ/2) dθ
+vanishes since the integrand is odd.
+
+5. Problems
+341
+Now cos θ = 1 −2(sin θ/2)2, so setting x = sin(θ/2) we see that the
+above integral becomes
+µ1/2e2s
+π
+
+√
+2
+2
+−
+√
+2
+2
+e−4sx2 dx.
+However
+
+√
+2
+2
+−
+√
+2
+2
+e−4sx2 dx =
+ ∞
+−∞
+e−4sx2 dx + O
+ ∞
+√
+2
+2
+e−4sx2 dx
+
+=
+√π
+2s1/2 + O(e−2s),
+and also
+d
+ds
+
+√
+2
+2
+−
+√
+2
+2
+e−4sx2 dx
+
+= d
+ds
+ √π
+2s1/2
+
++ O(e−2s).
+Gathering all the error terms together, we ﬁnd
+p(n) = d
+dn
+
+µ1/2 e2s
+π
+√π
+2s1/2
+
++ O(e
+K
+2 n1/2).
+Since s =
+π
+√
+6(n −1
+24)1/2, µ =
+√
+6
+12 (n −1
+24)−1/2, and K = π
+&
+2
+3, this is
+p(n) =
+1
+2π
+√
+2
+d
+dn
+
+eK(n−1
+24 )1/2
+(n −1
+24)1/2
+
++ O(e
+K
+2 n1/2),
+and the theorem is proved.
+5 Problems
+1. Let η be an indeﬁnitely diﬀerentiable function supported in a ﬁnite interval, so
+that η(x) = 1 for x near 0. Then, if m > −1 and N > 0,
+ ∞
+0
+e−sxxmη(x) dx = s−m−1Γ(m + 1) + O(s−N)
+for Re(s) ≥0, |s| →∞.
+(a) Consider ﬁrst the case −1 < m ≤0. It suﬃces to see that
+ ∞
+0
+e−sxxm(1 −η(x)) dx = O(s−N),
+and
+this
+can
+be
+done
+by
+repeated
+integration
+by
+parts
+since
+e−sx = (−1)Ns−N  d
+dx
+N (e−sx).
+
+342
+Appendix A: ASYMPTOTICS
+(b) To extend this to all m, ﬁnd an integer k so that k −1 < m ≤k, write
+ $ d
+dx
+k
+(xm)
+%
+e−sxη(x) dx = ck,ms−m+k−1 + O(s−N),
+and integrate by parts k times.
+2. The following is a more precise version of Stirling’s formula. There are real
+constant a1 = 1/12, a2, . . ., an, . . ., so that for every N > 0
+Γ(s) = es log se−s
+√
+2π
+s1/2
+
+1 +
+N
+
+j=1
+ajs−j + O(s−N)
+
+when s ∈Sδ.
+This can be proved by using the results of Problem 1 in place of Proposition 1.3.
+3. The Bessel functions and Airy function have the following power series expan-
+sions:
+Jν(x) =
+
+ x
+2
+ν
+∞
+
+m=0
+(−1)m 
+x2
+4
+m
+m!Γ(ν + m + 1) ,
+Ai(−x)= 1
+π
+∞
+
+n=0
+xn
+n! sin(2π(n + 1)/3)3n/3−2/3Γ(n/3 + 1/3).
+(a) From this, verify that when x > 0,
+Ai(−x) = x1/2
+3
+
+J1/3
+2
+3x3/2
+
++ J−1/3
+2
+3x3/2
+
+.
+(b) The function Ai(x) extends to an entire function of order 3/2.
+[Hint: For (b), use (a), or alternatively, apply Problem 4 in Chapter 5 to the power
+series for Ai. Compare also with Problem 1, Chapter 4.]
+4. Suppose F(z) = ∞
+n=0 Fnwn is meromorphic in a region containing the closed
+unit disc, and the only poles of F are on the unit circle at the points α1, . . . , αk,
+and their orders are r1, . . . , rk respectively. Then for some ϵ > 0
+Fn =
+k
+
+j=1
+Pj(n) + O(e−ϵn)
+as n →∞.
+Here
+Pj(n) =
+1
+(rj −1)!
+ d
+dw
+rj−1 
+(w −αj)rjw−n−1F(w)
+
+w=αj .
+
+5. Problems
+343
+Note that each Pj is of the form Pj(n) = Aj(α−1
+j n)rj−1 + O(nrj −2).
+To prove this, use the residue formula (Theorem 1.4, Chapter 3).
+5.∗The one shortcoming in our derivation of the asymptotic formula for p(n) arose
+from the fact that while f1(z) =
+	
+z/i e
+iπ
+12z e
+iπz
+12
+is a good approximation to the
+generating function f(z) near z = 0, this fails near other points on the real axis,
+since f1 is regular there, but f is not.
+However, using the transformation law (24) and the identity f(z + 1) = f(z),
+one can derive the following generalization of (24): whenever p/q is a rational
+number in lowest form (so p and q are relatively prime) then
+f
+
+z −p
+q
+
+= ωp/q
+!
+zq
+i
+e
+iπ
+12zq2 e−iπz
+12 f
+
+−1
+zq2 −p′
+q
+
+,
+where pp′ = 1 mod q. Here ωp/q is an appropriate 24th root of unity. This formula
+leads to an analogous fp/q, approximating f at z = p/q.
+From this one can obtain for each p/q a contribution of the form
+cp/q
+1
+2π
+√
+2
+d
+dn
+
+e
+K
+q (n−1
+24 )1/2
+(n −
+1
+24)1/2
+
+to the asymptotic formula for p(n). When suitably modiﬁed, the resulting series,
+summed over all proper fractions p/q in [0, 1), actually converges and gives an
+exact formula for p(n).
+
+Appendix B: Simple Connectivity
+and Jordan Curve Theorem
+Jordan was one of the precursors of the theory of func-
+tions of a real variable. He introduced in this part of
+analysis the capital notion of functions of bounded
+variation. Not less celebrated is his study of curves,
+universally called Jordan curves, which curves sepa-
+rate the plane in two distinct regions. We also owe
+him important propositions regarding the measure of
+sets that have led the way to numerous modern re-
+searches.
+E. Picard, 1922
+The notion of simple connectivity is at the source of many basic and
+fundamental results in complex analysis. To clarify the meaning of this
+important concept, we have gathered in this appendix some further in-
+sights into the properties of simply connected sets. Closely tied to the
+idea of simple connectivity is the notion of the “interior” of a simple
+closed curve. The theorem of Jordan states that this interior is well-
+deﬁned and is simply connected. We prove here the special case of this
+theorem for curves which are piecewise-smooth.
+Recall the deﬁnition in Chapter 3, according to which a region Ωis
+simply connected if any two curves in Ωwith the same end-points are
+homotopic.
+From this deﬁnition we deduced an important version of
+Cauchy’s theorem which states that if Ωis simply connected and γ ⊂Ω
+is any closed curve, then
+(1)
+
+γ
+f(ζ) dζ = 0
+whenever f is holomorphic in Ω. Here, we shall prove that a converse
+also holds, therefore:
+(I) A region Ωis simply connected if and only if it is holomorphi-
+cally simply connected; that is, whenever γ ⊂Ωis closed and f
+holomorphic in Ωthen (1) holds.
+Besides this fundamental equivalence, which is analytic in nature, there

@@ -1,0 +1,384 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.6 Problems
+직전 소단원: 「8.5 Exercises」
+[연습문제]
+254
+Chapter 8. CONFORMAL MAPPINGS
+then F maps the unit disc conformally onto the interior of a regular polygon with
+n sides and perimeter
+2
+n−2
+n
+ π
+0
+(sin θ)−2/n dθ.
+24. The elliptic integrals K and K′ deﬁned for 0 < k < 1 by
+K(k) =
+ 1
+0
+dx
+((1 −x2)(1 −k2x2))1/2
+and
+K′(k) =
+ 1/k
+1
+dx
+((x2 −1)(1 −k2x2))1/2
+satisfy various interesting identities. For instance:
+(a) Show that if ˜k2 = 1 −k2 and 0 < ˜k < 1, then
+K′(k) = K(˜k).
+[Hint: Change variables x = (1 −˜k2y2)−1/2 in the integral deﬁning K′(k).]
+(b) Prove that if ˜k2 = 1 −k2, and 0 < ˜k < 1, then
+K(k) =
+2
+1 + ˜k
+K
+1 −˜k
+1 + ˜k
+
+.
+[Hint: Change variables x = 2t/(1 + ˜k + (1 −˜k)t2).]
+(c) Show that for 0 < k < 1 one has
+K(k) = π
+2 F(1/2, 1/2, 1; k2),
+where F the hypergeometric series. [Hint: This follows from the integral
+representation for F given in Exercise 9, Chapter 6.]
+6 Problems
+1. Let f be a complex-valued C1 function deﬁned in the neighborhood of a point
+z0. There are several notions closely related to conformality at z0. We say that
+f is isogonal at z0 if whenever γ(t) and η(t) are two smooth curves with γ(0) =
+η(0) = z0, that make an angle θ there (|θ| < π), then f(γ(t)) and f(η(t)) make an
+angle of θ′ at t = 0 with |θ′| = |θ| for all θ. Also, f is said to be isotropic if it
+magniﬁes lengths by some factor for all directions emanating from z0, that is, if
+the limit
+lim
+r→0
+|f(z0 + reiθ) −f(z0)|
+r
+exists, is non-zero, and independent of θ.
+
+6. Problems
+255
+Then f is isogonal at z0 if and only if it is isotropic at z0; moreover, f is isogonal
+at z0 if and only if either f ′(z0) exists and is non-zero, or the same holds for f
+replaced by f.
+2. The angle between two non-zero complex numbers z and w (taken in that order)
+is simply the oriented angle, in (−π, π], that is formed between the two vectors in
+R2 corresponding to the points z and w. This oriented angle, say α, is uniquely
+determined by the two quantities
+(z, w)
+|z| |w|
+and
+(z, −iw)
+|z| |w|
+which are simply the cosine and sine of α, respectively. Here, the notation (·, ·)
+corresponds to the usual Euclidian inner product in R2, which in terms of complex
+numbers takes the form (z, w) = Re(zw).
+In particular, we may now consider two smooth curves γ : [a, b] →C and η :
+[a, b] →C, that intersect at z0, say γ(t0) = η(t0) = z0, for some t0 ∈(a, b). If the
+quantities γ′(t0) and η′(t0) are non-zero, then they represent the tangents to the
+curves γ and η at the point z0, and we say that the two curves intersect at z0 at
+the angle formed by the two vectors γ′(t0) and η′(t0).
+A holomorphic function f deﬁned near z0 is said to preserve angles at z0 if
+for any two smooth curves γ and η intersecting at z0, the angle formed between
+the curves γ and η at z0 equals the angle formed between the curves f ◦γ and
+f ◦η at f(z0). (See Figure 12 for an illustration.) In particular, we assume that
+the tangents to the curves γ, η, f ◦γ, and f ◦η at the point z0 and f(z0) are all
+non-zero.
+η
+γ
+z0
+f(z0)
+f ◦η
+f ◦γ
+Figure 12. Preservation of angles at z0
+(a) Prove that if f : Ω→C is holomorphic, and f ′(z0)̸ = 0, then f preserves
+angles at z0. [Hint: Observe that
+(f ′(z0)γ′(t0), f ′(z0)η′(t0)) = |f ′(z0)|2(γ′(t0), η′(t0)).]
+(b) Conversely, prove the following:
+suppose f : Ω→C is a complex-valued
+function, that is real-diﬀerentiable at z0 ∈Ω, and Jf(z0)̸ = 0. If f preserves
+angles at z0, then f is holomorphic at z0 with f ′(z0)̸ = 0.
+
+256
+Chapter 8. CONFORMAL MAPPINGS
+3.∗The Schwarz-Pick lemma (see Exercise 13) is the inﬁnitesimal version of an
+important observation in complex analysis and geometry.
+For complex numbers w ∈C and z ∈D we deﬁne the hyperbolic length of w
+at z by
+∥w∥z =
+|w|
+1 −|z|2 ,
+where |w| and |z| denote the usual absolute values.
+This length is sometimes
+referred to as the Poincar´e metric, and as a Riemann metric it is written as
+ds2 =
+|dz|2
+(1 −|z|2)2 .
+The idea is to think of w as a vector lying in the tangent space at z. Observe that
+for a ﬁxed w, its hyperbolic length grows to inﬁnity as z approaches the boundary
+of the disc. We pass from the inﬁnitesimal hyperbolic length of tangent vectors to
+the global hyperbolic distance between two points by integration.
+(a) Given two complex numbers z1 and z2 in the disc, we deﬁne the hyperbolic
+distance between them by
+d(z1, z2) = inf
+γ
+ 1
+0
+∥γ′(t)∥γ(t) dt,
+where the inﬁmum is taken over all smooth curves γ : [0, 1] →D joining z1
+and z2. Use the Schwarz-Pick lemma to prove that if f : D →D is holomor-
+phic, then
+d(f(z1), f(z2)) ≤d(z1, z2)
+for any z1, z2 ∈D.
+In other words, holomorphic functions are distance-decreasing in the hyper-
+bolic metric.
+(b) Prove that automorphisms of the unit disc preserve the hyperbolic distance,
+namely
+d(ϕ(z1), ϕ(z2)) = d(z1, z2),
+for any z1, z2 ∈D
+and any automorphism ϕ. Conversely, if ϕ : D →D preserves the hyperbolic
+distance, then either ϕ or ϕ is an automorphism of D.
+(c) Given two points z1, z2 ∈D, show that there exists an automorphism ϕ such
+that ϕ(z1) = 0 and ϕ(z2) = s for some s on the segment [0, 1) on the real
+line.
+(d) Prove that the hyperbolic distance between 0 and s ∈[0, 1) is
+d(0, s) = 1
+2 log 1 + s
+1 −s.
+
+6. Problems
+257
+(e) Find a formula for the hyperbolic distance between any two points in the
+unit disc.
+4.∗Consider the group of matrices of the form
+M =
+ a
+b
+c
+d
+
+,
+that satisfy the following conditions:
+(i) a, b, c, and d ∈C,
+(ii) the determinant of M is equal to 1,
+(iii) the matrix M preserves the following hermitian form on C2 × C2:
+⟨Z, W ⟩= z1w1 −z2w2,
+where Z = (z1, z2) and W = (w1, w2). In other words, for all Z, W ∈C2
+⟨MZ, MW ⟩= ⟨Z, W ⟩.
+This group of matrices is denoted by SU(1, 1).
+(a) Prove that all matrices in SU(1, 1) are of the form
+ a
+b
+b
+a
+
+,
+where |a|2 −|b|2 = 1. To do so, consider the matrix
+J =
+ 1
+0
+0
+−1
+
+,
+and observe that ⟨Z, W ⟩=
+tW JZ, where tW denotes the conjugate trans-
+pose of W .
+(b) To every matrix in SU(1, 1) we can associate a fractional linear transforma-
+tion
+az + b
+cz + d.
+Prove that the group SU(1, 1)/{±1} is isomorphic to the group of automor-
+phisms of the disc. [Hint: Use the following association.]
+e2iθ z −α
+1 −αz −→
+
+
+eiθ
+√
+1−|α|2
+−
+αeiθ
+√
+1−|α|2
+−
+αe−iθ
+√
+1−|α|2
+e−iθ
+√
+1−|α|2
+
+.
+
+258
+Chapter 8. CONFORMAL MAPPINGS
+5. The following result is relevant to Problem 4 in Chapter 10 which treats modular
+functions.
+(a) Suppose that F : H →C is holomorphic and bounded. Also, suppose that
+F(z) vanishes when z = irn, n = 1, 2, 3, . . ., where {rn} is a bounded se-
+quence of positive numbers. Prove that if ∞
+n=1 rn = ∞, then F = 0.
+(b) If  rn < ∞, it is possible to construct a bounded function on the upper
+half-plane with zeros precisely at the points irn.
+For related results in the unit disc, see Problems 1 and 2 in Chapter 5.]
+6.∗The results of Exercise 18 extend to the case when γ is assumed merely to be
+closed, simple, and continuous. The proof, however, requires further ideas.
+7.∗Applying ideas of Carath´eodory, Koebe gave a proof of the Riemann mapping
+theorem by constructing (more explicitly) a sequence of functions that converges
+to the desired conformal map.
+Starting with a Koebe domain, that is, a simply connected domain K0 ⊂D that
+is not all of D, and which contains the origin, the strategy is to ﬁnd an injective
+function f0 such that f0(K0) = K1 is a Koebe domain “larger” than K0. Then, one
+iterates this process, ﬁnally obtaining functions Fn = fn ◦· · · ◦f0 : K0 →D such
+that Fn(K0) = Kn+1 and lim Fn = F is a conformal map from K0 to D.
+The inner radius of a region K ⊂D that contains the origin is deﬁned by
+rK = sup{ρ ≥0 : D(0, ρ) ⊂K}. Also, a holomorphic injection f : K →D is said to
+be an expansion if f(0) = 0 and |f(z)| > |z| for all z ∈K −{0}.
+(a) Prove that if f is an expansion, then rf(K) ≥rK and |f ′(0)| > 1.
+[Hint:
+Write f(z) = zg(z) and use the maximum principle to prove that |f ′(0)| =
+|g(0)| > 1.]
+Suppose we begin with a Koebe domain K0 and a sequence of expansions
+{f0, f1, . . . , fn, . . .}, so that Kn+1 = fn(Kn) are also Koebe domains.
+We then
+deﬁne holomorphic maps Fn : K0 →D by Fn = fn ◦· · · ◦f0.
+(b) Prove that for each n, the function Fn is an expansion.
+Moreover,
+F ′
+n(0) = n
+k=0 f ′
+k(0), and conclude that limn→∞|f ′
+n(0)| = 1. [Hint: Prove
+that the sequence {|F ′
+n(0)|} has a limit by showing that it is bounded above
+and monotone increasing. Use the Schwarz lemma.]
+(c) Show that if the sequence is osculating, that is, rKn →1 as n →∞, then
+{Fn} converges uniformly on compact subsets of K0 to a conformal map
+F : K0 →D. [Hint: If rF (K0) ≥1 then F is surjective.]
+To construct the desired osculating sequence we shall use the automorphisms
+ψα = (α −z)/(1 −αz).
+(d) Given a Koebe domain K, choose a point α ∈D on the boundary of K such
+that |α| = rK, and also choose β ∈D such that β2 = α. Let S denote the
+square root of ψα on K such that S(0) = 0. Why is such a function well
+deﬁned? Prove that the function f : K →D deﬁned by f(z) = ψβ ◦S ◦ψα
+
+6. Problems
+259
+is an expansion. Moreover, show that |f ′(0)| = (1 + rK)/2√rK. [Hint: To
+prove that |f(z)| > |z| on K −{0} apply the Schwarz lemma to the inverse
+function, namely ψα ◦g ◦ψβ where g(z) = z2.]
+(e) Use part (d) to construct the desired sequence.
+8.∗Let f be an injective holomorphic function in the unit disc, with f(0) = 0 and
+f ′(0) = 1. If we write f(z) = z + a2z2 + a3z3 · · · , then Problem 1 in Chapter 3
+shows that |a2| ≤2. Bieberbach conjectured that in fact |an| ≤n for all n ≥2;
+this was proved by deBranges. This problem outlines an argument to prove the
+conjecture under the additional assumption that the coeﬃcients an are real.
+(a) Let z = reiθ with 0 < r < 1, and show that if v(r, θ) denotes the imaginary
+part of f(reiθ), then
+anrn = 2
+π
+ π
+0
+v(r, θ) sin nθ dθ.
+(b) Show that for 0 ≤θ ≤π and n = 1, 2, . . . we have | sin nθ| ≤n sin θ.
+(c) Use the fact that an ∈R to show that f(D) is symmetric with respect to
+the real axis, and use this fact to show that f maps the upper half-disc into
+either the upper or lower part of f(D).
+(d) Show that for r small,
+v(r, θ) = r sin θ[1 + O(r)],
+and use the previous part to conclude that v(r, θ) sin θ ≥0 for all 0 < r < 1
+and 0 ≤θ ≤π.
+(e) Prove that |anrn| ≤nr, and let r →1 to conclude that |an| ≤n.
+(f) Check that the function f(z) = z/(1 −z)2 satisﬁes all the hypotheses and
+that |an| = n for all n.
+9.∗Gauss found a connection between elliptic integrals and the familiar operations
+of forming arithmetic and geometric means.
+We start with any pair (a, b) of numbers that satisfy a ≥b > 0, and form the
+arithmetic and geometric means of a and b, that is,
+a1 = a + b
+2
+and
+b1 = (ab)1/2.
+We then repeat these operations with a and b replaced by a1 and b1. Iterating
+this process provides two sequences {an} and {bn} where an+1 and bn+1 are the
+arithmetic and geometric means of an and bn, respectively.
+
+260
+Chapter 8. CONFORMAL MAPPINGS
+(a) Prove that the two sequences {an} and {bn} have a common limit. This
+limit, which we denote by M(a, b), is called the arithmetic-geometric
+mean of a and b. [Hint: Show that a ≥a1 ≥a2 ≥· · · ≥an ≥bn ≥· · · ≥
+b1 ≥b and an −bn ≤(a −b)/2n.]
+(b) Gauss’s identity states that
+1
+M(a, b) = 2
+π
+ π/2
+0
+dθ
+(a2 cos2 θ + b2 sin2 θ)1/2 .
+To prove this relation, show that if I(a, b) denotes the integral on the right-
+hand side, then it suﬃces to establish the invariance of I, namely
+(6)
+I(a, b) = I
+ a + b
+2
+, (ab)1/2
+
+.
+Then, observe that the connection with elliptic integrals takes the form
+I(a, b) = 1
+aK(k) = 1
+a
+ 1
+0
+dx
+	
+(1 −x2)(1 −k2x2)
+where k2 = 1 −b2/a2,
+and that the relation (6) is a consequence of the identity in (b) of Exercise 24.
+
+9 An Introduction to Elliptic
+Functions
+The form that Jacobi had given to the theory of elliptic
+functions was far from perfection; its ﬂaws are obvious.
+At the base we ﬁnd three fundamental functions sn,
+cn and dn.
+These functions do not have the same
+periods...
+In Weierstrass’ system, instead of three funda-
+mental functions, there is only one, ℘(u), and it is the
+simplest of all having the same periods. It has only
+one double inﬁnity; and ﬁnally its deﬁnition is so that
+it does not change when one replaces one system of
+periods by another equivalent system.
+H. Poincar´e, 1899
+The theory of elliptic functions, which is of interest in several parts of
+mathematics, initially grew out of the study of elliptic integrals. These
+can be described generally as integrals of the form
+
+R(x,
+	
+P(x)) dx,
+where R is a rational function and P a polynomial of degree three or
+four.1 These integrals arose in computing the arc-length of an ellipse, or
+of a lemniscate, and in a variety of other problems. Their early study was
+centered on their special transformation properties and on the discovery
+of an inherent double-periodicity. We have seen an example of this latter
+phenomenon in the mapping function of the half-plane to a rectangle
+taken up in Section 4.5 of the previous chapter.
+It was Jacobi who transformed the subject by initiating the systematic
+study of doubly-periodic functions (called elliptic functions). In this the-
+ory, the theta functions he introduced played a decisive role. Weierstrass
+after him developed another approach, which in its initial steps is simpler
+and more elegant. It is based on his ℘function, and in this chapter we
+shall sketch the beginnings of that theory. We will go as far as to glimpse
+a possible connection with number theory, by considering the Eisenstein
+series and their expression involving divisor functions. A number of more
+direct links with combinatorics and number theory arise from the theta
+1The case when P is a quadratic polynomial is essentially that of “circular functions”,
+and can be reduced to the trigonometric functions sin x, cos x, etc.

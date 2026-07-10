@@ -1,0 +1,326 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.4 Conformal mappings onto polygons (분할 part 2)
+직전 소단원: 「8.3 The Riemann mapping theorem」
+[본문]
+4. Conformal mappings onto polygons
+243
+Ak
+Ak−1
+Ak+1
+Figure 9. Schwarz reﬂection
+Lk. Since hk is injective up to Lk (because F is) the symmetry in the
+Schwarz reﬂection principle guarantees that hk is injective in the whole
+disc centered at x, whence h′
+k(x)̸ = 0, whence h′
+k(z)̸ = 0 for all z in the
+strip Ak−1 < Re(z) < Ak+1.
+Now
+because
+F ′ = αkh−βk
+k
+h′
+k
+and
+F ′′ = −βkαkh−βk−1
+k
+(h′
+k)2 +
+αkh−βk
+k
+h′′
+k, the fact that h′
+k(z)̸ = 0 implies that
+F ′′(z)
+F ′(z) =
+−βk
+z −Ak
++ Ek(z),
+where Ek is holomorphic in the strip Ak−1 < Re(z) < Ak+1. A similar
+result holds for k = 1 and k = n, namely
+F ′′(z)
+F ′(z) = −
+β1
+z −A1
++ E1,
+where E1 is holomorphic in the strip −∞< Re(z) < A2, and
+F ′′(z)
+F ′(z) = −
+βn
+z −An
++ En,
+where En is holomorphic in the strip An−1 < Re(z) < ∞. Finally, an-
+other application of the reﬂection principle shows that F is continuable
+in the exterior of a disc |z| ≤R, for large R (say R > max1≤k≤n |Ak|). In-
+deed,
+we
+may
+continue
+F
+across
+the
+union
+of
+the
+segments
+
+244
+Chapter 8. CONFORMAL MAPPINGS
+(−∞, A1) ∪(An, ∞) since their image under F is a straight line seg-
+ment and Schwarz reﬂection applies. The fact that F maps the upper
+half-plane to a bounded region shows that the analytic continuation of F
+outside a large disc is also bounded, and hence holomorphic at inﬁnity.
+Thus F ′′/F ′ is holomorphic at inﬁnity and we claim that it goes to 0 as
+|z| →∞. Indeed, we may expand F at z = ∞as
+F(z) = c0 + c1
+z + c2
+z2 + · · · .
+This after diﬀerentiation shows that F ′′/F ′ decays like 1/z as |z| becomes
+large, and proves our claim.
+Altogether then, because the various strips overlap and cover the entire
+complex plane,
+F ′′(z)
+F ′(z) +
+n
+
+k=1
+βk
+z −Ak
+is holomorphic in the entire plane and vanishes at inﬁnity; thus, by Li-
+ouville’s theorem it is zero. Hence
+F ′′(z)
+F ′(z) = −
+n
+
+k=1
+βk
+z −Ak
+.
+From this we contend that F ′(z) = c(z −A1)−β1 · · · (z −An)−βn.
+In-
+deed, denoting this product by Q(z), we have
+Q′(z)
+Q(z) = −
+n
+
+k=1
+βk
+z −Ak
+.
+Therefore
+d
+dz
+F ′(z)
+Q(z)
+
+= 0,
+which proves the contention. A ﬁnal integration yields the theorem.
+We may now withdraw the hypothesis we made at the beginning that
+F did not map the point at inﬁnity to a vertex of P, and obtain a formula
+for that case as well.
+Theorem 4.7 If F is a conformal map from the upper half-plane to the
+polygonal region P and maps the points A1, . . . , An−1, ∞to the vertices
+of p, then there exist constants C1 and C2 such that
+F(z) = C1
+ z
+0
+dζ
+(ζ −A1)β1 · · · (ζ −An−1)βn−1 + C2.
+
+4. Conformal mappings onto polygons
+245
+In other words, the formula is obtained by deleting the last term in
+the Schwarz-Christoﬀel integral (5).
+Proof.
+After a preliminary translation, we may assume that Aj̸ = 0
+for j = 1, . . . , n −1. Choose a point A∗
+n > 0 on the real line, and consider
+the fractional linear map deﬁned by
+Φ(z) = A∗
+n −1
+z .
+Then Φ is an automorphism of the upper half-plane. Let A∗
+k = Φ(Ak)
+for k = 1, . . . , n −1, and note that A∗
+n = Φ(∞). Then
+(F ◦Φ−1)(A∗
+k) = ak
+for all k = 1, 2, . . ., n.
+We can now apply the Schwarz-Christoﬀel formula just proved to ﬁnd
+that
+(F ◦Φ−1)(z′) = C1
+ z′
+0
+dζ
+(ζ −A∗
+1)β1 · · · (ζ −A∗n)βn + C2.
+The change of variables ζ = Φ(w) satisﬁes dζ = dw/w2, and since we can
+write 2 = β1 + · · · + βn, we obtain
+(F ◦Φ−1)(z′) = C1
+ Φ−1(z′)
+0
+dw
+(w(A∗
+n−A∗
+1)−1)β1 ···(w(A∗
+n−A∗
+n−1)−1)βn−1 + C′
+2
+= C′
+1
+ Φ−1(z′)
+0
+dw
+(w−1/(A∗
+n−A∗
+1))β1 ···(w−1/(A∗
+n−A∗
+n−1))βn−1 + C′
+2.
+Finally, we note that 1/(A∗
+n −A∗
+k) = Ak and set Φ−1(z′) = z in the above
+equation to conclude that
+F(z) = C′
+1
+ z
+0
+dw
+(w −A1)β1 · · · (w −An−1)βn−1 + C′
+2,
+as was to be shown.
+4.5 Return to elliptic integrals
+We consider again the elliptic integral
+I(z) =
+ z
+0
+dζ
+[(1 −ζ2)(1 −k2ζ2)]1/2
+with 0 < k < 1,
+
+246
+Chapter 8. CONFORMAL MAPPINGS
+which arose in Example 3 of Section 4.1. We saw that it mapped the real
+axis to the rectangle R with vertices −K, K, K + iK′, and −K + iK′.
+We will now see that this mapping is a conformal mapping of H to the
+interior of R.
+According to Theorem 4.6 there is a conformal map F to the rectangle,
+that maps four points on the real axis to the vertices of R. By preceding
+this map with a suitable automorphism of H we may assume that F
+maps −1, 0, 1 to −K, 0, K, respectively. Indeed, by using a preliminary
+automorphism, we may assume that −K, 0, K are the images of points
+A1, 0, A2 with A1 < 0 < A2; then we can further take A1 = −1 and
+A2 = 1. See Exercise 15.
+Next, let ℓbe chosen with 0 < ℓ< 1, so that 1/ℓis the point on the
+real line mapped by F to the vertex K + iK′, which is the vertex next in
+order after −K and K. We claim that F(−1/ℓ) is the vertex −K + iK′.
+Indeed, if F ∗(z) = −F(−z), then by the symmetry of R, F ∗is also a
+conformal map of H to R; moreover F ∗(0) = 0, and F ∗(±1) = ±K. Thus
+F −1 ◦F ∗is an automorphism of H that ﬁxes the points −1, 0, and 1.
+Hence F −1 ◦F ∗is the identity (see Exercise 15), and F = F ∗, from which
+it follows that
+F(−1/ℓ) = −F(1/ℓ) = −K + iK′.
+Therefore, by Theorem 4.6
+F(z) = c1
+ z
+0
+dζ
+[(1 −ζ2)(1 −ℓ2ζ2)]1/2 + c2.
+Setting z = 0 gives c2 = 0, and letting z = 1, z = 1/ℓ, yields
+K(k) = c1K(ℓ)
+and
+K′(k) = c1K′(ℓ),
+where
+K(k) =
+ 1
+0
+dx
+[(1 −x2)(1 −k2x2)]1/2 ,
+K′(k) =
+ 1/k
+1
+dx
+[(x2 −1)(1 −k2x2)]1/2 .
+Now K(k) is clearly strictly increasing as k varies in (0, 1). Moreover, a
+change of variables (Exercise 24) establishes the identity
+K′(k) = K(˜k)
+where ˜k2 = 1 −k2 and ˜k > 0,
+
+4. Conformal mappings onto polygons
+247
+and this shows that K′(k) is strictly decreasing.
+Hence K(k)/K′(k)
+is strictly increasing.
+Since K(k)/K′(k) = K(ℓ)/K′(ℓ), we must have
+k = ℓ, and ﬁnally c1 = 1. This shows that I(z) = F(z), and hence I is
+conformal, as was to be proved.
+A ﬁnal observation is of signiﬁcance. A basic insight into elliptic in-
+tegrals is obtained by passing to their inverse functions. We therefore
+consider z 	→sn(z), the inverse map of z 	→I(z).9
+It transforms the
+closed rectangle into the closed upper half-plane. Now consider the se-
+ries of rectangles R = R0, R1, R2, . . . gotten by reﬂecting successively
+along the lower sides (Figure 10).
+K −iK′
+K + iK′
+K
+K −2iK′
+R0
+R1
+R2
+Figure 10. Reﬂections of R = R0
+With sn(z) deﬁned in R0, we can by the reﬂection principle extend
+it to R1 by setting sn(z) = sn(z) whenever z ∈R1 (note that then z ∈
+R0). Next we can extend sn(z) to R2 by setting sn(z) = sn(−iK′ + z) if
+z ∈R2 and noting that if z ∈R2, then −iK′ + z ∈R1. Combining these
+reﬂections and continuing this way we see that we can extend sn(z) in
+the entire strip −K < Re(z) < K, so that sn(z) = sn(z + 2iK′).
+Similarly, by reﬂecting in a series of horizontal rectangles, and combin-
+ing these with the previous reﬂections, we see that sn(z) can be continued
+to the complex plane and also satisﬁes sn(z) = sn(z + 4K). Thus sn(z)
+is doubly periodic (with periods 4K and 2iK′). A further examination
+9The notation sn(z) in somewhat diﬀerent form is due to Jacobi, and was adopted
+because of the analogy with sin z.
+
+248
+Chapter 8. CONFORMAL MAPPINGS
+shows that the only singularities sn(z) are poles. Functions of this type,
+called “elliptic functions,” are the subject of the next chapter.
+5 Exercises
+1. A holomorphic mapping f : U →V is a local bijection on U if for every z ∈U
+there exists an open disc D ⊂U centered at z, so that f : D →f(D) is a bijection.
+Prove that a holomorphic map f : U →V is a local bijection on U if and only
+if f ′(z)̸ = 0 for all z ∈U.
+[Hint: Use Rouch´e’s theorem as in the proof of Proposition 1.1.]
+2.
+Supppose F(z) is holomorphic near z = z0 and F(z0) = F ′(z0) = 0, while
+F ′′(z0)̸ = 0.
+Show that there are two curves Γ1 and Γ2 that pass through z0,
+are orthogonal at z0, and so that F restricted to Γ1 is real and has a minimum at
+z0, while F restricted to Γ2 is also real but has a maximum at z0.
+[Hint: Write F(z) = (g(z))2 for z near z0, and consider the mapping z →g(z) and
+its inverse.]
+3. Suppose U and V are conformally equivalent. Prove that if U is simply con-
+nected, then so is V . Note that this conclusion remains valid if we merely assume
+that there exists a continuous bijection between U and V .
+4. Does there exist a holomorphic surjection from the unit disc to C?
+[Hint: Move the upper half-plane “down” and then square it to get C.]
+5.
+Prove that f(z) = −1
+2(z + 1/z) is a conformal map from the half-disc
+{z = x + iy : |z| < 1, y > 0} to the upper half-plane.
+[Hint: The equation f(z) = w reduces to the quadratic equation z2 + 2wz + 1 = 0,
+which has two distinct roots in C whenever w̸ = ±1. This is certainly the case if
+w ∈H.]
+6. Give another proof of Lemma 1.3 by showing directly that the Laplacian of
+u ◦F is zero.
+[Hint: The real and imaginary parts of F satisfy the Cauchy-Riemann equations.]
+7. Provide all the details in the proof of the formula for the solution of the Dirichlet
+problem in a strip discussed in Section 1.3. Recall that it suﬃces to compute the
+solution at the points z = iy with 0 < y < 1.
+(a) Show that if reiθ = G(iy), then
+reiθ = i
+cos πy
+1 + sin πy .
+This leads to two separate cases: either 0 < y ≤1/2 and θ = π/2, or 1/2 ≤

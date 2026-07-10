@@ -1,0 +1,429 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.1 Zeros of the zeta function
+직전 소단원: 「6.4 Problems」
+[본문]
+7 The Zeta Function and Prime
+Number Theorem
+Bernhard Riemann, whose extraordinary intuitive pow-
+ers we have already mentioned, has especially reno-
+vated our knowledge of the distribution of prime num-
+bers, also one of the most mysterious questions in
+mathematics. He has taught us to deduce results in
+that line from considerations borrowed from the in-
+tegral calculus: more precisely, from the study of a
+certain quantity, a function of a variable s which may
+assume not only real, but also imaginary values. He
+proved some important properties of that function,
+but enunciated two or three as important ones with-
+out giving the proof. At the death of Riemann, a note
+was found among his papers, saying “These properties
+of ζ(s) (the function in question) are deduced from an
+expression of it which, however, I did not succeed in
+simplifying enough to publish it.”
+We still have not the slightest idea of what the
+expression could be. As to the properties he simply
+enunciated, some thirty years elapsed before I was able
+to prove all of them but one. The question concern-
+ing that last one remains unsolved as yet, though, by
+an immense labor pursued throughout this last half
+century, some highly interesting discoveries in that di-
+rection have been achieved. It seems more and more
+probable, but still not at all certain, that the “Rie-
+mann hypothesis” is true.
+J. Hadamard, 1945
+Euler found, through his product formula for the zeta function, a
+deep connection between analytical methods and arithmetic properties
+of numbers, in particular primes. An easy consequence of Euler’s for-
+mula is that the sum of the reciprocals of all primes, 
+p 1/p, diverges,
+a result that quantiﬁes the fact that there are inﬁnitely many prime
+numbers.
+The natural problem then becomes that of understanding
+how these primes are distributed. With this in mind, we consider the
+
+182
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+following function:
+π(x) = number of primes less than or equal to x.
+The erratic growth of the function π(x) gives little hope of ﬁnding a
+simple formula for it. Instead, one is led to study the asymptotic behavior
+of π(x) as x becomes large.
+About 60 years after Euler’s discovery,
+Legendre and Gauss observed after numerous calculations that it was
+likely that
+(1)
+π(x) ∼
+x
+log x
+as x →∞.
+(The
+asymptotic
+relation
+f(x) ∼g(x)
+as x →∞
+means that
+f(x)/g(x) →1 as x →∞.) Another 60 years later, shortly before Rie-
+mann’s work, Tchebychev proved by elementary methods (and in partic-
+ular, without the zeta function) the weaker result that
+(2)
+π(x) ≈
+x
+log x
+as x →∞.
+Here, by deﬁnition, the symbol ≈means that there are positive constants
+A < B such that
+A
+x
+log x ≤π(x) ≤B
+x
+log x
+for all suﬃciently large x.
+In 1896, about 40 years after Tchebychev’s result, Hadamard and de
+la Vall´ee Poussin gave a proof of the validity of the relation (1). Their
+result is known as the prime number theorem. The original proofs of
+this theorem, as well as the one we give below, use complex analysis.
+We should remark that since then other proofs have been found, some
+depending on complex analysis, and others more elementary in nature.
+At the heart of the proof of the prime number theorem that we give
+below lies the fact that ζ(s) does not vanish on the line Re(s) = 1. In
+fact, it can be shown that these two propositions are equivalent.
+1 Zeros of the zeta function
+We have seen in Theorem 1.10, Chapter 8 in Book I, Euler’s identity,
+which states that for Re(s) > 1 the zeta function can be expressed as an
+inﬁnite product
+ζ(s) =
+
+p
+1
+1 −p−s .
+
+1. Zeros of the zeta function
+183
+For the sake of completeness we provide a proof of the above identity.
+The key observation is that 1/(1 −p−s) can be written as a convergent
+(geometric) power series
+1 + 1
+ps + 1
+p2s + · · · +
+1
+pMs + · · · ,
+and taking formally the product of these series over all primes p, yields
+the desired result. A precise argument goes as follows.
+Suppose M and N are positive integers with M > N. Observe now
+that, by the fundamental theorem of arithmetic,1 any positive integer
+n ≤N can be written uniquely as a product of primes, and that each
+prime that occurs in the product must be less than or equal to N and
+repeated less than M times. Therefore
+N
+
+n=1
+1
+ns ≤
+
+p≤N
+
+1 + 1
+ps + 1
+p2s + · · · +
+1
+pMs
+
+≤
+
+p≤N
+
+1
+1 −p−s
+
+≤
+
+p
+
+1
+1 −p−s
+
+.
+Letting N tend to inﬁnity in the series now yields
+∞
+
+n=1
+1
+ns ≤
+
+p
+
+1
+1 −p−s
+
+.
+For the reverse inequality, we argue as follows. Again, by the fundamen-
+tal theorem of arithmetic, we ﬁnd that
+
+p≤N
+
+1 + 1
+ps + 1
+p2s + · · · +
+1
+pMs
+
+≤
+∞
+
+n=1
+1
+ns .
+Letting M tend to inﬁnity gives
+
+p≤N
+
+1
+1 −p−s
+
+≤
+∞
+
+n=1
+1
+ns .
+1A proof of this elementary (but essential) fact is given in the ﬁrst section of Chapter 8
+in Book I.
+
+184
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+Hence
+
+p
+
+1
+1 −p−s
+
+≤
+∞
+
+n=1
+1
+ns ,
+and the proof of the product formula for ζ is complete.
+From the product formula we see, by Proposition 3.1 in Chapter 5,
+that ζ(s) does not vanish when Re(s) > 1.
+To obtain further information about the location of the zeros of ζ, we
+use the functional equation that provided the analytic continuation of ζ.
+We may write the fundamental relation ξ(s) = ξ(1 −s) in the form
+π−s/2Γ(s/2)ζ(s) = π−(1−s)/2Γ((1 −s)/2)ζ(1 −s),
+and therefore
+ζ(s) = πs−1/2 Γ((1 −s)/2)
+Γ(s/2)
+ζ(1 −s).
+Now observe that for Re(s) < 0 the following are true:
+(i) ζ(1 −s) has no zeros because Re(1 −s) > 1.
+(ii) Γ((1 −s)/2) is zero free.
+(iii) 1/Γ(s/2) has zeros at s = −2, −4, −6, . . . .
+Therefore, the only zeros of ζ in Re(s) < 0 are located at the negative
+even integers −2, −4, −6, . . ..
+This proves the following theorem.
+Theorem 1.1 The only zeros of ζ outside the strip 0 ≤Re(s) ≤1 are
+at the negative even integers, −2, −4, −6, . . ..
+The region that remains to be studied is called the critical strip,
+0 ≤Re(s) ≤1. A key fact in the proof of the prime number theorem is
+that ζ has no zeros on the line Re(s) = 1. As a simple consequence of
+this fact and the functional equation, it follows that ζ has no zeros on
+the line Re(s) = 0.
+In the seminal paper where Riemann introduced the analytic contin-
+uation of the ζ function and proved its functional equation, he applied
+these insights to the theory of prime numbers, and wrote down “ex-
+plicit” formulas for determining the distribution of primes. While he did
+not succeed in fully proving and exploiting his assertions, he did initiate
+many important new ideas. His analysis led him to believe the truth of
+what has since been called the Riemann hypothesis:
+
+1. Zeros of the zeta function
+185
+The zeros of ζ(s) in the critical strip lie on the line
+Re(s) = 1/2.
+He said about this: “It would certainly be desirable to have a rigorous
+demonstration of this proposition; nevertheless I have for the moment
+set this aside, after several quick but unsuccessful attempts, because it
+seemed unneeded for the immediate goal of my study.” Although much
+of the theory and numerical results point to the validity of this hypothe-
+sis, a proof or a counter-example remains to be discovered. The Riemann
+hypothesis is today one of mathematics’ most famous unresolved prob-
+lems.
+In particular, it is for this reason that the zeros of ζ located outside the
+critical strip are sometimes called the trivial zeros of the zeta function.
+See also Exercise 5 for an argument proving that ζ has no zeros on the
+real segment, 0 ≤σ ≤1, where s = σ + it.
+In the rest of this section we shall restrict ourselves to proving the
+following theorem, together with related estimates on ζ, which we shall
+use in the proof of the prime number theorem.
+Theorem 1.2 The zeta function has no zeros on the line Re(s) = 1.
+Of course, since we know that ζ has a pole at s = 1, there are no zeros
+in a neighborhood of this point, but what we need is the deeper property
+that
+ζ(1 + it)̸ = 0
+for all t ∈R.
+The next sequence of lemmas gathers the necessary ingredients for the
+proof of Theorem 1.2.
+Lemma 1.3 If Re(s) > 1, then
+log ζ(s) =
+
+p,m
+p−ms
+m
+=
+∞
+
+n=1
+cnn−s
+for some cn ≥0.
+Proof.
+Suppose ﬁrst that s > 1. Taking the logarithm of the Euler
+product formula, and using the power series expansion for the logarithm
+log
+
+1
+1 −x
+
+=
+∞
+
+m=1
+xm
+m ,
+
+186
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+which holds for 0 ≤x < 1, we ﬁnd that
+log ζ(s) = log
+
+p
+1
+1 −p−s =
+
+p
+log
+
+1
+1 −p−s
+
+=
+
+p,m
+p−ms
+m
+.
+Since the double sum converges absolutely, we need not specify the order
+of summation. See the Note at the end of this chapter. The formula
+then holds for all Re(s) > 1 by analytic continuation.
+Note that, by
+Theorem 6.2 in Chapter 3, log ζ(s) is well deﬁned in the simply connected
+half-plane Re(s) > 1, since ζ has no zeros there. Finally, it is clear that
+we have
+
+p,m
+p−ms
+m
+=
+∞
+
+n=1
+cnn−s ,
+where cn = 1/m if n = pm and cn = 0 otherwise.
+The proof of the theorem we shall give depends on a simple trick that
+is based on the following inequality.
+Lemma 1.4 If θ ∈R, then 3 + 4 cosθ + cos 2θ ≥0.
+This follows at once from the simple observation
+3 + 4 cosθ + cos 2θ = 2(1 + cos θ)2.
+Corollary 1.5 If σ > 1 and t is real, then
+log |ζ3(σ)ζ4(σ + it)ζ(σ + 2it)| ≥0.
+Proof.
+Let s = σ + it and note that
+Re(n−s) = Re(e−(σ+it) log n) = e−σ log n cos(t log n) = n−σ cos(t log n).
+Therefore,
+log |ζ3(σ)ζ4(σ + it)ζ(σ + 2it)|
+= 3 log |ζ(σ)| + 4 log |ζ(σ + it)| + log |ζ(σ + 2it)|
+= 3Re[log ζ(σ)] + 4Re[log ζ(σ + it)] + Re[log ζ(σ + 2it)]
+=
+
+cnn−σ(3 + 4 cosθn + cos 2θn) ,
+where θn = t log n. The positivity now follows from Lemma 1.4, and the
+fact that cn ≥0.
+
+1. Zeros of the zeta function
+187
+We can now ﬁnish the proof of our theorem.
+Proof of Theorem 1.2. Suppose on the contrary that ζ(1 + it0) = 0 for
+some t0̸ = 0. Since ζ is holomorphic at 1 + it0, it must vanish at least to
+order 1 at this point, hence
+|ζ(σ + it0)|4 ≤C(σ −1)4
+as σ →1,
+for some constant C > 0. Also, we know that s = 1 is a simple pole for
+ζ(s), so that
+|ζ(σ)|3 ≤C′(σ −1)−3
+as σ →1,
+for some constant C′ > 0. Finally, since ζ is holomorphic at the points
+σ + 2it0, the quantity |ζ(σ + 2it0)| remains bounded as σ →1. Putting
+these facts together yields
+|ζ3(σ)ζ4(σ + it)ζ(σ + 2it)| →0
+as σ →1 ,
+which contradicts Corollary 1.5, since the logarithm of real numbers be-
+tween 0 and 1 is negative. This concludes the proof that ζ is zero free
+on the real line Re(s) = 1.
+1.1 Estimates for 1/ζ(s)
+The proof of the prime number theorem relies on detailed manipulations
+of the zeta function near the line Re(s) = 1; the basic object involved is
+the logarithmic derivative ζ′(s)/ζ(s). For this reason, besides the non-
+vanishing of ζ on the line, we need to know about the growth of ζ′
+and 1/ζ. The former was dealt with in Proposition 2.7 of Chapter 6; we
+now treat the latter.
+The proposition that follows is actually a quantitative version of The-
+orem 1.2.
+Proposition 1.6 For every ϵ > 0, we have 1/|ζ(s)| ≤cϵ|t|ϵ when s =
+σ + it, σ ≥1, and |t| ≥1.
+Proof.
+From our previous observations, we clearly have that
+|ζ3(σ)ζ4(σ + it)ζ(σ + 2it)| ≥1,
+whenever σ ≥1.
+Using the estimate for ζ in Proposition 2.7 of Chapter 6, we ﬁnd that
+|ζ4(σ + it)| ≥c|ζ−3(σ)| |t|−ϵ ≥c′(σ −1)3|t|−ϵ,
+
+188
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+for all σ ≥1 and |t| ≥1. Thus
+(3)
+|ζ(σ + it)| ≥c′(σ −1)3/4|t|−ϵ/4,
+whenever σ ≥1 and |t| ≥1.
+We now consider two separate cases, depending on whether the in-
+equality σ −1 ≥A|t|−5ϵ holds, for some appropriate constant A (whose
+value we choose later).
+If this inequality does hold, then (3) immediately provides
+|ζ(σ + it)| ≥A′|t|−4ϵ,
+and it suﬃces to replace 4ϵ by ϵ to conclude the proof of the desired
+estimate, in this case.
+If, however, σ −1 < A|t|−5ϵ, then we ﬁrst select σ′ > σ with σ′ −1 =
+A|t|−5ϵ. The triangle inequality then implies
+|ζ(σ + it)| ≥|ζ(σ′ + it)| −|ζ(σ′ + it) −ζ(σ + it)|,
+and an application of the mean value theorem, together with the esti-
+mates for the derivative of ζ obtained in the previous chapter, give
+|ζ(σ′ + it) −ζ(σ + it)| ≤c′′|σ′ −σ| |t|ϵ ≤c′′|σ′ −1| |t|ϵ.
+These observations, together with an application of (3) where we set
+σ = σ′, show that
+|ζ(σ + it)| ≥c′(σ′ −1)3/4|t|−ϵ/4 −c′′(σ′ −1)|t|ϵ.
+Now choose A = (c′/(2c′′))4, and recall that σ′ −1 = A|t|−5ϵ. This gives
+precisely
+c′(σ′ −1)3/4|t|−ϵ/4 = 2c′′(σ′ −1)|t|ϵ,
+and therefore
+|ζ(σ + it)| ≥A′′|t|−4ϵ.
+On replacing 4ϵ by ϵ, the desired inequality is established, and the proof
+of the proposition is complete.
+2 Reduction to the functions ψ and ψ1
+In his study of primes, Tchebychev introduced an auxiliary function
+whose behavior is to a large extent equivalent to the asymptotic distri-
+bution of primes, but which is easier to manipulate than π(x). Tcheby-
+chev’s ψ-function is deﬁned by
+ψ(x) =
+
+pm≤x
+log p.
