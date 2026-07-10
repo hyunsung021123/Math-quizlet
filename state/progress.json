@@ -13,16 +13,17 @@
       "section:0": true,
       "section:1": true,
       "section:2": true,
-      "section:3": true
+      "section:3": true,
+      "section:4": true
     }
   },
   "lastPos": {
     "topicId": "chapter_0_some_underlying_geometric_noti",
     "view": {
       "type": "section",
-      "index": 3
+      "index": 4
     },
-    "cardIndex": 0
+    "cardIndex": 9
   },
-  "updatedAt": "2026-07-10T08:24:11.078Z"
+  "updatedAt": "2026-07-10T08:58:19.902Z"
 }
