@@ -32,8 +32,10 @@
    - "Exercises"/"Problems"류는 이름이 뭐든(Problems, Exercises, Problems and Exercises, Exercises for Chapter 3 …) 항상 `role: "exercises"`로 분류한다.
 6. 목차에 인쇄된 페이지 번호를 `printed_page`에 정수로 적는다.
 7. **챕터(대단원) 자체의 시작 쪽번호도 따로 뽑는다.** 목차에는 보통 "Chapter 7 ... 195" 처럼 챕터 제목이 첫 소단원(7.1)과는 별도 줄, 별도 페이지 번호로 적혀 있다. 이걸 최상위 `chapters` 배열에 담는다. 챕터 제목 줄과 첫 소단원 줄의 페이지 번호가 다르면(=챕터 도입부가 존재하면) 반드시 챕터의 번호를 별도로 기록해야 한다. 목차에 챕터 자체의 페이지가 안 보이면(소단원과 한 줄로 합쳐져 있으면) 생략해도 된다.
+7-1. **(대단원 > 소단원 > 세부단원) 처럼 3중 이상 구조에서, 생성 단위를 가장 안쪽(세부단원) 수준으로 잡을 때는 그 사이의 모든 중간 표제도 `groups` 배열에 담는다.** 예를 들어 "1.1 Complex numbers and the complex plane"(소단원) 밑에 "1.1.1 Basic properties", "1.1.2 Convergence" 같은 세부단원이 있고 세부단원 단위로 쪼갠다면, "1.1" 자신도 규칙 7의 챕터와 똑같은 이유로 자기 시작 쪽번호를 따로 기록해야 한다 — 그래야 "1.1 시작 ~ 1.1.1 시작" 사이에 도입부 문단이 있어도(소단원 제목 바로 다음에 몇 줄 설명하고서야 첫 세부단원이 시작하는 경우) 그걸 놓치지 않는다. `groups` 항목의 형식은 `{"number": "1.1", "title": "...", "chapter_no": "1", "chapter_title": "...", "printed_page": N}` — `chapters`와 마찬가지로, 표제 줄과 그 첫 세부단원 줄의 페이지가 같으면(도입부가 없으면) 생략해도 된다. 중간 단계가 여러 층이면(예: 대단원 > 절 > 항 > 세부항) `groups`에 그 층들을 전부, 각자 자기 시작 쪽과 함께 담으면 된다 — 층 수에 제한은 없다. 평범한 2중 구조 책(챕터 바로 밑이 곧 생성 단위)에서는 `groups`가 필요 없으니 아예 비워 두거나 필드 자체를 생략한다.
+7-2. **책이 절 번호를 챕터(또는 소단원)마다 "1, 2, 3…"으로 새로 리셋해서 매겨도(예: 2장의 첫 절도 "1", 3장의 첫 절도 "1"), `number`에는 항상 그 조상 단원들의 번호를 전부 이어붙인 전역 고유 번호를 써라** — 인쇄된 대로 "1"이 아니라 "2.1", "3.1" 식으로(세부단원이면 "2.1.1"처럼 한 단계 더 이어붙인다). 규칙 1의 "인쇄된 숫자를 그대로 옮긴다"는 각 층의 숫자 자체(원문 그대로)에 대한 지시이지, 챕터 접두어를 빼도 된다는 뜻이 아니다 — 접두어 없이 그대로 베끼면 서로 다른 챕터의 항목 번호가 겹쳐서(둘 다 "1.1") `sections`/`groups`가 뒤섞인다. 이 규칙은 항상 지킨다(다른 규칙과 충돌하지 않으므로 요구사항 블록의 유무와 무관).
 8. 목차에 없는 내용은 지어내지 마라.
-9. **입력에 「요구사항」 블록이 있으면, 위 규칙 1~8보다 그 지시를 우선한다** — 단 출력은 여전히 아래 「출력 형식」의 JSON 스키마(키 이름·구조)를 반드시 지켜야 한다. 세분화 단위를 늘리거나(예: 소단원보다 더 잘게), 특정 항목의 처리 방식을 바꾸는 지시라도, 그 결과는 `sections`/`chapters` 배열 안의 표준 필드(`number`, `title`, `chapter_no`, `chapter_title`, `printed_page`, `role`)로 표현한다.
+9. **입력에 「요구사항」 블록이 있으면, 위 규칙 1~8(과 7-1·7-2)보다 그 지시를 우선한다** — 단 출력은 여전히 아래 「출력 형식」의 JSON 스키마(키 이름·구조)를 반드시 지켜야 한다. 세분화 단위를 늘리거나(예: 소단원보다 더 잘게), 특정 항목의 처리 방식을 바꾸는 지시라도, 그 결과는 `sections`/`chapters`/`groups` 배열 안의 표준 필드(`number`, `title`, `chapter_no`, `chapter_title`, `printed_page`, `role`)로 표현한다.
 
 ## 출력 형식
 ```json
@@ -44,6 +46,7 @@
     {"chapter_no": "0", "chapter_title": "Introduction and Examples", "printed_page": 1},
     {"chapter_no": "1", "chapter_title": "Polytopes, Polyhedra, and Cones", "printed_page": 27}
   ],
+  "groups": [],
   "sections": [
     {"number": "0.notes", "title": "Notes", "chapter_no": "0", "chapter_title": "Introduction and Examples", "printed_page": 22, "role": "drop"},
     {"number": "0.ex", "title": "Problems and Exercises", "chapter_no": "0", "chapter_title": "Introduction and Examples", "printed_page": 23, "role": "exercises"},
@@ -55,7 +58,7 @@
   ]
 }
 ```
-(위 예시에는 "Preface" 계열이 아예 등장하지 않는다 — 규칙 4에 따라 통째로 뺐다. `0.notes`·`1.remarks`는 역사적 논평 성격이라 `role: "drop"`이지만, `1.prelim`("Preliminaries")은 실제 수학 배경지식을 담고 있을 가능성이 커서 `role: "section"`으로 남겼다 — **이름이 아니라 내용의 성격으로 판단한 것이다.** 이 책이 "Notes"라는 이름을 쓴다고 다른 책도 "Notes"를 쓴다고 가정하지 마라 — 그 책의 목차에 실제로 적힌 이름을 그대로 쓰고, 위 기준으로 role만 판단하면 된다.)
+(위 예시에는 "Preface" 계열이 아예 등장하지 않는다 — 규칙 4에 따라 통째로 뺐다. `0.notes`·`1.remarks`는 역사적 논평 성격이라 `role: "drop"`이지만, `1.prelim`("Preliminaries")은 실제 수학 배경지식을 담고 있을 가능성이 커서 `role: "section"`으로 남겼다 — **이름이 아니라 내용의 성격으로 판단한 것이다.** 이 책이 "Notes"라는 이름을 쓴다고 다른 책도 "Notes"를 쓴다고 가정하지 마라 — 그 책의 목차에 실제로 적힌 이름을 그대로 쓰고, 위 기준으로 role만 판단하면 된다. 이 예시는 2중 구조(챕터 바로 밑이 생성 단위)라 `groups`가 비어 있다 — 3중 이상 구조에서 `groups`를 어떻게 채우는지는 아래 두 번째 「요구사항」 예시를 봐라.)
 
 ## 요구사항 (선택) — 그 책만의 특이한 목차 구조 설명하기
 「수동 지정」이 "번호 없는 특정 항목 하나의 역할"만 지정하는 좁은 도구라면, 이건 **그 책 목차 전체의 구조적 특징이나 분류 방식 자체**를 자유 문장으로 설명하는 창구다. 목차 형식은 책마다 천차만별이라, 미리 정해둔 규칙(1~8)이 못 잡는 패턴을 만나면 여기에 적으면 된다. 프롬프트 끝에 아래처럼 붙인다:
@@ -68,6 +71,55 @@
 - 이 블록의 지시는 규칙 1~8보다 우선한다(규칙 9 참고). 다만 **출력은 여전히 정해진 JSON 스키마를 따라야 한다** — 세분화 단위를 얼마나 잘게 잡든, 결과는 항상 `sections` 배열 안의 `number`/`title`/`chapter_no`/`chapter_title`/`printed_page`/`role` 필드로 표현한다.
 - 이 블록이 없으면(대부분의 경우) 규칙 1~8만으로 처리한다 — 예외 대비용 옵션이다.
 - 「요구사항」과 「수동 지정」을 동시에 써도 된다. 순서 상관없이 둘 다 프롬프트 끝에 붙이면 된다.
+
+### 예시: 3중 구조 + 챕터마다 절 번호가 리셋되는 책 (규칙 7-1·7-2)
+
+어떤 책은 목차가 (챕터 > 절 > 항) 3층이고, 절 번호가 챕터마다 "1, 2, 3…"으로 새로 시작한다 — 예:
+```
+Chapter 1. Preliminaries to Complex Analysis .......... 1
+  1  Complex numbers and the complex plane ............. 1
+     1.1  Basic properties ............................ 1
+     1.2  Convergence .................................. 5
+  2  Functions on the complex plane ...................... 8
+     2.1  Continuous functions ......................... 8
+     2.2  Holomorphic functions ........................ 8
+  4  Exercises ........................................... 24
+Chapter 2. Cauchy's Theorem and Its Applications ....... 32
+  1  Goursat's theorem ................................. 34
+  5  Further applications ................................ 53
+     5.1  Morera's theorem ............................. 53
+  6  Exercises ........................................... 64
+```
+항(1.1, 5.1 등) 단위로 쪼개 달라는 「요구사항」이 있으면 이렇게 낸다(오프셋 적용 전 인쇄 쪽번호 기준):
+```json
+{
+  "chapters": [
+    {"chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 1},
+    {"chapter_no": "2", "chapter_title": "Cauchy's Theorem and Its Applications", "printed_page": 32}
+  ],
+  "groups": [
+    {"number": "1.1", "title": "Complex numbers and the complex plane", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 1},
+    {"number": "1.2", "title": "Functions on the complex plane", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 8},
+    {"number": "2.5", "title": "Further applications", "chapter_no": "2", "chapter_title": "Cauchy's Theorem and Its Applications", "printed_page": 53}
+  ],
+  "sections": [
+    {"number": "1.1.1", "title": "Basic properties", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 1, "role": "section"},
+    {"number": "1.1.2", "title": "Convergence", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 5, "role": "section"},
+    {"number": "1.2.1", "title": "Continuous functions", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 8, "role": "section"},
+    {"number": "1.2.2", "title": "Holomorphic functions", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 8, "role": "section"},
+    {"number": "1.4", "title": "Exercises", "chapter_no": "1", "chapter_title": "Preliminaries to Complex Analysis", "printed_page": 24, "role": "exercises"},
+    {"number": "2.1", "title": "Goursat's theorem", "chapter_no": "2", "chapter_title": "Cauchy's Theorem and Its Applications", "printed_page": 34, "role": "section"},
+    {"number": "2.5.1", "title": "Morera's theorem", "chapter_no": "2", "chapter_title": "Cauchy's Theorem and Its Applications", "printed_page": 53, "role": "section"},
+    {"number": "2.6", "title": "Exercises", "chapter_no": "2", "chapter_title": "Cauchy's Theorem and Its Applications", "printed_page": 64, "role": "exercises"}
+  ]
+}
+```
+짚어볼 점:
+- 절 "1"(챕터 1)과 절 "1"(챕터 2, 여기선 "Goursat's theorem")은 인쇄된 숫자가 똑같이 "1"이지만, `number`에는 챕터 접두어를 붙여 각각 `1.1`, `2.1`로 — 규칙 7-2대로 전역에서 겹치지 않게 한다. 항도 마찬가지로 조상 번호를 다 이어붙인다(`1.1.1`, `2.5.1`).
+- "2 Functions on the complex plane"은 그 자체가 절이자 "2.1"·"2.2" 두 항의 부모이므로 `groups`에 `1.2`로 들어간다(챕터 접두 포함). "1 Complex numbers…"도 마찬가지로 `1.1`.
+- "2.5 Further applications"는 챕터 2 안의 절이라 `groups`에서도 챕터 접두를 붙여 `"2.5"`로 적는다 — 책에 인쇄된 "5"만 쓰면 안 된다.
+- 절 "3 Integration along curves"처럼 그 밑에 항이 없는 절(위 목차 조각엔 안 보이지만 실제 책엔 있다)은 항 단위로 더 쪼갤 게 없으므로 그 자체가 그대로 `sections`의 leaf가 된다(`groups`에는 안 들어감) — `groups`는 오직 "자기 밑에 항이 있는" 절에만 만든다.
+- "1 Complex numbers…"(페이지 1)와 그 첫 항 "1.1 Basic properties"(페이지 1)는 페이지가 같아 도입부가 없으므로 `groups`에서 굳이 안 적어도 되지만(적어도 무방), 예시에서는 일관성을 위해 적었다.
 
 ## 수동 지정 (선택)
 자동 판단(규칙 5)을 못 믿겠거나, 그 책의 특수한 사정을 이미 알고 있으면(예: "이 책의 Remarks에는 실제로 못 보던 정리가 하나 들어있다") 프롬프트 끝에 아래 블록을 붙여서 직접 지정할 수 있다. 이 블록이 있으면 **규칙 5의 자동 판단보다 항상 우선한다.**

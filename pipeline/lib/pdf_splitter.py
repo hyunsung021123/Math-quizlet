@@ -91,39 +91,72 @@ def load_plan(toc_path):
     for c in chapters:
         c["start"] = _apply_offset(f"ch:{c.get('chapter_no','')}", c["printed_page"])
 
-    entries = apply_chapter_intros(entries, chapters)
+    # groups: 대단원(chapters)과 최종 생성 단위(sections) 사이에 낀 임의 깊이의 중간 단원
+    # (예: 소단원 밑에 세부단원까지 쪼갤 때, 그 소단원 자신의 시작 쪽) — 3중 이상 구조에서만 쓰인다.
+    groups = data.get("groups", [])
+    for g in groups:
+        g["start"] = _apply_offset(f"grp:{g.get('number','')}", g["printed_page"])
+        g.setdefault("chapter_no", "")
+        g.setdefault("chapter_title", "")
+        g.setdefault("title", "")
+
+    entries = apply_group_intros(entries, chapters, groups)
     entries.sort(key=lambda x: x["start"])
     return data.get("book", ""), data.get("author", ""), entries
 
 
-def apply_chapter_intros(entries, chapters):
-    """챕터 시작 ~ 첫 소단원 시작 사이 '도입부'를 처리한다.
-    - 간격이 짧으면(INTRO_MERGE_THRESHOLD_PAGES 이하) 첫 소단원의 시작을 챕터 시작까지 당겨서 자동 편입.
-    - 간격이 길면 별도의 role="intro" 조각을 만들어 끼워 넣는다."""
-    by_chapter = {}
-    for e in entries:
-        if e["chapter_no"] and e["role"] in ("section", "exercises", "appendix"):
-            by_chapter.setdefault(e["chapter_no"], []).append(e)
+def apply_group_intros(entries, chapters, groups):
+    """'상위 단원 시작 ~ 그 안의 가장 이른 생성 단위 시작' 사이의 '도입부'를 처리한다.
+    - 간격이 짧으면(INTRO_MERGE_THRESHOLD_PAGES 이하) 그 생성 단위의 시작을 상위 단원 시작까지
+      당겨서 자동 편입.
+    - 간격이 길면 별도의 role="intro" 조각을 만들어 끼워 넣는다.
 
-    extra = []
+    chapters(대단원)뿐 아니라 groups(그 사이 임의 깊이의 중간 단원)까지 같은 로직으로 처리해,
+    (대단원 > 소단원 > 세부단원) 같은 3중 이상 구조에서도 각 층의 도입부를 전부 잡아낸다.
+    번호에 점이 많을수록(더 깊을수록) 먼저 처리한다 — 그래야 세부단원 하나가 먼저 자기 소단원
+    시작까지 당겨진 뒤, 그 소단원이 다시 챕터 시작까지 당겨지는 식으로 안쪽→바깥쪽 순서로
+    누적 병합된다(반대 순서면 바깥쪽에서 이미 당겨진 시작점을 안쪽이 다시 잘못 계산하게 된다)."""
+    GENERATION_ROLES = ("section", "exercises", "appendix")
+
+    containers = []
     for c in chapters:
         no = c.get("chapter_no", "")
-        members = by_chapter.get(no)
+        if not no:
+            continue
+        containers.append({
+            "label": no, "depth": 0, "start": c["start"], "printed_page": c["printed_page"],
+            "chapter_no": no, "chapter_title": c.get("chapter_title", ""),
+            "match": (lambda e, no=no: e["chapter_no"] == no),
+        })
+    for g in groups:
+        num = g.get("number", "")
+        if not num:
+            continue
+        containers.append({
+            "label": num, "depth": num.count("."), "start": g["start"], "printed_page": g["printed_page"],
+            "chapter_no": g.get("chapter_no", ""), "chapter_title": g.get("chapter_title", ""),
+            "match": (lambda e, num=num: e["number"].startswith(num + ".")),
+        })
+    containers.sort(key=lambda x: -x["depth"])  # 가장 깊은 단원부터
+
+    extra = []
+    for cont in containers:
+        members = [e for e in entries if e["role"] in GENERATION_ROLES and cont["match"](e)]
         if not members:
             continue
         first = min(members, key=lambda x: x["start"])
-        gap_pages = first["start"] - c["start"]
+        gap_pages = first["start"] - cont["start"]
         if gap_pages <= 0:
-            continue  # 챕터 시작이 첫 소단원과 같거나 늦음 → 도입부 없음
+            continue  # 상위 단원 시작이 첫 생성 단위와 같거나 늦음 → 도입부 없음
         if gap_pages <= INTRO_MERGE_THRESHOLD_PAGES:
-            print(f"  · 챕터 {no} 도입부 {gap_pages}쪽 → 첫 소단원({first['number']})에 자동 편입")
-            first["start"] = c["start"]
+            print(f"  · {cont['label']} 도입부 {gap_pages}쪽 → 첫 하위 단위({first['number']})에 자동 편입")
+            first["start"] = cont["start"]
         else:
-            print(f"  · 챕터 {no} 도입부 {gap_pages}쪽 → 별도 '개관' 조각으로 분리")
+            print(f"  · {cont['label']} 도입부 {gap_pages}쪽 → 별도 '개관' 조각으로 분리")
             extra.append({
-                "number": f"{no}.intro", "title": "개관 (챕터 도입부)",
-                "chapter_no": no, "chapter_title": c.get("chapter_title", ""),
-                "printed_page": c["printed_page"], "start": c["start"], "role": "intro",
+                "number": f"{cont['label']}.intro", "title": "개관 (도입부)",
+                "chapter_no": cont["chapter_no"], "chapter_title": cont["chapter_title"],
+                "printed_page": cont["printed_page"], "start": cont["start"], "role": "intro",
             })
     return entries + extra
 
