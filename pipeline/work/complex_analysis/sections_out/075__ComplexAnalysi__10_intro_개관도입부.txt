@@ -1,0 +1,88 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.intro 개관 (도입부)
+직전 소단원: 「9.4 Problems」
+[본문]
+10 Applications of Theta
+Functions
+The problem of the representation of an integer n as
+the sum of a given number k of integral squares is one
+of the most celebrated in the theory of numbers. Its
+history may be traced back to Diophantus, but begins
+eﬀectively with Girard’s (or Fermat’s) theorem that a
+prime 4m + 1 is the sum of two squares. Almost every
+arithmetician of note since Fermat has contributed to
+the solution of the problem, and it has its puzzles for
+us still.
+G. H. Hardy, 1940
+This chapter is devoted to a closer look at the theory of theta functions
+and some of its applications to combinatorics and number theory.
+The theta function is given by the series
+Θ(z|τ) =
+∞
+
+n=−∞
+eπin2τe2πinz,
+which converges for all z ∈C, and τ in the upper half-plane.
+A remarkable feature of the theta function is its dual nature. When
+viewed as a function of z, we see it in the arena of elliptic functions, since
+Θ is periodic with period 1 and “quasi-period” τ. When considered as
+a function of τ, Θ reveals its modular nature and close connection with
+the partition function and the problem of representation of integers as
+sums of squares.
+The two main tools allowing us to exploit these links are the triple-
+product for Θ and its transformation law. Once we have proved these
+theorems, we give a brief introduction to the connection with partitions,
+and then pass to proofs of the celebrated theorems about representation
+of integers as sums of two or four squares.
+
+284
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+1 Product formula for the Jacobi theta function
+In its most elaborate form, Jacobi’s theta function is deﬁned for z ∈C
+and τ ∈H by
+(1)
+Θ(z|τ) =
+∞
+
+n=−∞
+eπin2τe2πinz.
+Two signiﬁcant special cases (or variants) are θ(τ) and ϑ(t), which are
+deﬁned by
+θ(τ) =
+∞
+
+n=−∞
+eπin2τ,
+τ ∈H,
+ϑ(t) =
+∞
+
+n=−∞
+e−πn2t,
+t > 0.
+In fact, the relation between these various functions is given by
+θ(τ) = Θ(0|τ) and ϑ(t) = θ(it), with of course, t > 0.
+We have already encountered these functions several times. For exam-
+ple, in the study of the heat diﬀusion equation for the circle, in Chapter 4
+of Book I, we found that the heat kernel was given by
+Ht(x) =
+∞
+
+n=−∞
+e−4π2n2te2πinx,
+and therefore Ht(x) = Θ(x|4πit).
+Another instance was the occurence of ϑ in the study of the zeta func-
+tion. In fact, we proved in Chapter 6 that the functional equation of ϑ
+implied that of ζ, which then led to the analytic continuation of the zeta
+function.
+We begin our closer look at Θ as a function of z, with τ ﬁxed, by
+recording its basic structural properties, which to a large extent charac-
+terize it.
+Proposition 1.1 The function Θ satisﬁes the following properties:
+(i) Θ is entire in z ∈C and holomorphic in τ ∈H.
+(ii) Θ(z + 1|τ) = Θ(z|τ).
+(iii) Θ(z + τ|τ) = Θ(z|τ)e−πiτe−2πiz.
+(iv)
+Θ(z|τ) = 0 whenever z = 1/2 + τ/2 + n + mτ and n, m ∈Z.

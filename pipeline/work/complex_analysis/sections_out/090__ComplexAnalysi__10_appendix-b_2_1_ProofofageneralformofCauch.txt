@@ -1,0 +1,182 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.appendix-b.2.1 Proof of a general form of Cauchy’s theorem
+직전 소단원: 「10.appendix-b.2.intro 개관 (도입부)」
+[본문]
+2. The Jordan curve theorem
+361
+We conclude that △= 1, and hence Γc has precisely two components.
+Finally, only one of these components can be unbounded, namely U, and
+the winding number of Γ in this component must therefore be zero. By
+our last result, we see that, after possibly reversing the orientation of the
+curve, the winding number of any point in the bounded component Ωis
+constant and equal to 1. Also, it is clear from what has been said that
+any smooth point on Γ can be approached by points in either component,
+and hence Γ is the boundary of both Ωand U.
+The ﬁnal step in the proof is to show that the interior of the curve,
+that is, the bounded component Ω, is simply connected. By Theorem 1.2
+it suﬃces to show that Ωc is connected. If not, then
+Ωc = F1 ∪F2,
+where F1 and F2 are closed, disjoint, and non-empty. Let
+O1 = U ∩F1
+and
+O2 = U ∩F2.
+Clearly, O1 and O2 are disjoint. If z ∈O1, then z ∈U, and every small
+ball centered at z is contained in U. If every such ball intersects F2,
+then z ∈F2 since F2 is closed. However, F1 and F2 are disjoint, so this
+cannot happen. Consequently, O1 is open, and by the same argument, so
+is O2. Finally, we claim that O1 is non-empty. If not, then F1 is entirely
+contained in Γ and U is contained in F2. Pick any point z ∈F1, which
+we know belongs to Γ. Now every ball centered at z intersects U, hence
+F2. But F2 is closed and disjoint from F1, so we get a contradiction. A
+similar argument for O1 proves that
+U = O1 ∪O2,
+where O1, O2 are disjoint, open, and non-empty. This contradicts the
+fact that U is connected, and concludes the proof of the Jordan curve
+theorem for piecewise-smooth curves.
+2.1 Proof of a general form of Cauchy’s theorem
+Theorem 2.9 If a function f is holomorphic in an open set that con-
+tains a simple closed piecewise-smooth curve Γ and its interior, then
+
+Γ
+f = 0.
+Let O denote an open set on which f is holomorphic, and which con-
+tains Γ and its interior Ω. The idea is to construct a closed curve Λ
+
+362 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+in Ωthat is so close to Γ that 
+Γ f = 
+Λ f. Then, the integral on the
+right-hand side is 0, since f is holomorphic in the simply connected open
+set Ω. We build Λ as follows. Near the smooth parts of Γ, the curve Λ
+is essentially a curve like Γϵ in Lemma 2.4. Near points where smooth
+parts of Γ join, we shall use for Λ an arc of a circle. This is illustrated
+in Figure 5.
+Ω
+Γ
+Λ
+Figure 5. The curve Λ
+To ﬁnd the appropriate connecting arcs, we need the following prelim-
+inary result.
+Lemma 2.10 Let γ : [0, 1] →C be a simple smooth curve. Then, for all
+suﬃciently small δ > 0 the circle Cδ centered at γ(0) and of radius δ
+intersects γ in precisely one point.
+Proof.
+We may assume that γ(0) = 0. Since γ(0)̸ = γ(1) it is clear
+that for each small δ > 0, the circle Cδ intersects γ in at least one point.
+If the conclusion in the lemma is false, we can ﬁnd a sequence of positive
+δj going to 0, and so that the equation |γ(t)| = δj has at least two distinct
+solutions. The mean value theorem applied to h(t) = |γ(t)|2 provides a
+sequence of positive numbers tj so that tj →0 and h′(tj) = 0. Thus
+γ′(tj) · γ(tj) = 0
+for all j.
+However, the curve is smooth, so
+γ(t) = γ(0) + γ′(0)t + tϕ(t)
+and
+γ′(t) = γ′(0) + ψ(t),
+
+2. The Jordan curve theorem
+363
+where |ϕ(t)| →0 and |ψ(t)| →0 as t goes to 0. Then recalling that γ(0) =
+0, we ﬁnd γ′(t) · γ(t) = |γ′(0)|2t + o(|t|). The deﬁnition of a smooth curve
+also requires that γ′(0)̸ = 0, so the above gives
+γ′(t) · γ(t)̸ = 0
+for all small t.
+This is the desired contradiction.
+Returning to the proof of Cauchy’s theorem, choose ϵ so small that
+the open set U of all points at a distance < ϵ of Γ is contained in O.
+Next, if P1, . . . , Pn denote the consecutive points where smooth parts
+of Γ join, we may pick δ < ϵ/10 so small that each circle Cj centered at a
+point Pj and of radius δ intersects Γ in precisely two distinct points (this
+is possible by the previous lemma). These two points on Cj determine
+two arcs of circles, only one of which (denoted by Cj) has an interior
+entirely contained in Ω. To see this, it suﬃces to recall that if γ is a
+parametrization of a smooth part of Γ with end-point Pj, then for all
+small ϵ′ the curves parametrized by γϵ′ and γ−ϵ′ of Lemma 2.4 lie on
+opposite sides of Γ and must intersect the circle Cj. By construction the
+disc D∗
+j centered at Pj and of radius 2δ is also contained in U, hence
+in O.
+Bj
+Aj
+Pj+1
+Ω
+Λj
+Pj
+Γj
+Bj+1
+Aj+1
+Figure 6. Construction of the curve Λ
+We wish to construct Λ so that we may argue as in the proof of The-
+orem 5.1, Chapter 3 and establish
+
+Γ f =
+
+Λ f. To do so, we consider a
+chain of discs D = {D0, . . . , DK} contained in U, and so that Γ is con-
+tained in their union, with Dk ∩Dk+1̸ = ∅, D0 = DK, and with the discs
+
+364 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+D∗
+j part of the chain D. Suppose Γj is the smooth part of Γ that joins Pj
+to Pj+1. By Lemma 2.4 it is possible to construct a continuous curve Λj
+that is contained in Ωand in the union of the discs, and which connects
+a point on Bj on Cj to a point on Aj+1 on Cj+1 (see Figure 6). Since
+we only assumed that Γ has one continuous derivative, Λj need not be
+smooth, but by approximating this continuous curve by polygonal lines
+if necessary, we may actually assume that Λj is also smooth. Then, Aj+1
+is joined to Bj+1 by a piece of Cj+1, and so on. This procedure provides
+a piecewise-smooth curve Λ that is closed and contained in Ω.
+Since f has a primitive on each disc of the family D, we may argue as
+in the proof of Theorem 5.1, Chapter 3 to ﬁnd that
+
+Γ f =
+
+Λ f. Since
+Ωis simply connected, we have
+
+Λ f = 0, and as a result
+
+Γ
+f = 0.
+
+Notes and References
+Useful references for many of the subjects treated here are Saks and Zygmund [34],
+Ahlfors [2], and Lang [23].
+Introduction
+The citation is from Riemann’s dissertation [32].
+Chapter 1
+The citation is a free translation of a passage in Borel’s book [6].
+Chapter 2
+The citation is a translation of an excerpt from Cauchy’s memoir [7].
+Results related to the natural boundaries of holomorphic functions in the unit
+disc can be found in Titchmarsh [36].
+The construction of the universal functions in Problem 5 are due to G. D. Birkhoﬀ
+and G.R. MacLane.
+Chapter 3
+The citation is a translation of a passage in Cauchy’s memoir [8].
+Problem 1 and other results related to injective holomorphic mappings (uni-
+valent functions) can be found in Duren [11].
+Also, see Muskhelishvili [25] for more about the Cauchy integral introduced
+in Problem 5.
+Chapter 4
+The citation is from Wiener [40].
+The argument in Exercise 1 was discovered by D. J. Newman; see [4].
+The Paley-Wiener theorems appeared ﬁrst in [28]; further generalizations can
+be found in Stein and Weiss [35].
+Results related to the Borel transform (Problem 4) can be found in Boas [5].
+Chapter 5
+The citation is a translation from the German of a passage in a letter from
+K. Weierstrass to S. Kowalewskaja; see [38].
+A classical reference for Nevanlinna theory is the book by R. Nevanlinna
+himself [27].
+Chapter 6
+A number of diﬀerent proofs of the analytic continuation and functional equation
+for the zeta function can be found in Chapter 2 of Titchmarsch [37].
+Chapter 7
+The citation is from Hadamard [14]. Riemann’s statement concerning the zeroes
+of the zeta function in the critical strip is a passage taken from his paper [33].
+Further material related to the proof of the prime number theorem presented
+in the text is in Chapter 2 of Ingham [19], and Chapter 3 of Titchmarsch [37].
+365

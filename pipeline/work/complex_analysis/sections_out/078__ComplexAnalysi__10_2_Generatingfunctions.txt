@@ -1,0 +1,259 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.2 Generating functions
+직전 소단원: 「10.1.1 Further transformation laws」
+[본문]
+2. Generating functions
+293
+2 Generating functions
+Given a sequence {Fn}∞
+n=0, which may arise either combinatorially, re-
+cursively, or in terms of some number-theoretic law, an important tool
+in its study is the passage to its generating function, deﬁned by
+F(x) =
+∞
+
+n=0
+Fnxn.
+Often times, the deﬁning properties of the sequence {Fn} imply interest-
+ing algebraic or analytic properties of the function F(x), and exploiting
+these can eventually lead us back to new insights about the sequence
+{Fn}. A very simple-minded example is given by the Fibonacci sequence.
+(See Exercise 2). Here we want to study less elementary examples of this
+idea, related to the Θ function.
+We shall ﬁrst discuss very brieﬂy the theory of partitions.
+The partition function is deﬁned as follows: if n is a positive integer,
+we let p(n) denote the numbers of ways n can be written as a sum of
+positive integers. For instance, p(1) = 1, and p(2) = 2 since 2 = 2 + 0 =
+1 + 1. Also, p(3) = 3 since 3 = 3 + 0 = 2 + 1 = 1 + 1 + 1. We set p(0) =
+1 and collect some further values of p(n) in the following table.
+n
+0
+1
+2
+3
+4
+5
+6
+7
+8
+· · ·
+12
+p(n)
+1
+1
+2
+3
+5
+7
+11
+15
+22
+· · ·
+77
+The ﬁrst theorem is Euler’s identity for the generating function of the
+partition sequence {p(n)}, which is reminiscent of the product formula
+for the zeta function.
+Theorem 2.1 If |x| < 1, then
+∞
+
+n=0
+p(n)xn =
+∞
+
+k=1
+1
+1 −xk .
+Formally, we can write each fraction as
+1
+1 −xk =
+∞
+
+m=0
+xkm,
+and multiply these out together to obtain p(n) as the coeﬃcient of xn.
+Indeed, when we group together equal integers in a partition of n, this
+partition can be written as
+n = m1k1 + · · · + mrkr,
+
+294
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+where k1, . . . , kr are distinct positive integers. This partition corresponds
+to the term
+(xk1)m1 · · · (xkr)mr
+that arises in the product.
+The justiﬁcation of this formal argument proceeds as in the proof of
+the product formula for the zeta function (Section 1, Chapter 7); this is
+based on the convergence of the product  1/(1 −xk). This convergence
+in turn follows from the fact that for each ﬁxed |x| < 1 one has
+1
+1 −xk = 1 + O(xk).
+A similar argument shows that the product  1/(1 −x2n−1) is equal to
+the generating function for po(n), the number of partitions of n into odd
+parts. Also, (1 + xn) is the generating function for pu(n), the number
+of partitions of n into unequal parts. Remarkably, po(n) = pu(n) for all
+n, and this translates into the identity
+∞
+
+n=1
+
+1
+1 −x2n−1
+
+=
+∞
+
+n=1
+(1 + xn).
+To prove this note that (1 + xn)(1 −xn) = 1 −x2n, and therefore
+∞
+
+n=1
+(1 + xn)
+∞
+
+n=1
+(1 −xn) =
+∞
+
+n=1
+(1 −x2n).
+Moreover, taking into account the parity of integers, we have
+∞
+
+n=1
+(1 −x2n)
+∞
+
+n=1
+(1 −x2n−1) =
+∞
+
+n=1
+(1 −xn),
+which combined with the above proves the desired identity.
+The proposition that follows is deeper, and in fact involves the Θ func-
+tion directly. Let pe,u(n) denote the number of partitions of n into an
+even number of unequal parts, and po,u(n) the number of partitions of n
+into an odd number of unequal parts. Then, Euler proved that, unless n is
+a pentagonal number, one has pe,u(n) = po,u(n). By deﬁnition, pentag-
+onal numbers2 are integers n of the form k(3k + 1)/2, with k ∈Z. For
+2The traditional deﬁnition is as follows. Integers of the form n = k(k −1)/2, k ∈Z,
+are “triangular numbers”; those of the form n = k2 are “squares”; and those of the form
+k(3k + 1)/2 are “pentagonal numbers.” In general, numbers of the form (k/2)((ℓ−2)k +
+ℓ−4) are associated with an ℓ-sided polygon.
+
+2. Generating functions
+295
+example, the ﬁrst few pentagonal numbers are 1, 2, 5, 7, 12, 15, 22, 26, . . ..
+In fact, if n is pentagonal, then
+pe,u(n) −po,u(n) = (−1)k,
+if n = k(3k + 1)/2.
+To prove this result, we ﬁrst observe that
+∞
+
+n=1
+(1 −xn) =
+∞
+
+n=1
+[pe,u(n) −po,u(n)]xn.
+This follows since multiplying the terms in the product, we obtain terms
+of the form (−1)rxn1+···+nr where the integers n1, . . . , nr are distinct.
+Hence in the coeﬃcient of xn, each partition n1 + · · · + nr of n into an
+even number of unequal parts contributes for +1 (r is even), and each
+partition into an odd number of unequal parts contributes −1 (r is odd).
+This gives precisely the coeﬃcient pe,u(n) −po,u(n).
+With the above identity, we see that Euler’s theorem is a consequence
+of the following proposition.
+Proposition 2.2
+∞
+
+n=1
+(1 −xn) =
+∞
+
+k=−∞
+(−1)kx
+k(3k+1)
+2
+.
+Proof.
+If we set x = e2πiu, then we can write
+∞
+
+n=1
+(1 −xn) =
+∞
+
+n=1
+(1 −e2πinu)
+in terms of the triple product
+∞
+
+n=1
+(1 −q2n)(1 + q2n−1e2πiz)(1 + q2n−1e−2πiz)
+by letting q = e3πiu and z = 1/2 + u/2. This is because
+∞
+
+n=1
+(1 −e2πi3nu)(1 −e2πi(3n−1)u)(1 −e2πi(3n−2)u) =
+∞
+
+n=1
+(1 −e2πinu).
+By Theorem 1.3 the product equals
+∞
+
+n=−∞
+e3πin2u(−1)ne2πinu/2 =
+∞
+
+n=−∞
+(−1)neπin(3n+1)u
+
+296
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+=
+∞
+
+n=−∞
+(−1)nxn(3n+1)/2,
+which was to be proved.
+We make a ﬁnal comment about the partition function p(n).
+The
+nature of its growth as n →∞can be analyzed in terms of the behavior
+of 1/ ∞
+n=1(1 −x)n as |x| →1. In fact, by elementary considerations, we
+can get a rough order of growth of p(n) from the growth of the generating
+function as x →1; see Exercises 5 and 6. A more reﬁned analysis requires
+the transformation properties of the generating function which goes back
+to the corresponding Proposition 1.9 about η. This leads to a very good
+asymptotic formula for p(n). It may be found in Appendix A.
+3 The theorems about sums of squares
+The ancient Greeks were fascinated by triples of integers (a, b, c) that
+occurred as sides of right triangles. These are the “Pythagorean triples,”
+which satisfy a2 + b2 = c2.
+According to Diophantus of Alexandria
+(ca. 250 AD), if c is an integer of the above kind, and a and b have
+no common factors (a case to which one may easily reduce), then c is the
+sum of two squares, that is, c = m2 + n2 with m, n ∈Z; and conversely,
+any such c arises as the hypotenuse of a triangle whose sides are given by
+a Pythagorean triple (a, b, c). (See Exercise 8.) Therefore, it is natural
+to ask the following question: which integers can be written as the sum
+of two squares? It is easy to see that no number of the form 4k + 3 can
+be so written, but to determine which integers can be expressed in this
+way is not obvious.
+Let us pose the question in a more quantitative form. We deﬁne r2(n)
+to be the number of ways n can be written as the sum of two squares,
+counting obvious repetitions; that is, r2(n) is the number of pairs (x, y),
+x, y ∈Z, so that
+n = x2 + y2.
+For example, r2(3) = 0, but r2(5) = 8 because 5 = (±2)2 + (±1)2, and
+also 5 = (±1)2 + (±2)2. Hence, our ﬁrst problem can be posed as follows:
+Sum of two squares: Which integers can be written as a
+sum of two squares? More precisely, can one determine an
+expression for r2(n)?
+Next, since not every positive integer can be expressed as the sum of
+two squares, we may ask if three squares, or possibly four squares suﬃce.

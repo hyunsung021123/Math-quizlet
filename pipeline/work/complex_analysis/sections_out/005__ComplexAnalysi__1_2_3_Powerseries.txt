@@ -1,0 +1,291 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 1. Preliminaries to Complex Analysis
+현재 소단원: 1.2.3 Power series
+직전 소단원: 「1.2.2 Holomorphic functions」
+[본문]
+14
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+2.3 Power series
+The prime example of a power series is the complex exponential func-
+tion, which is deﬁned for z ∈C by
+ez =
+∞
+
+n=0
+zn
+n! .
+When z is real, this deﬁnition coincides with the usual exponential func-
+tion, and in fact, the series above converges absolutely for every z ∈C.
+To see this, note that
+
+zn
+n!
+ = |z|n
+n! ,
+so |ez| can be compared to the series  |z|n/n! = e|z| < ∞. In fact, this
+estimate shows that the series deﬁning ez is uniformly convergent in every
+disc in C.
+In this section we will prove that ez is holomorphic in all of C (it is
+entire), and that its derivative can be found by diﬀerentiating the series
+term by term. Hence
+(ez)′ =
+∞
+
+n=0
+nzn−1
+n!
+=
+∞
+
+m=0
+zm
+m! = ez,
+and therefore ez is its own derivative.
+In contrast, the geometric series
+∞
+
+n=0
+zn
+converges absolutely only in the disc |z| < 1, and its sum there is the
+function 1/(1 −z), which is holomorphic in the open set C −{1}. This
+identity is proved exactly as when z is real: we ﬁrst observe
+N
+
+n=0
+zn = 1 −zN+1
+1 −z
+,
+and then note that if |z| < 1 we must have limN→∞zN+1 = 0.
+In general, a power series is an expansion of the form
+(5)
+∞
+
+n=0
+anzn ,
+
+2. Functions on the complex plane
+15
+where an ∈C. To test for absolute convergence of this series, we must
+investigate
+∞
+
+n=0
+|an| |z|n ,
+and we observe that if the series (5) converges absolutely for some z0,
+then it will also converge for all z in the disc |z| ≤|z0|. We now prove
+that there always exists an open disc (possibly empty) on which the
+power series converges absolutely.
+Theorem 2.5 Given a power series ∞
+n=0 anzn, there exists 0 ≤R ≤∞
+such that:
+(i) If |z| < R the series converges absolutely.
+(ii) If |z| > R the series diverges.
+Moreover, if we use the convention that 1/0 = ∞and 1/∞= 0, then R
+is given by Hadamard’s formula
+1/R = lim sup |an|1/n.
+The number R is called the radius of convergence of the power series,
+and the region |z| < R the disc of convergence.
+In particular, we
+have R = ∞in the case of the exponential function, and R = 1 for the
+geometric series.
+Proof.
+Let L = 1/R where R is deﬁned by the formula in the state-
+ment of the theorem, and suppose that L̸ = 0, ∞. (These two easy cases
+are left as an exercise.) If |z| < R, choose ϵ > 0 so small that
+(L + ϵ)|z| = r < 1.
+By the deﬁnition L, we have |an|1/n ≤L + ϵ for all large n, therefore
+|an| |z|n ≤{(L + ϵ)|z|}n = rn.
+Comparison with the geometric series  rn shows that  anzn con-
+verges.
+If |z| > R, then a similar argument proves that there exists a sequence
+of terms in the series whose absolute value goes to inﬁnity, hence the
+series diverges.
+Remark. On the boundary of the disc of convergence, |z| = R, the sit-
+uation is more delicate as one can have either convergence or divergence.
+(See Exercise 19.)
+
+16
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+Further examples of power series that converge in the whole complex
+plane are given by the standard trigonometric functions; these are
+deﬁned by
+cos z =
+∞
+
+n=0
+(−1)n z2n
+(2n)!,
+and
+sin z =
+∞
+
+n=0
+(−1)n
+z2n+1
+(2n + 1)!,
+and they agree with the usual cosine and sine of a real argument whenever
+z ∈R.
+A simple calculation exhibits a connection between these two
+functions and the complex exponential, namely,
+cos z = eiz + e−iz
+2
+and
+sin z = eiz −e−iz
+2i
+.
+These are called the Euler formulas for the cosine and sine functions.
+Power series provide a very important class of analytic functions that
+are particularly simple to manipulate.
+Theorem 2.6 The power series f(z) = ∞
+n=0 anzn deﬁnes a holomor-
+phic function in its disc of convergence. The derivative of f is also a
+power series obtained by diﬀerentiating term by term the series for f,
+that is,
+f ′(z) =
+∞
+
+n=0
+nanzn−1.
+Moreover, f ′ has the same radius of convergence as f.
+Proof.
+The assertion about the radius of convergence of f ′ follows
+from Hadamard’s formula. Indeed, limn→∞n1/n = 1, and therefore
+lim sup |an|1/n = lim sup |nan|1/n,
+so that  anzn and  nanzn have the same radius of convergence, and
+hence so do  anzn and  nanzn−1.
+To prove the ﬁrst assertion, we must show that the series
+g(z) =
+∞
+
+n=0
+nanzn−1
+gives the derivative of f. For that, let R denote the radius of convergence
+of f, and suppose |z0| < r < R. Write
+f(z) = SN(z) + EN(z) ,
+
+2. Functions on the complex plane
+17
+where
+SN(z) =
+N
+
+n=0
+anzn
+and
+EN(z) =
+∞
+
+n=N+1
+anzn.
+Then, if h is chosen so that |z0 + h| < r we have
+f(z0 + h) −f(z0)
+h
+−g(z0) =
+SN(z0 + h) −SN(z0)
+h
+−S′
+N(z0)
+
++ (S′
+N(z0) −g(z0)) +
+EN(z0 + h) −EN(z0)
+h
+
+.
+Since an −bn = (a −b)(an−1 + an−2b + · · · + abn−2 + bn−1), we see that
+
+EN(z0 + h) −EN(z0)
+h
+ ≤
+∞
+
+n=N+1
+|an|
+
+(z0 + h)n −zn
+0
+h
+ ≤
+∞
+
+n=N+1
+|an|nrn−1,
+where we have used the fact that |z0| < r and |z0 + h| < r. The expres-
+sion on the right is the tail end of a convergent series, since g converges
+absolutely on |z| < R. Therefore, given ϵ > 0 we can ﬁnd N1 so that
+N > N1 implies
+
+EN(z0 + h) −EN(z0)
+h
+ < ϵ.
+Also, since limN→∞S′
+N(z0) = g(z0), we can ﬁnd N2 so that N > N2
+implies
+|S′
+N(z0) −g(z0)| < ϵ.
+If we ﬁx N so that both N > N1 and N > N2 hold, then we can ﬁnd
+δ > 0 so that |h| < δ implies
+
+SN(z0 + h) −SN(z0)
+h
+−S′
+N(z0)
+ < ϵ ,
+simply because the derivative of a polynomial is obtained by diﬀerenti-
+ating it term by term. Therefore,
+
+f(z0 + h) −f(z0)
+h
+−g(z0)
+ < 3ϵ
+whenever |h| < δ, thereby concluding the proof of the theorem.
+Successive applications of this theorem yield the following.
+
+18
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+Corollary 2.7 A power series is inﬁnitely complex diﬀerentiable in its
+disc of convergence, and the higher derivatives are also power series ob-
+tained by termwise diﬀerentiation.
+We have so far dealt only with power series centered at the origin.
+More generally, a power series centered at z0 ∈C is an expression of the
+form
+f(z) =
+∞
+
+n=0
+an(z −z0)n.
+The disc of convergence of f is now centered at z0 and its radius is still
+given by Hadamard’s formula. In fact, if
+g(z) =
+∞
+
+n=0
+anzn,
+then f is simply obtained by translating g, namely f(z) = g(w) where
+w = z −z0. As a consequence everything about g also holds for f after
+we make the appropriate translation. In particular, by the chain rule,
+f ′(z) = g′(w) =
+∞
+
+n=0
+nan(z −z0)n−1.
+A function f deﬁned on an open set Ωis said to be analytic (or have
+a power series expansion) at a point z0 ∈Ωif there exists a power
+series  an(z −z0)n centered at z0, with positive radius of convergence,
+such that
+f(z) =
+∞
+
+n=0
+an(z −z0)n
+for all z in a neighborhood of z0.
+If f has a power series expansion at every point in Ω, we say that f is
+analytic on Ω.
+By Theorem 2.6, an analytic function on Ωis also holomorphic there.
+A deep theorem which we prove in the next chapter says that the converse
+is true: every holomorphic function is analytic. For that reason, we use
+the terms holomorphic and analytic interchangeably.
+3 Integration along curves
+In the deﬁnition of a curve, we distinguish between the one-dimensional
+geometric object in the plane (endowed with an orientation), and its

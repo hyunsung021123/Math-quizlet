@@ -1,0 +1,166 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.5.3 Holomorphic functions defined in terms of integrals
+직전 소단원: 「2.5.2 Sequences of holomorphic functions」
+[본문]
+5. Further applications
+55
+Hence,
+|F ′(z)| ≤1
+2π
+
+Cδ(z)
+|F(ζ)|
+|ζ −z|2 |dζ|
+≤1
+2π sup
+ζ∈Ω
+|F(ζ)| 1
+δ2 2πδ
+= 1
+δ sup
+ζ∈Ω
+|F(ζ)| ,
+as was to be shown.
+Of course, there is nothing special about the ﬁrst derivative, and in
+fact under the hypotheses of the last theorem, we may conclude (arguing
+as above) that for every k ≥0 the sequence of kth derivatives {f (k)
+n }∞
+n=1
+converges uniformly to f (k) on every compact subset of Ω.
+In practice, one often uses Theorem 5.2 to construct holomorphic func-
+tions (say, with a prescribed property) as a series
+(14)
+F(z) =
+∞
+
+n=1
+fn(z).
+Indeed, if each fn is holomorphic in a given region Ωof the complex
+plane, and the series converges uniformly in compact subsets of Ω, then
+Theorem 5.2 guarantees that F is also holomorphic in Ω. For instance,
+various special functions are often expressed in terms of a converging
+series like (14). A speciﬁc example is the Riemann zeta function discussed
+in Chapter 6.
+We now turn to a variant of this idea, which consists of functions
+deﬁned in terms of integrals.
+5.3 Holomorphic functions deﬁned in terms of integrals
+As we shall see later in this book, a number of other special functions
+are deﬁned in terms of integrals of the type
+f(z) =
+ b
+a
+F(z, s) ds,
+or as limits of such integrals. Here, the function F is holomorphic in the
+ﬁrst argument, and continuous in the second. The integral is taken in
+the sense of Riemann integration over the bounded interval [a, b]. The
+problem then is to establish that f is holomorphic.
+
+56
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+In the next theorem, we impose a suﬃcient condition on F, often
+satisﬁed in practice, that easily implies that f is holomorphic.
+After a simple linear change of variables, we may assume that a = 0
+and b = 1.
+Theorem 5.4 Let F(z, s) be deﬁned for (z, s) ∈Ω× [0, 1] where Ωis an
+open set in C. Suppose F satisﬁes the following properties:
+(i)
+F(z, s) is holomorphic in z for each s.
+(ii)
+F is continuous on Ω× [0, 1].
+Then the function f deﬁned on Ωby
+f(z) =
+ 1
+0
+F(z, s) ds
+is holomorphic.
+The second condition says that F is jointly continuous in both argu-
+ments.
+To prove this result, it suﬃces to prove that f is holomorphic in any
+disc D contained in Ω, and by Morera’s theorem this could be achieved
+by showing that for any triangle T contained in D we have
+
+T
+ 1
+0
+F(z, s) ds dz = 0.
+Interchanging the order of integration, and using property (i) would then
+yield the desired result. We can, however, get around the issue of justi-
+fying the change in the order of integration by arguing diﬀerently. The
+idea is to interpret the integral as a “uniform” limit of Riemann sums,
+and then apply the results of the previous section.
+Proof.
+For each n ≥1, we consider the Riemann sum
+fn(z) = (1/n)
+n
+
+k=1
+F(z, k/n).
+Then fn is holomorphic in all of Ωby property (i), and we claim that
+on any disc D whose closure is contained in Ω, the sequence {fn}∞
+n=1
+converges uniformly to f. To see this, we recall that a continuous function
+on a compact set is uniformly continuous, so if ϵ > 0 there exists δ > 0
+such that
+sup
+z∈D
+|F(z, s1) −F(z, s2)| < ϵ
+whenever |s1 −s2| < δ.
+
+5. Further applications
+57
+Then, if n > 1/δ, and z ∈D we have
+|fn(z) −f(z)| =
+
+n
+
+k=1
+ k/n
+(k−1)/n
+F(z, k/n) −F(z, s) ds
+
+≤
+n
+
+k=1
+ k/n
+(k−1)/n
+|F(z, k/n) −F(z, s)| ds
+<
+n
+
+k=1
+ϵ
+n
+< ϵ.
+This proves the claim, and by Theorem 5.2 we conclude that f is holo-
+morphic in D. As a consequence, f is holomorphic in Ω, as was to be
+shown.
+5.4 Schwarz reﬂection principle
+In real analysis, there are various situations where one wishes to extend
+a function from a given set to a larger one.
+Several techniques exist
+that provide extensions for continuous functions, and more generally for
+functions with varying degrees of smoothness. Of course, the diﬃculty of
+the technique increases as we impose more conditions on the extension.
+The situation is very diﬀerent for holomorphic functions. Not only are
+these functions indeﬁnitely diﬀerentiable in their domain of deﬁnition,
+but they also have additional characteristically rigid properties, which
+make them diﬃcult to mold. For example, there exist holomorphic func-
+tions in a disc which are continuous on the closure of the disc, but which
+cannot be continued (analytically) into any region larger than the disc.
+(This phenomenon is discussed in Problem 1.)
+Another fact we have
+seen above is that holomorphic functions must be identically zero if they
+vanish on small open sets (or even, for example, a non-zero line segment).
+It turns out that the theory developed in this chapter provides a simple
+extension phenomenon that is very useful in applications: the Schwarz
+reﬂection principle. The proof consists of two parts. First we deﬁne the
+extension, and then check that the resulting function is still holomorphic.
+We begin with this second point.
+Let Ωbe an open subset of C that is symmetric with respect to the
+real line, that is
+z ∈Ω
+if and only if
+z ∈Ω.

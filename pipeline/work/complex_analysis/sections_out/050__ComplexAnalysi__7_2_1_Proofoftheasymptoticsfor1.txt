@@ -1,0 +1,259 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.2.1 Proof of the asymptotics for ψ1
+직전 소단원: 「7.2.intro 개관 (도입부)」
+[본문]
+194
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+This fact, together with equation (5) and an application of Lemma 2.4
+(with a = x/n), gives
+1
+2πi
+ c+i∞
+c−i∞
+xs+1
+s(s + 1)
+
+−ζ′(s)
+ζ(s)
+
+ds = x
+∞
+
+n=1
+Λ(n) 1
+2πi
+ c+i∞
+c−i∞
+(x/n)s
+s(s + 1) ds
+= x
+
+n≤x
+Λ(n)
+
+1 −n
+x
+
+= ψ1(x),
+as was to be shown.
+2.1 Proof of the asymptotics for ψ1
+In this section, we will show that
+ψ1(x) ∼x2/2
+as x →∞,
+and as a consequence, we will have proved the prime number theorem.
+The key ingredients in the argument are:
+• the formula in Proposition 2.3 connecting ψ1 to ζ, namely
+ψ1(x) =
+1
+2πi
+ c+i∞
+c−i∞
+xs+1
+s(s + 1)
+
+−ζ′(s)
+ζ(s)
+
+ds
+for c > 1.
+• the non-vanishing of the zeta function on Re(s) = 1,
+ζ(1 + it)̸ = 0
+for all t ∈R,
+and the estimates for ζ near that line given in Proposition 2.7 of
+Chapter 6 together with Proposition 1.6 of this chapter.
+Let us now discuss our strategy in more detail. In the integral above
+for ψ1(x) we want to change the line of integration Re(s) = c with c > 1,
+to Re(s) = 1. If we could achieve that, the size of the factor xs+1 in the
+integrand would then be of order x2 (which is close to what we want)
+instead of xc+1, c > 1, which is much too large. However, there would
+still be two issues that must be dealt with. The ﬁrst is the pole of ζ(s)
+at s = 1; it turns out that when it is taken into account, its contribution
+is exactly the main term x2/2 of the asymptotic of ψ1(x). Second, what
+remains must be shown to be essentially smaller than this term, and so
+
+2. Reduction to the functions ψ and ψ1
+195
+we must further reﬁne the crude estimate of order x2 when integrating
+on the line Re(s) = 1. We carry out our plan as follows.
+Fix c > 1, say c = 2, and assume x is also ﬁxed for the moment with
+x ≥2. Let F(s) denote the integrand
+F(s) =
+xs+1
+s(s + 1)
+
+−ζ′(s)
+ζ(s)
+
+.
+First we deform the vertical line from c −i∞to c + i∞to the path γ(T)
+shown in Figure 2. (The segments of γ(T) on the line Re(s) = 1 consist
+of T ≤t < ∞, and −∞< t ≤−T.) Here T ≥3, and T will be chosen
+appropriately large later.
+Re(s) = c
+s = 1
+s = 1
+s = 1
+γ5
+γ1
+γ2
+γ4
+γ(T)
+γ(T, δ)
+1 −i∞
+1 −i∞
+c −i∞
+c + i∞
+1 + i∞
+1 + i∞
+γ3
+Figure 2. Three stages:
+the line Re(s) = c, the contours γ(T) and
+γ(T, δ)
+The usual and familiar arguments using Cauchy’s theorem allow us to
+see that
+(7)
+1
+2πi
+ c+i∞
+c−i∞
+F(s) ds =
+1
+2πi
+
+γ(T)
+F(s) ds.
+
+196
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+Indeed, we know on the basis of Proposition 2.7 in Chapter 6 and Proposi-
+tion 1.6 that |ζ′(s)/ζ(s)| ≤A|t|η for any ﬁxed η > 0, whenever s = σ + it,
+σ ≥1, and |t| ≥1. Thus |F(s)| ≤A′|t|−2+η in the two (inﬁnite) rectan-
+gles bounded by the line (c −i∞, c + i∞) and γ(T). Since F is regular in
+that region, and its decrease at inﬁnity is rapid enough, the assertion (7)
+is established.
+Next, we pass from the contour γ(T) to the contour γ(T, δ). (Again,
+see Figure 2.) For ﬁxed T, we choose δ > 0 small enough so that ζ has
+no zeros in the box
+{s = σ + it, 1 −δ ≤σ ≤1, |t| ≤T}.
+Such a choice can be made since ζ does not vanish on the line σ = 1.
+Now F(s) has a simple pole at s = 1. In fact, by Corollary 2.6 in Chap-
+ter 6, we know that ζ(s) = 1/(s −1) + H(s), where H(s) is regular near
+s = 1. Hence −ζ′(s)/ζ(s) = 1/(s −1) + h(s), where h(s) is holomorphic
+near s = 1, and so the residue of F(s) at s = 1 equals x2/2. As a result
+1
+2πi
+
+γ(T)
+F(s) ds = x2
+2 +
+1
+2πi
+
+γ(T,δ)
+xs+1
+s(s + 1)F(s) ds.
+We now decompose the contour γ(T, δ) as γ1 + γ2 + γ3 + γ4 + γ5 and
+estimate each of the integrals 
+γj F(s) ds, j = 1, 2, 3, 4, 5, with the γj as
+in Figure 2.
+First we contend that there exists T so large that
+
+
+γ1
+F(s) ds
+ ≤ϵ
+2x2
+and
+
+
+γ5
+F(s) ds
+ ≤ϵ
+2x2.
+To see this, we ﬁrst note that for s ∈γ1 one has
+|x1+s| = x1+σ = x2.
+Then, by Proposition 1.6 we have, for example, that |ζ′(s)/ζ(s)| ≤A|t|1/2,
+so
+
+
+γ1
+F(s) ds
+ ≤Cx2
+ ∞
+T
+|t|1/2
+t2
+dt.
+Since the integral converges, we can make the right-hand side ≤ϵx2/2
+upon taking T suﬃciently large. The argument for the integral over γ5
+is the same.
+
+2. Reduction to the functions ψ and ψ1
+197
+Having now ﬁxed T, we choose δ appropriately small. On γ3, note
+that
+|x1+s| = x1+1−δ = x2−δ ,
+from which we conclude that there exists a constant CT (dependent on
+T) such that
+
+
+γ3
+F(s) ds
+ ≤CT x2−δ .
+Finally, on the small horizontal segment γ2 (and similarly on γ4), we can
+estimate the integral as follows:
+
+
+γ2
+F(s) ds
+ ≤C′
+T
+ 1
+1−δ
+x1+σ dσ ≤C′
+T
+x2
+log x .
+We conclude that there exist constants CT and C′
+T (possibly diﬀerent
+from the ones above) such that
+ψ1(x) −x2
+2
+ ≤ϵx2 + CT x2−δ + C′
+T
+x2
+log x.
+Dividing through by x2/2, we see that
+
+2ψ1(x)
+x2
+−1
+ ≤2ϵ + 2CT x−δ + 2C′
+T
+1
+log x,
+and therefore, for all large x we have
+
+2ψ1(x)
+x2
+−1
+ ≤4ϵ.
+This concludes the proof that
+ψ1(x) ∼x2/2
+as x →∞,
+and thus, we have also completed the proof of the prime number theorem.
+Note on interchanging double sums
+We prove the following facts about the interchange of inﬁnite sums: if {akℓ}1≤k,ℓ<∞
+is a sequence of complex numbers indexed by N × N, such that
+(8)
+∞
+
+k=1
+ ∞
+
+ℓ=1
+|akℓ|
+
+< ∞,

@@ -1,0 +1,82 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.1.1 Estimates for 1/ζ(s)
+직전 소단원: 「7.1.intro 개관 (도입부)」
+[본문]
+1. Zeros of the zeta function
+187
+We can now ﬁnish the proof of our theorem.
+Proof of Theorem 1.2. Suppose on the contrary that ζ(1 + it0) = 0 for
+some t0̸ = 0. Since ζ is holomorphic at 1 + it0, it must vanish at least to
+order 1 at this point, hence
+|ζ(σ + it0)|4 ≤C(σ −1)4
+as σ →1,
+for some constant C > 0. Also, we know that s = 1 is a simple pole for
+ζ(s), so that
+|ζ(σ)|3 ≤C′(σ −1)−3
+as σ →1,
+for some constant C′ > 0. Finally, since ζ is holomorphic at the points
+σ + 2it0, the quantity |ζ(σ + 2it0)| remains bounded as σ →1. Putting
+these facts together yields
+|ζ3(σ)ζ4(σ + it)ζ(σ + 2it)| →0
+as σ →1 ,
+which contradicts Corollary 1.5, since the logarithm of real numbers be-
+tween 0 and 1 is negative. This concludes the proof that ζ is zero free
+on the real line Re(s) = 1.
+1.1 Estimates for 1/ζ(s)
+The proof of the prime number theorem relies on detailed manipulations
+of the zeta function near the line Re(s) = 1; the basic object involved is
+the logarithmic derivative ζ′(s)/ζ(s). For this reason, besides the non-
+vanishing of ζ on the line, we need to know about the growth of ζ′
+and 1/ζ. The former was dealt with in Proposition 2.7 of Chapter 6; we
+now treat the latter.
+The proposition that follows is actually a quantitative version of The-
+orem 1.2.
+Proposition 1.6 For every ϵ > 0, we have 1/|ζ(s)| ≤cϵ|t|ϵ when s =
+σ + it, σ ≥1, and |t| ≥1.
+Proof.
+From our previous observations, we clearly have that
+|ζ3(σ)ζ4(σ + it)ζ(σ + 2it)| ≥1,
+whenever σ ≥1.
+Using the estimate for ζ in Proposition 2.7 of Chapter 6, we ﬁnd that
+|ζ4(σ + it)| ≥c|ζ−3(σ)| |t|−ϵ ≥c′(σ −1)3|t|−ϵ,
+
+188
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+for all σ ≥1 and |t| ≥1. Thus
+(3)
+|ζ(σ + it)| ≥c′(σ −1)3/4|t|−ϵ/4,
+whenever σ ≥1 and |t| ≥1.
+We now consider two separate cases, depending on whether the in-
+equality σ −1 ≥A|t|−5ϵ holds, for some appropriate constant A (whose
+value we choose later).
+If this inequality does hold, then (3) immediately provides
+|ζ(σ + it)| ≥A′|t|−4ϵ,
+and it suﬃces to replace 4ϵ by ϵ to conclude the proof of the desired
+estimate, in this case.
+If, however, σ −1 < A|t|−5ϵ, then we ﬁrst select σ′ > σ with σ′ −1 =
+A|t|−5ϵ. The triangle inequality then implies
+|ζ(σ + it)| ≥|ζ(σ′ + it)| −|ζ(σ′ + it) −ζ(σ + it)|,
+and an application of the mean value theorem, together with the esti-
+mates for the derivative of ζ obtained in the previous chapter, give
+|ζ(σ′ + it) −ζ(σ + it)| ≤c′′|σ′ −σ| |t|ϵ ≤c′′|σ′ −1| |t|ϵ.
+These observations, together with an application of (3) where we set
+σ = σ′, show that
+|ζ(σ + it)| ≥c′(σ′ −1)3/4|t|−ϵ/4 −c′′(σ′ −1)|t|ϵ.
+Now choose A = (c′/(2c′′))4, and recall that σ′ −1 = A|t|−5ϵ. This gives
+precisely
+c′(σ′ −1)3/4|t|−ϵ/4 = 2c′′(σ′ −1)|t|ϵ,
+and therefore
+|ζ(σ + it)| ≥A′′|t|−4ϵ.
+On replacing 4ϵ by ϵ, the desired inequality is established, and the proof
+of the proposition is complete.
+2 Reduction to the functions ψ and ψ1
+In his study of primes, Tchebychev introduced an auxiliary function
+whose behavior is to a large extent equivalent to the asymptotic distri-
+bution of primes, but which is easier to manipulate than π(x). Tcheby-
+chev’s ψ-function is deﬁned by
+ψ(x) =
+
+pm≤x
+log p.

@@ -1,0 +1,161 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.5.2 Sequences of holomorphic functions
+직전 소단원: 「2.5.1 Morera’s theorem」
+[본문]
+5. Further applications
+53
+Suppose we are given a pair of functions f and F analytic in regions
+Ωand Ω′, respectively, with Ω⊂Ω′. If the two functions agree on the
+smaller set Ω, we say that F is an analytic continuation of f into the
+region Ω′. The corollary then guarantees that there can be only one such
+analytic continuation, since F is uniquely determined by f.
+5 Further applications
+We gather in this section various consequences of the results proved so
+far.
+5.1 Morera’s theorem
+A direct application of what was proved here is a converse of Cauchy’s
+theorem.
+Theorem 5.1 Suppose f is a continuous function in the open disc D
+such that for any triangle T contained in D
+
+T
+f(z) dz = 0,
+then f is holomorphic.
+Proof.
+By the proof of Theorem 2.1 the function f has a primitive F
+in D that satisﬁes F ′ = f. By the regularity theorem, we know that F
+is indeﬁnitely (and hence twice) complex diﬀerentiable, and therefore f
+is holomorphic.
+5.2 Sequences of holomorphic functions
+Theorem 5.2 If {fn}∞
+n=1 is a sequence of holomorphic functions that
+converges uniformly to a function f in every compact subset of Ω, then
+f is holomorphic in Ω.
+Proof.
+Let D be any disc whose closure is contained in Ωand T
+any triangle in that disc. Then, since each fn is holomorphic, Goursat’s
+theorem implies
+
+T
+fn(z) dz = 0
+for all n.
+By assumption fn →f uniformly in the closure of D, so f is continuous
+and
+
+T
+fn(z) dz →
+
+T
+f(z) dz.
+
+54
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+As a result, we ﬁnd 
+T f(z) dz = 0, and by Morera’s theorem, we conclude
+that f is holomorphic in D. Since this conclusion is true for every D
+whose closure is contained in Ω, we ﬁnd that f is holomorphic in all of
+Ω.
+This is a striking result that is obviously not true in the case of real
+variables: the uniform limit of continuously diﬀerentiable functions need
+not be diﬀerentiable. For example, we know that every continuous func-
+tion on [0, 1] can be approximated uniformly by polynomials, by Weier-
+strass’s theorem (see Chapter 5, Book I), yet not every continuous func-
+tion is diﬀerentiable.
+We can go one step further and deduce convergence theorems for the
+sequence of derivatives. Recall that if f is a power series with radius
+of convergence R, then f ′ can be obtained by diﬀerentiating term by
+term the series for f, and moreover f ′ has radius of convergence R. (See
+Theorem 2.6 in Chapter 1.) This implies in particular that if Sn are the
+partial sums of f, then S′
+n converges uniformly to f ′ on every compact
+subset of the disc of convergence of f. The next theorem generalizes this
+fact.
+Theorem 5.3 Under the hypotheses of the previous theorem, the se-
+quence of derivatives {f ′
+n}∞
+n=1 converges uniformly to f ′ on every com-
+pact subset of Ω.
+Proof.
+We may assume without loss of generality that the sequence of
+functions in the theorem converges uniformly on all of Ω. Given δ > 0,
+let Ωδ denote the subset of Ωdeﬁned by
+Ωδ = {z ∈Ω: Dδ(z) ⊂Ω}.
+In other words, Ωδ consists of all points in Ωwhich are at distance > δ
+from its boundary. To prove the theorem, it suﬃces to show that {f ′
+n}
+converges uniformly to f ′ on Ωδ for each δ. This is achieved by proving
+the following inequality:
+(13)
+sup
+z∈Ωδ
+|F ′(z)| ≤1
+δ sup
+ζ∈Ω
+|F(ζ)|
+whenever F is holomorphic in Ω, since it can then be applied to
+F = fn −f to prove the desired fact.
+The inequality (13) follows at
+once from the Cauchy integral formula and the deﬁnition of Ωδ, since for
+every z ∈Ωδ the closure of Dδ(z) is contained in Ωand
+F ′(z) =
+1
+2πi
+
+Cδ(z)
+F(ζ)
+(ζ −z)2 dζ.
+
+5. Further applications
+55
+Hence,
+|F ′(z)| ≤1
+2π
+
+Cδ(z)
+|F(ζ)|
+|ζ −z|2 |dζ|
+≤1
+2π sup
+ζ∈Ω
+|F(ζ)| 1
+δ2 2πδ
+= 1
+δ sup
+ζ∈Ω
+|F(ζ)| ,
+as was to be shown.
+Of course, there is nothing special about the ﬁrst derivative, and in
+fact under the hypotheses of the last theorem, we may conclude (arguing
+as above) that for every k ≥0 the sequence of kth derivatives {f (k)
+n }∞
+n=1
+converges uniformly to f (k) on every compact subset of Ω.
+In practice, one often uses Theorem 5.2 to construct holomorphic func-
+tions (say, with a prescribed property) as a series
+(14)
+F(z) =
+∞
+
+n=1
+fn(z).
+Indeed, if each fn is holomorphic in a given region Ωof the complex
+plane, and the series converges uniformly in compact subsets of Ω, then
+Theorem 5.2 guarantees that F is also holomorphic in Ω. For instance,
+various special functions are often expressed in terms of a converging
+series like (14). A speciﬁc example is the Riemann zeta function discussed
+in Chapter 6.
+We now turn to a variant of this idea, which consists of functions
+deﬁned in terms of integrals.
+5.3 Holomorphic functions deﬁned in terms of integrals
+As we shall see later in this book, a number of other special functions
+are deﬁned in terms of integrals of the type
+f(z) =
+ b
+a
+F(z, s) ds,
+or as limits of such integrals. Here, the function F is holomorphic in the
+ﬁrst argument, and continuous in the second. The integral is taken in
+the sense of Riemann integration over the bounded interval [a, b]. The
+problem then is to establish that f is holomorphic.

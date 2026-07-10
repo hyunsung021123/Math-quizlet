@@ -1,0 +1,210 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.4.2 The Schwarz-Christoffel integral
+직전 소단원: 「8.4.1 Some examples」
+[본문]
+4. Conformal mappings onto polygons
+235
+prove a theorem that guarantees that the conformal map from the upper
+half-plane to a simply connected region bounded by a polygonal line is
+essentially given by a Schwarz-Christoﬀel integral.
+4.2 The Schwarz-Christoﬀel integral
+With the examples of the previous section in mind, we deﬁne the general
+Schwarz-Christoﬀel integral by
+(5)
+S(z) =
+ z
+0
+dζ
+(ζ −A1)β1 · · · (ζ −An)βn .
+Here A1 < A2 < · · · < An are n distinct points on the real axis arranged
+in increasing order. The exponents βk will be assumed to satisfy the
+conditions βk < 1 for each k and 1 < n
+k=1 βk.6
+The integrand in (5) is deﬁned as follows: (z −Ak)βk is that branch
+(deﬁned in the complex plane slit along the inﬁnite ray {Ak + iy : y ≤0})
+which is positive when z = x is real and x > Ak. As a result
+(z −Ak)βk =
+#
+(x −Ak)βk
+if x is real and x > Ak,
+|x −Ak|βkeiπβk
+if x is real and x < Ak.
+The complex plane slit along the union of the rays ∪n
+k=1{Ak + iy : y ≤0}
+is simply connected (see Exercise 19), so the integral that deﬁnes S(z) is
+holomorphic in this open set. Since the requirement βk < 1 implies that
+the singularities (ζ −Ak)−βk are integrable near Ak, the function S is
+continuous up to the real line, including the points Ak, with k = 1, . . . , n.
+Finally, this continuity condition implies that the integral can be taken
+along any path in the complex plane that avoids the union of the open
+slits ∪n
+k=1{Ak + iy : y < 0}.
+Now
+
+n
+
+k=1
+(ζ −Ak)−βk
+ ≤c|ζ|− βk
+for |ζ| large, so the assumption  βk > 1 guarantees the convergence of
+the integral (5) at inﬁnity. This fact and Cauchy’s theorem imply that
+limr→∞S(reiθ) exists and is independent of the angle θ, 0 ≤θ ≤π. We
+call this limit a∞, and we let ak = S(Ak) for k = 1, . . . , n.
+6Note that the case  βk ≤1, which occurs in Examples 1 and 2 above is excluded.
+However, a modiﬁcation of the proposition that follows can be made to take these cases
+into account; but then S(z) is no longer bounded in the upper half-plane.
+
+236
+Chapter 8. CONFORMAL MAPPINGS
+Proposition 4.1 Suppose S(z) is given by (5).
+(i)
+If n
+k=1 βk = 2, and p denotes the polygon whose vertices are given
+(in order) by a1, . . . , an, then S maps the real axis onto p −{a∞}.
+The point a∞lies on the segment [an, a1] and is the image of the
+point at inﬁnity. Moreover, the (interior) angle at the vertex ak is
+αkπ where αk = 1 −βk.
+(ii) There is a similar conclusion when 1 < n
+k=1 βk < 2, except now
+the image of the extended line is the polygon of n + 1 sides with
+vertices a1, a2, . . . , an, a∞.
+The angle at the vertex a∞is α∞π
+with α∞= 1 −β∞, where β∞= 2 −n
+k=1 βk.
+Figure 6 illustrates the proposition. The idea of the proof is already
+captured in Example 1 above.
+ak
+an
+ βk = 2
+Ak
+R
+ak
+an
+a1
+a∞
+p
+p
+1 <  βk < 2
+An
+A1
+a1
+a∞
+Figure 6. Action of the integral S(z)
+Proof.
+We assume that n
+k=1 βk = 2.
+If Ak < x < Ak+1 when
+1 ≤k ≤n −1, then
+S′(x) =
+
+j≤k
+(x −Aj)−βj 
+j>k
+(x −Aj)−βj.
+
+4. Conformal mappings onto polygons
+237
+Hence
+arg S′(x) = arg
+
+j>k
+(x −Aj)−βj
+
+= arg
+
+j>k
+e−iπβj = −π
+
+j>k
+βj,
+which of course is constant when x traverses the interval (Ak, Ak+1).
+Since
+S(x) = S(Ak) +
+ x
+Ak
+S′(y) dy,
+we see that as x varies from Ak to Ak+1, S(x) varies from S(Ak) =
+ak to S(Ak+1) = ak+1 along the straight line segment7 [ak, ak+1], and
+this makes an angle of −π 
+j>k βj with the real axis. Similarly, when
+An < x then S′(x) is positive, while if x < A1, the argument of S′(x)
+is −π n
+k=1 βk = −2π, and so S′(x) is again positive. Thus as x varies
+on [An, +∞), S(x) varies along a straight line (parallel to the x-axis)
+between an and a∞; similarly S(x) varies along a straight line (parallel
+to that axis) between a∞and a1 as x varies in (−∞, A1]. Moreover, the
+union of [an, a∞) and (a∞, a1] is the segment [an, a1] with the point a∞
+removed.
+Now the increase of the angle of [ak+1, ak] over that of [ak−1, ak] is
+πβk, which means that the angle at the vertex ak is παk. The proof
+when 1 < n
+k=1 βk < 2 is similar, and is left to the reader.
+As elegant as this proposition is, it does not settle the problem of
+ﬁnding a conformal map from the half-plane to a given region P that is
+bounded by a polygon. There are two reasons for this.
+1. It is not true for general n and generic choices of A1, . . . , An, that
+the polygon (which is the image of the real axis under S) is simple,
+that is, it does not cross itself. Nor is it true in general that the
+mapping S is conformal on the upper half-plane.
+2. Neither does the proposition show that starting with a simply con-
+nected region P (whose boundary is a polygonal line p) the mapping
+S is, for certain choices of A1, . . . , An and simple modiﬁcations, a
+conformal map from H to P. That however is the case, and is the
+result whose proof we now turn to.
+7We denote the closed straight line segment between two complex numbers z and w
+by [z, w], that is, [z, w] = {(1 −t)z + tw : t ∈[0, 1]}. If we restrict 0 < t < 1, then (z, w)
+denotes the open line segment between z and w. Similarly for the half-open segments
+[z, w) and (z, w] obtained by restricting 0 ≤t < 1 and 0 < t ≤1, respectively.
+
+238
+Chapter 8. CONFORMAL MAPPINGS
+4.3 Boundary behavior
+In what follows we shall consider a polygonal region P, namely a
+bounded, simply connected open set whose boundary is a polygonal line
+p. In this context, we always assume that the polygonal line is closed,
+and we sometimes refer to p as a polygon.
+To study conformal maps from the half-plane H to P, we consider ﬁrst
+the conformal maps from the disc D to P, and their boundary behavior.
+Theorem 4.2 If F : D →P is a conformal map, then F extends to a
+continuous bijection from the closure D of the disc to the closure P of
+the polygonal region. In particular, F gives rise to a bijection from the
+boundary of the disc to the boundary polygon p.
+The main point consists in showing that if z0 belongs to the unit circle,
+then limz→z0 F(z) exists. To prove this, we need a preliminary result,
+which uses the fact that if f : U →f(U) is conformal, then
+Area(f(U)) =
+ 
+U
+|f ′(z)|2 dx dy.
+This assertion follows from the deﬁnition, Area(f(U)) =
+
+f(U) dx dy,
+and the fact that the determinant of the Jacobian in the change of vari-
+ables w = f(z) is simply |f ′(z)|2, an observation we made in equation (4),
+Section 2.2, Chapter 1.
+Lemma 4.3 For each 0 < r < 1/2, let Cr denote the circle centered at
+z0 of radius r.
+Suppose that for all suﬃciently small r we are given
+two points zr and z′
+r in the unit disc that also lie on Cr.
+If we let
+ρ(r) = |f(zr) −f(z′
+r)|, then there exists a sequence {rn} of radii that
+tends to zero, and such that limn→∞ρ(rn) = 0.
+Proof.
+If not, there exist 0 < c and 0 < R < 1/2 such that c ≤ρ(r)
+for all 0 < r ≤R. Observe that
+f(zr) −f(z′
+r) =
+
+α
+f ′(ζ) dζ,
+where the integral is taken over the arc α on Cr that joins zr and z′
+r in
+D. If we parametrize this arc by z0 + reiθ with θ1(r) ≤θ ≤θ2(r), then
+ρ(r) ≤
+ θ2(r)
+θ1(r)
+|f ′(z)|r dθ.

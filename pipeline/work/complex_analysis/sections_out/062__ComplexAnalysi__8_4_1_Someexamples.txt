@@ -1,0 +1,265 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.4.1 Some examples
+직전 소단원: 「8.3.3 Proof of the Riemann mapping theorem」
+[본문]
+4. Conformal mappings onto polygons
+231
+Remark. It is worthwhile to point out that the only places where
+the hypothesis of simple-connectivity entered in the proof were in the
+uses of the logarithm and the square root.
+Thus it would have suf-
+ﬁced to have assumed (in addition to the hypothesis that Ωis proper)
+that Ωis holomorphically simply connected in the sense that for
+any holomorphic function f in Ωand any closed curve γ in Ω, we have
+
+γ f(z) dz = 0. Further discussion of this point, and various equivalent
+properties of simple-connectivity, are given in Appendix B.
+4 Conformal mappings onto polygons
+The Riemann mapping theorem guarantees the existence of a conformal
+map from any proper, simply connected open set to the disc, or equiv-
+alently to the upper half-plane, but this theorem gives little insight as
+to the exact form of this map.
+In Section 1 we gave various explicit
+formulas in the case of regions that have symmetries, but it is of course
+unreasonable to ask for an explicit formula in the general case. There
+is, however, another class of open sets for which there are nice formulas,
+namely the polygons. Our aim in this last section is to give a proof of
+the Schwarz-Christoﬀel formula, which describes the nature of conformal
+maps from the disc (or upper half-plane) to polygons.
+4.1 Some examples
+We begin by studying some motivating examples. The ﬁrst two corre-
+spond to easy (but inﬁnite and degenerate) cases.
+Example 1. First, we investigate the conformal map from the upper
+half-plane to the sector {z : 0 < arg z < απ}, with 0 < α < 2, given in
+Section 1 by f(z) = zα.
+Anticipating the Schwarz-Christoﬀel formula
+below, we write
+zα = f(z) =
+ z
+0
+f ′(ζ) dζ = α
+ z
+0
+ζ−β dζ
+with α + β = 1, and where the integral is taken along any path in the
+upper half-plane. In fact, by continuity and Cauchy’s theorem, we may
+take the path of integration to lie in the closure of the upper half-plane.
+Although the behavior of f follows immediately from the original deﬁ-
+nition, we study it in terms of the integral expression above, since this
+provides insight for the general case treated later.
+Note ﬁrst that ζ−β is integrable near 0 since β < 1, therefore f(0) = 0.
+Observe that when z is real and positive (z = x), then f ′(x) = αxα−1 is
+
+232
+Chapter 8. CONFORMAL MAPPINGS
+positive; also it is not ﬁnitely integrable at ∞. Therefore, as x travels
+from 0 to ∞, we see that f(x) increases from 0 to ∞, thus f maps [0, ∞)
+to [0, ∞). On the other hand, when z = x is negative, then
+f ′(z) = α|x|α−1eiπ(α−1) = −α|x|α−1eiπα ,
+so f maps the segment (−∞, 0] to (eiπα∞, 0]. The situation is illustrated
+in Figure 3 where the inﬁnite segment A is mapped to A′ and the segment
+B is mapped to B′, with the direction of travel indicated in Figure 3.
+B′
+A′
+0
+A
+B
+0
+Figure 3. The conformal map zα
+Example 2. Next, we consider for z ∈H,
+f(z) =
+ z
+0
+dζ
+(1 −ζ2)1/2 ,
+where the integral is taken from 0 to z along any path in the closed
+upper half-plane. We choose the branch for (1 −ζ2)1/2 that makes it
+holomorphic in the upper half-plane and positive when −1 < ζ < 1. As
+a result
+(1 −ζ2)−1/2 = i(ζ2 −1)−1/2
+when ζ > 1.
+We observe that f maps the real line to the boundary of the half-strip
+pictured in Figure 4.
+In fact, since f(±1) = ±π/2, and f ′(x) > 0 if −1 < x < 1, we see that
+f maps the segment B to B′. Moreover
+f(x) = π
+2 +
+ x
+1
+f ′(x) dx
+when x > 1,
+and
+ ∞
+1
+dx
+(x2 −1)1/2 = ∞.
+Thus, as x travels along the segment C, the image traverses the inﬁnite
+segment C′. Similarly segment A is mapped to A′.
+Note the connection of this example with Example 8 in Section 1.2. In
+fact, one can show that the function f(z) is the inverse to the function
+
+4. Conformal mappings onto polygons
+233
+A′
+B′
+C′
+π
+2
+−π
+2
+C
+A
+B
+−1
+1
+Figure 4. Mapping of the boundary in Example 2
+sin z, and hence f takes H conformally to the interior of the half-strip
+bounded by the segments A′, B′, and C′.
+Example 3. Here we take
+f(z) =
+ z
+0
+dζ
+[(1 −ζ2)(1 −k2ζ2)]1/2 ,
+z ∈H,
+where k is a ﬁxed real number with 0 < k < 1 (the branch of
+[(1 −ζ2) (1 −k2ζ2)]1/2 in the upper half-plane is chosen to be the one
+that is positive when ζ is real and −1 < ζ < 1). Integrals of this kind
+are called elliptic integrals, because variants of these arise in the cal-
+culation of the arc-length of an ellipse. We shall observe that f maps the
+real axis onto the rectangle shown in Figure 5(b), where K and K′ are
+determined by
+K =
+ 1
+0
+dx
+[(1 −x2)(1 −k2x2)]1/2 , K′ =
+ 1/k
+1
+dx
+[(x2 −1)(1 −k2x2)]1/2 .
+We divide the real axis into four “segments,” with division points
+−1/k, −1, 1, and 1/k (see Figure 5(a)). The segments are [−1/k, −1],
+[−1, 1], [1, 1/k], and [1/k, −1/k], the last consisting of the union of the
+two half-segments [1/k, ∞) and (−∞, −1/k]. It is clear from the deﬁni-
+tions that f(±1) = ±K, and since f ′(x) > 0, when −1 < x < 1, it follows
+that f maps the segment [−1, 1] to [−K, K]. Moreover, since
+f(z) = K +
+ x
+1
+dζ
+[(1 −ζ2)(1 −k2ζ2)]1/2
+if 1 < x < 1/k,
+
+234
+Chapter 8. CONFORMAL MAPPINGS
+(b)
+(a)
+−1
+1/k
+A
+C
+E
+D
+−1/k
+B
+1
+K
+K + iK′
+D′
+C′
+−K + iK′
+A′
+B′
+E′
+−K
+Figure 5. Mapping of the boundary in Example 3
+we see that f maps the segment [1, 1/k] to [K, K + iK′], where K′ was
+deﬁned above. Similarly, f maps [−1/k, −1] to [−K + iK′, −K]. Next,
+when x > 1/k we have
+f ′(x) = −
+1
+[(x2 −1)(k2x2 −1)]1/2 ,
+and therefore,
+f(x) = K + iK′ −
+ x
+1/k
+dx
+[(x2 −1)(k2x2 −1)]1/2 .
+However,
+ ∞
+1/k
+dx
+[(x2 −1)(k2x2 −1)]1/2 =
+ 1
+0
+dx
+[(1 −x2)(1 −k2x2)]1/2 ,
+as can be seen by making the change of variables x = 1/ku in the in-
+tegral on the left. Thus f maps the segment [1/k, ∞) to the segment
+[K + iK′, iK′). Similarly f maps (−∞, −1/k] to [−K + iK′, iK′). Al-
+together, then, f maps the real axis to the above rectangle, with the
+point at inﬁnity corresponding to the mid-point of the upper side of the
+rectangle.
+The results obtained so far lead naturally to two problems.
+The ﬁrst, which we pursue next, consists of a generalization of the
+above examples. More precisely we deﬁne the Schwarz-Christoﬀel inte-
+gral and prove that it maps the real line to a polygonal line.
+Second, we note that in the examples above little was inferred about
+the behavior of f in H itself. In particular, we have not shown that f
+maps H conformally to the interior of the corresponding polygon. Af-
+ter a careful study of the boundary behavior of conformal maps, we
+
+4. Conformal mappings onto polygons
+235
+prove a theorem that guarantees that the conformal map from the upper
+half-plane to a simply connected region bounded by a polygonal line is
+essentially given by a Schwarz-Christoﬀel integral.
+4.2 The Schwarz-Christoﬀel integral
+With the examples of the previous section in mind, we deﬁne the general
+Schwarz-Christoﬀel integral by
+(5)
+S(z) =
+ z
+0
+dζ
+(ζ −A1)β1 · · · (ζ −An)βn .
+Here A1 < A2 < · · · < An are n distinct points on the real axis arranged
+in increasing order. The exponents βk will be assumed to satisfy the
+conditions βk < 1 for each k and 1 < n
+k=1 βk.6
+The integrand in (5) is deﬁned as follows: (z −Ak)βk is that branch
+(deﬁned in the complex plane slit along the inﬁnite ray {Ak + iy : y ≤0})
+which is positive when z = x is real and x > Ak. As a result
+(z −Ak)βk =
+#
+(x −Ak)βk
+if x is real and x > Ak,
+|x −Ak|βkeiπβk
+if x is real and x < Ak.
+The complex plane slit along the union of the rays ∪n
+k=1{Ak + iy : y ≤0}
+is simply connected (see Exercise 19), so the integral that deﬁnes S(z) is
+holomorphic in this open set. Since the requirement βk < 1 implies that
+the singularities (ζ −Ak)−βk are integrable near Ak, the function S is
+continuous up to the real line, including the points Ak, with k = 1, . . . , n.
+Finally, this continuity condition implies that the integral can be taken
+along any path in the complex plane that avoids the union of the open
+slits ∪n
+k=1{Ak + iy : y < 0}.
+Now
+
+n
+
+k=1
+(ζ −Ak)−βk
+ ≤c|ζ|− βk
+for |ζ| large, so the assumption  βk > 1 guarantees the convergence of
+the integral (5) at inﬁnity. This fact and Cauchy’s theorem imply that
+limr→∞S(reiθ) exists and is independent of the angle θ, 0 ≤θ ≤π. We
+call this limit a∞, and we let ak = S(Ak) for k = 1, . . . , n.
+6Note that the case  βk ≤1, which occurs in Examples 1 and 2 above is excluded.
+However, a modiﬁcation of the proposition that follows can be made to take these cases
+into account; but then S(z) is no longer bounded in the upper half-plane.

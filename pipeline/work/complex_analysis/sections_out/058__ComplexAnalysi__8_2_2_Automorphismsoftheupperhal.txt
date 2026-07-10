@@ -1,0 +1,187 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.2.2 Automorphisms of the upper half-plane
+직전 소단원: 「8.2.1 Automorphisms of the disc」
+[본문]
+2. The Schwarz lemma; automorphisms of the disc and upper half-plane
+221
+Corollary 2.3 The only automorphisms of the unit disc that ﬁx the ori-
+gin are the rotations.
+Note that by the use of the mappings ψα, we can see that the group of
+automorphisms of the disc acts transitively, in the sense that given any
+pair of points α and β in the disc, there is an automorphism ψ mapping
+α to β. One such ψ is given by ψ = ψβ ◦ψα.
+The explicit formulas for the automorphisms of D give a good de-
+scription of the group Aut(D). In fact, this group of automorphisms is
+“almost” isomorphic to a group of 2 × 2 matrices with complex entries
+often denoted by SU(1, 1). This group consists of all 2 × 2 matrices that
+preserve the hermitian form on C2 × C2 deﬁned by
+⟨Z, W⟩= z1w1 −z2w2,
+where Z = (z1, z2) and W = (w1, w2). For more information about this
+subject, we refer the reader to Problem 4.
+2.2 Automorphisms of the upper half-plane
+Our knowledge of the automorphisms of D together with the conformal
+map F : H →D found in Section 1.1 allow us to determine the group of
+automorphisms of H which we denote by Aut(H).
+Consider the map
+Γ : Aut(D) →Aut(H)
+given by “conjugation by F”:
+Γ(ϕ) = F −1 ◦ϕ ◦F.
+It is clear that Γ(ϕ) is an automorphism of H whenever ϕ is an auto-
+morphism of D, and Γ is a bijection whose inverse is given by Γ−1(ψ) =
+F ◦ψ ◦F −1. In fact, we prove more, namely that Γ preserves the oper-
+ations on the corresponding groups of automorphisms. Indeed, suppose
+that ϕ1, ϕ2 ∈Aut(D). Since F ◦F −1 is the identity on D we ﬁnd that
+Γ(ϕ1 ◦ϕ2) = F −1 ◦ϕ1 ◦ϕ2 ◦F
+= F −1 ◦ϕ1 ◦F ◦F −1 ◦ϕ2 ◦F
+= Γ(ϕ1) ◦Γ(ϕ2).
+The conclusion is that the two groups Aut(D) and Aut(H) are the same,
+since Γ deﬁnes an isomorphism between them. We are still left with the
+
+222
+Chapter 8. CONFORMAL MAPPINGS
+task of giving a description of elements of Aut(H). A series of calcula-
+tions, which consist of pulling back the automorphisms of the disc to the
+upper half-plane via F, can be used to verify that Aut(H) consists of all
+maps
+z 	→az + b
+cz + d,
+where a, b, c, and d are real numbers with ad −bc = 1. Again, a matrix
+group is lurking in the background. Let SL2(R) denote the group of all
+2 × 2 matrices with real entries and determinant 1, namely
+SL2(R) =
+
+M =
+
+a
+b
+c
+d
+
+:
+a, b, c, d ∈R and det(M) = ad −bc=1
+"
+.
+This group is called the special linear group.
+Given a matrix M ∈SL2(R) we deﬁne the mapping fM by
+fM(z) = az + b
+cz + d.
+Theorem 2.4 Every automorphism of H takes the form fM for some
+M ∈SL2(R). Conversely, every map of this form is an automorphism of
+H.
+The proof consists of a sequence of steps. For brevity, we denote the
+group SL2(R) by G.
+Step 1. If M ∈G, then fM maps H to itself. This is clear from the
+observation that
+(4)
+Im(fM(z)) = (ad −bc)Im(z)
+|cz + d|2
+=
+Im(z)
+|cz + d|2 > 0
+whenever z ∈H.
+Step 2. If M and M ′ are two matrices in G, then fM ◦fM ′ = fMM ′.
+This follows from a straightforward calculation, which we omit. As a
+consequence, we can prove the ﬁrst half of the theorem. Each fM is an
+automorphism because it has a holomorphic inverse (fM)−1, which is
+simply fM −1. Indeed, if I is the identity matrix, then
+(fM ◦fM −1)(z) = fMM −1(z) = fI(z) = z.
+Step 3. Given any two points z and w in H, there exists M ∈G such
+that fM(z) = w, and therefore G acts transitively on H. To prove this,
+
+2. The Schwarz lemma; automorphisms of the disc and upper half-plane
+223
+it suﬃces to show that we can map any z ∈H to i. Setting d = 0 in
+equation (4) above gives
+Im(fM(z)) = Im(z)
+|cz|2
+and we may choose a real number c so that Im(fM(z)) = 1. Next we
+choose the matrix
+M1 =
+
+0
+−c−1
+c
+0
+
+so that fM1(z) has imaginary part equal to 1. Then we translate by a
+matrix of the form
+M2 =
+
+1
+b
+0
+1
+
+with b ∈R,
+to bring fM1(z) to i. Finally, the map fM with M = M2M1 takes z to i.
+Step 4. If θ is real, then the matrix
+Mθ =
+
+cos θ
+−sin θ
+sin θ
+cos θ
+
+belongs to G, and if F : H →D denotes the standard conformal map, then
+F ◦fMθ ◦F −1 corresponds to the rotation of angle −2θ in the disc. This
+follows from the fact that F ◦fMθ = e−2iθF(z), which is easily veriﬁed.
+Step 5. We can now complete the proof of the theorem. We suppose
+f is an automorphism of H with f(β) = i, and consider a matrix N ∈G
+such that fN(i) = β. Then g = f ◦fN satisﬁes g(i) = i, and therefore
+F ◦g ◦F −1 is an automorphism of the disc that ﬁxes the origin.
+So
+F ◦g ◦F −1 is a rotation, and by Step 4 there exists θ ∈R such that
+F ◦g ◦F −1 = F ◦fMθ ◦F −1.
+Hence g = fMθ, and we conclude that f = fMθN −1 which is of the desired
+form.
+A ﬁnal observation is that the group Aut(H) is not quite isomorphic
+with SL2(R). The reason for this is because the two matrices M and −M
+give rise to the same function fM = f−M. Therefore, if we identify the
+two matrices M and −M, then we obtain a new group PSL2(R) called
+the projective special linear group; this group is isomorphic with
+Aut(H).
+
+224
+Chapter 8. CONFORMAL MAPPINGS
+3 The Riemann mapping theorem
+3.1 Necessary conditions and statement of the theorem
+We now come to the promised cornerstone of this chapter. The basic
+problem is to determine conditions on an open set Ωthat guarantee the
+existence of a conformal map F : Ω→D.
+A series of simple observations allow us to ﬁnd necessary conditions
+on Ω. First, if Ω= C there can be no conformal map F : Ω→D, since
+by Liouville’s theorem F would have to be a constant.
+Therefore, a
+necessary condition is to assume that Ω̸ = C. Since D is connected, we
+must also impose the requirement that Ωbe connected. There is still
+one more condition that is forced upon us: since D is simply connected,
+the same must be true of Ω(see Exercise 3).
+It is remarkable that
+these conditions on Ωare also suﬃcient to guarantee the existence of a
+biholomorpism from Ωto D.
+For brevity, we shall call a subset Ωof C proper if it is non-empty
+and not the whole of C.
+Theorem 3.1 (Riemann mapping theorem) Suppose Ωis proper and
+simply connected. If z0 ∈Ω, then there exists a unique conformal map
+F : Ω→D such that
+F(z0) = 0
+and
+F ′(z0) > 0.
+Corollary 3.2 Any two proper simply connected open subsets in C are
+conformally equivalent.
+Clearly, the corollary follows from the theorem, since we can use as
+an intermediate step the unit disc. Also, the uniqueness statement in
+the theorem is straightforward, since if F and G are conformal maps
+from Ωto D that satisfy these two conditions, then H = F ◦G−1 is an
+automorphism of the disc that ﬁxes the origin. Therefore H(z) = eiθz,
+and since H′(0) > 0, we must have eiθ = 1, from which we conclude that
+F = G.
+The rest of this section is devoted to the proof of the existence of the
+conformal map F. The idea of the proof is as follows. We consider all
+injective holomorphic maps f : Ω→D with f(z0) = 0. From these we
+wish to choose an f so that its image ﬁlls out all of D, and this can be
+achieved by making f ′(z0) as large as possible. In doing this, we shall
+need to be able to extract f as a limit from a given sequence of functions.
+We turn to this point ﬁrst.

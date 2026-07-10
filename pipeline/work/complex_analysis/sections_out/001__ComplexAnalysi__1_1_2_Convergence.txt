@@ -1,0 +1,50 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 1. Preliminaries to Complex Analysis
+현재 소단원: 1.1.2 Convergence
+직전 소단원: 「1.1.1 Basic properties」
+[본문]
+1. Complex numbers and the complex plane
+5
+1.2 Convergence
+We make a transition from the arithmetic and geometric properties of
+complex numbers described above to the key notions of convergence and
+limits.
+A sequence {z1, z2, . . .} of complex numbers is said to converge to
+w ∈C if
+lim
+n→∞|zn −w| = 0,
+and we write
+w = lim
+n→∞zn.
+This notion of convergence is not new. Indeed, since absolute values in
+C and Euclidean distances in R2 coincide, we see that zn converges to w
+if and only if the corresponding sequence of points in the complex plane
+converges to the point that corresponds to w.
+As an exercise, the reader can check that the sequence {zn} converges
+to w if and only if the sequence of real and imaginary parts of zn converge
+to the real and imaginary parts of w, respectively.
+Since it is sometimes not possible to readily identify the limit of a
+sequence (for example, limN→∞
+N
+n=1 1/n3), it is convenient to have a
+condition on the sequence itself which is equivalent to its convergence. A
+sequence {zn} is said to be a Cauchy sequence (or simply Cauchy) if
+|zn −zm| →0
+as n, m →∞.
+In other words, given ϵ > 0 there exists an integer N > 0 so that
+|zn −zm| < ϵ whenever n, m > N.
+An important fact of real analysis
+is that R is complete: every Cauchy sequence of real numbers converges
+to a real number.1 Since the sequence {zn} is Cauchy if and only if the
+sequences of real and imaginary parts of zn are, we conclude that every
+Cauchy sequence in C has a limit in C. We have thus the following result.
+Theorem 1.1 C, the complex numbers, is complete.
+We now turn our attention to some simple topological considerations
+that are necessary in our study of functions. Here again, the reader will
+note that no new notions are introduced, but rather previous notions are
+now presented in terms of a new vocabulary.
+1.3 Sets in the complex plane
+If z0 ∈C and r > 0, we deﬁne the open disc Dr(z0) of radius r cen-
+tered at z0 to be the set of all complex numbers that are at absolute
+1This is sometimes called the Bolzano-Weierstrass theorem.

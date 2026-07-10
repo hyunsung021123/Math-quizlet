@@ -1,0 +1,342 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.1.3 The Dirichlet problem in a strip
+직전 소단원: 「8.1.2 Further examples」
+[본문]
+212
+Chapter 8. CONFORMAL MAPPINGS
+If x goes from π/2 + i∞to π/2, then f(x) goes from 0 to i, and as x
+goes from π/2 to −π/2, then f(x) travels from i to −i on the half-circle.
+Finally, as x goes from −π/2 to −π/2 + i∞, we see that f(x) travels
+from −i back to 0.
+The mapping f is closely related to the inverse of the map in Exam-
+ple 5.
+Example 7. The function f(z) = −1
+2(z + 1/z) is a conformal map from
+the half-disc {z = x + iy : |z| < 1, y > 0} to the upper half-plane (Exer-
+cise 5).
+The boundary behavior of f is as follows. If x travels from 0 to 1, then
+f(x) goes from ∞to 1 on the real axis. If z = eiθ, then f(z) = cos θ and
+as x travels from 1 to −1 along the unit half-circle in the upper half-
+plane, the f(x) goes from 1 to −1 on the real segment. Finally, when x
+goes from −1 to 0, f(x) goes from −1 to −∞along the real axis.
+Example 8. The map f(z) = sin z takes the upper half-plane confor-
+mally onto the half-strip {w = x + iy : −π/2 < x < π/2 y > 0}. To see
+this, note that if ζ = eiz, then
+sin z = eiz −e−iz
+2i
+= −1
+2
+
+iζ + 1
+iζ
+
+,
+and therefore f is obtained ﬁrst by applying the map in Example 6, then
+multiplying by i (that is, rotating by π/2), and ﬁnally applying the map
+in Example 7.
+As x travels from −π/2 + i∞to −π/2, the point f(x) goes from −∞
+to −1. When x is real, between −π/2 and π/2, then f(x) is also real
+between −1 and 1. Finally, if x goes from π/2 to π/2 + i∞, then f(x)
+travels from 1 to ∞on the real axis.
+1.3 The Dirichlet problem in a strip
+The Dirichlet problem in the open set Ωconsists of solving
+(1)
+
+△u
+=
+0
+in Ω,
+u
+=
+f
+on ∂Ω,
+where △denotes the Laplacian ∂2/∂x2 + ∂2/∂y2, and f is a given func-
+tion on the boundary of Ω. In other words, we wish to ﬁnd a harmonic
+function in Ωwith prescribed boundary values f. This problem was al-
+ready considered in Book I in the cases where Ωis the unit disc or the
+
+1. Conformal equivalence and examples
+213
+f(z) = zα
+f(z) = 1+z
+1−z
+f(z) = log z
+f(z) = sin z
+−π
+2
+0
+0
+iπ
+0
+0
+1
+0
+0
+1
+0
+0
+iπ
+π
+2
+1
+i
+0
+0
+f(z) = log z
+f1(z) = eiz
+f2(z) = iz
+f3(z) = −1
+2
+z + 1
+z
+
+Figure 1. Explicit conformal maps
+upper half-plane, where it arose in the solution of the steady-state heat
+equation. In these speciﬁc examples, explicit solutions were obtained in
+terms of convolutions with the Poisson kernels.
+Our goal here is to connect the Dirichlet problem with the conformal
+maps discussed so far. We begin by providing a formula for a solution to
+the problem (1) in the special case where Ωis a strip. In fact, this exam-
+
+214
+Chapter 8. CONFORMAL MAPPINGS
+ple was studied in Problem 3 of Chapter 5, Book I, where the problem
+was solved using the Fourier transform. Here, we recover this solution
+using only conformal mappings and the known solution in the disc.
+The ﬁrst important fact that we use is that the composition of a har-
+monic function with a holomorphic function is still harmonic.
+Lemma 1.3 Let V and U be open sets in C and F : V →U a holo-
+morphic function. If u : U →C is a harmonic function, then u ◦F is
+harmonic on V .
+Proof.
+The thrust of the lemma is purely local, so we may assume
+that U is an open disc. We let G be a holomorphic function in U whose
+real part is u (such a G exists by Exercise 12 in Chapter 2, and is deter-
+mined up to an additive constant). Let H = G ◦F and note that u ◦F
+is the real part of H. Hence u ◦F is harmonic because H is holomorphic.
+For an alternate (computational) proof of this lemma, see Exercise 6.
+With this result in hand, we may now consider the problem (1) when
+Ωconsists of the horizontal strip
+Ω= {x + iy : x ∈R, 0 < y < 1},
+whose boundary is the union of the two horizontal lines R and i + R. We
+express the boundary data as two functions f0 and f1 deﬁned on R, and
+ask for a solution u(x, y) in Ωof △u = 0 that satisﬁes
+u(x, 0) = f0(x)
+and
+u(x, 1) = f1(x).
+We shall assume that f0 and f1 are continuous and vanish at inﬁnity,
+that is, that lim|x|→∞fj(x) = 0 for j = 0, 1.
+The method we shall follow consists of relocating the problem from
+the strip to the unit disc via a conformal map. In the disc the solution
+˜u is then expressed in terms of a convolution with the Poisson kernel.
+Finally, ˜u is moved back to the strip using the inverse of the previous
+conformal map, thereby giving our ﬁnal answer to the problem.
+To achieve our goal, we introduce the mappings F : D →Ωand
+G : Ω→D, that are deﬁned by
+F(w) = 1
+π log
+
+i1 −w
+1 + w
+
+and
+G(z) = i −eπz
+i + eπz .
+These two functions, which are obtained from composing mappings from
+examples in the previous sections, are conformal and inverses to one
+
+1. Conformal equivalence and examples
+215
+u = f0
+u = f1
+z = iy
+Ω
+Figure 2. The Dirichlet problem in a strip
+another. Tracing through the boundary behavior of F, we ﬁnd that it
+maps the lower half-circle to the line i + R, and the upper half-circle to
+R. More precisely, as ϕ travels from −π to 0, then F(eiϕ) goes from
+i + ∞to i −∞, and as ϕ travels from 0 to π, then F(eiϕ) goes from −∞
+to ∞on the real line.
+With the behavior of F on the circle in mind, we deﬁne
+˜f1(ϕ) = f1(F(eiϕ) −i)
+whenever −π < ϕ < 0,
+and
+˜f0(ϕ) = f0(F(eiϕ))
+whenever 0 < ϕ < π.
+Then, since f0 and f1 vanish at inﬁnity, the function ˜f that is equal
+to ˜f1 on the lower semi-circle, ˜f0 on the upper semi-circle, and 0 at the
+points ϕ = ±π, 0, is continuous on the whole circle. The solution to the
+Dirichlet problem in the unit disc with boundary data ˜f is given by the
+Poisson integral3
+˜u(w) = 1
+2π
+ π
+−π
+Pr(θ −ϕ) ˜f(ϕ) dϕ
+= 1
+2π
+ 0
+−π
+Pr(θ −ϕ) ˜f1(ϕ) dϕ + 1
+2π
+ π
+0
+Pr(θ −ϕ) ˜f0(ϕ) dϕ,
+where w = reiθ, and
+Pr(θ) =
+1 −r2
+1 −2r cos θ + r2
+3We refer the reader to Chapter 2 in Book I for a detailed discussion of the Dirichlet
+problem in the disc and the Poisson integral formula. Also, the Poisson integral formula
+is deduced in Exercise 12 of Chapter 2 and Problem 2 in Chapter 3 of this book.
+
+216
+Chapter 8. CONFORMAL MAPPINGS
+is the Poisson kernel. Lemma 1.3 guarantees that the function u, deﬁned
+by
+u(z) = ˜u(G(z)),
+is harmonic in the strip. Moreover, our construction also insures that u
+has the correct boundary values.
+A formula for u in terms of f0 and f1 is ﬁrst obtained at the points z =
+iy with 0 < y < 1. The appropriate change of variables (see Exercise 7)
+shows that if reiθ = G(iy), then
+1
+2π
+ π
+0
+Pr(θ −ϕ) ˜f0(ϕ) dϕ = sin πy
+2
+ ∞
+−∞
+f0(t)
+cosh πt −cos πy dt.
+A similar calculation also establishes
+1
+2π
+ π
+0
+Pr(θ −ϕ) ˜f1(ϕ) dϕ = sin πy
+2
+ ∞
+−∞
+f1(t)
+cosh πt + cos πy dt.
+Adding these last two integrals provides a formula for u(0, y). In gen-
+eral, we recall from Exercise 13 in Chapter 5 of Book I, that a solution to
+the Dirichlet problem in the strip vanishing at inﬁnity is unique. Conse-
+quently, a translation of the boundary condition by x results in a trans-
+lation of the solution by x as well. We may therefore apply the same
+argument to f0(x + t) and f1(x + t) (with x ﬁxed), and a ﬁnal change of
+variables shows that
+u(x, y) = sin πy
+2
+ ∞
+−∞
+f0(x −t)
+cosh πt −cos πy dt +
+ ∞
+−∞
+f1(x −t)
+cosh πt + cos πy dt
+
+,
+which gives a solution to the Dirichlet problem in the strip. In partic-
+ular, we ﬁnd that the solution is given in terms of convolutions with
+the functions f0 and f1. Also, note that at the mid-point of the strip
+(y = 1/2), the solution is given by integration with respect to the func-
+tion 1/ cosh πt; this function happens to be its own Fourier transform,
+as we saw in Example 3, Chapter 3.
+Remarks about the Dirichlet problem
+The example above leads us to envisage the solution of the more general
+Dirichlet problem for Ω(a suitable region), if we know a conformal map F
+from the disc D to Ω. That is, suppose we wish to solve (1), where f is
+an assigned continuous function and ∂Ωis the boundary of Ω. Assuming
+we have a conformal map F from D to Ω(that extends to a continuous
+
+1. Conformal equivalence and examples
+217
+bijection of the boundary of the disc to the boundary of Ω), then ˜f =
+f ◦F is deﬁned on the circle, and we can solve the Dirichlet problem
+for the disc with boundary data ˜f. The solution is given by the Poisson
+integral formula
+˜u(reiθ) = 1
+2π
+ 2π
+0
+Pr(θ −ϕ) ˜f(eiϕ) dϕ,
+where Pr is the Poisson kernel. Then, one can expect that the solution
+of the original problem is given by u = ˜u ◦F −1.
+Success with this approach requires that we are able to resolve aﬃr-
+matively two questions:
+• Does there exist a conformal map Φ = F −1 from Ωto D?
+• If so, does this map extend to a continuous bijection from the
+boundary of Ωto the boundary of D?
+The ﬁrst question, that of existence, is settled by the Riemann mapping
+theorem, which we prove in the next section. It is completely general
+(assuming only that Ωis a proper subset of C that is simply connected),
+and necessitates no regularity of the boundary of Ω. A positive answer
+to the second question requires some regularity of ∂Ω. A particular case,
+when Ωis the interior of a polygon, is treated below in Section 4.3. (See
+Exercise 18 and Problem 6 for more general assertions.)
+It is interesting to note that in Riemann’s original approach to the
+mapping problem, the chain of implications was reversed: his idea was
+that the existence of the conformal map Φ from Ωto D is a consequence
+of the solvability of the Dirichlet problem in Ω. He argued as follows.
+Suppose we wish to ﬁnd such a Φ, with the property that a given point
+z0 ∈Ωis mapped to 0. Then Φ must be of the form
+Φ(z) = (z −z0)G(z),
+where G is holomorphic and non-vanishing in Ω. Hence we can take
+Φ(z) = (z −z0)eH(z),
+for suitable H. Now if u(z) is the harmonic function given by u = Re(H),
+then the fact that |Φ(z)| = 1 on ∂Ωmeans that u must satisfy the bound-
+ary condition u(z) = log(1/|z −z0|) for z ∈∂Ω. So if we can ﬁnd such a
+solution u of the Dirichlet problem,4 we can construct H, and from this
+the mapping function Φ.
+4The harmonic function u(z) is also known as the Green’s function with source z0 for
+the region Ω.
+
+218
+Chapter 8. CONFORMAL MAPPINGS
+However, there are several shortcomings to this method. First, one
+has to verify that Φ is a bijection. In addition, to succeed, this method
+requires some regularity of the boundary of Ω. Moreover, one is still
+faced with the question of solving the Dirichlet problem for Ω. At this
+stage Riemann proposed using the “Dirichlet principle.” But applying
+this idea involves diﬃculties that must be overcome.5
+Nevertheless, using diﬀerent methods, one can prove the existence of
+the mapping in the general case. This approach is carried out below in
+Section 3.
+2 The Schwarz lemma; automorphisms of the disc and
+upper half-plane
+The statement and proof of the Schwarz lemma are both simple, but the
+applications of this result are far-reaching. We recall that a rotation is
+a map of the form z 	→cz with |c| = 1, namely c = eiθ, where θ ∈R is
+called the angle of rotation and is well-deﬁned up to an integer multiple
+of 2π.
+Lemma 2.1 Let f : D →D be holomorphic with f(0) = 0. Then
+(i)
+|f(z)| ≤|z| for all z ∈D.
+(ii)
+If for some z0̸ = 0 we have |f(z0)| = |z0|, then f is a rotation.
+(iii)
+|f ′(0)| ≤1, and if equality holds, then f is a rotation.
+Proof.
+We ﬁrst expand f in a power series centered at 0 and conver-
+gent in all of D
+f(z) = a0 + a1z + a2z2 + · · · .
+Since f(0) = 0 we have a0 = 0, and therefore f(z)/z is holomorphic in
+D (since it has a removable singularity at 0). If |z| = r < 1, then since
+|f(z)| ≤1 we have
+
+f(z)
+z
+ ≤1
+r,
+and by the maximum modulus principle, we can conclude that this is
+true whenever |z| ≤r. Letting r →1 gives the ﬁrst result.
+For (ii), we see that f(z)/z attains its maximum in the interior of D and
+must therefore be constant, say f(z) = cz. Evaluating this expression
+5An implementation of Dirichlet’s principle in the present two-dimensional situation is
+taken up in Book III.

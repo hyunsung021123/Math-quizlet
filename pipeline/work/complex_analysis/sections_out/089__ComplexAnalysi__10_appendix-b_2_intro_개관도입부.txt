@@ -1,0 +1,491 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.appendix-b.2.intro 개관 (도입부)
+직전 소단원: 「10.appendix-b.1 Equivalent formulations of simple connectivity」
+[본문]
+2. The Jordan curve theorem
+351
+Clearly, Q still satisﬁes (i) through (iv), and we claim this collec-
+tion also satisﬁes (v). Indeed, let [a1, a2] denote any boundary side of
+(n
+j=1 Qj with its orientation from a1 to a2. By considering the three
+diﬀerent possibilities, one sees that a2 is the beginning point of another
+boundary side [a2, a3]. Continuing in this fashion, we obtain a sequence
+of boundary sides [a1, a2], [a2, a3], . . . , [an, an+1], . . .. Since there are only
+ﬁnitely many sides, we must have an = am for some n and some m > n.
+We may choose the smallest m so that an = am, say m = m′. Then,
+we note that if n > 1, then am′ is an end-point of at least three bound-
+ary sides, namely [an−1, an], [an, an+1], and [am′−1, am′], hence am′ is
+a bad boundary vertex. Since we arranged that Q had no such bound-
+ary vertices, we conclude that n = 1, and hence the polygon formed by
+a1, . . . , am′ is closed and simple. We may repeat this process and ﬁnd
+that Q satisﬁes property (v), and the proof of Lemma 1.5 is complete.
+Finally, we are now able to ﬁnish the proof of Theorem 1.2, namely,
+if Ωis bounded and simply connected we can conclude that Ωc is con-
+nected.
+To see this, note that if Ωc is not connected, then we have
+constructed a curve γ ⊂Ωand found a point w /∈Ωso that Wγ(w)̸ = 0,
+thus contradicting the fact that Ωis simply connected.
+2 The Jordan curve theorem
+Although we emphasize in the statement of the theorems which follow
+that the curves are piecewise-smooth, we note that the proofs involve the
+use of curves that may only be continuous, (the curves Γϵ below).
+The two main results in this section are the following.
+Theorem 2.1 Let Γ be curve in the plane that is simple and piecewise-
+smooth.
+Then, the complement of Γ is an open connected set whose
+boundary is precisely Γ.
+Theorem 2.2 Let Γ be a curve in the plane which is simple, closed, and
+piecewise-smooth. Then, the complement of Γ consists of two disjoint
+connected open sets. Precisely one of these regions is bounded and simply
+connected; it is called the interior of Γ and denoted by Ω. The other
+component is unbounded, called the exterior of Γ, and denoted by U.
+Moreover, with the appropriate orientation for Γ, we have
+WΓ(z) =
+
+1
+if z ∈Ω,
+0
+if z ∈U.
+
+352 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+Remark. These two theorems continue to hold in the general case
+where we drop the assumption that the curves are piecewise-smooth.
+However, as it turns out, the proofs then are more diﬃcult. Fortunately,
+the restricted setting of piecewise-smooth curves suﬃces for many appli-
+cations.
+As a consequence of the above propositions, we may state a version of
+Cauchy’s theorem as follows:
+Theorem 2.3 Suppose f is a function that is holomorphic in the inte-
+rior Ωof a simple closed curve Γ. Then
+
+η
+f(ζ) dζ = 0
+whenever η is any closed curve contained in Ω.
+The idea of the proof of Theorem 2.1 can be roughly summarized as
+follows. Since the complement of Γ is open, it is suﬃcient to show it
+is pathwise connected (Exercise 5, Chapter 1). Let z and w belong to
+the complement of Γ, and join these two points by a curve. If this curve
+intersects Γ, we ﬁrst connect z to z′ and w to w′, where z′ and w′ are
+close to Γ, by curves that do not intersect Γ. Then, we join z′ to w′
+by traveling “parallel” to the curve Γ and going around its end-points if
+necessary.
+Therefore, the key is to construct a family of continuous curves that are
+“parallel” to Γ. This can be achieved because of the conditions imposed
+on the curve. Indeed, if γ is a parametrization for a smooth piece of Γ,
+then γ is continuously diﬀerentiable, and γ′(t)̸ = 0. Moreover, the vector
+γ′(t) is tangent to Γ. Consequently, iγ′(t) is perpendicular to Γ, and
+if Γ is simple, considering γ(t) + iϵγ′(t) amounts to a new curve that is
+“parallel” to Γ. The details are as follows.
+In the next three lemmas and two propositions, we emphasize that Γ0
+denotes a simple smooth curve. We recall that an arc-length parametriza-
+tion γ for a smooth curve Γ0 satisﬁes |γ′(t)| = 1 for all t. Every smooth
+curve has an arc-length parametrization.
+Lemma 2.4 Let Γ0 be a simple smooth curve with an arc-length parametriza-
+tion given by γ : [0, L] →C. For each real number ϵ, let Γϵ be the con-
+tinuous curve deﬁned by the parametrization
+γϵ(t) = γ(t) + iϵγ′(t),
+for 0 ≤t ≤L.
+Then, there exists κ1 > 0 so that Γ0 ∩Γϵ = ∅whenever 0 < |ϵ| < κ1.
+
+2. The Jordan curve theorem
+353
+Proof.
+We ﬁrst prove the result locally. If s and t belong to [0, L],
+then
+γϵ(t) −γ(s) = γ(t) −γ(s) + iϵγ′(t)
+=
+ t
+s
+γ′(u) du + iϵγ′(t)
+=
+ t
+s
+[γ′(u) −γ′(t)] du + (t −s + iϵ)γ′(t).
+Since γ′ is uniformly continuous on [0, L], there exists δ > 0 so that
+|γ′(x) −γ′(y)| < 1/2 whenever |x −y| < δ. In particular, if |s −t| < δ
+we ﬁnd that
+|γϵ(t) −γ(s)| > |t −s + iϵ| |γ′(t)| −|t −s|
+2
+.
+Since γ is an arc-length parametrization, we have |γ′(t)| = 1, and hence
+|γϵ(t) −γ(s)| > |ϵ|/2,
+where we have used the simple fact that 2|a + ib| ≥|a| + |b| whenever a
+and b are real. This proves that γϵ(t)̸ = γ(s) whenever |t −s| < δ and
+ϵ̸ = 0.
+To conclude the proof of the lemma, we argue as follows. (See Figure 2
+for an illustration of the argument.)
+γϵ(J′
+k)
+w
+γϵ(Jk)
+γϵ(J′
+k)
+z
+ζ
+γ(Ik)
+γ(J′
+k)
+γ(J′
+k)
+Figure 2. Situation in the proof of Lemma 2.4
+Let 0 = t0 < · · · < tn = L be a partition of [0, L] with |tk+1 −tk| < δ
+for all k, and consider
+Ik = {t : |t −tk| ≤δ/4},
+Jk = {t : |t −tk| ≤δ/2},
+
+354 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+and
+J′
+k = {t : |t −tk| ≥δ/2}.
+Then, we have just proved that
+(3)
+γ(Ik) ∩γϵ(Jk) = ∅
+whenever ϵ̸ = 0.
+Since Γ0 is simple, the distance dk between the two compact sets γ(Ik)
+and γ(J′
+k) is strictly positive. We now claim that
+(4)
+γ(Ik) ∩γϵ(J′
+k) = ∅
+whenever |ϵ| < dk/2.
+Indeed, if z ∈γ(Ik) and w ∈γϵ(J′
+k), then we choose s in J′
+k so that
+w = γϵ(s) and let ζ = γ(s). The triangle inequality then implies
+|z −w| ≥|z −ζ| −|ζ −w| ≥dk −|ϵ| ≥dk/2,
+and the claim is established. Finally, if we choose κ1 = mink dk/2, then (3)
+and (4) imply that Γ0 ∩Γϵ = ∅whenever 0 < |ϵ| < κ1, as desired.
+The next lemma shows that any point close to an interior point of the
+curve belongs to one of its parallel translates. By an interior point of
+the curve, we mean a point of the form γ(t) with t in the open interval
+(0, L). Such a point should not to be confused with an “interior” point
+of a curve, as in Theorem 2.2.
+Lemma 2.5 Suppose z is a point which does not belong to the smooth
+curve Γ0, but that is closer to an interior point of the curve than to either
+of its end-points. Then z belongs to Γϵ for some ϵ̸ = 0.
+More precisely, if z0 ∈Γ0 is closest to z and z0 = γ(t0) for some t0 in
+the open interval (0, L), then z = γ(t0) + iϵγ′(t0) for some ϵ̸ = 0.
+Proof.
+For t in a neighborhood of t0 the fact that γ is diﬀerentiable
+guarantees that
+z −γ(t) = z −γ(t0) −γ′(t0)(t −t0) + o(|t −t0|).
+Since z0 = γ(t0) minimizes the distance from z to Γ0, we ﬁnd that
+
+2. The Jordan curve theorem
+355
+|z −z0|2 ≤|z −γ(t)|2
+=
+|z −z0|2 −2(t −t0)Re
+
+[z −γ(t0)]γ′(t0)
+
++
++
+o (|t −t0|).
+Since t −t0 can take on positive or negative values, we must have
+Re
+
+[z −γ(t0)]γ′(t0)
+
+= 0, otherwise the above inequality can be vio-
+lated for t close to t0. As a result, there exists a real number ϵ with
+[z −γ(t0)]γ′(t0) = iϵ. Since |γ′(t0)| = 1 we have γ′(t0) = 1/γ′(t0), and
+therefore z −γ(t0) = iϵγ′(t0). The proof of the lemma is complete.
+Suppose that z and w are close to interior points of Γ0, so that z ∈Γϵ
+and w ∈Γη for some non-zero ϵ and η. If ϵ and η have the same sign, we
+say that the points z and w belong to the same side of Γ0. Otherwise,
+z and w are said to be on opposite sides of Γ0. We stress the fact that
+we do not attempt to deﬁne the “two sides of Γ0,” but only that given
+two points near Γ0, we may infer if they are on the “same side” or on
+“opposite sides”. Also, nothing we have done so far shows that these
+conditions are mutually exclusive.
+Roughly speaking, points on the same side can be joined almost di-
+rectly by a curve “parallel” to Γ0, while for points on opposite sides, we
+also need to go around one of the end-points of Γ0.
+We ﬁrst investigate the situation for points on the same side of Γ0.
+Proposition 2.6 Let A and B denote the two end-points of a simple
+smooth curve Γ0, and suppose that K is a compact set that satisﬁes
+either
+Γ0 ∩K = ∅
+or
+Γ0 ∩K = A ∪B.
+If z /∈Γ0 and w /∈Γ0 lie on the same side of Γ0, and are closer to interior
+points of Γ0 than they are to K or to the end-points of Γ0, then z and w
+can be joined by a continuous curve that lies entirely in the complement
+of K ∪Γ0.
+The unspeciﬁed compact set K will be chosen appropriately in the
+proof of the Jordan curve theorem.
+Proof.
+By the previous lemma, consider z0 = γ(t0) and w0 = γ(s0)
+that are interior points of Γ0 closest to z and w, respectively. Then
+z = γ(t0) + iϵ0γ′(t0)
+and
+w = γ(s0) + iη0γ′(s0),
+
+356 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+where ϵ0 and η0 have the same sign, which we may assume to be positive.
+We may also assume that t0 ≤s0.
+The hypothesis of the lemma implies that the line segments joining z
+to z0 and w to w0 are entirely contained in the complement of K and
+Γ0. Therefore, for all small ϵ > 0, we may join z and w to the points
+zϵ = γ(t0) + iϵγ′(t0)
+and
+w = γ(s0) + iϵγ′(s0),
+respectively. See Figure 3.
+Γ
+z
+z0
+w0
+wϵ
+w
+zϵ
+Figure 3. Situation in the proof of Proposition 2.6
+Finally, if ϵ is chosen smaller than κ1 in Lemma 2.4 and also smaller
+than the distance from K to the part of Γ0 between z0 and w0, that is,
+{γ(t) : t0 ≤t ≤s0}, then the corresponding part of Γϵ, namely {γϵ(t) :
+t0 ≤t ≤s0}, joins the point zϵ to wϵ. Moreover, this curve is contained
+in the complement of K and Γ0. This proves the proposition.
+To join points on opposite sides of Γ0, we need the following prelimi-
+nary result, which ensures that there is enough room necessary to travel
+around the end-points.
+Lemma 2.7 Let Γ0 be a simple smooth curve. There exists κ2 > 0 so
+that the set N, which consists of points of the form z = γ(L) + ϵeiθγ′(L)
+with −π/2 ≤θ ≤π/2 and 0 < ϵ < κ2, is disjoint from Γ0.
+Proof.
+The argument is similar to the one given in the proof of
+Lemma 2.4. First, we note that
+γ(L) + ϵeiθγ′(L) −γ(t) =
+ L
+t
+[γ′(u) −γ′(L)] du + (L −t + ϵeiθ)γ′(L).
+
+2. The Jordan curve theorem
+357
+If we choose δ so that |γ′(u) −γ′(L)| < 1/2 when |u −L| < δ, then
+|t −L| < δ implies
+|γ(L) + ϵeiθγ′(L) −γ(t)| ≥|ϵ|/2 .
+Therefore γ(t) /∈N whenever L −δ ≤t ≤L. Finally, it suﬃces to choose
+κ2 smaller than the distance from the end-point γ(L) to the rest of the
+curve γ(t) with 0 ≤t ≤L −δ, to conclude the proof.
+Finally, we may state the result analogous to Proposition 2.6 for points
+that could lie on opposite sides of Γ0.
+Proposition 2.8 Let A denote an end-point of the simple smooth curve
+Γ0, and suppose that K is a compact set that satisﬁes either
+Γ0 ∩K = ∅
+or
+Γ0 ∩K = A.
+If z /∈Γ0 and w /∈Γ0 are closer to interior points of Γ0 than they are to
+K or to the end-points of Γ0, then z and w can be joined by a continuous
+curve that lies entirely in the complement of Γ0 ∪K.
+We only provide an outline of the argument, which is similar to the
+proof of Proposition 2.6. It suﬃces to consider the case when z and w
+lie on opposite sides of Γ0 and A = γ(0). First, we may join
+zϵ = γ(t0) + iϵγ′(t0)
+and
+wϵ = γ(s0) −iϵγ′(s0)
+to the points
+z′
+ϵ = γ(L) + iϵγ′(L)
+and
+w′
+ϵ = γ(L) −iϵγ′(L).
+Then, z′
+ϵ and w′
+ϵ may be joined within the “half-neighborhood” N of
+Lemma 2.7.
+Here, if t0 ≤s0 we must select |ϵ| smaller than the dis-
+tance from {γ(t) : t0 ≤t ≤L} to K, and also smaller than κ1 and κ2 of
+Lemmas 2.4 and 2.7.
+Proof of Theorem 2.1
+Let Γ be a simple piecewise-smooth curve.
+First, we prove that the boundary of the set O = Γc is precisely Γ.
+Clearly, O is an open set whose boundary is contained in Γ. Moreover,
+any point where Γ is smooth also belongs to the boundary of O (by
+Lemma 2.4 for instance). Since the boundary of O must also be closed,
+we conclude it is equal to all of Γ.
+
+358 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+Γ
+z
+w
+N
+Figure 4. Situation in the proof of Proposition 2.8
+The proof that O is connected is by induction on the number of smooth
+curves constituting Γ. Suppose ﬁrst that Γ is simple and smooth, and let
+Z and W be any two points that do not lie on Γ. Let Λ be any smooth
+curve in C that joins Z and W, and which omits the two end-points of Γ.
+If Λ intersects Γ, it does so at interior points. Therefore, we may join Z
+by a piece of Λ that does not intersect Γ to a point z that is closer to the
+interior of Γ than to either of its end-points. Similarly, W can be joined
+in the complement of Γ to a point w also closer to the interior of Γ than
+to either of its end-points. Proposition 2.8 (with K empty) then shows
+that z and w can be joined by a continuous curve in the complement of
+Γ. Altogether, we may join any two points in the complement of Γ, and
+this proves the base step of the induction.
+Suppose that the theorem is proved for all curves containing n −1
+smooth curves, and let Γ consist of n smooth curves, so that we may
+write
+Γ = K ∪Γ0,
+where K is the union of n −1 consecutive smooth curves, and Γ0 is
+smooth. In particular, K is compact and intersects Γ0 in a single one of
+its end-points. By the induction hypothesis, any two points Z and W in
+the complement of Γ can be joined by a curve that does not intersect K,
+and we may also assume that this curve omits both end-points of Γ0. If
+this curve intersects Γ0 in its interior, then we apply Proposition 2.8 to
+conclude the proof of the theorem.
+
+2. The Jordan curve theorem
+359
+Proof of Theorem 2.2
+Let Γ denote a curve which is simple, closed, and piecewise-smooth. We
+ﬁrst prove that the complement of Γ consists of at most two components.
+Fix a point W that lies outside some large disc that contains Γ, and
+let U denote the set of all points that can be joined to W by a continuous
+curve that lies entirely in the complement of Γ. The set U is clearly open,
+and also connected since any two points can be joined by passing ﬁrst
+through W. Now we deﬁne
+Ω= Γc −U.
+We must show that Ωis connected. To this end, let K denote the curve
+obtained by deleting a smooth piece Γ0 of Γ. By the Jordan arc theorem,
+we may join any point Z ∈Ωto W by a curve ΛZ that does not intersect
+K. Since Z /∈U, the curve ΛZ must intersect Γ0 at one of its interior
+points. We may therefore choose two points z, w ∈ΛZ closer to interior
+points of Γ0 than to either of its end-points, and so that the pieces of ΛZ
+joining Z to z and W to w are entirely contained in the complement of
+Γ. Then, the points z and w are on opposite sides of Γ0, for otherwise,
+we could apply Proposition 2.6 to ﬁnd that Z can be joined to W by a
+curve lying in the complement of Γ, and this contradicts Z /∈U. Finally,
+if Z1 is another point in Ω, the two corresponding points z1 and w1
+must also lie on opposite sides of Γ0. Moreover, z and z1 must lie on
+the same side of Γ0, for otherwise z and w1 do, and we can once again
+join Z to W without crossing Γ, thus contradicting Z /∈U. Therefore,
+by Proposition 2.6 the points z and z1 can be joined by a curve in the
+complement of Γ, and we conclude that Z and Z1 belong to the same
+connected component.
+The argument thus far proves that Γc contains at most two compo-
+nents, but nothing as yet guarantees that Ωis non-empty. To show that
+Γc has precisely two components, it suﬃces (by Lemma 1.3) to prove
+that there are points that have diﬀerent winding numbers with respect
+to Γ. In fact, we claim that points that are on opposite sides of Γ have
+winding numbers that diﬀer by 1. To see this, ﬁx a point z0 on a smooth
+part of Γ, say z0 = γ(t0), let ϵ > 0, and deﬁne
+zϵ = γ(t0) + iϵγ′(t0)
+and
+wϵ = γ(t0) −iϵγ′(t0).
+By our previous observations, points on the same side of Γ belong to the
+same connected component, and hence
+△= |WΓ(zϵ) −WΓ(wϵ)|
+
+360 Appendix B: SIMPLE CONNECTIVITY AND JORDAN CURVE THEOREM
+is constant for all small ϵ > 0.
+First, we may write
+
+γ′(t)
+γ(t) −zϵ
+−
+γ′(t)
+γ(t) −wϵ
+
+=
+2iϵγ′(t0)γ′(t)
+[γ(t) −γ(t0)]2 + ϵ2γ′(t0)2 .
+For the numerator, we use
+γ′(t) = γ′(t0) + [γ′(t) −γ′(t0)]
+= γ′(t0) + ψ(t),
+where ψ(t) →0 as t →t0. For the denominator, we recall that γ′(t0)̸ = 0,
+so that
+[γ(t) −γ(t0)]2 + ϵ2γ′(t0)2 = γ′(t0)2[(t −t0)2 + ϵ2] + o(|t −t0|).
+Putting these results together, we see that
+
+γ′(t)
+γ(t) −zϵ
+−
+γ′(t)
+γ(t) −wϵ
+
+=
+2iϵ
+(t −t0)2 + ϵ2 + E(t),
+where given η > 0, there exists δ > 0 so that if |t −t0| ≤δ, the error term
+satisﬁes
+|E(t)| ≤η
+ϵ
+(t −t0)2 + ϵ2 .
+We then write
+△=
+1
+2πi
+
+|t−t0|≥δ
+
+γ′(t)
+γ(t) −zϵ
+−
+γ′(t)
+γ(t) −wϵ
+
+dt +
++ 1
+2πi
+
+|t−t0|<δ
+
+2iϵ
+(t −t0)2 + ϵ2 + E(t)
+
+dt.
+The ﬁrst integral goes to 0 as ϵ →0. In the second integral we make the
+change of variables t −t0 = ϵs, and note that
+1
+π
+ ρ
+−ρ
+ds
+s2 + 1 = 1
+π [arctan s]ρ
+−ρ →1
+as ρ →∞.
+We therefore see that letting ϵ →0 gives
+|△−1| < η.
+
+2. The Jordan curve theorem
+361
+We conclude that △= 1, and hence Γc has precisely two components.
+Finally, only one of these components can be unbounded, namely U, and
+the winding number of Γ in this component must therefore be zero. By
+our last result, we see that, after possibly reversing the orientation of the
+curve, the winding number of any point in the bounded component Ωis
+constant and equal to 1. Also, it is clear from what has been said that
+any smooth point on Γ can be approached by points in either component,
+and hence Γ is the boundary of both Ωand U.
+The ﬁnal step in the proof is to show that the interior of the curve,
+that is, the bounded component Ω, is simply connected. By Theorem 1.2
+it suﬃces to show that Ωc is connected. If not, then
+Ωc = F1 ∪F2,
+where F1 and F2 are closed, disjoint, and non-empty. Let
+O1 = U ∩F1
+and
+O2 = U ∩F2.
+Clearly, O1 and O2 are disjoint. If z ∈O1, then z ∈U, and every small
+ball centered at z is contained in U. If every such ball intersects F2,
+then z ∈F2 since F2 is closed. However, F1 and F2 are disjoint, so this
+cannot happen. Consequently, O1 is open, and by the same argument, so
+is O2. Finally, we claim that O1 is non-empty. If not, then F1 is entirely
+contained in Γ and U is contained in F2. Pick any point z ∈F1, which
+we know belongs to Γ. Now every ball centered at z intersects U, hence
+F2. But F2 is closed and disjoint from F1, so we get a contradiction. A
+similar argument for O1 proves that
+U = O1 ∪O2,
+where O1, O2 are disjoint, open, and non-empty. This contradicts the
+fact that U is connected, and concludes the proof of the Jordan curve
+theorem for piecewise-smooth curves.
+2.1 Proof of a general form of Cauchy’s theorem
+Theorem 2.9 If a function f is holomorphic in an open set that con-
+tains a simple closed piecewise-smooth curve Γ and its interior, then
+
+Γ
+f = 0.
+Let O denote an open set on which f is holomorphic, and which con-
+tains Γ and its interior Ω. The idea is to construct a closed curve Λ

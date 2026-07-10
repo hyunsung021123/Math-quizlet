@@ -1,0 +1,405 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.2.1 Examples
+직전 소단원: 「3.1 Zeros and poles」
+[본문]
+76
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+If the pole is of higher order, a similar formula holds, one that involves
+diﬀerentiation as well as taking a limit.
+Theorem 1.4 If f has a pole of order n at z0, then
+resz0f = lim
+z→z0
+1
+(n −1)!
+ d
+dz
+n−1
+(z −z0)nf(z).
+The theorem is an immediate consequence of formula (1), which implies
+(z −z0)nf(z) = a−n + a−n+1(z −z0) + · · · + a−1(z −z0)n−1 +
++G(z)(z −z0)n.
+2 The residue formula
+We now discuss the celebrated residue formula. Our approach follows the
+discussion of Cauchy’s theorem in the last chapter: we ﬁrst consider the
+case of the circle and its interior the disc, and then explain generalizations
+to toy contours and their interiors.
+Theorem 2.1 Suppose that f is holomorphic in an open set containing
+a circle C and its interior, except for a pole at z0 inside C. Then
+
+C
+f(z) dz = 2πi resz0f.
+Proof.
+Once again, we may choose a keyhole contour that avoids the
+pole, and let the width of the corridor go to zero to see that
+
+C
+f(z) dz =
+
+Cϵ
+f(z) dz
+where Cϵ is the small circle centered at the pole z0 and of radius ϵ.
+Now we observe that
+1
+2πi
+
+Cϵ
+a−1
+z −z0
+dz = a−1
+is an immediate consequence of the Cauchy integral formula (Theo-
+rem 4.1 of the previous chapter), applied to the constant function f =
+a−1. Similarly,
+1
+2πi
+
+Cϵ
+a−k
+(z −z0)k dz = 0
+
+2. The residue formula
+77
+when k > 1, by using the corresponding formulae for the derivatives
+(Corollary 4.2 also in the previous chapter).
+But we know that in a
+neighborhood of z0 we can write
+f(z) =
+a−n
+(z −z0)n +
+a−n+1
+(z −z0)n−1 + · · · +
+a−1
+z −z0
++ G(z),
+where G is holomorphic.
+By Cauchy’s theorem, we also know that
+
+Cϵ G(z) dz = 0, hence 
+Cϵ f(z) dz = a−1. This implies the desired re-
+sult.
+This theorem can be generalized to the case of ﬁnitely many poles in
+the circle, as well as to the case of toy contours.
+Corollary 2.2 Suppose that f is holomorphic in an open set containing
+a circle C and its interior, except for poles at the points z1, . . . , zN inside
+C. Then
+
+C
+f(z) dz = 2πi
+N
+
+k=1
+reszkf.
+For the proof, consider a multiple keyhole which has a loop avoiding
+each one of the poles.
+Let the width of the corridors go to zero.
+In
+the limit, the integral over the large circle equals a sum of integrals over
+small circles to which Theorem 2.1 applies.
+Corollary 2.3 Suppose that f is holomorphic in an open set containing
+a toy contour γ and its interior, except for poles at the points z1, . . . , zN
+inside γ. Then
+
+γ
+f(z) dz = 2πi
+N
+
+k=1
+reszkf.
+In the above, we take γ to have positive orientation.
+The proof consists of choosing a keyhole appropriate for the given toy
+contour, so that, as we have seen previously, we can reduce the situation
+to integrating over small circles around the poles where Theorem 2.1
+applies.
+The identity 
+γ f(z) dz = 2πi N
+k=1 reszkf is referred to as the residue
+formula.
+2.1 Examples
+The calculus of residues provides a powerful technique to compute a
+wide range of integrals. In the examples we give next, we evaluate three
+
+78
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+improper Riemann integrals of the form
+ ∞
+−∞
+f(x) dx.
+The main idea is to extend f to the complex plane, and then choose a
+family γR of toy contours so that
+lim
+R→∞
+
+γR
+f(z) dz =
+ ∞
+−∞
+f(x) dx.
+By computing the residues of f at its poles, we easily obtain
+
+γR f(z) dz.
+The challenging part is to choose the contours γR, so that the above limit
+holds. Often, this choice is motivated by the decay behavior of f.
+Example 1. First, we prove that
+(2)
+ ∞
+−∞
+dx
+1 + x2 = π
+by using contour integration. Note that if we make the change of variables
+x 	→x/y, this yields
+1
+π
+ ∞
+−∞
+y dx
+y2 + x2 =
+ ∞
+−∞
+Py(x) dx.
+In other words, formula (2) says that the integral of the Poisson kernel
+Py(x) is equal to 1 for each y > 0.
+This was proved quite easily in
+Lemma 2.5 of Chapter 5 in Book I, since 1/(1 + x2) is the derivative of
+arctan x. Here we provide a residue calculation that leads to another
+proof of (2).
+Consider the function
+f(z) =
+1
+1 + z2 ,
+which is holomorphic in the complex plane except for simple poles at the
+points i and −i. Also, we choose the contour γR shown in Figure 1. The
+contour consists of the segment [−R, R] on the real axis and of a large
+half-circle centered at the origin in the upper half-plane.
+Since we may write
+f(z) =
+1
+(z −i)(z + i)
+
+2. The residue formula
+79
+R
+−R
+γR
+i
+0
+Figure 1. The contour γR in Example 1
+we see that the residue of f at i is simply 1/2i. Therefore, if R is large
+enough, we have
+
+γR
+f(z) dz = 2πi
+2i = π.
+If we denote by C+
+R the large half-circle of radius R, we see that
+
+
+C+
+R
+f(z) dz
+ ≤πR B
+R2 ≤M
+R ,
+where we have used the fact that |f(z)| ≤B/|z|2 when z ∈C+
+R and R is
+large. So this integral goes to 0 as R →∞. Therefore, in the limit we
+ﬁnd that
+ ∞
+−∞
+f(x) dx = π,
+as desired.
+We remark that in this example, there is nothing special
+about our choice of the semicircle in the upper half-plane. One gets the
+same conclusion if one uses the semicircle in the lower half-plane, with
+the other pole and the appropriate residue.
+Example 2. An integral that will play an important role in Chapter 6
+is
+ ∞
+−∞
+eax
+1 + ex dx =
+π
+sin πa,
+0 < a < 1.
+To prove this formula, let f(z) = eaz/(1 + ez), and consider the con-
+tour consisting of a rectangle in the upper half-plane with a side lying
+
+80
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+2πi
+γR
+0
+R
+−R
+πi
+Figure 2. The contour γR in Example 2
+on the real axis, and a parallel side on the line Im(z) = 2π, as shown in
+Figure 2.
+The only point in the rectangle γR where the denominator of f vanishes
+is z = πi. To compute the residue of f at that point, we argue as follows:
+First, note
+(z −πi)f(z) = eaz z −πi
+1 + ez = eaz z −πi
+ez −eπi .
+We recognize on the right the inverse of a diﬀerence quotient, and in fact
+lim
+z→πi
+ez −eπi
+z −πi = eπi = −1
+since ez is its own derivative. Therefore, the function f has a simple pole
+at πi with residue
+resπif = −eaπi.
+As a consequence, the residue formula says that
+(3)
+
+γR
+f = −2πieaπi.
+We now investigate the integrals of f over each side of the rectangle. Let
+IR denote
+ R
+−R
+f(x) dx
+and I the integral we wish to compute, so that IR →I as R →∞. Then,
+it is clear that the integral of f over the top side of the rectangle (with
+
+2. The residue formula
+81
+the orientation from right to left) is
+−e2πiaIR.
+Finally, if AR = {R + it : 0 ≤t ≤2π} denotes the vertical side on the
+right, then
+
+
+AR
+f
+ ≤
+ 2π
+0
+
+ea(R+it)
+1 + eR+it
+ dt ≤Ce(a−1)R,
+and since a < 1, this integral tends to 0 as R →∞. Similarly, the integral
+over the vertical segment on the left goes to 0, since it can be bounded
+by Ce−aR and a > 0. Therefore, in the limit as R tends to inﬁnity, the
+identity (3) yields
+I −e2πiaI = −2πieaπi ,
+from which we deduce
+I = −2πi
+eaπi
+1 −e2πia
+=
+2πi
+eπia −e−πia
+=
+π
+sin πa,
+and the computation is complete.
+Example 3. Now we calculate another Fourier transform, namely
+ ∞
+−∞
+e−2πixξ
+cosh πx dx =
+1
+cosh πξ
+where
+cosh z = ez + e−z
+2
+.
+In other words, the function 1/ coshπx is its own Fourier transform, a
+property also shared by e−πx2 (see Example 1, Chapter 2). To see this,
+we use a rectangle γR as shown on Figure 3 whose width goes to inﬁnity,
+but whose height is ﬁxed.
+For a ﬁxed ξ ∈R, let
+f(z) = e−2πizξ
+cosh πz
+
+82
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+2i
+−R
+R
+γR
+α
+β
+0
+Figure 3. The contour γR in Example 3
+and note that the denominator of f vanishes precisely when eπz = −e−πz,
+that is, when e2πz = −1. In other words, the only poles of f inside the
+rectangle are at the points α = i/2 and β = 3i/2. To ﬁnd the residue of
+f at α, we note that
+(z −α)f(z) = e−2πizξ 2(z −α)
+eπz + e−πz
+= 2e−2πizξeπz
+(z −α)
+e2πz −e2πα .
+We recognize on the right the reciprocal of the diﬀerence quotient for the
+function e2πz at z = α. Therefore
+lim
+z→α(z −α)f(z) = 2e−2πiαξeπα
+1
+2πe2πα = eπξ
+πi ,
+which shows that f has a simple pole at α with residue eπξ/(πi). Simi-
+larly, we ﬁnd that f has a simple pole at β with residue −e3πξ/(πi).
+We dispense with the integrals of f on the vertical sides by showing
+that they go to zero as R tends to inﬁnity. Indeed, if z = R + iy with
+0 ≤y ≤2, then
+|e−2πizξ| ≤e4π|ξ|,
+
+3. Singularities and meromorphic functions
+83
+and
+| cosh πz| =
+
+eπz + e−πz
+2
+
+≥1
+2
+ |eπz| −|e−πz|
+
+≥1
+2(eπR −e−πR)
+→∞
+as R →∞,
+which shows that the integral over the vertical segment on the right goes
+to 0 as R →∞. A similar argument shows that the integral of f over
+the vertical segment on the left also goes to 0 as R →∞. Finally, we see
+that if I denotes the integral we wish to calculate, then the integral of f
+over the top side of the rectangle (with the orientation from right to left)
+is simply −e4πξI where we have used the fact that cosh πζ is periodic
+with period 2i. In the limit as R tends to inﬁnity, the residue formula
+gives
+I −e4πξI = 2πi
+eπξ
+πi −e3πξ
+πi
+
+= −2e2πξ(eπξ −e−πξ),
+and since 1 −e4πξ = −e2πξ(e2πξ −e−2πξ), we ﬁnd that
+I = 2 eπξ −e−πξ
+e2πξ −e−2πξ = 2
+eπξ −e−πξ
+(eπξ −e−πξ)(eπξ + e−πξ) =
+2
+eπξ + e−πξ =
+1
+cosh πξ
+as claimed.
+A similar argument actually establishes the following formula:
+ ∞
+−∞
+e−2πixξ
+sin πa
+cosh πx + cos πa dx = 2 sinh 2πaξ
+sinh 2πξ
+whenever 0 < a < 1, and where sinh z = (ez −e−z)/2. We have proved
+above the particular case a = 1/2. This identity can be used to determine
+an explicit formula for the Poisson kernel for the strip (see Problem 3 in
+Chapter 5 of Book I), or to prove the sum of two squares theorem, as we
+shall see in Chapter 10.
+3 Singularities and meromorphic functions
+Returning to Section 1, we see that we have described the analytical
+character of a function near a pole. We now turn our attention to the
+other types of isolated singularities.

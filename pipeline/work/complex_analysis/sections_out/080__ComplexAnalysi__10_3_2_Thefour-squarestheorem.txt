@@ -1,0 +1,407 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.3.2 The four-squares theorem
+직전 소단원: 「10.3.1 The two-squares theorem」
+[본문]
+304
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+Thus any Un can be obtained by ﬁnitely many applications of T2, S, or
+their inverses. Since f is invariant under T2 and S, it is also invariant
+under Um. So we ﬁnd that
+f(µ−1Tnµ(τ)) = f(τ).
+Therefore, if we let F(τ) = f(µ−1(τ)) = f(1 −1/τ), we ﬁnd that F is
+periodic of period 1, that is,
+F(Tnτ) = F(τ)
+for every integer n.
+Now, by the previous argument, if we set h(z) = F(τ) with z = e2πiτ, we
+see that h has a removable singularity at z = 0, and the desired inequality
+follows by the maximum principle.
+We conclude from this analysis that f attains its maximum in the inte-
+rior of the upper half-plane, and this contradicts the maximum principle.
+The proof of the two-squares theorem is now only one step away.
+We consider the function f(τ) = C(τ)/θ(τ)2. Since we know by the
+product formula that θ(τ) does not vanish in the upper half-plane (Corol-
+lary 1.4), we ﬁnd that f is holomorphic in H.
+Moreover, by Propo-
+sition 3.3, f is invariant under the transformations T2 and S, that is,
+f(τ + 2) = f(τ) and f(−1/τ) = f(τ). Finally, in the fundamental do-
+main F, the function f(τ) is bounded, and in fact tends to 1 as Im(τ)
+tends to inﬁnity, or as τ tends to the cusps ±1. This is because of proper-
+ties (iii) and (iv) in Proposition 3.3, which are veriﬁed by both C and θ2.
+Thus f is bounded in H. The result is that f is a constant, which must
+be 1, proving that θ(τ)2 = C(τ), and with it the two-squares theorem.
+3.2 The four-squares theorem
+Statement of the theorem
+In the rest of this chapter, we shall consider the case of four squares.
+More precisely, we will prove that every positive integer is the sum of
+four squares, and moreover we will determine a formula for r4(n) that
+describes the number of ways this can be done.
+We need to introduce another divisor function, which we denote by
+σ∗
+1(n), and which equals the sum of divisors of n that are not divisible
+by 4. The main theorem we shall prove is the following.
+Theorem 3.6 Every positive integer is the sum of four squares, and
+moreover
+r4(n) = 8σ∗
+1(n)
+for all n ≥1.
+
+3. The theorems about sums of squares
+305
+As before, we relate the sequence {r4(n)} via its generating function
+to an appropriate power of the function θ, which in this case is its fourth
+power. The result is that
+θ(τ)4 =
+∞
+
+n=0
+r4(n)qn
+whenever q = eπiτ with τ ∈H.
+The next step is to ﬁnd the modular function whose equality with
+θ(τ)4 expresses the identity r4(n) = 8σ∗
+1(n). Unfortunately, here there
+is nothing as simple as the function C(τ) that arose in the two-squares
+theorem; instead we shall need to construct a rather subtle variant of the
+Eisenstein series considered in the previous chapter. In fact, we deﬁne
+E∗
+2(τ) =
+
+m
+
+n
+1
+ mτ
+2 + n2 −
+
+m
+
+n
+1
+
+mτ + n
+2
+2
+for τ ∈H. The indicated order of summation is critical, since the above
+series do not converge absolutely. The following reduces the four-squares
+theorem to the modular properties of E∗
+2.
+Proposition 3.7 The assertion r4(n) = 8σ∗
+1(n) is equivalent to the iden-
+tity
+θ(τ)4 = −1
+π2 E∗
+2(τ),
+where τ ∈H.
+Proof.
+It suﬃces to prove that if q = eπiτ, then
+−1
+π2 E∗
+2(τ) = 1 +
+∞
+
+k=1
+8σ∗
+1(k)qk.
+First, recall the forbidden Eisenstein series that we considered in the
+last section of the previous chapter, and which is deﬁned by
+F(τ) =
+
+m
+$
+n
+1
+(mτ + n)2
+%
+,
+where the term n = m = 0 is omitted. Since the sum above is not abso-
+lutely convergent, the order of summation, ﬁrst in n and then in m, is
+crucial. With this in mind, the deﬁnitions of E∗
+2 and F give immediately
+(10)
+E∗
+2(τ) = F
+
+τ
+2
+
+−4F(2τ).
+
+306
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+In Corollary 2.6 (and Exercise 7) of the last chapter, we proved that
+F(τ) = π2
+3 −8π2
+∞
+
+k=1
+σ1(k)e2πikτ,
+where σ1(k) is the sum of the divisors of k.
+Now observe that
+σ∗
+1(n) =
+
+σ1(n)
+if n is not divisible by 4,
+σ1(n) −4σ1(n/4)
+if n is divisible by 4.
+Indeed, if n is not divisible by 4, then no divisors of n are divisible by
+4. If n = 4˜n, and d is a divisor of n that is divisible by 4, say d = 4 ˜d,
+then ˜d divides ˜n. This gives the second formula. Therefore, from this
+observation and (10) we ﬁnd that
+E∗
+2(τ) = −π2 −8π2
+∞
+
+k=1
+σ∗
+1(k)eπikτ,
+and the proof of the proposition is complete.
+We have therefore reduced Theorem 3.6 to the identity θ4 = −π−2E∗
+2,
+and the key to establish this relation is that E∗
+2 satisﬁes the same modular
+properties as θ(τ)4.
+Proposition 3.8 The function E∗
+2(τ) deﬁned in the upper half-plane has
+the following properties:
+(i) E∗
+2(τ + 2) = E∗
+2(τ).
+(ii) E∗
+2(τ) = −τ −2E∗
+2(−1/τ).
+(iii) E∗
+2(τ) →−π2 as Im(τ) →∞.
+(iv) |E∗
+2(1 −1/τ)| = O(|τ 2eπiτ|) as Im(τ) →∞.
+Moreover −π2θ4 has the same properties.
+The periodicity (i) of E∗
+2 is immediate from the deﬁnition. The proofs
+of the other properties of E∗
+2 are a little more involved.
+Consider the forbidden Eisenstein series F and its reverse ˜F, which is
+obtained from reversing the order of summation:
+F(τ) =
+
+m
+
+n
+1
+(mτ + n)2
+and
+˜F(τ) =
+
+n
+
+m
+1
+(mτ + n)2 .
+In both cases, the term n = m = 0 is omitted.
+
+3. The theorems about sums of squares
+307
+Lemma 3.9 The functions F and ˜F satisfy:
+(a) F(−1/τ) = τ 2 ˜F(τ),
+(b) F(τ) −˜F(τ) = 2πi/τ,
+(c) F(−1/τ) = τ 2F(τ) −2πiτ.
+Proof.
+Property (a) follows directly from the deﬁnitions of F and ˜F,
+and the identity
+(n + m(−1/τ))2 = τ −2(−m + nτ)2.
+To prove property (b), we invoke the functional equation for the Dedekind
+eta function which was established earlier:
+η(−1/τ) =
+	
+τ/i η(τ),
+where η(τ) = q1/12 ∞
+n=1(1 −q2n), and q = eπiτ.
+First, we take the logarithmic derivative of η with respect to the vari-
+able τ to ﬁnd (by Proposition 3.2 in Chapter 5)
+(η′/η)(τ) = πi
+12 −2πi
+∞
+
+n=1
+nq2n
+1 −q2n .
+However, if σ1(k) denotes the sum of the divisors of k, then one sees that
+∞
+
+n=1
+nq2n
+1 −q2n =
+∞
+
+n=1
+∞
+
+ℓ=0
+nq2nq2ℓn
+=
+∞
+
+n=1
+∞
+
+m=1
+nq2nm
+=
+∞
+
+k=1
+σ1(k)q2k.
+If we recall that F(τ) = π2/3 −8π2 ∞
+k=1 σ1(k)q2k, we ﬁnd
+(η′/η)(τ) = i
+4π F(τ).
+By the chain rule, the logarithmic derivative of η(−1/τ) is τ −2(η′/η)(−1/τ),
+and using property (a), we see that the logarithmic derivative of η(−1/τ)
+
+308
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+equals (i/4π) ˜F(τ). Therefore, taking the logarithmic derivative of the
+functional equation for η we ﬁnd
+i
+4π
+˜F(τ) = 1
+2τ + i
+4πF(τ),
+and this gives ˜F(τ) = −2πi/τ + F(τ), as desired.
+Finally, (c) is a consequence of (a) and (b).
+To prove the transformation formula (ii) for E∗
+2 under τ 	→−1/τ, we
+begin with
+E∗
+2(τ) = F(τ/2) −4F(2τ).
+Then
+E∗
+2(−1/τ) = F(−1/(2τ)) −4F(−2/τ)
+= [4τ 2F(2τ) −4πiτ] −4[(τ/2)2F(τ/2) −πiτ]
+= 4τ 2F(2τ) −4(τ 2/4)F(τ/2)
+= −τ 2(F(τ/2) −4F(2τ))
+= −τ 2E∗
+2(τ),
+as desired. To prove the third property recall that
+F(τ) = π2
+3 −8π2
+∞
+
+k=1
+σ1(k)e2πikτ,
+where the sum goes to 0 as Im(τ) →∞. Then, if we use the fact that
+E∗
+2(τ) = F(τ/2) −4F(2τ),
+we conclude that E∗
+2(τ) →−π2 as Im(τ) →∞.
+To prove the ﬁnal property, we begin by showing that
+(11)
+E∗
+2(1 −1/τ) = τ 2
+
+F
+τ −1
+2
+
+−F(τ/2)
+
+.
+From the transformation formulas for F we have
+F(1/2 −1/2τ) = F
+τ −1
+2τ
+
+=
+ 2τ
+τ −1
+2
+F
+ 2τ
+1 −τ
+
+−2πi 2τ
+1 −τ ,
+
+4. Exercises
+309
+and
+F
+ 2τ
+1 −τ
+
+= F(−2 + 2/(1 −τ))
+= F(2/(1 −τ))
+=
+1 −τ
+2
+2
+F
+τ −1
+2
+
+−2πi
+τ −1
+2
+
+.
+Hence,
+F(1/2 −1/2τ) = τ 2F
+τ −1
+2
+
+−2πi2τ
+1 −τ −2πi (2τ)2
+(τ −1)2
+τ −1
+2
+
+.
+But F(2 −2/τ) = F(−2/τ) = (τ 2/4)F(τ/2) −2πiτ/2, and hence
+E∗
+2(1 −1/τ) = F(1/2 −1/2τ) −4F(2 −2/τ)
+= τ 2
+
+F
+τ −1
+2
+
+−F(τ/2)
+
+−2πi
+ 2τ
+1 −τ + 2τ 2
+τ −1
+
++ 4πiτ
+= τ 2
+
+F
+τ −1
+2
+
+−F(τ/2)
+
+.
+This proves (11). Then, the last property follows from it and the fact
+that
+F(τ) = π2
+3 −8π2
+∞
+
+k=1
+σ1(k)e2πikτ.
+Thus Proposition 3.8 is proved.
+We can now conclude the proof of the four-squares theorem by consid-
+ering the quotient f(τ) = E∗
+2(τ)/θ(τ)4, and applying Theorem 3.4, as in
+the two-squares theorem. Recall θ(τ)4 →1 and θ(1 −1/τ)4 ∼16τ 2eπiτ,
+as Im(τ) →∞. The result is that f(τ) is a constant, which equals −π2 by
+Proposition 3.8. This completes the proof of the four-squares theorem.
+4 Exercises
+1. Prove that
+(Θ′(z|τ))2 −Θ(z|τ)Θ′′(z|τ)
+Θ(z|τ)2
+= ℘τ(z −1/2 −τ/2) + cτ,
+where cτ can be expressed in terms of the ﬁrst two derivatives of Θ(z|τ), with
+respect to z, at z = 1/2 + τ/2. Compare this formula with the result in Exercise 5
+in the previous chapter.

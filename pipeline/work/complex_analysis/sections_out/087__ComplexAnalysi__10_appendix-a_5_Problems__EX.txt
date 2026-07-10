@@ -1,0 +1,310 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.appendix-a.5 Problems
+직전 소단원: 「10.appendix-a.4 The partition function」
+[연습문제]
+5. Problems
+341
+Now cos θ = 1 −2(sin θ/2)2, so setting x = sin(θ/2) we see that the
+above integral becomes
+µ1/2e2s
+π
+
+√
+2
+2
+−
+√
+2
+2
+e−4sx2 dx.
+However
+
+√
+2
+2
+−
+√
+2
+2
+e−4sx2 dx =
+ ∞
+−∞
+e−4sx2 dx + O
+ ∞
+√
+2
+2
+e−4sx2 dx
+
+=
+√π
+2s1/2 + O(e−2s),
+and also
+d
+ds
+
+√
+2
+2
+−
+√
+2
+2
+e−4sx2 dx
+
+= d
+ds
+ √π
+2s1/2
+
++ O(e−2s).
+Gathering all the error terms together, we ﬁnd
+p(n) = d
+dn
+
+µ1/2 e2s
+π
+√π
+2s1/2
+
++ O(e
+K
+2 n1/2).
+Since s =
+π
+√
+6(n −1
+24)1/2, µ =
+√
+6
+12 (n −1
+24)−1/2, and K = π
+&
+2
+3, this is
+p(n) =
+1
+2π
+√
+2
+d
+dn
+
+eK(n−1
+24 )1/2
+(n −1
+24)1/2
+
++ O(e
+K
+2 n1/2),
+and the theorem is proved.
+5 Problems
+1. Let η be an indeﬁnitely diﬀerentiable function supported in a ﬁnite interval, so
+that η(x) = 1 for x near 0. Then, if m > −1 and N > 0,
+ ∞
+0
+e−sxxmη(x) dx = s−m−1Γ(m + 1) + O(s−N)
+for Re(s) ≥0, |s| →∞.
+(a) Consider ﬁrst the case −1 < m ≤0. It suﬃces to see that
+ ∞
+0
+e−sxxm(1 −η(x)) dx = O(s−N),
+and
+this
+can
+be
+done
+by
+repeated
+integration
+by
+parts
+since
+e−sx = (−1)Ns−N  d
+dx
+N (e−sx).
+
+342
+Appendix A: ASYMPTOTICS
+(b) To extend this to all m, ﬁnd an integer k so that k −1 < m ≤k, write
+ $ d
+dx
+k
+(xm)
+%
+e−sxη(x) dx = ck,ms−m+k−1 + O(s−N),
+and integrate by parts k times.
+2. The following is a more precise version of Stirling’s formula. There are real
+constant a1 = 1/12, a2, . . ., an, . . ., so that for every N > 0
+Γ(s) = es log se−s
+√
+2π
+s1/2
+
+1 +
+N
+
+j=1
+ajs−j + O(s−N)
+
+when s ∈Sδ.
+This can be proved by using the results of Problem 1 in place of Proposition 1.3.
+3. The Bessel functions and Airy function have the following power series expan-
+sions:
+Jν(x) =
+
+ x
+2
+ν
+∞
+
+m=0
+(−1)m 
+x2
+4
+m
+m!Γ(ν + m + 1) ,
+Ai(−x)= 1
+π
+∞
+
+n=0
+xn
+n! sin(2π(n + 1)/3)3n/3−2/3Γ(n/3 + 1/3).
+(a) From this, verify that when x > 0,
+Ai(−x) = x1/2
+3
+
+J1/3
+2
+3x3/2
+
++ J−1/3
+2
+3x3/2
+
+.
+(b) The function Ai(x) extends to an entire function of order 3/2.
+[Hint: For (b), use (a), or alternatively, apply Problem 4 in Chapter 5 to the power
+series for Ai. Compare also with Problem 1, Chapter 4.]
+4. Suppose F(z) = ∞
+n=0 Fnwn is meromorphic in a region containing the closed
+unit disc, and the only poles of F are on the unit circle at the points α1, . . . , αk,
+and their orders are r1, . . . , rk respectively. Then for some ϵ > 0
+Fn =
+k
+
+j=1
+Pj(n) + O(e−ϵn)
+as n →∞.
+Here
+Pj(n) =
+1
+(rj −1)!
+ d
+dw
+rj−1 
+(w −αj)rjw−n−1F(w)
+
+w=αj .
+
+5. Problems
+343
+Note that each Pj is of the form Pj(n) = Aj(α−1
+j n)rj−1 + O(nrj −2).
+To prove this, use the residue formula (Theorem 1.4, Chapter 3).
+5.∗The one shortcoming in our derivation of the asymptotic formula for p(n) arose
+from the fact that while f1(z) =
+	
+z/i e
+iπ
+12z e
+iπz
+12
+is a good approximation to the
+generating function f(z) near z = 0, this fails near other points on the real axis,
+since f1 is regular there, but f is not.
+However, using the transformation law (24) and the identity f(z + 1) = f(z),
+one can derive the following generalization of (24): whenever p/q is a rational
+number in lowest form (so p and q are relatively prime) then
+f
+
+z −p
+q
+
+= ωp/q
+!
+zq
+i
+e
+iπ
+12zq2 e−iπz
+12 f
+
+−1
+zq2 −p′
+q
+
+,
+where pp′ = 1 mod q. Here ωp/q is an appropriate 24th root of unity. This formula
+leads to an analogous fp/q, approximating f at z = p/q.
+From this one can obtain for each p/q a contribution of the form
+cp/q
+1
+2π
+√
+2
+d
+dn
+
+e
+K
+q (n−1
+24 )1/2
+(n −
+1
+24)1/2
+
+to the asymptotic formula for p(n). When suitably modiﬁed, the resulting series,
+summed over all proper fractions p/q in [0, 1), actually converges and gives an
+exact formula for p(n).
+
+Appendix B: Simple Connectivity
+and Jordan Curve Theorem
+Jordan was one of the precursors of the theory of func-
+tions of a real variable. He introduced in this part of
+analysis the capital notion of functions of bounded
+variation. Not less celebrated is his study of curves,
+universally called Jordan curves, which curves sepa-
+rate the plane in two distinct regions. We also owe
+him important propositions regarding the measure of
+sets that have led the way to numerous modern re-
+searches.
+E. Picard, 1922
+The notion of simple connectivity is at the source of many basic and
+fundamental results in complex analysis. To clarify the meaning of this
+important concept, we have gathered in this appendix some further in-
+sights into the properties of simply connected sets. Closely tied to the
+idea of simple connectivity is the notion of the “interior” of a simple
+closed curve. The theorem of Jordan states that this interior is well-
+deﬁned and is simply connected. We prove here the special case of this
+theorem for curves which are piecewise-smooth.
+Recall the deﬁnition in Chapter 3, according to which a region Ωis
+simply connected if any two curves in Ωwith the same end-points are
+homotopic.
+From this deﬁnition we deduced an important version of
+Cauchy’s theorem which states that if Ωis simply connected and γ ⊂Ω
+is any closed curve, then
+(1)
+
+γ
+f(ζ) dζ = 0
+whenever f is holomorphic in Ω. Here, we shall prove that a converse
+also holds, therefore:
+(I) A region Ωis simply connected if and only if it is holomorphi-
+cally simply connected; that is, whenever γ ⊂Ωis closed and f
+holomorphic in Ωthen (1) holds.
+Besides this fundamental equivalence, which is analytic in nature, there

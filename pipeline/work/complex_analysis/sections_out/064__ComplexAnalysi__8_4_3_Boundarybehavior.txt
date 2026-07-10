@@ -1,0 +1,210 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.4.3 Boundary behavior
+직전 소단원: 「8.4.2 The Schwarz-Christoffel integral」
+[본문]
+238
+Chapter 8. CONFORMAL MAPPINGS
+4.3 Boundary behavior
+In what follows we shall consider a polygonal region P, namely a
+bounded, simply connected open set whose boundary is a polygonal line
+p. In this context, we always assume that the polygonal line is closed,
+and we sometimes refer to p as a polygon.
+To study conformal maps from the half-plane H to P, we consider ﬁrst
+the conformal maps from the disc D to P, and their boundary behavior.
+Theorem 4.2 If F : D →P is a conformal map, then F extends to a
+continuous bijection from the closure D of the disc to the closure P of
+the polygonal region. In particular, F gives rise to a bijection from the
+boundary of the disc to the boundary polygon p.
+The main point consists in showing that if z0 belongs to the unit circle,
+then limz→z0 F(z) exists. To prove this, we need a preliminary result,
+which uses the fact that if f : U →f(U) is conformal, then
+Area(f(U)) =
+ 
+U
+|f ′(z)|2 dx dy.
+This assertion follows from the deﬁnition, Area(f(U)) =
+
+f(U) dx dy,
+and the fact that the determinant of the Jacobian in the change of vari-
+ables w = f(z) is simply |f ′(z)|2, an observation we made in equation (4),
+Section 2.2, Chapter 1.
+Lemma 4.3 For each 0 < r < 1/2, let Cr denote the circle centered at
+z0 of radius r.
+Suppose that for all suﬃciently small r we are given
+two points zr and z′
+r in the unit disc that also lie on Cr.
+If we let
+ρ(r) = |f(zr) −f(z′
+r)|, then there exists a sequence {rn} of radii that
+tends to zero, and such that limn→∞ρ(rn) = 0.
+Proof.
+If not, there exist 0 < c and 0 < R < 1/2 such that c ≤ρ(r)
+for all 0 < r ≤R. Observe that
+f(zr) −f(z′
+r) =
+
+α
+f ′(ζ) dζ,
+where the integral is taken over the arc α on Cr that joins zr and z′
+r in
+D. If we parametrize this arc by z0 + reiθ with θ1(r) ≤θ ≤θ2(r), then
+ρ(r) ≤
+ θ2(r)
+θ1(r)
+|f ′(z)|r dθ.
+
+4. Conformal mappings onto polygons
+239
+We now apply the Cauchy-Schwarz inequality to see that
+ρ(r) ≤
+ θ2(r)
+θ1(r)
+|f ′(z)|2r dθ
+1/2  θ2(r)
+θ1(r)
+r dθ
+1/2
+.
+Squaring both sides and dividing by r yields
+ρ(r)2
+r
+≤2π
+ θ2(r)
+θ1(r)
+|f ′(z)|2r dθ.
+We may now integrate both sides from 0 to R, and since c ≤ρ(r) on that
+region we obtain
+c2
+ R
+0
+dr
+r ≤2π
+ R
+0
+ θ2(r)
+θ1(r)
+|f ′(z)|2r dθdr ≤2π
+ 
+D
+|f ′(z)|2 dxdy.
+Now the left-hand side is inﬁnite because 1/r is not integrable near the
+origin, and the right-hand side is bounded because the area of the polyg-
+onal region is bounded, so this yields the desired contradiction and con-
+cludes the proof of the lemma.
+Lemma 4.4 Let z0 be a point on the unit circle. Then F(z) tends to a
+limit as z approaches z0 within the unit disc.
+Proof.
+If not, there are two sequences {z1, z2, . . .} and {z′
+1, z′
+2, . . .}
+in the unit disc that converge to z0 and are so that F(zn) and F(z′
+n)
+converge to two distinct points ζ and ζ′ in the closure of P. Since F
+is conformal, the points ζ and ζ′ must lie on the boundary p of P. We
+may therefore choose two disjoint discs D and D′ centered at ζ and ζ′,
+respectively, that are at a distance d > 0 from each other. For all large
+n, F(zn) ∈D and F(z′
+n) ∈D′.
+Therefore, there exist two continuous
+curves8 Λ and Λ′ in D ∩P and D′ ∩P, respectively, with F(zn) ∈Λ and
+F(z′
+n) ∈Λ′ for all large n, and with the end-points of Λ and Λ′ equal to
+ζ and ζ′, respectively.
+Deﬁne λ = F −1(Λ) and λ′ = F −1(Λ′). Then λ and λ′ are two continu-
+ous curves in D. Moreover, both λ and λ′ contain inﬁnitely many points
+in each sequence {zn} and {z′
+n}. Recall that these sequences converge to
+z0. By continuity, the circle Cr centered at z0 and of radius r will inter-
+sect λ and λ′ for all small r, say at some points zr ∈λ and z′
+r ∈λ′. This
+8By a continuous curve, we mean the image of a continuous (not necessarily piecewise-
+smooth) function from a closed interval [a, b] to C.
+
+240
+Chapter 8. CONFORMAL MAPPINGS
+z0
+Cr
+λ′
+λ
+D
+ζ′
+Λ′
+Λ
+P
+D′
+D
+ζ
+zr
+z′
+r
+Figure 7. Illustration for the proof of Lemma 4.4
+contradicts the previous lemma, because |F(zr) −F(z′
+r)| > d. Therefore
+F(z) converges to a limit on p as z approaches z0 from within the unit
+disc, and the proof is complete.
+Lemma 4.5 The conformal map F extends to a continuous function
+from the closure of the disc to the closure of the polygon.
+Proof.
+By the previous lemma, the limit
+lim
+z→z0 F(z)
+exists, and we deﬁne F(z0) to be the value of this limit.
+There re-
+mains to prove that F is continuous on the closure of the unit disc.
+Given ϵ, there exists δ such that whenever z ∈D and |z −z0| < δ, then
+|F(z) −F(z0)| < ϵ.
+Now if z belongs to the boundary of D and
+|z −z0| < δ, then we may choose w such that |F(z) −F(w)| < ϵ and
+|w −z0| < δ. Therefore
+|F(z) −F(z0)| ≤|F(z) −F(w)| + |F(w) −F(z0)| < 2ϵ,
+and the lemma is established.
+We may now complete the proof of the theorem. We have shown that
+F extends to a continuous function from D to P. The previous argument
+can be applied to the inverse G of F. Indeed, the key geometric property
+of the unit disc that we used was that if z0 belongs to the boundary of
+D, and C is any small circle centered at z0, then C ∩D consists of an
+arc. Clearly, this property also holds at every boundary point of the
+
+4. Conformal mappings onto polygons
+241
+polygonal region P. Therefore, G also extends to a continuous function
+from P to D. It suﬃces to now prove that the extensions of F and G
+are inverses of each other. If z ∈∂D and {zk} is a sequence in the disc
+that converges to z, then G(F(zk)) = zk, so after taking the limit and
+using the fact that F is continuous, we conclude that G(F(z)) = z for all
+z ∈D. Similarly, F(G(w)) = w for all w ∈P, and the theorem is proved.
+The circle of ideas used in this proof can be used to prove more general
+theorems on the boundary continuity of conformal maps. See Exercise 18
+and Problem 6 below.
+4.4 The mapping formula
+Suppose P is a polygonal region bounded by a polygon p whose vertices
+are ordered consecutively a1, a2, . . . , an, and with n ≥3. We denote by
+παk the interior angle at ak, and deﬁne the exterior angle πβk by αk +
+βk = 1. A simple geometric argument provides n
+k=1 βk = 2.
+We shall consider conformal mappings of the half-plane H to P, and
+make use of the results of the previous section regarding conformal maps
+from the disc D to P. The standard correspondences w = (i −z)/(i + z),
+z = i(1 −w)/(1 + w) allows us to go back and forth between z ∈H and
+w ∈D. Notice that the boundary point w = −1 of the circle corresponds
+to the point at inﬁnity on the line, and so the conformal map of H to
+D extends to a continuous bijection of the boundary of H, which for the
+purpose of this discussion includes the point at inﬁnity.
+Let F be a conformal map from H to P. (Its existence is guaranteed by
+the Riemann mapping theorem and the previous discussion.) We assume
+ﬁrst that none of the vertices of p correspond to the point at inﬁnity.
+Therefore, there are real numbers A1, A2, . . . , An so that F(Ak) = ak for
+all k. Since F is continuous and injective, and the vertices are numbered
+consecutively, we may conclude that the Ak’s are in either increasing
+or decreasing order. After relabeling the vertices ak and the points Ak,
+we may assume that A1 < A2 < · · · < An. These points divide the real
+line into n −1 segments [Ak, Ak+1], 1 ≤k ≤n −1, and the segment that
+consists of the join of the two half-segments (−∞, A1] ∪[An, ∞). These
+are mapped bijectively onto the corresponding sides of the polygon, that
+is, the segments [ak, ak+1], 1 ≤k ≤n −1, and [an, a1] (see Figure 8).
+Theorem 4.6 There exist complex numbers c1 and c2 so that the con-
+formal map F of H to P is given by
+F(z) = c1S(z) + c2
+where S is the Schwarz-Christoﬀel integral introduced in Section 4.2.

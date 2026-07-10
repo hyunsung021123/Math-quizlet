@@ -1,0 +1,428 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.appendix-a.2 Laplace’s method; Stirling’s formula
+직전 소단원: 「10.appendix-a.1 Bessel functions」
+[본문]
+2. Laplace’s method; Stirling’s formula
+323
+However, we now have
+ a
+0
+e−sxxm dx =
+ ∞
+0
+e−sxxm dx −
+ ∞
+a
+e−sxxm dx.
+It is clear from (7), and from the fact that m < 0, that if we let N →∞,
+then
+ ∞
+a e−sxxm−1 dx = O(1/|s|). The proposition if therefore proved.
+Note. If one wants to obtain a better error term in Proposition 1.3,
+or for that matter extend the range of m, then one needs to mitigate the
+eﬀect of the contribution of the end-point x = a. This can be done by
+introducing suitable smooth cut-oﬀs. See Problem 1.
+2 Laplace’s method; Stirling’s formula
+We have already mentioned that when Φ is real-valued, the main contri-
+bution to  b
+a e−sΦ(x) dx as s →∞comes from the point where Φ takes its
+minimum value. A situation where this minimum is attained at one of
+the end-points, a or b, was considered in Proposition 1.2. We now turn
+to the important case when the minimum is achieved in the interior of
+[a, b].
+Consider
+ b
+a
+e−sΦ(x)ψ(x) dx
+where the phase Φ is real-valued, and both it and the amplitude ψ
+are assumed for simplicity to be indeﬁnitely diﬀerentiable. Our hypoth-
+esis regarding the minimum of Φ is that there is an x0 ∈(a, b) so that
+Φ′(x0) = 0, but Φ′′(x0) > 0 throughout [a, b] (Figure 2 illustrates the
+situation.)
+Proposition 2.1 Under the above assumptions, with s > 0 and s →∞,
+(8)
+ b
+a
+e−sΦ(x)ψ(x) dx = e−sΦ(x0)
+ A
+s1/2 + O
+1
+s
+
+,
+where
+A =
+√
+2π
+ψ(x0)
+(Φ′′(x0))1/2 .
+Proof.
+By replacing Φ(x) by Φ(x) −Φ(x0) we may assume that
+Φ(x0) = 0. Since Φ′(x0) = 0, we note that
+Φ(x)
+(x −x0)2 = Φ′′(x0)
+2
+ϕ(x),
+
+324
+Appendix A: ASYMPTOTICS
+Φ(x)
+a
+b
+x0
+Figure 2. The function Φ, with its minimum at x0
+where ϕ is smooth, and ϕ(x) = 1 + O(x −x0) as x →x0. We can there-
+fore make the smooth change of variables x 	→y = (x −x0)(ϕ(x))1/2 in
+a small neighborhood of x = x0, and observe that dy/dx|x0 = 1, and
+thus dx/dy = 1 + O(y) as y →0. Moreover, we have ψ(x) = ˜ψ(y) with
+˜ψ(y) = ψ(x0) + O(y) as y →0. Hence if [a′, b′] is a suﬃciently small in-
+terval containing x0 in its interior, by making the indicated change of
+variables we obtain
+(9)
+ b′
+a′ e−sΦ(x)ψ(x) dx = ψ(x0)
+ β
+α
+e−s Φ′′(x0)
+2
+y2dy + O
+ β
+α
+e−s Φ′′(x0)
+2
+y2|y|dy
+
+,
+where α < 0 < β. We now make the further change of variables y2 = X,
+dy = 1
+2X−1/2 dX, and we see by (5) that the ﬁrst integral on the right-
+hand side in (9) is
+ a0
+0
+e−s Φ′′(x0)
+2
+XX−1/2 dX + O(e−δs) = s−1/2
+
+2π
+Φ′′(x0)
+1/2
++ O(e−δs),
+for some δ > 0. By the same argument, the second integral is O(1/s).
+What remains are the integrals of e−sΦ(x)ψ(x) over [a, a′] and [b′, b]; but
+these integrals decay exponentially as s →∞, since Φ(x) ≥c > 0 in these
+two sub-intervals. Altogether, this establishes (8) and the proposition.
+It is important to realize that the asymptotic relation (8) extends to
+all complex s with Re(s) ≥0. The proof, however, requires a somewhat
+diﬀerent argument: here we must take into account the oscillations of
+e−sΦ(x) when |s| is large but Re(s) is small, and this is achieved by a
+simple integration by parts.
+
+2. Laplace’s method; Stirling’s formula
+325
+Proposition 2.2 With the same assumptions on Φ and ψ, the rela-
+tion (8) continues to hold if |s| →∞with Re(s) ≥0.
+Proof.
+We proceed as before to the equation (9), and obtain the
+appropriate asymptotic for the ﬁrst term, by virtue of Proposition 1.3,
+with m = −1/2. To deal with the rest we start with an observation. If Ψ
+and ψ are given on an interval [a, b], are indeﬁnitely diﬀerentiable, and
+Ψ(x) ≥0, while |Ψ′(x)| ≥c > 0, then if Re(s) ≥0,
+(10)
+ b
+a
+e−sΨ(x)ψ(x) dx = O
+ 1
+|s|
+
+as |s| →∞.
+Indeed, the integral equals
+−1
+s
+ b
+a
+d
+dx
+
+e−sΨ(x) ψ(x)
+Ψ′(x) dx,
+which by integration by parts gives
+1
+s
+ b
+a
+e−sΨ(x) d
+dx
+ ψ(x)
+Ψ′(x)
+
+dx −1
+s
+
+e−sΨ(x) ψ(x)
+Ψ′(x)
+b
+a
+.
+The assertion (10) follows immediately since |e−sΨ(x)| ≤1,
+when
+Re(s) ≥0. This allows us to deal with the integrals of e−sΦ(x)ψ(x) in
+the complementary intervals [a, a′] and [b′, b], because in each, |Φ′(x)| ≥
+c > 0, since Φ′(x0) = 0 and Φ′′(x) ≥c1 > 0.
+Finally, for the second term on the right-hand side of (9) we observe
+that it is actually of the form
+ β
+α
+e−s Φ′′(x0)
+2
+y2yη(y) dy,
+where η(y) is diﬀerentiable. Then we can again estimate this term by
+integration by parts, once we write it as
+−
+1
+sΦ′′(x0)
+ β
+α
+d
+dy
+
+e−s Φ′′(x0)
+2
+y2
+η(y) dy,
+obtaining the bound O(1/|s|).
+The special case of Proposition 2.2 when s is purely imaginary, s = it,
+t →±∞, is often treated separately; the argument in this situation is
+
+326
+Appendix A: ASYMPTOTICS
+usually referred to as the method of stationary phase. The points x0
+for which Φ′(x0) = 0 are called the critical points.
+Our ﬁrst application will be to the asymptotic behavior of the gamma
+function Γ, given by Stirling’s formula. This formula will be valid in any
+sector of the complex plane that omits the negative real axis. For any
+δ > 0 we set Sδ = {s : | arg s| ≤π −δ}, and denote by log s the principal
+branch of the logarithm that is given in the plane slit along the negative
+real axis.
+Theorem 2.3 If |s| →∞with s ∈Sδ, then
+(11)
+Γ(s) = es log se−s
+√
+2π
+s1/2
+
+1 + O
+
+1
+|s|1/2
+
+.
+Remark. With a little extra eﬀort one can improve the error term to
+O(1/|s|), and in fact obtain a complete asymptotic expansion in pow-
+ers of 1/s; see Problem 2.
+Also, we note that (11) implies Γ(s) ∼
+√
+2πss−1/2e−s, which is how Stirling’s formula is often stated.
+To prove the theorem we ﬁrst establish (11) in the right half-plane. We
+shall show that the formula holds whenever Re(s) > 0, and in addition
+that the error term is uniform on the closed half-plane, once we omit a
+neighborhood of the origin (say |s| < 1). To see this, start with s > 0,
+and write
+Γ(s) =
+ ∞
+0
+e−xxs dx
+x =
+ ∞
+0
+e−x+s log x dx
+x .
+Upon making the change of variables x 	→sx, the above equals
+ ∞
+0
+e−sx+s log sx dx
+x = es log se−s
+ ∞
+0
+e−sΦ(x) dx
+x ,
+where Φ(x) = x −1 −log x. By analytic continuation this identity con-
+tinues to hold, and we have when Re(s) > 0,
+Γ(s) = es log se−sI(s)
+with
+I(s) =
+ ∞
+0
+e−sΦ(x) dx
+x .
+It now suﬃces to see that
+(12)
+I(s) =
+√
+2π
+s1/2 + O
+ 1
+|s|
+
+for
+Re(s) > 0.
+
+2. Laplace’s method; Stirling’s formula
+327
+Observe
+ﬁrst
+that
+Φ(1) = Φ′(1) = 0,
+Φ′′(x) = 1/x2 > 0
+whenever
+0 < x < ∞, and Φ′′(1) = 1. Thus Φ is convex, attains its minimum at
+x = 1, and is positive.
+We apply the complex version of the Laplace method, Proposition 2.2,
+in this situation.
+Here the critical point is x0 = 1 and ψ(x) = 1/x.
+We choose for convenience the interval [a, b] to be [1/2, 2].
+Then for
+ b
+a e−sΦ(x)ψ(x) dx we get the asymptotic (12). It remains to bound the
+error terms, those corresponding to integration over [0, 1/2], and [2, ∞).
+Here the device of integration by parts, which has served us so well, can
+be applied again. Indeed, since Φ′(x) = 1 −1/x, we have
+ 1/2
+ϵ
+e−sΦ(x) dx
+x = −1
+s
+ 1/2
+ϵ
+d
+dx
+
+e−sΦ(x)
+dx
+Φ′(x)x
+= −1
+s
+e−sΦ(x)
+x −1
+1/2
+ϵ
+−1
+s
+ 1/2
+ϵ
+e−sΦ(x)
+dx
+(x −1)2 .
+Noting that Φ(ϵ) →+∞as ϵ →0, and |e−sΦ(x)| ≤1, we ﬁnd in the limit
+that
+ 1/2
+0
+e−sΦ(x) dx
+x = 2
+se−sΦ(1/2) −1
+s
+ 1/2
+0
+e−sΦ(x)
+dx
+(x −1)2 .
+Thus the left-hand side is O(1/|s|) in the half-plane Re(s) ≥0.
+The integral
+ ∞
+2
+e−sΦ(x) dx
+x is treated analogously, once we note that
+ ∞
+2 (x −1)−2 dx converges.
+Since these estimates are uniform, (12) and thus (11) are proved for
+Re(s) ≥0, |s| →∞.
+To pass from Re(s) ≥0 to Re(s) ≤0, s ∈Sδ, we record the following
+fact about the principal branch of log s: whenever Re(s) ≥0, s = σ + it,
+t̸ = 0, then
+log(−s) =
+
+log s −iπ
+if t > 0,
+log s + iπ
+if t < 0.
+Hence if G(s) = es log se−s, Re(s) ≥0, t̸ = 0, then
+(13)
+G(−s)−1 =
+
+es log se−se−siπ
+if t > 0,
+es log se−sesiπ
+if t < 0.
+Next,
+(14)
+Γ(s)Γ(−s) =
+π
+−s sin πs,
+
+328
+Appendix A: ASYMPTOTICS
+which
+follows
+from
+the
+fact
+that
+Γ(s)Γ(1 −s) = π/ sin πs,
+and
+Γ(1 −s) = −sΓ(−s) (see Theorem 1.4 and Lemma 1.2 in Chapter 6).
+The combination of (13) and (14), together with the fact that for large
+s, 
+1 + O(1/|s|1/2)−1 = 1 + O(1/|s|1/2), allows us then to extend (11)
+to the whole sector Sδ, thereby completing the proof of the theorem.
+3 The Airy function
+The Airy function appeared ﬁrst in optics, and more precisely, in the
+analysis of the intensity of light near a caustic; it was an important early
+instance in the study of asymptotics of integrals, and it continues to arise
+in a number of other problems. The Airy function Ai is deﬁned by
+(15)
+Ai(s) = 1
+2π
+ ∞
+−∞
+ei(x3/3+sx) dx,
+with s ∈R.
+Let us ﬁrst see that because of the rapid oscillations of the integrand as
+|x| →∞, the integral converges and represents a continuous function of
+s. In fact, note that
+1
+i(x2 + s)
+d
+dx
+
+ei(x3/3+sx)
+= ei(x3/3+sx),
+so if a ≥2|s|1/2, we can write the integral  R
+a ei(x3/3+sx) dx as
+(16)
+ R
+a
+1
+i(x2 + s)
+d
+dx
+
+ei(x3/3+sx)
+dx.
+We may now integrate by parts and let R →∞, to see that the integral
+converges uniformly, and that as a result
+ ∞
+a ei(x3/3+sx) dx is also con-
+tinuous for |s| ≤a2/4. The same argument works for the integral from
+−∞to −a and our assertion regarding Ai(s) is established.
+A better insight into Ai(s) is given by deforming the contour of inte-
+gration in (15). A choice of an optimal contour will appear below, but
+for now let us notice that as soon as we replace the x-axis of integration
+in (15) by the parallel line Lδ = {x + iδ, x ∈R}, δ > 0, matters improve
+dramatically.
+In fact, we may apply the Cauchy theorem to f(z) = ei(z3/3+sz) over
+the rectangle γR shown in Figure 3.
+One observes that f(z) = O(e−δx2) on Lδ, while f(z) = O(e−yR2) on
+the vertical sides of the rectangle.
+Thus since  δ
+0 e−yR2 dy →0 as

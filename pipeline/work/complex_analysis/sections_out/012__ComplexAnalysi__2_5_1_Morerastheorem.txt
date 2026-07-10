@@ -1,0 +1,51 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.5.1 Morera’s theorem
+직전 소단원: 「2.4 Cauchy’s integral formulas」
+[본문]
+5. Further applications
+53
+Suppose we are given a pair of functions f and F analytic in regions
+Ωand Ω′, respectively, with Ω⊂Ω′. If the two functions agree on the
+smaller set Ω, we say that F is an analytic continuation of f into the
+region Ω′. The corollary then guarantees that there can be only one such
+analytic continuation, since F is uniquely determined by f.
+5 Further applications
+We gather in this section various consequences of the results proved so
+far.
+5.1 Morera’s theorem
+A direct application of what was proved here is a converse of Cauchy’s
+theorem.
+Theorem 5.1 Suppose f is a continuous function in the open disc D
+such that for any triangle T contained in D
+
+T
+f(z) dz = 0,
+then f is holomorphic.
+Proof.
+By the proof of Theorem 2.1 the function f has a primitive F
+in D that satisﬁes F ′ = f. By the regularity theorem, we know that F
+is indeﬁnitely (and hence twice) complex diﬀerentiable, and therefore f
+is holomorphic.
+5.2 Sequences of holomorphic functions
+Theorem 5.2 If {fn}∞
+n=1 is a sequence of holomorphic functions that
+converges uniformly to a function f in every compact subset of Ω, then
+f is holomorphic in Ω.
+Proof.
+Let D be any disc whose closure is contained in Ωand T
+any triangle in that disc. Then, since each fn is holomorphic, Goursat’s
+theorem implies
+
+T
+fn(z) dz = 0
+for all n.
+By assumption fn →f uniformly in the closure of D, so f is continuous
+and
+
+T
+fn(z) dz →
+
+T
+f(z) dz.

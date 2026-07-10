@@ -1,0 +1,49 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 1. Preliminaries to Complex Analysis
+현재 소단원: 1.2.1 Continuous functions
+직전 소단원: 「1.1.3 Sets in the complex plane」
+[본문]
+8
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+2 Functions on the complex plane
+2.1 Continuous functions
+Let f be a function deﬁned on a set Ωof complex numbers. We say that
+f is continuous at the point z0 ∈Ωif for every ϵ > 0 there exists δ > 0
+such that whenever z ∈Ωand |z −z0| < δ then |f(z) −f(z0)| < ϵ. An
+equivalent deﬁnition is that for every sequence {z1, z2, . . .} ⊂Ωsuch that
+lim zn = z0, then lim f(zn) = f(z0).
+The function f is said to be continuous on Ωif it is continuous at
+every point of Ω. Sums and products of continuous functions are also
+continuous.
+Since the notions of convergence for complex numbers and points in
+R2 are the same, the function f of the complex argument z = x + iy is
+continuous if and only if it is continuous viewed as a function of the two
+real variables x and y.
+By the triangle inequality, it is immediate that if f is continuous, then
+the real-valued function deﬁned by z 	→|f(z)| is continuous. We say that
+f attains a maximum at the point z0 ∈Ωif
+|f(z)| ≤|f(z0)|
+for all z ∈Ω,
+with the inequality reversed for the deﬁnition of a minimum.
+Theorem 2.1 A continuous function on a compact set Ωis bounded and
+attains a maximum and minimum on Ω.
+This is of course analogous to the situation of functions of a real vari-
+able, and we shall not repeat the simple proof here.
+2.2 Holomorphic functions
+We now present a notion that is central to complex analysis, and in
+distinction to our previous discussion we introduce a deﬁnition that is
+genuinely complex in nature.
+Let Ωbe an open set in C and f a complex-valued function on Ω. The
+function f is holomorphic at the point z0 ∈Ωif the quotient
+(1)
+f(z0 + h) −f(z0)
+h
+converges to a limit when h →0. Here h ∈C and h̸ = 0 with z0 + h ∈Ω,
+so that the quotient is well deﬁned. The limit of the quotient, when it
+exists, is denoted by f ′(z0), and is called the derivative of f at z0:
+f ′(z0) = lim
+h→0
+f(z0 + h) −f(z0)
+h
+.

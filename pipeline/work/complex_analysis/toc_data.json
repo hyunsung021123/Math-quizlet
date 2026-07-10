@@ -1,72 +1,247 @@
 {
+  "book": "Complex Analysis",
+  "author": "Elias M. Stein & Rami Shakarchi",
   "chapters": [
     {
-      "printed_page": 1,
       "chapter_no": "1",
-      "chapter_title": "Preliminaries to Complex Analysis"
+      "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 1
     },
     {
-      "printed_page": 32,
       "chapter_no": "2",
-      "chapter_title": "Cauchy’s Theorem and Its Applications"
+      "chapter_title": "Cauchy’s Theorem and Its Applications",
+      "printed_page": 32
     },
     {
-      "printed_page": 71,
       "chapter_no": "3",
-      "chapter_title": "Meromorphic Functions and the Logarithm"
+      "chapter_title": "Meromorphic Functions and the Logarithm",
+      "printed_page": 71
     },
     {
-      "printed_page": 111,
       "chapter_no": "4",
-      "chapter_title": "The Fourier Transform"
+      "chapter_title": "The Fourier Transform",
+      "printed_page": 111
     },
     {
-      "printed_page": 134,
       "chapter_no": "5",
-      "chapter_title": "Entire Functions"
+      "chapter_title": "Entire Functions",
+      "printed_page": 134
     },
     {
-      "printed_page": 159,
       "chapter_no": "6",
-      "chapter_title": "The Gamma and Zeta Functions"
+      "chapter_title": "The Gamma and Zeta Functions",
+      "printed_page": 159
     },
     {
-      "printed_page": 181,
       "chapter_no": "7",
-      "chapter_title": "The Zeta Function and Prime Number Theorem"
+      "chapter_title": "The Zeta Function and Prime Number Theorem",
+      "printed_page": 181
     },
     {
-      "printed_page": 205,
       "chapter_no": "8",
-      "chapter_title": "Conformal Mappings"
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 205
     },
     {
-      "printed_page": 261,
       "chapter_no": "9",
-      "chapter_title": "An Introduction to Elliptic Functions"
+      "chapter_title": "An Introduction to Elliptic Functions",
+      "printed_page": 261
     },
     {
-      "printed_page": 283,
       "chapter_no": "10",
-      "chapter_title": "Applications of Theta Functions"
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 283
     }
   ],
-  "groups": [],
-  "sections": [
+  "groups": [
     {
       "number": "1.1",
       "title": "Complex numbers and the complex plane",
       "chapter_no": "1",
       "chapter_title": "Preliminaries to Complex Analysis",
-      "printed_page": 1,
-      "role": "section"
+      "printed_page": 1
     },
     {
       "number": "1.2",
       "title": "Functions on the complex plane",
       "chapter_no": "1",
       "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 8
+    },
+    {
+      "number": "2.5",
+      "title": "Further applications",
+      "chapter_no": "2",
+      "chapter_title": "Cauchy’s Theorem and Its Applications",
+      "printed_page": 53
+    },
+    {
+      "number": "3.2",
+      "title": "The residue formula",
+      "chapter_no": "3",
+      "chapter_title": "Meromorphic Functions and the Logarithm",
+      "printed_page": 76
+    },
+    {
+      "number": "5.3",
+      "title": "Infinite products",
+      "chapter_no": "5",
+      "chapter_title": "Entire Functions",
+      "printed_page": 140
+    },
+    {
+      "number": "6.1",
+      "title": "The gamma function",
+      "chapter_no": "6",
+      "chapter_title": "The Gamma and Zeta Functions",
+      "printed_page": 160
+    },
+    {
+      "number": "6.2",
+      "title": "The zeta function",
+      "chapter_no": "6",
+      "chapter_title": "The Gamma and Zeta Functions",
+      "printed_page": 168
+    },
+    {
+      "number": "7.1",
+      "title": "Zeros of the zeta function",
+      "chapter_no": "7",
+      "chapter_title": "The Zeta Function and Prime Number Theorem",
+      "printed_page": 182
+    },
+    {
+      "number": "7.2",
+      "title": "Reduction to the functions ψ and ψ1",
+      "chapter_no": "7",
+      "chapter_title": "The Zeta Function and Prime Number Theorem",
+      "printed_page": 188
+    },
+    {
+      "number": "8.1",
+      "title": "Conformal equivalence and examples",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 206
+    },
+    {
+      "number": "8.2",
+      "title": "The Schwarz lemma; automorphisms of the disc and upper half-plane",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 218
+    },
+    {
+      "number": "8.3",
+      "title": "The Riemann mapping theorem",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 224
+    },
+    {
+      "number": "8.4",
+      "title": "Conformal mappings onto polygons",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 231
+    },
+    {
+      "number": "9.1",
+      "title": "Elliptic functions",
+      "chapter_no": "9",
+      "chapter_title": "An Introduction to Elliptic Functions",
+      "printed_page": 262
+    },
+    {
+      "number": "9.2",
+      "title": "The modular character of elliptic functions and Eisenstein series",
+      "chapter_no": "9",
+      "chapter_title": "An Introduction to Elliptic Functions",
+      "printed_page": 273
+    },
+    {
+      "number": "10.1",
+      "title": "Product formula for the Jacobi theta function",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 284
+    },
+    {
+      "number": "10.3",
+      "title": "The theorems about sums of squares",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 296
+    },
+    {
+      "number": "10.appendix-a",
+      "title": "Appendix A: Asymptotics",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 318
+    },
+    {
+      "number": "10.appendix-b",
+      "title": "Appendix B: Simple Connectivity and Jordan Curve Theorem",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 344
+    },
+    {
+      "number": "10.appendix-b.2",
+      "title": "The Jordan curve theorem",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 351
+    }
+  ],
+  "sections": [
+    {
+      "number": "1.1.1",
+      "title": "Basic properties",
+      "chapter_no": "1",
+      "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 1,
+      "role": "section"
+    },
+    {
+      "number": "1.1.2",
+      "title": "Convergence",
+      "chapter_no": "1",
+      "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 5,
+      "role": "section"
+    },
+    {
+      "number": "1.1.3",
+      "title": "Sets in the complex plane",
+      "chapter_no": "1",
+      "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 5,
+      "role": "section"
+    },
+    {
+      "number": "1.2.1",
+      "title": "Continuous functions",
+      "chapter_no": "1",
+      "chapter_title": "Preliminaries to Complex Analysis",
       "printed_page": 8,
+      "role": "section"
+    },
+    {
+      "number": "1.2.2",
+      "title": "Holomorphic functions",
+      "chapter_no": "1",
+      "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 8,
+      "role": "section"
+    },
+    {
+      "number": "1.2.3",
+      "title": "Power series",
+      "chapter_no": "1",
+      "chapter_title": "Preliminaries to Complex Analysis",
+      "printed_page": 14,
       "role": "section"
     },
     {
@@ -118,11 +293,43 @@
       "role": "section"
     },
     {
-      "number": "2.5",
-      "title": "Further applications",
+      "number": "2.5.1",
+      "title": "Morera’s theorem",
       "chapter_no": "2",
       "chapter_title": "Cauchy’s Theorem and Its Applications",
       "printed_page": 53,
+      "role": "section"
+    },
+    {
+      "number": "2.5.2",
+      "title": "Sequences of holomorphic functions",
+      "chapter_no": "2",
+      "chapter_title": "Cauchy’s Theorem and Its Applications",
+      "printed_page": 53,
+      "role": "section"
+    },
+    {
+      "number": "2.5.3",
+      "title": "Holomorphic functions defined in terms of integrals",
+      "chapter_no": "2",
+      "chapter_title": "Cauchy’s Theorem and Its Applications",
+      "printed_page": 55,
+      "role": "section"
+    },
+    {
+      "number": "2.5.4",
+      "title": "Schwarz reflection principle",
+      "chapter_no": "2",
+      "chapter_title": "Cauchy’s Theorem and Its Applications",
+      "printed_page": 57,
+      "role": "section"
+    },
+    {
+      "number": "2.5.5",
+      "title": "Runge’s approximation theorem",
+      "chapter_no": "2",
+      "chapter_title": "Cauchy’s Theorem and Its Applications",
+      "printed_page": 60,
       "role": "section"
     },
     {
@@ -150,11 +357,11 @@
       "role": "section"
     },
     {
-      "number": "3.2",
-      "title": "The residue formula",
+      "number": "3.2.1",
+      "title": "Examples",
       "chapter_no": "3",
       "chapter_title": "Meromorphic Functions and the Logarithm",
-      "printed_page": 76,
+      "printed_page": 77,
       "role": "section"
     },
     {
@@ -270,11 +477,19 @@
       "role": "section"
     },
     {
-      "number": "5.3",
-      "title": "Infinite products",
+      "number": "5.3.1",
+      "title": "Generalities",
       "chapter_no": "5",
       "chapter_title": "Entire Functions",
       "printed_page": 140,
+      "role": "section"
+    },
+    {
+      "number": "5.3.2",
+      "title": "Example: the product formula for the sine function",
+      "chapter_no": "5",
+      "chapter_title": "Entire Functions",
+      "printed_page": 142,
       "role": "section"
     },
     {
@@ -310,16 +525,24 @@
       "role": "exercises"
     },
     {
-      "number": "6.1",
-      "title": "The gamma function",
+      "number": "6.1.1",
+      "title": "Analytic continuation",
       "chapter_no": "6",
       "chapter_title": "The Gamma and Zeta Functions",
-      "printed_page": 160,
+      "printed_page": 161,
       "role": "section"
     },
     {
-      "number": "6.2",
-      "title": "The zeta function",
+      "number": "6.1.2",
+      "title": "Further properties of Γ",
+      "chapter_no": "6",
+      "chapter_title": "The Gamma and Zeta Functions",
+      "printed_page": 163,
+      "role": "section"
+    },
+    {
+      "number": "6.2.1",
+      "title": "Functional equation and analytic continuation",
       "chapter_no": "6",
       "chapter_title": "The Gamma and Zeta Functions",
       "printed_page": 168,
@@ -342,23 +565,23 @@
       "role": "exercises"
     },
     {
-      "number": "7.1",
-      "title": "Zeros of the zeta function",
+      "number": "7.1.1",
+      "title": "Estimates for 1/ζ(s)",
       "chapter_no": "7",
       "chapter_title": "The Zeta Function and Prime Number Theorem",
-      "printed_page": 182,
+      "printed_page": 187,
       "role": "section"
     },
     {
-      "number": "7.2",
-      "title": "Reduction to the functions ψ and ψ₁",
+      "number": "7.2.1",
+      "title": "Proof of the asymptotics for ψ1",
       "chapter_no": "7",
       "chapter_title": "The Zeta Function and Prime Number Theorem",
-      "printed_page": 188,
+      "printed_page": 194,
       "role": "section"
     },
     {
-      "number": "7.note",
+      "number": "7.2.note",
       "title": "Note on interchanging double sums",
       "chapter_no": "7",
       "chapter_title": "The Zeta Function and Prime Number Theorem",
@@ -382,35 +605,107 @@
       "role": "exercises"
     },
     {
-      "number": "8.1",
-      "title": "Conformal equivalence and examples",
+      "number": "8.1.1",
+      "title": "The disc and upper half-plane",
       "chapter_no": "8",
       "chapter_title": "Conformal Mappings",
-      "printed_page": 206,
+      "printed_page": 208,
       "role": "section"
     },
     {
-      "number": "8.2",
-      "title": "The Schwarz lemma; automorphisms of the disc and upper half-plane",
+      "number": "8.1.2",
+      "title": "Further examples",
       "chapter_no": "8",
       "chapter_title": "Conformal Mappings",
-      "printed_page": 218,
+      "printed_page": 209,
       "role": "section"
     },
     {
-      "number": "8.3",
-      "title": "The Riemann mapping theorem",
+      "number": "8.1.3",
+      "title": "The Dirichlet problem in a strip",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 212,
+      "role": "section"
+    },
+    {
+      "number": "8.2.1",
+      "title": "Automorphisms of the disc",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 219,
+      "role": "section"
+    },
+    {
+      "number": "8.2.2",
+      "title": "Automorphisms of the upper half-plane",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 221,
+      "role": "section"
+    },
+    {
+      "number": "8.3.1",
+      "title": "Necessary conditions and statement of the theorem",
       "chapter_no": "8",
       "chapter_title": "Conformal Mappings",
       "printed_page": 224,
       "role": "section"
     },
     {
-      "number": "8.4",
-      "title": "Conformal mappings onto polygons",
+      "number": "8.3.2",
+      "title": "Montel’s theorem",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 225,
+      "role": "section"
+    },
+    {
+      "number": "8.3.3",
+      "title": "Proof of the Riemann mapping theorem",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 228,
+      "role": "section"
+    },
+    {
+      "number": "8.4.1",
+      "title": "Some examples",
       "chapter_no": "8",
       "chapter_title": "Conformal Mappings",
       "printed_page": 231,
+      "role": "section"
+    },
+    {
+      "number": "8.4.2",
+      "title": "The Schwarz-Christoffel integral",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 235,
+      "role": "section"
+    },
+    {
+      "number": "8.4.3",
+      "title": "Boundary behavior",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 238,
+      "role": "section"
+    },
+    {
+      "number": "8.4.4",
+      "title": "The mapping formula",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 241,
+      "role": "section"
+    },
+    {
+      "number": "8.4.5",
+      "title": "Return to elliptic integrals",
+      "chapter_no": "8",
+      "chapter_title": "Conformal Mappings",
+      "printed_page": 245,
       "role": "section"
     },
     {
@@ -430,19 +725,35 @@
       "role": "exercises"
     },
     {
-      "number": "9.1",
-      "title": "Elliptic functions",
+      "number": "9.1.1",
+      "title": "Liouville’s theorems",
       "chapter_no": "9",
       "chapter_title": "An Introduction to Elliptic Functions",
-      "printed_page": 262,
+      "printed_page": 264,
       "role": "section"
     },
     {
-      "number": "9.2",
-      "title": "The modular character of elliptic functions and Eisenstein series",
+      "number": "9.1.2",
+      "title": "The Weierstrass ℘ function",
+      "chapter_no": "9",
+      "chapter_title": "An Introduction to Elliptic Functions",
+      "printed_page": 266,
+      "role": "section"
+    },
+    {
+      "number": "9.2.1",
+      "title": "Eisenstein series",
       "chapter_no": "9",
       "chapter_title": "An Introduction to Elliptic Functions",
       "printed_page": 273,
+      "role": "section"
+    },
+    {
+      "number": "9.2.2",
+      "title": "Eisenstein series and divisor functions",
+      "chapter_no": "9",
+      "chapter_title": "An Introduction to Elliptic Functions",
+      "printed_page": 276,
       "role": "section"
     },
     {
@@ -462,11 +773,11 @@
       "role": "exercises"
     },
     {
-      "number": "10.1",
-      "title": "Product formula for the Jacobi theta function",
+      "number": "10.1.1",
+      "title": "Further transformation laws",
       "chapter_no": "10",
       "chapter_title": "Applications of Theta Functions",
-      "printed_page": 284,
+      "printed_page": 289,
       "role": "section"
     },
     {
@@ -478,11 +789,19 @@
       "role": "section"
     },
     {
-      "number": "10.3",
-      "title": "The theorems about sums of squares",
+      "number": "10.3.1",
+      "title": "The two-squares theorem",
       "chapter_no": "10",
       "chapter_title": "Applications of Theta Functions",
-      "printed_page": 296,
+      "printed_page": 297,
+      "role": "section"
+    },
+    {
+      "number": "10.3.2",
+      "title": "The four-squares theorem",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 304,
       "role": "section"
     },
     {
@@ -502,19 +821,59 @@
       "role": "exercises"
     },
     {
-      "number": "10.appendix-a",
-      "title": "Appendix A: Asymptotics",
+      "number": "10.appendix-a.1",
+      "title": "Bessel functions",
       "chapter_no": "10",
       "chapter_title": "Applications of Theta Functions",
-      "printed_page": 318,
+      "printed_page": 319,
       "role": "appendix"
     },
     {
-      "number": "10.appendix-b",
-      "title": "Appendix B: Simple Connectivity and Jordan Curve Theorem",
+      "number": "10.appendix-a.2",
+      "title": "Laplace’s method; Stirling’s formula",
       "chapter_no": "10",
       "chapter_title": "Applications of Theta Functions",
-      "printed_page": 344,
+      "printed_page": 323,
+      "role": "appendix"
+    },
+    {
+      "number": "10.appendix-a.3",
+      "title": "The Airy function",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 328,
+      "role": "appendix"
+    },
+    {
+      "number": "10.appendix-a.4",
+      "title": "The partition function",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 334,
+      "role": "appendix"
+    },
+    {
+      "number": "10.appendix-a.5",
+      "title": "Problems",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 341,
+      "role": "exercises"
+    },
+    {
+      "number": "10.appendix-b.1",
+      "title": "Equivalent formulations of simple connectivity",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 345,
+      "role": "appendix"
+    },
+    {
+      "number": "10.appendix-b.2.1",
+      "title": "Proof of a general form of Cauchy’s theorem",
+      "chapter_no": "10",
+      "chapter_title": "Applications of Theta Functions",
+      "printed_page": 361,
       "role": "appendix"
     },
     {
@@ -549,7 +908,5 @@
       "printed_page": 375,
       "role": "drop"
     }
-  ],
-  "book": "Complex Analysis",
-  "author": "Elias M. Stein & Rami Shakarchi"
+  ]
 }

@@ -1,0 +1,189 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.1.2 Further examples
+직전 소단원: 「8.1.1 The disc and upper half-plane」
+[본문]
+1. Conformal equivalence and examples
+209
+except at z = −i, and in particular it is continuous everywhere on the
+boundary of H, namely the real line. If we take z = x real, then the
+distance from x to i is the same as the distance from x to −i, there-
+fore |F(x)| = 1. Thus F maps R onto the boundary of D. We get more
+information by writing
+F(x) = i −x
+i + x = 1 −x2
+1 + x2 + i
+2x
+1 + x2 ,
+and parametrizing the real line by x = tan t with t ∈(−π/2, π/2). Since
+sin 2a =
+2 tana
+1 + tan2 a
+and
+cos 2a = 1 −tan2 a
+1 + tan2 a,
+we have F(x) = cos 2t + i sin 2t = ei2t. Hence the image of the real line
+is the arc consisting of the circle omitting the point −1. Moreover, as x
+travels from −∞to ∞, F(x) travels along that arc starting from −1 and
+ﬁrst going through that part of the circle that lies in the lower half-plane.
+The point −1 on the circle corresponds to the “point at inﬁnity” of
+the upper half-plane.
+Remark. Mappings of the form
+z 	→az + b
+cz + d,
+where a, b, c, and d are complex numbers, and where the denominator is
+assumed not to be a multiple of the numerator, are usually referred to
+as fractional linear transformations. Other instances occur as the
+automorphisms of the disc and of the upper half-plane in Theorems 2.1
+and 2.4.
+1.2 Further examples
+We gather here several illustrations of conformal mappings. In certain
+cases we discuss the behavior of the map on the boundary of the relevant
+domain. Some of the mappings are pictured in Figure 1.
+Example 1. Translations and dilations provide the ﬁrst simple examples.
+Indeed, if h ∈C, the translation z 	→z + h is a conformal map from C
+to itself whose inverse is w 	→w −h. If h is real, then this translation is
+also a conformal map from the upper half-plane to itself.
+For any non-zero complex number c, the map f : z 	→cz is a conformal
+map from the complex plane to itself, whose inverse is simply g : w 	→
+c−1w. If c has modulus 1, so that c = eiϕ for some real ϕ, then f is
+
+210
+Chapter 8. CONFORMAL MAPPINGS
+a rotation by ϕ. If c > 0 then f corresponds to a dilation. Finally, if
+c < 0 the map f consists of a dilation by |c| followed by a rotation of π.
+Example 2. If n is a positive integer, then the map z 	→zn is conformal
+from the sector S = {z ∈C : 0 < arg(z) < π/n} to the upper half-plane.
+The inverse of this map is simply w 	→w1/n, deﬁned in terms of the
+principal branch of the logarithm.
+More generally, if 0 < α < 2 the map f(z) = zα takes the upper half-
+plane to the sector S = {w ∈C : 0 < arg(w) < απ}. Indeed, if we choose
+the branch of the logarithm obtained by deleting the positive real axis,
+and z = reiθ with r > 0 and 0 < θ < π, then
+f(z) = zα = |z|αeiαθ.
+Therefore f maps H into S. Moreover, a simple veriﬁcation shows that
+the inverse of f is given by g(w) = w1/α, where the branch of the loga-
+rithm is chosen so that 0 < arg w < απ.
+By composing the map just discussed with the translations and rota-
+tions in the previous example, we may map the upper half-plane confor-
+mally to any (inﬁnite) sector in C.
+Let us note the boundary behavior of f. If x travels from −∞to 0 on
+the real line, then f(x) travels from ∞eiαπ to 0 on the half-line deter-
+mined by arg z = απ. As x goes from 0 to ∞on the real line, the image
+f(x) goes from 0 to ∞on the real line as well.
+Example 3.
+The map f(z) = (1 + z)/(1 −z) takes the upper half-
+disc {z = x + iy : |z| < 1 and y > 0} conformally to the ﬁrst quadrant
+{w = u + iv : u > 0 and v > 0}. Indeed, if z = x + iy we have
+f(z) = 1 −(x2 + y2)
+(1 −x)2 + y2 + i
+2y
+(1 −x)2 + y2 ,
+so f maps the half-disc in the upper half-plane into the ﬁrst quadrant.
+The inverse map, given by g(w) = (w −1)/(w + 1), is clearly holomor-
+phic in the ﬁrst quadrant. Moreover, |w + 1| > |w −1| for all w in the
+ﬁrst quadrant because the distance from w to −1 is greater than the
+distance from w to 1; thus g maps into the unit disc. Finally, an easy
+calculation shows that the imaginary part of g(w) is positive whenever w
+is in the ﬁrst quadrant.
+So g transforms the ﬁrst quadrant into the
+desired half-disc and we conclude that f is conformal because g is the
+inverse of f.
+To examine the action of f on the boundary, note that if z = eiθ be-
+
+1. Conformal equivalence and examples
+211
+longs to the upper half-circle, then
+f(z) = 1 + eiθ
+1 −eiθ = e−iθ/2 + eiθ/2
+e−iθ/2 −eiθ/2 =
+i
+tan(θ/2).
+As θ travels from 0 to π we see that f(eiθ) travels along the imaginary
+axis from inﬁnity to 0. Moreover, if z = x is real, then
+f(z) = 1 + x
+1 −x
+is also real; and one sees from this, that f is actually a bijection from
+(−1, 1) to the positive real axis, with f(x) increasing from 0 to inﬁnity
+as x travels from −1 to 1. Note also that f(0) = 1.
+Example 4. The map z 	→log z, deﬁned as the branch of the logarithm
+obtained by deleting the negative imaginary axis, takes the upper half-
+plane to the strip {w = u + iv : u ∈R, 0 < v < π}. This is immediate
+from the fact that if z = reiθ with −π/2 < θ < 3π/2, then by deﬁnition,
+log z = log r + iθ.
+The inverse map is then w 	→ew.
+As x travels from −∞to 0, the point f(x) travels from ∞+ iπ to
+−∞+ iπ on the line {x + iπ : −∞< x < ∞}. When x travels from 0
+to ∞on the real line, its image f(x) then goes from −∞to ∞along the
+reals.
+Example 5.
+With the previous example in mind, we see that
+z 	→log z also deﬁnes a conformal map from the half-disc {z = x + iy :
+|z| < 1, y > 0} to the half-strip {w = u + iv : u < 0, 0 < v < π}. As x
+travels from 0 to 1 on the real line, then log x goes from −∞to 0.
+When x goes from 1 to −1 on the half-circle in the upper half-plane,
+then the point log x travels from 0 to πi on the vertical segment of the
+strip. Finally, as x goes from −1 to 0, the point log x goes from πi to
+−∞+ iπ on the top half-line of the strip.
+Example 6.
+The map f(z) = eiz takes the half-strip {z = x + iy :
+−π/2 < x < π/2,
+y > 0} conformally to the half-disc {w = u + iv :
+|w| < 1, u > 0}.
+This is immediate from the fact that if z = x + iy,
+then
+eiz = e−yeix.
+
+212
+Chapter 8. CONFORMAL MAPPINGS
+If x goes from π/2 + i∞to π/2, then f(x) goes from 0 to i, and as x
+goes from π/2 to −π/2, then f(x) travels from i to −i on the half-circle.
+Finally, as x goes from −π/2 to −π/2 + i∞, we see that f(x) travels
+from −i back to 0.
+The mapping f is closely related to the inverse of the map in Exam-
+ple 5.
+Example 7. The function f(z) = −1
+2(z + 1/z) is a conformal map from
+the half-disc {z = x + iy : |z| < 1, y > 0} to the upper half-plane (Exer-
+cise 5).
+The boundary behavior of f is as follows. If x travels from 0 to 1, then
+f(x) goes from ∞to 1 on the real axis. If z = eiθ, then f(z) = cos θ and
+as x travels from 1 to −1 along the unit half-circle in the upper half-
+plane, the f(x) goes from 1 to −1 on the real segment. Finally, when x
+goes from −1 to 0, f(x) goes from −1 to −∞along the real axis.
+Example 8. The map f(z) = sin z takes the upper half-plane confor-
+mally onto the half-strip {w = x + iy : −π/2 < x < π/2 y > 0}. To see
+this, note that if ζ = eiz, then
+sin z = eiz −e−iz
+2i
+= −1
+2
+
+iζ + 1
+iζ
+
+,
+and therefore f is obtained ﬁrst by applying the map in Example 6, then
+multiplying by i (that is, rotating by π/2), and ﬁnally applying the map
+in Example 7.
+As x travels from −π/2 + i∞to −π/2, the point f(x) goes from −∞
+to −1. When x is real, between −π/2 and π/2, then f(x) is also real
+between −1 and 1. Finally, if x goes from π/2 to π/2 + i∞, then f(x)
+travels from 1 to ∞on the real axis.
+1.3 The Dirichlet problem in a strip
+The Dirichlet problem in the open set Ωconsists of solving
+(1)
+
+△u
+=
+0
+in Ω,
+u
+=
+f
+on ∂Ω,
+where △denotes the Laplacian ∂2/∂x2 + ∂2/∂y2, and f is a given func-
+tion on the boundary of Ω. In other words, we wish to ﬁnd a harmonic
+function in Ωwith prescribed boundary values f. This problem was al-
+ready considered in Book I in the cases where Ωis the unit disc or the

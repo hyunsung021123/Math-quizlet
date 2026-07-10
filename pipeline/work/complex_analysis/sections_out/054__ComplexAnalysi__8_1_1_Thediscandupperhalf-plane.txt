@@ -1,0 +1,227 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.1.1 The disc and upper half-plane
+직전 소단원: 「7.4 Problems」
+[본문]
+8 Conformal Mappings
+The results I found for polygons can be extended un-
+der very general assumptions. I have undertaken this
+research because it is a step towards a deeper un-
+derstanding of the mapping problem, for which not
+much has happened since Riemann’s inaugural disser-
+tation; this, even though the theory of mappings, with
+its close connection with the fundamental theorems of
+Riemann’s function theory, deserves in the highest de-
+gree to be developed further.
+E. B. Christoﬀel, 1870
+The problems and ideas we present in this chapter are more geomet-
+ric in nature than the ones we have seen so far. In fact, here we will
+be primarily interested in mapping properties of holomorphic functions.
+In particular, most of our results will be “global,” as opposed to the
+more “local” analytical results proved in the ﬁrst three chapters. The
+motivation behind much of our presentation lies in the following simple
+question:
+Given two open sets U and V in C, does there exist a holo-
+morphic bijection between them?
+By a holomorphic bijection we simply mean a function that is both
+holomorphic and bijective. (It will turn out that the inverse map is then
+automatically holomorphic.) A solution to this problem would permit
+a transfer of questions about analytic functions from one open set with
+little geometric structure to another with possibly more useful properties.
+The prime example consists in taking V = D the unit disc, where many
+ideas have been developed to study analytic functions.1 In fact, since
+the disc seems to be the most fruitful choice for V we are led to a variant
+of the above question:
+Given an open subset Ωof C, what conditions on Ωguarantee
+that there exists a holomorphic bijection from Ωto D?
+1For the corresponding problem when V = C, the solution is trivial: only U = C is
+possible. See Exercise 14 in Chapter 3.
+
+206
+Chapter 8. CONFORMAL MAPPINGS
+In some instances when a bijection exists it can be given by explicit
+formulas, and we turn to this aspect of the theory ﬁrst. For example, the
+upper half-plane can be mapped by a holomorphic bijection to the disc,
+and this is given by a fractional linear transformation. From there, one
+can construct many other examples, by composing simple maps already
+encountered earlier, such as rational functions, trigonometric functions,
+logarithms, etc. As an application, we discuss the consequence of these
+constructions to the solution of the Dirichlet problem for the Laplacian
+in some particular domains.
+Next, we pass from the speciﬁc examples to prove the ﬁrst general
+result of the chapter, namely the Schwarz lemma, with an immediate
+application to the determination of all holomorphic bijections (“auto-
+morphisms” of the disc to itself). These are again given by fractional
+linear transformations.
+Then comes the heart of the matter: the Riemann mapping theorem,
+which states that Ωcan be mapped to the unit disc whenever it is simply
+connected and not all of C. This is a remarkable theorem, since little
+is assumed about Ω, not even regularity of its boundary ∂Ω.
+(After
+all, the boundary of the disc is smooth.) In particular, the interiors of
+triangles, squares, and in fact any polygon can be mapped via a bijective
+holomorphic function to the disc. A precise description of the mapping
+in the case of polygons, called the Schwarz-Christoﬀel formula, will be
+taken up in the last section of the chapter. It is interesting to note that
+the mapping functions for rectangles are given by “elliptic integrals,” and
+these lead to doubly-periodic functions. The latter are the subject of the
+next chapter.
+1 Conformal equivalence and examples
+We ﬁx some terminology that we shall use in the rest of this chapter.
+A bijective holomorphic function f : U →V is called a conformal map
+or biholomorphism. Given such a mapping f, we say that U and V
+are conformally equivalent or simply biholomorphic. An important
+fact is that the inverse of f is then automatically holomorphic.
+Proposition 1.1 If f : U →V
+is holomorphic and injective,
+then
+f ′(z)̸ = 0 for all z ∈U. In particular, the inverse of f deﬁned on its
+range is holomorphic, and thus the inverse of a conformal map is also
+holomorphic.
+
+1. Conformal equivalence and examples
+207
+Proof.
+We argue by contradiction, and suppose that f ′(z0) = 0 for
+some z0 ∈U. Then
+f(z) −f(z0) = a(z −z0)k + G(z)
+for all z near z0,
+with a̸ = 0, k ≥2 and G vanishing to order k + 1 at z0. For suﬃciently
+small w, we write
+f(z) −f(z0) −w = F(z) + G(z),
+where F(z) = a(z −z0)k −w.
+Since |G(z)| < |F(z)| on a small circle centered at z0, and F has at
+least two zeros inside that circle, Rouch´e’s theorem implies that f(z) −
+f(z0) −w has at least two zeros there. Since f ′(z)̸ = 0 for all z̸ = z0 but
+suﬃciently close to z0 it follows that the roots of f(z) −f(z0) −w are
+distinct, hence f is not injective, a contradiction.
+Now let g = f −1 denote the inverse of f on its range, which we can
+assume is V . Suppose w0 ∈V and w is close to w0. Write w = f(z) and
+w0 = f(z0). If w̸ = w0, we have
+g(w) −g(w0)
+w −w0
+=
+1
+w−w0
+g(w)−g(w0)
+=
+1
+f(z)−f(z0)
+z−z0
+.
+Since f ′(z0)̸ = 0, we may let z →z0 and conclude that g is holomorphic
+at w0 with g′(w0) = 1/f ′(g(w0)).
+From this proposition we conclude that two open sets U and V are
+conformally equivalent if and only if there exist holomorphic functions
+f : U →V and g : V →U such that g(f(z)) = z and f(g(w)) = w for all
+z ∈U and w ∈V .
+We point out that the terminology adopted here is not universal. Some
+authors call a holomorphic map f : U →V conformal if f ′(z)̸ = 0 for all
+z ∈U. This deﬁnition is clearly less restrictive than ours; for example,
+f(z) = z2 on the punctured disc C −{0} satisﬁes f ′(z)̸ = 0, but is not
+injective. However, the condition f ′(z)̸ = 0 is tantamount to f being a
+local bijection (Exercise 1). There is a geometric consequence of the con-
+dition f ′(z)̸ = 0 and it is at the root of this discrepency of terminology in
+the deﬁnitions. A holomorphic map that satisﬁes this condition preserves
+angles. Loosely speaking, if two curves γ and η intersect at z0, and α is
+the oriented angle between the tangent vectors to these curves, then the
+image curves f ◦γ and f ◦η intersect at f(z0), and their tangent vectors
+form the same angle α. Problem 2 develops this idea.
+We begin our study of conformal mappings by looking at a number
+of speciﬁc examples. The ﬁrst gives the conformal equivalence between
+
+208
+Chapter 8. CONFORMAL MAPPINGS
+the unit disc and the upper half-plane, which plays an important role in
+many problems.
+1.1 The disc and upper half-plane
+The upper half-plane, which we denote by H, consists of those complex
+numbers with positive imaginary part; that is,
+H = {z ∈C : Im(z) > 0}.
+A remarkable fact, which at ﬁrst seems surprising, is that the unbounded
+set H is conformally equivalent to the unit disc. Moreover, an explicit
+formula giving this equivalence exists. Indeed, let
+F(z) = i −z
+i + z
+and
+G(w) = i1 −w
+1 + w.
+Theorem 1.2 The map F : H →D is a conformal map with inverse
+G : D →H.
+Proof.
+First we observe that both maps are holomorphic in their
+respective domains.
+Then we note that any point in the upper half-
+plane is closer to i than to −i, so |F(z)| < 1 and F maps H into D. To
+prove that G maps into the upper half-plane, we must compute Im(G(w))
+for w ∈D. To this end we let w = u + iv, and note that
+Im(G(w)) = Re
+1 −u −iv
+1 + u + iv
+
+= Re
+(1 −u −iv)(1 + u −iv)
+(1 + u)2 + v2
+
+= 1 −u2 −v2
+(1 + u)2 + v2 > 0
+since |w| < 1. Therefore G maps the unit disc to the upper half-plane.
+Finally,
+F(G(w)) =
+i −i 1−w
+1+w
+i + i 1−w
+1+w
+= 1 + w −1 + w
+1 + w + 1 −w = w,
+and similarly G(F(z)) = z. This proves the theorem.
+An interesting aspect of these functions is their behavior on the bound-
+aries of our open sets.2 Observe that F is holomorphic everywhere on C
+2The boundary behavior of conformal maps is a recurrent theme that plays an impor-
+tant role in this chapter.
+
+1. Conformal equivalence and examples
+209
+except at z = −i, and in particular it is continuous everywhere on the
+boundary of H, namely the real line. If we take z = x real, then the
+distance from x to i is the same as the distance from x to −i, there-
+fore |F(x)| = 1. Thus F maps R onto the boundary of D. We get more
+information by writing
+F(x) = i −x
+i + x = 1 −x2
+1 + x2 + i
+2x
+1 + x2 ,
+and parametrizing the real line by x = tan t with t ∈(−π/2, π/2). Since
+sin 2a =
+2 tana
+1 + tan2 a
+and
+cos 2a = 1 −tan2 a
+1 + tan2 a,
+we have F(x) = cos 2t + i sin 2t = ei2t. Hence the image of the real line
+is the arc consisting of the circle omitting the point −1. Moreover, as x
+travels from −∞to ∞, F(x) travels along that arc starting from −1 and
+ﬁrst going through that part of the circle that lies in the lower half-plane.
+The point −1 on the circle corresponds to the “point at inﬁnity” of
+the upper half-plane.
+Remark. Mappings of the form
+z 	→az + b
+cz + d,
+where a, b, c, and d are complex numbers, and where the denominator is
+assumed not to be a multiple of the numerator, are usually referred to
+as fractional linear transformations. Other instances occur as the
+automorphisms of the disc and of the upper half-plane in Theorems 2.1
+and 2.4.
+1.2 Further examples
+We gather here several illustrations of conformal mappings. In certain
+cases we discuss the behavior of the map on the boundary of the relevant
+domain. Some of the mappings are pictured in Figure 1.
+Example 1. Translations and dilations provide the ﬁrst simple examples.
+Indeed, if h ∈C, the translation z 	→z + h is a conformal map from C
+to itself whose inverse is w 	→w −h. If h is real, then this translation is
+also a conformal map from the upper half-plane to itself.
+For any non-zero complex number c, the map f : z 	→cz is a conformal
+map from the complex plane to itself, whose inverse is simply g : w 	→
+c−1w. If c has modulus 1, so that c = eiϕ for some real ϕ, then f is

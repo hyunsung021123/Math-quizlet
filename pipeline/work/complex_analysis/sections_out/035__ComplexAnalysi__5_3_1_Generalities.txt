@@ -1,0 +1,183 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 5. Entire Functions
+현재 소단원: 5.3.1 Generalities
+직전 소단원: 「5.2 Functions of finite order」
+[본문]
+140
+Chapter 5. ENTIRE FUNCTIONS
+Then f is entire, and it is easy to see that
+|f(z)| ≤e|z|1/2,
+and the order of growth of f is 1/2.
+Moreover, f(z) vanishes when
+zn = ((n + 1/2)π)2, while 
+n 1/|zn|s < ∞exactly when s > 1/2.
+A natural question is whether or not, given any sequence of complex
+numbers z1, z2, . . ., there exists an entire function f with zeros precisely
+at the points of this sequence. A necessary condition is that z1, z2, . . . do
+not accumulate, in other words we must have
+lim
+k→∞|zk| = ∞,
+otherwise f would vanish identically by Theorem 4.8 in Chapter 2. Weier-
+strass proved that this condition is also suﬃcient by explicitly construct-
+ing a function with these prescribed zeros. A ﬁrst guess is of course the
+product
+(z −z1)(z −z2) · · · ,
+which provides a solution in the special case when the sequence of zeros
+is ﬁnite.
+In general, Weierstrass showed how to insert factors in this
+product so that the convergence is guaranteed, yet no new zeros are
+introduced.
+Before coming to the general construction, we review inﬁnite products
+and study a basic example.
+3 Inﬁnite products
+3.1 Generalities
+Given a sequence {an}∞
+n=1 of complex numbers, we say that the product
+∞
+
+n=1
+(1 + an)
+converges if the limit
+lim
+N→∞
+N
+
+n=1
+(1 + an)
+of the partial products exists.
+A useful necessary condition that guarantees the existence of a product
+is contained in the following proposition.
+
+3. Infinite products
+141
+Proposition 3.1 If  |an| < ∞, then the product ∞
+n=1(1 + an) con-
+verges. Moreover, the product converges to 0 if and only if one of its
+factors is 0.
+This is simply Proposition 1.9 of Chapter 8 in Book I. We repeat the
+proof here.
+Proof.
+If  |an| converges, then for all large n we must have
+|an| < 1/2. Disregarding if necessary ﬁnitely many terms, we may as-
+sume that this inequality holds for all n. In particular, we can deﬁne
+log(1 + an) by the usual power series (see (6) in Chapter 3), and this
+logarithm satisﬁes the property that 1 + z = elog(1+z) whenever |z| < 1.
+Hence we may write the partial products as follows:
+N
+
+n=1
+(1 + an) =
+N
+
+n=1
+elog(1+an) = eBN ,
+where BN = N
+n=1 bn with bn = log(1 + an). By the power series expan-
+sion we see that | log(1 + z)| ≤2|z|, if |z| < 1/2. Hence |bn| ≤2|an|, so
+BN converges as N →∞to a complex number, say B. Since the expo-
+nential function is continuous, we conclude that eBN converges to eB as
+N →∞, proving the ﬁrst assertion of the proposition. Observe also that
+if 1 + an̸ = 0 for all n, then the product converges to a non-zero limit
+since it is expressed as eB.
+More generally, we can consider products of holomorphic functions.
+Proposition 3.2 Suppose {Fn} is a sequence of holomorphic functions
+on the open set Ω. If there exist constants cn > 0 such that
+
+cn < ∞
+and
+|Fn(z) −1| ≤cn
+for all z ∈Ω,
+then:
+(i) The product ∞
+n=1 Fn(z) converges uniformly in Ωto a holomorphic
+function F(z).
+(ii) If Fn(z) does not vanish for any n, then
+F ′(z)
+F(z) =
+∞
+
+n=1
+F ′
+n(z)
+Fn(z).
+Proof.
+To prove the ﬁrst statement, note that for each z we may
+argue as in the previous proposition if we write Fn(z) = 1 + an(z), with
+
+142
+Chapter 5. ENTIRE FUNCTIONS
+|an(z)| ≤cn. Then, we observe that the estimates are actually uniform
+in z because the cn’s are constants. It follows that the product converges
+uniformly to a holomorphic function, which we denote by F(z).
+To establish the second part of the theorem, suppose that K is a
+compact subset of Ω, and let
+GN(z) =
+N
+
+n=1
+Fn(z).
+We have just proved that GN →F uniformly in Ω, so by Theorem 5.3
+in Chapter 2, the sequence {G′
+N} converges uniformly to F ′ in K. Since
+GN is uniformly bounded from below on K, we conclude that G′
+N/GN →
+F ′/F uniformly on K, and because K is an arbitrary compact subset of
+Ω, the limit holds for every point of Ω. Moreover, as we saw in Section 4
+of Chapter 3
+G′
+N
+GN
+=
+N
+
+n=1
+F ′
+n
+Fn
+,
+so part (ii) of the proposition is also proved.
+3.2 Example: the product formula for the sine function
+Before proceeding with the general theory of Weierstrass products, we
+consider the key example of the product formula for the sine function:
+(3)
+sin πz
+π
+= z
+∞
+
+n=1
+
+1 −z2
+n2
+
+.
+This identity will in turn be derived from the sum formula for the cotan-
+gent function (cot πz = cos πz/ sin πz):
+(4)
+π cot πz =
+∞
+
+n=−∞
+1
+z + n = lim
+N→∞
+
+|n|≤N
+1
+z + n = 1
+z +
+∞
+
+n=1
+2z
+z2 −n2 .
+The ﬁrst formula holds for all complex numbers z, and the second when-
+ever z is not an integer. The sum ∞
+n=−∞1/(z + n) needs to be properly
+understood, because the separate halves corresponding to positive and
+negative values of n do not converge. Only when interpreted symmetri-
+cally, as limN→∞
+
+|n|≤N 1/(z + n), does the cancellation of terms lead
+to a convergent series as in (4) above.

@@ -1,0 +1,206 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.3.3 Proof of the Riemann mapping theorem
+직전 소단원: 「8.3.2 Montel’s theorem」
+[본문]
+228
+Chapter 8. CONFORMAL MAPPINGS
+on every compact subset of Ωto a holomorphic function f, then f is
+either injective or constant.
+Proof.
+We argue by contradiction and suppose that f is not injective,
+so there exist distinct complex numbers z1 and z2 in Ωsuch that f(z1) =
+f(z2). Deﬁne a new sequence by gn(z) = fn(z) −fn(z1), so that gn has
+no other zero besides z1, and the sequence {gn} converges uniformly on
+compact subsets of Ωto g(z) = f(z) −f(z1). If g is not identically zero,
+then z2 is an isolated zero for g (because Ωis connected); therefore
+1 =
+1
+2πi
+
+γ
+g′(ζ)
+g(ζ) dζ,
+where γ is a small circle centered at z2 chosen so that g does not vanish
+on γ or at any point of its interior besides z2. Therefore, 1/gn converges
+uniformly to 1/g on γ, and since g′
+n →g′ uniformly on γ we have
+1
+2πi
+
+γ
+g′
+n(ζ)
+gn(ζ) dζ →
+1
+2πi
+
+γ
+g′(ζ)
+g(ζ) dζ.
+But this is a contradiction since gn has no zeros inside γ, and hence
+1
+2πi
+
+γ
+g′
+n(ζ)
+gn(ζ) dζ = 0
+for all n .
+3.3 Proof of the Riemann mapping theorem
+Once we have established the technical results above, the rest of the
+proof of the Riemann mapping theorem is very elegant. It consists of
+three steps, which we isolate.
+Step 1. Suppose that Ωis a simply connected proper open subset of
+C. We claim that Ωis conformally equivalent to an open subset of the
+unit disc that contains the origin. Indeed, choose a complex number α
+that does not belong to Ω, (recall that Ωis proper), and observe that
+z −α never vanishes on the simply connected set Ω. Therefore, we can
+deﬁne a holomorphic function
+f(z) = log(z −α)
+with the desired properties of the logarithm. As a consequence one has,
+ef(z) = z −α, which proves in particular that f is injective. Pick a point
+w ∈Ω, and observe that
+f(z)̸ = f(w) + 2πi
+for all z ∈Ω
+
+3. The Riemann mapping theorem
+229
+for otherwise, we exponentiate this relation to ﬁnd that z = w, hence
+f(z) = f(w), a contradiction. In fact, we claim that f(z) stays strictly
+away from f(w) + 2πi, in the sense that there exists a disc centered at
+f(w) + 2πi that contains no points of the image f(Ω). Otherwise, there
+exists a sequence {zn} in Ωsuch that f(zn) →f(w) + 2πi. We exponen-
+tiate this relation, and, since the exponential function is continuous, we
+must have zn →w. But this implies f(zn) →f(w), which is a contra-
+diction. Finally, consider the map
+F(z) =
+1
+f(z) −(f(w) + 2πi).
+Since f is injective, so is F, hence F : Ω→F(Ω) is a conformal map.
+Moreover, by our analysis, F(Ω) is bounded. We may therefore translate
+and rescale the function F in order to obtain a conformal map from Ω
+to an open subset of D that contains the origin.
+Step 2. By the ﬁrst step, we may assume that Ωis an open subset of D
+with 0 ∈Ω. Consider the family F of all injective holomorphic functions
+on Ωthat map into the unit disc and ﬁx the origin:
+F = {f : Ω→D holomorphic, injective and f(0) = 0}.
+First, note that F is non-empty since it contains the identity.
+Also,
+this family is uniformly bounded by construction, since all functions are
+required to map into the unit disc.
+Now, we turn to the question of ﬁnding a function f ∈F that max-
+imizes |f ′(0)|. First, observe that the quantities |f ′(0)| are uniformly
+bounded as f ranges in F.
+This follows from the Cauchy inequality
+(Corollary 4.3 in Chapter 2) for f ′ applied to a small disc centered at
+the origin.
+Next, we let
+s = sup
+f∈F
+|f ′(0)|,
+and we choose a sequence {fn} ⊂F such that |f ′
+n(0)| →s as n →∞. By
+Montel’s theorem (Theorem 3.3), this sequence has a subsequence that
+converges uniformly on compact sets to a holomorphic function f on Ω.
+Since s ≥1 (because z 	→z belongs to F), f is non-constant, hence injec-
+tive,
+by
+Proposition
+3.5.
+Also,
+by
+continuity
+we
+have
+|f(z)| ≤1 for all z ∈Ωand from the maximum modulus principle we
+see that |f(z)| < 1. Since we clearly have f(0) = 0, we conclude that
+f ∈F with |f ′(0)| = s.
+
+230
+Chapter 8. CONFORMAL MAPPINGS
+Step 3. In this last step, we demonstrate that f is a conformal map
+from Ωto D. Since f is already injective, it suﬃces to prove that f is
+also surjective. If this were not true, we could construct a function in F
+with derivative at 0 greater than s. Indeed, suppose there exists α ∈D
+such that f(z)̸ = α, and consider the automorphism ψα of the disc that
+interchanges 0 and α, namely
+ψα(z) = α −z
+1 −αz .
+Since Ωis simply connected, so is U = (ψα ◦f)(Ω), and moreover, U
+does not contain the origin. It is therefore possible to deﬁne a square
+root function on U by
+g(w) = e
+1
+2 log w.
+Next, consider the function
+F = ψg(α) ◦g ◦ψα ◦f.
+We claim that F ∈F. Clearly F is holomorphic and it maps 0 to 0.
+Also F maps into the unit disc since this is true of each of the functions
+in the composition. Finally, F is injective. This is clearly true for the
+automorphisms ψα and ψg(α); it is also true for the square root g and
+the function f, since the latter is injective by assumption. If h denotes
+the square function h(w) = w2, then we must have
+f = ψ−1
+α
+◦h ◦ψ−1
+g(α) ◦F = Φ ◦F.
+But Φ maps D into D with Φ(0) = 0, and is not injective because F is
+and h is not. By the last part of the Schwarz lemma, we conclude that
+|Φ′(0)| < 1. The proof is complete once we observe that
+f ′(0) = Φ′(0)F ′(0),
+and thus
+|f ′(0)| < |F ′(0)|,
+contradicting the maximality of |f ′(0)| in F.
+Finally, we multiply f by a complex number of absolute value 1 so
+that f ′(0) > 0, which ends the proof.
+For a variant of this proof, see Problem 7.
+
+4. Conformal mappings onto polygons
+231
+Remark. It is worthwhile to point out that the only places where
+the hypothesis of simple-connectivity entered in the proof were in the
+uses of the logarithm and the square root.
+Thus it would have suf-
+ﬁced to have assumed (in addition to the hypothesis that Ωis proper)
+that Ωis holomorphically simply connected in the sense that for
+any holomorphic function f in Ωand any closed curve γ in Ω, we have
+
+γ f(z) dz = 0. Further discussion of this point, and various equivalent
+properties of simple-connectivity, are given in Appendix B.
+4 Conformal mappings onto polygons
+The Riemann mapping theorem guarantees the existence of a conformal
+map from any proper, simply connected open set to the disc, or equiv-
+alently to the upper half-plane, but this theorem gives little insight as
+to the exact form of this map.
+In Section 1 we gave various explicit
+formulas in the case of regions that have symmetries, but it is of course
+unreasonable to ask for an explicit formula in the general case. There
+is, however, another class of open sets for which there are nice formulas,
+namely the polygons. Our aim in this last section is to give a proof of
+the Schwarz-Christoﬀel formula, which describes the nature of conformal
+maps from the disc (or upper half-plane) to polygons.
+4.1 Some examples
+We begin by studying some motivating examples. The ﬁrst two corre-
+spond to easy (but inﬁnite and degenerate) cases.
+Example 1. First, we investigate the conformal map from the upper
+half-plane to the sector {z : 0 < arg z < απ}, with 0 < α < 2, given in
+Section 1 by f(z) = zα.
+Anticipating the Schwarz-Christoﬀel formula
+below, we write
+zα = f(z) =
+ z
+0
+f ′(ζ) dζ = α
+ z
+0
+ζ−β dζ
+with α + β = 1, and where the integral is taken along any path in the
+upper half-plane. In fact, by continuity and Cauchy’s theorem, we may
+take the path of integration to lie in the closure of the upper half-plane.
+Although the behavior of f follows immediately from the original deﬁ-
+nition, we study it in terms of the integral expression above, since this
+provides insight for the general case treated later.
+Note ﬁrst that ζ−β is integrable near 0 since β < 1, therefore f(0) = 0.
+Observe that when z is real and positive (z = x), then f ′(x) = αxα−1 is

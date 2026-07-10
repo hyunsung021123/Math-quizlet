@@ -1,0 +1,177 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.5.4 Schwarz reflection principle
+직전 소단원: 「2.5.3 Holomorphic functions defined in terms of integrals」
+[본문]
+5. Further applications
+57
+Then, if n > 1/δ, and z ∈D we have
+|fn(z) −f(z)| =
+
+n
+
+k=1
+ k/n
+(k−1)/n
+F(z, k/n) −F(z, s) ds
+
+≤
+n
+
+k=1
+ k/n
+(k−1)/n
+|F(z, k/n) −F(z, s)| ds
+<
+n
+
+k=1
+ϵ
+n
+< ϵ.
+This proves the claim, and by Theorem 5.2 we conclude that f is holo-
+morphic in D. As a consequence, f is holomorphic in Ω, as was to be
+shown.
+5.4 Schwarz reﬂection principle
+In real analysis, there are various situations where one wishes to extend
+a function from a given set to a larger one.
+Several techniques exist
+that provide extensions for continuous functions, and more generally for
+functions with varying degrees of smoothness. Of course, the diﬃculty of
+the technique increases as we impose more conditions on the extension.
+The situation is very diﬀerent for holomorphic functions. Not only are
+these functions indeﬁnitely diﬀerentiable in their domain of deﬁnition,
+but they also have additional characteristically rigid properties, which
+make them diﬃcult to mold. For example, there exist holomorphic func-
+tions in a disc which are continuous on the closure of the disc, but which
+cannot be continued (analytically) into any region larger than the disc.
+(This phenomenon is discussed in Problem 1.)
+Another fact we have
+seen above is that holomorphic functions must be identically zero if they
+vanish on small open sets (or even, for example, a non-zero line segment).
+It turns out that the theory developed in this chapter provides a simple
+extension phenomenon that is very useful in applications: the Schwarz
+reﬂection principle. The proof consists of two parts. First we deﬁne the
+extension, and then check that the resulting function is still holomorphic.
+We begin with this second point.
+Let Ωbe an open subset of C that is symmetric with respect to the
+real line, that is
+z ∈Ω
+if and only if
+z ∈Ω.
+
+58
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Let Ω+ denote the part of Ωthat lies in the upper half-plane and Ω−
+that part that lies in the lower half-plane.
+Ω+
+Ω−
+I
+R
+Ω
+z
+z
+Figure 11. An open set symmetric across the real axis
+Also, let I = Ω∩R so that I denotes the interior of that part of the
+boundary of Ω+ and Ω−that lies on the real axis. Then we have
+Ω+ ∪I ∪Ω−= Ω
+and the only interesting case of the next theorem occurs, of course, when
+I is non-empty.
+Theorem 5.5 (Symmetry principle) If f + and f −are holomorphic
+functions in Ω+ and Ω−respectively, that extend continuously to I and
+f +(x) = f −(x)
+for all x ∈I,
+then the function f deﬁned on Ωby
+f(z) =
+
+
+
+f +(z)
+if z ∈Ω+,
+f +(z) = f −(z)
+if z ∈I,
+f −(z)
+if z ∈Ω−
+is holomorphic on all of Ω.
+Proof.
+One notes ﬁrst that f is continuous throughout Ω. The only
+diﬃculty is to prove that f is holomorphic at points of I. Suppose D is a
+
+5. Further applications
+59
+disc centered at a point on I and entirely contained in Ω. We prove that
+f is holomorphic in D by Morera’s theorem. Suppose T is a triangle in
+D. If T does not intersect I, then
+
+T
+f(z) dz = 0
+since f is holomorphic in the upper and lower half-discs. Suppose now
+that one side or vertex of T is contained in I, and the rest of T is in,
+say, the upper half-disc. If Tϵ is the triangle obtained from T by slightly
+raising the edge or vertex which lies on I, we have 
+Tϵ f = 0 since Tϵ is
+entirely contained in the upper half-disc (an illustration of the case when
+an edge lies on I is given in Figure 12(a)). We then let ϵ →0, and by
+continuity we conclude that
+
+T
+f(z) dz = 0.
+(a)
+(b)
+T
+T1
+T2
+T3
+Tϵ
+T
+Figure 12. (a) Raising a vertex; (b) splitting a triangle
+If the interior of T intersects I, we can reduce the situation to the
+previous one by writing T as the union of triangles each of which has an
+edge or vertex on I as shown in Figure 12(b). By Morera’s theorem we
+conclude that f is holomorphic in D, as was to be shown.
+We can now state the extension principle, where we use the above
+notation.
+
+60
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Theorem 5.6 (Schwarz reﬂection principle) Suppose that f is a holo-
+morphic function in Ω+ that extends continuously to I and such that f
+is real-valued on I. Then there exists a function F holomorphic in all of
+Ωsuch that F = f on Ω+.
+Proof.
+The idea is simply to deﬁne F(z) for z ∈Ω−by
+F(z) = f(z).
+To prove that F is holomorphic in Ω−we note that if z, z0 ∈Ω−, then
+z, z0 ∈Ω+ and hence, the power series expansion of f near z0 gives
+f(z) =
+
+an(z −z0)n.
+As a consequence we see that
+F(z) =
+
+an(z −z0)n
+and F is holomorphic in Ω−. Since f is real valued on I we have f(x) =
+f(x) whenever x ∈I and hence F extends continuously up to I. The
+proof is complete once we invoke the symmetry principle.
+5.5 Runge’s approximation theorem
+We know by Weierstrass’s theorem that any continuous function on a
+compact interval can be approximated uniformly by polynomials.4 With
+this result in mind, one may inquire about similar approximations in
+complex analysis. More precisely, we ask the following question: what
+conditions on a compact set K ⊂C guarantee that any function holo-
+morphic in a neighborhood of this set can be approximated uniformly by
+polynomials on K?
+An example of this is provided by power series expansions. We recall
+that if f is a holomorphic function in a disc D, then it has a power series
+expansion f(z) = ∞
+n=0 anzn that converges uniformly on every compact
+set K ⊂D. By taking partial sums of this series, we conclude that f can
+be approximated uniformly by polynomials on any compact subset of D.
+In general, however, some condition on K must be imposed, as we see
+by considering the function f(z) = 1/z on the unit circle K = C. Indeed,
+recall that 
+C f(z) dz = 2πi, and if p is any polynomial, then Cauchy’s
+theorem implies 
+C p(z) dz = 0, and this quickly leads to a contradiction.
+4A proof may be found in Section 1.8, Chapter 5, of Book I.

@@ -1,0 +1,329 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.1.intro 개관 (도입부)
+직전 소단원: 「10.intro 개관 (도입부)」
+[본문]
+284
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+1 Product formula for the Jacobi theta function
+In its most elaborate form, Jacobi’s theta function is deﬁned for z ∈C
+and τ ∈H by
+(1)
+Θ(z|τ) =
+∞
+
+n=−∞
+eπin2τe2πinz.
+Two signiﬁcant special cases (or variants) are θ(τ) and ϑ(t), which are
+deﬁned by
+θ(τ) =
+∞
+
+n=−∞
+eπin2τ,
+τ ∈H,
+ϑ(t) =
+∞
+
+n=−∞
+e−πn2t,
+t > 0.
+In fact, the relation between these various functions is given by
+θ(τ) = Θ(0|τ) and ϑ(t) = θ(it), with of course, t > 0.
+We have already encountered these functions several times. For exam-
+ple, in the study of the heat diﬀusion equation for the circle, in Chapter 4
+of Book I, we found that the heat kernel was given by
+Ht(x) =
+∞
+
+n=−∞
+e−4π2n2te2πinx,
+and therefore Ht(x) = Θ(x|4πit).
+Another instance was the occurence of ϑ in the study of the zeta func-
+tion. In fact, we proved in Chapter 6 that the functional equation of ϑ
+implied that of ζ, which then led to the analytic continuation of the zeta
+function.
+We begin our closer look at Θ as a function of z, with τ ﬁxed, by
+recording its basic structural properties, which to a large extent charac-
+terize it.
+Proposition 1.1 The function Θ satisﬁes the following properties:
+(i) Θ is entire in z ∈C and holomorphic in τ ∈H.
+(ii) Θ(z + 1|τ) = Θ(z|τ).
+(iii) Θ(z + τ|τ) = Θ(z|τ)e−πiτe−2πiz.
+(iv)
+Θ(z|τ) = 0 whenever z = 1/2 + τ/2 + n + mτ and n, m ∈Z.
+
+1. Product formula for the Jacobi theta function
+285
+Proof.
+Suppose that Im(τ) = t ≥t0 > 0 and z = x + iy belongs to a
+bounded set in C, say |z| ≤M. Then, the series deﬁning Θ is absolutely
+and uniformly convergent, since
+∞
+
+n=−∞
+|eπin2τe2πinz| ≤C
+
+n≥0
+e−πn2t0e2πnM < ∞.
+Therefore, for each ﬁxed τ ∈H the function Θ(·|τ) is entire, and for each
+ﬁxed z ∈C the function Θ(z|·) is holomorphic in the upper half-plane.
+Since the exponential e2πinz is periodic of period 1, property (ii) is
+immediate from the deﬁnition of Θ.
+To show the third property we may complete the squares in the ex-
+pression for Θ(z + τ|τ). In detail, we have
+Θ(z + τ|τ) =
+∞
+
+n=−∞
+eπin2τe2πin(z+τ)
+=
+∞
+
+n=−∞
+eπi(n2+2n)τe2πinz
+=
+∞
+
+n=−∞
+eπi(n+1)2τe−πiτe2πinz
+=
+∞
+
+n=−∞
+eπi(n+1)2τe−πiτe2πi(n+1)ze−2πiz
+= Θ(z|τ)e−πiτe−2πiz.
+Thus we see that Θ(z|τ), as a function of z, is periodic with period 1 and
+“quasi-periodic” with period τ.
+To establish the last property it suﬃces, by what was just shown, to
+prove that Θ(1/2 + τ/2|τ) = 0. Again, we use the interplay between n
+and n2 to get
+Θ(1/2 + τ/2|τ) =
+∞
+
+n=−∞
+eπin2τe2πin(1/2+τ/2)
+=
+∞
+
+n=−∞
+(−1)neπi(n2+n)τ.
+To see that this last sum is identically zero, it suﬃces to match n ≥0
+with −n −1, and to observe that they have opposite parity, and that
+(−n −1)2 + (−n −1) = n2 + n. This completes the proof of the propo-
+sition.
+
+286
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+We consider next a product Π(z|τ) that enjoys the same structural
+properties as Θ(z|τ) as a function of z. This product is deﬁned for z ∈C
+and τ ∈H by
+Π(z|τ) =
+∞
+
+n=1
+(1 −q2n)(1 + q2n−1e2πiz)(1 + q2n−1e−2πiz),
+where we have used the notation that is standard in the subject, namely
+q = eπiτ. The function Π(z|τ) is sometimes referred to as the triple-
+product.
+Proposition 1.2 The function Π(z|τ) satisﬁes the following properties:
+(i) Π(z, τ) is entire in z ∈C and holomorphic for τ ∈H.
+(ii) Π(z + 1|τ) = Π(z|τ).
+(iii) Π(z + τ|τ) = Π(z|τ)e−πiτe−2πiz.
+(iv) Π(z|τ) = 0 whenever z = 1/2 + τ/2 + n + mτ and n, m ∈Z. More-
+over, these points are simple zeros of Π(·|τ), and Π(·|τ) has no
+other zeros.
+Proof.
+If Im(τ) = t ≥t0 > 0 and z = x + iy, then |q| ≤e−πt0 < 1 and
+(1 −q2n)(1 + q2n−1e2πiz)(1 + q2n−1e−2πiz) = 1 + O
+
+|q|2n−1e2π|z|
+.
+Since the series  |q|2n−1 converges, the results for inﬁnite products in
+Chapter 5 guarantee that Π(z|τ) deﬁnes an entire function of z with
+τ ∈H ﬁxed, and a holomorphic function for τ ∈H with z ∈C ﬁxed.
+Also, it is clear from the deﬁnition that Π(z|τ) is periodic of period 1
+in the z variable.
+To prove the third property, we ﬁrst observe that since q2 = e2πiτ we
+have
+Π(z + τ|τ) =
+∞
+
+n=1
+(1 −q2n)(1 + q2n−1e2πi(z+τ))(1 + q2n−1e−2πi(z+τ))
+=
+∞
+
+n=1
+(1 −q2n)(1 + q2n+1e2πiz)(1 + q2n−3e−2πiz).
+Comparing this last product with Π(z|τ), and isolating the factors that
+are either missing or extra leads to
+Π(z + τ|τ) = Π(z|τ)
+1 + q−1e−2πiz
+1 + qe2πiz
+
+.
+
+1. Product formula for the Jacobi theta function
+287
+Hence (iii) follows because (1 + x)/(1 + x−1) = x, whenever x̸ = −1.
+Finally, to ﬁnd the zeros of Π(z|τ) we recall that a product that con-
+verges vanishes only if at least one of its factors is zero. Clearly, the factor
+(1 −qn)
+never
+vanishes
+since
+|q| < 1.
+The
+second
+factor
+(1 + q2n−1e2πiz) vanishes when q2n−1e2πiz = −1 = eπi. Since q = eπiτ,
+we then have1
+(2n −1)τ + 2z = 1
+(mod 2).
+Hence,
+z = 1/2 + τ/2 −nτ
+(mod 1),
+and this takes care of the zeros of the type 1/2 + τ/2 −nτ + m with
+n ≥1 and m ∈Z. Similarly, the third factor vanishes if
+(2n −1)τ −2z = 1
+(mod 2)
+which implies that
+z = −1/2 −τ/2 + nτ
+(mod 1)
+= 1/2 + τ/2 + n′τ
+(mod 1),
+where n′ ≥0. This exhausts the zeros of Π(·|τ). Finally, these zeros are
+simple, since the function ew −1 vanishes at the origin to order 1 (a fact
+obvious from a power series expansion or a simple diﬀerentiation).
+The importance of the product Π comes from the following theorem,
+called the product formula for the theta function. The fact that Θ(z|τ)
+and Π(z|τ) satisfy similar properties hints at a close connection between
+the two. This is indeed the case.
+Theorem 1.3 (Product formula) For all z ∈C and τ ∈H we have
+the identity Θ(z|τ) = Π(z|τ).
+Proof.
+Fix τ ∈H. We claim ﬁrst that there exists a constant c(τ)
+such that
+(2)
+Θ(z|τ) = c(τ)Π(z|τ).
+In fact, consider the quotient F(z) = Θ(z|τ)/Π(z|τ), and note that by the
+previous two propositions, the function F is entire and doubly periodic
+with periods 1 and τ. This implies that F is constant as claimed.
+1We use the standard short-hand, a = b (mod c), to mean that a −b is an integral
+multiple of c.
+
+288
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+We must now prove that c(τ) = 1 for all τ, and the main point is to
+establish that c(τ) = c(4τ). If we put z = 1/2 in (2), so that e2iπz =
+e−2iπz = −1, we obtain
+∞
+
+n=−∞
+(−1)nqn2 = c(τ)
+∞
+
+n=1
+(1 −q2n)(1 −q2n−1)(1 −q2n−1)
+= c(τ)
+∞
+
+n=1
+
+(1 −q2n−1)(1 −q2n)
+
+(1 −q2n−1)
+= c(τ)
+∞
+
+n=1
+(1 −qn)(1 −q2n−1).
+Hence
+(3)
+c(τ) =
+∞
+n=−∞(−1)nqn2
+∞
+n=1(1 −qn)(1 −q2n−1).
+Next, we put z = 1/4 in (2), so that e2iπz = i. On the one hand, we have
+Θ(1/4|τ) =
+∞
+
+n=−∞
+qn2in,
+and due to the fact that 1/i = −i, only the terms corresponding to n =
+even = 2m are not cancelled; thus
+Θ(1/4|τ) =
+∞
+
+m=−∞
+q4m2(−1)m.
+On the other hand,
+Π(1/4|τ) =
+∞
+
+m=1
+(1 −q2m)(1 + iq2m−1)(1 −iq2m−1)
+=
+∞
+
+m=1
+(1 −q2m)(1 + q4m−2)
+=
+∞
+
+n=1
+(1 −q4n)(1 −q8n−4),
+where the last line is obtained by considering separately the two cases
+2m = 4n −4 and 2m = 4n −2 in the ﬁrst factor. Hence
+(4)
+c(τ) =
+∞
+n=−∞(−1)nq4n2
+∞
+n=1(1 −q4n)(1 −q8n−4),
+
+1. Product formula for the Jacobi theta function
+289
+and combining (3) and (4) establishes our claim that c(τ) = c(4τ). Suc-
+cessive applications of this identity give c(τ) = c(4kτ), and since q4k =
+eiπ4kτ →0 as k →∞, we conclude from (2) that c(τ) = 1. This proves
+the theorem.
+The product formula for the function Θ specializes to its variant θ(τ) =
+Θ(0|τ), and this provides a proof that θ is non-vanishing in the upper
+half-plane.
+Corollary 1.4 If Im(τ) > 0 and q = eπiτ, then
+θ(τ) =
+∞
+
+n=1
+(1 −q2n)(1 + q2n−1)2.
+Thus θ(τ)̸ = 0 for τ ∈H.
+The next corollary shows that the properties of the function Θ now
+yield the construction of an elliptic function (which is in fact closely
+related to the Weierstrass ℘function).
+Corollary 1.5 For each ﬁxed τ ∈H, the quotient
+(log Θ(z|τ))′′ = Θ(z|τ)Θ′′(z|τ) −(Θ′(z|τ))2
+Θ(z|τ)2
+is an elliptic function of order 2 with periods 1 and τ, and with a double
+pole at z = 1/2 + τ/2.
+In the above, the primes
+′ denote diﬀerentiation with respect to the z
+variable.
+Proof.
+Let F(z) = (log Θ(z|τ))′ = Θ(z|τ)′/Θ(z|τ).
+Diﬀerentiating
+the identities (ii) and (iii) of Proposition 1.1 gives F(z + 1) = F(z),
+F(z + τ) = F(z) −2πi, and diﬀerentiating again shows that F ′(z) is dou-
+bly periodic. Since Θ(z|τ) vanishes only at z = 1/2 + τ/2 in the funda-
+mental parallelogram, the function F(z) has only a single pole, and thus
+F ′(z) has only a double pole there.
+The precise connection between (log Θ(z|τ))′′ and ℘τ(z) is stated in
+Exercise 1.
+For an analogy between Θ and the Weierstrass σ function, see Exer-
+cise 5 of the previous chapter.
+1.1 Further transformation laws
+We now come to the study of the transformation relations in the τ-
+variable, that is, to the modular character of Θ.

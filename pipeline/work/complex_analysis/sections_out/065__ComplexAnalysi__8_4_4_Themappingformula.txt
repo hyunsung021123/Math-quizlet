@@ -1,0 +1,288 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.4.4 The mapping formula
+직전 소단원: 「8.4.3 Boundary behavior」
+[본문]
+4. Conformal mappings onto polygons
+241
+polygonal region P. Therefore, G also extends to a continuous function
+from P to D. It suﬃces to now prove that the extensions of F and G
+are inverses of each other. If z ∈∂D and {zk} is a sequence in the disc
+that converges to z, then G(F(zk)) = zk, so after taking the limit and
+using the fact that F is continuous, we conclude that G(F(z)) = z for all
+z ∈D. Similarly, F(G(w)) = w for all w ∈P, and the theorem is proved.
+The circle of ideas used in this proof can be used to prove more general
+theorems on the boundary continuity of conformal maps. See Exercise 18
+and Problem 6 below.
+4.4 The mapping formula
+Suppose P is a polygonal region bounded by a polygon p whose vertices
+are ordered consecutively a1, a2, . . . , an, and with n ≥3. We denote by
+παk the interior angle at ak, and deﬁne the exterior angle πβk by αk +
+βk = 1. A simple geometric argument provides n
+k=1 βk = 2.
+We shall consider conformal mappings of the half-plane H to P, and
+make use of the results of the previous section regarding conformal maps
+from the disc D to P. The standard correspondences w = (i −z)/(i + z),
+z = i(1 −w)/(1 + w) allows us to go back and forth between z ∈H and
+w ∈D. Notice that the boundary point w = −1 of the circle corresponds
+to the point at inﬁnity on the line, and so the conformal map of H to
+D extends to a continuous bijection of the boundary of H, which for the
+purpose of this discussion includes the point at inﬁnity.
+Let F be a conformal map from H to P. (Its existence is guaranteed by
+the Riemann mapping theorem and the previous discussion.) We assume
+ﬁrst that none of the vertices of p correspond to the point at inﬁnity.
+Therefore, there are real numbers A1, A2, . . . , An so that F(Ak) = ak for
+all k. Since F is continuous and injective, and the vertices are numbered
+consecutively, we may conclude that the Ak’s are in either increasing
+or decreasing order. After relabeling the vertices ak and the points Ak,
+we may assume that A1 < A2 < · · · < An. These points divide the real
+line into n −1 segments [Ak, Ak+1], 1 ≤k ≤n −1, and the segment that
+consists of the join of the two half-segments (−∞, A1] ∪[An, ∞). These
+are mapped bijectively onto the corresponding sides of the polygon, that
+is, the segments [ak, ak+1], 1 ≤k ≤n −1, and [an, a1] (see Figure 8).
+Theorem 4.6 There exist complex numbers c1 and c2 so that the con-
+formal map F of H to P is given by
+F(z) = c1S(z) + c2
+where S is the Schwarz-Christoﬀel integral introduced in Section 4.2.
+
+242
+Chapter 8. CONFORMAL MAPPINGS
+ak
+P
+H
+A1
+An
+Ak−1
+Ak+1
+ak+1
+ak−1
+παk
+Ak
+πβk
+Figure 8. The mapping F
+Proof.
+We ﬁrst consider z in the upper half-plane lying above the
+two adjacent segments [Ak−1, Ak] and [Ak, Ak+1], where 1 < k < n. We
+note that F maps these two segments to two segments that intersect at
+ak = F(Ak) at an angle παk.
+By choosing a branch of the logarithm we can in turn deﬁne
+hk(z) = (F(z) −ak)1/αk
+for all z in the half-strip in the upper half-plane bounded by the lines
+Re(z) = Ak−1 and Re(z) = Ak+1. Since F continues to the boundary of
+H, the map hk is actually continuous up to the segment (Ak−1, Ak+1)
+on the real line. By construction hk will map the segment [Ak−1, Ak+1]
+to a (straight) segment Lk in the complex plane, with Ak mapped to
+0. We may therefore apply the Schwarz reﬂection principle to see that
+hk is analytically continuable to a holomorphic function in the two-way
+inﬁnite strip Ak−1 < Re(z) < Ak+1 (see Figure 9).
+We claim that h′
+k
+never vanishes in that strip. First, if z belongs to the open upper half-
+strip, then
+F ′(z)
+F(z) −F(Ak) = αk
+h′
+k(z)
+hk(z),
+and since F is conformal, we have F ′(z)̸ = 0 so h′
+k(z)̸ = 0 (Proposi-
+tion 1.1). By reﬂection, this also holds in the lower half-strip, and it
+remains to investigate points on the segment (Ak−1, Ak+1). If Ak−1 <
+x < Ak+1, we note that the image under hk of a small half-disc centered
+at x and contained in H lies on one side of the straight line segment
+
+4. Conformal mappings onto polygons
+243
+Ak
+Ak−1
+Ak+1
+Figure 9. Schwarz reﬂection
+Lk. Since hk is injective up to Lk (because F is) the symmetry in the
+Schwarz reﬂection principle guarantees that hk is injective in the whole
+disc centered at x, whence h′
+k(x)̸ = 0, whence h′
+k(z)̸ = 0 for all z in the
+strip Ak−1 < Re(z) < Ak+1.
+Now
+because
+F ′ = αkh−βk
+k
+h′
+k
+and
+F ′′ = −βkαkh−βk−1
+k
+(h′
+k)2 +
+αkh−βk
+k
+h′′
+k, the fact that h′
+k(z)̸ = 0 implies that
+F ′′(z)
+F ′(z) =
+−βk
+z −Ak
++ Ek(z),
+where Ek is holomorphic in the strip Ak−1 < Re(z) < Ak+1. A similar
+result holds for k = 1 and k = n, namely
+F ′′(z)
+F ′(z) = −
+β1
+z −A1
++ E1,
+where E1 is holomorphic in the strip −∞< Re(z) < A2, and
+F ′′(z)
+F ′(z) = −
+βn
+z −An
++ En,
+where En is holomorphic in the strip An−1 < Re(z) < ∞. Finally, an-
+other application of the reﬂection principle shows that F is continuable
+in the exterior of a disc |z| ≤R, for large R (say R > max1≤k≤n |Ak|). In-
+deed,
+we
+may
+continue
+F
+across
+the
+union
+of
+the
+segments
+
+244
+Chapter 8. CONFORMAL MAPPINGS
+(−∞, A1) ∪(An, ∞) since their image under F is a straight line seg-
+ment and Schwarz reﬂection applies. The fact that F maps the upper
+half-plane to a bounded region shows that the analytic continuation of F
+outside a large disc is also bounded, and hence holomorphic at inﬁnity.
+Thus F ′′/F ′ is holomorphic at inﬁnity and we claim that it goes to 0 as
+|z| →∞. Indeed, we may expand F at z = ∞as
+F(z) = c0 + c1
+z + c2
+z2 + · · · .
+This after diﬀerentiation shows that F ′′/F ′ decays like 1/z as |z| becomes
+large, and proves our claim.
+Altogether then, because the various strips overlap and cover the entire
+complex plane,
+F ′′(z)
+F ′(z) +
+n
+
+k=1
+βk
+z −Ak
+is holomorphic in the entire plane and vanishes at inﬁnity; thus, by Li-
+ouville’s theorem it is zero. Hence
+F ′′(z)
+F ′(z) = −
+n
+
+k=1
+βk
+z −Ak
+.
+From this we contend that F ′(z) = c(z −A1)−β1 · · · (z −An)−βn.
+In-
+deed, denoting this product by Q(z), we have
+Q′(z)
+Q(z) = −
+n
+
+k=1
+βk
+z −Ak
+.
+Therefore
+d
+dz
+F ′(z)
+Q(z)
+
+= 0,
+which proves the contention. A ﬁnal integration yields the theorem.
+We may now withdraw the hypothesis we made at the beginning that
+F did not map the point at inﬁnity to a vertex of P, and obtain a formula
+for that case as well.
+Theorem 4.7 If F is a conformal map from the upper half-plane to the
+polygonal region P and maps the points A1, . . . , An−1, ∞to the vertices
+of p, then there exist constants C1 and C2 such that
+F(z) = C1
+ z
+0
+dζ
+(ζ −A1)β1 · · · (ζ −An−1)βn−1 + C2.
+
+4. Conformal mappings onto polygons
+245
+In other words, the formula is obtained by deleting the last term in
+the Schwarz-Christoﬀel integral (5).
+Proof.
+After a preliminary translation, we may assume that Aj̸ = 0
+for j = 1, . . . , n −1. Choose a point A∗
+n > 0 on the real line, and consider
+the fractional linear map deﬁned by
+Φ(z) = A∗
+n −1
+z .
+Then Φ is an automorphism of the upper half-plane. Let A∗
+k = Φ(Ak)
+for k = 1, . . . , n −1, and note that A∗
+n = Φ(∞). Then
+(F ◦Φ−1)(A∗
+k) = ak
+for all k = 1, 2, . . ., n.
+We can now apply the Schwarz-Christoﬀel formula just proved to ﬁnd
+that
+(F ◦Φ−1)(z′) = C1
+ z′
+0
+dζ
+(ζ −A∗
+1)β1 · · · (ζ −A∗n)βn + C2.
+The change of variables ζ = Φ(w) satisﬁes dζ = dw/w2, and since we can
+write 2 = β1 + · · · + βn, we obtain
+(F ◦Φ−1)(z′) = C1
+ Φ−1(z′)
+0
+dw
+(w(A∗
+n−A∗
+1)−1)β1 ···(w(A∗
+n−A∗
+n−1)−1)βn−1 + C′
+2
+= C′
+1
+ Φ−1(z′)
+0
+dw
+(w−1/(A∗
+n−A∗
+1))β1 ···(w−1/(A∗
+n−A∗
+n−1))βn−1 + C′
+2.
+Finally, we note that 1/(A∗
+n −A∗
+k) = Ak and set Φ−1(z′) = z in the above
+equation to conclude that
+F(z) = C′
+1
+ z
+0
+dw
+(w −A1)β1 · · · (w −An−1)βn−1 + C′
+2,
+as was to be shown.
+4.5 Return to elliptic integrals
+We consider again the elliptic integral
+I(z) =
+ z
+0
+dζ
+[(1 −ζ2)(1 −k2ζ2)]1/2
+with 0 < k < 1,

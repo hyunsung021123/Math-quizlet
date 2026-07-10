@@ -1,0 +1,275 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 6. The Gamma and Zeta Functions
+현재 소단원: 6.1.1 Analytic continuation
+직전 소단원: 「5.7 Problems」
+[본문]
+6 The Gamma and Zeta
+Functions
+It is no exaggeration to say that the gamma and zeta functions are
+among the most important nonelementary functions in mathematics.
+The gamma function Γ is ubiquitous in nature. It arises in a host of
+calculations and is featured in a large number of identities that occur in
+analysis. Part of the explanation for this probably lies in the basic struc-
+tural property of the gamma function, which essentially characterizes
+it: 1/Γ(s) is the (simplest) entire function1 which has zeros at exactly
+s = 0, −1, −2, . . ..
+The zeta function ζ (whose study, like that of the gamma function,
+was initiated by Euler) plays a fundamental role in the analytic theory
+of numbers. Its intimate connection with prime numbers comes about
+via the identity for ζ(s):
+
+p
+1
+1 −p−s =
+∞
+
+n=1
+1
+ns ,
+where the product is over all primes. The behavior of ζ(s) for real s > 1,
+with s tending to 1, was used by Euler to prove that 
+p 1/p diverges,
+and a similar reasoning for L-functions is at the starting point of the
+proof of Dirichlet’s theorem on primes in arithmetic progression, as we
+saw in Book I.
+While there is no diﬃculty in seeing that ζ(s) is well-deﬁned (and
+analytic) when Re(s) > 1, it was Riemann who realized that the further
+study of primes was bound up with the analytic (in fact, meromorphic)
+continuation of ζ into the rest of the complex plane. Beyond this, we also
+consider its remarkable functional equation, which reveals a symmetry
+about the line Re(s) = 1/2, and whose proof is based on a corresponding
+identity for the theta function. We also make a more detailed study of
+the growth of ζ(s) near the line Re(s) = 1, which will be required in the
+proof of the prime number theorem given in the next chapter.
+1In keeping with the standard notation of the subject, we denote by s (instead of z)
+the argument of the functions Γ and ζ.
+
+160
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+1 The gamma function
+For s > 0, the gamma function is deﬁned by
+(1)
+Γ(s) =
+ ∞
+0
+e−tts−1 dt.
+The integral converges for each positive s because near t = 0 the func-
+tion ts−1 is integrable, and for t large the convergence is guaranteed by
+the exponential decay of the integrand. These observations allow us to
+extend the domain of deﬁnition of Γ as follows.
+Proposition 1.1 The gamma function extends to an analytic function
+in the half-plane Re(s) > 0, and is still given there by the integral for-
+mula (1).
+Proof.
+It suﬃces to show that the integral deﬁnes a holomorphic
+function in every strip
+Sδ,M = {δ < Re(s) < M} ,
+where 0 < δ < M < ∞. Note that if σ denotes the real part of s, then
+|e−tts−1| = e−ttσ−1, so that the integral
+Γ(s) =
+ ∞
+0
+e−tts−1 dt ,
+which is deﬁned by the limit limϵ→0
+ 1/ϵ
+ϵ
+e−tts−1 dt, converges for each
+s ∈Sδ,M. For ϵ > 0, let
+Fϵ(s) =
+ 1/ϵ
+ϵ
+e−tts−1 dt.
+By Theorem 5.4 in Chapter 2, the function Fϵ is holomorphic in the
+strip Sδ,M. By Theorem 5.2, also of Chapter 2, it suﬃces to show that
+Fϵ converges uniformly to Γ on the strip Sδ,M.
+To see this, we ﬁrst
+observe that
+|Γ(s) −Fϵ(s)| ≤
+ ϵ
+0
+e−ttσ−1 dt +
+ ∞
+1/ϵ
+e−ttσ−1 dt.
+The ﬁrst integral converges uniformly to 0, as ϵ tends to 0 since it can
+be easily estimated by ϵδ/δ whenever 0 < ϵ < 1.
+The second integral
+converges uniformly to 0 as well, since
+
+ ∞
+1/ϵ
+e−ttσ−1 dt
+ ≤
+ ∞
+1/ϵ
+e−ttM−1dt ≤C
+ ∞
+1/ϵ
+e−t/2 dt →0,
+
+1. The gamma function
+161
+and the proof is complete.
+1.1 Analytic continuation
+Despite the fact that the integral deﬁning Γ is not absolutely convergent
+for other values of s, we can go further and prove that there exists a
+meromorphic function deﬁned on all of C that equals Γ in the half-plane
+Re(s) > 0. In the same sense as in Chapter 2, we say that this function
+is the analytic continuation2 of Γ, and we therefore continue to denote it
+by Γ.
+To prove the asserted analytic extension to a meromorphic function,
+we need a lemma, which incidentally exhibits an important property
+of Γ.
+Lemma 1.2 If Re(s) > 0, then
+(2)
+Γ(s + 1) = sΓ(s).
+As a consequence Γ(n + 1) = n! for n = 0, 1, 2, . . ..
+Proof.
+Integrating by parts in the ﬁnite integrals gives
+ 1/ϵ
+ϵ
+d
+dt(e−tts) dt = −
+ 1/ϵ
+ϵ
+e−tts dt + s
+ 1/ϵ
+ϵ
+e−tts−1 dt,
+and the desired formula (2) follows by letting ϵ tend to 0, and noting
+that the left-hand side vanishes because e−tts →0 as t tends to 0 or ∞.
+Now it suﬃces to check that
+Γ(1) =
+ ∞
+0
+e−t dt = 
+−e−t∞
+0 = 1 ,
+and to apply (2) successively to ﬁnd that Γ(n + 1) = n!.
+Formula (2) in the lemma is all we need to give a proof of the following
+theorem.
+Theorem 1.3 The function Γ(s) initially deﬁned for Re(s) > 0 has an
+analytic continuation to a meromorphic function on C whose only sin-
+gularities are simple poles at the negative integers s = 0, −1, . . .. The
+residue of Γ at s = −n is (−1)n/n!.
+2Uniqueness of the analytic continuation is guaranteed since the complement of the
+poles of a meromorphic function forms a connected set.
+
+162
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+Proof.
+It suﬃces to extend Γ to each half-plane Re(s) > −m, where
+m ≥1 is an integer. For Re(s) > −1, we deﬁne
+F1(s) = Γ(s + 1)
+s
+.
+Since Γ(s + 1) is holomorphic in Re(s) > −1, we see that F1 is meromor-
+phic in that half-plane, with the only possible singularity a simple pole
+at s = 0. The fact that Γ(1) = 1 shows that F1 does in fact have a simple
+pole at s = 0 with residue 1. Moreover, if Re(s) > 0, then
+F1(s) = Γ(s + 1)
+s
+= Γ(s)
+by the previous lemma. So F1 extends Γ to a meromorphic function on
+the half-plane Re(s) > −1. We can now continue in this fashion by deﬁn-
+ing a meromorphic Fm for Re(s) > −m that agrees with Γ on Re(s) > 0.
+For Re(s) > −m, where m is an integer ≥1, deﬁne
+Fm(s) =
+Γ(s + m)
+(s + m −1)(s + m −2) · · ·s.
+The function Fm is meromorphic in Re(s) > −m and has simple poles
+at s = 0, −1, −2, . . ., −m + 1 with residues
+ress=−nFm(s) =
+Γ(−n + m)
+(m −1 −n)!(−1)(−2) · · ·(−n)
+=
+(m −n −1)!
+(m −1 −n)!(−1)(−2) · · ·(−n)
+= (−1)n
+n!
+.
+Successive applications of the lemma show that Fm(s) = Γ(s) for Re(s) >
+0. By uniqueness, this also means that Fm = Fk for 1 ≤k ≤m on the
+domain of deﬁnition of Fk.
+Therefore, we have obtained the desired
+continuation of Γ.
+Remark. We have already proved that Γ(s + 1) = sΓ(s) whenever
+Re(s) > 0. In fact, by analytic continuation, this formula remains true
+whenever s̸ = 0, −1, −2, . . ., that is, whenever s is not a pole of Γ. This
+is because both sides of the formula are holomorphic in the complement
+of the poles of Γ and are equal when Re(s) > 0. Actually, one can go
+further, and note that if s is a negative integer s = −n with n ≥1, then
+both sides of the formula are inﬁnite and moreover
+ress=−nΓ(s + 1) = −n ress=−nΓ(s).
+
+1. The gamma function
+163
+Finally, note that when s = 0 we have Γ(1) = lims→0 sΓ(s).
+An alternate proof of Theorem 1.3, which is interesting in its own right
+and whose ideas recur later, is obtained by splitting the integral for Γ(s)
+deﬁned on Re(s) > 0 as follows:
+Γ(s) =
+ 1
+0
+e−tts−1 dt +
+ ∞
+1
+e−tts−1 dt.
+The integral on the far right deﬁnes an entire function; also expanding
+e−t in a power series and integrating term by term gives
+ 1
+0
+e−tts−1 dt =
+∞
+
+n=0
+(−1)n
+n!(n + s).
+Therefore
+(3)
+Γ(s) =
+∞
+
+n=0
+(−1)n
+n!(n + s) +
+ ∞
+1
+e−tts−1 dt
+for Re(s) > 0.
+Finally, the series deﬁnes a meromorphic function on C with poles at
+the negative integers and residue (−1)n/n! at s = −n. To prove this, we
+argue as follows. For a ﬁxed R > 0 we may split the sum in two parts
+∞
+
+n=0
+(−1)n
+n!(n + s) =
+N
+
+n=0
+(−1)n
+n!(n + s) +
+∞
+
+n=N+1
+(−1)n
+n!(n + s),
+where N is an integer chosen so that N > 2R. The ﬁrst sum, which is
+ﬁnite, deﬁnes a meromorphic function in the disc |s| < R with poles at
+the desired points and the correct residues. The second sum converges
+uniformly in that disc, hence deﬁnes a holomorphic function there, since
+n > N > 2R and |n + s| ≥R imply
+
+(−1)n
+n!(n + s)
+ ≤
+1
+n!R.
+Since R was arbitrary, we conclude that the series in (3) has the desired
+properties.
+In particular, the relation (3) now holds on all of C.
+1.2 Further properties of Γ
+The following identity reveals the symmetry of Γ about the line Re(s) =
+1/2.

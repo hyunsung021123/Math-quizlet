@@ -1,0 +1,211 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 8. Conformal Mappings
+현재 소단원: 8.3.2 Montel’s theorem
+직전 소단원: 「8.3.1 Necessary conditions and statement of the theorem」
+[본문]
+3. The Riemann mapping theorem
+225
+3.2 Montel’s theorem
+Let Ωbe an open subset of C. A family F of holomorphic functions on
+Ωis said to be normal if every sequence in F has a subsequence that
+converges uniformly on every compact subset of Ω(the limit need not be
+in F).
+The proof that a family of functions is normal is, in practice, the con-
+sequence of two related properties, uniform boundedness and equiconti-
+nuity. These we shall now deﬁne.
+The family F is said to be uniformly bounded on compact subsets
+of Ωif for each compact set K ⊂Ωthere exists B > 0, such that
+|f(z)| ≤B
+for all z ∈K and f ∈F.
+Also, the family F is equicontinuous on a compact set K if for every
+ϵ > 0 there exists δ > 0 such that whenever z, w ∈K and |z −w| < δ,
+then
+|f(z) −f(w)| < ϵ
+for all f ∈F.
+Equicontinuity is a strong condition, which requires uniform continuity,
+uniformly in the family. For instance, any family of diﬀerentiable func-
+tions on [0, 1] whose derivatives are uniformly bounded is equicontinuous.
+This follows directly from the mean value theorem. On the other hand,
+note that the family {fn} on [0, 1] given by fn(x) = xn is not equicon-
+tinuous since for any ﬁxed 0 < x0 < 1 we have |fn(1) −fn(x0)| →1 as n
+tends to inﬁnity.
+The theorem that follows puts together these new concepts and is an
+important ingredient in the proof of the Riemann mapping theorem.
+Theorem 3.3 Suppose F is a family of holomorphic functions on Ωthat
+is uniformly bounded on compact subsets of Ω. Then:
+(i)
+F is equicontinuous on every compact subset of Ω.
+(ii)
+F is a normal family.
+The theorem really consists of two separate parts. The ﬁrst part says
+that F is equicontinuous under the assumption that F is a family of
+holomorphic functions that is uniformly bounded on compact subsets of
+Ω. The proof follows from an application of the Cauchy integral formula
+and hence relies on the fact that F consists of holomorphic functions.
+This conclusion is in sharp contrast with the real situation as illustrated
+by the family of functions given by fn(x) = sin(nx) on (0, 1), which is
+
+226
+Chapter 8. CONFORMAL MAPPINGS
+uniformly bounded. However, this family is not equicontinuous and has
+no convergent subsequence on any compact subinterval of (0, 1).
+The second part of the theorem is not complex-analytic in nature.
+Indeed, the fact that F is a normal family follows from assuming only
+that F is uniformly bounded and equicontinuous on compact subsets of
+Ω. This result is sometimes known as the Arzela-Ascoli theorem and its
+proof consists primarily of a diagonalization argument.
+We are required to prove convergence on arbitrary compact subsets of
+Ω, therefore it is useful to introduce the following notion. A sequence
+{Kℓ}∞
+ℓ=1 of compact subsets of Ωis called an exhaustion if
+(a) Kℓis contained in the interior of Kℓ+1 for all ℓ= 1, 2, . . ..
+(b) Any compact set K ⊂Ωis contained in Kℓfor some ℓ. In particular
+Ω=
+∞
+
+ℓ=1
+Kℓ.
+Lemma 3.4 Any open set Ωin the complex plane has an exhaustion.
+Proof.
+If Ωis bounded, we let Kℓdenote the set of all points in Ω
+at distance ≥1/ℓfrom the boundary of Ω. If Ωis not bounded, let Kℓ
+denote the same set as above except that we also require |z| ≤ℓfor all
+z ∈Kℓ.
+We may now begin the proof of Montel’s theorem. Let K be a compact
+subset of Ωand choose r > 0 so small that D3r(z) is contained in Ωfor
+all z ∈K. It suﬃces to choose r so that 3r is less than the distance
+from K to the boundary of Ω. Let z, w ∈K with |z −w| < r, and let
+γ denote the boundary circle of the disc D2r(w). Then, by Cauchy’s
+integral formula, we have
+f(z) −f(w) =
+1
+2πi
+
+γ
+f(ζ)
+
+1
+ζ −z −
+1
+ζ −w
+
+dζ.
+Observe that
+
+1
+ζ −z −
+1
+ζ −w
+ =
+|z −w|
+|ζ −z| |ζ −w| ≤|z −w|
+r2
+since ζ ∈γ and |z −w| < r. Therefore
+|f(z) −f(w)| ≤1
+2π
+2πr
+r2 B|z −w|,
+
+3. The Riemann mapping theorem
+227
+where B denotes the uniform bound for the family F in the compact
+set consisting of all points in Ωat a distance ≤2r from K. Therefore
+|f(z) −f(w)| < C|z −w|, and this estimate is true for all z, w ∈K with
+|z −w| < r and f ∈F; thus this family is equicontinuous, as was to be
+shown.
+To prove the second part of the theorem, we argue as follows. Let
+{fn}∞
+n=1 be a sequence in F and K a compact subset of Ω. Choose a
+sequence of points {wj}∞
+j=1 that is dense in Ω. Since {fn} is uniformly
+bounded, there exists a subsequence {fn,1} = {f1,1, f2,1, f3,1, . . .} of {fn}
+such that fn,1(w1) converges.
+From {fn,1} we can extract a subsequence {fn,2} = {f1,2, f2,2, f3,2, . . .}
+so that fn,2(w2) converges. We may continue this process, and extract a
+subsequence {fn,j} of {fn,j−1} such that fn,j(wj) converges.
+Finally, let gn = fn,n and consider the diagonal subsequence {gn}. By
+construction, gn(wj) converges for each j, and we claim that equiconti-
+nuity implies that gn converges uniformly on K. Given ϵ > 0, choose δ
+as in the deﬁnition of equicontinuity, and note that for some J, the set
+K is contained in the union of the discs Dδ(w1), . . . , Dδ(wJ). Pick N so
+large that if n, m > N, then
+|gm(wj) −gn(wj)| < ϵ
+for all j = 1, . . . , J.
+So if z ∈K, then z ∈Dδ(wj) for some 1 ≤j ≤J. Therefore,
+|gn(z) −gm(z)| ≤|gn(z) −gn(wj)| + |gn(wj) −gm(wj)| +
++ |gm(wj) −gm(z)| < 3ϵ
+whenever n, m > N. Hence {gn} converges uniformly on K.
+Finally, we need one more diagonalization argument to obtain a sub-
+sequence that converges uniformly on every compact subset of Ω. Let
+K1 ⊂K2 ⊂· · · ⊂Kℓ⊂· · · be an exhaustion of Ω, and suppose {gn,1} is
+a subsequence of the original sequence {fn} that converges uniformly on
+K1. Extract from {gn,1} a subsequence {gn,2} that converges uniformly
+on K2, and so on. Then, {gn,n} is a subsequence of {fn} that converges
+uniformly on every Kℓand since the Kℓexhaust Ω, the sequence {gn,n}
+converges uniformly on any compact subset of Ω, as was to be shown.
+We need one further result before we can give the proof of the Riemann
+mapping theorem.
+Proposition 3.5 If Ωis a connected open subset of C and {fn} a se-
+quence of injective holomorphic functions on Ωthat converges uniformly
+
+228
+Chapter 8. CONFORMAL MAPPINGS
+on every compact subset of Ωto a holomorphic function f, then f is
+either injective or constant.
+Proof.
+We argue by contradiction and suppose that f is not injective,
+so there exist distinct complex numbers z1 and z2 in Ωsuch that f(z1) =
+f(z2). Deﬁne a new sequence by gn(z) = fn(z) −fn(z1), so that gn has
+no other zero besides z1, and the sequence {gn} converges uniformly on
+compact subsets of Ωto g(z) = f(z) −f(z1). If g is not identically zero,
+then z2 is an isolated zero for g (because Ωis connected); therefore
+1 =
+1
+2πi
+
+γ
+g′(ζ)
+g(ζ) dζ,
+where γ is a small circle centered at z2 chosen so that g does not vanish
+on γ or at any point of its interior besides z2. Therefore, 1/gn converges
+uniformly to 1/g on γ, and since g′
+n →g′ uniformly on γ we have
+1
+2πi
+
+γ
+g′
+n(ζ)
+gn(ζ) dζ →
+1
+2πi
+
+γ
+g′(ζ)
+g(ζ) dζ.
+But this is a contradiction since gn has no zeros inside γ, and hence
+1
+2πi
+
+γ
+g′
+n(ζ)
+gn(ζ) dζ = 0
+for all n .
+3.3 Proof of the Riemann mapping theorem
+Once we have established the technical results above, the rest of the
+proof of the Riemann mapping theorem is very elegant. It consists of
+three steps, which we isolate.
+Step 1. Suppose that Ωis a simply connected proper open subset of
+C. We claim that Ωis conformally equivalent to an open subset of the
+unit disc that contains the origin. Indeed, choose a complex number α
+that does not belong to Ω, (recall that Ωis proper), and observe that
+z −α never vanishes on the simply connected set Ω. Therefore, we can
+deﬁne a holomorphic function
+f(z) = log(z −α)
+with the desired properties of the logarithm. As a consequence one has,
+ef(z) = z −α, which proves in particular that f is injective. Pick a point
+w ∈Ω, and observe that
+f(z)̸ = f(w) + 2πi
+for all z ∈Ω

@@ -1,0 +1,427 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 6. The Gamma and Zeta Functions
+현재 소단원: 6.1.2 Further properties of Γ
+직전 소단원: 「6.1.1 Analytic continuation」
+[본문]
+1. The gamma function
+163
+Finally, note that when s = 0 we have Γ(1) = lims→0 sΓ(s).
+An alternate proof of Theorem 1.3, which is interesting in its own right
+and whose ideas recur later, is obtained by splitting the integral for Γ(s)
+deﬁned on Re(s) > 0 as follows:
+Γ(s) =
+ 1
+0
+e−tts−1 dt +
+ ∞
+1
+e−tts−1 dt.
+The integral on the far right deﬁnes an entire function; also expanding
+e−t in a power series and integrating term by term gives
+ 1
+0
+e−tts−1 dt =
+∞
+
+n=0
+(−1)n
+n!(n + s).
+Therefore
+(3)
+Γ(s) =
+∞
+
+n=0
+(−1)n
+n!(n + s) +
+ ∞
+1
+e−tts−1 dt
+for Re(s) > 0.
+Finally, the series deﬁnes a meromorphic function on C with poles at
+the negative integers and residue (−1)n/n! at s = −n. To prove this, we
+argue as follows. For a ﬁxed R > 0 we may split the sum in two parts
+∞
+
+n=0
+(−1)n
+n!(n + s) =
+N
+
+n=0
+(−1)n
+n!(n + s) +
+∞
+
+n=N+1
+(−1)n
+n!(n + s),
+where N is an integer chosen so that N > 2R. The ﬁrst sum, which is
+ﬁnite, deﬁnes a meromorphic function in the disc |s| < R with poles at
+the desired points and the correct residues. The second sum converges
+uniformly in that disc, hence deﬁnes a holomorphic function there, since
+n > N > 2R and |n + s| ≥R imply
+
+(−1)n
+n!(n + s)
+ ≤
+1
+n!R.
+Since R was arbitrary, we conclude that the series in (3) has the desired
+properties.
+In particular, the relation (3) now holds on all of C.
+1.2 Further properties of Γ
+The following identity reveals the symmetry of Γ about the line Re(s) =
+1/2.
+
+164
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+Theorem 1.4 For all s ∈C,
+(4)
+Γ(s)Γ(1 −s) =
+π
+sin πs.
+Observe that Γ(1 −s) has simple poles at the positive integers s =
+1, 2, 3, . . ., so that Γ(s)Γ(1 −s) is a meromorphic function on C with
+simple poles at all the integers, a property also shared by π/ sin πs.
+To prove the identity, it suﬃces to do so for 0 < s < 1 since it then
+holds on all of C by analytic continuation.
+Lemma 1.5 For 0 < a < 1,
+ ∞
+0
+va−1
+1 + v dv =
+π
+sin πa.
+Proof.
+We observe ﬁrst that
+ ∞
+0
+va−1
+1 + v dv =
+ ∞
+−∞
+eax
+1 + ex dx ,
+which follows by making the change of variables v = ex. However, using
+contour integration, we saw in Example 2 of Section 2.1 in Chapter 3,
+that the second integral equals π/ sin πa, as desired.
+To establish the theorem, we ﬁrst note that for 0 < s < 1 we may write
+Γ(1 −s) =
+ ∞
+0
+e−uu−s du = t
+ ∞
+0
+e−vt(vt)−s dv ,
+where for t > 0 we made the change of variables vt = u. This trick then
+gives
+Γ(1 −s)Γ(s) =
+ ∞
+0
+e−tts−1Γ(1 −s) dt
+=
+ ∞
+0
+e−tts−1
+
+t
+ ∞
+0
+e−vt(vt)−sdv
+
+dt
+=
+ ∞
+0
+ ∞
+0
+e−t[1+v]v−s dvdt
+=
+ ∞
+0
+v−s
+1 + v dv
+=
+π
+sin π(1 −s)
+=
+π
+sin πs,
+and the theorem is proved.
+
+1. The gamma function
+165
+In particular, by putting s = 1/2, and noting that Γ(s) > 0 whenever
+s > 0, we ﬁnd that
+Γ(1/2) = √π.
+We continue our study of the gamma function by considering its recip-
+rocal, which turns out to be an entire function with remarkably simple
+properties.
+Theorem 1.6 The function Γ has the following properties:
+(i)
+1/Γ(s) is an entire function of s with simple zeros at s=0,−1,−2,. . .
+and it vanishes nowhere else.
+(ii)
+1/Γ(s) has growth
+
+1
+Γ(s)
+ ≤c1ec2|s| log |s|.
+Therefore, 1/Γ is of order 1 in the sense that for every ϵ > 0, there
+exists a bound c(ϵ) so that
+
+1
+Γ(s)
+ ≤c(ϵ)ec2|s|1+ϵ.
+Proof.
+By the theorem we may write
+(5)
+1
+Γ(s) = Γ(1 −s)sin πs
+π
+,
+so the simple poles of Γ(1 −s), which are at s = 1, 2, 3, . . . are cancelled
+by the simple zeros of sin πs, and therefore 1/Γ is entire with simple zeros
+at s = 0, −1, −2, −3, . . ..
+To prove the estimate, we begin by showing that
+ ∞
+1
+e−ttσ dt ≤e(σ+1) log(σ+1)
+whenever σ = Re(s) is positive. Choose n so that σ ≤n ≤σ + 1. Then
+ ∞
+1
+e−ttσ dt ≤
+ ∞
+0
+e−ttn dt
+= n!
+≤nn
+= en log n
+≤e(σ+1) log(σ+1).
+
+166
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+Since the relation (3) holds on all of C, we see from (5) that
+1
+Γ(s) =
+ ∞
+
+n=0
+(−1)n
+n!(n + 1 −s)
+
+sin πs
+π
++
+ ∞
+1
+e−tt−s dt
+ sin πs
+π
+.
+However, from our previous observation,
+
+ ∞
+1
+e−tt−s dt
+ ≤
+ ∞
+1
+e−tt|σ| dt ≤e(|σ|+1) log(|σ|+1),
+and because | sin πs| ≤eπ|s| (by Euler’s formula for the sine function)
+we ﬁnd that the second term in the formula for 1/Γ(s) is dominated by
+ce(|s|+1) log(|s|+1)eπ|s|, which is itself majorized by c1ec2|s| log |s|. Next, we
+consider the term
+∞
+
+n=0
+(−1)n
+n!(n + 1 −s)
+sin πs
+π
+.
+There are two cases: |Im(s)| > 1 and |Im(s)| ≤1. In the ﬁrst case, this
+expression is dominated in absolute value by ceπ|s|. If |Im(s)| ≤1, we
+choose k to be the integer so that k −1/2 ≤Re(s) < k + 1/2. Then if
+k ≥1,
+∞
+
+n=0
+(−1)n
+n!(n + 1 −s)
+sin πs
+π
+= (−1)k−1
+sin πs
+(k −1)!(k −s)π +
++
+
+n̸=k−1
+(−1)n
+sin πs
+n!(n + 1 −s)π .
+Both terms on the right are bounded; the ﬁrst because sin πs vanishes
+at s = k, and the second because the sum is majorized by c  1/n!.
+When k ≤0, then Re(s) < 1/2 by our supposition, and ∞
+n=0
+(−1)n
+n!(n+1−s)
+is again bounded by c  1/n!. This concludes the proof of the theorem.
+The fact that 1/Γ satisﬁes the type of growth conditions discussed in
+Chapter 5 leads naturally to the product formula for the function 1/Γ,
+which we treat next.
+Theorem 1.7 For all s ∈C,
+1
+Γ(s) = eγss
+∞
+
+n=1
+
+1 + s
+n
+
+e−s/n.
+
+1. The gamma function
+167
+The real number γ, which is known as Euler’s constant, is deﬁned
+by
+γ = lim
+N→∞
+N
+
+n=1
+1
+n −log N.
+The existence of the limit was already proved in Proposition 3.10, Chap-
+ter 8 of Book I, but we shall repeat the argument here for completeness.
+Observe that
+N
+
+n=1
+1
+n −log N =
+N
+
+n=1
+1
+n −
+ N
+1
+1
+x dx =
+N−1
+
+n=1
+ n+1
+n
+ 1
+n −1
+x
+
+dx + 1
+N ,
+and by the mean value theorem applied to f(x) = 1/x we have
+
+1
+n −1
+x
+ ≤1
+n2
+for all n ≤x ≤n + 1.
+Hence
+∞
+
+n=1
+1
+n −log N =
+N−1
+
+n=1
+an + 1
+N
+where |an| ≤1/n2.
+Therefore  an converges, which proves that the
+limit deﬁning γ exists. We may now proceed with the proof of the fac-
+torization of 1/Γ.
+Proof.
+By the Hadamard factorization theorem and the fact that 1/Γ
+is entire, of growth order 1, and has simple zeros at s = 0, −1, −2, . . ., we
+can expand 1/Γ in a Weierstrass product of the form
+1
+Γ(s) = eAs+Bs
+∞
+
+n=1
+
+1 + s
+n
+
+e−s/n.
+Here A and B are two constants that are to be determined. Remembering
+that sΓ(s) →1 as s →0, we ﬁnd that B = 0 (or some integer multiple
+of 2πi, which of course gives the same result). Putting s = 1, and using
+
+168
+Chapter 6. THE GAMMA AND ZETA FUNCTIONS
+the fact that Γ(1) = 1 yields
+e−A =
+∞
+
+n=1
+
+1 + 1
+n
+
+e−1/n
+= lim
+N→∞
+N
+
+n=1
+
+1 + 1
+n
+
+e−1/n
+= lim
+N→∞e
+ N
+n=1[log(1+1/n)−1/n]
+= lim
+N→∞e−(
+ N
+n=1 1/n)+log N+log(1+1/N)
+= e−γ.
+Therefore A = γ + 2πik for some integer k. Since Γ(s) is real whenever
+s is real, we must have k = 0, and the argument is complete.
+Note that the proof shows that the function 1/Γ is essentially char-
+acterized (up to two normalizing constants) as the entire function that
+has:
+(i)
+simple zeros at s = 0, −1, −2, . . . and vanishes nowhere else, and
+(ii)
+order of growth ≤1.
+Observe that sin πs has a similar characterization (except the zeros are
+now at all the integers). However, while sin πs has a stricter growth esti-
+mate of the form sin πs = O 
+ec|s|
+, this estimate (without the logarithm
+in the exponent) does not hold for 1/Γ(s) as Exercise 12 demonstrates.
+2 The zeta function
+The Riemann zeta function is initially deﬁned for real s > 1 by the
+convergent series
+ζ(s) =
+∞
+
+n=1
+1
+ns .
+As in the case of the gamma function, ζ can be continued into the com-
+plex plane. There are several proofs of this fact, and we present in the
+next section the one that relies on the functional equation of ζ.
+2.1 Functional equation and analytic continuation
+In parallel to the gamma function, we ﬁrst provide a simple extension of
+ζ to a half-plane in C.

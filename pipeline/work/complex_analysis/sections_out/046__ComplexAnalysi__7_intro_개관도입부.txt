@@ -1,0 +1,100 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.intro 개관 (도입부)
+직전 소단원: 「6.4 Problems」
+[본문]
+7 The Zeta Function and Prime
+Number Theorem
+Bernhard Riemann, whose extraordinary intuitive pow-
+ers we have already mentioned, has especially reno-
+vated our knowledge of the distribution of prime num-
+bers, also one of the most mysterious questions in
+mathematics. He has taught us to deduce results in
+that line from considerations borrowed from the in-
+tegral calculus: more precisely, from the study of a
+certain quantity, a function of a variable s which may
+assume not only real, but also imaginary values. He
+proved some important properties of that function,
+but enunciated two or three as important ones with-
+out giving the proof. At the death of Riemann, a note
+was found among his papers, saying “These properties
+of ζ(s) (the function in question) are deduced from an
+expression of it which, however, I did not succeed in
+simplifying enough to publish it.”
+We still have not the slightest idea of what the
+expression could be. As to the properties he simply
+enunciated, some thirty years elapsed before I was able
+to prove all of them but one. The question concern-
+ing that last one remains unsolved as yet, though, by
+an immense labor pursued throughout this last half
+century, some highly interesting discoveries in that di-
+rection have been achieved. It seems more and more
+probable, but still not at all certain, that the “Rie-
+mann hypothesis” is true.
+J. Hadamard, 1945
+Euler found, through his product formula for the zeta function, a
+deep connection between analytical methods and arithmetic properties
+of numbers, in particular primes. An easy consequence of Euler’s for-
+mula is that the sum of the reciprocals of all primes, 
+p 1/p, diverges,
+a result that quantiﬁes the fact that there are inﬁnitely many prime
+numbers.
+The natural problem then becomes that of understanding
+how these primes are distributed. With this in mind, we consider the
+
+182
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+following function:
+π(x) = number of primes less than or equal to x.
+The erratic growth of the function π(x) gives little hope of ﬁnding a
+simple formula for it. Instead, one is led to study the asymptotic behavior
+of π(x) as x becomes large.
+About 60 years after Euler’s discovery,
+Legendre and Gauss observed after numerous calculations that it was
+likely that
+(1)
+π(x) ∼
+x
+log x
+as x →∞.
+(The
+asymptotic
+relation
+f(x) ∼g(x)
+as x →∞
+means that
+f(x)/g(x) →1 as x →∞.) Another 60 years later, shortly before Rie-
+mann’s work, Tchebychev proved by elementary methods (and in partic-
+ular, without the zeta function) the weaker result that
+(2)
+π(x) ≈
+x
+log x
+as x →∞.
+Here, by deﬁnition, the symbol ≈means that there are positive constants
+A < B such that
+A
+x
+log x ≤π(x) ≤B
+x
+log x
+for all suﬃciently large x.
+In 1896, about 40 years after Tchebychev’s result, Hadamard and de
+la Vall´ee Poussin gave a proof of the validity of the relation (1). Their
+result is known as the prime number theorem. The original proofs of
+this theorem, as well as the one we give below, use complex analysis.
+We should remark that since then other proofs have been found, some
+depending on complex analysis, and others more elementary in nature.
+At the heart of the proof of the prime number theorem that we give
+below lies the fact that ζ(s) does not vanish on the line Re(s) = 1. In
+fact, it can be shown that these two propositions are equivalent.
+1 Zeros of the zeta function
+We have seen in Theorem 1.10, Chapter 8 in Book I, Euler’s identity,
+which states that for Re(s) > 1 the zeta function can be expressed as an
+inﬁnite product
+ζ(s) =
+
+p
+1
+1 −p−s .

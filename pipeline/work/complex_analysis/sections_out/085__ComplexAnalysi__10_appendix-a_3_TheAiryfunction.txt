@@ -1,0 +1,460 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.appendix-a.3 The Airy function
+직전 소단원: 「10.appendix-a.2 Laplace’s method; Stirling’s formula」
+[본문]
+328
+Appendix A: ASYMPTOTICS
+which
+follows
+from
+the
+fact
+that
+Γ(s)Γ(1 −s) = π/ sin πs,
+and
+Γ(1 −s) = −sΓ(−s) (see Theorem 1.4 and Lemma 1.2 in Chapter 6).
+The combination of (13) and (14), together with the fact that for large
+s, 
+1 + O(1/|s|1/2)−1 = 1 + O(1/|s|1/2), allows us then to extend (11)
+to the whole sector Sδ, thereby completing the proof of the theorem.
+3 The Airy function
+The Airy function appeared ﬁrst in optics, and more precisely, in the
+analysis of the intensity of light near a caustic; it was an important early
+instance in the study of asymptotics of integrals, and it continues to arise
+in a number of other problems. The Airy function Ai is deﬁned by
+(15)
+Ai(s) = 1
+2π
+ ∞
+−∞
+ei(x3/3+sx) dx,
+with s ∈R.
+Let us ﬁrst see that because of the rapid oscillations of the integrand as
+|x| →∞, the integral converges and represents a continuous function of
+s. In fact, note that
+1
+i(x2 + s)
+d
+dx
+
+ei(x3/3+sx)
+= ei(x3/3+sx),
+so if a ≥2|s|1/2, we can write the integral  R
+a ei(x3/3+sx) dx as
+(16)
+ R
+a
+1
+i(x2 + s)
+d
+dx
+
+ei(x3/3+sx)
+dx.
+We may now integrate by parts and let R →∞, to see that the integral
+converges uniformly, and that as a result
+ ∞
+a ei(x3/3+sx) dx is also con-
+tinuous for |s| ≤a2/4. The same argument works for the integral from
+−∞to −a and our assertion regarding Ai(s) is established.
+A better insight into Ai(s) is given by deforming the contour of inte-
+gration in (15). A choice of an optimal contour will appear below, but
+for now let us notice that as soon as we replace the x-axis of integration
+in (15) by the parallel line Lδ = {x + iδ, x ∈R}, δ > 0, matters improve
+dramatically.
+In fact, we may apply the Cauchy theorem to f(z) = ei(z3/3+sz) over
+the rectangle γR shown in Figure 3.
+One observes that f(z) = O(e−δx2) on Lδ, while f(z) = O(e−yR2) on
+the vertical sides of the rectangle.
+Thus since  δ
+0 e−yR2 dy →0 as
+
+3. The Airy function
+329
+−R
+R
+z = x + iδ
+Lδ
+Figure 3. The line Lδ and the contour γR
+R →∞, we see that
+Ai(s) = 1
+2π
+
+Lδ
+ei(z3/3+sz) dz.
+Now the majorization f(z) = O(e−δx2) continues to hold for each com-
+plex s, and hence because of the (rapid) convergence of the integral, Ai(s)
+extends to an entire function of s.
+We note next that Ai(s) satisﬁes the diﬀerential equation
+(17)
+Ai′′(s) = sAi(s).
+This simple and natural equation helps to explain the ubiquity of the
+Airy function. To prove (17) observe that
+Ai′′(s) −sAi(s) = 1
+2π
+
+Lδ
+(−z2 −s)ei(z3/3+sz) dz.
+But −(z2 + s)ei(z3/3+sz) = i d
+dz(ei(z3/3+sz)), so
+Ai′′(s) −sAi(s) = i
+2π
+
+Lδ
+d
+dz (f(z)) dz = 0,
+since f(z) = ei(z3/3+sz) vanishes as |z| →∞along Lδ.
+We now turn to our main problem, the asymptotics of Ai(s) for large
+(real) values of s. The diﬀerential equation (17) shows us that we may
+expect diﬀerent behaviors of the Airy function when |s| is large, depend-
+ing on whether s is positive or negative. To see this, we compare the
+equation with a simple analogue
+(18)
+y′′(s) = Ay(s),
+
+330
+Appendix A: ASYMPTOTICS
+where A is a large constant, with A positive when considering s positive
+and A negative in the other case. The solutions of (18) are of course e
+√
+As
+and e−
+√
+As, the ﬁrst growing rapidly, and the second decreasing rapidly
+as s →∞, if A > 0. A glance at the integration by parts following (16)
+shows that Ai(s) remains bounded when s →∞.
+So the comparison
+with e
+√
+As must be dismissed, and we might reasonably guess that Ai(s)
+is rapidly decreasing in this case. When s < 0 we take A < 0 in (18). The
+exponentials e
+√
+As and e−
+√
+As are now oscillating, and we can therefore
+presume that Ai(s) should have an oscillatory character as s →−∞.
+Theorem 3.1 Suppose u > 0. Then as u →∞,
+(i) Ai(−u) = π−1/2u−1/4 cos( 2
+3u3/2 −π
+4 )(1 + O(1/u3/4)).
+(ii) Ai(u) =
+1
+2π1/2u−1/4e−2
+3 u3/2(1 + O(1/u3/4)).
+To consider the ﬁrst case, we make the change of variables x 	→u1/2x
+in the deﬁning integral with s = −u. This gives
+Ai(−u) = u1/2I−(u3/2),
+where
+(19)
+I−(t) = 1
+2π
+ ∞
+−∞
+eit(x3/3−x) dx.
+Now write
+I−(s) = 1
+2π
+ ∞
+−∞
+e−sΦ(x) dx,
+where Φ(x) = Φ−(x) = x3/3 −x, and we shall apply Proposition 2.2,
+which in this case, since s is purely imaginary, is the method of stationary
+phase. Note that Φ′(x) = x2 −1, so there are two critical points, x0 =
+±1; observe that Φ′′(x) = 2x; also Φ(±1) = ∓2/3.
+We break up the range of integration in (19) into two intervals [−2, 0]
+and [0, 2] each containing one critical point, and two complementary
+integrals, (−∞, −2] and [2, ∞).
+Now we apply Proposition 2.2 to the interval [0, 2] with s = −it, x0 = 1
+ψ = 1/2π, Φ(1) = −2/3, Φ′′(1) = 2, and get a contribution of
+1
+2√π e−i 2
+3 t
+
+1
+(−it)1/2 + O
+ 1
+|t|
+
+,
+
+3. The Airy function
+331
+in view of (8). Similarly the integral over [−2, 0] contributes
+1
+2√πei 2
+3 t
+
+1
+(it)1/2 + O
+ 1
+|t|
+
+.
+Finally, consider the complementary integrals. The ﬁrst is
+ −2
+−∞
+eitΦ(x) dx = lim
+N→∞
+ −2
+−N
+eitΦ(x) dx = lim
+N→∞
+1
+it
+ −2
+−N
+d
+dx
+
+eitΦ(x)
+dx
+Φ′(x),
+where Φ′(x) = x2 −1.
+So an integration by parts shows that this is
+O(1/|t|). The integral over [2, ∞) is treated similarly. Adding these four
+contributions, and inserting them in the identity Ai(−u) = u1/2I−(u3/2),
+proves conclusion (i) of the theorem.6
+To deal with the conclusion (ii) of the theorem, we make the change
+of variables x 	→u1/2x in the integral (15), with s = u. This gives us, for
+u > 0,
+Ai(u) = u1/2I+(u3/2),
+where
+(20)
+I+(s) = 1
+2π
+ ∞
+−∞
+e−sF(x) dx
+and F(x) = −i(x3/3 + x). Now when s →∞, the integrand in (20) again
+oscillates rapidly, but here in distinction to the previous case, there is no
+critical point on the real axis, since the derivative of x3/3 + x does not
+vanish. A repeated integration by parts argument (such as we have used
+before) shows that actually the integral I+(s) has fast decay as s →∞.
+But what is the exact nature and order of this decrease? To answer this
+question, we would have to take into account the precise cancellations
+inherent in (20), and doing this by the above method does not seem
+feasible.
+A better way is to follow the guiding principle used in the asymptotics
+of the Bessel function, and to deform the line of integration in (20) to a
+contour on which the imaginary part of F(z) vanishes; having done this,
+one might then hope to apply Laplace’s method, Proposition 2.1, to ﬁnd
+the true asymptotic behavior of I+(s), as s →∞.
+We describe the idea in the more general situation in which we assume
+only that F(z) is holomorphic. To follow the approach suggested, we
+seek a contour Γ so that:
+6An alternative derivation of this conclusion can be given as a consequence of the
+relation of the Airy function with the Bessel functions. See Problem 3 below.
+
+332
+Appendix A: ASYMPTOTICS
+(a) Im(F) = 0 on Γ.
+(b) Re(F) has a minimum on Γ at some point z0, and this function
+is non-degenerate in the sense that the second derivative of Re(F)
+along Γ is strictly positive at z0.
+Conditions (a) and (b) imply of course that F ′(z0) = 0.
+If as above,
+F ′′(z0)̸ = 0, then there are two curves Γ1 and Γ2 passing through z0
+which are orthogonal, so that F|Γi is real for i = 1, 2, with Re(F) re-
+stricted to Γ1 having a minimum at z0; and Re(F) restricted to Γ2 hav-
+ing a maximum at z0 (see Exercise 2 in Chapter 8). We therefore try to
+deform our original contour of integration to Γ = Γ1. This approach is
+usually referred to as the method of steepest descent, because at z0
+the function −Re(F(z)) has a saddle point, and starting at this point and
+following the path of Γ1, one has the greatest decrease of this function.
+Let us return to our special case, F(z) = −i(z3/3 + z). We note that
+
+Re(F)
+=
+x2y −y3/3 + y,
+Im(F)
+=
+−x3/3 + xy2 −x.
+We observe also that F ′(z) = −i(z2 + 1), so we have two non-real critical
+points z0 = ±i at which F ′(z0) = 0. If we choose z0 = i, then the two
+curves passing through this point where Im(F) = 0 are
+Γ1 = {(x, y) : y2 = x2/3 + 1}
+and
+Γ2 = {(x, y) : x = 0}.
+On Γ2, the function Re(F) clearly has a maximum at the point z0 = i,
+and so we reject this curve. We choose Γ = Γ1, which is a branch of a hy-
+perbola, and which can be written as y = (x2/3 + 1)1/2; it is asymptotic
+to the rays z = reiπ/6, and z = rei5π/6 at inﬁnity. See Figure 4.
+z = reiπ/6
+z = reiπ/6
+i
+0
+Γ
+Figure 4. The curve of steepest descent
+
+3. The Airy function
+333
+Next, we see that
+(21)
+1
+2π
+ ∞
+−∞
+e−sF(x) dx = 1
+2π
+
+Γ
+e−sF(z) dz.
+This identity is justiﬁed by applying the Cauchy theorem to e−sF(z)
+on the contour ΓR that consists of four arc segments: the parts of the
+real axis and Γ that lie inside the circle of radius R, and the two arcs
+of this circle joining the axis with Γ.
+Since in this region e−sF(z) =
+O(e−cyx2) as x →±∞, the contributions of the two arcs of the circle are
+O( π
+0 e−cR2 sin θ dθ) = O(1/R), and letting R →∞establishes (21).
+We now observe that on Γ
+Φ(x) = Re(F) = y(x2 −y2/3 + 1) = (8
+9x2 + 2
+3)(x2/3 + 1)1/2,
+since y2 = x2/3 + 1 there.
+Also, on Γ we have that dz = dx + idy =
+dx + i(x/3)(x2/3 + 1)−1/2dx. Thus,
+(22)
+1
+2π
+
+Γ
+e−sF(z) dz = 1
+2π
+ ∞
+−∞
+e−sΦ(x) dx,
+in view of the fact that Φ(x) is even, while x(x2/3 + 1)−1/2 is odd.
+We note next that since (1 + u)1/2 = 1 + u/2 + O(u2) as u →0,
+Φ(x) = (8
+9x2 + 2
+3) + 2
+3
+1
+2
+x2
+3 + O(x4) = x2 + 2
+3 + O(x4),
+and so Φ′′(0) = 2. We now apply Proposition 2.1 to estimate the main
+part of the right-hand side of (22), by
+1
+2π
+ c
+−c
+e−sΦ(x) dx,
+where c is a small positive constant. Since Φ(0) = 2/3, Φ′′(0) = 2, and
+ψ(0) = 1/2π, we obtain that this term contributes
+e−2
+3 s
+
+1
+2π1/2
+1
+s1/2 + O
+1
+s
+
+.
+The term
+ ∞
+c
+e−sΦ(x) dx is dominated by e−2s/3  ∞
+c
+e−c1sx2 dx, which is
+O(e−2s/3e−δs) for some δ > 0, as soon as c > 0. A similar estimate holds
+for  −c
+−∞e−sΦ(x) dx. Altogether, then,
+I+(s) = e−2
+3 s
+
+1
+2π1/2
+1
+s1/2 + O
+1
+s
+
+as s →∞,
+and this gives the desired asymptotic (ii) for the Airy function.
+
+334
+Appendix A: ASYMPTOTICS
+4 The partition function
+Our last illustration of the techniques developed in this appendix is in
+their application to the partition function p(n), which was discussed in
+Chapter 10. We derive for it the main term of the remarkable asymptotic
+formula of Hardy-Ramanujan.
+Theorem 4.1 If p denotes the partition function, then
+(i) p(n) ∼
+1
+4
+√
+3n
+eKn1/2 as n →∞, where K = π
+&
+2
+3.
+(ii) A much more precise assertion is that
+p(n) =
+1
+2π
+√
+2
+d
+dn
+
+eK(n−1
+24 )1/2
+(n −1
+24)1/2
+
++ O(e
+K
+2 n1/2).
+Note.
+Observe that (n −1
+24)1/2 −n1/2 = O(n−1/2), by the mean-
+value
+theorem;
+hence
+eK(n−1
+24 )1/2 = eKn1/2(1 + O(n−1/2)),
+thus
+eK(n−1
+24 )1/2 ∼eKn1/2, as n →∞. Of course, clearly (n −1
+24)1/2 ∼n1/2,
+and in particular (ii) implies (i).
+We shall discuss ﬁrst, in a more general setting, how we might derive
+the asymptotic behavior of a sequence {Fn} from the analytic properties
+of its generating function F(w) = ∞
+n=0 Fnwn. Assuming for the sake of
+simplicity that  Fnwn has the unit disc as its disc of convergence, we
+can set forth the following heuristic principle: the asymptotic behavior
+of Fn is determined by the location and nature of the “singularities” of
+F on the unit circle, and the contribution to the asymptotic formula
+due to each singularity corresponds in magnitude to the “order” of that
+singularity.
+A very simple example in which this principle is unambiguous and can
+be veriﬁed occurs when F is meromorphic in a larger disc, but has only
+one singularity on the circle, a pole of order r at the point w = 1. Then
+there is a polynomial P of degree r −1 so that Fn = P(n) + O(e−ϵn) as
+n →∞, for some ϵ > 0. In fact, ∞
+n=0 P(n)wn is a good approximation
+to F(w) near w = 1; it is the principal part of the pole of F. (See also
+Problem 4.)
+For the partition function the analysis is not as simple as this ex-
+ample, but the principle stated above is still applicable when properly
+interpreted. To this task we now turn.
+We recall the formula
+∞
+
+n=0
+p(n) wn =
+∞
+
+n=1
+1
+1 −wn ,

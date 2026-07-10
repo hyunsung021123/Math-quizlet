@@ -1,0 +1,336 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.3 Exercises
+직전 소단원: 「7.2.note Note on interchanging double sums」
+[연습문제]
+3. Exercises
+199
+To estimate the second term, we use the fact that  bk converges, which implies
+
+k>K
+∞
+ℓ=1 |akℓ| < ϵ/2 whenever K > K0, for some K0. For the ﬁrst term above,
+note that 
+k≤K
+
+ℓ>L |akℓ| ≤∞
+k=1
+
+ℓ>L |akℓ|. But the argument above guar-
+antees that we can interchange these last two sums; also ∞
+ℓ=1
+∞
+k=1 |akℓ| < ∞,
+so that for all L > L0 we have 
+ℓ>L
+∞
+k=1 |akℓ| < ϵ/2. Taking N > max(L0, K0)
+completes the proof of (ii).
+The proof of (iii) is a direct consequence of (ii). Indeed, given any rectangle
+R(K, L) = {(k, ℓ) ∈N × N : 1 ≤k ≤K and 1 ≤ℓ≤L},
+there exists M such that the image of [1, M] under the map m →(k(m), ℓ(m))
+contains R(K, L).
+When U denotes any open set in R2 that contains the origin, we deﬁne for R > 0
+its dilate U(R) = {y ∈R2 : y = Rx for some x ∈U}, and we can apply (ii) to see
+that
+A = lim
+R→∞
+
+(k,ℓ)∈U(R)
+akℓ.
+In other words, under condition (8) the double sum 
+kℓakℓcan be evaluated by
+summing over discs, squares, rectangles, ellipses, etc.
+Finally, we leave the reader with the instructive task of ﬁnding a sequence of
+complex numbers {akℓ} such that
+
+k
+
+ℓ
+akℓ̸ =
+
+ℓ
+
+k
+akℓ.
+[Hint: Consider {akℓ} as the entries of an inﬁnite matrix with 0 above the diagonal,
+−1 on the diagonal, and akℓ= 2ℓ−k if k > ℓ.]
+3 Exercises
+1. Suppose that {an}∞
+n=1 is a sequence of real numbers such that the partial sums
+An = a1 + · · · + an
+are bounded. Prove that the Dirichlet series
+∞
+
+n=1
+an
+ns
+converges for Re(s) > 0 and deﬁnes a holomorphic function in this half-plane.
+[Hint: Use summation by parts to compare the original (non-absolutely convergent)
+series to the (absolutely convergent) series  An(n−s −(n + 1)−s). An estimate
+for the term in parentheses is provided by the mean value theorem.
+To prove
+that the series is analytic, show that the partial sums converge uniformly on every
+compact subset of the half-plane Re(s) > 0.]
+
+200
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+2. The following links the multiplication of Dirichlet series with the divisibility
+properties of their coeﬃcients.
+(a) Show that if {am} and {bk} are two bounded sequences of complex numbers,
+then
+ ∞
+
+m=1
+am
+ms
+  ∞
+
+k=1
+bk
+ks
+
+=
+∞
+
+n=1
+cn
+ns
+where cn = 
+mk=n ambk.
+The above series converge absolutely when Re(s) > 1.
+(b) Prove as a consequence that one has
+(ζ(s))2 =
+∞
+
+n=1
+d(n)
+ns
+and
+ζ(s)ζ(s −a) =
+∞
+
+n=1
+σa(n)
+ns
+for Re(s) > 1 and Re(s −a) > 1, respectively. Here d(n) equals the number
+of divisors of n, and σa(n) is the sum of the ath powers of divisors of n. In
+particular, one has σ0(n) = d(n).
+3. In line with the previous exercise, we consider the Dirichlet series for 1/ζ.
+(a) Prove that for Re(s) > 1
+1
+ζ(s) =
+∞
+
+n=1
+µ(n)
+ns ,
+where µ(n) is the M¨obius function deﬁned by
+µ(n) =
+
+
+
+1
+if n = 1 ,
+(−1)k
+if n = p1 · · · pk, and the pj are distinct primes ,
+0
+otherwise .
+Note that µ(nm) = µ(n)µ(m) whenever n and m are relatively prime. [Hint:
+Use the Euler product formula for ζ(s).]
+(b) Show that
+
+k|n
+µ(k) =
+
+1
+if n = 1,
+0
+otherwise.
+4. Suppose {an}∞
+n=1 is a sequence of complex numbers such that an = am if n ≡m
+mod q for some positive integer q. Deﬁne the Dirichlet L-series associated to
+{an} by
+L(s) =
+∞
+
+n=1
+an
+ns
+for Re(s) > 1.
+
+3. Exercises
+201
+Also, with a0 = aq, let
+Q(x) =
+q−1
+
+m=0
+aq−memx.
+Show, as in Exercises 15 and 16 of the previous chapter, that
+L(s) =
+1
+Γ(s)
+ ∞
+0
+Q(x)xs−1
+eqx −1
+dx,
+for Re(s) > 1.
+Prove as a result that L(s) is continuable into the complex plane, with the only
+possible singularity a pole at s = 1. In fact, L(s) is regular at s = 1 if and only if
+q−1
+m=0 am = 0. Note the connection with the Dirichlet L(s, χ) series, taken up in
+Book I, Chapter 8, and that as a consequence, L(s, χ) is regular at s = 1 if and
+only if χ is a non-trivial character.
+5. Consider the following function
+˜ζ(s) = 1 −1
+2s + 1
+3s −· · · =
+∞
+
+n=1
+(−1)n+1
+ns
+.
+(a) Prove that the series deﬁning ˜ζ(s) converges for Re(s) > 0 and deﬁnes a
+holomorphic function in that half-plane.
+(b) Show that for s > 1 one has ˜ζ(s) = (1 −21−s)ζ(s).
+(c) Conclude, since ˜ζ is given as an alternating series, that ζ has no zeros on
+the segment 0 < σ < 1. Extend this last assertion to σ = 0 by using the
+functional equation.
+6. Show that for every c > 0
+lim
+N→∞
+1
+2πi
+ c+iN
+c−iN
+as ds
+s =
+
+
+
+1
+if a > 1,
+1/2
+if a = 1,
+0
+if 0 ≤a < 1.
+The integral is taken over the vertical segment from c −iN to c + iN.
+7. Show that the function
+ξ(s) = π−s/2Γ(s/2)ζ(s)
+is real when s is real, or when Re(s) = 1/2.
+8. The function ζ has inﬁnitely many zeros in the critical strip. This can be seen
+as follows.
+
+202
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+(a) Let
+F(s) = ξ(1/2 + s),
+where
+ξ(s) = π−s/2Γ(s/2)ζ(s).
+Show that F(s) is an even function of s, and as a result, there exists G so
+that G(s2) = F(s).
+(b) Show that the function (s −1)ζ(s) is an entire function of growth order 1,
+that is
+|(s −1)ζ(s)| ≤Aϵeaϵ|s|1+ϵ.
+As a consequence G(s) is of growth order 1/2.
+(c) Deduce from the above that ζ has inﬁnitely many zeros in the critical strip.
+[Hint: To prove (a) and (b) use the functional equation for ζ(s). For (c), use a
+result of Hadamard, which states that an entire function with fractional order has
+inﬁnitely many zeros (Exercise 14 in Chapter 5).]
+9. Reﬁne the estimates in Proposition 2.7 in Chapter 6 and Proposition 1.6 to
+show that
+(a) |ζ(1 + it)| ≤A log |t|,
+(b) |ζ′(1 + it)| ≤A(log |t|)2,
+(c) 1/|ζ(1 + it)| ≤A(log |t|)a,
+when |t| ≥2 (with a = 7).
+10. In the theory of primes, a better approximation to π(x) (instead of x/ log x)
+turns out to be Li(x) deﬁned by
+Li(x) =
+ x
+2
+dt
+log t.
+(a) Prove that
+Li(x) =
+x
+log x + O
+
+x
+(log x)2
+
+as x →∞,
+and that as a consequence
+π(x) ∼Li(x)
+as x →∞.
+[Hint: Integrate by parts in the deﬁnition of Li(x) and observe that it suﬃces
+to prove
+ x
+2
+dt
+(log t)2 = O
+
+x
+(log x)2
+
+.
+To see this, split the integral from 2 to √x and from √x to x.]
+
+4. Problems
+203
+(b) Reﬁne the previous analysis by showing that for every integer N > 0 one
+has the following asymptotic expansion
+Li(x) =
+x
+log x +
+x
+(log x)2 + 2
+x
+(log x)3 · · · + (N −1)!
+x
+(log x)N + O
+
+x
+(log x)N+1
+
+as x →∞.
+11. Let
+ϕ(x) =
+
+p≤x
+log p
+where the sum is taken over all primes ≤x. Prove that the following are equivalent
+as x →∞:
+(i) ϕ(x) ∼x,
+(ii) π(x) ∼x/ log x,
+(iii) ψ(x) ∼x,
+(iv) ψ1(x) ∼x2/2.
+12.
+If pn denotes the nth prime, the prime number theorem implies that
+pn ∼n log n as n →∞.
+(a) Show that π(x) ∼x/ log x implies that
+log π(x) + log log x ∼log x.
+(b) As a consequence, prove that log π(x) ∼log x, and take x = pn to conclude
+the proof.
+4 Problems
+1. Let F(s) = ∞
+n=1 an/ns, where |an| ≤M for all n.
+(a) Then
+lim
+T →∞
+1
+2T
+ T
+−T
+|F(σ + it)|2 dt =
+∞
+
+n=1
+|an|2
+n2σ
+if σ > 1.
+How is this reminiscent of the Parseval-Plancherel theorem? See e.g. Chap-
+ter 3 in Book I.

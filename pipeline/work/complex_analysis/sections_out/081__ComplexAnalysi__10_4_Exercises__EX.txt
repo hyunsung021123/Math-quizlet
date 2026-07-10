@@ -1,0 +1,414 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 10. Applications of Theta Functions
+현재 소단원: 10.4 Exercises
+직전 소단원: 「10.3.2 The four-squares theorem」
+[연습문제]
+4. Exercises
+309
+and
+F
+ 2τ
+1 −τ
+
+= F(−2 + 2/(1 −τ))
+= F(2/(1 −τ))
+=
+1 −τ
+2
+2
+F
+τ −1
+2
+
+−2πi
+τ −1
+2
+
+.
+Hence,
+F(1/2 −1/2τ) = τ 2F
+τ −1
+2
+
+−2πi2τ
+1 −τ −2πi (2τ)2
+(τ −1)2
+τ −1
+2
+
+.
+But F(2 −2/τ) = F(−2/τ) = (τ 2/4)F(τ/2) −2πiτ/2, and hence
+E∗
+2(1 −1/τ) = F(1/2 −1/2τ) −4F(2 −2/τ)
+= τ 2
+
+F
+τ −1
+2
+
+−F(τ/2)
+
+−2πi
+ 2τ
+1 −τ + 2τ 2
+τ −1
+
++ 4πiτ
+= τ 2
+
+F
+τ −1
+2
+
+−F(τ/2)
+
+.
+This proves (11). Then, the last property follows from it and the fact
+that
+F(τ) = π2
+3 −8π2
+∞
+
+k=1
+σ1(k)e2πikτ.
+Thus Proposition 3.8 is proved.
+We can now conclude the proof of the four-squares theorem by consid-
+ering the quotient f(τ) = E∗
+2(τ)/θ(τ)4, and applying Theorem 3.4, as in
+the two-squares theorem. Recall θ(τ)4 →1 and θ(1 −1/τ)4 ∼16τ 2eπiτ,
+as Im(τ) →∞. The result is that f(τ) is a constant, which equals −π2 by
+Proposition 3.8. This completes the proof of the four-squares theorem.
+4 Exercises
+1. Prove that
+(Θ′(z|τ))2 −Θ(z|τ)Θ′′(z|τ)
+Θ(z|τ)2
+= ℘τ(z −1/2 −τ/2) + cτ,
+where cτ can be expressed in terms of the ﬁrst two derivatives of Θ(z|τ), with
+respect to z, at z = 1/2 + τ/2. Compare this formula with the result in Exercise 5
+in the previous chapter.
+
+310
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+2. Consider the Fibonacci numbers {Fn}∞
+n=0, deﬁned by the two initial values
+F0 = 0, F1 = 1 and the recursion relation
+Fn = Fn−1 + Fn−2
+for n ≥2.
+(a) Consider the generating function F(x) = ∞
+n=0 Fnxn associated to {Fn},
+and prove that
+F(x) = x2F(x) + xF(x) + x
+for all x in a neighborhood of 0.
+(b) Show that the polynomial q(x) = 1 −x −x2 can be factored as
+q(x) = (1 −αx)(1 −βx),
+where α and β are the roots of the polynomial p(x) = x2 −x −1.
+(c) Expand the expression for F in partial fractions and obtain
+F(x) =
+x
+1 −x −x2 =
+x
+(1 −αx)(1 −βx) =
+A
+1 −αx +
+B
+1 −βx,
+where A = 1/(α −β) and B = 1/(β −α).
+(d) Conclude that Fn = Aαn + Bβn for n ≥0. The two roots of p are actually
+α = 1 +
+√
+5
+2
+and
+β = 1 −
+√
+5
+2
+,
+so that A = 1/
+√
+5 and B = −1/
+√
+5.
+The number 1/α = (
+√
+5 −1)/2, which is known as the golden mean, satisﬁes
+the following property: given a line segment [AC] of unit length (Figure 2), there
+exists a unique point B on this segment so that the following proportion holds
+AC
+AB = AB
+BC .
+If ℓ= AB, this reduces to the equation ℓ2 + ℓ−1 = 0, whose only positive solu-
+tion is the golden mean. This ratio arises also in the construction of the regular
+pentagon. It has played a role in architecture and art, going back to the time of
+ancient Greece.
+3. More generally, consider the diﬀerence equation given by the initial values u0
+and u1, and the recurrence relation un = aun−1 + bun−2 for n ≥2.
+Deﬁne the
+generating function associated to {un}∞
+n=0 by U(x) = ∞
+n=0 unxn. The recurrence
+relation implies that U(x)(1 −ax −bx2) = u0 + (u1 −au0)x in a neighborhood of
+
+4. Exercises
+311
+1
+B
+A
+C
+ℓ
+Figure 2. Appearance of the golden mean
+the origin. If α and β denote the roots of the polynomial p(x) = x2 −ax −b, then
+we may write
+U(x) = u0 + (u1 −au0)x
+(1 −αx)(1 −βx) =
+A
+1 −αx +
+B
+(1 −βx) = A
+∞
+
+n=0
+αnxn + B
+∞
+
+n=0
+βnxn,
+where it is an easy matter to solve for A and B. Finally, this gives un = Aαn +
+Bβn. Note that this approach yields a solution to our problem if the roots of p
+are distinct, namely α̸ = β. A variant of the formula holds if α = β.
+4. Using the generating formula for p(n), prove the recurrence formula
+p(n)
+=
+p(n −1) + p(n −2) −p(n −5) −p(n −7) −· · ·
+=
+
+k̸=0
+(−1)k+1p
+
+n −k(3k + 1)
+2
+
+,
+where the right-hand side is the ﬁnite sum taken over those k ∈Z, k̸ = 0, with
+k(3k + 1)/2 ≤n. Use this formula to calculate p(5), p(6), p(7), p(8), p(9), and
+p(10); check that p(10) = 42.
+The next two exercises give elementary results related to the asymptotics of the
+partition function. More reﬁned statements can be found in Appendix A.
+5. Let
+F(x) =
+∞
+
+n=0
+p(n)xn =
+∞
+
+n=1
+1
+1 −xn
+be the generating function for the partitions. Show that
+log F(x) ∼
+π2
+6(1 −x)
+as x →1, with 0 < x < 1.
+[Hint: Use log F(x) =  log(1/(1 −xn)) and log(1/(1 −xn)) = (1/m)xnm, so
+log F(x) =
+ 1
+m
+xm
+1 −xm .
+Use also mxm−1(1 −x) < 1 −xm < m(1 −x).]
+
+312
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+6. Show as a consequence of Exercise 5 that
+ec1n1/2 ≤p(n) ≤ec2n1/2
+for two positive constants c1 and c2.
+[Hint: F(e−y) =  p(n)e−ny ≤Cec/y as y →0. So p(n)e−ny ≤cec/y. Take y =
+1/n1/2 to get p(n) ≤c′ec′n1/2. In the opposite direction
+m
+
+n=0
+p(n)e−ny ≥C(ec/y −
+∞
+
+n=m+1
+ecn1/2e−ny),
+and it suﬃces to take y = Am−1/2 where A is a large constant, and use the fact
+that the sequence p(n) is increasing.]
+7. Use the product formula for Θ to prove:
+(a) The “triangular number” identity
+∞
+
+n=0
+(1 + xn)(1 −x2n+2) =
+∞
+
+n=−∞
+xn(n+1)/2,
+which holds for |x| < 1.
+(b) The “septagonal number” identity
+∞
+
+n=0
+(1 −x5n+1)(1 −x5n+4)(1 −x5n+5) =
+∞
+
+n=−∞
+(−1)nxn(5n+3)/2,
+which holds for |x| < 1.
+8. Consider Pythagorean triples (a, b, c) with a2 + b2 = c2, and with a, b, c ∈Z.
+Suppose moreover that a and b have no common factors.
+(a) Show that either a or b must be odd, and the other even.
+(b) Show in this case (assuming a is odd and b even) that there are integers
+m, n so that a = m2 −n2, b = 2mn, and c = m2 + n2.
+[Hint: Note that
+b2 = (c −a)(c + a), and prove that (c −a)/2 and (c + a)/2 are relatively
+prime integers.]
+(c) Conversely, show that whenever c is a sum of two-squares, then there exist
+integers a and b such that a2 + b2 = c2.
+9. Use the formula for r2(n) to prove the following:
+(a) If n = p, where p is a prime of the form 4k + 1, then r2(n) = 8. This implies
+that n can be written in a unique way as n = n2
+1 + n2
+2, except for the signs
+and reordering of n1 and n2.
+(b) If n = qa, where q is prime of the form 4k + 3 and a is a positive integer,
+then r2(n) > 0 if and only if a is even.
+
+4. Exercises
+313
+(c) In general, n can be represented as the sum of two squares if and only if all
+the primes of the form 4k + 3 that arise in the prime decomposition of n
+occur with even exponents.
+10.
+Observe the following irregularities of the functions r2(n) and r4(n) as n
+becomes large:
+(a) r2(n) = 0 for inﬁnitely many n, while lim supn→∞r2(n) = ∞.
+(b) r4(n) = 24 for inﬁnitely many n while lim supn→∞r4(n)/n = ∞.
+[Hint: For (a) consider n = 5k; for (b) consider alternatively n = 2k, and n = qk
+where q is odd and large.]
+11. Recall from Problem 2 in Chapter 2, that
+∞
+
+n=1
+d(n)zn =
+∞
+
+n=1
+zn
+1 −zn ,
+|z| < 1
+where d(n) denotes the number of divisors of n.
+More generally, show that
+∞
+
+n=1
+σℓ(n)zn =
+∞
+
+n=1
+nℓzn
+1 −zn ,
+|z| < 1
+where σℓ(n) is the sum of the ℓth powers of divisors of n.
+12. Here we give another identity involving θ4, which is equivalent to the four-
+squares theorem.
+(a) Show that for |q| < 1
+∞
+
+n=1
+nqn
+1 −qn =
+∞
+
+n=1
+qn
+(1 −qn)2 .
+[Hint: The left-hand side is  σ1(n)qn. Use x/(1 −x)2 = ∞
+n=1 nxn.]
+(b) Show as a result that
+∞
+
+n=1
+nqn
+1 −qn −
+∞
+
+n=1
+4nq4n
+1 −q4n =
+∞
+
+n=1
+qn
+(1 −qn)2 −4
+∞
+
+n=1
+q4n
+(1 −q4n)2 =
+
+σ∗
+1(n)qn
+where σ∗
+1(n) is the sum of the divisors of d that are not divisible by 4.
+(c) Show that the four-squares theorem is equivalent to the identity
+θ(τ)4 = 1 + 8
+∞
+
+n=1
+qn
+(1 + (−1)nqn)2 ,
+q = eπiτ.
+
+314
+Chapter 10. APPLICATIONS OF THETA FUNCTIONS
+5 Problems
+1.∗Suppose n is of the form n = 4a(8k + 7), where a and k are positive integers.
+Show that n cannot be written as the sum of three-squares. The converse, that
+every n that is not of that form can be written as the sum of three-squares, is a
+diﬃcult theorem of Legendre and Gauss.
+2. Let SL2(Z) denote the set of 2 × 2 matrices with integer entries and determinant
+1, that is,
+SL2(Z) =
+
+g =
+ a
+b
+c
+d
+
+: a, b, c, d ∈Z and ad −bc = 1
+"
+.
+This group acts on the upper half-plane by the fractional linear transformation
+g(τ) = (aτ + b)/(cτ + d).
+Together with this action comes the so-called funda-
+mental domain F1 in the complex plane deﬁned by
+F1 = {τ ∈C : |τ| ≥1,
+|Re(τ)| ≤1/2 and |Im(τ)| ≥0}.
+It is illustrated in Figure 3.
+F1
+−1
+1
+0
+Figure 3. The fundamental domain F1
+Consider the two elements in SL2(Z) deﬁned by S(τ) = −1/τ and T1(τ) = τ + 1.
+These correspond (for example) to the matrices
+ 0
+−1
+1
+0
+
+and
+ 1
+1
+0
+1
+
+,
+respectively. Let g be the subgroup of SL2(Z) generated by S and T1.
+(a) Show that for every τ ∈H there exists g ∈g such that g(τ) ∈F1.
+(b) We say that two points τ and τ ′ are congruent if there exists g ∈SL2(Z) such
+that g(τ) = w. Prove that if τ, w ∈F1 are congruent, then either Re(τ) =

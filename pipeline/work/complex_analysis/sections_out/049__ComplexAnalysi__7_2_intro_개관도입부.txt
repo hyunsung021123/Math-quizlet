@@ -1,0 +1,434 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 7. The Zeta Function and Prime Number Theorem
+현재 소단원: 7.2.intro 개관 (도입부)
+직전 소단원: 「7.1.1 Estimates for 1/ζ(s)」
+[본문]
+188
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+for all σ ≥1 and |t| ≥1. Thus
+(3)
+|ζ(σ + it)| ≥c′(σ −1)3/4|t|−ϵ/4,
+whenever σ ≥1 and |t| ≥1.
+We now consider two separate cases, depending on whether the in-
+equality σ −1 ≥A|t|−5ϵ holds, for some appropriate constant A (whose
+value we choose later).
+If this inequality does hold, then (3) immediately provides
+|ζ(σ + it)| ≥A′|t|−4ϵ,
+and it suﬃces to replace 4ϵ by ϵ to conclude the proof of the desired
+estimate, in this case.
+If, however, σ −1 < A|t|−5ϵ, then we ﬁrst select σ′ > σ with σ′ −1 =
+A|t|−5ϵ. The triangle inequality then implies
+|ζ(σ + it)| ≥|ζ(σ′ + it)| −|ζ(σ′ + it) −ζ(σ + it)|,
+and an application of the mean value theorem, together with the esti-
+mates for the derivative of ζ obtained in the previous chapter, give
+|ζ(σ′ + it) −ζ(σ + it)| ≤c′′|σ′ −σ| |t|ϵ ≤c′′|σ′ −1| |t|ϵ.
+These observations, together with an application of (3) where we set
+σ = σ′, show that
+|ζ(σ + it)| ≥c′(σ′ −1)3/4|t|−ϵ/4 −c′′(σ′ −1)|t|ϵ.
+Now choose A = (c′/(2c′′))4, and recall that σ′ −1 = A|t|−5ϵ. This gives
+precisely
+c′(σ′ −1)3/4|t|−ϵ/4 = 2c′′(σ′ −1)|t|ϵ,
+and therefore
+|ζ(σ + it)| ≥A′′|t|−4ϵ.
+On replacing 4ϵ by ϵ, the desired inequality is established, and the proof
+of the proposition is complete.
+2 Reduction to the functions ψ and ψ1
+In his study of primes, Tchebychev introduced an auxiliary function
+whose behavior is to a large extent equivalent to the asymptotic distri-
+bution of primes, but which is easier to manipulate than π(x). Tcheby-
+chev’s ψ-function is deﬁned by
+ψ(x) =
+
+pm≤x
+log p.
+
+2. Reduction to the functions ψ and ψ1
+189
+The sum is taken over those integers of the form pm that are less than or
+equal to x. Here p is a prime number and m is a positive integer. There
+are two other formulations of ψ that we shall need. First, if we deﬁne
+Λ(n) =
+
+log p
+if n = pm for some prime p and some m ≥1,
+0
+otherwise,
+then it is clear that
+ψ(x) =
+
+1≤n≤x
+Λ(n).
+Also, it is immediate that
+ψ(x) =
+
+p≤x
+log x
+log p
+
+log p
+where [u] denotes the greatest integer ≤u, and the sum is taken over the
+primes less than x. This formula follows from the fact that if pm ≤x,
+then m ≤log x/ log p.
+The fact that ψ(x) contains enough information about π(x) to prove
+our theorem is given a precise meaning in the statement of the next
+proposition. In particular, this reduces the prime number theorem to a
+corresponding asymptotic statement about ψ.
+Proposition 2.1 If ψ(x) ∼x
+as x →∞,
+then
+π(x) ∼x/ log x
+as
+x →∞.
+Proof.
+The argument here is elementary. By deﬁnition, it suﬃces to
+prove the following two inequalities:
+(4)
+1 ≤lim inf
+x→∞
+π(x)log x
+x
+and
+lim sup
+x→∞
+π(x)log x
+x
+≤1.
+To do so, ﬁrst note that crude estimates give
+ψ(x) =
+
+p≤x
+log x
+log p
+
+log p ≤
+
+p≤x
+log x
+log p log p = π(x) log x,
+and dividing through by x yields
+ψ(x)
+x
+≤π(x) log x
+x
+.
+
+190
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+The asymptotic condition ψ(x) ∼x implies the ﬁrst inequality in (4).
+The proof of the second inequality is a little trickier. Fix 0 < α < 1, and
+note that
+ψ(x) ≥
+
+p≤x
+log p ≥
+
+xα<p≤x
+log p ≥(π(x) −π(xα)) log xα,
+and therefore
+ψ(x) + απ(xα) log x ≥απ(x) log x.
+Dividing by x, noting that π(xα) ≤xα, α < 1, and ψ(x) ∼x, gives
+1 ≥α lim sup
+x→∞
+π(x)log x
+x
+.
+Since α < 1 was arbitrary, the proof is complete.
+Remark.
+The converse of the proposition is also true: if π(x) ∼
+x/ log x then ψ(x) ∼x. Since we shall not need this result, we leave the
+proof to the interested reader.
+In fact, it will be more convenient to work with a close cousin of the
+ψ function. Deﬁne the function ψ1 by
+ψ1(x) =
+ x
+1
+ψ(u) du.
+In the previous proposition we reduced the prime number theorem to
+the asymptotics of ψ(x) as x tends to inﬁnity. Next, we show that this
+follows from the asymptotics of ψ1.
+Proposition 2.2 If ψ1(x) ∼x2/2 as x →∞, then ψ(x) ∼x as x →∞,
+and therefore π(x) ∼x/ log x as x →∞.
+Proof.
+By Proposition 2.1, it suﬃces to prove that ψ(x) ∼x as
+x →∞. This will follow quite easily from the fact that if α < 1 < β,
+then
+1
+(1 −α)x
+ x
+αx
+ψ(u) du ≤ψ(x) ≤
+1
+(β −1)x
+ βx
+x
+ψ(u) du.
+The proof of this double inequality is immediate and relies simply on the
+fact that ψ is increasing. As a consequence, we ﬁnd, for example, that
+ψ(x) ≤
+1
+(β −1)x[ψ1(βx) −ψ1(x)],
+
+2. Reduction to the functions ψ and ψ1
+191
+and therefore
+ψ(x)
+x
+≤
+1
+(β −1)
+ψ1(βx)
+(βx)2 β2 −ψ1(x)
+x2
+
+.
+In turn this implies
+lim sup
+x→∞
+ψ(x)
+x
+≤
+1
+β −1
+1
+2β2 −1
+2
+
+= 1
+2(β + 1).
+Since
+this
+result
+is
+true
+for
+all
+β > 1,
+we
+have
+proved
+that
+lim supx→∞ψ(x)/x ≤1.
+A similar argument with α < 1, then shows
+that lim infx→∞ψ(x)/x ≥1, and the proof of the proposition is com-
+plete.
+It is now time to relate ψ1 (and therefore also ψ) and ζ. We proved in
+Lemma 1.3 that for Re(s) > 1
+log ζ(s) =
+
+m,p
+p−ms
+m
+.
+Diﬀerentiating this expression gives
+ζ′(s)
+ζ(s) = −
+
+m,p
+(log p)p−ms = −
+∞
+
+n=1
+Λ(n)
+ns .
+We record this formula for Re(s) > 1 as
+(5)
+−ζ′(s)
+ζ(s) =
+∞
+
+n=1
+Λ(n)
+ns .
+The asymptotic behavior ψ1(x) ∼x2/2 will be a consequence via (5)
+of the relationship between ψ1 and ζ, which is expressed by the following
+noteworthy integral formula.
+Proposition 2.3 For all c > 1
+(6)
+ψ1(x) =
+1
+2πi
+ c+i∞
+c−i∞
+xs+1
+s(s + 1)
+
+−ζ′(s)
+ζ(s)
+
+ds.
+To make the proof of this formula clear, we isolate the necessary con-
+tour integrals in a lemma.
+
+192
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+Lemma 2.4 If c > 0, then
+1
+2πi
+ c+i∞
+c−i∞
+as
+s(s + 1) ds =
+
+0
+if 0 < a ≤1,
+1 −1/a
+if 1 ≤a.
+Here, the integral is over the vertical line Re(s) = c.
+Proof.
+First note that since |as| = ac, the integral converges. We
+suppose ﬁrst that 1 ≤a, and write a = eβ with β = log a ≥0. Let
+f(s) =
+as
+s(s + 1) =
+esβ
+s(s + 1).
+Then ress=0f = 1 and ress=−1f = −1/a. For T > 0, consider the path
+Γ(T) shown on Figure 1.
+c
+S(T )
+0
+C(T )
+Γ(T )
+Figure 1. The contour in the proof of Lemma 2.4 when a ≥1
+The path Γ(T) consists of the vertical segment S(T) from c −iT to
+c + iT, and of the half-circle C(T) centered at c of radius T, lying to the
+left of the vertical segment. We equip Γ(T) with the positive (counter-
+clockwise) orientation, and note that we are dealing with a toy contour.
+If we choose T so large that 0 and −1 are contained in the interior of
+Γ(T), then by the residue formula
+1
+2πi
+
+Γ(T)
+f(s) ds = 1 −1/a.
+
+2. Reduction to the functions ψ and ψ1
+193
+Since
+
+Γ(T)
+f(s) ds =
+
+S(T)
+f(s) ds +
+
+C(T)
+f(s) ds,
+it suﬃces to prove that the integral over the half-circle goes to 0 as T
+tends to inﬁnity. Note that if s = σ + it ∈C(T), then for all large T we
+have
+|s(s + 1)| ≥(1/2)T 2,
+and since σ ≤c we also have the estimate |eβs| ≤eβc. Therefore
+
+
+C(T)
+f(s) ds
+ ≤C
+T 2 2πT →0
+as T →∞,
+and the case when a ≥1 is proved.
+If 0 < a ≤1, consider an analogous contour but with the half-circle
+lying to the right of the line Re(s) = c. Noting that there are no poles in
+the interior of that contour, we can give an argument similar to the one
+given above to show that the integral over the half-circle also goes to 0
+as T tends to inﬁnity.
+We are now ready to prove Proposition 2.3. First, observe that
+ψ(u) =
+∞
+
+n=1
+Λ(n)fn(u),
+where fn(u) = 1 if n ≤u and fn(u) = 0 otherwise. Therefore,
+ψ1(x) =
+ x
+0
+ψ(u) du
+=
+∞
+
+n=1
+ x
+0
+Λ(n)fn(u) du
+=
+
+n≤x
+Λ(n)
+ x
+n
+du,
+and hence
+ψ1(x) =
+
+n≤x
+Λ(n)(x −n).
+
+194
+Chapter 7. THE ZETA FUNCTION AND PRIME NUMBER THEOREM
+This fact, together with equation (5) and an application of Lemma 2.4
+(with a = x/n), gives
+1
+2πi
+ c+i∞
+c−i∞
+xs+1
+s(s + 1)
+
+−ζ′(s)
+ζ(s)
+
+ds = x
+∞
+
+n=1
+Λ(n) 1
+2πi
+ c+i∞
+c−i∞
+(x/n)s
+s(s + 1) ds
+= x
+
+n≤x
+Λ(n)
+
+1 −n
+x
+
+= ψ1(x),
+as was to be shown.
+2.1 Proof of the asymptotics for ψ1
+In this section, we will show that
+ψ1(x) ∼x2/2
+as x →∞,
+and as a consequence, we will have proved the prime number theorem.
+The key ingredients in the argument are:
+• the formula in Proposition 2.3 connecting ψ1 to ζ, namely
+ψ1(x) =
+1
+2πi
+ c+i∞
+c−i∞
+xs+1
+s(s + 1)
+
+−ζ′(s)
+ζ(s)
+
+ds
+for c > 1.
+• the non-vanishing of the zeta function on Re(s) = 1,
+ζ(1 + it)̸ = 0
+for all t ∈R,
+and the estimates for ζ near that line given in Proposition 2.7 of
+Chapter 6 together with Proposition 1.6 of this chapter.
+Let us now discuss our strategy in more detail. In the integral above
+for ψ1(x) we want to change the line of integration Re(s) = c with c > 1,
+to Re(s) = 1. If we could achieve that, the size of the factor xs+1 in the
+integrand would then be of order x2 (which is close to what we want)
+instead of xc+1, c > 1, which is much too large. However, there would
+still be two issues that must be dealt with. The ﬁrst is the pole of ζ(s)
+at s = 1; it turns out that when it is taken into account, its contribution
+is exactly the main term x2/2 of the asymptotic of ψ1(x). Second, what
+remains must be shown to be essentially smaller than this term, and so

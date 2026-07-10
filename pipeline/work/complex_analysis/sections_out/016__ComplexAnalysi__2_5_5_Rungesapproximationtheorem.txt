@@ -1,0 +1,286 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.5.5 Runge’s approximation theorem
+직전 소단원: 「2.5.4 Schwarz reflection principle」
+[본문]
+60
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Theorem 5.6 (Schwarz reﬂection principle) Suppose that f is a holo-
+morphic function in Ω+ that extends continuously to I and such that f
+is real-valued on I. Then there exists a function F holomorphic in all of
+Ωsuch that F = f on Ω+.
+Proof.
+The idea is simply to deﬁne F(z) for z ∈Ω−by
+F(z) = f(z).
+To prove that F is holomorphic in Ω−we note that if z, z0 ∈Ω−, then
+z, z0 ∈Ω+ and hence, the power series expansion of f near z0 gives
+f(z) =
+
+an(z −z0)n.
+As a consequence we see that
+F(z) =
+
+an(z −z0)n
+and F is holomorphic in Ω−. Since f is real valued on I we have f(x) =
+f(x) whenever x ∈I and hence F extends continuously up to I. The
+proof is complete once we invoke the symmetry principle.
+5.5 Runge’s approximation theorem
+We know by Weierstrass’s theorem that any continuous function on a
+compact interval can be approximated uniformly by polynomials.4 With
+this result in mind, one may inquire about similar approximations in
+complex analysis. More precisely, we ask the following question: what
+conditions on a compact set K ⊂C guarantee that any function holo-
+morphic in a neighborhood of this set can be approximated uniformly by
+polynomials on K?
+An example of this is provided by power series expansions. We recall
+that if f is a holomorphic function in a disc D, then it has a power series
+expansion f(z) = ∞
+n=0 anzn that converges uniformly on every compact
+set K ⊂D. By taking partial sums of this series, we conclude that f can
+be approximated uniformly by polynomials on any compact subset of D.
+In general, however, some condition on K must be imposed, as we see
+by considering the function f(z) = 1/z on the unit circle K = C. Indeed,
+recall that 
+C f(z) dz = 2πi, and if p is any polynomial, then Cauchy’s
+theorem implies 
+C p(z) dz = 0, and this quickly leads to a contradiction.
+4A proof may be found in Section 1.8, Chapter 5, of Book I.
+
+5. Further applications
+61
+A restriction on K that guarantees the approximation pertains to the
+topology of its complement: Kc must be connected. In fact, a slight mod-
+iﬁcation of the above example when f(z) = 1/z proves that this condition
+on K is also necessary; see Problem 4.
+Conversely, uniform approximations exist when Kc is connected, and
+this result follows from a theorem of Runge which states that for any K
+a uniform approximation exists by rational functions with “singularities”
+in the complement of K.5 This result is remarkable since rational func-
+tions are globally deﬁned, while f is given only in a neighborhood of K.
+In particular, f could be deﬁned independently on diﬀerent components
+of K, making the conclusion of the theorem even more striking.
+Theorem 5.7 Any function holomorphic in a neighborhood of a compact
+set K can be approximated uniformly on K by rational functions whose
+singularities are in Kc.
+If Kc is connected, any function holomorphic in a neighborhood of K
+can be approximated uniformly on K by polynomials.
+We shall see how the second part of the theorem follows from the
+ﬁrst: when Kc is connected, one can “push” the singularities to inﬁnity
+thereby transforming the rational functions into polynomials.
+The key to the theorem lies in an integral representation formula that is
+a simple consequence of the Cauchy integral formula applied to a square.
+Lemma 5.8 Suppose f is holomorphic in an open set Ω, and K ⊂Ωis
+compact. Then, there exists ﬁnitely many segments γ1, . . . , γN in Ω−K
+such that
+(15)
+f(z) =
+N
+
+n=1
+1
+2πi
+
+γn
+f(ζ)
+ζ −z dζ
+for all z ∈K.
+Proof.
+Let d = c · d(K, Ωc), where c is any constant < 1/
+√
+2, and
+consider a grid formed by (solid) squares with sides parallel to the axis
+and of length d.
+We let Q = {Q1, . . . , QM} denote the ﬁnite collection of squares in
+this grid that intersect K, with the boundary of each square given the
+positive orientation. (We denote by ∂Qm the boundary of the square
+Qm.) Finally, we let γ1, . . . , γN denote the sides of squares in Q that do
+not belong to two adjacent squares in Q. (See Figure 13.) The choice of
+d guarantees that for each n, γn ⊂Ω, and γn does not intersect K; for if
+it did, then it would belong to two adjacent squares in Q, contradicting
+our choice of γn.
+5These singularities are points where the function is not holomorphic, and are “poles”,
+as deﬁned in the next chapter.
+
+62
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Figure 13. The union of the γn’s is in bold-face
+Since for any z ∈K that is not on the boundary of a square in Q there
+exists j so that z ∈Qj, Cauchy’s theorem implies
+1
+2πi
+
+∂Qm
+f(ζ)
+ζ −z dζ =
+
+f(z)
+if m = j,
+0
+if m̸ = j.
+Thus, for all such z we have
+f(z) =
+M
+
+m=1
+1
+2πi
+
+∂Qm
+f(ζ)
+ζ −z dζ.
+However, if Qm and Qm′ are adjacent, the integral over their common side
+is taken once in each direction, and these cancel. This establishes (15)
+when z is in K and not on the boundary of a square in Q. Since γn ⊂Kc,
+continuity guarantees that this relation continues to hold for all z ∈K,
+as was to be shown.
+The ﬁrst part of Theorem 5.7 is therefore a consequence of the next
+lemma.
+Lemma 5.9 For any line segment γ entirely contained in Ω−K, there
+exists a sequence of rational functions with singularities on γ that ap-
+proximate the integral 
+γ f(ζ)/(ζ −z) dζ uniformly on K.
+Proof.
+If γ(t) : [0, 1] →C is a parametrization for γ, then
+
+γ
+f(ζ)
+ζ −z dζ =
+ 1
+0
+f(γ(t))
+γ(t) −z γ′(t) dt.
+
+5. Further applications
+63
+Since γ does not intersect K, the integrand F(z, t) in this last integral
+is jointly continuous on K × [0, 1], and since K is compact, given ϵ > 0,
+there exists δ > 0 such that
+sup
+z∈K
+|F(z, t1) −F(z, t2)| < ϵ
+whenever |t1 −t2| < δ.
+Arguing as in the proof of Theorem 5.4, we see that the Riemann sums
+of the integral  1
+0 F(z, t) dt approximate it uniformly on K. Since each
+of these Riemann sums is a rational function with singularities on γ, the
+lemma is proved.
+Finally, the process of pushing the poles to inﬁnity is accomplished by
+using the fact that Kc is connected. Since any rational function whose
+only singularity is at the point z0 is a polynomial in 1/(z −z0), it suﬃces
+to establish the next lemma to complete the proof of Theorem 5.7.
+Lemma 5.10 If Kc
+is connected and z0 /∈K,
+then the function
+1/(z −z0) can be approximated uniformly on K by polynomials.
+Proof.
+First, we choose a point z1 that is outside a large open disc D
+centered at the origin and which contains K. Then
+1
+z −z1
+= −1
+z1
+1
+1 −z/z1
+=
+∞
+
+n=1
+−zn
+zn+1
+1
+,
+where the series converges uniformly for z ∈K.
+The partial sums of
+this series are polynomials that provide a uniform approximation to
+1/(z −z1) on K. In particular, this implies that any power 1/(z −z1)k
+can also be approximated uniformly on K by polynomials.
+It now suﬃces to prove that 1/(z −z0) can be approximated uniformly
+on K by polynomials in 1/(z −z1). To do so, we use the fact that Kc is
+connected to travel from z0 to the point z1. Let γ be a curve in Kc that
+is parametrized by γ(t) on [0, 1], and such that γ(0) = z0 and γ(1) = z1.
+If we let ρ = 1
+2d(K, γ), then ρ > 0 since γ and K are compact. We then
+choose a sequence of points {w1, . . . , wℓ} on γ such that w0 = z0, wℓ= z1,
+and |wj −wj+1| < ρ for all 0 ≤j < ℓ.
+We claim that if w is a point on γ, and w′ any other point with
+|w −w′| < ρ, then 1/(z −w) can be approximated uniformly on K by
+polynomials in 1/(z −w′). To see this, note that
+1
+z −w =
+1
+z −w′
+1
+1 −w−w′
+z−w′
+=
+∞
+
+n=0
+(w −w′)n
+(z −w′)n+1 ,
+
+64
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+and since the sum converges uniformly for z ∈K, the approximation by
+partial sums proves our claim.
+This result allows us to travel from z0 to z1 through the ﬁnite sequence
+{wj} to ﬁnd that 1/(z −z0) can be approximated uniformly on K by
+polynomials in 1/(z −z1). This concludes the proof of the lemma, and
+also that of the theorem.
+6 Exercises
+1. Prove that
+ ∞
+0
+sin(x2) dx =
+ ∞
+0
+cos(x2) dx =
+√
+2π
+4
+.
+These are the Fresnel integrals. Here,
+ ∞
+0
+is interpreted as limR→∞
+ R
+0 .
+[Hint:
+Integrate the function e−z2 over the path in Figure 14.
+Recall that
+ ∞
+−∞e−x2 dx = √π.]
+R
+Rei π
+4
+0
+Figure 14. The contour in Exercise 1
+2. Show that
+ ∞
+0
+sin x
+x
+dx = π
+2 .
+[Hint: The integral equals
+1
+2i
+ ∞
+−∞
+eix−1
+x
+dx. Use the indented semicircle.]
+3. Evaluate the integrals
+ ∞
+0
+e−ax cos bx dx
+and
+ ∞
+0
+e−ax sin bx dx ,
+a > 0
+by integrating e−Az, A =
+√
+a2 + b2, over an appropriate sector with angle ω, with
+cos ω = a/A.
