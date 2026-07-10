@@ -695,18 +695,29 @@ p.prose{ margin:0; }
            '" font-family="\'JetBrains Mono\', ui-monospace, monospace" font-size="'+(size||13)+
            '" text-anchor="'+(anchor||'middle')+'">'+_escXML(_sub2(str))+'</text>';
   }
-  function _arrow(a,b,color,sw){
-    var dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1, ux=dx/L, uy=dy/L, hs=8;
-    var base=[b[0]-ux*hs, b[1]-uy*hs], nx=-uy, ny=ux;
+  /* 화살촉 삼각형만(선분 없이) — 곡선 중간에 방향 표시(등고선 진행 방향 등)를 찍을 때 재사용한다. */
+  function _arrowHead(tip, ux, uy, color, hs){
+    hs = hs || 8;
+    var base=[tip[0]-ux*hs, tip[1]-uy*hs], nx=-uy, ny=ux;
     var p1=[base[0]+nx*hs*0.55, base[1]+ny*hs*0.55];
     var p2=[base[0]-nx*hs*0.55, base[1]-ny*hs*0.55];
-    return _segEl(a,base,color,sw)+
-           '<polygon points="'+_n(b[0])+','+_n(b[1])+' '+_n(p1[0])+','+_n(p1[1])+' '+_n(p2[0])+','+_n(p2[1])+'" fill="'+color+'"/>';
+    return '<polygon points="'+_n(tip[0])+','+_n(tip[1])+' '+_n(p1[0])+','+_n(p1[1])+' '+_n(p2[0])+','+_n(p2[1])+'" fill="'+color+'"/>';
   }
-  function _axes(fit,C){
+  function _arrow(a,b,color,sw){
+    var dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1, ux=dx/L, uy=dy/L, hs=8;
+    var base=[b[0]-ux*hs, b[1]-uy*hs];
+    return _segEl(a,base,color,sw)+_arrowHead(b,ux,uy,color,hs);
+  }
+  function _axes(fit,C,labels){
     var bb=fit.bbox, out=[];
-    if(bb[0]<=0 && bb[2]>=0) out.push(_segEl(fit.map([0,bb[1]]),fit.map([0,bb[3]]),C.axis,1));
-    if(bb[1]<=0 && bb[3]>=0) out.push(_segEl(fit.map([bb[0],0]),fit.map([bb[2],0]),C.axis,1));
+    if(bb[0]<=0 && bb[2]>=0){
+      out.push(_segEl(fit.map([0,bb[1]]),fit.map([0,bb[3]]),C.axis,1));
+      if(labels && labels.y) out.push(_text(fit.map([0,bb[3]]),labels.y,C.faint,'middle',12));
+    }
+    if(bb[1]<=0 && bb[3]>=0){
+      out.push(_segEl(fit.map([bb[0],0]),fit.map([bb[2],0]),C.axis,1));
+      if(labels && labels.x) out.push(_text([fit.map([bb[2],0])[0]+4,fit.map([bb[2],0])[1]+12],labels.x,C.faint,'start',12));
+    }
     return out.join('');
   }
 
@@ -860,13 +871,13 @@ p.prose{ margin:0; }
       if(pr.to) bb.push(to2(pr.to));
       if(pr.at) bb.push(to2(pr.at));
       if(pr.center){
-        var ex=pr.rx!=null?+pr.rx:(pr.r!=null?+pr.r:1), ey=pr.ry!=null?+pr.ry:ex;
+        var ex=pr.rx!=null?+pr.rx:(pr.r!=null?+pr.r:(pr.r_outer!=null?+pr.r_outer:1)), ey=pr.ry!=null?+pr.ry:ex;
         var cc=to2(pr.center);
         bb.push([cc[0]-ex,cc[1]-ey]); bb.push([cc[0]+ex,cc[1]+ey]);
       }
     });
     var fit=makeFit(bb.length?bb:[[-1,-1],[1,1]],W,H,M), P=[];
-    P.push(_axes(fit,C));
+    P.push(_axes(fit,C,viz.axis_labels));
     prims.forEach(function(pr){
       var col=pr.color||C.primary;
       switch(pr.shape){
@@ -876,6 +887,14 @@ p.prose{ margin:0; }
           var cp=(pr.points||[]).map(function(p){return fit.map(to2(p));});
           P.push('<path d="'+_catmullRom2bezier(cp,!!pr.closed)+'" fill="'+(pr.closed?(pr.fill||'none'):'none')+
                  '" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+' stroke-linecap="round" stroke-linejoin="round"/>');
+          // arrow_at: 등고선(contour)이 도는 방향을 표시하는 화살촉. 매끄러운 곡선을 다시 매개변수화하지
+          // 않고, 지정한 두 입력점 사이 선분의 중점·방향으로 근사한다 — "이 방향으로 돈다" 표시로 충분.
+          var arrowIdx = pr.arrow_at || (pr.arrow ? [Math.max(0, Math.floor((cp.length-(pr.closed?1:2))/2))] : []);
+          arrowIdx.forEach(function(i){
+            var n=cp.length, a=cp[((i%n)+n)%n], b=cp[((i+1)%n+n)%n];
+            var dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1;
+            P.push(_arrowHead([(a[0]+b[0])/2,(a[1]+b[1])/2], dx/L, dy/L, pr.arrow_color||col, pr.arrow_size||9));
+          });
           break;
         }
         case 'ellipse': {
@@ -914,6 +933,36 @@ p.prose{ margin:0; }
         }
         case 'circle': { var c=fit.map(to2(pr.center)), rr=(pr.r||1)*fit.s; P.push('<circle cx="'+_n(c[0])+'" cy="'+_n(c[1])+'" r="'+_n(rr)+'" fill="'+(pr.fill||'none')+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>'); break; }
         case 'label': P.push(_text(fit.map(to2(pr.at)), pr.text||'', pr.color||C.ink, pr.anchor||'middle', pr.size||13)); break;
+        // ×표(극점 표시 등). r는 point과 같은 방식으로 화면 픽셀 크기 — 세계 좌표 스케일과 무관하다.
+        case 'cross': {
+          var xc=fit.map(to2(pr.at)), xr=pr.r||6, xsw=pr.stroke_width||2.2;
+          P.push(_segEl([xc[0]-xr,xc[1]-xr],[xc[0]+xr,xc[1]+xr],col,xsw));
+          P.push(_segEl([xc[0]-xr,xc[1]+xr],[xc[0]+xr,xc[1]-xr],col,xsw));
+          break;
+        }
+        // 부채꼴(각도 범위 — 편각 구간, 가지 자름, 부채꼴 영역 등). from/to는 도(degree) 단위,
+        // 수학 관례대로 +x축에서 반시계 방향으로 잰다(다른 프리미티브의 세계 좌표계와 동일).
+        case 'wedge': {
+          var wc=to2(pr.center);
+          var wrx=(pr.rx!=null?+pr.rx:(pr.r!=null?+pr.r:1)), wry=(pr.ry!=null?+pr.ry:wrx);
+          var wa0=(pr.from==null?0:+pr.from)*Math.PI/180, wa1=(pr.to==null?90:+pr.to)*Math.PI/180;
+          var wn=Math.max(8,Math.round(Math.abs(wa1-wa0)/Math.PI*24));
+          var arcPts=_ellipsePts(wc[0],wc[1],wrx,wry,wa0,wa1,wn).map(fit.map);
+          var wctr=fit.map(wc);
+          var wd='M '+_n(wctr[0])+' '+_n(wctr[1])+' L '+arcPts.map(function(p){return _n(p[0])+' '+_n(p[1]);}).join(' L ')+' Z';
+          P.push('<path d="'+wd+'" fill="'+(pr.fill||C.primaryFill)+'" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>');
+          break;
+        }
+        // 뚫린 원판/고리 영역(수렴 영역, 로랑 급수 환형 영역, 특이점 주변 등) — 바깥·안쪽 원 사이를
+        // torus_2d와 같은 evenodd 트릭으로 채운다.
+        case 'annulus': {
+          var nc=to2(pr.center), ro=(pr.r_outer!=null?+pr.r_outer:1), ri=(pr.r_inner!=null?+pr.r_inner:0.4);
+          var outerPts=_ellipsePts(nc[0],nc[1],ro,ro,0,2*Math.PI,48).map(fit.map);
+          var innerPts=_ellipsePts(nc[0],nc[1],ri,ri,0,2*Math.PI,48).map(fit.map);
+          P.push('<path d="'+_catmullRom2bezier(outerPts,true)+' '+_catmullRom2bezier(innerPts,true)+
+                 '" fill="'+(pr.fill||C.primaryFill)+'" fill-rule="evenodd" stroke="'+col+'" stroke-width="2"'+(pr.dash?' stroke-dasharray="'+pr.dash+'"':'')+'/>');
+          break;
+        }
       }
     });
     return P.join('');

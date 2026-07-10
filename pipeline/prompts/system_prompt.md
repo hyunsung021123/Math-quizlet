@@ -96,7 +96,12 @@
 - `custom_2d` — 위 유형으로 안 될 때의 저수준 프리미티브. `dash`(예: `"4,3"`)는 polygon/circle/ellipse/segment/arc/curve 어디에나 붙일 수 있다(가려진 뒷면·경계 등을 점선으로).
   `{ "type":"custom_2d", "primitives":[ {"shape":"polygon","points":[...]}, {"shape":"segment","from":[..],"to":[..]}, {"shape":"arrow","from":[..],"to":[..]}, {"shape":"arc","from":[..],"to":[..],"bulge":0.5,"arrow":true}, {"shape":"point","at":[..]}, {"shape":"circle","center":[..],"r":1}, {"shape":"ellipse","center":[..],"rx":1,"ry":0.4,"rotation":0}, {"shape":"curve","points":[[..],...],"closed":false}, {"shape":"label","at":[..],"text":"..."} ], "caption":"..." }`
   - `ellipse`: 원근이 들어간 "입체처럼 보이는" 2D 스키마(관 단면, 기울어진 원판 등)에 쓴다. `rotation`은 도(degree) 단위.
-  - `curve`: 점 목록을 매끄러운 곡선(Catmull-Rom)으로 잇는다 — 자유롭게 구불거리는 호모토피 경로, 임베딩된 매듭·고리처럼 `polyline`(직선 연결이라 각져 보임)이나 `arc`(두 점 사이 한 번만 휘는 곡선)로는 어색한 곡선에 쓴다. `closed:true`면 시작·끝을 이어 닫힌 곡선(`fill` 지정 가능).
+  - `curve`: 점 목록을 매끄러운 곡선(Catmull-Rom)으로 잇는다 — 자유롭게 구불거리는 호모토피 경로, 임베딩된 매듭·고리처럼 `polyline`(직선 연결이라 각져 보임)이나 `arc`(두 점 사이 한 번만 휘는 곡선)로는 어색한 곡선에 쓴다. `closed:true`면 시작·끝을 이어 닫힌 곡선(`fill` 지정 가능). **등고선(contour)의 진행 방향**을 보여줘야 하면(복소해석의 경로적분 등) `arrow_at:[i,...]`(`points` 배열의 0-based 인덱스 — 그 점과 다음 점 사이 구간 중점에 화살촉을 찍는다) 또는 그냥 `arrow:true`(곡선 중간 어딘가에 자동으로 하나)를 붙인다. 방향은 `points`를 나열한 순서 그대로이므로, "반시계 방향으로 도는 경로"라면 점들을 반시계 순서로 적으면 된다.
+  - **복소평면 전용 프리미티브** — 복소해석 챕터(경로적분·특이점·등각사상 등)에서 특히 유용하다:
+    - `cross`: `{"shape":"cross","at":[x,y],"color":"..."}` — ×표. **극(pole)**을 표시할 때 쓴다(영점은 기존 `point` 프리미티브 사용 — 관례상 극은 ×, 영점은 •로 구분).
+    - `wedge`: `{"shape":"wedge","center":[x,y],"r":1,"from":0,"to":90,"fill":"...","dash":"..."}` — 부채꼴. `from`/`to`는 도(degree) 단위, +x축에서 반시계 방향으로 잰다(편각 $\arg z$와 같은 방향). 편각 구간·가지 자름(branch cut) 근방·부채꼴 모양 정의역을 나타낼 때 쓴다.
+    - `annulus`: `{"shape":"annulus","center":[x,y],"r_outer":1.5,"r_inner":0.5,"fill":"..."}` — 뚫린 원판(고리 모양 영역). 로랑 급수의 수렴 영역($r<|z|<R$), 특이점을 둘러싼 뚫린 근방 등에 쓴다.
+    - `viz.axis_labels:{"x":"Re","y":"Im"}`를 최상위에 붙이면(예: `{"type":"custom_2d","axis_labels":{"x":"Re","y":"Im"},"primitives":[...]}`) 원점을 지나는 좌표축 끝에 그 라벨을 붙여 준다 — 복소평면임을 명시하고 싶을 때 쓴다(생략하면 라벨 없는 축만 그려지던 기존 방식 그대로).
   - **3D 좌표**: `points`/`from`/`to`/`at`/`center`에 `[x,y,z]`(길이 3)를 쓰면 고정된 3/4 각도 카메라로 2D에 투영해 그려 준다 — `torus_2d`/`cylinder_2d`가 다루지 못하는 임의의 3D 도형(정육면체·구체·나선형 피복공간 등)에 쓴다. `[x,y]`(길이 2)는 그대로 평범한 2D 점으로 취급되니 기존 콘텐츠와 완전히 호환된다.
     - 진짜 3D 엔진이 아니라 **회전·원근 없는 고정 평행투영**이다. 가려짐을 자동으로 계산하지 않으므로, 프리미티브를 나열하는 순서가 곧 쌓이는 순서다 — 뒤에 있어야 할 면·선을 먼저 적어라(다른 도형이 그 위를 덮도록).
     - `circle`/`ellipse`는 `center`만 3D로 투영될 뿐 원판 자체가 기울어지지 않는다(항상 평범한 원/타원으로 그려짐) — 3D 공간에 놓인 원을 제대로 기울여 보이려면 그 원의 둘레를 3D로 샘플링한 `curve`(`closed:true`)를 써라.
