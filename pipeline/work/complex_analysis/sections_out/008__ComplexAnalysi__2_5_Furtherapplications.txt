@@ -1,0 +1,622 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.5 Further applications
+직전 소단원: 「2.4 Cauchy’s integral formulas」
+[본문]
+5. Further applications
+53
+Suppose we are given a pair of functions f and F analytic in regions
+Ωand Ω′, respectively, with Ω⊂Ω′. If the two functions agree on the
+smaller set Ω, we say that F is an analytic continuation of f into the
+region Ω′. The corollary then guarantees that there can be only one such
+analytic continuation, since F is uniquely determined by f.
+5 Further applications
+We gather in this section various consequences of the results proved so
+far.
+5.1 Morera’s theorem
+A direct application of what was proved here is a converse of Cauchy’s
+theorem.
+Theorem 5.1 Suppose f is a continuous function in the open disc D
+such that for any triangle T contained in D
+
+T
+f(z) dz = 0,
+then f is holomorphic.
+Proof.
+By the proof of Theorem 2.1 the function f has a primitive F
+in D that satisﬁes F ′ = f. By the regularity theorem, we know that F
+is indeﬁnitely (and hence twice) complex diﬀerentiable, and therefore f
+is holomorphic.
+5.2 Sequences of holomorphic functions
+Theorem 5.2 If {fn}∞
+n=1 is a sequence of holomorphic functions that
+converges uniformly to a function f in every compact subset of Ω, then
+f is holomorphic in Ω.
+Proof.
+Let D be any disc whose closure is contained in Ωand T
+any triangle in that disc. Then, since each fn is holomorphic, Goursat’s
+theorem implies
+
+T
+fn(z) dz = 0
+for all n.
+By assumption fn →f uniformly in the closure of D, so f is continuous
+and
+
+T
+fn(z) dz →
+
+T
+f(z) dz.
+
+54
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+As a result, we ﬁnd 
+T f(z) dz = 0, and by Morera’s theorem, we conclude
+that f is holomorphic in D. Since this conclusion is true for every D
+whose closure is contained in Ω, we ﬁnd that f is holomorphic in all of
+Ω.
+This is a striking result that is obviously not true in the case of real
+variables: the uniform limit of continuously diﬀerentiable functions need
+not be diﬀerentiable. For example, we know that every continuous func-
+tion on [0, 1] can be approximated uniformly by polynomials, by Weier-
+strass’s theorem (see Chapter 5, Book I), yet not every continuous func-
+tion is diﬀerentiable.
+We can go one step further and deduce convergence theorems for the
+sequence of derivatives. Recall that if f is a power series with radius
+of convergence R, then f ′ can be obtained by diﬀerentiating term by
+term the series for f, and moreover f ′ has radius of convergence R. (See
+Theorem 2.6 in Chapter 1.) This implies in particular that if Sn are the
+partial sums of f, then S′
+n converges uniformly to f ′ on every compact
+subset of the disc of convergence of f. The next theorem generalizes this
+fact.
+Theorem 5.3 Under the hypotheses of the previous theorem, the se-
+quence of derivatives {f ′
+n}∞
+n=1 converges uniformly to f ′ on every com-
+pact subset of Ω.
+Proof.
+We may assume without loss of generality that the sequence of
+functions in the theorem converges uniformly on all of Ω. Given δ > 0,
+let Ωδ denote the subset of Ωdeﬁned by
+Ωδ = {z ∈Ω: Dδ(z) ⊂Ω}.
+In other words, Ωδ consists of all points in Ωwhich are at distance > δ
+from its boundary. To prove the theorem, it suﬃces to show that {f ′
+n}
+converges uniformly to f ′ on Ωδ for each δ. This is achieved by proving
+the following inequality:
+(13)
+sup
+z∈Ωδ
+|F ′(z)| ≤1
+δ sup
+ζ∈Ω
+|F(ζ)|
+whenever F is holomorphic in Ω, since it can then be applied to
+F = fn −f to prove the desired fact.
+The inequality (13) follows at
+once from the Cauchy integral formula and the deﬁnition of Ωδ, since for
+every z ∈Ωδ the closure of Dδ(z) is contained in Ωand
+F ′(z) =
+1
+2πi
+
+Cδ(z)
+F(ζ)
+(ζ −z)2 dζ.
+
+5. Further applications
+55
+Hence,
+|F ′(z)| ≤1
+2π
+
+Cδ(z)
+|F(ζ)|
+|ζ −z|2 |dζ|
+≤1
+2π sup
+ζ∈Ω
+|F(ζ)| 1
+δ2 2πδ
+= 1
+δ sup
+ζ∈Ω
+|F(ζ)| ,
+as was to be shown.
+Of course, there is nothing special about the ﬁrst derivative, and in
+fact under the hypotheses of the last theorem, we may conclude (arguing
+as above) that for every k ≥0 the sequence of kth derivatives {f (k)
+n }∞
+n=1
+converges uniformly to f (k) on every compact subset of Ω.
+In practice, one often uses Theorem 5.2 to construct holomorphic func-
+tions (say, with a prescribed property) as a series
+(14)
+F(z) =
+∞
+
+n=1
+fn(z).
+Indeed, if each fn is holomorphic in a given region Ωof the complex
+plane, and the series converges uniformly in compact subsets of Ω, then
+Theorem 5.2 guarantees that F is also holomorphic in Ω. For instance,
+various special functions are often expressed in terms of a converging
+series like (14). A speciﬁc example is the Riemann zeta function discussed
+in Chapter 6.
+We now turn to a variant of this idea, which consists of functions
+deﬁned in terms of integrals.
+5.3 Holomorphic functions deﬁned in terms of integrals
+As we shall see later in this book, a number of other special functions
+are deﬁned in terms of integrals of the type
+f(z) =
+ b
+a
+F(z, s) ds,
+or as limits of such integrals. Here, the function F is holomorphic in the
+ﬁrst argument, and continuous in the second. The integral is taken in
+the sense of Riemann integration over the bounded interval [a, b]. The
+problem then is to establish that f is holomorphic.
+
+56
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+In the next theorem, we impose a suﬃcient condition on F, often
+satisﬁed in practice, that easily implies that f is holomorphic.
+After a simple linear change of variables, we may assume that a = 0
+and b = 1.
+Theorem 5.4 Let F(z, s) be deﬁned for (z, s) ∈Ω× [0, 1] where Ωis an
+open set in C. Suppose F satisﬁes the following properties:
+(i)
+F(z, s) is holomorphic in z for each s.
+(ii)
+F is continuous on Ω× [0, 1].
+Then the function f deﬁned on Ωby
+f(z) =
+ 1
+0
+F(z, s) ds
+is holomorphic.
+The second condition says that F is jointly continuous in both argu-
+ments.
+To prove this result, it suﬃces to prove that f is holomorphic in any
+disc D contained in Ω, and by Morera’s theorem this could be achieved
+by showing that for any triangle T contained in D we have
+
+T
+ 1
+0
+F(z, s) ds dz = 0.
+Interchanging the order of integration, and using property (i) would then
+yield the desired result. We can, however, get around the issue of justi-
+fying the change in the order of integration by arguing diﬀerently. The
+idea is to interpret the integral as a “uniform” limit of Riemann sums,
+and then apply the results of the previous section.
+Proof.
+For each n ≥1, we consider the Riemann sum
+fn(z) = (1/n)
+n
+
+k=1
+F(z, k/n).
+Then fn is holomorphic in all of Ωby property (i), and we claim that
+on any disc D whose closure is contained in Ω, the sequence {fn}∞
+n=1
+converges uniformly to f. To see this, we recall that a continuous function
+on a compact set is uniformly continuous, so if ϵ > 0 there exists δ > 0
+such that
+sup
+z∈D
+|F(z, s1) −F(z, s2)| < ϵ
+whenever |s1 −s2| < δ.
+
+5. Further applications
+57
+Then, if n > 1/δ, and z ∈D we have
+|fn(z) −f(z)| =
+
+n
+
+k=1
+ k/n
+(k−1)/n
+F(z, k/n) −F(z, s) ds
+
+≤
+n
+
+k=1
+ k/n
+(k−1)/n
+|F(z, k/n) −F(z, s)| ds
+<
+n
+
+k=1
+ϵ
+n
+< ϵ.
+This proves the claim, and by Theorem 5.2 we conclude that f is holo-
+morphic in D. As a consequence, f is holomorphic in Ω, as was to be
+shown.
+5.4 Schwarz reﬂection principle
+In real analysis, there are various situations where one wishes to extend
+a function from a given set to a larger one.
+Several techniques exist
+that provide extensions for continuous functions, and more generally for
+functions with varying degrees of smoothness. Of course, the diﬃculty of
+the technique increases as we impose more conditions on the extension.
+The situation is very diﬀerent for holomorphic functions. Not only are
+these functions indeﬁnitely diﬀerentiable in their domain of deﬁnition,
+but they also have additional characteristically rigid properties, which
+make them diﬃcult to mold. For example, there exist holomorphic func-
+tions in a disc which are continuous on the closure of the disc, but which
+cannot be continued (analytically) into any region larger than the disc.
+(This phenomenon is discussed in Problem 1.)
+Another fact we have
+seen above is that holomorphic functions must be identically zero if they
+vanish on small open sets (or even, for example, a non-zero line segment).
+It turns out that the theory developed in this chapter provides a simple
+extension phenomenon that is very useful in applications: the Schwarz
+reﬂection principle. The proof consists of two parts. First we deﬁne the
+extension, and then check that the resulting function is still holomorphic.
+We begin with this second point.
+Let Ωbe an open subset of C that is symmetric with respect to the
+real line, that is
+z ∈Ω
+if and only if
+z ∈Ω.
+
+58
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Let Ω+ denote the part of Ωthat lies in the upper half-plane and Ω−
+that part that lies in the lower half-plane.
+Ω+
+Ω−
+I
+R
+Ω
+z
+z
+Figure 11. An open set symmetric across the real axis
+Also, let I = Ω∩R so that I denotes the interior of that part of the
+boundary of Ω+ and Ω−that lies on the real axis. Then we have
+Ω+ ∪I ∪Ω−= Ω
+and the only interesting case of the next theorem occurs, of course, when
+I is non-empty.
+Theorem 5.5 (Symmetry principle) If f + and f −are holomorphic
+functions in Ω+ and Ω−respectively, that extend continuously to I and
+f +(x) = f −(x)
+for all x ∈I,
+then the function f deﬁned on Ωby
+f(z) =
+
+
+
+f +(z)
+if z ∈Ω+,
+f +(z) = f −(z)
+if z ∈I,
+f −(z)
+if z ∈Ω−
+is holomorphic on all of Ω.
+Proof.
+One notes ﬁrst that f is continuous throughout Ω. The only
+diﬃculty is to prove that f is holomorphic at points of I. Suppose D is a
+
+5. Further applications
+59
+disc centered at a point on I and entirely contained in Ω. We prove that
+f is holomorphic in D by Morera’s theorem. Suppose T is a triangle in
+D. If T does not intersect I, then
+
+T
+f(z) dz = 0
+since f is holomorphic in the upper and lower half-discs. Suppose now
+that one side or vertex of T is contained in I, and the rest of T is in,
+say, the upper half-disc. If Tϵ is the triangle obtained from T by slightly
+raising the edge or vertex which lies on I, we have 
+Tϵ f = 0 since Tϵ is
+entirely contained in the upper half-disc (an illustration of the case when
+an edge lies on I is given in Figure 12(a)). We then let ϵ →0, and by
+continuity we conclude that
+
+T
+f(z) dz = 0.
+(a)
+(b)
+T
+T1
+T2
+T3
+Tϵ
+T
+Figure 12. (a) Raising a vertex; (b) splitting a triangle
+If the interior of T intersects I, we can reduce the situation to the
+previous one by writing T as the union of triangles each of which has an
+edge or vertex on I as shown in Figure 12(b). By Morera’s theorem we
+conclude that f is holomorphic in D, as was to be shown.
+We can now state the extension principle, where we use the above
+notation.
+
+60
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Theorem 5.6 (Schwarz reﬂection principle) Suppose that f is a holo-
+morphic function in Ω+ that extends continuously to I and such that f
+is real-valued on I. Then there exists a function F holomorphic in all of
+Ωsuch that F = f on Ω+.
+Proof.
+The idea is simply to deﬁne F(z) for z ∈Ω−by
+F(z) = f(z).
+To prove that F is holomorphic in Ω−we note that if z, z0 ∈Ω−, then
+z, z0 ∈Ω+ and hence, the power series expansion of f near z0 gives
+f(z) =
+
+an(z −z0)n.
+As a consequence we see that
+F(z) =
+
+an(z −z0)n
+and F is holomorphic in Ω−. Since f is real valued on I we have f(x) =
+f(x) whenever x ∈I and hence F extends continuously up to I. The
+proof is complete once we invoke the symmetry principle.
+5.5 Runge’s approximation theorem
+We know by Weierstrass’s theorem that any continuous function on a
+compact interval can be approximated uniformly by polynomials.4 With
+this result in mind, one may inquire about similar approximations in
+complex analysis. More precisely, we ask the following question: what
+conditions on a compact set K ⊂C guarantee that any function holo-
+morphic in a neighborhood of this set can be approximated uniformly by
+polynomials on K?
+An example of this is provided by power series expansions. We recall
+that if f is a holomorphic function in a disc D, then it has a power series
+expansion f(z) = ∞
+n=0 anzn that converges uniformly on every compact
+set K ⊂D. By taking partial sums of this series, we conclude that f can
+be approximated uniformly by polynomials on any compact subset of D.
+In general, however, some condition on K must be imposed, as we see
+by considering the function f(z) = 1/z on the unit circle K = C. Indeed,
+recall that 
+C f(z) dz = 2πi, and if p is any polynomial, then Cauchy’s
+theorem implies 
+C p(z) dz = 0, and this quickly leads to a contradiction.
+4A proof may be found in Section 1.8, Chapter 5, of Book I.
+
+5. Further applications
+61
+A restriction on K that guarantees the approximation pertains to the
+topology of its complement: Kc must be connected. In fact, a slight mod-
+iﬁcation of the above example when f(z) = 1/z proves that this condition
+on K is also necessary; see Problem 4.
+Conversely, uniform approximations exist when Kc is connected, and
+this result follows from a theorem of Runge which states that for any K
+a uniform approximation exists by rational functions with “singularities”
+in the complement of K.5 This result is remarkable since rational func-
+tions are globally deﬁned, while f is given only in a neighborhood of K.
+In particular, f could be deﬁned independently on diﬀerent components
+of K, making the conclusion of the theorem even more striking.
+Theorem 5.7 Any function holomorphic in a neighborhood of a compact
+set K can be approximated uniformly on K by rational functions whose
+singularities are in Kc.
+If Kc is connected, any function holomorphic in a neighborhood of K
+can be approximated uniformly on K by polynomials.
+We shall see how the second part of the theorem follows from the
+ﬁrst: when Kc is connected, one can “push” the singularities to inﬁnity
+thereby transforming the rational functions into polynomials.
+The key to the theorem lies in an integral representation formula that is
+a simple consequence of the Cauchy integral formula applied to a square.
+Lemma 5.8 Suppose f is holomorphic in an open set Ω, and K ⊂Ωis
+compact. Then, there exists ﬁnitely many segments γ1, . . . , γN in Ω−K
+such that
+(15)
+f(z) =
+N
+
+n=1
+1
+2πi
+
+γn
+f(ζ)
+ζ −z dζ
+for all z ∈K.
+Proof.
+Let d = c · d(K, Ωc), where c is any constant < 1/
+√
+2, and
+consider a grid formed by (solid) squares with sides parallel to the axis
+and of length d.
+We let Q = {Q1, . . . , QM} denote the ﬁnite collection of squares in
+this grid that intersect K, with the boundary of each square given the
+positive orientation. (We denote by ∂Qm the boundary of the square
+Qm.) Finally, we let γ1, . . . , γN denote the sides of squares in Q that do
+not belong to two adjacent squares in Q. (See Figure 13.) The choice of
+d guarantees that for each n, γn ⊂Ω, and γn does not intersect K; for if
+it did, then it would belong to two adjacent squares in Q, contradicting
+our choice of γn.
+5These singularities are points where the function is not holomorphic, and are “poles”,
+as deﬁned in the next chapter.
+
+62
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Figure 13. The union of the γn’s is in bold-face
+Since for any z ∈K that is not on the boundary of a square in Q there
+exists j so that z ∈Qj, Cauchy’s theorem implies
+1
+2πi
+
+∂Qm
+f(ζ)
+ζ −z dζ =
+
+f(z)
+if m = j,
+0
+if m̸ = j.
+Thus, for all such z we have
+f(z) =
+M
+
+m=1
+1
+2πi
+
+∂Qm
+f(ζ)
+ζ −z dζ.
+However, if Qm and Qm′ are adjacent, the integral over their common side
+is taken once in each direction, and these cancel. This establishes (15)
+when z is in K and not on the boundary of a square in Q. Since γn ⊂Kc,
+continuity guarantees that this relation continues to hold for all z ∈K,
+as was to be shown.
+The ﬁrst part of Theorem 5.7 is therefore a consequence of the next
+lemma.
+Lemma 5.9 For any line segment γ entirely contained in Ω−K, there
+exists a sequence of rational functions with singularities on γ that ap-
+proximate the integral 
+γ f(ζ)/(ζ −z) dζ uniformly on K.
+Proof.
+If γ(t) : [0, 1] →C is a parametrization for γ, then
+
+γ
+f(ζ)
+ζ −z dζ =
+ 1
+0
+f(γ(t))
+γ(t) −z γ′(t) dt.
+
+5. Further applications
+63
+Since γ does not intersect K, the integrand F(z, t) in this last integral
+is jointly continuous on K × [0, 1], and since K is compact, given ϵ > 0,
+there exists δ > 0 such that
+sup
+z∈K
+|F(z, t1) −F(z, t2)| < ϵ
+whenever |t1 −t2| < δ.
+Arguing as in the proof of Theorem 5.4, we see that the Riemann sums
+of the integral  1
+0 F(z, t) dt approximate it uniformly on K. Since each
+of these Riemann sums is a rational function with singularities on γ, the
+lemma is proved.
+Finally, the process of pushing the poles to inﬁnity is accomplished by
+using the fact that Kc is connected. Since any rational function whose
+only singularity is at the point z0 is a polynomial in 1/(z −z0), it suﬃces
+to establish the next lemma to complete the proof of Theorem 5.7.
+Lemma 5.10 If Kc
+is connected and z0 /∈K,
+then the function
+1/(z −z0) can be approximated uniformly on K by polynomials.
+Proof.
+First, we choose a point z1 that is outside a large open disc D
+centered at the origin and which contains K. Then
+1
+z −z1
+= −1
+z1
+1
+1 −z/z1
+=
+∞
+
+n=1
+−zn
+zn+1
+1
+,
+where the series converges uniformly for z ∈K.
+The partial sums of
+this series are polynomials that provide a uniform approximation to
+1/(z −z1) on K. In particular, this implies that any power 1/(z −z1)k
+can also be approximated uniformly on K by polynomials.
+It now suﬃces to prove that 1/(z −z0) can be approximated uniformly
+on K by polynomials in 1/(z −z1). To do so, we use the fact that Kc is
+connected to travel from z0 to the point z1. Let γ be a curve in Kc that
+is parametrized by γ(t) on [0, 1], and such that γ(0) = z0 and γ(1) = z1.
+If we let ρ = 1
+2d(K, γ), then ρ > 0 since γ and K are compact. We then
+choose a sequence of points {w1, . . . , wℓ} on γ such that w0 = z0, wℓ= z1,
+and |wj −wj+1| < ρ for all 0 ≤j < ℓ.
+We claim that if w is a point on γ, and w′ any other point with
+|w −w′| < ρ, then 1/(z −w) can be approximated uniformly on K by
+polynomials in 1/(z −w′). To see this, note that
+1
+z −w =
+1
+z −w′
+1
+1 −w−w′
+z−w′
+=
+∞
+
+n=0
+(w −w′)n
+(z −w′)n+1 ,
+
+64
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+and since the sum converges uniformly for z ∈K, the approximation by
+partial sums proves our claim.
+This result allows us to travel from z0 to z1 through the ﬁnite sequence
+{wj} to ﬁnd that 1/(z −z0) can be approximated uniformly on K by
+polynomials in 1/(z −z1). This concludes the proof of the lemma, and
+also that of the theorem.
+6 Exercises
+1. Prove that
+ ∞
+0
+sin(x2) dx =
+ ∞
+0
+cos(x2) dx =
+√
+2π
+4
+.
+These are the Fresnel integrals. Here,
+ ∞
+0
+is interpreted as limR→∞
+ R
+0 .
+[Hint:
+Integrate the function e−z2 over the path in Figure 14.
+Recall that
+ ∞
+−∞e−x2 dx = √π.]
+R
+Rei π
+4
+0
+Figure 14. The contour in Exercise 1
+2. Show that
+ ∞
+0
+sin x
+x
+dx = π
+2 .
+[Hint: The integral equals
+1
+2i
+ ∞
+−∞
+eix−1
+x
+dx. Use the indented semicircle.]
+3. Evaluate the integrals
+ ∞
+0
+e−ax cos bx dx
+and
+ ∞
+0
+e−ax sin bx dx ,
+a > 0
+by integrating e−Az, A =
+√
+a2 + b2, over an appropriate sector with angle ω, with
+cos ω = a/A.

@@ -1,0 +1,201 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 4. The Fourier Transform
+현재 소단원: 4.5 Problems
+직전 소단원: 「4.4 Exercises」
+[연습문제]
+5. Problems
+131
+12. The principle that a function and its Fourier transform cannot both be too
+small at inﬁnity is illustrated by the following theorem of Hardy.
+If f is a function on R that satisﬁes
+f(x) = O(e−πx2)
+and
+ˆf(ξ) = O(e−πξ2),
+then f is a constant multiple of e−πx2.
+As a result, if f(x) = O(e−πAx2), and
+ˆf(ξ) = O(e−πBξ2), with AB > 1 and A, B > 0, then f is identically zero.
+(a) If f is even, show that ˆf extends to an even entire function. Moreover, if
+g(z) = ˆf(z1/2), then g satisﬁes
+|g(x)| ≤ce−πx
+and
+|g(z)| ≤ceπR sin2(θ/2) ≤ceπ|z|
+when x ∈R and z = Reiθ with R ≥0 and θ ∈R.
+(b) Apply the Phragm´en-Lindel¨of principle to the function
+F(z) = g(z)eγz
+where γ = iπ e−iπ/(2β)
+sin π/(2β)
+and the sector 0 ≤θ ≤π/β < π, and let β →π to deduce that eπzg(z) is
+bounded in the closed upper half-plane. The same result holds in the lower
+half-plane, so by Liouville’s theorem eπzg(z) is constant, as desired.
+(c) If f is odd, then ˆf(0) = 0, and apply the above argument to ˆf(z)/z to deduce
+that f = ˆf = 0. Finally, write an arbitrary f as an appropriate sum of an
+even function and an odd function.
+5 Problems
+1. Suppose ˆf(ξ) = O(e−a|ξ|p) as |ξ| →∞, for some p > 1. Then f is holomorphic
+for all z and satisﬁes the growth condition
+|f(z)| ≤Aea|z|q
+where 1/p + 1/q = 1.
+Note that on the one hand, when p →∞then q →1, and this limiting case
+can be interpreted as part of Theorem 3.3. On the other hand, when p →1 then
+q →∞, and this limiting case in a sense brings us back to Theorem 2.1.
+[Hint: To prove the result, use the inequality −ξp + ξu ≤uq, which is valid when
+ξ and u are non-negative.
+To establish this inequality, examine separately the
+cases ξp ≥ξu and ξp < ξu; note also that the functions ξ = uq−1 and u = ξp−1 are
+inverses of each other because (p −1)(q −1) = 1.]
+
+132
+Chapter 4. THE FOURIER TRANSFORM
+2. The problem is to solve the diﬀerential equation
+an dn
+dtn u(t) + an−1 dn−1
+dtn−1 u(t) + · · · + a0u(t) = f(t) ,
+where a0, a1, . . . , an are complex constants, and f is a given function. Here we
+suppose that f has bounded support and is smooth (say of class C2).
+(a) Let
+ˆf(z) =
+ ∞
+−∞
+f(t)e−2πizt dt.
+Observe that ˆf is an entire function, and using integration by parts show
+that
+| ˆf(x + iy)| ≤
+A
+1 + x2
+if |y| ≤a for any ﬁxed a ≥0.
+(b) Write
+P(z) = an(2πiz)n + an−1(2πiz)n−1 + · · · + a0.
+Find a real number c so that P(z) does not vanish on the line
+L = {z : z = x + ic,
+x ∈R}.
+(c) Set
+u(t) =
+
+L
+e2πizt
+P(z)
+ˆf(z) dz.
+Check that
+n
+
+j=0
+aj
+ d
+dt
+j
+u(t) =
+
+L
+e2πizt ˆf(z) dz
+and
+
+L
+e2πizt ˆf(z) dz =
+ ∞
+−∞
+e2πixt ˆf(x) dx.
+Conclude by the Fourier inversion theorem that
+n
+
+j=0
+aj
+ d
+dt
+j
+u(t) = f(t).
+
+5. Problems
+133
+Note that the solution u depends on the choice c.
+3.∗In this problem, we investigate the behavior of certain bounded holomorphic
+functions in an inﬁnite strip. The particular result described here is sometimes
+called the three-lines lemma.
+(a) Suppose F(z) is holomorphic and bounded in the strip 0 < Im(z) < 1 and
+continuous on its closure.
+If |F(z)| ≤1 on the boundary lines, then
+|F(z)| ≤1 throughout the strip.
+(b) For the more general F, let supx∈R |F(x)| = M0 and supx∈R |F(x + i)| =
+M1. Then,
+sup
+x∈R
+|F(x + iy)| ≤M 1−y
+0
+M y
+1 ,
+if 0 ≤y ≤1.
+(c) As a consequence, prove that log supx∈R |F(x + iy)| is a convex function of
+y when 0 ≤y ≤1.
+[Hint: For part (a), apply the maximum modulus principle to Fϵ(z) = F(z)e−ϵz2.
+For part (b), consider M z−1
+0
+M −z
+1
+F(z).]
+4.∗There is a relation between the Paley-Wiener theorem and an earlier represen-
+tation due to E. Borel.
+(a) A function f(z), holomorphic for all z, satisﬁes |f(z)| ≤Aϵe2π(M+ϵ)|z| for
+all ϵ if and only if it is representable in the form
+f(z) =
+
+C
+e2πizwg(w) dw
+where g is holomorphic outside the circle of radius M centered at the origin,
+and g vanishes at inﬁnity. Here C is any circle centered at the origin of radius
+larger than M. In fact, if f(z) =  anzn, then g(w) = ∞
+n=0 Anw−n−1 with
+an = An(2πi)n+1/n!.
+(b) The connection with Theorem 3.3 is as follows. For these functions f (for
+which in addition f and ˆf are of moderate decrease on the real axis), one can
+assert that the g above is holomorphic in the larger region, which consists
+of the slit plane C −[−M, M]. Moreover, the relation between g and the
+Fourier transform ˆf is
+g(z) =
+1
+2πi
+ M
+−M
+ˆf(ξ)
+ξ −z dξ
+so that ˆf represents the jump of g across the segment [−M, M]; that is,
+ˆf(x) =
+lim
+ϵ→0,ϵ>0 g(x + iϵ) −g(x −iϵ).
+See Problem 5 in Chapter 3.
+
+5 Entire Functions
+...but after the 15th of October I felt myself a free
+man, with such longing for mathematical work, that
+the last two months ﬂew by quickly, and that only
+today I found the letter of the 19th of October that I
+had not answered. The result of my work, with which
+I am not entirely satisﬁed, I want to share with you.
+Firstly, in looking back at my lectures, a gap in
+function theory needed to be ﬁlled. As you know, up
+to now the following question had been unresolved.
+Given an arbitrary sequence of complex numbers,
+a1, a2, . . . , can one construct an entire (transcenden-
+tal) function that vanishes at these values, with pre-
+scribed multiplicities, and nowhere else?...
+K. Weierstrass, 1874
+In this chapter, we will study functions that are holomorphic in the
+whole complex plane; these are called entire functions. Our presentation
+will be organized around the following three questions:
+1. Where can such functions vanish? We shall see that the obvious
+necessary condition is also suﬃcient: if {zn} is any sequence of
+complex numbers having no limit point in C, then there exists an
+entire function vanishing exactly at the points of this sequence. The
+construction of the desired function is inspired by Euler’s product
+formula for sin πz (the prototypical case when {zn} is Z), but re-
+quires an additional reﬁnement: the Weierstrass canonical factors.
+2. How do these functions grow at inﬁnity? Here, matters are con-
+trolled by an important principle: the larger a function is, the more
+zeros it can have. This principle already manifests itself in the sim-
+ple case of polynomials. By the fundamental theorem of algebra,
+the number of zeros of a polynomial P of degree d is precisely d,
+which is also the exponent in the order of (polynomial) growth of
+P, namely
+sup
+|z|=R
+|P(z)| ≈Rd
+as R →∞.

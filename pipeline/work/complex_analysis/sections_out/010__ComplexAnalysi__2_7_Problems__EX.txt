@@ -1,0 +1,238 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.7 Problems
+직전 소단원: 「2.6 Exercises」
+[연습문제]
+7. Problems
+67
+(b) Deduce from this result, and from Exercise 11, the Poisson integral repre-
+sentation formula from the Cauchy integral formula: If u is harmonic in the
+unit disc and continuous on its closure, then if z = reiθ one has
+u(z) = 1
+2π
+ 2π
+0
+Pr(θ −ϕ)u(ϕ) dϕ
+where Pr(γ) is the Poisson kernel for the unit disc given by
+Pr(γ) =
+1 −r2
+1 −2r cos γ + r2 .
+13. Suppose f is an analytic function deﬁned everywhere in C and such that for
+each z0 ∈C at least one coeﬃcient in the expansion
+f(z) =
+∞
+
+n=0
+cn(z −z0)n
+is equal to 0. Prove that f is a polynomial.
+[Hint: Use the fact that cnn! = f (n)(z0) and use a countability argument.]
+14. Suppose that f is holomorphic in an open set containing the closed unit disc,
+except for a pole at z0 on the unit circle. Show that if
+∞
+
+n=0
+anzn
+denotes the power series expansion of f in the open unit disc, then
+lim
+n→∞
+an
+an+1 = z0.
+15. Suppose f is a non-vanishing continuous function on D that is holomorphic in
+D. Prove that if
+|f(z)| = 1
+whenever |z| = 1,
+then f is constant.
+[Hint: Extend f to all of C by f(z) = 1/f(1/z) whenever |z| > 1, and argue as in
+the Schwarz reﬂection principle.]
+7 Problems
+1. Here are some examples of analytic functions on the unit disc that cannot be
+extended analytically past the unit circle. The following deﬁnition is needed. Let
+
+68
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+f be a function deﬁned in the unit disc D, with boundary circle C. A point w on C
+is said to be regular for f if there is an open neighborhood U of w and an analytic
+function g on U, so that f = g on D ∩U. A function f deﬁned on D cannot be
+continued analytically past the unit circle if no point of C is regular for f.
+(a) Let
+f(z) =
+∞
+
+n=0
+z2n
+for |z| < 1.
+Notice that the radius of convergence of the above series is 1. Show that
+f cannot be continued analytically past the unit disc.
+[Hint:
+Suppose
+θ = 2πp/2k, where p and k are positive integers.
+Let z = reiθ; then
+|f(reiθ)| →∞as r →1.]
+(b) ∗Fix 0 < α < ∞. Show that the analytic function f deﬁned by
+f(z) =
+∞
+
+n=0
+2−nαz2n
+for |z| < 1
+extends continuously to the unit circle, but cannot be analytically continued
+past the unit circle. [Hint: There is a nowhere diﬀerentiable function lurking
+in the background. See Chapter 4 in Book I.]
+2.∗Let
+F(z) =
+∞
+
+n=1
+d(n)zn
+for |z| < 1
+where d(n) denotes the number of divisors of n. Observe that the radius of con-
+vergence of this series is 1. Verify the identity
+∞
+
+n=1
+d(n)zn =
+∞
+
+n=1
+zn
+1 −zn .
+Using this identity, show that if z = r with 0 < r < 1, then
+|F(r)| ≥c
+1
+1 −r log(1/(1 −r))
+as r →1. Similarly, if θ = 2πp/q where p and q are positive integers and z = reiθ,
+then
+|F(reiθ)| ≥cp/q
+1
+1 −r log(1/(1 −r))
+as r →1. Conclude that F cannot be continued analytically past the unit disc.
+3. Morera’s theorem states that if f is continuous in C, and
+
+T f(z) dz = 0 for all
+triangles T, then f is holomorphic in C. Naturally, we may ask if the conclusion
+still holds if we replace triangles by other sets.
+
+7. Problems
+69
+(a) Suppose that f is continuous on C, and
+(16)
+
+C
+f(z) dz = 0
+for every circle C. Prove that f is holomorphic.
+(b) More generally, let Γ be any toy contour, and F the collection of all trans-
+lates and dilates of Γ. Show that if f is continuous on C, and
+
+γ
+f(z) dz = 0
+for all γ ∈F
+then f is holomorphic.
+In particular, Morera’s theorem holds under the
+weaker assumption that
+
+T f(z) dz = 0 for all equilateral triangles.
+[Hint: As a ﬁrst step, assume that f is twice real diﬀerentiable, and write f(z) =
+f(z0) + a(z −z0) + b(z −z0) + O(|z −z0|2) for z near z0. Integrating this expan-
+sion over small circles around z0 yields ∂f/∂z = b = 0 at z0. Alternatively, suppose
+only that f is diﬀerentiable and apply Green’s theorem to conclude that the real
+and imaginary parts of f satisfy the Cauchy-Riemann equations.
+In general, let ϕ(w) = ϕ(x, y) (when w = x + iy) denote a smooth function with
+0 ≤ϕ(w) ≤1, and
+
+R2 ϕ(w) dV (w) = 1, where dV (w) = dxdy, and
+
+denotes the
+usual integral of a function of two variables in R2. For each ϵ > 0, let ϕϵ(z) =
+ϵ−2ϕ(ϵ−1z), as well as
+fϵ(z) =
+
+R2 f(z −w)ϕϵ(w) dV (w),
+where the integral denotes the usual integral of functions of two variables, with
+dV (w) the area element of R2. Then fϵ is smooth, satisﬁes condition (16), and
+fϵ →f uniformly on any compact subset of C.]
+4. Prove the converse to Runge’s theorem: if K is a compact set whose complement
+if not connected, then there exists a function f holomorphic in a neighborhood of
+K which cannot be approximated uniformly by polynomial on K.
+[Hint: Pick a point z0 in a bounded component of Kc, and let f(z) = 1/(z −z0).
+If f can be approximated uniformly by polynomials on K, show that there exists a
+polynomial p such that |(z −z0)p(z) −1| < 1. Use the maximum modulus principle
+(Chapter 3) to show that this inequality continues to hold for all z in the component
+of Kc that contains z0.]
+5.∗There exists an entire function F with the following “universal” property: given
+any entire function h, there is an increasing sequence {Nk}∞
+k=1 of positive integers,
+so that
+lim
+n→∞F(z + Nk) = h(z)
+uniformly on every compact subset of C.
+
+70
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+(a) Let p1, p2, . . . denote an enumeration of the collection of polynomials whose
+coeﬃcients have rational real and imaginary parts. Show that it suﬃces
+to ﬁnd an entire function F and an increasing sequence {Mn} of positive
+integers, such that
+(17)
+|F(z) −pn(z −Mn)| < 1
+n
+whenever z ∈Dn,
+where Dn denotes the disc centered at Mn and of radius n. [Hint: Given
+h entire, there exists a sequence {nk} such that limk→∞pnk(z) = h(z) uni-
+formly on every compact subset of C.]
+(b) Construct F satisfying (17) as an inﬁnite series
+F(z) =
+∞
+
+n=1
+un(z)
+where un(z) = pn(z −Mn)e−cn(z−Mn)2, and the quantities cn > 0 and Mn >
+0 are chosen appropriately with cn →0 and Mn →∞. [Hint: The function
+e−z2 vanishes rapidly as |z| →∞in the sectors {| arg z| < π/4 −δ} and
+{|π −arg z| < π/4 −δ}.]
+In the same spirit, there exists an alternate “universal” entire function G with
+the following property: given any entire function h, there is an increasing sequence
+{Nk}∞
+k=1 of positive integers, so that
+lim
+k→∞DNkG(z) = h(z)
+uniformly on every compact subset of C. Here DjG denotes the jth (complex)
+derivative of G.
+
+3 Meromorphic Functions and
+the Logarithm
+One knows that the diﬀerential calculus, which has
+contributed so much to the progress of analysis, is
+founded on the consideration of diﬀerential coeﬃcients,
+that is derivatives of functions. When one attributes
+an inﬁnitesimal increase ϵ to the variable x, the func-
+tion f(x) of this variable undergoes in general an in-
+ﬁnitesimal increase of which the ﬁrst term is propor-
+tional to ϵ, and the ﬁnite coeﬃcient of ϵ of this in-
+crease is what is called its diﬀerential coeﬃcient... If
+considering the values of x where f(x) becomes inﬁ-
+nite, we add to one of these values designated by x1,
+the inﬁnitesimal ϵ, and then develop f(x1 + ϵ) in in-
+creasing power of the same quantity, the ﬁrst terms
+of this development contain negative powers of ϵ; one
+of these will be the product of 1/ϵ with a ﬁnite coef-
+ﬁcient, which we will call the residue of the function
+f(x), relative to the particular value x1 of the variable
+x. Residues of this kind present themselves naturally
+in several branches of algebraic and inﬁnitesimal anal-
+ysis. Their consideration furnish methods that can be
+simply used, that apply to a large number of diverse
+questions, and that give new formulae that would seem
+to be of interest to mathematicians...
+A. L. Cauchy, 1826
+There is a general principle in the theory, already implicit in Riemann’s
+work, which states that analytic functions are in an essential way charac-
+terized by their singularities. That is to say, globally analytic functions
+are “eﬀectively” determined by their zeros, and meromorphic functions
+by their zeros and poles. While these assertions cannot be formulated
+as precise general theorems, there are nevertheless signiﬁcant instances
+where this principle applies.
+We begin this chapter by considering singularities, in particular the
+diﬀerent kind of point singularities (“isolated” singularities) that a holo-
+morphic function can have. In order of increasing severity, these are:
+• removable singularities

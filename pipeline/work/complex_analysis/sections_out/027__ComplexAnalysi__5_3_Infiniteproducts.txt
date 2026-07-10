@@ -1,0 +1,373 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 5. Entire Functions
+현재 소단원: 5.3 Infinite products
+직전 소단원: 「5.2 Functions of finite order」
+[본문]
+140
+Chapter 5. ENTIRE FUNCTIONS
+Then f is entire, and it is easy to see that
+|f(z)| ≤e|z|1/2,
+and the order of growth of f is 1/2.
+Moreover, f(z) vanishes when
+zn = ((n + 1/2)π)2, while 
+n 1/|zn|s < ∞exactly when s > 1/2.
+A natural question is whether or not, given any sequence of complex
+numbers z1, z2, . . ., there exists an entire function f with zeros precisely
+at the points of this sequence. A necessary condition is that z1, z2, . . . do
+not accumulate, in other words we must have
+lim
+k→∞|zk| = ∞,
+otherwise f would vanish identically by Theorem 4.8 in Chapter 2. Weier-
+strass proved that this condition is also suﬃcient by explicitly construct-
+ing a function with these prescribed zeros. A ﬁrst guess is of course the
+product
+(z −z1)(z −z2) · · · ,
+which provides a solution in the special case when the sequence of zeros
+is ﬁnite.
+In general, Weierstrass showed how to insert factors in this
+product so that the convergence is guaranteed, yet no new zeros are
+introduced.
+Before coming to the general construction, we review inﬁnite products
+and study a basic example.
+3 Inﬁnite products
+3.1 Generalities
+Given a sequence {an}∞
+n=1 of complex numbers, we say that the product
+∞
+
+n=1
+(1 + an)
+converges if the limit
+lim
+N→∞
+N
+
+n=1
+(1 + an)
+of the partial products exists.
+A useful necessary condition that guarantees the existence of a product
+is contained in the following proposition.
+
+3. Infinite products
+141
+Proposition 3.1 If  |an| < ∞, then the product ∞
+n=1(1 + an) con-
+verges. Moreover, the product converges to 0 if and only if one of its
+factors is 0.
+This is simply Proposition 1.9 of Chapter 8 in Book I. We repeat the
+proof here.
+Proof.
+If  |an| converges, then for all large n we must have
+|an| < 1/2. Disregarding if necessary ﬁnitely many terms, we may as-
+sume that this inequality holds for all n. In particular, we can deﬁne
+log(1 + an) by the usual power series (see (6) in Chapter 3), and this
+logarithm satisﬁes the property that 1 + z = elog(1+z) whenever |z| < 1.
+Hence we may write the partial products as follows:
+N
+
+n=1
+(1 + an) =
+N
+
+n=1
+elog(1+an) = eBN ,
+where BN = N
+n=1 bn with bn = log(1 + an). By the power series expan-
+sion we see that | log(1 + z)| ≤2|z|, if |z| < 1/2. Hence |bn| ≤2|an|, so
+BN converges as N →∞to a complex number, say B. Since the expo-
+nential function is continuous, we conclude that eBN converges to eB as
+N →∞, proving the ﬁrst assertion of the proposition. Observe also that
+if 1 + an̸ = 0 for all n, then the product converges to a non-zero limit
+since it is expressed as eB.
+More generally, we can consider products of holomorphic functions.
+Proposition 3.2 Suppose {Fn} is a sequence of holomorphic functions
+on the open set Ω. If there exist constants cn > 0 such that
+
+cn < ∞
+and
+|Fn(z) −1| ≤cn
+for all z ∈Ω,
+then:
+(i) The product ∞
+n=1 Fn(z) converges uniformly in Ωto a holomorphic
+function F(z).
+(ii) If Fn(z) does not vanish for any n, then
+F ′(z)
+F(z) =
+∞
+
+n=1
+F ′
+n(z)
+Fn(z).
+Proof.
+To prove the ﬁrst statement, note that for each z we may
+argue as in the previous proposition if we write Fn(z) = 1 + an(z), with
+
+142
+Chapter 5. ENTIRE FUNCTIONS
+|an(z)| ≤cn. Then, we observe that the estimates are actually uniform
+in z because the cn’s are constants. It follows that the product converges
+uniformly to a holomorphic function, which we denote by F(z).
+To establish the second part of the theorem, suppose that K is a
+compact subset of Ω, and let
+GN(z) =
+N
+
+n=1
+Fn(z).
+We have just proved that GN →F uniformly in Ω, so by Theorem 5.3
+in Chapter 2, the sequence {G′
+N} converges uniformly to F ′ in K. Since
+GN is uniformly bounded from below on K, we conclude that G′
+N/GN →
+F ′/F uniformly on K, and because K is an arbitrary compact subset of
+Ω, the limit holds for every point of Ω. Moreover, as we saw in Section 4
+of Chapter 3
+G′
+N
+GN
+=
+N
+
+n=1
+F ′
+n
+Fn
+,
+so part (ii) of the proposition is also proved.
+3.2 Example: the product formula for the sine function
+Before proceeding with the general theory of Weierstrass products, we
+consider the key example of the product formula for the sine function:
+(3)
+sin πz
+π
+= z
+∞
+
+n=1
+
+1 −z2
+n2
+
+.
+This identity will in turn be derived from the sum formula for the cotan-
+gent function (cot πz = cos πz/ sin πz):
+(4)
+π cot πz =
+∞
+
+n=−∞
+1
+z + n = lim
+N→∞
+
+|n|≤N
+1
+z + n = 1
+z +
+∞
+
+n=1
+2z
+z2 −n2 .
+The ﬁrst formula holds for all complex numbers z, and the second when-
+ever z is not an integer. The sum ∞
+n=−∞1/(z + n) needs to be properly
+understood, because the separate halves corresponding to positive and
+negative values of n do not converge. Only when interpreted symmetri-
+cally, as limN→∞
+
+|n|≤N 1/(z + n), does the cancellation of terms lead
+to a convergent series as in (4) above.
+
+3. Infinite products
+143
+We prove (4) by showing that both π cot πz and the series have the
+same structural properties. In fact, observe that if F(z) = π cot πz, then
+F has the following three properties:
+(i) F(z + 1) = F(z) whenever z is not an integer.
+(ii) F(z) = 1
+z + F0(z), where F0 is analytic near 0.
+(iii) F(z) has simple poles at the integers, and no other singularities.
+Then, we note that the function
+∞
+
+n=−∞
+1
+z + n = lim
+N→∞
+
+|n|≤N
+1
+z + n
+also satisﬁes these same three properties. In fact, property (i) is simply
+the observation that the passage from z to z + 1 merely shifts the terms
+in the inﬁnite sum. To be precise,
+
+|n|≤N
+1
+z + 1 + n =
+1
+z + 1 + N −
+1
+z −N +
+
+|n|≤N
+1
+z + n.
+Letting N tend to inﬁnity proves the assertion. Properties (ii) and (iii)
+are evident from the representation 1
+z + ∞
+n=1
+2z
+z2−n2 of the sum.
+Therefore, the function deﬁned by
+∆(z) = F(z) −
+∞
+
+n=−∞
+1
+z + n
+is periodic in the sense that ∆(z + 1) = ∆(z), and by (ii) the singularity
+of ∆at the origin is removable, and hence by periodicity the singularities
+at all the integers are also removable; this implies that ∆is entire.
+To prove our formula, it will suﬃce to show that the function ∆is
+bounded in the complex plane. By the periodicity above, it is enough
+to do so in the strip |Re(z)| ≤1/2. This is because every z′ ∈C is of
+the form z′ = z + k, where z is in the strip and k is an integer. Since ∆
+is holomorphic, it is bounded in the rectangle |Im(z)| ≤1, and we need
+only control the behavior of that function for |Im(z)| > 1. If Im(z) > 1
+and z = x + iy, then
+cot πz = i eiπz + e−iπz
+eiπz −e−iπz = i e−2πy + e−2πix
+e−2πy −e−2πix ,
+
+144
+Chapter 5. ENTIRE FUNCTIONS
+and in absolute value this quantity is bounded. Also
+1
+z +
+∞
+
+n=1
+2z
+z2 −n2 =
+1
+x + iy +
+∞
+
+n=1
+2(x + iy)
+x2 −y2 −n2 + 2ixy ;
+therefore if y > 1, we have
+
+1
+z +
+∞
+
+n=1
+2z
+z2 −n2
+ ≤C + C
+∞
+
+n=1
+y
+y2 + n2 .
+Now the sum on the right-hand side is majorized by
+ ∞
+0
+y
+y2 + x2 dx ,
+because the function y/(y2 + x2) is decreasing in x; moreover, as the
+change of variables x 	→yx shows, the integral is independent of y, and
+hence bounded. By a similar argument ∆is bounded in the strip where
+Im(z) < −1, hence is bounded throughout the whole strip |Re(z)| ≤1/2.
+Therefore ∆is bounded in C, and by Liouville’s theorem, ∆(z) is con-
+stant. The observation that ∆is odd shows that this constant must be
+0, and concludes the proof of formula (4).
+To prove (3), we now let
+G(z) = sin πz
+π
+and
+P(z) = z
+∞
+
+n=1
+
+1 −z2
+n2
+
+.
+Proposition 3.2 and the fact that  1/n2 < ∞guarantee that the prod-
+uct P(z) converges, and that away from the integers we have
+P ′(z)
+P(z) = 1
+z +
+∞
+
+n=1
+2z
+z2 −n2 .
+Since G′(z)/G(z) = π cot πz, the cotangent formula (4) gives
+P(z)
+G(z)
+′
+= P(z)
+G(z)
+P ′(z)
+P(z) −G′(z)
+G(z)
+
+= 0,
+and so P(z) = cG(z) for some constant c. Dividing this identity by z,
+and taking the limit as z →0, we ﬁnd c = 1.
+Remark. Other proofs of (4) and (3) can be given by integrating
+analogous identities for π2/(sin πz)2 derived in Exercise 12, Chapter 3,
+and Exercise 7, Chapter 4. Still other proofs using Fourier series can be
+found in the exercises of Chapters 3 and 5 of Book I.
+
+4. Weierstrass infinite products
+145
+4 Weierstrass inﬁnite products
+We now turn to Weierstrass’s construction of an entire function with
+prescribed zeros.
+Theorem 4.1 Given any sequence {an} of complex numbers with
+|an| →∞as n →∞, there exists an entire function f that vanishes at
+all z = an and nowhere else. Any other such entire function is of the
+form f(z)eg(z), where g is entire.
+Recall that if a holomorphic function f vanishes at z = a, then the
+multiplicity of the zero a is the integer m so that
+f(z) = (z −a)mg(z),
+where g is holomorphic and nowhere vanishing in a neighborhood of a.
+Alternatively, m is the ﬁrst non-zero power of z −a in the power series
+expansion of f at a. Since, as before, we allow for repetitions in the
+sequence {an}, the theorem actually guarantees the existence of entire
+functions with prescribed zeros and with desired multiplicities.
+To begin the proof, note ﬁrst that if f1 and f2 are two entire functions
+that vanish at all z = an and nowhere else, then f1/f2 has removable
+singularities at all the points an.
+Hence f1/f2 is entire and vanishes
+nowhere, so that there exists an entire function g with f1(z)/f2(z) =
+eg(z), as we showed in Section 6 of Chapter 3. Therefore f1(z) = f2(z)eg(z)
+and the last statement of the theorem is veriﬁed.
+Hence we are left with the task of constructing a function that vanishes
+at all the points of the sequence {an} and nowhere else. A naive guess,
+suggested by the product formula for sin πz, is the product 
+n (1 −z/an).
+The problem is that this product converges only for suitable sequences
+{an}, so we correct this by inserting exponential factors. These factors
+will make the product converge without adding new zeros.
+For each integer k ≥0 we deﬁne canonical factors by
+E0(z) = 1 −z
+and
+Ek(z) = (1 −z)ez+z2/2+···+zk/k,
+for k ≥1.
+The integer k is called the degree of the canonical factor.
+Lemma 4.2 If |z| ≤1/2, then |1 −Ek(z)| ≤c|z|k+1 for some c > 0.
+Proof.
+If |z| ≤1/2, then with the logarithm deﬁned in terms of the
+power series, we have 1 −z = elog(1−z), and therefore
+Ek(z) = elog(1−z)+z+z2/2+···+zk/k = ew,

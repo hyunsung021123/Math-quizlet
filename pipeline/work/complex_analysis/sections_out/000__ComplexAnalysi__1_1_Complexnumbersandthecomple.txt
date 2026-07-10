@@ -1,0 +1,314 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 1. Preliminaries to Complex Analysis
+현재 소단원: 1.1 Complex numbers and the complex plane
+[본문]
+1 Preliminaries to Complex
+Analysis
+The sweeping development of mathematics during the
+last two centuries is due in large part to the introduc-
+tion of complex numbers; paradoxically, this is based
+on the seemingly absurd notion that there are num-
+bers whose squares are negative.
+E. Borel, 1952
+This chapter is devoted to the exposition of basic preliminary material
+which we use extensively throughout of this book.
+We begin with a quick review of the algebraic and analytic properties
+of complex numbers followed by some topological notions of sets in the
+complex plane. (See also the exercises at the end of Chapter 1 in Book I.)
+Then, we deﬁne precisely the key notion of holomorphicity, which is
+the complex analytic version of diﬀerentiability. This allows us to discuss
+the Cauchy-Riemann equations, and power series.
+Finally, we deﬁne the notion of a curve and the integral of a function
+along it. In particular, we shall prove an important result, which we state
+loosely as follows: if a function f has a primitive, in the sense that there
+exists a function F that is holomorphic and whose derivative is precisely
+f, then for any closed curve γ
+
+γ
+f(z) dz = 0.
+This is the ﬁrst step towards Cauchy’s theorem, which plays a central
+role in complex function theory.
+1 Complex numbers and the complex plane
+Many of the facts covered in this section were already used in Book I.
+1.1 Basic properties
+A complex number takes the form z = x + iy where x and y are real,
+and i is an imaginary number that satisﬁes i2 = −1. We call x and y the
+
+2
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+real part and the imaginary part of z, respectively, and we write
+x = Re(z)
+and
+y = Im(z).
+The real numbers are precisely those complex numbers with zero imagi-
+nary parts. A complex number with zero real part is said to be purely
+imaginary.
+Throughout our presentation, the set of all complex numbers is de-
+noted by C. The complex numbers can be visualized as the usual Eu-
+clidean plane by the following simple identiﬁcation: the complex number
+z = x + iy ∈C is identiﬁed with the point (x, y) ∈R2. For example, 0
+corresponds to the origin and i corresponds to (0, 1). Naturally, the x
+and y axis of R2 are called the real axis and imaginary axis, because
+they correspond to the real and purely imaginary numbers, respectively.
+(See Figure 1.)
+Real axis
+Imaginary axis
+z = x + iy = (x, y)
+x
+0
+1
+i
+iy
+Figure 1. The complex plane
+The natural rules for adding and multiplying complex numbers can be
+obtained simply by treating all numbers as if they were real, and keeping
+in mind that i2 = −1. If z1 = x1 + iy1 and z2 = x2 + iy2, then
+z1 + z2 = (x1 + x2) + i(y1 + y2),
+and also
+z1z2 = (x1 + iy1)(x2 + iy2)
+= x1x2 + ix1y2 + iy1x2 + i2y1y2
+= (x1x2 −y1y2) + i(x1y2 + y1x2).
+
+1. Complex numbers and the complex plane
+3
+If we take the two expressions above as the deﬁnitions of addition and
+multiplication, it is a simple matter to verify the following desirable
+properties:
+• Commutativity: z1 + z2 = z2 + z1 and z1z2 = z2z1 for all z1, z2 ∈C.
+• Associativity:
+(z1 + z2) + z3 = z1 + (z2 + z3);
+and (z1z2)z3 =
+z1(z2z3) for z1, z2, z3 ∈C.
+• Distributivity: z1(z2 + z3) = z1z2 + z1z3 for all z1, z2, z3 ∈C.
+Of course, addition of complex numbers corresponds to addition of the
+corresponding vectors in the plane R2. Multiplication, however, consists
+of a rotation composed with a dilation, a fact that will become transpar-
+ent once we have introduced the polar form of a complex number. At
+present we observe that multiplication by i corresponds to a rotation by
+an angle of π/2.
+The notion of length, or absolute value of a complex number is identical
+to the notion of Euclidean length in R2. More precisely, we deﬁne the
+absolute value of a complex number z = x + iy by
+|z| = (x2 + y2)1/2,
+so that |z| is precisely the distance from the origin to the point (x, y). In
+particular, the triangle inequality holds:
+|z + w| ≤|z| + |w|
+for all z, w ∈C.
+We record here other useful inequalities.
+For all z ∈C we have both
+|Re(z)| ≤|z| and |Im(z)| ≤|z|, and for all z, w ∈C
+||z| −|w|| ≤|z −w|.
+This follows from the triangle inequality since
+|z| ≤|z −w| + |w|
+and
+|w| ≤|z −w| + |z|.
+The complex conjugate of z = x + iy is deﬁned by
+z = x −iy,
+and it is obtained by a reﬂection across the real axis in the plane. In
+fact a complex number z is real if and only if z = z, and it is purely
+imaginary if and only if z = −z.
+
+4
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+The reader should have no diﬃculty checking that
+Re(z) = z + z
+2
+and
+Im(z) = z −z
+2i
+.
+Also, one has
+|z|2 = zz
+and as a consequence
+1
+z =
+z
+|z|2
+whenever z̸ = 0.
+Any non-zero complex number z can be written in polar form
+z = reiθ ,
+where r > 0; also θ ∈R is called the argument of z (deﬁned uniquely
+up to a multiple of 2π) and is often denoted by arg z, and
+eiθ = cos θ + i sin θ.
+Since |eiθ| = 1 we observe that r = |z|, and θ is simply the angle (with
+positive counterclockwise orientation) between the positive real axis and
+the half-line starting at the origin and passing through z. (See Figure 2.)
+r
+θ
+0
+z = reiθ
+Figure 2. The polar form of a complex number
+Finally, note that if z = reiθ and w = seiϕ, then
+zw = rsei(θ+ϕ),
+so multiplication by a complex number corresponds to a homothety in
+R2 (that is, a rotation composed with a dilation).
+
+1. Complex numbers and the complex plane
+5
+1.2 Convergence
+We make a transition from the arithmetic and geometric properties of
+complex numbers described above to the key notions of convergence and
+limits.
+A sequence {z1, z2, . . .} of complex numbers is said to converge to
+w ∈C if
+lim
+n→∞|zn −w| = 0,
+and we write
+w = lim
+n→∞zn.
+This notion of convergence is not new. Indeed, since absolute values in
+C and Euclidean distances in R2 coincide, we see that zn converges to w
+if and only if the corresponding sequence of points in the complex plane
+converges to the point that corresponds to w.
+As an exercise, the reader can check that the sequence {zn} converges
+to w if and only if the sequence of real and imaginary parts of zn converge
+to the real and imaginary parts of w, respectively.
+Since it is sometimes not possible to readily identify the limit of a
+sequence (for example, limN→∞
+N
+n=1 1/n3), it is convenient to have a
+condition on the sequence itself which is equivalent to its convergence. A
+sequence {zn} is said to be a Cauchy sequence (or simply Cauchy) if
+|zn −zm| →0
+as n, m →∞.
+In other words, given ϵ > 0 there exists an integer N > 0 so that
+|zn −zm| < ϵ whenever n, m > N.
+An important fact of real analysis
+is that R is complete: every Cauchy sequence of real numbers converges
+to a real number.1 Since the sequence {zn} is Cauchy if and only if the
+sequences of real and imaginary parts of zn are, we conclude that every
+Cauchy sequence in C has a limit in C. We have thus the following result.
+Theorem 1.1 C, the complex numbers, is complete.
+We now turn our attention to some simple topological considerations
+that are necessary in our study of functions. Here again, the reader will
+note that no new notions are introduced, but rather previous notions are
+now presented in terms of a new vocabulary.
+1.3 Sets in the complex plane
+If z0 ∈C and r > 0, we deﬁne the open disc Dr(z0) of radius r cen-
+tered at z0 to be the set of all complex numbers that are at absolute
+1This is sometimes called the Bolzano-Weierstrass theorem.
+
+6
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+value strictly less than r from z0. In other words,
+Dr(z0) = {z ∈C : |z −z0| < r},
+and this is precisely the usual disc in the plane of radius r centered at
+z0. The closed disc Dr(z0) of radius r centered at z0 is deﬁned by
+Dr(z0) = {z ∈C : |z −z0| ≤r},
+and the boundary of either the open or closed disc is the circle
+Cr(z0) = {z ∈C : |z −z0| = r}.
+Since the unit disc (that is, the open disc centered at the origin and of
+radius 1) plays an important role in later chapters, we will often denote
+it by D,
+D = {z ∈C : |z| < 1}.
+Given a set Ω⊂C, a point z0 is an interior point of Ωif there exists
+r > 0 such that
+Dr(z0) ⊂Ω.
+The interior of Ωconsists of all its interior points. Finally, a set Ωis
+open if every point in that set is an interior point of Ω. This deﬁnition
+coincides precisely with the deﬁnition of an open set in R2.
+A set Ωis closed if its complement Ωc = C −Ωis open. This property
+can be reformulated in terms of limit points. A point z ∈C is said to
+be a limit point of the set Ωif there exists a sequence of points zn ∈Ω
+such that zn̸ = z and limn→∞zn = z. The reader can now check that a
+set is closed if and only if it contains all its limit points. The closure of
+any set Ωis the union of Ωand its limit points, and is often denoted by
+Ω.
+Finally, the boundary of a set Ωis equal to its closure minus its
+interior, and is often denoted by ∂Ω.
+A set Ωis bounded if there exists M > 0 such that |z| < M whenever
+z ∈Ω. In other words, the set Ωis contained in some large disc. If Ωis
+bounded, we deﬁne its diameter by
+diam(Ω) = sup
+z,w∈Ω
+|z −w|.
+A set Ωis said to be compact if it is closed and bounded. Arguing
+as in the case of real variables, one can prove the following.
+
+1. Complex numbers and the complex plane
+7
+Theorem 1.2 The set Ω⊂C is compact if and only if every sequence
+{zn} ⊂Ωhas a subsequence that converges to a point in Ω.
+An open covering of Ωis a family of open sets {Uα} (not necessarily
+countable) such that
+Ω⊂
+
+α
+Uα.
+In analogy with the situation in R, we have the following equivalent
+formulation of compactness.
+Theorem 1.3 A set Ωis compact if and only if every open covering of
+Ωhas a ﬁnite subcovering.
+Another interesting property of compactness is that of nested sets.
+We shall in fact use this result at the very beginning of our study of
+complex function theory, more precisely in the proof of Goursat’s theorem
+in Chapter 2.
+Proposition 1.4 If Ω1 ⊃Ω2 ⊃· · · ⊃Ωn ⊃· · · is a sequence of non-empty
+compact sets in C with the property that
+diam(Ωn) →0
+as n →∞,
+then there exists a unique point w ∈C such that w ∈Ωn for all n.
+Proof.
+Choose a point zn in each Ωn. The condition diam(Ωn) →0
+says precisely that {zn} is a Cauchy sequence, therefore this sequence
+converges to a limit that we call w. Since each set Ωn is compact we
+must have w ∈Ωn for all n. Finally, w is the unique point satisfying this
+property, for otherwise, if w′ satisﬁed the same property with w′̸ = w
+we would have |w −w′| > 0 and the condition diam(Ωn) →0 would be
+violated.
+The last notion we need is that of connectedness. An open set Ω⊂C is
+said to be connected if it is not possible to ﬁnd two disjoint non-empty
+open sets Ω1 and Ω2 such that
+Ω= Ω1 ∪Ω2.
+A connected open set in C will be called a region. Similarly, a closed
+set F is connected if one cannot write F = F1 ∪F2 where F1 and F2 are
+disjoint non-empty closed sets.
+There is an equivalent deﬁnition of connectedness for open sets in terms
+of curves, which is often useful in practice: an open set Ωis connected
+if and only if any two points in Ωcan be joined by a curve γ entirely
+contained in Ω. See Exercise 5 for more details.
+
+8
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+2 Functions on the complex plane
+2.1 Continuous functions
+Let f be a function deﬁned on a set Ωof complex numbers. We say that
+f is continuous at the point z0 ∈Ωif for every ϵ > 0 there exists δ > 0
+such that whenever z ∈Ωand |z −z0| < δ then |f(z) −f(z0)| < ϵ. An
+equivalent deﬁnition is that for every sequence {z1, z2, . . .} ⊂Ωsuch that
+lim zn = z0, then lim f(zn) = f(z0).
+The function f is said to be continuous on Ωif it is continuous at
+every point of Ω. Sums and products of continuous functions are also
+continuous.
+Since the notions of convergence for complex numbers and points in
+R2 are the same, the function f of the complex argument z = x + iy is
+continuous if and only if it is continuous viewed as a function of the two
+real variables x and y.
+By the triangle inequality, it is immediate that if f is continuous, then
+the real-valued function deﬁned by z 	→|f(z)| is continuous. We say that
+f attains a maximum at the point z0 ∈Ωif
+|f(z)| ≤|f(z0)|
+for all z ∈Ω,
+with the inequality reversed for the deﬁnition of a minimum.
+Theorem 2.1 A continuous function on a compact set Ωis bounded and
+attains a maximum and minimum on Ω.
+This is of course analogous to the situation of functions of a real vari-
+able, and we shall not repeat the simple proof here.
+2.2 Holomorphic functions
+We now present a notion that is central to complex analysis, and in
+distinction to our previous discussion we introduce a deﬁnition that is
+genuinely complex in nature.
+Let Ωbe an open set in C and f a complex-valued function on Ω. The
+function f is holomorphic at the point z0 ∈Ωif the quotient
+(1)
+f(z0 + h) −f(z0)
+h
+converges to a limit when h →0. Here h ∈C and h̸ = 0 with z0 + h ∈Ω,
+so that the quotient is well deﬁned. The limit of the quotient, when it
+exists, is denoted by f ′(z0), and is called the derivative of f at z0:
+f ′(z0) = lim
+h→0
+f(z0 + h) −f(z0)
+h
+.

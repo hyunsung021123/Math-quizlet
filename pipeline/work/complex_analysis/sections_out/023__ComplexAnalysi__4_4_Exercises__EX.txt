@@ -1,0 +1,242 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 4. The Fourier Transform
+현재 소단원: 4.4 Exercises
+직전 소단원: 「4.3 Paley-Wiener theorem」
+[연습문제]
+4. Exercises
+127
+for all ξ < 0. Then, passing to the limit successively, one has 
+fϵ,0(ξ) = 0
+for ξ < 0, and ﬁnally ˆf(ξ) = 
+f0,0(ξ) = 0 for all ξ < 0.
+Remark. The reader should note a certain analogy between the above
+theorem and Theorem 7.1 in Chapter 3.
+Here we are dealing with a
+function holomorphic in the upper half-plane, and there with a function
+holomorphic in a disc. In the present case the Fourier transform vanishes
+when ξ < 0, and in the earlier case, the Fourier coeﬃcients vanish when
+n < 0.
+4 Exercises
+1. Suppose f is continuous and of moderate decrease, and ˆf(ξ) = 0 for all ξ ∈R.
+Show that f = 0 by completing the following outline:
+(a) For each ﬁxed real number t consider the two functions
+A(z) =
+ t
+−∞
+f(x)e−2πiz(x−t) dx
+and
+B(z) = −
+ ∞
+t
+f(x)e−2πiz(x−t) dx.
+Show that A(ξ) = B(ξ) for all ξ ∈R.
+(b) Prove that the function F equal to A in the closed upper half-plane, and B
+in the lower half-plane, is entire and bounded, thus constant. In fact, show
+that F = 0.
+(c) Deduce that
+ t
+−∞
+f(x) dx = 0,
+for all t, and conclude that f = 0.
+2. If f ∈Fa with a > 0, then for any positive integer n one has f (n) ∈Fb whenever
+0 ≤b < a.
+[Hint: Modify the solution to Exercise 8 in Chapter 2.]
+3. Show, by contour integration, that if a > 0 and ξ ∈R then
+1
+π
+ ∞
+−∞
+a
+a2 + x2 e−2πixξ dx = e−2πa|ξ|,
+and check that
+ ∞
+−∞
+e−2πa|ξ|e2πiξx dξ = 1
+π
+a
+a2 + x2 .
+
+128
+Chapter 4. THE FOURIER TRANSFORM
+4. Suppose Q is a polynomial of degree ≥2 with distinct roots, none lying on the
+real axis. Calculate
+ ∞
+−∞
+e−2πixξ
+Q(x)
+dx,
+ξ ∈R
+in terms of the roots of Q. What happens when several roots coincide?
+[Hint: Consider separately the cases ξ < 0, ξ = 0, and ξ > 0. Use residues.]
+5. More generally, let R(x) = P(x)/Q(x) be a rational function with (degree Q) ≥
+(degreeP)+2 and Q(x)̸ = 0 on the real axis.
+(a) Prove that if α1, . . . , αk are the roots of R in the upper half-plane, then
+there exists polynomials Pj(ξ) of degree less than the multiplicity of αj so
+that
+ ∞
+−∞
+R(x)e−2πixξ dx =
+k
+
+j=1
+Pj(ξ)e−2πiαjξ,
+when ξ < 0.
+(b) In particular, if Q(z) has no zeros in the upper half-plane, then
+ ∞
+−∞R(x)e−2πixξ dx = 0 for ξ < 0.
+(c) Show that similar results hold in the case ξ > 0.
+(d) Show that
+ ∞
+−∞
+R(x)e−2πixξ dx = O(e−a|ξ|),
+ξ ∈R
+as |ξ| →∞for some a > 0. Determine the best possible a’s in terms of the
+roots of R.
+[Hint: For part (a), use residues. The powers of ξ appear when one diﬀerentiates
+the function f(z) = R(z)e−2πizξ (as in the formula of Theorem 1.4 in the previous
+chapter). For part (c) argue in the lower half-plane.]
+6. Prove that
+1
+π
+∞
+
+n=−∞
+a
+a2 + n2 =
+∞
+
+n=−∞
+e−2πa|n|
+whenever a > 0. Hence show that the sum equals coth πa.
+7. The Poisson summation formula applied to speciﬁc examples often provides
+interesting identities.
+(a) Let τ be ﬁxed with Im(τ) > 0. Apply the Poisson summation formula to
+f(z) = (τ + z)−k ,
+
+4. Exercises
+129
+where k is an integer ≥2, to obtain
+∞
+
+n=−∞
+1
+(τ + n)k = (−2πi)k
+(k −1)!
+∞
+
+m=1
+mk−1e2πimτ.
+(b) Set k = 2 in the above formula to show that if Im(τ) > 0, then
+∞
+
+n=−∞
+1
+(τ + n)2 =
+π2
+sin2(πτ).
+(c) Can one conclude that the above formula holds true whenever τ is any
+complex number that is not an integer?
+[Hint: For (a), use residues to prove that ˆf(ξ) = 0, if ξ < 0, and
+ˆf(ξ) = (−2πi)k
+(k −1)! ξk−1e2πiξτ,
+when ξ > 0.]
+8. Suppose ˆf has compact support contained in [−M, M] and let f(z) = ∞
+n=0 anzn.
+Show that
+an = (2πi)n
+n!
+ M
+−M
+ˆf(ξ)ξn dξ,
+and as a result
+lim sup
+n→∞
+(n!|an|)1/n ≤2πM.
+In the converse direction, let f be any power series f(z) = ∞
+n=0 anzn with
+lim supn→∞(n!|an|)1/n ≤2πM.
+Then, f is holomorphic in the complex plane,
+and for every ϵ > 0 there exists Aϵ > 0 such that
+|f(z)| ≤Aϵe2π(M+ϵ)|z|.
+9. Here are further results similar to the Phragm´en-Lindel¨of theorem.
+(a) Let F be a holomorphic function in the right half-plane that extends continu-
+ously to the boundary, that is, the imaginary axis. Suppose that |F(iy)| ≤1
+for all y ∈R, and
+|F(z)| ≤Cec|z|γ
+for some c, C > 0 and γ < 1. Prove that |F(z)| ≤1 for all z in the right
+half-plane.
+
+130
+Chapter 4. THE FOURIER TRANSFORM
+(b) More generally, let S be a sector whose vertex is the origin, and forming an
+angle of π/β. Let F be a holomorphic function in S that is continuous on
+the closure of S, so that |F(z)| ≤1 on the boundary of S and
+|F(z)| ≤Cec|z|αfor all z ∈S
+for some c, C > 0 and 0 < α < β. Prove that |F(z)| ≤1 for all z ∈S.
+10. This exercise generalizes some of the properties of e−πx2 related to the fact
+that it is its own Fourier transform.
+Suppose f(z) is an entire function that satisﬁes
+|f(x + iy)| ≤ce−ax2+by2
+for some a, b, c > 0. Let
+ˆf(ζ) =
+ ∞
+−∞
+f(x)e−2πixζ dx.
+Then, ˆf is an entire function of ζ that satisﬁes
+| ˆf(ξ + iη)| ≤c′e−a′ξ2+b′η2
+for some a′, b′, c′ > 0.
+[Hint: To prove ˆf(ξ) = O(e−a′ξ2), assume ξ > 0 and change the contour of inte-
+gration to x −iy for some y > 0 ﬁxed, and −∞< x < ∞. Then
+ˆf(ξ) = O(e−2πyξeby2).
+Finally, choose y = dξ where d is a small constant.]
+11. One can give a neater formulation of the result in Exercise 10 by proving the
+following fact.
+Suppose f(z) is an entire function of strict order 2, that is,
+f(z) = O(ec1|z|2)
+for some c1 > 0. Suppose also that for x real,
+f(x) = O(e−c2|x|2)
+for some c2 > 0. Then
+|f(x + iy)| = O(e−ax2+by2)
+for some a, b > 0. The converse is obviously true.
+
+5. Problems
+131
+12. The principle that a function and its Fourier transform cannot both be too
+small at inﬁnity is illustrated by the following theorem of Hardy.
+If f is a function on R that satisﬁes
+f(x) = O(e−πx2)
+and
+ˆf(ξ) = O(e−πξ2),
+then f is a constant multiple of e−πx2.
+As a result, if f(x) = O(e−πAx2), and
+ˆf(ξ) = O(e−πBξ2), with AB > 1 and A, B > 0, then f is identically zero.
+(a) If f is even, show that ˆf extends to an even entire function. Moreover, if
+g(z) = ˆf(z1/2), then g satisﬁes
+|g(x)| ≤ce−πx
+and
+|g(z)| ≤ceπR sin2(θ/2) ≤ceπ|z|
+when x ∈R and z = Reiθ with R ≥0 and θ ∈R.
+(b) Apply the Phragm´en-Lindel¨of principle to the function
+F(z) = g(z)eγz
+where γ = iπ e−iπ/(2β)
+sin π/(2β)
+and the sector 0 ≤θ ≤π/β < π, and let β →π to deduce that eπzg(z) is
+bounded in the closed upper half-plane. The same result holds in the lower
+half-plane, so by Liouville’s theorem eπzg(z) is constant, as desired.
+(c) If f is odd, then ˆf(0) = 0, and apply the above argument to ˆf(z)/z to deduce
+that f = ˆf = 0. Finally, write an arbitrary f as an appropriate sum of an
+even function and an odd function.
+5 Problems
+1. Suppose ˆf(ξ) = O(e−a|ξ|p) as |ξ| →∞, for some p > 1. Then f is holomorphic
+for all z and satisﬁes the growth condition
+|f(z)| ≤Aea|z|q
+where 1/p + 1/q = 1.
+Note that on the one hand, when p →∞then q →1, and this limiting case
+can be interpreted as part of Theorem 3.3. On the other hand, when p →1 then
+q →∞, and this limiting case in a sense brings us back to Theorem 2.1.
+[Hint: To prove the result, use the inequality −ξp + ξu ≤uq, which is valid when
+ξ and u are non-negative.
+To establish this inequality, examine separately the
+cases ξp ≥ξu and ξp < ξu; note also that the functions ξ = uq−1 and u = ξp−1 are
+inverses of each other because (p −1)(q −1) = 1.]

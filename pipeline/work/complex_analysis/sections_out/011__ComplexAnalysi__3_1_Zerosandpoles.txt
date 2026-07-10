@@ -1,0 +1,282 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.1 Zeros and poles
+직전 소단원: 「2.7 Problems」
+[본문]
+3 Meromorphic Functions and
+the Logarithm
+One knows that the diﬀerential calculus, which has
+contributed so much to the progress of analysis, is
+founded on the consideration of diﬀerential coeﬃcients,
+that is derivatives of functions. When one attributes
+an inﬁnitesimal increase ϵ to the variable x, the func-
+tion f(x) of this variable undergoes in general an in-
+ﬁnitesimal increase of which the ﬁrst term is propor-
+tional to ϵ, and the ﬁnite coeﬃcient of ϵ of this in-
+crease is what is called its diﬀerential coeﬃcient... If
+considering the values of x where f(x) becomes inﬁ-
+nite, we add to one of these values designated by x1,
+the inﬁnitesimal ϵ, and then develop f(x1 + ϵ) in in-
+creasing power of the same quantity, the ﬁrst terms
+of this development contain negative powers of ϵ; one
+of these will be the product of 1/ϵ with a ﬁnite coef-
+ﬁcient, which we will call the residue of the function
+f(x), relative to the particular value x1 of the variable
+x. Residues of this kind present themselves naturally
+in several branches of algebraic and inﬁnitesimal anal-
+ysis. Their consideration furnish methods that can be
+simply used, that apply to a large number of diverse
+questions, and that give new formulae that would seem
+to be of interest to mathematicians...
+A. L. Cauchy, 1826
+There is a general principle in the theory, already implicit in Riemann’s
+work, which states that analytic functions are in an essential way charac-
+terized by their singularities. That is to say, globally analytic functions
+are “eﬀectively” determined by their zeros, and meromorphic functions
+by their zeros and poles. While these assertions cannot be formulated
+as precise general theorems, there are nevertheless signiﬁcant instances
+where this principle applies.
+We begin this chapter by considering singularities, in particular the
+diﬀerent kind of point singularities (“isolated” singularities) that a holo-
+morphic function can have. In order of increasing severity, these are:
+• removable singularities
+
+72
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+• poles
+• essential singularities.
+The ﬁrst type is harmless since a function can actually be extended
+to be holomorphic at its removable singularities (hence the name). Near
+the third type, the function oscillates and may grow faster than any
+power, and a complete understanding of its behavior is not easy. For the
+second type the analysis is more straight forward and is connected with
+the calculus of residues, which arises as follows.
+Recall that by Cauchy’s theorem a holomorphic function f in an open
+set which contains a closed curve γ and its interior satisﬁes
+
+γ
+f(z) dz = 0.
+The question that occurs is: what happens if f has a pole in the interior
+of the curve? To try to answer this question consider the example f(z) =
+1/z, and recall that if C is a (positively oriented) circle centered at 0,
+then
+
+C
+dz
+z = 2πi.
+This turns out to be the key ingredient in the calculus of residues.
+A new aspect appears when we consider indeﬁnite integrals of holomor-
+phic functions that have singularities. As the basic example f(z) = 1/z
+shows, the resulting “function” (in this case the logarithm) may not be
+single-valued, and understanding this phenomenon is of importance for
+a number of subjects. Exploiting this multi-valuedness leads in eﬀect to
+the “argument principle.” We can use this principle to count the number
+of zeros of a holomorphic function inside a suitable curve. As a simple
+consequence of this result, we obtain a signiﬁcant geometric property of
+holomorphic functions: they are open mappings. From this, the maxi-
+mum principle, another important feature of holomorphic functions, is
+an easy step.
+In order to turn to the logarithm itself, and come to grips with the
+precise nature of its multi-valuedness, we introduce the notions of homo-
+topy of curves and simply connected domains. It is on the latter type of
+open sets that single-valued branches of the logarithm can be deﬁned.
+1 Zeros and poles
+By deﬁnition, a point singularity of a function f is a complex number
+z0 such that f is deﬁned in a neighborhood of z0 but not at the point
+
+1. Zeros and poles
+73
+z0 itself.
+We shall also call such points isolated singularities.
+For
+example, if the function f is deﬁned only on the punctured plane by
+f(z) = z, then the origin is a point singularity. Of course, in that case,
+the function f can actually be deﬁned at 0 by setting f(0) = 0, so that
+the resulting extension is continuous and in fact entire. (Such points
+are then called removable singularities.)
+More interesting is the case
+of the function g(z) = 1/z deﬁned in the punctured plane. It is clear
+now that g cannot be deﬁned as a continuous function, much less as
+a holomorphic function, at the point 0. In fact, g(z) grows to inﬁnity
+as z approaches 0, and we shall say that the origin is a pole singularity.
+Finally, the case of the function h(z) = e1/z on the punctured plane shows
+that removable singularities and poles do not tell the whole story. Indeed,
+the function h(z) grows indeﬁnitely as z approaches 0 on the positive real
+line, while h approaches 0 as z goes to 0 on the negative real axis. Finally
+h oscillates rapidly, yet remains bounded, as z approaches the origin on
+the imaginary axis.
+Since singularities often appear because the denominator of a frac-
+tion vanishes, we begin with a local study of the zeros of a holomorphic
+function.
+A complex number z0 is a zero for the holomorphic function f if
+f(z0) = 0. In particular, analytic continuation shows that the zeros of
+a non-trivial holomorphic function are isolated. In other words, if f is
+holomorphic in Ωand f(z0) = 0 for some z0 ∈Ω, then there exists an
+open neighborhood U of z0 such that f(z)̸ = 0 for all z ∈U −{z0}, unless
+f is identically zero. We start with a local description of a holomorphic
+function near a zero.
+Theorem 1.1 Suppose that f is holomorphic in a connected open set Ω,
+has a zero at a point z0 ∈Ω, and does not vanish identically in Ω. Then
+there exists a neighborhood U ⊂Ωof z0, a non-vanishing holomorphic
+function g on U, and a unique positive integer n such that
+f(z) = (z −z0)ng(z)
+for all z ∈U.
+Proof.
+Since Ωis connected and f is not identically zero, we conclude
+that f is not identically zero in a neighborhood of z0. In a small disc
+centered at z0 the function f has a power series expansion
+f(z) =
+∞
+
+k=0
+ak(z −z0)k.
+Since f is not identically zero near z0, there exists a smallest integer n
+
+74
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+such that an̸ = 0. Then, we can write
+f(z) = (z −z0)n[an + an+1(z −z0) + · · · ] = (z −z0)ng(z) ,
+where g is deﬁned by the series in brackets, and hence is holomorphic,
+and is nowhere vanishing for all z close to z0 (since an̸ = 0). To prove
+the uniqueness of the integer n, suppose that we can also write
+f(z) = (z −z0)ng(z) = (z −z0)mh(z)
+where h(z0)̸ = 0. If m > n, then we may divide by (z −z0)n to see that
+g(z) = (z −z0)m−nh(z)
+and letting z →z0 yields g(z0) = 0, a contradiction. If m < n a similar
+argument gives h(z0) = 0, which is also a contradiction. We conclude
+that m = n, thus h = g, and the theorem is proved.
+In the case of the above theorem, we say that f has a zero of order
+n (or multiplicity n) at z0. If a zero is of order 1, we say that it is
+simple. We observe that, quantitatively, the order describes the rate at
+which the function vanishes.
+The importance of the previous theorem comes from the fact that
+we can now describe precisely the type of singularity possessed by the
+function 1/f at z0.
+For this purpose, it is now convenient to deﬁne a deleted neighbor-
+hood of z0 to be an open disc centered at z0, minus the point z0, that
+is, the set
+{z : 0 < |z −z0| < r}
+for some r > 0.
+Then, we say that a function f deﬁned in a deleted
+neighborhood of z0 has a pole at z0, if the function 1/f, deﬁned to be
+zero at z0, is holomorphic in a full neighborhood of z0.
+Theorem 1.2 If f has a pole at z0 ∈Ω, then in a neighborhood of that
+point there exist a non-vanishing holomorphic function h and a unique
+positive integer n such that
+f(z) = (z −z0)−nh(z).
+Proof.
+By the previous theorem we have 1/f(z) = (z −z0)ng(z),
+where g is holomorphic and non-vanishing in a neighborhood of z0, so
+the result follows with h(z) = 1/g(z).
+
+1. Zeros and poles
+75
+The integer n is called the order (or multiplicity) of the pole, and
+describes the rate at which the function grows near z0. If the pole is of
+order 1, we say that it is simple.
+The next theorem should be reminiscent of power series expansion,
+except that now we allow terms of negative order, to account for the
+presence of a pole.
+Theorem 1.3 If f has a pole of order n at z0, then
+(1)
+f(z) =
+a−n
+(z −z0)n +
+a−n+1
+(z −z0)n−1 + · · · +
+a−1
+(z −z0) + G(z) ,
+where G is a holomorphic function in a neighborhood of z0.
+Proof.
+The proof follows from the multiplicative statement in the
+previous theorem. Indeed, the function h has a power series expansion
+h(z) = A0 + A1(z −z0) + · · ·
+so that
+f(z) = (z −z0)−n(A0 + A1(z −z0) + · · · )
+=
+a−n
+(z −z0)n +
+a−n+1
+(z −z0)n−1 + · · · +
+a−1
+(z −z0) + G(z).
+The sum
+a−n
+(z −z0)n +
+a−n+1
+(z −z0)n−1 + · · · +
+a−1
+(z −z0)
+is called the principal part of f at the pole z0, and the coeﬃcient a−1 is
+the residue of f at that pole. We write resz0f = a−1. The importance of
+the residue comes from the fact that all the other terms in the principal
+part, that is, those of order strictly greater than 1, have primitives in a
+deleted neighborhood of z0. Therefore, if P(z) denotes the principal part
+above and C is any circle centered at z0, we get
+1
+2πi
+
+C
+P(z) dz = a−1.
+We shall return to this important point in the section on the residue
+formula.
+As we shall see, in many cases, the evaluation of integrals reduces to
+the calculation of residues. In the case when f has a simple pole at z0,
+it is clear that
+resz0f = lim
+z→z0(z −z0)f(z).
+
+76
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+If the pole is of higher order, a similar formula holds, one that involves
+diﬀerentiation as well as taking a limit.
+Theorem 1.4 If f has a pole of order n at z0, then
+resz0f = lim
+z→z0
+1
+(n −1)!
+ d
+dz
+n−1
+(z −z0)nf(z).
+The theorem is an immediate consequence of formula (1), which implies
+(z −z0)nf(z) = a−n + a−n+1(z −z0) + · · · + a−1(z −z0)n−1 +
++G(z)(z −z0)n.
+2 The residue formula
+We now discuss the celebrated residue formula. Our approach follows the
+discussion of Cauchy’s theorem in the last chapter: we ﬁrst consider the
+case of the circle and its interior the disc, and then explain generalizations
+to toy contours and their interiors.
+Theorem 2.1 Suppose that f is holomorphic in an open set containing
+a circle C and its interior, except for a pole at z0 inside C. Then
+
+C
+f(z) dz = 2πi resz0f.
+Proof.
+Once again, we may choose a keyhole contour that avoids the
+pole, and let the width of the corridor go to zero to see that
+
+C
+f(z) dz =
+
+Cϵ
+f(z) dz
+where Cϵ is the small circle centered at the pole z0 and of radius ϵ.
+Now we observe that
+1
+2πi
+
+Cϵ
+a−1
+z −z0
+dz = a−1
+is an immediate consequence of the Cauchy integral formula (Theo-
+rem 4.1 of the previous chapter), applied to the constant function f =
+a−1. Similarly,
+1
+2πi
+
+Cϵ
+a−k
+(z −z0)k dz = 0

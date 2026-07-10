@@ -1,0 +1,294 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 5. Entire Functions
+현재 소단원: 5.1 Jensen’s formula
+직전 소단원: 「4.5 Problems」
+[본문]
+5 Entire Functions
+...but after the 15th of October I felt myself a free
+man, with such longing for mathematical work, that
+the last two months ﬂew by quickly, and that only
+today I found the letter of the 19th of October that I
+had not answered. The result of my work, with which
+I am not entirely satisﬁed, I want to share with you.
+Firstly, in looking back at my lectures, a gap in
+function theory needed to be ﬁlled. As you know, up
+to now the following question had been unresolved.
+Given an arbitrary sequence of complex numbers,
+a1, a2, . . . , can one construct an entire (transcenden-
+tal) function that vanishes at these values, with pre-
+scribed multiplicities, and nowhere else?...
+K. Weierstrass, 1874
+In this chapter, we will study functions that are holomorphic in the
+whole complex plane; these are called entire functions. Our presentation
+will be organized around the following three questions:
+1. Where can such functions vanish? We shall see that the obvious
+necessary condition is also suﬃcient: if {zn} is any sequence of
+complex numbers having no limit point in C, then there exists an
+entire function vanishing exactly at the points of this sequence. The
+construction of the desired function is inspired by Euler’s product
+formula for sin πz (the prototypical case when {zn} is Z), but re-
+quires an additional reﬁnement: the Weierstrass canonical factors.
+2. How do these functions grow at inﬁnity? Here, matters are con-
+trolled by an important principle: the larger a function is, the more
+zeros it can have. This principle already manifests itself in the sim-
+ple case of polynomials. By the fundamental theorem of algebra,
+the number of zeros of a polynomial P of degree d is precisely d,
+which is also the exponent in the order of (polynomial) growth of
+P, namely
+sup
+|z|=R
+|P(z)| ≈Rd
+as R →∞.
+
+1. Jensen’s formula
+135
+A precise version of this general principle is contained in Jensen’s
+formula, which we prove in the ﬁrst section. This formula, central
+to much of the theory developed in this chapter, exhibits a deep
+connection between the number of zeros of a function in a disc and
+the (logarithmic) average of the function over the circle. In fact,
+Jensen’s formula not only constitutes a natural starting point for
+us, but also leads to the fruitful theory of value distributions, also
+called Nevanlinna theory (which, however, we do not take up here).
+3. To what extent are these functions determined by their zeros? It
+turns out that if an entire function has a ﬁnite (exponential) order
+of growth, then it can be speciﬁed by its zeros up to multiplication
+by a simple factor.
+The precise version of this assertion is the
+Hadamard factorization theorem.
+It may be viewed as another
+instance of the general rule that was formulated in Chapter 3, that
+is, that under appropriate conditions, a holomorphic function is
+essentially determined by its zeros.
+1 Jensen’s formula
+In this section, we denote by DR and CR the open disc and circle of
+radius R centered at the origin. We shall also, in the rest of this chapter,
+exclude the trivial case of the function that vanishes identically.
+Theorem 1.1 Let Ωbe an open set that contains the closure of a disc
+DR and suppose that f is holomorphic in Ω, f(0)̸ = 0, and f vanishes
+nowhere on the circle CR. If z1, . . . , zN denote the zeros of f inside the
+disc (counted with multiplicities),1 then
+(1)
+log |f(0)| =
+N
+
+k=1
+log
+|zk|
+R
+
++ 1
+2π
+ 2π
+0
+log |f(Reiθ)| dθ.
+The proof of the theorem consists of several steps.
+Step 1. First, we observe that if f1 and f2 are two functions satisfying
+the hypotheses and the conclusion of the theorem, then the product
+f1f2 also satisﬁes the hypothesis of the theorem and formula (1). This
+observation is a simple consequence of the fact that log xy = log x + log y
+whenever x and y are positive numbers, and that the set of zeros of f1f2
+is the union of the sets of zeros of f1 and f2.
+1That is, each zero appears in the sequence as many times as its order.
+
+136
+Chapter 5. ENTIRE FUNCTIONS
+Step 2. The function
+g(z) =
+f(z)
+(z −z1) · · ·(z −zN)
+initially deﬁned on Ω−{z1, . . . , zN}, is bounded near each zj. Therefore
+each zj is a removable singularity, and hence we can write
+f(z) = (z −z1) · · · (z −zN)g(z)
+where g is holomorphic in Ωand nowhere vanishing in the closure of DR.
+By Step 1, it suﬃces to prove Jensen’s formula for functions like g that
+vanish nowhere, and for functions of the form z −zj.
+Step 3. We ﬁrst prove (1) for a function g that vanishes nowhere in the
+closure of DR. More precisely, we must establish the following identity:
+log |g(0)| = 1
+2π
+ 2π
+0
+log |g(Reiθ)| dθ.
+In a slightly larger disc, we can write g(z) = eh(z) where h is holomorphic
+in that disc. This is possible since discs are simply connected, and we
+can deﬁne h = log g (see Theorem 6.2 in Chapter 3). Now we observe
+that
+|g(z)| = |eh(z)| = |eRe(h(z))+i Im(h(z))| = eRe(h(z)),
+so that log |g(z)| = Re(h(z)). The mean value property (Corollary 7.3 in
+Chapter 3) then immediately implies the desired formula for g.
+Step 4. The last step is to prove the formula for functions of the form
+f(z) = z −w, where w ∈DR. That is, we must show that
+log |w| = log
+|w|
+R
+
++ 1
+2π
+ 2π
+0
+log |Reiθ −w| dθ.
+Since log(|w|/R)=log |w|−log R and log |Reiθ−w|=log R+log |eiθ−w/R|,
+it suﬃces to prove that
+ 2π
+0
+log |eiθ −a| dθ = 0,
+whenever |a| < 1.
+This in turn is equivalent (after the change of variables θ 	→−θ) to
+ 2π
+0
+log |1 −aeiθ| dθ = 0,
+whenever |a| < 1.
+
+1. Jensen’s formula
+137
+To prove this, we use the function F(z) = 1 −az, which vanishes nowhere
+in the closure of the unit disc. As a consequence, there exists a holomor-
+phic function G in a disc of radius greater than 1 such that F(z) =
+eG(z). Then |F| = eRe(G), and therefore log |F| = Re(G). Since F(0) = 1
+we have log |F(0)| = 0, and an application of the mean value property
+(Corollary 7.3 in Chapter 3) to the harmonic function log |F(z)| con-
+cludes the proof of the theorem.
+From Jensen’s formula we can derive an identity linking the growth of
+a holomorphic function with its number of zeros inside a disc. If f is a
+holomorphic function on the closure of a disc DR, we denote by n(r) (or
+nf(r) when it is necessary to keep track of the function in question) the
+number of zeros of f (counted with their multiplicities) inside the disc
+Dr, with 0 < r < R. A simple but useful observation is that n(r) is a
+non-decreasing function of r.
+We claim that if f(0)̸ = 0, and f does not vanish on the circle CR,
+then
+(2)
+ R
+0
+n(r) dr
+r = 1
+2π
+ 2π
+0
+log |f(Reiθ)| dθ −log |f(0)|.
+This formula is immediate from Jensen’s equality and the next lemma.
+Lemma 1.2 If z1, . . ., zN are the zeros of f inside the disc DR, then
+ R
+0
+n(r) dr
+r =
+N
+
+k=1
+log
+
+R
+zk
+ .
+Proof.
+First we have
+N
+
+k=1
+log
+
+R
+zk
+ =
+N
+
+k=1
+ R
+|zk|
+dr
+r .
+If we deﬁne the characteristic function
+ηk(r) =
+
+1
+if r > |zk|,
+0
+if r ≤|zk|,
+then N
+k=1 ηk(r) = n(r), and the lemma is proved using
+N
+
+k=1
+ R
+|zk|
+dr
+r =
+N
+
+k=1
+ R
+0
+ηk(r) dr
+r =
+ R
+0
+ N
+
+k=1
+ηk(r)
+
+dr
+r =
+ R
+0
+n(r) dr
+r .
+
+138
+Chapter 5. ENTIRE FUNCTIONS
+2 Functions of ﬁnite order
+Let f be an entire function.
+If there exist a positive number ρ and
+constants A, B > 0 such that
+|f(z)| ≤AeB|z|ρ
+for all z ∈C,
+then we say that f has an order of growth ≤ρ. We deﬁne the order
+of growth of f as
+ρf = inf ρ ,
+where the inﬁmum is over all ρ > 0 such that f has an order of growth
+≤ρ.
+For example, the order of growth of the function ez2 is 2.
+Theorem 2.1 If f is an entire function that has an order of growth ≤ρ,
+then:
+(i) n(r) ≤Crρ for some C > 0 and all suﬃciently large r.
+(ii) If z1, z2, . . . denote the zeros of f, with zk̸ = 0, then for all s > ρ
+we have
+∞
+
+k=1
+1
+|zk|s < ∞.
+Proof.
+It suﬃces to prove the estimate for n(r) when f(0)̸ = 0. Indeed,
+consider the function F(z) = f(z)/zℓwhere ℓis the order of the zero of
+f at the origin. Then nf(r) and nF (r) diﬀer only by a constant, and F
+also has an of order of growth ≤ρ.
+If f(0)̸ = 0 we may use formula (2), namely
+ R
+0
+n(x) dx
+x = 1
+2π
+ 2π
+0
+log |f(Reiθ)| dθ −log |f(0)|.
+Choosing R = 2r, this formula implies
+ 2r
+r
+n(x) dx
+x ≤1
+2π
+ 2π
+0
+log |f(Reiθ)| dθ −log |f(0)|.
+On the one hand, since n(r) is increasing, we have
+ 2r
+r
+n(x) dx
+x ≥n(r)
+ 2r
+r
+dx
+x = n(r)[log 2r −log r] = n(r) log 2,

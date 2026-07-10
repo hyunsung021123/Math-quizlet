@@ -1,0 +1,198 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 4. The Fourier Transform
+현재 소단원: 4.1 The class ℱ
+직전 소단원: 「3.9 Problems」
+[본문]
+4 The Fourier Transform
+Raymond Edward Alan Christopher Paley, Fellow of
+Trinity College, Cambridge, and International Research
+Fellow at the Massachusetts Institute of Technology
+and at Harvard University, was killed by an avalanche
+on April 7, 1933, while skiing in the vicinity of Banﬀ,
+Alberta.
+Although only twenty-six years of age, he
+was already recognized as the ablest of the group of
+young English mathematicians who have been inspired
+by the genius of G. H. Hardy and J. E. Littlewood. In
+a group notable for its brilliant technique, no one had
+developed this technique to a higher degree than Pa-
+ley. Nevertheless he should not be thought of primar-
+ily as a technician, for with this ability he combined
+creative power of the ﬁrst order. As he himself was
+wont to say, technique without “rugger tactics” will
+not get one far, and these rugger tactics he practiced
+to a degree that was characteristic of his forthright
+and vigorous nature.
+Possessed of an extraordinary capacity for mak-
+ing friends and for scientiﬁc collaboration, Paley be-
+lieved that the inspiration of continual interchange of
+ideas stimulates each collaborator to accomplish more
+than he would alone. Only the exceptional man works
+well with a partner, but Paley had collaborated suc-
+cessfully with many, including Littlewood, P´olya, Zyg-
+mund, and Wiener.
+N. Wiener, 1933
+If f is a function on R that satisﬁes appropriate regularity and decay
+conditions, then its Fourier transform is deﬁned by
+ˆf(ξ) =
+ ∞
+−∞
+f(x)e−2πixξ dx,
+ξ ∈R
+and its counterpart, the Fourier inversion formula, holds
+f(x) =
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ,
+x ∈R.
+The Fourier transform (including its d-dimensional variants), plays a ba-
+
+112
+Chapter 4. THE FOURIER TRANSFORM
+sic role in analysis, as the reader of Book I is aware. Here we want to illus-
+trate the intimate and fruitful connection between the one-dimensional
+theory of the Fourier transform and complex analysis. The main theme
+(stated somewhat imprecisely) is as follows: for a function f initially
+deﬁned on the real line, the possibility of extending it to a holomorphic
+function is closely related to the very rapid (for example, exponential)
+decay at inﬁnity of its Fourier transform ˆf. We elaborate on this theme
+in two stages.
+First, we assume that f can be analytically continued in a horizontal
+strip containing the real axis, and has “moderate decrease” at inﬁnity,1 so
+that the integral deﬁning the Fourier transform ˆf converges. As a result,
+we conclude that ˆf decreases exponentially at inﬁnity; it also follows
+directly that the Fourier inversion formula holds.
+Moreover one can
+easily obtain from these considerations the Poisson summation formula
+
+n∈Z f(n) = 
+n∈Z ˆf(n).
+Incidentally, all these theorems are elegant
+consequences of contour integration.
+At a second stage, we take as our starting point the validity of the
+Fourier inversion formula, which holds if we assume that both f and ˆf are
+of moderate decrease, without making any assumptions on the analyticity
+of f. We then ask a simple but natural question: What are the conditions
+on f so that its Fourier transform is supported in a bounded interval,
+say [−M, M]? This is a basic problem that, as one notices, can be stated
+without any reference to notions of complex analysis. However, it can
+be resolved only in terms of the holomorphic properties of the function
+f. The condition, given by the Paley-Wiener theorem, is that there be
+a holomorphic extension of f to C that satisﬁes the growth condition
+|f(z)| ≤Ae2πM|z|
+for some constant A > 0.
+Functions satisfying this condition are said to be of exponential type.
+Observe that the condition that ˆf vanishes outside a compact set can
+be viewed as an extreme version of a decay property at inﬁnity, and so
+the above theorem clearly falls within the context of the theme indicated
+above.
+In all these matters a decisive technique will consist in shifting the
+contour of integration, that is the real line, within the boundaries of
+a horizontal strip. This will take advantage of the special behavior of
+e−2πizξ when z has a non-zero imaginary part. Indeed, when z is real this
+exponential remains bounded and oscillates, while if Im(z)̸ = 0, it will
+1We say that a function f is of moderate decrease if f is continuous and there
+exists A > 0 so that |f(x)| ≤A/(1 + x2) for all x ∈R. A more restrictive condition is
+that f ∈S, the Schwartz space of testing functions, which also implies that ˆf belongs to
+S. See Book I for more details.
+
+1. The class F
+113
+have exponential decay or exponential increase, depending on whether
+the product ξIm(z) is negative or positive.
+1 The class F
+The weakest decay condition imposed on functions in our study of the
+Fourier transform in Book I was that of moderate decrease. There, we
+proved the Fourier inversion and Poisson summation formulas under the
+hypothesis that f and ˆf satisfy
+|f(x)| ≤
+A
+1 + x2
+and
+| ˆf(ξ)| ≤
+A′
+1 + ξ2
+for some positive constants A, A′ and all x, ξ ∈R. We were led to consider
+this class of functions because of various examples such as the Poisson
+kernel
+Py(x) = 1
+π
+y
+y2 + x2
+for y > 0, which played a fundamental role in the solution of the Dirichlet
+problem for the steady-state heat equation in the upper half-plane. There
+we had 
+Py(ξ) = e−2πy|ξ|.
+In the present context, we introduce a class of functions particularly
+suited to the goal we have set: proving theorems about the Fourier trans-
+form using complex analysis. Moreover, this class will be large enough
+to contain many of the important applications we have in mind.
+For each a > 0 we denote by Fa the class of all functions f that satisfy
+the following two conditions:
+(i) The function f is holomorphic in the horizontal strip
+Sa = {z ∈C : |Im(z)| < a}.
+(ii) There exists a constant A > 0 such that
+|f(x + iy)| ≤
+A
+1 + x2
+for all x ∈R and |y| < a.
+In other words, Fa consists of those holomorphic functions on Sa that
+are of moderate decay on each horizontal line Im(z) = y, uniformly in
+−a < y < a. For example, f(z) = e−πz2 belongs to Fa for all a. Also,
+the function
+f(z) = 1
+π
+c
+c2 + z2 ,
+
+114
+Chapter 4. THE FOURIER TRANSFORM
+which has simple poles at z = ±ci, belongs to Fa for all 0 < a < c.
+Another example is provided by f(z) = 1/ coshπz, which belongs to
+Fa whenever |a| < 1/2. This function, as well as one of its fundamental
+properties, was already discussed in Example 3, Section 2.1 of Chapter 3.
+Note also that a simple application of the Cauchy integral formulas
+shows that if f ∈Fa, then for every n, the nth derivative of f belongs to
+Fb for all b with 0 < b < a (Exercise 2).
+Finally, we denote by F the class of all functions that belong to Fa for
+some a.
+Remark. The condition of moderate decrease can be weakened some-
+what by replacing the order of decrease of A/(1 + x2) by A/(1 + |x|1+ϵ)
+for any ϵ > 0.
+As the reader will observe, many of the results below
+remain unchanged with this less restrictive condition.
+2 Action of the Fourier transform on F
+Here we prove three theorems, including the Fourier inversion and Pois-
+son summation formulas, for functions in F. The idea behind all three
+proofs is the same: contour integration. Thus the approach used will be
+diﬀerent from that of the corresponding results in Book I.
+Theorem 2.1 If f belongs to the class Fa for some a > 0, then
+| ˆf(ξ)| ≤Be−2πb|ξ| for any 0 ≤b < a.
+Proof.
+Recall that ˆf(ξ) =  ∞
+−∞f(x)e−2πixξ dx. The case b = 0 simply
+says that ˆf is bounded, which follows at once from the integral deﬁning
+ˆf, the assumption that f is of moderate decrease, and the fact that the
+exponential is bounded by 1.
+Now suppose 0 < b < a and assume ﬁrst that ξ > 0. The main step
+consists of shifting the contour of integration, that is the real line, down
+by b. More precisely, consider the contour in Figure 1 as well as the
+function g(z) = f(z)e−2πizξ.
+We claim that as R tends to inﬁnity, the integrals of g over the two
+vertical sides converge to zero. For example, the integral over the vertical
+segment on the left can be estimated by
+
+ −R
+−R−ib
+g(z) dz
+ ≤
+ b
+0
+|f(−R −it)e−2πi(−R−it)ξ| dt
+≤
+ b
+0
+A
+R2 e−2πtξ dt
+= O(1/R2).

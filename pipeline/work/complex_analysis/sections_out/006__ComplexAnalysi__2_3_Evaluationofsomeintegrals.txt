@@ -1,0 +1,245 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.3 Evaluation of some integrals
+직전 소단원: 「2.2 Local existence of primitives and Cauchy’s theorem in a disc」
+[본문]
+3. Evaluation of some integrals
+41
+Λ
+z0
+γz
+z
+Λint
+Figure 6. A curve γz
+Arguing as above allows us to show that F is a primitive of f in Λint
+and therefore
+
+Γ f(z) dz = 0.
+The important point is that for a toy contour γ we easily have that
+
+γ
+f(z) dz = 0 ,
+whenever f is holomorphic in an open set that contains the contour γ
+and its interior.
+Other examples of toy contours which we shall encounter in applica-
+tions and for which Cauchy’s theorem and its corollary also hold are
+given in Figure 7.
+While Cauchy’s theorem for toy contours is suﬃcient for most applica-
+tions we deal with, the question still remains as to what happens for more
+general curves. We take up this matter in Appendix B, where we prove
+Jordan’s theorem for piecewise-smooth curves. This theorem states that
+a simple closed piecewise-smooth curve has a well deﬁned interior that
+is “simply connected.” As a consequence, we ﬁnd that even in this more
+general situation, Cauchy’s theorem holds.
+3 Evaluation of some integrals
+Here we take up the idea that originally motivated Cauchy. We shall
+show by several examples how some integrals may be evaluated by the
+use of his theorem. A more systematic approach, in terms of the calculus
+of residues, may be found in the next chapter.
+
+42
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+The multiple keyhole
+Semicircle
+Sector
+Parallelogram
+Rectangular keyhole
+Indented semicircle
+Figure 7. Examples of toy contours
+Example 1. We show that if ξ ∈R, then
+(5)
+e−πξ2 =
+ ∞
+−∞
+e−πx2e−2πixξ dx.
+This gives a new proof of the fact that e−πx2 is its own Fourier transform,
+a fact we proved in Theorem 1.4 of Chapter 5 in Book I.
+If ξ = 0, the formula is precisely the known integral2
+1 =
+ ∞
+−∞
+e−πx2 dx.
+Now suppose that ξ > 0, and consider the function f(z) = e−πz2, which
+is entire, and in particular holomorphic in the interior of the toy contour
+γR depicted in Figure 8.
+2An alternate derivation follows from the fact that Γ(1/2) = √π, where Γ is the gamma
+function in Chapter 6.
+
+3. Evaluation of some integrals
+43
+R
+R + iξ
+−R
+−R + iξ
+0
+Figure 8. The contour γR in Example 1
+The contour γR consists of a rectangle with vertices R, R + iξ, −R +
+iξ, −R and the positive counterclockwise orientation. By Cauchy’s the-
+orem,
+(6)
+
+γR
+f(z) dz = 0.
+The integral over the real segment is simply
+ R
+−R
+e−πx2 dx ,
+which converges to 1 as R →∞. The integral on the vertical side on the
+right is
+I(R) =
+ ξ
+0
+f(R + iy)i dy =
+ ξ
+0
+e−π(R2+2iRy−y2)i dy.
+This integral goes to 0 as R →∞since ξ is ﬁxed and we may estimate
+it by
+|I(R)| ≤Ce−πR2.
+Similarly, the integral over the vertical segment on the left also goes to 0
+as R →∞for the same reasons. Finally, the integral over the horizontal
+segment on top is
+ −R
+R
+e−π(x+iξ)2 dx = −eπξ2  R
+−R
+e−πx2e−2πixξ dx.
+Therefore, we ﬁnd in the limit as R →∞that (6) gives
+0 = 1 −eπξ2  ∞
+−∞
+e−πx2e−2πixξ dx,
+
+44
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+and our desired formula is established. In the case ξ < 0, we then consider
+the symmetric rectangle, in the lower half-plane.
+The technique of shifting the contour of integration, which was used
+in the previous example, has many other applications. Note that the
+original integral (5) is taken over the real line, which by an application
+of Cauchy’s theorem is then shifted upwards or downwards (depending
+on the sign of ξ) in the complex plane.
+Example 2. Another classical example is
+ ∞
+0
+1 −cos x
+x2
+dx = π
+2 .
+Here we consider the function f(z) = (1 −eiz)/z2, and we integrate over
+the indented semicircle in the upper half-plane positioned on the x-axis,
+as shown in Figure 9.
+R
+γ+
+R
+−R
+γ+
+ϵ
+ϵ
+−ϵ
+Figure 9. The indented semicircle of Example 2
+If we denote by γ+
+ϵ and γ+
+R the semicircles of radii ϵ and R with negative
+and positive orientations respectively, Cauchy’s theorem gives
+ −ϵ
+−R
+1 −eix
+x2
+dx +
+
+γ+
+ϵ
+1 −eiz
+z2
+dz +
+ R
+ϵ
+1 −eix
+x2
+dx +
+
+γ+
+R
+1 −eiz
+z2
+dz = 0.
+First we let R →∞and observe that
+
+1 −eiz
+z2
+ ≤
+2
+|z|2 ,
+so the integral over γ+
+R goes to zero. Therefore
+
+|x|≥ϵ
+1 −eix
+x2
+dx = −
+
+γ+
+ϵ
+1 −eiz
+z2
+dz.
+
+4. Cauchy’s integral formulas
+45
+Next, note that
+f(z) = −iz
+z2 + E(z)
+where E(z) is bounded as z →0, while on γ+
+ϵ
+we have z = ϵeiθ and
+dz = iϵeiθdθ. Thus
+
+γ+
+ϵ
+1 −eiz
+z2
+dz →
+ 0
+π
+(−ii) dθ = −π
+as ϵ →0.
+Taking real parts then yields
+ ∞
+−∞
+1 −cos x
+x2
+dx = π.
+Since the integrand is even, the desired formula is proved.
+4 Cauchy’s integral formulas
+Representation formulas, and in particular integral representation formu-
+las, play an important role in mathematics, since they allow us to recover
+a function on a large set from its behavior on a smaller set. For example,
+we saw in Book I that a solution of the steady-state heat equation in the
+disc was completely determined by its boundary values on the circle via
+a convolution with the Poisson kernel
+(7)
+u(r, θ) = 1
+2π
+ 2π
+0
+Pr(θ −ϕ)u(1, ϕ) dϕ.
+In the case of holomorphic functions, the situation is analogous, which
+is not surprising since the real and imaginary parts of a holomorphic
+function are harmonic.3 Here, we will prove an integral representation
+formula in a manner that is independent of the theory of harmonic func-
+tions. In fact, it is also possible to recover the Poisson integral formula (7)
+as a consequence of the next theorem (see Exercises 11 and 12).
+Theorem 4.1 Suppose f is holomorphic in an open set that contains
+the closure of a disc D. If C denotes the boundary circle of this disc with
+the positive orientation, then
+f(z) =
+1
+2πi
+
+C
+f(ζ)
+ζ −z dζ
+for any point z ∈D.
+3This fact is an immediate consequence of the Cauchy-Riemann equations. We refer
+the reader to Exercise 11 in Chapter 1.

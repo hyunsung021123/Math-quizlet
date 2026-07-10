@@ -1,0 +1,258 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.4 The argument principle and applications
+직전 소단원: 「3.3 Singularities and meromorphic functions」
+[본문]
+4. The argument principle and applications
+89
+As the point w goes to inﬁnity in C (in the sense that |w| →∞) the
+corresponding point W on S comes arbitrarily close to N . This simple
+observation makes N a natural candidate for the so-called “point at
+inﬁnity.” Identifying inﬁnity with the point N on S, we see that the
+extended complex plane can be visualized as the full two-dimensional
+sphere S; this is the Riemann sphere. Since this construction takes
+the unbounded set C into the compact set S by adding one point, the
+Riemann sphere is sometimes called the one-point compactiﬁcation
+of C.
+An important consequence of this interpretation is the following: al-
+though the point at inﬁnity required special attention when considered
+separately from C, it now ﬁnds itself on equal footing with all other points
+on S. In particular, a meromorphic function on the extended complex
+plane can be thought of as a map from S to itself, where the image of a
+pole is now a tractable point on S, namely N . For these reasons (and
+others) the Riemann sphere provides good geometrical insight into the
+structure of C as well as the theory of meromorphic functions.
+4 The argument principle and applications
+We anticipate our discussion of the logarithm (in Section 6) with a few
+comments. In general, the function log f(z) is “multiple-valued” because
+it cannot be deﬁned unambiguously on the set where f(z)̸ = 0. However
+it is to be deﬁned, it must equal log |f(z)| + i arg f(z), where log |f(z)|
+is the usual real-variable logarithm of the positive quantity |f(z)| (and
+hence is deﬁned unambiguously), while arg f(z) is some determination
+of the argument (up to an additive integral multiple of 2π). Note that in
+any case, the derivative of log f(z) is f ′(z)/f(z) which is single-valued,
+and the integral
+
+γ
+f ′(z)
+f(z) dz
+can be interpreted as the change in the argument of f as z traverses
+the curve γ.
+Moreover, assuming the curve is closed, this change of
+argument is determined entirely by the zeros and poles of f inside γ. We
+now formulate this fact as a precise theorem.
+We begin with the observation that while the additivity formula
+log(f1f2) = log f1 + log f2
+fails in general (as we shall see below), the additivity can be restored
+to the corresponding derivatives.
+This is conﬁrmed by the following
+
+90
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+observation:
+(f1f2)′
+f1f2
+= f ′
+1f2 + f1f ′
+2
+f1f2
+= f ′
+1
+f1
++ f ′
+2
+f2
+,
+which generalizes to
+
+N
+k=1 fk
+′
+N
+k=1 fk
+=
+N
+
+k=1
+f ′
+k
+fk
+.
+We apply this formula as follows. If f is holomorphic and has a zero
+of order n at z0, we can write
+f(z) = (z −z0)ng(z) ,
+where g is holomorphic and nowhere vanishing in a neighborhood of z0,
+and therefore
+f ′(z)
+f(z) =
+n
+z −z0
++ G(z)
+where G(z) = g′(z)/g(z). The conclusion is that if f has a zero of order
+n at z0, then f ′/f has a simple pole with residue n at z0.
+Observe
+that a similar fact also holds if f has a pole of order n at z0, that is, if
+f(z) = (z −z0)−nh(z). Then
+f ′(z)
+f(z) =
+−n
+z −z0
++ H(z).
+Therefore, if f is meromorphic, the function f ′/f will have simple poles
+at the zeros and poles of f, and the residue is simply the order of the
+zero of f or the negative of the order of the pole of f. As a result, an
+application of the residue formula gives the following theorem.
+Theorem 4.1 (Argument principle) Suppose f is meromorphic in
+an open set containing a circle C and its interior. If f has no poles
+and never vanishes on C, then
+1
+2πi
+
+C
+f ′(z)
+f(z) dz = (number of zeros of f inside C) minus
+(number of poles of f inside C),
+where the zeros and poles are counted with their multiplicities.
+Corollary 4.2 The above theorem holds for toy contours.
+
+4. The argument principle and applications
+91
+As an application of the argument principle, we shall prove three the-
+orems of interest in the general theory. The ﬁrst, Rouch´e’s theorem, is
+in some sense a continuity statement. It says that a holomorphic func-
+tion can be perturbed slightly without changing the number of its zeros.
+Then, we prove the open mapping theorem, which states that holomor-
+phic functions map open sets to open sets, an important property that
+again shows the special nature of holomorphic functions. Finally, the
+maximum modulus principle is reminiscent of (and in fact implies) the
+same property for harmonic functions: a non-constant holomorphic func-
+tion on an open set Ωcannot attain its maximum in the interior of Ω.
+Theorem 4.3 (Rouch´e’s theorem) Suppose that f and g are holo-
+morphic in an open set containing a circle C and its interior. If
+|f(z)| > |g(z)|
+for all z ∈C,
+then f and f + g have the same number of zeros inside the circle C.
+Proof.
+For t ∈[0, 1] deﬁne
+ft(z) = f(z) + tg(z)
+so that f0 = f and f1 = f + g. Let nt denote the number of zeros of ft
+inside the circle counted with multiplicities, so that in particular, nt is
+an integer. The condition |f(z)| > |g(z)| for z ∈C clearly implies that
+ft has no zeros on the circle, and the argument principle implies
+nt =
+1
+2πi
+
+C
+f ′
+t(z)
+ft(z) dz.
+To prove that nt is constant, it suﬃces to show that it is a continu-
+ous function of t. Then we could argue that if nt were not constant,
+the intermediate value theorem would guarantee the existence of some
+t0 ∈[0, 1] with nt0 not integral, contradicting the fact that nt ∈Z for
+all t.
+To prove the continuity of nt, we observe that f ′
+t(z)/ft(z) is jointly
+continuous for t ∈[0, 1] and z ∈C. This joint continuity follows from
+the fact that it holds for both the numerator and denominator, and our
+assumptions guarantee that ft(z) does not vanish on C.
+Hence nt is
+integer-valued and continuous, and it must be constant. We conclude
+that n0 = n1, which is Rouch´e’s theorem.
+We now come to an important geometric property of holomorphic func-
+tions that arises when we consider them as mappings (that is, mapping
+regions in the complex plane to the complex plane).
+A mapping is said to be open if it maps open sets to open sets.
+
+92
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+Theorem 4.4 (Open mapping theorem) If f is holomorphic and non-
+constant in a region Ω, then f is open.
+Proof.
+Let w0 belong to the image of f, say w0 = f(z0). We must
+prove that all points w near w0 also belong to the image of f.
+Deﬁne g(z) = f(z) −w and write
+g(z) = (f(z) −w0) + (w0 −w)
+= F(z) + G(z).
+Now choose δ > 0 such that the disc |z −z0| ≤δ is contained in Ωand
+f(z)̸ = w0 on the circle |z −z0| = δ. We then select ϵ > 0 so that we
+have |f(z) −w0| ≥ϵ on the circle |z −z0| = δ. Now if |w −w0| < ϵ we
+have |F(z)| > |G(z)| on the circle |z −z0| = δ, and by Rouch´e’s theorem
+we conclude that g = F + G has a zero inside the circle since F has one.
+The next result pertains to the size of a holomorphic function. We
+shall refer to the maximum of a holomorphic function f in an open set
+Ωas the maximum of its absolute value |f| in Ω.
+Theorem 4.5 (Maximum modulus principle) If f is a non-constant
+holomorphic function in a region Ω, then f cannot attain a maximum in
+Ω.
+Proof.
+Suppose that f did attain a maximum at z0.
+Since f is
+holomorphic it is an open mapping, and therefore, if D ⊂Ωis a small disc
+centered at z0, its image f(D) is open and contains f(z0). This proves
+that there are points in z ∈D such that |f(z)| > |f(z0)|, a contradiction.
+Corollary 4.6 Suppose that Ωis a region with compact closure Ω. If f
+is holomorphic on Ωand continuous on Ωthen
+sup
+z∈Ω
+|f(z)| ≤
+sup
+z∈Ω−Ω
+|f(z)|.
+In fact, since f(z) is continuous on the compact set Ω, then |f(z)|
+attains its maximum in Ω; but this cannot be in Ωif f is non-constant.
+If f is constant, the conclusion is trivial.
+Remark. The hypothesis that Ωis compact (that is, bounded) is es-
+sential for the conclusion. We give an example related to considerations
+that we will take up in Chapter 4. Let Ωbe the open ﬁrst quadrant,
+bounded by the positive half-line x ≥0 and the corresponding imagi-
+nary line y ≥0. Consider F(z) = e−iz2. Then F is entire and clearly
+
+5. Homotopies and simply connected domains
+93
+continuous on Ω. Moreover |F(z)| = 1 on the two boundary lines z = x
+and z = iy. However, F(z) is unbounded in Ω, since for example, we
+have F(z) = er2 if z = r
+√
+i = reiπ/4.
+5 Homotopies and simply connected domains
+The key to the general form of Cauchy’s theorem, as well as the analysis of
+multiple-valued functions, is to understand in what regions we can deﬁne
+the primitive of a given holomorphic function. Note the relevance to the
+study of the logarithm, which arises as a primitive of 1/z. The question is
+not just a local one, but is also global in nature. Its elucidation requires
+the notion of homotopy, and the resulting idea of simple-connectivity.
+Let γ0 and γ1 be two curves in an open set Ωwith common end-points.
+So if γ0(t) and γ1(t) are two parametrizations deﬁned on [a, b], we have
+γ0(a) = γ1(a) = α
+and
+γ0(b) = γ1(b) = β.
+These two curves are said to be homotopic in Ωif for each 0 ≤s ≤1
+there exists a curve γs ⊂Ω, parametrized by γs(t) deﬁned on [a, b], such
+that for every s
+γs(a) = α
+and
+γs(b) = β,
+and for all t ∈[a, b]
+γs(t)|s=0 = γ0(t)
+and
+γs(t)|s=1 = γ1(t).
+Moreover, γs(t) should be jointly continuous in s ∈[0, 1] and t ∈[a, b].
+Loosely speaking, two curves are homotopic if one curve can be de-
+formed into the other by a continuous transformation without ever leav-
+ing Ω(Figure 6).
+Theorem 5.1 If f is holomorphic in Ω, then
+
+γ0
+f(z) dz =
+
+γ1
+f(z) dz
+whenever the two curves γ0 and γ1 are homotopic in Ω.
+Proof.
+The key to the proof lies in showing that if two curves are close
+to each other and have the same end-points, then the integrals over these
+curves are equal. Recall that by deﬁnition, the function F(s, t) = γs(t) is
+continuous on [0, 1] × [a, b]. In particular, since the image of F, which we

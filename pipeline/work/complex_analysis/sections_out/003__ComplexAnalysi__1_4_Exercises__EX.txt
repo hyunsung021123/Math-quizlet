@@ -1,0 +1,414 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 1. Preliminaries to Complex Analysis
+현재 소단원: 1.4 Exercises
+직전 소단원: 「1.3 Integration along curves」
+[연습문제]
+24
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+Proof.
+Fix a point w0 ∈Ω. It suﬃces to show that f(w) = f(w0) for
+all w ∈Ω.
+Since Ωis connected, for any w ∈Ω, there exists a curve γ which joins
+w0 to w. Since f is clearly a primitive for f ′, we have
+
+γ
+f ′(z) dz = f(w) −f(w0).
+By assumption, f ′ = 0 so the integral on the left is 0, and we conclude
+that f(w) = f(w0) as desired.
+Remark on notation. When convenient, we follow the practice of using
+the notation f(z) = O(g(z)) to mean that there is a constant C > 0 such
+that |f(z)| ≤C|g(z)| for z in a neighborhood of the point in question.
+In addition, we say f(z) = o(g(z)) when |f(z)/g(z)| →0. We also write
+f(z) ∼g(z) to mean that f(z)/g(z) →1.
+4 Exercises
+1. Describe geometrically the sets of points z in the complex plane deﬁned by the
+following relations:
+(a) |z −z1| = |z −z2| where z1, z2 ∈C.
+(b) 1/z = z.
+(c) Re(z) = 3.
+(d) Re(z) > c, (resp., ≥c) where c ∈R.
+(e) Re(az + b) > 0 where a, b ∈C.
+(f) |z| = Re(z) + 1.
+(g) Im(z) = c with c ∈R.
+2. Let ⟨·, ·⟩denote the usual inner product in R2. In other words, if Z = (x1, y1)
+and W = (x2, y2), then
+⟨Z, W ⟩= x1x2 + y1y2.
+Similarly, we may deﬁne a Hermitian inner product (·, ·) in C by
+(z, w) = zw.
+
+4. Exercises
+25
+The term Hermitian is used to describe the fact that (·, ·) is not symmetric, but
+rather satisﬁes the relation
+(z, w) = (w, z)
+for all z, w ∈C.
+Show that
+⟨z, w⟩= 1
+2[(z, w) + (w, z)] = Re(z, w),
+where we use the usual identiﬁcation z = x + iy ∈C with (x, y) ∈R2.
+3. With ω = seiϕ, where s ≥0 and ϕ ∈R, solve the equation zn = ω in C where
+n is a natural number. How many solutions are there?
+4. Show that it is impossible to deﬁne a total ordering on C. In other words, one
+cannot ﬁnd a relation ≻between complex numbers so that:
+(i) For any two complex numbers z, w, one and only one of the following is true:
+z ≻w, w ≻z or z = w.
+(ii) For all z1, z2, z3 ∈C the relation z1 ≻z2 implies z1 + z3 ≻z2 + z3.
+(iii) Moreover, for all z1, z2, z3 ∈C with z3 ≻0, then z1 ≻z2 implies z1z3 ≻z2z3.
+[Hint: First check if i ≻0 is possible.]
+5. A set Ωis said to be pathwise connected if any two points in Ωcan be
+joined by a (piecewise-smooth) curve entirely contained in Ω. The purpose of this
+exercise is to prove that an open set Ωis pathwise connected if and only if Ωis
+connected.
+(a) Suppose ﬁrst that Ωis open and pathwise connected, and that it can be
+written as Ω= Ω1 ∪Ω2 where Ω1 and Ω2 are disjoint non-empty open sets.
+Choose two points w1 ∈Ω1 and w2 ∈Ω2 and let γ denote a curve in Ω
+joining w1 to w2. Consider a parametrization z : [0, 1] →Ωof this curve
+with z(0) = w1 and z(1) = w2, and let
+t∗= sup
+0≤t≤1
+{t : z(s) ∈Ω1
+for all 0 ≤s < t}.
+Arrive at a contradiction by considering the point z(t∗).
+(b) Conversely, suppose that Ωis open and connected. Fix a point w ∈Ωand
+let Ω1 ⊂Ωdenote the set of all points that can be joined to w by a curve
+contained in Ω. Also, let Ω2 ⊂Ωdenote the set of all points that cannot be
+joined to w by a curve in Ω. Prove that both Ω1 and Ω2 are open, disjoint
+and their union is Ω. Finally, since Ω1 is non-empty (why?) conclude that
+Ω= Ω1 as desired.
+
+26
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+The proof actually shows that the regularity and type of curves we used to deﬁne
+pathwise connectedness can be relaxed without changing the equivalence between
+the two deﬁnitions when Ωis open. For instance, we may take all curves to be
+continuous, or simply polygonal lines.2
+6. Let Ωbe an open set in C and z ∈Ω. The connected component (or simply
+the component) of Ωcontaining z is the set Cz of all points w in Ωthat can be
+joined to z by a curve entirely contained in Ω.
+(a) Check ﬁrst that Cz is open and connected. Then, show that w ∈Cz deﬁnes
+an equivalence relation, that is: (i) z ∈Cz, (ii) w ∈Cz implies z ∈Cw, and
+(iii) if w ∈Cz and z ∈Cζ, then w ∈Cζ.
+Thus Ωis the union of all its connected components, and two components
+are either disjoint or coincide.
+(b) Show that Ωcan have only countably many distinct connected components.
+(c) Prove that if Ωis the complement of a compact set, then Ωhas only one
+unbounded component.
+[Hint: For (b), one would otherwise obtain an uncountable number of disjoint open
+balls. Now, each ball contains a point with rational coordinates. For (c), note that
+the complement of a large disc containing the compact set is connected.]
+7. The family of mappings introduced here plays an important role in complex
+analysis. These mappings, sometimes called Blaschke factors, will reappear in
+various applications in later chapters.
+(a) Let z, w be two complex numbers such that zw̸ = 1. Prove that
+
+w −z
+1 −wz
+ < 1
+if |z| < 1 and |w| < 1,
+and also that
+
+w −z
+1 −wz
+ = 1
+if |z| = 1 or |w| = 1.
+[Hint: Why can one assume that z is real? It then suﬃces to prove that
+(r −w)(r −w) ≤(1 −rw)(1 −rw)
+with equality for appropriate r and |w|.]
+(b) Prove that for a ﬁxed w in the unit disc D, the mapping
+F : z →w −z
+1 −wz
+satisﬁes the following conditions:
+2A polygonal line is a piecewise-smooth curve which consists of ﬁnitely many straight
+line segments.
+
+4. Exercises
+27
+(i) F maps the unit disc to itself (that is, F : D →D), and is holomorphic.
+(ii) F interchanges 0 and w, namely F(0) = w and F(w) = 0.
+(iii) |F(z)| = 1 if |z| = 1.
+(iv) F : D →D is bijective. [Hint: Calculate F ◦F.]
+8. Suppose U and V are open sets in the complex plane. Prove that if f : U →V
+and g : V →C are two functions that are diﬀerentiable (in the real sense, that is,
+as functions of the two real variables x and y), and h = g ◦f, then
+∂h
+∂z = ∂g
+∂z
+∂f
+∂z + ∂g
+∂z
+∂f
+∂z
+and
+∂h
+∂z = ∂g
+∂z
+∂f
+∂z + ∂g
+∂z
+∂f
+∂z .
+This is the complex version of the chain rule.
+9. Show that in polar coordinates, the Cauchy-Riemann equations take the form
+∂u
+∂r = 1
+r
+∂v
+∂θ
+and
+1
+r
+∂u
+∂θ = −∂v
+∂r .
+Use these equations to show that the logarithm function deﬁned by
+log z = log r + iθ
+where z = reiθ with −π < θ < π
+is holomorphic in the region r > 0 and −π < θ < π.
+10. Show that
+4 ∂
+∂z
+∂
+∂z = 4 ∂
+∂z
+∂
+∂z = △,
+where △is the Laplacian
+△= ∂2
+∂x2 + ∂2
+∂y2 .
+11. Use Exercise 10 to prove that if f is holomorphic in the open set Ω, then the
+real and imaginary parts of f are harmonic; that is, their Laplacian is zero.
+12. Consider the function deﬁned by
+f(x + iy) =
+	
+|x||y|,
+whenever x, y ∈R.
+
+28
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+Show that f satisﬁes the Cauchy-Riemann equations at the origin, yet f is not
+holomorphic at 0.
+13. Suppose that f is holomorphic in an open set Ω. Prove that in any one of the
+following cases:
+(a) Re(f) is constant;
+(b) Im(f) is constant;
+(c) |f| is constant;
+one can conclude that f is constant.
+14. Suppose {an}N
+n=1 and {bn}N
+n=1 are two ﬁnite sequences of complex numbers.
+Let Bk = k
+n=1 bn denote the partial sums of the series  bn with the convention
+B0 = 0. Prove the summation by parts formula
+N
+
+n=M
+anbn = aNBN −aMBM−1 −
+N−1
+
+n=M
+(an+1 −an)Bn.
+15. Abel’s theorem. Suppose ∞
+n=1 an converges. Prove that
+lim
+r→1, r<1
+∞
+
+n=1
+rnan =
+∞
+
+n=1
+an.
+[Hint: Sum by parts.] In other words, if a series converges, then it is Abel summable
+with the same limit. For the precise deﬁnition of these terms, and more information
+on summability methods, we refer the reader to Book I, Chapter 2.
+16. Determine the radius of convergence of the series ∞
+n=1 anzn when:
+(a) an = (log n)2
+(b) an = n!
+(c) an =
+n2
+4n+3n
+(d) an = (n!)3/(3n)!
+[Hint:
+Use Stirling’s formula,
+which says that
+n! ∼cnn+ 1
+2 e−n for some c > 0..]
+(e) Find the radius of convergence of the hypergeometric series
+F(α, β, γ; z) = 1 +
+∞
+
+n=1
+α(α + 1) · · · (α + n −1)β(β + 1) · · · (β + n −1)
+n!γ(γ + 1) · · · (γ + n −1)
+zn.
+Here α, β ∈C and γ̸ = 0, −1, −2, . . ..
+
+4. Exercises
+29
+(f) Find the radius of convergence of the Bessel function of order r:
+Jr(z) =
+
+ z
+2
+r
+∞
+
+n=0
+(−1)n
+n!(n + r)!
+
+ z
+2
+2n
+,
+where r is a positive integer.
+17. Show that if {an}∞
+n=0 is a sequence of non-zero complex numbers such that
+lim
+n→∞
+|an+1|
+|an|
+= L,
+then
+lim
+n→∞|an|1/n = L.
+In particular, this exercise shows that when applicable, the ratio test can be used
+to calculate the radius of convergence of a power series.
+18. Let f be a power series centered at the origin. Prove that f has a power series
+expansion around any point in its disc of convergence.
+[Hint: Write z = z0 + (z −z0) and use the binomial expansion for zn.]
+19. Prove the following:
+(a) The power series  nzn does not converge on any point of the unit circle.
+(b) The power series  zn/n2 converges at every point of the unit circle.
+(c) The power series  zn/n converges at every point of the unit circle except
+z = 1. [Hint: Sum by parts.]
+20. Expand (1 −z)−m in powers of z. Here m is a ﬁxed positive integer. Also,
+show that if
+(1 −z)−m =
+∞
+
+n=0
+anzn,
+then one obtains the following asymptotic relation for the coeﬃcients:
+an ∼
+1
+(m −1)! nm−1
+as n →∞.
+21. Show that for |z| < 1, one has
+z
+1 −z2 +
+z2
+1 −z4 + · · · +
+z2n
+1 −z2n+1 + · · · =
+z
+1 −z ,
+
+30
+Chapter 1. PRELIMINARIES TO COMPLEX ANALYSIS
+and
+z
+1 + z +
+2z2
+1 + z2 + · · · + 2kz2k
+1 + z2k + · · · =
+z
+1 −z .
+Justify any change in the order of summation.
+[Hint: Use the dyadic expansion of an integer and the fact that 2k+1 −1 = 1 +
+2 + 22 + · · · + 2k.]
+22. Let N = {1, 2, 3, . . .} denote the set of positive integers. A subset S ⊂N is
+said to be in arithmetic progression if
+S = {a, a + d, a + 2d, a + 3d, . . .}
+where a, d ∈N. Here d is called the step of S.
+Show that N cannot be partitioned into a ﬁnite number of subsets that are in
+arithmetic progression with distinct steps (except for the trivial case a = d = 1).
+[Hint: Write 
+n∈N zn as a sum of terms of the type
+za
+1−zd .]
+23. Consider the function f deﬁned on R by
+f(x) =
+
+0
+if x ≤0 ,
+e−1/x2
+if x > 0.
+Prove that f is indeﬁnitely diﬀerentiable on R, and that f (n)(0) = 0 for all n ≥1.
+Conclude that f does not have a converging power series expansion ∞
+n=0 anxn
+for x near the origin.
+24. Let γ be a smooth curve in C parametrized by z(t) : [a, b] →C. Let γ−denote
+the curve with the same image as γ but with the reverse orientation. Prove that
+for any continuous function f on γ
+
+γ
+f(z) dz = −
+
+γ−f(z) dz.
+25. The next three calculations provide some insight into Cauchy’s theorem, which
+we treat in the next chapter.
+(a) Evaluate the integrals
+
+γ
+zn dz
+for all integers n. Here γ is any circle centered at the origin with the positive
+(counterclockwise) orientation.
+(b) Same question as before, but with γ any circle not containing the origin.
+
+4. Exercises
+31
+(c) Show that if |a| < r < |b|, then
+
+γ
+1
+(z −a)(z −b) dz = 2πi
+a −b,
+where γ denotes the circle centered at the origin, of radius r, with the
+positive orientation.
+26. Suppose f is continuous in a region Ω. Prove that any two primitives of f (if
+they exist) diﬀer by a constant.
+
+2 Cauchy’s Theorem and Its
+Applications
+The solution of a large number of problems can be
+reduced, in the last analysis, to the evaluation of def-
+inite integrals; thus mathematicians have been much
+occupied with this task... However, among many re-
+sults obtained, a number were initially discovered by
+the aid of a type of induction based on the passage
+from real to imaginary.
+Often passage of this kind
+led directly to remarkable results. Nevertheless this
+part of the theory, as has been observed by Laplace,
+is subject to various diﬃculties...
+After having reﬂected on this subject and brought
+together various results mentioned above, I hope to
+establish the passage from the real to the imaginary
+based on a direct and rigorous analysis; my researches
+have thus led me to the method which is the object of
+this memoir...
+A. L. Cauchy, 1827
+In the previous chapter, we discussed several preliminary ideas in com-
+plex analysis: open sets in C, holomorphic functions, and integration
+along curves. The ﬁrst remarkable result of the theory exhibits a deep
+connection between these notions.
+Loosely stated, Cauchy’s theorem
+says that if f is holomorphic in an open set Ωand γ ⊂Ωis a closed
+curve whose interior is also contained in Ωthen
+(1)
+
+γ
+f(z) dz = 0.
+Many results that follow, and in particular the calculus of residues, are
+related in one way or another to this fact.
+A precise and general formulation of Cauchy’s theorem requires deﬁn-
+ing unambiguously the “interior” of a curve, and this is not always an
+easy task. At this early stage of our study, we shall make use of the
+device of limiting ourselves to regions whose boundaries are curves that
+are “toy contours.” As the name suggests, these are closed curves whose
+visualization is so simple that the notion of their interior will be unam-

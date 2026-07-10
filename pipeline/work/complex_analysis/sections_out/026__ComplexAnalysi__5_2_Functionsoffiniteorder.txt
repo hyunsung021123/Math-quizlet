@@ -1,0 +1,170 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 5. Entire Functions
+현재 소단원: 5.2 Functions of finite order
+직전 소단원: 「5.1 Jensen’s formula」
+[본문]
+138
+Chapter 5. ENTIRE FUNCTIONS
+2 Functions of ﬁnite order
+Let f be an entire function.
+If there exist a positive number ρ and
+constants A, B > 0 such that
+|f(z)| ≤AeB|z|ρ
+for all z ∈C,
+then we say that f has an order of growth ≤ρ. We deﬁne the order
+of growth of f as
+ρf = inf ρ ,
+where the inﬁmum is over all ρ > 0 such that f has an order of growth
+≤ρ.
+For example, the order of growth of the function ez2 is 2.
+Theorem 2.1 If f is an entire function that has an order of growth ≤ρ,
+then:
+(i) n(r) ≤Crρ for some C > 0 and all suﬃciently large r.
+(ii) If z1, z2, . . . denote the zeros of f, with zk̸ = 0, then for all s > ρ
+we have
+∞
+
+k=1
+1
+|zk|s < ∞.
+Proof.
+It suﬃces to prove the estimate for n(r) when f(0)̸ = 0. Indeed,
+consider the function F(z) = f(z)/zℓwhere ℓis the order of the zero of
+f at the origin. Then nf(r) and nF (r) diﬀer only by a constant, and F
+also has an of order of growth ≤ρ.
+If f(0)̸ = 0 we may use formula (2), namely
+ R
+0
+n(x) dx
+x = 1
+2π
+ 2π
+0
+log |f(Reiθ)| dθ −log |f(0)|.
+Choosing R = 2r, this formula implies
+ 2r
+r
+n(x) dx
+x ≤1
+2π
+ 2π
+0
+log |f(Reiθ)| dθ −log |f(0)|.
+On the one hand, since n(r) is increasing, we have
+ 2r
+r
+n(x) dx
+x ≥n(r)
+ 2r
+r
+dx
+x = n(r)[log 2r −log r] = n(r) log 2,
+
+2. Functions of finite order
+139
+and on the other hand, the growth condition on f gives
+ 2π
+0
+log |f(Reiθ)| dθ ≤
+ 2π
+0
+log |AeBRρ| dθ ≤C′rρ
+for all large r. Consequently, n(r) ≤Crρ for an appropriate C > 0 and
+all suﬃciently large r.
+The following estimates prove the second part of the theorem:
+
+|zk|≥1
+|zk|−s =
+∞
+
+j=0
+
+
+
+2j≤|zk|<2j+1
+|zk|−s
+
+
+≤
+∞
+
+j=0
+2−jsn(2j+1)
+≤c
+∞
+
+j=0
+2−js2(j+1)ρ
+≤c′
+∞
+
+j=0
+(2ρ−s)j
+< ∞.
+The last series converges because s > ρ.
+Part (ii) of the theorem is a noteworthy fact, which we shall use in a
+later part of this chapter.
+We give two simple examples of the theorem; each of these shows that
+the condition s > ρ cannot be improved.
+Example 1. Consider f(z) = sin πz. Recall Euler’s identity, namely
+f(z) = eiπz −e−iπz
+2i
+,
+which implies that |f(z)| ≤eπ|z|, and f has an order of growth ≤1. By
+taking z = ix, where x ∈R, it is clear that the order of growth of f is
+actually equal to 1. However, f vanishes to order 1 at z = n for each
+n ∈Z, and 
+n̸=0 1/|n|s < ∞precisely when s > 1.
+Example 2. Consider f(z) = cos z1/2, which we deﬁne by
+cos z1/2 =
+∞
+
+n=0
+(−1)n zn
+(2n)!.
+
+140
+Chapter 5. ENTIRE FUNCTIONS
+Then f is entire, and it is easy to see that
+|f(z)| ≤e|z|1/2,
+and the order of growth of f is 1/2.
+Moreover, f(z) vanishes when
+zn = ((n + 1/2)π)2, while 
+n 1/|zn|s < ∞exactly when s > 1/2.
+A natural question is whether or not, given any sequence of complex
+numbers z1, z2, . . ., there exists an entire function f with zeros precisely
+at the points of this sequence. A necessary condition is that z1, z2, . . . do
+not accumulate, in other words we must have
+lim
+k→∞|zk| = ∞,
+otherwise f would vanish identically by Theorem 4.8 in Chapter 2. Weier-
+strass proved that this condition is also suﬃcient by explicitly construct-
+ing a function with these prescribed zeros. A ﬁrst guess is of course the
+product
+(z −z1)(z −z2) · · · ,
+which provides a solution in the special case when the sequence of zeros
+is ﬁnite.
+In general, Weierstrass showed how to insert factors in this
+product so that the convergence is guaranteed, yet no new zeros are
+introduced.
+Before coming to the general construction, we review inﬁnite products
+and study a basic example.
+3 Inﬁnite products
+3.1 Generalities
+Given a sequence {an}∞
+n=1 of complex numbers, we say that the product
+∞
+
+n=1
+(1 + an)
+converges if the limit
+lim
+N→∞
+N
+
+n=1
+(1 + an)
+of the partial products exists.
+A useful necessary condition that guarantees the existence of a product
+is contained in the following proposition.

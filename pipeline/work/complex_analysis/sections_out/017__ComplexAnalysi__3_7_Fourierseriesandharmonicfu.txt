@@ -1,0 +1,172 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.7 Fourier series and harmonic functions
+직전 소단원: 「3.6 The complex logarithm」
+[본문]
+7. Fourier series and harmonic functions
+101
+where γ is any path in Ωconnecting z0 to z, and c0 is a complex number
+so that ec0 = f(z0). This deﬁnition is independent of the path γ since Ω
+is simply connected. Arguing as in the proof of Theorem 2.1, Chapter 2,
+we ﬁnd that g is holomorphic with
+g′(z) = f ′(z)
+f(z) ,
+and a simple calculation gives
+d
+dz
+
+f(z)e−g(z)
+= 0 ,
+so that f(z)e−g(z) is constant. Evaluating this expression at z0 we ﬁnd
+f(z0)e−c0 = 1, so that f(z) = eg(z) for all z ∈Ω, and the proof is com-
+plete.
+7 Fourier series and harmonic functions
+In Chapter 4 we shall describe some interesting connections between com-
+plex function theory and Fourier analysis on the real line. The motivation
+for this study comes in part from the simple and direct relation between
+Fourier series on the circle and power series expansions of holomorphic
+functions in the disc, which we now investigate.
+Suppose that f is holomorphic in a disc DR(z0), so that f has a power
+series expansion
+f(z) =
+∞
+
+n=0
+an(z −z0)n
+that converges in that disc.
+Theorem 7.1 The coeﬃcients of the power series expansion of f are
+given by
+an =
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−inθ dθ
+for all n ≥0 and 0 < r < R. Moreover,
+0 =
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−inθ dθ
+whenever n < 0.
+
+102
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+Proof.
+Since f (n)(z0) = ann!, the Cauchy integral formula gives
+an =
+1
+2πi
+
+γ
+f(ζ)
+(ζ −z0)n+1 dζ ,
+where γ is a circle of radius 0 < r < R centered at z0 and with the positive
+orientation. Choosing ζ = z0 + reiθ for the parametrization of this circle,
+we ﬁnd that for n ≥0
+an =
+1
+2πi
+ 2π
+0
+f(z0 + reiθ)
+(z0 + reiθ −z0)n+1 rieiθ dθ
+=
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−i(n+1)θeiθ dθ
+=
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−inθ dθ.
+Finally, even when n < 0, our calculation shows that we still have the
+identity
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−inθ dθ =
+1
+2πi
+
+γ
+f(ζ)
+(ζ −z0)n+1 dζ.
+Since −n > 0, the function f(ζ)(ζ −z0)−n−1 is holomorphic in the disc,
+and by Cauchy’s theorem the last integral vanishes.
+The interpretation of this theorem is as follows. Consider f(z0 + reiθ)
+as the restriction to the circle of a holomorphic function on the closure
+of a disc centered at z0 with radius r.
+Then its Fourier coeﬃcients
+vanish if n < 0, while those for n ≥0 are equal (up to a factor of rn)
+to coeﬃcients of the power series of the holomorphic function f. The
+property of the vanishing of the Fourier coeﬃcients for n < 0 reveals
+another special characteristic of holomorphic functions (and in particular
+their restrictions to any circle).
+Next, since a0 = f(z0), we obtain the following corollary.
+Corollary 7.2 (Mean-value property) If f is holomorphic in a disc
+DR(z0), then
+f(z0) = 1
+2π
+ 2π
+0
+f(z0 + reiθ) dθ,
+for any 0 < r < R.
+Taking the real parts of both sides, we obtain the following conse-
+quence.
+
+8. Exercises
+103
+Corollary 7.3 If f is holomorphic in a disc DR(z0), and u = Re(f),
+then
+u(z0) = 1
+2π
+ 2π
+0
+u(z0 + reiθ) dθ,
+for any 0 < r < R.
+Recall that u is harmonic whenever f is holomorphic, and in fact, the
+above corollary is a property enjoyed by every harmonic function in the
+disc DR(z0). This follows from Exercise 12 in Chapter 2, which shows
+that every harmonic function in a disc is the real part of a holomorphic
+function in that disc.
+8 Exercises
+1. Using Euler’s formula
+sin πz = eiπz −e−iπz
+2i
+,
+show that the complex zeros of sin πz are exactly at the integers, and that they
+are each of order 1.
+Calculate the residue of 1/ sin πz at z = n ∈Z.
+2. Evaluate the integral
+ ∞
+−∞
+dx
+1 + x4 .
+Where are the poles of 1/(1 + z4)?
+3. Show that
+ ∞
+−∞
+cos x
+x2 + a2 dx = π e−a
+a ,
+for a > 0.
+4. Show that
+ ∞
+−∞
+x sin x
+x2 + a2 dx = πe−a,
+for all a > 0.
+5. Use contour integration to show that
+ ∞
+−∞
+e−2πixξ
+(1 + x2)2 dx = π
+2 (1 + 2π|ξ|)e−2π|ξ|
+for all ξ real.

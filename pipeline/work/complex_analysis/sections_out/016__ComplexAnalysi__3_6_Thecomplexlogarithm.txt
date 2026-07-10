@@ -1,0 +1,247 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.6 The complex logarithm
+직전 소단원: 「3.5 Homotopies and simply connected domains」
+[본문]
+6. The complex logarithm
+97
+and if ˜γ is another curve in Ωjoining z0 and z, we would have
+
+γ
+f(w) dw =
+
+˜γ
+f(w) dw
+by Theorem 5.1. Now we can write
+F(z + h) −F(z) =
+
+η
+f(w) dw
+where η is the line segment joining z and z + h. Arguing as in the proof
+of Theorem 2.1 in Chapter 2, we ﬁnd that
+lim
+h→0
+F(z + h) −F(z)
+h
+= f(z).
+As a result, we obtain the following version of Cauchy’s theorem.
+Corollary 5.3 If f is holomorphic in the simply connected region Ω,
+then
+
+γ
+f(z) dz = 0
+for any closed curve γ in Ω.
+This is immediate from the existence of a primitive.
+The fact that the punctured plane is not simply connected now follows
+rigorously from the observation that the integral of 1/z over the unit
+circle is 2πi, and not 0.
+6 The complex logarithm
+Suppose we wish to deﬁne the logarithm of a non-zero complex num-
+ber.
+If z = reiθ, and we want the logarithm to be the inverse to the
+exponential, then it is natural to set
+log z = log r + iθ.
+Here and below, we use the convention that log r denotes the standard 1
+logarithm of the positive number r. The trouble with the above deﬁni-
+tion is that θ is unique only up to an integer multiple of 2π. However,
+1By the standard logarithm, we mean the natural logarithm of positive numbers that
+appears in elementary calculus.
+
+98
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+for given z we can ﬁx a choice of θ, and if z varies only a little, this
+determines the corresponding choice of θ uniquely (assuming we require
+that θ varies continuously with z). Thus “locally” we can give an unam-
+biguous deﬁnition of the logarithm, but this will not work “globally.” For
+example, if z starts at 1, and then winds around the origin and returns
+to 1, the logarithm does not return to its original value, but rather diﬀers
+by an integer multiple of 2πi, and therefore is not “single-valued.” To
+make sense of the logarithm as a single-valued function, we must restrict
+the set on which we deﬁne it. This is the so-called choice of a branch
+or sheet of the logarithm.
+Our discussion of simply connected domains given above leads to a
+natural global deﬁnition of a branch of the logarithm function.
+Theorem 6.1 Suppose that Ωis simply connected with 1 ∈Ω, and 0 /∈
+Ω. Then in Ωthere is a branch of the logarithm F(z) = logΩ(z) so that
+(i)
+F is holomorphic in Ω,
+(ii)
+eF(z) = z for all z ∈Ω,
+(iii)
+F(r) = log r whenever r is a real number and near 1.
+In other words, each branch logΩ(z) is an extension of the standard
+logarithm deﬁned for positive numbers.
+Proof.
+We shall construct F as a primitive of the function 1/z. Since
+0 /∈Ω, the function f(z) = 1/z is holomorphic in Ω. We deﬁne
+logΩ(z) = F(z) =
+
+γ
+f(w) dw ,
+where γ is any curve in Ωconnecting 1 to z. Since Ωis simply connected,
+this deﬁnition does not depend on the path chosen. Arguing as in the
+proof of Theorem 5.2, we ﬁnd that F is holomorphic and F ′(z) = 1/z
+for all z ∈Ω.
+This proves (i).
+To prove (ii), it suﬃces to show that
+ze−F(z) = 1. For that, we diﬀerentiate the left-hand side, obtaining
+d
+dz
+
+ze−F(z)
+= e−F(z) −zF ′(z)e−F(z) = (1 −zF ′(z))e−F(z) = 0.
+Since Ωis connected we conclude, by Corollary 3.4 in Chapter 1, that
+ze−F(z) is constant. Evaluating this expression at z = 1, and noting that
+F(1) = 0, we ﬁnd that this constant must be 1.
+Finally, if r is real and close to 1 we can choose as a path from 1 to r
+a line segment on the real axis so that
+F(r) =
+ r
+1
+dx
+x = log r,
+
+6. The complex logarithm
+99
+by the usual formula for the standard logarithm. This completes the
+proof of the theorem.
+For example, in the slit plane Ω= C −{(−∞, 0]} we have the princi-
+pal branch of the logarithm
+log z = log r + iθ
+where z = reiθ with |θ| < π. (Here we drop the subscript Ω, and write
+simply log z.) To prove this, we use the path of integration γ shown in
+Figure 8.
+0
+1
+r
+z = reiθ
+Figure 8. Path of integration for the principal branch of the logarithm
+If z = reiθ with |θ| < π, the path consists of the line segment from 1
+to r and the arc η from r to z. Then
+log z =
+ r
+1
+dx
+x +
+
+η
+dw
+w
+= log r +
+ θ
+0
+ireit
+reit dt
+= log r + iθ.
+An important observation is that in general
+log(z1z2)̸ = log z1 + log z2.
+For example, if z1 = e2πi/3 = z2, then for the principal branch of the
+logarithm, we have
+log z1 = log z2 = 2πi
+3 ,
+
+100
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+and since z1z2 = e−2πi/3 we have
+−2πi
+3
+= log(z1z2)̸ = log z1 + log z2.
+Finally, for the principal branch of the logarithm the following Taylor
+expansion holds:
+(6)
+log(1 + z) = z −z2
+2 + z3
+3 −· · · = −
+∞
+
+n=1
+(−1)n zn
+n
+for |z| < 1.
+Indeed, the derivative of both sides equals 1/(1 + z), so that they diﬀer
+by a constant. Since both sides are equal to 0 at z = 0 this constant
+must be 0, and we have proved the desired Taylor expansion.
+Having deﬁned a logarithm on a simply connected domain, we can
+now deﬁne the powers zα for any α ∈C. If Ωis simply connected with
+1 ∈Ωand 0 /∈Ω, we choose the branch of the logarithm with log 1 = 0
+as above, and deﬁne
+zα = eα log z.
+Note that 1α = 1, and that if α = 1/n, then
+(z1/n)n =
+n
+
+k=1
+e
+1
+n log z = e
+ n
+k=1
+1
+n log z = e
+n
+n log z = elog z = z.
+We know that every non-zero complex number w can be written as
+w = ez. A generalization of this fact is given in the next theorem, which
+discusses the existence of log f(z) whenever f does not vanish.
+Theorem 6.2 If f is a nowhere vanishing holomorphic function in a
+simply connected region Ω, then there exists a holomorphic function g on
+Ωsuch that
+f(z) = eg(z).
+The function g(z) in the theorem can be denoted by log f(z), and deter-
+mines a “branch” of that logarithm.
+Proof.
+Fix a point z0 in Ω, and deﬁne a function
+g(z) =
+
+γ
+f ′(w)
+f(w) dw + c0,
+
+7. Fourier series and harmonic functions
+101
+where γ is any path in Ωconnecting z0 to z, and c0 is a complex number
+so that ec0 = f(z0). This deﬁnition is independent of the path γ since Ω
+is simply connected. Arguing as in the proof of Theorem 2.1, Chapter 2,
+we ﬁnd that g is holomorphic with
+g′(z) = f ′(z)
+f(z) ,
+and a simple calculation gives
+d
+dz
+
+f(z)e−g(z)
+= 0 ,
+so that f(z)e−g(z) is constant. Evaluating this expression at z0 we ﬁnd
+f(z0)e−c0 = 1, so that f(z) = eg(z) for all z ∈Ω, and the proof is com-
+plete.
+7 Fourier series and harmonic functions
+In Chapter 4 we shall describe some interesting connections between com-
+plex function theory and Fourier analysis on the real line. The motivation
+for this study comes in part from the simple and direct relation between
+Fourier series on the circle and power series expansions of holomorphic
+functions in the disc, which we now investigate.
+Suppose that f is holomorphic in a disc DR(z0), so that f has a power
+series expansion
+f(z) =
+∞
+
+n=0
+an(z −z0)n
+that converges in that disc.
+Theorem 7.1 The coeﬃcients of the power series expansion of f are
+given by
+an =
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−inθ dθ
+for all n ≥0 and 0 < r < R. Moreover,
+0 =
+1
+2πrn
+ 2π
+0
+f(z0 + reiθ)e−inθ dθ
+whenever n < 0.

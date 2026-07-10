@@ -1,0 +1,300 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.1 Goursat’s theorem
+직전 소단원: 「1.4 Exercises」
+[본문]
+2 Cauchy’s Theorem and Its
+Applications
+The solution of a large number of problems can be
+reduced, in the last analysis, to the evaluation of def-
+inite integrals; thus mathematicians have been much
+occupied with this task... However, among many re-
+sults obtained, a number were initially discovered by
+the aid of a type of induction based on the passage
+from real to imaginary.
+Often passage of this kind
+led directly to remarkable results. Nevertheless this
+part of the theory, as has been observed by Laplace,
+is subject to various diﬃculties...
+After having reﬂected on this subject and brought
+together various results mentioned above, I hope to
+establish the passage from the real to the imaginary
+based on a direct and rigorous analysis; my researches
+have thus led me to the method which is the object of
+this memoir...
+A. L. Cauchy, 1827
+In the previous chapter, we discussed several preliminary ideas in com-
+plex analysis: open sets in C, holomorphic functions, and integration
+along curves. The ﬁrst remarkable result of the theory exhibits a deep
+connection between these notions.
+Loosely stated, Cauchy’s theorem
+says that if f is holomorphic in an open set Ωand γ ⊂Ωis a closed
+curve whose interior is also contained in Ωthen
+(1)
+
+γ
+f(z) dz = 0.
+Many results that follow, and in particular the calculus of residues, are
+related in one way or another to this fact.
+A precise and general formulation of Cauchy’s theorem requires deﬁn-
+ing unambiguously the “interior” of a curve, and this is not always an
+easy task. At this early stage of our study, we shall make use of the
+device of limiting ourselves to regions whose boundaries are curves that
+are “toy contours.” As the name suggests, these are closed curves whose
+visualization is so simple that the notion of their interior will be unam-
+
+33
+biguous, and the proof of Cauchy’s theorem in this setting will be quite
+direct. For many applications, it will suﬃce to restrict ourselves to these
+types of curves. At a later stage, we take up the questions related to
+more general curves, their interiors, and the extended form of Cauchy’s
+theorem.
+Our initial version of Cauchy’s theorem begins with the observation
+that it suﬃces that f have a primitive in Ω, by Corollary 3.3 in Chapter 1.
+The existence of such a primitive for toy contours will follow from a
+theorem of Goursat (which is itself a simple special case)1 that asserts
+that if f is holomorphic in an open set that contains a triangle T and its
+interior, then
+
+T
+f(z) dz = 0.
+It is noteworthy that this simple case of Cauchy’s theorem suﬃces to
+prove some of its more complicated versions. From there, we can prove
+the existence of primitives in the interior of some simple regions, and
+therefore prove Cauchy’s theorem in that setting. As a ﬁrst application
+of this viewpoint, we evaluate several real integrals by using appropriate
+toy contours.
+The above ideas also lead us to a central result of this chapter, the
+Cauchy integral formula; this states that if f is holomorphic in an open
+set containing a circle C and its interior, then for all z inside C,
+f(z) =
+1
+2πi
+
+C
+f(ζ)
+ζ −z dζ.
+Diﬀerentiation of this identity yields other integral formulas, and in
+particular we obtain the regularity of holomorphic functions.
+This is
+remarkable, since holomorphicity assumed only the existence of the ﬁrst
+derivative, and yet we obtain as a consequence the existence of derivatives
+of all orders. (An analogous statement is decisively false in the case of
+real variables!)
+The theory developed up to that point already has a number of note-
+worthy consequences:
+• The property at the base of “analytic continuation,” namely that a
+holomorphic function is determined by its restriction to any open
+subset of its domain of deﬁnition. This is a consequence of the fact
+that holomorphic functions have power series expansions.
+1Goursat’s result came after Cauchy’s theorem, and its interest is the technical fact
+that its proof requires only the existence of the complex derivative at each point, and not
+its continuity. For the earlier proof, see Exercise 5.
+
+34
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+• Liouville’s theorem, which yields a quick proof of the fundamental
+theorem of algebra.
+• Morera’s theorem, which gives a simple integral characterization
+of holomorphic functions, and shows that these functions are pre-
+served under uniform limits.
+1 Goursat’s theorem
+Corollary 3.3 in the previous chapter says that if f has a primitive in an
+open set Ω, then
+
+γ
+f(z) dz = 0
+for any closed curve γ in Ω. Conversely, if we can show that the above
+relation holds for some types of curves γ, then a primitive will exist. Our
+starting point is Goursat’s theorem, from which in eﬀect we shall deduce
+most of the other results in this chapter.
+Theorem 1.1 If Ωis an open set in C, and T ⊂Ωa triangle whose
+interior is also contained in Ω, then
+
+T
+f(z) dz = 0
+whenever f is holomorphic in Ω.
+Proof.
+We call T (0) our original triangle (with a ﬁxed orientation
+which we choose to be positive), and let d(0) and p(0) denote the diame-
+ter and perimeter of T (0), respectively. The ﬁrst step in our construction
+consists of bisecting each side of the triangle and connecting the mid-
+points. This creates four new smaller triangles, denoted T (1)
+1
+, T (1)
+2
+, T (1)
+3
+,
+and T (1)
+4
+that are similar to the original triangle. The construction and
+orientation of each triangle are illustrated in Figure 1. The orientation
+is chosen to be consistent with that of the original triangle, and so after
+cancellations arising from integrating over the same side in two opposite
+directions, we have
+(2)
+
+T (0) f(z) dz =
+
+T (1)
+1
+f(z) dz +
+
+T (1)
+2
+f(z) dz +
+
+T (1)
+3
+f(z) dz +
+
+T (1)
+4
+f(z) dz.
+For some j we must have
+
+
+T (0) f(z) dz
+ ≤4
+
+
+T (1)
+j
+f(z) dz
+,
+
+1. Goursat’s theorem
+35
+T (1)
+2
+T (1)
+1
+T (1)
+3
+T (1)
+4
+T (0)
+Figure 1. Bisection of T (0)
+for otherwise (2) would be contradicted.
+We choose a triangle that
+satisﬁes this inequality, and rename it T (1).
+Observe that if d(1) and
+p(1) denote the diameter and perimeter of T (1), respectively, then d(1) =
+(1/2)d(0) and p(1) = (1/2)p(0). We now repeat this process for the trian-
+gle T (1), bisecting it into four smaller triangles. Continuing this process,
+we obtain a sequence of triangles
+T (0), T (1), . . . , T (n), . . .
+with the properties that
+
+
+T (0) f(z) dz
+ ≤4n
+
+
+T (n) f(z) dz
+
+and
+d(n) = 2−nd(0),
+p(n) = 2−np(0)
+where d(n) and p(n) denote the diameter and perimeter of T (n), respec-
+tively. We also denote by T (n) the solid closed triangle with boundary
+T (n), and observe that our construction yields a sequence of nested com-
+pact sets
+T (0) ⊃T (1) ⊃· · · ⊃T (n) ⊃· · ·
+whose diameter goes to 0. By Proposition 1.4 in Chapter 1, there exists
+a unique point z0 that belongs to all the solid triangles T (n). Since f is
+holomorphic at z0 we can write
+f(z) = f(z0) + f ′(z0)(z −z0) + ψ(z)(z −z0) ,
+where ψ(z) →0 as z →z0. Since the constant f(z0) and the linear func-
+tion f ′(z0)(z −z0) have primitives, we can integrate the above equality
+using Corollary 3.3 in the previous chapter, and obtain
+(3)
+
+T (n) f(z) dz =
+
+T (n) ψ(z)(z −z0) dz.
+
+36
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Now z0 belongs to the closure of the solid triangle T (n) and z to its
+boundary, so we must have |z −z0| ≤d(n), and using (3) we get, by (iii)
+in Proposition 3.1 of the previous chapter, the estimate
+
+
+T (n) f(z) dz
+ ≤ϵnd(n)p(n),
+where ϵn = supz∈T (n) |ψ(z)| →0 as n →∞. Therefore
+
+
+T (n) f(z) dz
+ ≤ϵn4−nd(0)p(0) ,
+which yields our ﬁnal estimate
+
+
+T (0) f(z) dz
+ ≤4n
+
+
+T (n) f(z) dz
+ ≤ϵnd(0)p(0).
+Letting n →∞concludes the proof since ϵn →0.
+Corollary 1.2 If f is holomorphic in an open set Ωthat contains a
+rectangle R and its interior, then
+
+R
+f(z) dz = 0.
+This is immediate since we ﬁrst choose an orientation as in Figure 2
+and note that
+
+R
+f(z) dz =
+
+T1
+f(z) dz +
+
+T2
+f(z) dz.
+T2
+T1
+R
+Figure 2. A rectangle as the union of two triangles
+
+2. Local existence of primitives and Cauchy’s theorem in a disc
+37
+2 Local existence of primitives and Cauchy’s theorem in
+a disc
+We ﬁrst prove the existence of primitives in a disc as a consequence of
+Goursat’s theorem.
+Theorem 2.1 A holomorphic function in an open disc has a primitive
+in that disc.
+Proof.
+After a translation, we may assume without loss of generality
+that the disc, say D, is centered at the origin. Given a point z ∈D,
+consider the piecewise-smooth curve that joins 0 to z ﬁrst by moving in
+the horizontal direction from 0 to ˜z where ˜z = Re(z), and then in the
+vertical direction from ˜z to z. We choose the orientation from 0 to z,
+and denote this polygonal line (which consists of at most two segments)
+by γz, as shown on Figure 3.
+γz
+0
+˜z
+z
+Figure 3. The polygonal line γz
+Deﬁne
+F(z) =
+
+γz
+f(w) dw.
+The choice of γz gives an unambiguous deﬁnition of the function F(z).
+We contend that F is holomorphic in D and F ′(z) = f(z). To prove this,
+ﬁx z ∈D and let h ∈C be so small that z + h also belongs to the disc.
+Now consider the diﬀerence
+F(z + h) −F(z) =
+
+γz+h
+f(w) dw −
+
+γz
+f(w) dw.

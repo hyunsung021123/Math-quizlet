@@ -1,0 +1,369 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 5. Entire Functions
+현재 소단원: 5.5 Hadamard’s factorization theorem
+직전 소단원: 「5.4 Weierstrass infinite products」
+[본문]
+5. Hadamard’s factorization theorem
+147
+f has the desired properties, and the proof of Weierstrass’s theorem is
+complete.
+5 Hadamard’s factorization theorem
+The theorem of this section combines the results relating the growth of
+a function to the number of zeros it possesses, and the above product
+theorem. Weierstrass’s theorem states that a function that vanishes at
+the points a1, a2, . . . takes the form
+eg(z)zm
+∞
+
+n=1
+En(z/an).
+Hadamard reﬁned this result by showing that in the case of functions
+of ﬁnite order, the degree of the canonical factors can be taken to be
+constant, and g is then a polynomial.
+Recall that an entire function has an order of growth ≤ρ if
+|f(z)| ≤AeB|z|ρ ,
+and that the order of growth ρ0 of f is the inﬁmum of all such ρ’s.
+A basic result we proved earlier was that if f has order of growth ≤ρ,
+then
+n(r) ≤Crρ,
+for all large r,
+and if a1, a2, . . . are the non-zero zeros of f, and s > ρ, then
+
+|an|−s < ∞.
+Theorem 5.1 Suppose f is entire and has growth order ρ0. Let k be the
+integer so that k ≤ρ0 < k + 1. If a1, a2, . . . denote the (non-zero) zeros
+of f, then
+f(z) = eP(z)zm
+∞
+
+n=1
+Ek(z/an),
+where P is a polynomial of degree ≤k, and m is the order of the zero of
+f at z = 0.
+Main lemmas
+Here we gather a few lemmas needed in the proof of Hadamard’s theorem.
+
+148
+Chapter 5. ENTIRE FUNCTIONS
+Lemma 5.2 The canonical products satisfy
+|Ek(z)| ≥e−c|z|k+1
+if |z| ≤1/2
+and
+|Ek(z)| ≥|1 −z| e−c′|z|k
+if |z| ≥1/2.
+Proof.
+If |z| ≤1/2 we can use the power series to deﬁne the logarithm
+of 1 −z, so that
+Ek(z) = elog(1−z)+ k
+n=1 zn/n = e− ∞
+n=k+1 zn/n = ew.
+Since |ew| ≥e−|w| and |w| ≤c|z|k+1, the ﬁrst part of the lemma follows.
+For the second part, simply observe that if |z| ≥1/2, then
+|Ek(z)| = |1 −z||ez+z2/2+···+zk/k|,
+and that there exists c′ > 0 such that
+|ez+z2/2+···+zk/k| ≥e−|z+z2/2+···+zk/k| ≥e−c′|z|k.
+The inequality in the lemma when |z| ≥1/2 then follows from these
+observations.
+The key to the proof of Hadamard’s theorem consists of ﬁnding a lower
+bound for the product of the canonical factors when z stays away from
+the zeros {an}. Therefore, we shall ﬁrst estimate the product from below,
+in the complement of small discs centered at these points.
+Lemma 5.3 For any s with ρ0 < s < k + 1, we have
+
+∞
+
+n=1
+Ek(z/an)
+ ≥e−c|z|s,
+except possibly when z belongs to the union of the discs centered at an of
+radius |an|−k−1, for n = 1, 2, 3, . . ..
+Proof.
+The proof this lemma is a little subtle. First, we write
+∞
+
+n=1
+Ek(z/an) =
+
+|an|≤2|z|
+Ek(z/an)
+
+|an|>2|z|
+Ek(z/an).
+
+5. Hadamard’s factorization theorem
+149
+For the second product the estimate asserted above holds with no re-
+striction on z. Indeed, by the previous lemma
+
+
+|an|>2|z|
+Ek(z/an)
+
+=
+
+|an|>2|z|
+|Ek(z/an)|
+≥
+
+|an|>2|z|
+e−c|z/an|k+1
+≥e−c|z|k+1 
+|an|>2|z| |an|−k−1.
+But |an| > 2|z| and s < k + 1, so we must have
+|an|−k−1 = |an|−s|an|s−k−1 ≤C|an|−s|z|s−k−1.
+Therefore, the fact that  |an|−s converges implies that
+
+
+|an|>2|z|
+Ek(z/an)
+
+≥e−c|z|s
+for some c > 0.
+To estimate the ﬁrst product, we use the second part of Lemma 5.2,
+and write
+(5)
+
+
+|an|≤2|z|
+Ek(z/an)
+
+≥
+
+|an|≤2|z|
+1 −z
+an
+
+
+|an|≤2|z|
+e−c′|z/an|k.
+We now note that
+
+|an|≤2|z|
+e−c′|z/an|k = e−c′|z|k 
+|an|≤2|z| |an|−k,
+and again, we have |an|−k = |an|−s|an|s−k ≤C|an|−s|z|s−k, thereby prov-
+ing that
+
+|an|≤2|z|
+e−c′|z/an|k ≥e−c|z|s.
+It is the estimate on the ﬁrst product on the right-hand side of (5)
+which requires the restriction on z imposed in the statement of the
+
+150
+Chapter 5. ENTIRE FUNCTIONS
+lemma. Indeed, whenever z does not belong to a disc of radius |an|−k−1
+centered at an, we must have |an −z| ≥|an|−k−1. Therefore
+
+|an|≤2|z|
+1 −z
+an
+ =
+
+|an|≤2|z|
+
+an −z
+an
+
+≥
+
+|an|≤2|z|
+|an|−k−1|an|−1
+=
+
+|an|≤2|z|
+|an|−k−2.
+Finally, the estimate for the ﬁrst product follows from the fact that
+(k + 2)
+
+|an|≤2|z|
+log |an| ≤(k + 2)n(2|z|) log 2|z|
+≤c|z|s log 2|z|
+≤c′|z|s′,
+for any s′ > s, and the second inequality follows because n(2|z|) ≤c|z|s
+by Theorem 2.1. Since we restricted s to satisfy s > ρ0, we can take
+an initial s suﬃciently close to ρ0, so that the assertion of the lemma is
+established (with s being replaced by s′).
+Corollary 5.4 There
+exists
+a
+sequence
+of
+radii,
+r1, r2, . . .,
+with
+rm →∞, such that
+
+∞
+
+n=1
+Ek(z/an)
+ ≥e−c|z|s
+for |z| = rm.
+Proof.
+Since  |an|−k−1 < ∞, there exists an integer N so that
+∞
+
+n=N
+|an|−k−1 < 1/10.
+Therefore, given any two consecutive large integers L and L + 1, we can
+ﬁnd a positive number r with L ≤r ≤L + 1, such that the circle of
+radius r centered at the origin does not intersect the forbidden discs of
+Lemma 5.3. For otherwise, the union of the intervals
+In =
+
+|an| −
+1
+|an|k+1 , |an| +
+1
+|an|k+1
+
+
+5. Hadamard’s factorization theorem
+151
+(which are of length 2|an|−k−1) would cover all the interval [L, L + 1].
+(See Figure 1.) This would imply 2 ∞
+n=N |an|−k−1 ≥1, which is a con-
+tradiction. We can then apply the previous lemma with |z| = r to con-
+clude the proof of the corollary.
+I2
+I3
+a1
+I1
+a2
+In
+a3
+an
+Figure 1. The intervals In
+Proof of Hadamard’s theorem
+Let
+E(z) = zm
+∞
+
+n=1
+Ek(z/an).
+To prove that E is entire, we repeat the argument in the proof of Theo-
+rem 4.1; we take into account that by Lemma 4.2
+|1 −Ek(z/an)| ≤c
+
+z
+an
+
+k+1
+for all large n,
+and that the series  |an|−k−1 converges. (Recall ρ0 < s < k + 1.) More-
+over, E has the zeros of f, therefore f/E is holomorphic and nowhere
+vanishing. Hence
+f(z)
+E(z) = eg(z)
+
+152
+Chapter 5. ENTIRE FUNCTIONS
+for some entire function g. By the fact that f has growth order ρ0, and
+because of the estimate from below for E obtained in Corollary 5.4, we
+have
+eRe(g(z)) =
+
+f(z)
+E(z)
+ ≤c′ec|z|s
+for |z| = rm. This proves that
+Re(g(z)) ≤C|z|s,
+for |z| = rm.
+The proof of Hadamard’s theorem is therefore complete if we can estab-
+lish the following ﬁnal lemma.
+Lemma 5.5 Suppose g is entire and u = Re(g) satisﬁes
+u(z) ≤Crs
+whenever |z| = r
+for a sequence of positive real numbers r that tends to inﬁnity. Then g
+is a polynomial of degree ≤s.
+Proof.
+We can expand g in a power series centered at the origin
+g(z) =
+∞
+
+n=0
+anzn.
+We have already proved in the last section of Chapter 3 (as a simple
+application of Cauchy’s integral formulas) that
+(6)
+1
+2π
+ 2π
+0
+g(reiθ)e−inθ dθ =
+
+anrn
+if n ≥0
+0
+if n < 0.
+By taking complex conjugates we ﬁnd that
+(7)
+1
+2π
+ 2π
+0
+g(reiθ)e−inθ dθ = 0
+whenever n > 0, and since 2u = g + g we add equations (6) and (7) to
+obtain
+anrn = 1
+π
+ 2π
+0
+u(reiθ)e−inθ dθ,
+whenever n > 0.
+For n = 0 we can simply take real parts of both sides of (6) to ﬁnd that
+2Re(a0) = 1
+π
+ 2π
+0
+u(reiθ) dθ.
+
+6. Exercises
+153
+Now we recall the simple fact that whenever n̸ = 0, the integral of e−inθ
+over any circle centered at the origin vanishes. Therefore
+an =
+1
+πrn
+ 2π
+0
+[u(reiθ) −Crs]e−inθ dθ
+when n > 0,
+hence
+|an| ≤
+1
+πrn
+ 2π
+0
+[Crs −u(reiθ)] dθ ≤2Crs−n −2Re(a0)r−n.
+Letting r tend to inﬁnity along the sequence given in the hypothesis of
+the lemma proves that an = 0 for n > s. This completes the proof of the
+lemma and of Hadamard’s theorem.
+6 Exercises
+1.
+Give another proof of Jensen’s formula in the unit disc using the functions
+(called Blaschke factors)
+ψα(z) = α −z
+1 −αz .
+[Hint: The function f/(ψz1 · · · ψzN ) is nowhere vanishing.]
+2. Find the order of growth of the following entire functions:
+(a) p(z) where p is a polynomial.
+(b) ebzn for b̸ = 0.
+(c) eez.
+3. Show that if τ is ﬁxed with Im(τ) > 0, then the Jacobi theta function
+Θ(z|τ) =
+∞
+
+n=−∞
+eπin2τe2πinz
+is of order 2 as a function of z. Further properties of Θ will be studied in Chap-
+ter 10.
+[Hint: −n2t + 2n|z| ≤−n2t/2 when t > 0 and n ≥4|z|/t.]
+4. Let t > 0 be given and ﬁxed, and deﬁne F(z) by
+F(z) =
+∞
+
+n=1
+(1 −e−2πnte2πiz).
+Note that the product deﬁnes an entire function of z.

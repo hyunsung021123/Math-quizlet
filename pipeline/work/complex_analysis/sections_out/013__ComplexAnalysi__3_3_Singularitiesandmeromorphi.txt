@@ -1,0 +1,328 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.3 Singularities and meromorphic functions
+직전 소단원: 「3.2 The residue formula」
+[본문]
+3. Singularities and meromorphic functions
+83
+and
+| cosh πz| =
+
+eπz + e−πz
+2
+
+≥1
+2
+ |eπz| −|e−πz|
+
+≥1
+2(eπR −e−πR)
+→∞
+as R →∞,
+which shows that the integral over the vertical segment on the right goes
+to 0 as R →∞. A similar argument shows that the integral of f over
+the vertical segment on the left also goes to 0 as R →∞. Finally, we see
+that if I denotes the integral we wish to calculate, then the integral of f
+over the top side of the rectangle (with the orientation from right to left)
+is simply −e4πξI where we have used the fact that cosh πζ is periodic
+with period 2i. In the limit as R tends to inﬁnity, the residue formula
+gives
+I −e4πξI = 2πi
+eπξ
+πi −e3πξ
+πi
+
+= −2e2πξ(eπξ −e−πξ),
+and since 1 −e4πξ = −e2πξ(e2πξ −e−2πξ), we ﬁnd that
+I = 2 eπξ −e−πξ
+e2πξ −e−2πξ = 2
+eπξ −e−πξ
+(eπξ −e−πξ)(eπξ + e−πξ) =
+2
+eπξ + e−πξ =
+1
+cosh πξ
+as claimed.
+A similar argument actually establishes the following formula:
+ ∞
+−∞
+e−2πixξ
+sin πa
+cosh πx + cos πa dx = 2 sinh 2πaξ
+sinh 2πξ
+whenever 0 < a < 1, and where sinh z = (ez −e−z)/2. We have proved
+above the particular case a = 1/2. This identity can be used to determine
+an explicit formula for the Poisson kernel for the strip (see Problem 3 in
+Chapter 5 of Book I), or to prove the sum of two squares theorem, as we
+shall see in Chapter 10.
+3 Singularities and meromorphic functions
+Returning to Section 1, we see that we have described the analytical
+character of a function near a pole. We now turn our attention to the
+other types of isolated singularities.
+
+84
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+Let f be a function holomorphic in an open set Ωexcept possibly at
+one point z0 in Ω. If we can deﬁne f at z0 in such a way that f becomes
+holomorphic in all of Ω, we say that z0 is a removable singularity for f.
+Theorem 3.1 (Riemann’s theorem on removable singularities)
+Suppose that f is holomorphic in an open set Ωexcept possibly at a point
+z0 in Ω. If f is bounded on Ω−{z0}, then z0 is a removable singularity.
+Proof.
+Since the problem is local we may consider a small disc D
+centered at z0 and whose closure is contained in Ω. Let C denote the
+boundary circle of that disc with the usual positive orientation.
+We
+shall prove that if z ∈D and z̸ = z0, then under the assumptions of the
+theorem we have
+(4)
+f(z) =
+1
+2πi
+
+C
+f(ζ)
+ζ −z dζ.
+Since an application of Theorem 5.4 in the previous chapter proves that
+the right-hand side of equation (4) deﬁnes a holomorphic function on
+all of D that agrees with f(z) when z̸ = z0, this give us the desired
+extension.
+To prove formula (4) we ﬁx z ∈D with z̸ = z0 and use the familiar toy
+contour illustrated in Figure 4.
+z0
+z
+Figure 4. The multiple keyhole contour in the proof of Riemann’s the-
+orem
+The multiple keyhole avoids the two points z and z0. Letting the sides
+of the corridors get closer to each other, and ﬁnally overlap, in the limit
+
+3. Singularities and meromorphic functions
+85
+we get a cancellation:
+
+C
+f(ζ)
+ζ −z dζ +
+
+γϵ
+f(ζ)
+ζ −z dζ +
+
+γ′
+ϵ
+f(ζ)
+ζ −z dζ = 0 ,
+where γϵ and γ′
+ϵ are small circles of radius ϵ with negative orientation
+and centered at z and z0 respectively. Copying the argument used in the
+proof of the Cauchy integral formula in Section 4 of Chapter 2, we ﬁnd
+that
+
+γϵ
+f(ζ)
+ζ −z dζ = −2πif(z).
+For the second integral, we use the assumption that f is bounded and
+that since ϵ is small, ζ stays away from z, and therefore
+
+
+γ′
+ϵ
+f(ζ)
+ζ −z dζ
+ ≤Cϵ.
+Letting ϵ tend to 0 proves our contention and concludes the proof of the
+extension formula (4).
+Surprisingly, we may deduce from Riemann’s theorem a characteriza-
+tion of poles in terms of the behavior of the function in a neighborhood
+of a singularity.
+Corollary 3.2 Suppose that f has an isolated singularity at the point
+z0. Then z0 is a pole of f if and only if |f(z)| →∞as z →z0.
+Proof.
+If z0 is a pole, then we know that 1/f has a zero at z0, and
+therefore |f(z)| →∞as z →z0. Conversely, suppose that this condition
+holds. Then 1/f is bounded near z0, and in fact 1/|f(z)| →0 as z →z0.
+Therefore, 1/f has a removable singularity at z0 and must vanish there.
+This proves the converse, namely that z0 is a pole.
+Isolated singularities belong to one of three categories:
+• Removable singularities (f bounded near z0)
+• Pole singularities (|f(z)| →∞as z →z0)
+• Essential singularities.
+By default, any singularity that is not removable or a pole is deﬁned
+to be an essential singularity.
+For example, the function e1/z dis-
+cussed at the very beginning of Section 1 has an essential singularity at
+
+86
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+0. We already observed the wild behavior of this function near the ori-
+gin. Contrary to the controlled behavior of a holomorphic function near
+a removable singularity or a pole, it is typical for a holomorphic function
+to behave erratically near an essential singularity.
+The next theorem
+clariﬁes this.
+Theorem 3.3 (Casorati-Weierstrass) Suppose f is holomorphic in
+the punctured disc Dr(z0) −{z0} and has an essential singularity at z0.
+Then, the image of Dr(z0) −{z0} under f is dense in the complex plane.
+Proof.
+We argue by contradiction. Assume that the range of f is not
+dense, so that there exists w ∈C and δ > 0 such that
+|f(z) −w| > δ
+for all z ∈Dr(z0) −{z0}.
+We may therefore deﬁne a new function on Dr(z0) −{z0} by
+g(z) =
+1
+f(z) −w ,
+which is holomorphic on the punctured disc and bounded by 1/δ. Hence
+g has a removable singularity at z0 by Theorem 3.1. If g(z0)̸ = 0, then
+f(z) −w is holomorphic at z0, which contradicts the assumption that z0
+is an essential singularity. In the case that g(z0) = 0, then f(z) −w has
+a pole at z0 also contradicting the nature of the singularity at z0. The
+proof is complete.
+In fact, Picard proved a much stronger result. He showed that under
+the hypothesis of the above theorem, the function f takes on every com-
+plex value inﬁnitely many times with at most one exception. Although
+we shall not give a proof of this remarkable result, a simpler version of
+it will follow from our study of entire functions in a later chapter. See
+Exercise 11 in Chapter 5.
+We now turn to functions with only isolated singularities that are
+poles. A function f on an open set Ωis meromorphic if there exists a
+sequence of points {z0, z1, z2, . . .} that has no limit points in Ω, and such
+that
+(i) the function f is holomorphic in Ω−{z0, z1, z2, . . .}, and
+(ii) f has poles at the points {z0, z1, z2, . . .}.
+It is also useful to discuss functions that are meromorphic in the ex-
+tended complex plane. If a function is holomorphic for all large values of
+
+3. Singularities and meromorphic functions
+87
+z, we can describe its behavior at inﬁnity using the tripartite distinction
+we have used to classify singularities at ﬁnite values of z. Thus, if f is
+holomorphic for all large values of z, we consider F(z) = f(1/z), which
+is now holomorphic in a deleted neighborhood of the origin. We say that
+f has a pole at inﬁnity if F has a pole at the origin. Similarly, we
+can speak of f having an essential singularity at inﬁnity, or a re-
+movable singularity (hence holomorphic) at inﬁnity in terms of the
+corresponding behavior of F at 0. A meromorphic function in the com-
+plex plane that is either holomorphic at inﬁnity or has a pole at inﬁnity
+is said to be meromorphic in the extended complex plane.
+At this stage we return to the principle mentioned at the beginning of
+the chapter. Here we can see it in its simplest form.
+Theorem 3.4 The meromorphic functions in the extended complex plane
+are the rational functions.
+Proof.
+Suppose that f is meromorphic in the extended plane. Then
+f(1/z) has either a pole or a removable singularity at 0, and in either
+case it must be holomorphic in a deleted neighborhood of the origin, so
+that the function f can have only ﬁnitely many poles in the plane, say
+at z1, . . . , zn. The idea is to subtract from f its principal parts at all its
+poles including the one at inﬁnity. Near each pole zk ∈C we can write
+f(z) = fk(z) + gk(z) ,
+where fk(z) is the principal part of f at zk and gk is holomorphic in a
+(full) neighborhood of zk. In particular, fk is a polynomial in 1/(z −zk).
+Similarly, we can write
+f(1/z) = ˜f∞(z) + ˜g∞(z) ,
+where ˜g∞is holomorphic in a neighborhood of the origin and ˜f∞is the
+principal part of f(1/z) at 0, that is, a polynomial in 1/z. Finally, let
+f∞(z) = ˜f∞(1/z).
+We contend that the function H = f −f∞−n
+k=1 fk is entire and
+bounded. Indeed, near the pole zk we subtracted the principal part of f
+so that the function H has a removable singularity there. Also, H(1/z)
+is bounded for z near 0 since we subtracted the principal part of the
+pole at ∞. This proves our contention, and by Liouville’s theorem we
+conclude that H is constant. From the deﬁnition of H, we ﬁnd that f is
+a rational function, as was to be shown.
+Note that as a consequence, a rational function is determined up to a
+multiplicative constant by prescribing the locations and multiplicities of
+its zeros and poles.
+
+88
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+The Riemann sphere
+The extended complex plane, which consists of C and the point at inﬁnity,
+has a convenient geometric interpretation, which we brieﬂy discuss here.
+Consider the Euclidean space R3 with coordinates (X, Y, Z) where the
+XY -plane is identiﬁed with C. We denote by S the sphere centered at
+(0, 0, 1/2) and of radius 1/2; this sphere is of unit diameter and lies on
+top of the origin of the complex plane as pictured in Figure 5. Also, we
+let N = (0, 0, 1) denote the north pole of the sphere.
+N
+w
+W
+S
+C
+0
+Figure 5. The Riemann sphere S and stereographic projection
+Given any point W = (X, Y, Z) on S diﬀerent from the north pole, the
+line joining N and W intersects the XY -plane in a single point which
+we denote by w = x + iy; w is called the stereographic projection of
+W (see Figure 5). Conversely, given any point w in C, the line joining
+N and w = (x, y, 0) intersects the sphere at N and another point, which
+we call W. This geometric construction gives a bijective correspondence
+between points on the punctured sphere S −{N } and the complex plane;
+it is described analytically by the formulas
+x =
+X
+1 −Z
+and
+y =
+Y
+1 −Z ,
+giving w in terms of W, and
+X =
+x
+x2 + y2 + 1,
+Y =
+y
+x2 + y2 + 1,
+and
+Z =
+x2 + y2
+x2 + y2 + 1
+giving W in terms of w. Intuitively, we have wrapped the complex plane
+onto the punctured sphere S −{N }.
+
+4. The argument principle and applications
+89
+As the point w goes to inﬁnity in C (in the sense that |w| →∞) the
+corresponding point W on S comes arbitrarily close to N . This simple
+observation makes N a natural candidate for the so-called “point at
+inﬁnity.” Identifying inﬁnity with the point N on S, we see that the
+extended complex plane can be visualized as the full two-dimensional
+sphere S; this is the Riemann sphere. Since this construction takes
+the unbounded set C into the compact set S by adding one point, the
+Riemann sphere is sometimes called the one-point compactiﬁcation
+of C.
+An important consequence of this interpretation is the following: al-
+though the point at inﬁnity required special attention when considered
+separately from C, it now ﬁnds itself on equal footing with all other points
+on S. In particular, a meromorphic function on the extended complex
+plane can be thought of as a map from S to itself, where the image of a
+pole is now a tractable point on S, namely N . For these reasons (and
+others) the Riemann sphere provides good geometrical insight into the
+structure of C as well as the theory of meromorphic functions.
+4 The argument principle and applications
+We anticipate our discussion of the logarithm (in Section 6) with a few
+comments. In general, the function log f(z) is “multiple-valued” because
+it cannot be deﬁned unambiguously on the set where f(z)̸ = 0. However
+it is to be deﬁned, it must equal log |f(z)| + i arg f(z), where log |f(z)|
+is the usual real-variable logarithm of the positive quantity |f(z)| (and
+hence is deﬁned unambiguously), while arg f(z) is some determination
+of the argument (up to an additive integral multiple of 2π). Note that in
+any case, the derivative of log f(z) is f ′(z)/f(z) which is single-valued,
+and the integral
+
+γ
+f ′(z)
+f(z) dz
+can be interpreted as the change in the argument of f as z traverses
+the curve γ.
+Moreover, assuming the curve is closed, this change of
+argument is determined entirely by the zeros and poles of f inside γ. We
+now formulate this fact as a precise theorem.
+We begin with the observation that while the additivity formula
+log(f1f2) = log f1 + log f2
+fails in general (as we shall see below), the additivity can be restored
+to the corresponding derivatives.
+This is conﬁrmed by the following

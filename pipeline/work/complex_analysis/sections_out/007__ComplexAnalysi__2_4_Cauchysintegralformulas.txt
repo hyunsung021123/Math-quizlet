@@ -1,0 +1,498 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.4 Cauchy’s integral formulas
+직전 소단원: 「2.3 Evaluation of some integrals」
+[본문]
+4. Cauchy’s integral formulas
+45
+Next, note that
+f(z) = −iz
+z2 + E(z)
+where E(z) is bounded as z →0, while on γ+
+ϵ
+we have z = ϵeiθ and
+dz = iϵeiθdθ. Thus
+
+γ+
+ϵ
+1 −eiz
+z2
+dz →
+ 0
+π
+(−ii) dθ = −π
+as ϵ →0.
+Taking real parts then yields
+ ∞
+−∞
+1 −cos x
+x2
+dx = π.
+Since the integrand is even, the desired formula is proved.
+4 Cauchy’s integral formulas
+Representation formulas, and in particular integral representation formu-
+las, play an important role in mathematics, since they allow us to recover
+a function on a large set from its behavior on a smaller set. For example,
+we saw in Book I that a solution of the steady-state heat equation in the
+disc was completely determined by its boundary values on the circle via
+a convolution with the Poisson kernel
+(7)
+u(r, θ) = 1
+2π
+ 2π
+0
+Pr(θ −ϕ)u(1, ϕ) dϕ.
+In the case of holomorphic functions, the situation is analogous, which
+is not surprising since the real and imaginary parts of a holomorphic
+function are harmonic.3 Here, we will prove an integral representation
+formula in a manner that is independent of the theory of harmonic func-
+tions. In fact, it is also possible to recover the Poisson integral formula (7)
+as a consequence of the next theorem (see Exercises 11 and 12).
+Theorem 4.1 Suppose f is holomorphic in an open set that contains
+the closure of a disc D. If C denotes the boundary circle of this disc with
+the positive orientation, then
+f(z) =
+1
+2πi
+
+C
+f(ζ)
+ζ −z dζ
+for any point z ∈D.
+3This fact is an immediate consequence of the Cauchy-Riemann equations. We refer
+the reader to Exercise 11 in Chapter 1.
+
+46
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Proof.
+Fix z ∈D and consider the “keyhole” Γδ,ϵ which omits the
+point z as shown in Figure 10.
+Γδ,ϵ
+z
+C
+Figure 10. The keyhole Γδ,ϵ
+Here δ is the width of the corridor, and ϵ the radius of the small circle
+centered at z.
+Since the function F(ζ) = f(ζ)/(ζ −z) is holomorphic
+away from the point ζ = z, we have
+
+Γδ,ϵ
+F(ζ) dζ = 0
+by Cauchy’s theorem for the chosen toy contour.
+Now we make the
+corridor narrower by letting δ tend to 0, and use the continuity of F to
+see that in the limit, the integrals over the two sides of the corridor cancel
+out. The remaining part consists of two curves, the large boundary circle
+C with the positive orientation, and a small circle Cϵ centered at z of
+radius ϵ and oriented negatively, that is, clockwise. To see what happens
+to the integral over the small circle we write
+(8)
+F(ζ) = f(ζ) −f(z)
+ζ −z
++ f(z)
+ζ −z
+and note that since f is holomorphic the ﬁrst term on the right-hand
+side of (8) is bounded so that its integral over Cϵ goes to 0 as ϵ →0. To
+
+4. Cauchy’s integral formulas
+47
+conclude the proof, it suﬃces to observe that
+
+Cϵ
+f(z)
+ζ −z dζ = f(z)
+
+Cϵ
+dζ
+ζ −z
+= −f(z)
+ 2π
+0
+ϵie−it
+ϵe−it dt
+= −f(z)2πi ,
+so that in the limit we ﬁnd
+0 =
+
+C
+f(ζ)
+ζ −z dζ −2πif(z) ,
+as was to be shown.
+Remarks. Our earlier discussion of toy contours provides simple ex-
+tensions of the Cauchy integral formula; for instance, if f is holomorphic
+in an open set that contains a (positively oriented) rectangle R and its
+interior, then
+f(z) =
+1
+2πi
+
+R
+f(ζ)
+ζ −z dζ ,
+whenever z belongs to the interior of R. To establish this result, it suﬃces
+to repeat the proof of Theorem 4.1 replacing the “circular” keyhole by a
+“rectangular” keyhole.
+It should also be noted that the above integral vanishes when z is
+outside R, since in this case F(ζ) = f(ζ)/(ζ −z) is holomorphic inside
+R. Of course, a similar result also holds for the circle or any other toy
+contour.
+As a corollary to the Cauchy integral formula, we arrive at a second
+remarkable fact about holomorphic functions, namely their regularity.
+We also obtain further integral formulas expressing the derivatives of f
+inside the disc in terms of the values of f on the boundary.
+Corollary 4.2 If f is holomorphic in an open set Ω, then f has inﬁnitely
+many complex derivatives in Ω. Moreover, if C ⊂Ωis a circle whose
+interior is also contained in Ω, then
+f (n)(z) = n!
+2πi
+
+C
+f(ζ)
+(ζ −z)n+1 dζ
+for all z in the interior of C.
+
+48
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+We recall that, as in the above theorem, we take the circle C to have
+positive orientation.
+Proof.
+The proof is by induction on n, the case n = 0 being simply
+the Cauchy integral formula. Suppose that f has up to n −1 complex
+derivatives and that
+f (n−1)(z) = (n −1)!
+2πi
+
+C
+f(ζ)
+(ζ −z)n dζ.
+Now for h small, the diﬀerence quotient for f (n−1) takes the form
+(9)
+f (n−1)(z + h) −f (n−1)(z)
+h
+=
+(n −1)!
+2πi
+
+C
+f(ζ) 1
+h
+
+1
+(ζ −z −h)n −
+1
+(ζ −z)n
+
+dζ.
+We now recall that
+An −Bn = (A −B)[An−1 + An−2B + · · · + ABn−2 + Bn−1].
+With A = 1/(ζ −z −h) and B = 1/(ζ −z), we see that the term in
+brackets in equation (9) is equal to
+h
+(ζ −z −h)(ζ −z)[An−1 + An−2B + · · · + ABn−2 + Bn−1].
+But observe that if h is small, then z + h and z stay at a ﬁnite distance
+from the boundary circle C, so in the limit as h tends to 0, we ﬁnd that
+the quotient converges to
+(n −1)!
+2πi
+
+C
+f(ζ)
+
+1
+(ζ −z)2
+ 
+n
+(ζ −z)n−1
+
+dζ = n!
+2πi
+
+C
+f(ζ)
+(ζ −z)n+1 dζ ,
+which completes the induction argument and proves the theorem.
+From now on, we call the formulas of Theorem 4.1 and Corollary 4.2
+the Cauchy integral formulas.
+Corollary 4.3 (Cauchy inequalities) If f is holomorphic in an open
+set that contains the closure of a disc D centered at z0 and of radius R,
+then
+|f (n)(z0)| ≤n!∥f∥C
+Rn
+,
+where ∥f∥C = supz∈C |f(z)| denotes the supremum of |f| on the boundary
+circle C.
+
+4. Cauchy’s integral formulas
+49
+Proof.
+Applying the Cauchy integral formula for f (n)(z0), we obtain
+|f (n)(z0)| =
+
+n!
+2πi
+
+C
+f(ζ)
+(ζ −z0)n+1 dζ
+
+= n!
+2π
+
+ 2π
+0
+f(z0 + Reiθ)
+(Reiθ)n+1 Rieiθ dθ
+
+≤n!
+2π
+∥f∥C
+Rn 2π.
+Another striking consequence of the Cauchy integral formula is its
+connection with power series. In Chapter 1, we proved that a power series
+is holomorphic in the interior of its disc of convergence, and promised a
+proof of a converse, which is the content of the next theorem.
+Theorem 4.4 Suppose f is holomorphic in an open set Ω. If D is a
+disc centered at z0 and whose closure is contained in Ω, then f has a
+power series expansion at z0
+f(z) =
+∞
+
+n=0
+an(z −z0)n
+for all z ∈D, and the coeﬃcients are given by
+an = f (n)(z0)
+n!
+for all n ≥0.
+Proof.
+Fix z ∈D. By the Cauchy integral formula, we have
+(10)
+f(z) =
+1
+2πi
+
+C
+f(ζ)
+ζ −z dζ ,
+where C denotes the boundary of the disc and z ∈D. The idea is to
+write
+(11)
+1
+ζ −z =
+1
+ζ −z0 −(z −z0) =
+1
+ζ −z0
+1
+1 −
+
+z−z0
+ζ−z0
+,
+and use the geometric series expansion. Since ζ ∈C and z ∈D is ﬁxed,
+there exists 0 < r < 1 such that
+
+z −z0
+ζ −z0
+ < r,
+
+50
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+therefore
+(12)
+1
+1 −
+
+z−z0
+ζ−z0
+ =
+∞
+
+n=0
+z −z0
+ζ −z0
+n
+,
+where the series converges uniformly for ζ ∈C. This allows us to inter-
+change the inﬁnite sum with the integral when we combine (10), (11),
+and (12), thereby obtaining
+f(z) =
+∞
+
+n=0
+ 1
+2πi
+
+C
+f(ζ)
+(ζ −z0)n+1 dζ
+
+· (z −z0)n.
+This proves the power series expansion; further the use of the Cauchy in-
+tegral formulas for the derivatives (or simply diﬀerentiation of the series)
+proves the formula for an.
+Observe that since power series deﬁne indeﬁnitely (complex) diﬀer-
+entiable functions, the theorem gives another proof that a holomorphic
+function is automatically indeﬁnitely diﬀerentiable.
+Another important observation is that the power series expansion of
+f centered at z0 converges in any disc, no matter how large, as long
+as its closure is contained in Ω.
+In particular, if f is entire (that is,
+holomorphic on all of C), the theorem implies that f has a power series
+expansion around 0, say f(z) = ∞
+n=0 anzn, that converges in all of C.
+Corollary 4.5 (Liouville’s theorem) If f is entire and bounded, then
+f is constant.
+Proof.
+It suﬃces to prove that f ′ = 0, since C is connected, and we
+may then apply Corollary 3.4 in Chapter 1.
+For each z0 ∈C and all R > 0, the Cauchy inequalities yield
+|f ′(z0)| ≤B
+R
+where B is a bound for f. Letting R →∞gives the desired result.
+As an application of our work so far, we can give an elegant proof of
+the fundamental theorem of algebra.
+Corollary 4.6 Every non-constant polynomial P(z) = anzn + · · · + a0
+with complex coeﬃcients has a root in C.
+Proof.
+If P has no roots, then 1/P(z) is a bounded holomorphic
+function. To see this, we can of course assume that an̸ = 0, and write
+P(z)
+zn
+= an +
+
+an−1
+z
++ · · · + a0
+zn
+
+
+4. Cauchy’s integral formulas
+51
+whenever z̸ = 0. Since each term in the parentheses goes to 0 as |z| →∞
+we conclude that there exists R > 0 so that if c = |an|/2, then
+|P(z)| ≥c|z|n
+whenever |z| > R.
+In particular, P is bounded from below when |z| > R. Since P is contin-
+uous and has no roots in the disc |z| ≤R, it is bounded from below in
+that disc as well, thereby proving our claim.
+By Liouville’s theorem we then conclude that 1/P is constant. This
+contradicts our assumption that P is non-constant and proves the corol-
+lary.
+Corollary 4.7 Every polynomial P(z) = anzn + · · · + a0 of degree n ≥
+1 has precisely n roots in C. If these roots are denoted by w1, . . . , wn,
+then P can be factored as
+P(z) = an(z −w1)(z −w2) · · ·(z −wn).
+Proof.
+By the previous result P has a root, say w1. Then, writing
+z = (z −w1) + w1, inserting this expression for z in P, and using the
+binomial formula we get
+P(z) = bn(z −w1)n + · · · + b1(z −w1) + b0,
+where b0, . . . , bn−1 are new coeﬃcients, and bn = an. Since P(w1) = 0,
+we ﬁnd that b0 = 0, therefore
+P(z) = (z −w1)
+
+bn(z −w1)n−1 + · · · + b1
+
+= (z −w1)Q(z),
+where Q is a polynomial of degree n −1. By induction on the degree of
+the polynomial, we conclude that P(z) has n roots and can be expressed
+as
+P(z) = c(z −w1)(z −w2) · · · (z −wn)
+for some c ∈C. Expanding the right-hand side, we realize that the coef-
+ﬁcient of zn is c and therefore c = an as claimed.
+Finally, we end this section with a discussion of analytic continuation
+(the third of the “miracles” we mentioned in the introduction). It states
+that the “genetic code” of a holomorphic function is determined (that
+is, the function is ﬁxed) if we know its values on appropriate arbitrarily
+small subsets. Note that in the theorem below, Ωis assumed connected.
+
+52
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+Theorem 4.8 Suppose f is a holomorphic function in a region Ωthat
+vanishes on a sequence of distinct points with a limit point in Ω. Then
+f is identically 0.
+In other words, if the zeros of a holomorphic function f in the con-
+nected open set Ωaccumulate in Ω, then f = 0.
+Proof.
+Suppose that z0 ∈Ωis a limit point for the sequence {wk}∞
+k=1
+and that f(wk) = 0. First, we show that f is identically zero in a small
+disc containing z0.
+For that, we choose a disc D centered at z0 and
+contained in Ω, and consider the power series expansion of f in that disc
+f(z) =
+∞
+
+n=0
+an(z −z0)n.
+If f is not identically zero, there exists a smallest integer m such that
+am̸ = 0. But then we can write
+f(z) = am(z −z0)m(1 + g(z −z0)),
+where g(z −z0) converges to 0 as z →z0. Taking z = wk̸ = z0 for a se-
+quence of points converging to z0,
+we get a contradiction since
+am(wk −z0)m̸ = 0 and 1 + g(wk −z0)̸ = 0, but f(wk) = 0.
+We conclude the proof using the fact that Ωis connected.
+Let U
+denote the interior of the set of points where f(z) = 0. Then U is open
+by deﬁnition and non-empty by the argument just given. The set U is
+also closed since if zn ∈U and zn →z, then f(z) = 0 by continuity, and
+f vanishes in a neighborhood of z by the argument above. Hence z ∈U.
+Now if we let V denote the complement of U in Ω, we conclude that U
+and V are both open, disjoint, and
+Ω= U ∪V.
+Since Ωis connected we conclude that either U or V is empty. (Here we
+use one of the two equivalent deﬁnitions of connectedness discussed in
+Chapter 1.) Since z0 ∈U, we ﬁnd that U = Ωand the proof is complete.
+An immediate consequence of the theorem is the following.
+Corollary 4.9 Suppose f and g are holomorphic in a region Ωand
+f(z) = g(z) for all z in some non-empty open subset of Ω(or more gen-
+erally for z in some sequence of distinct points with limit point in Ω).
+Then f(z) = g(z) throughout Ω.
+
+5. Further applications
+53
+Suppose we are given a pair of functions f and F analytic in regions
+Ωand Ω′, respectively, with Ω⊂Ω′. If the two functions agree on the
+smaller set Ω, we say that F is an analytic continuation of f into the
+region Ω′. The corollary then guarantees that there can be only one such
+analytic continuation, since F is uniquely determined by f.
+5 Further applications
+We gather in this section various consequences of the results proved so
+far.
+5.1 Morera’s theorem
+A direct application of what was proved here is a converse of Cauchy’s
+theorem.
+Theorem 5.1 Suppose f is a continuous function in the open disc D
+such that for any triangle T contained in D
+
+T
+f(z) dz = 0,
+then f is holomorphic.
+Proof.
+By the proof of Theorem 2.1 the function f has a primitive F
+in D that satisﬁes F ′ = f. By the regularity theorem, we know that F
+is indeﬁnitely (and hence twice) complex diﬀerentiable, and therefore f
+is holomorphic.
+5.2 Sequences of holomorphic functions
+Theorem 5.2 If {fn}∞
+n=1 is a sequence of holomorphic functions that
+converges uniformly to a function f in every compact subset of Ω, then
+f is holomorphic in Ω.
+Proof.
+Let D be any disc whose closure is contained in Ωand T
+any triangle in that disc. Then, since each fn is holomorphic, Goursat’s
+theorem implies
+
+T
+fn(z) dz = 0
+for all n.
+By assumption fn →f uniformly in the closure of D, so f is continuous
+and
+
+T
+fn(z) dz →
+
+T
+f(z) dz.

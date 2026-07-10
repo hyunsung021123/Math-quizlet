@@ -1,0 +1,339 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 4. The Fourier Transform
+현재 소단원: 4.3 Paley-Wiener theorem
+직전 소단원: 「4.2 Action of the Fourier transform on ℱ」
+[본문]
+3. Paley-Wiener theorem
+121
+3 Paley-Wiener theorem
+In this section we change our point of view somewhat: we do not sup-
+pose any analyticity of f, but we do assume the validity of the Fourier
+inversion formula
+f(x) =
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ
+if
+ˆf(ξ) =
+ ∞
+−∞
+f(x)e−2πixξ dx,
+under the conditions |f(x)| ≤A/(1 + x2) and | ˆf(ξ)| ≤A′/(1 + ξ2). For a
+proof of the inversion formula under these conditions, we refer the reader
+to Chapter 5 in Book I.
+We start by pointing out a partial converse to Theorem 2.1.
+Theorem 3.1 Suppose ˆf satisﬁes the decay condition | ˆf(ξ)| ≤Ae−2πa|ξ|
+for some constants a, A > 0.
+Then f(x) is the restriction to R of a
+function f(z) holomorphic in the strip Sb = {z ∈C : |Im(z)| < b}, for
+any 0 < b < a.
+Proof.
+Deﬁne
+fn(z) =
+ n
+−n
+ˆf(ξ)e2πiξz dξ,
+and note that fn is entire by Theorem 5.4 in Chapter 2. Observe also
+that f(z) may be deﬁned for all z in the strip Sb by
+f(z) =
+ ∞
+−∞
+ˆf(ξ)e2πiξz dξ ,
+because the integral converges absolutely by our assumption on ˆf: it is
+majorized by
+A
+ ∞
+−∞
+e−2πa|ξ|e2πb|ξ| dξ ,
+which is ﬁnite if b < a. Moreover, for z ∈Sb
+|f(z) −fn(z)| ≤A
+
+|ξ|≥n
+e−2πa|ξ|e2πb|ξ| dξ
+→0
+as n →∞,
+and thus the sequence {fn} converges to f uniformly in Sb, which, by
+Theorem 5.2 in Chapter 2, proves the theorem.
+We digress brieﬂy to make the following observation.
+
+122
+Chapter 4. THE FOURIER TRANSFORM
+Corollary 3.2 If ˆf(ξ) = O(e−2πa|ξ|) for some a > 0, and f vanishes in
+a non-empty open interval, then f = 0.
+Since by the theorem f is analytic in a region containing the real line, the
+corollary is a consequence of Theorem 4.8 in Chapter 2. In particular,
+we recover the fact proved in Exercise 21, Chapter 5 in Book I, namely
+that f and ˆf cannot both have compact support unless f = 0.
+The Paley-Wiener theorem goes a step further than the previous theo-
+rem, and describes the nature of those functions whose Fourier transforms
+are supported in a given interval [−M, M].
+Theorem 3.3 Suppose f is continuous and of moderate decrease on
+R. Then, f has an extension to the complex plane that is entire with
+|f(z)| ≤Ae2πM|z| for some A > 0, if and only if ˆf is supported in the
+interval [−M, M].
+One direction is simple. Suppose ˆf is supported in [−M, M]. Then
+both f and ˆf have moderate decrease, and the Fourier inversion formula
+applies
+f(x) =
+ M
+−M
+ˆf(ξ)e2πiξx dξ.
+Since the range of integration is ﬁnite, we may replace x by the complex
+variable z in the integral, thereby deﬁning a complex-valued function on
+C by
+g(z) =
+ M
+−M
+ˆf(ξ)e2πiξz dξ.
+By construction g(z) = f(z) if z is real, and g is holomorphic by Theo-
+rem 5.4 in Chapter 2. Finally, if z = x + iy, we have
+|g(z)| ≤
+ M
+−M
+| ˆf(ξ)|e−2πξy dξ
+≤Ae2πM|z|.
+The converse result requires a little more work.
+It starts with the
+observation that if ˆf were supported in [−M, M], then the argument
+above would give the stronger bound |f(z)| ≤Ae2π|y| instead of what we
+assume, that is |f(z)| ≤Ae2π|z|. The idea is then to try to reduce to the
+better situation, where this stronger bound holds. However, this is not
+quite enough because we need in addition a (moderate) decay as x →∞
+
+3. Paley-Wiener theorem
+123
+(when y̸ = 0) to deal with the convergence of certain integrals at inﬁnity.
+Thus we begin by also assuming this further property of f, and then we
+remove the additional assumptions, one step at a time.
+Step 1. We ﬁrst assume that f is holomorphic in the complex plane,
+and satisﬁes the following condition regarding decay in x and growth
+in y:
+(6)
+|f(x + iy)| ≤A′ e2πM|y|
+1 + x2 .
+We then prove under this stronger assumption that ˆf(ξ) = 0 if |ξ| > M.
+To see this, we ﬁrst suppose that ξ > M and write
+ˆf(ξ) =
+ ∞
+−∞
+f(x)e−2πiξx dx
+=
+ ∞
+−∞
+f(x −iy)e−2πiξ(x−iy) dx.
+Here we have shifted the real line down by an amount y > 0 using the
+standard argument (equation (1)).
+Putting absolute values gives the
+bound
+| ˆf(ξ)| ≤A′
+ ∞
+−∞
+e2πMy−2πξy
+1 + x2
+dx
+≤Ce−2πy(ξ−M).
+Letting y tend to inﬁnity, and recalling that ξ −M > 0, proves that
+ˆf(ξ) = 0. A similar argument, shifting the contour up by y > 0, proves
+that ˆf(ξ) = 0 whenever ξ < −M.
+Step 2. We relax condition (6) by assuming only that f satisﬁes
+(7)
+|f(x + iy)| ≤Ae2πM|y|.
+This is still a stronger condition than in the theorem, but it is weaker
+than (6). Suppose ﬁrst that ξ > M, and for ϵ > 0 consider the following
+auxiliary function
+fϵ(z) =
+f(z)
+(1 + iϵz)2 .
+We observe that the quantity 1/(1 + iϵz)2 has absolute value less than
+or equal to 1 in the closed lower half-plane (including the real line) and
+
+124
+Chapter 4. THE FOURIER TRANSFORM
+converges to 1 as ϵ tends to 0. In particular, this shows that fϵ(ξ) →ˆf(ξ)
+as ϵ →0 since we may write
+|fϵ(ξ) −ˆf(ξ)| ≤
+ ∞
+−∞
+|f(x)|
+
+1
+(1 + iϵx)2 −1
+
+dx,
+and recall that f has moderate decrease on R.
+But for each ﬁxed ϵ, we have
+|fϵ(x + iy)| ≤A′′ e2πM|y|
+1 + x2 ,
+so by Step 1 we must have fϵ(ξ) = 0, and hence ˆf(ξ) = 0 after passing to
+the limit as ϵ →0. A similar argument applies if ξ < −M, although we
+must now argue in the upper half-plane, and use the factor 1/(1 −iϵz)2
+instead.
+Step 3. To conclude the proof, it suﬃces to show that the conditions
+in the theorem imply condition (7) in Step 2. In fact, after dividing by
+an appropriate constant, it suﬃces to show that if |f(x)| ≤1 for all real
+x, and |f(z)| ≤e2πM|z| for all complex z, then
+|f(x + iy)| ≤e2πM|y|.
+This will follow from an ingenious and very useful idea of Phragm´en and
+Lindel¨of that allows one to adapt the maximum modulus principle to
+various unbounded regions. The particular result we need is as follows.
+Theorem 3.4 Suppose F is a holomorphic function in the sector
+S = {z : −π/4 < arg z < π/4}
+that is continuous on the closure of S. Assume |F(z)| ≤1 on the bound-
+ary of the sector, and that there are constants C, c > 0 such that
+|F(z)| ≤Cec|z| for all z in the sector. Then
+|F(z)| ≤1
+for all z ∈S.
+In other words, if F is bounded by 1 on the boundary of S and has no
+more than a reasonable amount of growth, then F is actually bounded
+everywhere by 1. That some restriction on the growth of F is necessary
+follows from a simple observation.
+Consider the function F(z) = ez2.
+Then F is bounded by 1 on the boundary of S, but if x is real, F(x) is
+unbounded as x →∞. We now give the proof of Theorem 3.4.
+
+3. Paley-Wiener theorem
+125
+Proof.
+The idea is to subdue the “enemy” function ez2 and turn it
+to our advantage: in brief, one modiﬁes ez2 by replacing it by ezα with
+α < 2. For simplicity we take the case α = 3/2.
+If ϵ > 0, let
+Fϵ(z) = F(z)e−ϵz3/2.
+Here we have chosen the principal branch of the logarithm to deﬁne z3/2
+so that if z = reiθ (with −π < θ < π), then z3/2 = r3/2e3iθ/2. Hence Fϵ
+is holomorphic in S and continuous up to its boundary. Also
+|e−ϵz3/2| = e−ϵr3/2 cos(3θ/2);
+and since −π/4 < θ < π/4 in the sector, we get the inequalities
+−π
+2 < −3π
+8 < 3θ
+2 < 3π
+8 < π
+2 ,
+and therefore cos(3θ/2) is strictly positive in the sector. This, together
+with the fact that |F(z)| ≤Cec|z|, shows that Fϵ(z) decreases rapidly in
+the closed sector as |z| →∞, and in particular Fϵ is bounded. We claim
+that in fact |Fϵ(z)| ≤1 for all z ∈S, where S denotes the closure of S.
+To prove this, we deﬁne
+M = sup
+z∈S
+|Fϵ(z)|.
+Assuming F is not identically zero, let {wj} be a sequence of points
+such that |Fϵ(wj)| →M. Since M̸ = 0 and Fϵ decays to 0 as |z| becomes
+large in the sector, wj cannot escape to inﬁnity, and we conclude that
+this sequence accumulates to a point w ∈S. By the maximum principle,
+w cannot be an interior point of S, so w lies on its boundary. But on the
+boundary, we have ﬁrst |F(z)| ≤1 by assumption, and also |e−ϵz3/2| ≤1,
+so that M ≤1, and the claim is proved.
+Finally, we may let ϵ tend to 0 to conclude the proof of the theorem.
+Further generalizations of the Phragm´en-Lindel¨of theorem are included
+in Exercise 9 and Problem 3.
+We must now use this result to conclude the proof of the Paley-
+Wiener theorem, that is, show that if |f(x)| ≤1 and |f(z)| ≤e2πM|z|,
+then |f(z)| ≤e2πM|y|.
+First, note that the sector in the Phragm´en-
+Lindel¨of theorem can be rotated, say to the ﬁrst quadrant Q = {z =
+x + iy : x > 0, y > 0}, and the result remains the same. Then, we con-
+sider
+F(z) = f(z)e2πiMz,
+
+126
+Chapter 4. THE FOURIER TRANSFORM
+and note that F is bounded by 1 on the positive real and positive imag-
+inary axes. Since we also have |F(z)| ≤Cec|z| in the quadrant, we con-
+clude by the Phragm´en-Lindel¨of theorem that |F(z)| ≤1 for all z in Q,
+which implies |f(z)| ≤e2πMy. A similar argument for the other quad-
+rants concludes Step 3 as well as the proof of the Paley-Wiener theorem.
+We conclude with another version of the idea behind the Paley-Wiener
+theorem, this time characterizing the functions whose Fourier transform
+vanishes for all negative ξ.
+Theorem 3.5 Suppose f and ˆf have moderate decrease. Then ˆf(ξ) =
+0 for all ξ < 0 if and only if f can be extended to a continuous and
+bounded function in the closed upper half-plane {z = x + iy : y ≥0} with
+f holomorphic in the interior.
+Proof.
+First assume ˆf(ξ) = 0 for ξ < 0. By the Fourier inversion
+formula
+f(x) =
+ ∞
+0
+ˆf(ξ)e2πixξ dξ ,
+and we can extend f when z = x + iy with y ≥0 by
+f(z) =
+ ∞
+0
+ˆf(ξ)e2πizξ dξ .
+Notice that the integral converges and that
+|f(z)| ≤A
+ ∞
+0
+dξ
+1 + ξ2 < ∞,
+which proves the boundedness of f. The uniform convergence of
+fn(z) =
+ n
+0
+ˆf(ξ)e2πixξ dξ
+to f(z) in the closed half-plane establishes the continuity of f there, and
+its holomorphicity in the interior.
+For the converse, we argue in the spirit of the proof of Theorem 3.3.
+For ϵ and δ positive, we set
+fϵ,δ(z) = f(z + iδ)
+(1 −iϵz)2 .
+Then fϵ,δ is holomorphic in a region containing the closed upper half-
+plane. One also shows as before, using Cauchy’s theorem, that 
+fϵ,δ(ξ) = 0
+
+4. Exercises
+127
+for all ξ < 0. Then, passing to the limit successively, one has 
+fϵ,0(ξ) = 0
+for ξ < 0, and ﬁnally ˆf(ξ) = 
+f0,0(ξ) = 0 for all ξ < 0.
+Remark. The reader should note a certain analogy between the above
+theorem and Theorem 7.1 in Chapter 3.
+Here we are dealing with a
+function holomorphic in the upper half-plane, and there with a function
+holomorphic in a disc. In the present case the Fourier transform vanishes
+when ξ < 0, and in the earlier case, the Fourier coeﬃcients vanish when
+n < 0.
+4 Exercises
+1. Suppose f is continuous and of moderate decrease, and ˆf(ξ) = 0 for all ξ ∈R.
+Show that f = 0 by completing the following outline:
+(a) For each ﬁxed real number t consider the two functions
+A(z) =
+ t
+−∞
+f(x)e−2πiz(x−t) dx
+and
+B(z) = −
+ ∞
+t
+f(x)e−2πiz(x−t) dx.
+Show that A(ξ) = B(ξ) for all ξ ∈R.
+(b) Prove that the function F equal to A in the closed upper half-plane, and B
+in the lower half-plane, is entire and bounded, thus constant. In fact, show
+that F = 0.
+(c) Deduce that
+ t
+−∞
+f(x) dx = 0,
+for all t, and conclude that f = 0.
+2. If f ∈Fa with a > 0, then for any positive integer n one has f (n) ∈Fb whenever
+0 ≤b < a.
+[Hint: Modify the solution to Exercise 8 in Chapter 2.]
+3. Show, by contour integration, that if a > 0 and ξ ∈R then
+1
+π
+ ∞
+−∞
+a
+a2 + x2 e−2πixξ dx = e−2πa|ξ|,
+and check that
+ ∞
+−∞
+e−2πa|ξ|e2πiξx dξ = 1
+π
+a
+a2 + x2 .

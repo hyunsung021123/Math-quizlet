@@ -1,0 +1,525 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 4. The Fourier Transform
+현재 소단원: 4.2 Action of the Fourier transform on ℱ
+직전 소단원: 「4.1 The class ℱ」
+[본문]
+114
+Chapter 4. THE FOURIER TRANSFORM
+which has simple poles at z = ±ci, belongs to Fa for all 0 < a < c.
+Another example is provided by f(z) = 1/ coshπz, which belongs to
+Fa whenever |a| < 1/2. This function, as well as one of its fundamental
+properties, was already discussed in Example 3, Section 2.1 of Chapter 3.
+Note also that a simple application of the Cauchy integral formulas
+shows that if f ∈Fa, then for every n, the nth derivative of f belongs to
+Fb for all b with 0 < b < a (Exercise 2).
+Finally, we denote by F the class of all functions that belong to Fa for
+some a.
+Remark. The condition of moderate decrease can be weakened some-
+what by replacing the order of decrease of A/(1 + x2) by A/(1 + |x|1+ϵ)
+for any ϵ > 0.
+As the reader will observe, many of the results below
+remain unchanged with this less restrictive condition.
+2 Action of the Fourier transform on F
+Here we prove three theorems, including the Fourier inversion and Pois-
+son summation formulas, for functions in F. The idea behind all three
+proofs is the same: contour integration. Thus the approach used will be
+diﬀerent from that of the corresponding results in Book I.
+Theorem 2.1 If f belongs to the class Fa for some a > 0, then
+| ˆf(ξ)| ≤Be−2πb|ξ| for any 0 ≤b < a.
+Proof.
+Recall that ˆf(ξ) =  ∞
+−∞f(x)e−2πixξ dx. The case b = 0 simply
+says that ˆf is bounded, which follows at once from the integral deﬁning
+ˆf, the assumption that f is of moderate decrease, and the fact that the
+exponential is bounded by 1.
+Now suppose 0 < b < a and assume ﬁrst that ξ > 0. The main step
+consists of shifting the contour of integration, that is the real line, down
+by b. More precisely, consider the contour in Figure 1 as well as the
+function g(z) = f(z)e−2πizξ.
+We claim that as R tends to inﬁnity, the integrals of g over the two
+vertical sides converge to zero. For example, the integral over the vertical
+segment on the left can be estimated by
+
+ −R
+−R−ib
+g(z) dz
+ ≤
+ b
+0
+|f(−R −it)e−2πi(−R−it)ξ| dt
+≤
+ b
+0
+A
+R2 e−2πtξ dt
+= O(1/R2).
+
+2. Action of the Fourier transform on F
+115
+0
+−R
+R
+R −ib
+−R −ib
+Figure 1. The contour in the proof of Theorem 2.1 when ξ > 0
+A similar estimate for the other side proves our claim. Therefore, by
+Cauchy’s theorem applied to the large rectangle, we ﬁnd in the limit as
+R tends to inﬁnity that
+(1)
+ˆf(ξ) =
+ ∞
+−∞
+f(x −ib)e−2πi(x−ib)ξ dx,
+which leads to the estimate
+| ˆf(ξ)| ≤
+ ∞
+−∞
+A
+1 + x2 e−2πbξ dx ≤Be−2πbξ,
+where B is a suitable constant. A similar argument for ξ < 0, but this
+time shifting the real line up by b, allows us to ﬁnish the proof of the
+theorem.
+This result says that whenever f ∈F, then ˆf has rapid decay at inﬁnity.
+We remark that the further we can extend f (that is, the larger a), then
+the larger we can choose b, hence the better the decay. We shall return
+to this circle of ideas in Section 3, where we describe those f for which
+ˆf has the ultimate decay condition: compact support.
+Since ˆf decreases rapidly on R, the integral in the Fourier inversion
+formula makes sense, and we now turn to the complex analytic proof of
+this identity.
+Theorem 2.2 If f ∈F, then the Fourier inversion holds, namely
+f(x) =
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ
+for all x ∈R.
+
+116
+Chapter 4. THE FOURIER TRANSFORM
+Besides contour integration, the proof of the theorem requires a simple
+identity, which we isolate.
+Lemma 2.3 If A is positive and B is real, then
+ ∞
+0
+e−(A+iB)ξ dξ =
+1
+A+iB.
+Proof.
+Since A > 0 and B ∈R, we have |e−(A+iB)ξ| = e−Aξ, and the
+integral converges. By deﬁnition
+ ∞
+0
+e−(A+iB)ξ dξ = lim
+R→∞
+ R
+0
+e−(A+iB)ξ dξ.
+However,
+ R
+0
+e−(A+iB)ξ dξ =
+
+−e−(A+iB)ξ
+A + iB
+R
+0
+,
+which tends to 1/(A + iB) as R tends to inﬁnity.
+We can now prove the inversion theorem. Once again, the sign of ξ
+matters, so we begin by writing
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ =
+ 0
+−∞
+ˆf(ξ)e2πixξ dξ +
+ ∞
+0
+ˆf(ξ)e2πixξ dξ.
+For the second integral we argue as follows.
+Say f ∈Fa and choose
+0 < b < a. Arguing as the proof of Theorem 2.1, or simply using equa-
+tion (1), we get
+ˆf(ξ) =
+ ∞
+−∞
+f(u −ib)e−2πi(u−ib)ξ du,
+so that with an application of the lemma and the convergence of the
+integration in ξ, we ﬁnd
+ ∞
+0
+ˆf(ξ)e2πixξ dξ =
+ ∞
+0
+ ∞
+−∞
+f(u −ib)e−2πi(u−ib)ξe2πixξ du dξ
+=
+ ∞
+−∞
+f(u −ib)
+ ∞
+0
+e−2πi(u−ib−x)ξ dξ du
+=
+ ∞
+−∞
+f(u −ib)
+1
+2πb + 2πi(u −x) du
+=
+1
+2πi
+ ∞
+−∞
+f(u −ib)
+u −ib −x du
+=
+1
+2πi
+
+L1
+f(ζ)
+ζ −x dζ,
+
+2. Action of the Fourier transform on F
+117
+where L1 denotes the line {u −ib : u ∈R} traversed from left to right.
+(In other words, L1 is the real line shifted down by b.) For the integral
+when ξ < 0, a similar calculation gives
+ 0
+−∞
+ˆf(ξ)e2πixξ dξ = −1
+2πi
+
+L2
+f(ζ)
+ζ −x dζ,
+where L2 is the real line shifted up by b, with orientation from left to
+right. Now given x ∈R, consider the contour γR in Figure 2.
+0
+R + ib
+R −ib
+x
+−R + ib
+−R −ib
+γR
+Figure 2. The contour γR in the proof of Theorem 2.2
+The function f(ζ)/(ζ −x) has a simple pole at x with residue f(x), so
+the residue formula gives
+f(x) =
+1
+2πi
+
+γR
+f(ζ)
+ζ −x dζ.
+Letting R tend to inﬁnity, one checks easily that the integral over the
+vertical sides goes to 0 and therefore, combining with the previous results,
+we get
+f(x) =
+1
+2πi
+
+L1
+f(ζ)
+ζ −x dζ −
+1
+2πi
+
+L2
+f(ζ)
+ζ −x dζ
+=
+ ∞
+0
+ˆf(ξ)e2πixξ dξ +
+ 0
+−∞
+ˆf(ξ)e2πixξ dξ
+=
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ,
+
+118
+Chapter 4. THE FOURIER TRANSFORM
+and the theorem is proved.
+The last of our three theorems is the Poisson summation formula.
+Theorem 2.4 If f ∈F, then
+
+n∈Z
+f(n) =
+
+n∈Z
+ˆf(n).
+Proof.
+Say f ∈Fa and choose some b satisfying 0 < b < a. The func-
+tion 1/(e2πiz −1) has simple poles with residue 1/(2πi) at the integers.
+Thus f(z)/(e2πiz −1) has simple poles at the integers n, with residues
+f(n)/2πi. We may therefore apply the residue formula to the contour
+γN in Figure 3 where N is an integer.
+N + 1
+2 + ib
+N + 1
+2 −ib
+−N −1
+2 + ib
+−N −1
+2 −ib
+−N −1 −N
+N
+N + 1
+1
+0
+−1
+γN
+Figure 3. The contour γN in the proof of Theorem 2.4
+This yields
+
+|n|≤N
+f(n) =
+
+γN
+f(z)
+e2πiz −1 dz.
+Letting N tend to inﬁnity, and recalling that f has moderate decrease,
+we see that the sum converges to 
+n∈Z f(n), and also that the integral
+over the vertical segments goes to 0. Therefore, in the limit we get
+(2)
+
+n∈Z
+f(n) =
+
+L1
+f(z)
+e2πiz −1 dz −
+
+L2
+f(z)
+e2πiz −1 dz
+
+2. Action of the Fourier transform on F
+119
+where L1 and L2 are the real line shifted down and up by b, respectively.
+Now we use the fact that if |w| > 1, then
+1
+w −1 = w−1
+∞
+
+n=0
+w−n
+to see that on L1 (where |e2πiz| > 1) we have
+1
+e2πiz −1 = e−2πiz
+∞
+
+n=0
+e−2πinz.
+Also if |w| < 1, then
+1
+w −1 = −
+∞
+
+n=0
+wn
+so that on L2
+1
+e2πiz −1 = −
+∞
+
+n=0
+e2πinz.
+Substituting these observations in (2) we ﬁnd that
+
+n∈Z
+f(n) =
+
+L1
+f(z)
+
+e−2πiz
+∞
+
+n=0
+e−2πinz
+
+dz +
+
+L2
+f(z)
+ ∞
+
+n=0
+e2πinz
+
+dz
+=
+∞
+
+n=0
+
+L1
+f(z)e−2πi(n+1)z dz +
+∞
+
+n=0
+
+L2
+f(z)e2πinz dz
+=
+∞
+
+n=0
+ ∞
+−∞
+f(x)e−2πi(n+1)x dx +
+∞
+
+n=0
+ ∞
+−∞
+f(x)e2πinx dz
+=
+∞
+
+n=0
+ˆf(n + 1) +
+∞
+
+n=0
+ˆf(−n)
+=
+
+n∈Z
+ˆf(n),
+where we have shifted L1 and L2 back to the real line according to
+equation (1) and its analogue for the shift down.
+The Poisson summation formula has many far-reaching consequences,
+and we close this section by deriving several interesting identities that
+are of importance for later applications.
+
+120
+Chapter 4. THE FOURIER TRANSFORM
+First, we recall the calculation in Example 1, Chapter 2, which showed
+that the function e−πx2 was its own Fourier transform:
+ ∞
+−∞
+e−πx2e−2πixξ dx = e−πξ2.
+For
+ﬁxed
+values
+of
+t > 0
+and
+a ∈R,
+the
+change
+of
+variables
+x 	→t1/2(x + a) in the above integral shows that the Fourier transform
+of the function f(x) = e−πt(x+a)2 is ˆf(ξ) = t−1/2e−πξ2/te2πiaξ. Applying
+the Poisson summation formula to the pair f and ˆf (which belong to F)
+provides the following relation:
+(3)
+∞
+
+n=−∞
+e−πt(n+a)2 =
+∞
+
+n=−∞
+t−1/2e−πn2/te2πina.
+This identity has noteworthy consequences. For instance, the special case
+a = 0 is the transformation law for a version of the “theta function”:
+if we deﬁne ϑ for t > 0 by the series ϑ(t) = ∞
+n=−∞e−πn2t, then the
+relation (3) says precisely that
+(4)
+ϑ(t) = t−1/2ϑ(1/t)
+for t > 0.
+This equation will be used in Chapter 6 to derive the key functional
+equation of the Riemann zeta function, and this leads to its analytic
+continuation. Also, the general case a ∈R will be used in Chapter 10
+to establish a corresponding law for the more general Jacobi theta func-
+tion Θ.
+For another application of the Poisson summation formula we recall
+that we proved in Example 3, Chapter 3, that the function 1/ coshπx
+was also its own Fourier transform:
+ ∞
+−∞
+e−2πixξ
+cosh πx dx =
+1
+cosh πξ .
+This implies that if t > 0 and a ∈R, then the Fourier transform of the
+function f(x) = e−2πiax/ cosh(πx/t) is ˆf(ξ) = t/ cosh(π(ξ + a)t), and the
+Poisson summation formula yields
+(5)
+∞
+
+n=−∞
+e−2πian
+cosh(πn/t) =
+∞
+
+n=−∞
+t
+cosh(π(n + a)t).
+This formula will be used in Chapter 10 in the context of the two-squares
+theorem.
+
+3. Paley-Wiener theorem
+121
+3 Paley-Wiener theorem
+In this section we change our point of view somewhat: we do not sup-
+pose any analyticity of f, but we do assume the validity of the Fourier
+inversion formula
+f(x) =
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ
+if
+ˆf(ξ) =
+ ∞
+−∞
+f(x)e−2πixξ dx,
+under the conditions |f(x)| ≤A/(1 + x2) and | ˆf(ξ)| ≤A′/(1 + ξ2). For a
+proof of the inversion formula under these conditions, we refer the reader
+to Chapter 5 in Book I.
+We start by pointing out a partial converse to Theorem 2.1.
+Theorem 3.1 Suppose ˆf satisﬁes the decay condition | ˆf(ξ)| ≤Ae−2πa|ξ|
+for some constants a, A > 0.
+Then f(x) is the restriction to R of a
+function f(z) holomorphic in the strip Sb = {z ∈C : |Im(z)| < b}, for
+any 0 < b < a.
+Proof.
+Deﬁne
+fn(z) =
+ n
+−n
+ˆf(ξ)e2πiξz dξ,
+and note that fn is entire by Theorem 5.4 in Chapter 2. Observe also
+that f(z) may be deﬁned for all z in the strip Sb by
+f(z) =
+ ∞
+−∞
+ˆf(ξ)e2πiξz dξ ,
+because the integral converges absolutely by our assumption on ˆf: it is
+majorized by
+A
+ ∞
+−∞
+e−2πa|ξ|e2πb|ξ| dξ ,
+which is ﬁnite if b < a. Moreover, for z ∈Sb
+|f(z) −fn(z)| ≤A
+
+|ξ|≥n
+e−2πa|ξ|e2πb|ξ| dξ
+→0
+as n →∞,
+and thus the sequence {fn} converges to f uniformly in Sb, which, by
+Theorem 5.2 in Chapter 2, proves the theorem.
+We digress brieﬂy to make the following observation.

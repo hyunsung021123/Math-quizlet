@@ -1,0 +1,286 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.8 Exercises
+직전 소단원: 「3.7 Fourier series and harmonic functions」
+[연습문제]
+8. Exercises
+103
+Corollary 7.3 If f is holomorphic in a disc DR(z0), and u = Re(f),
+then
+u(z0) = 1
+2π
+ 2π
+0
+u(z0 + reiθ) dθ,
+for any 0 < r < R.
+Recall that u is harmonic whenever f is holomorphic, and in fact, the
+above corollary is a property enjoyed by every harmonic function in the
+disc DR(z0). This follows from Exercise 12 in Chapter 2, which shows
+that every harmonic function in a disc is the real part of a holomorphic
+function in that disc.
+8 Exercises
+1. Using Euler’s formula
+sin πz = eiπz −e−iπz
+2i
+,
+show that the complex zeros of sin πz are exactly at the integers, and that they
+are each of order 1.
+Calculate the residue of 1/ sin πz at z = n ∈Z.
+2. Evaluate the integral
+ ∞
+−∞
+dx
+1 + x4 .
+Where are the poles of 1/(1 + z4)?
+3. Show that
+ ∞
+−∞
+cos x
+x2 + a2 dx = π e−a
+a ,
+for a > 0.
+4. Show that
+ ∞
+−∞
+x sin x
+x2 + a2 dx = πe−a,
+for all a > 0.
+5. Use contour integration to show that
+ ∞
+−∞
+e−2πixξ
+(1 + x2)2 dx = π
+2 (1 + 2π|ξ|)e−2π|ξ|
+for all ξ real.
+
+104
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+6. Show that
+ ∞
+−∞
+dx
+(1 + x2)n+1 = 1 · 3 · 5 · · · (2n −1)
+2 · 4 · 6 · · · (2n)
+· π.
+7. Prove that
+ 2π
+0
+dθ
+(a + cos θ)2 =
+2πa
+(a2 −1)3/2 ,
+whenever a > 1.
+8. Prove that
+ 2π
+0
+dθ
+a + b cos θ =
+2π
+√
+a2 −b2
+if a > |b| and a, b ∈R.
+9. Show that
+ 1
+0
+log(sin πx) dx = −log 2.
+[Hint: Use the contour shown in Figure 9.]
+0
+1
+Figure 9. Contour in Exercise 9
+10.
+Show that if a > 0, then
+ ∞
+0
+log x
+x2 + a2 dx = π
+2a log a.
+[Hint: Use the contour in Figure 10.]
+11. Show that if |a| < 1, then
+ 2π
+0
+log |1 −aeiθ| dθ = 0.
+
+8. Exercises
+105
+−R
+R
+−ϵ
+ia
+ϵ
+Figure 10. Contour in Exercise 10
+Then, prove that the above result remains true if we assume only that |a| ≤1.
+12. Suppose u is not an integer. Prove that
+∞
+
+n=−∞
+1
+(u + n)2 =
+π2
+(sin πu)2
+by integrating
+f(z) = π cot πz
+(u + z)2
+over the circle |z| = RN = N + 1/2 (N integral, N ≥|u|), adding the residues of
+f inside the circle, and letting N tend to inﬁnity.
+Note. Two other derivations of this identity, using Fourier series, were given in
+Book I.
+13. Suppose f(z) is holomorphic in a punctured disc Dr(z0) −{z0}. Suppose also
+that
+|f(z)| ≤A|z −z0|−1+ϵ
+for some ϵ > 0, and all z near z0. Show that the singularity of f at z0 is removable.
+14.
+Prove that all entire functions that are also injective take the form
+f(z) = az + b with a, b ∈C, and a̸ = 0.
+[Hint: Apply the Casorati-Weierstrass theorem to f(1/z).]
+15. Use the Cauchy inequalities or the maximum modulus principle to solve the
+following problems:
+(a) Prove that if f is an entire function that satisﬁes
+sup
+|z|=R
+|f(z)| ≤ARk + B
+
+106
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+for all R > 0, and for some integer k ≥0 and some constants A, B > 0, then
+f is a polynomial of degree ≤k.
+(b) Show that if f is holomorphic in the unit disc, is bounded, and converges
+uniformly to zero in the sector θ < arg z < ϕ as |z| →1, then f = 0.
+(c) Let w1, . . . , wn be points on the unit circle in the complex plane. Prove that
+there exists a point z on the unit circle such that the product of the distances
+from z to the points wj, 1 ≤j ≤n, is at least 1. Conclude that there exists
+a point w on the unit circle such that the product of the distances from w
+to the points wj, 1 ≤j ≤n, is exactly equal to 1.
+(d) Show that if the real part of an entire function f is bounded, then f is
+constant.
+16.
+Suppose f and g are holomorphic in a region containing the disc |z| ≤1.
+Suppose that f has a simple zero at z = 0 and vanishes nowhere else in |z| ≤1.
+Let
+fϵ(z) = f(z) + ϵg(z).
+Show that if ϵ is suﬃciently small, then
+(a) fϵ(z) has a unique zero in |z| ≤1, and
+(b) if zϵ is this zero, the mapping ϵ →zϵ is continuous.
+17. Let f be non-constant and holomorphic in an open set containing the closed
+unit disc.
+(a) Show that if |f(z)| = 1 whenever |z| = 1, then the image of f contains the
+unit disc. [Hint: One must show that f(z) = w0 has a root for every w0 ∈D.
+To do this, it suﬃces to show that f(z) = 0 has a root (why?). Use the
+maximum modulus principle to conclude.]
+(b) If |f(z)| ≥1 whenever |z| = 1 and there exists a point z0 ∈D such that
+|f(z0)| < 1, then the image of f contains the unit disc.
+18. Give another proof of the Cauchy integral formula
+f(z) =
+1
+2πi
+
+C
+f(ζ)
+ζ −z dζ
+using homotopy of curves.
+[Hint: Deform the circle C to a small circle centered at z, and note that the
+quotient (f(ζ) −f(z))/(ζ −z) is bounded.]
+19. Prove the maximum principle for harmonic functions, that is:
+
+8. Exercises
+107
+(a) If u is a non-constant real-valued harmonic function in a region Ω, then u
+cannot attain a maximum (or a minimum) in Ω.
+(b) Suppose that Ωis a region with compact closure Ω. If u is harmonic in Ω
+and continuous in Ω, then
+sup
+z∈Ω
+|u(z)| ≤
+sup
+z∈Ω−Ω
+|u(z)|.
+[Hint: To prove the ﬁrst part, assume that u attains a local maximum at z0. Let f
+be holomorphic near z0 with u = Re(f), and show that f is not open. The second
+part follows directly from the ﬁrst.]
+20. This exercise shows how the mean square convergence dominates the uniform
+convergence of analytic functions. If U is an open subset of C we use the notation
+∥f∥L2(U) =
+
+U
+|f(z)|2 dxdy
+1/2
+for the mean square norm, and
+∥f∥L∞(U) = sup
+z∈U
+|f(z)|
+for the sup norm.
+(a) If f is holomorphic in a neighborhood of the disc Dr(z0), show that for any
+0 < s < r there exists a constant C > 0 (which depends on s and r) such
+that
+∥f∥L∞(Ds(z0)) ≤C∥f∥L2(Dr(z0)) .
+(b) Prove that if {fn} is a Cauchy sequence of holomorphic functions in the
+mean square norm ∥· ∥L2(U), then the sequence {fn} converges uniformly
+on every compact subset of U to a holomorphic function.
+[Hint: Use the mean-value property.]
+21. Certain sets have geometric properties that guarantee they are simply con-
+nected.
+(a) An open set Ω⊂C is convex if for any two points in Ω, the straight line
+segment between them is contained in Ω. Prove that a convex open set is
+simply connected.
+(b) More generally, an open set Ω⊂C is star-shaped if there exists a point
+z0 ∈Ωsuch that for any z ∈Ω, the straight line segment between z and z0
+is contained in Ω. Prove that a star-shaped open set is simply connected.
+Conclude that the slit plane C −{(−∞, 0]} (and more generally any sector,
+convex or not) is simply connected.
+
+108
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+(c) What are other examples of open sets that are simply connected?
+22. Show that there is no holomorphic function f in the unit disc D that extends
+continuously to ∂D such that f(z) = 1/z for z ∈∂D.
+9 Problems
+1.∗Consider a holomorphic map on the unit disc f : D →C which satisﬁes
+f(0) = 0. By the open mapping theorem, the image f(D) contains a small disc
+centered at the origin.
+We then ask: does there exist r > 0 such that for all
+f : D →C with f(0) = 0, we have Dr(0) ⊂f(D)?
+(a) Show that with no further restrictions on f, no such r exists. It suﬃces to
+ﬁnd a sequence of functions {fn} holomorphic in D such that 1/n /∈f(D).
+Compute f ′
+n(0), and discuss.
+(b) Assume in addition that f also satisﬁes f ′(0) = 1. Show that despite this
+new assumption, there exists no r > 0 satisfying the desired condition.
+[Hint: Try fϵ(z) = ϵ(ez/ϵ −1).]
+The Koebe-Bieberbach theorem states that if in addition to f(0) = 0 and
+f ′(0) = 1 we also assume that f is injective, then such an r exists and the best
+possible value is r = 1/4.
+(c) As a ﬁrst step, show that if h(z) = 1
+z + c0 + c1z + c2z2 + · · · is analytic and
+injective for 0 < |z| < 1, then ∞
+n=1 n|cn|2 ≤1.
+[Hint:
+Calculate the area of the complement of h(Dρ(0) −{0}) where
+0 < ρ < 1, and let ρ →1.]
+(d) If f(z) = z + a2z2 + · · · satisﬁes the hypotheses of the theorem, show that
+there exists another function g satisfying the hypotheses of the theorem such
+that g2(z) = f(z2).
+[Hint:
+f(z)/z
+is
+nowhere
+vanishing
+so
+there
+exists
+ψ
+such
+that
+ψ2(z) = f(z)/z and ψ(0) = 1. Check that g(z) = zψ(z2) is injective.]
+(e) With the notation of the previous part, show that |a2| ≤2, and that equality
+holds if and only if
+f(z) =
+z
+(1 −eiθz)2
+for some θ ∈R.
+[Hint: What is the power series expansion of 1/g(z)? Use part (c).]
+(f) If h(z) = 1
+z + c0 + c1z + c2z2 + · · · is injective on D and avoids the values
+z1 and z2, show that |z1 −z2| ≤4.
+[Hint:
+Look at the second coeﬃcient in the power series expansion of
+1/(h(z) −zj).]

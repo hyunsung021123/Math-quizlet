@@ -1,0 +1,225 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.5 Homotopies and simply connected domains
+직전 소단원: 「3.4 The argument principle and applications」
+[본문]
+5. Homotopies and simply connected domains
+93
+continuous on Ω. Moreover |F(z)| = 1 on the two boundary lines z = x
+and z = iy. However, F(z) is unbounded in Ω, since for example, we
+have F(z) = er2 if z = r
+√
+i = reiπ/4.
+5 Homotopies and simply connected domains
+The key to the general form of Cauchy’s theorem, as well as the analysis of
+multiple-valued functions, is to understand in what regions we can deﬁne
+the primitive of a given holomorphic function. Note the relevance to the
+study of the logarithm, which arises as a primitive of 1/z. The question is
+not just a local one, but is also global in nature. Its elucidation requires
+the notion of homotopy, and the resulting idea of simple-connectivity.
+Let γ0 and γ1 be two curves in an open set Ωwith common end-points.
+So if γ0(t) and γ1(t) are two parametrizations deﬁned on [a, b], we have
+γ0(a) = γ1(a) = α
+and
+γ0(b) = γ1(b) = β.
+These two curves are said to be homotopic in Ωif for each 0 ≤s ≤1
+there exists a curve γs ⊂Ω, parametrized by γs(t) deﬁned on [a, b], such
+that for every s
+γs(a) = α
+and
+γs(b) = β,
+and for all t ∈[a, b]
+γs(t)|s=0 = γ0(t)
+and
+γs(t)|s=1 = γ1(t).
+Moreover, γs(t) should be jointly continuous in s ∈[0, 1] and t ∈[a, b].
+Loosely speaking, two curves are homotopic if one curve can be de-
+formed into the other by a continuous transformation without ever leav-
+ing Ω(Figure 6).
+Theorem 5.1 If f is holomorphic in Ω, then
+
+γ0
+f(z) dz =
+
+γ1
+f(z) dz
+whenever the two curves γ0 and γ1 are homotopic in Ω.
+Proof.
+The key to the proof lies in showing that if two curves are close
+to each other and have the same end-points, then the integrals over these
+curves are equal. Recall that by deﬁnition, the function F(s, t) = γs(t) is
+continuous on [0, 1] × [a, b]. In particular, since the image of F, which we
+
+94
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+α
+β
+γs
+γ1
+Ω
+γ0
+Figure 6. Homotopy of curves
+denote by K, is compact, there exists ϵ > 0 such that every disc of radius
+3ϵ centered at a point in the image of F is completely contained in Ω. If
+not, for every ℓ≥0, there exist points zℓ∈K and wℓin the complement
+of Ωsuch that |zℓ−wℓ| < 1/ℓ.
+By compactness of K, there exists a
+subsequence of {zℓ}, say {zℓk}, that converges to a point z ∈K ⊂Ω. By
+construction, we must have wℓk →z as well, and since {wℓ} lies in the
+complement of Ωwhich is closed, we must have z ∈Ωc as well. This is a
+contradiction.
+Having found an ϵ with the desired property, we may, by the uniform
+continuity of F, select δ so that
+sup
+t∈[a,b]
+|γs1(t) −γs2(t)| < ϵ
+whenever |s1 −s2| < δ.
+Fix s1 and s2 with |s1 −s2| < δ. We then choose discs {D0, . . . , Dn} of
+radius 2ϵ, and consecutive points {z0, . . . , zn+1} on γs1 and {w0, . . . , wn+1}
+on γs2 such that the union of these discs covers both curves, and
+zi, zi+1, wi, wi+1 ∈Di.
+The situation is illustrated in Figure 7.
+Also, we choose z0 = w0 as the beginning end-point of the curves and
+zn+1 = wn+1 as the common end-point. On each disc Di, let Fi denote a
+primitive of f (Theorem 2.1, Chapter 2). On the intersection of Di and
+Di+1, Fi and Fi+1 are two primitives of the same function, so they must
+diﬀer by a constant, say ci. Therefore
+Fi+1(zi+1) −Fi(zi+1) = Fi+1(wi+1) −Fi(wi+1),
+
+5. Homotopies and simply connected domains
+95
+z5 = w5
+z0 = w0
+w1
+w2
+z3
+z4
+D0
+D1
+D2
+D3
+D4
+z1
+z2
+w3
+w4
+Figure 7. Covering two nearby curves with discs
+hence
+(5)
+Fi+1(zi+1) −Fi+1(wi+1) = Fi(zi+1) −Fi(wi+1).
+This implies
+
+γs1
+f −
+
+γs2
+f =
+n
+
+i=0
+[Fi(zi+1) −Fi(zi)] −
+n
+
+i=0
+[Fi(wi+1) −Fi(wi)]
+=
+n
+
+i=0
+Fi(zi+1) −Fi(wi+1) −(Fi(zi) −Fi(wi))
+= Fn(zn+1) −Fn(wn+1) −(F0(z0) −F0(w0)) ,
+because of the cancellations due to (5). Since γs1 and γs2 have the same
+beginning and end point, we have proved that
+
+γs1
+f =
+
+γs2
+f.
+By subdividing [0, 1] into subintervals [si, si+1] of length less than δ, we
+may go from γ0 to γ1 by ﬁnitely many applications of the above argument,
+and the theorem is proved.
+
+96
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+A region Ωin the complex plane is simply connected if any two pair
+of curves in Ωwith the same end-points are homotopic.
+Example 1. A disc D is simply connected. In fact, if γ0(t) and γ1(t)
+are two curves lying in D, we can deﬁne γs(t) by
+γs(t) = (1 −s)γ0(t) + sγ1(t).
+Note that if 0 ≤s ≤1, then for each t, the point γs(t) is on the segment
+joining γ0(t) and γ1(t), and so is in D. The same argument works if D is
+replaced by a rectangle, or more generally by any open convex set. (See
+Exercise 21.)
+Example 2. The slit plane Ω= C −{(−∞, 0]} is simply connected. For
+a pair of curves γ0 and γ1 in Ω, we write γj(t) = rj(t)eiθj(t) (j = 0, 1)
+with rj(t) continuous and strictly positive, and θj(t) continuous with
+|θj(t)| < π. Then, we can deﬁne γs(t) as rs(t)eiθs(t) where
+rs(t) = (1 −s)r0(t) + sr1(t)
+and
+θs(t) = (1 −s)θ0(t) + sθ1(t).
+We then have γs(t) ∈Ωwhenever 0 ≤s ≤1.
+Example 3. With some eﬀort one can show that the interior of a toy
+contour is simply connected. This requires that we divide the interior into
+several subregions. A general form of the argument is given in Exercise 4.
+Example 4.
+In contrast with the previous examples, the punctured
+plane C −{0} is not simply connected. Intuitively, consider two curves
+with the origin between them. It is impossible to continuously pass from
+one curve to the other without going over 0. A rigorous proof of this fact
+requires one further result, and will be given shortly.
+Theorem 5.2 Any holomorphic function in a simply connected domain
+has a primitive.
+Proof.
+Fix a point z0 in Ωand deﬁne
+F(z) =
+
+γ
+f(w) dw
+where the integral is taken over any curve in Ωjoining z0 to z. This
+deﬁnition is independent of the curve chosen, since Ωis simply connected,
+
+6. The complex logarithm
+97
+and if ˜γ is another curve in Ωjoining z0 and z, we would have
+
+γ
+f(w) dw =
+
+˜γ
+f(w) dw
+by Theorem 5.1. Now we can write
+F(z + h) −F(z) =
+
+η
+f(w) dw
+where η is the line segment joining z and z + h. Arguing as in the proof
+of Theorem 2.1 in Chapter 2, we ﬁnd that
+lim
+h→0
+F(z + h) −F(z)
+h
+= f(z).
+As a result, we obtain the following version of Cauchy’s theorem.
+Corollary 5.3 If f is holomorphic in the simply connected region Ω,
+then
+
+γ
+f(z) dz = 0
+for any closed curve γ in Ω.
+This is immediate from the existence of a primitive.
+The fact that the punctured plane is not simply connected now follows
+rigorously from the observation that the integral of 1/z over the unit
+circle is 2πi, and not 0.
+6 The complex logarithm
+Suppose we wish to deﬁne the logarithm of a non-zero complex num-
+ber.
+If z = reiθ, and we want the logarithm to be the inverse to the
+exponential, then it is natural to set
+log z = log r + iθ.
+Here and below, we use the convention that log r denotes the standard 1
+logarithm of the positive number r. The trouble with the above deﬁni-
+tion is that θ is unique only up to an integer multiple of 2π. However,
+1By the standard logarithm, we mean the natural logarithm of positive numbers that
+appears in elementary calculus.

@@ -1,0 +1,209 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 2. Cauchy’s Theorem and Its Applications
+현재 소단원: 2.2 Local existence of primitives and Cauchy’s theorem in a disc
+직전 소단원: 「2.1 Goursat’s theorem」
+[본문]
+2. Local existence of primitives and Cauchy’s theorem in a disc
+37
+2 Local existence of primitives and Cauchy’s theorem in
+a disc
+We ﬁrst prove the existence of primitives in a disc as a consequence of
+Goursat’s theorem.
+Theorem 2.1 A holomorphic function in an open disc has a primitive
+in that disc.
+Proof.
+After a translation, we may assume without loss of generality
+that the disc, say D, is centered at the origin. Given a point z ∈D,
+consider the piecewise-smooth curve that joins 0 to z ﬁrst by moving in
+the horizontal direction from 0 to ˜z where ˜z = Re(z), and then in the
+vertical direction from ˜z to z. We choose the orientation from 0 to z,
+and denote this polygonal line (which consists of at most two segments)
+by γz, as shown on Figure 3.
+γz
+0
+˜z
+z
+Figure 3. The polygonal line γz
+Deﬁne
+F(z) =
+
+γz
+f(w) dw.
+The choice of γz gives an unambiguous deﬁnition of the function F(z).
+We contend that F is holomorphic in D and F ′(z) = f(z). To prove this,
+ﬁx z ∈D and let h ∈C be so small that z + h also belongs to the disc.
+Now consider the diﬀerence
+F(z + h) −F(z) =
+
+γz+h
+f(w) dw −
+
+γz
+f(w) dw.
+
+38
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+The function f is ﬁrst integrated along γz+h with the original orientation,
+and then along γz with the reverse orientation (because of the minus
+sign in front of the second integral). This corresponds to (a) in Figure 4.
+Since we integrate f over the line segment starting at the origin in two
+opposite directions, it cancels, leaving us with the contour in (b). Then,
+we complete the square and triangle as shown in (c), so that after an
+application of Goursat’s theorem for triangles and rectangles we are left
+with the line segment from z to z + h as given in (d).
+(a)
+(b)
+(c)
+(d)
+0
+z + h
+z
+z + h
+z
+Figure 4. Relation between the polygonal lines γz and γz+h
+Hence the above cancellations yield
+F(z + h) −F(z) =
+
+η
+f(w) dw
+where η is the straight line segment from z to z + h. Since f is continuous
+at z we can write
+f(w) = f(z) + ψ(w)
+where ψ(w) →0 as w →z. Therefore
+(4)
+F(z + h) −F(z) =
+
+η
+f(z) dw +
+
+η
+ψ(w) dw = f(z)
+
+η
+dw +
+
+η
+ψ(w) dw.
+On the one hand, the constant 1 has w as a primitive, so the ﬁrst integral
+is simply h by an application of Theorem 3.2 in Chapter 1. On the other
+
+2. Local existence of primitives and Cauchy’s theorem in a disc
+39
+hand, we have the following estimate:
+
+
+η
+ψ(w) dw
+ ≤sup
+w∈η
+|ψ(w)| |h|.
+Since the supremum above goes to 0 as h tends to 0, we conclude from
+equation (4) that
+lim
+h→0
+F(z + h) −F(z)
+h
+= f(z) ,
+thereby proving that F is a primitive for f on the disc.
+This theorem says that locally, every holomorphic function has a prim-
+itive. It is crucial to realize, however, that the theorem is true not only
+for arbitrary discs, but also for other sets as well. We shall return to this
+point shortly in our discussion of “toy contours.”
+Theorem 2.2 (Cauchy’s theorem for a disc) If f is holomorphic in
+a disc, then
+
+γ
+f(z) dz = 0
+for any closed curve γ in that disc.
+Proof.
+Since f has a primitive, we can apply Corollary 3.3 of Chap-
+ter 1.
+Corollary 2.3 Suppose f is holomorphic in an open set containing the
+circle C and its interior. Then
+
+C
+f(z) dz = 0.
+Proof.
+Let D be the disc with boundary circle C. Then there exists
+a slightly larger disc D′ which contains D and so that f is holomorphic
+on D′. We may now apply Cauchy’s theorem in D′ to conclude that
+
+C f(z) dz = 0.
+In fact, the proofs of the theorem and its corollary apply whenever we
+can deﬁne without ambiguity the “interior” of a contour, and construct
+appropriate polygonal paths in an open neighborhood of that contour
+and its interior. In the case of the circle, whose interior is the disc, there
+was no problem since the geometry of the disc made it simple to travel
+horizontally and vertically inside it.
+
+40
+Chapter 2. CAUCHY’S THEOREM AND ITS APPLICATIONS
+The following deﬁnition is loosely stated, although its applications
+will be clear and unambiguous. We call a toy contour any closed curve
+where the notion of interior is obvious, and a construction similar to
+that in Theorem 2.1 is possible in a neighborhood of the curve and its
+interior. Its positive orientation is that for which the interior is to the left
+as we travel along the toy contour. This is consistent with the deﬁnition
+of the positive orientation of a circle.
+For example, circles, triangles,
+and rectangles are toy contours, since in each case we can modify (and
+actually copy) the argument given previously.
+Another important example of a toy contour is the “keyhole” Γ (illus-
+trated in Figure 5), which we shall put to use in the proof of the Cauchy
+integral formula. It consists of two almost complete circles, one large
+Γint
+Γ
+Figure 5. The keyhole contour
+and one small, connected by a narrow corridor. The interior of Γ, which
+we denote by Γint, is clearly that region enclosed by the curve, and can
+be given precise meaning with enough work. We ﬁx a point z0 in that
+interior.
+If f is holomorphic in a neighborhood of Γ and its interior,
+then it is holomorphic in the inside of a slightly larger keyhole, say Λ,
+whose interior Λint contains Γ ∪Γint. If z ∈Λint, let γz denote any curve
+contained inside Λint connecting z0 to z, and which consists of ﬁnitely
+many horizontal or vertical segments (as in Figure 6). If ηz is any other
+such curve, the rectangle version of Goursat’s theorem (Corollary 1.2)
+implies that
+
+γz
+f(w) dw =
+
+ηz
+f(w) dw ,
+and we may therefore deﬁne F unambiguously in Λint.
+
+3. Evaluation of some integrals
+41
+Λ
+z0
+γz
+z
+Λint
+Figure 6. A curve γz
+Arguing as above allows us to show that F is a primitive of f in Λint
+and therefore
+
+Γ f(z) dz = 0.
+The important point is that for a toy contour γ we easily have that
+
+γ
+f(z) dz = 0 ,
+whenever f is holomorphic in an open set that contains the contour γ
+and its interior.
+Other examples of toy contours which we shall encounter in applica-
+tions and for which Cauchy’s theorem and its corollary also hold are
+given in Figure 7.
+While Cauchy’s theorem for toy contours is suﬃcient for most applica-
+tions we deal with, the question still remains as to what happens for more
+general curves. We take up this matter in Appendix B, where we prove
+Jordan’s theorem for piecewise-smooth curves. This theorem states that
+a simple closed piecewise-smooth curve has a well deﬁned interior that
+is “simply connected.” As a consequence, we ﬁnd that even in this more
+general situation, Cauchy’s theorem holds.
+3 Evaluation of some integrals
+Here we take up the idea that originally motivated Cauchy. We shall
+show by several examples how some integrals may be evaluated by the
+use of his theorem. A more systematic approach, in terms of the calculus
+of residues, may be found in the next chapter.

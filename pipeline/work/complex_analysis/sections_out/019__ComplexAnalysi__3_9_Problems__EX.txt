@@ -1,0 +1,204 @@
+[문서 맥락]
+책: Complex Analysis / 저자: Elias M. Stein & Rami Shakarchi
+챕터: 3. Meromorphic Functions and the Logarithm
+현재 소단원: 3.9 Problems
+직전 소단원: 「3.8 Exercises」
+[연습문제]
+108
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+(c) What are other examples of open sets that are simply connected?
+22. Show that there is no holomorphic function f in the unit disc D that extends
+continuously to ∂D such that f(z) = 1/z for z ∈∂D.
+9 Problems
+1.∗Consider a holomorphic map on the unit disc f : D →C which satisﬁes
+f(0) = 0. By the open mapping theorem, the image f(D) contains a small disc
+centered at the origin.
+We then ask: does there exist r > 0 such that for all
+f : D →C with f(0) = 0, we have Dr(0) ⊂f(D)?
+(a) Show that with no further restrictions on f, no such r exists. It suﬃces to
+ﬁnd a sequence of functions {fn} holomorphic in D such that 1/n /∈f(D).
+Compute f ′
+n(0), and discuss.
+(b) Assume in addition that f also satisﬁes f ′(0) = 1. Show that despite this
+new assumption, there exists no r > 0 satisfying the desired condition.
+[Hint: Try fϵ(z) = ϵ(ez/ϵ −1).]
+The Koebe-Bieberbach theorem states that if in addition to f(0) = 0 and
+f ′(0) = 1 we also assume that f is injective, then such an r exists and the best
+possible value is r = 1/4.
+(c) As a ﬁrst step, show that if h(z) = 1
+z + c0 + c1z + c2z2 + · · · is analytic and
+injective for 0 < |z| < 1, then ∞
+n=1 n|cn|2 ≤1.
+[Hint:
+Calculate the area of the complement of h(Dρ(0) −{0}) where
+0 < ρ < 1, and let ρ →1.]
+(d) If f(z) = z + a2z2 + · · · satisﬁes the hypotheses of the theorem, show that
+there exists another function g satisfying the hypotheses of the theorem such
+that g2(z) = f(z2).
+[Hint:
+f(z)/z
+is
+nowhere
+vanishing
+so
+there
+exists
+ψ
+such
+that
+ψ2(z) = f(z)/z and ψ(0) = 1. Check that g(z) = zψ(z2) is injective.]
+(e) With the notation of the previous part, show that |a2| ≤2, and that equality
+holds if and only if
+f(z) =
+z
+(1 −eiθz)2
+for some θ ∈R.
+[Hint: What is the power series expansion of 1/g(z)? Use part (c).]
+(f) If h(z) = 1
+z + c0 + c1z + c2z2 + · · · is injective on D and avoids the values
+z1 and z2, show that |z1 −z2| ≤4.
+[Hint:
+Look at the second coeﬃcient in the power series expansion of
+1/(h(z) −zj).]
+
+9. Problems
+109
+(g) Complete the proof of the theorem. [Hint: If f avoids w, then 1/f avoids 0
+and 1/w.]
+2. Let u be a harmonic function in the unit disc that is continuous on its closure.
+Deduce Poisson’s integral formula
+u(z0) = 1
+2π
+ 2π
+0
+1 −|z0|2
+|eiθ −z0|2 u(eiθ) dθ
+for |z0| < 1
+from the special case z0 = 0 (the mean value theorem). Show that if z0 = reiϕ,
+then
+1 −|z0|2
+|eiθ −z0|2 =
+1 −r2
+1 −2r cos(θ −ϕ) + r2 = Pr(θ −ϕ),
+and we recover the expression for the Poisson kernel derived in the exercises of the
+previous chapter.
+[Hint: Set u0(z) = u(T(z)) where
+T(z) = z0 −z
+1 −z0z .
+Prove that u0 is harmonic. Then apply the mean value theorem to u0, and make
+a change of variables in the integral.]
+3. If f(z) is holomorphic in the deleted neighborhood {0 < |z −z0| < r} and has
+a pole of order k at z0, then we can write
+f(z) =
+a−k
+(z −z0)k + · · · +
+a−1
+(z −z0) + g(z)
+where g is holomorphic in the disc {|z −z0| < r}. There is a generalization of this
+expansion that holds even if z0 is an essential singularity. This is a special case of
+the Laurent series expansion, which is valid in an even more general setting.
+Let f be holomorphic in a region containing the annulus {z : r1 ≤|z −z0| ≤r2}
+where 0 < r1 < r2. Then,
+f(z) =
+∞
+
+n=−∞
+an(z −z0)n
+where the series converges absolutely in the interior of the annulus. To prove this,
+it suﬃces to write
+f(z) =
+1
+2πi
+
+Cr2
+f(ζ)
+ζ −z dζ −
+1
+2πi
+
+Cr1
+f(ζ)
+ζ −z dζ
+when r1 < |z −z0| < r2, and argue as in the proof of Theorem 4.4, Chapter 2.
+Here Cr1 and Cr2 are the circles bounding the annulus.
+
+110
+Chapter 3. MEROMORPHIC FUNCTIONS AND THE LOGARITHM
+4.∗Suppose Ωis a bounded region. Let L be a (two-way inﬁnite) line that intersects
+Ω. Assume that Ω∩L is an interval I. Choosing an orientation for L, we can deﬁne
+Ωl and Ωr to be the subregions of Ωlying strictly to the left or right of L, with
+Ω= Ωl ∪I ∪Ωr a disjoint union. If Ωl and Ωr are simply connected, then Ωis
+simply connected.
+5.∗Let
+g(z) =
+1
+2πi
+ M
+−M
+h(x)
+x −z dx
+where h is continuous and supported in [−M, M].
+(a) Prove that the function g is holomorphic in C −[−M, M], and vanishes
+at inﬁnity, that is, lim|z|→∞|g(z)| = 0. Moreover, the “jump” of g across
+[−M, M] is h, that is,
+h(x) =
+lim
+ϵ→0,ϵ>0 g(x + iϵ) −g(x −iϵ).
+[Hint: Express the diﬀerence g(x + iϵ) −g(x −iϵ) in terms of a convolution
+of h with the Poisson kernel.]
+(b) If h satisﬁes a mild smoothness condition, for instance a H¨older condition
+with exponent α, that is, |h(x) −h(y)| ≤C|x −y|α for some C > 0 and all
+x, y ∈[−M, M], then g(x + iϵ) and g(x −iϵ) converge uniformly to functions
+g+(x) and g−(x) as ϵ →0.
+Then, g can be characterized as the unique
+holomorphic function that satisﬁes:
+(i) g is holomorphic outside [−M, M],
+(ii) g vanishes at inﬁnity,
+(iii) g(x + iϵ) and g(x −iϵ) converge uniformly as ϵ →0 to functions g+(x)
+and g−(x) with
+g+(x) −g−(x) = h(x).
+[Hint: If G is another function satisfying these conditions, g −G is entire.]
+
+4 The Fourier Transform
+Raymond Edward Alan Christopher Paley, Fellow of
+Trinity College, Cambridge, and International Research
+Fellow at the Massachusetts Institute of Technology
+and at Harvard University, was killed by an avalanche
+on April 7, 1933, while skiing in the vicinity of Banﬀ,
+Alberta.
+Although only twenty-six years of age, he
+was already recognized as the ablest of the group of
+young English mathematicians who have been inspired
+by the genius of G. H. Hardy and J. E. Littlewood. In
+a group notable for its brilliant technique, no one had
+developed this technique to a higher degree than Pa-
+ley. Nevertheless he should not be thought of primar-
+ily as a technician, for with this ability he combined
+creative power of the ﬁrst order. As he himself was
+wont to say, technique without “rugger tactics” will
+not get one far, and these rugger tactics he practiced
+to a degree that was characteristic of his forthright
+and vigorous nature.
+Possessed of an extraordinary capacity for mak-
+ing friends and for scientiﬁc collaboration, Paley be-
+lieved that the inspiration of continual interchange of
+ideas stimulates each collaborator to accomplish more
+than he would alone. Only the exceptional man works
+well with a partner, but Paley had collaborated suc-
+cessfully with many, including Littlewood, P´olya, Zyg-
+mund, and Wiener.
+N. Wiener, 1933
+If f is a function on R that satisﬁes appropriate regularity and decay
+conditions, then its Fourier transform is deﬁned by
+ˆf(ξ) =
+ ∞
+−∞
+f(x)e−2πixξ dx,
+ξ ∈R
+and its counterpart, the Fourier inversion formula, holds
+f(x) =
+ ∞
+−∞
+ˆf(ξ)e2πixξ dξ,
+x ∈R.
+The Fourier transform (including its d-dimensional variants), plays a ba-
