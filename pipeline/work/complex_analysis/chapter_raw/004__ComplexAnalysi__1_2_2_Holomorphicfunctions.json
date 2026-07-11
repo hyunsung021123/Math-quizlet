@@ -1,0 +1,297 @@
+{
+  "chapter_info": {
+    "title": "1. Preliminaries to Complex Analysis",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis",
+    "overall_goal": "복소함수론의 토대를 세운다. 복소수의 대수적·해석적 성질과 복소평면의 위상에서 출발하여, 미분가능성의 복소판인 정칙성(holomorphicity), 코시-리만 방정식(Cauchy-Riemann equations), 멱급수(power series), 그리고 곡선을 따른 적분을 차례로 도입한다. 궁극적으로 원시함수를 갖는 함수의 닫힌 곡선 위 적분이 $0$이라는 사실을 거쳐 코시 정리(Cauchy's theorem)로 나아가는 준비를 갖추는 것이 이 장의 목표다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.2.2 Holomorphic functions",
+      "step1_big_picture": {
+        "context": "1.2.1에서 연속성이 '방향을 가리지 않는' 순한 조건이며 이변수 실연속성으로 그대로 환원됨을 보았고, 그것이 정칙성과 대비될 것이라 예고했다. 이 소단원이 그 정칙성(holomorphicity)을 정면으로 도입한다 — 복소해석 전체의 심장이다. 정의 자체는 실미분의 차분몫 $\\frac{f(z_0+h)-f(z_0)}{h}$를 그대로 흉내 내지만(그래서 극한 개념은 1.1.2의 복소수열 수렴, 정의역은 1.1.3의 열린집합을 쓴다), 결정적 차이는 $h$가 복소평면의 '모든 방향'에서 $0$으로 접근할 때 극한이 하나로 일치해야 한다는 것이다. 이 한 줄의 요구가 놀랄 만큼 강력한 구조를 낳는다: 정칙함수는 자동으로 무한 번 미분가능하고 멱급수로 전개된다(해석적, analytic — 다음 절에서 다룸). 이 소단원의 목표는 그 강한 조건을 실변수 언어로 번역하는 것 — 즉 정칙성이 '실미분가능성 + 코시-리만 방정식(Cauchy-Riemann equations)'과 동치임을 양방향으로 증명하는 것(명제 2.3과 정리 2.4)이다.",
+        "hidden_intuition": "정칙성의 핵심은 '도함수가 방향에 무관한 단 하나의 복소수 $f'(z_0)$이다'라는 데 있다. 실평면의 사상은 방향마다 다르게 늘이고 각을 비틀 수 있지만($2\\times2$ 야코비 행렬은 임의), 정칙이라는 것은 그 국소 선형사상이 오직 '회전 + 확대'만 하도록 — 즉 어떤 복소수 하나를 곱하는 것과 똑같도록 — 제한됨을 뜻한다. 1.1.1에서 본 '복소수 곱셈 = 회전 + 확대'가 도함수 수준에서 부활하는 것이다. 이 그림의 반례가 켤레 $\\bar z$다: $F(x,y)=(x,-y)$는 실미분가능(선형)이지만 거울반사라 회전+확대가 아니어서 정칙이 아니다. 차분몫 $\\bar h/h$가 $h$의 방향에 따라 $1$(실수축)과 $-1$(허수축)로 갈리는 것이 그 증거다. 코시-리만 방정식은 바로 이 '방향 일치'를 편도함수 언어로 옮긴 것이고, 월링거(Wirtinger) 연산자로 압축하면 '$\\partial f/\\partial\\bar z=0$', 곧 '$f$가 $\\bar z$에 조금도 의존하지 않는다'는 한마디가 된다. 정칙함수란 $z$만으로 지어지고 $\\bar z$가 전혀 섞이지 않은 함수인 셈이다. 마지막으로 $\\det J_F=|f'(z_0)|^2$은 이 회전·확대가 넓이를 $|f'|^2$배로 키운다는 기하(길이는 $|f'|$배)를 담고 있다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "arrow",
+              "from": [
+                -2.7,
+                0
+              ],
+              "to": [
+                -1.7,
+                0
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -2.7,
+                0
+              ],
+              "to": [
+                -2.7,
+                1.0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -2.7,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.7,
+                -0.4
+              ],
+              "text": "z_0"
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                2.7,
+                0
+              ],
+              "to": [
+                3.47,
+                0.64
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                2.7,
+                0
+              ],
+              "to": [
+                2.06,
+                0.77
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2.7,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.7,
+                -0.4
+              ],
+              "text": "f(z_0)"
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.4,
+                0.35
+              ],
+              "to": [
+                1.4,
+                0.35
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                0.7
+              ],
+              "text": "f (holomorphic)"
+            }
+          ],
+          "caption": "정칙사상의 국소 그림: $f'(z_0)$가 방향에 무관한 하나의 복소수이므로, $z_0$ 근방의 직교하는 두 짧은 벡터가 상에서도 직교를 유지한 채 함께 회전·확대된다(등각, conformal). 1.1.1의 '복소수 곱셈 = 회전 + 확대'가 도함수 수준에서 재현된 것이다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정칙함수와 도함수 (holomorphic function, derivative)",
+          "formal_statement": "$\\Omega$를 $\\mathbb{C}$의 열린집합, $f$를 $\\Omega$ 위의 복소숫값 함수라 하자. $f$가 점 $z_0\\in\\Omega$에서 정칙(holomorphic)이라는 것은 차분몫 $$\\frac{f(z_0+h)-f(z_0)}{h}$$이 $h\\to0$일 때 극한을 가짐을 뜻한다(여기서 $h\\in\\mathbb{C}$, $h\\ne0$, $z_0+h\\in\\Omega$). 그 극한을 $f'(z_0)$로 쓰고 $z_0$에서의 도함수라 부른다: $$f'(z_0)=\\lim_{h\\to0}\\frac{f(z_0+h)-f(z_0)}{h}.$$ 강조할 점은 $h$가 복소수로서 어느 방향에서든 $0$에 접근할 수 있다는 것이다. $f$가 $\\Omega$의 모든 점에서 정칙이면 $\\Omega$에서 정칙이라 하고, 닫힌집합 $C$를 포함하는 어떤 열린집합에서 정칙이면 $C$에서 정칙이라 한다. $\\mathbb{C}$ 전체에서 정칙이면 $f$를 전해석함수(entire)라 부른다."
+        },
+        {
+          "type": "Remark",
+          "name": "용어와 정칙성의 강력함",
+          "formal_statement": "정칙(holomorphic) 대신 정규(regular) 또는 복소미분가능(complex differentiable)이라 부르기도 한다. 겉보기에는 실변수 도함수 정의를 흉내 낸 것이지만, 한 복소변수의 정칙함수는 한 실변수의 미분가능 함수보다 훨씬 강한 성질을 만족한다. 예컨대 정칙함수는 실제로 무한 번 복소미분가능하다 — 일계도함수의 존재가 모든 계 도함수의 존재를 보장한다(실변수에서는 한 번 미분가능해도 두 번은 안 되는 함수가 있다). 더 나아가 모든 정칙함수는 해석적(analytic)이다: 각 점 근방에서 멱급수로 전개된다(멱급수는 다음 절에서 다룸). 그래서 해석적(analytic)을 정칙의 동의어로 쓴다. 이는 멱급수로 전개되지 않는 무한 미분가능 실함수가 존재하는 것과 대조된다(Exercise 23 참조)."
+        },
+        {
+          "type": "Example",
+          "name": "기본 예: $z$, 다항식, $1/z$",
+          "formal_statement": "(예 1) $f(z)=z$는 $\\mathbb{C}$의 임의의 열린집합에서 정칙이고 $f'(z)=1$이다. 더 일반적으로 임의의 다항식 $p(z)=a_0+a_1z+\\cdots+a_nz^n$은 복소평면 전체에서 정칙(전해석)이며 $$p'(z)=a_1+2a_2z+\\cdots+na_nz^{n-1}.$$ (이는 아래 명제 2.2에서 따라온다.) (예 2) $f(z)=1/z$는 원점을 포함하지 않는 임의의 열린집합에서 정칙이고 $f'(z)=-1/z^2$이다."
+        },
+        {
+          "type": "Example",
+          "name": "결정적 반례: $f(z)=\\bar z$는 정칙이 아니다",
+          "formal_statement": "(예 3) $f(z)=\\bar z$는 어느 점에서도 정칙이 아니다. 실제로 차분몫은 $$\\frac{f(z_0+h)-f(z_0)}{h}=\\frac{\\overline{(z_0+h)}-\\overline{z_0}}{h}=\\frac{\\bar h}{h}$$이며, 이는 $h\\to0$일 때 극한을 갖지 않는다: $h$를 실수로 두면($h=t$) $\\bar h/h=t/t=1$이지만, $h$를 순허수로 두면($h=it$) $\\bar h/h=-it/it=-1$이다. 방향에 따라 극한이 달라지므로 정칙성이 실패한다. 이 예가 '복소미분가능성'이 '이변수 실미분가능성'과 본질적으로 다름을 극명히 보여 준다.",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.2,
+                  -0.35
+                ],
+                "text": "z_0"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.7,
+                  0
+                ],
+                "to": [
+                  0.3,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.9,
+                  0.35
+                ],
+                "text": "h real: ratio to 1"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  1.7
+                ],
+                "to": [
+                  0,
+                  0.3
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.1,
+                  2.0
+                ],
+                "text": "h imag: ratio to -1"
+              }
+            ],
+            "caption": "$f(z)=\\bar z$의 차분몫 $\\bar h/h$: $h$가 실수축을 따라 $0$으로 가면 $1$, 허수축을 따라 가면 $-1$. 접근 방향마다 극한이 달라 정칙이 아니다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "정칙성의 선형근사 기술과 연속성",
+          "formal_statement": "$f$가 $z_0\\in\\Omega$에서 정칙일 필요충분조건은 어떤 복소수 $a$가 존재하여, 충분히 작은 모든 $h$에 대해 $$f(z_0+h)-f(z_0)-ah=h\\,\\psi(h),\\qquad \\lim_{h\\to0}\\psi(h)=0$$이 성립하는 것이다. 이때 $a=f'(z_0)$이다. 특히 이 기술로부터 $f$는 정칙인 곳에서 연속임이 즉시 따른다.",
+          "idea_behind_proof": "정칙성의 정의(차분몫의 극한 존재)를 '$f$가 $z_0$ 근방에서 일차항 $f'(z_0)\\,h$로 근사되고, 나머지가 $h$보다 빠르게 사라진다'로 바꿔 쓴 것뿐이다. 이 선형근사 형태가 곱·연쇄법칙 증명(명제 2.2)과 연속성 함의를 실변수와 똑같은 방식으로 굴러가게 해 주는 실무용 도구가 된다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $f$가 정칙이면 $\\psi(h):=\\dfrac{f(z_0+h)-f(z_0)}{h}-f'(z_0)$로 두면 정의에 의해 $\\psi(h)\\to0$이고, 정리하면 $a=f'(z_0)$로 위 식이 성립한다.",
+            "($\\Leftarrow$) 위 식이 성립하면 $\\dfrac{f(z_0+h)-f(z_0)}{h}=a+\\psi(h)\\to a$이므로 $f$는 정칙이고 $f'(z_0)=a$.",
+            "(연속성) 위 식에서 $h\\to0$이면 우변 $ah+h\\psi(h)\\to0$이므로 $f(z_0+h)\\to f(z_0)$, 즉 $f$는 $z_0$에서 연속이다."
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.2 (대수 연산과 연쇄법칙)",
+          "formal_statement": "$f,g$가 $\\Omega$에서 정칙이면 다음이 성립한다. (i) $f+g$는 정칙이고 $(f+g)'=f'+g'$. (ii) $fg$는 정칙이고 $(fg)'=f'g+fg'$. (iii) $g(z_0)\\ne0$이면 $f/g$는 $z_0$에서 정칙이고 $(f/g)'=\\dfrac{f'g-fg'}{g^2}$. 또한 $f:\\Omega\\to U$와 $g:U\\to\\mathbb{C}$가 정칙이면 연쇄법칙 $$(g\\circ f)'(z)=g'(f(z))\\,f'(z)\\quad(\\forall z\\in\\Omega)$$이 성립한다.",
+          "idea_behind_proof": "모두 실변수 미분법칙의 증명을 그대로 옮긴 것이며, 위의 선형근사 기술 (2)가 그 이식을 매끄럽게 만든다. 핵심은 '증분 = (도함수)$\\times h$ + (고차 잔여)'로 각 함수를 대체한 뒤 대수적으로 정리하는 것이다.",
+          "proof_steps": [
+            "(곱) 기술 (2)로 $f(z_0+h)=f(z_0)+f'(z_0)h+h\\psi_f$, $g(z_0+h)=g(z_0)+g'(z_0)h+h\\psi_g$ ($\\psi_f,\\psi_g\\to0$). 두 식을 곱하고 $h^2$ 및 $h\\psi$ 항을 모으면 $(fg)(z_0+h)-(fg)(z_0)=\\big(f'(z_0)g(z_0)+f(z_0)g'(z_0)\\big)h+h\\cdot(\\text{$0$으로 가는 항})$. 따라서 $(fg)'=f'g+fg'$.",
+            "(연쇄) $f$의 증분 $k=f(z_0+h)-f(z_0)=f'(z_0)h+h\\psi_f\\to0$을 $g$의 기술 (2)에 대입: $g(f(z_0)+k)-g(f(z_0))=g'(f(z_0))k+k\\psi_g=g'(f(z_0))f'(z_0)h+h\\cdot(\\text{$0$으로 가는 항})$. 나누면 $(g\\circ f)'=g'(f(z))f'(z)$.",
+            "(합·몫) 합은 자명하고, 몫은 먼저 $1/g$가 $g(z_0)\\ne0$에서 정칙이고 도함수가 $-g'/g^2$임을 (2)로 보인 뒤 곱셈 규칙과 결합하면 얻어진다."
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "사상으로서의 복소함수와 실미분가능성",
+          "formal_statement": "복소함수 $f=u+iv$에 사상 $F(x,y)=(u(x,y),v(x,y))$ ($\\mathbb{R}^2\\to\\mathbb{R}^2$)를 대응시킨다. $F$가 점 $P_0=(x_0,y_0)$에서 (실수의 의미로) 미분가능하다는 것은 선형사상 $J:\\mathbb{R}^2\\to\\mathbb{R}^2$이 존재하여 $$\\frac{|F(P_0+H)-F(P_0)-J(H)|}{|H|}\\to0\\quad(|H|\\to0,\\ H\\in\\mathbb{R}^2)$$인 것이다. 이때 $J$는 유일하며 표준기저에서 야코비 행렬 $$J_F=\\begin{pmatrix}\\partial u/\\partial x & \\partial u/\\partial y\\\\[2pt] \\partial v/\\partial x & \\partial v/\\partial y\\end{pmatrix}$$로 주어진다. 복소미분에서는 도함수가 복소수 $f'(z_0)$인 반면 실미분에서는 행렬 $J_F$이며, 이 둘의 연결이 아래의 코시-리만 방정식이다. (주의: $f(z)=\\bar z$의 $F(x,y)=(x,-y)$처럼, $F$가 실미분가능(심지어 선형)이어도 $f$가 정칙이 아닐 수 있다 — 실미분가능성만으로는 정칙성을 보장하지 못한다.)"
+        },
+        {
+          "type": "Proposition",
+          "name": "정칙성은 코시-리만 방정식을 함의한다",
+          "formal_statement": "$f$가 $z_0$에서 정칙이면 $u,v$의 일계 편도함수가 존재하고 코시-리만 방정식 $$\\frac{\\partial u}{\\partial x}=\\frac{\\partial v}{\\partial y},\\qquad \\frac{\\partial u}{\\partial y}=-\\frac{\\partial v}{\\partial x}$$을 만족한다. 동치로, $\\dfrac{\\partial f}{\\partial x}=\\dfrac{1}{i}\\dfrac{\\partial f}{\\partial y}$이다.",
+          "idea_behind_proof": "정칙성은 차분몫의 극한이 $h$의 접근 방향과 무관하기를 요구한다(1.2.1에서 예고한 '방향 일치'). 그러니 $h$를 실수축으로, 또 허수축으로 각각 보내 얻는 두 표현이 반드시 같아야 하고, 바로 그 등식에서 방정식이 강제된다. 두 특수한 방향만으로 이미 강한 제약이 나온다는 점이 핵심이다.",
+          "proof_steps": [
+            "$h=h_1$(실수)로 보내면 $f'(z_0)=\\lim_{h_1\\to0}\\dfrac{f(x_0+h_1,y_0)-f(x_0,y_0)}{h_1}=\\dfrac{\\partial f}{\\partial x}(z_0)$.",
+            "$h=ih_2$(순허수)로 보내면 $f'(z_0)=\\lim_{h_2\\to0}\\dfrac{f(x_0,y_0+h_2)-f(x_0,y_0)}{ih_2}=\\dfrac{1}{i}\\dfrac{\\partial f}{\\partial y}(z_0)$.",
+            "두 값이 같아야 하므로 $\\dfrac{\\partial f}{\\partial x}=\\dfrac{1}{i}\\dfrac{\\partial f}{\\partial y}$. $f=u+iv$를 대입하고 $1/i=-i$로 실수부·허수부를 분리하면 $\\dfrac{\\partial u}{\\partial x}=\\dfrac{\\partial v}{\\partial y}$와 $\\dfrac{\\partial u}{\\partial y}=-\\dfrac{\\partial v}{\\partial x}$을 얻는다."
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "월링거 연산자 (Wirtinger derivatives)",
+          "formal_statement": "두 미분연산자를 다음과 같이 정의한다. $$\\frac{\\partial}{\\partial z}=\\frac{1}{2}\\!\\left(\\frac{\\partial}{\\partial x}+\\frac{1}{i}\\frac{\\partial}{\\partial y}\\right)=\\frac{1}{2}\\!\\left(\\frac{\\partial}{\\partial x}-i\\frac{\\partial}{\\partial y}\\right),\\qquad \\frac{\\partial}{\\partial \\bar z}=\\frac{1}{2}\\!\\left(\\frac{\\partial}{\\partial x}-\\frac{1}{i}\\frac{\\partial}{\\partial y}\\right)=\\frac{1}{2}\\!\\left(\\frac{\\partial}{\\partial x}+i\\frac{\\partial}{\\partial y}\\right).$$ 이 언어에서 정칙성은 '$f$가 $\\bar z$에 의존하지 않는다'는 조건 $\\partial f/\\partial\\bar z=0$으로 압축된다(아래 명제 2.3)."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.3 (정칙성의 월링거·야코비 특징화)",
+          "formal_statement": "$f$가 $z_0$에서 정칙이면 $$\\frac{\\partial f}{\\partial \\bar z}(z_0)=0,\\qquad f'(z_0)=\\frac{\\partial f}{\\partial z}(z_0)=2\\,\\frac{\\partial u}{\\partial z}(z_0).$$ 또한 $F(x,y)=f(z)$로 두면 $F$는 실변수의 의미로 미분가능하고 $$\\det J_F(x_0,y_0)=|f'(z_0)|^2.$$",
+          "idea_behind_proof": "코시-리만 방정식을 월링거 연산자로 옮기면 '정칙 $\\iff \\partial_{\\bar z}f=0$'이라는 한 줄로 압축된다 — 정칙함수는 $\\bar z$가 전혀 섞이지 않은 함수라는 직관의 형식화다. 도함수 공식은 앞서 얻은 $f'=\\partial f/\\partial x=\\frac{1}{i}\\partial f/\\partial y$를 평균 내어 $\\partial_z$로 묶은 것이고, 야코비 행렬식은 코시-리만으로 정리하면 자연스럽게 $|f'|^2$이 된다.",
+          "proof_steps": [
+            "$\\partial_{\\bar z}f=\\tfrac12(f_x+if_y)$이고 $f=u+iv$이면 $=\\tfrac12\\big((u_x-v_y)+i(v_x+u_y)\\big)$. 이것이 $0$일 필요충분조건이 $u_x=v_y$이고 $u_y=-v_x$, 즉 코시-리만이다. 정칙이면 코시-리만이 성립하므로 $\\partial_{\\bar z}f=0$.",
+            "$f'(z_0)=\\tfrac12\\big(f_x+\\tfrac1i f_y\\big)=\\partial_z f$. 한편 $\\partial_z f=\\tfrac12(f_x-if_y)$에 $f=u+iv$와 코시-리만을 넣으면 $=u_x-iu_y=2\\cdot\\tfrac12(u_x-iu_y)=2\\,\\partial_z u$.",
+            "$\\det J_F=u_xv_y-u_yv_x$에 코시-리만($v_y=u_x,\\ v_x=-u_y$)을 대입하면 $=u_x^2+u_y^2=|u_x-iu_y|^2=|f'(z_0)|^2$."
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.4 (코시-리만의 역: 충분조건)",
+          "formal_statement": "열린집합 $\\Omega$ 위의 복소함수 $f=u+iv$에서 $u,v$가 연속미분가능(continuously differentiable, $C^1$)이고 $\\Omega$에서 코시-리만 방정식을 만족한다고 하자. 그러면 $f$는 $\\Omega$에서 정칙이며 $f'(z)=\\partial f/\\partial z$이다.",
+          "idea_behind_proof": "명제 2.3까지는 '정칙 $\\Rightarrow$ 코시-리만'이었다. 이 정리는 그 역으로 아이디어의 원을 닫는다. 열쇠는 $C^1$ 가정이 주는 일차근사 $u(x+h_1,y+h_2)-u(x,y)=u_xh_1+u_yh_2+|h|\\psi_1$ (그리고 $v$도 동일)이며, 여기에 코시-리만을 대입하면 두 실선형항이 정확히 '복소수 하나를 곱하는' 형태 $(u_x-iu_y)(h_1+ih_2)$로 합쳐진다 — 그 결과 차분몫이 방향과 무관한 극한 $u_x-iu_y$를 갖게 되어 정칙이 된다. 주의: 코시-리만 방정식만으로는 부족하며 $u,v$의 연속미분가능성($C^1$)이 반드시 필요하다.",
+          "proof_steps": [
+            "$u,v$의 $C^1$ 미분가능성으로 $h=h_1+ih_2$에 대해 $u(x+h_1,y+h_2)-u(x,y)=u_xh_1+u_yh_2+|h|\\psi_1(h)$, $v(x+h_1,y+h_2)-v(x,y)=v_xh_1+v_yh_2+|h|\\psi_2(h)$ ($\\psi_1,\\psi_2\\to0$).",
+            "$f=u+iv$의 증분을 만들고 코시-리만($v_x=-u_y,\\ v_y=u_x$)을 대입해 정리하면 $$f(z+h)-f(z)=\\Big(\\frac{\\partial u}{\\partial x}-i\\frac{\\partial u}{\\partial y}\\Big)(h_1+ih_2)+|h|\\psi(h),\\qquad \\psi=\\psi_1+i\\psi_2\\to0.$$",
+            "양변을 $h=h_1+ih_2$로 나누면 $\\dfrac{f(z+h)-f(z)}{h}=\\Big(u_x-iu_y\\Big)+\\dfrac{|h|}{h}\\psi(h)$이고, $\\big|\\tfrac{|h|}{h}\\big|=1$·$\\psi\\to0$이므로 잔여항은 사라진다. 따라서 극한이 방향과 무관하게 존재해 $f$는 정칙이고 $f'(z)=u_x-iu_y=2\\,\\partial_z u=\\partial_z f$."
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$f(z)=z^2$에 대해 실수부 $u$와 허수부 $v$를 구하고, 코시-리만 방정식을 확인하여 $f$가 전해석(entire)임을 보인 뒤 $f'(z)$를 구하라.",
+          "hint": "$z^2=(x+iy)^2$을 전개해 $u,v$를 읽는다. 코시-리만: $u_x=v_y$, $u_y=-v_x$. 도함수는 $f'=u_x+iv_x$ 또는 $\\partial f/\\partial z$로 계산.",
+          "solution": "$z^2=(x^2-y^2)+i(2xy)$이므로 $u=x^2-y^2$, $v=2xy$. 편도함수: $u_x=2x,\\ u_y=-2y,\\ v_x=2y,\\ v_y=2x$. 코시-리만 확인: $u_x=2x=v_y$ ✓, $u_y=-2y=-v_x$ ✓. $u,v$는 다항식이라 $C^1$(사실 $C^\\infty$)이므로 정리 2.4에 의해 $f$는 $\\mathbb{C}$ 전체에서 정칙, 곧 전해석이다. 도함수 $f'(z)=u_x+iv_x=2x+i\\,2y=2(x+iy)=2z$. 일반화: 귀납과 명제 2.2로 $(z^n)'=nz^{n-1}$, 따라서 모든 다항식은 전해석이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$f(z)=\\bar z$가 $\\mathbb{C}$의 어느 점에서도 정칙이 아님을 (a) 코시-리만 방정식 위배와 (b) $\\partial f/\\partial\\bar z\\ne0$ 계산의 두 방법으로 확인하라.",
+          "hint": "$\\bar z=x-iy$이므로 $u=x$, $v=-y$. (b)에서는 $\\dfrac{\\partial}{\\partial\\bar z}=\\tfrac12\\big(\\partial_x+i\\partial_y\\big)$를 $f$에 적용하라.",
+          "solution": "$u=x,\\ v=-y$. (a) $u_x=1$이고 $v_y=-1$이므로 $u_x\\ne v_y$ — 코시-리만의 첫 방정식부터 (모든 점에서) 어긋난다. 명제 2.3(정칙 $\\Rightarrow$ 코시-리만)의 대우로 $f$는 어디서도 정칙이 아니다. (b) $\\dfrac{\\partial f}{\\partial\\bar z}=\\tfrac12(f_x+if_y)$. $f=x-iy$에서 $f_x=1$, $f_y=-i$이므로 $\\dfrac{\\partial f}{\\partial\\bar z}=\\tfrac12\\big(1+i(-i)\\big)=\\tfrac12(1+1)=1\\ne0$. 정칙성의 기준 $\\partial f/\\partial\\bar z=0$을 위반한다. 일반화: $\\bar z$는 '$\\bar z$에 진짜로 의존하는' 함수의 원형이며, 정칙성이란 정확히 '$\\bar z$ 의존성이 전혀 없음'($\\partial_{\\bar z}f=0$)이다."
+        },
+        {
+          "type": "ox",
+          "question": "복소함수 $f$에 대응하는 실사상 $F:(x,y)\\mapsto(u,v)$가 (실수의 의미로) 미분가능하기만 하면 $f$는 정칙이다.",
+          "answer": "X",
+          "explanation": "실미분가능성만으로는 부족하다. 반례 $f(z)=\\bar z$의 $F(x,y)=(x,-y)$는 선형이라 무한히 미분가능하지만 코시-리만을 어겨 정칙이 아니다. 정칙이 되려면 $u,v$의 $C^1$ 미분가능성에 더해 코시-리만 방정식까지 성립해야 한다(정리 2.4)."
+        },
+        {
+          "type": "ox",
+          "question": "$f$가 $z_0$에서 정칙이면 $f$는 $z_0$에서 연속이다.",
+          "answer": "O",
+          "explanation": "선형근사 기술 $f(z_0+h)-f(z_0)=f'(z_0)h+h\\psi(h)$ ($\\psi\\to0$)에서 $h\\to0$이면 우변이 $0$으로 가므로 $f(z_0+h)\\to f(z_0)$. 즉 정칙성은 연속성을 함의한다(역은 거짓 — 연속이어도 정칙이 아닐 수 있다, 예: $\\bar z$)."
+        },
+        {
+          "type": "conceptual",
+          "question": "정칙성이 왜 '$F=(u,v)$의 실미분가능성 + 코시-리만 방정식'과 동치인지 설명하고, 코시-리만이 성립할 때 야코비 행렬 $J_F$가 기하학적으로 어떤 특별한 선형사상이 되는지 밝혀라. 항등식 $\\det J_F=|f'(z_0)|^2$은 이 그림과 어떻게 맞물리는가?",
+          "hint": "코시-리만 하에서 $J_F=\\begin{pmatrix}a&-b\\\\ b&a\\end{pmatrix}$ ($a=u_x,\\ b=v_x$) 꼴이 됨을 확인하고, 이것이 복소수 $a+ib$ 곱셈과 같은 사상임을 1.1.1의 '곱셈 = 회전 + 확대'와 연결하라.",
+          "answer": "실미분가능성은 $F$가 $P_0$ 근방에서 선형사상 $J_F$로 근사됨을 뜻한다. 일반적인 $J_F=\\begin{pmatrix}u_x&u_y\\\\ v_x&v_y\\end{pmatrix}$는 임의의 $2\\times2$ 실행렬이라 방향마다 다르게 늘이고 각을 비튼다. 그런데 코시-리만 방정식 $u_x=v_y,\\ u_y=-v_x$을 넣으면 $J_F=\\begin{pmatrix}a&-b\\\\ b&a\\end{pmatrix}$ ($a=u_x,\\ b=v_x$) 꼴로 특수화된다. 이 행렬은 정확히 복소수 $a+ib$를 곱하는 사상의 실행렬 표현이며, $a+ib=re^{i\\theta}$라면 '$\\theta$만큼 회전하고 $r$배 확대'하는 등각(conformal) 선형사상이다 — 1.1.1의 '복소수 곱셈 = 회전 + 확대'가 여기서 도함수의 국소 기하로 부활한다. 즉 정칙성 = 도함수가 방향에 무관한 단 하나의 복소수 $f'(z_0)$라는 것 = $J_F$가 (한 방향으로 찌그러뜨리지 않고) 순수한 회전·확대라는 것이다. 마지막으로 $\\det J_F=a^2+b^2=|a+ib|^2=|f'(z_0)|^2$은 이 사상의 넓이 확대율이 $|f'(z_0)|^2$임을 말한다 — 길이를 $|f'|$배 늘이는 등각사상이 넓이는 그 제곱배로 늘인다는 자연스러운 귀결이며, $f'(z_0)\\ne0$이면 $\\det J_F>0$이 되어 국소적으로 방향을 보존하는 가역사상이 됨도 보장한다."
+        }
+      ]
+    }
+  ]
+}

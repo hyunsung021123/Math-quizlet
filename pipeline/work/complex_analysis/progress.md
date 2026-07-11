@@ -12,7 +12,7 @@
 | 001 | [x] | 1.1.2 Convergence | section | `001__ComplexAnalysi__1_1_2_Convergence.txt` |
 | 002 | [x] | 1.1.3 Sets in the complex plane | section | `002__ComplexAnalysi__1_1_3_Setsinthecomplexplane.txt` |
 | 003 | [x] | 1.2.1 Continuous functions | section | `003__ComplexAnalysi__1_2_1_Continuousfunctions.txt` |
-| 004 | [ ] | 1.2.2 Holomorphic functions | section | `004__ComplexAnalysi__1_2_2_Holomorphicfunctions.txt` |
+| 004 | [x] | 1.2.2 Holomorphic functions | section | `004__ComplexAnalysi__1_2_2_Holomorphicfunctions.txt` |
 | 005 | [ ] | 1.2.3 Power series | section | `005__ComplexAnalysi__1_2_3_Powerseries.txt` |
 | 006 | [ ] | 1.3 Integration along curves | section | `006__ComplexAnalysi__1_3_Integrationalongcurves.txt` |
 | 007 | [ ] | 1.4 Exercises | exercises | `007__ComplexAnalysi__1_4_Exercises__EX.txt` |
