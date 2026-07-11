@@ -381,6 +381,195 @@
           "answer": "실수 곱셈은 1차원 수직선 위에서 늘이기·줄이기와 부호 반전($0$ 또는 $\\pi$ 회전)만 할 수 있다. 복소수 곱셈은 여기에 임의의 각 회전을 더한다: $w=se^{i\\varphi}$를 곱하면 크기는 $s$배 확대되고 편각은 $\\varphi$만큼 회전한다. 극형식 $z=re^{i\\theta}$는 이 두 효과를 완전히 분리해 보여 준다 — 곱셈에서 크기끼리는 곱($r\\cdot s$), 각끼리는 합($\\theta+\\varphi$)이 되어 $zw=rs\\,e^{i(\\theta+\\varphi)}$. 특히 $i=e^{i\\pi/2}$를 곱하면 크기는 그대로 두고 $90^\\circ$ 회전만 일어난다. 이 '곱셈은 회전과 확대'라는 관점은 이후 정칙함수를 국소적으로 '회전과 확대(등각사상)'로 이해하는 복소해석의 핵심 직관으로 이어진다."
         }
       ]
+    },
+    {
+      "section_title": "1.1.2 Convergence",
+      "step1_big_picture": {
+        "context": "직전 소단원 1.1.1에서 복소수의 절댓값 $|z|$가 곧 $\\mathbb{R}^2$의 유클리드 거리와 일치한다는 사실을 세웠다. 이 소단원은 그 관찰 위에서 해석학의 심장인 수렴(convergence)과 극한을 복소수로 옮긴다. 핵심 메시지는 역설적으로 '새로운 것이 없다'는 것이다 — $\\mathbb{C}$의 거리가 $\\mathbb{R}^2$의 거리와 같으므로, 복소수열의 수렴은 평면 점열의 수렴과 완전히 같은 이야기이고, 다시 실수부·허수부 두 실수열의 수렴으로 분해된다. 이 분해 원리를 극한을 몰라도 수렴을 판정하는 코시 수열(Cauchy sequence)에 적용하면, $\\mathbb{R}$의 완비성으로부터 $\\mathbb{C}$의 완비성(정리 1.1)이 거의 공짜로 따라온다. 완비성은 이후 멱급수의 수렴, 곡선적분의 존재성 등 이 책의 거의 모든 극한 논증이 기대는 바닥돌이다.",
+        "hidden_intuition": "수렴을 '$z_n$이 $w$에 가까워진다'로 느슨히 말하지만, 정의의 핵심은 오직 하나의 실수열 $|z_n-w|$가 $0$으로 가는지다 — 복소수 사이의 '거리'를 실수 하나로 압축해 버리는 것이다. 그림으로 보면 $w$를 중심으로 반지름 $\\epsilon$인 작은 원판을 그렸을 때, 아무리 작은 $\\epsilon$이라도 결국 유한개를 뺀 모든 $z_n$이 그 원판 안에 갇힌다는 뜻이다. 여기서 미묘한 함정 하나: 크기 $|z_n|$이 수렴한다고 $z_n$이 수렴하는 건 아니다($i^n$은 크기가 늘 $1$이지만 편각이 계속 돌아 수렴하지 않는다) — 오직 $|z_n-w|\\to 0$처럼 '$w$까지의 거리'가 줄어야 한다. 코시 수열의 발상은 더 영리하다: 목표점 $w$를 미리 알지 못해도, 수열의 항들이 자기들끼리 점점 뭉치기만 하면($|z_n-z_m|\\to 0$) 어딘가로 수렴한다고 보장하고 싶은 것이다. 이 보장이 성립하는 공간을 완비(complete)라 부르며, $\\mathbb{C}$가 완비인 이유는 순전히 '실수부·허수부로 쪼개면 각각이 완비인 $\\mathbb{R}$의 코시 수열이 되기 때문'이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "Re",
+            "y": "Im"
+          },
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                2,
+                1
+              ],
+              "r": 0.5,
+              "dash": "4,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.05,
+                1.35
+              ],
+              "text": "w"
+            },
+            {
+              "shape": "point",
+              "at": [
+                3.6,
+                2.4
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                3.9,
+                2.5
+              ],
+              "text": "z_1"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.7,
+                -0.1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.4,
+                -0.35
+              ],
+              "text": "z_2"
+            },
+            {
+              "shape": "point",
+              "at": [
+                3.0,
+                0.1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                3.3,
+                0.05
+              ],
+              "text": "z_3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.1,
+                1.9
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.75,
+                2.05
+              ],
+              "text": "z_4"
+            },
+            {
+              "shape": "point",
+              "at": [
+                2.35,
+                0.7
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.75,
+                1.25
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2.1,
+                1.25
+              ]
+            }
+          ],
+          "caption": "$z_n\\to w$의 그림: 임의의 반지름 $\\epsilon$인 원판 $\\{z:|z-w|<\\epsilon\\}$에 대해, 유한개를 제외한 모든 항이 그 안에 들어간다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "복소수열의 수렴 (convergence)",
+          "formal_statement": "복소수열 $\\{z_1,z_2,\\dots\\}$이 $w\\in\\mathbb{C}$로 수렴한다는 것은 $$\\lim_{n\\to\\infty}|z_n-w| = 0$$이 성립함을 뜻하며, 이때 $w=\\lim_{n\\to\\infty}z_n$으로 쓴다. 절댓값 $|\\cdot|$가 $\\mathbb{R}^2$의 유클리드 거리와 일치하므로(1.1.1), $z_n\\to w$일 필요충분조건은 대응하는 평면 점열이 $w$에 대응하는 점으로 수렴하는 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "성분별 수렴 판정",
+          "formal_statement": "복소수열 $\\{z_n\\}$이 $w$로 수렴할 필요충분조건은 실수열 $\\{\\operatorname{Re}(z_n)\\}$과 $\\{\\operatorname{Im}(z_n)\\}$이 각각 $\\operatorname{Re}(w)$와 $\\operatorname{Im}(w)$로 수렴하는 것이다.",
+          "idea_behind_proof": "1.1.1의 부등식 $|\\operatorname{Re}(z)|\\le|z|$, $|\\operatorname{Im}(z)|\\le|z|$가 한 방향을, 삼각부등식에서 나오는 $|z|\\le|\\operatorname{Re}(z)|+|\\operatorname{Im}(z)|$가 반대 방향을 준다. 두 부등식을 $z=z_n-w$에 대입하면 '복소 거리 $|z_n-w|$'와 '두 성분 거리의 합'이 서로를 위·아래에서 눌러, 하나가 $0$으로 가는 것과 다른 하나가 $0$으로 가는 것이 동치가 된다. 책이 연습문제로 남긴 사실이지만, 이후 완비성 증명의 뼈대이므로 명제로 승격해 둔다.",
+          "proof_steps": [
+            "$z=z_n-w$로 두면 $\\operatorname{Re}(z)=\\operatorname{Re}(z_n)-\\operatorname{Re}(w)$, $\\operatorname{Im}(z)=\\operatorname{Im}(z_n)-\\operatorname{Im}(w)$.",
+            "($\\Rightarrow$) $|\\operatorname{Re}(z_n)-\\operatorname{Re}(w)|\\le|z_n-w|$이고 $|\\operatorname{Im}(z_n)-\\operatorname{Im}(w)|\\le|z_n-w|$이므로, $|z_n-w|\\to 0$이면 두 성분 거리도 각각 $0$으로 간다.",
+            "($\\Leftarrow$) $|z_n-w|\\le|\\operatorname{Re}(z_n)-\\operatorname{Re}(w)|+|\\operatorname{Im}(z_n)-\\operatorname{Im}(w)|$이므로, 두 성분이 각각 수렴하면 우변이 $0$으로 가 $|z_n-w|\\to 0$."
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "코시 수열 (Cauchy sequence)",
+          "formal_statement": "복소수열 $\\{z_n\\}$이 코시 수열(Cauchy sequence)이라는 것은 $$|z_n-z_m|\\to 0 \\quad (n,m\\to\\infty)$$을 뜻한다. 즉 임의의 $\\epsilon>0$에 대해 정수 $N>0$이 존재하여 $n,m>N$이면 항상 $|z_n-z_m|<\\epsilon$이 되는 것이다. (수렴의 정의와 달리 극한값 $w$를 언급하지 않고 수열 자신의 항들만으로 조건을 기술한다는 점이 핵심이다.)"
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.1 (C는 완비이다)",
+          "formal_statement": "복소수 $\\mathbb{C}$는 완비(complete)이다. 즉 $\\mathbb{C}$의 모든 코시 수열은 $\\mathbb{C}$ 안의 극한을 갖는다.",
+          "idea_behind_proof": "실해석학의 알려진 사실 '$\\mathbb{R}$은 완비이다(모든 실수 코시 수열은 실수 극한을 갖는다, 볼차노-바이어슈트라스)'를 재사용하는 것이 전부다. 다리는 성분별 수렴 판정과 똑같은 부등식이다 — 복소수열이 코시일 필요충분조건은 실수부·허수부 두 실수열이 각각 코시인 것이므로, 문제가 두 개의 독립적인 실수 코시 수열로 분해된다. 각각에 $\\mathbb{R}$의 완비성을 적용해 실수 극한을 얻고, 성분별 수렴으로 다시 합쳐 복소 극한을 조립한다. '새 개념은 없고 새 어휘일 뿐'이라는 책의 표현 그대로다.",
+          "proof_steps": [
+            "$\\{z_n\\}$을 $\\mathbb{C}$의 코시 수열이라 하자. 부등식 $|\\operatorname{Re}(z_n)-\\operatorname{Re}(z_m)|\\le|z_n-z_m|$, $|\\operatorname{Im}(z_n)-\\operatorname{Im}(z_m)|\\le|z_n-z_m|$에 의해 $\\{\\operatorname{Re}(z_n)\\}$과 $\\{\\operatorname{Im}(z_n)\\}$은 각각 $\\mathbb{R}$의 코시 수열이다.",
+            "$\\mathbb{R}$의 완비성에 의해 실수 극한 $a=\\lim_n\\operatorname{Re}(z_n)$, $b=\\lim_n\\operatorname{Im}(z_n)$이 존재한다.",
+            "$w=a+ib\\in\\mathbb{C}$로 두면, 성분별 수렴 판정(위 명제)에 의해 $z_n\\to w$.",
+            "따라서 임의의 코시 수열이 $\\mathbb{C}$ 안의 극한을 가지므로 $\\mathbb{C}$는 완비이다. (역으로 $\\{z_n\\}$이 코시임과 성분열들이 코시임은 $|z_n-z_m|\\le|\\operatorname{Re}\\,\\text{차}|+|\\operatorname{Im}\\,\\text{차}|$로부터 동치임도 확인된다.)"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$z_n=\\dfrac{i^n}{n}$의 수렴 여부를 판정하고, 수렴하면 극한을 구하라.",
+          "hint": "수렴의 정의는 어떤 $w$에 대해 $|z_n-w|\\to 0$인 것이다. 후보 $w=0$을 두고 $|z_n|$을 직접 계산해 보라. $|i^n|$의 값에 주의.",
+          "solution": "$|i^n|=1$이므로 $|z_n-0|=|z_n|=\\dfrac{|i^n|}{n}=\\dfrac{1}{n}\\to 0$. 따라서 $z_n\\to 0$. 참고로 $i^n$은 $i,-1,-i,1$을 순환하며 편각은 수렴하지 않지만, 크기가 $0$으로 줄어드니 수열 자체는 원점으로 수렴한다. 일반화: 임의의 복소수열에서 $|z_n|\\to 0 \\iff z_n\\to 0$."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "부분합 $z_n=\\displaystyle\\sum_{k=1}^{n}\\dfrac{i^k}{k^2}$이 $\\mathbb{C}$에서 수렴함을 완비성(정리 1.1)을 이용해 보여라. (극한값을 구할 필요는 없다.)",
+          "hint": "극한을 몰라도 코시 수열임을 보이면 정리 1.1이 수렴을 보장한다. $n>m$에 대해 $|z_n-z_m|$을 삼각부등식으로 $\\sum 1/k^2$의 꼬리로 위에서 눌러라. $|i^k|=1$임을 이용.",
+          "solution": "$n>m$이라 하면 $|z_n-z_m|=\\left|\\displaystyle\\sum_{k=m+1}^{n}\\dfrac{i^k}{k^2}\\right|\\le\\displaystyle\\sum_{k=m+1}^{n}\\dfrac{|i^k|}{k^2}=\\displaystyle\\sum_{k=m+1}^{n}\\dfrac{1}{k^2}$ (삼각부등식과 $|i^k|=1$). 급수 $\\sum_{k\\ge1}1/k^2$이 수렴하므로 그 부분합은 코시 수열이고, 따라서 위 꼬리합은 $n,m\\to\\infty$에서 $0$으로 간다. 곧 $\\{z_n\\}$은 $\\mathbb{C}$의 코시 수열이며, 정리 1.1(완비성)에 의해 극한이 $\\mathbb{C}$ 안에 존재한다. 일반화: 극한을 명시적으로 몰라도 '코시 판정 + 완비성'으로 수렴을 확보하는 것이 표준 전략이며, 이는 책이 예로 든 $\\lim_N\\sum_{n=1}^N 1/n^3$처럼 극한을 쉽게 못 찾는 경우에 특히 유용하다."
+        },
+        {
+          "type": "ox",
+          "question": "복소수열 $\\{z_n\\}$이 $w$로 수렴할 필요충분조건은 $\\operatorname{Re}(z_n)\\to\\operatorname{Re}(w)$이고 $\\operatorname{Im}(z_n)\\to\\operatorname{Im}(w)$인 것이다.",
+          "answer": "O",
+          "explanation": "성분별 수렴 판정 명제 그대로다. $|\\operatorname{Re}(z)|,|\\operatorname{Im}(z)|\\le|z|$가 한 방향을, $|z|\\le|\\operatorname{Re}(z)|+|\\operatorname{Im}(z)|$가 반대 방향을 주어 두 조건이 동치가 된다."
+        },
+        {
+          "type": "ox",
+          "question": "복소수열 $\\{z_n\\}$에 대해 크기의 수열 $|z_n|$이 수렴하면 $\\{z_n\\}$ 자체도 수렴한다.",
+          "answer": "X",
+          "explanation": "반례로 $z_n=i^n$을 보자. $|z_n|=1$은 (상수라서) 수렴하지만 $z_n$은 $i,-1,-i,1$을 끝없이 순환하여 수렴하지 않는다. 크기의 수렴은 편각의 수렴을 보장하지 않는다. 다만 $|z_n|\\to 0$이라는 특수한 경우에는 예외적으로 $z_n\\to 0$이 성립한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "$\\mathbb{C}$의 완비성(정리 1.1) 증명이 왜 '새로운 해석학'을 요구하지 않고 $\\mathbb{R}$의 완비성만으로 충분한가? 1.1.1의 어떤 사실이 그 다리를 놓는지 함께 설명하라.",
+          "hint": "$|z|$와 $\\mathbb{R}^2$ 거리의 일치, 그리고 부등식 $|\\operatorname{Re}(z)|,|\\operatorname{Im}(z)|\\le|z|\\le|\\operatorname{Re}(z)|+|\\operatorname{Im}(z)|$를 떠올려라.",
+          "answer": "1.1.1에서 복소수의 절댓값 $|z|$가 곧 $\\mathbb{R}^2$의 유클리드 거리와 같음을 보았다. 여기에 부등식 $|\\operatorname{Re}(z)|\\le|z|$, $|\\operatorname{Im}(z)|\\le|z|$와 (삼각부등식에서 나오는) $|z|\\le|\\operatorname{Re}(z)|+|\\operatorname{Im}(z)|$를 결합하면, 복소수열이 코시일 필요충분조건이 그 실수부·허수부 두 실수열이 각각 코시인 것과 동치가 된다. 즉 복소수의 수렴 문제가 두 개의 독립적인 실수 수열 문제로 '차원 분해'된다. 이미 아는 사실인 '$\\mathbb{R}$은 완비'를 두 성분에 각각 적용해 실수 극한 $a,b$를 얻은 뒤, 성분별 수렴 판정으로 다시 조립하면 $z_n\\to a+ib$. 새 아이디어 없이 오직 분해와 재조립만 필요하다는 점이 핵심이며, 이것이 책이 '새 개념은 없고 이전 개념을 새 어휘로 옮길 뿐'이라 말하는 이유다."
+        }
+      ]
     }
   ]
 }
