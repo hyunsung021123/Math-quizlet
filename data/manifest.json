@@ -23,6 +23,12 @@
       "title": "Chapter 1. The Fundamental Group",
       "file": "chapter_1_the_fundamental_group.json",
       "book": "Hatcher — Algebraic Topology"
+    },
+    {
+      "id": "1_preliminaries_to_complex_analysis",
+      "title": "1. Preliminaries to Complex Analysis",
+      "file": "1_preliminaries_to_complex_analysis.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }

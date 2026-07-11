@@ -8,7 +8,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 000 | [ ] | 1.1.1 Basic properties | section | `000__ComplexAnalysi__1_1_1_Basicproperties.txt` |
+| 000 | [x] | 1.1.1 Basic properties | section | `000__ComplexAnalysi__1_1_1_Basicproperties.txt` |
 | 001 | [ ] | 1.1.2 Convergence | section | `001__ComplexAnalysi__1_1_2_Convergence.txt` |
 | 002 | [ ] | 1.1.3 Sets in the complex plane | section | `002__ComplexAnalysi__1_1_3_Setsinthecomplexplane.txt` |
 | 003 | [ ] | 1.2.1 Continuous functions | section | `003__ComplexAnalysi__1_2_1_Continuousfunctions.txt` |

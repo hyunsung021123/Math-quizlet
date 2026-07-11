@@ -1,0 +1,386 @@
+{
+  "chapter_info": {
+    "title": "1. Preliminaries to Complex Analysis",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis",
+    "overall_goal": "복소함수론의 토대를 세운다. 복소수의 대수적·해석적 성질과 복소평면의 위상에서 출발하여, 미분가능성의 복소판인 정칙성(holomorphicity), 코시-리만 방정식(Cauchy-Riemann equations), 멱급수(power series), 그리고 곡선을 따른 적분을 차례로 도입한다. 궁극적으로 원시함수를 갖는 함수의 닫힌 곡선 위 적분이 $0$이라는 사실을 거쳐 코시 정리(Cauchy's theorem)로 나아가는 준비를 갖추는 것이 이 장의 목표다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.1.1 Basic properties",
+      "step1_big_picture": {
+        "context": "이 소단원은 복소함수론 전체의 출발점이다. 책 서두가 예고하듯, 정칙성·코시-리만 방정식·멱급수·곡선적분 같은 이후의 모든 도구는 복소수 집합 $\\mathbb{C}$ 위에서 전개된다. 복소해석의 위력은 대부분 하나의 이중성에서 나온다: 복소수는 대수적으로는 $i^2=-1$을 만족하는 수 체계(field)이면서, 기하학적으로는 평면 $\\mathbb{R}^2$의 점이다. 이 소단원은 그 이중성을 정확히 세팅한다 — 사칙연산이 평면에서 무엇을 뜻하는지(덧셈은 벡터합, 곱셈은 회전과 확대), 크기(절댓값)와 반사(켤레복소수), 그리고 곱셈을 가장 투명하게 만드는 극형식(polar form)까지. 뒤에 나올 '복소수 곱셈에 대한 미분가능성'이라는 정칙성의 정의가 왜 그토록 강한 조건인지는, 여기서 곱셈이 곧 회전과 확대라는 사실을 몸으로 이해해야 비로소 감이 온다.",
+        "hidden_intuition": "교과서는 $z=x+iy$를 형식적인 기호처럼 도입하지만, 진짜 핵심은 곱셈에 숨어 있다. 실수에서 곱셈은 수직선 위의 늘이기·줄이기와 부호 뒤집기뿐이다. 그런데 복소수 곱셈은 평면을 '돌린다'. $i$를 곱하면 정확히 $90^\\circ$ 회전이다 — $i\\cdot 1 = i$, 다시 $i\\cdot i = -1$이니, 실수축의 $1$이 두 번의 $90^\\circ$ 회전을 거쳐 $-1$에 도달하는 것이 곧 $i^2=-1$의 기하학적 그림이다. 일반적으로 $re^{i\\theta}$를 곱하면 '$\\theta$만큼 돌리고 $r$배 확대'한다. 이 한 문장이 복소해석 전체의 기하학적 심장이다. 절댓값 $|z|$은 그저 피타고라스 거리이고, 켤레 $\\bar z$는 실수축에 대한 거울 반사다. 그래서 '$z$가 실수'라는 것은 거울에 비춰도 그대로($z=\\bar z$), '순허수'라는 것은 거울에 비추면 부호가 뒤집힘($z=-\\bar z$)이라는 기하학적 진술이 된다. 또 $z\\bar z = |z|^2$이라는 항등식은 '$z$와 그 거울상을 곱하면 허수부가 소멸하고 순수한 크기의 제곱만 남는다'는 뜻인데, 바로 이 덕분에 나눗셈 $1/z = \\bar z/|z|^2$이 가능해진다 — 분모를 실수로 만드는 표준 트릭의 근원이 여기 있다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "Re",
+            "y": "Im"
+          },
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                3,
+                0
+              ],
+              "to": [
+                3,
+                2
+              ],
+              "dash": "4,3"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                2
+              ],
+              "to": [
+                3,
+                2
+              ],
+              "dash": "4,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                3,
+                2
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                3,
+                2.4
+              ],
+              "text": "z = x + iy"
+            },
+            {
+              "shape": "label",
+              "at": [
+                3,
+                -0.4
+              ],
+              "text": "x"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -0.4,
+                2
+              ],
+              "text": "iy"
+            }
+          ],
+          "caption": "복소수 $z = x+iy$는 평면의 점 $(x,y)\\in\\mathbb{R}^2$와 동일시된다. 가로축은 실수축(real axis), 세로축은 허수축(imaginary axis)이다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "복소수와 복소평면 (complex number, complex plane)",
+          "formal_statement": "복소수(complex number)는 $z = x + iy$ 꼴의 수이다. 여기서 $x,y\\in\\mathbb{R}$이고 $i$는 $i^2=-1$을 만족하는 허수단위(imaginary unit)이다. $x=\\operatorname{Re}(z)$를 실수부(real part), $y=\\operatorname{Im}(z)$를 허수부(imaginary part)라 부른다. 허수부가 $0$인 복소수가 실수이고, 실수부가 $0$인 복소수를 순허수(purely imaginary)라 한다. 모든 복소수의 집합을 $\\mathbb{C}$로 표기하며, $z=x+iy\\in\\mathbb{C}$를 평면의 점 $(x,y)\\in\\mathbb{R}^2$와 동일시한다. 이 동일시에서 $0$은 원점, $i$는 $(0,1)$에 대응하고, $x$축을 실수축(real axis), $y$축을 허수축(imaginary axis)이라 부른다."
+        },
+        {
+          "type": "Definition",
+          "name": "복소수의 덧셈과 곱셈",
+          "formal_statement": "$z_1 = x_1+iy_1$, $z_2 = x_2+iy_2$에 대해 덧셈과 곱셈을 다음과 같이 정의한다. $$z_1+z_2 = (x_1+x_2) + i(y_1+y_2),$$ $$z_1 z_2 = (x_1 x_2 - y_1 y_2) + i(x_1 y_2 + y_1 x_2).$$ 곱셈 공식은 모든 항을 실수처럼 전개한 뒤 $i^2=-1$을 대입하면 그대로 얻어진다."
+        },
+        {
+          "type": "Proposition",
+          "name": "체 공리 (교환·결합·분배법칙)",
+          "formal_statement": "위 덧셈·곱셈에 대해 임의의 $z_1,z_2,z_3\\in\\mathbb{C}$에서 다음이 성립한다. 교환법칙 $z_1+z_2 = z_2+z_1$, $z_1 z_2 = z_2 z_1$; 결합법칙 $(z_1+z_2)+z_3 = z_1+(z_2+z_3)$, $(z_1 z_2)z_3 = z_1(z_2 z_3)$; 분배법칙 $z_1(z_2+z_3) = z_1 z_2 + z_1 z_3$.",
+          "idea_behind_proof": "복소수의 연산은 정의상 실수부·허수부의 실수 연산으로 환원된다. 따라서 각 법칙의 검증은 '$\\mathbb{R}$에서 이미 성립하는 같은 법칙'으로 곧바로 귀착된다 — 새로운 아이디어가 필요 없다는 것이 요점이며, 그래서 책도 '간단히 확인된다'고만 적는다.",
+          "proof_steps": [
+            "덧셈 교환법칙: $z_1+z_2 = (x_1+x_2)+i(y_1+y_2)$인데 실수 덧셈이 교환가능하므로 $=(x_2+x_1)+i(y_2+y_1)=z_2+z_1$.",
+            "곱셈 교환법칙: 곱셈 정의의 실수부 $x_1 x_2 - y_1 y_2$와 허수부 $x_1 y_2 + y_1 x_2$는 첨자 $1,2$를 맞바꿔도 (실수 곱·합의 교환성에 의해) 같은 값이므로 $z_1 z_2 = z_2 z_1$.",
+            "결합법칙과 분배법칙도 같은 방식으로, 양변을 실수부와 허수부로 각각 전개하면 성분마다 $\\mathbb{R}$에서의 결합·분배법칙으로 일치함을 확인하여 증명이 끝난다."
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "연산의 기하학적 의미",
+          "formal_statement": "복소수의 덧셈은 평면 $\\mathbb{R}^2$에서 대응하는 벡터의 덧셈과 같다. 곱셈은 회전(rotation)과 확대(dilation)의 합성에 해당한다. 특히 $i$를 곱하는 것은 각 $\\pi/2$만큼의 회전에 대응한다($i\\cdot 1 = i$, $i\\cdot i = -1$). 이 사실은 아래에서 극형식을 도입하면 완전히 투명해진다."
+        },
+        {
+          "type": "Definition",
+          "name": "절댓값 (absolute value, modulus)",
+          "formal_statement": "복소수 $z=x+iy$의 절댓값을 $$|z| = (x^2+y^2)^{1/2}$$로 정의한다. 이는 원점에서 점 $(x,y)$까지의 유클리드 거리와 정확히 일치한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "삼각부등식과 관련 부등식",
+          "formal_statement": "모든 $z,w\\in\\mathbb{C}$에 대해 삼각부등식 $|z+w|\\le |z|+|w|$가 성립한다. 또한 모든 $z\\in\\mathbb{C}$에서 $|\\operatorname{Re}(z)|\\le |z|$이고 $|\\operatorname{Im}(z)|\\le |z|$이며, 모든 $z,w\\in\\mathbb{C}$에서 역삼각부등식 $\\big||z|-|w|\\big|\\le |z-w|$가 성립한다.",
+          "idea_behind_proof": "절댓값이 $\\mathbb{R}^2$의 유클리드 거리와 같으므로 삼각부등식은 평면의 그것과 동일하다. 역삼각부등식은 '삼각부등식을 두 번, 대칭적으로 적용한다'는 표준 수법에서 나온다 — $z$를 $(z-w)$와 $w$로 쪼개고, 그다음 $z$와 $w$의 역할을 바꿔 한 번 더 쪼개면 양쪽 방향의 부등식이 동시에 얻어진다.",
+          "proof_steps": [
+            "$z=(z-w)+w$에 삼각부등식을 적용하면 $|z|\\le |z-w|+|w|$, 즉 $|z|-|w|\\le |z-w|$.",
+            "$z$와 $w$의 역할을 바꾸면 $|w|\\le |w-z|+|z|=|z-w|+|z|$, 즉 $|w|-|z|\\le |z-w|$, 곧 $-(|z|-|w|)\\le |z-w|$.",
+            "두 부등식을 합치면 $-|z-w|\\le |z|-|w|\\le |z-w|$, 따라서 $\\big||z|-|w|\\big|\\le |z-w|$.",
+            "$|\\operatorname{Re}(z)|=|x|\\le\\sqrt{x^2+y^2}=|z|$이고 $|\\operatorname{Im}(z)|=|y|\\le\\sqrt{x^2+y^2}=|z|$는 정의에서 곧바로 나온다."
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "켤레복소수 (complex conjugate)",
+          "formal_statement": "$z=x+iy$의 켤레복소수를 $$\\bar z = x - iy$$로 정의한다. 기하학적으로 $\\bar z$는 $z$를 실수축에 대해 반사한 점이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.4,
+                  1.6
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.4,
+                  -1.6
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2.4,
+                  1.6
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2.4,
+                  -1.6
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  2.4,
+                  1.6
+                ],
+                "to": [
+                  2.4,
+                  -1.6
+                ],
+                "dash": "4,3"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.8,
+                  1.9
+                ],
+                "text": "z = x+iy"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.9,
+                  -1.9
+                ],
+                "text": "conj z = x-iy"
+              }
+            ],
+            "caption": "켤레복소수 $\\bar z$는 $z$를 실수축(가로축)에 대해 거울 반사한 점이다. 그래서 $z$가 실수이면 $z=\\bar z$, 순허수이면 $z=-\\bar z$이다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "켤레와 절댓값의 성질",
+          "formal_statement": "임의의 $z=x+iy\\in\\mathbb{C}$에 대해 다음이 성립한다. (i) $z$가 실수일 필요충분조건은 $z=\\bar z$이고, $z$가 순허수일 필요충분조건은 $z=-\\bar z$이다. (ii) $\\operatorname{Re}(z)=\\dfrac{z+\\bar z}{2}$, $\\operatorname{Im}(z)=\\dfrac{z-\\bar z}{2i}$. (iii) $|z|^2 = z\\bar z$. (iv) $z\\ne 0$이면 $\\dfrac{1}{z}=\\dfrac{\\bar z}{|z|^2}$.",
+          "idea_behind_proof": "모든 성질이 $\\bar z = x-iy$를 대입하는 직접 계산으로 나온다. 특히 (iii)에서 $z\\bar z=(x+iy)(x-iy)=x^2+y^2$처럼 허수부가 상쇄되어 실수 $|z|^2$만 남는다는 관찰이 열쇠이고, (iv)는 그 관찰을 나눗셈에 재활용한 것이다 — 분모를 그 켤레와 곱해 실수로 만든다.",
+          "proof_steps": [
+            "(iii) $z\\bar z = (x+iy)(x-iy) = x^2 - (iy)^2 = x^2 + y^2 = |z|^2$.",
+            "(iv) (iii)에서 $z\\bar z = |z|^2 \\ne 0$이므로 양변을 $z|z|^2$로 나누면 $\\dfrac{1}{z}=\\dfrac{\\bar z}{|z|^2}$.",
+            "(ii) $z+\\bar z = (x+iy)+(x-iy) = 2x = 2\\operatorname{Re}(z)$이고 $z-\\bar z = 2iy = 2i\\operatorname{Im}(z)$이므로 두 식을 얻는다.",
+            "(i) $z=\\bar z \\iff iy=-iy \\iff y=0 \\iff z$는 실수. $z=-\\bar z \\iff x+iy = -x+iy \\iff x=0 \\iff z$는 순허수."
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "극형식과 편각 (polar form, argument)",
+          "formal_statement": "$0$이 아닌 복소수 $z$는 극형식 $$z = re^{i\\theta},\\quad r>0$$로 쓸 수 있다. 여기서 $$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$이고, $\\theta\\in\\mathbb{R}$은 $z$의 편각(argument, $\\arg z$)으로 $2\\pi$의 정수배만큼의 모호함을 갖고 정의된다. $|e^{i\\theta}|=1$이므로 $r=|z|$이며, $\\theta$는 양의 실수축과 원점에서 $z$를 지나는 반직선이 이루는 각(반시계 방향을 양으로)이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.6,
+                  1.9
+                ]
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0.9,
+                  0
+                ],
+                "to": [
+                  0.73,
+                  0.53
+                ],
+                "bulge": 0.2
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.15,
+                  0.28
+                ],
+                "text": "θ"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.0,
+                  1.25
+                ],
+                "text": "r"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2.6,
+                  1.9
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.9,
+                  2.15
+                ],
+                "text": "z = re^{iθ}"
+              }
+            ],
+            "caption": "극형식(polar form): $r=|z|$는 원점에서 $z$까지의 거리, $\\theta=\\arg z$는 양의 실수축과 이루는 각(반시계 방향)이다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "극형식에서의 곱셈은 회전과 확대이다",
+          "formal_statement": "$z=re^{i\\theta}$, $w=se^{i\\varphi}$이면 $$zw = rs\\,e^{i(\\theta+\\varphi)}.$$ 따라서 $w$를 곱하는 사상 $z\\mapsto zw$는 $\\mathbb{R}^2$의 상사변환(homothety), 즉 각 $\\varphi$만큼의 회전과 $s$배 확대의 합성이다.",
+          "idea_behind_proof": "핵심은 지수법칙 $e^{i\\theta}e^{i\\varphi}=e^{i(\\theta+\\varphi)}$인데, 이것 자체가 삼각함수 덧셈정리를 압축한 형태다. $e^{i\\theta}$를 $\\cos\\theta+i\\sin\\theta$로 풀어 곱한 뒤 실수부·허수부를 모으면 $\\cos(\\theta+\\varphi)$, $\\sin(\\theta+\\varphi)$가 그대로 나온다. '크기는 곱해지고($rs$) 각은 더해진다($\\theta+\\varphi$)'는 이 분해가 앞선 Remark의 '곱셈은 회전과 확대'라는 주장을 완전히 정당화한다.",
+          "proof_steps": [
+            "$e^{i\\theta}e^{i\\varphi} = (\\cos\\theta+i\\sin\\theta)(\\cos\\varphi+i\\sin\\varphi)$.",
+            "전개하고 $i^2=-1$을 쓰면 실수부는 $\\cos\\theta\\cos\\varphi-\\sin\\theta\\sin\\varphi=\\cos(\\theta+\\varphi)$, 허수부는 $\\cos\\theta\\sin\\varphi+\\sin\\theta\\cos\\varphi=\\sin(\\theta+\\varphi)$ (덧셈정리).",
+            "따라서 $e^{i\\theta}e^{i\\varphi}=e^{i(\\theta+\\varphi)}$이고, $zw=(re^{i\\theta})(se^{i\\varphi})=rs\\,e^{i(\\theta+\\varphi)}$.",
+            "결과의 크기가 $rs$, 편각이 $\\theta+\\varphi$이므로 곱셈은 $s$배 확대와 $\\varphi$ 회전의 합성이다."
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$z=2+3i$, $w=1-i$일 때 (a) $zw$, (b) $|z|$, (c) $1/z$를 구하라.",
+          "hint": "(a)는 실수처럼 전개한 뒤 $i^2=-1$을 대입한다. (c)는 분모의 켤레 $\\bar z$를 분자·분모에 곱하거나 공식 $1/z=\\bar z/|z|^2$을 직접 쓴다.",
+          "solution": "(a) $zw=(2+3i)(1-i)=2-2i+3i-3i^2=2+i+3=5+i$. (b) $|z|=\\sqrt{2^2+3^2}=\\sqrt{13}$. (c) $|z|^2=13$, $\\bar z=2-3i$이므로 $\\dfrac{1}{z}=\\dfrac{\\bar z}{|z|^2}=\\dfrac{2-3i}{13}=\\dfrac{2}{13}-\\dfrac{3}{13}i$. 일반화: 임의의 $z\\ne 0$에서 나눗셈은 '분모의 켤레를 곱해 분모를 실수 $|z|^2$로 만드는' 한 수로 항상 처리된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$z=1+i$를 극형식 $re^{i\\theta}$로 나타내고, 이를 이용해 $(1+i)^4$를 구하라.",
+          "hint": "$r=|z|$, $\\theta$는 실수축과 이루는 각이다. 거듭제곱은 극형식에서 $r$을 거듭제곱하고 편각에 지수를 곱하면 된다: $z^n=r^n e^{in\\theta}$.",
+          "solution": "$r=\\sqrt{1^2+1^2}=\\sqrt{2}$이고 $z$가 제1사분면에서 $\\tan\\theta=1$이므로 $\\theta=\\pi/4$. 따라서 $z=\\sqrt{2}\\,e^{i\\pi/4}$. 그러면 $z^4=(\\sqrt{2})^4 e^{i\\cdot 4\\cdot \\pi/4}=4e^{i\\pi}=4(\\cos\\pi+i\\sin\\pi)=-4$. 검산: $(1+i)^2=2i$, $(2i)^2=-4$. 일반화: 곱셈이 '각을 더하고 크기를 곱한다'는 사실 덕분에 거듭제곱과 근 계산이 극형식에서 지수법칙으로 단순해진다(드무아브르 정리의 씨앗).",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0.9,
+                  0
+                ],
+                "to": [
+                  0.64,
+                  0.64
+                ],
+                "bulge": 0.2
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.2,
+                  0.3
+                ],
+                "text": "π/4"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.3,
+                  2.2
+                ],
+                "text": "1 + i"
+              }
+            ],
+            "caption": "$1+i=\\sqrt{2}\\,e^{i\\pi/4}$: 크기 $\\sqrt{2}$, 편각 $\\pi/4$. 네 제곱하면 편각이 $\\pi$가 되어 음의 실수축 위 $-4$에 놓인다."
+          }
+        },
+        {
+          "type": "ox",
+          "question": "복소수에 $i$를 곱하는 것은 평면에서 원점 중심 $\\pi/2$ 회전에 해당한다.",
+          "answer": "O",
+          "explanation": "$i=e^{i\\pi/2}$이므로 사상 $z\\mapsto iz$는 편각에 $\\pi/2$를 더하고 크기는 그대로 둔다($|i|=1$). 이는 정확히 원점 중심의 $90^\\circ$ 반시계 회전이다."
+        },
+        {
+          "type": "ox",
+          "question": "$0$이 아닌 복소수 $z$의 편각 $\\arg z$는 유일하게 하나의 실수로 정해진다.",
+          "answer": "X",
+          "explanation": "편각은 $2\\pi$의 정수배만큼의 모호함을 갖는다 — $\\theta$와 $\\theta+2\\pi k$는 같은 $z$를 준다. 크기 $r=|z|$는 유일하지만 편각은 그렇지 않으며, $z=0$에서는 편각이 아예 정의되지 않는다."
+        },
+        {
+          "type": "conceptual",
+          "question": "실수 곱셈과 비교했을 때 복소수 곱셈이 '새롭게' 가져오는 기하학적 효과는 무엇이며, 그것이 극형식으로 어떻게 명료해지는지 설명하라.",
+          "hint": "실수 곱셈이 수직선에서 하는 일(확대·축소, 부호 반전)과 복소수 곱셈이 평면에서 하는 일을 대비하고, $re^{i\\theta}$ 표현이 크기와 각을 어떻게 분리하는지 짚어라.",
+          "answer": "실수 곱셈은 1차원 수직선 위에서 늘이기·줄이기와 부호 반전($0$ 또는 $\\pi$ 회전)만 할 수 있다. 복소수 곱셈은 여기에 임의의 각 회전을 더한다: $w=se^{i\\varphi}$를 곱하면 크기는 $s$배 확대되고 편각은 $\\varphi$만큼 회전한다. 극형식 $z=re^{i\\theta}$는 이 두 효과를 완전히 분리해 보여 준다 — 곱셈에서 크기끼리는 곱($r\\cdot s$), 각끼리는 합($\\theta+\\varphi$)이 되어 $zw=rs\\,e^{i(\\theta+\\varphi)}$. 특히 $i=e^{i\\pi/2}$를 곱하면 크기는 그대로 두고 $90^\\circ$ 회전만 일어난다. 이 '곱셈은 회전과 확대'라는 관점은 이후 정칙함수를 국소적으로 '회전과 확대(등각사상)'로 이해하는 복소해석의 핵심 직관으로 이어진다."
+        }
+      ]
+    }
+  ]
+}
