@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | 000 | [x] | 1.1.1 Basic properties | section | `000__ComplexAnalysi__1_1_1_Basicproperties.txt` |
 | 001 | [x] | 1.1.2 Convergence | section | `001__ComplexAnalysi__1_1_2_Convergence.txt` |
-| 002 | [ ] | 1.1.3 Sets in the complex plane | section | `002__ComplexAnalysi__1_1_3_Setsinthecomplexplane.txt` |
+| 002 | [x] | 1.1.3 Sets in the complex plane | section | `002__ComplexAnalysi__1_1_3_Setsinthecomplexplane.txt` |
 | 003 | [ ] | 1.2.1 Continuous functions | section | `003__ComplexAnalysi__1_2_1_Continuousfunctions.txt` |
 | 004 | [ ] | 1.2.2 Holomorphic functions | section | `004__ComplexAnalysi__1_2_2_Holomorphicfunctions.txt` |
 | 005 | [ ] | 1.2.3 Power series | section | `005__ComplexAnalysi__1_2_3_Powerseries.txt` |
