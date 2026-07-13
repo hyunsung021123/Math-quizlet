@@ -400,6 +400,10 @@ p.prose{ margin:0; }
   display:flex; flex-direction:column;
 }
 .card.is-turning{ animation:cardTurn .34s cubic-bezier(.2,.7,.25,1) both; }
+/* 필기 모드(책보기 모드가 아닐 때)에는 카드 텍스트 선택을 아예 막는다 — 그리기/지우개 중
+   드래그 제스처가 텍스트 선택으로 새는 것을 포인터 이벤트 처리와 무관하게 확실히 차단한다.
+   책보기 모드로 돌아오면(body에서 클래스 제거) 선택이 다시 정상 동작한다. */
+body.ink-drawing .card{ user-select:none; -webkit-user-select:none; }
 @keyframes cardTurn{
   0%{ opacity:0; transform:perspective(1400px) rotateY(7deg) translateX(14px); }
   100%{ opacity:1; transform:none; }
@@ -1385,8 +1389,11 @@ p.prose{ margin:0; }
     var bookMode = true, erasing = false;
     var color = '#1B2333', penWidth = 4;
     var canvas = null, ctx = null, ro = null, drawing = false, curStroke = null, curStrokeErasing = false;
+    var drawPointerId = null; // 지금 획을 그리고 있는 포인터 하나만 추적 — 다른 포인터(손바닥 등)의
+                               // move/up이 같은 stroke에 잘못 섞여 들어가는 것을 막는다.
     var scrollPointerId = null, lastScrollY = 0, scrollStartX = 0, scrollStartY = 0, scrollMoved = false;
     var penEverSeen = false;
+    var penActive = false; // 펜이 지금 화면에 닿아 있는 동안(눌림~뗌)만 true — 팜 리젝션에 쓴다.
     // 손가락 두 개 이상이 닿으면 진행 중이던 한손가락 획을 취소하고, 그 뒤로는 아무것도 하지 않고
     // 완전히 손을 뗀다 — pinch-zoom은 브라우저 네이티브 제스처로 그대로 넘긴다(카드 스와이프 기능
     // 자체를 없앴으므로 여기서 손가락 개수/이동 거리를 추적해 스와이프를 만들 필요도 없다).
@@ -1563,7 +1570,20 @@ p.prose{ margin:0; }
 
     function onPointerDown(ev){
       if(ev.pointerType === 'mouse' && ev.button !== 0) return;
-      if(ev.pointerType === 'pen') markPenSeen();
+      if(ev.pointerType === 'pen'){
+        markPenSeen();
+        penActive = true;
+        // 펜이 새로 닿는 순간, 이미 눌려 있던 손 접촉(스크롤로 잡고 있던 것)이 있다면 그건 필기
+        // 도중 화면에 얹힌 손바닥일 뿐이다 — 그 스크롤 추적을 즉시 무효화해서 이후 그 손이 조금
+        // 움직여도 화면이 딸려 움직이지 않게 한다(팜 리젝션).
+        if(scrollPointerId !== null){
+          try{ canvas.releasePointerCapture(scrollPointerId); }catch(e){}
+          scrollPointerId = null;
+        }
+      }
+      // 펜이 필기 중(눌려 있는 동안) 새로 닿는 손가락 접촉은 손바닥으로 간주해 완전히 무시한다 —
+      // 그리지도, 스크롤로 잡지도 않는다(팜 리젝션).
+      if(ev.pointerType === 'touch' && penActive) return;
 
       if(ev.pointerType === 'touch'){
         activeTouchIds.push(ev.pointerId);
@@ -1590,6 +1610,7 @@ p.prose{ margin:0; }
       ev.preventDefault();
       try{ canvas.setPointerCapture(ev.pointerId); }catch(e){}
       drawing = true;
+      drawPointerId = ev.pointerId;
       curStrokeErasing = effectiveErasing(ev);
       if(curStrokeErasing) eraseAt(ev.clientX, ev.clientY);
       else beginStroke(ev.clientX, ev.clientY, ev.pressure);
@@ -1603,7 +1624,8 @@ p.prose{ margin:0; }
         lastScrollY = ev.clientY;
         return;
       }
-      if(!drawing) return;
+      // 지금 획을 그리고 있는 포인터가 아니면(예: 필기 도중 닿은 손바닥) 완전히 무시한다.
+      if(!drawing || ev.pointerId !== drawPointerId) return;
       // getCoalescedEvents()는 실제 하드웨어 입력에서는 최소한 자기 자신은 포함해서 돌려주지만,
       // 그 보장이 깨지는 경우(빈 배열)에 대비한 || [ev] 는 빈 배열이 JS에서 truthy라 실제로는
       // 발동하지 않는 죽은 코드였다 — 배열 길이로 직접 판정한다.
@@ -1615,6 +1637,7 @@ p.prose{ margin:0; }
       });
     }
     function onPointerUp(ev){
+      if(ev.pointerType === 'pen') penActive = false;
       if(ev.pointerType === 'touch'){
         var idx = activeTouchIds.indexOf(ev.pointerId);
         if(idx !== -1) activeTouchIds.splice(idx, 1);
@@ -1636,8 +1659,9 @@ p.prose{ margin:0; }
         }
         return;
       }
-      if(!drawing) return;
+      if(!drawing || ev.pointerId !== drawPointerId) return;
       drawing = false;
+      drawPointerId = null;
       try{ canvas.releasePointerCapture(ev.pointerId); }catch(e){}
       if(curStrokeErasing){ curStroke = null; return; }
       commitCurStroke();
@@ -1685,6 +1709,8 @@ p.prose{ margin:0; }
       // 자바스크립트 에뮬레이션 없이, 브라우저 네이티브 스크롤·텍스트 선택·링크 클릭이 카드 위에서
       // 그대로 동작하게 하기 위함이다(필기 모드일 때만 캔버스가 포인터를 실제로 가로챈다).
       if(canvas) canvas.style.pointerEvents = v ? 'none' : 'auto';
+      // 필기(그리기/지우개) 모드에서는 텍스트 선택 자체를 CSS로 막는다 — 책보기 모드일 때만 풀린다.
+      document.body.classList.toggle('ink-drawing', !v);
     }
 
     function updateStickyOffset(){
