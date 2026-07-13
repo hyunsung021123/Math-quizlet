@@ -1681,6 +1681,10 @@ p.prose{ margin:0; }
       bookMode = v;
       var btn = document.getElementById('penToggleBtn');
       if(btn){ btn.classList.toggle('is-on', v); btn.setAttribute('aria-pressed', v ? 'true' : 'false'); }
+      // 책보기 모드에서는 캔버스를 아예 포인터 이벤트에서 빼 버린다 — 탭 전달·스크롤 흉내 같은
+      // 자바스크립트 에뮬레이션 없이, 브라우저 네이티브 스크롤·텍스트 선택·링크 클릭이 카드 위에서
+      // 그대로 동작하게 하기 위함이다(필기 모드일 때만 캔버스가 포인터를 실제로 가로챈다).
+      if(canvas) canvas.style.pointerEvents = v ? 'none' : 'auto';
     }
 
     function updateStickyOffset(){
@@ -1691,6 +1695,7 @@ p.prose{ margin:0; }
     function createCanvasEl(){
       canvas = document.createElement('canvas');
       canvas.className = 'ink-canvas';
+      canvas.style.pointerEvents = bookMode ? 'none' : 'auto';
       canvas.addEventListener('pointerdown', onPointerDown);
       canvas.addEventListener('pointermove', onPointerMove);
       canvas.addEventListener('pointerup', onPointerUp);
