@@ -14,16 +14,17 @@
       "section:1": true,
       "section:2": true,
       "section:3": true,
-      "section:4": true
+      "section:4": true,
+      "section:5": true
     }
   },
   "lastPos": {
-    "topicId": "chapter_0_some_underlying_geometric_noti",
+    "topicId": "chapter_1_the_fundamental_group",
     "view": {
       "type": "section",
       "index": 0
     },
-    "cardIndex": 12
+    "cardIndex": 0
   },
-  "updatedAt": "2026-07-14T16:32:07.067Z"
+  "updatedAt": "2026-07-14T16:33:48.456Z"
 }
