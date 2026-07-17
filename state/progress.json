@@ -16,6 +16,9 @@
       "section:3": true,
       "section:4": true,
       "section:5": true
+    },
+    "chapter_1_the_fundamental_group": {
+      "section:0": true
     }
   },
   "lastPos": {
@@ -26,5 +29,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-07-17T10:11:35.490Z"
+  "updatedAt": "2026-07-17T10:11:48.260Z"
 }
