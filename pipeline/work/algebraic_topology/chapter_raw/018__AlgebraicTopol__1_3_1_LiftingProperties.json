@@ -1,0 +1,208 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Hatcher, Algebraic Topology",
+    "overall_goal": "공간에 대수적 그림자(군·환 등)를 씌우는 함자(functor)라는 대수적 위상수학의 큰 그림을 이해하고, 그중 가장 단순하면서 근본적인 함자인 기본군(fundamental group)을 정의한다. 나아가 원의 기본군이 무한순환군임을 보이고, 이를 통해 '기본군이 다르면 두 공간은 위상동형이 아니다'라는 강력한 판별법을 손에 넣는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.3.1 Lifting Properties — 들어올리기의 결실과 분류의 문지방",
+      "step1_big_picture": {
+        "context": "§1.3에서 덮개공간을 정의하고 호모토피·경로 들어올리기(명제 1.30)를 얻었다. 이 조각은 그 들어올리기의 결실을 거둔다: (1) $p_*$가 단사이고 그 상이 '들어올림이 다시 고리가 되는 고리들'임을 정확히 특징짓는다(명제 1.31), (2) 덮개의 층수(number of sheets)가 부분군의 지표(index)와 같다(명제 1.32) — 앞서 $z\\mapsto z^n$·그래프 덮개에서 본 '층수=지표'의 일반 정리, (3) 일반 사상의 들어올림 존재를 $\\pi_1$ 조건 $f_*\\pi_1(Y)\\subseteq p_*\\pi_1(\\widetilde X)$으로 판정하고(명제 1.33, 들어올림 판정법), 들어올림이 유일함을 보인다(명제 1.34). 마지막으로 덮개공간 분류의 서막으로, 단순연결(보편) 덮개가 존재하려면 공간이 준국소 단순연결(semilocally simply-connected)이어야 한다는 필요조건을 세운다. 재사용: 명제 1.30(호모토피 들어올리기)과 경로 들어올림, 정리 1.7의 들어올림 논법, 그래프 덮개와 층수(1.3), 예제 1.25(수축하는 원들의 쐐기).",
+        "hidden_intuition": "들어올리기는 '위의 정보가 아래로 새지 않는다'는 강한 강성(rigidity)이다. 그 정수는 명제 1.34(유일성): 두 들어올림이 한 점에서만 맞으면 연결공간 전체에서 맞는다 — 층이 이산이라 들어올림이 '점프'할 수 없기 때문이다. 이 강성이 세 결실을 낳는다. $p_*$ 단사(명제 1.31): 위의 고리가 아래에서 풀리면 그 풀림을 들어올려 위에서도 풀리니, 위의 비자명 고리는 아래에서도 비자명하다 — $\\pi_1(\\widetilde X)$이 $\\pi_1(X)$에 부분군으로 충실히 박힌다. 층수=지표(명제 1.32): 잉여류 $H\\backslash\\pi_1(X)$이 정확히 '밑점 위의 층들'과 대응한다 — 대수(지표)와 기하(층수)가 같아진다. 들어올림 판정법(명제 1.33): 사상 $f$를 위로 올릴 수 있는가는 오직 $\\pi_1$ 수준의 포함 $f_*\\pi_1(Y)\\subseteq p_*\\pi_1(\\widetilde X)$으로 결정된다 — '올라가려면 $Y$의 고리가 이미 위에서 닫히는 것들이어야 한다'. 마지막으로 준국소 단순연결은 보편덮개를 짓기 위한 문지방이다: 아주 작은 고리가 (국소적으로는 아니어도) 큰 데서 결국 풀려야 위를 단순연결로 펼칠 수 있다 — 하와이 귀걸이처럼 무한히 작은 고리가 끝내 안 풀리면 보편덮개가 없다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "arrow",
+              "from": [
+                -1.2,
+                -0.8
+              ],
+              "to": [
+                1.0,
+                -0.8
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                1.7,
+                0.7
+              ],
+              "to": [
+                1.7,
+                -0.5
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -1.2,
+                -0.55
+              ],
+              "to": [
+                1.25,
+                0.95
+              ],
+              "dash": "4,3"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.75,
+                -0.8
+              ],
+              "text": "(Y,y_0)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.9,
+                1.0
+              ],
+              "text": "(X~,x~_0)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.75,
+                -0.85
+              ],
+              "text": "(X,x_0)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                -1.05
+              ],
+              "text": "f"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.0,
+                0.1
+              ],
+              "text": "p"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -0.35,
+                0.4
+              ],
+              "text": "f~ (lift?)"
+            }
+          ],
+          "caption": "들어올림 판정법(명제 1.33): $f:(Y,y_0)\\to(X,x_0)$의 들어올림 $\\widetilde f$이 존재할 필요충분조건은 $f_*\\pi_1(Y,y_0)\\subseteq p_*\\pi_1(\\widetilde X,\\widetilde x_0)$이다($Y$가 경로연결·국소경로연결일 때). 즉 '위로 올라갈 수 있느냐'는 오직 $\\pi_1$ 부분군 포함으로 결정된다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Corollary",
+          "name": "따름정리 (경로 호모토피의 들어올림은 끝점을 고정한다)",
+          "formal_statement": "명제 1.30에서 $Y=I$로 두면, 경로 $f_0$의 호모토피 $f_t:I\\to X$는 $f_0$의 각 들어올림 $\\widetilde f_0$의 호모토피 $\\widetilde f_t:I\\to\\widetilde X$로 들어올려진다. 나아가 $f_t$가 끝점을 고정하는 경로호모토피이면 들어올린 $\\widetilde f_t$도 끝점을 고정한다.",
+          "idea_behind_proof": "$t$가 변할 때 들어올린 경로의 각 끝점 $\\widetilde f_t(0),\\widetilde f_t(1)$은 (아래에서 고정된) 상수경로를 들어올린 것이고, 상수경로의 들어올림은 상수이므로 움직이지 않는다.",
+          "proof_steps": [
+            "명제 1.30을 $Y=I$에 적용하면 $\\widetilde f_t$이 존재·유일하다. $f_t$가 끝점을 고정하면 $t\\mapsto f_t(0)=x_0$이 상수이고, $t\\mapsto\\widetilde f_t(0)$은 이 상수경로의 들어올림이라 상수다(경로 들어올림의 유일성). 끝점 $f_t(1)$도 마찬가지이므로 $\\widetilde f_t$은 끝점을 고정하는 경로호모토피다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.31 ($p_*$의 단사성과 상의 특징)",
+          "formal_statement": "덮개공간 $p:(\\widetilde X,\\widetilde x_0)\\to(X,x_0)$이 유도하는 $p_*:\\pi_1(\\widetilde X,\\widetilde x_0)\\to\\pi_1(X,x_0)$은 단사다. 그 상 $p_*\\big(\\pi_1(\\widetilde X,\\widetilde x_0)\\big)$은 $x_0$ 밑점 고리 중 '$\\widetilde x_0$에서 시작하는 들어올림이 다시 고리가 되는' 것들의 호모토피류로 정확히 이루어진다.",
+          "idea_behind_proof": "단사성은 '위 고리가 아래에서 풀리면 그 풀림을 들어올려 위에서도 풀린다'는 것 — 앞 따름정리(끝점 고정 들어올림)가 핵심이다. 상의 특징은 '들어올림이 고리'라는 조건이 상에 드는 것과 정확히 같음을, 호모토피 들어올리기로 왕복 확인한다.",
+          "proof_steps": [
+            "단사성: $[\\widetilde f_0]\\in\\ker p_*$이면 $f_0=p\\widetilde f_0$이 $X$에서 상수고리 $f_1$로 가는 호모토피 $f_t$를 갖는다. 앞 따름정리로 $\\widetilde f_0$에서 시작하는 (끝점 고정) 고리들의 들어올린 호모토피 $\\widetilde f_t$이 있고 끝 $\\widetilde f_1$은 상수고리다. 따라서 $[\\widetilde f_0]=0$이라 $p_*$는 단사.",
+            "상 특징 ($\\subseteq$): $[\\widetilde g]\\in\\pi_1(\\widetilde X,\\widetilde x_0)$이면 $p_*[\\widetilde g]=[p\\widetilde g]$이고 $p\\widetilde g$의 $\\widetilde x_0$-들어올림은 $\\widetilde g$ 자신(고리)이라 조건을 만족한다.",
+            "상 특징 ($\\supseteq$): 아래 고리 $g$가 상의 원소를 대표하면 그런 들어올림을 갖는 고리와 호모토픽하고, 호모토피 들어올리기로 $g$ 자신의 $\\widetilde x_0$-들어올림도 고리다. 따라서 상은 정확히 '들어올림이 고리인' 류들로 이루어진다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.32 (층수 = 부분군의 지표)",
+          "formal_statement": "덮개공간 $p:\\widetilde X\\to X$에서 $|p^{-1}(x)|$은 $X$ 위에서 국소상수이므로, $X$가 연결이면 상수다 — 이를 덮개의 층수(number of sheets)라 한다. $X,\\widetilde X$이 경로연결인 덮개 $p:(\\widetilde X,\\widetilde x_0)\\to(X,x_0)$의 층수는 $p_*\\big(\\pi_1(\\widetilde X,\\widetilde x_0)\\big)$의 $\\pi_1(X,x_0)$ 안에서의 지표(index)와 같다.",
+          "idea_behind_proof": "잉여류 $H[g]$에 '$g$의 $\\widetilde x_0$-들어올림 $\\widetilde g$의 끝점 $\\widetilde g(1)$'을 대응시키는 사상 $\\Phi:H\\backslash\\pi_1(X,x_0)\\to p^{-1}(x_0)$을 만든다. $H=p_*\\pi_1(\\widetilde X)$의 원소는 들어올림이 고리라 끝점을 안 바꾸므로 $\\Phi$가 잘 정의되고, 경로연결성으로 전사, 들어올림 유일성으로 단사가 된다.",
+          "proof_steps": [
+            "$|p^{-1}(x)|$은 균등덮힌 이웃 위에서 층수만큼 일정하므로 국소상수, $X$가 연결이면 상수다. 이를 층수라 한다.",
+            "$H=p_*\\big(\\pi_1(\\widetilde X,\\widetilde x_0)\\big)$이라 하자. 고리 $g$의 $\\widetilde x_0$-들어올림 $\\widetilde g$의 끝점으로 잉여류를 보내는 $\\Phi:H\\backslash\\pi_1(X,x_0)\\to p^{-1}(x_0),\\ H[g]\\mapsto\\widetilde g(1)$을 정의한다. $[h]\\in H$이면 $h$의 들어올림 $\\widetilde h$가 고리라 $\\widetilde{hg}$의 끝점이 $\\widetilde g$의 끝점과 같아 $\\Phi$가 잘 정의된다.",
+            "전사: $\\widetilde X$가 경로연결이라 $\\widetilde x_0$에서 $p^{-1}(x_0)$의 임의 점으로 가는 경로 $\\widetilde g$이 있고 그 사영 $g$는 $x_0$ 고리이므로 $\\Phi(H[g])$가 그 점.",
+            "단사: $\\Phi(H[g_1])=\\Phi(H[g_2])$이면 $g_1\\bar g_2$의 $\\widetilde x_0$-들어올림이 고리라 $[g_1][g_2]^{-1}\\in H$, 곧 $H[g_1]=H[g_2]$. 따라서 층수 $=[\\pi_1(X,x_0):H]$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (국소 경로연결, locally path-connected)",
+          "formal_statement": "공간 $Y$가 국소 경로연결(locally path-connected)이라 함은, 각 점 $y\\in Y$과 그 이웃 $U$에 대해 $y$를 포함하는 경로연결 열린이웃 $V\\subset U$이 존재하는 것이다. (즉 임의로 작은 경로연결 열린이웃을 가진다.)"
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.33 (들어올림 판정법, lifting criterion)",
+          "formal_statement": "덮개공간 $p:(\\widetilde X,\\widetilde x_0)\\to(X,x_0)$과 경로연결·국소경로연결 공간 $Y$의 밑점 보존 사상 $f:(Y,y_0)\\to(X,x_0)$이 주어지면, 들어올림 $\\widetilde f:(Y,y_0)\\to(\\widetilde X,\\widetilde x_0)$이 존재할 필요충분조건은 $$f_*\\big(\\pi_1(Y,y_0)\\big)\\subseteq p_*\\big(\\pi_1(\\widetilde X,\\widetilde x_0)\\big)$$ 이다.",
+          "idea_behind_proof": "필요조건은 $f_*=p_*\\widetilde f_*$에서 곧바로. 충분조건은 '들어올림을 경로로 정의'한다: $y$까지의 경로 $\\gamma$를 잡아 $f\\gamma$를 들어올린 끝점으로 $\\widetilde f(y)$를 정의하고, 부분군 포함 조건이 이 정의가 경로 선택과 무관함을 보장한다(두 경로의 차이 고리가 $f_*\\pi_1(Y)\\subseteq p_*\\pi_1(\\widetilde X)$에 들어 들어올림이 고리가 되므로 끝점이 같다). 연속성은 국소경로연결로 국소적으로 $\\widetilde f=p^{-1}f$임을 보여 확인한다.",
+          "proof_steps": [
+            "필요: 들어올림 $\\widetilde f$이 있으면 $f=p\\widetilde f$이라 $f_*=p_*\\widetilde f_*$, 따라서 $f_*\\pi_1(Y)=p_*\\widetilde f_*\\pi_1(Y)\\subseteq p_*\\pi_1(\\widetilde X)$.",
+            "충분(정의): $y\\in Y$에 대해 $y_0\\to y$ 경로 $\\gamma$를 잡고, $f\\gamma$의 $\\widetilde x_0$-들어올림 $\\widetilde{f\\gamma}$의 끝점으로 $\\widetilde f(y)=\\widetilde{f\\gamma}(1)$을 정의한다.",
+            "잘 정의됨: 다른 경로 $\\gamma'$에 대해 $(f\\gamma')\\overline{(f\\gamma)}$은 $x_0$ 고리이고 그 류가 $f_*\\pi_1(Y)\\subseteq p_*\\pi_1(\\widetilde X)$에 든다. 그러면 이 고리는 $\\widetilde x_0$ 고리로 들어올려지는 고리와 호모토픽하고, 경로호모토피 들어올림과 들어올림의 유일성으로 $\\widetilde{f\\gamma'}(1)=\\widetilde{f\\gamma}(1)$. 따라서 정의가 $\\gamma$ 선택과 무관하다.",
+            "연속성: $f(y)$의 이웃 $U$로 위상동형으로 덮이는 $\\widetilde U\\ni\\widetilde f(y)$를 잡고, $Y$의 국소경로연결로 $f(V)\\subset U$인 경로연결 열린이웃 $V\\ni y$를 택한다. $V$의 점들로 가는 경로를 '$\\gamma$ 뒤에 $V$ 안 경로 $\\eta$'로 잡으면 $\\widetilde f|V=p^{-1}f$($p^{-1}:U\\to\\widetilde U$)이라 연속이다. (국소경로연결 가정의 필요성은 이 절 연습문제 7의 예가 보인다.) $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.34 (유일 들어올림 성질, unique lifting property)",
+          "formal_statement": "덮개공간 $p:\\widetilde X\\to X$과 사상 $f:Y\\to X$의 두 들어올림 $\\widetilde f_1,\\widetilde f_2:Y\\to\\widetilde X$이 $Y$의 한 점에서 일치하면, $Y$가 연결일 때 두 들어올림은 $Y$ 전체에서 일치한다.",
+          "idea_behind_proof": "'일치하는 점들의 집합'이 열림이자 닫힘임을 보인다. 균등덮힌 이웃에서 두 들어올림이 같은 층에 있으면 근방 전체에서 일치($p$가 층에서 단사), 다른 층에 있으면 근방 전체에서 불일치(층이 서로소)이기 때문이다.",
+          "proof_steps": [
+            "$y\\in Y$에 대해 $f(y)$의 균등덮힌 이웃 $U$($p^{-1}(U)=\\bigsqcup_\\alpha\\widetilde U_\\alpha$)를 잡고, $\\widetilde f_1(y),\\widetilde f_2(y)$이 든 층을 각각 $\\widetilde U_1,\\widetilde U_2$라 하자. 연속성으로 $\\widetilde f_1(N)\\subset\\widetilde U_1,\\ \\widetilde f_2(N)\\subset\\widetilde U_2$인 이웃 $N\\ni y$을 잡는다.",
+            "$\\widetilde f_1(y)\\ne\\widetilde f_2(y)$이면 $\\widetilde U_1\\ne\\widetilde U_2$(서로소)라 $N$ 전체에서 $\\widetilde f_1\\ne\\widetilde f_2$. $\\widetilde f_1(y)=\\widetilde f_2(y)$이면 $\\widetilde U_1=\\widetilde U_2$이고 $p\\widetilde f_1=p\\widetilde f_2=f$인데 $p$가 그 층에서 단사라 $N$ 전체에서 $\\widetilde f_1=\\widetilde f_2$.",
+            "따라서 두 들어올림이 일치하는 집합은 열림이자 닫힘이다. $Y$가 연결이고 그 집합이 비어 있지 않으므로(한 점에서 일치) $Y$ 전체에서 일치한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (준국소 단순연결, semilocally simply-connected)",
+          "formal_statement": "공간 $X$가 준국소 단순연결(semilocally simply-connected)이라 함은, 각 점 $x\\in X$이 이웃 $U$를 가져 포함이 유도하는 $\\pi_1(U,x)\\to\\pi_1(X,x)$이 자명한(즉 $U$ 안의 모든 고리가 $X$ 안에서 널호모토픽인) 것이다. 이는 국소 단순연결보다 약한 조건이다 — 고리가 $U$ 안에서 수축할 필요는 없고 더 큰 $X$ 안에서만 수축하면 된다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (단순연결 덮개의 필요조건과 예)",
+          "formal_statement": "$X$가 단순연결 덮개공간(즉 자명부분군을 실현하는 덮개, 나중의 보편덮개)을 가지려면 준국소 단순연결이어야 한다. 이유: 단순연결 덮개 $p:\\widetilde X\\to X$이 있으면 각 $x$의 이웃 $U$가 위상동형으로 덮이는 $\\widetilde U$를 가지므로 $U$의 고리는 $\\widetilde U$의 고리로 들어올려지고, $\\pi_1(\\widetilde X)=0$이라 위에서 널호모토픽, 사영하면 아래에서도 널호모토픽 — 곧 $\\pi_1(U,x)\\to\\pi_1(X,x)$이 자명하다. 예: CW 복합체는 국소 축약가능이라 준국소 단순연결이다(부록). 반례: 예제 1.25의 수축하는 원들의 쐐기는 준국소 단순연결이 아니다 — 원점의 어떤 이웃도 무한히 많은 작은 원 전체를 담아 $X$에서조차 수축하지 못하는 고리를 갖는다. 그 원뿔 $CX=(X\\times I)/(X\\times\\{0\\})$은 축약가능이라 준국소 단순연결이지만 국소 단순연결은 아니다(원점에서 여전히 얽힘). 이 조건이 다음 절 분류정리(보편덮개의 존재)의 문지방이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "나선 덮개 $p:\\mathbb{R}\\to S^1$에 대해, 사상 $f:S^1\\to S^1,\\ f(z)=z^k$을 $\\mathbb{R}$로 들어올릴 수 있는 정수 $k$를 명제 1.33으로 판정하라. 들어올려질 때 그 의미를 설명하라.",
+          "hint": "$\\mathbb{R}$은 단순연결이라 $p_*\\pi_1(\\mathbb{R})=0$(자명부분군)이다. $f_*:\\pi_1(S^1)\\to\\pi_1(S^1)$은 곱하기 몇인가? 판정 조건 $f_*\\pi_1\\subseteq p_*\\pi_1$은 언제 성립하는가?",
+          "solution": "$\\mathbb{R}$이 단순연결이라 $p_*\\pi_1(\\mathbb{R})=\\{0\\}$. $f(z)=z^k$은 $f_*:\\pi_1(S^1)=\\mathbb{Z}\\to\\mathbb{Z}$이 곱하기 $k$이므로 $f_*\\pi_1(S^1)=k\\mathbb{Z}$. 판정법(명제 1.33)의 조건 $f_*\\pi_1(S^1)\\subseteq p_*\\pi_1(\\mathbb{R})$은 $k\\mathbb{Z}\\subseteq\\{0\\}$, 즉 $k=0$일 때만 성립한다. 따라서 $k=0$(상수사상)일 때만 $\\mathbb{R}$로 들어올려진다. 의미: $k\\ne0$이면 $f$를 나선으로 올릴 수 없다 — $z^k$의 고리를 들어올리면 $\\mathbb{R}$에서 $0$에서 $k$로 가는 경로가 되어 닫히지 않기 때문이다($k=0$이면 상수경로로 닫힘). 이는 $\\pi_1(S^1)$ 계산에서 감은 횟수를 셌던 것과 같은 현상이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "밑점 보존 덮개 $p:(\\widetilde X,\\widetilde x_0)\\to(S^1\\vee S^1,x_0)$의 층수가 $3$이라 하자. 명제 1.32로 $p_*\\pi_1(\\widetilde X)$이 $F_2=\\pi_1(S^1\\vee S^1)$에서 지표 몇인지 답하고, $\\widetilde X$가 그래프일 때 $\\pi_1(\\widetilde X)$의 랭크를 구하라. 또 보편덮개(단순연결)의 층수는 얼마인가?",
+          "hint": "명제 1.32: 층수 = 지표. 4-정향 그래프는 각 꼭짓점 차수가 $4$다 — 꼭짓점 $3$개면 변은 몇 개? 연결그래프 $\\pi_1$ 랭크는 $E-V+1$. 보편덮개는 자명부분군 $\\{1\\}$에 대응하므로 지표는 $[F_2:\\{1\\}]$.",
+          "solution": "명제 1.32로 층수 $=[F_2:p_*\\pi_1(\\widetilde X)]=3$, 즉 지표 $3$ 부분군이다. $\\widetilde X$는 꼭짓점 $V=3$, 각 꼭짓점 차수 $4$라 변 수 $E=\\tfrac{3\\cdot4}{2}=6$인 연결그래프다. 따라서 $\\pi_1(\\widetilde X)$은 랭크 $E-V+1=6-3+1=4$의 자유군(닐센–슈라이어: $1+3(2-1)=4$와 일치). 보편덮개는 단순연결이라 $p_*\\pi_1=\\{1\\}$(자명부분군)에 대응하고 지표 $[F_2:\\{1\\}]=|F_2|=\\infty$이므로 층수가 무한대다 — 무한 4-정향 나무."
+        },
+        {
+          "type": "ox",
+          "question": "덮개공간에 대한 사상 $f:Y\\to X$의 두 들어올림이 어느 한 점에서 일치하면, $Y$가 연결이기만 하면 두 들어올림은 $Y$ 전체에서 일치한다.",
+          "answer": "O",
+          "explanation": "명제 1.34(유일 들어올림 성질)가 정확히 이것이다. 두 들어올림이 일치하는 점들의 집합은 열림이자 닫힘이다: 균등덮힌 이웃에서 두 값이 같은 층에 있으면 근방 전체에서 일치($p$가 층에서 단사), 다른 층에 있으면 근방 전체에서 불일치(층이 서로소). $Y$가 연결이고 이 집합이 비어 있지 않으므로 전체와 같다. 이 강성이 덮개공간 이론의 뼈대다 — 시작점 하나로 들어올림이 완전히 결정된다."
+        },
+        {
+          "type": "ox",
+          "question": "모든 위상공간은 단순연결(보편) 덮개공간을 갖는다.",
+          "answer": "X",
+          "explanation": "단순연결 덮개가 존재하려면 공간이 준국소 단순연결이어야 한다(필요조건). 반례는 예제 1.25의 수축하는 원들의 쐐기(하와이 귀걸이)다: 원점의 어떤 이웃도 무한히 많은 작은 원을 담아 $X$ 안에서조차 수축하지 못하는 고리를 가지므로 준국소 단순연결이 아니고, 따라서 단순연결 덮개(보편덮개)가 없다. 준국소 단순연결(과 경로연결·국소경로연결)이 보편덮개 존재의 문지방이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.31·1.32·1.33·1.34가 함께 '연결 덮개공간 ↔ $\\pi_1$의 부분군'이라는 갈루아식 사전을 어떻게 떠받치는가? 그리고 준국소 단순연결 조건은 이 사전에서 어떤 역할을 하는가?",
+          "hint": "각 명제가 대응의 어느 부분을 보장하는지 짚어라: 대응이 '잘 정의·충실'한가(1.31), '정량적'인가(1.32), 덮개 사이 사상이 '존재·유일'한가(1.33·1.34), 그리고 모든 부분군(특히 자명군)이 '실현'되는가?",
+          "answer": "네 명제는 갈루아 사전의 서로 다른 기둥을 세운다. (1) 명제 1.31($p_*$ 단사): 각 덮개에 부분군 $p_*\\pi_1(\\widetilde X)$을 대응시키는 것이 '충실'하다 — $\\pi_1(\\widetilde X)$이 왜곡 없이 부분군으로 박히므로 덮개의 대수적 그림자가 온전하다. (2) 명제 1.32(층수=지표): 대응이 '정량적'이다 — 덮개를 얼마나 크게 펼쳤나(층수)가 부분군이 얼마나 작은가(지표)와 정확히 맞물린다. (3) 명제 1.33(들어올림 판정법)과 1.34(유일 들어올림): 대응의 '사상(morphism) 쪽'을 준다 — 두 덮개 사이의 사상(특히 한 덮개가 다른 덮개를 덮는지)이 존재할 조건이 $\\pi_1$ 부분군 포함으로 결정되고(1.33), 그런 사상은 시작점 하나로 유일하게 정해진다(1.34). 그래서 부분군 격자의 포함관계가 덮개들 사이의 덮음관계로 그대로 번역된다(함자적·강성). (4) 그러나 이 사전이 '전사'(모든 부분군이 어떤 덮개로 실현, 특히 자명군 → 보편덮개)이려면 덮개들이 실제로 존재해야 하고, 그 존재의 문지방이 준국소 단순연결이다. 이 조건이 깨지면(하와이 귀걸이) 보편덮개가 없어 자명부분군이 실현되지 않고 사전이 불완전해진다 — 그래서 다음 절의 분류정리는 경로연결·국소경로연결·준국소 단순연결을 표준 가정으로 둔다."
+        }
+      ]
+    }
+  ]
+}
