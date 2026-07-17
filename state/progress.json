@@ -18,7 +18,8 @@
       "section:5": true
     },
     "chapter_1_the_fundamental_group": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true
     }
   },
   "lastPos": {
@@ -29,5 +30,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-07-17T11:53:56.647Z"
+  "updatedAt": "2026-07-17T12:04:57.113Z"
 }
