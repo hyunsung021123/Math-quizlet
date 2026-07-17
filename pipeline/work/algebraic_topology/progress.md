@@ -30,7 +30,7 @@
 | 014 | [x] | 1.2.2 The van Kampen Theorem (분할 part 2) _(원본 #014)_ | section | `014__AlgebraicTopol__1_2_2_ThevanKampenTheorem__p2.txt` |
 | 015 | [x] | 1.2.3 Applications to Cell Complexes | section | `015__AlgebraicTopol__1_2_3_ApplicationstoCellComplexe.txt` |
 | 016 | [x] | 1.2.ex Exercises | exercises | `016__AlgebraicTopol__1_2_ex_Exercises__EX.txt` |
-| 017 | [ ] | 1.3 Covering Spaces | section | `017__AlgebraicTopol__1_3_CoveringSpaces.txt` |
+| 017 | [x] | 1.3 Covering Spaces | section | `017__AlgebraicTopol__1_3_CoveringSpaces.txt` |
 | 018 | [ ] | 1.3.1 Lifting Properties | section | `018__AlgebraicTopol__1_3_1_LiftingProperties.txt` |
 | 019 | [ ] | 1.3.2 The Classification of Covering Spaces (분할 part 1) _(원본 #019)_ | section | `019__AlgebraicTopol__1_3_2_TheClassificationofCoverin__p1.txt` |
 | 020 | [ ] | 1.3.2 The Classification of Covering Spaces (분할 part 2) _(원본 #020)_ | section | `020__AlgebraicTopol__1_3_2_TheClassificationofCoverin__p2.txt` |
