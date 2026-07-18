@@ -41,7 +41,7 @@
 | 025 | [x] | 1.A.ex Exercises | exercises | `025__AlgebraicTopol__1_A_ex_Exercises__EX.txt` |
 | 026 | [x] | 1.B K(G,1) Spaces and Graphs of Groups (분할 part 1) _(원본 #026)_ | section | `026__AlgebraicTopol__1_B_KG1SpacesandGraphsofGroups__p1.txt` |
 | 027 | [x] | 1.B K(G,1) Spaces and Graphs of Groups (분할 part 2) _(원본 #027)_ | section | `027__AlgebraicTopol__1_B_KG1SpacesandGraphsofGroups__p2.txt` |
-| 028 | [ ] | 1.B.ex Exercises | exercises | `028__AlgebraicTopol__1_B_ex_Exercises__EX.txt` |
+| 028 | [x] | 1.B.ex Exercises | exercises | `028__AlgebraicTopol__1_B_ex_Exercises__EX.txt` |
 
 ## 2. Homology
 
