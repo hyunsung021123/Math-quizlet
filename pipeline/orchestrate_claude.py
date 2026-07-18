@@ -14,8 +14,14 @@ this script. Crossing a chapter boundary transparently switches to (or
 creates) that chapter's own dedicated session.
 
 Usage:
-    python orchestrate_claude.py --book <book-slug> [--chapter N] [--max N]
+    python orchestrate_claude.py --book <anything identifying a book> [--chapter N] [--max N]
 
+- --book accepts the exact folder slug (e.g. `algebraic_topology`), the exact
+  English title from that book's toc_data.json (e.g. `Complex Analysis`), a
+  case-insensitive substring of either, or a known Korean alias (see
+  BOOK_ALIASES below) -- resolved against every folder under `pipeline/work/`.
+  Ambiguous or unmatched input lists the available books and their slugs so
+  the caller (human or Claude) can retry with the exact slug.
 - --chapter N: stop once the next piece belongs to a chapter other than N
   (omit to run until the book is exhausted or an error occurs).
 - --max N: stop after generating at most N pieces this run (safety valve).
@@ -52,6 +58,56 @@ except Exception:
 
 def log(msg):
     print(msg, flush=True)
+
+
+# Slug -> extra Korean/English aliases a user might say instead of the exact
+# slug or the exact toc_data.json "book" title. Add an entry here whenever a
+# new book is started if its natural-language name doesn't already contain
+# an obvious substring of the slug/title (resolve_book() below already does
+# case-insensitive substring matching on both, so most short English/author
+# references need no entry at all).
+BOOK_ALIASES = {
+    "algebraic_topology": ["대수적 위상수학", "대수위상", "해처", "hatcher"],
+    "complex_analysis": ["복소해석", "복소해석학", "스타인", "stein", "shakarchi"],
+    "lectures_on_polytopes": ["폴리토프", "폴리토프 이론", "지글러", "ziegler"],
+}
+
+
+def resolve_book(query):
+    """Resolve a user-provided book reference to its pipeline/work/ slug.
+
+    Tries, in order: exact slug match, exact toc_data.json title match,
+    case-insensitive substring match against slug/title/aliases. Raises
+    SystemExit with the list of available books on no-match or ambiguity.
+    """
+    work_dir = os.path.join(PIPE, "work")
+    candidates = []  # (slug, title)
+    for slug in sorted(os.listdir(work_dir)):
+        toc_path = os.path.join(work_dir, slug, "toc_data.json")
+        if not os.path.isdir(os.path.join(work_dir, slug)) or not os.path.exists(toc_path):
+            continue
+        title = json.load(open(toc_path, encoding="utf-8")).get("book", "")
+        candidates.append((slug, title))
+
+    q = query.strip().lower()
+    for slug, title in candidates:
+        if q == slug.lower() or q == title.lower():
+            return slug
+
+    matches = []
+    for slug, title in candidates:
+        haystacks = [slug.lower(), title.lower()] + [a.lower() for a in BOOK_ALIASES.get(slug, [])]
+        if any(q in h or h in q for h in haystacks):
+            matches.append(slug)
+
+    if len(matches) == 1:
+        return matches[0]
+
+    listing = "\n".join(f"  - {slug}  ({title})" for slug, title in candidates)
+    if len(matches) > 1:
+        sys.exit(f"'{query}' matches more than one book ({matches}). "
+                  f"Rerun with the exact slug:\n{listing}")
+    sys.exit(f"'{query}' did not match any book in pipeline/work/. Available books:\n{listing}")
 
 
 def run(cmd, **kw):
@@ -139,12 +195,14 @@ def extract_validate(raw):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--book", required=True)
+    ap.add_argument("--book", required=True,
+                     help="slug, exact title, substring, or known alias -- see resolve_book()")
     ap.add_argument("--chapter", type=int, default=None,
                      help="stop once the next piece leaves this chapter number")
     ap.add_argument("--max", type=int, default=None,
                      help="max number of pieces to generate this run")
     args = ap.parse_args()
+    args.book = resolve_book(args.book)
 
     log(f"===== orchestrator start (book={args.book}) =====")
     done = 0

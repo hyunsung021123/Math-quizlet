@@ -127,8 +127,27 @@ default way to author new sections when the user asks to "automate" or "continue
 do not need to ask them to paste anything into an external AI first.
 
 ```
-python pipeline/orchestrate_claude.py --book <book-slug> [--chapter N] [--max N]
+python pipeline/orchestrate_claude.py --book <anything identifying a book> [--chapter N] [--max N]
 ```
+
+**Books in progress right now** (each is a folder under `pipeline/work/`; run
+`python pipeline/program2_track.py --book <slug> status` for that book's current per-chapter progress —
+don't rely on any progress numbers written here, they go stale):
+
+| slug | title (`toc_data.json`'s `book` field) | author |
+|---|---|---|
+| `algebraic_topology` | Algebraic Topology | Allen Hatcher |
+| `complex_analysis` | Complex Analysis | Elias M. Stein & Rami Shakarchi |
+| `lectures_on_polytopes` | Lectures on Polytopes | Günter M. Ziegler |
+
+`--book` does not need to be that exact slug: `orchestrate_claude.py`'s `resolve_book()` also accepts the
+exact title above, a case-insensitive substring of the slug/title (e.g. `ziegler`, `stein`, `polytopes`), or
+a Korean alias from its `BOOK_ALIASES` table (e.g. `복소해석`, `폴리토프`, `해처`) — so however the user names
+a book in conversation, try passing that string through as-is before normalizing it yourself. An ambiguous
+or unmatched `--book` value exits with the full list of available books/slugs rather than guessing, so a
+failed run here is informative, not a dead end. When a genuinely new book is started (new
+`pipeline/work/<slug>/`), add a `BOOK_ALIASES` entry only if its natural Korean/English name doesn't already
+substring-match its slug or title.
 
 For each remaining section it: reads `program2_track.py next`, builds the prompt (header + PDF path +
 `system_prompt.md`'s rules), calls `claude -p --resume <session> --model opus` to generate the JSON,
