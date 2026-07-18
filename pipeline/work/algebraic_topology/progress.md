@@ -51,7 +51,7 @@
 | 030 | [x] | 2.1 Simplicial and Singular Homology | section | `030__AlgebraicTopol__2_1_SimplicialandSingularHomol.txt` |
 | 031 | [x] | 2.1.1 Δ-Complexes | section | `031__AlgebraicTopol__2_1_1_-Complexes.txt` |
 | 032 | [x] | 2.1.2 Simplicial Homology | section | `032__AlgebraicTopol__2_1_2_SimplicialHomology.txt` |
-| 033 | [ ] | 2.1.3 Singular Homology | section | `033__AlgebraicTopol__2_1_3_SingularHomology.txt` |
+| 033 | [x] | 2.1.3 Singular Homology | section | `033__AlgebraicTopol__2_1_3_SingularHomology.txt` |
 | 034 | [ ] | 2.1.4 Homotopy Invariance | section | `034__AlgebraicTopol__2_1_4_HomotopyInvariance.txt` |
 | 035 | [ ] | 2.1.5 Exact Sequences and Excision (분할 part 1) _(원본 #035)_ | section | `035__AlgebraicTopol__2_1_5_ExactSequencesandExcision__p1.txt` |
 | 036 | [ ] | 2.1.5 Exact Sequences and Excision (분할 part 2) _(원본 #036)_ | section | `036__AlgebraicTopol__2_1_5_ExactSequencesandExcision__p2.txt` |

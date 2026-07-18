@@ -1009,6 +1009,346 @@
       ]
     },
     {
+      "section_title": "2.1.3 특이 호몰로지 (Singular Homology)",
+      "step1_big_picture": {
+        "context": "2.1.2의 단체 호몰로지 $H_n^{\\Delta}$는 단체 수가 적어 계산은 쉬웠지만 두 가지 약점이 있었다: (1) $\\Delta$-복합체에만, 그것도 준 $\\Delta$-구조에 의존해 정의되고, (2) 위상동형·호모토피 동치 불변인지가 전혀 자명하지 않았다. 이 절은 그 약점을 정면으로 없애는 특이 호몰로지 $H_n(X)$를 도입한다. 핵심 발상은 '단체를 하나 고르지 말고, $\\Delta^n$에서 $X$로 가는 모든 연속사상을 전부 기저로 삼자'는 것이다. 그러면 아무 선택도 하지 않으므로 위상동형 불변성이 정의에서 곧바로 따라 나온다. 그 대가로 사슬군 $C_n(X)$는 (보통 비가산으로) 거대해지지만, 몫인 $H_n(X)$는 여전히 작다. 이 무대에서 첫 실질적 정리들 — $H_0$이 경로성분을 센다, 점은 자명한 (축소)호몰로지를 갖는다 — 을 증명한다.",
+        "hidden_intuition": "특이 단체 $\\sigma:\\Delta^n\\to X$는 '삼각형을 $X$ 안에 아무렇게나 그려 넣은 것'이다 — 접힘·짜부라짐 같은 특이점(singularity)이 있어도 좋고, 연속이기만 하면 된다. 왜 이렇게 미친 듯이 많은(비가산의) 사상을 다 넣는가? 바로 '선택의 부재'가 곧 '불변성'이기 때문이다. 단체 호몰로지가 '어떻게 삼각분할했는가'에 매달렸다면, 특이 호몰로지는 가능한 모든 삼각형을 동시에 담아 그 의존성을 원천 제거한다. 그리고 순환의 기하적 얼굴이 여기서 드러난다: $H_1$의 원소는 $X$ 속 유향 고리(oriented loop)들의 모음이고, $H_2$의 원소는 닫힌 유향 곡면을 $X$로 보낸 것이다. '경계가 된다 = 0이다'는 말은 문자 그대로 '그 고리가 어떤 유향 곡면의 테두리로 채워진다'는 뜻이다. 마지막으로 축소 호몰로지 $\\widetilde{H}_n$는 빈 단체 $[\\varnothing]$가 만드는 여분의 $\\mathbb{Z}$를 사슬 복합체 끝에 덧붙여, '점은 모든 차원에서 호몰로지가 $0$'이 되도록 장부를 깔끔하게 맞추는 회계 트릭이다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (특이 단체·특이 사슬군·특이 호몰로지)",
+          "formal_statement": "공간 $X$의 특이 $n$-단체(singular $n$-simplex)는 정의상 단지 연속사상 $\\sigma:\\Delta^n\\to X$이다('특이'는 상이 단체처럼 보이지 않는 특이점을 가져도 됨을 뜻한다). $C_n(X)$를 $X$의 특이 $n$-단체 전체를 기저로 하는 자유아벨군으로 두고, 그 원소 $\\sum_i n_i\\sigma_i$ ($n_i\\in\\mathbb{Z}$)를 (특이) $n$-사슬이라 한다. 경계 사상 $\\partial_n:C_n(X)\\to C_{n-1}(X)$은 2.1.2와 같은 공식 $$\\partial_n(\\sigma)=\\sum_i(-1)^i\\,\\sigma\\big|_{[v_0,\\dots,\\widehat{v}_i,\\dots,v_n]}$$ 으로 정의한다(각 면을 정점 순서를 보존하며 $\\Delta^{n-1}$과 동일시하므로 $\\sigma|_{[\\dots]}$는 특이 $(n-1)$-단체다). 보조정리 2.1의 증명이 특이 단체에도 그대로 적용되어 $\\partial^2=0$이므로, 특이 호몰로지군 $$H_n(X)=\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$$ 이 정의된다.",
+          "idea_behind_proof": "경계 공식도 $\\partial^2=0$의 증명도 2.1.2에서 한 글자도 바꿀 필요가 없다 — 그 논증은 순전히 '정점을 두 번 지우는 두 순서의 부호가 반대'라는 조합적 사실이었고 단체가 매장(embedding)인지 여부를 전혀 쓰지 않았기 때문이다. 그래서 '연속사상이기만 하면 된다'로 대상을 넓혀도 대수 골격은 무사하다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -4.2,
+                    -0.7
+                  ],
+                  [
+                    -2.4,
+                    -0.7
+                  ],
+                  [
+                    -3.3,
+                    0.9
+                  ]
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -3.3,
+                  -1.15
+                ],
+                "text": "Δ^2"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.9,
+                  0.1
+                ],
+                "to": [
+                  -0.4,
+                  0.1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.15,
+                  0.5
+                ],
+                "text": "σ"
+              },
+              {
+                "shape": "ellipse",
+                "center": [
+                  1.7,
+                  0
+                ],
+                "rx": 1.5,
+                "ry": 0.4,
+                "rotation": 22
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.7,
+                  -1.15
+                ],
+                "text": "σ(Δ^2) ⊂ X"
+              }
+            ],
+            "caption": "특이 $2$-단체는 임의의 연속사상 $\\sigma:\\Delta^2\\to X$. 상이 짜부라져 삼각형처럼 안 보여도('특이점') 상관없다 — 이 관대함이 '가능한 모든 삼각형'을 담아 불변성을 얻는 대가다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (위상동형 불변성은 즉각, 그러나 유한성은 비자명; 특이복합체 $S(X)$)",
+          "formal_statement": "정의에서 곧바로, 위상동형인 공간은 동형인 특이 호몰로지군 $H_n$을 갖는다($H_n^{\\Delta}$와 대조된다). 반면 $C_n(X)$가 (특이 단체가 보통 비가산이라) 너무 크기 때문에, 유한한 단체를 가진 $\\Delta$-복합체 $X$에 대해서조차 $H_n(X)$가 유한생성인지, 또 $n>\\dim X$에서 $H_n(X)=0$인지는 전혀 자명하지 않다($H_n^{\\Delta}$에서는 자명했던 성질). 한편 특이 호몰로지는 오히려 단체 호몰로지의 특수한 경우로 볼 수 있다: 임의의 $X$에 대해, 각 특이 $n$-단체 $\\sigma$마다 하나의 $n$-단체 $\\Delta^n_\\sigma$를 두고 $\\partial\\Delta^n$의 면들을 $\\sigma$의 제한에 따라 붙인 $\\Delta$-복합체 $S(X)$(특이복합체, singular complex)를 만들면 모든 $n$에서 $H_n^{\\Delta}(S(X))=H_n(X)$이다. $S(X)$는 $X$에 비해 대개 극도로 거대한 '$\\Delta$-복합체 모형'이다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (순환의 기하학적 해석: 유향 고리와 유향 곡면)",
+          "formal_statement": "순환은 대수적으로 정의되지만 유한 $\\Delta$-복합체로부터의 사상으로 기하학적으로 읽을 수 있다. $n$-사슬은 항상 $\\xi=\\sum_i\\varepsilon_i\\sigma_i$ ($\\varepsilon_i=\\pm1$, 중복 허용)로 쓸 수 있고, $\\partial\\xi$를 계산할 때 부호가 반대인 동일한 $(n-1)$-단체 쌍(소거쌍)들을 골라 면끼리 붙이면 $n$-단체들 $\\Delta^n_i$로부터 $\\Delta$-복합체 $K_\\xi$가 만들어지고 $\\sigma_i$들이 사상 $K_\\xi\\to X$를 유도한다. $\\xi$가 순환이면 $K_\\xi$의 모든 $(n-1)$-단체가 정확히 두 $n$-단체의 면이 되어, $K_\\xi$는 여차원 $\\ge 3$의 예외 부분복합체를 빼면 유향 다양체(oriented manifold)가 된다. 특히 $H_1(X)$의 원소는 $X$ 속 유향 고리들의 모음으로, $H_2(X)$의 원소는 닫힌 유향 곡면의 사상으로 대표된다. 실제로 유향 $1$-순환 $\\coprod_\\alpha S^1_\\alpha\\to X$가 $H_1(X)$에서 $0$일 필요충분조건은 그것이 유향 곡면의 사상으로 확장되는 것이다($2$-순환에도 유사한 서술이 성립). 다만 다양체와의 이 밀접한 관계가 모든 고차원으로 이어지지는 않는다 — 다양체로 지은 호몰로지(보르디즘, bordism)는 훨씬 복잡하다.",
+          "idea_behind_proof": "핵심 직관은 '$\\partial\\xi=0$이면 소거쌍이 완벽히 맞아떨어져 붙일 면이 늘 짝으로 존재한다'는 것이다. 각 $(n-1)$-면이 정확히 두 개의 $n$-단체에 공유되는 상황이 바로 다양체의 국소 그림($\\mathbb{R}^n$)이고, $\\varepsilon_i$의 부호가 그 다양체에 정합적 방향을 준다. 그래서 '순환'이라는 대수 조건이 '유향 다양체를 $X$로 보낸 것'이라는 기하로 번역된다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    1.4,
+                    0
+                  ],
+                  [
+                    0,
+                    1.4
+                  ],
+                  [
+                    -1.4,
+                    0
+                  ],
+                  [
+                    0,
+                    -1.4
+                  ]
+                ],
+                "closed": true,
+                "fill": "#dbeafe",
+                "arrow": true
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "유향 곡면"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.75
+                ],
+                "text": "1-순환 = 유향 고리"
+              }
+            ],
+            "caption": "유향 $1$-순환(테두리 고리)이 $H_1(X)$에서 $0$일 필요충분조건은 그것이 유향 곡면(채워진 안쪽)의 테두리로 확장되는 것 — '경계가 된다'가 문자 그대로 '곡면으로 채워진다'를 뜻한다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.6 (경로성분 분해)",
+          "formal_statement": "공간 $X$의 경로성분(path-component) $X_\\alpha$로의 분해에 대응하여 동형 $$H_n(X)\\cong\\bigoplus_\\alpha H_n(X_\\alpha)$$ 이 성립한다.",
+          "idea_behind_proof": "특이 단체의 상은 (연속상이므로) 언제나 경로연결이라, 각 특이 단체가 단 하나의 경로성분 안에 통째로 놓인다. 이 사실 하나가 사슬군을 성분별로 완전히 쪼개고, 경계 사상이 그 쪼갬을 보존하므로 호몰로지도 성분별로 갈라진다.",
+          "proof_steps": [
+            "1단계: 특이 단체의 상이 경로연결이므로 $C_n(X)$는 부분군 $C_n(X_\\alpha)$들의 직합으로 분해된다.",
+            "2단계: 경계 사상 $\\partial_n$은 $C_n(X_\\alpha)$를 $C_{n-1}(X_\\alpha)$로 보내므로 이 직합 분해를 보존한다.",
+            "3단계: 따라서 $\\mathrm{Ker}\\,\\partial_n$과 $\\mathrm{Im}\\,\\partial_{n+1}$도 성분별 직합으로 갈라지고, 몫인 호몰로지도 $H_n(X)\\cong\\bigoplus_\\alpha H_n(X_\\alpha)$로 분해된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.7 ($H_0$은 경로성분을 센다)",
+          "formal_statement": "$X$가 공집합이 아니고 경로연결이면 $H_0(X)\\cong\\mathbb{Z}$이다. 따라서 임의의 공간 $X$에 대해 $H_0(X)$는 경로성분마다 하나씩의 $\\mathbb{Z}$의 직합이다.",
+          "idea_behind_proof": "증대사상(augmentation) $\\varepsilon(\\sum n_i\\sigma_i)=\\sum n_i$가 열쇠다. $\\varepsilon$은 '계수의 총합'을 재는데, 경로연결성이 있으면 '계수합이 $0$인 $0$-사슬'은 언제나 경계가 된다 — 각 점을 기준점으로 잇는 경로가 그 점과 기준점의 차를 경계로 실현하기 때문이다. 즉 경로가 $\\mathrm{Ker}\\,\\varepsilon$을 정확히 $\\mathrm{Im}\\,\\partial_1$로 메운다.",
+          "proof_steps": [
+            "1단계: $\\partial_0=0$이므로 $H_0(X)=C_0(X)/\\mathrm{Im}\\,\\partial_1$. 사상 $\\varepsilon:C_0(X)\\to\\mathbb{Z}$, $\\varepsilon(\\sum_i n_i\\sigma_i)=\\sum_i n_i$는 $X\\ne\\varnothing$이면 전사. 주장은 '$X$ 경로연결이면 $\\mathrm{Ker}\\,\\varepsilon=\\mathrm{Im}\\,\\partial_1$'이며, 그러면 $\\varepsilon$이 동형 $H_0(X)\\cong\\mathbb{Z}$를 유도한다.",
+            "2단계 ($\\mathrm{Im}\\,\\partial_1\\subseteq\\mathrm{Ker}\\,\\varepsilon$): 특이 $1$-단체 $\\sigma:\\Delta^1\\to X$에 대해 $\\varepsilon\\partial_1(\\sigma)=\\varepsilon(\\sigma|_{[v_1]}-\\sigma|_{[v_0]})=1-1=0$.",
+            "3단계 ($\\mathrm{Ker}\\,\\varepsilon\\subseteq\\mathrm{Im}\\,\\partial_1$): $\\sum_i n_i\\sigma_i$에서 $\\sum_i n_i=0$이라 하자($\\sigma_i$는 점). 기준점 $x_0$에서 $\\sigma_i(v_0)$로 가는 경로 $\\tau_i:[v_0,v_1]\\to X$를 잡고 $\\sigma_0$을 $x_0$에 대응하는 $0$-단체라 하면 $\\partial\\tau_i=\\sigma_i-\\sigma_0$.",
+            "4단계: 따라서 $\\partial(\\sum_i n_i\\tau_i)=\\sum_i n_i\\sigma_i-(\\sum_i n_i)\\sigma_0=\\sum_i n_i\\sigma_i$ ($\\sum n_i=0$이므로). 즉 $\\sum_i n_i\\sigma_i$는 경계이고 $\\mathrm{Ker}\\,\\varepsilon\\subseteq\\mathrm{Im}\\,\\partial_1$. 명제 2.6과 합치면 일반 $H_0$은 경로성분마다 $\\mathbb{Z}$의 직합. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -1.5
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.9
+                ],
+                "text": "x_0 (σ_0)"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -2.2,
+                  1.1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.1,
+                  1.5
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2.3,
+                  1.1
+                ]
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0,
+                  -1.5
+                ],
+                "to": [
+                  -2.2,
+                  1.1
+                ],
+                "bulge": 0.3,
+                "arrow": true
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0,
+                  -1.5
+                ],
+                "to": [
+                  0.1,
+                  1.5
+                ],
+                "bulge": 0.2,
+                "arrow": true
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0,
+                  -1.5
+                ],
+                "to": [
+                  2.3,
+                  1.1
+                ],
+                "bulge": -0.3,
+                "arrow": true
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.7,
+                  0
+                ],
+                "text": "τ_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.55,
+                  0
+                ],
+                "text": "τ_2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.75,
+                  0
+                ],
+                "text": "τ_3"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.5,
+                  1.45
+                ],
+                "text": "σ_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.1,
+                  1.85
+                ],
+                "text": "σ_2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.6,
+                  1.45
+                ],
+                "text": "σ_3"
+              }
+            ],
+            "caption": "명제 2.7의 심장: 각 점 $\\sigma_i$를 기준점 $x_0$에 잇는 경로 $\\tau_i$를 $1$-단체로 보면 $\\partial\\tau_i=\\sigma_i-\\sigma_0$. 계수합이 $0$이면 $\\sigma_0$ 항이 사라져 사슬이 경계로 실현된다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.8 (점의 호몰로지)",
+          "formal_statement": "$X$가 한 점이면 $n>0$에서 $H_n(X)=0$이고 $H_0(X)\\cong\\mathbb{Z}$이다.",
+          "idea_behind_proof": "한 점에서는 각 차원마다 특이 단체가 유일(상수사상)하므로 $C_n\\cong\\mathbb{Z}$이고, 경계 공식이 '항 $n+1$개의 교대합'으로 단순해져 $n$의 홀짝에 따라 $0$과 항등이 번갈아 나타난다. 이 규칙적인 사슬 복합체의 호몰로지는 계산만 하면 $H_0$만 남는다.",
+          "proof_steps": [
+            "1단계: 각 $n$마다 유일한 특이 $n$-단체 $\\sigma_n$이 있어 $\\partial(\\sigma_n)=\\sum_{i=0}^n(-1)^i\\sigma_{n-1}=(\\sum_{i=0}^n(-1)^i)\\,\\sigma_{n-1}$. 이 계수합은 $n$이 홀수면 $0$, $n$이 짝수($n\\ne0$)면 $1$이다.",
+            "2단계: 따라서 사슬 복합체는 $$\\cdots\\to\\mathbb{Z}\\xrightarrow{\\cong}\\mathbb{Z}\\xrightarrow{0}\\mathbb{Z}\\xrightarrow{\\cong}\\mathbb{Z}\\xrightarrow{0}\\mathbb{Z}\\to0$$ 로, 경계 사상이 (마지막을 빼고) 동형과 영사상을 번갈아 이룬다.",
+            "3단계: 영사상 뒤 동형이 이어지는 자리에서는 $\\mathrm{Ker}=\\mathrm{Im}$이 되어 호몰로지가 소멸하고, 오직 $H_0\\cong\\mathbb{Z}$만 남는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (축소 호몰로지 $\\widetilde{H}_n$)",
+          "formal_statement": "점이 모든 차원($0$ 포함)에서 자명한 호몰로지를 갖도록 하기 위해, 축소 호몰로지군(reduced homology group) $\\widetilde{H}_n(X)$을 증대된 사슬 복합체 $$\\cdots\\to C_2(X)\\xrightarrow{\\partial_2}C_1(X)\\xrightarrow{\\partial_1}C_0(X)\\xrightarrow{\\ \\varepsilon\\ }\\mathbb{Z}\\to0$$ 의 호몰로지로 정의한다. 여기서 $\\varepsilon(\\sum_i n_i\\sigma_i)=\\sum_i n_i$ (명제 2.7의 증대사상)이고 $X\\ne\\varnothing$을 요구한다(차원 $-1$에 군이 생기는 것을 피하려). $\\varepsilon\\partial_1=0$이므로 $\\varepsilon$은 $H_0(X)\\to\\mathbb{Z}$를 유도하며 그 핵이 $\\widetilde{H}_0(X)$이다. 따라서 $$H_0(X)\\cong\\widetilde{H}_0(X)\\oplus\\mathbb{Z},\\qquad H_n(X)\\cong\\widetilde{H}_n(X)\\ (n>0).$$ 형식적으로 여분의 $\\mathbb{Z}$는 정점이 없는 빈 단체 $[\\varnothing]$에서 $X$로 가는 유일한 사상이 만들고, $\\varepsilon$은 $\\partial[v_0]=[\\widehat{v}_0]=[\\varnothing]$이라는 통상의 경계 사상으로 이해된다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "임의의 특이 $1$-단체 $\\sigma:\\Delta^1\\to X$에 대해 증대사상 $\\varepsilon(\\sum n_i\\sigma_i)=\\sum n_i$가 $\\varepsilon(\\partial_1\\sigma)=0$을 만족함을 확인하고, 이 등식이 왜 (i) $\\varepsilon$이 $H_0(X)\\to\\mathbb{Z}$로 내려가게 하고 (ii) 축소 호몰로지가 잘 정의되게 하는지 설명하라.",
+          "hint": "$\\partial_1\\sigma=\\sigma|_{[v_1]}-\\sigma|_{[v_0]}$를 $\\varepsilon$에 대입하라. $\\varepsilon\\partial_1=0$은 곧 $\\mathrm{Im}\\,\\partial_1\\subseteq\\mathrm{Ker}\\,\\varepsilon$을 뜻함에 유의.",
+          "solution": "$\\partial_1\\sigma=\\sigma|_{[v_1]}-\\sigma|_{[v_0]}$이고 이는 두 개의 $0$-단체(점)의 차이므로 $\\varepsilon(\\partial_1\\sigma)=1-1=0$. 선형성에 의해 모든 $1$-사슬에서 $\\varepsilon\\partial_1=0$, 즉 $\\mathrm{Im}\\,\\partial_1\\subseteq\\mathrm{Ker}\\,\\varepsilon$. (i) 그러므로 $\\varepsilon$은 $\\mathrm{Im}\\,\\partial_1$ 위에서 소멸해 몫 $H_0(X)=C_0/\\mathrm{Im}\\,\\partial_1$에서 잘 정의된 사상 $H_0(X)\\to\\mathbb{Z}$을 유도한다. (ii) 증대 복합체 $\\cdots\\to C_0\\xrightarrow{\\varepsilon}\\mathbb{Z}\\to0$가 $\\varepsilon\\partial_1=0$ 덕분에 실제 사슬 복합체($\\partial^2=0$의 마지막 칸에 해당)가 되어, 그 호몰로지인 $\\widetilde{H}_n$이 정의된다. 결과적으로 $H_0\\cong\\widetilde{H}_0\\oplus\\mathbb{Z}$."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$X$가 서로 떨어진 세 점(이산 세 점)일 때 모든 특이 호몰로지군 $H_n(X)$와 축소 호몰로지군 $\\widetilde{H}_n(X)$을 구하라.",
+          "hint": "각 점은 하나의 경로성분이다. 명제 2.6으로 성분별로 쪼갠 뒤 명제 2.8을 각 점에 적용하고, 축소는 $H_0\\cong\\widetilde{H}_0\\oplus\\mathbb{Z}$를 역으로 쓰라.",
+          "solution": "세 점은 세 경로성분이므로 명제 2.6에 의해 $H_n(X)\\cong\\bigoplus_{k=1}^{3}H_n(\\text{점})$. 명제 2.8로 각 점은 $H_0\\cong\\mathbb{Z}$, $H_{n>0}=0$이므로 $$H_0(X)\\cong\\mathbb{Z}^3,\\qquad H_n(X)=0\\ (n>0).$$ 축소는 $H_0\\cong\\widetilde{H}_0\\oplus\\mathbb{Z}$에서 $\\widetilde{H}_0(X)\\cong\\mathbb{Z}^2$, $\\widetilde{H}_n(X)=0\\ (n>0)$. 일반화: 경로성분이 $k$개면 $H_0\\cong\\mathbb{Z}^k$, $\\widetilde{H}_0\\cong\\mathbb{Z}^{k-1}$ — 축소 호몰로지의 $-1$은 '한 성분을 기준으로 삼아 상대적으로만 센다'는 뜻이다."
+        },
+        {
+          "type": "ox",
+          "question": "공집합이 아닌 모든 공간 $X$에 대해 $H_0(X)\\cong\\mathbb{Z}$이다.",
+          "answer": "X",
+          "explanation": "$H_0(X)\\cong\\mathbb{Z}$는 $X$가 경로연결일 때만 보장된다(명제 2.7). 일반적으로 $H_0(X)$는 경로성분마다 하나씩의 $\\mathbb{Z}$의 직합이므로, 예컨대 이산 세 점에서는 $H_0\\cong\\mathbb{Z}^3$이다. $H_0$의 계수(rank)가 곧 경로성분의 수를 센다."
+        },
+        {
+          "type": "ox",
+          "question": "특이 호몰로지가 위상동형 불변이라는 사실은 그 정의에서 즉시 따라 나오지만, 단체 호몰로지 $H_n^{\\Delta}$의 위상동형 불변성은 정의만으로는 자명하지 않다.",
+          "answer": "O",
+          "explanation": "특이 호몰로지는 $\\Delta^n\\to X$의 '모든' 연속사상으로 만들어져 어떤 구조 선택도 하지 않으므로, 위상동형 $X\\cong Y$는 특이 단체들을 일대일로 대응시켜 곧바로 $H_n(X)\\cong H_n(Y)$를 준다. 반면 $H_n^{\\Delta}$는 특정 $\\Delta$-구조에 의존해 정의되므로 '구조를 바꿔도, 나아가 위상동형·호모토피 동치인 공간끼리 같은가?'가 자명하지 않았고, 바로 이 물음이 특이 호몰로지를 도입한 동기였다(이 절 끝에서 두 이론이 $\\Delta$-복합체 위에서 일치함을 보인다)."
+        },
+        {
+          "type": "conceptual",
+          "question": "계산에 유리한 경제적인 단체 호몰로지를 두고, 왜 굳이 사슬군이 비가산으로 거대해지는 특이 호몰로지를 정의하는가? 무엇을 얻고 무엇을 잃는지, 2.1.2에서 남겨진 물음과 연결해 설명하라.",
+          "hint": "'선택을 하지 않는다'는 것이 불변성과 어떻게 연결되는지, 그리고 거대한 $C_n(X)$ 때문에 자명성을 잃는 성질(유한생성, 차원 위 소멸)이 무엇인지 대비하라.",
+          "answer": "얻는 것은 불변성과 보편성이다. 단체 호몰로지는 '어떤 $\\Delta$-구조로 삼각분할했는가'라는 선택에 의존해, 위상동형·호모토피 동치 불변인지가 정의만으로는 불분명했다(2.1.2의 미해결 물음). 특이 호몰로지는 $\\Delta^n\\to X$의 가능한 모든 연속사상을 전부 기저로 삼아 아무 선택도 하지 않음으로써 이 의존성을 원천 제거한다 — 그 결과 위상동형 불변성은 정의에서 즉시 따라 나오고, $\\Delta$-복합체가 아닌 임의의 공간에도 정의된다. 잃는 것은 계산 편의와 '유한성의 자명함'이다. $C_n(X)$가 (보통 비가산으로) 거대해져, $H_n^{\\Delta}$에서는 공짜였던 두 성질 — $H_n$이 유한생성이라는 것, $n>\\dim X$에서 $H_n=0$이라는 것 — 이 더 이상 자명하지 않고 별도의 정리로 증명해야 한다. 그럼에도 거대한 사슬군의 '몫'인 $H_n$ 자체는 여전히 작아서, 명제 2.6~2.8처럼 손으로 다룰 수 있다. 요컨대 특이 호몰로지는 '계산의 경제성'을 '이론의 견고함(불변성·일반성)'과 맞바꾼 것이며, 뒤에서 두 이론이 $\\Delta$-복합체 위에서 일치함을 보임으로써 양쪽의 장점을 모두 회수한다."
+        }
+      ]
+    },
+    {
       "section_title": "2.intro 개관 — 호몰로지의 아이디어 (The Idea of Homology)",
       "step1_big_picture": {
         "context": "1장에서 배운 기본군(fundamental group) $\\pi_1(X)$은 저차원 공간에는 강력하지만, 그 정의가 오직 저차원 대상(고리 $I\\to X$, 고리의 호모토피 $I\\times I\\to X$)만 쓰기에 고차원을 다루기엔 무디다 — 예컨대 $S^n\\ (n\\ge 2)$들을 전혀 구별하지 못한다. 자연스러운 고차원 유비인 호모토피군 $\\pi_n(X)$은 모든 구를 구별하지만($\\pi_i(S^n)=0\\ (i<n),\\ \\mathbb{Z}\\ (i=n)$), 계산이 악명 높게 어렵다($i>n$일 때 $\\pi_i(S^n)$은 거대한 미해결 문제). 그 대안이 이 장의 주인공인 호몰로지군 $H_n(X)$이다. $\\pi_n$과 마찬가지로 CW 복합체에서 $(n{+}1)$-뼈대(skeleton)에만 의존하되, $i>n$이면 $H_i(S^n)=0$이라는 결정적 이점을 가지며, 무엇보다 셀 구조에서 직접 계산된다.",
