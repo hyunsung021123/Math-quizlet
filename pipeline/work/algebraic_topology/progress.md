@@ -34,7 +34,7 @@
 | 018 | [x] | 1.3.1 Lifting Properties | section | `018__AlgebraicTopol__1_3_1_LiftingProperties.txt` |
 | 019 | [x] | 1.3.2 The Classification of Covering Spaces (분할 part 1) _(원본 #019)_ | section | `019__AlgebraicTopol__1_3_2_TheClassificationofCoverin__p1.txt` |
 | 020 | [x] | 1.3.2 The Classification of Covering Spaces (분할 part 2) _(원본 #020)_ | section | `020__AlgebraicTopol__1_3_2_TheClassificationofCoverin__p2.txt` |
-| 021 | [ ] | 1.3.3 Deck Transformations and Group Actions (분할 part 1) _(원본 #021)_ | section | `021__AlgebraicTopol__1_3_3_DeckTransformationsandGrou__p1.txt` |
+| 021 | [x] | 1.3.3 Deck Transformations and Group Actions (분할 part 1) _(원본 #021)_ | section | `021__AlgebraicTopol__1_3_3_DeckTransformationsandGrou__p1.txt` |
 | 022 | [ ] | 1.3.3 Deck Transformations and Group Actions (분할 part 2) _(원본 #022)_ | section | `022__AlgebraicTopol__1_3_3_DeckTransformationsandGrou__p2.txt` |
 | 023 | [ ] | 1.3.ex Exercises | exercises | `023__AlgebraicTopol__1_3_ex_Exercises__EX.txt` |
 | 024 | [ ] | 1.A Graphs and Free Groups | section | `024__AlgebraicTopol__1_A_GraphsandFreeGroups.txt` |

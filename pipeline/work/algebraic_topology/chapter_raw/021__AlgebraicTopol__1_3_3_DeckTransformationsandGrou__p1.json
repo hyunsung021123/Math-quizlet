@@ -1,0 +1,337 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Allen Hatcher, Algebraic Topology",
+    "overall_goal": "공간의 1차원 구멍을 대수적으로 포착하는 기본군(fundamental group) $\\pi_1$을 정의하고, 반 캄펜(van Kampen) 정리와 덮개공간(covering space) 이론을 통해 이를 계산·분류하는 도구를 갖춘다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.3.3 Deck 변환과 군 작용 (Deck Transformations and Group Actions) — part 1",
+      "step1_big_picture": {
+        "context": "직전 소단원 1.3.2에서 우리는 덮개공간을 '밖에서' 분류했다 — $\\pi_1(X,x_0)$의 부분군 $H$의 켤레류(또는 섬유 위의 $\\pi_1$-작용)가 덮개를 완전히 결정한다는 것이다. 이제 시선을 하나의 덮개 '안으로' 돌려, 그 덮개가 스스로 지닌 대칭을 묻는다. 밑공간 $X$를 그대로 둔 채 덮개공간 $\\widetilde X$를 자기 자신으로 보내는 동형사상들 — deck 변환(deck transformation) — 이 이루는 군 $G(\\widetilde X)$가 그것이다. 놀랍게도 이 기하학적 대칭군은 $\\pi_1$의 순수 대수적 몫 $N(H)/H$와 일치한다(명제 1.39). 더 나아가 방향을 뒤집어, 군 $G$가 공간 $Y$에 '충분히 얌전히' 작용하면 궤도공간 $Y/G$로 가는 몫사상 자체가 덮개가 된다(명제 1.40). 이 역방향 관점은 $\\pi_1(S^1)=\\mathbb{Z}$를 $\\mathbb{R}\\to S^1$에서 읽어냈던 §1.1의 계산을 일반적인 도구로 승격시킨다.",
+        "hidden_intuition": "deck 변환은 밑공간을 전혀 흔들지 않으면서 시트(sheet)들만 서로 뒤섞는 강체(rigid) 대칭이다. 나선 계단을 수직으로 한 칸 밀어 올려도 계단 전체가 자기 자신에 정확히 겹치는 장면을 떠올려라 — $\\mathbb{R}\\to S^1$의 deck 변환이 바로 그 수직 평행이동이다. 이 대칭이 얼마나 뻣뻣한지는 유일 들어올림(unique lifting)에서 나온다: 어느 한 점을 어디로 보내는지만 알면 변환 전체가 결정된다. 그래서 한 점이라도 '얼어붙으면'(고정되면) 변환 전체가 항등사상으로 얼어붙는다 — 자명하지 않은 deck 변환은 고정점을 가질 수 없다. '정규(normal) 덮개'란 이 대칭이 최대인 경우, 즉 deck 군이 각 섬유 위에서 추이적(transitive)으로 작용해 $X=\\widetilde X/G(\\widetilde X)$가 성립하는 경우다. 역방향 그림에서 결정적 조건 (∗)은 '각 점 주위에 작은 이웃 하나를 잡으면 그 군-이미지들이 서로 겹치지 않는다'는 요구인데, 이것이야말로 몫사상을 '고르게 덮인' 덮개로 만들어 주는 최소한의 얌전함이다. 고정점이 없다는 자유성(freeness)만으로는 부족하다 — 궤도가 조밀해질 수 있기 때문이다(무리수 회전).",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  1,
+                  0,
+                  -1.4
+                ],
+                [
+                  0,
+                  1,
+                  -1.4
+                ],
+                [
+                  -1,
+                  0,
+                  -1.4
+                ],
+                [
+                  0,
+                  -1,
+                  -1.4
+                ],
+                [
+                  1,
+                  0,
+                  -1.4
+                ]
+              ],
+              "closed": true,
+              "dash": "4,3"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.9,
+                0,
+                -1.4
+              ],
+              "text": "S^1 = X"
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1,
+                  0.45
+                ],
+                [
+                  -1,
+                  0,
+                  0.9
+                ],
+                [
+                  0,
+                  -1,
+                  1.35
+                ],
+                [
+                  1,
+                  0,
+                  1.8
+                ],
+                [
+                  0,
+                  1,
+                  2.25
+                ],
+                [
+                  -1,
+                  0,
+                  2.7
+                ],
+                [
+                  0,
+                  -1,
+                  3.15
+                ],
+                [
+                  1,
+                  0,
+                  3.6
+                ]
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.9,
+                0,
+                1.8
+              ],
+              "text": "R"
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                1.7,
+                0,
+                0.9
+              ],
+              "to": [
+                1.7,
+                0,
+                2.7
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.4,
+                0,
+                1.8
+              ],
+              "text": "deck 변환 (수직 이동)"
+            }
+          ],
+          "caption": "나선형 덮개 $\\mathbb{R}\\to S^1$. deck 변환은 나선을 자기 자신으로 옮기는 수직 평행이동이고 $G(\\widetilde X)\\cong\\mathbb{Z}$."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (deck 변환과 그 군 $G(\\widetilde X)$)",
+          "formal_statement": "덮개공간 $p:\\widetilde X\\to X$에 대하여, 덮개 동형사상 $\\widetilde X\\to \\widetilde X$(즉 $p\\circ f = p$인 위상동형 $f$)를 deck 변환(deck transformation) 또는 covering transformation이라 한다. 이들은 합성에 대해 군을 이루며 이를 $G(\\widetilde X)$로 쓴다. 예: 나선 사영 $\\mathbb{R}\\to S^1$에서는 deck 변환이 나선을 보존하는 수직 평행이동이므로 $G(\\widetilde X)\\approx \\mathbb{Z}$; $n$-겹 덮개 $S^1\\to S^1,\\ z\\mapsto z^n$에서는 $2\\pi/n$의 배수만큼의 회전이므로 $G(\\widetilde X)=\\mathbb{Z}_n$."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (deck 변환의 강성)",
+          "formal_statement": "$\\widetilde X$가 경로연결(path-connected)이면, 유일 들어올림 성질에 의해 deck 변환은 한 점을 어디로 보내는지에 의해 완전히 결정된다. 특히 $\\widetilde X$의 한 점을 고정하는 deck 변환은 항등사상뿐이다. 즉 자명하지 않은 deck 변환에는 고정점이 없다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정규/regular 덮개공간)",
+          "formal_statement": "덮개공간 $p:\\widetilde X\\to X$가 정규(normal, 또는 regular)라는 것은, 각 $x\\in X$와 $x$의 임의의 두 들어올림 $\\widetilde x,\\widetilde x'$에 대하여 $\\widetilde x$를 $\\widetilde x'$로 보내는 deck 변환이 존재한다는 뜻이다. 직관적으로 정규 덮개는 대칭이 최대인 덮개다 — deck 군이 각 섬유 위에서 추이적으로 작용한다. 예: $\\mathbb{R}\\to S^1$과 $n$-겹 덮개 $S^1\\to S^1$은 모두 정규다. ($S^1\\vee S^1$의 4겹 정규 덮개 중 하나는 deck 군이 $\\mathbb{Z}_4$, 다른 하나는 $\\mathbb{Z}_2\\times\\mathbb{Z}_2$일 수 있음에 유의.)"
+        },
+        {
+          "type": "Theorem",
+          "name": "명제 1.39 ('정규'라는 이름의 유래)",
+          "formal_statement": "$p:(\\widetilde X,\\widetilde x_0)\\to (X,x_0)$을 경로연결이며 국소경로연결(locally path-connected)인 $X$의 경로연결 덮개공간이라 하고, $H=p_*\\big(\\pi_1(\\widetilde X,\\widetilde x_0)\\big)\\subseteq \\pi_1(X,x_0)$라 하자. 그러면:\n(a) 이 덮개가 정규일 필요충분조건은 $H$가 $\\pi_1(X,x_0)$의 정규부분군(normal subgroup)인 것이다.\n(b) $G(\\widetilde X)\\cong N(H)/H$이다. 여기서 $N(H)$는 $\\pi_1(X,x_0)$에서 $H$의 정규화부분군(normalizer)이다.\n특히 정규 덮개이면 $G(\\widetilde X)\\cong \\pi_1(X,x_0)/H$이고, 보편덮개 $\\widetilde X\\to X$에서는 $G(\\widetilde X)\\approx \\pi_1(X)$이다.",
+          "idea_behind_proof": "핵심 열쇠는 1.3.2 분류정리 증명에서 관찰했던 사실 하나다 — 섬유 $p^{-1}(x_0)$ 안에서 기준점을 $\\widetilde x_0$에서 $\\widetilde x_1$로 옮기는 것은 정확히 $H$를 $[\\gamma]$로 켤레하는 것과 대응한다($\\gamma$는 $\\widetilde x_0\\to\\widetilde x_1$로 들어올려지는 고리). 그러면 '대수적으로 $H$를 고정하는 원소'(즉 정규화부분군 $N(H)$의 원소)가 '기하적으로 두 기준점을 잇는 deck 변환이 존재하는 경우'와 정확히 맞아떨어진다 — 이 다리를 놓아 주는 것이 1.3.1의 들어올림 판정법(lifting criterion)이다. 이 대응을 사상 $\\varphi:N(H)\\to G(\\widetilde X)$로 옮기면, '고리가 유도하는 deck 변환을 기록'하는 이 사상의 핵이 바로 '자기 자신으로 들어올려지는 고리'들의 집합 $H$가 된다.",
+          "proof_steps": [
+            "1단계 (기준점 이동 = 켤레): 분류정리(1.3.2)의 증명에서 본 대로, $\\widetilde x_0$을 같은 섬유 안의 $\\widetilde x_1$로 바꾸면 $H$는 $[\\gamma]$에 의해 켤레된다. 여기서 $\\gamma$는 $\\widetilde x_0$에서 $\\widetilde x_1$로 가는 경로 $\\widetilde\\gamma$로 들어올려지는 $X$ 안의 고리다.",
+            "2단계 (정규화부분군 = deck 변환 존재): 따라서 $[\\gamma]\\in N(H)$ $\\iff$ $p_*\\pi_1(\\widetilde X,\\widetilde x_0)=p_*\\pi_1(\\widetilde X,\\widetilde x_1)$이고, 들어올림 판정법(lifting criterion)에 의해 이는 $\\widetilde x_0$을 $\\widetilde x_1$로 보내는 deck 변환이 존재하는 것과 동치다.",
+            "3단계 ((a) 증명): 그러므로 이 덮개가 정규 $\\iff$ 섬유의 모든 기준점 쌍이 deck 변환으로 연결됨 $\\iff$ $N(H)=\\pi_1(X,x_0)$ $\\iff$ $H$가 정규부분군. 이로써 (a)가 증명된다.",
+            "4단계 ((b)의 사상 정의): $\\varphi:N(H)\\to G(\\widetilde X)$를, $[\\gamma]$를 (위 표기의) $\\widetilde x_0\\mapsto\\widetilde x_1$인 deck 변환 $\\tau$로 보내도록 정의한다.",
+            "5단계 (준동형): $\\gamma'$이 deck 변환 $\\tau'$($\\widetilde x_0\\mapsto\\widetilde x_1'$)에 대응하면, $\\gamma\\cdot\\gamma'$은 $\\widetilde\\gamma\\cdot\\big(\\tau(\\widetilde\\gamma')\\big)$로 들어올려지고 이는 $\\widetilde x_0$에서 $\\tau(\\widetilde x_1')=\\tau\\tau'(\\widetilde x_0)$로 가는 경로다. 따라서 $[\\gamma][\\gamma']$에 대응하는 deck 변환은 $\\tau\\tau'$이므로 $\\varphi$는 준동형이다.",
+            "6단계 (전사·핵): 2단계에 의해 $\\varphi$는 전사(surjective)다. 그 핵은 $\\widetilde X$ 안의 고리로 들어올려지는 $[\\gamma]$들, 즉 정확히 $p_*\\pi_1(\\widetilde X,\\widetilde x_0)=H$의 원소들이다. 제1동형정리로 $N(H)/H\\cong G(\\widetilde X)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (군 작용과 조건 (∗))",
+          "formal_statement": "군 $G$의 공간 $Y$ 위 작용(action)이란 준동형 $\\rho:G\\to \\mathrm{Homeo}(Y)$를 말한다($g_1(g_2(y))=(g_1g_2)(y)$). 우리가 관심 갖는 것은 다음 조건을 만족하는 작용이다:\n$$(\\ast)\\quad \\text{각 } y\\in Y \\text{는 이웃 } U \\text{를 가져 } \\{g(U)\\mid g\\in G\\} \\text{들이 서로 disjoint하다.}$$\n즉 $g_1(U)\\cap g_2(U)\\neq\\varnothing \\Rightarrow g_1=g_2$. 동치인 형태로, $g_1=\\mathrm{id}$로 두어 $U\\cap g(U)\\neq\\varnothing$이 오직 $g=\\mathrm{id}$일 때만 성립하면 된다. 실제로 deck 변환군 $G(\\widetilde X)$의 $\\widetilde X$ 위 작용은 (∗)를 만족한다(균등하게 덮인 이웃 $\\widetilde U$를 잡으면, 겹침은 한 섬유 안에서 일어나야 하므로 강성에 의해 $g_1=g_2$)."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.40 (군 작용이 낳는 덮개)",
+          "formal_statement": "군 $G$의 공간 $Y$ 위 작용이 (∗)를 만족하면:\n(a) 몫사상 $p:Y\\to Y/G,\\ p(y)=Gy$는 정규 덮개공간이다.\n(b) $Y$가 경로연결이면 $G$는 이 덮개 $Y\\to Y/G$의 deck 변환군과 같다.\n(c) $Y$가 경로연결이며 국소경로연결이면 $G\\cong \\pi_1(Y/G)/p_*\\big(\\pi_1(Y)\\big)$.",
+          "idea_behind_proof": "이것은 deck 변환 그림을 그대로 뒤집은 것이다. 조건 (∗)의 이웃 $U$는 궤도들을 서로 떼어 놓아, 몫사상이 disjoint한 사본 $\\{g(U)\\}$을 하나의 열린집합 $p(U)$로 붙이도록 만든다 — 이것이 바로 '고르게 덮임'의 정의다. (b)에서 deck 군이 $G$보다 클 수 없는 이유는 강성이다: 임의의 deck 변환 $f$는 어떤 점에서 어떤 $g\\in G$와 값이 같아지고, 경로연결 덮개의 deck 변환은 한 점의 상으로 결정되므로 $f=g$. (c)는 $p_*\\pi_1(Y)$가 정규부분군이라는 (a)를 명제 1.39(b)에 대입한 즉각적 따름이다.",
+          "proof_steps": [
+            "1단계 (덮개임): (∗)의 $U$에 대해 $p$는 disjoint 동형 사본 $\\{g(U)\\mid g\\in G\\}$를 하나의 열린집합 $p(U)$로 동일시한다. 몫위상의 정의에 의해 $p$는 각 $g(U)$를 $p(U)$ 위로 위상동형으로 보내므로 $Y\\to Y/G$는 덮개공간이다.",
+            "2단계 (정규성): $G$의 각 원소는 deck 변환으로 작용하고, $g_2g_1^{-1}$이 $g_1(U)$를 $g_2(U)$로 보내므로 이 덮개는 정규다. 따라서 (a).",
+            "3단계 ((b)): deck 변환군은 $G$를 부분군으로 포함한다. $Y$가 경로연결이면, 임의의 deck 변환 $f$에 대해 아무 점 $y$나 잡으면 $y$와 $f(y)$는 같은 궤도에 있어 $g(y)=f(y)$인 $g\\in G$가 있고, 강성에 의해 $f=g$. 그러므로 deck 군은 정확히 $G$.",
+            "4단계 ((c)): $p_*\\pi_1(Y)$는 (a)에 의해 정규부분군이므로 명제 1.39(b)에 의해 $G(\\widetilde X)\\cong \\pi_1(Y/G)/p_*\\pi_1(Y)$이고, (b)에서 $G(\\widetilde X)=G$이므로 결론을 얻는다. $\\qquad\\square$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (covering space action · free · properly discontinuous)",
+          "formal_statement": "명제 1.40 때문에 (∗)를 만족하는 작용을 covering space action이라 부른다(표준 용어는 아님). 이보다 약한 조건인 properly discontinuous는 '각 점이 이웃 $U$를 가져 $U\\cap g(U)\\neq\\varnothing$인 $g$가 유한 개뿐'이라는 것으로, 고정점을 허용한다(예: $\\mathbb{R}^2$의 정육각형 타일링 대칭군 — 꼭짓점은 $120^\\circ$ 회전으로, 변의 중점은 $180^\\circ$ 회전으로 고정된다). 고정점이 없는 작용을 free 작용이라 하며, 이는 각 $y$의 상 $g(y)$들이 모두 서로 다르다는 것($g_1(y)=g_2(y)\\Rightarrow g_1=g_2$)과 동치다. (∗)는 free를 함의하지만 역은 거짓이다 — $\\mathbb{Z}$가 $S^1$에 무리수 배 $\\alpha$의 회전으로 작용하면 free이나 각 궤도가 $S^1$에서 조밀해 (∗)를 어긴다(궤도가 이산이 아니므로). 하우스도르프 공간에서는 free + properly discontinuous $\\Rightarrow$ (∗)이며, 유한군의 작용에서는 properly discontinuity가 자동이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.41 (곡면의 회전 대칭과 정규 덮개)",
+          "formal_statement": "$Y$를 종수(genus) 11인 닫힌 유향곡면('11구멍 토러스')이라 하면 $2\\pi/5$ 회전으로 생성되는 5겹 회전 대칭을 가지므로 $\\mathbb{Z}_5$가 $Y$에 작용하고 조건 (∗)가 성립한다. 궤도공간 $Y/\\mathbb{Z}_5$는 종수 3 곡면이며(다섯 조각 중 하나에서 두 경계원 $C_i,C_{i+1}$을 원 $C$로 동일시), 따라서 덮개공간 $M_{11}\\to M_3$을 얻는다($M_g$는 종수 $g$의 닫힌 유향곡면). 즉 $\\pi_1(M_3)$은 $\\pi_1(M_{11})$을 지표 5의 정규부분군으로 포함하고 몫은 $\\mathbb{Z}_5$이다. 일반화하면 $M_{mn+1}\\to M_{m+1}$ 형태의 덮개를 얻는다.",
+          "idea_behind_proof": "명제 1.40의 전형적 사용법이다: 유한군 $\\mathbb{Z}_5$가 곡면에 고정점 없이(회전축이 곡면을 관통하지 않도록) 작용하므로 (∗)가 자동으로 성립하고, 그 즉시 몫사상이 정규 덮개가 되며 deck 군 $\\mathbb{Z}_5=\\pi_1(M_3)/\\pi_1(M_{11})$을 읽어낼 수 있다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.42 (토러스와 클라인 병의 기본군)",
+          "formal_statement": "$\\mathbb{R}^2$의 $\\mathbb{Z}^2$ 격자에 화살표를 두 방식으로 장식한다. (i) 모든 수평 화살표를 같은 방향으로: 대칭군 $G$는 평행이동 $(x,y)\\mapsto(x+m,y+n)$ 전체로 $\\mathbb{Z}\\times\\mathbb{Z}$. (ii) 인접한 줄의 수평 화살표를 반대로: $G$는 평행이동 $(x,y)\\mapsto(x+m,y+2n)$과 더불어 활주반사(glide-reflection, 홀수 수직이동 후 수직선에 대한 반사)를 포함한다. 두 경우 모두 자명하지 않은 원소는 어떤 정사각형도 자기 자신으로 보내지 않고 최소 이동거리가 1이므로 (∗)가 성립한다. 궤도공간 $\\mathbb{R}^2/G$는 정사각형의 마주보는 변을 화살표대로 붙인 것 — 각각 토러스와 클라인 병이다. 따라서 이들의 기본군이 곧 대칭군 $G$이다. (ii)에서 평행이동 부분군은 지표 2이고 그 궤도공간(토러스)은 클라인 병의 2겹 덮개다.",
+          "idea_behind_proof": "단순연결 공간 $\\mathbb{R}^2$에 covering space action이 주어지면, 명제 1.40(c)에서 $\\pi_1(\\mathbb{R}^2)=0$이므로 $\\pi_1(\\mathbb{R}^2/G)\\cong G$가 곧바로 나온다. 즉 '$\\pi_1$을 구하는 문제'가 '이 곡면을 궤도공간으로 갖는 격자 대칭군을 알아보는 문제'로 번역된다.",
+          "visualization": {
+            "type": "identification_polygon_2d",
+            "edges": [
+              {
+                "label": "a",
+                "dir": 1
+              },
+              {
+                "label": "b",
+                "dir": 1
+              },
+              {
+                "label": "a",
+                "dir": -1
+              },
+              {
+                "label": "b",
+                "dir": -1
+              }
+            ],
+            "caption": "토러스 $\\mathbb{R}^2/\\mathbb{Z}^2$: 마주보는 변을 방향 그대로 동일시 ($aba^{-1}b^{-1}$). 클라인 병은 한 쌍의 방향을 뒤집는다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.43 ($\\mathbb{RP}^n$의 기본군)",
+          "formal_statement": "$S^n$의 대척사상(antipodal map) $x\\mapsto -x$은 $\\mathbb{Z}_2$의 작용을 낳고 궤도공간은 실사영공간 $\\mathbb{RP}^n$이다. 각 열린 반구가 그 대척상과 disjoint하므로 이 작용은 covering space action이다. $n\\ge 2$이면 $S^n$은 단순연결(명제 1.14)이므로 덮개 $S^n\\to\\mathbb{RP}^n$에서 $\\pi_1(\\mathbb{RP}^n)\\approx\\mathbb{Z}_2$를 얻는다. 생성원은 $S^n$에서 대척점을 잇는 경로를 사영한 고리 $\\gamma$이며, $n\\ge2$일 때 $\\gamma\\cdot\\gamma$는 $S^n$의 고리로 들어올려져 $\\pi_1(S^n)=0$에 의해 축약되므로 $\\gamma$의 위수는 정확히 2다.",
+          "idea_behind_proof": "명제 1.40(c)의 가장 깔끔한 사례다: 단순연결 $S^n$($n\\ge2$)에 자유롭고 (∗)를 만족하는 유한군 $\\mathbb{Z}_2$가 작용하므로 $\\pi_1(\\mathbb{RP}^n)\\cong\\mathbb{Z}_2$가 즉시 나온다. 생성원의 위수가 2임은 '$\\gamma\\cdot\\gamma$의 들어올림이 고리가 된다'는 것을 눈으로 확인하는 것과 같다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.6
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  1.13,
+                  1.13
+                ],
+                "to": [
+                  -1.13,
+                  -1.13
+                ],
+                "bulge": 0.45,
+                "arrow": true
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.13,
+                  1.13
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.13,
+                  -1.13
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.5,
+                  1.5
+                ],
+                "text": "x"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.6,
+                  -1.5
+                ],
+                "text": "-x"
+              }
+            ],
+            "caption": "$S^n$에서 대척점 $x,-x$를 잇는 경로는 $\\mathbb{RP}^n$에서 위수 2의 고리로 사영된다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($S^n$에 자유롭게 작용하는 유한군)",
+          "formal_statement": "어떤 유한군들이 $S^n$에 자유롭게 작용하여 덮개 $S^n\\to S^n/G$를 정의하는가? $n$이 짝수이면 $\\mathbb{Z}_2$가 유일하다(명제 2.29에서 증명 — 이후 챕터). 홀수 $n$에서는 훨씬 복잡하다. 임의의 순환군 $\\mathbb{Z}_m$은 $S^{2k-1}\\subset \\mathbb{C}^k$ 위에서 $v\\mapsto e^{2\\pi i/m}v$로 자유롭게 작용하며(방정식 $v=e^{2\\pi i\\ell/m}v$는 $0<\\ell<m$에서 $v=0$을 강제하는데 $0\\notin S^{2k-1}$이므로 free), 그 궤도공간 $S^{2k-1}/\\mathbb{Z}_m$이 렌즈공간(lens space)이다. 비순환 예로는, $\\mathbb{R}^4$를 사원수 대수 $\\mathbb{H}$로 보아 $S^3$가 곱셈으로 군을 이루므로, $S^3$의 임의의 부분군(예: 사원수군 $Q_8$, 일반화 사원수군 $Q_{4m}=D^*_{4m}$, 이항 정사면체·정팔면체·정이십면체군 $T^*_{24},O^*_{48},I^*_{120}$)이 좌곱셈으로 자유롭게 작용한다. $S^n$에 자유롭게 작용하는 유한군은 (a) 모든 아벨 부분군이 순환군이고 (b) 위수 2인 원소를 많아야 하나 가진다는 두 조건을 만족해야 한다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.44 (군 $G_{m,n}=\\langle a,b\\mid a^m b^{-n}\\rangle$의 작용)",
+          "formal_statement": "예제 1.35(이전 소단원)에서 만든 축약가능(contractible) 2-복합체 $\\widetilde X_{m,n}=T_{m,n}\\times\\mathbb{R}$은 유한 2-복합체 $X_{m,n}$(두 사상 $z\\mapsto z^m,\\ z\\mapsto z^n$의 사상원기둥의 합집합)의 보편덮개다. 따라서 그 deck 변환군은 기본군 $\\pi_1(X_{m,n})=G_{m,n}$이며, 반 캄펜 정리로 $G_{m,n}=\\langle a,b\\mid a^m b^{-n}\\rangle$이다. $G_{m,n}$은 $\\widetilde X_{m,n}$의 셀 구조(변의 방향까지)를 보존하는 모든 대칭군으로 실현되고, 곱구조 $T_{m,n}\\times\\mathbb{R}$을 보존해 대각작용 $g(x,y)=(g(x),g(y))$로 분해된다. $\\mathbb{R}$ 성분에서 $a^m=b^n$은 단위 평행이동, $a$는 $1/m$, $b$는 $1/n$ 평행이동으로 작용한다. $T_{m,n}$ 위 작용의 핵은 $a^m=b^n$의 거듭제곱들 — 이는 $G_{m,n}$의 중심(center, 예제 1.24)이다. $\\mathbb{R}$-작용의 준동형 $G_{m,n}\\to\\mathbb{Z}$의 핵 $K$로 제한하면 $T_{m,n}$ 위의 free covering space action을 얻으므로, $K$는 자유군이고 그래프 $T_{m,n}/K$의 기본군이다.",
+          "idea_behind_proof": "deck 군 = 보편덮개의 기본군이라는 명제 1.39의 특수경우($H=0$, $G(\\widetilde X)\\approx\\pi_1(X)$)를 구체적 복합체에 적용하는 예다. 셀 구조와 곱구조를 보존한다는 관찰이, 추상적인 군 $G_{m,n}$을 '나사운동(screw motion)'이라는 손에 잡히는 기하 대칭으로 바꿔 준다. 이 결과는 §1.3.1의 명제 1.32(지표=층수)와 명제 1.36(임의 부분군 실현)이 만들어 준 사전지식 위에서 읽힌다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$n$-겹 덮개 $p:S^1\\to S^1,\\ z\\mapsto z^n$에 대하여 (i) deck 변환군 $G(\\widetilde X)$를 명시적으로 구하고, (ii) 이 덮개가 정규임을 명제 1.39로 확인하라. 밑공간의 기본군은 $\\pi_1(S^1)\\cong\\mathbb{Z}$, 부분군은 $H=p_*\\pi_1(S^1)=n\\mathbb{Z}$이다.",
+          "hint": "위쪽 $S^1$을 $2\\pi/n$의 배수만큼 회전시키는 사상이 $p$와 교환되는지 보라. 또 $\\mathbb{Z}$는 아벨군이므로 모든 부분군이 어떤 성질을 가지는지 떠올려라.",
+          "solution": "(i) $2\\pi k/n$ 회전 $\\rho_k(z)=e^{2\\pi i k/n}z$는 $\\rho_k(z)^n=e^{2\\pi i k}z^n=z^n=p(z)$를 만족하므로 deck 변환이고, $k=0,\\dots,n-1$이 서로 다른 변환을 준다. 강성(한 점의 상으로 결정)에 의해 이들이 전부이므로 $G(\\widetilde X)=\\{\\rho_0,\\dots,\\rho_{n-1}\\}\\cong\\mathbb{Z}_n$. (ii) $\\pi_1(S^1)=\\mathbb{Z}$는 아벨군이라 부분군 $H=n\\mathbb{Z}$가 정규이므로 명제 1.39(a)에 의해 덮개는 정규다. 명제 1.39(b)로 $G(\\widetilde X)\\cong \\pi_1/H=\\mathbb{Z}/n\\mathbb{Z}=\\mathbb{Z}_n$ — (i)과 일치한다. 일반화: 아벨 기본군을 갖는 공간의 경로연결 덮개는 항상 정규이며 $G(\\widetilde X)\\cong\\pi_1/H$."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "대척사상이 생성하는 $\\mathbb{Z}_2$의 $S^n$ 위 작용이 조건 (∗)를 만족함을 보이고, 이로부터 $n\\ge2$일 때 $\\pi_1(\\mathbb{RP}^n)$을 결정하라. 나아가 이 논법이 $n=1$에서는 왜 $\\pi_1(\\mathbb{RP}^1)\\cong\\mathbb{Z}_2$라는 결론을 주지 못하는지 설명하라.",
+          "hint": "각 점의 이웃으로 '작은 열린 반구'를 잡아 보라. 그리고 명제 1.40(c)를 쓰려면 $Y=S^n$이 어떤 성질(단순연결)을 가져야 하는지 확인하라.",
+          "solution": "각 $x\\in S^n$에 대해 지름이 $\\pi$보다 작은 열린 공(반구보다 작은 이웃) $U$를 잡으면 $U$와 그 대척상 $-U$는 disjoint하다. 군은 $\\{\\mathrm{id},-\\mathrm{id}\\}$뿐이고 $U\\cap(-U)=\\varnothing$이므로 (∗) 성립(free이기도 하다: $x=-x$인 점이 $S^n$에 없다). $n\\ge2$이면 $S^n$이 단순연결(명제 1.14)이고 국소경로연결이므로 명제 1.40(c)에서 $\\pi_1(\\mathbb{RP}^n)\\cong \\mathbb{Z}_2/\\{1\\}\\cong\\mathbb{Z}_2$. $n=1$에서는 $S^1$이 단순연결이 아니라 명제 1.40(c)의 가정이 깨진다 — 실제로 $\\mathbb{RP}^1\\cong S^1$이고 $\\pi_1\\cong\\mathbb{Z}$이지 $\\mathbb{Z}_2$가 아니다. 일반화: covering space action으로 $\\pi_1(Y/G)\\cong G$를 얻으려면 반드시 $Y$가 단순연결이어야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "경로연결 덮개공간 $\\widetilde X$의 deck 변환 $f$가 어떤 한 점 $\\widetilde x$를 고정하면($f(\\widetilde x)=\\widetilde x$), $f$는 항등사상이다.",
+          "answer": "O",
+          "explanation": "유일 들어올림 성질에 의해 deck 변환은 한 점의 상으로 완전히 결정된다. 항등사상도 $\\widetilde x$를 고정하므로, $\\widetilde x$를 고정하는 deck 변환은 항등사상과 같은 점-데이터를 가지며 따라서 $f=\\mathrm{id}$이다. 이 강성이 이후 (∗)·free·명제 1.40의 (b)를 관통하는 핵심 사실이다."
+        },
+        {
+          "type": "ox",
+          "question": "군 $G$의 하우스도르프 공간 $Y$ 위 작용이 free(고정점 없음)이면, 그 작용은 항상 조건 (∗)를 만족한다.",
+          "answer": "X",
+          "explanation": "free는 (∗)를 함의하지 않는다. 반례는 $\\mathbb{Z}$가 $S^1$에 무리수 배 $\\alpha$의 회전으로 작용하는 경우다 — 자명하지 않은 회전은 고정점이 없어 free이지만, 각 궤도 $\\mathbb{Z}y$가 $S^1$에서 조밀해 이산이 아니므로 (∗)를 어긴다((∗)는 궤도가 이산 부분공간임을 함의한다). 다만 하우스도르프 공간에서 free에 'properly discontinuous'를 더하면 (∗)가 따라 나온다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원에는 두 방향의 관점이 있다 — (1) 주어진 덮개에서 deck 변환군 $G(\\widetilde X)$를 읽는 명제 1.39, (2) 주어진 군 작용에서 덮개(궤도공간 사상)를 만드는 명제 1.40. 이 둘이 어떻게 서로 역방향으로 맞물리는지 설명하고, 각 방향에서 '정규(normal)/자유(free)+조건 (∗)'가 왜 꼭 필요한 가정인지 논하라.",
+          "hint": "보편덮개의 특수경우($H=0$)에서 두 명제가 각각 무엇을 말하는지 비교해 보라. 또 free만으로는 부족했던 무리수 회전 예가 (∗)의 어떤 역할을 드러내는지 떠올려라.",
+          "answer": "두 명제는 서로 역함수 같은 대응이다. 명제 1.39는 덮개 $\\widetilde X\\to X$를 입력받아 그 대칭군 $G(\\widetilde X)\\cong N(H)/H$를 출력하고, 명제 1.40은 (∗)를 만족하는 작용 $G\\curvearrowright Y$를 입력받아 정규 덮개 $Y\\to Y/G$를 출력하며 그 deck 군이 다시 $G$가 됨을 보인다($Y$ 경로연결). 정규 덮개에서 시작하면 1.39가 $G(\\widetilde X)$를 주고, 그 작용에 1.40을 적용하면 원래 덮개를 복원한다 — 즉 '정규 덮개'와 '(∗)를 만족하는 작용'은 같은 대상의 두 얼굴이다. 보편덮개($H=0$)라는 극한에서 1.39는 $G(\\widetilde X)\\approx\\pi_1(X)$를, 1.40(c)는 단순연결 $Y$에 대해 $\\pi_1(Y/G)\\cong G$를 주어 서로를 완성한다. 가정의 필요성: '정규'는 deck 군이 섬유 위에서 추이적이어야(즉 $H$가 정규부분군이어야) $G(\\widetilde X)$가 $\\pi_1/H$ 전체를 채운다는 조건이고 — 정규가 아니면 $N(H)/H$라는 더 작은 몫만 얻는다. 역방향에서 free는 자명하지 않은 원소가 점을 고정하지 않아 deck 변환의 강성과 양립하게 해 주지만, free만으로는 궤도가 조밀해질 수 있어(무리수 회전) 몫이 덮개가 되지 못한다. 조건 (∗)는 각 점 주위에서 군-이미지들을 실제로 떼어 놓아 몫사상을 '고르게 덮인' 덮개로 만들어 주는, free보다 한 단계 강한 최소한의 얌전함이다."
+        }
+      ]
+    }
+  ]
+}
