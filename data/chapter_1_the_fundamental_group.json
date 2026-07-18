@@ -5190,6 +5190,244 @@
           "answer": "정리 1.38은 갈루아 이론의 격자 대응을 위상으로 실현한다. 대응의 두 방향을 두 명제가 나눠 맡는다: 명제 1.36(존재)은 '모든 부분군 $H$가 어떤 덮개 $X_H$의 그림자 $p_*\\pi_1=H$로 실현된다'는 전사성으로, 갈루아의 '모든 부분군이 어떤 중간체의 고정군'에 대응한다. 명제 1.37(유일)은 '같은 부분군이면 덮개가 (밑점 보존) 동형'이라는 단사성으로, 대응이 잘 정의되고 충실함을 보장한다. 둘을 합친 정리 1.38이 '밑점 보존 덮개 ↔ 부분군'의 전단사다. 보편덮개가 자명군에 대응하는 이유: 가장 많이 펼친 단순연결 덮개는 $\\pi_1(\\widetilde X)=0$이라 $p_*\\pi_1=\\{1\\}$이고, 이것이 다른 모든 연결 덮개를 다시 덮는다 — 갈루아의 '분해체 = 전체 확장, 자명 고정군'에 해당한다(반대로 $X$ 자신은 전체군 $\\pi_1(X)$). 켤레류가 등장하는 대수적 이유: 한 덮개에서 밑점 $\\widetilde x_0\\in p^{-1}(x_0)$을 다른 층의 점으로 옮기면, 두 밑점을 잇는 경로의 사영 고리 $g$에 의해 $p_*\\pi_1$이 $g^{-1}(\\,\\cdot\\,)g$로 켤레된다. 밑점을 잊는다는 것은 이 층 선택의 자유를 지운다는 뜻이라, 대응이 부분군 자체가 아니라 켤레류와 맺어진다. 부분군이 정규일 때(정규/보편덮개, deck 변환군 = 몫군)는 켤레류가 부분군 하나라 이 모호함이 사라지는데, 이는 갈루아의 '정규확장 ↔ 정규부분군, 갈루아군 = 몫군'과 정확히 대응한다(정규덮개의 상세는 part 2)."
         }
       ]
+    },
+    {
+      "section_title": "1.3.2 The Classification of Covering Spaces (part 2) — 순열표현 분류와 deck 변환",
+      "step1_big_picture": {
+        "context": "019에서 밑점 기준 갈루아 대응(정리 1.38)과 파이버 작용 $\\rho:\\pi_1(X,x_0)\\to\\mathrm{Perm}(F)$·재구성 $\\widetilde X_\\rho$를 도입했다. 이 조각은 둘을 완성·시작한다. 먼저 순열표현에 의한 분류: 임의의 $\\pi_1(X,x_0)$-작용 $\\rho$에 대해 $\\widetilde X_\\rho\\to X$이 덮개이고, 주어진 덮개는 자기 작용의 $\\widetilde X_\\rho$과 동형이며, 두 덮개가 동형일 필요충분조건은 파이버 작용이 동변(equivariant) 동형인 것이다. 결론: $X$의 $n$겹 덮개 ↔ 준동형 $\\pi_1(X,x_0)\\to\\Sigma_n$의 켤레류 — 연결·비연결을 통틀어 담는 대수적 그림. 그다음 deck 변환(deck transformation): 덮개의 자기동형 $\\widetilde X\\to\\widetilde X$들이 이루는 군 $G(\\widetilde X)$을 정의한다(나선 $\\mathbb{R}\\to S^1$은 $\\mathbb{Z}$, $z\\mapsto z^n$은 $\\mathbb{Z}_n$). 유일 들어올림으로 'deck 변환은 한 점의 상으로 완전히 결정되고 항등만 고정점을 갖는다'를 얻고, 정규덮개(normal covering)를 정의한다 — $G(\\widetilde X)$이 각 파이버에 추이적으로 작용하는 가장 대칭적인 덮개. 재사용: $\\widetilde X_\\rho$·파이버 작용(019), 유일 들어올림(명제 1.34), 정리 1.38, $\\pi_1(S^1)=\\mathbb{Z}$.",
+        "hidden_intuition": "순열표현 분류의 요점은 '덮개 = 파이버 위 $\\pi_1$의 순열작용'이라는 완전한 사전이다. 밑점 기준 정리 1.38이 '연결 덮개 ↔ 부분군'을 줬다면, 작용의 언어는 그 제약을 풀어 비연결까지 담는다: 작용의 궤도(orbit)가 덮개의 연결성분이고, 추이적 작용이 연결 덮개, 궤도가 여럿이면 비연결이다. $n$겹이면 작용은 준동형 $\\pi_1\\to\\Sigma_n$이고, 층을 재라벨하는 자유(켤레)만큼 같은 것으로 세므로 '$\\Sigma_n$-켤레류'가 분류 불변량이 된다. 한 점의 안정자(stabilizer)가 정확히 부분군 $p_*\\pi_1$이라, 궤도-안정자 관점에서 추이적 작용은 정리 1.38의 부분군 분류를 되돌려 준다. deck 변환은 '덮개를 자기 위로 미끄러뜨리는 대칭'이다 — 나선을 정수만큼 위아래로 밀거나($\\mathbb{Z}$), $n$겹 원을 $2\\pi/n$씩 돌리는($\\mathbb{Z}_n$) 것. 유일 들어올림이 주는 강성이 열쇠다: 층이 이산이라 deck 변환은 한 점을 어디로 보내는지로 완전히 굳고, 그래서 항등이 아닌 deck 변환은 고정점이 없다(있으면 항등과 한 점에서 일치 → 전체 일치). 이 '자유로운 작용'이 정규덮개에서 파이버 전체에 추이적일 때, deck 변환군이 $\\pi_1$의 몫군으로 드러난다(다음 조각의 $G(\\widetilde X)\\cong N(H)/H$, 정규덮개면 $\\cong\\pi_1/H$). 갈루아 유비로 치면 deck 변환군은 '덮개의 갈루아군', 정규덮개는 '정규(갈루아) 확장'에 해당한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0.87,
+                  0
+                ],
+                [
+                  -0.5,
+                  0.87,
+                  0
+                ],
+                [
+                  -1,
+                  0,
+                  0
+                ],
+                [
+                  -0.5,
+                  -0.87,
+                  0
+                ],
+                [
+                  0.5,
+                  -0.87,
+                  0
+                ],
+                [
+                  1,
+                  0,
+                  0
+                ]
+              ],
+              "closed": true
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                [
+                  0.5,
+                  0.87,
+                  0.2
+                ],
+                [
+                  -0.5,
+                  0.87,
+                  0.4
+                ],
+                [
+                  -1,
+                  0,
+                  0.6
+                ],
+                [
+                  -0.5,
+                  -0.87,
+                  0.8
+                ],
+                [
+                  0.5,
+                  -0.87,
+                  1.0
+                ],
+                [
+                  1,
+                  0,
+                  1.2
+                ],
+                [
+                  0.5,
+                  0.87,
+                  1.4
+                ],
+                [
+                  -0.5,
+                  0.87,
+                  1.6
+                ],
+                [
+                  -1,
+                  0,
+                  1.8
+                ],
+                [
+                  -0.5,
+                  -0.87,
+                  2.0
+                ],
+                [
+                  0.5,
+                  -0.87,
+                  2.2
+                ],
+                [
+                  1,
+                  0,
+                  2.4
+                ]
+              ]
+            },
+            {
+              "shape": "arrow",
+              "from": [
+                -0.5,
+                0.87,
+                0.4
+              ],
+              "to": [
+                -0.5,
+                0.87,
+                1.55
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -0.5,
+                0.87,
+                0.4
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -0.5,
+                0.87,
+                1.6
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.3,
+                0,
+                0
+              ],
+              "text": "S^1"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.5,
+                0.87,
+                1.0
+              ],
+              "text": "+1"
+            }
+          ],
+          "caption": "나선 덮개 $\\mathbb{R}\\to S^1$의 deck 변환은 나선을 자기 위로 옮기는 수직 평행이동들이라 $G(\\widetilde X)\\cong\\mathbb{Z}$. 한 층을 다음 층으로 미는 '$+1$' 이동이 생성원이며, 고정점이 없는 자유로운 작용이다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Theorem",
+          "name": "정리 (덮개공간의 순열표현 분류)",
+          "formal_statement": "임의의 집합 $F$ 위의 $\\pi_1(X,x_0)$-작용 $\\rho$에 대해 $\\widetilde X_\\rho=(\\widetilde X_0\\times F)/\\!\\sim$의 사영 $\\widetilde X_\\rho\\to X,\\ ([\\gamma],\\widetilde x_0)\\mapsto\\gamma(1)$은 덮개공간이다. 주어진 덮개 $\\widetilde X\\to X$의 파이버 작용 $\\rho$에 대해 $\\widetilde X_\\rho\\cong\\widetilde X$(덮개 동형)이다. 두 덮개가 동형일 필요충분조건은 파이버 위의 $\\pi_1$-작용이 동변(equivariant) 동형 — 즉 $\\gamma\\cdot h(\\widetilde x)=h(\\gamma\\cdot\\widetilde x)$을 만족하는 전단사 $h:F_1\\to F_2$이 존재 — 인 것이다. 따라서 $X$의 $n$겹 덮개공간은 준동형 $\\pi_1(X,x_0)\\to\\Sigma_n$($n$개 기호의 대칭군)의 $\\Sigma_n$-켤레류와 일대일 대응한다.",
+          "idea_behind_proof": "$\\widetilde X_\\rho$이 덮개인 이유: 보편덮개가 $U$ 위에서 곱 $U\\times\\pi_1$인 열린집합에서 $\\widetilde X_\\rho$의 동일시가 $U\\times\\pi_1\\times F$를 $U\\times F$로 붕괴시켜 균등덮힘을 준다. 주어진 덮개와의 동형은 $h$가 국소위상동형·전단사라 위상동형이고 파이버를 파이버로 보내므로 덮개 동형이다. 동형 ⟺ 동변 동형은 '$L_\\gamma$가 동형사상과 교환한다'는 관찰과 그 역구성에서 나온다.",
+          "proof_steps": [
+            "$\\widetilde X_\\rho\\to X$이 덮개: $U\\subset X$가 보편덮개를 곱 $U\\times\\pi_1(X,x_0)$으로 갖는 열린집합이면, $\\widetilde X_\\rho$의 동일시 $([\\gamma],\\widetilde x_0)\\sim([\\lambda\\gamma],L_\\lambda\\widetilde x_0)$이 $U\\times\\pi_1\\times F$를 $U\\times F$로 붕괴시킨다. 따라서 $p^{-1}(U)\\cong U\\times F$($F$ 이산)라 균등덮힘이고 $\\widetilde X_\\rho\\to X$이 덮개공간이다.",
+            "$\\widetilde X_\\rho\\cong\\widetilde X$: 주어진 덮개의 작용 $\\rho$에 대해 $h:\\widetilde X_0\\times F\\to\\widetilde X$이 유도한 $\\widetilde X_\\rho\\to\\widetilde X$은 전단사이고, $h$가 국소위상동형이라 위상동형이다. 파이버를 대응 파이버로 보내므로 덮개공간 동형.",
+            "동형 ⟹ 동변: 덮개 동형 $h:\\widetilde X_1\\to\\widetilde X_2$은 파이버 전단사 $F_1\\to F_2$로 제한되고 $L_\\gamma(h(\\widetilde x))=h(L_\\gamma(\\widetilde x))$, 즉 $\\gamma\\, h(\\widetilde x)=h(\\gamma\\,\\widetilde x)$을 만족한다(동변).",
+            "동변 ⟹ 동형: 동변 전단사 $h:F_1\\to F_2$은 $\\widetilde X_{\\rho_1}\\to\\widetilde X_{\\rho_2}$을, $h^{-1}$은 반대 방향 사상을 유도하며 두 합성이 어느 순서로든 항등이라 덮개 동형이 된다.",
+            "$n$겹 분류: $|F|=n$이면 작용은 준동형 $\\rho:\\pi_1(X,x_0)\\to\\Sigma_n$이고, $F$의 재라벨(동변 동형)은 $\\rho$를 $h^{-1}\\rho h$($h\\in\\Sigma_n$)로 켤레하는 것이다. 따라서 $n$겹 덮개 ↔ $\\{\\rho:\\pi_1\\to\\Sigma_n\\}/\\Sigma_n\\text{-켤레}$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (deck 변환군 $G(\\widetilde X)$)",
+          "formal_statement": "덮개 $p:\\widetilde X\\to X$의 자기동형사상, 즉 $p\\phi=p$인 위상동형 $\\phi:\\widetilde X\\to\\widetilde X$을 deck 변환(deck transformation) 또는 덮개 변환이라 한다. 이들은 합성에 대해 군 $G(\\widetilde X)$을 이룬다. 예: 나선 $\\mathbb{R}\\to S^1$(수직 나선을 원으로 사영)의 deck 변환은 나선을 자기 위로 옮기는 수직 평행이동들이라 $G(\\widetilde X)\\cong\\mathbb{Z}$. $n$겹 덮개 $S^1\\to S^1,\\ z\\mapsto z^n$의 deck 변환은 $2\\pi/n$의 정수배 회전들이라 $G(\\widetilde X)\\cong\\mathbb{Z}_n$."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (deck 변환의 강성: 한 점으로 결정, 자유로운 작용)",
+          "formal_statement": "$\\widetilde X$이 경로연결이면 deck 변환은 한 점을 어디로 보내는지로 완전히 결정된다. 특히 항등이 아닌 deck 변환은 고정점을 갖지 않는다 — 곧 $G(\\widetilde X)$은 $\\widetilde X$에 자유롭게(freely) 작용한다.",
+          "idea_behind_proof": "deck 변환 $\\phi$과 항등은 둘 다 $p$의 들어올림($p\\phi=p=p\\cdot\\mathrm{id}$)이므로, 한 점에서 일치하면 유일 들어올림 성질(명제 1.34)로 전체에서 일치한다.",
+          "proof_steps": [
+            "$\\phi,\\psi\\in G(\\widetilde X)$이 한 점 $\\widetilde x$에서 $\\phi(\\widetilde x)=\\psi(\\widetilde x)$이면, 둘 다 $p$의 들어올림($p\\phi=p\\psi=p$)이고 한 점에서 일치하므로 유일 들어올림 성질(명제 1.34, $\\widetilde X$ 연결)로 $\\phi=\\psi$. 즉 deck 변환은 한 점의 상으로 결정된다.",
+            "특히 $\\phi$이 어떤 점을 고정하면 항등과 그 점에서 일치하므로 $\\phi=\\mathrm{id}$. 따라서 항등이 아닌 deck 변환은 고정점이 없고, $G(\\widetilde X)$의 작용은 자유롭다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정규덮개, normal covering)",
+          "formal_statement": "덮개 $p:\\widetilde X\\to X$이 정규(normal, 또는 정칙 regular)라 함은, 각 $x\\in X$과 $x$의 임의의 두 들어올림 $\\widetilde x,\\widetilde x'\\in p^{-1}(x)$에 대해 $\\widetilde x$을 $\\widetilde x'$로 보내는 deck 변환이 존재하는 것이다. 동치로, $G(\\widetilde X)$이 각 파이버에 추이적(transitive)으로 작용하는 덮개다. 직관적으로 '가장 대칭적인' 덮개 — 어느 층에서 봐도 똑같이 보인다. (정규덮개가 $\\pi_1$의 정규부분군에 대응하고 $G(\\widetilde X)$이 몫군 $\\pi_1/H$가 되며, 일반적으로 $G(\\widetilde X)\\cong N(H)/H$임은 다음 조각에서 다룬다.)"
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$n$겹 덮개 $S^1\\to S^1,\\ z\\mapsto z^n$의 deck 변환군을 구하고 각 deck 변환을 명시하라. 왜 항등이 아닌 deck 변환은 고정점을 갖지 않는가?",
+          "hint": "$p(z)=z^n$을 보존($p\\phi=p$)하는 $S^1$의 위상동형 $\\phi$은 $z^n$을 안 바꾼다 — $\\phi(z)=\\zeta z$($\\zeta^n=1$) 꼴이다. 그런 $\\zeta$는 몇 개인가?",
+          "solution": "$p\\phi=p$은 $(\\phi(z))^n=z^n$, 즉 $\\phi(z)/z$이 $n$제곱근 $1$이어야 함을 뜻하므로 $\\phi(z)=\\zeta z$, $\\zeta\\in\\mu_n=\\{e^{2\\pi ik/n}:k=0,\\dots,n-1\\}$. 이 $n$개의 회전이 정확히 deck 변환이고 합성이 곱이라 $G(\\widetilde X)\\cong\\mu_n\\cong\\mathbb{Z}_n$. 항등이 아닌 회전($\\zeta\\ne1$)은 $\\zeta z=z$인 $z$가 없어 고정점이 없다 — 명제(deck 변환의 강성)의 '항등만 고정점을 갖는다'와 일치한다. 또 각 deck 변환은 한 점 $z_0$의 상 $\\zeta z_0$으로 완전히 결정된다. (이 덮개는 정규덮개이고 $G\\cong\\mathbb{Z}_n\\cong\\pi_1(S^1)/n\\mathbb{Z}$.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "순열표현 분류로 $S^1\\vee S^1$의 $2$겹 덮개공간(연결·비연결 포함)을 준동형 $\\pi_1=F_2\\to\\Sigma_2$의 켤레류로 세어라. 몇 개이며, 그중 연결인 것은 몇 개인가?",
+          "hint": "$F_2=\\langle a,b\\rangle$의 준동형 $\\to\\Sigma_2$은 $(\\sigma_a,\\sigma_b)=(\\rho(a),\\rho(b))\\in\\Sigma_2\\times\\Sigma_2$로 정해진다($F_2$이 자유라 아무 값이나 가능). $\\Sigma_2=\\{e,\\tau\\}$은 아벨이라 켤레가 자명하다. 덮개가 연결일 조건은 $\\langle\\sigma_a,\\sigma_b\\rangle$이 $\\{1,2\\}$에 추이적인 것.",
+          "solution": "$F_2$이 자유군이라 준동형 $\\rho:F_2\\to\\Sigma_2$은 생성원의 상 쌍 $(\\sigma_a,\\sigma_b)\\in\\Sigma_2\\times\\Sigma_2$로 자유롭게 정해지므로 $2\\times2=4$개다. $\\Sigma_2$이 아벨군이라 $\\Sigma_2$-켤레가 모두 자명 — 4개가 그대로 4개의 켤레류이므로 $S^1\\vee S^1$의 $2$겹 덮개는 정확히 4개. 연결성은 $\\langle\\sigma_a,\\sigma_b\\rangle$의 $\\{1,2\\}$ 위 추이성으로 판정한다: $(\\tau,e),(e,\\tau),(\\tau,\\tau)$은 전위를 포함해 추이적 — 연결(3개); $(e,e)$은 항등뿐이라 두 궤도 — 비연결(원 두 개, 1개). 따라서 4개 중 연결은 3개다. (연결 3개는 정리 1.38로 $F_2$의 지표 $2$ 부분군 3개와도 대응한다.)"
+        },
+        {
+          "type": "ox",
+          "question": "경로연결 덮개공간에서 항등이 아닌 deck 변환도 어떤 점을 고정할 수 있다.",
+          "answer": "X",
+          "explanation": "항등이 아닌 deck 변환은 고정점을 가질 수 없다. deck 변환 $\\phi$과 항등은 둘 다 $p$의 들어올림($p\\phi=p$)이므로, $\\phi$이 한 점을 고정하면 항등과 그 점에서 일치하고, 유일 들어올림 성질(명제 1.34, $\\widetilde X$ 경로연결)로 $\\phi=\\mathrm{id}$가 된다. 즉 $G(\\widetilde X)$은 자유롭게 작용한다."
+        },
+        {
+          "type": "ox",
+          "question": "두 덮개공간이 동형일 필요충분조건은 파이버 위의 $\\pi_1(X,x_0)$ 작용이 동변(equivariant) 동형인 것이다.",
+          "answer": "O",
+          "explanation": "순열표현 분류가 정확히 이것이다. 덮개 동형 $h$은 파이버 전단사로 제한되며 $\\gamma\\cdot h(\\widetilde x)=h(\\gamma\\cdot\\widetilde x)$(동변)을 만족하고, 역으로 동변 전단사는 $\\widetilde X_{\\rho_1}\\cong\\widetilde X_{\\rho_2}$을 유도한다. 그래서 덮개의 동형류가 파이버 작용의 동변 동형류와 일대일 대응하고, $n$겹이면 $\\pi_1\\to\\Sigma_n$ 준동형의 $\\Sigma_n$-켤레류가 된다."
+        },
+        {
+          "type": "conceptual",
+          "question": "순열표현 분류(덮개 ↔ $\\pi_1\\to\\Sigma_n$ 켤레류)는 정리 1.38(연결 덮개 ↔ 부분군의 켤레류)과 어떻게 관계되며 무엇을 더 담는가? 또 deck 변환군을 '덮개의 갈루아군'으로 보는 관점을 설명하라.",
+          "hint": "작용의 궤도는 무엇이고 안정자(stabilizer)는 무엇인가? 추이적 작용은 연결 덮개와 어떻게 대응하는가? 보편덮개의 deck 변환군은?",
+          "answer": "두 분류는 궤도-안정자(orbit–stabilizer)로 이어진다. 정리 1.38은 '연결 덮개 ↔ $\\pi_1$ 부분군의 켤레류'를 준다. 파이버 작용의 언어에서 한 점 $\\widetilde x_0$의 안정자가 정확히 부분군 $p_*\\pi_1(\\widetilde X,\\widetilde x_0)$이고, 작용이 추이적(궤도 하나)일 때가 연결 덮개다 — 이 경우 파이버 $\\cong\\pi_1/(\\text{안정자})$라 정리 1.38의 부분군 분류를 되돌려 준다. 순열표현이 더 담는 것은 비연결이다: 일반 작용의 궤도들이 덮개의 연결성분이므로, 궤도가 여럿이면 비연결 덮개까지 하나의 준동형 $\\pi_1\\to\\Sigma_n$으로 부호화된다(층 재라벨 = $\\Sigma_n$-켤레). deck 변환군 $G(\\widetilde X)$은 '덮개의 대칭군' — 밑공간을 고정한 채 층을 섞는 자기동형들 — 이고, 갈루아 이론의 갈루아군에 해당한다. 유일 들어올림 때문에 이 작용은 자유롭고, 정규(normal)덮개일 때 파이버에 추이적이 되어 $G(\\widetilde X)$이 $\\pi_1$의 몫군으로 실현된다(다음 조각: 일반적으로 $G(\\widetilde X)\\cong N(H)/H$, 정규덮개면 $\\cong\\pi_1/H$). 보편덮개는 $H=\\{1\\}$이라 $G(\\widetilde X)\\cong\\pi_1(X)$ — '가장 큰 갈루아군'이며, 정규덮개 ↔ 정규부분군, deck군 = 몫군이라는 대응이 갈루아 이론(정규확장 ↔ 정규부분군, 갈루아군 = 몫군)의 완벽한 위상적 쌍둥이다."
+        }
+      ]
     }
   ]
 }
