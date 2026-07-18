@@ -318,10 +318,26 @@ def main():
             sys.exit(EXIT_ERROR)
         sect_m = re.search(r"현재 소단원:\s*(.+)", info["header"])
         sect = sect_m.group(1).strip() if sect_m else seq
-        git("add", "-A")
+        # Scope `git add` to exactly what this pipeline touches -- NOT `-A`,
+        # which would also sweep up any unrelated dirty file in the repo
+        # (e.g. a script mid-edit in another session) into a content commit.
+        git("add",
+            info["save"],
+            os.path.join(REPO, "data"),
+            os.path.join(PIPE, "work", args.book, "progress.md"),
+            os.path.join(PIPE, "work", args.book, "state.json"))
         commit_msg = (f"{args.book}: {sect} 추가\n\n"
                       "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>")
-        git("commit", "-m", commit_msg)
+        # Pathspec on `commit` too: even if something unrelated is *already*
+        # staged (by a human, another tool) before this runs, `git commit`
+        # with no pathspec would sweep the whole index into this commit --
+        # restricting to these paths commits only them regardless of what
+        # else sits in the index.
+        git("commit", "-m", commit_msg, "--",
+            info["save"],
+            os.path.join(REPO, "data"),
+            os.path.join(PIPE, "work", args.book, "progress.md"),
+            os.path.join(PIPE, "work", args.book, "state.json"))
         git("push", "origin", "dev")
         log(f"seq {seq} submitted + committed + pushed. ({sect})")
         done += 1
