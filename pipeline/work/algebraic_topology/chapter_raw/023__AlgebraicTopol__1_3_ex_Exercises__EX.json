@@ -1,0 +1,336 @@
+{
+  "chapter_info": {
+    "title": "Chapter 1. The Fundamental Group",
+    "source": "Hatcher, Algebraic Topology",
+    "overall_goal": "공간에 대수적 그림자(군·환 등)를 씌우는 함자(functor)라는 대수적 위상수학의 큰 그림을 이해하고, 그중 가장 단순하면서 근본적인 함자인 기본군(fundamental group)을 정의한다. 나아가 원의 기본군이 무한순환군임을 보이고, 이를 통해 '기본군이 다르면 두 공간은 위상동형이 아니다'라는 강력한 판별법을 손에 넣는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.3 연습문제 (Exercises) — 덮개공간 이론의 적용",
+      "step1_big_picture": {
+        "context": "§1.3에서 우리는 덮개공간 이론의 핵심 골격을 완성했다 — 들어올림 판정법(lifting criterion, 1.3.1), 연결 덮개공간과 $\\pi_1(X,x_0)$의 부분군 사이의 갈루아 대응(Galois correspondence, 1.3.2 분류정리), deck 변환군 $G(\\widetilde X)\\cong N(H)/H$(명제 1.39), 그리고 군 작용 ↔ 정규 덮개 ↔ 케일리 복합체로 이어지는 상호변환(명제 1.40, 1.3.3)이다. 이 연습문제 절은 그 도구들을 손에 쥐고 실제로 계산하고 구성하는 훈련장이다. 크게 네 갈래다: (i) 덮개공간을 만들거나 제한·곱으로 새 덮개를 얻는 순수 위상적 구성(문제 1–8), (ii) 특정 공간의 모든 연결 덮개를 열거하거나($S^1\\vee S^1$, $\\mathbb{RP}^2\\vee\\mathbb{RP}^2$) 특정 부분군에 대응하는 덮개를 그리는 계산(문제 10–14), (iii) 군 작용의 언어로 덮개를 다루는 일반 정리들 — 자유롭고 properly discontinuous한 작용이 covering space action임(문제 23), 부분군 $H\\subset G$에 대한 $X/H$의 갈루아 대응(문제 24), (iv) 케일리 그래프와 자유군의 위상적 그림(문제 30–33). 뒤이어 나오는 §1.A(Graphs and Free Groups)는 별도의 Additional Topic이므로 여기서는 다루지 않는다.",
+        "hidden_intuition": "이 문제들을 관통하는 몇 가지 '재사용 가능한 반사신경'이 있다. 첫째, 덮개공간을 다룰 때는 항상 '섬유 위의 순열표현'으로 번역하라 — $n$겹 연결 덮개는 $\\pi_1(X)\\to\\Sigma_n$의 추이적(transitive) 준동형이고, 밑점 없는 동형은 켤레류(=부분군의 켤레류)로 센다. 둘째, '어떤 사상이 덮개로 들어올려지는가?'라는 질문은 언제나 $f_*\\pi_1 \\subseteq p_*\\pi_1$인지를 보는 것으로 환원된다(들어올림 판정법). 셋째, 군 작용을 만나면 조건 (∗)가 성립하는지부터 확인하라 — 유한군의 자유 작용이나 '점을 움직이는 최소거리가 양수'인 상황에서는 자동이다. 넷째, $\\pi_1$을 계산할 때 단순연결 공간에 얌전한 작용을 얹을 수 있으면 $\\pi_1(Y/G)\\cong G$가 즉시 나온다. 반례를 만드는 문제들(합성이 덮개가 아닌 예, 국소경로연결이 빠진 quasi-circle)은 가정이 왜 필요한지를 '깨뜨려 보며' 배우게 하는 장치다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Lemma",
+          "name": "보조정리 (문제 1·2: 제한과 곱은 덮개를 보존)",
+          "formal_statement": "$p:\\widetilde X\\to X$가 덮개공간이라 하자. (문제 1) 부분공간 $A\\subseteq X$와 $\\widetilde A=p^{-1}(A)$에 대해 제한 $p:\\widetilde A\\to A$도 덮개공간이다. (문제 2) 두 덮개 $p_1:\\widetilde X_1\\to X_1$, $p_2:\\widetilde X_2\\to X_2$의 곱 $p_1\\times p_2:\\widetilde X_1\\times\\widetilde X_2\\to X_1\\times X_2$도 덮개공간이다.",
+          "idea_behind_proof": "'균등하게 덮인 이웃(evenly covered neighborhood)'을 그대로 물려받으면 된다. 부분공간에서는 균등이웃 $U$를 $U\\cap A$로 자르고, 곱에서는 두 균등이웃 $U_1,U_2$의 곱 $U_1\\times U_2$를 취한다. 시트(sheet)들의 분해가 각각 교집합·곱과 호환되므로 조건이 유지된다.",
+          "proof_steps": [
+            "문제 1: $a\\in A$에 대해 $X$에서 $a$의 균등이웃 $U$를 잡으면 $p^{-1}(U)=\\bigsqcup_\\alpha V_\\alpha$이고 각 $V_\\alpha\\xrightarrow{\\sim}U$. 그러면 $U\\cap A$는 $A$에서 $a$의 열린이웃이고 $p^{-1}(U\\cap A)\\cap\\widetilde A=\\bigsqcup_\\alpha (V_\\alpha\\cap\\widetilde A)$이며 각 조각이 $U\\cap A$로 위상동형으로 사상된다.",
+            "문제 2: $(x_1,x_2)$에 대해 균등이웃 $U_1,U_2$를 잡으면 $U_1\\times U_2$가 균등이웃이고, $(p_1\\times p_2)^{-1}(U_1\\times U_2)=\\bigsqcup_{\\alpha,\\beta}(V_\\alpha\\times W_\\beta)$의 각 조각이 $U_1\\times U_2$로 위상동형이다."
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 23: 자유 + properly discontinuous $\\Rightarrow$ covering space action)",
+          "formal_statement": "군 $G$가 하우스도르프 공간 $X$에 자유(free)롭게, 그리고 properly discontinuous하게 작용하면(각 $x$가 이웃 $U$를 가져 $\\{g\\in G\\mid U\\cap g(U)\\neq\\varnothing\\}$이 유한), 이 작용은 covering space action (조건 (∗)를 만족)이다. 특히 유한군의 하우스도르프 공간 위 자유 작용은 항상 covering space action이다.",
+          "idea_behind_proof": "properly discontinuous가 '겹치는 $g$가 유한 개'로 후보를 잘라 주고, 자유성 + 하우스도르프성이 그 유한 개의 자명하지 않은 $g$ 각각을 이웃을 더 줄여 떼어낼 수 있게 해 준다.",
+          "proof_steps": [
+            "1단계: $x\\in X$에 대해 properly discontinuous에서 이웃 $U$를 잡으면 $U\\cap g_iU\\neq\\varnothing$인 원소가 유한 개 $g_0=e,g_1,\\dots,g_n$뿐이다.",
+            "2단계: 각 $g_i\\neq e$에 대해 자유성으로 $g_i(x)\\neq x$이고, 하우스도르프성으로 $x$와 $g_i(x)$를 분리하는 서로소 열린집합 $A_i\\ni x$, $B_i\\ni g_i(x)$를 잡는다. $W_i:=A_i\\cap g_i^{-1}(B_i)$로 두면 $W_i\\cap g_i(W_i)\\subseteq A_i\\cap B_i=\\varnothing$.",
+            "3단계: $V:=U\\cap W_1\\cap\\cdots\\cap W_n$은 $x$의 이웃이며, $g\\notin\\{g_i\\}$이면 $U\\cap gU=\\varnothing$이라 $V\\cap gV=\\varnothing$이고, $g=g_i\\neq e$이면 $W_i$가 처리한다. 따라서 $g\\neq e$인 모든 $g$에 대해 $V\\cap gV=\\varnothing$, 즉 조건 (∗)가 성립한다. 유한군은 자동으로 properly discontinuous하므로 마지막 주장이 따라온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 24: 군 작용에 대한 갈루아 대응)",
+          "formal_statement": "경로연결·국소경로연결 공간 $X$ 위의 covering space action $G\\curvearrowright X$가 주어지면, 각 부분군 $H\\subseteq G$는 덮개공간의 합성 $X\\to X/H\\to X/G$를 정한다. 그러면: (a) $X$와 $X/G$ 사이의 모든 경로연결 덮개공간은 어떤 $H\\subseteq G$에 대한 $X/H$와 동형이다. (b) 두 덮개 $X/H_1$, $X/H_2$가 ($X/G$ 위에서) 동형일 필요충분조건은 $H_1,H_2$가 $G$에서 켤레부분군인 것이다. (c) $X/H\\to X/G$가 정규 덮개일 필요충분조건은 $H$가 $G$의 정규부분군인 것이고, 이때 deck 변환군은 $G/H$이다.",
+          "idea_behind_proof": "명제 1.40에 의해 $X\\to X/G$는 deck 변환군이 정확히 $G$인 정규 덮개다. 따라서 '맨 위' 덮개 $X$를 기준으로 삼으면, $X$와 $X/G$ 사이의 중간 덮개들은 정확히 $G=G(X)$의 부분군들과 대응한다 — 이것이 1.3.2 분류정리(갈루아 대응)를 이 상황에 특수화한 것이다. (b)는 밑점을 바꿀 때 부분군이 켤레된다는 사실, (c)는 명제 1.39(a),(b)의 직접 적용이다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (반례가 가르치는 것: 문제 6·7)",
+          "formal_statement": "두 덮개의 합성은 항상 덮개인 것은 아니다(문제 6: 축소쐐기 원들의 덮개 위에 2겹 덮개를 얹으면 합성이 덮개 조건을 잃을 수 있다 — 단, 경로 유일 들어올림 성질은 유지된다). 또한 들어올림 판정법에서 정의역의 국소경로연결성은 생략할 수 없다(문제 7: quasi-circle $Y$는 $\\pi_1(Y)=0$이지만 몫사상 $f:Y\\to S^1$이 $\\mathbb{R}\\to S^1$로 들어올려지지 않는다)."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "문제 9. $X$가 경로연결·국소경로연결이고 $\\pi_1(X)$가 유한이라 하자. 그러면 모든 사상 $f:X\\to S^1$은 널호모토픽(nullhomotopic)임을 보여라. [덮개 $\\mathbb{R}\\to S^1$을 이용하라.]",
+          "hint": "$f_*:\\pi_1(X)\\to\\pi_1(S^1)=\\mathbb{Z}$의 상은 $\\mathbb{Z}$의 부분군이면서 유한이다. $\\mathbb{Z}$에서 유한 부분군은 무엇뿐인가? 그다음 들어올림 판정법을 $\\mathbb{R}\\to S^1$에 적용하라.",
+          "solution": "$f_*:\\pi_1(X)\\to\\pi_1(S^1)\\cong\\mathbb{Z}$를 본다. 그 상은 $\\mathbb{Z}$의 부분군인 동시에 유한군 $\\pi_1(X)$의 준동형상이라 유한하다. 그런데 $\\mathbb{Z}$의 유한 부분군은 자명군뿐이므로 $f_*=0$. 보편덮개 $p:\\mathbb{R}\\to S^1$은 $\\mathbb{R}$이 축약가능이라 $p_*\\pi_1(\\mathbb{R})=0$이고, $f_*\\pi_1(X)=0\\subseteq p_*\\pi_1(\\mathbb{R})$이다. $X$가 경로연결·국소경로연결이므로 들어올림 판정법에 의해 $f$는 $\\widetilde f:X\\to\\mathbb{R}$로 들어올려진다($f=p\\circ\\widetilde f$). $\\mathbb{R}$는 축약가능이라 $\\widetilde f$가 널호모토픽이고, 이를 $p$로 합성한 $f$도 널호모토픽이다. $\\qquad\\blacksquare$"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 10. $S^1\\vee S^1$의 연결된 2겹·3겹 덮개공간을 밑점 없는 덮개공간 동형(isomorphism without basepoints)을 기준으로 모두 찾아라.",
+          "hint": "$n$겹 연결 덮개 ↔ 추이적 순열표현 $\\rho:F_2=\\langle a,b\\rangle\\to\\Sigma_n$ ↔ 지표 $n$ 부분군. 밑점 없는 동형은 $\\Sigma_n$에서의 켤레(=부분군의 켤레류)로 센다. 지표 2 부분군은 몇 개이며 모두 정규인가? 지표 3에서는 정규(=$F_2\\twoheadrightarrow\\mathbb{Z}_3$의 핵)와 비정규를 나누어 세라.",
+          "solution": "덮개는 그래프이고, $n$겹 연결 덮개는 추이적 준동형 $\\rho:F_2\\to\\Sigma_n$의 켤레류(밑점 없는 동형)와 대응한다.\\n\\n【2겹】 $\\rho:F_2\\to\\Sigma_2=\\{1,\\tau\\}$에서 $(\\rho(a),\\rho(b))$가 추이적(둘 다 항등은 제외)인 경우는 $(\\tau,1),(1,\\tau),(\\tau,\\tau)$의 3가지. $\\Sigma_2$는 아벨이라 켤레가 자명하므로 서로 다른 3개의 덮개다. 각각 2개의 꼭짓점과 4개의 변($a$-변 2, $b$-변 2, $\\chi=2-4=-2$)을 갖는다: (i) $a$가 두 시트를 바꾸고 $b$는 각 꼭짓점의 고리, (ii) 그 반대, (iii) $a,b$ 모두 두 꼭짓점을 잇는 변. 지표 2 부분군은 항상 정규라 세 덮개 모두 정규다.\\n\\n【3겹】 밑점 없는 동형류 = 지표 3 부분군의 켤레류 수. $F_2$의 지표 3 부분군은 총 13개다(홀의 공식: $a_3=3\\cdot 3!-[2!\\,a_1+1!\\,a_2]=18-5=13$). 이 중 정규인 것은 몫이 $\\mathbb{Z}_3$인 경우, 즉 전사 $F_2\\to\\mathbb{Z}_3$($9-1=8$개)를 $\\mathrm{Aut}(\\mathbb{Z}_3)$(위수 2)로 나눈 $8/2=4$개. 지표 3 부분군은 정규이거나(켤레류 크기 1) 켤레류 크기 3(비정규)뿐이므로, 비정규는 $13-4=9$개가 크기 3짜리 켤레류 $9/3=3$개를 이룬다. 따라서 켤레류는 $4+3=7$개 — 즉 밑점 없는 동형 기준으로 연결 3겹 덮개는 7개다. 각각 3개의 꼭짓점과 6개의 변($\\chi=-3$)을 갖는 그래프이며, $F_2\\to\\Sigma_3$의 추이적 표현으로 구체적으로 그릴 수 있다(4개는 정규=$\\mathbb{Z}_3$ 대칭, 3개는 비정규)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 25. 선형변환 $\\varphi:\\mathbb{R}^2\\to\\mathbb{R}^2$, $\\varphi(x,y)=(2x,\\,y/2)$가 생성하는 $\\mathbb{Z}$-작용을 $X=\\mathbb{R}^2\\setminus\\{0\\}$ 위에서 생각하자. 이 작용이 covering space action임을 보이고 $\\pi_1(X/\\mathbb{Z})$를 계산하라. 나아가 $X/\\mathbb{Z}$가 비-하우스도르프임을 설명하고, 이것이 $x$축·$y$축의 여집합 성분에서 오는 $S^1\\times\\mathbb{R}$과 위상동형인 네 부분공간의 합집합임을 기술하라.",
+          "hint": "자유성: $\\varphi^n(v)=v$($n\\neq0$)이면 $2^n x=x,\\,2^{-n}y=y$이므로 $v=0$. $X\\simeq S^1$이라 $\\pi_1(X)=\\mathbb{Z}$이고 $X\\to X/\\mathbb{Z}$는 deck 군 $\\mathbb{Z}$인 덮개다. $\\varphi$가 $\\pi_1(X)$에 어떻게 작용하는지($\\det\\varphi=1>0$, 항등에 등위상적으로 연결) 보고 사상 원환면(mapping torus)으로 해석하라. 각 사분면에서 $(x,y)\\mapsto(\\ln|x|,\\ln|y|)$ 좌표를 쓰면 $\\varphi$가 무엇이 되는가?",
+          "solution": "【covering space action】 $n\\neq0$이면 $\\varphi^n(x,y)=(2^n x,2^{-n}y)=(x,y)$는 $x=y=0$을 강제하는데 $0\\notin X$이므로 작용은 자유롭다. 또 $X$는 하우스도르프이고, 임의의 점 주위에서 $\\varphi^n$이 점을 지수적으로 멀리 보내므로 겹치는 $n$이 유한(properly discontinuous)이다. 문제 23에 의해 covering space action이다.\\n\\n【$\\pi_1(X/\\mathbb{Z})$】 $X=\\mathbb{R}^2\\setminus\\{0\\}\\simeq S^1$이라 $\\pi_1(X)=\\mathbb{Z}$. $X\\to X/\\mathbb{Z}$는 deck 군이 $\\mathbb{Z}$인 정규 덮개이므로 $X/\\mathbb{Z}$는 $\\varphi$의 사상 원환면이다. $\\varphi\\in GL^+_2(\\mathbb{R})$($\\det=1$)는 항등원과 경로로 연결되므로 $\\pi_1(X)=\\mathbb{Z}$ 위에 자명하게 작용($\\varphi_*=\\mathrm{id}$)한다. 따라서 $\\pi_1(X/\\mathbb{Z})=\\langle\\alpha,t\\mid t\\alpha t^{-1}=\\varphi_*(\\alpha)=\\alpha\\rangle=\\mathbb{Z}\\times\\mathbb{Z}$.\\n\\n【비-하우스도르프 & 네 개의 $S^1\\times\\mathbb{R}$】 $x$축과 $y$축(원점 제외)을 빼면 $X$는 네 개의 열린 사분면으로 나뉘고, $\\varphi$는 부호를 보존하므로 각 사분면을 보존한다. 한 사분면(예 $x,y>0$)에서 $(u,v)=(\\ln x,\\ln y)$로 좌표를 바꾸면 $\\varphi$는 평행이동 $(u,v)\\mapsto(u+\\ln2,\\,v-\\ln2)$이 되고, $\\mathbb{R}^2$를 한 평행이동으로 몫하면 $S^1\\times\\mathbb{R}$을 얻는다. 네 사분면이 각각 $S^1\\times\\mathbb{R}$을 주지만, 축 위의 궤도들이 서로 다른 사분면 조각들의 극한으로 겹쳐 들어와 분리되지 않으므로(한 궤도의 극한점이 유일하지 않다) $X/\\mathbb{Z}$는 비-하우스도르프다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 30. 군 $\\mathbb{Z}\\ast\\mathbb{Z}_2=\\langle a,b\\mid b^2\\rangle$의 케일리 그래프(Cayley graph)를 그려라.",
+          "hint": "생성원 $a$는 무한위수, $b$는 위수 2다. 각 꼭짓점 $g$에서 $a$-변($g\\to ga$)과 $b$-변($g\\to gb$)을 하나씩 붙인다. $b^2=e$이므로 $b$-변은 $g$와 $gb$를 잇는 '단일' 변이다(되돌아오면 제자리). 자유곱이라 축약된 단어는 절대 $e$로 되돌아오지 않는다 — 그럼 그래프에 고리가 있을까?",
+          "solution": "각 꼭짓점 $g$는 $a$-변 두 개($ga$ 쪽, $ga^{-1}$ 쪽)와 $b$-변 한 개($gb$)를 가져 차수 3이다. $\\langle a\\rangle$의 켤레(코셋)들이 이루는 양방향 무한 수평선(=$a$-변들의 사슬)이 있고, 각 꼭짓점은 $b$-변 하나로 짝 꼭짓점 $gb$와 이어진다. $b^2=e$라 $b$-변은 $g$와 $gb$를 잇는 단일 변일 뿐 고리(2각형)를 만들지 않으며, 자유곱이므로 축약된 단어가 $e$로 되돌아오는 비자명 관계가 없다 — 따라서 그래프에는 어떤 순환(cycle)도 없다. 즉 케일리 그래프는 나무(tree)이며, '$a$가 만드는 수평선들'이 '$b$-변'으로 나무 패턴으로 연결된 무한 그래프다. (케일리 복합체에서는 $b^2$ 관계자의 2-셀을 붙이지만, 그래프 자체는 이미 나무라 축약가능하다.)",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    -2.6,
+                    0
+                  ],
+                  [
+                    2.6,
+                    0
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -2,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.35
+                ],
+                "text": "e"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  -0.35
+                ],
+                "text": "a"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2,
+                  -0.35
+                ],
+                "text": "a^2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1,
+                  -0.35
+                ],
+                "text": "a^{-1}"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2,
+                  -0.35
+                ],
+                "text": "a^{-2}"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    0,
+                    0
+                  ],
+                  [
+                    0,
+                    1.2
+                  ]
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.35,
+                  0.6
+                ],
+                "text": "b"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    -1.4,
+                    1.2
+                  ],
+                  [
+                    1.4,
+                    1.2
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1,
+                  1.2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  1.2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  1.2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.55
+                ],
+                "text": "b"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  1.55
+                ],
+                "text": "ba"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1,
+                  1.55
+                ],
+                "text": "ba^{-1}"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    1,
+                    -1.2
+                  ]
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.35,
+                  -0.6
+                ],
+                "text": "b"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    -0.4,
+                    -1.2
+                  ],
+                  [
+                    2.4,
+                    -1.2
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  -1.55
+                ],
+                "text": "ab"
+              }
+            ],
+            "caption": "$\\mathbb{Z}\\ast\\mathbb{Z}_2$의 케일리 그래프(일부): $a$-변이 만드는 수평선들이 단일 $b$-변으로 나무 모양으로 연결된다. 각 꼭짓점 차수는 3이고 순환이 없어 나무(tree)다."
+          }
+        },
+        {
+          "type": "ox",
+          "question": "두 덮개공간의 합성 $Y\\to\\widetilde X\\to X$는 언제나 다시 덮개공간이다.",
+          "answer": "X",
+          "explanation": "일반적으로는 성립하지 않는다(문제 6). 축소쐐기(shrinking wedge) 원들의 특정 덮개 $\\widetilde X\\to X$ 위에 2겹 덮개 $Y\\to\\widetilde X$를 적절히 얹으면, 합성 $Y\\to X$는 균등하게 덮인 이웃을 갖지 못해 덮개 조건을 잃을 수 있다 — 밑공간이 국소적으로 나쁘게 행동(반국소단순연결성 결여)하기 때문이다. 다만 합성은 경로 유일 들어올림 성질(unique path lifting)은 항상 가진다. 밑공간 $X$(또는 문제 16의 $Z$)가 국소경로연결이면 합성이 덮개가 됨이 보장된다."
+        },
+        {
+          "type": "ox",
+          "question": "들어올림 판정법(lifting criterion)에서 정의역 공간의 국소경로연결성(local path-connectedness)은 생략할 수 없는 가정이다.",
+          "answer": "O",
+          "explanation": "문제 7의 quasi-circle $Y$가 반례를 준다: $Y$는 $y=\\sin(1/x)$의 조각, $y$축 위 선분 $[-1,1]$, 그리고 이 둘을 잇는 호로 이루어진 $\\mathbb{R}^2$의 닫힌 부분공간으로 $\\pi_1(Y)=0$이다. $y$축 선분을 한 점으로 collapse한 몫사상 $f:Y\\to S^1$은 $f_*\\pi_1(Y)=0\\subseteq p_*\\pi_1(\\mathbb{R})=0$을 만족하지만, $Y$가 그 선분 근처에서 국소경로연결이 아니어서 $f$는 $\\mathbb{R}\\to S^1$로 들어올려지지 않는다. 따라서 $f_*\\pi_1\\subseteq p_*\\pi_1$만으로는 부족하고 국소경로연결성이 반드시 필요하다."
+        },
+        {
+          "type": "conceptual",
+          "question": "문제 27. 보편덮개 $p:\\widetilde X\\to X$에서 섬유 $p^{-1}(x_0)$ 위에는 두 개의 $\\pi_1(X,x_0)$-작용이 있다 — (i) 고리를 들어올려 얻는 monodromy 작용, (ii) deck 변환을 섬유로 제한해 얻는 작용. $X=S^1\\vee S^1$ 또는 $X=S^1\\times S^1$일 때 이 둘은 같은가? $\\pi_1(X,x_0)$이 아벨이면 항상 일치하는가?",
+          "hint": "보편덮개에서 두 작용 모두 섬유 위에서 자유·추이적(regular)이다. 하나는 오른쪽 작용, 다른 하나는 왼쪽 작용으로 볼 수 있다. 섬유를 $\\pi_1$ 자체와 동일시하면 monodromy는 오른쪽 곱셈 $g\\mapsto g\\gamma$, deck 작용은 왼쪽 곱셈 $g\\mapsto \\gamma g$에 해당한다. 두 작용이 같은 순열을 주는 조건은?",
+          "answer": "보편덮개에서 섬유 $p^{-1}(x_0)$를 $\\pi_1(X,x_0)$과 자연스럽게 동일시하면, monodromy(고리 들어올림)는 오른쪽 곱셈 $g\\mapsto g\\gamma$로, deck 변환의 제한은 왼쪽 곱셈 $g\\mapsto\\gamma g$로 실현된다(둘 다 자유·추이적). 두 작용이 '같은' 순열을 준다는 것은 모든 $g,\\gamma$에 대해 $g\\gamma=\\gamma g$, 즉 $\\pi_1$이 아벨이라는 것과 동치다. 따라서 $X=S^1\\times S^1$($\\pi_1=\\mathbb{Z}\\times\\mathbb{Z}$, 아벨)에서는 두 작용이 일치하고, $X=S^1\\vee S^1$($\\pi_1=F_2$, 비아벨)에서는 일치하지 않는다. 그리고 일반적으로 $\\pi_1(X,x_0)$이 아벨이면 왼쪽·오른쪽 곱셈이 같아지므로 두 작용은 항상 일치한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "문제 31. '$S^1\\vee S^1$의 정규(normal) 덮개공간은 정확히 두 생성원을 갖는 군들의 케일리 그래프(Cayley graph)이다'라는 명제를, 그리고 그 $n$개 원 쐐기로의 일반화($n$ 생성원 군의 케일리 그래프)를 설명하라.",
+          "hint": "$S^1\\vee S^1$의 연결 덮개는 각 꼭짓점에서 $a$-변·$b$-변이 하나씩 들어오고 나가는 그래프다. 정규 덮개 ↔ 정규부분군 $H\\trianglelefteq F_2$ ↔ 몫군 $G=F_2/H$. 이때 deck 변환군이 $G$이고 섬유 위에 자유·추이적으로 작용한다는 사실을 케일리 그래프의 정의와 맞춰 보라.",
+          "answer": "$S^1\\vee S^1$의 연결 덮개공간은 각 꼭짓점이 정확히 방향 있는 $a$-변 하나와 $b$-변 하나(들어오고 나가는)를 갖는 그래프다. 덮개가 정규 ↔ 대응 부분군 $H$가 $F_2=\\langle a,b\\rangle$에서 정규 ↔ 몫 $G=F_2/H$가 잘 정의되고, 명제 1.39·1.40에 의해 deck 변환군이 $G$이며 이 군이 섬유(꼭짓점 집합) 위에 자유·추이적으로 작용한다. 그러면 꼭짓점 집합을 $G$와 동일시할 수 있고, $a$-변은 $g\\mapsto ga$, $b$-변은 $g\\mapsto gb$로 붙는다 — 이것이 정확히 생성원 $\\{a,b\\}$에 대한 $G$의 케일리 그래프의 정의다. 역으로 두 생성원 군 $G$의 케일리 그래프는 $G$가 왼쪽 곱셈으로 자유·추이적으로 작용하는, 각 꼭짓점 차수가 (방향 고려) $a,b$ 각 하나인 그래프이므로 $S^1\\vee S^1$의 정규 덮개가 된다. 원 $n$개의 쐐기 $\\bigvee_n S^1$($\\pi_1=F_n$)로 일반화하면, 그 정규 덮개공간들은 정확히 $n$개의 생성원을 갖는 군들의 케일리 그래프다 — 케일리 그래프 구성(1.3.3 part 2)이 '정규 덮개'라는 위상 개념과 완전히 같은 대상임을 보여 주는 결론이다."
+        }
+      ]
+    }
+  ]
+}
