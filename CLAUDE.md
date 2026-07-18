@@ -138,11 +138,16 @@ generation approach for the session). Run this in the background (it can take ma
 don't poll it — you'll be notified when the process exits or when a piece fails.
 
 Key mechanics to know before touching or rerunning this:
-- **Dedicated per-book session**: `--resume`s a single Claude session ID persisted at
-  `pipeline/work/<book>/.claude_gen_session_id` (auto-created on first run, gitignored — it's a local
-  `~/.claude` conversation handle, not portable content). This keeps all of a book's generation calls in
-  one accumulating context (consistent style, awareness of already-used definitions) without polluting or
-  being polluted by whatever chat session invoked the orchestrator.
+- **Dedicated per-(book, chapter) session**: `--resume`s a Claude session ID persisted at
+  `pipeline/work/<book>/.claude_gen_session_id.ch<N>` (one file per chapter number, auto-created the first
+  time that chapter is generated; gitignored — it's a local `~/.claude` conversation handle, not portable
+  content). The orchestrator switches to (or creates) the current chapter's dedicated session automatically
+  whenever `next`'s chapter number changes, so a chapter's pieces share one accumulating context (consistent
+  style, awareness of already-used definitions within that chapter) without that context growing unboundedly
+  across an entire book (e.g. chapter 4 of Hatcher has 52 sections), and without polluting or being polluted
+  by whatever chat session invoked the orchestrator or by other chapters/books.
+  If these session-id files are ever missing on a fresh machine/clone, the orchestrator just creates fresh
+  ones — content generation still works, it only loses that chapter's accumulated generation-session context.
 - **Stops, doesn't corrupt, on failure**: a validation error, a `submit` error, or unparseable `claude`
   output (most commonly the subscription's own message `"You've hit your session limit ... resets <time>"`)
   halts the loop before writing anything broken. Just rerun the same command later (e.g. after the quota

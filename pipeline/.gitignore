@@ -7,8 +7,8 @@ work/*/_review_input_*.txt
 # 사용자가 올린 원본 PDF/toc_data를 프로그램 1에 넘기기 전 잠시 두는 곳(임시, 커밋 안 함)
 _inbox/
 
-# orchestrate_claude.py의 책별 전용 생성 세션 ID(로컬 machine·~/.claude 대화이력에 종속) + 원본 응답 덤프
-work/*/.claude_gen_session_id
+# orchestrate_claude.py의 (책, 챕터)별 전용 생성 세션 ID(로컬 machine·~/.claude 대화이력에 종속) + 원본 응답 덤프
+work/*/.claude_gen_session_id.ch*
 work/*/_gen_raw_*.txt
 work/_tmp_sysprompt.txt
 

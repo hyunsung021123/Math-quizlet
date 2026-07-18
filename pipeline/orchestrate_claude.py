@@ -5,10 +5,13 @@
 Generates each remaining section's JSON by calling the `claude` CLI itself
 (`claude -p --resume <session-id> --model opus`), using the SAME Claude Code
 subscription this repo's sessions already run under -- no separate API key,
-no per-token billing. All pieces for one book are generated inside a single
-resumable session (see .claude_gen_session_id below) so the generation model
-accumulates context across pieces (style, already-used definitions, etc.)
-without polluting whatever chat session invoked this script.
+no per-token billing. Pieces are generated inside a session dedicated to their
+(book, chapter) pair (see .claude_gen_session_id.ch<N> below) so the
+generation model accumulates context across a chapter's pieces (style,
+already-used definitions, etc.) without that context growing unboundedly
+across an entire book, and without polluting whatever chat session invoked
+this script. Crossing a chapter boundary transparently switches to (or
+creates) that chapter's own dedicated session.
 
 Usage:
     python orchestrate_claude.py --book <book-slug> [--chapter N] [--max N]
@@ -65,8 +68,8 @@ def git(*args):
     return run(["git", *args], cwd=REPO)
 
 
-def get_or_create_session_id(book):
-    path = os.path.join(PIPE, "work", book, ".claude_gen_session_id")
+def get_or_create_session_id(book, chapter):
+    path = os.path.join(PIPE, "work", book, f".claude_gen_session_id.ch{chapter}")
     if os.path.exists(path):
         return open(path, encoding="utf-8").read().strip(), path
     sid = str(uuid.uuid4())
@@ -143,9 +146,10 @@ def main():
                      help="max number of pieces to generate this run")
     args = ap.parse_args()
 
-    sid, sid_path = get_or_create_session_id(args.book)
-    log(f"===== orchestrator start (book={args.book}, session={sid}) =====")
+    log(f"===== orchestrator start (book={args.book}) =====")
     done = 0
+    current_chapter = None
+    sid = None
     while args.max is None or done < args.max:
         nx = track(args.book, "next")
         info = parse_next(nx.stdout)
@@ -157,6 +161,11 @@ def main():
             log(f"reached chapter {info['chapter']} (seq {info['seq']}) "
                 f"-- chapter {args.chapter} boundary. stopping.")
             break
+        if info["chapter"] != current_chapter:
+            current_chapter = info["chapter"]
+            sid, sid_path = get_or_create_session_id(args.book, current_chapter)
+            log(f"-- switched to chapter {current_chapter} dedicated session "
+                f"{sid} ({sid_path}) --")
         seq = info["seq"]
         log(f"\n--- seq {seq}: generating ---")
         raw = gen(build_prompt(info), sid)
