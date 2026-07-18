@@ -37,7 +37,7 @@
 | 021 | [x] | 1.3.3 Deck Transformations and Group Actions (분할 part 1) _(원본 #021)_ | section | `021__AlgebraicTopol__1_3_3_DeckTransformationsandGrou__p1.txt` |
 | 022 | [x] | 1.3.3 Deck Transformations and Group Actions (분할 part 2) _(원본 #022)_ | section | `022__AlgebraicTopol__1_3_3_DeckTransformationsandGrou__p2.txt` |
 | 023 | [x] | 1.3.ex Exercises | exercises | `023__AlgebraicTopol__1_3_ex_Exercises__EX.txt` |
-| 024 | [ ] | 1.A Graphs and Free Groups | section | `024__AlgebraicTopol__1_A_GraphsandFreeGroups.txt` |
+| 024 | [x] | 1.A Graphs and Free Groups | section | `024__AlgebraicTopol__1_A_GraphsandFreeGroups.txt` |
 | 025 | [ ] | 1.A.ex Exercises | exercises | `025__AlgebraicTopol__1_A_ex_Exercises__EX.txt` |
 | 026 | [ ] | 1.B K(G,1) Spaces and Graphs of Groups (분할 part 1) _(원본 #026)_ | section | `026__AlgebraicTopol__1_B_KG1SpacesandGraphsofGroups__p1.txt` |
 | 027 | [ ] | 1.B K(G,1) Spaces and Graphs of Groups (분할 part 2) _(원본 #027)_ | section | `027__AlgebraicTopol__1_B_KG1SpacesandGraphsofGroups__p2.txt` |
