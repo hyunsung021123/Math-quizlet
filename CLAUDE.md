@@ -118,6 +118,45 @@ Key architectural points (span multiple files, easy to miss):
   `chapter_raw/*.json`, `state.json`) is committed, since the sandbox this pipeline runs in is ephemeral
   and PDFs are large/regenerable.
 
+## Automated section generation (`pipeline/orchestrate_claude.py`)
+
+The pipeline's `program1`/`program2` scripts and the manual "paste PDF + system_prompt.md into an
+external AI" step (see above) can be replaced end-to-end by this repo's own `claude` CLI, running under
+the user's existing Claude Code subscription — **no separate API key, no per-token billing**. This is the
+default way to author new sections when the user asks to "automate" or "continue" content generation; you
+do not need to ask them to paste anything into an external AI first.
+
+```
+python pipeline/orchestrate_claude.py --book <book-slug> [--chapter N] [--max N]
+```
+
+For each remaining section it: reads `program2_track.py next`, builds the prompt (header + PDF path +
+`system_prompt.md`'s rules), calls `claude -p --resume <session> --model opus` to generate the JSON,
+validates it (`lib/merger.py`), saves it to `chapter_raw/`, runs `program2_track.py submit`, then commits
+and pushes to `dev` (per the Git workflow below — no confirmation needed once the user has approved this
+generation approach for the session). Run this in the background (it can take many minutes per piece);
+don't poll it — you'll be notified when the process exits or when a piece fails.
+
+Key mechanics to know before touching or rerunning this:
+- **Dedicated per-book session**: `--resume`s a single Claude session ID persisted at
+  `pipeline/work/<book>/.claude_gen_session_id` (auto-created on first run, gitignored — it's a local
+  `~/.claude` conversation handle, not portable content). This keeps all of a book's generation calls in
+  one accumulating context (consistent style, awareness of already-used definitions) without polluting or
+  being polluted by whatever chat session invoked the orchestrator.
+- **Stops, doesn't corrupt, on failure**: a validation error, a `submit` error, or unparseable `claude`
+  output (most commonly the subscription's own message `"You've hit your session limit ... resets <time>"`)
+  halts the loop before writing anything broken. Just rerun the same command later (e.g. after the quota
+  reset time shown in the failure) — `program2_track.py next` picks up exactly where it left off.
+- **`--chapter N`**: stop once the next piece would leave chapter `N` — use this to pause at a natural
+  checkpoint (e.g. finish chapter 1, then re-evaluate) rather than running unattended through an entire book.
+- Encoding: this repo's Python pipeline scripts print Korean text with em-dashes etc. to stdout; on Windows
+  the orchestrator forces UTF-8 on its own stdout/stderr to avoid `cp949` `UnicodeEncodeError` crashes —
+  keep that `reconfigure()` call if you edit the script.
+- Quality note: before scaling this up on a new book/chapter, generate one piece and sanity-check it
+  against the schema/style of an already-completed neighboring piece (e.g. diff the `step2_rigorous_logic`
+  block count, check for content overlap with the immediately preceding piece) rather than assuming the
+  first output is representative.
+
 ## Git workflow
 
 Active development happens on the `dev` branch (branched from `main`); commit and push directly to `dev`
