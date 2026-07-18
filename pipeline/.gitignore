@@ -1,7 +1,6 @@
-# 대화에서 확정: 텍스트 상태만 커밋한다.
-# 분할 PDF와 전달용 zip은 용량이 크고 zip으로 직접 전송하므로 git 에서 제외.
+# 분할 PDF는 백업을 위해 git 에 커밋한다(샌드박스가 휘발성이라 유일한 백업처).
+# 전달용 zip 은 같은 PDF의 중복 압축본이라 계속 제외.
 # work/<책 슬러그>/... 구조(여러 책 지원)라 */ 로 책 폴더 하나를 건너뛰고 매칭한다.
-work/*/sections_out/*.pdf
 work/*/_delivery/
 work/*/_review_input_*.txt
 
