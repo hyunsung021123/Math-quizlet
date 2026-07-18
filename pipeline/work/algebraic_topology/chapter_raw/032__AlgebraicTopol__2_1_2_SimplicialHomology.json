@@ -1,0 +1,360 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.1.2 단체 호몰로지 (Simplicial Homology)",
+      "step1_big_picture": {
+        "context": "2.1.1에서 정점에 순서를 매긴 단체들을 면끼리 붙여 $\\Delta$-복합체라는 무대를 세웠다. 이제 2.intro가 약속했던 것을 실제로 완성한다: $\\Delta$-복합체 $X$의 단체 사슬군 $\\Delta_n(X)$과 경계 사상 $\\partial_n$을 정의하고, 핵심 등식 $\\partial^2=0$을 증명한 뒤, 단체 호몰로지군 $H_n^{\\Delta}(X)=\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$을 손에 넣는다. 2.intro에서 셀 복합체의 '일반 패턴'으로 대략 그렸던 $C_n,\\partial_n,H_n$의 그림이, 여기서 정점 순서가 주는 부호 덕분에 비로소 엄밀하게 확정된다. 그리고 $S^1$, 토러스, $\\mathbb{RP}^2$, $S^n$을 실제로 계산해 본다.",
+        "hidden_intuition": "이 절의 심장은 경계 공식의 교대부호 $(-1)^i$다. 왜 그냥 면들을 다 더하지 않고 부호를 끼워 넣는가? 그래야 '면들이 정합적으로 방향을 이어받아' 경계의 경계가 사라지기 때문이다. 삼각형을 한 바퀴 돌며 테두리를 그리면 각 꼭짓점을 한 번 들어오고 한 번 나가 상쇄되듯, $\\partial\\partial$을 계산하면 각 $(n-2)$-면이 정확히 두 번 — 두 정점을 지우는 두 순서로 — 나타나고 그 부호가 언제나 반대라서 완벽히 소거된다. 이 '경계의 경계는 없다'($\\partial^2=0$)가 바로 $\\mathrm{Im}\\,\\partial_{n+1}\\subseteq\\mathrm{Ker}\\,\\partial_n$을 보장해, '순환을 경계로 나눈 몫'이라는 정의를 가능하게 만드는 단 하나의 기적이다. 교대부호는 이 기적이 일어나도록 정확히 조율된 장치다. 그리고 $\\mathbb{RP}^2$ 계산에서 처음으로 $H_1^{\\Delta}=\\mathbb{Z}_2$라는 유한군(꼬임, torsion)이 튀어나오는데, 이는 '뒤집힌 접착'이 남긴 대수적 흔적으로, 자유아벨군만 보던 눈에 새 세계를 연다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (단체 사슬군과 경계 사상)",
+          "formal_statement": "$\\Delta$-복합체 $X$에 대해 $\\Delta_n(X)$를 $X$의 열린 $n$-단체 $e_\\alpha^n$들을 기저로 하는 자유아벨군으로 정의하고, 그 원소를 $n$-사슬($n$-chain)이라 한다. 즉 $n$-사슬은 유한합 $\\sum_\\alpha n_\\alpha e_\\alpha^n$ ($n_\\alpha\\in\\mathbb{Z}$)이며, 각 $e_\\alpha^n$의 특성사상 $\\sigma_\\alpha:\\Delta^n\\to X$을 써서 $\\sum_\\alpha n_\\alpha\\sigma_\\alpha$로도 쓴다. 경계 사상 $\\partial_n:\\Delta_n(X)\\to\\Delta_{n-1}(X)$을 기저 원소 위에서 $$\\partial_n(\\sigma_\\alpha)=\\sum_i(-1)^i\\,\\sigma_\\alpha\\big|_{[v_0,\\dots,\\widehat{v}_i,\\dots,v_n]}$$ 로 정의한다. 여기서 $\\widehat{v}_i$는 그 정점을 지웠음을 뜻하고, 지운 면은 정점 순서를 보존하는 표준 동형으로 $\\Delta^{n-1}$과 동일시한다. 낮은 차원의 예: $$\\partial[v_0,v_1]=[v_1]-[v_0],$$ $$\\partial[v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1].$$",
+          "idea_behind_proof": "교대부호는 손으로 지어낸 것이 아니라 '방향의 정합성'이라는 기하에서 강제된다. 삼각형 $[v_0,v_1,v_2]$의 테두리를 반시계로 한 바퀴 돌면 $v_0\\!\\to\\!v_1\\!\\to\\!v_2\\!\\to\\!v_0$인데, 이를 정점 순서가 주는 방향의 변 $[v_0,v_1],[v_1,v_2],[v_0,v_2]$로 적으려면 $[v_0,v_2]$만 거꾸로 써야 하고 그 자리에 $-$부호가 붙는다. 부호 $(-1)^i$는 '$i$번째 정점을 지울 때 뒤집히는 방향'을 정확히 기록한 것이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.4,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  1.2,
+                  2.0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  2.4,
+                  0
+                ],
+                "to": [
+                  1.2,
+                  2.0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2.4,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.2,
+                  2.0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.3,
+                  -0.25
+                ],
+                "text": "v_0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.7,
+                  -0.25
+                ],
+                "text": "v_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.2,
+                  2.3
+                ],
+                "text": "v_2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.2,
+                  -0.35
+                ],
+                "text": "+"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.95,
+                  1.15
+                ],
+                "text": "+"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.45,
+                  1.15
+                ],
+                "text": "-"
+              }
+            ],
+            "caption": "$\\partial[v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1]$. 세 변에 붙는 $\\pm$는 반시계 방향 테두리와 정점 순서 방향이 일치하는지($+$)/뒤집히는지($-$)를 나타낸다."
+          }
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 2.1 ($\\partial^2=0$)",
+          "formal_statement": "합성 $\\Delta_n(X)\\xrightarrow{\\ \\partial_n\\ }\\Delta_{n-1}(X)\\xrightarrow{\\ \\partial_{n-1}\\ }\\Delta_{n-2}(X)$은 영사상이다. 즉 모든 $n$에 대해 $\\partial_{n-1}\\partial_n=0$.",
+          "idea_behind_proof": "열쇠는 '$\\partial\\partial$을 펼치면 각 $(n-2)$-면이 정확히 두 번 나타난다'는 관찰이다. 두 정점 $v_i,v_j$($j<i$)를 지운 면은, $v_i$를 먼저 지우고 $v_j$를 지우는 경로와 $v_j$를 먼저 지우고 $v_i$를 지우는 경로, 두 가지로 얻어진다. 두 경로에서 붙는 부호를 세어 보면 정확히 부호가 반대라서 쌍쌍이 소거된다 — 이것이 교대부호 $(-1)^i$를 넣은 진짜 이유다.",
+          "proof_steps": [
+            "1단계: $\\partial_n(\\sigma)=\\sum_i(-1)^i\\sigma|_{[v_0,\\dots,\\widehat{v}_i,\\dots,v_n]}$을 한 번 더 적용하면 $$\\partial_{n-1}\\partial_n(\\sigma)=\\sum_{j<i}(-1)^i(-1)^j\\,\\sigma|_{[\\dots,\\widehat{v}_j,\\dots,\\widehat{v}_i,\\dots]}+\\sum_{j>i}(-1)^i(-1)^{j-1}\\,\\sigma|_{[\\dots,\\widehat{v}_i,\\dots,\\widehat{v}_j,\\dots]}.$$",
+            "2단계: 부호가 갈리는 이유 — $v_i$를 먼저 지우면 $\\sigma$의 항에서 $v_j$($j<i$)의 위치는 변하지 않아 부호 $(-1)^j$가 그대로지만, $v_j$를 먼저 지우면 그보다 뒤에 있던 $v_i$가 한 칸 앞당겨져 위치가 $i-1$이 되어 부호가 $(-1)^{i-1}$로 바뀐다. 이 한 칸의 이동이 부호 하나를 뒤집는다.",
+            "3단계: 두 번째 합에서 첨자 $i$와 $j$의 이름을 맞바꾸면 그것은 첫 번째 합과 같은 면들의 합이 되지만 부호가 정확히 반대($(-1)^{i+j}$ 대 $(-1)^{i+j-1}$)이다. 따라서 두 합은 항별로 상쇄되어 $\\partial_{n-1}\\partial_n(\\sigma)=0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (사슬 복합체와 호몰로지군, 순환·경계·호몰로지류)",
+          "formal_statement": "아벨군과 준동형의 열 $$\\cdots\\to C_{n+1}\\xrightarrow{\\partial_{n+1}}C_n\\xrightarrow{\\partial_n}C_{n-1}\\to\\cdots\\to C_1\\xrightarrow{\\partial_1}C_0\\xrightarrow{\\partial_0}0$$ 이 모든 $n$에서 $\\partial_n\\partial_{n+1}=0$을 만족하면 이를 사슬 복합체(chain complex)라 한다(오른쪽 끝은 $0$으로 확장, $\\partial_0=0$). $\\partial_n\\partial_{n+1}=0$은 곧 $\\mathrm{Im}\\,\\partial_{n+1}\\subseteq\\mathrm{Ker}\\,\\partial_n$을 뜻하므로, $n$번째 호몰로지군 $$H_n=\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$$ 이 잘 정의된다. $\\mathrm{Ker}\\,\\partial_n$의 원소를 순환(cycle), $\\mathrm{Im}\\,\\partial_{n+1}$의 원소를 경계(boundary)라 하고, $H_n$의 원소($\\mathrm{Im}\\,\\partial_{n+1}$의 잉여류)를 호몰로지류(homology class)라 한다. 같은 호몰로지류를 대표하는 두 순환은 호몰로지 동치(homologous)라 하며, 이는 그 차가 경계임을 뜻한다. $C_n=\\Delta_n(X)$인 경우의 $H_n=\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$을 $H_n^{\\Delta}(X)$로 적고 $X$의 $n$번째 단체 호몰로지군이라 부른다.",
+          "idea_behind_proof": "2.intro에서 $H_n=\\mathrm{Ker}/\\mathrm{Im}$을 '순환을 경계로 나눈 몫'이라 대략 말했지만, 그 몫이 성립하려면 반드시 '경계는 순환이다'($\\mathrm{Im}\\subseteq\\mathrm{Ker}$)가 참이어야 한다. 보조정리 2.1이 정확히 그것을 보장하므로, 이제 정의가 공중에 뜨지 않고 단단히 착지한다."
+        },
+        {
+          "type": "Example",
+          "name": "예 2.2 ($S^1$: 경계가 모두 0인 복합체)",
+          "formal_statement": "$S^1$에 정점 하나 $v$와 변 하나 $e$로 $\\Delta$-복합체 구조를 준다. 그러면 $\\Delta_0(S^1)\\cong\\mathbb{Z}$, $\\Delta_1(S^1)\\cong\\mathbb{Z}$이고, $\\partial_1 e=v-v=0$이므로 $\\partial_1=0$이다. $n\\ge 2$에서는 단체가 없어 $\\Delta_n(S^1)=0$. 따라서 $$H_n^{\\Delta}(S^1)\\cong\\begin{cases}\\mathbb{Z}&n=0,1\\\\ 0&n\\ge 2.\\end{cases}$$ 이는 '사슬 복합체의 경계 사상이 모두 0이면 호몰로지군이 사슬군 자신과 동형이다'라는 일반 사실의 예다($\\mathrm{Ker}\\,\\partial_n=C_n$, $\\mathrm{Im}\\,\\partial_{n+1}=0$).",
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                0,
+                0
+              ]
+            ],
+            "vertex_labels": [
+              "v"
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 0,
+                "label": "e"
+              }
+            ],
+            "caption": "$S^1$의 가장 경제적인 $\\Delta$-구조: 정점 하나 $v$와 자기 자신으로 돌아오는 변 $e$. $\\partial e=v-v=0$이라 경계 사상이 소멸한다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.3 (토러스 $T$)",
+          "formal_statement": "앞서 그린 토러스의 $\\Delta$-구조는 정점 하나, 세 변 $a,b,c$, 두 $2$-단체 $U,L$로 이루어진다. $\\partial_1=0$이므로 $H_0^{\\Delta}(T)\\cong\\mathbb{Z}$. 또 $\\partial_2 U=a+b-c=\\partial_2 L$이고 $\\{a,\\,b,\\,a+b-c\\}$가 $\\Delta_1(T)$의 기저이므로, $$H_1^{\\Delta}(T)=\\mathrm{Ker}\\,\\partial_1/\\mathrm{Im}\\,\\partial_2\\cong\\mathbb{Z}\\oplus\\mathbb{Z}$$ 이며 기저는 호몰로지류 $[a],[b]$이다. $3$-단체가 없어 $H_2^{\\Delta}(T)=\\mathrm{Ker}\\,\\partial_2$인데, $\\partial_2(pU+qL)=(p+q)(a+b-c)=0$은 $p=-q$일 때만 성립하므로 $\\mathrm{Ker}\\,\\partial_2=\\langle U-L\\rangle\\cong\\mathbb{Z}$. 종합하면 $$H_n^{\\Delta}(T)\\cong\\begin{cases}\\mathbb{Z}\\oplus\\mathbb{Z}&n=1\\\\ \\mathbb{Z}&n=0,2\\\\ 0&n\\ge 3.\\end{cases}$$",
+          "idea_behind_proof": "$U,L$이 같은 경계 $a+b-c$를 가진다는 사실이 두 곳에서 동시에 작동한다. $H_1$에서는 그 공통 경계가 $\\mathrm{Im}\\,\\partial_2=\\langle a+b-c\\rangle$을 만들어 세 변 중 하나 몫을 죽여 $\\mathbb{Z}^2$을 남기고, $H_2$에서는 그 일치 때문에 $U-L$이 경계 없는 $2$-순환(속이 빈 토러스 표면)이 되어 $\\mathbb{Z}$를 만든다.",
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                0,
+                0
+              ],
+              [
+                2.4,
+                0
+              ],
+              [
+                2.4,
+                2.4
+              ],
+              [
+                0,
+                2.4
+              ]
+            ],
+            "vertex_labels": [
+              "v",
+              "v",
+              "v",
+              "v"
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1,
+                "label": "b"
+              },
+              {
+                "from": 1,
+                "to": 2,
+                "label": "a"
+              },
+              {
+                "from": 3,
+                "to": 2,
+                "label": "b"
+              },
+              {
+                "from": 0,
+                "to": 3,
+                "label": "a"
+              },
+              {
+                "from": 0,
+                "to": 2,
+                "label": "c"
+              }
+            ],
+            "faces": [
+              {
+                "vertices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "vertices": [
+                  0,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "caption": "토러스의 $\\Delta$-구조: 네 모서리가 한 점 $v$로, 두 쌍의 변이 각각 $a,b$로 동일시되고 대각선 $c$가 두 삼각형 $L=[v_0v_1v_2]$, $U=[v_0v_2v_3]$을 가른다. $\\partial_2 U=\\partial_2 L=a+b-c$."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.4 ($\\mathbb{RP}^2$: 처음 만나는 꼬임(torsion))",
+          "formal_statement": "사영평면 $\\mathbb{RP}^2$의 $\\Delta$-구조는 두 정점 $v,w$, 세 변 $a,b,c$, 두 $2$-단체 $U,L$로 이루어진다. $\\mathrm{Im}\\,\\partial_1$은 $w-v$로 생성되므로 $H_0^{\\Delta}(\\mathbb{RP}^2)\\cong\\mathbb{Z}$. $\\partial_2 U=-a+b+c$, $\\partial_2 L=a-b+c$는 일차독립이라 $\\partial_2$가 단사이므로 $H_2^{\\Delta}(\\mathbb{RP}^2)=0$. 한편 $\\mathrm{Ker}\\,\\partial_1\\cong\\mathbb{Z}\\oplus\\mathbb{Z}$는 기저 $a-b,\\ c$를 가지며, $\\mathrm{Im}\\,\\partial_2$는 $\\mathrm{Ker}\\,\\partial_1$의 지표 $2$ 부분군이다($a-b+c$와 $2c=(a-b+c)+(-a+b+c)$가 그 기저). 따라서 $$H_1^{\\Delta}(\\mathbb{RP}^2)\\cong\\mathbb{Z}_2.$$",
+          "idea_behind_proof": "$U,L$의 경계가 토러스처럼 일치하지 않고 부호가 어긋나는($-a+b+c$ 대 $a-b+c$) 것이 핵심이다. 이 어긋남 때문에 $\\partial_2$가 단사가 되어 $H_2=0$이 되고, 두 경계의 합이 $2c$라는 '짝수배'를 만들어 $\\mathrm{Im}\\,\\partial_2$가 $\\mathrm{Ker}\\,\\partial_1$ 안에 지표 $2$로 들어앉는다. 몫에서 $2[c]=0$이지만 $[c]\\ne0$이라는 유한 꼬임 $\\mathbb{Z}_2$가 남는다 — 이것이 '한 바퀴가 아니라 두 바퀴 돌아야 메워지는' 사영평면의 비틀린 접착이 남긴 대수적 지문이다.",
+          "proof_steps": [
+            "1단계: $\\mathrm{Ker}\\,\\partial_1$을 자유기저 $x=a-b,\\ y=c$로 둔다($\\cong\\mathbb{Z}^2$).",
+            "2단계: $\\mathrm{Im}\\,\\partial_2=\\langle -a+b+c,\\ a-b+c\\rangle=\\langle x+y,\\ 2y\\rangle$ (여기서 $-a+b+c=-x+y$, $a-b+c=x+y$이고 두 원소의 합이 $2y$).",
+            "3단계: 몫 $\\mathbb{Z}^2/\\langle x+y,\\,2y\\rangle$에서 $x+y=0$이므로 $x=-y$, 남은 관계는 $2y=0$. 따라서 몫은 $[c]=y$가 생성하는 $\\mathbb{Z}_2$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예 2.5 ($S^n$: 두 단체를 붙여 만드는 구면)",
+          "formal_statement": "두 개의 $\\Delta^n$의 복사본 $U,L$을 항등사상으로 경계끼리 동일시하면 $S^n$ 위의 $\\Delta$-복합체 구조를 얻는다. 이때 $\\partial_n U$와 $\\partial_n L$이 (경계를 항등으로 붙였으므로) 같은 $(n-1)$-사슬이 되어, $\\partial_n(pU+qL)=(p+q)\\,\\partial_n U=0$은 $p=-q$일 때만 성립한다. 따라서 $\\mathrm{Ker}\\,\\partial_n=\\langle U-L\\rangle\\cong\\mathbb{Z}$이고 $n$차원에 위 단체가 없으므로 $$H_n^{\\Delta}(S^n)\\cong\\mathbb{Z}.$$ (나머지 차원의 호몰로지 계산은 더 까다롭다.)",
+          "idea_behind_proof": "2.intro의 $X_3$ 예에서 두 $2$-셀 $A,B$의 차 $A-B$가 구면을 이루던 장면과 똑같은 원리다. 같은 경계를 공유하는 두 최고차원 셀의 차는 언제나 경계가 없는 순환 — 즉 속이 빈 구면 — 이 되어 최고차원 호몰로지를 $\\mathbb{Z}$로 만든다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.6
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.6,
+                  0
+                ],
+                "to": [
+                  1.6,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.6,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.6,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0.75
+                ],
+                "text": "U"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.75
+                ],
+                "text": "L"
+              }
+            ],
+            "caption": "$S^n$을 두 $\\Delta^n$($U,L$)으로: 경계(적도)를 항등으로 붙인다. 두 반구의 차 $U-L$이 경계 없는 $n$-순환이 되어 $H_n^{\\Delta}(S^n)\\cong\\mathbb{Z}$를 생성한다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($\\Delta$-복합체 vs 단체 복합체, 그리고 남은 물음들)",
+          "formal_statement": "전통적으로 단체 호몰로지는 단체 복합체(simplicial complex) — 각 단체가 그 정점들로 유일하게 결정되는 $\\Delta$-복합체, 즉 각 $n$-단체가 서로 다른 $n+1$개 정점을 갖고 같은 정점집합을 갖는 다른 $n$-단체가 없는 것 — 위에서 정의된다. 이는 정점집합 $X_0$과, 각 $n$-단체를 $X_0$의 $(n+1)$-원소 부분집합으로 보는 조합 데이터로 기술된다. 모든 $\\Delta$-복합체는 세분(subdivide)하여 단체 복합체로 만들 수 있으므로 위상동형인 단체 복합체를 갖지만, $\\Delta$-복합체는 필요한 단체 수가 훨씬 적어 계산이 간단하다는 장점이 있다(토러스: $\\Delta$-구조는 삼각형 $2$개면 되지만 단체 복합체로는 최소 $14$개 삼각형·$21$개 변·$7$개 정점, $\\mathbb{RP}^2$는 최소 $10$개 삼각형·$15$개 변·$6$개 정점 필요). 한편 자연스러운 물음이 남는다: $H_n^{\\Delta}(X)$는 $X$에 준 $\\Delta$-구조 선택과 무관한가? 위상동형이거나 나아가 호모토피 동치인 공간은 같은 호몰로지를 갖는가? 이 물음에 답하고 일반론을 세우려면 경직된 단체 세계를 떠나, 모든 공간에 대해 정의되는 특이 호몰로지(singular homology)를 도입하는 것이 최선이다 — 이 절 끝에서 두 이론이 $\\Delta$-복합체 위에서 일치함을 보일 것이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$2$-단체 $[v_0,v_1,v_2]$에 대해 $\\partial_2[v_0,v_1,v_2]$를 적고, 거기에 다시 $\\partial_1$을 적용해 그 결과가 $0$임을 직접 계산으로 확인하라(즉 보조정리 2.1을 이 구체적 삼각형에서 검증).",
+          "hint": "먼저 교대부호 공식으로 $\\partial_2[v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1]$을 얻고, 각 변에 $\\partial_1[v_i,v_j]=[v_j]-[v_i]$를 적용한 뒤 정점별로 계수를 모아라.",
+          "solution": "$\\partial_2[v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1]$. 여기에 $\\partial_1$을 적용하면 $$\\partial_1\\big([v_1,v_2]\\big)-\\partial_1\\big([v_0,v_2]\\big)+\\partial_1\\big([v_0,v_1]\\big)=\\big([v_2]-[v_1]\\big)-\\big([v_2]-[v_0]\\big)+\\big([v_1]-[v_0]\\big).$$ 정점별로 모으면 $[v_0]$: $+1-1=0$, $[v_1]$: $-1+1=0$, $[v_2]$: $+1-1=0$. 따라서 $\\partial_1\\partial_2[v_0,v_1,v_2]=0$. 각 정점이 정확히 두 변에서 반대 부호로 나타나 상쇄되는 것 — 이것이 $\\partial^2=0$의 국소적 모습이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예 2.5의 $S^n$ 구조($\\Delta^n$의 두 복사본 $U,L$을 경계끼리 항등으로 동일시)에서 $\\mathrm{Ker}\\,\\partial_n$이 $U-L$로 생성되는 무한순환군임을 논증하라.",
+          "hint": "동일시로 인해 $\\partial_n U$와 $\\partial_n L$이 $\\Delta_{n-1}$ 안에서 같은 원소가 됨을 이용해 $\\partial_n(pU+qL)$을 전개하라. $\\Delta_n(S^n)$의 기저는 $\\{U,L\\}$뿐이다.",
+          "solution": "$U,L$의 경계가 항등사상으로 붙었으므로 $\\partial_n U=\\partial_n L$ (같은 $(n-1)$-사슬 $\\beta$라 하자). 일반 $n$-사슬 $pU+qL$에 대해 $$\\partial_n(pU+qL)=p\\,\\beta+q\\,\\beta=(p+q)\\beta.$$ $\\beta\\ne 0$이므로 이것이 $0$일 필요충분조건은 $p+q=0$, 즉 $q=-p$. 따라서 $\\mathrm{Ker}\\,\\partial_n=\\{p(U-L):p\\in\\mathbb{Z}\\}=\\langle U-L\\rangle\\cong\\mathbb{Z}$. 위 차원에 단체가 없어 $\\mathrm{Im}\\,\\partial_{n+1}=0$이므로 $H_n^{\\Delta}(S^n)=\\mathrm{Ker}\\,\\partial_n\\cong\\mathbb{Z}$. 일반화: 같은 경계를 공유하는 두 최고차원 셀의 차는 언제나 최고차원 순환을 낳는다."
+        },
+        {
+          "type": "ox",
+          "question": "사슬 복합체에서 모든 경계(boundary)는 순환(cycle)이다.",
+          "answer": "O",
+          "explanation": "정의상 사슬 복합체는 $\\partial_n\\partial_{n+1}=0$을 만족하므로, 경계 $\\beta=\\partial_{n+1}\\gamma\\in\\mathrm{Im}\\,\\partial_{n+1}$에 대해 $\\partial_n\\beta=\\partial_n\\partial_{n+1}\\gamma=0$, 즉 $\\beta\\in\\mathrm{Ker}\\,\\partial_n$. 이 포함 $\\mathrm{Im}\\,\\partial_{n+1}\\subseteq\\mathrm{Ker}\\,\\partial_n$이 있어야 몫 $H_n=\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$이 정의되며, 그 근거가 바로 보조정리 2.1이다. (역은 일반적으로 거짓 — 순환이 반드시 경계는 아니고, 그 차이를 재는 것이 곧 $H_n$이다.)"
+        },
+        {
+          "type": "ox",
+          "question": "$\\Delta$-복합체의 단체 호몰로지군 $H_n^{\\Delta}(X)$은 언제나 꼬임 없는(torsion-free) 자유아벨군이다.",
+          "answer": "X",
+          "explanation": "$\\mathbb{RP}^2$가 반례다: $H_1^{\\Delta}(\\mathbb{RP}^2)\\cong\\mathbb{Z}_2$는 유한 꼬임군이다. 두 $2$-단체의 경계가 어긋나게 붙어 $\\mathrm{Im}\\,\\partial_2$가 $\\mathrm{Ker}\\,\\partial_1$ 안에 지표 $2$로 들어앉으면서 $2[c]=0,\\ [c]\\ne 0$인 원소가 생긴다. 호몰로지군은 유한생성 아벨군이면 자유부분과 꼬임부분의 합으로 나타나며, 꼬임은 공간의 '비틀린 접착'을 포착한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "경계 공식에 왜 하필 교대부호 $(-1)^i$를 넣는가? 그리고 그 결과인 $\\partial^2=0$이 호몰로지를 '정의 가능하게' 만드는 데 왜 필수인지, 2.intro의 몫 $\\mathrm{Ker}/\\mathrm{Im}$ 관점과 연결해 설명하라.",
+          "hint": "부호 없이 면들을 그냥 더하면 $\\partial\\partial$을 계산할 때 각 $(n-2)$-면이 두 번 나타나는데 상쇄될까? 그리고 몫 $\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$이 성립하려면 두 부분군 사이에 어떤 포함관계가 필요한지 생각하라.",
+          "answer": "교대부호 $(-1)^i$는 '정점 순서가 주는 방향을 면들에 정합적으로 물려주기' 위한 장치다. 그 덕분에 $\\partial\\partial$을 펼치면 두 정점 $v_i,v_j$를 지운 각 $(n-2)$-면이 정확히 두 경로(먼저 $v_i$, 먼저 $v_j$)로 두 번 등장하되 부호가 항상 반대여서($v_j$를 먼저 지우면 뒤의 $v_i$ 위치가 한 칸 당겨져 부호가 뒤집힌다) 완벽히 소거된다 — 부호가 없다면 이 두 항은 같은 부호로 더해져 $\\partial^2\\ne0$이 되어 버린다. $\\partial^2=0$이 중요한 이유는 그것이 곧 $\\mathrm{Im}\\,\\partial_{n+1}\\subseteq\\mathrm{Ker}\\,\\partial_n$, 즉 '모든 경계는 순환'을 의미하기 때문이다. 몫군 $\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$은 나누는 쪽(경계)이 나뉘는 쪽(순환) 안에 부분군으로 들어 있을 때만 정의되므로, $\\partial^2=0$ 없이는 2.intro가 그린 '순환을 경계로 나눈 몫'이라는 호몰로지의 정의 자체가 성립하지 않는다. 요컨대 교대부호는 $\\partial^2=0$을 위해, $\\partial^2=0$은 호몰로지의 존재 자체를 위해 있는 것이다."
+        }
+      ]
+    }
+  ]
+}
