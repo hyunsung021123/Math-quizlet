@@ -138,13 +138,26 @@ def git(*args):
 
 
 def get_or_create_session_id(book, chapter):
+    """Returns (session_id, path, is_new). `is_new` is True iff this session
+    id was just minted this call -- `claude` only lets --resume attach to a
+    session that already exists server-side (fails with "No conversation
+    found ..." otherwise), so the caller MUST use --session-id (not --resume)
+    for that session's very first `gen()` call to actually create it.
+
+    Deliberately does NOT write the id to disk yet when new -- see
+    persist_session_id(). If that first establishing call fails (quota or
+    error) before we persist, the next run mints a fresh id and retries
+    establishment the same way, rather than being stuck trying --resume on
+    an id that was never actually created server-side."""
     path = os.path.join(PIPE, "work", book, f".claude_gen_session_id.ch{chapter}")
     if os.path.exists(path):
-        return open(path, encoding="utf-8").read().strip(), path
-    sid = str(uuid.uuid4())
+        return open(path, encoding="utf-8").read().strip(), path, False
+    return str(uuid.uuid4()), path, True
+
+
+def persist_session_id(path, sid):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, "w", encoding="utf-8").write(sid)
-    return sid, path
 
 
 def parse_next(txt):
@@ -174,18 +187,23 @@ def build_prompt(info):
 규약은 이 대화 처음에 준 시스템 프롬프트(pipeline/prompts/system_prompt.md의 시작~끝)를 그대로 따른다. 이 소단원 하나에 대한 유효한 JSON 객체 **하나만** 출력하라 — 코드펜스·설명·인사 없이 첫 글자 {{ 마지막 글자 }}. 본문 끝부분이 다음 소단원과 겹치면 무시하고 현재 소단원 범위 안에서 마무리하라. 이미 만든 이전 소단원과 중복되는 정의/정리는 다시 만들지 말고 "이전 소단원 핵심 결과"를 참조해 이어가라. chapter_info는 같은 챕터의 기존 data/*.json에 이미 쓰인 것과 동일하게 유지하라."""
 
 
-def gen(prompt, session_id):
+def gen(prompt, session_id, resume):
+    """resume=False uses --session-id (mints a brand-new session under that
+    exact id); resume=True uses --resume (attaches to one that already
+    exists). Passing the wrong one for a not-yet-created session fails with
+    `No conversation found with session ID: ...` and empty stdout."""
     sysprompt_path = os.path.join(PIPE, "prompts", "system_prompt.md")
     raw = open(sysprompt_path, encoding="utf-8").read()
     m = re.search(r"---8<--- 시스템 프롬프트 시작 ---8<---(.*?)---8<--- 시스템 프롬프트 끝 ---8<---", raw, re.S)
     sysprompt = m.group(1).strip()
     sysfile = os.path.join(PIPE, "work", "_tmp_sysprompt.txt")
     open(sysfile, "w", encoding="utf-8").write(sysprompt)
-    cmd = ["claude", "-p", prompt, "--resume", session_id, "--model", "opus",
+    session_flag = ["--resume", session_id] if resume else ["--session-id", session_id]
+    cmd = ["claude", "-p", prompt, *session_flag, "--model", "opus",
            "--output-format", "text", "--allowedTools", "Read",
            "--append-system-prompt-file", sysfile]
     r = run(cmd, cwd=REPO, stdin=subprocess.DEVNULL)
-    return r.stdout or ""
+    return (r.stdout or ""), (r.stderr or "")
 
 
 def parse_quota_reset(raw):
@@ -247,6 +265,7 @@ def main():
     done = 0
     current_chapter = None
     sid = None
+    sid_established = False
     while args.max is None or done < args.max:
         nx = track(args.book, "next")
         info = parse_next(nx.stdout)
@@ -260,16 +279,17 @@ def main():
             break
         if info["chapter"] != current_chapter:
             current_chapter = info["chapter"]
-            sid, sid_path = get_or_create_session_id(args.book, current_chapter)
+            sid, sid_path, sid_is_new = get_or_create_session_id(args.book, current_chapter)
+            sid_established = not sid_is_new
             log(f"-- switched to chapter {current_chapter} dedicated session "
-                f"{sid} ({sid_path}) --")
+                f"{sid} ({sid_path}, {'existing' if sid_established else 'brand new, not yet persisted'}) --")
         seq = info["seq"]
         log(f"\n--- seq {seq}: generating ---")
-        raw = gen(build_prompt(info), sid)
+        raw, err = gen(build_prompt(info), sid, resume=sid_established)
         raw_dump = os.path.join(PIPE, "work", args.book, f"_gen_raw_{seq}.txt")
-        open(raw_dump, "w", encoding="utf-8").write(raw)
+        open(raw_dump, "w", encoding="utf-8").write(raw + ("\n--- stderr ---\n" + err if err else ""))
 
-        reset_at = parse_quota_reset(raw)
+        reset_at = parse_quota_reset(raw) or parse_quota_reset(err)
         if reset_at is not None:
             log(f"seq {seq}: hit subscription session limit. "
                 f"QUOTA_RESET_AT={reset_at.isoformat()}")
@@ -280,9 +300,15 @@ def main():
         data, msg = extract_validate(raw)
         if data is None:
             log(f"seq {seq} FAILED: {msg}")
+            if err:
+                log(f"stderr: {err[:500]}")
             log("Repo state unchanged; this needs a human look (not a quota "
                 "issue) before retrying.")
             sys.exit(EXIT_ERROR)
+        if not sid_established:
+            persist_session_id(sid_path, sid)
+            sid_established = True
+            log(f"chapter {current_chapter} session {sid} established and persisted.")
         json.dump(data, open(info["save"], "w", encoding="utf-8"),
                    ensure_ascii=False, indent=2)
         log(f"seq {seq} validated ({msg}), saved.")

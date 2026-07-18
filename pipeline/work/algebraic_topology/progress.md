@@ -47,7 +47,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 029 | [ ] | 2.intro 개관 (챕터 도입부) | intro | `029__AlgebraicTopol__2_intro_개관챕터도입부.txt` |
+| 029 | [x] | 2.intro 개관 (챕터 도입부) | intro | `029__AlgebraicTopol__2_intro_개관챕터도입부.txt` |
 | 030 | [ ] | 2.1 Simplicial and Singular Homology | section | `030__AlgebraicTopol__2_1_SimplicialandSingularHomol.txt` |
 | 031 | [ ] | 2.1.1 Δ-Complexes | section | `031__AlgebraicTopol__2_1_1_-Complexes.txt` |
 | 032 | [ ] | 2.1.2 Simplicial Homology | section | `032__AlgebraicTopol__2_1_2_SimplicialHomology.txt` |

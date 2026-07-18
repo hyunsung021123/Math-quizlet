@@ -29,6 +29,12 @@
       "title": "1. Preliminaries to Complex Analysis",
       "file": "1_preliminaries_to_complex_analysis.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "chapter_2_homology",
+      "title": "Chapter 2. Homology",
+      "file": "chapter_2_homology.json",
+      "book": "Hatcher — Algebraic Topology"
     }
   ]
 }
