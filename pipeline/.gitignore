@@ -12,6 +12,11 @@ work/*/.claude_gen_session_id.ch*
 work/*/_gen_raw_*.txt
 work/_tmp_sysprompt.txt
 
+# auto_cycle.py의 로컬 실행 상태(로그·알림·작업 스케줄러용 배치 파일) — machine-local, 커밋 안 함
+work/_auto_cycle.log
+work/_NEEDS_ATTENTION.txt
+run_auto_cycle.bat
+
 # python 캐시
 __pycache__/
 *.pyc

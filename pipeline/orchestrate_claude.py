@@ -31,19 +31,32 @@ dedicated session) -> extract/validate JSON -> save to chapter_raw/ ->
 program2_track.py submit -> git add/commit/push (dev branch), matching the
 "commit and push directly to dev" policy in CLAUDE.md.
 
-Stops immediately (without corrupting state) on: validation error, submit
-error, or unparseable `claude` output (e.g. hit the subscription's session
-quota -- message reads "You've hit your session limit ... resets <time>").
-Rerun the same command afterwards; already-submitted pieces are skipped
-automatically by `program2_track.py next` continuing from where it left off.
+Stops immediately (without corrupting state) on validation error, submit
+error, or hitting the subscription's own session-limit message ("You've hit
+your session limit ... resets <time>"). These are distinguished via exit
+code (see EXIT_OK/EXIT_ERROR/EXIT_QUOTA below) so a caller -- notably
+auto_cycle.py -- can tell "safe to retry after <time>" (quota) apart from
+"needs a human to look at this" (error) without re-deriving that from raw
+output. On EXIT_QUOTA, stdout also has a `QUOTA_RESET_AT=<ISO8601>` line.
+Rerun the same command afterwards regardless; already-submitted pieces are
+skipped automatically by `program2_track.py next` continuing from where it
+left off.
 """
 import argparse
+import datetime
 import json
 import os
 import re
 import subprocess
 import sys
 import uuid
+
+# Exit codes auto_cycle.py (and any other caller) can rely on to tell a
+# quota stop from a genuine error, since both otherwise look like "no JSON
+# in `claude`'s output":
+EXIT_OK = 0          # book exhausted / --max reached / chapter boundary reached
+EXIT_ERROR = 1       # validation/submit error or unexplained bad output -- needs a human
+EXIT_QUOTA = 2       # hit the subscription's own session-limit message -- safe to retry later
 
 PIPE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(PIPE)
@@ -175,6 +188,32 @@ def gen(prompt, session_id):
     return r.stdout or ""
 
 
+def parse_quota_reset(raw):
+    """If `raw` is (or contains) the subscription's own session-limit notice
+    (e.g. "You've hit your session limit · resets 7:30pm (Asia/Seoul)"),
+    return the next datetime.datetime that time refers to (today, or tomorrow
+    if that clock time has already passed today), else return None.
+
+    Assumes the local machine clock is already in the timezone `claude` prints
+    (this repo's dev machine is Asia/Seoul and system time matches it).
+    """
+    if "session limit" not in raw.lower():
+        return None
+    m = re.search(r"resets\s+(\d{1,2}):(\d{2})\s*([ap]m)", raw, re.I)
+    if not m:
+        return None
+    hour, minute, ampm = int(m.group(1)), int(m.group(2)), m.group(3).lower()
+    if ampm == "pm" and hour != 12:
+        hour += 12
+    if ampm == "am" and hour == 12:
+        hour = 0
+    now = datetime.datetime.now()
+    target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+    if target <= now:
+        target += datetime.timedelta(days=1)
+    return target
+
+
 def extract_validate(raw):
     from lib import merger
     s, e = raw.find("{"), raw.rfind("}")
@@ -229,19 +268,28 @@ def main():
         raw = gen(build_prompt(info), sid)
         raw_dump = os.path.join(PIPE, "work", args.book, f"_gen_raw_{seq}.txt")
         open(raw_dump, "w", encoding="utf-8").write(raw)
+
+        reset_at = parse_quota_reset(raw)
+        if reset_at is not None:
+            log(f"seq {seq}: hit subscription session limit. "
+                f"QUOTA_RESET_AT={reset_at.isoformat()}")
+            log("Repo state unchanged (nothing written for this piece); "
+                "safe to retry after that time.")
+            sys.exit(EXIT_QUOTA)
+
         data, msg = extract_validate(raw)
         if data is None:
             log(f"seq {seq} FAILED: {msg}")
-            log("Repo state unchanged; rerun this script later to retry "
-                "(e.g. after a subscription session-limit reset).")
-            break
+            log("Repo state unchanged; this needs a human look (not a quota "
+                "issue) before retrying.")
+            sys.exit(EXIT_ERROR)
         json.dump(data, open(info["save"], "w", encoding="utf-8"),
                    ensure_ascii=False, indent=2)
         log(f"seq {seq} validated ({msg}), saved.")
         sub = track(args.book, "submit", "--json", info["save"])
         if "✗" in sub.stdout or "저장하지 않" in sub.stdout:
             log(f"seq {seq} submit reported errors:\n{sub.stdout[-800:]}")
-            break
+            sys.exit(EXIT_ERROR)
         sect_m = re.search(r"현재 소단원:\s*(.+)", info["header"])
         sect = sect_m.group(1).strip() if sect_m else seq
         git("add", "-A")
@@ -252,6 +300,7 @@ def main():
         log(f"seq {seq} submitted + committed + pushed. ({sect})")
         done += 1
     log(f"===== orchestrator done: {done} piece(s) this run =====")
+    sys.exit(EXIT_OK)
 
 
 if __name__ == "__main__":

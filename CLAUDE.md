@@ -167,19 +167,49 @@ Key mechanics to know before touching or rerunning this:
   by whatever chat session invoked the orchestrator or by other chapters/books.
   If these session-id files are ever missing on a fresh machine/clone, the orchestrator just creates fresh
   ones — content generation still works, it only loses that chapter's accumulated generation-session context.
-- **Stops, doesn't corrupt, on failure**: a validation error, a `submit` error, or unparseable `claude`
-  output (most commonly the subscription's own message `"You've hit your session limit ... resets <time>"`)
-  halts the loop before writing anything broken. Just rerun the same command later (e.g. after the quota
-  reset time shown in the failure) — `program2_track.py next` picks up exactly where it left off.
+- **Stops, doesn't corrupt, on failure**: a validation error, a `submit` error, or the subscription's own
+  session-limit message halts the loop before writing anything broken, and exits with a distinct code
+  (`EXIT_QUOTA`=2 for the session-limit case, `EXIT_ERROR`=1 for a real error, `EXIT_OK`=0 otherwise) plus a
+  `QUOTA_RESET_AT=<ISO8601>` stdout line on the quota case — see `auto_cycle.py` below, which relies on this
+  distinction to decide whether to auto-retry or stop and flag for a human.
 - **`--chapter N`**: stop once the next piece would leave chapter `N` — use this to pause at a natural
   checkpoint (e.g. finish chapter 1, then re-evaluate) rather than running unattended through an entire book.
 - Encoding: this repo's Python pipeline scripts print Korean text with em-dashes etc. to stdout; on Windows
   the orchestrator forces UTF-8 on its own stdout/stderr to avoid `cp949` `UnicodeEncodeError` crashes —
-  keep that `reconfigure()` call if you edit the script.
+  keep that `reconfigure()` call if you edit the script. Native Windows console tools invoked as subprocesses
+  (`schtasks`, not this repo's own Python scripts) print in the system's ANSI codepage instead (`cp949` on a
+  ko-KR machine) — capture their output with `encoding="mbcs", errors="replace"`, not `"utf-8"`, or the
+  subprocess capture itself throws `UnicodeDecodeError` (see `auto_cycle.py`'s `schedule_next_run()`).
 - Quality note: before scaling this up on a new book/chapter, generate one piece and sanity-check it
   against the schema/style of an already-completed neighboring piece (e.g. diff the `step2_rigorous_logic`
   block count, check for content overlap with the immediately preceding piece) rather than assuming the
   first output is representative.
+
+### Unattended operation across quota resets (`pipeline/auto_cycle.py`)
+
+The Claude subscription's own usage quota resets on a rolling ~5h window, not a fixed schedule — the
+`claude` CLI reports the *exact* reset time in its own limit message when hit. Don't schedule blind
+fixed-interval reruns (e.g. "every 5 hours") to work around this; `auto_cycle.py` instead parses that exact
+time and self-reschedules a one-shot Windows Scheduled Task for a few minutes after it, so the chain always
+wakes close to the real reset regardless of when the quota window actually started:
+
+```
+python pipeline/auto_cycle.py [--book <name>]   # default: cycle through every book under pipeline/work/
+```
+
+- Runs `orchestrate_claude.py` per book, in order, until a book is fully generated (moves to the next one),
+  a quota hit occurs (registers the Scheduled Task `MathQuizletAutoCycle` for `reset_time + 4min`, running
+  `pipeline/run_auto_cycle.bat`, then exits — the quota is subscription-wide, so it doesn't bother trying
+  the remaining books this round), or a genuine error occurs (writes `pipeline/work/_NEEDS_ATTENTION.txt`,
+  best-effort desktop popup, and **does not reschedule** — auto-retrying a real error would just burn the
+  next quota window repeating the same failure).
+- Bootstrapping or resuming the chain (first time, or after fixing a `_NEEDS_ATTENTION.txt` issue) is just
+  running the command above once by hand; from then on it keeps itself going with no further action needed.
+- Stopping the chain permanently: `schtasks /Delete /TN MathQuizletAutoCycle /F` (from PowerShell — Git
+  Bash's MSYS layer mangles `/`-prefixed args into path conversions; run schtasks itself from PowerShell, or
+  from Python via `subprocess.run([...])` with an argv list, which bypasses that shell entirely).
+- Progress/decisions land in `pipeline/work/_auto_cycle.log`; check there (or `_NEEDS_ATTENTION.txt`) for
+  what happened between chat sessions rather than assuming silence means it's still running fine.
 
 ## Git workflow
 
