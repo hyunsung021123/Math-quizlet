@@ -33,6 +33,18 @@ To bootstrap the chain for the first time (or restart it after fixing a
 _NEEDS_ATTENTION.txt issue), just run this script once by hand; from then on
 it re-invokes itself via Windows Task Scheduler with no further action needed.
 To stop the chain permanently: `schtasks /Delete /TN MathQuizletAutoCycle /F`.
+
+Pausing to reclaim the subscription for interactive use (e.g. you want to use
+Claude Code yourself right now, and don't want a scheduled run competing for
+the same session/usage quota): create `work/_PAUSE` (any content, even an
+empty file). orchestrate_claude.py checks it once per piece and backs off
+between pieces (never mid-generation, so nothing is ever killed uncommitted);
+if a scheduled run fires while it exists, this script itself checks it before
+touching anything and just logs + exits, not rescheduling. Neither path
+deletes the Windows Scheduled Task entry, if one is currently pending -- it
+will fire, see the pause file, and no-op. Delete work/_PAUSE and rerun this
+script by hand whenever you want the chain going again -- exactly like
+resuming after a _NEEDS_ATTENTION.txt fix.
 """
 import argparse
 import datetime
@@ -140,6 +152,12 @@ def main():
                      help="process only this book (still self-reschedules); default: all books")
     args = ap.parse_args()
 
+    if os.path.exists(oc.PAUSE_FILE):
+        log(f"pause file found ({oc.PAUSE_FILE}) at chain start -- doing nothing "
+            "this run and not rescheduling. Delete it and rerun `auto_cycle.py` "
+            "by hand to resume the chain.")
+        return
+
     books = [oc.resolve_book(args.book)] if args.book else discover_books()
     log(f"===== auto_cycle start, books={books} =====")
 
@@ -148,6 +166,11 @@ def main():
         rc, out = process_book(book)
         tail = out[-1500:]
         log(f"orchestrate_claude.py[{book}] exit={rc}\n{tail}")
+
+        if rc == oc.EXIT_PAUSED:
+            log(f"book '{book}' paused mid-run (work/_PAUSE present). Not rescheduling. "
+                "Delete the pause file and rerun `auto_cycle.py` by hand to resume the chain.")
+            return
 
         if rc == oc.EXIT_QUOTA:
             m = re.search(r"QUOTA_RESET_AT=(\S+)", out)

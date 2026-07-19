@@ -3,7 +3,7 @@
 """Dedicated-session orchestrator for the PDL content pipeline.
 
 Generates each remaining section's JSON by calling the `claude` CLI itself
-(`claude -p --resume <session-id> --model opus`), using the SAME Claude Code
+(`claude -p --resume <session-id> --model opus --effort high`), using the SAME Claude Code
 subscription this repo's sessions already run under -- no separate API key,
 no per-token billing. Pieces are generated inside a session dedicated to their
 (book, chapter) pair (see .claude_gen_session_id.ch<N> below) so the
@@ -34,13 +34,19 @@ program2_track.py submit -> git add/commit/push (dev branch), matching the
 Stops immediately (without corrupting state) on validation error, submit
 error, or hitting the subscription's own session-limit message ("You've hit
 your session limit ... resets <time>"). These are distinguished via exit
-code (see EXIT_OK/EXIT_ERROR/EXIT_QUOTA below) so a caller -- notably
-auto_cycle.py -- can tell "safe to retry after <time>" (quota) apart from
-"needs a human to look at this" (error) without re-deriving that from raw
-output. On EXIT_QUOTA, stdout also has a `QUOTA_RESET_AT=<ISO8601>` line.
+code (see EXIT_OK/EXIT_ERROR/EXIT_QUOTA/EXIT_PAUSED below) so a caller --
+notably auto_cycle.py -- can tell "safe to retry after <time>" (quota) apart
+from "needs a human to look at this" (error) without re-deriving that from
+raw output. On EXIT_QUOTA, stdout also has a `QUOTA_RESET_AT=<ISO8601>` line.
 Rerun the same command afterwards regardless; already-submitted pieces are
 skipped automatically by `program2_track.py next` continuing from where it
 left off.
+
+Also stops (EXIT_PAUSED) between pieces if `work/_PAUSE` exists -- create
+that file (any content, even empty) to make a running/scheduled chain back
+off the next time it checks, without killing anything mid-piece; delete it
+and rerun to resume. See auto_cycle.py's module docstring for how this
+interacts with the self-rescheduling chain.
 """
 import argparse
 import datetime
@@ -57,10 +63,21 @@ import uuid
 EXIT_OK = 0          # book exhausted / --max reached / chapter boundary reached
 EXIT_ERROR = 1       # validation/submit error or unexplained bad output -- needs a human
 EXIT_QUOTA = 2       # hit the subscription's own session-limit message -- safe to retry later
+EXIT_PAUSED = 3      # PAUSE_FILE was present -- user wants the chain to back off, not an error
 
 PIPE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(PIPE)
 sys.path.insert(0, PIPE)
+
+# Sentinel file checked once per piece (see main()'s loop) so a human -- or a
+# chat session on behalf of the human -- can pause generation between pieces
+# without killing the process: create this file, the current piece finishes
+# and commits normally, then the run exits EXIT_PAUSED instead of starting the
+# next piece. Delete it and rerun (orchestrate_claude.py or auto_cycle.py) to
+# resume; auto_cycle.py treats EXIT_PAUSED like EXIT_ERROR for scheduling
+# purposes (does not reschedule itself) but without the _NEEDS_ATTENTION.txt/
+# popup noise, since this is an intentional pause, not a failure.
+PAUSE_FILE = os.path.join(PIPE, "work", "_PAUSE")
 
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -199,7 +216,7 @@ def gen(prompt, session_id, resume):
     sysfile = os.path.join(PIPE, "work", "_tmp_sysprompt.txt")
     open(sysfile, "w", encoding="utf-8").write(sysprompt)
     session_flag = ["--resume", session_id] if resume else ["--session-id", session_id]
-    cmd = ["claude", "-p", prompt, *session_flag, "--model", "opus",
+    cmd = ["claude", "-p", prompt, *session_flag, "--model", "opus", "--effort", "high",
            "--output-format", "text", "--allowedTools", "Read",
            "--append-system-prompt-file", sysfile]
     r = run(cmd, cwd=REPO, stdin=subprocess.DEVNULL)
@@ -267,6 +284,10 @@ def main():
     sid = None
     sid_established = False
     while args.max is None or done < args.max:
+        if os.path.exists(PAUSE_FILE):
+            log(f"pause file found ({PAUSE_FILE}) -- stopping before the next piece "
+                f"({done} piece(s) done this run). Delete it and rerun to resume.")
+            sys.exit(EXIT_PAUSED)
         nx = track(args.book, "next")
         info = parse_next(nx.stdout)
         if not info:
