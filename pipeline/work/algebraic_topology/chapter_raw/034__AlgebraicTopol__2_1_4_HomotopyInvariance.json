@@ -1,0 +1,162 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.1.4 호모토피 불변성 (Homotopy Invariance)",
+      "step1_big_picture": {
+        "context": "2.1.3에서 특이 호몰로지 $H_n(X)$가 정의만으로 위상동형 불변임을 봤다. 이제 이 절은 이 장의 첫 실질적 정리를 증명한다: 호모토피 동치인 공간은 동형인 호몰로지군을 갖는다(정리 2.10, 따름정리 2.11). 이는 위상동형 불변성보다 훨씬 강력하다 — 축약가능(contractible) 공간은 자명한 축소 호몰로지를 갖고, 변형수축(deformation retract)은 호몰로지를 보존하므로, $\\mathbb{R}^n$이나 원판 같은 공간을 즉시 계산할 수 있다. 증명의 뼈대는 두 단계다: (1) 사상 $f:X\\to Y$가 사슬사상(chain map) $f_\\#$을 유도하고, 이것이 다시 호몰로지 준동형 $f_*:H_n(X)\\to H_n(Y)$을 유도한다(명제 2.9, 함자성). (2) 호모토피한 두 사상은 사슬호모토피(chain homotopy)한 사슬사상을 유도하므로 호몰로지에서 같은 준동형을 준다(정리 2.10, 명제 2.12).",
+        "hidden_intuition": "핵심은 '기둥(prism)'이다. 호모토피 $F:X\\times I\\to Y$는 각 특이 단체 $\\sigma$를 시간에 따라 쓸고 지나가며 기둥 $\\Delta^n\\times I$를 그린다. 이 기둥의 경계는 눈으로 보면 '윗면 $-$ 아랫면 $-$ 옆면' — 윗면은 $g\\circ\\sigma$, 아랫면은 $f\\circ\\sigma$, 옆면은 $\\partial\\Delta^n\\times I$다. 이 기하가 대수식 $\\partial P+P\\partial=g_\\#-f_\\#$로 그대로 번역된다: 두 끝($g_\\#,f_\\#$)의 차이가 '기둥을 채운 것의 경계'($\\partial P$)와 '옆면에서 오는 항'($P\\partial$)의 합이다. 순환에서는 $\\partial\\alpha=0$이라 $P\\partial$가 사라지고 차이가 순수한 경계가 되어 호몰로지에서 $0$이 된다. 유일하게 기술적인 장애물은 '단체 곱하기 구간'이 단체가 아니라는 것 — 그래서 기둥 $\\Delta^n\\times I$를 대각으로 비스듬히 잘라 $(n+1)$개의 진짜 단체 $[v_0,\\dots,v_i,w_i,\\dots,w_n]$로 삼각분할한다. 사슬호모토피 $P$는 결국 '기둥을 채워 넣는 조작'의 대수적 그림자다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (유도 사슬사상 $f_\\#$과 사슬사상)",
+          "formal_statement": "사상 $f:X\\to Y$에 대해 유도 준동형 $f_\\#:C_n(X)\\to C_n(Y)$을 각 특이 $n$-단체 $\\sigma:\\Delta^n\\to X$을 $f$와 합성해 $f_\\#(\\sigma)=f\\circ\\sigma$로 두고 선형확장 $f_\\#(\\sum_i n_i\\sigma_i)=\\sum_i n_i(f\\circ\\sigma_i)$으로 정의한다. 그러면 $$f_\\#\\partial=\\partial f_\\#$$ 이 성립한다. 실제로 $$f_\\#\\partial(\\sigma)=f_\\#\\Big(\\sum_i(-1)^i\\sigma|_{[v_0,\\dots,\\widehat{v}_i,\\dots,v_n]}\\Big)=\\sum_i(-1)^i f\\circ\\sigma|_{[v_0,\\dots,\\widehat{v}_i,\\dots,v_n]}=\\partial f_\\#(\\sigma).$$ 이 관계식 $f_\\#\\partial=\\partial f_\\#$을 만족하는 준동형족을 사슬사상(chain map)이라 하며, 이는 각 정사각형에서 두 경로의 합성이 같은 가환도식(commutative diagram)으로 표현된다.",
+          "idea_behind_proof": "$f_\\#$이 경계와 교환하는 이유는 단순하다 — $f$를 합성하는 것과 '면을 취하는 것'은 서로 독립적인 조작이라 순서를 바꿔도 결과가 같다. 즉 '먼저 $X$에서 면을 취해 $f$로 보내기'와 '먼저 $f$로 보낸 뒤 $Y$에서 면을 취하기'가 같다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.9 (사슬사상은 호몰로지 준동형을 유도)",
+          "formal_statement": "사슬 복합체 사이의 사슬사상은 두 복합체의 호몰로지군 사이의 준동형을 유도한다. 특히 $f:X\\to Y$은 각 $n$에 대해 $f_*:H_n(X)\\to H_n(Y)$을 유도한다. 또한 함자성이 성립한다: 합성 $X\\xrightarrow{g}Y\\xrightarrow{f}Z$에 대해 $(fg)_*=f_*g_*$이고, 항등사상에 대해 $\\mathbb{1}_*=\\mathbb{1}$이다.",
+          "idea_behind_proof": "관계식 $f_\\#\\partial=\\partial f_\\#$ 하나가 모든 것을 보증한다. 이 식은 $f_\\#$이 순환을 순환으로, 경계를 경계로 보냄을 뜻하므로 몫인 호몰로지로 잘 내려간다. 함자성 $(fg)_*=f_*g_*$는 합성의 결합법칙 $\\Delta^n\\xrightarrow{\\sigma}X\\xrightarrow{g}Y\\xrightarrow{f}Z$에서 곧바로 나온다.",
+          "proof_steps": [
+            "1단계 (순환→순환): $\\partial\\alpha=0$이면 $\\partial(f_\\#\\alpha)=f_\\#(\\partial\\alpha)=f_\\#(0)=0$이므로 $f_\\#\\alpha$도 순환.",
+            "2단계 (경계→경계): $f_\\#(\\partial\\beta)=\\partial(f_\\#\\beta)$이므로 경계는 경계로 간다.",
+            "3단계: 따라서 $f_\\#$은 $\\mathrm{Ker}\\,\\partial_n$을 $\\mathrm{Ker}\\,\\partial_n$으로, $\\mathrm{Im}\\,\\partial_{n+1}$을 $\\mathrm{Im}\\,\\partial_{n+1}$으로 보내 몫 $H_n=\\mathrm{Ker}/\\mathrm{Im}$에서 잘 정의된 $f_*$을 유도한다. 함자성은 $(fg)_\\#=f_\\# g_\\#$과 $\\mathbb{1}_\\#=\\mathbb{1}$에서 따라온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.10 (호모토피 불변성)",
+          "formal_statement": "두 사상 $f,g:X\\to Y$가 호모토피하면 이들은 호몰로지에서 같은 준동형을 유도한다: 모든 $n$에 대해 $f_*=g_*:H_n(X)\\to H_n(Y)$.",
+          "idea_behind_proof": "호모토피 $F:X\\times I\\to Y$가 각 단체를 쓸어 만드는 기둥 $\\Delta^n\\times I$를 삼각분할한 뒤, 그 기둥을 '채우는' 조작을 대수화한 기둥연산자(prism operator) $P$를 만든다. 기둥의 경계가 '윗면 $-$ 아랫면 $-$ 옆면'이라는 기하가 정확히 $\\partial P+P\\partial=g_\\#-f_\\#$로 번역되고, 순환에서는 옆면 항 $P\\partial$이 사라져 두 끝의 차가 경계가 된다.",
+          "proof_steps": [
+            "1단계 (기둥의 삼각분할): $\\Delta^n\\times\\{0\\}=[v_0,\\dots,v_n]$, $\\Delta^n\\times\\{1\\}=[w_0,\\dots,w_n]$($v_i,w_i$는 사영으로 같은 상)이라 하면, $\\Delta^n\\times I$는 $(n+1)$개의 단체 $[v_0,\\dots,v_i,w_i,\\dots,w_n]$ ($i=0,\\dots,n$)의 합집합이며 이웃한 둘은 $n$-단체 면에서 만난다.",
+            "2단계 (기둥연산자 정의): 호모토피 $F$에 대해 $P:C_n(X)\\to C_{n+1}(Y)$을 $$P(\\sigma)=\\sum_i(-1)^i\\,F\\circ(\\sigma\\times\\mathbb{1})\\big|_{[v_0,\\dots,v_i,w_i,\\dots,w_n]}$$ 로 정의한다(여기서 $F\\circ(\\sigma\\times\\mathbb{1}):\\Delta^n\\times I\\to X\\times I\\to Y$).",
+            "3단계 (기본 관계식): $\\partial P(\\sigma)$와 $P\\partial(\\sigma)$을 전개하면, $\\partial P$의 $i=j$ 항들이 (옆면 소거 후) 윗면 $g\\circ\\sigma=g_\\#(\\sigma)$와 아랫면 $-f\\circ\\sigma=-f_\\#(\\sigma)$만 남기고, $i\\ne j$ 항들이 정확히 $-P\\partial(\\sigma)$(옆면 $\\partial\\Delta^n\\times I$)와 같다. 따라서 $$\\partial P=g_\\#-f_\\#-P\\partial,\\qquad\\text{즉}\\qquad \\partial P+P\\partial=g_\\#-f_\\#.$$",
+            "4단계 (결론): $\\alpha\\in C_n(X)$가 순환($\\partial\\alpha=0$)이면 $$g_\\#(\\alpha)-f_\\#(\\alpha)=\\partial P(\\alpha)+P\\partial(\\alpha)=\\partial P(\\alpha),$$ 즉 두 끝의 차가 경계다. 그러므로 $f_\\#(\\alpha)$와 $g_\\#(\\alpha)$는 같은 호몰로지류를 결정하고 $f_*=g_*$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                0,
+                0
+              ],
+              [
+                2.6,
+                0
+              ],
+              [
+                0,
+                2.3
+              ],
+              [
+                2.6,
+                2.3
+              ]
+            ],
+            "vertex_labels": [
+              "v_0",
+              "v_1",
+              "w_0",
+              "w_1"
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1
+              },
+              {
+                "from": 2,
+                "to": 3
+              },
+              {
+                "from": 0,
+                "to": 2
+              },
+              {
+                "from": 1,
+                "to": 3
+              },
+              {
+                "from": 0,
+                "to": 3
+              }
+            ],
+            "faces": [
+              {
+                "vertices": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "vertices": [
+                  0,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "caption": "$n=1$ 기둥 $\\Delta^1\\times I$의 삼각분할: 대각선 $[v_0,w_1]$로 두 $2$-단체 $[v_0,v_1,w_1]$과 $[v_0,w_0,w_1]$로 자른다. 아랫변 $[v_0,v_1]$이 $f$, 윗변 $[w_0,w_1]$이 $g$. 일반 $n$에서는 $(n+1)$개의 단체로 쪼갠다."
+          }
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (사슬호모토피)와 명제 2.12",
+          "formal_statement": "관계식 $\\partial P+P\\partial=g_\\#-f_\\#$을 만족하는 준동형족 $P:C_n(X)\\to C_{n+1}(Y)$을 사슬사상 $f_\\#$과 $g_\\#$ 사이의 사슬호모토피(chain homotopy)라 하고, 이때 $f_\\#$과 $g_\\#$을 사슬호모토피하다고 한다. 명제 2.12: 사슬호모토피한 사슬사상은 호몰로지에서 같은 준동형을 유도한다. (축소 호몰로지에서도 $f_\\#\\varepsilon=\\varepsilon f_\\#$ 덕분에 유도 준동형 $f_*:\\widetilde{H}_n(X)\\to\\widetilde{H}_n(Y)$이 존재하며 위 성질들이 같은 증명으로 성립한다.)",
+          "idea_behind_proof": "정리 2.10의 4단계가 곧 명제 2.12의 증명이다 — 순환 $\\alpha$에서 $g_\\#\\alpha-f_\\#\\alpha=\\partial P\\alpha$가 경계이므로 두 사슬사상이 호몰로지류를 똑같이 보낸다. '사슬호모토피'는 이 논증이 통하는 최소 조건을 추상화한 이름이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 2.11 (호모토피 동치는 동형을 유도)",
+          "formal_statement": "호모토피 동치 $f:X\\to Y$이 유도하는 $f_*:H_n(X)\\to H_n(Y)$은 모든 $n$에서 동형이다. 예를 들어 $X$가 축약가능(contractible)이면 모든 $n$에서 $\\widetilde{H}_n(X)=0$이다.",
+          "idea_behind_proof": "호모토피 역사상 $h$를 잡으면 $fh\\simeq\\mathbb{1}$, $hf\\simeq\\mathbb{1}$이다. 정리 2.10(호모토피 불변)과 함자성 $(fg)_*=f_*g_*$, $\\mathbb{1}_*=\\mathbb{1}$을 결합하면 $f_*$과 $h_*$이 서로 역이 되어 동형이 된다.",
+          "proof_steps": [
+            "1단계: 호모토피 역 $h:Y\\to X$에 대해 $f_*h_*=(fh)_*=\\mathbb{1}_*=\\mathbb{1}$ (정리 2.10으로 $fh\\simeq\\mathbb{1}$의 유도사상이 항등).",
+            "2단계: 마찬가지로 $h_*f_*=(hf)_*=\\mathbb{1}_*=\\mathbb{1}$. 따라서 $f_*$은 양쪽 역을 가진 동형.",
+            "3단계 (축약가능): $X$가 한 점으로 축약가능하면 항등 $\\mathbb{1}_X$이 상수사상과 호모토피하므로 $\\widetilde{H}_n(X)$에서 $\\mathbb{1}=(\\text{상수})_*$. 상수사상은 점을 거쳐 분해되고 점은 $\\widetilde{H}_n=0$(명제 2.8의 축소판)이므로 항등이 영사상, 즉 $\\widetilde{H}_n(X)=0$. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "따름정리 2.11을 써서 $\\mathbb{R}^n$(또는 임의의 볼록집합)의 모든 특이 호몰로지군 $H_k(\\mathbb{R}^n)$과 축소 호몰로지군 $\\widetilde{H}_k(\\mathbb{R}^n)$을 구하라.",
+          "hint": "$\\mathbb{R}^n$은 한 점으로 축약가능하다(직선 호모토피 $F(x,t)=(1-t)x$). 축약가능 공간의 축소 호몰로지가 무엇인지 떠올리고, $H_0\\cong\\widetilde{H}_0\\oplus\\mathbb{Z}$로 되돌리라.",
+          "solution": "$\\mathbb{R}^n$은 축약가능하므로 따름정리 2.11에 의해 모든 $k$에서 $\\widetilde{H}_k(\\mathbb{R}^n)=0$. 되돌리면 $$H_0(\\mathbb{R}^n)\\cong\\widetilde{H}_0\\oplus\\mathbb{Z}\\cong\\mathbb{Z},\\qquad H_k(\\mathbb{R}^n)=0\\ (k>0).$$ 즉 $\\mathbb{R}^n$은 (경로연결이라 $H_0=\\mathbb{Z}$일 뿐) 아무 구멍도 없다. 일반화: 호모토피 동치는 호몰로지를 보존하므로, 변형수축하는 어떤 공간이든 그 수축점(또는 부분공간)의 호몰로지로 계산된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "기둥연산자의 기본 관계식 $\\partial P+P\\partial=g_\\#-f_\\#$이 주어졌다고 하자. 이로부터 호모토피한 두 사상 $f\\simeq g$가 호몰로지에서 같은 준동형을 유도함($f_*=g_*$)을 유도하라 — 즉 정리 2.10 증명의 마지막 논리를 채워라.",
+          "hint": "$H_n$의 원소는 순환 $\\alpha$($\\partial\\alpha=0$)의 호몰로지류다. 관계식에 $\\partial\\alpha=0$을 대입해 $g_\\#\\alpha-f_\\#\\alpha$이 무엇이 되는지 보라.",
+          "solution": "$\\alpha$를 순환($\\partial\\alpha=0$)이라 하자. 관계식에 대입하면 $$g_\\#(\\alpha)-f_\\#(\\alpha)=\\partial P(\\alpha)+P\\partial(\\alpha)=\\partial P(\\alpha)+P(0)=\\partial P(\\alpha).$$ 즉 $g_\\#(\\alpha)-f_\\#(\\alpha)$은 경계($\\mathrm{Im}\\,\\partial_{n+1}$의 원소)다. 따라서 몫 $H_n=\\mathrm{Ker}\\,\\partial_n/\\mathrm{Im}\\,\\partial_{n+1}$에서 $[g_\\#\\alpha]=[f_\\#\\alpha]$, 곧 모든 호몰로지류에서 $g_*=f_*$. 핵심: 사슬 수준에서 $f_\\#,g_\\#$은 다를 수 있지만, 그 차이가 항상 경계($\\partial P$)여서 호몰로지에서 소멸한다."
+        },
+        {
+          "type": "ox",
+          "question": "위상동형이 아니더라도 호모토피 동치인 두 공간은 모든 차원에서 동형인 호몰로지군을 갖는다.",
+          "answer": "O",
+          "explanation": "따름정리 2.11이 정확히 이를 말한다: 호모토피 동치 $f$가 유도하는 $f_*$이 모든 $n$에서 동형이다. 예컨대 $\\mathbb{R}^n$과 한 점, 또는 메비우스 띠와 원 $S^1$은 위상동형이 아니지만 호모토피 동치라 같은 호몰로지를 갖는다. 이 강력함 덕분에 호몰로지가 실제로 계산 가능한 도구가 된다(변형수축으로 공간을 단순화)."
+        },
+        {
+          "type": "ox",
+          "question": "축약가능(contractible) 공간 $X$는 $n=0$을 포함한 모든 $n\\ge0$에서 $H_n(X)=0$이다.",
+          "answer": "X",
+          "explanation": "축약가능 공간에서 $0$이 되는 것은 축소 호몰로지 $\\widetilde{H}_n(X)$이다($n\\ge0$ 전부). 통상 호몰로지에서는 $H_0(X)\\cong\\mathbb{Z}$(경로연결이므로)이고 $H_n(X)=0$은 $n>0$에서만 성립한다. $H_0\\cong\\widetilde{H}_0\\oplus\\mathbb{Z}$라는 축소·비축소 사이의 $\\mathbb{Z}$ 차이를 놓치기 쉽다."
+        },
+        {
+          "type": "conceptual",
+          "question": "호모토피 $F$ 하나가 어떻게 '사슬 수준에서는 서로 다른' $f_\\#$과 $g_\\#$을 '호몰로지 수준에서는 같게' 만드는가? 기둥(prism)의 기하와 사슬호모토피 $\\partial P+P\\partial=g_\\#-f_\\#$의 대수를 연결해 설명하라.",
+          "hint": "호모토피가 각 단체를 쓸어 만드는 도형이 무엇인지, 그 도형의 경계가 어떤 세 조각으로 이루어지는지, 그리고 순환에서 왜 그중 한 조각이 사라지는지 생각하라.",
+          "answer": "호모토피 $F:X\\times I\\to Y$는 각 특이 단체 $\\sigma$를 시간축을 따라 쓸어 기둥 $\\Delta^n\\times I$를 그린다. 이 기둥의 경계는 기하적으로 세 조각 — 윗면($g\\circ\\sigma$), 아랫면($f\\circ\\sigma$), 옆면($\\partial\\Delta^n\\times I$) — 으로 이루어진다. 기둥연산자 $P$는 이 기둥을 $(n+1)$개의 단체로 삼각분할해 '채워 넣는' 조작이고, 기둥 경계의 세 조각 구조가 정확히 대수식 $\\partial P+P\\partial=g_\\#-f_\\#$로 번역된다: $\\partial P$는 '채운 기둥의 경계', 우변 $g_\\#-f_\\#$는 '윗면 $-$ 아랫면', $P\\partial$는 '옆면'에 해당한다. 사슬 수준에서 $f_\\#$과 $g_\\#$은 실제로 다른 사슬을 줄 수 있다. 그러나 순환 $\\alpha$(즉 $\\partial\\alpha=0$)에서는 옆면에서 오는 항 $P\\partial\\alpha$가 사라지므로 두 끝의 차 $g_\\#\\alpha-f_\\#\\alpha=\\partial P\\alpha$가 순수한 경계가 된다. 경계는 호몰로지에서 $0$이므로, 사슬 수준의 차이는 몫을 취하는 순간 흔적 없이 소멸하고 $f_*=g_*$이 된다. 요컨대 '호모토피는 기둥이고, 기둥의 경계는 위·아래를 옆면을 통해 이어 주며, 순환에서는 옆면이 닫혀 위·아래의 차가 채워진다'는 것이 호모토피 불변성의 전부다."
+        }
+      ]
+    }
+  ]
+}
