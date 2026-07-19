@@ -2609,6 +2609,215 @@
       ]
     },
     {
+      "section_title": "2.1.ex 연습문제 — §2.1 도구의 종합과 계산",
+      "step1_big_picture": {
+        "context": "이 소단원은 §2.1에서 세운 기계 전체 — $\\Delta$-복합체와 단체 호몰로지, 특이 호몰로지, 호모토피 불변성, 완전열·상대 호몰로지·절제, 그리고 단체=특이(정리 2.27) — 를 손으로 굴려 보는 문제 모음이다. 새 이론은 없지만, 문제들은 몇 개의 뚜렷한 가족으로 묶인다: (i) 명시적 $\\Delta$-복합체 호몰로지 계산(1~9번: 낙하산·클라인병·렌즈공간 등), (ii) 유도 사상·사슬호모토피의 형식적 성질(11~13번), (iii) 완전열의 대수(14~16번), (iv) 상대 호몰로지 계산(17~19번), (v) 현수(suspension)와 그 일반화(20~21번), (vi) CW 복합체의 귀납 구조(22번), (vii) 무게중심 세분의 정밀한 성질(23~25번), (viii) 경계 사례와 반례(26~31번).",
+        "hidden_intuition": "이 문제들이 몸으로 가르치는 한 가지는 '호몰로지는 계산하는 것'이라는 태도다. 계산의 문법은 늘 같다 — 경제적인 $\\Delta$/CW 구조를 고르고, 조각들을 긴 완전열·절제·현수 동형으로 잇고, 완전열의 순수 대수(특히 다섯 보조정리)가 나머지 일을 대신하게 한다. 여기서 반복되는 두 개의 지렛대가 있다. 하나는 '뼈대 몫 $X^n/X^{n-1}$은 $n$-구면의 쐐기합'이라는 관찰(22번) — 이것이 CW 호몰로지의 씨앗이다. 다른 하나는 현수 동형 $\\widetilde{H}_n(X)\\cong\\widetilde{H}_{n+1}(SX)$(20번) — 차원을 한 칸 올리며 구를 만들어 내는, 안정 현상(stable phenomena)의 첫 신호다. 그리고 반례들(26·29·31번)은 이론의 경계를 표시한다: 상대 호몰로지가 몫과 어긋나는 나쁜 쌍(26번), 호몰로지가 같아도 호모토피형은 다를 수 있음(29번), 다섯 보조정리에서 '동형'을 '영사상'으로 약화하면 결론이 무너짐(31번). 즉 호몰로지는 강력하지만 거친(coarse) 도구라는 감각을 심는 것이 이 문제 모음의 숨은 목적이다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 11: 수축이면 단사)",
+          "formal_statement": "$A$가 $X$의 수축(retract) — 즉 $r\\circ i=\\mathbb{1}_A$인 수축사상 $r:X\\to A$이 존재하는 부분공간 — 이면, 포함 $i:A\\hookrightarrow X$이 유도하는 $i_*:H_n(A)\\to H_n(X)$은 모든 $n$에서 단사다.",
+          "idea_behind_proof": "함자성 $(rg)_*=r_*g_*$와 $\\mathbb{1}_*=\\mathbb{1}$만 쓰면 된다. 수축은 호몰로지에서 왼쪽 역을 주고, 왼쪽 역을 가진 준동형은 단사다.",
+          "proof_steps": [
+            "$r\\circ i=\\mathbb{1}_A$에 함자성을 적용하면 $r_*\\circ i_*=(\\mathbb{1}_A)_*=\\mathbb{1}_{H_n(A)}$.",
+            "$i_*$이 왼쪽 역 $r_*$을 가지므로 단사. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 15: 완전열에서 가운데 항의 소멸)",
+          "formal_statement": "완전열 $A\\to B\\to C\\to D\\to E$에서 $C=0$일 필요충분조건은 $A\\to B$이 전사이고 $D\\to E$이 단사인 것이다. 따라서 쌍 $(X,A)$에 대해, 포함 $A\\hookrightarrow X$이 모든 차원에서 호몰로지 동형을 유도할 필요충분조건은 모든 $n$에서 $H_n(X,A)=0$이다.",
+          "idea_behind_proof": "완전성 $\\mathrm{Ker}=\\mathrm{Im}$을 $C$ 좌우에서 두 번 읽는 것이 전부다. 쌍의 완전열에 이 보조사실을 넣으면 $H_n(X,A)$가 두 절대군의 '차이'를 재는 정확한 대수적 의미가 드러난다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $C=0$이면 $B\\to C$이 영사상이라 $\\mathrm{Ker}(B\\to C)=B$, 완전성 $\\mathrm{Im}(A\\to B)=B$ 즉 $A\\to B$ 전사. 또 $C\\to D$이 영사상이라 $\\mathrm{Im}(C\\to D)=0=\\mathrm{Ker}(D\\to E)$ 즉 $D\\to E$ 단사.",
+            "($\\Leftarrow$) $A\\to B$ 전사면 $\\mathrm{Ker}(B\\to C)=\\mathrm{Im}(A\\to B)=B$라 $B\\to C=0$, 완전성으로 $\\mathrm{Ker}(C\\to D)=\\mathrm{Im}(B\\to C)=0$이니 $C\\to D$ 단사. $D\\to E$ 단사면 $\\mathrm{Im}(C\\to D)=\\mathrm{Ker}(D\\to E)=0$이라 $C\\to D=0$. 단사이면서 $0$이니 $C=0$.",
+            "쌍 적용: $(X,A)$의 긴 완전열 $H_n(A)\\xrightarrow{i_*}H_n(X)\\to H_n(X,A)\\to H_{n-1}(A)\\xrightarrow{i_*}H_{n-1}(X)$에 넣으면, $H_n(X,A)=0\\ (\\forall n)$ $\\iff$ 모든 $i_*$이 동형. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 20·21: 현수 동형)",
+          "formal_statement": "임의의 공간 $X$와 그 현수(suspension) $SX$(두 원뿔 $CX$를 밑면 $X$에서 붙인 것)에 대해 $$\\widetilde{H}_n(X)\\cong\\widetilde{H}_{n+1}(SX)\\quad(\\forall n).$$ 더 일반적으로 $n$개의 원뿔 $CX$를 공통 밑면 $X$에서 붙인 공간의 축소 호몰로지는 $\\widetilde{H}_i(X)^{\\,n-1}$의 형태로 $\\widetilde{H}_{i-1}(X)$의 여러 벌이 된다.",
+          "idea_behind_proof": "$SX$를 두 개의 (열린) 원뿔로 덮으면, 각 원뿔은 축약가능하고 교집합은 $X$와 호모토피 동치다. 마이어–비토리스(또는 각 좋은 쌍의 긴 완전열)에서 축약가능한 항이 사라지며 연결 사상이 차원을 한 칸 올리는 동형을 강제한다 — 이는 구 $\\widetilde{H}_n(S^n)\\cong\\widetilde{H}_{n-1}(S^{n-1})$ 계산의 일반화다($S^{n}=SX$일 때 $X=S^{n-1}$).",
+          "proof_steps": [
+            "$SX=C_1\\cup C_2$($C_i$는 원뿔, 축약가능, $C_1\\cap C_2\\simeq X$)로 두고 축소 마이어–비토리스를 적용.",
+            "$\\widetilde{H}_n(C_1)\\oplus\\widetilde{H}_n(C_2)=0$과 $\\widetilde{H}_{n-1}(C_1)\\oplus\\widetilde{H}_{n-1}(C_2)=0$이므로 $$0\\to\\widetilde{H}_n(SX)\\to\\widetilde{H}_{n-1}(X)\\to0$$ 이 완전, 즉 $\\widetilde{H}_n(SX)\\cong\\widetilde{H}_{n-1}(X)$. 인덱스를 옮기면 $\\widetilde{H}_{n+1}(SX)\\cong\\widetilde{H}_n(X)$.",
+            "$n$개 원뿔의 경우도 같은 논법으로, 붙인 밑면 $X$에서 오는 연결 사상들이 $\\widetilde{H}_{i-1}(X)$의 $(n-1)$벌을 준다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "ellipse",
+                "center": [
+                  0,
+                  0
+                ],
+                "rx": 1.7,
+                "ry": 0.45
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  1.9
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -1.9
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.7,
+                  0
+                ],
+                "to": [
+                  0,
+                  1.9
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1.7,
+                  0
+                ],
+                "to": [
+                  0,
+                  1.9
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.7,
+                  0
+                ],
+                "to": [
+                  0,
+                  -1.9
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1.7,
+                  0
+                ],
+                "to": [
+                  0,
+                  -1.9
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.15,
+                  0
+                ],
+                "text": "X"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  2.2
+                ],
+                "text": "꼭짓점"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.95,
+                  1.05
+                ],
+                "text": "CX"
+              }
+            ],
+            "caption": "현수 $SX$: 두 원뿔 $CX$를 공통 밑면 $X$에서 붙인다. 원뿔은 축약가능하므로 $\\widetilde{H}_{n+1}(SX)\\cong\\widetilde{H}_n(X)$ — 차원을 한 칸 올리며 '구를 만드는' 조작."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 22: 유한차원 CW 복합체의 호몰로지)",
+          "formal_statement": "유한차원 CW 복합체 $X$에 대해, '$X^n/X^{n-1}$은 $n$-셀 개수만큼의 $n$-구면의 쐐기합'이라는 관찰과 차원 귀납으로 다음이 성립한다. (a) $\\dim X=n$이면 $i>n$에서 $H_i(X)=0$이고 $H_n(X)$은 자유아벨군이다. (b) 차원 $n-1$과 $n+1$의 셀이 하나도 없으면 $H_n(X)$은 $n$-셀들과 일대일 대응하는 기저를 갖는 자유아벨군이다. (c) $X$에 $n$-셀이 $k$개면 $H_n(X)$은 많아야 $k$개의 원소로 생성된다.",
+          "idea_behind_proof": "핵심 재료는 $H_i(X^n,X^{n-1})$이 $i=n$에서 $n$-셀 기저의 자유아벨군이고 그 외엔 $0$이라는 것(쐐기합 관찰). 쌍 $(X^n,X^{n-1})$의 긴 완전열을 차원에 대해 훑으면 각 결론이 나온다 — 이것이 다음 절 셀 호몰로지의 예고편이다.",
+          "proof_steps": [
+            "(a) $H_i(X^n,X^{n-1})=0\\ (i\\ne n)$이므로 완전열에서 $H_i(X^{n})\\cong H_i(X^{n-1})$ ($i>n$). 최고차원부터 내려오면 $i>n$에서 $H_i(X)=0$. 또 $H_n(X)$은 자유군 $H_n(X^n,X^{n-1})$의 부분군(경계로 나오는 것)의 몫이자 순환의 부분군이라 자유아벨.",
+            "(b) $n\\pm1$ 셀이 없으면 $H_{n-1}(X^{n-1},X^{n-2})$과 $H_{n+1}(X^{n+1},X^{n})$이 관여하는 경계 사상이 소멸해, $H_n(X)\\cong H_n(X^n,X^{n-1})$ = $n$-셀 기저 자유군.",
+            "(c) $H_n(X)$은 $n$-셀 $k$개가 생성하는 $H_n(X^n,X^{n-1})\\cong\\mathbb{Z}^k$의 상(부분군의 몫)이므로 많아야 $k$개 원소로 생성. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 5) 절 첫머리에 나온 $\\Delta$-복합체 구조(정점 $1$개, 변 $a,b,c$, 두 $2$-단체 $U,L$)를 이용해 클라인병 $K$의 단체 호몰로지군을 모두 계산하라. 경계 사상은 $\\partial_2 U=a+b-c,\\ \\partial_2 L=a-b+c$이다.",
+          "hint": "$\\partial_1=0$이라 $H_0=\\mathbb{Z}$. $H_2=\\mathrm{Ker}\\,\\partial_2$이고 $H_1=\\mathbb{Z}^3/\\mathrm{Im}\\,\\partial_2$. 두 관계 벡터 $(1,1,-1),(1,-1,1)$의 스미스 표준형(불변인자)을 구하라 — 토러스와 달리 $\\partial_2 U\\ne\\partial_2 L$인 것이 핵심.",
+          "solution": "$\\partial_1=0$이므로 $H_0(K)=\\mathbb{Z}$. $H_2$: $p\\,\\partial_2U+q\\,\\partial_2L=(p+q)a+(p-q)b+(-p+q)c=0$은 $p=q=0$일 때만 성립하므로 $\\mathrm{Ker}\\,\\partial_2=0$, 즉 $H_2(K)=0$. $H_1$: $\\mathbb{Z}^3/\\langle(1,1,-1),(1,-1,1)\\rangle$. 행 $R_2-R_1=(0,-2,2)$, 열연산으로 $(1,0,0),(0,-2,0)$을 얻어 불변인자는 $1,2$. 따라서 $$H_1(K)=\\mathbb{Z}^{3-2}\\oplus\\mathbb{Z}/2=\\mathbb{Z}\\oplus\\mathbb{Z}_2.$$ 정리하면 $H_0=\\mathbb{Z},\\ H_1=\\mathbb{Z}\\oplus\\mathbb{Z}_2,\\ H_2=0$. 토러스와 대비하라: 토러스는 $\\partial_2U=\\partial_2L$이라 두 $2$-단체의 차가 $2$-순환이 되어 $H_2=\\mathbb{Z}$, $H_1=\\mathbb{Z}^2$(꼬임 없음)였다. 클라인병은 두 경계가 어긋나 $2$-순환이 없어지고($H_2=0$), 대신 $\\mathrm{Im}\\,\\partial_2$가 지표 $2$로 들어앉아 꼬임 $\\mathbb{Z}_2$가 나타난다 — 비가향성(nonorientability)의 대수적 지문이다.",
+          "visualization": {
+            "type": "identification_polygon_2d",
+            "edges": [
+              {
+                "label": "a",
+                "dir": 1
+              },
+              {
+                "label": "b",
+                "dir": 1
+              },
+              {
+                "label": "a",
+                "dir": -1
+              },
+              {
+                "label": "b",
+                "dir": 1
+              }
+            ],
+            "caption": "클라인병 $K=abab^{-1}$: 한 쌍($b$)을 같은 방향으로 붙여 뒤틀리게 만든 결과. 이 뒤틀림이 $H_1$의 꼬임 $\\mathbb{Z}_2$와 $H_2=0$으로 나타난다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 17(a)) $X$가 $S^2$ 또는 토러스 $T^2=S^1\\times S^1$이고 $A\\subset X$가 서로 다른 $k$개의 점일 때, 상대 호몰로지군 $H_n(X,A)$을 모두 구하라.",
+          "hint": "쌍의 축소 긴 완전열 $\\cdots\\to \\widetilde{H}_n(A)\\to\\widetilde{H}_n(X)\\to H_n(X,A)\\to\\widetilde{H}_{n-1}(A)\\to\\cdots$을 쓰라. $A$는 $k$개의 점이라 $\\widetilde{H}_0(A)=\\mathbb{Z}^{k-1}$, 그 외 $\\widetilde{H}_{>0}(A)=0$이다.",
+          "solution": "$A$가 $k$개의 점이므로 $\\widetilde{H}_0(A)=\\mathbb{Z}^{k-1}$, $\\widetilde{H}_i(A)=0\\ (i>0)$. \\n\\n$X=S^2$: $\\widetilde{H}_2(S^2)=\\mathbb{Z}$, $\\widetilde{H}_1(S^2)=0$. 완전열 $0=\\widetilde{H}_1(S^2)\\to H_1(S^2,A)\\to\\widetilde{H}_0(A)=\\mathbb{Z}^{k-1}\\to\\widetilde{H}_0(S^2)=0$에서 $H_1(S^2,A)=\\mathbb{Z}^{k-1}$. $H_2(S^2,A)\\cong\\widetilde{H}_2(S^2)=\\mathbb{Z}$($\\widetilde{H}_2(A)=\\widetilde{H}_1(A)=0$). $H_0(S^2,A)=0$. 정리: $$H_n(S^2,A)=\\begin{cases}\\mathbb{Z}^{k-1}&n=1\\\\\\mathbb{Z}&n=2\\\\0&\\text{그 외.}\\end{cases}$$\\n\\n$X=T^2$: $\\widetilde{H}_1(T^2)=\\mathbb{Z}^2$, $\\widetilde{H}_2(T^2)=\\mathbb{Z}$. 완전열 $0\\to\\mathbb{Z}^2\\to H_1(T^2,A)\\to\\mathbb{Z}^{k-1}\\to0$은 자유군이라 분열되어 $H_1(T^2,A)=\\mathbb{Z}^{k+1}$. $H_2(T^2,A)\\cong\\mathbb{Z}$, $H_0=0$. 정리: $$H_n(T^2,A)=\\begin{cases}\\mathbb{Z}^{k+1}&n=1\\\\\\mathbb{Z}&n=2\\\\0&\\text{그 외.}\\end{cases}$$ 직관: $k$개의 점을 한 점으로 collapse하면($X/A$) 새로 $k-1$개의 원(구멍)이 생겨 $H_1$이 그만큼 커지고, 원래의 $2$차원 구멍($H_2$)은 그대로 보존된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 14) 짧은 완전열 $0\\to\\mathbb{Z}_4\\to\\mathbb{Z}_8\\oplus\\mathbb{Z}_2\\to\\mathbb{Z}_4\\to0$이 존재하는가? 또 소수 $p$에 대해 $0\\to\\mathbb{Z}_{p^m}\\to A\\to\\mathbb{Z}_{p^n}\\to0$에 들어갈 수 있는 아벨군 $A$를 판정하라.",
+          "hint": "짧은 완전열이면 $|A|=|\\mathbb{Z}_{p^m}|\\cdot|\\mathbb{Z}_{p^n}|=p^{m+n}$이어야 한다. $\\mathbb{Z}_{p^m}$을 부분군으로, $\\mathbb{Z}_{p^n}$을 몫으로 갖는 유한아벨 $p$-군을 분류하라. 구체적 예에서는 $\\mathbb{Z}_8\\oplus\\mathbb{Z}_2$ 안에서 $\\mathbb{Z}_4$와 동형인 부분군을 찾아 몫을 계산해 보라.",
+          "solution": "존재한다. $\\mathbb{Z}_8\\oplus\\mathbb{Z}_2$에서 원소 $(2,1)$은 위수 $4$이고 $\\langle(2,1)\\rangle\\cong\\mathbb{Z}_4$이다. 몫에서 $2e_1=e_2$(여기서 $e_1=(1,0),e_2=(0,1)$)이 되어 $e_2$가 소거되고 $4e_1=2e_2=0$이므로 몫은 위수 $4$의 순환군 $\\langle e_1\\rangle\\cong\\mathbb{Z}_4$. 따라서 $0\\to\\mathbb{Z}_4\\to\\mathbb{Z}_8\\oplus\\mathbb{Z}_2\\to\\mathbb{Z}_4\\to0$이 (비분열로) 존재한다.\\n\\n일반적으로 $0\\to\\mathbb{Z}_{p^m}\\to A\\to\\mathbb{Z}_{p^n}\\to0$에 들어갈 $A$는 위수 $p^{m+n}$의 아벨 $p$-군으로, $\\mathbb{Z}_{p^m}$을 부분군·$\\mathbb{Z}_{p^n}$을 몫으로 가지려면 최대 순환합이 $p^{\\max(m,n)}$ 이상이어야 하므로 $$A\\cong\\mathbb{Z}_{p^{m+n-k}}\\oplus\\mathbb{Z}_{p^{k}}\\quad(0\\le k\\le\\min(m,n))$$ 꼴이 모두(그리고 이것만) 가능하다. 두 극단은 $k=0$의 순환군 $\\mathbb{Z}_{p^{m+n}}$(비분열)과 $k=\\min(m,n)$의 분열형이다. 한편 $0\\to\\mathbb{Z}\\to A\\to\\mathbb{Z}_n\\to0$에서는 $A$가 자유계수 $1$이라 $A\\cong\\mathbb{Z}$(비분열; $\\mathbb{Z}\\xrightarrow{\\times n}\\mathbb{Z}$) 또는 $A\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_n$(분열)이다."
+        },
+        {
+          "type": "ox",
+          "question": "(문제 11 관련) $A$가 $X$의 수축(retract)이면 포함이 유도하는 $H_n(A)\\to H_n(X)$은 항상 단사다.",
+          "answer": "O",
+          "explanation": "수축사상 $r:X\\to A$이 $r\\circ i=\\mathbb{1}_A$를 만족하므로 함자성에 의해 $r_*\\circ i_*=\\mathbb{1}_{H_n(A)}$, 즉 $i_*$은 왼쪽 역 $r_*$을 갖는다. 왼쪽 역을 가진 준동형은 단사다. (더 나아가 $i_*$의 상은 $H_n(X)$의 직합인자가 된다.) 이는 '수축이 있으면 부분공간의 호몰로지가 전체 안에 온전히 살아남는다'는 직관의 대수판이다."
+        },
+        {
+          "type": "ox",
+          "question": "(문제 31) 두 행이 완전한 다섯 보조정리 도식에서 바깥 네 세로 사상 $\\alpha,\\beta,\\delta,\\varepsilon$이 모두 영사상이면 가운데 사상 $\\gamma$도 반드시 영사상이다.",
+          "answer": "X",
+          "explanation": "반례가 있다. 위 행 $0\\to0\\to\\mathbb{Z}\\xrightarrow{\\mathrm{id}}\\mathbb{Z}\\to0$과 아래 행 $0\\to\\mathbb{Z}\\xrightarrow{\\mathrm{id}}\\mathbb{Z}\\to0\\to0$을 두면 둘 다 완전하고, 세로 사상은 $\\alpha:0\\to0$, $\\beta:0\\to\\mathbb{Z}$(영), $\\gamma:\\mathbb{Z}\\xrightarrow{\\mathrm{id}}\\mathbb{Z}$(영이 아님!), $\\delta:\\mathbb{Z}\\to0$(영), $\\varepsilon:0\\to0$이며 모든 정사각형이 가환이다. 즉 바깥 넷이 영사상이어도 $\\gamma\\ne0$일 수 있다. 다섯 보조정리는 바깥 넷이 '동형'일 때만 결론을 주며, '동형'을 '영사상'으로 약화하면 무너진다 — 가설의 핵심은 정확히 그 동형성에 있다."
+        },
+        {
+          "type": "conceptual",
+          "question": "(문제 29) $S^1\\times S^1$(토러스)과 $S^1\\vee S^1\\vee S^2$은 모든 차원에서 동형인 호몰로지군을 갖지만, 그 보편피복공간(universal cover)의 호몰로지는 다르다. 이 사실이 호몰로지라는 도구에 대해 무엇을 말해 주는가?",
+          "hint": "두 공간의 $H_0,H_1,H_2$를 각각 계산해 같음을 확인한 뒤, 두 공간의 기본군과 그에 따른 보편피복이 어떻게 다른지 생각하라. 호몰로지가 '보지 못하는' 정보가 무엇인지 짚어라.",
+          "answer": "두 공간의 호몰로지는 $H_0=\\mathbb{Z},\\ H_1=\\mathbb{Z}^2,\\ H_2=\\mathbb{Z}$, 그 외 $0$으로 완전히 같다(토러스: 두 방향의 고리와 하나의 $2$차원 구멍; 쐐기합: 두 원에서 $H_1=\\mathbb{Z}^2$, 구 $S^2$에서 $H_2=\\mathbb{Z}$). 그러나 기본군이 다르다: 토러스는 $\\pi_1=\\mathbb{Z}^2$(가환), 쐐기합은 $\\pi_1=F_2$(두 생성원의 자유군, 비가환). 따라서 보편피복도 전혀 다르다 — 토러스의 보편피복은 축약가능한 평면 $\\mathbb{R}^2$라 모든 축소 호몰로지가 $0$이지만, $S^1\\vee S^1\\vee S^2$의 보편피복은 $F_2$의 케일리 그래프(무한 트리) 각 꼭짓점마다 구 $S^2$가 매달린 공간이라 $H_2$가 무한생성이다. 이것이 가르치는 바: 호몰로지는 강력하고 계산 가능하지만 거친(coarse) 불변량이다. 그것은 아벨화된 정보만 보므로 기본군의 비가환 구조, 나아가 호모토피형을 완전히 결정하지 못한다 — 같은 호몰로지를 가진 서로 다른 호모토피형이 얼마든지 존재한다. 호몰로지가 놓치는 이 층위를 포착하려면 기본군·고차 호모토피군·피복공간 같은 더 섬세한 도구, 또는 호몰로지에 곱구조를 얹은 코호몰로지 환이 필요하다."
+        }
+      ]
+    },
+    {
       "section_title": "2.intro 개관 — 호몰로지의 아이디어 (The Idea of Homology)",
       "step1_big_picture": {
         "context": "1장에서 배운 기본군(fundamental group) $\\pi_1(X)$은 저차원 공간에는 강력하지만, 그 정의가 오직 저차원 대상(고리 $I\\to X$, 고리의 호모토피 $I\\times I\\to X$)만 쓰기에 고차원을 다루기엔 무디다 — 예컨대 $S^n\\ (n\\ge 2)$들을 전혀 구별하지 못한다. 자연스러운 고차원 유비인 호모토피군 $\\pi_n(X)$은 모든 구를 구별하지만($\\pi_i(S^n)=0\\ (i<n),\\ \\mathbb{Z}\\ (i=n)$), 계산이 악명 높게 어렵다($i>n$일 때 $\\pi_i(S^n)$은 거대한 미해결 문제). 그 대안이 이 장의 주인공인 호몰로지군 $H_n(X)$이다. $\\pi_n$과 마찬가지로 CW 복합체에서 $(n{+}1)$-뼈대(skeleton)에만 의존하되, $i>n$이면 $H_i(S^n)=0$이라는 결정적 이점을 가지며, 무엇보다 셀 구조에서 직접 계산된다.",
