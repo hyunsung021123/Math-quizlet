@@ -32,8 +32,10 @@ program2_track.py submit -> git add/commit/push (dev branch), matching the
 "commit and push directly to dev" policy in CLAUDE.md.
 
 Stops immediately (without corrupting state) on validation error, submit
-error, or hitting the subscription's own session-limit message ("You've hit
-your session limit ... resets <time>"). These are distinguished via exit
+error, a missing sections_out/*.txt (program1_split.py hasn't split that far
+yet -- needs a human to rerun it with the source book PDF), or hitting the
+subscription's own session-limit message ("You've hit your session limit ...
+resets <time>"). These are distinguished via exit
 code (see EXIT_OK/EXIT_ERROR/EXIT_QUOTA/EXIT_PAUSED below) so a caller --
 notably auto_cycle.py -- can tell "safe to retry after <time>" (quota) apart
 from "needs a human to look at this" (error) without re-deriving that from
@@ -291,9 +293,23 @@ def main():
         nx = track(args.book, "next")
         info = parse_next(nx.stdout)
         if not info:
-            log("no further pieces parsed from `next` output. stopping.")
+            if "🎉" in nx.stdout:
+                log("book genuinely exhausted (tracker reports nothing pending). stopping.")
+                log(nx.stdout[-500:])
+                break
+            # Any other unparseable `next` output -- e.g. `next_section.py`'s
+            # "⚠ '<path>.txt'을 찾을 수 없습니다" when program1_split.py hasn't
+            # produced that section's source .txt/.pdf yet -- is NOT the same
+            # as the book being done: it means a human needs to re-run
+            # program1_split.py (with the source book PDF) before generation
+            # can continue. Treating it as EXIT_OK here previously made
+            # auto_cycle.py conclude the whole book was finished and
+            # permanently stop rescheduling, silently stalling the chain.
+            log("`next` produced no piece AND no completion marker -- likely a "
+                "missing sections_out/*.txt (source PDF split doesn't cover this "
+                "section yet) or another tracker problem. Needs a human look.")
             log(nx.stdout[-500:])
-            break
+            sys.exit(EXIT_ERROR)
         if args.chapter is not None and info["chapter"] != args.chapter:
             log(f"reached chapter {info['chapter']} (seq {info['seq']}) "
                 f"-- chapter {args.chapter} boundary. stopping.")
