@@ -1502,6 +1502,338 @@
       ]
     },
     {
+      "section_title": "2.1.5 완전열과 절제 (Exact Sequences and Excision) — 1부",
+      "step1_big_picture": {
+        "context": "지금까지(2.1.3~2.1.4) 특이 호몰로지의 정의·불변성을 세웠지만, 정작 구를 계산하는 것조차 손에 잡히지 않았다. 이 절은 계산의 엔진을 만든다. 순진한 희망은 '공간 $X$, 부분공간 $A$, 몫공간 $X/A$의 호몰로지가 $H_n(X)/H_n(A)\\cong H_n(X/A)$처럼 단순히 얽혀 있으면 좋겠다'는 것이지만, 이는 일반적으로 거짓이다(모든 공간은 축약가능한 원뿔 $CX$에 부분공간으로 들어가므로 이런 관계는 이론을 붕괴시킨다). 올바른 관계는 세 군을 모든 차원에서 동시에 엮는 긴 완전열(long exact sequence)이다. 이를 위해 (1) 완전열이라는 대수 개념, (2) 상대 호몰로지 $H_n(X,A)$('$A$를 무시한 $X$의 호몰로지'), (3) 사슬 복합체의 짧은 완전열에서 긴 완전열을 뽑는 도식추적(diagram chasing) 정리 2.16을 세우고, 그 응용으로 $\\widetilde{H}_n(S^n)\\cong\\mathbb{Z}$(따름정리 2.14)와 브라우어 고정점 정리(따름정리 2.15)를 얻는다. 끝으로 계산의 결정타인 절제 정리(정리 2.20)를 예고한다.",
+        "hidden_intuition": "긴 완전열의 심장은 연결 준동형(connecting homomorphism) $\\partial:H_n(X,A)\\to H_{n-1}(A)$다. 직관은 이렇다: '$X$에서 상대순환 $\\alpha$'란 그 자체는 닫히지 않았지만 경계 $\\partial\\alpha$가 $A$ 안에 떨어지는 사슬이다 — 마치 $A$에 두 발을 딛고 $X$로 뻗은 다리 같다. 그 다리의 발자국 $\\partial\\alpha$가 바로 $A$의 진짜 순환이고, $\\partial[\\alpha]=[\\partial\\alpha]$가 '한 차원 아래로 내려가는' 연결이다. 완전성 $\\mathrm{Ker}=\\mathrm{Im}$은 곧 '$A$에서 막힌 것은 $X$에서 뚫리고, $X$에서 새로 생긴 것은 $\\partial$로 $A$의 흔적을 남긴다'는 회계 장부다. 상대 호몰로지의 발상은 'mod $n$ 산술처럼, $A$의 사슬을 통째로 $0$으로 무시하면 오히려 더 유연하고 강한 이론이 된다'는 역설이다. 그리고 절제(excision)는 '$A$ 깊숙이 파묻힌 조각 $Z$를 도려내도 $H_n(X,A)$는 꿈쩍 않는다'는, 국소성을 보장하는 마법 — 이것이 있어야 호몰로지가 조각조각 계산된다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (완전열과 짧은 완전열)",
+          "formal_statement": "준동형의 열 $\\cdots\\to A_{n+1}\\xrightarrow{\\alpha_{n+1}}A_n\\xrightarrow{\\alpha_n}A_{n-1}\\to\\cdots$이 각 $n$에서 $\\mathrm{Ker}\\,\\alpha_n=\\mathrm{Im}\\,\\alpha_{n+1}$을 만족하면 완전(exact)하다고 한다. 포함 $\\mathrm{Im}\\,\\alpha_{n+1}\\subseteq\\mathrm{Ker}\\,\\alpha_n$은 $\\alpha_n\\alpha_{n+1}=0$과 동치이므로 완전열은 사슬 복합체이고, 반대 포함은 그 복합체의 호몰로지가 모두 $0$임을 뜻한다. 기본 사실: (i) $0\\to A\\xrightarrow{\\alpha}B$ 완전 $\\iff\\alpha$ 단사; (ii) $A\\xrightarrow{\\alpha}B\\to0$ 완전 $\\iff\\alpha$ 전사; (iii) $0\\to A\\xrightarrow{\\alpha}B\\to0$ 완전 $\\iff\\alpha$ 동형; (iv) $0\\to A\\xrightarrow{\\alpha}B\\xrightarrow{\\beta}C\\to0$ 완전 $\\iff\\alpha$ 단사, $\\beta$ 전사, $\\mathrm{Ker}\\,\\beta=\\mathrm{Im}\\,\\alpha$이며, 이때 $C\\cong B/\\mathrm{Im}\\,\\alpha\\ (\\cong B/A)$. (iv) 형태의 완전열을 짧은 완전열(short exact sequence)이라 한다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (상대 호몰로지군 $H_n(X,A)$)",
+          "formal_statement": "공간 $X$와 부분공간 $A\\subset X$에 대해 상대 사슬군 $C_n(X,A)=C_n(X)/C_n(A)$을 둔다($A$ 속 사슬은 $0$이 된다). 경계 사상 $\\partial:C_n(X)\\to C_{n-1}(X)$이 $C_n(A)$를 $C_{n-1}(A)$로 보내므로 몫 경계 사상 $\\partial:C_n(X,A)\\to C_{n-1}(X,A)$이 유도되고, $\\partial^2=0$이 몫 이전에 성립했으므로 그대로 유지된다. 이 사슬 복합체의 호몰로지 $\\mathrm{Ker}\\,\\partial/\\mathrm{Im}\\,\\partial$을 상대 호몰로지군 $H_n(X,A)$이라 한다. 구체적으로: $H_n(X,A)$의 원소는 상대순환(relative cycle) — $\\partial\\alpha\\in C_{n-1}(A)$인 $n$-사슬 $\\alpha\\in C_n(X)$ — 으로 대표되며, 상대순환 $\\alpha$가 $H_n(X,A)$에서 자명할 필요충분조건은 상대경계 $\\alpha=\\partial\\beta+\\gamma$ ($\\beta\\in C_{n+1}(X),\\ \\gamma\\in C_n(A)$)인 것이다. 이것이 '$H_n(X,A)$ = $A$를 법으로 한 $X$의 호몰로지'라는 직관을 엄밀히 만든다.",
+          "idea_behind_proof": "몫 $C_n(X)/C_n(A)$을 '상이 $A$에 담기지 않는 특이 단체들'이 만드는 부분군으로 볼 수도 있으나, 경계 사상이 그 부분군을 보존하지 않으므로 부분군이 아니라 몫으로 다루는 편이 옳다. '$A$를 무시한다'가 곧 '$A$ 속 사슬을 $0$으로 친다'로 번역된다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.16 (사슬 복합체의 짧은 완전열 → 긴 완전열)",
+          "formal_statement": "사슬 복합체의 짧은 완전열 $0\\to A\\xrightarrow{i}B\\xrightarrow{j}C\\to0$(각 차원에서 $0\\to A_n\\to B_n\\to C_n\\to0$ 완전, $i,j$는 사슬사상)이 주어지면, 호몰로지의 긴 완전열 $$\\cdots\\to H_n(A)\\xrightarrow{i_*}H_n(B)\\xrightarrow{j_*}H_n(C)\\xrightarrow{\\ \\partial\\ }H_{n-1}(A)\\xrightarrow{i_*}H_{n-1}(B)\\to\\cdots$$ 이 완전하다. 연결 준동형 $\\partial:H_n(C)\\to H_{n-1}(A)$은 다음으로 정의된다: 순환 $c\\in C_n$을 $j$의 전사성으로 $c=j(b)$로 들어올리고, $\\partial b\\in\\mathrm{Ker}\\,j=\\mathrm{Im}\\,i$이므로 $\\partial b=i(a)$인 순환 $a\\in A_{n-1}$을 잡아 $\\partial[c]=[a]$로 둔다.",
+          "idea_behind_proof": "핵심 발상은 '세로로 놓인 세 사슬 복합체(짧은 완전열)를 가로질러 지그재그로 원소를 추적'하는 도식추적(diagram chasing)이다. $C$에서 막힌 순환은 $B$로 들어올려 경계를 취하면 $A$로 떨어지고, 그 떨어진 곳이 곧 한 차원 아래 $A$의 순환 — 이 '내려감'이 $\\partial$이다. 완전성의 여섯 포함관계는 모두 이 추적을 반복하는 기계적 검증이다.",
+          "proof_steps": [
+            "1단계 ($\\partial$의 정의): 순환 $c=j(b)$에 대해 $j(\\partial b)=\\partial j(b)=\\partial c=0$이므로 $\\partial b\\in\\mathrm{Ker}\\,j=\\mathrm{Im}\\,i$, 즉 $\\partial b=i(a)$. $i(\\partial a)=\\partial i(a)=\\partial\\partial b=0$이고 $i$가 단사라 $\\partial a=0$이니 $a$는 순환. $\\partial[c]:=[a]$.",
+            "2단계 (잘 정의됨): $i$가 단사라 $a$는 $\\partial b$로 유일하게 결정된다. $b$를 $b'=b+i(a')$로 바꾸면 $a$는 호몰로지 동치인 $a+\\partial a'$로 바뀌고, $c$를 호몰로지류 내 $c+\\partial c'$로 바꾸면 $b$가 $b+\\partial b'$로 바뀌어 $\\partial b$와 $a$는 불변. 따라서 $\\partial$은 잘 정의된 준동형.",
+            "3단계 (완전성 — 도식추적): 여섯 포함을 확인한다. 쉬운 셋 $\\mathrm{Im}\\,i_*\\subseteq\\mathrm{Ker}\\,j_*$($ji=0$), $\\mathrm{Im}\\,j_*\\subseteq\\mathrm{Ker}\\,\\partial$($\\partial b=0$), $\\mathrm{Im}\\,\\partial\\subseteq\\mathrm{Ker}\\,i_*$($i_*\\partial[c]=[\\partial b]=0$)는 즉각. 나머지 셋(예: $\\mathrm{Ker}\\,j_*\\subseteq\\mathrm{Im}\\,i_*$)은 원소를 들어올리고 경계를 빼는 추적으로 얻는다: $j(b)=\\partial c'$이고 $c'=j(b')$이면 $b-\\partial b'\\in\\mathrm{Ker}\\,j=\\mathrm{Im}\\,i$라 $b-\\partial b'=i(a)$, 이 $a$가 순환이고 $i_*[a]=[b]$. 나머지도 동형태의 추적. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "label",
+                "at": [
+                  -1.7,
+                  0
+                ],
+                "text": "b"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.7,
+                  -1.5
+                ],
+                "text": "c = j(b)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.9,
+                  0
+                ],
+                "text": "∂b = i(a)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.7,
+                  1.5
+                ],
+                "text": "a"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.7,
+                  -0.3
+                ],
+                "to": [
+                  -1.7,
+                  -1.2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.05,
+                  -0.75
+                ],
+                "text": "j"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.2,
+                  0
+                ],
+                "to": [
+                  0.9,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.15,
+                  0.3
+                ],
+                "text": "∂"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.7,
+                  1.2
+                ],
+                "to": [
+                  1.7,
+                  0.3
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.05,
+                  0.75
+                ],
+                "text": "i"
+              }
+            ],
+            "caption": "연결 준동형 $\\partial[c]=[a]$의 지그재그: 순환 $c$를 $b$로 들어올리고($j$ 전사), $\\partial b$가 $\\mathrm{Ker}\\,j=\\mathrm{Im}\\,i$에 있어 $a$로 내린다. 이 '한 차원 내려감'이 긴 완전열을 잇는다."
+          }
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.13 · 쌍의 긴 완전열",
+          "formal_statement": "짧은 완전열 $0\\to C_n(A)\\xrightarrow{i}C_n(X)\\xrightarrow{j}C_n(X,A)\\to0$에 정리 2.16을 적용하면 임의의 쌍 $(X,A)$에 대해 긴 완전열 $$\\cdots\\to H_n(A)\\xrightarrow{i_*}H_n(X)\\xrightarrow{j_*}H_n(X,A)\\xrightarrow{\\ \\partial\\ }H_{n-1}(A)\\to\\cdots\\to H_0(X,A)\\to0$$ 을 얻는다. 여기서 연결 사상은 아주 단순하다: 상대순환 $\\alpha$가 대표하는 $[\\alpha]\\in H_n(X,A)$에 대해 $\\partial[\\alpha]=[\\partial\\alpha]\\in H_{n-1}(A)$. $A\\ne\\varnothing$이면 축소 호몰로지의 완전열도 같은 방식으로 성립하며 $\\widetilde{H}_n(X,A)=H_n(X,A)$이다. 나아가 $(X,A)$가 좋은 쌍(good pair) — $A$가 비어 있지 않은 닫힌 부분공간이며 $X$의 어떤 근방의 변형수축 — 이면 $H_n(X,A)\\cong\\widetilde{H}_n(X/A)$이므로(정리 2.13) 완전열은 $\\widetilde{H}_n(X/A)$로 표현된다. CW 복합체 $X$와 비어 있지 않은 부분복합체 $A$는 좋은 쌍이다(부록 명제 A.5).",
+          "idea_behind_proof": "이 완전열은 '$H_n(X,A)$가 $H_n(X)$와 $H_n(A)$의 차이를 잰다'는 생각을 엄밀히 만든다. 특히 완전성으로부터, 모든 $n$에서 $H_n(X,A)=0$이면 (기본사실 (iii)에 의해) 포함 $A\\hookrightarrow X$이 모든 $H_n(A)\\cong H_n(X)$를 유도한다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 2.14 (구의 호몰로지)",
+          "formal_statement": "$\\widetilde{H}_n(S^n)\\cong\\mathbb{Z}$이고 $i\\ne n$이면 $\\widetilde{H}_i(S^n)=0$이다.",
+          "idea_behind_proof": "쌍 $(D^n,S^{n-1})$의 몫이 $S^n$이라는 사실과, $D^n$이 축약가능해 그 축소 호몰로지가 모두 $0$이라는 사실을 결합한다. 그러면 완전열이 연결 사상 $\\partial$을 통해 '차원을 하나 낮추는 동형' $\\widetilde{H}_i(S^n)\\cong\\widetilde{H}_{i-1}(S^{n-1})$을 강제하고, $S^0$에서 시작하는 귀납이 마무리한다.",
+          "proof_steps": [
+            "1단계: $n>0$에서 $(X,A)=(D^n,S^{n-1})$, $X/A=S^n$. 좋은 쌍의 축소 완전열에서 $\\widetilde{H}_i(D^n)=0$(축약가능)이므로 이웃한 두 항이 사라진다.",
+            "2단계: 완전성에 의해 $\\partial:\\widetilde{H}_i(S^n)\\to\\widetilde{H}_{i-1}(S^{n-1})$이 $i>0$에서 동형이고 $\\widetilde{H}_0(S^n)=0$.",
+            "3단계: $S^0$(두 점)에서 $\\widetilde{H}_0(S^0)\\cong\\mathbb{Z}$, $\\widetilde{H}_{i>0}(S^0)=0$(명제 2.6·2.8). $n$에 대한 귀납으로 차원을 올리면 $\\widetilde{H}_n(S^n)\\cong\\mathbb{Z}$, 그 외 $0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 2.15 (브라우어: 수축 불가능성과 고정점)",
+          "formal_statement": "$\\partial D^n$은 $D^n$의 수축(retract)이 아니다. 따라서 모든 사상 $f:D^n\\to D^n$은 고정점을 갖는다.",
+          "idea_behind_proof": "수축 $r:D^n\\to\\partial D^n$이 있다면 포함 $i$와 합성 $ri=\\mathbb{1}$이 항등이 되어, 호몰로지에서도 항등을 유도해야 한다. 그러나 그 합성은 $\\widetilde{H}_{n-1}(D^n)=0$을 거치므로 영사상이 되어, $\\widetilde{H}_{n-1}(\\partial D^n)\\cong\\mathbb{Z}\\ne0$과 모순이다. 함자성이 위상 문제를 대수 모순으로 번역한다.",
+          "proof_steps": [
+            "1단계: 수축 $r:D^n\\to\\partial D^n$이면 $ri=\\mathbb{1}$ ($i:\\partial D^n\\hookrightarrow D^n$). 그러면 $\\widetilde{H}_{n-1}(\\partial D^n)\\xrightarrow{i_*}\\widetilde{H}_{n-1}(D^n)\\xrightarrow{r_*}\\widetilde{H}_{n-1}(\\partial D^n)$은 항등.",
+            "2단계: 그러나 $\\widetilde{H}_{n-1}(D^n)=0$(축약가능)이라 $i_*,r_*$이 모두 $0$이고 합성도 $0$. 한편 $\\widetilde{H}_{n-1}(\\partial D^n)=\\widetilde{H}_{n-1}(S^{n-1})\\cong\\mathbb{Z}\\ne0$(따름정리 2.14)이므로 항등이 영사상일 수 없어 모순.",
+            "3단계 (고정점): $f:D^n\\to D^n$이 고정점이 없다면 각 $x$에서 $f(x)$를 지나 $x$ 방향으로 반직선을 그어 $\\partial D^n$에 닿는 점으로 보내는 수축을 얻어(정리 1.9와 동일) 위 결과에 모순. 따라서 $f$는 고정점을 갖는다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.6,
+                "fill": "#eef2ff"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "D^n"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.95
+                ],
+                "text": "∂D^n = S^{n-1}"
+              }
+            ],
+            "caption": "$\\widetilde{H}_{n-1}(\\partial D^n)\\cong\\mathbb{Z}$이지만 $\\widetilde{H}_{n-1}(D^n)=0$. 경계를 안쪽으로 밀어 붙이는 수축 $r$이 있으면 $\\mathbb{Z}\\to0\\to\\mathbb{Z}$가 항등이 되어야 하는 모순 — 그래서 수축은 없고, 모든 $f:D^n\\to D^n$은 고정점을 갖는다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.17 · 2.18 (상대 호몰로지 계산)",
+          "formal_statement": "예 2.17: 쌍 $(D^n,\\partial D^n)$의 축소 완전열에서 $\\widetilde{H}_i(D^n)=0$이므로 $\\partial:H_i(D^n,\\partial D^n)\\to\\widetilde{H}_{i-1}(S^{n-1})$이 모든 $i>0$에서 동형이 되어 $$H_i(D^n,\\partial D^n)\\cong\\begin{cases}\\mathbb{Z}&i=n\\\\0&\\text{그 외}\\end{cases}$$ 예 2.18: 점 $x_0\\in X$에 대한 쌍 $(X,x_0)$에서 $\\widetilde{H}_n(x_0)=0$이므로 완전열이 모든 $n$에서 동형 $H_n(X,x_0)\\cong\\widetilde{H}_n(X)$을 준다.",
+          "idea_behind_proof": "두 예 모두 '완전열에서 한쪽 이웃 항이 $0$이면 연결 사상(또는 유도 사상)이 동형이 된다'는 (iii)의 반복이다. 상대 호몰로지가 절대 호몰로지(축소 포함)를 되찾아 주는 두 대표 장면이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.19 · 삼조의 완전열 (상대판 함자성)",
+          "formal_statement": "쌍의 사상 $f:(X,A)\\to(Y,B)$(즉 $f(A)\\subset B$)은 $C_n(A)$를 $C_n(B)$로 보내므로 몫에서 $f_\\#:C_n(X,A)\\to C_n(Y,B)$을, 나아가 $f_*:H_n(X,A)\\to H_n(Y,B)$을 유도한다. 명제 2.19: 두 사상 $f,g:(X,A)\\to(Y,B)$가 쌍의 사상으로서 호모토피하면 $f_*=g_*:H_n(X,A)\\to H_n(Y,B)$이다. 또한 $B\\subset A\\subset X$인 삼조 $(X,A,B)$에 대해 짧은 완전열 $0\\to C_n(A,B)\\to C_n(X,B)\\to C_n(X,A)\\to0$에서 삼조의 긴 완전열 $$\\cdots\\to H_n(A,B)\\to H_n(X,B)\\to H_n(X,A)\\to H_{n-1}(A,B)\\to\\cdots$$ 을 얻는다($B$가 한 점이면 쌍 $(X,A)$의 축소 완전열이 된다).",
+          "idea_behind_proof": "명제 2.19는 정리 2.10의 기둥연산자 $P$가 $C_n(A)$를 $C_{n+1}(B)$로 보내므로 몫으로 내려가 상대 사슬호모토피 $\\partial P+P\\partial=g_\\#-f_\\#$을 유지한다는 관찰에서 곧바로 나온다 — 절대판 증명을 몫에 그대로 옮긴 것이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.20 (절제 정리) — 예고",
+          "formal_statement": "부분공간 $Z\\subset A\\subset X$이 $\\mathrm{cl}\\,Z\\subset\\mathrm{int}\\,A$를 만족하면, 포함 $(X-Z,\\,A-Z)\\hookrightarrow(X,A)$은 모든 $n$에서 동형 $H_n(X-Z,A-Z)\\to H_n(X,A)$을 유도한다. 동치로, 내부가 $X$를 덮는 부분공간 $A,B\\subset X$($X=\\mathrm{int}\\,A\\cup\\mathrm{int}\\,B$)에 대해 포함 $(B,A\\cap B)\\hookrightarrow(X,A)$이 동형 $H_n(B,A\\cap B)\\to H_n(X,A)$을 유도한다($B=X-Z$로 두면 두 형태가 번역된다). 증명은 '작은 특이 단체만으로 호몰로지를 계산할 수 있다'는 무게중심 세분(barycentric subdivision) 기법을 요한다: 덮개 $\\mathcal{U}$의 원소에 상이 담기는 사슬들의 부분복합체 $C_n^{\\mathcal{U}}(X)$에 대해, 포함 $\\iota:C_n^{\\mathcal{U}}(X)\\hookrightarrow C_n(X)$이 사슬호모토피 동치이고 따라서 $H_n^{\\mathcal{U}}(X)\\cong H_n(X)$이다(명제 2.21).",
+          "idea_behind_proof": "절제의 직관은 '$A$의 내부 깊숙이 파묻힌 $Z$는 상대 호몰로지에 아무 정보도 주지 않으므로 도려내도 무방'이라는 국소성이다. 기술적 장애물은 특이 단체가 $A-Z$와 $X-Z$의 경계를 넘나들 수 있다는 것인데, 무게중심 세분으로 단체를 충분히 잘게 쪼개 각 조각이 $\\mathrm{int}\\,A$나 $\\mathrm{int}\\,B$ 안에 들어가게 만들면 이 문제가 사라진다. 세분의 핵심 정량 사실은 '무게중심 세분이 지름을 $\\tfrac{n}{n+1}$배 이하로 줄인다'는 것으로, 반복하면 지름이 $0$으로 수렴한다(자세한 4단계 증명은 다음 부에서).",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "ellipse",
+                "center": [
+                  0,
+                  0
+                ],
+                "rx": 2.6,
+                "ry": 1.8
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.0,
+                  1.5
+                ],
+                "text": "X"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    -0.2,
+                    1.0
+                  ],
+                  [
+                    1.5,
+                    0.7
+                  ],
+                  [
+                    1.7,
+                    -0.7
+                  ],
+                  [
+                    0.0,
+                    -1.1
+                  ],
+                  [
+                    -1.2,
+                    -0.5
+                  ],
+                  [
+                    -1.1,
+                    0.6
+                  ]
+                ],
+                "closed": true,
+                "fill": "#eef2ff"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.3,
+                  -0.9
+                ],
+                "text": "A"
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    0.2,
+                    0.4
+                  ],
+                  [
+                    0.8,
+                    0.2
+                  ],
+                  [
+                    0.7,
+                    -0.4
+                  ],
+                  [
+                    0.1,
+                    -0.5
+                  ],
+                  [
+                    -0.2,
+                    0.0
+                  ]
+                ],
+                "closed": true,
+                "fill": "#c7d2fe"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.35,
+                  0.0
+                ],
+                "text": "Z"
+              }
+            ],
+            "caption": "절제: $\\mathrm{cl}\\,Z\\subset\\mathrm{int}\\,A$이면 $A$ 깊숙한 $Z$를 도려내도 $H_n(X-Z,A-Z)\\cong H_n(X,A)$. 상대 호몰로지는 $A$ 안쪽 정보를 이미 '무시'하므로 국소적으로 반응한다."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "쌍 $(D^n,\\partial D^n)$($n>0$)의 축소 호몰로지 긴 완전열과 $D^n$의 축약가능성을 이용해, 연결 사상 $\\partial:H_i(D^n,\\partial D^n)\\to\\widetilde{H}_{i-1}(S^{n-1})$이 모든 $i>0$에서 동형임을 보이고 $H_i(D^n,\\partial D^n)$을 결정하라.",
+          "hint": "완전열에서 $H_i(D^n,\\partial D^n)$의 양옆에 있는 항 $\\widetilde{H}_i(D^n)$과 $\\widetilde{H}_{i-1}(D^n)$이 무엇인지 보라. 이웃 두 항이 $0$이면 (기본사실 (iii)) 가운데 사상이 동형이다.",
+          "solution": "완전열의 한 토막은 $$\\widetilde{H}_i(D^n)\\to H_i(D^n,\\partial D^n)\\xrightarrow{\\partial}\\widetilde{H}_{i-1}(S^{n-1})\\to\\widetilde{H}_{i-1}(D^n).$$ $D^n$이 축약가능하므로 양끝 $\\widetilde{H}_i(D^n)=\\widetilde{H}_{i-1}(D^n)=0$. 따라서 $0\\to H_i(D^n,\\partial D^n)\\xrightarrow{\\partial}\\widetilde{H}_{i-1}(S^{n-1})\\to0$이 완전, 즉 $\\partial$이 동형(기본사실 (iii)). 따름정리 2.14의 $\\widetilde{H}_{i-1}(S^{n-1})$을 대입하면 $$H_i(D^n,\\partial D^n)\\cong\\widetilde{H}_{i-1}(S^{n-1})\\cong\\begin{cases}\\mathbb{Z}&i=n\\\\0&\\text{그 외}\\end{cases}$$ 일반화: 완전열에서 이웃 항이 사라지는 것만으로 미지의 군이 확정되는 것이 긴 완전열 계산의 전형이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "쌍 $(X,A)$의 긴 완전열을 이용해, 모든 $n$에서 $H_n(X,A)=0$이면 포함 $i:A\\hookrightarrow X$이 모든 $n$에서 동형 $i_*:H_n(A)\\xrightarrow{\\ \\cong\\ }H_n(X)$을 유도함을 보여라.",
+          "hint": "완전열에서 $H_n(X,A)=0$과 $H_{n+1}(X,A)=0$을 $i_*$ 양옆에 대입하면 어떤 짧은 완전열이 남는가?",
+          "solution": "긴 완전열의 토막 $$H_{n+1}(X,A)\\to H_n(A)\\xrightarrow{i_*}H_n(X)\\to H_n(X,A)$$ 에 $H_{n+1}(X,A)=H_n(X,A)=0$을 넣으면 $$0\\to H_n(A)\\xrightarrow{i_*}H_n(X)\\to0$$ 이 완전. 기본사실 (iii)에 의해 $i_*$은 동형이다. 즉 '상대 호몰로지가 전부 사라진다'는 것은 정확히 '$A$와 $X$가 호몰로지적으로 구별되지 않는다'는 뜻이며, 이것이 $H_n(X,A)$가 두 군의 '차이'를 잰다는 말의 정밀한 형태다. (역도 참임이 이 절 연습문제로 남는다.)"
+        },
+        {
+          "type": "ox",
+          "question": "완전열 $0\\to A\\xrightarrow{\\alpha}B\\xrightarrow{\\beta}C\\to0$이 짧은 완전열이면 $\\alpha$는 단사, $\\beta$는 전사이며 $C\\cong B/\\mathrm{Im}\\,\\alpha$이다.",
+          "answer": "O",
+          "explanation": "완전성의 정의를 세 자리에서 읽으면 그대로 나온다: $A$ 자리에서 $\\mathrm{Ker}\\,\\alpha=\\mathrm{Im}(0\\to A)=0$이라 $\\alpha$ 단사; $C$ 자리에서 $\\mathrm{Im}\\,\\beta=\\mathrm{Ker}(C\\to0)=C$라 $\\beta$ 전사; $B$ 자리에서 $\\mathrm{Ker}\\,\\beta=\\mathrm{Im}\\,\\alpha$라 $\\beta$가 동형 $C\\cong B/\\mathrm{Im}\\,\\alpha$를 유도한다. $\\alpha$를 포함으로 보면 $C\\cong B/A$."
+        },
+        {
+          "type": "ox",
+          "question": "절제 정리에 의해, 부분공간 $Z\\subset A$이면 무엇이든 도려내도 $H_n(X,A)\\cong H_n(X-Z,A-Z)$이 성립한다.",
+          "answer": "X",
+          "explanation": "조건 $\\mathrm{cl}\\,Z\\subset\\mathrm{int}\\,A$(즉 $Z$가 $A$의 내부에 여유 있게 파묻힘)가 반드시 필요하다. $Z$가 $A$의 경계에 걸쳐 있으면 도려내기가 $X-Z$와 $A-Z$의 경계 근방을 훼손해 상대 호몰로지가 바뀔 수 있다. 동치 형태로는 $X=\\mathrm{int}\\,A\\cup\\mathrm{int}\\,B$($B=X-Z$)라는 '내부 덮개' 조건으로 표현된다."
+        },
+        {
+          "type": "conceptual",
+          "question": "왜 순진한 관계 '$H_n(X)/H_n(A)\\cong H_n(X/A)$' 대신 세 군을 모든 차원에서 동시에 엮는 긴 완전열을 쓰는가? 긴 완전열이 무엇을 보장하고, 연결 준동형 $\\partial$은 무엇을 의미하는지 설명하라.",
+          "hint": "순진한 관계가 왜 일반적으로 무너지는지(원뿔 $CX$), 그리고 완전성 $\\mathrm{Ker}=\\mathrm{Im}$이 어떻게 '한 군의 정보 손실을 이웃 군이 정확히 메운다'를 뜻하는지 생각하라.",
+          "answer": "순진한 관계는 일반적으로 거짓이다 — 모든 공간 $X$는 축약가능한 원뿔 $CX$에 부분공간으로 들어가므로, 만약 그 관계가 늘 성립한다면 호몰로지가 통째로 붕괴한다. 대신 긴 완전열 $\\cdots\\to H_n(A)\\to H_n(X)\\to H_n(X,A)\\to H_{n-1}(A)\\to\\cdots$은 세 군 $H_n(A),H_n(X),H_n(X,A)$을 모든 차원에서 사슬처럼 엮는다. 완전성 $\\mathrm{Ker}=\\mathrm{Im}$이 핵심 보장이다: 각 자리에서 '들어오는 상 = 나가는 핵'이므로, 한 사상에서 죽는(핵으로 들어가는) 정보는 반드시 바로 앞 사상의 상으로부터 오고, 어떤 것도 새거나 중복되지 않는다. 그래서 세 군 중 둘을 알면 셋째가 (완전성의 대수만으로) 강하게 제약되며, 특히 이웃 항이 $0$이면 사상이 동형이 되어 미지의 군이 결정된다 — 이것이 구·원판·브라우어 정리를 단숨에 주는 계산 엔진이다. 연결 준동형 $\\partial:H_n(X,A)\\to H_{n-1}(A)$의 의미는 '차원을 한 칸 낮추는 다리'다: 상대순환 $\\alpha$는 그 자체로 닫히지 않았지만 경계 $\\partial\\alpha$가 $A$ 안에 떨어지는 사슬이고, 그 발자국 $\\partial[\\alpha]=[\\partial\\alpha]$가 $A$의 진짜 순환이 된다. 즉 $\\partial$은 '$X$에서 $A$에 두 발을 딛고 뻗은 다리'를 그 발자국인 $A$의 저차원 순환으로 되돌려, $X$의 $n$차원 정보와 $A$의 $(n-1)$차원 정보를 정확히 잇는다. 요컨대 $H_n(X,A)$는 $H_n(X)$와 $H_n(A)$의 '차이'를 재고, 긴 완전열은 그 차이가 어떻게 차원을 넘나들며 정산되는지를 남김없이 기록한 장부다."
+        }
+      ]
+    },
+    {
       "section_title": "2.intro 개관 — 호몰로지의 아이디어 (The Idea of Homology)",
       "step1_big_picture": {
         "context": "1장에서 배운 기본군(fundamental group) $\\pi_1(X)$은 저차원 공간에는 강력하지만, 그 정의가 오직 저차원 대상(고리 $I\\to X$, 고리의 호모토피 $I\\times I\\to X$)만 쓰기에 고차원을 다루기엔 무디다 — 예컨대 $S^n\\ (n\\ge 2)$들을 전혀 구별하지 못한다. 자연스러운 고차원 유비인 호모토피군 $\\pi_n(X)$은 모든 구를 구별하지만($\\pi_i(S^n)=0\\ (i<n),\\ \\mathbb{Z}\\ (i=n)$), 계산이 악명 높게 어렵다($i>n$일 때 $\\pi_i(S^n)$은 거대한 미해결 문제). 그 대안이 이 장의 주인공인 호몰로지군 $H_n(X)$이다. $\\pi_n$과 마찬가지로 CW 복합체에서 $(n{+}1)$-뼈대(skeleton)에만 의존하되, $i>n$이면 $H_i(S^n)=0$이라는 결정적 이점을 가지며, 무엇보다 셀 구조에서 직접 계산된다.",
