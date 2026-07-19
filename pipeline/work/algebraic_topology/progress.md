@@ -55,7 +55,7 @@
 | 034 | [x] | 2.1.4 Homotopy Invariance | section | `034__AlgebraicTopol__2_1_4_HomotopyInvariance.txt` |
 | 035 | [x] | 2.1.5 Exact Sequences and Excision (분할 part 1) _(원본 #035)_ | section | `035__AlgebraicTopol__2_1_5_ExactSequencesandExcision__p1.txt` |
 | 036 | [x] | 2.1.5 Exact Sequences and Excision (분할 part 2) _(원본 #036)_ | section | `036__AlgebraicTopol__2_1_5_ExactSequencesandExcision__p2.txt` |
-| 037 | [ ] | 2.1.6 The Equivalence of Simplicial and Singular Homology | section | `037__AlgebraicTopol__2_1_6_TheEquivalenceofSimplicial.txt` |
+| 037 | [x] | 2.1.6 The Equivalence of Simplicial and Singular Homology | section | `037__AlgebraicTopol__2_1_6_TheEquivalenceofSimplicial.txt` |
 | 038 | [ ] | 2.1.ex Exercises | exercises | `038__AlgebraicTopol__2_1_ex_Exercises__EX.txt` |
 | 039 | [ ] | 2.2 Computations and Applications | section | `039__AlgebraicTopol__2_2_ComputationsandApplication.txt` |
 | 040 | [ ] | 2.2.1 Degree | section | `040__AlgebraicTopol__2_2_1_Degree.txt` |
