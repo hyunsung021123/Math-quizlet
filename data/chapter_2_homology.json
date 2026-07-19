@@ -1834,6 +1834,389 @@
       ]
     },
     {
+      "section_title": "2.1.5 완전열과 절제 (Exact Sequences and Excision) — 2부",
+      "step1_big_picture": {
+        "context": "1부에서 완전열·상대 호몰로지·긴 완전열(정리 2.16)을 세우고, 계산의 결정타인 절제 정리(정리 2.20)와 그 증명 도구인 명제 2.21(작은 단체로 호몰로지를 계산할 수 있다)을 예고만 해 두었다. 2부는 그 예고된 증명을 실제로 수행한다. 핵심 기술은 무게중심 세분(barycentric subdivision) — 특이 단체를 지름이 $0$으로 수렴할 만큼 잘게 쪼개되 호몰로지는 전혀 바꾸지 않는 조작이다. 이것으로 절제 정리를 증명하고, 이어 상대 호몰로지를 축소 호몰로지로 되돌리는 명제 2.22(좋은 쌍에서 $H_n(X,A)\\cong\\widetilde{H}_n(X/A)$, 정리 2.13 완성), 생성원의 명시적 순환(예 2.23), CW 절제(따름정리 2.24)와 쐐기합(따름정리 2.25), 그리고 브라우어의 차원 불변성(정리 2.26, $\\mathbb{R}^m\\cong\\mathbb{R}^n\\Rightarrow m=n$)까지 단숨에 얻는다. 마지막으로 완전열의 자연성(naturality)을 짚고, 이 절의 종착점인 '단체=특이 호몰로지'(정리 2.27)를 예고한다.",
+        "hidden_intuition": "무게중심 세분이 왜 마법인가? 큰 특이 단체는 $A$와 $B$의 경계를 제멋대로 넘나들어 절제를 방해한다. 하지만 삼각형을 무게중심에 원뿔로 이어 잘게 쪼개면(지름이 매번 $\\tfrac{n}{n+1}$배로 줄어든다) 각 조각은 결국 $\\mathrm{int}\\,A$ 아니면 $\\mathrm{int}\\,B$ 하나에 쏙 들어간다 — 르베그 수(Lebesgue number)가 이를 보장한다. 결정적인 것은 '세분해도 호몰로지가 안 변한다'는 사실인데, 그 이유가 아름답다: 세분 연산자 $S$와 항등 사이에 사슬호모토피 $T$($\\partial T+T\\partial=\\mathbb{1}-S$)가 있어, 세분은 호몰로지에서 항등과 구별되지 않는다. 그 사슬호모토피의 기하가 바로 원뿔 연산자($\\partial b+b\\partial=\\mathbb{1}$, '원뿔의 경계 = 밑면 + 밑면 경계의 원뿔')와 정리 2.10의 기둥이다. 즉 이 절 전체가 '경계 연산과 짝을 이루는 채움 연산(원뿔·기둥·세분)이 호몰로지를 항등으로 만든다'는 하나의 선율을 변주한다. 그 결과 상대 호몰로지 $H_n(X,A)$는 '몫공간 $X/A$의 (축소) 호몰로지'라는 직관적 정체를 되찾고, 국소 호몰로지 $H_n(X,X-\\{x\\})$는 점 $x$ 주변의 차원을 읽어 내는 현미경이 된다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "명제 2.21 (무게중심 세분: 작은 단체로 호몰로지 계산)",
+          "formal_statement": "덮개 $\\mathcal{U}=\\{U_j\\}$(내부가 $X$를 덮음)에 대해, 각 특이 단체의 상이 어떤 $U_j$에 담기는 사슬들의 부분복합체 $C_n^{\\mathcal{U}}(X)$을 두면, 포함 $\\iota:C_n^{\\mathcal{U}}(X)\\hookrightarrow C_n(X)$은 사슬호모토피 동치다. 즉 사슬사상 $\\rho:C_n(X)\\to C_n^{\\mathcal{U}}(X)$이 있어 $\\iota\\rho,\\rho\\iota$가 항등과 사슬호모토피하고, 따라서 $H_n^{\\mathcal{U}}(X)\\cong H_n(X)$이 모든 $n$에서 성립한다.",
+          "idea_behind_proof": "증명은 '가장 기하적인 것에서 점점 대수적인 것으로' 네 단계로 간다. 열쇠는 두 개의 채움 연산자다. (1) 원뿔 연산자 $b([w_0,\\dots,w_n])=[b,w_0,\\dots,w_n]$은 $\\partial b+b\\partial=\\mathbb{1}$을 만족한다 — '원뿔의 경계는 밑면과, 밑면 경계 위의 원뿔로 이루어진다'는 기하의 대수판. (2) 이것으로 세분 연산자 $S(\\lambda)=b_\\lambda(S\\partial\\lambda)$를 귀납적으로 짓는데, 진짜 단체에서는 $S$가 무게중심 세분 조각들의 부호 붙은 합이 된다. (3) 세분과 항등을 잇는 사슬호모토피 $T$($\\partial T+T\\partial=\\mathbb{1}-S$)의 기하는 정리 2.10의 기둥 $\\Delta^n\\times I$의 삼각분할이다. (4) 반복 세분 $S^m$은 지름을 $(\\tfrac{n}{n+1})^m\\to0$로 줄여, 르베그 수보다 작아지면 조각이 어떤 $U_j$에 담긴다.",
+          "proof_steps": [
+            "1단계 (원뿔): 각 점 $b$에 대해 $b([w_0,\\dots,w_n])=[b,w_0,\\dots,w_n]$은 $\\partial b(\\alpha)=\\alpha-b(\\partial\\alpha)$, 즉 $\\partial b+b\\partial=\\mathbb{1}$을 만족한다(증대 복합체 $LC(Y)$에서 항등과 영사상 사이의 사슬호모토피).",
+            "2단계 (세분 $S$와 사슬호모토피 $T$): $S(\\lambda)=b_\\lambda(S\\partial\\lambda)$는 사슬사상($\\partial S=S\\partial$)이고, $T\\lambda=b_\\lambda(\\lambda-T\\partial\\lambda)$가 $\\partial T+T\\partial=\\mathbb{1}-S$를 준다. 일반 사슬로는 $S\\sigma=\\sigma_\\#S\\Delta^n$, $T\\sigma=\\sigma_\\#T\\Delta^n$로 확장.",
+            "3단계 (반복): $D_m=\\sum_{0\\le i<m}TS^i$는 $\\partial D_m+D_m\\partial=\\mathbb{1}-S^m$. 콤팩트성(르베그 수)으로 각 $\\sigma$마다 $S^{m(\\sigma)}\\sigma\\in C_n^{\\mathcal{U}}(X)$가 되는 최소 $m(\\sigma)$가 존재.",
+            "4단계 (국소화): $D\\sigma=D_{m(\\sigma)}\\sigma$로 두면 $\\partial D+D\\partial=\\mathbb{1}-\\iota\\rho$ (여기서 $\\rho(\\sigma)\\in C_n^{\\mathcal{U}}(X)$)이고, $\\sigma\\in C_n^{\\mathcal{U}}$이면 $m(\\sigma)=0$이라 $\\rho\\iota=\\mathbb{1}$. 따라서 $\\rho$는 $\\iota$의 사슬호모토피 역, 곧 $H_n^{\\mathcal{U}}(X)\\cong H_n(X)$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                0,
+                0
+              ],
+              [
+                3,
+                0
+              ],
+              [
+                1.5,
+                2.6
+              ],
+              [
+                1.5,
+                0
+              ],
+              [
+                2.25,
+                1.3
+              ],
+              [
+                0.75,
+                1.3
+              ],
+              [
+                1.5,
+                0.87
+              ]
+            ],
+            "vertex_labels": [
+              "v_0",
+              "v_1",
+              "v_2",
+              "m_{01}",
+              "m_{12}",
+              "m_{02}",
+              "b"
+            ],
+            "faces": [
+              {
+                "vertices": [
+                  6,
+                  0,
+                  3
+                ]
+              },
+              {
+                "vertices": [
+                  6,
+                  3,
+                  1
+                ]
+              },
+              {
+                "vertices": [
+                  6,
+                  1,
+                  4
+                ]
+              },
+              {
+                "vertices": [
+                  6,
+                  4,
+                  2
+                ]
+              },
+              {
+                "vertices": [
+                  6,
+                  2,
+                  5
+                ]
+              },
+              {
+                "vertices": [
+                  6,
+                  5,
+                  0
+                ]
+              }
+            ],
+            "caption": "삼각형 $\\Delta^2$의 무게중심 세분: 무게중심 $b$를 각 변의 세분에 원뿔로 이어 $6$개의 작은 삼각형을 얻는다. 지름은 원래의 $\\tfrac{2}{3}$배 이하로 줄고, 반복하면 임의로 작아진다."
+          }
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.20 증명 (절제)",
+          "formal_statement": "$X=A\\cup B$ ($\\mathrm{int}\\,A\\cup\\mathrm{int}\\,B=X$)일 때 포함 $(B,A\\cap B)\\hookrightarrow(X,A)$은 동형 $H_n(B,A\\cap B)\\xrightarrow{\\cong}H_n(X,A)$을 유도한다. (동치 형태로 $\\mathrm{cl}\\,Z\\subset\\mathrm{int}\\,A$인 $Z$를 도려낸 $(X-Z,A-Z)\\hookrightarrow(X,A)$이 동형.)",
+          "idea_behind_proof": "덮개 $\\mathcal{U}=\\{A,B\\}$에 대한 $C_n^{\\mathcal{U}}(X)$을 $C_n(A+B)$('$A$의 사슬 + $B$의 사슬')로 쓰면, 명제 2.21의 두 공식 $\\partial D+D\\partial=\\mathbb{1}-\\iota\\rho$, $\\rho\\iota=\\mathbb{1}$이 모두 '$A$의 사슬을 $A$의 사슬로' 보내므로 $C_n(A)$로 나눈 몫에서도 그대로 성립한다.",
+          "proof_steps": [
+            "1단계: 위 공식들이 $C_n(A)$를 보존하므로 몫으로 내려가, 포함 $C_n(A+B)/C_n(A)\\hookrightarrow C_n(X)/C_n(A)$이 호몰로지에서 동형을 유도한다(우변이 곧 $C_n(X,A)$).",
+            "2단계: 포함이 유도하는 $C_n(B)/C_n(A\\cap B)\\to C_n(A+B)/C_n(A)$은 동형이다 — 양쪽 모두 'B에 있으나 A에는 없는 특이 단체'를 기저로 하는 자유군이기 때문.",
+            "3단계: 두 동형을 합치면 $H_n(B,A\\cap B)\\cong H_n(X,A)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.22 (좋은 쌍: 상대 = 몫의 축소 호몰로지) — 정리 2.13 완성",
+          "formal_statement": "좋은 쌍 $(X,A)$에 대해 몫사상 $q:(X,A)\\to(X/A,A/A)$은 동형 $q_*:H_n(X,A)\\xrightarrow{\\cong}H_n(X/A,A/A)\\cong\\widetilde{H}_n(X/A)$을 모든 $n$에서 유도한다. 따라서 정리 2.13의 긴 완전열이 $\\widetilde{H}_n(X/A)$로 표현된다. 임의의 쌍에 대해서도 사상원뿔(mapping cone) $X\\cup CA$($CA=(A\\times I)/(A\\times\\{0\\})$의 밑면 $A\\times\\{1\\}$을 $A\\subset X$와 동일시)를 써서 $$\\widetilde{H}_n(X\\cup CA)\\cong H_n(X\\cup CA,CA)\\cong H_n(X\\cup CA-\\{p\\},CA-\\{p\\})\\cong H_n(X,A)$$ 로 상대 호몰로지를 절대(축소) 호몰로지로 표현할 수 있다($p$는 원뿔의 꼭짓점).",
+          "idea_behind_proof": "$A$를 변형수축하는 근방 $V$를 잡아, 절제(정리 2.20)와 삼조 $(X,V,A)$의 완전열($H_n(V,A)=0$, 이는 $(V,A)\\simeq(A,A)$이므로)을 짜맞춘 가환도식을 추적한다. $q$가 $A$의 여집합에서 위상동형이라는 사실이 오른쪽 세로 사상을 동형으로 만들어, 도식의 가환성으로 원하는 $q_*$이 동형이 된다. 임의 쌍의 경우 $CA$가 축약가능하다는 것과 절제, $CA-\\{p\\}\\simeq A$를 차례로 쓴다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -2.4,
+                  0
+                ],
+                "to": [
+                  2.4,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.1,
+                  0
+                ],
+                "to": [
+                  1.1,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.1,
+                  0
+                ],
+                "to": [
+                  0,
+                  2.0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1.1,
+                  0
+                ],
+                "to": [
+                  0,
+                  2.0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  2.0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  2.35
+                ],
+                "text": "p"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0.9
+                ],
+                "text": "CA"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.35
+                ],
+                "text": "A"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.0,
+                  0.3
+                ],
+                "text": "X"
+              }
+            ],
+            "caption": "사상원뿔 $X\\cup CA$: 부분공간 $A$ 위에 원뿔 $CA$(꼭짓점 $p$)를 얹는다. $CA$가 축약가능하고 절제·변형수축을 거치면 $\\widetilde{H}_n(X\\cup CA)\\cong H_n(X,A)$."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.23 (생성원의 명시적 순환)",
+          "formal_statement": "무한순환군 $H_n(D^n,\\partial D^n)$과 $\\widetilde{H}_n(S^n)$의 생성원을 구체적 순환으로 나타낸다. 동치 쌍 $(\\Delta^n,\\partial\\Delta^n)$에서, 항등사상 $i_n:\\Delta^n\\to\\Delta^n$을 특이 $n$-단체로 보면 이는 상대순환이고 $H_n(\\Delta^n,\\partial\\Delta^n)\\cong\\mathbb{Z}$의 생성원이다. 또 $S^n$을 경계를 동일시한 두 $n$-단체 $\\Delta^n_1,\\Delta^n_2$로 보면, 차 $\\Delta^n_1-\\Delta^n_2$는 순환이며 $\\widetilde{H}_n(S^n)$($n>0$)의 생성원을 대표한다.",
+          "idea_behind_proof": "핵심은 '항등사상이야말로 가장 자연스러운 상대순환'이라는 관찰이다. 삼조 $(\\Delta^n,\\partial\\Delta^n,\\Lambda)$($\\Lambda$는 한 면만 뺀 경계)의 완전열에서 연결 사상 $\\partial$이 $i_n$을 $\\partial i_n=\\pm i_{n-1}$로 보내므로, 차원에 대한 귀납으로 $i_n$이 생성원임이 이어진다. 구면 생성원은 명제 2.22의 몫 논법으로 $\\Delta^n_1-\\Delta^n_2$가 $\\Delta^n_1$(즉 $H_n(\\Delta^n_1,\\partial\\Delta^n_1)$의 생성원)에 대응함을 보여 얻는다.",
+          "proof_steps": [
+            "1단계 (원판): $n=0$에서 $i_0$은 생성원. 귀납으로 $H_n(\\Delta^n,\\partial\\Delta^n)\\xrightarrow{\\cong}H_{n-1}(\\partial\\Delta^n,\\Lambda)\\xleftarrow{\\cong}H_{n-1}(\\Delta^{n-1},\\partial\\Delta^{n-1})$: 첫 동형은 삼조의 연결 사상($H_i(\\Delta^n,\\Lambda)=0$, $\\Delta^n\\simeq\\Lambda$), 둘째는 명제 2.22($\\Delta^{n-1}/\\partial\\Delta^{n-1}\\cong\\partial\\Delta^n/\\Lambda$).",
+            "2단계: $i_n\\mapsto\\partial i_n=\\pm i_{n-1}$이므로 귀납이 완결되어 $i_n$이 $H_n(\\Delta^n,\\partial\\Delta^n)\\cong\\mathbb{Z}$의 생성원.",
+            "3단계 (구면): $\\widetilde{H}_n(S^n)\\xrightarrow{\\cong}H_n(S^n,\\Delta^n_2)\\xleftarrow{\\cong}H_n(\\Delta^n_1,\\partial\\Delta^n_1)$에서 $\\Delta^n_1-\\Delta^n_2\\mapsto\\Delta^n_1$이 생성원에 대응하므로 $\\Delta^n_1-\\Delta^n_2$가 $\\widetilde{H}_n(S^n)$의 생성원. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.6
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.6,
+                  0
+                ],
+                "to": [
+                  1.6,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.6,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.6,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0.8
+                ],
+                "text": "Δ^n_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.8
+                ],
+                "text": "Δ^n_2"
+              }
+            ],
+            "caption": "$S^n$을 경계 동일시한 두 단체 $\\Delta^n_1,\\Delta^n_2$로 본 그림. 차 $\\Delta^n_1-\\Delta^n_2$가 경계 없는 순환이 되어 $\\widetilde{H}_n(S^n)\\cong\\mathbb{Z}$를 생성한다."
+          }
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 2.24 · 2.25 (CW 절제와 쐐기합)",
+          "formal_statement": "따름정리 2.24: CW 복합체 $X$가 부분복합체 $A,B$의 합집합이면 포함 $(B,A\\cap B)\\hookrightarrow(X,A)$이 모든 $n$에서 동형 $H_n(B,A\\cap B)\\to H_n(X,A)$을 유도한다(내부 덮개 조건이 없어도 성립). 따름정리 2.25: 쐐기합 $\\bigvee_\\alpha X_\\alpha$에서, 각 쌍 $(X_\\alpha,x_\\alpha)$가 좋은 쌍이도록 기준점에서 붙였다면 포함들이 동형 $\\bigoplus_\\alpha\\widetilde{H}_n(X_\\alpha)\\xrightarrow{\\cong}\\widetilde{H}_n\\big(\\bigvee_\\alpha X_\\alpha\\big)$을 유도한다.",
+          "idea_behind_proof": "2.24는 CW 쌍이 좋은 쌍(명제 2.22)이라 몫공간 $B/(A\\cap B)\\cong X/A$로 넘어가 얻는다(위상동형인 몫이면 절제가 내부조건 없이도 성립). 2.25는 '축소 호몰로지 = 기준점에 대한 상대 호몰로지'라는 사실에 $(X,A)=(\\coprod_\\alpha X_\\alpha,\\coprod_\\alpha\\{x_\\alpha\\})$을 대입한 명제 2.22의 직접 결과다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.26 (차원 불변성)와 국소 호몰로지",
+          "formal_statement": "비어 있지 않은 열린집합 $U\\subset\\mathbb{R}^m$과 $V\\subset\\mathbb{R}^n$이 위상동형이면 $m=n$이다. 일반적으로 공간 $X$의 점 $x$에서의 국소 호몰로지군(local homology group)을 $H_n(X,X-\\{x\\})$로 정의하면, 절제에 의해 임의의 열린 근방 $U$에 대해 $H_n(X,X-\\{x\\})\\cong H_n(U,U-\\{x\\})$이므로 이는 $x$ 근방의 국소 위상에만 의존한다.",
+          "idea_behind_proof": "국소 호몰로지가 점 주변의 '차원을 읽는 현미경'이라는 것이 핵심이다. 절제로 국소화한 뒤, 뚫린 유클리드 공간이 구면으로 변형수축한다는 사실이 $H_k(\\mathbb{R}^m,\\mathbb{R}^m-\\{x\\})$을 정확히 차원 $m$에서만 $\\mathbb{Z}$로 만든다. 위상동형은 이 국소 불변량을 보존하므로 두 차원이 같아야 한다.",
+          "proof_steps": [
+            "1단계: 절제로 $H_k(U,U-\\{x\\})\\cong H_k(\\mathbb{R}^m,\\mathbb{R}^m-\\{x\\})$.",
+            "2단계: 쌍 $(\\mathbb{R}^m,\\mathbb{R}^m-\\{x\\})$의 완전열과 $\\mathbb{R}^m$의 축약가능성에서 $H_k(\\mathbb{R}^m,\\mathbb{R}^m-\\{x\\})\\cong\\widetilde{H}_{k-1}(\\mathbb{R}^m-\\{x\\})$. $\\mathbb{R}^m-\\{x\\}\\simeq S^{m-1}$이므로 이는 $k=m$에서 $\\mathbb{Z}$, 그 외 $0$.",
+            "3단계: 같은 논리로 $H_k(V,V-\\{y\\})$은 $k=n$에서만 $\\mathbb{Z}$. 위상동형 $h:U\\to V$이 모든 $k$에서 $H_k(U,U-\\{x\\})\\cong H_k(V,V-\\{h(x)\\})$을 유도하므로 $m=n$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "annulus",
+                "center": [
+                  0,
+                  0
+                ],
+                "r_outer": 1.9,
+                "r_inner": 0.45,
+                "fill": "#eef2ff"
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.35,
+                  0.3
+                ],
+                "text": "x"
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.15,
+                "dash": "5,4"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.45
+                ],
+                "text": "S^{m-1}"
+              }
+            ],
+            "caption": "국소 호몰로지의 심장: 점 $x$를 뺀 $\\mathbb{R}^m-\\{x\\}$는 구면 $S^{m-1}$로 변형수축한다. 그래서 $H_k(\\mathbb{R}^m,\\mathbb{R}^m-\\{x\\})$은 $k=m$에서만 $\\mathbb{Z}$ — 이 값이 국소 차원을 읽어 낸다."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (자연성, 그리고 단체=특이 호몰로지 예고)",
+          "formal_statement": "지금까지 세운 긴 완전열들은 자연성(naturality)을 갖는다: 쌍의 사상 $f:(X,A)\\to(Y,B)$에 대해, 쌍 $(X,A)$의 긴 완전열과 $(Y,B)$의 긴 완전열을 $f_*$로 잇는 사다리 도식이 가환이다(연결 사상 $\\partial$이 걸린 정사각형까지 포함). 이는 사슬 수준의 $f_\\#\\partial=\\partial f_\\#$에서 곧바로 나오며, 삼조·축소·정리 2.13의 완전열에도 동일하게 성립한다. 겉보기엔 기술적 사족 같지만, 뒤의 여러 논증에서 결정적 역할을 한다. 이 절은 마지막으로 단체 호몰로지와 특이 호몰로지가 항상 일치함(정리 2.27: 모든 $\\Delta$-복합체 쌍 $(X,A)$에서 표준 사상 $H_n^{\\Delta}(X,A)\\to H_n(X,A)$이 동형)을 증명하며 마무리되는데, 그 증명은 뼈대 $X^k$에 대한 귀납과 다섯 보조정리(five lemma)를 쓴다(다음 조각에서 전개).",
+          "idea_behind_proof": "자연성의 증명 원리는 '사슬 수준에서 이미 가환인 것은 호몰로지로 내려가도 가환'이라는 단순한 사실이다 — $f_\\#$이 사슬사상이라 순환·경계·연결 사상과 모두 교환한다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "원뿔 연산자 $b([w_0,\\dots,w_n])=[b,w_0,\\dots,w_n]$이 $n=1$일 때 관계식 $\\partial\\big(b[w_0,w_1]\\big)=[w_0,w_1]-b\\big(\\partial[w_0,w_1]\\big)$을 만족함을 직접 계산으로 확인하라. 이것이 $\\partial b+b\\partial=\\mathbb{1}$의 한 사례임을 설명하라.",
+          "hint": "$b[w_0,w_1]=[b,w_0,w_1]$(삼각형)이다. $\\partial[b,w_0,w_1]$을 교대부호 공식으로 전개하고, $\\partial[w_0,w_1]=[w_1]-[w_0]$에 $b$를 씌운 것과 비교하라.",
+          "solution": "$b[w_0,w_1]=[b,w_0,w_1]$이고 $$\\partial[b,w_0,w_1]=[w_0,w_1]-[b,w_1]+[b,w_0].$$ 한편 $\\partial[w_0,w_1]=[w_1]-[w_0]$이므로 $b(\\partial[w_0,w_1])=b([w_1]-[w_0])=[b,w_1]-[b,w_0]$. 따라서 $$\\partial[b,w_0,w_1]=[w_0,w_1]-\\big([b,w_1]-[b,w_0]\\big)=[w_0,w_1]-b(\\partial[w_0,w_1]).$$ 이를 옮기면 $\\partial b(\\alpha)+b(\\partial\\alpha)=\\alpha$, 곧 $\\partial b+b\\partial=\\mathbb{1}$. 기하적으로 '삼각형(원뿔)의 경계 = 밑변 $[w_0,w_1]$ + 밑변의 경계 위의 원뿔'이며, $\\partial b+b\\partial=\\mathbb{1}$은 원뿔 연산자가 항등과 영사상 사이의 사슬호모토피임을 뜻한다 — 이 채움 성질이 세분이 호몰로지를 보존하는 근원이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "절제와 쌍의 긴 완전열을 이용해 국소 호몰로지 $H_k(\\mathbb{R}^n,\\mathbb{R}^n-\\{x\\})$을 계산하고, 이것이 왜 '차원 불변성'을 주는지 설명하라. ($\\mathbb{R}^n-\\{x\\}\\simeq S^{n-1}$과 따름정리 2.14를 사용하라.)",
+          "hint": "쌍 $(\\mathbb{R}^n,\\mathbb{R}^n-\\{x\\})$의 축소 완전열에서 $\\widetilde{H}_k(\\mathbb{R}^n)=0$(축약가능)을 양옆에 넣어 연결 사상을 동형으로 만들라.",
+          "solution": "완전열의 토막 $\\widetilde{H}_k(\\mathbb{R}^n)\\to H_k(\\mathbb{R}^n,\\mathbb{R}^n-\\{x\\})\\xrightarrow{\\partial}\\widetilde{H}_{k-1}(\\mathbb{R}^n-\\{x\\})\\to\\widetilde{H}_{k-1}(\\mathbb{R}^n)$에서 양끝이 $0$이므로 $\\partial$이 동형: $$H_k(\\mathbb{R}^n,\\mathbb{R}^n-\\{x\\})\\cong\\widetilde{H}_{k-1}(\\mathbb{R}^n-\\{x\\})\\cong\\widetilde{H}_{k-1}(S^{n-1})\\cong\\begin{cases}\\mathbb{Z}&k=n\\\\0&\\text{그 외.}\\end{cases}$$ 이 군은 $x$가 어느 차원의 유클리드 공간에 있는지를 '$\\mathbb{Z}$가 나타나는 차수 $k=n$'으로 정확히 기록한다. 위상동형은 국소 호몰로지를 보존하므로, $\\mathbb{R}^m$의 열린집합과 $\\mathbb{R}^n$의 열린집합이 위상동형이면 이 유일한 비영 차수가 같아야 하고, 따라서 $m=n$이다."
+        },
+        {
+          "type": "ox",
+          "question": "덮개 $\\mathcal{U}$의 원소에 담기는 작은 사슬만 쓰는 $H_n^{\\mathcal{U}}(X)$은 일반적으로 통상의 $H_n(X)$보다 작을 수 있다.",
+          "answer": "X",
+          "explanation": "명제 2.21이 정확히 반대를 말한다: 포함 $\\iota:C_n^{\\mathcal{U}}(X)\\hookrightarrow C_n(X)$은 사슬호모토피 동치라 $H_n^{\\mathcal{U}}(X)\\cong H_n(X)$이다. 즉 '작은 단체만으로 계산해도' 호몰로지는 전혀 손실되지 않는다. 무게중심 세분 연산자 $S$와 항등 사이의 사슬호모토피 $T$($\\partial T+T\\partial=\\mathbb{1}-S$)가 이 동형을 보증하며, 바로 이것이 절제 정리의 핵심 도구다."
+        },
+        {
+          "type": "ox",
+          "question": "좋은 쌍 $(X,A)$에 대해 상대 호몰로지는 몫공간의 축소 호몰로지와 같다: $H_n(X,A)\\cong\\widetilde{H}_n(X/A)$.",
+          "answer": "O",
+          "explanation": "명제 2.22의 결론이다. $A$를 변형수축하는 근방을 잡아 절제와 삼조 완전열을 결합하면, 몫사상 $q$가 동형 $H_n(X,A)\\cong H_n(X/A,A/A)\\cong\\widetilde{H}_n(X/A)$을 유도한다. 이로써 1부의 정리 2.13(좋은 쌍의 긴 완전열이 $\\widetilde{H}_n(X/A)$로 표현됨)이 완성된다. CW 쌍은 항상 좋은 쌍이므로 이 관계가 널리 쓰인다."
+        },
+        {
+          "type": "conceptual",
+          "question": "무게중심 세분이 왜 절제 정리의 열쇠인가? '작은 단체로 호몰로지를 계산할 수 있다'는 명제 2.21이 어떻게 절제의 동형을 낳는지, 그리고 그 밑바탕에 깔린 '채움 연산자'의 공통 원리를 설명하라.",
+          "hint": "큰 특이 단체가 왜 절제를 방해하는지, 세분이 그 단체를 어디로 몰아넣는지($\\mathrm{int}\\,A$ 또는 $\\mathrm{int}\\,B$), 그리고 세분이 호몰로지를 안 바꾸는 이유(사슬호모토피)를 이으라.",
+          "answer": "절제 $H_n(B,A\\cap B)\\cong H_n(X,A)$가 성립하려면 '$X$의 사슬을 $A$의 사슬과 $B$의 사슬로 분리'할 수 있어야 한다. 그런데 큰 특이 단체는 $A$와 $B$의 경계를 제멋대로 넘나들어 이 분리를 막는다. 무게중심 세분이 해결한다: 각 단체를 무게중심에 원뿔로 이어 잘게 쪼개면 지름이 매번 $\\tfrac{n}{n+1}$배로 줄어, 반복하면(르베그 수보다 작아지면) 모든 조각이 $\\mathrm{int}\\,A$ 아니면 $\\mathrm{int}\\,B$ 하나에 들어간다 — 즉 큰 사슬을 '작은 사슬'($C_n(A+B)$)로 밀어 넣을 수 있다. 결정적으로 이 세분이 호몰로지를 바꾸지 않아야 하는데, 명제 2.21이 세분 연산자 $S$와 항등 사이에 사슬호모토피 $T$($\\partial T+T\\partial=\\mathbb{1}-S$)를 지어 $H_n^{\\mathcal{U}}(X)\\cong H_n(X)$을 보장한다. 그러면 이 두 공식이 $C_n(A)$를 보존하므로 몫으로 내려가, 작은 사슬 쪽에서 계산한 것이 곧 $H_n(X,A)$가 되고 절제의 동형이 나온다. 그 밑바탕의 공통 원리는 '경계 $\\partial$과 짝을 이루는 채움 연산자'다: 원뿔 연산자는 $\\partial b+b\\partial=\\mathbb{1}$, 호모토피의 기둥은 $\\partial P+P\\partial=g_\\#-f_\\#$, 세분은 $\\partial T+T\\partial=\\mathbb{1}-S$ — 모두 '무언가를 채워 넣으면 그 차이가 경계가 되어 호몰로지에서 사라진다'는 하나의 아이디어의 변주다. 이 원리가 호모토피 불변성부터 절제까지 이 장 전체를 관통한다."
+        }
+      ]
+    },
+    {
       "section_title": "2.intro 개관 — 호몰로지의 아이디어 (The Idea of Homology)",
       "step1_big_picture": {
         "context": "1장에서 배운 기본군(fundamental group) $\\pi_1(X)$은 저차원 공간에는 강력하지만, 그 정의가 오직 저차원 대상(고리 $I\\to X$, 고리의 호모토피 $I\\times I\\to X$)만 쓰기에 고차원을 다루기엔 무디다 — 예컨대 $S^n\\ (n\\ge 2)$들을 전혀 구별하지 못한다. 자연스러운 고차원 유비인 호모토피군 $\\pi_n(X)$은 모든 구를 구별하지만($\\pi_i(S^n)=0\\ (i<n),\\ \\mathbb{Z}\\ (i=n)$), 계산이 악명 높게 어렵다($i>n$일 때 $\\pi_i(S^n)$은 거대한 미해결 문제). 그 대안이 이 장의 주인공인 호몰로지군 $H_n(X)$이다. $\\pi_n$과 마찬가지로 CW 복합체에서 $(n{+}1)$-뼈대(skeleton)에만 의존하되, $i>n$이면 $H_i(S^n)=0$이라는 결정적 이점을 가지며, 무엇보다 셀 구조에서 직접 계산된다.",
