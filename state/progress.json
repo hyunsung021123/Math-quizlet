@@ -25,16 +25,17 @@
       "section:4": true,
       "section:5": true,
       "section:6": true,
-      "section:7": true
+      "section:7": true,
+      "section:8": true
     }
   },
   "lastPos": {
     "topicId": "chapter_1_the_fundamental_group",
     "view": {
       "type": "section",
-      "index": 8
+      "index": 9
     },
-    "cardIndex": 8
+    "cardIndex": 0
   },
-  "updatedAt": "2026-07-20T15:56:39.490Z"
+  "updatedAt": "2026-07-20T15:56:45.254Z"
 }
