@@ -21,16 +21,20 @@
       "section:0": true,
       "section:1": true,
       "section:2": true,
-      "section:3": true
+      "section:3": true,
+      "section:4": true,
+      "section:5": true,
+      "section:6": true,
+      "section:7": true
     }
   },
   "lastPos": {
     "topicId": "chapter_1_the_fundamental_group",
     "view": {
       "type": "section",
-      "index": 10
+      "index": 7
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-07-20T07:04:48.306Z"
+  "updatedAt": "2026-07-20T07:49:41.310Z"
 }
