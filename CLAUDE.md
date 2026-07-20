@@ -81,6 +81,40 @@ legacy-only (see `index.html`'s `hasLegacyReview()`), not a currently-supported 
 
 All math is KaTeX (`$...$` / `$$...$$`); LaTeX backslashes must be double-escaped in the JSON strings.
 
+## Exam-prep flashcards (`data/exam/`) — temporary, wipe freely
+
+A second, **disposable** kind of content lives alongside the textbook chapters: exam-prep flashcard sets
+built from a user's past-paper PDFs. It reuses the exact same content JSON schema above (so `index.html`'s
+existing deck engine renders it unchanged — past-paper problems go in each section's `step3_checkpoint` as
+`checkpoint` items), but it is **fully isolated** from the textbook content so it can be created and deleted
+on a whim without ever touching `data/*.json`:
+
+- **Separate directory + manifest**: exam sets are `data/exam/<file>.json`, listed in their own
+  `data/exam/manifest.json` (same `{topics:[{id,title,file,book}]}` shape). The textbook `data/manifest.json`
+  and `data/*.json` are never read or written by the exam flow.
+- **How they appear in the UI**: `index.html`'s `boot()` now merges *two* manifests — `loadManifests()`
+  fetches `data/manifest.json` (required) and `data/exam/manifest.json` (optional; a missing/empty exam
+  manifest is silently skipped), tags each topic with the directory it came from (`_dir`), and `loadTopic()`
+  fetches from that topic's own `_dir`. Exam topics carry `book: "📝 시험 대비"`, so `populateSelect()`'s
+  existing group-by-`book` logic puts them in their own dropdown group. This is the *only* index.html change.
+- **Never author or delete these by hand.** Use the dedicated CLI, which validates via `lib/merger.py` (same
+  rules as the textbook pipeline) and keeps `data/exam/manifest.json` in sync:
+  ```
+  python pipeline/exam.py add --json <file> [--title "..."] [--id <base>] [--book "group"]
+  python pipeline/exam.py list                       # current exam sets
+  python pipeline/exam.py remove --id <id>           # drop one set (json + manifest entry)
+  python pipeline/exam.py clear --yes                # wipe ALL exam sets (textbook data untouched)
+  ```
+  Topic ids are force-prefixed `exam__` (so browser localStorage progress never collides with a textbook
+  topic), while the on-disk **filename is ASCII-only** (`<ascii>_<hash8>.json`) to avoid any GitHub-Pages
+  non-ASCII-filename risk even when the title is Korean.
+- **Authoring**: when the user hands over exam PDFs + their per-exam requirements, generate the JSON directly
+  in-session following `pipeline/prompts/exam_prompt.md` (the sister of `system_prompt.md`, tuned for
+  problem/solution flashcards and honoring the user's custom requirements), then `exam.py add` it.
+- **Lifecycle**: these are committed to `dev` like everything else (so they serve on GitHub Pages for
+  phone/tablet study); "wiping" is just `exam.py clear --yes` followed by a commit. Expect the user to ask to
+  clear a set after an exam.
+
 ## Content production pipeline (`pipeline/`)
 
 Turns a textbook PDF into the JSON above via two CLI programs (see `pipeline/README.md` for full detail —

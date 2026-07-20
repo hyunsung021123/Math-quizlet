@@ -1129,6 +1129,7 @@ body.ink-drawing .card{ user-select:none; -webkit-user-select:none; }
   }
 
   var DATA_DIR = 'data/';
+  var EXAM_DIR = 'data/exam/';   // 시험 대비 flashcard 전용 (임시). 전공서 data/ 와 완전히 분리된 영역.
   var TYPE_MAP = {
     Definition:['정의','def'], Theorem:['정리','thm'], Lemma:['보조정리','lem'],
     Proposition:['명제','prop'], Corollary:['따름정리','cor'], Remark:['참고','rem'], Example:['예시','ex']
@@ -1819,12 +1820,28 @@ body.ink-drawing .card{ user-select:none; -webkit-user-select:none; }
   }
 
   /* ---------- boot & topic loading ---------- */
+  /* 전공서(data/manifest.json)와 시험 대비(data/exam/manifest.json) 두 매니페스트를 합쳐
+     하나의 주제 목록으로 만든다. 각 주제에는 어느 폴더에서 파일을 읽을지 `_dir`를 표시해 둔다.
+     전공서 매니페스트가 깨지면 기존처럼 로드 에러를 띄우지만, 시험 매니페스트는 없거나 비어 있어도
+     (아직 시험 세트를 안 만든 평상시 상태) 조용히 건너뛴다 — 전공서 학습에 전혀 영향 없음. */
+  function tagDir(list, dir){
+    return (Array.isArray(list) ? list : []).map(function(t){ t._dir = dir; return t; });
+  }
+  function loadManifests(){
+    return fetchJSON(DATA_DIR + 'manifest.json').then(function(bookM){
+      var bookTopics = tagDir(bookM.topics, DATA_DIR);
+      return fetchJSON(EXAM_DIR + 'manifest.json')
+        .then(function(examM){ return tagDir(examM.topics, EXAM_DIR); })
+        .catch(function(){ return []; })   // 시험 매니페스트 없음/비어있음 → 시험 그룹만 안 보임
+        .then(function(examTopics){ return bookTopics.concat(examTopics); });
+    });
+  }
   function boot(){
     ghSync.initUI();
     inkPad.init();
     renderState('loading', '학습 데이터를 불러오는 중…', '');
-    ghSync.pullRemoteState().then(function(){ return fetchJSON(DATA_DIR + 'manifest.json'); }).then(function(manifest){
-      state.topics = Array.isArray(manifest.topics) ? manifest.topics : [];
+    ghSync.pullRemoteState().then(loadManifests).then(function(topics){
+      state.topics = topics;
       populateSelect();
       if(!state.topics.length){
         renderState('empty', '등록된 주제가 없습니다', 'data/manifest.json 의 topics 배열에 항목을 추가하세요.');
@@ -1858,7 +1875,7 @@ body.ink-drawing .card{ user-select:none; -webkit-user-select:none; }
     if(!t) return Promise.resolve();
     selectEl.value = id;
     renderState('loading', '불러오는 중…', '');
-    return fetchJSON(DATA_DIR + t.file).then(function(data){
+    return fetchJSON((t._dir || DATA_DIR) + t.file).then(function(data){
       state.topicId = id;
       state.data = data;
       state.completedMap = loadCompletedStore()[id] || {};
