@@ -21,7 +21,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 008 | [ ] | 2.1 Goursat’s theorem | section | `008__ComplexAnalysi__2_1_Goursatstheorem.txt` |
+| 008 | [x] | 2.1 Goursat’s theorem | section | `008__ComplexAnalysi__2_1_Goursatstheorem.txt` |
 | 009 | [ ] | 2.2 Local existence of primitives and Cauchy’s theorem in a disc | section | `009__ComplexAnalysi__2_2_Localexistenceofprimitives.txt` |
 | 010 | [ ] | 2.3 Evaluation of some integrals | section | `010__ComplexAnalysi__2_3_Evaluationofsomeintegrals.txt` |
 | 011 | [ ] | 2.4 Cauchy’s integral formulas | section | `011__ComplexAnalysi__2_4_Cauchysintegralformulas.txt` |

@@ -35,6 +35,12 @@
       "title": "Chapter 2. Homology",
       "file": "chapter_2_homology.json",
       "book": "Hatcher — Algebraic Topology"
+    },
+    {
+      "id": "chapter_2_cauchy_s_theorem_and_its_appli",
+      "title": "Chapter 2. Cauchy's Theorem and Its Applications",
+      "file": "chapter_2_cauchy_s_theorem_and_its_appli.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }
