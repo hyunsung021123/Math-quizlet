@@ -31,7 +31,9 @@
       "section:10": true,
       "section:11": true,
       "section:13": true,
-      "section:14": true
+      "section:14": true,
+      "section:16": true,
+      "section:15": true
     }
   },
   "lastPos": {
@@ -42,5 +44,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-07-22T16:34:55.060Z"
+  "updatedAt": "2026-07-22T16:35:07.761Z"
 }
