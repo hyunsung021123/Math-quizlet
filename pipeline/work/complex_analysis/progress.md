@@ -26,7 +26,7 @@
 | 010 | [x] | 2.3 Evaluation of some integrals | section | `010__ComplexAnalysi__2_3_Evaluationofsomeintegrals.txt` |
 | 011 | [x] | 2.4 Cauchy’s integral formulas | section | `011__ComplexAnalysi__2_4_Cauchysintegralformulas.txt` |
 | 012 | [x] | 2.5.1 Morera’s theorem | section | `012__ComplexAnalysi__2_5_1_Morerastheorem.txt` |
-| 013 | [ ] | 2.5.2 Sequences of holomorphic functions | section | `013__ComplexAnalysi__2_5_2_Sequencesofholomorphicfunc.txt` |
+| 013 | [x] | 2.5.2 Sequences of holomorphic functions | section | `013__ComplexAnalysi__2_5_2_Sequencesofholomorphicfunc.txt` |
 | 014 | [ ] | 2.5.3 Holomorphic functions defined in terms of integrals | section | `014__ComplexAnalysi__2_5_3_Holomorphicfunctionsdefine.txt` |
 | 015 | [ ] | 2.5.4 Schwarz reflection principle | section | `015__ComplexAnalysi__2_5_4_Schwarzreflectionprinciple.txt` |
 | 016 | [ ] | 2.5.5 Runge’s approximation theorem | section | `016__ComplexAnalysi__2_5_5_Rungesapproximationtheorem.txt` |
