@@ -275,7 +275,7 @@ function updateSummary(){
 function numKey(title){
   var m = /(\d+(?:\.\w+)*)/.exec(title||'');
   if(!m) return [9999];
-  return m[1].split('.').map(function(p){ var n=parseInt(p,10); return isNaN(n)?p:n; });
+  return m[1].split('.').map(function(p){ if(p==='intro') return -1; var n=parseInt(p,10); return isNaN(n)?p:n; });
 }
 function cmpKey(a,b){
   for(var i=0;i<Math.max(a.length,b.length);i++){

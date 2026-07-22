@@ -168,6 +168,11 @@ def _num_key(title):
         return [9999]
     out = []
     for p in m.group(1).split("."):
+        if p == "intro":
+            # 챕터/소단원 도입부("2.intro")는 형제 항목(2.1, 2.2, ...)보다 앞에 와야 하므로
+            # 문자열로 두면 안 된다(문자열 vs 정수 비교에서 오히려 맨 뒤로 밀림).
+            out.append(-1)
+            continue
         try:
             out.append(int(p))
         except ValueError:
