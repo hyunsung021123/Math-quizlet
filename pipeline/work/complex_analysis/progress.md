@@ -15,7 +15,7 @@
 | 004 | [x] | 1.2.2 Holomorphic functions | section | `004__ComplexAnalysi__1_2_2_Holomorphicfunctions.txt` |
 | 005 | [x] | 1.2.3 Power series | section | `005__ComplexAnalysi__1_2_3_Powerseries.txt` |
 | 006 | [x] | 1.3 Integration along curves | section | `006__ComplexAnalysi__1_3_Integrationalongcurves.txt` |
-| 007 | [ ] | 1.4 Exercises | exercises | `007__ComplexAnalysi__1_4_Exercises__EX.txt` |
+| 007 | [x] | 1.4 Exercises | exercises | `007__ComplexAnalysi__1_4_Exercises__EX.txt` |
 
 ## 2. Cauchy’s Theorem and Its Applications
 

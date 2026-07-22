@@ -2142,6 +2142,304 @@
           "answer": "정리 3.2는 원시함수 $F$가 있으면 $\\int_\\gamma f=F(w_2)-F(w_1)$로 곡선 적분이 끝점만으로 결정됨(경로 독립)을 준다. 그 특수경우인 따름정리 3.3은 닫힌 곡선이면 끝점이 같아 적분이 $0$임을 준다. 이 함의의 대우가 $1/z$ 예제의 논리다 — 단위원에서 $\\int_C dz/z=2\\pi i\\neq 0$이므로 $1/z$는 $\\mathbb{C}\\setminus\\{0\\}$에서 원시함수를 가질 수 없다. 즉 '닫힌 곡선 적분이 $0$이 아님'은 원시함수 부재의 증거다. 코시 정리는 여기서 한 걸음 더 나아가, 원시함수의 존재를 미리 가정하지 않고도 '$f$가 닫힌 곡선의 내부에서 정칙이기만 하면 $\\int_\\gamma f=0$'을 주장한다. 이 절은 그 강력한 정리가 다룰 대상(곡선·적분)의 정의를 마련하고, 정칙성이라는 국소적 조건이 닫힌 곡선 적분의 소멸이라는 대역적 결론으로 이어지는 현상의 가장 단순한 형태(원시함수를 통한 소멸)를 미리 보여주기에 '첫 그림자'라 불린다."
         }
       ]
+    },
+    {
+      "section_title": "1.4 Exercises",
+      "step1_big_picture": {
+        "context": "이 절은 1장 전체를 마무리하는 연습문제 모음이다. 문제들은 1장에서 쌓아온 모든 갈래를 다시 손으로 관통한다 — 복소평면의 기하와 대수(§1.1), 정칙함수와 코시-리만 방정식(§1.2.2), 멱급수와 하다마르 공식·수렴반지름(§1.2.3), 그리고 곡선을 따른 적분·원시함수·명제 3.1(§1.3). 특히 뒤 장에서 되풀이해 쓰이는 도구와 대상들이 여기서 처음 등장한다: 블라슈케 인자(Blaschke factors), 부분합 공식(summation by parts)과 아벨의 정리(Abel's theorem), 극좌표 코시-리만 방정식, 비르팅거 미분(Wirtinger derivatives)과 라플라시안의 인수분해, 연결성분(connected component), 그리고 원 위에서의 $\\int_\\gamma z^n\\,dz$ 계산이다.",
+        "hidden_intuition": "연습문제를 잡동사니 목록으로 보지 말라. 이들은 '이론의 엔진을 직접 분해해 조립해 보는' 실습이다. 예컨대 원을 도는 $\\int_\\gamma z^n\\,dz$ 계산(연습 25)은 다음 장 잔여정리(residue calculus)의 씨앗 그 자체다 — 적분값이 특이점을 곡선이 감싸느냐 아니냐에만 달렸음을 맨손으로 확인하는 것이다. 비르팅거 미분 $\\partial/\\partial z,\\ \\partial/\\partial\\bar z$(연습 8, 10)는 코시-리만 방정식을 '$f$는 $\\bar z$에 의존하지 않는다'($\\partial f/\\partial\\bar z=0$)는 한 줄로 압축해 주고, 그 곱이 라플라시안의 $1/4$이라는 사실이 정칙함수의 실·허수부가 조화함수(harmonic)임을 즉시 설명한다. 부분합 공식(연습 14)은 적분의 부분적분에 대응하는 이산판이며, 그것이 경계 위 수렴(연습 19)과 아벨의 정리를 지탱한다. 요컨대 이 절을 푸는 일은 2장에서 휘두를 연장통을 미리 갖추는 일이다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "연습 8 (복소 연쇄법칙 / 비르팅거 미분)",
+          "formal_statement": "비르팅거 미분을 $\\dfrac{\\partial}{\\partial z}=\\dfrac12\\!\\left(\\dfrac{\\partial}{\\partial x}-i\\dfrac{\\partial}{\\partial y}\\right)$, $\\dfrac{\\partial}{\\partial\\bar z}=\\dfrac12\\!\\left(\\dfrac{\\partial}{\\partial x}+i\\dfrac{\\partial}{\\partial y}\\right)$로 둔다. $f:U\\to V$, $g:V\\to\\mathbb{C}$가 (두 실변수 $x,y$의 함수로서) 미분가능하고 $h=g\\circ f$이면 $$\\frac{\\partial h}{\\partial z}=\\frac{\\partial g}{\\partial z}\\frac{\\partial f}{\\partial z}+\\frac{\\partial g}{\\partial\\bar z}\\frac{\\partial\\bar f}{\\partial z},\\qquad \\frac{\\partial h}{\\partial\\bar z}=\\frac{\\partial g}{\\partial z}\\frac{\\partial f}{\\partial\\bar z}+\\frac{\\partial g}{\\partial\\bar z}\\frac{\\partial\\bar f}{\\partial\\bar z}.$$",
+          "idea_behind_proof": "핵심 착상은 형식적으로 $z$와 $\\bar z$를 서로 독립적인 두 변수로 취급할 수 있다는 관찰이다. 그러면 통상적인 이변수 실연쇄법칙을 '$z$에 대한 것'과 '$\\bar z$에 대한 것'으로 재배열하기만 하면 된다. $g$가 정칙이면 $\\partial g/\\partial\\bar z=0$이 되어 오른쪽 항들이 사라지고 익숙한 형태 $\\partial h/\\partial z=(\\partial g/\\partial z)(\\partial f/\\partial z)$만 남는다는 점이 이 표기의 위력이다.",
+          "proof_steps": [
+            "$h=g(f(x,y),\\overline{f(x,y)})$로 보고, 실변수 연쇄법칙으로 $\\partial h/\\partial x$, $\\partial h/\\partial y$를 $\\partial g/\\partial z,\\ \\partial g/\\partial\\bar z$와 $\\partial f/\\partial x,\\ \\partial f/\\partial y$로 전개한다.",
+            "$\\partial/\\partial z=\\tfrac12(\\partial_x-i\\partial_y)$, $\\partial/\\partial\\bar z=\\tfrac12(\\partial_x+i\\partial_y)$의 정의를 대입해 $h$에 대한 조합을 만든다.",
+            "$\\partial f/\\partial z,\\ \\partial\\bar f/\\partial z$ 등의 정의를 이용해 항을 묶으면 주어진 두 공식이 얻어진다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "연습 10·11 (라플라시안의 인수분해와 조화성)",
+          "formal_statement": "라플라시안 $\\triangle=\\dfrac{\\partial^2}{\\partial x^2}+\\dfrac{\\partial^2}{\\partial y^2}$에 대하여 $$4\\frac{\\partial}{\\partial z}\\frac{\\partial}{\\partial\\bar z}=4\\frac{\\partial}{\\partial\\bar z}\\frac{\\partial}{\\partial z}=\\triangle.$$ 따라서 $f$가 열린집합 $\\Omega$에서 정칙이면 $f$의 실수부와 허수부는 조화함수(harmonic)이다. 즉 그들의 라플라시안은 $0$이다.",
+          "idea_behind_proof": "두 개의 $1$차 미분연산자의 곱이 곧 $2$차 연산자 $\\triangle$이 된다는 것이 열쇠다 — 마치 $(a-b)(a+b)=a^2-b^2$처럼 $i^2=-1$ 덕분에 교차항이 상쇄되기 때문이다. 조화성은 여기에 코시-리만의 압축형 $\\partial f/\\partial\\bar z=0$을 결합한 결과다: 정칙함수는 $\\bar z$에 대한 미분이 소멸하므로, $\\triangle f=4\\,\\partial_z\\partial_{\\bar z}f=0$이 즉시 나온다.",
+          "proof_steps": [
+            "$\\dfrac{\\partial}{\\partial z}\\dfrac{\\partial}{\\partial\\bar z}=\\dfrac14(\\partial_x-i\\partial_y)(\\partial_x+i\\partial_y)=\\dfrac14(\\partial_{xx}+\\partial_{yy})=\\dfrac14\\triangle$ (교차항 $\\pm i\\partial_x\\partial_y$가 상쇄).",
+            "양변에 $4$를 곱하면 $4\\,\\partial_z\\partial_{\\bar z}=\\triangle$; 순서를 바꿔도 같음을 같은 계산으로 확인한다.",
+            "$f$가 정칙이면 코시-리만에 의해 $\\partial f/\\partial\\bar z=0$이고(정칙함수는 무한히 미분가능함을 이후 사용), $\\triangle f=4\\,\\partial_z\\partial_{\\bar z}f=4\\,\\partial_z(0)=0$.",
+            "$\\triangle f=\\triangle u+i\\triangle v=0$이고 $u,v$가 실함수이므로 $\\triangle u=\\triangle v=0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "연습 9 (극좌표에서의 코시-리만 방정식과 로그의 정칙성)",
+          "formal_statement": "극좌표 $z=re^{i\\theta}$에서 코시-리만 방정식은 $$\\frac{\\partial u}{\\partial r}=\\frac1r\\frac{\\partial v}{\\partial\\theta},\\qquad \\frac1r\\frac{\\partial u}{\\partial\\theta}=-\\frac{\\partial v}{\\partial r}$$ 의 형태를 취한다. 이를 이용하면 $\\log z=\\log r+i\\theta$ ($z=re^{i\\theta}$, $-\\pi<\\theta<\\pi$)는 영역 $r>0,\\ -\\pi<\\theta<\\pi$에서 정칙이다.",
+          "idea_behind_proof": "$x=r\\cos\\theta,\\ y=r\\sin\\theta$의 연쇄법칙으로 직교좌표 코시-리만을 극좌표로 옮겨 쓰는 것이 전부다. 로그 함수는 극좌표에서 $u=\\log r$, $v=\\theta$로 매우 단순해져, 새 형태의 방정식을 눈으로 확인할 수 있고 도함수의 연속성까지 갖추므로 정칙성이 따라온다.",
+          "proof_steps": [
+            "$u_x,u_y$를 $u_r,u_\\theta$로 바꾸는 연쇄법칙을 세우고 $u_x=v_y,\\ u_y=-v_x$에 대입해 정리하면 극좌표 형태 두 식이 나온다.",
+            "$\\log z$의 경우 $u=\\log r,\\ v=\\theta$이므로 $u_r=1/r,\\ v_\\theta=1$이라 $u_r=\\tfrac1r v_\\theta$가 성립; $u_\\theta=0,\\ v_r=0$이라 $\\tfrac1r u_\\theta=-v_r$도 성립.",
+            "이 편도함수들이 $r>0$에서 연속이므로(정칙성의 충분조건) $\\log z$는 그 영역에서 정칙이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "연습 14·15 (부분합 공식과 아벨의 정리)",
+          "formal_statement": "유한수열 $\\{a_n\\},\\{b_n\\}$과 부분합 $B_k=\\sum_{n=1}^{k}b_n$ ($B_0=0$)에 대하여 부분합 공식(summation by parts)이 성립한다: $$\\sum_{n=M}^{N}a_nb_n=a_NB_N-a_MB_{M-1}-\\sum_{n=M}^{N-1}(a_{n+1}-a_n)B_n.$$ 이를 이용하면 아벨의 정리(Abel's theorem)가 성립한다: $\\sum_{n=1}^{\\infty}a_n$이 수렴하면 $$\\lim_{r\\to1^-}\\sum_{n=1}^{\\infty}r^na_n=\\sum_{n=1}^{\\infty}a_n.$$",
+          "idea_behind_proof": "부분합 공식은 부분적분 $\\int u\\,dv=uv-\\int v\\,du$의 이산판이다 — $b_n$을 '$dv$', 부분합 $B_n$을 '$v$'로 보는 것이 착상의 출처다. 아벨의 정리는 여기에 $b_n=a_n$, 가중치 $r^n$을 대입하는 전략으로 증명한다: 부분합 $s_n\\to s$가 수렴한다는 사실을, 합을 부분합으로 재배열해 $r\\to1^-$ 극한에서 통제하는 것이다.",
+          "proof_steps": [
+            "$a_nb_n=a_n(B_n-B_{n-1})$로 쓰고 지표를 밀어(Abel 변형) 합을 재배열하면 부분합 공식이 나온다.",
+            "아벨의 정리: $\\sum_{n=1}^{\\infty}r^na_n$에 부분합 공식을 적용하고 $s_n=\\sum_{k\\le n}a_k\\to s$를 이용한다.",
+            "$0<r<1$에서 $\\sum(r^n-r^{n+1})s_n=(1-r)\\sum r^n s_n$ 꼴로 정리하면, $s_n\\to s$이므로 $r\\to1^-$에서 이 가중평균이 $s$로 수렴함을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "연습 7 (블라슈케 인자, Blaschke factors)",
+          "formal_statement": "단위원판 $\\mathbb{D}$의 고정점 $w$에 대해 사상 $F(z)=\\dfrac{w-z}{1-\\bar w z}$를 블라슈케 인자라 한다. 이 사상은 (i) $\\mathbb{D}$를 $\\mathbb{D}$로 보내는 정칙사상이고, (ii) $F(0)=w$, $F(w)=0$으로 $0$과 $w$를 맞바꾸며, (iii) $|z|=1$이면 $|F(z)|=1$이고, (iv) $F:\\mathbb{D}\\to\\mathbb{D}$는 전단사이다. 또 $\\bar w z\\neq1$일 때 $\\left|\\dfrac{w-z}{1-\\bar w z}\\right|<1$ (단, $|z|<1,|w|<1$), $=1$ (단, $|z|=1$ 또는 $|w|=1$)이다."
+        },
+        {
+          "type": "Remark",
+          "name": "연습 5·6 (경로연결성과 연결성분)",
+          "formal_statement": "열린집합 $\\Omega$가 경로연결(pathwise connected)이라 함은 임의의 두 점을 $\\Omega$ 안에 완전히 들어있는 조각별 매끄러운 곡선으로 이을 수 있는 것이다. 열린집합에 대해 경로연결과 (위상적) 연결은 동치이다. $z\\in\\Omega$의 연결성분 $\\mathcal{C}_z$는 $z$와 곡선으로 이어지는 모든 점의 집합이며, $w\\in\\mathcal{C}_z$는 동치관계를 이룬다. 따라서 $\\Omega$는 서로 겹치지 않는 열린 연결성분들의 합집합이고, 이런 성분은 가산개뿐이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "연습 3. $\\omega=se^{i\\varphi}$ ($s\\ge0,\\ \\varphi\\in\\mathbb{R}$)일 때 자연수 $n$에 대해 방정식 $z^n=\\omega$를 $\\mathbb{C}$에서 풀어라. 해는 몇 개인가?",
+          "hint": "$z=\\rho e^{i\\alpha}$로 놓고 $z^n=\\rho^n e^{in\\alpha}=se^{i\\varphi}$의 크기와 편각을 각각 맞춰라. 편각은 $2\\pi$의 정수배만큼 어긋나도 같은 복소수임을 잊지 말라.",
+          "solution": "$s=0$이면 유일한 해는 $z=0$($n$중근)이다. $s>0$이면 $z=\\rho e^{i\\alpha}$로 두어 $\\rho^n=s$, $n\\alpha=\\varphi+2\\pi k$ ($k\\in\\mathbb{Z}$)를 얻는다. 따라서 $\\rho=s^{1/n}$ (양의 실근), $\\alpha=\\dfrac{\\varphi+2\\pi k}{n}$. $k=0,1,\\dots,n-1$이 서로 다른 편각을 주고 그 이후는 반복되므로 서로 다른 해는 정확히 $n$개다: $$z_k=s^{1/n}\\exp\\!\\Big(i\\tfrac{\\varphi+2\\pi k}{n}\\Big),\\quad k=0,\\dots,n-1.$$ 이들은 반지름 $s^{1/n}$인 원 위에 놓인 정$n$각형의 꼭짓점을 이룬다. 일반화: $0$이 아닌 복소수는 항상 정확히 $n$개의 $n$제곱근을 가지며, 그들은 원점을 중심으로 $2\\pi/n$씩 균등하게 회전한 위치에 있다.",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.3,
+                "dash": "4,3"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1.3,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.402,
+                  1.236
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.052,
+                  0.764
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -1.052,
+                  -0.764
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.402,
+                  -1.236
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1.3,
+                  0
+                ],
+                "to": [
+                  0.402,
+                  1.236
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0.402,
+                  1.236
+                ],
+                "to": [
+                  -1.052,
+                  0.764
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.052,
+                  0.764
+                ],
+                "to": [
+                  -1.052,
+                  -0.764
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.052,
+                  -0.764
+                ],
+                "to": [
+                  0.402,
+                  -1.236
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0.402,
+                  -1.236
+                ],
+                "to": [
+                  1.3,
+                  0
+                ]
+              }
+            ],
+            "caption": "$n=5$, $\\omega=1$일 때의 다섯 해 $z_k=e^{2\\pi ik/5}$. 반지름 $s^{1/n}=1$인 원 위 정오각형의 꼭짓점을 이룬다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 4. $\\mathbb{C}$ 위에 전순서(total ordering) $\\succ$ (삼분법 + 덧셈보존 + 양수배 부등호보존)를 정의하는 것이 불가능함을 보여라.",
+          "hint": "삼분법에 의해 $i\\succ0$ 이거나 $0\\succ i$ 중 하나다. 양수배 부등호보존 규칙 (iii)에 $z_3=i$나 $z_3=-i$를 대입해 $-1$과 $0$의 순서에 관한 모순을 끌어내라.",
+          "solution": "전순서 $\\succ$가 존재한다고 가정하자. $i\\neq0$이므로 (i)에 의해 $i\\succ0$ 또는 $0\\succ i$이다. 경우 1: $i\\succ0$. 규칙 (iii)에 $z_1=i,z_2=0,z_3=i(\\succ0)$를 적용하면 $i\\cdot i\\succ0$, 즉 $-1\\succ0$. 다시 (iii)에 $z_3=-1(\\succ0)$을 적용하면 $(-1)(-1)\\succ0$, 즉 $1\\succ0$. 그런데 $-1\\succ0$에 (ii)로 $1$을 더하면 $0\\succ1$. 이는 $1\\succ0$과 삼분법에 모순. 경우 2: $0\\succ i$. (ii)로 양변에 $-i$를 더하면 $-i\\succ0$. 그러면 (iii)로 $(-i)(-i)=-1\\succ0$이 되어 경우 1과 동일한 모순에 이른다. 따라서 그런 순서는 존재할 수 없다. 핵심: $\\mathbb{R}$과 달리 $-1$이 어떤 원소의 제곱($i^2$)이라 '양수의 제곱은 양수'라는 규칙과 충돌한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 12. $f(x+iy)=\\sqrt{|x||y|}$가 원점에서 코시-리만 방정식을 만족하지만 $0$에서 정칙(복소미분가능)이 아님을 보여라.",
+          "hint": "먼저 좌표축을 따라 편도함수를 계산해 $u_x(0)=u_y(0)=0$, $v\\equiv0$임을 확인하라. 그 다음 차분몫 $\\dfrac{f(h)-f(0)}{h}$를 실축 방향 $h\\to0$과 대각선 방향 $h=t(1+i)$로 각각 취해 극한을 비교하라.",
+          "solution": "$u=\\sqrt{|x||y|}$, $v=0$이다. $x$축($y=0$)에서 $u\\equiv0$이므로 $u_x(0)=0$; $y$축($x=0$)에서 $u\\equiv0$이므로 $u_y(0)=0$. $v\\equiv0$이라 $v_x=v_y=0$. 따라서 원점에서 $u_x=v_y$ ($0=0$), $u_y=-v_x$ ($0=0$)로 코시-리만 방정식이 성립한다. 그러나 복소미분가능성을 보려고 $\\dfrac{f(h)-f(0)}{h}=\\dfrac{f(h)}{h}$를 보자. (i) $h=t\\in\\mathbb{R}$ (실축): $f(t)=\\sqrt{|t|\\cdot0}=0$이므로 극한 $0$. (ii) $h=t(1+i)$ (대각선): $f(h)=\\sqrt{|t||t|}=|t|$이므로 $\\dfrac{|t|}{t(1+i)}$인데, $t\\to0^+$이면 $\\dfrac1{1+i}$, $t\\to0^-$이면 $-\\dfrac1{1+i}$로 값이 다르다. 방향에 따라 극한이 다르므로 $f'(0)$은 존재하지 않는다. 교훈: 한 점에서 코시-리만 방정식이 성립해도 정칙이 되지 않는다 — 정칙성에는 한 근방 전체에서의 미분가능성(또는 편도함수의 연속성)이 필요하다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 13. $f$가 영역 $\\Omega$에서 정칙이고 다음 중 하나가 성립하면 $f$가 상수임을 보여라: (a) $\\mathrm{Re}(f)$가 상수, (b) $\\mathrm{Im}(f)$가 상수, (c) $|f|$가 상수.",
+          "hint": "$f=u+iv$로 쓰고 코시-리만 방정식으로 조건을 $u,v$의 편도함수 관계로 바꾼 뒤, $f'=u_x+iv_x=0$을 끌어내 따름정리 3.4(1.3절, $f'=0\\Rightarrow$ 상수)를 적용하라. (c)에서는 $|f|^2=u^2+v^2$을 미분하라.",
+          "solution": "(a) $u$가 상수면 $u_x=u_y=0$. 코시-리만 $u_x=v_y,\\ u_y=-v_x$에서 $v_y=v_x=0$이므로 $v$도 상수. 따라서 $f'=u_x+iv_x=0$이고 따름정리 3.4로 $f$는 상수. (b)도 $v$ 상수로부터 대칭적으로 같다. (c) $|f|^2=u^2+v^2=c$. $c=0$이면 $f\\equiv0$. $c\\neq0$이면 $x,y$로 미분: $uu_x+vv_x=0$, $uu_y+vv_y=0$. 코시-리만으로 $u_y=-v_x,\\ v_y=u_x$를 대입해 정리하면 $(u^2+v^2)u_x=0$, $(u^2+v^2)v_x=0$을 얻고 $u^2+v^2=c\\neq0$이므로 $u_x=v_x=0$, 즉 $f'=0$. 다시 따름정리 3.4로 $f$는 상수. 세 경우 모두 '정칙 + 한 실량이 상수'가 코시-리만을 통해 $f'=0$으로 귀결됨을 이용한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 16. $\\sum_{n=1}^{\\infty}a_nz^n$의 수렴반지름 $R$을 구하라: (a) $a_n=(\\log n)^2$, (b) $a_n=n!$, (c) $a_n=\\dfrac{n^2}{4^n+3^n}$, (f) 베셀 함수 $J_r(z)=\\left(\\tfrac z2\\right)^r\\sum_{n=0}^{\\infty}\\dfrac{(-1)^n}{n!(n+r)!}\\left(\\tfrac z2\\right)^{2n}$ (양의 정수 $r$).",
+          "hint": "하다마르 공식(정리 2.5) $1/R=\\limsup_n|a_n|^{1/n}$을 쓰되, 계승이 섞이면 비판정(연습 17: $|a_{n+1}/a_n|\\to L\\Rightarrow|a_n|^{1/n}\\to L$)이 더 편하다.",
+          "solution": "(a) $(\\log n)^{2/n}=\\exp\\!\\big(\\tfrac{2\\log\\log n}{n}\\big)\\to1$이므로 $1/R=1$, 즉 $R=1$. (b) $|a_n|^{1/n}=(n!)^{1/n}\\to\\infty$ (스털링) 이므로 $1/R=\\infty$, $R=0$ (원점에서만 수렴). (c) $a_n\\sim n^2/4^n$이고 $|a_n|^{1/n}\\to1/4$이므로 $R=4$. (f) 비판정을 계수 $b_n=\\dfrac{(-1)^n}{n!(n+r)!\\,4^n}$ (변수 $z$에 대해)로 적용하면 $\\left|\\dfrac{b_{n+1}}{b_n}\\right|=\\dfrac{1}{4(n+1)(n+1+r)}\\to0$이므로 $R=\\infty$. 즉 베셀 함수의 급수는 온 평면에서 수렴한다(정함수, entire). 요령: 계승·거듭제곱이 지배하는 계수에는 근판정보다 비판정이 훨씬 빠르다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 25. 원점 중심, 반지름 $r$, 양의 방향의 원 $\\gamma$에 대하여 (a) 모든 정수 $n$에 대해 $\\int_\\gamma z^n\\,dz$를 구하라. (b) 원점을 포함하지 않는 원에 대해서는? (c) $|a|<r<|b|$일 때 $\\int_\\gamma \\dfrac{1}{(z-a)(z-b)}\\,dz=\\dfrac{2\\pi i}{a-b}$임을 보여라.",
+          "hint": "(a),(b)는 $z^n$이 원시함수 $\\dfrac{z^{n+1}}{n+1}$를 갖는 경우($n\\neq-1$)와 아닌 경우($n=-1$)를 나눠 1.3절의 예제·따름정리 3.3을 쓴다. (c)는 부분분수 $\\dfrac{1}{(z-a)(z-b)}=\\dfrac{1}{a-b}\\!\\left(\\dfrac{1}{z-a}-\\dfrac{1}{z-b}\\right)$로 쪼갠 뒤 각 항을 (a)의 결과로 처리하라.",
+          "solution": "(a) $n\\neq-1$이면 $z^n$은 $\\mathbb{C}\\setminus\\{0\\}$에서 원시함수 $\\tfrac{z^{n+1}}{n+1}$를 가지므로(닫힌 곡선) $\\int_\\gamma z^n\\,dz=0$. $n=-1$이면 1.3절 예제대로 $\\int_\\gamma z^{-1}\\,dz=2\\pi i$. 정리하면 $\\int_\\gamma z^n\\,dz=\\begin{cases}2\\pi i,&n=-1\\\\0,&n\\neq-1.\\end{cases}$ (b) 원이 원점을 감싸지 않으면 그 원과 내부를 포함하는 원판에서 모든 $z^n$($음수 지수 포함)이 정칙이라 원시함수를 가지므로, 모든 정수 $n$에 대해 적분은 $0$. (c) 부분분수로 $\\int_\\gamma\\dfrac{dz}{(z-a)(z-b)}=\\dfrac{1}{a-b}\\!\\left(\\int_\\gamma\\dfrac{dz}{z-a}-\\int_\\gamma\\dfrac{dz}{z-b}\\right)$. $|a|<r$이라 $a$는 원 안쪽 → 평행이동하면 $\\int_\\gamma\\dfrac{dz}{z-a}=2\\pi i$; $|b|>r$이라 $b$는 바깥 → 그 근방에서 $\\dfrac{1}{z-b}$가 원시함수를 가지므로 $\\int_\\gamma\\dfrac{dz}{z-b}=0$. 따라서 값은 $\\dfrac{1}{a-b}(2\\pi i-0)=\\dfrac{2\\pi i}{a-b}$. 이 세 계산은 '적분값이 특이점을 곡선이 감싸느냐에만 달렸다'는 잔여정리의 예고편이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.4
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  1.4,
+                  0
+                ],
+                "to": [
+                  0,
+                  1.4
+                ],
+                "bulge": 0.35,
+                "arrow": true
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  0.5,
+                  -0.3
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.55,
+                  -0.65
+                ],
+                "text": "a"
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  2.1,
+                  0.6
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.15,
+                  0.95
+                ],
+                "text": "b"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.05,
+                  -1.15
+                ],
+                "text": "gamma"
+              }
+            ],
+            "caption": "반지름 $r$인 양의 방향 원 $\\gamma$. 극 $a$는 안쪽($|a|<r$)이라 $\\int_\\gamma\\tfrac{dz}{z-a}=2\\pi i$에 기여하고, $b$는 바깥($|b|>r$)이라 기여하지 않는다."
+          }
+        },
+        {
+          "type": "ox",
+          "question": "어떤 함수 $f$가 한 점 $z_0$에서 코시-리만 방정식을 만족하면, $f$는 $z_0$에서 정칙(복소미분가능)이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 연습 12의 $f(x+iy)=\\sqrt{|x||y|}$는 원점에서 코시-리만 방정식을 만족하지만 그곳에서 복소미분가능하지 않다. 한 점에서의 코시-리만 방정식은 필요조건일 뿐이며, 정칙성을 보장하려면 한 근방 전체에서의 (실)미분가능성이나 편도함수의 연속성 같은 추가 조건이 있어야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "멱급수 $\\sum_{n=1}^{\\infty} \\dfrac{z^n}{n}$은 단위원 $|z|=1$ 위의 모든 점에서 수렴한다.",
+          "answer": "X",
+          "explanation": "거짓이다(연습 19). 이 급수의 수렴반지름은 $1$이지만 경계에서의 거동은 점마다 다르다. $z=1$에서는 조화급수 $\\sum 1/n$이 되어 발산한다. $z=1$을 제외한 $|z|=1$의 모든 점에서는 부분합 공식(연습 14)으로 수렴함을 보일 수 있다. 대조적으로 $\\sum z^n/n^2$은 $|z|=1$ 전체에서 절대수렴하고, $\\sum nz^n$은 $|z|=1$의 어느 점에서도 수렴하지 않는다 — 같은 반지름이라도 경계 수렴은 계수에 따라 천차만별이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "연습 25의 세 적분 계산 (a) 원점을 감싸는 원 위 $\\int_\\gamma z^n\\,dz$, (b) 원점을 안 감싸는 원, (c) $\\int_\\gamma\\tfrac{dz}{(z-a)(z-b)}$ 은 다음 장에서 배울 코시 정리(Cauchy's theorem)와 잔여정리(residues)를 어떻게 예고하는가? 이 문제들이 '적분의 값이 무엇에 의존하는지'에 대해 알려주는 핵심 교훈을 정리하라.",
+          "hint": "각 경우에서 적분이 $0$이 되는 때와 $2\\pi i$의 배수가 되는 때를 가른 기준이 무엇이었는지 보라. '원시함수의 존재(→따름정리 3.3)'와 '특이점을 곡선이 에워싸는지'가 어떻게 연결되는지 짚어라.",
+          "answer": "세 계산의 공통 교훈은 '적분값은 피적분함수가 곡선이 감싸는 영역 안에 특이점을 갖는지에만 민감하다'는 것이다. (b)처럼 곡선과 그 내부에서 함수가 정칙이면 원시함수가 존재해 적분은 항상 $0$이 되는데, 이것이 바로 코시 정리의 결론 $\\int_\\gamma f=0$의 원형이다. 반대로 (a)의 $n=-1$항, 즉 $1/z$처럼 감싸인 영역 안에 특이점이 있으면 원시함수가 존재하지 않아 적분이 $2\\pi i$로 살아남는다. (c)는 이 둘을 합성한다: 부분분수로 쪼개면 안쪽 극 $a$만 $2\\pi i$를 기여하고 바깥 극 $b$는 $0$을 기여해, 최종값 $\\tfrac{2\\pi i}{a-b}$가 오직 감싸인 극에서 나온 잔여(residue)들의 합으로 결정된다. 즉 이 문제들은 '정칙성이라는 국소 성질이 닫힌 곡선 적분이라는 대역량을 통제하고, 그 적분이 감싸인 특이점의 잔여로 계산된다'는 잔여정리의 씨앗이며, 다음 장에서 '내부'가 명확한 단순한 닫힌 곡선(toy contour) 위에서 이 아이디어가 엄밀화된다."
+        }
+      ]
     }
   ]
 }
