@@ -38,16 +38,17 @@
       "section:17": true
     },
     "chapter_2_homology": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true
     }
   },
   "lastPos": {
     "topicId": "chapter_2_homology",
     "view": {
       "type": "section",
-      "index": 1
+      "index": 2
     },
-    "cardIndex": 7
+    "cardIndex": 0
   },
-  "updatedAt": "2026-07-23T13:12:59.643Z"
+  "updatedAt": "2026-07-23T13:13:11.003Z"
 }
