@@ -90,7 +90,7 @@
 | 049 | [x] | 7.2.intro 개관 (도입부) | intro | `049__ComplexAnalysi__7_2_intro_개관도입부.txt` |
 | 050 | [x] | 7.2.1 Proof of the asymptotics for ψ1 | section | `050__ComplexAnalysi__7_2_1_Proofoftheasymptoticsfor1.txt` |
 | 051 | [x] | 7.2.note Note on interchanging double sums | section | `051__ComplexAnalysi__7_2_note_Noteoninterchangingdoubles.txt` |
-| 052 | [ ] | 7.3 Exercises | exercises | `052__ComplexAnalysi__7_3_Exercises__EX.txt` |
+| 052 | [x] | 7.3 Exercises | exercises | `052__ComplexAnalysi__7_3_Exercises__EX.txt` |
 | 053 | [ ] | 7.4 Problems | exercises | `053__ComplexAnalysi__7_4_Problems__EX.txt` |
 
 ## 8. Conformal Mappings

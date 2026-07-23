@@ -1083,6 +1083,121 @@
           "answer": "이 노트는 챕터에서 순서를 자유롭게 바꾸며 다룬 이중합들을 정당화한다 — 특히 보조정리 1.3의 $\\log\\zeta(s)=\\sum_{p,m}p^{-ms}/m$('절대수렴하므로 순서 무관'이라 미뤄 둔 대목), 그리고 공식 (5)의 항별 미분과 명제 2.3에서 급수와 적분·합을 맞바꾼 단계들이다. 이들 모두 이중으로 첨수된 항($p,m$ 또는 $n$과 등고선)을 어떤 순서로 모으든 같은 값이 나온다는 사실에 의존했는데, 그 근거가 바로 조건 (8)형 절대·균일 수렴이다. 증명 전략이 자연스러운 이유는, '합의 순서'라는 이산적 자유도가 사실 '어느 극한을 먼저 취하는가'라는 해석적 자유도와 같기 때문이다. $\\sum_k\\sum_\\ell$은 '$\\ell$-극한을 먼저, $k$-극한을 나중', $\\sum_\\ell\\sum_k$은 그 반대인데, 두 반복극한의 교환 가능성은 고전적으로 '연속 함수열의 균일수렴 → 극한 함수의 연속'으로 판정된다. 그래서 부분합을 점열 $x_n\\to x_0$ 위의 함숫값으로 위장하면 이 판정 정리를 그대로 빌려 쓸 수 있고, 조건 (8)의 $\\sum_k b_k<\\infty$이 정확히 균일수렴을 공급한다. 이는 일변수에서 절대수렴 급수가 임의 재배열에도 같은 합을 주는 성질(리만의 재배열 정리의 '좋은 쪽')의 이차원 판본이다: 조건 (8)은 '이중 절대수렴'이고, 그 아래에서 (iii)이 보장하는 '전단사에 의한 임의 재배열 불변성'이 바로 절대수렴의 재배열 불변성에 대응한다. 조건 (8)이 깨지면(경고 예제) 마치 조건수렴 급수처럼 순서가 값을 바꾼다."
         }
       ]
+    },
+    {
+      "section_title": "7.3 연습문제 (Exercises)",
+      "step1_big_picture": {
+        "context": "이 절의 연습문제들은 챕터 본문을 세 방향으로 확장한다. 첫째, 디리클레 급수(Dirichlet series)의 대수 — 곱셈이 계수의 디리클레 합성곱(divisor 구조)에 대응하고(연습 2), 오일러 곱을 뒤집으면 뫼비우스 함수(Möbius function)가 $1/\\zeta$의 계수로 나타난다(연습 3). 둘째, $\\zeta$가 더 큰 $L$-함수 가족의 한 구성원임을 보여 준다 — 주기적 계수의 디리클레 $L$-급수(연습 4), 교대 제타 $\\tilde\\zeta$(연습 5). 셋째, 본문에서 증명한 해석적 사실들을 더 날카롭게 벼린다 — 임계띠에 영점이 무한히 많음(연습 8), $\\zeta$ 근방의 정밀한 로그 규모 평가(연습 9), 그리고 $x/\\log x$보다 더 좋은 근사 $\\mathrm{Li}(x)$(연습 10)와 소수 정리의 여러 동치 형태(연습 11·12). 본문의 노트(이중합 교환)와 정리들이 여기서 실전 도구로 쓰인다.",
+        "hidden_intuition": "관통하는 하나의 감각은 '디리클레 급수 $\\sum a_n n^{-s}$는 계수 수열 $\\{a_n\\}$을 담는 그릇이고, 그 곱셈은 곱셈적 정수론(multiplicative number theory)을 부호화한다'는 것이다. 두 급수를 곱하면 계수가 $c_n=\\sum_{mk=n}a_m b_k$로 얽히는데, 이것이 정확히 '$n$의 약수 구조'다 — 그래서 $\\zeta^2$의 계수가 약수 개수 $d(n)$, $\\zeta(s)\\zeta(s-a)$의 계수가 약수 거듭제곱 합 $\\sigma_a(n)$이 된다. 오일러 곱을 뒤집은 $1/\\zeta=\\prod_p(1-p^{-s})$은 '각 소수를 넣거나 빼거나'라는 포함-배제(inclusion–exclusion)를 급수로 옮긴 것이고, 그 부호가 뫼비우스 $\\mu(n)$이다. $\\zeta\\cdot\\frac1\\zeta=1$이라는 자명한 등식이 계수 층위에서 $\\sum_{k\\mid n}\\mu(k)=\\delta_{n,1}$이라는 뫼비우스 반전(Möbius inversion)의 심장을 낳는다. 그리고 이 모든 재배열의 정당성이 바로 이 챕터의 노트(조건 (8) 아래 이중합 교환)에 걸려 있다 — 추상적으로 보였던 노트가 여기서 값을 치른다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (약수 함수 $d(n)$, $\\sigma_a(n)$)",
+          "formal_statement": "$d(n)$은 $n$의 (양의) 약수의 개수, $\\sigma_a(n)=\\sum_{k\\mid n}k^{a}$는 $n$의 약수들의 $a$-제곱의 합이다. 특히 $\\sigma_0(n)=d(n)$."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (뫼비우스 함수 $\\mu(n)$)",
+          "formal_statement": "$$\\mu(n)=\\begin{cases}1 & n=1,\\\\ (-1)^k & n=p_1\\cdots p_k \\ (\\text{서로 다른 소수의 곱}),\\\\ 0 & \\text{그 외(제곱인수를 가질 때)}.\\end{cases}$$ $\\mu$는 곱셈적(multiplicative)이다: $n,m$이 서로소면 $\\mu(nm)=\\mu(n)\\mu(m)$."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (교대 제타 $\\tilde\\zeta$, 로그 적분 $\\mathrm{Li}$)",
+          "formal_statement": "교대 제타(디리클레 에타) 함수 $\\tilde\\zeta(s)=\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}}{n^s}=1-\\frac{1}{2^s}+\\frac{1}{3^s}-\\cdots$. 로그 적분 $\\mathrm{Li}(x)=\\int_2^{x}\\frac{dt}{\\log t}$."
+        },
+        {
+          "type": "Remark",
+          "name": "통합 주제 (디리클레 급수의 곱셈)",
+          "formal_statement": "유계 수열 $\\{a_m\\},\\{b_k\\}$에 대해 $\\mathrm{Re}(s)>1$에서 $$\\left(\\sum_{m}\\frac{a_m}{m^s}\\right)\\left(\\sum_{k}\\frac{b_k}{k^s}\\right)=\\sum_{n}\\frac{c_n}{n^s},\\quad c_n=\\sum_{mk=n}a_m b_k,$$ 이며 모든 급수가 절대수렴한다(연습 2). 이 곱셈 규칙과 오일러 곱이 이 절 대부분 문제의 뼈대다. 재배열의 정당성은 이 챕터의 노트(조건 (8))가 보장한다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "연습 1. 실수열 $\\{a_n\\}$의 부분합 $A_n=a_1+\\cdots+a_n$이 유계라 하자. 디리클레 급수 $\\sum_{n=1}^{\\infty}\\frac{a_n}{n^s}$이 $\\mathrm{Re}(s)>0$에서 수렴하고 그 반평면에서 정칙함을 보여라.",
+          "hint": "부분합 공식(아벨 합, summation by parts)으로 원래 급수를 절대수렴하는 급수 $\\sum A_n(n^{-s}-(n+1)^{-s})$과 비교하라. 괄호 항은 평균값 정리로 $|n^{-s}-(n+1)^{-s}|\\le|s|\\,n^{-\\sigma-1}$처럼 평가된다.",
+          "solution": "$a_n=A_n-A_{n-1}$을 넣고 아벨 합: $\\sum_{n=1}^{N}a_n n^{-s}=A_N N^{-s}+\\sum_{n=1}^{N-1}A_n\\bigl(n^{-s}-(n+1)^{-s}\\bigr)$. $|A_n|\\le M$이고 평균값 정리로 $|n^{-s}-(n+1)^{-s}|=\\bigl|s\\int_n^{n+1}u^{-s-1}du\\bigr|\\le|s|\\,n^{-\\sigma-1}$ ($\\sigma=\\mathrm{Re}(s)>0$). 따라서 $\\sum_n A_n(n^{-s}-(n+1)^{-s})$은 $\\sum_n M|s|n^{-\\sigma-1}$과 비교해 절대수렴하고, 경계항 $A_N N^{-s}\\to 0$ ($\\sigma>0$). 각 콤팩트 부분집합에서 이 평가가 균일하므로 부분합이 정칙함수로 균일수렴 → 극한도 정칙(정칙함수열의 균일극한). (일반화: 이것이 $\\tilde\\zeta$·$L$-급수가 $\\mathrm{Re}(s)>1$을 넘어 $\\mathrm{Re}(s)>0$까지 사는 이유다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 2. (a) 유계 수열 $\\{a_m\\},\\{b_k\\}$에 대해 $\\bigl(\\sum_m a_m m^{-s}\\bigr)\\bigl(\\sum_k b_k k^{-s}\\bigr)=\\sum_n c_n n^{-s}$ ($c_n=\\sum_{mk=n}a_mb_k$)이 $\\mathrm{Re}(s)>1$에서 성립하고 절대수렴함을 보여라. (b) 이로부터 $(\\zeta(s))^2=\\sum_n \\frac{d(n)}{n^s}$, $\\zeta(s)\\zeta(s-a)=\\sum_n\\frac{\\sigma_a(n)}{n^s}$을 유도하라.",
+          "hint": "(a) 두 급수가 $\\sigma>1$에서 절대수렴함을 보이고, 이 챕터의 노트(조건 (8))로 이중합 $\\sum_{m,k}a_mb_k(mk)^{-s}$의 재배열·$n=mk$별 묶기를 정당화하라. (b) $a_m=b_k=1$ 및 $b_k=k^a$를 대입.",
+          "solution": "(a) $|a_m|,|b_k|\\le M$이므로 $\\sum_m|a_m|m^{-\\sigma}\\le M\\zeta(\\sigma)<\\infty$ ($\\sigma>1$), $\\{b_k\\}$도 같다. 조건 (8) $\\sum_{m}\\sum_k|a_mb_k|(mk)^{-\\sigma}=(\\sum_m|a_m|m^{-\\sigma})(\\sum_k|b_k|k^{-\\sigma})<\\infty$가 성립하므로 노트의 정리에 의해 이중합 $\\sum_{m,k}a_mb_k(mk)^{-s}$을 임의 순서로 더할 수 있다. $n=mk$로 묶으면 $\\sum_n(\\sum_{mk=n}a_mb_k)n^{-s}=\\sum_n c_n n^{-s}$. (b) $a_m=b_k=1$: $c_n=\\sum_{mk=n}1=d(n)$이므로 $\\zeta^2=\\sum d(n)n^{-s}$. $a_m=1,b_k=k^a$ (즉 $\\zeta(s-a)=\\sum k^a k^{-s}=\\sum k^{-(s-a)}$): $c_n=\\sum_{mk=n}k^a=\\sum_{k\\mid n}k^a=\\sigma_a(n)$이므로 $\\zeta(s)\\zeta(s-a)=\\sum\\sigma_a(n)n^{-s}$. (일반화: 디리클레 급수의 곱은 계수의 약수 합성곱이다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 3. (a) $\\mathrm{Re}(s)>1$에서 $\\dfrac{1}{\\zeta(s)}=\\sum_{n=1}^{\\infty}\\dfrac{\\mu(n)}{n^s}$임을 오일러 곱으로 보여라. (b) 이로부터 $\\sum_{k\\mid n}\\mu(k)=\\begin{cases}1&n=1\\\\0&n>1\\end{cases}$을 보여라.",
+          "hint": "(a) $1/\\zeta=\\prod_p(1-p^{-s})$을 전개하면 제곱인수 없는(squarefree) $n$에서만 항이 살아남고 부호가 소인수 개수의 패리티다. (b) $\\zeta(s)\\cdot\\frac{1}{\\zeta(s)}=1$의 계수를 연습 2(a)로 비교하라.",
+          "solution": "(a) 오일러 곱의 역수 $\\frac{1}{\\zeta(s)}=\\prod_p(1-p^{-s})$. 절대수렴이라 전개 가능: 각 소수에서 $1$ 또는 $-p^{-s}$를 고르는 방식은 서로 다른 소수 $p_1,\\dots,p_k$의 유한 부분집합에 대응하고, 그 항은 $(-1)^k(p_1\\cdots p_k)^{-s}$. 곧 제곱인수 없는 $n=p_1\\cdots p_k$에서 계수 $(-1)^k=\\mu(n)$, 제곱인수를 가지면 $0=\\mu(n)$. 따라서 $\\frac1\\zeta=\\sum_n\\mu(n)n^{-s}$. (b) $\\zeta(s)\\cdot\\frac{1}{\\zeta(s)}=1$. 좌변을 연습 2(a)로 곱하면 계수 $c_n=\\sum_{mk=n}1\\cdot\\mu(k)=\\sum_{k\\mid n}\\mu(k)$이므로 $\\sum_n(\\sum_{k\\mid n}\\mu(k))n^{-s}=1=\\sum_n\\delta_{n,1}n^{-s}$. 디리클레 급수의 계수는 유일하므로 $\\sum_{k\\mid n}\\mu(k)=\\delta_{n,1}$. (일반화: 이 항등식이 뫼비우스 반전 공식의 핵심이다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 4. $a_n=a_m$ ($n\\equiv m\\bmod q$)인 주기적 복소수열의 디리클레 $L$-급수 $L(s)=\\sum_{n\\ge1}a_n n^{-s}$ ($\\mathrm{Re}(s)>1$)에 대해, $Q(x)=\\sum_{m=0}^{q-1}a_{q-m}e^{mx}$ ($a_0=a_q$)로 두면 $L(s)=\\frac{1}{\\Gamma(s)}\\int_0^\\infty\\frac{Q(x)x^{s-1}}{e^{qx}-1}dx$임을 보이고, $L$이 복소평면으로 연속되며 $s=1$에서만 극을 가질 수 있고 그 극이 사라지는 조건이 $\\sum_{m=0}^{q-1}a_m=0$임을 논하라.",
+          "hint": "$\\Gamma(s)n^{-s}=\\int_0^\\infty x^{s-1}e^{-nx}dx$을 각 항에 쓰고 합·적분을 바꿔라. 주기성으로 $\\sum_n a_n e^{-nx}$을 잔류류(residue) $m$별로 묶으면 분모 $e^{qx}-1$이 나온다. 6장 연습 15·16의 감마-적분 표현 기법을 그대로 따른다.",
+          "solution": "$\\Gamma(s)L(s)=\\sum_n a_n\\int_0^\\infty x^{s-1}e^{-nx}dx=\\int_0^\\infty x^{s-1}\\bigl(\\sum_{n\\ge1}a_n e^{-nx}\\bigr)dx$ (절대수렴이라 교환 가능). $n=qj+ (q-m)$ 식으로 주기별로 묶으면 $\\sum_n a_n e^{-nx}=\\frac{Q(x)}{e^{qx}-1}$ (등비합), 따라서 $L(s)=\\frac{1}{\\Gamma(s)}\\int_0^\\infty\\frac{Q(x)x^{s-1}}{e^{qx}-1}dx$. $x\\to\\infty$에서 피적분은 지수적으로 작아 항상 정칙; $s$-연속성의 유일한 장애는 $x\\to0$ 근방이다. 거기서 $\\frac{Q(x)}{e^{qx}-1}\\sim\\frac{Q(0)}{qx}=\\frac{\\sum_{m}a_m}{qx}$이라, 6장 연습의 논법대로 $\\int_0 x^{s-2}dx$형 항이 $s=1$에 단순극을 만든다. 그 극의 유수는 $\\frac{1}{q}\\sum_{m=0}^{q-1}a_m$에 비례하므로, $L$이 $s=1$에서 정칙일 필요충분조건은 $\\sum_{m=0}^{q-1}a_m=0$. 디리클레 지표 $\\chi$의 $L(s,\\chi)$(Book I, 8장)에서는 $\\sum_m\\chi(m)=0$이 비자명 지표의 특징이므로, $L(s,\\chi)$는 $\\chi$가 비자명일 때만 $s=1$에서 정칙이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 5. $\\tilde\\zeta(s)=\\sum_{n\\ge1}\\frac{(-1)^{n+1}}{n^s}$에 대해: (a) $\\mathrm{Re}(s)>0$에서 수렴·정칙임을 보여라. (b) $s>1$에서 $\\tilde\\zeta(s)=(1-2^{1-s})\\zeta(s)$임을 보여라. (c) 이로부터 $\\zeta$가 실선분 $0<\\sigma<1$에서 영점을 갖지 않음을 결론짓고, 함수 방정식으로 $\\sigma=0$까지 확장하라.",
+          "hint": "(a) 연습 1을 $a_n=(-1)^{n+1}$(부분합이 $0,1$로 유계)에 적용. (b) $\\zeta-\\tilde\\zeta$는 짝수항의 두 배 $=2\\cdot2^{-s}\\zeta$. (c) $0<\\sigma<1$ 실수에서 교대급수 $\\tilde\\zeta(\\sigma)>0$이고 $1-2^{1-\\sigma}\\ne0$임을 보여라.",
+          "solution": "(a) 부분합이 유계이므로 연습 1로 $\\mathrm{Re}(s)>0$에서 수렴·정칙. (b) $\\zeta(s)-\\tilde\\zeta(s)=2\\sum_{n\\text{ 짝수}}n^{-s}=2\\cdot2^{-s}\\zeta(s)=2^{1-s}\\zeta(s)$이므로 $\\tilde\\zeta(s)=(1-2^{1-s})\\zeta(s)$. 양변 모두 $\\mathrm{Re}(s)>0$에서 정칙이라 이 등식은 해석적 연속으로 그 반평면 전체에서 성립. (c) 실수 $0<\\sigma<1$에서 $\\tilde\\zeta(\\sigma)=\\sum(-1)^{n+1}n^{-\\sigma}$는 항이 양이고 감소하는 교대급수라 $\\tilde\\zeta(\\sigma)\\in(1-2^{-\\sigma},\\,1)$, 특히 $\\tilde\\zeta(\\sigma)>0$. 또 $\\sigma\\ne1$이면 $1-2^{1-\\sigma}\\ne0$. 따라서 $\\zeta(\\sigma)=\\tilde\\zeta(\\sigma)/(1-2^{1-\\sigma})\\ne0$ — 실선분 $0<\\sigma<1$에 영점이 없다. $\\sigma=0$: $\\zeta(0)=-1/2\\ne0$(함수 방정식/따름으로 계산되는 값)이므로 확장된다. (이것이 7.1.intro에서 인용한 '연습 5' — 임계띠의 실축 위 비소멸.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 6. 모든 $c>0$에 대해 $\\displaystyle\\lim_{N\\to\\infty}\\frac{1}{2\\pi i}\\int_{c-iN}^{c+iN}\\frac{a^s}{s}\\,ds=\\begin{cases}1&a>1\\\\ 1/2&a=1\\\\ 0&0\\le a<1\\end{cases}$ 임을 보여라(페론 공식, Perron's formula).",
+          "hint": "보조정리 2.4의 논법을 인자 $1/s$(극 $s=0$, 유수 $a^0=1$)에 적용하라. $a>1$이면 왼쪽 반원, $0<a<1$이면 오른쪽 반원으로 닫는다. $a=1$은 극을 반만 감싸므로 유수의 절반.",
+          "solution": "$f(s)=a^s/s$는 $s=0$에서 단순극, 유수 $a^0=1$. $a>1$: $a^s=e^{s\\log a}$이 $\\mathrm{Re}(s)\\to-\\infty$에서 감쇠하므로 왼쪽 반원으로 닫아 극을 감싼다 → 값 $1$ (반원 적분은 $N\\to\\infty$에서 소멸, 단 $1/s$의 느린 감쇠 탓에 절단 평가가 필요). $0<a<1$: 오른쪽 반원으로 닫으며 내부에 극이 없어 $0$. $a=1$: 피적분 $1/s$의 세로선 주값(principal value)은 극을 정확히 반만 지나므로 유수의 절반 $1/2$. (본문 보조정리 2.4는 인자 $1/(s(s+1))$로 반원 감쇠가 쉬웠으나, 여기 $1/s$는 감쇠가 약해 절단 논법이 더 섬세하다 — 그럼에도 결과는 같은 '불연속 적분' 꼴이다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 7. $\\xi(s)=\\pi^{-s/2}\\Gamma(s/2)\\zeta(s)$가 $s$가 실수일 때, 그리고 $\\mathrm{Re}(s)=1/2$일 때 실수값을 가짐을 보여라.",
+          "hint": "실축 위에서 $\\xi$가 실수임을 보인 뒤 슈바르츠 반사(Schwarz reflection) $\\xi(\\bar s)=\\overline{\\xi(s)}$을 얻어라. $\\mathrm{Re}(s)=1/2$면 $\\bar s=1-s$임을 이용하고 함수 방정식 $\\xi(s)=\\xi(1-s)$을 결합하라.",
+          "solution": "실수 $s>1$에서 $\\pi^{-s/2},\\Gamma(s/2),\\zeta(s)$ 모두 실수이므로 $\\xi(s)$ 실수. $\\xi$는 (극을 뺀 곳에서) 정칙이고 실축의 한 구간에서 실수이므로 슈바르츠 반사 원리로 $\\xi(\\bar s)=\\overline{\\xi(s)}$이 모든 곳에서 성립 — 이것이 '실축 위 실수'를 준다. $\\mathrm{Re}(s)=1/2$: $s=\\tfrac12+it$이면 $\\bar s=\\tfrac12-it=1-s$. 함수 방정식 $\\xi(s)=\\xi(1-s)=\\xi(\\bar s)=\\overline{\\xi(s)}$이므로 $\\xi(s)$는 자신의 켤레와 같아 실수. $\\qquad\\blacksquare$"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 8. $\\zeta$가 임계띠에 무한히 많은 영점을 가짐을 다음 단계로 보여라: (a) $F(s)=\\xi(\\tfrac12+s)$가 $s$의 짝함수임을 보여 $G(s^2)=F(s)$인 $G$의 존재를 얻고, (b) $(s-1)\\zeta(s)$가 성장 차수(order) $1$의 정함수(entire function)임을 보여 $G$가 차수 $1/2$임을 얻고, (c) 아다마르(Hadamard)의 정리로 결론지어라.",
+          "hint": "(a),(b)는 $\\zeta$의 함수 방정식 사용. (c) '분수 차수(fractional order)를 갖는 정함수는 영점이 무한히 많다'는 아다마르의 결과(5장 연습 14)를 $G$(차수 $1/2$)에 적용하라.",
+          "solution": "(a) 함수 방정식 $\\xi(s)=\\xi(1-s)$에서 $s\\mapsto\\tfrac12+s$로 두면 $F(s)=\\xi(\\tfrac12+s)=\\xi(\\tfrac12-s)=F(-s)$, 곧 $F$는 짝함수. 짝함수는 $s^2$의 함수로 쓸 수 있으므로 $G(s^2)=F(s)$인 $G$가 존재한다. (b) $\\zeta$는 $s=1$의 단순극만 가지므로 $(s-1)\\zeta(s)$는 정함수이고, 함수 방정식·감마 인자의 성장 평가로 $|(s-1)\\zeta(s)|\\le A_\\epsilon e^{a_\\epsilon|s|^{1+\\epsilon}}$ — 차수 $1$. $\\xi$(따라서 $F$)도 차수 $1$이고, $G(s^2)=F(s)$에서 변수 $w=s^2$로 보면 $G$의 차수는 절반인 $1/2$. (c) 아다마르 정리: 분수 차수의 정함수는 영점이 무한히 많다. $G$는 차수 $1/2$이므로 무한히 많은 영점을 갖고, $G(s^2)=\\xi(\\tfrac12+s)$의 영점은 $\\xi$의 영점(=임계띠 안 $\\zeta$의 비자명 영점)에 대응하므로 $\\zeta$는 임계띠에 무한히 많은 영점을 갖는다. $\\qquad\\blacksquare$"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 9. 6장 명제 2.7과 이 챕터 명제 1.6을 정련하여, $|t|\\ge2$에서 (a) $|\\zeta(1+it)|\\le A\\log|t|$, (b) $|\\zeta'(1+it)|\\le A(\\log|t|)^2$, (c) $1/|\\zeta(1+it)|\\le A(\\log|t|)^a$ (여기서 $a=7$)임을 보여라.",
+          "hint": "(a) $\\zeta(s)=\\sum_{n\\le|t|}n^{-s}+(\\text{꼬리})$로 나눠 앞부분을 $\\sum_{n\\le|t|}n^{-1}\\sim\\log|t|$로 평가하고 꼬리를 부분합·적분으로 통제. (b)는 코시 적분으로 미분을 (a)형 평가로 환원. (c)는 3-4-1 부등식 $|\\zeta^3(\\sigma)\\zeta^4(\\sigma+it)\\zeta(\\sigma+2it)|\\ge1$을 (a)의 정련된 상한과 결합.",
+          "solution": "(a) $\\sigma=1$ 근방에서 $\\zeta(s)=\\sum_{n\\le|t|}n^{-s}+O(1)$형 절단을 쓰면 주항 $\\sum_{n\\le|t|}n^{-1}\\le 1+\\log|t|$이라 $|\\zeta(1+it)|\\le A\\log|t|$. (b) $\\zeta'(1+it)=\\frac{1}{2\\pi i}\\oint\\frac{\\zeta(w)}{(w-(1+it))^2}dw$을 반지름 $\\sim1/\\log|t|$의 작은 원 위에서 잡으면, (a)의 로그 상한이 한 번 더 로그 인자를 곱해 $|\\zeta'(1+it)|\\le A(\\log|t|)^2$. (c) 따름 1.5의 $|\\zeta^3(\\sigma)\\zeta^4(\\sigma+it)\\zeta(\\sigma+2it)|\\ge1$에서 $|\\zeta(\\sigma+it)|\\ge|\\zeta(\\sigma)|^{-3/4}|\\zeta(\\sigma+2it)|^{-1/4}$; $\\sigma\\to1$과 (a)형 정련($|\\zeta(\\sigma+2it)|\\le A\\log|t|$, $|\\zeta(\\sigma)|\\sim(\\sigma-1)^{-1}$)을 명제 1.6의 밀기-되돌리기 논법에 넣어 로그 규모로 정련하면 $1/|\\zeta(1+it)|\\le A(\\log|t|)^7$. (요점: 명제 1.6의 $|t|^\\epsilon$ 다항 상한이 실제로는 로그 거듭제곱으로 날카롭게 줄어든다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 10. $\\mathrm{Li}(x)=\\int_2^x\\frac{dt}{\\log t}$에 대해 $\\mathrm{Li}(x)=\\frac{x}{\\log x}+O\\!\\left(\\frac{x}{(\\log x)^2}\\right)$임을 보이고, 그 결과로 $\\pi(x)\\sim\\mathrm{Li}(x)$임을 보여라.",
+          "hint": "$\\mathrm{Li}(x)$를 부분적분하고, 남는 $\\int_2^x\\frac{dt}{(\\log t)^2}=O\\!\\left(\\frac{x}{(\\log x)^2}\\right)$을 보이면 충분하다. 이 적분을 $2$에서 $\\sqrt x$, $\\sqrt x$에서 $x$로 쪼개라.",
+          "solution": "부분적분: $\\int_2^x\\frac{dt}{\\log t}=\\Bigl[\\frac{t}{\\log t}\\Bigr]_2^x+\\int_2^x\\frac{dt}{(\\log t)^2}=\\frac{x}{\\log x}-\\frac{2}{\\log2}+\\int_2^x\\frac{dt}{(\\log t)^2}$. 남은 적분을 쪼개면: $\\int_2^{\\sqrt x}\\frac{dt}{(\\log t)^2}\\le\\frac{\\sqrt x}{(\\log2)^2}$(피적분 $\\le$ 상수), $\\int_{\\sqrt x}^x\\frac{dt}{(\\log t)^2}\\le\\frac{x}{(\\log\\sqrt x)^2}=\\frac{x}{(\\frac12\\log x)^2}=\\frac{4x}{(\\log x)^2}$. 합쳐 $\\int_2^x\\frac{dt}{(\\log t)^2}=O\\!\\left(\\frac{x}{(\\log x)^2}\\right)$. 따라서 $\\mathrm{Li}(x)=\\frac{x}{\\log x}+O\\!\\left(\\frac{x}{(\\log x)^2}\\right)$, 곧 $\\mathrm{Li}(x)\\sim\\frac{x}{\\log x}$. 소수 정리로 $\\pi(x)\\sim\\frac{x}{\\log x}$이므로 $\\pi(x)\\sim\\mathrm{Li}(x)$. (참고: $\\mathrm{Li}$는 $\\pi$의 실제 오차가 훨씬 작아 '더 좋은 근사'다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 11·12. (11) $\\varphi(x)=\\sum_{p\\le x}\\log p$에 대해 (i) $\\varphi(x)\\sim x$, (ii) $\\pi(x)\\sim x/\\log x$, (iii) $\\psi(x)\\sim x$, (iv) $\\psi_1(x)\\sim x^2/2$가 서로 동치임을 보여라. (12) $p_n$을 $n$번째 소수라 할 때 소수 정리가 $p_n\\sim n\\log n$을 함의함을 보여라.",
+          "hint": "(11) $\\psi(x)-\\varphi(x)=\\sum_{p^m\\le x,\\,m\\ge2}\\log p=O(\\sqrt x\\log x)$이 작음을 이용해 (i)⟺(iii); (iii)⟺(ii)는 명제 2.1과 그 역; (iv)⟺(iii)은 명제 2.2와 그 역. (12) $\\pi(x)\\sim x/\\log x$에서 $\\log\\pi(x)\\sim\\log x$을 얻고 $x=p_n$을 대입하라.",
+          "solution": "(11) $\\psi-\\varphi=\\sum_{m\\ge2,\\,p^m\\le x}\\log p$는 각 소수에서 $m\\ge2$ 거듭제곱만 세므로 $\\le\\sum_{p\\le\\sqrt x}\\frac{\\log x}{\\log p}\\log p=O(\\sqrt x\\log x)=o(x)$; 따라서 $\\varphi(x)\\sim x\\iff\\psi(x)\\sim x$. 명제 2.1과 그 역(본문 참고)이 $\\psi(x)\\sim x\\iff\\pi(x)\\sim x/\\log x$; 명제 2.2와 그 역이 $\\psi_1(x)\\sim x^2/2\\iff\\psi(x)\\sim x$. 네 명제가 모두 동치. (12) (a) $\\pi(x)\\sim x/\\log x$에서 로그를 취하면 $\\log\\pi(x)=\\log x-\\log\\log x+o(1)$이므로 $\\log\\pi(x)+\\log\\log x\\sim\\log x$. (b) $\\log\\log x=o(\\log x)$이므로 $\\log\\pi(x)\\sim\\log x$. $x=p_n$을 대입하면 $\\pi(p_n)=n$이라 $\\log n\\sim\\log p_n$. 다시 $n=\\pi(p_n)\\sim\\frac{p_n}{\\log p_n}$이므로 $p_n\\sim n\\log p_n\\sim n\\log n$. $\\qquad\\blacksquare$"
+        },
+        {
+          "type": "ox",
+          "question": "연습 3의 항등식 $\\sum_{k\\mid n}\\mu(k)=\\delta_{n,1}$은 $\\zeta(s)\\cdot\\frac{1}{\\zeta(s)}=1$을 계수 층위에서 읽은 것에 불과하다.",
+          "answer": "O",
+          "explanation": "$\\zeta=\\sum 1\\cdot n^{-s}$, $\\frac1\\zeta=\\sum\\mu(n)n^{-s}$이므로 두 디리클레 급수의 곱(연습 2a)의 $n^{-s}$ 계수는 $\\sum_{k\\mid n}\\mu(k)$이다. 곱이 상수 $1=\\sum\\delta_{n,1}n^{-s}$이고 디리클레 급수의 계수가 유일하므로 $\\sum_{k\\mid n}\\mu(k)=\\delta_{n,1}$. 이 자명해 보이는 등식이 뫼비우스 반전의 핵심이다."
+        },
+        {
+          "type": "ox",
+          "question": "연습 10에서 $\\mathrm{Li}(x)$가 $x/\\log x$보다 '더 좋은 근사'라는 것은, $\\mathrm{Li}(x)$와 $x/\\log x$가 서로 점근적으로 다르다($\\mathrm{Li}(x)\\not\\sim x/\\log x$)는 뜻이다.",
+          "answer": "X",
+          "explanation": "연습 10이 보이듯 $\\mathrm{Li}(x)=\\frac{x}{\\log x}+O\\!\\left(\\frac{x}{(\\log x)^2}\\right)$이므로 둘은 점근적으로 같다($\\mathrm{Li}(x)\\sim x/\\log x$). '더 좋다'는 것은 점근이 다르다는 뜻이 아니라, $\\pi(x)$와의 실제 오차가 $\\mathrm{Li}(x)$ 쪽이 훨씬 작다는(고차 점근 전개까지 맞는) 의미다 — 둘 다 소수 정리의 주항을 공유하지만 $\\mathrm{Li}$가 더 미세한 항까지 포착한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 연습문제 묶음은 본문에서 증명한 소수 정리를 어떤 더 넓은 그림 안에 놓는가? 특히 디리클레 급수의 곱셈(연습 2·3)과 $L$-함수 가족(연습 4·5)이 $\\zeta$ 하나에 대한 이야기를 어떻게 확장하는지, 그리고 이 챕터의 노트(이중합 교환)가 그 확장에서 어떤 기반 역할을 하는지 설명하라.",
+          "hint": "‘계수 수열을 담는 그릇으로서의 디리클레 급수’, ‘곱셈 = 약수 구조’, ‘오일러 곱을 가진 급수들의 가족’이라는 세 관점을 엮고, 재배열이 정당화되는 조건이 어디서 오는지 짚어라.",
+          "answer": "본문은 $\\zeta$ 하나의 해석적 성질로 소수를 셌지만, 연습문제들은 $\\zeta$가 훨씬 큰 구조의 특수한 사례임을 드러낸다. 첫째, 디리클레 급수 $\\sum a_n n^{-s}$는 산술적 수열 $\\{a_n\\}$을 담아 해석적으로 다루는 '그릇'이며, 두 그릇의 곱셈은 계수의 약수 합성곱 $c_n=\\sum_{mk=n}a_mb_k$으로 나타난다(연습 2). 그래서 $\\zeta^2$이 약수 개수 $d(n)$을, $\\zeta(s)\\zeta(s-a)$가 약수 거듭제곱 합 $\\sigma_a(n)$을, $1/\\zeta$가 뫼비우스 $\\mu(n)$을 계수로 갖는다(연습 2·3) — 곱셈적 정수론 전체가 이 대수 안에 부호화된다. 둘째, 오일러 곱을 가진 디리클레 급수는 $\\zeta$만이 아니다: 주기적 계수의 $L$-급수(연습 4)와 교대 제타(연습 5)는 같은 기법(해석적 연속, $s=1$의 극/정칙성, 비소멸)이 통째로 이식되는 가족의 구성원이며, 특히 $L(s,\\chi)$가 비자명 지표에서 $s=1$에 정칙이라는 사실은 산술급수 안의 소수 분포(디리클레 정리)로 가는 문을 연다. 셋째 — 그리고 기반 층위에서 — 이 모든 급수 조작(곱을 항별로 펼치고 $n=mk$로 다시 묶고 순서를 바꾸는 일)은 무한 이중합의 재배열이므로, 그 정당성이 이 챕터의 노트(조건 (8) 아래 이중합 교환)에 걸려 있다. 추상적으로 보였던 노트가 여기서 값을 치르며, $\\zeta$에 대한 하나의 정리가 어떻게 $L$-함수와 곱셈적 정수론이라는 넓은 대륙의 입구가 되는지를 이 연습문제들이 함께 보여 준다."
+        }
+      ]
     }
   ]
 }
