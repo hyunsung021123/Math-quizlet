@@ -1,0 +1,120 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Cauchy's Theorem and Its Applications",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis, Ch. 2",
+    "overall_goal": "코시 정리($\\oint_\\gamma f = 0$)의 씨앗이 되는 구르사 정리(Goursat's theorem)를 삼각형에서 증명하고, 이를 발판으로 원판에서의 원시함수 존재·코시 적분공식·정칙함수의 무한 미분가능성 같은 이 장의 핵심 결과들이 어떻게 연쇄적으로 따라오는지 이해한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.6.ex 연습문제 (Exercises) — Cauchy의 정리와 응용",
+      "step1_big_picture": {
+        "context": "이 장은 구르사 정리에서 출발해 원판 코시 정리·코시 적분공식·정칙함수의 해석성·리우빌 정리·모레라 정리·슈바르츠 반사·룽에 근사까지 하나의 사슬로 쌓아 올렸다. 연습문제들은 그 도구들을 실제로 손에 쥐고 휘두르는 훈련장이다. 크게 세 갈래로 나뉜다: (1) 등고선 적분으로 실적분 계산하기(프레넬 적분, $\\int_0^\\infty \\frac{\\sin x}{x}dx$, 라플라스형 적분) — 2.3의 기법을 확장한다; (2) 코시 부등식·코시 적분공식의 정량적 응용(상의 지름 추정, 성장 조건 아래 미분 추정, 부동점을 가진 자기사상의 선형성) — 2.4의 강성 정리들을 쓴다; (3) 구조적 정리들(그린 정리로 구르사 재증명, 제거 가능 특이점, 조화함수의 정칙 실현과 푸아송 공식, 슈바르츠 반사의 응용) — 이 장의 이론적 뼈대를 재확인한다.",
+        "hidden_intuition": "연습문제 전체를 관통하는 하나의 메타-전략이 있다: '풀고 싶은 실수/복소 대상을, 코시 이론이 무언가를 강제하는 등고선 적분이나 급수·계수 관계로 번역한다'는 것이다. 실적분은 닫힌 등고선 위 적분($=0$)으로 번역되어 원치 않는 조각이 극한에서 사라지고(1~4번), 함수의 크기·모양 제약은 코시 부등식 $|f^{(n)}(z_0)|\\le \\frac{n!\\|f\\|}{R^n}$을 통해 계수·미분의 부등식으로 번역되며(7·8·9번), 특이점·경계 조건은 반사·항등정리·리우빌로 번역되어 함수의 전역 형태를 결정한다(10·13·14·15번). 각 문제에서 '어떤 등고선을 그릴까 / 어떤 반지름 $R$에서 코시 부등식을 쓸까 / 어떤 함수에 항등정리·리우빌을 걸까'를 고르는 것이 곧 풀이의 핵심이다."
+      },
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 1 — 프레넬 적분] $$\\int_0^\\infty \\sin(x^2)\\,dx=\\int_0^\\infty \\cos(x^2)\\,dx=\\frac{\\sqrt{2\\pi}}{4}.$$ ($\\int_0^\\infty$은 $\\lim_{R\\to\\infty}\\int_0^R$.) $e^{-z^2}$을 각 $\\pi/4$인 부채꼴(그림 14) 위에서 적분하라. $\\int_{-\\infty}^\\infty e^{-x^2}dx=\\sqrt\\pi$을 이용한다.",
+          "hint": "부채꼴 경로: $0\\to R$ (실축) $\\to$ 반지름 $R$ 호를 따라 $Re^{i\\pi/4}$ $\\to$ 다시 원점으로($z=re^{i\\pi/4}$ 광선). $e^{-z^2}$은 정함수라 세 조각의 합이 $0$. 광선 위에서 $z^2=ir^2$임을 이용하라. 호의 적분은 $R\\to\\infty$에서 $0$.",
+          "solution": "$e^{-z^2}$은 정함수이므로 부채꼴 경계 위 적분이 $0$이다. (i) 실축 조각: $\\int_0^R e^{-x^2}dx\\to\\frac{\\sqrt\\pi}{2}$. (ii) 호: $|e^{-z^2}|=e^{-R^2\\cos2\\theta}$, $\\theta\\in[0,\\pi/4]$에서 표준 추정으로 $R\\to\\infty$에 $0$. (iii) 광선 $z=re^{i\\pi/4}$: $z^2=r^2e^{i\\pi/2}=ir^2$, $dz=e^{i\\pi/4}dr$이므로 이 조각(원점 방향)은 $-e^{i\\pi/4}\\int_0^R e^{-ir^2}dr$. 합이 $0$이므로 극한에서 $\\frac{\\sqrt\\pi}{2}=e^{i\\pi/4}\\int_0^\\infty e^{-ir^2}dr$. 따라서 $$\\int_0^\\infty e^{-ir^2}dr=\\frac{\\sqrt\\pi}{2}e^{-i\\pi/4}=\\frac{\\sqrt\\pi}{2}\\Big(\\tfrac{1}{\\sqrt2}-\\tfrac{i}{\\sqrt2}\\Big).$$ $e^{-ir^2}=\\cos r^2-i\\sin r^2$이므로 실·허수부를 비교하면 $\\int_0^\\infty\\cos r^2\\,dr=\\int_0^\\infty\\sin r^2\\,dr=\\frac{\\sqrt\\pi}{2\\sqrt2}=\\frac{\\sqrt{2\\pi}}{4}$. 일반화: 광선을 $\\pi/4$로 기울이면 $z^2$이 순허수가 되어 가우시안이 진동적분(프레넬)으로 변환된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 2] $$\\int_0^\\infty \\frac{\\sin x}{x}\\,dx=\\frac{\\pi}{2}.$$ 힌트: 이 적분은 $\\frac{1}{2i}\\int_{-\\infty}^\\infty\\frac{e^{ix}-1}{x}\\,dx$과 같다. 들여쓴 반원(indented semicircle)을 사용하라.",
+          "hint": "$f(z)=\\frac{e^{iz}-1}{z}$을 상반평면의 들여쓴 반원 위에서 적분하라. $f$는 $z=0$에서 제거 가능하지만, $\\frac{e^{iz}}{z}$와 $\\frac{1}{z}$로 나눠 보면 작은 반원의 기여를 계산하기 쉽다. 큰 반원에서 $e^{iz}$은 상반평면에서 유계.",
+          "solution": "$\\int_{-\\infty}^\\infty\\frac{\\sin x}{x}dx=\\mathrm{Im}\\int_{-\\infty}^\\infty\\frac{e^{ix}}{x}dx$을 들여쓴 반원으로 계산한다. $g(z)=\\frac{e^{iz}}{z}$을 실축 위 $[-R,-\\epsilon]\\cup[\\epsilon,R]$, 작은 반원 $\\gamma_\\epsilon^+$(원점 우회, 음의 방향), 큰 반원 $\\gamma_R^+$으로 이루어진 등고선에서 적분하면 내부에 특이점이 없어 합이 $0$. 큰 반원: 상반평면에서 $|e^{iz}|\\le1$이라 조르당 보조정리로 $R\\to\\infty$에 $0$. 작은 반원: $g(z)=\\frac1z+(\\text{유계})$이고 $z=\\epsilon e^{i\\theta}$ ($\\theta:\\pi\\to0$)에서 $\\int_{\\gamma_\\epsilon^+}\\frac{dz}{z}=\\int_\\pi^0 i\\,d\\theta=-i\\pi$. 따라서 $\\mathrm{p.v.}\\int_{-\\infty}^\\infty\\frac{e^{ix}}{x}dx-i\\pi=0$, 즉 주값이 $i\\pi$. 허수부를 취하면 $\\int_{-\\infty}^\\infty\\frac{\\sin x}{x}dx=\\pi$. 피적분함수가 우함수이므로 $\\int_0^\\infty\\frac{\\sin x}{x}dx=\\frac{\\pi}{2}$. (힌트의 $\\frac{e^{ix}-1}{x}$ 형태를 쓰면 $-1$ 항이 원점 특이성을 없애 주며 실직선에서 절대수렴을 확보하는 같은 결과를 준다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 3] $a>0$에 대해 $$\\int_0^\\infty e^{-ax}\\cos bx\\,dx,\\qquad \\int_0^\\infty e^{-ax}\\sin bx\\,dx$$ 를 계산하라. $e^{-Az}$ ($A=\\sqrt{a^2+b^2}$)을 각 $\\omega$($\\cos\\omega=a/A$)인 부채꼴 위에서 적분한다.",
+          "hint": "부채꼴: 실축 $0\\to R$, 호, 광선 $z=re^{i\\omega}$. 광선 위에서 $Az=Ar e^{i\\omega}=r(a+ib)$ (왜냐하면 $A\\cos\\omega=a$, $A\\sin\\omega=b$)임을 이용하라. 두 실적분을 실·허수부로 동시에 얻는다.",
+          "solution": "$e^{-Az}$은 정함수. 실축 조각: $\\int_0^\\infty e^{-Ax}dx=\\frac1A$. 호: $R\\to\\infty$에 $0$. 광선 $z=re^{i\\omega}$: $Az=r(a+ib)$이므로 $e^{-Az}=e^{-ar}(\\cos br-i\\sin br)$, $dz=e^{i\\omega}dr$. 부채꼴 적분 $=0$에서 $$\\frac1A=e^{i\\omega}\\int_0^\\infty e^{-ar}(\\cos br-i\\sin br)\\,dr,$$ 즉 $\\int_0^\\infty e^{-ar}(\\cos br-i\\sin br)\\,dr=\\frac{e^{-i\\omega}}{A}=\\frac{\\cos\\omega-i\\sin\\omega}{A}=\\frac{a-ib}{A^2}$. 실·허수부 비교: $$\\int_0^\\infty e^{-ax}\\cos bx\\,dx=\\frac{a}{a^2+b^2},\\qquad \\int_0^\\infty e^{-ax}\\sin bx\\,dx=\\frac{b}{a^2+b^2}.$$ 일반화: 감쇠지수 $e^{-ax}$와 진동 $e^{\\pm ibx}$을 하나의 복소지수 $e^{-Az}$로 묶으면, 부채꼴 각도 $\\omega$가 정확히 $a,b$의 비를 담아 두 적분을 한 번에 준다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 4] 모든 $\\xi\\in\\mathbb{C}$에 대해 $$e^{-\\pi\\xi^2}=\\int_{-\\infty}^\\infty e^{-\\pi x^2}e^{2\\pi i x\\xi}\\,dx$$ 를 증명하라(2.3 예제 1은 실수 $\\xi$에 대해 이미 보였다).",
+          "hint": "양변을 $\\xi$의 함수로 보라. 우변이 $\\xi$에 대해 정칙임을 정리 5.4(또는 적분기호 아래 미분)로 확인하고, 실수 $\\xi$에서 두 정함수가 일치함을 이용하라. 어떤 정리가 '실직선 위 일치 ⟹ 전평면 일치'를 주는가?",
+          "solution": "좌변 $e^{-\\pi\\xi^2}$은 정함수이다. 우변 $g(\\xi)=\\int_{-\\infty}^\\infty e^{-\\pi x^2}e^{2\\pi i x\\xi}dx$도 $\\xi$의 정함수이다 — 피적분함수가 각 $x$에 대해 $\\xi$에 정칙이고 $|e^{-\\pi x^2}e^{2\\pi i x\\xi}|=e^{-\\pi x^2}e^{-2\\pi x\\,\\mathrm{Im}\\xi}$이 임의의 컴팩트 $\\xi$-영역에서 지배수렴하므로, 정리 5.4류(적분으로 정의된 정칙함수)에 의해 $g$가 정칙. 2.3 예제 1(부호를 $e^{2\\pi ix\\xi}$로 맞춘 형태)에 의해 실수 $\\xi\\in\\mathbb{R}$에서 $g(\\xi)=e^{-\\pi\\xi^2}$. 두 정함수가 실직선(극한점을 갖는 집합)에서 일치하므로 일치의 정리(따름정리 4.9)에 의해 $\\mathbb{C}$ 전체에서 $g(\\xi)=e^{-\\pi\\xi^2}$. 일반화: 실수축에서 검증된 항등식을 복소 전체로 넓히는 표준 도구가 해석적 연속(항등정리)이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 5 — 그린 정리로 구르사 재증명] $f$가 $\\Omega$에서 연속적으로 복소미분가능($f'$ 연속)하고 $T\\subset\\Omega$가 내부까지 포함된 삼각형일 때, 그린 정리를 써서 $\\int_T f(z)\\,dz=0$을 보여라. (이는 '$f'$ 연속'이라는 추가 가정 아래의 구르사 정리다.)",
+          "hint": "$f=u+iv$, $dz=dx+i\\,dy$로 전개해 $\\int_T f\\,dz$을 두 실선적분으로 쪼개라. 각각에 그린 정리 $\\int_T F\\,dx+G\\,dy=\\iint_{\\text{int}}(\\partial_x G-\\partial_y F)\\,dxdy$을 적용하고 코시-리만 방정식 $u_x=v_y,\\ u_y=-v_x$을 넣어라.",
+          "solution": "$f=u+iv$이면 $$\\int_T f\\,dz=\\int_T(u+iv)(dx+i\\,dy)=\\int_T(u\\,dx-v\\,dy)+i\\int_T(v\\,dx+u\\,dy).$$ $f'$이 연속이므로 $u,v$은 $C^1$이고 그린 정리를 적용할 수 있다: $$\\int_T(u\\,dx-v\\,dy)=\\iint_{\\text{int}}(-v_x-u_y)\\,dxdy,\\quad \\int_T(v\\,dx+u\\,dy)=\\iint_{\\text{int}}(u_x-v_y)\\,dxdy.$$ 코시-리만 방정식 $u_x=v_y,\\ u_y=-v_x$을 대입하면 $-v_x-u_y=-v_x+v_x=0$이고 $u_x-v_y=0$. 두 이중적분의 피적분함수가 모두 $0$이므로 $\\int_T f\\,dz=0$. 참고: 이 증명은 $f'$의 연속성을 본질적으로 쓴다($C^1$이어야 그린 정리 적용) — 구르사의 원래 기여는 바로 이 가정을 제거한 것이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 6 — 유계 특이점] $\\Omega$가 열린집합, $T\\subset\\Omega$가 내부까지 포함된 삼각형이고, $f$가 $T$ 내부의 한 점 $w$를 제외하고 $\\Omega$에서 정칙이라 하자. $f$가 $w$ 근처에서 유계이면 $\\int_T f(z)\\,dz=0$임을 증명하라.",
+          "hint": "$T$를 $w$를 담는 아주 작은 삼각형(또는 사각형) $\\tau$와, $f$가 정칙인 나머지 조각들로 분할하라. 나머지 조각에서는 구르사 정리가 $0$을 준다. 작은 조각의 적분은 유계 $|f|\\le M$과 둘레 길이로 추정하라.",
+          "solution": "$f$가 $w$ 근처에서 $|f|\\le M$으로 유계라 하자. $T$의 내부를 세분해, $w$를 담는 변 길이 $\\eta$의 작은 삼각형 $\\tau$와 나머지 삼각형들로 나눈다(공유변은 반대 방향으로 상쇄). 나머지 삼각형들에서는 $f$가 정칙이므로 구르사 정리로 각 적분이 $0$. 따라서 $\\int_T f\\,dz=\\int_\\tau f\\,dz$. 이때 $$\\Big|\\int_\\tau f\\,dz\\Big|\\le M\\cdot(\\text{perimeter of }\\tau)=M\\cdot c\\eta\\xrightarrow{\\eta\\to0}0.$$ 좌변 $\\int_T f\\,dz$은 $\\eta$에 무관한 상수이므로 $\\int_T f\\,dz=0$. 일반화: '유계인 고립 특이점은 적분에 기여하지 않는다' — 이는 다음 장의 '제거 가능 특이점(removable singularity)' 정리(리만)의 씨앗이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 7 — 상(image)의 지름] $f:\\mathbb{D}\\to\\mathbb{C}$가 정칙일 때, 상의 지름 $d=\\sup_{z,w\\in\\mathbb{D}}|f(z)-f(w)|$이 $$2|f'(0)|\\le d$$ 를 만족함을 보여라. 힌트: $0<r<1$에 대해 $2f'(0)=\\frac{1}{2\\pi i}\\int_{|\\zeta|=r}\\frac{f(\\zeta)-f(-\\zeta)}{\\zeta^2}\\,d\\zeta$.",
+          "hint": "코시 미분공식 $f'(0)=\\frac{1}{2\\pi i}\\int_{|\\zeta|=r}\\frac{f(\\zeta)}{\\zeta^2}d\\zeta$에서 $\\zeta\\to-\\zeta$ 치환으로 $f(-\\zeta)$ 항을 만들어 힌트의 대칭 형태를 얻어라. 그다음 $|f(\\zeta)-f(-\\zeta)|\\le d$로 눌러라.",
+          "solution": "코시 미분공식에서 $f'(0)=\\frac{1}{2\\pi i}\\int_{|\\zeta|=r}\\frac{f(\\zeta)}{\\zeta^2}d\\zeta$. $\\zeta\\to-\\zeta$ 치환($d\\zeta\\to-d\\zeta$, 경로 방향 보존)으로 $f'(0)=\\frac{1}{2\\pi i}\\int_{|\\zeta|=r}\\frac{-f(-\\zeta)}{\\zeta^2}d\\zeta$도 성립... 정확히는 두 표현을 더해 힌트의 $$2f'(0)=\\frac{1}{2\\pi i}\\int_{|\\zeta|=r}\\frac{f(\\zeta)-f(-\\zeta)}{\\zeta^2}\\,d\\zeta$$ 를 얻는다. 절댓값을 취하고 $\\zeta,-\\zeta\\in\\mathbb{D}$이므로 $|f(\\zeta)-f(-\\zeta)|\\le d$, $|\\zeta|=r$을 쓰면 $$2|f'(0)|\\le\\frac{1}{2\\pi}\\cdot\\frac{d}{r^2}\\cdot 2\\pi r=\\frac{d}{r}.$$ $r\\to1^-$로 보내면 $2|f'(0)|\\le d$. (등호는 $f$가 일차 $a_0+a_1z$일 때만.) 일반화: 대칭화된 코시 공식이 '도함수와 상의 지름' 사이의 날카로운 부등식을 준다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 8 — 띠에서의 성장 조건] $f$가 띠 $-1<y<1,\\ x\\in\\mathbb{R}$에서 정칙이고 그 위 모든 $z$에서 $|f(z)|\\le A(1+|z|)^\\eta$ ($\\eta$ 고정 실수)이면, 각 정수 $n\\ge0$에 대해 $$|f^{(n)}(x)|\\le A_n(1+|x|)^\\eta\\quad(\\forall x\\in\\mathbb{R})$$ 인 $A_n\\ge0$이 존재함을 보여라. 힌트: 코시 부등식.",
+          "hint": "실수 $x$마다 반지름 $1/2$인 원판(띠 안에 들어감)을 잡고 코시 부등식 $|f^{(n)}(x)|\\le\\frac{n!\\,\\|f\\|_{C}}{(1/2)^n}$을 적용하라. 그 원 위에서 $|z|\\le|x|+\\tfrac12$임을 이용해 $(1+|z|)^\\eta$을 $(1+|x|)^\\eta$로 바꿔라.",
+          "solution": "고정된 $x\\in\\mathbb{R}$에 대해 중심 $x$, 반지름 $\\tfrac12$인 원판은 띠 $|y|<1$에 완전히 든다. 코시 부등식(따름정리 4.3)으로 $$|f^{(n)}(x)|\\le\\frac{n!}{(1/2)^n}\\sup_{|\\zeta-x|=1/2}|f(\\zeta)|=n!\\,2^n\\sup_{|\\zeta-x|=1/2}|f(\\zeta)|.$$ 그 원 위에서 $|\\zeta|\\le|x|+\\tfrac12$이므로 $|f(\\zeta)|\\le A(1+|x|+\\tfrac12)^\\eta=A(\\tfrac32+|x|)^\\eta$. $\\eta\\ge0$이면 $\\tfrac32+|x|\\le\\tfrac32(1+|x|)$이라 $(\\tfrac32+|x|)^\\eta\\le(\\tfrac32)^\\eta(1+|x|)^\\eta$; $\\eta<0$이면 $\\tfrac32+|x|\\ge 1+|x|$을 써서 $(\\tfrac32+|x|)^\\eta\\le(1+|x|)^\\eta$. 어느 경우든 상수 $C_\\eta$로 $(\\tfrac32+|x|)^\\eta\\le C_\\eta(1+|x|)^\\eta$. 따라서 $|f^{(n)}(x)|\\le n!\\,2^n A\\,C_\\eta(1+|x|)^\\eta=:A_n(1+|x|)^\\eta$. 일반화: 코시 부등식은 함수의 성장률을 그대로 도함수의 성장률로 물려준다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 9 — 부동점을 가진 자기사상의 선형성] $\\Omega\\subset\\mathbb{C}$가 유계 열린집합이고 $\\varphi:\\Omega\\to\\Omega$가 정칙이라 하자. 어떤 $z_0\\in\\Omega$에서 $\\varphi(z_0)=z_0$이고 $\\varphi'(z_0)=1$이면 $\\varphi$가 항등사상(선형 $\\varphi(z)=z$)임을 증명하라.",
+          "hint": "$z_0=0$으로 놓고 $\\varphi(z)=z+a_nz^n+O(z^{n+1})$ (첫 비영 고차항)이라 하자. $k$번 합성 $\\varphi_k=\\varphi\\circ\\cdots\\circ\\varphi$의 전개가 $\\varphi_k(z)=z+ka_nz^n+O(z^{n+1})$임을 귀납으로 보이고, $\\Omega$가 유계라 $\\varphi_k$이 일양유계임을 코시 부등식과 결합해 $k\\to\\infty$를 취하라.",
+          "solution": "평행이동으로 $z_0=0$이라 가정한다. $\\varphi$가 항등이 아니라면 $\\varphi(z)=z+a_nz^n+O(z^{n+1})$ ($n\\ge2$, $a_n\\ne0$이 첫 비영 고차계수). 귀납: $\\varphi_1=\\varphi$은 성립하고, $\\varphi_{k+1}=\\varphi\\circ\\varphi_k$에서 $\\varphi_k(z)=z+ka_nz^n+O(z^{n+1})$을 대입하면 $\\varphi_{k+1}(z)=\\varphi_k(z)+a_n\\varphi_k(z)^n+\\cdots=z+ka_nz^n+a_nz^n+O(z^{n+1})=z+(k+1)a_nz^n+O(z^{n+1})$. $\\Omega$가 유계이므로 모든 $\\varphi_k(\\Omega)\\subset\\Omega$은 어떤 $M$으로 $|\\varphi_k|\\le M$ 일양유계다. $z^n$ 계수 $ka_n$에 코시 부등식을 적용하면 $|ka_n|\\le\\frac{M}{r^n}$ (고정된 $r$). $k\\to\\infty$이면 좌변이 $\\infty$로 발산하므로 $a_n=0$, 모순. 따라서 모든 고차계수가 $0$, 곧 $\\varphi(z)=z$. 일반화: 유계 영역의 자기사상은 반복 합성이 계수를 선형 증폭시키는데, 유계성(코시 부등식)이 그 증폭을 금지해 강한 강성(선형성)을 강제한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 10] 바이어슈트라스 정리에 따르면 $[0,1]$의 연속함수는 다항식으로 균등근사된다. 닫힌 단위원판 위의 모든 연속함수는 변수 $z$의 다항식으로 균등근사될 수 있는가?",
+          "hint": "만약 다항식열 $p_n\\to g$이 닫힌 원판에서 균등수렴하면, 열린 원판에서 $g$는 어떤 성질을 가져야 하는가(정리 5.2)? $f(z)=\\bar z$을 후보 반례로 검토하라.",
+          "solution": "아니다. 다항식열 $p_n(z)$이 닫힌 단위원판 $\\overline{\\mathbb{D}}$에서 어떤 $g$로 균등수렴하면, 열린 원판 $\\mathbb{D}$의 컴팩트 부분집합에서도 균등수렴하므로 정리 5.2에 의해 $g$는 $\\mathbb{D}$에서 정칙이어야 한다. 그런데 $f(z)=\\bar z$은 $\\overline{\\mathbb{D}}$에서 연속이지만 어디서도 정칙이 아니다(코시-리만 방정식 불만족). 따라서 $\\bar z$은 다항식으로 균등근사될 수 없다. (대안 증명: 만약 근사되면 $\\int_{|z|=1}\\bar z\\,dz=\\int_{|z|=1}\\frac1z\\cdot|z|^2? $ 직접 $\\int_{|z|=1}\\bar z\\,dz=2\\pi i\\ne0$이지만 모든 다항식은 $\\int_{|z|=1}p\\,dz=0$이라 모순.) 일반화: 복소 다항식 근사는 실 바이어슈트라스보다 훨씬 제한적이다 — 극한은 반드시 정칙이어야 하므로 정칙이 아닌 연속함수는 배제된다(룽에 정리에서 $K^c$ 연결 조건이 붙는 것과 같은 맥락)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 11 — 슈바르츠/푸아송 핵] $f$가 원점 중심 반지름 $R_0$인 원판 $D_{R_0}$에서 정칙이라 하자. (a) $0<R<R_0$, $|z|<R$일 때 $$f(z)=\\frac{1}{2\\pi}\\int_0^{2\\pi} f(Re^{i\\varphi})\\,\\mathrm{Re}\\!\\Big(\\frac{Re^{i\\varphi}+z}{Re^{i\\varphi}-z}\\Big)\\,d\\varphi$$ 를 증명하라. (b) $\\mathrm{Re}\\!\\Big(\\frac{Re^{i\\gamma}+r}{Re^{i\\gamma}-r}\\Big)=\\dfrac{R^2-r^2}{R^2-2Rr\\cos\\gamma+r^2}$ 임을 보여라.",
+          "hint": "(a) $w=R^2/\\bar z$ (원 밖의 점)에 대해 $\\int_{|\\zeta|=R}\\frac{f(\\zeta)}{\\zeta-w}d\\zeta=0$ (내부에서 정칙). 이를 보통의 코시 적분공식과 빼서 두 핵의 차를 계산하면 실수부 핵이 나온다. (b) 분모의 켤레를 분자·분모에 곱해 실수부를 뽑아라.",
+          "solution": "(a) 코시 적분공식 $f(z)=\\frac{1}{2\\pi i}\\int_{|\\zeta|=R}\\frac{f(\\zeta)}{\\zeta-z}d\\zeta$. 점 $w=R^2/\\bar z$은 $|w|=R^2/|z|>R$이라 원 밖에 있어 $\\frac{f(\\zeta)}{\\zeta-w}$이 원판 내부에서 정칙, 따라서 $\\frac{1}{2\\pi i}\\int\\frac{f(\\zeta)}{\\zeta-w}d\\zeta=0$. 두 식을 빼면 $f(z)=\\frac{1}{2\\pi i}\\int f(\\zeta)\\big(\\frac{1}{\\zeta-z}-\\frac{1}{\\zeta-w}\\big)d\\zeta$. $\\zeta=Re^{i\\varphi}$, $w=R^2/\\bar z$을 넣고 정리하면 괄호가 $\\frac{1}{2\\pi}\\mathrm{Re}\\big(\\frac{\\zeta+z}{\\zeta-z}\\big)$ 형태의 실수부 핵과 $d\\varphi$로 바뀌어 원하는 식이 나온다. (b) $z=r$ (실수), $\\zeta=Re^{i\\gamma}$: $$\\frac{Re^{i\\gamma}+r}{Re^{i\\gamma}-r}=\\frac{(Re^{i\\gamma}+r)(Re^{-i\\gamma}-r)}{|Re^{i\\gamma}-r|^2}=\\frac{R^2-r^2-2iRr\\sin\\gamma}{R^2-2Rr\\cos\\gamma+r^2},$$ 실수부는 $\\frac{R^2-r^2}{R^2-2Rr\\cos\\gamma+r^2}$. 이것이 (반지름 $R$ 원판의) 푸아송 핵(Poisson kernel)이다. 일반화: 원 밖의 '반사점' $R^2/\\bar z$을 이용해 코시 핵을 실수부 핵으로 대칭화하면 조화함수 이론의 푸아송 공식이 코시 이론에서 직접 나온다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 12 — 조화함수의 정칙 실현] $u$가 단위원판 $\\mathbb{D}$에서 두 번 연속미분가능하고 조화($\\Delta u=0$)인 실숫값 함수라 하자. (a) $\\mathrm{Re}(f)=u$인 정칙함수 $f$가 $\\mathbb{D}$에 존재하고, $f$의 허수부는 실수 상수만큼의 차이로 유일함을 보여라.",
+          "hint": "$g(z)=2\\,\\partial u/\\partial z$을 두고 $g$가 정칙임을 보여라($\\partial g/\\partial\\bar z=2\\partial^2 u/\\partial z\\partial\\bar z=\\tfrac12\\Delta u=0$). 원판이므로 $g$는 원시함수 $F$($F'=g$)를 갖는다(정리 2.1). $\\mathrm{Re}(F)$와 $u$의 편미분을 비교하라.",
+          "solution": "(a) $\\partial_z=\\tfrac12(\\partial_x-i\\partial_y)$, $\\partial_{\\bar z}=\\tfrac12(\\partial_x+i\\partial_y)$로 두고 $g(z)=2\\partial_z u=u_x-iu_y$을 정의한다. $u$가 $C^2$·조화이므로 $\\partial_{\\bar z}g=2\\partial_{\\bar z}\\partial_z u=\\tfrac12\\Delta u=0$, 즉 $g$는 코시-리만을 만족해 정칙이다. 원판에서 정칙함수는 원시함수를 가지므로(정리 2.1) $F'=g$인 정칙 $F$가 존재한다. 이제 $F=U+iV$라 하면 $F'=U_x+iV_x=U_x-iU_y$ (CR)이고 이것이 $g=u_x-iu_y$과 같으므로 $U_x=u_x$, $U_y=u_y$. 따라서 $\\nabla(U-u)=0$, 연결된 $\\mathbb{D}$에서 $U-u=c$ (실수 상수). $f=F-c$로 두면 $\\mathrm{Re}(f)=U-c=u$. 허수부: 실수부가 같은 두 정칙함수는 CR에 의해 도함수가 같아 상수 차이만 나므로, 허수부는 실수 상수만큼의 차이로 유일하다. (b) 이 결과와 연습문제 11을 결합하면 조화함수의 푸아송 적분 표현 $u(re^{i\\theta})=\\frac{1}{2\\pi}\\int_0^{2\\pi}P_r(\\theta-\\varphi)u(\\varphi)\\,d\\varphi$이 코시 공식으로부터 유도된다. 일반화: 단순연결 영역에서 모든 조화함수는 정칙함수의 실수부이며, 그 켤레조화함수는 상수 차이로 결정된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 13] $f$가 $\\mathbb{C}$ 전체에서 해석적(정함수)이고, 각 $z_0\\in\\mathbb{C}$에서 전개 $f(z)=\\sum_{n\\ge0}c_n(z-z_0)^n$의 계수 중 적어도 하나가 $0$이라 하자. $f$가 다항식임을 증명하라. 힌트: $c_n n!=f^{(n)}(z_0)$과 가산성(countability) 논법.",
+          "hint": "$A_n=\\{z_0:f^{(n)}(z_0)=0\\}$으로 두면 가정은 $\\mathbb{C}=\\bigcup_{n\\ge0}A_n$이다. 각 $A_n$은 닫힌집합이다. 베르 범주 정리(Baire category)를 완비공간 $\\mathbb{C}$에 적용하라.",
+          "solution": "$c_n=f^{(n)}(z_0)/n!$이므로 '$c_n=0$'은 '$f^{(n)}(z_0)=0$'과 같다. $A_n=\\{z_0\\in\\mathbb{C}:f^{(n)}(z_0)=0\\}$로 두면 가정에 의해 모든 $z_0$이 어떤 $A_n$에 들어 $\\mathbb{C}=\\bigcup_{n=0}^\\infty A_n$. 각 $A_n$은 연속함수 $f^{(n)}$의 영점집합이라 닫혀 있다. $\\mathbb{C}$는 완비거리공간이므로 베르 범주 정리에 의해, 가산합집합이 전체를 덮으려면 어떤 $A_N$은 내부가 비어 있지 않다(nowhere dense가 아니다). $A_N$이 닫혀 있고 내부를 가지므로 어떤 열린원판 $\\subset A_N$이 존재, 즉 $f^{(N)}$이 그 열린집합에서 항등적으로 $0$. 항등정리(정리 4.8)에 의해 $f^{(N)}\\equiv0$이 $\\mathbb{C}$ 전체에서 성립하므로 $f$는 차수 $<N$인 다항식이다. 일반화: '국소적으로 어떤 미분이 사라진다'는 조건이 가산성+베르+항등정리를 거쳐 '전역적 다항식'이라는 강한 결론으로 증폭된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 14 — 극과 계수비] $f$가 닫힌 단위원판을 포함하는 열린집합에서, 단위원 위의 한 점 $z_0$의 극(pole)을 제외하고 정칙이라 하자. 열린 단위원판에서 $f$의 멱급수 전개를 $\\sum_{n\\ge0}a_nz^n$이라 할 때 $$\\lim_{n\\to\\infty}\\frac{a_n}{a_{n+1}}=z_0$$ 임을 보여라.",
+          "hint": "멱급수의 수렴반지름은 가장 가까운 특이점까지의 거리 $=|z_0|=1$이다. $z_0$이 단순극이면 $f(z)=\\frac{A}{z_0-z}+(\\text{반지름}>1\\text{인 정칙부})$로 쓰고 $\\frac{A}{z_0-z}$을 전개해 $a_n$의 주도항을 구하라.",
+          "solution": "$f$의 유일한 특이점이 $|z_0|=1$이므로 $\\sum a_nz^n$의 수렴반지름은 $1$. $z_0$을 단순극이라 하면 $f(z)=\\frac{A}{z_0-z}+h(z)$, 여기서 $h$은 반지름 $>1$인 원판에서 정칙(따라서 그 계수 $b_n$은 $|b_n|\\le C\\rho^{-n}$, $\\rho>1$로 빠르게 감소). $\\frac{A}{z_0-z}=\\frac{A}{z_0}\\cdot\\frac{1}{1-z/z_0}=\\sum_{n\\ge0}\\frac{A}{z_0^{n+1}}z^n$. 따라서 $a_n=\\frac{A}{z_0^{n+1}}+b_n$이고 $b_n$은 지수적으로 작으므로 $a_n\\sim\\frac{A}{z_0^{n+1}}$. 그러면 $$\\frac{a_n}{a_{n+1}}\\to\\frac{A/z_0^{n+1}}{A/z_0^{n+2}}=z_0.$$ (차수 $m$인 극이면 $a_n\\sim(\\text{$n$의 다항식})\\cdot z_0^{-(n+m)}$이라 비의 극한은 여전히 $z_0$.) 일반화: 멱급수 계수의 점근비는 가장 가까운 특이점의 위치를 정확히 짚어낸다(비판정법의 기하적 의미)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[연습문제 15 — 슈바르츠 반사 응용] $f$가 $\\overline{\\mathbb{D}}$에서 연속이고 $\\mathbb{D}$에서 정칙이며 소멸하지 않는(non-vanishing) 함수라 하자. $|z|=1$에서 $|f(z)|=1$이면 $f$가 상수임을 증명하라. 힌트: $|z|>1$에서 $f(z)=1/\\overline{f(1/\\bar z)}$로 확장하고 슈바르츠 반사처럼 논증하라.",
+          "hint": "확장 $F(z)=1/\\overline{f(1/\\bar z)}$ ($|z|>1$)이 정칙임을 보이고, $|z|=1$에서 원래 $f$와 연속으로 이어짐을 $|f|=1$($\\Rightarrow \\bar f=1/f$)로 확인하라. 이렇게 만든 정함수가 유계임을 보여 리우빌 정리를 적용하라.",
+          "solution": "$|z|>1$에 대해 $F(z)=1/\\overline{f(1/\\bar z)}$로 정의한다. $f$가 소멸하지 않으므로 분모가 $0$이 아니고, $\\overline{f(1/\\bar z)}$은 (슈바르츠 반사의 계수-켤레 논법으로) $z$에 대해 정칙이며 그 역수도 정칙이다. $|z|=1$이면 $1/\\bar z=z$이라 $\\overline{f(1/\\bar z)}=\\overline{f(z)}$, 그리고 $|f(z)|=1$에서 $\\overline{f(z)}=1/f(z)$이므로 $F(z)=1/\\overline{f(z)}=f(z)$ — 즉 $F$가 단위원을 가로질러 $f$와 연속으로 일치한다. 대칭원리(정리 5.5)류 논법으로 이어 붙인 함수는 $\\mathbb{C}$ 전체에서 정칙(정함수)이다. 유계성: 닫힌 원판에서 $f$가 연속·비영이라 $|f|\\ge\\delta>0$·$|f|\\le M$, 따라서 $|z|>1$에서 $|F|=1/|f(1/\\bar z)|\\le1/\\delta$로 유계. 정함수이면서 유계이므로 리우빌 정리(따름정리 4.5)에 의해 $F$(따라서 $f$)는 상수다. 일반화: 경계에서의 모듈러스 조건($|f|=1$)을 켤레-반사로 정칙 확장의 접합조건으로 바꾸면, 리우빌 정리가 함수를 상수로 못 박는다."
+        },
+        {
+          "type": "ox",
+          "question": "등고선 적분으로 실적분을 계산할 때(연습문제 1~3), 반원·부채꼴 같은 등고선에서 '먼 조각(큰 호)의 적분이 $0$으로 사라진다'는 것은 피적분함수가 그 조각에서 충분히 빨리 감쇠하기 때문이며, 어느 방향으로 등고선을 닫을지는 피적분함수의 감쇠 방향이 결정한다.",
+          "answer": "O",
+          "explanation": "맞다. 프레넬 적분(1번)에서는 $e^{-z^2}$이 부채꼴의 호에서 $e^{-R^2\\cos2\\theta}$로 감쇠하고, $\\sin x/x$(2번)에서는 $e^{iz}$이 상반평면에서 $|e^{iz}|=e^{-y}\\le1$로 유계여서 상반평면으로 닫으며, 라플라스형(3번)에서는 $e^{-Az}$의 감쇠 방향이 부채꼴 각 $\\omega$를 정한다. 어느 반평면·부채꼴로 등고선을 닫을지는 항상 '지수인자가 감쇠하는(발산하지 않는) 방향'으로 결정되며, 그래야 먼 조각이 극한에서 사라져 실축 위 적분만 남는다. 방향을 잘못 잡으면 지수가 폭발해 추정이 실패한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 연습문제 묶음은 크게 '실적분 계산', '코시 부등식류 추정', '전역 구조 결정(리우빌·항등정리·반사)'의 세 유형으로 나뉜다. 각 유형이 이 장의 어떤 핵심 정리를 주 무기로 쓰는지 정리하고, 세 유형을 관통하는 공통의 사고방식을 한 문장으로 요약하라.",
+          "hint": "1~4번은 어떤 정리로 등고선 적분을 다루는가? 7~9번은 $|f^{(n)}|$을 무엇으로 지배하는가? 10·13·14·15번은 함수 전체를 어떤 정리로 못 박는가?",
+          "answer": "세 유형과 주 무기는 다음과 같다. (1) 실적분 계산(1·2·3·4번): 코시 정리($\\oint_\\gamma f=0$)와 그 등고선 변형이 무기다. 실축 적분을 닫힌 등고선으로 완성하고, 먼 조각을 지수 감쇠로 죽이며(때로 특이점 근방의 작은 조각이 유한 기여를 남김), 4번은 여기에 항등정리를 더해 실수 결과를 복소로 넓힌다. (2) 정량적 추정(7·8·9번): 코시 적분공식과 코시 부등식 $|f^{(n)}(z_0)|\\le\\frac{n!\\|f\\|_C}{R^n}$이 무기다. 도함수·계수의 크기를 함수 자체의 크기와 반지름 $R$로 지배해, 상의 지름 부등식(7)·성장률 전달(8)·부동점 자기사상의 선형성(9)을 얻는다. (3) 전역 구조 결정(10·13·14·15번): 리우빌 정리·항등정리·정칙성 정리(정리 5.2)·슈바르츠 반사가 무기다. 유계 정함수는 상수(15), 국소 영점 조건은 다항식(13), 균등극한은 정칙(10), 계수비는 극의 위치(14)를 못 박는다. 5·6·11·12번은 이 장의 이론적 뼈대(그린 정리 대 구르사, 제거 가능 특이점, 조화함수의 정칙 실현)를 재확인한다. 공통 사고방식: **'풀고 싶은 대상을, 코시 이론이 등식·부등식·유일성을 강제하는 등고선 적분 또는 급수 계수 관계로 번역한 뒤, 극한(반지름·경로)을 조절해 원하는 정보만 남긴다.'** 이것이 이 장 전체가 가르친 복소해석의 작동 원리다."
+        }
+      ]
+    }
+  ]
+}
