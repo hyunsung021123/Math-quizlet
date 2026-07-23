@@ -1,0 +1,398 @@
+{
+  "chapter_info": {
+    "title": "Chapter 4. The Fourier Transform",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis, Ch. 4",
+    "overall_goal": "1차원 푸리에 변환(Fourier transform)과 복소해석 사이의 깊은 연결을 이해한다. 실축 위에서 정의된 함수의 정칙 확장 가능성과 그 푸리에 변환 $\\hat f$의 빠른(예: 지수적) 감소가 서로 대응한다는 큰 주제를 배우고, '등고선 이동(shifting the contour)'이라는 하나의 기법으로 $\\hat f$의 지수 감소·푸리에 역변환·포아송 합 공식(Poisson summation)을 증명하며, 종국에는 Paley–Wiener 정리에 도달한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.3 Paley–Wiener 정리 (Paley-Wiener theorem)",
+      "step1_big_picture": {
+        "context": "4.2에서는 $f\\in\\mathfrak{F}$(수평 띠에서 정칙)를 가정하고 $\\hat f$가 지수적으로 감소함을 보였다. 이 소단원은 관점을 뒤집는다: $f$의 정칙성을 미리 가정하지 않되, $f$와 $\\hat f$가 모두 적당한 감소를 가질 때 성립하는 푸리에 역변환(Book I, 5장)만을 출발점으로 삼는다. 그리고 자연스럽지만 근본적인 질문을 던진다 — '$\\hat f$가 유계 구간 $[-M,M]$에 받침(support)을 가지려면 $f$는 어떤 함수여야 하는가?' 이 질문은 복소해석을 전혀 언급하지 않고 진술되지만, 그 답(Paley–Wiener 정리)은 오직 $f$의 정칙적 성질로만 주어진다: $f$가 성장 조건 $|f(z)|\\le Ae^{2\\pi M|z|}$ 를 만족하는 정함수(entire)로 확장되는 것과 동치다. 이런 함수를 지수형(exponential type)이라 부른다. 4.2 정리 2.1이 '$f$를 넓은 띠로 확장할수록 $\\hat f$가 빨리 감소한다'였다면, 여기서는 그 극단 — '$\\hat f$가 콤팩트 받침을 가지는 궁극의 감소' — 를 다룬다.",
+        "hidden_intuition": "핵심 직관은 일종의 불확정성 원리다: $\\hat f$의 받침이 좁을수록($M$이 작을수록) $f$는 더 '정칙적'이고 성장이 완만하며, 반대로 $\\hat f$가 콤팩트 받침을 가지면 $f$는 아예 복소평면 전체로 뻗는 정함수가 된다. 왜? 받침이 $[-M,M]$이면 역변환 적분 $\\int_{-M}^M \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 의 적분 구간이 유한하므로, 실변수 $x$를 복소변수 $z$로 바꿔도 적분이 수렴해 정함수가 정의되고, 그 크기는 $|e^{2\\pi i\\xi z}|=e^{-2\\pi\\xi y}\\le e^{2\\pi M|y|}$ 에서 $e^{2\\pi M|z|}$ 로 통제된다. 역방향(성장 조건 $\\Rightarrow$ 받침)이 훨씬 어렵다: 등고선을 아래로 무한히($y\\to\\infty$) 밀어 $\\hat f(\\xi)=0$($\\xi>M$)을 짜내려 하는데, 그러려면 성장이 '나쁜 방향'으로 폭주하지 않아야 한다. 이를 제어하는 결정적 도구가 Phragmén–Lindelöf 정리로, '경계에서 유계이고 내부 성장이 지나치지 않으면 내부에서도 유계'라는 최대 절댓값 원리의 무계 영역판이다. 적 함수 $e^{z^2}$(부채꼴 경계에선 유계지만 실축에서 폭주)를 $e^{-\\epsilon z^{3/2}}$($\\alpha=3/2<2$)로 눌러 길들이는 발상이 그 증명의 백미다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "ξ",
+            "y": ""
+          },
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -3.4,
+                0
+              ],
+              "to": [
+                3.4,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.5,
+                0
+              ],
+              "to": [
+                1.5,
+                0
+              ],
+              "color": "#c0392b"
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1.5,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.5,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.5,
+                0.32
+              ],
+              "text": "-M"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.5,
+                0.32
+              ],
+              "text": "M"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                0.42
+              ],
+              "text": "supp f-hat"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.7,
+                0.32
+              ],
+              "text": "f-hat=0"
+            }
+          ],
+          "caption": "Paley–Wiener의 무대: $\\hat f$의 받침이 콤팩트 구간 $[-M,M]$(붉은 선분)에 갇혀 있다 — '궁극의 감소'. 이 받침 폭 $M$이 정확히 $f$의 정칙 확장이 허용하는 성장률 $2\\pi M$과 대응한다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Theorem",
+          "name": "정리 3.1 (정리 2.1의 부분적 역, partial converse)",
+          "formal_statement": "$\\hat f$가 어떤 상수 $a,A>0$에 대해 $|\\hat f(\\xi)|\\le Ae^{-2\\pi a|\\xi|}$ 를 만족한다고 하자. 그러면 $f(x)$는 임의의 $0<b<a$에 대해 띠 $S_b=\\{z\\in\\mathbb{C}:|\\mathrm{Im}(z)|<b\\}$ 에서 정칙인 함수 $f(z)$의 실축으로의 제한이다.",
+          "idea_behind_proof": "4.2 정리 2.1('정칙 확장 $\\Rightarrow$ 지수 감소')의 방향을 뒤집으려는 시도다. 역변환 공식 $f(z)=\\int \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 에서 $z$를 복소수로 허용할 때 수렴 여부가 관건인데, $|e^{2\\pi i\\xi z}|=e^{-2\\pi\\xi\\,\\mathrm{Im}(z)}\\le e^{2\\pi b|\\xi|}$ 이고 이것이 가정 $\\hat f$의 감소 $e^{-2\\pi a|\\xi|}$ 와 곱해져 $b<a$일 때 적분가능해진다는 관찰이 핵심이다. 부분합 $f_n$이 정함수(2장 정리 5.4)이고 $S_b$에서 균등수렴하므로 극한 $f$도 정칙(2장 정리 5.2).",
+          "proof_steps": [
+            "$f_n(z)=\\int_{-n}^n \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 는 유한 구간 적분이므로 정함수(2장 정리 5.4).",
+            "$z\\in S_b$에서 $f(z)=\\int_{-\\infty}^\\infty \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 가 절대수렴: 피적분함수가 $A\\,e^{-2\\pi a|\\xi|}e^{2\\pi b|\\xi|}$ 로 지배되고 $b<a$이면 $\\int e^{-2\\pi(a-b)|\\xi|}d\\xi<\\infty$.",
+            "$|f(z)-f_n(z)|\\le A\\int_{|\\xi|\\ge n}e^{-2\\pi a|\\xi|}e^{2\\pi b|\\xi|}\\,d\\xi\\to0$ ($n\\to\\infty$), 균등수렴.",
+            "정함수열의 $S_b$ 균등극한이므로 $f$는 $S_b$에서 정칙(2장 정리 5.2). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 3.2",
+          "formal_statement": "$\\hat f(\\xi)=O(e^{-2\\pi a|\\xi|})$ ($a>0$)이고 $f$가 어떤 비어 있지 않은 열린 구간에서 $0$이면, $f\\equiv0$이다. 특히 $f$와 $\\hat f$가 둘 다 콤팩트 받침을 가질 수 있는 것은 $f=0$일 때뿐이다.",
+          "idea_behind_proof": "정리 3.1로 $f$가 실축을 품는 영역에서 해석적(정칙)이므로, 열린 구간에서 $0$이면 해석적 연속의 유일성(2장 정리 4.8, 항등정리)으로 전역 $0$이다. 두 번째 문장은 첫 문장의 특수한 결과다: $\\hat f$가 콤팩트 받침이면 $\\hat f=O(e^{-2\\pi a|\\xi|})$가 자명히 성립하고, $f$도 콤팩트 받침이면 어떤 구간에서 $0$이므로 $f\\equiv0$ (Book I 5장 연습 21의 결과 회복)."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.3 (Paley–Wiener 정리)",
+          "formal_statement": "$f$가 $\\mathbb{R}$에서 연속이고 적당한 감소를 갖는다고 하자. 그러면 다음 두 조건은 동치다: (i) $f$는 어떤 $A>0$에 대해 $|f(z)|\\le Ae^{2\\pi M|z|}$ 를 만족하는 정함수(entire)로 확장된다 (지수형, exponential type); (ii) $\\hat f$의 받침이 구간 $[-M,M]$에 포함된다.",
+          "idea_behind_proof": "쉬운 방향 (ii)$\\Rightarrow$(i)는 '받침이 유한하면 역변환 적분 구간이 유한 $\\Rightarrow$ $x$를 $z$로 바꿔도 정함수'라는 직접적 관찰이다. 어려운 방향 (i)$\\Rightarrow$(ii)는 세 단계로 조건을 점점 약화하며 접근한다: 먼저 $x$에 대한 감소까지 갖춘 강한 가정 (6)에서 등고선을 $y\\to\\infty$로 밀어 $\\hat f=0$($|\\xi|>M$)을 얻고(Step 1), 보조 인수 $1/(1+i\\epsilon z)^2$로 $x$-감소를 인위적으로 만들어 가정을 (7)로 약화하며(Step 2), 마지막으로 정리의 원래 조건이 (7)을 함의함을 Phragmén–Lindelöf로 보인다(Step 3). '나쁜 방향의 성장을 통제한다'가 전 과정을 관통하는 아이디어다.",
+          "proof_steps": [
+            "[쉬운 방향 (ii)$\\Rightarrow$(i)] $\\hat f$가 $[-M,M]$에 받침을 가지면 역변환은 $f(x)=\\int_{-M}^M \\hat f(\\xi)e^{2\\pi i\\xi x}\\,d\\xi$. 적분 구간이 유한하므로 $x$를 $z$로 바꿔 $g(z)=\\int_{-M}^M \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 를 정의하면 $g$는 정함수(2장 정리 5.4)이고 실축에서 $g=f$.",
+            "성장: $z=x+iy$에서 $|g(z)|\\le\\int_{-M}^M|\\hat f(\\xi)|e^{-2\\pi\\xi y}\\,d\\xi\\le e^{2\\pi M|y|}\\int_{-M}^M|\\hat f|\\,d\\xi\\le Ae^{2\\pi M|z|}$.",
+            "[Step 1] 강한 가정 (6) $|f(x+iy)|\\le A'e^{2\\pi M|y|}/(1+x^2)$ 하에서 $\\xi>M$이면: 식 (1)로 실축을 아래로 $y>0$만큼 밀어 $\\hat f(\\xi)=\\int f(x-iy)e^{-2\\pi i\\xi(x-iy)}\\,dx$, 절댓값 취하면 $|\\hat f(\\xi)|\\le A'\\int \\frac{e^{2\\pi My-2\\pi\\xi y}}{1+x^2}dx\\le Ce^{-2\\pi y(\\xi-M)}$.",
+            "$\\xi-M>0$이므로 $y\\to\\infty$에서 $\\hat f(\\xi)=0$. 위로 밀면 $\\xi<-M$에서도 $\\hat f=0$.",
+            "[Step 2] 약한 가정 (7) $|f(x+iy)|\\le Ae^{2\\pi M|y|}$ 만으로: 보조 함수 $f_\\epsilon(z)=\\dfrac{f(z)}{(1+i\\epsilon z)^2}$. $1/(1+i\\epsilon z)^2$ 는 닫힌 하반평면에서 절댓값 $\\le1$이고 $x$에 대한 감소를 주어 $f_\\epsilon$이 (6)을 만족 $\\Rightarrow$ Step 1로 $\\widehat{f_\\epsilon}(\\xi)=0$ ($\\xi>M$). $\\epsilon\\to0$에서 $\\widehat{f_\\epsilon}\\to\\hat f$($f$의 적당한 감소 이용) $\\Rightarrow \\hat f(\\xi)=0$. $\\xi<-M$은 상반평면·인수 $1/(1-i\\epsilon z)^2$로 대칭.",
+            "[Step 3] 정리의 조건이 (7)을 함의함을 보이면 끝. 정규화 후 '$|f(x)|\\le1$(실축), $|f(z)|\\le e^{2\\pi M|z|}$(전역) $\\Rightarrow |f(x+iy)|\\le e^{2\\pi M|y|}$'를 증명. 제1사분면 $Q$에서 $F(z)=f(z)e^{2\\pi iMz}$ 는 양의 실축·양의 허축에서 $|F|\\le1$이고 $|F|\\le Ce^{c|z|}$이므로 Phragmén–Lindelöf(정리 3.4)로 $Q$에서 $|F|\\le1$, 즉 $|f(z)|\\le e^{2\\pi My}$. 나머지 사분면도 같은 논법. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -3.6,
+                  0
+                ],
+                "to": [
+                  3.6,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -3,
+                  -1.4
+                ],
+                "to": [
+                  3,
+                  -1.4
+                ],
+                "dash": "5,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -3,
+                  -2.4
+                ],
+                "to": [
+                  3,
+                  -2.4
+                ],
+                "dash": "5,3"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  2.4,
+                  -0.3
+                ],
+                "to": [
+                  2.4,
+                  -2.2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.1,
+                  -1.4
+                ],
+                "text": "Im=-y"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.1,
+                  -2.4
+                ],
+                "text": "y→∞"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.9,
+                  -1.0
+                ],
+                "text": "ξ>M"
+              }
+            ],
+            "caption": "어려운 방향(Step 1): $\\xi>M$일 때 등고선(실축)을 아래로 무한히 밀면 $|\\hat f(\\xi)|\\le Ce^{-2\\pi y(\\xi-M)}\\to0$. '나쁜 방향의 성장 통제'가 관건."
+          }
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.4 (Phragmén–Lindelöf, 부채꼴에서의 최대 절댓값 원리)",
+          "formal_statement": "$F$가 부채꼴 $S=\\{z:-\\pi/4<\\arg z<\\pi/4\\}$ 에서 정칙이고 그 폐포에서 연속이라 하자. 경계에서 $|F(z)|\\le1$ 이고, 어떤 상수 $C,c>0$에 대해 부채꼴 안에서 $|F(z)|\\le Ce^{c|z|}$ 이면, $$|F(z)|\\le1\\quad\\text{for all } z\\in S.$$ (성장 제한이 없으면 거짓임은 $F(z)=e^{z^2}$이 보여 준다: 경계에서 유계지만 실축에서 폭주.)",
+          "idea_behind_proof": "무계 영역에서는 최대 절댓값 원리가 그냥은 성립하지 않는다($e^{z^2}$이 반례). 발상은 '적 함수' $e^{z^2}$을 지수 $\\alpha<2$인 $e^{z^\\alpha}$로 바꿔 길들이는 것이다. $\\alpha=3/2$를 택해 $F_\\epsilon(z)=F(z)e^{-\\epsilon z^{3/2}}$ 를 만들면, 부채꼴 안에서 $|3\\theta/2|<3\\pi/8<\\pi/2$ 라 $\\cos(3\\theta/2)>0$ 이 되어 $|e^{-\\epsilon z^{3/2}}|=e^{-\\epsilon r^{3/2}\\cos(3\\theta/2)}$ 가 무한대에서 급감한다. 따라서 $F_\\epsilon$은 유계가 되어 폐포에서 최댓값이 경계에 잡히고(내부는 최대 원리로 배제, 무한대는 급감으로 배제), 경계에서 $|F|\\le1$·$|e^{-\\epsilon z^{3/2}}|\\le1$ 이므로 $\\le1$. 끝으로 $\\epsilon\\to0$.",
+          "proof_steps": [
+            "$\\epsilon>0$에 대해 $F_\\epsilon(z)=F(z)e^{-\\epsilon z^{3/2}}$ (주지선분 로그로 $z^{3/2}=r^{3/2}e^{3i\\theta/2}$, $z=re^{i\\theta}$).",
+            "$|e^{-\\epsilon z^{3/2}}|=e^{-\\epsilon r^{3/2}\\cos(3\\theta/2)}$. 부채꼴에서 $-\\pi/4<\\theta<\\pi/4$이므로 $-3\\pi/8<3\\theta/2<3\\pi/8$, 따라서 $\\cos(3\\theta/2)>0$.",
+            "가정 $|F|\\le Ce^{c|z|}$ 와 결합하면 $F_\\epsilon(z)\\to0$ ($|z|\\to\\infty$, 폐부채꼴), 특히 $F_\\epsilon$ 유계.",
+            "$M=\\sup_{\\overline S}|F_\\epsilon|$. $|F_\\epsilon(w_j)|\\to M$인 점열은 무한대로 못 달아나고(급감), 폐포의 한 점 $w$로 집적. 최대 원리로 $w$는 내부점 불가 $\\Rightarrow$ 경계점.",
+            "경계에서 $|F|\\le1$, $|e^{-\\epsilon z^{3/2}}|\\le1$ 이므로 $M\\le1$. 즉 폐부채꼴에서 $|F_\\epsilon|\\le1$.",
+            "$\\epsilon\\to0$ 하면 $|F(z)|\\le1$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "wedge",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 3,
+                "from": -45,
+                "to": 45,
+                "fill": "#cfe3f5"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.55,
+                  2.55
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  2.55,
+                  -2.55
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.9,
+                  2.6
+                ],
+                "text": "arg z=π/4"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.9,
+                  -2.6
+                ],
+                "text": "arg z=-π/4"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.6,
+                  0
+                ],
+                "text": "|F|≤1?"
+              }
+            ],
+            "caption": "Phragmén–Lindelöf 부채꼴 $S=\\{|\\arg z|<\\pi/4\\}$. 경계 두 반직선에서 $|F|\\le1$이고 성장이 완만하면 내부 전체에서 $|F|\\le1$. 인수 $e^{-\\epsilon z^{3/2}}$가 $\\cos(3\\theta/2)>0$ 덕에 무한대에서 눌러 준다."
+          }
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.5 (한쪽 받침 소멸 ↔ 상반평면 정칙성)",
+          "formal_statement": "$f$와 $\\hat f$가 적당한 감소를 갖는다고 하자. 그러면 '$\\hat f(\\xi)=0$ for all $\\xi<0$' 인 것과 '$f$가 닫힌 상반평면 $\\{z=x+iy:y\\ge0\\}$ 에서 연속·유계이고 내부에서 정칙인 함수로 확장된다'는 것은 동치다.",
+          "idea_behind_proof": "정리 3.3의 '양쪽 받침 $[-M,M]$'을 '한쪽 $\\xi\\ge0$'으로 바꾼 판본이다. 정방향은 역변환이 $f(x)=\\int_0^\\infty \\hat f(\\xi)e^{2\\pi i x\\xi}\\,d\\xi$ 가 되어, $z$를 상반평면으로 올리면 $|e^{2\\pi i z\\xi}|=e^{-2\\pi y\\xi}\\le1$($y\\ge0,\\xi\\ge0$)이라 적분이 수렴·유계가 되는 것이 핵심. 역방향은 정리 3.3 Step 2의 정신으로 보조 함수 $f_{\\epsilon,\\delta}(z)=f(z+i\\delta)/(1-i\\epsilon z)^2$ 를 써 코시 정리로 $\\widehat{f_{\\epsilon,\\delta}}(\\xi)=0$($\\xi<0$)을 얻고 극한을 취한다.",
+          "proof_steps": [
+            "[정방향] $\\hat f(\\xi)=0$ ($\\xi<0$)이면 $f(x)=\\int_0^\\infty \\hat f(\\xi)e^{2\\pi i x\\xi}\\,d\\xi$. $y\\ge0$에 대해 $f(z)=\\int_0^\\infty \\hat f(\\xi)e^{2\\pi i z\\xi}\\,d\\xi$ 로 확장.",
+            "수렴·유계: $|e^{2\\pi i z\\xi}|=e^{-2\\pi y\\xi}\\le1$ ($y\\ge0,\\xi\\ge0$)이므로 $|f(z)|\\le A\\int_0^\\infty \\frac{d\\xi}{1+\\xi^2}<\\infty$.",
+            "$f_n(z)=\\int_0^n \\hat f(\\xi)e^{2\\pi i z\\xi}\\,d\\xi$ 가 닫힌 상반평면에서 $f$로 균등수렴 $\\Rightarrow$ $f$는 거기서 연속, 내부에서 정칙.",
+            "[역방향] $f_{\\epsilon,\\delta}(z)=\\dfrac{f(z+i\\delta)}{(1-i\\epsilon z)^2}$ 는 닫힌 상반평면을 포함하는 영역에서 정칙. 코시 정리로 $\\widehat{f_{\\epsilon,\\delta}}(\\xi)=0$ ($\\xi<0$)을 보이고, 극한 $\\epsilon\\to0$, $\\delta\\to0$을 차례로 취해 $\\hat f(\\xi)=0$ ($\\xi<0$). $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -3.2,
+                    0
+                  ],
+                  [
+                    3.2,
+                    0
+                  ],
+                  [
+                    3.2,
+                    2.6
+                  ],
+                  [
+                    -3.2,
+                    2.6
+                  ]
+                ],
+                "fill": "#cfe3f5"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -3.6,
+                  0
+                ],
+                "to": [
+                  3.6,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.0,
+                  1.3
+                ],
+                "text": "y≥0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.3,
+                  0.28
+                ],
+                "text": "f holo."
+              }
+            ],
+            "caption": "정리 3.5: $\\hat f$가 음의 주파수에서 소멸($\\xi<0$)하는 것은 $f$가 닫힌 상반평면(파란 영역)으로 유계·정칙 확장되는 것과 동치. 3장 정리 7.1(원판에서 정칙 ↔ $n<0$ 푸리에 계수 소멸)과의 유비."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (원판 이론과의 유비)",
+          "formal_statement": "정리 3.5는 3장 정리 7.1과 뚜렷한 유비를 이룬다. 여기서는 상반평면에서 정칙인 함수를 다루고 그때 푸리에 변환이 $\\xi<0$에서 소멸하는 반면, 3장에서는 원판(disc)에서 정칙인 함수를 다루고 그때 푸리에 계수가 $n<0$에서 소멸했다. 즉 '연속 스펙트럼(상반평면·$\\hat f$)'과 '이산 스펙트럼(원판·푸리에 계수)'이 같은 현상의 두 얼굴이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "Paley–Wiener 정리의 쉬운 방향을 증명하라: $\\hat f$의 받침이 $[-M,M]$에 포함되면, $g(z)=\\int_{-M}^M \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 로 정의된 $g$가 정함수이고 $|g(z)|\\le Ae^{2\\pi M|z|}$ 를 만족함을 보여라.",
+          "hint": "유한 구간 적분이 왜 정함수를 주는지(2장 정리 5.4), 그리고 $z=x+iy$에서 $|e^{2\\pi i\\xi z}|$ 를 계산해 $|\\xi|\\le M$ 이라는 사실로 지수를 눌러라.",
+          "solution": "적분 구간 $[-M,M]$이 유한하고 피적분함수가 $\\xi$에 연속·$z$에 정칙이므로, 매개변수 적분은 $\\mathbb{C}$ 전체에서 정칙, 즉 $g$는 정함수다(2장 정리 5.4). 성장: $z=x+iy$에서 $|e^{2\\pi i\\xi z}|=|e^{2\\pi i\\xi x}e^{-2\\pi\\xi y}|=e^{-2\\pi\\xi y}$. $|\\xi|\\le M$ 이므로 $-2\\pi\\xi y\\le 2\\pi M|y|\\le 2\\pi M|z|$, 따라서 $$|g(z)|\\le\\int_{-M}^M|\\hat f(\\xi)|e^{-2\\pi\\xi y}\\,d\\xi\\le e^{2\\pi M|z|}\\int_{-M}^M|\\hat f(\\xi)|\\,d\\xi=Ae^{2\\pi M|z|},$$ 여기서 $A=\\int_{-M}^M|\\hat f|\\,d\\xi<\\infty$. 실축에서 $g=f$이므로 $f$는 지수형 정함수로 확장된다. 일반화: 받침 폭 $M$이 정확히 성장 지수율 $2\\pi M$을 결정한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "Phragmén–Lindelöf 정리(정리 3.4)에서 '성장 조건이 필요하다'는 것을, 반례 $F(z)=e^{z^2}$ 로 확인하라. 부채꼴 $S=\\{|\\arg z|<\\pi/4\\}$ 의 경계와 실축 위에서 $|F|$ 를 각각 계산해 무엇이 어긋나는지 설명하라.",
+          "hint": "$z=re^{i\\theta}$ 에서 $z^2=r^2e^{2i\\theta}$ 이므로 $|e^{z^2}|=e^{r^2\\cos2\\theta}$. 경계 $\\theta=\\pm\\pi/4$ 와 내부 $\\theta=0$ 에서 $\\cos2\\theta$ 를 비교하라.",
+          "solution": "$|F(z)|=|e^{z^2}|=e^{\\mathrm{Re}(z^2)}=e^{r^2\\cos2\\theta}$. 경계 $\\theta=\\pm\\pi/4$: $\\cos2\\theta=\\cos(\\pm\\pi/2)=0$ 이므로 $|F|=e^0=1$, 즉 경계 전체에서 $|F|\\le1$(정확히 $=1$)로 정리의 경계 조건을 만족한다. 그러나 내부의 실축 $\\theta=0$: $\\cos0=1$ 이므로 $|F(x)|=e^{x^2}\\to\\infty$ ($x\\to\\infty$). 즉 경계에서 유계인데 내부에서 폭주 — 결론 $|F|\\le1$ 이 깨진다. 어긋난 지점은 성장 조건 $|F|\\le Ce^{c|z|}$ 이다: $e^{z^2}$ 은 $e^{r^2}$ 로 자라 $e^{c|z|}=e^{cr}$ 보다 훨씬 빠르므로 정리의 가정을 위반한다. 이 때문에 증명에서 지수 $\\alpha=3/2<2$ 인 $e^{-\\epsilon z^{3/2}}$ 로 눌러 주는 것이다."
+        },
+        {
+          "type": "ox",
+          "question": "Paley–Wiener 정리에 따르면, $\\hat f$의 받침 구간 $[-M,M]$ 이 좁을수록(즉 $M$이 작을수록) $f$의 정칙 확장이 허용하는 성장률 $2\\pi M$ 도 작아진다.",
+          "answer": "O",
+          "explanation": "맞다. 성장 조건은 $|f(z)|\\le Ae^{2\\pi M|z|}$ 이고 여기서 지수율이 정확히 받침 반폭 $M$에 비례한다. $M$이 작으면 성장이 완만해지고, 극단으로 $M\\to0$이면 $f$는 유계 정함수 $\\Rightarrow$ 리우빌 정리로 상수가 된다. 이것이 '받침의 집중 정도 ↔ 정칙성/성장'이라는 불확정성 원리적 대응이다."
+        },
+        {
+          "type": "ox",
+          "question": "$f$와 $\\hat f$가 둘 다 콤팩트 받침을 가지려면 반드시 $f\\neq0$ 이어야 한다.",
+          "answer": "X",
+          "explanation": "정반대다(따름정리 3.2). $\\hat f$가 콤팩트 받침이면 정리 3.1·3.3에 의해 $f$는 실축을 품는 영역에서 해석적인데, $f$까지 콤팩트 받침이면 어떤 열린 구간에서 $f=0$ 이고, 해석적 연속의 유일성(항등정리)으로 $f\\equiv0$ 이 강제된다. 즉 $f$와 $\\hat f$가 동시에 콤팩트 받침을 갖는 것은 오직 $f=0$ 인 자명한 경우뿐이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "Paley–Wiener 정리는 왜 '불확정성 원리(uncertainty principle)'의 한 형태로 읽히는가? 또 이 정리의 어려운 방향(성장 조건 $\\Rightarrow$ 받침의 콤팩트성)에서 Phragmén–Lindelöf 정리가 정확히 어떤 역할을 하는지 설명하라.",
+          "hint": "받침의 '폭'과 함수의 '퍼짐/정칙성'이 어떻게 반비례하는지, 그리고 어려운 방향에서 등고선을 무한히 밀 때 '나쁜 방향의 성장'을 무엇이 막아 주는지를 연결하라.",
+          "answer": "불확정성 원리의 정신은 '$f$와 $\\hat f$가 동시에 국소화될 수 없다'이다. Paley–Wiener는 그 극단적·정량적 판본을 준다: $\\hat f$가 콤팩트 받침 $[-M,M]$에 완전히 갇히는(주파수 쪽 극단적 국소화) 순간, $f$는 복소평면 전체로 퍼지는 정함수가 되어 결코 콤팩트 받침을 가질 수 없고(따름정리 3.2), 게다가 그 성장률 $2\\pi M$은 받침 반폭 $M$에 정확히 비례한다 — 받침을 좁히면($M\\downarrow$) $f$의 성장이 느려지고 극한 $M\\to0$에서는 상수만 남는다. 즉 '주파수 받침의 크기'와 '공간 쪽 정칙성/성장'이 하나의 저울 양끝에 놓인다. 어려운 방향에서 Phragmén–Lindelöf의 역할: $\\hat f(\\xi)=0$($|\\xi|>M$)을 짜내려면 등고선(실축)을 허수 방향으로 무한히 밀어 $|\\hat f(\\xi)|\\le Ce^{-2\\pi y(\\xi-M)}\\to0$ 을 얻어야 하는데, 이 추정이 유효하려면 $f$의 성장이 '나쁜 방향'으로 폭주하지 않고 $|f(x+iy)|\\le e^{2\\pi M|y|}$ 처럼 허수축 방향으로만 제어되어야 한다(Step 3의 목표 (7)). 그런데 정리의 원래 가정은 등방적 성장 $|f(z)|\\le Ae^{2\\pi M|z|}$ 뿐이라 실축 방향의 유계성($|f(x)|\\le1$)과 결합해 방향별 정밀한 유계 (7)을 끌어내야 한다. 바로 이 지점에서, '경계(양의 실·허축)에서 유계이고 내부 성장이 지수형을 넘지 않으면 사분면 내부 전체에서 유계'라는 Phragmén–Lindelöf가 $F(z)=f(z)e^{2\\pi iMz}$ 에 적용되어 결정적 다리를 놓는다. 요컨대 Phragmén–Lindelöf는 '무계 영역에서도 최대 절댓값 원리를 쓰게 해 주는' 장치로서, 등방적 성장 가정을 받침 소멸에 필요한 방향성 있는 감쇠로 번역한다."
+        }
+      ]
+    }
+  ]
+}

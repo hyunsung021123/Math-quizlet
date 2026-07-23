@@ -53,7 +53,7 @@
 |---|---|---|---|---|
 | 028 | [x] | 4.1 The class ℱ | section | `028__ComplexAnalysi__4_1_Theclass.txt` |
 | 029 | [x] | 4.2 Action of the Fourier transform on ℱ | section | `029__ComplexAnalysi__4_2_ActionoftheFouriertransfor.txt` |
-| 030 | [ ] | 4.3 Paley-Wiener theorem | section | `030__ComplexAnalysi__4_3_Paley-Wienertheorem.txt` |
+| 030 | [x] | 4.3 Paley-Wiener theorem | section | `030__ComplexAnalysi__4_3_Paley-Wienertheorem.txt` |
 | 031 | [ ] | 4.4 Exercises | exercises | `031__ComplexAnalysi__4_4_Exercises__EX.txt` |
 | 032 | [ ] | 4.5 Problems | exercises | `032__ComplexAnalysi__4_5_Problems__EX.txt` |
 
