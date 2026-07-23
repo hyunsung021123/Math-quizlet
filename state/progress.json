@@ -36,6 +36,9 @@
       "section:15": true,
       "section:12": true,
       "section:17": true
+    },
+    "chapter_2_homology": {
+      "section:0": true
     }
   },
   "lastPos": {
@@ -44,7 +47,7 @@
       "type": "section",
       "index": 1
     },
-    "cardIndex": 0
+    "cardIndex": 1
   },
-  "updatedAt": "2026-07-23T12:51:16.943Z"
+  "updatedAt": "2026-07-23T12:51:27.801Z"
 }
