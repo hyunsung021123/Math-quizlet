@@ -39,12 +39,12 @@
     }
   },
   "lastPos": {
-    "topicId": "chapter_1_the_fundamental_group",
+    "topicId": "chapter_2_homology",
     "view": {
       "type": "section",
-      "index": 20
+      "index": 0
     },
-    "cardIndex": 3
+    "cardIndex": 1
   },
-  "updatedAt": "2026-07-23T07:21:15.982Z"
+  "updatedAt": "2026-07-23T07:21:23.647Z"
 }
