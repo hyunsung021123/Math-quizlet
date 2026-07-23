@@ -1,0 +1,182 @@
+{
+  "chapter_info": {
+    "title": "Chapter 6. The Gamma and Zeta Functions",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis",
+    "overall_goal": "실변수 계승 $n!$을 복소수 전체로 자연스럽게 확장하는 감마 함수(gamma function) $\\Gamma$와, 소수의 분포를 지배하는 제타 함수(zeta function) $\\zeta$를 정칙·유리형 함수의 언어로 이해한다. 그 첫걸음으로, 오직 $\\mathrm{Re}(s)>0$에서만 수렴하는 적분으로 태어난 $\\Gamma$가 어떻게 함수방정식 $\\Gamma(s+1)=s\\Gamma(s)$ 하나만으로 복소평면 전체의 유리형 함수로 유일하게 연장되는지, 그리고 그 극(pole)들이 어디에 어떤 유수(residue)로 나타나는지를 밝힌다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "6.4.ex 문제 (Problems) — 톱니파·베르누이 수로 본 ζ의 연속과 자람",
+      "step1_big_picture": {
+        "context": "이 문제 묶음은 6.2.1의 '초등적 접근'(명제 2.5·따름정리 2.6)을 끝까지 밀어붙인다. 세타 함수를 거치지 않고, 합 $\\sum n^{-s}$과 적분 $\\int x^{-s}dx$의 차이를 정면으로 파고들어 $\\zeta$를 $\\mathbb{C}$ 전체로 연속시키고, 덤으로 오일러의 전설적 공식 $\\zeta(2k)=(\\text{유리수})\\cdot\\pi^{2k}$까지 얻는다. 문제 1은 $\\mathrm{Re}(s)=1$ 근방의 자람을 $|\\zeta(1+it)|=O(\\log|t|)$로 정밀화하고, 문제 2–3은 소수부(fractional part) $\\{x\\}$를 이용한 적분표현으로 연속을 한 겹씩 넓히며, 문제 4는 그 과정에 숨은 함수들이 베르누이 다항식(Bernoulli polynomial)임을 밝혀 $\\zeta(2k)$를 베르누이 수로 표현한다. 6.3의 멜린 변환·베타 함수와 함께, 이 절은 $\\zeta$를 다루는 두 번째(초등적) 도구 계보를 완성한다.",
+        "hidden_intuition": "모든 문제를 관통하는 한 단어는 '평균 빼기(mean subtraction)'다. 합과 적분의 차이는 정수마다 튀는 톱니파 $\\{x\\}$가 만든다. 이 톱니파의 평균 $1/2$을 빼면 평균이 0인 진동 $Q(x)=\\{x\\}-\\tfrac12$이 남고, 평균이 0이면 그 부정적분 $Q_1$이 유계로 갇힌다. 부분적분으로 $Q$를 $Q_1$으로 바꾸면 피적분함수가 한 차수 더 빨리 감쇠해 적분이 더 왼쪽 반평면까지 수렴한다 — 즉 '평균 빼고 적분하기'를 $k$번 반복할 때마다 연속 영역이 한 칸씩 왼쪽으로 넓어진다. 이것이 오일러–매클로린 합공식(Euler–Maclaurin summation)의 심장이다. 그리고 이 반복에서 튀어나오는 주기함수들이 정확히 베르누이 다항식이라서, $\\zeta$의 짝수 값이 $\\pi$의 거듭제곱과 유리수(베르누이 수)로 딱 떨어지는 기적이 일어난다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -0.5
+              ],
+              "to": [
+                1,
+                0.5
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                1,
+                -0.5
+              ],
+              "to": [
+                2,
+                0.5
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                2,
+                -0.5
+              ],
+              "to": [
+                3,
+                0.5
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                3,
+                -0.5
+              ],
+              "to": [
+                4,
+                0.5
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                0
+              ],
+              "to": [
+                4,
+                0
+              ],
+              "dash": "3,3"
+            },
+            {
+              "shape": "label",
+              "at": [
+                3.4,
+                0.72
+              ],
+              "text": "Q(x)={x}-1/2"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2,
+                -0.8
+              ],
+              "text": "mean 0 over each period"
+            }
+          ],
+          "caption": "평균이 0인 톱니파 $Q(x)=\\{x\\}-\\tfrac12$. 평균이 0이므로 부정적분 $Q_1$이 유계로 갇히고, 이를 이용한 부분적분이 $\\zeta$의 연속을 한 칸씩 왼쪽으로 넓힌다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "준비: 소수부와 톱니파",
+          "formal_statement": "$x$의 소수부(fractional part)를 $\\{x\\}=x-\\lfloor x\\rfloor$로 쓰고, 평균을 제거한 톱니파를 $Q(x)=Q_0(x)=\\{x\\}-\\tfrac12$로 둔다. $Q$는 주기 $1$이고 각 주기에서 평균이 $0$이다: $\\int_0^1 Q(x)\\,dx=0$. 이어서 $\\int_0^1 Q_k(x)\\,dx=0$, $\\dfrac{dQ_{k+1}}{dx}=Q_k(x)$, $Q_k(x+1)=Q_k(x)$로 주기함수열 $\\{Q_k\\}$를 재귀적으로 정의한다. 평균이 $0$이라는 조건이 각 $Q_k$가 유계임을 보장한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 2 — 소수부 적분표현)",
+          "formal_statement": "$\\mathrm{Re}(s)>0$에서 $$\\zeta(s)=\\frac{s}{s-1}-s\\int_1^\\infty\\frac{\\{x\\}}{x^{s+1}}\\,dx.$$",
+          "idea_behind_proof": "발상은 이산합을 계단함수 $\\lfloor x\\rfloor$의 적분으로 바꾸는 것이다. $\\mathrm{Re}(s)>1$에서 $s\\int_1^\\infty\\lfloor x\\rfloor x^{-s-1}dx$를 계산하면 (구간마다 상수인 $\\lfloor x\\rfloor$ 덕분에 망원합이 일어나) 정확히 $\\zeta(s)$가 된다. 그런 다음 $\\lfloor x\\rfloor=x-\\{x\\}$로 쪼개면 매끄러운 부분이 $\\tfrac{s}{s-1}$를, 톱니 부분이 나머지 적분을 준다. 결정적 이득은 $\\{x\\}$가 유계라서 그 적분이 $\\mathrm{Re}(s)>0$에서도 수렴한다는 점 — 이것이 연속을 한 칸 넓힌다.",
+          "proof_steps": [
+            "1단계 ($\\mathrm{Re}(s)>1$): $$s\\int_1^\\infty\\lfloor x\\rfloor x^{-s-1}dx=s\\sum_{n=1}^\\infty n\\int_n^{n+1}x^{-s-1}dx=\\sum_{n=1}^\\infty n\\big(n^{-s}-(n+1)^{-s}\\big).$$ 재색인으로 망원합하면 $=\\sum_{n\\ge1}n^{-s}=\\zeta(s)$.",
+            "2단계: $\\lfloor x\\rfloor=x-\\{x\\}$를 넣으면 $$\\zeta(s)=s\\int_1^\\infty x^{-s}dx-s\\int_1^\\infty\\{x\\}x^{-s-1}dx=\\frac{s}{s-1}-s\\int_1^\\infty\\frac{\\{x\\}}{x^{s+1}}dx.$$",
+            "3단계: $0\\le\\{x\\}<1$이므로 오른쪽 적분은 $\\mathrm{Re}(s)>0$에서 절대수렴하며 그 반평면에서 정칙이다. 양변이 $\\mathrm{Re}(s)>1$에서 일치하므로 항등식은 $\\mathrm{Re}(s)>0$ 전체로 연장되고, $\\tfrac{s}{s-1}$가 $s=1$의 단순극(유수 $1$)을 드러낸다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 3 — 평균 제거와 반복 부분적분에 의한 연속)",
+          "formal_statement": "$Q(x)=\\{x\\}-\\tfrac12$로 두면 $\\mathrm{Re}(s)>0$에서 $$\\zeta(s)=\\frac{s}{s-1}-\\frac12-s\\int_1^\\infty\\frac{Q(x)}{x^{s+1}}\\,dx.$$ 나아가 $Q_k$가 $\\dfrac{d^k}{dx^k}Q_k=Q$를 만족하도록 잡으면 $$\\zeta(s)=\\frac{s}{s-1}-\\frac12-s\\int_1^\\infty\\Big(\\frac{d^k}{dx^k}Q_k(x)\\Big)x^{-s-1}\\,dx$$ 이고, $k$번의 부분적분이 $\\zeta$를 반평면 $\\mathrm{Re}(s)>-k$로 해석적 연속시킨다.",
+          "idea_behind_proof": "문제 2의 적분에서 $\\{x\\}=Q(x)+\\tfrac12$로 상수 평균을 분리하면 새 상수항 $-\\tfrac12$이 떨어져 나온다. 이제 진짜 진동만 남은 $Q$에 부분적분을 건다. $Q_1$(유계인 부정적분)을 꺼내면 경계항은 소멸하고 새 적분은 $x^{-s-2}$ 무게라 한 칸 더 왼쪽까지 수렴한다. 이를 $k$번 반복하면 무게가 $x^{-s-k-1}$까지 내려가 $\\mathrm{Re}(s)>-k$에서 수렴 — '평균을 빼서 유계 부정적분을 얻고, 부분적분으로 감쇠를 벌어들이는' 사다리다.",
+          "proof_steps": [
+            "1단계: $\\{x\\}=Q(x)+\\tfrac12$를 문제 2에 대입하면 $s\\int_1^\\infty\\{x\\}x^{-s-1}dx=s\\int_1^\\infty Q(x)x^{-s-1}dx+\\tfrac{s}{2}\\int_1^\\infty x^{-s-1}dx=s\\int_1^\\infty Q\\,x^{-s-1}dx+\\tfrac12$. 따라서 $\\zeta(s)=\\tfrac{s}{s-1}-\\tfrac12-s\\int_1^\\infty Q(x)x^{-s-1}dx$.",
+            "2단계: $Q=\\tfrac{d}{dx}Q_1$이고 $Q_1$이 유계·주기적이므로 부분적분하면 경계항이 소멸하고 $\\int_1^\\infty Q\\,x^{-s-1}dx=(s+1)\\int_1^\\infty Q_1(x)x^{-s-2}dx$가 된다. 새 적분은 $\\mathrm{Re}(s)>-1$에서 수렴한다.",
+            "3단계: 같은 과정을 $Q_1\\to Q_2\\to\\cdots\\to Q_k$로 $k$번 반복하면 피적분함수의 무게가 $x^{-s-k-1}$까지 내려가 적분이 $\\mathrm{Re}(s)>-k$에서 수렴한다. $k$가 임의이므로 $\\zeta$는 $\\mathbb{C}$ 전체로 연속되며, 유일한 특이점은 여전히 $s=1$의 단순극이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (문제 4 — 베르누이 다항식과 $\\zeta(2k)$)",
+          "formal_statement": "문제 3의 주기함수 $Q_k$는 $0\\le x\\le1$에서 베르누이 다항식 $B_k(x)$와 $$Q_k(x)=\\frac{B_{k+1}(x)}{(k+1)!}$$ 로 이어진다. 그 결과, 양의 정수 $k$에 대해 $$2\\,\\zeta(2k)=(-1)^{k+1}\\frac{(2\\pi)^{2k}}{(2k)!}\\,B_{2k},$$ 여기서 $B_k=B_k(0)$은 베르누이 수(Bernoulli number)로, 생성함수 $\\dfrac{x}{e^x-1}=\\sum_{m\\ge0}\\dfrac{B_m}{m!}x^m$로 정의된다.",
+          "idea_behind_proof": "문제 3의 재귀 조건 — 평균 $0$, 미분하면 하나 아래 단계 — 은 정확히 베르누이 다항식의 정의적 성질($B_{k+1}'=(k+1)B_k$, $\\int_0^1 B_k=0$ for $k\\ge1$)과 일치한다. 따라서 $Q_k$는 규격만 다른 베르누이 다항식이다. $\\zeta(2k)$ 공식은 이 주기함수의 푸리에 급수(사실 $B_{2k}(x)$의 푸리에 계수가 $\\sim n^{-2k}$)를 $\\zeta$와 맞물리게 하면 나온다 — 짝수 차수에서만 사인/코사인 위상이 실수로 정렬되어 $\\pi^{2k}$와 유리수의 곱으로 떨어진다.",
+          "proof_steps": [
+            "1단계: $Q_k$의 정의 조건 $Q_k'=Q_{k-1}$, $\\int_0^1 Q_k=0$, 주기성은 베르누이 다항식의 성질 $B_{m}'(x)=mB_{m-1}(x)$, $\\int_0^1 B_m(x)dx=0$ ($m\\ge1$)과 동형이다. 상수 규격을 맞추면 $Q_k(x)=B_{k+1}(x)/(k+1)!$.",
+            "2단계: 이 표현을 문제 3의 연속 공식에 넣고 짝수 $s=2k$에서 적분을 평가하면(또는 $B_{2k}(x)$의 푸리에 전개 $B_{2k}(x)=(-1)^{k+1}\\tfrac{2(2k)!}{(2\\pi)^{2k}}\\sum_{n\\ge1}\\tfrac{\\cos2\\pi nx}{n^{2k}}$를 $x=0$에서 사용하면) $$B_{2k}=(-1)^{k+1}\\frac{2(2k)!}{(2\\pi)^{2k}}\\zeta(2k),$$ 즉 $2\\zeta(2k)=(-1)^{k+1}\\dfrac{(2\\pi)^{2k}}{(2k)!}B_{2k}$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 1 — $\\mathrm{Re}(s)=1$ 위의 로그 자람)",
+          "formal_statement": "명제 2.5·따름정리 2.6에서 정수 $N\\ge2$와 $\\mathrm{Re}(s)>0$에 대해 $$\\zeta(s)=\\sum_{1\\le n<N}n^{-s}-\\frac{N^{s-1}}{s-1}+\\sum_{n\\ge N}\\delta_n(s)$$ 가 성립한다. 이로부터 $|t|\\to\\infty$일 때 $$|\\zeta(1+it)|=O(\\log|t|).$$",
+          "idea_behind_proof": "자유 매개변수 $N$을 $|t|$에 맞춰 고르는 것이 요령이다. 유한합은 $\\log N$ 크기, 중간항 $N^{s-1}/(s-1)$은 $|N^{it}|/|s-1|=1/|t|$로 유계, 꼬리 $\\sum_{n\\ge N}\\delta_n$은 $|\\delta_n|\\le|s|/n^2$로 $|s|/N\\sim|t|/|t|$ 정도라 유계다. 그러니 $N=\\lfloor|t|\\rfloor$로 두면 세 조각 중 로그로 자라는 유한합만 지배적으로 남아 $O(\\log|t|)$가 된다.",
+          "proof_steps": [
+            "1단계: $N=\\lfloor|t|\\rfloor$로 잡는다. $\\mathrm{Re}(s)=1$에서 유한합 $\\big|\\sum_{1\\le n<N}n^{-(1+it)}\\big|\\le\\sum_{1\\le n<N}n^{-1}=O(\\log N)=O(\\log|t|)$.",
+            "2단계: 중간항 $\\big|\\tfrac{N^{s-1}}{s-1}\\big|=\\tfrac{|N^{it}|}{|it|}=\\tfrac{1}{|t|}$ 로 유계.",
+            "3단계: 꼬리는 $|\\delta_n(s)|\\le|s|/n^{2}$ ($\\sigma=1$)이므로 $\\big|\\sum_{n\\ge N}\\delta_n\\big|\\le|s|\\sum_{n\\ge N}n^{-2}\\le|s|/N\\sim|t|/|t|=O(1)$. 세 항을 합하면 $|\\zeta(1+it)|=O(\\log|t|)$. (문제 1(c)는 같은 방법으로 $\\zeta'$의 추정을, 1(d)는 $\\sum n^{-(1+it)}$의 부분합이 유계이나 급수가 수렴하지 않음을 준다.) $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "문제 2. $\\mathrm{Re}(s)>1$에서 $s\\displaystyle\\int_1^\\infty\\lfloor x\\rfloor\\,x^{-s-1}\\,dx=\\zeta(s)$임을 직접 계산으로 확인하고, 이로부터 $\\zeta(s)=\\dfrac{s}{s-1}-s\\displaystyle\\int_1^\\infty\\dfrac{\\{x\\}}{x^{s+1}}\\,dx$를 유도하라. 이 표현이 왜 $\\zeta$를 $\\mathrm{Re}(s)>0$으로 연속시키는지 설명하라.",
+          "hint": "$\\lfloor x\\rfloor$는 구간 $[n,n+1)$에서 상수 $n$이다. 구간별로 적분을 쪼개 망원합을 만들어라. 그 뒤 $\\lfloor x\\rfloor=x-\\{x\\}$로 분리하라.",
+          "solution": "구간별로 $\\int_1^\\infty\\lfloor x\\rfloor x^{-s-1}dx=\\sum_{n\\ge1}n\\int_n^{n+1}x^{-s-1}dx=\\sum_{n\\ge1}\\frac{n}{s}\\big(n^{-s}-(n+1)^{-s}\\big)$. $s$를 곱하고 재색인($m=n+1$)하면 $$\\sum_{n\\ge1}n\\,n^{-s}-\\sum_{m\\ge2}(m-1)m^{-s}=1+\\sum_{n\\ge2}\\big[n-(n-1)\\big]n^{-s}=\\sum_{n\\ge1}n^{-s}=\\zeta(s).$$ 이제 $\\lfloor x\\rfloor=x-\\{x\\}$를 넣으면 $$\\zeta(s)=s\\int_1^\\infty x^{-s}dx-s\\int_1^\\infty\\{x\\}x^{-s-1}dx=\\frac{s}{s-1}-s\\int_1^\\infty\\frac{\\{x\\}}{x^{s+1}}dx.$$ 마지막 적분은 $0\\le\\{x\\}<1$이라 $\\mathrm{Re}(s)>0$에서 절대수렴·정칙이므로, 우변 전체가 $\\mathrm{Re}(s)>0$에서 정의된 정칙함수(단, $s=1$에서 $\\tfrac{s}{s-1}$가 유수 $1$의 단순극)를 준다. 양변이 $\\mathrm{Re}(s)>1$에서 일치하므로 이 우변이 $\\zeta$의 $\\mathrm{Re}(s)>0$ 연속이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 4의 공식 $2\\zeta(2k)=(-1)^{k+1}\\dfrac{(2\\pi)^{2k}}{(2k)!}B_{2k}$를 이용해 $\\zeta(2)$와 $\\zeta(4)$를 구하라. (베르누이 수 $B_2=\\tfrac16$, $B_4=-\\tfrac1{30}$.)",
+          "hint": "$k=1$, $k=2$를 차례로 대입하라. 부호 인자 $(-1)^{k+1}$에 주의.",
+          "solution": "$k=1$: $2\\zeta(2)=(-1)^{2}\\dfrac{(2\\pi)^2}{2!}B_2=\\dfrac{4\\pi^2}{2}\\cdot\\dfrac16=\\dfrac{2\\pi^2}{6}=\\dfrac{\\pi^2}{3}$이므로 $$\\zeta(2)=\\frac{\\pi^2}{6}.$$ $k=2$: $2\\zeta(4)=(-1)^{3}\\dfrac{(2\\pi)^4}{4!}B_4=-\\dfrac{16\\pi^4}{24}\\cdot\\Big(-\\dfrac1{30}\\Big)=\\dfrac{16\\pi^4}{720}=\\dfrac{\\pi^4}{45}$이므로 $$\\zeta(4)=\\frac{\\pi^4}{90}.$$ 짝수 값이 모두 $\\pi^{2k}$의 유리수 배로 딱 떨어지는 것이 이 공식의 핵심이다. (반면 $\\zeta(3),\\zeta(5),\\dots$ 같은 홀수 값에는 이런 닫힌 형태가 알려져 있지 않다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 3의 연속 공식 $\\zeta(s)=\\dfrac{s}{s-1}-\\dfrac12-s\\displaystyle\\int_1^\\infty\\dfrac{Q(x)}{x^{s+1}}dx$ ($\\mathrm{Re}(s)>0$, 그리고 부분적분으로 $\\mathrm{Re}(s)>-k$까지)를 이용해 $\\zeta(0)$의 값을 구하라.",
+          "hint": "$s=0$을 직접 대입하라. $\\dfrac{s}{s-1}$과 $-s\\int(\\cdots)$ 항이 $s=0$에서 각각 얼마가 되는지 보라(적분은 $\\mathrm{Re}(s)>-1$에서 이미 수렴하므로 유한).",
+          "solution": "$s=0$에서 $\\dfrac{s}{s-1}=\\dfrac{0}{-1}=0$이고, $-s\\int_1^\\infty\\dfrac{Q(x)}{x^{s+1}}dx$의 앞 인자 $s$가 $0$이라 (적분이 $\\mathrm{Re}(s)>-1$에서 유한하므로) 이 항도 $0$이다. 남는 것은 상수항뿐: $$\\zeta(0)=0-\\frac12-0=-\\frac12.$$ 이는 세타 함수 접근(정리 2.4)이나 함수방정식으로 얻는 잘 알려진 값 $\\zeta(0)=-\\tfrac12$과 정확히 일치한다 — 서로 다른 두 연속 방법이 같은 해석적 연속(유일하다)에 도달함을 확인해 준다."
+        },
+        {
+          "type": "ox",
+          "question": "문제 2·3의 적분표현은 $s=1$을 제외한 $\\mathrm{Re}(s)>0$(및 부분적분 후 $\\mathrm{Re}(s)>-k$)에서 $\\zeta$가 정칙임을 보여 주며, 그 영역에 새로운 극을 만들지 않는다.",
+          "answer": "O",
+          "explanation": "소수부·톱니파 적분 $\\int_1^\\infty\\{x\\}x^{-s-1}dx$(또는 $Q,Q_k$ 버전)는 피적분함수가 유계이고 무게 $x^{-s-1}$이 충분히 감쇠하는 반평면에서 절대수렴하여 정칙함수를 정의한다. 유일한 극은 매끄러운 항 $\\tfrac{s}{s-1}$이 $s=1$에 만드는 단순극(유수 $1$)뿐이다. 부분적분을 반복해도 새 적분은 여전히 정칙이고 극을 추가하지 않으므로, 이 초등적 방법은 정리 2.4(세타 방법)와 같은 결론 — $s=1$의 단순극 하나 — 에 이른다."
+        },
+        {
+          "type": "ox",
+          "question": "문제 4의 공식에 따르면 모든 양의 정수 $m$에 대해 $\\zeta(m)$은 $\\pi^m$의 유리수 배로 표현된다.",
+          "answer": "X",
+          "explanation": "공식 $2\\zeta(2k)=(-1)^{k+1}\\tfrac{(2\\pi)^{2k}}{(2k)!}B_{2k}$는 오직 짝수 $m=2k$에만 적용된다. 짝수 값 $\\zeta(2),\\zeta(4),\\dots$는 실제로 $\\pi^{2k}$의 유리수 배($\\pi^2/6,\\pi^4/90,\\dots$)이지만, 홀수 값 $\\zeta(3),\\zeta(5),\\dots$에는 이런 닫힌 형태가 알려져 있지 않다($\\zeta(3)$이 무리수라는 것만 아페리 Apéry가 증명). 베르누이 공식이 짝수에만 통하는 이유는 주기함수 $B_{2k}(x)$의 푸리에 전개에서 짝수 차수일 때만 위상이 실수로 정렬되기 때문이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "문제 2→3→4로 이어지는 '평균 빼기와 부분적분' 사다리가 어떻게 $\\zeta$를 복소평면 전체로 연속시키고, 동시에 왜 그 과정에서 베르누이 수가 필연적으로 등장하는지를 하나의 이야기로 설명하라.",
+          "hint": "합과 적분의 차이를 만드는 톱니파 $\\{x\\}$, 평균을 빼서 유계 부정적분을 얻는 조작, 부분적분이 감쇠를 벌어들이는 원리, 그리고 재귀 조건 $Q_k'=Q_{k-1}$·$\\int_0^1 Q_k=0$이 무엇의 정의와 같은지를 차례로 엮어라.",
+          "answer": "출발점(문제 2)은 이산합과 적분의 차이가 소수부 톱니파 $\\{x\\}$에서 온다는 관찰이다. $\\{x\\}$가 유계이므로 그 적분은 $\\mathrm{Re}(s)>0$까지 수렴해 첫 칸의 연속을 준다. 그런데 $\\{x\\}$는 평균 $\\tfrac12$을 갖고 있어 부정적분이 무한히 자라 더는 못 나아간다. 문제 3의 열쇠는 평균을 빼는 것이다: $Q=\\{x\\}-\\tfrac12$은 각 주기에서 평균이 $0$이라 그 부정적분 $Q_1$이 유계로 갇힌다. 이제 부분적분으로 $Q$를 $Q_1$으로 바꾸면 경계항은 유계·주기성으로 소멸하고 남는 적분의 무게가 $x^{-s-1}\\to x^{-s-2}$로 한 차수 더 감쇠해, 수렴 영역이 왼쪽으로 한 칸 넓어진다. 이 '평균 빼고 적분하기'를 $k$번 반복하면 $\\mathrm{Re}(s)>-k$, 결국 $\\mathbb{C}$ 전체를 덮는다. 그런데 이 반복이 요구하는 함수열 $Q_k$의 조건은 '미분하면 한 단계 아래가 되고($Q_k'=Q_{k-1}$), 한 주기 평균이 $0$이다($\\int_0^1 Q_k=0$)'인데, 이는 정확히 베르누이 다항식 $B_k(x)$를 특징짓는 성질($B_m'=mB_{m-1}$, $\\int_0^1 B_m=0$)과 같다. 그래서 $Q_k=B_{k+1}(x)/(k+1)!$일 수밖에 없고, 사다리의 각 단에 베르누이 수가 상수로 새겨진다. 짝수점 $s=2k$에서 이 주기함수의 푸리에 성분이 $\\zeta(2k)$와 맞물리면서 $\\pi^{2k}$·유리수의 닫힌 형태가 떨어진다. 요컨대 '오일러–매클로린 평균 빼기'가 연속을 낳고, 그 평균 빼기의 주기함수가 곧 베르누이 다항식이라서 $\\zeta$의 짝수값과 베르누이 수가 한 몸으로 묶인다."
+        }
+      ]
+    }
+  ]
+}
