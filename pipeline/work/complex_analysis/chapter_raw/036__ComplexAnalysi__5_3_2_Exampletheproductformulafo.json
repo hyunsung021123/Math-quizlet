@@ -1,0 +1,163 @@
+{
+  "chapter_info": {
+    "title": "Chapter 5. Entire Functions",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis",
+    "overall_goal": "복소평면 $\\mathbb{C}$ 전체에서 정칙인 정함수(entire function)를 지배하는 세 가지 질문 — 어디서 영점을 가질 수 있는가, 무한대에서 얼마나 빨리 자라는가, 영점만으로 함수가 얼마나 결정되는가 — 을 이해한다. 그 출발점으로, 함수의 원판 안 영점 개수와 원 위에서의 로그 평균을 하나로 묶는 Jensen의 공식(Jensen's formula)을 세운다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.3.2 예제: 사인 함수의 곱 공식 (Example: the product formula for the sine function)",
+      "step1_big_picture": {
+        "context": "5.3.1에서 무한곱의 수렴(명제 3.1)과 정칙함수 곱의 균등수렴·로그미분 공식(명제 3.2)을 준비했다. 이 소단원은 그 도구를 첫 대표 예제 — 사인 함수의 곱 공식 $$\\frac{\\sin\\pi z}{\\pi}=z\\prod_{n=1}^{\\infty}\\Big(1-\\frac{z^2}{n^2}\\Big)$$ — 에 적용한다. 이 항등식은 '$\\sin\\pi z$는 정수마다 단순영점을 갖는다'는 사실을 하나의 무한곱으로 완전히 포착하며, Weierstrass 일반 구성(다음 소단원)의 원형(prototype)이다. 증명 전략은 곧바로 곱을 다루지 않고, 먼저 코탄젠트의 부분분수 전개(합 공식 (4))를 세운 뒤 명제 3.2의 로그미분으로 곱 공식을 끌어낸다. 5.2에서 본 대로 $\\sin\\pi z$는 차수 $1$의 정함수이고 영점이 정수라 $\\sum 1/n^s$가 $s>1$에서 수렴하는데, 곱의 인수 $1-z^2/n^2$의 오차가 $|z|^2/n^2$라 $\\sum 1/n^2<\\infty$ 덕분에 곱이 잘 수렴한다.",
+        "hidden_intuition": "핵심 아이디어는 두 초월함수의 항등식을 '직접 계산'이 아니라 '차이가 상수임을 보이는' 방식으로 증명하는 것이다. $\\pi\\cot\\pi z$와 대칭 급수 $\\sum_n 1/(z+n)$은 (a) 주기 $1$, (b) 정수마다 유수(residue) $1$인 단순극, (c) 그 외 특이점 없음 — 이 세 가지 구조를 똑같이 공유한다. 그러니 그 차이 $\\Delta$는 극이 모두 상쇄되어 정함수가 되고, 주기성 덕에 폭 $1$짜리 세로 띠에서만 유계임을 보이면 온 평면에서 유계다. 유계 정함수는 Liouville에 의해 상수이고, $\\Delta$가 홀함수(odd)라 그 상수는 $0$일 수밖에 없다 — 즉 두 함수는 같다. 곱 공식 (3)은 여기서 '적분'으로 얻는다: 곱 $P$와 $\\sin\\pi z/\\pi$는 로그미분(=$\\pi\\cot\\pi z$)이 같으므로 비 $P/G$의 도함수가 $0$, 따라서 상수배이고, $z\\to0$에서 둘 다 기울기 $1$로 출발하니 그 상수는 정확히 $1$이다. '로그를 취해 곱을 합으로 바꾸고, 합에서 상수까지 좁힌 뒤 되돌린다'가 전체 흐름이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "Re",
+            "y": "Im"
+          },
+          "primitives": [
+            {
+              "shape": "point",
+              "at": [
+                -3,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -2,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                3,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1,
+                -0.35
+              ],
+              "text": "1"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2,
+                -0.35
+              ],
+              "text": "2"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1,
+                -0.35
+              ],
+              "text": "-1"
+            }
+          ],
+          "caption": "$\\sin\\pi z$의 영점은 모든 정수 $z=n$에 놓인다. 곱 공식 $z\\prod(1-z^2/n^2)$의 각 인수 $1-z^2/n^2$가 $\\pm n$ 두 영점을 담당하고, 앞의 $z$가 원점 영점을 담당한다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "명제 (코탄젠트 합 공식, 식 (4))",
+          "formal_statement": "모든 정수 아닌 $z$에 대해 $$\\pi\\cot\\pi z=\\sum_{n=-\\infty}^{\\infty}\\frac{1}{z+n}=\\lim_{N\\to\\infty}\\sum_{|n|\\le N}\\frac{1}{z+n}=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^2-n^2}.$$ 여기서 양방향 합 $\\sum_{n=-\\infty}^{\\infty}$은 반드시 대칭적으로($\\lim_{N\\to\\infty}\\sum_{|n|\\le N}$) 해석해야 한다 — 양수 쪽 절반과 음수 쪽 절반은 각각 발산하고, 대칭으로 짝지어 상쇄될 때에만 수렴하기 때문이다.",
+          "idea_behind_proof": "직접 값을 계산하는 대신 '구조가 같으면 함수도 같다'는 원리를 쓴다. $\\pi\\cot\\pi z$와 대칭 급수가 (주기성·극의 위치·유수)라는 세 특징을 공유하도록 만든 뒤, 그 차이가 극이 모두 제거된 유계 정함수가 됨을 보인다. 유계성은 주기성으로 폭 $1$ 띠로 환원하고, 띠의 위·아래 무한 방향에서 $\\cot$와 급수를 각각 눌러 얻는다. 마지막 Liouville + 홀함수 관찰이 차이를 $0$으로 확정한다.",
+          "proof_steps": [
+            "$F(z)=\\pi\\cot\\pi z$는 세 성질을 갖는다: (i) $F(z+1)=F(z)$(주기 1), (ii) $F(z)=\\frac{1}{z}+F_0(z)$로 $F_0$은 원점 근방에서 해석적(즉 원점에서 유수 1인 단순극), (iii) 정수에서만 단순극을 갖고 그 외 특이점 없음.",
+            "대칭 급수 $S(z)=\\sum_{|n|\\le N}\\frac{1}{z+n}$의 극한도 같은 세 성질을 만족한다. (i): $z\\mapsto z+1$은 합의 항을 한 칸 밀 뿐이며 $\\sum_{|n|\\le N}\\frac{1}{z+1+n}=\\frac{1}{z+1+N}-\\frac{1}{z-N}+\\sum_{|n|\\le N}\\frac{1}{z+n}$에서 $N\\to\\infty$로 두면 경계항이 사라져 주기성이 나온다. (ii),(iii): 표현 $\\frac{1}{z}+\\sum_{n\\ge1}\\frac{2z}{z^2-n^2}$에서 명백하다.",
+            "따라서 $\\Delta(z)=F(z)-S(z)$는 주기적($\\Delta(z+1)=\\Delta(z)$)이고, (ii)에 의해 두 함수의 $1/z$ 항이 상쇄되어 원점 특이점이 제거 가능하며, 주기성으로 모든 정수에서도 제거 가능하다. 그러므로 $\\Delta$는 정함수(entire)이다.",
+            "유계성: 주기성 덕에 띠 $|\\mathrm{Re}(z)|\\le 1/2$에서만 유계를 보이면 충분하다. $\\Delta$는 정칙이라 사각형 $|\\mathrm{Im}(z)|\\le 1$에서 유계이므로 $|\\mathrm{Im}(z)|>1$만 통제하면 된다. $z=x+iy$, $y>1$이면 $\\cot\\pi z=i\\frac{e^{-2\\pi y}+e^{-2\\pi i x}}{e^{-2\\pi y}-e^{-2\\pi i x}}$이 유계이고, 급수 쪽은 $\\big|\\frac{1}{z}+\\sum_{n\\ge1}\\frac{2z}{z^2-n^2}\\big|\\le C+C\\sum_{n\\ge1}\\frac{y}{y^2+n^2}$인데 이 합은 $\\int_0^\\infty\\frac{y}{y^2+x^2}\\,dx$(치환 $x\\mapsto yx$로 $y$에 무관)로 눌려 유계다. $y<-1$도 같은 방식. 따라서 $\\Delta$는 띠 전체에서, 그러므로 $\\mathbb{C}$ 전체에서 유계이다.",
+            "Liouville 정리에 의해 $\\Delta$는 상수이다. 그런데 $\\pi\\cot\\pi z$와 $S(z)$가 모두 홀함수이므로 $\\Delta$도 홀함수이고, 홀함수인 상수는 $0$뿐이다. 따라서 $\\Delta\\equiv 0$, 즉 식 (4)가 성립한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (사인 함수의 곱 공식, 식 (3))",
+          "formal_statement": "모든 $z\\in\\mathbb{C}$에 대해 $$\\frac{\\sin\\pi z}{\\pi}=z\\prod_{n=1}^{\\infty}\\Big(1-\\frac{z^2}{n^2}\\Big).$$",
+          "idea_behind_proof": "식 (4)는 이미 '로그미분 수준'의 등식이다. 곱 $P(z)=z\\prod(1-z^2/n^2)$의 로그미분이 정확히 식 (4)의 우변이고, $\\sin\\pi z/\\pi$의 로그미분이 $\\pi\\cot\\pi z$(=좌변)이므로, 두 함수는 로그미분이 같다. 로그미분이 같으면 비가 상수 — 이것을 $z\\to0$에서의 첫 계수로 고정하면 상수가 $1$임이 나온다. 곱의 수렴·정칙성·로그미분 공식은 모두 5.3.1의 명제 3.2가 보증한다.",
+          "proof_steps": [
+            "$G(z)=\\frac{\\sin\\pi z}{\\pi}$, $P(z)=z\\prod_{n=1}^{\\infty}(1-\\frac{z^2}{n^2})$로 둔다. 명제 3.2와 $\\sum 1/n^2<\\infty$에 의해 $P$는 (콤팩트 집합에서 균등)수렴하는 정함수이고, 정수 아닌 점에서 $\\frac{P'(z)}{P(z)}=\\frac{1}{z}+\\sum_{n=1}^{\\infty}\\frac{2z}{z^2-n^2}$.",
+            "한편 $\\frac{G'(z)}{G(z)}=\\pi\\cot\\pi z$이다. 식 (4)에 의해 $\\frac{P'(z)}{P(z)}=\\frac{G'(z)}{G(z)}$.",
+            "따라서 $\\Big(\\frac{P}{G}\\Big)'=\\frac{P}{G}\\Big(\\frac{P'}{P}-\\frac{G'}{G}\\Big)=0$이므로 $P(z)=c\\,G(z)$인 상수 $c$가 존재한다.",
+            "양변을 $z$로 나누고 $z\\to0$의 극한을 취하면 $\\frac{P(z)}{z}=\\prod(1-\\frac{z^2}{n^2})\\to1$, $\\frac{G(z)}{z}=\\frac{\\sin\\pi z}{\\pi z}\\to1$이므로 $c=1$. 이로써 식 (3)이 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (다른 증명들)",
+          "formal_statement": "식 (4)와 (3)은 다른 방법으로도 증명된다: $\\pi^2/(\\sin\\pi z)^2$에 대한 유사 항등식(3장 연습 12, 4장 연습 7)을 적분하거나, Fourier 급수를 이용하는 증명(Book I의 3장·5장 연습)이 있다. 이 소단원의 증명은 그중 'Liouville로 차이를 상수화'하는 복소해석적 접근이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "사인 곱 공식 (3)에 $z=\\frac{1}{2}$를 대입하여 무한곱 $\\displaystyle\\prod_{n=1}^{\\infty}\\Big(1-\\frac{1}{4n^2}\\Big)$의 값을 구하라. (이것은 Wallis 곱과 동치이다.)",
+          "hint": "$\\sin(\\pi/2)=1$임을 이용하라. 좌변과 $z=1/2$에서의 곱의 앞 인수 $z$를 정리하면 원하는 무한곱만 남는다.",
+          "solution": "$z=\\frac{1}{2}$을 (3)에 넣으면 $$\\frac{\\sin(\\pi/2)}{\\pi}=\\frac{1}{\\pi}=\\frac{1}{2}\\prod_{n=1}^{\\infty}\\Big(1-\\frac{1}{4n^2}\\Big).$$ 따라서 $$\\prod_{n=1}^{\\infty}\\Big(1-\\frac{1}{4n^2}\\Big)=\\frac{2}{\\pi}.$$ 뒤집으면 $\\prod_{n=1}^{\\infty}\\frac{4n^2}{4n^2-1}=\\frac{\\pi}{2}$ — 이것이 고전적인 Wallis 곱이다. (교훈: 곱 공식에 특정 값을 넣으면 고전적 무한곱 항등식이 곧바로 떨어진다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "사인 곱 공식 (3)의 양변을 $z^3$까지 Taylor 전개하고 계수를 비교하여 Euler의 항등식 $\\sum_{n=1}^{\\infty}\\frac{1}{n^2}=\\frac{\\pi^2}{6}$을 유도하라.",
+          "hint": "좌변은 $\\frac{\\sin\\pi z}{\\pi}=z-\\frac{(\\pi z)^3}{6\\pi}+\\cdots=z\\big(1-\\frac{\\pi^2}{6}z^2+\\cdots\\big)$. 우변의 곱 $\\prod(1-z^2/n^2)$을 전개할 때 $z^2$ 항의 계수는 각 인수의 $-1/n^2$을 하나씩 골라 더한 것이다.",
+          "solution": "좌변: $\\sin\\pi z=\\pi z-\\frac{(\\pi z)^3}{3!}+\\cdots$이므로 $\\frac{\\sin\\pi z}{\\pi}=z-\\frac{\\pi^2}{6}z^3+\\cdots=z\\Big(1-\\frac{\\pi^2}{6}z^2+\\cdots\\Big)$. 우변: $z\\prod_{n=1}^{\\infty}\\Big(1-\\frac{z^2}{n^2}\\Big)=z\\Big(1-\\big(\\sum_{n=1}^{\\infty}\\frac{1}{n^2}\\big)z^2+\\cdots\\Big)$ (곱을 전개하면 $z^2$ 계수는 각 인수에서 $-1/n^2$을 한 번씩 뽑은 합). $z^3$의 계수를 비교하면 $-\\frac{\\pi^2}{6}=-\\sum_{n=1}^{\\infty}\\frac{1}{n^2}$, 즉 $\\sum_{n=1}^{\\infty}\\frac{1}{n^2}=\\frac{\\pi^2}{6}$. (일반화: 더 높은 차수의 계수를 비교하면 $\\sum 1/n^4=\\pi^4/90$ 등 짝수 제타값이 차례로 나온다.)"
+        },
+        {
+          "type": "ox",
+          "question": "급수 $\\sum_{n=-\\infty}^{\\infty}\\frac{1}{z+n}$은 (정수 아닌 $z$에서) 절대수렴한다.",
+          "answer": "X",
+          "explanation": "절대수렴하지 않는다. $\\frac{1}{z+n}\\sim\\frac{1}{n}$이라 $\\sum\\big|\\frac{1}{z+n}\\big|$은 조화급수처럼 발산하고, 양수 $n$ 쪽 절반과 음수 $n$ 쪽 절반도 각각 발산한다. 오직 대칭 부분합 $\\lim_{N\\to\\infty}\\sum_{|n|\\le N}$으로 해석하여 $\\frac{1}{z+n}+\\frac{1}{z-n}=\\frac{2z}{z^2-n^2}\\sim\\frac{2z}{-n^2}$처럼 항을 짝지어 상쇄시킬 때에만 수렴한다(그 결과가 $\\frac1z+\\sum\\frac{2z}{z^2-n^2}$로 절대수렴)."
+        },
+        {
+          "type": "ox",
+          "question": "식 (4)의 증명에서 차이 $\\Delta=\\pi\\cot\\pi z-\\sum_n\\frac{1}{z+n}$이 $0$임은, $\\Delta$를 직접 대수적으로 전개해 각 항이 소거됨을 보여 증명되었다.",
+          "answer": "X",
+          "explanation": "직접 소거가 아니라 함수론적 논증이다. 먼저 $\\Delta$의 극이 모두 제거되어 $\\Delta$가 정함수임을 보이고, 주기성으로 유계성을 폭 $1$ 띠로 환원해 온 평면에서 유계임을 보인다. 그러면 Liouville 정리로 $\\Delta$는 상수이고, $\\Delta$가 홀함수라는 관찰로 그 상수가 $0$임이 결정된다. '유계 정함수는 상수'라는 Liouville가 증명의 심장이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이미 증명된 코탄젠트 합 공식 (4)로부터 사인 곱 공식 (3)이 어떻게 따라 나오는가? '로그미분'과 '$z\\to0$ 극한'이 각각 어떤 역할을 하는지 설명하라.",
+          "hint": "곱 $P(z)=z\\prod(1-z^2/n^2)$의 로그미분 $P'/P$이 무엇인지(명제 3.2), 그리고 $\\sin\\pi z/\\pi$의 로그미분이 무엇인지 떠올려라. 두 함수의 로그미분이 같으면 무엇을 말할 수 있는가?",
+          "answer": "핵심은 식 (4)가 이미 '로그미분 등식'이라는 점이다. 명제 3.2의 로그미분 공식에 의해 곱 $P(z)=z\\prod(1-z^2/n^2)$은 $\\frac{P'}{P}=\\frac1z+\\sum_{n\\ge1}\\frac{2z}{z^2-n^2}$을 만족하는데, 이는 정확히 식 (4)의 우변이다. 한편 $G(z)=\\frac{\\sin\\pi z}{\\pi}$의 로그미분은 $\\frac{G'}{G}=\\pi\\cot\\pi z$(=식 (4)의 좌변)이다. 따라서 식 (4)는 곧 $\\frac{P'}{P}=\\frac{G'}{G}$을 뜻한다. 로그미분이 같다는 것은 $(P/G)'=\\frac{P}{G}(\\frac{P'}{P}-\\frac{G'}{G})=0$, 즉 $P/G$가 상수라는 것이다 — 로그미분을 '되돌려 적분'하면 곱 자체가 $G$의 상수배임이 나온다. 남은 것은 그 상수를 정하는 일인데, $z\\to0$에서 $P(z)/z\\to1$이고 $G(z)/z=\\frac{\\sin\\pi z}{\\pi z}\\to1$이므로 두 함수의 '원점에서의 첫 기울기'가 같아 상수는 $1$이다. 요약하면, 로그미분은 곱 공식을 이미 증명된 합 공식으로 환원해 주고, $z\\to0$ 극한은 적분 상수를 $1$로 고정하는 초기조건 역할을 한다."
+        }
+      ]
+    }
+  ]
+}
