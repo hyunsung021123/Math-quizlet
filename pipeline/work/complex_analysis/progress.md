@@ -61,7 +61,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 033 | [ ] | 5.1 Jensen’s formula | section | `033__ComplexAnalysi__5_1_Jensensformula.txt` |
+| 033 | [x] | 5.1 Jensen’s formula | section | `033__ComplexAnalysi__5_1_Jensensformula.txt` |
 | 034 | [ ] | 5.2 Functions of finite order | section | `034__ComplexAnalysi__5_2_Functionsoffiniteorder.txt` |
 | 035 | [ ] | 5.3.1 Generalities | section | `035__ComplexAnalysi__5_3_1_Generalities.txt` |
 | 036 | [ ] | 5.3.2 Example: the product formula for the sine function | section | `036__ComplexAnalysi__5_3_2_Exampletheproductformulafo.txt` |

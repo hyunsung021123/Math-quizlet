@@ -53,6 +53,12 @@
       "title": "Chapter 4. The Fourier Transform",
       "file": "chapter_4_the_fourier_transform.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "chapter_5_entire_functions",
+      "title": "Chapter 5. Entire Functions",
+      "file": "chapter_5_entire_functions.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }
