@@ -71,6 +71,12 @@
       "title": "7. The Zeta Function and Prime Number Theorem",
       "file": "7_the_zeta_function_and_prime_number_the.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "chapter_8_conformal_mappings",
+      "title": "Chapter 8. Conformal Mappings",
+      "file": "chapter_8_conformal_mappings.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }
