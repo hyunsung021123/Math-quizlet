@@ -47,6 +47,12 @@
       "title": "Chapter 3. Meromorphic Functions and the Logarithm",
       "file": "chapter_3_meromorphic_functions_and_the_.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "chapter_4_the_fourier_transform",
+      "title": "Chapter 4. The Fourier Transform",
+      "file": "chapter_4_the_fourier_transform.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }
