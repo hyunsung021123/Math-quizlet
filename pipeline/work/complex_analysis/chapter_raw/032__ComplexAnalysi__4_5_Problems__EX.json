@@ -1,0 +1,250 @@
+{
+  "chapter_info": {
+    "title": "Chapter 4. The Fourier Transform",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis, Ch. 4",
+    "overall_goal": "1차원 푸리에 변환(Fourier transform)과 복소해석 사이의 깊은 연결을 이해한다. 실축 위에서 정의된 함수의 정칙 확장 가능성과 그 푸리에 변환 $\\hat f$의 빠른(예: 지수적) 감소가 서로 대응한다는 큰 주제를 배우고, '등고선 이동(shifting the contour)'이라는 하나의 기법으로 $\\hat f$의 지수 감소·푸리에 역변환·포아송 합 공식(Poisson summation)을 증명하며, 종국에는 Paley–Wiener 정리에 도달한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.5 Problems (심화 문제)",
+      "step1_big_picture": {
+        "context": "이 심화 문제 묶음은 4장의 핵심 대응 — '$f$의 크기 ↔ $\\hat f$의 크기'라는 사전(dictionary)' — 을 더 날카롭고 일반적인 형태로 밀어붙인다. 문제 1은 4.2 정리 2.1(지수 감소 ↔ 띠에서의 정칙성)과 4.3 정리 3.3(콤팩트 받침 ↔ 지수형)이라는 두 끝점을, 켤레 지수 $1/p+1/q=1$ 로 잇는 연속적 스펙트럼($\\hat f=O(e^{-a|\\xi|^p})\\Rightarrow |f(z)|\\le Ae^{a|z|^q}$)으로 확장한다. 문제 2는 푸리에 변환으로 상수계수 상미분방정식을 푼다. 문제 3(별표)은 띠에서의 최대 절댓값 원리인 세 직선 보조정리(three-lines lemma)로, 복소 보간(complex interpolation) 이론의 씨앗이다. 문제 4(별표)는 Borel의 고전적 표현과 Paley–Wiener를 잇는다.",
+        "hidden_intuition": "관통하는 실은 '크기의 쌍대성(duality)을 점점 더 정밀하게 읽는다'는 것이다. 4.2·4.3은 두 극단을 줬을 뿐이다: 문제 1은 그 사이를 Legendre/Young 쌍대성으로 채운다 — 감소 지수 $p$와 성장 지수 $q$가 서로 켤레라는 사실이, '감소율과 성장률이 쌍대'라는 직관을 정량화한다($p\\to\\infty$면 $q\\to1$로 정리 3.3에, $p\\to1$면 $q\\to\\infty$로 정리 2.1에 수렴). 세 직선 보조정리는 그 골격에 '로그-볼록성'을 부여한다: 정칙함수의 중간 직선 위 최댓값이 양 끝 직선 값의 로그-선형 결합으로 통제된다는 것 — 이것이 Riesz–Thorin 보간의 원형이다. Borel 표현은 가장 시각적이다: 받침 $[-M,M]$에 사는 $\\hat f$가 사실은 그 구간을 절단선(slit)으로 갖는 정칙함수 $g$의 '도약(jump)'이라는 것 — Paley–Wiener의 '받침'이 '가지 자름(branch cut)'으로 번역된다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "p",
+            "y": "q"
+          },
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  1.15,
+                  6.5
+                ],
+                [
+                  1.4,
+                  3.5
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  3.5,
+                  1.4
+                ],
+                [
+                  6.5,
+                  1.15
+                ]
+              ],
+              "color": "#2c6fbb"
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                2
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2,
+                2.4
+              ],
+              "text": "p=q=2"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.4,
+                5.5
+              ],
+              "text": "p→1: Thm 2.1"
+            },
+            {
+              "shape": "label",
+              "at": [
+                5.0,
+                1.6
+              ],
+              "text": "p→∞: Thm 3.3"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0.6,
+                0.6
+              ],
+              "to": [
+                7,
+                7
+              ],
+              "dash": "4,3",
+              "color": "#9aa0a6"
+            }
+          ],
+          "caption": "문제 1의 쌍대성 스펙트럼: 켤레 지수 $1/p+1/q=1$ 위의 각 점이 '감소 $e^{-a|\\xi|^p}$ ↔ 성장 $e^{a|z|^q}$'의 한 판본. 양 끝점이 각각 정리 2.1과 정리 3.3을 회복한다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Theorem",
+          "name": "문제 1 (켤레 지수 쌍대성: 정리 2.1과 3.3의 보간)",
+          "formal_statement": "어떤 $p>1$에 대해 $\\hat f(\\xi)=O(e^{-a|\\xi|^p})$ ($|\\xi|\\to\\infty$)이면 $f$는 정함수이고 $$|f(z)|\\le A\\,e^{a|z|^q},\\qquad \\tfrac1p+\\tfrac1q=1$$ 을 만족한다. $p\\to\\infty$($q\\to1$)이면 정리 3.3(콤팩트 받침·지수형)의 일부가, $p\\to1$($q\\to\\infty$)이면 정리 2.1(지수 감소)이 회복된다.",
+          "idea_behind_proof": "핵심 발상은 성장 추정에 등장하는 지수 $-a\\xi^p+(\\text{선형항})\\xi$ 를 최적화하는 것이 바로 Legendre 변환이고, 그 최댓값이 켤레 지수 $q$의 거듭제곱으로 자란다는 관찰이다. 구체적으로 역변환 $f(z)=\\int\\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 에서 $|e^{2\\pi i\\xi z}|=e^{-2\\pi\\xi\\,\\mathrm{Im}\\,z}$ 를 쓰면 피적분함수 지수가 $-a|\\xi|^p+2\\pi|\\xi|\\,|\\mathrm{Im}\\,z|$ 꼴이 된다. 여기에 Young 부등식 $-\\xi^p+\\xi u\\le u^q$ (비음 $\\xi,u$; $\\xi=u^{q-1}$과 $u=\\xi^{p-1}$이 $(p-1)(q-1)=1$로 서로 역함수)을 적용하면 지수가 $u^q\\sim|z|^q$ 로 통제된다. 즉 '감소 지수 $p$'와 '성장 지수 $q$'의 켤레 관계가 곧 Young/Legendre 쌍대성이다.",
+          "proof_steps": [
+            "$\\hat f$가 초지수적으로 감소하므로 $f(z)=\\int_{-\\infty}^\\infty \\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 는 모든 $z$에서 절대수렴, 정함수(2장 정리 5.4).",
+            "$y=\\mathrm{Im}\\,z$ 에 대해 $|f(z)|\\le \\int |\\hat f(\\xi)|e^{2\\pi|\\xi||y|}\\,d\\xi\\le A'\\int e^{-a|\\xi|^p+2\\pi|\\xi||y|}\\,d\\xi$.",
+            "비음 $\\xi,u$에 대한 부등식 $-\\xi^p+\\xi u\\le u^q$ 를 스케일링해 적용하면 지수 $-a|\\xi|^p+2\\pi|\\xi||y|$ 의 상한이 $c\\,|y|^q$ 꼴 $\\Rightarrow$ 적분이 $Ae^{a|z|^q}$ 로 지배됨.",
+            "끝점: $p\\to\\infty$면 $q\\to1$로 $|f(z)|\\le Ae^{a|z|}$(지수형, 정리 3.3의 범주), $p\\to1$면 $q\\to\\infty$로 지수 감소·정칙 띠(정리 2.1)의 세계로 되돌아온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "문제 3 (세 직선 보조정리, Hadamard three-lines lemma) — 별표",
+          "formal_statement": "$F$가 띠 $0<\\mathrm{Im}(z)<1$ 에서 정칙·유계이고 폐포에서 연속이라 하자. (a) 두 경계 직선에서 $|F|\\le1$ 이면 띠 전체에서 $|F|\\le1$. (b) 일반적으로 $M_0=\\sup_{x}|F(x)|$, $M_1=\\sup_x|F(x+i)|$ 라 하면 $0\\le y\\le1$ 에서 $$\\sup_x |F(x+iy)|\\le M_0^{\\,1-y}M_1^{\\,y}.$$ (c) 따라서 $\\log\\sup_x|F(x+iy)|$ 는 $y\\in[0,1]$ 에서 볼록함수다.",
+          "idea_behind_proof": "무계 띠에서는 최대 절댓값 원리가 그냥은 성립하지 않으므로(4.3 Phragmén–Lindelöf와 같은 난점), 인수 $e^{-\\epsilon z^2}$ 를 곱해 $|\\mathrm{Re}\\,z|\\to\\infty$ 에서 강제로 감쇠시키는 것이 (a)의 열쇠다: $|e^{-\\epsilon z^2}|=e^{-\\epsilon(x^2-y^2)}$ 가 띠에서 $|x|\\to\\infty$ 일 때 죽어 최댓값이 유한 사각형 경계에 잡히고, 거기서 $|F|\\le1$. (b)는 (a)로의 환원 기법이다: 지수 인수(예: $M_0,M_1$의 복소 거듭제곱)를 곱해 두 경계에서 크기를 정확히 $1$로 정규화한 $G$를 만들면 (a)가 곧 $M_0^{1-y}M_1^{y}$ 상한을 준다. (c)는 (b)의 로그를 취한 재진술 — 이 로그-볼록성이 복소 보간(Riesz–Thorin) 이론의 심장이다.",
+          "proof_steps": [
+            "(a) $F_\\epsilon(z)=F(z)e^{-\\epsilon z^2}$: $|F_\\epsilon|=|F|e^{-\\epsilon(x^2-y^2)}$ 가 띠($0\\le y\\le1$)에서 $|x|\\to\\infty$일 때 $\\to0$. 최대 원리를 큰 사각형에 적용하면 최댓값이 경계에 잡히고, 경계에서 $|F|\\le1$·$|e^{-\\epsilon z^2}|\\lesssim1$ 이므로 $|F_\\epsilon|\\lesssim1$. $\\epsilon\\to0$ 하여 $|F|\\le1$.",
+            "(b) 적절한 지수 인수를 곱한 $G(z)$(경계 $y=0$에서 크기 $M_0$, $y=1$에서 $M_1$을 상쇄)를 만들어 두 경계에서 $|G|\\le1$ 이 되게 한 뒤 (a)를 적용 $\\Rightarrow \\sup_x|F(x+iy)|\\le M_0^{1-y}M_1^{y}$.",
+            "(c) (b)의 양변에 로그를 취하면 $\\log\\sup_x|F(x+iy)|\\le(1-y)\\log M_0+y\\log M_1$, 즉 끝점을 잇는 직선 아래 — 볼록성. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -3.2,
+                    0
+                  ],
+                  [
+                    3.2,
+                    0
+                  ],
+                  [
+                    3.2,
+                    1.8
+                  ],
+                  [
+                    -3.2,
+                    1.8
+                  ]
+                ],
+                "fill": "#cfe3f5"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -3.4,
+                  0
+                ],
+                "to": [
+                  3.4,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -3.4,
+                  1.8
+                ],
+                "to": [
+                  3.4,
+                  1.8
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.4,
+                  -0.25
+                ],
+                "text": "|F|≤M_0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.4,
+                  2.05
+                ],
+                "text": "|F|≤M_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.6,
+                  0.9
+                ],
+                "text": "≤ M_0^{1-y} M_1^{y}"
+              }
+            ],
+            "caption": "세 직선 보조정리: 띠 $0\\le\\mathrm{Im}\\,z\\le1$의 두 경계 값 $M_0,M_1$이 중간 직선의 최댓값을 로그-선형으로 지배한다. 복소 보간의 원형."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "문제 4 (Borel 표현과 Paley–Wiener의 연결) — 별표",
+          "formal_statement": "정함수 $f(z)=\\sum a_n z^n$ 이 모든 $\\epsilon>0$에 대해 $|f(z)|\\le A_\\epsilon e^{2\\pi(M+\\epsilon)|z|}$ 를 만족하는 것은, 원점 중심 반지름 $M$의 원 밖에서 정칙이고 무한대에서 소멸하는 $g$로 $$f(z)=\\int_C e^{2\\pi i z w}g(w)\\,dw$$ ($C$는 반지름 $>M$인 원점 중심 원)로 표현되는 것과 동치다. 여기서 $g(w)=\\sum_{n\\ge0}A_n w^{-n-1}$, $a_n=A_n(2\\pi i)^{n+1}/n!$. 나아가 $f,\\hat f$가 실축에서 적당한 감소를 가지면 $g$는 절단평면 $\\mathbb{C}\\setminus[-M,M]$ 에서 정칙이고 $$g(z)=\\frac{1}{2\\pi i}\\int_{-M}^M \\frac{\\hat f(\\xi)}{\\xi-z}\\,d\\xi,$$ 즉 $\\hat f$는 $g$가 구간 $[-M,M]$ 을 가로지르며 겪는 도약(jump)이다: $\\hat f(x)=\\lim_{\\epsilon\\to0^+}\\bigl(g(x+i\\epsilon)-g(x-i\\epsilon)\\bigr)$.",
+          "idea_behind_proof": "Paley–Wiener(정리 3.3)는 지수형 정함수 $f$를 '받침이 $[-M,M]$인 $\\hat f$'와 짝지었다. Borel의 관점은 이 $\\hat f$를 코시 적분 $g(z)=\\frac{1}{2\\pi i}\\int_{-M}^M\\frac{\\hat f(\\xi)}{\\xi-z}d\\xi$ 의 밀도로 본다 — 이 적분은 $z$가 $[-M,M]$ 밖에 있으면 정칙함수 $g$를 정의하고, $z$가 실축의 구간을 위·아래로 가로지를 때 Plemelj의 도약 공식으로 정확히 $\\hat f(x)$ 만큼 불연속이 된다. 즉 Paley–Wiener의 '콤팩트 받침'이 복소해석에서는 '절단선(branch cut) 위의 도약'으로 번역되며, 이는 3장 문제 5(원판·경계값)의 무한 구간 판본이다. (계수 관계 $a_n=A_n(2\\pi i)^{n+1}/n!$ 은 $e^{2\\pi izw}$ 를 전개해 항별로 코시 적분하면 나온다.)"
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "문제 1. $\\hat f(\\xi)=O(e^{-a|\\xi|^p})$ ($p>1$)일 때 $f$가 정함수이고 $|f(z)|\\le Ae^{a|z|^q}$ ($1/p+1/q=1$)임을, 힌트의 부등식 $-\\xi^p+\\xi u\\le u^q$ (비음 $\\xi,u$)을 이용해 유도하라. 또 $p\\to\\infty$, $p\\to1$ 극한이 각각 어떤 정리로 이어지는지 설명하라.",
+          "hint": "역변환 $f(z)=\\int\\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 에서 $|e^{2\\pi i\\xi z}|=e^{-2\\pi\\xi\\,\\mathrm{Im}\\,z}$ 를 써서 피적분함수 지수를 $-a|\\xi|^p+2\\pi|\\xi||y|$ 로 만들고, $u\\propto|y|$ 로 두어 부등식을 적용하라. 부등식 성립은 $\\xi=u^{q-1}$과 $u=\\xi^{p-1}$이 $(p-1)(q-1)=1$로 서로 역함수임에서 나온다.",
+          "solution": "$\\hat f$가 초지수적으로 감소하므로 $f(z)=\\int_{-\\infty}^\\infty\\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 는 모든 $z$에서 절대수렴 $\\Rightarrow$ 정함수(2장 정리 5.4). $y=\\mathrm{Im}\\,z$ 에 대해 $$|f(z)|\\le A'\\int_{-\\infty}^\\infty e^{-a|\\xi|^p}e^{2\\pi|\\xi||y|}\\,d\\xi=A'\\int e^{\\,-a|\\xi|^p+2\\pi|\\xi||y|}\\,d\\xi.$$ 적분 지수를 최대화한다: 스케일링 후 부등식 $-\\xi^p+\\xi u\\le u^q$ 에서 $u\\propto|y|$ 로 두면 지수의 상한이 $c\\,|y|^q$ 가 되어(나머지 $\\xi$-적분은 유한한 상수) $$|f(z)|\\le A\\,e^{c|y|^q}\\le A\\,e^{a|z|^q}.$$ 부등식 $-\\xi^p+\\xi u\\le u^q$ 은 $\\xi^p\\ge\\xi u$ / $\\xi^p<\\xi u$ 두 경우로 나눠 확인되며, $\\xi=u^{q-1}$과 $u=\\xi^{p-1}$이 $(p-1)(q-1)=1$로 서로 역함수라는 사실(=Young 부등식/Legendre 쌍대)이 등호 경계를 준다. 극한: $p\\to\\infty\\Rightarrow q\\to1$ 이면 $|f(z)|\\le Ae^{a|z|}$ (지수형, 정리 3.3의 범주 — 받침의 콤팩트성에 접근); $p\\to1\\Rightarrow q\\to\\infty$ 이면 지수적 감소·정칙 띠(정리 2.1)로 되돌아온다. 즉 이 문제는 두 정리를 켤레 지수로 잇는 연속적 다리다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 2. 상수계수 상미분방정식 $\\sum_{j=0}^n a_j\\,u^{(j)}(t)=f(t)$ ($f$는 콤팩트 받침·$C^2$)를 푸리에 변환으로 푸는 다음 개요를 완성하라: (a) $\\hat f(z)=\\int f(t)e^{-2\\pi i z t}\\,dt$ 가 정함수이고 $|y|\\le a$ 에서 $|\\hat f(x+iy)|\\le A/(1+x^2)$ 임을 보여라. (b) $P(z)=\\sum_j a_j(2\\pi i z)^j$ 가 소멸하지 않는 수평선 $L=\\{x+ic\\}$ 를 잡을 수 있음을 보여라. (c) $u(t)=\\int_L \\frac{e^{2\\pi i z t}}{P(z)}\\hat f(z)\\,dz$ 가 방정식을 풂을 확인하라.",
+          "hint": "(a) $C^2$·콤팩트 받침이므로 부분적분을 두 번 해 $\\hat f$에 $1/z^2$ 감소를 만들어라. (b) $P$는 유한개의 근을 가지므로 그 허수부를 피하는 실수 $c$를 고르면 된다. (c) 미분 연산자 $\\sum a_j(d/dt)^j$ 를 $u$에 적용하면 적분 안에 $\\sum a_j(2\\pi i z)^j=P(z)$ 가 나와 분모와 상쇄됨을 이용하고, $L$을 실축으로 되돌린 뒤 푸리에 역변환을 쓴다.",
+          "solution": "(a) $f\\in C^2$이고 콤팩트 받침이라 $\\hat f(z)=\\int f(t)e^{-2\\pi i z t}\\,dt$ 는 유한 구간 적분이므로 정함수. 부분적분 두 번: $\\hat f(z)=\\frac{1}{(2\\pi i z)^2}\\int f''(t)e^{-2\\pi i z t}\\,dt$ 이고 $f''$가 유계·콤팩트 받침이므로, $|y|\\le a$ 에서 $|\\hat f(x+iy)|\\le \\frac{A}{1+x^2}$ (지수 인수는 유한 받침에서 $e^{2\\pi|t||y|}\\le$ 상수). (b) $P(z)$ 는 차수 $n$ 다항식이라 근이 유한개 $\\Rightarrow$ 그 근들의 허수부는 유한집합. 이 값들을 피하는 실수 $c$ 를 고르면 수평선 $L=\\{x+ic\\}$ 위에서 $P(z)\\ne0$. (c) $u(t)=\\int_L \\frac{e^{2\\pi izt}}{P(z)}\\hat f(z)\\,dz$ 에 연산자 적용: $(d/dt)^j e^{2\\pi izt}=(2\\pi iz)^j e^{2\\pi izt}$ 이므로 $$\\sum_{j=0}^n a_j\\Bigl(\\frac{d}{dt}\\Bigr)^j u(t)=\\int_L \\frac{\\sum_j a_j(2\\pi iz)^j}{P(z)}e^{2\\pi izt}\\hat f(z)\\,dz=\\int_L e^{2\\pi izt}\\hat f(z)\\,dz.$$ $\\hat f$가 $1/(1+x^2)$ 감소·극이 없으므로 $L$을 실축으로 되돌리면 $\\int_L=\\int_{-\\infty}^\\infty e^{2\\pi ixt}\\hat f(x)\\,dx=f(t)$ (푸리에 역변환, 정리 2.2). 따라서 $\\sum_j a_j u^{(j)}(t)=f(t)$. 해 $u$는 $c$의 선택에 의존한다(서로 다른 $c$는 동차해만큼 차이). 일반화: 미분 연산자를 푸리에 쪽에서 다항식 $P(z)$로 대각화한 뒤 $1/P$로 '나눗셈'하는 것이 상수계수 선형 ODE 풀이의 본질이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "문제 3(별표). 세 직선 보조정리의 기본형을 증명하라: $F$가 띠 $0<\\mathrm{Im}(z)<1$ 에서 정칙·유계이고 폐포에서 연속이며 두 경계 직선에서 $|F|\\le1$ 이면, 띠 전체에서 $|F|\\le1$. 이어서 이로부터 $\\log\\sup_x|F(x+iy)|$ 가 $y\\in[0,1]$ 에서 볼록함을 설명하라.",
+          "hint": "무계 띠라 최대 원리를 바로 못 쓴다. $F_\\epsilon(z)=F(z)e^{-\\epsilon z^2}$ 를 만들어 $|\\mathrm{Re}\\,z|\\to\\infty$ 에서 감쇠시켜라. 볼록성은 일반형 $\\sup_x|F(x+iy)|\\le M_0^{1-y}M_1^{y}$ 의 로그를 취하면 나온다.",
+          "solution": "$F_\\epsilon(z)=F(z)e^{-\\epsilon z^2}$ 로 두면 $z=x+iy$에서 $|F_\\epsilon(z)|=|F(z)|\\,e^{-\\epsilon(x^2-y^2)}$. 띠 $0\\le y\\le1$ 에서 $|x|\\to\\infty$ 일 때 $x^2-y^2\\to+\\infty$ 이므로 $|F_\\epsilon|\\to0$ ($F$ 유계). 따라서 충분히 큰 사각형 $[-R,R]\\times[0,1]$ 밖에서는 $|F_\\epsilon|$ 이 작고, 최대 절댓값 원리로 사각형 최댓값이 경계에 잡힌다. 경계 직선 $y=0,1$ 에서 $|F|\\le1$ 이고 $|e^{-\\epsilon z^2}|=e^{-\\epsilon(x^2-y^2)}\\le e^{\\epsilon}$ 이므로 $|F_\\epsilon|\\le e^{\\epsilon}$. 세로변($|x|=R$)은 감쇠로 무시 가능. $R\\to\\infty$, 이어 $\\epsilon\\to0$ 하면 띠 전체에서 $|F|\\le1$. 볼록성: 일반형에서 $M_0=\\sup_x|F(x)|$, $M_1=\\sup_x|F(x+i)|$ 로 정규화한 함수에 위 결과를 적용하면 $\\sup_x|F(x+iy)|\\le M_0^{1-y}M_1^{y}$. 로그를 취하면 $\\log\\sup_x|F(x+iy)|\\le(1-y)\\log M_0+y\\log M_1$ — 끝점 $(0,\\log M_0)$, $(1,\\log M_1)$ 을 잇는 직선 이하이므로 볼록함수다. 일반화: 이 로그-볼록성이 $L^p$ 공간 사이 작용소의 Riesz–Thorin 보간 정리의 핵심 메커니즘이다."
+        }
+      ],
+      "step3_checkpoint_note": "",
+      "step4_placeholder": "",
+      "step_ox_conceptual": "",
+      "step3_extra": "",
+      "step3_checkpoint2": "",
+      "step3_final": [
+        {
+          "type": "ox",
+          "question": "문제 1의 결과에서 감소 지수 $p$가 커질수록($p\\to\\infty$) 성장 지수 $q$는 $1$에 가까워지며, 이 극단은 정리 2.1(지수 감소)을 회복한다.",
+          "answer": "X",
+          "explanation": "극한이 향하는 정리가 뒤바뀌었다. $p\\to\\infty$($q\\to1$)이면 성장이 $e^{a|z|}$ 인 '지수형'에 접근해 정리 3.3(콤팩트 받침·Paley–Wiener)의 범주로 간다. 정리 2.1(지수 감소 ↔ 정칙 띠)을 회복하는 것은 반대쪽 극단 $p\\to1$($q\\to\\infty$)이다. 즉 $p$가 작을수록(감소가 완만할수록) 성장 지수 $q$가 커지며 정리 2.1로, $p$가 클수록(감소가 급격할수록) $q\\to1$로 정리 3.3에 다가간다."
+        },
+        {
+          "type": "ox",
+          "question": "세 직선 보조정리(문제 3)는 $\\log\\sup_x|F(x+iy)|$ 가 $y\\in[0,1]$ 에서 볼록함을 주장하며, 이는 곧 그 함수가 두 끝점을 잇는 직선보다 위에 있을 수 없음을 뜻한다.",
+          "answer": "O",
+          "explanation": "맞다. 볼록함수는 정의상 임의의 두 점을 잇는 현(chord) 아래에 놓이므로, $\\log\\sup_x|F(x+iy)|\\le(1-y)\\log M_0+y\\log M_1$ 이 성립한다. 이 로그-선형 상한이 정확히 $\\sup_x|F(x+iy)|\\le M_0^{1-y}M_1^{y}$ 의 로그 판본이며, 양 끝 직선에서의 크기($M_0,M_1$)가 중간 직선의 크기를 지배한다는 보간 원리를 담는다. 이것이 복소 보간(Riesz–Thorin) 이론의 씨앗이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 심화 문제 묶음(문제 1·3·4)이 4장의 중심 주제인 '$f$의 크기 ↔ $\\hat f$의 크기'라는 쌍대성을 각각 어떤 방식으로 더 정밀하게/일반적으로 만드는지 종합하라.",
+          "hint": "문제 1은 4.2·4.3의 두 끝점 사이를 무엇으로 잇는가(켤레 지수·Legendre 쌍대). 문제 3은 그 대응에 어떤 '볼록성' 구조를 부여하는가. 문제 4는 받침 $[-M,M]$을 복소해석적으로 무엇으로 다시 보는가(절단선·도약).",
+          "answer": "세 문제는 같은 사전('크기의 쌍대성')을 세 방향으로 정련한다. 문제 1은 해상도를 높인다: 4.2 정리 2.1(지수 감소 ↔ 정칙 띠)과 4.3 정리 3.3(콤팩트 받침 ↔ 지수형)은 스펙트럼의 두 끝점일 뿐이며, 켤레 지수 $1/p+1/q=1$ 이 그 사이 전 구간($\\hat f=O(e^{-a|\\xi|^p})\\Leftrightarrow$ 성장 $e^{a|z|^q}$)을 채운다. 여기서 '감소 지수 $p$'와 '성장 지수 $q$'가 Legendre/Young 쌍대라는 사실이, 감소율과 성장률이 본질적으로 쌍대량임을 정량화한다. 문제 3(세 직선 보조정리)은 그 대응에 구조를 부여한다: 정칙함수의 크기는 띠의 중간 직선에서 양 끝 직선 값의 로그-볼록 결합으로 통제되며($M_0^{1-y}M_1^{y}$), 이 로그-볼록성이 크기 정보가 어떻게 '보간'되는지를 지배한다 — 이는 이후 $L^p$ 보간(Riesz–Thorin)으로 자라난다. 문제 4(Borel)는 관점을 기하화한다: Paley–Wiener가 지수형 $f$와 '받침 $[-M,M]$의 $\\hat f$'를 짝지었다면, Borel은 그 $\\hat f$를 절단평면 $\\mathbb{C}\\setminus[-M,M]$ 에서 정칙인 $g$의 코시 적분 밀도로 보아, $\\hat f$가 $g$의 절단선 위 '도약(jump)'임을 드러낸다 — '받침'이 '가지 자름'으로 번역되는 것이다. 요컨대 문제 1은 대응을 연속화하고, 문제 3은 그것에 볼록성이라는 뼈대를 주며, 문제 4는 그것을 절단평면 위의 도약이라는 복소해석적 그림으로 완성한다. 세 방향 모두 4장의 한 문장 — '함수와 그 푸리에 변환의 크기는 서로를 정밀하게 구속한다' — 를 더 깊이 파고든 것이다."
+        }
+      ]
+    }
+  ]
+}
