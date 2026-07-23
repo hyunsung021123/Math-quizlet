@@ -453,6 +453,224 @@
           "answer": "핵심 하한 (3)은 극에서 오는 인자 $(\\sigma-1)^{3/4}$를 품고 있어, 점이 경계선 $\\mathrm{Re}(s)=1$에 바짝 붙으면($\\sigma\\to 1^{+}$) 하한이 $0$으로 무너진다. 그래서 경계선 바로 위가 아니라 극에서 오른쪽으로 조금 떨어진 $\\sigma'$에서 (3)을 적용해 강한 하한을 확보한다. 그러나 우리가 원하는 것은 원래 점 $\\sigma+it$에서의 하한이므로, 삼각부등식으로 $|\\zeta(\\sigma+it)|\\ge|\\zeta(\\sigma'+it)|-|\\zeta(\\sigma'+it)-\\zeta(\\sigma+it)|$을 쓰고 두 값의 차(=이동 오차)를 되돌려 뺀다. 이 오차는 평균값 정리에 의해 '민 거리 $\\times$ $\\zeta'$의 크기'로 잡히므로, 6장의 $\\zeta'$ 성장 평가가 그것을 $c''(\\sigma'-1)|t|^{\\epsilon}$으로 통제해 준다. 전략이 성공하려면 '민 곳에서 얻는 이득' $c'(\\sigma'-1)^{3/4}|t|^{-\\epsilon/4}$이 '되돌리며 잃는 손실' $c''(\\sigma'-1)|t|^{\\epsilon}$을 압도(적어도 상수배로 균형)해야 하며, 이동 거리 $\\sigma'-1=A|t|^{-5\\epsilon}$과 상수 $A=(c'/(2c''))^4$의 선택이 두 항을 같은 $|t|^{-4\\epsilon}$ 차수로 맞추면서 이득이 손실의 두 배가 되게 하여 차가 살아남도록 조율한다. 요컨대 밀기의 이득(극에서 멀어짐)과 되돌리기의 비용(이동 오차)이 정량적으로 균형을 이루는 지점을 찾는 것이 이 전략의 요체다."
         }
       ]
+    },
+    {
+      "section_title": "7.2.0 ψ와 ψ₁ 함수로의 환원 — 개관 (도입부)",
+      "step1_big_picture": {
+        "context": "7.1절에서 $\\zeta$의 해석적 자산 — $\\mathrm{Re}(s)=1$ 위의 비소멸(정리 1.2)과 $1/\\zeta$의 성장 통제(명제 1.6) — 을 모두 갖췄다. 이제 무대를 소수를 세는 쪽으로 옮긴다. 문제는 $\\pi(x)$가 너무 거칠어 $\\zeta$와 직접 잇기 어렵다는 것이다. 그래서 체비쇼프(Tchebychev)의 보조 함수 $\\psi(x)=\\sum_{p^m\\le x}\\log p$를 도입한다. 이 함수는 각 소수 거듭제곱을 $\\log p$로 무겁게 달아, $\\zeta$의 로그 미분과 $-\\zeta'(s)/\\zeta(s)=\\sum_n \\Lambda(n)n^{-s}$라는 깔끔한 항등식으로 곧장 연결된다. 이 소단원은 다음 환원 사슬을 세운다: 소수 정리 $\\pi(x)\\sim x/\\log x$ $\\Leftarrow$ $\\psi(x)\\sim x$(명제 2.1) $\\Leftarrow$ $\\psi_1(x)\\sim x^2/2$(명제 2.2, 여기서 $\\psi_1(x)=\\int_1^x\\psi(u)\\,du$). 마지막으로 $\\psi_1$을 $\\zeta$로 표현하는 페론형(Perron) 적분 공식(명제 2.3)과 그 재료가 되는 불연속 적분(보조정리 2.4)을 확립해, 다음 소단원에서 $\\psi_1\\sim x^2/2$를 등고선 이동으로 증명할 발판을 놓는다.",
+        "hidden_intuition": "두 가지 '왜'가 이 소단원의 심장이다. 첫째, 왜 $\\pi$가 아니라 $\\psi$인가? $\\log p$라는 가중치는 인위적 장식이 아니라 자연이 고른 것이다 — 오일러 곱에 로그를 취해 미분하면 지수에서 $\\log p$가 저절로 떨어져 나와 $-\\zeta'/\\zeta=\\sum\\Lambda(n)n^{-s}$를 만든다. 즉 $\\psi$는 '$\\zeta'/\\zeta$의 계수를 그대로 세는 함수'라서 해석과 산술을 잇는 다리에 정확히 들어맞는다. 둘째, 왜 $\\psi$를 또 적분해 $\\psi_1$을 만드는가? $\\psi$는 계단처럼 뛰는 함수라 그 페론 적분은 수렴이 조건부이고 다루기 사납다. 한 번 적분해 매끄럽게 만들면 적분식에 인자 $\\frac{1}{s(s+1)}$이 붙어 세로선 적분이 절대수렴하게 되고, 그제서야 등고선을 $\\mathrm{Re}(s)=c$에서 $\\mathrm{Re}(s)=1$로 자유롭게 밀 수 있다. 이것은 의도된 거래다: 다루기 힘든 $\\psi$ 대신 그 '원시함수' $\\psi_1$에서 깨끗한 점근을 증명하고, 단조성 샌드위치(명제 2.2)로 되돌려 벗겨낸다. 그리고 보조정리 2.4의 불연속 적분($a>1$이냐 $a\\le 1$이냐에 따라 값이 튄다)이 바로 '$n\\le x$인 항만 골라내는' 스위치 역할을 한다 — $a=x/n$을 넣으면 $x\\ge n$일 때만 $1-n/x$가 살아남는다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (체비쇼프 ψ-함수와 폰 망골트 함수 Λ)",
+          "formal_statement": "체비쇼프의 $\\psi$-함수는 $$\\psi(x)=\\sum_{p^m\\le x}\\log p$$ 로 정의된다(합은 $x$ 이하의 소수 거듭제곱 $p^m$ 전체에 대해; $p$는 소수, $m\\ge 1$). 폰 망골트 함수(von Mangoldt function)를 $$\\Lambda(n)=\\begin{cases}\\log p & n=p^m \\ (\\text{어떤 소수 }p,\\ m\\ge 1)\\\\ 0 & \\text{그 외}\\end{cases}$$ 로 두면 세 가지 동치 표현이 성립한다: $$\\psi(x)=\\sum_{1\\le n\\le x}\\Lambda(n)=\\sum_{p\\le x}\\left[\\frac{\\log x}{\\log p}\\right]\\log p.$$ (마지막 식은 $p^m\\le x\\iff m\\le \\log x/\\log p$이므로, 소수 $p$마다 정확히 $[\\log x/\\log p]$개의 거듭제곱이 세어지기 때문이다. $[u]$는 $u$ 이하 최대 정수.)"
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.1 (ψ로의 환원)",
+          "formal_statement": "$\\psi(x)\\sim x$ ($x\\to\\infty$)이면 $\\pi(x)\\sim x/\\log x$ ($x\\to\\infty$)이다.",
+          "idea_behind_proof": "$\\psi$와 $\\pi\\log x$를 위·아래로 조이는 것이 전부다. 위쪽 부등식은 세 표현 중 $[\\,\\cdot\\,]\\le(\\cdot)$이라는 거친 평가에서 곧장 나온다. 아래쪽은 조금 까다로운데, 합의 범위를 $x^\\alpha<p\\le x$로 좁혀 각 $\\log p$를 $\\log x^\\alpha=\\alpha\\log x$로 아래에서 눌러 $\\pi$를 끄집어낸 뒤, $\\pi(x^\\alpha)\\le x^\\alpha$가 무시할 만큼 작다는 점과 $\\alpha<1$을 임의로 $1$에 보낼 수 있다는 점을 쓴다.",
+          "proof_steps": [
+            "보일 것 (4): $1\\le\\liminf_{x\\to\\infty}\\pi(x)\\frac{\\log x}{x}$ 이고 $\\limsup_{x\\to\\infty}\\pi(x)\\frac{\\log x}{x}\\le 1$.",
+            "상한: $\\psi(x)=\\sum_{p\\le x}[\\frac{\\log x}{\\log p}]\\log p\\le\\sum_{p\\le x}\\frac{\\log x}{\\log p}\\log p=\\pi(x)\\log x$. $x$로 나누면 $\\frac{\\psi(x)}{x}\\le\\frac{\\pi(x)\\log x}{x}$. $\\psi(x)\\sim x$이므로 좌변 $\\to 1$, 따라서 $\\liminf\\pi(x)\\frac{\\log x}{x}\\ge 1$ — (4)의 첫 부등식.",
+            "하한: $0<\\alpha<1$ 고정. $\\psi(x)\\ge\\sum_{p\\le x}\\log p\\ge\\sum_{x^\\alpha<p\\le x}\\log p\\ge(\\pi(x)-\\pi(x^\\alpha))\\log x^\\alpha=(\\pi(x)-\\pi(x^\\alpha))\\,\\alpha\\log x$.",
+            "정리하면 $\\psi(x)+\\alpha\\pi(x^\\alpha)\\log x\\ge\\alpha\\pi(x)\\log x$. $x$로 나누고 $\\pi(x^\\alpha)\\le x^\\alpha$ ($\\alpha<1$), $\\psi(x)\\sim x$를 쓰면 $1\\ge\\alpha\\limsup\\pi(x)\\frac{\\log x}{x}$.",
+            "$\\alpha<1$이 임의이므로 $\\alpha\\to 1^-$에서 $\\limsup\\pi(x)\\frac{\\log x}{x}\\le 1$ — (4)의 둘째 부등식. 두 부등식이 곧 $\\pi(x)\\sim x/\\log x$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (역도 성립)",
+          "formal_statement": "명제 2.1의 역도 참이다: $\\pi(x)\\sim x/\\log x$이면 $\\psi(x)\\sim x$. 이 장에서는 필요하지 않으므로 증명은 생략한다(따라서 $\\psi(x)\\sim x$와 $\\pi(x)\\sim x/\\log x$는 사실상 동치인 진술이다)."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (매끄럽게 만든 함수 ψ₁)",
+          "formal_statement": "$$\\psi_1(x)=\\int_1^x\\psi(u)\\,du.$$ $\\psi$를 한 번 적분해 얻는 이 '가까운 사촌'은 계단 함수의 도약을 뭉개어 이후의 등고선 적분을 절대수렴하게 만드는 데 쓰인다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.2 (ψ₁로의 환원)",
+          "formal_statement": "$\\psi_1(x)\\sim x^2/2$ ($x\\to\\infty$)이면 $\\psi(x)\\sim x$ ($x\\to\\infty$)이고, 따라서 명제 2.1에 의해 $\\pi(x)\\sim x/\\log x$이다.",
+          "idea_behind_proof": "$\\psi$가 단조증가라는 사실 하나로 $\\psi(x)$를 $\\psi_1$의 차분으로 위·아래에서 조인다. 증가 함수의 값은 그 이웃 구간 평균으로 샌드위치되므로, $\\psi_1(\\beta x)-\\psi_1(x)$ 같은 차분이 $\\psi(x)$의 상·하한을 준다. $\\psi_1\\sim x^2/2$를 대입하고 $\\beta\\to 1^+$, $\\alpha\\to 1^-$로 보내면 상·하극한이 모두 $1$로 조여진다.",
+          "proof_steps": [
+            "$\\psi$가 증가하므로 $\\alpha<1<\\beta$에 대해 $\\frac{1}{(1-\\alpha)x}\\int_{\\alpha x}^{x}\\psi(u)\\,du\\le\\psi(x)\\le\\frac{1}{(\\beta-1)x}\\int_{x}^{\\beta x}\\psi(u)\\,du$.",
+            "오른쪽은 $\\psi(x)\\le\\frac{1}{(\\beta-1)x}[\\psi_1(\\beta x)-\\psi_1(x)]=\\frac{1}{\\beta-1}\\left[\\frac{\\psi_1(\\beta x)}{(\\beta x)^2}\\beta^2-\\frac{\\psi_1(x)}{x^2}\\right]\\cdot\\frac{x}{1}\\Big/x$; 정리하면 $\\frac{\\psi(x)}{x}\\le\\frac{1}{\\beta-1}\\left[\\frac{\\psi_1(\\beta x)}{(\\beta x)^2}\\beta^2-\\frac{\\psi_1(x)}{x^2}\\right]$.",
+            "$\\psi_1\\sim x^2/2$를 대입하면 $\\limsup\\frac{\\psi(x)}{x}\\le\\frac{1}{\\beta-1}(\\tfrac12\\beta^2-\\tfrac12)=\\tfrac12(\\beta+1)$. $\\beta\\to 1^+$에서 $\\limsup\\psi(x)/x\\le 1$.",
+            "$\\alpha<1$로 하는 대칭 논법이 $\\liminf\\psi(x)/x\\ge 1$을 주므로 $\\psi(x)\\sim x$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "공식 (5) (로그 미분과 폰 망골트 함수)",
+          "formal_statement": "$\\mathrm{Re}(s)>1$일 때 보조정리 1.3의 $\\log\\zeta(s)=\\sum_{m,p}\\frac{p^{-ms}}{m}$을 미분하면 $$-\\frac{\\zeta'(s)}{\\zeta(s)}=\\sum_{m,p}(\\log p)\\,p^{-ms}=\\sum_{n=1}^{\\infty}\\frac{\\Lambda(n)}{n^s}. \\tag{5}$$",
+          "idea_behind_proof": "각 항 $\\frac{1}{m}p^{-ms}=\\frac{1}{m}e^{-ms\\log p}$을 $s$로 미분하면 $-\\log p\\cdot p^{-ms}$이 되어 $1/m$이 정확히 소거된다. 살아남은 $\\log p\\,p^{-ms}$을 $n=p^m$으로 재색인하면 계수가 바로 $\\Lambda(n)$이다. 이 식이 $\\psi=\\sum\\Lambda$와 $\\zeta$를 잇는 핵심 다리다.",
+          "proof_steps": [
+            "$\\frac{d}{ds}\\log\\zeta(s)=\\frac{\\zeta'(s)}{\\zeta(s)}$.",
+            "우변을 항별 미분: $\\frac{d}{ds}\\sum_{m,p}\\frac{p^{-ms}}{m}=\\sum_{m,p}\\frac{1}{m}(-m\\log p)p^{-ms}=-\\sum_{m,p}(\\log p)p^{-ms}$ (절대수렴이라 항별 미분 정당).",
+            "$n=p^m$으로 재색인: $\\sum_{m,p}(\\log p)p^{-ms}=\\sum_n\\Lambda(n)n^{-s}$이므로 (5). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 2.4 (불연속 적분)",
+          "formal_statement": "$c>0$이면 $$\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}\\frac{a^s}{s(s+1)}\\,ds=\\begin{cases}0 & 0<a\\le 1,\\\\ 1-\\dfrac{1}{a} & a\\ge 1.\\end{cases}$$ (적분은 세로선 $\\mathrm{Re}(s)=c$ 위에서. $|a^s|=a^c$이므로 인자 $1/(s(s+1))$ 덕에 수렴한다.)",
+          "idea_behind_proof": "고전적인 '등고선을 어느 쪽으로 닫느냐'의 문제다. $a\\ge 1$이면 $a^s=e^{s\\log a}$이 왼쪽 반평면($\\mathrm{Re}(s)\\to-\\infty$)에서 감쇠하므로 세로선을 왼쪽 반원으로 닫아 극 $s=0,-1$의 유수를 줍는다. $0<a\\le 1$이면 반대로 오른쪽으로 닫으며, 그 안에는 극이 없어 $0$이다. 인자 $1/(s(s+1))$이 반원에서 $\\sim 1/T^2$ 감쇠를 주어 호 적분이 사라지는 것이 결정적이다.",
+          "proof_steps": [
+            "$a\\ge 1$: $a=e^\\beta$ ($\\beta=\\log a\\ge 0$), $f(s)=\\frac{a^s}{s(s+1)}=\\frac{e^{s\\beta}}{s(s+1)}$. 유수 $\\operatorname{Res}_{s=0}f=1$, $\\operatorname{Res}_{s=-1}f=-1/a$.",
+            "장난감 등고선 $\\Gamma(T)$: 세로 선분 $S(T)$($c-iT\\to c+iT$)와 $c$ 중심 반지름 $T$의 왼쪽 반원 $C(T)$, 양(반시계)의 방향. $T$가 크면 $0,-1$이 내부이므로 유수정리로 $\\frac{1}{2\\pi i}\\oint_{\\Gamma(T)}f=1-1/a$.",
+            "반원 평가: $s\\in C(T)$에서 $|s(s+1)|\\ge\\frac12 T^2$, 그리고 $\\mathrm{Re}(s)\\le c$이므로 $|e^{\\beta s}|\\le e^{\\beta c}$. 따라서 $\\big|\\int_{C(T)}f\\big|\\le\\frac{C}{T^2}\\cdot 2\\pi T\\to 0$ ($T\\to\\infty$).",
+            "$\\oint=\\int_{S(T)}+\\int_{C(T)}$이고 호가 사라지므로 세로선 적분 $=1-1/a$.",
+            "$0<a\\le 1$: 이제 $\\beta\\le 0$이라 오른쪽 반평면에서 감쇠. 반원을 오른쪽($\\mathrm{Re}(s)\\ge c$)에 두면 내부에 극이 없어 적분은 $0$, 호도 같은 방식으로 사라진다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    1,
+                    2.5
+                  ],
+                  [
+                    -0.77,
+                    1.77
+                  ],
+                  [
+                    -1.5,
+                    0
+                  ],
+                  [
+                    -0.77,
+                    -1.77
+                  ],
+                  [
+                    1,
+                    -2.5
+                  ]
+                ],
+                "arrow": true
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1,
+                  -2.5
+                ],
+                "to": [
+                  1,
+                  2.5
+                ]
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  -1,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.25,
+                  -0.35
+                ],
+                "text": "c"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.35,
+                  1.6
+                ],
+                "text": "S(T)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.55,
+                  1.4
+                ],
+                "text": "C(T)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.05,
+                  -0.4
+                ],
+                "text": "0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.05,
+                  -0.4
+                ],
+                "text": "-1"
+              }
+            ],
+            "caption": "보조정리 2.4의 장난감 등고선(Figure 1, $a\\ge 1$인 경우). 세로 선분 $S(T)$를 위로 오른 뒤 왼쪽 반원 $C(T)$로 반시계 방향으로 닫아, 내부의 두 극 $s=0$($\\times$)과 $s=-1$($\\times$)의 유수 $1$과 $-1/a$를 줍는다. $1/(s(s+1))$의 $\\sim T^{-2}$ 감쇠로 반원 적분은 사라진다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.3 (ψ₁의 등고선 적분 표현)",
+          "formal_statement": "모든 $c>1$에 대하여 $$\\psi_1(x)=\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}\\frac{x^{s+1}}{s(s+1)}\\left(-\\frac{\\zeta'(s)}{\\zeta(s)}\\right)ds. \\tag{6}$$ 특히 초등적으로 $\\psi_1(x)=\\sum_{n\\le x}\\Lambda(n)(x-n)$이 성립한다.",
+          "idea_behind_proof": "두 표현이 같음을 양쪽에서 만난다. 먼저 $\\psi_1$을 직접 적분해 $\\sum_{n\\le x}\\Lambda(n)(x-n)$을 얻는다. 다음으로 적분식에 (5)를 대입해 항별로 쪼개면 각 항이 보조정리 2.4의 적분($a=x/n$) 꼴이 되고, $a=x/n\\ge 1\\iff n\\le x$이므로 $n\\le x$인 항만 $1-n/x$로 살아남아 같은 합이 된다.",
+          "proof_steps": [
+            "직접 계산: $\\psi(u)=\\sum_n\\Lambda(n)f_n(u)$ ($f_n(u)=1$ if $n\\le u$, else $0$). 그러면 $\\psi_1(x)=\\int_0^x\\psi(u)\\,du=\\sum_{n\\le x}\\Lambda(n)\\int_n^x du=\\sum_{n\\le x}\\Lambda(n)(x-n)$.",
+            "적분식 전개: (5)로 $-\\zeta'/\\zeta=\\sum_n\\Lambda(n)n^{-s}$을 대입하고 $x^{s+1}=x\\cdot x^s$, $x^s/n^s=(x/n)^s$를 쓰면 $\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}\\frac{x^{s+1}}{s(s+1)}\\left(-\\frac{\\zeta'}{\\zeta}\\right)ds=x\\sum_{n=1}^{\\infty}\\Lambda(n)\\cdot\\frac{1}{2\\pi i}\\int_{c-i\\infty}^{c+i\\infty}\\frac{(x/n)^s}{s(s+1)}\\,ds$.",
+            "보조정리 2.4를 $a=x/n$에 적용: $a\\ge 1\\iff n\\le x$일 때 안쪽 적분 $=1-n/x$, 그 외 $0$. 따라서 합 $=x\\sum_{n\\le x}\\Lambda(n)(1-\\frac{n}{x})=\\sum_{n\\le x}\\Lambda(n)(x-n)$.",
+            "두 결과가 일치하므로 (6)이 성립한다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\psi(10)$을 정의 $\\psi(x)=\\sum_{p^m\\le 10}\\log p$로 직접 계산하고, 같은 값이 $\\sum_{p\\le 10}\\left[\\frac{\\log 10}{\\log p}\\right]\\log p$로도 나옴을 확인하라.",
+          "hint": "$10$ 이하의 소수 거듭제곱을 모두 나열하라: $2,4,8$($=2^1,2^2,2^3$), $3,9$, $5$, $7$. 각 소수 $p$가 몇 번 등장하는지가 곧 $[\\log 10/\\log p]$이다.",
+          "solution": "소수 거듭제곱: $p=2$는 $2,4,8$ (3개), $p=3$은 $3,9$ (2개), $p=5$는 $5$ (1개), $p=7$은 $7$ (1개). 따라서 $\\psi(10)=3\\log 2+2\\log 3+\\log 5+\\log 7\\approx 2.079+2.197+1.609+1.946=7.83$. 둘째 식: $[\\log 10/\\log 2]=[3.32]=3$, $[\\log 10/\\log 3]=[2.10]=2$, $[\\log 10/\\log 5]=[1.43]=1$, $[\\log 10/\\log 7]=[1.18]=1$이므로 $3\\log2+2\\log3+\\log5+\\log7$로 완전히 일치한다. (일반화: $[\\log x/\\log p]$는 '$p$의 거듭제곱 중 $x$ 이하인 것의 개수'를 세므로 두 표현이 항상 같다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "보조정리 2.4의 피적분함수 $f(s)=\\dfrac{a^s}{s(s+1)}$의 극 $s=0$과 $s=-1$에서의 유수를 계산하고, $a\\ge 1$일 때 두 유수의 합이 정확히 $1-1/a$임을 확인하라.",
+          "hint": "$s=0,-1$은 단순극이다. $\\operatorname{Res}_{s=s_0}\\frac{g(s)}{s(s+1)}$은 $s_0$을 제외한 나머지 인자에 $s_0$을 대입하면 된다. $a^0=1$, $a^{-1}=1/a$에 유의.",
+          "solution": "$\\operatorname{Res}_{s=0}f=\\left.\\frac{a^s}{s+1}\\right|_{s=0}=\\frac{a^0}{0+1}=1$. $\\operatorname{Res}_{s=-1}f=\\left.\\frac{a^s}{s}\\right|_{s=-1}=\\frac{a^{-1}}{-1}=-\\frac{1}{a}$. 유수정리로 왼쪽 반원 안(두 극 포함)에서 $\\frac{1}{2\\pi i}\\oint f=1+(-\\frac1a)=1-\\frac1a$, 반원 적분이 $0$이므로 세로선 적분이 $1-1/a$. (일반화: $a=x/n$을 넣으면 이 값 $1-n/x$이 명제 2.3에서 $n\\le x$인 항의 가중치가 된다.)"
+        },
+        {
+          "type": "ox",
+          "question": "공식 (5) $-\\zeta'(s)/\\zeta(s)=\\sum_{n\\ge 1}\\Lambda(n)n^{-s}$은 모든 복소수 $s$에서 성립한다.",
+          "answer": "X",
+          "explanation": "(5)는 오일러 곱과 $\\log\\zeta(s)=\\sum_{m,p}p^{-ms}/m$의 절대수렴에 기대므로 $\\mathrm{Re}(s)>1$에서만 성립한다. 이 급수 표현은 임계띠 안($\\mathrm{Re}(s)\\le 1$)으로 연장되지 않으며, 그래서 다음 소단원에서 $\\psi_1$의 등고선을 $\\mathrm{Re}(s)=1$로 밀 때 급수가 아니라 $\\zeta'/\\zeta$의 해석적 연속과 극·비소멸 정보를 직접 다뤄야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "$\\psi$ 대신 그 적분 $\\psi_1$을 다루는 것은 단순한 표기상의 편의일 뿐, 등고선 적분의 수렴성에는 영향을 주지 않는다.",
+          "answer": "X",
+          "explanation": "적분이 본질적이다. $\\psi$를 한 번 적분하면 명제 2.3의 피적분함수에 인자 $\\frac{1}{s(s+1)}$이 붙어(원래 $\\psi$의 페론 공식이라면 $\\frac{1}{s}$뿐) 세로선 적분이 $\\sim 1/|s|^2$로 절대수렴한다. 이 추가 감쇠 덕에 등고선을 $\\mathrm{Re}(s)=1$로 정당하게 이동할 수 있다. $\\psi$의 조건부 수렴 적분으로는 이 조작이 훨씬 까다롭다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 소단원의 환원 사슬 '소수 정리 $\\Leftarrow$ $\\psi\\sim x$ $\\Leftarrow$ $\\psi_1\\sim x^2/2$'에서 각 화살표가 어떤 도구로 정당화되는지, 그리고 왜 굳이 $\\pi\\to\\psi\\to\\psi_1$으로 두 번 갈아타는지를 하나의 이야기로 설명하라.",
+          "hint": "$\\pi\\to\\psi$ 전환의 이득(‥$\\log p$ 가중치가 $\\zeta$와 무엇으로 연결되는가), $\\psi\\to\\psi_1$ 전환의 이득(‥매끄러움과 적분식의 수렴)을 각각 짚고, 되돌아오는 두 화살표가 각각 명제 2.1·2.2의 어떤 성질(거친 부등식 / 단조성)에 기대는지 되짚어라.",
+          "answer": "출발점은 $\\pi(x)$가 너무 거칠어 $\\zeta$와 직접 잇기 어렵다는 문제다. 첫 갈아타기 $\\pi\\to\\psi$: 각 소수 거듭제곱을 $\\log p$로 가중한 $\\psi$는 $\\zeta$의 로그 미분과 $-\\zeta'/\\zeta=\\sum\\Lambda(n)n^{-s}$(공식 5)로 곧장 연결되므로 해석적 도구를 쓸 수 있게 된다. 되돌아오는 화살표(명제 2.1)는 $\\psi\\le\\pi\\log x$ 같은 거친 부등식과 합 범위를 $x^\\alpha<p\\le x$로 좁히는 초등적 조임으로 정당화된다. 둘째 갈아타기 $\\psi\\to\\psi_1$: $\\psi$는 계단 함수라 그 페론 적분이 다루기 사납다. 한 번 적분한 $\\psi_1$은 매끄럽고, 그 적분식(명제 2.3)에 $\\frac{1}{s(s+1)}$이 붙어 절대수렴하므로 등고선을 $\\mathrm{Re}(s)=1$로 밀 수 있다 — 이것이 다음 소단원에서 $\\psi_1\\sim x^2/2$를 증명하는 열쇠다. 되돌아오는 화살표(명제 2.2)는 $\\psi$의 단조증가성만으로 $\\psi(x)$를 $\\psi_1$의 차분으로 샌드위치해 정당화된다. 요컨대 두 번의 갈아타기는 각각 '해석적 연결 확보($\\log p$ 가중)'와 '수렴·매끄러움 확보(적분)'라는 이득을 얻기 위한 것이고, 각 이득은 되돌아올 때 거친 부등식과 단조성이라는 값싼 초등적 성질로 회수된다. 최종적으로 $\\psi_1\\sim x^2/2$ 하나만 (해석적으로) 증명하면 사슬을 타고 소수 정리가 따라온다."
+        }
+      ]
     }
   ]
 }
