@@ -44,7 +44,7 @@
 | 023 | [x] | 3.5 Homotopies and simply connected domains | section | `023__ComplexAnalysi__3_5_Homotopiesandsimplyconnect.txt` |
 | 024 | [x] | 3.6 The complex logarithm | section | `024__ComplexAnalysi__3_6_Thecomplexlogarithm.txt` |
 | 025 | [x] | 3.7 Fourier series and harmonic functions | section | `025__ComplexAnalysi__3_7_Fourierseriesandharmonicfu.txt` |
-| 026 | [ ] | 3.8 Exercises | exercises | `026__ComplexAnalysi__3_8_Exercises__EX.txt` |
+| 026 | [x] | 3.8 Exercises | exercises | `026__ComplexAnalysi__3_8_Exercises__EX.txt` |
 | 027 | [ ] | 3.9 Problems | exercises | `027__ComplexAnalysi__3_9_Problems__EX.txt` |
 
 ## 4. The Fourier Transform
