@@ -41,6 +41,12 @@
       "title": "Chapter 2. Cauchy's Theorem and Its Applications",
       "file": "chapter_2_cauchy_s_theorem_and_its_appli.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "chapter_3_meromorphic_functions_and_the_",
+      "title": "Chapter 3. Meromorphic Functions and the Logarithm",
+      "file": "chapter_3_meromorphic_functions_and_the_.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }

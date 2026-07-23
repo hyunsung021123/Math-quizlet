@@ -37,7 +37,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 019 | [ ] | 3.1 Zeros and poles | section | `019__ComplexAnalysi__3_1_Zerosandpoles.txt` |
+| 019 | [x] | 3.1 Zeros and poles | section | `019__ComplexAnalysi__3_1_Zerosandpoles.txt` |
 | 020 | [ ] | 3.2.1 Examples | section | `020__ComplexAnalysi__3_2_1_Examples.txt` |
 | 021 | [ ] | 3.3 Singularities and meromorphic functions | section | `021__ComplexAnalysi__3_3_Singularitiesandmeromorphi.txt` |
 | 022 | [ ] | 3.4 The argument principle and applications | section | `022__ComplexAnalysi__3_4_Theargumentprincipleandapp.txt` |
