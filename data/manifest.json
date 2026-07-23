@@ -59,6 +59,12 @@
       "title": "Chapter 5. Entire Functions",
       "file": "chapter_5_entire_functions.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "chapter_6_the_gamma_and_zeta_functions",
+      "title": "Chapter 6. The Gamma and Zeta Functions",
+      "file": "chapter_6_the_gamma_and_zeta_functions.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }

@@ -74,7 +74,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 041 | [ ] | 6.1.1 Analytic continuation | section | `041__ComplexAnalysi__6_1_1_Analyticcontinuation.txt` |
+| 041 | [x] | 6.1.1 Analytic continuation | section | `041__ComplexAnalysi__6_1_1_Analyticcontinuation.txt` |
 | 042 | [ ] | 6.1.2 Further properties of Γ | section | `042__ComplexAnalysi__6_1_2_Furtherpropertiesof.txt` |
 | 043 | [ ] | 6.2.1 Functional equation and analytic continuation | section | `043__ComplexAnalysi__6_2_1_Functionalequationandanaly.txt` |
 | 044 | [ ] | 6.3 Exercises | exercises | `044__ComplexAnalysi__6_3_Exercises__EX.txt` |
