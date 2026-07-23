@@ -817,6 +817,289 @@
           "answer": "이사 전략은 세 걸음의 왕복이다. (1) 어려운 영역 $\\Omega$(여기서는 띠)를 등각사상 $G:\\Omega\\to\\mathbb{D}$로 원판으로 옮긴다. (2) 원판에서는 푸아송 적분이라는 완성된 도구로 디리클레 문제의 해 $\\tilde u$를 구한다. (3) $u=\\tilde u\\circ G$로 되돌린다. 이 왕복이 정당한 이유는 보조정리 1.3 — 조화함수와 정칙함수의 합성이 다시 조화 — 이 왕복 내내 '$\\Delta u=0$'이라는 성질을 보존하기 때문이다(등각사상은 라플라스 방정식을 형태 그대로 옮긴다). 임의의 $\\Omega$로 일반화할 때 답해야 할 두 질문은: (Q1) $\\Omega$에서 $\\mathbb{D}$로의 등각사상이 애초에 존재하는가? 이는 리만 사상정리가 해결한다 — $\\Omega$가 $\\mathbb{C}$의 진부분집합이면서 단순연결이기만 하면 존재하고 경계의 정칙성은 필요 없다(8.3절). (Q2) 그 등각사상이 경계 $\\partial\\Omega$와 $\\partial\\mathbb{D}$ 사이의 연속 전단사로 확장되는가? 경계값을 옮겨 붙이려면 이것이 필요하고, 이는 $\\partial\\Omega$의 어느 정도 정칙성을 요구하며 다각형의 경우가 8.4.3절에서 다루어진다. 요컨대 존재성은 완전히 일반적(리만 사상정리)이지만, 경계 거동은 추가 규칙성을 요구한다는 것이 두 질문의 핵심 구분이다."
         }
       ]
+    },
+    {
+      "section_title": "8.2.1 Automorphisms of the disc",
+      "step1_big_picture": {
+        "context": "8.1절에서 우리는 여러 영역 사이를 잇는 '구체적' 등각사상들을 손으로 만들었다. 이제 관점을 뒤집어, 한 영역을 자기 자신으로 보내는 등각사상 전체 — 그 영역의 '대칭군(symmetry group)' $\\mathrm{Aut}(\\Omega)$ — 를 완전히 분류한다. 무대는 가장 중요한 영역인 단위원판 $\\mathbb{D}$이다. 이 분류를 가능케 하는 유일한 도구가 슈바르츠 보조정리(Schwarz lemma)인데, 이는 '중심을 고정하는 원판의 정칙 자기사상은 절대 늘어날 수 없다'는 강력한 강직성(rigidity) 진술이다. 여기서 얻는 $\\mathrm{Aut}(\\mathbb{D})$의 완전한 목록은 곧바로 다음 소절(8.2.2)에서 케일리 변환(정리 1.2)을 통해 상반평면의 자기동형군 $\\mathrm{Aut}(\\mathbb{H})$로 옮겨지고, 8.3의 리만 사상정리 증명에서도 핵심 재료가 된다.",
+        "hidden_intuition": "슈바르츠 보조정리의 정신은 '정칙성은 유클리드 기하보다 훨씬 빡빡하다'는 것이다. 매끄러운 실함수라면 중심을 고정한 채 원판을 얼마든지 늘렸다 줄였다 할 수 있지만, 정칙 자기사상은 $f(0)=0$이기만 하면 결코 $|f(z)|>|z|$가 될 수 없고, 만약 단 한 점에서라도 '한계까지 늘어나면'($|f(z_0)|=|z_0|$) 그 즉시 순수 회전으로 고정되어 버린다 — 중간이 없다. 이 강직성 덕분에 원판의 자기동형사상은 딱 두 종류의 조립으로 남는다: 중심을 고정하는 '회전'과, 임의의 점 $\\alpha$를 중심 $0$으로 끌어오는 '미끄러짐' $\\psi_\\alpha$. $\\psi_\\alpha$는 쌍곡기하(hyperbolic geometry)의 눈으로 보면 원판의 '평행이동'에 해당하고, 회전은 '회전'에 해당한다 — 즉 $\\mathrm{Aut}(\\mathbb{D})$는 원판을 쌍곡평면으로 봤을 때의 강체운동(등거리변환) 전체다. 분류의 트릭도 여기서 나온다: 어떤 자기동형사상이든 $\\psi_\\alpha$를 곱해 '중심 고정' 상황으로 정규화하면, 남는 것은 회전뿐이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 1.25
+            },
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 0.62,
+              "dash": "4,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.44,
+                0.44
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.66,
+                0.56
+              ],
+              "text": "z"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.24,
+                0.16
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.34,
+                -0.04
+              ],
+              "text": "f(z)"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                0
+              ],
+              "to": [
+                0.44,
+                0.44
+              ],
+              "dash": "2,3"
+            }
+          ],
+          "caption": "슈바르츠 보조정리: $f(0)=0$인 정칙 자기사상은 반지름 $|z|$의 점선원 안으로만 상을 보낸다 — 즉 $|f(z)|\\le|z|$. 어느 한 점에서라도 이 원에 닿으면 $f$는 순수 회전이 된다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Lemma",
+          "name": "보조정리 2.1 (슈바르츠 보조정리, Schwarz lemma)",
+          "formal_statement": "$f:\\mathbb{D}\\to\\mathbb{D}$가 정칙이고 $f(0)=0$이라 하자. 그러면 (i) 모든 $z\\in\\mathbb{D}$에서 $|f(z)|\\le|z|$; (ii) 어떤 $z_0\\neq 0$에서 $|f(z_0)|=|z_0|$이면 $f$는 회전(rotation), 즉 $f(z)=cz\\ (|c|=1)$; (iii) $|f'(0)|\\le 1$이고, 등호가 성립하면 $f$는 회전이다. (여기서 회전이란 $|c|=1$인 $c=e^{i\\theta}$에 대한 $z\\mapsto cz$이다.)",
+          "idea_behind_proof": "열쇠는 '$f(0)=0$이면 $f(z)/z$가 원판 전체에서 정칙인 하나의 함수가 된다'는 관찰이다($z=0$의 특이점이 제거가능). 그러면 유계성 $|f|\\le 1$이 경계 쪽으로 갈수록 $|f(z)/z|\\le 1/r$을 주고, 최대모듈러스 원리로 $r\\to 1$을 밀어붙이면 $|f(z)/z|\\le 1$이 원판 전체에서 성립한다. 등호(강직성) 부분도 같은 함수에 최대모듈러스 원리를 다시 적용하는 것뿐이다 — 내부에서 최댓값 $1$에 도달하면 상수일 수밖에 없다.",
+          "proof_steps": [
+            "$0$에서 멱급수 $f(z)=a_0+a_1z+a_2z^2+\\cdots$로 전개하면 $f(0)=0$이라 $a_0=0$. 따라서 $g(z)=f(z)/z$는 $0$에서 제거가능 특이점을 가져 $\\mathbb{D}$ 전체에서 정칙이다.",
+            "$|z|=r<1$ 위에서 $|f(z)|\\le 1$이므로 $|g(z)|=|f(z)|/r\\le 1/r$. 최대모듈러스 원리로 이 부등식은 $|z|\\le r$ 전체에서 성립하고, $r\\to 1$을 취하면 $|g(z)|\\le 1$, 즉 $|f(z)|\\le|z|$ (i).",
+            "$g(0)=\\lim_{z\\to 0}\\dfrac{f(z)-f(0)}{z}=f'(0)$이므로 $|f'(0)|=|g(0)|\\le 1$ (iii의 부등식).",
+            "(ii): 어떤 $z_0\\neq 0$에서 $|f(z_0)|=|z_0|$이면 $|g(z_0)|=1$, 즉 $g$가 내부에서 최댓값 $1$에 도달한다. 최대모듈러스 원리로 $g$는 상수 $c$, $|c|=1$, 곧 $f(z)=cz$는 회전이다. (iii의 등호): $|f'(0)|=|g(0)|=1$이면 마찬가지로 $g$가 상수가 되어 $f$는 회전. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (자기동형사상과 군 $\\mathrm{Aut}(\\Omega)$)",
+          "formal_statement": "열린집합 $\\Omega$에서 자기 자신으로 가는 등각사상을 $\\Omega$의 자기동형사상(automorphism)이라 하고, 그 전체를 $\\mathrm{Aut}(\\Omega)$로 쓴다. $\\mathrm{Aut}(\\Omega)$는 합성을 연산으로, 항등사상 $z\\mapsto z$를 항등원으로, 역함수를 역원으로 갖는 군(group)을 이룬다. 특히 $f,g\\in\\mathrm{Aut}(\\Omega)$이면 $f\\circ g\\in\\mathrm{Aut}(\\Omega)$이고 $(f\\circ g)^{-1}=g^{-1}\\circ f^{-1}$이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (블라슈케 인자 $\\psi_\\alpha$는 원판의 자기동형사상)",
+          "formal_statement": "$\\alpha\\in\\mathbb{C}$, $|\\alpha|<1$에 대해 $$\\psi_\\alpha(z)=\\frac{\\alpha-z}{1-\\overline{\\alpha}z}$$ 는 $\\mathbb{D}$의 자기동형사상이다. 게다가 $\\psi_\\alpha$는 자기 자신이 역사상이며($\\psi_\\alpha\\circ\\psi_\\alpha=\\mathrm{id}$), $0$과 $\\alpha$를 맞바꾼다: $\\psi_\\alpha(0)=\\alpha,\\ \\psi_\\alpha(\\alpha)=0$.",
+          "idea_behind_proof": "$\\psi_\\alpha$의 극은 $z=1/\\overline{\\alpha}$인데 $|\\alpha|<1$이라 이 극은 원판 바깥에 있으므로 $\\psi_\\alpha$는 $\\mathbb{D}$에서 정칙이다. 경계 $|z|=1$ 위에서 크기가 정확히 $1$임을 직접 계산으로 확인하면(분자·분모가 켤레 관계라 크기가 같아짐), 최대모듈러스 원리가 '내부에서는 $|\\psi_\\alpha|<1$'을 공짜로 준다. 전단사성은 합성 $\\psi_\\alpha\\circ\\psi_\\alpha$가 항등이라는 대수적 사실 하나로 끝난다 — 스스로가 역함수이므로.",
+          "proof_steps": [
+            "$|\\alpha|<1$이라 극 $z=1/\\overline{\\alpha}$는 $\\mathbb{D}$ 밖에 있고, $\\psi_\\alpha$는 $\\mathbb{D}$에서 정칙.",
+            "$|z|=1$이면 $z=e^{i\\theta}$이고 $\\psi_\\alpha(e^{i\\theta})=\\dfrac{\\alpha-e^{i\\theta}}{e^{i\\theta}(e^{-i\\theta}-\\overline{\\alpha})}=e^{-i\\theta}\\dfrac{w}{\\overline{w}}$ ($w=\\alpha-e^{i\\theta}$)이므로 $|\\psi_\\alpha(z)|=1$. 최대모듈러스 원리로 $z\\in\\mathbb{D}$에서 $|\\psi_\\alpha(z)|<1$, 즉 $\\psi_\\alpha:\\mathbb{D}\\to\\mathbb{D}$.",
+            "합성을 직접 계산하면 $(\\psi_\\alpha\\circ\\psi_\\alpha)(z)=\\dfrac{(1-|\\alpha|^2)z}{1-|\\alpha|^2}=z$이므로 $\\psi_\\alpha$는 자기 자신이 역사상 — 전단사, 곧 자기동형사상이다.",
+            "$z=0$: $\\psi_\\alpha(0)=\\alpha$; $z=\\alpha$: $\\psi_\\alpha(\\alpha)=\\dfrac{\\alpha-\\alpha}{1-|\\alpha|^2}=0$. 즉 $0\\leftrightarrow\\alpha$를 맞바꾼다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.25
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.02,
+                  -0.24
+                ],
+                "text": "0"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.6,
+                  0.25
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.78,
+                  0.34
+                ],
+                "text": "α"
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0.03,
+                  0.12
+                ],
+                "to": [
+                  0.55,
+                  0.33
+                ],
+                "bulge": 0.4,
+                "arrow": true
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  0.57,
+                  0.13
+                ],
+                "to": [
+                  0.05,
+                  -0.08
+                ],
+                "bulge": 0.4,
+                "arrow": true
+              }
+            ],
+            "caption": "블라슈케 인자 $\\psi_\\alpha$는 중심 $0$과 점 $\\alpha$를 서로 맞바꾼다($\\psi_\\alpha(0)=\\alpha,\\ \\psi_\\alpha(\\alpha)=0$). 원판의 '평행이동'에 해당하는 자기동형사상이다."
+          }
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.2 (원판 자기동형사상의 완전 분류)",
+          "formal_statement": "$f$가 $\\mathbb{D}$의 자기동형사상이면, 어떤 $\\theta\\in\\mathbb{R}$과 $\\alpha\\in\\mathbb{D}$가 존재하여 $$f(z)=e^{i\\theta}\\,\\frac{\\alpha-z}{1-\\overline{\\alpha}z}=e^{i\\theta}\\psi_\\alpha(z).$$ 즉 $\\mathrm{Aut}(\\mathbb{D})$는 회전과 블라슈케 인자 $\\psi_\\alpha$의 합성으로 남김없이 소진된다.",
+          "idea_behind_proof": "'정규화 후 강직성 적용'이라는 전형적 전략이다. 임의의 자기동형사상 $f$는 원판의 어떤 점 $\\alpha$를 $0$으로 보낸다. 그 $\\alpha$에 맞춘 $\\psi_\\alpha$를 곱해 $g=f\\circ\\psi_\\alpha$로 만들면 $g(0)=0$이 되어 슈바르츠 보조정리를 쓸 수 있는 상황이 된다. 결정적 착상은 $g$뿐 아니라 $g^{-1}$에도 슈바르츠를 적용하는 것이다: 양쪽에서 $|g(z)|\\le|z|$와 $|z|\\le|g(z)|$를 얻어 $|g(z)|=|z|$로 조이면, 강직성이 곧바로 $g$를 회전으로 확정한다.",
+          "proof_steps": [
+            "$f$가 자기동형사상이므로 $f(\\alpha)=0$인 유일한 $\\alpha\\in\\mathbb{D}$가 존재한다.",
+            "$g=f\\circ\\psi_\\alpha$로 두면 $g(0)=f(\\psi_\\alpha(0))=f(\\alpha)=0$. 슈바르츠 보조정리로 $|g(z)|\\le|z|$ (2).",
+            "$g^{-1}(0)=0$이므로 $g^{-1}$에도 슈바르츠를 적용해 $|g^{-1}(w)|\\le|w|$. $w=g(z)$를 대입하면 $|z|\\le|g(z)|$ (3).",
+            "(2)와 (3)을 합쳐 $|g(z)|=|z|$가 모든 $z$에서 성립. 슈바르츠 보조정리 (ii)에 의해 $g(z)=e^{i\\theta}z$.",
+            "$z$ 자리에 $\\psi_\\alpha(z)$를 넣고 $\\psi_\\alpha\\circ\\psi_\\alpha=\\mathrm{id}$를 쓰면 $f(z)=g(\\psi_\\alpha(z))=e^{i\\theta}\\psi_\\alpha(z)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 2.3 (원점을 고정하는 자기동형사상은 회전뿐)",
+          "formal_statement": "단위원판의 자기동형사상 중 원점을 고정하는($f(0)=0$) 것은 회전 $z\\mapsto e^{i\\theta}z$뿐이다.",
+          "idea_behind_proof": "정리 2.2에서 $f(0)=0$이면 $\\psi_\\alpha(0)=\\alpha$의 상 $f(\\alpha)=0$이 곧 $\\alpha=0$을 강제하고($f$가 단사이므로 $0$의 원상은 유일), $\\alpha=0$을 대입하면 $\\psi_0(z)=-z$라 $f(z)=-e^{i\\theta}z$, 즉 회전만 남는다.",
+          "proof_steps": [
+            "정리 2.2에 의해 $f(z)=e^{i\\theta}\\psi_\\alpha(z)$. $f(0)=e^{i\\theta}\\psi_\\alpha(0)=e^{i\\theta}\\alpha=0$이므로 $\\alpha=0$.",
+            "$\\psi_0(z)=\\dfrac{0-z}{1-0}=-z$이므로 $f(z)=-e^{i\\theta}z=e^{i(\\theta+\\pi)}z$, 곧 회전이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (추이성과 군의 구조 $SU(1,1)$)",
+          "formal_statement": "$\\psi_\\alpha$를 이용하면 $\\mathrm{Aut}(\\mathbb{D})$가 추이적(transitive)으로 작용함을 안다: 원판의 임의의 두 점 $\\alpha,\\beta$에 대해 $\\alpha$를 $\\beta$로 보내는 자기동형사상 $\\psi=\\psi_\\beta\\circ\\psi_\\alpha$가 존재한다(먼저 $\\alpha\\to 0$, 이어 $0\\to\\beta$). 즉 원판 안에 '특별한 점'은 없다. 또한 이 명시적 공식들은 $\\mathrm{Aut}(\\mathbb{D})$가 $\\mathbb{C}^2$ 위의 에르미트 형식 $\\langle Z,W\\rangle=z_1\\overline{w_1}-z_2\\overline{w_2}$를 보존하는 $2\\times 2$ 복소행렬들의 군 $SU(1,1)$과 '거의' 동형임을 보여 준다(자세한 내용은 Problem 4)."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$f:\\mathbb{D}\\to\\mathbb{D}$가 정칙이고 $f(0)=0$, $f'(0)=1$이라 하자. $f$가 항등사상 $f(z)=z$임을 슈바르츠 보조정리로 보여라.",
+          "hint": "슈바르츠 보조정리 (iii)의 등호 조건을 보라. $|f'(0)|$의 값이 무엇인가?",
+          "solution": "$f'(0)=1$이므로 $|f'(0)|=1$. 슈바르츠 보조정리 (iii)의 등호 조건에 의해 $f$는 회전 $f(z)=cz$($|c|=1$)이다. 그런데 $f'(0)=c=1$이므로 $c=1$, 즉 $f(z)=z$. 일반화: $f(0)=0$인 원판의 정칙 자기사상에서 도함수의 크기가 한계값 $1$에 도달하는 순간 $f$는 회전으로 '얼어붙고', 도함수 값까지 지정되면 그 회전각도 확정된다 — 강직성의 전형이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1.25
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -0.26
+                ],
+                "text": "f(0)=0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.15,
+                  0.8
+                ],
+                "text": "f'(0)=1 → f=id"
+              }
+            ],
+            "caption": "$f(0)=0$이고 도함수가 한계 $|f'(0)|=1$에 도달하면 $f$는 회전으로 고정되고, $f'(0)=1$이라 그 회전은 항등사상이다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "단위원판의 점 $\\alpha=\\tfrac12$를 중심 $0$으로 보내는 자기동형사상을 하나 적고, 그것의 역사상을 구하라. 또 그 사상이 $0$을 어디로 보내는지 계산하라.",
+          "hint": "블라슈케 인자 $\\psi_\\alpha(z)=\\dfrac{\\alpha-z}{1-\\overline{\\alpha}z}$에 $\\alpha=\\tfrac12$을 대입하라. $\\psi_\\alpha$의 역사상에 대한 명제의 특별한 성질을 떠올려라.",
+          "solution": "$\\alpha=\\tfrac12$(실수라 $\\overline{\\alpha}=\\tfrac12$)이므로 $$\\psi_{1/2}(z)=\\frac{\\tfrac12-z}{1-\\tfrac12 z}=\\frac{1-2z}{2-z}.$$ 이 사상은 $\\psi_{1/2}(\\tfrac12)=0$이라 $\\tfrac12$을 $0$으로 보낸다. 명제에 의해 $\\psi_\\alpha$는 자기 자신이 역사상이므로 역사상도 $\\psi_{1/2}$ 자기 자신이다. 또 $\\psi_{1/2}(0)=\\tfrac12$이므로 $0$은 $\\tfrac12$로 간다($0\\leftrightarrow\\tfrac12$ 맞교환). 확인: $|z|=1$에서 크기가 $1$, 극 $z=2$는 원판 밖이라 정당한 자기동형사상."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "단위원판의 자기동형사상 중 점 $\\alpha$를 점 $\\beta$로 보내는 것을 하나 구성하라(단 $\\alpha,\\beta\\in\\mathbb{D}$).",
+          "hint": "$\\alpha$를 먼저 중심 $0$으로 옮긴 뒤, $0$을 $\\beta$로 옮기면 된다. 각 단계에 어떤 블라슈케 인자를 쓰는가?",
+          "solution": "$\\psi_\\alpha$가 $\\alpha\\mapsto 0$, $\\psi_\\beta$가 $0\\mapsto\\beta$($\\psi_\\beta(0)=\\beta$)이므로, 합성 $$\\psi=\\psi_\\beta\\circ\\psi_\\alpha$$ 가 $\\alpha\\mapsto 0\\mapsto\\beta$로 보내는 자기동형사상이다(두 자기동형사상의 합성도 자기동형사상). 이것이 $\\mathrm{Aut}(\\mathbb{D})$의 추이적 작용을 보여 준다 — 원판 안에는 특별히 구별되는 점이 없다. 참고: 이런 $\\psi$는 뒤에 회전을 곱하는 자유도만큼 유일하지 않다."
+        },
+        {
+          "type": "ox",
+          "question": "슈바르츠 보조정리에서 가정 $f(0)=0$을 빼도 부등식 $|f(z)|\\le|z|$는 여전히 모든 정칙 자기사상 $f:\\mathbb{D}\\to\\mathbb{D}$에 대해 성립한다.",
+          "answer": "X",
+          "explanation": "$f(0)=0$은 필수 가정이다. 반례로 블라슈케 인자 $\\psi_\\alpha$($\\alpha\\neq 0$)를 보면 $\\psi_\\alpha(0)=\\alpha$라 $|\\psi_\\alpha(0)|=|\\alpha|>0=|0|$이므로 $z=0$에서 이미 $|f(z)|\\le|z|$가 깨진다. 슈바르츠 보조정리의 증명이 '$f(z)/z$가 정칙'이라는 데 의존하는데, 이는 정확히 $f(0)=0$일 때만 성립한다."
+        },
+        {
+          "type": "ox",
+          "question": "단위원판의 모든 자기동형사상은 유리일차변환(뫼비우스 변환)이다.",
+          "answer": "O",
+          "explanation": "정리 2.2에 의해 임의의 $f\\in\\mathrm{Aut}(\\mathbb{D})$는 $f(z)=e^{i\\theta}\\dfrac{\\alpha-z}{1-\\overline{\\alpha}z}$ 꼴, 즉 $\\dfrac{az+b}{cz+d}$ 꼴의 유리일차변환이다(8.1.2의 참고에서 소개한 fractional linear transformation). 회전 $e^{i\\theta}z$도 $\\alpha=0$인 특수한 경우로 이 형태에 포함된다."
+        },
+        {
+          "type": "conceptual",
+          "question": "슈바르츠 보조정리 하나가 어떻게 원판 자기동형사상 '전체'의 분류(정리 2.2)로 이어지는가? '중심을 고정하도록 정규화한다'는 전략이 왜 작동하며, 이때 $g$와 $g^{-1}$ 양쪽에 슈바르츠를 적용하는 것이 왜 결정적인지 설명하라. 또 얻어진 군 $\\mathrm{Aut}(\\mathbb{D})$의 추이성이 기하학적으로 무엇을 뜻하는지 논하라.",
+          "hint": "슈바르츠 보조정리는 '$f(0)=0$'일 때만 쓸 수 있다는 점, 그리고 $\\psi_\\alpha$가 임의의 $\\alpha$를 $0$으로 옮겨 그 상황을 만들어 준다는 점을 연결하라. 등호로 조이는 데 왜 부등식 두 개가 필요한지도 생각하라.",
+          "answer": "슈바르츠 보조정리는 '$f(0)=0$'이라는 정규 상황에서만 강직성을 발휘한다. 임의의 자기동형사상 $f$는 일반적으로 원점을 고정하지 않지만, $f$가 $0$으로 보내는 점 $\\alpha$를 찾아 $\\psi_\\alpha$를 곱하면 $g=f\\circ\\psi_\\alpha$가 $g(0)=0$을 만족하도록 '정규화'된다 — 이것이 블라슈케 인자 $\\psi_\\alpha$의 존재 이유다. 이제 슈바르츠는 $|g(z)|\\le|z|$만 준다(한쪽 부등식). 그런데 $g^{-1}$도 원점을 고정하므로 그에도 슈바르츠를 적용하면 반대 방향 $|z|\\le|g(z)|$가 나온다. 두 부등식을 합쳐야 비로소 $|g(z)|=|z|$라는 '한계 도달' 상황이 되고, 그제서야 강직성(ii)이 $g$를 순수 회전으로 확정한다 — 부등식 하나로는 회전임을 결론지을 수 없다. 정규화를 되돌리면($z\\to\\psi_\\alpha(z)$) $f=e^{i\\theta}\\psi_\\alpha$가 되어 분류가 끝난다. 마지막으로 $\\mathrm{Aut}(\\mathbb{D})$가 추이적으로 작용한다는 것은 $\\psi_\\beta\\circ\\psi_\\alpha$가 임의의 $\\alpha$를 임의의 $\\beta$로 보낼 수 있다는 뜻이고, 기하학적으로는 '원판 안의 모든 점이 자기동형사상의 눈에는 동등하다 — 중심조차 특별하지 않다'는 것이다. 이는 원판을 쌍곡평면으로 보면 그 등거리변환군이 임의의 점을 임의의 점으로 옮기는 것과 같은 균질성(homogeneity)의 표현이다."
+        }
+      ]
     }
   ]
 }
