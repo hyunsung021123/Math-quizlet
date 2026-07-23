@@ -106,7 +106,7 @@
 | 060 | [x] | 8.3.2 Montel’s theorem | section | `060__ComplexAnalysi__8_3_2_Montelstheorem.txt` |
 | 061 | [x] | 8.3.3 Proof of the Riemann mapping theorem | section | `061__ComplexAnalysi__8_3_3_ProofoftheRiemannmappingth.txt` |
 | 062 | [x] | 8.4.1 Some examples | section | `062__ComplexAnalysi__8_4_1_Someexamples.txt` |
-| 063 | [ ] | 8.4.2 The Schwarz-Christoffel integral | section | `063__ComplexAnalysi__8_4_2_TheSchwarz-Christoffelinte.txt` |
+| 063 | [x] | 8.4.2 The Schwarz-Christoffel integral | section | `063__ComplexAnalysi__8_4_2_TheSchwarz-Christoffelinte.txt` |
 | 064 | [ ] | 8.4.3 Boundary behavior | section | `064__ComplexAnalysi__8_4_3_Boundarybehavior.txt` |
 | 065 | [ ] | 8.4.4 The mapping formula | section | `065__ComplexAnalysi__8_4_4_Themappingformula.txt` |
 | 066 | [ ] | 8.4.5 Return to elliptic integrals | section | `066__ComplexAnalysi__8_4_5_Returntoellipticintegrals.txt` |
