@@ -1,0 +1,218 @@
+{
+  "chapter_info": {
+    "title": "7. The Zeta Function and Prime Number Theorem",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis",
+    "overall_goal": "리만 제타 함수(Riemann zeta function) $\\zeta(s)$의 해석적 성질을 도구 삼아 정수론의 심장부에 있는 소수 정리(prime number theorem) $\\pi(x)\\sim x/\\log x$를 증명하는 것이 이 장의 목표다. 오일러 곱(Euler product)이 드러내는 $\\zeta(s)$와 소수 사이의 다리에서 출발하여, 증명의 핵심 열쇠인 '$\\zeta(s)$는 직선 $\\mathrm{Re}(s)=1$ 위에서 결코 $0$이 되지 않는다'는 사실에 이르고, 이를 타우버 정리(Tauberian theorem)와 결합해 소수 계량 함수 $\\pi(x)$의 점근적 거동을 확정한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "7.2.note 이중합의 교환에 관한 노트 (Note on interchanging double sums)",
+      "step1_big_picture": {
+        "context": "이 노트는 챕터 곳곳에서 진 '빚'을 갚는다. 보조정리 1.3에서 $\\log\\zeta(s)=\\sum_{p,m}\\frac{p^{-ms}}{m}$을 다루며 '이중합이 절대수렴하므로 합의 순서를 지정할 필요가 없다 — 챕터 끝 노트 참조'라고 미뤄 두었고, 명제 (5)의 항별 미분이나 명제 2.3의 급수-적분 교환도 모두 이중합의 자유로운 재배열에 기대고 있었다. 이 노트는 그 조작을 정당화하는 정확한 조건과 정리를 제시한다: 조건 (8) — 각 행의 절대수렴이 $k$에 대해 '균일하게' 모인다는 조건 — 아래에서는 이중합을 어떤 순서로 더하든, 심지어 어떤 모양의 영역으로 소진(exhaust)하든 같은 값 $A$를 얻는다. 급수판(版) 푸비니 정리(Fubini's theorem for sums)라 할 만하다.",
+        "hidden_intuition": "증명의 묘수는 '합의 순서 교환'이라는 이산적 문제를 '극한의 교환'이라는 해석적 문제로 번역하는 것이다. 핵심 관찰: $\\lim_{x\\to x_0}\\lim_{n\\to\\infty}f_n(x)$와 $\\lim_{n\\to\\infty}\\lim_{x\\to x_0}f_n(x)$의 교환은, $f_n$이 연속이고 수렴이 균일하면 (극한 함수가 연속이 되므로) 참이라는 고전적 사실이 있다. 그래서 이중합을 이 틀에 억지로 밀어 넣는다 — 수렴하는 점열 $x_n\\to x_0$ 위에서 $f_k(x_n)=\\sum_{\\ell\\le n}a_{k\\ell}$(부분합), $f_k(x_0)=\\sum_\\ell a_{k\\ell}$(완전합)로 함수를 짓고, $g=\\sum_k f_k$의 $x_0$에서의 연속성이 바로 우리가 원하는 교환 등식이 되게 만든다. 조건 (8)의 $b_k=\\sum_\\ell|a_{k\\ell}|$가 $\\sum_k b_k<\\infty$을 주어 $\\sum_k f_k$의 균일수렴을 보장하는 것이 결정적이다. 그리고 반드시 기억할 경고: 조건 (8)이 없으면 순서에 따라 값이 달라진다 — 이것이 절대수렴 급수(순서 무관)와 조건수렴 급수(순서 의존)의 대응물이다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Theorem",
+          "name": "정리 (이중합 교환)",
+          "formal_statement": "$\\{a_{k\\ell}\\}_{1\\le k,\\ell<\\infty}$이 $\\mathbb{N}\\times\\mathbb{N}$로 첨수된 복소수열이고 $$\\sum_{k=1}^{\\infty}\\left(\\sum_{\\ell=1}^{\\infty}|a_{k\\ell}|\\right)<\\infty \\tag{8}$$ 이면 다음이 성립한다. (i) 이 순서의 이중합 $A=\\sum_{k}\\sum_{\\ell}a_{k\\ell}$이 수렴하고 순서를 바꿔도 같다: $A=\\sum_{k}\\sum_{\\ell}a_{k\\ell}=\\sum_{\\ell}\\sum_{k}a_{k\\ell}$. (ii) 모든 $\\epsilon>0$에 대해 어떤 $N$이 있어 $K,L>N$이면 $\\bigl|A-\\sum_{k=1}^{K}\\sum_{\\ell=1}^{L}a_{k\\ell}\\bigr|<\\epsilon$. (iii) $m\\mapsto(k(m),\\ell(m))$이 $\\mathbb{N}\\to\\mathbb{N}\\times\\mathbb{N}$의 전단사이고 $c_m=a_{k(m)\\ell(m)}$이면 $A=\\sum_{m=1}^{\\infty}c_m$.",
+          "idea_behind_proof": "(i)은 위에서 말한 '극한 교환 = 균일극한의 연속성' 번역으로 얻는다. (ii)은 유한 부분합과 $A$의 차이를 두 꼬리 — '행은 짧고 열이 긴' 부분과 '행 자체가 큰' 부분 — 으로 나눠 조건 (8)의 절대·균일 수렴으로 각각 $\\epsilon/2$ 이하로 누른다. (iii)은 (ii)의 직접적 귀결이다: 임의의 직사각형 $R(K,L)$이 재배열의 유한 초기 구간에 결국 포함되므로, 재배열 부분합이 $A$로 수렴한다.",
+          "proof_steps": [
+            "(i): $b_k=\\sum_\\ell|a_{k\\ell}|$, 수렴점열 $x_n\\to x_0$인 가산집합 $S=\\{x_0,x_1,\\dots\\}$을 잡고 $f_k(x_0)=\\sum_{\\ell=1}^\\infty a_{k\\ell}$, $f_k(x_n)=\\sum_{\\ell=1}^{n}a_{k\\ell}$, $g(x)=\\sum_k f_k(x)$로 둔다.",
+            "(i): (8)에 의해 각 $f_k$는 $x_0$에서 연속(부분합이 완전합으로 수렴)이고, $|f_k(x)|\\le b_k$, $\\sum_k b_k<\\infty$이므로 $\\sum_k f_k$는 $S$에서 균일수렴 → $g$도 $x_0$에서 연속.",
+            "(i): 따라서 $\\sum_k\\sum_\\ell a_{k\\ell}=g(x_0)=\\lim_n g(x_n)=\\lim_n\\sum_k\\sum_{\\ell=1}^{n}a_{k\\ell}=\\lim_n\\sum_{\\ell=1}^{n}\\sum_k a_{k\\ell}=\\sum_\\ell\\sum_k a_{k\\ell}$ (유한 $\\ell$-합과 무한 $k$-합의 교환은 자명).",
+            "(ii): $\\bigl|A-\\sum_{k\\le K}\\sum_{\\ell\\le L}a_{k\\ell}\\bigr|\\le\\sum_{k\\le K}\\sum_{\\ell>L}|a_{k\\ell}|+\\sum_{k>K}\\sum_{\\ell=1}^\\infty|a_{k\\ell}|$.",
+            "(ii): 둘째 항은 $\\sum_k b_k$의 꼬리이므로 $K>K_0$에서 $<\\epsilon/2$. 첫째 항은 $\\sum_{k\\le K}\\sum_{\\ell>L}|a_{k\\ell}|\\le\\sum_{\\ell>L}\\sum_{k=1}^\\infty|a_{k\\ell}|$ (이미 (i)로 $|a|$의 순서 교환 가능, $\\sum_\\ell\\sum_k|a|<\\infty$)이므로 $L>L_0$에서 $<\\epsilon/2$. $N>\\max(K_0,L_0)$이면 끝.",
+            "(iii): 직사각형 $R(K,L)=\\{(k,\\ell):1\\le k\\le K,\\ 1\\le\\ell\\le L\\}$에 대해, 전단사의 상 $\\{(k(m),\\ell(m)):1\\le m\\le M\\}$이 $R(K,L)$을 포함하는 $M$이 존재한다. $K,L\\to\\infty$과 (ii)로 재배열 부분합 $\\sum_{m\\le M}c_m\\to A$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름 (임의의 영역으로 소진해도 무방)",
+          "formal_statement": "조건 (8) 아래에서, 원점을 포함하는 임의의 열린집합 $U\\subseteq\\mathbb{R}^2$의 팽창 $U(R)=\\{Rx:x\\in U\\}$에 대해 $$A=\\lim_{R\\to\\infty}\\sum_{(k,\\ell)\\in U(R)}a_{k\\ell}.$$ 즉 이중합 $\\sum_{k,\\ell}a_{k\\ell}$은 원판·정사각형·직사각형·타원 등 어떤 모양으로 격자를 소진하며 더해도 같은 값을 준다.",
+          "idea_behind_proof": "$U(R)$은 $R$이 커지면 임의의 직사각형 $R(K,L)$을 삼키고 또 어떤 큰 직사각형에 삼켜지므로, (ii)의 직사각형 근사가 그대로 임의 영역 근사로 옮겨간다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 4.3,
+                "dash": "5,4"
+              },
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    0.4,
+                    0.4
+                  ],
+                  [
+                    3.7,
+                    0.4
+                  ],
+                  [
+                    3.7,
+                    3.7
+                  ],
+                  [
+                    0.4,
+                    3.7
+                  ]
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  3
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  3
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  3,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  3,
+                  2
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  3,
+                  3
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  1,
+                  4
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  4,
+                  1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  4
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  4,
+                  2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.1,
+                  3.95
+                ],
+                "text": "square"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.6,
+                  4.3
+                ],
+                "text": "disc U(R)"
+              }
+            ],
+            "caption": "격자 $\\mathbb{N}\\times\\mathbb{N}$의 점 $(k,\\ell)$을 정사각형으로 소진하든(실선) 팽창하는 원판 $U(R)$으로 소진하든(점선), 조건 (8) 아래에서는 극한이 같은 $A$로 수렴한다."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "경고 예제 (조건 (8)이 깨지면 순서가 값을 바꾼다)",
+          "formal_statement": "무한 행렬 $\\{a_{k\\ell}\\}$을 대각선 위($k<\\ell$)에서는 $0$, 대각선($k=\\ell$)에서는 $-1$, 대각선 아래($k>\\ell$)에서는 $a_{k\\ell}=2^{\\ell-k}$로 두면 $$\\sum_{k}\\sum_{\\ell}a_{k\\ell}\\ne\\sum_{\\ell}\\sum_{k}a_{k\\ell}.$$ 이 예에서는 $\\sum_k\\sum_\\ell|a_{k\\ell}|=\\infty$이라 조건 (8)이 성립하지 않으므로 정리가 적용되지 않는다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "경고 예제의 행렬($k<\\ell$이면 $0$, $k=\\ell$이면 $-1$, $k>\\ell$이면 $2^{\\ell-k}$)에 대해 $\\sum_k\\bigl(\\sum_\\ell a_{k\\ell}\\bigr)$과 $\\sum_\\ell\\bigl(\\sum_k a_{k\\ell}\\bigr)$을 각각 계산해 두 값이 다름을 확인하고, 조건 (8)이 왜 깨지는지 보여라.",
+          "hint": "행별 합(고정 $k$): $\\sum_{\\ell<k}2^{\\ell-k}$을 등비급수로 더한 뒤 대각선 $-1$을 더하라. 열별 합(고정 $\\ell$): $\\sum_{k>\\ell}2^{\\ell-k}$을 더한 뒤 $-1$을 더하라. $\\sum_{k>\\ell}2^{\\ell-k}=2^\\ell\\sum_{k>\\ell}2^{-k}$.",
+          "solution": "행별 합: $\\sum_{\\ell=1}^{k-1}2^{\\ell-k}=2^{-k}(2^k-2)=1-2^{1-k}$, 대각선 $-1$을 더하면 $\\sum_\\ell a_{k\\ell}=-2^{1-k}$. 따라서 $\\sum_k\\sum_\\ell a_{k\\ell}=-\\sum_{k=1}^\\infty 2^{1-k}=-2$. 열별 합: $\\sum_{k>\\ell}2^{\\ell-k}=2^\\ell\\cdot 2^{-\\ell}=1$, 대각선 $-1$을 더하면 $\\sum_k a_{k\\ell}=0$. 따라서 $\\sum_\\ell\\sum_k a_{k\\ell}=0$. 두 값 $-2\\ne 0$. 조건 (8): $\\sum_\\ell|a_{k\\ell}|=(1-2^{1-k})+1=2-2^{1-k}\\to 2$이므로 $\\sum_k(2-2^{1-k})=\\infty$ — (8)이 깨진다. (일반화: 순서 의존성은 항상 절대수렴의 실패에서 온다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "정리 (i)의 증명에서 왜 하필 $f_k(x_n)=\\sum_{\\ell=1}^n a_{k\\ell}$(부분합)과 $f_k(x_0)=\\sum_{\\ell=1}^\\infty a_{k\\ell}$(완전합)로 함수를 정의하는지, 그리고 이 정의 아래에서 '$g$가 $x_0$에서 연속'이라는 명제가 어떻게 곧 이중합 교환 등식이 되는지 설명하라.",
+          "hint": "$g(x_0)$은 어떤 이중합이고, $\\lim_n g(x_n)$은 어떤 이중합인가? 연속성 $g(x_0)=\\lim_n g(x_n)$을 이 둘로 번역해 보라.",
+          "solution": "$g(x_0)=\\sum_k f_k(x_0)=\\sum_k\\sum_\\ell a_{k\\ell}$ (먼저 $\\ell$, 다음 $k$). $g(x_n)=\\sum_k f_k(x_n)=\\sum_k\\sum_{\\ell=1}^n a_{k\\ell}$인데, 안쪽이 유한합이라 순서를 바꿔 $=\\sum_{\\ell=1}^n\\sum_k a_{k\\ell}$; $n\\to\\infty$이면 $\\lim_n g(x_n)=\\sum_\\ell\\sum_k a_{k\\ell}$ (먼저 $k$, 다음 $\\ell$). 따라서 '$g$가 $x_0$에서 연속' 곧 $g(x_0)=\\lim_n g(x_n)$은 정확히 $\\sum_k\\sum_\\ell a_{k\\ell}=\\sum_\\ell\\sum_k a_{k\\ell}$이라는 교환 등식이다. 부분합/완전합 구성은 '$n\\to\\infty$ 극한'을 '점 $x_n\\to x_0$에서의 함숫값 극한'으로 위장해, 연속성 정리를 쓸 수 있게 만든 장치다. 균일수렴($\\sum b_k<\\infty$)이 $g$의 연속성을 보장하는 대목이 핵심이다."
+        },
+        {
+          "type": "ox",
+          "question": "각 행이 절대수렴한다는 것, 즉 모든 $k$에 대해 $\\sum_\\ell|a_{k\\ell}|<\\infty$인 것만으로 $\\sum_k\\sum_\\ell a_{k\\ell}=\\sum_\\ell\\sum_k a_{k\\ell}$을 보장할 수 있다.",
+          "answer": "X",
+          "explanation": "행별 절대수렴만으로는 부족하다. 정리가 요구하는 조건 (8)은 $\\sum_k\\bigl(\\sum_\\ell|a_{k\\ell}|\\bigr)<\\infty$, 즉 행별 절대수렴이 $k$에 대해 '균일하게(합하여도 유한하게)' 모여야 한다는 훨씬 강한 조건이다. 경고 예제의 각 행은 $\\sum_\\ell|a_{k\\ell}|=2-2^{1-k}<\\infty$로 절대수렴하지만, 그 합 $\\sum_k(2-2^{1-k})=\\infty$이라 (8)이 깨지고 실제로 두 순서의 값이 $-2$와 $0$으로 달라진다."
+        },
+        {
+          "type": "ox",
+          "question": "조건 (8)이 성립하면, 이중합을 팽창하는 원판으로 소진하며 더한 값과 팽창하는 정사각형으로 소진하며 더한 값이 같다.",
+          "answer": "O",
+          "explanation": "따름정리가 정확히 이를 말한다. 원점을 포함하는 임의의 열린집합 $U$의 팽창 $U(R)$은 $R\\to\\infty$에서 임의의 직사각형을 삼키고 또 더 큰 직사각형에 삼켜지므로, (ii)의 직사각형 근사가 그대로 옮겨가 $A=\\lim_{R\\to\\infty}\\sum_{(k,\\ell)\\in U(R)}a_{k\\ell}$. 원판·정사각형·타원 등 어떤 모양으로 소진해도 같은 $A$를 준다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 노트는 챕터 본문의 어떤 조작들을 사후에 정당화하는가? 그리고 '합의 순서 교환'을 '극한의 교환'으로 번역하는 증명 전략이 왜 자연스러운 선택인지, 절대수렴 급수의 재배열 불변성과 견주어 설명하라.",
+          "hint": "보조정리 1.3의 $\\sum_{p,m}p^{-ms}/m$과 명제 (5)·2.3의 급수 조작이 어떤 순서 교환에 기댔는지 떠올리고, 조건 (8)이 일변수 절대수렴의 어떤 성질에 대응하는지 생각하라.",
+          "answer": "이 노트는 챕터에서 순서를 자유롭게 바꾸며 다룬 이중합들을 정당화한다 — 특히 보조정리 1.3의 $\\log\\zeta(s)=\\sum_{p,m}p^{-ms}/m$('절대수렴하므로 순서 무관'이라 미뤄 둔 대목), 그리고 공식 (5)의 항별 미분과 명제 2.3에서 급수와 적분·합을 맞바꾼 단계들이다. 이들 모두 이중으로 첨수된 항($p,m$ 또는 $n$과 등고선)을 어떤 순서로 모으든 같은 값이 나온다는 사실에 의존했는데, 그 근거가 바로 조건 (8)형 절대·균일 수렴이다. 증명 전략이 자연스러운 이유는, '합의 순서'라는 이산적 자유도가 사실 '어느 극한을 먼저 취하는가'라는 해석적 자유도와 같기 때문이다. $\\sum_k\\sum_\\ell$은 '$\\ell$-극한을 먼저, $k$-극한을 나중', $\\sum_\\ell\\sum_k$은 그 반대인데, 두 반복극한의 교환 가능성은 고전적으로 '연속 함수열의 균일수렴 → 극한 함수의 연속'으로 판정된다. 그래서 부분합을 점열 $x_n\\to x_0$ 위의 함숫값으로 위장하면 이 판정 정리를 그대로 빌려 쓸 수 있고, 조건 (8)의 $\\sum_k b_k<\\infty$이 정확히 균일수렴을 공급한다. 이는 일변수에서 절대수렴 급수가 임의 재배열에도 같은 합을 주는 성질(리만의 재배열 정리의 '좋은 쪽')의 이차원 판본이다: 조건 (8)은 '이중 절대수렴'이고, 그 아래에서 (iii)이 보장하는 '전단사에 의한 임의 재배열 불변성'이 바로 절대수렴의 재배열 불변성에 대응한다. 조건 (8)이 깨지면(경고 예제) 마치 조건수렴 급수처럼 순서가 값을 바꾼다."
+        }
+      ]
+    }
+  ]
+}
