@@ -850,6 +850,90 @@
           "answer": "감마 인자 $\\pi^{-s/2}\\Gamma(s/2)$는 장식이 아니라 멜린 변환이 자동으로 붙이는 '완결 인자'다: 정리 2.2가 보여 주듯 $\\xi(s)=\\tfrac12\\int_0^\\infty u^{s/2-1}[\\vartheta(u)-1]du$로, $\\xi$는 세타 함수의 멜린 변환 그 자체다. 반면 $\\zeta$ 홀로는 이 적분 표현을 갖지 못한다. 이제 세타의 함수방정식 $\\vartheta(u)=u^{-1/2}\\vartheta(1/u)$는 적분변수의 반전 $u\\mapsto1/u$에 대한 대칭인데, 적분을 $u=1$에서 잘라 $[0,1]$ 조각에 이 반전을 적용하면 지수 $u^{s/2-1}$이 $u^{(1-s)/2-1}$ 유형으로 뒤바뀐다 — 즉 적분변수의 반전이 매개변수의 반사 $s\\mapsto1-s$로 번역된다. 정리 2.3의 최종 표현 $\\xi(s)=\\tfrac1{s-1}-\\tfrac1s+\\int_1^\\infty(u^{-s/2-1/2}+u^{s/2-1})\\psi(u)du$에서 적분핵과 두 기본항이 모두 $s\\leftrightarrow1-s$에서 불변임이 눈으로 확인된다. 만약 $\\Gamma$ 인자를 떼어 $\\zeta$만 보면, 이 대칭은 $\\zeta(s)$와 $\\zeta(1-s)$ 사이에 $\\Gamma$·$\\pi$·$\\sin$ 인자들이 어지럽게 낀 형태로 나타나 은폐된다. 요컨대 감마 인자는 세타의 자기쌍대성을 흡수해 대칭을 표면으로 끌어올리는 역할을 한다."
         }
       ]
+    },
+    {
+      "section_title": "6.3.ex 연습문제 (Exercises) — 감마·제타 함수의 응용 도구상자",
+      "step1_big_picture": {
+        "context": "이 절은 6장에서 세운 기계 — 무한곱 표현(정리 1.7), 반사공식(정리 1.4), $\\Gamma(1/2)=\\sqrt\\pi$, $\\zeta$·$\\Gamma$·$\\vartheta$를 잇는 항등식(정리 2.2), 그리고 합-적분 비교(명제 2.5) — 를 실제로 굴려 보는 연습장이다. 문제들은 흩어진 계산이 아니라 하나의 큰 그림을 겨눈다: 가우스(Gauss)의 극한곱 표현, 르장드르(Legendre) 배가공식, 베타 함수(Beta function), 멜린 변환(Mellin transform), 그리고 $\\zeta$의 또 다른 적분 표현과 연속. 이전 소단원들의 결과(특히 보조정리 1.2의 함수방정식, 정리 1.4의 반사공식, 정리 1.7의 무한곱, 명제 2.5·따름정리 2.6)가 여기서 도구로 재사용된다.",
+        "hidden_intuition": "모든 문제를 관통하는 한 문장은 이것이다: '$\\Gamma$는 특수함수들의 보편 접착제다.' 베타 함수는 두 감마의 비 $\\Gamma(\\alpha)\\Gamma(\\beta)/\\Gamma(\\alpha+\\beta)$이고, 베셀 함수·초기하 함수·제타 함수는 모두 어떤 것의 멜린 변환 $\\int_0^\\infty f(t)t^{z-1}dt$ 또는 감마들의 조합으로 표현된다. 왜 하필 $\\Gamma$인가? 멜린 변환에서 $t^{z-1}$이라는 '연속적인 거듭제곱 무게'를 지수함수에 씌우면 자동으로 $\\Gamma$가 튀어나오기 때문이다($\\Gamma=\\mathcal{M}(e^{-t})$). 그래서 곱셈적 구조(척도변환 $t\\mapsto at$)를 가진 문제라면 어디서든 $\\Gamma$가 접착제로 등장한다. 이 관점을 쥐면 겉보기에 무관해 보이는 배가공식·베타 적분·$\\zeta$ 적분표현이 사실 같은 재료의 다른 조립임이 보인다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (멜린 변환 Mellin transform, 연습 10)",
+          "formal_statement": "함수 $f$에 대한 멜린 변환은 $$\\mathcal{M}(f)(z)=\\int_0^\\infty f(t)\\,t^{z-1}\\,dt$$ 로 정의된다($F(z)=\\mathcal{M}(f)(z)$로 쓴다). 감마 함수는 $e^{-t}$의 멜린 변환이다: $\\Gamma=\\mathcal{M}(e^{-t})$. 연습 10은 $0<\\mathrm{Re}(z)<1$에서 $$\\mathcal{M}(\\cos)(z)=\\Gamma(z)\\cos\\!\\Big(\\frac{\\pi z}{2}\\Big),\\qquad \\mathcal{M}(\\sin)(z)=\\Gamma(z)\\sin\\!\\Big(\\frac{\\pi z}{2}\\Big)$$ 임을 보이고, 이를 $-1<\\mathrm{Re}(z)<1$로 연속하여 $\\int_0^\\infty\\frac{\\sin x}{x}\\,dx=\\frac{\\pi}{2}$, $\\int_0^\\infty\\frac{\\sin x}{x^{3/2}}\\,dx=\\sqrt{2\\pi}$를 얻는다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (베타 함수 Beta function, 연습 7)",
+          "formal_statement": "$\\mathrm{Re}(\\alpha)>0$, $\\mathrm{Re}(\\beta)>0$에 대해 베타 함수는 $$B(\\alpha,\\beta)=\\int_0^1 (1-t)^{\\alpha-1}t^{\\beta-1}\\,dt$$ 로 정의된다. 치환 $t\\mapsto u/(1+u)$를 쓰면 동치인 표현 $B(\\alpha,\\beta)=\\int_0^\\infty \\frac{u^{\\alpha-1}}{(1+u)^{\\alpha+\\beta}}\\,du$ 도 얻는다(연습 7(b))."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (베타-감마 관계, 연습 7(a))",
+          "formal_statement": "$\\mathrm{Re}(\\alpha)>0$, $\\mathrm{Re}(\\beta)>0$이면 $$B(\\alpha,\\beta)=\\frac{\\Gamma(\\alpha)\\Gamma(\\beta)}{\\Gamma(\\alpha+\\beta)}.$$",
+          "idea_behind_proof": "핵심 착상은 두 감마 적분의 곱 $\\Gamma(\\alpha)\\Gamma(\\beta)$를 평면 위의 이중적분으로 보고, '반지름'과 '각도'에 해당하는 새 좌표 $u=t+s$, $r=t/(t+s)$로 갈아타는 것이다. 이 좌표에서 지수 $e^{-t-s}=e^{-u}$는 오직 $u$에만 의존하고, 나머지 $r$-부분이 정확히 베타 적분을 이룬다. 곱이 '반지름 적분($\\Gamma(\\alpha+\\beta)$) × 각도 적분($B$)'으로 분리되는 것이 관계식의 정체다.",
+          "proof_steps": [
+            "1단계: $\\Gamma(\\alpha)\\Gamma(\\beta)=\\int_0^\\infty\\int_0^\\infty t^{\\alpha-1}s^{\\beta-1}e^{-t-s}\\,dt\\,ds$.",
+            "2단계: 치환 $t=u(1-r)$, $s=ur$ ($u>0$, $0<r<1$)를 쓰면 $t+s=u$, 야코비안은 $u$이다. 대입하면 $$\\Gamma(\\alpha)\\Gamma(\\beta)=\\int_0^\\infty\\!\\!\\int_0^1 \\big(u(1-r)\\big)^{\\alpha-1}(ur)^{\\beta-1}e^{-u}\\,u\\,dr\\,du.$$",
+            "3단계: 정리하면 $=\\Big(\\int_0^\\infty u^{\\alpha+\\beta-1}e^{-u}du\\Big)\\Big(\\int_0^1(1-r)^{\\alpha-1}r^{\\beta-1}dr\\Big)=\\Gamma(\\alpha+\\beta)\\,B(\\alpha,\\beta)$. 양변을 $\\Gamma(\\alpha+\\beta)$로 나누면 결론이 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (가우스 극한곱 표현, 연습 1)",
+          "formal_statement": "$s\\ne0,-1,-2,\\dots$에서 $$\\Gamma(s)=\\lim_{n\\to\\infty}\\frac{n^s\\,n!}{s(s+1)\\cdots(s+n)}.$$",
+          "idea_behind_proof": "정리 1.7의 무한곱 $1/\\Gamma(s)=e^{\\gamma s}s\\prod_{n\\ge1}(1+s/n)e^{-s/n}$의 부분곱을 그대로 펼치는 것이 전부다. 지수 인자들을 모으면 $e^{s(\\gamma-\\sum_{k=1}^N 1/k)}$가 되는데, 오일러 상수의 정의 $\\sum_{k=1}^N 1/k=\\log N+\\gamma+o(1)$에 의해 이 인자가 정확히 $N^{-s}$로 수렴한다. 즉 무한곱의 '수렴 인자' $e^{-s/n}$들이 뭉쳐 $N^{-s}$를 만들어 내는 것이 이 공식의 비밀이다.",
+          "proof_steps": [
+            "1단계: 정리 1.7의 부분곱 $$P_N=e^{\\gamma s}\\,s\\prod_{k=1}^N\\Big(1+\\frac{s}{k}\\Big)e^{-s/k}=s\\,e^{s(\\gamma-\\sum_{k=1}^N 1/k)}\\prod_{k=1}^N\\frac{k+s}{k}.$$",
+            "2단계: $\\sum_{k=1}^N 1/k=\\log N+\\gamma+o(1)$이므로 $e^{s(\\gamma-\\sum_{k=1}^N 1/k)}\\to e^{-s\\log N}=N^{-s}$ (오차 $e^{o(1)s}\\to1$).",
+            "3단계: $s\\prod_{k=1}^N\\frac{k+s}{k}=\\dfrac{s(s+1)\\cdots(s+N)}{N!}$이므로 $\\dfrac{1}{\\Gamma(s)}=\\lim_{N\\to\\infty}\\dfrac{s(s+1)\\cdots(s+N)}{N!}\\,N^{-s}$. 역수를 취하면 $$\\Gamma(s)=\\lim_{N\\to\\infty}\\frac{N!\\,N^{s}}{s(s+1)\\cdots(s+N)}.\\qquad\\blacksquare$$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "이 도구상자가 여는 다른 문들",
+          "formal_statement": "같은 재료로 여러 특수함수가 조립된다: (연습 8) 베셀 함수(Bessel function) $J_\\nu(x)=\\frac{(x/2)^\\nu}{\\Gamma(\\nu+1/2)\\sqrt\\pi}\\int_{-1}^1 e^{ixt}(1-t^2)^{\\nu-1/2}dt$가 베타-감마 관계로 멱급수로 펼쳐지고 베셀 방정식을 만족한다; (연습 9) 초기하 함수(hypergeometric function) $F(\\alpha,\\beta,\\gamma;z)$가 베타형 적분표현을 얻어 $[1,\\infty)$를 자른 평면으로 연속된다; (연습 15–16, 문제 1) $\\zeta$가 $\\zeta(s)=\\frac{1}{\\Gamma(s)}\\int_0^\\infty\\frac{x^{s-1}}{e^x-1}dx$로 표현되어 베르누이 수(Bernoulli number)와 함께 또 다른 연속을 주며, $|\\zeta(1+it)|=O(\\log|t|)$를 얻는다. 반면 (연습 12) $1/\\Gamma(s)$는 $O(e^{c|s|})$ 형태의 자람 추정을 만족하지 '않음'이 확인된다($s=-k-\\tfrac12$에서 $|1/\\Gamma(s)|\\ge k!/\\pi$)."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "연습 5. 반사공식 $\\Gamma(s)\\Gamma(1-s)=\\pi/\\sin\\pi s$를 이용해, 모든 실수 $t$에 대해 $$|\\Gamma(\\tfrac12+it)|=\\sqrt{\\frac{2\\pi}{e^{\\pi t}+e^{-\\pi t}}}$$ 임을 증명하라.",
+          "hint": "$s=\\tfrac12+it$이면 $1-s=\\tfrac12-it=\\bar s$임을 관찰하라. $\\Gamma$는 실수축에서 실수값을 가지므로 슈바르츠 반사원리로 $\\Gamma(\\bar s)=\\overline{\\Gamma(s)}$이다. 또 $\\sin\\pi(\\tfrac12+it)=\\cos(i\\pi t)=\\cosh(\\pi t)$.",
+          "solution": "$s=\\tfrac12+it$로 두면 $1-s=\\tfrac12-it=\\bar s$이다. $\\Gamma$가 실수축에서 실수값을 가지므로 $\\Gamma(1-s)=\\Gamma(\\bar s)=\\overline{\\Gamma(s)}$이고, 따라서 $$\\Gamma(s)\\Gamma(1-s)=\\Gamma(s)\\overline{\\Gamma(s)}=|\\Gamma(\\tfrac12+it)|^2.$$ 한편 $\\sin\\pi s=\\sin\\!\\big(\\tfrac{\\pi}{2}+i\\pi t\\big)=\\cos(i\\pi t)=\\cosh(\\pi t)=\\tfrac{e^{\\pi t}+e^{-\\pi t}}{2}$. 반사공식에 대입하면 $$|\\Gamma(\\tfrac12+it)|^2=\\frac{\\pi}{\\cosh(\\pi t)}=\\frac{2\\pi}{e^{\\pi t}+e^{-\\pi t}}.$$ 양변에 양의 제곱근을 취하면 결론이 나온다. 특히 $t=0$이면 $|\\Gamma(\\tfrac12)|=\\sqrt{\\pi}$로, 앞서 얻은 $\\Gamma(\\tfrac12)=\\sqrt\\pi$와 일치한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 15. $\\mathrm{Re}(s)>1$에서 $$\\zeta(s)=\\frac{1}{\\Gamma(s)}\\int_0^\\infty\\frac{x^{s-1}}{e^x-1}\\,dx$$ 임을 증명하라.",
+          "hint": "기하급수 $\\dfrac{1}{e^x-1}=\\dfrac{e^{-x}}{1-e^{-x}}=\\sum_{n=1}^\\infty e^{-nx}$ ($x>0$)로 펼치고, 각 항에 $\\int_0^\\infty x^{s-1}e^{-nx}dx$가 감마의 척도불변성으로 무엇이 되는지 보라.",
+          "solution": "$x>0$에서 $\\dfrac{1}{e^x-1}=\\sum_{n=1}^\\infty e^{-nx}$이다. 이를 대입하고 (피적분함수가 음이 아니며 $\\mathrm{Re}(s)>1$에서 합·적분 교환이 정당화되므로) 순서를 바꾸면 $$\\int_0^\\infty\\frac{x^{s-1}}{e^x-1}\\,dx=\\sum_{n=1}^\\infty\\int_0^\\infty x^{s-1}e^{-nx}\\,dx.$$ 척도 치환 $y=nx$로 $\\int_0^\\infty x^{s-1}e^{-nx}dx=n^{-s}\\int_0^\\infty y^{s-1}e^{-y}dy=n^{-s}\\Gamma(s)$이다. 따라서 $$\\int_0^\\infty\\frac{x^{s-1}}{e^x-1}\\,dx=\\Gamma(s)\\sum_{n=1}^\\infty n^{-s}=\\Gamma(s)\\zeta(s).$$ 양변을 $\\Gamma(s)$로 나누면 결론이 나온다. (연습 16은 이 적분을 $\\int_0^1+\\int_1^\\infty$로 쪼개 $\\zeta$의 유리형 연속과 $s=1$의 단순극을 다시 얻는다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 3. 베타-감마 관계를 이용해 르장드르 배가공식(Legendre duplication formula) $$\\Gamma(s)\\,\\Gamma\\!\\big(s+\\tfrac12\\big)=\\sqrt\\pi\\,2^{1-2s}\\,\\Gamma(2s)$$ 를 증명하라.",
+          "hint": "$B(s,s)=\\dfrac{\\Gamma(s)^2}{\\Gamma(2s)}$를 적어 두고, 적분 $B(s,s)=\\int_0^1(t(1-t))^{s-1}dt$에 대칭 치환 $t=\\tfrac{1+u}{2}$를 적용해 $B(s,\\tfrac12)$와 연결하라.",
+          "solution": "베타-감마 관계로 $B(s,s)=\\dfrac{\\Gamma(s)\\Gamma(s)}{\\Gamma(2s)}$. 한편 $$B(s,s)=\\int_0^1\\big(t(1-t)\\big)^{s-1}dt.$$ 치환 $t=\\tfrac{1+u}{2}$ ($u\\in[-1,1]$, $dt=\\tfrac12du$)를 쓰면 $t(1-t)=\\tfrac{1-u^2}{4}$이므로 $$B(s,s)=\\int_{-1}^1\\Big(\\frac{1-u^2}{4}\\Big)^{s-1}\\frac{du}{2}=2^{1-2s}\\int_{-1}^1(1-u^2)^{s-1}\\,du=2^{1-2s}\\cdot 2\\int_0^1(1-u^2)^{s-1}du.$$ 마지막 적분에 $v=u^2$를 쓰면 $\\int_0^1(1-u^2)^{s-1}du=\\tfrac12\\int_0^1 v^{-1/2}(1-v)^{s-1}dv=\\tfrac12 B(\\tfrac12,s)=\\tfrac12\\dfrac{\\Gamma(\\tfrac12)\\Gamma(s)}{\\Gamma(s+\\tfrac12)}$. 정리하면 $$B(s,s)=2^{1-2s}\\,\\frac{\\Gamma(\\tfrac12)\\Gamma(s)}{\\Gamma(s+\\tfrac12)}=2^{1-2s}\\,\\frac{\\sqrt\\pi\\,\\Gamma(s)}{\\Gamma(s+\\tfrac12)}.$$ 두 표현을 같게 놓으면 $\\dfrac{\\Gamma(s)^2}{\\Gamma(2s)}=2^{1-2s}\\dfrac{\\sqrt\\pi\\,\\Gamma(s)}{\\Gamma(s+\\tfrac12)}$, 즉 $\\Gamma(s)\\Gamma(s+\\tfrac12)=\\sqrt\\pi\\,2^{1-2s}\\Gamma(2s)$. $\\;\\blacksquare$ (해석적 연속으로 모든 허용 $s$에서 성립.)"
+        },
+        {
+          "type": "ox",
+          "question": "연습 12. 어떤 상수 $c>0$에 대해 $1/\\Gamma(s)=O(e^{c|s|})$가 성립한다.",
+          "answer": "X",
+          "explanation": "성립하지 않는다. $s=-k-\\tfrac12$ ($k$는 양의 정수)로 두면 반사공식/무한곱 계산에서 $|1/\\Gamma(s)|\\ge k!/\\pi$가 나온다. $k!$은 $e^{c|s|}$처럼 지수적으로가 아니라 $e^{|s|\\log|s|}$처럼 초지수적으로 자라므로, 로그 인자를 뺀 $O(e^{c|s|})$ 추정은 불가능하다. 이것이 정리 1.6이 $1/\\Gamma$의 상계를 굳이 $c_1e^{c_2|s|\\log|s|}$로(지수에 로그를 달고) 준 이유이며, $\\sin\\pi s$와 달리 $1/\\Gamma$에는 더 엄격한 추정이 없다는 사실(6.1.2 말미)의 정량적 근거다."
+        },
+        {
+          "type": "ox",
+          "question": "베타 함수는 두 인수에 대해 대칭이다: $B(\\alpha,\\beta)=B(\\beta,\\alpha)$.",
+          "answer": "O",
+          "explanation": "베타-감마 관계 $B(\\alpha,\\beta)=\\dfrac{\\Gamma(\\alpha)\\Gamma(\\beta)}{\\Gamma(\\alpha+\\beta)}$의 우변이 $\\alpha,\\beta$ 교환에 대해 명백히 대칭이므로 $B$도 대칭이다. 적분 정의에서 직접 봐도 치환 $t\\mapsto1-t$가 $\\int_0^1(1-t)^{\\alpha-1}t^{\\beta-1}dt$를 $\\int_0^1 t^{\\alpha-1}(1-t)^{\\beta-1}dt$로 바꿔 같은 결론을 준다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 연습문제 집합의 여러 항등식(베타-감마 관계, 배가공식, $\\zeta$의 적분표현, 코사인·사인의 멜린 변환)이 왜 하나같이 감마 함수를 매개로 표현되는가? '멜린 변환'이라는 관점에서 그 공통 이유를 설명하라.",
+          "hint": "$\\Gamma(z)=\\int_0^\\infty e^{-t}t^{z-1}dt$가 곧 $e^{-t}$의 멜린 변환 $\\mathcal{M}(e^{-t})$임을, 그리고 멜린 변환이 척도변환 $t\\mapsto at$ 아래에서 어떻게 행동하는지를 떠올려라.",
+          "answer": "핵심은 멜린 변환 $\\mathcal{M}(f)(z)=\\int_0^\\infty f(t)t^{z-1}dt$가 곱셈적 구조(양의 실수의 척도변환군 $t\\mapsto at$)에 딱 맞는 변환이고, 그 '기준 함수'가 바로 $\\Gamma=\\mathcal{M}(e^{-t})$라는 점이다. 척도 치환 $t\\mapsto at$는 $\\mathcal{M}(f)(z)$에 인수 $a^{-z}$를 붙이는데(연습 15의 $\\int x^{s-1}e^{-nx}dx=n^{-s}\\Gamma(s)$가 그 예), 이 $a^{-z}$가 곧 제타의 항 $n^{-s}$나 거듭제곱 무게를 만들어 낸다. 따라서 (i) $\\zeta$는 $1/(e^x-1)=\\sum e^{-nx}$의 멜린 변환이라 $\\Gamma(s)\\zeta(s)$가 자연스럽게 묶이고, (ii) 베타 함수는 두 감마 적분의 곱을 '반지름×각도'로 분리할 때 반지름 방향이 $\\Gamma(\\alpha+\\beta)$가 되어 $\\Gamma$들의 비로 떨어지며, (iii) 배가공식은 같은 베타 적분을 두 가지 척도로 계산한 두 표현을 등치시킨 것이고, (iv) 코사인·사인의 멜린 변환은 $e^{-t}$ 대신 $e^{\\pm it}$를 넣어 $\\Gamma(z)$에 위상 $\\cos(\\pi z/2)$, $\\sin(\\pi z/2)$가 붙은 형태다. 요컨대 '연속적인 거듭제곱 무게 $t^{z-1}$로 적분한다'는 조작을 하는 순간 그 보편 상수로 $\\Gamma$가 등장하므로, 곱셈적/척도적 구조를 지닌 특수함수는 예외 없이 $\\Gamma$를 접착제로 갖게 된다."
+        }
+      ]
     }
   ]
 }

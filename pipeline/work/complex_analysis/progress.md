@@ -77,7 +77,7 @@
 | 041 | [x] | 6.1.1 Analytic continuation | section | `041__ComplexAnalysi__6_1_1_Analyticcontinuation.txt` |
 | 042 | [x] | 6.1.2 Further properties of Γ | section | `042__ComplexAnalysi__6_1_2_Furtherpropertiesof.txt` |
 | 043 | [x] | 6.2.1 Functional equation and analytic continuation | section | `043__ComplexAnalysi__6_2_1_Functionalequationandanaly.txt` |
-| 044 | [ ] | 6.3 Exercises | exercises | `044__ComplexAnalysi__6_3_Exercises__EX.txt` |
+| 044 | [x] | 6.3 Exercises | exercises | `044__ComplexAnalysi__6_3_Exercises__EX.txt` |
 | 045 | [ ] | 6.4 Problems | exercises | `045__ComplexAnalysi__6_4_Problems__EX.txt` |
 
 ## 7. The Zeta Function and Prime Number Theorem
