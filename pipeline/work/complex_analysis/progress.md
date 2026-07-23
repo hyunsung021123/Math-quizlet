@@ -31,7 +31,7 @@
 | 015 | [x] | 2.5.4 Schwarz reflection principle | section | `015__ComplexAnalysi__2_5_4_Schwarzreflectionprinciple.txt` |
 | 016 | [x] | 2.5.5 Runge’s approximation theorem | section | `016__ComplexAnalysi__2_5_5_Rungesapproximationtheorem.txt` |
 | 017 | [x] | 2.6 Exercises | exercises | `017__ComplexAnalysi__2_6_Exercises__EX.txt` |
-| 018 | [ ] | 2.7 Problems | exercises | `018__ComplexAnalysi__2_7_Problems__EX.txt` |
+| 018 | [x] | 2.7 Problems | exercises | `018__ComplexAnalysi__2_7_Problems__EX.txt` |
 
 ## 3. Meromorphic Functions and the Logarithm
 
