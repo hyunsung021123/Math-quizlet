@@ -103,7 +103,7 @@
 | 057 | [x] | 8.2.1 Automorphisms of the disc | section | `057__ComplexAnalysi__8_2_1_Automorphismsofthedisc.txt` |
 | 058 | [x] | 8.2.2 Automorphisms of the upper half-plane | section | `058__ComplexAnalysi__8_2_2_Automorphismsoftheupperhal.txt` |
 | 059 | [x] | 8.3.1 Necessary conditions and statement of the theorem | section | `059__ComplexAnalysi__8_3_1_Necessaryconditionsandstat.txt` |
-| 060 | [ ] | 8.3.2 Montel’s theorem | section | `060__ComplexAnalysi__8_3_2_Montelstheorem.txt` |
+| 060 | [x] | 8.3.2 Montel’s theorem | section | `060__ComplexAnalysi__8_3_2_Montelstheorem.txt` |
 | 061 | [ ] | 8.3.3 Proof of the Riemann mapping theorem | section | `061__ComplexAnalysi__8_3_3_ProofoftheRiemannmappingth.txt` |
 | 062 | [ ] | 8.4.1 Some examples | section | `062__ComplexAnalysi__8_4_1_Someexamples.txt` |
 | 063 | [ ] | 8.4.2 The Schwarz-Christoffel integral | section | `063__ComplexAnalysi__8_4_2_TheSchwarz-Christoffelinte.txt` |
