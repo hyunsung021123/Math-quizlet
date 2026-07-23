@@ -65,6 +65,12 @@
       "title": "Chapter 6. The Gamma and Zeta Functions",
       "file": "chapter_6_the_gamma_and_zeta_functions.json",
       "book": "Shakarchi — Complex Analysis"
+    },
+    {
+      "id": "7_the_zeta_function_and_prime_number_the",
+      "title": "7. The Zeta Function and Prime Number Theorem",
+      "file": "7_the_zeta_function_and_prime_number_the.json",
+      "book": "Shakarchi — Complex Analysis"
     }
   ]
 }

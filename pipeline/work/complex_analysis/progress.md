@@ -84,7 +84,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 046 | [ ] | 7.intro 개관 (도입부) | intro | `046__ComplexAnalysi__7_intro_개관도입부.txt` |
+| 046 | [x] | 7.intro 개관 (도입부) | intro | `046__ComplexAnalysi__7_intro_개관도입부.txt` |
 | 047 | [ ] | 7.1.intro 개관 (도입부) | intro | `047__ComplexAnalysi__7_1_intro_개관도입부.txt` |
 | 048 | [ ] | 7.1.1 Estimates for 1/ζ(s) | section | `048__ComplexAnalysi__7_1_1_Estimatesfor1s.txt` |
 | 049 | [ ] | 7.2.intro 개관 (도입부) | intro | `049__ComplexAnalysi__7_2_intro_개관도입부.txt` |
