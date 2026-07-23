@@ -67,7 +67,7 @@
 | 036 | [x] | 5.3.2 Example: the product formula for the sine function | section | `036__ComplexAnalysi__5_3_2_Exampletheproductformulafo.txt` |
 | 037 | [x] | 5.4 Weierstrass infinite products | section | `037__ComplexAnalysi__5_4_Weierstrassinfiniteproduct.txt` |
 | 038 | [x] | 5.5 Hadamard’s factorization theorem | section | `038__ComplexAnalysi__5_5_Hadamardsfactorizationtheo.txt` |
-| 039 | [ ] | 5.6 Exercises | exercises | `039__ComplexAnalysi__5_6_Exercises__EX.txt` |
+| 039 | [x] | 5.6 Exercises | exercises | `039__ComplexAnalysi__5_6_Exercises__EX.txt` |
 | 040 | [ ] | 5.7 Problems | exercises | `040__ComplexAnalysi__5_7_Problems__EX.txt` |
 
 ## 6. The Gamma and Zeta Functions
