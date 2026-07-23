@@ -98,7 +98,7 @@
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
 | 054 | [x] | 8.1.1 The disc and upper half-plane | section | `054__ComplexAnalysi__8_1_1_Thediscandupperhalf-plane.txt` |
-| 055 | [ ] | 8.1.2 Further examples | section | `055__ComplexAnalysi__8_1_2_Furtherexamples.txt` |
+| 055 | [x] | 8.1.2 Further examples | section | `055__ComplexAnalysi__8_1_2_Furtherexamples.txt` |
 | 056 | [ ] | 8.1.3 The Dirichlet problem in a strip | section | `056__ComplexAnalysi__8_1_3_TheDirichletprobleminastri.txt` |
 | 057 | [ ] | 8.2.1 Automorphisms of the disc | section | `057__ComplexAnalysi__8_2_1_Automorphismsofthedisc.txt` |
 | 058 | [ ] | 8.2.2 Automorphisms of the upper half-plane | section | `058__ComplexAnalysi__8_2_2_Automorphismsoftheupperhal.txt` |
