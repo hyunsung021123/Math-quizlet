@@ -1,0 +1,254 @@
+{
+  "chapter_info": {
+    "title": "Chapter 4. The Fourier Transform",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis, Ch. 4",
+    "overall_goal": "1차원 푸리에 변환(Fourier transform)과 복소해석 사이의 깊은 연결을 이해한다. 실축 위에서 정의된 함수의 정칙 확장 가능성과 그 푸리에 변환 $\\hat f$의 빠른(예: 지수적) 감소가 서로 대응한다는 큰 주제를 배우고, '등고선 이동(shifting the contour)'이라는 하나의 기법으로 $\\hat f$의 지수 감소·푸리에 역변환·포아송 합 공식(Poisson summation)을 증명하며, 종국에는 Paley–Wiener 정리에 도달한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.4 Exercises (연습문제)",
+      "step1_big_picture": {
+        "context": "이 연습문제 묶음은 4장의 세 기둥 — (1) 등고선 적분으로 푸리에 변환/역변환/포아송 합을 계산하는 기법(4.2), (2) '$\\hat f$의 받침·감소 ↔ $f$의 정칙성·성장'이라는 쌍대성(4.3의 Paley–Wiener), (3) 최대 절댓값 원리의 무계 영역판인 Phragmén–Lindelöf — 을 손으로 직접 굴려 보게 한다. 특히 유리함수의 푸리에 변환(연습 3·4·5), 포아송 합의 아름다운 응용(연습 6·7: $\\coth$와 $\\pi^2/\\sin^2$ 항등식), Paley–Wiener의 멱급수 판본(연습 8), 그리고 챕터 전체를 관통하는 '불확정성 원리'의 정점인 Hardy의 정리(연습 12)가 핵심이다.",
+        "hidden_intuition": "이 문제들의 밑바닥에 흐르는 하나의 감각은 '$f$와 $\\hat f$는 동시에 너무 작을(집중될) 수 없다'는 불확정성이다. 4.3의 Paley–Wiener가 그 극단(콤팩트 받침)을 다뤘다면, 여기 연습 10~12는 가우스 $e^{-\\pi x^2}$ — 자기 자신이 푸리에 변환인 유일한 균형점 — 를 축으로 그 정량적 경계를 재현한다: 실축에서 $e^{-\\pi A x^2}$, 주파수에서 $e^{-\\pi B\\xi^2}$ 로 둘 다 가우스보다 빨리 죽으려 하면($AB>1$) 함수는 아예 사라진다. 계산 문제(연습 3~7)들도 겉보기엔 실적분 항등식이지만, 실제로는 '극(유수)이 어느 반평면에 있느냐'가 $\\xi$의 부호별 답을 가르는 4.2·4.3의 논리를 그대로 쓴다 — 실해석으로는 보이지 않던 구조가 극의 위치라는 복소적 사실로 드러난다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "x / ξ",
+            "y": ""
+          },
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -2.6,
+                  0.05
+                ],
+                [
+                  -1.3,
+                  0.35
+                ],
+                [
+                  0,
+                  1.6
+                ],
+                [
+                  1.3,
+                  0.35
+                ],
+                [
+                  2.6,
+                  0.05
+                ]
+              ],
+              "color": "#2c6fbb"
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -2.6,
+                  0.05
+                ],
+                [
+                  -1.3,
+                  0.35
+                ],
+                [
+                  0,
+                  1.6
+                ],
+                [
+                  1.3,
+                  0.35
+                ],
+                [
+                  2.6,
+                  0.05
+                ]
+              ],
+              "dash": "5,3",
+              "color": "#c0392b"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -3,
+                0
+              ],
+              "to": [
+                3,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                1.85
+              ],
+              "text": "e^{-πx²}: f = f-hat"
+            }
+          ],
+          "caption": "연습 10~12의 축: 가우스 $e^{-\\pi x^2}$은 자기 자신이 푸리에 변환인 유일한 균형점이다. $f$와 $\\hat f$가 이보다 더 집중되려 하면(Hardy, $AB>1$) $f\\equiv0$."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "연습 1 (푸리에 변환의 단일성, uniqueness)",
+          "formal_statement": "$f$가 연속이고 적당한 감소를 가지며 $\\hat f(\\xi)=0$ for all $\\xi\\in\\mathbb{R}$ 이면 $f\\equiv0$이다.",
+          "idea_behind_proof": "핵심 발상은 $\\hat f$를 '위쪽에서 본 조각 $A$'와 '아래쪽에서 본 조각 $B$'로 쪼갠 뒤, $\\hat f=0$ 이 곧 두 조각이 실축에서 일치함을 뜻함을 관찰하는 것이다. 그러면 $A$(상반평면 정칙·유계)와 $B$(하반평면 정칙·유계)를 이어 붙인 함수가 정함수이자 유계가 되어 리우빌 정리로 상수, 나아가 $0$이 된다. 이는 4.3 정리 3.5의 '한쪽 받침 ↔ 반평면 정칙성' 아이디어를 단일성 증명으로 재활용한 것이다.",
+          "proof_steps": [
+            "고정된 실수 $t$에 대해 $A(z)=\\int_{-\\infty}^t f(x)e^{-2\\pi i z(x-t)}\\,dx$, $B(z)=-\\int_t^\\infty f(x)e^{-2\\pi i z(x-t)}\\,dx$ 를 둔다. $A$는 닫힌 상반평면에서, $B$는 닫힌 하반평면에서 정칙·유계 (지수 인수의 절댓값이 각 영역에서 $\\le1$).",
+            "실축에서 $A(\\xi)-B(\\xi)=\\int_{-\\infty}^\\infty f(x)e^{-2\\pi i\\xi(x-t)}\\,dx=e^{2\\pi i\\xi t}\\hat f(\\xi)=0$, 즉 $A(\\xi)=B(\\xi)$.",
+            "상반평면에서 $A$, 하반평면에서 $B$로 정의한 $F$는 실축에서 연속으로 이어지므로 정함수이고 유계 $\\Rightarrow$ 리우빌로 상수. $\\mathrm{Im}\\,z\\to+\\infty$에서 $A\\to0$ 이므로 $F\\equiv0$.",
+            "$A(0)=\\int_{-\\infty}^t f(x)\\,dx=F(0)=0$ 이 모든 $t$에서 성립 $\\Rightarrow$ 미분하여 (연속성) $f\\equiv0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "연습 5 (유리함수의 푸리에 변환과 지수 감소)",
+          "formal_statement": "$R(x)=P(x)/Q(x)$ 가 유리함수이고 $\\deg Q\\ge \\deg P+2$, $Q$는 실축에서 영점이 없다고 하자. 상반평면의 극을 $\\alpha_1,\\dots,\\alpha_k$ 라 하면, $\\xi<0$일 때 $$\\int_{-\\infty}^\\infty R(x)e^{-2\\pi i x\\xi}\\,dx=\\sum_{j=1}^k P_j(\\xi)\\,e^{-2\\pi i\\alpha_j\\xi}$$ ($P_j$는 $\\alpha_j$의 중복도보다 낮은 차수의 다항식). 특히 $Q$가 상반평면에 영점이 없으면 $\\xi<0$에서 이 적분은 $0$이다. 또 $\\int R(x)e^{-2\\pi i x\\xi}\\,dx=O(e^{-a|\\xi|})$ 이며, 최적의 $a$는 극의 허수부에서 결정된다.",
+          "idea_behind_proof": "$\\xi<0$이면 $e^{-2\\pi i z\\xi}=e^{-2\\pi i x\\xi}e^{2\\pi y\\xi}$ 가 $y\\to+\\infty$에서 죽으므로($\\xi<0$) 상반평면 반원으로 닫아 유수 정리를 쓴다. 단순극이면 유수가 $e^{-2\\pi i\\alpha_j\\xi}$ 상수배를 주지만, 중복극에서는 $f(z)=R(z)e^{-2\\pi i z\\xi}$ 를 미분해 유수를 뽑으므로 $\\xi$의 거듭제곱(다항식 $P_j$)이 튀어나온다. 감쇠율 $a$는 $e^{-2\\pi i\\alpha_j\\xi}$ 의 크기 $e^{2\\pi\\,\\mathrm{Im}(\\alpha_j)\\xi}$ 를 지배하는, 실축에 가장 가까운 극의 허수부가 결정한다 — 이는 4.3 Paley–Wiener의 '극의 위치 ↔ 감소율' 원리의 구체적 계산판이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "연습 12 (Hardy의 불확정성 정리, Hardy's uncertainty theorem)",
+          "formal_statement": "$f$가 $\\mathbb{R}$ 위에서 $f(x)=O(e^{-\\pi x^2})$ 이고 $\\hat f(\\xi)=O(e^{-\\pi\\xi^2})$ 를 만족하면 $f$는 $e^{-\\pi x^2}$ 의 상수배이다. 따라서 더 나아가 $f(x)=O(e^{-\\pi A x^2})$, $\\hat f(\\xi)=O(e^{-\\pi B\\xi^2})$ 이고 $AB>1$ ($A,B>0$)이면 $f\\equiv0$이다.",
+          "idea_behind_proof": "'$f$와 $\\hat f$가 동시에 너무 작을 수 없다'는 불확정성 원리의 가장 날카로운 정량화다. 균형점은 자기쌍대인 가우스 $e^{-\\pi x^2}$($AB=1$)이고, 그보다 조금이라도 더 집중되면($AB>1$) 함수가 소멸한다. 증명의 골격은 4.3의 Phragmén–Lindelöf를 정교하게 적용하는 것이다: $f$가 짝함수일 때 $g(z)=\\hat f(z^{1/2})$ 를 만들면 $g$는 실축에서 $e^{-\\pi x}$로 감소하고 부채꼴에서 $e^{\\pi|z|}$ 정도로 자라, $F(z)=g(z)e^{\\gamma z}$ 에 적절한 $\\gamma$와 각 $\\pi/\\beta$ 부채꼴로 Phragmén–Lindelöf를 걸고 $\\beta\\to\\pi$ 극한을 취하면 $e^{\\pi z}g(z)$ 가 상·하반평면에서 유계가 된다. 리우빌 정리로 이것이 상수 $\\Rightarrow$ $g$가, 따라서 $f$가 가우스의 상수배. 홀함수·일반 $f$는 짝/홀 분해로 환원한다.",
+          "proof_steps": [
+            "$f$가 짝함수면 $\\hat f$도 짝인 정함수로 확장되고, $g(z)=\\hat f(z^{1/2})$ 는 $x\\in\\mathbb{R}$에서 $|g(x)|\\le ce^{-\\pi x}$, $z=Re^{i\\theta}$에서 $|g(z)|\\le ce^{\\pi R\\sin^2(\\theta/2)}\\le ce^{\\pi|z|}$.",
+            "$F(z)=g(z)e^{\\gamma z}$, $\\gamma=i\\pi\\,e^{-i\\pi/(2\\beta)}/\\sin(\\pi/(2\\beta))$ 와 부채꼴 $0\\le\\theta\\le\\pi/\\beta<\\pi$ 에 Phragmén–Lindelöf 적용, $\\beta\\to\\pi$ 극한 $\\Rightarrow$ $e^{\\pi z}g(z)$ 가 닫힌 상반평면에서 유계. 하반평면도 동일.",
+            "리우빌 정리로 $e^{\\pi z}g(z)$ 는 상수 $\\Rightarrow$ $g(z)=$ 상수$\\cdot e^{-\\pi z}$ $\\Rightarrow$ $\\hat f(\\xi)=$ 상수$\\cdot e^{-\\pi\\xi^2}$, 되돌리면 $f(x)=$ 상수$\\cdot e^{-\\pi x^2}$.",
+            "$f$가 홀함수면 $\\hat f(0)=0$ 이므로 $\\hat f(z)/z$ 에 같은 논법을 적용해 $f=\\hat f=0$. 일반 $f$는 짝부분·홀부분으로 나눠 결론. 마지막으로 $AB>1$ 이면 스케일링으로 균형을 넘겨 $f\\equiv0$. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "연습 3. 등고선 적분으로, $a>0$, $\\xi\\in\\mathbb{R}$ 에 대해 $$\\frac{1}{\\pi}\\int_{-\\infty}^\\infty \\frac{a}{a^2+x^2}\\,e^{-2\\pi i x\\xi}\\,dx=e^{-2\\pi a|\\xi|}$$ 임을 보여라. (즉 포아송 핵 $P_a$의 푸리에 변환이 $e^{-2\\pi a|\\xi|}$.)",
+          "hint": "$e^{-2\\pi i z\\xi}=e^{-2\\pi i x\\xi}e^{2\\pi y\\xi}$ 이므로 $\\xi>0$이면 $y\\to-\\infty$에서 죽는다 — 하반평면 반원으로 닫아라. 극은 $z=\\pm ia$ 이고 하반평면 극은 $z=-ia$. $\\xi<0$은 상반평면으로 닫는다.",
+          "solution": "$g(z)=\\dfrac{1}{\\pi}\\dfrac{a}{a^2+z^2}e^{-2\\pi i z\\xi}$, 극은 $z=\\pm ia$ (단순극). $\\xi>0$: 하반평면의 큰 반원으로 닫으면(시계 방향) 반원 위 적분은 $\\deg$ 차 $\\ge2$ 라 $0$으로 가고, 둘러싸인 극은 $z=-ia$ 하나. 유수 $\\mathrm{Res}_{z=-ia}=\\dfrac{1}{\\pi}\\dfrac{a}{2z}\\Big|_{z=-ia}e^{-2\\pi i(-ia)\\xi}=\\dfrac{1}{\\pi}\\dfrac{a}{-2ia}e^{-2\\pi a\\xi}=\\dfrac{i}{2\\pi}e^{-2\\pi a\\xi}$. 시계 방향이므로 $\\int=-2\\pi i\\cdot\\dfrac{i}{2\\pi}e^{-2\\pi a\\xi}=e^{-2\\pi a\\xi}$. $\\xi<0$: 상반평면(반시계)으로 닫아 극 $z=ia$, 대칭적으로 $\\int=e^{2\\pi a\\xi}$. 두 경우를 합치면 $e^{-2\\pi a|\\xi|}$. (역으로 $\\int_{-\\infty}^\\infty e^{-2\\pi a|\\xi|}e^{2\\pi i\\xi x}\\,d\\xi=\\dfrac{1}{\\pi}\\dfrac{a}{a^2+x^2}$ 도 직접 적분으로 확인된다 — 두 함수는 푸리에 쌍.) 일반화: 실축에 가장 가까운 극의 허수부 $a$가 감쇠율 $2\\pi a$를 결정한다(연습 5).",
+          "visualization": {
+            "type": "custom_2d",
+            "axis_labels": {
+              "x": "Re",
+              "y": "Im"
+            },
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -3.2,
+                  0
+                ],
+                "to": [
+                  3.2,
+                  0
+                ]
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    2.6,
+                    0
+                  ],
+                  [
+                    1.85,
+                    -1.85
+                  ],
+                  [
+                    0,
+                    -2.6
+                  ],
+                  [
+                    -1.85,
+                    -1.85
+                  ],
+                  [
+                    -2.6,
+                    0
+                  ]
+                ],
+                "arrow": true,
+                "color": "#2c6fbb"
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  0,
+                  -1.2
+                ],
+                "color": "#c0392b"
+              },
+              {
+                "shape": "cross",
+                "at": [
+                  0,
+                  1.2
+                ],
+                "color": "#9aa0a6"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.6,
+                  -1.2
+                ],
+                "text": "-ia"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.55,
+                  1.2
+                ],
+                "text": "ia"
+              }
+            ],
+            "caption": "$\\xi>0$: 하반평면 반원(시계 방향)으로 닫아 극 $-ia$(붉은 ×)의 유수만 취한다. 상반평면 극 $ia$는 둘러싸지 않는다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 6. $a>0$에 대해 $$\\frac{1}{\\pi}\\sum_{n=-\\infty}^\\infty \\frac{a}{a^2+n^2}=\\sum_{n=-\\infty}^\\infty e^{-2\\pi a|n|}$$ 임을 보이고, 이 합이 $\\coth\\pi a$ 와 같음을 보여라.",
+          "hint": "연습 3에서 $f(x)=\\frac{1}{\\pi}\\frac{a}{a^2+x^2}$ 의 푸리에 변환이 $\\hat f(\\xi)=e^{-2\\pi a|\\xi|}$ 임을 얻었다. 포아송 합 공식(4.2 정리 2.4) $\\sum f(n)=\\sum\\hat f(n)$ 에 대입하라. 우변은 등비급수로 닫아라.",
+          "solution": "$f\\in\\mathfrak{F}$(극 $\\pm ia$, $0<b<a$ 띠에서 정칙·적당한 감소)이고 $\\hat f(\\xi)=e^{-2\\pi a|\\xi|}$ (연습 3). 포아송 합: $\\sum_n f(n)=\\sum_n\\hat f(n)$ 이 곧 $\\dfrac{1}{\\pi}\\sum_n\\dfrac{a}{a^2+n^2}=\\sum_n e^{-2\\pi a|n|}$. 우변 계산: $\\sum_{n\\in\\mathbb{Z}}e^{-2\\pi a|n|}=1+2\\sum_{n\\ge1}e^{-2\\pi a n}=1+2\\cdot\\dfrac{e^{-2\\pi a}}{1-e^{-2\\pi a}}=\\dfrac{1+e^{-2\\pi a}}{1-e^{-2\\pi a}}=\\coth(\\pi a)$. 따라서 $\\dfrac{1}{\\pi}\\sum_n\\dfrac{a}{a^2+n^2}=\\coth\\pi a$, 즉 $\\displaystyle\\sum_{n\\in\\mathbb{Z}}\\frac{a}{a^2+n^2}=\\pi\\coth\\pi a$. 일반화: 이는 $\\coth$의 부분분수 전개 $\\pi\\coth\\pi a=\\frac1a+\\sum_{n\\ge1}\\frac{2a}{a^2+n^2}$ 와 동일한 고전적 항등식이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 7(b). $\\mathrm{Im}(\\tau)>0$ 일 때 포아송 합을 $f(z)=(\\tau+z)^{-2}$ 에 적용하여 $$\\sum_{n=-\\infty}^\\infty \\frac{1}{(\\tau+n)^2}=\\frac{\\pi^2}{\\sin^2(\\pi\\tau)}$$ 을 유도하라.",
+          "hint": "$k=2$일 때 유수 계산으로 $\\hat f(\\xi)=0$ ($\\xi<0$), $\\hat f(\\xi)=(-2\\pi i)^2\\,\\xi\\,e^{2\\pi i\\xi\\tau}$ ($\\xi>0$)임을 이용하라(연습 7 힌트). 포아송 우변은 $q=e^{2\\pi i\\tau}$ ($|q|<1$)로 두고 $\\sum_{m\\ge1}m q^m=q/(1-q)^2$ 을 쓴다.",
+          "solution": "$k=2$: $\\hat f(m)=(-2\\pi i)^2 m\\,e^{2\\pi i m\\tau}=-4\\pi^2 m\\,q^m$ ($m\\ge1$, $q=e^{2\\pi i\\tau}$), $\\hat f(m)=0$ ($m\\le0$). 포아송 합 $\\sum_n f(n)=\\sum_m\\hat f(m)$: $$\\sum_{n\\in\\mathbb{Z}}\\frac{1}{(\\tau+n)^2}=-4\\pi^2\\sum_{m\\ge1}m q^m=-4\\pi^2\\cdot\\frac{q}{(1-q)^2}.$$ 이제 $1-q=1-e^{2\\pi i\\tau}=-e^{i\\pi\\tau}(e^{i\\pi\\tau}-e^{-i\\pi\\tau})=-2i\\,e^{i\\pi\\tau}\\sin(\\pi\\tau)$ 이므로 $(1-q)^2=-4e^{2\\pi i\\tau}\\sin^2(\\pi\\tau)$, 따라서 $\\dfrac{q}{(1-q)^2}=\\dfrac{e^{2\\pi i\\tau}}{-4e^{2\\pi i\\tau}\\sin^2(\\pi\\tau)}=-\\dfrac{1}{4\\sin^2(\\pi\\tau)}$. 대입하면 $-4\\pi^2\\cdot\\bigl(-\\tfrac{1}{4\\sin^2\\pi\\tau}\\bigr)=\\dfrac{\\pi^2}{\\sin^2(\\pi\\tau)}$. (c) 양변 모두 정수를 뺀 $\\tau$에서 정칙이고 해석적 연속으로, 정수가 아닌 임의의 복소수 $\\tau$로 확장된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "연습 8. $\\hat f$의 받침이 $[-M,M]$에 포함되고 $f(z)=\\sum_{n=0}^\\infty a_n z^n$ 이라 하자. $$a_n=\\frac{(2\\pi i)^n}{n!}\\int_{-M}^M \\hat f(\\xi)\\,\\xi^n\\,d\\xi$$ 임을 보이고, 그 결과 $\\limsup_{n\\to\\infty}(n!\\,|a_n|)^{1/n}\\le 2\\pi M$ 임을 유도하라.",
+          "hint": "Paley–Wiener 쉬운 방향으로 $f(z)=\\int_{-M}^M\\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ (정함수). $e^{2\\pi i\\xi z}$ 를 $z$의 멱급수로 전개하고 항별 적분하여 $a_n$을 읽어라. 이후 $|\\xi|\\le M$ 으로 눌러 계수 추정을 얻는다.",
+          "solution": "$\\hat f$ 콤팩트 받침이므로 $f(z)=\\int_{-M}^M\\hat f(\\xi)e^{2\\pi i\\xi z}\\,d\\xi$ 는 정함수(4.3 정리 3.3 쉬운 방향). $e^{2\\pi i\\xi z}=\\sum_{n\\ge0}\\dfrac{(2\\pi i\\xi z)^n}{n!}$ 를 대입·항별 적분하면 $$f(z)=\\sum_{n\\ge0}\\Bigl[\\frac{(2\\pi i)^n}{n!}\\int_{-M}^M\\hat f(\\xi)\\xi^n\\,d\\xi\\Bigr]z^n,$$ 멱급수 계수 비교로 $a_n=\\dfrac{(2\\pi i)^n}{n!}\\int_{-M}^M\\hat f(\\xi)\\xi^n\\,d\\xi$. 추정: $|a_n|\\le\\dfrac{(2\\pi)^n}{n!}\\int_{-M}^M|\\hat f(\\xi)|\\,|\\xi|^n\\,d\\xi\\le\\dfrac{(2\\pi)^n}{n!}M^n\\int_{-M}^M|\\hat f|\\,d\\xi=C\\dfrac{(2\\pi M)^n}{n!}$. 따라서 $n!\\,|a_n|\\le C(2\\pi M)^n$ 이고 $(n!|a_n|)^{1/n}\\le C^{1/n}\\,2\\pi M\\to 2\\pi M$. 즉 $\\limsup(n!|a_n|)^{1/n}\\le 2\\pi M$. 일반화: 역방향(연습 8 후반)도 성립해, 이 계수 성장 조건이 곧 지수형($|f(z)|\\le A_\\epsilon e^{2\\pi(M+\\epsilon)|z|}$)과 동치다 — Paley–Wiener의 멱급수 판본."
+        },
+        {
+          "type": "ox",
+          "question": "연습 10에 따르면, 정함수 $f$가 실축에서 $|f(x+iy)|\\le ce^{-ax^2+by^2}$ 처럼 실방향으로 가우스적으로 감소하면 그 푸리에 변환 $\\hat f$ 역시 같은 종류의 감소 $|\\hat f(\\xi+i\\eta)|\\le c'e^{-a'\\xi^2+b'\\eta^2}$ 를 갖는다.",
+          "answer": "O",
+          "explanation": "맞다. 이는 $e^{-\\pi x^2}$이 자기 자신이 푸리에 변환이라는 사실의 일반화다(연습 10). 증명은 $\\xi>0$에서 등고선을 $x-iy$ 로 옮겨 $\\hat f(\\xi)=O(e^{-2\\pi y\\xi}e^{by^2})$ 를 얻은 뒤 $y=d\\xi$(작은 $d$)로 최적화하면 $\\xi^2$ 차수의 가우스 감소가 나온다. 즉 '실방향 가우스 감소'라는 성질이 푸리에 변환 아래 보존된다."
+        },
+        {
+          "type": "ox",
+          "question": "Hardy의 정리(연습 12)에서 $f(x)=O(e^{-\\pi A x^2})$, $\\hat f(\\xi)=O(e^{-\\pi B\\xi^2})$ 이고 $AB<1$ 이면 $f\\equiv0$ 이다.",
+          "answer": "X",
+          "explanation": "부등호 방향이 틀렸다. $f\\equiv0$ 을 강제하는 조건은 $AB>1$ 이다. $AB=1$ 은 균형점으로 가우스 $e^{-\\pi Ax^2}$ 의 상수배가 살아남고, $AB<1$ 이면 $f$와 $\\hat f$가 가우스보다 '덜' 집중되어도 되므로 자명하지 않은 함수가 풍부하게 존재한다. 즉 두 함수를 가우스보다 더 좁히려는($AB>1$) 시도만이 불가능하다 — 이것이 불확정성 원리의 정량적 진술이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 연습문제 묶음(특히 연습 1·6·12)이 4장의 세 핵심 주제 — 등고선 적분, '받침·감소 ↔ 정칙성·성장'의 쌍대성, 불확정성 원리 — 를 각각 어떻게 구현하는지 정리하라.",
+          "hint": "각 연습이 어느 정리(4.2 정리 2.4, 4.3 정리 3.5·3.3·Phragmén–Lindelöf)를 재사용하는지, 그리고 '극이 어느 반평면에 있는가'가 왜 계산의 분기점이 되는지를 짚어라.",
+          "answer": "연습 1(단일성)은 '한쪽 반평면 정칙성'이라는 4.3 정리 3.5의 도구를 재활용한다: $\\hat f=0$ 을 '상반평면 조각 $A$'와 '하반평면 조각 $B$'가 실축에서 일치한다는 말로 번역해, 이어 붙인 정함수가 유계 $\\Rightarrow$ 리우빌 $\\Rightarrow$ $0$. 여기서 지수 인수의 크기가 어느 반평면에서 $\\le1$ 이 되는지가 조각을 상/하반평면에 배정하는 기준이며, 이는 '극(성질)의 위치가 부호별 거동을 가른다'는 챕터 공통 논리다. 연습 6($\\coth$ 항등식)은 등고선 적분(연습 3에서 유수로 $\\hat f=e^{-2\\pi a|\\xi|}$ 계산)과 포아송 합(4.2 정리 2.4)을 결합한다 — 실적분·급수 항등식이 사실은 극 $\\pm ia$의 유수와 포아송 쌍대성의 산물임을 보여, '실해석으론 안 보이는 구조가 복소적 사실로 드러난다'는 4장의 메시지를 압축한다. 연습 12(Hardy)는 불확정성 원리의 정점으로, Paley–Wiener(콤팩트 받침 ↔ 지수형)를 넘어 '가우스적 감소'라는 더 미세한 저울에서 $f$와 $\\hat f$의 동시 집중 한계($AB\\le1$)를 재고, 그 증명이 4.3의 Phragmén–Lindelöf를 정교하게 적용한 뒤 리우빌로 마무리한다는 점에서 챕터의 기법을 총동원한다. 세 문제 모두 밑바닥엔 '극/성장을 통제해 등고선을 옮기고, 그 결과 나타나는 유수·유계성으로 결론을 강제한다'는 하나의 골격이 흐른다."
+        }
+      ]
+    }
+  ]
+}
