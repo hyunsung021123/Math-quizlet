@@ -1,0 +1,156 @@
+{
+  "chapter_info": {
+    "title": "Chapter 5. Entire Functions",
+    "source": "Elias M. Stein & Rami Shakarchi, Complex Analysis",
+    "overall_goal": "복소평면 $\\mathbb{C}$ 전체에서 정칙인 정함수(entire function)를 지배하는 세 가지 질문 — 어디서 영점을 가질 수 있는가, 무한대에서 얼마나 빨리 자라는가, 영점만으로 함수가 얼마나 결정되는가 — 을 이해한다. 그 출발점으로, 함수의 원판 안 영점 개수와 원 위에서의 로그 평균을 하나로 묶는 Jensen의 공식(Jensen's formula)을 세운다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.7 문제 (Problems)",
+      "step1_big_picture": {
+        "context": "'문제(Problems)'는 연습문제보다 한 단계 깊은, 5장 이론의 확장과 다른 세계로의 연결을 담는다. 세 갈래가 두드러진다. (1) Jensen 공식(5.1)을 단위 원판의 유계 정칙함수에 적용해 영점의 '밀도 제약' $\\sum(1-|z_n|)<\\infty$을 얻고(문제 1), 이를 바탕으로 Weierstrass 곱의 원판판(版)인 Blaschke 곱(문제 2)을 세운다 — 정함수 이론이 유계 영역 이론으로 번역된다. (2) 성장 차수(5.2)를 Taylor 계수의 감소율과 직접 잇는 쌍대성(문제 3·4): $\\sum z^n/(n!)^\\alpha$의 차수가 $1/\\alpha$임을, 계수 $a_n$과 차수 $\\rho$의 정량 관계 $\\limsup|a_n|^{1/n}n^{1/\\rho}<\\infty$로 규명한다. (3) 이 모든 도구가 다음 장(감마·제타 함수)에서 어떻게 쓰이는지의 예고 — $1/\\Gamma(s)$는 정확히 $s=0,-1,-2,\\dots$에서 영점을 갖는 가장 단순한 정함수로, Weierstrass·Hadamard 구성의 직접적 산물이다.",
+        "hidden_intuition": "관통하는 두 아이디어. 첫째, '유계'는 '영점이 경계로 충분히 빨리 몰려야 함'을 강제한다 — 정함수에서 $|a_n|\\to\\infty$이 필요조건이었듯, 유계 정칙함수의 영점 $\\alpha_n$은 $\\sum(1-|\\alpha_n|)<\\infty$(경계까지 거리의 합이 유한)을 만족해야 한다. Jensen 공식이 '경계 위 평균이 유계 ⇒ 안쪽 영점의 로그 위치 합이 유계'라는 형태로 이 제약을 낳는다. 둘째, '얼마나 크냐(차수)'와 '계수가 얼마나 빨리 작아지냐'는 동전의 양면이다: 함수가 $e^{|z|^\\rho}$처럼 자라면 Cauchy 부등식 $|a_n|\\le\\min_r r^{-n}e^{ar^\\rho}$에서 반지름 $r$을 $n$에 맞춰 최적화하면 $|a_n|\\lesssim (n^{1/\\rho})^{-n}$처럼 계수가 초기하급수적으로 감소한다. $\\sum z^n/(n!)^\\alpha$가 차수 $1/\\alpha$인 것도 결국 $(n!)^\\alpha$의 감소 속도를 Stirling으로 재면 나온다. 요컨대 '경계 밀도 ↔ 유계성', '계수 감소 ↔ 성장 차수'라는 두 쌍대성이 문제 전체의 뼈대다.",
+        "visualization": {
+          "type": "custom_2d",
+          "axis_labels": {
+            "x": "Re",
+            "y": "Im"
+          },
+          "primitives": [
+            {
+              "shape": "circle",
+              "center": [
+                0,
+                0
+              ],
+              "r": 2
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.4,
+                0.5
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.7,
+                -0.6
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.85,
+                0.4
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.9,
+                -0.2
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1.6,
+                0.9
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1.88,
+                0.3
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1.95,
+                -0.15
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.3,
+                -1.9
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -0.2,
+                -1.96
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.5,
+                1.6
+              ],
+              "text": "|z|<1"
+            }
+          ],
+          "caption": "단위 원판의 유계 정칙함수의 영점 $\\alpha_n$(문제 1·2). 영점은 경계 $|z|=1$로 몰릴 수 있으나 반드시 $\\sum(1-|\\alpha_n|)<\\infty$ — 경계까지의 거리 합이 유한 — 을 만족한다. 이것이 정함수의 조건 $|a_n|\\to\\infty$에 대응하는 '원판판' 제약이며, Blaschke 곱의 수렴을 보장한다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "문제 길잡이 (핵심 착상과 배경)",
+          "formal_statement": "이 소단원은 5장 이론의 확장이다. 반복되는 도구: (1) Jensen 공식 — 유계성으로 원 위 로그 평균을 위에서 눌러 안쪽 영점 위치 합을 제약(문제 1); (2) Blaschke 인수 $\\frac{\\alpha-z}{1-\\bar\\alpha z}$ — 단위 원판을 자기 자신으로 보내는 유계판 '표준인수'(문제 2); (3) Cauchy 부등식 $|a_n|\\le r^{-n}\\max_{|z|=r}|F(z)|$의 반지름 최적화 — 성장 차수를 계수 감소율로 번역(문제 3·4); (4) Stirling 근사 $n!\\sim(n/e)^n$. 아래 체크포인트는 저자의 실제 문제(별표 $*$는 난도 높음)를 옮기고 풀이·개요를 붙인 것이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "[문제 1] $f$가 단위 원판에서 정칙이고 유계이며 항등적으로 $0$이 아니고, $z_1,z_2,\\dots$이 그 영점($|z_k|<1$)이라 하자. 그러면 $$\\sum_n(1-|z_n|)<\\infty$$ 임을 증명하라.",
+          "hint": "$f(0)\\neq0$이라 가정하고(아니면 $z^m$을 떼어냄) 반지름 $r<1$의 원에 Jensen 공식(5.1)을 적용하라. $|f|\\le M$이라 원 위 로그 평균이 $\\le\\log M$임을 쓰고, $r\\to1$의 극한을 취하라. 마지막에 $-\\log x\\ge 1-x$ ($0<x\\le1$)을 이용하라.",
+          "solution": "$f(0)\\neq0$이라 하자. $r<1$이고 $C_r$ 위에 영점이 없다고 하면 Jensen 공식은 $$\\log|f(0)|=\\sum_{|z_k|<r}\\log\\frac{|z_k|}{r}+\\frac{1}{2\\pi}\\int_0^{2\\pi}\\log|f(re^{i\\theta})|\\,d\\theta.$$ $|f|\\le M$이므로 적분항 $\\le\\log M$. 따라서 $$\\sum_{|z_k|<r}\\log\\frac{r}{|z_k|}=\\frac{1}{2\\pi}\\int\\log|f(re^{i\\theta})|\\,d\\theta-\\log|f(0)|\\le\\log M-\\log|f(0)|=:C,$$ 이 상한 $C$는 $r$에 무관하다. $r\\to1$로 보내면 $\\sum_k\\log\\frac{1}{|z_k|}\\le C<\\infty$. 그런데 $0<|z_k|\\le1$에서 $\\log\\frac{1}{|z_k|}\\ge 1-|z_k|$(함수 $-\\log x-(1-x)$이 $(0,1]$에서 감소하며 $x=1$에서 $0$)이므로 $$\\sum_n(1-|z_n|)\\le\\sum_n\\log\\frac{1}{|z_n|}\\le C<\\infty.\\qquad\\blacksquare$$ (교훈: 유계성이 원 위 평균의 상한이 되고, Jensen이 그것을 안쪽 영점의 위치 제약으로 옮긴다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[문제 2] (Blaschke 곱) $\\{\\alpha_n\\}$이 단위 원판 안의 수열로 $\\alpha_n\\neq0$이고 $\\sum_n(1-|\\alpha_n|)<\\infty$이라 하자. 곱 $$f(z)=\\prod_{n=1}^{\\infty}\\frac{\\alpha_n-z}{1-\\bar\\alpha_n z}\\cdot\\frac{|\\alpha_n|}{\\alpha_n}$$ 이 $|z|\\le r<1$에서 균등수렴하여 정확히 $\\{\\alpha_n\\}$을 영점으로 갖는 정칙함수를 정의하고 $|f(z)|\\le1$임을 (개요로) 보여라.",
+          "hint": "각 인수를 $1$과 비교하라: $1-\\frac{\\alpha_n-z}{1-\\bar\\alpha_n z}\\cdot\\frac{|\\alpha_n|}{\\alpha_n}$을 계산하면 $(1-|\\alpha_n|)$이 인수로 튀어나온다. 그다음 명제 3.2($\\sum c_n<\\infty$면 균등수렴)를 적용하라. $|f|\\le1$은 각 Blaschke 인수가 원판을 원판으로 보냄(최대 절댓값 $\\le1$)에서 온다.",
+          "solution": "개요. 각 인수 $B_n(z)=\\frac{\\alpha_n-z}{1-\\bar\\alpha_n z}\\cdot\\frac{|\\alpha_n|}{\\alpha_n}$에 대해 직접 계산하면 $$1-B_n(z)=\\frac{(1-\\bar\\alpha_n z)\\alpha_n-(\\alpha_n-z)|\\alpha_n|}{(1-\\bar\\alpha_n z)\\alpha_n},$$ 분자를 정리하면 $(1-|\\alpha_n|)$에 비례하는 항이 나와, $|z|\\le r$에서 (문제 2(a)의 부등식 $\\big|\\frac{\\alpha+|\\alpha|z}{(1-\\bar\\alpha z)\\alpha}\\big|\\le\\frac{1+r}{1-r}$을 이용해) $$|1-B_n(z)|\\le \\frac{1+r}{1-r}(1-|\\alpha_n|)=:c_n$$ 로 눌린다. 가정 $\\sum(1-|\\alpha_n|)<\\infty$에서 $\\sum c_n<\\infty$이므로 명제 3.2에 의해 곱이 $|z|\\le r$에서 균등수렴하여 정칙함수가 되고, 영점은 각 $B_n$의 유일한 영점 $z=\\alpha_n$뿐이다. 끝으로 각 Blaschke 인수 $\\frac{\\alpha_n-z}{1-\\bar\\alpha_n z}$은 단위 원판을 단위 원판으로 보내 $|z|<1$에서 절댓값 $\\le1$(경계에서 $=1$)이고 $\\frac{|\\alpha_n|}{\\alpha_n}$은 단위 복소수이므로, 부분곱의 절댓값이 $\\le1$이라 $|f(z)|\\le1$. (교훈: Blaschke 곱은 Weierstrass 곱의 유계 원판판 — 표준인수 자리에 원판 자기동형 Blaschke 인수가 들어가고, 조건 $|a_n|\\to\\infty$ 자리에 $\\sum(1-|\\alpha_n|)<\\infty$이 들어간다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[문제 3$^*$] $\\displaystyle F(z)=\\sum_{n=0}^{\\infty}\\frac{z^n}{(n!)^\\alpha}$ ($\\alpha>0$)가 성장 차수 $1/\\alpha$의 정함수임을 (개요로) 보여라.",
+          "hint": "항 $t_n=|z|^n/(n!)^\\alpha$을 Stirling $n!\\sim(n/e)^n$으로 근사해 $t_n\\approx(e^\\alpha|z|/n^\\alpha)^n$을 얻고, $n$에 대해 최대가 되는 지점 $n\\approx|z|^{1/\\alpha}$에서 최대항의 크기를 추정하라. 하한(차수가 정확히 $1/\\alpha$)은 계수-차수 관계(문제 4)를 쓰라.",
+          "solution": "개요. 계수는 $a_n=1/(n!)^\\alpha$. Stirling으로 $(n!)^\\alpha\\approx (n/e)^{\\alpha n}$이므로 $$t_n=\\frac{|z|^n}{(n!)^\\alpha}\\approx\\Big(\\frac{e^\\alpha|z|}{n^\\alpha}\\Big)^{n}.$$ $n$에 대해 $\\log t_n\\approx n(\\alpha+\\log|z|-\\alpha\\log n)$을 최대화하면 $n_*\\approx (e|z|^{1/\\alpha})/\\cdots\\sim|z|^{1/\\alpha}$에서 최대이고, 그 최대항의 로그는 $\\sim c\\,n_*\\sim c\\,|z|^{1/\\alpha}$. 항 수와 감소를 감안해도 $$|F(z)|\\le\\sum_n t_n\\le A\\,e^{c|z|^{1/\\alpha}},$$ 즉 성장 차수 $\\le 1/\\alpha$. 역방향(차수 $\\ge1/\\alpha$)은 계수-차수 쌍대성(문제 4)에서 나온다: $\\rho=1/\\alpha$은 $\\limsup|a_n|^{1/n}n^{1/\\rho}<\\infty$을 등호에 가깝게 만드는 값이며 $|a_n|^{1/n}=(n!)^{-\\alpha/n}\\approx (n/e)^{-\\alpha}$이라 $n^{1/\\rho}=n^\\alpha$과 곱해 유계가 되는 임계 $\\rho$가 정확히 $1/\\alpha$이다. 따라서 차수 $=1/\\alpha$. (특수 예: $\\alpha=1$이면 $F=e^z$, 차수 $1$; $\\alpha=1/2$이면 차수 $2$.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "[문제 4$^*$] $F(z)=\\sum_{n\\ge0}a_nz^n$이 유한 차수의 정함수라 하자. $|F(z)|\\le Ae^{a|z|^\\rho}$이면 $$\\limsup_{n\\to\\infty}|a_n|^{1/n}\\,n^{1/\\rho}<\\infty$$ 임을 (개요로) 보여라(계수 감소율이 성장 차수를 지배한다).",
+          "hint": "Cauchy 부등식 $|a_n|\\le r^{-n}\\max_{|z|=r}|F|\\le A r^{-n}e^{ar^\\rho}$에서 우변을 $r>0$에 대해 최소화하라. 함수 $r^{-n}e^{ar^\\rho}$의 최소점 $r_*$을 미분으로 찾고 대입하라.",
+          "solution": "개요. Cauchy 부등식으로 모든 $r>0$에서 $|a_n|\\le A\\,r^{-n}e^{ar^\\rho}$. 우변을 최소화하기 위해 $g(r)=-n\\log r+ar^\\rho$을 미분하면 $g'(r)=-n/r+a\\rho r^{\\rho-1}=0$, 즉 $r_*^\\rho=\\frac{n}{a\\rho}$, $r_*=\\big(\\frac{n}{a\\rho}\\big)^{1/\\rho}$. 대입하면 $$|a_n|\\le A\\,r_*^{-n}e^{ar_*^\\rho}=A\\Big(\\frac{a\\rho}{n}\\Big)^{n/\\rho}e^{n/\\rho}=A\\Big(\\frac{ea\\rho}{n}\\Big)^{n/\\rho}.$$ 양변을 $1/n$ 제곱하면 $|a_n|^{1/n}\\le A^{1/n}\\big(\\frac{ea\\rho}{n}\\big)^{1/\\rho}$, 곧 $|a_n|^{1/n}n^{1/\\rho}\\le A^{1/n}(ea\\rho)^{1/\\rho}$. $n\\to\\infty$에서 $A^{1/n}\\to1$이므로 $$\\limsup_{n\\to\\infty}|a_n|^{1/n}n^{1/\\rho}\\le(ea\\rho)^{1/\\rho}<\\infty.\\qquad\\blacksquare$$ (역명제(b): 이 계수 조건이 성립하면 임의의 $\\epsilon>0$에 대해 $|F(z)|\\le A_\\epsilon e^{a_\\epsilon|z|^{\\rho+\\epsilon}}$. 교훈: '성장 차수 $\\rho$'와 '계수가 $|a_n|\\sim n^{-n/\\rho}$로 감소'는 서로를 결정하는 쌍대 정보다.)"
+        },
+        {
+          "type": "ox",
+          "question": "Blaschke 곱은 단위 원판 위 유계 정칙함수에 대한 Weierstrass 곱의 유비물이며, 정함수에서의 조건 '$|a_n|\\to\\infty$' 자리에 조건 '$\\sum(1-|\\alpha_n|)<\\infty$'이 들어간다.",
+          "answer": "O",
+          "explanation": "맞다. Weierstrass 곱은 $\\mathbb{C}$ 전체에서 규정된 영점(집적점 없음, $|a_n|\\to\\infty$)을 갖는 정함수를 지었다. Blaschke 곱은 그 유계 원판판으로, 원판 자기동형 인수 $\\frac{\\alpha_n-z}{1-\\bar\\alpha_n z}$을 표준인수 대신 쓰고, 수렴·유계성을 보장하는 조건이 Blaschke 조건 $\\sum(1-|\\alpha_n|)<\\infty$(문제 1에서 유계 함수의 영점이 자동으로 만족)이다. 결과 함수는 정확히 그 영점만 갖고 $|f|\\le1$."
+        },
+        {
+          "type": "ox",
+          "question": "단위 원판 위의 유계 정칙함수(항등적 0 아님)는 원판 안에 영점을 아무렇게나 — 개수·위치에 제한 없이 — 가질 수 있다.",
+          "answer": "X",
+          "explanation": "제한이 있다. 문제 1이 보이듯 영점 $z_n$은 반드시 $\\sum_n(1-|z_n|)<\\infty$(Blaschke 조건)을 만족해야 한다 — 즉 영점이 경계 $|z|=1$로 '충분히 빨리' 몰려야 한다. 예컨대 영점이 경계에 너무 느리게 접근하면(거리의 합이 발산하면) 그런 유계 정칙함수는 존재할 수 없다. 이는 유계성이 Jensen 공식을 통해 영점 분포에 부과하는 근본 제약이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "[문제 4] 정함수의 '성장 차수 $\\rho$'와 'Taylor 계수 $a_n$의 감소율'이 왜 본질적으로 같은 정보인지, Cauchy 부등식이 이 쌍대성을 어떻게 매개하는지 설명하라.",
+          "hint": "Cauchy 부등식 $|a_n|\\le r^{-n}\\max_{|z|=r}|F|$에서, 함수가 크면($\\max|F|$ 큼) 계수 상한도 커지지만 $r^{-n}$이 작아진다는 상충을 어떻게 조율하는지 — 즉 각 $n$마다 '가장 유리한 반지름 $r$'을 고른다는 발상을 떠올려라.",
+          "answer": "핵심은 Cauchy 부등식 $|a_n|\\le r^{-n}\\max_{|z|=r}|F(z)|$이 모든 $r$에서 동시에 성립한다는 점이다. 함수의 성장 정보 $\\max_{|z|=r}|F|\\le Ae^{ar^\\rho}$을 넣으면 $|a_n|\\le A r^{-n}e^{ar^\\rho}$인데, 여기서 $r$을 키우면 $e^{ar^\\rho}$은 커지지만 $r^{-n}$은 작아지는 상충이 생긴다. 각 $n$에 대해 이 상한을 가장 작게 만드는 최적 반지름 $r_*=(n/a\\rho)^{1/\\rho}$을 고르면 — 즉 '$n$차 계수는 그 계수를 가장 날카롭게 잡아 주는 크기의 원에서 읽는다' — 계수 상한이 $|a_n|\\lesssim(n^{1/\\rho})^{-n}$처럼 나온다. 그래서 성장이 빠를수록($\\rho$ 크거나 $a$ 큼) 계수는 더 느리게 감소하고, 반대로 계수가 $n^{-n/\\rho}$로 감소하면 함수는 차수 $\\rho$로 자란다(문제 4(b)의 역명제). 즉 성장 차수는 함수의 '무한대에서의 크기'를 재고 계수 감소율은 함수의 '원점에서의 국소 데이터'를 재지만, Cauchy 부등식이 원 위 최대값을 통해 이 둘을 정량적으로 잇기에 서로를 완전히 결정한다. 문제 3의 $\\sum z^n/(n!)^\\alpha$(차수 $1/\\alpha$)이 이 쌍대성의 깔끔한 실례다 — 계수 $(n!)^{-\\alpha}$의 감소 속도가 곧 차수 $1/\\alpha$를 규정한다."
+        }
+      ]
+    }
+  ]
+}
