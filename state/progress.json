@@ -43,7 +43,8 @@
       "section:2": true,
       "section:3": true,
       "section:4": true,
-      "section:5": true
+      "section:5": true,
+      "section:6": true
     }
   },
   "lastPos": {
@@ -52,7 +53,7 @@
       "type": "section",
       "index": 7
     },
-    "cardIndex": 0
+    "cardIndex": 5
   },
-  "updatedAt": "2026-07-24T09:19:49.464Z"
+  "updatedAt": "2026-07-24T09:24:04.644Z"
 }
