@@ -1,0 +1,137 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.D.ex Exercises
+직전 소단원: 「3.D The Cohomology of SO(n)」
+[연습문제]
+302
+Chapter 3
+Cohomology
+There is a natural projection p : O(n)→Vn,k sending α ∈O(n) to the k frame
+consisting of the last k columns of α, which are the images under α of the last k
+standard basis vectors in Rn . This projection is onto, and the preimages of points are
+precisely the cosets αO(n−k), where we embed O(n−k) in O(n) as the orthogonal
+transformations of the ﬁrst n −k coordinates of Rn . Thus Vn,k can be viewed as the
+space O(n)/O(n −k) of such cosets, with the quotient topology from O(n). This is
+the same as the previously deﬁned topology on Vn,k since the projection O(n)→Vn,k
+is a surjection of compact Hausdorff spaces.
+When k < n the projection p : SO(n)→Vn,k is surjective, and Vn,k can also be
+viewed as the coset space SO(n)/SO(n−k). We can use this to induce a CW structure
+on Vn,k from the CW structure on SO(n). The cells are the sets of cosets of the form
+eISO(n −k) = ei1 ··· eimSO(n −k) for n > i1 > ··· > im ≥n −k, together with the
+coset SO(n −k) itself as a 0 cell of Vn,k . These sets of cosets are unions of cells of
+SO(n) since SO(n−k) consists of the cells eJ = ej1 ··· ejℓwith n−k > j1 > ··· > jℓ.
+This implies that Vn,k is the disjoint union of its cells, and the boundary of each cell
+is contained in cells of lower dimension, so we do have a CW structure.
+Since the projection SO(n)→Vn,k is a cellular map, the structure of the cellular
+chain complex of Vn,k can easily be deduced from that of SO(n). For example, the
+cellular chain complex of V2k+1,2 is just the complex C2k deﬁned earlier, while for
+V2k,2 the cellular boundary maps are all trivial. Hence the nonzero homology groups
+of Vn,2 are
+Hi(V2k+1,2; Z) =
+ Z
+for i = 0, 4k −1
+Z2
+for i = 2k −1
+Hi(V2k,2; Z) = Z
+for i = 0, 2k −2, 2k −1, 4k −3
+Thus SO(n) has the same homology and cohomology groups as the product space
+V3,2×V5,2× ··· ×V2k+1,2 when n = 2k+1, or as V3,2×V5,2× ··· ×V2k+1,2×S2k+1 when
+n = 2k + 2. However, our calculations show that SO(n) is distinguished from these
+products by its cup product structure with Z2 coefﬁcients, at least when n ≥5, since
+β4
+1 is nonzero in H4(SO(n); Z2) if n ≥5, while for the product spaces the nontrivial
+element of H1(−; Z2) must lie in the factor V3,2 , and H4(V3,2; Z2) = 0. When n = 4
+we have SO(4) homeomorphic to SO(3)×S3 = V3,2×S3 as we noted at the beginning
+of this section. Also SO(3) = V3,2 and SO(2) = S1 .
+Exercises
+1. Show that a topological group that has a CW structure is an orientable manifold.
+[Consider the homeomorphisms x , xg for a ﬁxed group element g.]
+2. Using the CW structure on SO(n), show that π1SO(n) ≈Z2 for n ≥3. Find a
+loop representing a generator, and describe how twice this loop is nullhomotopic.
+3. Compute the Pontryagin ring structure in H∗(SO(5); Z).
+
+Bockstein Homomorphisms
+Section 3.E
+303
+Homology and cohomology with coefﬁcients in a ﬁeld, particularly Zp with p
+prime, often have more structure and are easier to compute than with Z coefﬁcients.
+Of course, passing from Z to Zp coefﬁcients can involve a certain loss of information,
+a blurring of ﬁner distinctions.
+For example, a Zpn in integer homology becomes
+a pair of Zp ’s in Zp homology or cohomology, so the exponent n is lost with Zp
+coefﬁcients. In this section we introduce Bockstein homomorphisms, which in many
+interesting cases allow one to recover Z coefﬁcient information from Zp coefﬁcients.
+Bockstein homomorphisms also provide a small piece of extra internal structure to
+Zp homology or cohomology itself, which can be quite useful.
+We will concentrate on cohomology in order to have cup products available,
+but the basic constructions work equally well for homology. If we take a short ex-
+act sequence 0→G→H→K→0 of abelian groups and apply the covariant functor
+Hom(Cn(X), −), we obtain
+0 -→Cn(X; G) -→Cn(X; H) -→Cn(X; K) -→0
+which is exact since Cn(X) is free. Letting n vary, we have a short exact sequence of
+chain complexes, so there is an associated long exact sequence
+··· -→Hn(X; G) -→Hn(X; H) -→Hn(X; K) -→Hn+1(X; G) -→···
+whose ‘boundary’ map Hn(X; K)→Hn+1(X; G) is called a Bockstein homomorphism.
+We shall be interested primarily in the Bockstein β : Hn(X; Zm)→Hn+1(X; Zm) as-
+sociated to the coefﬁcient sequence 0→Zm
+m--→Zm2 -→Zm→0, especially when m is
+prime, but for the moment we do not need this assumption. Closely related to β is the
+Bockstein eβ : Hn(X; Zm)→Hn+1(X; Z) associated to 0→Z
+m--→Z -→Zm→0. From the
+natural map of the latter short exact sequence onto the former one, we obtain the re-
+lationship β = ρ eβ where ρ : H∗(X; Z)→H∗(X; Zm) is the homomorphism induced by
+the map Z→Zm reducing coefﬁcients mod m. Thus we have a commutative triangle
+in the following diagram, whose upper row is the exact sequence containing eβ.
+−−−−−→
+X
+H
+m
+n(
+)
+;
+β
+β
+Z
+−−−→
+−−−−−→
+−−−−−−−−→
+X
+H
+(
+)
+;Z
+∼
+ρ
+−−−−−→
+X
+H
+n(
+)
+;Z
+m
+m
+Z
+ρ
+n 1
++
+X
+H
+(
+)
+;Z
+n 1
++
+X
+H
+(
+)
+;
+n 1
++
+Example 3E.1. Let X be a K(Zm, 1), for example RP∞when m = 2 or an inﬁnite-
+dimensional lens space with fundamental group Zm for arbitrary m. From the ho-
+mology calculations in Examples 2.42 and 2.43 together with the universal coefﬁcient
+theorem or cellular cohomology we have Hn(X; Zm) ≈Zm for all n. Let us show that
+β : Hn(X; Zm)→Hn+1(X; Zm) is an isomorphism for n odd and zero for n even. If
+n is odd the vertical map ρ in the diagram above is surjective for X = K(Zm, 1), as

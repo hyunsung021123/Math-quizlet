@@ -1,7 +1,7 @@
 [문서 맥락]
 책: Algebraic Topology / 저자: Allen Hatcher
 챕터: 2. Homology
-현재 소단원: 2.intro 개관 (챕터 도입부)
+현재 소단원: 2.intro 개관 (도입부)
 직전 소단원: 「1.B.ex Exercises」
 [본문]
 The fundamental group π1(X) is especially useful when studying spaces of low

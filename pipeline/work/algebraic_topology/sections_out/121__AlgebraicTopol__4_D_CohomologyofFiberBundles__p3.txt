@@ -1,0 +1,95 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.D Cohomology of Fiber Bundles (분할 part 3)
+직전 소단원: 「4.C Minimal Cell Structures」
+[본문]
+446
+Chapter 4
+Homotopy Theory
+we compute the cohomology with Zp coefﬁcients for p an odd prime. The answer
+will again be a polynomial algebra, but this time on even-dimensional generators,
+depending on the parity of n. Consider ﬁrst the case that n is odd, say n = 2k + 1.
+There are two ﬁber bundles
+V2(R2k+1) -→E -→eG2k+1(R∞)
+V2(R∞) -→E -→eG2k−1(R∞)
+where E is the space of triples (P, v1, v2) with P an oriented (2k + 1) plane in R∞
+and v1 and v2 two orthogonal unit vectors in P . The projection map in the ﬁrst
+bundle is (P, v1, v2), P , and for the second bundle the projection sends (P, v1, v2)
+to the oriented (2k −1) plane in P orthogonal to v1 and v2 , with the orientation
+speciﬁed by saying for example that v1, v2 followed by a positively oriented basis
+for the orthogonal (2k −1) plane is a positively oriented basis for P . Both bundles
+are orientable since their base spaces eGn(R∞) are simply-connected, from the bundle
+SO(n)→Vn(R∞)→eGn(R∞).
+The ﬁber V2(R∞) of the second bundle is contractible, so E has the same coho-
+mology as eG2k−1(R∞). The ﬁber of the ﬁrst bundle has the same Zp cohomology as
+S4k−1 if p is odd, by the calculation at the end of §3.D. So if we assume inductively
+that H∗( eG2k−1(R∞); Zp) ≈Zp[p1, ··· , pk−1] with |pi| = 4i, then Proposition 4D.11
+above implies that H∗( eG2k+1(R∞); Zp) ≈Zp[p1, ··· , pk] where pk = e has dimension
+4k. The induction can start with eG1(R∞) which is just S∞since an oriented line in
+R∞contains a unique unit vector in the positive direction.
+To handle the case of eGn(R∞) with n = 2k even, we proceed just as in Exam-
+ple 4D.12, considering the bundles
+S2k−1 -→E -→eG2k(R∞)
+S∞-→E -→eG2k−1(R∞)
+By the case n odd we have H∗( eG2k−1(R∞); Zp) ≈Zp[p1, ··· , pk−1] with |pi| = 4i, so
+the corollary implies that H∗( eG2k(R∞); Zp) is a polynomial ring on these generators
+and also a generator in dimension 2k.
+Summarizing, for p an odd prime we have shown:
+H∗( eG2k+1(R∞); Zp) ≈Zp[p1, ··· , pk],
+|pi| = 4i
+H∗( eG2k(R∞); Zp) ≈Zp[p1, ··· , pk−1, e],
+|pi| = 4i, |e| = 2k
+The same result holds also with Q coefﬁcients. In fact, our proof applies for any
+coefﬁcient ring in which 2 has a multiplicative inverse, since all that is needed is that
+H∗(V2(R2k+1); R) ≈H∗(S4k−1; R). For a calculation of the cohomology of eGn(R∞)
+with Z coefﬁcients, see [VBKT]. It turns out that all torsion elements have order 2,
+and modulo this torsion the integral cohomology is again a polynomial ring on the
+generators pi and e. Similar results hold also for the cohomology of the unoriented
+Grassmann manifold Gn(R∞), but with the generator e replaced by pk when n = 2k.
+
+Cohomology of Fiber Bundles
+Section 4.D
+447
+Exercises
+1. By Exercise 35 in §4.2 there is a bundle S2→CP3→S4 . Let S2→Ek→S4 be the
+pullback of this bundle via a degree k map S4→S4 , k > 1. Use the Leray-Hirsch
+theorem to show that H∗(Ek; Z) is additively isomorphic to H∗(CP3; Z) but has a
+different cup product structure in which the square of a generator of H2(Ek; Z) is k
+times a generator of H4(Ek; Z).
+2.
+Apply the Leray–Hirsch theorem to the bundle S1→S∞/Zp→CP∞to compute
+H∗(K(Zp, 1); Zp) from H∗(CP∞; Zp).
+3. Use the Leray–Hirsch theorem as in Corollary 4D.3 to compute H∗(Vn(Ck); Z) ≈
+ΛZ[x2k−2n+1, x2k−2n+3, ··· , x2k−1] and similarly in the quaternionic case.
+4. For the ﬂag space Fn(Cn) show that H∗(Fn(Cn); Z) ≈Z[x1, ··· , xn]/(σ1, ··· , σn)
+where σi is the ith elementary symmetric polynomial.
+5. Use the Gysin sequence to show that for a ﬁber bundle Sk→Sm
+p--→Sn we must
+have k = n −1 and m = 2n −1. Then use the Thom isomorphism to show that the
+Hopf invariant of p must be ±1. [Hence n = 1, 2, 4, 8 by Adams’ theorem.]
+6. Show that if M is a manifold of dimension 2n for which there exists a ﬁber bundle
+S1→S2n+1→M , then M is simply-connected and H∗(M; Z) ≈H∗(CPn; Z) as rings.
+Conversely, if M is simply-connected and H∗(M; Z) ≈H∗(CPn; Z) as rings, show there
+is a bundle S1→E→M where E ≃S2n+1 . [When n > 1 there are examples where M
+is not homeomorphic to CPn .]
+7. Show that if a disk bundle Dn→E→B has a Thom class with Z coefﬁcients, then
+it is orientable.
+8.
+If E is the product bundle B×Dn with B a CW complex, show that the Thom
+space T(E) is homotopy equivalent to the n fold reduced suspension ΣnB , and
+that the Thom isomorphism specializes to the suspension isomorphism Hi(B; R) ≈
+eHn+i(ΣnB; R) given by the reduced cross product in §3.2.
+9. Show that the inclusion T n > U(n) of the n torus of diagonal matrices is homo-
+topic to the map T n→U(1) > U(n) sending an n tuple of unit complex numbers
+(z1, ··· , zn) to the 1×1 matrix (z1 ··· zn). Do the same for the diagonal subgroup of
+Sp(n). [Hint: Diagonal matrices in U(n) are compositions of scalar multiplication in
+n lines in Cn , and CPn−1 is connected.]
+10.
+Fill in the details of the following argument to show that every n×n matrix
+A with entries in H has an eigenvalue in H. (The usual argument over C involv-
+ing roots of the characteristic polynomial does not work due to the lack of a good
+quaternionic determinant function.) For t ∈[0, 1] and λ ∈S3 ⊂H, consider the
+matrix tλI + (1 −t)A. If A has no eigenvalues, this is invertible for all t . Thus the
+map S3→GLn(H), λ , λI , is nullhomotopic. But by the preceding problem and
+Exercise 10(b) in §3.C, this map represents n times a generator of π3GLn(H).

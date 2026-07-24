@@ -1,0 +1,721 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.L Steenrod Squares and Powers (분할 part 3)
+직전 소단원: 「4.K.ex Exercises」
+[본문]
+Steenrod Squares and Powers
+Section 4.L
+503
+ﬁber bundle terminology this subspace L∞⊂ΓX is a section of the bundle. Let ΛX
+denote the quotient ΓX/L∞obtained by collapsing the section L∞to a point. Note
+that the ﬁbers X∧p in ΓX are still embedded in the quotient ΛX since each ﬁber meets
+the section L∞in a single point.
+If we replace S∞by S1 in these deﬁnition, we get subspaces Γ 1X ⊂ΓX and
+Λ1X ⊂ΛX . All these spaces have natural CW structures if X is a CW complex having
+x0 as a 0 cell. Namely, L∞is given its standard CW structure with one cell in each
+dimension. This is lifted to a CW structure on S∞with p cells in each dimension, and
+then T freely permutes the product cells of S∞×X∧p so there is induced a quotient
+CW structure on ΓX . The section L∞⊂ΓX is a subcomplex, so the quotient ΛX
+inherits a CW structure from ΓX . For example, if the n skeleton of X is Sn with its
+usual CW structure, then the pn skeleton of ΛX is Spn with its usual CW structure.
+We remark also that Γ , Γ 1 , Λ, and Λ1 are functors: A map f : (X, x0)→(Y, y0)
+induces maps Γf : ΓX→ΓY , etc., in the evident way.
+For brevity we write H∗(−; Zp) simply as H∗(−). For n > 0 let Kn denote a CW
+complex K(Zp, n) with (n−1) skeleton a point and n skeleton Sn . Let ι ∈Hn(Kn) be
+the canonical fundamental class described in the discussion following Theorem 4.57.
+It will be notationally convenient to regard an element α ∈Hn(X) also as a map
+α : X→Kn such that α∗(ι) = α. Here we are assuming X is a CW complex.
+From §3.2 we have a reduced p fold cross product eH∗(X)⊗p→eH∗(X∧p) where
+eH∗(X)⊗p denotes the p fold tensor product of eH∗(X) with itself. This cross prod-
+uct map eH∗(X)⊗p→eH∗(X∧p) is an isomorphism since we are using Zp coefﬁcients.
+With this isomorphism in mind, we will use the notation α1 ⊗··· ⊗αp rather than
+α1× ··· ×αp for p fold cross products in eH∗(X∧p). In particular, for each element
+α ∈Hn(X), n > 0, we have its p fold cross product α⊗p ∈eH∗(X∧p). Our ﬁrst
+task will be to construct an element λ(α) ∈Hpn(ΛX) restricting to α⊗p in each ﬁber
+X∧p ⊂ΛX . By naturality it will sufﬁce to construct λ(ι) ∈Hpn(ΛKn).
+The key point in the construction of λ(ι) is the fact that T ∗(ι⊗p) = ι⊗p . In terms
+of maps K∧p
+n →Kpn , this says the composition ι⊗p T is homotopic to ι⊗p , preserving
+basepoints. Such a homotopy can be constructed as follows. The pn skeleton of K∧p
+n
+is (Sn)∧p = Spn , with T permuting the factors cyclically. Thinking of Sn as (S1)∧n ,
+the permutation T is a product of (p −1)n transpositions of adjacent factors, so T
+has degree (−1)(p−1)n on Spn . If p is odd, this degree is +1, so the restriction of T
+to this skeleton is homotopic to the identity, hence ι⊗p T is homotopic to ι⊗p on this
+skeleton. This conclusion also holds when p = 2, signs being irrelevant in this case
+since we are dealing with maps S2n→K2n and π2n(K2n) = Z2 . Having a homotopy
+ι⊗p T ≃ι⊗p on the pn skeleton, there are no obstructions to extending the homotopy
+over all higher-dimensional cells ei×(0, 1) since πi(Kpn) = 0 for i > pn.
+The homotopy ι⊗p T ≃ι⊗p : K∧p
+n →Kpn deﬁnes a map Γ 1Kn→Kpn since Γ 1X
+is the quotient of I×X∧p under the identiﬁcations (0, x) ∼(1, T(x)). The homo-
+
+504
+Chapter 4
+Homotopy Theory
+topy is basepoint-preserving, so the map Γ 1Kn→Kpn passes down to a quotient map
+λ1 : Λ1Kn→Kpn . Since Kn is obtained from Sn by attaching cells of dimension greater
+than n, ΛKn is obtained from Λ1Kn by attaching cells of dimension greater than
+pn+1. There are then no obstructions to extending λ1 to a map λ : ΛKn→Kpn since
+πi(Kpn) = 0 for i > pn.
+The map λ gives the desired element λ(ι) ∈Hpn(ΛKn) since the restriction of λ
+to each ﬁber K∧p
+n
+is homotopic to ι⊗p . Note that this property determines λ uniquely
+up to homotopy since the restriction map Hpn(ΛKn)→Hpn(K∧p
+n ) is injective, the
+pn skeleton of ΛKn being contained in K∧p
+n .
+We shall have occasion to use this
+argument again in the proof, so we refer to it as ‘the uniqueness argument.’
+For any α ∈Hn(X) let λ(α) be the composition ΛX
+Λα
+--→ΛKn
+λ--→Kpn . This
+restricts to α⊗p in each ﬁber X∧p since Λα restricts to α⊗p in each ﬁber.
+Now we are ready to deﬁne some cohomology operations.
+There is an inclu-
+sion L∞×X > ΓX as the quotient of the diagonal embedding S∞×X > S∞×X∧p ,
+(s, x) , (s, x, ··· , x). Composing with the quotient map ΓX→ΛX , we get a map
+∇: L∞×X→ΛX inducing ∇∗: H∗(ΛX)→H∗(L∞×X) ≈H∗(L∞)⊗H∗(X). For each
+α ∈Hn(X) the element ∇∗(λ(α)) ∈Hpn(L∞×X) may be written in the form
+∇∗(λ(α)) =
+X
+i ω(p−1)n−i ⊗θi(α)
+where ωj is a generator of Hj(L∞) and θi(α) ∈Hn+i(X). Thus θi increases dimen-
+sion by i. When p = 2 there is no ambiguity about ωj . For odd p we choose ω1 to
+be the class dual to the 1 cell of L∞in its standard cell structure, then we take ω2 to
+be the Bockstein βω1 and we set ω2j = ωj
+2 and ω2j+1 = ω1ωj
+2 .
+It is clear that θi is a cohomology operation since θi(α) = α∗(θi(ι)). For p = 2
+we set Sqi(α) = θi(α). For odd p we will show that θi = 0 unless i = 2k(p −1)
+or 2k(p −1) + 1. The operation P k will be deﬁned to be a certain constant times
+θ2k(p−1) , and θ2k(p−1)+1 will be a constant times βP k , for β the mod p Bockstein.
+Theorem 4L.12. The operations Sqi satisfy the properties (1)–(7).
+Proof: We have already observed that the θi ’s are cohomology operations, so property
+(1) holds. Because cohomology operations cannot decrease dimension, we have θi = 0
+for i < 0. Also, θi = 0 for i > (p −1)n since the factor ω(p−1)n−i vanishes in
+this case. The basic property that λ(α) restricts to α⊗p in each ﬁber implies that
+θ(p−1)n(α) = αp since ω0 = 1. This gives property (5).
+To show the additivity property (2) we will show λ(α + β) = λ(α) + λ(β) using
+the following diagram:
+∆
+∆
+×
+×
+λ
+λ
+Λ
+ι
+ι
+1
+1
+X
+n
+n
+Λ(
+)
+Λ(
+)
+Λ X
+X
+(
+)
+×
+Λ K
+K
+(
+)
+n
+ΛK
+×
+n
+ΛX
+ΛX
+×
+ΛK
+n
+ΛK
+pn
+K
+−−−−−−−−−→
+−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+α
+β
+Λ(
+)
+×
+Λ
+Λ
+α
+β
+⊗
+⊗
++
+ι
+ι
+1
+1
+(
+)
+⊗
+⊗
++
+λ
+λ
+1
+1
+⊗
+⊗
++
+
+Steenrod Squares and Powers
+Section 4.L
+505
+Here ∆is a generic symbol for diagonal maps x,(x, x). These relate cross product
+to cup product via ∆∗(ϕ ⊗ψ) = ϕ ⌣ψ. The two unlabeled vertical maps are induced
+by (s, x1, y1, ··· , xp, yp),(s, x1, ··· , xp, s, y1, ··· , yp). It is obvious that the central
+square in the diagram commutes, and also the left and upper right triangles. To show
+that the remaining triangle commutes it sufﬁces to show this when we restrict to
+the ﬁber (Kn×Kn)∧p by the uniqueness argument used earlier, since (Kn×Kn)∧p
+contains the pn skeleton of Λ(Kn×Kn).
+On the ﬁber the two routes to Kpn are
+ι⊗p ⊗1 + 1 ⊗ι⊗p and (ι ⊗1 + 1 ⊗ι)⊗p . These are equal since raising to the pth power
+is an additive homomorphism of the ﬁeld Zp .
+The composition ΛX→ΛKn is Λ(α + β), so the composition ΛX→Kpn across
+the top of the diagram is λ(α + β). Going from ΛX to Kpn across the bottom of the
+diagram gives λ(α) + λ(β) since the second and third steps of this composition give
+λ(α) ⊗1 + 1 ⊗λ(β) and ∆∗(ϕ ⊗ψ) = ϕ ⌣ψ. Thus λ(α + β) = λ(α) + λ(β), which
+implies that each θi is an additive homomorphism.
+Next we turn to the Cartan formula. For any prime p we will show that λ(α⌣β) =
+(−1)p(p−1)mn/2λ(α)λ(β) for m = |α| and n = |β|. This implies (3) when p = 2 since
+if we let ω = ω1 , hence ωj = ωj , then
+X
+i Sqi(α ⌣β) ⊗ωn+m−i = ∇∗ λ(α ⌣β)
+
+= ∇∗ λ(α) ⌣λ(β)
+
+= ∇∗ λ(α)
+ ⌣∇∗ λ(β)
+
+=
+X
+j Sqj(α) ⊗ωn−j ⌣
+X
+k Sqk(β) ⊗ωm−k
+=
+X
+i
+X
+j+k=i Sqj(α) ⌣Sqk(β)
+
+⊗ωn+m−i
+To obtain the formula λ(α ⌣β) = ±λ(α) ⌣λ(β) we use a diagram rather like the
+previous one:
+∆
+∆
+λ
+λ
+Λ
+ι
+ι
+X
+m
+m
+n
+Λ(
+)
+Λ(
+)
+Λ X
+X
+(
+)
+Λ K
+K
+(
+)
+m n
+ΛK
+m
+ΛX
+ΛX
+ΛK
+n
+ΛK
+pm
+pn
+K
+−−−−−−−−−→
+−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−−−−−−→
+−−−−−−−−−−−−−−−−−−−−−−→
+−−−−−→
+−−−−−→
+−−−−−→
+α
+β
+Λ(
+)
+Λ
+Λ
+α
+β
+⊗
+∧
+∧
+∧
+∧
+∧
+∧
+n
+ι
+ι
+m
+(
+)
+⊗
+n
+λ ι
+ι
+m
+(
+λ(
+)
+)⊗
+n
++
++
+The composition ΛX→Kpm+pn going across the top of the diagram is λ(α ⌣β)
+since the map ΛX→ΛKm+n is Λ(α ⌣β). The composition ΛX ∧ΛX→Kpm+pn is
+λ(α) ⊗λ(β) so the composition ΛX→Kpm+pn across the bottom of the diagram is
+λ(α) ⌣λ(β). Commutativity of the square and the upper two triangles is obvious
+from the deﬁnitions. It remains to see that the lower triangle commutes up to the sign
+(−1)p(p−1)mn/2 . Since (Km ∧Kn)∧p includes the (pm+pn) skeleton of Λ(Km ∧Kn),
+restriction to this ﬁber is injective on Hpm+pn . On this ﬁber the two routes around
+the triangle give (ιm ⊗ιn)⊗p and ι⊗p
+m ⊗ι⊗p
+n . These differ by a permutation that is the
+product of (p −1) + (p −2) + ··· + 1 = p(p −1)/2 transpositions of adjacent fac-
+tors.
+Since ιm and ιn have dimensions m and n, this permutation introduces a
+
+506
+Chapter 4
+Homotopy Theory
+sign (−1)p(p−1)mn/2 by the commutativity property of cup product. This ﬁnishes the
+veriﬁcation of the Cartan formula when p = 2.
+Before proceeding further we need to make an explicit calculation to show that
+Sq0 is the identity on H1(S1). Viewing S1 as the one-point compactiﬁcation of R,
+with the point at inﬁnity as the basepoint, the 2 sphere S1∧S1 becomes the one-point
+compactiﬁcation of R2 . The map T : S1 ∧S1→S1 ∧S1 then corresponds to reﬂecting
+R2 across the line x = y , so after a rotation of coordinates
+this becomes reﬂection of S2 across the equator. Hence Γ 1S1
+is obtained from the shell I×S2 by identifying its inner and
+outer boundary spheres via a reﬂection across the equator. The
+diagonal RP1×S1 ⊂Γ 1S1 is a torus, obtained from the equato-
+rial annulus I×S1 ⊂I×S2 by identifying the two ends via the
+identity map since the equator is ﬁxed by the reﬂection. This RP1×S1 represents the
+same element of H2(Γ 1S1; Z2) as the ﬁber sphere S1 ∧S1 since the upper half of the
+shell is a 3 cell whose mod 2 boundary in Γ 1S1 is the union of these two surfaces.
+For a generator α ∈H1(S1), consider the element ∇∗(λ(α)) in H2(RP∞×S1) ≈
+Hom(H2(RP∞×S1; Z2), Z2). A basis for H2(RP∞×S1; Z2) is represented by RP2×{x0}
+and RP1×S1 .
+A cocycle representing ∇∗(λ(α)) takes the value 0 on RP2×{x0}
+since RP∞×{x0} collapses to a point in ΛS1 and λ(α) lies in H2(ΛS1). On RP1×S1 ,
+∇∗(λ(α)) takes the value 1 since when λ(α) is pulled back to ΓS1 it takes the same
+value on the homologous cycles RP1×S1 and S1 ∧S1 , namely 1 by the deﬁning prop-
+erty of λ(α) since α ⊗α ∈H2(S1 ∧S1) is a generator. Thus ∇∗(λ(α)) = ω1 ⊗α and
+hence Sq0(α) = α by the deﬁnition of Sq0 .
+We use this calculation to prove that Sqi commutes with the suspension σ ,
+where σ is deﬁned by σ(α) = ε ⊗α ∈H∗(S1 ∧X) for ε a generator of H1(S1)
+and α ∈H∗(X). We have just seen that Sq0(ε) = ε. By (5), Sq1(ε) = ε2 = 0 and
+Sqi(ε) = 0 for i > 1.
+The Cartan formula then gives Sqi(σ(α)) = Sqi(ε ⊗α) =
+P
+j Sqj(ε) ⊗Sqi−j(α) = ε ⊗Sqi(α) = σ(Sqi(α)).
+From this it follows that Sq0 is the identity on Hn(Sn) for all n > 0. Since Sn is
+the n skeleton of Kn , this implies that Sq0 is the identity on the fundamental class
+ιn , hence Sq0 is the identity on all positive-dimensional classes.
+Property (7) is proved similarly: Sq1 coincides with the Bockstein β on the gener-
+ator ω ∈H1(RP2) since both equal ω2 . Hence Sq1 = β on the iterated suspensions
+of ω, and the n fold suspension of RP2 is the (n + 2) skeleton of Kn+1 .
+⊔⊓
+Theorem 4L.13. The Adem relations hold for Steenrod squares.
+Proof: The idea is to imitate the construction of ΛX using Zp×Zp in place of Zp .
+The Adem relations will then arise from the symmetry of Zp×Zp interchanging the
+two factors.
+
+Steenrod Squares and Powers
+Section 4.L
+507
+The group Zp×Zp acts on S∞×S∞via (g, h)(s, t) = (g(s), h(t)), with quotient
+L∞×L∞. There is also an action of Zp×Zp on X∧p2 , obtained by writing points of X∧p2
+as p2 tuples (xij) with subscripts i and j varying from 1 to p, and then letting the
+ﬁrst Zp act on the ﬁrst subscript and the second Zp act on the second. Factoring
+out the diagonal action of Zp×Zp on S∞×S∞×X∧p2 gives a quotient space Γ2X . This
+projects to L∞×L∞with a section, and collapsing the section gives Λ2X . The ﬁbers
+of the projection Λ2X→L∞×L∞are X∧p2 since the action of Zp×Zp on S∞×S∞is
+free. We could also obtain Λ2X from the product S∞×S∞×Xp2 by ﬁrst collapsing the
+subspace of points having at least one X coordinate equal to the basepoint x0 and
+then factoring out the Zp×Zp action.
+It will be useful to compare Λ2X with Λ(ΛX). The latter space is the quotient of
+S∞×(S∞×Xp)p in which one ﬁrst identiﬁes all points having at least one X coordi-
+nate equal to x0 and then one factors out by an action of the wreath product Zp ≀Zp ,
+the group of order pp+1 deﬁned by a split exact sequence 0→Zp
+p→Zp ≀Zp→Zp→0
+with conjugation by the quotient group Zp given by cyclic permutations of the p
+Zp factors of Zp
+p .
+In the coordinates (s, t1, x11, ··· , x1p, ··· , tp, xp1, ··· , xpp) the
+ith factor Zp of Zp
+p acts in the block (ti, xi1, ··· , xip), and the quotient Zp acts
+by cyclic permutation of the index i and by rotation in the s coordinate.
+There
+is a natural map Λ2X→Λ(ΛX) induced by (s, t, x11, ··· , x1p, ··· , xp1, ··· , xpp) ,
+(s, t, x11, ··· , x1p, ··· , t, xp1, ··· , xpp). In Λ2X one is factoring out by the action of
+Zp×Zp . This is the subgroup of Zp ≀Zp obtained by restricting the action of the quo-
+tient Zp on Zp
+p to the diagonal subgroup Zp ⊂Zp
+p , where this action becomes trivial
+so that one has the direct product Zp×Zp .
+Since it sufﬁces to prove that the Adem relations hold on the class ι ∈Hn(Kn),
+we take X = Kn . There is a map λ2 : Λ2Kn→Kp2n restricting to ι⊗p2 in each ﬁber.
+This is constructed by the same method used to construct λ. One starts with a map
+representing ι⊗p2 in a ﬁber, then extends this over the part of Λ2Kn projecting to the
+1 skeleton of L∞×L∞, and ﬁnally one extends inductively over higher-dimensional
+cells of Λ2Kn using the fact that Kp2n is an Eilenberg–MacLane space. The map λ2 ﬁts
+into the diagram at the right, where ∇2 is in-
+duced by the map (s, t, x),(s, t, x, ··· , x)
+and the unlabeled map is the one deﬁned
+×
+×
+2
+2
+2
+2
+n
+×
+L
+Λ
+n
+K
+K
+p n
+K
+(
+)
+×
+n
+ΛK
+n
+ΛK
+Λ(
+)
+−−−−−−−−−→
+−−−−−−−−−−→
+−−−−−−−−−−→
+−−−−−−−−→
+−−−→
+−−−→
+∞
+L
+∞
+L
+∞
+▽
+▽
+▽
+1
+1
+λ
+λ λ
+above. It is clear that the square commutes.
+Commutativity of the triangle up to homotopy follows from the fact that λ2 is uniquely
+determined, up to homotopy, by its restrictions to ﬁbers.
+The element ∇∗
+2 λ∗
+2 (ι) may be written in the form
+P
+r,s ωr ⊗ωs ⊗ϕrs , and we
+claim that the elements ϕrs satisfy the symmetry rela-
+tion ϕrs = (−1)rs+p(p−1)n/2ϕsr . To verify this we use
+the commutative diagram at the right where the map τ
+×
+2
+2
+n
+×
+Λ
+n
+K
+K
+−−−−−→
+−−−→
+−−−→
+L
+∞
+L
+∞
+▽
+×
+2
+2
+n
+×
+Λ
+n
+K
+K
+−−−−−→
+L
+∞
+L
+∞
+▽
+τ
+τ
+on the left switches the two L∞factors and the τ on
+
+508
+Chapter 4
+Homotopy Theory
+the right is induced by switching the two S∞factors of S∞×S∞×K∧p2
+n
+and permuting
+the Kn factors of the smash product by interchanging the two subscripts in p2 tuples
+(xij). This permutation is a product of p(p −1)/2 transpositions, one for each pair
+(i, j) with 1 ≤i < j ≤p, so in a ﬁber the class ι⊗p2 is sent to (−1)p(p−1)n/2ι⊗p2 .
+By the uniqueness property of λ2 this means that τ∗λ∗
+2 (ι) = (−1)p(p−1)n/2λ∗
+2 (ι).
+Commutativity of the square then gives
+(−1)p(p−1)n/2∇∗
+2 λ∗
+2 (ι) = ∇∗
+2 τ∗λ∗
+2 (ι) = τ∗∇∗
+2 λ∗
+2 (ι) =
+X
+r,s(−1)rsωs ⊗ωr ⊗ϕrs
+where the last equality follows from the commutativity property of cross products.
+The symmetry relation ϕrs = (−1)rs+p(p−1)n/2ϕsr follows by interchanging the in-
+dices r and s in the last summation.
+If we compute ∇∗
+2 λ∗
+2 (ι) using the lower route across the earlier diagram contain-
+ing the map λ2 , we obtain
+∇∗
+2 λ∗
+2 (ι) =
+X
+i ω(p−1)pn−i ⊗θi
+X
+j ω(p−1)n−j ⊗θj(ι)
+
+=
+X
+i,j ω(p−1)pn−i ⊗θi
+ ω(p−1)n−j ⊗θj(ι)
+
+Now we specialize to p = 2, so θi = Sqi for all i. The Cartan formula converts the
+last summation above into
+P
+i,j,k ω2n−i ⊗Sqk(ωn−j) ⊗Sqi−kSqj(ι). Plugging in the
+value for Sqk(ωn−j) computed in the discussion preceding Example 4L.3, we obtain
+P
+i,j,k
+
+n−j
+k
+
+ω2n−i ⊗ωn−j+k ⊗Sqi−kSqj(ι). To write this summation more symmetri-
+cally with respect to the two ω terms, let n −j + k = 2n −ℓ. Then we get
+X
+i,j,ℓ
+ n−j
+n+j−ℓ
+
+ω2n−i ⊗ω2n−ℓ⊗Sqi+ℓ−n−jSqj(ι)
+In view of the symmetry property of ϕrs , which becomes ϕrs = ϕsr for p = 2,
+switching i and ℓin this formula leaves it unchanged. Hence we get the relation
+(∗)
+X
+j
+ n−j
+n+j−ℓ
+
+Sqi+ℓ−n−jSqj(ι) =
+X
+j
+
+n−j
+n+j−i
+
+Sqi+ℓ−n−jSqj(ι)
+This holds for all n, i, and ℓ, and the idea is to choose these numbers so that the
+left side of this equation has only one nonzero term. Given integers r and s , let
+n = 2r −1 + s and ℓ= n + s , so that
+ n−j
+n+j−ℓ
+
+=
+
+2r −1−(j−s)
+j−s
+
+. If r is sufﬁciently large,
+this will be 0 unless j = s . This is because the dyadic expansion of 2r −1 consists
+entirely of 1’s, so the expansion of 2r −1−(j −s) will have 0’s in the positions where
+the expansion of j −s has 1’s, hence these positions contribute factors of
+
+0
+1
+
+= 0 to
+
+2r −1−(j−s)
+j−s
+
+. Thus with n and ℓchosen as above, the relation (∗) becomes
+SqiSqs(ι) =
+X
+j
+
+2r −1+s−j
+2r −1+s+j−i
+
+Sqi+s−jSqj(ι) =
+X
+j
+
+2r +s−j−1
+i−2j
+
+Sqi+s−jSqj(ι)
+where the latter equality comes from the general relation
+
+x
+y
+
+=
+
+x
+x−y
+
+.
+The ﬁnal step is to show that
+
+2r +s−j−1
+i−2j
+
+=
+
+s−j−1
+i−2j
+
+if i < 2s .
+Both of these
+binomial coefﬁcients are zero if i < 2j . If i ≥2j then we have 2j ≤i < 2s , so j < s ,
+
+Steenrod Squares and Powers
+Section 4.L
+509
+hence s −j −1 ≥0. The term 2r then makes no difference in
+
+2r +s−j−1
+i−2j
+
+if r is large
+since this 2r contributes only a single 1 to the dyadic expansion of 2r + s −j −1, far
+to the left of all the nonzero entries in the dyadic expansions of s −j −1 and i −2j .
+This gives the Adem relations for the classes ι of dimension n = 2r −1+s with r
+large. This implies the relations hold for all classes of these dimensions, by naturality.
+Since we can suspend repeatedly to make any class have dimension of this form, the
+Adem relations must hold for all cohomology classes.
+⊔⊓
+Steenrod Powers
+Our remaining task is to verify the axioms and Adem relations for the Steenrod
+powers for an odd prime p. Unfortunately this is quite a bit more complicated than
+the p = 2 case, largely because one has to be very careful in computing the many
+coefﬁcients in Zp that arise. Even for the innocent-looking axiom P 0 = 11 it will take
+three pages to calculate the normalization constants needed to make the axiom hold.
+One could wish that the whole process was a lot cleaner.
+Lemma 4L.14. θi = 0 unless i = 2k(p −1) or 2k(p −1) + 1.
+Proof: The group of automorphisms of Zp is the multiplicative group Z∗
+p of nonzero
+elements of Zp . Since p is prime, Zp is a ﬁeld and Z∗
+p is cyclic of order p−1. Let r be
+a generator of Z∗
+p . Deﬁne a map ϕ : S∞×X∧p→S∞×X∧p by ϕ(s, (xi)) = (sr , (xri))
+where subscripts are taken mod p and sr means raise each coordinate of s , regarded
+as a unit vector in C∞, to the r th power and renormalize the resulting vector to
+have unit length. Then if γ is a generator of the Zp action on S∞×X∧p , we have
+ϕ(γ(s, (xi))) = ϕ(e2π/ps, (xi+1)) = (e2rπ/psr, (xri+r)) = γr (ϕ(s, (xi))). This says
+that ϕ takes orbits to orbits, so ϕ induces maps ϕ : ΓX→ΓX and ϕ : ΛX→ΛX . Re-
+stricting to the ﬁrst coordinate, there is also an induced map ϕ : L∞→L∞. Taking
+X = Kn , these maps ﬁt into the diagram at the
+right. The square obviously commutes, and the
+×
+×
+n
+L
+Λ
+n
+K
+K
+pn
+K
+×
+n
+ΛK
+n
+K
+−−−−−−−→
+−−−−−−−→
+−−−−−−−→
+−−−−−−→
+−−−−−→
+−−−−−→
+∞
+L
+∞
+▽
+▽
+1
+1
+λ
+λ
+ϕ
+ϕ
+triangle commutes up to homotopy since it suf-
+ﬁces to verify this in the ﬁber X∧p , and here the
+map ϕ is an even permutation of the coordinates since it has even order p −1, so ϕ
+preserves ι⊗p .
+Commutativity of the diagram means that
+P
+i ω(p−1)n−i ⊗θi(ι) is invariant under
+ϕ∗⊗11. The map ϕ induces multiplication by r in π1(L∞), hence also in H1(L∞) and
+H1(L∞; Zp), sending ω1 to rω1 . Since ω2 was chosen to be the Bockstein of ω1 , it
+is also multiplied by r . We chose r to have order p −1 in Z∗
+p , so ϕ∗(ωℓ) = ωℓonly
+when the total number of ω1 and ω2 factors in ωℓis a multiple of p−1, that is, when
+ℓhas the form 2k(p −1) or 2k(p −1) −1. Thus in the formula
+P
+i ω(p−1)n−i ⊗θi(ι)
+we must have θi(ι) = 0 unless i is congruent to 0 or 1 mod 2(p −1).
+⊔⊓

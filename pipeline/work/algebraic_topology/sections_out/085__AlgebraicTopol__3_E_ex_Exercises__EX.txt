@@ -1,0 +1,125 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.E.ex Exercises
+직전 소단원: 「3.E Bockstein Homomorphisms」
+[연습문제]
+310
+Chapter 3
+Cohomology
+the preceding ﬁgure, occurs in the upper left corner as the subdiagram with labels 1
+through 4. This subdiagram has the symmetry of Poincar´e duality as well.
+From the diagram one can with some effort work out the cup product structure
+in H∗(SO(7); Z), but the answer is rather complicated, just as the diagram is:
+F[x, y, z, v, w]/(2x, 2v, x4, y4, z2, v2, w2,xz, vz, vw, y2w, x3y2v,
+y2z −x3v, xw −y2v −x3v)
+where x , y , z, v , w have dimensions 2, 3, 7, 7, 11, respectively. It is curious that
+the relation x3 = y2 in H∗(SO(5); Z) no longer holds in H∗(SO(7); Z).
+Exercises
+1. Show that H∗(K(Zm, 1); Zk) is isomorphic as a ring to H∗(K(Zm, 1); Zm)⊗Zk if k
+divides m. In particular, if m/k is even, this is ΛZk[x]⊗Zk[y].
+2.
+In this problem we will derive one half of the classiﬁcation of lens spaces up
+to homotopy equivalence, by showing that if Lm(ℓ1, ··· , ℓn) ≃Lm(ℓ′
+1, ··· , ℓ′
+n) then
+ℓ1 ··· ℓn ≡±ℓ′
+1 ··· ℓ′
+nkn mod m for some integer k.
+The converse is Exercise 29
+for §4.2.
+(a) Let L = Lm(ℓ1, ··· , ℓn) and let Z∗
+m be the multiplicative group of invertible ele-
+ments of Zm . Deﬁne t ∈Z∗
+m by the equation xyn−1 = tz where x is a generator
+of H1(L; Zm), y = β(x), and z ∈H2n−1(L; Zm) is the image of a generator of
+H2n−1(L; Z). Show that the image τ(L) of t in the quotient group Z∗
+m/±(Z∗
+m)n
+depends only on the homotopy type of L.
+(b) Given nonzero integers k1, ··· , kn , deﬁne a map ef : S2n−1→S2n−1 sending the
+unit vector (r1eiθ1, ··· , rneiθn) in Cn to (r1eik1θ1, ··· , rneiknθn). Show:
+(i)
+ef has degree k1 ··· kn .
+(ii)
+ef induces a quotient map f : L→L′ for L′ = Lm(ℓ′
+1, ··· , ℓ′
+n) provided that
+kjℓj ≡ℓ′
+j mod m for each j .
+(iii) f induces an isomorphism on π1 , hence on H1(−; Zm).
+(iv) f has degree k1 ··· kn , i.e., f∗is multiplication by k1 ··· kn on H2n−1(−; Z).
+(c) Using the f in (b), show that τ(L) = k1 ··· knτ(L′).
+(d) Deduce that if Lm(ℓ1, ··· , ℓn) ≃Lm(ℓ′
+1, ··· , ℓ′
+n), then ℓ1 ··· ℓn ≡±ℓ′
+1 ··· ℓ′
+nkn
+modm for some integer k.
+3.
+Let X be the smash product of k copies of a Moore space M(Zp, n) with p
+prime.
+Compute the Bockstein homomorphisms in H∗(X; Zp) and use this to de-
+scribe H∗(X; Z).
+4. Using the cup product structure in H∗(SO(5); Z), show that SO(5) is not homotopy
+equivalent to the product of any two CW complexes with nontrivial cohomology.
+
+Limits and Ext
+Section 3.F
+311
+It often happens that one has a CW complex X expressed as a union of an in-
+creasing sequence of subcomplexes X0 ⊂X1 ⊂X2 ⊂···. For example, Xi could be
+the i skeleton of X , or the Xi ’s could be ﬁnite complexes whose union is X . In situa-
+tions of this sort, Proposition 3.33 says that Hn(X; G) is the direct limit lim
+--→Hn(Xi; G).
+Our goal in this section is to show this holds more generally for any homology the-
+ory, and to derive the corresponding formula for cohomology theories, which is a bit
+more complicated even for ordinary cohomology with Z coefﬁcients. For ordinary
+homology and cohomology the results apply somewhat more generally than just to
+CW complexes, since if a space X is the union of an increasing sequence of subspaces
+Xi with the property that each compact set in X is contained in some Xi , then the
+singular complex of X is the union of the singular complexes of the Xi ’s, and so this
+gives a reduction to the CW case.
+Passing to limits can often result in nonﬁnitely generated homology and cohomol-
+ogy groups. At the end of this section we describe some of the rather subtle behavior
+of Ext for nonﬁnitely generated groups.
+Direct and Inverse Limits
+As a special case of the general deﬁnition in §3.3, the direct limit lim
+--→Gi of a
+sequence of homomorphisms of abelian groups G1
+α1
+----→G2
+α2
+----→G3 -→··· is deﬁned
+to be the quotient of the direct sum
+L
+i Gi by the subgroup consisting of elements of
+the form (g1, g2 −α1(g1), g3 −α2(g2), ···). It is easy to see from this deﬁnition that
+every element of lim
+--→Gi is represented by an element gi ∈Gi for some i, and two
+such representatives gi ∈Gi and gj ∈Gj deﬁne the same element of lim
+--→Gi iff they
+have the same image in some Gk under the appropriate composition of αℓ’s. If all
+the αi ’s are injective and are viewed as inclusions of subgroups, lim
+--→Gi is just
+S
+i Gi .
+Example 3F.1. For a prime p, consider the sequence Z
+p--→Z
+p--→Z -→··· with all
+maps multiplication by p. Then lim
+--→Gi can be identiﬁed with the subgroup Z[1/p]
+of Q consisting of rational numbers with denominator a power of p. More generally,
+we can realize any subgroup of Q as the direct limit of a sequence Z -→Z -→Z -→···
+with an appropriate choice of maps. For example, if the nth map is multiplication by
+n, then the direct limit is Q itself.
+Example 3F.2. The sequence of injections Zp
+p--→Zp2
+p--→Zp3 -→···, with p prime,
+has direct limit a group we denote Zp∞. This is isomorphic to Z[1/p]/Z, the subgroup
+of Q/Z represented by fractions with denominator a power of p.
+In fact Q/Z is
+isomorphic to the direct sum of the subgroups Z[1/p]/Z ≈Zp∞for all primes p. It is
+not hard to determine all the subgroups of Q/Z and see that each one can be realized
+as a direct limit of ﬁnite cyclic groups with injective maps between them. Conversely,
+every such direct limit is isomorphic to a subgroup of Q/Z.

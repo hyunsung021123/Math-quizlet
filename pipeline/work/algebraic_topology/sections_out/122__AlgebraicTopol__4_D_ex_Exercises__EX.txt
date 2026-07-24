@@ -1,0 +1,122 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.D.ex Exercises
+직전 소단원: 「4.D Cohomology of Fiber Bundles」
+[연습문제]
+Cohomology of Fiber Bundles
+Section 4.D
+447
+Exercises
+1. By Exercise 35 in §4.2 there is a bundle S2→CP3→S4 . Let S2→Ek→S4 be the
+pullback of this bundle via a degree k map S4→S4 , k > 1. Use the Leray-Hirsch
+theorem to show that H∗(Ek; Z) is additively isomorphic to H∗(CP3; Z) but has a
+different cup product structure in which the square of a generator of H2(Ek; Z) is k
+times a generator of H4(Ek; Z).
+2.
+Apply the Leray–Hirsch theorem to the bundle S1→S∞/Zp→CP∞to compute
+H∗(K(Zp, 1); Zp) from H∗(CP∞; Zp).
+3. Use the Leray–Hirsch theorem as in Corollary 4D.3 to compute H∗(Vn(Ck); Z) ≈
+ΛZ[x2k−2n+1, x2k−2n+3, ··· , x2k−1] and similarly in the quaternionic case.
+4. For the ﬂag space Fn(Cn) show that H∗(Fn(Cn); Z) ≈Z[x1, ··· , xn]/(σ1, ··· , σn)
+where σi is the ith elementary symmetric polynomial.
+5. Use the Gysin sequence to show that for a ﬁber bundle Sk→Sm
+p--→Sn we must
+have k = n −1 and m = 2n −1. Then use the Thom isomorphism to show that the
+Hopf invariant of p must be ±1. [Hence n = 1, 2, 4, 8 by Adams’ theorem.]
+6. Show that if M is a manifold of dimension 2n for which there exists a ﬁber bundle
+S1→S2n+1→M , then M is simply-connected and H∗(M; Z) ≈H∗(CPn; Z) as rings.
+Conversely, if M is simply-connected and H∗(M; Z) ≈H∗(CPn; Z) as rings, show there
+is a bundle S1→E→M where E ≃S2n+1 . [When n > 1 there are examples where M
+is not homeomorphic to CPn .]
+7. Show that if a disk bundle Dn→E→B has a Thom class with Z coefﬁcients, then
+it is orientable.
+8.
+If E is the product bundle B×Dn with B a CW complex, show that the Thom
+space T(E) is homotopy equivalent to the n fold reduced suspension ΣnB , and
+that the Thom isomorphism specializes to the suspension isomorphism Hi(B; R) ≈
+eHn+i(ΣnB; R) given by the reduced cross product in §3.2.
+9. Show that the inclusion T n > U(n) of the n torus of diagonal matrices is homo-
+topic to the map T n→U(1) > U(n) sending an n tuple of unit complex numbers
+(z1, ··· , zn) to the 1×1 matrix (z1 ··· zn). Do the same for the diagonal subgroup of
+Sp(n). [Hint: Diagonal matrices in U(n) are compositions of scalar multiplication in
+n lines in Cn , and CPn−1 is connected.]
+10.
+Fill in the details of the following argument to show that every n×n matrix
+A with entries in H has an eigenvalue in H. (The usual argument over C involv-
+ing roots of the characteristic polynomial does not work due to the lack of a good
+quaternionic determinant function.) For t ∈[0, 1] and λ ∈S3 ⊂H, consider the
+matrix tλI + (1 −t)A. If A has no eigenvalues, this is invertible for all t . Thus the
+map S3→GLn(H), λ , λI , is nullhomotopic. But by the preceding problem and
+Exercise 10(b) in §3.C, this map represents n times a generator of π3GLn(H).
+
+448
+Chapter 4
+Homotopy Theory
+In Theorem 4.58 in §4.3 we showed that Ωspectra deﬁne cohomology theories,
+and now we will prove the converse statement that all cohomology theories on the
+CW category arise in this way from Ωspectra.
+Theorem 4E.1. Every reduced cohomology theory on the category of basepointed
+CW complexes and basepoint-preserving maps has the form hn(X) = ⟨X, Kn⟩for
+some Ωspectrum {Kn}.
+We will also see that the spaces Kn are unique up to homotopy equivalence.
+This theorem gives another proof that ordinary cohomology is representable as
+maps into Eilenberg–MacLane spaces, since for the spaces Kn in an Ωspectrum rep-
+resenting eH∗(−; G) we have πi(Kn) = ⟨Si, Kn⟩= eHn(Si; R), so Kn is a K(G, n).
+Before getting into the proof of the theorem let us observe that coﬁbration se-
+quences, as constructed in §4.3, allow us to recast the deﬁnition of a reduced coho-
+mology theory in a slightly more concise form: A reduced cohomology theory on the
+category C whose objects are CW complexes with a chosen basepoint 0 cell and whose
+morphisms are basepoint-preserving maps is a sequence of functors hn , n ∈Z, from
+C to abelian groups, together with natural isomorphisms hn(X) ≈hn+1(ΣX) for all
+X in C, such that the following axioms hold for each hn :
+(i) If f ≃g : X→Y in the basepointed sense, then f ∗= g∗: hn(Y)→hn(X).
+(ii) For each inclusion A>X in C the sequence hn(X/A)→hn(X)→hn(A) is exact.
+(iii) For a wedge sum X =
+W
+α Xα with inclusions iα : Xα > X , the product map
+Q
+αi∗
+α : hn(X)→
+Q
+αhn(Xα) is an isomorphism.
+To see that these axioms sufﬁce to deﬁne a cohomology theory, the main thing to
+note is that the coﬁbration sequence A→X→X/A→ΣA→··· allows us to construct
+the long exact sequence of a pair, just as we did in the case of the functors hn(X) =
+⟨X, Kn⟩. In the converse direction, if we have natural long exact sequences of pairs,
+then by applying these to pairs of the form (CX, X) we get natural isomorphisms
+hn(X) ≈hn+1(ΣX). Note that these natural isomorphisms coming from coboundary
+maps of pairs (CX, X) uniquely determine the coboundary maps for all pairs (X, A)
+via the diagram at the right, where the maps from
+A
+h (
+)
+n
+h
+n 1(
+)
++
+CA/A
+h
+n 1(
+)
++
+CX/A
+h
+n 1(
+)
++
+X/A
+−−−−−→
+−−−−−→
+−−−−−−−−→
+−−−−−−−−−−−−−→
+−−−−−→
+≈
+hn(A) are coboundary maps of pairs and the dia-
+gram commutes by naturality of these coboundary
+maps. The isomorphism comes from a deforma-
+tion retraction of CX onto CA. It is easy to check that these processes for converting
+one deﬁnition of a cohomology theory into the other are inverses of each other.
+Most of the work in representing cohomology theories by Ωspectra will be in
+realizing a single functor hn of a cohomology theory as ⟨−, Kn⟩for some space Kn .

@@ -1,0 +1,380 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.3.2 Fibrations
+직전 소단원: 「4.3.1 The Homotopy Construction of Cohomology」
+[본문]
+Connections with Cohomology
+Section 4.3
+405
+The case R = Z is particularly simple. We can take Sm as the (m + 1) skeleton
+of Km , and similarly for Kn , so Km ∧Kn has Sm ∧Sn as its (m + n + 1) skeleton
+and we can obtain µ by extending the inclusion Sm ∧Sn = Sm+n > Km+n .
+It is not hard to prove the basic properties of cup product using this deﬁnition,
+and in particular the commutativity property becomes somewhat more transparent
+from this viewpoint. For example, when R = Z, commutativity just comes down to
+the fact that the map Sm ∧Sn→Sn ∧Sm switching the factors has degree (−1)mn
+when regarded as a map of Sm+n .
+Fibrations
+Recall from §4.2 that a ﬁbration is a map p : E→B having the homotopy lifting
+property with respect to all spaces. In a ﬁber bundle all the ﬁbers are homeomorphic
+by deﬁnition, but this need not be true for ﬁbrations. An example is the linear projec-
+tion of a 2 simplex onto one of its edges, which is a ﬁbration according to an exercise
+at the end of the section. The following result gives some evidence that ﬁbrations
+should be thought of as a homotopy-theoretic analog of ﬁber bundles:
+Proposition 4.61. For a ﬁbration p : E→B , the ﬁbers Fb = p−1(b) over each path
+component of B are all homotopy equivalent.
+Proof: A path γ : I→B gives rise to a homotopy gt : Fγ(0)→B with gt(Fγ(0)) = γ(t).
+The inclusion Fγ(0) > E provides a lift eg0 , so by the homotopy lifting property we
+have a homotopy egt : Fγ(0)→E with egt(Fγ(0)) ⊂Fγ(t) for all t . In particular, eg1 gives
+a map Lγ : Fγ(0)→Fγ(1) . The association γ , Lγ has the following basic properties:
+(a) If γ ≃γ′ rel ∂I , then Lγ ≃Lγ′ . In particular the homotopy class of Lγ is inde-
+pendent of the choice of the lifting egt of gt .
+(b) For a composition of paths γγ′ , Lγγ′ is homotopic to the composition Lγ′Lγ .
+From these statements it follows that Lγ is a homotopy equivalence with homotopy
+inverse Lγ , where γ is the inverse path of γ .
+Before proving (a), note that a ﬁbration has the homotopy lifting property for
+pairs (X×I, X×∂I) since the pairs (I×I, I×{0}∪∂I×I) and (I×I, I×{0}) are homeo-
+morphic, hence the same is true after taking products with X .
+To prove (a), let γ(s, t) be a homotopy from γ(t) to γ′(t), (s, t) ∈I×I . This
+determines a family gst : Fγ(0)→B with gst(Fγ(0)) = γ(s, t). Let eg0,t and eg1,t be lifts
+deﬁning Lγ and Lγ′ , and let egs,0 be the inclusion Fγ(0) > E for all s . Using the
+homotopy lifting property for the pair (Fγ(0)×I, Fγ(0)×∂I), we can extend these lifts
+to lifts egst for (s, t) ∈I×I . Restricting to t = 1 then gives a homotopy Lγ ≃Lγ′ .
+Property (b) holds since for lifts egt and eg′
+t deﬁning Lγ and Lγ′ we obtain a lift
+deﬁning Lγγ′ by taking eg2t for 0 ≤t ≤1/2 and eg′
+2t−1Lγ for 1/2 ≤t ≤1.
+⊔⊓
+One may ask whether ﬁbrations satisfy a homotopy analog of the local triviality
+property of ﬁber bundles. Observe ﬁrst that for a ﬁbration p : E→B , the restriction
+
+406
+Chapter 4
+Homotopy Theory
+p : p−1(A)→A is a ﬁbration for any subspace A ⊂B . So we can ask whether every
+point of B has a neighborhood U for which the ﬁbration p−1(U)→U is equivalent
+in some homotopy-theoretic sense to a projection U ×F→U . The natural notion of
+equivalence for ﬁbrations is deﬁned in the following way. Given ﬁbrations p1 : E1→B
+and p2 : E2→B , a map f : E1→E2 is called ﬁber-preserving if p1 = p2f , or in other
+words, f (p−1
+1 (b)) ⊂p−1
+2 (b) for all b ∈B . A ﬁber-preserving map f : E1→E2 is a
+ﬁber homotopy equivalence if there is a ﬁber-preserving map g : E2→E1 such that
+both compositions f g and gf are homotopic to the identity through ﬁber-preserving
+maps.
+A ﬁber homotopy equivalence can be thought of as a family of homotopy
+equivalences between corresponding ﬁbers of E1 and E2 . An interesting fact is that a
+ﬁber-preserving map that is a homotopy equivalence is a ﬁber homotopy equivalence;
+this is an exercise for §4.H.
+We will show that a ﬁbration p : E→B is locally ﬁber-homotopically trivial in the
+sense described above if B is locally contractible. In order to do this we ﬁrst digress
+to introduce another basic concept.
+Given a ﬁbration p : E→B and a map f : A→B , there is a pullback or induced
+ﬁbration f ∗(E)→A obtained by setting f ∗(E) = {(a, e) ∈A×E ||f (a) = p(e)}, with
+the projections of f ∗(E) onto A and E giving a commutative
+diagram as shown at the right. The homotopy lifting property
+−→
+−→
+−−−−→
+−−−−−→
+E
+A
+B
+E
+(
+)
+∗
+f
+f
+p
+holds for f ∗(E)→A since a homotopy gt : X→A gives the ﬁrst
+coordinate of a lift egt : X→f ∗(E), the second coordinate being
+a lifting to E of the composed homotopy f gt .
+Proposition 4.62. Given a ﬁbration p : E→B and a homotopy ft : A→B , the pull-
+back ﬁbrations f ∗
+0 (E)→A and f ∗
+1 (E)→A are ﬁber homotopy equivalent.
+Proof: Let F : A×I→B be the homotopy ft . The ﬁbration F∗(E)→A×I contains
+f ∗
+0 (E) and f ∗
+1 (E) over A×{0} and A×{1}. So it sufﬁces to prove the following: For
+a ﬁbration p : E→B×I , the restricted ﬁbrations Es = p−1(B×{s})→B are all ﬁber
+homotopy equivalent for s ∈[0, 1].
+To prove this assertion the idea is to imitate the construction of the homotopy
+equivalences Lγ in the proof of Proposition 4.61.
+A path γ : [0, 1]→I gives rise
+to a ﬁber-preserving map Lγ : Eγ(0)→Eγ(1) by lifting the homotopy gt : Eγ(0)→B×I ,
+gt(x) = (p(x), γ(t)), starting with the inclusion Eγ(0) > E . As before, one shows
+the two basic properties (a) and (b), noting that in (a) the homotopy Lγ ≃Lγ′ is ﬁber-
+preserving since it is obtained by lifting a homotopy ht : Eγ(0)×[0, 1]→B×I of the
+form ht(x, u) = (p(x), −). From (a) and (b) it follows that Lγ is a ﬁber homotopy
+equivalence with inverse Lγ .
+⊔⊓
+Corollary 4.63. A ﬁbration E→B over a contractible base B is ﬁber homotopy equiv-
+alent to a product ﬁbration B×F→B .
+
+Connections with Cohomology
+Section 4.3
+407
+Proof: The pullback of E by the identity map B→B is E itself, while the pullback by
+a constant map B→B is a product B×F .
+⊔⊓
+Thus we see that if B is locally contractible then any ﬁbration over B is locally
+ﬁber homotopy equivalent to a product ﬁbration.
+Pathspace Constructions
+There is a simple but extremely useful way to turn arbitrary mappings into ﬁ-
+brations. Given a map f : A→B , let Ef be the space of pairs (a, γ) where a ∈A
+and γ : I→B is a path in B with γ(0) = f (a). We topologize Ef as a subspace of
+A×BI , where BI is the space of mappings I→B with the compact-open topology; see
+the Appendix for the deﬁnition and basic properties of this topology, in particular
+Proposition A.14 which we will be using shortly.
+Proposition 4.64. The map p : Ef→B , p(a, γ) = γ(1), is a ﬁbration.
+Proof: Continuity of p follows from (a) of Proposition A.14 in the Appendix which
+says that the evaluation map BI ×I→B , (γ, s) , γ(s), is continuous.
+To verify the ﬁbration property, let a homotopy gt : X→B and a lift eg0 : X→Ef
+of g0 be given. Write eg0(x) = (h(x), γx) for h : X→A and γx : I→B . Deﬁne a lift
+egt : X→Ef by egt(x) = (h(x), γx g[0,t](x)), the second coordinate being the path γx
+followed by the path traced out by gs(x) for 0 ≤s ≤t . This composition of paths is
+deﬁned since g0(x) = p eg0(x) = γx(1). To check that egt is a continuous homotopy
+we regard it as a map X×I→Ef ⊂A×BI and then apply (b) of Proposition A.14 which
+in the current context asserts that continuity of a map X×I→A×BI is equivalent to
+continuity of the associated map X×I×I→A×B .
+⊔⊓
+We can regard A as the subspace of Ef consisting of pairs (a, γ) with γ the
+constant path at f (a), and Ef deformation retracts onto this subspace by restricting
+all the paths γ to shorter and shorter initial segments. The map p : Ef→B restricts
+to f on the subspace A, so we have factored an arbitrary map f : A→B as the com-
+position A > Ef→B of a homotopy equivalence and a ﬁbration. We can also think
+of this construction as extending f to a ﬁbration Ef→B by enlarging its domain to
+a homotopy equivalent space. The ﬁber Ff of Ef→B is called the homotopy ﬁber
+of f . It consists of all pairs (a, γ) with a ∈A and γ a path in B from f (a) to a
+basepoint b0 ∈B .
+If f : A→B is the inclusion of a subspace, then Ef is the space of paths in B
+starting at points of A. In this case a map (Ii+1, ∂Ii+1, Ji)→(B, A, x0) is the same as
+a map (Ii, ∂Ii)→(Ff , γ0) where γ0 is the constant path at x0 and Ff is the ﬁber of
+Ef over x0 . This means that πi+1(B, A, x0) can be identiﬁed with πi(Ff , γ0), hence
+the long exact sequences of homotopy groups of the pair (B, A) and of the ﬁbration
+Ef→B can be identiﬁed.
+
+408
+Chapter 4
+Homotopy Theory
+An important special case is when f is the inclusion of the basepoint b0 into B .
+Then Ef is the space PB of paths in B starting at b0 , and p : PB→B sends each path
+to its endpoint. The ﬁber p−1(b0) is the loopspace ΩB consisting of all loops in B
+based at b0 . Since PB is contractible by progressively truncating paths, the long exact
+sequence of homotopy groups for the path ﬁbration PB→B yields another proof that
+πn(X, x0) ≈πn−1(ΩX, x0) for all n.
+As we mentioned in the discussion of loopspaces earlier in this section, it is a
+theorem of [Milnor 1959] that the loopspace of a CW complex is homotopy equivalent
+to a CW complex. Milnor’s theorem is actually quite a bit more general than this,
+and implies in particular that the homotopy ﬁber of an arbitrary map between CW
+complexes has the homotopy type of a CW complex. One can usually avoid quoting
+these results by using CW approximations, though it is reassuring to know they are
+available if needed, or if one does not want to bother with CW approximations.
+If the ﬁbration construction f , Ef is applied to a map p : E→B that is already
+a ﬁbration, one might expect the resulting ﬁbration Ep→B to be closely related to
+the original ﬁbration E→B . This is indeed the case:
+Proposition 4.65. If p : E→B is a ﬁbration, then the inclusion E > Ep is a ﬁber ho-
+motopy equivalence. In particular, the homotopy ﬁbers of p are homotopy equivalent
+to the actual ﬁbers.
+Proof: We apply the homotopy lifting property to the homotopy gt : Ep→B , gt(e, γ) =
+γ(t), with initial lift eg0 : Ep→E , eg0(e, γ) = e. The lifting egt : Ep→E is then the ﬁrst
+coordinate of a homotopy ht : Ep→Ep whose second coordinate is the restriction of
+the paths γ to the interval [t, 1]. Since the endpoints of the paths γ are unchanged,
+ht is ﬁber-preserving. We have h0 = 11, h1(Ep) ⊂E , and ht(E) ⊂E for all t . If we let
+i denote the inclusion E > Ep , then ih1 ≃11 via ht and h1i ≃11 via ht ||E , so i is a
+ﬁber homotopy equivalence.
+⊔⊓
+We have seen that loopspaces occur as ﬁbers of ﬁbrations PB→B with con-
+tractible total space PB . Here is something of a converse:
+Proposition 4.66. If F→E→B is a ﬁbration or ﬁber bundle with E contractible,
+then there is a weak homotopy equivalence F→ΩB .
+Proof: If we compose a contraction of E with the projection p : E→B then we have
+for each point x ∈E a path γx in B from p(x) to a basepoint b0 = p(x0), where
+x0 is the point to which E contracts. This yields a map E→PB , x , γx , whose
+composition with the ﬁbration PB→B is p. By restriction this
+−
+→
+−
+→
+−−−→
+−−−→
+F
+B
+PB
+E −−−→
+−−−→
+B
+B
+Ω
+p
+==
+gives a map F→ΩB where F = p−1(b0), and the long exact
+sequence of homotopy groups for F→E→B maps to the long
+exact sequence for ΩB→PB→B . Since E and PB are contractible, the ﬁve-lemma
+implies that the map F→ΩB is a weak homotopy equivalence.
+⊔⊓
+
+Connections with Cohomology
+Section 4.3
+409
+Examples arising from ﬁber bundles constructed earlier in the chapter are O(n) ≃
+ΩGn(R∞), U(n) ≃ΩGn(C∞), and Sp(n) ≃ΩGn(H∞). In particular, taking n = 1
+in the latter two examples, we have S1 ≃ΩCP∞and S3 ≃ΩHP∞. Note that in all
+these examples it is a topological group that is homotopy equivalent to a loopspace.
+In [Milnor 1956] this is shown to hold in general: For each topological group G there
+is a ﬁber bundle G→EG→BG with EG contractible, hence by the proposition there
+is a weak equivalence G ≃ΩBG. There is also a converse statement: The loopspace
+of a CW complex is homotopy equivalent to a topological group.
+The relationship between X and ΩX has been much studied, particularly the case
+that ΩX has the homotopy type of a ﬁnite CW complex, which is of special interest
+because of the examples of the classical Lie groups such as O(n), U(n), and Sp(n).
+See [Kane 1988] for an introduction to this subject.
+It is interesting to see what happens when the process of forming homotopy
+ﬁbers is iterated. Given a ﬁbration p : E→B with ﬁber F = p−1(b0), we know that the
+inclusion of F into the homotopy ﬁber Fp is a homotopy equivalence. Recall that Fp
+consists of pairs (e, γ) with e ∈E and γ a path in B from p(e) to b0 . The inclusion
+F > E extends to a map i : Fp→E , i(e, γ) = e, and this map is obviously a ﬁbration.
+In fact it is the pullback via p of the path ﬁbration PB→B . This allows us to iterate,
+taking the homotopy ﬁber Fi with its map to Fp , and so on, as in the ﬁrst row of the
+following diagram:
+−−−−−→
+E
+F
+−−−−−→
+−→
+−→
+−→
+−→
+−→
+−−−−→
+−−−−→
+−−−−−→
+F
+−−−−−→
+F
+B
+B
+Ω
+E
+Ω
+p
+−−−−−→
+E
+−−−−−→
+B
+p
+Ωp
+i
+j
+p
+i
+−−−−−→
+−−−−−→Fj
+...
+...
+≃
+≃
+≃
+==
+==
+The actual ﬁber of i over a point e0 ∈p−1(b0) consists of pairs (e0, γ) with γ a
+loop in B at the basepoint b0 , so this ﬁber is just ΩB , and the inclusion ΩB > Fi
+is a homotopy equivalence. In the second row of the diagram the map ΩB→F is
+the composition ΩB > Fi→Fp→F where the last map is a homotopy inverse to the
+inclusion F > Fp , so the square in the diagram containing these maps commutes up
+to homotopy. The homotopy ﬁber Fi consists of pairs (γ, η) where η is a path in E
+ending at e0 and γ is a path in B from p(η(0)) to b0 . A homotopy inverse to the
+inclusion ΩB > Fi is the retraction Fi→ΩB sending (γ, η) to the loop obtained by
+composing the inverse path of pη with γ . These constructions can now be iterated
+indeﬁnitely.
+Thus we produce a sequence
+···→Ω2B→ΩF→ΩE→ΩB→F→E→B
+where any two consecutive maps form a ﬁbration, up to homotopy equivalence, and
+all the maps to the left of ΩB are obtained by applying the functor Ωto the later
+maps. The long exact sequence of homotopy groups for any ﬁbration in the sequence
+coincides with the long exact sequence for F→E→B , as the reader can check.
+
+410
+Chapter 4
+Homotopy Theory
+Postnikov Towers
+A Postnikov tower for a path-connected space X is a commutative
+diagram as at the right, such that:
+−−−−−−−−−−−→
+−−
+−−−−−−→
+−−−−−−−→
+−→
+−→
+−→
+X
+X1
+X2
+X3
+...
+(1) The map X→Xn induces an isomorphism on πi for i ≤n.
+(2) πi(Xn) = 0 for i > n.
+As we saw in Example 4.17, every connected CW complex X has a
+Postnikov tower, and this is unique up to homotopy equivalence by
+Corollary 4.19.
+If we convert the map Xn→Xn−1 into a ﬁbration, its ﬁber Fn is a K(πnX, n), as
+is apparent from a brief inspection of the long exact sequence of homotopy groups
+for the ﬁbration:
+πi+1(Xn)→πi+1(Xn−1)→πi(Fn)→πi(Xn)→πi(Xn−1)
+We can replace each map Xn→Xn−1 by a ﬁbration X′
+n→X′
+n−1 in succession, starting
+with X2→X1 and working upward. For the inductive step we con-
+−→
+X
+-
+n 1
+Xn
+−→
+X
+-
+n 1
+Xn
+′
+′
+>
+>
+vert the composition Xn→Xn−1 > X′
+n−1 into a ﬁbration X′
+n→X′
+n−1
+ﬁtting into the commutative diagram at the right. Thus we obtain a
+Postnikov tower satisfying also the condition
+(3) The map Xn→Xn−1 is a ﬁbration with ﬁber a K(πnX, n).
+To the extent that ﬁbrations can be regarded as twisted products, up to homotopy
+equivalence, the spaces Xn in a Postnikov tower for X can be thought of as twisted
+products of Eilenberg-MacLane spaces K(πn(X), n).
+For many purposes, a CW complex X can be replaced by one of the stages Xn in
+a Postnikov tower for X , for example if one is interested in homotopy or homology
+groups in only a ﬁnite range of dimensions. However, to determine the full homotopy
+type of X from its Postnikov tower, some sort of limit process is needed.
+Let us
+investigate this question is somewhat greater generality.
+Given a sequence of maps ···→X2→X1 , deﬁne their inverse limit lim
+←-- Xn to be
+the subspace of the product
+Q
+nXn consisting of sequences of points xn ∈Xn with
+xn mapping to xn−1 under the map Xn→Xn−1 . The corresponding algebraic notion
+is the inverse limit lim
+←-- Xn of a sequence of group homomorphisms ···→G2→G1 ,
+which is the subgroup of
+Q
+nGn consisting of sequences of elements gn ∈Gn with
+gn mapping to gn−1 under the homomorphism Gn→Gn−1 .
+Proposition 4.67. For an arbitrary sequence of ﬁbrations ···→X2→X1 the nat-
+ural map λ : πi(lim
+←-- Xn)→lim
+←-- πi(Xn) is surjective, and λ is injective if the maps
+πi+1(Xn)→πi+1(Xn−1) are surjective for n sufﬁciently large.
+Proof: Represent an element of lim
+←-- πi(Xn) by maps fn : (Si, s0)→(Xn, xn). Since
+the projection pn : Xn→Xn−1 takes [fn] to [fn−1], by applying the homotopy lifting

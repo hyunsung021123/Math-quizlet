@@ -1,0 +1,79 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.H.ex Exercises
+직전 소단원: 「3.H Local Coefficients」
+[연습문제]
+336
+Chapter 3
+Cohomology
+a, b ∈Z. This has complex conjugation a + bi , a −bi as a ring isomorphism. If
+M is nonorientable and connected we can use the homomorphism ω : π1(M)→{±1}
+that deﬁnes the bundle of groups MZ to build a bundle of rings E corresponding to
+the action of π1(M) on Z[i] given by γ(a + bi) = a + ω(γ)bi. The homology and
+cohomology groups of M with coefﬁcients in E depend only on the additive structure
+of Z[i] so they split as the direct sum of their real and imaginary parts, which are
+just the homology or cohomology groups with ordinary coefﬁcients Z and twisted
+coefﬁcients eZ, respectively. The fundamental class in Hn(M; eZ) constructed in Exam-
+ple 3H.3 can be viewed as a pure imaginary fundamental class [M] ∈Hn(M; E). Since
+cap product with [M] interchanges real and imaginary parts, we obtain:
+Theorem 3H.6. If M is a nonorientable closed connected n manifold then cap prod-
+uct with the pure imaginary fundamental class [M] gives isomorphisms Hk(M; Z) ≈
+Hn−k(M; eZ) and Hk(M; eZ) ≈Hn−k(M; Z).
+⊔⊓
+More generally this holds with Z replaced by other rings such as Q or Zp . There
+is also a version for noncompact manifolds using cohomology with compact supports.
+Exercises
+1. Compute H∗(S1; E) and H∗(S1; E) for E→S1 the nontrivial bundle with ﬁber Z.
+2.
+Compute the homology groups with local coefﬁcients Hn(M; MZ) for a closed
+nonorientable surface M .
+3. Let B(X; G) be the set of isomorphism classes of bundles of groups E→X with
+ﬁber G, and let E0→BAut(G) be the bundle corresponding to the ‘identity’ action
+ρ : Aut(G)→Aut(G). Show that the map [X, BAut(G)]→B(X, G), [f ] , f ∗(E0), is
+a bijection if X is a CW complex, where [X, Y] denotes the set of homotopy classes
+of maps X→Y .
+4. Show that if ﬁnite connected CW complexes X and Y are homotopy equivalent,
+then their universal covers eX and eY are proper homotopy equivalent.
+5. If X is a ﬁnite nonsimply-connected graph, show that Hn(X; Z[π1X]) is zero un-
+less n = 1, when it is the direct sum of a countably inﬁnite number of Z’s. [Use
+Proposition 3H.5 and compute Hn
+c ( eX) as lim
+--→Hn( eX, eX −Ti) for a suitable sequence
+of ﬁnite subtrees T1 ⊂T2 ⊂··· of eX with
+S
+i Ti = eX .]
+6. Show that homology groups Hℓf
+n (X; G) can be deﬁned using locally ﬁnite chains,
+which are formal sums
+P
+σ gσ σ of singular simplices σ : ∆n→X with coefﬁcients
+gσ ∈G, such that each x ∈X has a neighborhood meeting the images of only ﬁnitely
+many σ ’s with gσ ≠0. Develop this homology theory far enough to show that for
+a locally compact CW complex X , Hℓf
+n (X; G) can be computed using inﬁnite cellular
+chains
+P
+α gαen
+α .
+
+Homotopy theory begins with the homotopy groups πn(X), which are the nat-
+ural higher-dimensional analogs of the fundamental group. These higher homotopy
+groups have certain formal similarities with homology groups. For example, πn(X)
+turns out to be always abelian for n ≥2, and there are relative homotopy groups ﬁt-
+ting into a long exact sequence just like the long exact sequence of homology groups.
+However, the higher homotopy groups are much harder to compute than either ho-
+mology groups or the fundamental group, due to the fact that neither the excision
+property for homology nor van Kampen’s theorem for π1 holds for higher homotopy
+groups.
+In spite of these computational difﬁculties, homotopy groups are of great theo-
+retical signiﬁcance. One reason for this is Whitehead’s theorem that a map between
+CW complexes which induces isomorphisms on all homotopy groups is a homotopy
+equivalence. The stronger statement that two CW complexes with isomorphic homo-
+topy groups are homotopy equivalent is usually false, however. One of the rare cases
+when a CW complex does have its homotopy type uniquely determined by its homo-
+topy groups is when it has just a single nontrivial homotopy group. Such spaces,
+known as Eilenberg–MacLane spaces, turn out to play a fundamental role in algebraic
+topology for a variety of reasons. Perhaps the most important is their close connec-
+tion with cohomology: Cohomology classes in a CW complex correspond bijectively
+with homotopy classes of maps from the complex into an Eilenberg–MacLane space.

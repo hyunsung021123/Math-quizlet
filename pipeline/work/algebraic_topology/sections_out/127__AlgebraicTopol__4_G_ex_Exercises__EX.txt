@@ -1,0 +1,132 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.G.ex Exercises
+직전 소단원: 「4.G Gluing Constructions」
+[연습문제]
+460
+Chapter 4
+Homotopy Theory
+Let us conclude this section with a few comments about terminology. For some
+diagrams of spaces such as sequences X1→X2→··· the amalgamation
+X can be
+regarded as the direct limit of the vertex spaces Xv with respect to the edge maps
+fe . Following this cue, the space
+X is commonly called the direct limit for arbitrary
+diagrams, even ﬁnite ones. If one views
+X as a direct limit, then ∆X becomes a sort
+of homotopy direct limit. For reasons that are explained in the next section, direct
+limits are often called ‘colimits.’ This has given rise to the rather unfortunate name of
+‘hocolim’ for ∆X , short for ‘homotopy colimit.’ In preference to this we have chosen
+the term ‘realization,’ both for its intrinsic merits and because ∆X is closely related
+to what is called the geometric realization of a simplicial space.
+Exercises
+1. Show that for a sequence of maps X0
+f1--→X1
+f2--→···, the inﬁnite iterated mapping
+cylinder M(f1, f2, ···), which is the union of the ﬁnite iterated mapping cylinders
+M(f1, ··· , fn), deformation retracts onto the mapping telescope.
+2. Show that if X is a complex of spaces in which all the maps are homeomorphisms,
+then the projection ∆X→Γ is a ﬁber bundle.
+3. What is the nerve of the cover of a simplicial complex by the open stars of its
+vertices? [See Lemma 2C.2.]
+4. Show that Proposition 4G.2 and its corollary hold also for CW complexes and covers
+by families of subcomplexes. [CW complexes are paracompact; see [VBKT].]
+There is a very nice duality principle in homotopy theory, called Eckmann–Hilton
+duality in its more reﬁned and systematic aspects, but which in its most basic form
+involves the simple idea of reversing the direction of all arrows in a given construc-
+tion. For example, if in the deﬁnition of a ﬁbration as a map satisfying the homotopy
+lifting property we reverse the direction of all the arrows, we obtain the dual notion of
+a coﬁbration. This is a map i : A→B satisfying the following prop-
+erty: Given eg0 : B→X and a homotopy gt : A→X such that eg0i = g0 ,
+−−−−−→
+−−−−−−→
+−→
+A
+B
+X
+i
+gt
+g0
+∼
+there exists a homotopy egt : B→X such that egti = gt . In the special
+case that i is the inclusion of a subspace, this is the homotopy extension property,
+and the next proposition says that this is indeed the general case. So a coﬁbration is
+the same as an inclusion satisfying the homotopy extension property.
+Proposition 4H.1. If i : A→B is a coﬁbration, then i is injective, and in fact a homeo-
+morphism onto its image.
+
+Eckmann–Hilton Duality
+Section 4.H
+461
+Proof: Consider the mapping cylinder Mi , the quotient of A×I ⨿B in which (a, 1) is
+identiﬁed with i(a). Let gt : A→Mi be the homotopy mapping a ∈A to the image of
+(a, 1 −t) ∈A×I in Mi , and let eg0 be the inclusion B> Mi . The coﬁbration property
+gives egt : B→Mi with egti = gt . Restricting to a ﬁxed t > 0, this implies i is injective
+since gt is. Furthermore, since gt is a homeomorphism onto its image A×{1 −t},
+the relation egti = gt implies that the map g−1
+t
+egt : i(A)→A is a continuous inverse of
+i : A→i(A).
+⊔⊓
+Many constructions for ﬁbrations have analogs for coﬁbrations, and vice versa.
+For example, for an arbitrary map f : A→B the inclusion A > Mf is readily seen to
+be a coﬁbration, so the analog of the factorization A> Ef→B of f into a homotopy
+equivalence followed by a ﬁbration is the factorization A>Mf→B into a coﬁbration
+followed by a homotopy equivalence. Even the deﬁnition of Mf is in some way dual to
+the deﬁnition of Ef , since Ef can be deﬁned as a pullback and Mf can be deﬁned as
+a dual pushout. In general, the pushout of maps
+−−−−−→
+−−−−→
+−−→
+−−→
+A
+M
+A
+I
+B
+f
+×
+−−−−−→
+−−−−→
+−→
+−−→
+E
+B
+A
+I
+B
+f
+f : Z→X and g : Z→Y is deﬁned as the quotient
+of X ⨿Y under the identiﬁcations f (z) ∼g(z).
+Thus the pushout is a quotient of X ⨿Y , while the pullback of maps X→Z and Y→Z
+is a subobject of X×Y , so we see here two instances of duality: a duality between
+disjoint union and product, and a duality between subobjects and quotients. The ﬁrst
+of these is easily explained, since a collection of maps Xα→X is equivalent to a map
+`
+αXα→X , while a collection of maps X→Xα is equivalent to a map X→
+Q
+αXα . The
+notation
+`
+for the ‘coproduct’ was chosen to indicate that it is dual to
+Q
+. If we were
+dealing with basepointed spaces and maps, the coproduct would be wedge sum. In
+the category of abelian groups the coproduct is direct sum.
+The duality between subobjects and quotient objects is clear for abelian groups,
+where subobjects are kernels and quotient objects cokernels. The strict topological
+analog of a kernel is a ﬁber of a ﬁbration. Dually, the topological analog of a cokernel
+is the coﬁber B/A of a coﬁbration A>B . If we make an arbitrary map f : A→B into
+a coﬁbration A > Mf , the coﬁber is the mapping cone Cf = Mf /(A×{0}).
+In the diagram showing Ef and Mf as pullback and pushout, there also appears to
+be some sort of duality involving the terms A×I and BI . This leads us to ask whether
+X×I and XI are in some way dual. Indeed, if we ignore topology and just think set-
+theoretically, this is an instance of the familiar product–coproduct duality since the
+product of copies of X indexed by I is XI , all functions I→X , while the coproduct
+of copies of X indexed by I is X×I , the disjoint union of the sets X×{t} for t ∈I .
+Switching back from the category of sets to the topological category, we can view XI
+as a ‘continuous product’ of copies of X and X×I as a ‘continuous coproduct.’
+On a less abstract level, the fact that maps A×I→B are the same as maps A→BI
+indicates a certain duality between A×I and BI .
+This leads to a duality between

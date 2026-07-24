@@ -1,0 +1,271 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.1 Homotopy Groups
+직전 소단원: 「3.H.ex Exercises」
+[본문]
+Homotopy theory begins with the homotopy groups πn(X), which are the nat-
+ural higher-dimensional analogs of the fundamental group. These higher homotopy
+groups have certain formal similarities with homology groups. For example, πn(X)
+turns out to be always abelian for n ≥2, and there are relative homotopy groups ﬁt-
+ting into a long exact sequence just like the long exact sequence of homology groups.
+However, the higher homotopy groups are much harder to compute than either ho-
+mology groups or the fundamental group, due to the fact that neither the excision
+property for homology nor van Kampen’s theorem for π1 holds for higher homotopy
+groups.
+In spite of these computational difﬁculties, homotopy groups are of great theo-
+retical signiﬁcance. One reason for this is Whitehead’s theorem that a map between
+CW complexes which induces isomorphisms on all homotopy groups is a homotopy
+equivalence. The stronger statement that two CW complexes with isomorphic homo-
+topy groups are homotopy equivalent is usually false, however. One of the rare cases
+when a CW complex does have its homotopy type uniquely determined by its homo-
+topy groups is when it has just a single nontrivial homotopy group. Such spaces,
+known as Eilenberg–MacLane spaces, turn out to play a fundamental role in algebraic
+topology for a variety of reasons. Perhaps the most important is their close connec-
+tion with cohomology: Cohomology classes in a CW complex correspond bijectively
+with homotopy classes of maps from the complex into an Eilenberg–MacLane space.
+
+338
+Chapter 4
+Homotopy Theory
+Thus cohomology has a strictly homotopy-theoretic interpretation, and there is an
+analogous but more subtle homotopy-theoretic interpretation of homology, explained
+in §4.F.
+A more elementary and direct connection between homotopy and homology is
+the Hurewicz theorem, asserting that the ﬁrst nonzero homotopy group πn(X) of a
+simply-connected space X is isomorphic to the ﬁrst nonzero homology group eHn(X).
+This result, along with its relative version, is one of the cornerstones of algebraic
+topology.
+Though the excision property does not always hold for homotopy groups, in some
+important special cases there is a range of dimensions in which it does hold. This
+leads to the idea of stable homotopy groups, the beginning of stable homotopy theory.
+Perhaps the major unsolved problem in algebraic topology is the computation of the
+stable homotopy groups of spheres. Near the end of §4.2 we give some tables of
+known calculations that show quite clearly the complexity of the problem.
+Included in §4.2 is a brief introduction to ﬁber bundles, which generalize covering
+spaces and play a somewhat analogous role for higher homotopy groups. It would
+easily be possible to devote a whole book to the subject of ﬁber bundles, even the
+special case of vector bundles, but here we use ﬁber bundles only to provide a few
+basic examples and to motivate their more ﬂexible homotopy-theoretic generalization,
+ﬁbrations, which play a large role in §4.3. Among other things, ﬁbrations allow one
+to describe, in theory at least, how the homotopy type of an arbitrary CW complex
+is built up from its homotopy groups by an inductive procedure of forming ‘twisted
+products’ of Eilenberg–MacLane spaces. This is the notion of a Postnikov tower. In
+favorable cases, including all simply-connected CW complexes, the additional data
+beyond homotopy groups needed to determine a homotopy type can also be described,
+in the form of a sequence of cohomology classes called the k invariants of a space. If
+these are all zero, the space is homotopy equivalent to a product of Eilenberg–MacLane
+spaces, and otherwise not. Unfortunately the k invariants are cohomology classes
+in rather complicated spaces in general, so this is not a practical way of classifying
+homotopy types, but it is useful for various more theoretical purposes.
+This chapter is arranged so that it begins with purely homotopy-theoretic notions,
+largely independent of homology and cohomology theory, whose roles gradually in-
+crease in later sections of the chapter. It should therefore be possible to read a good
+portion of this chapter immediately after reading Chapter 1, with just an occasional
+glimpse at Chapter 2 for algebraic deﬁnitions, particularly the notion of an exact se-
+quence which is just as important in homotopy theory as in homology and cohomology
+theory.
+
+Homotopy Groups
+Section 4.1
+339
+Perhaps the simplest noncontractible spaces are spheres, so to get a glimpse of
+the subtlety inherent in homotopy groups let us look at some of the calculations of
+the groups πi(Sn) that have been made. A small sample is shown in the table below,
+extracted from [Toda 1962].
+πi(Sn)
+i -→
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+n
+1
+Z
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+↓
+2
+0
+Z
+Z
+Z2
+Z2
+Z12
+Z2
+Z2
+Z3
+Z15
+Z2
+Z2× Z2
+3
+0
+0
+Z
+Z2
+Z2
+Z12
+Z2
+Z2
+Z3
+Z15
+Z2
+Z2× Z2
+4
+0
+0
+0
+Z
+Z2
+Z2
+Z × Z12
+Z2× Z2
+Z2× Z2
+Z24× Z3
+Z15
+Z2
+5
+0
+0
+0
+0
+Z
+Z2
+Z2
+Z24
+Z2
+Z2
+Z2
+Z30
+6
+0
+0
+0
+0
+0
+Z
+Z2
+Z2
+Z24
+0
+Z
+Z2
+7
+0
+0
+0
+0
+0
+0
+Z
+Z2
+Z2
+Z24
+0
+0
+8
+0
+0
+0
+0
+0
+0
+0
+Z
+Z2
+Z2
+Z24
+0
+This is an intriguing mixture of pattern and chaos. The most obvious feature is the
+large region of zeros below the diagonal, and indeed πi(Sn) = 0 for all i < n as we
+show in Corollary 4.9. There is also the sequence of zeros in the ﬁrst row, suggesting
+that πi(S1) = 0 for all i > 1. This too is a fairly elementary fact, a special case of
+Proposition 4.1, following easily from covering space theory.
+The coincidences in the second and third rows can hardly be overlooked. These
+are the case n = 1 of isomorphisms πi(S2n) ≈πi−1(S2n−1)×πi(S4n−1) that hold for
+n = 1, 2, 4 and all i. The next case n = 2 says that each entry in the fourth row is
+the product of the entry diagonally above it to the left and the entry three units below
+it. Actually, these isomorphisms πi(S2n) ≈πi−1(S2n−1)×πi(S4n−1) hold for all n if
+one factors out 2 torsion, the elements of order a power of 2. This is a theorem of
+James that will be proved in [SSAT].
+The next regular feature in the table is the sequence of Z’s down the diagonal. This
+is an illustration of the Hurewicz theorem, which asserts that for a simply-connected
+space X , the ﬁrst nonzero homotopy group πn(X) is isomorphic to the ﬁrst nonzero
+homology group Hn(X).
+One may observe that all the groups above the diagonal are ﬁnite except for
+π3(S2), π7(S4), and π11(S6). In §4.C we use cup products in cohomology to show
+that π4k−1(S2k) contains a Z direct summand for all k ≥1. It is a theorem of Serre
+proved in [SSAT] that πi(Sn) is ﬁnite for i > n except for π4k−1(S2k), which is the
+direct sum of Z with a ﬁnite group. So all the complexity of the homotopy groups of
+spheres resides in ﬁnite abelian groups. The problem thus reduces to computing the
+p torsion in πi(Sn) for each prime p.
+
+340
+Chapter 4
+Homotopy Theory
+An especially interesting feature of the table is that along each diagonal the groups
+πn+k(Sn) with k ﬁxed and varying n eventually become independent of n for large
+enough n. This stability property is the Freudenthal suspension theorem, proved in
+§4.2 where we give more extensive tables of these stable homotopy groups of spheres.
+Deﬁnitions and Basic Constructions
+Let In be the n dimensional unit cube, the product of n copies of the interval
+[0, 1]. The boundary ∂In of In is the subspace consisting of points with at least one
+coordinate equal to 0 or 1. For a space X with basepoint x0 ∈X , deﬁne πn(X, x0)
+to be the set of homotopy classes of maps f : (In, ∂In)→(X, x0), where homotopies
+ft are required to satisfy ft(∂In) = x0 for all t . The deﬁnition extends to the case
+n = 0 by taking I0 to be a point and ∂I0 to be empty, so π0(X, x0) is just the set of
+path-components of X .
+When n ≥2, a sum operation in πn(X, x0), generalizing the composition opera-
+tion in π1 , is deﬁned by
+(f + g)(s1, s2, ··· , sn) =
+ f (2s1, s2, ··· , sn),
+s1 ∈[0, 1/2]
+g(2s1 −1, s2, ··· , sn),
+s1 ∈[1/2, 1]
+It is evident that this sum is well-deﬁned on homotopy classes. Since only the ﬁrst
+coordinate is involved in the sum operation, the same arguments as for π1 show that
+πn(X, x0) is a group, with identity element the constant map sending In to x0 and
+with inverses given by −f (s1, s2, ··· , sn) = f (1 −s1, s2, ··· , sn).
+The additive notation for the group operation is used because πn(X, x0) is abelian
+for n ≥2. Namely, f +g ≃g +f via the homotopy indicated in the following ﬁgures.
+f
+g
+f
+g
+f
+g
+f
+g
+≃
+≃
+f
+g
+≃
+≃
+The homotopy begins by shrinking the domains of f and g to smaller subcubes of
+In , with the region outside these subcubes mapping to the basepoint. After this has
+been done, there is room to slide the two subcubes around anywhere in In as long
+as they stay disjoint, so if n ≥2 they can be slid past each other, interchanging their
+positions. Then to ﬁnish the homotopy, the domains of f and g can be enlarged
+back to their original size. If one likes, the whole process can be done using just the
+coordinates s1 and s2 , keeping the other coordinates ﬁxed.
+Maps (In, ∂In)→(X, x0) are the same as maps of the quotient In/∂In = Sn to X
+taking the basepoint s0 = ∂In/∂In to x0 . This means that we can also view πn(X, x0)
+as homotopy classes of maps (Sn, s0)→(X, x0), where homotopies are through maps

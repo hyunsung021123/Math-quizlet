@@ -1,0 +1,114 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.H.ex Exercises
+직전 소단원: 「4.H Eckmann-Hilton Duality」
+[연습문제]
+466
+Chapter 4
+Homotopy Theory
+Fβ ||Sn×{0} to attach en+1
+β
+, and then Fβ ||Sn×I gives hn on en+1
+β
+and Fβ gives an
+extension of f over the cone on en+1
+β
+.
+This construction assures that f∗: Hn+1(Xn+1, Xn)→Hn+1(Y, Xn) is an isomor-
+phism, so from the ﬁve-lemma applied to the long exact sequences of these pairs we
+deduce that f∗: Hi(Xn+1)→Hi(Y) is an isomorphism for i ≤n + 1. This ﬁnishes the
+induction step. We may assume the maps fα and Fβ are cellular, so X =
+S
+n Xn is
+a CW complex with subcomplexes Xn . Since f : X→Y is a homology isomorphism
+between simply-connected CW complexes, it is a homotopy equivalence.
+⊔⊓
+As an example, suppose that Y is a simply-connected CW complex having all its
+homology groups free. Then the Moore spaces used in the construction of X can
+be taken to be wedges of spheres, and so Xn is obtained from Xn−1 by attaching an
+n cell for each Z summand of Hn(Y). The attaching maps may be taken to be cellular,
+making X into a CW complex whose cellular chain complex has trivial boundary maps.
+Similarly, ﬁnite cyclic summands of Hn(Y) can be realized by wedge summands of
+the form Sn−1 ∪en in M(Hn(Y), n −1), contributing an n cell and an (n + 1) cell to
+X . This is Proposition 4C.1, but the present result is stronger because it tells us that
+a ﬁnite cyclic summand of Hn can be realized in one step by attaching the cone on a
+Moore space M(Zk, n −1), rather than in two steps of attaching an n cell and then
+an (n + 1) cell.
+Exercises
+1. Show that if A>X is a coﬁbration of compact Hausdorff spaces, then for any space
+Y , the map Y X→Y A obtained by restriction of functions is a ﬁbration. [If A > X is
+a coﬁbration, so is A×Y > X×Y for any space Y .]
+2.
+Consider a pushout diagram as at the right, where B ⊔f X
+−−−−−→
+−−−−→
+A
+B
+X
+X
+B
+f
+f
+>
+>
+⊔
+is B with X attached along A via f . Show that if A > X is a
+coﬁbration, so is B > B ⊔f X .
+3. For ﬁbrations E1→B and E2→B , show that a ﬁber-preserving map E1→E2 that
+is a homotopy equivalence is in fact a ﬁber homotopy equivalence. [This is dual to
+Proposition 0.19.]
+4. Deﬁne the dual of an iterated mapping cylinder precisely, in terms of maps from
+∆n , and use this to give a deﬁnition of ∇X , the dual of ∆X , for X a complex of spaces.
+It sometimes happens that suspending a space has the effect of simplifying its
+homotopy type, as the suspension becomes homotopy equivalent to a wedge sum of
+
+Stable Splittings of Spaces
+Section 4.I
+467
+smaller spaces. Much of the interest in such stable splittings comes from the fact
+that they provide a geometric explanation for algebraic splittings of homology and
+cohomology groups, as well as other algebraic invariants of spaces that are unaffected
+by suspension such as the cohomology operations studied in §4.L.
+The simplest example of a stable splitting occurs for the torus S1×S1 . Here the
+reduced suspension Σ(S1×S1) is homotopy equivalent to S2∨S2∨S3 since Σ(S1×S1)
+is S2 ∨S2 with a 3 cell attached by the suspension of the attaching map of the 2 cell
+of the torus, but the latter attaching map is the commutator of the two inclusions
+S1 > S1 , and the suspension of this commutator is trivial since it lies in the abelian
+group π2(S2 ∨S2).
+By an easy geometric argument we will prove more generally:
+Proposition 4I.1. If X and Y are CW complexes, then Σ(X×Y) ≃ΣX∨ΣY ∨Σ(X∧Y).
+For example, Σ(Sm×Sn) ≃Sm+1 ∨Sn+1 ∨Sm+n+1 . In view of the cup product
+structure on H∗(Sm×Sn) there can be no such splitting of Sm×Sn before suspension.
+Proof: Consider the join X ∗Y deﬁned in Chapter 0, consisting of all line segments
+joining points in X to points in Y . For our present purposes it is convenient to use
+the reduced version of the join, obtained by collapsing to a point the line segment
+joining the basepoints x0 ∈X and y0 ∈Y . We will still denote this reduced join
+by X ∗Y . Consider the space obtained
+from X ∗Y by attaching reduced cones
+CX and CY to the copies of X and Y
+at the two ends of X ∗Y .
+If we col-
+CX
+CY
+X Y
+∗
+X
+Y
+lapse each of these cones to a point, we
+get the reduced suspension Σ(X×Y).
+Since each cone is contractible, collapsing the cones gives a homotopy equivalence
+X ∗Y ∪CX ∪CY ≃Σ(X×Y). Inside X ∗Y there are also cones x0 ∗Y and X ∗y0
+intersecting in a point. Collapsing these cones converts X ∗Y into Σ(X ∧Y) and
+X ∗Y ∪CX ∪CY into Σ(X ∧Y) ∨ΣX ∨ΣY .
+⊔⊓
+This result can be applied inductively to obtain splittings for suspensions of prod-
+ucts of more than two spaces, using the fact that reduced suspension is smash product
+with S1 , and smash product is associative and commutative. For example,
+Σ(X×Y ×Z) ≃ΣX ∨ΣY ∨ΣZ ∨Σ(X ∧Y) ∨Σ(X ∧Z) ∨Σ(Y ∧Z) ∨Σ(X ∧Y ∧Z)
+Our next example involves the reduced product J(X) deﬁned in §3.2. An inter-
+esting case is J(Sn), which has a CW structure of the form Sn ∪e2n ∪e3n ∪···. All the
+cells ein for i > 1 are attached nontrivially since H∗(J(Sn); Q) is a polynomial ring
+Q[x] for n even and a tensor product Q[x]⊗ΛQ[y] for n odd. However, after we
+suspend to ΣJ(Sn), it is a rather surprising fact that all the attaching maps become
+trivial:

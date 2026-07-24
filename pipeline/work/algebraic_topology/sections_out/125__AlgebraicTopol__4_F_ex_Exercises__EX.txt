@@ -1,0 +1,121 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.F.ex Exercises
+직전 소단원: 「4.F Spectra and Homology Theories」
+[연습문제]
+Spectra and Homology Theories
+Section 4.F
+455
+limit of a product need not equal the product of the direct limits. For ﬁnite wedge sums
+there is no difﬁculty, so we do have a cohomology theory for ﬁnite CW complexes. But
+for general CW complexes a different deﬁnition is needed. The simplest thing to do
+is to associate to each spectrum K an Ωspectrum K′ and let hn(X) = ⟨X, K′
+n⟩. We
+obtain K′ from K by setting K′
+n = lim
+--→ΩiKn+i , the mapping telescope of the sequence
+Kn→ΩKn+1→Ω2Kn+2→···. The Ωspectrum structure is given by equivalences
+K′
+n = lim
+--→ΩiKn+i ≃lim
+--→Ωi+1Kn+i+1
+κ-----→Ωlim
+--→ΩiKn+i+1 = ΩK′
+n+1
+The ﬁrst homotopy equivalence comes from deleting the ﬁrst term of the sequence
+Kn→ΩKn+1→Ω2Kn+2→···, which has negligible effect on the mapping telescope.
+The next map κ is a special case of the natural weak equivalence lim
+--→ΩZn→Ωlim
+--→Zn
+that holds for any sequence Z1→Z2→···. Strictly speaking, we should let K′
+n be a
+CW approximation to the mapping telescope lim
+--→ΩiKn+i in order to obtain a spectrum
+consisting of CW complexes, in accordance with our deﬁnition of a spectrum.
+In case one starts with a suspension spectrum Kn = ΣnK it is not necessary
+to take mapping telescopes since one can just set K′
+n =
+S
+i ΩiΣi+nK =
+S
+i ΩiΣiKn ,
+the union with respect to the natural inclusions ΩiΣiKn ⊂Ωi+1Σi+1Kn . The union
+S
+i ΩiΣiX is usually abbreviated to Ω∞Σ∞X . Another common notation for this union
+is QX . Thus πi(QX) = πs
+i (X), so Q is a functor converting stable homotopy groups
+into ordinary homotopy groups.
+It follows routinely from the deﬁnitions that the homology theory deﬁned by a
+spectrum is the same as the homology theory deﬁned by the associated Ωspectrum.
+One may ask whether every homology theory is deﬁned by a spectrum, as we showed
+for cohomology. The answer is yes if one replaces the wedge axiom by a stronger
+direct limit axiom: hi(X) = lim
+--→hi(Xα), the direct limit over the ﬁnite subcomplexes
+Xα of X . The homology theory deﬁned by a spectrum satisﬁes this axiom, and the
+converse is proved in [Adams 1971].
+Spectra have become the preferred language for describing many stable phenom-
+ena in algebraic topology. The increased ﬂexibility of spectra is not without its price,
+however, since a number of concepts that are elementary for spaces become quite a
+bit more subtle for spectra, such as the proper deﬁnition of a map between spectra,
+or the smash product of two spectra. For the reader who wants to learn more about
+this language a good starting point is [Adams 1974].
+Exercises
+1. Assuming the ﬁrst two axioms for a homology theory on the CW category, show
+that the direct limit axiom implies the wedge sum axiom. Show that the converse also
+holds for countable CW complexes.
+2. For CW complexes X and Y consider the suspension sequence
+⟨X, Y⟩
+Σ--→⟨ΣX, ΣY⟩
+Σ--→⟨Σ2X, Σ2Y⟩--→···
+
+456
+Chapter 4
+Homotopy Theory
+Show that if X is a ﬁnite complex, these maps eventually become isomorphisms. [Use
+induction on the number of cells of X and the ﬁve-lemma.]
+3. Show that for any sequence Z1→Z2→···, the natural map lim
+--→ΩZn→Ωlim
+--→Zn is
+a weak homotopy equivalence, where the direct limits mean mapping telescopes.
+It is a common practice in algebraic topology to glue spaces together to form
+more complicated spaces.
+In this section we describe two general procedures for
+making such constructions. The ﬁrst is fairly straightforward but also rather rigid,
+lacking some homotopy invariance properties an algebraic topologist would like to
+see. The second type of gluing construction avoids these drawbacks by systematic
+use of mapping cylinders. We have already seen many special cases of both types of
+constructions, and having a general framework covering all these special cases should
+provide some conceptual clarity.
+A diagram of spaces consists of an oriented graph Γ with a space Xv for each
+vertex v of Γ and a map fe : Xv→Xw for each edge e of Γ from a vertex v to a vertex
+w , the words ‘from’ and ‘to’ referring to the given orientation of e. Commutativity of
+the diagram is not assumed. Denoting such a diagram of spaces simply by X , we deﬁne
+a space
+X to be the quotient of the disjoint union of all the spaces Xv associated to
+vertices of Γ under the identiﬁcations x ∼fe(x) for all maps fe associated to edges
+of Γ . To give a name to this construction, let us call
+X the amalgamation of the
+diagram X . Here are some examples:
+If the diagram of spaces has the simple form X0
+f←--- A > X1 then
+X is the
+space X0 ⊔f X1 obtained from X0 by attaching X1 along A via f .
+A sequence of inclusions X1 > X1 > ··· determines a diagram of spaces X for
+which
+X is
+S
+i Xi with the weak topology. This holds more generally when the
+spaces Xi are indexed by any directed set.
+From a cover U = {Xi} of a space X by subspaces Xi we can form a diagram of
+spaces XU whose vertices are the nonempty ﬁnite intersections Xi1 ∩··· ∩Xin
+with distinct indices ij , and whose edges are the various inclusions obtained by
+omitting some of the subspaces in such an intersection, for example the inclusions
+Xi ∩Xj > Xi . Then
+XU equals X as a set, though possibly with a different
+topology. If the cover is an open cover, or if X is a CW complex and the Xi ’s are
+subcomplexes, then the topology will be the original topology on X .
+An action of a group G on a space X determines a diagram of spaces XG , with X
+itself as the only space and with maps the homeomorphisms g : X→X , g ∈G,
+given by the action. In this case
+XG is the orbit space X/G.

@@ -1,0 +1,104 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.A.ex Exercises
+직전 소단원: 「3.A Universal Coefficients for Homology」
+[연습문제]
+Universal Coefﬁcients for Homology
+Section 3.A
+267
+for all primes p, then A = 0. For the short exact sequences 0→Z
+p--→Z→Zp→0 and
+0→Z→Q→Q/Z→0, the six-term exact sequences in (6) of the proposition become
+0 -→Tor(A, Zp) -→A
+p--→A -→A⊗Zp -→0
+0 -→Tor(A, Q/Z) -→A -→A⊗Q -→A⊗Q/Z -→0
+If Tor(A, Zp) = 0 for all p, then exactness of the ﬁrst sequence implies that A
+p--→A
+is injective for all p, so A is torsionfree. Then Tor(A, Q/Z) = 0 by (3) or (4) of the
+proposition, so the second sequence implies that A→A⊗Q is injective, hence A = 0
+if A⊗Q = 0.
+⊔⊓
+The algebra by means of which the Tor functor is derived from tensor products
+has a very natural generalization in which abelian groups are replaced by modules
+over a ﬁxed ring R with identity, using the deﬁnition of tensor product of R modules
+given in §3.2. Free resolutions of R modules are deﬁned in the same way as for abelian
+groups, using free R modules, which are direct sums of copies of R. Lemmas 3A.1 and
+3A.2 carry over to this context without change, and so one has functors TorR
+n(A, B).
+However, it need not be true that TorR
+n(A, B) = 0 for n > 1. The reason this was
+true when R = Z was that subgroups of free groups are free, but submodules of free
+R modules need not be free in general. If R is a principal ideal domain, submodules
+of free R modules are free, so in this case the rest of the algebra, in particular the
+universal coefﬁcient theorem, goes through without change. When R is a ﬁeld F , every
+module is free and TorF
+n(A, B) = 0 for n > 0 via the free resolution 0→A→A→0.
+Thus Hn(C ⊗F G) ≈Hn(C)⊗F G if F is a ﬁeld.
+Exercises
+1. Use the universal coefﬁcient theorem to show that if H∗(X; Z) is ﬁnitely generated,
+so the Euler characteristic χ(X) =
+P
+n(−1)n rank Hn(X; Z) is deﬁned, then for any
+coefﬁcient ﬁeld F we have χ(X) =
+P
+n(−1)n dim Hn(X; F).
+2. Show that Tor(A, Q/Z) is isomorphic to the torsion subgroup of A. Deduce that
+A is torsionfree iff Tor(A, B) = 0 for all B .
+3. Show that if eHn(X; Q) and eHn(X; Zp) are zero for all n and all primes p, then
+eHn(X; Z) = 0 for all n, and hence eHn(X; G) = 0 for all G and n.
+4. Show that ⊗and Tor commute with direct limits: (lim
+--→Aα)⊗B = lim
+--→(Aα ⊗B) and
+Tor(lim
+--→Aα, B) = lim
+--→Tor(Aα, B).
+5. From the fact that Tor(A, B) = 0 if A is free, deduce that Tor(A, B) = 0 if A
+is torsionfree by applying the previous problem to the directed system of ﬁnitely
+generated subgroups Aα of A.
+6. Show that Tor(A, B) is always a torsion group, and that Tor(A, B) contains an
+element of order n iff both A and B contain elements of order n.
+
+268
+Chapter 3
+Cohomology
+K¨unneth formulas describe the homology or cohomology of a product space in
+terms of the homology or cohomology of the factors. In nice cases these formulas take
+the form H∗(X×Y; R) ≈H∗(X; R)⊗H∗(Y; R) or H∗(X×Y; R) ≈H∗(X; R)⊗H∗(Y; R)
+for a coefﬁcient ring R. For the case of cohomology, such a formula was given in
+Theorem 3.16, with hypotheses of ﬁnite generation and freeness on the cohomology
+of one factor. To obtain a completely general formula without these hypotheses it
+turns out that homology is more natural than cohomology, and the main aim in this
+section is to derive the general K¨unneth formula for homology. The new feature of
+the general case is that an extra Tor term is needed to describe the full homology of
+a product.
+The Cross Product in Homology
+A major component of the K¨unneth formula is a cross product map
+Hi(X; R)×Hj(Y; R)
+×
+---------→Hi+j(X×Y; R)
+There are two ways to deﬁne this. One is a direct deﬁnition for singular homology,
+involving explicit simplicial formulas. More enlightening, however, is the deﬁnition in
+terms of cellular homology. This necessitates assuming X and Y are CW complexes,
+but this hypothesis can later be removed by the technique of CW approximation in
+§4.1. We shall focus therefore on the cellular deﬁnition, leaving the simplicial deﬁni-
+tion to later in this section for those who are curious to see how it goes.
+The key ingredient in the deﬁnition of the cellular cross product will be the fact
+that the cellular boundary map satisﬁes d(ei×ej) = dei×ej + (−1)iei×dej . Implicit
+in the right side of this formula is the convention of treating the symbol × as a
+bilinear operation on cellular chains.
+With this convention we can then say more
+generally that d(a×b) = da×b + (−1)ia×db whenever a is a cellular i chain and
+b is a cellular j chain. From this formula it is obvious that the cross product of two
+cycles is a cycle. Also, the product of a boundary and a cycle is a boundary since
+da×b = d(a×b) if db = 0, and similarly a×db = (−1)id(a×b) if da = 0. Hence
+there is an induced bilinear map Hi(X; R)×Hj(Y; R)→Hi+j(X×Y; R), which is by
+deﬁnition the cross product in cellular homology. Since it is bilinear, it could also
+be viewed as a homomorphism Hi(X; R)⊗RHj(Y; R)→Hi+j(X×Y; R). In either form,
+this cross product turns out to be independent of the cell structures on X and Y .
+Our task then is to express the boundary maps in the cellular chain complex
+C∗(X×Y) for X×Y in terms of the boundary maps in the cellular chain complexes
+C∗(X) and C∗(Y). For simplicity we consider homology with Z coefﬁcients here,
+but the same formula for arbitrary coefﬁcients follows immediately from this special
+case. With Z coefﬁcients, the cellular chain group Ci(X) is free with basis the i cells
+of X , but there is a sign ambiguity for the basis element corresponding to each cell ei ,

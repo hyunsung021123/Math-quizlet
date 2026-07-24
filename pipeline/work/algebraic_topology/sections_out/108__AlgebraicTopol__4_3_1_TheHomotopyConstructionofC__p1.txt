@@ -1,0 +1,580 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.3.1 The Homotopy Construction of Cohomology (분할 part 1)
+직전 소단원: 「4.3 Connections with Cohomology」
+[본문]
+Connections with Cohomology
+Section 4.3
+393
+The Hurewicz theorem provides a strong link between homotopy groups and ho-
+mology, and hence also an indirect relation with cohomology. But there is a more di-
+rect connection with cohomology of a quite different sort. We will show that for every
+CW complex X there is a natural bijection between Hn(X; G) and the set ⟨X, K(G, n)⟩
+of basepoint-preserving homotopy classes of maps from X to a K(G, n). We will also
+deﬁne a natural group structure on ⟨X, K(G, n)⟩that makes the bijection a group iso-
+morphism. The mere fact that there is any connection at all between cohomology and
+homotopy classes of maps is the ﬁrst surprise here, and the second is that Eilenberg–
+MacLane spaces are involved, since their deﬁnition is entirely in terms of homotopy
+groups, which on the face of it have nothing to do with cohomology.
+After proving this basic isomorphism Hn(X; G) ≈⟨X, K(G, n)⟩and describing a
+few of its immediate applications, the later parts of this section aim toward a further
+study of Postnikov towers, which were introduced brieﬂy in §4.1. These provide a
+general theoretical method for realizing an arbitrary CW complex as a sort of twisted
+product of Eilenberg–MacLane spaces, up to homotopy equivalence.
+The most ge-
+ometric interpretation of the phrase ‘twisted product’ is the notion of ﬁber bundle
+introduced in the previous section, but here we need the more homotopy-theoretic
+notion of a ﬁbration, so before we begin the discussion of Postnikov towers we ﬁrst
+take a few pages to present some basic constructions and results about ﬁbrations.
+As we shall see, Postnikov towers can be expressed as sequences of ﬁbrations
+with ﬁbers Eilenberg–MacLane spaces, so we can again expect close connections with
+cohomology. One such connection is provided by k invariants, which describe, at
+least in principle, how Postnikov towers for a broad class of spaces are determined
+by a sequence of cohomology classes. Another application of these ideas, described
+at the end of the section, is a technique for factoring basic extension and lifting prob-
+lems in homotopy theory into a sequence of smaller problems whose solutions are
+equivalent to the vanishing of certain cohomology classes. This technique goes under
+the somewhat grandiose title of Obstruction Theory, though it is really quite a simple
+idea when expressed in terms of Postnikov towers.
+The Homotopy Construction of Cohomology
+The main result of this subsection is the following fundamental relationship be-
+tween singular cohomology and Eilenberg–MacLane spaces:
+Theorem 4.57. There are natural bijections T : ⟨X, K(G, n)⟩→Hn(X; G) for all CW
+complexes X and all n > 0, with G any abelian group. Such a T has the form
+T([f ]) = f ∗(α) for a certain distinguished class α ∈Hn(K(G, n); G).
+
+394
+Chapter 4
+Homotopy Theory
+In the course of the proof we will deﬁne a natural group structure on ⟨X, K(G, n)⟩
+such that the transformation T is an isomorphism.
+A class α ∈Hn(K(G, n); G) with the property stated in the theorem is called a
+fundamental class. The proof of the theorem will yield an explicit fundamental class,
+namely the element of Hn(K(G, n); G) ≈Hom(Hn(K; Z), G) given by the inverse of
+the Hurewicz isomorphism G = πn(K(G, n))→Hn(K; Z). Concretely, if we choose
+K(G, n) to be a CW complex with (n −1) skeleton a point, then a fundamental class
+is represented by the cellular cochain assigning to each n cell of K(G, n) the element
+of πn(K(G, n)) deﬁned by a characteristic map for the n cell.
+For connected CW complexes X the theorem also holds with ⟨X, K(G, n)⟩re-
+placed by [X, K(G, n)], the nonbasepointed homotopy classes. This is easy to see
+when n > 1 since every map X→K(G, n) can be homotoped to take basepoint to
+basepoint, and every homotopy between basepoint-preserving maps can be homo-
+toped to be basepoint-preserving if the target space K(G, n) is simply-connected.
+When n = 1 the equality [X, K(G, n)] = ⟨X, K(G, n)⟩is an exercise for §4.A, using
+the assumption that G is abelian.
+It is possible to give a direct, bare-hands proof of the theorem, constructing maps
+and homotopies cell by cell. This provides much geometric insight into why the result
+is true, but unfortunately the technical details of this proof are rather tedious. So we
+shall take a different approach, one that has the advantage of placing the result in
+its natural context via general machinery that turns out to be quite useful in other
+situations as well. The two main steps will be the following assertions.
+(1) The functors hn(X) = ⟨X, K(G, n)⟩deﬁne a reduced cohomology theory on the
+category of basepointed CW complexes.
+(2) If a reduced cohomology theory h∗deﬁned on CW complexes has coefﬁcient
+groups hn(S0) which are zero for n ≠0, then there are natural isomorphisms
+hn(X) ≈eHn(X; h0(S0)) for all CW complexes X and all n.
+Towards proving (1) we will study a more general question: When does a sequence
+of spaces Kn deﬁne a cohomology theory by setting hn(X) = ⟨X, Kn⟩? Note that this
+will be a reduced cohomology theory since ⟨X, Kn⟩is trivial when X is a point.
+The ﬁrst question to address is putting a group structure on the set ⟨X, K⟩. This
+requires that either X or K have some special structure. When X = Sn we have
+⟨Sn, K⟩= πn(K), which has a group structure when n > 0. The deﬁnition of this
+group structure works more generally whenever Sn is replaced by a suspension SX ,
+with the sum of maps f , g : SX→K deﬁned as the composition SX→SX ∨SX→K
+where the ﬁrst map collapses an ‘equatorial’ X ⊂SX to a point and the second map
+consists of f and g on the two summands. However, for this to make sense we must
+be talking about basepoint-preserving maps, and there is a problem with where to
+choose the basepoint in SX . If x0 is a basepoint of X , the basepoint of SX should
+be somewhere along the segment {x0}×I ⊂SX , most likely either an endpoint or the
+
+Connections with Cohomology
+Section 4.3
+395
+midpoint, but no single choice of such a basepoint gives a well-deﬁned sum. The sum
+would be well-deﬁned if we restricted attention to maps sending the whole segment
+{x0}×I to the basepoint. This is equivalent to considering basepoint-preserving maps
+ΣX→K where ΣX = SX/({x0}×I) and the image of {x0}×I in ΣX is taken to be
+the basepoint. If X is a CW complex with x0 a 0 cell, the quotient map SX→ΣX
+is a homotopy equivalence since it collapses a contractible subcomplex of SX to a
+point, so we can identify ⟨SX, K⟩with ⟨ΣX, K⟩. The space ΣX is called the reduced
+suspension of X when we want to distinguish it from the ordinary suspension SX .
+It is easy to check that ⟨ΣX, K⟩is a group with respect to the sum deﬁned above,
+inverses being obtained by reﬂecting the I coordinate in the suspension. However,
+what we would really like to have is a group structure on ⟨X, K⟩arising from a special
+structure on K rather than on X . This can be obtained using the following basic
+adjoint relation:
+⟨ΣX, K⟩= ⟨X, ΩK⟩where ΩK is the space of loops in K at its chosen basepoint
+and the constant loop is taken as the basepoint of ΩK .
+The space ΩK , called the loopspace of K , is topologized as a subspace of the space KI
+of all maps I→K , where KI is given the compact-open topology; see the Appendix for
+the deﬁnition and basic properties of this topology. The adjoint relation ⟨ΣX, K⟩=
+⟨X, ΩK⟩holds because basepoint-preserving maps ΣX→K are exactly the same as
+basepoint-preserving maps X→ΩK , the correspondence being given by associating to
+f : ΣX→K the family of loops obtained by restricting f to the images of the segments
+{x}×I in ΣX .
+Taking X = Sn in the adjoint relation, we see that πn+1(K) = πn(ΩK) for all
+n ≥0. Thus passing from a space to its loopspace has the effect of shifting homotopy
+groups down a dimension. In particular we see that ΩK(G, n) is a K(G, n −1). This
+fact will turn out to be important in what follows.
+Note that the association X , ΩX is a functor: A basepoint-preserving map
+f : X→Y induces a map Ωf : ΩX→ΩY by composition with f . A homotopy f ≃g
+induces a homotopy Ωf ≃Ωg, so it follows formally that X ≃Y implies ΩX ≃ΩY .
+It is a theorem of [Milnor 1959] that the loopspace of a CW complex has the
+homotopy type of a CW complex. This may be a bit surprising since loopspaces are
+usually quite large spaces, though of course CW complexes can be quite large too, in
+terms of the number of cells. What often happens in practice is that if a CW complex
+X has only ﬁnitely many cells in each dimension, then ΩX is homotopy equivalent
+to a CW complex with the same property. We will see explicitly how this happens for
+X = Sn in §4.J.
+Composition of loops deﬁnes a map ΩK×ΩK→ΩK , and this gives a sum oper-
+ation in ⟨X, ΩK⟩by setting (f + g)(x) = f (x) g(x), the composition of the loops
+f(x) and g(x). Under the adjoint relation this is the same as the sum in ⟨ΣX, K⟩
+deﬁned previously. If we take the composition of loops as the sum operation then it
+
+396
+Chapter 4
+Homotopy Theory
+is perhaps somewhat easier to see that ⟨X, ΩK⟩is a group since the same reasoning
+which shows that π1(K) is a group can be applied.
+Since cohomology groups are abelian, we would like the group ⟨X, ΩK⟩to be
+abelian. This can be achieved by iterating the operation of forming loopspaces. One
+has a double loopspace Ω2K = Ω(ΩK) and inductively an n fold loopspace ΩnK =
+Ω(Ωn−1K). The evident bijection KY ×Z ≈(KY )Z is a homeomorphism for locally
+compact Hausdorff spaces Y and Z , as shown in Proposition A.16 in the Appendix,
+and from this it follows by induction that ΩnK can be regarded as the space of maps
+In→K sending ∂In to the basepoint. Taking n = 2, we see that the argument that
+π2(K) is abelian shows more generally that ⟨X, Ω2K⟩is an abelian group. Iterating
+the adjoint relation gives ⟨ΣnX, K⟩= ⟨X, ΩnK⟩, so this is an abelian group for all
+n ≥2.
+Thus for a sequence of spaces Kn to deﬁne a cohomology theory hn(X) = ⟨X, Kn⟩
+we have been led to the assumption that each Kn should be a loopspace and in fact
+a double loopspace. Actually we do not need Kn to be literally a loopspace since it
+would sufﬁce for it to be homotopy equivalent to a loopspace, as ⟨X, Kn⟩depends
+only on the homotopy type of Kn . In fact it would sufﬁce to have just a weak homo-
+topy equivalence Kn→ΩLn for some space Ln since this would induce a bijection
+⟨X, Kn⟩= ⟨X, ΩLn⟩by Proposition 4.22. In the special case that Kn = K(G, n) for all
+n, we can take Ln = Kn+1 = K(G, n + 1) by the earlier observation that ΩK(G, n + 1)
+is a K(G, n). Thus if we take the K(G, n)’s to be CW complexes, the map Kn→ΩKn+1
+is just a CW approximation K(G, n)→ΩK(G, n + 1).
+There is another reason to look for weak homotopy equivalences Kn→ΩKn+1 .
+For a reduced cohomology theory hn(X) there are natural isomorphisms hn(X) ≈
+hn+1(ΣX) coming from the long exact sequence of the pair (CX, X) with CX the
+cone on X , so if hn(X) = ⟨X, Kn⟩for all n then the isomorphism hn(X) ≈hn+1(ΣX)
+translates into a bijection ⟨X, Kn⟩≈⟨ΣX, Kn+1⟩= ⟨X, ΩKn+1⟩and the most natural
+thing would be for this to come from a weak equivalence Kn→ΩKn+1 . Weak equiva-
+lences of this form would give also weak equivalences Kn→ΩKn+1→Ω2Kn+2 and so
+we would automatically obtain an abelian group structure on ⟨X, Kn⟩≈⟨X, Ω2Kn+2⟩.
+These observations lead to the following deﬁnition. An Ωspectrum is a sequence
+of CW complexes K1, K2, ··· together with weak homotopy equivalences Kn→ΩKn+1
+for all n. By using the theorem of Milnor mentioned above it would be possible to
+replace ‘weak homotopy equivalence’ by ‘homotopy equivalence’ in this deﬁnition.
+However it does not noticeably simplify matters to do this, except perhaps psycho-
+logically.
+Notice that if we discard a ﬁnite number of spaces Kn from the beginning of
+an Ωspectrum K1, K2, ···, then these omitted terms can be reconstructed from the
+remaining Kn ’s since each Kn determines Kn−1 as a CW approximation to ΩKn . So
+it is not important that the sequence start with K1 . By the same token, this allows us
+
+Connections with Cohomology
+Section 4.3
+397
+to extend the sequence of Kn ’s to all negative values of n. This is signiﬁcant because
+a general cohomology theory hn(X) need not vanish for negative n.
+Theorem 4.58. If {Kn} is an Ωspectrum, then the functors X , hn(X) = ⟨X, Kn⟩,
+n ∈Z, deﬁne a reduced cohomology theory on the category of basepointed CW com-
+plexes and basepoint-preserving maps.
+Rather amazingly, the converse is also true: Every reduced cohomology theory
+on CW complexes arises from an Ωspectrum in this way. This is the Brown repre-
+sentability theorem which will be proved in §4.E.
+A space Kn in an Ωspectrum is sometimes called an inﬁnite loopspace since there
+are weak homotopy equivalences Kn→ΩkKn+k for all k.
+A number of important
+spaces in algebraic topology turn out to be inﬁnite loopspaces. Besides Eilenberg–
+MacLane spaces, two other examples are the inﬁnite-dimensional orthogonal and uni-
+tary groups O and U , for which there are weak homotopy equivalences O→Ω8O and
+U→Ω2U by a strong form of the Bott periodicity theorem, as we will show in [VBKT].
+So O and U give periodic Ωspectra, hence periodic cohomology theories known as
+real and complex K–theory. For a more in-depth introduction to the theory of inﬁnite
+loopspaces, the book [Adams 1978] can be much recommended.
+Proof: Two of the three axioms for a cohomology theory, the homotopy axiom and
+the wedge sum axiom, are quite easy to check. For the homotopy axiom, a basepoint-
+preserving map f : X→Y induces f ∗: ⟨Y, Kn⟩→⟨X, Kn⟩by composition, sending a
+map Y→Kn to X
+f--→Y→Kn . Clearly f ∗depends only on the basepoint-preserving
+homotopy class of f , and it is obvious that f ∗is a homomorphism if we replace Kn
+by ΩKn+1 and use the composition of loops to deﬁne the group structure. The wedge
+sum axiom holds since in the realm of basepoint-preserving maps, a map
+W
+α Xα→Kn
+is the same as a collection of maps Xα→Kn .
+The bulk of the proof involves associating a long exact sequence to each CW pair
+(X, A). As a ﬁrst step we build the following diagram:
+A
+CA
+X
+X
+>
+A
+SA
+SX
+A
+X
+>
+>
+>
+>
+∪
+CA
+CX
+X ∪
+∪
+(
+)
+CA
+CX
+C
+X ∪
+∪
+∪
+((
+)
+CA
+X ∪
+(
+)
+)
+==
+==
+X/
+−−−→
+−−−−−−→
+−−−−−−−−−−−−→
+−→
+−→
+−→
+−→
+−→
+≃
+≃
+≃
+⊂
+( )
+1
+The ﬁrst row is obtained from the inclusion A > X by iterating the rule, ‘attach a
+cone on the preceding subspace,’ as shown in the pictures below.
+A
+CA
+X
+CX
+The three downward arrows in the diagram (1) are quotient maps collapsing the most
+recently attached cone to a point. Since cones are contractible, these downward maps
+
+398
+Chapter 4
+Homotopy Theory
+are homotopy equivalences. The second and third of them have homotopy inverses
+the evident inclusion maps, indicated by the upward arrows.
+In the lower row of
+the diagram the maps are the obvious ones, except for the map X/A→SX which is
+the composition of a homotopy inverse of the quotient map X ∪CA→X/A followed
+by the maps X ∪CA→(X ∪CA) ∪CX→SA. Thus the square containing this map
+commutes up to homotopy. It is easy to check that the same is true of the right-hand
+square as well.
+The whole construction can now be repeated with SA > SX in place of A> X ,
+then with double suspensions, and so on.
+The resulting inﬁnite sequence can be
+written in either of the following two forms:
+A→X→X ∪CA→SA→SX→S(X ∪CA)→S2A→S2X→···
+A→X→X/A→SA→SX→SX/SA→S2A→S2X→···
+In the ﬁrst version we use the obvious equality SX ∪CSA = S(X ∪CA). The ﬁrst
+version has the advantage that the map X∪CA→SA is easily described and canonical,
+whereas in the second version the corresponding map X/A→SA is only deﬁned up
+to homotopy since it depends on choosing a homotopy inverse to the quotient map
+X ∪CA→X/A. The second version does have the advantage of conciseness, however.
+When basepoints are important it is generally more convenient to use reduced
+cones and reduced suspensions, obtained from ordinary cones and suspensions by
+collapsing the segment {x0}×I where x0 is the basepoint. The image point of this
+segment in the reduced cone or suspension then serves as a natural basepoint in the
+quotient. Assuming x0 is a 0 cell, these collapses of {x0}×I are homotopy equiva-
+lences. Using reduced cones and suspensions in the preceding construction yields a
+sequence
+(2)
+A > X→X/A→ΣA > ΣX→Σ(X/A)→Σ2A > Σ2X→···
+where we identify ΣX/ΣA with Σ(X/A), and all the later maps in the sequence are sus-
+pensions of the ﬁrst three maps. This sequence, or its unreduced version, is called the
+coﬁbration sequence or Puppe sequence of the pair (X, A). It has an evident natu-
+rality property, namely, a map (X, A)→(Y, B) induces a map between the coﬁbration
+sequences of these two pairs, with homotopy-commutative squares:
+B
+ΣB
+B
+Y
+Y/
+B
+B
+Y/
+−−−→
+−−−→
+Σ
+−−−→
+−−−→
+ΣY
+−−−→
+Σ
+−−−→
+−−−→
+−→
+−→
+−→
+−→
+−→
+−→
+−→
+(
+)
+2
+...
+A
+ΣA
+A
+X
+X/
+A
+A
+X/
+−−−→
+−−−→
+Σ
+−−−→
+−−−→
+ΣX
+−−−→
+Σ
+−−−→
+−−−→
+(
+)
+2
+...
+Taking basepoint-preserving homotopy classes of maps from the spaces in (2) to
+a ﬁxed space K gives a sequence
+(3)
+⟨A, K⟩←⟨X, K⟩←⟨X/A, K⟩←⟨ΣA, K⟩←⟨ΣX, K⟩←···
+whose maps are deﬁned by composition with those in (2).
+For example, the map
+⟨X, K⟩→⟨A, K⟩sends a map X→K to A→X→K . The sets in (3) are groups starting
+
+Connections with Cohomology
+Section 4.3
+399
+with ⟨ΣA, K⟩, and abelian groups from ⟨Σ2A, K⟩onward. It is easy to see that the maps
+between these groups are homomorphisms since the maps in (2) are suspensions from
+ΣA→ΣX onward. In general the ﬁrst three terms of (3) are only sets with distinguished
+‘zero’ elements, the constant maps.
+A key observation is that the sequence (3) is exact. To see this, note ﬁrst that the
+diagram (1) shows that, up to homotopy equivalence, each term in (2) is obtained from
+its two predecessors by the same procedure of forming a mapping cone, so it sufﬁces
+to show that ⟨A, K⟩←⟨X, K⟩←⟨X ∪CA, K⟩is exact. This is easy: A map f : X→K
+goes to zero in ⟨A, K⟩iff its restriction to A is nullhomotopic, ﬁxing the basepoint,
+and this is equivalent to f extending to a map X ∪CA→K .
+If we have a weak homotopy equivalence K→ΩK′ for some space K′ , then the
+sequence (3) can be continued three steps to the left via the commutative diagram
+−→
+−→
+−→
+A
+X/
+−−→
+−−→
+−−→
+−−→
+−−→
+A
+X/
+Σ(
+)
+...
+A K
+⟨
+,
+′⟩
+X K
+⟨
+,
+′⟩
+K
+⟨
+,
+′⟩
+ΣA K
+⟨
+,
+′⟩
+−−→
+ΣX K
+⟨
+,
+′⟩
+K
+⟨
+,
+′⟩
+−−→
+−−→
+A
+X/
+...
+A ΩK
+⟨
+,
+′⟩
+X ΩK
+⟨
+,
+′⟩
+−−→
+ΩK
+⟨
+,
+′⟩
+−−→
+−−→
+A
+X/
+...
+A K
+⟨
+,
+⟩
+−−→
+X K
+⟨
+,
+⟩
+K
+⟨
+,
+⟩
+≈
+≈
+≈
+−→
+−→
+−→
+≈
+≈
+≈
+Thus if we have a sequence of spaces Kn together with weak homotopy equivalences
+Kn→ΩKn+1 , we can extend the sequence (3) to the left indeﬁnitely, producing a long
+exact sequence
+(4)
+···←⟨A, Kn⟩←⟨X, Kn⟩←⟨X/A, Kn⟩←⟨A, Kn−1⟩←⟨X, Kn−1⟩←···
+All the terms here are abelian groups and the maps homomorphisms. This long exact
+sequence is natural with respect to maps (X, A)→(Y, B) since coﬁbration sequences
+are natural.
+⊔⊓
+There is no essential difference between cohomology theories on basepointed
+CW complexes and cohomology theories on nonbasepointed CW complexes. Given a
+reduced basepointed cohomology theory eh∗, one gets an unreduced theory by setting
+hn(X, A) = ehn(X/A), where X/∅= X+ , the union of X with a disjoint basepoint.
+This is a nonbasepointed theory since an arbitrary map X→Y induces a basepoint-
+preserving map X+→Y+ . Furthermore, a nonbasepointed unreduced theory h∗gives
+a nonbasepointed reduced theory by setting ehn(X) = Coker
+ hn(point)→hn(X)
+
+,
+where the map is induced by the constant map X→point . One could also give an
+argument using suspension, which is always an isomorphism for reduced theories,
+and which takes one from the nonbasepointed to the basepointed category.
+Theorem 4.59. If h∗is an unreduced cohomology theory on the category of CW
+pairs and hn(point) = 0 for n ≠0, then there are natural isomorphisms hn(X, A) ≈
+Hn X, A; h0(point)
+
+for all CW pairs (X, A) and all n. The corresponding statement
+for homology theories is also true.
+
+400
+Chapter 4
+Homotopy Theory
+Proof: The case of homology is slightly simpler, so let us consider this ﬁrst. For CW
+complexes, relative homology groups reduce to absolute groups, so it sufﬁces to deal
+with the latter. For a CW complex X the long exact sequences of h∗homology groups
+for the pairs (Xn, Xn−1) give rise to a cellular chain complex
+··· ---→hn+1(Xn+1, Xn)
+dn+1
+--------→hn(Xn, Xn−1)
+dn
+------→hn−1(Xn−1, Xn−2) ---→···
+just as for ordinary homology. The hypothesis that hn(point) = 0 for n ≠0 implies
+that this chain complex has homology groups hn(X) by the same argument as for
+ordinary homology. The main thing to verify now is that this cellular chain complex
+is isomorphic to the cellular chain complex in ordinary homology with coefﬁcients
+in the group G = h0(point). Certainly the cellular chain groups in the two cases are
+isomorphic, being direct sums of copies of G with one copy for each cell, so we have
+only to check that the cellular boundary maps are the same.
+It is not really necessary to treat the cellular boundary map d1 from 1 chains
+to 0 chains since one can always pass from X to ΣX , suspension being a natural
+isomorphism in any homology theory, and the double suspension Σ2X has no 1 cells.
+The calculation of cellular boundary maps dn for n > 1 in terms of degrees of
+certain maps between spheres works equally well for the homology theory h∗, where
+‘degree’ now means degree with respect to the h∗theory, so what is needed is the
+fact that a map Sn→Sn of degree m in the usual sense induces multiplication by m
+on hn(Sn) ≈G. This is obviously true for degrees 0 and 1, represented by a constant
+map and the identity map. Since πn(Sn) ≈Z, every map Sn→Sn is homotopic to
+some multiple of the identity, so the general case will follow if we know that degree
+in the h∗theory is additive with respect to the sum operation in πn(Sn). This is a
+special case of the following more general assertion:
+Lemma 4.60. If a functor h from basepointed CW complexes to abelian groups sat-
+isﬁes the homotopy and wedge axioms, then for any two basepoint-preserving maps
+f , g : ΣX→K , we have (f + g)∗= f∗+ g∗if h is covariant and (f + g)∗= f ∗+ g∗
+if h is contravariant.
+Proof: The map f + g is the composition ΣX
+c--→ΣX ∨ΣX
+f∨g
+---------→K where c is the
+quotient map collapsing an equatorial copy of X . In the covariant case consider the
+diagram at the right, where i1 and i2
+ΣX
+h(
+)
+ΣX
+h(
+)
+ΣX
+h(
+)
+K
+h(
+)
+ΣX
+ΣX
+h(
+(
+)
+)
+∨
+∨
+−−−−−→
+−−−−−−→
+−−−−−→
+⊕
+⊕
+∗
+∗
+∗
+c
+f
+g
+i1
+∗
+i2
+≈
+are the inclusions ΣX > ΣX ∨ΣX . Let
+q1, q2 : ΣX ∨ΣX -→ΣX be the quotient
+maps restricting to the identity on the
+summand indicated by the subscript and collapsing the other summand to a point.
+Then q1∗⊕q2∗is an inverse to i1∗⊕i2∗since qjik is the identity map for j = k and
+the constant map for j ≠k.
+An element x in the left-hand group h(ΣX) in the diagram is sent by the compo-
+sition (q1∗⊕q2∗)c∗to the element (x, x) in the lower group h(ΣX)⊕h(ΣX) since

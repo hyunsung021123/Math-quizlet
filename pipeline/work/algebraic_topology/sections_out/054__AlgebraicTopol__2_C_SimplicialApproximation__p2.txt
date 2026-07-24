@@ -1,0 +1,59 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.C Simplicial Approximation (분할 part 2)
+직전 소단원: 「2.B.ex Exercises」
+[본문]
+184
+Chapter 2
+Homology
+simplicial subcomplex Sn
+α homeomorphic to Sn at one end of M(fα), and the homeo-
+morphism Sn ≈Sn
+α is homotopic in Wn to the map fα , hence also to ϕα . Let Zn+1 be
+obtained from Zn by attaching Dn+1
+α
+×I ’s via these homotopies between the ϕα ’s and
+the inclusions Sn
+α>Wn . Thus Zn+1 contains Xn+1 at one end, and at the other end we
+have a simplicial complex Yn+1 = Yn
+S
+α C(fα), where C(fα) is obtained from M(fα)
+by attaching a cone on the subcomplex Sn
+α . Since Dn+1×I deformation retracts onto
+∂Dn+1×I ∪Dn+1×{1}, we see that Zn+1 deformation retracts onto Zn ∪Yn+1 , which
+in turn deformation retracts onto Yn ∪Yn+1 = Yn+1 by induction. Likewise, Zn+1
+deformation retracts onto Xn+1 ∪Wn which deformation retracts onto Xn+1 ∪Zn and
+hence onto Xn+1 ∪Xn = Xn+1 by induction.
+Let Y =
+S
+n Yn and Z =
+S
+n Zn . The deformation retractions of Zn onto Xn
+give deformation retractions of X ∪Zn onto X , and the inﬁnite concatenation of the
+latter deformation retractions is a deformation retraction of Z onto X . Similarly, Z
+deformation retracts onto Y .
+⊔⊓
+Exercises
+1. What is the minimum number of edges in simplicial complex structures K and L
+on S1 such that there is a simplicial map K→L of degree n?
+2. Use the Lefschetz ﬁxed point theorem to show that a map Sn→Sn has a ﬁxed
+point unless its degree is equal to the degree of the antipodal map x , −x .
+3. Verify that the formula f (z1, ··· , z2k) = (z2, −z1, z4, −z3, ··· , z2k, −z2k−1) deﬁnes
+a map f : C2k→C2k inducing a quotient map CP2k−1→CP2k−1 without ﬁxed points.
+4. If X is a ﬁnite simplicial complex and f : X→X is a simplicial homeomorphism,
+show that the Lefschetz number τ(f ) equals the Euler characteristic of the set of ﬁxed
+points of f . In particular, τ(f ) is the number of ﬁxed points if the ﬁxed points are
+isolated. [Hint: Barycentrically subdivide X to make the ﬁxed point set a subcomplex.]
+5. Let M be a closed orientable surface embedded in R3 in such a way that reﬂection
+across a plane P deﬁnes a homeomorphism r : M→M ﬁxing M ∩P , a collection of
+circles. Is it possible to homotope r to have no ﬁxed points?
+6. Do an even-genus analog of Example 2C.4 by replacing the central torus by a sphere
+letting f be a homeomorphism that restricts to the antipodal map on this sphere.
+7. Verify that the Lefschetz ﬁxed point theorem holds also when τ(f ) is deﬁned using
+homology with coefﬁcients in a ﬁeld F .
+8. Let X be homotopy equivalent to a ﬁnite simplicial complex and let Y be homotopy
+equivalent to a ﬁnite or countably inﬁnite simplicial complex. Using the simplicial ap-
+proximation theorem, show that there are at most countably many homotopy classes
+of maps X→Y .
+9. Show that there are only countably many homotopy types of ﬁnite CW complexes.

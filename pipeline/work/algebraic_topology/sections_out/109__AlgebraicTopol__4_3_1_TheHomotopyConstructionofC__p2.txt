@@ -1,0 +1,243 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.3.1 The Homotopy Construction of Cohomology (분할 part 2)
+직전 소단원: 「4.3 Connections with Cohomology」
+[본문]
+Connections with Cohomology
+Section 4.3
+401
+q1c and q2c are homotopic to the identity. The composition (f ∨g)∗(i1∗⊕i2∗) sends
+(x, 0) to f∗(x) and (0, y) to g∗(y) since (f ∨g)i1 = f and (f ∨g)i2 = g. Hence
+(x, y) is sent to f∗(x) + g∗(y). Combining these facts, we see that the composition
+across the top of the diagram is x , f∗(x) + g∗(x). But this composition is also
+(f + g)∗since f + g = (f ∨g)c . This ﬁnishes the proof in the covariant case.
+The contravariant case is similar, using the corresponding diagram with arrows
+reversed. The inverse of i∗
+1 ⊕i∗
+2 is q∗
+1 ⊕q∗
+2 by the same reasoning. An element u in
+the right-hand group h(K) maps to the element (f ∗(u), g∗(u)) in the lower group
+h(ΣX)⊕h(ΣX) since (f ∨g)i1 = f and (f ∨g)i2 = g. An element (x, 0) in the
+lower group in the diagram maps to the element x in the left-hand group since q1c
+is homotopic to the identity, and similarly (0, y) maps to y . Hence (x, y) maps to
+x + y in the left-hand group. We conclude that u ∈h(K) maps by the composition
+across the top of the diagram to f ∗(u) + g∗(u) in h(ΣX). But this composition is
+(f + g)∗by deﬁnition.
+⊔⊓
+Returning to the proof of the theorem, we see that the cellular chain complexes for
+h∗(X) and H∗(X; G) are isomorphic, so we obtain isomorphisms hn(X) ≈Hn(X; G)
+for all n. To verify that these isomorphisms are natural with respect to maps f : X→Y
+we may ﬁrst deform such a map f to be cellular. Then f takes each pair (Xn, Xn−1)
+to the pair (Y n, Y n−1), hence f induces a chain map of cellular chain complexes in
+the h∗theory, as well as for H∗(−; G). To compute these chain maps we may pass to
+the quotient maps Xn/Xn−1→Y n/Y n−1 . These are maps of the form
+W
+α Sn
+α→
+W
+β Sn
+β ,
+so the induced maps f∗on hn are determined by their component maps f∗: Sn
+α→Sn
+β .
+This is exactly the same situation as with the cellular boundary maps before, where
+we saw that the degree of a map Sn→Sn determines the induced map on hn . We
+conclude that the cellular chain map induced by f in the h∗theory agrees exactly
+with the cellular chain map for H∗(−; G). This implies that the isomorphism between
+the two theories is natural.
+The situation for cohomology is quite similar, but there is one point in the ar-
+gument where a few more words are needed. For cohomology theories the cellular
+cochain groups are the direct product, rather than the direct sum, of copies of the
+coefﬁcient group G = h0(point), with one copy per cell. This means that when there
+are inﬁnitely many cells in a given dimension, it is not automatically true that the
+cellular coboundary maps are uniquely determined by how they map factors of one
+direct product to factors of the other direct product. To be precise, consider the cel-
+lular coboundary map dn : hn(Xn, Xn−1)→hn+1(Xn+1, Xn). Decomposing the latter
+group as a product of copies of G for the (n + 1) cells, we see that dn is determined
+by the maps hn(Xn/Xn−1)→hn(Sn
+α) associated to the attaching maps ϕα of the cells
+en+1
+α
+. The thing to observe is that since ϕα has compact image, meeting only ﬁnitely
+many n cells, this map hn(Xn/Xn−1)→hn(Sn
+α) is ﬁnitely supported in the sense that
+
+402
+Chapter 4
+Homotopy Theory
+there is a splitting of the domain into a product of ﬁnitely many factors and a product
+of the remaining possibly inﬁnite number of factors, such that the map is zero on the
+latter product. Finitely supported maps have the good property that they are deter-
+mined by their restrictions to the G factors of hn(Xn/Xn−1). From this we deduce,
+using the lemma, that the cellular coboundary maps in the h∗theory agree with those
+in ordinary cohomology with G coefﬁcients. This extra argument is also needed to
+prove naturality of the isomorphisms hn(X) ≈Hn(X; G).
+This completes the proof of Theorem 4.59.
+⊔⊓
+Proof of Theorem 4.57: The functors hn(X) = ⟨X, K(G, n)⟩deﬁne a reduced co-
+homology theory, and the coefﬁcient groups hn(Si) = πi(K(G, n)) are the same as
+eHn(Si; G), so Theorem 4.59, translated into reduced cohomology, gives natural iso-
+morphisms T : ⟨X, K(G, n)⟩→eHn(X; G) for all CW complexes X .
+It remains to see that T([f ]) = f ∗(α) for some α ∈eHn(K(G, n); G), independent
+of f . This is purely formal: Take α = T(11) for 11 the identity map of K(G, n), and
+then naturality gives T([f ]) = T(f ∗(11)) = f ∗T(11) = f ∗(α), where the ﬁrst f ∗
+refers to induced homomorphisms for the functor hn , which means composition
+with f .
+⊔⊓
+The fundamental class α = T(11) can be made more explicit if we choose for
+K(G, n) a CW complex K with (n −1) skeleton a point. Denoting ⟨X, K(G, n)⟩by
+hn(X), then we have
+hn(K) ≈hn(Kn+1) ≈Ker d : hn(Kn)→hn+1(Kn+1, Kn)
+The map d is the cellular coboundary in h∗cohomology since we have hn(Kn) =
+hn(Kn, Kn−1) because Kn−1 is a point and h∗is a reduced theory. The isomorphism
+of hn(K) with Ker d is given by restriction of maps K→K to Kn , so the element
+11 ∈hn(K) deﬁning the fundamental class T(11) corresponds, under the isomorphism
+hn(K) ≈Ker d, to the inclusion Kn>K viewed as an element of hn(Kn). As a cellular
+cocycle this element assigns to each n cell of K the element of the coefﬁcient group
+G = πn(K) given by the inclusion of the closure of this cell into K . This means that
+the fundamental class α ∈Hn(K; G) is represented by the cellular cocycle assigning
+to each n cell the element of πn(K) given by a characteristic map for the cell.
+By naturality of T it follows that for a cellular map f : X→K , the corresponding
+element of Hn(X; G) is represented by the cellular cocycle sending each n cell of X to
+the element of G = πn(K) represented by the composition of f with a characteristic
+map for the cell.
+The natural isomorphism Hn(X; G) ≈⟨X, K(G, n)⟩leads to a basic principle
+which reappears many places in algebraic topology, the idea that the occurrence or
+nonoccurrence of a certain phenomenon is governed by what happens in a single spe-
+cial case, the universal example. To illustrate, let us prove the following special fact:
+
+Connections with Cohomology
+Section 4.3
+403
+The map H1(X; Z)→H2(X; Z), α , α2 , is identically zero for all spaces X .
+By taking a CW approximation to X we are reduced to the case that X is a CW complex.
+Then every element of H1(X; Z) has the form f ∗(α) for some f : X→K(Z, 1), with
+α a fundamental class in H1(K(Z, 1); Z), further reducing us to verifying the result
+for this single α, the ‘universal example.’ And for this universal α it is evident that
+α2 = 0 since S1 is a K(Z, 1) and H2(S1; Z) = 0.
+Does this fact generalize?
+It certainly does not hold if we replace the coefﬁ-
+cient ring Z by Z2 since H∗(RP∞; Z2) = Z2[x]. Indeed, the example of RP∞shows
+more generally that the fundamental class α ∈Hn(K(Z2, n); Z2) generates a poly-
+nomial subalgebra Z2[α] ⊂H∗(K(Z2, n); Z2) for each n ≥1, since there is a map
+f : RP∞→K(Z2, n) with f ∗(α) = xn and all the powers of xn are nonzero, hence
+also all the powers of α. By the same reasoning, the example of CP∞shows that the
+fundamental class α ∈H2n(K(Z, 2n); Z) generates a polynomial subalgebra Z[α] in
+H∗(K(Z, 2n); Z). As we shall see in [SSAT], H∗(K(Z, 2n); Z)/torsion is exactly this
+polynomial algebra Z[α].
+A little more subtle is the question of identifying the subalgebra of H∗(K(Z, n); Z)
+generated by the fundamental class α for odd n ≥3. By the commutativity prop-
+erty of cup products we know that α2 is either zero or of order two. To see that
+α2 is nonzero it sufﬁces to ﬁnd a single space X with an element γ ∈Hn(X; Z)
+such that γ2 ≠0. The ﬁrst place to look might be RP∞, but its cohomology with Z
+coefﬁcients is concentrated in even dimensions. Instead, consider X = RP∞×RP∞.
+This has Z2 cohomology Z2[x, y] and Example 3E.5 shows that its Z cohomology
+is the Z2[x2, y2] submodule generated by 1 and x2y + xy2 , except in dimension
+zero of course, where 1 generates a Z rather than a Z2 . In particular we can take
+z = x2k(x2y + xy2) for any k ≥0, and then all powers zm are nonzero since we are
+inside the polynomial ring Z2[x, y]. It follows that the subalgebra of H∗(K(Z, n); Z)
+generated by α is Z[α]/(2α2) for odd n ≥3.
+These examples lead one to wonder just how complicated the cohomology of
+K(G, n)’s is. The general construction of a K(G, n) is not very helpful in answering
+this question. Consider the case G = Z for example. Here one would start with Sn and
+attach (n + 2) cells to kill πn+1(Sn). Since πn+1(Sn) happens to be cyclic, only one
+(n + 2) cell is needed. To continue, one would have to compute generators for πn+2
+of the resulting space Sn ∪en+2 , use these to attach (n + 3) cells, then compute the
+resulting πn+3 , and so on for each successive dimension. When n = 2 this procedure
+happens to work out very neatly, and the resulting K(Z, 2) is CP∞with its usual CW
+structure having one cell in each even dimension, according to an exercise at the end
+of the section. However, for larger n it quickly becomes impractical to make this
+procedure explicit since homotopy groups are so hard to compute. One can get some
+idea of the difﬁculties of the next case n = 3 by considering the homology groups of
+K(Z, 3). Using techniques in [SSAT], the groups Hi(K(Z, 3); Z) for 0 ≤i ≤12 can be
+
+404
+Chapter 4
+Homotopy Theory
+computed to be
+Z, 0, 0, Z, 0, Z2, 0, Z3, Z2, Z2, Z3, Z10, Z2
+To get this sequence of homology groups would require quite a few cells, and the
+situation only gets worse in higher dimensions, where the homology groups are not
+always cyclic.
+Indeed, one might guess that computing the homology groups of K(Z, n)’s would
+be of the same order of difﬁculty as computing the homotopy groups of spheres, but
+by some miracle this is not the case. The calculations are indeed complicated, but
+they were completely done by Serre and Cartan in the 1950s, not just for K(Z, n)’s,
+but for all K(G, n)’s with G ﬁnitely generated abelian. For example, H∗(K(Z, 3); Z2)
+is the polynomial algebra Z2[x3, x5, x9, x17, x33, ···] with generators of dimensions
+2i + 1, indicated by the subscripts. And in general, for G ﬁnitely generated abelian,
+H∗(K(G, n); Zp) is a polynomial algebra on generators of speciﬁed dimensions if p
+is 2, while for p an odd prime one gets the tensor product of a polynomial ring
+on generators of speciﬁed even dimensions and an exterior algebra on generators of
+speciﬁed odd dimensions. With Z coefﬁcients the description of the cohomology is
+not nearly so neat, however. We will study these questions in some detail in [SSAT].
+There is a good reason for being interested in the cohomology of K(G, n)’s, aris-
+ing from the equivalence Hn(X; G) ≈⟨X, K(G, n)⟩. Taking Z coefﬁcients for simplic-
+ity, an element of Hm(K(Z, n); Z) corresponds to a map θ : K(Z, n)→K(Z, m). We
+can compose θ with any map f : X→K(Z, n) to get a map θf : X→K(Z, m). Letting
+f vary and keeping θ ﬁxed, this gives a function Hn(X; Z)→Hm(X; Z), depending
+only on θ. This is the idea of cohomology operations, which we study in more detail
+in §4.L.
+The equivalence Hn(X; G) ≈⟨X, K(G, n)⟩also leads to a new viewpoint toward
+cup products. Taking G to be a ring R and setting Kn = K(R, n), then if we are given
+maps f : X→Km and g : Y→Kn , we can deﬁne the cross product of the corresponding
+cohomology classes by the composition
+X×Y
+f ×g
+--------→Km×Kn ---→Km ∧Kn
+µ-----→Km+n
+where the middle map is the quotient map and µ can be deﬁned in the following way.
+The space Km ∧Kn is (m + n −1) connected, so by the Hurewicz theorem and the
+K¨unneth formula for reduced homology we have isomorphisms πm+n(Km ∧Kn) ≈
+Hm+n(Km ∧Kn) ≈Hm(Km)⊗Hn(Kn) ≈R⊗R. By Lemmas 4.7 and 4.31 there is then
+a map µ : Km ∧Kn→Km+n inducing the multiplication map R⊗R→R on πm+n . Or
+we could use the isomorphism Hm+n(Km ∧Kn; R) ≈Hom(Hm+n(Km ∧Kn), R) and
+let µ be the map corresponding to the cohomology class given by the multiplication
+homomorphism R⊗R→R.
+
+Connections with Cohomology
+Section 4.3
+405
+The case R = Z is particularly simple. We can take Sm as the (m + 1) skeleton
+of Km , and similarly for Kn , so Km ∧Kn has Sm ∧Sn as its (m + n + 1) skeleton
+and we can obtain µ by extending the inclusion Sm ∧Sn = Sm+n > Km+n .
+It is not hard to prove the basic properties of cup product using this deﬁnition,
+and in particular the commutativity property becomes somewhat more transparent
+from this viewpoint. For example, when R = Z, commutativity just comes down to
+the fact that the map Sm ∧Sn→Sn ∧Sm switching the factors has degree (−1)mn
+when regarded as a map of Sm+n .
+Fibrations
+Recall from §4.2 that a ﬁbration is a map p : E→B having the homotopy lifting
+property with respect to all spaces. In a ﬁber bundle all the ﬁbers are homeomorphic
+by deﬁnition, but this need not be true for ﬁbrations. An example is the linear projec-
+tion of a 2 simplex onto one of its edges, which is a ﬁbration according to an exercise
+at the end of the section. The following result gives some evidence that ﬁbrations
+should be thought of as a homotopy-theoretic analog of ﬁber bundles:
+Proposition 4.61. For a ﬁbration p : E→B , the ﬁbers Fb = p−1(b) over each path
+component of B are all homotopy equivalent.
+Proof: A path γ : I→B gives rise to a homotopy gt : Fγ(0)→B with gt(Fγ(0)) = γ(t).
+The inclusion Fγ(0) > E provides a lift eg0 , so by the homotopy lifting property we
+have a homotopy egt : Fγ(0)→E with egt(Fγ(0)) ⊂Fγ(t) for all t . In particular, eg1 gives
+a map Lγ : Fγ(0)→Fγ(1) . The association γ , Lγ has the following basic properties:
+(a) If γ ≃γ′ rel ∂I , then Lγ ≃Lγ′ . In particular the homotopy class of Lγ is inde-
+pendent of the choice of the lifting egt of gt .
+(b) For a composition of paths γγ′ , Lγγ′ is homotopic to the composition Lγ′Lγ .
+From these statements it follows that Lγ is a homotopy equivalence with homotopy
+inverse Lγ , where γ is the inverse path of γ .
+Before proving (a), note that a ﬁbration has the homotopy lifting property for
+pairs (X×I, X×∂I) since the pairs (I×I, I×{0}∪∂I×I) and (I×I, I×{0}) are homeo-
+morphic, hence the same is true after taking products with X .
+To prove (a), let γ(s, t) be a homotopy from γ(t) to γ′(t), (s, t) ∈I×I . This
+determines a family gst : Fγ(0)→B with gst(Fγ(0)) = γ(s, t). Let eg0,t and eg1,t be lifts
+deﬁning Lγ and Lγ′ , and let egs,0 be the inclusion Fγ(0) > E for all s . Using the
+homotopy lifting property for the pair (Fγ(0)×I, Fγ(0)×∂I), we can extend these lifts
+to lifts egst for (s, t) ∈I×I . Restricting to t = 1 then gives a homotopy Lγ ≃Lγ′ .
+Property (b) holds since for lifts egt and eg′
+t deﬁning Lγ and Lγ′ we obtain a lift
+deﬁning Lγγ′ by taking eg2t for 0 ≤t ≤1/2 and eg′
+2t−1Lγ for 1/2 ≤t ≤1.
+⊔⊓
+One may ask whether ﬁbrations satisfy a homotopy analog of the local triviality
+property of ﬁber bundles. Observe ﬁrst that for a ﬁbration p : E→B , the restriction

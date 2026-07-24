@@ -1,0 +1,463 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.3.ex Exercises
+직전 소단원: 「3.3.4 Other Forms of Duality」
+[연습문제]
+Poincar´e Duality
+Section 3.3
+257
+gular cohomology of K with another kind of cohomology called ˇCech cohomology.
+This is deﬁned in the following way. To each open cover U = {Uα} of a given space X
+we can associate a simplicial complex N(U) called the nerve of U. This has a vertex
+vα for each Uα , and a set of k + 1 vertices spans a k simplex whenever the k + 1
+corresponding Uα ’s have nonempty intersection. When another cover V = {Vβ} is a
+reﬁnement of U, so each Vβ is contained in some Uα , then these inclusions induce a
+simplicial map N(V)→N(U) that is well-deﬁned up to homotopy. We can then form
+the direct limit lim
+--→Hi(N(U); G) with respect to ﬁner and ﬁner open covers U. This
+limit group is by deﬁnition the ˇCech cohomology group ˇ
+Hi(X; G). For a full exposi-
+tion of this cohomology theory see [Eilenberg & Steenrod 1952]. With an analogous
+deﬁnition of relative groups, ˇCech cohomology turns out to satisfy the same axioms as
+singular cohomology, and indeed a stronger form of excision: a map (X, A)→(Y, B)
+that restricts to a homeomorphism X −A→Y −B induces isomorphisms on ˇCech
+cohomology groups. For spaces homotopy equivalent to CW complexes, ˇCech coho-
+mology coincides with singular cohomology, but for spaces with local complexities it
+often behaves more reasonably. For example, if X is the subspace of R3 consisting
+of the spheres of radius 1/n and center (1/n, 0, 0) for n = 1, 2, ···, then contrary to
+what one might expect, H3(X; Z) is nonzero, as shown in [Barratt & Milnor 1962]. But
+ˇ
+H3(X; Z) = 0 and ˇ
+H2(X; Z) = Z∞, the direct sum of countably many copies of Z.
+Oddly enough, the corresponding ˇCech homology groups deﬁned using inverse
+limits are not so well-behaved. This is because the exactness axiom fails due to the
+algebraic fact that an inverse limit of exact sequences need not be exact, as a direct
+limit would be; see §3.F. However, there is a way around this problem using a more
+reﬁned deﬁnition. This is Steenrod homology theory, which the reader can ﬁnd out
+about in [Milnor 1995].
+Exercises
+1.
+Show that there exist nonorientable 1 dimensional manifolds if the Hausdorff
+condition is dropped from the deﬁnition of a manifold.
+2. Show that deleting a point from a manifold of dimension greater than 1 does not
+affect orientability of the manifold.
+3. Show that every covering space of an orientable manifold is an orientable manifold.
+4.
+Given a covering space action of a group G on an orientable manifold M by
+orientation-preserving homeomorphisms, show that M/G is also orientable.
+5. Show that M×N is orientable iff M and N are both orientable.
+6. Given two disjoint connected n manifolds M1 and M2 , a connected n manifold
+M1♯M2 , their connected sum, can be constructed by deleting the interiors of closed
+n balls B1 ⊂M1 and B2 ⊂M2 and identifying the resulting boundary spheres ∂B1 and
+∂B2 via some homeomorphism between them. (Assume that each Bi embeds nicely
+in a larger ball in Mi .)
+
+258
+Chapter 3
+Cohomology
+(a) Show that if M1 and M2 are closed then there are isomorphisms Hi(M1♯M2; Z) ≈
+Hi(M1; Z)⊕Hi(M2; Z) for 0 < i < n, with one exception: If both M1 and M2 are
+nonorientable, then Hn−1(M1♯M2; Z) is obtained from Hn−1(M1; Z)⊕Hn−1(M2; Z) by
+replacing one of the two Z2 summands by a Z summand. [Euler characteristics may
+help in the exceptional case.]
+(b) Show that χ(M1♯M2) = χ(M1) + χ(M2) −χ(Sn) if M1 and M2 are closed.
+7. For a map f : M→N between connected closed orientable n manifolds with fun-
+damental classes [M] and [N], the degree of f is deﬁned to be the integer d such
+that f∗([M]) = d[N], so the sign of the degree depends on the choice of fundamen-
+tal classes. Show that for any connected closed orientable n manifold M there is a
+degree 1 map M→Sn .
+8. For a map f : M→N between connected closed orientable n manifolds, suppose
+there is a ball B ⊂N such that f −1(B) is the disjoint union of balls Bi each mapped
+homeomorphically by f onto B . Show the degree of f is
+P
+i εi where εi is +1 or −1
+according to whether f : Bi→B preserves or reverses local orientations induced from
+given fundamental classes [M] and [N].
+9. Show that a p sheeted covering space projection M→N has degree ±p, when M
+and N are connected closed orientable manifolds.
+10. Show that for a degree 1 map f : M→N of connected closed orientable manifolds,
+the induced map f∗: π1M→π1N is surjective, hence also f∗: H1(M)→H1(N). [Lift
+f to the covering space eN→N corresponding to the subgroup Im f∗⊂π1N , then
+consider the two cases that this covering is ﬁnite-sheeted or inﬁnite-sheeted.]
+11. If Mg denotes the closed orientable surface of genus g, show that degree 1 maps
+Mg→Mh exist iff g ≥h.
+12. As an algebraic application of the preceding problem, show that in a free group
+F with basis x1, ··· , x2k , the product of commutators [x1, x2] ··· [x2k−1, x2k] is not
+equal to a product of fewer than k commutators [vi, wi] of elements vi, wi ∈F .
+[Recall that the 2 cell of Mk is attached by the product [x1, x2] ··· [x2k−1, x2k]. From
+a relation [x1, x2] ··· [x2k−1, x2k] = [v1, w1] ··· [vj, wj] in F , construct a degree 1
+map Mj→Mk .]
+13. Let M′
+h ⊂Mg be a compact subsurface of genus h with one boundary circle, so
+M′
+h is homeomorphic to Mh with an open disk removed. Show there is no retraction
+Mg→M′
+h if h > g/2. [Apply the previous problem, using the fact that Mg −M′
+h has
+genus g −h.]
+14. Let X be the shrinking wedge of circles in Example 1.25, the subspace of R2
+consisting of the circles of radius 1/n and center (1/n, 0) for n = 1, 2, ···.
+(a) If fn : I→X is the loop based at the origin winding once around the nth circle,
+show that the inﬁnite product of commutators [f1, f2][f3, f4] ··· deﬁnes a loop in X
+that is nontrivial in H1(X). [Use Exercise 12.]
+
+Poincar´e Duality
+Section 3.3
+259
+(b) If we view X as the wedge sum of the subspaces A and B consisting of the odd-
+numbered and even-numbered circles, respectively, use the same loop to show that
+the map H1(X)→H1(A)⊕H1(B) induced by the retractions of X onto A and B is not
+an isomorphism.
+15. For an n manifold M and a compact subspace A ⊂M , show that Hn(M, M −A; R)
+is isomorphic to the group ΓR(A) of sections of the covering space MR→M over A,
+that is, maps A→MR whose composition with MR→M is the identity.
+16. Show that (α ⌢ϕ) ⌢ψ = α ⌢(ϕ ⌣ψ) for all α ∈Ck(X; R), ϕ ∈Cℓ(X; R), and
+ψ ∈Cm(X; R). Deduce that cap product makes H∗(X; R) a right H∗(X; R) module.
+17. Show that a direct limit of exact sequences is exact. More generally, show that
+homology commutes with direct limits: If {Cα, fαβ} is a directed system of chain
+complexes, with the maps fαβ : Cα→Cβ chain maps, then Hn(lim
+--→Cα) = lim
+--→Hn(Cα).
+18. Show that a direct limit lim
+--→Gα of torsionfree abelian groups Gα is torsionfree.
+More generally, show that any ﬁnitely generated subgroup of lim
+--→Gα is realized as a
+subgroup of some Gα .
+19. Show that a direct limit of countable abelian groups over a countable indexing
+set is countable. Apply this to show that if X is an open set in Rn then Hi(X; Z) is
+countable for all i.
+20. Show that H0
+c (X; G) = 0 if X is path-connected and noncompact.
+21. For a space X , let X+ be the one-point compactiﬁcation. If the added point,
+denoted ∞, has a neighborhood in X+ that is a cone with ∞the cone point, show that
+the evident map Hn
+c (X; G)→Hn(X+, ∞; G) is an isomorphism for all n. [Question:
+Does this result hold when X = Z×R?]
+22. Show that Hn
+c (X×R; G) ≈Hn−1
+c
+(X; G) for all n.
+23. Show that for a locally compact ∆complex X the simplicial and singular coho-
+mology groups Hi
+c(X; G) are isomorphic. This can be done by showing that ∆i
+c(X; G)
+is the union of its subgroups ∆i(X, A; G) as A ranges over subcomplexes of X that
+contain all but ﬁnitely many simplices, and likewise Ci
+c(X; G) is the union of its sub-
+groups Ci(X, A; G) for the same family of subcomplexes A.
+24. Let M be a closed connected 3 manifold, and write H1(M; Z) as Zr ⊕F , the direct
+sum of a free abelian group of rank r and a ﬁnite group F . Show that H2(M; Z) is
+Zr if M is orientable and Zr−1⊕Z2 if M is nonorientable. In particular, r ≥1 when
+M is nonorientable. Using Exercise 6, construct examples showing there are no other
+restrictions on the homology groups of closed 3 manifolds. [In the nonorientable case
+consider the manifold N obtained from S2×I by identifying S2×{0} with S2×{1}
+via a reﬂection of S2 .]
+25. Show that if a closed orientable manifold M of dimension 2k has Hk−1(M; Z)
+torsionfree, then Hk(M; Z) is also torsionfree.
+
+260
+Chapter 3
+Cohomology
+26. Compute the cup product structure in H∗(S2×S8♯S4×S6; Z), and in particular
+show that the only nontrivial cup products are those dictated by Poincar´e duality. [See
+Exercise 6. The result has an evident generalization to connected sums of Si×Sn−i ’s
+for ﬁxed n and varying i.]
+27. Show that after a suitable change of basis, a skew-symmetric nonsingular bilinear
+form over Z can be represented by a matrix consisting of 2×2 blocks
+  0
+1
+−1
+0
+
+along
+the diagonal and zeros elsewhere. [For the matrix of a bilinear form, the following
+operation can be realized by a change of basis: Add an integer multiple of the ith row
+to the j th row and add the same integer multiple of the ith column to the j th column.
+Use this to ﬁx up each column in turn. Note that a skew-symmetric matrix must have
+zeros on the diagonal.]
+28. Show that a nonsingular symmetric or skew-symmetric bilinear pairing over a ﬁeld
+F , of the form Fn×Fn→F , cannot be identically zero when restricted to all pairs of
+vectors v, w in a k dimensional subspace V ⊂Fn if k > n/2.
+29. Use the preceding problem to show that if the closed orientable surface Mg of
+genus g retracts onto a graph X ⊂Mg , then H1(X) has rank at most g. Deduce an
+alternative proof of Exercise 13 from this, and construct a retraction of Mg onto a
+wedge sum of k circles for each k ≤g.
+30. Show that the boundary of an R orientable manifold is also R orientable.
+31. Show that if M is a compact R orientable n manifold, then the boundary map
+Hn(M, ∂M; R)→Hn−1(∂M; R) sends a fundamental class for (M, ∂M) to a fundamen-
+tal class for ∂M .
+32. Show that a compact manifold does not retract onto its boundary.
+33. Show that if M is a compact contractible n manifold then ∂M is a homology
+(n −1) sphere, that is, Hi(∂M; Z) ≈Hi(Sn−1; Z) for all i.
+34. For a compact manifold M verify that the following diagram relating Poincar´e
+duality for M and ∂M is commutative, up to sign at least:
+M R
+M
+H (
+)
+−−−−−−−−→
+−−−−−→
+−−−−−→
+k
+H
+(
+)
+k 1
+H (
+)
+k
+M
+H (
+k
+−−−−→
+−−−−−−−→
+−−−−→
+M
+H
+(
+)
+n k
+-
+H
+(
+n k 1
+-
+-
+−−−−→
+∂
+∂
+∂
+;
+R
+;
+R
+;
+M
+H
+(
+)
+n k
+-
+R
+;
+M
+H
+(
+)
+n k
+-
+R
+;
+)
+M,
+M
+∂
+)
+R
+;
+M
+∂
+,
+M
+∂
+∂
+R
+;
+R
+;
+[ ]
+M
+−−−−→
+[ ]
+M
+−−−−→
+[  ]
+M
+∂
+−−−−→
+[  ]
+M
+-
+35. If M is a noncompact R orientable n manifold with boundary ∂M having a collar
+neighborhood in M , show that there are Poincar´e duality isomorphisms Hk
+c (M; R) ≈
+Hn−k(M, ∂M; R) for all k, using the ﬁve-lemma and the following diagram:
+M R
+M
+H (
+)
+−−−−−−−→
+−−−−→
+−−→
+−−−−→
+−−−−→
+k
+H
+(
+)
+k 1
+H (
+)
+k
+M
+H (
+k
+−−−→
+−−−−→
+−−−→
+−−−→
+−→
+M
+H
+(
+)
+n k
+-
+H
+(
+n k 1
+-
+-
+−−−−→
+∂
+∂
+;
+R
+;
+R
+;
+M
+H
+(
+)
+n k
+-
+R
+;
+M
+H
+(
+)
+n k
+-
+R
+;
+)
+M,
+M
+∂
+)
+R
+;
+M
+∂
+,
+M
+∂
+∂
+R
+;
+R
+;
+DM
+D M
+DM
+−−−−→
+−−−−→
+∂
+D M
+∂
+−−−−→
+-
+c
+c
+c
+c
+...
+...
+...
+...
+
+Universal Coefﬁcients for Homology
+Section 3.A
+261
+The main goal in this section is an algebraic formula for computing homology with
+arbitrary coefﬁcients in terms of homology with Z coefﬁcients. The theory parallels
+rather closely the universal coefﬁcient theorem for cohomology in §3.1.
+The ﬁrst step is to formulate the deﬁnition of homology with coefﬁcients in terms
+of tensor products. The chain group Cn(X; G) as deﬁned in §2.2 consists of the ﬁnite
+formal sums
+P
+i giσi with gi ∈G and σi : ∆n→X . This means that Cn(X; G) is a
+direct sum of copies of G, with one copy for each singular n simplex in X . More gen-
+erally, the relative chain group Cn(X, A; G) = Cn(X; G)/Cn(A; G) is also a direct sum
+of copies of G, one for each singular n simplex in X not contained in A. From the
+basic properties of tensor products listed in the discussion of the K¨unneth formula
+in §3.2 it follows that Cn(X, A; G) is naturally isomorphic to Cn(X, A)⊗G, via the
+correspondence
+P
+i giσi ,
+P
+i σi ⊗gi . Under this isomorphism the boundary map
+Cn(X, A; G)→Cn−1(X, A; G) becomes the map ∂⊗11 : Cn(X, A)⊗G→Cn−1(X, A)⊗G
+where ∂: Cn(X, A)→Cn−1(X, A) is the usual boundary map for Z coefﬁcients. Thus
+we have the following algebraic problem:
+Given a chain complex ··· -→Cn
+∂n--→Cn−1 -→··· of free abelian groups Cn ,
+is it possible to compute the homology groups Hn(C; G) of the associated
+chain complex ··· --→Cn ⊗G
+∂n⊗11
+-------------→Cn−1 ⊗G --→··· just in terms of G and
+the homology groups Hn(C) of the original complex?
+To approach this problem, the idea will be to compare the chain complex C with two
+simpler subcomplexes, the subcomplexes consisting of the cycles and the boundaries
+in C , and see what happens upon tensoring all three complexes with G.
+Let Zn = Ker ∂n ⊂Cn and Bn = Im ∂n+1 ⊂Cn . The restrictions of ∂n to these
+two subgroups are zero, so they can be regarded as subcomplexes Z and B of C
+with trivial boundary maps. Thus we have a short exact sequence of chain complexes
+consisting of the commutative diagrams
+(i)
+Cn
+B
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−→
+−−−−→
+−−−−→
+−−−−→
+−−−−→
+−−−−→
+Z
+0
+0
+n−−−−→
+−−−−→
+-
+Cn 1
+-
+Z
+0
+0
+n 1
+-
+Bn 2
+-
+n 1
+-
+n 1
+∂
+-
+n 1
+∂
+n
+∂
+n
+∂
+n
+∂
+The rows in this diagram split since each Bn is free, being a subgroup of the free group
+Cn . Thus Cn ≈Zn⊕Bn−1 , but the chain complex C is not the direct sum of the chain
+complexes Z and B since the latter have trivial boundary maps but the boundary
+maps in C may be nontrivial. Now tensor with G to get a commutative diagram

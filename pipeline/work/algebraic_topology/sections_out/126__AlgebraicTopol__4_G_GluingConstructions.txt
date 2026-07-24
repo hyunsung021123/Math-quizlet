@@ -1,0 +1,266 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.G Gluing Constructions
+직전 소단원: 「4.F.ex Exercises」
+[본문]
+456
+Chapter 4
+Homotopy Theory
+Show that if X is a ﬁnite complex, these maps eventually become isomorphisms. [Use
+induction on the number of cells of X and the ﬁve-lemma.]
+3. Show that for any sequence Z1→Z2→···, the natural map lim
+--→ΩZn→Ωlim
+--→Zn is
+a weak homotopy equivalence, where the direct limits mean mapping telescopes.
+It is a common practice in algebraic topology to glue spaces together to form
+more complicated spaces.
+In this section we describe two general procedures for
+making such constructions. The ﬁrst is fairly straightforward but also rather rigid,
+lacking some homotopy invariance properties an algebraic topologist would like to
+see. The second type of gluing construction avoids these drawbacks by systematic
+use of mapping cylinders. We have already seen many special cases of both types of
+constructions, and having a general framework covering all these special cases should
+provide some conceptual clarity.
+A diagram of spaces consists of an oriented graph Γ with a space Xv for each
+vertex v of Γ and a map fe : Xv→Xw for each edge e of Γ from a vertex v to a vertex
+w , the words ‘from’ and ‘to’ referring to the given orientation of e. Commutativity of
+the diagram is not assumed. Denoting such a diagram of spaces simply by X , we deﬁne
+a space
+X to be the quotient of the disjoint union of all the spaces Xv associated to
+vertices of Γ under the identiﬁcations x ∼fe(x) for all maps fe associated to edges
+of Γ . To give a name to this construction, let us call
+X the amalgamation of the
+diagram X . Here are some examples:
+If the diagram of spaces has the simple form X0
+f←--- A > X1 then
+X is the
+space X0 ⊔f X1 obtained from X0 by attaching X1 along A via f .
+A sequence of inclusions X1 > X1 > ··· determines a diagram of spaces X for
+which
+X is
+S
+i Xi with the weak topology. This holds more generally when the
+spaces Xi are indexed by any directed set.
+From a cover U = {Xi} of a space X by subspaces Xi we can form a diagram of
+spaces XU whose vertices are the nonempty ﬁnite intersections Xi1 ∩··· ∩Xin
+with distinct indices ij , and whose edges are the various inclusions obtained by
+omitting some of the subspaces in such an intersection, for example the inclusions
+Xi ∩Xj > Xi . Then
+XU equals X as a set, though possibly with a different
+topology. If the cover is an open cover, or if X is a CW complex and the Xi ’s are
+subcomplexes, then the topology will be the original topology on X .
+An action of a group G on a space X determines a diagram of spaces XG , with X
+itself as the only space and with maps the homeomorphisms g : X→X , g ∈G,
+given by the action. In this case
+XG is the orbit space X/G.
+
+Gluing Constructions
+Section 4.G
+457
+A ∆complex X can be viewed as a diagram of spaces X∆where each simplex
+of X gives a vertex space Xv which is a simplex of the same dimension, and the
+edge maps are the inclusions of faces into the simplices that contain them. Then
+X∆= X .
+It can very easily happen that for a diagram of spaces X the amalgamation
+X
+is rather useless because so much collapsing has occurred that little of the original
+diagram remains. For example, consider a diagram X of the form X0←X0×X1→X1
+whose maps are the projections onto the two factors. In this case
+X is simply a point.
+To correct for problems like this, and to get a notion with nicer homotopy-theoretic
+properties, we introduce the homotopy version of
+X , which we shall denote ∆X
+and call the realization of X . Here we again start with the disjoint union of all the
+vertex spaces Xv , but instead of passing to a quotient space of this disjoint union,
+we enlarge it by ﬁlling in a mapping cylinder Mf for each map f of the diagram,
+identifying the two ends of this cylinder with the appropriate Xv ’s. In the case of the
+projection diagram X0←X0×X1→X1 , the union of the two mapping cylinders is the
+same as the quotient of X0×X1×I with X0×X1×{0} collapsed to X0 and X0×X1×{1}
+collapsed to X1 . Thus ∆X is the join X0 ∗X1 deﬁned in Chapter 0.
+We have seen a number of other special cases of the construction ∆X . For a dia-
+gram consisting of just one map f : X0→X1 one gets of course the mapping cylinder
+Mf itself. For a diagram X0
+f←--- X1
+g--→X2 the realization ∆X is a double mapping
+cylinder. In case X2 is a point this is the mapping cone of f . When the diagram has
+just one space and one map from this space to itself, then ∆X is the mapping torus.
+For a diagram consisting of two maps f , g : X0→X1 the space ∆X was studied in Ex-
+ample 2.48. Mapping telescopes are the case of a sequence of maps X0→X1→···.
+In §1.B we considered general diagrams in which the spaces are K(G, 1)’s.
+There is a natural generalization of ∆X in which one starts with a ∆complex
+Γ and a diagram of spaces associated to the 1 skeleton of Γ such that the maps
+corresponding to the edges of each n simplex of Γ , n > 1, form a commutative di-
+agram. We call this data a complex of spaces. If X is a complex of spaces, then
+for each n simplex of Γ we have a sequence of maps X0
+f1--→X1
+f2--→···
+fn--→Xn ,
+and we deﬁne the iterated mapping cylinder M(f1, ··· , fn) to be the usual map-
+ping cylinder for n = 1, and inductively for n > 1, the mapping cylinder of the
+composition M(f1, ··· , fn−1)→Xn−1
+fn--→Xn where the ﬁrst map is the canonical
+projection of a mapping cylinder onto its target end. There is a natural projection
+M(f1, ··· , fn)→∆n , and over each face of ∆n one has the iterated mapping cylin-
+der for the maps associated to the edges in this face. For example when n = 2 one
+has the three mapping cylinders M(f1), M(f2), and M(f2f1) over the three edges
+of ∆2 . All these iterated mapping cylinders over the various simplices of Γ thus ﬁt
+together to form a space ∆X with a canonical projection ∆X→Γ . We again call ∆X
+the realization of the complex of spaces X , and we call Γ the base of X or ∆X .
+
+458
+Chapter 4
+Homotopy Theory
+Some of our earlier examples of diagrams of spaces can be regarded in a natural
+way as complexes of spaces:
+For a cover U = {Xi} of a space X the diagram of spaces XU whose vertices are
+the ﬁnite intersections of Xi ’s and whose edges are inclusions is a complex of
+spaces with n simplices the n fold inclusions. The base Γ for this complex of
+spaces is the barycentric subdivision of the nerve of the cover. Recall from the
+end of §3.3 that the nerve of a cover is the simplicial complex with n simplices
+the nonempty (n + 1) fold intersections of sets in the cover.
+The diagram of spaces XG associated to an action of a group G on a space X is a
+complex of spaces, with n simplices corresponding to the n fold compositions
+X
+g1--→X
+g2--→···
+gn--→X . The base ∆complex Γ is the K(G, 1) called BG in §1.B.
+This was the orbit space of a free action of G on a contractible ∆complex EG.
+Checking through the deﬁnitions, one sees that the space ∆XG in this case can
+be regarded as the quotient of X×EG under the diagonal action of G, g(x, y) =
+(g(x), g(y)). This is the space we called the Borel construction in §3.G, with the
+notation X ×G EG.
+By a map f : X→Y of complexes of spaces over the same base Γ we mean a
+collection of maps fv : Xv→Yv for all the vertices of Γ , with commutative squares
+over all edges of Γ . There is then an induced map ∆f : ∆X→∆Y .
+Proposition 4G.1. If all the maps fv making up a map of complexes of spaces
+f : X→Y are homotopy equivalences, then so is the map ∆f : ∆X→∆Y .
+Proof: The mapping cylinders M(fv) form a complex of spaces M(f) over the same
+base Γ , and the space ∆M(f ) is the mapping cylinder M(∆f ).
+This deformation
+retracts onto ∆Y , so it will sufﬁce to show that it also deformation retracts onto ∆X .
+Let Mn(∆f ) be the part of M(∆f ) lying over the n skeleton of Γ . We claim that
+Mn(∆f ) ∪∆X deformation retracts onto Mn−1(∆f ) ∪∆X . It is enough to show this
+when Γ = ∆n . In this case f is a map from X0→···→Xn to Y0→···→Yn . By
+Corollary 0.20 it sufﬁces to show that the inclusion Mn−1(∆f ) ∪∆X > M(∆f ) is a
+homotopy equivalence and the pair (M(∆f ), Mn−1(∆f )∪∆X) satisﬁes the homotopy
+extension property. The latter assertion is evident from Example 0.15 since a mapping
+cylinder neighborhood is easily constructed for this pair. For the other condition, note
+that by induction on the dimension of Γ we may assume that Mn−1(∆f ) deformation
+retracts onto the part of ∆X over ∂∆n . Also, the inclusion ∆X > M(∆f ) is a ho-
+motopy equivalence since it is equivalent to the map Xn→Yn , which is a homotopy
+equivalence by hypothesis. So Corollary 0.20 applies, and the claim that Mn(∆f )∪∆X
+deformation retracts onto Mn−1(∆f ) ∪∆X is proved.
+Letting n vary, the inﬁnite concatenation of these deformation retractions in the
+t intervals [1/2n+1, 1/2n] gives a deformation retraction of M(∆f ) onto ∆X .
+⊔⊓
+
+Gluing Constructions
+Section 4.G
+459
+There is a canonical map ∆X→
+X induced by retracting each mapping cylinder
+onto its target end. In some cases this is a homotopy equivalence, for example, for
+a diagram X0←A > X1 where the pair (X1, A) has the homotopy extension prop-
+erty. Another example is a sequence of inclusions X0>X1>··· for which the pairs
+(Xn, Xn−1) satisfy the homotopy extension property, by the argument involving map-
+ping telescopes in the proof of Lemma 2.34. However, without some conditions on
+the maps it need not be true that ∆X→
+X is a homotopy equivalence, as the earlier
+example of the projections X0←X0×X1→X1 shows. Even with inclusion maps one
+need not have ∆X ≃
+X if the base Γ is not contractible. A trivial example is the
+diagram consisting of the two spaces ∆0 and ∆1 and two maps f0, f1 : ∆0→∆1 that
+happen to have the same image.
+Thus one can expect the map ∆X→
+X to be a homotopy equivalence only in
+special circumstances. Here is one such situation:
+Proposition 4G.2. When XU is the complex of spaces associated to an open cover
+U = {Xi} of a paracompact space X , the map p : ∆XU→
+XU = X is a homotopy
+equivalence.
+Proof: The realization ∆XU can also be described as the quotient space of the disjoint
+union of all the products Xi0 ∩··· ∩Xin ×∆n , as the subscripts range over sets of
+n + 1 distinct indices and n ≥0, with the identiﬁcations over the faces of ∆n using
+inclusions Xi0 ∩··· ∩Xin > Xi0 ∩··· ∩bXij ∩··· ∩Xin . From this viewpoint, points
+of ∆XU in a given ‘ﬁber’ p−1(x) can be written as ﬁnite linear combinations
+P
+i tixi
+where
+P
+i ti = 1 and xi is x regarded as a point of Xi , for those Xi ’s that contain x .
+Since X is paracompact there is a partition of unity subordinate to the cover
+U.
+This is a family of maps ϕα : X→[0, 1] satisfying three conditions: The sup-
+port of each ϕα is contained in some Xi(α) , only ﬁnitely many ϕα ’s are nonzero
+near each point of X , and
+P
+α ϕα = 1. Deﬁne a section s : X→∆XU of p by setting
+s(x) =
+P
+α ϕα(x)xi(α) . The ﬁgure shows the case X = S1 with a
+cover by two arcs, the heavy line indicating the image of s . In the
+general case the section s embeds X as a retract of ∆XU , and it
+is a deformation retract since points in ﬁbers p−1(x) can move
+linearly along line segments to s(x).
+⊔⊓
+Corollary 4G.3. If U is an open cover of a paracompact space X such that every
+nonempty intersection of ﬁnitely many sets in U is contractible, then X is homotopy
+equivalent to the nerve NU.
+Proof: The proposition gives a homotopy equivalence X ≃∆XU . Since the nonempty
+ﬁnite intersections of sets in U are contractible, the earlier proposition implies that
+the map ∆XU→Γ induced by sending each intersection to a point is a homotopy
+equivalence. Since Γ is the barycentric subdivision of NU, the result follows.
+⊔⊓
+
+460
+Chapter 4
+Homotopy Theory
+Let us conclude this section with a few comments about terminology. For some
+diagrams of spaces such as sequences X1→X2→··· the amalgamation
+X can be
+regarded as the direct limit of the vertex spaces Xv with respect to the edge maps
+fe . Following this cue, the space
+X is commonly called the direct limit for arbitrary
+diagrams, even ﬁnite ones. If one views
+X as a direct limit, then ∆X becomes a sort
+of homotopy direct limit. For reasons that are explained in the next section, direct
+limits are often called ‘colimits.’ This has given rise to the rather unfortunate name of
+‘hocolim’ for ∆X , short for ‘homotopy colimit.’ In preference to this we have chosen
+the term ‘realization,’ both for its intrinsic merits and because ∆X is closely related
+to what is called the geometric realization of a simplicial space.
+Exercises
+1. Show that for a sequence of maps X0
+f1--→X1
+f2--→···, the inﬁnite iterated mapping
+cylinder M(f1, f2, ···), which is the union of the ﬁnite iterated mapping cylinders
+M(f1, ··· , fn), deformation retracts onto the mapping telescope.
+2. Show that if X is a complex of spaces in which all the maps are homeomorphisms,
+then the projection ∆X→Γ is a ﬁber bundle.
+3. What is the nerve of the cover of a simplicial complex by the open stars of its
+vertices? [See Lemma 2C.2.]
+4. Show that Proposition 4G.2 and its corollary hold also for CW complexes and covers
+by families of subcomplexes. [CW complexes are paracompact; see [VBKT].]
+There is a very nice duality principle in homotopy theory, called Eckmann–Hilton
+duality in its more reﬁned and systematic aspects, but which in its most basic form
+involves the simple idea of reversing the direction of all arrows in a given construc-
+tion. For example, if in the deﬁnition of a ﬁbration as a map satisfying the homotopy
+lifting property we reverse the direction of all the arrows, we obtain the dual notion of
+a coﬁbration. This is a map i : A→B satisfying the following prop-
+erty: Given eg0 : B→X and a homotopy gt : A→X such that eg0i = g0 ,
+−−−−−→
+−−−−−−→
+−→
+A
+B
+X
+i
+gt
+g0
+∼
+there exists a homotopy egt : B→X such that egti = gt . In the special
+case that i is the inclusion of a subspace, this is the homotopy extension property,
+and the next proposition says that this is indeed the general case. So a coﬁbration is
+the same as an inclusion satisfying the homotopy extension property.
+Proposition 4H.1. If i : A→B is a coﬁbration, then i is injective, and in fact a homeo-
+morphism onto its image.

@@ -1,0 +1,133 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 2. Homology
+현재 소단원: 2.3.ex Exercises
+직전 소단원: 「2.3.2 Categories and Functors」
+[연습문제]
+The Formal Viewpoint
+Section 2.3
+165
+Change-of-coefﬁcient homomorphisms Hn(X; G1)→Hn(X; G2) induced by a ho-
+momorphism G1→G2 , as in the proof of Lemma 2.49.
+In general, if one has two functors F, G :C→D then a natural transformation T from
+F to G assigns a morphism TX : F(X)→G(X) to each object
+X ∈C, in such a way that for each morphism f : X→Y in
+C the square at the right commutes. The case that F and G
+−−−−−→
+−−−−−→
+−−−−−→
+TX
+TY
+X
+F (
+)
+f
+F (
+)
+f
+G(
+)
+Y
+F (
+)
+−−−−−→
+X
+G(
+)
+Y
+G(
+)
+are contravariant rather than covariant is similar.
+We have been describing the passage from topology to the abstract world of cat-
+egories and functors, but there is also a nice path in the opposite direction:
+To each category C there is associated a ∆complex BC called the classifying
+space of C, whose n simplices are the strings X0→X1→···→Xn of morphisms
+in C. The faces of this simplex are obtained by deleting an Xi , and then compos-
+ing the two adjacent morphisms if i ≠0, n. Thus when n = 2 the three faces of
+X0→X1→X2 are X0→X1 , X1→X2 , and the composed morphism X0→X2 . In
+case C has a single object and the morphisms of C form a group G, then BC is
+the same as the ∆complex BG constructed in Example 1B.7, a K(G, 1). In gen-
+eral, the space BC need not be a K(G, 1), however. For example, if we start with a
+∆complex X and regard its set of simplices as a partially ordered set C(X) under
+the relation of inclusion of faces, then BC(X) is the barycentric subdivision of X .
+A functor F :C→D induces a map BC→BD. This is the ∆map that sends an
+n simplex X0→X1→···→Xn to the n simplex F(X0)→F(X1)→···→F(Xn).
+A natural transformation from a functor F to a functor G induces a homotopy
+between the induced maps of classifying spaces. We leave this for the reader to
+make explicit, using the subdivision of ∆n×I into (n + 1) simplices described
+earlier in the chapter.
+Exercises
+1. If Tn(X, A) denotes the torsion subgroup of Hn(X, A; Z), show that the functors
+(X, A) , Tn(X, A), with the obvious induced homomorphisms Tn(X, A)→Tn(Y, B)
+and boundary maps Tn(X, A)→Tn−1(A), do not deﬁne a homology theory. Do the
+same for the ‘mod torsion’ functor MTn(X, A) = Hn(X, A; Z)/Tn(X, A).
+2. Deﬁne a candidate for a reduced homology theory on CW complexes by ehn(X) =
+Q
+i eHi(X)
+ L
+i eHi(X).
+Thus ehn(X) is independent of n and is zero if X is ﬁnite-
+dimensional, but is not identically zero, for example for X =
+W
+i Si . Show that the
+axioms for a homology theory are satisﬁed except that the wedge axiom fails.
+3. Show that if eh is a reduced homology theory, then ehn(point) = 0 for all n. Deduce
+that there are suspension isomorphisms ehn(X) ≈ehn+1(SX) for all n.
+4. Show that the wedge axiom for homology theories follows from the other axioms
+in the case of ﬁnite wedge sums.
+
+166
+Chapter 2
+Homology
+There is a close connection between H1(X) and π1(X), arising from the fact that
+a map f : I→X can be viewed as either a path or a singular 1 simplex. If f is a loop,
+with f (0) = f (1), this singular 1 simplex is a cycle since ∂f = f (1) −f (0).
+Theorem 2A.1. By regarding loops as singular 1 cycles, we obtain a homomorphism
+h : π1(X, x0)→H1(X). If X is path-connected, then h is surjective and has kernel
+the commutator subgroup of π1(X), so h induces an isomorphism from the abelian-
+ization of π1(X) onto H1(X).
+Proof: Recall the notation f ≃g for the relation of homotopy, ﬁxing endpoints,
+between paths f and g. Regarding f and g as chains, the notation f ∼g will mean
+that f is homologous to g, that is, f −g is the boundary of some 2 chain. Here are
+some facts about this relation.
+(i) If f is a constant path, then f ∼0. Namely, f is a cycle since it is a loop, and
+since H1(point) = 0, f must then be a boundary. Explicitly, f is the boundary of the
+constant singular 2 simplex σ having the same image as f since
+∂σ = σ ||[v1, v2] −σ ||[v0, v2] + σ ||[v0, v1] = f −f + f = f
+(ii) If f ≃g then f ∼g. To see this, consider a homotopy F : I×I→X from f to
+g. This yields a pair of singular 2 simplices σ1 and σ2 in X
+by subdividing the square I×I into two triangles [v0, v1, v3]
+and [v0, v2, v3] as shown in the ﬁgure. When one computes
+∂(σ1 −σ2), the two restrictions of F to the diagonal of the
+square cancel, leaving f −g together with two constant sin-
+gular 1 simplices from the left and right edges of the square.
+By (i) these are boundaries, so f −g is also a boundary.
+f
+g
+v
+v
+v
+v
+σ1
+0
+1
+3
+2
+σ2
+f
+f
+g
+g
+v
+v0
+1
+v2
+(iii) f g ∼f + g, where f g denotes the product of the paths
+f and g. For if σ : ∆2→X is the composition of orthogonal
+projection of ∆2 = [v0, v1, v2] onto the edge [v0, v2] followed
+by f g : [v0, v2]→X , then ∂σ = g −f g + f .
+(iv) f ∼−f , where f is the inverse path of f . This follows from the preceding three
+observations, which give f + f ∼f f ∼0.
+Applying (ii) and (iii) to loops, it follows that we have a well-deﬁned homomor-
+phism h : π1(X, x0)→H1(X) sending the homotopy class of a loop f to the homology
+class of the 1 cycle f .

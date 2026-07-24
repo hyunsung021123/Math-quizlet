@@ -1,0 +1,540 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.A Universal Coefficients for Homology
+직전 소단원: 「3.3.ex Exercises」
+[본문]
+Universal Coefﬁcients for Homology
+Section 3.A
+261
+The main goal in this section is an algebraic formula for computing homology with
+arbitrary coefﬁcients in terms of homology with Z coefﬁcients. The theory parallels
+rather closely the universal coefﬁcient theorem for cohomology in §3.1.
+The ﬁrst step is to formulate the deﬁnition of homology with coefﬁcients in terms
+of tensor products. The chain group Cn(X; G) as deﬁned in §2.2 consists of the ﬁnite
+formal sums
+P
+i giσi with gi ∈G and σi : ∆n→X . This means that Cn(X; G) is a
+direct sum of copies of G, with one copy for each singular n simplex in X . More gen-
+erally, the relative chain group Cn(X, A; G) = Cn(X; G)/Cn(A; G) is also a direct sum
+of copies of G, one for each singular n simplex in X not contained in A. From the
+basic properties of tensor products listed in the discussion of the K¨unneth formula
+in §3.2 it follows that Cn(X, A; G) is naturally isomorphic to Cn(X, A)⊗G, via the
+correspondence
+P
+i giσi ,
+P
+i σi ⊗gi . Under this isomorphism the boundary map
+Cn(X, A; G)→Cn−1(X, A; G) becomes the map ∂⊗11 : Cn(X, A)⊗G→Cn−1(X, A)⊗G
+where ∂: Cn(X, A)→Cn−1(X, A) is the usual boundary map for Z coefﬁcients. Thus
+we have the following algebraic problem:
+Given a chain complex ··· -→Cn
+∂n--→Cn−1 -→··· of free abelian groups Cn ,
+is it possible to compute the homology groups Hn(C; G) of the associated
+chain complex ··· --→Cn ⊗G
+∂n⊗11
+-------------→Cn−1 ⊗G --→··· just in terms of G and
+the homology groups Hn(C) of the original complex?
+To approach this problem, the idea will be to compare the chain complex C with two
+simpler subcomplexes, the subcomplexes consisting of the cycles and the boundaries
+in C , and see what happens upon tensoring all three complexes with G.
+Let Zn = Ker ∂n ⊂Cn and Bn = Im ∂n+1 ⊂Cn . The restrictions of ∂n to these
+two subgroups are zero, so they can be regarded as subcomplexes Z and B of C
+with trivial boundary maps. Thus we have a short exact sequence of chain complexes
+consisting of the commutative diagrams
+(i)
+Cn
+B
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−→
+−−−−→
+−−−−→
+−−−−→
+−−−−→
+−−−−→
+Z
+0
+0
+n−−−−→
+−−−−→
+-
+Cn 1
+-
+Z
+0
+0
+n 1
+-
+Bn 2
+-
+n 1
+-
+n 1
+∂
+-
+n 1
+∂
+n
+∂
+n
+∂
+n
+∂
+The rows in this diagram split since each Bn is free, being a subgroup of the free group
+Cn . Thus Cn ≈Zn⊕Bn−1 , but the chain complex C is not the direct sum of the chain
+complexes Z and B since the latter have trivial boundary maps but the boundary
+maps in C may be nontrivial. Now tensor with G to get a commutative diagram
+
+262
+Chapter 3
+Cohomology
+(ii)
+Cn
+B
+−−−−−→
+−−−−−→
+−−−−−→
+−−−−−−→
+−−−−−−→
+−−−−−→
+−−−−→
+−−−−−→
+−−−−−→
+Z
+G
+0
+0
+n
+−−−−−→
+−−−−→
+-
+Cn 1
+-
+Z
+0
+0
+n 1
+-
+Bn 2
+-
+n 1
+-
+n 1
+∂
+-
+n 1
+∂
+n
+∂
+n
+∂
+n
+∂
+⊗
+G
+⊗
+G
+⊗
+G
+⊗
+G
+⊗
+⊗
+G
+⊗
+1
+1
+⊗1
+1
+⊗1
+1
+⊗1
+1
+⊗1
+1
+The rows are exact since the rows in (i) split and tensor products satisfy (A⊕B)⊗G ≈
+A⊗G⊕B ⊗G, so the rows in (ii) are split exact sequences too. Thus we have a short
+exact sequence of chain complexes 0→Z ⊗G→C ⊗G→B ⊗G→0. Since the boundary
+maps are trivial in Z ⊗G and B ⊗G, the associated long exact sequence of homology
+groups has the form
+(iii)
+··· -→Bn ⊗G -→Zn ⊗G -→Hn(C; G) -→Bn−1 ⊗G -→Zn−1 ⊗G -→···
+The ‘boundary’ maps Bn ⊗G→Zn ⊗G in this sequence are simply the maps in ⊗11
+where in : Bn→Zn is the inclusion. This is evident from the deﬁnition of the boundary
+map in a long exact sequence of homology groups: In diagram (ii) one takes an element
+of Bn−1 ⊗G, pulls it back via (∂n ⊗11)−1 to Cn ⊗G, then applies ∂n ⊗11 to get into
+Cn−1 ⊗G, then pulls back to Zn−1 ⊗G.
+The long exact sequence (iii) can be broken up into short exact sequences
+(iv)
+0 -→Coker(in ⊗11) -→Hn(C; G) -→Ker(in−1 ⊗11) -→0
+where Coker(in ⊗11) = (Zn ⊗G)/ Im(in ⊗11). The next lemma shows this cokernel is
+just Hn(C)⊗G.
+Lemma 3A.1. If the sequence of abelian groups A
+i--→B
+j--→C --→0 is exact, then
+so is A⊗G
+i⊗11
+---------→B ⊗G
+j⊗11
+---------→C ⊗G --→0.
+Proof: Certainly the compositions of two successive maps in the latter sequence are
+zero. Also, j ⊗11 is clearly surjective since j is. To check exactness at B ⊗G it sufﬁces
+to show that the map B ⊗G/ Im(i ⊗11)→C ⊗G induced by j ⊗11 is an isomorphism,
+which we do by constructing its inverse. Deﬁne a map ϕ : C×G→B ⊗G/ Im(i ⊗11) by
+ϕ(c, g) = b ⊗g where j(b) = c . This ϕ is well-deﬁned since if j(b) = j(b′) = c
+then b −b = i(a) for some a ∈A by exactness, so b ⊗g −b′ ⊗g = (b −b′) ⊗g =
+i(a) ⊗g ∈Im(i ⊗11).
+Since ϕ is a homomorphism in each variable separately, it
+induces a homomorphism C ⊗G→B ⊗G/ Im(i ⊗11). This is clearly an inverse to the
+map B ⊗G/ Im(i ⊗11)→C ⊗G.
+⊔⊓
+It remains to understand Ker(in−1 ⊗11), or equivalently Ker(in ⊗11). The situation
+is that tensoring the short exact sequence
+(v)
+0 ---→Bn
+in
+-----→Zn ---→Hn(C) ---→0
+with G produces a sequence which becomes exact only by insertion of the extra term
+Ker(in ⊗11):
+(vi)
+0 -→Ker(in ⊗11) --→Bn ⊗G
+in⊗11
+------------→Zn ⊗G --→Hn(C)⊗G -→0
+
+Universal Coefﬁcients for Homology
+Section 3.A
+263
+What we will show is that Ker(in ⊗11) does not really depend on Bn and Zn but only
+on their quotient Hn(C), and of course G.
+The sequence (v) is a free resolution of Hn(C), where as in §3.1 a free resolution
+of an abelian group H is an exact sequence
+··· --→F2
+f2
+-----→F1
+f1
+-----→F0
+f0
+-----→H --→0
+with each Fn free.
+Tensoring a free resolution of this form with a ﬁxed group G
+produces a chain complex
+··· --→F1 ⊗G
+f1⊗11
+------------→F0 ⊗G
+f0⊗11
+------------→H ⊗G --→0
+By the preceding lemma this is exact at F0 ⊗G and H ⊗G, but to the left of these two
+terms it may not be exact. For the moment let us write Hn(F ⊗G) for the homology
+group Ker(fn ⊗11)/ Im(fn+1 ⊗11).
+Lemma 3A.2. For any two free resolutions F and F′ of H there are canonical iso-
+morphisms Hn(F ⊗G) ≈Hn(F′ ⊗G) for all n.
+Proof: We will use Lemma 3.1(a). In the situation described there we have two free
+resolutions F and F′ with a chain map between them.
+If we tensor the two free
+resolutions with G we obtain chain complexes F ⊗G and F′ ⊗G with the maps αn ⊗11
+forming a chain map between them. Passing to homology, this chain map induces
+homomorphisms α∗: Hn(F ⊗G)→Hn(F′ ⊗G) which are independent of the choice of
+αn ’s since if αn and α′
+n are chain homotopic via a chain homotopy λn then αn ⊗11
+and α′
+n ⊗11 are chain homotopic via λn ⊗11.
+For a composition H
+α--→H′
+β--→H′′ with free resolutions F , F′ , and F′′ of these
+three groups also given, the induced homomorphisms satisfy (βα)∗= β∗α∗since
+we can choose for the chain map F→F′′ the composition of chain maps F→F′→F′′ .
+In particular, if we take α to be an isomorphism, with β its inverse and F′′ = F ,
+then β∗α∗= (βα)∗= 11∗= 11, and similarly with β and α reversed. So α∗is an
+isomorphism if α is an isomorphism. Specializing further, taking α to be the identity
+but with two different free resolutions F and F′ , we get a canonical isomorphism
+11∗: Hn(F ⊗G)→Hn(F′ ⊗G).
+⊔⊓
+The group Hn(F ⊗G), which depends only on H and G, is denoted Torn(H, G).
+Since a free resolution 0→F1→F0→H→0 always exists, as noted in §3.1, it follows
+that Torn(H, G) = 0 for n > 1. Usually Tor1(H, G) is written simply as Tor(H, G). As
+we shall see later, Tor(H, G) provides a measure of the common torsion of H and G,
+hence the name ‘Tor.’
+Is there a group Tor0(H, G)? With the deﬁnition given above it would be zero since
+Lemma 3A.1 implies that F1 ⊗G→F0 ⊗G→H ⊗G→0 is exact. It is probably better
+to modify the deﬁnition of Hn(F ⊗G) to be the homology groups of the sequence
+
+264
+Chapter 3
+Cohomology
+···→F1 ⊗G→F0 ⊗G→0, omitting the term H ⊗G which can be regarded as a kind
+of augmentation. With this revised deﬁnition, Lemma 3A.1 then gives an isomorphism
+Tor0(H, G) ≈H ⊗G.
+We should remark that Tor(H, G) is a functor of both G and H : Homomorphisms
+α : H→H′ and β : G→G′ induce homomorphisms α∗: Tor(H, G)→Tor(H′, G) and
+β∗: Tor(H, G)→Tor(H, G′), satisfying (αα′)∗= α∗α′
+∗, (ββ′)∗= β∗β′
+∗, and 11∗= 11.
+The induced map α∗was constructed in the proof of Lemma 3A.2, while for β the
+construction of β∗is obvious.
+Before going into calculations of Tor(H, G) let us ﬁnish analyzing the earlier exact
+sequence (iv). Recall that we have a chain complex C of free abelian groups, with
+homology groups denoted Hn(C), and tensoring C with G gives another complex
+C ⊗G whose homology groups are denoted Hn(C; G). The following result is known
+as the universal coefﬁcient theorem for homology since it describes homology with
+arbitrary coefﬁcients in terms of homology with the ‘universal’ coefﬁcient group Z.
+Theorem 3A.3. If C is a chain complex of free abelian groups, then there are natural
+short exact sequences
+0 -→Hn(C)⊗G -→Hn(C; G) -→Tor(Hn−1(C), G) -→0
+for all n and all G, and these sequences split, though not naturally.
+Naturality means that a chain map C→C′ induces a map between the correspond-
+ing short exact sequences, with commuting squares.
+Proof: The exact sequence in question is (iv) since we have shown that we can identify
+Coker(in ⊗11) with Hn(C)⊗G and Ker in−1 with Tor(Hn−1(C), G). Verifying the nat-
+urality of this sequence is a mental exercise in deﬁnition-checking, left to the reader.
+The splitting is obtained as follows. We observed earlier that the short exact se-
+quence 0→Zn→Cn→Bn−1→0 splits, so there is a projection p : Cn→Zn restricting
+to the identity on Zn . The map p gives an extension of the quotient map Zn→Hn(C)
+to a homomorphism Cn→Hn(C). Letting n vary, we then have a chain map C→H(C)
+where the groups Hn(C) are regarded as a chain complex with trivial boundary maps,
+so the chain map condition is automatic.
+Now tensor with G to get a chain map
+C ⊗G→H(C)⊗G. Taking homology groups, we then have induced homomorphisms
+Hn(C; G)→Hn(C)⊗G since the boundary maps in the chain complex H(C)⊗G are
+trivial. The homomorphisms Hn(C; G)→Hn(C)⊗G give the desired splitting since at
+the level of chains they are the identity on cycles in C , by the deﬁnition of p.
+⊔⊓
+Corollary 3A.4. For each pair of spaces (X, A) there are split exact sequences
+0 -→Hn(X, A)⊗G -→Hn(X, A; G) -→Tor(Hn−1(X, A), G) -→0
+for all n, and these sequences are natural with respect to maps (X, A)→(Y, B).
+⊔⊓
+The splitting is not natural, for if it were, a map X→Y that induced trivial
+maps Hn(X)→Hn(Y) and Hn−1(X)→Hn−1(Y) would have to induce the trivial map
+
+Universal Coefﬁcients for Homology
+Section 3.A
+265
+Hn(X; G)→Hn(Y; G) for all G, but in Example 2.51 we saw an instance where this
+fails, namely the quotient map M(Zm, n)→Sn+1 with G = Zm .
+The basic tools for computing Tor are given by:
+Proposition 3A.5.
+(1) Tor(A, B) ≈Tor(B, A).
+(2) Tor(
+L
+iAi, B) ≈
+L
+iTor(Ai, B).
+(3) Tor(A, B) = 0 if A or B is free, or more generally torsionfree.
+(4) Tor(A, B) ≈Tor(T(A), B) where T(A) is the torsion subgroup of A.
+(5) Tor(Zn, A) ≈Ker(A
+n--→A).
+(6) For each short exact sequence 0→B→C→D→0 there is a naturally associated
+exact sequence
+0→Tor(A, B)→Tor(A, C)→Tor(A, D)→A⊗B→A⊗C→A⊗D→0
+Proof: Statement (2) is easy since one can choose as a free resolution of
+L
+i Ai the
+direct sum of free resolutions of the Ai ’s. Also easy is (5), which comes from tensoring
+the free resolution 0→Z
+n--→Z→Zn→0 with A.
+For (3), if A is free, it has a free resolution with Fn = 0 for n ≥1, so Tor(A, B) = 0
+for all B . On the other hand, if B is free, then tensoring a free resolution of A with
+B preserves exactness, since tensoring a sequence with a direct sum of Z’s produces
+just a direct sum of copies of the given sequence. So Tor(A, B) = 0 in this case too.
+The generalization to torsionfree A or B will be given below.
+For (6), choose a free resolution 0→F1→F0→A→0 and tensor with the given
+short exact sequence to get a commutative diagram
+−→
+−→
+−→
+−−−−→
+−−−−→
+F
+B
+0
+0
+1
+F1
+F1
+−−−−→
+−−−−→
+⊗
+C
+⊗
+D
+⊗
+−−−−→
+−−−−→
+F
+B
+0
+0
+0
+F0
+F0
+−−−−→
+−−−−→
+⊗
+C
+⊗
+D
+⊗
+The rows are exact since tensoring with a free group preserves exactness. Extending
+the three columns by zeros above and below, we then have a short exact sequence
+of chain complexes whose associated long exact sequence of homology groups is the
+desired six-term exact sequence.
+To prove (1) we apply (6) to a free resolution 0→F1→F0→B→0. Since Tor(A, F1)
+and Tor(A, F0) vanish by the part of (3) which we have proved, the six-term sequence
+in (6) reduces to the ﬁrst row of the following diagram:
+−→
+−−→
+−−→
+−−−−−→
+−−−−−→
+A
+0
+F1
+A
+F0
+A
+−−−−−→
+−−−−−→
+⊗
+⊗
+B
+⊗
+−−−−−→
+−−−−−→
+F
+A
+0
+1
+F0
+B
+−−−−−→
+−−−−−→
+0 −−−−−→
+0 −−−−−→
+⊗
+A
+⊗
+A
+⊗
+B
+A
+Tor (
+)
+,
+A
+B
+Tor (
+)
+,
+≈
+≈
+≈
+The second row comes from the deﬁnition of Tor(B, A). The vertical isomorphisms
+come from the natural commutativity of tensor product. Since the squares commute,
+there is induced a map Tor(A, B)→Tor(B, A), which is an isomorphism by the ﬁve-
+lemma.
+
+266
+Chapter 3
+Cohomology
+Now we can prove the statement (3) in the torsionfree case. For a free resolution
+0 -→F1
+ϕ--→F0 -→A -→0 we wish to show that ϕ ⊗11 : F1 ⊗B→F0 ⊗B is injective
+if B is torsionfree. Suppose
+P
+i xi ⊗bi lies in the kernel of ϕ ⊗11. This means that
+P
+i ϕ(xi) ⊗bi can be reduced to 0 by a ﬁnite number of applications of the deﬁning
+relations for tensor products. Only a ﬁnite number of elements of B are involved in
+this process. These lie in a ﬁnitely generated subgroup B0 ⊂B , so
+P
+i xi ⊗bi lies in
+the kernel of ϕ ⊗11 : F1 ⊗B0→F0 ⊗B0 . This kernel is zero since Tor(A, B0) = 0, as B0
+is ﬁnitely generated and torsionfree, hence free.
+Finally, we can obtain statement (4) by applying (6) to the short exact sequence
+0→T(A)→A→A/T(A)→0 since A/T(A) is torsionfree.
+⊔⊓
+In particular, (5) gives Tor(Zm, Zn) ≈Zq where q is the greatest common divisor
+of m and n. Thus Tor(Zm, Zn) is isomorphic to Zm ⊗Zn , though somewhat by acci-
+dent. Combining this isomorphism with (2) and (3) we see that for ﬁnitely generated
+A and B , Tor(A, B) is isomorphic to the tensor product of the torsion subgroups of
+A and B , or roughly speaking, the common torsion of A and B . This is one reason
+for the ‘Tor’ designation, further justiﬁcation being (3) and (4).
+Homology calculations are often simpliﬁed by taking coefﬁcients in a ﬁeld, usually
+Q or Zp for p prime. In general this gives less information than taking Z coefﬁcients,
+but still some of the essential features are retained, as the following result indicates:
+Corollary 3A.6. (a) Hn(X; Q) ≈Hn(X; Z)⊗Q, so when Hn(X; Z) is ﬁnitely gen-
+erated, the dimension of Hn(X; Q) as a vector space over Q equals the rank of
+Hn(X; Z).
+(b) If Hn(X; Z) and Hn−1(X; Z) are ﬁnitely generated, then for p prime, Hn(X; Zp)
+consists of
+(i) a Zp summand for each Z summand of Hn(X; Z),
+(ii) a Zp summand for each Zpk summand in Hn(X; Z), k ≥1,
+(iii) a Zp summand for each Zpk summand in Hn−1(X; Z), k ≥1.
+⊔⊓
+Even in the case of nonﬁnitely generated homology groups, ﬁeld coefﬁcients still
+give good qualitative information:
+Corollary 3A.7. (a)
+eHn(X; Z) = 0 for all n iff eHn(X; Q) = 0 and eHn(X; Zp) = 0 for
+all n and all primes p.
+(b) A map f : X→Y induces isomorphisms on homology with Z coefﬁcients iff it
+induces isomorphisms on homology with Q and Zp coefﬁcients for all primes p.
+Proof: Statement (b) follows from (a) by passing to the mapping cone of f .
+The
+universal coefﬁcient theorem gives the ‘only if’ half of (a). For the ‘if’ implication it
+sufﬁces to show that if an abelian group A is such that A⊗Q = 0 and Tor(A, Zp) = 0
+
+Universal Coefﬁcients for Homology
+Section 3.A
+267
+for all primes p, then A = 0. For the short exact sequences 0→Z
+p--→Z→Zp→0 and
+0→Z→Q→Q/Z→0, the six-term exact sequences in (6) of the proposition become
+0 -→Tor(A, Zp) -→A
+p--→A -→A⊗Zp -→0
+0 -→Tor(A, Q/Z) -→A -→A⊗Q -→A⊗Q/Z -→0
+If Tor(A, Zp) = 0 for all p, then exactness of the ﬁrst sequence implies that A
+p--→A
+is injective for all p, so A is torsionfree. Then Tor(A, Q/Z) = 0 by (3) or (4) of the
+proposition, so the second sequence implies that A→A⊗Q is injective, hence A = 0
+if A⊗Q = 0.
+⊔⊓
+The algebra by means of which the Tor functor is derived from tensor products
+has a very natural generalization in which abelian groups are replaced by modules
+over a ﬁxed ring R with identity, using the deﬁnition of tensor product of R modules
+given in §3.2. Free resolutions of R modules are deﬁned in the same way as for abelian
+groups, using free R modules, which are direct sums of copies of R. Lemmas 3A.1 and
+3A.2 carry over to this context without change, and so one has functors TorR
+n(A, B).
+However, it need not be true that TorR
+n(A, B) = 0 for n > 1. The reason this was
+true when R = Z was that subgroups of free groups are free, but submodules of free
+R modules need not be free in general. If R is a principal ideal domain, submodules
+of free R modules are free, so in this case the rest of the algebra, in particular the
+universal coefﬁcient theorem, goes through without change. When R is a ﬁeld F , every
+module is free and TorF
+n(A, B) = 0 for n > 0 via the free resolution 0→A→A→0.
+Thus Hn(C ⊗F G) ≈Hn(C)⊗F G if F is a ﬁeld.
+Exercises
+1. Use the universal coefﬁcient theorem to show that if H∗(X; Z) is ﬁnitely generated,
+so the Euler characteristic χ(X) =
+P
+n(−1)n rank Hn(X; Z) is deﬁned, then for any
+coefﬁcient ﬁeld F we have χ(X) =
+P
+n(−1)n dim Hn(X; F).
+2. Show that Tor(A, Q/Z) is isomorphic to the torsion subgroup of A. Deduce that
+A is torsionfree iff Tor(A, B) = 0 for all B .
+3. Show that if eHn(X; Q) and eHn(X; Zp) are zero for all n and all primes p, then
+eHn(X; Z) = 0 for all n, and hence eHn(X; G) = 0 for all G and n.
+4. Show that ⊗and Tor commute with direct limits: (lim
+--→Aα)⊗B = lim
+--→(Aα ⊗B) and
+Tor(lim
+--→Aα, B) = lim
+--→Tor(Aα, B).
+5. From the fact that Tor(A, B) = 0 if A is free, deduce that Tor(A, B) = 0 if A
+is torsionfree by applying the previous problem to the directed system of ﬁnitely
+generated subgroups Aα of A.
+6. Show that Tor(A, B) is always a torsion group, and that Tor(A, B) contains an
+element of order n iff both A and B contain elements of order n.

@@ -1,0 +1,871 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 3. Cohomology
+현재 소단원: 3.F Limits and Ext (분할 part 1)
+직전 소단원: 「3.E.ex Exercises」
+[본문]
+Limits and Ext
+Section 3.F
+311
+It often happens that one has a CW complex X expressed as a union of an in-
+creasing sequence of subcomplexes X0 ⊂X1 ⊂X2 ⊂···. For example, Xi could be
+the i skeleton of X , or the Xi ’s could be ﬁnite complexes whose union is X . In situa-
+tions of this sort, Proposition 3.33 says that Hn(X; G) is the direct limit lim
+--→Hn(Xi; G).
+Our goal in this section is to show this holds more generally for any homology the-
+ory, and to derive the corresponding formula for cohomology theories, which is a bit
+more complicated even for ordinary cohomology with Z coefﬁcients. For ordinary
+homology and cohomology the results apply somewhat more generally than just to
+CW complexes, since if a space X is the union of an increasing sequence of subspaces
+Xi with the property that each compact set in X is contained in some Xi , then the
+singular complex of X is the union of the singular complexes of the Xi ’s, and so this
+gives a reduction to the CW case.
+Passing to limits can often result in nonﬁnitely generated homology and cohomol-
+ogy groups. At the end of this section we describe some of the rather subtle behavior
+of Ext for nonﬁnitely generated groups.
+Direct and Inverse Limits
+As a special case of the general deﬁnition in §3.3, the direct limit lim
+--→Gi of a
+sequence of homomorphisms of abelian groups G1
+α1
+----→G2
+α2
+----→G3 -→··· is deﬁned
+to be the quotient of the direct sum
+L
+i Gi by the subgroup consisting of elements of
+the form (g1, g2 −α1(g1), g3 −α2(g2), ···). It is easy to see from this deﬁnition that
+every element of lim
+--→Gi is represented by an element gi ∈Gi for some i, and two
+such representatives gi ∈Gi and gj ∈Gj deﬁne the same element of lim
+--→Gi iff they
+have the same image in some Gk under the appropriate composition of αℓ’s. If all
+the αi ’s are injective and are viewed as inclusions of subgroups, lim
+--→Gi is just
+S
+i Gi .
+Example 3F.1. For a prime p, consider the sequence Z
+p--→Z
+p--→Z -→··· with all
+maps multiplication by p. Then lim
+--→Gi can be identiﬁed with the subgroup Z[1/p]
+of Q consisting of rational numbers with denominator a power of p. More generally,
+we can realize any subgroup of Q as the direct limit of a sequence Z -→Z -→Z -→···
+with an appropriate choice of maps. For example, if the nth map is multiplication by
+n, then the direct limit is Q itself.
+Example 3F.2. The sequence of injections Zp
+p--→Zp2
+p--→Zp3 -→···, with p prime,
+has direct limit a group we denote Zp∞. This is isomorphic to Z[1/p]/Z, the subgroup
+of Q/Z represented by fractions with denominator a power of p.
+In fact Q/Z is
+isomorphic to the direct sum of the subgroups Z[1/p]/Z ≈Zp∞for all primes p. It is
+not hard to determine all the subgroups of Q/Z and see that each one can be realized
+as a direct limit of ﬁnite cyclic groups with injective maps between them. Conversely,
+every such direct limit is isomorphic to a subgroup of Q/Z.
+
+312
+Chapter 3
+Cohomology
+We can realize these algebraic examples topologically by the following construc-
+tion.
+The mapping telescope of a sequence of maps X0
+f0----→X1
+f1----→X2 -→···
+is the union of the mapping cylinders Mfi with the copies of Xi in Mfi and Mfi−1
+identiﬁed for all i. Thus the mapping tele-
+X0
+X1
+X2
+X3
+scope is the quotient space of the disjoint
+union
+`
+i (Xi×[i, i + 1]) in which each point
+(xi, i + 1) ∈Xi×[i, i + 1] is identiﬁed with
+(fi(xi), i + 1) ∈Xi+1×[i + 1, i + 2]. In the
+mapping telescope T , let Ti be the union of
+the ﬁrst i mapping cylinders. This deformation retracts onto Xi by deformation re-
+tracting each mapping cylinder onto its right end in turn. If the maps fi are cellular,
+each mapping cylinder is a CW complex and the telescope T is the increasing union
+of the subcomplexes Ti ≃Xi . Then Proposition 3.33, or Theorem 3F.8 below, implies
+that Hn(T; G) ≈lim
+--→Hn(Xi; G).
+Example 3F.3. Suppose each fi is a map Sn→Sn of degree p for a ﬁxed prime p.
+Then Hn(T) is the direct limit of the sequence Z
+p--→Z
+p--→Z -→··· considered in
+Example 3F.1 above, and eHk(T) = 0 for k ≠n, so T is a Moore space M(Z[1/p], n).
+Example 3F.4. In the preceding example, if we attach a cell en+1 to the ﬁrst Sn in T
+via the identity map of Sn , we obtain a space X which is a Moore space M(Zp∞, n)
+since X is the union of its subspaces Xi = Ti ∪en+1 , which are M(Zpi, n)’s, and the
+inclusion Xi ⊂Xi+1 induces the inclusion Zpi ⊂Zpi+1 on Hn .
+Generalizing these two examples, we can obtain Moore spaces M(G, n) for arbi-
+trary subgroups G of Q or Q/Z by choosing maps fi : Sn→Sn of suitable degrees.
+The behavior of cohomology groups is more complicated. If X is the increasing
+union of subcomplexes Xi , then the cohomology groups Hn(Xi; G), for ﬁxed n and
+G, form a sequence of homomorphisms
+··· ---→G2
+α2
+-----→G1
+α1
+-----→G0
+Given such a sequence of group homomorphisms, the inverse limit lim
+←-- Gi is deﬁned
+to be the subgroup of
+Q
+iGi consisting of sequences (gi) with αi(gi) = gi−1 for all i.
+There is a natural map λ : Hn(X; G)→lim
+←-- Hn(Xi; G) sending an element of Hn(X; G)
+to its sequence of images in Hn(Xi; G) under the maps Hn(X; G)→Hn(Xi; G) induced
+by inclusion. One might hope that λ is an isomorphism, but this is not true in general,
+as we shall see. However, for some choices of G it is:
+Proposition 3F.5. If the CW complex X is the union of an increasing sequence of sub-
+complexes Xi and if G is one of the ﬁelds Q or Zp , then λ : Hn(X; G)→lim
+←-- Hn(Xi; G)
+is an isomorphism for all n.
+Proof: First we have an easy algebraic fact: Given a sequence of homomorphisms
+of abelian groups G1
+α1--→G2
+α2--→G3 -→···, then Hom(lim
+--→Gi, G) = lim
+←-- Hom(Gi, G)
+
+Limits and Ext
+Section 3.F
+313
+for any G. Namely, it follows from the deﬁnition of lim
+--→Gi that a homomorphism
+ϕ : lim
+--→Gi→G is the same thing as a sequence of homomorphisms ϕi : Gi→G with
+ϕi = ϕi+1αi for all i. Such a sequence (ϕi) is exactly an element of lim
+←-- Hom(Gi, G).
+Now if G is a ﬁeld Q or Zp we have
+Hn(X; G) = Hom(Hn(X; G), G)
+= Hom(lim
+--→Hn(Xi; G), G)
+= lim
+←-- Hom(Hn(Xi; G), G)
+= lim
+←-- Hn(Xi; G)
+⊔⊓
+Let us analyze what happens for cohomology with an arbitrary coefﬁcient group,
+or more generally for any cohomology theory. Given a sequence of homomorphisms
+of abelian groups
+··· ---→G2
+α2
+-----→G1
+α1
+-----→G0
+deﬁne a map δ :
+Q
+iGi→
+Q
+iGi by δ(··· , gi, ···) = (··· , gi −αi+1(gi+1), ···), so that
+lim
+←-- Gi is the kernel of δ. Denoting the cokernel of δ by lim
+←--
+1Gi , we have then an exact
+sequence
+0 -→lim
+←-- Gi -→
+Q
+iGi
+δ--→
+Q
+iGi -→lim
+←--
+1Gi -→0
+This may be compared with the corresponding situation for the direct limit of a se-
+quence G1
+α1
+----→G2
+α2
+----→G3 -→···. In this case one has a short exact sequence
+0 -→
+L
+i Gi
+δ--→
+L
+i Gi -→lim
+--→Gi -→0
+where δ(··· , gi, ···) = (··· , gi−αi−1(gi−1), ···), so δ is injective and there is no term
+lim
+--→
+1Gi analogous to lim
+←--
+1Gi .
+Here are a few simple observations about lim
+←-- and lim
+←--
+1 :
+If all the αi ’s are isomorphisms then lim
+←-- Gi ≈G0 and lim
+←--
+1Gi = 0.
+In fact,
+lim
+←--
+1Gi = 0 if each αi is surjective, for to realize a given element (hi) ∈
+Q
+iGi as
+δ(gi) we can take g0 = 0 and then solve α1(g1) = −h0 , α2(g2) = g1 −h1 , ···.
+If all the αi ’s are zero then lim
+←-- Gi = lim
+←--
+1Gi = 0.
+Deleting a ﬁnite number of terms from the end of the sequence ···→G1→G0
+does not affect lim
+←-- Gi or lim
+←--
+1Gi .
+More generally, lim
+←-- Gi and lim
+←--
+1Gi are un-
+changed if we replace the sequence ···→G1→G0 by a subsequence, with the
+appropriate compositions of αj ’s as the maps.
+Example 3F.6. Consider the sequence of natural surjections ···→Zp3→Zp2→Zp
+with p a prime. The inverse limit of this sequence is a famous object in number theory,
+called the p adic integers. Our notation for it will be bZp . It is actually a commutative
+ring, not just a group, since the projections Zpi+1→Zpi are ring homomorphisms, but
+we will be interested only in the additive group structure. Elements of bZp are inﬁnite
+sequences (··· , a2, a1) with ai ∈Zpi such that ai is the mod pi reduction of ai+1 .
+
+314
+Chapter 3
+Cohomology
+For each choice of ai there are exactly p choices for ai+1 , so bZp is uncountable.
+There is a natural inclusion Z ⊂bZp as the constant sequences ai = n ∈Z. It is easy
+to see that bZp is torsionfree by checking that it has no elements of prime order.
+There is another way of looking at bZp . An element of bZp has a unique represen-
+tation as a sequence (··· , a2, a1) of integers ai with 0 ≤ai < pi for each i. We can
+write each ai uniquely in the form bi−1pi−1 + ··· + b1p + b0 with 0 ≤bj < p. The
+fact that ai+1 reduces mod pi to ai means that the numbers bj depend only on the
+element (··· , a2, a1) ∈bZp , so we can view the elements of bZp as the ‘base p inﬁnite
+numbers’ ··· b1b0 with 0 ≤bi < p for all i, with the familiar rule for addition in base
+p notation. The ﬁnite expressions bn ··· b1b0 represent the nonnegative integers,
+but negative integers have inﬁnite expansions. For example, −1 has bi = p −1 for
+all i, as one can see by adding 1 to this number.
+Since the maps Zpi+1→Zpi are surjective, lim
+←--
+1Zpi = 0. The next example shows
+how p adic integers can also give rise to a nonvanishing lim
+←--
+1 term.
+Example 3F.7. Consider the sequence ··· -→Z
+p--→Z
+p--→Z for p prime. In this case
+the inverse limit is zero since a nonzero integer can only be divided by p ﬁnitely often.
+The lim
+←--
+1 term is the cokernel of the map δ :
+Q
+∞Z→
+Q
+∞Z given by δ(y1, y2, ···) =
+(y1 −py2, y2 −py3, ···). We claim that the map bZp/Z→Coker δ sending a p adic
+number ··· b1b0 as in the preceding example to (b0, b1, ···) is an isomorphism. To
+see this, note that the image of δ consists of the sums y1(1, 0, ···)+y2(−p, 1, 0, ···)+
+y3(0, −p, 1, 0, ···) + ···. The terms after y1(1, 0, ···) give exactly the relations that
+hold among the p adic numbers ··· b1b0 , and in particular allow one to reduce an
+arbitrary sequence (b0, b1, ···) to a unique sequence with 0 ≤bi < p for all i. The
+term y1(1, 0, ···) corresponds to the subgroup Z ⊂bZp .
+We come now to the main result of this section:
+Theorem 3F.8. For a CW complex X which is the union of an increasing sequence
+of subcomplexes X0 ⊂X1 ⊂··· there is an exact sequence
+0 -→lim
+←--
+1hn−1(Xi) -→hn(X)
+λ--→lim
+←-- hn(Xi) -→0
+where h∗is any reduced or unreduced cohomology theory. For any homology theory
+h∗, reduced or unreduced, the natural maps lim
+--→hn(Xi)→hn(X) are isomorphisms.
+Proof: Let T be the mapping telescope of the inclusion sequence X0>X1>···. This
+is a subcomplex of X×[0, ∞) when [0, ∞) is given the CW structure with the integer
+points as 0 cells. We have T ≃X since T is a deformation retract of X×[0, ∞), as
+we showed in the proof of Lemma 2.34 in the special case that Xi is the i skeleton of
+X , but the argument works just as well for arbitrary subcomplexes Xi .
+Let T1 ⊂T be the union of the products Xi×[i, i + 1] for i odd, and let T2 be
+the corresponding union for i even. Thus T1 ∩T2 =
+`
+i Xi and T1 ∪T2 = T . For an
+unreduced cohomology theory h∗we have then a Mayer–Vietoris sequence
+
+Limits and Ext
+Section 3.F
+315
+−→
+−→
+−→
+−→
+T
+h
+1
+h
+n
+h
+n
+n
+n
+(
+)
+-
+n 1
+T
+h
+2
+(
+)
+-
+n 1
+⊕
+T
+h
+1
+(
+)
+T
+h
+2
+(
+)
+⊕
+T
+h
+1
+(
+T
+(
+-
+n 1
+T2)
+)
+∩
+−−−−−→
+−−→
+−−−−−→
+−−−−−→
+X
+h
+i
+i
+h
+n
+(
+)
+-
+n 1
+X
+(
+)
+T1
+(
+T2)
+∩
+∏
+X
+h
+i
+i
+(
+)
+-
+n 1
+∏
+X
+h
+i
+i
+(
+)
+n
+∏
+X
+h
+i
+i
+(
+)
+n
+∏
+≈
+≈
+≈
+≈
+≈
+ϕ
+ϕ
+The maps ϕ making the diagram commute are given by the formula ϕ(··· , gi, ···) =
+(··· , (−1)i−1(gi −ρ(gi+1)), ···), the ρ’s being the appropriate restriction maps. This
+differs from δ only in the sign of its even coordinates, so if we change the isomor-
+phism hk(T1 ∩T2) ≈
+Q
+ihk(Xi) by inserting a minus sign in the even coordinates, we
+can replace ϕ by δ in the second row of the diagram. This row then yields a short ex-
+act sequence 0→Coker δ→hn(X; G)→Ker δ→0, ﬁnishing the proof for unreduced
+cohomology.
+The same argument works for reduced cohomology if we use the reduced tele-
+scope obtained from T by collapsing {x0}×[0, ∞) to a point, for x0 a basepoint
+0 cell of X0 . Then T1 ∩T2 =
+W
+i Xi rather than
+`
+i Xi , and the rest of the argument
+goes through unchanged. The proof also applies for homology theories, with direct
+products replaced by direct sums in the second row of the diagram. As we noted
+earlier, Ker δ = 0 in the direct limit case, and Coker δ = lim
+--→.
+⊔⊓
+Example 3F.9. As in Example 3F.3, consider the mapping telescope T for the sequence
+of degree p maps Sn→Sn→···. Letting Ti be the union of the ﬁrst i mapping cylin-
+ders in the telescope, the inclusions T1>T2>··· induce on Hn(−; Z) the sequence
+··· -→Z
+p--→Z in Example 3F.7. From the theorem we deduce that Hn+1(T; Z) ≈bZp/Z
+and eHk(T; Z) = 0 for k ≠n+1. Thus we have the rather strange situation that the CW
+complex T is the union of subcomplexes Ti each having cohomology consisting only
+of a Z in dimension n, but T itself has no cohomology in dimension n and instead
+has a huge uncountable group bZp/Z in dimension n + 1. This contrasts sharply with
+what happens for homology, where the groups Hn(Ti) ≈Z ﬁt together nicely to give
+Hn(T) ≈Z[1/p].
+Example 3F.10. A more reasonable behavior is exhibited if we consider the space
+X = M(Zp∞, n) in Example 3F.4 expressed as the union of its subspaces Xi . By the
+universal coefﬁcient theorem, the reduced cohomology of Xi with Z coefﬁcients con-
+sists of a Zpi = Ext(Zpi, Z) in dimension n + 1. The inclusion Xi > Xi+1 induces the
+inclusion Zpi > Zpi+1 on Hn , and on Ext this induced map is a surjection Zpi+1→Zpi
+as one can see by looking at the diagram of free resolutions on the left:
+−−→
+−−→
+−−→
+−−−−−→
+−−−→
+p
+p
+p
+p
+i
+i
+Z
+−−−−−→
+Z
+−−−→
+Z
+0
+0
+−−−−−→
+−−−→
+p
+pi 1
+i 1
+Z
+−−−−−→
+Z
+−→
+Z
+0
+0
++
++
+1
+1
+−−→
+−−→
+−−−→
+pi Z
+−−−−−→
+Z
+0
+−−→
+−−−→
+−−−→
+i 1
+0
++
+1
+1
+Ext(
+)
+,
+p
+Z
+Z
+Ext(
+)
+,
+Z
+Z
+Hom(
+)
+,
+−−−→
+Z
+Z
+Hom(
+)
+,
+...
+...
+Applying Hom(−, Z) to this diagram, we get the diagram on the right, with exact
+rows, and the left-hand vertical map is a surjection since the vertical map to the
+right of it is surjective. Thus the sequence ···→Hn+1(X2; Z)→Hn+1(X1; Z) is the
+
+316
+Chapter 3
+Cohomology
+sequence in Example 3F.6, and we deduce that Hn+1(X; Z) ≈bZp , the p adic integers,
+and eHk(X; Z) = 0 for k ≠n + 1.
+This example can be related to the
+preceding one. If we view X as the map-
+ping cone of the inclusion Sn>T of one
+end of the telescope, then the long exact
+sequences of homology and cohomology
+groups for the pair (T, Sn) reduce to the
+short exact sequences at the right.
+n
+−→
+−→
+X
+0
+0
+Hn(
+)
+−→
+T
+Hn(
+)
+−→
+S
+Hn(
+)
+n
+n
+−→
+−→
+T
+0
+0
+H
+(
+)
+−→
+X
+H
+(
+)
+−→
+S
+H (
+)
+n 1
++
+n 1
++
+==
+Z
+==
+==
+Z
+==
+Z[1/p
+p
+]
+==
+Z
+p
+==
+Z
+∞
+/
+b
+p
+Z
+Z
+b
+From these examples and the universal coefﬁcient theorem we obtain isomor-
+phisms Ext(Zp∞, Z) ≈bZp and Ext(Z[1/p], Z) ≈bZp/Z.
+These can also be derived
+directly from the deﬁnition of Ext. A free resolution of Zp∞is
+0 -→Z∞
+ϕ--→Z∞-→Zp∞-→0
+where Z∞is the direct sum of an inﬁnite number of Z’s, the sequences (x1, x2, ···)
+of integers all but ﬁnitely many of which are zero, and ϕ sends (x1, x2, ···) to
+(px1 −x2, px2 −x3, ···). We can view ϕ as the linear map corresponding to the inﬁ-
+nite matrix with p’s on the diagonal, −1’s just above the diagonal, and 0’s everywhere
+else. Clearly Ker ϕ = 0 since integers cannot be divided by p inﬁnitely often. The im-
+age of ϕ is generated by the vectors (p, 0, ···), (−1, p, 0, ···), (0, −1, p, 0, ···), ··· so
+Coker ϕ ≈Zp∞. Dualizing by taking Hom(−, Z), we have Hom(Z∞, Z) the inﬁnite di-
+rect product of Z’s, and ϕ∗(y1, y2, ···) = (py1, py2−y1, py3−y2, ···), correspond-
+ing to the transpose of the matrix of ϕ. By deﬁnition, Ext(Zp∞, Z) = Coker ϕ∗. The
+image of ϕ∗consists of the inﬁnite sums y1(p, −1, 0 ···) + y2(0, p, −1, 0, ···) + ···,
+so Coker ϕ∗can be identiﬁed with bZp by rewriting a sequence (z1, z2, ···) as the
+p adic number ··· z2z1 .
+The calculation Ext(Z[1/p], Z) ≈bZp/Z is quite similar.
+A free resolution of
+Z[1/p] can be obtained from the free resolution of Zp∞by omitting the ﬁrst col-
+umn of the matrix of ϕ and, for convenience, changing sign.
+This gives the for-
+mula ϕ(x1, x2, ···) = (x1, x2 −px1, x3 −px2, ···), with the image of ϕ generated
+by the elements (1, −p, 0, ···), (0, 1, −p, 0, ···), ···. The dual map ϕ∗is given by
+ϕ∗(y1, y2, ···) = (y1 −py2, y2 −py3, ···), and this has image consisting of the sums
+y1(1, 0 ···) + y2(−p, 1, 0, ···) + y3(0, −p, 1, 0, ···) + ···, so we get Ext(Z[1/p], Z) =
+Coker ϕ∗≈bZp/Z. Note that ϕ∗is exactly the map δ in Example 3F.7.
+It is interesting to note also that the map ϕ : Z∞→Z∞in the two cases Zp∞and
+Z[1/p] is precisely the cellular boundary map Hn+1(Xn+1, Xn)→Hn(Xn, Xn−1) for
+the Moore space M(Zp∞, n) or M(Z[1/p], n) constructed as the mapping telescope
+of the sequence of degree p maps Sn→Sn→···, with a cell en+1 attached to the
+ﬁrst Sn in the case of Zp∞.
+
+Limits and Ext
+Section 3.F
+317
+More About Ext
+The functors Hom and Ext behave fairly simply for ﬁnitely generated groups,
+when cohomology and homology are essentially the same except for a dimension shift
+in the torsion. But matters are more complicated in the nonﬁnitely generated case. A
+useful tool for getting a handle on this complication is the following:
+Proposition 3F.11. Given an abelian group G and a short exact sequence of abelian
+groups 0→A→B→C→0, there are exact sequences
+0→Hom(G, A)→Hom(G, B)→Hom(G, C)→Ext(G, A)→Ext(G, B)→Ext(G, C)→0
+0→Hom(C, G)→Hom(B, G)→Hom(A, G)→Ext(C, G)→Ext(B, G)→Ext(A, G)→0
+Proof: A free resolution 0→F1→F0→G→0 gives rise to a commutative diagram
+Hom
+A
+0
+0
+F1
+(
+)
+,
+−−−−→Hom
+B
+F1
+(
+)
+,
+−−−−→Hom
+C
+F1
+(
+)
+,
+−−−→
+−−−→
+Hom
+A
+0
+0
+F0
+(
+)
+,
+−−−−→Hom
+B
+F0
+(
+)
+,
+−−−−→Hom
+C
+F0
+(
+)
+,
+−−−→
+−−−→
+−→
+−→
+−→
+Since F0 and F1 are free, the two rows are exact, as they are simply direct products
+of copies of the exact sequence 0→A→B→C→0, in view of the general fact that
+Hom(
+L
+iGi, H) =
+Q
+iHom(Gi, H). Enlarging the diagram by zeros above and below,
+it becomes a short exact sequence of chain complexes, and the associated long exact
+sequence of homology groups is the ﬁrst of the
+two six-term exact sequences in the proposition.
+To obtain the other exact sequence we will
+construct the commutative diagram at the right,
+where the columns are free resolutions and the
+−→
+−→
+−−−→
+−−−→F
+′
+1
+−−−→
+F
+0
+0
+−→
+′′−−−→
+F
+1
+1
+−→
+−→
+−−−→
+−−−→F
+′
+0
+−−−→
+F
+0
+0
+−→
+′′−−−→
+F
+0
+0
+−→
+−→
+−−−→
+−−−→A
+−−−→
+B
+0
+0
+0
+0
+0
+0
+0
+0
+−→
+−→
+−→
+−→
+−−−→
+C
+rows are exact. To start, let F0→A and F′′
+0 →C
+be surjections from free abelian groups onto A
+and C . Then let F′
+0 = F0⊕F′′
+0 , with the obvious
+maps in the second row, inclusion and projection. The map F′
+0→B is deﬁned on the
+summand F0 to make the lower left square commute, and on the summand F′′
+0 it is
+deﬁned by sending basis elements of F′′
+0 to elements of B mapping to the images of
+these basis elements in C , so the lower right square also commutes. Now we have
+the bottom two rows of the diagram, and we can regard these two rows as a short
+exact sequence of two-term chain complexes. The associated long exact sequence of
+homology groups has six terms, the ﬁrst three being the kernels of the three vertical
+maps to A, B , and C , and the last three being the cokernels of these maps. Since
+the vertical maps to A and C are surjective, the fourth and sixth of the six homology
+groups vanish, hence also the ﬁfth, which says the vertical map to B is surjective. The
+ﬁrst three of the original six homology groups form a short exact sequence, and we
+let this be the top row of the diagram, formed by the kernels of the vertical maps to
+A, B , and C . These kernels are subgroups of free abelian groups, hence are also free.
+
+318
+Chapter 3
+Cohomology
+Thus the three columns are free resolutions. The upper two squares automatically
+commute, so the construction of the diagram is complete.
+The ﬁrst two rows of the diagram split by freeness, so applying Hom(−, G) yields
+a diagram
+Hom
+G
+0
+0
+F1
+(
+)
+,
+−−−−−→Hom
+G
+F1
+(
+)
+,
+−−−−−→Hom
+G
+F1
+(
+)
+,
+−−−−−→
+−−−−−→
+Hom
+G
+0
+0
+F0
+(
+)
+,
+−−−−−→Hom
+G
+F0
+(
+)
+,
+−−−−−→Hom
+G
+F0
+(
+)
+,
+−−−−−→
+−−−−−→
+−→
+−→
+−→
+′
+′
+′′
+′′
+with exact rows. Again viewing this as a short exact sequence of chain complexes,
+the associated long exact sequence of homology groups is the second six-term exact
+sequence in the statement of the proposition.
+⊔⊓
+The second sequence in the proposition says in particular that an injection A→B
+induces a surjection Ext(B, C)→Ext(A, C) for any C . For example, if A has torsion,
+this says Ext(A, Z) is nonzero since it maps onto Ext(Zn, Z) ≈Zn for some n > 1.
+The calculation Ext(Zp∞, Z) ≈bZp earlier in this section shows that torsion in A does
+not necessarily yield torsion in Ext(A, Z), however.
+Also useful are the formulas
+Ext(
+L
+i Ai, B) ≈
+Q
+iExt(Ai, B)
+Ext(A,
+L
+i Bi) ≈
+L
+i Ext(A, Bi)
+whose proofs we leave as exercises. For example, since Q/Z =
+L
+p Zp∞we obtain
+Ext(Q/Z, Z) ≈
+Q
+p bZp from the calculation Ext(Zp∞, Z) ≈bZp . Then from the exact
+sequence 0→Z→Q→Q/Z→0 we get Ext(Q, Z) ≈(
+Q
+p bZp)/Z using the second exact
+sequence in the proposition.
+In these examples the groups Ext(A, Z) are rather large, and the next result says
+this is part of a general pattern:
+Proposition 3F.12. If A is not ﬁnitely generated then either Hom(A, Z) or Ext(A, Z)
+is uncountable. Hence if Hn(X; Z) is not ﬁnitely generated then either Hn(X; Z) or
+Hn+1(X; Z) is uncountable.
+Both possibilities can occur, as we see from the examples Hom(
+L
+∞Z, Z) ≈
+Q
+∞Z
+and Ext(Zp∞, Z) ≈bZp .
+This proposition has some interesting topological consequences. First, it implies
+that if a space X has eH∗(X; Z) = 0, then eH∗(X; Z) = 0, since the case of ﬁnitely
+generated homology groups follows from our earlier results. And second, it says that
+one cannot always construct a space X with prescribed cohomology groups Hn(X; Z),
+as one can for homology. For example there is no space whose only nonvanishing
+eHn(X; Z) is a countable nonﬁnitely generated group such as Q or Q/Z. Even in the
+ﬁnitely generated case the dimension n = 1 is somewhat special since the group
+H1(X; Z) ≈Hom(H1(X), Z) is always torsionfree.

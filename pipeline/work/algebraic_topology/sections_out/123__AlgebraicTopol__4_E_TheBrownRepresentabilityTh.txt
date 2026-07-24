@@ -1,0 +1,376 @@
+[문서 맥락]
+책: Algebraic Topology / 저자: Allen Hatcher
+챕터: 4. Homotopy Theory
+현재 소단원: 4.E The Brown Representability Theorem
+직전 소단원: 「4.D.ex Exercises」
+[본문]
+448
+Chapter 4
+Homotopy Theory
+In Theorem 4.58 in §4.3 we showed that Ωspectra deﬁne cohomology theories,
+and now we will prove the converse statement that all cohomology theories on the
+CW category arise in this way from Ωspectra.
+Theorem 4E.1. Every reduced cohomology theory on the category of basepointed
+CW complexes and basepoint-preserving maps has the form hn(X) = ⟨X, Kn⟩for
+some Ωspectrum {Kn}.
+We will also see that the spaces Kn are unique up to homotopy equivalence.
+This theorem gives another proof that ordinary cohomology is representable as
+maps into Eilenberg–MacLane spaces, since for the spaces Kn in an Ωspectrum rep-
+resenting eH∗(−; G) we have πi(Kn) = ⟨Si, Kn⟩= eHn(Si; R), so Kn is a K(G, n).
+Before getting into the proof of the theorem let us observe that coﬁbration se-
+quences, as constructed in §4.3, allow us to recast the deﬁnition of a reduced coho-
+mology theory in a slightly more concise form: A reduced cohomology theory on the
+category C whose objects are CW complexes with a chosen basepoint 0 cell and whose
+morphisms are basepoint-preserving maps is a sequence of functors hn , n ∈Z, from
+C to abelian groups, together with natural isomorphisms hn(X) ≈hn+1(ΣX) for all
+X in C, such that the following axioms hold for each hn :
+(i) If f ≃g : X→Y in the basepointed sense, then f ∗= g∗: hn(Y)→hn(X).
+(ii) For each inclusion A>X in C the sequence hn(X/A)→hn(X)→hn(A) is exact.
+(iii) For a wedge sum X =
+W
+α Xα with inclusions iα : Xα > X , the product map
+Q
+αi∗
+α : hn(X)→
+Q
+αhn(Xα) is an isomorphism.
+To see that these axioms sufﬁce to deﬁne a cohomology theory, the main thing to
+note is that the coﬁbration sequence A→X→X/A→ΣA→··· allows us to construct
+the long exact sequence of a pair, just as we did in the case of the functors hn(X) =
+⟨X, Kn⟩. In the converse direction, if we have natural long exact sequences of pairs,
+then by applying these to pairs of the form (CX, X) we get natural isomorphisms
+hn(X) ≈hn+1(ΣX). Note that these natural isomorphisms coming from coboundary
+maps of pairs (CX, X) uniquely determine the coboundary maps for all pairs (X, A)
+via the diagram at the right, where the maps from
+A
+h (
+)
+n
+h
+n 1(
+)
++
+CA/A
+h
+n 1(
+)
++
+CX/A
+h
+n 1(
+)
++
+X/A
+−−−−−→
+−−−−−→
+−−−−−−−−→
+−−−−−−−−−−−−−→
+−−−−−→
+≈
+hn(A) are coboundary maps of pairs and the dia-
+gram commutes by naturality of these coboundary
+maps. The isomorphism comes from a deforma-
+tion retraction of CX onto CA. It is easy to check that these processes for converting
+one deﬁnition of a cohomology theory into the other are inverses of each other.
+Most of the work in representing cohomology theories by Ωspectra will be in
+realizing a single functor hn of a cohomology theory as ⟨−, Kn⟩for some space Kn .
+
+The Brown Representability Theorem
+Section 4.E
+449
+So let us consider what properties the functor h(X) = ⟨X, K⟩has, where K is a ﬁxed
+space with basepoint.
+First of all, it is a contravariant functor from the category
+of basepointed CW complexes to the category of pointed sets, that is, sets with a
+distinguished element, the homotopy class of the constant map in the present case.
+Morphisms in the category of pointed sets are maps preserving the distinguished
+element. We have already seen in §4.3 that h(X) satisﬁes the three axioms (i)–(iii). A
+further property is the following Mayer–Vietoris axiom:
+Suppose the CW complex X is the union of subcomplexes A and B containing
+the basepoint. Then if a ∈h(A) and b ∈h(B) restrict to the same element of
+h(A ∩B), there exists an element x ∈h(X) whose restrictions to A and B are
+the given elements a and b.
+Here and in what follows we use the term ‘restriction’ to mean the map induced by
+inclusion. In the case that h(X) = ⟨X, K⟩, this axiom is an immediate consequence of
+the homotopy extension property. The functors hn in any cohomology theory also
+satisfy this axiom since there are Mayer–Vietoris exact sequences in any cohomology
+theory, as we observed in §2.3 in the analogous setting of homology theories.
+Theorem 4E.2. If h is a contravariant functor from the category of connected base-
+pointed CW complexes to the category of pointed sets, satisfying the homotopy ax-
+iom (i), the Mayer–Vietoris axiom, and the wedge axiom (iii), then there exists a
+connected CW complex K and an element u ∈h(K) such that the transformation
+Tu : ⟨X, K⟩→h(X), Tu(f ) = f ∗(u), is a bijection for all X .
+Such a pair (K, u) is called universal for the functor h. It is automatic from
+the deﬁnition that the space K in a universal pair (K, u) is unique up to homo-
+topy equivalence.
+For if (K′, u′) is also universal for h, then, using the notation
+f : (K, u)→(K′, u′) to mean f : K→K′ with f ∗(u′) = u, universality implies that
+there are maps f : (K, u)→(K′, u′) and g : (K′, u′)→(K, u) that are unique up to ho-
+motopy. Likewise the compositions gf : (K, u)→(K, u) and f g : (K′, u′)→(K′, u′)
+are unique up to homotopy, hence are homotopic to the identity maps.
+Before starting the proof of this theorem we make two preliminary comments on
+the axioms.
+(1) The wedge axiom implies that h(point) is trivial. To see this, just use the fact that
+for any X we have X ∨point = X , so the map h(X)×h(point)→h(X) induced by
+inclusion of the ﬁrst summand is a bijection, but this map is the projection (a, b),a,
+hence h(point) must have only one element.
+(2) Axioms (i), (iii), and the Mayer–Vietoris axiom imply axiom (ii). Namely, (ii) is equiv-
+alent to exactness of h(A)←h(X)←h(X ∪CA), where CA is the reduced cone since
+we are in the basepointed category. The inclusion Im ⊂Ker holds since the composi-
+tion A→X ∪CA is nullhomotopic, so the induced map factors through h(point) = 0.
+
+450
+Chapter 4
+Homotopy Theory
+To obtain the opposite inclusion Ker ⊂Im, decompose X ∪CA into two subspaces
+Y and Z by cutting along a copy of A halfway up the cone CA, so Y is a smaller
+copy of CA and Z is the reduced mapping cylinder of the inclusion A > X . Given
+an element x ∈h(X), this extends to an element z ∈h(Z) since Z deformation
+retracts to X . If x restricts to the trivial element of h(A), then z restricts to the
+trivial element of h(Y ∩Z). The latter element extends to the trivial element of h(Y),
+so the Mayer–Vietoris axiom implies there is an element of h(X ∪CA) restricting to
+z in h(Z) and hence to x in h(X).
+The bulk of the proof of the theorem will be contained in two lemmas. To state
+the ﬁrst, consider pairs (K, u) with K a basepointed connected CW complex and
+u ∈h(K), where h satisﬁes the hypotheses of the theorem. Call such a pair (K, u)
+n universal if the map Tu : πi(K)→h(Si), Tu(f ) = f ∗(u), is surjective for i ≤n
+and has trivial kernel for i < n. Note that having a trivial kernel may not be the same
+as being injective since we are not dealing with homomorphisms of groups here. Call
+(K, u) π∗universal if it is n universal for all n.
+Lemma 4E.3. Given any pair (Z, z) with Z a connected CW complex and z ∈h(Z),
+there exists a π∗universal pair (K, u) with Z a subcomplex of K and u||Z = z.
+Proof: We construct K from Z by an inductive process of attaching cells. To begin,
+let K1 = Z
+W
+α S1
+α where α ranges over the elements of h(S1). By the wedge axiom
+there exists u1 ∈h(K1) with u1 ||Z = z and u1 ||S1
+α = α, so (K1, u1) is 1 universal.
+For the inductive step, suppose we have already constructed (Kn, un) with un
+n universal, Z ⊂Kn , and un ||Z = z. Represent each element α in the kernel of
+Tun : πn(Kn)→h(Sn) by a map fα : Sn→Kn . Let f =
+W
+α fα :
+W
+α Sn
+α→Kn . The reduced
+mapping cylinder Mf deformation retracts to Kn , so we can regard un as an element
+of h(Mf ), and this element restricts to the trivial element of h(
+W
+α Sn
+α) by the deﬁnition
+of f . The exactness property of h then implies that for the reduced mapping cone
+Cf = Mf /
+W
+α Sn
+α there is an element w ∈h(Cf ) restricting to un on Kn . Note that Cf
+is obtained from Kn by attaching cells en+1
+α
+by the maps fα . To ﬁnish the construction
+of Kn+1 , set Kn+1 = Cf
+W
+β Sn+1
+β
+where β ranges over h(Sn+1). By the wedge axiom
+again, there exists un+1 ∈h(Kn+1) restricting to w on Cf and β on Sn+1
+β
+.
+To see that (Kn+1, un+1) is (n+1) universal, consider the commutative diagram
+at the right. Since Kn+1 is obtained from Kn by attaching
+Kn 1
++
++
+u n 1
+K
+πi
+n
+(
+)
+S
+h
+i
+(
+)
+πi(
+)
+−−−−−−−−→
+−−−−−−−−→
+−−−−−−→
+Tu n
+T
+(n + 1) cells, the upper map is an isomorphism for i < n
+and a surjection for i = n. By induction the map Tun has
+trivial kernel for i < n and is surjective for i ≤n, so the
+same is true for Tun+1 . The kernel of Tun+1 is trivial for i = n since an element of this
+kernel pulls back to Ker Tn ⊂πn(Kn), by surjectivity of the upper map when i = n,
+and we attached cells to Kn by maps representing all elements of Ker Tn . And lastly,
+Tun+1 is surjective for i = n + 1 by construction.
+
+The Brown Representability Theorem
+Section 4.E
+451
+Now let K =
+S
+n Kn . We apply a mapping telescope argument as in the proofs of
+Lemma 2.34 and Theorem 3F.8 to show there is an element u ∈h(K) restricting to
+un on Kn , for all n. The mapping telescope of the inclusions K1 > K2 > ··· is the
+subcomplex T =
+S
+i Ki×[i, i+1] of K×[1, ∞). We take ‘ × ’ to be the reduced product
+here, with basepoint × interval collapsed to a point. The natural projection T→K is a
+homotopy equivalence since K×[1, ∞) deformation retracts onto T , as we showed in
+the proof of Lemma 2.34. Let A ⊂T be the union of the subcomplexes Ki×[i, i+1] for
+i odd and let B be the corresponding union for i even. Thus A∪B = T , A∩B =
+W
+i Ki ,
+A ≃
+W
+i K2i−1 , and B ≃
+W
+i K2i . By the wedge axiom there exist a ∈h(A) and b ∈h(B)
+restricting to ui on each Ki . Then using the fact that ui+1 ||Ki = ui , the Mayer–Vietoris
+axiom implies that a and b are the restrictions of an element t ∈h(T). Under the
+isomorphism h(T) ≈h(K), t corresponds to an element u ∈h(K) restricting to un
+on Kn for all n.
+To verify that (K, u) is π∗universal we use the com-
+mutative diagram at the right. For n > i + 1 the upper
+K
+πi
+n
+(
+)
+S
+h
+i
+(
+)
+K
+πi(
+)
+−−−−−−−−→
+−−−−−−−−→
+−−−−−−→
+Tu n
+Tu
+map is an isomorphism and Tun is surjective with trivial
+kernel, so the same is true of Tu .
+⊔⊓
+Lemma 4E.4. Let (K, u) be a π∗universal pair and let (X, A) be a basepointed CW
+pair. Then for each x ∈h(X) and each map f : A→K with f ∗(u) = x ||A there
+exists a map g : X→K extending f with g∗(u) = x .
+Schematically, this is saying that the diagonal arrow in
+the diagram at the right always exists, where the map i is
+inclusion.
+−−−−−→
+−−−−−−−−→
+a
+A
+(
+)
+,
+u
+K
+(
+)
+,
+x
+X
+(
+)
+,
+−−→
+f
+g
+i
+Proof: Replacing K by the reduced mapping cylinder of f reduces us to the case
+that f is the inclusion of a subcomplex. Let Z be the union of X and K with the
+two copies of A identiﬁed. By the Mayer–Vietoris axiom, there exists z ∈h(Z) with
+z||X = x and z||K = u. By the previous lemma, we can embed (Z, z) in a π∗universal
+pair (K′, u′). The inclusion (K, u)> (K′, u′) induces an isomorphism on homotopy
+groups since both u and u′ are π∗universal, so K′ deformation retracts onto K .
+This deformation retraction induces a homotopy rel A of the inclusion X > K′ to a
+map g : X→K . The relation g∗(u) = x holds since u′ ||K = u and u′ ||X = x .
+⊔⊓
+Proof of Theorem 4E.2: It sufﬁces to show that a π∗universal pair (K, u) is univer-
+sal. Applying the preceding lemma with A a point shows that Tu : ⟨X, K⟩→h(X) is
+surjective. To show injectivity, suppose Tu(f0) = Tu(f1), that is, f ∗
+0 (u) = f ∗
+1 (u). We
+apply the preceding lemma with (X×I, X×∂I) playing the role of (X, A), using the
+maps f0 and f1 on X×∂I and taking x to be p∗f ∗
+0 (u) = p∗f ∗
+1 (u) where p is the
+projection X×I→X . Here X×I should be the reduced product, with basepoint ×I
+collapsed to a point. The lemma then gives a homotopy from f0 to f1 .
+⊔⊓
+
+452
+Chapter 4
+Homotopy Theory
+Proof of Theorem 4E.1: Since suspension is an isomorphism in any reduced coho-
+mology theory, and the suspension of any CW complex is connected, it sufﬁces to
+restrict attention to connected CW complexes. Each functor hn satisﬁes the homo-
+topy, wedge, and Mayer–Vietoris axioms, as we noted earlier, so the preceding theorem
+gives CW complexes Kn with hn(X) = ⟨X, Kn⟩. It remains to show that the natu-
+ral isomorphisms hn(X) ≈hn+1(ΣX) correspond to weak homotopy equivalences
+Kn→ΩKn+1 . The natural isomorphism hn(X) ≈hn+1(ΣX) corresponds to a nat-
+ural bijection ⟨X, Kn⟩≈⟨ΣX, Kn+1⟩= ⟨X, ΩKn+1⟩which we call Φ. The naturality
+of this bijection gives, for any map f : X→Kn , a
+commutative diagram as at the right. Let εn =
+Kn
+Kn
+−−−−−−−−−−−→
+−−−−−−→
+,
+⟨
+⟩
+K
+Kn,
+⟨
+⟩
+Kn
+X,
+⟨
+⟩
+n 1
++
+Ω
+K
+X,
+⟨
+⟩
+n 1
++
+Ω
+−−−→
+Φ
+−−−→
+Φ
+f ∗
+f ∗
+Φ(11) : Kn→ΩKn+1 .
+Then using commutativity
+we have Φ(f ) = Φf ∗(11) = f ∗Φ(11) = f ∗(εn) =
+εnf , which says that the map Φ : ⟨X, Kn⟩→⟨X, ΩKn+1⟩is composition with εn . Since
+Φ is a bijection, if we take X to be Si , we see that εn induces an isomorphism on πi
+for all i, so εn is a weak homotopy equivalence and we have an Ωspectrum.
+There is one ﬁnal thing to verify, that the bijection hn(X) = ⟨X, Kn⟩is a group
+isomorphism, where ⟨X, Kn⟩has the group structure that comes from identifying
+it with ⟨X, ΩKn+1⟩= ⟨ΣX, Kn+1⟩. Via the natural isomorphism hn(X) ≈hn+1(ΣX)
+this is equivalent to showing the bijection hn+1(ΣX) = ⟨ΣX, Kn+1⟩preserves group
+structure. For maps f , g : ΣX→K , the relation Tu(f + g) = Tu(f ) + Tu(g) means
+(f +g)∗(u) = f ∗(u)+g∗(u), and this holds since (f +g)∗= f ∗+g∗: h(K)→h(ΣX)
+by Lemma 4.60.
+⊔⊓
+We have seen in §4.3 and the preceding section how cohomology theories have
+a homotopy-theoretic interpretation in terms of Ωspectra, and it is natural to look
+for a corresponding description of homology theories. In this case we do not already
+have a homotopy-theoretic description of ordinary homology to serve as a starting
+point. But there is another homology theory we have encountered which does have a
+very homotopy-theoretic ﬂavor:
+Proposition 4F.1. Stable homotopy groups πs
+n(X) deﬁne a reduced homology theory
+on the category of basepointed CW complexes and basepoint-preserving maps.
+Proof: In the preceding section we reformulated the axioms for a cohomology theory
+so that the exactness axiom asserts just the exactness of hn(X/A)→hn(X)→hn(A)
+for CW pairs (X, A). In order to derive long exact sequences, the reformulated axioms
