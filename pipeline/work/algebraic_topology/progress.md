@@ -100,7 +100,7 @@
 
 | 040 | [x] | 2.2.1 Degree | section | `040__AlgebraicTopol__2_2_1_Degree.txt` |
 
-| 041 | [ ] | 2.2.2 Cellular Homology (분할 part 1) _(원본 #041)_ | section | `041__AlgebraicTopol__2_2_2_CellularHomology__p1.txt` |
+| 041 | [x] | 2.2.2 Cellular Homology (분할 part 1) _(원본 #041)_ | section | `041__AlgebraicTopol__2_2_2_CellularHomology__p1.txt` |
 
 | 042 | [ ] | 2.2.2 Cellular Homology (분할 part 2) _(원본 #042)_ | section | `042__AlgebraicTopol__2_2_2_CellularHomology__p2.txt` |
 

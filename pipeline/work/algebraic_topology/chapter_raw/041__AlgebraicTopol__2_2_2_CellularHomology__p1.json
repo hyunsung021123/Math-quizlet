@@ -1,0 +1,363 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.2.2 셀 호몰로지 (Cellular Homology) — 1부",
+      "step1_big_picture": {
+        "context": "지금까지의 호몰로지는 개념은 견고했지만 계산은 무거웠다(단체는 삼각분할이 방대하고, 특이는 사슬군이 비가산). 이 소단원은 CW 복합체에 특화된, 압도적으로 효율적인 계산 도구인 셀 호몰로지(cellular homology)를 세운다. 재료는 딱 하나 — 뼈대 쌍 $(X^n,X^{n-1})$의 호몰로지가 '$n$-셀마다 하나씩의 $\\mathbb{Z}$'라는 사실(Lemma 2.34, 곧 $X^n/X^{n-1}$이 $n$-구면 쐐기합)이다. 이 상대군들을 잇는 경계 사상 $d_n$이 사슬 복합체를 이루고, 그 호몰로지 $H_n^{CW}(X)$가 놀랍게도 통상의 $H_n(X)$와 같다(정리 2.35). 게다가 $d_n$은 2.2.1의 차수(degree)로 명시적으로 계산된다(셀 경계 공식). 이 기계로 곡면($M_g,N_g$), $\\mathbb{CP}^n$, $\\mathbb{RP}^n$, 무어 공간(임의의 호몰로지 실현), 렌즈공간까지 단숨에 계산한다.",
+        "hidden_intuition": "셀 호몰로지가 빠른 이유는 '사슬군이 곧 셀'이기 때문이다 — $n$차 사슬군은 $n$-셀들이 자유로 생성하는 $\\mathbb{Z}^{(\\#\\,n\\text{-cells})}$이라, 원판을 두 개로 자르든 열네 개로 자르든 상관없이 셀 개수만큼만 다루면 된다. 경계 사상 $d_n$의 정체가 아름답다: $n$-셀 $e^n_\\alpha$의 붙임 사상 $S^{n-1}\\to X^{n-1}$을 '$(n-1)$-셀 $e^{n-1}_\\beta$만 남기고 나머지를 뭉갠' 구 $S^{n-1}_\\beta$로 밀면 자기사상 $S^{n-1}\\to S^{n-1}$이 되고, 그 차수 $d_{\\alpha\\beta}$가 곧 $d_n$의 계수다 — '$e^n$의 테두리가 $e^{n-1}$을 몇 겹 감는가'를 정수로 센 것. 이 한 줄이 붙임 방식(방향·감음)의 기하를 $d_n$의 행렬로 번역한다. 그래서 곡면의 가향/비가향(교환자냐 $a^2$냐), $\\mathbb{RP}^n$의 $2$겹 피복(차수 $1+(-1)^k$), 렌즈공간의 $m$겹 회전(차수 $m$)이 모두 $d_n$의 $0/2/m$으로 나타나고, 꼬임(torsion)이 어디서 오는지가 눈에 보인다. 셀 호몰로지는 'CW 구조라는 조립 설명서를 그대로 대수로 옮긴 것'이다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Lemma",
+          "name": "보조정리 2.34 (뼈대의 예비 사실)",
+          "formal_statement": "CW 복합체 $X$에 대해: (a) $H_k(X^n,X^{n-1})$은 $k\\ne n$이면 $0$, $k=n$이면 $X$의 $n$-셀들과 일대일 대응하는 기저를 갖는 자유아벨군. (b) $k>n$이면 $H_k(X^n)=0$; 특히 유한차원이면 $k>\\dim X$에서 $H_k(X)=0$. (c) 포함 $i:X^n\\hookrightarrow X$은 $k<n$에서 동형 $i_*:H_k(X^n)\\to H_k(X)$을 유도한다.",
+          "idea_behind_proof": "(a)는 '$(X^n,X^{n-1})$이 좋은 쌍이고 $X^n/X^{n-1}$이 $n$-셀마다 하나씩의 $n$-구면 쐐기합'이라는 관찰(명제 2.22, 따름정리 2.25)에서 즉시 나온다. (b)(c)는 쌍 $(X^n,X^{n-1})$의 긴 완전열에서 (a)로 양옆 항이 사라져 $H_k(X^{n-1})\\cong H_k(X^n)$이 연쇄적으로 성립함을 이용하는 망원경(telescoping) 논법이다. 무한차원 (c)는 콤팩트 상이 유한 뼈대에 갇힌다는 사실(또는 사상 망원경 mapping telescope 구성)로 유한차원으로 환원한다.",
+          "proof_steps": [
+            "(a) 좋은 쌍이라 $H_k(X^n,X^{n-1})\\cong\\widetilde{H}_k(X^n/X^{n-1})=\\widetilde{H}_k(\\bigvee_\\alpha S^n_\\alpha)$, 이는 $k=n$에서 $n$-셀 기저 자유군, 그 외 $0$.",
+            "(b)(c) 완전열 $H_k(X^n,X^{n-1})\\to H_k(X^{n-1})\\to H_k(X^n)\\to H_k(X^n,X^{n-1})$에서 $k\\ne n,n-1$이면 양끝이 $0$이라 $H_k(X^{n-1})\\cong H_k(X^n)$. $k>n$이면 $H_k(X^n)\\cong\\cdots\\cong H_k(X^0)=0$; $k<n$이면 $H_k(X^n)\\cong H_k(X^{n+m})$ ($\\forall m$)이라 유한차원 (c) 성립.",
+            "무한차원 (c): 특이 사슬은 콤팩트 상을 가져 유한 뼈대 $X^m$에 담기므로, $k$-순환·경계가 모두 어떤 $X^m$ 안에 있어 유한차원 결과로 환원(또는 $X$를 사상 망원경 $T\\simeq X$로 펴서 국소 유한차원화). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.35 (셀 호몰로지 = 특이 호몰로지)",
+          "formal_statement": "CW 복합체 $X$에 대해, 상대군 $H_n(X^n,X^{n-1})$을 $n$차 사슬군으로 하고 $d_n=j_{n-1}\\partial_n:H_n(X^n,X^{n-1})\\to H_{n-1}(X^{n-1},X^{n-2})$(경계 $\\partial_n$ 뒤에 자연 사상 $j_{n-1}$을 합성)을 경계로 하면, $d_nd_{n+1}=0$인 사슬 복합체(셀 사슬 복합체)를 얻는다. 그 호몰로지 $H_n^{CW}(X)=\\mathrm{Ker}\\,d_n/\\mathrm{Im}\\,d_{n+1}$은 특이 호몰로지와 동형이다: $$H_n^{CW}(X)\\cong H_n(X).$$",
+          "idea_behind_proof": "여러 뼈대 쌍의 긴 완전열을 한 그림에 겹쳐, $d_n=j_{n-1}\\partial_n$이 두 완전열의 연속한 두 사상을 지나므로 $d_nd_{n+1}=0$. 동형은 순수 도식추적이다 — $j$들이 단사라는 것이 몫들을 정확히 맞물리게 한다.",
+          "proof_steps": [
+            "$d_nd_{n+1}=j_{n-1}\\partial_n j_n\\partial_{n+1}$인데 $\\partial_n j_n$이 완전열의 연속한 두 사상이라 $0$. 따라서 사슬 복합체.",
+            "Lemma 2.34로 $H_n(X)\\cong H_n(X^n)/\\mathrm{Im}\\,\\partial_{n+1}$($H_n(X^{n+1})\\cong H_n(X)$, $H_n(X^n)\\to H_n(X^{n+1})$의 핵이 $\\mathrm{Im}\\,\\partial_{n+1}$).",
+            "$j_n$ 단사라 $\\mathrm{Im}\\,\\partial_{n+1}\\xrightarrow{\\cong}\\mathrm{Im}\\,d_{n+1}$, $H_n(X^n)\\xrightarrow{\\cong}\\mathrm{Im}\\,j_n=\\mathrm{Ker}\\,\\partial_n$; $j_{n-1}$ 단사라 $\\mathrm{Ker}\\,\\partial_n=\\mathrm{Ker}\\,d_n$. 따라서 $j_n$이 $H_n(X^n)/\\mathrm{Im}\\,\\partial_{n+1}\\xrightarrow{\\cong}\\mathrm{Ker}\\,d_n/\\mathrm{Im}\\,d_{n+1}$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "label",
+                "at": [
+                  -3.3,
+                  0
+                ],
+                "text": "C_{n+1}"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "C_n"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.3,
+                  0
+                ],
+                "text": "C_{n-1}"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.6,
+                  1.6
+                ],
+                "text": "H_n(X^n)"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -2.8,
+                  0
+                ],
+                "to": [
+                  -0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.65,
+                  -0.32
+                ],
+                "text": "d_{n+1}"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0.5,
+                  0
+                ],
+                "to": [
+                  2.8,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.65,
+                  -0.32
+                ],
+                "text": "d_n"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -3.1,
+                  0.3
+                ],
+                "to": [
+                  -2.0,
+                  1.3
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -3.0,
+                  0.95
+                ],
+                "text": "∂_{n+1}"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.2,
+                  1.3
+                ],
+                "to": [
+                  -0.2,
+                  0.3
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.5,
+                  1.0
+                ],
+                "text": "j_n"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.15
+                ],
+                "text": "C_k = H_k(X^k, X^{k-1})"
+              }
+            ],
+            "caption": "셀 사슬 복합체: 사슬군 $C_n=H_n(X^n,X^{n-1})$($n$-셀 기저 자유군)을 잇는 경계 $d_n=j_{n-1}\\partial_n$. 대각선 $\\partial,j$를 지나므로 $d_nd_{n+1}=0$."
+          }
+        },
+        {
+          "type": "Remark",
+          "name": "즉각적 응용 (i)–(iii)와 $\\mathbb{CP}^n$",
+          "formal_statement": "(i) $X$에 $n$-셀이 없으면 $H_n(X)=0$. (ii) $n$-셀이 $k$개면 $H_n(X)$은 많아야 $k$개 원소로 생성된다($H_n(X^n,X^{n-1})\\cong\\mathbb{Z}^k$의 부분군의 몫). (iii) 인접한 두 차원에 동시에 셀이 없으면(즉 셀들이 차원상 떨어져 있으면) 모든 $d_n=0$이라 $H_n(X)$은 $n$-셀 기저의 자유아벨군이다. 예: $\\mathbb{CP}^n$은 각 짝수 차원 $2k\\le 2n$에 셀 하나씩이라 인접 셀이 없으므로 $$H_i(\\mathbb{CP}^n)\\cong\\begin{cases}\\mathbb{Z}&i=0,2,4,\\dots,2n\\\\0&\\text{그 외.}\\end{cases}$$ 마찬가지로 $S^n\\times S^n$($n>1$: $0$-셀, $n$-셀 두 개, $2n$-셀)도 셀 차원이 떨어져 자유로 계산된다.",
+          "idea_behind_proof": "세 응용 모두 '사슬군이 $n$-셀 자유군'이라는 정리 2.35의 직접 귀결이다. 특히 (iii)은 $d_n$의 정의역·공역 중 하나가 $0$이면 $d_n=0$이 되어 호몰로지가 사슬군 그대로임을 말한다 — CW 구조가 경제적일수록 계산이 공짜에 가까워진다."
+        },
+        {
+          "type": "Theorem",
+          "name": "셀 경계 공식 (Cellular Boundary Formula)",
+          "formal_statement": "$n>1$에서 $$d_n(e^n_\\alpha)=\\sum_\\beta d_{\\alpha\\beta}\\,e^{n-1}_\\beta$$ 이며, 계수 $d_{\\alpha\\beta}$는 합성 $$S^{n-1}_\\alpha\\ \\xrightarrow{\\ \\varphi_\\alpha\\ }\\ X^{n-1}\\ \\xrightarrow{\\ q_\\beta\\ }\\ S^{n-1}_\\beta$$ 의 차수다. 여기서 $\\varphi_\\alpha$는 $e^n_\\alpha$의 붙임 사상이고 $q_\\beta$는 $X^{n-1}$에서 $e^{n-1}_\\beta$의 여집합을 한 점으로 뭉개 얻는 구 $S^{n-1}_\\beta=D^{n-1}_\\beta/\\partial D^{n-1}_\\beta$로의 사상이다. ($n=1$일 때 $d_1$은 단체 경계 $\\Delta_1\\to\\Delta_0$과 같고, $0$-셀이 하나뿐인 연결복합체에선 $d_1=0$.) 붙임 사상의 상이 콤팩트라 유한개 $\\beta$만 나타난다.",
+          "idea_behind_proof": "특성사상 $\\Phi_\\alpha$가 생성원 $[D^n_\\alpha]$을 $e^n_\\alpha$로 보내고, $d_n(e^n_\\alpha)=j_{n-1}\\varphi_{\\alpha*}\\partial[D^n_\\alpha]$이 성립하는 가환도식을 세운다. $q_{\\beta*}$가 $H_{n-1}(X^{n-1}/X^{n-2})$을 $e^{n-1}_\\beta$ 성분으로 사영하므로, $\\beta$ 성분의 계수가 곧 붙임 사상을 $S^{n-1}_\\beta$로 밀어 얻는 자기사상의 차수 $d_{\\alpha\\beta}$가 된다 — 2.2.1의 국소/전역 차수 계산이 여기서 직접 쓰인다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -3,
+                  0
+                ],
+                "r": 0.7
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -3,
+                  -1.15
+                ],
+                "text": "S^{n-1}_α = ∂e^n_α"
+              },
+              {
+                "shape": "ellipse",
+                "center": [
+                  0,
+                  0
+                ],
+                "rx": 1.0,
+                "ry": 0.7
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.15
+                ],
+                "text": "X^{n-1}"
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  3,
+                  0
+                ],
+                "r": 0.7
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3,
+                  -1.15
+                ],
+                "text": "S^{n-1}_β"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -2.25,
+                  0
+                ],
+                "to": [
+                  -1.05,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.65,
+                  0.3
+                ],
+                "text": "φ_α"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.05,
+                  0
+                ],
+                "to": [
+                  2.25,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.65,
+                  0.3
+                ],
+                "text": "q_β (뭉개기)"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.7
+                ],
+                "text": "차수 = d_{αβ}"
+              }
+            ],
+            "caption": "셀 경계 공식: $e^n_\\alpha$의 테두리를 붙임 사상으로 $X^{n-1}$에 보낸 뒤 $e^{n-1}_\\beta$만 남기고 뭉개면 자기사상 $S^{n-1}\\to S^{n-1}$이 된다. 그 차수 $d_{\\alpha\\beta}$가 $d_n$의 계수 — '테두리가 $e^{n-1}_\\beta$를 몇 겹 감는가'."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.36 · 2.37 (가향·비가향 곡면)",
+          "formal_statement": "가향 폐곡면 $M_g$(종수 $g$): $0$-셀 $1$개, $1$-셀 $2g$개, $2$-셀 $1$개(붙임어 $[a_1,b_1]\\cdots[a_g,b_g]$). $d_1=0$($0$-셀 하나), $d_2=0$(각 생성원이 역원과 함께 나타나 $\\Delta_{\\alpha\\beta}$가 상수사상과 호모토피). 따라서 $$H_0(M_g)=\\mathbb{Z},\\ H_1(M_g)=\\mathbb{Z}^{2g},\\ H_2(M_g)=\\mathbb{Z}.$$ 비가향 폐곡면 $N_g$(종수 $g$): $1$-셀 $g$개, $2$-셀 $1$개(붙임어 $a_1^2\\cdots a_g^2$). $d_1=0$, $d_2(1)=(2,\\dots,2)$(각 $a_i$가 총지수 $2$, 곧 $z\\mapsto z^2$의 차수 $2$). $d_2$ 단사라 $H_2(N_g)=0$; 기저를 바꾸면 $$H_0(N_g)=\\mathbb{Z},\\ H_1(N_g)=\\mathbb{Z}^{g-1}\\oplus\\mathbb{Z}_2,\\ H_2(N_g)=0.$$",
+          "idea_behind_proof": "핵심 대비는 붙임어에 있다. 가향 곡면의 교환자 $[a_i,b_i]=a_ib_ia_i^{-1}b_i^{-1}$는 각 변을 정·역으로 한 번씩 쓸어 총차수 $0$ → $d_2=0$ → $H_2=\\mathbb{Z}$(꼬임 없음, 최고차원 순환 존재=가향성). 비가향 곡면의 $a_i^2$는 같은 변을 같은 방향으로 두 번 감아 차수 $2$ → $d_2$가 $2$를 만들어 $H_2=0$이고 $H_1$에 꼬임 $\\mathbb{Z}_2$가 생긴다. 최고차원 호몰로지 $H_n$이 $\\mathbb{Z}$냐 $0$이냐가 곧 폐다양체의 가향성을 검출한다(정리 3.26).",
+          "visualization": {
+            "type": "identification_polygon_2d",
+            "edges": [
+              {
+                "label": "a_1",
+                "dir": 1
+              },
+              {
+                "label": "b_1",
+                "dir": 1
+              },
+              {
+                "label": "a_1",
+                "dir": -1
+              },
+              {
+                "label": "b_1",
+                "dir": -1
+              },
+              {
+                "label": "a_2",
+                "dir": 1
+              },
+              {
+                "label": "b_2",
+                "dir": 1
+              },
+              {
+                "label": "a_2",
+                "dir": -1
+              },
+              {
+                "label": "b_2",
+                "dir": -1
+              }
+            ],
+            "caption": "종수 $2$ 가향 곡면 $M_2$: 팔각형의 변을 $[a_1,b_1][a_2,b_2]$로 동일시. 각 생성원이 정·역으로 나타나 $d_2=0$, 그래서 $H_1=\\mathbb{Z}^4$, $H_2=\\mathbb{Z}$."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.42 (실사영공간 $\\mathbb{RP}^n$)",
+          "formal_statement": "$\\mathbb{RP}^n$은 각 차원 $k\\le n$에 셀 $e^k$ 하나씩을 갖고, $e^k$의 붙임 사상은 $2$겹 피복 $\\varphi:S^{k-1}\\to\\mathbb{RP}^{k-1}$이다. $q\\varphi:S^{k-1}\\to\\mathbb{RP}^{k-1}/\\mathbb{RP}^{k-2}=S^{k-1}$은 $S^{k-1}-S^{k-2}$의 두 성분 각각에서 위상동형이고 둘은 대척사상(차수 $(-1)^k$)만큼 차이 나므로 $\\deg(q\\varphi)=1+(-1)^k$. 따라서 $d_k$는 $k$가 홀수면 $0$, 짝수면 $\\times2$. 결과: $$H_k(\\mathbb{RP}^n)=\\begin{cases}\\mathbb{Z}&k=0,\\ \\text{또는 }k=n\\text{ 홀수}\\\\\\mathbb{Z}_2&k\\text{ 홀수},\\ 0<k<n\\\\0&\\text{그 외.}\\end{cases}$$",
+          "idea_behind_proof": "핵심은 붙임 사상이 대척사상을 품는다는 것이다. $q\\varphi$의 두 성분 위상동형이 대척사상 $(-1)^k$만큼 어긋나므로 차수가 $1+(-1)^k$ — 홀수 차원에선 $1-1=0$, 짝수 차원에선 $1+1=2$. 이 규칙적 $0,2,0,2,\\dots$ 사슬 복합체가 홀수 자리마다 $\\mathbb{Z}_2$를 낳는다. $\\mathbb{RP}^n$은 '차수 계산이 호몰로지를 어떻게 결정하는가'의 표본이다."
+        },
+        {
+          "type": "Example",
+          "name": "예 2.40 · 2.43 (무어 공간과 렌즈공간)",
+          "formal_statement": "무어 공간(Moore space) $M(G,n)$: 아벨군 $G$와 $n\\ge1$에 대해 $H_n(X)\\cong G$, $\\widetilde{H}_i(X)=0\\ (i\\ne n)$인 CW 복합체. $G=\\mathbb{Z}_m$이면 $S^n$에 차수 $m$ 사상으로 $(n+1)$-셀을 붙여 얻고, 일반 유한생성 $G$는 이런 것들과 $S^n$들의 쐐기합으로 실현. 비유한생성도 자유 분해 $0\\to K\\to F\\to G\\to0$에서 $X^n=\\bigvee_\\alpha S^n_\\alpha$($H_n=F$)에 $K\\hookrightarrow F$를 실현하는 $(n+1)$-셀들을 붙여 만든다 — 곧 임의의 지정 호몰로지열을 실현할 수 있다(예 2.41). 렌즈공간(lens space) $L=L_m(\\ell_1,\\dots,\\ell_n)=S^{2n-1}/\\mathbb{Z}_m$: $\\rho(z_1,\\dots,z_n)=(e^{2\\pi i\\ell_1/m}z_1,\\dots,e^{2\\pi i\\ell_n/m}z_n)$이 생성하는 자유 작용의 몫($\\gcd(\\ell_j,m)=1$). 각 차원에 셀 하나씩인 CW 구조에서 셀 사슬 복합체가 $0,m,0,m,\\dots$ 꼴이라 $$H_k(L)=\\begin{cases}\\mathbb{Z}&k=0,\\ 2n-1\\\\\\mathbb{Z}_m&k\\text{ 홀수},\\ 0<k<2n-1\\\\0&\\text{그 외.}\\end{cases}$$ ($m=2$이면 $\\rho$는 대척사상이라 $L=\\mathbb{RP}^{2n-1}$.)",
+          "idea_behind_proof": "무어 공간의 요령은 예 2.31(임의 차수 사상)의 일반화다 — 붙임 사상의 성분별 차수를 자유 분해의 계수 $d_{\\beta\\alpha}$에 정확히 맞추면 셀 경계 $d_{n+1}$이 포함 $K\\hookrightarrow F$가 되어 원하는 $G=F/K$가 호몰로지로 나온다. 렌즈공간은 $\\mathbb{Z}_m$ 회전 작용의 셀 구조에서 붙임 차수가 $m$이 되어(회전이 $m$겹) $0,m,0,m,\\dots$을 준다 — $\\mathbb{RP}^{2n-1}$($m=2$)의 자연스러운 일반화."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예 2.42의 셀 사슬 복합체를 이용해 $\\mathbb{RP}^3$의 모든 호몰로지군 $H_k(\\mathbb{RP}^3)$을 직접 계산하라.",
+          "hint": "$\\mathbb{RP}^3$은 $0,1,2,3$차원에 셀 하나씩. $d_k=1+(-1)^k$이므로 $d_1=0,\\ d_2=2,\\ d_3=0$. 사슬 복합체 $0\\to\\mathbb{Z}\\xrightarrow{d_3}\\mathbb{Z}\\xrightarrow{d_2}\\mathbb{Z}\\xrightarrow{d_1}\\mathbb{Z}\\to0$의 각 자리에서 $\\mathrm{Ker}/\\mathrm{Im}$를 구하라.",
+          "solution": "사슬 복합체는 $$0\\to\\underset{C_3}{\\mathbb{Z}}\\xrightarrow{\\,d_3=0\\,}\\underset{C_2}{\\mathbb{Z}}\\xrightarrow{\\,d_2=2\\,}\\underset{C_1}{\\mathbb{Z}}\\xrightarrow{\\,d_1=0\\,}\\underset{C_0}{\\mathbb{Z}}\\to0.$$ $H_3=\\mathrm{Ker}\\,d_3=\\mathrm{Ker}(0)=\\mathbb{Z}$. $H_2=\\mathrm{Ker}\\,d_2/\\mathrm{Im}\\,d_3=\\mathrm{Ker}(\\times2)/0=0$($\\times2$ 단사). $H_1=\\mathrm{Ker}\\,d_1/\\mathrm{Im}\\,d_2=\\mathbb{Z}/2\\mathbb{Z}=\\mathbb{Z}_2$. $H_0=\\mathbb{Z}$. 정리: $$H_k(\\mathbb{RP}^3)=\\mathbb{Z},\\ \\mathbb{Z}_2,\\ 0,\\ \\mathbb{Z}\\quad(k=0,1,2,3),$$ 일반 공식($k=0$·$k=n=3$ 홀수 → $\\mathbb{Z}$; $k=1$ 홀수 $0<1<3$ → $\\mathbb{Z}_2$; $k=2$ → $0$)과 일치한다. 최고차원 $H_3=\\mathbb{Z}$은 $\\mathbb{RP}^3$이 가향 폐$3$-다양체임을 반영한다(짝수 $\\mathbb{RP}^{2m}$이라면 $H_{\\text{top}}=0$)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "클라인병 $K$를 $0$-셀 $1$개, $1$-셀 $a,b$, $2$-셀 하나(붙임어 $abab^{-1}$)인 CW 복합체로 보고, 셀 경계 공식으로 $d_2$를 구해 모든 호몰로지군을 계산하라.",
+          "hint": "$d_1=0$($0$-셀 하나). $d_2$는 붙임어를 아벨화해 각 $1$-셀의 총지수를 세면 된다: $abab^{-1}$에서 $a$의 지수 합과 $b$의 지수 합. 그 벡터가 $d_2(1)$이다.",
+          "solution": "$d_1=0$이라 $H_0=\\mathbb{Z}$. 붙임어 $abab^{-1}$를 아벨화하면 $a$는 $+1+1=2$번, $b$는 $+1-1=0$번 나타나므로 기저 $(a,b)$에서 $d_2(1)=(2,0)$. $H_2=\\mathrm{Ker}\\,d_2=0$($d_2$ 단사, $(2,0)\\ne0$). $H_1=\\mathbb{Z}^2/\\langle(2,0)\\rangle$: 첫 성분은 $2a=0$인 $\\mathbb{Z}_2$, 둘째 성분 $b$는 자유 $\\mathbb{Z}$. 따라서 $$H_0(K)=\\mathbb{Z},\\ H_1(K)=\\mathbb{Z}\\oplus\\mathbb{Z}_2,\\ H_2(K)=0.$$ 이는 예 2.37의 $N_2$($g=2$: $H_1=\\mathbb{Z}^{1}\\oplus\\mathbb{Z}_2$)와 일치한다 — 클라인병이 종수 $2$ 비가향 곡면이기 때문. 꼬임 $\\mathbb{Z}_2$는 붙임어의 $a$가 같은 방향으로 두 번 감긴 데서(차수 $2$) 나온다."
+        },
+        {
+          "type": "ox",
+          "question": "CW 복합체 $X$가 인접한 두 차원에 동시에 셀을 갖지 않으면(즉 셀이 있는 차원들이 서로 떨어져 있으면), 각 $H_n(X)$은 $n$-셀들과 일대일 대응하는 기저를 갖는 자유아벨군이다.",
+          "answer": "O",
+          "explanation": "이 경우 셀 경계 사상 $d_n:H_n(X^n,X^{n-1})\\to H_{n-1}(X^{n-1},X^{n-2})$의 정의역 또는 공역 중 하나가 $0$(인접 차원에 셀이 없으므로)이라 모든 $d_n=0$이 된다. 그러면 호몰로지가 사슬군 그대로 $H_n(X)\\cong H_n(X^n,X^{n-1})\\cong\\mathbb{Z}^{(\\#\\,n\\text{-cells})}$. 대표 예가 $\\mathbb{CP}^n$(짝수 차원에만 셀)로, $H_{2k}=\\mathbb{Z}$($0\\le k\\le n$), 나머지 $0$이다."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 아벨군 $G$와 정수 $n\\ge1$에 대해, $H_n\\cong G$이고 나머지 축소 호몰로지가 모두 $0$인 CW 복합체(무어 공간 $M(G,n)$)가 존재한다.",
+          "answer": "O",
+          "explanation": "예 2.40의 구성이다. $G=\\mathbb{Z}_m$이면 $S^n$에 차수 $m$ 사상으로 $(n+1)$-셀을 붙이고, 일반 $G$는 자유 분해 $0\\to K\\to F\\to G\\to0$을 택해 $\\bigvee S^n$($H_n=F$)에 $K\\hookrightarrow F$를 실현하는 $(n+1)$-셀들을 붙인다. 셀 경계 $d_{n+1}$이 포함 $K\\hookrightarrow F$가 되어 $H_n=F/K=G$, 그 외는 $0$. 나아가 무어 공간들의 쐐기합으로 임의의 지정 호몰로지열도 실현된다(예 2.41) — 호몰로지는 실현 제약이 거의 없는 유연한 불변량이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "셀 호몰로지는 왜 특이·단체 호몰로지보다 압도적으로 계산이 빠른가? 그리고 셀 경계 사상 $d_n$이 어떻게 '차수'라는 정수 계산으로 환원되는지, 이 절의 기계(보조정리 2.34 → 정리 2.35 → 셀 경계 공식)를 엮어 설명하라.",
+          "hint": "각 차원의 사슬군이 무엇으로 생성되는지(셀 개수 vs 모든 특이 단체), 그리고 $d_n$을 계산할 때 결국 어떤 자기사상 $S^{n-1}\\to S^{n-1}$의 차수를 세게 되는지 짚어라.",
+          "answer": "속도의 근원은 사슬군의 크기다. 특이 호몰로지의 $C_n(X)$은 비가산으로 거대하고 단체 호몰로지도 삼각분할이 방대할 수 있지만, 셀 사슬군 $H_n(X^n,X^{n-1})$은 정확히 '$n$-셀 개수만큼의 $\\mathbb{Z}$'다(보조정리 2.34a: $X^n/X^{n-1}$이 $n$-구면 쐐기합이므로). 즉 CW 구조가 경제적일수록 다뤄야 할 생성원이 최소가 된다 — 토러스는 셀 $4$개, $\\mathbb{RP}^n$은 차원마다 $1$개뿐이다. 정리 2.35가 이 작은 셀 복합체의 호몰로지가 진짜 호몰로지 $H_n(X)$와 같음을 보증하므로, 우리는 방대한 것 대신 이 작은 것만 계산하면 된다. 남은 유일한 일은 경계 사상 $d_n$을 아는 것인데, 셀 경계 공식이 이를 순수 정수 계산으로 바꾼다: $n$-셀 $e^n_\\alpha$의 테두리(붙임 사상 $S^{n-1}\\to X^{n-1}$)를 '$(n-1)$-셀 $e^{n-1}_\\beta$만 남기고 나머지를 뭉갠' 구 $S^{n-1}_\\beta$로 밀면 자기사상 $S^{n-1}\\to S^{n-1}$이 되고, 그 차수 $d_{\\alpha\\beta}$가 곧 $d_n$의 행렬 성분이다. 이 차수는 2.2.1의 국소/전역 차수 계산(붙임어의 각 생성원이 몇 번, 어느 방향으로 감기는가)으로 손쉽게 읽힌다 — 가향 곡면의 교환자는 차수 $0$($d_2=0$), 비가향의 $a^2$는 차수 $2$, $\\mathbb{RP}^n$의 $2$겹 피복은 $1+(-1)^k$, 렌즈공간의 $m$겹 회전은 $m$. 요컨대 셀 호몰로지는 'CW 조립 설명서(어느 셀을 어떻게 붙였는가)'를 '작은 사슬 복합체 + 차수 행렬'로 그대로 옮긴 것이며, 기하의 감음수가 대수의 경계 계수로 직결되기에 빠르고 투명하다. 꼬임(torsion)이 어디서 오는지 — 붙임 차수가 $\\pm1$이 아닌 곳 — 까지 눈에 보이는 것이 이 관점의 힘이다."
+        }
+      ]
+    }
+  ]
+}
