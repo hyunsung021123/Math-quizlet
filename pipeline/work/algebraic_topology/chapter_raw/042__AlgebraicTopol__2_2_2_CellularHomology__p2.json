@@ -1,0 +1,259 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.2.2 셀 호몰로지 (Cellular Homology) — 2부",
+      "step1_big_picture": {
+        "context": "1부에서 셀 호몰로지의 기계(보조정리 2.34 → 정리 2.35 → 셀 경계 공식)와 여러 계산을 세웠다. 2부는 그 기계로 얻는 구조적 결론과 새 도구들을 모은다: (1) 렌즈공간의 CW 구조를 실제로 지어 그 호몰로지를 확정하고 무한차원 렌즈공간이 $K(\\mathbb{Z}_m,1)$임을 본다, (2) 오일러 지표 $\\chi(X)=\\sum(-1)^n c_n$이 사실은 호몰로지의 계수로 결정되어 위상불변량임을 증명한다(정리 2.44), (3) 분열 완전열(split exact sequence)과 분열 보조정리로 수축(retraction)이 언제 불가능한지를 판정한다(뫼비우스 띠·브라우어), (4) 군의 호몰로지 $H_n(G)=H_n(K(G,1))$를 정의하고 유한차원 $K(G,1)$이면 $G$가 꼬임 없음을 보인다(명제 2.45), (5) 쌍의 완전열과 쌍벽을 이루는 마이어–비토리스 완전열(Mayer–Vietoris)을 도입한다.",
+        "hidden_intuition": "이 2부를 관통하는 감각은 '호몰로지가 세는 수(rank)와 못 세는 것(꼬임·호모토피형)의 경계'다. 오일러 지표는 각 차원 호몰로지의 계수를 부호 교대로 더한 것 — 사슬 수준의 셀 개수 교대합이 호몰로지 계수 교대합과 같아지는 것은 '자유부분만 남기면 사슬과 호몰로지가 같은 오일러 수를 준다'는 대수적 상쇄의 마법이며, 그래서 CW 구조와 무관한 위상불변량이 된다. 분열 보조정리는 '수축이 존재하면 호몰로지가 직합으로 쪼개진다'는 대수를 무기로 삼아, $\\mathbb{Z}\\not\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_m$ 같은 사소해 보이는 사실로 뫼비우스 띠가 경계로 수축 못함을 증명한다 — 위상의 불가능성을 대수의 불가능성으로 번역하는 것. 군의 호몰로지는 '$K(G,1)$이라는 공간에 군을 대신 물어보는' 우회로이고, $H_n(\\mathbb{Z}_m)$이 무한히 많은 차원에서 안 죽는다는 사실이 '유한차원 $K(G,1)$엔 꼬임이 없다'를 강제한다. 마지막으로 마이어–비토리스는 절제(2.21)의 또 다른 얼굴로, 공간을 두 조각 $A,B$로 나눠 조각들과 겹침 $A\\cap B$의 호몰로지로 전체 $A\\cup B$를 조립하는 '분해-접합' 도구다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Example",
+          "name": "예 2.43 (완결) — 렌즈공간의 CW 구조와 분류",
+          "formal_statement": "렌즈공간 $L=L_m(\\ell_1,\\dots,\\ell_n)=S^{2n-1}/\\mathbb{Z}_m$은 각 차원 $k\\le2n-1$에 셀 하나씩인 CW 구조를 가지며, 그 셀 사슬 복합체의 경계는 $0,m,0,m,\\dots$로 교대한다($d_{2n-1}=0$은 두 면을 잇는 '반사(차수 $-1$) 뒤 회전(차수 $+1$)'이 $e-e=0$을 주기 때문, $d_{2n-2}=\\times m$은 $S^{2n-3}\\to L_m(\\ell_1,\\dots,\\ell_{n-1})$의 붙임에서 $m$개의 공이 순환 치환되기 때문). 3차원($n=2$)에서 $L$은 렌즈꼴 $3$-공의 두 곡면을 각 $2\\pi\\ell/m$ 회전으로 붙인 것이라 $L_{\\ell/m}$으로 쓰며, 라이데마이스터(Reidemeister)의 고전 정리로 $L_{\\ell/m}\\cong L_{\\ell'/m'}\\iff m'=m$이고 $\\ell'\\equiv\\pm\\ell^{\\pm1}\\ (\\mathrm{mod}\\ m)$. 무한차원 $L_m(\\ell_1,\\ell_2,\\dots)=S^\\infty/\\mathbb{Z}_m$은 $S^\\infty$가 축약가능하므로 $K(\\mathbb{Z}_m,1)$이고, 그 축소 호몰로지는 홀수 차원마다 $\\mathbb{Z}_m$이다.",
+          "idea_behind_proof": "요점은 '기하적 미묘함(호모토피형·위상형)을 호몰로지는 못 본다'는 것이다. $L_{1/5}$와 $L_{2/5}$는 같은 $\\pi_1(\\cong\\mathbb{Z}_5)$과 같은 호몰로지를 갖지만 호모토피 동치가 아니고, $L_{1/7}$과 $L_{2/7}$은 호모토피 동치지만 위상동형이 아니다 — 호몰로지·기본군만으로는 렌즈공간을 분류할 수 없다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "arc",
+                "from": [
+                  -1.6,
+                  0
+                ],
+                "to": [
+                  1.6,
+                  0
+                ],
+                "bulge": 0.55
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  -1.6,
+                  0
+                ],
+                "to": [
+                  1.6,
+                  0
+                ],
+                "bulge": -0.55
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.6,
+                  0
+                ],
+                "to": [
+                  1.6,
+                  0
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  -0.4,
+                  1.15
+                ],
+                "to": [
+                  0.4,
+                  1.15
+                ],
+                "bulge": 0.4,
+                "arrow": true
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.65
+                ],
+                "text": "회전 2πℓ/m"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0.62
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -0.62
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.85,
+                  0
+                ],
+                "text": "S^{2n-3}"
+              }
+            ],
+            "caption": "3차원 렌즈공간 $L_{\\ell/m}$: 렌즈꼴 $3$-공의 위·아래 곡면을 각 $2\\pi\\ell/m$ 회전으로 동일시(두 점이 한 쌍의 동일시점). 셀 경계가 $0,m,0,\\dots$이라 홀수 차원에 $\\mathbb{Z}_m$."
+          }
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.44 (오일러 지표는 호몰로지로 결정된다)",
+          "formal_statement": "유한 CW 복합체 $X$에 대해 오일러 지표 $\\chi(X)=\\sum_n(-1)^n c_n$($c_n$은 $n$-셀의 개수)은 $$\\chi(X)=\\sum_n(-1)^n\\,\\mathrm{rank}\\,H_n(X)$$ 와 같다. 따라서 $\\chi(X)$는 $X$의 호모토피형에만 의존하며 CW 구조 선택과 무관하다. (유한생성 아벨군의 rank는 순환군 직합 표현에서 $\\mathbb{Z}$ 합의 개수.)",
+          "idea_behind_proof": "순수 대수다. 유한생성 아벨군의 짧은 완전열에서 rank가 가법적($\\mathrm{rank}\\,B=\\mathrm{rank}\\,A+\\mathrm{rank}\\,C$)이라는 사실을 사슬 복합체의 순환·경계·호몰로지 분해에 적용하면, 사슬군의 교대합 rank와 호몰로지의 교대합 rank가 같아진다.",
+          "proof_steps": [
+            "사슬 복합체 $0\\to C_k\\to\\cdots\\to C_0\\to0$에서 순환 $Z_n=\\mathrm{Ker}\\,d_n$, 경계 $B_n=\\mathrm{Im}\\,d_{n+1}$, $H_n=Z_n/B_n$. 짧은 완전열 $0\\to Z_n\\to C_n\\to B_{n-1}\\to0$과 $0\\to B_n\\to Z_n\\to H_n\\to0$.",
+            "rank 가법성으로 $\\mathrm{rank}\\,C_n=\\mathrm{rank}\\,Z_n+\\mathrm{rank}\\,B_{n-1}$, $\\mathrm{rank}\\,Z_n=\\mathrm{rank}\\,B_n+\\mathrm{rank}\\,H_n$.",
+            "둘째를 첫째에 대입하고 $(-1)^n$을 곱해 합하면 $B_n$ 항들이 이웃 항과 상쇄되어 $\\sum(-1)^n\\mathrm{rank}\\,C_n=\\sum(-1)^n\\mathrm{rank}\\,H_n$. $C_n=H_n(X^n,X^{n-1})$(rank $=c_n$)을 넣으면 정리. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "분열 보조정리 (Splitting Lemma)와 수축의 검출",
+          "formal_statement": "아벨군의 짧은 완전열 $0\\to A\\xrightarrow{i}B\\xrightarrow{j}C\\to0$에 대해 다음은 동치다: (a) $pi=\\mathbb{1}_A$인 $p:B\\to A$가 존재; (b) $js=\\mathbb{1}_C$인 $s:C\\to B$가 존재; (c) $B\\cong A\\oplus C$인 동형이 있어 표준 도식이 가환. 이때 완전열이 분열(split)한다고 한다. 특히 $C$가 자유이면 항상 분열한다. 위상적 귀결: 수축 $r:X\\to A$이 있으면 $r_*i_*=\\mathbb{1}$이라 $(X,A)$의 긴 완전열이 짧은 완전열들로 쪼개지고 $$H_n(X)\\cong H_n(A)\\oplus H_n(X,A).$$",
+          "idea_behind_proof": "(a)$\\Rightarrow$(c): $b\\mapsto(p(b),j(b))$가 원하는 동형; (b)$\\Rightarrow$(c): $(a,c)\\mapsto i(a)+s(c)$. $C$ 자유이면 기저마다 원상을 골라 $s$를 만들 수 있어 (b) 성립. 응용의 힘은 '수축 $\\Rightarrow$ 직합 분해'라는 대수를 대우로 써서 수축의 비존재를 증명하는 데 있다.",
+          "proof_steps": [
+            "수축 $r$이 있으면 $r_*$이 $i_*$의 왼쪽 역이라 (a)가 성립, $H_n(X)\\cong H_n(A)\\oplus H_n(X,A)$.",
+            "브라우어: 수축 $D^n\\to S^{n-1}$이 있으면 $H_{n-1}(D^n)\\cong H_{n-1}(S^{n-1})\\oplus H_{n-1}(D^n,S^{n-1})$인데 좌변 $0$, 우변에 $\\mathbb{Z}$가 있어 모순.",
+            "차수 $m>1$ 사상 $f:S^n\\to S^n$의 사상원기둥 $M_f$: $S^n$으로의 수축이 있으면 분열 $0\\to\\mathbb{Z}\\xrightarrow{m}\\mathbb{Z}\\to\\mathbb{Z}_m\\to0$을 얻는데 $\\mathbb{Z}\\not\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_m$이라 모순 — 차수 $2$의 경우가 곧 '뫼비우스 띠는 경계 원으로 수축하지 않는다'. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "identification_polygon_2d",
+            "edges": [
+              {
+                "label": "a",
+                "dir": 1
+              },
+              {
+                "free": true
+              },
+              {
+                "label": "a",
+                "dir": 1
+              },
+              {
+                "free": true
+              }
+            ],
+            "caption": "뫼비우스 띠: 마주보는 한 쌍을 같은 방향으로 뒤틀어 붙이고 나머지 한 쌍은 자유 경계. 경계 원 $\\partial M$은 중심원을 $2$번 감으므로($\\times2$), $M\\to\\partial M$ 수축은 $\\mathbb{Z}\\to\\mathbb{Z}\\to\\mathbb{Z}_2$의 분열을 요구해 불가능하다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.45 (군의 호몰로지와 꼬임)",
+          "formal_statement": "군 $G$의 호몰로지를 $H_n(G)=H_n(K(G,1))$로 정의한다($K(G,1)$의 호모토피형이 $G$로 유일하게 결정되므로 잘 정의됨). 렌즈공간 계산에서 $H_n(\\mathbb{Z}_m)$은 홀수 $n$에서 $\\mathbb{Z}_m$, 짝수 $n>0$에서 $0$이다($S^1=K(\\mathbb{Z},1)$, 토러스 $=K(\\mathbb{Z}^2,1)$). 명제 2.45: 유한차원 CW 복합체가 $K(G,1)$이면 $G=\\pi_1$은 꼬임 없음(torsion-free)이다.",
+          "idea_behind_proof": "$G$에 꼬임이 있으면 유한순환 부분군 $\\mathbb{Z}_m$($m>1$)에 대응하는 피복공간이 $K(\\mathbb{Z}_m,1)$인데, 유한차원 $X$의 피복도 유한차원이라 호몰로지가 유한개 차원에서만 $0$이 아니어야 한다. 그러나 $H_n(\\mathbb{Z}_m)$은 무한히 많은 (홀수) 차원에서 $0$이 아니다 — 모순.",
+          "proof_steps": [
+            "$G$에 꼬임 원소가 있으면 유한순환 부분군 $\\mathbb{Z}_m\\subset G$($m>1$). 이에 대응하는 $X$의 피복은 $K(\\mathbb{Z}_m,1)$.",
+            "$X$가 유한차원이면 피복도 유한차원 CW라 $H_n$이 유한개 차원에서만 비영.",
+            "하지만 $H_n(\\mathbb{Z}_m)=\\mathbb{Z}_m$($n$ 홀수)이 무한히 많은 차원에서 비영이라 모순. 따라서 $G$ 꼬임 없음. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (마이어–비토리스 완전열)",
+          "formal_statement": "내부가 $X$를 덮는 부분공간 $A,B\\subset X$($X=\\mathrm{int}\\,A\\cup\\mathrm{int}\\,B$)에 대해 긴 완전열 $$\\cdots\\to H_n(A\\cap B)\\xrightarrow{\\Phi}H_n(A)\\oplus H_n(B)\\xrightarrow{\\Psi}H_n(X)\\xrightarrow{\\partial}H_{n-1}(A\\cap B)\\to\\cdots\\to H_0(X)\\to0$$ 이 성립한다($\\Phi(x)=(x,-x)$ 꼴, $\\Psi(a,b)=a+b$ 꼴). 이를 마이어–비토리스 완전열이라 한다.",
+          "idea_behind_proof": "절제의 도구(명제 2.21)가 다시 열쇠다. '$A$의 사슬 + $B$의 사슬'로 이루어진 $C_n(A+B)$가 포함으로 $C_n(X)$와 같은 호몰로지를 주고, 사슬 수준의 짧은 완전열 $0\\to C_n(A\\cap B)\\to C_n(A)\\oplus C_n(B)\\to C_n(A+B)\\to0$에 정리 2.16(짧은 완전열 → 긴 완전열)을 적용하면 곧바로 나온다.",
+          "proof_steps": [
+            "$\\varphi(x)=(x,-x)$, $\\psi(a,b)=a+b$로 두면 $0\\to C_n(A\\cap B)\\xrightarrow{\\varphi}C_n(A)\\oplus C_n(B)\\xrightarrow{\\psi}C_n(A+B)\\to0$이 짧은 완전열(각 사슬은 $A$·$B$ 조각의 합, 겹치는 $A\\cap B$ 조각이 부호로 상쇄).",
+            "명제 2.21로 $C_n(A+B)\\hookrightarrow C_n(X)$이 호몰로지 동형이라 $H_n(A+B)=H_n(X)$.",
+            "정리 2.16을 이 사슬 복합체의 짧은 완전열에 적용해 긴 완전열을 얻는다. 연결 사상 $\\partial$은 '$X$의 순환을 $A$-부분과 $B$-부분으로 쪼갠 뒤 그 경계($A\\cap B$에 놓임)를 취하는' 것. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -0.75,
+                  0
+                ],
+                "r": 1.4
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0.75,
+                  0
+                ],
+                "r": 1.4
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.7,
+                  1.15
+                ],
+                "text": "A"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.7,
+                  1.15
+                ],
+                "text": "B"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  0
+                ],
+                "text": "A∩B"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.85
+                ],
+                "text": "X = A ∪ B"
+              }
+            ],
+            "caption": "마이어–비토리스: 공간 $X$를 두 조각 $A,B$로 나누면, $A$·$B$·겹침 $A\\cap B$의 호몰로지가 긴 완전열로 엮여 $H_*(X)$를 결정한다 — 절제의 또 다른 얼굴인 '분해-접합' 도구."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "정리 2.44를 이용해 $S^2$, 토러스 $T^2$, 종수 $g$ 가향 폐곡면 $M_g$의 오일러 지표를 (i) 셀 개수로, (ii) 호몰로지 계수로 각각 계산해 두 방법이 일치함을 확인하라.",
+          "hint": "$S^2$: $0$-셀·$2$-셀 각 $1$개. $T^2$: $0$-셀 $1$, $1$-셀 $2$, $2$-셀 $1$. $M_g$: $0$-셀 $1$, $1$-셀 $2g$, $2$-셀 $1$. 호몰로지 계수는 1부 예 2.36의 $H_0=\\mathbb{Z},H_1=\\mathbb{Z}^{2g},H_2=\\mathbb{Z}$를 쓰라.",
+          "solution": "$S^2$: (i) $c_0-c_1+c_2=1-0+1=2$. (ii) $\\mathrm{rank}\\,H_0-\\mathrm{rank}\\,H_1+\\mathrm{rank}\\,H_2=1-0+1=2$. $\\chi(S^2)=2$. \\n$T^2$: (i) $1-2+1=0$. (ii) $H_*=\\mathbb{Z},\\mathbb{Z}^2,\\mathbb{Z}$이라 $1-2+1=0$. $\\chi(T^2)=0$. \\n$M_g$: (i) $1-2g+1=2-2g$. (ii) $\\mathrm{rank}$가 $1,2g,1$이라 $1-2g+1=2-2g$. $\\chi(M_g)=2-2g$. \\n세 경우 모두 두 방법이 일치하며, 이는 정리 2.44가 보장하는 바다. 특히 $\\chi(M_g)=2-2g$는 종수 $g$를 유일하게 결정하므로 가향 폐곡면들을 오일러 지표만으로 구별한다(꼬임을 못 보는 $\\chi$이지만 계수만으로도 곡면 분류엔 충분). 비가향 $N_g$는 $\\chi=2-g$이고 $\\chi(M_g)=\\chi(N_{2g})$의 관계가 있다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "분열 보조정리를 이용해 뫼비우스 띠 $M$이 그 경계 원 $\\partial M$으로 수축(retract)하지 않음을 보여라. (힌트: $M$은 중심원 $S^1$으로 변형수축하고, 포함 $\\partial M\\hookrightarrow M$은 $H_1$에서 $\\times2$를 유도한다.)",
+          "hint": "수축이 있으면 $(M,\\partial M)$의 긴 완전열이 짧은 완전열 $0\\to H_1(\\partial M)\\to H_1(M)\\to H_1(M,\\partial M)\\to0$으로 분열함을 쓰라. 각 군을 계산하고 $\\mathbb{Z}$가 $\\mathbb{Z}\\oplus(\\text{꼬임})$과 동형일 수 있는지 보라.",
+          "solution": "$M\\simeq S^1$이라 $H_1(M)=\\mathbb{Z}$이고 $\\partial M\\simeq S^1$이라 $H_1(\\partial M)=\\mathbb{Z}$인데, 경계 원이 중심원을 두 번 감으므로 포함 $i:\\partial M\\hookrightarrow M$은 $i_*=\\times2:\\mathbb{Z}\\to\\mathbb{Z}$. 쌍 $(M,\\partial M)$의 완전열 $0\\to H_1(\\partial M)\\xrightarrow{i_*=\\times2}H_1(M)\\to H_1(M,\\partial M)\\to\\widetilde{H}_0(\\partial M)=0$에서 $H_1(M,\\partial M)=\\mathbb{Z}/2\\mathbb{Z}=\\mathbb{Z}_2$. 만약 수축 $r:M\\to\\partial M$이 있으면 분열 보조정리로 $H_1(M)\\cong H_1(\\partial M)\\oplus H_1(M,\\partial M)$, 즉 $\\mathbb{Z}\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_2$. 그러나 좌변은 꼬임이 없고 우변엔 꼬임 $\\mathbb{Z}_2$가 있어 동형일 수 없다 — 모순. 따라서 뫼비우스 띠는 경계 원으로 수축하지 않는다. (일반화: 차수 $m>1$ 사상의 사상원기둥은 정의역 구로 수축하지 않는다 — $\\mathbb{Z}\\not\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_m$.)"
+        },
+        {
+          "type": "ox",
+          "question": "오일러 지표 $\\chi(X)$는 $X$에 준 CW 구조(셀 개수)에 따라 달라질 수 있다.",
+          "answer": "X",
+          "explanation": "정리 2.44에 의해 $\\chi(X)=\\sum_n(-1)^n c_n=\\sum_n(-1)^n\\mathrm{rank}\\,H_n(X)$이다. 오른쪽은 호몰로지(나아가 호모토피형)로만 결정되므로, 왼쪽의 셀 개수 교대합은 CW 구조를 어떻게 잡든 같은 값이 나온다. 예컨대 $S^2$를 두 개의 셀로 짓든 정십이면체처럼 여러 셀로 짓든 $\\chi=2$로 불변이다 — 이것이 오일러의 $V-E+F$가 위상불변량인 이유다."
+        },
+        {
+          "type": "ox",
+          "question": "$C$가 자유아벨군이면 임의의 짧은 완전열 $0\\to A\\to B\\to C\\to0$은 분열한다(즉 $B\\cong A\\oplus C$).",
+          "answer": "O",
+          "explanation": "분열 보조정리의 조건 (b)를 직접 만들 수 있다: $C$의 기저 $\\{c_\\alpha\\}$를 잡고 $j(b_\\alpha)=c_\\alpha$인 $b_\\alpha\\in B$를 하나씩 골라 $s(c_\\alpha)=b_\\alpha$로 두면 $js=\\mathbb{1}_C$인 절단 $s$가 정의된다(자유성 덕에 기저 위 임의 지정이 준동형으로 확장). 그러면 (b)$\\Rightarrow$(c)로 $B\\cong A\\oplus C$. (역도 참: 모든 SES가 분열하는 $C$는 자유다.) 이것이 호몰로지 계산에서 자유부분이 늘 깔끔히 떨어져 나오는 이유다."
+        },
+        {
+          "type": "conceptual",
+          "question": "마이어–비토리스 완전열은 무엇을 계산해 주며, 쌍의 긴 완전열과 어떻게 다른가? 왜 '절제의 또 다른 얼굴'이라 부를 수 있는지, 그 유도 과정과 연결해 설명하라.",
+          "hint": "MV가 엮는 네 종류의 군($H_*(A),H_*(B),H_*(A\\cap B),H_*(X)$)이 무엇인지, 그리고 그 유도가 $C_n(A+B)\\hookrightarrow C_n(X)$의 호몰로지 동형(명제 2.21)에 어떻게 기대는지 짚어라.",
+          "answer": "마이어–비토리스 완전열은 공간을 두 조각 $A,B$($X=\\mathrm{int}\\,A\\cup\\mathrm{int}\\,B$)로 나눴을 때, 조각들 $H_*(A),H_*(B)$와 그 겹침 $H_*(A\\cap B)$의 호몰로지로부터 합집합 $H_*(X=A\\cup B)$를 결정하는 '분해-접합' 도구다. 완전열 $\\cdots\\to H_n(A\\cap B)\\to H_n(A)\\oplus H_n(B)\\to H_n(X)\\to H_{n-1}(A\\cap B)\\to\\cdots$이 네 군을 차원을 넘나들며 엮으므로, 셋을 알면 넷째가 강하게 제약된다 — 특히 귀납 논증(작은 조각들에서 성립하는 성질을 합집합으로 올리기)에 아주 편하다. 쌍의 긴 완전열이 '전체 $X$, 부분 $A$, 몫 $X/A$(상대군)'를 엮는 세로 방향 도구라면, MV는 '두 부분 $A,B$와 그 겹침·합집합'을 엮는 가로 방향 도구다 — 같은 정보량이지만 공간을 자연스러운 두 열린 조각으로 자를 수 있을 때(구를 두 반구로, 곡면을 두 손잡이로) MV가 훨씬 직접적이다. '절제의 또 다른 얼굴'인 이유는 유도 과정에 있다: MV는 '$A$의 사슬 + $B$의 사슬'로 이루어진 $C_n(A+B)$가 포함으로 $C_n(X)$와 같은 호몰로지를 준다는 사실 — 바로 절제를 떠받친 명제 2.21(작은 사슬로 호몰로지를 계산할 수 있다) — 에 전적으로 기댄다. 그 위에서 사슬 수준의 짧은 완전열 $0\\to C_n(A\\cap B)\\xrightarrow{x\\mapsto(x,-x)}C_n(A)\\oplus C_n(B)\\xrightarrow{(a,b)\\mapsto a+b}C_n(A+B)\\to0$에 정리 2.16(짧은 완전열 → 긴 완전열)을 적용하면 MV가 나온다. 즉 절제와 MV는 '큰 공간의 사슬을 작은 조각들의 사슬로 대체할 수 있다'는 한 원리의 두 응용이다."
+        }
+      ]
+    }
+  ]
+}

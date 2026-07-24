@@ -102,7 +102,7 @@
 
 | 041 | [x] | 2.2.2 Cellular Homology (분할 part 1) _(원본 #041)_ | section | `041__AlgebraicTopol__2_2_2_CellularHomology__p1.txt` |
 
-| 042 | [ ] | 2.2.2 Cellular Homology (분할 part 2) _(원본 #042)_ | section | `042__AlgebraicTopol__2_2_2_CellularHomology__p2.txt` |
+| 042 | [x] | 2.2.2 Cellular Homology (분할 part 2) _(원본 #042)_ | section | `042__AlgebraicTopol__2_2_2_CellularHomology__p2.txt` |
 
 | 043 | [ ] | 2.2.3 Mayer-Vietoris Sequences | section | `043__AlgebraicTopol__2_2_3_Mayer-VietorisSequences.txt` |
 
