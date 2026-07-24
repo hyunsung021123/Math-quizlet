@@ -1,0 +1,281 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.2.4 계수 호몰로지의 활용 (Homology with Coefficients)",
+      "step1_big_picture": {
+        "context": "직전 2.2.3에서 계수를 임의의 아벨군 $G$로 바꾼 계수 호몰로지 $H_n(X;G)$를 정의했다(경계 공식·이론 전체가 그대로 이어지고, 점은 $G$·$0$·$0\\cdots$, $\\widetilde{H}_n(S^k;G)=G$). 이 소단원은 그것을 실제로 굴리며 '계수를 바꾸면 무엇이 달라지는가'를 본다. 핵심 도구는 보조정리 2.49(차수 $m$ 사상은 $H_k(S^k;G)$에서 $\\times m$을 유도)이고, 이를 통해 $\\mathbb{RP}^n$을 체(field) 계수로 계산하면 표수(characteristic)에 따라 답이 극적으로 달라짐을 본다(예 2.50). 정수 계수가 다른 계수를 '결정'함(§3.A 보편계수정리)에도 불구하고, 적절한 계수가 더 많은 정보를 주는 상황 — 특히 유도 사상이 $\\mathbb{Z}$ 계수에선 자명하지만 $\\mathbb{Z}_m$ 계수에선 비자명한 예(예 2.51) — 을 통해 계수 선택의 실전적 위력을 확인한다.",
+        "hidden_intuition": "계수의 마법은 '수를 세는 눈금을 바꾸는 것'이다. 정수 계수에서 경계 사상이 $\\times m$이라 꼬임 $\\mathbb{Z}_m$을 만들던 자리가, 계수를 $\\mathbb{Z}_m$이나 표수 $p\\mid m$인 체로 바꾸면 $\\times m=0$이 되어 그 경계가 소멸한다 — 죽었던 순환이 되살아나고, $\\mathbb{RP}^n$이 $\\mathbb{Z}_2$ 계수에서는 모든 차원에 $\\mathbb{Z}_2$가 고르게 나타난다. 반대로 표수가 $m$과 서로소인 체에서는 $\\times m$이 가역이라 그 자리가 완전히 지워진다. 이 '어느 눈금에서 무엇이 보이는가'가 계수의 본질이다. 특히 결정적 통찰: 보편계수정리는 계수 호몰로지를 '군'으로서는 정수 호몰로지가 결정한다고 말하지만, 사상이 유도하는 준동형은 그렇지 않다 — $\\mathbb{Z}$ 계수에서 우연히 다른 차원으로 흩어져 자명해 보이던 사상이, $\\mathbb{Z}_m$ 계수에서는 경계의 소멸로 같은 차원에 겹쳐지며 비자명해진다. 그래서 $\\mathbb{Z}_m$·$\\mathbb{Z}_2$ 계수는 '어떤 사상이 상수와 호모토피하지 않다'거나 보르숙–울람 같은 정리를 증명하는, 정수 계수가 놓치는 현상을 잡는 렌즈가 된다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Lemma",
+          "name": "보조정리 2.49 (차수 $m$은 임의 계수에서 $\\times m$)",
+          "formal_statement": "$f:S^k\\to S^k$이 차수 $m$이면 유도 사상 $f_*:H_k(S^k;G)\\to H_k(S^k;G)$은 $\\times m$(원소 $g\\mapsto mg$)이다. (준비: 준동형 $\\varphi:G_1\\to G_2$은 경계와 교환하는 $\\varphi_\\#:C_n(X,A;G_1)\\to C_n(X,A;G_2)$을, 따라서 $\\varphi_*:H_n(X,A;G_1)\\to H_n(X,A;G_2)$을 유도하며, 이 $\\varphi_*$은 쌍의 긴 완전열·유도 사상 $f_*$과 모두 가환하는 자연성을 갖는다.)",
+          "idea_behind_proof": "계수 변경 준동형 $\\varphi:\\mathbb{Z}\\to G$($1\\mapsto g$)의 자연성으로 정수 계수와 $G$ 계수의 두 층을 잇는 가환 정사각형을 세운다. 위층(정수 계수)에서 $f_*$이 $1\\mapsto m$임을 알므로, 가환성이 아래층에서 $g\\mapsto mg$를 강제한다.",
+          "proof_steps": [
+            "$\\varphi:\\mathbb{Z}\\to G$, $1\\mapsto g$를 잡으면 $\\widetilde{H}_k(S^k;\\mathbb{Z})\\to\\widetilde{H}_k(S^k;G)$이 $\\varphi_*$로 유도된다.",
+            "가환 도식(바깥 두 정사각형은 $k$에 대한 귀납으로 $k=0$의 자명한 경우에 귀착)에서 위 행은 $\\times m$($1\\mapsto m$).",
+            "가환성에 의해 아래 행은 $\\varphi(1)=g$를 $\\varphi(m)=mg$로 보낸다. $g$가 임의이므로 $f_*=\\times m$ on $H_k(S^k;G)$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "label",
+                "at": [
+                  -2.4,
+                  1.1
+                ],
+                "text": "H̃_k(S^k;Z)=Z"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.4,
+                  1.1
+                ],
+                "text": "Z"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.4,
+                  -1.1
+                ],
+                "text": "H̃_k(S^k;G)=G"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.4,
+                  -1.1
+                ],
+                "text": "G"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.3,
+                  1.1
+                ],
+                "to": [
+                  1.9,
+                  1.1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.3,
+                  1.42
+                ],
+                "text": "f_* = ×m"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.7,
+                  1.35
+                ],
+                "to": [
+                  2.15,
+                  1.35
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -2.4,
+                  0.8
+                ],
+                "to": [
+                  -2.4,
+                  -0.8
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.75,
+                  0
+                ],
+                "text": "φ"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  2.4,
+                  0.8
+                ],
+                "to": [
+                  2.4,
+                  -0.8
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.75,
+                  0
+                ],
+                "text": "φ"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -1.5,
+                  -1.1
+                ],
+                "to": [
+                  1.9,
+                  -1.1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.3,
+                  -1.42
+                ],
+                "text": "f_* = ×m"
+              }
+            ],
+            "caption": "계수 변경 $\\varphi:\\mathbb{Z}\\to G$($1\\mapsto g$)의 자연성. 위 행이 $\\times m$이므로 가환성이 아래 행도 $g\\mapsto mg$로 강제한다 — 차수 $m$은 어느 계수에서든 $\\times m$."
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예 2.50 ($\\mathbb{RP}^n$의 체 계수 호몰로지)",
+          "formal_statement": "$\\mathbb{RP}^n$의 셀 사슬 복합체는 체 $F$ 계수에서 $$\\cdots\\xrightarrow{0}F\\xrightarrow{2}F\\xrightarrow{0}F\\xrightarrow{2}F\\xrightarrow{0}F\\to0$$ (경계가 $0$과 $\\times2$ 교대). $F$의 표수가 $2$이면(예: $F=\\mathbb{Z}_2$) $\\times2=0$이라 모든 경계가 $0$이므로 $$H_k(\\mathbb{RP}^n;F)\\cong F\\quad(0\\le k\\le n),$$ 정수 계수보다 훨씬 균일하다. $F$의 표수가 $2$가 아니면 $\\times2$가 동형이라 $$H_k(\\mathbb{RP}^n;F)=\\begin{cases}F&k=0,\\ \\text{또는 }k=n\\text{ 홀수}\\\\0&\\text{그 외.}\\end{cases}$$",
+          "idea_behind_proof": "표수가 눈금을 바꾼다. 경계 $\\times2$가 표수 $2$에서는 소멸($=0$)해 모든 사슬군이 살아남아 $\\mathbb{Z}_2$가 층층이 나타나고, 표수 $\\ne2$에서는 $\\times2$가 가역이라 그 자리를 완전히 지워 정수 계수의 홀수-차원 $\\mathbb{Z}_2$ 꼬임이 사라진 깔끔한 답만 남는다. 같은 공간이 계수에 따라 전혀 다른 얼굴을 보인다."
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (보편계수 예고, 그리고 계수가 더 많이 보는 이유)",
+          "formal_statement": "§3.A에서 임의 계수 호몰로지를 정수 계수 호몰로지로 표현하는 일반 대수 공식(보편계수정리, universal coefficient theorem)을 보게 된다 — 즉 $H_n(X;G)$은 군으로서 $H_*(X;\\mathbb{Z})$에 의해 결정된다. 그럼에도 적절한 계수가 정수 계수보다 더 많은 정보를 주는 상황이 많다. 대표적으로 $\\mathbb{Z}_2$ 계수는 부호(방향)를 지워 비가향 공간에 자연스럽고, §2.B의 보르숙–울람(Borsuk–Ulam) 정리 증명에서 결정적으로 쓰인다. 핵심 미묘함: 계수 호몰로지가 '군'으로는 정수 호몰로지로 결정되지만, 사상이 유도하는 '준동형'은 그렇지 않다 — 정수 계수에서 자명해 보이는 유도 사상이 $\\mathbb{Z}_m$ 계수에서는 비자명할 수 있다(다음 예).",
+          "idea_behind_proof": "보편계수정리가 '결정'한다는 것은 대상(군)의 동형류를 말할 뿐, 사상 사이의 관계까지 포함하지 않는다. 사상 $f$의 정보는 $f_*$이라는 준동형에 담기는데, 계수를 바꾸면 서로 다른 차원의 호몰로지가 (경계의 소멸로) 같은 차원에 겹쳐져 $f_*$이 새 정보를 드러낼 수 있다."
+        },
+        {
+          "type": "Example",
+          "name": "예 2.51 ($\\mathbb{Z}_m$ 계수가 잡아내는 비자명 사상)",
+          "formal_statement": "무어 공간 $X=M(\\mathbb{Z}_m,n)$($S^n$에 차수 $m$ 사상으로 $e^{n+1}$을 붙인 것)에서 몫사상 $f:X\\to X/S^n=S^{n+1}$을 생각하자. 정수 계수 축소 호몰로지에서 $X$와 $S^{n+1}$의 비자명 호몰로지가 서로 다른 차원($n$ 대 $n+1$)에 있으므로 $f_*=0$이다. 그러나 $\\mathbb{Z}_m$ 계수에서는 쌍 $(X,S^n)$의 긴 완전열 $$0=\\widetilde{H}_{n+1}(S^n;\\mathbb{Z}_m)\\to\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)\\xrightarrow{f_*}\\widetilde{H}_{n+1}(X/S^n;\\mathbb{Z}_m)$$ 에서 $f_*$이 단사이고, $\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)=\\mathbb{Z}_m\\ne0$(셀 경계 $H_{n+1}(X^{n+1},X^n;\\mathbb{Z}_m)\\to H_n(X^n,X^{n-1};\\mathbb{Z}_m)$이 $\\mathbb{Z}_m\\xrightarrow{m}\\mathbb{Z}_m=0$이므로)이라 $f_*\\ne0$. 따라서 $\\mathbb{Z}_m$ 계수는 $f$가 상수사상과 호모토피하지 않음을 알려준다 — 정수 계수만으로는 알 수 없던 사실이다.",
+          "idea_behind_proof": "정수 계수에서 차수 $m$ 붙임 사상의 셀 경계는 $\\times m$이라 $X$의 $(n+1)$차 호몰로지를 죽였다. $\\mathbb{Z}_m$ 계수로 바꾸면 그 $\\times m$이 $0$이 되어 $\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)=\\mathbb{Z}_m$이 되살아나고, 그 살아난 클래스를 $f_*$이 $S^{n+1}$의 호몰로지로 단사적으로 실어 나른다. 눈금을 $\\mathbb{Z}_m$으로 바꾸자 정수 계수에서 흩어져 보이지 않던 사상의 작용이 드러난 것이다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  -2.2,
+                  0
+                ],
+                "r": 0.9
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.2,
+                  0
+                ],
+                "text": "S^n"
+              },
+              {
+                "shape": "arc",
+                "from": [
+                  -2.9,
+                  0.55
+                ],
+                "to": [
+                  -1.5,
+                  0.55
+                ],
+                "bulge": 0.6
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.2,
+                  1.5
+                ],
+                "text": "e^{n+1} (차수 m 붙임)"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -0.9,
+                  0
+                ],
+                "to": [
+                  0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.2,
+                  0.35
+                ],
+                "text": "f (S^n 뭉개기)"
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1.7,
+                  0
+                ],
+                "r": 0.9
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.7,
+                  0
+                ],
+                "text": "S^{n+1}"
+              }
+            ],
+            "caption": "$M(\\mathbb{Z}_m,n)=S^n\\cup_m e^{n+1}$에서 $S^n$을 뭉개는 $f:X\\to S^{n+1}$. $\\mathbb{Z}$ 계수에선 $f_*=0$이지만, $\\mathbb{Z}_m$ 계수에선 붙임 경계 $\\times m=0$이 되어 $\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)=\\mathbb{Z}_m$이 살아나 $f_*\\ne0$."
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예 2.50의 셀 사슬 복합체를 이용해 $\\mathbb{RP}^3$의 호몰로지를 (i) $\\mathbb{Z}_2$ 계수, (ii) 유리수 $\\mathbb{Q}$ 계수로 각각 계산하고, 정수 계수 결과($\\mathbb{Z},\\mathbb{Z}_2,0,\\mathbb{Z}$)와 비교하라.",
+          "hint": "$\\mathbb{RP}^3$의 사슬 복합체는 $0\\to F\\xrightarrow{d_3=0}F\\xrightarrow{d_2=2}F\\xrightarrow{d_1=0}F\\to0$. $\\mathbb{Z}_2$에서는 $\\times2=0$, $\\mathbb{Q}$에서는 $\\times2$가 동형임에 유의해 각 자리 $\\mathrm{Ker}/\\mathrm{Im}$을 구하라.",
+          "solution": "(i) $\\mathbb{Z}_2$ 계수: $\\times2=0$이라 모든 경계가 $0$. 따라서 $H_k(\\mathbb{RP}^3;\\mathbb{Z}_2)=\\mathbb{Z}_2$ for $k=0,1,2,3$ — 네 차원 모두 $\\mathbb{Z}_2$로 균일. (ii) $\\mathbb{Q}$ 계수: $d_3=0,\\ d_2=\\times2$(동형),$\\ d_1=0$. $H_3=\\mathrm{Ker}\\,d_3=\\mathbb{Q}$; $H_2=\\mathrm{Ker}\\,d_2/\\mathrm{Im}\\,d_3=0/0=0$($d_2$ 단사); $H_1=\\mathrm{Ker}\\,d_1/\\mathrm{Im}\\,d_2=\\mathbb{Q}/\\mathbb{Q}=0$; $H_0=\\mathbb{Q}$. 즉 $H_k(\\mathbb{RP}^3;\\mathbb{Q})=\\mathbb{Q}\\ (k=0,3),\\ 0$ (그 외). 비교: 정수 계수의 꼬임 $H_1=\\mathbb{Z}_2$는 $\\mathbb{Q}$ 계수에서는 $\\times2$가 가역이라 완전히 사라지지만($H_1(\\mathbb{Q})=0$), $\\mathbb{Z}_2$ 계수에서는 $\\times2=0$이라 오히려 $H_1=\\mathbb{Z}_2$로 살아나고 게다가 $H_2$까지 $\\mathbb{Z}_2$가 새로 생긴다. 같은 $\\mathbb{RP}^3$이 계수의 표수에 따라 전혀 다른 얼굴을 보인다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예 2.51에서 무어 공간 $X=M(\\mathbb{Z}_m,n)$의 축소 호몰로지를 $\\mathbb{Z}$ 계수와 $\\mathbb{Z}_m$ 계수로 각각 구하고, 몫사상 $f:X\\to S^{n+1}$이 $\\mathbb{Z}$ 계수에서는 $f_*=0$이지만 $\\mathbb{Z}_m$ 계수에서는 $f_*\\ne0$임을 설명하라.",
+          "hint": "$X$의 셀 사슬 복합체는 $C_{n+1}=C_n=(\\text{계수군})$이고 경계 $d_{n+1}=\\times m$. $\\mathbb{Z}$에선 $\\times m$이 단사, $\\mathbb{Z}_m$에선 $\\times m=0$. 그다음 쌍 $(X,S^n)$의 완전열을 각 계수에서 보라.",
+          "solution": "$\\mathbb{Z}$ 계수: 셀 경계 $d_{n+1}=\\times m:\\mathbb{Z}\\to\\mathbb{Z}$는 단사이므로 $\\widetilde{H}_{n+1}(X)=\\mathrm{Ker}=0$, $\\widetilde{H}_n(X)=\\mathbb{Z}/m\\mathbb{Z}=\\mathbb{Z}_m$, 그 외 $0$. 한편 $\\widetilde{H}_*(S^{n+1})=\\mathbb{Z}$(차원 $n+1$)뿐. 두 공간의 비자명 호몰로지가 서로 다른 차원($n$ 대 $n+1$)에 있어 $f_*$이 끼어들 여지가 없으므로 $f_*=0$. $\\mathbb{Z}_m$ 계수: $d_{n+1}=\\times m=0:\\mathbb{Z}_m\\to\\mathbb{Z}_m$이므로 $\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)=\\mathrm{Ker}=\\mathbb{Z}_m\\ne0$, $\\widetilde{H}_n(X;\\mathbb{Z}_m)=\\mathbb{Z}_m$. 쌍 $(X,S^n)$의 완전열 $0=\\widetilde{H}_{n+1}(S^n;\\mathbb{Z}_m)\\to\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)\\xrightarrow{f_*}\\widetilde{H}_{n+1}(S^{n+1};\\mathbb{Z}_m)=\\mathbb{Z}_m$에서 $f_*$이 단사이고 정의역이 $\\mathbb{Z}_m\\ne0$이라 $f_*\\ne0$. 상수사상은 $f_*=0$을 주므로, $\\mathbb{Z}_m$ 계수가 '$f$는 상수와 호모토피하지 않다'를 증명한다 — 정수 계수로는 얻을 수 없던 결론. 원리: 계수를 $\\mathbb{Z}_m$으로 바꾸자 붙임 경계 $\\times m$이 소멸해, 정수 계수에서 죽었던 $(n+1)$차 클래스가 되살아나 $f$의 작용을 드러낸다."
+        },
+        {
+          "type": "ox",
+          "question": "차수 $m$인 사상 $f:S^k\\to S^k$은 임의의 계수군 $G$에 대해 $H_k(S^k;G)$에서 $\\times m$(원소 $g\\mapsto mg$)을 유도한다.",
+          "answer": "O",
+          "explanation": "보조정리 2.49의 결론이다. 계수 변경 준동형 $\\varphi:\\mathbb{Z}\\to G$($1\\mapsto g$)의 자연성으로 정수 계수와 $G$ 계수를 잇는 가환 정사각형을 세우면, 위층(정수)에서 $f_*=\\times m$이라는 사실이 아래층에서 $g\\mapsto mg$를 강제한다. 예컨대 $\\mathbb{Z}_2$ 계수에서는 짝수 차수 사상이 $\\times 0=0$을, 홀수 차수가 $\\times1=\\mathrm{id}$을 유도한다."
+        },
+        {
+          "type": "ox",
+          "question": "만약 사상 $f$가 정수 계수 호몰로지에서 자명한 유도 사상($f_*=0$)을 가지면, 임의의 계수군 $G$에 대해서도 $f_*=0$이다.",
+          "answer": "X",
+          "explanation": "예 2.51이 반례다. 무어 공간 $M(\\mathbb{Z}_m,n)$을 $S^{n+1}$로 뭉개는 사상 $f$는 정수 계수 축소 호몰로지에서 $f_*=0$(두 공간의 비자명 호몰로지가 서로 다른 차원에 있음)이지만, $\\mathbb{Z}_m$ 계수에서는 붙임 경계 $\\times m$이 $0$이 되어 $\\widetilde{H}_{n+1}(X;\\mathbb{Z}_m)=\\mathbb{Z}_m$이 살아나고 $f_*$이 단사·비자명이 된다. 보편계수정리는 계수 호몰로지를 '군'으로서 정수 호몰로지가 결정한다고만 하지, 사상이 유도하는 '준동형'까지 결정하지는 않는다 — 그래서 적절한 계수가 정수 계수가 놓친 정보를 잡아낼 수 있다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정수 계수 호몰로지가 다른 계수의 호몰로지를 '결정'한다는 보편계수정리가 있는데도, 왜 굳이 $\\mathbb{Z}_2$·$\\mathbb{Z}_m$·체 계수를 쓰는가? 계수 선택이 실제로 무엇을 더 보여주는지 예 2.50·2.51과 연결해 설명하라.",
+          "hint": "보편계수정리가 '결정'하는 것이 대상(군)인지 사상(준동형)인지, 그리고 계수의 표수가 경계 사상 $\\times m$을 어떻게 바꾸는지 생각하라. 비가향 공간에서 $\\mathbb{Z}_2$가 왜 자연스러운지도 짚어라.",
+          "answer": "세 가지 이유가 있다. 첫째, 계산의 명료함이다. 표수가 경계 사상의 정수배 $\\times m$을 다르게 만든다: 표수 $2$인 체에서 $\\mathbb{RP}^n$의 $\\times2$는 $0$이 되어 모든 차원에 $\\mathbb{Z}_2$가 고르게 나타나고(예 2.50), 표수 $\\ne2$인 체에서는 $\\times2$가 가역이라 꼬임 자리가 깨끗이 사라진다 — 목적에 따라 가장 단순한 눈금을 고를 수 있다. 둘째, 방향의 제거다. $\\mathbb{Z}_2$에서는 $+1=-1$이라 경계의 부호가 사라지고, 부호는 방향의 대수적 표현이므로 비가향 공간(클라인병·$\\mathbb{RP}^n$)에서 $\\mathbb{Z}_2$ 계수가 가장 자연스러운 도구가 되며 보르숙–울람 정리 증명의 핵심이 된다. 셋째, 그리고 가장 미묘하게, 사상의 검출력이다. 보편계수정리는 계수 호몰로지를 '군의 동형류'로서 정수 호몰로지가 결정한다고 말하지만, 사상이 유도하는 '준동형 $f_*$'까지 결정하지는 않는다. 예 2.51에서 무어 공간을 뭉개는 사상은 정수 계수에서 비자명 호몰로지가 서로 다른 차원에 흩어져 $f_*=0$처럼 보이지만, $\\mathbb{Z}_m$ 계수로 눈금을 바꾸면 붙임 경계 $\\times m$이 소멸해 죽었던 $(n+1)$차 클래스가 되살아나고 그 위에서 $f_*$이 단사·비자명이 되어 '$f$는 상수와 호모토피하지 않다'를 증명한다 — 정수 계수만으로는 얻을 수 없던 결론이다. 요컨대 계수는 '같은 공간·같은 사상을 여러 눈금으로 재보는' 렌즈들이며, 어떤 눈금에서 무엇이 죽고 무엇이 살아나는지를 조절해 정수 계수가 놓치는 현상을 포착한다."
+        }
+      ]
+    }
+  ]
+}

@@ -106,7 +106,7 @@
 
 | 043 | [x] | 2.2.3 Mayer-Vietoris Sequences | section | `043__AlgebraicTopol__2_2_3_Mayer-VietorisSequences.txt` |
 
-| 044 | [ ] | 2.2.4 Homology with Coefficients | section | `044__AlgebraicTopol__2_2_4_HomologywithCoefficients.txt` |
+| 044 | [x] | 2.2.4 Homology with Coefficients | section | `044__AlgebraicTopol__2_2_4_HomologywithCoefficients.txt` |
 
 | 045 | [ ] | 2.2.ex Exercises | exercises | `045__AlgebraicTopol__2_2_ex_Exercises__EX.txt` |
 
