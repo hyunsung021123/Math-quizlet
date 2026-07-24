@@ -1,0 +1,59 @@
+{
+  "completed": {
+    "chapter_0_introduction_and_examples": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
+    },
+    "chapter_1_polytopes_polyhedra_and_cones": {
+      "section:0": true,
+      "section:1": true
+    },
+    "chapter_0_some_underlying_geometric_noti": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true,
+      "section:5": true
+    },
+    "chapter_1_the_fundamental_group": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true,
+      "section:5": true,
+      "section:6": true,
+      "section:7": true,
+      "section:8": true,
+      "section:9": true,
+      "section:10": true,
+      "section:11": true,
+      "section:13": true,
+      "section:14": true,
+      "section:16": true,
+      "section:15": true,
+      "section:12": true,
+      "section:17": true
+    },
+    "chapter_2_homology": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true,
+      "section:5": true,
+      "section:6": true
+    }
+  },
+  "lastPos": {
+    "topicId": "chapter_2_homology",
+    "view": {
+      "type": "section",
+      "index": 5
+    },
+    "cardIndex": 10
+  },
+  "updatedAt": "2026-07-24T09:58:08.807Z"
+}
