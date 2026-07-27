@@ -61,15 +61,25 @@
       "section:7": true,
       "section:8": true,
       "section:9": true
+    },
+    "1_preliminaries_to_complex_analysis": {
+      "section:1": true,
+      "section:0": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true,
+      "section:5": true,
+      "section:6": true,
+      "section:7": true
     }
   },
   "lastPos": {
-    "topicId": "chapter_3_meromorphic_functions_and_the_",
+    "topicId": "chapter_2_cauchy_s_theorem_and_its_appli",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 9
     },
-    "cardIndex": 9
+    "cardIndex": 6
   },
-  "updatedAt": "2026-07-27T08:46:37.388Z"
+  "updatedAt": "2026-07-27T08:47:38.626Z"
 }
