@@ -73,16 +73,17 @@
       "section:7": true
     },
     "chapter_3_meromorphic_functions_and_the_": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true
     }
   },
   "lastPos": {
     "topicId": "chapter_3_meromorphic_functions_and_the_",
     "view": {
       "type": "section",
-      "index": 1
+      "index": 2
     },
-    "cardIndex": 7
+    "cardIndex": 1
   },
-  "updatedAt": "2026-07-27T10:03:37.271Z"
+  "updatedAt": "2026-07-27T10:04:08.898Z"
 }
