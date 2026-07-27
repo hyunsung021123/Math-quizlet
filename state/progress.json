@@ -49,15 +49,20 @@
       "section:8": true,
       "section:9": true,
       "section:10": true
+    },
+    "chapter_2_cauchy_s_theorem_and_its_appli": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
     }
   },
   "lastPos": {
-    "topicId": "chapter_1_the_fundamental_group",
+    "topicId": "chapter_2_cauchy_s_theorem_and_its_appli",
     "view": {
       "type": "section",
-      "index": 17
+      "index": 3
     },
-    "cardIndex": 7
+    "cardIndex": 3
   },
-  "updatedAt": "2026-07-26T17:13:28.095Z"
+  "updatedAt": "2026-07-27T04:07:17.633Z"
 }
