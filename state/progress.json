@@ -64,7 +64,8 @@
     },
     "chapter_5_entire_functions": {
       "section:0": true,
-      "section:1": true
+      "section:1": true,
+      "section:2": true
     }
   },
   "lastPos": {
@@ -75,5 +76,5 @@
     },
     "cardIndex": 2
   },
-  "updatedAt": "2026-07-28T08:46:09.100Z"
+  "updatedAt": "2026-07-28T08:46:25.508Z"
 }
