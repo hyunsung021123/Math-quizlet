@@ -118,7 +118,7 @@
 
 | 049 | [x] | 2.3.ex Exercises | exercises | `049__AlgebraicTopol__2_3_ex_Exercises__EX.txt` |
 
-| 050 | [ ] | 2.A Homology and Fundamental Group | section | `050__AlgebraicTopol__2_A_HomologyandFundamentalGrou.txt` |
+| 050 | [x] | 2.A Homology and Fundamental Group | section | `050__AlgebraicTopol__2_A_HomologyandFundamentalGrou.txt` |
 
 | 051 | [ ] | 2.B Classical Applications | section | `051__AlgebraicTopol__2_B_ClassicalApplications.txt` |
 
