@@ -1,0 +1,586 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.2.ex 연습문제 (Exercises) — 차수·셀 호몰로지·마이어–비토리스의 실전",
+      "step1_big_picture": {
+        "context": "§2.2는 세 개의 계산 엔진을 차례로 세웠다. (i) 사상의 차수(degree)와 국소 차수(2.2, 2.2.1), (ii) 셀 호몰로지 $H^{CW}_n$과 오일러 지표에 관한 정리 2.44·명제 2.45(2.2.2), (iii) 마이어–비토리스 완전열과 그 상대판(2.2.3), 그리고 (iv) 계수 호몰로지 $H_n(X;G)$와 보조정리 2.49(2.2.4). 이 연습문제 묶음은 그 네 엔진을 실제로 돌려 보는 자리다. 문제들은 크게 네 덩어리로 갈린다 — 1~8·14번은 차수로 고정점·벡터장·다항식을 다루고, 9~19번은 CW 구조를 손으로 잡아 셀 사슬 복합체를 계산하며, 20~25번은 오일러 지표의 형식적 성질(곱·합·피복공간·종수 공식)을 짜내고, 26~39번은 마이어–비토리스로 새 공간의 호몰로지를 얻어내고, 40~43번은 계수 $\\mathbb{Z}_n$이 정수 호몰로지의 어떤 정보를 읽어 내는지를 미리 맛보게 한다(3장의 보편계수 정리로 이어진다).",
+        "hidden_intuition": "이 연습문제들을 관통하는 한 문장은 이렇다: **'공간을 어떻게 자르거나 세느냐'가 곧 계산 전략이다.** 차수 문제는 자르지 않고 사상 전체를 $H_n(S^n)=\\mathbb{Z}$라는 하나의 정수 계기판에 비추어 본다 — 고정점이 없다는 기하학적 가정이 곧 '항등사상 또는 대심사상과 호모토픽'이라는 대수적 결론으로 번역되고, 정수 $1$과 $(-1)^{n+1}$이 충돌하면서 모순이 터진다. 셀 호몰로지 문제는 공간을 셀로 완전히 분해해 버린다 — 여기서 실제로 어려운 일은 대수가 아니라 '붙임 사상이 1-스켈레톤 위를 어떤 단어로 도는가'를 정확히 읽는 것이고, 그 단어의 지수 합이 곧 경계 사상의 계수다. 마이어–비토리스 문제는 반대로 공간을 **두 조각**으로만 자른다 — 셀 구조를 잡기 어려운 붙임(뫼비우스 띠를 토러스에 붙이기, 두 개의 $R$을 $M_g$를 따라 붙이기) 앞에서는 '조각들은 이미 안다, 모르는 것은 겹침뿐'이라는 전략이 압도적으로 효율적이다. 그래서 같은 공간을 놓고도 셀 구조를 잡을 수 있으면 셀 호몰로지, 조각 둘로 자연스럽게 쪼개지면 MV를 고르는 감각이 이 절의 진짜 학습 목표다. 마지막으로 오일러 지표 문제들은 '호몰로지를 다 몰라도 알 수 있는 것'의 힘을 보여준다 — 셀 개수만 세면 $\\chi$가 나오고, $\\chi$만으로 종수 $g=n(h-1)+1$처럼 피복공간의 존재 가능성을 차단할 수 있다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "참고 (연습문제 지도 — 어느 도구를 언제 꺼내는가)",
+          "formal_statement": "문제를 만나면 다음 순서로 판단한다. (1) 대상이 $S^n\\to S^n$ 꼴의 **사상**이고 고정점·전사성·벡터장이 화제라면 → 차수. 핵심 사실 두 개는 '$f(x)\\ne x$ 모든 $x$ ⟹ $f\\simeq$ 대심사상 $a$, $\\deg a=(-1)^{n+1}$'과 '$f(x)\\ne -x$ 모든 $x$ ⟹ $f\\simeq \\mathrm{id}$, $\\deg=1$'이다. (2) 공간이 **명시적 CW 구조**로 주어졌거나(연습문제 9~19) 붙임 사상의 차수를 읽을 수 있다면 → 셀 호몰로지: $d_n$의 계수는 붙임 사상이 각 $(n-1)$-셀 위를 도는 **부호 있는 횟수**다. (3) 공간이 '$A$에 $B$를 어떤 원을 따라 붙였다' 꼴이면 → 마이어–비토리스: $A,B,A\\cap B$는 이미 아는 공간이고, 유일하게 계산할 것은 포함사상 $H_*(A\\cap B)\\to H_*(A)\\oplus H_*(B)$다(뫼비우스 띠의 경계원 → 중심원은 **차수 2**, $\\mathbb{RP}^1\\subset\\mathbb{RP}^2$는 $H_1=\\mathbb{Z}_2$의 **생성원**임을 놓치지 말 것). (4) 호몰로지군 전체가 아니라 **계수(랭크)만** 필요하면 → 오일러 지표(정리 2.44). (5) 정수 호몰로지의 꼬임(torsion)을 다른 계수로 검출하고 싶으면 → $\\mathbb{Z}_n$ 계수(연습문제 40, 43)."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 1) 브라우어 고정점 정리 — 브라우어 본인의 차수 증명",
+          "formal_statement": "모든 연속사상 $f:D^n\\to D^n$은 고정점을 갖는다.",
+          "idea_behind_proof": "이미 §2.2 본문에서 $H_n$의 함자성으로 브라우어 정리를 얻었지만, 브라우어의 원래 증명은 **차수라는 정수 하나에 두 개의 서로 다른 값을 강제**하는 방식이다. 착상의 출처는 '$D^n$은 $S^n$의 반구'라는 관찰이다. $f$가 고정점이 없다면 $D^n$ 위의 정보만으로는 모순을 만들 재료($H_n(D^n)=0$)가 없으니, $f$를 $S^n$ 위의 사상으로 **부풀려** $H_n(S^n)=\\mathbb{Z}$라는 계기판을 얻는다. 부풀리는 방법이 바로 '두 반구를 모두 $f$를 통해 남반구로 보낸다'는 것이고, 이 사상은 (a) 고정점이 없고 (b) 북반구 내부를 전혀 맞히지 않는다. (a)는 차수를 $(-1)^{n+1}$로 못 박고 (b)는 차수를 $0$으로 못 박는다.",
+          "proof_steps": [
+            "1단계: 수직 사영 $\\pi:S^n\\to D^n$, $\\pi(x_1,\\dots,x_{n+1})=(x_1,\\dots,x_n)$을 쓰고, 남반구 $S^n_-=\\{x\\in S^n: x_{n+1}\\le 0\\}$ 위에서의 $\\pi$의 역사상을 $\\iota_-:D^n\\to S^n_-$라 한다($\\pi\\iota_-=\\mathrm{id}$).",
+            "2단계: $g=\\iota_-\\circ f\\circ \\pi : S^n\\to S^n$으로 정의한다. $\\pi$가 연속이고 $\\iota_-$가 연속이므로 $g$는 연속이며, 정의상 두 반구가 모두 $f$를 통해 남반구로 간다(적도에서도 한 가지 값만 나오므로 잘 정의됨).",
+            "3단계: $f$에 고정점이 없다고 가정하면 $g$에도 고정점이 없다. 실제로 $g(x)=x$이면 $x\\in S^n_-$이므로 $x=\\iota_-(x')$ ($x'=\\pi(x)$)이고, $g(x)=\\iota_-(f(x'))=\\iota_-(x')$에서 $\\iota_-$의 단사성에 의해 $f(x')=x'$ — 가정에 모순.",
+            "4단계: 고정점이 없는 사상은 대심사상과 호모토픽하다(§2.2 본문): $g\\simeq a$이므로 $\\deg g=\\deg a=(-1)^{n+1}\\ne 0$.",
+            "5단계: 한편 $g$의 상은 남반구 $S^n_-$에 들어가므로 $g$는 열린 북반구의 점을 맞히지 않는다. 한 점을 빼면 $S^n\\setminus\\{pt\\}\\cong\\mathbb{R}^n$은 축약가능이므로 $g$는 널호모토픽이고 $\\deg g=0$.",
+            "6단계: $(-1)^{n+1}\\ne 0$이므로 4·5단계는 모순이다. 따라서 $f$는 고정점을 갖는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 2·3) 차수가 강제하는 고정점·반대점, 그리고 벡터장",
+          "formal_statement": "(a) 임의의 $f:S^{2n}\\to S^{2n}$에 대해 $f(x)=x$ 또는 $f(x)=-x$인 점 $x$가 존재한다. 따라서 모든 사상 $\\mathbb{RP}^{2n}\\to\\mathbb{RP}^{2n}$은 고정점을 갖는다. 반면 고윳벡터를 갖지 않는 선형변환 $\\mathbb{R}^{2n}\\to\\mathbb{R}^{2n}$은 고정점 없는 사상 $\\mathbb{RP}^{2n-1}\\to\\mathbb{RP}^{2n-1}$을 준다. (b) $\\deg f=0$인 $f:S^n\\to S^n$에는 $f(x)=x$인 $x$와 $f(y)=-y$인 $y$가 모두 존재한다. (c) $D^n\\subset\\mathbb{R}^n$ 위의 연속 벡터장 $F$가 모든 점에서 $F(x)\\ne 0$이면, $\\partial D^n$ 위에 $F$가 반지름 방향 **바깥쪽**을 가리키는 점과 **안쪽**을 가리키는 점이 각각 존재한다.",
+          "idea_behind_proof": "세 진술 모두 같은 사전(dictionary) 한 장을 쓴다: '고정점 없음 = 대심사상과 호모토픽', '반대점 없음 = 항등사상과 호모토픽'. 차수는 호모토피 불변이므로 이 두 조건이 동시에 성립하면 $\\deg f$가 $(-1)^{n+1}$과 $1$을 동시에 만족해야 한다 — $n$이 **짝수**일 때 이 둘은 $-1\\ne 1$로 충돌하고, 이것이 (a)의 전부다. (b)는 $\\deg f=0$이라는 정보가 $1$과 $(-1)^{n+1}$ 둘 다를 배제한다는 점만 다르다. (c)에서 핵심 착상은 '$D^n$ 전체에 정의된 벡터장'이라는 가정이 곧 경계에서의 사상 $F/|F|:S^{n-1}\\to S^{n-1}$이 **원판까지 확장된다**는 뜻이고, 원판으로 확장되는 사상은 널호모토픽이므로 차수가 $0$이라는 것이다. 그러면 (b)가 그대로 적용된다.",
+          "proof_steps": [
+            "(a) 1단계: 만약 모든 $x$에서 $f(x)\\ne x$이면 $f\\simeq a$이므로 $\\deg f=(-1)^{2n+1}=-1$. 만약 모든 $x$에서 $f(x)\\ne -x$이면 $f\\simeq\\mathrm{id}$이므로 $\\deg f=1$. 두 가정이 동시에 성립하면 $-1=1$로 모순이므로, $f(x)=x$ 또는 $f(x)=-x$인 $x$가 있다.",
+            "(a) 2단계: $g:\\mathbb{RP}^{2n}\\to\\mathbb{RP}^{2n}$이 주어지면, $S^{2n}$이 단연결이므로 피복사상 $p:S^{2n}\\to\\mathbb{RP}^{2n}$에 대해 $g\\circ p$는 들어올려져 $\\tilde g:S^{2n}\\to S^{2n}$, $p\\tilde g=gp$를 얻는다.",
+            "(a) 3단계: 1단계를 $\\tilde g$에 적용해 $\\tilde g(x)=\\pm x$인 $x$를 잡으면 $g(p(x))=p(\\tilde g(x))=p(\\pm x)=p(x)$이므로 $p(x)$가 $g$의 고정점이다.",
+            "(a) 4단계: 반대로 $T:\\mathbb{R}^{2n}\\to\\mathbb{R}^{2n}$, $T(x_1,x_2,\\dots)=(-x_2,x_1,\\dots)$처럼 실고윳벡터가 없는 가역 선형변환은 $\\mathbb{RP}^{2n-1}$ 위의 사상을 유도하고, 그 고정점은 정확히 $T$의 고윳벡터의 직선에 대응하므로 고정점이 없다.",
+            "(b) 1단계: $f(x)\\ne x$가 모든 $x$에서 성립하면 $\\deg f=(-1)^{n+1}\\ne 0$, $f(y)\\ne -y$가 모든 $y$에서 성립하면 $\\deg f=1\\ne 0$. $\\deg f=0$이므로 두 경우 모두 배제되어 $f(x)=x$인 $x$와 $f(y)=-y$인 $y$가 존재한다.",
+            "(c) 1단계: $n\\ge 2$라 하고 $u=F/|F| : D^n\\to S^{n-1}$, 그 제한을 $f=u|_{\\partial D^n}:S^{n-1}\\to S^{n-1}$이라 한다. $f$가 축약가능한 $D^n$ 위로 확장되므로 $f$는 널호모토픽이고 $\\deg f=0$.",
+            "(c) 2단계: (b)를 $f$에 적용하면 $f(x)=x$인 $x\\in\\partial D^n$이 존재한다. 즉 $F(x)=|F(x)|\\,x$이므로 $F$는 $x$에서 바깥쪽 반지름 방향을 가리킨다.",
+            "(c) 3단계: 또 $f(y)=-y$인 $y\\in\\partial D^n$이 존재하므로 $F(y)=-|F(y)|\\,y$, 즉 $F$는 $y$에서 안쪽 반지름 방향을 가리킨다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 2,
+                "dash": "4,3"
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  2,
+                  0
+                ],
+                "to": [
+                  3.1,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  -2,
+                  0
+                ],
+                "to": [
+                  -0.9,
+                  0
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  2
+                ],
+                "to": [
+                  0.8,
+                  2.7
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  0,
+                  -2
+                ],
+                "to": [
+                  0.9,
+                  -2.5
+                ]
+              },
+              {
+                "shape": "arrow",
+                "from": [
+                  1.41,
+                  1.41
+                ],
+                "to": [
+                  2.3,
+                  1.7
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  3.1,
+                  0.45
+                ],
+                "text": "outward"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1.0,
+                  0.45
+                ],
+                "text": "inward"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.35,
+                  -0.45
+                ],
+                "text": "x"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.35,
+                  -0.45
+                ],
+                "text": "y"
+              }
+            ],
+            "caption": "연습문제 3(c): $D^n$ 위에서 한 번도 $0$이 되지 않는 벡터장은 경계에서 반드시 반지름 방향 바깥을 가리키는 점 $x$와 안쪽을 가리키는 점 $y$를 갖는다. 이유는 $F/|F|$가 원판 전체로 확장되어 경계에서의 차수가 $0$이 되기 때문이다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 14) 짝 사상(even map)의 차수",
+          "formal_statement": "$f:S^n\\to S^n$이 모든 $x$에 대해 $f(x)=f(-x)$를 만족하면($f$를 짝 사상이라 한다) $\\deg f$는 짝수이고, $n$이 짝수이면 $\\deg f=0$이다. $n$이 홀수일 때는 임의로 주어진 짝수를 차수로 갖는 짝 사상이 존재한다.",
+          "idea_behind_proof": "$f(x)=f(-x)$라는 조건은 곧 '$f$가 대심 관계로 몫을 취한 뒤에도 잘 정의된다'는 뜻이므로, $f$는 반드시 $S^n\\xrightarrow{\\;p\\;}\\mathbb{RP}^n\\xrightarrow{\\;g\\;}S^n$으로 **인수분해**된다. 그러면 $\\deg f = g_*\\circ p_*$이고, 병목은 오직 $p_*:H_n(S^n)\\to H_n(\\mathbb{RP}^n)$ 하나다. 여기서 2.2.2에서 계산한 $H_n(\\mathbb{RP}^n)$이 결정타를 놓는다 — $n$이 짝수면 이 군 자체가 $0$이므로 $p_*=0$, 따라서 차수가 $0$이 될 수밖에 없다. $n$이 홀수면 $H_n(\\mathbb{RP}^n)=\\mathbb{Z}$이지만, $S^n$을 대심 CW 구조($\\text{각 차원에 }e^k_\\pm$)로 보면 $S^n$의 기본 순환이 $e^n_++e^n_-$ 꼴이고 $p$가 두 셀을 같은 셀로 보내므로 $p_*$는 생성원을 **생성원의 2배**로 보낸다. '2배'가 짝수성의 출처다.",
+          "proof_steps": [
+            "1단계: $f(x)=f(-x)$이므로 $f$는 몫 $p:S^n\\to\\mathbb{RP}^n$을 지나 $f=g\\circ p$로 인수분해된다.",
+            "2단계: $n$이 짝수인 경우, 2.2.2의 계산에 의해 $H_n(\\mathbb{RP}^n)=0$이다. 따라서 $f_*=g_*p_*=0$, 즉 $\\deg f=0$.",
+            "3단계: $n$이 홀수인 경우, $S^n$에 대심사상과 양립하는 CW 구조(각 차원에 두 개의 셀 $e^k_\\pm$, $p(e^k_\\pm)=e^k$)를 준다. $H_n(S^n)=\\mathbb{Z}$의 생성원은 순환 $z=e^n_++e^n_-$로 나타나고(두 반구가 같은 방향으로 기본 순환을 이룸), $p_*(z)=2e^n$이다. $n$이 홀수라 $d_n e^n=(1+(-1)^n)e^{n-1}=0$이고 $d_{n+1}$은 없으므로 $e^n$은 $H_n(\\mathbb{RP}^n)=\\mathbb{Z}$의 생성원이다. 즉 $p_*$는 생성원을 생성원의 $2$배로 보낸다.",
+            "4단계: 따라서 $\\deg f=g_*(p_*(z))=2\\,k$ (여기서 $g_*$가 생성원을 $k$배로 보낸다) — 항상 짝수다.",
+            "5단계: (역구성) $n$이 홀수일 때 몫사상 $q:\\mathbb{RP}^n\\to\\mathbb{RP}^n/\\mathbb{RP}^{n-1}\\cong S^n$은 $H_n$에서 동형이다(셀 사슬 복합체에서 $n$-셀 하나만 남고 그 경계가 $0$이므로). 그러면 $q\\circ p:S^n\\to S^n$은 짝 사상이고 3단계에 의해 차수 $\\pm 2$다. 여기에 차수 $k$인 사상을 합성하면 차수 $\\pm 2k$인 짝 사상을 얻으므로, 임의의 짝수가 실현된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 20·21·22·23·41) 오일러 지표의 형식적 성질",
+          "formal_statement": "유한 CW 복합체에 대해 다음이 성립한다. (a) $\\chi(X\\times Y)=\\chi(X)\\chi(Y)$. (b) $X=A\\cup B$가 부분복합체들의 합집합이면 $\\chi(X)=\\chi(A)+\\chi(B)-\\chi(A\\cap B)$. (c) $p:\\widetilde X\\to X$가 $n$겹 피복공간이면 $\\chi(\\widetilde X)=n\\,\\chi(X)$. (d) 종수 $g$의 닫힌 유향곡면 $M_g$가 $M_h$의 $n$겹 피복공간이면 $g=n(h-1)+1$. (e) 임의의 체 $F$에 대해 $\\chi(X)=\\sum_n(-1)^n\\dim_F H_n(X;F)$.",
+          "idea_behind_proof": "(a)~(d)는 모두 '$\\chi$는 결국 셀을 세는 것'이라는 한 줄에서 나온다 — 곱복합체의 셀은 셀의 곱이고 차원이 더해지므로 부호 $(-1)^{i+j}$가 곱으로 분리되고, 합집합에서는 셀 개수가 포함–배제로 세지고, 피복공간에서는 각 셀이 정확히 $n$개로 들어올려진다($D^i$가 단연결이므로 특성사상이 들어올려진다). (d)는 여기에 $\\chi(M_g)=2-2g$라는 계산 하나만 대입한 것이다. (e)의 착상은 다르다: 정리 2.44는 $\\chi$가 정수 호몰로지로 결정됨을 말했는데, 계수를 체로 바꾸면 사슬 복합체가 **벡터공간의 복합체**가 되어 계급–퇴화 정리(rank–nullity)만으로 텔레스코핑이 일어난다. 즉 $\\chi$는 어떤 체로 재도 같은 값이며, 이것이 나중에 표수 $p$의 계수로 계산해도 안전하다는 실용적 보증이 된다.",
+          "proof_steps": [
+            "(a) $X\\times Y$의 셀은 $e^i_\\alpha\\times e^j_\\beta$ (차원 $i+j$)이므로 $\\chi(X\\times Y)=\\sum_{i,j}(-1)^{i+j}c_i(X)c_j(Y)=\\bigl(\\sum_i(-1)^ic_i(X)\\bigr)\\bigl(\\sum_j(-1)^jc_j(Y)\\bigr)=\\chi(X)\\chi(Y)$. 여기서 $c_i$는 $i$-셀의 개수.",
+            "(b) $A,B$가 부분복합체이므로 $A\\cap B$도 부분복합체이고, $X$의 각 셀은 $A$에만, $B$에만, 또는 둘 다에 속한다. 따라서 $c_i(X)=c_i(A)+c_i(B)-c_i(A\\cap B)$이고 교대합을 취하면 결론이 나온다.",
+            "(c) $p$가 피복사상이고 $D^i$는 단연결이므로 $X$의 각 $i$-셀의 특성사상은 정확히 $n$개의 방식으로 들어올려지고, 이 들어올림들이 $\\widetilde X$의 $i$-셀 전부를 준다. 즉 $c_i(\\widetilde X)=n\\,c_i(X)$이므로 $\\chi(\\widetilde X)=n\\chi(X)$.",
+            "(d) $\\chi(M_g)=2-2g$이므로 (c)에서 $2-2g=n(2-2h)$, 양변을 $-2$로 나누면 $g-1=n(h-1)$, 즉 $g=n(h-1)+1$.",
+            "(e) 체 $F$ 계수의 셀 사슬 복합체는 $\\dim_F C_n=c_n$인 유한차원 벡터공간의 복합체다. $Z_n=\\ker d_n$, $B_n=\\operatorname{im} d_{n+1}$로 두면 계급–퇴화 정리에서 $c_n=\\dim Z_n+\\dim B_{n-1}$이고 $\\dim H_n=\\dim Z_n-\\dim B_n$이다.",
+            "(e) 따라서 $\\sum_n(-1)^n\\dim H_n=\\sum_n(-1)^n(\\dim Z_n-\\dim B_n)=\\sum_n(-1)^n(\\dim Z_n+\\dim B_{n-1})=\\sum_n(-1)^nc_n=\\chi(X)$ (둘째 등식은 $-(-1)^n\\dim B_n=(-1)^{n+1}\\dim B_n$의 지표 이동). 정리 2.44(오일러 지표는 호몰로지로 결정된다)의 체 계수판이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 31·32) MV로 얻는 웨지 합과 현수",
+          "formal_statement": "(a) $X\\vee Y$에서 동일시되는 기점들이 각각 근방 $U\\subset X$, $V\\subset Y$의 변형수축이면 $\\widetilde H_n(X\\vee Y)\\cong\\widetilde H_n(X)\\oplus\\widetilde H_n(Y)$이다. (b) 임의의 공간 $X$의 현수 $SX$에 대해 모든 $n$에서 $\\widetilde H_n(SX)\\cong\\widetilde H_{n-1}(X)$이다.",
+          "idea_behind_proof": "두 결과 모두 '겹침이 곧 답이다'라는 MV의 사용법을 순수한 형태로 보여준다. 현수의 경우, 자연스러운 두 조각은 위·아래 원뿔인데 이들은 닫혀 있어 MV의 열린 조건을 만족하지 않는다 — 그래서 **꼭짓점을 하나씩 뺀** 열린 집합 $A=SX\\setminus\\{\\text{아래 꼭짓점}\\}$, $B=SX\\setminus\\{\\text{위 꼭짓점}\\}$을 쓴다. 이 사소해 보이는 조정이 결정적인데, 두 조각은 여전히 원뿔이라 축약가능하고 겹침은 $X\\times(0,1)\\simeq X$가 되어 축소 MV열의 양 끝이 $0$으로 막히면서 경계 사상이 곧 동형이 된다. 웨지 합도 같은 기술 — 기점의 근방을 조각에 조금 덧붙여 열린 집합을 만들면 겹침이 축약가능해진다.",
+          "proof_steps": [
+            "(b) 1단계: $SX=(X\\times[0,1])/(X\\times\\{0\\},\\,X\\times\\{1\\}\\text{ 각각 한 점})$에서 $A=SX\\setminus\\{\\text{아래 꼭짓점}\\}$, $B=SX\\setminus\\{\\text{위 꼭짓점}\\}$으로 두면 $A,B$는 열린집합이고 $A\\cup B=SX$.",
+            "(b) 2단계: $A$와 $B$는 각각 꼭짓점으로 변형수축되는 원뿔이므로 축약가능하고, $A\\cap B\\cong X\\times(0,1)\\simeq X$이다.",
+            "(b) 3단계: 축소 마이어–비토리스열(2.2.3의 축소판)에서 $\\widetilde H_n(A)\\oplus\\widetilde H_n(B)=0$이 모든 $n$에서 성립하므로 $0\\to\\widetilde H_n(SX)\\xrightarrow{\\ \\partial\\ }\\widetilde H_{n-1}(A\\cap B)\\to 0$, 즉 $\\widetilde H_n(SX)\\cong\\widetilde H_{n-1}(X)$.",
+            "(a) 1단계: $A=X\\cup V$, $B=U\\cup Y$로 두면 ($X\\vee Y$ 안에서) $A\\cup B=X\\vee Y$이고 $A\\cap B=U\\cup V$는 기점으로 변형수축되므로 $\\widetilde H_*(A\\cap B)=0$.",
+            "(a) 2단계: $A\\simeq X$, $B\\simeq Y$이므로 축소 MV열이 $0\\to\\widetilde H_n(X)\\oplus\\widetilde H_n(Y)\\to\\widetilde H_n(X\\vee Y)\\to 0$으로 붕괴하여 결론을 얻는다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "segment",
+                "from": [
+                  -1.8,
+                  0
+                ],
+                "to": [
+                  0,
+                  2.1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2.1
+                ],
+                "to": [
+                  1.8,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  1.8,
+                  0
+                ],
+                "to": [
+                  0,
+                  -2.1
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  -2.1
+                ],
+                "to": [
+                  -1.8,
+                  0
+                ]
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -1.8,
+                  0
+                ],
+                "to": [
+                  1.8,
+                  0
+                ],
+                "dash": "5,4"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  2.1
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -2.1
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.25,
+                  0.05
+                ],
+                "text": "X"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.85,
+                  1.15
+                ],
+                "text": "A"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.85,
+                  -1.15
+                ],
+                "text": "B"
+              }
+            ],
+            "caption": "연습문제 32의 MV 분해: 아래 꼭짓점을 뺀 $A$와 위 꼭짓점을 뺀 $B$는 둘 다 축약가능한 원뿔이고 $A\\cap B\\simeq X$(점선). 양 끝이 $0$으로 막히므로 경계 사상 $\\widetilde H_n(SX)\\to\\widetilde H_{n-1}(X)$이 동형이 된다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 40) $\\mathbb{Z}_n$ 계수가 읽어 내는 정수 호몰로지의 두 조각",
+          "formal_statement": "모든 $i$에 대해 자연스러운 단완전열 $$0\\to H_i(X)/nH_i(X)\\to H_i(X;\\mathbb{Z}_n)\\to n\\text{-Torsion}\\bigl(H_{i-1}(X)\\bigr)\\to 0$$ 이 존재한다. 여기서 $n\\text{-Torsion}(G)=\\ker(G\\xrightarrow{\\ n\\ }G)$. 따라서 모든 $i$와 모든 소수 $p$에 대해 $\\widetilde H_i(X;\\mathbb{Z}_p)=0$인 것은 모든 $i$에서 $\\widetilde H_i(X)$가 $\\mathbb{Q}$ 위의 벡터공간인 것과 동치다.",
+          "idea_behind_proof": "출발점은 계수를 만드는 가장 정직한 방법 — 사슬군 수준의 단완전열 $0\\to C_i(X)\\xrightarrow{\\,n\\,}C_i(X)\\to C_i(X;\\mathbb{Z}_n)\\to 0$ — 이고(각 $C_i(X)$가 자유이므로 $n$배 사상은 단사), 여기에 2.1.5의 장완전열 기계를 그냥 돌리는 것이다. 그러면 $H_i(X)\\xrightarrow{n}H_i(X)$의 **여핵**과 $H_{i-1}(X)\\xrightarrow{n}H_{i-1}(X)$의 **핵**이 $H_i(X;\\mathbb{Z}_n)$을 위아래로 감싼다. 이것이 3장의 보편계수 정리(universal coefficient theorem)의 예고편이며, 보조정리 2.49(차수 $m$은 임의 계수에서도 $\\times m$)가 왜 계수 호몰로지에서 꼬임을 검출할 수 있었는지도 같은 원리다. 마지막 동치는 '나눗셈 가능(divisible) + 꼬임 없음 = $\\mathbb{Q}$-벡터공간'이라는 아벨군의 초등적 사실로 번역된다.",
+          "proof_steps": [
+            "1단계: $C_i(X)$가 자유아벨군이므로 $0\\to C_i(X)\\xrightarrow{\\,n\\,}C_i(X)\\to C_i(X;\\mathbb{Z}_n)\\to 0$은 사슬 복합체의 단완전열이다.",
+            "2단계: 그 장완전열은 $\\cdots\\to H_i(X)\\xrightarrow{\\,n\\,}H_i(X)\\to H_i(X;\\mathbb{Z}_n)\\xrightarrow{\\ \\partial\\ }H_{i-1}(X)\\xrightarrow{\\,n\\,}H_{i-1}(X)\\to\\cdots$ 이다.",
+            "3단계: 완전성에서 $H_i(X)\\to H_i(X;\\mathbb{Z}_n)$의 상은 $H_i(X)/nH_i(X)$와 동형이고(핵이 정확히 $nH_i(X)$), $\\partial$의 상은 $\\ker(n:H_{i-1}\\to H_{i-1})=n\\text{-Torsion}(H_{i-1}(X))$이다. 이를 이어 붙이면 주장한 단완전열을 얻는다.",
+            "4단계: ($\\Rightarrow$) 모든 소수 $p$에서 $\\widetilde H_i(X;\\mathbb{Z}_p)=0$이면 단완전열의 두 끝이 모두 $0$이므로 $\\widetilde H_i(X)=p\\widetilde H_i(X)$(모든 $p$에 대해 나눗셈 가능)이고 $p\\text{-Torsion}(\\widetilde H_i(X))=0$이다.",
+            "5단계: 유한 위수 원소가 있으면 그 적당한 배수는 소수 위수를 가지므로 4단계는 $\\widetilde H_i(X)$가 꼬임 없음을 뜻한다. 꼬임 없고 나눗셈 가능한 아벨군은 $\\mathbb{Q}$-벡터공간이다(각 $m\\ne 0$에 대해 $m$배 사상이 전단사).",
+            "6단계: ($\\Leftarrow$) $\\widetilde H_i(X)$가 $\\mathbb{Q}$-벡터공간이면 나눗셈 가능하므로 $\\widetilde H_i/p\\widetilde H_i=0$이고 꼬임이 없으므로 $p\\text{-Torsion}=0$이다. 단완전열의 양 끝이 $0$이므로 $\\widetilde H_i(X;\\mathbb{Z}_p)=0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 27) 사슬 수준의 분열은 호몰로지의 분열을 주지 않는다",
+          "formal_statement": "각 $n$에서 단완전열 $0\\to C_n(A)\\to C_n(X)\\to C_n(X,A)\\to 0$은 항상 분열한다. 그러나 이로부터 $H_n(X)\\cong H_n(A)\\oplus H_n(X,A)$가 따라오지는 않는다. 예를 들어 $(X,A)=(D^2,S^1)$에서 $H_1(D^2)=0$이지만 $H_1(S^1)\\oplus H_1(D^2,S^1)=\\mathbb{Z}\\oplus 0=\\mathbb{Z}$이다.",
+          "idea_behind_proof": "함정의 정체는 '무엇의 분열인가'다. $C_n(X,A)$는 상이 $A$에 들어가지 않는 특이 단체들 위의 자유군이므로, 각 차원에서 그 단체들을 그대로 $C_n(X)$로 되올리는 절단 $s$가 존재한다 — 하지만 $s$는 **사슬 사상이 아니다**: 상이 $A$에 걸치지 않는 단체의 면(face)은 $A$ 안에 있을 수 있어 $\\partial s\\ne s\\partial$이다. 2.2.2에서 쓴 분열 보조정리(Splitting Lemma)는 호몰로지 수준(또는 사슬 사상 수준)의 절단을 요구하므로 적용되지 않는다. 그 실패의 크기를 정확히 재는 것이 장완전열의 연결 사상 $\\partial$이며, $\\partial$이 $0$이 아니면 분열은 깨진다.",
+          "proof_steps": [
+            "1단계: $C_n(X,A)=C_n(X)/C_n(A)$는 상이 $A$에 포함되지 않는 특이 $n$-단체들 위의 자유아벨군이다. 이 기저 원소들을 자기 자신으로 보내면 각 차원에서의 절단 $s:C_n(X,A)\\to C_n(X)$을 얻으므로 열은 아벨군의 열로서 분열한다.",
+            "2단계: 그러나 $s$는 경계 사상과 교환하지 않는다. 상이 $A$에 포함되지 않는 단체의 어떤 면은 $A$ 안에 있을 수 있고, 그 면은 $C_n(X,A)$에서는 죽지만 $C_n(X)$에서는 살아 있다. 따라서 $s$는 사슬 사상이 아니고 호몰로지에 사상을 유도하지 못한다.",
+            "3단계: 반례: $(D^2,S^1)$에서 장완전열은 $H_2(D^2,S^1)\\cong\\mathbb{Z}\\xrightarrow{\\ \\partial\\ }H_1(S^1)=\\mathbb{Z}\\to H_1(D^2)=0$이고 $\\partial$이 동형이다. 즉 $H_1(S^1)$의 생성원은 $H_1(D^2)$에서 죽으며, $H_1(D^2)=0\\ne\\mathbb{Z}=H_1(S^1)\\oplus H_1(D^2,S^1)$.",
+            "4단계: 결국 연결 사상 $\\partial$이 비자명한 것이 분열 실패의 원인이고, $\\partial=0$일 때에만 장완전열이 짧은 분열열들로 끊어진다(그때에도 확장이 분열하는지는 별도 논의가 필요하다). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (연습문제 15) $H_n(X^n)$은 자유아벨군이다",
+          "formal_statement": "$X$가 CW 복합체이면 $H_n(X^n)$은 셀 경계 사상 $d_n:H_n(X^n,X^{n-1})\\to H_{n-1}(X^{n-1},X^{n-2})$의 핵과 동형이며, 특히 자유아벨군이다.",
+          "idea_behind_proof": "2.2.2에서 셀 호몰로지를 세울 때 그렸던 큰 가환 도표를 다시 읽으면 된다. 그 도표의 요점은 '$H_n(X^{n-1})=0$이고 $H_{n-1}(X^{n-2})=0$'이라는 스켈레톤의 소멸 사실이었고, 이것이 $H_n(X^n)$을 상대군 $H_n(X^n,X^{n-1})$(=$n$-셀들 위의 자유군) 안으로 **단사로** 밀어 넣는다. 그다음은 순수 대수: 자유아벨군의 부분군은 자유다.",
+          "proof_steps": [
+            "1단계: 쌍 $(X^n,X^{n-1})$의 장완전열의 한 토막은 $H_n(X^{n-1})\\to H_n(X^n)\\xrightarrow{\\,j_*\\,}H_n(X^n,X^{n-1})$이고, 2.2.2에서 본 대로 $H_n(X^{n-1})=0$이므로 $j_*$는 단사다.",
+            "2단계: 완전성에서 $\\operatorname{im}j_*=\\ker\\bigl(\\partial:H_n(X^n,X^{n-1})\\to H_{n-1}(X^{n-1})\\bigr)$이다.",
+            "3단계: $H_{n-1}(X^{n-2})=0$이므로 $H_{n-1}(X^{n-1})\\to H_{n-1}(X^{n-1},X^{n-2})$도 단사이고, 따라서 $\\ker\\partial=\\ker d_n$ (여기서 $d_n$은 $\\partial$에 이 단사 사상을 합성한 것, 즉 셀 경계 사상).",
+            "4단계: 그러므로 $H_n(X^n)\\cong\\ker d_n\\subset H_n(X^n,X^{n-1})$이고, 오른쪽은 $n$-셀들 위의 자유아벨군이다. 자유아벨군의 부분군은 자유이므로 $H_n(X^n)$은 자유아벨군이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 9(a)) $S^2$에서 북극과 남극을 한 점으로 동일시한 몫공간 $X$의 호몰로지군을 셀 호몰로지로 계산하라. (연습문제 9(c)) $D^2$의 내부에서 서로 만나지 않는 두 개의 부분원판의 내부를 제거한 뒤(바지 모양 공간), 남은 세 개의 경계원을 모두 시계 방향을 보존하는 위상동형으로 동일시한 공간 $Y$의 호몰로지군을 구하라.",
+          "hint": "(a) 두 극을 잇는 자오선 호(arc)를 1-셀로 잡아라. 동일시 후 그 호는 **고리(loop)** $a$가 되고, $S^2$에서 그 호를 잘라 내면 하나의 원판이 남는다. 그 원판의 붙임 단어에서 $a$가 몇 번, 어떤 부호로 나타나는지를 세라. (c) 두 절단호 $c_1,c_2$(외부 경계의 한 점 $v_0$에서 각 구멍까지)로 자르면 하나의 원판이 된다. 그 원판의 경계 단어를 적을 때, 영역의 경계 방향으로 보면 **외부 원은 반시계, 두 내부 원은 시계** 방향으로 돌게 된다는 점이 부호를 결정한다.",
+          "solution": "(a) CW 구조: 0-셀 $p$(동일시된 극) 하나, 1-셀 $a$(자오선 호가 고리가 된 것) 하나, 2-셀 $e^2$(호를 따라 자른 $S^2$는 원판) 하나. 붙임 단어는 호를 갔다가 되돌아오는 $a\\,a^{-1}$이므로 $d_2(e^2)=(1-1)a=0$, 또 $a$가 고리이므로 $d_1=0$. 따라서 $$H_0(X)=\\mathbb{Z},\\quad H_1(X)=\\mathbb{Z},\\quad H_2(X)=\\mathbb{Z},\\quad H_i=0\\ (i\\ge3).$$ 이는 $X\\simeq S^2\\vee S^1$이라는 사실과 일치한다(호가 고리로 변하고, 나머지는 구면).\\n(c) 세 경계원이 하나의 고리 $a$로 동일시되고, 그 위의 기점들도 한 점 $v$로 동일시된다. CW 구조: 0-셀 $v$ 하나, 1-셀 $a,c_1,c_2$ 셋, 2-셀 하나. 경계 단어는 $a^{-1}c_1ac_1^{-1}c_2ac_2^{-1}$ (외부 원은 $a^{-1}$, 두 내부 원은 각각 $a$)이므로 $$d_2(e^2)=(-1+1+1)a+(1-1)c_1+(1-1)c_2=a.$$ 따라서 $d_2$는 단사이고 $H_2(Y)=\\ker d_2=0$, $H_1(Y)=\\mathbb{Z}^3/\\langle a\\rangle=\\mathbb{Z}^2$ (생성원 $c_1,c_2$), $H_0(Y)=\\mathbb{Z}$. 검산: $\\chi(Y)=1-3+1=-1$이고 호몰로지에서도 $1-2+0=-1$. **일반화**: '경계원들을 한 개의 원으로 붙이기' 문제에서 답은 언제나 붙임 단어에서의 $a$의 지수 합 하나가 결정한다 — 지수 합이 $\\pm1$이면 2-차원 순환이 살아남지 못하고, $0$이면 $H_2$에 $\\mathbb{Z}$가 생긴다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 2.2
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  -1,
+                  -0.2
+                ],
+                "r": 0.55
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  1,
+                  -0.2
+                ],
+                "r": 0.55
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2.2
+                ],
+                "to": [
+                  -1,
+                  0.35
+                ],
+                "dash": "4,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  2.2
+                ],
+                "to": [
+                  1,
+                  0.35
+                ],
+                "dash": "4,3"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  2.2
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.28,
+                  2.5
+                ],
+                "text": "v_0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.95,
+                  1.35
+                ],
+                "text": "c_1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.95,
+                  1.35
+                ],
+                "text": "c_2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.55,
+                  -1.1
+                ],
+                "text": "a"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -1,
+                  -1.05
+                ],
+                "text": "a"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1,
+                  -1.05
+                ],
+                "text": "a"
+              }
+            ],
+            "caption": "연습문제 9(c): 세 경계원은 모두 하나의 고리 $a$로 동일시된다. 점선 절단호 $c_1,c_2$로 자르면 경계 단어가 $a^{-1}c_1ac_1^{-1}c_2ac_2^{-1}$인 원판 하나가 되어 $d_2(e^2)=a$."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 10) $S^2$에서 적도 $S^1$ 위의 점들만 $x\\sim -x$로 동일시한 몫공간 $X$의 호몰로지군 $H_i(X)$를 계산하라. 같은 방식으로 $S^3$에서 적도 $S^2\\subset S^3$의 대심점들만 동일시한 공간 $X'$에 대해서도 계산하라.",
+          "hint": "적도에 대심 동일시를 하면 $S^1\\to\\mathbb{RP}^1$($=$원), $S^2\\to\\mathbb{RP}^2$가 된다. 즉 동일시된 적도는 $\\mathbb{RP}^{n-1}$의 표준 CW 구조를 갖고, 두 반구는 각각 **$\\mathbb{RP}^{n-1}$의 이중피복사상**으로 붙는 $n$-셀이 된다. $\\mathbb{RP}^n$의 셀 경계 사상 $d_k=(1+(-1)^k)$ 계산(2.2.2)을 그대로 재사용하라. 답이 맞는지는 오일러 지표로 검산하라.",
+          "solution": "($X$) CW 구조: 적도의 몫은 $\\mathbb{RP}^1$이므로 0-셀 $v$, 1-셀 $a$ (적도는 $a^2$로 감긴다). 위·아래 반구가 각각 2-셀 $U,L$이고 붙임 사상은 적도를 두 번 감으므로 $d_2(U)=2a=d_2(L)$, $d_1=0$. 따라서 $$H_0=\\mathbb{Z},\\quad H_1=\\mathbb{Z}/\\langle 2a\\rangle=\\mathbb{Z}_2,\\quad H_2=\\ker d_2=\\{(m,-m)\\}\\cong\\mathbb{Z}.$$ 검산: $\\chi=1-1+2=2$, 호몰로지 쪽도 $1-0+1=2$. (기하적으로 $X=\\mathbb{RP}^2\\cup_{\\mathbb{RP}^1}\\mathbb{RP}^2$이며 동일시된 원 위에서는 네 장의 반원판이 만나므로 다양체가 아니다.)\\n($X'$) 적도의 몫은 $\\mathbb{RP}^2$: 셀 $v,a,b$와 $d_2(b)=2a$. 두 반구는 3-셀 $U,L$이고 붙임 사상은 대심 몫 $S^2\\to\\mathbb{RP}^2$이므로 $\\mathbb{RP}^3$에서와 같은 계산으로 $d_3(U)=(1+(-1)^3)b=0=d_3(L)$. 따라서 $$H_0=\\mathbb{Z},\\quad H_1=\\mathbb{Z}_2,\\quad H_2=\\ker d_2=0,\\quad H_3=\\ker d_3=\\mathbb{Z}^2.$$ 검산: $\\chi=1-1+1-2=-1$, 호몰로지 쪽도 $1-0+0-2=-1$. 마이어–비토리스로도 확인된다: $X'=\\mathbb{RP}^3\\cup_{\\mathbb{RP}^2}\\mathbb{RP}^3$이고 $H_1(\\mathbb{RP}^2)=\\mathbb{Z}_2\\to H_1(\\mathbb{RP}^3)\\oplus H_1(\\mathbb{RP}^3)=\\mathbb{Z}_2\\oplus\\mathbb{Z}_2$가 단사이므로 $H_2(X')=0$, $H_1(X')=\\mathbb{Z}_2$, $H_3(X')\\cong\\mathbb{Z}^2$.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 2
+              },
+              {
+                "shape": "ellipse",
+                "center": [
+                  0,
+                  0
+                ],
+                "rx": 2,
+                "ry": 0.55,
+                "dash": "5,4"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -2,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  2,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -2.35,
+                  0.35
+                ],
+                "text": "x"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  2.3,
+                  0.35
+                ],
+                "text": "-x"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  1.25
+                ],
+                "text": "U"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0,
+                  -1.45
+                ],
+                "text": "L"
+              }
+            ],
+            "caption": "연습문제 10: 적도(점선)에서만 $x\\sim -x$. 적도의 몫은 $\\mathbb{RP}^1\\cong S^1$이고 두 반구는 그 위를 두 번 감는 2-셀 $U,L$이 되어 $d_2(U)=d_2(L)=2a$."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 13) $S^1$의 표준 셀 구조(0-셀 하나, 1-셀 $a$ 하나)에 차수 $2$와 차수 $3$의 사상으로 2-셀 $e_1,e_2$를 각각 붙여 만든 2-복합체를 $X$라 한다. (a) $X$의 모든 부분복합체 $A\\subset X$와 그 몫복합체 $X/A$의 호몰로지군을 계산하라. (b) $X$의 호몰로지가 $S^2$의 것과 같음을 보이고, 몫사상 $X\\to X/A$가 호모토피 동치가 되는 부분복합체 $A$는 자명한 것(0-셀)뿐임을 보여라.",
+          "hint": "(a) 부분복합체는 $\\{$0-셀$\\}$, $S^1$, $S^1\\cup e_1$, $S^1\\cup e_2$, $X$ 다섯 개뿐이다. (b) 핵심은 $H_2(X)$의 **생성원이 무엇인지** 정확히 아는 것: $d_2(e_1)=2a$, $d_2(e_2)=3a$이므로 $\\ker d_2$는 $3e_1-2e_2$가 생성한다. 몫사상이 이 생성원을 $H_2(X/A)$의 어떤 원소로 보내는지 계산하라 — 호모토피 동치라면 $H_2$에서 동형이어야 한다.",
+          "solution": "셀 사슬 복합체: $0\\to\\mathbb{Z}^2\\xrightarrow{d_2}\\mathbb{Z}\\xrightarrow{d_1=0}\\mathbb{Z}\\to0$, $d_2(e_1)=2a$, $d_2(e_2)=3a$.\\n(a) 부분복합체와 그 호몰로지: 0-셀 $\\Rightarrow H_0=\\mathbb{Z}$; $S^1\\Rightarrow H_0=\\mathbb{Z},H_1=\\mathbb{Z}$; $S^1\\cup e_1\\cong\\mathbb{RP}^2\\Rightarrow H_0=\\mathbb{Z},H_1=\\mathbb{Z}_2,H_2=0$; $S^1\\cup e_2\\Rightarrow H_0=\\mathbb{Z},H_1=\\mathbb{Z}_3,H_2=0$; $X\\Rightarrow H_0=\\mathbb{Z},H_1=\\mathbb{Z}/(2,3)=0,H_2=\\ker d_2=\\langle 3e_1-2e_2\\rangle\\cong\\mathbb{Z}$. 몫복합체: $X/\\{pt\\}=X$; $X/S^1=S^2\\vee S^2\\Rightarrow H_2=\\mathbb{Z}^2$; $X/(S^1\\cup e_1)=S^2\\Rightarrow H_2=\\mathbb{Z}$; $X/(S^1\\cup e_2)=S^2\\Rightarrow H_2=\\mathbb{Z}$ (모두 $H_1=0$).\\n(b) $H_*(X)=H_*(S^2)$이며 $\\pi_1(X)=\\langle a\\mid a^2,a^3\\rangle=1$이므로 $X$는 단연결이다. 후르비치 정리와 화이트헤드 정리(4장에서 다룸)를 쓰면 $H_2$의 생성원을 대표하는 사상 $S^2\\to X$가 호모토피 동치이므로 $X\\simeq S^2$. 몫사상의 $H_2$ 유도사상을 보면: $A=S^1$일 때 $3e_1-2e_2\\mapsto(3,-2)\\in\\mathbb{Z}^2$ — 전사가 아니다. $A=S^1\\cup e_1$일 때 $e_1$이 죽으므로 $3e_1-2e_2\\mapsto -2e_2$, 즉 $\\mathbb{Z}\\xrightarrow{-2}\\mathbb{Z}$ — 동형이 아니다. $A=S^1\\cup e_2$일 때 $\\mathbb{Z}\\xrightarrow{3}\\mathbb{Z}$ — 동형이 아니다. $A=X$일 때 $X/A$는 한 점. 따라서 $H_2$에서 동형을 주는 것은 $A=\\{$0-셀$\\}$뿐이고, 호모토피 동치가 되는 부분복합체는 자명한 것뿐이다. **교훈**: '$X$와 $X/A$가 같은 호몰로지군을 갖는다'는 것($A=S^1\\cup e_1$의 경우처럼 둘 다 $S^2$의 호몰로지)이 몫사상이 호모토피 동치라는 뜻은 전혀 아니다 — 유도사상 자체를 봐야 한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 30) 사상 $f:X\\to X$의 사상토러스 $T_f$에 대한 장완전열 $\\cdots\\to H_n(X)\\xrightarrow{\\,1-f_*\\,}H_n(X)\\to H_n(T_f)\\to H_{n-1}(X)\\to\\cdots$ (예 2.48)을 써서 다음 사상들의 사상토러스의 호몰로지를 계산하라. (a) 반사 $S^2\\to S^2$, (b) 차수 $2$인 사상 $S^2\\to S^2$, (c) 한 인수에서는 항등, 다른 인수에서는 반사인 $S^1\\times S^1\\to S^1\\times S^1$, (d) 두 인수 모두에서 반사인 사상, (e) 두 인수를 맞바꾼 뒤 한 인수를 반사하는 사상.",
+          "hint": "할 일은 각 경우에 $f_*$를 $H_1$과 $H_2$의 기저 $a=[S^1\\times pt]$, $b=[pt\\times S^1]$, $a\\wedge b$에서 **행렬로** 적고 $1-f_*$의 핵과 여핵을 구하는 것뿐이다. 완전열은 $0\\to\\operatorname{coker}(1-f_*)_n\\to H_n(T_f)\\to\\ker(1-f_*)_{n-1}\\to0$으로 끊기며, 오른쪽 항이 자유일 때 이 확장은 분열한다. 반사는 해당 원 위에서 $-1$이고, $H_2$에서의 부호는 두 인수의 부호의 곱임에 유의하라.",
+          "solution": "(a) $f_*=-1$ on $H_2$, $1-f_*=2$; $H_0$에서는 $1-f_*=0$. $H_3(T_f)=\\ker(2)=0$, $H_2(T_f)=\\operatorname{coker}(2)=\\mathbb{Z}_2$, $H_1(T_f)=\\ker(0:H_0\\to H_0)=\\mathbb{Z}$, $H_0=\\mathbb{Z}$.\\n(b) $f_*=2$ on $H_2$, $1-f_*=-1$(동형). $H_3=0$, $H_2=0$, $H_1=\\mathbb{Z}$, $H_0=\\mathbb{Z}$ — $S^1$과 같은 호몰로지.\\n(c) $f_*(a)=a,\\ f_*(b)=-b$이므로 $H_1$에서 $1-f_*=\\mathrm{diag}(0,2)$; $H_2$에서 $f_*=-1$이므로 $1-f_*=2$. 결과: $H_3=\\ker(2)=0$; $H_2$: $0\\to\\mathbb{Z}_2\\to H_2(T_f)\\to\\ker\\mathrm{diag}(0,2)=\\mathbb{Z}\\to0$이므로 $H_2(T_f)\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_2$; $H_1$: $0\\to\\operatorname{coker}\\mathrm{diag}(0,2)=\\mathbb{Z}\\oplus\\mathbb{Z}_2\\to H_1(T_f)\\to\\mathbb{Z}\\to0$이므로 $H_1(T_f)\\cong\\mathbb{Z}^2\\oplus\\mathbb{Z}_2$; $H_0=\\mathbb{Z}$. 검산: $\\chi=1-2+1-0=0$ (닫힌 3-다양체).\\n(d) $f_*=\\mathrm{diag}(-1,-1)$ on $H_1$이므로 $1-f_*=\\mathrm{diag}(2,2)$; $H_2$에서 $f_*=(-1)(-1)=+1$이므로 $1-f_*=0$. 결과: $H_3(T_f)=\\mathbb{Z}$, $H_2(T_f)=\\mathbb{Z}$, $H_1(T_f)\\cong\\mathbb{Z}\\oplus(\\mathbb{Z}_2)^2$, $H_0=\\mathbb{Z}$.\\n(e) $f_*(a)=-b,\\ f_*(b)=a$이므로 $1-f_*=\\begin{pmatrix}1&-1\\\\1&1\\end{pmatrix}$, 행렬식 $2$: 단사이고 여핵은 $\\mathbb{Z}_2$(스미스 표준형 $\\mathrm{diag}(1,2)$). $H_2$에서는 $f_*(a\\wedge b)=(-b)\\wedge a=a\\wedge b$이므로 $1-f_*=0$. 결과: $H_3(T_f)=\\mathbb{Z}$, $H_2(T_f)=\\mathbb{Z}$, $H_1(T_f)\\cong\\mathbb{Z}\\oplus\\mathbb{Z}_2$, $H_0=\\mathbb{Z}$. **일반화**: 사상토러스의 호몰로지는 $1-f_*$의 핵(위 차원에 기여)과 여핵(같은 차원에 기여)만으로 결정되며, $\\det(1-f_*)\\ne0$이면 그 차원의 자유 부분이 사라지고 꼬임만 남는다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 28) 마이어–비토리스열을 써서 다음 공간의 호몰로지군을 계산하라. (a) 토러스 $S^1\\times S^1$에 뫼비우스 띠를, 그 경계원에서 토러스의 원 $S^1\\times\\{x_0\\}$로 가는 위상동형을 통해 붙인 공간 $X$. (b) $\\mathbb{RP}^2$에 뫼비우스 띠를, 그 경계원에서 표준적인 $\\mathbb{RP}^1\\subset\\mathbb{RP}^2$로 가는 위상동형을 통해 붙인 공간 $Y$.",
+          "hint": "$A=$(토러스 또는 $\\mathbb{RP}^2$의 근방)$\\simeq$ 원래 공간, $B=$ 뫼비우스 띠 $\\simeq S^1$(중심원), $A\\cap B\\simeq S^1$(붙인 원)으로 잡아라. 계산의 전부는 $\\varphi:H_1(A\\cap B)\\to H_1(A)\\oplus H_1(B)$를 적는 것이다. 두 가지 사실이 결정적이다: 뫼비우스 띠의 **경계원은 중심원을 두 번 감는다**(차수 2), 그리고 $[\\mathbb{RP}^1]$은 $H_1(\\mathbb{RP}^2)=\\mathbb{Z}_2$의 **생성원**이다.",
+          "solution": "(a) $H_1(A)=\\mathbb{Z}\\langle a\\rangle\\oplus\\mathbb{Z}\\langle b\\rangle$, $H_1(B)=\\mathbb{Z}\\langle c\\rangle$, $H_1(A\\cap B)=\\mathbb{Z}$이고 $\\varphi(1)=(a,\\,2c)$. 이는 단사이므로 MV열 $0\\to H_2(A)\\oplus H_2(B)=\\mathbb{Z}\\to H_2(X)\\to\\ker\\varphi=0$에서 $H_2(X)=\\mathbb{Z}$. 또 $H_1(X)=\\operatorname{coker}\\varphi=\\mathbb{Z}^3/\\langle(1,0,2)\\rangle$이고 첫 성분의 계수가 $1$이므로 기저를 $a'=a+2c$로 바꾸어 $\\mathbb{Z}^3/\\langle a'\\rangle\\cong\\mathbb{Z}^2$. 따라서 $$H_0(X)=\\mathbb{Z},\\ H_1(X)=\\mathbb{Z}^2,\\ H_2(X)=\\mathbb{Z},\\ H_i=0\\ (i\\ge3).$$ 검산: $\\chi(X)=\\chi(T^2)+\\chi(M)-\\chi(S^1)=0+0-0=0$, 호몰로지 쪽도 $1-2+1=0$.\\n(b) $H_1(A)=H_1(\\mathbb{RP}^2)=\\mathbb{Z}_2$, $H_1(B)=\\mathbb{Z}\\langle c\\rangle$, $\\varphi(1)=(1\\bmod 2,\\,2c)$. 둘째 성분에서 단사이므로 $H_2(Y)\\to\\ker\\varphi=0$이고 $H_2(A)\\oplus H_2(B)=0$이므로 $H_2(Y)=0$. $H_1(Y)=\\operatorname{coker}\\varphi=(\\mathbb{Z}_2\\oplus\\mathbb{Z})/\\langle(1,2)\\rangle$. 이를 $\\mathbb{Z}^2/\\langle(2,0),(1,2)\\rangle$로 제시하면 행렬 $\\begin{pmatrix}2&0\\\\1&2\\end{pmatrix}$의 행렬식이 $4$, 원소들의 최대공약수가 $1$이므로 스미스 표준형은 $\\mathrm{diag}(1,4)$, 즉 $$H_0(Y)=\\mathbb{Z},\\quad H_1(Y)=\\mathbb{Z}_4,\\quad H_i(Y)=0\\ (i\\ge2).$$ 검산: $\\chi(Y)=1+0-0=1$, 호몰로지 쪽도 $1-0+0=1$. **관찰**: (b)에서 $\\mathbb{Z}_4$가 나오는 이유는 '뫼비우스 띠의 차수 2'와 '$\\mathbb{RP}^2$의 차수 2'가 곱해져 4가 되는 것이며, 이는 두 조각을 아무리 잘 알아도 겹침에서의 유도사상을 정확히 세지 않으면 절대 얻을 수 없는 정보다.",
+          "visualization": {
+            "type": "torus_2d",
+            "R": 2,
+            "r": 0.8,
+            "squash": 0.42,
+            "show_longitude": true,
+            "show_meridian": false,
+            "labels": {
+              "longitude": "a"
+            },
+            "caption": "연습문제 28(a): 토러스의 원 $a=S^1\\times\\{x_0\\}$(능선)을 따라 뫼비우스 띠의 경계원을 붙인다. MV에서 $H_1(A\\cap B)=\\mathbb{Z}\\to H_1(T^2)\\oplus H_1(M)$, $1\\mapsto(a,2c)$가 유일한 계산 대상이다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 19) $m<n$에 대해 $H_i(\\mathbb{RP}^n/\\mathbb{RP}^m)$을 셀 호몰로지로 계산하라. 여기서 $\\mathbb{RP}^n$은 표준 CW 구조를 갖고 $\\mathbb{RP}^m$은 그 $m$-스켈레톤이다.",
+          "hint": "$\\mathbb{RP}^n/\\mathbb{RP}^m$의 셀은 한 개의 0-셀(뭉개진 $\\mathbb{RP}^m$)과 $e^{m+1},\\dots,e^n$이다. $k\\ge m+2$에서 경계 사상은 $\\mathbb{RP}^n$에서와 같은 $d_k=(1+(-1)^k)$이지만, $d_{m+1}$은 **목표가 뭉개졌으므로 $0$**이 된다. 이 한 칸의 차이가 $m$의 홀짝에 따라 답을 갈라놓는다.",
+          "solution": "축소 셀 사슬 복합체는 $0\\to\\mathbb{Z}\\xrightarrow{d_n}\\mathbb{Z}\\to\\cdots\\to\\mathbb{Z}\\ (\\text{차원 } m+1)\\to0$이고, $m+2\\le k\\le n$에서 $d_k=2$ ($k$ 짝수), $d_k=0$ ($k$ 홀수)이며 $d_{m+1}=0$이다.\\n• $n=m+1$인 경우: $\\mathbb{RP}^{m+1}/\\mathbb{RP}^m\\cong S^{m+1}$이므로 $\\widetilde H_{m+1}=\\mathbb{Z}$, 나머지는 $0$.\\n• $n\\ge m+2$인 경우($i\\le m$ 또는 $i>n$에서는 $\\widetilde H_i=0$):\\n  – $i=n$: $n$이 홀수면 $d_n=0$이므로 $\\widetilde H_n=\\mathbb{Z}$, $n$이 짝수면 $d_n=2$가 단사이므로 $\\widetilde H_n=0$.\\n  – $i=m+1$이고 $m$이 홀수인 경우: $d_{m+1}=0$이고 $d_{m+2}=0$($m+2$가 홀수)이므로 $\\widetilde H_{m+1}=\\mathbb{Z}$.\\n  – 그 밖의 $m+1\\le i<n$: $i$가 홀수면 $\\ker d_i=\\mathbb{Z}$, $\\operatorname{im}d_{i+1}=2\\mathbb{Z}$이므로 $\\widetilde H_i=\\mathbb{Z}_2$; $i$가 짝수면 $d_i=2$가 단사이므로 $\\widetilde H_i=0$.\\n예: $m$이 짝수, $n$이 홀수, $n\\ge m+3$이면 $\\widetilde H_i=\\mathbb{Z}_2$ ($m+1\\le i<n$, $i$ 홀수), $\\widetilde H_n=\\mathbb{Z}$. $m$이 홀수이면 여기에 $\\widetilde H_{m+1}=\\mathbb{Z}$가 추가된다(예: $\\mathbb{RP}^{m+2}/\\mathbb{RP}^m$은 $m$이 홀수일 때 $S^{m+1}\\vee S^{m+2}$의 호몰로지를 갖는다). 물론 $H_0=\\mathbb{Z}$. **교훈**: 몫을 취하는 것은 '스켈레톤을 뭉개어 그 차원으로 들어가는 경계 사상 하나를 $0$으로 만드는 일'이고, 그 한 칸이 $\\mathbb{Z}_2$였을 자리를 $\\mathbb{Z}$로 바꿔 놓는다. 이는 연습문제 14에서 $n$이 홀수일 때 $\\mathbb{RP}^n\\to\\mathbb{RP}^n/\\mathbb{RP}^{n-1}$이 $H_n$에서 동형이라는 사실의 일반형이다."
+        },
+        {
+          "type": "ox",
+          "question": "$\\deg f=0$인 사상 $f:S^n\\to S^n$은 결코 전사가 될 수 없다.",
+          "answer": "X",
+          "explanation": "연습문제 4가 정확히 반례를 요구한다. 적도를 뭉개는 사상 $S^n\\to S^n\\vee S^n$ 뒤에 한 인수에는 항등, 다른 인수에는 반사를 적용하고 다시 접으면, 각 반구가 $S^n$ 전체로 전사하는 사상 $f$를 얻는다. 차수는 $1+(-1)=0$이지만 $f$는 전사다. (연습문제 1의 증명에서 쓴 논리는 그 반대 방향 — '전사가 아니면 차수가 0'이다. 역은 성립하지 않는다.)"
+        },
+        {
+          "type": "ox",
+          "question": "$H_2$에서의 유도사상을 보면, 토러스 $S^1\\times S^1$에서 $S^2$로 가는 사상 중 널호모토픽이 아닌 것이 존재하지만, 반대로 $S^2$에서 $S^1\\times S^1$로 가는 사상은 모두 널호모토픽이다.",
+          "answer": "O",
+          "explanation": "연습문제 12의 두 주장이다. 앞쪽: $S^1\\vee S^1$을 한 점으로 뭉개는 몫사상 $q:S^1\\times S^1\\to S^2$는 CW 구조에서 토러스의 유일한 2-셀을 $S^2$의 2-셀로 보내므로 $H_2$에서 동형을 유도한다. 널호모토픽 사상은 $H_2$에서 $0$을 유도하므로 $q$는 널호모토픽이 아니다. 뒤쪽: $S^1\\times S^1$의 보편피복공간은 축약가능한 $\\mathbb{R}^2$이고 $S^2$는 단연결이므로 임의의 사상 $S^2\\to S^1\\times S^1$은 $\\mathbb{R}^2$로 들어올려진다. $\\mathbb{R}^2$가 축약가능하니 들어올린 사상이 널호모토픽이고, 내려보내면 원래 사상도 널호모토픽이다."
+        },
+        {
+          "type": "ox",
+          "question": "종수 $2$의 닫힌 유향곡면 $M_2$는 종수 $3$의 곡면 $M_3$의 유한겹 피복공간이 될 수 있다.",
+          "answer": "X",
+          "explanation": "연습문제 22·23에 의해 $n$겹 피복 $M_g\\to M_h$가 있으면 $\\chi$가 곱셈적으로 행동하여 $2-2g=n(2-2h)$, 즉 $g=n(h-1)+1$이어야 한다. $h=3$이면 $g=2n+1$은 항상 홀수이므로 $g=2$는 불가능하다. (덧붙여 $n\\ge1$이므로 피복공간의 종수는 결코 밑공간의 종수보다 작을 수 없다 — 오일러 지표라는 '랭크 정보 하나'만으로도 이런 강한 금지가 나온다는 점이 요점이다.)"
+        },
+        {
+          "type": "conceptual",
+          "question": "같은 공간의 호몰로지를 구하는 데에 셀 호몰로지와 마이어–비토리스열이라는 두 전략이 있다. 이 절의 연습문제들을 근거로, 어떤 상황에서 어느 쪽을 택해야 하며 각 전략에서 '실제로 어려운 단계'는 무엇인지 설명하라. 또 오일러 지표는 이 둘과 어떻게 다른 역할을 하는가?",
+          "hint": "연습문제 9·10·13·19(셀)과 28·29·30(MV)을 비교하라. 각각의 계산에서 답을 결정한 **단 하나의 데이터**가 무엇이었는지를 떠올려 보라 — 한쪽은 붙임 단어의 지수 합, 다른 쪽은 겹침에서의 유도사상이다. 그리고 연습문제 21~23에서 $\\chi$가 무엇을 해 주었는지도 함께 보라.",
+          "answer": "셀 호몰로지는 공간이 **명시적 CW 구조**로 주어졌을 때, 즉 붙임 사상이 스켈레톤 위를 어떻게 도는지 읽을 수 있을 때 최선이다(연습문제 9, 10, 13, 19). 여기서 대수는 사실상 자동이며(사슬군은 셀 개수로 결정되고 경계 사상은 정수 행렬), 진짜 어려운 단계는 **붙임 사상의 부호 있는 감김 횟수를 정확히 세는 기하적 판독**이다 — 9(c)에서 외부 원과 내부 원의 방향이 반대여서 지수 합이 $-1+1+1=1$이 된 것, 10에서 반구가 적도를 두 번 감아 $d_2=2a$가 된 것, 19에서 몫을 취해 $d_{m+1}$이 $0$으로 바뀐 것이 모두 그 예다. 마이어–비토리스는 반대로 셀 구조를 잡기 번거롭지만 '아는 두 조각을 어떤 부분공간을 따라 붙였다'는 서술이 자연스러운 공간에 쓴다(연습문제 28, 29, 32). 조각들의 호몰로지는 이미 알고 있으므로 진짜 어려운 단계는 **겹침의 호몰로지에서 두 조각으로 가는 포함 유도사상 $\\varphi$를 정확히 적는 것** 하나로 압축된다 — 28에서 뫼비우스 띠 경계원의 차수 2와 $[\\mathbb{RP}^1]$이 $\\mathbb{Z}_2$의 생성원이라는 두 사실이 $\\mathbb{Z}_4$를 만들어 냈듯이, $\\varphi$의 핵이 위 차원의 새 순환을 만들고 여핵이 그 차원의 답을 준다. 두 전략은 결국 '공간을 잘게 자르느냐(셀), 크게 두 조각으로 자르느냐(MV)'의 차이다. 오일러 지표는 이들과 층위가 다르다 — 군 자체가 아니라 **교대 랭크 하나**만 보는 대신, 셀만 세면 되고 곱·합집합·피복공간에 대해 완벽히 형식적으로 행동한다(연습문제 20~23, 41). 그래서 호몰로지군을 전혀 계산하지 않고도 '$M_2$는 $M_3$을 덮을 수 없다'처럼 존재 자체를 차단하는 데 쓰이며, 정리 2.44가 보증한 대로 어떤 CW 구조로 세도, 심지어 어떤 체 계수로 재도 같은 값이 나온다."
+        }
+      ]
+    }
+  ]
+}

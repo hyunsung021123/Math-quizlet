@@ -108,7 +108,7 @@
 
 | 044 | [x] | 2.2.4 Homology with Coefficients | section | `044__AlgebraicTopol__2_2_4_HomologywithCoefficients.txt` |
 
-| 045 | [ ] | 2.2.ex Exercises | exercises | `045__AlgebraicTopol__2_2_ex_Exercises__EX.txt` |
+| 045 | [x] | 2.2.ex Exercises | exercises | `045__AlgebraicTopol__2_2_ex_Exercises__EX.txt` |
 
 | 046 | [ ] | 2.3 The Formal Viewpoint | section | `046__AlgebraicTopol__2_3_TheFormalViewpoint.txt` |
 
