@@ -75,16 +75,17 @@
       "section:2": true,
       "section:4": true,
       "section:3": true,
-      "section:5": true
+      "section:5": true,
+      "section:6": true
     }
   },
   "lastPos": {
     "topicId": "chapter_8_conformal_mappings",
     "view": {
       "type": "section",
-      "index": 6
+      "index": 7
     },
-    "cardIndex": 6
+    "cardIndex": 0
   },
-  "updatedAt": "2026-07-29T16:05:47.138Z"
+  "updatedAt": "2026-07-29T16:06:05.245Z"
 }
