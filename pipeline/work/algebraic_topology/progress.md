@@ -114,7 +114,7 @@
 
 | 047 | [x] | 2.3.1 Axioms for Homology | section | `047__AlgebraicTopol__2_3_1_AxiomsforHomology.txt` |
 
-| 048 | [ ] | 2.3.2 Categories and Functors | section | `048__AlgebraicTopol__2_3_2_CategoriesandFunctors.txt` |
+| 048 | [x] | 2.3.2 Categories and Functors | section | `048__AlgebraicTopol__2_3_2_CategoriesandFunctors.txt` |
 
 | 049 | [ ] | 2.3.ex Exercises | exercises | `049__AlgebraicTopol__2_3_ex_Exercises__EX.txt` |
 
