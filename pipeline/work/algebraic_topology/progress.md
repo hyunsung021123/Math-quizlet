@@ -116,7 +116,7 @@
 
 | 048 | [x] | 2.3.2 Categories and Functors | section | `048__AlgebraicTopol__2_3_2_CategoriesandFunctors.txt` |
 
-| 049 | [ ] | 2.3.ex Exercises | exercises | `049__AlgebraicTopol__2_3_ex_Exercises__EX.txt` |
+| 049 | [x] | 2.3.ex Exercises | exercises | `049__AlgebraicTopol__2_3_ex_Exercises__EX.txt` |
 
 | 050 | [ ] | 2.A Homology and Fundamental Group | section | `050__AlgebraicTopol__2_A_HomologyandFundamentalGrou.txt` |
 
