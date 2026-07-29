@@ -111,7 +111,7 @@
 | 065 | [x] | 8.4.4 The mapping formula | section | `065__ComplexAnalysi__8_4_4_Themappingformula.txt` |
 | 066 | [x] | 8.4.5 Return to elliptic integrals | section | `066__ComplexAnalysi__8_4_5_Returntoellipticintegrals.txt` |
 | 067 | [x] | 8.5 Exercises | exercises | `067__ComplexAnalysi__8_5_Exercises__EX.txt` |
-| 068 | [ ] | 8.6 Problems | exercises | `068__ComplexAnalysi__8_6_Problems__EX.txt` |
+| 068 | [x] | 8.6 Problems | exercises | `068__ComplexAnalysi__8_6_Problems__EX.txt` |
 
 ## 9. An Introduction to Elliptic Functions
 

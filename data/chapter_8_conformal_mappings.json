@@ -5598,6 +5598,432 @@
           "answer": "**(i) 슈바르츠 보조정리 계열**은 한 문장으로 '$\\mathbb{D}$ 를 자신으로 보내는 정칙사상은 쌍곡거리를 늘릴 수 없다'로 요약된다. 원래의 슈바르츠 보조정리는 원점이라는 특별한 점을 요구하지만, $\\mathbb{D}$ 의 자기동형사상군이 추이적(어떤 점이든 원점으로 옮길 수 있다)이므로 $\\psi_w,\\psi_{f(w)}$ 로 앞뒤를 감싸 임의의 점에서의 진술로 승격시킬 수 있다 — 그 결과가 준쌍곡거리의 축소성과 슈바르츠–픽 보조정리(연습문제 13)이고, 10·11번은 그 정량적 사용례, 12번(부동점)과 14번($\\mathbb{H}\\to\\mathbb{D}$ 등각사상의 분류)은 등호 성립 조건의 사용례다.\\n\\n**(ii) 슈바르츠–크리스토펠 계열**은 '다각형으로 가는 등각사상은 반드시 $\\int\\prod(\\zeta-A_j)^{-\\beta_j}d\\zeta$ 꼴이고, 그 지수들은 $\\sum_j\\beta_j=2$ 라는 하나의 제약만 받는다'로 요약된다. 20번(직사각형), 21번(삼각형과 그 퇴화), 22번(원판 버전), 23번(정$n$각형)은 모두 이 제약을 어떻게 배분하느냐의 문제이고, 24번은 그 적분이 낳은 완전타원적분 자체의 항등식이다. 여기서 $\\sum\\beta_j=2$ 는 '경계를 한 바퀴 돌 때 외각의 총합이 $2\\pi$'라는 기하학적 사실의 대수적 그림자이며, 21번의 (b)(c)는 이 예산이 모자랄 때 도형이 무한대로 새어 나가는 모습을, 22번의 증명은 이 등식이 유리일차 치환에서 $(cw+d)^{-2}$ 를 정확히 상쇄시키는 모습을 보여 준다.\\n\\n**두 축의 만나는 지점은 '유일성을 자유도 셈으로 확보한다'는 전략이다.** 두 계열 모두 리만 사상정리류의 **존재** 정리에서 출발해, 정규화를 최대한 밀어붙여 남은 미지 매개변수를 세고, 남은 것을 다른 논거로 잠가 **동일성**에 도달한다. 그 정규화를 가능케 하는 것이 바로 연습문제 15다 — $\\mathbb{H}$ 의 자기동형사상은 실축의 세 점을 자유롭게 지정할 수 있게 해 주고(존재), 세 점을 고정하면 항등사상이 되어 더 이상 여유를 주지 않는다(유일성). 축 (i)에서는 이 '삼점 성질'의 원판 버전(원점을 고정하면 회전뿐)이 12번·14번의 결론을 못 박고, 축 (ii)에서는 그것이 8.4.5에서 $-1,0,1\\mapsto-K,0,K$ 라는 정규화를 정당화하면서 동시에 네 번째 꼭짓점 $1/\\ell$ 을 우리 손에서 빼앗는다 — 그래서 남은 하나의 미지량을 잠그기 위해 $K/K'$ 의 순증가성이라는 **별도의** 논거가 필요했던 것이다. 요컨대 8장 전체가 '존재 정리 + 자유도 셈 + 단조성/등호조건 = 명시적 공식'이라는 한 가지 문법으로 쓰여 있다."
         }
       ]
+    },
+    {
+      "section_title": "8.6 문제 (Problems)",
+      "step1_big_picture": {
+        "context": "8.5의 연습문제들이 본문의 빈칸을 메우는 작업이었다면, 이 마지막 절의 아홉 문제는 8장의 각 결과를 **한 층 더 높은 관점으로 끌어올린다**(별표 $^*$ 가 붙은 것들은 더 깊은 아이디어를 요구한다). 문제 1·2는 '등각성'이라는 말 자체를 해부해 정칙성과 각 보존이 정확히 동등함을 밝히고, 문제 3·4는 8.5의 슈바르츠–픽 보조정리를 푸앵카레 계량(Poincaré metric)이라는 **기하학**으로, $\\mathbb{D}$ 의 자기동형사상군을 행렬군 $SU(1,1)$ 이라는 **대수학**으로 번역한다. 문제 5는 유계 정칙함수의 영점이 경계에 얼마나 몰릴 수 있는지를 묻고, 문제 6은 8.5의 연습문제 18(경계 확장)을 조르당 곡선까지 확장하며, 문제 7은 8.3에서 몬텔 정리로 '존재만' 보였던 리만 사상정리를 쾨베(Koebe)의 방식으로 **구성적으로** 다시 증명한다. 문제 8은 단사 정칙함수의 계수 문제(비버바흐 추측)를, 문제 9는 8.4.5의 완전타원적분과 가우스의 산술–기하평균을 잇는다.",
+        "hidden_intuition": "이 아홉 문제는 8장의 세 결과를 각각 '한 단계 승격'시키는 것으로 읽으면 정확히 이해된다.\\n\\n**(i) 부등식 → 기하학.** 슈바르츠–픽 보조정리 $\\dfrac{|f'(z)|}{1-|f(z)|^2}\\le\\dfrac{1}{1-|z|^2}$ 는 겉보기에 무미건조한 부등식이지만, 좌·우변을 각각 '$\\mathbb{D}$ 위에 놓인 계량 $ds=\\dfrac{|dz|}{1-|z|^2}$ 로 잰 벡터의 길이'로 읽으면 곧바로 **'정칙사상은 쌍곡거리를 늘리지 않는다'** 라는 기하학적 문장이 된다(문제 3). 여기서 결정적인 감각은 '무한소를 적분해 대역적 거리를 만든다'는 리만 계량의 관점이다 — 경계에 가까워지면 분모 $1-|z|^2$ 가 $0$ 이 되므로 같은 유클리드 길이가 무한히 긴 쌍곡 길이를 갖게 되고, 그래서 $\\partial\\mathbb{D}$ 는 '무한히 먼 곳'이 된다. 자기동형사상은 이 계량의 등거리사상이고, 그것이 곧 $\\mathbb{D}$ 를 균질한(homogeneous) 공간으로 만드는 이유다. 문제 4는 같은 이야기를 행렬로 옮긴 것 — 에르미트 형식 $|z_1|^2-|z_2|^2$ 를 보존하는 행렬군 $SU(1,1)$ 이 정확히 $\\mathrm{Aut}(\\mathbb{D})$ 라는 사실은, '단위원판'이라는 것이 애초에 $z_1\\bar w_1-z_2\\bar w_2$ 라는 부호 있는 형식의 '음이 아닌 쪽'이었음을 말해 준다.\\n\\n**(ii) 존재 → 구성.** 8.3의 리만 사상정리 증명은 '$|F'(0)|$ 을 최대화하는 함수를 정규족에서 뽑아낸다'는 극값 논법이었다 — 답이 있다는 것만 알려 주고 어떻게 생겼는지는 침묵한다. 문제 7의 쾨베 방식은 정반대다: 영역을 조금씩 '부풀리는' 확대사상(expansion) $f_n$ 을 명시적으로 만들어($\\psi_\\beta\\circ\\sqrt{\\;}\\circ\\psi_\\alpha$, 즉 자기동형사상–제곱근–자기동형사상의 3단 조립) 합성을 반복한다. 여기서의 통찰은 **'제곱근이 영역을 부풀린다'** 는 것 — $|w|<1$ 에서 $\\sqrt{|w|}>|w|$ 이므로 제곱근을 취하면 원점에서 밀려나고, 그 밀림을 자기동형사상으로 원점 근방에 다시 배치하면 내반지름이 커진다. 그리고 확대의 정도가 $|f'(0)|=\\dfrac{1+r_{\\mathcal{K}}}{2\\sqrt{r_{\\mathcal{K}}}}$ 라는 한 개의 수로 정량화되기 때문에, '더 부풀릴 여지가 없어지는 것($|f_n'(0)|\\to1$)' 과 '이미 원판을 다 채운 것($r_{\\mathcal{K}_n}\\to1$)' 이 동등해진다. 존재 증명이 극값을 향해 '한 번에 점프'하는 대신, 구성 증명은 그 극값을 향해 '단조증가하며 걸어간다'.\\n\\n**(iii) 특수함수 → 알고리즘.** 8.4.5에서 직사각형의 종횡비를 결정한 $K(k)$ 는 닫힌 형태가 없는 초월적 적분이다. 그런데 연습문제 24(b)의 란덴 변환 $K(k)=\\frac{2}{1+\\tilde k}K\\!\\left(\\frac{1-\\tilde k}{1+\\tilde k}\\right)$ 을 뒤집어 읽으면, 그것은 정확히 '두 수를 산술평균과 기하평균으로 바꾸는 조작'에 대한 적분의 **불변성**이다(문제 9). 산술–기하평균 반복은 오차가 이차적으로 줄어드는 초고속 알고리즘이므로, 이 불변성 하나로 $K(k)$ 와 $\\pi$ 를 수십 자리까지 계산할 수 있다. '적분의 대칭성이 곧 수치 알고리즘이 된다'는 이 현상이 가우스가 남긴 가장 실용적인 유산 중 하나다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Remark",
+          "name": "참고 (문제 지형도)",
+          "formal_statement": "아홉 문제의 배치는 다음과 같다. **문제 1, 2 — 등각성의 해부**: '각의 크기만 보존(isogonal)', '모든 방향으로 같은 배율(isotropic)', '방향 있는 각의 보존'이라는 세 개념이 정칙성(또는 그 켤레의 정칙성)과 어떻게 맞물리는지. **문제 3$^*$, 4$^*$ — 쌍곡기하와 군**: 푸앵카레 계량·쌍곡거리와 슈바르츠–픽 보조정리의 기하학적 의미, 그리고 $SU(1,1)/\\{\\pm1\\}\\cong\\mathrm{Aut}(\\mathbb{D})$. **문제 5 — 영점의 밀도**: 상반평면의 유계 정칙함수가 $ir_n$ 에서 영이 될 때 $\\sum r_n=\\infty$ 이면 항등적으로 $0$ (10장의 모듈러 함수와 연결된다). **문제 6$^*$ — 조르당 곡선으로의 확장**: 8.5의 연습문제 18의 결론이 $\\gamma$ 가 단순히 닫힌 단순 연속 곡선일 때에도 성립한다는 카라테오도리(Carathéodory)의 정리로, 증명에는 새로운 아이디어가 필요하므로 여기서는 사실만 기록한다. **문제 7$^*$ — 쾨베의 구성적 증명**: 리만 사상정리를 명시적인 확대사상의 열로 다시 증명. **문제 8$^*$ — 비버바흐 추측**: 계수가 실수인 경우의 $|a_n|\\le n$ (일반적인 경우는 드브랑주(de Branges)가 증명). **문제 9$^*$ — 가우스의 산술–기하평균**: 완전타원적분과 $\\mathrm{AGM}$ 의 연결."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (문제 1·2: 등각성의 세 사촌)",
+          "formal_statement": "$f$ 가 점 $z_0$ 근방에서 정의된 복소값 $C^1$ 함수라 하자.\\n$\\bullet$ $f$ 가 $z_0$ 에서 **등각(isogonal)** 이라는 것은, $\\gamma(0)=\\eta(0)=z_0$ 인 임의의 두 매끄러운 곡선이 $z_0$ 에서 각 $\\theta$ ($|\\theta|<\\pi$) 를 이룰 때 $f\\circ\\gamma$ 와 $f\\circ\\eta$ 가 $t=0$ 에서 이루는 각 $\\theta'$ 이 $|\\theta'|=|\\theta|$ 를 만족하는 것이다(각의 **크기**만 보존).\\n$\\bullet$ $f$ 가 $z_0$ 에서 **등방(isotropic)** 이라는 것은 극한 $$\\lim_{r\\to0}\\frac{|f(z_0+re^{i\\theta})-f(z_0)|}{r}$$ 이 존재하고, $0$ 이 아니며, $\\theta$ 에 의존하지 않는 것이다(모든 방향으로 같은 배율).\\n$\\bullet$ 두 영이 아닌 복소수 $z,w$ 가 (그 순서로) 이루는 **방향 있는 각(oriented angle)** $\\alpha\\in(-\\pi,\\pi]$ 은 두 양 $$\\frac{(z,w)}{|z||w|},\\qquad\\frac{(z,-iw)}{|z||w|}$$ 에 의해 유일하게 결정된다(각각 $\\cos\\alpha$, $\\sin\\alpha$). 여기서 $(z,w)=\\mathrm{Re}(z\\bar{w})$ 는 $\\mathbb{R}^2$ 의 통상적인 내적이다. 두 매끄러운 곡선 $\\gamma,\\eta$ 가 $\\gamma(t_0)=\\eta(t_0)=z_0$ 에서 만나고 $\\gamma'(t_0),\\eta'(t_0)\\neq0$ 이면, 두 곡선이 $z_0$ 에서 이루는 각을 두 접벡터 $\\gamma'(t_0),\\eta'(t_0)$ 가 이루는 방향 있는 각으로 정의한다. $f$ 가 $z_0$ 에서 **각을 보존한다(preserves angles)** 는 것은, $z_0$ 에서 만나는 임의의 두 매끄러운 곡선 $\\gamma,\\eta$ 에 대해 $\\gamma,\\eta$ 가 $z_0$ 에서 이루는 각이 $f\\circ\\gamma,f\\circ\\eta$ 가 $f(z_0)$ 에서 이루는 각과 (방향까지 포함하여) 같은 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 2: 각의 보존 $\\iff$ 정칙성)",
+          "formal_statement": "(a) $f:\\Omega\\to\\mathbb{C}$ 가 정칙이고 $f'(z_0)\\neq0$ 이면 $f$ 는 $z_0$ 에서 각을 보존한다.\\n(b) 역으로 $f:\\Omega\\to\\mathbb{C}$ 가 $z_0\\in\\Omega$ 에서 실미분가능(real-differentiable)하고 야코비 행렬식이 $J_f(z_0)\\neq0$ 이라 하자. $f$ 가 $z_0$ 에서 각을 보존하면 $f$ 는 $z_0$ 에서 (복소)미분가능하며 $f'(z_0)\\neq0$ 이다.",
+          "idea_behind_proof": "(a)의 열쇠는 힌트에 그대로 들어 있다: 접벡터는 $f'(z_0)$ 이라는 **하나의** 복소수가 곱해진 것뿐이므로, 내적이 $|f'(z_0)|^2$ 라는 공통 인수만 얻는다. 분자와 분모에 같은 양수가 곱해지니 $\\cos\\alpha,\\sin\\alpha$ 가 둘 다 변하지 않는다 — '곱셈은 회전 더하기 확대'라는 복소수의 기본 성질이 각 보존의 전부다.\\n(b)의 착상은 '실미분가능'이라는 약한 가정을 볼프 미분(Wirtinger derivative)으로 정리해 보는 것이다. 미분은 $v\\mapsto \\partial f\\,v+\\bar\\partial f\\,\\bar{v}$ 라는 $\\mathbb{R}$-선형 사상인데, 여기에 $\\bar{v}$ 항이 있으면 방향에 따라 회전량이 달라진다. 단위벡터 $e^{i\\theta}$ 를 넣고 상의 편각이 $\\theta$ 보다 **일정한 양만큼** 앞서야 한다는 조건을 쓰면, $\\partial f+\\bar\\partial f\\,e^{-2i\\theta}$ 가 $\\theta$ 에 무관한 편각을 가져야 한다는 식이 나온다. 좌변은 $\\theta$ 가 움직일 때 중심 $\\partial f$, 반지름 $|\\bar\\partial f|$ 인 **원**을 그리는데, 원이 한 반직선 위에 놓이려면 반지름이 $0$ 이어야 한다 — 그것이 곧 코시–리만 방정식 $\\bar\\partial f=0$ 이다. '방향까지 보존'이라는 조건이 켤레항을 죽인다는 것이 핵심이며, 방향을 버리고 크기만 보존하게 하면(문제 1) $\\partial f=0$ 인 반정칙(anti-holomorphic) 가능성이 되살아난다.",
+          "proof_steps": [
+            "1단계 (a): $\\gamma(t_0)=\\eta(t_0)=z_0$ 라 하면 연쇄법칙에서 $(f\\circ\\gamma)'(t_0)=f'(z_0)\\gamma'(t_0)$, $(f\\circ\\eta)'(t_0)=f'(z_0)\\eta'(t_0)$ 이다.",
+            "2단계: $(z,w)=\\mathrm{Re}(z\\bar{w})$ 이므로 $$\\big(f'(z_0)\\gamma'(t_0),\\,f'(z_0)\\eta'(t_0)\\big)=\\mathrm{Re}\\big(f'(z_0)\\gamma'(t_0)\\overline{f'(z_0)\\eta'(t_0)}\\big)=|f'(z_0)|^2\\big(\\gamma'(t_0),\\eta'(t_0)\\big),$$ 그리고 같은 계산으로 $\\big(f'\\gamma',-i f'\\eta'\\big)=|f'|^2\\big(\\gamma',-i\\eta'\\big)$ 이다.",
+            "3단계: 한편 $|f'\\gamma'||f'\\eta'|=|f'|^2|\\gamma'||\\eta'|$ 이므로 방향 있는 각을 결정하는 두 몫 $\\dfrac{(z,w)}{|z||w|}$, $\\dfrac{(z,-iw)}{|z||w|}$ 이 모두 변하지 않는다. 따라서 $\\cos\\alpha,\\sin\\alpha$ 가 보존되어 각이 (방향까지) 보존된다.",
+            "4단계 (b): $f$ 가 $z_0$ 에서 실미분가능하므로 미분은 $\\mathbb{R}$-선형 사상 $$L(v)=A\\,v+B\\,\\bar{v},\\qquad A=\\frac{\\partial f}{\\partial z}(z_0),\\;B=\\frac{\\partial f}{\\partial\\bar{z}}(z_0)$$ 로 쓰이고, $J_f(z_0)=|A|^2-|B|^2\\neq0$ 이다. 접벡터 $v$ 를 갖는 곡선의 상은 접벡터 $L(v)$ 를 가지며, $z_0$ 를 지나는 곡선의 접벡터로는 임의의 $v\\neq0$ 이 나타날 수 있다.",
+            "5단계: 각 보존은 '모든 $v,w\\neq0$ 에 대해 $L(v),L(w)$ 가 이루는 방향 있는 각이 $v,w$ 가 이루는 각과 같다'는 뜻이다. 이는 단위벡터에 대해 $\\arg L(e^{i\\theta})-\\theta$ 가 $\\theta$ 에 무관한 상수 $c$ 라는 것과 동치다. 즉 어떤 $\\rho(\\theta)>0$ 에 대해 $$A e^{i\\theta}+B e^{-i\\theta}=\\rho(\\theta)e^{i(\\theta+c)}\\quad\\Longleftrightarrow\\quad A+Be^{-2i\\theta}=\\rho(\\theta)e^{ic}.$$",
+            "6단계: 좌변은 $\\theta$ 가 움직일 때 중심 $A$, 반지름 $|B|$ 인 원을 그리고, 우변은 편각이 $c$ 로 고정된 반직선 위의 점이다. 원이 반직선 안에 포함되려면 반지름이 $0$ 이어야 하므로 $B=0$.",
+            "7단계: $B=\\dfrac{\\partial f}{\\partial\\bar{z}}(z_0)=0$ 은 $z_0$ 에서의 코시–리만 방정식이고, $f$ 가 그 점에서 실미분가능하므로 $f$ 는 $z_0$ 에서 복소미분가능하며 $f'(z_0)=A$ 이다. 또 $J_f(z_0)=|A|^2\\neq0$ 에서 $f'(z_0)\\neq0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (문제 3: 푸앵카레 계량과 쌍곡거리)",
+          "formal_statement": "$w\\in\\mathbb{C}$ 와 $z\\in\\mathbb{D}$ 에 대하여 **$z$ 에서 $w$ 의 쌍곡 길이(hyperbolic length)** 를 $$\\|w\\|_z=\\frac{|w|}{1-|z|^2}$$ 로 정의한다. $w$ 를 '점 $z$ 에서의 접공간에 놓인 벡터'로 생각하는 것이며, 이 계량을 **푸앵카레 계량(Poincaré metric)** 이라 하고 리만 계량으로는 $$ds^2=\\frac{|dz|^2}{(1-|z|^2)^2}$$ 로 쓴다. 고정된 $w$ 에 대해 $z$ 가 원판의 경계로 갈수록 $\\|w\\|_z\\to\\infty$ 임에 주목하라. 이 무한소 길이를 적분하여 두 점 $z_1,z_2\\in\\mathbb{D}$ 사이의 **쌍곡거리(hyperbolic distance)** 를 $$d(z_1,z_2)=\\inf_{\\gamma}\\int_0^1\\|\\gamma'(t)\\|_{\\gamma(t)}\\,dt$$ 로 정의하는데, 하한은 $z_1$ 과 $z_2$ 를 잇는 모든 매끄러운 곡선 $\\gamma:[0,1]\\to\\mathbb{D}$ 에 대해 취한다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (문제 3(a)(b): 정칙사상은 쌍곡거리를 줄인다)",
+          "formal_statement": "(a) $f:\\mathbb{D}\\to\\mathbb{D}$ 가 정칙이면 모든 $z_1,z_2\\in\\mathbb{D}$ 에 대해 $$d(f(z_1),f(z_2))\\le d(z_1,z_2).$$ 즉 정칙함수는 쌍곡 계량에서 거리를 감소시킨다.\\n(b) $\\mathbb{D}$ 의 자기동형사상 $\\varphi$ 는 쌍곡거리를 보존한다: $d(\\varphi(z_1),\\varphi(z_2))=d(z_1,z_2)$. 역으로 $\\varphi:\\mathbb{D}\\to\\mathbb{D}$ 가 쌍곡거리를 보존하면 $\\varphi$ 또는 $\\bar{\\varphi}$ 가 $\\mathbb{D}$ 의 자기동형사상이다.",
+          "idea_behind_proof": "슈바르츠–픽 보조정리(8.5의 연습문제 13)를 '점 대 점'의 부등식이 아니라 **'접벡터 대 접벡터'** 의 부등식으로 읽는 것이 전부다. $\\dfrac{|f'(z)|}{1-|f(z)|^2}\\le\\dfrac{1}{1-|z|^2}$ 의 양변에 $|\\gamma'(t)|$ 를 곱하면 좌변은 정확히 상곡선 $f\\circ\\gamma$ 의 무한소 쌍곡 길이, 우변은 원래 곡선 $\\gamma$ 의 무한소 쌍곡 길이가 된다. 즉 **슈바르츠–픽 보조정리는 '$f$ 가 푸앵카레 계량을 늘리지 않는다'는 문장의 무한소 판본**이고, 적분하면 대역적 거리 부등식이 된다. 역방향(등거리사상의 분류)에서는 '거리 보존 $\\Rightarrow$ 측지선 보존'을 이용해 정규화한 뒤, 원점 중심의 쌍곡원(=유클리드원)을 보존하는 사상이 회전 또는 반사뿐이라는 점을 쓴다 — 반사가 살아남기 때문에 켤레 $\\bar\\varphi$ 라는 예외가 생긴다.",
+          "proof_steps": [
+            "1단계 (a): $\\gamma:[0,1]\\to\\mathbb{D}$ 가 $z_1,z_2$ 를 잇는 매끄러운 곡선이면 $f\\circ\\gamma$ 는 $f(z_1),f(z_2)$ 를 잇는 매끄러운 곡선이고 $(f\\circ\\gamma)'(t)=f'(\\gamma(t))\\gamma'(t)$.",
+            "2단계: 슈바르츠–픽 보조정리에 의해 각 $t$ 에서 $$\\|(f\\circ\\gamma)'(t)\\|_{f(\\gamma(t))}=\\frac{|f'(\\gamma(t))|\\,|\\gamma'(t)|}{1-|f(\\gamma(t))|^2}\\le\\frac{|\\gamma'(t)|}{1-|\\gamma(t)|^2}=\\|\\gamma'(t)\\|_{\\gamma(t)}.$$",
+            "3단계: $t$ 에 대해 적분하면 $f\\circ\\gamma$ 의 쌍곡 길이가 $\\gamma$ 의 쌍곡 길이 이하다. 따라서 $$d(f(z_1),f(z_2))\\le(\\text{길이의 하한})\\le\\inf_\\gamma(\\gamma\\text{의 쌍곡 길이})=d(z_1,z_2)$$ (첫 부등호는 $\\{f\\circ\\gamma\\}$ 가 상점들을 잇는 곡선들의 부분족이라는 사실에서 나온다).",
+            "4단계 (b, 정방향): $\\varphi$ 가 자기동형사상이면 (a)를 $\\varphi$ 와 $\\varphi^{-1}$ 에 각각 적용하여 $$d(\\varphi(z_1),\\varphi(z_2))\\le d(z_1,z_2)\\le d(\\varphi(z_1),\\varphi(z_2))$$ 를 얻으므로 등호가 성립한다.",
+            "5단계 (b, 역방향 — 개요): $\\varphi$ 가 거리를 보존한다고 하자. $\\varphi$ 는 단사이며 측지선을 측지선으로 보낸다. 자기동형사상을 앞뒤로 합성하여 $\\varphi(0)=0$ 이고 $\\varphi$ 가 구간 $[0,1)$ 의 어떤 점을 고정한다고 가정할 수 있다(문제 3(c)의 정규화). 그러면 $d(0,z)=d(0,\\varphi(z))$ 와 아래 명시적 공식에서 $|\\varphi(z)|=|z|$ 이므로 $\\varphi$ 는 원점 중심의 각 원을 자기 자신으로 보내고, 각 원 위에서 거리를 보존하는 전단사이므로 회전 또는 반사로 작용한다. 정규화에 의해 $\\varphi$ 는 항등사상 또는 켤레 $z\\mapsto\\bar{z}$ 이고, 되돌리면 $\\varphi$ 또는 $\\bar\\varphi$ 가 자기동형사상이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 4(b): $SU(1,1)/\\{\\pm1\\}\\cong\\mathrm{Aut}(\\mathbb{D})$)",
+          "formal_statement": "$\\mathbb{C}^2$ 의 에르미트 형식 $\\langle Z,W\\rangle=z_1\\bar{w}_1-z_2\\bar{w}_2$ 를 보존하고 행렬식이 $1$ 인 $2\\times2$ 복소행렬들의 군을 $SU(1,1)$ 이라 한다. 각 $M=\\begin{pmatrix}a&b\\\\ \\bar{b}&\\bar{a}\\end{pmatrix}\\in SU(1,1)$ 에 유리일차변환 $\\varphi_M(z)=\\dfrac{az+b}{\\bar{b}z+\\bar{a}}$ 를 대응시키면, $M\\mapsto\\varphi_M$ 은 군 동형사상 $$SU(1,1)/\\{\\pm1\\}\\;\\cong\\;\\mathrm{Aut}(\\mathbb{D})$$ 를 유도한다. 구체적인 대응은 $$e^{2i\\theta}\\frac{z-\\alpha}{1-\\bar{\\alpha}z}\\;\\longleftrightarrow\\;\\begin{pmatrix}\\dfrac{e^{i\\theta}}{\\sqrt{1-|\\alpha|^2}}&\\dfrac{-\\alpha e^{i\\theta}}{\\sqrt{1-|\\alpha|^2}}\\\\[4pt] \\dfrac{-\\bar{\\alpha}e^{-i\\theta}}{\\sqrt{1-|\\alpha|^2}}&\\dfrac{e^{-i\\theta}}{\\sqrt{1-|\\alpha|^2}}\\end{pmatrix}$$ 이다.",
+          "idea_behind_proof": "$|z|<1$ 이라는 조건을 '$\\langle Z,Z\\rangle>0$', 즉 $|z_1|^2>|z_2|^2$ 로 다시 쓰는 것이 출발점이다. 그러면 원판의 점 $z$ 는 $\\mathbb{C}^2$ 의 '양의 벡터' $Z=(z_1,z_2)$ 를 스칼라배로 나눈 비 $z=z_2/z_1$ 로 보이고, 형식을 보존하는 선형사상은 자동으로 이 비에 대한 유리일차변환을 유도한다 — 즉 $\\mathbb{D}$ 는 부호 있는 형식이 정하는 '사영적 원판'이고 $\\mathrm{Aut}(\\mathbb{D})$ 는 그 형식의 대칭군이다. 남는 일은 (i) 형식 보존이 실제로 $\\mathbb{D}$ 를 보존함을 계산으로 확인하고, (ii) 8.2.1의 자기동형사상 분류에 나오는 표준형을 행렬로 정규화(행렬식이 $1$ 이 되게 $\\sqrt{1-|\\alpha|^2}$ 로 나누기)하여 전사성을 얻고, (iii) 유리일차변환이 항등이 되는 행렬이 $\\pm I$ 뿐임을 확인하는 것이다. 회전 인자가 $e^{i\\theta}$ 가 아니라 $e^{2i\\theta}$ 로 나타나는 것이 바로 $\\{\\pm1\\}$ 로 나눠야 하는 이유의 흔적이다.",
+          "proof_steps": [
+            "1단계 ($\\mathbb{D}$ 를 보존): $|z|<1$ 일 때 $$|az+b|^2-|\\bar{b}z+\\bar{a}|^2=\\big(|a|^2-|b|^2\\big)|z|^2-\\big(|a|^2-|b|^2\\big)=|z|^2-1<0$$ 이므로 $|\\varphi_M(z)|<1$. 또 $\\bar{b}z+\\bar{a}=0$ 이면 $|z|=|a|/|b|>1$ 이므로 분모는 $\\mathbb{D}$ 에서 영이 되지 않는다. $\\varphi_M$ 은 유리일차변환이고 역행렬 $M^{-1}\\in SU(1,1)$ 이 역사상을 주므로 $\\varphi_M\\in\\mathrm{Aut}(\\mathbb{D})$.",
+            "2단계 (준동형): 유리일차변환과 행렬의 대응은 곱을 합성으로 보내므로 $\\varphi_{MN}=\\varphi_M\\circ\\varphi_N$, 즉 $M\\mapsto\\varphi_M$ 은 군 준동형사상이다.",
+            "3단계 (핵): $\\varphi_M=\\mathrm{id}$ 이면 $az+b=z(\\bar{b}z+\\bar{a})$ 가 모든 $z\\in\\mathbb{D}$ 에서 성립하므로 $\\bar{b}=0$, $b=0$, $a=\\bar{a}$. 즉 $a$ 는 실수이고 $|a|^2=1$ 에서 $a=\\pm1$, 따라서 $M=\\pm I$. 핵은 $\\{\\pm1\\}$ 이다.",
+            "4단계 (전사): 8.2.1의 분류에 의해 $\\mathbb{D}$ 의 임의의 자기동형사상은 $e^{2i\\theta}\\dfrac{z-\\alpha}{1-\\bar{\\alpha}z}$ ($\\theta\\in\\mathbb{R}$, $\\alpha\\in\\mathbb{D}$) 꼴이다. 여기서 $$a=\\frac{e^{i\\theta}}{\\sqrt{1-|\\alpha|^2}},\\qquad b=\\frac{-\\alpha e^{i\\theta}}{\\sqrt{1-|\\alpha|^2}}$$ 로 두면 $|a|^2-|b|^2=\\dfrac{1-|\\alpha|^2}{1-|\\alpha|^2}=1$ 이므로 $M=\\begin{pmatrix}a&b\\\\ \\bar b&\\bar a\\end{pmatrix}\\in SU(1,1)$ 이고 $$\\varphi_M(z)=\\frac{e^{i\\theta}(z-\\alpha)}{e^{-i\\theta}(1-\\bar{\\alpha}z)}=e^{2i\\theta}\\frac{z-\\alpha}{1-\\bar{\\alpha}z}.$$",
+            "5단계: 2·3·4단계에서 $M\\mapsto\\varphi_M$ 은 핵이 $\\{\\pm1\\}$ 인 전사 준동형사상이므로 제1동형정리에 의해 $SU(1,1)/\\{\\pm1\\}\\cong\\mathrm{Aut}(\\mathbb{D})$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (문제 7: 쾨베 영역, 내반지름, 확대사상)",
+          "formal_statement": "**쾨베 영역(Koebe domain)** 이란 $\\mathbb{D}$ 에 포함되고 $\\mathbb{D}$ 전체는 아니며 원점을 포함하는 단연결 영역 $\\mathcal{K}$ 를 말한다. 원점을 포함하는 영역 $\\mathcal{K}\\subset\\mathbb{D}$ 의 **내반지름(inner radius)** 은 $$r_{\\mathcal{K}}=\\sup\\{\\rho\\ge0:\\;D(0,\\rho)\\subset\\mathcal{K}\\}$$ 로 정의한다. 또 정칙 단사사상 $f:\\mathcal{K}\\to\\mathbb{D}$ 가 **확대사상(expansion)** 이라는 것은 $$f(0)=0\\quad\\text{이고}\\quad |f(z)|>|z|\\;\\;(\\forall z\\in\\mathcal{K}\\setminus\\{0\\})$$ 를 만족하는 것이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 (문제 7: 쾨베의 구성적 리만 사상정리)",
+          "formal_statement": "쾨베 영역 $\\mathcal{K}_0$ 와 확대사상들의 열 $\\{f_0,f_1,\\dots\\}$ 이 주어져 $\\mathcal{K}_{n+1}=f_n(\\mathcal{K}_n)$ 도 모두 쾨베 영역이라 하고 $F_n=f_n\\circ\\cdots\\circ f_0:\\mathcal{K}_0\\to\\mathbb{D}$ 라 하자. 그러면\\n(b) 각 $F_n$ 은 확대사상이고 $F_n'(0)=\\prod_{k=0}^{n}f_k'(0)$ 이며 $\\lim_{n\\to\\infty}|f_n'(0)|=1$ 이다.\\n(c) 열이 **접촉적(osculating)**, 즉 $r_{\\mathcal{K}_n}\\to1$ 이면 $\\{F_n\\}$ 은 $\\mathcal{K}_0$ 의 콤팩트 부분집합에서 고르게 수렴하여 등각사상 $F:\\mathcal{K}_0\\to\\mathbb{D}$ 를 준다.\\n(d) 그런 열은 실제로 만들 수 있다: 쾨베 영역 $\\mathcal{K}$ 에 대해 $|\\alpha|=r_{\\mathcal{K}}$ 인 경계점 $\\alpha\\in\\mathbb{D}$ 와 $\\beta^2=\\alpha$ 인 $\\beta\\in\\mathbb{D}$ 를 고르고, $\\mathcal{K}$ 에서 $S^2=\\psi_\\alpha$, $S(0)=\\beta$ 를 만족하는 정칙 제곱근 $S$ 를 택하면($\\psi_\\alpha(z)=\\frac{\\alpha-z}{1-\\bar\\alpha z}$) $$f=\\psi_\\beta\\circ S:\\mathcal{K}\\to\\mathbb{D}$$ 는 확대사상이고 $$|f'(0)|=\\frac{1+r_{\\mathcal{K}}}{2\\sqrt{r_{\\mathcal{K}}}}>1.$$\\n(e) (d)를 반복하면 접촉적인 열이 얻어지므로 $\\mathcal{K}_0$ 에서 $\\mathbb{D}$ 로의 등각사상이 명시적으로 구성된다.",
+          "idea_behind_proof": "전략의 핵심 은유는 '풍선 불기'다. 각 단계에서 영역을 조금 부풀려 원판을 향해 밀어붙이고, 부풀린 정도를 $|f_n'(0)|$ 이라는 하나의 수로 잰다. 그 수는 항상 $1$ 보다 크므로 $|F_n'(0)|$ 은 단조증가하고, 슈바르츠 보조정리가 위쪽 천장 $1/r_{\\mathcal{K}_0}$ 을 제공하므로 수렴한다 — 그러면 인접한 비인 $|f_n'(0)|$ 은 $1$ 로 수렴할 수밖에 없다. '더 이상 부풀릴 수 없다'가 곧 '이미 원판을 다 채웠다'와 동등하다는 것이 (d)의 공식 $|f'(0)|=\\frac{1+r}{2\\sqrt r}$ 이 하는 일이다: 이 함수는 $r=1$ 에서만 값 $1$ 을 가지므로 $|f_n'(0)|\\to1$ 은 $r_{\\mathcal{K}_n}\\to1$ 을 강제한다.\\n확대사상을 만드는 아이디어는 '제곱근은 원점에서 밀어낸다'는 것이다. $|w|<1$ 이면 $\\sqrt{|w|}>|w|$ 이므로, 관심 있는 경계점 $\\alpha$ 를 $\\psi_\\alpha$ 로 원점에 놓고(그러면 영역이 원점을 피하므로 제곱근 분지가 존재한다) 제곱근을 취해 밖으로 밀어낸 다음, $\\psi_\\beta$ 로 다시 원점을 제자리에 돌려놓는다. 확대성 $|f(z)|>|z|$ 을 직접 보이는 것은 어렵지만, **역사상** $\\psi_\\alpha\\circ(w\\mapsto w^2)\\circ\\psi_\\beta$ 가 원점을 고정하는 $\\mathbb{D}\\to\\mathbb{D}$ 정칙사상이면서 회전이 아니라는 점을 관찰하면 슈바르츠 보조정리가 곧바로 부등식을 뒤집어 준다 — 제곱하기가 단사가 아니라는 사실이 '엄밀한 부등호'를 보장한다.",
+          "proof_steps": [
+            "1단계 (b): 확대사상의 합성은 확대사상이다 — $F_n(0)=0$ 이고, $|f_k(w)|>|w|$ 를 차례로 적용하면 $|F_n(z)|>|z|$ ($z\\neq0$). 연쇄법칙과 $f_k(0)=0$ 에서 $F_n'(0)=\\prod_{k=0}^nf_k'(0)$.",
+            "2단계: $r=r_{\\mathcal{K}_0}>0$ 이라 하면 $D(0,r)\\subset\\mathcal{K}_0$ 이고 $F_n:D(0,r)\\to\\mathbb{D}$ 는 $F_n(0)=0$ 인 정칙사상이므로 슈바르츠 보조정리(축척판)에 의해 $|F_n'(0)|\\le1/r$. 한편 (a)에서 $|f_k'(0)|>1$ 이므로 $\\{|F_n'(0)|\\}$ 은 순증가한다. 위로 유계인 단조증가열이므로 유한한 극한 $L$ 로 수렴하고, $$|f_{n+1}'(0)|=\\frac{|F_{n+1}'(0)|}{|F_n'(0)|}\\longrightarrow\\frac{L}{L}=1.$$",
+            "3단계 (c): $\\{F_n\\}$ 은 값이 모두 $\\mathbb{D}$ 안에 있어 고르게 유계이므로 몬텔 정리(8.3.2)에 의해 콤팩트 부분집합에서 고르게 수렴하는 부분열을 가지며, 그 극한 $F$ 는 정칙이다. $|F'(0)|=L>1\\neq0$ 이므로 8.3.3의 논법(단사 정칙함수의 극한은 상수가 아니면 단사)에 의해 $F$ 는 단사다.",
+            "4단계: $F_n(\\mathcal{K}_0)=\\mathcal{K}_{n+1}$ 이고 $r_{\\mathcal{K}_{n+1}}\\to1$ 이므로 $F(\\mathcal{K}_0)$ 는 반지름이 $1$ 에 임의로 가까운 원판들을 포함한다. 즉 $F(\\mathcal{K}_0)=\\mathbb{D}$ 이고 $F:\\mathcal{K}_0\\to\\mathbb{D}$ 는 등각사상이다.",
+            "5단계 (d, $S$ 의 존재): $\\alpha$ 는 $\\mathcal{K}$ 의 경계점이므로 $\\alpha\\notin\\mathcal{K}$ 이고, $\\psi_\\alpha(\\alpha)=0$ 이므로 $\\psi_\\alpha(\\mathcal{K})$ 는 원점을 포함하지 않는 단연결 영역이다. 그런 영역에서는 정칙인 제곱근 분지가 존재하므로(8.3절에서 사용한 사실) $S^2=\\psi_\\alpha$ 인 정칙함수가 두 개($\\pm S$) 있고, $S(0)^2=\\psi_\\alpha(0)=\\alpha=\\beta^2$ 이므로 $S(0)=\\beta$ 인 쪽을 택한다. $|S|=|\\psi_\\alpha|^{1/2}<1$ 이므로 $S:\\mathcal{K}\\to\\mathbb{D}$ 이고, $S^2=\\psi_\\alpha$ 가 단사이므로 $S$ 도 단사다. 따라서 $f=\\psi_\\beta\\circ S$ 는 단사이고 $f(0)=\\psi_\\beta(\\beta)=0$.",
+            "6단계 (d, 확대성): $g(w)=w^2$ 로 두고 $h=\\psi_\\alpha\\circ g\\circ\\psi_\\beta:\\mathbb{D}\\to\\mathbb{D}$ 를 생각하면 $h(0)=\\psi_\\alpha(g(\\beta))=\\psi_\\alpha(\\alpha)=0$ 이고, $\\psi_\\beta,\\psi_\\alpha$ 는 자기동형사상이지만 $g$ 는 단사가 아니므로 $h$ 는 회전이 아니다. 따라서 슈바르츠 보조정리의 엄밀한 형태로 $|h(w)|<|w|$ ($w\\neq0$). 한편 직접 계산으로 $h(f(z))=\\psi_\\alpha\\big(S(z)^2\\big)=\\psi_\\alpha(\\psi_\\alpha(z))=z$ 이므로, $w=f(z)\\neq0$ 에 대해 $|z|=|h(f(z))|<|f(z)|$, 즉 $|f(z)|>|z|$ ($z\\neq0$).",
+            "7단계 (d, 도함수): $\\psi_\\alpha'(z)=\\dfrac{|\\alpha|^2-1}{(1-\\bar\\alpha z)^2}$ 에서 $\\psi_\\alpha'(0)=-(1-|\\alpha|^2)$ 이고, $2S S'=\\psi_\\alpha'$ 에서 $S'(0)=-\\dfrac{1-|\\alpha|^2}{2\\beta}$, 또 $\\psi_\\beta'(\\beta)=-\\dfrac{1}{1-|\\beta|^2}$ 이다. 따라서 $$f'(0)=\\psi_\\beta'(S(0))S'(0)=\\frac{1-|\\alpha|^2}{2\\beta\\,(1-|\\beta|^2)}.$$ $|\\alpha|=r_{\\mathcal{K}}=:r$, $|\\beta|=\\sqrt{r}$ 이므로 $$|f'(0)|=\\frac{1-r^2}{2\\sqrt{r}\\,(1-r)}=\\frac{1+r}{2\\sqrt{r}},$$ 그리고 $\\dfrac{1+r}{2\\sqrt r}>1\\iff(1-\\sqrt r)^2>0$ 이므로 $r<1$ 인 한 항상 $|f'(0)|>1$.",
+            "8단계 (e): $\\mathcal{K}_0$ 에서 시작해 (d)를 반복하여 $f_n$ 과 $\\mathcal{K}_{n+1}=f_n(\\mathcal{K}_n)$ 을 정의한다. (b)에서 $|f_n'(0)|\\to1$ 이고 (d)에서 $|f_n'(0)|=\\dfrac{1+r_{\\mathcal{K}_n}}{2\\sqrt{r_{\\mathcal{K}_n}}}$ 인데, 함수 $r\\mapsto\\dfrac{1+r}{2\\sqrt r}$ 은 $(0,1]$ 에서 값이 $1$ 인 곳이 $r=1$ 뿐이므로 $r_{\\mathcal{K}_n}\\to1$ 이다. 즉 이 열은 접촉적이고 (c)에 의해 등각사상 $F:\\mathcal{K}_0\\to\\mathbb{D}$ 를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (문제 9: 산술–기하평균 $M(a,b)$)",
+          "formal_statement": "$a\\ge b>0$ 인 두 수에서 시작하여 $$a_1=\\frac{a+b}{2},\\qquad b_1=(ab)^{1/2}$$ 로 산술평균과 기하평균을 만들고, 같은 조작을 $a_1,b_1$ 에 반복하여 두 수열 $\\{a_n\\},\\{b_n\\}$ 을 얻는다($a_{n+1},b_{n+1}$ 은 각각 $a_n,b_n$ 의 산술평균과 기하평균). 두 수열의 공통 극한을 $a$ 와 $b$ 의 **산술–기하평균(arithmetic-geometric mean)** 이라 하고 $M(a,b)$ 로 쓴다. 가우스의 항등식은 $$\\frac{1}{M(a,b)}=\\frac{2}{\\pi}\\int_0^{\\pi/2}\\frac{d\\theta}{(a^2\\cos^2\\theta+b^2\\sin^2\\theta)^{1/2}}$$ 이며, 오른쪽 적분을 $I(a,b)$ 로 쓰면 $I(a,b)=\\dfrac{1}{a}K(k)$ ($k^2=1-b^2/a^2$) 라는 완전타원적분과의 연결이 성립한다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "(문제 1) $f$ 가 $z_0$ 근방에서 정의된 복소값 $C^1$ 함수라 하자. $f$ 가 $z_0$ 에서 등각(isogonal)일 필요충분조건은 $z_0$ 에서 등방(isotropic)인 것이고, 또한 이는 '$f'(z_0)$ 이 존재하고 $0$ 이 아니다' 또는 '$f$ 를 $\\bar{f}$ 로 바꾸었을 때 같은 일이 성립한다' 와 동등함을 보여라.",
+          "hint": "$f$ 의 실미분을 볼프 미분으로 $L(v)=A v+B\\bar{v}$ ($A=\\partial f/\\partial z$, $B=\\partial f/\\partial\\bar z$) 로 쓰라. 등방성은 $|L(e^{i\\theta})|$ 이 $\\theta$ 에 무관하다는 뜻이니 $|L(e^{i\\theta})|^2$ 을 전개해 보라 — $e^{2i\\theta}$ 항이 사라져야 한다.",
+          "solution": "$L(v)=Av+B\\bar{v}$ 라 두면 $C^1$ 성에 의해 $$\\frac{f(z_0+re^{i\\theta})-f(z_0)}{r}\\longrightarrow L(e^{i\\theta})=Ae^{i\\theta}+Be^{-i\\theta}\\qquad(r\\to0)$$ 이다.\\n\\n**등방성 $\\iff$ $AB=0$ 이고 $(A,B)\\neq(0,0)$.** 실제로 $$|L(e^{i\\theta})|^2=|A|^2+|B|^2+2\\,\\mathrm{Re}\\!\\left(A\\bar{B}e^{2i\\theta}\\right)$$ 이므로 이 값이 $\\theta$ 에 무관할 필요충분조건은 $A\\bar{B}=0$, 즉 $A=0$ 또는 $B=0$ 이다. 극한이 $0$ 이 아니라는 조건이 둘 중 하나가 반드시 $0$ 이 아님을 준다. 그리고 $B=0$ 은 $z_0$ 에서 코시–리만 방정식이 성립함, 즉 $f'(z_0)=A\\neq0$ 이 존재함과 동치이고, $A=0$ 은 $\\bar{f}$ 에 대해 같은 조건이 성립함과 동치다($\\partial\\bar{f}/\\partial\\bar{z}=\\overline{\\partial f/\\partial z}=\\bar{A}$).\\n\\n**등각성 $\\iff$ 등방성.** ($\\Leftarrow$) $B=0$ 이면 $L(v)=Av$ 로 복소수 곱이므로 각을 방향까지 보존한다(명제 문제 2(a)). $A=0$ 이면 $L(v)=B\\bar{v}$ 로 켤레를 한 번 취하므로 각의 방향이 뒤집히지만 크기는 보존된다. 어느 쪽이든 $|\\theta'|=|\\theta|$.\\n($\\Rightarrow$) 등각성은 $L$ 이 부호 없는 각을 모두 보존하는 가역 $\\mathbb{R}$-선형 사상이라는 뜻이다. 특히 $v$ 와 $iv$ (직각)의 상이 항상 직각이어야 하므로 $$0=\\big(L(v),L(iv)\\big)=\\mathrm{Re}\\!\\left((Av+B\\bar v)\\overline{(Aiv-Bi\\bar v)}\\right)$$ 를 모든 $v$ 에 대해 요구한다. $v=1$ 과 $v=e^{i\\pi/4}$ 를 넣어 정리하면 $\\mathrm{Re}(A\\bar B)=\\mathrm{Im}(A\\bar B)=0$, 즉 $A\\bar B=0$ 을 얻는다. 가역성에서 $(A,B)\\neq(0,0)$ 이므로 $L$ 은 $v\\mapsto Av$ 또는 $v\\mapsto B\\bar v$ 이고, 두 경우 모두 $|L(e^{i\\theta})|$ 이 상수이므로 등방적이다.\\n\\n**일반화 한 줄**: '각의 크기'만 요구하면 정칙성과 반정칙성이 함께 살아남고, '각의 방향'까지 요구하면 정칙성만 남는다(문제 2) — 등각성은 본질적으로 '미분이 유사변환(similarity)이다'라는 선형대수적 조건이며, 방향 보존 여부가 회전과 반사를 가른다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 3(c)(d)(e)) 쌍곡거리의 명시적 공식을 구하라.\\n(c) 임의의 두 점 $z_1,z_2\\in\\mathbb{D}$ 에 대해 $\\varphi(z_1)=0$, $\\varphi(z_2)=s$ ($s\\in[0,1)$ 은 실수) 인 $\\mathbb{D}$ 의 자기동형사상 $\\varphi$ 가 존재함을 보여라.\\n(d) $s\\in[0,1)$ 에 대해 $$d(0,s)=\\frac{1}{2}\\log\\frac{1+s}{1-s}$$ 임을 증명하라.\\n(e) 단위원판의 임의의 두 점 사이의 쌍곡거리 공식을 구하라.",
+          "hint": "(c) $\\psi_{z_1}$ 로 $z_1$ 을 원점으로 옮긴 뒤 회전을 곱하라. (d) 지름을 따라가는 경로의 쌍곡 길이를 직접 적분하고($\\int_0^s\\frac{dt}{1-t^2}$), 다른 어떤 경로도 그보다 짧지 않음을 $|\\gamma'|\\ge|(|\\gamma|)'|$ 로 보이라. (e) (b)의 불변성 + (c)의 정규화 + (d)의 공식을 이어 붙이고, $s$ 가 준쌍곡거리 $\\rho(z_1,z_2)$ 임을 확인하라.",
+          "solution": "**(c)** $\\psi_{z_1}(z)=\\dfrac{z-z_1}{1-\\bar{z_1}z}$ 는 자기동형사상이고 $\\psi_{z_1}(z_1)=0$ 이다. $w=\\psi_{z_1}(z_2)\\in\\mathbb{D}$ 를 $w=|w|e^{i\\vartheta}$ 로 쓰고 $\\varphi=e^{-i\\vartheta}\\psi_{z_1}$ 로 두면 $\\varphi$ 는 자기동형사상이며 $\\varphi(z_1)=0$, $\\varphi(z_2)=|w|=:s\\in[0,1)$ 이다. 참고로 $s=|\\psi_{z_1}(z_2)|=\\rho(z_1,z_2)$ — 8.5에서 정의한 준쌍곡거리다.\\n\\n**(d)** 먼저 지름 경로 $\\gamma_0(t)=ts$ ($t\\in[0,1]$) 의 쌍곡 길이는 $$\\int_0^1\\frac{s\\,dt}{1-t^2s^2}=\\int_0^s\\frac{du}{1-u^2}=\\frac{1}{2}\\log\\frac{1+s}{1-s}$$ 이므로 $d(0,s)\\le\\frac12\\log\\frac{1+s}{1-s}$.\\n역부등식: $0$ 과 $s$ 를 잇는 임의의 매끄러운 곡선 $\\gamma$ 에 대해 $|\\gamma'(t)|\\ge\\left|\\frac{d}{dt}|\\gamma(t)|\\right|$ 이므로 $$\\int_0^1\\frac{|\\gamma'(t)|}{1-|\\gamma(t)|^2}dt\\ge\\int_0^1\\frac{\\left|\\frac{d}{dt}|\\gamma(t)|\\right|}{1-|\\gamma(t)|^2}dt\\ge\\left|\\int_0^1\\frac{\\frac{d}{dt}|\\gamma(t)|}{1-|\\gamma(t)|^2}dt\\right|=\\int_0^s\\frac{du}{1-u^2}$$ (마지막 등호는 $|\\gamma(0)|=0$, $|\\gamma(1)|=s$ 인 치환). 따라서 $$d(0,s)=\\frac12\\log\\frac{1+s}{1-s}$$ 이고, 등호는 지름을 단조롭게 지나는 경로에서만 성립한다 — 즉 원점을 지나는 지름이 측지선이다.\\n\\n**(e)** (b)의 불변성과 (c)의 정규화에 의해 $$d(z_1,z_2)=d(\\varphi(z_1),\\varphi(z_2))=d(0,s),\\qquad s=\\rho(z_1,z_2)=\\left|\\frac{z_1-z_2}{1-\\bar{z_2}z_1}\\right|.$$ 그러므로 $$\\boxed{\\;d(z_1,z_2)=\\frac{1}{2}\\log\\frac{1+\\rho(z_1,z_2)}{1-\\rho(z_1,z_2)}=\\tanh^{-1}\\!\\rho(z_1,z_2)\\;}$$ 이다.\\n\\n**일반화 한 줄**: 준쌍곡거리 $\\rho$ 와 쌍곡거리 $d$ 는 $d=\\tanh^{-1}\\rho$ 라는 단조 함수로 연결되므로 '거리를 줄인다'는 진술이 서로 동등하다 — 슈바르츠–픽 보조정리(대수적)와 푸앵카레 계량의 축소성(기하적)이 같은 사실의 두 얼굴인 이유다. 또 $\\rho\\to1$ 일 때 $d\\to\\infty$ 이므로 경계는 무한히 멀다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 0.762,
+                "dash": "4,3"
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 0.964,
+                "dash": "4,3"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  0,
+                  0
+                ],
+                "to": [
+                  0.6,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0.6,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.12,
+                  -0.16
+                ],
+                "text": "0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.62,
+                  -0.18
+                ],
+                "text": "s"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.62,
+                  0.44
+                ],
+                "text": "d = 1"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.86,
+                  0.62
+                ],
+                "text": "d = 2"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.0,
+                  1.16
+                ],
+                "text": "|z| = 1"
+              }
+            ],
+            "caption": "원점 중심의 쌍곡원들: 쌍곡반지름 $1,2$ 는 유클리드 반지름 $\\tanh1\\approx0.76$, $\\tanh2\\approx0.96$ 에 해당한다. $d(0,s)=\\tfrac12\\log\\frac{1+s}{1-s}$ 이므로 경계에 가까워질수록 같은 쌍곡거리가 점점 얇은 띠에 몰리고, $\\partial\\mathbb{D}$ 는 무한히 먼 곳이 된다. 지름(굵은 선분)이 측지선이다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 4(a)) $SU(1,1)$ 의 모든 행렬이 $$\\begin{pmatrix}a&b\\\\ \\bar{b}&\\bar{a}\\end{pmatrix},\\qquad |a|^2-|b|^2=1$$ 꼴임을 증명하라. $J=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ 로 두고 $\\langle Z,W\\rangle={}^t\\overline{W}JZ$ 임을 관찰하라(${}^t\\overline{W}$ 는 $W$ 의 켤레전치).",
+          "hint": "$\\langle MZ,MW\\rangle=\\langle Z,W\\rangle$ 를 행렬 등식으로 옮기면 $M^*JM=J$ 다. 여기에 $\\det M=1$ 을 함께 쓰면 $M^{-1}$ 을 두 가지 방법으로 계산할 수 있다 — 하나는 $J$ 로, 하나는 여인자로.",
+          "solution": "$Z=(z_1,z_2)$, $W=(w_1,w_2)$ 를 열벡터로 보면 $${}^t\\overline{W}JZ=(\\bar{w}_1,\\bar{w}_2)\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}\\begin{pmatrix}z_1\\\\z_2\\end{pmatrix}=z_1\\bar{w}_1-z_2\\bar{w}_2=\\langle Z,W\\rangle$$ 이므로 형식 보존 조건 $\\langle MZ,MW\\rangle=\\langle Z,W\\rangle$ 은 $${}^t\\overline{(MW)}J(MZ)={}^t\\overline{W}\\big(M^*JM\\big)Z={}^t\\overline{W}JZ\\qquad(\\forall Z,W)$$ 즉 $$M^*JM=J\\qquad(M^*={}^t\\overline{M})$$ 와 동치다.\\n\\n$J^2=I$ 이므로 위 식에서 $\\big(JM^*J\\big)M=I$, 즉 $$M^{-1}=JM^*J.$$ $M=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ 라 하면 $M^*=\\begin{pmatrix}\\bar{a}&\\bar{c}\\\\ \\bar{b}&\\bar{d}\\end{pmatrix}$ 이고 $$JM^*J=\\begin{pmatrix}\\bar{a}&-\\bar{c}\\\\ -\\bar{b}&\\bar{d}\\end{pmatrix}.$$ 한편 $\\det M=1$ 이므로 여인자 공식에서 $$M^{-1}=\\begin{pmatrix}d&-b\\\\ -c&a\\end{pmatrix}.$$ 두 표현을 성분별로 비교하면 $$d=\\bar{a},\\qquad -b=-\\bar{c}\\;(\\text{즉 }c=\\bar{b}),\\qquad -c=-\\bar{b}\\;(\\text{같은 조건}),\\qquad a=\\bar{d}\\;(\\text{같은 조건})$$ 이므로 $$M=\\begin{pmatrix}a&b\\\\ \\bar{b}&\\bar{a}\\end{pmatrix}$$ 이고, $\\det M=a\\bar{a}-b\\bar{b}=|a|^2-|b|^2=1$ 이다. $\\;\\blacksquare$\\n(역으로 이 꼴의 행렬은 $M^*JM=J$ 를 만족함을 직접 대입해 확인할 수 있다.)\\n\\n**일반화 한 줄**: 부호수 $(1,1)$ 의 에르미트 형식을 보존한다는 조건이 $SU(2)$ 의 $|a|^2+|b|^2=1$ 을 $|a|^2-|b|^2=1$ 로 바꾼 것뿐이다 — 부호 하나를 뒤집으면 콤팩트한 구($\\cong$ 회전군)가 비콤팩트한 쌍곡평면의 등거리군으로 바뀐다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 5) $F:\\mathbb{H}\\to\\mathbb{C}$ 가 정칙이고 유계라 하고, $\\{r_n\\}$ 이 유계인 양수열일 때 $F(ir_n)=0$ ($n=1,2,3,\\dots$) 이라 하자. $\\sum_{n=1}^\\infty r_n=\\infty$ 이면 $F\\equiv0$ 임을 증명하라. 또 $\\sum r_n<\\infty$ 인 경우에는 왜 그런 결론을 기대할 수 없는지 설명하라.",
+          "hint": "$\\mathbb{D}$ 로 옮겨 놓고 블라슈케 조건을 쓰라: 항등적으로 $0$ 이 아닌 유계 정칙함수의 영점 $\\{z_n\\}\\subset\\mathbb{D}$ 는 $\\sum_n(1-|z_n|)<\\infty$ 를 만족한다(5장 문제 1·2 — 이전 챕터에서 다룸). $\\Phi(z)=i\\frac{1-z}{1+z}$ 에서 $ir$ 의 원상을 구해 $1-|z_n|$ 을 $r_n$ 으로 표현하라.",
+          "solution": "$\\Phi(z)=i\\dfrac{1-z}{1+z}$ 는 $\\mathbb{D}$ 에서 $\\mathbb{H}$ 로 가는 등각사상이므로 $G=F\\circ\\Phi:\\mathbb{D}\\to\\mathbb{C}$ 는 정칙이고 유계다.\\n\\n**영점의 위치.** $\\Phi(z)=ir$ 를 풀면 $r(1+z)=1-z$, 즉 $$z=\\frac{1-r}{1+r}.$$ 따라서 $G$ 는 $z_n=\\dfrac{1-r_n}{1+r_n}\\in(-1,1)$ 에서 영이 된다.\\n\\n**$1-|z_n|$ 의 크기.** $$1-|z_n|=1-\\frac{|1-r_n|}{1+r_n}=\\frac{(1+r_n)-|1-r_n|}{1+r_n}=\\frac{\\min(2r_n,\\,2)}{1+r_n}.$$ $\\{r_n\\}$ 이 유계이므로 $r_n\\le M$ 인 $M$ 을 잡으면 $$1-|z_n|\\ \\ge\\ \\frac{\\min(2r_n,2)}{1+M}.$$\\n\\n**결론.** $\\sum r_n=\\infty$ 라 하자. $r_n\\ge1$ 인 항이 무한히 많으면 그 항들만으로 $\\sum(1-|z_n|)\\ge\\sum\\frac{2}{1+M}=\\infty$ 이다. 그렇지 않으면 유한개를 제외하고 $r_n<1$ 이므로 $\\min(2r_n,2)=2r_n$ 이고 $$\\sum_n(1-|z_n|)\\ \\ge\\ \\frac{2}{1+M}\\sum_n r_n=\\infty.$$ 어느 경우든 블라슈케 조건 $\\sum_n(1-|z_n|)<\\infty$ 가 **깨지므로**, 유계 정칙함수 $G$ 는 항등적으로 $0$ 이어야 한다(5장 문제 1·2). 따라서 $F=G\\circ\\Phi^{-1}\\equiv0$. $\\;\\blacksquare$\\n\\n**$\\sum r_n<\\infty$ 인 경우.** 위 계산을 거꾸로 읽으면 $\\sum(1-|z_n|)<\\infty$, 즉 블라슈케 조건이 만족되므로 $\\{z_n\\}$ 을 영점으로 갖는 블라슈케 곱이 수렴하여 $\\mathbb{D}$ 에서 유계이고 영점이 정확히 $\\{z_n\\}$ 인 정칙함수를 준다. 이를 $\\Phi^{-1}$ 로 되돌리면 상반평면에서 유계이고 영점이 정확히 $\\{ir_n\\}$ 인 함수가 만들어진다 — 그러므로 $\\sum r_n=\\infty$ 라는 가정은 없어서는 안 된다.\\n\\n**일반화 한 줄**: 유계 정칙함수는 영점을 아무렇게나 가질 수 없고, 영점들이 경계에 다가가는 '속도'가 블라슈케 조건으로 정확히 제한된다 — 이 문제는 그 조건을 상반평면의 허축이라는 구체적 배치로 번역한 것이며, 10장의 모듈러 함수 논의에서 다시 쓰인다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 7(a)) $f$ 가 쾨베 영역 $\\mathcal{K}$ 에서의 확대사상(expansion)이면 $$r_{f(\\mathcal{K})}\\ge r_{\\mathcal{K}}\\qquad\\text{그리고}\\qquad|f'(0)|>1$$ 임을 증명하라.",
+          "hint": "$f(0)=0$ 이므로 $f(z)=zg(z)$ 로 쓸 수 있다. 확대성은 $\\mathcal{K}\\setminus\\{0\\}$ 에서 $|g|>1$ 을 뜻하니, $1/g$ 에 최대절댓값원리를 적용하라. 내반지름 쪽은 원 $|z|=\\rho$ 위에서 $|f(z)|>\\rho$ 임을 이용해 루셰 정리로 $f(z)-w$ 의 영점을 세라.",
+          "solution": "**1) $|f'(0)|>1$.** $f(0)=0$ 이므로 $f(z)=z\\,g(z)$ 로 쓸 수 있고 $g$ 는 $\\mathcal{K}$ 에서 정칙이며 $g(0)=f'(0)$ 이다. 확대성 $|f(z)|>|z|$ ($z\\neq0$) 는 $$|g(z)|>1\\qquad(z\\in\\mathcal{K}\\setminus\\{0\\})$$ 을 뜻한다. 특히 $g$ 는 $\\mathcal{K}\\setminus\\{0\\}$ 에서 영이 되지 않고, 연속성에서 $|g(0)|\\ge1>0$ 이므로 $1/g$ 는 $\\mathcal{K}$ 전체에서 정칙이며 $$|1/g(z)|<1\\quad(z\\in\\mathcal{K}\\setminus\\{0\\}),\\qquad |1/g(0)|\\le1.$$ 만약 $|1/g(0)|=1$ 이면 $1/g$ 가 내부점 $0$ 에서 최대절댓값을 취하므로 최대절댓값원리에 의해 $1/g$ 는 절댓값 $1$ 의 상수가 되어 $|1/g|<1$ ($z\\neq0$) 에 모순이다. 따라서 $|1/g(0)|<1$, 즉 $$|f'(0)|=|g(0)|>1.$$\\n\\n**2) $r_{f(\\mathcal{K})}\\ge r_{\\mathcal{K}}$.** $0<\\rho<r_{\\mathcal{K}}$ 를 임의로 잡으면 $\\overline{D(0,\\rho)}\\subset\\mathcal{K}$ 이다. 원 $|z|=\\rho$ 위에서 확대성에 의해 $|f(z)|>\\rho$ 이므로, $|w|<\\rho$ 인 임의의 $w$ 에 대해 $$|(f(z)-w)-f(z)|=|w|<\\rho<|f(z)|\\qquad(|z|=\\rho)$$ 이고 루셰 정리에 의해 $f(z)-w$ 와 $f(z)$ 는 $D(0,\\rho)$ 안에서 같은 개수의 영점을 갖는다. $f$ 는 단사이고 $f(0)=0$ 이므로 $f$ 의 영점은 $z=0$ 하나뿐, 따라서 $f(z)-w$ 도 정확히 하나의 영점을 갖는다 — 즉 $w\\in f(D(0,\\rho))\\subset f(\\mathcal{K})$.\\n그러므로 $D(0,\\rho)\\subset f(\\mathcal{K})$ 이고, $\\rho\\uparrow r_{\\mathcal{K}}$ 로 보내면 $r_{f(\\mathcal{K})}\\ge r_{\\mathcal{K}}$. $\\;\\blacksquare$\\n\\n**일반화 한 줄**: 확대사상은 '내반지름을 줄이지 않으면서 원점에서의 배율을 반드시 키운다' — 이 두 성질이 쾨베의 반복이 단조롭게 원판을 향해 진행하도록 만드는 엔진이고, $|F_n'(0)|$ 이 위로 유계인 단조증가열이 되는 이유다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 1
+              },
+              {
+                "shape": "curve",
+                "points": [
+                  [
+                    0.9,
+                    0.2
+                  ],
+                  [
+                    0.5,
+                    0.8
+                  ],
+                  [
+                    -0.2,
+                    0.85
+                  ],
+                  [
+                    -0.7,
+                    0.4
+                  ],
+                  [
+                    -0.55,
+                    -0.3
+                  ],
+                  [
+                    0.0,
+                    -0.45
+                  ],
+                  [
+                    0.35,
+                    -0.25
+                  ],
+                  [
+                    0.75,
+                    -0.1
+                  ]
+                ],
+                "closed": true,
+                "fill": "#eaf2ff"
+              },
+              {
+                "shape": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "r": 0.45,
+                "dash": "4,3"
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  0,
+                  -0.45
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.14,
+                  0.12
+                ],
+                "text": "0"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.16,
+                  -0.56
+                ],
+                "text": "alpha"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.15,
+                  0.5
+                ],
+                "text": "K"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  0.0,
+                  1.16
+                ],
+                "text": "|z| = 1"
+              }
+            ],
+            "caption": "쾨베 영역 $\\mathcal{K}\\subset\\mathbb{D}$ 와 내반지름 $r_{\\mathcal{K}}$ (점선 원). 원점에서 가장 가까운 경계점 $\\alpha$ ($|\\alpha|=r_{\\mathcal{K}}$) 를 골라 $\\psi_\\beta\\circ S\\circ$ ($S^2=\\psi_\\alpha$, $\\beta^2=\\alpha$) 를 만들면 확대사상이 되어 $\\mathcal{K}$ 가 원판을 향해 '부풀어 오른다'."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 8) $f$ 가 단위원판에서 단사인 정칙함수이고 $f(0)=0$, $f'(0)=1$ 이며 $f(z)=z+a_2z^2+a_3z^3+\\cdots$ 의 계수 $a_n$ 이 **모두 실수**라 하자. 다음을 보여 비버바흐(Bieberbach) 추측 $|a_n|\\le n$ 을 이 경우에 증명하라.\\n(a) $z=re^{i\\theta}$ ($0<r<1$) 이고 $v(r,\\theta)=\\mathrm{Im}\\,f(re^{i\\theta})$ 이면 $a_nr^n=\\dfrac{2}{\\pi}\\int_0^\\pi v(r,\\theta)\\sin n\\theta\\,d\\theta$.\\n(b) $0\\le\\theta\\le\\pi$ 와 $n=1,2,\\dots$ 에 대해 $|\\sin n\\theta|\\le n\\sin\\theta$.\\n(e) $|a_nr^n|\\le nr$ 이고 $r\\to1$ 에서 $|a_n|\\le n$. (여기서 (c)(d)의 결론 $v(r,\\theta)\\sin\\theta\\ge0$ 은 사용해도 좋다.)\\n(f) $f(z)=z/(1-z)^2$ 이 모든 가정을 만족하고 $|a_n|=n$ 임을 확인하라.",
+          "hint": "(a) $a_n$ 이 실수이므로 $v(r,\\theta)=\\sum_n a_nr^n\\sin n\\theta$ 이고 $\\{\\sin n\\theta\\}$ 는 $[0,\\pi]$ 에서 직교한다. (b) $\\sin(n+1)\\theta=\\sin n\\theta\\cos\\theta+\\cos n\\theta\\sin\\theta$ 로 귀납하라. (e) (a)의 적분에 (b)를 대입하고, $v\\sin\\theta\\ge0$ 덕분에 $|v|\\sin\\theta=v\\sin\\theta$ 임을 이용해 $n=1$ 인 경우로 되돌려라.",
+          "solution": "**(a)** $a_n\\in\\mathbb{R}$ 이므로 $$v(r,\\theta)=\\mathrm{Im}\\sum_{n\\ge1}a_nr^ne^{in\\theta}=\\sum_{n\\ge1}a_nr^n\\sin n\\theta\\qquad(a_1=1).$$ $\\int_0^\\pi\\sin n\\theta\\sin m\\theta\\,d\\theta=\\frac{\\pi}{2}\\delta_{nm}$ 이므로(급수는 $|z|=r<1$ 에서 고르게 수렴하여 항별 적분 가능) $$\\frac{2}{\\pi}\\int_0^\\pi v(r,\\theta)\\sin n\\theta\\,d\\theta=a_nr^n.$$\\n\\n**(b)** $n=1$ 에서는 등호. $|\\sin n\\theta|\\le n\\sin\\theta$ 를 가정하면 $0\\le\\theta\\le\\pi$ 에서 $\\sin\\theta\\ge0$ 이므로 $$|\\sin(n+1)\\theta|=|\\sin n\\theta\\cos\\theta+\\cos n\\theta\\sin\\theta|\\le|\\sin n\\theta|+\\sin\\theta\\le n\\sin\\theta+\\sin\\theta=(n+1)\\sin\\theta.$$\\n\\n**(e)** (c)(d)에서 $v(r,\\theta)\\sin\\theta\\ge0$ 이므로 $\\theta\\in(0,\\pi)$ 에서 $v(r,\\theta)\\ge0$, 즉 $|v(r,\\theta)|=v(r,\\theta)$ 이다. 따라서 (a)와 (b)에서 $$|a_n|r^n\\le\\frac{2}{\\pi}\\int_0^\\pi|v(r,\\theta)|\\,|\\sin n\\theta|\\,d\\theta\\le n\\cdot\\frac{2}{\\pi}\\int_0^\\pi v(r,\\theta)\\sin\\theta\\,d\\theta=n\\cdot a_1r=nr,$$ 마지막 등호는 (a)를 $n=1$ 에 적용한 것($a_1=1$)이다. 즉 $|a_n|r^n\\le nr$, 다시 쓰면 $|a_n|\\le n\\,r^{1-n}$. $r\\to1^-$ 로 보내면 $$|a_n|\\le n.$$\\n\\n**(f)** $\\dfrac{z}{(1-z)^2}=\\sum_{n\\ge1}nz^n$ 이므로 $a_n=n$ (실수), $f(0)=0$, $f'(0)=1$ 이다. 또 $$f(z)=\\frac14\\left[\\left(\\frac{1+z}{1-z}\\right)^2-1\\right]$$ 인데 $z\\mapsto\\frac{1+z}{1-z}$ 는 $\\mathbb{D}$ 를 우반평면으로 보내는 등각사상이고 제곱은 우반평면에서 단사이므로 $f$ 는 단사이다(상은 $(-\\infty,-\\tfrac14]$ 를 제거한 평면). 따라서 모든 가정을 만족하면서 $|a_n|=n$ 이므로 부등식 $|a_n|\\le n$ 은 **최적**이다.\\n\\n**일반화 한 줄**: 계수 $a_n$ 이 실수라는 가정이 (c)(d)를 통해 '$v$ 의 부호가 상반원판에서 일정하다'로 바뀌고, 그 덕분에 절댓값 부등식 (b)가 손실 없이 적용된다 — 실수성 가정을 제거한 일반적 증명은 드브랑주(de Branges)가 완성했으며 훨씬 깊은 도구를 요구한다.",
+          "visualization": {
+            "type": "custom_2d",
+            "primitives": [
+              {
+                "shape": "polygon",
+                "points": [
+                  [
+                    -3.2,
+                    -1.5
+                  ],
+                  [
+                    3.2,
+                    -1.5
+                  ],
+                  [
+                    3.2,
+                    1.5
+                  ],
+                  [
+                    -3.2,
+                    1.5
+                  ]
+                ],
+                "fill": "#eaf2ff"
+              },
+              {
+                "shape": "segment",
+                "from": [
+                  -3.2,
+                  0
+                ],
+                "to": [
+                  -0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "point",
+                "at": [
+                  -0.5,
+                  0
+                ]
+              },
+              {
+                "shape": "label",
+                "at": [
+                  -0.42,
+                  -0.3
+                ],
+                "text": "-1/4"
+              },
+              {
+                "shape": "label",
+                "at": [
+                  1.4,
+                  0.75
+                ],
+                "text": "f(D)"
+              }
+            ],
+            "caption": "쾨베 함수 $f(z)=z/(1-z)^2$ 의 상: 반직선 $(-\\infty,-\\tfrac14]$ 를 제거한 평면. 이 함수가 $|a_n|=n$ 을 달성하므로 비버바흐 부등식 $|a_n|\\le n$ 은 개선할 수 없다."
+          }
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 9(a)) $a\\ge b>0$ 에서 시작한 산술–기하평균 반복 $a_{n+1}=\\dfrac{a_n+b_n}{2}$, $b_{n+1}=(a_nb_n)^{1/2}$ 에 대해 두 수열 $\\{a_n\\},\\{b_n\\}$ 이 공통 극한 $M(a,b)$ 를 가짐을 증명하라. 특히 $$a\\ge a_1\\ge a_2\\ge\\cdots\\ge a_n\\ge b_n\\ge\\cdots\\ge b_1\\ge b,\\qquad a_n-b_n\\le\\frac{a-b}{2^n}$$ 을 보여라.",
+          "hint": "산술–기하평균 부등식으로 $a_n\\ge b_n$ 을 유지하고, 그 사실에서 $a_{n+1}\\le a_n$ 과 $b_{n+1}\\ge b_n$ 이 따라온다. 차의 감소는 $a_{n+1}-b_{n+1}\\le a_{n+1}-b_n$ 을 쓰면 한 줄이다.",
+          "solution": "**1) 순서 관계.** 산술–기하평균 부등식에서 모든 $n$ 에 대해 $$a_{n+1}=\\frac{a_n+b_n}{2}\\ \\ge\\ \\sqrt{a_nb_n}=b_{n+1},$$ 즉 $a_n\\ge b_n$ 이 귀납적으로 유지된다($a_0=a\\ge b=b_0$). 그러면 $$a_{n+1}=\\frac{a_n+b_n}{2}\\le\\frac{a_n+a_n}{2}=a_n,\\qquad b_{n+1}=\\sqrt{a_nb_n}\\ge\\sqrt{b_nb_n}=b_n$$ 이므로 $\\{a_n\\}$ 은 감소, $\\{b_n\\}$ 은 증가하고 $$a\\ge a_1\\ge a_2\\ge\\cdots\\ge a_n\\ge b_n\\ge\\cdots\\ge b_1\\ge b>0.$$\\n\\n**2) 수렴.** $\\{a_n\\}$ 은 아래로 유계인 감소열, $\\{b_n\\}$ 은 위로 유계인 증가열이므로 각각 극한 $\\alpha,\\beta$ 로 수렴한다.\\n\\n**3) 차의 감소.** $b_{n+1}\\ge b_n$ 이므로 $$a_{n+1}-b_{n+1}\\le a_{n+1}-b_n=\\frac{a_n+b_n}{2}-b_n=\\frac{a_n-b_n}{2}.$$ 귀납적으로 $$0\\le a_n-b_n\\le\\frac{a-b}{2^n}\\longrightarrow0.$$\\n\\n**4) 결론.** 따라서 $\\alpha=\\beta$ 이고 이 공통 극한을 $M(a,b)$ 라 쓴다. $\\;\\blacksquare$\\n\\n**일반화 한 줄**: 위 추정은 수렴이 적어도 등비적임을 주지만, 실제로는 $a_{n+1}-b_{n+1}=\\dfrac{(\\sqrt{a_n}-\\sqrt{b_n})^2}{2}$ 이므로 오차가 매 단계 **제곱**으로 줄어든다(이차 수렴) — 그래서 $\\mathrm{AGM}$ 은 $\\pi$ 나 $K(k)$ 를 수만 자리까지 계산하는 실제 알고리즘의 심장이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(문제 9(b)) $$I(a,b)=\\int_0^{\\pi/2}\\frac{d\\theta}{(a^2\\cos^2\\theta+b^2\\sin^2\\theta)^{1/2}}$$ 라 할 때 다음을 보여 가우스의 항등식 $\\dfrac{1}{M(a,b)}=\\dfrac{2}{\\pi}I(a,b)$ 를 증명하라.\\n(i) $I(a,b)=\\dfrac1aK(k)$ where $k^2=1-b^2/a^2$.\\n(ii) 불변성 $I(a,b)=I\\!\\left(\\dfrac{a+b}{2},(ab)^{1/2}\\right)$ — 이것이 8.5의 연습문제 24(b)(란덴 변환)의 귀결임을 확인하라.\\n(iii) (ii)를 반복하고 극한을 취해 결론을 얻으라.",
+          "hint": "(i) $a^2\\cos^2\\theta+b^2\\sin^2\\theta=a^2(1-k^2\\sin^2\\theta)$ 로 묶고 $x=\\sin\\theta$ 로 치환하라. (ii) 여모수 $\\tilde k=b/a$ 를 계산하고, 새 쌍 $(a_1,b_1)$ 의 모수가 $\\dfrac{1-\\tilde k}{1+\\tilde k}$ 와 같은지 확인하라. (iii) $a_n,b_n\\to M$ 이므로 $I(a_n,b_n)\\to I(M,M)$ 인데 $I(M,M)$ 은 얼마인가?",
+          "solution": "**(i)** $b^2=a^2(1-k^2)$ 이므로 $$a^2\\cos^2\\theta+b^2\\sin^2\\theta=a^2\\big(\\cos^2\\theta+(1-k^2)\\sin^2\\theta\\big)=a^2\\big(1-k^2\\sin^2\\theta\\big).$$ 따라서 $x=\\sin\\theta$ ($dx=\\cos\\theta\\,d\\theta$, $\\cos\\theta=\\sqrt{1-x^2}$) 로 치환하면 $$I(a,b)=\\frac1a\\int_0^{\\pi/2}\\frac{d\\theta}{\\sqrt{1-k^2\\sin^2\\theta}}=\\frac1a\\int_0^1\\frac{dx}{\\sqrt{(1-x^2)(1-k^2x^2)}}=\\frac{1}{a}K(k).$$\\n\\n**(ii)** 여모수는 $\\tilde{k}=\\sqrt{1-k^2}=b/a$ 다. 8.5의 연습문제 24(b)에 의해 $$K(k)=\\frac{2}{1+\\tilde k}K(\\kappa),\\qquad \\kappa=\\frac{1-\\tilde k}{1+\\tilde k}=\\frac{a-b}{a+b}.$$ 그러므로 $$I(a,b)=\\frac1aK(k)=\\frac1a\\cdot\\frac{2}{1+b/a}K(\\kappa)=\\frac{2}{a+b}K(\\kappa).$$ 한편 새 쌍 $a_1=\\frac{a+b}{2}$, $b_1=\\sqrt{ab}$ 의 여모수는 $\\tilde{k}_1=\\dfrac{b_1}{a_1}=\\dfrac{2\\sqrt{ab}}{a+b}$ 이므로 그 모수는 $$k_1=\\sqrt{1-\\frac{4ab}{(a+b)^2}}=\\sqrt{\\frac{(a-b)^2}{(a+b)^2}}=\\frac{a-b}{a+b}=\\kappa.$$ 따라서 (i)을 $(a_1,b_1)$ 에 적용하면 $$I(a_1,b_1)=\\frac{1}{a_1}K(k_1)=\\frac{2}{a+b}K(\\kappa)=I(a,b),$$ 즉 불변성 (6)이 성립한다.\\n\\n**(iii)** (ii)를 반복하면 모든 $n$ 에 대해 $I(a,b)=I(a_n,b_n)$ 이다. 문제 9(a)에서 $a_n,b_n\\to M=M(a,b)$ 이고 피적분함수가 $(a_n,b_n)$ 에 대해 고르게 수렴하므로 $$I(a,b)=\\lim_{n\\to\\infty}I(a_n,b_n)=I(M,M)=\\int_0^{\\pi/2}\\frac{d\\theta}{\\sqrt{M^2(\\cos^2\\theta+\\sin^2\\theta)}}=\\frac{\\pi}{2M}.$$ 그러므로 $$\\frac{1}{M(a,b)}=\\frac{2}{\\pi}I(a,b)=\\frac{2}{\\pi}\\int_0^{\\pi/2}\\frac{d\\theta}{(a^2\\cos^2\\theta+b^2\\sin^2\\theta)^{1/2}}.\\qquad\\blacksquare$$\\n\\n**일반화 한 줄**: '적분이 산술–기하평균 조작에 대해 불변'이라는 한 문장이 전부이며, 그 불변성의 정체는 8.4.5의 직사각형 모수에 대한 란덴 변환이다 — 8.4.5에서 직사각형의 종횡비를 잠그는 데 쓰였던 $K,K'$ 의 항등식이 여기서는 $\\pi$ 를 초고속으로 계산하는 알고리즘으로 변신한다."
+        },
+        {
+          "type": "ox",
+          "question": "(문제 1·2 관련) 점 $z_0$ 에서 두 곡선이 이루는 각의 **크기**를 항상 보존하는(등각, isogonal) 실미분가능 사상은 반드시 $z_0$ 에서 정칙이다.",
+          "answer": "X",
+          "explanation": "각의 크기만 보존하는 사상은 정칙이거나 **반정칙(anti-holomorphic)** 이다. 실제로 $f(z)=\\bar{z}$ 는 모든 각의 크기를 보존하지만(켤레는 유클리드 등거리사상이다) 어디서도 정칙이 아니다 — 각의 **방향**이 뒤집힐 뿐이다. 볼프 미분으로 보면 등각성은 $\\dfrac{\\partial f}{\\partial z}\\cdot\\overline{\\dfrac{\\partial f}{\\partial\\bar z}}=0$, 즉 두 편미분 중 하나가 $0$ 이라는 조건이고, $\\partial f/\\partial\\bar z=0$ 이면 정칙, $\\partial f/\\partial z=0$ 이면 $\\bar f$ 가 정칙이다(문제 1). 정칙성만 남기려면 문제 2처럼 **방향 있는 각**의 보존을 요구해야 하며, 그때 켤레항이 죽는다. 같은 이유로 쌍곡거리를 보존하는 사상도 자기동형사상이거나 그 켤레다(문제 3(b))."
+        },
+        {
+          "type": "ox",
+          "question": "(문제 5 관련) 상반평면에서 유계인 정칙함수가 허축 위의 무한히 많은 점 $ir_1,ir_2,\\dots$ ($r_n>0$ 유계) 에서 영이 되면, 그 함수는 반드시 항등적으로 $0$ 이다.",
+          "answer": "X",
+          "explanation": "영점이 무한히 많다는 것만으로는 부족하고, 영점이 경계에 다가가는 **속도**가 문제다. 결론이 성립하는 것은 $\\sum_n r_n=\\infty$ 인 경우이며(문제 5(a)), 이는 $\\mathbb{D}$ 로 옮겼을 때 블라슈케 조건 $\\sum_n(1-|z_n|)<\\infty$ 가 깨지는 상황에 해당한다. 반대로 $\\sum_n r_n<\\infty$ 이면 블라슈케 조건이 만족되어, 영점이 **정확히** $\\{ir_n\\}$ 인 유계 정칙함수를 블라슈케 곱으로 실제로 만들 수 있다(문제 5(b)). 예컨대 $r_n=2^{-n}$ 이면 영점이 무한히 많지만 항등적으로 $0$ 이 아닌 유계 함수가 존재한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 문제 모음은 8장의 세 축을 각각 한 단계 승격시킨다 — 슈바르츠–픽 보조정리(8.5의 연습문제 13)가 문제 3·4에서 어떻게 '기하학과 대수학'이 되고, 8.3의 리만 사상정리 **존재** 증명이 문제 7에서 어떻게 '구성'이 되며, 8.4.5의 완전타원적분이 문제 9에서 어떻게 '알고리즘'이 되는가? 세 승격에 공통으로 흐르는 발상이 무엇인지도 함께 정리하라.",
+          "hint": "각 승격에서 '무엇이 새로 들어왔는가'를 한 단어로 짚어 보라 — 계량? 군? 반복? 그리고 세 경우 모두 원래의 결과에서 무엇을 '뒤집어' 읽었는지 생각해 보라(부등식을 길이로, 극값을 단조증가로, 변수변환을 반복 연산으로).",
+          "answer": "**(1) 부등식 $\\to$ 계량과 군 (문제 3·4).** 슈바르츠–픽 보조정리 $\\dfrac{|f'(z)|}{1-|f(z)|^2}\\le\\dfrac{1}{1-|z|^2}$ 를 '점에 대한 부등식'이 아니라 '접벡터의 길이에 대한 부등식'으로 읽으면, 좌·우변이 각각 푸앵카레 계량 $ds=\\dfrac{|dz|}{1-|z|^2}$ 로 잰 상벡터·원벡터의 길이가 된다. 즉 이 보조정리는 '정칙사상은 쌍곡 계량을 늘리지 않는다'의 **무한소 판본**이고, 곡선을 따라 적분하면 대역적 축소성 $d(f(z_1),f(z_2))\\le d(z_1,z_2)$ 가 된다(문제 3(a)). 이 관점에서 자기동형사상은 등거리사상이 되고, 명시적 공식 $d(z_1,z_2)=\\tanh^{-1}\\rho(z_1,z_2)$ 가 준쌍곡거리와 쌍곡거리를 잇는다. 문제 4는 같은 대칭성을 대수로 옮긴 것이다 — $|z|<1$ 을 에르미트 형식 $|z_1|^2-|z_2|^2>0$ 으로 다시 쓰면 $\\mathrm{Aut}(\\mathbb{D})$ 가 그 형식의 대칭군 $SU(1,1)/\\{\\pm1\\}$ 로 정체를 드러낸다. 하나의 부등식이 계량(기하)과 군(대수)이라는 두 언어를 동시에 얻는다.\\n\\n**(2) 존재 $\\to$ 구성 (문제 7).** 8.3의 증명은 정규족에서 $|F'(0)|$ 을 최대화하는 원소를 뽑는 극값 논법이었다 — 답의 존재만 말하고 모양은 말하지 않는다. 쾨베의 방식은 그 극값을 향해 **걸어간다**: 영역의 경계 중 원점에 가장 가까운 점 $\\alpha$ 를 골라 $\\psi_\\alpha$ 로 원점에 놓고(그래서 영역이 원점을 피하게 되어 제곱근 분지가 생기고), 제곱근으로 밖으로 밀어낸 뒤 $\\psi_\\beta$ 로 원점을 되돌리는 3단 조립 $f=\\psi_\\beta\\circ S$ 가 확대사상이 된다. 확대의 크기가 $|f'(0)|=\\dfrac{1+r_{\\mathcal{K}}}{2\\sqrt{r_{\\mathcal{K}}}}$ 라는 하나의 수로 정량화되므로, '$|F_n'(0)|$ 이 단조증가하며 슈바르츠 보조정리의 천장 $1/r_{\\mathcal{K}_0}$ 아래에서 수렴한다'가 곧 '$|f_n'(0)|\\to1$', 다시 '$r_{\\mathcal{K}_n}\\to1$', 최종적으로 '$F(\\mathcal{K}_0)=\\mathbb{D}$' 로 이어진다. 극값 원리의 '한 번의 점프'가 단조 반복의 '무한한 걸음'으로 바뀐 것이다.\\n\\n**(3) 특수함수 $\\to$ 알고리즘 (문제 9).** 8.4.5에서 직사각형의 종횡비를 결정한 $K(k)$ 는 닫힌 형태가 없다. 그런데 연습문제 24(b)의 란덴 변환은 뒤집어 읽으면 적분 $I(a,b)$ 가 조작 $(a,b)\\mapsto\\left(\\frac{a+b}{2},\\sqrt{ab}\\right)$ 에 대해 **불변**이라는 진술이다. 불변량을 아는 반복은 곧 알고리즘이다 — 반복이 공통 극한 $M(a,b)$ 로 (그것도 이차 수렴으로) 가므로 $I(a,b)=I(M,M)=\\dfrac{\\pi}{2M(a,b)}$, 즉 가우스의 항등식이 나온다. 초월적 적분이 산술 연산 몇 번으로 계산되는 것이다.\\n\\n**공통으로 흐르는 발상**은 '원래 결과를 다른 방향으로 읽는다'는 것이다. 부등식은 **길이**로, 최대화는 **단조 반복**으로, 변수변환은 **불변 연산**으로 뒤집어 읽었다. 그리고 세 경우 모두 8장 전체를 지배했던 같은 장치가 다시 등장한다 — $\\mathbb{D}$ 의 자기동형사상 $\\psi_\\alpha$ 다. 문제 3·4에서는 등거리사상으로서(균질성을 주고), 문제 7에서는 확대사상의 재료로서(제곱근을 끼워 넣을 자리를 만들고), 그리고 8.4.5·문제 9에서는 정규화 도구로서(모수를 잠그고) 쓰인다. '단위원판에는 특별한 점이 없다'는 이 한 가지 대칭성이 8장의 모든 결과를 관통한다."
+        }
+      ]
     }
   ]
 }
