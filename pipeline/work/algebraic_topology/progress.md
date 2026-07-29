@@ -110,7 +110,7 @@
 
 | 045 | [x] | 2.2.ex Exercises | exercises | `045__AlgebraicTopol__2_2_ex_Exercises__EX.txt` |
 
-| 046 | [ ] | 2.3 The Formal Viewpoint | section | `046__AlgebraicTopol__2_3_TheFormalViewpoint.txt` |
+| 046 | [x] | 2.3 The Formal Viewpoint | section | `046__AlgebraicTopol__2_3_TheFormalViewpoint.txt` |
 
 | 047 | [ ] | 2.3.1 Axioms for Homology | section | `047__AlgebraicTopol__2_3_1_AxiomsforHomology.txt` |
 
