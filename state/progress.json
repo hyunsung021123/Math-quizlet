@@ -67,27 +67,21 @@
       "section:1": true,
       "section:2": true,
       "section:3": true,
-      "section:5": true,
-      "section:4": true
+      "section:5": true
     },
     "chapter_8_conformal_mappings": {
       "section:0": true,
       "section:1": true,
-      "section:2": true,
-      "section:4": true,
-      "section:3": true,
-      "section:5": true,
-      "section:6": true,
-      "section:7": true
+      "section:2": true
     }
   },
   "lastPos": {
-    "topicId": "chapter_2_cauchy_s_theorem_and_its_appli",
+    "topicId": "chapter_2_homology",
     "view": {
       "type": "section",
-      "index": 5
+      "index": 0
     },
-    "cardIndex": 1
+    "cardIndex": 0
   },
-  "updatedAt": "2026-07-30T14:41:26.956Z"
+  "updatedAt": "2026-08-03T05:07:03.091Z"
 }
