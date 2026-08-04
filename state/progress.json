@@ -35,7 +35,8 @@
       "section:16": true,
       "section:15": true,
       "section:12": true,
-      "section:17": true
+      "section:17": true,
+      "section:18": true
     },
     "chapter_2_homology": {
       "section:0": true,
@@ -88,5 +89,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-08-04T11:38:14.685Z"
+  "updatedAt": "2026-08-04T11:39:05.311Z"
 }
