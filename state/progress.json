@@ -48,7 +48,9 @@
       "section:7": true,
       "section:8": true,
       "section:9": true,
-      "section:10": true
+      "section:10": true,
+      "section:11": true,
+      "section:12": true
     },
     "chapter_2_cauchy_s_theorem_and_its_appli": {
       "section:0": true,
@@ -83,5 +85,5 @@
     },
     "cardIndex": 4
   },
-  "updatedAt": "2026-08-04T08:48:41.648Z"
+  "updatedAt": "2026-08-04T08:48:48.646Z"
 }
