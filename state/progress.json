@@ -50,7 +50,9 @@
       "section:9": true,
       "section:10": true,
       "section:11": true,
-      "section:12": true
+      "section:12": true,
+      "section:13": true,
+      "section:14": true
     },
     "chapter_2_cauchy_s_theorem_and_its_appli": {
       "section:0": true,
@@ -81,9 +83,9 @@
     "topicId": "chapter_2_homology",
     "view": {
       "type": "section",
-      "index": 14
+      "index": 15
     },
-    "cardIndex": 1
+    "cardIndex": 0
   },
-  "updatedAt": "2026-08-04T10:04:49.147Z"
+  "updatedAt": "2026-08-04T10:05:09.787Z"
 }
