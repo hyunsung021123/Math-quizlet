@@ -89,6 +89,12 @@
       "title": "Chapter 3. Cohomology",
       "file": "chapter_3_cohomology.json",
       "book": "Hatcher — Algebraic Topology"
+    },
+    {
+      "id": "2_matching_covering_and_packing",
+      "title": "2. Matching, Covering and Packing",
+      "file": "2_matching_covering_and_packing.json",
+      "book": "Diestel — Graph Theory"
     }
   ]
 }
