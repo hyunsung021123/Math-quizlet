@@ -120,7 +120,7 @@
 
 | 050 | [x] | 2.A Homology and Fundamental Group | section | `050__AlgebraicTopol__2_A_HomologyandFundamentalGrou.txt` |
 
-| 051 | [ ] | 2.B Classical Applications | section | `051__AlgebraicTopol__2_B_ClassicalApplications.txt` |
+| 051 | [x] | 2.B Classical Applications | section | `051__AlgebraicTopol__2_B_ClassicalApplications.txt` |
 
 | 052 | [ ] | 2.B.ex Exercises | exercises | `052__AlgebraicTopol__2_B_ex_Exercises__EX.txt` |
 
