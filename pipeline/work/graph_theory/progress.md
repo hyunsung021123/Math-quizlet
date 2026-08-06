@@ -11,7 +11,7 @@
 | 000 | [x] | 1.1 Graphs | section | `000__GraphTheory__1_1_Graphs.txt` |
 | 001 | [x] | 1.2 The degree of a vertex | section | `001__GraphTheory__1_2_Thedegreeofavertex.txt` |
 | 002 | [x] | 1.3 Paths and cycles | section | `002__GraphTheory__1_3_Pathsandcycles.txt` |
-| 003 | [ ] | 1.4 Connectivity | section | `003__GraphTheory__1_4_Connectivity.txt` |
+| 003 | [x] | 1.4 Connectivity | section | `003__GraphTheory__1_4_Connectivity.txt` |
 | 004 | [ ] | 1.5 Trees and forests | section | `004__GraphTheory__1_5_Treesandforests.txt` |
 | 005 | [ ] | 1.6 Bipartite graphs | section | `005__GraphTheory__1_6_Bipartitegraphs.txt` |
 | 006 | [ ] | 1.7 Contraction and minors | section | `006__GraphTheory__1_7_Contractionandminors.txt` |
