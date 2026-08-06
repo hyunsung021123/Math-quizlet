@@ -13,7 +13,7 @@
 | 002 | [x] | 1.3 Paths and cycles | section | `002__GraphTheory__1_3_Pathsandcycles.txt` |
 | 003 | [x] | 1.4 Connectivity | section | `003__GraphTheory__1_4_Connectivity.txt` |
 | 004 | [x] | 1.5 Trees and forests | section | `004__GraphTheory__1_5_Treesandforests.txt` |
-| 005 | [ ] | 1.6 Bipartite graphs | section | `005__GraphTheory__1_6_Bipartitegraphs.txt` |
+| 005 | [x] | 1.6 Bipartite graphs | section | `005__GraphTheory__1_6_Bipartitegraphs.txt` |
 | 006 | [ ] | 1.7 Contraction and minors | section | `006__GraphTheory__1_7_Contractionandminors.txt` |
 | 007 | [ ] | 1.8 Euler tours | section | `007__GraphTheory__1_8_Eulertours.txt` |
 | 008 | [ ] | 1.9 Some linear algebra | section | `008__GraphTheory__1_9_Somelinearalgebra.txt` |
