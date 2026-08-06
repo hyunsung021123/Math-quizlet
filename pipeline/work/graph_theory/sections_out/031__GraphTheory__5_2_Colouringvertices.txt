@@ -1,0 +1,326 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 5. Colouring
+현재 소단원: 5.2 Colouring vertices
+직전 소단원: 「5.1 Colouring maps and planar graphs」
+[본문]
+126
+5. Colouring
+duces a 5-colouring of G −v in which u and w receive the same colour,
+that of vP from our colouring of G/P.
+The neighbours of v in this
+colouring of G −v thus use at most four colours, and we can colour v
+with the ﬁfth colour.
+⇤
+As a backdrop to the two famous theorems above, let us cite another
+well-known result:
+Theorem 5.1.3. (Gr¨otzsch 1959)
+Every planar graph not containing a triangle is 3-colourable.
+5.2 Colouring vertices
+How do we determine the chromatic number of a given graph? How can
+we ﬁnd a vertex-colouring with as few colours as possible? How does
+the chromatic number relate to other graph invariants, such as average
+degree, connectivity or girth?
+Straight from the deﬁnition of the chromatic number we may derive
+the following upper bound:
+Proposition 5.2.1. Every graph G with m edges satisﬁes
+χ(G) 6 1
+2 +
+q
+2m + 1
+4 .
+Proof. Let c be a vertex colouring of G with k = χ(G) colours. Then
+G has at least one edge between any two colour classes: if not, we could
+have used the same colour for both classes. Thus, m > 1
+2k(k−1). Solving
+this inequality for k, we obtain the assertion claimed.
+⇤
+One obvious way to colour a graph G with not too many colours is
+the following greedy algorithm: starting from a ﬁxed vertex enumeration
+greedy
+algorithm
+v1, . . . , vn of G, we consider the vertices in turn and colour each vi with
+the ﬁrst available colour – e.g., with the smallest positive integer not
+already used to colour any neighbour of vi among v1, . . . , vi−1. In this
+way, we never use more than ∆(G) + 1 colours, even for unfavourable
+choices of the enumeration v1, . . . , vn. If G is complete or an odd cycle,
+then this is even best possible.
+In general, though, this upper bound of ∆+ 1 is rather generous,
+even for greedy colourings. Indeed, when we come to colour the vertex vi
+in the above algorithm, we only need a supply of dG[v1,...,vi](vi)+1 rather
+than dG(vi) + 1 colours to proceed; recall that, at this stage, the algo-
+rithm ignores any neighbours vj of vi with j > i. Hence in most graphs,
+
+5.2 Colouring vertices
+127
+there will be scope for an improvement of the ∆+1 bound by choosing a
+particularly suitable vertex ordering to start with: one that picks vertices
+of large degree early (when most neighbours are ignored) and vertices
+of small degree last. Locally, the number dG[v1,...,vi](vi) + 1 of colours
+required will be smallest if vi has minimum degree in G[v1, . . . , vi]. But
+this is easily achieved: we just choose vn ﬁrst, with d(vn) = δ(G), then
+choose as vn−1 a vertex of minimum degree in G −vn, and so on.
+The least number k such that G has a vertex enumeration in which
+each vertex is preceded by fewer than k of its neighbours is called
+the colouring number col(G) of G. The enumeration we just discussed
+colouring
+number
+col(G)
+shows that col(G) 6 maxH✓G δ(H) + 1. But for H ✓G clearly also
+col(G) > col(H) and col(H) > δ(H) + 1, since the ‘back-degree’ of the
+last vertex in any enumeration of H is just its ordinary degree in H,
+which is at least δ(H). So we have proved the following:
+Proposition 5.2.2. Every graph G satisﬁes
+χ(G) 6 col(G) = max { δ(H) | H ✓G } + 1 .
+⇤
+The colouring number of a graph is closely related to its arboricity; see
+Exercise 14 and the remark following Theorem 2.4.3.
+Proposition 5.2.2 shows that every k-chromatic graph has a sub-
+graph of minimum degree at least k −1. In fact, it has a k-chromatic
+such subgraph:
+Lemma 5.2.3. Every k-chromatic graph has a k-chromatic subgraph of
+[7.3]
+[9.2.1]
+[9.2.3]
+[11.2.3]
+minimum degree at least k −1.
+Proof. Given G with χ(G) = k, let H ✓G be minimal with χ(H) = k.
+If H had a vertex v of degree dH(v) 6 k −2, we could extend a (k −1)-
+colouring of H −v to one of H, contradicting the choice of H.
+⇤
+As we have seen, every graph G satisﬁes χ(G) 6 ∆(G) + 1, with
+equality for complete graphs and odd cycles.
+In all other cases, this
+general bound can be improved a little:
+Theorem 5.2.4. (Brooks 1941)
+Let G be a connected graph. If G is neither complete nor an odd cycle,
+then
+χ(G) 6 ∆(G) .
+
+128
+5. Colouring
+Proof. We apply induction on |G|. If ∆(G) 6 2, then G is a path or a cy-
+cle, and the assertion is trivial. We therefore assume that ∆:= ∆(G) > 3,
+∆
+and that the assertion holds for graphs of smaller order. Suppose that
+χ(G) > ∆.
+Let v 2 G be a vertex and H := G −v. Then χ(H) 6 ∆: by in-
+v, H
+duction, every component H0 of H satisﬁes χ(H0) 6 ∆(H0) 6 ∆unless
+H0 is complete or an odd cycle, in which case χ(H0) = ∆(H0) + 1 6 ∆
+as every vertex of H0 has maximum degree in H0 and one such vertex is
+also adjacent to v in G.
+Since H can be ∆-coloured but G cannot, we have the following:
+Every ∆-colouring of H uses all the colours 1, . . . , ∆on
+the neighbours of v; in particular, d(v) = ∆.
+(1)
+Given any ∆-colouring of H, let us denote the neighbour of v col-
+oured i by vi, i = 1, . . . , ∆. For all i 6= j, let Hi,j denote the subgraph
+v1, . . . , v∆
+of H spanned by all the vertices coloured i or j.
+Hi,j
+For all i 6= j, the vertices vi and vj lie in a common com-
+ponent Ci,j of Hi,j.
+(2)
+Otherwise we could interchange the colours i and j in one of those
+components; then vi and vj would be coloured the same, contrary to (1).
+Ci,j
+Ci,j is always a vi– vj path.
+(3)
+Indeed, let P be a vi– vj path in Ci,j. As dH(vi) 6 ∆−1, the neighbours
+of vi have pairwise di↵erent colours: otherwise we could recolour vi, con-
+trary to (1). Hence the neighbour of vi on P is its only neighbour in Ci,j,
+and similarly for vj. Thus if Ci,j 6= P, then P has an inner vertex with
+three identically coloured neighbours in H; let u be the ﬁrst such vertex
+on P (Fig. 5.2.1). Since at most ∆−2 colours are used on the neighbours
+of u, we may recolour u. But this makes P˚u into a component of Hi,j,
+contradicting (2).
+vi
+vj
+P˚u
+Ci,j
+i
+j
+j
+j
+j
+i
+i
+i
+v
+u
+i
+Fig. 5.2.1. The proof of (3) in Brooks’s theorem
+For distinct i, j, k, the paths Ci,j and Ci,k meet only in vi.
+(4)
+
+5.2 Colouring vertices
+129
+For if vi 6= u 2 Ci,j \Ci,k, then u has two neighbours coloured j and two
+coloured k, so we may recolour u. In the new colouring, vi and vj lie in
+di↵erent components of Hi,j, contrary to (2).
+The proof of the theorem now follows easily. If the neighbours of v
+are pairwise adjacent, then each has ∆neighbours in N(v)[{v} already,
+so G = G[N(v) [ {v}] = K∆+1. As G is complete, there is nothing to
+show. We may thus assume that v1v2 /2 G, where v1, . . . , v∆derive their
+v1, . . . , v∆
+names from some ﬁxed ∆-colouring c of H. Let u 6= v2 be the neighbour
+c
+of v1 on the path C1,2; then c(u) = 2. Interchanging the colours 1 and 3
+u
+in C1,3, we obtain a new colouring c0 of H; let v0
+i, H0
+i,j, C0
+i,j etc. be deﬁned
+c0
+with respect to c0 in the obvious way. As a neighbour of v1 = v0
+3, our
+vertex u now lies in C0
+2,3 , since c0(u) = c(u) = 2. By (4) for c, however,
+the path ˚v1C1,2 retained its original colouring, so u 2 ˚v1C1,2 ✓C0
+1,2.
+Hence u 2 C0
+2,3 \ C0
+1,2, contradicting (4) for c0.
+⇤
+We have so far seen some necessary conditions for high chromaticity,
+in the form of upper bounds on χ. If χ(G) > k, for example, then also
+∆> k (unless G is complete or an odd cycle), and G has a subgraph of
+minimum degree at least k −1. These conditions are far from suﬃcient,
+though: if G = Kn,n, say, they hold for all k 6 n but χ(G) = 2.
+It would be nice also to have some suﬃcient conditions for χ > k. If
+they are easy to check, they might provide useful certiﬁcates for why we
+are unable to colour a given graph with few colours. If they could even
+be shown to be necessary too, they would ‘explain’ why certain graphs
+are highly chromatic – just as the marriage condition in Hall’s theorem
+‘explains’ why certain matchings in bipartite graphs fail: its violation
+clearly prevents a graph from having the desired matching, and it is
+violated every time such a matching fails to exist.
+For example, we might try to determine the class Xk of ✓-minimal
+graphs that cannot be coloured with fewer than k colours. As is easy
+to check (cf. Lemma 12.6.1.), a given graph G satisﬁes χ(G) > k if and
+(12.6.1)
+only if it has a subgraph in Xk, just as in Kuratowski’s planarity theo-
+rem with minors or topological minors. So containing any graph from Xk
+is a certiﬁcate for χ > k, and these certiﬁcates together ‘explain’ this
+phenomenon in the sense discussed.
+But will these certiﬁcates be easy to ﬁnd in an arbitrary k-chromatic
+graph, or at least easy to check? That is, will it be easy to verify that a
+given graph X 2 Xk is indeed in Xk, or even just that χ(X) > k? We
+shall return to this question in a moment.
+One obvious suﬃcient condition for χ(G) > k is that Kk ✓G. But
+this condition is not necessary: as Theorem 5.2.5 will show, k-chromatic
+graphs need not even contain a triangle. Hence while Kk certainly lies
+in Xk, it is not its only element. Conversely, Lemma 5.2.3 implies that all
+the graphs in Xk have minimum degree at least k −1; but not all graphs
+of minimum degree k −1 are in Xk, since they need not satisfy χ > k.
+
+130
+5. Colouring
+The following theorem of Erd˝os implies that Xk cannot be ﬁnite.
+In fact, it implies that for no k is there a ﬁnite set X of graphs X with
+χ(X) > 3 such that every k-chromatic graph has a subgraph in X:
+Theorem 5.2.5. (Erd˝os 1959)
+[9.2.3]
+For every integer k there exists a graph G with girth g(G) > k and
+chromatic number χ(G) > k.
+Theorem 5.2.5 was ﬁrst proved non-constructively using random
+graphs, and we shall give this proof in Chapter 11.2. Constructing graphs
+of large chromatic number and girth directly is not easy; cf. Exercise 22
+for the simplest case.
+The message of Erd˝os’s theorem is that, contrary perhaps to what
+we had hoped, large chromatic number can occur as a purely global
+phenomenon: locally, around each vertex, a graph of large girth looks
+just like a tree, and in particular is 2-colourable there. But what exactly
+can cause high chromaticity as a global phenomenon remains a mystery.
+Nevertheless, there exists a simple – though not always short – pro-
+cedure to construct all the graphs of chromatic number at least k. For
+each k 2 N, let us deﬁne the class of k-constructible graphs recursively
+k-con-
+structible
+as follows:
+(i) Kk is k-constructible.
+(ii) If G is k-constructible and two vertices x, y of G are non-adjacent,
+then also (G + xy)/xy is k-constructible.
+(iii) If G1, G2 are k-constructible and there are vertices x, y1, y2 such
+that G1 \ G2 = {x} and xy1 2 E(G1) and xy2 2 E(G2), then also
+(G1 [ G2) −xy1 −xy2 + y1y2 is k-constructible (Fig. 5.2.2).
+y1
+y2
+y1
+y2
+x
+x
+x
+1
+G
+2
+G
+=
+Fig. 5.2.2. The Haj´os construction (iii)
+One easily checks inductively that all k-constructible graphs – and
+hence their supergraphs – are at least k-chromatic. For example, any
+colouring of the graph (G + xy)/xy in (ii) induces a colouring of G, and
+hence by inductive assumption uses at least k colours. Similarly, in any
+colouring of the graph constructed in (iii) the vertices y1 and y2 do not
+both have the same colour as x, so this colouring induces a colouring of
+either G1 or G2 and hence uses at least k colours.
+It is remarkable, though, that the converse holds too:
+
+131
+Theorem 5.2.6. (Haj´os 1961)
+Let G be a graph and k 2 N. Then χ(G) > k if and only if G has a k-
+constructible subgraph.
+Proof.
+Let G be a graph with χ(G) > k; we show that G has a k-
+constructible subgraph. Suppose not; then k > 3. Adding some edges
+if necessary, let us make G edge-maximal with the property that none
+of its subgraphs is k-constructible. Now G is not a complete r-partite
+graph for any r: for then χ(G) > k would imply r > k, and G would
+contain the k-constructible graph Kk.
+Since G is not a complete multipartite graph, non-adjacency is not
+an equivalence relation on V (G). So there are vertices y1, x, y2 such that
+y1x, xy2 /2 E(G) but y1y2 2 E(G). Since G is edge-maximal without
+x, y1, y2
+a k-constructible subgraph, each edge xyi lies in some k-constructible
+subgraph Hi of G + xyi (i = 1, 2).
+H1, H2
+Let H0
+2 be an isomorphic copy of H2 that contains x and H2 −H1
+H0
+2
+but is otherwise disjoint from G, together with an isomorphism v 7! v0
+v0 etc.
+from H2 to H0
+2 that ﬁxes H2 \ H0
+2 pointwise. Then H1 \ H0
+2 = {x}, so
+H := (H1 [ H0
+2) −xy1 −xy0
+2 + y1y0
+2
+is k-constructible by (iii). One vertex at a time, let us identify in H each
+vertex v0 2 H0
+2 −G with its partner v; since vv0 is never an edge of H,
+each of these identiﬁcations amounts to a construction step of type (ii).
+Eventually, we obtain the graph
+(H1 [ H2) −xy1 −xy2 + y1y2 ✓G ;
+this is the desired k-constructible subgraph of G.
+⇤
+Does Haj´os’s theorem solve our Kuratowski-type problem for highly
+chromatic graphs, which was to ﬁnd a class of graphs of chromatic num-
+ber at least k with the property that every such graph has a subgraph
+in this class?
+Formally it does, albeit with an inﬁnite characterizing
+class: the class of k-constructible graphs, which contains Xk.
+Unlike
+Kuratowski’s characterization of planar graphs, however, this does not –
+at least not obviously – make Haj´os’s theorem a good characterization
+of the graphs of chromatic number < k: as one can show, proving that
+a given k-constructible graph is indeed k-constructible is just as hard as
+proving that a graph of chromatic number > k does indeed need at least
+k colours. See the notes for details.
+5.3 Colouring edges
+Clearly, every graph G satisﬁes χ0(G) > ∆(G). For bipartite graphs, we
+have equality here:
+5.3 Colouring edges

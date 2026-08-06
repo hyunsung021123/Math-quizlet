@@ -1,0 +1,209 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.3 Homogeneous and universal graphs
+직전 소단원: 「8.2 Paths, trees, and ends」
+[본문]
+246
+8. Inﬁnite Graphs
+8.3 Homogeneous and universal graphs
+Unlike ﬁnite graphs, inﬁnite graphs o↵er the possibility to represent an
+entire graph property P by just one specimen, a single graph that con-
+tains all the graphs in P up to some ﬁxed cardinality. Such graphs are
+called ‘universal’ for this property.
+More precisely, if 6 is a graph relation (such as the minor, topolo-
+gical minor, subgraph, or induced subgraph relation up to isomorphism),
+we call a countable graph G⇤universal in P (for 6) if G⇤2 P and G 6 G⇤
+universal
+for every countable graph G 2 P.
+Is there a graph that is universal in the class of all countable graphs?
+Suppose a graph R has the following property:
+Whenever U and W are disjoint ﬁnite sets of vertices in R,
+there exists a vertex v 2 R −U −W that is adjacent in R
+to all the vertices in U but to none in W.
+(⇤)
+Then R is universal even for the strongest of all graph relations, the
+induced subgraph relation. Indeed, in order to embed a given countable
+graph G in R we just map its vertices v1, v2, . . . to R inductively, making
+sure that vn gets mapped to a vertex v 2 R adjacent to the images of
+all the neighbours of vn in G[v1, . . . , vn] but not adjacent to the image
+of any non-neighbour of vn in G[v1, . . . , vn].
+Clearly, this map is an
+isomorphism between G and the subgraph of R induced by its image.
+Theorem 8.3.1. (Erd˝os & R´enyi 1963)
+[11.3.5]
+There exists a unique countable graph R with property (⇤).
+R
+Proof. To prove existence, we construct a graph R with property (⇤)
+inductively. Let R0 := K1. For all n 2 N, let Rn+1 be obtained from
+Rn by adding for every set U ✓V (Rn) a new vertex v joined to all the
+vertices in U but to none outside U. (In particular, the new vertices form
+an independent set in Rn+1.) Clearly R := S
+n2N Rn has property (⇤).
+To prove uniqueness, let R = (V, E) and R0 = (V 0, E0) be two graphs
+with property (⇤), each given with a ﬁxed vertex enumeration. We con-
+struct a bijection ': V !V 0 in an inﬁnite sequence of steps, deﬁning '(v)
+for one new vertex v 2 V at each step.
+At every odd step we look at the ﬁrst vertex v in the enumeration
+of V for which '(v) has not yet been deﬁned. Let U be the set of those
+of its neighbours u in R for which '(u) has already been deﬁned. This
+is a ﬁnite set. Using (⇤) for R0, ﬁnd a vertex v0 2 V 0 outside the image
+of ' (which is a ﬁnite set), so that v0 is adjacent in R0 to all the vertices
+in '(U) but to no other vertex in the image of '. Put '(v) := v0.
+At even steps in the deﬁnition process we do the same thing with
+the roles of R and R0 interchanged: we look at the ﬁrst vertex v0 in
+the enumeration of V 0 that does not yet lie in the image of ', and set
+
+8.3 Homogeneous and universal graphs
+247
+'(v) = v0 for a new vertex v that matches the adjacencies and non-
+adjacencies of v0 among the vertices for which ' (resp. '−1) has already
+been deﬁned.
+By our minimum choices of v and v0, the bijection gets deﬁned on
+all of V and all of V 0, and it is clearly an isomorphism.
+⇤
+The graph R in Theorem 8.3.1 is usually called the Rado graph,
+Rado graph
+named after Richard Rado who gave one of its earliest explicit deﬁ-
+nitions.
+The method of constructing a bijection in alternating steps,
+as in the uniqueness part of the proof, is known as the back-and-forth
+technique.
+The Rado graph R is unique in another rather fascinating respect.
+We shall hear more about this in Chapter 11.3, but in a nutshell it is the
+following. If we generate a countably inﬁnite random graph by admit-
+ting its pairs of vertices as edges independently with some ﬁxed positive
+probability p 2 (0, 1), then with probability 1 the resulting graph has
+property (⇤), and is hence isomorphic to R ! In the context of inﬁnite
+graphs, the Rado graph is therefore also called the (countably inﬁnite)
+inﬁnite
+random
+graph
+random graph.
+As one would expect of a random graph, the Rado graph shows
+a high degree of uniformity. One aspect of this is its resilience against
+small changes: the deletion of ﬁnitely many vertices or edges, and similar
+local changes, leave it ‘unchanged’ and result in just another copy of R
+(Exercise 54).
+The following rather extreme aspect of uniformity, however, is still
+surprising: no matter how we partition the vertex set of R into two
+parts, at least one of the parts will induce another isomorphic copy of R.
+Trivial examples aside, the Rado graph is the only countable graph with
+this property, and hence unique in yet another respect:
+Proposition 8.3.2. The Rado graph is the unique countable graph G
+other than K@0 and K@0 such that, no matter how V (G) is partitioned
+into two parts, one of the parts induces an isomorphic copy of G.
+Proof. We ﬁrst show that the Rado graph R has the partition property.
+Let {V1, V2} be a partition of V (R). If (⇤) fails in both R[V1] and R[V2],
+say for sets U1, W1 and U2, W2, respectively, then (⇤) fails for U = U1 [U2
+and W = W1 [ W2 in R, a contradiction.
+To show uniqueness, let G = (V, E) be a countable graph with the
+partition property. Let V1 be its set of isolated vertices, and V2 the rest.
+If V1 6= ; then G 6⇠= G[V2], since G has isolated vertices but G[V2] does
+not. Hence G = G[V1] ⇠= K@0. Similarly, if G has a vertex adjacent to
+all other vertices, then G = K@0.
+Assume now that G has no isolated vertex and no vertex joined
+to all other vertices. If G is not the Rado graph then there are sets
+U, W for which (⇤) fails in G; choose these with |U [ W| minimum.
+
+248
+8. Inﬁnite Graphs
+Assume ﬁrst that U 6= ;, and pick u 2 U. Let V1 consist of u and all
+vertices outside U [ W that are not adjacent to u, and let V2 contain
+the remaining vertices. As u is isolated in G[V1], we have G 6⇠= G[V1]
+and hence G ⇠= G[V2]. By the minimality of |U [ W|, there is a vertex
+v 2 G[V2] −U −W that is adjacent to every vertex in U r {u} and to
+none in W. But v is also adjacent to u, because it lies in V2. So U, W
+and v satisfy (⇤) for G, contrary to assumption.
+Finally, assume that U = ;. Then W 6= ;. Pick w 2 W, and consider
+the partition {V1, V2} of V where V1 consists of w and all its neighbours
+outside W. As before, G 6⇠= G[V1] and hence G ⇠= G[V2]. Therefore U
+and W r{w} satisfy (⇤) in G[V2], with v 2 V2 rW say, and then U, W, v
+satisfy (⇤) in G.
+⇤
+Another indication of the high degree of uniformity in the structure
+of the Rado graph is its large automorphism group. For example, R is
+easily seen to be vertex-transitive: given any two vertices x and y, there
+is an automorphism of R mapping x to y.
+In fact, much more is true: using the back-and-forth technique, one
+can easily show that the Rado graph is homogeneous: every isomorphism
+homoge-
+neous
+between two ﬁnite induced subgraphs can be extended to an automor-
+phism of the entire graph (Exercise 56).
+Which other countable graphs are homogeneous?
+The complete
+graph K@0 and its complement are again obvious examples. Moreover,
+for every integer r > 3 there is a homogeneous Kr-free graph Rr, con-
+structed as follows. Let Rr
+0 := K1, and let Rr
+n+1 be obtained from Rr
+n
+by joining, for every induced subgraph H 6◆Kr−1 of Rr
+n, a new vertex
+vH to every vertex in H. Then let Rr := S
+n2N Rr
+n. Clearly, as the new
+Rr
+vertices vH of Rr
+n+1 are independent, there is no Kr in Rr
+n+1 if there
+was none in Rr
+n, so Rr 6◆Kr by induction on n. Just like the Rado
+graph, Rr is clearly universal among the Kr-free countable graphs, and
+by the back-and-forth argument from the proof of Theorem 8.3.1 it is
+easily seen to be homogeneous.
+By the following deep theorem of Lachlan and Woodrow, the count-
+able homogeneous graphs we have seen so far are essentially all:
+Theorem 8.3.3. (Lachlan & Woodrow 1980)
+Every countably inﬁnite homogeneous graph is one of the following:
+• a disjoint union of complete graphs of the same order, or the
+complement of such a graph;
+• the graph Rr or its complement, for some r > 3;
+• the Rado graph R.
+To conclude this section, let us return to our original problem: for
+which graph properties is there a graph that is universal with this prop-
+erty? Most investigations into this problem have addressed it from a
+
+249
+more general model-theoretic point of view, and have therefore been
+based on the strongest of all graph relations, the induced subgraph rela-
+tion. As a consequence, most of these results are negative; see the notes.
+From a graph-theoretic point of view, it seems more promising to
+look instead for universal graphs for the weaker subgraph relation, or
+even the topological minor or minor relation. For example, while there
+is no universal planar graph for subgraphs or induced subgraphs, there
+is one for minors:
+Theorem 8.3.4. (Diestel & K¨uhn 1999)
+There exists a universal planar graph for the minor relation.
+This remained the only result about universal graphs for the minor-
+relation for over 20 years, until Georgakopoulos found 4-universal graphs
+in Forb4(X) = { G | X 64 G } for X = K5 and X = K3,3, and proved
+there is none for X = K@0.
+8.4 Connectivity and matching
+In this section we look at inﬁnite versions of Menger’s theorem and of the
+matching theorems from Chapter 2. This area of inﬁnite graph theory is
+one of its best developed ﬁelds, with several deep results. One of these,
+however, stands out among the rest: a version of Menger’s theorem that
+had been conjectured by Erd˝os decades ago, and was proved only fairly
+recently by Aharoni and Berger. The techniques developed for its proof
+inspired, over the years, much of the theory in this area.
+Before we turn to this result, however, let us take a brief look at
+edge-connectivity.
+Recall from Section 8.1 that in an inﬁnitely edge-
+connected countable graph we can easily ﬁnd inﬁnitely many edge-
+disjoint spanning trees. Can we still ﬁnd such trees when the graph is
+uncountable? We can, but this is not quite as easy to prove (Exercise 62).
+The following deep theorem of Laviolette reduces the above prob-
+lem to its countable case – as it does for many other problems involving
+edge-connectivity. Let H be a set of countable graphs forming an edge-
+decomposition of an arbitrary graph G. Call this decomposition bond-
+faithful if every countable bond of G is contained in some H 2 H and
+every ﬁnite bond of any H 2 H is a bond also of G. Note that the ﬁnite
+bonds of G will be bonds of the H 2 H that contain them. (Why?)
+Theorem 8.4.1. (Laviolette 2005)
+Every graph has a bond-faithful decomposition into countable graphs.
+We shall not be able to prove Laviolette’s theorem here. But let
+us illustrate its power in reducing problems to their countable case by
+deducing an early classic from the theory of inﬁnite graphs.
+8.4 Connectivity and matching

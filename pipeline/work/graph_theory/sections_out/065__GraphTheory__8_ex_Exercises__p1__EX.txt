@@ -1,0 +1,479 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.ex Exercises (분할 part 1)
+직전 소단원: 「8.8 Infinite graphs as limits of finite ones」
+[연습문제]
+280
+8. Inﬁnite Graphs
+them for all p in some coﬁnal Q ✓P. For example, we can construct
+spanning trees inductively in all the Gn by expanding a dummy vertex
+in the tree Tn ✓Gn to a star in Tn+1 ✓Gn+1. Then our given bonding
+maps Xpn ! Xpm will map the subspace X0
+pn induced by Tn to that
+induced by Tm, and these X0
+pn will have a topological spanning tree in
+X = |G| as their inverse limit. This construction is possible only because
+the partition classes of the pn are connected in G; we could not perform
+it on all of P(G).
+Arcs and circles in |G|, or in a standard subspace, can be obtained
+easily by applying the following lifting lemma with Y = [0, 1] or Y = S1.
+Let ( Xp | p 2 P ) be any inverse system of compact spaces, with bonding
+maps fqp say, and let X be its inverse limit. Let Y be a topological space
+with continuous compatible maps gp: Y ! Xp: maps that commute with
+compatible
+maps
+the fqp in that gp = fqp ◦gq whenever p < q. Let us call the family
+( gp | p 2 P ) eventually injective if for all distinct y, y0 2 Y there exists
+some p 2 P with gp(y) 6= gp(y0).
+Lemma 8.8.4. There is a unique continuous map g: Y ! X that com-
+lifting
+lemma
+mutes with the projections fp: X ! Xp in that gp = fp ◦g for all p 2 P.
+If the gp are eventually injective, then g is injective.
+⇤
+For example, suppose we wish to ﬁnd an arc in X between some
+points x and y.
+We can ﬁnd a topological x–y path g: [0, 1] ! X by
+ﬁnding topological fp(x)–fp(y) paths gp: [0, 1] ! Xp that commute with
+the fqp. If we can make these gp eventually injective, then g will be
+injective, and its image will be the desired arc.
+Similarly, if we can ﬁnd compatible circles gp: S1 ! Xp that are
+eventually injective, whose images contain all the vertices of G/p, and
+which commute with the fqp, then g will deﬁne a Hamilton circle of G,
+Hamilton
+circle
+a circle in |G| that traverses every vertex.
+Exercises
+1.−Show that a connected graph is countable if all its vertices have count-
+able degrees.
+2.−Given countably many sequences σi = si
+1, si
+2, . . . (i 2 N) of natural num-
+bers, ﬁnd one sequence σ = s1, s2, . . . that beats every σi eventually,
+i.e. such that for every i there exists an n(i) such that sn > si
+n for all
+n > n(i).
+3.−Can a countable set have uncountably many subsets whose intersections
+have ﬁnitely bounded size?
+4.−Let T be an inﬁnite rooted tree.
+Show that every ray in T has an
+increasing tail, that is, a tail whose sequence of vertices increases in the
+tree-order associated with T and its root.
+
+Exercises
+281
+5.−Let G be an inﬁnite graph and A, B ✓V (G). Show that if no ﬁnite set
+of vertices separates A from B in G, then G contains an inﬁnite set of
+disjoint A–B paths.
+6.−In Proposition 8.1.1, the existence of a spanning tree was proved using
+Zorn’s lemma ‘from below’, to ﬁnd a maximal acyclic subgraph. For
+ﬁnite graphs, one can also use induction ‘from above’, to ﬁnd a minimal
+spanning connected subgraph. What happens if we apply Zorn’s lemma
+‘from above’ to ﬁnd such a subgraph?
+For the next two exercises it may help to consider the cycle space of the given
+graph, deﬁned as for ﬁnite graphs in Chapter 1.9.
+7.−Show that if a graph has a spanning tree with inﬁnitely many chords
+then all its spanning trees have inﬁnitely many chords.
+8.
+Show that if a graph contains inﬁnitely many distinct cycles then it
+contains inﬁnitely many edge-disjoint cycles.
+9.
+Let G be a countable inﬁnitely connected graph. Show that G has,
+for every k 2 N, an inﬁnitely connected spanning subgraph of girth at
+least k.
+10.
+Construct, for any given k 2 N, a planar k-connected graph. Can you
+construct one whose girth is also at least k?
+Can you construct an
+inﬁnitely connected planar graph?
+11.
+Theorem 8.1.3 implies that there exists an N!N function fχ such that,
+for every k 2 N, every inﬁnite graph of chromatic number at least fχ(k)
+has a ﬁnite subgraph of chromatic number at least k. (E.g., let fχ be
+the identity on N.) Find similar functions fδ and ffor the minimum
+degree and connectivity, or show that no such functions exist.
+12.
+Let k be an integer and > @1 a regular cardinal. Show that every k-
+connected graph of order contains TKk,as a topological minor.
+13.
+Let k 2 N, and let a, b be two vertices in a graph G.
+(i) Show that there are only ﬁnitely many minimal a–b separators
+of order k, and only ﬁnitely many minimal a–b cuts of order k.
+(A cut is an a– b cut if it separates a from b.)
+(ii) Deduce that every edge of G lies in only ﬁnitely many bonds of
+k edges.
+14.+ Extend Exercise 42 of Chapter 1 to inﬁnite graphs.
+15.
+Use the inﬁnity lemma to show that a rayless connected graph of min-
+imum degree d has a ﬁnite subgraph of minimum degree d.
+16.
+A theorem of Halin says that every graph of chromatic number ↵> @0
+contains a TKβ for every cardinal β < ↵. Prove this for ↵= @0.
+17.−Prove Theorem 8.1.3 for arbitrary graphs using the generalized inﬁnity
+lemma from Appendix A.
+
+282
+8. Inﬁnite Graphs
+18.
+Give a proof of Theorem 8.1.3 for countable graphs that is based on the
+fact that, in this case, the topological space X deﬁned in the third proof
+of the theorem is sequentially compact. (Thus, every inﬁnite sequence
+of points in X has a convergent subsequence: there is an x 2 X such
+that every neighbourhood of x contains a tail of the subsequence.)
+19.−Extend Nash-Williams’s tree covering theorem (2.4.3) to inﬁnite graphs.
+20.+ Extend the packing-covering theorem (2.4.4) to inﬁnite graphs.
+21.+ For every k 2 N, construct a k-connected locally ﬁnite graph such that
+the deletion of the edge set of any cycle disconnects that graph. Deduce
+that the tree packing theorem (2.4.1) of Nash-Williams and Tutte fails
+for inﬁnite graphs.
+(Hint.
+Start with a k-connected ﬁnite graph G0.
+If G0 has a cycle
+C such that deleting E(C) does not disconnect G0, graft some more
+copies of G0 on to E(C) to give C that property. Continue inductively.)
+22.
+Derive the generalized inﬁnity lemma and the compactness principle in
+Appendix A from each other.
+23.
+In the text, the unfriendly partition conjecture is proved for locally
+ﬁnite graphs, using the inﬁnity lemma.
+(i) Give an alternative proof using the compactness principle from
+Appendix A.
+(ii) The proof in the text, by the inﬁnity lemma, required a modiﬁca-
+tion of the statement. Is this still necessary? Which step in the
+proof using the compactness principle reﬂects the requirement
+in the inﬁnity lemma that every admissible partial solution must
+induce an admissible solution on a smaller substructure? Where
+is the local ﬁniteness used?
+24.
+(i) Prove the unfriendly partition conjecture for countable graphs with
+all degrees inﬁnite.
+(ii) Can you adapt the proof to cover also those countable graphs that
+have ﬁnitely many vertices of ﬁnite degree?
+25.
+Rephrase Gallai’s partition theorem of Exercise 55, Ch. 1, in terms of
+degrees, and extend the equivalent version to locally ﬁnite graphs.
+26.
+Prove Theorem 8.4.10 for locally ﬁnite graphs. Does your proof extend
+to arbitrary countable graphs?
+27.
+Extend the marriage theorem to locally ﬁnite graphs, but show that it
+fails for countable graphs with inﬁnite degrees.
+28.
+Show that every locally ﬁnite factor-critical graph is ﬁnite.
+29.+ Show that a locally ﬁnite graph G has a 1-factor if and only if, for
+every ﬁnite set S ✓V (G), the graph G −S has at most |S| odd (ﬁnite)
+components. Find a counterexample that is not locally ﬁnite.
+30.+ Extend Kuratowski’s theorem to countable graphs.
+
+Exercises
+283
+31.−A vertex v 2 G is said to dominate an end ! of G if any of the following
+three assertions holds; show that they are equivalent.
+(i) For some ray R 2 ! there is an inﬁnite v–(R −v) fan in G.
+(ii) For every ray R 2 ! there is an inﬁnite v–(R −v) fan in G.
+(iii) No ﬁnite subset of V (G −v) separates v from a ray in !.
+32.
+Show that a graph G contains a TK@0 if and only if some end of G is
+dominated by inﬁnitely many vertices.
+33.
+Let G be a ﬁnitely separable graph, one in which any two vertices can
+be separated by ﬁnitely many edges.
+(i) Show that any two ends in G that cannot be separated by ﬁnitely
+many edges are dominated by a common vertex.
+(ii) Is the assumption of ﬁnite separability necessary for (i) to hold?
+34.
+Construct a countable graph with uncountably many thick ends. Can
+you ﬁnd a locally ﬁnite such graph?
+35.
+Show that a locally ﬁnite connected vertex-transitive graph has exactly
+0, 1, 2 or inﬁnitely many ends.
+36.+ Show that the automorphisms of a graph G = (V, E) act naturally on
+its ends, i.e., that every automorphism σ: V ! V can be extended to a
+map σ: ⌦(G) ! ⌦(G) such that σ(R) 2 σ(!) whenever R is a ray in an
+end !. Prove that, if G is connected, every automorphism σ of G ﬁxes
+a ﬁnite set of vertices or an end. If σ ﬁxes no ﬁnite set of vertices, can
+it ﬁx more than one end? More than two?
+37.−Show that a locally ﬁnite spanning tree of a graph G contains a ray
+from every end of G.
+38.
+A ray in a graph follows another ray if the two have inﬁnitely many
+vertices in common. Show that if T is a normal spanning tree of G
+then every ray of G follows a unique normal ray of T.
+39.
+Use normal spanning trees to show that a countable connected graph
+has either countably many or continuum many ends.
+40.
+Show that the following assertions are equivalent for connected count-
+able graphs G.
+(i) G has a locally ﬁnite spanning tree.
+(ii) For no ﬁnite separator X ✓V (G) in G does G−X have inﬁnitely
+many components.
+41.
+Show that every (countable) planar 3-connected graph has a locally
+ﬁnite spanning tree.
+42.
+Prove the following inﬁnite version of the Erd˝os-P´osa theorem: an in-
+ﬁnite graph G either contains inﬁnitely many disjoint cycles or it has a
+ﬁnite set Z of vertices such that G −Z is a forest.
+
+284
+8. Inﬁnite Graphs
+43.
+Let G be a connected graph. Call a set U ✓V (G) dispersed if every
+ray in G can be separated from U by a ﬁnite set of vertices. (In the
+topology of Section 8.6, these are precisely the closed subsets of V (G).)
+(i) Prove that G has a normal spanning tree if and only if V (G) is
+a countable union of dispersed sets. Show that in this case we
+can choose any vertex of G as the normal spanning tree’s root.
+(ii) Deduce that if G has a normal spanning tree then so does every
+connected minor of G.
+44.+ Show that a connected graph G has a normal spanning tree if it does
+not contain a subdivision of a fat K@0, one in which every edge has
+been replaced by uncountably many parallel edges.
+(Hint. Apply induction on |G|. Given G, construct an increasing se-
+quence ( Gβ | β < ↵) of smaller graphs exhausting G so that the endver-
+tices of any Gβ-path in G are joined in Gβ by inﬁnitely many indepen-
+dent paths and in G by uncountably many independent paths. Combine
+suitable normal spanning trees of the components of Gβ+1 −Gβ with
+the inductively given normal spanning tree of Gβ to form a normal
+spanning tree of Gβ+1.)
+45.+ Prove Theorem 8.2.5 (ii).
+46.
+(i) Prove that if a given end of a graph contains k disjoint rays for every
+k 2 N then it contains inﬁnitely many disjoint rays.
+(ii)+ Prove that if a given end of a graph contains k edge-disjoint rays
+for every k 2 N then it contains inﬁnitely many edge-disjoint rays.
+47.
+Prove that if a graph contains k disjoint double rays for every k 2 N
+then it contains inﬁnitely many disjoint double rays.
+48.
+Show that, in the ubiquity conjecture, the host graphs G considered
+can be assumed to be locally ﬁnite too.
+49.
+Show that the modiﬁed comb below is not ubiquitous with respect to
+the subgraph relation. Does it become ubiquitous if we delete its 3-star
+on the left?
+50.
+Show that every locally ﬁnite tree T is minor-ubiquitous in countable
+graphs, by proving and combining the following statements:
+(i)
+The N ⇥N grid H satisﬁes @0H 4 H.
+(ii)
+T 4 H.
+(iii)+ Assuming that nT 4 G for all n 2 N, show that @0T 4 G unless
+G has a thick end.
+51.
+Imitate the proof of Theorem 8.2.6 to ﬁnd a function f: N!N such that
+whenever an end ! of a graph G contains f(k) disjoint rays, G contains
+a subdivision of the k ⇥N hexagonal grid whose rays all belong to !.
+
+Exercises
+285
+52.
+Show that there is no universal locally ﬁnite connected graph for the
+subgraph relation.
+53.
+Construct a universal locally ﬁnite connected graph for the minor rela-
+tion. Is there one for the topological minor relation?
+54.−Show that each of the following operations performed on the Rado
+graph R leaves a graph isomorphic to R:
+(i) taking the complement, i.e. changing all edges into non-edges
+and vice versa;
+(ii) deleting ﬁnitely many vertices;
+(iii) changing ﬁnitely many edges into non-edges or vice versa;
+(iv) changing all the edges between a ﬁnite vertex set X ✓V (R) and
+its complement V (R) r X into non-edges, and vice versa.
+55.
+(i)−If we delete inﬁnitely many vertices of the Rado graph R leaving
+an inﬁnite rest, does the rest necessarily induce a copy of R?
+(ii) Does R admit a vertex partition into two copies of itself?
+(iii) Construct a locally ﬁnite tree that has a vertex partition into two
+copies of itself.
+56.−Prove that the Rado graph is homogeneous.
+57.
+Show that a homogeneous countable graph is determined uniquely, up
+to isomorphism, by the class of (the isomorphism types of) its ﬁnite
+subgraphs.
+58.
+Recall that subgraphs H1, H2, . . . of a graph G are said to partition G if
+their edge sets form a partition of E(G). Show that the Rado graph can
+be partitioned into any given countable set of countable locally ﬁnite
+graphs, as long as each of them contains at least one edge.
+59.
+A linear order is called dense if between any two elements there lies a
+third.
+(i) Find, or construct, a countable dense linear order that has nei-
+ther a maximal nor a minimal element.
+(ii) Show that this order is unique, i.e. that every two such orders
+are order-isomorphic. (Deﬁnition?)
+(iii) Show that this ordering is universal among the countable linear
+orders. Is it homogeneous? (Supply appropriate deﬁnitions.)
+60.
+Given a bijection f between N and [N]<!, let Gf be the graph on N in
+which u, v 2 N are adjacent if u 2 f(v) or vice versa. Prove that all
+such graphs Gf are isomorphic.
+61.
+(for set theorists) Show that, given any countable model of set theory,
+the graph whose vertices are the sets and in which two sets are adjacent
+if and only if one contains the other as an element, is the Rado graph.
+
+286
+8. Inﬁnite Graphs
+62.
+Find two proofs that every inﬁnitely edge-connected graph has inﬁnitely
+many edge-disjoint spanning trees:
+(i)−Apply Theorem 8.4.1.
+(ii)+ Find a direct argument.
+63.−Given sets A, B of vertices in a graph G, show that either G contains
+inﬁnitely many edge-disjoint A–B paths or there is a ﬁnite set of edges
+separating A from B in G.
+64.
+Let G be a locally ﬁnite graph. Let us say that a ﬁnite set S of vertices
+separates two ends ! and !0 if C(S, !) 6= C(S, !0). Use Proposition
+8.4.3 to show that if ! can be separated from !0 by k 2 N but no fewer
+vertices, then G contains k disjoint double rays each with one tail in !
+and one in !0. Is the same true for all graphs that are not locally ﬁnite?
+65.+ Prove the following more structural version of Exercise 46 (i). Let ! be
+an end of a graph G. Show that either G contains a TK@0 with all its
+rays in !, or there are disjoint ﬁnite sets S0, S1, . . . such that, if Ci is
+the component of G −(S0 [ Si) that contains a tail of every ray in !,
+we have for all i < j that Ci ) Cj and G[Si [ Ci] contains |Si| disjoint
+Si–Si+1 paths for all i > 1.
+66.+ Is there a planar @0-regular graph all whose ends have inﬁnite vertex-
+degree?
+67.−Let A, B be two vertex sets in a locally ﬁnite connected graph G. Can
+there be an inﬁnite sequence P1, P2, . . . of disjoint A–B paths such that
+each Pn+1 arises from Pn by applying an alternating walk, and such
+that some edge e 2 G lies in E[Pn] for inﬁnitely many n but not in
+E[Pn] for inﬁnitely many other n?
+68.
+Construct an example of a small limit of large waves. Can you ﬁnd a
+locally ﬁnite one?
+69.+ Prove Theorem 8.4.4 for trees.
+70.+ Prove Pym’s theorem (8.4.9).
+71.
+(i)−Prove the naive extension of Dilworth’s theorem to arbitrary in-
+ﬁnite posets P: if P has no antichain of order k 2 N, then P can be
+partitioned into fewer than k chains. (A proof for countable P will do.)
+(ii)−Find a poset that has no inﬁnite antichain and no partition into
+ﬁnitely many chains.
+(iii) For posets without inﬁnite chains, deduce from Theorem 8.4.10 the
+following Erd˝os-Menger-type extension of Dilworth’s theorem: every
+such poset has a partition C into chains such that some antichain meets
+all the chains in C.
+72.
+Let G be a countable graph in which for every partial matching there
+is an augmenting path.
+(i) Find an example of G and a sequence M0, M1, . . . of partial
+matchings, each obtained from the previous as its symmetric
+di↵erence with the edge set of an augmenting path, so that for
+every edge e of G we have e 2 Mn+1 r Mn for inﬁnitely many n.
+
+Exercises
+287
+(ii) Show that for every partial matching M there exists a sequence
+as in (i) such that S
+m
+T
+n>m Mn is the edge set of a 1-factor.
+73.
+Find an uncountable graph in which every partial matching admits an
+augmenting path (ﬁnite or inﬁnite) but which has no 1-factor.
+74.−Let G be a countable graph whose ﬁnite subgraphs are all perfect. Show
+that G is weakly perfect but not necessarily perfect.
+75.+ Let G be the incomparability graph of the binary tree. (Thus, V (G) =
+V (T2), and two vertices are adjacent if and only if they are incompa-
+rable in the tree-order of T2.) Show that G is perfect but not strongly
+perfect.
+76.+ (i) Show that the vertices of any inﬁnite connected locally ﬁnite graph
+can be enumerated in such a way that every vertex is adjacent to some
+later vertex.
+(ii) Characterize the class of all these graphs, countable but not neces-
+sarily locally ﬁnite, by their separation properties.
+77.
+Show that a tree has a rank as deﬁned in the second paragraph after
+the proof of Proposition 8.5.1 if and only if it is recursively prunable,
+and that it has rank ↵if and only if ↵is the maximum of its pruning
+labels.
+78.
+Let G be a rayless graph, of rank ↵say, and let U be a ﬁnite set of
+vertices witnessing this, of minimal order. Show that U is unique.
+79.
+(i) Construct a countable tree that has rank ! in the ranking of rayless
+graphs. Can you ﬁnd one such tree that contains all the others?
+(ii)+ Is there a tree of rank ! that is a subtree of every such tree?
+80.
+A graph G = (V, E) is called bounded if for every vertex labelling
+`: V ! N there exists a function f: N ! N that exceeds the labelling
+along any ray in G eventually. (Formally: for every ray v1v2 . . . in G
+there exists an n0 such that f(n) > `(vn) for every n > n0.) Prove the
+following assertions:
+(i) The ray is bounded.
+(ii) Every locally ﬁnite connected graph is bounded.
+(iii) A countable tree is bounded if and only if it contains no subdi-
+vision of the @0-regular tree T@0.
+81.+ Let T be a tree with root r, and let 6 denote the tree-order on V (T)
+associated with T and r. Show that T contains no subdivision of the
+@1-regular tree T@1 if and only if T has an ordinal labelling t 7! o(t)
+such that o(t) > o(t0) whenever t < t0 and no more than countably
+many vertices of T have the same label.
+82.
+Let G be a countable connected graph with vertices v0, v1, . . . .
+For
+every n 2 N write Sn := {v0, . . . , vn−1}. Prove the following statements:
+(i) For every end ! of G there is a unique sequence C0 ◆C1 ◆. . .
+of components Cn of G −Sn such that Cn = C(Sn, !) for all n.
+
+288
+8. Inﬁnite Graphs
+(ii) For every inﬁnite sequence C0 ◆C1 ◆. . . of components Cn of
+G −Sn there exists a unique end ! such that Cn = C(Sn, !) for
+all n.
+83.
+Let G be a graph, U ✓V (G), and R 2 ! 2 ⌦(G). Show that G contains
+a comb with spine R and teeth in U if and only if ! 2 U.
+84.
+Given graphs H ✓G, let ⌘: ⌦(H) ! ⌦(G) assign to every end of H the
+unique end of G containing it as a subset (of rays). For the following
+questions, assume that H is connected and V (H) = V (G).
+(i) Show that ⌘need not be injective. Must it be surjective?
+(ii) Investigate how ⌘relates the subspace ⌦(H) of |H| to its image
+in |G|. Is ⌘always continuous? Is it open? Do the answers to
+these questions change if ⌘is known to be injective?
+(iii) A spanning tree is called end-faithful if ⌘is bijective, and topo-
+logically end-faithful if ⌘is a homeomorphism. Show that every
+connected countable graph has a topologically end-faithful span-
+ning tree.
+The end space of a graph G is the subspace ⌦(G) of |G|.
+85.
+Consider the end space ⌦of the binary tree T2 shown in Figure 8.1.4,
+in which its vertices are the ﬁnite 0–1 sequences.
+(i) Show that ⌦is homeomorphic to 2N, where 2 = {0, 1} carries
+the discrete topology and 2N the product topology.
+(ii) Identify in ⌦every two ends whose inﬁnite binary sequences en-
+code the same rational. Show that the resulting quotient space
+of ⌦is homeomorphic to the real interval [0, 1].
+86.
+Above every horizontal edge of the plane graph shown in Figure 8.6.1
+add inﬁnitely many horizontal edges in the plane, so as to turn every
+pair of rays whose associated 0–1 sequences deﬁne the same rational
+number into a ladder.
+Prove or disprove that the end space of the
+resulting graph is homeomorphic to [0, 1].
+87.
+A compact metric space is a Cantor set if the singletons are its only
+connected subsets and every point is an accumulation point.
+(i) Characterize the trees whose end space is a Cantor set.
+(ii) Show that the end space of a connected locally ﬁnite graph is a
+subset of a Cantor set.
+88.
+(i) Show that if H is a contraction minor of G with ﬁnite branch sets,
+then the end spaces of H and G are homeomorphic.
+(ii) Let Tn denote the n-ary tree, the rooted tree in which every vertex
+has exactly n successors. Show that all these trees have homeomorphic
+end spaces.
+89.
+Give an independent proof of Proposition 8.6.1 using sequential com-
+pactness and the inﬁnity lemma.

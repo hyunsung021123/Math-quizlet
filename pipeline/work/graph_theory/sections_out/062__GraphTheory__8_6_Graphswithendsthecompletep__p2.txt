@@ -1,0 +1,118 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.6 Graphs with ends: the complete picture (분할 part 2)
+직전 소단원: 「8.5 Recursive structures」
+[본문]
+8.6 Graphs with ends: the complete picture
+271
+As a ﬁrst application of our new concepts, let us now extend the
+tree packing theorem (2.4.1) of Nash-Williams and Tutte to locally ﬁnite
+graphs. Its naive extension, with ordinary spanning trees, fails. Indeed,
+for every k 2 N one can construct a 2k-edge-connected locally ﬁnite
+graph that is left disconnected by the deletion of the edges in any one
+ﬁnite circuit (Exercise 21).
+Such a graph will have at least k(` −1)
+edges across any vertex partition into ` sets, but it cannot have more
+than two edge-disjoint spanning trees: adding an edge of one of these
+to another creates a (ﬁnite) fundamental circuit there, whose deletion
+would disconnect any third spanning tree.
+As soon as we replace ordinary spanning trees with topological ones,
+however, Theorem 2.4.1 does extend:
+Theorem 8.6.9. The following statements are equivalent for all k 2 N
+and connected locally ﬁnite multigraphs G = (V, E):
+G = (V, E)
+(i) G has k edge-disjoint topological spanning trees.
+(ii) For every ﬁnite partition of V, into ` sets say, G has at least
+k (` −1) cross-edges.
+We begin our proof of Theorem 8.6.9 with a compactness extension
+of the ﬁnite theorem. This yields a weaker, ‘ﬁnitary’, statement at the
+limit (cf. Lemma 8.6.7):
+Lemma 8.6.10. If for every ﬁnite partition of V, into ` sets say, G has
+at least k (` −1) cross-edges, then G has k edge-disjoint spanning sub-
+multigraphs whose closures in |G| are topologically connected.
+Proof. Pick an enumeration v0, v1, . . . of V. For every n 2 N let Gn be
+(2.4.1)
+(8.1.2)
+the ﬁnite multigraph obtained from G by contracting every component of
+G−{v0, . . . , vn} to a vertex, deleting any loops but no parallel edges that
+arise in the contraction. Then G[v0, . . . , vn] is an induced submultigraph
+of Gn. Let Vn denote the set of all k-tuples (H1
+n , . . . , Hk
+n) of edge-disjoint
+connected spanning submultigraphs of Gn.
+Since every partition P of V (Gn) induces a partition of V, since G
+has enough cross-edges for that partition, and since all these cross-edges
+are also cross-edges of P, Theorem 2.4.1 implies that Vn 6= ;. As every
+(H1
+n , . . . , Hk
+n) 2 Vn induces an element (H1
+n−1, . . . , Hk
+n−1) of Vn−1, the
+inﬁnity lemma (8.1.2), yields a sequence (H1
+n , . . . , Hk
+n)n2N of k-tuples,
+one from each Vn, with a limit (H1, . . . , Hk) deﬁned by the nested unions
+Hi :=
+[
+n2N
+Hi
+n[v0, . . . , vn] .
+These Hi are edge-disjoint for distinct i (because the Hi
+n are), but
+they need not be connected. To show that they have connected closures,
+
+272
+8. Inﬁnite Graphs
+it suﬃces by Lemma 8.6.7 to show that each of them has an edge in every
+ﬁnite cut F of G. Given F, choose n large enough that all the edges of
+F lie in G[v0, . . . , vn]. Then F is also a cut of Gn. Now consider the
+k-tuple (H1
+n , . . . , Hk
+n) which the inﬁnity lemma picked from Vn. Each of
+these Hi
+n is a connected spanning submultigraph of Gn , so it contains an
+edge from F. But Hi
+n agrees with Hi on {v0, . . . , vn}, so Hi too contains
+this edge from F.
+⇤
+Lemma 8.6.11. Every connected standard subspace of |G| that con-
+tains V also contains a topological spanning tree of G.
+Proof. Let X be a connected standard subspace of |G| containing V.
+Then G too must be connected, so it is countable. Let e0, e1, . . . be an
+enumeration of E(X), and consider these edges in turn. Starting with
+X0 := X, deﬁne Xn+1 := Xn r˚en if this keeps Xn+1 connected; if not,
+put Xn+1 := Xn. Finally, let T := T
+n2N Xn.
+Since T is closed and contains V, it is still a standard subspace. And
+T has an edge in every ﬁnite cut of G, because X does and its last edge
+in that cut will never be deleted. So T is connected, by Lemma 8.6.7.
+But T contains no circle: that would contain an edge, which should have
+got deleted since deleting an edge from a circle cannot destroy connect-
+edness.
+⇤
+Proof of Theorem 8.6.9. The implication (ii)!(i) follows from our
+two lemmas. For (i)!(ii), let G have edge-disjoint topological spanning
+trees T1, . . . , Tk, and consider a partition P of V into ` sets. If there are
+inﬁnitely many cross-edges, there is nothing to show; so we assume there
+are only ﬁnitely many. For each i 2 {1, . . . , k}, let T 0
+i be the multigraph
+of order ` which the edges of Ti induce on P.
+To establish that G has at least k(` −1) cross-edges, we show that
+the multigraphs T 0
+i are connected. If not, then some T 0
+i has a vertex
+partition crossed by no edge of Ti. This partition induces a cut of G
+that contains no edge of Ti. By our assumption that G has only ﬁnitely
+many cross-edges, this cut is ﬁnite. By Lemma 8.6.7, this contradicts
+the connectedness of Ti.
+⇤
+8.7 The topological cycle space
+As a more comprehensive application of our new theory, let us now look
+(1.9)
+at how the cycle space theory of ﬁnite graphs extends to locally ﬁnite
+graphs G = (V, E) with inﬁnite circuits and topological spanning trees.
+G = (V, E)
+Every two points of a topological spanning tree T are joined by a
+unique arc in T: existence follows from Lemma 8.6.5, while uniqueness
+is proved as for ﬁnite graphs. Adding a new edge e to T therefore creates

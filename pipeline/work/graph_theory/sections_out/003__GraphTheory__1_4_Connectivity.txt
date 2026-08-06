@@ -1,0 +1,217 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.4 Connectivity
+직전 소단원: 「1.3 Paths and cycles」
+[본문]
+10
+1. The Basics
+It is not diﬃcult to prove that a graph of minimum degree δ and girth g
+has at least n0(δ, g) vertices (Exercise 7). Interestingly, one can obtain
+the same bound for its average degree:
+Theorem 1.3.4. (Alon, Hoory & Linial 2002)
+Let G be a graph. If d(G) > d > 2 and g(G) > g 2 N then |G| > n0(d, g).
+One aspect of Theorem 1.3.4 is that it guarantees the existence of
+a short cycle compared with |G|. Using just the easy minimum degree
+version of Exercise 7, we get the following rather general bound:
+Corollary 1.3.5. If δ(G) > 3 then g(G) < 2 log |G|.
+[2.3.1]
+Proof. If g := g(G) is even then
+n0(3, g) = 2 2g/2 −1
+2 −1
+= 2g/2 + (2g/2 −2) > 2g/2,
+while if g is odd then
+n0(3, g) = 1 + 3 2(g−1)/2 −1
+2 −1
+=
+3
+p
+2 2g/2 −2 > 2g/2.
+As |G| > n0(3, g), the result follows.
+⇤
+A walk (of length k) in a graph G is a non-empty alternating se-
+walk
+quence v0e0v1e1 . . . ek−1vk of vertices and edges in G such that ei =
+{vi, vi+1} for all i < k. If v0 = vk, the walk is closed. If the vertices
+in a walk are all distinct, it deﬁnes an obvious path in G. In general,
+every walk between two vertices contains4 a path between these vertices
+(proof?).
+1.4 Connectivity
+A graph G is called connected if it is non-empty and any two of its
+connected
+vertices are linked by a path in G. If U ✓V (G) and G[U] is connected,
+we also call U itself connected (in G). Instead of ‘not connected’ we
+usually say ‘disconnected’.
+Proposition 1.4.1. The vertices of a connected graph G can always be
+[1.5.2]
+enumerated, say as v1, . . . , vn, so that Gi := G[v1, . . . , vi] is connected
+for every i.
+4 We shall often use terms deﬁned for graphs also for walks, as long as their
+meaning is obvious.
+
+1.4 Connectivity
+11
+Proof. Pick any vertex as v1, and assume inductively that v1, . . . , vi have
+been chosen for some i < |G|. Now pick a vertex v 2 G −Gi. As G is
+connected, it contains a v–v1 path P. Choose as vi+1 the last vertex of
+P in G −Gi; then vi+1 has a neighbour in Gi. The connectedness of
+every Gi follows by induction on i.
+⇤
+Let G = (V, E) be a graph. A maximal connected subgraph of G is
+a component of G. Clearly, the components are induced subgraphs, and
+component
+their vertex sets partition V . Since connected graphs are non-empty, the
+empty graph has no components.
+Fig. 1.4.1. A graph with three components, and a minimal
+spanning connected subgraph in each component
+If A, B ✓V and X ✓V [ E are such that every A–B path in G
+contains a vertex or an edge from X, we say that X separates the sets
+separate
+A and B in G. Note that this implies A \ B ✓X. We say that X
+separates two vertices a, b if it separates the sets {a}, {b} but a, b /2 X.
+The set X separates G, and is a separator in or of G, if X separates some
+separator
+two vertices in G. Separating sets of edges have no generic name, but
+some such sets do; see Section 1.9 for the deﬁnition of cuts and bonds.
+A vertex which separates two other vertices of the same component is a
+cutvertex
+cutvertex, and an edge separating its ends is a bridge. Thus, the bridges
+bridge
+in a graph are precisely those edges that do not lie on any cycle.
+w
+v
+e
+x
+y
+Fig. 1.4.2. A graph with cutvertices v, x, y, w and bridge e = xy
+The unordered pair {A, B} is a separation of G if A[B = V and G
+separation
+has no edge between A r B and B r A. Clearly, the latter is equivalent
+to saying that A \ B separates A from B. If both A r B and B r A are
+non-empty, the separation is proper. The number |A\B| is the order of
+the separation {A, B}; the sets A, B are its sides.
+G is called k-connected (for k 2 N) if |G| > k and G−X is connected
+k-connected
+for every set X ✓V with |X| < k. In other words, no two vertices of G
+
+12
+1. The Basics
+are separated by fewer than k other vertices. Every (non-empty) graph
+is 0-connected, and the 1-connected graphs are precisely the non-trivial
+connected graphs. The greatest integer k such that G is k-connected
+is the connectivity (G) of G.
+Thus, (G) = 0 if and only if G is
+connectivity
+(G)
+disconnected or a K1, and (Kn) = n −1 for all n > 1.
+If |G| > 1 and G −F is connected for every set F ✓E of fewer
+than ` edges, then G is called `-edge-connected. The greatest integer `
+`-edge-
+connected
+such that G is `-edge-connected is the edge-connectivity λ(G) of G. In
+particular, we have λ(G) = 0 if G is disconnected.
+edge-
+connectivity
+λ(G)
+H
+G
+Fig. 1.4.3. The octahedron G (left) with (G) = λ(G) = 4,
+and a graph H with (H) = 2 but λ(H) = 4
+Proposition 1.4.2. If G is non-trivial then (G) 6 λ(G) 6 δ(G).
+[3.2.1]
+Proof. The second inequality follows from the fact that all the edges
+incident with a ﬁxed vertex separate G. To prove the ﬁrst, let F be a
+set of λ(G) edges such that G −F is disconnected. Such a set exists by
+deﬁnition of λ; note that F is a minimal separating set of edges in G.
+We show that (G) 6 |F|.
+Suppose ﬁrst that G has a vertex v that is not incident with an edge
+in F. Let C be the component of G −F containing v. Then the vertices
+of C that are incident with an edge in F separate v from G −C. Since
+no edge in F has both ends in C (by the minimality of F), there are at
+most |F| such vertices, giving (G) 6 |F| as desired.
+Suppose now that every vertex is incident with an edge in F. Let
+v be any vertex, and let C be the component of G −F containing v.
+Then the neighbours w of v with vw /2 F lie in C and are incident
+with distinct edges in F (distinct by the minimality of F, as earlier),
+giving dG(v) 6 |F|. As NG(v) separates v from any other vertices in G,
+this yields (G) 6 |F| – unless there are no other vertices, i.e. unless
+{v}[N(v) = V . But v was an arbitrary vertex. So we may assume that
+G is complete, giving (G) = λ(G) = |G| −1.
+⇤
+By Proposition 1.4.2, high connectivity requires a large minimum
+degree. Conversely, large minimum degree does not ensure high connec-
+tivity, not even high edge-connectivity (examples?). It does, however,
+imply the existence of a highly connected subgraph:
+
+13
+Theorem 1.4.3. (Mader 1972)
+[7.2.3]
+[11.2.3]
+Let 0 6= k 2 N.
+Every graph G with d(G) > 4k has a k-connected
+subgraph. In fact, every such G has a (k + 1)-connected subgraph H
+such that d(H) > d(G) −2k > 2k.
+Proof. Put γ := "(G) (> 2k), and consider the subgraphs G0 ✓G such
+(1.2.2)
+(1.3.1)
+γ
+that
+|G0| > 2k
+and
+kG0k > γ
+$
+|G0| −k
+%
+.
+(⇤)
+Such graphs G0 exist since G is one; let H be one of smallest order.
+H
+No graph G0 as in (⇤) can have order exactly 2k, since this would
+imply that kG0k > γk > 2k2 >
+$|G0|
+2
+%
+. The minimality of H therefore
+implies that δ(H) > γ : otherwise we could delete a vertex of degree at
+most γ and obtain a graph G0 ( H still satisfying (⇤). In particular, we
+have |H| > γ. Dividing the inequality of kHk > γ |H| −γk from (⇤) by
+|H| therefore yields "(H) > γ −k, as desired.
+It remains to show that H is (k + 1)-connected.
+If not, then H
+has a proper separation {U1, U2} of order at most k; put H[Ui] =: Hi.
+H1, H2
+Since any vertex v 2 U1 r U2 has all its d(v) > δ(H) > γ neighbours
+from H in H1, we have |H1| > γ > 2k. Similarly, |H2| > 2k. As by the
+minimality of H neither H1 nor H2 satisﬁes (⇤), we thus have
+kHik 6 γ
+$
+|Hi| −k
+%
+for i = 1, 2. But then
+kHk 6 kH1k + kH2k
+6 γ
+$
+|H1| + |H2| −2k
+%
+6 γ
+$
+|H| −k
+%
+(as |H1 \ H2| 6 k),
+which contradicts (⇤) for H.
+⇤
+1.5 Trees and forests
+An acyclic graph, one not containing any cycles, is called a forest. A con-
+forest
+nected forest is called a tree. (Thus, a forest is a graph whose components
+tree
+are trees.) The vertices of degree 1 in a tree are its leaves,5 the others
+leaf
+are its inner vertices. Every non-trivial tree has a leaf – consider, for
+example, the ends of a longest path.
+This little fact often comes in
+handy, especially in induction proofs about trees: if we remove a leaf
+from a tree, what remains is still a tree.
+5 . . . except that the root of a tree (see below) is never called a leaf, even if it has
+degree 1.
+1.5 Trees and forests

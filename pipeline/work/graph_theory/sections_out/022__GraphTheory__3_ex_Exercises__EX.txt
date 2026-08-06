@@ -1,0 +1,219 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 3. Connectivity
+현재 소단원: 3.ex Exercises
+직전 소단원: 「3.5 Linking pairs of vertices」
+[연습문제]
+Exercises
+87
+Exercises
+For the ﬁrst three exercises let G be a graph with vertices a and b, and let
+X ✓V (G) r {a, b} be an a–b separator in G.
+1.−Show that X is minimal as an a–b separator if and only if every vertex
+in X has a neighbour in the component Ca of G −X containing a, and
+another in the component Cb of G −X containing b.
+2.−(continued)
+Let X0 ✓V (G) r {a, b} be another a–b separator, and deﬁne C0
+a and
+C0
+b correspondingly. Show that both
+Ya := (X \ C0
+a) [ (X \ X0) [ (X0 \ Ca)
+and
+Yb := (X \ C0
+b) [ (X \ X0) [ (X0 \ Cb)
+separate a from b (see ﬁgure).
+X0
+X
+X0
+a
+b
+Ya
+X
+3.
+(continued)
+Are Ya and Yb minimal a–b separators if X and X0 are? Are |Ya| and
+|Yb| minimum for a–b separators if |X| and |X0| are?
+4.
+Let X and X0 be minimal separators in G. Show that if X meets at
+least two components of G −X0, then X0 meets all the components of
+G −X and X meets all the components of G −X0.
+5.−Deduce the k = 2 case of Menger’s theorem (3.3.1) from Proposi-
+tion 3.1.1.
+6.−Prove the elementary properties of blocks mentioned after their formal
+deﬁnition.
+7.
+Show that the block graph of any connected graph is a tree.
+8.−Let G be a k-connected graph, and let xy be an edge of G. Show that
+G/xy is k-connected if and only if G −{x, y} is (k −1)-connected.
+9.
+(i) Let e be an edge in a 2-connected graph G 6= K3. Show that either
+G −e or G/e is again 2-connected.
+(ii) Does every 2-connected graph G 6= K3 have an edge e such that
+G/e is still 2-connected?
+10.+ Let e be an edge in a 3-connected graph G 6= K4. Show that either
+G .−e or G/e is again 3-connected.
+
+88
+3. Connectivity
+11.
+Show without using Theorem 3.2.6 that every edge of a 3-connected
+graph lies on some non-separating induced cycle.
+12.
+Give an inductive proof of Theorem 3.2.6 based on Lemma 3.2.2. You
+may use the previous exercise.
+13.+ Give an inductive proof of Theorem 3.2.6 based on Lemma 3.2.4.
+14.+ Show that every transitive graph G with (G) = 2 is a cycle.
+15.−At which point does the ﬁrst proof of Menger’s theorem fail if we assign
+the contracted vertex ve to A in G/e only if A in G contains both ends
+of e, and similarly for B?
+16.
+When one tries to prove an unknown implication a ) b, it can be
+dangerous to attempt to prove a
+)
+c
+)
+b for some assertion c
+that clearly implies b: if c is too strong, then a ) c may fail even
+if a ) b is true. But the ﬁrst proof of Menger’s theorem appears to
+be doing just that: it proves the seemingly very strong assertion that,
+given G, A, B and any edge e of G, we can contract or delete e without
+decreasing k(G, A, B) – from which the existence of k disjoint A–B
+paths follows easily by induction. Can one see already at the outset of
+the proof that this route will in fact not be dangerous?
+17.
+(i) Find the error in the following ‘simple proof’ of Menger’s theorem
+(3.3.1). Let X be an A–B separator of minimum size. Denote by GA
+the subgraph of G induced by X and all the components of G −X that
+meet A, and deﬁne GB correspondingly. By the minimality of X, there
+can be no A–X separator in GA with fewer than |X| vertices, so GA
+contains k disjoint A–X paths by induction. Similarly, GB contains k
+disjoint X–B paths. Together, all these paths form the desired A–B
+paths in G.
+(ii) Fill the gap in the proof of (i) by considering, if possible, a vertex
+or edge outside A and B.
+18.
+Prove Menger’s theorem by induction on kGk, as follows. Given an
+edge e = xy, consider a smallest A–B separator S in G −e. Show that
+the induction hypothesis implies a solution for G unless S [ {x} and
+S [ {y} are smallest A–B separators in G. Then show that if choosing
+neither of these separators as X in the previous exercise gives a valid
+proof, there is only one easy case left to do.
+19.
+Work out the details of the proof of Corollary 3.3.5 (ii).
+20.−Show that the least number of edges separating two disjoint sets A, B
+of vertices in a graph G equals the maximum number of edge-disjoint
+A–B paths in G.
+21.
+Is there a function f: N ! N such that, for every k 2 N, every f(k)-
+edge-connected graph contains between any two vertices k edge-disjoint
+paths every two of which traverse their common vertices in the same
+order?
+
+Exercises
+89
+22.
+Let k > 2. Show that every k-connected graph of order at least 2k
+contains a cycle of length at least 2k.
+23.
+Let k > 2. Show that in a k-connected graph any k vertices lie on a
+common cycle.
+24.
+Find a subset D of the plane and two inﬁnite subsets A, B ✓D such
+that for every ﬁnite set X ✓D there is an A–B arc in D r X but D
+contains no inﬁnite set of disjoint A–B arcs.
+25.+ Prove the following weakening of Gallai’s theorem without the help of
+Mader’s theorem. Find a constant c such that, for every k, G and A,
+either G contains k disjoint A-paths or G has a set of at most ck vertices
+that meets all its A-paths.
+26.+ Given a collection S of disjoint vertex sets in a graph G = (V, E), a path
+in G is an S-path if it joins distinct sets in S and has no inner vertices
+in S := S
+S. Show that the following version of Mader’s theorem is
+equivalent to Theorem 3.4.2: The maximum number of disjoint S-paths
+in G is always equal to the minimum value of |V0|+Pr
+i=1b 1
+2|@Vi|c taken
+over all partitions {V0, . . . , Vr} of V such that every S-path in G −V0
+has an edge spanned by some Vi, where @Vi is the set of vertices in Vi
+that lie in S or have a neighbour outside V0 [ Vi.
+27.
+Derive the edge part of Corollary 3.4.3 from the vertex part.
+(Hint. Consider the H-paths in the graph obtained from the disjoint
+union of H and the line graph L(G) by adding all the edges he such
+that h is a vertex of H and e 2 E(G) r E(H) is an edge at h.)
+28.−To the disjoint union of the graph H = K2m+1 with k copies of K2m+1
+add edges joining H bijectively to each of the K2m+1. Show that the
+resulting graph G contains at most km =
+1
+2H(G) independent H-
+paths.
+29.
+Find a bipartite graph G, with partition classes A and B say, such that
+for H := G[A] there are at most 1
+2λH(G) edge-disjoint H-paths in G.
+30.−Deduce Gallai’s theorem, as well as an edge analogue with the same
+bound of 2k −2, from Mader’s theorem via Corollary 3.4.3.
+31.
+Derive a suitable version of Menger’s theorem from Mader’s theorem.
+32.+ Derive Tutte’s 1-factor theorem (2.2.1) from Mader’s theorem.
+(Hint. Extend the given graph G to a graph G0 by adding, for each
+vertex v 2 G, a new vertex v0 and joining v0 to v. Choose H ✓G0 so that
+the 1-factors in G correspond to the large enough sets of independent
+H-paths in G0.)
+33.−Show that 2k-edge-connected graphs are k-edge-linked in the sense that
+for all distinct vertices s1, . . . , sk, t1, . . . , tk there are edge-disjoint paths
+Pi = si . . . ti for i = 1, . . . , k.
+34.−Show that k-linked graphs are (2k −1)-connected. Are they even 2k-
+connected?
+
+90
+3. Connectivity
+35.
+For every k 2 N ﬁnd an ` = `(k), as large as possible, such that not
+every `-connected graph is k-linked.
+36.
+Show that if G is k-linked and s1, . . . , sk, t1, . . . , tk are not necessarily
+distinct vertices such that si 6= ti for all i, then G contains independent
+paths Pi = si . . . ti for i = 1, . . . , k.
+37.
+Go through the proof of Theorem 3.5.3 monitoring the use of kV r Xk+.
+How would the proof fail if kG[V r X]k was used instead? Which ar-
+guments would become simpler?
+38.
+In the informal discussion preceding the proof of Theorem 3.5.3 we
+noted that, by Corollary 11.2.3, we cannot expect to ﬁnd in G a sub-
+graph H that satisﬁes the premise of Lemma 3.5.4. But then the proof
+of (⇤) does ﬁnd such a subgraph H. Can you explain this?
+39.
+Use Theorem 3.5.3 to show that the function h in Lemma 3.5.1 can be
+chosen as h(r) = cr2, for some c 2 N.
+Notes
+Although connectivity theorems are doubtless among the most natural, and
+also the most applicable, results in graph theory, there is still no monograph on
+this subject. The most comprehensive sources to date are A. Schrijver, Com-
+binatorial optimization, Springer 2003, and A. Frank, Connections in combi-
+natorial optimization, Oxford University Press 2011. Some areas are covered
+in B. Bollob´as, Extremal Graph Theory, Academic Press 1978, in R. Halin,
+Graphentheorie, Wissenschaftliche Buchgesellschaft 1980, and in A. Frank’s
+chapter of the Handbook of Combinatorics (R.L. Graham, M. Gr¨otschel &
+L. Lov´asz, eds.), North-Holland 1995. A survey speciﬁcally of techniques and
+results on minimally k-connected graphs (see below) is given by W. Mader,
+On vertices of degree n in minimally n-connected graphs and digraphs, in
+(D. Mikl´os, V.T. S´os & T. Sz˝onyi, eds.) Paul Erd˝os is 80, Vol. 2, Proc. Colloq.
+Math. Soc. J´anos Bolyai, Budapest 1996.
+Theorem 3.2.3 is often attributed to Barnette and Gr¨unbaum (1969). It
+can also be extracted from W.T. Tutte, Connectivity in graphs, Oxford Uni-
+versity Press 1966. Tutte’s wheel theorem, proved in W.T. Tutte, A theory of
+3-connected graphs, Nederl. Akad. Wet. Proc. Ser. A 64 (1961), 441–455, di↵ers
+from our Theorem 3.2.5 as follows. As an alternative to the contraction of an
+edge in the reduction step, the wheel theorem also allows its deletion. Of edges
+to be contracted, however, it requires that they do not lie in any triangle. The
+starting set for the construction of all 3-connected graphs therefore consists of
+all wheels, not only K4.
+Tutte’s wheel theorem has been extended to 3-connected graphs H other
+than K4: from any 3-connected graph G < H that is not a wheel we can
+obtain H by contracting or deleting edges step by step, remaining 3-connected
+at every step. (As in Tutte’s theorem, one is not allowed to contract edges
+that lie in a triangle.) This was proved by S. Negami, A characterization of 3-
+connected graphs containing a given graph, J. Comb. Theory, Ser. B 32 (1982),

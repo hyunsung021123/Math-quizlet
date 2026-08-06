@@ -1,0 +1,271 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.5 Trees and forests
+직전 소단원: 「1.4 Connectivity」
+[본문]
+13
+Theorem 1.4.3. (Mader 1972)
+[7.2.3]
+[11.2.3]
+Let 0 6= k 2 N.
+Every graph G with d(G) > 4k has a k-connected
+subgraph. In fact, every such G has a (k + 1)-connected subgraph H
+such that d(H) > d(G) −2k > 2k.
+Proof. Put γ := "(G) (> 2k), and consider the subgraphs G0 ✓G such
+(1.2.2)
+(1.3.1)
+γ
+that
+|G0| > 2k
+and
+kG0k > γ
+$
+|G0| −k
+%
+.
+(⇤)
+Such graphs G0 exist since G is one; let H be one of smallest order.
+H
+No graph G0 as in (⇤) can have order exactly 2k, since this would
+imply that kG0k > γk > 2k2 >
+$|G0|
+2
+%
+. The minimality of H therefore
+implies that δ(H) > γ : otherwise we could delete a vertex of degree at
+most γ and obtain a graph G0 ( H still satisfying (⇤). In particular, we
+have |H| > γ. Dividing the inequality of kHk > γ |H| −γk from (⇤) by
+|H| therefore yields "(H) > γ −k, as desired.
+It remains to show that H is (k + 1)-connected.
+If not, then H
+has a proper separation {U1, U2} of order at most k; put H[Ui] =: Hi.
+H1, H2
+Since any vertex v 2 U1 r U2 has all its d(v) > δ(H) > γ neighbours
+from H in H1, we have |H1| > γ > 2k. Similarly, |H2| > 2k. As by the
+minimality of H neither H1 nor H2 satisﬁes (⇤), we thus have
+kHik 6 γ
+$
+|Hi| −k
+%
+for i = 1, 2. But then
+kHk 6 kH1k + kH2k
+6 γ
+$
+|H1| + |H2| −2k
+%
+6 γ
+$
+|H| −k
+%
+(as |H1 \ H2| 6 k),
+which contradicts (⇤) for H.
+⇤
+1.5 Trees and forests
+An acyclic graph, one not containing any cycles, is called a forest. A con-
+forest
+nected forest is called a tree. (Thus, a forest is a graph whose components
+tree
+are trees.) The vertices of degree 1 in a tree are its leaves,5 the others
+leaf
+are its inner vertices. Every non-trivial tree has a leaf – consider, for
+example, the ends of a longest path.
+This little fact often comes in
+handy, especially in induction proofs about trees: if we remove a leaf
+from a tree, what remains is still a tree.
+5 . . . except that the root of a tree (see below) is never called a leaf, even if it has
+degree 1.
+1.5 Trees and forests
+
+14
+1. The Basics
+Fig. 1.5.1. A tree
+Theorem 1.5.1. The following assertions are equivalent for a graph T:
+[1.6.1]
+[1.9.5]
+[4.2.9]
+(i) T is a tree;
+(ii) Any two vertices of T are linked by a unique path in T;
+(iii) T is minimally connected, i.e. T is connected but T −e is discon-
+nected for every edge e 2 T;
+(iv) T is maximally acyclic, i.e. T contains no cycle but T + xy does,
+for any two non-adjacent vertices x, y 2 T.
+⇤
+The proof of Theorem 1.5.1 is straightforward, and a good exercise
+for anyone not yet familiar with all the notions it relates. Extending our
+notation for paths from Section 1.3, we write xTy for the unique path
+xTy
+in a tree T between two vertices x, y (see (ii) above).
+A common application of Theorem 1.5.1 is that every connected
+graph contains a spanning tree: take a minimal connected spanning
+subgraph and use (iii). Figure 1.4.1 shows a spanning tree in each of
+the three components of the graph depicted. When T is a spanning tree
+of G, the edges in E(G) r E(T) are the chords of T in G.
+chord
+Corollary 1.5.2. A connected graph with n vertices is a tree if and
+[1.9.5]
+[2.4.4]
+[4.2.9]
+only if it has n −1 edges.
+Proof. For the forward implication, enumerate the vertices of a tree T
+as in Proposition 1.4.1. As T is acyclic, every vertex is adjacent to only
+one earlier vertex. Now |T| = n −1 follows by induction on n.
+Conversely, let G be any connected graph with n vertices and n −1
+edges. Let T be a spanning tree in G. Since T has n −1 edges by the
+ﬁrst implication, it follows that T = G.
+⇤
+Corollary 1.5.3. If T is a tree and G is any graph with δ(G) > |T|−1,
+[9.2.1]
+[9.2.3]
+then T is (isomorphic to) a subgraph of G.
+Proof. Map the vertices of T to G inductively, following their enumera-
+tion from Proposition 1.4.1 applied to T.
+⇤
+
+1.5 Trees and forests
+15
+Sometimes it is convenient to consider one vertex of a tree as special;
+such a vertex is then called the root of this tree. A tree T with a ﬁxed
+root
+root r is a rooted tree. Writing x 6 y for x 2 rTy then deﬁnes a partial
+ordering on V (T), the tree-order associated with T and r.
+We shall
+tree-order
+think of this ordering as expressing ‘height’: if x < y we say that x lies
+below y in T, we call
+up/above
+down/below
+dye := { x | x 6 y }
+and
+bxc := { y | y > x }
+dte, btc
+the down-closure of y and the up-closure of x, and so on. A set X ✓V (T)
+down-closure
+up-closure
+that equals its up-closure, i.e. which satisﬁes X = bXc := S
+x2Xbxc, is
+closed upwards, or an up-set in T. Similarly, there are down-closed sets,
+or down-sets etc..
+Note that the root of T is the least element in its tree-order, the
+leaves are its maximal elements, the ends of any edge of T are compa-
+rable, and the down-closure of every vertex is a chain, a set of pairwise
+chain
+comparable elements. (Proofs?) The vertices at distance k from the root
+have height k and form the kth level of T.
+height, level
+A rooted tree T contained in a graph G is called normal in G if
+normal tree
+the ends of every T-path in G are comparable in the tree-order of T.
+If T spans G, this amounts to requiring that two vertices of T must be
+comparable whenever they are adjacent in G; see Figure 1.5.2.
+r
+G
+T
+Fig. 1.5.2. A normal spanning tree with root r
+A normal tree T in G can be a powerful tool for examining the
+structure of G, because G reﬂects the separation properties of T:
+Lemma 1.5.4. Let T be a normal tree in G.
+[8.2.3]
+[8.6.8]
+(i) Any two vertices x, y of T that are incomparable in its tree-order
+are separated in G by the set dxe \ dye.
+(ii) If V (T) = V (G) =: V and S ✓V is down-closed, then the compo-
+nents of G−S are spanned by the sets bxc with x minimal in V rS.
+
+16
+1. The Basics
+Proof. (i) As x and y are incomparable, neither of them lies in dxe\dye.
+So it suﬃces to show that every x–y path P in G meets dxe \ dye. Let
+t1, . . . , tn be a minimal sequence of vertices in P \ T such that t1 = x
+and tn = y and ti and ti+1 are comparable in the tree-order of T for
+all i. (Such a sequence exists: the set of all vertices in P \ T, in their
+natural order as they occur on P, has this property because T is normal
+and every segment tiPti+1 is either an edge of T or a T- path.) In our
+minimal sequence we cannot have ti−1 < ti > ti+1 for any i, since ti−1
+and ti+1 would then be comparable, and deleting ti would yield a smaller
+such sequence. Thus, our sequence has the form
+x = t1 > . . . > tk < . . . < tn = y
+for some k 2 {1, . . . , n} (even with k 6 3, by the minimality of n). As
+tk 2 dxe \ dye \ V (P), our proof is complete.
+(ii) Every set bxc as in (ii) is connected in T, and hence in G. It lies
+in V r S, because x /2 S and S is down-closed. As every vertex in V r S
+lies above some minimal such vertex x, these sets bxc have union V r S.
+For distinct x and x0, the connected sets bxc and bx0c are disjoint,
+and not joined by an edge of G, because dxe \ dx0e ✓S separates x
+from x0 in G, by (i). So the sets bxc span maximal connected subgraphs,
+components, in G −S, and these are all its components.
+⇤
+Normal spanning trees are also called depth-ﬁrst search trees, be-
+cause of the way they arise in computer searches on graphs (Exercise 29).
+This fact is often used to prove their existence, which can also be shown
+by a very short and clever induction (Exercise 28). The following con-
+structive proof, however, illuminates better how normal trees capture
+the structure of their host graphs.
+Proposition 1.5.5. Every connected graph has a normal spanning tree.
+[6.5.3]
+[8.2.4]
+Proof.
+Let G be a connected graph. Let T be any maximal normal tree
+in G; we show that V (T) = V (G).
+Suppose not, and let C be a component of G −T. As T is normal,
+N(C) is a chain in T. Let x be its greatest element, and let y 2 C be
+adjacent to x. Let T 0 be the tree obtained from T by joining y to x; the
+tree-order of T 0 then extends that of T. We shall derive a contradiction
+by showing that T 0 is also normal in G.
+Let P be a T 0-path in G. If the ends of P both lie in T, then they
+are comparable in the tree-order of T (and hence in that of T 0), because
+then P is also a T- path and T is normal in G by assumption. If not,
+then y is one end of P, so P lies in C except for its other end z, which
+lies in N(C). Then z 6 x, by the choice of x. For our proof that y and
+z are comparable it thus suﬃces to show that x < y, i.e. that x 2 rT 0y.
+This, however, is clear since y is a leaf of T 0 with neighbour x.
+⇤
+
+1.6 Bipartite graphs
+17
+1.6 Bipartite graphs
+Let r > 2 be an integer. A graph G = (V, E) is called r-partite if V
+r-partite
+admits a partition into r classes such that every edge has its ends in dif-
+ferent classes: vertices in the same partition class must not be adjacent.
+Instead of ‘2-partite’ one usually says bipartite.
+bipartite
+K2,2,2 = K3
+2
+Fig. 1.6.1. Two 3-partite graphs
+An r-partite graph in which every two vertices from di↵erent par-
+tition classes are adjacent is called complete; the complete r-partite
+complete
+r-partite
+graphs for all r together are the complete multipartite graphs.
+The
+complete r-partite graph Kn1 ⇤. . . ⇤Knr is denoted by Kn1,...,nr; if
+Kn1,...,nr
+n1 = . . . = nr =: s, we abbreviate this to Kr
+s. Thus, Kr
+s is the complete
+Kr
+s
+r-partite graph in which every partition class contains exactly s vertices.6
+(Figure 1.6.1 shows the example of the octahedron K3
+2; compare its draw-
+ing with that in Figure 1.4.3.) Graphs of the form K1,n are called stars;
+star
+the vertex in the singleton partition class of this K1,n is the star’s centre.
+centre
+=
+=
+Fig. 1.6.2. Three drawings of the bipartite graph K3,3 = K2
+3
+Clearly, a bipartite graph cannot contain an odd cycle, a cycle of odd
+odd cycle
+length. In fact, the bipartite graphs are characterized by this property:
+Proposition 1.6.1. A graph is bipartite if and only if it contains no
+[1.9.4]
+[5.3.1]
+[6.4.2]
+odd cycle.
+6 Note that we obtain a Kr
+s if we replace each vertex of a Kr by an independent
+s-set; our notation of Kr
+s is intended to hint at this connection.

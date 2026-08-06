@@ -1,0 +1,433 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.ex Exercises
+직전 소단원: 「12.7 The graph minor theorem」
+[연습문제]
+405
+techniques developed for its proof, the various ways in which minors are
+handled or constructed. Most of these have not even been touched upon
+here, yet they seem set to inﬂuence the development of graph theory for
+many years to come.
+Exercises
+1.−Let 6 be a quasi-ordering on a set X.
+Call two elements x, y
+2 X
+equivalent if both x 6 y and y 6 x.
+Show that this is indeed an
+equivalence relation on X, and that 6 induces a partial ordering on the
+set of equivalence classes.
+2.
+Let (A, 6) be a quasi-ordering. For subsets X ✓A write
+Forb6(X) := { a 2 A | a 6> x for all x 2 X } .
+Show that 6 is a well-quasi-ordering on A if and only if every subset
+B ✓A that is closed under 6 (i.e. such that x 6 y 2 B ) x 2 B) can
+be written as B = Forb6(X) with ﬁnite X.
+3.
+Prove Proposition 12.1.1 and Corollary 12.1.2 directly, without using
+Ramsey’s theorem.
+4.−Show that the relation 6 between rooted trees deﬁned in the text is
+indeed a quasi-ordering.
+5.
+Show that the ﬁnite trees are not well-quasi-ordered by the subgraph
+relation.
+6.
+The last step of the proof of Kruskal’s theorem considers a ‘topological’
+embedding of Tm in Tn that maps the root of Tm to the root of Tn.
+Suppose we assume inductively that the trees of Am are embedded in
+the trees of An in the same way, with roots mapped to roots. We thus
+seem to obtain a proof that the ﬁnite rooted trees are well-quasi-ordered
+by the subgraph relation, even with roots mapped to roots. Where is
+the error?
+7.
+Extend Kruskal’s theorem to trees whose vertices are labelled from a
+well-quasi-ordered set. The tree embedding is deﬁned as before but in
+addition respects the ordering of the labels.
+8.
+Are the connected ﬁnite graphs well-quasi-ordered by contraction alone
+(i.e. by taking minors without deleting edges or vertices)?
+9.+ Relax the minor relation by not insisting that branch sets be connected.
+Show that the ﬁnite graphs are well-quasi-ordered by this relation.
+10.+ Show that the ﬁnite graphs are not well-quasi-ordered by the topological
+minor relation.
+11.+ Given k 2 N, is the class { G | G 6◆P k } well-quasi-ordered by the
+subgraph relation?
+Exercises
+
+406
+12. Graph Minors
+12.−Let G be a graph, T a tree, and V = (Vt)t2T a family of subsets of V (G).
+Show that (T, V) is a tree-decomposition of G if and only if
+(i) for every v 2 V (G) the set Tv := { t | v 2 Vt } is connected in T;
+(ii) Tu \ Tv 6= ; for every edge uv of G.
+13.−Consider a tree-decomposition of a graph G in which some parts contain
+other parts. Modify it into a tree-decomposition whose parts are the
+✓-maximal parts of the ﬁrst decomposition. How does the new tree
+arise from the old?
+14.
+Let G be a graph, T a set, and (Vt)t2T a family of subsets of V (G) satis-
+fying (T1) and (T2) from the deﬁnition of a tree-decomposition. Show
+that there exists a tree on T that makes (T3) true if and only if there
+exists an enumeration t1, . . . , tn of T such that for every k = 2, . . . , n
+there is a j < k satisfying Vtk \ S
+i<k Vti ✓Vtj.
+(The new condition tends to be more convenient to check than (T3).
+It can help, for example, with the construction of a tree-decomposition
+into a given set of parts.)
+15.
+Prove the following converse of Lemma 12.3.1: if (T, V) satisﬁes con-
+dition (T1) and the statement of the lemma, then (T, V) is a tree-
+decomposition of G.
+16.
+Recall that two separations {U1, U2} and {W1, W2} of G are nested if
+we can choose i, j 2 {1, 2} so that Ui ✓Wj and U3−i ◆W3−j.
+(i) Show that the separations Se := {U1, U2} in Lemma 12.3.1 are
+pairwise nested (for di↵erent choices of the edge e = t1t2 2 T).
+(ii)+ Conversely, show that given a set N of nested separations of G
+there is a tree-decomposition (T, V) of G such that N = { Se |
+e 2 E(T) }.
+17.+ Prove Theorem 12.3.7 for k = 3. Speciﬁcally, prove Tutte’s theorem
+that every 2-connected graph has a tree-decomposition of adhesion 2
+whose torsos are each either 3-connected or a cycle. Conversely, show
+that every graph with such a tree-decomposition is 2-connected.
+(Hint. Try the tree-decomposition deﬁned, as in Exercise 16 (ii), by
+the set of all separations of order 2 that are nested with all other such
+separations.)
+18.
+Describe the tree-decomposition of a contraction minor H of G which
+a given tree-decomposition of G induces as in Lemma 12.3.3, in terms
+subtrees of T (as in Exercise 12).
+19.−Show that any graph with a simplicial tree-decomposition into k-
+colourable parts is itself k-colourable.
+20.
+Let H be a set of graphs, and let G be constructed recursively from
+elements of H by pasting along complete subgraphs. Show that G has
+a simplicial tree-decomposition into elements of H.
+
+Exercises
+407
+21.
+Use the previous exercise to show that G has no K5 minor if and only
+if G has a tree-decomposition in which every torso is either planar or a
+copy of the Wagner graph W (Figure 7.3.1).
+22.+ Call a graph irreducible if it is not separated by any complete subgraph.
+Every ﬁnite graph G can be decomposed into irreducible induced sub-
+graphs, as follows. If G has a separating complete subgraph S, then de-
+compose G into proper induced subgraphs G0 and G00 with G = G0 [G00
+and G0 \ G00 = S. Then decompose G0 and G00 in the same way, and so
+on, until all the graphs obtained are irreducible. By Exercise 20, G has
+a simplicial tree-decomposition into these irreducible subgraphs. Show
+that they are uniquely determined if the complete separators were all
+chosen minimal.
+23.
+If F is a family of sets, then the graph G on F with XY
+2 E(G) ,
+X \ Y 6= ; is called the intersection graph of F. Show that a graph
+is chordal if and only if it is isomorphic to the intersection graph of a
+family of (vertex sets of) subtrees of a tree.
+24.
+Show that for n > 3 the graphs Kn, Cn, an arbitrary tree of order n,
+and the n⇥n grid have tree-decompositions of widths n−1, 2, 1, and n,
+respectively. For Kn and Cn show that these values are best possible.
+25.
+Can the tree-width of a subdivision of a graph G be smaller than tw(G)?
+Can it be larger?
+26.
+Show that the tree-width of a ﬁnite graph is at least its minimum
+degree. Is this still true for inﬁnite graphs?
+27.+ Show that if a graph has circumference k 6= 0, then its tree-width is at
+most k −1.
+28.+ A graph is called outerplanar if it has a drawing in which every vertex
+lies on the boundary of the outer face. Show that outerplanar graphs
+can have arbitrarily large tree-width, or ﬁnd the best upper bound.
+A tree-decomposition whose tree is a path is a path-decomposition. The path-
+width pw(G) of G is the least width of a path-decomposition of G.
+29.
+Show that a graph has a path-decomposition into complete graphs if
+and only if it is isomorphic to an interval graph. (Interval graphs are
+deﬁned in Exercise 44, Ch. 5.)
+30.
+(continued)
+Prove the following analogue of Proposition 12.4.4 for path-width:
+every graph G satisﬁes pw(G) = min !(H) −1, where the minimum is
+taken over all interval graphs H containing G.
+31.+ Do trees have unbounded path-width?
+A transaction of a sequence (v1, . . . , vn) of vertices is a set of disjoint paths
+from an initial segment {v1, . . . , vi} to the rest, {vi+1, . . . , vn}.
+
+408
+12. Graph Minors
+32.+ Given k 2 N and a sequence v1, . . . , vn of vertices in a graph G, show
+that G has a path-decomposition (V1, . . . , Vn) of adhesion 6 k, with
+vi 2 Vi for all i, if and only if G contains no transaction P of (v1, . . . , vn)
+of order |P| > k.
+33.
+Show that the cycle Cn has connected tree-width dn/2e.
+34.
+Show that the n ⇥n grid has tree-width n.
+35.−Let B be a maximum-order bramble in a graph G. Show that every
+minimum-width tree-decomposition of G has a unique part covering B.
+36.−Let P be a minor-closed graph property. Show that strengthening the
+notion of a minor (for example, to that of topological minor) increases
+the set of forbidden minors required to characterize P.
+37.
+Deduce from the graph minor theorem that every minor-closed property
+can be expressed by forbidding ﬁnitely many topological minors. Is the
+same true for every property that is closed under taking topological
+minors?
+Call a set X ✓V (G) of vertices k-connected in G if |X| > k and for all subsets
+Y, Z ✓X with |Y | = |Z| 6 k there are |Y | disjoint Y –Z paths in G.
+38.+ Show that the tree-width of a graph G is large if and only if it contains
+a large set of vertices that is k-connected in G for some large k. For ex-
+ample, show that graphs of tree-width < k contain no (k +1)-connected
+set of 3k vertices, and that graphs containing no (k + 1)-connected set
+of 3k vertices have tree-width < 4k.
+39.
+(continued)
+(i)+ Find an N ! N2 function k 7! (h, `) such that every graph with an
+`-connected set of h vertices contains a bramble of order > k.
+(ii)−Using the last exercise, deduce the following weakening of the
+diﬃcult implication of Theorem 12.4.3: given k, every graph of large
+enough tree-width f(k) contains a bramble of order > k.
+40.−Show that if separations r, s are nested, they have orientations ~r > ~s.
+41.
+Two cuts are nested if a side of one is contained in a side of the other.
+Show that the k-cuts in a k-edge-connected graph are nested if k is odd.
+42.
+Characterize the 2-tangles in a graph.
+43.
+Find a 4-tangle in the 3-dimensional cube.
+When ⌧is a tangle and (A, B) 2 ⌧, we call A the small side of {A, B} in ⌧
+and B its big side.
+44.
+Let G be a graph with a tangle ⌧of order k.
+(i) Show that every graph G0 < G also has a k-tangle.
+(ii) Justify the notion of a ‘small side’ by showing that if (A, B) 2 ⌧
+and {A0, B0} is a separation of order < k with A0 ✓A or B0 ◆B,
+then (A0, B0) 2 ⌧.
+
+Exercises
+409
+(iii) Deduce from the proﬁle property of ⌧that the intersection X of
+the big sides of any star in ⌧contains at least k vertices.
+(iv) Deduce that, for every set X of fewer than k vertices, exactly
+one of the components C of G −X is ‘big’, in the sense that
+(V (G −C), X [ V (C)) 2 ⌧.
+45.+ Is (iv) of the previous exercise true also in inﬁnite graphs (with k ﬁnite)?
+A decider set for a tangle ⌧in G is a set X ✓V (G) such that |X \A| < |X \B|
+for every (A, B) 2 ⌧.
+46.+ Show that a k-tangle induced by a 2k-tangle always has a decider set.
+47.
+Show that separations {A, B} and {C, D} cross if and only if both
+A and B meet both C and D outside A \ B \ C \ D.
+48.
+Does every set of separations in a graph admit a consistent orientation?
+49.
+Show that for every consistent orientation O of the set N of the separa-
+tions Se := {U1, U2} in Lemma 12.3.1, one for every edge e of T, there
+exists a node t of T such that O orients every separation in N towards Vt.
+50.−Show that orienting the edges of a tree T = (V, E) towards some ﬁxed
+node t is consistent for the partial ordering on
+!
+E deﬁned in Section 12.5.
+Is this a bijection between V and the consistent orientations of E?
+51.
+(continued)
+Show that S-trees are just a formal way to display, by a concrete tree,
+the ‘tree-like’ structure of nested sets of separations:
+(i) Given an S-tree (T, ↵), show that ↵(
+!
+E(T)) ✓
+!
+S is nested.
+(A set σ ✓
+!
+S is nested if { s |
+!s
+2 σ } is nested.)
+(ii)+ Given a nested set S of separations, construct an S-tree (T, ↵)
+with surjective ↵:
+!
+E(T) !
+!
+S .
+(iii) Derive Exercise 16 (ii).
+52.
+(continued)
+Prove the assertions about trees of tangles and tree-decompositions
+made in the long paragraph following the proof of Theorem 12.5.8.
+53.+ Show that in any graph of order n there are at most n tangles.
+54.
+Recall from the proof of Theorem 12.4.3 how a k-bramble orients Sk.
+Is this orientation of Sk a tangle? Is it a proﬁle?
+55.
+Show the following implications for a graph G:
+(i) G contains a k-block ) G has a bramble of order k.
+(ii) G has a tangle of order k ) G has a bramble of order k.
+(iii) G has a bramble of order 3k ) G has a tangle of order k.
+(iv) G contains a k-block ) G has a k-tangle or |B| 6 3
+2(k −1).
+Is there a function f: N!N such that, for every k 2 N, if G has a tangle
+of order at least f(k) then it contains a k-block?
+
+410
+12. Graph Minors
+56.
+Show that k-blocks of size at least 3k/2 deﬁne robust proﬁles of Sk.
+Strengthen Theorem 12.3.7 for such blocks, to ﬁnd a canonical tree-
+decomposition which, for variable k, eﬃciently distinguishes all pairs of
+k-blocks of size at least 3k/2 such that neither includes the other.
+57.+ Deﬁne as the order of a bipartition {A, B} of the vertex set of a graph G
+the number kA, Bk of its A–B edges. Deﬁne orientations of such bipar-
+titions in the obvious way. Call an orientation of the set of all the vertex
+bipartitions of order < k an edge-tangle of order k if it has no three
+elements (A1, B1), (A2, B2), (A3, B3) such that A1 [ A2 [ A3 = V (G).
+Show that the proofs of Theorems 12.5.1 and 12.5.8 yield tree-of-tangle
+theorems for edge tangles, the second of them canonical.
+58.
+Discuss the following three shortcuts in the proof of Theorem 12.5.11,
+all designed to avoid shifting. Does any of them work?
+(i) In the induction step, pick any separation s 2 Sk r SO of your
+choice. (If you think it helps, choose it of minimum order.) Add
+each of its two orientations
+!s ,
+ s to O to obtain Sk-trees that
+are over T ⇤[ T + except at one leaf, whose label is {
+ s} or {
+!s },
+respectively. Merge the trees at these leaves as in the text.
+Does it worry you that the extensions of O are no longer closed upwards
+in
+−!
+Sk? If so, why? Then try the following adaptations of (i):
+(ii) Dispense with the requirement that O be closed upwards in
+−!
+Sk.
+(iii) Add to O not just
+!s or
+ s, but their entire up-closure in
+−!
+Sk.
+59.
+To illustrate the equivalence of Theorems 12.4.3 and 12.5.11, prove the
+following assertions for all graphs G:
+(i) G has tree-width < k −1 if and only if it has an Sk-tree over Fk.
+(ii) G has a k-bramble if and only if it admits an Fk-tangle of Sk.
+60.+ Modify the proof of Theorem 12.5.9 to obtain a proof of Theorem 12.5.11.
+61.
+Extend Theorem 12.6.5 as follows.
+Let H be a connected planar
+graph, let X be any set of connected graphs including H, and let
+H := { IX | X
+2 X }.
+Show that H has the Erd˝os-P´osa property,
+witnessed by the same function f as deﬁned in the proof of Theorem
+12.6.5. Explain how it is possible that f depends on H but not on any
+of the other graphs in X.
+62.+ Show that, for every non-planar graph H, the class IH fails to have
+the Erd˝os-P´osa property.
+(Hint. Embed H in a surface.)
+63.+ Let H be a class of connected graphs, and k > 1 an integer. Without
+using any theorems from this chapter, show that H has the Erd˝os-P´osa
+property for graphs without a k-tangle.
+
+Exercises
+411
+64.+ Show that the four ingredients to the structure of the graphs in
+Forb4(Kn) as described in Theorem 12.6.6 – tree-decomposition, an
+apex set X, arbitrary surfaces S 6 - Kn, and vortices H1, . . . , Hk – are
+all needed to capture all the graphs in Forb4(Kn).
+More precisely,
+ﬁnd examples of graphs in Forb4(Kn) showing that Theorem 12.6.6
+becomes false if we require in addition that the tree-decomposition has
+only one part, or that X is always empty, or that S is always the sphere,
+or that H1, . . . , Hk are always empty. No exact proofs are required.
+65.+ (continued)
+Show that, unlike in Theorem 12.6.6, the surfaces used in Theorem
+12.6.7 cannot be limited to those in which Kn cannot be drawn. (As
+before, no exact proofs are required.)
+66.
+Without using the graph minor theorem, show that the chromatic num-
+ber of the graphs in any 4-antichain is bounded.
+67.
+Let Sg denote the orientable surface obtained from the sphere by adding
+g handles. Find a lower bound for |KP(S)| in terms of g.
+(Hint. The smallest g such that a given graph can be embedded in Sg
+is its orientable genus. Use the theorem that the orientable genus of a
+graph is equal to the sum of the genera of its blocks.)
+68.
+Deduce the graph minor theorem from the self-minor conjecture.
+69.
+Prove Theorem 12.6.9, assuming that G has a normal spanning tree.
+70.
+Let G be a locally ﬁnite graph obtained from the Z ⇥Z grid H by
+adding an inﬁnite set of edges xy with dH(x, y) unbounded. Show that
+G < K@0. Can you do the same if the distances dH(x, y) are bounded
+(but at least 3)?
+71.
+Is the inﬁnite Z ⇥Z grid a minor of the Z ⇥N grid? Is the latter a
+minor of the N ⇥N grid?
+72.+ Extend Proposition 12.3.6 to inﬁnite graphs not containing an inﬁnite
+complete subgraph.
+73.
+Using the previous exercise, prove that if every ﬁnite subgraph of G
+has tree-width less than k 2 N then so does G.
+74.
+Show that no assumption of large ﬁnite connectivity can ensure that
+a countable graph has a Kr minor when r > 5. However, using the
+previous exercise show that suﬃciently large ﬁnite connectivity forces
+an inﬁnite graph to contain any given planar minor.
+
+412
+12. Graph Minors
+Notes
+Robertson & Seymour have traditionally referred to the graph minor theorem
+as Wagner’s conjecture. Wagner did indeed discuss this problem in the 1960s
+with his then students, Halin and Mader, and it seems that Mader conjectured
+a positive solution. Wagner himself always insisted that he did not – even after
+the graph minor theorem had been proved.
+Robertson & Seymour’s proof of the graph minor theorem is given in the
+numbers IV–VII, IX–XII and XIV–XXII of their series of over 20 papers under
+the common title of Graph Minors, most of which appeared in the Journal of
+Combinatorial Theory, Series B, between 1983 and 2012. Of their theorems
+cited in this chapter, Theorem 12.4.2 is from Graph Minors IV, Theorems
+12.5.9 and 12.5.1 from Graph Minors X, Theorems 12.6.3 and 12.6.5 from
+Graph Minors V, and Theorem 12.6.6 from Graph Minors XVI.
+Kruskal’s theorem on the well-quasi-ordering of ﬁnite trees was ﬁrst pub-
+lished in J.B. Kruskal, Well-quasi ordering, the tree theorem, and V´aszonyi’s
+conjecture, Trans. Amer. Math. Soc. 95 (1960), 210–225.
+Our proof is due
+to Nash-Williams, who introduced the versatile proof technique of choosing a
+‘minimal bad sequence’. This technique was also used in our proof of Higman’s
+Lemma 12.1.3.
+Nash-Williams generalized Kruskal’s theorem to inﬁnite graphs. This ex-
+tension is much more diﬃcult than the ﬁnite case. Its proof introduces as a tool
+the notion of better-quasi-ordering, a concept that has profoundly inﬂuenced
+well-quasi-ordering theory.
+The graph minor theorem is false for uncount-
+able graphs; this was shown by R. Thomas, A counterexample to ‘Wagner’s
+conjecture’ for inﬁnite graphs, Math. Proc. Camb. Phil. Soc. 103 (1988), 55–
+57. Whether or not the countable graphs are well-quasi-ordered as minors,
+and whether the ﬁnite (or the countable) graphs are better-quasi-ordered as
+minors, are related questions that remain wide open. Both are related also
+to the self-minor conjecture.
+This, too, was originally intended to include
+graphs of arbitrary cardinality, but was disproved for uncountable graphs by
+B. Oporowski, A counterexample to Seymour’s self-minor conjecture, J. Graph
+Theory 14 (1990), 521–524.
+Doubling all the edges of an cycle, and then subdividing every new edge
+once, yields a graph which is incomparable under the topological minor re-
+lation to any graph obtained in this way from a cycle of any other length.
+This shows that the ﬁnite graphs are not well-quasi-ordered by the topological
+minor relation; cf. Exercise 10. C.-H. Liu, Graph Structures and Well-Quasi-
+Ordering, PhD thesis, Georgia Institute of Technology (2014), showed that
+this example is essentially the only obstruction to well-quasi-ordering by the
+topological minor relation: given any integer k, the ﬁnite graphs that do not
+contain, as a topological minor, a graph obtained from a path P k in this way
+are well-quasi-ordered as topological minors.
+The notions of tree-decomposition and tree-width were ﬁrst introduced
+(under di↵erent names) by R. Halin, S-functions for graphs, J. Geometry 8
+(1976), 171–186. Among other things, Halin showed that grids can have ar-
+bitrarily large tree-width. Robertson & Seymour reintroduced the two con-
+cepts, apparently unaware of Halin’s paper, with direct reference to K. Wagner,
+¨Uber eine Eigenschaft der ebenen Komplexe, Math. Ann. 114 (1937), 570–

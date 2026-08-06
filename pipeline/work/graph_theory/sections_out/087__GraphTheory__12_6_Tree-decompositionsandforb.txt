@@ -1,0 +1,323 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.6 Tree-decompositions and forbidden minors
+직전 소단원: 「12.5 Tangles」
+[본문]
+391
+Then (ei, ui, wi) > (e0, t, s0) by the choice of e 6= e0. Hence C0 = C \X3−i,
+but also A0 = A [ Xi. Thus, any vertex or edge of G[C] that is not
+in G[C0] lies in G[Xi] ✓G[A0]. The fact that ↵i(σt) 2 T thus implies
+↵0
+i(σt) 2 T , as desired.
+Let T be the tree obtained from the disjoint union of T1 −u1 and
+T2 −u2 by joining w1 to w2 by a new edge e. Let ↵:
+!
+E(T) !
+−!
+Sk map
+(e, w3−i, wi) to ↵0
+i(ei, ui, wi) = (Xi, X3−i) for i = 1, 2, and otherwise ex-
+tend the ↵0
+i. Then ↵commutes with the inversion of
+!e and of (X1, X2),
+and ↵(σt) = ↵0
+i(σt) 2 T ⇤[ T + for all t 2 T, in particular for t = wi.
+Hence, (T, ↵) satisﬁes (2).
+⇤
+Theorem 12.5.9, as stated above, is a special case of a more general
+result in which T ⇤can be replaced by other collections F of ‘forbidden’
+stars of oriented separations. Given a set S of separations, an F-tangle
+F-tangle
+of S is a consistent orientation of S that has no subset σ 2 F. For
+Fk :=
+*
+σ ✓
+!
+S : σ is a star and
+.. T { B : (A, B) 2 σ}
+.. < k
+ 
+we obtain the following more tangle-like duality theorem for tree-width:
+Theorem 12.5.11. The following two assertions are equivalent for all
+graphs G and integers k > 0 :
+(i) G has tree-width less than k −1;
+(ii) G has no Fk-tangle of Sk.
+It is not hard to show that (i) is equivalent to the existence of an Sk-tree
+over Fk in G (Ex. 59). Theorem 12.5.11 in that form and Theorem 12.5.9
+are both corollaries of a more general theorem about tangle-tree duality
+in so-called ‘abstract separation systems’; see the notes.
+Moreover, any Fk-tangle of Sk gives rise to a k-bramble (Ex. 59).
+Thus, Theorem 12.5.11 implies the tree-width duality theorem (12.4.3).
+12.6 Tree-decompositions and forbidden minors
+If H is any set or class of graphs, then the class
+Forb4(H) := { G | G 6< H for all H 2 H }
+Forb4(H)
+of all graphs without a minor in H is a graph property, i.e. is closed under
+isomorphism.11 When it is written as above, we say that this property
+is expressed by specifying the graphs H 2 H as forbidden (or excluded)
+forbidden
+minors
+minors.
+11 As usual, we abbreviate Forb4({H}) to Forb4(H).
+12.6 Tree-decompositions and forbidden minors
+
+392
+12. Graph Minors
+By Proposition 1.7.1, Forb4(H) is closed under taking minors, or
+(1.7.1)
+minor-closed: if G0 4 G 2 Forb4(H) then G0 2 Forb4(H). Every minor-
+closed property can in turn be expressed by forbidden minors:
+Lemma 12.6.1. A graph property P can be expressed by forbidden
+[5.2]
+minors if and only if it is closed under taking minors.
+Proof. For the ‘if’ part, note that P = Forb4(P), where P is the com-
+P
+plement of P.
+⇤
+In Section 12.7, we shall return to the general question of how a
+given minor-closed property is best represented by forbidden minors.
+In this section, we begin by looking at a particular example of such a
+property: bounded tree-width.
+Consider the property of having tree-width less than some given
+integer k. By Lemmas 12.4.1 and 12.6.1, this property can be expressed
+by forbidden minors. Choosing their set H as small as possible, we ﬁnd
+that H = {K3} for k = 2: the graphs of tree-width < 2 are precisely the
+forests. For k = 3, we have H = {K4}:
+Proposition 12.6.2. A graph has tree-width < 3 if and only if it has
+no K4 minor.
+Proof.
+By Corollary 12.3.5, we have tw(K4) > 3. By Lemma 12.4.1,
+(7.3.1)
+(12.3.2)
+(12.3.5)
+(12.3.6)
+(12.4.1)
+therefore, a graph of tree-width < 3 cannot contain K4 as a minor.
+Conversely, let G be a graph without a K4 minor; we assume that
+|G| > 3. Add edges to G until the graph G0 obtained is edge-maximal
+without a K4 minor. By Proposition 7.3.1, G0 can be constructed recur-
+sively from triangles by pasting along K2s. By induction on the number
+of recursion steps and Corollary 12.3.5, every graph constructible in this
+way has a tree-decomposition into triangles (as in the proof of Propo-
+sition 12.3.6).
+Such a tree-decomposition of G0 has width 2, and by
+Lemma 12.3.2 it is also a tree-decomposition of G.
+⇤
+As k grows, the list of forbidden minors characterizing the graphs
+of tree-width < k seems to grow fast. They are known explicitly only up
+to k = 4; see the notes.
+A question converse to the above is to ask for which H (other than
+K3 and K4) the tree-width of the graphs in Forb4(H) is bounded. This
+is the case, for example, when H is grid:
+Theorem 12.6.3. (Robertson & Seymour 1986)
+[12.7.1]
+[12.7.3]
+For every integer r there is an integer k such that every graph of tree-
+width at least k has an r ⇥r grid minor.
+This grid theorem may, at ﬁrst glance, look like just a speciﬁc and
+technical result. But it has a sweeping consequence:
+
+12.6 Tree-decompositions and forbidden minors
+393
+Corollary 12.6.4. Given a graph H, the graphs without an H minor
+have bounded tree-width if and only if H is planar.
+Proof. Since all grids and their minors are planar, every class Forb4(H)
+(4.4.6)
+with a non-planar H contains all grids, which have unbounded tree-width
+(see after Theorem 12.4.3).
+Conversely, every planar graph H is a minor of some grid: take a
+drawing of the graph, fatten its vertices and edges, and superimpose a
+suﬃciently ﬁne plane grid. Hence, by Theorem 12.6.3, the graphs in
+Forb4(H) have bounded tree-width as soon as H is planar.
+⇤
+Theorem 12.6.3 has another interesting application. Recall that a
+class H of graphs has the Erd˝os-P´osa property if the number of vertices in
+a graph needed to cover all its subgraphs in H is bounded by a function
+of its maximum number of disjoint subgraphs in H. Now let H be a
+H
+ﬁxed connected graph, and consider the class H = IH of graphs that
+H
+contract to a copy of H. (Thus, G has a subgraph in H if and only if
+H 4 G.)
+Theorem 12.6.5. (Robertson & Seymour 1986)
+H has the Erd˝os-P´osa property if H is planar.
+Proof. We have to ﬁnd a function f: N ! N such that, given k 2 N and
+(12.3.1)
+a graph G, either G contains k disjoint models of H or there is a set U
+of at most f(k) vertices in G such that H 64 G −U.
+By Corollary 12.6.4, there exists for every k > 1 an integer wk such
+that every graph of tree-width at least wk contains the disjoint union of
+k copies of H (which is again planar) as a minor. Deﬁne
+f(k) := 2f(k −1) + wk
+inductively, starting with f(0) = f(1) = 0.
+To verify that f does what it should, we apply induction on k. For
+k 6 1 there is nothing to show. Now let k and G be given for the induc-
+tion step. If tw(G) > wk, we are home by deﬁnition of wk. So assume
+that tw(G) < wk, and let (T, (Vt)t2T ) be a tree-decomposition of G of
+width < wk. Let us direct the edges t1t2 of the tree T as follows. Let
+T1, T2 be the components of T −t1t2 containing t1 and t2, respectively,
+and put
+G1 := G[
+[
+t2T1
+(Vt r Vt2)]
+and
+G2 := G[
+[
+t2T2
+(Vt r Vt1)] .
+We direct the edge t1t2 towards Gi if H 4 Gi, thereby giving t1t2 either
+one or both or neither direction.
+If every edge of T receives at most one direction, we follow these to
+a node t 2 T such that no edge at t in T is directed away from t. As H is
+
+394
+12. Graph Minors
+connected, this implies by Lemma 12.3.1 that Vt meets every IH ✓G.
+This completes the proof with U = Vt, since |Vt| 6 wk 6 f(k) by the
+choice of our tree-decomposition.
+Suppose now that T has an edge t1t2 that received both directions.
+For each i = 1, 2 let us ask if we can cover all the models of H in Gi by at
+most f(k −1) vertices. If we can, for both i, then by Lemma 12.3.1 the
+two covers combine with Vt1 \Vt2 to the desired cover U for G. Suppose
+now that G1 has no such cover.
+Then, by the induction hypothesis,
+G1 contains k −1 disjoint models of H. Since t1t2 was also directed
+towards t2, there is another such model in G2. This gives the desired
+total of k disjoint models of H in G.
+⇤
+Theorem 12.6.5 contains the Erd˝os-P´osa theorem 2.3.2 as the special
+case that H = K3. It is best possible in that if H is non-planar, then
+H = IH does not have the Erd˝os-P´osa property (Exercise 62).
+We conclude this section with some structure theorems for graphs
+not containing a given complete graph as a minor. These theorems are
+more diﬃcult to prove than the results we have seen so far in this chap-
+ter, and they are not even that easy to state. But it’s worth an e↵ort:
+already the ﬁrst of them, the excluded-Kn theorem, is both central to
+the proof of the graph minor theorem and can be applied elsewhere.
+A linear decomposition of G is a family (Vi)i2I of vertex sets indexed
+linear
+decom-
+position
+by some linear order I such that S
+i2I Vi = V (G), every edge of G has
+both its ends in some Vi, and Vi \ Vk ✓Vj whenever i < j < k. When
+G is ﬁnite, this is just a tree-decomposition whose decomposition tree
+is a path, and usually called a path-decomposition. If each Vi contains
+at most k vertices and k is minimal with this property, then (Vi)i2I has
+width k −1.
+Let S0 be a subspace of a surface12 S obtained by removing the
+interiors of ﬁnitely many disjoint closed discs, with boundary circles
+C1, . . . , Ck say. This space is determined up to homeomorphism by S
+C1, . . . , Ck
+and the number k, and we denote it by S −k. Each Ci is the image of a
+S −k
+continuous map fi: [0, 1] ! S0 that is injective except for fi(0) = fi(1).
+We call C1, . . . , Ck the cu↵s of S0 and the points f1(0), . . . , fk(0) their
+cu↵s
+roots. The other points of each Ci are linearly ordered by fi as images
+of (0, 1); when we use cu↵s as index sets for linear decompositions below,
+we shall be referring to these linear orders. An embedding of a graph
+in S (or in S −k) is deﬁned analogously to embeddings in the plane.
+Let H be a graph, S a surface, and k 2 N. We say that H is k-nearly
+embeddable in S if H has a set X of at most k vertices such that H −X
+k-near
+embedding
+can be written as H0 [ H1 [ . . . [ Hk so that
+(N1) there exists an embedding σ: H0 ,! S −k that maps only vertices
+to cu↵s and no vertex to the root of a cu↵;
+12 A compact connected 2-manifold without boundary; see Appendix B.
+
+12.6 Tree-decompositions and forbidden minors
+395
+(N2) the graphs H1, . . . , Hk are pairwise disjoint (and may be empty),
+and H0 \ Hi = σ−1(σ(H0) \ Ci) for each i;
+(N3) every Hi with i > 1 has a linear decomposition (V i
+z )z 2Ci\σ(H0) of
+width < k such that σ−1(z) 2 V i
+z for all z.
+Here, then, is the structure theorem for graphs without a Kn minor.13
+Note that, for n = 5, Wagner’s Theorem (7.3.4) remains stronger and
+more precise. The case of n = 4 is covered by Proposition 7.3.1.
+Theorem 12.6.6. (Robertson & Seymour 2003)
+For every n > 5 there exists a k 2 N such that every graph not contain-
+ing Kn as a minor has a tree-decomposition whose torsos are k-nearly
+embeddable in a surface in which Kn is not embeddable.
+Theorem 12.6.6 is true also for inﬁnite graphs; see the notes.
+Note that there are only ﬁnitely many surfaces in which Kn is not
+embeddable.
+The set of those surfaces in the statement of Theorem
+12.6.6 could therefore be replaced by just two surfaces: the orientable
+and the non-orientable surface of maximum genus in this set.
+Theorem 12.6.6 also has a converse, though only a qualitative one.
+A decomposition as described does not by itself preclude the presence of
+a Kn minor. But for every n there is an r such that no graph with such a
+decomposition has a Kr minor. This is because the adhesion sets of the
+tree-decomposition have bounded size, e.g. by 2k + n, since they induce
+complete subgraphs in the torsos, and these are k-nearly embeddable in
+a surface that does not accommodate Kn.
+For graphs without a given topological minor, there is a related
+structure theorem:
+Theorem 12.6.7. (Grohe & Marx 2012)
+For every n > 5 there exists a k 2 N such that every graph not contain-
+ing Kn as a topological minor has a tree-decomposition whose torsos are
+either k-nearly embeddable in a surface of Euler genus 6 k or have at
+most k vertices of degree > k.
+(See Appendix B for the deﬁnition of the Euler genus of a surface.)
+There are also structure theorems for excluding inﬁnite minors, and
+we now state two of these.
+First, the structure theorem for excluding K@0. Call a graph H
+nearly planar if H has a ﬁnite set X of vertices such that H −X can
+nearly
+planar
+be written as H0 [ H1 so that (N1–2) hold with S = S2 (the sphere)
+and k = 1, while (N3) holds with k = |X|. (In other words, deleting
+13 Robertson and Seymour proved several versions of this theorem, of which The-
+orem 12.6.6 is the simplest. See the notes.
+
+396
+12. Graph Minors
+a bounded number of vertices makes H planar except for a subgraph
+of bounded linear width sewn on to the unique cu↵of S2 −1.) A tree-
+decomposition (T, (Vt)t2T ) of a graph G has ﬁnite adhesion if all its
+ﬁnite
+adhesion
+adhesion sets are ﬁnite and for every inﬁnite path t1t2 . . . in T the value
+of lim infi!1 |Vti \ Vti+1| is ﬁnite.
+Unlike its counterpart for Kn, the excluded-K@0 structure theorem
+has a direct converse. It thus characterizes the graphs without a K@0
+minor, as follows:
+Theorem 12.6.8. A graph G has no K@0 minor if and only if G has a
+tree-decomposition of ﬁnite adhesion whose torsos are nearly planar.
+Finally, a structure theorem for excluding K@0 as a topological minor.
+Let us say that G has ﬁnite tree-width if G admits a tree-decomposition
+ﬁnite
+tree-width
+(T, (Vt)t2T ) into ﬁnite parts such that for every inﬁnite path t1t2 . . . in
+T the set S
+j>1
+T
+i>j Vti is ﬁnite.
+Theorem 12.6.9. The following assertions are equivalent for connected
+graphs G:
+(i) G does not contain K@0 as a topological minor;
+(ii) G has ﬁnite tree-width;
+(iii) G has a normal spanning tree T such that for every ray R in T
+there are only ﬁnitely many vertices v such that G contains an
+inﬁnite v–(R −v) fan.
+12.7 The graph minor theorem
+Graph properties that are closed under taking minors occur frequently
+in graph theory. Among the most natural examples are the properties
+of being embeddable in some ﬁxed surface, such as planarity.
+By Kuratowski’s theorem, planarity can be expressed by forbidding
+the minors K5 and K3,3. This is a good characterization of planarity in
+the following sense. Suppose we wish to persuade someone that a certain
+graph is planar: this is easy (at least intuitively) if we can produce a
+drawing of the graph. But how do we persuade someone that a graph is
+non-planar? By Kuratowski’s theorem, there is also an easy way to do
+that: we just have to exhibit an IK5 or IK3,3 in our graph, as an easily
+checked ‘certiﬁcate’ for non-planarity. Our simple Proposition 12.6.2 is
+another example of a good characterization: if a graph has tree width
+< 3, we can prove this by exhibiting a suitable tree-decomposition; if
+not, we can produce an IK4 as evidence.

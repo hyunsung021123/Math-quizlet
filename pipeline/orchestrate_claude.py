@@ -101,6 +101,7 @@ def log(msg):
 BOOK_ALIASES = {
     "algebraic_topology": ["대수적 위상수학", "대수위상", "해처", "hatcher"],
     "complex_analysis": ["복소해석", "복소해석학", "스타인", "stein", "shakarchi"],
+    "graph_theory": ["그래프이론", "그래프 이론", "디스텔", "diestel"],
     "lectures_on_polytopes": ["폴리토프", "폴리토프 이론", "지글러", "ziegler"],
 }
 

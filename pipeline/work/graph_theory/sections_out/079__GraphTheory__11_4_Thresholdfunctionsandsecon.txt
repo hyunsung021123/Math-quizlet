@@ -1,0 +1,493 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 11. Random Graphs
+현재 소단원: 11.4 Threshold functions and second moments
+직전 소단원: 「11.3 Properties of almost all graphs」
+[본문]
+351
+Theorem 11.3.5. (Erd˝os & R´enyi 1963)
+With probability 1, a random graph G 2 G(@0, p) with 0 < p < 1 is
+isomorphic to the Rado graph R.
+Proof. Given ﬁxed disjoint ﬁnite sets U, W ✓N, the probability that a
+(8.3.1)
+vertex v /2 U [ W is not joined to U [ W as expressed in property (⇤) of
+Chapter 8.3 (i.e., is not joined to all of U or is joined to some vertex in W)
+is some number r < 1 depending only on U and W. The probability
+that none of k given vertices v is joined to U [ W as in (⇤) is rk, which
+tends to 0 as k !1. Hence the probability that all the (inﬁnitely many)
+vertices outside U [ W fail to witness (⇤) for these sets U and W is 0.
+Now there are only countably many choices for U and W as above.
+Since the union of countably many sets of measure 0 again has measure 0,
+the probability that (⇤) fails for any sets U and W is still 0. Therefore
+G satisﬁes (⇤) with probability 1. By Theorem 8.3.1 this means that,
+almost surely, G ⇠= R.
+⇤
+How can we make sense of the paradox that the result of inﬁnitely
+many independent choices can be so predictable? The answer, of course,
+lies in the fact that the uniqueness of R holds only up to isomorphism.
+Now, constructing an automorphism for an inﬁnite graph with prop-
+erty (⇤) is a much easier task than ﬁnding one for a ﬁnite random graph,
+so in this sense the uniqueness is no longer that surprising. Viewed in
+this way, Theorem 11.3.5 expresses not a lack of variety in inﬁnite ran-
+dom graphs but rather the abundance of symmetry that glosses over this
+variety when the graphs G 2 G(@0, p) are viewed only up to isomorphism.
+11.4 Threshold functions and second moments
+The results we saw in Section 11.3 have an interesting common feature:
+the values of p played no role as long as they were constant, that is, inde-
+pendent of n. For example, if almost every graph in G(n, p) with p = 0.99
+had the property considered, then the same was true for p = 0.01. How
+could this happen?
+Such insensitivity of our random model to changes of p was cer-
+tainly not intended. For most properties, however, the critical order of
+magnitude of p around which the property will ‘just’ occur or not occur
+simply lies below any constant value of p: it is a function of n tending
+to zero as n ! 1. In the proof of Erd˝os’s theorem, for example, this
+critical probability for the two properties we were trying to relate was
+p(n) = 1/n.
+11.4 Threshold functions and second moments
+
+352
+11. Random Graphs
+Let us call a positive real function t = t(n) a threshold function for a
+threshold
+function
+graph property P if the following holds for all p = p(n) and G 2 G(n, p):
+lim
+n!1 P [ G 2 P ] =
+⇢
+0
+if p/t ! 0 as n ! 1
+1
+if p/t ! 1 as n ! 1.
+If P has a threshold function t, then clearly any positive multiple ct of t
+is also a threshold function for P; thus, threshold functions in the above
+sense are only ever unique up to a multiplicative constant.6
+Bollob´as & Thomason (1987) have shown that, trivial exceptions
+aside, all increasing graph properties have threshold functions, proper-
+ties that are closed under the addition of edges. Properties of the form
+{ G | G ◆H }, with H ﬁxed, are a common example; we shall compute
+their threshold functions in this section.
+For the purpose of computing its threshold function, it is convenient
+to cast the graph property P considered in the form
+P = { G | X(G) > 1 } ,
+where X > 0 is a suitable random variable on G(n, p). For example, we
+X > 0
+could take the indicator random variable of P on G(n, p). But other
+choices of X are allowed too; if P is connectedness, for example, we
+might have X(G) count the number of spanning trees of G.
+How could we prove that some given t is a threshold function
+of P? Any such proof will consist of two parts: a proof that almost
+no G 2 G(n, p) has P when p is small compared with t, and one showing
+that almost every G has P when p is large.
+Since X > 0, we may use Markov’s inequality for the ﬁrst part of
+the proof and ﬁnd an upper bound for E(X) instead of P [ X > 1 ]: if
+E(X) is much smaller than 1 then X(G) can be at least 1 only for few
+G 2 G(n, p), and for almost no G if E(X) ! 0 as n ! 1. Besides, the
+expectation is much easier to calculate than probabilities: without wor-
+rying about such things as independence or incompatibility of events, we
+may compute the expectation of a sum of random variables – for exam-
+ple, of indicator random variables – simply by adding up their individual
+expected values.
+For the second part of the proof, things are more complicated. In
+order to show that P [ X > 1 ] is large, it is not enough to bound E(X)
+from below: since X is not bounded above, E(X) may be large simply
+because X is very large on just a few graphs G – so X may still be zero
+6 Our notion of threshold reﬂects only the crudest interesting level of screening:
+for some properties, such as connectedness, one can deﬁne sharper thresholds where
+the constant factor is crucial.
+
+11.4 Threshold functions and second moments
+353
+for most G 2 G(n, p).7 In order to prove that P [ X > 1 ] ! 1, we thus
+have to show that this cannot happen, i.e., that X does not deviate a
+lot from its mean too often.
+The following tool from probability theory achieves just that. As is
+customary, we write
+µ := E(X)
+µ
+and deﬁne σ > 0 by setting
+σ2 := E
+$
+(X −µ)2%
+.
+σ2
+This quantity σ2 is called the variance or second moment of X; by
+deﬁnition, it is a measure of how much X deviates from its mean. Since
+E is linear, the deﬁning term for σ2 expands to
+σ2 = E(X2 −2µX + µ2) = E(X2) −µ2.
+Note that µ and σ2 always refer to a random variable on some ﬁxed
+probability space. In our setting, where we consider the spaces G(n, p),
+both quantities are functions of n.
+The following lemma says exactly what we need: that X cannot
+deviate a lot from its mean too often.
+Lemma 11.4.1. (Chebyshev’s Inequality)
+For all real λ > 0,
+P
+⇥
+|X −µ| > λ
+⇤
+6 σ2/λ2.
+Proof. By Lemma 11.1.5 and deﬁnition of σ2,
+(11.1.5)
+P
+⇥
+|X −µ| > λ
+⇤
+= P
+⇥
+(X −µ)2 > λ2 ⇤
+6 σ2/λ2.
+⇤
+For a proof that X(G) > 1 for almost all G 2 G(n, p), Chebyshev’s
+inequality can be used as follows:
+Lemma 11.4.2. If µ > 0 for all large enough n, and σ2/µ2 ! 0 as
+n ! 1, then X(G) > 0 for almost all G 2 G(n, p).
+7 For some p between n−1 and (log n)n−1, for example, almost every G 2 G(n, p)
+has an isolated vertex (and hence no spanning tree), but its expected number of
+spanning trees tends to inﬁnity with n. See the Exercise 11 for details.
+
+354
+11. Random Graphs
+Proof. Any graph G with X(G) = 0 satisﬁes |X(G) −µ| = µ. Hence
+Lemma 11.4.1 implies with λ := µ that
+P
+⇥
+X = 0
+⇤
+6 P
+⇥
+|X −µ| > µ
+⇤
+6 σ2/µ2 −!
+n!1 0 .
+Since X > 0, this means that X > 0 almost surely, i.e. that X(G) > 0
+for almost all G 2 G(n, p).
+⇤
+As the main result of this section, we now prove a theorem that will
+give us a threshold function for all graph properties of the form PH, the
+PH
+property of containing a copy of a ﬁxed graph H as a subgraph.
+Let H be given, put k := |H| and ` := kHk, and assume that
+H; k, `
+` > 1. Write X(G) for the number of subgraphs of a graph G that are
+isomorphic to H.
+X
+Given n 2 N, let H denote the set of all copies of H on subsets of
+{0, . . . , n −1}, the vertex set of the graphs in G(n, p):
+H :=
+*
+H0 | H0 ⇠= H, V (H0) ✓{0, . . . , n −1}
+ 
+.
+H
+Given H0 2 H and G 2 G(n, p), we shall write H0 ✓G to express that
+H0 itself – not just an isomorphic copy of H0 – is a subgraph of G. As
+in the proof of Lemma 11.1.4, double counting gives
+E(X) =
+X
+H0 2H
+P [ H0 ✓G ] .
+(1)
+And for every ﬁxed H0 2 H we have
+P [ H0 ✓G ] = p`,
+(2)
+because kHk = `.
+Let h denote the number of isomorphic copies of H on a ﬁxed k-set;
+h
+clearly, h 6 k! . As there are
+$n
+k
+%
+possible vertex sets for the graphs in H,
+we thus have
+|H| =
+✓n
+k
+◆
+h 6
+✓n
+k
+◆
+k! 6 nk.
+(3)
+Given a probability p = p(n) and a candidate t = t(n) for a threshold
+function, we write γ := p/t. Our ﬁrst lemma treats the case of γ ! 0:
+γ
+Lemma 11.4.3. If t = n−1/"(H), and p is such that γ ! 0 as n ! 1,
+then almost no G 2 G(n, p) lies in PH.
+
+11.4 Threshold functions and second moments
+355
+Proof. Our aim is to ﬁnd an upper bound for E(X), and to show that
+(11.1.5)
+(11.1.4)
+this tends to zero as n ! 1. By our choice of t and deﬁnition of γ we
+have
+p = γt = γn−k/`,
+so
+E(X) =
+(1,2) |H| p` 6
+(3)
+nk(γn−k/`)` = γ`.
+Thus if γ ! 0 as n ! 1, then
+P [ G 2 PH ] = P [ X > 1 ] 6 E(X) 6 γ` −!
+n!1 0
+by Markov’s inequality (11.1.5).
+⇤
+Unlike the function t in Lemma 11.4.3, our threshold function for
+PH will not be expressed in terms of "(H), but of
+"0(H) := max { "(H0) | H0 ✓H } .
+"0(H)
+Our second lemma treats the case of γ ! 1:
+Lemma 11.4.4. If t = n−1/"0(H), and p is such that γ ! 1 as n ! 1,
+then almost every G 2 G(n, p) lies in PH.
+Proof. By our new choice of t and deﬁnition of γ we now have
+p = γn−1/"0,
+(4)
+where "0 := "0(H).
+"0
+Before we start on the main proof, let us note an inequality for later
+use. For all n > k,
+✓n
+k
+◆
+n−k =
+1
+k!
+✓n
+n · · · n −k + 1
+n
+◆
+>
+1
+k!
+✓n −k + 1
+n
+◆k
+=
+1
+k!
+✓
+1 −k −1
+k
+◆k
+.
+(5)
+When n gets large and k is bounded, as in our case, the upshot is that
+nk exceeds
+$n
+k
+%
+by no more than a constant factor, one independent of n.
+Our goal is to apply Lemma 11.4.2, and hence to bound σ2/µ2 =
+$
+E(X2) −µ2%
+/µ2 from above. To help us estimate E(X2), we begin by
+rewriting X2 in a strange way, as
+X2(G) =
+..{H 2 H : H ✓G}
+..2 =
+..{(H0, H00) 2 H2: H0 ✓G and H00 ✓G}
+...
+
+356
+11. Random Graphs
+We can now calculate E(X2) by double counting, just as in (1):
+E(X2) =
+X
+(H0,H00)2H2
+P [ H0 [ H00 ✓G ] .
+(6)
+Let us then calculate these probabilities P [ H0 [ H00 ✓G ].
+Given
+H0, H00 2 H, we have
+P [ H0 [ H00 ✓G ] = p2`−kH0\H00k .
+As kH0 \ H00k 6 i"0 for i := |H0 \ H00| by deﬁnition of "0, this yields
+i
+P [ H0 [ H00 ✓G ] 6 p2`−i"0.
+(7)
+We have now estimated the individual summands in (6); what does
+this imply for the sum as a whole? Since (7) depends on the parameter
+i = |H0 \ H00|, we partition the range H2 of the sum in (6) into the
+subsets
+H2
+i :=
+*
+(H0, H00) 2 H2 : |H0 \ H00| = i
+ 
+,
+i = 0, . . . , k,
+H2i
+and calculate for each H2
+i the corresponding sum
+Ai :=
+X
+i P [ H0 [ H00 ✓G ]
+Ai
+by itself.
+(Here, as below, we use P
+i to denote sums over all pairs
+P
+i
+(H0, H00) 2 H2
+i.)
+If i = 0 then H0 and H00 are disjoint, so the events H0 ✓G and
+H00 ✓G are independent. Hence,
+A0 =
+X
+0 P [ H0 [ H00 ✓G ]
+=
+X
+0 P [ H0 ✓G ] · P [ H00 ✓G ]
+6
+X
+(H0,H00)2H2
+P [ H0 ✓G ] · P [ H00 ✓G ]
+=
+⇣X
+H0 2H
+P [ H0 ✓G ]
+⌘
+·
+⇣X
+H00 2H
+P [ H00 ✓G ]
+⌘
+=
+(1) µ2.
+(8)
+Let us now estimate Ai for i > 1. Note that P
+i can be written as
+P
+H0 2H
+P
+H00 2H: |H0\H00|=i . For ﬁxed H0, the second sum ranges over
+✓k
+i
+◆✓n −k
+k −i
+◆
+h
+
+11.4 Threshold functions and second moments
+357
+summands: the number of graphs H00 2 H with |H00 \ H0| = i. Hence,
+for all i > 1 and suitable constants c1, c2 independent of n,
+Ai =
+X
+i P [ H0 [ H00 ✓G ]
+6
+(7)
+X
+H0 2H
+✓k
+i
+◆✓n −k
+k −i
+◆
+h p2`p−i"0
+=
+(4) |H|
+✓k
+i
+◆✓n −k
+k −i
+◆
+h p2`$
+γ n−1/"0%−i"0
+6 |H| p`c1 nk−i h p`γ−i"0 ni
+=
+(1,2) µ c1nkh p`γ−i"0
+6
+(5)
+µ c2
+✓n
+k
+◆
+h p`γ−i"0
+=
+(1,2,3)µ2c2γ−i"0
+6 µ2c2γ−"0
+if γ > 1. By deﬁnition of the Ai, this implies with c3 := kc2 that
+E(X2)/µ2
+=
+(6)
+⇣
+A0/µ2 +
+k
+X
+i=1
+Ai/µ2⌘
+6
+(8)
+1 + c3γ−"0
+and hence
+σ2
+µ2 = E(X2) −µ2
+µ2
+6 c3γ−"0 −!
+γ!1 0 ,
+since "0 > " > 0 by our assumption that ` = kHk > 0. By Lemma 11.4.2,
+therefore, X > 0 almost surely, i.e. almost every G 2 G(n, p) has a sub-
+graph isomorphic to H and hence lies in PH.
+⇤
+Theorem 11.4.5. (Erd˝os & R´enyi 1960; Bollob´as 1981)
+Let H be a graph with at least one edge.
+Then t = n−1/"0(H) is a
+threshold function for PH.
+Proof. We have to show that almost no G 2 G(n, p) lies in PH if γ ! 0
+as n ! 1, and that almost all G 2 G(n, p) lie in PH if γ ! 1 as n ! 1.
+This latter assertion was proved in Lemma 11.4.4.
+To prove that almost no G 2 G(n, p) lies in PH if γ ! 0, we apply
+Lemma 11.4.3 to a subgraph H0 ✓H for which the maximum in the
+deﬁnition of "0(H) is attained, i.e. which is such that "(H0) = "0(H).
+The lemma implies that almost no G 2 G(n, p) contains a copy of H0.
+Since any graph containing H also contains H0, this implies that almost
+no G 2 G(n, p) contains a copy of H, as desired.
+⇤
+
+358
+11. Random Graphs
+The bound in Theorem 11.4.5 is particularly easy to compute for
+balanced graphs H, those for which "0(H) = "(H). Cycles and trees are
+examples of balanced graphs. For cycles, we have the threshold familiar
+from the proof of Erd˝os’s theorem:
+Corollary 11.4.6. If k > 3, then t(n) = n−1 is a threshold function for
+the property of containing a k-cycle.
+⇤
+Note that t does not depend on k. (See also Exercise 18.)
+For trees, there is a similar phenomenon. Here, the threshold func-
+tion does depend on the order of the tree, but not on its shape:
+Corollary 11.4.7. If T is a tree of order k > 2, then t(n) = n−k/(k−1)
+is a threshold function for the property of containing a copy of T.
+⇤
+The systematic study of threshold functions has led to an overall
+picture of how the typical properties of a graph G 2 G(n, p) unfold as
+the growth rate of p = p(n) increases. This picture, dubbed the evolu-
+tion of random graphs, is quite fascinating: as in the evolution of species,
+changes happen ‘in jumps’, marked by the times the growth rate of p
+crosses that of a threshold function.
+For a very rough sketch, let us begin with edge probabilities p whose
+order of magnitude lies below n−2; for such p, a random graph G 2 G(n, p)
+almost surely has no edges at all. But as p grows, it acquires more and
+more structure. As p approaches n−1, its components become larger and
+larger trees (Corollary 11.4.7), until at p = n−1 the ﬁrst cycles are born
+(Exercise 18).
+Soon, some of these will have several crossing chords,
+making the graph non-planar. At the same time, one component out-
+grows the others, until it devours them around p = (log n)n−1, making
+the graph connected. Hardly later, at a mere p = (1 + ✏)(log n)n−1, our
+random graph already almost surely has a Hamilton cycle. . .
+Exercises
+1.−What is the probability that a random graph in G(n, p) has exactly m
+edges, for 0 6 m 6 $n
+2
+%
+ﬁxed?
+2.
+What is the expected number of edges in G 2 G(n, p)?
+3.
+What is the expected number of Kr-subgraphs in G 2 G(n, p)?
+4.
+Characterize the graphs that occur as a subgraph in every graph of
+suﬃciently large average degree.

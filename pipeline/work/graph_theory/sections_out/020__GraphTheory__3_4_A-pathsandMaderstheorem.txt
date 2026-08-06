@@ -1,0 +1,222 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 3. Connectivity
+현재 소단원: 3.4 A-paths and Mader's theorem
+직전 소단원: 「3.3 Menger's theorem」
+[본문]
+76
+3. Connectivity
+Theorem 3.3.6. (Global Version of Menger’s Theorem)
+[4.2.7]
+[6.6.1]
+[9.4.2]
+(i) A graph is k-connected if and only if it contains k independent
+paths between any two vertices.
+(ii) A graph is k-edge-connected if and only if it contains k edge-
+disjoint paths between any two vertices.
+Proof. (i) If a graph G contains k independent paths between any two
+vertices, then |G| > k and G cannot be separated by fewer than k ver-
+tices; thus, G is k-connected.
+Conversely, suppose that G is k-connected (and, in particular, has
+more than k vertices) but contains vertices a, b not linked by k indepen-
+a, b
+dent paths. By Corollary 3.3.5 (i), a and b are adjacent; let G0 := G−ab.
+G0
+Then G0 contains at most k −2 independent a–b paths. By Corollary
+3.3.5 (i), we can separate a and b in G0 by a set X of at most k −2
+X
+vertices. As |G| > k, there is at least one further vertex v /2 X [ {a, b}
+v
+in G. Now X separates v in G0 from either a or b – say, from a. But
+then X [ {b} is a set of at most k −1 vertices separating v from a in G,
+contradicting the k-connectedness of G.
+(ii) follows straight from Corollary 3.3.5 (ii).
+⇤
+3.4 A-paths and Mader’s theorem
+In analogy to Menger’s theorem we may consider the following questions.
+Given a set A of vertices in a graph, how many disjoint, edge-disjoint, or
+independent A-paths can we ﬁnd in that graph? Is the largest number
+of such paths related to the least size of a vertex or edge cover of all its
+A-paths?
+An early theorem of Gallai goes in this direction. In Erd˝os-P´osa
+spirit – see Chapter 2.3 – it says that if a graph fails to contain many
+disjoint A-paths it has a small set of vertices that covers all its A-paths,
+and thus ‘totally disconnects’ A:
+Theorem 3.4.1. (Gallai 1961)
+Let A be a set of vertices in a graph G, and k > 1 an integer. Then G
+either contains k disjoint A-paths or has a set of at most 2k −2 vertices
+that meets every A-path.
+The graph K2k−1, with A its entire vertex set, shows that 2k −2 is
+lowest possible as a general bound, one that depends only on k.
+Theorem 3.4.1, as well as its analogue for edge-disjoint paths (with
+the same bound of 2k −2), will be an easy consequence of Mader’s
+theorem below, via its Corollary 3.4.3. See Exercises 25 and 30.
+
+3.4 A-paths and Mader’s theorem
+77
+Mader’s theorem solves our initial problem for independent H-paths
+rather than A-paths. Recall that, for H ✓G, an H-path in G is an A-
+path for A = V (H) that is not just a single edge of H. If H is induced
+in G, as it will be for Mader’s theorem, the H-paths in G are thus
+precisely its A-paths of length at least 2, for A = V (H).
+In addition to implying Gallai’s theorem and its edge-analogue,
+Mader’s theorem also implies a similar statement about independent
+A-paths: just subdivide any A-paths of length 1, which turns them into
+H-paths (with V (H) = A) without changing the number of A-paths.
+In the fashion of Menger’s theorem, Mader’s theorem observes an
+upper bound on the number of independent H-paths that arises naturally
+from the size of certain separators, and then states that this bound is
+always attained by some set of paths.
+What could such an upper bound look like? Clearly, if X ✓V (G−H)
+X
+and F ✓E(G −H) are such that every H-path in G has a vertex or an
+F
+edge in X [ F, then G cannot contain more than |X [ F| independent
+H-paths. Hence, the least cardinality of such a set X [ F is a natural
+upper bound for the maximum number of independent H-paths. (Note
+that every H-path meets G −H, because H is induced in G and edges
+of H do not count as H-paths.)
+In contrast to Menger’s theorem, this bound can still be improved.
+The minimality of |X [ F| implies that no edge in F has an end
+in X: otherwise this edge would not be needed in the separator. Let
+Y := V (G −H) r X, and denote by CF the set of components of the
+CF
+graph (Y, F). Since every H-path avoiding X contains an edge from F,
+it has at least two vertices in @C for some C 2 CF , where @C denotes
+@C
+the set of vertices in C that send an edge of G to G−X −C (Fig. 3.4.1).
+@C
+CF
+C
+H
+X
+Fig. 3.4.1. An H-path in G −X
+The number of independent H-paths in G is therefore bounded above by
+MH(G) := min
+⇣
+|X| +
+X
+C 2CF
+⌅1
+2 |@C|
+⇧⌘
+,
+MH(G)
+where the minimum is taken over all X and F as described above:
+
+78
+3. Connectivity
+X ✓V (G −H) and F ✓E(G −H −X) such that every H-path in G
+X
+has a vertex or an edge in X [ F.
+Mader’s theorem says that this upper bound is always attained by
+some set of independent H-paths:
+Theorem 3.4.2. (Mader 1978)
+Given a graph G with an induced subgraph H, there are always MH(G)
+independent H-paths in G.
+In order to obtain more immediate analogues to the vertex and edge
+version of Menger’s theorem, let us consider the two special cases of the
+above problem where either F or X is required to be empty. Given an
+induced subgraph H ✓G, we denote by H(G) the least cardinality of
+H(G)
+a vertex set X ✓V (G −H) that meets every H-path in G. Similarly,
+we let λH(G) denote the least cardinality of an edge set F ✓E(G) that
+λH(G)
+meets every H-path in G.
+Corollary 3.4.3. Given a graph G with an induced subgraph H, there
+are at least 1
+2H(G) independent H-paths and at least 1
+2λH(G) edge-
+disjoint H-paths in G.
+Proof. To prove the ﬁrst assertion, let k be the maximum number of inde-
+k
+pendent H-paths in G. By Theorem 3.4.2, there are sets X ✓V (G−H)
+and F ✓E(G −H −X) with
+k = |X| +
+X
+C 2CF
+⌅1
+2 |@C|
+⇧
+such that every H-path in G has a vertex in X or an edge in F. For
+every C 2 CF with @C 6= ;, pick a vertex v 2 @C and let YC := @C r{v};
+if @C = ;, let YC := ;. Then
+⌅1
+2 |@C|
+⇧
+> 1
+2 |YC| for all C 2 CF . Moreover,
+for Y := S
+C 2CF YC every H-path has a vertex in X [ Y . Hence
+Y
+k > |X| +
+X
+C 2CF
+1
+2 |YC| > 1
+2 |X [ Y | > 1
+2H(G)
+as claimed.
+The second assertion follows from the ﬁrst by considering the line
+graph of G (Exercise 27).
+⇤
+It may come as a surprise to see that the bounds in Corollary 3.4.3
+are best possible (as general bounds): one can ﬁnd examples for G and
+H where G contains no more than 1
+2H(G) independent H-paths or no
+more than 1
+2λH(G) edge-disjoint H-paths (Exercises 28 and 29).
+
+3.5 Linking pairs of vertices
+79
+3.5 Linking pairs of vertices
+Let G be a graph, and let X ✓V (G) be a set of vertices. We call X
+linked in G if whenever we pick distinct vertices s1, . . . , s`, t1, . . . , t` in
+linked
+X we can ﬁnd disjoint paths P1, . . . , P` in G such that each Pi links si to
+ti and has no inner vertex in X. Thus, unlike in Menger’s theorem, we
+are not merely asking for disjoint paths between two sets of vertices: we
+insist that each of these paths shall link a speciﬁed pair of endvertices.
+If |G| > 2k and every set X of at most 2k vertices is linked in G,
+then G is k-linked. Clearly, this is equivalent to requiring merely that
+k-linked
+|G| > 2k and disjoint paths Pi = si . . . ti exist for every choice of exactly
+2k distinct vertices s1, . . . , sk, t1, . . . , tk: just add dummy vertices to X
+to bring it up to size 2k. In practice, the latter is easier to prove, because
+we need not worry about inner vertices in X.
+Clearly, every k-linked graph is k-connected. The converse, however,
+seems far from true: being k-linked is clearly a much stronger property
+than k-connectedness. Still, we shall prove in this section that we can
+force a graph to be k-linked by assuming that it is f(k)-connected, for
+some function f: N ! N. We ﬁrst borrow a lemma from Chapter 7 to
+give a nice and simple proof that such a function f exists at all. In the
+remainder of the section we then prove that f can even be chosen linear.
+The basic idea in the simple proof is as follows. If we can prove
+that G contains a subdivision K of a large complete graph, we can use
+Menger’s theorem to link the vertices of X disjointly to branch vertices
+of K, and then hope to pair them up as desired through the subdivided
+edges of K. This requires, of course, that our paths do not hit too many
+of the subdivided edges before reaching the branch vertices of K.
+The lemma saying that large enough connectivity does indeed force
+the existence of such a complete topological minor K will be proved in
+Chapter 7.2, where we consider several results of this type. By Theo-
+rem 1.4.3 it suﬃces to assume that G has large average degree:
+Lemma 3.5.1. There is a function h: N ! N such that, for every r 2 N,
+every graph of average degree at least h(r) contains Kr as a topological
+minor.
+Theorem 3.5.2. (Jung 1970; Larman & Mani 1970)
+There is a function f: N ! N such that every f(k)-connected graph is k-
+linked, for all k 2 N.
+Proof.
+We prove the assertion for f(k) = h(3k) + 2k, where h is a
+(3.3.1)
+function as in Lemma 3.5.1. Let G be an f(k)-connected graph. Then
+G
+d(G) > δ(G) > (G) > h(3k); let K be a TK3k in G as provided by
+K
+Lemma 3.5.1, and let U denote its set of branch vertices.
+U
+For the proof that G is k-linked, let distinct vertices s1, . . . , sk
+si, ti
+and t1, . . . , tk be given.
+By deﬁnition of f(k), we have (G) > 2k.

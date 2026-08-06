@@ -1,0 +1,432 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.1 Basic notions, facts and techniques (분할 part 1)
+직전 소단원: 「7.ex Exercises」
+[본문]
+8
+Inﬁnite Graphs
+The study of inﬁnite graphs is an attractive, but often neglected, part of
+graph theory. This chapter aims to give an introduction that starts gent-
+ly, but then moves on in several directions to display both the breadth
+and some of the depth that this ﬁeld has to o↵er. Our overall theme will
+be to highlight the typical kinds of phenomena that will always appear
+when graphs are inﬁnite, and to show how they can lead to deep and
+fascinating problems.
+Perhaps the most typical such phenomena occur already when the
+graphs are ‘only just’ inﬁnite, when they have only countably many
+vertices and perhaps only ﬁnitely many edges at each vertex. This is not
+surprising: after all, some of the most basic structural features of graphs,
+such as paths, are intrinsically countable. Problems that become really
+interesting only for uncountable graphs tend to be interesting for reasons
+that have more to do with sets than with graphs, and are studied in com-
+binatorial set theory. This, too, is a fascinating ﬁeld, but not our topic
+in this chapter. The problems we shall consider will all be interesting
+for countable graphs, and set-theoretic problems will not arise.
+The terminology we need is exactly the same as for ﬁnite graphs,
+except when we wish to describe an aspect of inﬁnite graphs that has no
+ﬁnite counterpart. One important such aspect is the eventual behaviour
+of the inﬁnite paths in a graph, which is captured by the notion of ends.
+The ends of a graph can be thought of as additional limit points at in-
+ﬁnity to which its inﬁnite paths converge. This convergence is described
+formally in terms of a natural topology placed on the graph together with
+its ends. In Sections 6–8 we shall therefore assume familiarity with the
+basic concepts of point-set topology; reminders of the relevant deﬁnitions
+will be included as they arise.
+227
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_8
+
+228
+8. Inﬁnite Graphs
+8.1 Basic notions, facts and techniques
+This section gives a gentle introduction to the aspects of inﬁnity most
+commonly encountered in graph theory.1
+After just a couple of deﬁnitions, we begin by looking at a few
+obvious properties of inﬁnite sets, and how they can be employed in
+the context of graphs. We then illustrate how to use the three most
+basic common tools in inﬁnite graph theory: Zorn’s lemma, transﬁnite
+induction, and something called ‘compactness’. We complete the section
+with the combinatorial deﬁnition of an end; topological aspects will be
+treated in Section 8.6.
+A graph is locally ﬁnite if all its vertices have ﬁnite degrees. An in-
+locally
+ﬁnite
+ﬁnite graph (V, E) of the form
+V = {x0, x1, x2, . . .}
+E = {x0x1, x1x2, x2x3, . . .}
+is called a ray, and a double ray is an inﬁnite graph (V, E) of the form
+rays
+V = {. . . , x−1, x0, x1, . . .}
+E = {. . . , x−1x0, x0x1, x1x2, . . .} ;
+in both cases the xn are assumed to be distinct. Thus, up to isomor-
+phism, there is only one ray and one double ray, the latter being the
+unique inﬁnite 2-regular connected graph.
+In the context of inﬁnite
+graphs, ﬁnite paths, rays and double rays are all called paths.
+path
+The subrays of a ray or double ray are its tails. Formally, every
+tail
+ray has inﬁnitely many tails, but any two of them di↵er only by a ﬁnite
+initial segment. The union of a ray R with inﬁnitely many disjoint ﬁnite
+paths having precisely their ﬁrst vertex on R is a comb; the last vertices
+comb
+of those paths are the teeth of this comb, and R is its spine. (If such a
+teeth, spine
+path is trivial, which we allow, then its unique vertex lies on R and also
+counts as a tooth; see Figure 8.1.1.)
+x0
+x1
+x2
+R
+. . .
+Fig. 8.1.1. A comb with white teeth and spine R = x0x1 . . .
+1 This introductory section is deliberately kept informal, with the emphasis on
+ideas rather than deﬁnitions that do not belong in a graph theory book. A more
+formal reminder of those basic deﬁnitions about inﬁnite sets and numbers that we
+shall need is given in Appendix A at the end of the book.
+
+8.1 Basic notions, facts and techniques
+229
+Let us now look at a few very basic properties of inﬁnite sets, and
+see how they appear in some typical arguments about graphs.
+An inﬁnite set minus a ﬁnite subset is still inﬁnite.
+(1)
+This trivial property is eminently useful when the inﬁnite set in
+question plays the role of ‘supplies’ that keep an iterated process going.
+For example, let us show that if a graph G is inﬁnitely connected (that
+is, if G is k-connected for every k 2 N), then G contains a subdivision
+of K@0, the complete graph of order |N|. We embed K@0 in G (as a
+K@0
+topological minor) in one inﬁnite sequence2 of steps, as follows.
+We
+begin by enumerating its vertices. Then at each step we embed the next
+vertex in G, connecting it to the images of its earlier neighbours by paths
+in G that avoid any other vertices used so far. The point here is that
+each new path has to avoid only ﬁnitely many previously used vertices,
+which is not a problem since deleting any ﬁnite set of vertices keeps G
+inﬁnitely connected.
+If G, too, is countable, can we then also ﬁnd a TK@0 as a spanning
+subgraph of G? Although embedding K@0 in G topologically as above
+takes inﬁnitely many steps, it is by no means guaranteed that the TK@0
+constructed uses all the vertices of G.
+However, it is not diﬃcult to
+ensure this: since we are free to choose the image of each new vertex
+of K@0, we can choose this as the next unused vertex from some ﬁxed
+enumeration of V (G). In this way, every vertex of G gets chosen eventu-
+ally, unless it becomes part of the TK@0 before its time, as a subdividing
+vertex on one of the paths.
+Unions of countably many countable sets are countable.
+(2)
+This fact can be applied in two ways: to show that sets that come
+to us as countable unions are ‘small’, but also to rewrite a countable set
+deliberately as a disjoint union of inﬁnitely many inﬁnite subsets. For an
+example of the latter type of application, let us show that an inﬁnitely
+edge-connected countable graph has inﬁnitely many edge-disjoint span-
+ning trees. (Note that the converse implication is trivial.) The trick is
+to construct the trees simultaneously, in one inﬁnite sequence of steps.
+We ﬁrst use (2) to partition N into inﬁnitely many inﬁnite subsets Ni
+(i 2 N). Then at step n we look which Ni contains n, and add a further
+vertex v to the ith tree Ti. As before, we choose v minimal in some ﬁxed
+enumeration of V (G) among the vertices not yet in Ti, and join v to Ti
+by a path avoiding the ﬁnitely many edges used so far.
+Clearly, a countable set cannot have uncountably many disjoint sub-
+sets. However,
+2 We reserve the term ‘inﬁnite sequence’ for sequences indexed by the set of
+natural numbers. (In the language of well-orderings: for sequences of order type !.)
+
+230
+8. Inﬁnite Graphs
+A countable set can have uncountably many subsets whose
+pairwise intersections are all ﬁnite.
+(3)
+This is a remarkable property of countable sets, and a good source of
+counterexamples to rash conjectures. Can you prove it without looking
+at Figure 8.1.4?
+Another common pitfall in dealing with inﬁnite sets is to assume
+that the intersection of an inﬁnite nested sequence A0 ◆A1 ◆. . . of
+inﬁnite (or uncountable) sets must still be inﬁnite (or uncountable). It
+need not be; in fact it may be empty. (Examples?)
+Before we move on to our discussion of common inﬁnite proof tech-
+niques, let us look at one more type of construction. One often wants
+to construct a graph G with a property that is in some sense local, a
+property that has more to do with the ﬁnite subgraphs of G than with
+G itself. Rather than formalize what exactly this should mean, let us
+consider an example: given two large integers k and g, let us construct
+a graph G that is k-connected and has girth at least g.3
+We start with a cycle of length g; call it G0. This graph has the
+right girth, but it is not k-connected. To cure this defect for the vertices
+of G0, join every pair of them by k new independent paths, keeping all
+these paths internally disjoint. If we choose the paths long enough, the
+resulting graph G1 will again have girth g, and no two vertices of G0
+can be separated in it by fewer than k other vertices. Of course, G1 is
+not k-connected either.
+But we can repeat the construction step for
+the pairs of vertices of G1, extending G1 to G2, and so on. The limit
+graph G = S
+n2N Gn will again have girth g, since any short cycle would
+have appeared in some Gn on the way. And, unlike all the Gn, it will be
+k-connected: since every two vertices are contained in some common Gn,
+they cannot be separated by fewer than k other vertices in Gn+1, let alone
+in G.
+There are a few basic proof techniques that are found frequently in
+inﬁnite combinatorics. The two most common of these are the use of
+Zorn’s lemma and transﬁnite induction. Rather than describing these
+formally,4 we illustrate their use by a simple example.
+Proposition 8.1.1. Every connected graph contains a spanning tree.
+First proof (by Zorn’s lemma).
+Given a connected graph G, consider the set of all trees T ✓G, ordered
+by the subgraph relation. Since G is connected, any maximal such tree
+contains every vertex of G, i.e. is a spanning tree of G.
+3 There are ﬁnite such graphs, but they are much harder to construct; we shall
+prove their existence by random methods in Chapter 11.2.
+4 Appendix A o↵ers brief introductions to both, enough to enable the reader to
+use these tools with conﬁdence in practice.
+
+8.1 Basic notions, facts and techniques
+231
+To prove that a maximal tree exists, we have to show that for any
+chain C of such trees there is an upper bound: a tree T ⇤✓G containing
+every tree in C as a subgraph. We claim that T ⇤:= S C is such a tree.
+To show that T ⇤is connected, let u, v 2 T ⇤be two vertices. Then
+in C there is a tree Tu containing u and a tree Tv containing v. One of
+these is a subgraph of the other, say Tu ✓Tv. Then Tv contains a path
+from u to v, and this path is also contained in T ⇤.
+To show that T ⇤is acyclic, suppose it contains a cycle C. Each of the
+edges of C lies in some tree in C. These trees form a ﬁnite subchain of C,
+which has a maximal element T. Then C ✓T, a contradiction.
+⇤
+Transﬁnite induction and recursion are very similar to ﬁnite induc-
+tive proofs and constructions, respectively. Basically, one proceeds step
+by step, and may at each step assume as known what was shown or
+constructed before. The only di↵erence is that one may ‘start again’
+after performing any inﬁnite number of steps. This is formalized by the
+use of ordinals rather than natural numbers for counting the steps; see
+Appendix A.
+Just as with ﬁnite graphs, it is usually more intuitive to construct a
+desired object (such as a spanning tree) step by step, rather than start-
+ing with some unknown ‘maximal’ object and then proving that it has
+the desired properties. More importantly, a step-by-step construction
+is almost always the best way to ﬁnd the desired object: only later,
+when one understands the construction well, can one devise an induc-
+tive ordering (one whose chains have upper bounds) in which the desired
+objects appear as the maximal elements. Thus, although Zorn’s lemma
+may at times provide an elegant way to wrap up a constructive proof, it
+cannot in general replace a good understanding of transﬁnite induction –
+just as a preference for elegant direct deﬁnitions of ﬁnite objects cannot,
+for a thorough understanding, replace the more pedestrian algorithmic
+approach.
+Our second proof of Proposition 8.1.1 illustrates both the construct-
+ive and the proof aspect of transﬁnite induction in the typical intertwined
+way. We deﬁne larger and larger subgraphs T↵✓G inductively. At each
+step ↵we prove that T↵is a tree. The deﬁnition of T↵will assume and
+use that subgraphs Tβ for all β < ↵have been previously deﬁned, but
+not only this: it needs to assume that they are nested trees. This fact,
+therefore, has to be proved along with the recursive deﬁnition, always
+‘just before’ it is needed.
+Second proof (by transﬁnite induction).
+Let G be a connected graph. We deﬁne trees T↵✓G recursively so that
+Tβ ✓T↵for all β < ↵.
+(⇤↵)
+
+232
+8. Inﬁnite Graphs
+Let T0 consist of a single vertex. Given a limit ordinal ↵> 0, let
+T↵:= S
+β<↵Tβ. Since the Tβ are trees satisfying (⇤β), our new T↵is
+also a tree (as in the ﬁrst proof), and it clearly satisﬁes (⇤↵).
+Given a successor ↵= β + 1, we ﬁrst check whether G −Tβ = ;. If
+so, then Tβ is a spanning tree and we terminate the recursion. If not,
+then G −Tβ has a vertex v↵that sends an edge e↵to a vertex in Tβ.
+Then T↵, obtained from Tβ by adding v↵and e↵, is a tree satisfying (⇤↵).
+It remains to check that our recursion does indeed terminate. But if
+vβ+1 gets deﬁned for all β < γ then β 7! vβ+1 is an injective map showing
+that |γ| 6 |G|. This cannot hold for all ordinals γ; it fails, for example,
+when γ represents a well-ordering of the power set of V (G).
+⇤
+Why did these proofs work so smoothly? The reason is that the
+forbidden substructures, cycles, were ﬁnite and therefore could not arise
+unexpectedly at limit steps. If we wanted to construct a rayless span-
+ning tree, on the other hand, one that contains no ray, then the edges
+of partial ﬁnite trees Tβ might combine to form a ray in T↵= S
+β<↵Tβ
+when ↵is a limit. And indeed, here lies the challenge in most transﬁnite
+constructions: to make the right choices at successor steps to ensure that
+the structure will also be as desired at limits.
+Our third basic proof technique, somewhat mysteriously referred to
+as compactness (see below for why), o↵ers a formalized way of making
+compactness
+proofs
+the right choices in certain standard cases. These are cases where nothing
+unexpected happens at limits, but a choice that looks good at the time
+it is made may lead to a dead end after another ﬁnite number of steps –
+unlike the creation of a cycle, which is visible at once.
+For example, let G be a graph whose ﬁnite subgraphs are all k-
+colourable. It is natural then to try to construct a k-colouring of G as
+a limit of k-colourings of its ﬁnite subgraphs. Now each ﬁnite subgraph
+will have several k-colourings; will it matter which we choose? Clearly, it
+will. When G0 ✓G00 are two ﬁnite subgraphs and u, v are vertices of G0
+that receive the same colour in every k-colouring of G00 (and hence also
+in any k-colouring of G), we must not give them di↵erent colours in the
+colouring we choose for G0, even if such a colouring exists. However if
+we do manage, somehow, to colour the ﬁnite subgraphs of G compatibly,
+we shall automatically have a colouring of all of G.
+All compactness proofs deal with situations similar to this. We wish
+to solve a problem about an inﬁnite structure, and we know how to solve
+it for all the ﬁnite substructures. ‘Compactness’ enables us to combine
+these partial solutions to an overall solution if the partial solutions are
+compatible in the right way.
+For countable structures, all this – the choices, the dead ends, the
+compatibility requirement on the ﬁnite solutions, and how they combine
+to an overall solution – can be made visible in a particularly intuitive
+way, by a graph:
+
+8.1 Basic notions, facts and techniques
+233
+Lemma 8.1.2. (K¨onig’s Inﬁnity Lemma)
+Let V0, V1, . . . be an inﬁnite sequence of disjoint non-empty ﬁnite sets,
+[8.2.1]
+[8.2.6]
+[8.6.1]
+[8.6.10]
+[8.7.3]
+[9.1.3]
+and let G be a graph on their union. Assume that every vertex v in a
+set Vn with n > 1 has a neighbour f(v) in Vn−1. Then G contains a ray
+v0v1 . . . with vn 2 Vn for all n.
+V0
+V1
+V2
+V3
+f(v)
+f(
+f(
+v))
+v
+Fig. 8.1.2. K¨onig’s inﬁnity lemma
+Proof. Let P be the set of all ﬁnite paths of the form v f(v) f(f(v)) . . .
+ending in V0. Since V0 is ﬁnite but P is inﬁnite, inﬁnitely many of the
+paths in P end at the same vertex v0 2 V0. Of these paths, inﬁnitely
+many also agree on their penultimate vertex v1 2 V1, because V1 is ﬁnite.
+Of those paths, inﬁnitely many agree even on their vertex v2 in V2 – and
+so on. Although the set of paths considered decreases from step to step,
+it is still inﬁnite after any ﬁnite number of steps, so vn gets deﬁned for
+every n 2 N. By deﬁnition, each vertex vn is adjacent to vn−1 on one of
+those paths, so v0v1 . . . is indeed a ray.
+⇤
+The following ‘compactness theorem’, the ﬁrst of its kind in graph
+theory, answers our question about colourings:
+Theorem 8.1.3. (de Bruijn & Erd˝os, 1951)
+Let G = (V, E) be a graph and k 2 N. If every ﬁnite subgraph of G has
+chromatic number at most k, then so does G.
+First proof (for G countable, by the inﬁnity lemma).
+Let v0, v1, . . . be an enumeration of V and put Gn := G[v0, . . . , vn]. Write
+Vn for the set of all k-colourings of Gn with colours in {1, . . . , k}. Deﬁne
+a graph on S
+n2N Vn by inserting all edges cc0 such that c 2 Vn and
+c0 2 Vn−1 is the restriction of c to {v0, . . . , vn−1}. Let c0c1 . . . be a ray
+in this graph with cn 2 Vn for all n. Then c := S
+n2N cn is a colouring
+of G with colours in {1, . . . , k}.
+⇤
+Applications of the inﬁnity lemma such as this one rely on the fact
+that a countable graph can be exhausted by a nested sequence of ﬁnite
+subgraphs. Appendix A o↵ers a version of the inﬁnity lemma that works
+for arbitrary graphs, in which these ﬁnite subgraphs need not be sequen-
+tially ordered. This general version is still very intuitive and can be used
+conveniently in many settings, including a proof of Theorem 8.1.3.
+
+234
+8. Inﬁnite Graphs
+The essence of compactness proofs is often encoded more directly,
+if less graphically, in terms of just sets and functions. The compactness
+principle from Appendix A is such a version that is particularly easy to
+apply. We illustrate its application by another proof of Theorem 8.1.3:
+Second proof (for arbitrary graphs, by the compactness principle).
+Let X := V and S := {1, . . . , k}. Let F be the set of all ﬁnite subsets
+of V. For each Y
+2 F let A(Y ) be the set of k-colourings of G[Y ]. Our
+proof of Theorem 8.1.3 will be complete once we have found a function
+V !{1, . . . , k} that induces a k-colouring on every ﬁnite subgraph G[Y ],
+as any such function is clearly a k-colouring of G.
+By the compactness principle it suﬃces to show that, given any ﬁnite
+Y ✓F, we can ﬁnd a function V ! {1, . . . , k} that induces a colouring
+on every G[Y ] with Y
+2 Y. But this is easy: just take a k-colouring of
+the ﬁnite graph G[S Y], and extend it arbitrarily to the rest of V.
+⇤
+Our last proof of Theorem 8.1.3 appeals directly to compactness
+as deﬁned in topology. Recall that a topological space is compact if its
+closed sets have the ‘ﬁnite intersection property’, which means that the
+overall intersection T A of a set A of closed sets is non-empty whenever
+every ﬁnite subset of A has a non-empty intersection. By Tychono↵’s
+theorem of general topology, any product of compact spaces is compact
+in the usual product topology.
+Third proof (for arbitrary graphs, by Tychono↵’s theorem).
+Consider the product space
+X :=
+Y
+V
+{1, . . . , k} = {1, . . . , k}V
+of |V | copies of the ﬁnite set {1, . . . , k} endowed with the discrete topol-
+ogy. By Tychono↵’s theorem, this is a compact space. Its basic open
+sets have the form
+Oh := { f 2 X : f|U = h } ,
+where h is some map from a ﬁnite set U ✓V to {1, . . . , k}.
+For every ﬁnite set U ✓V, let AU be the set of all f 2 X whose
+restriction to U is a k-colouring of G[U]. These sets AU are closed (as
+well as open – why?), and for any ﬁnite set U of ﬁnite subsets of V we
+have T
+U 2U AU 6= ;, because G[S U] has a k-colouring. By the ﬁnite
+intersection property of the sets AU, their overall intersection is non-
+empty, and every element of this intersection is a k-colouring of G.
+⇤
+
+8.1 Basic notions, facts and techniques
+235
+Although our three compactness proofs look formally di↵erent, it is
+instructive to compare them in detail, checking how the requirements in
+one are reﬂected in the other (cf. Exercise 18).
+As mentioned before, the standard use for compactness proofs is to
+transfer theorems from ﬁnite to inﬁnite graphs, or conversely. This is
+not always quite as straightforward as above; often, the statement has to
+be modiﬁed a little to make it susceptible to a compactness argument.
+As an example – see Exercises 19–30 for more – let us prove the lo-
+cally ﬁnite version of the following famous conjecture. Call a bipartition
+of the vertex set of a graph unfriendly if every vertex has at least as many
+neighbours in the other class as in its own. Clearly, every ﬁnite graph
+has an unfriendly partition: just take any partition that maximizes the
+number of edges between the partition classes. At the other extreme,
+it can be shown by set-theoretic methods that uncountable graphs need
+not have such partitions. Thus, intriguingly, it is the countable case that
+has remained unsolved:
+Unfriendly Partition Conjecture. Every countable graph admits an
+unfriendly partition of its vertex set.
+Proof for locally ﬁnite graphs. Let G = (V, E) be an inﬁnite but locally
+ﬁnite graph, and enumerate its vertices as v0, v1, . . .. For every n 2 N,
+let Vn be the set of partitions of Vn := {v0, . . . , vn} into two sets Un
+and Wn such that every vertex v 2 Vn with NG(v) ✓Vn has at least
+as many neighbours in the other class as in its own. Since the conjec-
+ture holds for ﬁnite graphs, the sets Vn are non-empty. For all n > 1,
+every (Un, Wn) 2 Vn induces a partition (Un−1, Wn−1) of Vn−1, which lies
+in Vn−1. By the inﬁnity lemma, there is an inﬁnite sequence of partitions
+(Un, Wn) 2 Vn, one for every n 2 N, such that each is induced by the
+next. Then (S
+n2N Un, S
+n2N Wn) is an unfriendly partition of G.
+⇤
+The trick that made this proof possible was to require, for the par-
+titions of Vn, correct positions only of vertices that send no edge out
+of Vn: this weakening is necessary to ensure that partitions from Vn
+induce partitions in Vn−1; but since, by local ﬁniteness, every vertex has
+this property eventually (for large enough n), the weaker assumption
+suﬃces to ensure that the limit partition is unfriendly.
+Let us complete this section with an introduction to the one im-
+portant concept of inﬁnite graph theory that has no ﬁnite counterpart,
+the notion of an end. An end5 of a graph G is an equivalence class of
+end
+rays in G, where two rays are considered equivalent if, for every ﬁnite
+set S ✓V (G), both have a tail in the same component of G −S. This
+5 Not to be confused with the ends, or endvertices, of an edge. In the context of
+inﬁnite graphs, we use the term ‘endvertices’ to avoid confusion.

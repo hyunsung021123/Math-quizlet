@@ -1,0 +1,458 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.5 Tangles (분할 part 1)
+직전 소단원: 「12.4 Tree-width」
+[본문]
+376
+12. Graph Minors
+In our quest for tree-decompositions into ‘small’ bags, we now have
+two criteria to choose between: the global ‘worst case’ criterion of width,
+and the more subtle local criterion of leanness. Surprisingly, it is always
+possible to ﬁnd a tree-decomposition that is optimal with respect to both
+criteria at once:
+Theorem 12.4.5. (Thomas 1990)
+Every graph G has a lean tree-decomposition of width tw(G).
+Another natural feature one might ask of a tree-decomposition is
+that its parts, as induced subgraphs of G, be connected. Let us call such
+a tree-decomposition connected, and let the connected tree-width ctw(G)
+of G be the least width of a connected tree-decomposition of G.
+The connected tree-width of most graphs is greater than their or-
+dinary tree-width.
+For example, every cycle has tree-width 2, but
+ctw(Cn) = dn/2e (Exercise 33). And unlike ordinary tree-width, the
+connected tree-width of a subgraph of G can be greater than that of G.
+(For example, let G be obtained from a long cycle by adding a chord
+between opposite vertices.) However, if C ✓G is a geodesic cycle, i.e.,
+if dC(u, v) = dG(u, v) for all vertices u, v 2 C, then ctw(C) 6 ctw(G).
+The presence of long geodesic cycles in a graph thus is an obstruction
+to small connected tree-width – as is, trivially, large ordinary tree-width.
+By the following theorem, however, these are the only obstructions:
+Theorem 12.4.6. There is a function f: N2 ! N such that every graph
+of tree-width 6 w 2 N that has no geodesic cycle of length > k 2 N has
+connected tree-width at most f(w, k).
+12.5 Tangles
+We have already in this chapter met a few types of substructures of possi-
+bly sparse graphs that are highly connected in some sense, but which are
+not just k-connected subgraphs (or minors) for some large k. Large grid
+minors are an example, the k-blocks deﬁned at the end of Section 12.3
+are another, as are brambles of high order. All these substructures have
+one feature in common: for every low-order separation of the graph they
+lie essentially, though not necessarily entirely, on one of its two sides.
+For example, given a bramble B of order k in a graph G = (V, E), if
+G = (V, E)
+{A, B} is a separation of order < k then A r B or B r A, but not both,
+contains a set from B. This helped us prove the easy implication of the
+tree-width duality theorem: B orients every edge of the decomposition
+tree T of any tree-decomposition (T, V) of adhesion < k ‘towards’ the
+
+12.5 Tangles
+377
+side of its induced separation that contains one of the sets in B, and the
+edges thus oriented point to a central node t of T for which Vt covers B.
+It has turned out that, more often than not, the only feature of a
+highly connected substructure that mattered in the proofs of theorems
+about it was the information of how it ‘orients’ the low-order separations
+of G in this way. Collecting just this information together leads to a more
+abstract notion of a highly connected substructure, called a tangle. The
+purpose of this section is to make this precise, to prove a duality theorem
+for tangles in the spirit of Theorem 12.4.3, and to point out how this
+setting can be used to express the duality between global tree-structure
+of a graph and its highly connected substructures more generally.
+In the context of tangles, we often denote the order |A \ B| of a
+|s|
+separation s = {A, B} simply as |s|. The orientations of {A, B} are the
+two oriented separations (A, B) and (B, A). We say that (A, B) is ori-
+oriented
+separation
+ented, or ‘points’, towards B and its subsets. Given oriented separations
+(A, B) and (C, D), we write (A, B) > (C, D) if A ✓C and B ◆D.
+6
+Two separations of G are nested if they have 6-comparable orienta-
+nested
+tions; otherwise they cross. The separation {E, F} in Figure 12.5.1, for
+cross
+example, is nested with the two crossing separations {A, B} and {C, D},
+because (E, F) > (A, B), (C, D). The separations induced by a tree-
+decomposition are clearly nested, and every nested set of separations of
+a graph is induced by some tree-decomposition; see after Lemma 12.3.1.
+Given two separations {A, B} and {C, D} of G, it is easy to check
+that also {A [ C, B \ D} is a separation of G. We call the four sepa-
+rations of this form the corners of the separations {A, B} and {C, D}
+corners
+(Fig. 12.5.1). They come in pairs of opposite corners: the corner opposite
+to {A [ D, B \ C}, for example, is {B [ C, A \ D}. Two corners that
+opposite
+adjacent
+are not opposite are adjacent. The adjacent corners {A [ C, B \ D} and
+{A [ D, B \ C} lie on the same side of {A, B}, on its B-side.
+D
+C
+E
+F
+A
+B
+B \ D
+Fig. 12.5.1. The separation {A[C, B \D} is one of the four cor-
+ners of {A, B} and {C, D}. The separation {E, F} is
+nested with {A, B} and {C, D} and all their corners.
+
+378
+12. Graph Minors
+The sum of the orders of a pair of opposite corners always equals the
+sum of the orders of the original two crossing separations. For example:
+|(A [ D) \ (B \ C)| + |(B [ C) \ (A \ D)| = |A \ B| + |C \ D|.
+The 6-part of this equality, the fact that opposite corners c, d of any two
+separations r, s satisfy
+|c| + |d| 6 |r| + |s| ,
+(†)
+submodularity
+is sometimes referred to as submodularity of the order function s 7! |s|. It
+implies, for example, that of any two opposite corners of two separations
+of order < k at least one also has order < k. More generally, (†) implies
+that |c| 6 |r| or |d| 6 |s| (or both), which is the standard way to apply it.
+Given a set S of separations, we write
+!
+S := { (A, B) | {A, B} 2 S }
+!
+S
+for the set of all their orientations. An orientation of S is a subset of
+!
+S
+that contains for every element of S exactly one of its two orientations.
+Unless otherwise mentioned, from now on in this section S will be the set
+S
+of all the separations of G, so
+!
+S is the set of all its oriented separations.
+A set σ of oriented separations of G is consistent if it does not
+consistent
+contain (B, A) whenever (A, B) > (C, D) with (C, D) 2 σ.5
+For example, if (T, V) is a tree-decomposition of G with V = (Vt)t2T ,
+and Vt is not contained in any other bag, then orienting the separations
+that (T, V) induces towards Vt orients them consistently. A k-block X
+of G even deﬁnes a consistent orientation of the entire set
+Sk := { s 2 S : |s| < k }
+Sk
+of separations of order < k of G: the orientation { (A, B) 2
+−!
+Sk | X ✓B }.
+A bramble B of order n > k also deﬁnes an orientation of Sk: the
+set O = { (A, B) 2
+−!
+Sk | 9 X 2 B : X ✓B r A }. Unlike in the case of
+k-blocks, there need not be any ﬁxed bramble set that lies in every B
+with (A, B) 2 O; indeed the intersection of all these B may be empty.
+(Example?) But O then shows the large order of B in another way, in
+that we cannot cover B by few sets A with (A, B) 2 O: since any bramble
+set meeting A also meets A\B (as it touches the bramble set in B rA),
+and |A\B| 6 k−1, we need at least n/(k−1) sets A to cover B. The idea
+that this is enough not only to reﬂect but to constitute a kind of highly
+connected substructure in G has led to the following concept of a tangle.
+An orientation O of a set of separations avoids a set F of subsets
+avoids
+of
+!
+S if no subset of O is an element of F. A tangle of order k in G, or
+k-tangle for short, is an orientation of Sk that avoids
+tangle
+T :=
+*
+{(A1, B1), (A2, B2), (A3, B3)}
+.. G[A1] [ G[A2] [ G[A3] = G
+ 
+.
+T
+5 Intuitively, σ is consistent if no two of its elements point away from each other.
+In particular, it will not contain both orientations of any given separation.
+
+12.5 Tangles
+379
+Note that the separations (Ai, Bi) in the deﬁnition of T need not be
+distinct. For example, no tangle contains a separation of the form (V, A).
+And if (A, B) > (C, D) then no tangle contains both (B, A) and (C, D),
+since G[B] [ G[C] ◆G[D] [ G[C] = G. Thus, tangles are consistent.
+More generally, tangles ⌧clearly have the following two properties:
+If ⌧contains the oriented separations (A, B) and (C, D),
+it does not contain their oriented corner (B \ D, A [ C).
+(P)
+Given separations {A, B} and {C, D}, if ⌧contains (A, B)
+it does not contain both (B \D, A[C) and (B \C, A[D).
+(R)
+Sets of oriented separations satifying (P) are known as proﬁles, and (P)
+proﬁle
+is the proﬁle property of tangles.6 Note that it can be satisﬁed in two
+ways: either by (A [ C, B \ D) 2 ⌧, or by the fact that ⌧does not orient
+the corner {A [ C, B \ D} at all; this happens if that corner has order k
+or larger, but ⌧is only a k-tangle. Proﬁles satisfying (R) are robust.
+Like its k-blocks, compare Theorem 12.3.7, the tangles of a graph
+can be ‘separated’ by a tree-decomposition. Since the tangles in a graph
+see it in terms of its separations rather than its subgraphs, this is natu-
+rally expressed not in terms of the bags of the decomposition but of the
+separations it induces.
+Let us say that a separation distinguishes two tangles, not neces-
+distinguish
+sarily of the same order, if they both orient it but do so di↵erently.
+Distinct tangles of the same order are always distinguished by some
+separation; otherwise they would be identical. But a k-tangle cannot be
+distinguished from the `-tangle it induces for ` < k, the set of those of
+induced
+tangle
+its oriented separations that have order < `.
+A separation that distinguishes two tangles does so eﬃciently if
+eﬃcient
+they are not distinguished by any separation of smaller order. A set T
+of separations distinguishes some set of tangles in a graph G eﬃciently
+if every two tangles in this set that are distinguished by some separation
+of G are distinguished eﬃciently by a separation in T.
+Theorem 12.5.1. (Robertson & Seymour 1991)
+Every graph G has a nested set of separations that distinguishes all the
+tree-of-
+tangles
+theorem
+tangles in G eﬃciently.
+It is not hard to construct from any nested set of separations, such as
+that in Theorem 12.5.1, a tree-decomposition that induces precisely this
+set of separations as deﬁned after Lemma 12.3.1 (Exercises 16 and 51).
+6 If we think of tangles as orienting separations towards their ‘big’ side, condition
+(P) is reminiscent of ultraﬁlters: the intersection of two big sets cannot be small.
+
+380
+12. Graph Minors
+We shall give two proofs for Theorem 12.5.1. The ﬁrst proof is based
+on a combinatorial lemma, the splinter lemma, which encapsulates the
+essence of earlier direct proofs that sought to ﬁnd the required nested
+set of tangle-distinguishing separations directly among the corners of
+arbitrary eﬃcient tangle-distinguishing separations.
+Our second proof of Theorem 12.5.1 comes with an important
+strengthening: the nested set of tangle-distinguishing separations it ﬁnds
+is not constructed by a sequence of choices, as in the ﬁrst proof, but is
+identiﬁed by an explicitly stated property of separations. As a conse-
+quence, this set is invariant under the automorphisms of the graph G.
+We state this result separately as Theorem 12.5.8.
+In both proofs we shall need the following lemma about nested and
+crossing separations (see Figure 12.5.1):
+Lemma 12.5.2. (Fish Lemma)
+Any separation r that is nested with two crossing separations s and t is
+also nested with their four corners.
+Proof. Since r is nested with s, the two have orientations
+!r >
+!s (Ex. 40).
+Similarly, r and t have orientations
+!r 0 >
+!t 0. If
+!r 0 6=
+!r , then
+!r 6
+!t
+with
+!t the inverse of
+!t 0. Then
+!s 6
+!r 6
+!t , showing that s and t are
+nested. This contradicts our assumptions, so
+!r 0 =
+!r >
+!s ,
+!t 0.
+Let
+!r =: (E, F) and
+!s =: (A, B) and
+!t 0 =: (C, D) (Fig. 12.5.1).
+Then (E, F) > (A \ C, B [ D) as well as, more trivially, (E, F) >
+(A[C, B \D) and (E, F) > (A[D, B \C) and (E, F) > (C [B, A\D).
+In particular, r is nested with all four corners of s and t.
+⇤
+Let us say that a family (A1, . . . , An) of sets of separations of a graph
+splinters if, for all i 6= j, any crossing ai 2 Ai r Aj and aj 2 Aj r Ai
+have a corner in Ai [ Aj.
+Lemma 12.5.3. (Splinter Lemma)
+Every splintering family (A1, . . . , An) of non-empty sets of separations
+has a nested family (a1, . . . , an) of representatives ai 2 Ai.
+Proof. We apply induction on n, which starts trivially with n = 1. For
+the induction step let (a1, . . . , an−1) be a nested family of representatives
+a1, . . . , an−1
+ai 2 Ai of (A1, . . . , An−1). If any of those ai lies in An, let an := ai ;
+then (a1, . . . , an) is as desired. Suppose now that ai 2 Ai r An for all
+i < n, and choose an 2 An so as to cross ai for as few i < n as possible.
+an
+Let us show that, for all i < n, the set A0
+i of elements of Ai that
+A0
+i
+are nested with an is non-empty. If an 2 Ai then an 2 A0
+i; we may thus
+assume that an 2 An rAi (as well as ai 2 Ai rAn). We may also assume
+that ai and an cross, as otherwise ai 2 A0
+i. Since (A1, . . . , An) splinters,
+ai and an have a corner c in Ai [An. By the ﬁsh lemma, c is nested with
+all the aj that an is nested with (since these aj are also nested with ai),
+
+12.5 Tangles
+381
+and with ai in addition. Hence c /2 An by the choice of an, and therefore
+c 2 Ai. Since c is nested with an, this yields c 2 A0
+i. This completes the
+proof that the A0
+i are non-empty.
+Let us show that the family (A0
+1, . . . , A0
+n−1) splinters. Consider any
+crossing separations a0
+i 2 A0
+i rA0
+j and a0
+j 2 A0
+j rA0
+i with i 6= j. Since a0
+i is
+nested with an it cannot lie in Aj rA0
+j, and similarly a0
+j /2 Ai rA0
+i. Thus,
+a0
+i 2 Ai rAj and a0
+j 2 Aj rAi. As (A1, . . . , An) splinters, a0
+i and a0
+j have
+a corner c in Ai [ Aj. We need to show that c 2 A0
+i [ A0
+j, i.e., that c is
+nested with an. But this follows from the ﬁsh lemma, since an is nested
+with both a0
+i 2 A0
+i and a0
+j 2 A0
+j.
+As the family (A0
+1, . . . , A0
+n−1) splinters, the induction hypothesis
+implies that it has nested representatives a00
+i
+2 A0
+i. As these are nested
+with an by deﬁnition of the A0
+i, the family (a00
+1, . . . , a00
+n−1, an) can serve
+as our desired nested family of representatives of (A1, . . . , An).
+⇤
+Proof of Theorem 12.5.1. Pick an enumeration of the distinguishable
+pairs of tangles in G, and let Ai denote the set of separations of G that
+Ai
+eﬃciently distinguish the ith pair. By Lemma 12.5.3 it suﬃces to show
+that the family of these Ai splinters.
+To prove this, consider any indices i 6= j with crossing separations
+s 2 Ai r Aj and t 2 Aj r Ai. Assume that these have orders |s| 6 |t|;
+that s eﬃciently distinguishes the ith pair of tangles, σ and σ0; and that
+t eﬃciently distinguishes the jth pair of tangles, ⌧and ⌧0 (Figure 12.5.2).
+As |s| 6 |t|, the tangle ⌧orients s; we may assume it orients s as σ does.
+As s is not in Aj but has order |s| 6 |t|, it does not distinguish ⌧from ⌧0;
+so ⌧0 too orients s as ⌧and σ do.
+Fig. 12.5.2. Crossing separations s 2 Ai r Aj and t 2 Aj r Ai
+and their four corner separations c, c0, d, d0
+Consider the corner c of s and t at the top right in Figure 12.5.2. If c
+has order |c| 6 |t|, then ⌧orients it. Since ⌧has the proﬁle property (P),
+and it orients t towards the right in the diagram and s upwards, it cannot
+orient c towards the centre. So ⌧orients c towards the top right. But
+⌧0 orients c towards the centre, since it orients t towards the left and
+
+382
+12. Graph Minors
+is consistent. Thus, c distinguishes ⌧from ⌧0, and by our assumption
+that |c| 6 |t| it does so eﬃciently, giving c 2 Aj as desired. We may
+thus assume that |c| > |t|. Analogously with c0 instead of c, we are done
+unless |c0| > |t|, which we therefore assume.
+But now, by submodularity (†), these assumptions about the orders
+of c and c0 imply that their opposite corners d0 and d have order < |s|.
+Hence both σ and σ0 orient them. As σ orients s upwards, it must orient
+d and d0 towards the centre, by consistency. But since d and d0 have
+order < |s|, they cannot distinguish σ from σ0, so σ0 too orients them
+towards the centre. As σ0 orients s downwards, it thus violates (R).
+This contradiction completes the proof that the family of all Ai
+splinters, as was our aim to show.
+⇤
+The construction of a nested set of eﬃcient tangle-distinguishing
+separations in our ﬁrst proof of Theorem 12.5.1 makes a number of
+choices, those of the an at the start of the proof of the splinter lemma.
+Objects deﬁned for a graph without making such choices, but so that
+they are invariant under its automorphisms,7 are called canonical. Our
+canonical
+second proof of Theorem 12.5.1 provides such a canonical nested set
+of tangle-distinguishing separations: the set of all separations that ef-
+ﬁciently distinguish some pair of tangles and cross as few other such
+separations as possible. We shall make this deﬁnition precise later.
+Given a pair ⌧, ⌧0 of tangles in G, let D(⌧, ⌧0) denote the set of
+D(⌧, ⌧0)
+separations of G that distinguish ⌧, ⌧0 eﬃciently. Our second proof of
+Theorem 12.5.1 rests on a property of these sets that has its own name.
+An entanglement in G is any non-empty set T of separations of G that
+entangle-
+ment
+satisﬁes the following condition:
+Whenever some t 2 T is crossed by a separation s of G so
+that two corners of s and t that lie on the same side of t
+have order at most |t|, then at least one of these corners
+has order exactly |t| and also lies in T.
+(E)
+Lemma 12.5.4. For every pair ⌧, ⌧0 of distinguishable tangles in G, the
+separations of G that distinguish them eﬃciently form an entanglement.
+Proof. Let crossing separations t 2 D(⌧, ⌧0) and s be given as in condi-
+tion (E), with corners c, d on the same side of t. These are as shown in
+Figure 12.5.2, together with the tangles ⌧, ⌧0 that t distinguishes.
+Since c and d have order at most |t|, the tangle ⌧orients them. As ⌧
+orients t towards the right, it cannot orient both c and d inwards, by (R).
+But if ⌧orients c outwards, say, then c distinguishes ⌧from ⌧0, which
+orients t towards the left and hence, by consistency, orients c inwards.
+Since t distinguishes ⌧and ⌧0 eﬃciently we cannot have |c| < |t|, so
+|c| = |t| as required.
+⇤
+7 See the discussion following Theorem 12.3.7 for why this can be important.
+
+12.5 Tangles
+383
+We need three more general lemmas about crossing separations.
+Lemma 12.5.5. Let s, t be two crossing separations of G, with opposite
+corners c, d. Then every separation r of G satisﬁes the following:
+(i) If r crosses c or d, it also crosses s or t.
+(ii) If r crosses c and d, it also crosses s and t.
+Proof. (i) is equivalent to the ﬁsh lemma (12.5.2).
+(ii) If r = {A, B} and {C, D} 2 {s, t} are nested, they have compa-
+rable orientations; indeed we may assume that (A, B) > (C, D) (Ex. 40).
+Since c and d are opposite corners of s and t, one of them lies on the
+D-side of {C, D}. This corner has a side contained in D ✓B, while its
+other side contains C ◆A. It is therefore nested with r.
+⇤
+Given a set S of separations of G and any separation a of G, let
+S
+xS(a) =: x(a) denote the number of separations in S that a crosses.
+x
+Lemma 12.5.6. Let s, t 2 S be two crossing separations, with opposite
+corners c, d. Then x(c) + x(d) < x(s) + x(t).
+Proof. To evaluate x on our separations c, d, s, t, we have to count the
+separations r 2 S which they cross. Counting only separations r /2 {s, t},
+we obtain x(c) + x(d) 6 x(s) + x(t) from Lemma 12.5.5. The inequality
+gets strict when we allow r 2 {s, t}, since s and t cross each other but
+not their corners c and d.
+⇤
+Let S be any set of sets of separations of G.8 Let us say that a
+separation s of G is S-friendly if it lies in some S 2 S such that no other
+S-friendly
+separation in S crosses fewer separations in S S than s does. Note that
+every S 2 S has at least one S-friendly element.
+Lemma 12.5.7. Suppose that for all sets S, S0 2 S, possibly S = S0,
+and any crossing separations s 2 S and s0 2 S0, one of the following two
+assertions holds:
+(i) s and s0 have opposite corners c 2 S and c0 2 S0;
+(ii) s and s0 have pairs of opposite corners c, d in S and c0, d0 in S0.
+Then the S-friendly separations of G are nested.
+Proof. Let us show that crossing separations s, s0 of G cannot both be
+S-friendly. Suppose they are. Then s 2 S and s0 2 S0 for some S, S0 2 S
+witnessing this. By assumption, these satisfy (i) or (ii).
+Suppose ﬁrst that (i) holds. Then x(c) + x(c0) < x(s) + x(s0) by
+Lemma 12.5.6, where x = x ˆS for ˆS = S S. So either x(c) < x(s) or
+x(c0) < x(s0). In the ﬁrst case s is not S-friendly, by c 2 S and our
+choice of S for s. In the second case s0 is not S-friendly, by c0 2 S0 and
+our choice of S0 for s0.
+8 When we apply Lemma 12.5.7 later, S will be a set of entanglements in G.

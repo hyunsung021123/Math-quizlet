@@ -1,0 +1,200 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.5 Algebraic planarity criteria
+직전 소단원: 「4.4 Planar graphs: Kuratowski's theorem」
+[본문]
+111
+G1
+G2
+z1
+z2
+x
+y
+K
+Fig. 4.4.4. A TK5 or TK3,3 in G + z1z2
+two branch vertices of a TK3,3. Hence K is a TK3,3 with only one branch
+vertex v in, say, G2 −G1. But then also the graph G1 +v +{vx, vy, vz1},
+which is planar by the choice of z1, contains a TK3,3. This contradicts
+Corollary 4.2.11.
+⇤
+Theorem 4.4.6. (Kuratowski 1930; Wagner 1937)
+[4.5.1]
+[5.1.2]
+[12.6.4]
+The following assertions are equivalent for graphs G:
+(i) G is planar;
+(ii) G contains neither K5 nor K3,3 as a minor;
+(iii) G contains neither K5 nor K3,3 as a topological minor.
+Proof. Combine Corollary 4.2.11 with Lemmas 4.4.2, 4.4.3 and 4.4.5.
+(4.2.11)
+⇤
+Corollary 4.4.7. Every maximal planar graph with at least four ver-
+tices is 3-connected.
+Proof. Apply Lemma 4.4.5 and Theorem 4.4.6.
+⇤
+4.5 Algebraic planarity criteria
+One of the most conspicuous features of a plane graph G are its facial
+cycles, the cycles that bound a face. If G is 2-connected it is covered by
+facial
+cycles
+its facial cycles, so in a sense these form a ‘large’ set. In fact, the set of
+facial cycles is large even in the sense that they generate the entire cycle
+space: every cycle in G is easily seen to be the sum of the facial cycles
+(see below). On the other hand, the facial cycles only cover G ‘thinly’,
+as every edge lies on at most two of them. Our ﬁrst aim in this section
+is to show that the existence of such a large yet thinly spread family of
+cycles is not only a conspicuous feature of planarity but lies at its very
+heart: it characterizes it.
+Let G = (V, E) be any graph. We call a subset F of its edge space
+E(G) sparse if every edge of G lies in at most two sets of F. For ex-
+sparse
+ample, the cut space B(G) has a sparse basis consisting of atomic cuts
+(Proposition 1.9.2).
+4.5 Algebraic planarity criteria
+
+112
+4. Planar Graphs
+Theorem 4.5.1. (MacLane 1937)
+[4.6.3]
+A graph is planar if and only if its cycle space has a sparse basis.
+Proof.
+The assertion being trivial for graphs of order at most 2, we
+(1.9.1)
+(1.9.5)
+(4.1.1)
+(4.2.2)
+(4.2.6)
+(4.4.6)
+consider a graph G of order at least 3. If (G) 6 1, then G is the union
+of two proper induced subgraphs G1, G2 with |G1 \ G2| 6 1. Then C(G)
+is the direct sum of C(G1) and C(G2), and hence has a sparse basis if
+and only if both C(G1) and C(G2) do (proof?). Moreover, G is planar if
+and only if both G1 and G2 are: this follows at once from Kuratowski’s
+theorem, but also from easy geometrical considerations. The assertion
+for G thus follows inductively from those for G1 and G2. For the rest of
+the proof, we now assume that G is 2-connected.
+We ﬁrst assume that G is planar and choose a drawing. By Pro-
+position 4.2.6, the face boundaries of G are cycles, so they are elements
+of C(G). We shall show that the face boundaries generate all the cycles
+in G; then C(G) has a sparse basis by Lemma 4.2.2. Let C ✓G be any
+cycle, and let f be its inner face. By Lemma 4.2.2, every edge e with
+˚e ✓f lies on exactly two face boundaries G[f 0] with f 0 ✓f, and every
+edge of C lies on exactly one such face boundary. Hence the sum in C(G)
+of all those face boundaries is exactly C.
+Conversely, let {C1, . . . , Ck} be a sparse basis of C(G). Then, for
+every edge e 2 G, also C(G −e) has a sparse basis. Indeed, if e lies
+in just one of the sets Ci, say in C1, then {C2, . . . , Ck} is a sparse
+basis of C(G −e); if e lies in two of the Ci, say in C1 and C2, then
+{C1 + C2, C3, . . . , Ck} is such a basis. (Note that C1 + C2 is indeed an
+element of C(G −e), by Proposition 1.9.1.) Thus every subgraph of G
+has a cycle space with a sparse basis. For our proof that G is planar, it
+thus suﬃces to show that the cycle spaces of K5 and K3,3 (and hence
+those of their subdivisions) do not have a sparse basis: then G cannot
+contain a TK5 or TK3,3, and so is planar by Kuratowski’s theorem.
+Let us consider K5 ﬁrst. By Theorem 1.9.5, dim C(K5) = 6; let
+B = {C1, . . . , C6} be a sparse basis, and put C0 := C1 + . . . + C6. As
+B is linearly independent, none of the sets C0, . . . , C6 is empty, so each
+of them contains at least three edges (cf. Proposition 1.9.1). Moreover,
+as every edge from C0 lies in just one of C1, . . . , C6, the set {C0, . . . , C6}
+is still sparse. But this implies that K5 should have more edges than it
+does, i.e. we obtain the contradiction of
+21 = 7 · 3 6 |C0| + . . . + |C6| 6 2 kK5k = 20 .
+For K3,3, Theorem 1.9.5 gives dim C(K3,3) = 4; let B = {C1, . . . , C4}
+be a sparse basis, and put C0 := C1 +. . .+C4. As K3,3 has girth 4, each
+Ci contains at least four edges. We then obtain the contradiction of
+20 = 5 · 4 6 |C0| + . . . + |C4| 6 2 kK3,3k = 18 .
+⇤
+
+4.5 Algebraic planarity criteria
+113
+A constructive proof of the backward implication of MacLane’s the-
+orem is indicated in Exercise 32. That proof shows that the generating
+set we chose in our proof of the forward implication, the set of face
+boundaries, is canonical in the following sense: given any set D of cycles
+in a 2-connected planar graph G that generates C(G) and is such that
+every edge of G lies on exactly two of those cycles, there is a drawing of
+G in which the cycles in D are precisely the face boundaries.
+It is one of the hidden beauties of planarity theory that two such
+abstract and seemingly unintuitive results about generating sets in cy-
+cle spaces as MacLane’s theorem and Tutte’s theorem 3.2.6 conspire to
+produce a very tangible planarity criterion for 3-connected graphs:
+Theorem 4.5.2. (Kelmans 1978)
+A 3-connected graph is planar if and only if every edge lies on at most
+(equivalently: exactly) two non-separating induced cycles.
+Proof.
+The forward implication follows from Proposition 4.2.7 and
+(3.2.6)
+(4.2.2)
+(4.2.6)
+(4.2.7)
+Lemma 4.2.2 (and Proposition 4.2.6 for the ‘exactly two’ version); the
+backward implication follows from Theorems 3.2.6 and 4.5.1.
+⇤
+Let us conclude this section with another characterization of pla-
+narity, one with a very di↵erent ﬂavour. A linear extension of a partial
+linear
+extension
+ordering 6 of a set P is a total ordering 60 on P which includes 6 as
+a subset of P 2. Thus, for any p 6 q in P we still have p 60 q, and
+for incomparable p, q 2 P we have either p <0 q or p >0 q in addition.
+The dimension of the partially ordered set (P, 6) is the least number
+poset
+dimension
+of linear extensions of 6 on P whose intersection is exactly 6 : for any
+incomparable p, q 2 P there must be a linear extension 60 with p <0 q
+and another linear extension 600 with p >00 q in this collection.
+With every graph G = (V, E) one can associate its incidence poset,
+incidence
+poset
+the partially ordered set (V [ E, 6) in which v < e if and only if v is a
+vertex and e is an edge at v. (Thus, as a relation, < is the same as 2.)
+Theorem 4.5.3. (Schnyder 1989)
+A graph is planar if and only if its incidence poset has dimension 6 3.
+
+114
+4. Planar Graphs
+4.6 Plane duality
+In this section we shall use MacLane’s theorem to uncover another con-
+nection between planarity and algebraic structure: a connection between
+the duality of plane graphs, deﬁned below, and the duality of the cycle
+and cut space hinted at in Chapters 1.9 and 2.4.
+A plane multigraph is a pair G = (V, E) of ﬁnite sets (of vertices
+plane
+multigraph
+and edges, respectively) satisfying the following conditions:
+(i) V ✓R2;
+(ii) every edge is either an arc between two vertices or a polygon
+containing exactly one vertex (its endpoint);
+(iii) apart from its own endpoint(s), an edge contains no vertex and
+no point of any other edge.
+We shall use terms deﬁned for plane graphs freely for plane multigraphs.
+Note that, as in abstract multigraphs, both loops and double edges count
+as cycles.
+Let us consider the plane multigraph G shown in Figure 4.6.1. Let
+us place a new vertex inside each face of G and link these new vertices
+up to form another plane multigraph G⇤, as follows: for every edge e of
+G we link the two new vertices in the faces incident with e by an edge e⇤
+crossing e; if e is incident with only one face, we attach a loop e⇤to the
+new vertex in that face, again crossing the edge e. The plane multigraph
+G⇤formed in this way is then dual to G in the following sense: if we
+apply the same procedure as above to G⇤, we obtain a plane multigraph
+very similar to G; in fact, G itself may be reobtained from G⇤in this way.
+G⇤
+e⇤
+e
+G
+Fig. 4.6.1. A plane graph and its dual
+To make this idea more precise, let G = (V, E) and (V ⇤, E⇤) be any
+two plane multigraphs, and put F(G) =: F and F((V ⇤, E⇤)) =: F ⇤. We
+call (V ⇤, E⇤) a plane dual of G, and write (V ⇤, E⇤) =: G⇤, if there are
+plane dual
+G⇤
+bijections
+F ! V ⇤
+f 7! v⇤(f)
+E ! E⇤
+e 7! e⇤
+V ! F ⇤
+v 7! f ⇤(v)
+satisfying the following conditions:

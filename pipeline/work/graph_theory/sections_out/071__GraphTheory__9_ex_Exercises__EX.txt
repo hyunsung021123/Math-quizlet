@@ -1,0 +1,166 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 9. Ramsey Theory for Graphs
+현재 소단원: 9.ex Exercises
+직전 소단원: 「9.4 Ramsey properties and connectivity」
+[연습문제]
+Exercises
+319
+Exercises
+1.−Determine the Ramsey number R(3).
+2.−Deduce the case k = 2 (but c arbitrary) of Theorem 9.1.3 directly from
+Theorem 9.1.1.
+3.
+Prove that the graphs not containing some ﬁxed star as an induced
+subgraph are χ-bounded.
+(See Chapter 5.6 for the deﬁnition of χ-boundedness.)
+4.
+Let the edges of a complete graph G on N be coloured with two colours.
+Show that G contains two monochromatic paths whose vertex sets par-
+tition N.
+5.
+An arithmetic progression is an increasing sequence of numbers of the
+form a, a + d, a + 2d, a + 3d . . . . Van der Waerden’s theorem says that
+no matter how we partition the natural numbers into two classes, one of
+these classes will contain arbitrarily long arithmetic progressions. Must
+there even be an inﬁnite arithmetic progression in one of the classes?
+6.
+Can you improve the exponential upper bound on the Ramsey number
+R(n) for perfect graphs?
+7.
+Show that the n✏-type bound in the Erd˝os-Hajnal conjecture cannot
+be lowered substantially, by ﬁnding a graph H such that inﬁnitely
+many graphs G not containing H as an induced subgraph satisfy
+↵(G) 6 |G|1/2 as well as !(G) 6 |G|1/2.
+8.
+Let G be a class of graphs that is closed under taking induced subgraphs.
+Assume that G is χ-bounded, with a polynomial χ-bounding function.
+Prove the Erd˝os-Hajnal conjecture for the graphs in G.
+9.+ Construct a graph on R that has neither a complete nor an edgeless
+induced subgraph on |R| = 2@0 vertices. (So Ramsey’s theorem does
+not extend to uncountable sets.)
+10.
+(i)−Use Ramsey’s theorem to show that for any k, ` 2 N there is an
+n 2 N such that every sequence of n distinct integers has an increasing
+subsequence of length k +1 or a decreasing subsequence of length `+1.
+(ii) Prove that n = k` + 1 has this property but n = k` does not.
+11.+ Find a short proof of the Erd˝os-P´osa theorem (2.3.2) with a recursively
+deﬁned bound.
+(Hint. For the recursion step ﬁnd two cycles with at most one vertex
+in common. If Menger’s theorem between them does not give you k
+disjoint cycles, use the size of the separator it o↵ers for the deﬁnition
+of f(k) from f(k −1).)
+12.+ Prove the edge version of the Erd˝os-P´osa theorem (2.3.2): there exists a
+function g: N ! R such that, given k 2 N, every graph contains either k
+edge-disjoint cycles or a set of at most g(k) edges meeting all its cycles.
+(Hint. Consider in each component a normal spanning tree.)
+
+320
+9. Ramsey Theory
+13.
+Show that for every k 2 N there is an n 2 N such that among any
+n points in the plane, no three of them collinear, there are k points
+spanning a convex k-gon, i.e. such that none of them lies in the convex
+hull of the others.
+14.
+Show that for every k 2 N there is an n 2 N such that, for every partition
+of {1, . . . , n} into k sets, at least one of the subsets contains numbers
+x, y, z such that x + y = z.
+15.
+Let (X, 6) be a totally ordered set, and let G = (V, E) be the graph
+on V := [X]2 with E := {(x, y)(x0, y0) | x < y = x0 < y0}.
+(i) Show that G contains no triangle.
+(ii) Show that χ(G) will get arbitrarily large if |X| is chosen large
+enough.
+16.
+A family of sets is called a ∆-system if every two of the sets have the
+same intersection. Show that every inﬁnite family of sets of the same
+ﬁnite cardinality contains an inﬁnite ∆-system.
+17.
+Prove that for every r 2 N and every tree T there exists a k 2 N such
+that every graph G with χ(G) > k and !(G) < r contains a subdivision
+of T in which no two branch vertices are adjacent in G (unless they are
+adjacent in T).
+18.
+Let m, n 2 N, and assume that m −1 divides n −1. Show that every
+tree T of order m satisﬁes R(T, K1,n) = m + n −1.
+19.
+Prove that 2c < R(2, c, 3) 6 3c! for every c 2 N.
+(Hint. Induction on c.)
+20.
+Explain why, in the proof of Theorem 9.2.2, choosing ✏small enough
+can ensure that the regularity graph R contains a copy of K`, although
+some of the pairs (Vi, Vj) in G may not be ✏-regular. Your explanation
+may use that t`−1(k) ⇡`−2
+`−1
+$k
+2
+%
+, but should contain no calculations.
+21.+ Determine the Ramsey-minimal graphs for stars.
+22.
+Prove the analogue of Theorem 9.3.1 for vertex colouring: for every
+graph H there exists a graph G which, given any 2-colouring of its
+vertices, contains a monochromatic induced copy of H.
+23.
+Show that the Ramsey graph G for H constructed in the proof of The-
+orem 9.3.1 satisﬁes !(G) = !(H).
+24.
+In the proof of Theorem 9.3.1, is it really necessary to equip Gk+1 for
+i /
+2 {i1, i2} with separate disjoint copies of V i
+k, one for every p, or could
+we deﬁne Gk+1 from Gk by just replacing P with P 0 and joining it to
+the other V k
+i in the right way?
+25.−Show that any Kuratowski set for a non-trivial graph property is unique
+up to equivalence.
+
+Notes
+321
+26.
+Deduce Theorem 9.4.5 (iii) from Theorem 9.4.3, and vice versa.
+Notes
+Due to increased interaction with research on random and pseudo-random5
+structures (the latter being provided, for example, by the regularity lemma),
+the Ramsey theory of graphs has recently seen a period of major activity and
+advance. Theorem 9.2.2 is an early example of this development.
+For the more classical approach, the introductory text by R.L. Graham,
+B.L. Rothschild & J.H. Spencer, Ramsey Theory (2nd edn.), Wiley 1990,
+makes stimulating reading. This book includes a chapter on graph Ramsey
+theory, but is not conﬁned to it. Surveys of ﬁnite and inﬁnite Ramsey theory
+are given by J. Neˇsetˇril and A. Hajnal in their chapters in the Handbook of
+Combinatorics (R.L. Graham, M. Gr¨otschel & L. Lov´asz, eds.), North-Holland
+1995. The Ramsey theory of inﬁnite sets forms a substantial part of combi-
+natorial set theory, and is treated in depth in P. Erd˝os, A. Hajnal, A. M´at´e &
+R. Rado, Combinatorial Set Theory, North-Holland 1984. An attractive col-
+lection of highlights from various branches of Ramsey theory, including appli-
+cations in algebra, geometry and point-set topology, is o↵ered in B. Bollob´as,
+Graph Theory, Springer GTM 63, 1979.
+Ramsey’s original theorem, Theorem 9.1.1, is from F.P. Ramsey, On a
+problem of formal logic, Proc. Lond. Math. Soc. 2 (1930), 264–286. Our proof
+is due to P. Erd˝os and G. Szekeres, A combinatorial problem in geometry, Com-
+pos. Math. 2 (1935), 463–470. Its bound of R(r) 6 22r−3 = 4r/8 was improved
+by an exponential factor, to (4−✏)r for some ✏> 0, only as recently as in 2023,
+by M. Campos, S. Griﬃths, R. Morris and J. Sahasrabudhe, An exponential
+improvement for diagonal Ramsey, arXiv:2303.09521.
+The Erd˝os-Hajnal conjecture is taken from P. Erd˝os & A. Hajnal, Ramsey-
+type theorems, Discrete Appl. Math. 25 (1989), 37–52. A survey on the state
+of the art a couple of years ago was given by M. Chudnovsky, The Erd˝os-Hajnal
+conjecture – a survey, J. Graph Theory 75 (2014), 178–190, arXiv:1606.08827.
+Theorem 9.2.2 is due to V. Chv´atal, V. R¨odl, E. Szemer´edi & W.T. Trot-
+ter, The Ramsey number of a graph with bounded maximum degree, J. Comb.
+Theory, Ser. B 34 (1983), 239–243. The theorem marked a breakthrough to-
+wards a conjecture of Burr and Erd˝os (1975), which asserts that the Ramsey
+numbers of graphs with bounded average degree in every subgraph are lin-
+ear: for every d 2 N, the conjecture says, there exists a constant c such that
+R(H) 6 c |H| for all graphs H with d(H0) 6 d for all H0 ✓H. This conjecture
+was eventually proved by C. Lee, Ramsey numbers of degenerate graphs, Ann.
+Math. 185 (2017), 791–829, arXiv:1505.04773.
+Our proof of Theorem 9.3.1 is from J. Neˇsetˇril & V. R¨odl, Simple proof of
+the existence of restricted Ramsey graphs by means of a partite construction,
+Combinatorica 1 (1981), 199–202. This construction technique was reﬁned
+in an iterative and highly complex way for the proof of Theorem 9.3.4 in
+5 Concrete graphs whose structure resembles the structure expected of a random
+graph are called pseudo-random. For example, the bipartite graphs spanned by an
+✏-regular pair of vertex sets in a graph are pseudo-random.

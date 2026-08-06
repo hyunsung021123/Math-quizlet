@@ -1,0 +1,308 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.1 Graphs
+[본문]
+1
+The Basics
+This chapter gives a gentle yet concise introduction to most of the ter-
+minology used later in the book. Fortunately, much of standard graph
+theoretic terminology is so intuitive that it is easy to remember; the few
+terms better understood in their proper setting will be introduced later,
+when their time has come.
+Section 1.1 o↵ers a brief but self-contained summary of the most
+basic deﬁnitions in graph theory, those centred round the notion of a
+graph. Most readers will have met these deﬁnitions before, or will have
+them explained to them as they begin to read this book. For this reason,
+Section 1.1 does not dwell on these deﬁnitions more than clarity requires:
+its main purpose is to collect the most basic terms in one place, for easy
+reference later. For deviations for multigraphs see Section 1.10.
+From Section 1.2 onwards, all new deﬁnitions will be brought to
+life almost immediately by a number of simple yet fundamental propo-
+sitions. Often, these will relate the newly deﬁned terms to one another:
+the question of how the value of one invariant inﬂuences that of another
+underlies much of graph theory, and it will be good to become familiar
+with this line of thinking early.
+By N we denote the set of natural numbers, including zero. The set
+Z/nZ of integers modulo n is denoted by Zn; its elements are written
+Zn
+as i := i + nZ. When we regard Z2 = {0, 1} as a ﬁeld, we also denote
+it as F2 = {0, 1}. For a real number x we denote by bxc the greatest
+integer 6 x, and by dxe the least integer > x. Logarithms written as
+bxc, dxe
+‘log’ are taken at base 2; the natural logarithm will be denoted by ‘ln’.
+log, ln
+The expressions x := y and y =: x mean that x is being deﬁned as y.
+A set A = {A1, . . . , Ak} of disjoint subsets of a set A is a partition
+partition
+of A if the union S A of all the sets Ai 2 A is A. Our default assumption
+will be that all the Ai are non-empty. Another partition {A0
+1, . . . , A0
+`} of
+A reﬁnes the partition A if each A0
+i is contained in some Aj. By [A]k we
+[A]k
+denote the set of all k-element subsets of A. Sets with k elements will
+be called k-sets; subsets with k elements are k-subsets.
+k-set
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+1
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_1
+
+2
+1. The Basics
+1.1 Graphs
+A graph is a pair G = (V, E) of sets such that E ✓[V ]2; thus, the elements
+graph
+of E are 2-element subsets of V . To avoid notational ambiguities, we
+shall always assume tacitly that V \ E = ;. The elements of V are the
+vertices (or nodes, or points) of the graph G, the elements of E are its
+vertex
+edges (or lines). The usual way to picture a graph is by drawing a dot for
+edge
+each vertex and joining two of these dots by a line if the corresponding
+two vertices form an edge. Just how these dots and lines are drawn is
+considered irrelevant: all that matters is the information of which pairs
+of vertices form an edge and which do not.
+1
+2
+3
+4
+5
+6
+7
+Fig. 1.1.1. The graph on V = {1, . . . , 7} with edge set
+E = {{1, 2}, {1, 5}, {2, 5}, {3, 4}, {5, 7}}
+A graph with vertex set V is said to be a graph on V . The vertex
+on
+set of a graph G is referred to as V (G), its edge set as E(G). These
+V (G), E(G)
+conventions are independent of any actual names of these two sets: the
+vertex set W of a graph H = (W, F) is still referred to as V (H), not as
+W(H). We shall not always distinguish strictly between a graph and its
+vertex or edge set. For example, we may speak of a vertex v 2 G (rather
+than v 2 V (G)), an edge e 2 G, and so on.
+The number of vertices of a graph G is its order, written as |G|; its
+order
+number of edges is denoted by kGk. Graphs are ﬁnite, inﬁnite, countable
+|G|, kGk
+and so on according to their order. Except in Chapter 8, our graphs will
+be ﬁnite unless otherwise stated.
+For the empty graph (;, ;) we simply write ;. A graph of order 0 or 1
+;
+is called trivial. Sometimes, e.g. to start an induction, trivial graphs can
+trivial
+graph
+be useful; at other times they form silly counterexamples and become a
+nuisance. To avoid cluttering the text with non-triviality conditions, we
+shall mostly treat the trivial graphs, and particularly the empty graph ;,
+with generous disregard.
+A vertex v is incident with an edge e if v 2 e; then e is an edge at v.
+incident
+The two vertices incident with an edge are its endvertices or ends, and
+ends
+an edge joins its ends. An edge {x, y} is usually written as xy (or yx).
+If x 2 X and y 2 Y , then xy is an X–Y edge. The set of all X–Y edges
+in a set E is denoted by E(X, Y ); instead of E({x}, Y ) and E(X, {y})
+E(X, Y )
+we simply write E(x, Y ) and E(X, y). The set of all the edges in E at a
+vertex v is denoted by E(v).
+E(v)
+
+1.1 Graphs
+3
+Two vertices x, y of G are adjacent, or neighbours, if {x, y} is an edge
+adjacent
+of G. Two edges e 6= f are adjacent if they have an end in common. If all
+neighbour
+the vertices of G are pairwise adjacent, then G is complete. A complete
+complete
+graph on n vertices is a Kn; a K3 is called a triangle.
+Kn
+Pairwise non-adjacent vertices or edges are called independent.
+More formally, a set of vertices or of edges is independent if no two of its
+inde-
+pendent
+elements are adjacent. Independent sets of vertices are also called stable.
+Let G = (V, E) and G0 = (V 0, E0) be two graphs. A map ': V ! V 0
+is a homomorphism from G to G0 if it preserves the adjacency of vertices,
+homo-
+morphism
+that is, if {'(x), '(y)} 2 E0 whenever {x, y} 2 E. Then, in particular,
+for every vertex x0 in the image of ' its inverse image '−1(x0) is an
+independent set of vertices in G. If ' is bijective and its inverse '−1 is
+also a homomorphism (so that xy 2 E , '(x)'(y) 2 E0 for all x, y 2 V ),
+we call ' an isomorphism, say that G and G0 are isomorphic, and write
+isomorphic
+G ⇠= G0. An isomorphism from G to itself is an automorphism of G.
+⇠
+=
+We do not normally distinguish between isomorphic graphs. Thus,
+we usually write G = G0 rather than G ⇠= G0, speak of the complete
+=
+graph on 17 vertices, and so on. If we wish to emphasize that we are
+only interested in the isomorphism type of a given graph, we informally
+refer to it as an abstract graph.
+A class of graphs that is closed under isomorphism is called a graph
+property. For example, ‘containing a triangle’ is a graph property: if
+property
+G contains three pairwise adjacent vertices then so does every graph
+isomorphic to G. A map taking graphs as arguments is called a graph
+invariant if it assigns equal values to isomorphic graphs. The number
+invariant
+of vertices and the number of edges of a graph are two simple graph
+invariants; the greatest number of pairwise adjacent vertices is another.
+We set G [ G0 := (V [ V 0, E [ E0) and G \ G0 := (V \ V 0, E \ E0).
+G [ G0
+If G \ G0 = ;, then G and G0 are disjoint. If V 0 ✓V and E0 ✓E, then
+G \ G0
+G
+G [
+−
+G \
+1
+2
+3
+4
+5
+G
+3
+4
+5
+6
+1
+2
+3
+4
+5
+6
+1
+2
+3
+4
+5
+G0
+G0
+G0
+G0
+Fig. 1.1.2. Union, di↵erence and intersection; the vertices 2,3,4
+induce (or span) a triangle in G [ G0 but not in G
+
+4
+1. The Basics
+G0 is a subgraph of G (and G a supergraph of G0), written as G0 ✓G.
+subgraph
+Less formally, we say that G contains G0. If G0 ✓G and G0 6= G, then
+G0 ✓G
+G0 is a proper subgraph of G.
+G0
+G00
+G
+Fig. 1.1.3. A graph G with subgraphs G0 and G00:
+G0 is an induced subgraph of G, but G00 is not
+If G0 ✓G and G0 contains all the edges xy 2 E with x, y 2 V 0, then
+G0 is an induced subgraph of G; we say that V 0 induces or spans G0 in G,
+induced
+subgraph
+and write G0 =: G[V 0]. Thus if U ✓V is any set of vertices, then G[U]
+denotes the graph on U whose edges are precisely the edges of G with
+G[U]
+both ends in U. If H is a subgraph of G, not necessarily induced, we
+abbreviate G[V (H)] to G[H]. Finally, G0 ✓G is a spanning subgraph
+spanning
+of G if V 0 spans all of G, i.e. if V 0 = V .
+If U is any set of vertices (usually of G), we write G −U for
+−
+G[V r U]. In other words, G −U is obtained from G by deleting all
+the vertices in U \ V and their incident edges. If U = {v} is a singleton,
+we write G −v rather than G −{v}. Instead of G −V (G0) we simply
+write G −G0. For a subset F of [V ]2 we write G −F := (V, E r F) and
++
+G + F := (V, E [ F); as above, G −{e} and G + {e} are abbreviated to
+G −e and G + e. We call G edge-maximal with a given graph property
+edge-
+maximal
+if G itself has the property but no graph (V, F) with F ) E does.
+More generally, when we call a graph minimal or maximal with some
+minimal
+property but have not speciﬁed any particular ordering, we are referring
+maximal
+to the subgraph relation. When we speak of minimal or maximal sets of
+vertices or edges, the reference is simply to set inclusion.
+If G and G0 are disjoint, we denote by G ⇤G0 the graph obtained
+G ⇤G0
+from G [ G0 by joining all the vertices of G to all the vertices of G0. For
+example, K2 ⇤K3 = K5. The complement G of G is the graph on V
+comple-
+ment G
+with edge set [V ]2 r E. The line graph L(G) of G is the graph on E in
+which x, y 2 E are adjacent as vertices if and only if they are adjacent
+line graph
+L(G)
+as edges in G.
+G
+G
+Fig. 1.1.4. A graph isomorphic to its complement
+
+1.2 The degree of a vertex
+5
+1.2 The degree of a vertex
+Let G = (V, E) be a (non-empty) graph. The set of neighbours of a
+vertex v in G is denoted by NG(v), or brieﬂy by N(v).1 More generally
+N(v)
+for U ✓V , the neighbours in V rU of vertices in U are called neighbours
+of U; their set is denoted by N(U).
+The degree (or valency) dG(v) = d(v) of a vertex v is the number
+degree d(v)
+|E(v)| of edges at v; by our deﬁnition of a graph,2 this is equal to the
+number of neighbours of v. A vertex of degree 0 is isolated. The number
+isolated
+δ(G) := min { d(v) | v 2 V } is the minimum degree of G, the number
+δ(G)
+∆(G) := max { d(v) | v 2 V } its maximum degree. If all the vertices
+∆(G)
+of G have the same degree k, then G is k-regular, or simply regular. A
+regular
+3-regular graph is called cubic.
+cubic
+The number
+d(G) :=
+1
+|V |
+X
+v 2V
+d(v)
+d(G)
+is the average degree of G. Clearly,
+average
+degree
+δ(G) 6 d(G) 6 ∆(G) .
+The average degree quantiﬁes globally what is measured locally by the
+vertex degrees: the number of edges of G per vertex. Sometimes it will
+be convenient to express this ratio directly, as "(G) := |E|/|V |.
+"(G)
+The quantities d and " are, of course, intimately related. Indeed,
+if we sum up all the vertex degrees in G, we count every edge exactly
+twice: once from each of its ends. Thus
+|E| = 1
+2
+X
+v 2V
+d(v) = 1
+2d(G) · |V | ,
+and therefore
+"(G) = 1
+2d(G) .
+Proposition 1.2.1. The number of vertices of odd degree in a graph is
+[10.3.1]
+always even.
+Proof. As |E| = 1
+2
+P
+v 2V d(v) is an integer, P
+v 2V d(v) is even.
+⇤
+1 Here, as elsewhere, we drop the index referring to the underlying graph if the
+reference is clear.
+2 but not for multigraphs; see Section 1.10

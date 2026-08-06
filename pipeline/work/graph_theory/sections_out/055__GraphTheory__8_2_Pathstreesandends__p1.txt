@@ -1,0 +1,594 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.2 Paths, trees, and ends (분할 part 1)
+직전 소단원: 「8.1 Basic notions, facts and techniques」
+[본문]
+237
+its rays starting at ;, and hence to the inﬁnite 0–1 sequences.
+These examples suggest that the ends of a graph can be thought of
+as ‘points at inﬁnity’ to which its rays converge. We shall formalize this
+in Section 8.6, where we deﬁne a natural topology on a graph and its
+ends in which rays will indeed converge to their respective ends.
+The maximum number of disjoint rays in an end is the (combina-
+torial) vertex-degree of that end, the maximum number of edge-disjoint
+end degrees
+rays in it is its (combinatorial) edge-degree. These maxima are indeed
+attained: if an end contains a set of k (edge-) disjoint rays for every inte-
+ger k, it also contains an inﬁnite set of (edge-) disjoint rays (Exercise 46).
+Thus, every end has a vertex-degree and an edge-degree in N [ {1}.
+8.2 Paths, trees, and ends
+There are two fundamentally di↵erent aspects to the inﬁnity of an inﬁnite
+connected graph: one of ‘length’, expressed in the presence of rays, and
+one of ‘width’, expressed locally by inﬁnite degrees. The inﬁnity lemma
+tells us that at least one of these must occur:
+Proposition 8.2.1. Every inﬁnite connected graph has a vertex of in-
+ﬁnite degree or contains a ray.
+Proof. Let G be an inﬁnite connected graph with all degrees ﬁnite. Let
+(8.1.2)
+v0 be a vertex, and for every n 2 N let Vn be the set of vertices at
+distance n from v0. Induction on n shows that the sets Vn are ﬁnite, and
+hence that Vn+1 6= ; (because G is inﬁnite and connected). Furthermore,
+the neighbour of a vertex v 2 Vn+1 on any shortest v–v0 path lies in Vn.
+By Lemma 8.1.2, G contains a ray.
+⇤
+Often it is useful to have more detailed information on how this ray
+or vertex of inﬁnite degree lies in G. The following lemma enables us to
+ﬁnd it ‘close to’ any given inﬁnite set of vertices.
+Lemma 8.2.2. (Star-Comb Lemma)
+[8.6.3]
+Let U be an inﬁnite set of vertices in a connected graph G. Then G
+contains either a comb with all teeth in U or a subdivision of an inﬁnite
+star with all leaves in U.
+Proof. As G is connected, it contains a path between two vertices in U.
+This path is a tree T ✓G every edge of which lies on a path in T between
+two vertices in U. By Zorn’s lemma there is a maximal such tree T ⇤.
+Since U is inﬁnite and G is connected, T ⇤is inﬁnite. If T ⇤has a vertex
+of inﬁnite degree, it contains the desired subdivided star.
+8.2 Paths, trees, and ends
+
+238
+8. Inﬁnite Graphs
+Suppose now that T ⇤is locally ﬁnite. Then T ⇤contains a ray R
+(Proposition 8.2.1). Let us construct a sequence P1, P2, . . . of disjoint
+R–U paths in T ⇤. Having chosen Pi for every i < n for some n, pick
+v 2 R so that vR meets none of those paths Pi. The ﬁrst edge of vR
+lies on a path P in T ⇤between two vertices in U; let us think of P as
+traversing this edge in the same direction as R, and choose P minimal.
+Then vP has the form vRwP, where Pn := wP is an R–U path. And
+Pn \ Pi = ; for all i < n, because Pi [ Rw [ Pn contains no cycle.
+⇤
+We shall often apply Lemma 8.2.2 in locally ﬁnite graphs, in which
+case it always yields a comb.
+Recall that a rooted tree T ✓G is normal in G if the endvertices
+of every T-path in G are comparable in the tree-order of T. If T is a
+spanning tree, the only T- paths are edges of G that are not edges of T.
+Normal spanning trees are perhaps the single most important struc-
+tural tool in inﬁnite graph theory. As in ﬁnite graphs, they exhibit the
+separation properties of the graph they span.6 Moreover, their normal
+rays, those that start at the root, reﬂect its end structure:
+normal ray
+Lemma 8.2.3. If T is a normal spanning tree of G, then every end of
+[8.6.8]
+G contains exactly one normal ray of T.
+Proof. Let ! 2 ⌦(G) be given. Apply the star-comb lemma in T with
+(1.5.4)
+U the vertex set of any ray R 2 !. If the lemma gives a subdivided
+star with leaves in U and centre z, say, then the ﬁnite down-closure dze
+of z in T separates inﬁnitely many vertices u > z of U pairwise in G
+(Lemma 1.5.4). This contradicts our choice of U.
+So T contains a comb with teeth on R. Let R0 ✓T be its spine.
+Since every ray in T has an increasing tail (Exercise 4), we may assume
+that R0 is a normal ray. Since R0 is equivalent to R, it lies in !.
+Conversely, distinct normal rays of T are separated in G by the
+(ﬁnite) down-closure of their greatest common vertex (Lemma 1.5.4), so
+they cannot belong to the same end of G.
+⇤
+Not all connected graphs have a normal spanning tree; complete
+uncountable graphs, for example, have none. (Why not?) The quest to
+characterize the graphs that have a normal spanning tree is not entirely
+over, and it has held some surprises.7 One of the most useful suﬃcient
+conditions is that the graph contains no TK@0; see Theorem 12.6.9. For
+our purposes, the following result suﬃces:
+Theorem 8.2.4. (Jung 1967)
+[8.7.2]
+Every countable connected graph has a normal spanning tree.
+6 Lemma 1.5.4 continues to hold for inﬁnite graphs, with the same proof.
+7 One of these is Theorem 8.6.2; for more see the notes.
+
+8.2 Paths, trees, and ends
+239
+Proof. The proof follows that of Proposition 1.5.5; we only sketch the
+(1.5.5)
+di↵erences. Starting with a single vertex, we construct an inﬁnite se-
+quence T0 ✓T1 ✓. . . of ﬁnite normal trees in G, all with the same root,
+whose union T will be a normal spanning tree.
+To ensure that T spans G, we ﬁx an enumeration v0, v1, . . . of V (G)
+and see to it that Tn contains vn. It is clear that T will be a tree (since
+any cycle in T would lie in some Tn, and every two vertices of T lie in
+a common Tn and can be linked there), and clearly the tree order of T
+induces that of the Tn. Finally, T will be normal, because the endvertices
+of any edge of G that is not an edge of T lie in some Tn: since that Tn
+is normal, they must be comparable there, and hence in T.
+It remains to specify how to construct Tn+1 from Tn. If vn+1 2 Tn,
+put Tn+1 := Tn. If not, let C be the component of G −Tn contain-
+ing vn+1. Let x be the greatest element of the chain N(C) in Tn, and
+let Tn+1 be the union of Tn and an x–vn+1 path P with ˚
+P ✓C. Then
+the neighbourhood in Tn+1 of any new component C0 ✓C of G −Tn+1
+is a chain in Tn+1, so Tn+1 is again normal.
+⇤
+One of the most basic problems in an inﬁnite setting that has no
+ﬁnite equivalent is whether or not ‘arbitrarily many’, in some context,
+implies ‘inﬁnitely many’. Suppose we can ﬁnd k disjoint rays in some
+given graph G, for every k 2 N; does G also contain an inﬁnite set of
+disjoint rays?
+The answer to the corresponding question for ﬁnite paths (of any
+ﬁxed length) is clearly ‘yes’, since a ﬁnite path P can never get in the way
+of more than |P| disjoint other paths. A badly chosen ray, however, can
+meet inﬁnitely many other rays, preventing them from being selected for
+the same disjoint set. Rather than collecting our disjoint rays greedily,
+we therefore have to construct them carefully and all simultaneously.
+The proof of the following theorem is a nice example of a construc-
+tion in an inﬁnite sequence of steps, where the ﬁnal object emerges only
+at the limit step. Each of the steps in the sequence will involve a non-
+trivial application of Menger’s theorem (3.3.1).
+Theorem 8.2.5. (Halin 1965)
+(i) If an inﬁnite graph G contains k disjoint rays for every k 2 N,
+then G contains inﬁnitely many disjoint rays.
+(ii) If an inﬁnite graph G contains k edge-disjoint rays for every k 2 N,
+then G contains inﬁnitely many edge-disjoint rays.
+Proof. (i) We construct our inﬁnite system of disjoint rays inductively
+(3.3.1)
+in ! steps. After step n, we shall have found n disjoint rays Rn
+1 , . . . , Rn
+n
+and chosen initial segments Rn
+i xn
+i of these rays. In step n + 1 we choose
+the rays Rn+1
+1
+, . . . , Rn+1
+n+1 so as to extend these initial segments, i.e. so
+that Rn
+i xn
+i is a proper initial segment of Rn+1
+i
+xn+1
+i
+, for i = 1, . . . , n.
+
+240
+8. Inﬁnite Graphs
+Then, clearly, the graphs R⇤
+i := S
+n2N Rn
+i xn
+i will form an inﬁnite family
+(R⇤
+i )i2N of disjoint rays in G.
+For n = 0 the empty set of rays is as required. So let us assume
+that Rn
+1 , . . . , Rn
+n have been chosen, and describe step n + 1. For sim-
+n
+plicity, let us abbreviate Rn
+i =: Ri and xn
+i =: xi. Let R be any set of
+Ri, xi
+|R1x1 [ . . . [ Rnxn| + n2 + 1 disjoint rays (which exists by assumption),
+and immediately delete those rays from R that meet any of the paths
+R1x1, . . . , Rnxn; then R still contains at least n2 + 1 rays.
+We begin by repeating the following step as often as possible. If
+there exists an i 2 {1, . . . , n} such that Rn+1
+i
+has not yet been deﬁned
+and ˚xiRi meets at most n of the rays currently in R, we delete those
+rays from R, put Rn+1
+i
+:= Ri, and choose as xn+1
+i
+the successor of xi
+on Ri. Having performed this step as often as possible, we let I denote
+I
+the set of those i 2 {1, . . . , n} for which Rn+1
+i
+is still undeﬁned, and put
+|I| =: m. Then R still contains at least n2 + 1 −(n −m)n > m2 + 1
+m
+rays. Every Ri with i 2 I meets more than n > m of the rays in R; let
+zi be its ﬁrst vertex on the mth ray it meets. Then Z := S
+i2I xiRizi
+Z
+meets at most m2 of the rays in R; we delete all the other rays from R,
+choosing one of them as Rn+1
+n+1 (with xn+1
+n+1 arbitrary).
+On each remaining ray R 2 R we now pick a vertex y = y(R) after
+its last vertex in Z, and put Y := { y(R) | R 2 R }. Let H be the union
+of Z and all the paths Ry (R 2 R). Then X := { xi | i 2 I } cannot be
+separated from Y in H by fewer than m vertices, because these would
+miss both one of the m rays Ri with i 2 I and one of the m rays in
+R that meet xiRizi for this i. So by Menger’s theorem (3.3.1) there
+are m disjoint X–Y paths Pi = xi . . . yi (i 2 I) in H. For each i 2 I
+yi
+let R0
+i denote the ray from R that contains yi, choose as Rn+1
+i
+the ray
+RixiPiyiR0
+i, and put xn+1
+i
+:= yi.
+(ii) The proof is similar; see Exercise 45 and its hint.
+⇤
+Does Theorem 8.2.5 generalize to other graphs than rays? Let us
+call a graph H ubiquitous with respect to a relation 6 between graphs
+(such as the subgraph relation ✓, or the minor relation 4) if nH 6 G
+for all n 2 N implies @0H 6 G, where nH denotes the disjoint union of n
+nH
+copies of H. Ubiquity appears to be closely related to questions of well-
+quasi-ordering as discussed in Chapter 12. Non-ubiquitous graphs exist
+for all the standard graph orderings; see Exercise 49 for an example of a
+locally ﬁnite graph that is not ubiquitous under the subgraph relation.
+Ubiquity conjecture. (Andreae 2002)
+Every locally ﬁnite connected graph is ubiquitous with respect to the
+minor relation.
+A proof of the ubiquity conjecture for trees is indicated in Exercise 50.
+
+8.2 Paths, trees, and ends
+241
+Just as in Theorem 8.2.5 one can show that an end contains in-
+ﬁnitely many disjoint rays as soon as the number of disjoint rays in it is
+not ﬁnitely bounded, and similarly for edge-disjoint rays (Exercise 46).
+Hence, the maxima in our earlier deﬁnitions of the vertex- and edge-
+degrees of an end exist as claimed. Ends of inﬁnite vertex-degree are
+called thick; ends of ﬁnite vertex-degree are thin.
+thick/thin
+The N⇥N grid, for example, the graph on N2 in which two vertices
+(n, m) and (n0, m0) are adjacent if and only if |n −n0| + |m −m0| = 1,
+grid
+has only one end, which is thick. In fact, the N ⇥N grid is a kind of
+prototype for thick ends: every graph with a thick end contains it as a
+minor. This is another classical result of Halin, which we prove in the
+remainder of this section.
+For technical reasons, we shall prove Halin’s theorem for hexagonal
+rather than square grids. These may seem a little unwieldy at ﬁrst, but
+have the advantage that they can be found as topological rather than
+ordinary minors (Proposition 1.7.3), which makes them much easier to
+handle. We shall deﬁne the hexagonal grid H1 so that it is a subgraph
+of the N ⇥N grid, and it will be easy to see that, conversely, the N ⇥N
+grid is a minor of H1. (See also Exercise 71, Ch. 12.)
+To deﬁne our standard copy of the hexagonal quarter grid H1, we
+H1
+delete from the N ⇥N grid H the vertex (0, 0), the vertices (n, m) with
+n > m, and all edges (n, m)(n + 1, m) such that n and m have equal
+parity (Fig. 8.2.1). Thus, H1 consists of the vertical rays
+Un
+U0 := H [ { (0, m) | 1 6 m } ]
+Un := H [ { (n, m) | n 6 m } ]
+(n > 1)
+and between these a set of horizontal edges,
+E := { (n, m)(n + 1, m) | n 6⌘m (mod 2) } .
+To enumerate these edges, as e1, e2, . . . say, we order them colexicograph-
+e1, e2, . . .
+ically: the edge (n, m)(n + 1, m) precedes the edge (n0, m0)(n0 + 1, m0) if
+m < m0, or if m = m0 and n < n0 (Fig. 8.2.1).
+Theorem 8.2.6. (Halin 1965)
+Whenever a graph contains a thick end, it has a TH1 subgraph whose
+rays belong to that end.
+Proof. Given two inﬁnite sets P, P0 of ﬁnite or inﬁnite paths, let us write
+(8.1.2)
+P > P0 if P0 consists of ﬁnal segments of paths in P. (Thus, if P is a
+6
+set of rays, then so is P0.)
+Let G be any graph with a thick end !. Our task is to ﬁnd disjoint
+!
+rays in ! that can serve as ‘vertical’ (subdivided) rays Un for our desired
+grid, and to link these up by suitable disjoint ‘horizontal’ paths. We
+
+242
+8. Inﬁnite Graphs
+U0
+U1
+U2
+(0, 1)
+(1, 1)
+(2, 2)
+(3, 3)
+(0, 3)
+(0, 5)
+e7
+e3
+e5
+e6
+e2
+e8
+e9
+e4
+e1
+Fig. 8.2.1. The hexagonal quarter grid H1.
+begin by constructing a sequence R0, R1, . . . of rays (of which we shall
+later choose some tails R0
+n as ‘vertical rays’), together with path systems
+Pn between the Rn and suitable Rp(n) with p(n) < n (from which we
+shall later choose the ‘horizontal paths’). We shall aim to ﬁnd the Rn in
+‘supply sets’ R0 > R1 > . . . of unused rays. After the nth construction
+step we shall have constructed the subgraph Hn := Sn
+i=0
+$
+Ri [ S Pi
+%
+.
+Hn
+We start with any inﬁnite set R of disjoint rays in !; this exists by
+our assumption that ! is a thick end. Pick R0 2 R, put P0 := ;, and
+R0
+let R0 := R r {R0}. At step n > 1 of the construction we shall choose
+R0
+the following:
+(1) a ray Rn 2 ! disjoint from Hn−1;
+(2) an integer p(n) < n;
+(3) an inﬁnite set Pn of disjoint Rn–Rp(n) paths avoiding every
+other Ri;
+(4) an inﬁnite set Rn 6 Rn−1 of disjoint rays in G −Hn.
+Let n > 1 be given. As a ﬁrst candidate for Rn consider any ray
+R 2 Rn−1. By (4) for smaller values of n, we have both R 2 ! (since
+R
+Rn−1 6 . . . 6 R0 ✓R) and R \ Hn−1 = ;, as required for Rn in (1).
+Next, let us try to ﬁnd a set Pn and p(n) to go with R as Rn.
+Since Hn−1 contains R0 2 !, there exists an inﬁnite set P of disjoint
+R–Hn−1 paths in G. If P has an inﬁnite subset of paths all ending on
+the same Ri (i < n), we delete all other paths from P. If not, then P
+has an inﬁnite subset of paths all ending at an inner vertex of a path
+in Pi, for the same i < n. We extend them back along this path of Pi
+until they hit Ri, and delete all other paths from P. In both cases we
+
+8.2 Paths, trees, and ends
+243
+put p(n) := i, satisfying (2), and have found an inﬁnite set P of disjoint
+p(n), P
+R–Rp(n) paths that avoid all the other Ri (i < n).
+For later use we record:
+Every path in P consists of an R–Hn−1 path followed by
+a (possibly trivial) path in Hn−1.
+(⇤)
+What can still prevent us from choosing R as Rn and P as Pn is
+condition (4): if P meets all but ﬁnitely many rays in Rn−1 inﬁnitely,
+we cannot ﬁnd an inﬁnite set Rn 6 Rn−1 of rays avoiding P.
+If this happens, the only option we have is to make a virtue of
+necessity and use the rich intersection of P and Rn−1 for an altogether
+di↵erent construction of Rn, Pn and Rn. This will require some work.
+But we may assume the following, as the result of our e↵ort so far:
+Whenever R0 2 Rn−1 and P0 6 P is an inﬁnite set of R0–
+Rp(n) paths, there is a ray R00 6= R0 in Rn−1 that meets P0
+inﬁnitely.
+(⇤⇤)
+For if (⇤⇤) failed, we could choose R0 as Rn and P0 as Pn, and for Rn
+select from every ray R00 6= R0 in Rn−1 a tail avoiding P0. This would
+satisfy conditions (1)–(4) for n.
+Consider the paths in P as linearly ordered by the natural order of
+their starting vertices on R. This induces an ordering on every P0 6 P.
+If P0 is a set of R0–Rp(n) paths for some ray R0, we shall call this ordering
+of P0 compatible with R0 if the ordering it induces on the ﬁrst vertices
+of its paths coincides with the natural ordering of those vertices on R0.
+Starting with R =: R0
+n−1 and P =: P0, let us construct sequences
+R0
+n−1, P0
+R0
+n−1, R1
+n−1, . . . and P0 > P1 > . . . such that every Rk
+n−1 is a tail of a
+ray in Rn−1 and each Pk is an inﬁnite set of Rk
+n−1–Rp(n) paths whose
+ordering is compatible with Rk
+n−1. The ﬁrst path of Pk in this ordering
+will be denoted by Pk, its starting vertex on Rk
+n−1 by vk, and the path
+Pk, vk
+in Pk−1 containing Pk (if k > 1) by P −
+k (Fig. 8.2.2). To deﬁne Rk
+n−1
+P −
+k
+and Pk for k > 1, we use (⇤⇤) with R0 ◆Rk−1
+n−1 and P0 = Pk−1 to ﬁnd
+in Rn−1 a ray R00 6◆Rk−1
+n−1 that meets Pk−1 inﬁnitely; let Rk
+n−1 be a tail
+of R00 that avoids the ﬁnitely many paths in P containing P0, . . . , Pk−1.
+Let P −
+k be a path in Pk−1 that meets Rk
+n−1 and let v be its ‘highest’
+vertex on Rk
+n−1, that is, the last vertex of Rk
+n−1 in V (P −
+k ). Replacing
+Rk
+n−1 with its tail vRk
+n−1, we can arrange that P −
+k has only the vertex
+Rk
+n−1
+v on Rk
+n−1. Then Pk := vP −
+k is an Rk
+n−1–Rp(n) path starting at vk = v.
+We may now select an inﬁnite set Pk 6 Pk−1 of Rk
+n−1–Rp(n) paths
+Pk
+compatible with Rk
+n−1 and containing Pk as its ﬁrst path.
+Note that Pk cannot be a subpath of any Pi with i < k, since Pk
+contains vk 2 Rk
+n−1 but Rk
+n−1 \ Pi = ;. As Pk 6 Pi, this means that Pk
+and Pi are subpaths of disjoint paths in P. Similarly, for i < k the rays
+Rk
+n−1 and Ri
+n−1 cannot be tails of the same ray in Rn−1, and are there-
+
+244
+8. Inﬁnite Graphs
+Rp(n)
+Rn
+R3
+n−1
+R2
+n−1
+R1
+n−1
+R0
+n−1
+P2
+P3
+P1
+P0
+P −
+2
+P −
+1
+P3
+P2
+P1
+P0
+v−
+1
+v−
+2
+v−
+3
+v1
+v2
+v0
+v3
+Fig. 8.2.2. Constructing Rn from condition (⇤⇤)
+fore tails of disjoint rays in Rn−1, because S Pk meets Rk
+n−1 inﬁnitely
+but avoids Ri
+n−1. (Indeed, as Rk
+n−1 is disjoint from Rk−1
+n−1 by deﬁnition,
+the paths in Pk are proper ﬁnal segments of paths in Pk−1 6 Pi, and
+the paths in Pi meet Ri
+n−1 only in their ﬁrst vertex.)
+For each k, let v−
+k+1 denote the starting vertex of P −
+k+1 on Rk
+n−1,
+v−
+k
+and put Rk
+n := ˚v−
+k+1Rk
+n−1. Then let
+Rn := v0R0
+n−1v−
+1 P −
+1 v1R1
+n−1v−
+2 P −
+2 v2R2
+n−1 . . .
+Pn := {P0, P1, P2, . . .}
+Rn := { Rk
+n | k 2 N } .
+To verify that Rn is indeed a ray, we have to check that the various
+path segments it is composed of meet only at the vertices at which they
+are concatenated. We have already noted that for di↵erent k the paths
+P −
+k
+are ﬁnal segments of disjoint paths in P and the rays Rk
+n−1 are
+tails of disjoint rays in Rn−1. Moreover, each Rk
+n−1 by deﬁnition avoids
+the paths in P containing P0, . . . , Pk−1. And each P −
+k+1 avoids the rays
+Ri
+n−1 with i < k, because P −
+k+1 lies in Pk, whose paths are proper ﬁnal
+segments of Ri
+n−1–Rp(n) paths in Pi. Hence all that remains to check
+is that, for each k, the segment vkRk
+n−1v−
+k+1 of Rn meets the previous
+segment v−
+k P −
+k vk only in vk and the next segment v−
+k+1P −
+k+1vk+1 only
+in v−
+k+1. The ﬁrst of these assertions follows from the deﬁnition of Rk
+n−1,
+the second by the choice of P −
+k+1.
+For the same reasons, each Pk meets Rn only in vk (so Pn is indeed
+a set of Rn–Rp(n) paths), and the paths in Rn meet neither Rn nor the
+paths in Pn. Therefore Rn satisﬁes (4), and Pn satisﬁes (3); recall that
+the paths in P > Pn avoid Ri for every i < n other than p(n).
+
+8.2 Paths, trees, and ends
+245
+It remains to verify (1). We have Rn 2 !, since Pn joins Rn disjointly
+to Rp(n), and Rp(n) 2 ! by (1). To show that Rn \Hn−1 = ;, recall that
+the ‘vertical’ segments of Rn lie in rays from Rn−1, so by (4) they do not
+meet Hn−1. And a ‘horizontal’ segment of Rn can meet Hn−1 only if it
+does so also in its last vertex vk, by (⇤). But vk also lies on a vertical
+segment, and hence not in Hn−1. Thus, Rn \ Hn−1 = ; as desired.
+Let us now use our rays Rn and path systems Pn to construct the
+desired grid. In the tree on N deﬁned by joining each n to p(n), apply the
+inﬁnity lemma (8.1.2) to the distance classes from 0 to ﬁnd a ray n0n1 . . .
+with vertices n0 < n1 < . . . or, if one of these classes is inﬁnite, a vertex
+n0 with inﬁnitely many neighbours n1, n2, . . . greater than n0. We treat
+these two cases in turn, assuming for notational simplicity that ni = i
+for all i. (In other words, we discard any Rn with n /2 {n0, n1, . . .}.)
+In the ﬁrst case, each Pn is an inﬁnite set of disjoint Rn–Rn−1 paths.
+Our aim is to choose tails R0
+n of our rays Rn that will correspond to the
+vertical rays Un ✓H1, and paths S1, S2, . . . between the R0
+n that will
+correspond to the horizontal edges e1, e2, . . . of H1. We shall ﬁnd the
+paths S1, S2, . . . inductively, choosing the R0
+n as needed as we go along
+(but also in the order of increasing n, starting with R0
+0 := R0). At every
+step of the construction, we shall have selected only ﬁnitely many Sk
+and only ﬁnitely many R0
+n.
+Let k and n be minimal such that Sk and R0
+n are still undeﬁned.
+We describe how to choose Sk, and R0
+n if the deﬁnition of Sk requires
+it. Let i be such that ek joins Ui−1 to Ui in H1. If i = n, let R0
+n be
+a tail of Rn that avoids the ﬁnitely many paths S1, . . . , Sk−1; otherwise,
+R0
+i has already been deﬁned, and so has R0
+i−1.
+Now choose Sk 2 Pi
+‘high enough’ between R0
+i−1 and R0
+i to mirror the position of ek in H1,
+and to avoid S1 [ . . . [ Sk−1. Then Sk will also avoid every other R0
+j
+already deﬁned: by (3) for i if j < i, and by (1) for j if j > i. Since
+every R0
+n is chosen so as to avoid all previously deﬁned Sk, and every Sk
+avoids all previously deﬁned R0
+j (except R0
+i−1 and R0
+i), the R0
+n and Sk
+are pairwise disjoint for all n, k 2 N, except for the required incidences.
+Our construction thus yields the desired subdivision of H1.
+In the second case, every Pn is a set of disjoint Rn–R0 paths. We
+now use only the Rn with n > 1 for vertical rays of H1, because R0
+will be needed for the horizontal paths. More precisely, we choose rays
+R0
+n ✓Rn for n > 1, and paths Sk between them, inductively as before,
+except that Sk now consists of three parts: an initial segment from Pi−1,
+followed by a middle segment on R0, and a ﬁnal segment from Pi. Such
+Sk can again be found, since at every stage of the construction only a
+ﬁnite part of R0 has been used.
+⇤

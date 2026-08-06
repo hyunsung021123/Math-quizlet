@@ -1,0 +1,490 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.4 Connectivity and matching (분할 part 1)
+직전 소단원: 「8.3 Homogeneous and universal graphs」
+[본문]
+249
+more general model-theoretic point of view, and have therefore been
+based on the strongest of all graph relations, the induced subgraph rela-
+tion. As a consequence, most of these results are negative; see the notes.
+From a graph-theoretic point of view, it seems more promising to
+look instead for universal graphs for the weaker subgraph relation, or
+even the topological minor or minor relation. For example, while there
+is no universal planar graph for subgraphs or induced subgraphs, there
+is one for minors:
+Theorem 8.3.4. (Diestel & K¨uhn 1999)
+There exists a universal planar graph for the minor relation.
+This remained the only result about universal graphs for the minor-
+relation for over 20 years, until Georgakopoulos found 4-universal graphs
+in Forb4(X) = { G | X 64 G } for X = K5 and X = K3,3, and proved
+there is none for X = K@0.
+8.4 Connectivity and matching
+In this section we look at inﬁnite versions of Menger’s theorem and of the
+matching theorems from Chapter 2. This area of inﬁnite graph theory is
+one of its best developed ﬁelds, with several deep results. One of these,
+however, stands out among the rest: a version of Menger’s theorem that
+had been conjectured by Erd˝os decades ago, and was proved only fairly
+recently by Aharoni and Berger. The techniques developed for its proof
+inspired, over the years, much of the theory in this area.
+Before we turn to this result, however, let us take a brief look at
+edge-connectivity.
+Recall from Section 8.1 that in an inﬁnitely edge-
+connected countable graph we can easily ﬁnd inﬁnitely many edge-
+disjoint spanning trees. Can we still ﬁnd such trees when the graph is
+uncountable? We can, but this is not quite as easy to prove (Exercise 62).
+The following deep theorem of Laviolette reduces the above prob-
+lem to its countable case – as it does for many other problems involving
+edge-connectivity. Let H be a set of countable graphs forming an edge-
+decomposition of an arbitrary graph G. Call this decomposition bond-
+faithful if every countable bond of G is contained in some H 2 H and
+every ﬁnite bond of any H 2 H is a bond also of G. Note that the ﬁnite
+bonds of G will be bonds of the H 2 H that contain them. (Why?)
+Theorem 8.4.1. (Laviolette 2005)
+Every graph has a bond-faithful decomposition into countable graphs.
+We shall not be able to prove Laviolette’s theorem here. But let
+us illustrate its power in reducing problems to their countable case by
+deducing an early classic from the theory of inﬁnite graphs.
+8.4 Connectivity and matching
+
+250
+8. Inﬁnite Graphs
+Let us call a cut F in a graph G even or odd if |F| is ﬁnite and even
+even/odd
+cut
+or odd, respectively. Since cycles meet cuts in an even number of edges,
+graphs with an odd cut cannot have an edge-decomposition into cycles.
+Suprisingly, all other graphs do:
+Theorem 8.4.2. (Nash-Williams 1960)
+Every graph with no odd cut has an edge-decomposition into cycles.
+Proof. By Theorem 8.4.1 we may assume that our graph G is countable;
+let us enumerate its edges. We shall ﬁnd the desired cycles in ! steps.
+At each step we shall assume inductively that every cut is inﬁnite or
+even, ﬁnd a cycle, and delete its edges.
+To ﬁnd that cycle, consider the ﬁrst remaining edge e = xy in our
+enumeration. By our inductive assumption e is not a bridge, so there is
+an x–y path not using e. Together with e this path forms a cycle, whose
+edges we delete to complete this step. This deletion keeps every ﬁnite
+cut even and every inﬁnite cut inﬁnite.
+After at most ! steps no edges remain, so the cycles we found form
+an edge-decomposition of G.
+⇤
+Let us now turn to the Aharoni-Berger theorem: the inﬁnite version
+of Menger’s theorem originally conjectured by Erd˝os. We shall prove this
+theorem for countable graphs, which will take up most of this section.
+Although the countable case is much easier, the techniques it requires al-
+ready give a good impression of the general proof. We then wind up with
+an overview of inﬁnite matching theorems and a conjecture conceived in
+the same spirit.
+Recall that Menger’s theorem, in its simplest form, says that if A
+and B are sets of vertices in a ﬁnite graph G, not necessarily disjoint,
+and if k = k(G, A, B) is the minimum number of vertices separating A
+from B in G, then G contains k disjoint A–B paths. (Clearly, it cannot
+contain more.) The same holds, and is easily deduced from the ﬁnite
+case, when G is inﬁnite but k is still ﬁnite:
+Proposition 8.4.3. Let G be any graph, k 2 N, and let A, B be two
+sets of vertices in G that can be separated by k but no fewer than k
+vertices. Then G contains k disjoint A–B paths.
+Proof. By assumption, every set of disjoint A–B paths has cardinality at
+(3.3.1)
+most k. Choose one, P say, of maximum cardinality. Suppose |P| < k.
+Then no set X consisting of one vertex from each path in P separates A
+from B. For each X, let PX be an A–B path avoiding X. Let H be the
+union of S P with all these paths PX. This is a ﬁnite graph in which no
+set of |P| vertices separates A from B. So H ✓G contains more than
+|P| paths from A to B by Menger’s theorem (3.3.1), which contradicts
+the choice of P.
+⇤
+
+8.4 Connectivity and matching
+251
+When k is inﬁnite, however, the result suddenly becomes trivial.
+Indeed, let P be any maximal set of disjoint A–B paths in G. Then the
+union of all these paths separates A from B, so P must be inﬁnite. But
+then the cardinality of this union is no bigger than |P|. Thus, P contains
+|P| =
+.. S P
+.. > k disjoint A–B paths, as desired.
+Of course, this is no more than a trick played on us by inﬁnite car-
+dinal arithmetic: although, numerically, the A–B separator consisting of
+all the inner vertices of paths in P is no bigger than |P|, it uses far more
+vertices to separate A from B than should be necessary. Or put another
+way: when our path systems and separators are inﬁnite, their cardinal-
+ities alone are no longer a suﬃciently ﬁne tool to distinguish carefully
+chosen ‘small’ separators from unnecessarily large and wasteful ones.
+To overcome this problem, Erd˝os suggested an alternative form of
+Menger’s theorem, which for ﬁnite graphs is clearly equivalent to the
+standard version. Recall that an A–B separator X is said to lie on a
+set P of disjoint A–B paths if X consists of a choice of exactly one
+vertex from each path in P. The following so-called Erd˝os-Menger con-
+jecture, now a theorem, inﬂuenced much of the development of inﬁnite
+Erd˝os-
+Menger
+conjecture
+connectivity and matching theory:
+Theorem 8.4.4. (Aharoni & Berger 2009)
+Let G be any graph, and let A, B ✓V (G). Then G contains a set P of
+disjoint A–B paths and an A–B separator on P.
+The next few pages give a proof of Theorem 8.4.4 for countable G.
+Of the three proofs we gave for the ﬁnite case of Menger’s theorem,
+only the last has any chance of being adaptable to the inﬁnite case: the
+others were by induction on |G| or | S P|, and both these parameters
+may now be inﬁnite. The third proof, however, looks more promising:
+recall that, by Lemmas 3.3.2 and 3.3.3, it provided us with a tool to
+either ﬁnd a separator on a given system of A–B paths, or to construct
+another system of A–B paths that covers more vertices in A and in B.
+Lemmas 3.3.2 and 3.3.3 (whose proofs work for inﬁnite graphs too)
+will indeed form a cornerstone of our proof for Theorem 8.4.4. However,
+it will not do just to apply these lemmas inﬁnitely often. Indeed, al-
+though any ﬁnite number of applications of Lemma 3.3.2 leaves us with
+another system of disjoint A–B paths, an inﬁnite number of iterations
+may leave nothing at all: each edge may be toggled on and o↵inﬁnitely
+often by successive alternating paths, so that no ‘limit system’ of A–B
+paths will be deﬁned. We shall therefore take another tack: starting at A,
+we grow simultaneously as many disjoint paths towards B as possible.
+To make this precise, we need some terminology.
+Given a set
+X ✓V (G), let us write GX!B for the subgraph of G induced by X
+GX!B
+and all the components of G −X that meet B.
+
+252
+8. Inﬁnite Graphs
+Let W = ( Wa | a 2 A ) be a family of disjoint paths such that every
+Wa starts in a. We call W an A ! B wave in G if the set Z of ﬁnal
+wave
+vertices of paths in W separates A from B in G. (Note that W may
+contain inﬁnite paths, which have no ﬁnal vertex.) Sometimes, we shall
+wish to consider A ! B waves in subgraphs of G that contain A but not
+all of B. For this reason we do not formally require that B ✓V (G).
+A
+GX!B
+B
+X
+Z
+Fig. 8.4.1. A small A ! B wave W with boundary X
+When W is a wave, then the set X ✓Z of those vertices in Z
+that either lie in B or have a neighbour in GZ!B −Z is a minimal
+A–B separator in G; note that z 2 Z lies in X if and only if it can be
+linked to B by a path that has no vertex other than z on W. We call
+X the boundary of W, and often use (W, X) as shorthand for the wave
+boundary
+(W, X)
+W together with its boundary X. If all the paths in W are ﬁnite and
+X = Z, we call the wave W large; otherwise it is small. We shall call
+large/small
+W proper if at least one of the paths in W is non-trivial, or if all its
+proper
+paths are trivial but its boundary is a proper subset of A. Every small
+wave, for example, is proper. Note that while some A ! B wave always
+exists, e.g. the family ( {a} | a 2 A ) of singleton paths, G need not have
+a proper A ! B wave. (For example, if A consists of two vertices of
+G = K10 and B of three other vertices, there is no proper A ! B wave.)
+If (U, X) is an A ! B wave in G and (V, Y ) is an X ! B wave
+in GX!B, then the family W = U + V obtained from U by appending
+U + V
+the paths of V (to those paths of U that end in X) is clearly an A ! B
+wave in G, with boundary Y . Note that W is large if and only if both
+V and U are large. W is greater than U in the following sense.
+Given two path systems U = ( Ua | a 2 A ) and W = ( Wa | a 2 A ),
+write U 6 W if Ua ✓Wa for every a 2 A. Given a chain (Wi, Xi)i2I
+6
+of waves in this ordering, with Wi = ( W i
+a | a 2 A ) say, let W⇤=
+( W ⇤
+a | a 2 A ) be deﬁned by W ⇤
+a := S
+i2I W i
+a. Then W⇤is an A ! B
+wave: any A–B path is ﬁnite but meets every Xi, so at least one of its
+vertices lies in Xi for arbitrarily large (Wi, Xi) and hence is the ﬁnal
+vertex of a path in W⇤. Clearly Wi 6 W⇤for all i 2 I; we call W⇤the
+limit of the waves Wi.
+limit wave
+
+8.4 Connectivity and matching
+253
+As every chain of A ! B waves is bounded above by its limit wave,
+Zorn’s lemma implies that G has a maximal A ! B wave W; let X be
+maximal
+wave
+its boundary. This wave (W, X) forms the ﬁrst step in our proof for
+Theorem 8.4.4: if we can now ﬁnd disjoint paths in GX!B linking all
+the vertices of X to B, then X will be an A–B separator on these paths
+preceded by the paths of W that end in X.
+By the maximality of W, there is no proper X !B wave in GX!B.
+For our proof it will thus suﬃce to prove the following (renaming X as A):
+Lemma 8.4.5. If G has no proper A ! B wave, then G contains a set
+of disjoint A–B paths linking all of A to B.
+Our approach to the proof of Lemma 8.4.5 is to enumerate the
+vertices in A =: {a1, a2, . . .}, and to ﬁnd the required A–B paths
+a1, a2, . . .
+Pn = an . . . bn in turn for n = 1, 2, . . . . Since our premise in Lemma 8.4.5
+Pn
+is that G has no proper A ! B wave, we would like to choose P1 so that
+G −P1 has no proper (A r {a1}) ! B wave: this would restore the same
+premise to G −P1, and we could proceed to ﬁnd P2 in G −P1 in the
+same way.
+We shall not be able to choose P1 quite like this, but we shall be
+able to do something almost as good. We shall construct P1 so that
+deleting it (as well as a few more vertices outside A) leaves a graph that
+has a large maximal (A r {a1}) ! B wave (W, A0). We then earmark
+the paths Wn = an . . . a0
+n (n > 2) of this wave as initial segments for the
+paths Pn. By the maximality of W, there is no proper A0 ! B wave in
+GA0!B. In other words, we have restored our original premise to GA0!B,
+and can ﬁnd there an A0–B path P 0
+2 = a0
+2 . . . b2. Then P2 := a2W2a0
+2P 0
+2
+is our second path for Lemma 8.4.5, and we continue inductively inside
+GA0!B.
+Given a set ˆA of vertices in G, let us call a vertex a /2 ˆA linkable
+linkable
+for (G, ˆA, B) if G −ˆA contains an a–B path P and a set X ◆V (P)
+of vertices such that G −X has a large maximal ˆA ! B wave. (The
+ﬁrst such a we shall be considering will be a1, and ˆA will be the set
+{a2, a3, . . .}.)
+Lemma 8.4.6. Let a⇤2 A and ˆA := A r {a⇤}, and assume that G has
+no proper A ! B wave. Then a⇤is linkable for (G, ˆA, B).
+Proof of Lemma 8.4.5 (assuming Lemma 8.4.6).
+Let G be as in
+Lemma 8.4.5, i.e. assume that G has no proper A ! B wave.
+We
+construct subgraphs G1, G2, . . . of G satisfying the following statement
+(Fig. 8.4.2):
+
+254
+8. Inﬁnite Graphs
+Gn contains a set An = {an
+n, an
+n+1, an
+n+2, . . .} of distinct
+vertices such that Gn has no proper An ! B wave.
+In
+G there are disjoint paths Pi (i < n) and W n
+i
+(i > n)
+starting at ai. The Pi are disjoint from Gn and end in B.
+The W n
+i end in an
+i and are otherwise disjoint from Gn.
+(⇤)
+Clearly, the paths P1, P2, . . . will satisfy Lemma 8.4.5.
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+B
+a1
+P1
+an
+n+1
+an
+n
+Gn
+A
+an
+an−1
+W n
+i
+Pn−1
+An
+Fig. 8.4.2. Gn has no proper An ! B wave
+Let G1 := G, and put a1
+i := ai and W 1
+i
+:= {ai} for all i > 1.
+Since by assumption G has no proper A ! B wave, these deﬁnitions
+satisfy (⇤) for n = 1. Suppose now that (⇤) has been satisﬁed for n.
+Put ˆAn := An r {an
+n}. By Lemma 8.4.6 applied to Gn, we can ﬁnd in
+Gn −ˆAn an an
+n–B path P and a set Xn ◆V (P) such that Gn −Xn has
+a large maximal ˆAn ! B wave (W, An+1). Let Pn be the path W n
+n [ P.
+For i > n + 1, let W n+1
+i
+be W n
+i
+followed by the path of W starting
+at an
+i , and call its last vertex an+1
+i
+. By the maximality of W there is no
+proper An+1 ! B wave in Gn+1 := (Gn −Xn)An+1!B, so (⇤) is satisﬁed
+for n + 1.
+⇤
+To complete our proof of Theorem 8.4.4, it remains to prove
+Lemma 8.4.6. For this, we need another lemma:
+Lemma 8.4.7. Let x be a vertex in G −A. If G has no proper A ! B
+wave but G −x does, then every A ! B wave in G −x is large.
+Proof.
+Suppose G −x has a small A ! B wave (W, X).
+Put B0 :=
+(3.3.2)
+(3.3.3)
+X [ {x}, and let P denote the set of A–X paths in W (Fig. 8.4.3). If G
+contains an A–B0 separator S on P, then replacing in W every P 2 P
+with its initial segment ending in S we obtain a small (and hence proper)
+A!B wave in G, which by assumption does not exist. By Lemmas 3.3.3
+
+8.4 Connectivity and matching
+255
+x
+B0
+S
+P
+W
+B
+A
+X
+Fig. 8.4.3. A hypothetical small A ! B wave in G −x
+and 3.3.2, therefore, G contains a set P0 of disjoint A–B0 paths exceed-
+ing P. The set of last vertices of these paths contains X properly, and
+hence must be all of B0 = X [ {x}. But B0 separates A from B in G, so
+we can turn P0 into an A ! B wave in G by adding as singleton paths
+any vertices of A it does not cover. As x lies on P0 but not in A, this is
+a proper wave, which by assumption does not exist.
+⇤
+Proof of Lemma 8.4.6. We inductively construct trees T0 ✓T1 ✓. . .
+in G −( ˆA [ B) and path systems W0 6 W1 6 . . . in G so that each Wn
+Wn
+is a large maximal ˆA ! B wave in G −Tn.
+Let W0 := ( {a} | a 2 ˆA ). Clearly, W0 is an ˆA ! B wave in G −a⇤,
+and it is large and maximal: if not, then G−a⇤has a proper ˆA!B wave,
+and adding the trivial path {a⇤} to this wave turns it into a proper A!B
+wave (which by assumption does not exist). If a⇤2 B, the existence of
+W0 makes a⇤linkable for (G, ˆA, B). So we assume that a⇤/2 B. Now
+T0 := {a⇤} and W0 are as desired.
+Suppose now that Tn and Wn have been deﬁned, and let An denote
+An
+the set of last vertices of the paths in Wn. Since Wn is large, An is its
+boundary, and since Wn is maximal, Gn := (G−Tn)An!B has no proper
+Gn
+An ! B wave (Fig. 8.4.4).
+...
+...
+...
+n
+...
+...
+a∗
+An
+B
+Tn
+tn
+ˆ
+A
+Gn
+An+1
+Gn+1
+Pn
+Pn
+pn
+W
+W
+Fig. 8.4.4. As Wn is maximal, Gn has no proper An ! B wave
+
+256
+8. Inﬁnite Graphs
+Note that An does not separate A from B in G: if it did, then
+Wn [ {a⇤} would be a small A ! B wave in G, which does not ex-
+ist. Hence, G −An contains an A–B path P, which meets Tn because
+(Wn, An) is a wave in G −Tn. Let P =: Pn be chosen so that its vertex
+Pn
+pn following its last vertex tn in Tn is minimal in some ﬁxed enumeration
+pn, tn
+of V (G).
+Let Tn+1 := Tn [tnPnpn be the tree obtained from Tn by adding the
+Tn+1
+edge tnpn. If Gn −pn has no proper An ! B wave, then Wn+1 := Wn is
+large and maximal not only in G −Tn but also in G −Tn+1. If Gn −pn
+has a proper An ! B wave, W say, we choose it maximal. Since Gn has
+no such wave, W is large by Lemma 8.4.7. Now Wn+1 := Wn + W is a
+large maximal An !B wave in G−Tn+1. In either case Tn+1 and Wn+1
+are as desired, unless pn 2 B. But then a⇤is linkable for (G, ˆA, B) with
+a⇤–B path a⇤Tn+1pn, wave Wn+1 and X = V (Tn+1).
+Put T ⇤:= S
+n2N Tn. Then the Wn are ˆA!B waves also in G−T ⇤;
+let (W⇤, A⇤) be their limit. Our aim is to show that A⇤separates A from
+B not only in G −T ⇤but even in G: then (W⇤[ {a⇤} , A⇤) is a small
+A ! B wave in G, which by assumption does not exist: a contradiction.
+Suppose there exists an A–B path Q in G −A⇤. Let t be its last
+vertex in T ⇤. Since T ⇤does not meet B, there is a vertex p following t
+on Q. This p is not among the pn, since T ⇤contains those but not p.
+Let n be large enough that t 2 Tn and that p precedes pn in our ﬁxed
+enumeration of V (G). (As pn 2 Tn+1 −Tn, the pn are pairwise distinct.)
+The fact that a⇤TntQ was not chosen as Pn means that its portion
+pQ outside Tn meets An, say in a vertex q. Now q /2 A⇤by the choice of Q.
+Let W be the path in Wn that joins ˆA to q; this path too avoids A⇤.
+But then WqQ contains an ˆA–B path in G −T ⇤avoiding A⇤, which
+contradicts the deﬁnition of A⇤.
+⇤
+The proof of Theorem 8.4.4 for countable G is now complete.
+Turning now to matching, let us begin with a simple problem that is
+intrinsically inﬁnite. Given two sets A, B and injective functions A ! B
+and B !A, is there necessarily also a bijection between A and B? Indeed
+there is – this is the famous Cantor-Bernstein theorem from elementary
+set theory. Recast in terms of matchings, the proof becomes very simple:
+Proposition 8.4.8. Let G be a bipartite graph, with bipartition {A, B}
+say. If G contains a matching of A and a matching of B, then G has a
+1-factor.
+Proof. Let H be the multigraph on V (G) whose edge set is the disjoint
+union of the two matchings. (Thus, any edge that lies in both matchings
+becomes a double edge in H.) Every vertex in H has degree 1 or 2. In
+fact, it is easy to check that every component of H is an even cycle or an
+inﬁnite path. Picking every other edge from each component, we obtain
+a 1-factor of G.
+⇤
+
+8.4 Connectivity and matching
+257
+The corresponding path problem in non-bipartite graphs, with sets
+of disjoint A–B paths instead of matchings, is less trivial. Let us say
+that a set P of paths in G covers a set U of vertices if every vertex in U
+covers
+is an endvertex of a path in P.
+Theorem 8.4.9. (Pym 1969)
+Let G be a graph, and let A, B ✓V (G). Suppose that G contains two
+sets of disjoint A–B paths, one covering A and one covering B. Then G
+contains a set of disjoint A–B paths covering A [ B.
+Some hints for a proof of Theorem 8.4.9 are included with Exercise 70.
+Next, let us see how the standard matching theorems for ﬁnite
+graphs – K¨onig, Hall, Tutte, Gallai-Edmonds – extend to inﬁnite graphs.
+For locally ﬁnite graphs, they all have straightforward extensions by
+compactness; see Exercises 26–29. But there are also very satisfactory
+extensions to graphs of arbitrary cardinality. Their proofs form a co-
+herent body of theory and are much deeper, so we shall only be able to
+state those results and point out how some of them are related. But, as
+with Menger’s theorem, the statements themselves are interesting too:
+ﬁnding the ‘right’ restatement of a given ﬁnite result to make a substan-
+tial inﬁnite theorem is by no means easy, and most of them were found
+only as the theory itself developed over the years.
+Let us start with bipartite graphs. The following Erd˝os-Menger-type
+extension of K¨onig’s theorem (2.1.1) is now a corollary of Theorem 8.4.4:
+Theorem 8.4.10. (Aharoni 1984)
+Every bipartite graph has a matching, M say, and a vertex cover of its
+edge set that consists of exactly one vertex from every edge in M.
+What about an inﬁnite version of the marriage theorem (2.1.2)?
+The ﬁnite theorem says that a matching exists as soon as every subset
+S of the ﬁrst partition class has enough neighbours in the second. But
+how do we measure ‘enough’ in an inﬁnite graph? Just as in Menger’s
+theorem, comparing cardinalities is not enough (Exercise 27).
+However, there is a neat way of rephrasing the marriage condition
+for a ﬁnite graph without appealing to cardinalities. Call a subset X of
+one partition class matchable to a subset Y of the other if the subgraph
+matchable
+spanned by X and Y contains a matching of X. Now if S is minimal with
+|S| > |N(S)| then, by the marriage theorem, S is ‘larger’ than N(S) also
+in the sense that S is not matchable to N(S) but N(S) is matchable to S.
+(Indeed, by the minimality of S and the marriage theorem, any S0 ✓S
+with |S0| = |S|−1 can be matched to N(S). As |S0| = |S|−1 > |N(S)|,
+this matching covers N(S).) Thus, if there is any obstruction S of the
+type |S| > |N(S)| to a perfect matching, there is also one where S is
+larger than N(S) in this other sense: that S is not matchable to N(S)
+but N(S) is matchable to S.

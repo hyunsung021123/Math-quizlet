@@ -1,0 +1,308 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 2. Matching, Covering and Packing
+현재 소단원: 2.1 Matching in bipartite graphs
+직전 소단원: 「1.ex Exercises」
+[본문]
+2
+Matching
+Covering
+and Packing
+Suppose we are given a graph and are asked to ﬁnd in it as many in-
+dependent edges as possible. How should we go about this? Will we
+be able to pair up all its vertices in this way? If not, how can we be
+sure that this is indeed impossible? Somewhat surprisingly, this basic
+problem does not only lie at the heart of numerous applications, it also
+gives rise to some rather interesting graph theory.
+A set M of independent edges in a graph G = (V, E) is called a
+matching. M is a matching of U ✓V if every vertex in U is incident
+matching
+with an edge in M. The vertices in U are then called matched (by M);
+matched
+vertices not incident with any edge of M are unmatched.
+A k-regular spanning subgraph is called a k-factor. Thus, a sub-
+factor
+graph H ✓G is a 1-factor of G if and only if E(H) is a matching of V .
+The problem of how to characterize the graphs that have a 1-factor, i.e.
+a matching of their entire vertex set, will be our main theme in the ﬁrst
+two sections of this chapter.
+A generalization of the matching problem is to ﬁnd in a given graph
+G as many disjoint subgraphs as possible that are each isomorphic to
+an element of a given class H of graphs. This is known as the packing
+packing
+problem.
+It is related to the covering problem, which asks how few
+covering
+vertices of G suﬃce to meet all its subgraphs isomorphic to a graph
+in H. Clearly, we need at least as many vertices for such a cover as
+the maximum number k of graphs from H that we can pack disjointly
+into G. If there is no cover by just k vertices, perhaps there is always
+a cover by at most f(k) vertices, where f(k) may depend on H but not
+37
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_2
+
+38
+2. Matching, Covering and Packing
+on G? In Section 2.3 we shall prove that when H is the class of cycles,
+then there is such a function f.
+In Section 2.4 we consider packing and covering in terms of edges:
+we ask how many edge-disjoint spanning trees we can ﬁnd in a given
+graph, and how few trees in it will cover all its edges. In Section 2.5
+we prove a path cover theorem for directed graphs, which implies the
+well-known duality theorem of Dilworth for partial orders.
+2.1 Matching in bipartite graphs
+For this whole section, we let G = (V, E) be a ﬁxed bipartite graph with
+G = (V, E)
+bipartition {A, B}. Vertices denoted as a, a0 etc. will be assumed to lie
+A, B
+in A, vertices denoted as b etc. will lie in B.
+a, b etc.
+How can we ﬁnd a matching in G with as many edges as possible?
+Let us start by considering an arbitrary matching M in G. A path in G
+which starts in A at an unmatched vertex and then contains, alternately,
+edges from E rM and from M, is an alternating path with respect to M.
+alternating
+path
+Note that the path is allowed to be trivial, i.e. to consist of its starting
+vertex only. An alternating path P that ends in an unmatched vertex
+of B is called an augmenting path (Fig. 2.1.1), because we can use it
+augment-
+ing path
+to turn M into a larger matching: the symmetric di↵erence of M with
+E(P) is again a matching (consider the edges at a given vertex), and the
+set of matched vertices is increased by two, the ends of P.
+M
+A
+B
+A
+B
+P
+M 0
+Fig. 2.1.1. Augmenting the matching M by the alternating
+path P
+Alternating paths play an important role in the practical search for
+large matchings. In fact, if we start with any matching and keep apply-
+ing augmenting paths until no further such improvement is possible, the
+matching obtained will always be an optimal one, a matching with the
+largest possible number of edges (Exercise 1). The algorithmic problem
+of ﬁnding such matchings thus reduces to that of ﬁnding augmenting
+paths – which is an interesting and accessible algorithmic problem.
+Our ﬁrst theorem characterizes the maximal cardinality of a matching
+in G by a kind of duality condition. Let us call a set U ✓V a (vertex)
+cover of E if every edge of G is incident with a vertex in U.
+cover
+
+2.1 Matching in bipartite graphs
+39
+Theorem 2.1.1. (K¨onig 1931)
+The maximum cardinality of a matching in G is equal to the minimum
+cardinality of a vertex cover of its edges.
+Proof. Let M be a matching in G of maximum cardinality. From every
+M
+edge in M let us choose one of its ends: its end in B if some alternating
+path ends in that vertex, and its end in A otherwise (Fig. 2.1.2). We
+shall prove that the set U of these |M| vertices covers E; since any vertex
+U
+cover of E must cover M, there can be none with fewer than |M| vertices,
+and so the theorem will follow.
+U \ A
+U \ B
+Fig. 2.1.2. The vertex cover U
+Note that if an alternating path P ends in a vertex b 2 B, then b 2 U:
+as M is a largest matching, P is not an augmenting path, so b is matched
+to some a 2 A and was put in U when we considered the edge ab 2 M
+while constructing U.
+To show that U covers E, let an edge ab 2 E be given. If a 2 U we
+are done, so assume that a /2 U. To prove b 2 U, it suﬃces to show that
+some alternating path ends in b. If a is unmatched, then ab is such a
+path. If not, we have ab0 2 M for some b0 2 B. Since a /2 U, there exists
+an alternating path P ending in b0. Depending on whether or not b 2 P,
+either Pb or Pb0ab is an alternating path ending in b.
+⇤
+Let us return to our main problem, the search for some necessary
+and suﬃcient conditions for the existence of a 1-factor. In our present
+case of a bipartite graph, we may as well ask more generally when G
+contains a matching of A; this will deﬁne a 1-factor of G if |A| = |B|,
+a condition that has to hold anyhow if G is to have a 1-factor.
+A condition clearly necessary for the existence of a matching of A
+is that every subset of A has enough neighbours in B, i.e. that
+marriage
+condition
+|N(S)| > |S|
+for all S ✓A.
+The following marriage theorem says that this obvious necessary condi-
+tion is in fact suﬃcient:
+
+40
+2. Matching, Covering and Packing
+Theorem 2.1.2. (Hall 1935)
+[2.2.3]
+G contains a matching of A if and only if |N(S)| > |S| for all S ✓A.
+We give three proofs, of rather di↵erent character.1 In each proof we
+assume that G satisﬁes the marriage condition and ﬁnd a matching of A.
+First proof.
+We show that for every matching M of G that leaves a
+M
+vertex a 2 A unmatched there is an augmenting path with respect to M.
+a
+Let A0 and B0 be the sets of vertices in A and B that can be reached
+by an alternating path from a. Any such path ending at an unmatched
+b0 2 B0 is augmenting, so we may assume that all b0 2 B0 are matched.
+Their M-neighbours clearly lie in A0, but a 2 A0 is not among these.
+Hence by the marriage condition, A0 also sends an edge a0b to a vertex
+b /2 B0. Appending this edge to an alternating a–a0 path yields an alter-
+nating a–b path. This places b in B0, contradicting its choice.
+⇤
+Second proof. We apply induction on |A|. For |A| = 1 the assertion
+is true. Now let |A| > 2, and assume that the marriage condition is
+suﬃcient for the existence of a matching of A when |A| is smaller.
+If |N(S)| > |S| + 1 for every non-empty set S ( A, we pick an edge
+ab 2 G and consider the graph G0 := G −{a, b} obtained by deleting its
+ends. Then every non-empty set S ✓A r {a} satisﬁes
+|NG0(S)| > |NG(S)| −1 > |S| ,
+so by the induction hypothesis G0 contains a matching of A r {a}. To-
+gether with the edge ab, this yields a matching of A in G.
+Suppose now that A has a non-empty proper subset A0 with |B0| =
+|A0| for B0 := N(A0). By the induction hypothesis, G0 := G[A0 [ B0]
+contains a matching of A0. But G −G0 satisﬁes the marriage condition
+too: for any set S ✓A r A0 with |NG−G0(S)| < |S| we would have
+|NG(S [ A0)| < |S [ A0|, contrary to our assumption. Again by induc-
+tion, G −G0 contains a matching of A r A0. Putting the two matchings
+together, we obtain a matching of A in G.
+⇤
+For our last proof, let H be an edge-minimal subgraph of G that
+H
+satisﬁes the marriage condition and contains A. Note that dH(a) > 1
+for every a 2 A, by the marriage condition with S = {a}.
+Third proof. We show that dH(a) = 1 for every a 2 A. The edges of H
+then form a matching of A, since by the marriage condition no two such
+edges can share a vertex in B.
+Suppose a has distinct neighbours b1, b2 in H. By deﬁnition of H,
+the graphs H −ab1 and H −ab2 violate the marriage condition. So for
+1 The theorem can also be derived easily from K¨onig’s theorem; see Exercise 5.
+
+2.1 Matching in bipartite graphs
+41
+A1
+A2
+a
+b2
+b1
+B1
+Fig. 2.1.3. B1 contains b2 but not b1
+i = 1, 2 there is a set Ai ✓A containing a such that |Ai| > |Bi| for
+Bi := NH−abi(Ai) (Fig. 2.1.3). Since b1 2 B2 and b2 2 B1,
+|NH(A1 \ A2 r {a})| 6 |B1 \ B2|
+= |B1| + |B2| −|B1 [ B2|
+= |B1| + |B2| −
+..NH(A1 [ A2)|
+6 |A1| −1 + |A2| −1 −|A1 [ A2|
+= |A1 \ A2| −2
+= |A1 \ A2 r {a}| −1 .
+Hence H violates the marriage condition, contrary to assumption.
+⇤
+This last proof has a pretty ‘dual’, which begins by showing that
+dH(b) 6 1 for every b 2 B. See Exercise 6 and its hint for details.
+Corollary 2.1.3. Every k-regular (k > 1) bipartite graph has a 1-factor.
+Proof. If G is k-regular, then clearly |A| = |B|; it thus suﬃces to show by
+Theorem 2.1.2 that G contains a matching of A. Now every set S ✓A
+is joined to N(S) by a total of k |S| edges, and these are among the
+k |N(S)| edges of G incident with N(S). Therefore k |S| 6 k |N(S)|, so
+G does indeed satisfy the marriage condition.
+⇤
+In some real-life applications, matchings are not chosen on the basis
+of global criteria for the entire graph but evolve as the result of inde-
+pendent decisions made locally by the participating vertices. A typical
+situation is that vertices are not indi↵erent to which of their incident
+edges are picked to match them, but prefer some to others. Then if M
+is a matching and e = ab is an edge not in M such that both a and
+b prefer e to their current matching edge (if they are matched), then a
+and b may agree to change M locally by including e and discarding their
+earlier matching edges. The matching M, although perhaps of maximum
+size, would thus be unstable.
+
+42
+2. Matching, Covering and Packing
+More formally, call a family (6v)v 2V of linear orderings 6v on E(v)
+preferences
+a set of preferences for G. Then call a matching M in G stable if for
+every edge e 2 E rM there exists an edge f 2 M such that e and f have
+stable
+matching
+a common vertex v with e <v f. The following result is sometimes called
+the stable marriage theorem; see Exercises 16 and 17 for a discussion of
+alternative proofs.
+Theorem 2.1.4. (Gale & Shapley 1962)
+[5.4.4]
+For every set of preferences, G has a stable matching.
+Proof. Call a matching M in G better than a matching M 0 6= M if M
+makes the vertices in B happier than M 0 does, that is, if every vertex b
+in an edge f 0 2 M 0 is incident also with some f 2 M such that f 0 6b f.
+We shall construct a sequence of better and better matchings. Since
+these can increase the happiness of a ﬁxed vertex b at most d(b) times,
+this process will terminate.
+Given a matching M, call a vertex a 2 A acceptable to b 2 B if
+e = ab 2 E r M and any edge f 2 M at b satisﬁes f <b e. Call a 2 A
+happy with M if a is unmatched or its matching edge f 2 M satisﬁes
+f >a e for all edges e = ab such that a is acceptable to b.
+Starting with the empty matching, let us construct a sequence of
+matchings that keep all the vertices in A happy. Given such a match-
+ing M, consider a vertex a 2 A that is unmatched but acceptable to
+some b 2 B. (If no such a exists, terminate the sequence.) Add to M
+the 6a-maximal edge ab such that a is acceptable to b, and discard from
+M any other edge at b.
+Clearly, each matching in our sequence is better than the previous
+and keeps the vertices in A happy (which they initially are, when M = ;).
+So the sequence continues until it terminates with a matching M such
+that no unmatched vertex in A is acceptable to any of its neighbours
+in B. As every matched vertex in A is happy with M, this matching is
+stable.
+⇤
+Despite its seemingly narrow formulation, the marriage theorem
+counts among the most frequently applied graph theorems, both out-
+side graph theory and within. Often, however, recasting a problem in
+the setting of bipartite matching requires some clever adaptation. As a
+simple example, we now use the marriage theorem to derive one of the
+earliest results of graph theory, a result whose original proof is not all
+that simple, and certainly not short:
+Corollary 2.1.5. (Petersen 1891)
+Every regular graph of positive even degree has a 2-factor.
+
+43
+Proof. Let G be any 2k-regular graph (k > 1), without loss of generality
+(1.8.1)
+connected. By Theorem 1.8.1, G contains an Euler tour v0e0 . . . e`−1v`,
+with v` = v0. We replace every vertex v by a pair (v−, v+), and every
+edge ei = vivi+1 by the edge v+
+i v−
+i+1 (Fig. 2.1.4). The resulting bipartite
+graph G0 is k-regular, so by Corollary 2.1.3 it has a 1-factor. Collapsing
+every vertex pair (v−, v+) back into a single vertex v, we turn this 1-
+factor of G0 into a 2-factor of G.
+⇤
+v
+v−
+v+
+Fig. 2.1.4. Splitting vertices in the proof of Corollary 2.1.5
+2.2 Matching in general graphs
+Given a graph G, let us denote by CG the set of its components, and by
+CG
+q(G) the number of its odd components, those of odd order. If G has a
+q(G)
+1-factor, then clearly
+Tutte’s
+condition
+q(G −S) 6 |S|
+for all S ✓V (G),
+since every odd component of G −S will send a factor edge to S.
+G
+S
+S
+GS
+Fig. 2.2.1. Tutte’s condition q(G −S) 6 |S| for q = 3, and the
+contracted graph GS from Theorem 2.2.3.
+Again, this obvious necessary condition for the existence of a 1-factor
+is also suﬃcient:
+2.2 Matching in general graphs

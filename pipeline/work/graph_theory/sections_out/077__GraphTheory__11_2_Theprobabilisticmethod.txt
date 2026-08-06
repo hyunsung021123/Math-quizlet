@@ -1,0 +1,223 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 11. Random Graphs
+현재 소단원: 11.2 The probabilistic method
+직전 소단원: 「11.1 The notion of a random graph」
+[본문]
+345
+Computing the mean of a random variable X can be a simple and
+e↵ective way to establish the existence of a graph G such that X(G) < a
+for some ﬁxed a > 0 and, moreover, G has some desired property P. In-
+deed, if the expected value of X is small, then X(G) cannot be large for
+more than a few graphs in G(n, p), because X(G) > 0 for all G 2 G(n, p).
+Hence X must be small for many graphs in G(n, p), and it is reasonable
+to expect that among these we may ﬁnd one with the desired property P.
+This simple idea lies at the heart of countless non-constructive exist-
+ence proofs using random graphs, including the proof of Erd˝os’s theorem
+presented in the next section. Quantiﬁed, it takes the form of the fol-
+lowing lemma, whose proof follows at once from the deﬁnition of the
+expectation and the additivity of P:
+Lemma 11.1.5. (Markov’s Inequality)
+[11.2.2]
+[11.4.1]
+[11.4.3]
+Let X > 0 be a random variable on G(n, p) and a > 0. Then
+P [ X > a ] 6 E(X)/a .
+Proof.
+E(X) =
+X
+G2G(n,p)
+P({G}) · X(G) >
+X
+G2G(n,p)
+X(G)>a
+P({G}) · a = P [ X > a ] · a .
+⇤
+11.2 The probabilistic method
+Very roughly, the probabilistic method in discrete mathematics has devel-
+oped from the following idea. In order to prove the existence of an object
+with some desired property, one deﬁnes a probability space on some
+larger – and certainly non-empty – class of objects, and then shows that
+an element of this space has the desired property with positive prob-
+ability. The ‘objects’ inhabiting this probability space may be of any
+kind: partitions or orderings of the vertices of some ﬁxed graph arise as
+naturally as mappings, embeddings and, of course, graphs themselves.
+In this section, we illustrate the probabilistic method by giving a detailed
+account of one of its earliest results: of Erd˝os’s classic theorem on large
+girth and chromatic number (Theorem 5.2.5).
+Erd˝os’s theorem says that, given any positive integer k, there is a
+graph G with girth g(G) > k and chromatic number χ(G) > k. Let us
+call cycles of length at most k short, and sets of |G|/k or more vertices
+short
+big. For a proof of Erd˝os’s theorem, it suﬃces to ﬁnd a graph G without
+big/small
+short cycles and without big independent sets of vertices: then the colour
+classes in any vertex colouring of G are small (not big), so we need more
+than k colours to colour G.
+11.2 The probabilistic method
+
+346
+11. Random Graphs
+How can we ﬁnd such a graph G? If we choose p small enough, then
+a random graph in G(n, p) is unlikely to contain any (short) cycles. If
+we choose p large enough, then G is unlikely to have big independent
+vertex sets. So the question is: do these two ranges of p overlap, that
+is, can we choose p so that, for some n, it is both small enough to give
+P [ g 6 k ] <
+1
+2 and large enough for P [ ↵> n/k ] <
+1
+2 ? If so, then
+G(n, p) will contain at least one graph without either short cycles or big
+independent sets.
+Unfortunately, such a choice of p is impossible: the two ranges of p
+do not overlap! As we shall see in Section 11.4, we must keep p below
+n−1 to make the occurrence of short cycles in G unlikely – but for any
+such p there will most likely be no cycles in G at all (Exercise 18), so G
+will be bipartite and hence have at least n/2 independent vertices.
+But all is not lost. In order to make big independent sets unlikely,
+we shall ﬁx p above n−1, at n✏−1 for some ✏> 0. Fortunately, though,
+if ✏is small enough then this will produce only few short cycles in G,
+even compared with n (rather than, more typically, with nk). If we then
+delete a vertex in each of those cycles, the graph H obtained will have
+no short cycles, and its independence number ↵(H) will be at most that
+of G. Since H is not much smaller than G, its chromatic number will
+thus still be large, so we have found a graph with both large girth and
+large chromatic number.
+To prepare for the formal proof of Erd˝os’s theorem, we ﬁrst show
+that an edge probability of p = n✏−1 is indeed always large enough to
+ensure that G 2 G(n, p) ‘almost surely’ has no big independent set of
+vertices. More precisely, we prove the following stronger assertion:
+Lemma 11.2.1. Let k > 0 be an integer, and let p = p(n) be a function
+of n such that p(n) > 16k2/n for n large. Then
+lim
+n!1 P [ ↵> 1
+2n/k ] = 0 .
+Proof. For all integers n > r > 2 and G 2 G(n, p), Lemma 11.1.2 implies3
+(11.1.2)
+P [ ↵> r ] 6
+✓n
+r
+◆
+q(
+r
+2) 6 2nq(
+r
+2) 6 2ne−p(
+r
+2).
+Hence if p > 16k2/n and r > 1
+2n/k > 2, then
+P [ ↵> r ] 6 2ne−pr2/4 6 2ne−pn2/16k2 6 2ne−n
+!
+n!1 0 .
+As ↵is an integer and thus P [ ↵> r ] = P [ ↵> 1
+2n/k ] for r = d 1
+2n/ke,
+this implies the assertion.
+⇤
+3 To see the second inequality, count the subsets of an n-set. For the third, note
+that 1 −p 6 e−p for all p: compare the functions x 7! ex and x 7! x + 1 for x = −p.
+
+11.2 The probabilistic method
+347
+We are now ready to prove Theorem 5.2.5, which we restate:
+Theorem 11.2.2. (Erd˝os 1959)
+[9.2.3]
+For every integer k there exists a graph H with girth g(H) > k and
+chromatic number χ(H) > k.
+Proof. Assume that k > 3, ﬁx ✏with 0 < ✏< 1/k, and let p := n✏−1. Let
+(11.1.5)
+(11.1.4)
+p, ✏, X
+X(G) denote the number of short cycles in a random graph G 2 G(n, p),
+i.e. its number of cycles of length at most k.
+By Lemma 11.1.4, we have
+E(X) =
+k
+X
+i=3
+(n)i
+2i pi 6 1
+2
+k
+X
+i=3
+nipi 6 1
+2(k −2) nkpk ;
+note that (np)i 6 (np)k, because np = n✏> 1. By Lemma 11.1.5,
+P [ X > n/2 ] 6 E(X)
+8
+(n/2)
+6 (k −2) nk−1pk
+= (k −2) nk−1n(✏−1)k
+= (k −2) nk✏−1.
+As k✏−1 < 0 by our choice of ✏, this implies that
+lim
+n!1 P [ X > n/2 ] = 0 .
+Let n be large enough that P [ X > n/2 ] < 1
+2 and P [ ↵> 1
+2n/k ] < 1
+2;
+n
+the latter is possible by our choice of p and Lemma 11.2.1. Then there is
+a graph G 2 G(n, p) with fewer than n/2 short cycles and ↵(G) < 1
+2n/k.
+From each of those cycles delete a vertex, and let H be the graph ob-
+tained. Then |H| > n/2 and H has no short cycles, so g(H) > k. By
+deﬁnition of G,
+χ(H) >
+|H|
+↵(H) > n/2
+↵(G) > k .
+⇤
+Corollary 11.2.3. There are graphs with arbitrarily large girth and
+arbitrarily large values of the invariants , " and δ.
+Proof.
+Apply Lemma 5.2.3 and Theorem 1.4.3.
+⇤
+(1.4.3)
+(5.2.3)
+
+348
+11. Random Graphs
+11.3 Properties of almost all graphs
+Recall that a graph property is a class of graphs that is closed under
+isomorphism, one that contains with every graph G also the graphs iso-
+morphic to G. If p = p(n) is a ﬁxed function (possibly constant), and P is
+a graph property, we may ask how the probability P [ G 2 P ] behaves for
+G 2 G(n, p) as n ! 1. If this probability tends to 1, we say that G 2 P
+for almost all (or almost every) G 2 G(n, p), or that G 2 P almost surely;
+almost all
+etc.
+if it tends to 0, we say that almost no G 2 G(n, p) has the property P.
+(For example, in Lemma 11.2.1 we proved that, for a certain p, almost
+no G 2 G(n, p) has a set of more than 1
+2n/k independent vertices.)
+To illustrate the new concept let us show that, for constant p, every
+ﬁxed abstract4 graph H is an induced subgraph of almost all graphs:
+Proposition 11.3.1. For every constant p 2 (0, 1) and every graph H,
+almost every G 2 G(n, p) contains an induced copy of H.
+Proof. Let H be given, and k := |H|. If n > k and U ✓{0, . . . , n −1} is
+a ﬁxed set of k vertices of G, then G[U] is isomorphic to H with a certain
+probability r > 0. This probability r depends on p, but not on n (why
+not?). Now G contains a collection of bn/kc disjoint such sets U. The
+probability that none of the corresponding graphs G[U] is isomorphic to
+H is (1 −r)bn/kc, since these events are independent by the disjointness
+of the edges sets [U]2. Thus
+P [ H 6✓G induced ] 6 (1 −r)bn/kc −!
+n!1 0 ,
+which implies the assertion.
+⇤
+The following lemma is a simple device enabling us to deduce that
+quite a number of natural graph properties (including that of Proposi-
+tion 11.3.1) are shared by almost all graphs. Given i, j 2 N, let Pi,j
+Pi,j
+denote the property that the graph considered contains, for any disjoint
+vertex sets U, W with |U| 6 i and |W| 6 j, a vertex v /2 U [ W that is
+adjacent to all the vertices in U but to none in W.
+Lemma 11.3.2. For every constant p 2 (0, 1) and i, j 2 N, almost every
+graph G 2 G(n, p) has the property Pi,j.
+4 The word ‘abstract’ is used to indicate that only the isomorphism type of H is
+known or relevant, not its actual vertex and edge sets. In our context, it indicates
+that the word ‘subgraph’ is used in the usual sense of ‘isomorphic to a subgraph’.

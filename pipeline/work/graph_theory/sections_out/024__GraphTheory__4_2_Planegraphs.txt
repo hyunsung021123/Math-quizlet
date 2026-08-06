@@ -1,0 +1,392 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.2 Plane graphs
+직전 소단원: 「4.1 Topological prerequisites」
+[본문]
+96
+4. Planar Graphs
+X1
+X2
+P
+O
+Fig. 4.1.2. P does not separate the region O of R2 r (X1 [ X2)
+It remains to introduce a few terms and facts that will be used only
+once, when we consider notions of equivalence for graph drawings in
+Chapter 4.3.
+As usual, we denote by Sn the n-dimensional sphere, the set of
+Sn
+points in Rn+1 at distance 1 from the origin. The 2-sphere minus its
+‘north pole’ (0, 0, 1) is homeomorphic to the plane; let us choose a ﬁxed
+such homeomorphism ⇡: S2 r{(0, 0, 1)}!R2 (for example, stereograph-
+⇡
+ic projection). If P ✓R2 is a polygon and O is the bounded region of
+R2 r P, let us call C := ⇡−1(P) a circle on S2, and the sets ⇡−1(O) and
+S2 r ⇡−1(P [ O) the regions of S2 r C.
+Our last tool is the theorem of Jordan and Schoenﬂies, again
+adapted slightly for our purposes:
+Theorem 4.1.4. Let ': C1 !C2 be a homeomorphism between two cir-
+[4.3.1]
+cles on S2, let O1 be a region of S2 rC1, and let O2 be a region of S2 rC2.
+Then ' can be extended to a homeomorphism C1 [ O1 ! C2 [ O2.
+4.2 Plane graphs
+A plane graph is a pair (V, E) of ﬁnite sets with the following properties
+plane
+graph
+(the elements of V are again called vertices, those of E edges):
+(i) V ✓R2;
+(ii) every edge is an arc between two vertices;
+(iii) di↵erent edges have di↵erent sets of endpoints;
+(iv) the interior of an edge contains no vertex and no point of any
+other edge.
+A plane graph (V, E) deﬁnes a graph G on V in a natural way. As long
+as no confusion can arise, we shall use the name G of this abstract graph
+also for the plane graph (V, E), or for the point set V [ S E; similar
+notational conventions will be used for abstract versus plane edges, for
+subgraphs, and so on.1
+1 However, we shall continue to use r for di↵erences of point sets and −for graph
+di↵erences – which may help a little to keep the two apart.
+
+4.2 Plane graphs
+97
+When G is a plane graph, we call the regions of R2 r G the faces
+faces
+of G. These are open subsets of R2 and hence have their frontiers in G.
+Since G is bounded – i.e., lies inside some suﬃciently large disc D –
+exactly one of its faces is unbounded, the face that contains R2 r D.
+This face is the outer face of G; the other faces are its inner faces. We
+denote the set of faces of G by F(G).
+F(G)
+The faces of plane graphs and their subgraphs are related in the
+obvious way:
+Lemma 4.2.1.
+Let G be a plane graph, f 2 F(G) a face, and H ✓G
+[4.4.3]
+a subgraph.
+(i) H has a face f 0 containing f.
+(ii) If the frontier of f lies in H, then f 0 = f.
+Proof. (i) Clearly, the points in f are equivalent also in R2 r H; let f 0
+be the equivalence class of R2 r H containing them.
+(ii) Recall from Section 4.1 that any arc between f and f 0 rf meets
+the frontier X of f. If f 0 r f 6= ; then there is such an arc inside f 0,
+whose points in X do not lie in H. Hence X 6✓H.
+⇤
+In order to lay the foundations for the (easy but) rigorous introduc-
+tion to plane graphs that this section aims to provide, let us descend
+once now into the realm of truly elementary topology of the plane, and
+prove what seems entirely obvious:2 that the frontier of a face of a plane
+graph G is always a subgraph of G – not, say, half an edge.
+The following lemma states this formally, together with two simi-
+larly ‘obvious’ properties of plane graphs:
+Lemma 4.2.2. Let G be a plane graph and e an edge of G.
+[4.5.1]
+[4.5.2]
+[12.7.4]
+(i) If X is the frontier of a face of G, then either e ✓X or X \˚e = ;.
+(ii) If e lies on a cycle C ✓G, then e lies on the frontier of exactly
+two faces of G, and these are contained in distinct faces of C.
+(iii) If e lies on no cycle, then e lies on the frontier of exactly one face
+of G.
+Proof. We prove all three assertions together. Let us start by considering
+(4.1.1)
+(4.1.3)
+one point x0 2 ˚e. We show that x0 lies on the frontier of either exactly
+two faces or exactly one, according as e lies on a cycle in G or not. We
+then show that every other point in ˚e lies on the frontier of exactly the
+same faces as x0. Then the endpoints of e will also lie on the frontier of
+2 Note that even the best intuition can only ever be ‘accurate’, i.e., coincide with
+what the technical deﬁnitions imply, inasmuch as those deﬁnitions do indeed formal-
+ize what is intuitively intended. Given the complexity of deﬁnitions in elementary
+topology, this can hardly be taken for granted.
+
+98
+4. Planar Graphs
+these faces – simply because every neighbourhood of an endpoint of e is
+also the neighbourhood of an inner point of e.
+Since Gr˚e is compact, we can ﬁnd around every point x 2 ˚e an open
+disc Dx that meets G only in those (one or two) straight line segments
+Dx
+that contain x.
+Let us pick an inner point x0 from a straight line segment S ✓e.
+x0, S
+Then Dx0 \G = Dx0 \S, so Dx0 rG is the union of two open half-discs.
+Since these half-discs do not meet G, they each lie in a face of G. Let
+us denote these faces by f1 and f2; they are the only faces of G with x0
+f1, f2
+on their frontier, and they may coincide (Fig. 4.2.1).
+f1
+f2
+x0
+Dx0
+e
+S
+Fig. 4.2.1. Faces f1, f2 of G in the proof of Lemma 4.2.2
+If e lies on a cycle C ✓G, then Dx0 meets both faces of C (Theo-
+rem 4.1.1). Since f1 and f2 are contained in faces of C by Lemma 4.2.1,
+this implies f1 6= f2. If e does not lie on any cycle, then e is a bridge
+and thus links two disjoint point sets X1, X2 as in Lemma 4.1.3, with
+X1 [ X2 = G r˚e. Clearly, f1 [˚e [ f2 is the subset of a face f of G −e.
+By Lemma 4.1.3, f r˚e is a face of G, while f1, f2 ✓f r˚e by deﬁnition
+of f. Since f1 and f2 are also faces of G, this implies f1 = f r˚e = f2.
+Now consider any other point x1 2 ˚e. Let P be the arc from x0 to
+x1
+x1 contained in e. Since P is compact, ﬁnitely many of the discs Dx
+P
+with x 2 P cover P. Let us enumerate these discs as D0, . . . , Dn in the
+D0, . . . , Dn
+natural order of their centres along P; adding Dx0 or Dx1 as necessary,
+we may assume that D0 = Dx0 and Dn = Dx1. By induction on n, one
+easily proves that every point y 2 Dn r e can be linked by an arc inside
+y
+(D0 [ . . . [ Dn) r e to a point z 2 D0 r e (Fig. 4.2.2); then y and z are
+z
+equivalent in R2 r G. Hence, every point of Dn r e lies in f1 or in f2, so
+x1 cannot lie on the frontier of any other face of G. Since both half-discs
+of D0 r e can be linked to Dn r e in this way (swap the roles of D0
+and Dn), we ﬁnd that x1 lies on the frontier of both f1 and f2.
+⇤
+x0
+x1
+y
+z
+P
+e
+D0
+Dn
+Fig. 4.2.2. An arc from y to D0, close to P
+Corollary 4.2.3. The frontier of a face is always the point set of a
+subgraph.
+⇤
+
+4.2 Plane graphs
+99
+The subgraph of G whose point set is the frontier of a face f is said
+to bound f and is called its boundary; we denote it by G[f]. A face
+boundary
+is said to be incident with the vertices and edges of its boundary. By
+G[f]
+Lemma 4.2.1 (ii), every face of G is also a face of its boundary; we shall
+use this fact frequently in the proofs to come.
+Proposition 4.2.4. A plane forest has exactly one face.
+[4.6.1]
+Proof. Use induction on the number of edges and Lemma 4.1.3.
+⇤
+(4.1.3)
+With just one exception, di↵erent faces of a plane graph have dif-
+ferent boundaries:
+Lemma 4.2.5. If a plane graph has di↵erent faces with the same bound-
+[4.3.1]
+ary, then the graph is a cycle.
+Proof. Let G be a plane graph, and let H ✓G be the boundary of distinct
+(4.1.1)
+faces f1, f2 of G. Since f1 and f2 are also faces of H, Proposition 4.2.4
+implies that H contains a cycle C. By Lemma 4.2.2 (ii), f1 and f2 are
+contained in di↵erent faces of C. Since f1 and f2 both have all of H
+as boundary, this implies that H = C: any further vertex or edge of H
+would lie in one of the faces of C and hence not on the boundary of the
+other. Thus, f1 and f2 are distinct faces of C. As C has only two faces,
+it follows that f1 [ C [ f2 = R2 and hence G = C.
+⇤
+Proposition 4.2.6. In a 2-connected plane graph, every face is bounded
+[4.3.1]
+[4.4.3]
+[4.5.1]
+[4.5.2]
+by a cycle.
+Proof. Let f be a face in a 2-connected plane graph G. We show by
+(3.1.1)
+(4.1.1)
+(4.1.2)
+induction on kGk that G[f] is a cycle. If G is itself a cycle, this holds
+by Theorem 4.1.1; we therefore assume that G is not a cycle.
+By Proposition 3.1.1, there exist a 2-connected plane graph H ✓G
+H
+and a plane H-path P such that G = H [ P. The interior of P lies in a
+P
+face f 0 of H, which by the induction hypothesis is bounded by a cycle C.
+f0, C
+If G[f] ✓H, then f is also a face of H (Lemma 4.2.1 (ii)), and we are
+home by the induction hypothesis. If G[f] 6✓H, then G[f] meets P rH,
+so f ✓f 0 and G[f] ✓C [ P (why?). By Lemma 4.2.1 (ii), then, f is a
+face of C [ P and hence bounded by a cycle (Lemma 4.1.2 (i)).
+⇤
+In a 3-connected graph, we can identify the face boundaries among
+the other cycles in purely combinatorial terms:
+Proposition 4.2.7. The face boundaries in a 3-connected plane graph
+[4.3.2]
+[4.5.2]
+are precisely its non-separating induced cycles.
+
+100
+4. Planar Graphs
+Proof. Let G be a 3-connected plane graph, and let C ✓G. If C is a non-
+(3.3.6)
+(4.1.1)
+(4.1.2)
+separating induced cycle, then by the Jordan curve theorem its two faces
+cannot both contain points of G r C. Therefore it bounds a face of G.
+Conversely, suppose that C bounds a face f. By Proposition 4.2.6,
+C, f
+C is a cycle. If C has a chord e = xy, then the components of C −{x, y}
+are linked by a C-path in G, because G is 3-connected. This path and
+e both run through the other face of C (not f) but do not intersect,
+a contradiction to Lemma 4.1.2 (ii).
+It remains to show that C does not separate any two vertices
+x, y 2 G −C. By Menger’s theorem (3.3.6), x and y are linked in G
+by three independent paths. By Lemma 4.2.1 (i), f lies inside a face of
+their union, and by Lemma 4.1.2 (i) this face is bounded by only two of
+the paths. The third therefore avoids f and its boundary C.
+⇤
+A plane graph G is called maximally plane, or just maximal, if we
+maximal
+plane graph
+cannot add a new edge to form a plane graph G0 ) G with V (G0) = V (G).
+We call G a plane triangulation if every face of G (including the outer
+plane
+triangulation face) is bounded by a triangle.
+Proposition 4.2.8. A plane graph of order at least 3 is maximally plane
+[4.4.1]
+[5.4.2]
+if and only if it is a plane triangulation.
+Proof. Let G be a plane graph of order at least 3. It is easy to see that
+(4.1.2)
+if every face of G is bounded by a triangle, then G is maximally plane.
+Indeed, any additional edge e would have its interior inside a face of G
+and its ends on the boundary of that face. Hence these ends are already
+adjacent in G, so G [ e cannot satisfy condition (iii) in the deﬁnition of
+a plane graph.
+Conversely, assume that G is maximally plane and let f 2 F(G) be
+f
+a face; let us write H := G[f]. Since G is maximal as a plane graph,
+H
+G[H] is complete: any two vertices of H that are not already adjacent
+in G could be linked by an arc through f, extending G to a larger plane
+graph. Thus G[H] = Kn for some n – but we do not know yet which
+n
+edges of G[H] lie in H.
+Let us show ﬁrst that H contains a cycle. If not, then G r H 6= ;:
+by G ◆Kn if n > 3, or else by |G| > 3. On the other hand we have
+f [ H = R2 by Proposition 4.2.4 and hence G = H, a contradiction.
+Since H contains a cycle, it suﬃces to show that n 6 3: then H = K3
+as claimed. Suppose n > 4, and let C = v1v2v3v4v1 be a cycle in G[H]
+C, vi
+(= Kn). By C ✓G, our face f is contained in a face fC of C; let f 0
+C
+be the other face of C. Since the vertices v1 and v3 lie on the boundary
+fC, f0
+C
+of f, they can be linked by an arc whose interior lies in fC and avoids G.
+Hence by Lemma 4.1.2 (ii), the plane edge v2v4 of G[H] runs through f 0
+C
+rather than fC (Fig. 4.2.3). Analogously, since v2, v4 2 G[f], the edge
+v1v3 runs through f 0
+C. But the edges v1v3 and v2v4 are disjoint, so this
+contradicts Lemma 4.1.2 (ii).
+⇤
+
+4.2 Plane graphs
+101
+f 0
+C
+v1
+C
+v2
+v3
+v4
+fC
+
+f
+Fig. 4.2.3. The edge v2v4 of G runs through the face f 0
+C
+The following classic result of Euler (1752) – here stated in its sim-
+plest form, for the plane – marks one of the common origins of graph
+theory and topology. The theorem relates the number of vertices, edges
+and faces in a plane graph: taken with the correct signs, these numbers
+always add up to 2. The general form of Euler’s theorem asserts the same
+for graphs suitably embedded in other surfaces, too: the sum obtained
+is always a ﬁxed number depending only on the surface, not on the
+graph, and this number di↵ers for distinct (orientable closed) surfaces.
+Hence, any two such surfaces can be distinguished by a simple arithmetic
+invariant of the graphs embedded in them!3
+Let us then prove Euler’s theorem in its simplest form:
+Theorem 4.2.9. (Euler’s Formula)
+Let G be a connected plane graph with n vertices, m edges, and ` faces.
+Then
+n −m + ` = 2 .
+Proof. We ﬁx n and apply induction on m. For m 6 n −1, G is a tree
+(1.5.1)
+(1.5.2)
+and m = n −1 (why?), so the assertion follows from Proposition 4.2.4.
+Now let m > n. Then G has an edge e that lies on a cycle; let
+e
+G0 := G −e. By Lemma 4.2.2 (ii), e lies on the boundary of exactly two
+G0
+faces f1, f2 of G, and as the points in ˚e are all equivalent in R2 r G0,
+f1, f2
+there is a face fe of G0 containing ˚e. We show that
+fe
+F(G) r {f1, f2} = F(G0) r {fe} ;
+(⇤)
+then G0 has exactly one face and one edge less than G, and so the
+assertion follows from the induction hypothesis for G0.
+For a proof of (⇤) let ﬁrst f 2 F(G) r {f1, f2} be given. By Lemma
+4.2.2 (i) we have G[f] ✓G r˚e = G0, and hence f 2 F(G0) by Lemma
+4.2.1 (ii). As clearly f 6= fe, this establishes the forward inclusion in (⇤).
+Conversely, consider any face f 0 2 F(G0)r{fe}. Clearly f 0 6= f1, f2,
+and f 0 \ ˚e = ;.
+Hence every two points of f 0 lie in R2 r G and are
+3 This fundamental connection between graphs and surfaces lies at the heart of
+the proof of the famous Robertson-Seymour graph minor theorem; see Chapter 12.7.
+
+102
+4. Planar Graphs
+equivalent there, so G has a face f containing f 0. By Lemma 4.2.1 (i),
+however, f lies inside a face f 00 of G0. Thus f 0 ✓f ✓f 00 and hence
+f 0 = f = f 00, since both f 0 and f 00 are faces of G0.
+⇤
+Corollary 4.2.10. A plane graph with n > 3 vertices has at most 3n−6
+[4.4.1]
+[5.1.2]
+[7.3.5]
+edges. Every plane triangulation with n vertices has 3n −6 edges.
+Proof. By Proposition 4.2.8 it suﬃces to prove the second assertion. In a
+plane triangulation G, every face boundary contains exactly three edges,
+and every edge lies on the boundary of exactly two faces (Lemma 4.2.2).
+The bipartite graph on E(G)[F(G) with edge set { ef | e ✓G[f] } thus
+has exactly 2 |E(G)| = 3 |F(G)| edges. According to this identity we may
+replace ` with 2m/3 in Euler’s formula, and obtain m = 3n −6.
+⇤
+Euler’s formula can be useful for showing that certain graphs cannot
+occur as plane graphs. The graph K5, for example, has 10 > 3 · 5 −6
+edges, more than allowed by Corollary 4.2.10. Similarly, K3,3 cannot be
+a plane graph. For since K3,3 is 2-connected but contains no triangle,
+every face of a plane K3,3 would be bounded by a cycle of length > 4
+(Proposition 4.2.6).
+As in the proof of Corollary 4.2.10 this implies
+2m > 4`, which yields m 6 2n −4 when substituted in Euler’s formula.
+But K3,3 has 9 > 2 · 6 −4 edges.
+Clearly, along with K5 and K3,3 themselves, their subdivisions can-
+not occur as plane graphs either:
+Corollary 4.2.11. A plane graph contains neither K5 nor K3,3 as a
+[4.4.5]
+[4.4.6]
+[5.1.2]
+topological minor.
+⇤
+Surprisingly, it turns out that this simple property of plane graphs iden-
+tiﬁes them among all other graphs: as Section 4.4 will show, an arbitrary
+graph can be drawn in the plane if and only if it has no (topological) K5
+or K3,3 minor.
+4.3 Drawings
+An embedding in the plane, or planar embedding, of an (abstract) graph
+planar
+embedding
+G is an isomorphism between G and a plane graph H. The latter will be
+called a drawing of G. We shall not always distinguish notationally be-
+drawing
+tween the vertices and edges of G and of H. In this section we investigate
+how two planar embeddings of a graph can di↵er.
+How should we measure the likeness of two embeddings %: G ! H
+and %0: G ! H0 of a planar graph G? An obvious way to do this is to
+consider the canonical isomorphism σ := %0 ◦%−1 between H and H0
+as abstract graphs, and ask how much of their position in the plane

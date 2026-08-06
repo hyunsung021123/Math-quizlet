@@ -1,0 +1,397 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 5. Colouring
+현재 소단원: 5.5 Perfect graphs
+직전 소단원: 「5.4 List colouring」
+[본문]
+139
+ee0 of H is directed from e to e0 in D. Then any stable matching in the
+graph (X [ Y, V (D0)) for this set of preferences is a kernel in D0.
+⇤
+By Proposition 5.3.1, we now know the exact list-chromatic index
+(5.3.1)
+of bipartite graphs:
+Corollary 5.4.5. Every bipartite graph G satisﬁes ch0(G) = ∆(G).
+⇤
+5.5 Perfect graphs
+As discussed in Section 5.2, a high chromatic number may occur as a
+purely global phenomenon: even when a graph has large girth, and thus
+locally looks like a tree, its chromatic number may be arbitrarily high.
+Since such ‘global dependence’ is obviously diﬃcult to deal with, one may
+become interested in graphs where this phenomenon does not occur, i.e.
+whose chromatic number is high only when there is a local reason for it.
+Before we make this precise, let us deﬁne two new invariants for
+a graph G.
+The greatest integer r such that Kr ✓G is the clique
+number !(G) of G. The greatest size of a set of independent vertices
+!(G)
+in G is the independence number ↵(G) of G. Clearly, ↵(G) = !(G) and
+↵(G)
+!(G) = ↵(G).
+A graph is called perfect if every induced subgraph H ✓G has
+perfect
+chromatic number χ(H) = !(H), i.e. if the trivial lower bound of !(H)
+colours always suﬃces to colour the vertices of H. Thus, while proving
+an assertion of the form χ(G) > k may in general be diﬃcult, even
+in principle, for a given graph G, it can always be done for a perfect
+graph simply by exhibiting some Kk+1 subgraph as a ‘certiﬁcate’ for
+non-colourability with k colours.
+At ﬁrst glance, the structure of the class of perfect graphs appears
+somewhat contrived: although it is closed under induced subgraphs (if
+only by explicit deﬁnition), it is not closed under taking general sub-
+graphs or supergraphs, let alone minors (examples?).
+However, per-
+fection is an important notion in graph theory: the fact that several
+fundamental classes of graphs are perfect (as if by ﬂuke) may serve as a
+superﬁcial indication of this.2
+What graphs, then, are perfect? Bipartite graphs are, for instance.
+Less trivially, the complements of bipartite graphs are perfect, too –
+a fact equivalent to K¨onig’s duality theorem 2.1.1 (Exercise 41). The
+2 The class of perfect graphs has duality properties with deep connections to
+optimization and complexity theory, which are far from understood. Theorem 5.5.6
+shows the tip of an iceberg here; for more, the reader is referred to Lov´asz’s survey
+cited in the notes.
+5.5 Perfect graphs
+
+140
+5. Colouring
+so-called comparability graphs are perfect, and so are the interval graphs
+(see the exercises); both these turn up in numerous applications.
+In order to study at least one such example in some detail, we prove
+here that the chordal graphs are perfect: a graph is chordal (or trian-
+chordal
+gulated) if each of its cycles of length at least 4 has a chord, i.e. if it
+contains no induced cycles other than triangles.
+To show that chordal graphs are perfect, we shall ﬁrst characterize
+their structure. If G is a graph with induced subgraphs G1, G2 and S,
+such that G = G1 [ G2 and S = G1 \ G2, we say that G arises from G1
+and G2 by pasting these graphs together along S.
+pasting
+Proposition 5.5.1. A graph is chordal if and only if it can be con-
+[12.3.6]
+structed recursively by pasting along complete subgraphs, starting from
+complete graphs.
+Proof. If G is obtained from two chordal graphs G1, G2 by pasting them
+together along a complete subgraph, then G is clearly again chordal:
+any induced cycle in G lies in either G1 or G2, and is hence a triangle
+by assumption. Since complete graphs are chordal, this proves that all
+graphs constructible as stated are chordal.
+Conversely, let G be a chordal graph. We show by induction on |G|
+that G can be constructed as described. This is trivial if G is complete.
+We therefore assume that G is not complete, in particular that |G| > 1,
+and that all smaller chordal graphs are constructible as stated.
+Let
+a, b 2 G be two non-adjacent vertices, and let X ✓V (G) r {a, b} be a
+a, b, X
+minimal a–b separator. Let C denote the component of G −X contain-
+C
+ing a, and put G1 := G[V (C) [ X] and G2 := G −C. Then G arises
+G1, G2
+from G1 and G2 by pasting these graphs together along S := G[X].
+S
+a
+b
+S
+G1
+G2
+P1
+P2
+s
+t
+Fig. 5.5.1. If G1 and G2 are chordal, then so is G
+Since G1 and G2 are both chordal (being induced subgraphs of G)
+and hence constructible by induction, it suﬃces to show that S is com-
+plete. Suppose, then, that s, t 2 S are non-adjacent. By the minimality
+s, t
+of X = V (S) as an a–b separator, both s and t have a neighbour in C.
+Hence, there is an X-path from s to t in G1; we let P1 be a shortest such
+
+141
+path. Analogously, G2 contains a shortest X-path P2 from s to t. But
+then P1 [P2 is a chordless cycle of length > 4 (Fig. 5.5.1), contradicting
+our assumption that G is chordal.
+⇤
+Proposition 5.5.2. Every chordal graph is perfect.
+Proof. Since complete graphs are perfect, it suﬃces by Proposition 5.5.1
+to show that any graph G obtained from perfect graphs G1, G2 by past-
+ing them together along a complete subgraph S is again perfect. So let
+H ✓G be an induced subgraph; we show that χ(H) 6 !(H).
+Let Hi := H \ Gi for i = 1, 2, and let T := H \ S. Then T is
+again complete, and H arises from H1 and H2 by pasting along T. As
+an induced subgraph of Gi, each Hi can be coloured with !(Hi) colours.
+Since T is complete and hence coloured injectively, two such colourings,
+one of H1 and one of H2, may be combined into a colouring of H with
+max {!(H1), !(H2)} 6 !(H) colours – if necessary by permuting the
+colours in one of the Hi.
+⇤
+By deﬁnition, every induced subgraph of a perfect graph is again
+perfect. The property of perfection can therefore be characterized by
+forbidden induced subgraphs: there exists a set H of imperfect graphs
+such that any graph is perfect if and only if it has no induced subgraph
+isomorphic to an element of H. (For example, we may choose as H the
+set of all imperfect graphs with vertices in N.)
+Naturally, one would like to keep H as small as possible. It is one of
+the deepest results in graph theory that H need only contain two types of
+graph: the odd cycles of length > 5 and their complements. (Neither of
+these are perfect; cf. Theorem 5.5.4 below.) This fact, the famous strong
+perfect graph conjecture of Berge (1963), was proved only 40 years later:
+Theorem 5.5.3. (Chudnovsky, Robertson, Seymour & Thomas 2006)
+strong
+perfect
+graph
+theorem
+A graph G is perfect if and only if neither G nor G contains an odd cycle
+of length at least 5 as an induced subgraph.
+In the context of perfect graphs, induced cycles of length at least 4 in G
+are usually referred to as holes in G, while holes in G are antiholes of G.
+hole
+antihole
+In this jargon, the strong perfect graph theorem says that a graph is
+perfect if and only if it has neither odd holes nor odd antiholes.
+The proof of the strong perfect graph theorem is long and techni-
+cal, and it would not be too illuminating to attempt to sketch it. Its
+overall design is not unlike our proof that chordal graphs are perfect:
+it decomposes the graph under consideration into simpler pieces, which
+are shown to be perfect ﬁrst, in ways that preserve perfection when the
+pieces are put back together – much as the decomposition along complete
+subgraphs did in the case of chordal graphs.
+5.5 Perfect graphs
+
+142
+5. Colouring
+To shed more light on the notion of perfection, we instead give
+two direct proofs of its most important consequence: the perfect graph
+theorem, formerly Berge’s weak perfect graph conjecture:
+Theorem 5.5.4. (Lov´asz 1972)
+perfect
+graph
+theorem
+A graph is perfect if and only if its complement is perfect.
+We give two proofs for Theorem 5.5.4. The ﬁrst is based on ideas from
+Lov´asz’s original proof. The second is a magical linear algebra proof,
+due to Gasparian (1996), of a slightly stronger theorem of Lov´asz’s.
+The ﬁrst proof of Theorem 5.5.4 is based on a crucial lemma. Let
+G be a graph and x 2 G a vertex, and let G0 be obtained from G by
+adding a vertex x0 and joining it to x and all the neighbours of x. We say
+that G0 is obtained from G by replicating the vertex x to the pair {x, x0}
+replicating
+a vertex
+(Fig. 5.5.2).
+X r { x }
+x
+0
+G0
+x
+G
+H
+Fig. 5.5.2. Replicating the vertex x in the proof of Lemma 5.5.5
+Lemma 5.5.5. (Replication Lemma)
+Any graph obtained from a perfect graph by replicating a vertex is again
+perfect.
+Proof. We use induction on the order of the perfect graph considered.
+Replicating the vertex of K1 yields K2, which is perfect. For the induc-
+tion step, let G be a non-trivial perfect graph, and let G0 be obtained
+from G by replicating a vertex x 2 G to a pair {x, x0}. For our proof
+x, x0
+that G0 is perfect it suﬃces to show χ(G0) 6 !(G0). Indeed, every proper
+induced subgraph H0 of G0 is either isomorphic to an induced subgraph
+H of G and hence perfect by assumption, or it is obtained from a proper
+induced subgraph of G by replicating x and hence perfect by the induc-
+tion hypothesis. Either way, it can be coloured with !(H0) colours.
+Let !(G) =: ! ; then !(G0) 2 {!, ! + 1}. If !(G0) = ! + 1, then
+!
+χ(G0) 6 χ(G) + 1 = ! + 1 = !(G0)
+and we are done. So let us assume that !(G0) = !. Then x lies in no
+K! ✓G: together with x0, this would yield a K!+1 in G0. Let us colour
+G with ! colours. Since every K! ✓G meets the colour class X of x but
+X
+
+5.5 Perfect graphs
+143
+not x itself, the graph H := G−(X r{x}) has clique number !(H) < !
+H
+(Fig. 5.5.2). Since G is perfect, we may thus colour H with ! −1 colours.
+Now X is independent, so the set (X r {x}) [ {x0} = V (G0 −H) is also
+independent. We can therefore extend our (! −1)-colouring of H to an
+!-colouring of G0, showing that χ(G0) 6 ! = !(G0) as desired.
+⇤
+Interestingly, while replicating a vertex preserves perfection, it does
+not preserve the property of χ = ! if this holds only for the graph itself:
+we need that all induced subgraphs have this property too (Exercise 47).
+Proof of Theorem 5.5.4. Given a perfect graph G, let us show that G is
+perfect too. We prove the following statement ﬁrst:
+Every induced subgraph H of G has a complete subgraph
+K that meets all its independent vertex sets of size ↵(H).
+(⇤)
+For our proof of (⇤), let A be the set of all independent vertex sets
+A
+of size ↵(H) in H. Let A0 = { A0 | A 2 A } be a set of disjoint copies
+A0
+of the sets in A, one new set A0 for each A 2 A, and let U := S A0 be
+their disjoint union. For every vertex v of H write Uv for the set of its
+Uv
+clones in U, one in each A0 with v 2 A.3 These sets Uv may be empty,
+but every vertex of H0 lies in some Uv.
+Deﬁne a graph H0 on U by making Uv complete for every v 2 H,
+H0
+and adding all Uu −Uv edges whenever uv is an edge of H. The sets
+A0 2 A0 are independent in H0, because the A 2 A are independent in H.
+And H0 contains no larger independent sets than these A0. Indeed, any
+independent set in H0 meets each Uv in at most one vertex; the ver-
+tices v whose Uv it meets are independent in H, so there are at most
+↵(H) = |A0| such v; and H0 has no vertices outside the sets Uv. Since
+the A0 are disjoint and all have the same size, the fact that H0 contains
+no larger independent sets than these implies that it cannot be coloured
+with fewer than |A0| colours. Thus, χ(H0) = |A0|.
+Since H0 arises from an induced subgraph of H by vertex replication,
+Lemma 5.5.5 implies that it is perfect. It thus has a complete subgraph
+K0 of order χ(H0). As χ(H0) = |A0| and K0 has at most one vertex in
+each A0, it meets every A0 2 A0.
+Let K be the subgraph of H induced by the vertices v for which K0
+meets Uv. This is a complete subgraph of H that meets every A 2 A,
+because K0 meets every A0 2 A0. This completes the proof of (⇤).
+Let us now show that G is perfect. Expressed in terms of G, we
+have to show that we can cover the vertices of any induced subgraph H
+of G by at most ↵(H) complete subgraphs K of H. These can be found
+inductively by ↵(H) applications of (⇤), since ↵(H −K) < ↵(H) if
+K ✓H satisﬁes (⇤).
+⇤
+3 This can be expressed formally by letting A0 := { (v, A) | v 2 A } for every A 2 A,
+and Uv := { (v, A) | v 2 A 2 A } = { (v, A) 2 A0 | A 2 A } for every v 2 V (H).
+
+144
+5. Colouring
+The proof of the perfect graph theorem ist best understood if we
+start from the last paragraph: once we have shown (⇤), the proof that
+G is perfect is easy.
+The existence of a complete graph K as in (⇤) follows at once from
+the perfection of H if the sets in A provide an optimal colouring of H: if
+they cover its vertices and |A| 6 χ(H). The ﬁrst of these requirements,
+however, is immaterial. We can just replace H with its subgraph induced
+by those of its vertices that are covered by A : that subgraph, too, will
+be perfect, and any K found in it will satisfy (⇤) also for the original H.
+So assuming that A covers H, how can we prove that a colouring it
+induces is optimal? This would be immediate if the A 2 A were disjoint:
+since they all have the same size, any colouring with fewer colours would
+need a larger colour class, which does not exist since the sets in A have
+size ↵(H). The trick, now, is simply to make the sets in A disjoint, as is
+done ﬁrst thing in the proof of (⇤). The obvious way to copy the structure
+of H to the enlarged vertex set without creating any larger independent
+sets, then, is to endow it with the edges as in the deﬁnition of H0 in the
+proof. This, in turn, motivates the notion of vertex replication.
+All we need to complete the proof now is that the expanded graph H0
+is again perfect. This is Lemma 5.5.5.
+Since the following characterization of perfection is symmetrical in
+G and G, it clearly implies Theorem 5.5.4. As our proof of Theorem
+5.5.6 will again be from ﬁrst principles, we thus obtain a second and
+independent proof of the perfect graph theorem.
+Theorem 5.5.6. (Lov´asz 1972)
+A graph G is perfect if and only if
+|H| 6 ↵(H) · !(H)
+(⇤)
+for all induced subgraphs H ✓G.
+Proof.
+Let us write V (G) =: {v1, . . . , vn}, and put ↵:= ↵(G) and
+vi, n
+! := !(G). The necessity of (⇤) is immediate: if G is perfect, then every
+↵, !
+induced subgraph H of G can be partitioned into at most !(H) colour
+classes each containing at most ↵(H) vertices, and (⇤) follows.
+To prove suﬃciency, we apply induction on n = |G|. Assume that
+every induced subgraph H of G satisﬁes (⇤), and suppose that G is not
+perfect. By the induction hypothesis, every proper induced subgraph
+of G is perfect. Hence, every non-empty independent set U ✓V (G)
+satisﬁes
+χ(G −U) = !(G −U) = ! .
+(1)
+Indeed, while the ﬁrst equality is immediate from the perfection of G−U,
+the second is easy: ‘6’ is obvious, while χ(G −U) < ! would imply
+χ(G) 6 !, so G would be perfect contrary to our assumption.
+
+5.5 Perfect graphs
+145
+Let us apply (1) to a singleton U = {u} and consider an !-colouring
+of G −u. Let K be the vertex set of any K! in G. Clearly,
+if u /2 K then K meets every colour class of G −u;
+(2)
+if u 2 K then K meets all but exactly one colour class of G −u.
+(3)
+Let A0 = {u1, . . . , u↵} be an independent set in G of size ↵.
+A0
+Let A1, . . . , A! be the colour classes of an !-colouring of G −u1, let
+A!+1, . . . , A2! be the colour classes of an !-colouring of G −u2, and
+so on; altogether, this gives us ↵! + 1 independent sets A0, A1, . . . , A↵!
+Ai
+in G. For each i = 0, . . . , ↵!, there exists by (1) a K! ✓G −Ai; we
+denote its vertex set by Ki.
+Ki
+Note that if K is the vertex set of any K! in G, then
+K \ Ai = ; for exactly one i 2 {0, . . . , ↵!}.
+(4)
+Indeed, if K \ A0 = ; then K \ Ai 6= ; for all i 6= 0, by deﬁnition of Ai
+and (2). Similarly if K \ A0 6= ;, then |K \ A0| = 1, so K \ Ai = ; for
+exactly one i 6= 0: apply (3) to the unique vertex u 2 K \ A0, and (2)
+to all the other vertices u 2 A0.
+Let A = (aij) be the real (↵! + 1) ⇥n matrix whose rows are the
+A
+incidence vectors of the sets Ai with V (G): where aij = 1 if vj 2 Ai, and
+aij = 0 otherwise. Similarly, let B denote the real n ⇥(↵! + 1) matrix
+B
+whose columns are the incidence vectors of the sets Kj with V (G). Now
+while |Ai \ Ki| = 0 for all i by the choice of Ki, we have Ai \ Kj 6= ;
+and hence |Ai \ Kj| = 1 whenever i 6= j, by (4). Thus,
+J := AB
+is the (↵! + 1) ⇥(↵! + 1) matrix with zero entries in the main diagonal
+and all other entries 1.
+It is easy to see that J is non-singular, and hence has rank ↵! + 1.
+But A, which has n columns, cannot have lower rank than J. Hence
+n > ↵! + 1, which contradicts (⇤) for H := G.
+⇤
+
+146
+5. Colouring
+5.6 χ-bounded graph properties
+Our motivation for considering perfect graphs in the last section was
+that high chromaticity is easier to understand for these graphs than in
+general: if a perfect graph has chromatic number at least r, it has a local
+reason for this in the form of a Kr subgraph. It turned out that perfec-
+tion has structural implications far beyond this. We may ask, therefore,
+whether graph properties deﬁned by a slightly weaker condition might
+still imply some interesting structure for the graphs that have them.
+Consider any graph property G which, like perfection, is closed un-
+der taking induced subgraphs: a class that contains all induced sub-
+graphs of its elements. We call G χ-bounded if there exists a function
+χ-bounded
+f: N ! N, called a χ-bounding function, such that χ(G) 6 f(r) for all
+χ-bounding
+graphs G 2 G of clique number !(G) 6 r, for all r 2 N. In particular,
+then, χ(G) 6 f(!(G)); but note that for individual functions f this
+is a weaker condition. Perfection, for example, is χ-bounded with χ-
+bounding function f(r) = r.
+Qualitatively, graphs in a χ-bounded class G have complete sub-
+graphs as large as desired as soon as their chromatic number is big
+enough: that is the idea behind the notion of χ-boundedness. Quanti-
+tatively, if f is a χ-bounding function for G, then any G
+2 G with
+χ(G) > f(r) contains a Kr+1, for every r 2 N.
+Not all graph classes that are closed under taking induced subgraphs
+are χ-bounded: the triangle-free graphs, for example, are not, by Erd˝os’s
+Theorem 5.2.5. So which classes are?
+Every graph property G that is closed under induced subgraphs is
+characterized by the class H of graphs that are not in G and are minimal
+with this property under the induced-subgraph relation: an arbitrary
+graph G lies in G if and only if it has no induced subgraph in H. One
+way to search for χ-bounded graph properties, therefore, is to examine
+those characterized in this way by some particularly simple classes H.
+The strong perfect graph theorem implies that G is χ-bounded when
+H consists of all odd holes and antiholes. But since χ-boundedness is
+weaker than perfection, we can make H smaller, thereby making G larger:
+Theorem 5.6.1. (Scott & Seymour 2016)
+The graphs with no odd hole are χ-bounded.
+Theorem 5.6.1 is one of the earliest results of its kind proved in the
+wake of the strong perfect graph theorem. It has since been strength-
+ened in various ways, see the notes. The notion of χ-boundedness itself
+is much older. It was introduced by Gy´arf´as in 1975, who later proved
+the following pretty result:
+Proposition 5.6.2. If P is any ﬁxed path, then the graphs not con-
+taining P as an induced subgraph are χ-bounded.

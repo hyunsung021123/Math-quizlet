@@ -1,0 +1,152 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 2. Matching, Covering and Packing
+현재 소단원: 2.5 Path covers
+직전 소단원: 「2.4 Tree packing and arboricity」
+[본문]
+54
+2. Matching, Covering and Packing
+For the theorem’s packing assertion, let U
+2 P be given. For all
+j = 1, . . . , k let Sj be the subgraph of Tj induced on U by its edges in D.
+These forests Sj are edge-disjoint, since by the maximality of E(T ) and
+Lemma 2.4.5 no edge in D lies in more than one Tj. Let us show that
+the Sj are connected.
+Since the edges from D form a connected submultigraph on U, it
+suﬃces to show that for every edge uu0 2 D with u, u0 2 U there is a
+u–u0 path in Sj. This is clear if uu0 lies in Tj, and hence in Sj. If it
+does not, then the path uTju0 still has all its edges e in D, and hence lies
+in Sj: if e0, . . . , en is an exchange chain witnessing that e0 = uu0 2 D,
+then e, e0, . . . en is an exchange chain putting e in D, because e lies on
+the fundamental cycle of e0 with respect to Tj.
+As every Tj induces connected subgraphs Sj on the partition classes
+of P, contracting these Sj turns the Tj into spanning trees T 0
+j of G/P.
+These T 0
+j cover all the edges of G/P, since E r E(T ) ✓D.
+⇤
+The packing-covering theorem di↵ers from both the tree packing
+and the tree covering theorem in a fundamental way. The non-trivial
+directions of the latter two theorems each obtain a structural assertion
+about a graph, the existence of a packing or covering, as a consequence
+of quantitative assumptions about all their minors of a certain type:
+contraction minors for the packing theorem, and ‘deletion minors’ – i.e.,
+subgraphs – for the covering theorem. This format makes them interest-
+ing: they o↵er valuable structural information for one graph in exchange
+for less valuable quantitative information about many smaller graphs.
+The packing-covering theorem, by contrast, makes a structural as-
+sertion about every graph: with no need for any assumptions at all,
+neither quantitative nor qualitative.
+The packing-covering theorem extends to inﬁnite graphs in two in-
+terestingly di↵erent ways; see Exercises 20 and 131 in Chapter 8.
+2.5 Path covers
+Let us return once more to K¨onig’s duality theorem for bipartite graphs,
+Theorem 2.1.1. If we orient every edge of G from A to B, the theorem
+tells us how many disjoint directed paths we need in order to cover all
+the vertices of G: every directed path has length 0 or 1, and clearly the
+number of paths in such a ‘path cover’ is smallest when it contains as
+many paths of length 1 as possible – in other words, when it contains a
+maximum-cardinality matching.
+In this section we put the above question more generally: how many
+paths in a given directed graph will suﬃce to cover its entire vertex set?
+Of course, this could be asked just as well for undirected graphs. As it
+turns out, however, the result we shall prove is rather more trivial in
+
+2.5 Path covers
+55
+the undirected case (exercise), and the directed case will also have an
+interesting corollary.
+A directed path is a directed graph P 6= ; with distinct vertices
+x0, . . . , xk and edges e0, . . . , ek−1 such that ei is an edge directed from
+xi to xi+1, for all i < k. In this section, path will always mean ‘directed
+path
+path’. The vertex xk above is the last vertex of the path P, and when P
+is a set of paths we write ter(P) for the set of their last vertices. A path
+ter(P)
+cover of a directed graph G is a set of disjoint paths in G which together
+path cover
+contain all the vertices of G.
+Theorem 2.5.1. (Gallai & Milgram 1960)
+Every directed graph G has a path cover P and an independent set
+{ vP | P 2 P } of vertices such that vP 2 P for every P 2 P.
+Proof. Clearly, G has a path cover, e.g. by trivial paths. We prove by
+induction on |G| that for every path cover P = {P1, . . . , Pm} with ter(P)
+P, Pi
+minimal there is a set { vP | P 2 P } as claimed. For each i, let vi denote
+vi
+the last vertex of Pi.
+If ter(P) = {v1, . . . , vm} is independent there is nothing more to
+show, so we assume that G has an edge from v2 to v1. Since P2v2v1
+is again a path, the minimality of ter(P) implies that v1 is not the
+only vertex of P1; let v be the vertex preceding v1 on P1.
+Then
+v
+P0 := {P1v, P2, . . . , Pm} is a path cover of G0 := G −v1 (Fig. 2.5.1).
+P0, G0
+Clearly, any independent set of representatives for P0 in G0 will also work
+for P in G, so all we have to check is that we may apply the induction
+hypothesis to P0. It thus remains to show that ter(P0) = {v, v2, . . . , vm}
+is minimal among the sets of last vertices of path covers of G0.
+. . .
+v1
+v2
+P1
+P2
+v
+Pm
+Fig. 2.5.1. Path covers of G and G0
+Suppose then that G0 has a path cover P00 with ter(P00) ( ter(P0).
+If a path P 2 P00 ends in v, we may replace P in P00 by Pvv1 to obtain
+a path cover of G whose set of last vertices is a proper subset of ter(P),
+contradicting the choice of P. If a path P 2 P00 ends in v2 (but none in v),
+we similarly replace P in P00 by Pv2v1 to obtain a contradiction to the
+
+56
+2. Matching, Covering and Packing
+minimality of ter(P). Hence ter(P00) ✓{v3, . . . , vm}. But now P00 and
+the trivial path {v1} together form a path cover of G that contradicts
+the minimality of ter(P).
+⇤
+As a corollary to Theorem 2.5.1 we obtain a classical result from
+the theory of partial orders. Recall that a subset of a partially ordered
+set (P, 6) is a chain in P if its elements are pairwise comparable; it is
+chain
+an antichain if they are pairwise incomparable.
+antichain
+Corollary 2.5.2. (Dilworth 1950)
+In every ﬁnite partially ordered set (P, 6), the minimum number of
+chains with union P is equal to the maximum cardinality of an antichain
+in P.
+Proof. If A is an antichain in P of maximum cardinality, then clearly
+P cannot be covered by fewer than |A| chains. The fact that |A| chains
+will suﬃce follows from Theorem 2.5.1 applied to the directed graph on
+P with the edge set { (x, y) | x < y }.
+⇤
+Exercises
+1.
+Let M be a matching in a bipartite graph G. Show that if M is sub-
+optimal, i.e. contains fewer edges than some other matching in G, then
+G contains an augmenting path with respect to M.
+Does this fact
+generalize to matchings in non-bipartite graphs?
+2.
+(continued)
+Describe an algorithm that ﬁnds, as eﬃciently as possible, a matching
+of maximum cardinality in any bipartite graph.
+3.
+Show that if there exist injective functions A ! B and B ! A between
+two inﬁnite sets A and B then there exists a bijection A ! B.
+4.
+Moving alternately, two players jointly construct a path in some ﬁxed
+graph G. If v1 . . . vn is the path constructed so far, the player to move
+next has to ﬁnd a vertex vn+1 such that v1 . . . vn+1 is again a path.
+Whichever player cannot move loses. For which graphs G does the ﬁrst
+player have a winning strategy, for which the second?
+5.−Derive the marriage theorem from K¨onig’s theorem.
+6.
+Let G and H be deﬁned as for the third proof of Hall’s theorem. Show
+that dH(b) 6 1 for every b 2 B, and deduce the marriage theorem.
+7.
+Does our ﬁrst proof of the marriage theorem use the assumption that
+the graph is ﬁnite? If so, can it be adapted so that it works for inﬁnite
+graphs too?

@@ -1,0 +1,210 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 10. Hamilton Cycles
+현재 소단원: 10.2 Hamilton cycles and degree sequences
+직전 소단원: 「10.1 Sufficient conditions」
+[본문]
+327
+The toughness conjecture was long expected to hold with t as small
+as t = 2. This was disproved after many years, but the general conjecture
+remains open. See the exercises for how the conjecture ties in with the
+results given in the remainder of this chapter.
+It may come as a surprise to learn that hamiltonicity is also related
+to the four colour problem. As we noted in Chapter 6.6, the four colour
+theorem is equivalent to the non-existence of a planar snark, i.e. to the
+assertion that every bridgeless planar cubic graph has a 4-ﬂow. It is
+easily checked that ‘bridgeless’ can be replaced with ‘3-connected’ in
+this assertion, and that every hamiltonian graph has a 4-ﬂow (Ex. 16,
+Ch. 6). For a proof of the four colour theorem, therefore, it would suﬃce
+to show that every 3-connected planar cubic graph has a Hamilton cycle!
+Unfortunately, this is not the case: the ﬁrst counterexample was
+found by Tutte in 1946.
+Ten years later, Tutte proved the following
+deep theorem as a best possible weakening:
+Theorem 10.1.4. (Tutte 1956)
+Every 4-connected planar graph has a Hamilton cycle.
+Although, at ﬁrst glance, it appears that the study of Hamilton
+cycles is a part of graph theory that cannot possibly extend to inﬁnite
+graphs, there is a fascinating conjecture that does just that. Recall that a
+circle in an inﬁnite graph G is a homeomorphic copy of the unit circle S1
+in the topological space |G| formed by G and its ends (see Chapter 8.6).
+A Hamilton circle of G is a circle that contains every vertex of G.
+Hamilton
+circle
+Conjecture. (Bruhn 2003)
+Every locally ﬁnite 4-connected planar graph has a Hamilton circle.
+10.2 Hamilton cycles and degree sequences
+Historically, Dirac’s theorem formed the point of departure for the dis-
+covery of a series of weaker and weaker degree conditions, all suﬃcient
+for hamiltonicity. The development culminated in a single theorem that
+encompasses all the earlier results: the theorem we shall prove in this
+section.
+If G is a graph with n vertices and degrees d1 6 . . . 6 dn, then the
+n-tuple (d1, . . . , dn) is called the degree sequence of G. Note that this
+degree
+sequence
+sequence is unique, even though G has several vertex enumerations giv-
+ing rise to its degree sequence. Let us call an arbitrary integer sequence
+(a1, . . . , an) hamiltonian if every graph with n vertices and a degree se-
+hamiltonian
+sequence
+quence pointwise greater than (a1, . . . , an) is hamiltonian. (A sequence
+(d1, . . . , dn) is pointwise greater than (a1, . . . , an) if di > ai for all i.)
+pointwise
+greater
+The following theorem characterizes all hamiltonian sequences:
+10.2 Hamilton cycles and degree sequences
+
+328
+10. Hamilton Cycles
+Theorem 10.2.1. (Chv´atal 1972)
+An integer sequence (a1, . . . , an) such that 0 6 a1 6 . . . 6 an < n and
+n > 3 is hamiltonian if and only if the following holds for every i < n/2:
+ai 6 i ) an−i > n −i .
+Proof.
+Let (a1, . . . , an) be an arbitrary integer sequence such that
+(a1, . . . , an)
+0 6 a1 6 . . . 6 an < n and n > 3. We ﬁrst assume that this sequence
+satisﬁes the condition of the theorem and prove that it is hamiltonian.
+Suppose not.
+Then there exists a graph whose degree sequence
+(d1, . . . , dn) satisﬁes
+(d1, . . . , dn)
+di > ai
+for all i
+(1)
+but which has no Hamilton cycle.
+Let G = (V, E) be such a graph,
+G = (V, E)
+chosen with the maximum number of edges.
+By (1), our assumptions for (a1, . . . , an) transfer to the degree se-
+quence (d1, . . . , dn) of G; thus,
+di 6 i ) dn−i > n −i
+for all i < n/2.
+(2)
+Let x, y be distinct and non-adjacent vertices in G, with d(x) 6 d(y)
+x, y
+and d(x) + d(y) as large as possible. One easily checks that the degree
+sequence of G+xy is pointwise greater than (d1, . . . , dn), and hence than
+(a1, . . . , an). Hence, by the maximality of G, the new edge xy lies on a
+Hamilton cycle H of G+xy. Then H −xy is a Hamilton path x1, . . . , xn
+x1, . . . , xn
+in G, with x1 = x and xn = y say.
+As in the proof of Dirac’s theorem, we now consider the index sets
+I := { i | xxi+1 2 E }
+and
+J := { j | xjy 2 E } .
+Then I [ J ✓{1, . . . , n −1}, and I \ J = ; because G has no Hamilton
+cycle. Hence
+d(x) + d(y) = |I| + |J| < n ,
+(3)
+so h := d(x) < n/2 by the choice of x.
+h
+Since xiy /2 E for all i 2 I, all these xi were candidates for the
+choice of x (together with y).
+Our choice of {x, y} with d(x) + d(y)
+maximum thus implies that d(xi) 6 d(x) for all i 2 I. Hence G has at
+least |I| = h vertices of degree at most h, so dh 6 h. By (2), this implies
+that dn−h > n −h, i.e. the h + 1 vertices with the degrees dn−h, . . . , dn
+all have degree at least n −h. Since d(x) = h, one of these vertices,
+z say, is not adjacent to x. Since
+z
+d(x) + d(z) > h + (n −h) = n ,
+this contradicts the choice of x and y by (3).
+
+10.2 Hamilton cycles and degree sequences
+329
+Let us now show that, conversely, for every sequence (a1, . . . , an) as
+in the theorem, but with
+ah 6 h
+and
+an−h 6 n −h −1
+for some h < n/2, there exists a graph that has a pointwise greater degree
+h
+sequence than (a1, . . . , an) but no Hamilton cycle. As the sequence
+(h, . . . , h
+| {z }
+h times
+, n −h −1, . . . , n −h −1
+|
+{z
+}
+n−2h times
+, n −1, . . . , n −1
+|
+{z
+}
+h times
+)
+is pointwise greater than (a1, . . . , an), it suﬃces to ﬁnd a graph with this
+degree sequence that has no Hamilton cycle.
+vh
+Kh,h
+vn−h+1
+vh+1
+Kn−h
+vn
+v1
+v2
+. . .
+. . .
+. . .
+Fig. 10.2.1. Any cycle containing v1, . . . , vh misses vh+1
+Figure 10.2.1 shows such a graph G, with vertices v1, . . . , vn and the
+edge set
+{ vivj | i, j > h } [ { vivj | i 6 h; j > n −h } ;
+it is the union of a Kn−h on the vertices vh+1, . . . , vn and a Kh,h with
+partition sets {v1, . . . , vh} and {vn−h+1, . . . , vn}. Deleting these latter
+h vertices leaves more than h components. Hence G is not 1-tough, and
+thus not hamiltonian.
+⇤
+By applying Theorem 10.2.1 to graphs of the form G ⇤K1, one can
+easily prove the following adaptation of the theorem to Hamilton paths.
+Let an integer sequence be called path-hamiltonian if every graph with
+a pointwise greater degree sequence has a Hamilton path.
+Corollary 10.2.2. An integer sequence (a1, . . . , an) such that n > 2 and
+0 6 a1 6 . . . 6 an < n is path-hamiltonian if and only if every i 6 n/2
+is such that ai < i ) an+1−i > n −i.
+⇤
+
+330
+10. Hamilton Cycles
+10.3 Hamilton cycles in the square of a graph
+Given a graph G and a positive integer d, we denote by Gd the graph on
+Gd
+V (G) in which two vertices are adjacent if and only if they have distance
+at most d in G. Clearly, G = G1 ✓G2 ✓. . . Our goal in this section is
+to prove the following fundamental result:
+Theorem 10.3.1. (Fleischner 1974)
+If G is a 2-connected graph, then G2 has a Hamilton cycle.
+The proof of Theorem 10.3.1 will go roughly as follows. We start
+by ﬁnding a cycle C in G. Using induction, we shall cover the remaining
+vertices by C - paths in G2. The ﬁrst and last edges of those paths will
+be edges of G, like those of C. By deleting some of these edges and
+doubling others, we turn the union of C and all the C - paths into a
+multigraph with even degrees, and ﬁnd an Euler tour in it. This Euler
+tour W will pass some vertices more than once, but all edges in such
+multiple passes will be edges of G. For all but one of the passes through
+a given vertex we can therefore try to replace its two G - edges by an edge
+of G2 (Fig. 10.3.1), hoping to turn our Euler tour into a Hamilton cycle
+of G2. The main diﬃculty will be to ensure that these lifts of passes are
+compatible, i.e., that we do not attempt to lift an edge at both its ends.
+v
+v
+Fig. 10.3.1. Reducing the degree of v in W by lifting a pass
+Lemma 10.3.2. For every 2-connected graph G and x 2 V (G), there is a
+cycle C ✓G that contains x as well as a vertex y 6= x with NG(y) ✓V (C).
+Proof. If G has a Hamilton cycle, there is nothing more to show. If
+not, let C0 ✓G be any cycle containing x; such a cycle exists, since G
+is 2-connected. Let D be a component of G −C0. Assume that C0 and
+D are chosen so that |D| is minimum. Since G is 2-connected, D has
+at least two neighbours on C0. Then C0 contains a path P between two
+such neighbours u and v, whose interior ˚
+P does not contain x and has
+no neighbour in D (Fig. 10.3.2).
+Replacing P in C0 by a u–v path through D, we obtain a cycle C
+that contains x and a vertex y 2 D. If y had a neighbour z in G−C, then
+z would lie in a component D0 ( D of G −C, contradicting the choice
+of C0 and D. Hence all the neighbours of y lie on C, and C satisﬁes the
+assertion of the lemma.
+⇤

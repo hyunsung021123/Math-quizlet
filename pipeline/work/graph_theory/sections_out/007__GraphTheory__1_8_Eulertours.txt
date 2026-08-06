@@ -1,0 +1,121 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.8 Euler tours
+직전 소단원: 「1.7 Contraction and minors」
+[본문]
+21
+Proposition 1.7.3.
+[4.4.2]
+[7.3.1]
+[12.7.3]
+(i) Every TX is also an IX (Fig. 1.7.4); thus, every topological minor
+of a graph is also its (ordinary) minor.
+(ii) If ∆(X) 6 3, then every IX contains a TX; thus, every minor
+with maximum degree at most 3 of a graph is also its topological
+minor.
+⇤
+Fig. 1.7.4. A subdivision of K4 viewed as an IK4
+Now that we have met all the standard relations between graphs,
+we can also deﬁne what it means to embed one graph in another. Basi-
+cally, an embedding of G in H is an injective map ': V (G) ! V (H) that
+embedding
+preserves the kind of structure we are interested in. Thus, ' embeds G
+in H ‘as a subgraph’ if it preserves the adjacency of vertices, and ‘as an
+induced subgraph’ if it preserves both adjacency and non-adjacency. If
+' is deﬁned on E(G) as well as on V (G) and maps the edges xy of G to
+independent paths in H between '(x) and '(y), it embeds G in H ‘as
+a topological minor’. Similarly, an embedding ' of G in H ‘as a minor’
+would be a map from V (G) to disjoint connected vertex sets in H (rather
+than to single vertices) so that H has an edge between the sets '(x) and
+'(y) whenever xy is an edge of G. Further variants are possible; depend-
+ing on the context, one may wish to deﬁne embeddings ‘as a spanning
+subgraph’, ‘as an induced minor’ and so on, in the obvious way.
+1.8 Euler tours
+Any mathematician who happens to ﬁnd himself in the East Prussian
+city of K¨onigsberg (and in the 18th century) will lose no time to fol-
+low the great Leonhard Euler’s example and inquire about a round trip
+through the old city that traverses each of the bridges shown in Figure
+1.8.1 exactly once.
+Thus inspired,9 let us call a closed walk in a graph an Euler tour if
+it traverses every edge of the graph exactly once. A graph is Eulerian if
+Eulerian
+it admits an Euler tour.
+9 Anyone to whom such inspiration seems far-fetched, even after contemplating
+Figure 1.8.2, may seek consolation in the multigraph of Figure 1.10.1.
+1.8 Euler tours
+
+22
+1. The Basics
+Fig. 1.8.1.
+The bridges of K¨onigsberg (anno 1736)
+Theorem 1.8.1. (Euler 1736)
+[2.1.5]
+[10.3.1]
+A connected graph is Eulerian if and only if every vertex has even degree.
+Proof. The degree condition is clearly necessary: a vertex appearing k
+times in an Euler tour (or k + 1 times, if it is the starting and ﬁnishing
+vertex and as such counted twice) must have degree 2k.
+Conversely, we show by induction on kGk that every connected
+graph G with all degrees even has an Euler tour. The induction starts
+trivially with kGk = 0. Now let kGk > 1. Since all degrees are even,
+we can ﬁnd in G a non-trivial closed walk that contains no edge more
+than once. (How exactly?) Let W be such a walk of maximal length,
+Fig. 1.8.2. A graph formalizing the bridge problem
+
+23
+and write F for the set of its edges. If F = E(G), then W is an Euler
+tour. Suppose, therefore, that G0 := G −F has an edge.
+For every vertex v 2 G, an even number of the edges of G at v lies
+in F, so the degrees of G0 are again all even. Since G is connected, G0 has
+an edge e incident with a vertex on W. By the induction hypothesis,
+the component C of G0 containing e has an Euler tour. Concatenating
+this with W (suitably re-indexed), we obtain a closed walk in G that
+contradicts the maximal length of W.
+⇤
+1.9 Some linear algebra
+Let G = (V, E) be a graph with n vertices and m edges, say V =
+[8.7]
+G = (V, E)
+{v1, . . . , vn} and E = {e1, . . . , em}. The vertex space V(G) of G is the
+vector space over the 2-element ﬁeld F2 = {0, 1} of all functions V !F2.
+vertex
+space V(G)
+Every element of V(G) corresponds naturally to a subset of V , the set of
+those vertices to which it assigns a 1, and every subset of V is uniquely
+represented in V(G) by its indicator function. We may thus think of
+V(G) as the power set of V made into a vector space: the sum U + U 0
++
+of two vertex sets U, U 0 ✓V is their symmetric di↵erence (why?), and
+U = −U for all U ✓V .
+The zero in V(G), viewed in this way, is
+the empty (vertex) set ;. Since {{v1}, . . . , {vn}} is a basis of V(G), its
+standard basis, we have dim V(G) = n.
+In the same way as above, the functions E !F2 form the edge space
+E(G) of G: its elements correspond to the subsets of E, vector addition
+edge space
+E(G)
+amounts to symmetric di↵erence, ; ✓E is the zero, and F = −F for all
+F ✓E. As before, {{e1}, . . . , {em}} is the standard basis of E(G), and
+standard
+basis
+dim E(G) = m. Given two elements F, F 0 of the edge space, viewed as
+functions E ! F2, we write
+hF, F 0i :=
+X
+e2E
+F(e)F 0(e) 2 F2 .
+hF, F 0i
+This is zero if and only if F and F 0 have an even number of edges in
+common; in particular, we can have hF, Fi = 0 with F 6= ;. Given a
+subspace F of E(G), we write
+F? :=
+*
+D 2 E(G) | hF, Di = 0 for all F 2 F
+ 
+.
+F?
+This is again a subspace of E(G) (the space of all vectors solving a certain
+set of linear equations – which?), and one can show that
+dim F + dim F? = m .
+1.9 Some linear algebra

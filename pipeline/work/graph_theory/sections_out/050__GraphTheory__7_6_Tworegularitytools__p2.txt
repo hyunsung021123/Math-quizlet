@@ -1,0 +1,50 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.6 Two regularity tools (분할 part 2)
+직전 소단원: 「7.5 Applying the regularity lemma」
+[본문]
+216
+7. Extremal Graph Theory
+image of at most k! injective homomorphisms H ! G, so
+h(G) 6 k! · d kGk 6 k! · d · n2 6 ⌘n0 · n2 6 ⌘n3.
+The removal lemma therefore yields a set E of at most %n2 edges in G
+such that H 6✓G −E. Like every edge of G, each of the edges in E lies
+in at most d copies of H in G. So we also have
+h(G) 6 k! · d |E|.
+As the copies of H are thinly spread over G, every edge of G lies in the
+image of some injective homomorphism H ! G. Hence h(G) > kGk/m,
+so
+kGk 6 m h(G) 6 m k! d |E| 6 m k! d %n2 = δn2.
+As the number h of copies of H in G is no bigger than h(G), the above
+inequality also shows h 6 h(G) 6 δn2, as claimed.
+⇤
+Corollary 7.6.5. For every δ > 0 there exists an integer n0 such that
+[7.7.3]
+the following holds for every graph G of order n > n0: if every edge of G
+lies in exactly one triangle, then G has at most δn2 edges.
+⇤
+7.7 Szemer´edi’s theorem
+When Szemer´edi proved his ﬁrst version of the regularity lemma, he did
+not think of it as a precursor to the fundamental structure theorem for
+all of extremal graph theory that it has since become. He thought of it,
+well, as a lemma: a lemma he needed in a proof of a conjecture of Erd˝os
+and Tur´an about ‘arithmetic progressions’ of integers. We shall describe
+this theorem in this section, and then use the tools from Section 7.6 to
+derive its simplest case in just over a page.
+An arithmetic progression is an increasing sequence of integers of
+arithmetic
+progression
+the form a, a + d, a + 2d, . . . , one in which adjacent terms always di↵er
+by the same amount. The number of terms in the sequence is its length.
+length
+One of the earliest results in combinatorics is van der Waerden’s theorem
+that, no matter how we partition the natural numbers into ﬁnitely many
+classes, one of these will contain arbitrarily long arithmetic progres-
+sions.18 Szemer´edi’s theorem explores the deeper reasons why this is so.
+In any partition {A1, . . . , Ap} of N into ﬁnitely many classes, one of
+these Ai will have positive upper density: for some δ > 0, in our case
+upper
+density
+certainly for δ = 1/p, arbitrarily large n 2 N will satisfy |Ai \ n| > δn
+18 Compare Exercise 5 in Chapter 9.

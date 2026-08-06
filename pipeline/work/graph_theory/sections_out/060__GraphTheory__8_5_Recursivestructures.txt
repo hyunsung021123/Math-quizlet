@@ -1,0 +1,204 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.5 Recursive structures
+직전 소단원: 「8.4 Connectivity and matching」
+[본문]
+260
+8. Inﬁnite Graphs
+Inﬁnite matching theory may seem rather mature and complete as
+it stands, but there are still fascinating unsolved problems in the Erd˝os-
+Menger spirit concerning related discrete structures, such as partially
+ordered sets or hypergraphs. We conclude with one about graphs.
+Call an inﬁnite graph G perfect if every induced subgraph H ✓G
+has a complete subgraph K of order χ(H), and strongly perfect if K
+strongly
+perfect
+can always be chosen so that it meets every colour class of some χ(H)-
+colouring of H. (Exercise 75 gives an example of a perfect graph that is
+not strongly perfect.) Call G weakly perfect if the chromatic number of
+weakly
+perfect
+every induced subgraph H ✓G is at most the supremum of the orders
+of its complete subgraphs.
+Conjecture. (Aharoni & Korman 1993)
+Every weakly perfect graph without inﬁnite independent sets of vertices
+is strongly perfect.
+8.5 Recursive structures
+In this section we introduce another tool that is commonly used in inﬁ-
+nite graph theory: to deﬁne a class of graphs recursively, so as to be able
+later to prove assertions about these graphs by (transﬁnite) induction.
+Rather than attempting a systematic treatment of this technique we give
+two examples; more can be found in the exercises.
+Our ﬁrst example is very simple: it describes the structure of a tree
+by recursively pruning away leaves and isolated ends. Let T be any tree,
+equipped with a root and the corresponding tree-order on its vertices.
+We recursively label the vertices of T by ordinals, as follows. Given an
+ordinal ↵, assume that we have decided for every β < ↵which of the
+vertices of T to label β, and let T↵be the subgraph of T induced by
+the vertices that are still unlabelled. Assign label ↵to every vertex t of
+T↵whose up-closure btcT↵= btcT \ T↵in T↵is a chain. The recursion
+terminates at the ﬁrst ↵not used to label any vertex; for this ↵we put
+T↵=: T ⇤.
+T ⇤
+For each ↵, the vertices labelled ↵form an up-set in T↵: if btcT↵is
+a chain, then so is bt0cT↵for every t0 2 btcT↵. Every T↵, therefore, is a
+down-set in T (induction on ↵) and hence connected. Thus, T↵is a tree,
+and the set of vertices labelled ↵induces in T↵a disjoint union of paths.
+Let us call T recursively prunable if every vertex of T gets labelled
+recursively
+prunable
+in this way, i.e., if T ⇤= ;. We may then be able to prove assertions
+about T, or about graphs containing T as a normal spanning tree, by
+dealing in turn with those chains as they get deleted.
+The following
+proposition shows that the recursively prunable trees form a natural
+class also in structural terms:
+
+8.5 Recursive structures
+261
+Proposition 8.5.1. A rooted tree is recursively prunable if and only if
+it contains no subdivision of the inﬁnite binary tree T2 as a subgraph.
+Proof. Let T be any rooted tree. Suppose ﬁrst that T is not recursively
+prunable, i.e. that T ⇤6= ;. Since no vertex of T ⇤gets labelled when the
+recursion terminates, every t 2 T ⇤has two incomparable vertices of T ⇤
+above it. As T ⇤is connected, it is now easy to ﬁnd a subdivision of T2
+in T ⇤inductively, along the levels of T2.
+Conversely, suppose that T contains a subdivision T 0 of T2. We shall
+see in a moment that T 0 can be chosen ‘upwards’ in T, that is, in such
+a way that the tree-order which T induces on its vertices agrees with its
+own tree-order as induced by T2. If this is the case, then every vertex
+of T 0 has two incomparable vertices of T 0 above it (in both orders). Hence
+there can be no minimal ordinal ↵such that a vertex of T 0 is labelled ↵.
+Thus all of T 0 remains unlabelled, and ; 6= T 0 ✓T ⇤as desired.
+It remains to show that T 0 can indeed be chosen in this way. Let
+T 0 be any subdivision of T2 in T, and let u be minimal in the tree-order
+of T among the vertices of T 0. Induction on the levels of the tree bucT 0
+shows that 6T 0 and 6T agree on bucT 0: any upper neighbour in T 0 of
+a vertex t 2 bucT 0 must lie above t also in T, since the unique lower
+neighbour of t in T is either not in T 0 (if t = u), or by induction it is
+the unique lower neighbour of t also in T 0. Pick any branch vertex v of
+T 0 in bucT 0. Then bvcT 0 is the desired subdivision of T2 in T.
+⇤
+The charm of the recursive pruning discussed above lies in the fact
+that it removes the ‘messy bits’ of a given tree in an automated sort of
+way: we do not have to know where they are, but if our given tree con-
+tains a ‘clean’ ever-branching subtree, then the recursion will reveal it.
+And there is another way of viewing it. We might think of rooted
+paths (paths with a ﬁrst vertex, which we take to be the root) as par-
+ticularly basic objects, and call them rooted trees of rank 0. We could
+then deﬁne rooted trees of higher ordinal rank inductively, taking as the
+rooted trees of rank ↵those that do not have any rank β < ↵but in
+which it is possible to delete a path starting at the root so as to leave
+components that each have some rank < ↵when taken with the induced
+tree-order. Then the rooted trees that are assigned a rank in this way
+are precisely the recursively prunable ones, and those of rank 6 ↵are
+precisely those whose labels do not exceed ↵(Exercise 77).
+We now apply the same idea to graphs that are not necessarily trees.
+Let us assign rank 0 to all the ﬁnite graphs. Given an ordinal ↵> 0, we
+rank
+assign rank ↵to every graph G that does not already have a rank β < ↵
+and which has a ﬁnite set U of vertices such that every component of
+G −U has some rank < ↵.
+When disjoint graphs Gi have ranks ↵i < ↵, their union clearly has
+a rank of at most ↵; if the union is ﬁnite, it has rank maxi ↵i.
+Induction
+
+262
+8. Inﬁnite Graphs
+on ↵shows that subgraphs of graphs of rank ↵also have a rank of at
+most ↵. Conversely, joining ﬁnitely many new vertices to a graph, no
+matter how, will not change its rank.
+Not every graph has a rank. Indeed, the ray cannot have a rank,
+since deleting ﬁnitely many of its vertices always leaves a component
+that is also a ray. As subgraphs of graphs with a rank also have a rank,
+this means that only rayless graphs can have a rank. But all these do:
+Lemma 8.5.2. A graph has a rank if and only if it is rayless.
+Proof. Consider a graph G that has no rank. Then one of its compo-
+nents, C0 say, has no rank; let v0 be a vertex in C0. Now C0 −v0 has
+a component C1 that has no rank; let v1 be a neighbour of v0 in C1.
+Continuing inductively, we ﬁnd a ray v0v1 . . . in G.
+⇤
+Because of Lemma 8.5.2, we call the ranking deﬁned above the rank-
+ing of rayless graphs. As an application of this ranking, we now prove
+the unfriendly partition conjecture from Section 8.1 for rayless graphs.
+Theorem 8.5.3. Every countable rayless graph G has an unfriendly
+partition.
+Proof. To help with our formal notation, we shall think of a partition
+of a set V as a map ⇡: V ! {0, 1}.
+We apply induction on the rank
+of G. When this is zero then G is ﬁnite, and an unfriendly partition can
+be obtained by maximizing the number of edges across the partition.
+Suppose now that G has rank ↵> 0, and assume the theorem as true
+↵
+for graphs of smaller rank.
+Let U be a ﬁnite set of vertices in G such that each of the compo-
+U
+nents C0, C1, . . . of G −U has rank < ↵. Partition U into the set U0
+C0, C1, . . .
+of vertices that have ﬁnite degree in G, the set U1 of vertices that have
+inﬁnitely many neighbours in some Cn, and the set U2 of vertices that
+U0, U1, U2
+have inﬁnite degree but only ﬁnitely many neighbours in each Cn.
+For every n 2 N let Gn := G[U [ V (C0) [ . . . [ V (Cn)]. This is
+G0, G1, . . .
+a graph of some rank ↵n < ↵, so by induction it has an unfriendly
+partition ⇡n. Each of these ⇡n induces a partition of U. Let ⇡U be a
+partition of U induced by ⇡n for inﬁnitely many n, say for n0 < n1 < . . ..
+Choose n0 large enough that Gn0 contains all the neighbours of vertices
+in U0, and the other ni large enough that every vertex in U2 has more
+neighbours in Gni −Gni−1 than in Gni−1, for all i > 0. Let ⇡be the
+n0, n1, . . .
+partition of G deﬁned by letting ⇡(v) := ⇡ni(v) for all v 2 Gni −Gni−1
+and all i, where Gn−1 := ;. Note that ⇡|U = ⇡n0|U = ⇡U.
+⇡
+Let us show that ⇡is unfriendly. We have to check that every vertex
+is happy with ⇡, i.e., that it has at least as many neighbours in the oppo-
+
+263
+site class under ⇡as in its own.8 To see that a vertex v 2 G−U is happy
+with ⇡, let i be minimal such that v 2 Gni and recall that v was happy
+with ⇡ni. As both v and its neighbours in G lie in U [ V (Gni −Gni−1),
+and ⇡agrees with ⇡ni on this set, v is happy also with ⇡. Vertices in U0
+are happy with ⇡, because they were happy with ⇡n0, and ⇡agrees with
+⇡n0 on U0 and all its neighbours. Vertices in U1 are also happy. Indeed,
+every u 2 U1 has inﬁnitely many neighbours in some Cn, and hence in
+some Gni; let i be minimal with this property. Then u has inﬁnitely
+many opposite neighbours under ⇡ni in Gni, and hence in Gni −Gni−1.
+Since ⇡ni agrees with ⇡on both U and Gni −Gni−1, our vertex u has
+inﬁnitely many opposite neighbours also under ⇡. Vertices in U2, ﬁnally,
+are happy with every ⇡ni.
+By our choice of ni, at least one of their
+opposite neighbours under ⇡ni must lie in Gni −Gni−1. Since ⇡ni agrees
+with ⇡on both U2 and Gni −Gni−1, this gives every u 2 U2 at least one
+opposite neighbour under ⇡in every Gni −Gni−1. Hence u has inﬁnitely
+many opposite neighbours under ⇡, which clearly makes it happy.
+⇤
+8.6 Graphs with ends: the complete picture
+In this section we shall develop a deeper understanding of the global
+structure of inﬁnite graphs, especially locally ﬁnite ones, that can be
+attained only by studying their ends. This structure is intrinsically topo-
+logical, because topology best captures our intuition about convergence.9
+Our ﬁrst goal will be to make precise our intuitive idea that the
+ends of a graph are the ‘points at inﬁnity’ to which its rays converge.
+To do so, we shall deﬁne a topological space |G| associated with a graph
+G = (V, E, ⌦) and its ends.10
+By considering topological versions of
+V, E, ⌦
+paths, cycles and spanning trees in this space, we shall then be able to
+extend to inﬁnite graphs some parts of ﬁnite graph theory that would
+not otherwise have inﬁnite counterparts; see the notes for more examples.
+Thus, the ends of an inﬁnite graph turn out to be more than a curious
+phenomenon: they form an integral part of the picture, without which
+it cannot be properly understood.
+To build the space |G| formally, we start with the set V [ ⌦. For
+every edge e = uv we add a set˚e = (u, v) of continuum many points, mak-
+(u, v)
+ing these sets ˚e disjoint from each other and from V [⌦. We then choose
+for each e some ﬁxed bijection between ˚e and the real interval (0, 1), and
+8 It is only by tradition that such partitions are called ‘unfriendly’; our vertices
+love them.
+9 Only point-set topology is needed for the text. See the exercises for more.
+10 The notation of |G| comes from topology and clashes with our notation for the
+order of G. But there is little danger of confusion, so we keep both.
+8.6 Graphs with ends: the complete picture

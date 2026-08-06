@@ -1,0 +1,162 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 6. Flows
+현재 소단원: 6.ex Exercises
+직전 소단원: 「6.6 Tutte's flow conjectures」
+[연습문제]
+174
+6. Flows
+zero, by letting f2(
+!e) := 1 2 Z2 for all edges e of H. Setting f2 to zero
+on e1 too then turns it into a Z2-circulation on G. Now f := f2 ⇥f3 is a
+(Z2 ⇥Z3)-ﬂow on G with f2 zero on all the edges at u, as desired.
+⇤
+Exercises
+1.−Prove Proposition 6.2.1 by induction on |S|.
+2.
+(i)−Given n 2 N, ﬁnd a capacity function for the network below such
+that the algorithm from the proof of the max-ﬂow min-cut theorem will
+need more than n augmenting paths W if these are badly chosen.
+s
+t
+(ii)+ Show that, if all augmenting paths are chosen as short as possible,
+their number is bounded by a function of the size of the network.
+3.+ Derive Menger’s Theorem 3.3.5 from the max-ﬂow min-cut theorem.
+(Hint. The edge version is easy. For the vertex version, apply the edge
+version to a suitable auxiliary graph.)
+4.−Let f:
+!
+E ! H be a circulation on G and g: H ! H0 a group homomor-
+phism. Show that g ◦f is a circulation on G. Is g ◦f an H0-ﬂow if f is
+an H-ﬂow?
+5.
+View the group of circulations on a graph with values in Z2 as a vector
+space over Z2. Find a space in Chapter 1.9 to which it is isomorphic,
+and write down an explicit isomorphism.
+6.
+Let H be an abelian group, G = (V, E) a connected graph, T a spanning
+tree, and f a map from the orientations of the edges in E r E(T) to H
+that satisﬁes (F1). Show that f extends uniquely to a circulation on G
+with values in H.
+7.
+(continued)
+Let VH = VH(G) be the group of all maps V !H, and EH = EH(G) the
+group of all maps
+!
+E !H satisfying (F1), both with pointwise addition.
+Every ' 2 VH deﬁnes a 2 EH by (e, x, y) := '(y) −'(x).
+(i) Show that these form a subgroup BH = BH(G) of EH with
+BH = { 2 EH | (
+!
+C ) = 0 for every oriented cycle C ✓G },
+where (
+!
+C ) := P
+~e 2 ~
+C (
+!e).
+(ii) Show that every map
+!
+E(T)!H satisfying (F1) extends uniquely
+to a map in BH.
+
+Exercises
+175
+8.+ (continued)
+Let CH denote the group of all circulations on G with values in H.
+(i) Show that EH/BH is isomorphic to CH.
+(ii) Show that EH/CH is isomorphic to BH.
+9.−Given k > 1, show that a graph has a k-ﬂow if and only if each of its
+blocks has a k-ﬂow.
+10.−Show that '(G/e) 6 '(G) whenever G is a multigraph and e an edge
+of G. Does this imply that, for every k, the class of all multigraphs
+admitting a k-ﬂow is closed under taking minors?
+11.−Work out the ﬂow number of K4 directly, without using any results
+from the text.
+12.
+Let G be a graph with a k-ﬂow, where k > 3. Find a cubic graph that
+has a k-ﬂow and from which G can be obtained by contracting edges
+and identifying nonadjacent vertices. Can you ﬁnd a construction that
+does not require the assumption of k > 3?
+Do not use the 6-ﬂow Theorem 6.6.1 for the following three exercises.
+13.
+Show that '(G) < 1 for every bridgeless multigraph G.
+14.
+Let G be a bridgeless connected graph with n vertices and m edges. By
+considering a normal spanning tree of G, show that '(G) 6 m −n + 2.
+15.
+Assume that a graph G has m spanning trees such that no edge of G
+lies in all of these trees. Show that '(G) 6 2m.
+16.
+Show that every graph with a Hamilton cycle has a 4-ﬂow. (A Hamilton
+cycle of G is a cycle in G that contains all the vertices of G.)
+17.
+A family of (not necessarily distinct) subgraphs of a graph G is called
+a double cover of G if every edge of G lies on exactly two of these sub-
+graphs. The cycle double cover conjecture asserts that every bridgeless
+multigraph admits a double cover by cycles. Prove the conjecture for
+graphs with a 4-ﬂow.
+18.−Determine the ﬂow number of C5 ⇤K1, the wheel with 5 spokes.
+19.
+Find bridgeless graphs G and H = G −e such that 2 < '(G) < '(H).
+20.
+Prove Proposition 6.4.1 without using Theorem 6.3.3.
+21.+ Prove that a plane triangulation is 3-colourable if and only if all its
+vertices have even degree.
+22.
+Show that the 3-ﬂow conjecture for planar multigraphs is equivalent to
+Gr¨otzsch’s Theorem 5.1.3.
+23.
+(i)−Show that the four colour theorem is equivalent to the non-exist-
+ence of a planar snark, i.e. to the statement that every cubic bridgeless
+planar multigraph has a 4-ﬂow.
+(ii) Can ‘bridgeless’ in (i) be replaced by ‘3-connected’?
+
+176
+6. Flows
+24.+ Show that a graph G = (V, E) has a k-ﬂow if and only if it has an
+orientation D that directs, for every X ✓V , at least 1/k of the edges
+in E(X, X) from X towards X.
+Notes
+Network ﬂow theory is an application of graph theory that has had a major
+and lasting impact on its development over decades. As is illustrated already
+by the fact that Menger’s theorem can be deduced easily from the max-ﬂow
+min-cut theorem (Exercise 3), the interaction between graphs and networks
+may go either way: while ‘pure’ results in areas such as connectivity, matching
+and random graphs have found applications in network ﬂows, the intuitive
+power of the latter has boosted the development of proof techniques that have
+in turn brought about theoretic advances.
+The classical reference for network ﬂows is L.R. Ford & D.R. Fulkerson,
+Flows in Networks, Princeton University Press 1962. More recent and compre-
+hensive accounts are given by R.K. Ahuja, T.L. Magnanti & J.B. Orlin, Net-
+work ﬂows, Prentice-Hall 1993, by A. Frank in his chapter in the Handbook of
+Combinatorics (R.L. Graham, M. Gr¨otschel & L. Lov´asz, eds.), North-Holland
+1995, and by A. Schrijver, Combinatorial optimization, Springer 2003. An in-
+troduction to graph algorithms in general is given in A. Gibbons, Algorithmic
+Graph Theory, Cambridge University Press 1985.
+If one recasts the maximum ﬂow problem in linear programming terms,
+one can derive the max-ﬂow min-cut theorem from the linear programming
+duality theorem; see A. Schrijver, Theory of integer and linear programming,
+Wiley 1986.
+The more algebraic theory of group-valued ﬂows and k-ﬂows has been
+developed largely by Tutte; he gives a thorough account in his monograph
+W.T. Tutte, Graph Theory, Addison-Wesley 1984. The fact that the number
+of k-ﬂows of a multigraph is a polynomial in k, whose values can be bounded
+in terms of the corresponding values of the ﬂow polynomial, was proved by
+M. Kochol, Polynomials associated with nowhere-zero8 ﬂows, J. Comb. Theory,
+Ser. B 84 (2002), 260–269.
+Tutte’s ﬂow conjectures are covered also in F. Jaeger’s survey, Nowhere-
+zero ﬂow problems, in (L.W. Beineke & R.J. Wilson, eds.)
+Selected Topics
+in Graph Theory 3, Academic Press 1988. For the ﬂow conjectures, see also
+T.R. Jensen & B. Toft, Graph Coloring Problems, Wiley 1995. The 6-ﬂow the-
+orem is due to P.D. Seymour, Nowhere-zero 6-ﬂows, J. Comb. Theory, Ser. B
+30 (1981), 130–135. This paper also indicates how Tutte’s 5-ﬂow conjecture
+reduces to snarks. Our proof is from M. Devos and K. Nurse, A short proof
+of Seymour’s 6-ﬂow theorem, arXiv:2307.04768. The proof of the 4-ﬂow con-
+jecture for cubic graphs announced in 1998 Robertson, Sanders, Seymour and
+Thomas has not yet been entirely written up. C. Thomassen, The weak 3-ﬂow
+conjecture and the weak circular ﬂow conjecture, J. Comb. Theory, Ser. B 102
+(2012), 521–529, proved that every graph of large enough edge-connectivity k
+8 In the literature, the term ‘ﬂow’ is often used to mean what we have called ‘cir-
+culation’, i.e. ﬂows are not required to be nowhere zero unless this is stated explicitly.

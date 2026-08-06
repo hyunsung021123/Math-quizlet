@@ -1,0 +1,285 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 2. Matching, Covering and Packing
+현재 소단원: 2.4 Tree packing and arboricity
+직전 소단원: 「2.3 The Erdős-Pósa theorem」
+[본문]
+50
+2. Matching, Covering and Packing
+2.4 Tree packing and arboricity
+In this section we consider packing and covering in terms of edges rather
+than vertices. How many edge-disjoint spanning trees can we ﬁnd in a
+given connected graph? And how few trees, not necessarily edge-disjoint,
+suﬃce to cover all its edges? These two questions have two classical the-
+orems answering them. But rather than proving these theorems directly,
+we shall obtain them both as corollaries of a beautiful recent uniﬁcation
+due to Bowler and Carmesin: the packing-covering theorem.
+To motivate the tree packing problem, assume for a moment that
+our graph represents a communication network, and that for every choice
+of two vertices we want to be able to ﬁnd k edge-disjoint paths between
+them. Menger’s theorem (3.3.6) in the next chapter will tell us that such
+paths exist as soon as our graph is k-edge-connected, which is clearly also
+necessary. This is a good theorem, but it does not tell us how to ﬁnd
+those paths; in particular, having found them for one pair of endvertices
+we are not necessarily better placed to ﬁnd them for another pair. If our
+graph has k edge-disjoint spanning trees, however, there will always be k
+canonical such paths, one in each tree. Once we have stored those trees
+in our computer, we shall always be able to ﬁnd the k paths quickly,
+between any given pair of vertices.
+When does a graph G have k edge-disjoint spanning trees? If it
+does, it clearly must be k-edge-connected.
+The converse, however, is
+easily seen to be false (try k = 2); indeed it is not even clear that any
+edge-connectivity will imply the existence of k edge-disjoint spanning
+trees. (But see Corollary 2.4.2 below.)
+Here is another necessary condition. If G has k edge-disjoint span-
+ning trees, then with respect to any partition of V (G) into r sets, every
+spanning tree of G has at least r −1 cross-edges, edges whose ends lie in
+cross-edges
+di↵erent partition sets. (Why?) Thus if G has k edge-disjoint spanning
+trees, it has at least k (r −1) cross-edges. This condition is also suﬃcient:
+Theorem 2.4.1. (Nash-Williams 1961; Tutte 1961)
+A multigraph contains k edge-disjoint spanning trees if and only if for
+tree
+packing
+theorem
+[8.6.9]
+every partition P of its vertex set it has at least k (|P| −1) cross-edges.
+Theorem 2.4.1 has a striking corollary: 2k-edge-connectedness is
+enough to ensure the existence of k edge-disjoint spanning trees.
+Corollary 2.4.2. Every 2k-edge-connected multigraph G has k edge-
+[6.4.4]
+disjoint spanning trees.
+Proof. Every class in a vertex partition of G is joined to other partition
+classes by at least 2k edges. Hence, for any partition into r sets, G has
+at least 1
+2
+Pr
+i=1 2k = kr cross-edges. The assertion thus follows from
+Theorem 2.4.1.
+⇤
+
+2.4 Tree packing and arboricity
+51
+Note that the quantitative condition on cross-edges in Theorem 2.4.1
+is equivalent to asking the same only for partitions into connected vertex
+sets: any other partition is reﬁned by such a partition, and if the latter
+has enough cross-edges (even though it has more classes) then clearly so
+does the former. The tree packing theorem thus says that a multigraph
+has k edge-disjoint spanning trees as soon as all its contraction minors
+have enough edges to support k edge-disjoint spanning trees.
+We shall meet Theorem 2.4.1 again in Chapter 8.6, where we prove
+an inﬁnite analouge. This is based not on ordinary spanning trees (for
+which the result is false) but on ‘topological spanning trees’: the analog-
+ous structures in a topological space formed by the graph together with
+its ends, points at inﬁnity that make it compact.
+Let us now turn to the covering problem. To bring out its duality to
+the packing problem, we begin by rephrasing the latter. Let us say that
+some given subgraphs of a multigraph G form an edge-decomposition
+of G if their edge sets partition E(G). Our spanning tree problem can
+now be recast as follows: into how many connected spanning subgraphs
+can we edge-decompose G? Since a spanning subgraph is connected if
+and only if it has an edge in every bond, the packing problem in this new
+guise has a ‘dual’ reminiscent of Theorems 1.5.1 and 1.9.4: into how few
+acyclic subgraphs – those whose complement meets all their circuits –
+can we edge-decompose G?
+Let us say that some given graphs, not necessarily subgraphs of G,
+cover its edges if every edge of G lies in at least one of them. Our dual
+cover
+problem, then, is for which multigraphs G can we cover their edges by
+at most k trees.
+An obvious necessary condition is that every set U ✓V (G) induces
+at most k (|U| −1) edges, no more than |U| −1 for each tree. Or, to
+phrase it dually to the tree packing condition, that no ‘deletion minor’
+(subgraph) of G has too many edges to be covered by k trees.
+Once more, this condition turns out to be suﬃcient too:
+Theorem 2.4.3. (Nash-Williams 1964)
+The edges of a multigraph G = (V, E) can be covered by at most k trees
+tree
+covering
+theorem
+if and only if kG[U]k 6 k (|U| −1) for every non-empty set U ✓V .
+The least number of trees that can cover the edges of a graph is
+its arboricity. By Theorem 2.4.3, the arboricity of a graph is a measure
+arboricity
+for its maximum local density: it has small arboricity if and only if it is
+‘nowhere dense’ in the sense that it has no subgraph H with "(H) large.
+We ﬁnally come to the packing-covering theorem. Recall from Chap-
+ter 1.10 that when we form a contraction minor G/P of a multigraph G,
+we keep all the edges of G between di↵erent partition classes: edges
+between the same two classes U, U 0 2 P become parallel edges of G/P.
+
+52
+2. Matching, Covering and Packing
+Theorem 2.4.4. (Bowler & Carmesin 2015)
+For every connected multigraph G = (V, E) and every k 2 N there is a
+packing-
+covering
+theorem
+partition P of V such that every G[U] with U 2 P has k edge-disjoint
+spanning trees and the edges of G/P can be covered by k spanning trees.
+Before we prove the packing-covering theorem, let us deduce Theo-
+rems 2.4.1 and 2.4.3.
+Proof of Theorem 2.4.1 (assuming Theorem 2.4.4).
+Suppose a multigraph G has at least k (|P| −1) cross-edges for every
+partition P of V (G). Let P be the partition provided by Theorem 2.4.4.
+By the theorem, G/P has k spanning trees covering its edges. Since
+kG/Pk > k (|P| −1), they must be edge-disjoint. Combining them with
+the edge-disjoint spanning trees in the G[U] that are also provided by
+Theorem 2.4.4, we obtain the desired k spanning trees of G.
+⇤
+Proof of Theorem 2.4.3 (assuming Theorem 2.4.4).
+Suppose every U ✓V induces at most k (|U|−1) edges in G. Let C be a
+component of G, and P the partition of V (C) provided by Theorem 2.4.4.
+For each U 2 P, each of the k edge-disjoint spanning trees of G[U] that
+the theorem provides has |U| −1 edges, so all the edges of G[U] lie in
+these trees. Combining these trees with the spanning trees of C/P that
+cover its edges, also provided by Theorem 2.4.4, we obtain k spanning
+trees of C covering its edges. These can be combined to k forests covering
+the edges of G. Add edges to turn these into the desired k trees.
+⇤
+Given the power of the packing-covering theorem, its proof is strik-
+ingly short and elegant. To prepare some notation, consider a spanning
+tree T of G, a chord e, and an edge f 2 T on its fundamental cycle Ce.
+Then T 0 = T + e −f is another spanning tree: this is immediate from
+Corollary 1.5.2, because T 0 is still connected and has the same number of
+edges as T. One says that T 0 is obtained from T by exchanging f for e.
+Now let T = (Tj)j=1,...,k be a family of spanning trees of G. Call a
+T , k
+sequence (e0, . . . , en) of edges of G an exchange chain with respect to T ,
+started by e0, if en lies on none of these trees but for every i < n there
+exchange
+chain
+i 7! j(i)
+exists j =: j(i) such that ei+1 is a chord of Tj whose fundamental cycle
+with respect to Tj contains ei.
+Let us write E(T ) := S { E(T) | T 2 T } for any such family.
+E(T )
+Lemma 2.4.5. If e0 starts an exchange chain with respect to T and
+lies in two of its trees, then there is a family T 0 of k spanning trees of G
+such that E(T ) ( E(T 0).
+Proof.
+Choose (e0, . . . , en) of minimum length among the exchange
+chains with respect to T that start with e0. Then its elements ei are
+distinct. And no ei lies on the fundamental cycle with respect to any
+
+2.4 Tree packing and arboricity
+53
+tree in T of any e` with ` > i + 1: if it did, we could omit ei+1, . . . , e`−1
+from our sequence, contradicting its minimality.
+For i = 0, . . . , n inductively, we shall deﬁne families T i = (T i
+j)j=1,...,k
+T i
+j
+of spanning trees of G such that, for all i 6 ` < n,
+(i) E(T i) = E(T );
+(ii) ei lies in two of the trees in the family T i;
+(iii) e`+1 is a chord of T i
+j(`) and has the same fundamental cycle there
+as with respect to Tj(`).
+Note that these families have the same index set as T , and we continue
+to use the map i 7! j(i) from the indices of our exchange chain to the
+j(i)
+indices of T i that we deﬁned together with T .
+For i = 0 the family T 0 := T is as required. Given i < n, let T i+1
+T i
+be obtained from T i by replacing T i
+j(i) with T i
+j(i) +ei+1 −ei =: T i+1
+j(i) and
+letting T i+1
+j
+:= T i
+j for all other j.
+By (iii) for i with ` = i, the modiﬁed tree T i+1
+j(i) is again a spanning
+tree of G: recall that ei lies on the fundamental cycle of ei+1 with respect
+to Tj(i), by deﬁnition of j(i).
+Assertion (i) for i+1 < n follows from (i)–(iii) for i: we are not losing
+ei by (ii), and we are not gaining ei+1, since it lies on the fundamental
+cycle of ei+2 with respect to Tj(i+1), and hence is already in T i
+j(i+1) 2 T i
+by (iii).
+To verify (ii) for i + 1 < n, note ﬁrst that j(i + 1) 6= j(i), because
+ei+1 is a chord of Tj(i) but lies on Tj(i+1). Now ei+1 2 T i
+j(i+1) = T i+1
+j(i+1)
+as noted above, as well as ei+1 2 T i+1
+j(i) , by deﬁnition of this tree.
+For a proof of (iii) for i + 1 < n consider any i + 1 6 ` < n. As long
+as j(`) 6= j(i), we have T i
+j(`) = T i+1
+j(`) , and the assertion follows from (iii)
+for i. Now consider the case that j(`) = j(i) =: j. Then e`+1 is a chord
+of T i
+j by (iii) for i, and T i+1
+j
+= T i
+j + ei+1 −ei. As ei+1 6= e`+1 since
+i 6= `, our edge e`+1 is still a chord of T i+1
+j
+. As noted at the start of
+the proof, its fundamental cycle with respect to Tj does not contain ei.
+Hence (iii) for i implies (iii) for i + 1.
+It remains to check that T 0 := T n satisﬁes E(T ) ( E(T 0).
+As
+en 2 E(T 0) by deﬁnition of T 0 = T n, and en /2 E(T ) by assumption,
+all we have to check is that E(T ) ✓E(T 0). Now E(T ) = E(T n−1), by
+(i) for i = n −1. But the only edge we deleted from any tree in T n−1
+when we turned it into T n was en−1. By (ii) for i = n−1, this edge also
+lay on another tree in T n−1, which we left unchanged for T n.
+⇤
+Proof of Theorem 2.4.4.
+Let T = (T1, . . . , Tk) be a family of k
+spanning trees of G, chosen with E(T ) maximal. Let D be the set of all
+edges of G that start an exchange chain with respect to T . These include
+all edges not in E(T ), since they form singleton exchange chains. Let P
+be the partition of V into the vertex sets of the components of (V, D).
+
+54
+2. Matching, Covering and Packing
+For the theorem’s packing assertion, let U
+2 P be given. For all
+j = 1, . . . , k let Sj be the subgraph of Tj induced on U by its edges in D.
+These forests Sj are edge-disjoint, since by the maximality of E(T ) and
+Lemma 2.4.5 no edge in D lies in more than one Tj. Let us show that
+the Sj are connected.
+Since the edges from D form a connected submultigraph on U, it
+suﬃces to show that for every edge uu0 2 D with u, u0 2 U there is a
+u–u0 path in Sj. This is clear if uu0 lies in Tj, and hence in Sj. If it
+does not, then the path uTju0 still has all its edges e in D, and hence lies
+in Sj: if e0, . . . , en is an exchange chain witnessing that e0 = uu0 2 D,
+then e, e0, . . . en is an exchange chain putting e in D, because e lies on
+the fundamental cycle of e0 with respect to Tj.
+As every Tj induces connected subgraphs Sj on the partition classes
+of P, contracting these Sj turns the Tj into spanning trees T 0
+j of G/P.
+These T 0
+j cover all the edges of G/P, since E r E(T ) ✓D.
+⇤
+The packing-covering theorem di↵ers from both the tree packing
+and the tree covering theorem in a fundamental way. The non-trivial
+directions of the latter two theorems each obtain a structural assertion
+about a graph, the existence of a packing or covering, as a consequence
+of quantitative assumptions about all their minors of a certain type:
+contraction minors for the packing theorem, and ‘deletion minors’ – i.e.,
+subgraphs – for the covering theorem. This format makes them interest-
+ing: they o↵er valuable structural information for one graph in exchange
+for less valuable quantitative information about many smaller graphs.
+The packing-covering theorem, by contrast, makes a structural as-
+sertion about every graph: with no need for any assumptions at all,
+neither quantitative nor qualitative.
+The packing-covering theorem extends to inﬁnite graphs in two in-
+terestingly di↵erent ways; see Exercises 20 and 131 in Chapter 8.
+2.5 Path covers
+Let us return once more to K¨onig’s duality theorem for bipartite graphs,
+Theorem 2.1.1. If we orient every edge of G from A to B, the theorem
+tells us how many disjoint directed paths we need in order to cover all
+the vertices of G: every directed path has length 0 or 1, and clearly the
+number of paths in such a ‘path cover’ is smallest when it contains as
+many paths of length 1 as possible – in other words, when it contains a
+maximum-cardinality matching.
+In this section we put the above question more generally: how many
+paths in a given directed graph will suﬃce to cover its entire vertex set?
+Of course, this could be asked just as well for undirected graphs. As it
+turns out, however, the result we shall prove is rather more trivial in

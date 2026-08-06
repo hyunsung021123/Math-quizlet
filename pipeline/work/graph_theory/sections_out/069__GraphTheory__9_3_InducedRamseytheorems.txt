@@ -1,0 +1,470 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 9. Ramsey Theory for Graphs
+현재 소단원: 9.3 Induced Ramsey theorems
+직전 소단원: 「9.2 Ramsey numbers」
+[본문]
+310
+9. Ramsey Theory
+So far in this section, we have been asking what is the least order of a
+complete graph G such that every 2-colouring of its edges yields a mono-
+chromatic copy of some given graph H. Rather than keeping G complete
+and focusing on its order, let us now consider its structure too, i.e., min-
+imize G with respect to the subgraph relation. Given a graph H, let us
+call a graph G Ramsey-minimal for H if G is minimal with the property
+Ramsey-
+minimal
+that every 2-colouring of its edges yields a monochromatic copy of H.
+What do such Ramsey-minimal graphs look like? Are they unique?
+The following result, which we include for its pretty proof, answers the
+second question for some H:
+Proposition 9.2.3. If T is a tree but not a star, then inﬁnitely many
+graphs are Ramsey-minimal for T.
+Proof. Let |T| =: r. We show that for every n 2 N there is a graph of
+(1.5.3)
+(5.2.3)
+(5.2.5)
+(=11.2.2)
+order at least n that is Ramsey-minimal for T.
+By Theorem 5.2.5, there exists a graph G with chromatic number
+χ(G) > r2 and girth g(G) > n. If we colour the edges of G red and
+green, then the red and the green subgraph cannot both have an r-
+(vertex-)colouring in the sense of Chapter 5: otherwise we could colour
+the vertices of G with the pairs of colours from those colourings and
+obtain a contradiction to χ(G) > r2. So let G0 ✓G be monochromatic
+with χ(G0) > r. By Lemma 5.2.3, G0 has a subgraph of minimum degree
+at least r, which contains a copy of T by Corollary 1.5.3.
+Let G⇤✓G be Ramsey-minimal for T. Clearly, G⇤is not a for-
+est: the edges of any forest can be 2-coloured (partitioned) so that no
+monochromatic subforest contains a path of length 3, let alone a copy
+of T. (Here we use that T is not a star, and hence contains a P 3.) So G⇤
+contains a cycle, which has length g(G) > n since G⇤✓G. In particular,
+|G⇤| > n as desired.
+⇤
+9.3 Induced Ramsey theorems
+Ramsey’s theorem can be rephrased as follows. For every graph H = Kr
+there exists a graph G such that every 2-colouring of the edges of G
+yields a monochromatic H ✓G. This is witnessed by any large enough
+complete graph as G. Let us now change the problem slightly and ask
+for a graph G in which every 2-edge-colouring yields a monochromatic
+induced H ✓G, where H is now an arbitrary given graph.
+This slight modiﬁcation changes the character of the problem. What
+is needed now is no longer a simple proof that G is ‘big enough’ (as for
+Theorem 9.1.1), but a careful construction: the construction of a graph
+that, however we bipartition its edge set, contains an induced copy of H
+
+9.3 Induced Ramsey theorems
+311
+with all edges in one partition class. We shall call such a graph a Ramsey
+graph for H.
+Ramsey
+graph
+The fact that every graph H has such a Ramsey graph G was proved
+around 1973, independently by Deuber, by Erd˝os, Hajnal & P´osa, and
+by R¨odl. It is one of the fundamental results of graph Ramsey theory.
+Theorem 9.3.1. Every graph has a Ramsey graph. In other words,
+for every graph H there exists a graph G which, for every partition4
+{E1, E2} of E(G), contains H as an induced subgraph with E(H) ✓E1
+or E(H) ✓E2.
+We shall prove Theorem 9.3.1 for bipartite graphs ﬁrst, and use this
+in our proof of the general theorem. For the remainder of this section,
+let us view bipartite graphs P as triples (V1, V2, E), where V1 and V2 are
+bipartite
+the two vertex classes and E ✓V1 ⇥V2 is the set of edges. The reason for
+this more explicit notation is that we want embeddings between bipar-
+tite graphs to respect their bipartitions: given another bipartite graph
+P 0 = (V 0
+1, V 0
+2, E0), an injective map ': V1 [V2 !V 0
+1 [V 0
+2 will be called an
+embedding of P in P 0 if '(Vi) ✓V 0
+i for i = 1, 2 and '(v1)'(v2) is an edge
+embedding
+P ! P 0
+of P 0 if and only if v1v2 is an edge of P. Note that such embeddings are
+‘induced’. Instead of ': V1 [V2 !V 0
+1 [V 0
+2 we may simply write ': P !P 0.
+Recall that [X]k denotes the set of k-subsets of a set X.
+[X]k
+Lemma 9.3.2. Every bipartite graph can be embedded in a bipartite
+graph of the form (X, [X]k, E) with E = { xY | x 2 Y }.
+E
+Proof. Let P be any bipartite graph, with vertex classes {a1, . . . , an}
+and {b1, . . . , bm}, say. Let X be a set with 2n + m elements, say
+X = {x1, . . . , xn, y1, . . . , yn, z1, . . . , zm} ;
+we shall deﬁne an embedding ': P ! (X, [X]n+1, E).
+Let us start by setting '(ai) := xi for all i = 1, . . . , n.
+Which
+(n + 1)-sets Y ✓X are suitable candidates for the choice of '(bi) for
+a given vertex bi? Clearly those adjacent exactly to the images of the
+neighbours of bi, i.e. those satisfying
+Y \ {x1, . . . , xn} = '(NP (bi)) .
+(1)
+Since d(bi) 6 n, the requirement of (1) leaves at least one of the n + 1
+elements of Y unspeciﬁed. In addition to '(NP (bi)), we may therefore
+include in each Y = '(bi) the vertex zi as an ‘index’; this ensures that
+'(bi) 6= '(bj) for i 6= j, even when bi and bj have the same neighbours
+in P. To specify the sets Y = '(bi) completely, we ﬁnally ﬁll them up
+with ‘dummy’ elements yj until |Y | = n + 1.
+⇤
+4 The partition classes here are allowed to be empty.
+
+312
+9. Ramsey Theory
+Next, we prove that every bipartite graph has a Ramsey graph –
+even a bipartite one:
+Lemma 9.3.3. For every bipartite graph P there exists a bipartite
+graph P 0 such that for every 2-colouring of the edges of P 0 there is
+an embedding ': P ! P 0 for which all the edges of '(P) have the same
+colour.
+Proof. We may assume by Lemma 9.3.2 that P has the form (X, [X]k, E)
+(9.1.3)
+with E = { xY
+| x
+2 Y }.
+We show the assertion for the graph
+P, X, k, E
+P 0 := (X0, [X0]k0, E0), where k0 := 2k −1, X0 is any set of cardinality
+P 0, X0, k0
+|X0| = R
+⇣
+k0, 2
+$k0
+k
+%
+, k |X| + k −1
+⌘
+,
+(this is the Ramsey number deﬁned after Theorem 9.1.3), and
+E0 := { x0Y 0 | x0 2 Y 0 } .
+E0
+Let us then colour the edges of P 0 with two colours ↵and β. Of the
+↵, β
+|Y 0| = 2k −1 edges incident with a vertex Y 0 2 [X0]k0, at least k must
+have the same colour. For each Y 0 we may therefore choose a ﬁxed k-set
+Z0 ✓Y 0 such that all the edges x0Y 0 with x0 2 Z0 have the same colour;
+Z0
+we shall call this colour associated with Y 0.
+associated
+The sets Z0 can lie within their supersets Y 0 in
+$k0
+k
+%
+ways, as follows.
+Let X0 be linearly ordered. Then for every Y 0 2 [X0]k0 there is a unique
+order-preserving bijection σY 0: Y 0 ! {1, . . . , k0}, which maps Z0 to one
+σY 0
+of
+$k0
+k
+%
+possible images.
+We now colour [X0]k0 with the 2
+$k0
+k
+%
+elements of the set
+[{1, . . . , k0}]k ⇥{↵, β}
+as colours, giving each Y 0 2 [X0]k0 as its colour the pair (σY 0(Z0), γ),
+where γ is the colour ↵or β associated with Y 0. Since |X0| was chosen
+as the Ramsey number with parameters k0, 2
+$k0
+k
+%
+and k |X| + k −1, we
+know that X0 has a monochromatic subset W of cardinality k |X|+k −1.
+W
+All Z0 with Y 0 ✓W thus lie within their Y 0 in the same way, i.e. there
+exists an S 2 [{1, . . . , k0}]k such that σY 0(Z0) = S for all Y 0 2 [W]k0, and
+all Y 0 2 [W]k0 are associated with the same colour, say with ↵.
+↵
+We now construct the desired embedding ' of P in P 0. We ﬁrst
+'|X
+deﬁne ' on X =: {x1, . . . , xn}, choosing images '(xi) =: wi 2 W so that
+xi, wi, n
+wi < wj in our ordering of X0 whenever i < j. Moreover, we choose the
+wi so that exactly k −1 elements of W are smaller than w1, exactly k −1
+lie between wi and wi+1 for i = 1, . . . , n−1, and exactly k −1 are bigger
+than wn. Since |W| = kn + k −1, this can indeed be done (Fig. 9.3.1).
+We now deﬁne ' on [X]k.
+Given Y
+2 [X]k, we wish to choose
+'|[X]k
+'(Y ) =: Y 0 2 [X0]k0 so that the neighbours of Y 0 among the vertices
+
+9.3 Induced Ramsey theorems
+313
+w1
+w2
+wn
+n
+n
+k −1
+X0
+Y 0
+Z0
+˜Z0
+˜Y 0
+W
+k −1
+k −1
+k −1
+. . .
+. . .
+. . .
+. . .
+n
+n
+x1
+x2
+xn
+−
+−
+−!
+−
+−
+−!
+−
+−
+−!
+Fig. 9.3.1. The graph of Lemma 9.3.3
+in '(X) are precisely the images of the neighbours of Y in P, i.e. the
+k vertices '(x) with x 2 Y , and so that all these edges at Y 0 are col-
+oured ↵. To ﬁnd such a set Y 0, we ﬁrst ﬁx its subset Z0 as { '(x) | x 2 Y }
+(these are k vertices of type wi) and then extend Z0 by k0 −k further
+vertices u 2 W r '(X) to a set Y 0 2 [W]k0, in such a way that Z0 lies
+correctly within Y 0, i.e. so that σY 0(Z0) = S. This can be done, because
+k −1 = k0 −k other vertices of W lie between any two wi. Then
+Y 0 \ '(X) = Z0 = { '(x) | x 2 Y } ,
+so Y 0 has the correct neighbours in '(X), and all the edges between Y 0
+and these neighbours are coloured ↵(because those neighbours lie in Z0
+and Y 0 is associated with ↵). Finally, ' is injective on [X]k: the images
+Y 0 of di↵erent vertices Y are distinct, because their intersections with
+'(X) di↵er. Hence, our map ' is indeed an embedding of P in P 0.
+⇤
+Proof of Theorem 9.3.1. Let H be given as in the theorem, and let
+n := R(r) be the Ramsey number of r := |H|. Then, for every 2-colouring
+r, n
+
+314
+9. Ramsey Theory
+of its edges, the graph K = Kn contains a monochromatic copy of H –
+K
+although not necessarily induced.
+We start by constructing a graph G0, as follows. Imagine the ver-
+tices of K to be arranged in a column, and replace every vertex by a row
+of
+$n
+r
+%
+vertices. Then each of the
+$n
+r
+%
+columns arising can be associated
+with one of the
+$n
+r
+%
+ways of embedding V (H) in V (K); let us furnish
+this column with the edges of such a copy of H. The graph G0 thus aris-
+ing consists of
+$n
+r
+%
+disjoint copies of H and (n −r)
+$n
+r
+%
+isolated vertices
+(Fig. 9.3.2).
+|
+{z
+}
+%n
+r
+&
+n −r
+H
+H
+H
+H
+n
+r
+. . .
+|
+{z
+}
+Fig. 9.3.2. The graph G0
+In order to deﬁne G0 formally, we assume that V (K) = {1, . . . , n}
+and choose copies H1, . . . , H(
+n
+r) of H in K with pairwise distinct vertex
+sets. (Thus, on each r-set in V (K) we have one ﬁxed copy Hj of H.)
+We then deﬁne
+V (G0) :=
+*
+(i, j) | i = 1, . . . , n; j = 1, . . . ,
+$n
+r
+% 
+and
+G0
+E(G0) :=
+(
+n
+r)
+[
+j=1
+*
+(i, j)(i0, j) | ii0 2 E(Hj)
+ 
+.
+The idea of the proof now is as follows. Our aim is to reduce the gen-
+eral case of the theorem to the bipartite case dealt with in Lemma 9.3.3.
+Applying the lemma iteratively to all the pairs of rows of G0, we con-
+struct a very large graph G such that for every edge colouring of G there
+is an induced copy of G0 in G that is monochromatic on all the bipartite
+subgraphs induced by its pairs of rows, i.e. in which edges between the
+same two rows always have the same colour.
+The projection of this
+G0 ✓G to {1, . . . , n} (by contracting its rows) then deﬁnes an edge
+colouring of K. (If the contraction does not yield all the edges of K,
+colour the missing edges arbitrarily.) By the choice of |K|, some Kr ✓K
+will be monochromatic. The Hj inside this Kr then occurs with the same
+
+9.3 Induced Ramsey theorems
+315
+colouring in the jth column of our G0, where it is an induced subgraph
+of G0, and hence of G.
+Formally, we shall deﬁne a sequence G0, . . . , Gm of n-partite graphs
+Gk, with n-partition {V k
+1 , . . . , V k
+n } say, and then let G := Gm.
+The
+graph G0 has been deﬁned above; let V 0
+1 , . . . , V 0
+n be its rows:
+V 0
+i :=
+*
+(i, j) | j = 1, . . . ,
+$n
+r
+% 
+.
+V 0
+i
+Now let e1, . . . , em be an enumeration of the edges of K.
+For k =
+ek, m
+0, . . . , m −1, construct Gk+1 from Gk as follows. If ek+1 = i1i2, say,
+i1, i2
+let P = (V k
+i1, V k
+i2, E) be the bipartite subgraph of Gk induced by its i1th
+P
+and i2th row. By Lemma 9.3.3, P has a (minimal) bipartite Ramsey
+P 0
+graph P 0 = (W1, W2, E0). We wish to deﬁne Gk+1 ◆P 0 in such a way
+W1, W2
+that every (monochromatic) embedding P ! P 0 can be extended to an
+embedding Gk ! Gk+1 respecting their n-partitions. Let {'1, . . . , 'q}
+'p, q
+be the set of all embeddings of P in P 0, and let
+V (Gk+1) := V k+1
+1
+[ . . . [ V k+1
+n
+,
+where
+V k+1
+i
+:=
+8
+<
+:
+W1
+for i = i1
+W2
+for i = i2
+Sq
+p=1(V k
+i ⇥{p})
+for i /2 {i1, i2}.
+(Thus for i 6= i1, i2, we take as V k+1
+i
+just q disjoint copies of V k
+i .) We
+now deﬁne the edge set of Gk+1 so that the obvious extensions of 'p to
+all of V (Gk) become embeddings of Gk in Gk+1: for p = 1, . . . , q, let
+ p: V (Gk) ! V (Gk+1) be deﬁned by
+ p(v) :=
+⇢
+'p(v)
+for v 2 P
+(v, p)
+for v /2 P
+and let
+E(Gk+1) :=
+q[
+p=1
+{ p(v) p(v0) | vv0 2 E(Gk) } .
+Now for every 2-colouring of its edges, Gk+1 contains an induced copy
+ p(Gk) of Gk whose edges in P, i.e. those between its i1th and i2th row,
+have the same colour: just choose p so that 'p(P) is the monochromatic
+induced copy of P in P 0 that exists by Lemma 9.3.3.
+We claim that G := Gm satisﬁes the assertion of the theorem. So
+let a 2-colouring of the edges of G be given.
+By the construction of
+Gm from Gm−1, we can ﬁnd in Gm an induced copy of Gm−1 such that
+for em = ii0 all edges between the ith and the i0th row have the same
+colour. In the same way, we ﬁnd inside this copy of Gm−1 an induced
+copy of Gm−2 whose edges between the ith and the i0th row have the
+
+316
+9. Ramsey Theory
+same colour also for ii0 = em−1. Continuing in this way, we ﬁnally arrive
+at an induced copy of G0 in G such that, for each pair (i, i0), all the
+edges between V 0
+i and V 0
+i0 have the same colour. As shown earlier, this
+G0 contains a monochromatic induced copy Hj of H.
+⇤
+The Ramsey graph G for H built in the proof of Theorem 9.3.1 is
+sparse in the sense that it contains no complete graphs bigger than it
+has to in order to contain H: G and H have the same clique number
+!(G) = !(H) (Exercise 23). This property, which comes for free with
+this proof of the theorem, is non-trivial even if we do not ask for induced
+embeddings: the existence of a graph G that contains a monochromatic
+copy of H, induced or not, on any 2-colouring of its edges is neither
+obvious nor does it follow easily from Ramsey’s original theorem.
+An even stronger sparsity requirement on G is to ask that it should
+contain no shorter cycles than H does, that g(G) = g(H). As a small
+indication of how ambitious this requirement on G is, notice that the
+statement of χ(G) > r can be rephrased as a Ramsey-like property of G:
+for any vertex-colouring with at most r colours, G contains a ‘monochro-
+matic’ copy of H = K2, an edge joining two like-coloured vertices. But
+as we noted in Chapter 5.2, graphs of simultaneously large chromatic
+number and girth are diﬃcult to construct.
+However, Ramsey graphs of large girth do exist:
+Theorem 9.3.4. (Reiher & R¨odl 2023)
+Every graph H has a Ramsey graph G that satisﬁes g(G) = g(H) unless
+H is a forest, in which case g(G) can be made arbitrarily large.
+If H is a tree but not a star, the aim of g(G) = g(H) (= 1) cannot be
+realised: if g(G) = 1 then G is a forest, so its edges can be 2-coloured
+alternately so that every path of length 3 receives two colours.
+9.4 Ramsey properties and connectivity
+According to Ramsey’s theorem, every large enough graph G has a very
+dense or a very sparse induced subgraph of given order, a Kr or Kr. If
+we assume that G is connected, we can say a little more:
+Proposition 9.4.1. For every integer r > 1 there is an n 2 N such that
+every connected graph of order at least n contains Kr, K1,r or P r as an
+induced subgraph.
+Proof. Let d + 1 be the Ramsey number of r, let n >
+d
+d−2(d −1)r, and
+(1.3.3)
+let G be a graph of order at least n. If G has a vertex v of degree at least

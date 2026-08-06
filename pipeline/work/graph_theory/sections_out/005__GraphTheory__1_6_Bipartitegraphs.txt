@@ -1,0 +1,98 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.6 Bipartite graphs
+직전 소단원: 「1.5 Trees and forests」
+[본문]
+1.6 Bipartite graphs
+17
+1.6 Bipartite graphs
+Let r > 2 be an integer. A graph G = (V, E) is called r-partite if V
+r-partite
+admits a partition into r classes such that every edge has its ends in dif-
+ferent classes: vertices in the same partition class must not be adjacent.
+Instead of ‘2-partite’ one usually says bipartite.
+bipartite
+K2,2,2 = K3
+2
+Fig. 1.6.1. Two 3-partite graphs
+An r-partite graph in which every two vertices from di↵erent par-
+tition classes are adjacent is called complete; the complete r-partite
+complete
+r-partite
+graphs for all r together are the complete multipartite graphs.
+The
+complete r-partite graph Kn1 ⇤. . . ⇤Knr is denoted by Kn1,...,nr; if
+Kn1,...,nr
+n1 = . . . = nr =: s, we abbreviate this to Kr
+s. Thus, Kr
+s is the complete
+Kr
+s
+r-partite graph in which every partition class contains exactly s vertices.6
+(Figure 1.6.1 shows the example of the octahedron K3
+2; compare its draw-
+ing with that in Figure 1.4.3.) Graphs of the form K1,n are called stars;
+star
+the vertex in the singleton partition class of this K1,n is the star’s centre.
+centre
+=
+=
+Fig. 1.6.2. Three drawings of the bipartite graph K3,3 = K2
+3
+Clearly, a bipartite graph cannot contain an odd cycle, a cycle of odd
+odd cycle
+length. In fact, the bipartite graphs are characterized by this property:
+Proposition 1.6.1. A graph is bipartite if and only if it contains no
+[1.9.4]
+[5.3.1]
+[6.4.2]
+odd cycle.
+6 Note that we obtain a Kr
+s if we replace each vertex of a Kr by an independent
+s-set; our notation of Kr
+s is intended to hint at this connection.
+
+18
+1. The Basics
+Proof. Let G = (V, E) be a graph without odd cycles; we show that G is
+(1.5.1)
+bipartite. Clearly a graph is bipartite if all its components are bipartite
+or trivial, so we may assume that G is connected. Let T be a spanning
+tree in G, pick a root r 2 T, and denote the associated tree-order on V
+by 6T . For each v 2 V , the unique path rTv has odd or even length.
+This deﬁnes a bipartition of V ; we show that G is bipartite with this
+partition.
+e
+Ce
+r
+x
+y
+Fig. 1.6.3. The cycle Ce in T + e
+Let e = xy be an edge of G.
+If e 2 T, with x <T y say, then
+rTy = rTxy and so x and y lie in di↵erent partition classes. If e /2 T
+then Ce := xTy + e is a cycle (Fig. 1.6.3), and by the case treated
+already the vertices along xTy alternate between the two classes. Since
+Ce is even by assumption, x and y again lie in di↵erent classes.
+⇤
+1.7 Contraction and minors
+In Section 1.1 we saw two fundamental containment relations between
+graphs: the ‘subgraph’ relation, and the ‘induced subgraph’ relation. In
+this section we meet two more: the ‘minor’ relation, and the ‘topological
+minor’ relation. Let X be a ﬁxed graph.
+A subdivision of X is, informally, any graph obtained from X by
+‘subdividing’ some or all of its edges by drawing new vertices on those
+edges.
+In other words, we replace some edges of X with new paths
+subdivision
+TX of X
+between their ends, so that none of these paths has an inner vertex in
+V (X) or on another new path. When G is a subdivision of X, we also
+say that G is a TX.7 The original vertices of X are the branch vertices
+branch
+vertices
+of the TX; its new vertices are called subdividing vertices. Note that
+7 The ‘T’ stands for ‘topological’. Although, formally, TX denotes a whole class
+of graphs, the class of all subdivisions of X, it is customary to use the expression as
+indicated to refer to an arbitrary member of that class.

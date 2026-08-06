@@ -1,0 +1,154 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 11. Random Graphs
+현재 소단원: 11.ex Exercises
+직전 소단원: 「11.4 Threshold functions and second moments」
+[연습문제]
+358
+11. Random Graphs
+The bound in Theorem 11.4.5 is particularly easy to compute for
+balanced graphs H, those for which "0(H) = "(H). Cycles and trees are
+examples of balanced graphs. For cycles, we have the threshold familiar
+from the proof of Erd˝os’s theorem:
+Corollary 11.4.6. If k > 3, then t(n) = n−1 is a threshold function for
+the property of containing a k-cycle.
+⇤
+Note that t does not depend on k. (See also Exercise 18.)
+For trees, there is a similar phenomenon. Here, the threshold func-
+tion does depend on the order of the tree, but not on its shape:
+Corollary 11.4.7. If T is a tree of order k > 2, then t(n) = n−k/(k−1)
+is a threshold function for the property of containing a copy of T.
+⇤
+The systematic study of threshold functions has led to an overall
+picture of how the typical properties of a graph G 2 G(n, p) unfold as
+the growth rate of p = p(n) increases. This picture, dubbed the evolu-
+tion of random graphs, is quite fascinating: as in the evolution of species,
+changes happen ‘in jumps’, marked by the times the growth rate of p
+crosses that of a threshold function.
+For a very rough sketch, let us begin with edge probabilities p whose
+order of magnitude lies below n−2; for such p, a random graph G 2 G(n, p)
+almost surely has no edges at all. But as p grows, it acquires more and
+more structure. As p approaches n−1, its components become larger and
+larger trees (Corollary 11.4.7), until at p = n−1 the ﬁrst cycles are born
+(Exercise 18).
+Soon, some of these will have several crossing chords,
+making the graph non-planar. At the same time, one component out-
+grows the others, until it devours them around p = (log n)n−1, making
+the graph connected. Hardly later, at a mere p = (1 + ✏)(log n)n−1, our
+random graph already almost surely has a Hamilton cycle. . .
+Exercises
+1.−What is the probability that a random graph in G(n, p) has exactly m
+edges, for 0 6 m 6 $n
+2
+%
+ﬁxed?
+2.
+What is the expected number of edges in G 2 G(n, p)?
+3.
+What is the expected number of Kr-subgraphs in G 2 G(n, p)?
+4.
+Characterize the graphs that occur as a subgraph in every graph of
+suﬃciently large average degree.
+
+Exercises
+359
+5.
+In the usual terminology of measure spaces (and in particular, of prob-
+ability spaces), the phrase ‘almost all’ is used to refer to a set of points
+whose complement has measure zero. Rather than considering a limit
+of probabilities in G(n, p) as n ! 1, would it not be more natural to
+deﬁne a probability space on the set of all ﬁnite graphs (one copy of
+each) and to investigate properties of ‘almost all’ graphs in this space,
+in the sense above?
+6.
+Show that if almost all G 2 G(n, p) have a graph property P1 and almost
+all G 2 G(n, p) have a graph property P2, then almost all G 2 G(n, p)
+have both properties, i.e. have the property P1 \ P2.
+7.
+Show that, for constant p 2 (0, 1), almost every graph in G(n, p) has
+diameter 2.
+8.
+Show that, for constant p 2 (0, 1), almost no graph in G(n, p) has a
+separating complete subgraph.
+9.
+Derive Proposition 11.3.1 from Lemma 11.3.2.
+10.
+Show that for every graph H there exists a function p = p(n) such that
+limn!1 p(n) = 0 but almost every G 2 G(n, p) contains an induced
+copy of H.
+11.+ (i) Show that, for every 0 < ✏6 1 and p = (1 −✏)(ln n)n−1, almost
+every G 2 G(n, p) has an isolated vertex.
+(ii) Find a probability p = p(n) such that almost every G 2 G(n, p) is
+disconnected but the expected number of spanning trees of G tends to
+inﬁnity as n ! 1.
+(Hint for (ii): A theorem of Cayley states that Kn has exactly nn−2
+spanning trees.)
+12.+ Given r
+2 N, ﬁnd a c > 0 such that, for p = cn−1, almost every
+G 2 G(n, p) has a Kr minor. Can c be chosen independently of r?
+13.
+Find an increasing graph property without a threshold function, and a
+property that is not increasing but has a threshold function.
+14.−Let H be a graph of order k, and let h denote the number of graphs
+isomorphic to H on some ﬁxed set of k elements. Show that h 6 k!.
+For which graphs H does equality hold?
+15.−For every k > 1, ﬁnd a threshold function for { G | ∆(G) > k }.
+16.−For every d 2 N, determine the threshold function for the property of
+containing the d-dimensional cube (see Exercise 2, Ch. 1), and for the
+property of containing the complete graph Kd.
+17.
+Does the property of containing any tree of order k (for k > 2 ﬁxed)
+have a threshold function? If so, which? If not, why not?
+18.
+Show that t(n) = n−1 is also a threshold function for the property of
+containing any cycle.
+
+360
+11. Random Graphs
+19.
+Consider the terms A0 and A1 in the proof of Lemma 11.4.4, which
+are both functions of n. Recall that P [ H0 [ H00 ✓G ] = p2` both for
+H0 \ H00 = ; and for |H0 \ H00| = 1.
+(i) Show that A0 6! 0 (while A1 ! 0) as n ! 1.
+(ii) Explain the di↵erence without doing any formal calculations.
+20.+ Given a graph H, let P be the property of containing an induced copy
+of H. Show that P has no threshold function unless H is complete.
+Notes
+There are a number of monographs and texts on the subject of random graphs.
+The ﬁrst comprehensive monograph was B. Bollob´as, Random Graphs, Aca-
+demic Press 1985. Another advanced monograph is S. Janson, T. Luczak &
+A. Ruci´nski, Random Graphs, Wiley 2000; this concentrates on areas devel-
+oped since Random Graphs was published. E.M. Palmer, Graphical Evolution,
+Wiley 1985, covers material similar to parts of Random Graphs but is writ-
+ten in a more elementary way.
+Compact introductions going beyond what
+is covered in this chapter are given by B. Bollob´as, Modern Graph Theory,
+Springer GTM 184, 1998, and by M. Karo´nski, Handbook of Combinatorics
+(R.L. Graham, M. Gr¨otschel & L. Lov´asz, eds.), North-Holland 1995.
+A stimulating advanced introduction to the use of random techniques in
+discrete mathematics more generally is given by N. Alon & J.H. Spencer, The
+Probabilistic Method, Wiley 1992. One of the attractions of this book lies in
+the way it shows probabilistic methods to be relevant in proofs of entirely de-
+terministic theorems, where nobody would suspect it. Other examples for this
+phenomenon are Alon’s proof of Theorem 5.4.1, or the proof of Theorem 1.3.4;
+see the notes for Chapters 5 and 1, respectively.
+The probabilistic method had its ﬁrst origins in the 1940s, one of its
+earliest results being Erd˝os’s probabilistic lower bound for Ramsey numbers
+(Theorem 11.1.3). Lemma 11.3.2 about the properties Pi,j is taken from Bol-
+lob´as’s Springer text cited above. A very readable rendering of the proof that,
+for constant p, every ﬁrst order sentence about graphs is either almost surely
+true or almost surely false, is given by P. Winkler, Random structures and
+zero-one laws, in (N.W. Sauer et al., eds.) Finite and Inﬁnite Combinatorics
+in Sets and Logic (NATO ASI Series C 411), Kluwer 1993.
+Theorem 11.3.5 is due to P. Erd˝os and A. R´enyi, Asymmetric graphs, Acta
+Math. Acad. Sci. Hungar. 14 (1963), 295–315. For further references about
+the inﬁnite random graph R see the notes in Chapter 8.
+The seminal paper on graph evolution is P. Erd˝os & A. R´enyi, On the
+evolution of random graphs, Publ. Math. Inst. Hungar. Acad. Sci. 5 (1960),
+17–61. This paper also includes Theorem 11.4.5 for balanced graphs. The
+generalization to unbalanced subgraphs was ﬁrst proved by Bollob´as in 1981;
+see Karo´nski’s Handbook chapter. The fact that all ‘non-trivial’ increasing
+graph properties have a threshold function was proved by B. Bollob´as and
+A.G. Thomason, Threshold functions, Combinatorica 7 (1987), 35–38.
+There is another way of deﬁning a random graph G, which is just as
+natural and common as the model we considered. Rather than choosing the

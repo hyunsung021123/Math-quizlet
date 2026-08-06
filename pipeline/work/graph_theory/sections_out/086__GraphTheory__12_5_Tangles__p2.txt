@@ -1,0 +1,556 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.5 Tangles (분할 part 2)
+직전 소단원: 「12.4 Tree-width」
+[본문]
+384
+12. Graph Minors
+Suppose now that (ii) holds. We may assume that x(s) 6 x(s0).
+Lemma 12.5.6 now gives x(c0) + x(d0) < x(s) + x(s0) 6 2 x(s0), so
+x(c0) < x(s0) or x(d0) < x(s0). In either case s0 is not S-friendly, by
+c0, d0 2 S0 and our choice of S0 for s0.
+⇤
+The following general theorem about entanglements in graphs im-
+plies Theorem 12.5.1. Indeed, take as the S in Theorem 12.5.8 the set of
+all sets D(⌧, ⌧0) of eﬃcient distinguishers of distinguishable tangles in G;
+recall that, by Lemma 12.5.4, these sets D(⌧, ⌧0) are entanglements.
+Theorem 12.5.8. (Carmesin & Kurkofka, 2024)
+Let S be any set of entanglements in a graph G. Then the S-friendly
+separations of G are nested.
+Proof. It suﬃces to show that S satisﬁes the premise of Lemma 12.5.7.
+So consider S, S0 2 S with crossing separations s 2 S and s0 2 S0 as in
+the lemma, with |s| 6 |s0| say. Let us call a corner of s and s0 relevant
+relevant
+if it has order at most |s0|. Let us show the following:
+At least three corners of s and s0 are relevant.
+(1)
+Suppose at most two corners of s and s0 are relevant. By submodu-
+larity (†) and |s| 6 |s0|, at least one of any two opposite corners must be
+relevant, so there are adjacent relevant corners. As their opposite two
+corners are irrelevant and thus have order > |s0|, our adjacent relevant
+corners have order < |s| by submodularity. If they lie on the same side
+of s, then this contradicts our assumption that S is an entanglement. If
+they lie on the same side of s0, it contradicts our assumption that S0 is
+an entanglement. This completes the proof of (1).
+We may assume that all four corners of s and s0 are relevant.
+(2)
+To prove (2), suppose only three corners are relevant. Two of these,
+c0 and d0 say, lie on the same side of s0. One of them, c0 say, then lies
+in S0 and has order exactly |s0|, by (E) for S0. By submodularity, the
+corner c opposite c0 has order at most |s|; in particular, c is relevant
+too (Fig. 12.5.3). By assumption, the remaining corner d is irrelevant
+and hence has order > |s0|. By submodularity, therefore, its opposite
+corner d0 has order < |s|. Condition (E) applied to S and s now yields
+that |c| = |s| and c 2 S. We thus have (i) of Lemma 12.5.7, as desired.
+This completes the proof of (2).
+By (E) for S0, the separation s0 has corners on both sides that have
+order |s0| and lie in S0.
+Assume ﬁrst that these are adjacent, say c0
+and d.
+Let c be the corner opposite c0, and d0 that opposite d.
+By
+submodularity, c and d0 have order at most |s|. As they lie on the same
+side of s, one of them lies in S, by (E) for S. Since its opposite corner
+lies in S0, we have (i) of Lemma 12.5.7 as desired.
+
+12.5 Tangles
+385
+Fig. 12.5.3. Corners of s and s0 in the proof of Theorem 12.5.8.
+Relevant corners in the proof of (2) are shaded.
+Suppose now that the two corners on the di↵erent sides of s0 that
+have order |s0| and lie in S0 are opposite corners, say c0 and c in
+Figure 12.5.3.
+By submodularity, this means that our assumption of
+|s| 6 |s0| must hold with equality: |s| = |s0|. Applying (E) to the side
+of s on which d lies, we ﬁnd that d or c0 lies in S. If c0 does, then c0 2 S
+and c 2 S0 satisfy (i) of Lemma 12.5.7. So we assume that d 2 S.
+Applying (E) to the other side of s, we ﬁnd that c or d0 lies in S. If
+c does, then again c and c0 satisfy (i) of Lemma 12.5.7. So we assume that
+d0 2 S. We now have (ii) of Lemma 12.5.7, with d, d0 2 S and c, c0 2 S0.
+This completes our veriﬁcation of the premise of Lemma 12.5.7.
+⇤
+Theorem 12.5.8, like Theorem 12.5.1, tells us how all the tangles in
+a graph G are distinguished by a certain set N of nested separations.
+These are induced by a tree-decomposition of G (Exercises 16, 51). More
+generally, for every k 2 N the set Nk of separations of order < k in N
+is induced by a tree-decomposition (Tk, Vk) of G. Then every k-tangle
+⌧in G orients all the separations in Nk towards Vt for some t 2 Tk
+depending on ⌧, where Vk = (Vt)t2Tk as usual. We may think of the
+tangle ⌧as ‘living in’ this node t of Tk, or in the bag Vt it speciﬁes.
+For i < j, the tree Ti is obtained from Tj by contracting the edges that
+correspond, as in Lemma 12.3.1, to separations in Nj r Ni, while the
+bags of Vi are unions of bags of Vj indexed by the t 2 Tj that lie in a
+common branch set of this contraction minor Ti 4 Tj.
+The tree-structure which a nested set of separations imposes on G
+can also be made visible in a more direct way, without a detour via
+tree-decompositions, as follows.
+The set
+!
+E(T) of the oriented edges of a tree T is partially ordered by
+letting
+!e >
+!f whenever
+!e = (e, x, y) and
+!f = (f, u, v) are such that the
+!e >
+!
+f
+unique {x, y}–{u, v} path in T starts in y and ends in u. Note that every
+two edges of T are ‘nested’ in our earlier sense that they have comparable
+orientations. Call a subset ⌧of
+!
+E(T) consistent if it contains no
+ e such
+consistent
+
+386
+12. Graph Minors
+that
+!e >
+!f
+2 ⌧for some f. The consistent orientations of E(T) are
+precisely those towards some node t of T (Ex. 50). The set of minimal
+elements of such an orientation, then, is the set
+σt := { (e, s, t) 2
+!
+E(T) | e = st 2 T }
+σt
+of all the incoming edges at t.
+Given a set S of separations of G, an S-tree is a pair (T, ↵) such
+S-tree
+that T is a tree and ↵:
+!
+E(T) !
+!
+S respects the orderings on these sets
+and commutes with inversion: ↵(
+!e) > ↵(
+!f) if
+!e >
+!f (Fig. 12.5.4), and
+↵(
+ e) = (B, A) whenever ↵(
+!e) = (A, B).9 We then say that (T, ↵) is an
+S-tree over a set F of subsets of
+!
+S if ↵(σt) 2 F for every node t of T.
+over
+Note that we do not require ↵to be injective, not even on the sets σt.
+A
+B
+!e
+C
+D
+!f
+Fig. 12.5.4. An S-tree with ↵(
+!e) = (A, B) > (C, D) = ↵(
+!f )
+As every two edges of a tree have comparable orientations, the image
+of
+!
+E(T) under ↵for an S-tree (T, ↵) deﬁnes a nested subset of S. Con-
+versely, every nested set N of separations of G underlies the image of ↵
+for a suitable S-tree (T, ↵), with S = N say. For example, a set N of ef-
+ﬁcient tangle-distinguishers as in Theorem 12.5.1 can be displayed by an
+N-tree (T, ↵) in this way. Its minors T1 4 T2 4 . . . deﬁned earlier, then,
+display the sets Nk of eﬃcient tangle-distinguishers of order < k in N for
+k = 1, 2, . . . : those that distinguish, among others, the k-tangles in G.
+The second main theorem about tangles, the tangle–tree duality the-
+orem, employs Sk-trees to display the tree-structure of graphs that have
+no k-tangles for some desired k. Intuitively, the bags of the correspond-
+ing tree-decompositions will be ‘too small’ to be home to a tangle. To
+express this directly in terms of S-trees, we need another deﬁnition.
+Recall that the k-tangles in G are the orientations of Sk that avoid T.
+A set σ of oriented separations is a star if (A, B) > (D, C) for all distinct
+star
+(A, B), (C, D) 2 σ (Fig. 12.5.5). Let T ⇤:= { σ 2 T | σ is a star }.
+T ⇤
+As we shall see in a moment, Sk-trees over T ⇤are natural certiﬁ-
+cates for the non-existence of k-tangles. The tangle–tree duality theorem
+guarantees that these certiﬁcates exist whenever a graph has no k-tangle:
+9 A tree-decomposition (T, V), for example, makes T into an S-tree for the set S
+of separations it induces.
+
+12.5 Tangles
+387
+ 
+A \ B
+A
+B
+E
+F
+C
+D
+A
+B
+B
+A
+Fig. 12.5.5. The separations (A, B), (C, D), (E, F) form a star
+Theorem 12.5.9. (Robertson & Seymour 1991)
+tangle–tree
+duality
+theorem
+The following assertions are equivalent for all graphs G and integers k > 0 :
+(i) G has no tangle of order k;
+(ii) G has an Sk-tree over T ⇤.
+Lemma 12.5.10. (Uncrossing Lemma)
+Every consistent orientation of Sk that has a subset σ 2 T also has a
+subset in T ⇤.
+Proof. Let σ = { (Ai, Bi) | i = 1, 2, 3 } 2 T be contained in a consistent
+orientation O of Sk. We show that, unless σ is a star, we can replace one
+of its elements by a strictly greater separation in O while keeping it in T .
+In ﬁnitely many steps this will turn σ into a star: a subset of O in T ⇤.
+If σ is not a star we may assume that (A1, B1) 6> (B2, A2). By (†) and
+σ ✓
+−!
+Sk we may further assume that (C, D) := (A1 \ B2, B1 [ A2) 2
+−!
+Sk;
+the other case, that (B1 \ A2, A1 [ B2) 2
+−!
+Sk, is analogous. Since O is
+consistent and (C, D) > (A1, B1) 2 O, we cannot have (D, C) 2 O. Thus,
+(C, D) 2 O. But (C, D) > (A1, B1), since either A1 6✓B2 or B1 6◆A2
+by assumption. Replacing (A1, B1) in σ with (C, D) to obtain σ0, say,
+gives the desired reduction: since any vertex or edge of G[A1] that does
+not lie in G[C] lies in G[A2], and (A2, B2) 2 σ0, we have σ0 2 T .
+⇤
+Proof of Theorem 12.5.9. (ii)!(i) Suppose G has an Sk-tree (T, ↵)
+over T ⇤. Then any k-tangle ⌧in G deﬁnes via ↵an orientation of the
+edges of T. Let t 2 T be the last node of any maximal path in T whose
+edges are all oriented forward.
+Then all the edges at t are oriented
+towards t, and ↵maps these oriented edges to a star in T . In particular,
+⌧has a subset in T and thus cannot be a tangle.
+(i)!(ii) To make this implication susceptible to an induction proof,
+our strategy is to relax both (i) and (ii) in some carefully designed way
+that makes it easier to prove the implication at the induction start. The
+
+388
+12. Graph Minors
+relaxation, however, gets a little less in each inductive step, so that at the
+end it has evaporated and we have our desired implication of (i)!(ii).
+More precisely, we shall prove that certain sets T + satisfy one of
+(1) Sk has a consistent orientation that avoids T ⇤[ T +;
+(2) G has an Sk-tree over T ⇤[ T +.
+This yields (i)!(ii) when T + = ;. Indeed, if G has no k-tangle then, by
+Lemma 12.5.10, (1) cannot hold. So (2) must hold, but (2) is just (ii)
+when T + = ;.
+The sets T + for which we prove this will depend on certain sets O
+of oriented separations, which we shall vary in the induction. Given O,
+let T + :=
+*
+{(B, A)} : (A, B) 2 O
+ 
+r T ⇤. Thus, Sk-trees over T ⇤[ T +
+T +
+are given more freedom compared with Sk-trees over T ⇤: singleton stars
+associated with their leaves need not lie in T ⇤, as long as they lie in T +.
+This happens when the inverse of their element lies in O but is not of the
+form (A, V ). In the latter case, {(V, A)} lies in T ⇤, and hence not in T +.
+The sets O we consider in our induction will be all the sets O ✓
+−!
+Sk
+that have the following two properties common to all k-tangles. First,
+they will contain all the separations (A, V ) with |A| < k .
+Second, they will be closed upwards in
+−!
+Sk:
+they contain any
+(A, B) 2
+−!
+Sk such that (A, B) > (C, D) for some (C, D) 2 O. In particular,
+our induction covers the smallest such set, O = { (A, V ) : |A| < k }, for
+which T + = ;.
+Since all singletons {(B, A)} in T ⇤satisfy B = V, by deﬁnition of T ,
+our sets O contain the corresponding separations (A, B). So the relation-
+ship between each O and the T + it gives rise to is precisely
+O =
+*
+(A, B) 2
+−!
+Sk : {(B, A)} 2 T ⇤[ T + 
+.
+(⇤)
+If O contains a separation (X, Y ) together with its inverse (Y, X),
+then (T, ↵) with T = K2 and ↵:
+!
+E(T) ! {(X, Y ), (Y, X)} satisﬁes (2),
+by (⇤). We now assume that O is antisymmetric: that it contains no
+inverse pair of separations. Then O is a consistent orientation of some
+subset SO of Sk.
+SO
+Let us prove by induction on |Sk r SO| that T + satisﬁes (1) or (2).
+At the induction start, O is an orientation of all of Sk. Hence if (1) fails
+then O has a subset σ 2 T ⇤[ T +. By (⇤) and the antisymmetry of O,
+we have |σ| > 2. Let T be the star K1,n with n = |σ| leaves, and let ↵
+map its oriented edges (e, s, t) with s a leaf bijectively to the elements
+of σ. Then (T, ↵) satisﬁes (2), by deﬁnition of σ and (⇤).
+In the induction step we have Sk r SO 6= ;. Choose {U1, W1} and
+{U2, W2} in Sk r SO so that both (Ui, Wi) are maximal in
+−!
+Sk r
+−!
+SO and
+Ui, Wi
+(U1, W1) > (W2, U2).10 Then the (Ui, Wi) are maximal even in
+−!
+Sk r O:
+10 It is easy to see that such separations exist, just choose them in turn.
+
+12.5 Tangles
+389
+for any (U, W) > (Ui, Wi) in
+−!
+Sk r O we would have (W, U) 2 O by
+the maximality of (Ui, Wi) in
+−!
+Sk r
+−!
+SO, so (Wi, Ui) > (W, U) would
+be in O (this being closed upwards in
+−!
+Sk), contradicting the fact that
+(Ui, Wi) /2
+−!
+SO.
+Thus, the sets Oi := O [{(Ui, Wi)} are again closed upwards in
+−!
+Sk,
+Oi
+and are orientations of subsets of Sk that contain SO properly. We may
+therefore apply the induction hypothesis to these Oi, to obtain (1) or (2)
+for T +
+i
+:=
+*
+{(B, A)} : (A, B) 2 Oi
+ 
+r T ⇤◆T + instead of T +.
+T +
+i
+Since (1) holds with T + as soon as it holds with T +
+1
+or T +
+2 , we
+may assume that both T +
+i
+satisfy (2). Let (Ti, ↵i) be the correspond-
+(Ti, ↵i)
+ing Sk-trees over T ⇤[ T +
+i . If one of these is in fact over T ⇤[ T + we
+are done, so we assume not.
+Then each Ti has a node ui such that
+↵i(ei, wi, ui) = (Wi, Ui) for every edge ei = wiui of Ti at ui.
+ei, ui, wi
+Every such ui must be a leaf. For otherwise (Wi, Ui) > (Ui, Wi), and
+therefore Wi ✓Ui. But then Ui = V and hence (Wi, Ui) 2 O, contrary
+to the choice of (Ui, Wi). Similarly, these leaves ui are unique. Indeed if
+u0
+i is another leaf, with incident edge e0
+i = u0
+iw0
+i say, then (e0
+i, u0
+i, w0
+i) >
+(ei, wi, ui) and therefore ↵i(e0
+i, u0
+i, w0
+i) > ↵i(ei, wi, ui) = (Wi, Ui). Hence
+if ↵i(e0
+i, u0
+i, w0
+i) = (Ui, Wi) then (Ui, Wi) > (Wi, Ui), with a contradiction
+as earlier. Thus, our Sk-trees (Ti, ↵i) are nearly over T ⇤[T +: they are,
+except at their leaf ui.
+Choose {X1, X2} 2 Sk of minimum order with
+X1, X2
+(U1, W1) > (X1, X2) > (W2, U2);
+such a separation exists, because (U1, W1) is a candidate.
+We shall
+modify the maps ↵i to maps ↵0
+i deﬁning Sk-trees (Ti, ↵0
+i). These will
+again be over T ⇤[ T + except at ui, where we shall have ↵0
+i(ei, wi, ui) =
+(X3−i, Xi). Our plan will then be to join the newly labelled trees Ti −ui
+together by adding the edge wiw3−i and mapping it to their common
+separation (X3−i, Xi), to obtain our desired Sk-tree over T ⇤[ T +.
+To deﬁne ↵0
+i, consider an edge e of Ti. Name its ends t, t0 so that
+(ei, ui, wi) > (e, t, t0). Then if ↵i(e, t, t0) = (A, B), say, let
+↵0
+i(e, t, t0) = (A0, B0) := (A [ Xi, B \ X3−i)
+↵0
+i
+and ↵0
+i(e, t0, t) = (B0, A0). (Fig. 12.5.6).
+Let us show that ↵0
+i maps
+!
+E(Ti) to
+−!
+Sk. Given an edge e 2 E(Ti),
+let
+!e be such that (ei, ui, wi) >
+!e, as in the deﬁnition of ↵0
+i. Then for
+↵i(
+!e) = (A, B) we have ↵0
+i(
+!e) = (A0, B0) = (A [ Xi, B \ X3−i). By (†)
+we have |A0 \ B0| 6 |A \ B| < k, as desired, if the order of
+(Yi, Y3−i) := (A \ Xi, B [ X3−i)
+is no less than the order of {X1, X2}. And it cannot be less, as that would
+contradict our choice of {X1, X2} since (U1, W1) > (Y1, Y2) > (W2, U2).
+
+390
+12. Graph Minors
+A
+A
+B
+B
+A
+B
+ui
+wi
+Ti
+t
+t
+Xi
+Ui
+Ui
+Wi
+Wi
+X3−i
+Fig. 12.5.6. Shifting (A, B) to (A0, B0)
+Indeed, recall that Ui ✓Xi as well as Ui ✓A, and Wi ◆X3−i as well
+as Wi ◆B, because (Ui, Wi) > (Xi, X3−i) as well as (Ui, Wi) > (A, B).
+Hence (Ui, Wi) > (Yi, Y3−i), and (Yi, Y3−i) > (Xi, X3−i) > (W3−i, U3−i).
+Next, let us show that ↵0
+i, like ↵i, respects the orderings of
+!
+E(Ti)
+and
+−!
+Sk. Consider any
+!e >
+!f 2
+!
+E(Ti), with (A, B) = ↵i(
+!e) > ↵i(
+!f) =
+(C, D) say. Then A ✓C and B ◆D. If (ei, ui, wi) >
+!e, then ↵0
+i(
+!e) =:
+(A0, B0) > (C0, D0) := ↵0
+i(
+!f), because A0 = A [ Xi ✓C [ Xi = C0 and
+B0 = B \ X3−i ◆D \ X3−i = D0. On the other hand if (ei, ui, wi) >
+ e
+but (ei, ui, wi) >
+!f, then A0 = A \ X3−i ✓A ✓C ✓C [ Xi = C0 while
+B0 = B [ Xi ◆B ◆D ◆D \ X3−i = D0, so again (A0, B0) > (C0, D0).
+Since ↵0
+i, by deﬁnition, commutes with inversions of orientations, this
+covers all the cases to be considered.
+So (Ti, ↵0
+i) is indeed an Sk-tree. Let us show that (Ti, ↵0
+i), like (Ti, ↵i),
+is an Sk-tree over T ⇤[ T + except at ui, where
+↵0
+i(ei, wi, ui) = (Wi \ X3−i, Ui [ Xi) = (X3−i, Xi) .
+Consider a node t 6= ui, and let e = st be its incident edge
+in uiTit.
+Let ↵i(e, s, t) =: (A, B) and ↵0
+i(e, s, t) =: (A0, B0).
+As
+(ei, ui, wi) > (e, s, t),
+(Ui, Wi) > (A, B) > (A [ Xi, B \ X3−i) = (A0, B0).
+Suppose ﬁrst that ↵i(σt) = {(A, B)}. Let us show that t must be a leaf.
+If not, then ↵i(e0, s0, t) = (A, B) for another edge e0 = s0t at t. Then
+(A, B) > (B, A), and hence B = V. But then (A, B) 2 O, and hence
+(Ui, Wi) 2 O since O is closed upwards in
+−!
+Sk. This contradicts our choice
+of (Ui, Wi). Hence t is indeed a leaf of Ti.
+Since (Ti, ↵i) is over T ⇤[T + except at ui, we thus have (B, A) 2 O
+by (⇤). As O is closed upwards in
+−!
+Sk, this means that (B0, A0) > (B, A)
+is also in O. Thus, ↵0
+i(σt) = {(A0, B0)} 2 T ⇤[ T + by (⇤), as desired.
+Suppose now that |↵i(σt)| > 2. Then ↵i(σt) 2 T ⇤; let us show that
+also ↵0
+i(σt) 2 T ⇤. Since ↵0
+i respects the orderings of
+!
+E(Ti) and
+−!
+Sk, we
+already know that ↵0
+i(σt) is a star. To show that ↵0
+i(σt) 2 T, consider any
+edge e0 = s0t 6= st. Let (C, D) := ↵i(e0, s0, t) and (C0, D0) := ↵0
+i(e0, s0, t).
+
+391
+Then (ei, ui, wi) > (e0, t, s0) by the choice of e 6= e0. Hence C0 = C \X3−i,
+but also A0 = A [ Xi. Thus, any vertex or edge of G[C] that is not
+in G[C0] lies in G[Xi] ✓G[A0]. The fact that ↵i(σt) 2 T thus implies
+↵0
+i(σt) 2 T , as desired.
+Let T be the tree obtained from the disjoint union of T1 −u1 and
+T2 −u2 by joining w1 to w2 by a new edge e. Let ↵:
+!
+E(T) !
+−!
+Sk map
+(e, w3−i, wi) to ↵0
+i(ei, ui, wi) = (Xi, X3−i) for i = 1, 2, and otherwise ex-
+tend the ↵0
+i. Then ↵commutes with the inversion of
+!e and of (X1, X2),
+and ↵(σt) = ↵0
+i(σt) 2 T ⇤[ T + for all t 2 T, in particular for t = wi.
+Hence, (T, ↵) satisﬁes (2).
+⇤
+Theorem 12.5.9, as stated above, is a special case of a more general
+result in which T ⇤can be replaced by other collections F of ‘forbidden’
+stars of oriented separations. Given a set S of separations, an F-tangle
+F-tangle
+of S is a consistent orientation of S that has no subset σ 2 F. For
+Fk :=
+*
+σ ✓
+!
+S : σ is a star and
+.. T { B : (A, B) 2 σ}
+.. < k
+ 
+we obtain the following more tangle-like duality theorem for tree-width:
+Theorem 12.5.11. The following two assertions are equivalent for all
+graphs G and integers k > 0 :
+(i) G has tree-width less than k −1;
+(ii) G has no Fk-tangle of Sk.
+It is not hard to show that (i) is equivalent to the existence of an Sk-tree
+over Fk in G (Ex. 59). Theorem 12.5.11 in that form and Theorem 12.5.9
+are both corollaries of a more general theorem about tangle-tree duality
+in so-called ‘abstract separation systems’; see the notes.
+Moreover, any Fk-tangle of Sk gives rise to a k-bramble (Ex. 59).
+Thus, Theorem 12.5.11 implies the tree-width duality theorem (12.4.3).
+12.6 Tree-decompositions and forbidden minors
+If H is any set or class of graphs, then the class
+Forb4(H) := { G | G 6< H for all H 2 H }
+Forb4(H)
+of all graphs without a minor in H is a graph property, i.e. is closed under
+isomorphism.11 When it is written as above, we say that this property
+is expressed by specifying the graphs H 2 H as forbidden (or excluded)
+forbidden
+minors
+minors.
+11 As usual, we abbreviate Forb4({H}) to Forb4(H).
+12.6 Tree-decompositions and forbidden minors

@@ -1,0 +1,184 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.4 Connectivity and matching (분할 part 2)
+직전 소단원: 「8.3 Homogeneous and universal graphs」
+[본문]
+258
+8. Inﬁnite Graphs
+Rewriting the marriage condition in this way does indeed yield an
+inﬁnite version of Hall’s theorem, which follows from Theorem 8.4.10
+just as the marriage theorem follows from K¨onig’s theorem:
+Corollary 8.4.11. A bipartite graph with bipartition {A, B} contains
+a matching of A unless there is a set S ✓A such that S is not matchable
+to N(S) but N(S) is matchable to S.
+Proof. Consider a matching M and a cover U as in Theorem 8.4.10.
+Then U \ B ◆N(A r U) is matchable to A r U, by the edges of M.
+And if A r U is matchable to N(A r U), then adding this matching to
+the edges of M incident with A \ U yields a matching of A.
+⇤
+Applied to a ﬁnite graph, Corollary 8.4.11 implies the marriage
+theorem: if N(S) is matchable to S but not conversely, then clearly
+|S| > |N(S)|. Similarly, the ﬁnite version of Corollary 8.4.11 implies
+the ﬁnite case of the following suﬃcient condition for the existence of a
+matching of A:
+Theorem 8.4.12. (Milner & Shelah 1974)
+A bipartite graph with bipartition {A, B} contains a matching of A if
+d(a) > 1 for every a 2 A and d(a) > d(b) for every edge ab with a 2 A.
+Let us now turn to non-bipartite graphs. If a ﬁnite graph has a
+1-factor, then the set of vertices covered by any partial matching – one
+partial
+matching
+that leaves some vertices unmatched – can be increased by an augment-
+ing path, an alternating path whose ﬁrst and last vertex are unmatched
+(Ex. 1, Ch. 2). In an inﬁnite graph we no longer insist that augmenting
+paths be ﬁnite, as long as they have a ﬁrst vertex. Then, starting at any
+augmenting
+path
+unmatched vertex with an edge of the 1-factor that we are assuming to
+exist, we can likewise ﬁnd a unique maximal alternating path that will
+either be a ray or end at another unmatched vertex. Switching edges
+along this path we can then improve our current matching to increase
+the set of matched vertices, just as in a ﬁnite graph.
+The existence of an inaugmentable partial matching, therefore, is an
+obvious obstruction to the existence of a 1-factor. The following theorem
+asserts that this obstruction is the only one:
+Theorem 8.4.13. (Ste↵ens 1977)
+A countable graph has a 1-factor if and only if for every partial matching
+there exists an augmenting path.
+Unlike its ﬁnite counterpart, Theorem 8.4.13 is far from trivial: aug-
+menting a given matching ‘blindly’ need not lead to a well-deﬁned match-
+ing at limit steps, since a given edge may get toggled on and o↵inﬁnitely
+often (in which case its status will be undeﬁned at the limit – example?).
+We therefore cannot simply ﬁnd the desired 1-factor inductively.
+
+8.4 Connectivity and matching
+259
+In fact, Theorem 8.4.13 does not extend to uncountable graphs
+(Exercise 73).
+However, from the obstruction of inaugmentable par-
+tial matchings one can derive a Tutte-type condition that does extend.
+Given a set S of vertices in a graph G, let us write C0
+G−S for the set of
+C0
+G−S
+factor-critical components of G−S, and G0
+S for the bipartite graph with
+vertex set S [ C0
+G−S and edge set { sC | 9 c 2 C : sc 2 E(G) }.
+G0
+S
+Theorem 8.4.14. (Aharoni 1988)
+A graph G has a 1-factor if and only if, for every set S ✓V (G), the set
+C0
+G−S is matchable to S in G0
+S.
+Applied to a ﬁnite graph, Theorem 8.4.14 implies Tutte’s 1-factor
+theorem (2.2.1): if C0
+G−S is not matchable to S in G0
+S, then by the
+marriage theorem there is a subset S0 of S that sends edges to more
+than |S0| components in C0
+G−S that are also components of G −S0, and
+these components are odd because they are factor-critical.
+Theorems 8.4.10 and 8.4.14 also imply an inﬁnite version of the
+Gallai-Edmonds theorem (2.2.3):
+Corollary 8.4.15. Every graph G = (V, E) has a set S of vertices that
+is matchable to C0
+G−S in G0
+S and such that every component of G −S
+not in C0
+G−S has a 1-factor. Given any such set S, the graph G has a
+1-factor if and only if C0
+G−S is matchable to S in G0
+S.
+Proof. Given a pair (S, M) where S ✓V and M is a matching of S
+in G0
+S, and given another such pair (S0, M 0), write (S, M) 6 (S0, M 0) if
+S ✓S0 ✓V r
+[
+{ V (C) | C 2 C0
+G−S }
+and M ✓M 0. Since C0
+G−S ✓C0
+G−S0 for any such S and S0, Zorn’s lemma
+implies that there is a maximal such pair (S, M).
+S, M
+For the ﬁrst statement, we have to show that every component C
+of G −S that is not in C0
+G−S has a 1-factor. If it does not, then by
+Theorem 8.4.14 there is a set T ✓V (C) such that C0
+C−T is not match-
+able to T in C0
+T .
+By Corollary 8.4.11, this means that C0
+C−T has a
+subset C that is not matchable in C0
+T to the set T 0 ✓T of its neigh-
+bours, while T 0 is matchable to C; let M 0 be such a matching. Then
+(S, M) < (S [ T 0, M [ M 0), contradicting the maximality of (S, M).
+Of the second statement, only the backward implication is non-
+trivial. Our assumptions now are that C0
+G−S is matchable to S in G0
+S
+and vice versa (by the choice of S), so Proposition 8.4.8 yields that G0
+S
+has a 1-factor. This deﬁnes a matching of S in G that picks one vertex
+xC from every component C 2 C0
+G−S and leaves the other components
+of G −S untouched. Adding to this matching a 1-factor of C −xC for
+every C 2 C0
+G−S and a 1-factor of every other component of G −S, we
+obtain the desired 1-factor of G.
+⇤
+
+260
+8. Inﬁnite Graphs
+Inﬁnite matching theory may seem rather mature and complete as
+it stands, but there are still fascinating unsolved problems in the Erd˝os-
+Menger spirit concerning related discrete structures, such as partially
+ordered sets or hypergraphs. We conclude with one about graphs.
+Call an inﬁnite graph G perfect if every induced subgraph H ✓G
+has a complete subgraph K of order χ(H), and strongly perfect if K
+strongly
+perfect
+can always be chosen so that it meets every colour class of some χ(H)-
+colouring of H. (Exercise 75 gives an example of a perfect graph that is
+not strongly perfect.) Call G weakly perfect if the chromatic number of
+weakly
+perfect
+every induced subgraph H ✓G is at most the supremum of the orders
+of its complete subgraphs.
+Conjecture. (Aharoni & Korman 1993)
+Every weakly perfect graph without inﬁnite independent sets of vertices
+is strongly perfect.
+8.5 Recursive structures
+In this section we introduce another tool that is commonly used in inﬁ-
+nite graph theory: to deﬁne a class of graphs recursively, so as to be able
+later to prove assertions about these graphs by (transﬁnite) induction.
+Rather than attempting a systematic treatment of this technique we give
+two examples; more can be found in the exercises.
+Our ﬁrst example is very simple: it describes the structure of a tree
+by recursively pruning away leaves and isolated ends. Let T be any tree,
+equipped with a root and the corresponding tree-order on its vertices.
+We recursively label the vertices of T by ordinals, as follows. Given an
+ordinal ↵, assume that we have decided for every β < ↵which of the
+vertices of T to label β, and let T↵be the subgraph of T induced by
+the vertices that are still unlabelled. Assign label ↵to every vertex t of
+T↵whose up-closure btcT↵= btcT \ T↵in T↵is a chain. The recursion
+terminates at the ﬁrst ↵not used to label any vertex; for this ↵we put
+T↵=: T ⇤.
+T ⇤
+For each ↵, the vertices labelled ↵form an up-set in T↵: if btcT↵is
+a chain, then so is bt0cT↵for every t0 2 btcT↵. Every T↵, therefore, is a
+down-set in T (induction on ↵) and hence connected. Thus, T↵is a tree,
+and the set of vertices labelled ↵induces in T↵a disjoint union of paths.
+Let us call T recursively prunable if every vertex of T gets labelled
+recursively
+prunable
+in this way, i.e., if T ⇤= ;. We may then be able to prove assertions
+about T, or about graphs containing T as a normal spanning tree, by
+dealing in turn with those chains as they get deleted.
+The following
+proposition shows that the recursively prunable trees form a natural
+class also in structural terms:

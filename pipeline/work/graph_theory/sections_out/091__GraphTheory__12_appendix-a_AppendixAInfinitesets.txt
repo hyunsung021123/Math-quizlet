@@ -1,0 +1,262 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.appendix-a Appendix A: Infinite sets
+직전 소단원: 「12.ex Exercises」
+[본문]
+A
+Inﬁnite sets
+This appendix gives a minimum-fuss summary of the set-theoretic no-
+tions and facts, such as Zorn’s lemma and transﬁnite induction, that are
+used in Chapter 8.
+Let A, B be sets. If there exists a bijective map between A and B,
+we write |A| = |B| and say that A and B have the same cardinality.
+This is clearly an equivalence relation between sets, and we may think of
+the cardinality |A| of A as the equivalence class containing A. We write
+cardinality
+|A| 6 |B| if there exists an injective map A ! B. This is clearly well
+deﬁned, and it is a partial ordering: if there are injective maps A ! B
+and B ! A, there is also a bijection A ! B.1 For every set there exists
+another that is bigger; for example, |A| < |B| when B is the power set
+of A, the set of all its subsets.
+The natural numbers are deﬁned inductively as n := {0, . . . , n −1},
+N
+starting with 0 := ;. The usual expression of |A| = n can then be read
+more formally as an abbreviation for |A| = |n|.
+A set A is ﬁnite if there is a natural number n such that |A| = n;
+otherwise it is inﬁnite. A is countable if |A| 6 |N|, and countably inﬁnite
+if |A| = |N|. A bijection N ! A is an enumeration of A. If A is inﬁnite
+then |N| 6 |A|. Thus, |N| is the smallest inﬁnite cardinality; it is denoted
+by @0. There is also a smallest uncountable cardinality, denoted by @1.
+If |A| = |R| then A is uncountable, and we say that A has continuum
+many elements. For example, there are continuum many inﬁnite 0–1 se-
+quences. (Whether |R| is equal to @1 or greater depends on the axioms
+of set theory assumed; in our context, this question does not arise.) We
+remark that if A is inﬁnite and its elements are countable sets, then the
+union of all these sets is no bigger than A itself: | S A| 6 |A|.
+1 This is the Cantor-Bernstein theorem; a simple graph-theoretic proof is given
+in Proposition 8.4.8.
+417
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2
+
+418
+Appendix A
+An element x of a partially ordered set X is minimal in X if there
+is no y 2 X with y < x, and maximal if there is no z 2 X with x < z.
+A partially ordered set may have one or many elements that are maximal
+or minimal, or none at all. An upper bound in X of a subset Y ✓X is
+any x 2 X such that y 6 x for all y 2 Y .
+A chain is a partially ordered set in which every two elements are
+comparable. If (C, 6) is a chain, and if x, y 2 C satisfy x < y but no
+element z of C is such that x < z < y, then x is called the predecessor
+of y in C, and y the successor of x. A set of the form {x 2 C | x < z},
+successor
+for a given z 2 C, is a proper initial segment of C.
+A partially ordered set (X, 6) is well-founded if every non-empty
+subset of X has a minimal element, and a well-founded chain is said
+to be well-ordered. For example, N, Z and R are all chains (with their
+well-
+ordering
+usual orderings), but only N is well-ordered. Note that every element x
+of a well-ordered set X has a successor (unless x is maximal in X): the
+unique minimal element of {y 2 X | x < y} ⇢X. However, an element of
+a well-ordered set need not have a predecessor, even if it is not minimal.
+An element that has no predecessor is called a limit; for example, the
+limit
+number 1 is a limit in the well-ordered set
+A = {1 −
+1
+n+1 | n 2 N} [ {2 −
+1
+n+1 | n 2 N}
+of rationals.
+One of the many statements equivalent to the axiom of choice (which
+we assume throughout) is that for every set X there exists a relation by
+which X is well-ordered:
+Well-ordering theorem. Every set can be well-ordered.
+Two well-ordered sets are said to have the same order type if there is
+a bijection between them which preserves their orders. Thus N and the
+set of even natural numbers have the same order type, but this di↵ers
+from the order type of the set A deﬁned above. Having the same order
+type is clearly an equivalence relation, which justiﬁes the term if we
+think of those order types themselves as equivalence classes.
+When one considers properties shared by all well-ordered sets of
+the same order type, it is convenient to represent each order type by a
+specially chosen set of that type, its ordinal. The ordinal representing
+ordinals
+the order type of N, for instance, is by custom denoted as !; our example
+!
+above thus says that the set of even natural numbers has (the) order type
+(of) !. Finite chains of the same cardinality always have the same order
+type; we choose n as the ordinal representing the chains of order n.
+There is an addition of ordinals, deﬁned by taking as the sum ↵+β
+the ordinal representing the order type of the concatenation of ↵with β
+(in this order); note that this is again a well-ordered set. For example,
+↵+1 is the successor of ↵. Note that no inverse operation ‘−’ is deﬁned.
+
+Inﬁnite sets
+419
+If an ordinal β has the same order type as a proper initial segment of
+another ordinal ↵, we write β < ↵. For example, we have 0 6 n < ! for
+every natural number n. It can be shown that < deﬁnes an ordering, even
+a well-ordering, on every set of ordinals. On N, this ordering coincides
+with the usual one, so our notation is unambiguous.
+Since a set S of ordinals is itself well-ordered, it has an order type –
+just like any other well-ordered set. If the ordinal ↵is a strict upper
+bound for S, then the order type of S is at most ↵; it is equal to ↵if
+S consists of all the ordinals up to (but excluding) ↵. In fact, just like
+the natural numbers, inﬁnite ordinals are usually deﬁned in such a way
+that ↵and {β | β < ↵} are actually identical; then our ordering < for
+ordinals coincides with the relation 2.
+This makes it natural to write a well-ordered set S, of order type ↵
+say, as a family S = {sβ | β < ↵} with sγ < sβ for all γ < β < ↵. This
+is common practice when one proves statements about the elements of
+S by transﬁnite induction, which works as follows.
+transﬁnite
+induction
+Suppose we want to show that every s 2 S satisﬁes some proposi-
+tion P; let us write P(s) to express that it does. Just as in ordinary in-
+duction we prove, for every β < ↵, that if P holds for every sγ with γ < β
+then P also holds for sβ. In practice, we usually have to distinguish the
+two cases of β being a limit ordinal or a successor. Checking P(s0) from
+ﬁrst principles, as in ordinary induction, is part of the ﬁrst case, because
+0 counts as a limit and the premise of Pγ for all γ < 0 is void. The con-
+clusion then is that P(sβ) for every β < ↵, that is, every s 2 S satisﬁes P.
+This is certainly simple – but is it correct? Well, any proper justiﬁ-
+cation of transﬁnite induction requires a formal treatment of set theory,
+but so does ordinary induction. Informally, what we have shown is that
+the set
+{β < ↵| P(sβ) fails}
+has no least element. Since it is well-ordered, it must therefore be empty,
+so P(sβ) holds for all β < ↵.
+Similarly, we may deﬁne things inductively. Such a recursive deﬁ-
+nition speciﬁes for each ordinal ↵some object x↵, in a way that may
+recursive
+deﬁnition
+refer to the objects xβ with β < ↵(which we think of as ‘having been
+deﬁned earlier’). Our deﬁnition of the natural numbers at the start of
+this appendix is a simple example.
+In practice, the deﬁnition of x↵often makes sense only for ordinals
+↵less than some ﬁxed ordinal ↵⇤, although the smallest such ↵⇤may not
+be known in advance. For example, if the x↵are to be distinct vertices
+picked recursively from a graph G according to some given rules, it is
+clear that we shall not be able to ﬁnd such x↵for all ↵< ↵⇤when
+|↵⇤| > |G|, because ↵7! x↵would be an injective map from ↵⇤to V (G)
+showing that |↵⇤| 6 |G|. Since there exist ordinals larger than |G|, such
+as any ordinal equivalent to a well-ordering of the power set of V (G),
+
+420
+Appendix A
+this means that our recursion cannot go on indeﬁnitely, i.e. we shall not
+be able to deﬁne x↵for all ordinals ↵. We may not know in advance
+when our recursion will get stuck, i.e., which is the smallest ordinal ↵
+for which x↵cannot be found in compliance with our rules. But this
+does not matter: we simply deﬁne ↵⇤as the ﬁrst ordinal ↵for which x↵
+cannot be found, content ourselves with having deﬁned x↵for all ↵< ↵⇤,
+and say that our recursion terminates at step ↵⇤. (In fact, we usually
+want a recursive deﬁnition to terminate. In our example, we might wish
+to consider the set of all vertices x 2 G that got picked by our deﬁnition,
+and this will be the set {x↵| ↵< ↵⇤}.)
+Note that our recursive deﬁnition for x↵may involve choices. In
+our example, x↵might be required to be a neighbour of some xβ with
+β < ↵, but there may be several such xβ, each with several neighbours
+that have not yet been picked. This does not cause our recursion to get
+stuck at step ↵: we just pick one eligible vertex as x↵, and proceed. In
+other words, we accept {x↵| ↵< ↵⇤} as a properly deﬁned set even
+though we may not ‘know’ its elements x↵constructively.
+Back to proving things, here is a formal statement of Zorn’s lemma:
+Zorn’s Lemma. Let (X, 6) be a partially ordered set such that every
+chain in X has an upper bound in X. Then X contains at least one
+maximal element.
+Note that, in applications of Zorn’s lemma, the relation 6 need not
+correspond to an intuitive notion of ‘smaller than’. Applied to sets or to
+graphs, for example, it can stand for ‘◆’ just as much as for ‘✓’. Then
+the ‘upper bound’ of a chain C is typically its overall intersection T C.
+Finally, compactness. The inﬁnity lemma discussed in Chapter 8
+generalizes as follows.2 As before, we consider a collection { Xp | p 2 P }
+of ﬁnite sets, but rather than indexing these by natural numbers we have
+one such set Xp for every element p of some partially ordered set (P, 6).
+All we assume about P is that every two elements have a common upper
+bound: for all p, q there exists an r such that p 6 r and q 6 r. Further-
+more, we have maps fqp: Xq ! Xp for all q > p, which are compatible in
+that fqp ◦frq = frp whenever r > q > p.
+Generalized Inﬁnity Lemma. For every such family { Xp | p 2 P } of
+ﬁnite sets there exists a family { xp | p 2 P } of representatives xp 2 Xp
+such that fqp(xq) = xp whenever q > p.
+The inﬁnity lemma is clearly a special case of this, with P = N and the
+fqp deﬁned by iterating the lemma’s predecessor function f.
+2 In category theory, our ‘generalized inﬁnity lemma’ is known as the fact that
+the inverse limit of any directed inverse system of ﬁnite sets is non-empty. Instead of
+ﬁnite sets one can take any other compact spaces; see Chapter 8.8 for an application.
+
+Inﬁnite sets
+421
+The following more combinatorial encoding for compactness argu-
+ments brings out particularly well the choices involved, and their inter-
+dependence. Let X be any set, S a ﬁnite set, and F a set of ﬁnite subsets
+of X. Assume that every Y
+2 F comes with a ﬁxed set A(Y ) of Y ! S
+functions, its admissible functions. Call Y ✓F compatible if there exists
+a function f: X !S all whose restrictions to the sets in Y are admissible,
+i.e. which satisﬁes f|Y 2 A(Y ) for all Y 2 Y.
+Compactness Principle. F is compatible if every ﬁnite Y ✓F is
+compatible.
+The proofs of the generalized inﬁnity lemma and of the compact-
+ness principle are each just a few lines based on Tychono↵’s theorem
+that every product of compact spaces is compact. We illustrate this for
+the compactness principle.
+Think of the set of all X ! S functions as a product of |X| copies
+of S, so they form a compact space. For every ﬁnite Y ✓X, the set of
+all functions f: X ! S with f|Y
+2 A(Y ) is closed (as well as open) in
+this product space. The result now follows from the ‘ﬁnite intersection
+property’ of compact spaces, that a family of closed sets has a non-empty
+intersection as soon as all its ﬁnite subfamilies do.
+
+B
+Surfaces
+This appendix o↵ers a summary of background information about sur-
+faces, as needed for an understanding of their role in the proof of the
+graph minor theorem or the proof of the ‘general Kuratowski theorem’
+for arbitrary surfaces given in Chapter 12.7. In order to be read at a
+rigorous level it requires familiarity with some basic deﬁnitions of general
+topology (such as of the product and the identiﬁcation topology), but
+no more.
+A surface, for the purpose of this book, is a compact connected1
+surface
+Hausdor↵topological space S in which every point has a neighbourhood
+homeomorphic to the Euclidean plane R2. An arc, a circle, and a disc
+arc
+in S are subsets that are homeomorphic in the subspace topology to the
+circle S1
+real interval [0, 1], to the unit circle S1 = {x 2 R2 : kxk = 1}, and to
+disc
+the unit disc {x 2 R2 : kxk 6 1} or {x 2 R2 : kxk < 1}, respectively.
+The components of a subset X of S are the equivalence classes of
+component
+points in X where two points are equivalent if they can be joined by an
+arc in X. The surface S itself, being connected, has only one component.
+The frontier of X is the set of all points y in S such that every
+frontier
+neighbourhood of y meets both X and S r X.
+The frontier F of X
+separates S r X from X: since X [ F is closed, every arc from S r X to
+X has a ﬁrst point in X [ F, which must lie in F. A component of the
+frontier of X that is a circle in S is a boundary circle of X. A boundary
+boundary
+circle
+circle of a disc in S is said to bound that disc.
+There is a fundamental theorem about surfaces, their classiﬁcation.
+This says that, up to homeomorphism, every surface can be obtained
+from the sphere S2 = {x 2 R3 : kxk = 1} by ‘adding ﬁnitely many han-
+sphere S2
+dles or ﬁnitely many crosscaps’, and that surfaces obtained by adding
+di↵erent numbers of handles or crosscaps are distinct. We shall not need
+the classiﬁcation theorem, but to form a picture let us see what the
+1 Throughout this appendix, ‘connected’ means ‘arc-connected’.
+423
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2

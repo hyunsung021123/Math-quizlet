@@ -1,0 +1,175 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 3. Connectivity
+현재 소단원: 3.1 2-Connected graphs and subgraphs
+직전 소단원: 「2.ex Exercises」
+[본문]
+3
+Connectivity
+Our deﬁnition of k-connectedness, given in Chapter 1.4, is somewhat un-
+intuitive. It does not tell us much about ‘connections’ in a k-connected
+graph: all it says is that we need at least k vertices to disconnect it.
+The following deﬁnition – which, incidentally, implies the one above –
+might have been more descriptive: ‘a graph is k-connected if any two of
+its vertices can be joined by k independent paths’.
+It is one of the classic results of graph theory that these two deﬁni-
+tions are in fact equivalent, are dual aspects of the same property. We
+shall study this theorem of Menger (1927) in some depth in Section 3.3.
+In Sections 3.1 and 3.2, we investigate the structure of the 2-con-
+nected and the 3-connected graphs. For these small values of k it is still
+possible to give a simple general description of how these graphs can be
+constructed.
+In Sections 3.4 and 3.5 we look at other concepts of connectedness,
+more recent than the standard one but no less important: the number of
+H-paths in G for a subgraph H of G, and the existence of disjoint paths
+in G linking up speciﬁed pairs of vertices.
+3.1 2-Connected graphs and subgraphs
+The simplest 2-connected graphs are the cycles. All the others can be
+constructed inductively from a cycle by adding paths:
+Proposition 3.1.1. A graph is 2-connected if and only if it can be
+[4.2.6]
+constructed from a cycle by successively adding H-paths to graphs H
+already constructed (Fig. 3.1.1).
+Proof.
+Clearly, every graph constructed as described is 2-connected.
+Conversely, let a 2-connected graph G be given.
+Then G contains a
+63
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_3
+
+64
+3. Connectivity
+Fig. 3.1.1. The construction of 2-connected graphs
+cycle, and hence has a maximal subgraph H constructible as above.
+H
+Since any edge xy 2 E(G) r E(H) with x, y 2 H would deﬁne an H-
+path, H is an induced subgraph of G. Thus if H 6= G, then by the
+connectedness of G there is an edge vw with v 2 G −H and w 2 H. As
+G is 2-connected, G−w contains a v–H path P. Then wvP is an H-path
+in G, and H [wvP is a constructible subgraph of G larger than H. This
+contradicts the maximality of H.
+⇤
+Just as an arbitrary graph can be decomposed into its maximal con-
+nected subgraphs, or components, we can try to decompose a connected
+graph G into its maximal 2-connected subgraphs. These may not quite
+be disjoint, and they may not quite cover all of G. However, it is easy
+to weaken the notion of ‘maximal 2-connected subgraph’ slightly so that
+the subgraphs ﬁtting the weaker notion do cover G and are still nearly
+disjoint. These ‘blocks’ ﬁt together nicely in a tree-like fashion, which
+captures precisely the overall structure of G in terms of those blocks.
+Formally, a block is a maximal connected subgraph without a cutver-
+block
+tex.1 Thus, every block is either a maximal 2-connected subgraph, or
+a bridge (with its ends), or an isolated vertex. Conversely, every such
+subgraph is a block. By their maximality, di↵erent blocks of G overlap
+in at most one vertex, which is then a cutvertex of G. Hence every edge
+of G lies in a unique block, and G is the union of its blocks.
+Cycles and bonds are conﬁned to a single block:
+Lemma 3.1.2. Let G be any graph.
+[4.6]
+(i) The cycles in G are precisely the cycles in its blocks.
+(ii) The bonds of G are precisely the bonds of its blocks.
+Proof. (i) Any cycle in G is a connected subgraph without a cutvertex,
+and hence lies in some maximal such subgraph. By deﬁnition, this is a
+block of G.
+1 . . . of the subgraph; it may contain cutvertices of G.
+
+3.1 2-Connected graphs and subgraphs
+65
+(ii) The proof follows easily by repeated application of the following
+observation. Consider any cut in G. Let xy be one of its edges, and B
+the block containing it. By the maximality of B in the deﬁnition of a
+block, G contains no B-path. Hence every x–y path in G lies in B, so
+those edges of our cut that lie in B separate x from y even in G.
+⇤
+As every edge lies in a unique block, belonging to a common block
+is an equivalence relation on the edge set of a graph. This equivalence
+can be expressed in two other interesting ways:
+Lemma 3.1.3. The following statements are equivalent for distinct
+[4.6]
+edges e, f of a graph G:
+(i) The edges e, f belong to a common block of G.
+(ii) The edges e, f belong to a common cycle in G.
+(iii) The edges e, f belong to a common bond of G.
+Proof. (i)!(ii) It clearly suﬃces to prove that in a 2-connected graph
+any two 2-sets of vertices can be joined by two disjoint paths.
+This
+follows easily by induction based on Proposition 3.1.1.2
+(ii)!(iii) Deleting e and f from a cycle C 3 e, f leaves a partition of
+V (C) into two connected sets. Extend this to a partitition into two con-
+nected sets of the vertex set of the component of G containing C. (How?)
+The edges between these sets form a bond of G containing e and f.
+(iii)!(i) By Lemma 3.1.2 (ii), two edges can lie in a common bond
+only if they belong to the same block.
+⇤
+Our last lemma on blocks shows how they ﬁt together to form the
+coarse structure of G. Let A denote the set of cutvertices of G, and B
+the set of its blocks. The bipartite graph on A [ B formed by the edges
+aB with a 2 B is the block graph of G, see Figure 3.1.2.
+block
+graph
+a0
+a
+a0
+a
+B0
+B0
+B
+B
+Fig. 3.1.2. A graph and its block graph
+2 See Exercise 5. Note that this is the case k = 2 of Menger’s theorem (3.3.1).
+
+66
+3. Connectivity
+Lemma 3.1.4. The block graph of a connected graph is a tree.
+⇤
+Lemma 3.1.4 generalizes to graphs of higher connectivity: every
+(k −1)-connected graph has a canonical tree-like decomposition that
+separates all its ‘k-blocks’. See Theorem 12.3.7 for the precise statement,
+and Exercise 17 in Chapter 12 for the case of k = 3.
+3.2 The structure of 3-connected graphs
+In this section we describe how every 3-connected graph can be ob-
+tained from a K4 by a succession of elementary operations preserving
+3-connectedness. We then prove a theorem of Tutte about the algebraic
+structure of the cycle space of 3-connected graphs; this will play an
+important role again in Chapter 4.5.
+Proposition 3.1.1 describes how the 2-connected graphs can be con-
+structed inductively, starting from a cycle. All the graphs constructed
+in the process were themselves 2-connected, so the graphs construct-
+ible in this way are precisely the 2-connected graphs. We shall now do
+something similar for 3-connected graphs.
+We shall prove that every
+3-connected graph G 6= K4 can be turned into a smaller 3-connected
+graph in two ways: by deleting an edge (and suppressing any vertices of
+degree 2 that may arise), and by contracting an edge. Inverting these
+processes will give us two independent ways of building all 3-connected
+graphs from a K4.
+Given an edge e in a graph G, we write G .−e for the multigraph ob-
+G .−e
+tained from G−e by suppressing any end of e that has degree 2 in G−e.3
+Lemma 3.2.1. Let e be an edge in a graph G. If G .−e is 3-connected,
+then so is G.
+Proof.
+Thinking of G as obtained from G .−e by adding e, let us call
+(1.4.2)
+the vertices of G .−e the old vertices of G, and any other vertex of G
+(which will be an end of e) a new vertex. Remembering that G .−e, being
+3-connected, has no parallel edges, it is easy to see that, in G, no two
+vertices x1, x2 can separate a new vertex from all the old vertices. So it
+suﬃces to show that {x1, x2} cannot separate two old vertices. If they
+did, then those old vertices would be separated in G .−e by x0
+1 and x0
+2,
+where either x0
+i = xi or, if xi is new, x0
+i is the edge of G .−e subdivided
+by xi. By Proposition 1.4.2, this contradicts our assumption that G .−e
+is 3-connected.
+⇤
+3 See Chapter 1.10 for the formal deﬁnition of suppressing vertices in a multi-
+graph. Recall also that 3-connected multigraphs cannot have multiple edges. Since
+parallel edges arising when a vertex is suppressed are not deleted, our assumption in
+Lemma 3.2.1 that the multigraph G .−e is 3-connected implies that no parallel edges
+arise when it is formed from the graph G. Thus G .−e, too, is in fact a graph.

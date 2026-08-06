@@ -1,0 +1,194 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 9. Ramsey Theory for Graphs
+현재 소단원: 9.4 Ramsey properties and connectivity
+직전 소단원: 「9.3 Induced Ramsey theorems」
+[본문]
+316
+9. Ramsey Theory
+same colour also for ii0 = em−1. Continuing in this way, we ﬁnally arrive
+at an induced copy of G0 in G such that, for each pair (i, i0), all the
+edges between V 0
+i and V 0
+i0 have the same colour. As shown earlier, this
+G0 contains a monochromatic induced copy Hj of H.
+⇤
+The Ramsey graph G for H built in the proof of Theorem 9.3.1 is
+sparse in the sense that it contains no complete graphs bigger than it
+has to in order to contain H: G and H have the same clique number
+!(G) = !(H) (Exercise 23). This property, which comes for free with
+this proof of the theorem, is non-trivial even if we do not ask for induced
+embeddings: the existence of a graph G that contains a monochromatic
+copy of H, induced or not, on any 2-colouring of its edges is neither
+obvious nor does it follow easily from Ramsey’s original theorem.
+An even stronger sparsity requirement on G is to ask that it should
+contain no shorter cycles than H does, that g(G) = g(H). As a small
+indication of how ambitious this requirement on G is, notice that the
+statement of χ(G) > r can be rephrased as a Ramsey-like property of G:
+for any vertex-colouring with at most r colours, G contains a ‘monochro-
+matic’ copy of H = K2, an edge joining two like-coloured vertices. But
+as we noted in Chapter 5.2, graphs of simultaneously large chromatic
+number and girth are diﬃcult to construct.
+However, Ramsey graphs of large girth do exist:
+Theorem 9.3.4. (Reiher & R¨odl 2023)
+Every graph H has a Ramsey graph G that satisﬁes g(G) = g(H) unless
+H is a forest, in which case g(G) can be made arbitrarily large.
+If H is a tree but not a star, the aim of g(G) = g(H) (= 1) cannot be
+realised: if g(G) = 1 then G is a forest, so its edges can be 2-coloured
+alternately so that every path of length 3 receives two colours.
+9.4 Ramsey properties and connectivity
+According to Ramsey’s theorem, every large enough graph G has a very
+dense or a very sparse induced subgraph of given order, a Kr or Kr. If
+we assume that G is connected, we can say a little more:
+Proposition 9.4.1. For every integer r > 1 there is an n 2 N such that
+every connected graph of order at least n contains Kr, K1,r or P r as an
+induced subgraph.
+Proof. Let d + 1 be the Ramsey number of r, let n >
+d
+d−2(d −1)r, and
+(1.3.3)
+let G be a graph of order at least n. If G has a vertex v of degree at least
+
+9.4 Ramsey properties and connectivity
+317
+d + 1 then, by Theorem 9.1.1 and the choice of d, either N(v) induces a
+Kr in G or {v} [ N(v) induces a K1,r. On the other hand, if ∆(G) 6 d,
+then by Proposition 1.3.3 G has radius > r, and hence contains two
+vertices at a distance > r. Any shortest path in G between these two
+vertices contains a P r.
+⇤
+In principle, we could now look for a similar set of ‘unavoidable’
+k-connected subgraphs for any given connectivity k. To keep these ‘un-
+avoidable sets’ small, it helps to relax the containment relation from
+‘induced subgraph’ for k = 1 (as above) to ‘topological minor’ for k = 2,
+and on to ‘minor’ for k = 3 and k = 4. For larger k, no similar results
+are known.
+Proposition 9.4.2. For every integer r > 2 there is an n 2 N such that
+every 2-connected graph of order at least n contains Cr or K2,r as a
+topological minor.
+Proof. Let d be the n associated with r in Proposition 9.4.1, and let G be
+(1.3.3)
+(3.3.6)
+a 2-connected graph with at least
+d
+d−2(d −1)r vertices. By Proposition
+1.3.3, either G has a vertex of degree > d or diam(G) > rad(G) > r.
+In the latter case let a, b 2 G be two vertices at distance > r. By
+Menger’s theorem (3.3.6), G contains two independent a–b paths. These
+form a cycle of length > r.
+Assume now that G has a vertex v of degree > d. Since G is 2-
+connected, G −v is connected and thus has a spanning tree; let T be
+a minimal tree in G −v that contains all the neighbours of v. Then
+every leaf of T is a neighbour of v. By the choice of d, either T has a
+vertex of degree > r or T contains a path of length > r, without loss of
+generality linking two leaves. Together with v, such a path forms a cycle
+of length > r. A vertex u of degree > r in T can be joined to v by r
+independent paths through T, to form a TK2,r.
+⇤
+Theorem 9.4.3. (Oporowski, Oxley & Thomas 1993)
+For every integer r > 3 there is an n 2 N such that every 3-connected
+graph of order at least n contains a wheel of order r or a K3,r as a minor.
+Let us call a graph of the form Cn ⇤K2 (n > 4) a double wheel, the
+1-skeleton of a triangulation of the cylinder as in Fig. 9.4.1 a crown, and
+the 1-skeleton of a triangulation of the M¨obius strip a M¨obius crown.
+Theorem 9.4.4. (Oporowski, Oxley & Thomas 1993)
+For every integer r > 4 there is an n 2 N such that every 4-connected
+graph with at least n vertices has a minor of order at least r that is a
+double wheel, a crown, a M¨obius crown, or a K4,r.
+Note that the graphs listed in Theorems 9.4.3 and 9.4.4 are themselves
+3-connected resp. 4-connected, as required.
+
+318
+9. Ramsey Theory
+Fig. 9.4.1. A crown and a M¨obius crown
+At ﬁrst glance, the ‘unavoidable’ substructures presented in the four
+theorems above may seem to be chosen somewhat arbitrarily. In fact,
+the contrary is true: these sets are smallest possible, and as such unique.
+To make this precise, call a graph property non-trivial if it contains
+non-trivial
+property
+graphs of inﬁnitely many isomorphism types. Given two such properties
+P, P0 and an order relation 6 between graphs (such as the subgraph
+relation ✓, or the minor relation 4), write P 6 P0 if for every G 2 P
+6
+there is a G0 2 P0 such that G 6 G0. If P 6 P0 as well as P > P0, call
+P and P0 equivalent and write P⇠P0. For example, if 6 is the subgraph
+⇠
+relation, P is the class of all paths, P0 is the class of paths of even length,
+and S is the class of all subdivisions of stars, then P ⇠P0 6 S 6
+P.
+Given a non-trivial graph property G, call a ﬁnite set {P1, . . . , Pk} of
+non-trivial graph properties Pi ✓G a Kuratowski set for G and 6 if the Pi
+Kuratowski
+set
+are incomparable (i.e., Pi 6
+Pj whenever i 6= j) and for every non-trivial
+graph property P ✓G there is an i such that Pi 6 P. Such a Kuratowski
+set {P1, . . . , Pk} is unique up to equivalence: if {Q1, . . . , Q`} is another
+Kuratowski set for G then ` = k and, with suitable enumeration, Qi ⇠Pi
+for i = 1, . . . , k. (Why?)
+The essence of our last four theorems can now be stated more com-
+prehensively, as follows. Let us say k-connectedness for the class of all
+k-connected ﬁnite graphs, and connectedness for 1-connectedness.
+Theorem 9.4.5.
+(i) The stars and the paths form the (2-element) Kuratowski set for
+connectedness and the subgraph relation.
+(ii) The cycles and the graphs K2,r (r > 2) form the (2-element) Kura-
+towski set for 2-connectedness and the topological minor relation.
+(iii) The wheels and the graphs K3,r (r > 3) form the (2-element)
+Kuratowski set for 3-connectedness and the minor relation.
+(iv) The double wheels, the crowns, the M¨obius crowns, and the
+graphs K4,r (r > 4) form the (4-element) Kuratowski set for 4-
+connectedness and the minor relation.
+⇤
+
+Exercises
+319
+Exercises
+1.−Determine the Ramsey number R(3).
+2.−Deduce the case k = 2 (but c arbitrary) of Theorem 9.1.3 directly from
+Theorem 9.1.1.
+3.
+Prove that the graphs not containing some ﬁxed star as an induced
+subgraph are χ-bounded.
+(See Chapter 5.6 for the deﬁnition of χ-boundedness.)
+4.
+Let the edges of a complete graph G on N be coloured with two colours.
+Show that G contains two monochromatic paths whose vertex sets par-
+tition N.
+5.
+An arithmetic progression is an increasing sequence of numbers of the
+form a, a + d, a + 2d, a + 3d . . . . Van der Waerden’s theorem says that
+no matter how we partition the natural numbers into two classes, one of
+these classes will contain arbitrarily long arithmetic progressions. Must
+there even be an inﬁnite arithmetic progression in one of the classes?
+6.
+Can you improve the exponential upper bound on the Ramsey number
+R(n) for perfect graphs?
+7.
+Show that the n✏-type bound in the Erd˝os-Hajnal conjecture cannot
+be lowered substantially, by ﬁnding a graph H such that inﬁnitely
+many graphs G not containing H as an induced subgraph satisfy
+↵(G) 6 |G|1/2 as well as !(G) 6 |G|1/2.
+8.
+Let G be a class of graphs that is closed under taking induced subgraphs.
+Assume that G is χ-bounded, with a polynomial χ-bounding function.
+Prove the Erd˝os-Hajnal conjecture for the graphs in G.
+9.+ Construct a graph on R that has neither a complete nor an edgeless
+induced subgraph on |R| = 2@0 vertices. (So Ramsey’s theorem does
+not extend to uncountable sets.)
+10.
+(i)−Use Ramsey’s theorem to show that for any k, ` 2 N there is an
+n 2 N such that every sequence of n distinct integers has an increasing
+subsequence of length k +1 or a decreasing subsequence of length `+1.
+(ii) Prove that n = k` + 1 has this property but n = k` does not.
+11.+ Find a short proof of the Erd˝os-P´osa theorem (2.3.2) with a recursively
+deﬁned bound.
+(Hint. For the recursion step ﬁnd two cycles with at most one vertex
+in common. If Menger’s theorem between them does not give you k
+disjoint cycles, use the size of the separator it o↵ers for the deﬁnition
+of f(k) from f(k −1).)
+12.+ Prove the edge version of the Erd˝os-P´osa theorem (2.3.2): there exists a
+function g: N ! R such that, given k 2 N, every graph contains either k
+edge-disjoint cycles or a set of at most g(k) edges meeting all its cycles.
+(Hint. Consider in each component a normal spanning tree.)

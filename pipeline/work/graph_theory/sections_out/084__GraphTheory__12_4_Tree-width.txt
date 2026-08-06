@@ -1,0 +1,337 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.4 Tree-width
+직전 소단원: 「12.3 Tree-decompositions」
+[본문]
+12.4 Tree-width
+371
+12.4 Tree-width
+As indicated by Figure 12.3.1, the bags of (T, V) reﬂect the structure of
+the tree T, so in this sense the graph G decomposed resembles a tree.
+However, this is valuable only inasmuch as the structure of G within
+each part is negligible: the smaller the bags, the closer the resemblance.
+This observation motivates the following deﬁnition. The width of
+width
+(T, V) is the number
+max
+*
+|Vt| −1 : t 2 T
+ 
+,
+and the tree-width tw(G) of G is the least width of any tree-decomposi-
+tree-width
+tw(G)
+tion of G. As one easily checks,4 trees themselves have tree-width 1.
+By Lemmas 12.3.2 and 12.3.3, the tree-width of a graph will never
+be increased by deletion or contraction:
+(12.3.2)
+(12.3.3)
+Lemma 12.4.1. If H 4 G then tw(H) 6 tw(G).
+⇤
+[12.6.2]
+Graphs of bounded tree-width are suﬃciently similar to trees that it
+becomes possible to adapt the proof of Kruskal’s theorem to the class of
+these graphs; very roughly, one has to iterate the ‘minimal bad sequence’
+argument from the proof of Lemma 12.1.3 tw(G) times. This takes us a
+step further towards a proof of the graph minor theorem:
+Theorem 12.4.2. (Robertson & Seymour 1990)
+[12.7.1]
+[12.7.3]
+For every integer k > 0, the graphs of tree-width < k are well-quasi-
+ordered by the minor relation.
+In order to make use of Theorem 12.4.2 for a proof of the full graph
+minor theorem, we should be able to say something about the graphs
+which it does not cover, i.e., to deduce some information about a graph
+from the assumption that its tree-width is large. Our next result, the
+tree-width duality theorem, achieves just that: it identiﬁes a canonical
+obstruction to small tree-width, a structural phenomenon that occurs in
+a graph if and only if its tree-width is large.
+Let us say that two subsets of V (G) touch if they have a vertex in
+touch
+common or G contains an edge between them. A set of mutually touch-
+ing connected vertex sets in G is a bramble. Extending our terminology
+bramble
+of Chapter 2, we say that a subset of V (G) covers (or is a cover of) a
+cover
+bramble B if it meets every element of B. The least number of vertices
+covering a bramble is the order of that bramble. A k-bramble is one of
+order
+order k.
+4 Indeed the ‘−1’ in the deﬁnition of width serves no other purpose than to make
+this statement true.
+
+372
+12. Graph Minors
+A typical example of a bramble is the set of crosses in a grid. The
+k ⇥k grid is the graph on {1, . . . , k}2 with the edge set
+grid
+{ (i, j)(i0, j0) : |i −i0| + |j −j0| = 1 } .
+The crosses of this grid are the k2 sets
+Cij := { (i, `) | ` = 1, . . . , k } [ { (`, j) | ` = 1, . . . , k } .
+Thus, the cross Cij is the union of the grid’s ith row and its jth column.
+Clearly, the crosses of the k ⇥k grid form a k-bramble: they are covered
+by any row or column, while any set of fewer than k vertices misses both
+a row and a column, and hence a cross.
+Theorem 12.4.3. (Seymour & Thomas 1993)
+Let k > 0 be an integer. A graph has tree-width < k if and only if it
+contains no bramble of order > k.
+Proof. Let G = (V, E) be a graph. For the forward implication, let B be
+(3.3.1)
+(12.3.1)
+(12.3.2)
+(12.3.3)
+any bramble in G. We show that every tree-decomposition (T, (Vt)t2T )
+of G has a bag that covers B.
+As in the proof of Lemma 12.3.4 we start by orienting the edges t1t2
+of T. If X := Vt1 \Vt2 covers B, we are done. If not, then for each B 2 B
+disjoint from X there is an i 2 {1, 2} such that B ✓Ui r X (deﬁned as
+in Lemma 12.3.1); recall that B is connected. This i is the same for all
+such B, because they touch. We now orient the edge t1t2 towards ti.
+If every edge of T is oriented in this way, it has a node t all whose
+incident edges are oriented towards it. Then Vt covers B – just as in the
+proof of Lemma 12.3.4.
+For our proof of the converse implication we need the notion of a
+good tree-decomposition (T, V) of G, with V = (Vt)t2T say: one where
+good
+|Vt| 6 k for at least one t and |Vt| 6 k whenever t is not a leaf of T.
+Then |Vt| 6 k for the unique neighbour t of any leaf x with |Vx| > k.
+The set Vx r Vt 6= ; is the petal of such a leaf x with |Vx| > k.
+petal
+Suppose now that tw(G) > k, and let us ﬁnd a bramble of order > k.
+Note that G has a good tree-decomposition – for example, with T = K2
+and parts ;, V. And since tw(G) > k, every good tree-decomposition of G
+has a petal. Let B be a minimal set of petals of good tree-decompositions
+satisfying
+(i) B contains a petal of every good tree-decomposition;
+(ii) B is closed under taking supersets among petals: if X ✓X0 are
+both petals of good tree-decompositions and X 2 B, then X0 2 B.
+Let B0 := { X 2 B | G[X] is connected }. To complete our proof we show
+that B0 is a bramble of order > k.
+
+12.4 Tree-width
+373
+Let us show ﬁrst that no set Z of at most k vertices covers B0. As
+tw(G) > k we have V r Z 6= ;, and if C1, . . . , Cn are the components of
+G −Z, then G has a tree-decomposition into Z and the sets V (Ci) [ Z,
+whose decomposition tree is a star with Z as its central bag. This is
+a good tree-decomposition, so by (i) it has a petal in B. But any such
+petal is one of the Ci, so it is connected and thus lies in B0. Hence Z
+fails to cover B0, as claimed.
+It remains to show that every two sets in B0 touch. In fact, let us
+show that every two sets in B touch. If not, we can ﬁnd X, Y 2 B that
+X, Y
+do not touch and are ✓-minimal in B. Since B r {X} and B r {Y } still
+satisfy (ii), the minimality of B implies that they violate (i). So there
+exists a good tree-decomposition (T1, V1) whose only petal in B is X,
+(T1, V1)
+and a good tree-decomposition (T2, V2) whose only petal in B is Y . Let
+(T2, V2)
+us choose T1 and T2 disjoint.
+Let X be the petal of x 2 T1, and Y the petal of y 2 T2.
+By
+x, y
+Lemma 12.3.1, x is unique in T1 and y is unique in T2. Deleting any
+vertices outside N(X) and N(Y ) from the adhesion sets of x and y,
+respectively, we may assume that their bags are exactly X [ N(X) and
+Y [ N(Y ). (The trimmed bags still have size > k, since otherwise the
+modiﬁed tree-decomposition would have no petal in B.) Since any petal
+in (T1, V1) containing Y would lie in B r {X}, by (ii), there is no such
+petal. Similarly, no petal in (T2, V2) contains X.
+To complete our proof we show the following:
+There is a good tree-decomposition (T, V) all whose petals
+are contained in petals of (T1, V1) and (T2, V2) and in which
+neither X nor Y is a petal.
+(⇤)
+Since X and Y are the only petals of (T1, V1) and (T2, V2) in B and have
+no proper subsets in B, the (T, V) from (⇤) will have no petal in B, by (ii)
+for B. As this contradicts (i), our proof will then be complete.
+So let us prove (⇤).
+As X and Y do not touch, the set N(X)
+is disjoint from both X and Y and separates them in G.
+Hence G
+has a separation {A, B} such that X ✓A r B and Y ✓B r A. As
+A, B
+|N(X)| 6 k since X is a petal, choosing {A, B} of minimum order
+ensures that S := A \ B has size at most k. By the minimality of S
+S
+and Menger’s Theorem 3.3.1, there is a family { Ps | s 2 S } of disjoint
+Ps, Qs
+S–N(X) paths in G[A] and a family { Qs | s 2 S } of disjoint S–N(Y )
+paths in G[B].
+Let H be the minor of G obtained by deleting A r S
+s2S V (Ps)
+H
+and contracting each of the paths Ps. Identifying the contracted branch
+sets V (Ps) with their representatives s, we may think of H as obtained
+from G[B] by adding some edges on S. Let (T1, V0
+1) be the tree-decompo-
+sition which (T1, V1) induces on H as in Lemmas 12.3.2 and 12.3.3, and
+think of it as a tree-decomposition of G[B]. Thus for any t 2 T1, with a
+
+374
+12. Graph Minors
+bag V 1
+t
+2 V1, say, its bag Vt in V0
+1 is
+Vt = (V 1
+t \ B) [ { s 2 S | V 1
+t \ V (Ps) 6= ; }
+(1)
+(Fig. 12.4.1). In particular, Vx = S, since Vx = X [N(X) ✓A and N(X)
+meets every Ps. Similarly, let J be the minor of G obtained by deleting
+J
+B r S
+s2S V (Qs) and contracting the paths Qs, and let (T2, V0
+2) be the
+tree-decomposition which (T2, V2) induces on J. As before, think of this
+as a tree-decomposition of G[A] in which S is the bag corresponding to y.
+s
+Y
+S
+A
+B
+X
+Ps
+N(X)
+V 1
+t
+Fig. 12.4.1. To obtain Vt from V 1
+t \ B, add two vertices from S
+Let T be obtained from the (disjoint) trees T1 and T2 by identifying
+T
+x and y into a new node r. As Y and X are non-empty, x is not the only
+node of T1 and y is not the only node of T2, so r is not a leaf of T. Let
+Vr := S. For all t 2 T −r let Vt be the bag in V0
+1 or V0
+2 that corresponds
+Vt
+to t there, thought of as a subset of B if t 2 T1, or of A if t 2 T2. We
+claim that (T, V) with V = (Vt)t2T is a good tree-decomposition of G
+(T, V)
+satisfying (⇤).
+Using that (T1, V0
+1) and (T2, V0
+2) are tree-decompositions of G[B]
+and G[A], it is easy to check that (T, V) is indeed a tree-decomposition
+of G. The non-leaves of T are precisely those of T1 and T2, plus r. We
+have already seen that |S| 6 k. For t 2 T1 −x, its bag Vt in V is no
+larger than its bag V 1
+t in V1: by (1), there exists for every s 2 Vt r V 1
+t
+a vertex of Ps in V 1
+t rVt. Similarly, the bags Vt with t 2 T2 are no larger
+than their corresponding bags in V2. Thus, (T, V) is good.
+To show that (T, V) satisﬁes (⇤), consider a petal Z in (T, V) of a
+Z
+leaf z of T. Then z is a leaf also of T1 or T2. Let us assume that z 2 T1;
+then Vz ✓B. By axiom (T3) for (T, V), any vertex of Vz \ Vr lies in the
+adhesion set of Vz, so Z \ S = ;. Hence Z ✓B r A. But this implies
+that Z lies inside the petal Z1 of z in (T1, V1): recall that the bag V 1
+z
+corresponding to z in V1 has size at least |Vz| > k (so it can have a petal)
+and di↵ers from Vz only by vertices in A, and likewise for the neighbour
+of z in T1 and T. Finally, Z 6= X because X ✓A r B, and Z 6= Y since
+the petal Z1 ◆Z of z in (T1, V1) does not contain Y by assumption.
+This completes the proof of (⇤), and hence of the theorem.
+⇤
+
+12.4 Tree-width
+375
+Often, Theorem 12.4.3 is stated in terms of the bramble number of a
+graph, the largest order of any bramble in it. The theorem then says that
+the tree-width of a graph is exactly one less than its bramble number.
+How useful even the easy forward implication of Theorem 12.4.3 can
+be is exempliﬁed once more by our example of the crosses bramble in the
+k ⇥k grid: this bramble has order k, so by the theorem the k ⇥k grid
+has tree-width at least k −1. (Try to show this without the theorem!)
+In fact, the k ⇥k grid has tree-width k (Exercise 34). But more
+important than its precise value is the fact that the tree-width of grids
+tends to inﬁnity with their size. For as we shall see, large grid minors
+pose another canonical obstruction to small tree-width: not only do large
+grids (and hence all graphs containing large grids as minors; cf. Lemma
+12.4.1) have large tree-width, but conversely every graph of large tree-
+width has a large grid minor (Theorem 12.6.3).
+In Section 12.5 we shall place these within the wider framework of
+tangles, another central notion in graph minor theory. Using tangles one
+can formulate a more general duality theory between highly connected
+substructures and trees, of which Theorem 12.4.3 is but a special case.
+Tree-width can also be expressed as follows:
+Proposition 12.4.4. tw(G) = min
+*
+!(H) −1 | G ✓H; H chordal
+ 
+.
+Proof.
+By Corollary 12.3.5 and Proposition 12.3.6, each of the graphs H
+(12.3.2)
+(12.3.5)
+(12.3.6)
+considered for the minimum has a tree-decomposition of width !(H)−1.
+Every such tree-decomposition induced one of G by Lemma 12.3.2, so
+tw(G) 6 !(H) −1 for every H.
+Conversely, let us construct an H as above with !(H) −1 6 tw(G).
+Let (T, V) be a tree-decomposition of G of width tw(G).
+For every
+t 2 T let Kt denote the complete graph on Vt, and put H := S
+t2T Kt.
+Clearly, (T, V) is also a tree-decomposition of H. By Proposition 12.3.6,
+H is chordal, and by Corollary 12.3.5, !(H) −1 is at most the width of
+(T, V), i.e. at most tw(G).
+⇤
+A tree-decomposition (T, V) of G with V = (Vt)t2T is linked, or
+linked/lean
+lean, if it satisﬁes the following condition:
+(T4) Given t1, t2 2 T and vertex sets Z1 ✓Vt1 and Z2 ✓Vt2 such that
+|Z1| = |Z2| =: k, either G contains k disjoint Z1–Z2 paths or there
+exists an edge tt0 2 t1Tt2 with |Vt \ Vt0| < k.
+The ‘branches’ in a lean tree-decomposition are thus stripped of any bulk
+not necessary to maintain their connecting qualities. Indeed, if a branch
+is thick (i.e. the adhesion sets Vt \ Vt0 along a path in T are all large),
+then G is highly connected along this branch, and the bags themselves
+are no larger than their ‘external connectivity’ in G requires: for t1 = t2,
+(T4) says that two k-sets of vertices will only lie in a common bag if
+they cannot be separated (in G) by fewer than k vertices.
+
+376
+12. Graph Minors
+In our quest for tree-decompositions into ‘small’ bags, we now have
+two criteria to choose between: the global ‘worst case’ criterion of width,
+and the more subtle local criterion of leanness. Surprisingly, it is always
+possible to ﬁnd a tree-decomposition that is optimal with respect to both
+criteria at once:
+Theorem 12.4.5. (Thomas 1990)
+Every graph G has a lean tree-decomposition of width tw(G).
+Another natural feature one might ask of a tree-decomposition is
+that its parts, as induced subgraphs of G, be connected. Let us call such
+a tree-decomposition connected, and let the connected tree-width ctw(G)
+of G be the least width of a connected tree-decomposition of G.
+The connected tree-width of most graphs is greater than their or-
+dinary tree-width.
+For example, every cycle has tree-width 2, but
+ctw(Cn) = dn/2e (Exercise 33). And unlike ordinary tree-width, the
+connected tree-width of a subgraph of G can be greater than that of G.
+(For example, let G be obtained from a long cycle by adding a chord
+between opposite vertices.) However, if C ✓G is a geodesic cycle, i.e.,
+if dC(u, v) = dG(u, v) for all vertices u, v 2 C, then ctw(C) 6 ctw(G).
+The presence of long geodesic cycles in a graph thus is an obstruction
+to small connected tree-width – as is, trivially, large ordinary tree-width.
+By the following theorem, however, these are the only obstructions:
+Theorem 12.4.6. There is a function f: N2 ! N such that every graph
+of tree-width 6 w 2 N that has no geodesic cycle of length > k 2 N has
+connected tree-width at most f(w, k).
+12.5 Tangles
+We have already in this chapter met a few types of substructures of possi-
+bly sparse graphs that are highly connected in some sense, but which are
+not just k-connected subgraphs (or minors) for some large k. Large grid
+minors are an example, the k-blocks deﬁned at the end of Section 12.3
+are another, as are brambles of high order. All these substructures have
+one feature in common: for every low-order separation of the graph they
+lie essentially, though not necessarily entirely, on one of its two sides.
+For example, given a bramble B of order k in a graph G = (V, E), if
+G = (V, E)
+{A, B} is a separation of order < k then A r B or B r A, but not both,
+contains a set from B. This helped us prove the easy implication of the
+tree-width duality theorem: B orients every edge of the decomposition
+tree T of any tree-decomposition (T, V) of adhesion < k ‘towards’ the

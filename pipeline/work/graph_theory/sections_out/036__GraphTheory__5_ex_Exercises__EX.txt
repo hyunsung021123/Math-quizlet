@@ -1,0 +1,263 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 5. Colouring
+현재 소단원: 5.ex Exercises
+직전 소단원: 「5.6 χ-bounded graph properties」
+[연습문제]
+148
+5. Colouring
+Exercises
+1.−Show that the four colour theorem does indeed solve the map colouring
+problem stated in the ﬁrst sentence of the chapter. Conversely, does
+the 4-colourability of every map imply the four colour theorem?
+2.−Show that, for the map colouring problem above, it suﬃces to con-
+sider maps such that no point lies on the boundary of more than three
+countries. How does this a↵ect the proof of the four colour theorem?
+3.
+Try to turn the proof of the ﬁve colour theorem into one of the four
+colour theorem, as follows. Deﬁning v and H as before, assume induc-
+tively that H has a 4-colouring; then proceed as before. Where does
+the proof fail?
+4.
+Calculate the chromatic number of a graph in terms of the chromatic
+numbers of its blocks.
+5.−Let G be a graph, and let k 2 N.
+(i) Show that G has chromatic number at most k if and only if there
+exists a homomorphism from G to Kk.
+(ii) Show that G is bipartite if and only if there exists a homomor-
+phism from G to K2 or to an even cycle.
+(iii) Are there homomorphisms from C17 to C7, from C7 to C17,
+from C16 to C7, and from C17 to C6?
+6.
+Show that graphs of large girth and without a given minor are ‘nearly
+bipartite’ in the following sense. Let H be a ﬁxed graph and C a ﬁxed
+odd cycle. Use Theorem 7.2.6 to show that if G is a graph of suﬃciently
+large girth (depending only on H and C) that does not contain H as a
+minor, then there is a homomorphism from G to C.
+7.
+For every n > 1, ﬁnd a bipartite graph on 2n vertices, ordered in such
+a way that the greedy algorithm uses n rather than 2 colours.
+8.
+Consider the following approach to vertex colouring. First, ﬁnd a max-
+imal independent set of vertices and colour these with colour 1; then
+ﬁnd a maximal independent set of vertices in the remaining graph and
+colour those 2, and so on. Compare this algorithm with the greedy
+algorithm: which is better?
+9.
+Show that the bound of Proposition 5.2.2 is always at least as sharp as
+that of Proposition 5.2.1.
+A k-chromatic graph G is called critically k-chromatic, or just critical, if
+χ(G −v) < k for every v 2 V (G).
+10.
+Determine the critical 3-chromatic graphs.
+11.+ Show that every critical k-chromatic graph is (k −1) - edge-connected.
+12.
+Formalize and prove the following statement: assuming large average
+degree drives the colouring number up but not the chromatic number.
+
+Exercises
+149
+13.
+Write col0(G) for the least number of colours used by the greedy algo-
+rithm for a suitable vertex ordering of a graph G. Does every G satisfy
+col0(G) = col(G) or col0(G) = χ(G)?
+14.
+Find a function f such that every graph of arboricity at least f(k) has
+colouring number at least k, and a function g such that every graph of
+colouring number at least g(k) has arboricity at least k, for all k 2 N.
+15.
+Given k
+2 N, ﬁnd a constant ck > 0 such that every large enough
+graph G with ↵(G) 6 k contains a cycle of length at least ck |G|.
+16.−Find a graph G for which Brooks’s theorem yields a signiﬁcantly weaker
+bound on χ(G) than Proposition 5.2.2.
+17.+ Show that, in order to prove Brooks’s theorem for a graph G = (V, E),
+we may assume that (G) > 2 and δ(G) > 3. Then prove the theorem
+under these assumptions, showing ﬁrst the following two lemmas.
+(i) Let v1, . . . , vn be an enumeration of V . If every vi (i < n) has
+a neighbour vj with j > i, and if v1vn, v2vn 2 E but v1v2 /
+2 E,
+then the greedy algorithm uses at most ∆(G) colours.
+(ii) If G is not complete, it has a vertex vn with non-adjacent neigh-
+bours v1, v2 that do not separate G.
+18.+ Show that the following statements are equivalent for a graph G:
+(i) χ(G) 6 k;
+(ii) G has an orientation without directed paths of length k;
+(iii) G has an acyclic such orientation (one without directed cycles).
+19.
+Given a graph G and k 2 N, let PG(k) denote the number of vertex
+colourings V (G) ! {1, . . . , k}. Show that PG is a polynomial in k of
+degree n := |G|, in which the coeﬃcient of kn is 1 and the coeﬃcient
+of kn−1 is −kGk. (PG is called the chromatic polynomial of G.)
+(Hint. Apply induction on kGk.)
+20.+ Determine the class of all graphs G for which PG(k) = k (k −1)n−1. (As
+in the previous exercise, let n := |G|, and let PG denote the chromatic
+polynomial of G.)
+21.
+Show that for every k 2 N there is a unique ✓-minimal ‘Kuratowski
+class’ Xk of k-chromatic graphs such that every k-chromatic graph has
+a subgraph in Xk, but that for k > 3 this class Xk is never ﬁnite.
+22.
+For every k 2 N, construct a triangle-free k-chromatic graph. Can you
+even make them C4-free?
+23.
+Consider an inﬁnite matrix whose rows and columns are both indexed
+by N r {0}. For all i, j 2 N r {0} join the element vij in row i and
+column j to every element of column i + j. Prove that the resulting
+graph contains no triangle. What is its chromatic number?
+
+150
+5. Colouring
+24.
+In the deﬁnition of ‘k-constructible’, replace axioms (ii) and (iii) by
+(ii)0 Every supergraph of a k-constructible graph is k-constructible.
+(iii)0 If x, y1, y2 are distinct vertices of a graph G and y1y2 2 E(G),
+and if both G + xy1 and G + xy2 are k-constructible, then G is
+k-constructible.
+Show that a graph is k-constructible with respect to this new deﬁnition
+if and only if its chromatic number is at least k.
+25.−An n ⇥n - matrix with entries from {1, . . . , n} is called a Latin square
+if every element of {1, . . . , n} appears exactly once in each column and
+exactly once in each row. Recast the problem of constructing Latin
+squares as a colouring problem.
+26.
+Without using Proposition 5.3.1, show that χ0(G) = k for every k-
+regular bipartite graph G.
+27.
+Prove Proposition 5.3.1 from the statement of the previous exercise.
+28.+ A forest is called linear if all its components are paths. Show that every
+cubic graph has an edge-decomposition into two linear forests.
+29.−Without using Theorem 5.4.2, show that every plane graph is 6-list-
+colourable.
+30.
+For every integer k, ﬁnd a 2-chromatic graph whose choice number is
+at least k.
+31.−Find a general upper bound for ch0(G) in terms of χ0(G).
+32.
+Compare the choice number of a graph with its colouring number:
+which is greater? Can you prove the analogue of Theorem 5.4.1 for
+the colouring number (directly, without using any major theorem)?
+33.+ Prove that the choice number of Kr
+2 is r.
+34.
+The total chromatic number χ00(G) of a graph G = (V, E) is the least
+number of colours needed to colour the vertices and edges of G simulta-
+neously so that any adjacent or incident elements of V [E are coloured
+di↵erently. The total colouring conjecture says that χ00(G) 6 ∆(G)+2.
+Bound the total chromatic number from above in terms of the list-
+chromatic index, and use this bound to deduce a weakening of the
+total colouring conjecture from the list colouring conjecture.
+35.−Does every oriented graph have a kernel? If not, does every graph have
+an orientation in which every induced subgraph has a kernel? If not,
+does every graph have an orientation that has a kernel?
+36.+ Prove that every directed graph without odd directed cycles has a kernel.
+37.
+Show that every bipartite planar graph is 3-list-colourable.
+(Hint. Apply the previous exercise and Lemma 5.4.3.)
+38.−Show that perfection is closed neither under edge deletion nor under
+edge contraction.
+
+Exercises
+151
+39.−Deduce Theorem 5.5.6 from the strong perfect graph theorem.
+40.
+Let H1 and H2 be two sets of imperfect graphs, each minimal with
+the property that a graph is perfect if and only if it has no induced
+subgraph in Hi (i = 1, 2). Do H1 and H2 contain the same graphs, up
+to isomorphism?
+41.
+Use K¨onig’s Theorem 2.1.1 to show that the complement of any bipar-
+tite graph is perfect.
+42.
+Using the results of this chapter, ﬁnd a one-line proof of the following
+theorem of K¨onig, the dual of Theorem 2.1.1: in any bipartite graph
+without isolated vertices, the minimum number of edges meeting all
+vertices equals the maximum number of independent vertices.
+43.
+A graph is called a comparability graph if there exists a partial ordering
+of its vertex set such that two vertices are adjacent if and only if they
+are comparable. Show that every comparability graph is perfect.
+44.
+A graph G is called an interval graph if there exists a set { Iv | v 2 V (G) }
+of real intervals such that Iu \ Iv 6= ; if and only if uv 2 E(G).
+(i) Show that every interval graph is chordal.
+(ii) Show that the complement of any interval graph is a compara-
+bility graph.
+(Conversely, a chordal graph is an interval graph if its complement is a
+comparability graph; this is a theorem of Gilmore and Ho↵man (1964).)
+45.
+Show that χ(H) 2 {!(H) , !(H) + 1} for every line graph H.
+46.+ Characterize the graphs whose line graphs are perfect.
+47.
+Let G0 be obtained from a graph G by replicating a vertex. If G satisﬁes
+χ = !, does G0 too?
+48.
+Show that a graph G is perfect if and only if every non-empty induced
+subgraph H of G contains an independent set A ✓V (H) such that
+!(H −A) < !(H).
+49.+ Consider the graphs G for which every induced subgraph H has the
+property that every maximum-size complete subgraph of H meets every
+maximum-size independent vertex set in H.
+(i) Show that these graphs G are perfect.
+(ii) Show that these graphs G are precisely the graphs not containing
+an induced copy of P 3.
+50.+ Show that in every perfect graph G one can ﬁnd a set A of independent
+vertex sets and a set K of vertex sets of complete subgraphs such that
+S
+A = V (G) = S
+K and every set in A meets every set in K.
+(Hint. Lemma 5.5.5.)
+51.+ Let G be a perfect graph. As in the proof of Theorem 5.5.4, replace
+every vertex v of G with a perfect graph Gv (not necessarily complete),
+adding all Gu–Gv edges whenever uv is an edge of G. Show that the
+resulting graph G0 is again perfect.
+
+152
+5. Colouring
+52.
+Show that χ(G) > max { !(G), d|G|/↵(Ge)} for all graphs G.
+(i)−Find an example of G where this inequality is strict.
+(ii)+ Prove that all graphs G obtained from cycles by repeated vertex
+replication satisfy it with equality.
+53.−Discuss why χ-boundedness is deﬁned only for graph properties that
+are closed under induced subgraphs. Support your arguments by the
+construction of a class that satisﬁes the deﬁnition of χ-boundedness but
+is not closed under induced subgraphs, so that the graphs in this class
+are very similar to the triangle-free graphs.
+54.−Reduce the Gy´arf´as-Sumner conjecture to trees: prove that if not con-
+taining any ﬁxed tree as an induced subgraph is a χ-bounded property
+then so is that of not containing any ﬁxed forest.
+Notes
+The authoritative reference work on all questions of graph colouring is T.R.
+Jensen & B. Toft, Graph Coloring Problems, Wiley 1995.
+Starting with a
+brief survey of the most important results and areas of research in the ﬁeld,
+this monograph gives a detailed account of over 200 open colouring problems,
+complete with extensive background surveys and references. Most of the re-
+marks below are discussed comprehensively in this book, and all the references
+for this chapter can be found there. A book speciﬁcally on edge colouring
+is L.M. Favrholdt, D. Scheide, M. Stiebitz & B. Toft, Graph Edge Coloring:
+Vizing’s Theorem and Goldberg’s Conjecture, Wiley 2012.
+The four colour problem, whether every map can be coloured with four
+colours so that adjacent countries are shown in di↵erent colours, was raised by
+a certain Francis Guthrie in 1852. He put the question to his brother Frederick,
+who was then a mathematics undergraduate in Cambridge. The problem was
+ﬁrst brought to the attention of a wider public when Cayley presented it to
+the London Mathematical Society in 1878. A year later, Kempe published an
+incorrect proof, which was in 1890 modiﬁed by Heawood into our ﬁrst proof
+of the ﬁve colour theorem. In 1880, Tait announced ‘further proofs’ of the
+four colour conjecture, which never materialized; see the notes for Chapter 10.
+Our second proof of the ﬁve colour theorem dates back at least to 1972, when
+Woodall used it in his ﬁrst graph theory course.
+The ﬁrst widely accepted proof of the four colour theorem was published
+by Appel and Haken in 1977. The proof builds on ideas that can be traced back
+as far as Kempe’s paper, and were developed largely by Birkho↵and Heesch.
+Very roughly, the proof sets out ﬁrst to show that every plane triangulation
+must contain at least one of 1482 certain ‘unavoidable conﬁgurations’. In a
+second step, a computer is used to show that each of those conﬁgurations is
+‘reducible’, i.e., that any plane triangulation containing such a conﬁguration
+can be 4-coloured by piecing together 4-colourings of smaller plane triangula-
+tions. Taken together, these two steps amount to an inductive proof that all
+plane triangulations, and hence all planar graphs, can be 4-coloured.
+Appel & Haken’s proof has not been immune to criticism, not only be-
+cause of their use of a computer. The authors responded with a 741 page long

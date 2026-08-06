@@ -1,0 +1,244 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.8 Infinite graphs as limits of finite ones
+직전 소단원: 「8.7 The topological cycle space」
+[본문]
+277
+8.8 Inﬁnite graphs as limits of ﬁnite ones
+In the last section we saw how the space |G|, for a locally ﬁnite graph G,
+seems to appear as a ‘limit’ of the ﬁnite minors Gn of G obtained by
+contracting the components left on deleting its ﬁrst n vertices. We now
+make this relationship between |G| and the Gn more formal. Clarifying
+this can help a lot with transferring theorems for ﬁnite graphs to inﬁnite
+ones – which, after all, is the idea behind considering |G| in the ﬁrst place.
+Let (P, 6) be a directed partially ordered set, one such that for all
+directed
+p, q there exists an r such that p 6 r and q 6 r. A subset Q ✓P is
+coﬁnal in P if for every p 2 P there exists some q 2 Q with p 6 q.
+coﬁnal
+For every p 2 P let Xp be a compact Hausdor↵topological space;
+later, these will represent ﬁnite graphs. Assume that we have continuous
+maps fqp: Xq ! Xp for all q > p, which are compatible in that, whenever
+inverse
+system
+r > q > p, we have fqp ◦frq = frp. The family X = ( Xp | p 2 P ),
+together with these bonding maps fqp, is called an inverse system.
+bonding
+maps
+The set X of all x = ( xp | p 2 P ) with xp 2 Xp and fqp(xq) = xp
+for all p < q in P is the inverse limit X = lim
+ −X of X. We give it the inverse limit
+subspace topology from the product space Q
+p2P Xp which, like the Xp,
+is Hausdor↵and compact by Tychono↵’s theorem.
+The space X = lim
+ −X is the intersection, over all q 2 P, of the sets
+X<q of all ( xp | p 2 P ) 2 Q
+p Xp that satisfy fqp(xq) = xp for all p < q.
+Using the fact that the Xp are Hausdor↵and the maps fqp are contin-
+uous, one can show that these subsets X<q of Q
+p Xp are closed. Thus,
+X = T
+q 2P X<q is closed in the compact space Q
+p Xp, and therefore
+compact.
+As P is directed, the sets X<q have the ﬁnite intersection property,
+as long as the Xp are non-empty. Then X = T
+q X<q is also non-empty:
+Lemma 8.8.1. X = lim
+ −( Xp | p 2 P ) is a compact Hausdor↵space.
+It is non-empty if Xp 6= ; for all p 2 P.
+⇤
+Given a graph G = (V, E, ⌦), consider as P = P(G) the set of all
+G, V, E, ⌦
+ﬁnite partitions of V with only ﬁnitely many cross-edges. Letting p 6 q
+P(G), P
+whenever q reﬁnes p makes P into a directed partially ordered set. For
+each p, let G/p be the ﬁnite multigraph on p whose edges are the cross-
+G/p
+edges of p.15 The vertices of G/p that are non-singleton partition classes
+are its dummy vertices. The other vertices of G/p, those of the form {v},
+dummy
+vertices
+we consider to be vertices of G and refer to them as v.
+On the compact spaces Xp := |G/p| we have compatible quotient
+maps fqp: Xq !Xp for q > p which send the vertices of G/q to the vertices
+Xp, fqp
+of G/p that contain them as subsets; which are the identity on the edges
+15 If the partition classes U 2 p are connected in G, then G/p is the minor of G
+obtained by contracting them. But we do not require them to be connected.
+8.8 Inﬁnite graphs as limits of ﬁnite ones
+
+278
+8. Inﬁnite Graphs
+of G/q that are also edges of G/p; and which send any other edge of G/q
+to the dummy vertex of G/p that contains both its endvertices in G/q.
+Let
+kGk := lim
+ −( Xp | p 2 P ),
+kGk
+with these fqp as bonding maps.
+Theorem 8.8.2. If G is locally ﬁnite and connected, then kGk is homeo-
+morphic to |G|.
+Proof. As kGk is compact and |G| is Hausdor↵, it suﬃces to construct a
+continuous bijection σ: kGk!|G|. Let x = ( xp | p 2 P ) 2 kGk be given.
+If there exists p 2 P such that xp is not a dummy vertex of G/p,
+then xp 2 |G|r⌦and we let σ(x) := xp. To see that this is well deﬁned,
+consider two such points xp and xp0 and pick q > p, p0. Then xq is not a
+dummy vertex either, and xp = xq = xp0 by the deﬁnition of fqp and fqp0.
+Suppose now that xp is a dummy vertex for every p. For every n 2 N
+let Sn be the set of the ﬁrst n vertices of G in some ﬁxed enumeration,
+and let pn 2 P consist of the vertices in Sn as singleton partition classes
+and the vertex sets of the components of G −Sn as the remaining par-
+tition classes. This sequence p0, p1, . . . is coﬁnal in P, since every p 2 P
+is reﬁned by every pn with n large enough that all the cross-edges of p
+have their endvertices in Sn.
+As fqp(xq) = xp whenever p = pm < pn = q, the connected vertex
+sets Un = xpn form a descending sequence U0 ◆U1 ◆. . .. It is straight-
+forward to construct a ray R in G that has a tail in G[Un] for every n.
+Let ! be the end of R.
+For every p 2 P the set U = xp contains every Un with p < pn as a
+subset. As the pn are coﬁnal in P, every G[xp] thus contains a tail of R.
+Conversely, for every end !0 6= ! there is an n such that G[Un] contains
+no ray from !0. Thus, ! is the unique end of G that has a ray in G[xp]
+for every p 2 P. Let σ(x) := !. This completes the deﬁnition of σ.
+To see that σ is injective, consider distinct points x, x0 2 kGk, dif-
+fering in their components xp 6= x0
+p say.
+If p can be chosen so that
+one of these is not a dummy vertex of G/p, then clearly σ(x) 6= σ(x0).
+Otherwise U = xp and U 0 = x0
+p are disjoint vertex sets in G separated by
+ﬁnitely many edges, and σ(x) is an end with a ray in G[U] while σ(x0)
+is an end with a ray in G[U 0]. Thus again, σ(x) 6= σ(x0).
+To see that σ is surjective, let x 2 |G| be given. If x is not an end,
+choose p(x) 2 P so as to contain the vertex x, or the endvertices of the
+edge containing x, as singleton partition classes. For every q > p(x) in P
+let xq := x, and for every p0 < q for some such q let xp0 := fqp0(x). Then
+( xp | p 2 P ) is a well-deﬁned point in kGk which σ maps to x.
+If x is an end, it has a ray in G[xp] for exactly one dummy vertex xp
+of G/p for every p 2 P. These satisfy fqp(xq) = xp whenever p < q, so
+( xp | p 2 P ) is a point in kGk which σ maps to x.
+
+8.8 Inﬁnite graphs as limits of ﬁnite ones
+279
+Let us show that σ is continuous at every point x = ( xp | p 2 P )
+of kGk. If σ(x) is not an end, there exists some p(x) 2 P such that
+σ(x) = xp(x), which is a point in Xp(x) but not a dummy vertex. Then
+every basic open neighbourhood O of σ(x) in |G| is also a basic neigh-
+bourhood of this same point xp(x) in Xp(x). Then the set Q
+p2P Op with
+Op(x) = O and Op = Xp for all p 6= p(x) is a basic open neighbourhood
+of x in Q
+p Xp. Its intersection with kGk is an open neighbourhood of x
+in kGk which σ maps to O.
+If σ(x) is an end, ! say, consider any basic open neighbourhood
+O = ˆC✏(S, !) of ! in |G|. Let p(!) 2 P be the partition of V into the
+vertex sets of the components of G −S and the singletons in S. Then
+V (C) is a dummy vertex of G/p(!); call it xp(!). Let Op(!) ✓Xp(!)
+consist of xp(!) and the inner points in O of any C–S edges; these are
+also points of Xp(!). As earlier, x has a basic open neighbourhood Q
+p Op
+in Q
+p Xp with Op = Xp for all p 6= p(!), whose intersection with kGk
+maps to O under σ.
+⇤
+Note that our proof did not use that |G| is compact: we reobtain
+Proposition 8.6.1 as a corollary.
+In the proof of Theorem 8.8.2 we found it convenient to work with
+a coﬁnal sequence in P instead of the entire set P. This is justiﬁed more
+generally by the following easy lemma:
+Lemma 8.8.3. Let ( Xp | p 2 P ) be an inverse system of compact spaces,
+let Q ✓P be coﬁnal in P, and consider ( Xp | p 2 Q ) with the same
+bonding maps.
+Mapping every point ( xp | p 2 P ) to its restriction
+( xp | p 2 Q ) then deﬁnes a homeomorphism from lim
+ −( Xp | p 2 P ) to
+lim
+ −( Xp | p 2 Q ).
+⇤
+By Theorem 8.8.2 and this lemma, our familiar |G| for locally ﬁnite
+G is the inverse limit of the ﬁnite contraction minors Gn of G deﬁned as
+in Section 8.6. Indeed, for the coﬁnal sequence p0, p1, . . . in P deﬁned in
+the proof of the theorem, we have Gn = G/pn, and by the lemma |G| is
+the inverse limit of the corresponding compact spaces Xpn.
+Just like |G| itself, every standard subspace X0 of X = |G| can be
+obtained as an inverse limit of ﬁnite multigraphs. Indeed, the projections
+fp: X !Xp deﬁned by ( xp | p 2 P ) 7! xp are continuous, so their images
+X0
+p ✓Xp of X0 are compact since X0 is, and the fqp send X0
+q to X0
+p. Thus,
+( X0
+p | p 2 P ) is an inverse system with bonding maps f 0
+qp := fqp ↾X0
+q,
+and X0 = lim
+ −( X0
+p | p 2 P ).
+More typically, we would like to ﬁnd a standard subspace X0 with
+certain desired properties – for example, a topological spanning tree.
+We can then try to construct some X0
+p whose inverse limit is X0. It
+may not be straightforward, however, to ﬁnd such compatible X0
+p for
+all p 2 P.
+Here, Lemma 8.8.3 can help: it is only necessary to ﬁnd
+
+280
+8. Inﬁnite Graphs
+them for all p in some coﬁnal Q ✓P. For example, we can construct
+spanning trees inductively in all the Gn by expanding a dummy vertex
+in the tree Tn ✓Gn to a star in Tn+1 ✓Gn+1. Then our given bonding
+maps Xpn ! Xpm will map the subspace X0
+pn induced by Tn to that
+induced by Tm, and these X0
+pn will have a topological spanning tree in
+X = |G| as their inverse limit. This construction is possible only because
+the partition classes of the pn are connected in G; we could not perform
+it on all of P(G).
+Arcs and circles in |G|, or in a standard subspace, can be obtained
+easily by applying the following lifting lemma with Y = [0, 1] or Y = S1.
+Let ( Xp | p 2 P ) be any inverse system of compact spaces, with bonding
+maps fqp say, and let X be its inverse limit. Let Y be a topological space
+with continuous compatible maps gp: Y ! Xp: maps that commute with
+compatible
+maps
+the fqp in that gp = fqp ◦gq whenever p < q. Let us call the family
+( gp | p 2 P ) eventually injective if for all distinct y, y0 2 Y there exists
+some p 2 P with gp(y) 6= gp(y0).
+Lemma 8.8.4. There is a unique continuous map g: Y ! X that com-
+lifting
+lemma
+mutes with the projections fp: X ! Xp in that gp = fp ◦g for all p 2 P.
+If the gp are eventually injective, then g is injective.
+⇤
+For example, suppose we wish to ﬁnd an arc in X between some
+points x and y.
+We can ﬁnd a topological x–y path g: [0, 1] ! X by
+ﬁnding topological fp(x)–fp(y) paths gp: [0, 1] ! Xp that commute with
+the fqp. If we can make these gp eventually injective, then g will be
+injective, and its image will be the desired arc.
+Similarly, if we can ﬁnd compatible circles gp: S1 ! Xp that are
+eventually injective, whose images contain all the vertices of G/p, and
+which commute with the fqp, then g will deﬁne a Hamilton circle of G,
+Hamilton
+circle
+a circle in |G| that traverses every vertex.
+Exercises
+1.−Show that a connected graph is countable if all its vertices have count-
+able degrees.
+2.−Given countably many sequences σi = si
+1, si
+2, . . . (i 2 N) of natural num-
+bers, ﬁnd one sequence σ = s1, s2, . . . that beats every σi eventually,
+i.e. such that for every i there exists an n(i) such that sn > si
+n for all
+n > n(i).
+3.−Can a countable set have uncountably many subsets whose intersections
+have ﬁnitely bounded size?
+4.−Let T be an inﬁnite rooted tree.
+Show that every ray in T has an
+increasing tail, that is, a tail whose sequence of vertices increases in the
+tree-order associated with T and its root.

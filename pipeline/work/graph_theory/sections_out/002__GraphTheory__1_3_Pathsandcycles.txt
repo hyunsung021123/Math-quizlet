@@ -1,0 +1,286 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.3 Paths and cycles
+직전 소단원: 「1.2 The degree of a vertex」
+[본문]
+6
+1. The Basics
+If a graph has large minimum degree, i.e. everywhere, locally,
+many edges per vertex, it also has many edges per vertex globally:
+"(G) = 1
+2d(G) > 1
+2δ(G). Conversely, of course, its average degree may
+be large even when its minimum degree is small. However, the vertices
+of large degree cannot be scattered completely among vertices of small
+degree: as the next proposition shows, every graph G has a subgraph
+whose average degree is no less than the average degree of G, and whose
+minimum degree is more than half its average degree:
+Proposition 1.2.2. Every graph G with at least one edge has a sub-
+[1.4.3]
+[7.2.2]
+graph H with δ(H) > "(H) > "(G).
+Proof.
+To construct H from G, let us try to delete vertices of small
+degree one by one, until only vertices of large degree remain.
+Up to
+which degree d(v) can we a↵ord to delete a vertex v, without lowering "?
+Clearly, up to d(v) = " : then the number of vertices decreases by 1
+and the number of edges by at most ", so the overall ratio " of edges to
+vertices will not decrease.
+Formally, we construct a sequence G = G0 ◆G1 ◆. . . of induced
+subgraphs of G as follows. If Gi has a vertex vi of degree d(vi) 6 "(Gi),
+we let Gi+1 := Gi −vi; if not, we terminate our sequence and set
+H := Gi. By the choices of vi we have "(Gi+1) > "(Gi) for all i, and
+hence "(H) > "(G).
+What else can we say about the graph H? Since "(K1) = 0 < "(G),
+none of the graphs in our sequence is trivial, so in particular H 6= ;. The
+fact that H has no vertex suitable for deletion thus implies δ(H) > "(H),
+as claimed.
+⇤
+1.3 Paths and cycles
+A path is a non-empty graph P = (V, E) of the form
+path
+V = {x0, x1, . . . , xk}
+E = {x0x1, x1x2, . . . , xk−1xk} ,
+where the xi are all distinct. The vertices x0 and xk are linked by P and
+are called its endvertices or ends; the vertices x1, . . . , xk−1 are the inner
+vertices of P. The number of edges of a path is its length, and the path
+length
+of length k is denoted by P k. Note that k is allowed to be zero; thus,
+P k
+P 0 = K1.
+We often refer to a path by the natural sequence of its vertices,3
+3 More precisely, by one of the two natural sequences: x0 . . . xk and xk . . . x0
+denote the same path. Still, it often helps to ﬁx one of these two orderings of V (P)
+notationally: we may then speak of things like the ‘ﬁrst’ vertex on P with a certain
+property, etc.
+
+1.3 Paths and cycles
+7
+G
+P
+Fig. 1.3.1. A path P = P 6 in G
+writing, say, P = x0x1 . . . xk and calling P a path from x0 to xk (as well
+as between x0 and xk).
+For 0 6 i 6 j 6 k we write
+xPy, ˚
+P
+Pxi := x0 . . . xi
+xiP := xi . . . xk
+xiPxj := xi . . . xj
+and
+˚
+P := x1 . . . xk−1
+P˚xi := x0 . . . xi−1
+˚xiP := xi+1 . . . xk
+˚xiP˚xj := xi+1 . . . xj−1
+for the appropriate subpaths of P. We use similar intuitive notation for
+the concatenation of paths; for example, if the union Px [ xQy [ yR of
+three paths is again a path, we may simply denote it by PxQyR.
+PxQyR
+xPyQz
+x
+y
+z
+x
+P
+y
+Q
+z
+Fig. 1.3.2. Paths P, Q and xPyQz
+Given sets A, B of vertices, we call P = x0 . . . xk an A–B path if
+A–B path
+V (P) \ A = {x0} and V (P) \ B = {xk}. As before, we write a–B path
+rather than {a}–B path, etc.
+Two or more paths are independent if
+inde-
+pendent
+none of them contains an inner vertex of another. Two a–b paths, for
+instance, are independent if and only if a and b are their only common
+vertices.
+A non-trivial path P is an A-path for a set A of vertices if P has its
+A-path
+ends but no inner vertex in A. It is an H- path for a graph H if it is a
+H- path
+V (H) - path and, if it has length 1, its edge does not lie in H.
+
+8
+1. The Basics
+If P = x0 . . . xk−1 is a path and k > 3, then the graph C :=
+P + xk−1x0 is called a cycle. As with paths, we often denote a cycle
+cycle
+by its (cyclic) sequence of vertices; the above cycle C might be written
+as x0 . . . xk−1x0. The length of a cycle is its number of edges (or vertices);
+length
+the cycle of length k is called a k-cycle and denoted by Ck.
+Ck
+The minimum length of a cycle (contained) in a graph G is the girth
+girth g(G)
+g(G) of G; the maximum length of a cycle in G is its circumference. (If
+circum-
+ference
+G does not contain a cycle, we set the former to 1, the latter to zero.)
+An edge which joins two vertices of a cycle but is not itself an edge of
+chord
+the cycle is a chord of that cycle. Thus, an induced cycle in G, a cycle in
+G forming an induced subgraph, is one that has no chords (Fig. 1.3.3).
+induced
+cycle
+y
+x
+Fig. 1.3.3. A cycle C8 with chord xy, and induced cycles C6, C4
+If a graph has large minimum degree, it contains long paths and
+cycles (see also Exercise 9):
+Proposition 1.3.1. Every graph G contains a path of length δ(G) and
+[1.4.3]
+[7.2.2]
+a cycle of length at least δ(G) + 1 (provided that δ(G) > 2).
+Proof. Let x0 . . . xk be a longest path in G. Then all the neighbours of
+xk lie on this path (Fig. 1.3.4). Hence k > d(xk) > δ(G). If i < k is
+minimal with xixk 2 E(G), then xi . . . xkxi is a cycle of length at least
+δ(G) + 1.
+⇤
+x0
+xi
+xk
+Fig. 1.3.4. A longest path x0 . . . xk, and the neighbours of xk
+Minimum degree and girth, on the other hand, are not related (un-
+less we ﬁx the number of vertices): as we shall see in Chapter 11, there
+are graphs combining arbitrarily large minimum degree with arbitrarily
+large girth.
+The distance dG(x, y) in G of two vertices x, y is the length of a
+distance
+d(x, y)
+shortest x–y path in G; if no such path exists, we set d(x, y) := 1. The
+greatest distance between any two vertices in G is the diameter of G,
+diameter
+diam(G)
+denoted by diam(G). Diameter and girth are, of course, related:
+
+1.3 Paths and cycles
+9
+Proposition 1.3.2. Every graph G containing a cycle satisﬁes g(G) 6
+2 diam(G) + 1.
+Proof. Let C be a shortest cycle in G. If g(G) > 2 diam(G) + 2, then
+C has two vertices whose distance in C is at least diam(G) + 1. In G,
+these vertices have a lesser distance; any shortest path P between them
+is therefore not a subgraph of C.
+Thus, P contains a C-path xPy.
+Together with the shorter of the two x–y paths in C, this path xPy
+forms a shorter cycle than C, a contradiction.
+⇤
+A vertex is central in G if its greatest distance from any other ver-
+central
+tex is as small as possible. This distance is the radius of G, denoted
+by rad(G).
+Thus, formally, rad(G) = minx2V (G) maxy 2V (G) dG(x, y).
+radius
+rad(G)
+As one easily checks (exercise), we have
+rad(G) 6 diam(G) 6 2 rad(G) .
+Diameter and radius are not related to minimum, average or max-
+imum degree if we say nothing about the order of the graph. However,
+graphs of large diameter and minimum degree must be large (larger than
+forced by each of the two parameters alone; see Exercise 10), and graphs
+of small diameter and maximum degree must be small:
+Proposition 1.3.3. A graph G of radius at most k and maximum degree
+[9.4.1]
+[9.4.2]
+at most d > 3 has fewer than
+d
+d−2(d −1)k vertices.
+Proof. Let z be a central vertex in G, and let Di denote the set of vertices
+of G at distance i from z. Then V (G) = Sk
+i=0 Di. Clearly |D0| = 1 and
+|D1| 6 d. For i > 1 we have |Di+1| 6 (d −1)|Di|, because every vertex
+in Di+1 is a neighbour of a vertex in Di (why?), and each vertex in Di
+has at most d −1 neighbours in Di+1 (since it has another neighbour
+in Di−1). Thus |Di+1| 6 d(d −1)i for all i < k by induction, giving
+|G| 6 1 + d
+k−1
+X
+i=0
+(d −1)i = 1 +
+d
+d −2
+$
+(d −1)k −1
+%
+<
+d
+d −2(d −1)k.
+⇤
+Similarly, we can bound the order of G from below by assuming that
+both its minimum degree and girth are large. For d 2 R and g 2 N let
+n0(d, g) :=
+8
+>
+>
+>
+>
+>
+<
+>
+>
+>
+>
+>
+:
+1 + d
+r−1
+X
+i=0
+(d −1)i
+if g =: 2r + 1 is odd;
+2
+r−1
+X
+i=0
+(d −1)i
+if g =: 2r is even.
+
+10
+1. The Basics
+It is not diﬃcult to prove that a graph of minimum degree δ and girth g
+has at least n0(δ, g) vertices (Exercise 7). Interestingly, one can obtain
+the same bound for its average degree:
+Theorem 1.3.4. (Alon, Hoory & Linial 2002)
+Let G be a graph. If d(G) > d > 2 and g(G) > g 2 N then |G| > n0(d, g).
+One aspect of Theorem 1.3.4 is that it guarantees the existence of
+a short cycle compared with |G|. Using just the easy minimum degree
+version of Exercise 7, we get the following rather general bound:
+Corollary 1.3.5. If δ(G) > 3 then g(G) < 2 log |G|.
+[2.3.1]
+Proof. If g := g(G) is even then
+n0(3, g) = 2 2g/2 −1
+2 −1
+= 2g/2 + (2g/2 −2) > 2g/2,
+while if g is odd then
+n0(3, g) = 1 + 3 2(g−1)/2 −1
+2 −1
+=
+3
+p
+2 2g/2 −2 > 2g/2.
+As |G| > n0(3, g), the result follows.
+⇤
+A walk (of length k) in a graph G is a non-empty alternating se-
+walk
+quence v0e0v1e1 . . . ek−1vk of vertices and edges in G such that ei =
+{vi, vi+1} for all i < k. If v0 = vk, the walk is closed. If the vertices
+in a walk are all distinct, it deﬁnes an obvious path in G. In general,
+every walk between two vertices contains4 a path between these vertices
+(proof?).
+1.4 Connectivity
+A graph G is called connected if it is non-empty and any two of its
+connected
+vertices are linked by a path in G. If U ✓V (G) and G[U] is connected,
+we also call U itself connected (in G). Instead of ‘not connected’ we
+usually say ‘disconnected’.
+Proposition 1.4.1. The vertices of a connected graph G can always be
+[1.5.2]
+enumerated, say as v1, . . . , vn, so that Gi := G[v1, . . . , vi] is connected
+for every i.
+4 We shall often use terms deﬁned for graphs also for walks, as long as their
+meaning is obvious.

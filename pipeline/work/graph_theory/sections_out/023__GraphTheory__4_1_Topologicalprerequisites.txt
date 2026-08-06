@@ -1,0 +1,194 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.1 Topological prerequisites
+직전 소단원: 「3.ex Exercises」
+[본문]
+4
+Planar Graphs
+When we draw a graph on a piece of paper, we naturally try to do this
+as transparently as possible. One obvious way to limit the mess created
+by all the lines is to avoid intersections. For example, we may ask if we
+can draw the graph in such a way that no two edges meet in a point
+other than a common end.
+Graphs drawn in this way are called plane graphs; abstract graphs
+that can be drawn in this way are called planar. Due to their natural
+appeal, plane graphs have been studied right from the outset of graph
+theory; the most prominent example is the four colour problem for maps,
+which we shall meet in Chapter 5.
+The seemingly unrelated question of how we can characterize planar
+graphs combinatorially, and conversely of which role they play elsewhere
+in graph theory, is not only equally interesting, but has been found to be
+quite unexpectedly relevant. Indeed, we shall see in Chapter 12 that the
+planar graphs – in fact, the graphs embeddable in any given surface –
+play a central role in one of the deepest theorems of all of graph the-
+ory: the structure theorem that describes all graphs without any ﬁxed
+minor. (Note that there is nothing topological in the deﬁnition of that
+class.) Thus, planar graphs are not just for colouring puzzles: they are
+important, and they deserve rigorous study.
+In this chapter we study both plane and planar graphs, as well as
+the relationship between the two: the question of how an abstract planar
+graph might be drawn in fundamentally di↵erent ways. After collecting
+together in Section 4.1 the few basic topological facts that will enable
+us later to prove all results rigorously without too much technical ado,
+we begin in Section 4.2 by studying the structural properties of plane
+graphs. In Section 4.3, we investigate how two drawings of the same
+graph can di↵er. The main result of that section is that 3-connected
+planar graphs have essentially only one drawing, in some very strong
+and natural topological sense. The next two sections are devoted to the
+93
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_4
+
+94
+4. Planar Graphs
+proofs of all the classical planarity criteria, conditions telling us when
+an abstract graph is planar. We complete the chapter with a section on
+plane duality, a notion with fascinating links to algebraic, colouring, and
+ﬂow properties of graphs (Chapters 1.9 and 6.5).
+The traditional notion of a graph drawing is that its vertices are re-
+presented by points in the Euclidean plane, its edges are represented by
+curves between these points, and di↵erent curves meet only in common
+endpoints. To avoid unnecessary topological complication, however, we
+shall only consider curves that are piecewise linear; it is not diﬃcult to
+show that any drawing can be straightened out in this way, so the two
+notions come to the same thing.
+4.1 Topological prerequisites
+In this section we brieﬂy review some basic topological deﬁnitions and
+facts needed later. All these facts have (by now) easy and well-known
+proofs; see the notes for sources. Since those proofs contain no graph
+theory, we do not repeat them here: indeed our aim is to collect precisely
+those topological facts that we need but do not want to prove. Later,
+all proofs will follow strictly from the deﬁnitions and facts stated here
+(and be guided by but not rely on geometric intuition), so the material
+presented now will help to keep elementary topological arguments in
+those proofs to a minimum.
+A straight line segment in the Euclidean plane is a subset of R2 that
+has the form { p + λ(q −p) | 0 6 λ 6 1 } for distinct points p, q 2 R2. A
+polygon is a subset of R2 which is the union of ﬁnitely many straight line
+polygon
+segments and is homeomorphic to the unit circle S1, the set of points in
+R2 at distance 1 from the origin. Here, as later, any subset of a topolo-
+gical space is assumed to carry the subspace topology. A polygonal arc is
+a subset of R2 which is the union of ﬁnitely many straight line segments
+and is homeomorphic to the closed unit interval [0, 1]. The images of 0
+and of 1 under such a homeomorphism are the endpoints of this polygo-
+nal arc, which links them and runs between them. Instead of ‘polygonal
+arc’ we shall simply say arc in this chapter. If P is an arc between x
+arc
+and y, we denote the point set P r {x, y}, the interior of P, by ˚
+P. As
+˚
+P, ˚e
+continuous images of [0, 1], arcs, and ﬁnite unions of arcs, are compact,
+and hence closed in R2. Their complements in R2, therefore, are open.
+Let O ✓R2 be any open set. Being linked by an arc in O deﬁnes
+an equivalence relation on O. The corresponding equivalence classes are
+again open; they are the regions of O. A closed set X ✓R2 is said
+region
+to separate a region O0 of O if O0 r X has more than one region. The
+separate
+frontier of a set X ✓R2 is the set Y of all points y 2 R2 such that every
+frontier
+neighbourhood of y meets both X and R2 r X. Note that if X is open
+then its frontier lies in R2 r X.
+
+4.1 Topological prerequisites
+95
+The frontier of a region O of R2 r X, where X is a ﬁnite union of
+points and arcs, has two important properties. The ﬁrst is accessibility:
+if x 2 X lies on the frontier of O, then x can be linked to some point in O
+by a straight line segment whose interior lies wholly inside O. As a conse-
+quence, any two points on the frontier of O can be linked by an arc whose
+interior lies in O (why?). The second notable property of the frontier of
+O is that it separates O from the rest of R2. Indeed, if ': [0, 1]!P ✓R2
+is continuous, with '(0) 2 O and '(1) /2 O, then P meets the frontier of
+O at least in the point '(y) for y := inf { x | '(x) /2 O }, the ﬁrst point
+of P in R2 r O.
+Theorem 4.1.1. (Jordan Curve Theorem for Polygons)
+For every polygon P ✓R2, the set R2 rP has exactly two regions. Each
+[4.2.2]
+[4.2.5]
+[4.2.6]
+[4.2.7]
+[4.3.1]
+[4.5.1]
+[4.6.1]
+[5.1.2]
+of these has the entire polygon P as its frontier.
+With the help of Theorem 4.1.1, it is not diﬃcult to prove the fol-
+lowing lemma.
+Lemma 4.1.2. Let P1, P2, P3 be three arcs, between the same two end-
+[4.2.6]
+[4.2.7]
+[4.2.8]
+[12.7.4]
+points but otherwise disjoint.
+(i) R2 r (P1 [ P2 [ P3) has exactly three regions, with frontiers
+P1 [ P2, P2 [ P3 and P1 [ P3.
+(ii) If P is an arc between a point in ˚
+P1 and a point in ˚
+P3 whose
+interior lies in the region of R2 r (P1 [ P3) that contains ˚
+P2, then
+˚
+P \ ˚
+P2 6= ;.
+P1
+P2
+P3
+P
+Fig. 4.1.1. The arcs in Lemma 4.1.2 (ii)
+Our next lemma complements the Jordan curve theorem by saying
+that an arc does not separate the plane. For easier application later, we
+phrase this a little more generally:
+Lemma 4.1.3. Let X1, X2 ✓R2 be disjoint sets, each the union of
+[4.2.2]
+[4.2.4]
+ﬁnitely many points and arcs, and let P be an arc between a point in
+X1 and one in X2 whose interior lies in a region O of R2 r (X1 [ X2).
+Then O r P is a region of R2 r (X1 [ P [ X2).
+
+96
+4. Planar Graphs
+X1
+X2
+P
+O
+Fig. 4.1.2. P does not separate the region O of R2 r (X1 [ X2)
+It remains to introduce a few terms and facts that will be used only
+once, when we consider notions of equivalence for graph drawings in
+Chapter 4.3.
+As usual, we denote by Sn the n-dimensional sphere, the set of
+Sn
+points in Rn+1 at distance 1 from the origin. The 2-sphere minus its
+‘north pole’ (0, 0, 1) is homeomorphic to the plane; let us choose a ﬁxed
+such homeomorphism ⇡: S2 r{(0, 0, 1)}!R2 (for example, stereograph-
+⇡
+ic projection). If P ✓R2 is a polygon and O is the bounded region of
+R2 r P, let us call C := ⇡−1(P) a circle on S2, and the sets ⇡−1(O) and
+S2 r ⇡−1(P [ O) the regions of S2 r C.
+Our last tool is the theorem of Jordan and Schoenﬂies, again
+adapted slightly for our purposes:
+Theorem 4.1.4. Let ': C1 !C2 be a homeomorphism between two cir-
+[4.3.1]
+cles on S2, let O1 be a region of S2 rC1, and let O2 be a region of S2 rC2.
+Then ' can be extended to a homeomorphism C1 [ O1 ! C2 [ O2.
+4.2 Plane graphs
+A plane graph is a pair (V, E) of ﬁnite sets with the following properties
+plane
+graph
+(the elements of V are again called vertices, those of E edges):
+(i) V ✓R2;
+(ii) every edge is an arc between two vertices;
+(iii) di↵erent edges have di↵erent sets of endpoints;
+(iv) the interior of an edge contains no vertex and no point of any
+other edge.
+A plane graph (V, E) deﬁnes a graph G on V in a natural way. As long
+as no confusion can arise, we shall use the name G of this abstract graph
+also for the plane graph (V, E), or for the point set V [ S E; similar
+notational conventions will be used for abstract versus plane edges, for
+subgraphs, and so on.1
+1 However, we shall continue to use r for di↵erences of point sets and −for graph
+di↵erences – which may help a little to keep the two apart.

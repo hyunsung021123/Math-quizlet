@@ -1,0 +1,181 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.7 Contraction and minors
+직전 소단원: 「1.6 Bipartite graphs」
+[본문]
+18
+1. The Basics
+Proof. Let G = (V, E) be a graph without odd cycles; we show that G is
+(1.5.1)
+bipartite. Clearly a graph is bipartite if all its components are bipartite
+or trivial, so we may assume that G is connected. Let T be a spanning
+tree in G, pick a root r 2 T, and denote the associated tree-order on V
+by 6T . For each v 2 V , the unique path rTv has odd or even length.
+This deﬁnes a bipartition of V ; we show that G is bipartite with this
+partition.
+e
+Ce
+r
+x
+y
+Fig. 1.6.3. The cycle Ce in T + e
+Let e = xy be an edge of G.
+If e 2 T, with x <T y say, then
+rTy = rTxy and so x and y lie in di↵erent partition classes. If e /2 T
+then Ce := xTy + e is a cycle (Fig. 1.6.3), and by the case treated
+already the vertices along xTy alternate between the two classes. Since
+Ce is even by assumption, x and y again lie in di↵erent classes.
+⇤
+1.7 Contraction and minors
+In Section 1.1 we saw two fundamental containment relations between
+graphs: the ‘subgraph’ relation, and the ‘induced subgraph’ relation. In
+this section we meet two more: the ‘minor’ relation, and the ‘topological
+minor’ relation. Let X be a ﬁxed graph.
+A subdivision of X is, informally, any graph obtained from X by
+‘subdividing’ some or all of its edges by drawing new vertices on those
+edges.
+In other words, we replace some edges of X with new paths
+subdivision
+TX of X
+between their ends, so that none of these paths has an inner vertex in
+V (X) or on another new path. When G is a subdivision of X, we also
+say that G is a TX.7 The original vertices of X are the branch vertices
+branch
+vertices
+of the TX; its new vertices are called subdividing vertices. Note that
+7 The ‘T’ stands for ‘topological’. Although, formally, TX denotes a whole class
+of graphs, the class of all subdivisions of X, it is customary to use the expression as
+indicated to refer to an arbitrary member of that class.
+
+1.7 Contraction and minors
+19
+subdividing vertices have degree 2, while branch vertices retain their
+degree from X.
+If a graph Y contains a TX as a subgraph, then X is a topological
+minor of Y (Fig. 1.7.1).
+topological
+minor
+X
+G
+Y
+Fig. 1.7.1. The graph G is a TX, a subdivision of X.
+As G ✓Y , this makes X a topological minor of Y .
+Similarly, replacing the vertices x of X with disjoint connected
+graphs Gx, and the edges xy of X with non-empty sets of Gx– Gy edges,
+yields a graph that we shall call an IX.8 More formally, a graph G is
+an IX if its vertex set admits a partition { Vx | x 2 V (X) } into con-
+IX
+nected subsets Vx such that distinct vertices x, y 2 X are adjacent in X
+if and only if G contains a Vx–Vy edge. The sets Vx are the branch sets
+branch sets
+of the IX. Conversely, we say that X arises from G by contracting the
+subgraphs Gx and call it a contraction minor of G.
+contraction
+If a graph Y contains an IX as a subgraph, then X is a minor of Y,
+minor, 4
+the IX is a model of X in Y, and we write X 4 Y (Fig. 1.7.2).
+model
+X
+Y
+Vx
+Vz
+x
+z
+G
+Fig. 1.7.2. The graph G is a model of X in Y, which makes X
+a minor of Y.
+Thus, X is a minor of Y if and only if there is a map ' from a
+subset of V (Y ) onto V (X) such that for every vertex x 2 X its inverse
+image '−1(x) is connected in Y and for every edge xx0 2 X there is an
+8 The ‘I’ stands for ‘inﬂated’. As before, while IX is formally a class of graphs,
+those admitting a vertex partition { Vx | x 2 V (X) } as described below, we use the
+expression as indicated to refer to an arbitrary member of that class.
+
+20
+1. The Basics
+edge in Y between the branch sets '−1(x) and '−1(x0) of its ends. If
+the domain of ' is all of V (Y ), and xx0 2 X whenever x 6= x0 and Y has
+an edge between '−1(x) and '−1(x0) (so that Y is an IX), we call ' a
+contraction of Y onto X.
+contraction
+Since branch sets can be singletons, every subgraph of a graph is
+also its minor. In inﬁnite graphs, branch sets are allowed to be inﬁnite
+unless speciﬁed otherwise. For example, the graph shown in Figure 8.1.1
+is an IX with X an inﬁnite star.
+Proposition 1.7.1. The minor relation 4 and the topological-minor
+[12.6.1]
+relation are partial orderings on the class of ﬁnite graphs, i.e. they are
+reﬂexive, antisymmetric and transitive.
+⇤
+If G is an IX, then P = { Vx | x 2 X } is a partition of V (G), and we
+write X =: G/P for this contraction minor of G. If U = Vx is the only
+G/P
+non-singleton branch set, we write X =: G/U, write vU for the vertex
+G/U
+x 2 X to which U contracts, and think of the rest of X as an induced
+vU
+subgraph of G. The ‘smallest’ non-trivial case of this is that U contains
+exactly two vertices forming an edge e, so that U = e. We then say that
+X = G/e arises from G by contracting the edge e; see Figure 1.7.3.
+contracting
+an edge
+x
+y
+e
+ve
+G/e
+G
+Fig. 1.7.3. Contracting the edge e = xy
+Since the minor relation is transitive, every sequence of single vertex
+or edge deletions or contractions yields a minor. Conversely, every minor
+of a given ﬁnite graph can be obtained in this way:
+Corollary 1.7.2. Let X and Y be ﬁnite graphs. X is a minor of Y if
+and only if there are graphs G0, . . . , Gn such that G0 = Y and Gn = X
+and each Gi+1 arises from Gi by deleting an edge, contracting an edge,
+or deleting a vertex.
+Proof. Induction on |Y | + kY k.
+⇤
+Finally, we have the following relationship between minors and to-
+pological minors:
+
+21
+Proposition 1.7.3.
+[4.4.2]
+[7.3.1]
+[12.7.3]
+(i) Every TX is also an IX (Fig. 1.7.4); thus, every topological minor
+of a graph is also its (ordinary) minor.
+(ii) If ∆(X) 6 3, then every IX contains a TX; thus, every minor
+with maximum degree at most 3 of a graph is also its topological
+minor.
+⇤
+Fig. 1.7.4. A subdivision of K4 viewed as an IK4
+Now that we have met all the standard relations between graphs,
+we can also deﬁne what it means to embed one graph in another. Basi-
+cally, an embedding of G in H is an injective map ': V (G) ! V (H) that
+embedding
+preserves the kind of structure we are interested in. Thus, ' embeds G
+in H ‘as a subgraph’ if it preserves the adjacency of vertices, and ‘as an
+induced subgraph’ if it preserves both adjacency and non-adjacency. If
+' is deﬁned on E(G) as well as on V (G) and maps the edges xy of G to
+independent paths in H between '(x) and '(y), it embeds G in H ‘as
+a topological minor’. Similarly, an embedding ' of G in H ‘as a minor’
+would be a map from V (G) to disjoint connected vertex sets in H (rather
+than to single vertices) so that H has an edge between the sets '(x) and
+'(y) whenever xy is an edge of G. Further variants are possible; depend-
+ing on the context, one may wish to deﬁne embeddings ‘as a spanning
+subgraph’, ‘as an induced minor’ and so on, in the obvious way.
+1.8 Euler tours
+Any mathematician who happens to ﬁnd himself in the East Prussian
+city of K¨onigsberg (and in the 18th century) will lose no time to fol-
+low the great Leonhard Euler’s example and inquire about a round trip
+through the old city that traverses each of the bridges shown in Figure
+1.8.1 exactly once.
+Thus inspired,9 let us call a closed walk in a graph an Euler tour if
+it traverses every edge of the graph exactly once. A graph is Eulerian if
+Eulerian
+it admits an Euler tour.
+9 Anyone to whom such inspiration seems far-fetched, even after contemplating
+Figure 1.8.2, may seek consolation in the multigraph of Figure 1.10.1.
+1.8 Euler tours

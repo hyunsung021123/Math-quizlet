@@ -1,0 +1,400 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 11. Random Graphs
+현재 소단원: 11.1 The notion of a random graph
+직전 소단원: 「10.ex Exercises」
+[본문]
+11
+Random Graphs
+At various points in this book we already encountered the following fun-
+damental theorem of Erd˝os: for every integer k there is a graph G with
+g(G) > k and χ(G) > k. In plain English: there exist graphs combining
+arbitrarily large girth with arbitrarily high chromatic number.
+How could one prove such a theorem? The standard approach would
+be to construct a graph with those two properties, possibly in steps
+by induction on k. However, this is anything but straightforward: the
+global nature of the second property forced by the ﬁrst, namely, that
+the graph should have high chromatic number ‘overall’ but be acyclic
+(and hence 2-colourable) locally, ﬂies in the face of any attempt to build
+it up, constructively, from smaller pieces that have the same or similar
+properties.
+In his pioneering paper of 1959, Erd˝os took a radically di↵erent
+approach: for each n he deﬁned a probability space on the set of graphs
+with n vertices, and showed that, for some carefully chosen probability
+measures, the probability that an n-vertex graph has both of the above
+properties is positive for all large enough n.
+This approach, now called the probabilistic method, has since un-
+folded into a sophisticated and versatile proof technique, in graph the-
+ory as much as in other branches of discrete mathematics. The theory
+of random graphs is now a subject in its own right. The aim of this
+chapter is to o↵er an elementary but rigorous introduction to random
+graphs: no more than is necessary to understand its basic concepts, ideas
+and techniques, but enough to give an inkling of the power and elegance
+hidden behind the calculations.
+Erd˝os’s theorem asserts the existence of a graph with certain prop-
+erties: it is a perfectly ordinary assertion showing no trace of the ran-
+domness employed in its proof. There are also results in random graphs
+that are generically random even in their statement: these are theorems
+about almost all graphs, a notion we shall meet in Section 11.3. In the
+339
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_11
+
+340
+11. Random Graphs
+last section, we give a detailed proof of a theorem of Erd˝os and R´enyi that
+illustrates a proof technique frequently used in random graph theory, the
+so-called second moment method.
+11.1 The notion of a random graph
+Let V be a ﬁxed set of n elements, say V = {0, . . . , n −1}. Our aim is
+V
+to turn the set G of all graphs on V into a probability space, and then
+G
+to consider the kind of questions typically asked about random objects:
+What is the probability that a graph G 2 G has this or that property?
+What is the expected value of a given invariant on G, say its expected
+girth or chromatic number?
+Intuitively, we should be able to generate G randomly as follows.
+For each e 2 [V ]2 we decide by some random experiment whether or not
+e shall be an edge of G; these experiments are performed independently,
+and for each the probability of success – i.e. of accepting e as an edge
+for G – is equal to some ﬁxed1 number p 2 [0, 1]. Then if G0 is some
+p
+ﬁxed graph on V , with m edges say, the elementary event {G0} has a
+probability of pmq(
+n
+2)−m (where q := 1 −p): with this probability, our
+q
+randomly generated graph G is this particular graph G0. (The proba-
+bility that G is isomorphic to G0 will usually be greater.) But if the
+probabilities of all the elementary events are thus determined, then so
+is the entire probability measure of our desired space G. Hence all that
+remains to be checked is that such a probability measure on G, one for
+which all individual edges occur independently with probability p, does
+indeed exist.2
+In order to construct such a measure on G formally, we start by
+deﬁning for every potential edge e 2 [V ]2 its own little probability space
+⌦e := {0e, 1e}, choosing Pe({1e}) := p and Pe({0e}) := q as the prob-
+⌦e
+abilities of its two elementary events. As our desired probability space
+Pe
+G = G(n, p) we then take the product space
+G(n, p)
+⌦:=
+Y
+e2[V ]2
+⌦e .
+⌦
+1 Often, the value of p will depend on the cardinality n of the set V on which our
+random graphs are generated; thus, p will be the value p = p(n) of some function
+n 7! p(n).
+Note, however, that V (and hence n) is ﬁxed for the deﬁnition of G:
+for each n separately, we are constructing a probability space of the graphs G on
+V = {0, . . . , n −1}, and within each space the probability that e 2 [V ]2 is an edge of
+G has the same value for all e.
+2 Any reader ready to believe this may skip ahead now to the end of Proposi-
+tion 11.1.1, without missing anything.
+
+11.1 The notion of a random graph
+341
+Thus, formally, an element of ⌦is a map ! assigning to every e 2 [V ]2
+either 0e or 1e, and the probability measure P on ⌦is the product mea-
+P
+sure of all the measures Pe. In practice, of course, we identify ! with
+the graph G on V whose edge set is
+E(G) = { e | !(e) = 1e } ,
+and call G a random graph on V with edge probability p.
+random
+graph
+Following standard probabilistic terminology, we may now call any
+set of graphs on V an event in G(n, p). In particular, for every e 2 [V ]2
+event
+the set
+Ae := { ! | !(e) = 1e }
+Ae
+of all graphs G on V with e 2 E(G) is an event: the event that e is an
+edge of G. For these events, we can now prove formally what had been
+our guiding intuition all along:
+Proposition 11.1.1. The events Ae are independent and occur with
+probability p.
+Proof. By deﬁnition,
+Ae = {1e} ⇥
+Y
+e06=e
+⌦e0 .
+Since P is the product measure of all the measures Pe, this implies
+P(Ae) = p ·
+Y
+e06=e
+1 = p .
+Similarly, if {e1, . . . , ek} is any subset of [V ]2, then
+P (Ae1 \ . . . \ Aek) = P
+⇣
+{1e1} ⇥. . . ⇥{1ek} ⇥
+Y
+e/
+2{e1,...,ek}
+⌦e
+⌘
+= pk
+= P(Ae1) · · · P(Aek) .
+⇤
+As noted before, P is determined uniquely by the value of p and our
+assumption that the events Ae are independent. In order to calculate
+probabilities in G(n, p), it therefore generally suﬃces to work with these
+two assumptions: our concrete model for G(n, p) has served its purpose
+and will not be needed again.
+As a simple example of such a calculation, consider the event that G
+contains some ﬁxed graph H on a subset of V as a subgraph; let |H| =: k
+k
+and kHk =: `. The probability of this event H ✓G is the product of
+`
+the probabilities Ae over all the edges e 2 H, so P [ H ✓G ] = p`. In
+
+342
+11. Random Graphs
+contrast, the probability that H is an induced subgraph of G is p`q(
+k
+2)−`:
+now the edges missing from H are required to be missing from G too,
+and they do so independently with probability q.
+The probability pH that G has an induced subgraph isomorphic
+to H is usually more diﬃcult to compute: since the possible instances
+of H on subsets of V overlap, the events that they occur in G are not
+independent. However, the sum (over all k-sets U ✓V ) of the proba-
+bilities P [ H ⇠= G[U] ] is always an upper bound for pH, since pH is the
+measure of the union of all those events. For example, if H = Kk, we
+have the following trivial upper bound on the probability that G contains
+an induced copy of H:
+Lemma 11.1.2. For all integers n, k with n > k > 2, the probability
+[11.2.1]
+[11.3.4]
+that G 2 G(n, p) has a set of k independent vertices is at most
+P [ ↵(G) > k ] 6
+✓n
+k
+◆
+q(
+k
+2).
+Proof.
+The probability that a ﬁxed k-set U ✓V is independent in
+G is q(
+k
+2). The assertion thus follows from the fact that there are only
+$n
+k
+%
+such sets U.
+⇤
+Analogously, the probability that G 2 G(n, p) contains a Kk is at
+most
+P [ !(G) > k ] 6
+✓n
+k
+◆
+p(
+k
+2).
+Now if k is ﬁxed, and n is small enough that these bounds for the prob-
+abilities P [ ↵(G) > k ] and P [ !(G) > k ] sum to less than 1, then G
+contains graphs that have neither property: graphs which contain nei-
+ther a Kk nor a Kk induced. But then any such n is a lower bound for
+the Ramsey number of k !
+As the following theorem shows, this lower bound is quite close to
+the upper bound of 22k−3 implied by the proof of Theorem 9.1.1:
+Theorem 11.1.3. (Erd˝os 1947)
+For every integer k > 3, the Ramsey number of k satisﬁes
+R(k) > 2k/2.
+Proof. For k = 3 we trivially have R(3) > 3 > 23/2, so let k > 4. We show
+that, for all n 6 2k/2 and G 2 G(n, 1
+2), the probabilities P [ ↵(G) > k ]
+and P [ !(G) > k ] are both less than 1
+2.
+Since p = q = 1
+2, Lemma 11.1.2 and the analogous assertion for !(G)
+imply the following for all n 6 2k/2 (use that k! > 2k for k > 4):
+
+11.1 The notion of a random graph
+343
+P [ ↵(G) > k ], P [ !(G) > k ] 6
+✓n
+k
+◆$ 1
+2
+%(
+k
+2)
+<
+$
+nk/2k%
+2−1
+2 k(k−1)
+6
+$
+2k2/2/2k%
+2−1
+2 k(k−1)
+= 2−k/2
+<
+1
+2 .
+⇤
+In the context of random graphs, most of the familiar graph in-
+variants (like average degree, connectivity, chromatic number, and so
+on) may be interpreted as a non-negative random variable on G(n, p),
+random
+variable
+a function
+X: G(n, p) ! [0, 1) .
+The mean or expected value of X is the number
+mean
+expectation
+E(X) :=
+X
+G2G(n,p)
+P({G}) · X(G) .
+E
+If X takes integers as values, we can compute E(X) alternatively by
+summing over these values k:
+E(X) =
+X
+k>1
+P [ X > k ] =
+X
+k>1
+k · P [ X = k ] .
+Note also that the operator E, the expectation, is linear:
+we have
+E(X + Y ) = E(X) + E(Y ) and E(λX) = λE(X) for any two random
+variables X, Y on G(n, p) and λ > 0.
+Since our probability spaces are ﬁnite, the expectation can often be
+computed by a simple application of double counting, a standard com-
+binatorial technique we met before in the proof of Corollary 4.2.10. For
+example, if X is a random variable on G(n, p) that counts the number
+of subgraphs of G in some ﬁxed set H of graphs on V , then E(X), by
+deﬁnition, counts the number of pairs (G, H) such that H
+2 H and
+H ✓G, each weighted with the probability P({G}). Algorithmically,
+we compute E(X) by going through the graphs G 2 G(n, p) in an ‘outer
+loop’ and performing, for each G, an ‘inner loop’ that runs through the
+graphs H 2 H and counts ‘P({G})’ whenever H ✓G. Alternatively,
+we may count the same set of weighted pairs with H in the outer and
+G in the inner loop. This amounts to adding up, over all H 2 H, the
+probabilities P [ H ✓G ]:
+E(X) =
+X
+G2G(n,p)
+..{ H 2 H : H ✓G }
+.. · P({G}) =
+X
+H 2H
+P [ H ✓G ].
+
+344
+11. Random Graphs
+To illustrate this once in detail, and to introduce the probabilis-
+tic terminology commonly used at this point, let us compute the ex-
+pected number of cycles of some given length k > 3 in a random graph
+G 2 G(n, p). (We shall also need this for our proof of Erd˝os’s theorem in
+Section 11.2.) Let X: G(n, p) ! N be the random variable that assigns
+X
+to a random graph G its number of k-cycles, the number of subgraphs
+isomorphic to Ck.
+How many potential such cycles are there? In other words, how
+large is the set Ck of all k-cycles with vertices in V ? Since there are
+Ck
+(n)k := n (n −1)(n −2) · · · (n −k + 1)
+(n)k
+ways of choosing a sequence of k distinct vertices in V, and each k-cycle
+is identiﬁed by 2k of those sequences, clearly
+|Ck| = (n)k/2k .
+(1)
+Lemma 11.1.4. The expected number of k-cycles in G 2 G(n, p) is
+[11.2.2]
+[11.4.3]
+E(X) = (n)k
+2k pk.
+Proof. Consider for every ﬁxed C 2 Ck its indicator random variable
+XC: G(n, p) ! {0, 1}, deﬁned by
+XC: G 7!
+n 1
+if C ✓G;
+0
+otherwise.
+Since XC takes only 1 as a positive value, its expectation E(XC) equals
+the measure P [ XC = 1 ] of the set of all graphs in G(n, p) that contain C.
+But this is just the probability that C ✓G:
+E(XC) = P [ C ✓G ] = pk.
+(2)
+Our random variable X assigns to every graph G its number of
+k-cycles. Hence
+X(G) =
+X
+C 2Ck
+XC(G)
+for every G, or X = P XC for short. Since the expectation is linear,
+applying this with (1) and (2) yields
+E(X) =
+X
+C 2Ck
+E(XC) =
+X
+C 2Ck
+P [ C ✓G ] = (n)k
+2k pk
+as claimed.
+⇤
+
+345
+Computing the mean of a random variable X can be a simple and
+e↵ective way to establish the existence of a graph G such that X(G) < a
+for some ﬁxed a > 0 and, moreover, G has some desired property P. In-
+deed, if the expected value of X is small, then X(G) cannot be large for
+more than a few graphs in G(n, p), because X(G) > 0 for all G 2 G(n, p).
+Hence X must be small for many graphs in G(n, p), and it is reasonable
+to expect that among these we may ﬁnd one with the desired property P.
+This simple idea lies at the heart of countless non-constructive exist-
+ence proofs using random graphs, including the proof of Erd˝os’s theorem
+presented in the next section. Quantiﬁed, it takes the form of the fol-
+lowing lemma, whose proof follows at once from the deﬁnition of the
+expectation and the additivity of P:
+Lemma 11.1.5. (Markov’s Inequality)
+[11.2.2]
+[11.4.1]
+[11.4.3]
+Let X > 0 be a random variable on G(n, p) and a > 0. Then
+P [ X > a ] 6 E(X)/a .
+Proof.
+E(X) =
+X
+G2G(n,p)
+P({G}) · X(G) >
+X
+G2G(n,p)
+X(G)>a
+P({G}) · a = P [ X > a ] · a .
+⇤
+11.2 The probabilistic method
+Very roughly, the probabilistic method in discrete mathematics has devel-
+oped from the following idea. In order to prove the existence of an object
+with some desired property, one deﬁnes a probability space on some
+larger – and certainly non-empty – class of objects, and then shows that
+an element of this space has the desired property with positive prob-
+ability. The ‘objects’ inhabiting this probability space may be of any
+kind: partitions or orderings of the vertices of some ﬁxed graph arise as
+naturally as mappings, embeddings and, of course, graphs themselves.
+In this section, we illustrate the probabilistic method by giving a detailed
+account of one of its earliest results: of Erd˝os’s classic theorem on large
+girth and chromatic number (Theorem 5.2.5).
+Erd˝os’s theorem says that, given any positive integer k, there is a
+graph G with girth g(G) > k and chromatic number χ(G) > k. Let us
+call cycles of length at most k short, and sets of |G|/k or more vertices
+short
+big. For a proof of Erd˝os’s theorem, it suﬃces to ﬁnd a graph G without
+big/small
+short cycles and without big independent sets of vertices: then the colour
+classes in any vertex colouring of G are small (not big), so we need more
+than k colours to colour G.
+11.2 The probabilistic method

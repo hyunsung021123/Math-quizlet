@@ -1,0 +1,318 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.ex Exercises
+직전 소단원: 「1.10 Other notions of graphs」
+[연습문제]
+29
+e itself: edges parallel to e become loops at ve, while edges xv and yv
+become parallel edges between ve and v (Fig. 1.10.1). Thus, formally,
+E(G/e) = E r{e}, and only the incidence map e0 7! {init(e0), ter(e0)} of
+G has to be adjusted to the new vertex set in G/e. Contracting a loop
+thus has the same e↵ect as deleting it.
+The notion of a minor adapts accordingly. The contraction minor
+G/P deﬁned by a partition P of V (G) into connected sets has precisely
+those edges of G that join distinct partition classes. If there are several
+such edges between the same two classes, they become parallel edges
+of G/P. However, we do not normally give G/P any loops resulting from
+edges of G whose ends lie in the same partition class U. This would re-
+quire us to say which of the edges of G[U] are contracted (assuming they
+induce a connected spanning subgraph of G[U]), or at least how many
+are, which seems futile if we do not care about loops in G/P anyway.
+Fig. 1.10.2. Suppressing the white vertices
+If v is a vertex of degree 2 in a multigraph G, then by suppressing v
+suppressing
+a vertex
+we mean deleting v and adding an edge between its two neighbours. (If
+its two incident edges are identical, i.e. form a loop at v, we add no
+edge and obtain just G −v. If they go to the same vertex w 6= v, the
+added edge will be a loop at w. See Figure 1.10.2.) Since the degrees
+of all vertices other than v remain unchanged when v is suppressed,
+suppressing several vertices of G always yields a well-deﬁned multigraph
+that is independent of the order in which those vertices are suppressed.
+Finally, it should be pointed out that authors who usually work with
+multigraphs tend to call them ‘graphs’; in their terminology, our graphs
+would be called ‘simple graphs’.
+Exercises
+1.−What is the number of edges in a Kn?
+2.
+Let d 2 N and V := {0, 1}d; thus, V is the set of all 0–1 sequences of
+length d. The graph on V in which two such sequences form an edge if
+and only if they di↵er in exactly one position is called the d-dimensional
+cube. Determine the average degree, number of edges, diameter, girth
+and circumference of this graph.
+(Hint for the circumference: induction on d.)
+Exercises
+
+30
+1. The Basics
+3.
+Let G be a graph containing a cycle C, and assume that G contains
+a path of length at least k between two vertices of C. Show that G
+contains a cycle of length at least
+p
+k.
+4.−Is the bound in Proposition 1.3.2 best possible?
+5.
+Let v0 be a vertex in a graph G, and D0 := {v0}. For n = 1, 2, . . .
+inductively deﬁne Dn := NG(D0 [ . . . [ Dn−1). Show that Dn = { v |
+d(v0, v) = n } and Dn+1 ✓N(Dn) ✓Dn−1 [ Dn+1 for all n 2 N.
+6.
+Show that rad(G) 6 diam(G) 6 2 rad(G) for every graph G.
+7.
+Prove the weakening of Theorem 1.3.4 obtained by replacing average
+with minimum degree. Deduce that |G| > n0(d/2, g) for every graph G
+as given in the theorem.
+8.
+Show that graphs of girth at least 5 and order n have a minimum degree
+of o(n). In other words, show that there is a function f: N ! N such
+that f(n)/n ! 0 as n ! 1 and δ(G) 6 f(n) for all such graphs G.
+9.+ Show that every connected graph G of order at least 3 contains a path
+or cycle of length at least min {2δ(G), |G|}.
+10.
+Show that a connected graph of diameter k and minimum degree d has
+at least about kd/3 vertices but need not have substantially more.
+11.−Show that the components of a graph partition its vertex set. (In other
+words, show that every vertex belongs to exactly one component.)
+12.−Show that every 2-connected graph contains a cycle.
+13.
+Determine (G) and λ(G) for G = P m, Km, Km,n, Cn and the d-
+dimensional cube (Exercise 2), for all m > 1 and d, n > 3.
+14.−Is there a function f: N ! N such that, for all k 2 N, every graph of
+minimum degree at least f(k) is k-connected?
+15.
+Let ↵, β be two graph invariants with positive integer values. Formalize
+the two statements below, and show that each implies the other:
+(i) β is bounded above by a function of ↵;
+(ii) ↵can be forced up by making β large enough.
+Show that the statement
+(iii) ↵is bounded below by a function of β
+is not equivalent to (i) and (ii). Which small change will make it so?
+16.
+Show that every graph that is k-edge-connected but loses this property
+whenever we delete an edge has a vertex of degree k.
+17.+ Show for every k 2 N that every graph of minimum degree 2k has a
+(k + 1)-edge-connected subgraph. Is it enough to assume an average
+degree of at least 2k?
+
+Exercises
+31
+18.
+Consider the proof of Theorem 1.4.3. Would it not seem more natural
+to assume in the second statement of (⇤) that "(G0) > γ −k, as required
+for H in the statement of the theorem?
+(i) Look how this alteration would change the proof: which parts
+would carry over, which could be adapted, and which would fail?
+(ii) Explain how the use of an assumption of the form m > ckn −bk
+rather than m > ckn helps to obtain a contradiction in the ﬁnal
+inequality of the proof.
+19.
+Prove Theorem 1.5.1.
+20.
+Revisit the proof that every connected graph has a spanning tree given
+as an application of Theorem 1.5.1 (iii). What is wrong with the analog-
+ous ‘proof’ that says, ‘take a maximal acyclic subgraph and apply (iv)’?
+(Hint: Something must be wrong, as the ‘proof’ does not use the as-
+sumption that the graph is connected. But where exactly is the error?)
+21.−(i) Show that every tree T has at least ∆(T) leaves.
+(ii) Deduce that in a connected graph G we can delete ∆(G) vertices
+so that the rest remains connected.
+22.
+Let T be a tree with ` > 2 leaves and maximum degree at most 3.
+(i)−Show that T has exactly ` −2 vertices of degree 3.
+(ii) Show that T contains b`/2c disjoint paths between distinct
+leaves.
+23.
+Find two very short proofs, one by induction and another without, that
+every tree has more leaves than vertices of degree at least 3.
+24.
+Let F, F 0 be forests on the same set of vertices, with kFk < kF 0k.
+Show that F 0 has an edge e /
+2 F such that F + e is again a forest.
+25.
+Show that the tree-order associated with a rooted tree T is indeed a
+partial order on V (T), and verify the claims made about this partial
+order in the text.
+26.
+Show that a graph is 2-edge-connected if and only if it has a strongly
+connected orientation, one in which every vertex can be reached from
+every other vertex by a directed path.
+27.
+Modify the proof of Proposition 1.5.5 to show that we may specify any
+vertex of G as the root of the normal spanning tree sought.
+28.
+(i) Find a short proof for the existence of normal spanning trees in
+connected graphs that applies induction by deleting a vertex.
+(ii) Adapt your proof to show that every path in a connected graph
+extends to a normal spanning tree.
+
+32
+1. The Basics
+29.+ Let G be a connected graph, and let r
+2 G be a vertex.
+Starting
+from r, move along the edges of G, going whenever possible to a vertex
+not visited so far. If there is no such vertex, go back along the edge by
+which the current vertex was ﬁrst reached (unless the current vertex
+is r; then stop). Show that the edges traversed form a normal spanning
+tree in G with root r.
+(This procedure has earned those trees the name of depth-ﬁrst search
+trees.)
+30.
+Let T be a set of subtrees of a tree T, and k 2 N.
+(i) Show that if the trees in T have pairwise non-empty intersection
+then their overall intersection T
+T is non-empty.
+(ii) Show that either T contains k disjoint trees or there is a set of
+at most k −1 vertices of T meeting every tree in T .
+31.
+Show that every automorphism of a tree ﬁxes a vertex or an edge.
+32.−Do the partition classes of a regular bipartite graph always have the
+same size?
+33.−Show that a graph is bipartite if and only if every induced cycle has
+even length.
+34.
+Is the vertex partition of a bipartite graph uniquely determined?
+35.
+Prove or disprove that a graph is bipartite if and only if no two adjacent
+vertices have the same distance from any other vertex.
+36.
+Proposition 1.6.1 characterizes the graphs that contain no odd cycle.
+Can you characterize those that contain no even cycle?
+37.
+Find a function f: N ! N such that, for all k 2 N, every graph of aver-
+age degree at least f(k) has a bipartite subgraph of minimum degree
+at least k.
+38.
+Show that the minor relation 4 deﬁnes a partial ordering on any set
+of pairwise non-isomorphic ﬁnite graphs. Is the same true for inﬁnite
+graphs?
+39.
+If we had been careless, we might have deﬁned a walk as an alternating
+sequence of vertices and edges, v0e0v1e1 . . . ek−1vk say, such that every
+edge ei is incident with both vi and vi+1. Show that Theorem 1.8.1
+would fail with this deﬁnition, and ﬁnd where the di↵erence between
+the two deﬁnitions matters in the proof.
+40.
+Prove or disprove that every connected graph contains a walk that
+traverses each of its edges exactly once in each direction.
+41.
+Show that a cut in a connected graph G is a bond if and only if both
+parts of the corresponding bipartition of V (G) are connected in G. Is
+every atomic cut a bond?
+42.
+Let A be a set of vertices in a tree T.
+Show that T contains a set
+of edge-disjoint paths with ends in A such that every vertex from A
+except at most one is the end of exactly one such path.
+
+Exercises
+33
+43.
+To how few edges can you reduce the complete graph Kn by deleting
+one edge at a time from a 4-cycle found in the current graph?
+44.
+Show that the cycle space of a graph is spanned by
+(i) its induced cycles;
+(ii) its geodesic cycles.
+(A cycle C ✓G is geodesic in G if, for every two vertices of C, their
+distances in G equals their distance in C.)
+45.
+Show that the set of sides of a cut in a connected graph is well deﬁned.
+46.−Show directly, without appealing to atomic cuts, that the cuts of a
+graph together with the empty set form a subspace of its edge space.
+How does the vertex partition of a sum of two given cuts arise from
+their vertex partitions?
+47.
+Let F be a cut in G, with vertex partition {V1, V2}. For i = 1, 2 let
+Ci
+1, . . . , Ci
+k(i) denote the components of G[Vi].
+Use the Ci
+j to deﬁne
+bonds whose disjoint union is F.
+48.
+Show that the cut space of any graph has a basis of atomic cuts.
+49.
+Prove that the cycles and the cuts in a graph together generate its
+entire edge space, or ﬁnd a counterexample.
+50.−Show the following duality between the fundamental cycles Ce and the
+fundamental cuts Df in a graph with respect to some ﬁxed spanning
+tree: e 2 Df , f 2 Ce.
+51.
+Show that in a connected graph the minimal edge sets containing an
+edge from every spanning tree are precisely its bonds.
+52.
+Given a spanning tree T = (V, F) of a connected graph G = (V, E), its
+fundamental cuts Df and fundamental cycles Ce witness the following:
+(i) B has a basis ( Df | f 2 F ) such that Df \F = {f} for all f 2 F;
+(ii) C has a basis ( Ce | e 2 E r F ) such that Ce \ (E r F) = {e}
+for all e 2 E r F.
+Show that, conversely, every set F ✓E satisfying (i) and (ii) is the edge
+set of a spanning tree of G. Is the same true as soon as F satisﬁes one of
+these two statements? Then show that this spanning tree has precisely
+the Df as fundamental cuts, and the Ce as fundamental cycles.
+53.
+Let F be a set of edges in a graph G.
+(i) Show that F extends to an element of B(G) if and only if it
+contains no odd cycle.
+(ii)+ Show that F extends to an element of C(G) if and only if it
+contains no odd cut.
+54.+ In a graph G let a, b be two vertices that are separated by a cut F of
+k edges but cannot be separated by fewer edges. Show that F is not a
+sum of cuts of fewer than k edges.
+
+34
+1. The Basics
+55.+ Prove that the edge set of any graph G can be written as a disjoint
+union E(G) = C [ D with C 2 C(G) and D 2 B(G).
+56.
+Show that a set of vertices lies in the image of the incidence matrix of
+a connected graph if and only if it has even cardinality.
+57.
+(i) Generalize Proposition 1.9.6 by describing the images under B
+and B> of given sets F ✓E and U ✓V , as indicated in the text.
+(ii) Reprove Proposition 1.9.7 for matrices with values in F2 by showing
+that BB> and A + D deﬁne the same the maps V ! V.
+58.
+Let A = (aij)n⇥n be the adjacency matrix of the graph G. Show that
+the matrix Ak = (a0
+ij)n⇥n displays, for all i, j 6 n, the number a0
+ij of
+walks of length k from vi to vj in G.
+Notes
+The terminology used in this book is mostly standard. Alternatives do exist,
+and some of these are stated when a concept is ﬁrst deﬁned.
+Our formal deﬁnition of a graph G = (V, E) with E ✓[V ]2 is intended to
+convey two messages: that the edges are undirected (since {u, v} = {v, u} for
+sets), and that there are neither loops (since {v, v} /
+2 [V ]2 because |{v, v}| = 1)
+nor multiple edges (since two sets are equal as soon as they have the same
+elements). This formal deﬁnition – like any other – occasionally clashes with
+other standard terminology.13
+But avoiding all such possible clashes would
+make the terminology so unwieldy that it would defeat the purpose of clarity.
+There is one small point where our notation deviates slightly from stan-
+dard usage. Complete graphs, paths, cycles etc. of given order are usually
+denoted by Kn, Pk, C` and so on, but we use superscripts instead of sub-
+scripts. This has the advantage of leaving the variables K, P, C etc. free for
+ad-hoc use: we may now enumerate components as C1, C2, . . ., speak of paths
+P1, . . . , Pk, and so on – without any danger of confusion.
+Theorem14 1.3.4 was proved by N. Alon, S. Hoory and N. Linial, The
+Moore bound for irregular graphs, Graphs Comb. 18 (2002), 53–57.
+The
+proof uses an ingenious argument counting random walks along the edges of
+the graph considered.
+The main assertion of Theorem 1.4.3, that an average degree of at least 4k
+forces a k-connected subgraph, is from W. Mader, Existenz n-fach zusammen-
+h¨angender Teilgraphen in Graphen gen¨ugend großer Kantendichte, Abh. Math.
+Sem. Univ. Hamburg 37 (1972) 86–97.
+For the history of the K¨onigsberg bridge problem, and Euler’s actual
+part in its solution, see N.L. Biggs, E.K. Lloyd & R.J. Wilson, Graph Theory
+1736–1936, Oxford University Press 1976.
+13 For example, when e = {u, v} is an edge of G, then G −e and G −{u, v} mean
+two di↵erent things: in G −e we deleted the edge e but kept the vertices u and v,
+whereas in G −{u, v} we deleted the vertices u, v and all their incident edges.
+14 In the interest of readability, the end-of-chapter notes in this book give refer-
+ences only for Theorems, and only in cases where these references cannot be found
+in a monograph or survey cited for that chapter.

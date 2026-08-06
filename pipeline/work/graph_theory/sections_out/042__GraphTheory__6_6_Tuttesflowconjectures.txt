@@ -1,0 +1,196 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 6. Flows
+현재 소단원: 6.6 Tutte's flow conjectures
+직전 소단원: 「6.5 Flow-colouring duality」
+[본문]
+171
+6.6 Tutte’s ﬂow conjectures
+How can we determine the ﬂow number of a graph? Indeed, does every
+(bridgeless) graph have a ﬂow number, a k-ﬂow for some k? Can ﬂow
+numbers, like chromatic numbers, become arbitrarily large?
+Can we
+characterize the graphs admitting a k-ﬂow, for given k?
+Of these four questions, we shall answer the second and third in this
+section: we prove that every bridgeless graph has a 6-ﬂow. In particular,
+a graph has a ﬂow number if and only if it has no bridge. The ques-
+tion asking for a characterization of the graphs with a k-ﬂow remains
+interesting for k = 3, 4, 5. Partial answers are suggested by the following
+three conjectures of Tutte, who initiated algebraic ﬂow theory on graphs.
+The oldest and best known of the Tutte conjectures is his 5-ﬂow
+conjecture:
+Five-Flow Conjecture. (Tutte 1954)
+Every bridgeless multigraph has a 5-ﬂow.
+Which graphs have a 4-ﬂow?
+By Proposition 6.4.4, the 4-edge-
+connected graphs are among them. The Petersen graph (Fig. 6.6.1), on
+the other hand, is an example of a bridgeless graph without a 4-ﬂow:
+since it is cubic but not 3-edge-colourable, it cannot have a 4-ﬂow by
+Proposition 6.4.5 (ii).
+Fig. 6.6.1. The Petersen graph
+Tutte’s 4-ﬂow conjecture states that the Petersen graph must be
+present in every graph without a 4-ﬂow:
+Four-Flow Conjecture. (Tutte 1966)
+Every bridgeless multigraph not containing the Petersen graph as a mi-
+nor has a 4-ﬂow.
+By Proposition 1.7.3, we may replace the word ‘minor’ in the 4-ﬂow
+conjecture by ‘topological minor’.
+6.6 Tutte’s ﬂow conjectures
+
+172
+6. Flows
+Even if true, the 4-ﬂow conjecture will not be best possible: a K11,
+for example, contains the Petersen graph as a minor but has a 4-ﬂow,
+even a 2-ﬂow. The conjecture appears more natural for sparser graphs;
+a proof for cubic graphs was announced in 1998 by Robertson, Sanders,
+Seymour and Thomas, which however still has not been published in full.
+A cubic bridgeless graph or multigraph without a 4-ﬂow (equiva-
+lently, without a 3-edge-colouring) is called a snark. The 4-ﬂow conjec-
+snark
+ture for cubic graphs says that every snark contains the Petersen graph
+as a minor; in this sense, the Petersen graph has thus been shown to be
+the smallest snark. Snarks form the hard core both of the four colour
+theorem and of the 5-ﬂow conjecture: the four colour theorem is equi-
+valent to the assertion that no snark is planar (exercise), and it is not
+diﬃcult to reduce the 5-ﬂow conjecture to the case of snarks.6 However,
+although the snarks form a very special class of graphs, none of the
+problems mentioned seems to become much easier by this reduction.7
+Three-Flow Conjecture. (Tutte 1972)
+Every multigraph without a cut consisting of exactly one or exactly three
+edges has a 3-ﬂow.
+Again, the 3-ﬂow conjecture will not be best possible: it is easy to con-
+struct graphs with three-edge cuts that have a 3-ﬂow (exercise).
+By our duality theorem (6.5.3), all three ﬂow conjectures are true
+for planar graphs and thus motivated: the 3-ﬂow conjecture translates
+to Gr¨otzsch’s theorem (5.1.3), the 4-ﬂow conjecture to the four colour
+theorem (since the Petersen graph is not planar, it is not a minor of a
+planar graph), the 5-ﬂow conjecture to the ﬁve colour theorem.
+We ﬁnish this section with the main result of the chapter:
+Theorem 6.6.1. (Seymour 1981)
+Every bridgeless multigraph has a 6-ﬂow.
+Proof. We prove by induction on |G| that, given any bridgeless multi-
+(3.3.6)
+(6.1.3)
+(6.3.2)
+(6.3.3)
+graph G = (V, E) and a vertex u of G, there exists a (Z2 ⇥Z3)-ﬂow
+f = f2 ⇥f3 on G such that f2 is zero on all the edges at u. By Corol-
+u
+lary 6.3.2 and Theorem 6.3.3, then, G will also have a 6-ﬂow.
+The induction starts trivially with |G| = 1, since loops are ignored
+in (F1) and (F2).
+So let G be given for the induction step.
+This is
+trivial if G is disconnected or has a cutvertex, so we assume that G is
+2-connected. Then G −u is connected.
+6 The same applies to another well-known conjecture, the cycle double cover con-
+jecture; see Exercise 17.
+7 That snarks are elusive has been known to mathematicians for some time; cf.
+Lewis Carroll, The Hunting of the Snark, Macmillan 1876.
+
+6.6 Tutte’s ﬂow conjectures
+173
+If G−u has a bridge, e say, let {V1, V2} be the partition of V (G−u)
+underlying its cut {e}. For i = 1, 2 the sets Ui := Vi [{u} are connected
+in G; we contract them to form Gi := G/Ui with contracted vertex ui. By
+the induction hypothesis, Gi has a (Z2 ⇥Z3)-ﬂow f i = f i
+2 ⇥f i
+3 in which
+f i
+2 is zero on ui. Replacing f 1
+3 with −f 1
+3 if necessary we may assume
+that it agrees with f 2
+3 on
+!e and
+ e. Now f := f 1 [ f 2 is a (Z2 ⇥Z3)-ﬂow
+on G whose ﬁrst component f2 is zero on all the edges at u, as desired.
+Fig. 6.6.2. Constructing f when G −u has a bridge
+It remains to consider the case that G −u is bridgeless. As G −u is
+connected, this makes it 2-edge-connected. Let H be the union of two
+H
+edge-disjoint paths in G−u between distinct neighbours of u; these paths
+exist by Menger’s theorem 3.3.6 (ii). Note that H is an even connected
+submultigraph of G −u (Figure 6.6.3).
+Fig. 6.6.3. Constructing f when G −u has no bridge
+Let G1 be the minor of G obtained by contracting the edges of H to a
+G1, u1
+vertex u1, and let G2 be obtained from G1 by contracting a u–u1 edge e1
+e1
+to a vertex u2. Both G1 and G2 are bridgeless, because contracting edges
+G2, u2
+never creates a bridge. By the induction hypothesis, G2 has a (Z2 ⇥Z3)-
+ﬂow f 2
+2 ⇥f 2
+3 with f 2
+2 zero on all the edges at u2.
+By Lemma 6.1.3,
+f 2
+3 extends to a Z3-circulation f 1
+3 on G1 that is non-zero everywhere
+except possibly on e1. As G1 has at least two u–u1 edges, however, we
+can modify f 1
+3 to make it non-zero on all the edges of G1, including e1.
+Applying Lemma 6.1.3 once more, we extend f 1
+3 to a Z3-circulation f3
+on G that is non-zero on all edges not in H.
+As H is even and f 2
+2 maps all the edges at u2 to zero, we can
+extend f 2
+2 to a Z2-circulation f2 on G−e1 that maps all its edges at u to
+
+174
+6. Flows
+zero, by letting f2(
+!e) := 1 2 Z2 for all edges e of H. Setting f2 to zero
+on e1 too then turns it into a Z2-circulation on G. Now f := f2 ⇥f3 is a
+(Z2 ⇥Z3)-ﬂow on G with f2 zero on all the edges at u, as desired.
+⇤
+Exercises
+1.−Prove Proposition 6.2.1 by induction on |S|.
+2.
+(i)−Given n 2 N, ﬁnd a capacity function for the network below such
+that the algorithm from the proof of the max-ﬂow min-cut theorem will
+need more than n augmenting paths W if these are badly chosen.
+s
+t
+(ii)+ Show that, if all augmenting paths are chosen as short as possible,
+their number is bounded by a function of the size of the network.
+3.+ Derive Menger’s Theorem 3.3.5 from the max-ﬂow min-cut theorem.
+(Hint. The edge version is easy. For the vertex version, apply the edge
+version to a suitable auxiliary graph.)
+4.−Let f:
+!
+E ! H be a circulation on G and g: H ! H0 a group homomor-
+phism. Show that g ◦f is a circulation on G. Is g ◦f an H0-ﬂow if f is
+an H-ﬂow?
+5.
+View the group of circulations on a graph with values in Z2 as a vector
+space over Z2. Find a space in Chapter 1.9 to which it is isomorphic,
+and write down an explicit isomorphism.
+6.
+Let H be an abelian group, G = (V, E) a connected graph, T a spanning
+tree, and f a map from the orientations of the edges in E r E(T) to H
+that satisﬁes (F1). Show that f extends uniquely to a circulation on G
+with values in H.
+7.
+(continued)
+Let VH = VH(G) be the group of all maps V !H, and EH = EH(G) the
+group of all maps
+!
+E !H satisfying (F1), both with pointwise addition.
+Every ' 2 VH deﬁnes a 2 EH by (e, x, y) := '(y) −'(x).
+(i) Show that these form a subgroup BH = BH(G) of EH with
+BH = { 2 EH | (
+!
+C ) = 0 for every oriented cycle C ✓G },
+where (
+!
+C ) := P
+~e 2 ~
+C (
+!e).
+(ii) Show that every map
+!
+E(T)!H satisfying (F1) extends uniquely
+to a map in BH.

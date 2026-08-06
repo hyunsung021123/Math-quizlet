@@ -1,0 +1,239 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 9. Ramsey Theory for Graphs
+현재 소단원: 9.1 Ramsey's original theorems
+직전 소단원: 「8.ex Exercises」
+[본문]
+9
+Ramsey Theory
+for Graphs
+In this chapter we set out from a type of problem which, on the face
+of it, appears to be similar to the theme of Chapter 7: what kind of
+substructures are necessarily present in every large enough graph?
+While ‘large’ in Chapter 7 meant ‘many edges’ on a given number of
+vertices, in this chapter it will simply mean ‘many vertices’. Of course,
+we cannot expect any concrete graph H to arise as a subgraph in just
+any graph G of large enough order. But if it does not, maybe we can say
+something else about G? For example, if H 6✓G then maybe G contains
+some other graph we can specify in advance, one very di↵erent from H?
+Ramsey’s theorem, in its simplest form, says just that: for every
+integer r > 0, every large enough graph G contains either a Kr or Kr as
+an induced subgraph. If G is connected, we can say a little more: then
+G contains either a Kr or a large induced path or star. What can we
+say if G is 2-connected, or even 3-connected?
+Despite its superﬁcial similarity to extremal problems, the above
+type of question leads to a kind of mathematics with a distinctive ﬂavour
+of its own. Indeed, the theorems and proofs in this chapter have more in
+common with similar results in algebra or geometry, say, than with most
+other areas of graph theory. The study of their underlying methods,
+therefore, is generally regarded as a combinatorial subject in its own
+right: the discipline of Ramsey theory.
+In line with the subject of this book, we shall focus on results that
+are naturally expressed in terms of graphs. Even from the viewpoint of
+general Ramsey theory, however, this is not as much of a limitation as
+it might seem: graphs are a natural setting for Ramsey problems, and
+the material in this chapter brings out a suﬃcient variety of ideas and
+methods to convey some of the fascination of the theory as a whole.
+303
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_9
+
+304
+9. Ramsey Theory
+9.1 Ramsey’s original theorems
+In its simplest version, Ramsey’s theorem says that, given an integer
+r > 0, every large enough graph G contains either a Kr or a Kr as an
+induced subgraph. At ﬁrst glance, this may seem surprising: after all,
+we need a proportion of about (r −2)/(r −1) of all possible edges to
+force a Kr subgraph in G (Corollary 7.1.3), but neither G nor G can be
+expected to have more than half of all possible edges.
+However, there is a subtle di↵erence: we are not trying to force
+either of these two events, that G ◆Kr or that G ◆Kr, but only
+that one or the other happens. Keeping an open mind as to which of
+them does, rather looking for a Kr only in the denser half of the set of
+potential edges, helps G to live up to our expectations. And Ramsey’s
+theorem says that it only has to be large enough.
+Tur´an’s theorem ﬁts this pattern too when G has exactly tr−1(n)
+edges on n vertices. In this case it tells us more than Ramsey’s theorem:
+if G does not contain a Kr then G contains a Kdn/(r−1)e, a complete
+graph of order much larger than r.
+So how could we go about proving Ramsey’s theorem? Let us try
+to build a Kr or Kr in G inductively, starting with an arbitrary vertex
+v1 2 V1 := V (G). If |G| is large, there will be a large set V2 ✓V1 r {v1}
+of vertices that are either all adjacent to v1 or all non-adjacent to v1.
+Accordingly, we may think of v1 as the ﬁrst vertex of a Kr or Kr whose
+other vertices all lie in V2. Let us then choose another vertex v2 2 V2
+for our Kr or Kr. Since V2 is large, it will have a subset V3, still fairly
+large, of vertices that are all ‘of the same type’ with respect to v2 as
+well: either all adjacent or all non-adjacent to it. We then continue our
+search for vertices inside V3, and so on (Fig. 9.1.1).
+v1
+v1
+v2
+V2
+V3
+Fig. 9.1.1. Choosing the sequence v1, v2, . . .
+How long can we go on in this way? This depends on the size of
+our initial set V1: each set Vi has at least half the size of its predeces-
+sor Vi−1, so we shall be able to complete s construction steps if G has
+order about 2s. As the following proof shows, the choice of s = 2r −3
+vertices vi suﬃces to ﬁnd among them the vertices of a Kr or Kr.
+
+9.1 Ramsey’s original theorems
+305
+Theorem 9.1.1. (Ramsey 1930)
+[9.2.2]
+For every r 2 N there exists an n 2 N such that every graph of order at
+least n contains either Kr or Kr as an induced subgraph.
+Proof. The assertion is trivial for r 6 1; we assume that r > 2. Let
+n := 22r−3, and let G be a graph of order at least n. We shall deﬁne
+a sequence V1, . . . , V2r−2 of sets and choose vertices vi 2 Vi with the
+following properties:
+(i) |Vi| = 22r−2−i (i = 1, . . . , 2r −2);
+(ii) Vi ✓Vi−1 r {vi−1} (i = 2, . . . , 2r −2);
+(iii) vi−1 is adjacent either to all vertices in Vi or to no vertex in Vi
+(i = 2, . . . , 2r −2).
+Let V1 ✓V (G) be any set of 22r−3 vertices, and pick v1 2 V1 arbitrarily.
+Then (i) holds for i = 1, while (ii) and (iii) hold trivially. Suppose now
+that Vi−1 and vi−1 2 Vi−1 have been chosen so as to satisfy (i)–(iii) for
+i −1, where 1 < i 6 2r −2. Since
+|Vi−1 r {vi−1}| = 22r−1−i −1
+is odd, Vi−1 has a subset Vi satisfying (i)–(iii); we pick vi 2 Vi arbitrarily.
+Among the 2r −3 vertices v1, . . . , v2r−3, there are r −1 vertices that
+show the same behaviour when viewed as vi−1 in (iii), being adjacent
+either to all the vertices in Vi or to none. Accordingly, these r −1 vertices
+and v2r−2 induce either a Kr or a Kr in G, because vi, . . . , v2r−2 2 Vi
+for all i.
+⇤
+The least integer n associated with r as in Theorem 9.1.1 is the
+Ramsey number R(r) of r. Our proof shows that R(r) 6 22r−3, which is
+Ramsey
+number
+R(r)
+close to the best known upper bound; see the Notes. In Chapter 11 we
+shall use a simple probabilistic argument to show that R(r) is bounded
+below by 2r/2 (Theorem 11.1.3).
+In other words, the clique and independence number of a graph can
+both, asymptotically, be logarithmically small compared with its order.
+As soon as we forbid some ﬁxed induced subgraph, however, one of them
+may have to be bigger: The Erd˝os-Hajnal conjecture says that for every
+Erd˝os-
+Hajnal
+conjecture
+graph H there exists a constant δH > 0 such that every graph G not
+containing an induced copy of H has a set of at least |G|δH vertices that
+are either independent or span a complete subgraph in G.
+It is customary in Ramsey theory to think of partitions as colourings:
+a colouring of (the elements of) a set X with c colours, or c-colouring
+c-colouring
+for short, is simply a partition of X into c classes1 (indexed by the ‘col-
+ours’). In particular, these colourings need not satisfy any non-adjacency
+1 Unlike elsewhere in this book, these partition classes may be empty.
+
+306
+9. Ramsey Theory
+requirements as in Chapter 5. Given a c-colouring of [X]k, the set of all
+[X]k
+k-subsets of X, we call a set Y ✓X monochromatic if all the elements
+of [Y ]k have the same colour,2 i.e. belong to the same of the c partition
+mono-
+chromatic
+classes of [X]k. Similarly, if G = (V, E) is a graph and all the edges of
+H ✓G have the same colour in some colouring of E, we call H a mono-
+chromatic subgraph of G, speak of a red (green, etc.) H in G, and so on.
+In the above terminology, Ramsey’s theorem can be expressed as
+follows: for every r there exists an n such that, given any n-set X,
+every 2-colouring of [X]2 yields a monochromatic r-set Y ✓X. Interest-
+ingly, this assertion remains true for c-colourings of [X]k with arbitrary
+c and k – with almost exactly the same proof!
+We ﬁrst prove the inﬁnite version, which is easier, and then deduce
+the ﬁnite version.
+Theorem 9.1.2. Let k, c be positive integers, and X an inﬁnite set. If
+[12.1.1]
+[X]k is coloured with c colours, then X has an inﬁnite monochromatic
+subset.
+Proof. We prove the theorem by induction on k, with c ﬁxed. For k =
+1 the assertion holds, so let k > 1 and assume the assertion for smaller
+values of k.
+Let [X]k be coloured with c colours. We shall construct an inﬁnite
+sequence X0, X1, . . . of inﬁnite subsets of X and choose elements xi 2 Xi
+with the following properties (for all i):
+(i) Xi+1 ✓Xi r {xi};
+(ii) all k-sets {xi}[Z with Z 2 [Xi+1]k−1 have the same colour, which
+we associate with xi.
+We start with X0 := X and pick x0 2 X0 arbitrarily. By assumption,
+X0 is inﬁnite. Having chosen an inﬁnite set Xi and xi 2 Xi for some i, we
+c-colour [Xi r {xi}]k−1 by giving each set Z the colour of {xi} [ Z from
+our c-colouring of [X]k. By the induction hypothesis, Xi r {xi} has an
+inﬁnite monochromatic subset, which we choose as Xi+1. Clearly, this
+choice satisﬁes (i) and (ii). Finally, we pick xi+1 2 Xi+1 arbitrarily.
+Since c is ﬁnite, one of the c colours is associated with inﬁnitely
+many xi. These xi form an inﬁnite monochromatic subset of X.
+⇤
+If desired, the ﬁnite version of Theorem 9.1.2 could be proved just
+like the inﬁnite version above. However to ensure that the relevant sets
+are large enough at all stages of the induction, we have to keep track of
+their sizes, which involves a good deal of boring calculation. As long as
+we are not interested in bounds, the more elegant route is to deduce the
+ﬁnite version from the inﬁnite ‘by compactness’, that is, using K¨onig’s
+inﬁnity lemma (8.1.2).
+2 Note that Y is called monochromatic, but it is the elements of [Y ]k, not of Y ,
+that are (equally) coloured.
+
+307
+Theorem 9.1.3. For all k, c, r > 1 there exists an n > k such that every
+[9.3.3]
+n-set X has a monochromatic r-subset with respect to any c-colouring
+of [X]k.
+Proof. As is customary in set theory, we denote by n 2 N (also) the
+(8.1.2)
+set {0, . . . , n −1}. Suppose the assertion fails for some k, c, r. Then for
+k, c, r
+every n > k there exist an n-set, without loss of generality the set n, and
+a c-colouring [n]k ! c such that n contains no monochromatic r-set. Let
+us call such colourings bad; we are thus assuming that for every n > k
+bad
+colouring
+there exists a bad colouring of [n]k. Our aim is to combine these into a
+bad colouring of [N]k, which will contradict Theorem 9.1.2.
+For every n > k let Vn 6= ; be the set of bad colourings of [n]k. For
+n > k, the restriction f(g) of any g 2 Vn to [n−1]k is still bad, and hence
+lies in Vn−1. By the inﬁnity lemma (8.1.2), there is an inﬁnite sequence
+gk, gk+1, . . . of bad colourings gn 2 Vn such that f(gn) = gn−1 for all
+n > k. For every m > k, all colourings gn with n > m agree on [m]k, so
+for each Y
+2 [N]k the value of gn(Y ) coincides for all n > max Y . Let
+us deﬁne g(Y ) as this common value gn(Y ). Then g is a bad colouring
+of [N]k: every r-set S ✓N is contained in some suﬃciently large n,
+so S cannot be monochromatic since g coincides on [n]k with the bad
+colouring gn.
+⇤
+The least integer n associated with k, c, r as in Theorem 9.1.3 is the
+Ramsey number for these parameters; we denote it by R(k, c, r).
+Ramsey
+number
+R(k, c, r)
+9.2 Ramsey numbers
+Ramsey’s theorem may be rephrased as follows: if H = Kr and G is a
+graph with suﬃciently many vertices, then either G itself or its comple-
+ment G contains a copy of H as a subgraph. Clearly, the same is true
+for any graph H, simply because H ✓Kh for h := |H|.
+However, if we ask for the least n such that every graph G of order n
+has the above property – this is the Ramsey number R(H) of H – then
+Ramsey
+number
+R(H)
+the above question makes sense: if H has only few edges, it should embed
+more easily in G or G, and we would expect R(H) to be smaller than
+the Ramsey number R(h) = R(Kh).
+A little more generally, let R(H1, H2) denote the least n 2 N such
+R(H1, H2)
+that H1 ✓G or H2 ✓G for every graph G of order n. For most graphs
+H1, H2, only very rough estimates are known for R(H1, H2). Interest-
+ingly, lower bounds given by random graphs (as in Theorem 11.1.3) are
+often sharper than even the best bounds provided by explicit construc-
+tions.
+The following proposition describes one of the few cases where exact
+Ramsey numbers are known for a relatively large class of graphs:
+9.2 Ramsey numbers

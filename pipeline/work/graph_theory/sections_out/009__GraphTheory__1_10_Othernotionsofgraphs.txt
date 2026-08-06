@@ -1,0 +1,146 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.10 Other notions of graphs
+직전 소단원: 「1.9 Some linear algebra」
+[본문]
+27
+As usual, let B> denote the transpose of B.
+Then B and B> deﬁne
+linear maps B: E(G) ! V(G) and B>: V(G) ! E(G) with respect to the
+standard bases. As is easy to check, B maps an edge set F ✓E to the
+set of vertices incident with an odd number of edges in F, while B>maps
+a set U ✓V to set of edges with exactly one end in U. In particular:
+Proposition 1.9.6.
+(i) The kernel of B is C(G).
+(ii) The image of B> is B(G).
+⇤
+More on this in the exercises and notes at the end of this chapter.
+The adjacency matrix A = (aij)n⇥n of G is deﬁned by
+adjacency
+matrix
+aij :=
+n 1
+if vivj 2 E
+0
+otherwise.
+Viewed as a linear map V ! V, the adjacency matrix maps a given set
+U ✓V to the set of vertices with an odd number of neighbours in U.
+Let D denote the real diagonal matrix (dij)n⇥n with dii = d(vi)
+and dij = 0 otherwise. Our last proposition establishes a connection
+between A and B (now viewed as real matrices), which can be veriﬁed
+simply from the deﬁnition of matrix multiplication:
+Proposition 1.9.7. BB> = A + D.
+⇤
+It is also instructive to check that A + D, with entries taken mod 2, de-
+ﬁnes the same map V ! V as the composition of the maps of B and B>
+(Exercise 57).
+1.10 Other notions of graphs
+For completeness, we now mention a few other notions of graphs which
+feature less frequently or not at all in this book.
+A hypergraph is a pair (V, E) of disjoint sets, where the elements
+hypergraph
+of E are non-empty subsets (of any cardinality) of V . Thus, graphs are
+special hypergraphs.
+A directed graph (or digraph) is a pair (V, E) of disjoint sets (of
+directed
+graph
+vertices and edges) together with two maps init: E ! V and ter: E ! V
+assigning to every edge e an initial vertex init(e) and a terminal vertex
+init(e)
+ter(e). The edge e is said to be directed from init(e) to ter(e). Note that
+ter(e)
+a directed graph may have several edges between the same two vertices
+x, y. Such edges are called multiple edges; if they have the same direction
+(say from x to y), they are parallel. If init(e) = ter(e), the edge e is called
+a loop.
+loop
+1.10 Other notions of graphs
+
+28
+1. The Basics
+A directed graph D is an orientation of an (undirected) graph G if
+orientation
+V (D) = V (G) and E(D) = E(G), and if {init(e), ter(e)} = {x, y} for
+every edge e = xy. Intuitively, such an oriented graph arises from an
+oriented
+graph
+undirected graph simply by directing every edge from one of its ends to
+the other. Put di↵erently, oriented graphs are directed graphs without
+loops or multiple edges.
+A multigraph is a pair (V, E) of disjoint sets (of vertices and edges)
+multigraph
+together with a map E ! V [ [V ]2 assigning to every edge either one
+or two vertices, its ends.
+Thus, multigraphs too can have loops and
+multiple edges: we may think of a multigraph as a directed graph whose
+edge directions have been ‘forgotten’. To express that x and y are the
+ends of an edge e we still write e = xy, though this no longer determines
+e uniquely.
+A graph is thus essentially the same as a multigraph without loops
+or multiple edges. Somewhat surprisingly, proving a graph theorem more
+generally for multigraphs may, on occasion, simplify the proof. More-
+over, there are areas in graph theory (such as plane duality; see Chapters
+4.6 and 6.5) where multigraphs arise more naturally than graphs, and
+where any restriction to the latter would seem artiﬁcial and be tech-
+nically complicated. We shall therefore consider multigraphs in these
+cases, but without much technical ado: terminology introduced earlier
+for graphs will be used correspondingly.
+A few di↵erences, however, should be pointed out. A multigraph
+may have cycles of length 1 or 2: loops, and pairs of multiple edges
+(or double edges). A loop at a vertex makes it its own neighbour, and
+contributes 2 to its degree; in Figure 1.10.1, we thus have d(ve) = 6.
+The ends of loops and parallel edges in a multigraph G are considered as
+separating that edge from the rest of G. The vertex v of a loop e, there-
+fore, is a cutvertex unless ({v}, {e}) is a component of G, and ({v}, {e})
+is a ‘block’ in the sense of Chapter 3.1. Thus, a multigraph with a loop
+is never 2-connected, and any 3-connected multigraph is in fact a graph.
+G/e
+G
+e
+ve
+Fig. 1.10.1. Contracting the edge e in the multigraph correspond-
+ing to Fig. 1.8.1
+The notion of edge contraction is simpler in multigraphs than in
+graphs. If we contract an edge e = xy in a multigraph G = (V, E) to a
+new vertex ve, there is no longer a need to delete any edges other than
+
+29
+e itself: edges parallel to e become loops at ve, while edges xv and yv
+become parallel edges between ve and v (Fig. 1.10.1). Thus, formally,
+E(G/e) = E r{e}, and only the incidence map e0 7! {init(e0), ter(e0)} of
+G has to be adjusted to the new vertex set in G/e. Contracting a loop
+thus has the same e↵ect as deleting it.
+The notion of a minor adapts accordingly. The contraction minor
+G/P deﬁned by a partition P of V (G) into connected sets has precisely
+those edges of G that join distinct partition classes. If there are several
+such edges between the same two classes, they become parallel edges
+of G/P. However, we do not normally give G/P any loops resulting from
+edges of G whose ends lie in the same partition class U. This would re-
+quire us to say which of the edges of G[U] are contracted (assuming they
+induce a connected spanning subgraph of G[U]), or at least how many
+are, which seems futile if we do not care about loops in G/P anyway.
+Fig. 1.10.2. Suppressing the white vertices
+If v is a vertex of degree 2 in a multigraph G, then by suppressing v
+suppressing
+a vertex
+we mean deleting v and adding an edge between its two neighbours. (If
+its two incident edges are identical, i.e. form a loop at v, we add no
+edge and obtain just G −v. If they go to the same vertex w 6= v, the
+added edge will be a loop at w. See Figure 1.10.2.) Since the degrees
+of all vertices other than v remain unchanged when v is suppressed,
+suppressing several vertices of G always yields a well-deﬁned multigraph
+that is independent of the order in which those vertices are suppressed.
+Finally, it should be pointed out that authors who usually work with
+multigraphs tend to call them ‘graphs’; in their terminology, our graphs
+would be called ‘simple graphs’.
+Exercises
+1.−What is the number of edges in a Kn?
+2.
+Let d 2 N and V := {0, 1}d; thus, V is the set of all 0–1 sequences of
+length d. The graph on V in which two such sequences form an edge if
+and only if they di↵er in exactly one position is called the d-dimensional
+cube. Determine the average degree, number of edges, diameter, girth
+and circumference of this graph.
+(Hint for the circumference: induction on d.)
+Exercises

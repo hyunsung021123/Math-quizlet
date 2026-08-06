@@ -1,0 +1,269 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 2. Matching, Covering and Packing
+현재 소단원: 2.2 Matching in general graphs
+직전 소단원: 「2.1 Matching in bipartite graphs」
+[본문]
+43
+Proof. Let G be any 2k-regular graph (k > 1), without loss of generality
+(1.8.1)
+connected. By Theorem 1.8.1, G contains an Euler tour v0e0 . . . e`−1v`,
+with v` = v0. We replace every vertex v by a pair (v−, v+), and every
+edge ei = vivi+1 by the edge v+
+i v−
+i+1 (Fig. 2.1.4). The resulting bipartite
+graph G0 is k-regular, so by Corollary 2.1.3 it has a 1-factor. Collapsing
+every vertex pair (v−, v+) back into a single vertex v, we turn this 1-
+factor of G0 into a 2-factor of G.
+⇤
+v
+v−
+v+
+Fig. 2.1.4. Splitting vertices in the proof of Corollary 2.1.5
+2.2 Matching in general graphs
+Given a graph G, let us denote by CG the set of its components, and by
+CG
+q(G) the number of its odd components, those of odd order. If G has a
+q(G)
+1-factor, then clearly
+Tutte’s
+condition
+q(G −S) 6 |S|
+for all S ✓V (G),
+since every odd component of G −S will send a factor edge to S.
+G
+S
+S
+GS
+Fig. 2.2.1. Tutte’s condition q(G −S) 6 |S| for q = 3, and the
+contracted graph GS from Theorem 2.2.3.
+Again, this obvious necessary condition for the existence of a 1-factor
+is also suﬃcient:
+2.2 Matching in general graphs
+
+44
+2. Matching, Covering and Packing
+Theorem 2.2.1. (Tutte 1947)
+A graph G has a 1-factor if and only if q(G −S) 6 |S| for all S ✓V (G).
+Proof. Let G = (V, E) be a graph without a 1-factor. Our task is to ﬁnd
+V, E
+a bad set S ✓V , one that violates Tutte’s condition.
+bad set
+We may assume that G is edge-maximal without a 1-factor. Indeed,
+if G0 is obtained from G by adding edges and S ✓V is bad for G0, then
+S is also bad for G: any odd component of G0 −S is the union of
+components of G −S, and one of these must again be odd.
+What does G look like? Clearly, if G contains a bad set S then, by
+its edge-maximality and the trivial forward implication of the theorem,
+all the components of G−S are complete and every vertex
+s 2 S is adjacent to all the vertices of G −s.
+(⇤)
+But also conversely, if a set S ✓V satisﬁes (⇤) then either S or the
+empty set must be bad: if S is not bad we can join the odd components
+of G −S disjointly to S and pair up all the remaining vertices – unless
+|G| is odd, in which case ; is bad.
+So it suﬃces to prove that G has a set S of vertices satisfying (⇤).
+Let S be the set of vertices that are adjacent to every other vertex. If
+S
+this set S does not satisfy (⇤), then some component of G −S has non-
+adjacent vertices a, a0. Let a, b, c be the ﬁrst three vertices on a shortest
+a, b, c
+a–a0 path in this component; then ab, bc 2 E but ac /2 E. Since b /2 S,
+there is a vertex d 2 V such that bd /2 E. By the maximality of G, there
+d
+is a matching M1 of V in G + ac, and a matching M2 of V in G + bd.
+M1, M2
+P
+c
+a
+b
+d
+C
+. . .
+2
+2
+1
+1
+1
+Fig. 2.2.2. Deriving a contradiction if S does not satisfy (⇤)
+Let P = d . . . v be a maximal path in G starting at d with an edge
+v
+from M1 and containing alternately edges from M1 and M2 (Fig. 2.2.2).
+If the last edge of P lies in M1, then v = b, since otherwise we could
+continue P. Let us then set C := P +bd. If the last edge of P lies in M2,
+then by the maximality of P the M1-edge at v must be ac, so v 2 {a, c};
+then let C := dPvbd. This is again a cycle, since b cannot be an inner
+vertex of P: those are incident with M2-edges from G, which b is not.
+In every case C is an even cycle with every other edge in M2, and
+whose only edge not in E is bd. Replacing in M2 its edges on C with the
+edges of C −M2, we obtain a matching of V in E, a contradiction.
+⇤
+
+2.2 Matching in general graphs
+45
+Corollary 2.2.2. (Petersen 1891)
+Every bridgeless cubic graph has a 1-factor.
+Proof. We show that any bridgeless cubic graph G satisﬁes Tutte’s con-
+dition. Let S ✓V (G) be given, and consider an odd component C of
+G−S. Since G is cubic, the degrees (in G) of the vertices in C sum to an
+odd number, but only an even part of this sum arises from edges of C.
+So G has an odd number of S–C edges, and therefore has at least 3 such
+edges (since G has no bridge). The total number of edges between S and
+G −S thus is at least 3q(G −S). But it is also at most 3|S|, because G
+is cubic. Hence q(G −S) 6 |S|, as required.
+⇤
+In order to shed a little more light on the techniques used in match-
+ing theory, we now give a second proof of Tutte’s theorem.
+In fact,
+we shall prove a slightly stronger result, a result that places a structure
+interesting from the matching point of view on an arbitrary graph. If the
+graph happens to satisfy the condition of Tutte’s theorem, this structure
+will at once yield a 1-factor.
+A non-empty graph G = (V, E) is called factor-critical if G has no
+factor-
+critical
+1-factor but for every vertex v 2 G the graph G −v has a 1-factor. We
+call a vertex set S ✓V matchable to CG−S if the (bipartite2) graph GS,
+matchable
+which arises from G by contracting the components C 2 CG−S to sin-
+gle vertices and deleting all the edges inside S, contains a matching
+of S. (Formally, GS is the graph with vertex set S [ CG−S and edge set
+GS
+{ sC | 9 c 2 C : sc 2 E }; see Fig. 2.2.1.)
+Theorem 2.2.3. (Gallai 1964; Edmonds 1965)
+Every graph G has a set S of vertices with the following two properties:
+(i) S is matchable to CG−S;
+(ii) Every component of G −S is factor-critical.
+Given any such set S, the graph G contains a 1-factor if and only if
+|S| = |CG−S|.
+For any given G, the assertion of Tutte’s theorem follows easily from
+this result. Indeed, by (i) and (ii) we have |S| 6 |CG−S| = q(G −S)
+(since factor-critical graphs have odd order); thus Tutte’s condition of
+q(G −S) 6 |S| implies |S| = |CG−S|, and the existence of a 1-factor
+follows from the last statement of Theorem 2.2.3.
+Proof of Theorem 2.2.3. Note ﬁrst that the last assertion of the theorem
+(2.1.2)
+follows at once from the assertions (i) and (ii): if G has a 1-factor, we
+have q(G −S) 6 |S| and hence |S| = |CG−S| as above; conversely if
+2 except for the – permitted – case that S or CG−S is empty
+
+46
+2. Matching, Covering and Packing
+|S| = |CG−S|, then the existence of a 1-factor follows straight from (i)
+and (ii).
+We now prove the existence of a set S satisfying (i) and (ii), by
+induction on |G|. For |G| = 0 we may take S = ;. Now let G be given
+with |G| > 0, and assume the assertion holds for graphs with fewer
+vertices.
+Consider the sets T ✓V (G) for which Tutte’s condition fails worst,
+i.e. for which
+d(T) := dG(T) := q(G −T) −|T|
+d
+is maximum, and let S be a largest such set T. Note that d(S) > d(;) > 0.
+S
+We ﬁrst show that every component C 2 CG−S =: C is odd. If |C|
+C
+is even, pick a vertex c 2 C, and consider T := S [ {c}. As C −c has
+odd order it has at least one odd component, which is also a component
+of G −T. Therefore
+q(G −T) > q(G −S) + 1
+while
+|T| = |S| + 1 ,
+so d(T) > d(S) contradicting the choice of S.
+Next we prove the assertion (ii), that every C 2 C is factor-critical.
+Suppose there exist C 2 C and c 2 C such that C0 := C −c has no
+1-factor. By the induction hypothesis (and the fact that, as shown ear-
+lier, for ﬁxed G our theorem implies Tutte’s theorem) there exists a set
+S0 ✓V (C0) with
+q(C0 −S0) > |S0| .
+Since |C| is odd and hence |C0| is even, the numbers q(C0 −S0) and |S0|
+are either both even or both odd, so they cannot di↵er by exactly 1. We
+may therefore sharpen the above inequality to
+q(C0 −S0) > |S0| + 2 ,
+giving dC0(S0) > 2. Then for T := S [ {c} [ S0 we have
+d(T) > d(S) −1 −1 + dC0(S0) > d(S) ,
+where the ﬁrst ‘−1’ comes from the loss of C as an odd component
+and the second comes from including c in the set T. As before, this
+contradicts the choice of S.
+It remains to show that S is matchable to CG−S. If not, then by
+the marriage theorem there exists a set S0 ✓S that sends edges to fewer
+than |S0| components in C. Since the other components in C are also
+components of G −(S r S0), the set T = S r S0 satisﬁes d(T) > d(S),
+contrary to the choice of S.
+⇤
+
+47
+Let us consider once more the set S from Theorem 2.2.3, together
+S
+with any matching M in G = (V, E). As before, we write C := CG−S.
+V, C
+Let us denote by kS the number of edges in M with at least one end
+in S, and by kC the number of edges in M with both ends in G −S.
+kS, kC
+Since each C 2 C is odd, at least one of its vertices is not incident with
+an edge of the second type. Therefore every matching M satisﬁes
+kS 6 |S|
+and
+kC 6 1
+2
+⇣
+|V | −|S| −|C|
+⌘
+.
+(1)
+Moreover, G contains a matching M0 with equality in both cases: ﬁrst
+M0
+choose |S| edges between S and S C according to (i), and then use (ii) to
+ﬁnd a suitable set of 1
+2
+$
+|C| −1
+%
+edges in every component C 2 C. This
+matching M0 thus has exactly
+|M0| = |S| + 1
+2
+⇣
+|V | −|S| −|C|
+⌘
+(2)
+edges.
+Now (1) and (2) together imply that every matching M of maxi-
+mum cardinality satisﬁes both parts of (1) with equality: by |M| > |M0|
+and (2), M has at least |S| + 1
+2
+$
+|V | −|S| −|C|
+%
+edges, which implies by
+(1) that neither of the inequalities in (1) can be strict. But equality
+in (1), in turn, implies that M has the structure described above: by
+kS = |S|, every vertex s 2 S is the end of an edge st 2 M with t 2 G−S,
+and by kC = 1
+2
+$
+|V | −|S| −|C|
+%
+exactly 1
+2(|C| −1
+%
+edges of M lie in C,
+for every C 2 C. Finally, since these latter edges miss only one vertex in
+each C, the ends t of the edges st above lie in di↵erent components C
+for di↵erent s.
+The seemingly technical Theorem 2.2.3 thus hides a wealth of struc-
+tural information: it contains the essence of a detailed description of all
+maximum-cardinality matchings in all graphs. A reference to the full
+statement of this result, the Gallai-Edmonds structure theorem, is given
+in the notes at the end of this chapter.
+2.3 The Erd˝os-P´osa theorem
+Much of the charm of K¨onig’s and Hall’s theorems in Section 2.1 lies
+in the fact that they guarantee the existence of the desired matching as
+soon as some obvious obstruction does not occur. In K¨onig’s theorem,
+we can ﬁnd k independent edges in our graph unless we can cover all its
+edges by fewer than k vertices (in which case it is obviously impossible).
+More generally, if G is an arbitrary graph, not necessarily bipartite,
+and H is any class of graphs, we might compare the largest number k
+of graphs from H (not necessarily distinct) that we can pack disjointly
+into G with the smallest number s of vertices of G that will cover all
+2.3 The Erd˝os-P´osa theorem

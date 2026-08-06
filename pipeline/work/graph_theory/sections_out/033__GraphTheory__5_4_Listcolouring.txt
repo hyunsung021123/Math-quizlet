@@ -1,0 +1,302 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 5. Colouring
+현재 소단원: 5.4 List colouring
+직전 소단원: 「5.3 Colouring edges」
+[본문]
+134
+5. Colouring
+5.4 List colouring
+In this section, we take a look at a relatively recent generalization of the
+concepts of colouring studied so far. This generalization may seem a little
+far-fetched at ﬁrst glance, but it turns out to supply a fundamental link
+between the classical (vertex and edge) chromatic numbers of a graph
+and its other invariants.
+Suppose we are given a graph G = (V, E), and for each vertex of
+G a list of colours permitted at that particular vertex: when can we
+colour G (in the usual sense) so that each vertex receives a colour from
+its list? More formally, let (Sv)v 2V be a family of sets. We call a vertex
+colouring c of G with c(v) 2 Sv for all v
+2 V a colouring from the
+lists Sv. The graph G is called k-list-colourable, or k-choosable, if, for
+k-choosable
+every family (Sv)v 2V with |Sv| = k for all v, there is a vertex colouring
+of G from the lists Sv. The least integer k for which G is k-choosable is
+the list-chromatic number, or choice number ch(G) of G.
+choice
+number
+ch(G)
+List-colourings of edges are deﬁned analogously.
+The least inte-
+ger k such that G has an edge colouring from any family of lists of
+size k is the list-chromatic index ch0(G) of G; formally, we just set
+ch0(G) := ch(L(G)), where L(G) is the line graph of G.
+ch0(G)
+In principle, showing that a given graph is k-choosable is more diﬃ-
+cult than proving it to be k-colourable: the latter is just the special case
+of the former where all lists are equal to {1, . . . , k}. Thus,
+ch(G) > χ(G)
+and
+ch0(G) > χ0(G)
+for all graphs G.
+In spite of these inequalities, many of the known upper bounds for
+the chromatic number have turned out to be valid for the choice num-
+ber, too. Examples for this phenomenon include Brooks’s theorem and
+Proposition 5.2.2; in particular, graphs of large choice number still have
+subgraphs of large minimum degree. On the other hand, it is easy to con-
+struct graphs for which the two invariants are wide apart (Exercise 30).
+Taken together, these two facts indicate a little how far those general
+upper bounds on the chromatic number may be from the truth.
+The following theorem shows that, in terms of its relationship to
+other graph invariants, the choice number di↵ers fundamentally from the
+chromatic number. As mentioned before, there are 2-chromatic graphs of
+arbitrarily large minimum degree, e.g. the graphs Kn,n. The choice num-
+ber, however, will be forced up by large values of invariants like δ, " or :
+Theorem 5.4.1. (Alon 1993)
+There exists a function f: N!N such that, given any integer k, all graphs
+G with average degree d(G) > f(k) satisfy ch(G) > k.
+
+5.4 List colouring
+135
+The proof of Theorem 5.4.1 uses probabilistic methods as introduced in
+Chapter 11.
+Although statements of the form ch(G) 6 k are formally stronger
+than the corresponding statement of χ(G) 6 k, they can be easier to
+prove. A pretty example is the list version of the ﬁve colour theorem:
+every planar graph is 5-choosable. The proof of this does not use the
+ﬁve colour theorem (or even Euler’s formula, on which the proof of the
+ﬁve colour theorem is based). We thus reobtain the ﬁve colour theorem
+as a corollary, with a very di↵erent proof.
+Theorem 5.4.2. (Thomassen 1994)
+Every planar graph is 5-choosable.
+Proof. We shall prove the following assertion for all plane graphs G with
+(4.2.8)
+at least 3 vertices:
+Suppose that every inner face of G is bounded by a trian-
+gle and its outer face by a cycle C = v1 . . . vkv1. Suppose
+further that v1 has already been coloured with the col-
+our 1, and v2 has been coloured 2. Suppose ﬁnally that
+with every other vertex of C a list of at least 3 colours is
+associated, and with every vertex of G−C a list of at least
+5 colours. Then the colouring of v1 and v2 can be extended
+to a colouring of G from the given lists.
+(⇤)
+Let us check ﬁrst that (⇤) implies the assertion of the theorem.
+Let any plane graph be given, together with a list of 5 colours for each
+vertex. Add edges to this graph until it is a maximal plane graph G.
+By Proposition 4.2.8, G is a plane triangulation; let v1v2v3v1 be the
+boundary of its outer face. We now colour v1 and v2 (di↵erently) from
+their lists, and extend this colouring by (⇤) to a colouring of G from the
+lists given.
+v2 = w
+v1
+v
+G1
+G2
+1
+2
+Fig. 5.4.1. The induction step with a chord vw; here the case
+of w = v2
+
+136
+5. Colouring
+Let us now prove (⇤), by induction on |G|. If |G| = 3, then G = C
+and the assertion is trivial.
+Now let |G| > 4, and assume (⇤) for
+smaller graphs. If C has a chord vw, then vw lies on two unique cy-
+vw
+cles C1, C2 ✓C + vw with v1v2 2 C1 and v1v2 /2 C2. For i = 1, 2, let
+Gi denote the subgraph of G induced by the vertices lying on Ci or in
+its inner face (Fig. 5.4.1). Applying the induction hypothesis ﬁrst to G1
+and then – with the colours now assigned to v and w – to G2 yields the
+desired colouring of G.
+If C has no chord, let v1, u1, . . . , um, vk−1 be the neighbours of vk
+u1, . . . , um
+in their natural cyclic order around vk;1 by deﬁnition of C, all those
+neighbours ui lie in the inner face of C (Fig. 5.4.2). As the inner faces
+of C are bounded by triangles, P := v1u1 . . . umvk−1 is a path in G, and
+C0 := P [ (C −vk) a cycle.
+C0
+v1
+v2
+C0
+vk−1
+vk
+u1
+u2
+u3
+P
+Fig. 5.4.2. The induction step without a chord
+We now choose two di↵erent colours j, ` 6= 1 from the list of vk and
+delete these colours from the lists of all the vertices ui. Then every list of
+a vertex on C0 still has at least 3 colours, so by induction we may colour
+C0 and its interior, i.e. the graph G −vk. At least one of the two colours
+j, ` is not used for vk−1, and we may assign that colour to vk.
+⇤
+As is often the case with induction proofs, the key to the proof above
+lies in its delicately balanced strengthening of the assertion proved. Com-
+pared with ordinary colouring, the task of ﬁnding a suitable strengthen-
+ing is helped greatly by the possibility to give di↵erent vertices lists of
+di↵erent lengths, and thus to tailor the colouring problem more ﬁttingly
+to the structure of the graph. This suggests that maybe in other unsolved
+colouring problems too it might be of advantage to aim straight for their
+list version, i.e. to prove an assertion of the form ch(G) 6 k instead of
+the formally weaker χ(G) 6 k. Unfortunately, this approach fails for the
+four colour theorem: planar graphs are not in general 4-choosable.
+1 as in the ﬁrst proof of the ﬁve colour theorem
+
+5.4 List colouring
+137
+As mentioned before, the chromatic number of a graph and its choice
+number may di↵er a lot. Surprisingly, however, no such examples are
+known for edge colourings. Indeed it has been conjectured that none
+exist:
+List Colouring Conjecture. Every graph G satisﬁes ch0(G) = χ0(G).
+We shall prove the list colouring conjecture for bipartite graphs. As
+a tool we shall use orientations of graphs, deﬁned in Chapter 1.10. If D
+is a directed graph and v 2 V (D), we denote by N +(v) the set, and by
+N+(v)
+d+(v) the number, of vertices w such that D contains an edge directed
+d+(v)
+from v to w.
+To see how orientations come into play in the context of colouring,
+recall the greedy algorithm from Section 5.2. This colours the vertices
+of a graph G in turn, following a previously ﬁxed ordering (v1, . . . , vn),
+with the smallest available colour. This ordering deﬁnes an orientation
+of G if we orient every edge vivj ‘backwards’, that is, from vj to vi if
+i < j. Then to determine a colour for vj the algorithm only looks at
+previously coloured neighbours of vj, those to which vj sends a directed
+edge. In particular, if d+(v) < k for all vertices v, the algorithm will use
+at most k colours.
+If we rewrite the proof of this fact (rather awkwardly) as a formal
+induction on k, the essential property of the set U of vertices coloured 1
+is that every vertex in G −U sends an edge to U: this ensures that
+d+
+G−U(v) < d+
+G(v) for all v 2 G −U, so we can colour G −U with the
+remaining k −1 colours by the induction hypothesis.
+The following lemma generalizes these observations to list colour-
+ing, and to orientations D of G that do not necessarily come from a
+vertex enumeration but may contain some directed cycles. Let us call an
+independent set U ✓V (D) a kernel of D if, for every vertex v 2 D −U,
+kernel
+there is an edge in D directed from v to a vertex in U. Note that kernels
+of non-empty directed graphs are themselves non-empty.
+Lemma 5.4.3. Let H be a graph and (Sv)v 2V (H) a family of lists. If H
+has an orientation D with d+(v) < |Sv| for every v, and such that every
+induced subgraph of D has a kernel, then H can be coloured from the
+lists Sv.
+Proof.
+We apply induction on |H|.
+For |H| = 0 we take the empty
+colouring. For the induction step, let |H| > 0. Let ↵be a colour occur-
+↵
+ring in one of the lists Sv, and let D be an orientation of H as stated.
+The vertices v with ↵2 Sv span a non-empty subgraph D0 in D; by
+D0
+assumption, D0 has a kernel U 6= ;.
+U
+Let us colour the vertices in U with ↵, and remove ↵from the lists
+of all the other vertices of D0. Since each of those vertices sends an edge
+to U, the modiﬁed lists S0
+v for v 2 D −U again satisfy the condition
+
+138
+5. Colouring
+d+(v) < |S0
+v| in D −U. Since D −U is an orientation of H −U, we
+can thus colour H −U from those lists by the induction hypothesis. As
+none of these lists contains ↵, this extends our colouring U !{↵} to the
+desired list colouring of H.
+⇤
+In our proof of the list colouring conjecture for bipartite graphs we
+shall apply Lemma 5.4.3 only to colourings from lists of uniform length k.
+However, note that keeping list lengths variable is essential for the proof
+of the lemma itself: its simple induction could not be performed with
+uniform list lengths.
+Theorem 5.4.4. (Galvin 1995)
+Every bipartite graph G satisﬁes ch0(G) = χ0(G).
+Proof. Let G =: (X [ Y, E), where {X, Y } is a vertex bipartition of G.
+(2.1.4)
+We say that two edges of G meet in X if they share an end in X, and cor-
+X, Y, E
+respondingly for Y . Let χ0(G) =: k, and let c be a k-edge-colouring of G.
+k, c
+Clearly, ch0(G) > k; we prove that ch0(G) 6 k. Our plan is to use
+Lemma 5.4.3 to show that the line graph H of G is k-choosable. To apply
+H
+the lemma, it suﬃces to ﬁnd an orientation D of H with d+(e) < k for
+every vertex e of H, and such that every induced subgraph of D has a
+kernel. To deﬁne D, consider adjacent e, e0 2 E, say with c(e) < c(e0).
+D
+If e and e0 meet in X, we orient the edge ee0 2 H from e0 towards e; if e
+and e0 meet in Y , we orient it from e to e0 (Fig 5.4.3).
+1
+1
+2
+2
+3
+X
+Y
+G
+Fig. 5.4.3. Orienting the line graph of G
+Let us compute d+(e) for given e 2 E = V (D). If c(e) = i, say,
+then every e0 2 N +(e) meeting e in X has its colour in {1, . . . , i −1},
+and every e0 2 N +(e) meeting e in Y has its colour in {i + 1, . . . , k}.
+As any two neighbours e0 of e meeting e either both in X or both in
+Y are themselves adjacent and hence coloured di↵erently, this implies
+d+(e) < k as desired.
+It remains to show that every induced subgraph D0 of D has a kernel.
+D0
+This, however, is immediate by the stable marriage theorem (2.1.4) for G,
+if we interpret the directions in D as expressing preference. Indeed, given
+a vertex v 2 X [Y and edges e, e0 2 V (D0) at v, write e <v e0 if the edge
+
+139
+ee0 of H is directed from e to e0 in D. Then any stable matching in the
+graph (X [ Y, V (D0)) for this set of preferences is a kernel in D0.
+⇤
+By Proposition 5.3.1, we now know the exact list-chromatic index
+(5.3.1)
+of bipartite graphs:
+Corollary 5.4.5. Every bipartite graph G satisﬁes ch0(G) = ∆(G).
+⇤
+5.5 Perfect graphs
+As discussed in Section 5.2, a high chromatic number may occur as a
+purely global phenomenon: even when a graph has large girth, and thus
+locally looks like a tree, its chromatic number may be arbitrarily high.
+Since such ‘global dependence’ is obviously diﬃcult to deal with, one may
+become interested in graphs where this phenomenon does not occur, i.e.
+whose chromatic number is high only when there is a local reason for it.
+Before we make this precise, let us deﬁne two new invariants for
+a graph G.
+The greatest integer r such that Kr ✓G is the clique
+number !(G) of G. The greatest size of a set of independent vertices
+!(G)
+in G is the independence number ↵(G) of G. Clearly, ↵(G) = !(G) and
+↵(G)
+!(G) = ↵(G).
+A graph is called perfect if every induced subgraph H ✓G has
+perfect
+chromatic number χ(H) = !(H), i.e. if the trivial lower bound of !(H)
+colours always suﬃces to colour the vertices of H. Thus, while proving
+an assertion of the form χ(G) > k may in general be diﬃcult, even
+in principle, for a given graph G, it can always be done for a perfect
+graph simply by exhibiting some Kk+1 subgraph as a ‘certiﬁcate’ for
+non-colourability with k colours.
+At ﬁrst glance, the structure of the class of perfect graphs appears
+somewhat contrived: although it is closed under induced subgraphs (if
+only by explicit deﬁnition), it is not closed under taking general sub-
+graphs or supergraphs, let alone minors (examples?).
+However, per-
+fection is an important notion in graph theory: the fact that several
+fundamental classes of graphs are perfect (as if by ﬂuke) may serve as a
+superﬁcial indication of this.2
+What graphs, then, are perfect? Bipartite graphs are, for instance.
+Less trivially, the complements of bipartite graphs are perfect, too –
+a fact equivalent to K¨onig’s duality theorem 2.1.1 (Exercise 41). The
+2 The class of perfect graphs has duality properties with deep connections to
+optimization and complexity theory, which are far from understood. Theorem 5.5.6
+shows the tip of an iceberg here; for more, the reader is referred to Lov´asz’s survey
+cited in the notes.
+5.5 Perfect graphs

@@ -1,0 +1,869 @@
+{
+  "book": "Graph Theory",
+  "author": "Reinhard Diestel",
+  "chapters": [
+    {
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 1
+    },
+    {
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 37
+    },
+    {
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 63
+    },
+    {
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 93
+    },
+    {
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 123
+    },
+    {
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 155
+    },
+    {
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 179
+    },
+    {
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 227
+    },
+    {
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 303
+    },
+    {
+      "chapter_no": "10",
+      "chapter_title": "Hamilton Cycles",
+      "printed_page": 323
+    },
+    {
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 339
+    },
+    {
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 363
+    }
+  ],
+  "groups": [],
+  "sections": [
+    {
+      "number": "1.1",
+      "title": "Graphs",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 2,
+      "role": "section"
+    },
+    {
+      "number": "1.2",
+      "title": "The degree of a vertex",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 5,
+      "role": "section"
+    },
+    {
+      "number": "1.3",
+      "title": "Paths and cycles",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 6,
+      "role": "section"
+    },
+    {
+      "number": "1.4",
+      "title": "Connectivity",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 10,
+      "role": "section"
+    },
+    {
+      "number": "1.5",
+      "title": "Trees and forests",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 13,
+      "role": "section"
+    },
+    {
+      "number": "1.6",
+      "title": "Bipartite graphs",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 17,
+      "role": "section"
+    },
+    {
+      "number": "1.7",
+      "title": "Contraction and minors",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 18,
+      "role": "section"
+    },
+    {
+      "number": "1.8",
+      "title": "Euler tours",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 21,
+      "role": "section"
+    },
+    {
+      "number": "1.9",
+      "title": "Some linear algebra",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 23,
+      "role": "section"
+    },
+    {
+      "number": "1.10",
+      "title": "Other notions of graphs",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 27,
+      "role": "section"
+    },
+    {
+      "number": "1.ex",
+      "title": "Exercises",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 29,
+      "role": "exercises"
+    },
+    {
+      "number": "1.notes",
+      "title": "Notes",
+      "chapter_no": "1",
+      "chapter_title": "The Basics",
+      "printed_page": 34,
+      "role": "drop"
+    },
+    {
+      "number": "2.1",
+      "title": "Matching in bipartite graphs",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 38,
+      "role": "section"
+    },
+    {
+      "number": "2.2",
+      "title": "Matching in general graphs",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 43,
+      "role": "section"
+    },
+    {
+      "number": "2.3",
+      "title": "The Erdős-Pósa theorem",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 47,
+      "role": "section"
+    },
+    {
+      "number": "2.4",
+      "title": "Tree packing and arboricity",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 50,
+      "role": "section"
+    },
+    {
+      "number": "2.5",
+      "title": "Path covers",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 54,
+      "role": "section"
+    },
+    {
+      "number": "2.ex",
+      "title": "Exercises",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 56,
+      "role": "exercises"
+    },
+    {
+      "number": "2.notes",
+      "title": "Notes",
+      "chapter_no": "2",
+      "chapter_title": "Matching, Covering and Packing",
+      "printed_page": 59,
+      "role": "drop"
+    },
+    {
+      "number": "3.1",
+      "title": "2-Connected graphs and subgraphs",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 63,
+      "role": "section"
+    },
+    {
+      "number": "3.2",
+      "title": "The structure of 3-connected graphs",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 66,
+      "role": "section"
+    },
+    {
+      "number": "3.3",
+      "title": "Menger's theorem",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 71,
+      "role": "section"
+    },
+    {
+      "number": "3.4",
+      "title": "A-paths and Mader's theorem",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 76,
+      "role": "section"
+    },
+    {
+      "number": "3.5",
+      "title": "Linking pairs of vertices",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 79,
+      "role": "section"
+    },
+    {
+      "number": "3.ex",
+      "title": "Exercises",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 87,
+      "role": "exercises"
+    },
+    {
+      "number": "3.notes",
+      "title": "Notes",
+      "chapter_no": "3",
+      "chapter_title": "Connectivity",
+      "printed_page": 90,
+      "role": "drop"
+    },
+    {
+      "number": "4.1",
+      "title": "Topological prerequisites",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 94,
+      "role": "section"
+    },
+    {
+      "number": "4.2",
+      "title": "Plane graphs",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 96,
+      "role": "section"
+    },
+    {
+      "number": "4.3",
+      "title": "Drawings",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 102,
+      "role": "section"
+    },
+    {
+      "number": "4.4",
+      "title": "Planar graphs: Kuratowski's theorem",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 106,
+      "role": "section"
+    },
+    {
+      "number": "4.5",
+      "title": "Algebraic planarity criteria",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 111,
+      "role": "section"
+    },
+    {
+      "number": "4.6",
+      "title": "Plane duality",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 114,
+      "role": "section"
+    },
+    {
+      "number": "4.ex",
+      "title": "Exercises",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 117,
+      "role": "exercises"
+    },
+    {
+      "number": "4.notes",
+      "title": "Notes",
+      "chapter_no": "4",
+      "chapter_title": "Planar Graphs",
+      "printed_page": 121,
+      "role": "drop"
+    },
+    {
+      "number": "5.1",
+      "title": "Colouring maps and planar graphs",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 124,
+      "role": "section"
+    },
+    {
+      "number": "5.2",
+      "title": "Colouring vertices",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 126,
+      "role": "section"
+    },
+    {
+      "number": "5.3",
+      "title": "Colouring edges",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 131,
+      "role": "section"
+    },
+    {
+      "number": "5.4",
+      "title": "List colouring",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 134,
+      "role": "section"
+    },
+    {
+      "number": "5.5",
+      "title": "Perfect graphs",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 139,
+      "role": "section"
+    },
+    {
+      "number": "5.6",
+      "title": "χ-bounded graph properties",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 146,
+      "role": "section"
+    },
+    {
+      "number": "5.ex",
+      "title": "Exercises",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 148,
+      "role": "exercises"
+    },
+    {
+      "number": "5.notes",
+      "title": "Notes",
+      "chapter_no": "5",
+      "chapter_title": "Colouring",
+      "printed_page": 152,
+      "role": "drop"
+    },
+    {
+      "number": "6.1",
+      "title": "Circulations",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 156,
+      "role": "section"
+    },
+    {
+      "number": "6.2",
+      "title": "Flows in networks",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 158,
+      "role": "section"
+    },
+    {
+      "number": "6.3",
+      "title": "Group-valued flows",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 161,
+      "role": "section"
+    },
+    {
+      "number": "6.4",
+      "title": "k-Flows for small k",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 165,
+      "role": "section"
+    },
+    {
+      "number": "6.5",
+      "title": "Flow-colouring duality",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 167,
+      "role": "section"
+    },
+    {
+      "number": "6.6",
+      "title": "Tutte's flow conjectures",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 171,
+      "role": "section"
+    },
+    {
+      "number": "6.ex",
+      "title": "Exercises",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 174,
+      "role": "exercises"
+    },
+    {
+      "number": "6.notes",
+      "title": "Notes",
+      "chapter_no": "6",
+      "chapter_title": "Flows",
+      "printed_page": 176,
+      "role": "drop"
+    },
+    {
+      "number": "7.1",
+      "title": "Subgraphs",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 180,
+      "role": "section"
+    },
+    {
+      "number": "7.2",
+      "title": "Minors",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 185,
+      "role": "section"
+    },
+    {
+      "number": "7.3",
+      "title": "Hadwiger's conjecture",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 189,
+      "role": "section"
+    },
+    {
+      "number": "7.4",
+      "title": "Szemerédi's regularity lemma",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 192,
+      "role": "section"
+    },
+    {
+      "number": "7.5",
+      "title": "Applying the regularity lemma",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 200,
+      "role": "section"
+    },
+    {
+      "number": "7.6",
+      "title": "Two regularity tools",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 206,
+      "role": "section"
+    },
+    {
+      "number": "7.7",
+      "title": "Szemerédi's theorem",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 216,
+      "role": "section"
+    },
+    {
+      "number": "7.ex",
+      "title": "Exercises",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 219,
+      "role": "exercises"
+    },
+    {
+      "number": "7.notes",
+      "title": "Notes",
+      "chapter_no": "7",
+      "chapter_title": "Extremal Graph Theory",
+      "printed_page": 223,
+      "role": "drop"
+    },
+    {
+      "number": "8.1",
+      "title": "Basic notions, facts and techniques",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 228,
+      "role": "section"
+    },
+    {
+      "number": "8.2",
+      "title": "Paths, trees, and ends",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 237,
+      "role": "section"
+    },
+    {
+      "number": "8.3",
+      "title": "Homogeneous and universal graphs",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 246,
+      "role": "section"
+    },
+    {
+      "number": "8.4",
+      "title": "Connectivity and matching",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 249,
+      "role": "section"
+    },
+    {
+      "number": "8.5",
+      "title": "Recursive structures",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 260,
+      "role": "section"
+    },
+    {
+      "number": "8.6",
+      "title": "Graphs with ends: the complete picture",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 263,
+      "role": "section"
+    },
+    {
+      "number": "8.7",
+      "title": "The topological cycle space",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 272,
+      "role": "section"
+    },
+    {
+      "number": "8.8",
+      "title": "Infinite graphs as limits of finite ones",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 277,
+      "role": "section"
+    },
+    {
+      "number": "8.ex",
+      "title": "Exercises",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 280,
+      "role": "exercises"
+    },
+    {
+      "number": "8.notes",
+      "title": "Notes",
+      "chapter_no": "8",
+      "chapter_title": "Infinite Graphs",
+      "printed_page": 293,
+      "role": "drop"
+    },
+    {
+      "number": "9.1",
+      "title": "Ramsey's original theorems",
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 304,
+      "role": "section"
+    },
+    {
+      "number": "9.2",
+      "title": "Ramsey numbers",
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 307,
+      "role": "section"
+    },
+    {
+      "number": "9.3",
+      "title": "Induced Ramsey theorems",
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 310,
+      "role": "section"
+    },
+    {
+      "number": "9.4",
+      "title": "Ramsey properties and connectivity",
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 316,
+      "role": "section"
+    },
+    {
+      "number": "9.ex",
+      "title": "Exercises",
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 319,
+      "role": "exercises"
+    },
+    {
+      "number": "9.notes",
+      "title": "Notes",
+      "chapter_no": "9",
+      "chapter_title": "Ramsey Theory for Graphs",
+      "printed_page": 321,
+      "role": "drop"
+    },
+    {
+      "number": "10.1",
+      "title": "Sufficient conditions",
+      "chapter_no": "10",
+      "chapter_title": "Hamilton Cycles",
+      "printed_page": 323,
+      "role": "section"
+    },
+    {
+      "number": "10.2",
+      "title": "Hamilton cycles and degree sequences",
+      "chapter_no": "10",
+      "chapter_title": "Hamilton Cycles",
+      "printed_page": 327,
+      "role": "section"
+    },
+    {
+      "number": "10.3",
+      "title": "Hamilton cycles in the square of a graph",
+      "chapter_no": "10",
+      "chapter_title": "Hamilton Cycles",
+      "printed_page": 330,
+      "role": "section"
+    },
+    {
+      "number": "10.ex",
+      "title": "Exercises",
+      "chapter_no": "10",
+      "chapter_title": "Hamilton Cycles",
+      "printed_page": 335,
+      "role": "exercises"
+    },
+    {
+      "number": "10.notes",
+      "title": "Notes",
+      "chapter_no": "10",
+      "chapter_title": "Hamilton Cycles",
+      "printed_page": 336,
+      "role": "drop"
+    },
+    {
+      "number": "11.1",
+      "title": "The notion of a random graph",
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 340,
+      "role": "section"
+    },
+    {
+      "number": "11.2",
+      "title": "The probabilistic method",
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 345,
+      "role": "section"
+    },
+    {
+      "number": "11.3",
+      "title": "Properties of almost all graphs",
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 348,
+      "role": "section"
+    },
+    {
+      "number": "11.4",
+      "title": "Threshold functions and second moments",
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 351,
+      "role": "section"
+    },
+    {
+      "number": "11.ex",
+      "title": "Exercises",
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 358,
+      "role": "exercises"
+    },
+    {
+      "number": "11.notes",
+      "title": "Notes",
+      "chapter_no": "11",
+      "chapter_title": "Random Graphs",
+      "printed_page": 360,
+      "role": "drop"
+    },
+    {
+      "number": "12.1",
+      "title": "Well-quasi-ordering",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 364,
+      "role": "section"
+    },
+    {
+      "number": "12.2",
+      "title": "The graph minor theorem for trees",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 365,
+      "role": "section"
+    },
+    {
+      "number": "12.3",
+      "title": "Tree-decompositions",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 367,
+      "role": "section"
+    },
+    {
+      "number": "12.4",
+      "title": "Tree-width",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 371,
+      "role": "section"
+    },
+    {
+      "number": "12.5",
+      "title": "Tangles",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 376,
+      "role": "section"
+    },
+    {
+      "number": "12.6",
+      "title": "Tree-decompositions and forbidden minors",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 391,
+      "role": "section"
+    },
+    {
+      "number": "12.7",
+      "title": "The graph minor theorem",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 396,
+      "role": "section"
+    },
+    {
+      "number": "12.ex",
+      "title": "Exercises",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 405,
+      "role": "exercises"
+    },
+    {
+      "number": "12.notes",
+      "title": "Notes",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 412,
+      "role": "drop"
+    },
+    {
+      "number": "12.appendix-a",
+      "title": "Appendix A: Infinite sets",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 417,
+      "role": "appendix"
+    },
+    {
+      "number": "12.appendix-b",
+      "title": "Appendix B: Surfaces",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 423,
+      "role": "appendix"
+    },
+    {
+      "number": "12.hints",
+      "title": "Hints for all the exercises",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 431,
+      "role": "drop"
+    },
+    {
+      "number": "12.index",
+      "title": "Index",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 433,
+      "role": "drop"
+    },
+    {
+      "number": "12.symindex",
+      "title": "Symbol index",
+      "chapter_no": "12",
+      "chapter_title": "Graph Minors",
+      "printed_page": 453,
+      "role": "drop"
+    }
+  ]
+}

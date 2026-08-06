@@ -1,0 +1,230 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 2. Matching, Covering and Packing
+현재 소단원: 2.ex Exercises
+직전 소단원: 「2.5 Path covers」
+[연습문제]
+56
+2. Matching, Covering and Packing
+minimality of ter(P). Hence ter(P00) ✓{v3, . . . , vm}. But now P00 and
+the trivial path {v1} together form a path cover of G that contradicts
+the minimality of ter(P).
+⇤
+As a corollary to Theorem 2.5.1 we obtain a classical result from
+the theory of partial orders. Recall that a subset of a partially ordered
+set (P, 6) is a chain in P if its elements are pairwise comparable; it is
+chain
+an antichain if they are pairwise incomparable.
+antichain
+Corollary 2.5.2. (Dilworth 1950)
+In every ﬁnite partially ordered set (P, 6), the minimum number of
+chains with union P is equal to the maximum cardinality of an antichain
+in P.
+Proof. If A is an antichain in P of maximum cardinality, then clearly
+P cannot be covered by fewer than |A| chains. The fact that |A| chains
+will suﬃce follows from Theorem 2.5.1 applied to the directed graph on
+P with the edge set { (x, y) | x < y }.
+⇤
+Exercises
+1.
+Let M be a matching in a bipartite graph G. Show that if M is sub-
+optimal, i.e. contains fewer edges than some other matching in G, then
+G contains an augmenting path with respect to M.
+Does this fact
+generalize to matchings in non-bipartite graphs?
+2.
+(continued)
+Describe an algorithm that ﬁnds, as eﬃciently as possible, a matching
+of maximum cardinality in any bipartite graph.
+3.
+Show that if there exist injective functions A ! B and B ! A between
+two inﬁnite sets A and B then there exists a bijection A ! B.
+4.
+Moving alternately, two players jointly construct a path in some ﬁxed
+graph G. If v1 . . . vn is the path constructed so far, the player to move
+next has to ﬁnd a vertex vn+1 such that v1 . . . vn+1 is again a path.
+Whichever player cannot move loses. For which graphs G does the ﬁrst
+player have a winning strategy, for which the second?
+5.−Derive the marriage theorem from K¨onig’s theorem.
+6.
+Let G and H be deﬁned as for the third proof of Hall’s theorem. Show
+that dH(b) 6 1 for every b 2 B, and deduce the marriage theorem.
+7.
+Does our ﬁrst proof of the marriage theorem use the assumption that
+the graph is ﬁnite? If so, can it be adapted so that it works for inﬁnite
+graphs too?
+
+Exercises
+57
+8.
+Let k be an integer. Show that any two partitions of a ﬁnite set into
+k-sets admit a common choice of representatives.
+9.
+Let A be a ﬁnite set with subsets A1, . . . , An, and let d1, . . . , dn 2 N.
+Show that there are disjoint subsets Dk ✓Ak, with |Dk| = dk for all
+k 6 n, if and only if
+...
+[
+i2I
+Ai
+... >
+X
+i2I
+di
+for all I ✓{1, . . . , n}.
+10.+ Prove that in an n-set X there are never more than $
+n
+bn/2c
+%
+subsets
+such that none of these contains another.
+(Hint. Construct $
+n
+bn/2c
+%
+chains covering the power set lattice of X.)
+11.
+Let G be a bipartite graph with bipartition {A, B}.
+Assume that
+δ(G) > 1, and that d(a) > d(b) for every edge ab with a 2 A. Show
+that G contains a matching of A.
+12.
+Find a bipartite graph with a set of preferences such that no matching
+of maximum size is stable and no stable matching has maximum size.
+Find a non-bipartite graph with a set of preferences that has no stable
+matching.
+13.−Consider the algorithm described in the proof of the stable marriage
+theorem.
+Observe that once a vertex of B is matched, she remains
+matched and gets happier with every change of her matching edge.
+On the other hand, show that the sequence of matching edges incident
+with a given vertex of A makes this vertex unhappier with every change
+(disregarding the interim periods when he is unmatched).
+14.
+Show that all stable matchings of a given graph cover the same vertices.
+(In particular, they have the same size.)
+15.+ Show that the algorithm in our proof of Theorem 2.1.4 produces a
+matching M such that no other stable matching makes any vertex in A
+happier or any vertex in B unhappier than he or she is in M. Consider
+only matched vertices for happiness.
+16.+ Show that the following ‘obvious’ algorithm need not produce a stable
+matching in a bipartite graph. Start with any matching. If the current
+matching is not maximal, add an edge. If it is maximal but not stable,
+insert an edge that creates instability, deleting any current matching
+edges at its ends.
+17.
+Show that the union of two partial orderings 61, 62 of a ﬁnite set P
+has a ‘dominating antichain’, a set A ✓P such that no two elements
+of A are related in either 61 or 62 and for every x 2 P there exists an
+a 2 A such that x 61 a or x 62 a. Deduce Theorem 2.1.4.
+18.
+Find a set S for Theorem 2.2.3 when G is a forest.
+
+58
+2. Matching, Covering and Packing
+19.
+A graph G is called (vertex-) transitive if, for any two vertices v, w 2 G,
+there is an automorphism of G mapping v to w. Using the observa-
+tions following the proof of Theorem 2.2.3, show that every transitive
+connected graph of even order contains a 1-factor.
+20.+ Show that a graph G contains k independent edges if and only if
+q(G −S) 6 |S| + |G| −2k for all sets S ✓V (G).
+21.−Find a cubic graph without a 1-factor.
+22.+ Derive the marriage theorem from Tutte’s theorem.
+23.−Disprove the analogue of K¨onig’s theorem (2.1.1) for non-bipartite
+graphs, but show that H = {K2} has the Erd˝os-P´osa property.
+24.
+Let T be a tree and T a set of subtrees of T. Show that the maximum
+number of disjoint trees in T equals the least cardinality of a set X of
+vertices such that T −X contains no tree from T .
+25.
+For cubic graphs, Lemma 2.3.1 is considerably stronger than the Erd˝os-
+P´osa theorem. Extend the lemma to arbitrary multigraphs of minimum
+degree > 3, by ﬁnding a function g: N!N such that every multigraph of
+minimum degree > 3 and order at least g(k) contains k disjoint cycles,
+for all k 2 N. Alternatively, show that no such function g exists.
+26.
+Given a graph G, let ↵(G) denote the largest size of a set of independent
+vertices in G. Prove that the vertices of G can be covered by at most
+↵(G) disjoint subgraphs each isomorphic to a cycle or a K2 or K1.
+27.
+Show that if G has two edge-disjoint spanning trees, it has a connected
+spanning subgraph all whose degrees are even.
+28.
+In the proofs of Theorems 2.4.1, 2.4.3 and 2.4.4, there is exactly one
+place where we use that we are working with multigraphs. Where is it?
+29.
+Find the error in the following short ‘proof’ of Theorem 2.4.1. Call a
+partition non-trivial if it has at least two classes and at least one of the
+classes has more than one element. We show by induction on |V | + |E|
+that G = (V, E) has k edge-disjoint spanning trees if every non-trivial
+partition of V into r sets (say) has at least k(r −1) cross-edges. The
+induction starts trivially with G = K1 if we allow k copies of K1 as a
+family of k edge-disjoint spanning trees of K1. We now consider the
+induction step. If every non-trivial partition of V into r sets (say) has
+more than k(r −1) cross-edges, we delete any edge of G and are done
+by induction. So V has a non-trivial partition {V1, . . . , Vr} with exactly
+k(r −1) cross-edges. Assume that |V1| > 2. If G0 := G[V1] has k disjoint
+spanning trees, we may combine these with k disjoint spanning trees
+that exist in G/V1 by induction.
+We may thus assume that G0 has
+no k disjoint spanning trees. Then by induction it has a non-trivial
+vertex partition {V 0
+1, . . . , V 0
+s} with fewer than k(s −1) cross-edges.
+Then {V 0
+1, . . . , V 0
+s, V2, . . . , Vr} is a non-trivial vertex partition of G into
+r + s −1 sets with fewer than k(r −1) + k(s −1) = k((r + s −1) −1)
+cross-edges, a contradiction.
+
+59
+30.
+A graph G is called balanced if "(H) 6 "(G) for every subgraph H ✓G.
+(i) Find a few natural classes of balanced graphs.
+(ii) Show that the arboricity of a balanced graph is bounded above
+by its average degree. Is it even bounded by "? Or by " + 1?
+(iii) Characterize, in terms of the balanced graphs or otherwise, the
+graphs G such that "(H) > "(G) for every induced subgraph
+H ✓G.
+31.
+Rephrase K¨onig’s and Dilworth’s theorems as pure existence statements
+without any inequalities.
+32.−Prove the undirected version of the theorem of Gallai & Milgram (with-
+out using the directed version).
+33.
+Derive the marriage theorem from the theorem of Gallai & Milgram.
+34.−Show that a partially ordered set of at least rs + 1 elements contains
+either a chain of size r + 1 or an antichain of size s + 1.
+35.
+Prove the following dual version of Dilworth’s theorem: in every ﬁnite
+partially ordered set (P, 6), the minimum number of antichains with
+union P is equal to the maximum cardinality of a chain in P.
+36.
+Derive K¨onig’s theorem from Dilworth’s theorem.
+37.
+Find a partially ordered set that has no inﬁnite antichain but is not a
+union of ﬁnitely many chains.
+Notes
+There is a very readable and comprehensive monograph about matching in
+ﬁnite graphs: L. Lov´asz & M.D. Plummer, Matching Theory, Annals of Dis-
+crete Math. 29, North Holland 1986. Two other very comprehensive sources
+are A. Schrijver, Combinatorial optimization, Springer 2003, and A. Frank,
+Connections in combinatorial optimization, Oxford University Press 2011. All
+the references for the results in this chapter can be found in these books.
+All the main theorems in this chapter are of a particularly attractive
+type, which they share with several other fundamental theorems in graph the-
+ory. They each assert that in some obvious inequality we can attain equality,
+or that some obvious potential obstruction to some desirable property must
+necessarily occur in all graphs that fail to have this property.
+Phrased in
+yet another way, these theorems provide easily checked ‘certiﬁcates’ for the
+absence of some desirable property, which comes with its own obvious certiﬁ-
+cate when it does hold. The theorems of K¨onig, Hall, Tutte, Dilworth, and
+Nash-Williams proved in this chapter can all be viewed in this way.
+As we shall see in Chapter 3, K¨onig’s Theorem of 1931 is no more than
+the bipartite case of a more general theorem that is also of this type, which is
+generally attributed to Menger (1927). However, Menger missed the bipartite
+case in his original proof. When Menger showed K¨onig his theorem and proof
+during a visit to Budapest in 1930, they seem to have noticed this gap. K¨onig
+Notes

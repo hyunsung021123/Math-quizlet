@@ -1,0 +1,370 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 6. Flows
+현재 소단원: 6.5 Flow-colouring duality
+직전 소단원: 「6.4 k-Flows for small k」
+[본문]
+167
+(ii) Let G = (V, E) be a cubic graph. We assume ﬁrst that G has a
+Z2
+2 -ﬂow f, and deﬁne an edge colouring E !Z2
+2 r{0}. As a = −a for all
+a 2 Z2
+2, we have f(
+!e) = f(
+ e) for every
+!e 2
+!
+E; let us colour the edge
+e with this colour f(
+!e). Now if two edges with a common end v had
+the same colour, then these two values of f would sum to zero; by (F2),
+f would then assign zero to the third edge at v. As this contradicts the
+deﬁnition of f, our edge colouring is correct.
+Conversely, since the three non-zero elements of Z2
+2 sum to zero,
+every 3-edge-colouring c: E !Z2
+2 r{0} deﬁnes a Z2
+2 -ﬂow on G by letting
+f(
+!e) = f(
+ e) = c(e) for all
+!e 2
+!
+E.
+⇤
+Corollary 6.4.6. Every cubic 3-edge-colourable graph is bridgeless.
+⇤
+6.5 Flow-colouring duality
+In this section we shall see a surprising connection between ﬂows and
+colouring: every k-colouring of a plane multigraph gives rise to a k-ﬂow
+on its dual, and vice versa. In this way, the investigation of k-ﬂows on
+arbitrary graphs, not necessarily planar, appears as a natural general-
+ization of the familiar map colouring problems in the plane.
+Let G = (V, E) and G⇤= (V ⇤, E⇤) be dual plane multigraphs. (This
+G = (V, E)
+G⇤= (V ⇤, E⇤)
+implies that G and G⇤are connected; see Chapter 4.6.) For simplicity,
+let us assume that G and G⇤have neither bridges nor loops and are
+non-trivial. For edge sets F ✓E, let us write
+F ⇤:= { e⇤2 E⇤| e 2 F } .
+F ⇤
+Conversely, if a subset of E⇤is given, we shall usually write it immedi-
+ately in the form F ⇤, and thus let F ✓E be deﬁned implicitly via the
+bijection e 7! e⇤.
+Suppose we are given a circulation g on G⇤: how can we employ the
+duality between G and G⇤to derive from g some information about G?
+The most general property of all circulations is Proposition 6.1.1, which
+says that g(X, X) = 0 for all X ✓V ⇤. By Proposition 4.6.1, the bonds
+E⇤(X, X) in G⇤correspond precisely to the cycles in G. Thus if we take
+the composition f of the maps e 7! e⇤and g, and sum its values over
+the edges of a cycle in G, then this sum should again be zero. Our ﬁrst
+aim is to formalize and prove this observation.
+Of course, there is still a technical hitch: since g takes its arguments
+not in E⇤but in
+−!
+E⇤, we cannot simply deﬁne f as above: we ﬁrst have
+to reﬁne the bijection e 7! e⇤into one from
+!
+E to
+−!
+E⇤, i.e. assign to every
+!e 2
+!
+E canonically one of the two orientations of e⇤. This will be the
+purpose of our ﬁrst lemma. After that, we shall show that f does indeed
+sum to zero along any cycle in G.
+6.5 Flow-colouring duality
+
+168
+6. Flows
+If C = v0 . . . v`−1v0 is a cycle with edges ei = vivi+1 (and v` := v0),
+we shall call
+!
+C := { (ei, vi, vi+1) | i < ` }
+!
+C
+a cycle with orientation. Note that this deﬁnition of
+!
+C depends on the
+cycle with
+orientation
+vertex enumeration chosen to denote C: every cycle has two orienta-
+tions. Conversely, of course, C can be reconstructed from the set
+!
+C. In
+practice, we shall therefore speak about C freely even when, formally,
+only
+!
+C has been deﬁned.
+Lemma 6.5.1. There exists a bijection ⇤:
+!e 7!
+!e ⇤from
+!
+E to
+−!
+E⇤with
+the following properties:
+(i) The underlying edge of
+!e ⇤is always e⇤, i.e.
+!e ⇤is one of the two
+orientations
+−!
+e⇤,
+ −
+e⇤of e⇤;
+(ii) If C ✓G is a cycle, F := E(C), and if X ✓V ⇤is such that
+F ⇤= E⇤(X, X), then there exists an orientation
+!
+C of C with
+{
+!e ⇤|
+!e 2
+!
+C } =
+−!
+E⇤(X, X).
+The proof of Lemma 6.5.1 is not entirely trivial: it is based on the
+so-called orientability of the plane, and we cannot give it here. Still,
+the assertion of the lemma is intuitively plausible.
+Indeed if we de-
+ﬁne for e = vw and e⇤= xy the assignment (e, v, w) 7! (e, v, w)⇤2
+{(e⇤, x, y), (e⇤, y, x)} simply by turning e and its ends clockwise onto e⇤
+(Fig. 6.5.1), then the resulting map
+!e 7!
+!e ⇤satisﬁes the two assertions
+of the lemma.
+X
+X
+!
+C
+Fig. 6.5.1. Oriented cycle-cut duality
+Consider a ﬁxed bijection ⇤:
+!e 7!
+!e ⇤as provided by Lemma 6.5.1.
+!e ⇤
+Given an abelian group H, let f:
+!
+E ! H and g:
+−!
+E⇤! H be two maps
+f, g
+such that
+f(
+!e) = g(
+!e ⇤)
+
+6.5 Flow-colouring duality
+169
+for all
+!e 2
+!
+E. For
+!
+F ✓
+!
+E, we set
+f(
+!
+F ) :=
+X
+~e 2 ~F
+f(
+!e) .
+f(
+!
+C ) etc.
+Lemma 6.5.2.
+(i) The map g satisﬁes (F1) if and only if f does.
+(ii) The map g is a circulation on G⇤if and only if f satisﬁes (F1)
+and f(
+!
+C) = 0 for every cycle
+!
+C with orientation.
+Proof. Assertion (i) follows from Lemma 6.5.1 (i) and the fact that
+!e 7!
+(1.9.3)
+(4.6.1)
+(6.1.1)
+!e ⇤is bijective.
+For the forward implication of (ii), let us assume that g is a circu-
+lation on G⇤, and consider a cycle C ✓G with some given orientation.
+Let F := E(C). By Proposition 4.6.1, F ⇤=: E⇤(X, X) is a bond of G⇤.
+By deﬁnition of f and g, Lemma 6.5.1 (ii) and Proposition 6.1.1 give
+f(
+!
+C) =
+X
+~e 2 ~C
+f(
+!e) =
+X
+~d 2
+−!
+E⇤(X,X)
+g(
+!d) = g(X, X) = 0
+for one of the two orientations
+!
+C of C. Then, by f(
+ 
+C) = −f(
+!
+C), also
+the corresponding value for our given orientation of C must be zero.
+For the backward implication it suﬃces by (i) to show that g sat-
+isﬁes (F2). Let v 2 V ⇤be given. By Lemma 1.9.3, the cut E⇤(v) is a
+disjoint union of bonds D⇤= E⇤(X, X); let us name these so that always
+v 2 X. Since every edge in these bonds is incident with v, we then have
+−!
+E⇤(X, X) ✓
+−!
+E⇤(v) also for the oriented edges.
+By Proposition 4.6.1, each of the sets D ✓E is the edge set of a
+cycle C in G, which by Lemma 6.5.1 (ii) has an orientation
+!
+C such that
+{
+!e ⇤|
+!e 2
+!
+C } =
+−!
+E⇤(X, X) .
+Hence g(X, X) = f(
+!
+C) = 0 by deﬁnition of f and g, giving
+g(v, V ⇤) =
+X
+X
+g(X, X) = 0
+as desired.
+⇤
+With the help of Lemma 6.5.2, we can now prove our colouring-ﬂow
+duality theorem for plane multigraphs. If P = v0 . . . v` is a path with
+edges ei = vivi+1 (i < `), we set (depending on our vertex enumeration
+of P)
+!
+P := { (ei, vi, vi+1) | i < ` }
+!
+P
+and call
+!
+P a v0 ! v` path. Again, P may be given implicitly by
+!
+P .
+v0 ! v`
+path
+
+170
+6. Flows
+Theorem 6.5.3. (Tutte 1954)
+For every dual pair G, G⇤of plane multigraphs,
+χ(G) = '(G⇤) .
+Proof. Let G =: (V, E) and G⇤=: (V ⇤, E⇤). For |G| 2 {1, 2} the assertion
+(1.5.5)
+is easily checked; we shall assume that |G| > 3, and apply induction on
+V, E
+the number of bridges in G.
+If e 2 G is a bridge then e⇤is a loop,
+V ⇤, E⇤
+and G⇤−e⇤is a plane dual of G/e (why?). Hence, by the induction
+hypothesis,
+χ(G) = χ(G/e) = '(G⇤−e⇤) = '(G⇤) ;
+for the ﬁrst and the last equality we use that, by |G| > 3, e is not the
+only edge of G.
+So all that remains to be checked is the induction start: let us
+assume that G has no bridge. If G has a loop, then G⇤has a bridge, and
+χ(G) = 1 = '(G⇤) by convention. So we may also assume that G has
+no loop. Then χ(G) is ﬁnite; we shall prove for given k > 2 that G is
+k
+k-colourable if and only if G⇤has a k-ﬂow. As G – and hence G⇤– has
+neither loops nor bridges, we may apply Lemmas 6.5.1 and 6.5.2 to G
+and G⇤. Let
+!e 7!
+!e ⇤be a bijection between
+!
+E and
+−!
+E⇤as in Lemma 6.5.1.
+We ﬁrst assume that G⇤has a k-ﬂow. Then G⇤also has a Zk-ﬂow g.
+g
+As before, let f:
+!
+E ! Zk be deﬁned by f(
+!e) := g(
+!e ⇤). We shall use f to
+f
+deﬁne a vertex colouring c: V ! Zk of G.
+Let T be a normal spanning tree of G, with root r, say. Put c(r) := 0.
+For every other vertex v 2 V let c(v) := f(
+!
+P ), where
+!
+P is the r ! v
+path in T. To check that this is a proper colouring, consider an edge
+e = vw 2 E. As T is normal, we may assume that v < w in the tree-order
+of T. If e is an edge of T then c(w) −c(v) = f(e, v, w) by deﬁnition of c,
+so c(v) 6= c(w) since g (and hence f) is nowhere zero. If e /2 T, let
+!
+P
+denote the v ! w path in T. Then
+c(w) −c(v) = f(
+!
+P ) = −f(e, w, v) 6= 0
+by Lemma 6.5.2 (ii).
+Conversely, we now assume that G has a k-colouring c. Let us deﬁne
+c
+f:
+!
+E ! Z by
+f(e, v, w) := c(w) −c(v) ,
+f
+and g:
+−!
+E⇤! Z by g(
+!e ⇤) := f(
+!e). Clearly, f satisﬁes (F1) and takes
+g
+values in {±1, . . . , ±(k −1)}, so by Lemma 6.5.2 (i) the same holds for g.
+By deﬁnition of f, we further have f(
+!
+C) = 0 for every cycle
+!
+C with
+orientation. By Lemma 6.5.2 (ii), therefore, g is a k-ﬂow.
+⇤
+
+171
+6.6 Tutte’s ﬂow conjectures
+How can we determine the ﬂow number of a graph? Indeed, does every
+(bridgeless) graph have a ﬂow number, a k-ﬂow for some k? Can ﬂow
+numbers, like chromatic numbers, become arbitrarily large?
+Can we
+characterize the graphs admitting a k-ﬂow, for given k?
+Of these four questions, we shall answer the second and third in this
+section: we prove that every bridgeless graph has a 6-ﬂow. In particular,
+a graph has a ﬂow number if and only if it has no bridge. The ques-
+tion asking for a characterization of the graphs with a k-ﬂow remains
+interesting for k = 3, 4, 5. Partial answers are suggested by the following
+three conjectures of Tutte, who initiated algebraic ﬂow theory on graphs.
+The oldest and best known of the Tutte conjectures is his 5-ﬂow
+conjecture:
+Five-Flow Conjecture. (Tutte 1954)
+Every bridgeless multigraph has a 5-ﬂow.
+Which graphs have a 4-ﬂow?
+By Proposition 6.4.4, the 4-edge-
+connected graphs are among them. The Petersen graph (Fig. 6.6.1), on
+the other hand, is an example of a bridgeless graph without a 4-ﬂow:
+since it is cubic but not 3-edge-colourable, it cannot have a 4-ﬂow by
+Proposition 6.4.5 (ii).
+Fig. 6.6.1. The Petersen graph
+Tutte’s 4-ﬂow conjecture states that the Petersen graph must be
+present in every graph without a 4-ﬂow:
+Four-Flow Conjecture. (Tutte 1966)
+Every bridgeless multigraph not containing the Petersen graph as a mi-
+nor has a 4-ﬂow.
+By Proposition 1.7.3, we may replace the word ‘minor’ in the 4-ﬂow
+conjecture by ‘topological minor’.
+6.6 Tutte’s ﬂow conjectures

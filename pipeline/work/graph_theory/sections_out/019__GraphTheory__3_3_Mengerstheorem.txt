@@ -1,0 +1,315 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 3. Connectivity
+현재 소단원: 3.3 Menger's theorem
+직전 소단원: 「3.2 The structure of 3-connected graphs」
+[본문]
+71
+path in G −{u, v}. Note that Q too avoids B. Now C [ P [ Q contains
+three cycles C1, C2, C3 summing to C and each missing a vertex of C
+(Fig. 3.2.4). As every vertex of C sends an edge to B, we therefore have
+b(Ci) > |B| = b(C) for every i, with the familiar contradiction.
+⇤
+3.3 Menger’s theorem
+The following theorem is one of the cornerstones of graph theory. It is
+another example of the particularly attractive type of theorem disussed
+in the notes for Chapter 2, a discussion which equally applies here:
+Theorem 3.3.1. (Menger 1927)
+Let G = (V, E) be a graph and A, B ✓V . Then the minimum number
+[3.5.2]
+[8.2.5]
+[8.4.3]
+[12.4.3]
+[12.6.3]
+of vertices separating A from B in G is equal to the maximum number
+of disjoint A–B paths in G.
+We o↵er three proofs. Whenever G, A, B are given as in the theorem,
+we denote by k (G, A, B) the minimum number of vertices separating A
+from B in G.
+Clearly, G cannot contain more than k = k (G, A, B)
+k
+disjoint A–B paths; our task will be to show that k such paths exist.
+First proof.
+We apply induction on kGk.
+If G has no edge, then
+|A \ B| = k and we have k trivial A–B paths.
+So we assume that
+G has an edge e = xy. If G has no k disjoint A–B paths, then neither
+does G/e; here, we count the contracted vertex ve as an element of A
+(resp. B) in G/e if in G at least one of x, y lies in A (resp. B). By the
+induction hypothesis, G/e contains an A–B separator Y of fewer than
+k vertices. Among these must be the vertex ve, since otherwise Y ✓V
+would be an A–B separator in G. Then X := (Y r {ve}) [ {x, y} is an
+A–B separator in G of exactly k vertices.
+We now consider the graph G −e.
+Since x, y
+2 X, every A–X
+separator in G −e is also an A–B separator in G and hence contains at
+least k vertices. So by induction there are k disjoint A–X paths in G−e,
+and similarly there are k disjoint X–B paths in G −e. As X separates
+A from B, these two path systems do not meet outside X, and can thus
+be combined to k disjoint A–B paths.
+⇤
+Let P be a set of disjoint A–B paths, and let Q be another such set.
+We say that Q exceeds P if the set of vertices in A that lie on a path in
+exceeds
+P is a proper subset of the set of vertices in A that lie on a path in Q,
+and likewise for B. Then, in particular, |Q| > |P| + 1.
+Second proof. We prove the following stronger statement:
+3.3 Menger’s theorem
+
+72
+3. Connectivity
+If P is any set of fewer than k = k (G, A, B) disjoint A–B
+paths in G, then G contains a set of |P| + 1 disjoint A–B
+paths exceeding P.
+Keeping G and A ﬁxed, we let B vary and apply induction on | S P|. Let
+R be an A–B path that avoids the (fewer than k) vertices of B that lie
+on a path in P. If R avoids all the paths in P, then P [ {R} exceeds P,
+as desired. (This will happen when P = ;, so the induction starts.) If
+not, let x be the last vertex of R that lies on some P 2 P (Fig. 3.3.1).
+A
+B
+R
+P
+x
+P
+x
+R
+x
+P
+Fig. 3.3.1. Paths in the second proof of Menger’s theorem
+Put
+B0 := B [ V (xP [ xR)
+and
+P0 :=
+$
+P r {P}
+%
+[ {Px} .
+Then |P0| = |P| but | S P0| < | S P|, and k(G, A, B0) > k(G, A, B), so by
+the induction hypothesis there is a set Q0 of |P0|+1 disjoint A–B0 paths
+exceeding P0. Then Q0 contains a path Q ending at x, and a unique
+path Q0 whose last vertex y is not among the last vertices of the paths
+in P0.
+If y /2 xP, we let Q be obtained from Q0 by appending xP to Q,
+and appending yR to Q0 if y /2 B. Otherwise y 2 ˚xP, and we let Q be
+obtained from Q0 by appending xR to Q and yP to Q0. In all cases Q
+exceeds P, as desired.
+⇤
+Applied to a bipartite graph, Menger’s theorem specializes to the
+assertion of K¨onig’s theorem (2.1.1). For our third proof, we shall adapt
+the alternating path proof of K¨onig’s theorem to the more general set-
+up of Theorem 3.3.1. Let again G, A, B be given, and let P be a set
+P
+of disjoint A–B paths in G. Let us say that an A–B separator X ✓V
+lies on P if it consists of a choice of exactly one vertex from each path
+on
+in P. If we can ﬁnd such a separator X, then clearly k 6 |X| = |P|, and
+Menger’s theorem will be proved.
+Put
+V [P] :=
+[
+{ V (P) | P 2 P }
+E[P] :=
+[
+{ E(P) | P 2 P } .
+
+3.3 Menger’s theorem
+73
+Let a walk W = x0e0x1e1 . . . en−1xn in G with ei 6= ej for i 6= j be said
+W, xi, ei
+to alternate with respect to P (Fig. 3.3.2) if it starts in A r V [P] and
+the following three conditions hold for all i < n (with e−1 := e0 in (iii)):
+alternating
+walk
+(i) if ei = e 2 E[P], then W traverses the edge e backwards, i.e.
+xi+1 2 P˚xi for some P 2 P;
+(ii) if xi = xj with i 6= j, then xi 2 V [P];
+(iii) if xi 2 V [P], then {ei−1, ei} \ E[P] 6= ;.
+P
+x0
+xn
+A
+B
+W
+Fig. 3.3.2. An alternating walk from A to B
+Note that, by (ii), any vertex outside V [P] occurs at most once
+on W. And since the edges ei of W are all distinct, (iii) implies that any
+vertex v 2 V [P] occurs at most twice on W. For v 6= xn, this can happen
+in exactly the following two ways. If xi = xj with 0 < i < j < n, then
+either ei−1, ej 2 E[P] and ei, ej−1 /2 E[P]
+or ei, ej−1 2 E[P] and ei−1, ej /2 E[P] .
+Unless otherwise stated, any use of the word ‘alternate’ below will
+refer to our ﬁxed path system P.
+The next two lemmas together make up our third proof of Menger’s
+theorem. We state and prove them in a way that makes them reusable
+in Chapter 8, when we prove Menger’s theorem for inﬁnite graphs.
+Lemma 3.3.2. If an alternating walk W as above ends in B r V [P],
+[8.4.7]
+then G contains a set of disjoint A–B paths exceeding P.
+Proof. We may assume that W has only its ﬁrst vertex in A r V [P] and
+only its last vertex in B r V [P]. Let H be the graph on V (G) whose
+edge set is the symmetric di↵erence of E[P] with {e0, . . . , en−1}. In H,
+the ends of the paths in P and of W have degree 1 (or 0, if the path or
+W is trivial), and all other vertices have degree 0 or 2.
+For each vertex a 2 (A \ V [P]) [ {x0}, therefore, the component of
+H containing a is a path, P = v0 . . . vk say, which starts in a and ends
+in A or B. Using conditions (i) and (iii), one easily shows by induction
+
+74
+3. Connectivity
+on i = 0, . . . , k −1 that P traverses each of its edges e = vivi+1 in the
+forward direction with respect to P or W. (Formally: if e 2 P 0 with
+P 0 2 P, then vi 2 P 0˚vi+1; if e = ej 2 W, then vi = xj and vi+1 = xj+1.)
+Hence, P is an A–B path. (When G is inﬁnite, this last conclusion uses
+the fact that W meets only ﬁnitely many paths in P, and hence every
+component of H is ﬁnite.)
+Similarly, for every b 2 (B \V [P])[{xn} there is an A–B path in H
+that ends in b. The set of A–B paths in H therefore exceeds P.
+⇤
+Lemma 3.3.3. If no alternating walk W as above ends in B r V [P],
+[8.4.7]
+then G contains an A–B separator on P.
+Proof. Let
+A1 := A \ V [P]
+and
+A2 := A r A1 ,
+A1, A2
+and
+B1 := B \ V [P]
+and
+B2 := B r B1 .
+B1, B2
+For every path P 2 P, let xP be the last vertex of P that lies on some
+xP
+alternating walk; if no such vertex exists, let xP be the ﬁrst vertex of P.
+Our aim is to show that
+X := { xP | P 2 P }
+X
+meets every A–B path in G; then X is an A–B separator on P.
+Suppose there is an A–B path Q that avoids X. We know that Q
+Q
+meets V [P], as otherwise it would be an alternating walk ending in B2.
+Now the A–V [P] path in Q is either an alternating walk or consists only
+of the ﬁrst vertex of some path in P. Therefore Q also meets the vertex
+set V [P0] of
+P0 := { PxP | P 2 P } .
+P0
+Let y be the last vertex of Q in V [P0], say y 2 P 2 P, and let x := xP .
+y, P, x
+As Q avoids X and hence x, we have y 2 P˚x. In particular, x = xP is
+not the ﬁrst vertex of P, and so there is an alternating walk W ending
+W
+at x. Then W [ xPyQ is a walk from A2 to B (Fig. 3.3.3). If this walk
+alternates and ends in B2, we have our desired contradiction.
+P
+Q
+W
+y
+x
+z
+Q
+y
+Fig. 3.3.3. Alternating walks in the proof of Lemma 3.3.3.
+
+3.3 Menger’s theorem
+75
+How could W [ xPyQ fail to alternate?
+For example, W might
+already use an edge of xPy. But if x0 is the ﬁrst vertex of W on xP˚y,
+x0, W 0
+then W 0 := Wx0Py is an alternating walk from A2 to y. (By Wx0 we
+mean the initial segment of W ending at the ﬁrst occurrence of x0 on W;
+from there, W 0 follows P back to y.) Even our new walk W 0yQ need not
+yet alternate: for example, W 0 might still meet ˚yQ. By deﬁnition of P0
+and W, however, and the choice of y on Q, we have
+V (W 0) \ V [P] ✓V [P0]
+and
+V (˚yQ) \ V [P0] = ; .
+Thus, W 0 and ˚yQ can meet only outside P.
+If W 0 does indeed meet ˚yQ, we let z be the ﬁrst vertex of W 0 on ˚yQ
+z
+and set W 00 := W 0zQ.
+Otherwise we set W 00 := W 0 [ yQ.
+In both
+W 00
+cases W 00 alternates with respect to P0, because W 0 does and ˚yQ avoids
+V [P0]. (W 00 satisﬁes condition (iii) at y in the second case even if y oc-
+curs twice on W 0, because W 00 then contains the entire walk W 0 and not
+just its initial segment W 0y.) By deﬁnition of P0, therefore, W 00 avoids
+V [P]rV [P0]. Thus W 00 also alternates with respect to P and ends in B2,
+contrary to our assumptions.
+⇤
+Third proof of Menger’s theorem. Let P contain as many disjoint
+A–B paths in G as possible. Then by Lemma 3.3.2, no alternating walk
+ends in B r V [P]. By Lemma 3.3.3, this implies that G has an A–B
+separator X on P, giving k 6 |X| = |P| as desired.
+⇤
+A set of a–B paths is called an a–B fan if any two of the paths have
+fan
+only a in common.
+Corollary 3.3.4. For B ✓V and a 2 V r B, the minimum number of
+vertices separating a from B in G is equal to the maximum number of
+paths forming an a–B fan in G.
+Proof. Apply Theorem 3.3.1 to G −a with A := NG(a).
+⇤
+Corollary 3.3.5. Let a and b be two distinct vertices of G.
+(i) If ab /2 E, then the minimum number of vertices separating a
+from b in G is equal to the maximum number of independent a–b
+paths in G.
+(ii) The minimum number of edges separating a from b in G is equal
+to the maximum number of edge-disjoint a–b paths in G.
+Proof. (i) Apply Theorem 3.3.1 to G −{a, b}, with A := NG(a) and
+B := NG(b).
+(ii) Apply Theorem 3.3.1 to the line graph of G, with A := E(a)
+and B := E(b).
+⇤
+
+76
+3. Connectivity
+Theorem 3.3.6. (Global Version of Menger’s Theorem)
+[4.2.7]
+[6.6.1]
+[9.4.2]
+(i) A graph is k-connected if and only if it contains k independent
+paths between any two vertices.
+(ii) A graph is k-edge-connected if and only if it contains k edge-
+disjoint paths between any two vertices.
+Proof. (i) If a graph G contains k independent paths between any two
+vertices, then |G| > k and G cannot be separated by fewer than k ver-
+tices; thus, G is k-connected.
+Conversely, suppose that G is k-connected (and, in particular, has
+more than k vertices) but contains vertices a, b not linked by k indepen-
+a, b
+dent paths. By Corollary 3.3.5 (i), a and b are adjacent; let G0 := G−ab.
+G0
+Then G0 contains at most k −2 independent a–b paths. By Corollary
+3.3.5 (i), we can separate a and b in G0 by a set X of at most k −2
+X
+vertices. As |G| > k, there is at least one further vertex v /2 X [ {a, b}
+v
+in G. Now X separates v in G0 from either a or b – say, from a. But
+then X [ {b} is a set of at most k −1 vertices separating v from a in G,
+contradicting the k-connectedness of G.
+(ii) follows straight from Corollary 3.3.5 (ii).
+⇤
+3.4 A-paths and Mader’s theorem
+In analogy to Menger’s theorem we may consider the following questions.
+Given a set A of vertices in a graph, how many disjoint, edge-disjoint, or
+independent A-paths can we ﬁnd in that graph? Is the largest number
+of such paths related to the least size of a vertex or edge cover of all its
+A-paths?
+An early theorem of Gallai goes in this direction. In Erd˝os-P´osa
+spirit – see Chapter 2.3 – it says that if a graph fails to contain many
+disjoint A-paths it has a small set of vertices that covers all its A-paths,
+and thus ‘totally disconnects’ A:
+Theorem 3.4.1. (Gallai 1961)
+Let A be a set of vertices in a graph G, and k > 1 an integer. Then G
+either contains k disjoint A-paths or has a set of at most 2k −2 vertices
+that meets every A-path.
+The graph K2k−1, with A its entire vertex set, shows that 2k −2 is
+lowest possible as a general bound, one that depends only on k.
+Theorem 3.4.1, as well as its analogue for edge-disjoint paths (with
+the same bound of 2k −2), will be an easy consequence of Mader’s
+theorem below, via its Corollary 3.4.3. See Exercises 25 and 30.

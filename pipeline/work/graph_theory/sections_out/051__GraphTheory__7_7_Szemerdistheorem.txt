@@ -1,0 +1,214 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.7 Szemerédi's theorem
+직전 소단원: 「7.6 Two regularity tools」
+[본문]
+216
+7. Extremal Graph Theory
+image of at most k! injective homomorphisms H ! G, so
+h(G) 6 k! · d kGk 6 k! · d · n2 6 ⌘n0 · n2 6 ⌘n3.
+The removal lemma therefore yields a set E of at most %n2 edges in G
+such that H 6✓G −E. Like every edge of G, each of the edges in E lies
+in at most d copies of H in G. So we also have
+h(G) 6 k! · d |E|.
+As the copies of H are thinly spread over G, every edge of G lies in the
+image of some injective homomorphism H ! G. Hence h(G) > kGk/m,
+so
+kGk 6 m h(G) 6 m k! d |E| 6 m k! d %n2 = δn2.
+As the number h of copies of H in G is no bigger than h(G), the above
+inequality also shows h 6 h(G) 6 δn2, as claimed.
+⇤
+Corollary 7.6.5. For every δ > 0 there exists an integer n0 such that
+[7.7.3]
+the following holds for every graph G of order n > n0: if every edge of G
+lies in exactly one triangle, then G has at most δn2 edges.
+⇤
+7.7 Szemer´edi’s theorem
+When Szemer´edi proved his ﬁrst version of the regularity lemma, he did
+not think of it as a precursor to the fundamental structure theorem for
+all of extremal graph theory that it has since become. He thought of it,
+well, as a lemma: a lemma he needed in a proof of a conjecture of Erd˝os
+and Tur´an about ‘arithmetic progressions’ of integers. We shall describe
+this theorem in this section, and then use the tools from Section 7.6 to
+derive its simplest case in just over a page.
+An arithmetic progression is an increasing sequence of integers of
+arithmetic
+progression
+the form a, a + d, a + 2d, . . . , one in which adjacent terms always di↵er
+by the same amount. The number of terms in the sequence is its length.
+length
+One of the earliest results in combinatorics is van der Waerden’s theorem
+that, no matter how we partition the natural numbers into ﬁnitely many
+classes, one of these will contain arbitrarily long arithmetic progres-
+sions.18 Szemer´edi’s theorem explores the deeper reasons why this is so.
+In any partition {A1, . . . , Ap} of N into ﬁnitely many classes, one of
+these Ai will have positive upper density: for some δ > 0, in our case
+upper
+density
+certainly for δ = 1/p, arbitrarily large n 2 N will satisfy |Ai \ n| > δn
+18 Compare Exercise 5 in Chapter 9.
+
+7.7 Szemer´edi’s theorem
+217
+(where n = {0, . . . , n −1}). Szemer´edi’s theorem says that the latter is
+enough to assume to get arbitrarily long arithmetic progressions in Ai.
+We do not need a choice between Ai and other partition sets, as in van
+der Waerden’s theorem, we just need a single set that is dense enough:
+Theorem 7.7.1. (Szemer´edi 1975)
+Every set A ✓N of positive upper density contains arbitrarily long
+arithmetic progressions.
+Szemer´edi’s theorem is often expressed in more compact notation.
+For all k, n 2 N, and abbreviating ‘arithmetic progression’ as ‘AP’, let
+AP
+rk(n) := max
+*
+|D| : D ✓n and D contains no AP of length k
+ 
+.
+Thus, if k
+2 N is such that limn!1 rk(n)/n = 0 then, for any sets
+Dn ✓n that contain no arithmetic progression of length k, the values
+of |Dn|/n will tend to zero as n grows. But if A ✓N has positive upper
+density, the values of |A \ n|/n exceed some δ > 0 again and again. For
+those n, the sets A \ n will eventually contain arithmetic progressions
+of length k. This happens for every k, just for later n when k is bigger.
+Hence the assertions that limn!1 rk(n)/n = 0, one for each k, together
+imply Theorem 7.7.1.
+For this reason, Szemer´edi’s theorem is often stated as follows:
+Theorem 7.7.2. For all integers k > 3 we have limn!1 rk(n)/n = 0.
+Even given the regularity lemma, Szemer´edi’s theorem is still a deep
+result far beyond the scope of this book. Indeed, it is surprising that an
+arithmetic statement such as this is susceptible to a purely combinato-
+rial proof at all. The case of k = 3, however, which is known as Roth’s
+theorem (1953), follows easily from Corollary 7.6.5:
+Proposition 7.7.3. limn!1 r3(n)/n = 0.
+Proof. We show that, for every ✏> 0, we have r3(n)/n 6 ✏for every n
+[7.6.5]
+greater than the n0 returned by Corollary 7.6.5 on input δ := ✏/12. To
+✏, δ, n0
+prove this for given n > n0, consider any set D ✓n that contains no
+D
+arithmetic progression of length 3. We have to show that |D| 6 ✏n.
+We shall apply Corollary 7.6.5 to the tripartite graph G with vertex
+classes X := {1, . . . , n} and Y := {1, . . . , 2n} and Z := {1, . . . , 3n},
+X, Y, Z
+viewed as disjoint sets. As the edges of G we take those of its deﬁning
+triangles, the complete graphs K(x, d) = K3 with vertices
+deﬁning
+triangle
+K(x, d)
+x 2 X
+and
+x + d 2 Y
+and
+2x + d 2 Z
+E(G)
+for all x 2 X and d 2 D.
+
+218
+7. Extremal Graph Theory
+Since any two vertices of a deﬁning triangle determine its third ver-
+tex, the deﬁning triangles are edge-disjoint. Thus, every edge of G lies
+in a unique deﬁning triangle, and
+|G| = 6n
+and
+kGk = 3n|D| .
+Let us show that G has no other triangles than the deﬁning ones, and
+therefore satisﬁes the premise of Corollary 7.6.5.
+Suppose T ✓G is a non-deﬁning triangle. Let T1, T2, T3 be the
+T
+deﬁning triangles that contributed its edges. They are distinct, because
+T1, T2, T3
+any triangle that contains two of the edges of T contains all its ver-
+tices, and hence equals T. Since there are no edges inside the partition
+classes X, Y, Z, our T has one vertex in each class (Fig. 7.7.1, left).
+Fig. 7.7.1. Three deﬁning triangles creating another triangle
+Assume that the X–Y edge of T was contributed by T1, and its
+X–Z edge by T2. The vertex x of T in X then lies in T1 \ T2, so
+T1 = K(x, a)
+and
+T2 = K(x, b)
+and
+T3 = K(x0, c)
+for some a, b, c 2 D and x0 2 X. Since T3 contributes the Y –Z edge of T
+a, b, c
+but not its other edges, we have x0 6= x. The vertices of T, then, are
+x 2 X
+and
+x + a = x0 + c 2 Y
+and
+2x + b = 2x0 + c 2 Z
+(Fig. 7.7.1, right), so
+a = c + (x0 −x)
+and
+b = c + 2(x0 −x) .
+Hence either (c, a, b) or (b, a, c) is an arithmetic progression of length 3
+in D, with di↵erence |x0 −x| 6= 0 since x0 6= x. This contradicts the
+choice of D, so we conclude that G contains no triangles other than the
+deﬁning ones. In particular, every edge of G lies in exactly one triangle.
+Corollary 7.6.5 now yields
+kGk 6 δ · |G|2 = δ · (6n)2.
+
+219
+As kGk = 3n|D|, we conclude that
+|D| = kGk/3n 6 δ · 12n = ✏n
+as desired.
+⇤
+Exercises
+1.−Show that K1,3 is extremal without a P 3.
+2.−Given k > 0, determine the extremal graphs of chromatic number at
+most k.
+3.−Is there a graph that is edge-maximal without a K3 minor but not
+extremal?
+4.
+Determine the value of ex(n, K1,r) for all r, n 2 N.
+5.+ Given k > 0, determine the extremal graphs without a matching of
+size k.
+(Hint. Theorem 2.2.3 and Ex. 20, Ch. 2.)
+6.
+Without using Tur´an’s theorem, show that the maximum number of
+edges in a triangle-free graph of order n > 1 is bn2/4c.
+7.
+Show that
+tr−1(n) 6 1
+2n2 r −2
+r −1 ,
+with equality whenever r −1 divides n.
+8.
+Show that tr−1(n)/$n
+2
+%
+converges to (r −2)/(r −1) as n ! 1.
+(Hint. tr−1((r −1)b
+n
+r−1c) 6 tr−1(n) 6 tr−1((r −1)d
+n
+r−1e).)
+9.
+Does every large enough graph G with at most c |G| edges, where c is
+any constant, contain a set of 100 independent vertices?
+10.
+Show that deleting at most (m −s)(n −t)/s edges from a Km,n will
+never destroy all its Ks,t subgraphs.
+11.
+For 0 < s 6 t 6 n let z(n, s, t) denote the maximum number of edges in
+a bipartite graph whose partition sets both have size n, and which does
+not contain a Ks,t. Show that 2 ex(n, Ks,t) 6 z(n, s, t) 6 ex(2n, Ks,t).
+12.+ Let 1 6 r 6 n be integers. Let G be a bipartite graph with bipartition
+{A, B}, where |A| = |B| = n, and assume that Kr,r 6✓G. Show that
+X
+x2A
+✓
+d(x)
+r
+◆
+6 (r −1)
+✓
+n
+r
+◆
+.
+Using the previous exercise, deduce that ex(n, Kr,r) 6 cn2−1/r for some
+constant c depending only on r.
+Exercises

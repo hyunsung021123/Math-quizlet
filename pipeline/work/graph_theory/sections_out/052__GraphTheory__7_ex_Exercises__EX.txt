@@ -1,0 +1,300 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.ex Exercises
+직전 소단원: 「7.7 Szemerédi's theorem」
+[연습문제]
+219
+As kGk = 3n|D|, we conclude that
+|D| = kGk/3n 6 δ · 12n = ✏n
+as desired.
+⇤
+Exercises
+1.−Show that K1,3 is extremal without a P 3.
+2.−Given k > 0, determine the extremal graphs of chromatic number at
+most k.
+3.−Is there a graph that is edge-maximal without a K3 minor but not
+extremal?
+4.
+Determine the value of ex(n, K1,r) for all r, n 2 N.
+5.+ Given k > 0, determine the extremal graphs without a matching of
+size k.
+(Hint. Theorem 2.2.3 and Ex. 20, Ch. 2.)
+6.
+Without using Tur´an’s theorem, show that the maximum number of
+edges in a triangle-free graph of order n > 1 is bn2/4c.
+7.
+Show that
+tr−1(n) 6 1
+2n2 r −2
+r −1 ,
+with equality whenever r −1 divides n.
+8.
+Show that tr−1(n)/$n
+2
+%
+converges to (r −2)/(r −1) as n ! 1.
+(Hint. tr−1((r −1)b
+n
+r−1c) 6 tr−1(n) 6 tr−1((r −1)d
+n
+r−1e).)
+9.
+Does every large enough graph G with at most c |G| edges, where c is
+any constant, contain a set of 100 independent vertices?
+10.
+Show that deleting at most (m −s)(n −t)/s edges from a Km,n will
+never destroy all its Ks,t subgraphs.
+11.
+For 0 < s 6 t 6 n let z(n, s, t) denote the maximum number of edges in
+a bipartite graph whose partition sets both have size n, and which does
+not contain a Ks,t. Show that 2 ex(n, Ks,t) 6 z(n, s, t) 6 ex(2n, Ks,t).
+12.+ Let 1 6 r 6 n be integers. Let G be a bipartite graph with bipartition
+{A, B}, where |A| = |B| = n, and assume that Kr,r 6✓G. Show that
+X
+x2A
+✓
+d(x)
+r
+◆
+6 (r −1)
+✓
+n
+r
+◆
+.
+Using the previous exercise, deduce that ex(n, Kr,r) 6 cn2−1/r for some
+constant c depending only on r.
+Exercises
+
+220
+7. Extremal Graph Theory
+13.
+The upper density of an inﬁnite graph G is the lim sup of the maximum
+edge densities of its (ﬁnite) n-vertex subgraphs as n ! 1.
+(i) Show that, for every r 2 N, every inﬁnite graph of upper density
+> r−2
+r−1 has a Kr
+s subgraph for every s 2 N.
+(ii) Deduce that the upper density of inﬁnite graphs can only take
+the countably many values of 0, 1, 1
+2, 2
+3, 3
+4, . . ..
+14.
+Given a tree T, ﬁnd an upper bound for ex(n, T) that is linear in n and
+independent of the structure of T, i.e. depends only on |T|.
+15.
+Show that the Erd˝os-S´os conjecture is best possible in the sense that,
+for every k and inﬁnitely many n, there is a graph on n vertices and
+with 1
+2(k −1)n edges that contains no tree with k edges.
+16.−Prove the Erd˝os-S´os conjecture for the case when the tree considered
+is a star.
+17.
+Prove the Erd˝os-S´os conjecture for the case when the tree considered
+is a path.
+(Hint. Use Exercise 9 of Chapter 1.)
+18.
+Can large average degree force the chromatic number up if we exclude
+some tree as an induced subgraph? More precisely: For which trees T
+is there a function f: N ! N such that, for every k 2 N, every graph of
+average degree at least f(k) either has chromatic number at least k or
+contains an induced copy of T?
+19.
+Given two numerical graph invariants i1 and i2, write i1 6 i2 if we can
+force i2 to be arbitrarily high on some subgraph of G by assuming that
+i1(G) is large enough. (Formally: write i1 6 i2 if there exists a function
+f: N ! N such that, given any k 2 N, every graph G with i1(G) > f(k)
+has a subgraph H with i2(H) > k.) If i1 6 i2 as well as i1 > i2, write
+i1 ⇠i2.
+Show that this is an equivalence relation for graph invari-
+ants, and sort the following invariants into equivalence classes ordered
+by <: minimum degree; average degree; connectivity; arboricity; chro-
+matic number; colouring number; choice number; max { r | Kr ✓G };
+max { r | TKr ✓G }; max { r | Kr 4 G }; min max d+(v), where the
+maximum is taken over all vertices v of the graph, and the minimum
+over all its orientations.
+20.+ Prove, from ﬁrst principles and without using average or minimum
+degree arguments, the existence of a function f: N ! N such that every
+graph of chromatic number at least f(r) has a Kr minor.
+(Hint. Use induction on r. For the induction step (r −1)!r try to ﬁnd
+a connected set U of vertices whose neighbours induce a subgraph that
+needs enough colours to contract to Kr−1. If no such set U exists, show
+that the given graph can be coloured with fewer colours than assumed.)
+21.
+Given a graph G with "(G) > k 2 N, ﬁnd a minor H 4 G such that
+δ(H) > k > |H|/2.
+
+Exercises
+221
+22.+ Find a constant c such that every graph with n vertices and at least
+n + 2k(log k + log log k + c) edges contains k edge-disjoint cycles (for all
+k 2 N). Deduce an edge-analogue of the Erd˝os-P´osa theorem (2.3.2).
+(Hint. Assuming δ > 3, delete the edges of a short cycle and apply
+induction. The calculations are similar to the proof of Lemma 2.3.1.)
+23.
+Simplify the proof of Theorem 7.2.3 by using Exercise 36, Ch. 3.
+24.+ Show that any function h as in Lemma 3.5.1 satisﬁes the inequality
+h(r) > 1
+8r2 for all even r, and hence that Theorem 7.2.3 is best possible
+up to the value of the constant c.
+25.
+Characterize the graphs with n vertices and more than 3n −6 edges
+that contain no TK3,3. In particular, determine ex(n, TK3,3).
+(Hint. You may use the theorem of Wagner that every edge-maximal
+graph without a K3,3 minor can be constructed recursively from max-
+imal planar graphs and copies of K5 by pasting along K2s.)
+26.−Derive the four colour theorem from Hadwiger’s conjecture for r = 5.
+27.−Show that Hadwiger’s conjecture for r + 1 implies the conjecture for r.
+28.−Deduce the following weakening of Hadwiger’s conjecture from known
+results: given any ✏> 0, every graph of chromatic number at least r1+✏
+has a Kr minor, provided that r is large enough.
+29.−Show that any graph constructed as in Proposition 7.3.1 is edge-
+maximal without a K4 minor.
+30.
+Prove the implication δ(G) > 3 ) G ◆TK4.
+(Hint. You may use any result from Section 7.3.)
+31.
+A multigraph is called series-parallel if it can be constructed recursively
+from a K2 by the operations of subdividing and of doubling edges. Show
+that a 2-connected multigraph is series-parallel if and only if it has no
+(topological) K4 minor.
+32.
+Without using Theorem 7.3.8, prove Hadwiger’s conjecture for all
+graphs of girth at least 11 and r large enough.
+Without using Co-
+rollary 7.3.9, show that there is a constant g 2 N such that all graphs
+of girth at least g satisfy Hadwiger’s conjecture, irrespective of r.
+33.+ Prove Hadwiger’s conjecture for r = 4 from ﬁrst principles.
+34.+ Prove Hadwiger’s conjecture for line graphs.
+35.
+Prove Corollary 7.3.5.
+36.−In the deﬁnition of an ✏-regular pair, what is the purpose of the re-
+quirement that |X| > ✏|A| and |Y | > ✏|B|?
+37.−Show that any ✏-regular pair in G is also ✏-regular in G.
+38.
+Does the regularity lemma for m = 1 imply the general version?
+
+222
+7. Extremal Graph Theory
+39.
+Consider a partition of a ﬁnite set V into k equally sized subsets. Show
+that the complete graph on V has about k −1 as many edges between
+di↵erent partition sets as edges inside partition sets. Explain how this
+leads to the choice of m := 1/γ in the proof of the Erd˝os-Stone theorem.
+40.
+(i) Deduce the regularity lemma from the assumption that it holds,
+given ✏> 0 and m > 1, for all graphs of order at least some n = n(✏, m).
+(ii) Prove the regularity lemma for sparse graphs – more precisely, for
+every sequence (Gn)n2N of graphs Gn of order n such that kGnk/n2 !0
+as n ! 1.
+41.−Consider a pair (A, B) of disjoint vertex sets in a graph, and a pair of
+subsets X ✓A and Y ✓B that are small in that |X||Y | 6 ✏|A||B|.
+For which d does (X, Y ) satisfy the requirement of (✏, d)-uniformity
+for (A, B)?
+42.
+Compare the deﬁnitions of ✏-regularity and ✏-uniformity for pairs of
+disjoint vertex sets in a graph:
+(i)−Show that every ✏-regular pair is also ✏-uniform.
+(ii) Show that every ✏-uniform pair is
+3p✏-regular.
+43.
+Discuss the factor of $k
+2
+%
+in Proposition 7.6.1.
+Is it natural?
+Is it
+important? Why is it there?
+44.
+Deduce Proposition 7.6.1 from Lemma 7.6.2.
+45.
+Replace the use of the blow-up lemma with the counting lemma. . .
+(i) . . . in the proof of Theorem 7.1.2;
+(ii) . . . in the proof of Theorem 9.2.2.
+46.
+A consequence of the Erd˝os-Stone theorem is that γn2 more edges than
+are needed to force a Kr subgraph will force many such subgraphs, as
+many as a Kr
+s contains. Can you prove this directly using the removal
+lemma? Can you ﬁnd even more Kr subgraphs in this way?
+47.
+Let H be any graph, of order k say.
+Does the removal lemma say,
+essentially, that we can hit all the copies of H in arbitrary graphs G
+by o(n2) edges, where n := |G|, if H is such that no more than o(nk)
+of the nk maps V (H) ! V (G) induce homomorphisms H ! G? If not,
+what is missing?
+48.−Find a class of 3-connected planar graphs over which triangles are
+spread thinly.
+49.
+(i) In the deﬁnition of ‘thinly spread’, and again in Corollary 7.6.5, there
+is a condition requiring that every edge of G lie in at least one copy of H.
+If we drop this assumption, will Theorem 7.6.4 and Corollary 7.6.5 fail?
+(ii) In our earlier informal discussion of a typical scenario for the re-
+moval lemma, which begins with the inequalities (⇤) and concludes that
+many copies of H are lumped together at just a few edges of G, there
+is no such condition as in (i). Why was it not needed there?
+
+223
+50.
+In the deﬁnition of ‘thinly spread’, weaken the condition that every
+edge of G lies in at least one copy of H to the condition that the edges
+of G lie in at least β copies of H on average, for some β > 0 that is the
+same for all G 2 G. Does Theorem 7.6.4 still hold?
+51.
+We saw that Theorem 7.7.2 implies Theorem 7.7.1. Does the converse
+implication hold, too?
+Notes
+The standard reference work for results and open problems in extremal graph
+theory (in a very broad sense) is still B. Bollob´as, Extremal Graph Theory,
+Academic Press 1978. A kind of update on the book is given by its author in
+his chapter of the Handbook of Combinatorics (R.L. Graham, M. Gr¨otschel &
+L. Lov´asz, eds.), North-Holland 1995. An instructive survey of extremal graph
+theory in the narrower sense of Section 7.1 is given by M. Simonovits in
+(L.W. Beineke & R.J. Wilson, eds.) Selected Topics in Graph Theory 2, Aca-
+demic Press 1983. This paper focuses among other things on the particular
+role played by the Tur´an graphs. A more recent survey by the same author
+can be found in (R.L. Graham & J. Neˇsetˇril, eds.) The Mathematics of Paul
+Erd˝os, Vol. 2, Springer 1996.
+Tur´an’s theorem is not merely one extremal result among others: it is the
+result that sparked o↵the entire line of research. Our ﬁrst proof of Tur´an’s
+theorem is essentially the original one; the second is a version of a proof of
+Zykov due to Brandt.
+Tur´an’s theorem has been generalized as follows. Suppose that, for some
+ﬁxed r > 3, we wish to construct a graph on n vertices with at least γn2
+edges, where now
+1
+2
+r−2
+r−1 < γ <
+1
+2, in such a way as to create as few Kr
+subgraphs as possible. The clique density theorem says that, for ﬁxed γ, the
+asymptotically best way to do this is to form a complete multipartite graph
+in which all classes have the same size except for one, which may be smaller.
+How many such classes there are depends on γ, but not on n: as in Tur´an’s
+theorem, s classes will always give about γn2 edges for γ = 1
+2
+s−1
+s . The clique
+density theorem had been conjectured by Lov´asz and Simonovits in 1983, and
+was ﬁnally proved for all r by C. Reiher, The clique density theorem, Ann.
+Math. 184 (2016), 683–707, arXiv:1212.2454.
+Our version of the Erd˝os-Stone theorem is a slight simpliﬁcation of the
+original. A direct proof, not using the regularity lemma, is given in L. Lov´asz,
+Combinatorial Problems and Exercises (2nd edn.), North-Holland 1993. Its
+most fundamental application, Corollary 7.1.3, was only found 20 years after
+the theorem, by Erd˝os and Simonovits (1966).
+Of our two bounds on ex(n, Kr,r) the upper one is thought to give the
+correct order of magnitude. For vastly o↵-diagonal complete bipartite graphs
+this was veriﬁed by J. Koll´ar, L. R´onyai & T. Szab´o, Norm-graphs and bi-
+partite Tur´an numbers, Combinatorica 16 (1996), 399–406, who proved that
+ex(n, Kr,s) > crn2−1
+r when s > r! .
+Details about the Erd˝os-S´os conjecture, including an approximate solu-
+tion for large k, can be found in the survey by Koml´os and Simonovits cited
+below.
+The case where the tree T is a path (Exercise 17) was proved by
+Notes

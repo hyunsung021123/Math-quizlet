@@ -1,0 +1,55 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.7 The graph minor theorem (분할 part 2)
+직전 소단원: 「12.6 Tree-decompositions and forbidden minors」
+[본문]
+405
+techniques developed for its proof, the various ways in which minors are
+handled or constructed. Most of these have not even been touched upon
+here, yet they seem set to inﬂuence the development of graph theory for
+many years to come.
+Exercises
+1.−Let 6 be a quasi-ordering on a set X.
+Call two elements x, y
+2 X
+equivalent if both x 6 y and y 6 x.
+Show that this is indeed an
+equivalence relation on X, and that 6 induces a partial ordering on the
+set of equivalence classes.
+2.
+Let (A, 6) be a quasi-ordering. For subsets X ✓A write
+Forb6(X) := { a 2 A | a 6> x for all x 2 X } .
+Show that 6 is a well-quasi-ordering on A if and only if every subset
+B ✓A that is closed under 6 (i.e. such that x 6 y 2 B ) x 2 B) can
+be written as B = Forb6(X) with ﬁnite X.
+3.
+Prove Proposition 12.1.1 and Corollary 12.1.2 directly, without using
+Ramsey’s theorem.
+4.−Show that the relation 6 between rooted trees deﬁned in the text is
+indeed a quasi-ordering.
+5.
+Show that the ﬁnite trees are not well-quasi-ordered by the subgraph
+relation.
+6.
+The last step of the proof of Kruskal’s theorem considers a ‘topological’
+embedding of Tm in Tn that maps the root of Tm to the root of Tn.
+Suppose we assume inductively that the trees of Am are embedded in
+the trees of An in the same way, with roots mapped to roots. We thus
+seem to obtain a proof that the ﬁnite rooted trees are well-quasi-ordered
+by the subgraph relation, even with roots mapped to roots. Where is
+the error?
+7.
+Extend Kruskal’s theorem to trees whose vertices are labelled from a
+well-quasi-ordered set. The tree embedding is deﬁned as before but in
+addition respects the ordering of the labels.
+8.
+Are the connected ﬁnite graphs well-quasi-ordered by contraction alone
+(i.e. by taking minors without deleting edges or vertices)?
+9.+ Relax the minor relation by not insisting that branch sets be connected.
+Show that the ﬁnite graphs are well-quasi-ordered by this relation.
+10.+ Show that the ﬁnite graphs are not well-quasi-ordered by the topological
+minor relation.
+11.+ Given k 2 N, is the class { G | G 6◆P k } well-quasi-ordered by the
+subgraph relation?
+Exercises

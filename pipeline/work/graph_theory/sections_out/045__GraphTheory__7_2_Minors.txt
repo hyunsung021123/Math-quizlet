@@ -1,0 +1,280 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.2 Minors
+직전 소단원: 「7.1 Subgraphs」
+[본문]
+185
+For bipartite graphs H, Corollary 7.1.3 says that substantially fewer
+than
+$n
+2
+%
+edges suﬃce to force an H subgraph. It turns out that
+c1n2−
+2
+r+1 6 ex(n, Kr,r) 6 c2n2−1
+r
+for suitable constants c1, c2 depending on r; the lower bound is obtained
+by random graphs,2 the upper bound is calculated in Exercise 12. If H
+is a forest, then H ✓G as soon as "(G) is large enough, so ex(n, H) is at
+most linear in n (Exercise 14). Erd˝os and S´os conjectured in 1963 that
+Erd˝os-S´os
+conjecture
+ex(n, T) 6 1
+2(k −1)n for all trees with k > 2 edges; as a general bound
+for all n, this is best possible for every T (Exercises 15–17).
+A related but rather di↵erent question is whether large values of
+" or χ can force a graph G to contain a given tree T as an induced
+subgraph. Of course, we need some additional assumption for this to
+make sense – for example, to prevent G from just being a large complete
+graph. The weakest sensible such assumption is that G has bounded
+clique number, i.e., that G 6◆Kr for some ﬁxed integer r. Then large
+average degree still does not force an induced copy of T – consider com-
+plete bipartite graphs – but large chromatic number might: according to
+the Gy´arf´as-Sumner conjecture from Chapter 5.6, there exists for every
+r 2 N and every tree T an integer k = k(T, r) such that every graph G
+with !(G) 6 r and χ(G) > k contains T as an induced subgraph.
+7.2 Minors
+In this section and the next we ask to what extent assumptions about
+invariants of a graph such as average degree, chromatic number, or girth
+can force it to contain another given graph as a minor or topological
+minor.
+As a starting question, let us consider the analogue of Tur´an’s the-
+orem: how many edges on n vertices force a Kr minor or topological
+minor? The qualitative answer is that, unlike for Kr subgraphs where
+we might need as many as 1
+2
+r−2
+r−1n2 edges, a number of edges linear in n
+is enough: it suﬃces to assume that the graph has large enough average
+degree (depending on r).
+Proposition 7.2.1. Every graph of average degree at least 2r−2 has a
+Kr minor, for all r 2 N.
+Proof. We apply induction on r. For r 6 2 the assertion is trivial. For
+the induction step let r > 3, and let G be any graph of average degree
+at least 2r−2. Then "(G) > 2r−3; let H be a minimal minor of G with
+"(H) > 2r−3. Pick a vertex x 2 H. By the minimality of H, x is not iso-
+2 see Chapter 11
+7.2 Minors
+
+186
+7. Extremal Graph Theory
+lated. And each of its neighbours y has at least 2r−3 common neighbours
+with x: otherwise contracting the edge xy would lose us one vertex and
+at most 2r−3 edges, yielding a smaller minor H0 with "(H0) > 2r−3. The
+subgraph induced in H by the neighbours of x therefore has minimum
+degree at least 2r−3, and hence has a Kr−1 minor by the induction hy-
+pothesis. Together with x this yields the desired Kr minor of G.
+⇤
+In Proposition 7.2.1 we needed an average degree of 2r−2 to force a
+Kr minor by induction on r. Forcing a topological Kr minor is a little
+harder: we shall ﬁx its branch vertices in advance and then construct its
+subdivided edges inductively, which requires an average degree of 2(
+r
+2) to
+start with. Apart from this di↵erence, the proof follows the same idea:
+Proposition 7.2.2. Every graph of average degree at least 2(
+r
+2) has a
+topological Kr minor, for every integer r > 2.
+Proof. The assertion is clear for r = 2, so let us assume that r > 3.
+(1.2.2)
+(1.3.1)
+We show by induction on m = r, . . . ,
+$r
+2
+%
+that every graph G of average
+degree d(G) > 2m has a topological minor X with r vertices and m edges.
+If m = r then, by Propositions 1.2.2 and 1.3.1, G contains a cycle
+of length at least "(G) + 1 > 2r−1 + 1 > r + 1, and the assertion follows
+with X = Cr.
+Now let r < m 6
+$r
+2
+%
+, and assume the assertion holds for smaller m.
+Let G with d(G) > 2m be given; thus, "(G) > 2m−1. Since G has a
+component C with "(C) > "(G), we may assume that G is connected.
+Consider a maximal set U ✓V (G) such that U is connected in G and
+U
+"(G/U) > 2m−1; such a set U exists, because G itself has the form G/U
+with |U| = 1. Since G is connected, we have N(U) 6= ;.
+Let H := G[N(U)]. If H has a vertex v of degree dH(v) < 2m−1,
+H
+we may add it to U and obtain a contradiction to the maximality
+of U: when we contract the edge vvU in G/U, we lose one vertex and
+dH(v) + 1 6 2m−1 edges, so " will still be at least 2m−1.
+Therefore
+d(H) > δ(H) > 2m−1. By the induction hypothesis, H contains a TY
+with |Y | = r and kY k = m −1.
+Let x, y be two branch vertices of
+this TY that are non-adjacent in Y . Since x and y lie in N(U) and U is
+connected in G, G contains an x–y path whose inner vertices lie in U.
+Adding this path to the TY , we obtain the desired TX.
+⇤
+In Chapter 3.5 we used the TKr from Proposition 7.2.2 (stated
+there as Lemma 3.5.1) for a ﬁrst proof that large enough connectivity
+f(k) implies that a graph is k-linked. Later, in Theorem 3.5.3, we saw
+that connectivity as low as 2k, coupled with an average degree of at
+least 16k, is enough to imply this.
+Conversely, we can use the more involved Theorem 3.5.3 to reduce
+the bound in Proposition 7.2.2 from exponential to quadratic, which is
+best possible up to a multiplicative constant (Exercise 24):
+
+7.2 Minors
+187
+Theorem 7.2.3. There is a constant c 2 R such that, for every r 2 N,
+every graph G of average degree d(G) > cr2 contains Kr as a topological
+minor.
+Proof. We prove the theorem with c = 10. Let G with d(G) > 10r2 be
+(1.4.3)
+(3.5.3)
+given. By Theorem 1.4.3 for k := r2, G has a subgraph H with (H) > r2
+and "(H) > "(G)−r2 > 4r2. For a TKr in H, pick a set X of r vertices
+in H as branch vertices, and a set Y of r(r −1) neighbours of X in H,
+r −1 for each vertex in X, as initial subdividing vertices. These are r2
+vertices altogether; they can be chosen distinct, since δ(H) > (H) > r2.
+It remains to link up the vertices of Y in pairs, by disjoint paths in
+H0 := H −X corresponding to the edges of Kr. This can be done if Y
+is linked in H0. We show more generally that H0 is 1
+2r(r −1)-linked, by
+checking that H0 satisﬁes the premise of Theorem 3.5.3 for k = 1
+2r(r −1).
+We have (H0) > (H) −r > r(r −1) = 2k. And as H0 was obtained
+from H by deleting at most r|H| edges (as well as some vertices), we
+also have "(H0) > "(H) −r > 4r(r −1) = 8k.
+⇤
+For small r one can try to determine the exact number of edges
+needed to force a TKr subgraph on n vertices. For r = 4, this number
+is 2n −2; see Corollary 7.3.2. For r = 5, plane triangulations yield a
+lower bound of 3n −5 (Corollary 4.2.10).
+The converse, that 3n −5
+edges do force a TK5 – not just either a TK5 or a TK3,3, as they do
+by Corollary 4.2.10 and Kuratowski’s theorem – is already a diﬃcult
+theorem (Mader 1998).
+The average degree needed to force an arbitrary Kr minor is less
+than that for a TKr, and it is known very precisely; see the notes for
+the value of c in the following result.
+Theorem 7.2.4. (Kostochka 1982)
+There exists a constant c 2 R such that, for every r 2 N, every graph G
+of average degree d(G) > c rplog r contains Kr as a minor. Up to the
+value of c, this bound is best possible as a function of r.
+The easier implication of the theorem, the fact that in general an average
+degree of c rplog r is needed to force a Kr minor, follows from consid-
+ering random graphs as introduced in Chapter 11. The converse im-
+plication, that this average degree suﬃces, is proved by methods not
+dissimilar to the proof of Theorem 3.5.3.
+Rather than proving Theorem 7.2.4, therefore, we devote the re-
+mainder of this section to another striking aspect of forcing minors: that
+we can force a Kr minor in a graph simply by raising its girth (as long
+as we do not merely subdivide edges). At ﬁrst glance, this may seem
+almost paradoxical. But it looks more plausible if, rather than trying to
+force a Kr minor directly, we instead try to force a minor just of large
+
+188
+7. Extremal Graph Theory
+minimum or average degree – which suﬃces by Theorem 7.2.4. For if
+the girth g of a graph is large then the ball { v | d(x, v) < bg/2c } around
+a vertex x induces a tree with many leaves, each of which sends all but
+one of its incident edges away from the tree. Contracting enough disjoint
+such trees we can thus hope to obtain a minor of large average degree,
+which in turn will have a large complete minor.
+The following lemma realizes this idea.
+Lemma 7.2.5. Let d, k 2 N with d > 3, and let G be a graph of minimum
+degree δ(G) > d and girth g(G) > 8k + 3. Then G has a minor H of
+minimum degree δ(H) > d(d −1)k.
+Proof. Let X ✓V (G) be maximal with d(x, y) > 2k for all distinct
+x, y
+2 X.
+For each x 2 X put T 0
+x := {x}.
+Given i < 2k, assume
+X
+that we have deﬁned disjoint trees T i
+x ✓G (one for each x 2 X) whose
+vertices together are precisely the vertices at distance at most i from X
+in G. Joining each vertex at distance i + 1 from X to a neighbour at
+distance i, we obtain a similar set of disjoint trees T i+1
+x
+. As every vertex
+of G has distance at most 2k from X (by the maximality of X), the trees
+Tx := T 2k
+x
+obtained in this way partition the entire vertex set of G. Let
+Tx
+H be the minor of G obtained by contracting every Tx.
+To prove that δ(H) > d(d −1)k, note ﬁrst that the Tx are induced
+subgraphs of G, because diam(Tx) 6 4k and g(G) > 4k + 1. Similarly,
+there is at most one edge in G between any two trees Tx and Ty: two
+such edges, together with the paths joining their ends in Tx and Ty,
+would form a cycle of length at most 8k + 2 < g(G). So all the edges
+leaving Tx are preserved in the contraction.
+How many such edges are there?
+Note that, for every vertex
+u 2 T k−1
+x
+, all its dG(u) > d neighbours v also lie in Tx: since d(v, x) 6 k
+and d(x, y) > 2k for every other y 2 X, we have d(v, y) > k > d(v, x),
+so v was added to Tx rather than to Ty when those trees were deﬁned.
+Therefore T k
+x , and hence also Tx, has at least d(d −1)k−1 leaves. But
+every leaf of Tx sends at least d −1 edges away from Tx, so Tx sends at
+least d(d −1)k edges to (distinct) other trees Ty.
+⇤
+Lemma 7.2.5 provides Theorem 7.2.4 with the following corollary:
+Theorem 7.2.6. (Thomassen 1983)
+There exists a function f: N ! N such that every graph of minimum
+degree at least 3 and girth at least f(r) has a Kr minor, for all r 2 N.
+Proof. We prove the theorem with f(r) := 8 log r + 4 log log r + c , for
+some constant c 2 R. Let k = k(r) 2 N be minimal with 3·2k > c0rplog r,
+where c0 2 R is the constant from Theorem 7.2.4. Then for a suitable
+constant c 2 R we have 8k + 3 6 8 log r + 4 log log r + c, and the result
+follows by Lemma 7.2.5 and Theorem 7.2.4.
+⇤
+
+189
+Large girth can also be used to force a topological Kr minor. We
+now need some vertices of degree at least r−1 to serve as branch vertices,
+but if we assume a minimum degree of r −1 to secure these, we can even
+get by with a girth bound that is independent of r:
+Theorem 7.2.7. (K¨uhn & Osthus 2002)
+[7.3.9]
+There exists a constant g such that G ◆TKr for every graph G satisfying
+δ(G) > r −1 and g(G) > g.
+7.3 Hadwiger’s conjecture
+As we saw in Section 7.2, an average degree of c rplog r suﬃces to force
+an arbitrary graph to have a Kr minor, and an average degree of cr2
+forces it to have a topological Kr minor.
+If we replace ‘average de-
+gree’ above with ‘chromatic number’ then, with almost the same con-
+stants c, the two assertions remain true: this is because every graph
+with chromatic number k has a subgraph of average degree at least k −1
+(Lemma 5.2.3).
+Although both functions above, c rplog r and cr2, are best possible
+(up to the constant c) for the said implications with ‘average degree’,
+the question arises whether they are still best possible with ‘chromatic
+number’ – or whether some slower-growing function would do in that
+case. What lies hidden behind this problem about growth rates is a fun-
+damental question about the nature of the invariant χ: can this invariant
+have some direct structural e↵ect on a graph in terms of forcing concrete
+substructures, or is its e↵ect no greater than that of the ‘unstructural’
+property of having lots of edges somewhere, which it implies trivially?
+Neither for general nor for topological minors is the answer to this
+question known. For general minors, however, the following conjecture
+of Hadwiger suggests a positive answer:
+Conjecture. (Hadwiger 1943)
+The following implication holds for every integer r > 0 and every
+graph G:
+χ(G) > r
+)
+G < Kr.
+Hadwiger’s conjecture is trivial for r 6 2, easy for r = 3 and r = 4
+(exercises), and equivalent to the four colour theorem for r = 5 and
+r = 6. For r > 7 the conjecture is open, but it is true for line graphs
+(Exercise 34) and for graphs of large girth (Exercise 32; see also Corol-
+lary 7.3.9). Rephrased as G < Kχ(G), it is true for almost all graphs.3
+In general, the conjecture for r + 1 implies it for r (exercise).
+3 See Chapter 11 for the notion of ‘almost all’.
+7.3 Hadwiger’s conjecture

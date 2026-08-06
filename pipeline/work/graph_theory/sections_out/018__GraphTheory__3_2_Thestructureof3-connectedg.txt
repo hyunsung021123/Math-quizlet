@@ -1,0 +1,310 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 3. Connectivity
+현재 소단원: 3.2 The structure of 3-connected graphs
+직전 소단원: 「3.1 2-Connected graphs and subgraphs」
+[본문]
+66
+3. Connectivity
+Lemma 3.1.4. The block graph of a connected graph is a tree.
+⇤
+Lemma 3.1.4 generalizes to graphs of higher connectivity: every
+(k −1)-connected graph has a canonical tree-like decomposition that
+separates all its ‘k-blocks’. See Theorem 12.3.7 for the precise statement,
+and Exercise 17 in Chapter 12 for the case of k = 3.
+3.2 The structure of 3-connected graphs
+In this section we describe how every 3-connected graph can be ob-
+tained from a K4 by a succession of elementary operations preserving
+3-connectedness. We then prove a theorem of Tutte about the algebraic
+structure of the cycle space of 3-connected graphs; this will play an
+important role again in Chapter 4.5.
+Proposition 3.1.1 describes how the 2-connected graphs can be con-
+structed inductively, starting from a cycle. All the graphs constructed
+in the process were themselves 2-connected, so the graphs construct-
+ible in this way are precisely the 2-connected graphs. We shall now do
+something similar for 3-connected graphs.
+We shall prove that every
+3-connected graph G 6= K4 can be turned into a smaller 3-connected
+graph in two ways: by deleting an edge (and suppressing any vertices of
+degree 2 that may arise), and by contracting an edge. Inverting these
+processes will give us two independent ways of building all 3-connected
+graphs from a K4.
+Given an edge e in a graph G, we write G .−e for the multigraph ob-
+G .−e
+tained from G−e by suppressing any end of e that has degree 2 in G−e.3
+Lemma 3.2.1. Let e be an edge in a graph G. If G .−e is 3-connected,
+then so is G.
+Proof.
+Thinking of G as obtained from G .−e by adding e, let us call
+(1.4.2)
+the vertices of G .−e the old vertices of G, and any other vertex of G
+(which will be an end of e) a new vertex. Remembering that G .−e, being
+3-connected, has no parallel edges, it is easy to see that, in G, no two
+vertices x1, x2 can separate a new vertex from all the old vertices. So it
+suﬃces to show that {x1, x2} cannot separate two old vertices. If they
+did, then those old vertices would be separated in G .−e by x0
+1 and x0
+2,
+where either x0
+i = xi or, if xi is new, x0
+i is the edge of G .−e subdivided
+by xi. By Proposition 1.4.2, this contradicts our assumption that G .−e
+is 3-connected.
+⇤
+3 See Chapter 1.10 for the formal deﬁnition of suppressing vertices in a multi-
+graph. Recall also that 3-connected multigraphs cannot have multiple edges. Since
+parallel edges arising when a vertex is suppressed are not deleted, our assumption in
+Lemma 3.2.1 that the multigraph G .−e is 3-connected implies that no parallel edges
+arise when it is formed from the graph G. Thus G .−e, too, is in fact a graph.
+
+3.2 The structure of 3-connected graphs
+67
+Lemma 3.2.2. Every 3-connected graph G 6= K4 has an edge e such
+that G .−e is another 3-connected graph.
+Proof. We start by showing that G contains a TK4. Let C be a shortest
+cycle and P = u . . . v a C-path in G. Then ˚
+P 6= ; since C is induced, so
+G −{u, v} contains a C–P path Q. Now C [ P [ Q = TK4.
+Thus, TK4 ✓G 6= K4; choose H = TJ ✓G with some 3-connected
+J 6= G so that kHk is maximum. We shall ﬁnd an edge e in G such that
+H
+G .−e = J.
+As G is 3-connected but proper subdivisions of J are not, we have
+H 6= G. Let P = u . . . v be an H-path in G, chosen if possible so that
+P = u . . . v
+u and v do not lie on the same (subdivided) edge of J.
+(⇤)
+If P violates (⇤) then uv 2 J = H. Indeed, since G is 3-connected, the
+vertices subdividing an edge xy of J could be joined by an H-path P 0
+in G −{x, y} to a vertex not on that subdivided edge; as P 0 would
+satisfy (⇤), this would contradict our choice of P.
+So H = J.
+Our
+assumption that P violates (⇤) now means that uv 2 J. Since G has
+no parallel u–v edges, P has an inner vertex.
+Now (H −uv) [ P is
+another TJ with more edges than H, contradicting our choice of H.
+Therefore P satisﬁes (⇤). Suppressing any vertices of degree 2 in
+H [ P we obtain a multigraph J0 such that J0 .−e = J, where e is the
+edge corresponding to P. By (⇤) the edge e is not parallel to an edge
+of J, so J0, like J, is in fact a graph. By Lemma 3.2.1, J0 is 3-connected.
+As TJ0 = H [ P ✓G has more edges than H, our choice of J with kHk
+maximum implies J0 = G. Thus, G .−e = J as claimed.
+⇤
+Theorem 3.2.3. (Tutte 1966)
+A graph G is 3-connected if and only if there exists a sequence G0, . . . , Gn
+of graphs such that
+(i) G0 = K4 and Gn = G;
+(ii) Gi+1 has an edge e such that Gi = Gi+1 .−e, for every i < n.
+Moreover, the graphs in any such sequence are all 3-connected.
+Proof. If G is 3-connected, use Lemma 3.2.2 to ﬁnd Gn, . . . , G0 in turn.
+Conversely, if G0, . . . , Gn is any sequence of graphs satisfying (i) and (ii),
+then all these graphs, and in particular G = Gn, are 3-connected by
+Lemma 3.2.1.
+⇤
+Theorem 3.2.3 enables us to construct, recursively, the entire class
+of 3-connected graphs. Starting from K4, we simply add to every graph
+already constructed a new edge in every way compatible with (ii): be-
+tween two already existing vertices, between newly inserted subdividing
+vertices (not on the same edge), or between one old vertex and one new
+subdividing vertex.
+
+68
+3. Connectivity
+We now turn to our second method of reducing 3-connected graphs
+to K4, by contracting edges. In what follows we only consider graphs,
+not multigraphs.
+Lemma 3.2.4. Every 3-connected graph G 6= K4 has an edge e such
+[4.4.3]
+that G/e is again 3-connected.
+Proof. Suppose there is no such edge e. Then, for every edge xy 2 G,
+xy
+the graph G/xy contains a separator S of at most 2 vertices.
+Since
+(G) > 3, the contracted vertex vxy of G/xy (see Chapter 1.7) lies in S
+and |S| = 2, i.e. G has a vertex z /2 {x, y} such that {vxy, z} sepa-
+z
+rates G/xy. Then any two vertices separated by {vxy, z} in G/xy are
+separated in G by T := {x, y, z}. Since no proper subset of T separates G,
+every vertex in T has a neighbour in every component C of G −T.
+C
+We choose the edge xy, the vertex z, and the component C so that
+|C| is as small as possible, and pick a neighbour v of z in C (Fig. 3.2.1).
+v
+By assumption, G/zv is again not 3-connected, so again there is a vertex
+w such that {z, v, w} separates G, and as before every vertex in {z, v, w}
+w
+has a neighbour in every component of G −{z, v, w}.
+x
+x
+y
+y
+z
+T
+C
+v
+z
+v
+w
+D
+D
+Fig. 3.2.1. Separating vertices in the proof of Lemma 3.2.4
+As x and y are adjacent, G−{z, v, w} has a component D such that
+D \ {x, y} = ;. Then every neighbour of v in D lies in C (since v 2 C),
+so D \C 6= ; and hence D ( C by the choice of D. This contradicts the
+choice of xy, z and C.
+⇤
+Theorem 3.2.5. (Tutte 1961)
+A graph G is 3-connected if and only if there exists a sequence G0, . . . , Gn
+of graphs with the following two properties:
+(i) G0 = K4 and Gn = G;
+(ii) Gi+1 has an edge xy such that d(x), d(y) > 3 and Gi = Gi+1/xy,
+for every i < n.
+Moreover, the graphs in any such sequence are all 3-connected.
+
+3.2 The structure of 3-connected graphs
+69
+Proof. If G is 3-connected, then by Lemma 3.2.4 there is a sequence
+Gn, . . . , G0 of 3-connected graphs satisfying (i) and (ii).
+Conversely, and to show the ﬁnal statement of the theorem, let
+G0, . . . , Gn be a sequence of graphs satisfying (i) and (ii); we show that
+if Gi is 3-connected then so is Gi+1, for every i < n. Suppose not, let
+S be a separator of at most 2 vertices in Gi+1, and let C1, C2 be two
+components of Gi+1 −S. As x and y are adjacent, we may assume that
+{x, y} \ V (C1) = ; (Fig. 3.2.2). Then C2 contains neither both vertices
+x, y nor a vertex v /2 {x, y}: otherwise vxy or v would be separated
+from C1 in Gi by at most two vertices, a contradiction. But now C2
+contains only one vertex: either x or y. This contradicts our assumption
+of d(x), d(y) > 3.
+⇤
+C1
+C2
+S
+x
+y
+Fig. 3.2.2. The position of xy 2 Gi+1 in the proof of Theorem 3.2.5
+Like Theorem 3.2.3, Theorem 3.2.5 enables us to construct all
+3-connected graphs inductively from K4, by simple local alterations
+and without ever leaving the class of 3-connected graphs. Given a 3-
+connected graph already constructed, pick any vertex v and split it into
+two adjacent vertices v0, v00; then join these to all the former neighbours
+of v, each to at least two. This is the essential core of a result of Tutte
+known as his wheel theorem.4
+For larger integers k it is no longer true that in any k-connected
+graph we can contract an edge so as to obtain another k-connected
+graph. However, for every k there is a constant nk such that in every
+k-connected graph we can either delete or contract an edge so that the
+resulting graph has no separation of order less than k in which both sides
+have at least nk vertices. See the notes.
+Theorem 3.2.6. (Tutte 1963)
+[4.5.2]
+The cycle space of every 3-connected graph G is generated by its non-
+separating induced cycles.
+Proof.
+Given a cycle C in G, let b(C) denote the largest order of a
+b
+component of G −C if there is one, and put b(C) := 0 if V (C) = V (G).
+Suppose the theorem is false, and consider a cycle C with b(C) maximum
+C
+that is not generated by non-separating induced cycles.
+4 Graphs of the form Cn ⇤K1 are called wheels; thus, K4 is the smallest wheel.
+wheel
+
+70
+3. Connectivity
+If V (C) = V (G), then C is the sum of two cycles C1, C2 ✓C + e,
+where e a chord. As b(C1), b(C2) > 0 = b(C), our choice of C implies
+that C1 and C2 are generated by non-separating induced cycles. But
+then so is their sum C, a contradiction.
+Assume now that G −C 6= ;, and let B be a component of G −C
+B
+of order |B| = b(C). Suppose ﬁrst that
+G −B contains a C-path P = u . . . v such that each of the
+two u–v paths on C has an inner vertex in N(B).
+(⇤)
+P
+v
+C
+u
+B
+C1
+C2
+Fig. 3.2.3. C1 and C2 are drawn in broken lines
+Then C is the sum of the two cycles C1, C2 ✓C [P containing P, and for
+each of these Ci there is a component of G−Ci that contains B properly
+(Fig. 3.2.3). Hence b(Ci) > |B| = b(C), with a contradiction as earlier.
+Suppose ﬁnally that (⇤) fails. Then every vertex of C sends an edge
+to B. (Indeed, if not then C contains an N(B) - path Q = x . . . y with
+˚
+Q 6= ;. As G is 3-connected, C −Q 6= ;, and there is a ˚
+Q – (C −Q) path
+in G−{x, y}. Such a path P would satisfy (⇤).) Since V (C) = N(B), any
+chord of C would also be a path P as in (⇤), so C has no chord. Hence
+unless C itself is induced and non-separating, G −C has a component
+B0 6= B. Let P = u . . . v be a C-path through B0, and let Q be a C–P
+P
+B0
+Q
+v
+C
+u
+B
+C1
+C2
+C3
+Fig. 3.2.4. Three cycles C1, C2, C3 summing to C, and each
+missing a vertex of C that sends an edge to B
+
+71
+path in G −{u, v}. Note that Q too avoids B. Now C [ P [ Q contains
+three cycles C1, C2, C3 summing to C and each missing a vertex of C
+(Fig. 3.2.4). As every vertex of C sends an edge to B, we therefore have
+b(Ci) > |B| = b(C) for every i, with the familiar contradiction.
+⇤
+3.3 Menger’s theorem
+The following theorem is one of the cornerstones of graph theory. It is
+another example of the particularly attractive type of theorem disussed
+in the notes for Chapter 2, a discussion which equally applies here:
+Theorem 3.3.1. (Menger 1927)
+Let G = (V, E) be a graph and A, B ✓V . Then the minimum number
+[3.5.2]
+[8.2.5]
+[8.4.3]
+[12.4.3]
+[12.6.3]
+of vertices separating A from B in G is equal to the maximum number
+of disjoint A–B paths in G.
+We o↵er three proofs. Whenever G, A, B are given as in the theorem,
+we denote by k (G, A, B) the minimum number of vertices separating A
+from B in G.
+Clearly, G cannot contain more than k = k (G, A, B)
+k
+disjoint A–B paths; our task will be to show that k such paths exist.
+First proof.
+We apply induction on kGk.
+If G has no edge, then
+|A \ B| = k and we have k trivial A–B paths.
+So we assume that
+G has an edge e = xy. If G has no k disjoint A–B paths, then neither
+does G/e; here, we count the contracted vertex ve as an element of A
+(resp. B) in G/e if in G at least one of x, y lies in A (resp. B). By the
+induction hypothesis, G/e contains an A–B separator Y of fewer than
+k vertices. Among these must be the vertex ve, since otherwise Y ✓V
+would be an A–B separator in G. Then X := (Y r {ve}) [ {x, y} is an
+A–B separator in G of exactly k vertices.
+We now consider the graph G −e.
+Since x, y
+2 X, every A–X
+separator in G −e is also an A–B separator in G and hence contains at
+least k vertices. So by induction there are k disjoint A–X paths in G−e,
+and similarly there are k disjoint X–B paths in G −e. As X separates
+A from B, these two path systems do not meet outside X, and can thus
+be combined to k disjoint A–B paths.
+⇤
+Let P be a set of disjoint A–B paths, and let Q be another such set.
+We say that Q exceeds P if the set of vertices in A that lie on a path in
+exceeds
+P is a proper subset of the set of vertices in A that lie on a path in Q,
+and likewise for B. Then, in particular, |Q| > |P| + 1.
+Second proof. We prove the following stronger statement:
+3.3 Menger’s theorem

@@ -1,0 +1,195 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 6. Flows
+현재 소단원: 6.4 k-Flows for small k
+직전 소단원: 「6.3 Group-valued flows」
+[본문]
+6.4 k-Flows for small k
+165
+6.4 k-Flows for small k
+Trivially, a graph has a 1-ﬂow (the empty set) if and only if it has no
+edges.
+In this section we collect a few simple examples of suﬃcient
+conditions under which a graph has a 2-, 3- or 4-ﬂow. More examples
+can be found in the exercises.
+Proposition 6.4.1. A graph has a 2-ﬂow if and only if all its degrees
+are even.
+Proof. By Theorem 6.3.3, a graph G = (V, E) has a 2-ﬂow if and only if
+(6.3.3)
+it has a Z2-ﬂow, i.e. if and only if the constant map
+!
+E !Z2 with value 1
+satisﬁes (F2). This is the case if and only if all degrees are even.
+⇤
+For the remainder of this chapter, let us call a graph even if all its vertex
+even
+graph
+degrees are even.
+Proposition 6.4.2. A cubic graph has a 3-ﬂow if and only if it is bi-
+partite.
+Proof.
+Let G = (V, E) be a cubic graph.
+Let us assume ﬁrst that
+(1.6.1)
+(6.3.3)
+G has a 3-ﬂow, and hence also a Z3-ﬂow f. We show that any cycle
+C = x0 . . . x`x0 in G has even length (cf. Proposition 1.6.1). Consider
+two consecutive edges on C, say ei−1 := xi−1xi and ei := xixi+1. If f
+assigned the same value to these edges in the direction of the forward
+orientation of C, i.e. if f(ei−1, xi−1, xi) = f(ei, xi, xi+1), then f could
+not satisfy (F2) at xi for any non-zero value of the third edge at xi.
+Therefore f assigns the values 1 and 2 to the edges of C alternately, and
+in particular C has even length.
+Conversely, let G be bipartite, with vertex bipartition {X, Y }. Since
+G is cubic, the map
+!
+E ! Z3 deﬁned by f(e, x, y) := 1 and f(e, y, x) := 2
+for all edges e = xy with x 2 X and y 2 Y is a Z3-ﬂow on G.
+By
+Theorem 6.3.3, then, G has a 3-ﬂow.
+⇤
+What are the ﬂow numbers of the complete graphs Kn? For odd
+n > 1, we have '(Kn) = 2 by Proposition 6.4.1. Moreover, '(K2) = 1,
+and '(K4) = 4; this is easy to see directly (and it follows from Proposi-
+tions 6.4.2 and 6.4.5). Interestingly, K4 is the only complete graph with
+ﬂow number 4:
+Proposition 6.4.3. For all even n > 4, '(Kn) = 3.
+Proof. Proposition 6.4.1 implies that '(Kn) > 3 for even n. We show,
+(6.3.3)
+by induction on n, that every G = Kn with even n > 4 has a 3-ﬂow.
+
+166
+6. Flows
+For the induction start, let n = 6. Then G is the edge-disjoint union
+of three graphs G1, G2, G3, with G1, G2 = K3 and G3 = K3,3. Clearly
+G1 and G2 each have a 2-ﬂow, while G3 has a 3-ﬂow by Proposition 6.4.2.
+The union of all these ﬂows is a 3-ﬂow on G.
+Now let n > 6, and assume the assertion holds for n −2. Clearly,
+G is the edge-disjoint union of a Kn−2 and a graph G0 = (V 0, E0) with
+G0 = Kn−2 ⇤K2.
+The Kn−2 has a 3-ﬂow by induction.
+By Theo-
+rem 6.3.3, it thus suﬃces to ﬁnd a Z3-ﬂow on G0. For every vertex z of
+the Kn−2 ✓G0, let fz be a Z3-ﬂow on the triangle zxyz ✓G0, where
+e = xy is the edge of the K2 in G0. Let f:
+−!
+E0 ! Z3 be the sum of these
+ﬂows. Clearly, f is nowhere zero, except possibly in (e, x, y) and (e, y, x).
+If f(e, x, y) 6= 0, then f is the desired Z3-ﬂow on G0. If f(e, x, y) = 0,
+then f + fz (for any z) is a Z3-ﬂow on G0.
+⇤
+Proposition 6.4.4. Every 4-edge-connected graph has a 4-ﬂow.
+Proof. Let G = (V, E) be a 4-edge-connected graph. By Corollary 2.4.2,
+(2.4.2)
+G has two edge-disjoint spanning trees Ti, i = 1, 2. For each edge e /2 Ti
+let Ci,e be the fundamental cycle with respect to Ti containing e, and let
+fi,e be a Z4-ﬂow of value i around Ci,e – more precisely: a circulation
+f1,e, f2,e
+!
+E ! Z4 with values i and −i on the edges of Ci,e and zero elsewhere.
+Let f1 := P
+e/
+2T1 f1,e. Since each e /2 T1 lies on only one cycle C1,e0
+f1
+(namely, for e = e0), f1 takes only the values 1 and −1 (= 3) outside T1.
+Let
+F := { e 2 E(T1) | f1(e) = 0 }
+and f2 := P
+e2F f2,e. As above, f2(e) = 2 = −2 for all e 2 F. Now
+f2
+f := f1 +f2 is the sum of circulations with values in Z4, and hence itself
+f
+a circulation with values in Z4. Moreover, f is nowhere zero: on edges
+in F it takes the value 2, on edges of T1 −F it agrees with f1 (and is
+hence non-zero by the choice of F), and on all edges outside T1 it takes
+one of the values 1 or 3. Hence, f is a Z4-ﬂow on G, and the assertion
+follows by Theorem 6.3.3.
+⇤
+Our next proposition describes the graphs with a 4-ﬂow in terms
+of those with a 2-ﬂow. Given integers m, n > 2, write Zm ⇥Zn for the
+Zm ⇥Zn
+group whose elements are the pairs (a, b) with a 2 Zm and b 2 Zn and
+where (a, b) + (a0, b0) := (a + a0, b + b0).
+Proposition 6.4.5.
+(i) A graph has a 4-ﬂow if and only if it is the union of two even
+subgraphs.
+(ii) A cubic graph has a 4-ﬂow if and only if it is 3-edge-colourable.
+Proof. By Corollary 6.3.2 and Theorem 6.3.3, a graph has a 4-ﬂow if and
+(6.3.2)
+(6.3.3)
+only if it has a Z2
+2 -ﬂow, where Z2
+2 := Z2 ⇥Z2. Assertion (i) now follows
+from Proposition 6.4.1.
+
+167
+(ii) Let G = (V, E) be a cubic graph. We assume ﬁrst that G has a
+Z2
+2 -ﬂow f, and deﬁne an edge colouring E !Z2
+2 r{0}. As a = −a for all
+a 2 Z2
+2, we have f(
+!e) = f(
+ e) for every
+!e 2
+!
+E; let us colour the edge
+e with this colour f(
+!e). Now if two edges with a common end v had
+the same colour, then these two values of f would sum to zero; by (F2),
+f would then assign zero to the third edge at v. As this contradicts the
+deﬁnition of f, our edge colouring is correct.
+Conversely, since the three non-zero elements of Z2
+2 sum to zero,
+every 3-edge-colouring c: E !Z2
+2 r{0} deﬁnes a Z2
+2 -ﬂow on G by letting
+f(
+!e) = f(
+ e) = c(e) for all
+!e 2
+!
+E.
+⇤
+Corollary 6.4.6. Every cubic 3-edge-colourable graph is bridgeless.
+⇤
+6.5 Flow-colouring duality
+In this section we shall see a surprising connection between ﬂows and
+colouring: every k-colouring of a plane multigraph gives rise to a k-ﬂow
+on its dual, and vice versa. In this way, the investigation of k-ﬂows on
+arbitrary graphs, not necessarily planar, appears as a natural general-
+ization of the familiar map colouring problems in the plane.
+Let G = (V, E) and G⇤= (V ⇤, E⇤) be dual plane multigraphs. (This
+G = (V, E)
+G⇤= (V ⇤, E⇤)
+implies that G and G⇤are connected; see Chapter 4.6.) For simplicity,
+let us assume that G and G⇤have neither bridges nor loops and are
+non-trivial. For edge sets F ✓E, let us write
+F ⇤:= { e⇤2 E⇤| e 2 F } .
+F ⇤
+Conversely, if a subset of E⇤is given, we shall usually write it immedi-
+ately in the form F ⇤, and thus let F ✓E be deﬁned implicitly via the
+bijection e 7! e⇤.
+Suppose we are given a circulation g on G⇤: how can we employ the
+duality between G and G⇤to derive from g some information about G?
+The most general property of all circulations is Proposition 6.1.1, which
+says that g(X, X) = 0 for all X ✓V ⇤. By Proposition 4.6.1, the bonds
+E⇤(X, X) in G⇤correspond precisely to the cycles in G. Thus if we take
+the composition f of the maps e 7! e⇤and g, and sum its values over
+the edges of a cycle in G, then this sum should again be zero. Our ﬁrst
+aim is to formalize and prove this observation.
+Of course, there is still a technical hitch: since g takes its arguments
+not in E⇤but in
+−!
+E⇤, we cannot simply deﬁne f as above: we ﬁrst have
+to reﬁne the bijection e 7! e⇤into one from
+!
+E to
+−!
+E⇤, i.e. assign to every
+!e 2
+!
+E canonically one of the two orientations of e⇤. This will be the
+purpose of our ﬁrst lemma. After that, we shall show that f does indeed
+sum to zero along any cycle in G.
+6.5 Flow-colouring duality

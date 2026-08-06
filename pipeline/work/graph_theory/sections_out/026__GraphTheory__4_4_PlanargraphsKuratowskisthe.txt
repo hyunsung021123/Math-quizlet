@@ -1,0 +1,308 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.4 Planar graphs: Kuratowski's theorem
+직전 소단원: 「4.3 Drawings」
+[본문]
+106
+4. Planar Graphs
+In the third step we now extend our homeomorphism ': ˜H ! ˜H0 to
+all of S2. This can be done analogously to the second step, face by face.
+By Proposition 4.2.6, all face boundaries in ˜H and ˜H0 are cycles. Now if
+f is a face of ˜H and C its boundary, then ˜σ(C) := S{ ˜σ(e) | e 2 E(C) }
+bounds the face ˜σ(f) of ˜H0. By Theorem 4.1.4, we may therefore extend
+the homeomorphism ': C ! ˜σ(C) deﬁned so far to a homeomorphism
+from C [f to ˜σ(C)[ ˜σ(f). We ﬁnally take the union of all these homeo-
+morphisms, one for every face f of ˜H, as our desired homeomorphism
+': S2 ! S2; as before, continuity is easily checked.
+⇤
+Let us return now to our original goal, the deﬁnition of equivalence
+for planar embeddings. Let us call two planar embeddings %, %0 of a graph
+G topologically (respectively, combinatorially) equivalent if %0 ◦%−1 is a
+equivalent
+embeddings
+topological (respectively, combinatorial) isomorphism between %(G) and
+%0(G). If G is 2-connected, the two deﬁnitions coincide by Theorem 4.3.1,
+and we simply speak of equivalent embeddings. Clearly, this is indeed an
+equivalence relation on the set of planar embeddings of any given graph.
+Note that two drawings of G resulting from inequivalent embeddings
+may well be topologically isomorphic (exercise): for the equivalence of
+two embeddings we ask not only that some (topological or combinato-
+rial) isomorphism exist between the their images, but that the canonical
+isomorphism %0 ◦%−1 be a topological or combinatorial one.
+Even in this strong sense, 3-connected graphs have only one embed-
+ding up to equivalence:
+Theorem 4.3.2. (Whitney 1933)
+[12.7.4]
+Any two planar embeddings of a 3-connected graph are equivalent.
+Proof. Let G be a 3-connected graph with planar embeddings %: G ! H
+(4.2.7)
+and %0: G ! H0. By Theorem 4.3.1 it suﬃces to show that %0 ◦%−1 is
+a graph-theoretical isomorphism, i.e. that %(C) bounds a face of H if
+and only if %0(C) bounds a face of H0, for every subgraph C ✓G. This
+follows at once from Proposition 4.2.7.
+⇤
+4.4 Planar graphs: Kuratowski’s theorem
+A graph is called planar if it can be embedded in the plane: if it is
+planar
+isomorphic to a plane graph. A planar graph is maximal, or maximally
+planar, if it is planar but cannot be extended to a larger planar graph
+by adding an edge (but no vertex).
+Drawings of maximal planar graphs are clearly maximally plane.
+The converse, however, is not obvious: when we start to draw a planar
+graph, could it happen that we get stuck half-way with a proper sub-
+graph that is already maximally plane? Our ﬁrst proposition says that
+
+4.4 Planar graphs: Kuratowski’s theorem
+107
+this can never happen, that is, a plane graph is never maximally plane
+just because it is badly drawn:
+Proposition 4.4.1.
+(i) Every maximal plane graph is maximally planar.
+(ii) A planar graph with n > 3 vertices is maximally planar if and
+only if it has 3n −6 edges.
+Proof. Apply Proposition 4.2.8 and Corollary 4.2.10.
+⇤
+(4.2.8)
+(4.2.10)
+Which graphs are planar? As we saw in Corollary 4.2.11, no planar
+graph contains K5 or K3,3 as a topological minor. Our aim in this section
+is to prove the surprising converse, a classic theorem of Kuratowski: any
+graph without a topological K5 or K3,3 minor is planar.
+Before we prove Kuratowski’s theorem, let us note that it suﬃces
+to consider ordinary minors rather than topological ones:
+Lemma 4.4.2. A graph contains K5 or K3,3 as a minor if and only if
+it contains K5 or K3,3 as a topological minor.
+Proof. By Proposition 1.7.3 it suﬃces to show that every graph G with a
+(1.7.3)
+K5 minor contains either K5 as a topological minor or K3,3 as a minor.
+So suppose that G < K5, and let K be a minimal model of K5 in G.
+Then every branch set of K induces a tree in K, and between any two
+branch sets K has exactly one edge. If we take the tree induced by a
+branch set Vx and add to it the four edges joining it to other branch sets,
+we obtain another tree, Tx say. By the minimality of K, the tree Tx has
+exactly 4 leaves, the 4 neighbours of Vx in other branch sets (Fig. 4.4.1).
+Tx
+Vx
+Fig. 4.4.1. Every IK5 contains a TK5 or IK3,3
+If each of the ﬁve trees Tx is a TK1,4 then K is a TK5, and we are
+done. If one of the Tx is not a TK1,4 then it has exactly two vertices
+of degree 3. Contracting Vx onto these two vertices, and every other
+branch set to a single vertex, we obtain a graph on 6 vertices containing
+a K3,3. Thus, G < K3,3 as desired.
+⇤
+
+108
+4. Planar Graphs
+We ﬁrst prove Kuratowski’s theorem for 3-connected graphs. This
+is the heart of the proof: the general case will then follow easily.
+Lemma 4.4.3. Every 3-connected graph G without a K5 or K3,3 minor
+is planar.
+Proof. We apply induction on |G|. For |G| = 4 we have G = K4, and
+(3.2.4)
+(4.2.1)
+(4.2.6)
+the assertion holds. Now let |G| > 4, and assume the assertion is true
+for smaller graphs. By Lemma 3.2.4, G has an edge xy such that G/xy
+xy
+is again 3-connected. Since the minor relation is transitive, G/xy has no
+K5 or K3,3 minor either. Thus, by the induction hypothesis, G/xy has
+a drawing ˜G in the plane. Let f be the face of ˜G −vxy containing the
+˜G
+point vxy, and let C be the boundary of f. Let X := NG(x) r {y} and
+f, C
+Y := NG(y) r {x}; then X [ Y ✓V (C), because vxy 2 f. Clearly,
+X, Y
+˜G0 := ˜G −{ vxyv | v 2 Y r X }
+˜G0
+may be viewed as a drawing of G−y, in which the vertex x is represented
+by the point vxy (Fig. 4.4.2). Our aim is to add y to this drawing to
+obtain a drawing of G.
+x1
+x2
+x3
+x4
+x5
+x (= vxy)
+C
+f1
+P4
+f
+Fig. 4.4.2. ˜G0 as a drawing of G−y: the vertex x is represented
+by the point vxy
+Since ˜G is 3-connected, ˜G −vxy is 2-connected, so C is a cycle
+(Proposition 4.2.6). Let x1, . . . , xk be an enumeration along this cycle of
+x1, . . . , xk
+the vertices in X, and let Pi = xi . . . xi+1 be the X-paths on C between
+Pi
+them (i = 1, . . . , k; with xk+1 := x1). Let us show that Y ✓V (Pi) for
+some i. Suppose not. If y has a neighbour y0 2 ˚
+Pi for some i, it has
+another neighbour y00 2 C −Pi, and these are separated in C by x0 := xi
+and x00 := xi+1. If Y ✓X and |Y \ X| 6 2, then y has exactly two
+neighbours y0, y00 on C but not in the same Pi, so again y0 and y00 are
+separated on C by two vertices x0, x00 2 X. In either case, x, y0, y00 and
+y, x0, x00 are the branch vertices of a TK3,3 in G, a contradiction. The
+only remaining case is that y and x have three common neighbours on C.
+Then these form a TK5 with x and y, again a contradiction.
+Fix i so that Y ✓Pi. The point set C r Pi is contained in one of
+the two faces of the cycle Ci := xxiPixi+1x; we denote the other face of
+Ci
+
+4.4 Planar graphs: Kuratowski’s theorem
+109
+Ci by fi. Clearly, fi lies inside a face of C. By Lemma 4.2.1 (ii), one of
+fi
+these is f. Since fi meets f (close to x), we thus have fi ✓f. Moreover,
+the plane edges xxj with j /2 {i, i+1} meet Ci only in x and end outside
+fi in C r Pi, so fi meets none of those edges. Hence fi ✓R2 r ˜G0,
+that is, fi is contained in (and hence equal to) a face of ˜G0. We may
+therefore extend ˜G0 to a drawing of G by placing y and its incident edges
+in fi.
+⇤
+Compared with other proofs of Kuratowski’s theorem, the above
+proof has the attractive feature that it can easily be adapted to produce
+a drawing in which every inner face is convex (exercise); in particular,
+every edge can be drawn straight. Note that 3-connectedness is essential
+here: a 2-connected planar graph need not have a drawing with all inner
+faces convex (example?), although it always has a straight-line drawing
+(Exercise 15).
+It is not diﬃcult, in principle, to reduce the general Kuratowski
+theorem to the 3-connected case by manipulating and combining partial
+drawings assumed to exist by induction. For example, if (G) = 2 and
+G = G1 [ G2 with V (G1 \ G2) = {x, y}, and if G has no TK5 or TK3,3
+subgraph, then neither G1 + xy nor G2 + xy has such a subgraph, and
+we may try to combine drawings of these graphs to one of G + xy. (If
+xy is already an edge of G, the same can be done with G1 and G2.)
+For (G) 6 1, things become even simpler.
+However, the geometric
+operations involved require some cumbersome shifting and scaling, even
+if all the plane edges occurring are assumed to be straight.
+The following more combinatorial route o↵ers an ingenious alterna-
+tive. In order to show that a given graph G 6◆TK5, TK3,3 is planar we
+start by adding edges to G until it is edge-maximal with the property
+of not containing a TK5 or TK3,3. In Lemma 4.4.5 we show that this
+makes our graph 3-connected, so by Lemma 4.4.3 it is planar.
+For the proof of Lemma 4.4.5 we need another lemma. We state this
+a little more generally, so that we can use it again in another context in
+Chapter 7. For our application here put X := {K5, K3,3}.
+Lemma 4.4.4. Let X be a set of 3-connected graphs. Let G be a graph
+[7.3.1]
+with a proper separation {V1, V2} of order (G) 6 2.
+If G is edge-
+maximal without a topological minor in X, then so are G1 := G[V1] and
+G2 := G[V2], and G1 \ G2 = K2.
+Proof. Note ﬁrst that every vertex v 2 S := V1 \ V2 has a neighbour in
+S
+every component of Gi −S, i = 1, 2: otherwise S r{v} would separate G,
+contradicting |S| = (G). By the maximality of G, every edge e added
+to G lies in a TX ✓G+e with X 2 X. For all the choices of e considered
+X
+below, the 3-connectedness of X will imply that the branch vertices of
+this TX all lie in the same Vi, say in V1. (The position of e will always be
+symmetrical with respect to V1 and V2, so this assumption entails no loss
+
+110
+4. Planar Graphs
+of generality.) Then the TX meets V2 at most in a path P corresponding
+P
+to an edge of X.
+If S = ;, we obtain an immediate contradiction by choosing e with
+one end in V1 and the other in V2. If S = {v} is a singleton, let e join a
+neighbour v1 of v in V1 r S to a neighbour v2 of v in V2 r S (Fig. 4.4.3).
+Then P contains both v and the edge e = v1v2; replacing its segment
+vPv2v1 with the edge vv1 we obtain a TX in G1 ✓G, a contradiction.
+G1
+G2
+TX
+P
+e
+v
+v1
+v2
+Fig. 4.4.3. If G + e contains a TX, then so does G1 or G2
+So |S| = 2, say S = {x, y}. If xy /2 G, we let e := xy, and in the
+x, y
+arising TX replace e by an x–y path through G2. This yields a TX in G,
+a contradiction. Hence xy 2 G, and G[S] = K2 as claimed.
+It remains to show that G1 and G2 are edge-maximal without a
+topological minor in X.
+So let e0 be an additional edge for G1, say.
+Replacing xPy with the edge xy if necessary, we obtain a TX either
+in G1 + e0 (which shows the edge-maximality of G1, as desired) or in G2
+(which contradicts G2 ✓G).
+⇤
+Lemma 4.4.5. If |G| > 4 and G is edge-maximal with TK5, TK3,3 6✓G,
+then G is 3-connected.
+Proof. We apply induction on |G|. For |G| = 4, we have G = K4 and the
+(4.2.11)
+assertion holds. Now let |G| > 4, and let G be edge-maximal without a
+TK5 or TK3,3. Suppose (G) 6 2, and choose G1 and G2 as in Lemma
+G1, G2
+4.4.4. For X := {K5, K3,3}, the lemma says that G1 \ G2 is a K2, with
+vertices x, y say, and that G1 and G2 too are edge-maximal without a
+x, y
+TK5 or TK3,3. Hence, G1 and G2 are either a triangle or 3-connected by
+the induction hypothesis. Since they cannot contain K5 or K3,3 even as
+an ordinary minor (Lemma 4.4.2), they are thus planar by Lemma 4.4.3.
+For each i = 1, 2 separately, choose a drawing of Gi, a face fi with
+fi
+the edge xy on its boundary, and a vertex zi 6= x, y on the boundary of fi.
+zi
+Let K be a TK5 or TK3,3 in the abstract graph G + z1z2 (Fig. 4.4.4).
+K
+If all the branch vertices of K lie in the same Gi, then either Gi +xzi
+or Gi + yzi (or Gi itself, if zi is already adjacent to x or y, respectively)
+contains a TK5 or TK3,3; this contradicts Corollary 4.2.11, since these
+graphs are planar by the choice of zi. Since G+z1z2 does not contain four
+independent paths between (G1 −G2) and (G2 −G1), these subgraphs
+cannot both contain a branch vertex of a TK5, and cannot both contain
+
+111
+G1
+G2
+z1
+z2
+x
+y
+K
+Fig. 4.4.4. A TK5 or TK3,3 in G + z1z2
+two branch vertices of a TK3,3. Hence K is a TK3,3 with only one branch
+vertex v in, say, G2 −G1. But then also the graph G1 +v +{vx, vy, vz1},
+which is planar by the choice of z1, contains a TK3,3. This contradicts
+Corollary 4.2.11.
+⇤
+Theorem 4.4.6. (Kuratowski 1930; Wagner 1937)
+[4.5.1]
+[5.1.2]
+[12.6.4]
+The following assertions are equivalent for graphs G:
+(i) G is planar;
+(ii) G contains neither K5 nor K3,3 as a minor;
+(iii) G contains neither K5 nor K3,3 as a topological minor.
+Proof. Combine Corollary 4.2.11 with Lemmas 4.4.2, 4.4.3 and 4.4.5.
+(4.2.11)
+⇤
+Corollary 4.4.7. Every maximal planar graph with at least four ver-
+tices is 3-connected.
+Proof. Apply Lemma 4.4.5 and Theorem 4.4.6.
+⇤
+4.5 Algebraic planarity criteria
+One of the most conspicuous features of a plane graph G are its facial
+cycles, the cycles that bound a face. If G is 2-connected it is covered by
+facial
+cycles
+its facial cycles, so in a sense these form a ‘large’ set. In fact, the set of
+facial cycles is large even in the sense that they generate the entire cycle
+space: every cycle in G is easily seen to be the sum of the facial cycles
+(see below). On the other hand, the facial cycles only cover G ‘thinly’,
+as every edge lies on at most two of them. Our ﬁrst aim in this section
+is to show that the existence of such a large yet thinly spread family of
+cycles is not only a conspicuous feature of planarity but lies at its very
+heart: it characterizes it.
+Let G = (V, E) be any graph. We call a subset F of its edge space
+E(G) sparse if every edge of G lies in at most two sets of F. For ex-
+sparse
+ample, the cut space B(G) has a sparse basis consisting of atomic cuts
+(Proposition 1.9.2).
+4.5 Algebraic planarity criteria

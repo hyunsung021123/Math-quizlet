@@ -1,0 +1,369 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.1 Subgraphs
+직전 소단원: 「6.ex Exercises」
+[본문]
+7
+Extremal
+Graph Theory
+In this chapter we study how global parameters of a graph, such as its
+edge density or chromatic number, can inﬂuence its local substructures.
+How many edges, for instance, do we have to give a graph on n vertices
+to be sure that, no matter how these edges are arranged, the graph will
+contain a Kr subgraph for some given r? Or at least a Kr minor? Will
+some suﬃciently high average degree or chromatic number ensure that
+one of these substructures occurs?
+Questions of this type are among the most natural ones in graph
+theory, and there is a host of deep and interesting results. Collectively,
+these are known as extremal graph theory.
+Extremal graph problems in this sense fall neatly into two categories,
+as follows. If we are looking for ways to ensure by global assumptions
+that a graph G contains some given graph H as a minor (or topolo-
+gical minor), it will suﬃce to raise kGk above the value of some linear
+function of |G|, i.e., to make "(G) large enough. The precise value of "
+needed to force a desired minor or topological minor will be our topic
+in Section 7.2. Graphs whose number of edges is about1 linear in their
+number of vertices are called sparse, so Section 7.2 is devoted to ‘sparse
+sparse
+extremal graph theory’.
+A particularly interesting way to force an H minor is to assume
+that χ(G) is large.
+Recall that if χ(G) > k + 1, say, then G has a
+subgraph G0 with 2"(G0) > δ(G0) > k (Lemma 5.2.3). The question here
+is whether the e↵ect of large χ is limited to this indirect inﬂuence via ",
+or whether an assumption of χ > k + 1 can force bigger minors than
+1 Formally, the notions of sparse and dense (below) make sense only for classes
+of graphs whose order tends to inﬁnity, not for individual graphs.
+179
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_7
+
+180
+7. Extremal Graph Theory
+the assumption of 2" > k can. Hadwiger’s conjecture, which we meet
+in Section 7.3, asserts that χ has this quality. The conjecture can be
+viewed as a generalization of the four colour theorem, and is regarded
+by many as the most challenging open problem in graph theory.
+On the other hand, if we ask what global assumptions might imply
+the existence of some given graph H as a subgraph, it will not help to
+raise invariants such as " or χ, let alone any of the other invariants dis-
+cussed in Chapter 1. For as soon as H contains a cycle, there are graphs
+of arbitrarily large chromatic number not containing H as a subgraph
+(Theorem 5.2.5). In fact, unless H is bipartite, any function f such that
+f(n) edges on n vertices force an H subgraph must grow quadratically
+with n (why?).
+Graphs with a number of edges about quadratic in their number of
+dense
+vertices are usually called dense; the number kGk
+8$|G|
+2
+%
+, the proportion
+of its potential edges that G actually has, is the edge density of G. The
+edge
+density
+question of exactly which edge density is needed to force a given subgraph
+is the archetypal extremal graph problem, and it is our ﬁrst topic in this
+chapter (Section 7.1). Rather than attempting to survey the wide ﬁeld of
+‘dense extremal graph theory’, however, we shall concentrate on its two
+most important results: we ﬁrst prove Tur´an’s classical extremal graph
+theorem for H = Kr – a result that has served as a model for countless
+similar theorems for other graphs H – and then state the fundamental
+Erd˝os-Stone theorem, which gives precise asymptotic information for all
+H at once.
+Although the Erd˝os-Stone theorem can be proved by elementary
+means, we shall use the opportunity of its proof to portray a powerful
+modern proof technique that has transformed much of extremal graph
+theory in recent years: Szemer´edi’s regularity lemma. This lemma is
+presented and proved in Section 7.4. In Section 7.5 we outline a general
+method for applying it, and illustrate this by our proof of the Erd˝os-Stone
+theorem. Another application will be given in Chapter 9.2. Sections 7.6–
+7.7 indicate some more advanced tools for applying the regularity lemma.
+7.1 Subgraphs
+Let H be a graph and n > |H|. How many edges will suﬃce to force an
+H subgraph in any graph on n vertices, no matter how these edges are
+arranged? Or, to rephrase the problem: which is the greatest possible
+number of edges that a graph on n vertices can have without containing
+a copy of H as a subgraph? What will such a graph look like? Will it
+be unique?
+A graph G 6◆H on n vertices with the largest possible number of
+edges is called extremal for n and H; its number of edges is denoted by
+extremal
+
+7.1 Subgraphs
+181
+ex(n, H). Clearly, any graph G that is extremal for some n and H will
+ex(n, H)
+also be edge-maximal with H 6✓G. Conversely, though, edge-maximality
+does not imply extremality: G may well be edge-maximal with H 6✓G
+while having fewer than ex(n, H) edges (Fig. 7.1.1).
+Fig. 7.1.1. Two graphs that are edge-maximal with P 3 6✓G; is
+the right one extremal?
+As a case in point, we consider our problem for H = Kr (with r > 1).
+A moment’s thought suggests some obvious candidates for extremality
+here: all complete (r −1)-partite graphs are edge-maximal without con-
+taining Kr. But which among these have the greatest number of edges?
+Clearly those whose partition sets are as equal as possible, i.e. di↵er in
+size by at most 1: if V1, V2 are two partition sets with |V1|−|V2| > 2, we
+may increase the number of edges in our complete (r −1)-partite graph
+by moving a vertex from V1 to V2.
+The unique complete (r −1)-partite graphs on n > r −1 vertices
+whose partition sets di↵er in size by at most 1 are called Tur´an graphs;
+we denote them by T r−1(n) and their number of edges by tr−1(n)
+T r−1(n)
+(Fig. 7.1.2).
+For n < r −1 we shall formally continue to use these
+tr−1(n)
+deﬁnitions, with the proviso that – contrary to our usual terminology –
+the partition sets may now be empty; then, clearly, T r−1(n) = Kn for
+all n 6 r −1.
+Fig. 7.1.2. The Tur´an graph T 3(8)
+The following theorem tells us that T r−1(n) is indeed extremal for
+n and Kr, and as such unique; in particular, ex(n, Kr) = tr−1(n).
+Theorem 7.1.1. (Tur´an 1941)
+[7.1.2]
+[9.2.2]
+For all integers r, n with r > 1, every graph G 6◆Kr with n vertices and
+ex(n, Kr) edges is a T r−1(n).
+
+182
+7. Extremal Graph Theory
+We give two proofs: one using induction, the other by a short and direct
+local argument. While that argument in the second proof is perhaps
+clever, the ﬁrst proof is particularly natural and o↵ers more insight.
+First proof.
+We apply induction on n.
+For n 6 r −1 we have
+G = Kn = T r−1(n) as claimed. For the induction step, let now n > r.
+Since G is edge-maximal without a Kr subgraph, it has a subgraph
+K = Kr−1, with vertices x1, . . . , xr−1 say. From Kr 6✓G alone we have
+K
+kG −Kk 6 ex(n −r + 1, Kr)
+(1)
+and
+Every vertex in G −K sends at most r −2 edges to K.
+(2)
+For i = 1, . . . , r −1 let Vi := { v 2 V (G) | vxi /2 E(G) } (Fig. 7.1.3).
+V1, . . . , Vr−1
+xi
+Vi
+V1
+Vr−1
+G
+K
+K = Kr−1
+Fig. 7.1.3. Are the sets V1, . . . , Vr−1 covering G −K disjoint?
+Are they each independent?
+Let G0 be obtained from K and an (r −1)-partite Tur´an graph
+on V (G −K) by joining its ith partition class completely to K −{xi}
+for each i. This G0 contains no Kr and satisﬁes both (1) and (2) with
+equality, in the case of (1) by the induction hypothesis. Hence so does G,
+because G cannot have fewer edges than G0.
+Equality in (1) means, by the induction hypothesis, that G −K is
+indeed an (r −1)-partite Tur´an graph. And its partition classes must be
+the sets Vi r{xi}, since equality in (2) implies with G 6◆Kr that every Vi
+is independent, and (r −1)-partite Tur´an graphs cannot be covered by
+r −1 sets of independent vertices other than their partition classes. In
+particular, these classes di↵er in size by at most 1. Hence G is a Tur´an
+graph, too: with classes V1, . . . , Vr−1.
+⇤
+
+7.1 Subgraphs
+183
+In our second proof of Tur´an’s theorem we shall use an operation
+called vertex duplication. By duplicating a vertex v 2 G we mean adding
+vertex
+duplication
+to G a new vertex v0 and joining it to exactly the neighbours of v (but
+not to v itself).
+Second proof. We have already seen that among the complete k-partite
+graphs on n vertices the Tur´an graphs T k(n) have the most edges, and
+their degrees show that T r−1(n) has more edges than any T k(n) with
+k < r −1. So it suﬃces to show that G is complete multipartite.
+If not, then non-adjacency is not an equivalence relation on V (G),
+and so there are vertices y1, x, y2 such that y1x, xy2
+/2 E(G) but
+y1y2 2 E(G). If d(y1) > d(x), then deleting x and duplicating y1 yields
+another Kr-free graph with more edges than G, contradicting the choice
+of G. So d(y1) 6 d(x), and similarly d(y2) 6 d(x). But then deleting
+both y1 and y2 and duplicating x twice yields a Kr-free graph with more
+edges than G, again contradicting the choice of G.
+⇤
+The Tur´an graphs T r−1(n) are dense: in order of magnitude, they
+have about n2 edges. More exactly, for every n and r we have
+tr−1(n) 6 1
+2n2 r −2
+r −1 ,
+with equality whenever r −1 divides n (Exercise 7). It is therefore re-
+markable that just ✏n2 more edges (for any ﬁxed ✏> 0 and n large) give
+us not only a Kr subgraph (as does Tur´an’s theorem) but a Kr
+s for any
+given integer s – a graph itself teeming with Kr subgraphs:
+Theorem 7.1.2. (Erd˝os & Stone 1946)
+For all integers r > 2 and s > 1, and every ✏> 0, there exists an integer
+n0 such that every graph with n > n0 vertices and at least
+tr−1(n) + ✏n2
+edges contains Kr
+s as a subgraph.
+A proof of the Erd˝os-Stone theorem will be given in Section 7.5, as
+an illustration of how the regularity lemma may be applied. But the
+theorem can also be proved directly; see the notes for references.
+The Erd˝os-Stone theorem is interesting not only in its own right: it
+also has a most interesting corollary. In fact, it was this entirely unex-
+pected corollary that established the theorem as a kind of meta-theorem
+for the extremal theory of dense graphs, and thus made it famous.
+Given a graph H and an integer n, consider the number hn :=
+ex(n, H)/
+$n
+2
+%
+: the maximum edge density that an n-vertex graph can
+
+184
+7. Extremal Graph Theory
+have without containing a copy of H.
+Could it be that this critical
+density is essentially just a function of H, that hn converges as n ! 1?
+Theorem 7.1.2 implies this, and more: the limit of hn is determined by a
+very simple function of a natural invariant of H – its chromatic number!
+Corollary 7.1.3. For every graph H with at least one edge,
+lim
+n!1 ex(n, H)
+✓n
+2
+◆−1
+= χ(H) −2
+χ(H) −1 .
+For the proof of Corollary 7.1.3 we need as a lemma that tr−1(n)
+never deviates much from the value it takes when r −1 divides n (see
+above), and that tr−1(n)/
+$n
+2
+%
+converges accordingly. The proof of the
+lemma is left as an easy exercise with hint (Exercise 8).
+Lemma 7.1.4.
+[7.1.2]
+lim
+n!1 tr−1(n)
+✓n
+2
+◆−1
+= r −2
+r −1 .
+⇤
+Proof of Corollary 7.1.3. Let r := χ(H). Since H cannot be coloured
+r
+with r −1 colours, we have H 6✓T r−1(n) for all n 2 N, and hence
+tr−1(n) 6 ex(n, H) .
+On the other hand, H ✓Kr
+s for all suﬃciently large s, so
+ex(n, H) 6 ex(n, Kr
+s)
+for all those s. Let us ﬁx such an s. For every ✏> 0, Theorem 7.1.2
+s
+implies that eventually (i.e. for large enough n)
+ex(n, Kr
+s) < tr−1(n) + ✏n2.
+Hence for n large,
+tr−1(n)/
+$n
+2
+%
+6 ex(n, H)/
+$n
+2
+%
+6 ex(n, Kr
+s)/
+$n
+2
+%
+< tr−1(n)/
+$n
+2
+%
++ ✏n2/
+$n
+2
+%
+= tr−1(n)/
+$n
+2
+%
++ 2✏/(1 −1
+n)
+6 tr−1(n)/
+$n
+2
+%
++ 4✏
+(assume n > 2).
+Therefore, since tr−1(n)/
+$n
+2
+%
+converges to r−2
+r−1 (Lemma 7.1.4), so does
+ex(n, H)/
+$n
+2
+%
+.
+⇤
+
+185
+For bipartite graphs H, Corollary 7.1.3 says that substantially fewer
+than
+$n
+2
+%
+edges suﬃce to force an H subgraph. It turns out that
+c1n2−
+2
+r+1 6 ex(n, Kr,r) 6 c2n2−1
+r
+for suitable constants c1, c2 depending on r; the lower bound is obtained
+by random graphs,2 the upper bound is calculated in Exercise 12. If H
+is a forest, then H ✓G as soon as "(G) is large enough, so ex(n, H) is at
+most linear in n (Exercise 14). Erd˝os and S´os conjectured in 1963 that
+Erd˝os-S´os
+conjecture
+ex(n, T) 6 1
+2(k −1)n for all trees with k > 2 edges; as a general bound
+for all n, this is best possible for every T (Exercises 15–17).
+A related but rather di↵erent question is whether large values of
+" or χ can force a graph G to contain a given tree T as an induced
+subgraph. Of course, we need some additional assumption for this to
+make sense – for example, to prevent G from just being a large complete
+graph. The weakest sensible such assumption is that G has bounded
+clique number, i.e., that G 6◆Kr for some ﬁxed integer r. Then large
+average degree still does not force an induced copy of T – consider com-
+plete bipartite graphs – but large chromatic number might: according to
+the Gy´arf´as-Sumner conjecture from Chapter 5.6, there exists for every
+r 2 N and every tree T an integer k = k(T, r) such that every graph G
+with !(G) 6 r and χ(G) > k contains T as an induced subgraph.
+7.2 Minors
+In this section and the next we ask to what extent assumptions about
+invariants of a graph such as average degree, chromatic number, or girth
+can force it to contain another given graph as a minor or topological
+minor.
+As a starting question, let us consider the analogue of Tur´an’s the-
+orem: how many edges on n vertices force a Kr minor or topological
+minor? The qualitative answer is that, unlike for Kr subgraphs where
+we might need as many as 1
+2
+r−2
+r−1n2 edges, a number of edges linear in n
+is enough: it suﬃces to assume that the graph has large enough average
+degree (depending on r).
+Proposition 7.2.1. Every graph of average degree at least 2r−2 has a
+Kr minor, for all r 2 N.
+Proof. We apply induction on r. For r 6 2 the assertion is trivial. For
+the induction step let r > 3, and let G be any graph of average degree
+at least 2r−2. Then "(G) > 2r−3; let H be a minimal minor of G with
+"(H) > 2r−3. Pick a vertex x 2 H. By the minimality of H, x is not iso-
+2 see Chapter 11
+7.2 Minors

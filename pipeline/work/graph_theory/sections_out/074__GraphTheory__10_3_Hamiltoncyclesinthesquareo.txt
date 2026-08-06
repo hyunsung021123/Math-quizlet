@@ -1,0 +1,375 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 10. Hamilton Cycles
+현재 소단원: 10.3 Hamilton cycles in the square of a graph
+직전 소단원: 「10.2 Hamilton cycles and degree sequences」
+[본문]
+330
+10. Hamilton Cycles
+10.3 Hamilton cycles in the square of a graph
+Given a graph G and a positive integer d, we denote by Gd the graph on
+Gd
+V (G) in which two vertices are adjacent if and only if they have distance
+at most d in G. Clearly, G = G1 ✓G2 ✓. . . Our goal in this section is
+to prove the following fundamental result:
+Theorem 10.3.1. (Fleischner 1974)
+If G is a 2-connected graph, then G2 has a Hamilton cycle.
+The proof of Theorem 10.3.1 will go roughly as follows. We start
+by ﬁnding a cycle C in G. Using induction, we shall cover the remaining
+vertices by C - paths in G2. The ﬁrst and last edges of those paths will
+be edges of G, like those of C. By deleting some of these edges and
+doubling others, we turn the union of C and all the C - paths into a
+multigraph with even degrees, and ﬁnd an Euler tour in it. This Euler
+tour W will pass some vertices more than once, but all edges in such
+multiple passes will be edges of G. For all but one of the passes through
+a given vertex we can therefore try to replace its two G - edges by an edge
+of G2 (Fig. 10.3.1), hoping to turn our Euler tour into a Hamilton cycle
+of G2. The main diﬃculty will be to ensure that these lifts of passes are
+compatible, i.e., that we do not attempt to lift an edge at both its ends.
+v
+v
+Fig. 10.3.1. Reducing the degree of v in W by lifting a pass
+Lemma 10.3.2. For every 2-connected graph G and x 2 V (G), there is a
+cycle C ✓G that contains x as well as a vertex y 6= x with NG(y) ✓V (C).
+Proof. If G has a Hamilton cycle, there is nothing more to show. If
+not, let C0 ✓G be any cycle containing x; such a cycle exists, since G
+is 2-connected. Let D be a component of G −C0. Assume that C0 and
+D are chosen so that |D| is minimum. Since G is 2-connected, D has
+at least two neighbours on C0. Then C0 contains a path P between two
+such neighbours u and v, whose interior ˚
+P does not contain x and has
+no neighbour in D (Fig. 10.3.2).
+Replacing P in C0 by a u–v path through D, we obtain a cycle C
+that contains x and a vertex y 2 D. If y had a neighbour z in G−C, then
+z would lie in a component D0 ( D of G −C, contradicting the choice
+of C0 and D. Hence all the neighbours of y lie on C, and C satisﬁes the
+assertion of the lemma.
+⇤
+
+10.3 Hamilton cycles in the square of a graph
+331
+x
+C
+D
+P
+u
+v
+y
+z
+C
+D
+D
+Fig. 10.3.2. The proof of Lemma 10.3.2
+For our proof of Theorem 10.3.1 we need some more deﬁnitions. Let
+G be a multigraph, and W a walk in G. A pass of W through a vertex x
+pass
+is a subwalk of the form uexfv, where e and f are edges. (We also count
+uexfv as a pass of W if W = xfv . . . uex.) By lifting this pass we mean
+lift
+replacing it in W by a new u–v edge if u 6= v, or by the single vertex u
+if u = v. A multipath is a multigraph obtained from a path by replacing
+multipath
+some of its edges by double edges. Given C ✓G, we deﬁne a C-trail to
+C-trail
+be either a C-path or a cycle meeting C in exactly one vertex.
+Proof of Theorem 10.3.1. Let G = (V, E) be a 2-connected graph.
+(1.2.1)
+(1.8.1)
+We prove the following stronger assertion by induction on |G|:
+G = (V, E)
+x
+For every vertex x 2 V there is a Hamilton cycle in G2
+whose edges at x lie in E.
+If G is hamiltonian, there is nothing more to show. If not, let C and
+C, y
+y be as provided by Lemma 10.3.2. For i = 1, 2 let ri, si 2 V (C) and
+gi, hi 2 E(C) be such that
+C = xg1r1 . . . s1h1yh2s2 . . . r2g2x ;
+ri, si; gi, hi
+see Figure 10.3.3. (These vertices and edges need not all be distinct.)
+Our ﬁrst aim is to construct for every component D of G −C a set
+of C-trails in G2 + E, where E will be a set of additional edges parallel
+to edges of G. Every vertex of D will lie on exactly one such trail, and
+every edge of such a trail that is incident with a vertex of C will lie in
+E or in E.
+If D consists of a single vertex u, we pick any C-trail in G con-
+taining u, and let ED be the set of its two edges. If |D| > 1, let ˜D
+be the (2-connected) graph obtained from G by contracting G −D to a
+vertex ˜x. Applying the induction hypothesis to ˜D, we obtain a Hamilton
+cycle ˜H of ˜D2 whose edges at ˜x lie in E( ˜D). Write ˜E for the set of those
+edges of ˜H that are not edges of G2; these include its two edges at ˜x.
+Replacing the edges from ˜E by edges of G or new edges e 2 E, we shall
+turn E( ˜H) into the edge set of a union of C-trails.
+
+332
+10. Hamilton Cycles
+Consider an edge uv 2 ˜E, with u 2 D. Then either v = ˜x, or u and
+v have distance at most 2 in ˜D but not in G, and are hence neighbours
+of ˜x in ˜D. In either case, G contains a u–C edge. Let ED be obtained
+from E( ˜H) r ˜E by adding at every vertex u 2 D as many u–C edges
+from E as u has incident edges in ˜E; if u has two incident edges in ˜E
+but in G sends only one edge e to C, we add both e and a new edge
+e parallel to e. Then every vertex of D has the same degree (two) in
+e
+(V, ED) as in ˜H, so ED is the edge set of a union of C-trails. Let
+G0
+G0 :=
+$
+V, E(C) [
+[
+D
+ED
+%
+be the union of C and all these C-trails, for all components D of G −C
+together.
+Our next aim is to turn G0 into an Eulerian multigraph by doubling
+some edges of C. Since G0 is connected, it will suﬃce to do this in such
+a way that all degrees become even (Theorem 1.8.1).2 The vertices of
+G0 outside C already have degree 2. To make the degrees even also at
+the vertices of C we consider these in reverse order, starting with x and
+ending with r1. Let u be the vertex currently considered, and let v be
+the vertex to be considered next. Add a new edge e parallel to e = uv if
+e
+and only if u has odd degree in the multigraph obtained from G0 so far.
+When ﬁnally u = r1 is considered, every other vertex has even degree, so
+r1 must have even degree too (Proposition 1.2.1), and no edge parallel
+to g1 will be added.
+P2
+g1
+s1
+g2
+y
+x
+P1
+h1
+r1
+s2
+h2
+r2
+Fig. 10.3.3. Broken edges may not exist in G1; bold edges are
+known to be single (if they exist)
+From the Eulerian multigraph thus obtained we may now delete
+one or two double edges, as follows (Fig. 10.3.3). If g2 has a parallel
+edge g2, we delete both g2 and g2. If h2 has a parallel edge h2, we delete
+h2 and h2 unless this (together with the deletion of g2 and g2) would
+2 To deduce the multigraph version of Theorem 1.8.1, subdivide every edge once
+to obtain a simple graph.
+
+10.3 Hamilton cycles in the square of a graph
+333
+disconnect our multigraph. We write G1 for the Eulerian multigraph
+G1
+thus obtained, E = E(G1) r E(G2) for the set of all its new parallel
+E
+edges, and C1 := G1[V (C)].
+C1
+Let us note two properties of G1, which follow from its construction
+and the deﬁnition of y:
+The edges of G1 at vertices of C all lie in E [ E.
+(1)
+NG1(y) ✓{s1, s2}; thus, y has degree 2 or 4 in G1.
+(2)
+Let P1 = x1
+0 . . . x1
+`1 be the (maximal) x–y multipath in C1 con-
+`i, xi
+j
+taining g1, and let P2 = x2
+0 . . . x2
+`2 be the multipath consisting of the
+Pi
+other edges of C1. Unless P2 is empty, we think of it as running from
+x2
+0 2 {x, r2} to x2
+`2 2 {y, s2}. We write ei
+j for the xi
+j−1–xi
+j edge of Pi
+in E(C), and ei
+j for its possible parallel edge in E (i = 1, 2).
+ei
+j, ei
+j
+Our plan is to ﬁnd an Euler tour W1 of G1 that can be transformed
+into a Hamilton cycle of G2. In order to endow W1 more easily with
+the required properties, we shall not deﬁne it directly. Instead, we shall
+derive W1 from an Euler tour W2 of a related multigraph G2, which we
+deﬁne next.
+For i = 1, 2 and every j = 1, . . . , `i −1 such that ei
+j+1 2 G1, we delete
+ei
+j and ei
+j+1 from G1 and add a new edge f i
+j joining xi
+j−1 to xi
+j+1; we shall
+fi
+j
+say that f i
+j represents the path xi
+j−1ei
+jxi
+jei
+j+1xi
+j+1 ✓Pi (Fig. 10.3.4).
+Note that every such replacement leaves the current multigraph con-
+nected, and it preserves the parity of all degrees. Hence, the multigraph
+G2 obtained from G1 by all these replacements is Eulerian.
+G2
+xi
+j
+1
+xi
+j
+1
+xi
+j
+xi
+j
+xi
+j+1
+xi
+j+1
+ei
+j+1
+ei
+j+1
+ei
+j+1
+ei
+j
+f i
+j
+Fig. 10.3.4. Replacing ei
+j and ei
+j+1 by a new edge f i
+j
+Pick an Euler tour W2 of G2. To transform W2 into an Euler tour
+W2
+W1 of G1, replace every edge in E(W2)rE(G1) by the path it represents.
+W1
+By (2), there are either one or two passes of W1 through y. If d(y) = 4
+then G1 is connected but G1 −{h2, h2} is not, by deﬁnition of G1. Hence
+the proper y–y subwalk W of W1 starting or ending with the edge h2
+must end or start with the edge h2: otherwise it would contain an s2–y
+walk in G1 −{h2, h2}, and deleting h2 and h2 from G1 could not a↵ect
+its connectedness. Therefore W1 has no pass through y containing both
+h2 and h2: this would close the subwalk W and thus imply W = W1,
+
+334
+10. Hamilton Cycles
+contrary to the deﬁnition of W. Reversing W if necessary, we may thus
+assume:
+If W1 contains two passes through y, then one of these
+contains h1 and h2.
+(3)
+Our plan is to transform W1 into a Hamilton cycle of G2 by lifting,
+at every vertex v 2 C, all but one of the passes of W1 through v. We
+begin by marking the one pass at each vertex that we shall not lift. At x
+we mark an arbitrary pass Q of W1. At y we mark the pass containing h1.
+Q
+For every v 2 V (C)r{x, y} there is a unique pair (i, j) such that v = xi
+j.
+If j > 1, we mark the pass through v = xi
+j that contains ei
+j. If j = 0
+(which can happen only if v = x2
+0 = r2), we mark the pass through v that
+contains e2
+1 if e2
+1 2 G1; otherwise we mark an arbitrary pass through v.
+At every vertex v /2 C we mark the unique pass of W1 through v. Thus:
+At every vertex v 2 G we marked exactly one pass through v.
+(4)
+To avoid conﬂicts when we later lift the unmarked passes, we need that
+no edge of W1 is left unmarked at both its ends:
+For every edge e = uv in W1 we marked at least one of the
+two passes of W1 containing e (one through u, the other
+through v). If u = x, we marked the pass through v.
+(5)
+This is clear for edges not in C1. For every edge e 2 C1, there is a
+unique pair (i, j) such that e = ei
+j or e = ei
+j; then j > 1. If e = ei
+j, we
+marked the pass of W1 through xi
+j that contains e; for e = h2 this follows
+from (3). If e = ei
+j, we marked the pass through xi
+j−1 containing e. In-
+deed, note ﬁrst that e is not incident with x: recall that g1 never existed,
+and if g2 existed it was deleted in the deﬁnition of G1. Hence unless P2
+starts at r2 and e = e2
+1, an edge f i
+j−1 was deﬁned to represent the path
+xi
+j−2ei
+j−1xi
+j−1ei
+jxi
+j. Since W2 contained f i
+j−1, this path is a pass in W1.
+We marked this pass, because it is a pass through xi
+j−1 containing ei
+j−1.
+Finally, if P2 starts at r2 and e = e2
+1, we marked the pass through r2
+containing e explicitly. This completes the proof of (5).
+By (1), all unmarked passes lift to edges of G2. As di↵erent un-
+marked passes never share an edge (5), lifting them all at once turns W1
+into one closed walk H in G2 + E (which inherits the cyclic ordering of
+its edges from W1). By (4), H still contains all the vertices v of G: if uv
+is an edge of a pass marked at v, then H contains either the edge uv or
+the lift wv of a pass weufv. Also by (4), H traverses every vertex only
+once. In particular, H cannot contain a pair of parallel edges. We can
+therefore replace every edge e in H by its parallel edge e 2 E, to obtain
+a Hamilton cycle H of G2. Since we marked Q, and by (5) no edge of Q
+was lifted at its other end, H contains the edges of Q. By (1), these lie
+in E [ E. Hence the edges of H at x lie in E, as desired.
+⇤
+
+Exercises
+335
+Fleischner’s theorem has a natural extension to inﬁnite graphs,
+which is much harder to prove:
+Theorem 10.3.3. (Georgakopoulos 2009)
+The square of every 2-connected locally ﬁnite graph contains a Hamilton
+circle.
+We close the chapter with a far-reaching conjecture generalizing
+Dirac’s theorem:
+Conjecture. (Seymour 1974)
+Let G be a graph of order n > 3, and let k be a positive integer. If G
+has minimum degree
+δ(G) >
+k
+k + 1 n ,
+then G has a Hamilton cycle H such that Hk ✓G.
+For k = 1, this is precisely Dirac’s theorem. The conjecture was proved
+for large enough n (depending on k) by Koml´os, S´ark¨ozy and Szemer´edi
+(1998).
+Exercises
+1.
+An oriented complete graph is called a tournament. Show that every
+tournament contains a (directed) Hamilton path.
+2.
+Show that every uniquely 3-edge-colourable cubic graph is hamilton-
+ian. (‘Unique’ means that all 3-edge-colourings induce the same edge
+partition.)
+3.
+Given an even positive integer k, construct for every n > k a k-regular
+graph of order 2n + 1.
+4.
+Prove or disprove the following strengthening of Proposition 10.1.2:
+‘Every k-connected graph G with |G| > 3 and χ(G) > |G|/k has a
+Hamilton cycle.’
+5.
+Let G be a graph, and H := L(G) its line graph.
+(i) Show that H is hamiltonian if G has a spanning Eulerian sub-
+graph.
+(ii)+ Deduce that H is hamiltonian if G is 4-edge-connected.
+6.
+(i)−Show that hamiltonian graphs are 1-tough.
+(ii) Find a graph that is 1-tough but not hamiltonian.
+7.
+Prove the toughness conjecture for planar graphs. Does it hold with
+t = 2, or even with some t < 2?

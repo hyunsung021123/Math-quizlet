@@ -1,0 +1,741 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.6 Two regularity tools (분할 part 1)
+직전 소단원: 「7.5 Applying the regularity lemma」
+[본문]
+206
+7. Extremal Graph Theory
+ceptional ways, provided we choose m large enough and ✏small enough
+(giving an additional upper bound for ✏). It is now a routine matter to
+compute the values of m and ✏that will work.
+7.6 Two regularity tools
+Our acquaintance with the regularity lemma so far already includes the
+essentials: the notion of regularity, a statement of the regularity lemma,
+its proof, and a typical application of the lemma in our proof of The-
+orem 7.1.2 in Section 7.5. Another application, also based on no more
+than we have covered so far, will be given in the proof of Theorem 9.2.2.
+Both these applications illustrate techniques typically involved in many
+uses of the regularity lemma.
+Our aim in this section is to extract some of these techniques and
+bundle them into formal tools that can be used out of the box: the ‘count-
+ing lemma’, the ‘removal lemma’, and some immediate consequences of
+these. Their proofs will not be short, but the ideas they involve will look
+familiar by now.
+Conversely, our proofs of Theorems 7.1.2 and 9.2.2
+could be rewritten to use some of these formal tools (Exercise 45).
+To facilitate the proof of the counting lemma, it will be convenient
+to use a slightly di↵erent notion of ✏-regularity.
+To avoid confusion,
+we shall call this ‘✏-uniformity’ here; but in the literature it is usually
+referred to as (another version of) ‘✏-regularity’ as well.
+Call a pair (A, B) of disjoint sets of vertices in a graph (✏, d)-uniform
+(✏, d)-
+uniform
+for ✏> 0 and 0 6 d 6 1 if their non-empty subsets X ✓A and Y ✓B
+satisfy
+..kX, Y k −d |X||Y |
+.. 6 ✏|A||B| ,
+or equivalently,
+..d(X, Y ) −d
+.. 6 ✏|A||B|
+|X||Y | .
+We may think of the real number d as a ‘target density’ with which the
+densities d(X, Y ) = kX, Y k/|X||Y | of the pairs (X, Y ) are compared. If
+this is chosen as d = d(A, B), the (✏, d)-uniform pair (A, B) is simply
+called ✏-uniform.
+✏-uniform
+This di↵ers from our deﬁnition of ✏-regularity in Section 7.4 in two
+ways. One is that all subsets X ✓A and Y ✓B are required to satisfy
+the inequality, including those of size less than ✏|A| or ✏|B|. The other
+di↵erence is best seen in the second of the two inequalities. Its left-hand
+side measures how much the density of (X, Y ) di↵ers from that of (A, B).
+Our deﬁnition of ✏-regularity requires that this should be at most ✏. This
+is relaxed here by the factor |A||B|/|X||Y | > 1: the density of small
+pairs (X, Y ) is allowed to deviate from d more than that of bigger ones.
+
+7.6 Two regularity tools
+207
+The di↵erence between ✏-regularity and ✏-uniformity, however, is
+qualitatively irrelevant: ✏-regular pairs are also ✏-uniform, which we use
+freely in this section, and ✏-uniform pairs are
+3p✏-regular (Exercise 42).
+The purpose of the counting lemma is to count in how many ways a
+given graph H can be embedded as a subgraph, not necessarily induced,
+in a larger graph G that comes with an ✏-regular partition. In our ver-
+sion we pre-assign to each vertex of H the partition class of G in which
+we want to embed it. We then count only those embeddings H ! G
+that conform to this assignment, and assume that the pairs of partition
+classes due to accommodate the edges of H form ✏-regular pairs in G.
+The lemma then says, roughly, that the number of such embeddings is
+close to what their expected number would be if G was a random graph
+that had edges only between distinct classes Vi, Vj and these edges were
+chosen independently with probabilities dij close to d(Vi, Vj).10
+It turns out that, for G large enough, there are at least c |G||H|
+such embeddings H ! G, where c depends only on H, ✏, and the densi-
+ties d(Vi, Vj) between the partition classes needed to accommodate the
+edges of H. If all these densities are positive we have c > 0, and can
+therefore ﬁnd at least one copy of H in any large enough G that has
+such an ✏-regular partition.
+Before we state and prove the counting lemma, let us note what
+happens in the special case that H = Kk and G is k-partite with classes
+V1, . . . , Vk, for some k 2 N. Since the vertices of H are pairwise adja-
+k
+cent, any embedding in G sends them to distinct classes, and there are
+Q
+16i6k |Vi| ways of doing that. Not all of them will induce a Kk in G,
+but we can estimate how many of them might: a pair (vi, vj) from (Vi, Vj)
+induces an edge in G with a ‘probability’ of d(Vi, Vj). If these are close
+to given parameters dij, we can expect that about Q
+16i<j6k dij of our
+dij
+Q
+16i6k |Vi| maps V (Kk) ! V (G) induce a Kk also in G.
+Proposition 7.6.1. Let ✏> 0, and let G be a multipartite graph with
+vertex classes V1, . . . , Vk whose pairs (Vi, Vj) are (✏, dij)-uniform in G.
+Then
+...|Kk(G)| −
+Y
+16i<j6k
+dij ·
+Y
+16i6k
+|Vi|
+... 6 ✏
+$k
+2
+% Y
+16i6k
+|Vi| ,
+where Kk(G) denotes the set of complete subgraphs of order k in G.
+Proposition 7.6.1 will follow from Lemma 7.6.2 (Exercise 44).
+For the more general counting lemma we need some notation. Let us
+denote by Hom(H, G) the set, and by hom(H, G) the number, of homo-
+Hom(H, G)
+morphisms from H to G. Recall that these are the maps V (H) ! V (G)
+hom(H, G)
+10 Both uses of ‘close’ here mean, essentially, ‘up to an ✏-portion’.
+
+208
+7. Extremal Graph Theory
+that preserve adjacency, but not necessarily non-adjacency. Vertices of H
+can map to the same vertex of G, but only if they are non-adjacent.11
+Injective homomorphisms ': H ! G embed H in G as a subgraph,
+though not necessarily as an induced subgraph. Note that there can be
+more such homomorphisms than subgraphs of G isomorphic to H, be-
+cause there can be many ways of mapping H to a ﬁxed copy of H in G.
+We may think of each ' as specifying a ‘labelled copy’ of H in G: one
+whose vertices are each ‘labelled’ by the vertices of H that ' maps there.
+Consider a ﬁxed homomorphism ': H ! R with V (R) = {1, . . . , k},
+and let G be a k-partite graph with vertex classes V1, . . . , Vk. Given
+any subgraph H0 ✓H (often, but not always, H0 = H) we write
+Hom'(H0, G) for the set, and hom'(H0, G) for the number, of homo-
+Hom'(H, G)
+morphisms : H0 ! G that satisfy (u) 2 V'(u) for all u 2 V (H0); we
+hom'(H, G)
+call these the '-partite homomorphisms from H0 to G.12
+Lemma 7.6.2. (Counting Lemma)
+Let R be a graph on {1, . . . , k} ✓N, and ': H ! R a homomorphism
+for some graph H. Let G be a multipartite graph with vertex classes
+V1, . . . , Vk, whose pairs (Vi, Vj) with ij 2 E(R) are (✏, dij)-uniform in G
+for some ✏> 0 and various dij > 0. Then
+...hom'(H, G) −
+Y
+e2E(H)
+d'
+e ·
+Y
+u2V (H)
+|V'(u)|
+... 6 ✏kHk
+Y
+u2V (H)
+|V'(u)| ,
+where d'
+e = d'(u)'(w) for edges e = uw of H.
+A typical application of the counting lemma, which we shall prove
+below, says that there are many '-partite homomorphisms H ! G, at
+least
+hom'(H, G) >
+⇣Y
+d'
+e −✏kHk
+⌘
+·
+Y
+|V'(u)|
+many, of which comparatively few are non-injective.
+The conclusion,
+then, is that there are many injective homomorphisms H ! G. In par-
+ticular, there is at least one, so G contains H as a subgraph.
+For example, if χ(H) = k, say, let us show that we can ﬁnd a copy
+of H in any graph G that has a vertex partition {V1, . . . , Vk} whose pairs
+(Vi, Vj) are ✏-uniform with positive density, at least d > 0 say, as soon
+d
+as the classes Vi have some common size ` that is large enough in terms
+`
+of d and ✏, and ✏is small enough that dkHk −✏kHk > 0.13
+11 . . . unless G has loops, which in this book happens only in Chapters 4.6 and 6.
+12 Fixing ': H !R and then looking for injective '-partite homomorphisms H !G
+is similar to ﬁnding embeddings H ! G based on a speciﬁed embedding H ! Rs, as
+we did in our version of the blow-up lemma, Lemma 7.5.2.
+13 In an application, these Vi might be only some of the partition classes of a bigger
+graph to which we have applied the regularity lemma. And only some of their pairs
+may be ✏-uniform with density at least d, just enough pairs for ': H ! R to exist.
+
+7.6 Two regularity tools
+209
+As χ(H) = k, there exists a homomorphism ': H ! R := Kk. We
+apply the counting lemma with ✏< dkHk/kHk and dij := d(Vi, Vj) > d.
+It tells us that
+hom'(H, G) >
+$
+dkHk −✏kHk
+%
+`|H|.
+Let us think of this lower bound as c `|H| in which c is a ‘constant’: it
+depends only on H, d and our choice of ✏(which ensures that c > 0),
+but not on `. Our aim now is to show that if ` is large enough there are
+more injective homomorphism than non-injective ones.
+How many non-injective '-partite homomorphisms : H ! G are
+there? Any such maps two vertices u, w of H to the same vertex of G,
+and for every choice of u and w there are at most `|H|−1 such . Hence
+for c0 =
+$|H|
+2
+%
+there are at most c0`|H|−1 non-injective '-partite homo-
+morphisms H !G altogether. As c `|H| −c0`|H|−1 !1 as `!1, we ﬁnd
+that for ` large enough there exists an injective '-partite homomorphism
+H ! G. In particular, G has a subgraph isomorphic to H.
+Proof of Lemma 7.6.2.
+We apply induction on kHk.
+The induction
+starts trivially with kHk = 0, where we follow the convention that the
+empty product Q
+e2; d'
+e equals 1. For the induction step, pick an edge
+ab 2 H and let H0 := H −ab.
+a, b, H0
+The homomorphisms in Hom'(H, G), which we wish to count, are
+precisly the homomorphisms in Hom(H0, G) that map a, b to adjacent
+vertices of G.
+Let us write 1G for the function that sends a pair of
+1G
+vertices of G to 1 if they are adjacent, and to 0 if not; in particular,
+1G(v, v) = 0 for all v 2 V (G). Then
+hom'(H, G) =
+X
+ 2Hom'(H0,G)
+1G
+$
+ (a), (b)
+%
+.
+In order to apply the induction hypothesis, we rewrite this sum as
+hom'(H, G) =
+X
+ 2Hom'(H0,G)
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab + d'
+ab
+⌘
+=
+X
+ 2Hom'(H0,G)
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘
++ d'
+ab· hom'(H0, G),
+where d'
+ab is deﬁned as in the statement of the counting lemma.
+d'
+ab
+Qualitatively, the induction hypothesis tells that the last term
+above, hom'(H0, G), is close to Q
+e2E(H0) d'
+e · Q
+u2V (H0) |V'(u)|.
+As
+V (H0) = V (H), this di↵ers from the corresponding target value for
+hom'(H, G) only by a factor of d'
+ab: exactly the factor that precedes
+hom'(H0, G) in the equation above. It thus remains to show that the
+big sum in the last equation is small.
+
+210
+7. Extremal Graph Theory
+Quantitatively, the last summand d'
+ab· hom'(H0, G) in our rewriting
+of hom'(H, G) di↵ers from the target value for hom'(H, G) as stated in
+the counting lemma, the number Q
+e2E(H) d'
+e · Q
+u2V (H) |V'(u)|, by
+... d'
+ab · hom'(H0, G) −
+Y
+e2E(H)
+d'
+e ·
+Y
+u2V (H)
+|V'(u)|
+...
+=
+... d'
+ab · hom'(H0, G) −d'
+ab ·
+Y
+e0 2E(H0)
+d'
+e0 ·
+Y
+u2V (H)
+|V'(u)|
+...
+6 d'
+ab · ✏· kH0k ·
+Y
+u2V (H)
+|V'(u)|
+6 ✏·
+$
+kHk −1
+% Y
+u2V (H)
+|V'(u)| .
+This di↵erence is smaller than the di↵erence of ✏kHk Q
+u2V (H) |V'(u)|
+that the counting lemma allows between hom'(H, G) and its target value
+of Q
+e2E(H) d'
+e ·Q
+u2V (H) |V'(u)|: smaller by the quantity of ✏·Q |Vu| that
+corresponds to the −1 in the last line above.
+To complete the induction step, it thus remains to show that this
+margin of ✏· Q |Vu| can accommodate the ﬁrst summand in our earlier
+estimate for hom'(H, G), i.e. that
+...
+X
+ 2Hom'(H0,G)
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘... 6 ✏·
+Y
+u2V (H)
+|V'(u)| .
+(⇤)
+For a proof of (⇤), let H00 := H −a−b be the subgraph of H obtained
+H00
+by deleting the vertices a and b. Then
+...
+X
+ 2Hom'(H0,G)
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘...
+=
+...
+X
+ 0 2Hom'(H00,G)
+X
+ 2Hom'(H0,G)
+ |H00= 0
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘...
+6
+X
+ 0 2Hom'(H00,G)
+...
+X
+ 2Hom'(H0,G)
+ |H00= 0
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘....
+The ﬁrst summation here, over all 2 Hom'(H0, G), is thus performed in
+steps: we ﬁrst sum over all the possible ways 0 in which can act on the
+vertices other than a and b, and then sum for each of these 0 over all the
+ways in which we can extend it to a and b to obtain a homomorphism 
+from all of H0 to G. In particular, the in the last sum have to map a to
+vertices of G that are adjacent to all the previously chosen images 0(u)
+
+7.6 Two regularity tools
+211
+of neighbours u that a has in V (H00), and likewise for b:
+ (a) 2 V'(a) \
+\
+u2NH0(a)
+NG
+$
+ 0(u)
+%
+=: Wa
+and
+Wa
+Wb
+ (b) 2 V'(b) \
+\
+u2NH0(b)
+NG
+$
+ 0(u)
+%
+=: Wb .
+Conversely, every pair in Wa ⇥Wb, chosen as (a) and (b), extends a
+given 0 2 Hom'(H00, G) to a homomorphism 2 Hom'(H0, G). Thus,
+...
+X
+ 2Hom'(H0,G)
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘...
+6
+X
+ 0 2Hom'(H00,G)
+...
+X
+ 2Hom'(H0,G)
+ |H00= 0
+⇣
+1G
+$
+ (a), (b)
+%
+−d'
+ab
+⌘...
+=
+X
+ 0 2Hom'(H00,G)
+...
+X
+wa 2Wa
+wb 2Wb
+⇣
+1G(wa, wb) −d'
+ab
+⌘...
+=
+X
+ 0 2Hom'(H00,G)
+...kWa, WbkG −d'
+ab |Wa||Wb|
+...
+6 hom'(H00, G) · ✏|V'(a)||V'(b)|
+by the (✏, d'
+ab) - uniformity of (V'(a),V'(b)) for their subsets Wa and Wb.
+Since
+hom'(H00, G) 6
+Y
+u2V (H00)
+|V'(u)| ,
+assertion (⇤) follows.
+⇤
+We now turn to our second regularity tool, the removal lemma.
+Qualitatively,14 the removal lemma says that if a large graph G is so
+sparse that most of the embeddings of the vertices of some ﬁxed graph H
+in G fail to induce a copy (or supergraph) of H, we can delete all the
+copies of H in G by removing few of its edges:
+Lemma 7.6.3. (Removal Lemma)
+For every graph H and every % > 0 there exist ⌘> 0 and n0 such that
+the following holds for all graphs G of order n > n0 : if there are at most
+⌘n|H| injective homomorphisms H ! G, then G contains a set E of at
+most %n2 edges such that H 6✓G −E.
+14 Quantitatively: if only o(|G||H|) of the maps V (H)!V (G) induce a supergraph
+of H in G, we can remove all the copies of H in G by deleting o(|G|2) edges.
+
+212
+7. Extremal Graph Theory
+Informally, the removal lemma says that if at most an ⌘-fraction of
+all the maps V (H) ! V (G) are injective H ! G homomorphisms, then
+all these can be destroyed by deleting only a %-fraction of the possible
+edges on V (G). We can wish for % to be as small as we like, but have to
+pay for it by having a smaller ⌘and a bigger n0 returned by the lemma,
+so the assertion will apply to fewer G and work only if there are fewer
+injective H ! G homomorphisms.
+The proof of the removal lemma will be along the following lines.
+The ﬁrst thing we shall note is that we can allow non-injective H ! G
+homomorphisms too in our count: there are too few of those to matter.
+All we shall need is that there are no more non-injective homomorphisms
+than injective ones, which will be easy to prove; then the number of all
+of them together is still bounded by 2⌘n|H|.
+The desired few edges of G that hit all the copies of H in it will be all
+the edges outside ✏-regular pairs of partition classes of density at least %,
+for any ✏-regular partition of G with ✏chosen small enough. An easy
+count will show that there are at most %n2 such edges, which we delete.
+The interesting bit then is why that destroys all the copies of H in G.
+This is where ✏-regularity and the counting lemma come in. If there
+is even a single copy H0 of H left in G, its edges must lie in ✏-regular
+pairs of partition classes of density at least %. By the counting lemma,
+however, this means that there is not just one copy of H in G but
+many: more than our assumptions allow. Indeed, the existence of H0
+as above means that there exists a homomorphism ': H ! R, where R
+is the regularity graph for precisely those ✏-regular pairs that accom-
+modate H0. The counting lemma, then, concludes that there should be
+more than 2⌘n|H| homomorphisms H ! G if ⌘is small enough in terms
+of %. But, as we have seen, this is ruled out by our assumption about ⌘.
+Proof of Lemma 7.6.3. If H has no edges, we can make the premise of
+the lemma void by suitable choices of ⌘and n0, regardless of the value
+of %. If H has an edge but % > 1/2, the conclusion of the lemma holds
+with E = E(G). We shall therefore assume that kHk > 1 and % < 1/2.
+%
+On input
+✏:= min
+* 1
+8% , 1
+2%kHk8
+kHk
+ 
+and
+m := d2/%e
+(1)
+✏, m
+the Regularity Lemma 7.4.1 returns an integer M. We use this to set
+M
+⌘:= 1
+5%kHk8
+(2M)|H|
+and
+n0 := max
+*
+M,
+⌃$|H|
+2
+%8
+⌘
+⌥ 
+.
+(2)
+⌘, n0
+Now let G be any graph of order n > n0 as considered in the lemma:
+such that there are at most ⌘n|H| injective homomorphisms H ! G.
+It is easy to see – compare our discussion just before the proof of
+the counting lemma – that there are also at most
+n|H|−1$|H|
+2
+%
+6 n|H|$|H|
+2
+%8
+n0 6 ⌘n|H|
+
+7.6 Two regularity tools
+213
+non-injective homomorphisms H ! G.
+The number of all homomor-
+phisms H ! G, injective or not, is therefore at most
+hom(H, G) 6 2⌘n|H|.
+(3)
+The regularity lemma yields an ✏-regular partition {V0, V1, . . . , Vk}
+k
+of G with |V1| = . . . = |Vk| := ` and
+`
+2/% 6
+(1)
+m 6 k 6 M.
+(4)
+Let us use this partition to choose our set E to satisfy the lemma. Let E
+be the set of all edges xy of G that satisfy one of the following statements:
+E
+(a) x or y lies in V0 ;
+(b) x and y lie in the same Vi with i > 1;
+(c) x 2 Vi and y 2 Vj with (Vi, Vj) not ✏-regular and i, j > 1;
+(d) x 2 Vi and y 2 Vj with d(Vi, Vj) < % and i, j > 1.
+To prove our lemma, we have to show that
+|E| 6 %n2
+and
+H 6✓G −E .
+(5)
+For a proof of the ﬁrst statement in (5) note that
+• at most |V0| · n 6 ✏n2 edges of G satisfy (a);
+• at most k ·
+$n/k
+2
+%
+< n2/2k edges of G satisfy (b);
+• at most ✏k2 · (n/k)2 = ✏n2 edges of G satisfy (c);
+• at most
+$k
+2
+%
+· % · (n/k)2 < %n2/2 edges of G satisfy (d).
+Hence
+|E| 6
+$
+✏+ 1
+2k + ✏+ 1
+2%
+%
+n2 6
+(4)
+$
+✏+ 1
+4% + ✏+ 1
+2%
+%
+n2 6
+(1)
+%n2
+as desired.
+For a proof of the second statement in (5) suppose that H ✓G−E.
+By our choice of E, every edge of this copy of H lies in some ✏-regular pair
+of partition classes of density at least %. This deﬁnes a homomorphism
+': H ! R, where R is the regularity graph of G for our partition with
+'
+parameters ✏, ` and %.15
+R
+15 The regularity graph for an ✏-regular partition is deﬁned before Lemma 7.5.2.
+
+214
+7. Extremal Graph Theory
+Since ✏-regularity implies ✏-uniformity (Exercise 42), ' and G −E
+satisfy the premise for the counting lemma with dij := d(Vi, Vj) > % for
+the edges ij of R. The counting lemma yields
+hom(H, G) > hom'(H, G −E)
+>
+⇣Y
+e2E(H)
+d'
+e −✏kHk
+⌘
+·
+Y
+u2V (H)
+|V'(u)|
+>
+$
+%kHk −✏kHk
+%$
+n/2M
+%|H|
+>
+(1)
+1
+2%kHk$
+n/2M
+%|H|
+>
+(2) 2⌘n|H|.
+This contradicts (3), and thereby completes the proof of (5).
+⇤
+The number of copies of a ﬁxed graph H in some dense graphs G
+tells us something about the structure of those G when they get large.
+Assume, for simplicity, that we have an inﬁnite class of graphs G each
+with ↵n2 edges, where n = |G| and ↵> 0 is some ﬁxed parameter telling
+n, ↵
+us how dense all those G are. Let k := |H| > 3 and m := kHk > 1. Let
+k, m
+γ > 0 be any constant, and assume that the number ✓= ✓(G) of copies
+γ, ✓
+of H in our graphs G satisﬁes
+γn2 6 ✓m 6 ⌘nk
+(⇤)
+for any given ⌘> 0 when n is large enough.16 On average, every edge
+of G lies in ✓m/↵n2 copies of H. The removal lemma tells us that we
+can hit all those copies of H with only %n2 edges, for any % > 0 we may
+choose, when n is large enough. These special edges each lie in at least
+✓/%n2 copies of H on average: more than our overall average by a factor
+of at least c := ↵/%m. And since we may choose %, while ↵and m are
+c
+constant, we can make c as large as we like, just by making % small and
+n large enough that the removal lemma applies.
+So the removal lemma tells us that the copies of H in G cannot be
+spread evenly over G, in the sense that the maximum number of copies
+in which a given edge of G lies di↵ers from the average such number by
+no more than a constant factor as n grows. The copies of H in G must
+instead be lumped together at a few edges that lie in many more such
+copies than an edge of G does on average: in at least c times as many,
+where c ! 1 as n ! 1. In absolute terms, these special edges lie in at
+least
+c · ✓m/↵n2 > c γ/↵
+16 In complexity-theoretic notation: ✓(G) = ⌦(n2) but ✓(G) = o(nk). The ⌘here
+could be any returned by the removal lemma on input some % we may later choose.
+
+7.6 Two regularity tools
+215
+copies of H on average, for n large enough. Since γ/↵is a positive con-
+stant, this number will get arbitrarily large if we choose % small enough.
+This bites most if the average number ✓m/↵n2 of copies of H in which
+an edge of G lies is itself bounded as n grows. We shall return to this
+case in a moment.
+By contraposition, our considerations above also tell us something
+about the density of the graphs G in a given class, and about the number
+of copies of H they contain, if those copies are not lumped together at a
+few edges but are evenly spread over G. If these G are dense, we must
+also have ✓> γn2 for some γ > 0 (unless ✓= 0), since otherwise the
+copies of H would technically be ‘lumped together’ (as deﬁned earlier)
+at every edge of G that lies in at least one of them.
+So our graphs
+satisfy the left inequality in (⇤), which means that the right one must
+fail: they must contain at least ⌘nk copies of H for some ﬁxed ⌘> 0. In
+particular, for some mysterious reason exposed by the removal lemma,
+we cannot have quadratically17 many copies of H spread evenly over
+dense graphs G.
+Let us say that the copies of H are spread thinly over the graphs G
+spread
+thinly
+in some inﬁnite class G if, for every G 2 G, every edge of G lies in at least
+one copy of H in G but only in a bounded number: in at most d copies,
+say, with the same d 2 N for all G 2 G. Then ✓and hom(H, G) grow at
+most quadratically in n, more slowly than ⌘nk for any ⌘returned by the
+removal lemma. Hence those G will satisfy the premise of the removal
+lemma as soon as they are big enough. Our considerations above imply
+that those G cannot be dense. Let us show this more formally:
+Theorem 7.6.4. Let H be any graph with at least 3 vertices. Let G be
+a class of graphs over which their subgraphs isomorphic to H are spread
+thinly. Then for every δ > 0 there exists an integer n0 such that every
+G 2 G of order n > n0 has at most δn2 edges and contains at most δn2
+copies of H.
+Proof. Let k := |H| > 3 and m := kHk; we may assume that kHk > 1.
+k, m
+Let d be the constant from the deﬁnition of ‘thinly spread’: an integer
+d
+such that every edge of any G 2 G lies in at most d copies of H in G.
+For each G, write h = h(G) for the number of injective homomorphisms
+h
+H ! G.
+We apply the removal lemma with % = δ/(m k! d). It returns some
+⌘> 0 and an integer ‘n0’, which we now call n1. We use these to deﬁne
+%, ⌘
+n0 := max {n1, dk! · d/⌘e}.
+Let G 2 G of order n > n0 be given. Each copy of H in G is the
+17 In complexity-theoretic notation: ⇥(n2) many.

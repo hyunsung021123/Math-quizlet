@@ -1,0 +1,275 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.3 Tree-decompositions
+직전 소단원: 「12.2 The graph minor theorem for trees」
+[본문]
+367
+12.3 Tree-decompositions
+Trees are graphs with some very distinctive and fundamental properties;
+consider Theorem 1.5.1, or the more sophisticated example of Kruskal’s
+theorem. It is therefore legitimate to ask to what degree those prop-
+erties can be transferred to more general graphs, graphs that are not
+themselves trees but tree-like in some sense.2 In this section, we study
+a concept of tree-likeness that permits generalizations of all the tree
+properties referred to above (including Kruskal’s theorem), and which
+plays a crucial role in the proof of the graph minor theorem.
+Let G be a graph, T a tree, and let V = (Vt)t2T be a family of
+bags Vt ✓V (G) indexed by the nodes t of T. The pair (T, V) is called a
+bags
+tree-decomposition of G if it satisﬁes the following three conditions:
+tree-
+decomposition
+(T1) V (G) = S
+t2T Vt;
+(T2) for every edge e 2 G there exists a t 2 T such that both ends of e
+lie in Vt;
+(T3) Vt1 \ Vt3 ✓Vt2 whenever t1, t2, t3 2 T satisfy t2 2 t1Tt3.
+Conditions (T1) and (T2) together say that G is the union of the sub-
+graphs G[Vt]. We call these subgraphs the parts of (T, V), and say that
+parts
+(T, V) is a tree-decomposition of G into the bags Vt or the parts G[Vt].
+Condition (T3) implies that the bags of (T, V) are organized roughly like
+a tree (Fig. 12.3.1).
+T
+G
+t1
+t2
+t3
+t?
+?
+e?
+?
+Vt3
+Fig. 12.3.1. Edges and bags ruled out by (T2) and (T3)
+Before we discuss the role that tree-decompositions play in the proof
+of the minor theorem, let us note some of their basic properties. Consider
+a ﬁxed tree-decomposition (T, V) of G, with V = (Vt)t2T as above.
+(T, V), Vt
+Perhaps the most important feature of a tree-decomposition is that
+it transfers the separation properties of its tree to the graph decomposed:
+2 What exactly this ‘sense’ should be will depend both on the property considered
+and on its intended application.
+12.3 Tree-decompositions
+
+368
+12. Graph Minors
+Lemma 12.3.1. Let t1t2 be any edge of T and let T1, T2 be the com-
+[12.4.3]
+[12.5]
+[12.6.5]
+ponents of T −t1t2, with t1 2 T1 and t2 2 T2. Then Vt1 \ Vt2 separates
+U1 := S
+t2T1 Vt from U2 := S
+t2T2 Vt in G (Fig. 12.3.2).
+t1
+t2
+U1
+U2
+Vt1 \ Vt2
+T1
+T2
+Fig. 12.3.2. Vt1 \ Vt2 separates U1 from U2 in G
+Proof. Consider a shortest U1–U2 path. By (T1) it has length at most 1,
+so by (T2) it has length 0. By (T3), its vertex lies in Vt1 \ Vt2.
+⇤
+We shall say that the separation {U1, U2} of G in Lemma 12.3.1 is
+induced
+separation
+induced by the edge t1t2 of T, or more generally by (T, V). Its separator
+U1 \ U2 = Vt1 \ Vt2 is the adhesion set of Vt1 and Vt2.
+The adhesion of a tree-decomposition is the maximum size of its
+adhesion
+adhesion sets. (If T is trivial, we let it be zero.) The torsos of a tree-
+torsos
+decomposition are the supergraphs of its parts G[Vt] obtained by making
+their adhesion sets complete: by adding to G[Vt] any edges not in G
+whose ends lie in a common adhesion set Vt \ Vt0 with tt0 2 E(T).
+Tree-decompositions are passed on to subgraphs, indeed to minors:
+Lemma 12.3.2. For every H ✓G, the pair
+$
+T, (Vt \ V (H))t2T
+%
+is a
+[12.4.1]
+[12.4.4]
+[12.4.3]
+[12.6.2]
+tree-decomposition of H.
+⇤
+Lemma 12.3.3. Suppose that G = IH with branch sets Uh, h 2 V (H).
+[12.4.1]
+[12.4.3]
+Let f: V (G)!V (H) be the map assigning to each vertex of G the index
+of the branch set containing it. For each t 2 T let Wt := { f(v) | v 2 Vt },
+and put W := (Wt)t2T . Then (T, W) is a tree-decomposition of H.
+Proof. The assertions (T1) and (T2) for (T, W) follow immediately from
+the corresponding assertions for (T, V).
+Now let t1, t2, t3
+2 T be as
+in (T3), and consider a vertex h 2 Wt1 \Wt3 of H; we show that h 2 Wt2.
+By deﬁnition of Wt1 and Wt3, the set Uh meets both Vt1 and Vt3. As Uh
+is connected in G, this implies by Lemma 12.3.1 that Uh also meets Vt2.
+Hence h 2 Wt2, by deﬁnition of Wt2.
+⇤
+Here is another useful consequence of Lemma 12.3.1:
+
+369
+Lemma 12.3.4. Any set of vertices not contained in a bag of (T, V)
+[12.4.3]
+contains two vertices that are separated by an adhesion set of (T, V).
+Proof. Given W ✓V (G), orient the edges of T as follows. For each edge
+t1t2 2 T, deﬁne U1, U2 as in Lemma 12.3.1; then Vt1 \ Vt2 separates U1
+from U2. Unless Vt1 \ Vt2 separates two vertices from W, we can ﬁnd an
+i 2 {1, 2} such that W ✓Ui, and orient t1t2 towards ti.
+Let t be the last node of a maximal directed path in T; then all the
+edges of T at t are oriented towards t. We claim that W ✓Vt. Given
+w 2 W, let t0 2 T be such that w 2 Vt0. If t0 6= t, then the edge e at t
+that separates t0 from t in T is directed towards t, so w also lies in Vt00
+for some t00 in the component of T −e containing t. Therefore w 2 Vt
+by (T3).
+⇤
+The following special case of Lemma 12.3.4 is used particularly often:
+Corollary 12.3.5. Every complete subgraph of G is contained in some
+[12.6.2]
+part of (T, V).
+⇤
+The tree-decomposition (T, V) of G is called simplicial if all the
+simplicial
+separators Vt1 \ Vt2 induce complete subgraphs in G. This assumption
+can enable us to lift assertions about the parts of the decomposition to
+G itself. For example, if all the parts in a simplicial tree-decomposition
+of G are k-colourable, then so is G (Exercise 19). The same applies to
+the property of not containing a Kr minor for some ﬁxed r.
+Conversely, if G can be constructed recursively from a set H of
+graphs by pasting along complete subgraphs, then G has a simplicial
+tree-decomposition into elements of H. For example, by Wagner’s The-
+orem 7.3.4, any graph without a K5 minor has a supergraph with a
+simplicial tree-decomposition into plane triangulations and copies of the
+Wagner graph W, and similarly for graphs without K4 minors (see Pro-
+position 12.6.2).
+Tree-decompositions may thus lead to intuitive structural charac-
+terizations of graph properties.
+A particularly simple example is the
+following characterization of chordal graphs:
+Proposition 12.3.6. G is chordal if and only if G has a tree-decompo-
+[12.4.4]
+[12.6.2]
+sition into complete parts.
+Proof. We apply induction on |G|. We ﬁrst assume that G has a tree-
+(5.5.1)
+decomposition (T, V) such that G[Vt] is complete for every t 2 T; let
+us choose (T, V) with |T| minimum.
+If |T| 6 1, then G is complete
+and hence chordal. So let t1t2 2 T be an edge, and for i = 1, 2 deﬁne
+Ti and Gi := G[Ui] as in Lemma 12.3.1. Then G = G1 [ G2 by (T1)
+and (T2), and V (G1 \ G2) = Vt1 \ Vt2 by the lemma; thus, G1 \ G2 is
+complete. Since (Ti, (Vt)t2Ti) is a tree-decomposition of Gi into complete
+12.3 Tree-decompositions
+
+370
+12. Graph Minors
+parts, both Gi are chordal by the induction hypothesis. (By the choice
+of (T, V), neither Gi is a subgraph of G[Vt1 \ Vt2] = G1 \ G2, so both
+Gi are indeed smaller than G.) Since G1 \ G2 is complete, any induced
+cycle in G lies in G1 or in G2 and hence has a chord, so G too is chordal.
+Conversely, assume that G is chordal. If G is complete, there is
+nothing to show. If not then, by Proposition 5.5.1, G is the union of
+smaller chordal graphs G1, G2 with G1 \ G2 complete. By the induction
+hypothesis, G1 and G2 have tree-decompositions (T1, V1) and (T2, V2)
+into complete parts.
+By Corollary 12.3.5, G1 \ G2 lies inside one of
+those parts in each case, say with indices t1 2 T1 and t2 2 T2. As one
+easily checks, ((T1 [T2)+t1t2, V1 [V2) is a tree-decomposition of G into
+complete parts.
+⇤
+Let us wind up this section with an application of tree-decompo-
+sitions to connectivity that generalizes the idea of the block-cutvertex
+tree from Lemma 3.1.4. A set U ✓V (G) of at least k vertices is (< k)-
+inseparable in G if no two vertices from U can be separated in G by
+fewer than k other vertices (which may or may not lie in U).
+A maximal (< k)-inseparable set of vertices is a k-block. Thus, the
+k-block
+1-blocks of a graph are its components; its 2-blocks are the non-singleton
+vertex sets spanning a block as deﬁned in Chapter 3. In general, a k-
+block need not induce a highly connected subgraph: the many paths
+between its vertices that are needed to make it (< k)-inseparable can all
+lie outside it. Its ‘connectivity’ is thus measured in the ambient graph;
+its vertices themselves may even be independent.
+Theorem 12.3.7. For every integer k > 1, every graph G has a tree-
+decomposition (T, V) with the following properties:
+(i) (T, V) has adhesion < k.
+(ii) Distinct k-blocks lie in di↵erent bags. Moreover, every two blocks
+are separated by an adhesion set that is no larger than the smallest
+set of vertices that separates them in G.
+(iii) Every automorphism of G acts on the set of bags of (T, V), and
+the action on V (T) which this induces is an automorphism of T.
+Note that, by (i) and Lemma 12.3.4, every k-block is contained in some
+bag.
+This is unique by (i) and (T3), so the bags in (ii) are well de-
+ﬁned. Assertion (iii) means that, for every automorphism ' of G and
+every t 2 T, the set '(Vt) is another bag Vt0 (possibly Vt), and this map
+': t 7! t0 is an automorphism of T.3 Such tree-decompositions are called
+canonical.
+3 This can be important both theoretically and in applications.
+For example,
+when a computer constructs a tree-decomposition, then this may depend on how we
+present the graph to it as input. But if it ﬁnds a canonical decomposition, then this
+will always be the same up to automorphism, in the sense just deﬁned.
+
+12.4 Tree-width
+371
+12.4 Tree-width
+As indicated by Figure 12.3.1, the bags of (T, V) reﬂect the structure of
+the tree T, so in this sense the graph G decomposed resembles a tree.
+However, this is valuable only inasmuch as the structure of G within
+each part is negligible: the smaller the bags, the closer the resemblance.
+This observation motivates the following deﬁnition. The width of
+width
+(T, V) is the number
+max
+*
+|Vt| −1 : t 2 T
+ 
+,
+and the tree-width tw(G) of G is the least width of any tree-decomposi-
+tree-width
+tw(G)
+tion of G. As one easily checks,4 trees themselves have tree-width 1.
+By Lemmas 12.3.2 and 12.3.3, the tree-width of a graph will never
+be increased by deletion or contraction:
+(12.3.2)
+(12.3.3)
+Lemma 12.4.1. If H 4 G then tw(H) 6 tw(G).
+⇤
+[12.6.2]
+Graphs of bounded tree-width are suﬃciently similar to trees that it
+becomes possible to adapt the proof of Kruskal’s theorem to the class of
+these graphs; very roughly, one has to iterate the ‘minimal bad sequence’
+argument from the proof of Lemma 12.1.3 tw(G) times. This takes us a
+step further towards a proof of the graph minor theorem:
+Theorem 12.4.2. (Robertson & Seymour 1990)
+[12.7.1]
+[12.7.3]
+For every integer k > 0, the graphs of tree-width < k are well-quasi-
+ordered by the minor relation.
+In order to make use of Theorem 12.4.2 for a proof of the full graph
+minor theorem, we should be able to say something about the graphs
+which it does not cover, i.e., to deduce some information about a graph
+from the assumption that its tree-width is large. Our next result, the
+tree-width duality theorem, achieves just that: it identiﬁes a canonical
+obstruction to small tree-width, a structural phenomenon that occurs in
+a graph if and only if its tree-width is large.
+Let us say that two subsets of V (G) touch if they have a vertex in
+touch
+common or G contains an edge between them. A set of mutually touch-
+ing connected vertex sets in G is a bramble. Extending our terminology
+bramble
+of Chapter 2, we say that a subset of V (G) covers (or is a cover of) a
+cover
+bramble B if it meets every element of B. The least number of vertices
+covering a bramble is the order of that bramble. A k-bramble is one of
+order
+order k.
+4 Indeed the ‘−1’ in the deﬁnition of width serves no other purpose than to make
+this statement true.

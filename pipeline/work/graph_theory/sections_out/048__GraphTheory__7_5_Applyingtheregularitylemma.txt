@@ -1,0 +1,453 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.5 Applying the regularity lemma
+직전 소단원: 「7.4 Szemerédi's regularity lemma」
+[본문]
+200
+7. Extremal Graph Theory
+and take M := max {f s(k), 2k/✏}; the second term in the maximum
+M
+ensures that any n > M is large enough to satisfy (5).
+We ﬁnally have to show that every graph G = (V, E) of order at
+least m has an ✏-regular partition {V0, V1, . . . , Vk0} with m 6 k0 6 M. So
+let G be given, and let n := |G|. If n 6 M, we partition G into k0 := n
+n
+singletons, choosing V0 := ; and |V1| = . . . = |Vk0| = 1. This partition of
+G is clearly ✏-regular. Suppose now that n > M. Let C0 ✓V be minimal
+such that k divides |V r C0|, and let {C1, . . . , Ck} be any partition of
+V r C0 into sets of equal size. Then |C0| 6 k −1, and hence |C0| 6 ✏n
+by (5). Starting with {C0, C1, . . . , Ck} we apply Lemma 7.4.4 again and
+again, until the partition of G obtained is ✏-regular; this will happen
+after at most s iterations, since by (5) the size of the exceptional set in
+the partitions stays below ✏n, so the lemma could indeed be reapplied
+up to the theoretical maximum of s times.
+⇤
+7.5 Applying the regularity lemma
+The purpose of this section is to illustrate how the regularity lemma
+is typically applied in the context of (dense) extremal graph theory.
+Suppose we are trying to prove that a certain edge density of a graph
+G suﬃces to force the occurrence of some given subgraph H, and that
+we have an ✏-regular partition of G. For most of the pairs (Vi, Vj) of
+partition sets, the edges between Vi and Vj are distributed fairly uni-
+formly; their density, however, may depend on the pair. But since G
+has many edges, this density cannot be too small for too many pairs:
+some sizeable proportion of the pairs will have at least a certain positive
+density. Moreover if G is large, then so are the pairs: recall that the
+number of partition sets is bounded, and they have equal size. But any
+large enough bipartite graph with equal partition sets, ﬁxed positive edge
+density (however small) and a uniform distribution of edges will contain
+any given bipartite subgraph;8 this will be made precise below. Writing
+H as a union of bipartite subgraphs, say those induced by pairs of colour
+classes of some vertex colouring of H, we shall obtain H ✓G as desired.
+These ideas will be formalized by the so-called ‘blow-up lemma’,
+Lemma 7.5.2 below. We shall then use this and the regularity lemma
+to prove the Erd˝os-Stone theorem from Section 7.1; another application
+will be given later, in the proof of Theorem 9.2.2. We wind up the section
+with an informal review of the application of the regularity lemma that
+we have seen, summarizing what it can teach us for similar applications.
+In particular, we look at how the various parameters involved depend
+8 Readers already acquainted with random graphs may ﬁnd it instructive to com-
+pare this statement with Proposition 11.3.1.
+
+7.5 Applying the regularity lemma
+201
+on each other, and in which order they have to be chosen to make the
+lemma work.
+Let us begin by noting a simple consequence of the ✏-regularity of a
+pair (A, B). For any subset Y ✓B that is not too small, most vertices
+of A have about the expected number of neighbours in Y :
+Lemma 7.5.1. Let (A, B) be an ✏-regular pair, of density d say, and
+let Y ✓B have size |Y | > ✏|B|. Then all but fewer than ✏|A| of the
+vertices in A have (each) at least (d −✏)|Y | neighbours in Y .
+Proof.
+Let X ✓A be the set of vertices with fewer than (d −✏)|Y |
+neighbours in Y . Then kX, Y k < |X|(d −✏)|Y |, so
+d(X, Y ) = kX, Y k
+|X| |Y | < d −✏= d(A, B) −✏.
+As (A, B) is ✏-regular and |Y | > ✏|B|, this implies that |X| < ✏|A|.
+⇤
+Let G be a graph with an ✏-regular partition {V0, V1, . . . , Vk}, with
+exceptional set V0 and |V1| = . . . = |Vk| =: `. Given d 2 [0, 1], let R be
+R
+the graph on {1, . . . , k} in which two vertices i, j are adjacent if and only
+if (Vi, Vj) is ✏-regular of density > d. We shall call R a regularity graph
+regularity
+graph
+of G with parameters ✏, ` and d. Given s 2 N, let us now replace every
+vertex i of R by a set V s
+i of s vertices, and every edge by a complete
+V s
+i
+bipartite graph between the corresponding s-sets. The resulting graph
+will be denoted by Rs. (For R = Kr, for example, we have Rs = Kr
+s.)
+Rs
+Lemma 7.5.2, a simple version of the blow-up lemma that suﬃces for
+our intended applications of the regularity lemma, says that subgraphs
+of Rs can also be found in G, provided that d > 0, that ✏is small enough,
+and that the Vi are large enough. In fact, the values of ✏and ` required
+depend only on (d and) the maximum degree of the subgraph:
+Lemma 7.5.2. (Blow-up Lemma9)
+For all d 2 (0, 1] and ∆> 1 there exists an ✏0 > 0 with the following
+[9.2.2]
+property: if G is any graph, H is a graph with ∆(H) 6 ∆, s 2 N, and R
+is any regularity graph of G with parameters ✏6 ✏0, ` > 2s/d∆and d,
+then
+H ✓Rs
+)
+H ✓G .
+Proof. Given d and ∆, choose ✏0 > 0 small enough that ✏0 < d and
+d, ∆, ✏0
+(d −✏0)∆−∆✏0 > 1
+2d∆;
+(1)
+such a choice is possible, since (d −✏)∆−∆✏! d∆as ✏! 0. Now let
+G, H, R, Rs
+9 See the notes for the original, more general, blow-up lemma.
+
+202
+7. Extremal Graph Theory
+G, H, s and R be given as stated. Let {V0, V1, . . . , Vk} be the ✏-regular
+Vi
+partition of G that gave rise to R; thus, ✏6 ✏0 and V (R) = {1, . . . , k}
+✏, k, `
+and |V1| = . . . = |Vk| = ` > 2s/d∆. Let us assume that H is actually
+a subgraph of Rs (not just isomorphic to one), with vertices u1, . . . , uh
+ui, h
+say. Each vertex ui lies in one of the s-sets V s
+j of Rs, which deﬁnes a
+map σ: i 7! j. Our aim is to deﬁne an embedding ui 7! vi 2 Vσ(i) of H
+σ
+in G as a subgraph; thus, v1, . . . , vh will be distinct, and vivj will be an
+vi
+edge of G whenever uiuj is an edge of H.
+Our plan is to choose the vertices v1, . . . , vh inductively. Throughout
+the induction, we shall have a ‘target set’ Yi ✓Vσ(i) assigned to each ui;
+this contains the vertices that are still candidates for the choice of vi.
+Initially, Yi is the entire set Vσ(i). As the embedding proceeds, Yi will
+get smaller and smaller (until it collapses to {vi} when vi is chosen):
+whenever we choose a vertex vj with j < i and ujui 2 E(H), we delete
+all those vertices from Yi that are not adjacent to vj. The set Yi thus
+evolves as
+Vσ(i) = Y 0
+i ◆. . . ◆Y i
+i = {vi} ,
+where Y j
+i denotes the version of Yi current after the deﬁnition of vj and
+the resulting deletion of vertices from Y j−1
+i
+.
+In order to make this approach work, we have to ensure that the
+target sets Yi do not get too small. When we come to embed a vertex uj,
+we consider all the indices i > j with ujui 2 E(H); there are at most ∆
+such i. For each of these i, we wish to select vj so that
+Y j
+i = N(vj) \ Y j−1
+i
+(2)
+is still relatively large: smaller than Y j−1
+i
+by no more than a constant
+factor such as (d −✏).
+Now this can be done by Lemma 7.5.1 (with
+A = Vσ(j), B = Vσ(i) and Y = Y j−1
+i
+): provided that Y j−1
+i
+still has size
+at least ✏` (which induction will ensure), all but at most ✏` choices of vj
+will be such that the new set Y j
+i as in (2) satisﬁes
+|Y j
+i | > (d −✏)|Y j−1
+i
+| .
+(3)
+Excluding the bad choices for vj for all the relevant values of i simulta-
+neously, we ﬁnd that all but at most ∆✏` choices of vj from Vσ(j), and
+in particular from Y j−1
+j
+✓Vσ(j), satisfy (3) for all i.
+It remains to show that the sets Y j−1
+i
+considered above as Y for
+Lemma 7.5.1 never fall below the size of ✏`, and that when we come to
+select vj 2 Y j−1
+j
+we have a choice of at least s suitable candidates: since
+before uj at most s −1 vertices u were given an image in Vσ(j), we can
+then choose vj distinct from these.
+
+7.5 Applying the regularity lemma
+203
+But all this follows from our choice of ✏0. Indeed, the initial target
+sets Y 0
+i have size `, and each Yi shrinks at most ∆times by a factor of
+(d −✏) when some vj with j < i and ujui 2 E(H) is deﬁned. Thus,
+|Y j−1
+i
+| −∆✏` >
+(3)
+(d −✏)∆` −∆✏` > (d −✏0)∆` −∆✏0` >
+(1)
+1
+2d∆` > s
+for all j 6 i; in particular, we have |Y j−1
+i
+| > ✏` and |Y j−1
+j
+| −∆✏` > s as
+desired.
+⇤
+We are now ready to prove the Erd˝os-Stone theorem.
+Proof of Theorem 7.1.2. Let r > 2 and s > 1 be given as in the
+(7.1.1)
+(7.1.4)
+(7.4.1)
+statement of the theorem. For s = 1 the assertion follows from Tur´an’s
+theorem, so we assume that s > 2. Let γ > 0 be given; this γ will play
+r, s
+γ
+the role of the ✏of the theorem. If any graph G with |G| =: n has
+kGk > tr−1(n) + γn2
+kGk
+edges, then γ < 1. We want to show that Kr
+s ✓G if n is large enough.
+Our plan is to use the regularity lemma to show that G has a
+regularity graph R dense enough to contain a Kr by Tur´an’s theorem.
+Then Rs contains a Kr
+s, so we may hope to use our blow-up lemma,
+Lemma 7.5.2, to deduce that Kr
+s ✓G.
+On input d := γ and ∆:= ∆(Kr
+s) Lemma 7.5.2 returns an ✏0 > 0.
+d, ∆, ✏0
+To apply the regularity lemma, let m > 1/γ and choose ✏> 0 small
+m, ✏
+enough that ✏6 ✏0,
+✏< γ/2 < 1 ,
+(1)
+and
+δ := 2γ −✏2 −4✏−d −1
+m > 0 ;
+δ
+this is possible, since 2γ −d −1
+m > 0. On input ✏and m, the regularity
+lemma returns an integer M. Let us assume that
+M
+n >
+2Ms
+d∆(1 −✏) .
+n
+Since this number is at least m, the regularity lemma provides us with
+an ✏-regular partition {V0, V1, . . . , Vk} of G, where m 6 k 6 M; let
+k
+|V1| = . . . = |Vk| =: `. Then
+`
+n > k` ,
+(2)
+and
+` = n −|V0|
+k
+> n −✏n
+M
+= n 1 −✏
+M
+> 2s
+d∆
+
+204
+7. Extremal Graph Theory
+by the choice of n. Let R be the regularity graph of G with parameters
+R
+✏, `, d corresponding to the above partition. Then Lemma 7.5.2 will imply
+Kr
+s ✓G as desired if Kr ✓R (and hence Kr
+s ✓Rs).
+Our plan was to show Kr ✓R by Tur´an’s theorem. We thus have to
+check that R has enough edges, i.e. that enough ✏-regular pairs (Vi, Vj)
+have density at least d. This should follow from our assumption that G
+has at least tr−1(n) + γn2 edges, i.e. an edge density of about r−2
+r−1 + 2γ:
+this lies substantially above the approximate density of r−2
+r−1 of the Tur´an
+graph T r−1(k), and hence substantially above any density that G could
+derive from tr−1(k) dense pairs alone, even if all these had density 1.
+Let us then estimate kRk more precisely. How many edges of G
+lie outside ✏-regular pairs? At most
+$|V0|
+2
+%
+edges lie inside V0, and by
+condition (i) in the deﬁnition of ✏-regularity these are at most 1
+2(✏n)2
+edges. At most |V0|k` 6 ✏n2 edges join V0 to other partition sets. The
+at most ✏k2 other pairs (Vi, Vj) that are not ✏-regular contain at most
+`2 edges each, together at most ✏k2`2. The ✏-regular pairs of insuﬃcient
+density (< d) each contain no more than d`2 edges, altogether at most
+1
+2k2d`2 edges. Finally, there are at most
+$`
+2
+%
+edges inside each of the
+partition sets V1, . . . , Vk, together at most 1
+2`2k edges. All other edges
+of G lie in ✏-regular pairs of density at least d, and thus contribute to
+edges of R. Since each edge of R corresponds to at most `2 edges of G,
+we thus have in total
+kGk 6 1
+2✏2n2 + ✏n2 + ✏k2`2 + 1
+2k2d`2 + 1
+2`2k + kRk `2.
+Hence, for all suﬃciently large n,
+kRk > 1
+2k2 kGk −1
+2✏2n2 −✏n2 −✏k2`2 −1
+2dk2`2 −1
+2k`2
+1
+2k2`2
+>
+(1,2)
+1
+2k2
+✓tr−1(n) + γn2 −1
+2✏2n2 −✏n2
+n2/2
+−2✏−d −1
+k
+◆
+> 1
+2k2
+✓tr−1(n)
+n2/2
++ 2γ −✏2 −4✏−d −1
+m
+◆
+= 1
+2k2
+✓
+tr−1(n)
+✓n
+2
+◆−1✓
+1 −1
+n
+◆
++ δ
+◆
+> 1
+2k2 r −2
+r −1
+> tr−1(k) .
+(The strict inequality follows from Lemma 7.1.4.) Therefore Kr ✓R by
+Theorem 7.1.1, as desired.
+⇤
+
+7.5 Applying the regularity lemma
+205
+Having seen a typical application of the regularity lemma in full
+detail, let us now step back and try to separate the wheat from the
+cha↵: what were the main ideas, how do the various parameters depend
+on each other, and in which order were they chosen?
+The task was to show that γn2 more edges than can be accommo-
+dated on n vertices without creating a Kr force a Kr
+s subgraph, provided
+that G is large enough. The plan was to do this using our blow-up lemma,
+which asks for the input of two parameters: d and ∆. As we wish to ﬁnd
+a copy of H = Kr
+s in G, it is clear that we must choose ∆:= ∆(Kr
+s).
+We shall return to the question of how to choose d in a moment.
+Given d and ∆, our blow-up lemma tells us how small we must choose
+✏to make the regularity lemma provide us with a suitable partition.
+The regularity lemma also requires the input of a lower bound m for the
+number of partition classes; we shall discuss this below, together with d.
+All that remains now is to choose G large enough that the partition
+classes have size at least 2s/d∆, as required by the blow-up lemma. (The
+s here depends on the graph H we wish to embed, and s := |H| would
+certainly be big enough. In our case, we can use the s from our H = Kr
+s.)
+How large is ‘large enough’ for |G| follows straight from the upper bound
+M on the number of partition classes returned by the regularity lemma:
+roughly, i.e. disregarding V0, an assumption of |G| > 2Ms/d∆suﬃces.
+So far, everything was entirely straightforward, and standard for
+any application of the regularity lemma of this kind. But now comes
+the interesting bit, the part speciﬁc to this proof: the observation that,
+if only d is small enough, our γn2 ‘additional edges’ force an ‘additional
+dense ✏-regular pair’ of partition sets, giving us more than tr−1(k) dense
+✏-regular pairs in total (where ‘dense’ means ‘of density at least d’), thus
+forcing R to contain a Kr and hence Rs to contain a Kr
+s.
+Let us examine why this is so. Suppose we have at most tr−1(k)
+dense ✏-regular pairs . Inside these, G has at most
+1
+2k2 r −2
+r −1 `2 6 1
+2n2 r −2
+r −1
+edges, even if we use those pairs to their full capacity of `2 edges each
+(where ` is again the common size of the partition sets other than V0, so
+that k` is nearly n). Thus, we have almost exactly our γn2 additional
+edges left to accommodate elsewhere in the graph: either in ✏-regular
+pairs of density less than d, or in some exceptional way, i.e. in irregular
+pairs, inside a partition set, or with an end in V0. Now the number of
+edges in low-density ✏-regular pairs is less than
+1
+2k2d`2 6 1
+2dn2,
+and hence less than half of our extra edges if d 6 γ. The other half,
+the remaining 1
+2γn2 edges, are more than can be accommodated in ex-
+
+206
+7. Extremal Graph Theory
+ceptional ways, provided we choose m large enough and ✏small enough
+(giving an additional upper bound for ✏). It is now a routine matter to
+compute the values of m and ✏that will work.
+7.6 Two regularity tools
+Our acquaintance with the regularity lemma so far already includes the
+essentials: the notion of regularity, a statement of the regularity lemma,
+its proof, and a typical application of the lemma in our proof of The-
+orem 7.1.2 in Section 7.5. Another application, also based on no more
+than we have covered so far, will be given in the proof of Theorem 9.2.2.
+Both these applications illustrate techniques typically involved in many
+uses of the regularity lemma.
+Our aim in this section is to extract some of these techniques and
+bundle them into formal tools that can be used out of the box: the ‘count-
+ing lemma’, the ‘removal lemma’, and some immediate consequences of
+these. Their proofs will not be short, but the ideas they involve will look
+familiar by now.
+Conversely, our proofs of Theorems 7.1.2 and 9.2.2
+could be rewritten to use some of these formal tools (Exercise 45).
+To facilitate the proof of the counting lemma, it will be convenient
+to use a slightly di↵erent notion of ✏-regularity.
+To avoid confusion,
+we shall call this ‘✏-uniformity’ here; but in the literature it is usually
+referred to as (another version of) ‘✏-regularity’ as well.
+Call a pair (A, B) of disjoint sets of vertices in a graph (✏, d)-uniform
+(✏, d)-
+uniform
+for ✏> 0 and 0 6 d 6 1 if their non-empty subsets X ✓A and Y ✓B
+satisfy
+..kX, Y k −d |X||Y |
+.. 6 ✏|A||B| ,
+or equivalently,
+..d(X, Y ) −d
+.. 6 ✏|A||B|
+|X||Y | .
+We may think of the real number d as a ‘target density’ with which the
+densities d(X, Y ) = kX, Y k/|X||Y | of the pairs (X, Y ) are compared. If
+this is chosen as d = d(A, B), the (✏, d)-uniform pair (A, B) is simply
+called ✏-uniform.
+✏-uniform
+This di↵ers from our deﬁnition of ✏-regularity in Section 7.4 in two
+ways. One is that all subsets X ✓A and Y ✓B are required to satisfy
+the inequality, including those of size less than ✏|A| or ✏|B|. The other
+di↵erence is best seen in the second of the two inequalities. Its left-hand
+side measures how much the density of (X, Y ) di↵ers from that of (A, B).
+Our deﬁnition of ✏-regularity requires that this should be at most ✏. This
+is relaxed here by the factor |A||B|/|X||Y | > 1: the density of small
+pairs (X, Y ) is allowed to deviate from d more than that of bigger ones.

@@ -1,0 +1,89 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.1 Basic notions, facts and techniques (분할 part 2)
+직전 소단원: 「7.ex Exercises」
+[본문]
+236
+8. Inﬁnite Graphs
+is indeed an equivalence relation: note that, since S is ﬁnite, there is
+exactly one such component for each ray. If two rays are equivalent –
+and only then – they can be linked by inﬁnitely many disjoint paths:
+just choose these inductively, taking as S the union of the vertex sets
+of the ﬁrst ﬁnitely many paths to ﬁnd the next. The set of ends of G
+is denoted by ⌦(G), and we write G = (V, E, ⌦) to express that G has
+⌦(G)
+vertex, edge and end sets V, E, ⌦.
+For example, let us determine the ends of the 2-way inﬁnite ladder
+shown in Figure 8.1.3. Every ray in this graph contains vertices arbi-
+trarily far to the left or vertices arbitrarily far to the right, but not both.
+These two types of rays are clearly equivalence classes, so the ladder has
+exactly two ends. (In Figure 8.1.3 these are shown as two isolated dots –
+one on the left, the other on the right.)
+Fig. 8.1.3. The 2-way ladder has two ends
+The ends of a tree are particularly simple: two rays in a tree are
+equivalent if and only if they share a tail, and for every ﬁxed vertex v each
+end contains exactly one ray starting at v. Even a locally ﬁnite tree can
+have uncountably many ends. The prototype example (see Exercise 39)
+is the binary tree T2, the rooted tree in which every vertex has exactly
+binary
+tree T2
+two upper neighbours. Often, the vertex set of T2 is taken to be the
+set of ﬁnite 0–1 sequences (with the empty sequence as the root), as
+indicated in Figure 8.1.4. The ends of T2 then correspond bijectively to
+01
+011
+0110
+10
+101
+11
+00
+1
+0
+;
+T2
+Fig. 8.1.4. The binary tree T2 has continuum many ends, one
+for every inﬁnite 0–1 sequence
+
+237
+its rays starting at ;, and hence to the inﬁnite 0–1 sequences.
+These examples suggest that the ends of a graph can be thought of
+as ‘points at inﬁnity’ to which its rays converge. We shall formalize this
+in Section 8.6, where we deﬁne a natural topology on a graph and its
+ends in which rays will indeed converge to their respective ends.
+The maximum number of disjoint rays in an end is the (combina-
+torial) vertex-degree of that end, the maximum number of edge-disjoint
+end degrees
+rays in it is its (combinatorial) edge-degree. These maxima are indeed
+attained: if an end contains a set of k (edge-) disjoint rays for every inte-
+ger k, it also contains an inﬁnite set of (edge-) disjoint rays (Exercise 46).
+Thus, every end has a vertex-degree and an edge-degree in N [ {1}.
+8.2 Paths, trees, and ends
+There are two fundamentally di↵erent aspects to the inﬁnity of an inﬁnite
+connected graph: one of ‘length’, expressed in the presence of rays, and
+one of ‘width’, expressed locally by inﬁnite degrees. The inﬁnity lemma
+tells us that at least one of these must occur:
+Proposition 8.2.1. Every inﬁnite connected graph has a vertex of in-
+ﬁnite degree or contains a ray.
+Proof. Let G be an inﬁnite connected graph with all degrees ﬁnite. Let
+(8.1.2)
+v0 be a vertex, and for every n 2 N let Vn be the set of vertices at
+distance n from v0. Induction on n shows that the sets Vn are ﬁnite, and
+hence that Vn+1 6= ; (because G is inﬁnite and connected). Furthermore,
+the neighbour of a vertex v 2 Vn+1 on any shortest v–v0 path lies in Vn.
+By Lemma 8.1.2, G contains a ray.
+⇤
+Often it is useful to have more detailed information on how this ray
+or vertex of inﬁnite degree lies in G. The following lemma enables us to
+ﬁnd it ‘close to’ any given inﬁnite set of vertices.
+Lemma 8.2.2. (Star-Comb Lemma)
+[8.6.3]
+Let U be an inﬁnite set of vertices in a connected graph G. Then G
+contains either a comb with all teeth in U or a subdivision of an inﬁnite
+star with all leaves in U.
+Proof. As G is connected, it contains a path between two vertices in U.
+This path is a tree T ✓G every edge of which lies on a path in T between
+two vertices in U. By Zorn’s lemma there is a maximal such tree T ⇤.
+Since U is inﬁnite and G is connected, T ⇤is inﬁnite. If T ⇤has a vertex
+of inﬁnite degree, it contains the desired subdivided star.
+8.2 Paths, trees, and ends

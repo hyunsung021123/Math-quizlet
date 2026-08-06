@@ -1,0 +1,119 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 1. The Basics
+현재 소단원: 1.2 The degree of a vertex
+직전 소단원: 「1.1 Graphs」
+[본문]
+1.2 The degree of a vertex
+5
+1.2 The degree of a vertex
+Let G = (V, E) be a (non-empty) graph. The set of neighbours of a
+vertex v in G is denoted by NG(v), or brieﬂy by N(v).1 More generally
+N(v)
+for U ✓V , the neighbours in V rU of vertices in U are called neighbours
+of U; their set is denoted by N(U).
+The degree (or valency) dG(v) = d(v) of a vertex v is the number
+degree d(v)
+|E(v)| of edges at v; by our deﬁnition of a graph,2 this is equal to the
+number of neighbours of v. A vertex of degree 0 is isolated. The number
+isolated
+δ(G) := min { d(v) | v 2 V } is the minimum degree of G, the number
+δ(G)
+∆(G) := max { d(v) | v 2 V } its maximum degree. If all the vertices
+∆(G)
+of G have the same degree k, then G is k-regular, or simply regular. A
+regular
+3-regular graph is called cubic.
+cubic
+The number
+d(G) :=
+1
+|V |
+X
+v 2V
+d(v)
+d(G)
+is the average degree of G. Clearly,
+average
+degree
+δ(G) 6 d(G) 6 ∆(G) .
+The average degree quantiﬁes globally what is measured locally by the
+vertex degrees: the number of edges of G per vertex. Sometimes it will
+be convenient to express this ratio directly, as "(G) := |E|/|V |.
+"(G)
+The quantities d and " are, of course, intimately related. Indeed,
+if we sum up all the vertex degrees in G, we count every edge exactly
+twice: once from each of its ends. Thus
+|E| = 1
+2
+X
+v 2V
+d(v) = 1
+2d(G) · |V | ,
+and therefore
+"(G) = 1
+2d(G) .
+Proposition 1.2.1. The number of vertices of odd degree in a graph is
+[10.3.1]
+always even.
+Proof. As |E| = 1
+2
+P
+v 2V d(v) is an integer, P
+v 2V d(v) is even.
+⇤
+1 Here, as elsewhere, we drop the index referring to the underlying graph if the
+reference is clear.
+2 but not for multigraphs; see Section 1.10
+
+6
+1. The Basics
+If a graph has large minimum degree, i.e. everywhere, locally,
+many edges per vertex, it also has many edges per vertex globally:
+"(G) = 1
+2d(G) > 1
+2δ(G). Conversely, of course, its average degree may
+be large even when its minimum degree is small. However, the vertices
+of large degree cannot be scattered completely among vertices of small
+degree: as the next proposition shows, every graph G has a subgraph
+whose average degree is no less than the average degree of G, and whose
+minimum degree is more than half its average degree:
+Proposition 1.2.2. Every graph G with at least one edge has a sub-
+[1.4.3]
+[7.2.2]
+graph H with δ(H) > "(H) > "(G).
+Proof.
+To construct H from G, let us try to delete vertices of small
+degree one by one, until only vertices of large degree remain.
+Up to
+which degree d(v) can we a↵ord to delete a vertex v, without lowering "?
+Clearly, up to d(v) = " : then the number of vertices decreases by 1
+and the number of edges by at most ", so the overall ratio " of edges to
+vertices will not decrease.
+Formally, we construct a sequence G = G0 ◆G1 ◆. . . of induced
+subgraphs of G as follows. If Gi has a vertex vi of degree d(vi) 6 "(Gi),
+we let Gi+1 := Gi −vi; if not, we terminate our sequence and set
+H := Gi. By the choices of vi we have "(Gi+1) > "(Gi) for all i, and
+hence "(H) > "(G).
+What else can we say about the graph H? Since "(K1) = 0 < "(G),
+none of the graphs in our sequence is trivial, so in particular H 6= ;. The
+fact that H has no vertex suitable for deletion thus implies δ(H) > "(H),
+as claimed.
+⇤
+1.3 Paths and cycles
+A path is a non-empty graph P = (V, E) of the form
+path
+V = {x0, x1, . . . , xk}
+E = {x0x1, x1x2, . . . , xk−1xk} ,
+where the xi are all distinct. The vertices x0 and xk are linked by P and
+are called its endvertices or ends; the vertices x1, . . . , xk−1 are the inner
+vertices of P. The number of edges of a path is its length, and the path
+length
+of length k is denoted by P k. Note that k is allowed to be zero; thus,
+P k
+P 0 = K1.
+We often refer to a path by the natural sequence of its vertices,3
+3 More precisely, by one of the two natural sequences: x0 . . . xk and xk . . . x0
+denote the same path. Still, it often helps to ﬁx one of these two orderings of V (P)
+notationally: we may then speak of things like the ‘ﬁrst’ vertex on P with a certain
+property, etc.

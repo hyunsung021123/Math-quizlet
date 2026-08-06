@@ -1,0 +1,144 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 5. Colouring
+현재 소단원: 5.6 χ-bounded graph properties
+직전 소단원: 「5.5 Perfect graphs」
+[본문]
+146
+5. Colouring
+5.6 χ-bounded graph properties
+Our motivation for considering perfect graphs in the last section was
+that high chromaticity is easier to understand for these graphs than in
+general: if a perfect graph has chromatic number at least r, it has a local
+reason for this in the form of a Kr subgraph. It turned out that perfec-
+tion has structural implications far beyond this. We may ask, therefore,
+whether graph properties deﬁned by a slightly weaker condition might
+still imply some interesting structure for the graphs that have them.
+Consider any graph property G which, like perfection, is closed un-
+der taking induced subgraphs: a class that contains all induced sub-
+graphs of its elements. We call G χ-bounded if there exists a function
+χ-bounded
+f: N ! N, called a χ-bounding function, such that χ(G) 6 f(r) for all
+χ-bounding
+graphs G 2 G of clique number !(G) 6 r, for all r 2 N. In particular,
+then, χ(G) 6 f(!(G)); but note that for individual functions f this
+is a weaker condition. Perfection, for example, is χ-bounded with χ-
+bounding function f(r) = r.
+Qualitatively, graphs in a χ-bounded class G have complete sub-
+graphs as large as desired as soon as their chromatic number is big
+enough: that is the idea behind the notion of χ-boundedness. Quanti-
+tatively, if f is a χ-bounding function for G, then any G
+2 G with
+χ(G) > f(r) contains a Kr+1, for every r 2 N.
+Not all graph classes that are closed under taking induced subgraphs
+are χ-bounded: the triangle-free graphs, for example, are not, by Erd˝os’s
+Theorem 5.2.5. So which classes are?
+Every graph property G that is closed under induced subgraphs is
+characterized by the class H of graphs that are not in G and are minimal
+with this property under the induced-subgraph relation: an arbitrary
+graph G lies in G if and only if it has no induced subgraph in H. One
+way to search for χ-bounded graph properties, therefore, is to examine
+those characterized in this way by some particularly simple classes H.
+The strong perfect graph theorem implies that G is χ-bounded when
+H consists of all odd holes and antiholes. But since χ-boundedness is
+weaker than perfection, we can make H smaller, thereby making G larger:
+Theorem 5.6.1. (Scott & Seymour 2016)
+The graphs with no odd hole are χ-bounded.
+Theorem 5.6.1 is one of the earliest results of its kind proved in the
+wake of the strong perfect graph theorem. It has since been strength-
+ened in various ways, see the notes. The notion of χ-boundedness itself
+is much older. It was introduced by Gy´arf´as in 1975, who later proved
+the following pretty result:
+Proposition 5.6.2. If P is any ﬁxed path, then the graphs not con-
+taining P as an induced subgraph are χ-bounded.
+
+5.6 χ-bounded graph properties
+147
+We shall derive Proposition 5.6.2 from a lemma that weakens the
+assumption of not containing the given path to better support induction:
+Lemma 5.6.3. There is a function g: N2 ! N such that χ(G) 6 g(c, k)
+for every connected graph G satisfying
+(i) χ(G[N(v)]) 6 c for every vertex v 2 G;
+(ii) G has a vertex v at which no induced path of length k starts.
+Proof. We prove by induction on k that the function g deﬁned recursively
+by g(c, 1) := 1 and g(c, k) := g(c, k −1) + c + 1, for all c 2 N and k > 1,
+is as desired. The induction starts with k = 1, in which case G = K1
+by (ii).
+For the induction step pick v 2 G as in (ii). Since G is connected,
+every component C of G −N(v) −v has a neighbour u in N(v). By
+induction, χ(G[V (C) [ {u}]) 6 g(c, k −1), so also χ(C) 6 g(c, k −1).
+Combining such colourings of all these C with a (c+1)-colouring of v and
+its neighbours, which exists by (i), yields a g(c, k)-colouring of G.
+⇤
+Proof of Proposition 5.6.2. Fix any k 2 N. Let f: N ! N be deﬁned
+recursively by f(1) := 1 and f(r) := g(f(r −1), k) for r > 1, where
+g is the function from Lemma 5.6.3. We prove by induction on r that
+every graph G that contains no path of length k induced and is such
+that !(G) 6 r satisﬁes χ(G) 6 f(r).
+The induction starts at r = 1, in which case G consists of isolated
+vertices. For the induction step let Gv := G[N(v)] for vertices v of G.
+As !(G) 6 r we have !(Gv) 6 r −1, and hence χ(Gv) 6 f(r −1), for
+every v. By Lemma 5.6.3 with c = f(r −1) this yields χ(G) 6 f(r).
+⇤
+Proposition 5.6.2 is a special case of a more sweeping conjecture.
+As we noted earlier for triangles, excluding a graph H will not deﬁne
+a χ-bounded graph property if H contains a cycle: by Theorem 5.2.5
+there are graphs of arbitrarily large chromatic number and girth greater
+than g(H), which thus do not contain H but have clique number 2.
+The following conjecture claims that this is the only obstruction to
+χ-boundedness: that excluding any graph that does not contain a cycle
+will deﬁne a χ-bounded class.
+Conjecture. (Gy´arf´as 1975; Sumner 1981)
+If F is any ﬁxed forest, then the graphs not containing F as an induced
+subgraph are χ-bounded.
+
+148
+5. Colouring
+Exercises
+1.−Show that the four colour theorem does indeed solve the map colouring
+problem stated in the ﬁrst sentence of the chapter. Conversely, does
+the 4-colourability of every map imply the four colour theorem?
+2.−Show that, for the map colouring problem above, it suﬃces to con-
+sider maps such that no point lies on the boundary of more than three
+countries. How does this a↵ect the proof of the four colour theorem?
+3.
+Try to turn the proof of the ﬁve colour theorem into one of the four
+colour theorem, as follows. Deﬁning v and H as before, assume induc-
+tively that H has a 4-colouring; then proceed as before. Where does
+the proof fail?
+4.
+Calculate the chromatic number of a graph in terms of the chromatic
+numbers of its blocks.
+5.−Let G be a graph, and let k 2 N.
+(i) Show that G has chromatic number at most k if and only if there
+exists a homomorphism from G to Kk.
+(ii) Show that G is bipartite if and only if there exists a homomor-
+phism from G to K2 or to an even cycle.
+(iii) Are there homomorphisms from C17 to C7, from C7 to C17,
+from C16 to C7, and from C17 to C6?
+6.
+Show that graphs of large girth and without a given minor are ‘nearly
+bipartite’ in the following sense. Let H be a ﬁxed graph and C a ﬁxed
+odd cycle. Use Theorem 7.2.6 to show that if G is a graph of suﬃciently
+large girth (depending only on H and C) that does not contain H as a
+minor, then there is a homomorphism from G to C.
+7.
+For every n > 1, ﬁnd a bipartite graph on 2n vertices, ordered in such
+a way that the greedy algorithm uses n rather than 2 colours.
+8.
+Consider the following approach to vertex colouring. First, ﬁnd a max-
+imal independent set of vertices and colour these with colour 1; then
+ﬁnd a maximal independent set of vertices in the remaining graph and
+colour those 2, and so on. Compare this algorithm with the greedy
+algorithm: which is better?
+9.
+Show that the bound of Proposition 5.2.2 is always at least as sharp as
+that of Proposition 5.2.1.
+A k-chromatic graph G is called critically k-chromatic, or just critical, if
+χ(G −v) < k for every v 2 V (G).
+10.
+Determine the critical 3-chromatic graphs.
+11.+ Show that every critical k-chromatic graph is (k −1) - edge-connected.
+12.
+Formalize and prove the following statement: assuming large average
+degree drives the colouring number up but not the chromatic number.

@@ -1,0 +1,273 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.ex Exercises
+직전 소단원: 「4.6 Plane duality」
+[연습문제]
+117
+Theorem 4.6.3. (Whitney 1932)
+A graph is planar if and only if it has an abstract dual.
+Proof.
+Let G be a planar graph, and consider any drawing.
+Every
+(1.9.2)
+(4.5.1)
+component C of this drawing has a plane dual C⇤. Consider these C⇤
+as abstract multigraphs, and let G⇤be their disjoint union. Then the
+bonds of G⇤are precisely those of the C⇤, which by Proposition 4.6.1
+correspond to the cycles in G.
+Conversely, suppose that G has an abstract dual G⇤. For a proof
+that G is planar, it suﬃces by Theorem 4.5.1 and Proposition 4.6.2 to
+show that B(G⇤) has a sparse basis. By Proposition 1.9.2, it does.
+⇤
+The duality theory for both abstract and plane graphs can be ex-
+tended to inﬁnite graphs. As these can have inﬁnite bonds, their duals
+must then have ‘inﬁnite cycles’. Such things do indeed exist, and are
+fascinating: they arise as topological circles in a space formed by the
+graph and its ends; see Chapter 8.6.
+Exercises
+1.
+Show that every graph can be embedded in R3 with all edges straight.
+2.−Show directly by Lemma 4.1.2 that K3,3 is not planar.
+3.
+Here is an inductive ‘proof’ that every maximal plane graph of order > 4
+is a plane triangulation of minimum degree 3.
+The induction starts
+with K4. For the induction step, consider an arbitrary maximal plane
+graph G of order n > 4, and consider all possible ways of extending it to
+a maximal plane graph G0 of order n + 1 by adding a new vertex v. No
+matter how this is done, v will come to sit in a face of G, which by the
+inductive assumption is bounded by a triangle. Since G0 is maximally
+planar, v must be joined to all three vertices of that triangle. Clearly,
+G0 is another plane triangulation, and δ(G0) = d(v) = 3.
+(i)−Find the ﬂaw in this ‘proof’.
+(ii) Find a counterexample, and explain why the ‘proof’ overlooks it.
+4.
+Show that every planar graph is a union of three forests.
+5.
+The ancient Greeks loved regular plane graphs whose faces were bounded
+by cycles of the same length.
+(i) Show that such graphs exist for only ﬁnitely many pairs (d, `) of
+degree d > 3 and cycle length `. Can you give an upper bound?
+(ii)+Show that there are only ﬁnitely many such plane graphs, up
+to topological isomorphism.
+6.
+A fullerene is a molecule that is made up entirely of carbon atoms
+forming a cubic plane graph all whose faces are pentagons or hexagons.
+Show that, since carbon atoms can form double bonds, every such graph
+can be realized in principle by (4-valent) carbon atoms.
+Exercises
+
+118
+4. Planar Graphs
+7.
+A football is made of pentagons and hexagons, not necessarily of regular
+shape. They are sewn together so that their seams form a cubic planar
+graph. How many pentagons does the football have?
+8.−(continued from Exercises 6 and 7)
+Fullerenes are less stable if they contain adjacent pentagons. Show that
+stable fullerenes have at least 60 carbon atoms.
+9.
+Let G be a graph of order n that is embedded in a surface of Euler
+characteristic χ and cannot be embedded in a simpler surface (one of
+larger Euler characteristic). Show that G has at most 3n −3χ edges.
+(Hint. You may use that every face of such an embedded graph is a
+topological disc. Such embeddings satisfy the general Euler formula,
+n −m + ` = χ.)
+10.
+Find a direct proof for planar graphs of Tutte’s theorem on the cycle
+space of 3-connected graphs (Theorem 3.2.6).
+11.−Show that the two plane graphs in Figure 4.3.1 are not combinatorially
+(and hence not topologically) isomorphic.
+12.
+Show that the two graphs in Figure 4.3.2 are combinatorially but not
+topologically isomorphic.
+13.−Show that our deﬁnition of equivalence for planar embeddings does
+indeed deﬁne an equivalence relation.
+14.
+Find a 2-connected planar graph whose drawings are all topologically
+isomorphic but whose planar embeddings are not all equivalent.
+15.+ Show that every plane graph is combinatorially isomorphic to a plane
+graph whose edges are all straight.
+(Hint.
+Given a plane triangulation, construct inductively a graph-
+theoretically isomorphic plane graph whose edges are straight. Which
+additional property of the inner faces could help with the induction?)
+Do not use Kuratowski’s theorem in the following two exercises.
+16.
+Show that any minor of a planar graph is planar. Deduce that a graph
+is planar if and only if it is the minor of a grid. (Grids are deﬁned in
+Chapter 12.4.)
+17.
+(i) Show that the planar graphs can in principle be characterized as in
+Kuratowski’s theorem: that there exists a set X of graphs such that a
+graph G is planar if and only if G has no minor in X.
+(ii) Can every graph property be characterized in this way?
+If not,
+which can?
+18.
+Does every planar graph have a drawing with all inner faces convex?
+19.
+Modify the proof of Lemma 4.4.3 so that all inner faces become convex.
+20.
+Does every minimal non-planar graph G (i.e., every non-planar graph G
+whose proper subgraphs are all planar) contain an edge e such that
+G −e is maximally planar? Does the answer change if we deﬁne ‘mini-
+mal’ with respect to minors rather than subgraphs?
+
+Exercises
+119
+21.
+Show that adding a new edge to a maximal planar graph of order at
+least 6 always produces both a TK5 and a TK3,3 subgraph.
+22.
+Prove the general Kuratowski theorem from its 3-connected case by
+manipulating plane graphs, i.e. avoiding Lemma 4.4.5.
+(This is not intended as an exercise in elementary topology; for the
+topological parts of the proof, a rough sketch will do.)
+23.−A graph is called outerplanar if it has a drawing in which every vertex
+lies on the boundary of the outer face. Show that a graph is outerplanar
+if and only if it contains neither K4 nor K2,3 as a minor.
+24.
+Show that a 2-connected plane graph is bipartite if and only if every
+face is bounded by an even cycle.
+25.
+Let G = G1 [ G2, where |G1 \ G2| 6 1. Show that C(G) has a sparse
+basis if both C(G1) and C(G2) have one.
+26.
+Find a cycle space basis among the face boundaries of a 2-connected
+plane graph.
+27.
+Show that a 3-connected graph of order n has at least n/2 peripheral
+cycles. Is this lower bound sharp?
+28.+ Find an algebraic proof of Euler’s formula for 2-connected plane graphs,
+along the following lines. Deﬁne the face space F (over F2) of such
+a graph in analogy to its vertex space V and edge space E.
+Deﬁne
+boundary maps F ! E ! V in the obvious way, specifying them ﬁrst on
+single faces or edges (i.e., on the standard bases of F and E) and then
+extending these maps linearly to all of F and E. Determine the kernels
+and images of these homomorphisms, and derive Euler’s formula from
+the dimensions of those subspaces of F, E and V.
+A family of subgraphs of G is said to form a double cover of G if every edge of
+G lies in exactly two of those subgraphs. A double cover by cycles is a cycle
+double cover. A surface map is a graph embedded in a surface so that every
+face is bounded by a cycle.
+29.
+(for topologists)
+(i) Show that a cubic graph has a cycle double cover if and only if it
+isomorphic to a surface map.
+(ii) Does every cycle double cover of a cubic graph occur as the family
+of face boundaries of a surface graph isomorphic to it?
+(iii) Is the assumption of being cubic relevant in (ii)?
+Given a 2-connected graph G = (V, E) and an integer χ, call another graph
+H = (W, E) with the same edge set E as G an abstract dual of G with para-
+meter χ if all the atomic bonds of G are cycles in H and |V | −|E| + |W| = χ.
+30.+ (continuing Exercise 29)
+Show that a graph is isomorphic to a surface map for a surface of Euler
+characteristic χ if and only if it has an abstract dual with parameter χ.
+You may use the results from Appendix B as needed.
+
+120
+4. Planar Graphs
+31.
+Let G be a 2-connected graph whose cycle space is generated by a sparse
+set C0 of cycles. From MacLane’s theorem we know that G even admits
+a double cover by cycles generating C(G): the face boundaries in any
+drawing of G. Show directly (without using MacLane’s theorem) that
+C0 extends to a cycle double cover D of G.
+32.+ (for topologists) Prove the non-trivial implication in MacLane’s the-
+orem constructively, as follows.
+Assume that the given graph G is
+2-connected and, by the previous exercise, has a double cover D by
+cycles generating C(G).
+For each of these cycles C take a disc and
+identify its boundary with C.
+(i) Show that the space obtained is a surface, i.e., a compact 2-
+manifold without boundary.
+(ii) Use Theorem 1.9.5 to show that this surface has Euler char-
+acteristic at least 2. (This implies that it must be the sphere,
+a fact you may assume as known.)
+33.
+Deduce from the last two exercises that, given any 2-connected planar
+graph and a sparse basis C0 of C(G) consisting of cycles, there is a
+drawing of G in which the cycles in C0 are precisely the boundaries of
+the inner faces.
+34.+ Let C be a closed curve in the plane that intersects itself at most once
+in any given point of the plane, and where every such self-intersection
+is a proper crossing. Call C alternating if we can turn these crossings
+into over- and underpasses in such a way that when we run along the
+curve the overpasses alternate with the underpasses.
+(i) Prove that every such curve is alternating, or ﬁnd a counterex-
+ample.
+(ii) Does the solution to (i) change if the curves considered are not
+closed?
+35.−What does the plane dual of a plane tree look like?
+36.−Show that the plane dual of a plane multigraph is connected.
+37.+ Show that a connected plane multigraph has a plane dual.
+38.
+Show that any two plane duals of a plane multigraph are combinatori-
+ally isomorphic.
+39.
+Let G⇤be an abstract dual of G, and let e = e⇤be an edge. Prove the
+following two assertions:
+(i) G⇤/e⇤is an abstract dual of G −e.
+(ii)+ G⇤−e⇤is an abstract dual of G/e.
+40.
+Find a connected graph that has two non-isomorphic abstract duals.
+Can you ﬁnd a 2-connected example?
+41.
+Let G, G⇤be dual plane graphs. Prove the following statements:
+(i) If G is 2-connected, then G⇤is 2-connected.
+(ii) If G is 3-connected, then G⇤is 3-connected.
+(iii) If G is 4-connected, then G⇤need not be 4-connected.
+
+Notes
+121
+42.
+Give detailed proofs for the statements made after Proposition 4.6.2,
+except for the uniqueness of G⇤(which is proved in Exercise 43 (ii)).
+43.
+Let G⇤= (V ⇤, E⇤) be a connected abstract dual of a connected multi-
+graph G = (V, E). Does G have a drawing whose plane dual is isomor-
+phic to G⇤? (Perhaps even ‘canonically’ isomorphic? In which sense?)
+(i) For 2-connected G, prove this using the approach of Exercise 32.
+(ii) Deduce that abstract duals of 3-connected graphs are unique.
+(What exactly could this mean? Suggest a deﬁnition of unique-
+ness that is stronger than ‘up to isomorphism’.)
+(iii) Find a counterexample to the general statement.
+44.
+Show that the following statements are equivalent for connected multi-
+graphs G = (V, E) and G0 = (V 0, E) with the same edge set:
+(i) G and G0 are abstract duals of each other;
+(ii) given any set F ✓E, the multigraph (V, F) is a tree if and only
+if (V 0, E r F) is a tree.
+Notes
+There is a very thorough monograph on the embedding of graphs in surfaces,
+including the plane: B. Mohar & C. Thomassen, Graphs on Surfaces, Johns
+Hopkins University Press 2001. Proofs of the results cited in Section 4.1, as
+well as all references for this chapter, can be found there. A good account
+of the Jordan curve theorem, both polygonal and general, is given also in
+J. Stillwell, Classical topology and combinatorial group theory, Springer 1980.
+The short proof of Corollary 4.2.10 uses a trick that deserves special
+mention: the so-called double counting of pairs, illustrated in the text by
+a bipartite graph whose edges can be counted alternatively by summing its
+degrees on the left or on the right. Double counting is a technique widely used
+in combinatorics, and there will be more examples later in the book.
+The material of Section 4.3 is not normally standard for an introductory
+graph theory course, and the rest of the chapter can be read independently of
+this section. However, the results of Section 4.3 are by no means unimportant.
+In a way, they have fallen victim to their own success: the shift from a topo-
+logical to a combinatorial setting for planarity problems which they achieve
+has made the topological techniques developed there dispensable for most of
+planarity theory.
+In its original version, Kuratowski’s theorem was stated only for topo-
+logical minors; the version for general minors was added by Wagner in 1937.
+Our proof of the 3-connected case (Lemma 4.4.3) is a weakening of a proof due
+to C. Thomassen, Planarity and duality of ﬁnite and inﬁnite graphs, J. Comb.
+Theory, Ser. B 29 (1980), 244–271, which yields a drawing in which all the
+inner faces are convex (Exercise 19). The existence of such ‘convex’ drawings
+for 3-connected planar graphs follows already from the theorem of Steinitz
+(1922) that these graphs are precisely the 1-skeletons of 3-dimensional convex
+polyhedra. Compare also W.T. Tutte, How to draw a graph, Proc. Lond. Math.
+Soc. 13 (1963), 743–767.

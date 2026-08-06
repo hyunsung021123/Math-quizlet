@@ -1,0 +1,574 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.4 Szemerédi's regularity lemma
+직전 소단원: 「7.3 Hadwiger's conjecture」
+[본문]
+192
+7. Extremal Graph Theory
+As mentioned earlier, the challenge posed by Hadwiger’s conjecture
+is to devise a proof technique that makes better use of the assumption of
+χ > r than just using its consequence of δ > r −1 in a suitable subgraph,
+which we know cannot force a Kr minor (Theorem 7.2.4). See the notes
+for some recent advances in this direction.
+If we resign ourselves to using just δ > r −1, we can still ask what
+additional assumptions might help in making this force a Kr minor.
+Theorem 7.2.7 says that an assumption of large girth has this e↵ect;
+see also Exercise 32. In fact, a much weaker assumption suﬃces: for
+any ﬁxed s 2 N and all large enough d depending only on s, the graphs
+G 6◆Ks,s of average degree at least d can be shown to have Kr minors
+for r considerably larger than d. For Hadwiger’s conjecture, this implies
+the following:
+Theorem 7.3.8. (K¨uhn & Osthus 2005)
+For every integer s there is an integer rs such that Hadwiger’s conjecture
+holds for all graphs G 6◆Ks,s and r > rs.
+The strengthening of Hadwiger’s conjecture that graphs of chro-
+matic number at least r contain Kr as a topological minor has become
+known as Haj´os’s conjecture. It is false in general, but Theorem 7.2.7
+implies it for graphs of large girth:
+Corollary 7.3.9. There is a constant g such that all graphs G of girth
+at least g satisfy the implication χ(G) > r ) G ◆TKr for all r.
+Proof. Let g be the constant from Theorem 7.2.7. If χ(G) > r then, by
+(5.2.3)
+(7.2.7)
+Lemma 5.2.3, G has a subgraph H of minimum degree δ(H) > r −1. As
+g(H) > g(G) > g, Theorem 7.2.7 implies that G ◆H ◆TKr.
+⇤
+7.4 Szemer´edi’s regularity lemma
+Some 50 years ago, in the course of the proof of a theorem about arith-
+metic progressions of integers, Szemer´edi developed a graph-theoretical
+tool that has since come to dominate methods in extremal graph theory
+like none other: his regularity lemma. Very roughly, the lemma says
+that all graphs can be approximated by random graphs in the following
+sense: every graph can be partitioned, into a bounded number of equal
+parts, so that most of its edges run between di↵erent parts and the edges
+between any two parts are distributed fairly uniformly – just as we would
+expect it if they had been generated at random.
+
+7.4 Szemer´edi’s regularity lemma
+193
+In order to state the regularity lemma precisely, we need some deﬁ-
+nitions. Let G = (V, E) be a graph, and let X, Y ✓V be disjoint. We
+denote by kX, Y k the number of X–Y edges of G, and call
+kX, Y k
+d(X, Y ) := kX, Y k
+|X| |Y |
+d(X, Y )
+the density of the pair (X, Y ). (This is a real number between 0 and 1.)
+density
+Given any ✏> 0, we call a pair (A, B) of disjoint sets A, B ✓V ✏-regular
+if all X ✓A and Y ✓B with
+✏-regular
+pair
+|X| > ✏|A|
+and
+|Y | > ✏|B|
+satisfy
+..d(X, Y ) −d(A, B)
+.. 6 ✏.
+The edges in an ✏-regular pair are thus distributed fairly uniformly, the
+more so the smaller the ✏we started with.
+Consider a partition {V0, V1, . . . , Vk} of V in which one set V0 has
+been singled out as an exceptional set. (This exceptional set V0 may
+exceptional
+set
+be empty.6) We call such a partition an ✏-regular partition of G if it
+satisﬁes the following three conditions:
+(i) |V0| 6 ✏|V |;
+✏-regular
+partition
+(ii) |V1| = . . . = |Vk|;
+(iii) all but at most ✏k2 of the pairs (Vi, Vj) with 1 6 i < j 6 k are
+✏-regular.
+The role of the exceptional set V0 is one of pure convenience: it
+makes it possible to require that all the other partition sets have exactly
+the same size. Since condition (iii) a↵ects only the sets V1, . . . , Vk, we
+may think of V0 as a kind of bin: its vertices are disregarded when
+the regularity of the partition is assessed, but there are only few such
+vertices.
+Theorem 7.4.1. (Regularity Lemma)
+[7.1.2]
+[9.2.2]
+For every ✏> 0 and every integer m > 1 there exists an integer M
+such that every graph of order at least m admits an ✏-regular partition
+{V0, V1, . . . , Vk} with m 6 k 6 M.
+6 So V0 may be an exception also to our terminological rule that partition sets
+are not normally empty.
+
+194
+7. Extremal Graph Theory
+The regularity lemma thus says that, given any ✏> 0, every graph
+has an ✏-regular partition into a bounded number of sets. The upper
+bound M on the number of partition sets ensures that for large graphs
+the partition sets are large too; note that ✏-regularity is trivial when
+the partition sets are singletons, and a powerful property when they are
+large. The lemma also allows us to specify a lower bound m for the
+number of partition sets. This can be used to increase the proportion
+of edges running between di↵erent partition sets (i.e., of edges governed
+by the regularity assertion) over edges inside partition sets (about which
+we know nothing). See Exercise 39 for an example.
+Note that the regularity lemma in this form is designed for use with
+dense graphs:7 for sparse graphs it becomes trivial, because all densities
+of pairs – and hence their di↵erences – tend to zero (Exercise 40).
+The remainder of this section is devoted to the proof of the regular-
+ity lemma. Although the proof is not diﬃcult, any reader meeting the
+regularity lemma here for the ﬁrst time is likely to draw more insight
+from seeing how the lemma is typically applied than from studying the
+technicalities of its proof. Any such reader is encouraged to skip to the
+start of Section 7.5 now and come back to the proof at his or her leisure.
+We shall need the following inequality for reals µ1, . . . , µk > 0 and
+e1, . . . , ek > 0:
+X e2
+i
+µi
+> (P ei)2
+P µi
+.
+(1)
+This follows from the Cauchy-Schwarz inequality P a2
+i
+P b2
+i > (P aibi)2
+by taking ai := pµi and bi := ei/pµi.
+Let G = (V, E) be a graph and n := |V |. For disjoint sets A, B ✓V
+G = (V, E)
+we deﬁne
+n
+q(A, B) := |A| |B|
+n2
+d2(A, B) =
+kA, Bk2
+|A| |B| n2 .
+q(A, B)
+For partitions A of A and B of B we set
+q(A, B) :=
+X
+A0 2A; B0 2B
+q(A0, B0) ,
+q(A, B)
+and for a partition P = {C1, . . . , Ck} of V we let
+q(P) :=
+X
+i<j
+q(Ci, Cj) .
+q(P)
+7 Sparse versions were developed later; see the notes.
+
+7.4 Szemer´edi’s regularity lemma
+195
+However, if P = {C0, C1, . . . , Ck} is a partition of V with exceptional
+set C0, we treat C0 as a set of singletons and deﬁne
+q(P) := q( ˜P) ,
+where ˜P :=
+*
+C1, . . . , Ck
+ 
+[
+*
+{v} : v 2 C0
+ 
+.
+˜P
+The function q(P) plays a pivotal role in our proof of the regularity
+lemma. On the one hand, it measures the regularity of the partition P:
+if P has too many irregular pairs (A, B), we can take some of the pairs
+(X, Y ) of subsets violating the regularity of the pairs (A, B) and make
+those sets X and Y into partition sets of their own; as we shall prove,
+this can reﬁne P into a partition for which q is substantially greater than
+for P. Here, ‘substantial’ means that the increase of q(P) is bounded
+below by some constant depending only on ✏. On the other hand,
+q(P) =
+X
+i<j
+q(Ci, Cj)
+=
+X
+i<j
+|Ci| |Cj|
+n2
+d2(Ci, Cj)
+6 1
+n2
+X
+i<j
+|Ci| |Cj| 6 1 .
+The number of times that q(P) can be increased by a constant is thus
+also bounded by a constant – in other words, after some bounded number
+of reﬁnements our partition will be ✏-regular! To complete the proof of
+the regularity lemma, all we have to do then is to note how many sets
+that last partition can possibly have if we start with a partition into m
+sets, and to choose this number as our promised bound M.
+Let us make all this precise. We begin by showing that, when we
+reﬁne any partition of V, its q-value will not decrease:
+Lemma 7.4.2.
+(i) Let C, D ✓V be disjoint. If C is a partition of C and D is a
+partition of D, then q(C, D) > q(C, D).
+(ii) If P, P0 are partitions of V and P0 reﬁnes P, then q(P0) > q(P).
+Proof. (i) Let C =: {C1, . . . , Ck} and D =: {D1, . . . , D`}. Then
+q(C, D) =
+X
+i,j
+q(Ci, Dj)
+=
+1
+n2
+X
+i,j
+kCi, Djk
+2
+|Ci| |Dj|
+>
+(1)
+1
+n2
+$ P
+i,j kCi, Djk
+%2
+P
+i,j |Ci| |Dj|
+
+196
+7. Extremal Graph Theory
+=
+1
+n2
+kC, Dk2
+$ P
+i |Ci|
+%$ P
+j |Dj|
+%
+= q(C, D) .
+(ii) Let P =: {C1, . . . , Ck}, and for i = 1, . . . , k let Ci be the partition
+of Ci induced by P0. Then
+q(P) =
+X
+i<j
+q(Ci, Cj)
+6
+(i)
+X
+i<j
+q(Ci, Cj)
+6 q(P0) ,
+since q(P0) = P
+i q(Ci) + P
+i<j q(Ci, Cj).
+⇤
+Next, we show that by subpartitioning an irregular pair of partition
+sets we can increase the q-value of that partition a little. Since we are
+dealing with a single pair only, however, we cannot guarantee yet that
+the amount of this increase exceeds any constant that depends only on ✏.
+Lemma 7.4.3. Let ✏> 0, and let C, D ✓V be disjoint. If (C, D) is not
+✏-regular, then there are partitions C = {C1, C2} of C and D = {D1, D2}
+of D such that
+q(C, D) > q(C, D) + ✏4 |C| |D|
+n2
+.
+Proof. Suppose (C, D) is not ✏-regular. Then there are sets C1 ✓C and
+D1 ✓D with |C1| > ✏|C| and |D1| > ✏|D| such that
+|⌘| > ✏
+(2)
+for ⌘:= d(C1, D1) −d(C, D). Let C := {C1, C2} and D := {D1, D2},
+⌘
+where C2 := C r C1 and D2 := D r D1.
+Let us show that C and D satisfy the conclusion of the lemma. We
+shall write ci := |Ci|, di := |Di|, eij := kCi, Djk, c := |C|, d := |D|
+ci, di, eij
+and e := kC, Dk. As in the proof of Lemma 7.4.2,
+c, d, e
+q(C, D) =
+1
+n2
+X
+i,j
+e2
+ij
+cidj
+=
+1
+n2
+✓e2
+11
+c1d1
++
+X
+i+j>2
+e2
+ij
+cidj
+◆
+>
+(1)
+1
+n2
+✓e2
+11
+c1d1
++ (e −e11)2
+cd −c1d1
+◆
+.
+
+7.4 Szemer´edi’s regularity lemma
+197
+By deﬁnition of ⌘, we have e11 = c1d1e/cd + ⌘c1d1, so
+n2 q(C, D) >
+1
+c1d1
+✓c1d1e
+cd
++ ⌘c1d1
+◆2
++
+1
+cd −c1d1
+✓cd −c1d1
+cd
+e −⌘c1d1
+◆2
+= c1d1e2
+c2d2 + 2e⌘c1d1
+cd
++ ⌘2c1d1
++ cd −c1d1
+c2d2
+e2 −2e⌘c1d1
+cd
++
+⌘2c2
+1d2
+1
+cd −c1d1
+>
+e2
+cd + ⌘2c1d1
+>
+(2)
+e2
+cd + ✏4cd = n2q(C, D) + ✏4|C| |D|
+as claimed, since c1 > ✏c and d1 > ✏d by the choice of C1 and D1.
+⇤
+Finally, we show that if a partition has enough irregular pairs of
+partition sets to fall short of the deﬁnition of an ✏-regular partition,
+then subpartitioning all those pairs at once can increase q by a constant:
+Lemma 7.4.4. Let 0 < ✏6 1/4, and let P = {C0, C1, . . . , Ck}
+be a partition of V, with exceptional set C0 of size |C0| 6 ✏n and
+|C1| = . . . = |Ck| =: c. If P is not ✏-regular, then there is a partition
+c
+P0 = {C0
+0, C0
+1, . . . , C0
+`} of V with exceptional set C0
+0, where k 6 ` 6 k4k+1,
+such that |C0
+0| 6 |C0|+n/2k, all other sets C0
+i have equal size, and either
+P0 is ✏-regular or
+q(P0) > q(P) + ✏5/2 .
+Proof. For all 1 6 i < j 6 k, let us deﬁne a partition Cij of Ci and a
+Cij
+partition Cji of Cj, as follows. If the pair (Ci, Cj) is ✏-regular, we let
+Cij := {Ci} and Cji := {Cj}. If not, then by Lemma 7.4.3 there are
+partitions Cij of Ci and Cji of Cj with |Cij| = |Cji| = 2 and
+q(Cij, Cji) > q(Ci, Cj) + ✏4 |Ci| |Cj|
+n2
+= q(Ci, Cj) + ✏4c2
+n2 .
+(3)
+For each i = 1, . . . , k, let Ci be the unique minimal partition of Ci that
+Ci
+reﬁnes every partition Cij with j 6= i. (In other words, if we consider two
+elements of Ci as equivalent whenever they lie in the same partition set
+
+198
+7. Extremal Graph Theory
+of Cij for every j 6= i, then Ci is the set of equivalence classes.) Thus,
+|Ci| 6 2k−1. Now consider the partition
+C := {C0} [
+k[
+i=1
+Ci
+C
+of V , with C0 as exceptional set. Then C reﬁnes P and |C r {C0}| 6
+k2k−1, so
+k 6 |C| 6 k2k.
+(4)
+Let C0 :=
+*
+{v} | v 2 C0
+ 
+. Now if P is not ✏-regular, then for more
+C0
+than ✏k2 of the pairs (Ci, Cj) with 1 6 i < j 6 k the partition Cij is
+non-trivial. Hence, by our deﬁnition of q for partitions with exceptional
+set, and Lemma 7.4.2 (i),
+q(C) =
+X
+16i<j
+q(Ci, Cj) +
+X
+16i
+q(C0, Ci) +
+X
+06i
+q(Ci)
+>
+X
+16i<j
+q(Cij, Cji) +
+X
+16i
+q
+$
+C0, {Ci}
+%
++ q(C0)
+>
+(3)
+X
+16i<j
+q(Ci, Cj) + ✏k2 ✏4c2
+n2 +
+X
+16i
+q
+$
+C0, {Ci}
+%
++ q(C0)
+= q(P) + ✏5
+✓kc
+n
+◆2
+> q(P) + ✏5/2 .
+(For the last inequality, recall that |C0| 6 ✏n 6 1
+4n, so kc > 3
+4n.)
+In order to turn C into our desired partition P0, all that remains
+to do is to cut its sets up into pieces of some common size so that
+all remaining vertices can be collected into the exceptional set without
+making this too large.
+If c < 4k, the ✏-regular partition P0 into C0
+0 := C0 and the single-
+tons {v} with v 2 V r C0 is as desired, since there are ` such singletons
+for k 6 ` = kc < k4k.
+Assume now that c > 4k. Let C0
+1, . . . , C0
+` be a maximal collection of
+disjoint sets of size d := bc/4kc > 1 such that each C0
+i is contained in some
+d
+C 2 C r {C0}, and put C0
+0 := V r S C0
+i. Then P0 = {C0
+0, C0
+1, . . . , C0
+`} is
+P0
+indeed a partition of V . Moreover, ˜P0 reﬁnes ˜C, so
+q(P0) > q(C) > q(P) + ✏5/2
+by Lemma 7.4.2 (ii). Since each set C0
+i 6= C0
+0 is also contained in one of
+the sets C1, . . . , Ck, but no more than c/d 6 4k+1 sets C0
+i can lie inside
+
+7.4 Szemer´edi’s regularity lemma
+199
+the same Cj (by the choice of d), we also have k 6 ` 6 k4k+1 as required.
+Finally, the sets C0
+1, . . . , C0
+` use all but at most d vertices from each set
+C 6= C0 of C. Hence,
+|C0
+0| 6 |C0| + d |C|
+6
+(4)
+|C0| + c
+4k k2k
+= |C0| + ck/2k
+6 |C0| + n/2k.
+⇤
+We are no ready to prove the regularity lemma. Our plan is, roughly,
+to start for ﬁxed ✏with any partition P of V to which we can apply
+Lemma 7.4.4. We shall iterate this until the partition the lemma returns
+is ✏-regular. This should happen after at most 2/✏5 iterations, since the
+q-value of our partition grows by at least ✏5/2 at each step but cannot
+exceed 1. The number of sets in our ﬁnal partition will therefore also be
+bounded in terms of ✏, and we can take this bound as the value for M
+required in the assertion of the regularity lemma.
+Proof of Theorem 7.4.1. Let ✏> 0 and m > 1 be given, and assume
+✏, m
+without loss of generality that ✏6 1/4. Let s := 2/✏5.
+There is one critical requirement which a partition {C0, C1, . . . , Ck}
+with |C1| = . . . = |Ck| has to satisfy before Lemma 7.4.4 can be (re-)
+applied: the size |C0| of its exceptional set must not exceed ✏n. As the
+size of the exceptional set can grow with each iteration of the lemma, see
+there, we thus have to start with C0 small enough that after up to s −1
+increases its size is still less than ✏n.
+The increase to |C0| e↵ected by one application of Lemma 7.4.4
+is stated there as being at most n/2k. This k is the number of non-
+exceptional sets in the partition to which we apply the lemma, so n/2k
+decreases with each step.
+Hence we only need to start with k large
+enough that s increments even of our starting value of n/2k add up to
+at most ✏n/2 and ensure, if we can, that the initial size of C0 is also at
+most ✏n/2.
+Pick k > m large enough that 2k−1 > s/✏. Then s/2k 6 ✏/2, and
+k
+hence
+k + sn/2k 6 ✏n
+(5)
+whenever k 6 ✏n/2, i.e. for all n > 2k/✏.
+Let us now choose M.
+This should be an upper bound on the
+number of non-exceptional sets in our partition after up to s iterations
+of Lemma 7.4.4, where in each iteration this number may grow from its
+current value r to at most r4r+1. So let f be the function x 7! x4x+1,
+
+200
+7. Extremal Graph Theory
+and take M := max {f s(k), 2k/✏}; the second term in the maximum
+M
+ensures that any n > M is large enough to satisfy (5).
+We ﬁnally have to show that every graph G = (V, E) of order at
+least m has an ✏-regular partition {V0, V1, . . . , Vk0} with m 6 k0 6 M. So
+let G be given, and let n := |G|. If n 6 M, we partition G into k0 := n
+n
+singletons, choosing V0 := ; and |V1| = . . . = |Vk0| = 1. This partition of
+G is clearly ✏-regular. Suppose now that n > M. Let C0 ✓V be minimal
+such that k divides |V r C0|, and let {C1, . . . , Ck} be any partition of
+V r C0 into sets of equal size. Then |C0| 6 k −1, and hence |C0| 6 ✏n
+by (5). Starting with {C0, C1, . . . , Ck} we apply Lemma 7.4.4 again and
+again, until the partition of G obtained is ✏-regular; this will happen
+after at most s iterations, since by (5) the size of the exceptional set in
+the partitions stays below ✏n, so the lemma could indeed be reapplied
+up to the theoretical maximum of s times.
+⇤
+7.5 Applying the regularity lemma
+The purpose of this section is to illustrate how the regularity lemma
+is typically applied in the context of (dense) extremal graph theory.
+Suppose we are trying to prove that a certain edge density of a graph
+G suﬃces to force the occurrence of some given subgraph H, and that
+we have an ✏-regular partition of G. For most of the pairs (Vi, Vj) of
+partition sets, the edges between Vi and Vj are distributed fairly uni-
+formly; their density, however, may depend on the pair. But since G
+has many edges, this density cannot be too small for too many pairs:
+some sizeable proportion of the pairs will have at least a certain positive
+density. Moreover if G is large, then so are the pairs: recall that the
+number of partition sets is bounded, and they have equal size. But any
+large enough bipartite graph with equal partition sets, ﬁxed positive edge
+density (however small) and a uniform distribution of edges will contain
+any given bipartite subgraph;8 this will be made precise below. Writing
+H as a union of bipartite subgraphs, say those induced by pairs of colour
+classes of some vertex colouring of H, we shall obtain H ✓G as desired.
+These ideas will be formalized by the so-called ‘blow-up lemma’,
+Lemma 7.5.2 below. We shall then use this and the regularity lemma
+to prove the Erd˝os-Stone theorem from Section 7.1; another application
+will be given later, in the proof of Theorem 9.2.2. We wind up the section
+with an informal review of the application of the regularity lemma that
+we have seen, summarizing what it can teach us for similar applications.
+In particular, we look at how the various parameters involved depend
+8 Readers already acquainted with random graphs may ﬁnd it instructive to com-
+pare this statement with Proposition 11.3.1.

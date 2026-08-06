@@ -1,0 +1,227 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 5. Colouring
+현재 소단원: 5.3 Colouring edges
+직전 소단원: 「5.2 Colouring vertices」
+[본문]
+131
+Theorem 5.2.6. (Haj´os 1961)
+Let G be a graph and k 2 N. Then χ(G) > k if and only if G has a k-
+constructible subgraph.
+Proof.
+Let G be a graph with χ(G) > k; we show that G has a k-
+constructible subgraph. Suppose not; then k > 3. Adding some edges
+if necessary, let us make G edge-maximal with the property that none
+of its subgraphs is k-constructible. Now G is not a complete r-partite
+graph for any r: for then χ(G) > k would imply r > k, and G would
+contain the k-constructible graph Kk.
+Since G is not a complete multipartite graph, non-adjacency is not
+an equivalence relation on V (G). So there are vertices y1, x, y2 such that
+y1x, xy2 /2 E(G) but y1y2 2 E(G). Since G is edge-maximal without
+x, y1, y2
+a k-constructible subgraph, each edge xyi lies in some k-constructible
+subgraph Hi of G + xyi (i = 1, 2).
+H1, H2
+Let H0
+2 be an isomorphic copy of H2 that contains x and H2 −H1
+H0
+2
+but is otherwise disjoint from G, together with an isomorphism v 7! v0
+v0 etc.
+from H2 to H0
+2 that ﬁxes H2 \ H0
+2 pointwise. Then H1 \ H0
+2 = {x}, so
+H := (H1 [ H0
+2) −xy1 −xy0
+2 + y1y0
+2
+is k-constructible by (iii). One vertex at a time, let us identify in H each
+vertex v0 2 H0
+2 −G with its partner v; since vv0 is never an edge of H,
+each of these identiﬁcations amounts to a construction step of type (ii).
+Eventually, we obtain the graph
+(H1 [ H2) −xy1 −xy2 + y1y2 ✓G ;
+this is the desired k-constructible subgraph of G.
+⇤
+Does Haj´os’s theorem solve our Kuratowski-type problem for highly
+chromatic graphs, which was to ﬁnd a class of graphs of chromatic num-
+ber at least k with the property that every such graph has a subgraph
+in this class?
+Formally it does, albeit with an inﬁnite characterizing
+class: the class of k-constructible graphs, which contains Xk.
+Unlike
+Kuratowski’s characterization of planar graphs, however, this does not –
+at least not obviously – make Haj´os’s theorem a good characterization
+of the graphs of chromatic number < k: as one can show, proving that
+a given k-constructible graph is indeed k-constructible is just as hard as
+proving that a graph of chromatic number > k does indeed need at least
+k colours. See the notes for details.
+5.3 Colouring edges
+Clearly, every graph G satisﬁes χ0(G) > ∆(G). For bipartite graphs, we
+have equality here:
+5.3 Colouring edges
+
+132
+5. Colouring
+Proposition 5.3.1. (K¨onig 1916)
+[5.4.5]
+Every bipartite graph G satisﬁes χ0(G) = ∆(G).
+Proof. We apply induction on kGk. For kGk = 0 the assertion holds.
+(1.6.1)
+Now assume that kGk > 1, and that the assertion holds for graphs with
+fewer edges. Let ∆:= ∆(G), pick an edge xy 2 G, and choose a ∆-
+∆, xy
+edge-colouring of G −xy by the induction hypothesis. Let us refer to
+the edges coloured ↵as ↵-edges, etc.
+↵-edge
+In G −xy, each of x and y is incident with at most ∆−1 edges.
+Hence there are ↵, β 2 {1, . . . , ∆} such that x is not incident with an
+↵, β
+↵-edge and y is not incident with a β-edge. If ↵= β, we can colour the
+edge xy with this colour and are done; so we may assume that ↵6= β,
+and that x is incident with a β-edge.
+Let us extend this edge to a maximal walk W from x whose edges are
+coloured β and ↵alternately. Since no such walk contains a vertex twice
+(why not?), W exists and is a path. Moreover, W does not contain y:
+if it did, it would end in y on an ↵-edge (by the choice of β) and thus
+have even length, so W +xy would be an odd cycle in G (cf. Proposition
+1.6.1). We now recolour all the edges on W, swapping ↵with β. By the
+choice of ↵and the maximality of W, adjacent edges of G −xy are still
+coloured di↵erently. We have thus found a ∆-edge-colouring of G −xy
+in which neither x nor y is incident with a β-edge. Colouring xy with β,
+we extend this colouring to a ∆-edge-colouring of G.
+⇤
+Theorem 5.3.2. (Vizing 1964)
+Every graph G satisﬁes
+∆(G) 6 χ0(G) 6 ∆(G) + 1 .
+Proof. We prove the second inequality by induction on kGk. For kGk = 0
+V, E
+it is trivial. For the induction step let G = (V, E) with ∆:= ∆(G) > 0 be
+∆
+given, and assume that the assertion holds for graphs with fewer edges.
+Instead of ‘(∆+ 1)-edge-colouring’ let us just say ‘colouring’.
+colouring
+For every edge e 2 G there exists a colouring of G −e, by the
+induction hypothesis. In such a colouring, the edges at a given vertex
+v use at most d(v) 6 ∆colours, so some colour β 2 {1, . . . , ∆+ 1} is
+missing at v. For any other colour ↵, there is a unique maximal walk
+missing
+(possibly trivial) starting at v, whose edges are coloured alternately ↵
+and β. This walk is a path; we call it the ↵/β - path from v.
+↵/β - path
+Suppose that G has no colouring. Then the following holds:
+Given xy 2 E, and any colouring of G −xy in which the
+colour ↵is missing at x and the colour β is missing at y,
+the ↵/β - path from y ends in x.
+(⇤)
+
+5.3 Colouring edges
+133
+Otherwise we could interchange the colours ↵and β along this path and
+colour xy with ↵, obtaining a colouring of G (contradiction).
+Let xy0 2 G be an edge. By induction, G0 := G −xy0 has a col-
+ouring c0. Let ↵be a colour missing at x in this colouring. Further, let
+↵
+y0, . . . , yk be a maximal sequence of distinct neighbours of x in G such
+that c0(xyi+1) is missing in c0 at yi for every i < k. For each of the
+graphs Gi := G −xyi we deﬁne a colouring ci, setting
+Gi
+ci(e) :=
+⇢
+c0(xyj+1)
+for e = xyj with j 2 {0, . . . , i −1}
+c0(e)
+otherwise;
+ci
+note that in each of these colourings the same colours are missing at x
+as in c0.
+Now let β be a colour missing at yk in c0. By (⇤), the ↵/β - path P
+β
+from yk in Gk (with respect to ck) ends in x, with an edge yx coloured β
+since ↵is missing at x. Since y cannot serve as yk+1, by the maximality
+of the sequence y0, . . . , yk, we thus have y = yi for some 0 6 i < k
+(Fig. 5.3.1). By deﬁnition of ck, therefore, β = ck(xyi) = c0(xyi+1). By
+the choice of yi+1 this means that β was missing at yi in c0, and hence
+also in ci. Now the ↵/β - path P 0 from yi in Gi with respect to ci starts
+with yiPyk, since the edges of P˚x are coloured the same in ci as in ck.
+But in c0, and hence in ci, there is no edge at yk coloured β. Therefore
+P 0 ends in yk, contradicting (⇤).
+⇤
+Gk
+yi+1
+yi
+yk
+x
+P
+y0
+↵
+↵
+↵
+↵
+β
+β
+β
+β
+Fig. 5.3.1. The ↵/β - path P in Gk = G −xyk
+Vizing’s theorem divides the ﬁnite graphs into two classes according
+to their chromatic index; graphs satisfying χ0 = ∆are called (imagina-
+tively) class 1, those with χ0 = ∆+ 1 are class 2. There is no good
+characterization theorem that enables us to tell these classes apart, be-
+cause no easily checkable ‘certiﬁcate’ is known for a graph to be class 2.
+Regular graphs of large even order and large degree are class 1:
+Theorem 5.3.3. (Csaba, K¨uhn, Lo, Osthus, Treglown 2016)
+There exists an n0 2 N such that, for all even n > n0 and d > n/2, every
+d-regular graph G of order n satisﬁes χ0(G) = ∆(G).
+
+134
+5. Colouring
+5.4 List colouring
+In this section, we take a look at a relatively recent generalization of the
+concepts of colouring studied so far. This generalization may seem a little
+far-fetched at ﬁrst glance, but it turns out to supply a fundamental link
+between the classical (vertex and edge) chromatic numbers of a graph
+and its other invariants.
+Suppose we are given a graph G = (V, E), and for each vertex of
+G a list of colours permitted at that particular vertex: when can we
+colour G (in the usual sense) so that each vertex receives a colour from
+its list? More formally, let (Sv)v 2V be a family of sets. We call a vertex
+colouring c of G with c(v) 2 Sv for all v
+2 V a colouring from the
+lists Sv. The graph G is called k-list-colourable, or k-choosable, if, for
+k-choosable
+every family (Sv)v 2V with |Sv| = k for all v, there is a vertex colouring
+of G from the lists Sv. The least integer k for which G is k-choosable is
+the list-chromatic number, or choice number ch(G) of G.
+choice
+number
+ch(G)
+List-colourings of edges are deﬁned analogously.
+The least inte-
+ger k such that G has an edge colouring from any family of lists of
+size k is the list-chromatic index ch0(G) of G; formally, we just set
+ch0(G) := ch(L(G)), where L(G) is the line graph of G.
+ch0(G)
+In principle, showing that a given graph is k-choosable is more diﬃ-
+cult than proving it to be k-colourable: the latter is just the special case
+of the former where all lists are equal to {1, . . . , k}. Thus,
+ch(G) > χ(G)
+and
+ch0(G) > χ0(G)
+for all graphs G.
+In spite of these inequalities, many of the known upper bounds for
+the chromatic number have turned out to be valid for the choice num-
+ber, too. Examples for this phenomenon include Brooks’s theorem and
+Proposition 5.2.2; in particular, graphs of large choice number still have
+subgraphs of large minimum degree. On the other hand, it is easy to con-
+struct graphs for which the two invariants are wide apart (Exercise 30).
+Taken together, these two facts indicate a little how far those general
+upper bounds on the chromatic number may be from the truth.
+The following theorem shows that, in terms of its relationship to
+other graph invariants, the choice number di↵ers fundamentally from the
+chromatic number. As mentioned before, there are 2-chromatic graphs of
+arbitrarily large minimum degree, e.g. the graphs Kn,n. The choice num-
+ber, however, will be forced up by large values of invariants like δ, " or :
+Theorem 5.4.1. (Alon 1993)
+There exists a function f: N!N such that, given any integer k, all graphs
+G with average degree d(G) > f(k) satisfy ch(G) > k.

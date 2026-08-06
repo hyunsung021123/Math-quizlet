@@ -1,0 +1,55 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.2 Paths, trees, and ends (분할 part 2)
+직전 소단원: 「8.1 Basic notions, facts and techniques」
+[본문]
+246
+8. Inﬁnite Graphs
+8.3 Homogeneous and universal graphs
+Unlike ﬁnite graphs, inﬁnite graphs o↵er the possibility to represent an
+entire graph property P by just one specimen, a single graph that con-
+tains all the graphs in P up to some ﬁxed cardinality. Such graphs are
+called ‘universal’ for this property.
+More precisely, if 6 is a graph relation (such as the minor, topolo-
+gical minor, subgraph, or induced subgraph relation up to isomorphism),
+we call a countable graph G⇤universal in P (for 6) if G⇤2 P and G 6 G⇤
+universal
+for every countable graph G 2 P.
+Is there a graph that is universal in the class of all countable graphs?
+Suppose a graph R has the following property:
+Whenever U and W are disjoint ﬁnite sets of vertices in R,
+there exists a vertex v 2 R −U −W that is adjacent in R
+to all the vertices in U but to none in W.
+(⇤)
+Then R is universal even for the strongest of all graph relations, the
+induced subgraph relation. Indeed, in order to embed a given countable
+graph G in R we just map its vertices v1, v2, . . . to R inductively, making
+sure that vn gets mapped to a vertex v 2 R adjacent to the images of
+all the neighbours of vn in G[v1, . . . , vn] but not adjacent to the image
+of any non-neighbour of vn in G[v1, . . . , vn].
+Clearly, this map is an
+isomorphism between G and the subgraph of R induced by its image.
+Theorem 8.3.1. (Erd˝os & R´enyi 1963)
+[11.3.5]
+There exists a unique countable graph R with property (⇤).
+R
+Proof. To prove existence, we construct a graph R with property (⇤)
+inductively. Let R0 := K1. For all n 2 N, let Rn+1 be obtained from
+Rn by adding for every set U ✓V (Rn) a new vertex v joined to all the
+vertices in U but to none outside U. (In particular, the new vertices form
+an independent set in Rn+1.) Clearly R := S
+n2N Rn has property (⇤).
+To prove uniqueness, let R = (V, E) and R0 = (V 0, E0) be two graphs
+with property (⇤), each given with a ﬁxed vertex enumeration. We con-
+struct a bijection ': V !V 0 in an inﬁnite sequence of steps, deﬁning '(v)
+for one new vertex v 2 V at each step.
+At every odd step we look at the ﬁrst vertex v in the enumeration
+of V for which '(v) has not yet been deﬁned. Let U be the set of those
+of its neighbours u in R for which '(u) has already been deﬁned. This
+is a ﬁnite set. Using (⇤) for R0, ﬁnd a vertex v0 2 V 0 outside the image
+of ' (which is a ﬁnite set), so that v0 is adjacent in R0 to all the vertices
+in '(U) but to no other vertex in the image of '. Put '(v) := v0.
+At even steps in the deﬁnition process we do the same thing with
+the roles of R and R0 interchanged: we look at the ﬁrst vertex v0 in
+the enumeration of V 0 that does not yet lie in the image of ', and set

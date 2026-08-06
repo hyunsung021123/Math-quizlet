@@ -1,0 +1,196 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 11. Random Graphs
+현재 소단원: 11.3 Properties of almost all graphs
+직전 소단원: 「11.2 The probabilistic method」
+[본문]
+348
+11. Random Graphs
+11.3 Properties of almost all graphs
+Recall that a graph property is a class of graphs that is closed under
+isomorphism, one that contains with every graph G also the graphs iso-
+morphic to G. If p = p(n) is a ﬁxed function (possibly constant), and P is
+a graph property, we may ask how the probability P [ G 2 P ] behaves for
+G 2 G(n, p) as n ! 1. If this probability tends to 1, we say that G 2 P
+for almost all (or almost every) G 2 G(n, p), or that G 2 P almost surely;
+almost all
+etc.
+if it tends to 0, we say that almost no G 2 G(n, p) has the property P.
+(For example, in Lemma 11.2.1 we proved that, for a certain p, almost
+no G 2 G(n, p) has a set of more than 1
+2n/k independent vertices.)
+To illustrate the new concept let us show that, for constant p, every
+ﬁxed abstract4 graph H is an induced subgraph of almost all graphs:
+Proposition 11.3.1. For every constant p 2 (0, 1) and every graph H,
+almost every G 2 G(n, p) contains an induced copy of H.
+Proof. Let H be given, and k := |H|. If n > k and U ✓{0, . . . , n −1} is
+a ﬁxed set of k vertices of G, then G[U] is isomorphic to H with a certain
+probability r > 0. This probability r depends on p, but not on n (why
+not?). Now G contains a collection of bn/kc disjoint such sets U. The
+probability that none of the corresponding graphs G[U] is isomorphic to
+H is (1 −r)bn/kc, since these events are independent by the disjointness
+of the edges sets [U]2. Thus
+P [ H 6✓G induced ] 6 (1 −r)bn/kc −!
+n!1 0 ,
+which implies the assertion.
+⇤
+The following lemma is a simple device enabling us to deduce that
+quite a number of natural graph properties (including that of Proposi-
+tion 11.3.1) are shared by almost all graphs. Given i, j 2 N, let Pi,j
+Pi,j
+denote the property that the graph considered contains, for any disjoint
+vertex sets U, W with |U| 6 i and |W| 6 j, a vertex v /2 U [ W that is
+adjacent to all the vertices in U but to none in W.
+Lemma 11.3.2. For every constant p 2 (0, 1) and i, j 2 N, almost every
+graph G 2 G(n, p) has the property Pi,j.
+4 The word ‘abstract’ is used to indicate that only the isomorphism type of H is
+known or relevant, not its actual vertex and edge sets. In our context, it indicates
+that the word ‘subgraph’ is used in the usual sense of ‘isomorphic to a subgraph’.
+
+11.3 Properties of almost all graphs
+349
+Proof. For ﬁxed U, W and v 2 G −(U [ W), the probability that v is
+adjacent to all the vertices in U but to none in W, is
+p|U|q|W | > piqj.
+Hence, the probability that no suitable v exists for these U and W, is
+(1 −p|U|q|W |)n−|U|−|W | 6 (1 −piqj)n−i−j
+(for n > i + j), since the corresponding events are independent for
+di↵erent v.
+As there are no more than ni+j pairs of such sets U, W
+in V (G) (encode sets U of fewer than i points as non-injective maps
+{0, . . . , i −1} ! {0, . . . , n −1}, etc.), the probability that some such pair
+has no suitable v is at most
+ni+j(1 −piqj)n−i−j,
+which tends to zero as n ! 1 since 1 −piqj < 1.
+⇤
+Corollary 11.3.3. For every constant p 2 (0, 1) and k 2 N, almost every
+graph in G(n, p) is k-connected.
+Proof. By Lemma 11.3.2, it is enough to show that every graph in P2,k−1
+is k-connected. But this is easy: any graph in P2,k−1 has order at least
+k + 2, and if W is a set of fewer than k vertices, then by deﬁnition of
+P2,k−1 any other two vertices x, y have a common neighbour v /2 W; in
+particular, W does not separate x from y.
+⇤
+In the proof of Corollary 11.3.3, we showed substantially more than
+was asked for: rather than ﬁnding, for any two vertices x, y /2 W, some
+x–y path avoiding W, we showed that x and y have a common neighbour
+outside W; thus, all the paths needed to establish the desired connec-
+tivity could in fact be chosen of length 2. What seemed like a clever
+trick in this particular proof is in fact indicative of a more fundamental
+phenomenon for constant edge probabilities: by an easy result in logic,
+any statement about graphs expressed by quantifying over vertices only
+(rather than over sets or sequences of vertices)5 is either almost surely
+true or almost surely false.
+All such statements, or their negations,
+are in fact immediate consequences of an assertion that the graph has
+property Pi,j, for some suitable i, j.
+As a last example of an ‘almost all’ result we now show that almost
+every graph has a surprisingly high chromatic number:
+5 In the terminology of logic: any ﬁrst order sentence in the language of graph
+theory
+
+350
+11. Random Graphs
+Proposition 11.3.4. For every constant p 2 (0, 1) and every ✏> 0,
+almost every graph G 2 G(n, p) has chromatic number
+χ(G) > c · n/ log n
+with c = log(1/q)
+8
+(2 + ✏).
+Proof. For any ﬁxed n > k > 2, Lemma 11.1.2 implies
+(11.1.2)
+P [ ↵> k ] 6
+✓n
+k
+◆
+q(
+k
+2)
+6 nkq(
+k
+2)
+= qk log n
+log q + 1
+2 k(k−1)
+= q
+k
+2
+$
+−
+2 log n
+log(1/q) +k−1%
+.
+For
+k :=
+2 + ✏
+log(1/q) log n
+the exponent of this expression tends to inﬁnity with n, so the expression
+itself tends to zero. Hence, almost every G 2 G(n, p) is such that in any
+vertex colouring of G no k vertices can have the same colour, so every
+colouring uses more than
+n
+k = log(1/q)
+2 + ✏
+·
+n
+log n
+colours.
+⇤
+By a result of Bollob´as (1988), Proposition 11.3.4 is sharp in the
+following sense: if we replace ✏by −✏, then the lower bound given for χ
+turns into an upper bound.
+We ﬁnish this section with a little gem, the one and only theorem
+about inﬁnite random graphs. Let G(@0, p) be deﬁned exactly like G(n, p)
+for n = @0, as the (product) space of random graphs on N whose edges
+are chosen independently with probability p.
+As we saw in Lemma 11.3.2, the properties Pi,j hold almost surely
+for ﬁnite random graphs with constant edge probability. It will therefore
+hardly come as a surprise that an inﬁnite random graph almost surely
+(which now has the usual meaning of ‘with probability 1’) has all these
+properties at once. However, in Chapter 8.3 we saw that, up to isomor-
+phism, there is exactly one countable graph, the Rado graph R, that
+has property Pi,j for all i, j 2 N simultaneously; this joint property was
+denoted as (⇤) there. Combining these facts, we get the following rather
+bizarre result:
+
+351
+Theorem 11.3.5. (Erd˝os & R´enyi 1963)
+With probability 1, a random graph G 2 G(@0, p) with 0 < p < 1 is
+isomorphic to the Rado graph R.
+Proof. Given ﬁxed disjoint ﬁnite sets U, W ✓N, the probability that a
+(8.3.1)
+vertex v /2 U [ W is not joined to U [ W as expressed in property (⇤) of
+Chapter 8.3 (i.e., is not joined to all of U or is joined to some vertex in W)
+is some number r < 1 depending only on U and W. The probability
+that none of k given vertices v is joined to U [ W as in (⇤) is rk, which
+tends to 0 as k !1. Hence the probability that all the (inﬁnitely many)
+vertices outside U [ W fail to witness (⇤) for these sets U and W is 0.
+Now there are only countably many choices for U and W as above.
+Since the union of countably many sets of measure 0 again has measure 0,
+the probability that (⇤) fails for any sets U and W is still 0. Therefore
+G satisﬁes (⇤) with probability 1. By Theorem 8.3.1 this means that,
+almost surely, G ⇠= R.
+⇤
+How can we make sense of the paradox that the result of inﬁnitely
+many independent choices can be so predictable? The answer, of course,
+lies in the fact that the uniqueness of R holds only up to isomorphism.
+Now, constructing an automorphism for an inﬁnite graph with prop-
+erty (⇤) is a much easier task than ﬁnding one for a ﬁnite random graph,
+so in this sense the uniqueness is no longer that surprising. Viewed in
+this way, Theorem 11.3.5 expresses not a lack of variety in inﬁnite ran-
+dom graphs but rather the abundance of symmetry that glosses over this
+variety when the graphs G 2 G(@0, p) are viewed only up to isomorphism.
+11.4 Threshold functions and second moments
+The results we saw in Section 11.3 have an interesting common feature:
+the values of p played no role as long as they were constant, that is, inde-
+pendent of n. For example, if almost every graph in G(n, p) with p = 0.99
+had the property considered, then the same was true for p = 0.01. How
+could this happen?
+Such insensitivity of our random model to changes of p was cer-
+tainly not intended. For most properties, however, the critical order of
+magnitude of p around which the property will ‘just’ occur or not occur
+simply lies below any constant value of p: it is a function of n tending
+to zero as n ! 1. In the proof of Erd˝os’s theorem, for example, this
+critical probability for the two properties we were trying to relate was
+p(n) = 1/n.
+11.4 Threshold functions and second moments

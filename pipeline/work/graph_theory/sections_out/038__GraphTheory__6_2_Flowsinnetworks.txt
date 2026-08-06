@@ -1,0 +1,279 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 6. Flows
+현재 소단원: 6.2 Flows in networks
+직전 소단원: 「6.1 Circulations」
+[본문]
+158
+6. Flows
+6.2 Flows in networks
+In this section we give a brief introduction to the kind of network ﬂow
+theory that is now a standard proof technique in areas such as matching
+and connectivity. By way of example, we shall prove a classic result of
+this theory, the so-called max-ﬂow min-cut theorem of Ford and Fulk-
+erson. This theorem alone implies Menger’s theorem without much dif-
+ﬁculty (Exercise 3), which indicates some of the natural power lying in
+this approach.
+Consider the task of modelling a network with one source s and
+one sink t, in which the amount of ﬂow through a given link between
+two nodes is subject to a certain capacity of that link. Our aim is to
+determine the maximum net amount of ﬂow through the network from
+s to t. Somehow, this will depend both on the structure of the network
+and on the various capacities of its connections – how exactly, is what
+we wish to ﬁnd out.
+Let G = (V, E) be a multigraph, s, t 2 V two ﬁxed vertices, and
+G = (V, E)
+c:
+!
+E ! N a map; we call c a capacity function on G, and the quadruple
+s, t, c, N
+N := (G, s, t, c) a network. Note that c is deﬁned independently for the
+network
+two orientations of an edge. A function f:
+!
+E ! R is a ﬂow in N if it
+ﬂow
+satisﬁes the following three conditions (Fig. 6.2.1):
+0
+1
+1
+2
+2
+1
+1
+3
+s
+t
+3
+Fig. 6.2.1. A network ﬂow in short notation: all values refer to
+the direction indicated (capacities are not shown)
+(F1) f(e, x, y) = −f(e, y, x) for all (e, x, y) 2
+!
+E with x 6= y;
+(F20) f(v, V ) = 0 for all v 2 V r {s, t};
+(F3) f(
+!e) 6 c(
+!e) for all
+!e 2
+!
+E.
+We call f integral if all its values are integers.
+integral
+Let f be a ﬂow in N. If S ✓V is such that s 2 S and t 2 S, we call
+f
+the pair (S, S) a cut in N, and c(S, S) the capacity of this cut.3
+cut in N
+Since f now has to satisfy only (F20) rather than (F2), we no longer
+capacity
+have f(X, X) = 0 for all X ✓V (as in Proposition 6.1.1). However, the
+value is the same for all cuts:
+3 The number c(S, S) is deﬁned in (1) of Section 6.1.
+
+6.2 Flows in networks
+159
+Proposition 6.2.1. Every cut (S, S) in N satisﬁes f(S, S) = f(s, V ).
+Proof. As in the proof of Proposition 6.1.1, we have
+f(S, S) = f(S, V ) −f(S, S)
+=
+(F1) f(s, V ) +
+X
+v 2Sr{s}
+f(v, V ) −0
+=
+(F20) f(s, V ) .
+⇤
+The common value of f(S, S) in Proposition 6.2.1 will be called the total
+value of f and denoted by |f|;4 the ﬂow shown in Figure 6.2.1 has total
+total
+value |f|
+value 3.
+By (F3), we have
+|f| = f(S, S) 6 c(S, S)
+for every cut (S, S) in N. Hence the total value of a ﬂow in N is never
+larger than the smallest capacity of a cut. The following max-ﬂow min-
+cut theorem states that this upper bound is always attained by some
+ﬂow:
+Theorem 6.2.2. (Ford & Fulkerson 1956)
+In every network, the maximum total value of a ﬂow equals the minimum
+max-ﬂow
+min-cut
+theorem
+capacity of a cut.
+Proof. Let N = (G, s, t, c) be a network, and G =: (V, E). We shall deﬁne
+a sequence f0, f1, f2, . . . of integral ﬂows in N of strictly increasing total
+value, i.e. with
+|f0| < |f1| < |f2| < . . .
+Clearly, the total value of an integral ﬂow is again an integer, so in fact
+|fn+1| > |fn| + 1 for all n. Since all these numbers are bounded above
+by the capacity of any cut in N, our sequence will terminate with some
+ﬂow fn.
+Corresponding to this ﬂow, we shall ﬁnd a cut of capacity
+cn = |fn|. Since no ﬂow can have a total value greater than cn, and no
+cut can have a capacity less than |fn|, this number is simultaneously the
+maximum and the minimum referred to in the theorem.
+For f0, we set f0(
+!e) := 0 for all
+!e 2
+!
+E. Having deﬁned an integral
+ﬂow fn in N for some n 2 N, we denote by Sn the set of all vertices v
+Sn
+such that G contains an s–v walk x0e0 . . . e`−1x` with
+fn(
+!ei) < c(
+!ei)
+4 Thus, formally, |f| may be negative. In practice, however, we can change the
+sign of |f| simply by swapping the roles of s and t.
+
+160
+6. Flows
+for all i < `; here,
+!ei := (ei, xi, xi+1) (and, of course, x0 = s and x` = v).
+If t 2 Sn, let W = x0e0 . . . e`−1x` be the corresponding s–t walk;
+W
+without loss of generality we may assume that W does not repeat any
+vertices. Let
+✏:= min { c(
+!ei) −fn(
+!ei) | i < ` } .
+✏
+Then ✏> 0, and since fn (like c) is integral by assumption, ✏is an integer.
+Let
+fn+1:
+!e 7!
+8
+>
+<
+>
+:
+fn(
+!e) + ✏
+for
+!e =
+!ei, i = 0, . . . , ` −1;
+fn(
+!e) −✏
+for
+!e =
+ ei, i = 0, . . . , ` −1;
+fn(
+!e)
+for e /2 W.
+Intuitively, fn+1 is obtained from fn by sending additional ﬂow of value ✏
+along W from s to t (Fig. 6.2.2).
+0
+1
+1
+2
+2
+1
+1
+3
+s
+t
+3
+W
+Fig. 6.2.2. An ‘augmenting path’ W with increment ✏= 2, for
+constant ﬂow fn = 0 and capacities c = 3
+Clearly, fn+1 is again an integral ﬂow in N. Let us compute its total
+value |fn+1| = fn+1(s, V ). Since W contains the vertex s only once,
+!e0
+is the only triple (e, x, y) with x = s and y 2 V whose f-value was
+changed. This value, and hence that of fn+1(s, V ) was raised. Therefore
+|fn+1| > |fn| as desired.
+If t /2 Sn, then (Sn, Sn) is a cut in N. By (F3) for fn, and the
+deﬁnition of Sn, we have
+fn(
+!e) = c(
+!e)
+for all
+!e 2
+!
+E(Sn, Sn), so
+|fn| = fn(Sn, Sn) = c(Sn, Sn)
+as desired.
+⇤
+Since the ﬂow constructed in the proof of Theorem 6.2.2 is integral,
+we have also proved the following:
+Corollary 6.2.3. In every network (with integral capacity function)
+there exists an integral ﬂow of maximum total value.
+⇤
+
+161
+6.3 Group-valued ﬂows
+Let G = (V, E) be a multigraph. If f and g are two circulations on G
+with values in the same abelian group H, then (f + g):
+!e 7! f(
+!e) + g(
+!e)
+f + g
+and −f:
+!e 7! −f(
+!e) are again circulations. The circulations on G with
+−f
+values in H thus form a group in a natural way.
+An H-ﬂow in our terminology5 is a circulation f:
+!
+E ! H that is
+H-ﬂow
+nowhere zero, one that satisﬁes f(
+!e) 6= 0 for all
+!e 2
+!
+E. Note that the
+set of H-ﬂows on G is not closed under addition: if two H-ﬂows add up
+to zero on some oriented edge
+!e, then their sum is no longer an H-ﬂow.
+By Corollary 6.1.2, a graph with an H-ﬂow cannot have a bridge.
+For ﬁnite groups H, the number of H-ﬂows on G – and, in particular,
+their existence – surprisingly depends only on the order of H, not on H
+itself:
+Theorem 6.3.1. (Tutte 1954)
+For every multigraph G there exists a polynomial P such that, for any
+ﬁnite abelian group H, the number of H-ﬂows on G is P
+$
+|H| −1
+%
+.
+Proof. Let G =: (V, E); we use induction on m := |E|. Let us assume
+(6.1.1)
+(6.1.3)
+ﬁrst that all the edges of G are loops. Then, given any ﬁnite abelian
+group H, every map
+!
+E ! H r {0} is an H-ﬂow on G. Since |
+!
+E| = |E|
+when all edges are loops, there are
+$
+|H| −1
+%m such maps, and P := xm
+is the polynomial sought.
+Now assume there is an edge e0 = xy 2 E that is not a loop; let
+e0 = xy
+!e0 := (e0, x, y) and E0 := E r {e0}. We consider the multigraphs
+E0
+G1 := G −e0
+and
+G2 := G/e0 .
+By the induction hypothesis, there are polynomials Pi for i = 1, 2 such
+P1, P2
+that, for any ﬁnite abelian group H and k := |H| −1, the number of
+k
+H-ﬂows on Gi is Pi(k). We shall prove that the number of H-ﬂows on G
+equals P2(k) −P1(k); then P := P2 −P1 is the desired polynomial.
+Let H be given, and let F denote the set of all H-ﬂows on G. Our
+H, F
+aim is to show that
+|F| = P2(k) −P1(k) .
+(1)
+The H-ﬂows on G1 are precisely the restrictions to
+−!
+E0 of those H-
+circulations on G that are zero on e0 but nowhere else. Let us denote
+the set of these circulations on G by F1; then
+F1
+|F1| = P1(k).
+5 To avoid cumbersome repetitions of the phrase ‘nowhere zero’ before ‘H-ﬂow’,
+we deviate slightly here from standard terminology. See the footnote in the notes.
+6.3 Group-valued ﬂows

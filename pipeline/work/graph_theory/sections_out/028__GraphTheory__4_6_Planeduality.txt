@@ -1,0 +1,210 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.6 Plane duality
+직전 소단원: 「4.5 Algebraic planarity criteria」
+[본문]
+114
+4. Planar Graphs
+4.6 Plane duality
+In this section we shall use MacLane’s theorem to uncover another con-
+nection between planarity and algebraic structure: a connection between
+the duality of plane graphs, deﬁned below, and the duality of the cycle
+and cut space hinted at in Chapters 1.9 and 2.4.
+A plane multigraph is a pair G = (V, E) of ﬁnite sets (of vertices
+plane
+multigraph
+and edges, respectively) satisfying the following conditions:
+(i) V ✓R2;
+(ii) every edge is either an arc between two vertices or a polygon
+containing exactly one vertex (its endpoint);
+(iii) apart from its own endpoint(s), an edge contains no vertex and
+no point of any other edge.
+We shall use terms deﬁned for plane graphs freely for plane multigraphs.
+Note that, as in abstract multigraphs, both loops and double edges count
+as cycles.
+Let us consider the plane multigraph G shown in Figure 4.6.1. Let
+us place a new vertex inside each face of G and link these new vertices
+up to form another plane multigraph G⇤, as follows: for every edge e of
+G we link the two new vertices in the faces incident with e by an edge e⇤
+crossing e; if e is incident with only one face, we attach a loop e⇤to the
+new vertex in that face, again crossing the edge e. The plane multigraph
+G⇤formed in this way is then dual to G in the following sense: if we
+apply the same procedure as above to G⇤, we obtain a plane multigraph
+very similar to G; in fact, G itself may be reobtained from G⇤in this way.
+G⇤
+e⇤
+e
+G
+Fig. 4.6.1. A plane graph and its dual
+To make this idea more precise, let G = (V, E) and (V ⇤, E⇤) be any
+two plane multigraphs, and put F(G) =: F and F((V ⇤, E⇤)) =: F ⇤. We
+call (V ⇤, E⇤) a plane dual of G, and write (V ⇤, E⇤) =: G⇤, if there are
+plane dual
+G⇤
+bijections
+F ! V ⇤
+f 7! v⇤(f)
+E ! E⇤
+e 7! e⇤
+V ! F ⇤
+v 7! f ⇤(v)
+satisfying the following conditions:
+
+4.6 Plane duality
+115
+(i) v⇤(f) 2 f for all f 2 F;
+(ii) |e⇤\ G| = |˚e⇤\˚e| = |e \ G⇤| = 1 for all e 2 E, and in each of e
+and e⇤this point is an inner point of a straight line segment;
+(iii) v 2 f ⇤(v) for all v 2 V .
+Every connected plane multigraph has a plane dual. Indeed, to sat-
+isfy condition (i) we start by picking from each face f of G a point v⇤(f)
+as a vertex for G⇤. We can then link these vertices up by independent
+arcs as required by (ii), and using the connectedness of G show that
+there is indeed a bijection V ! F ⇤satisfying (iii) (Exercise 37).
+If G⇤
+1 and G⇤
+2 are two plane duals of G, then clearly G⇤
+1 ⇠= G⇤
+2; in fact,
+one can show that the natural bijection v⇤
+1(f) 7! v⇤
+2(f) is a topological
+isomorphism between G⇤
+1 and G⇤
+2. In this sense, we may speak of the
+plane dual G⇤of G.
+Finally, G is in turn a plane dual of G⇤. Indeed, this is witnessed
+by the inverse maps of the bijections from the deﬁnition of G⇤: setting
+v⇤(f ⇤(v)) := v and f ⇤(v⇤(f)) := f for f ⇤(v) 2 F ⇤and v⇤(f) 2 V ⇤, we
+see that conditions (i) and (iii) for G⇤transform into (iii) and (i) for G,
+while condition (ii) is symmetrical in G and G⇤. As duals are easily seen
+to be connected (Exercise 36), this symmetry implies that connectedness
+is also a necessary condition for G to have a dual.
+Perhaps the most interesting aspect of plane duality is that it relates
+geometrically two types of edge sets – cycles and bonds – that we have
+previously seen to be algebraically related (Theorem 1.9.4):
+Proposition 4.6.1. For any connected plane multigraph G, an edge set
+[6.5.2]
+E ✓E(G) is the edge set of a cycle in G if and only if E⇤:= { e⇤| e 2 E }
+is a bond in G⇤.
+Proof. By conditions (i) and (ii) in the deﬁnition of G⇤, two vertices
+(4.1.1)
+(4.2.4)
+v⇤(f1) and v⇤(f2) of G⇤lie in the same component of G⇤−E⇤if and
+only if f1 and f2 lie in the same region of R2 rS E: every v⇤(f1)–v⇤(f2)
+path in G⇤−E⇤is an arc between f1 and f2 in R2 rS E, and conversely
+every such arc P (with P \V (G) = ;) deﬁnes a walk in G⇤−E⇤between
+v⇤(f1) and v⇤(f2).
+Now if C ✓G is a cycle and E = E(C) then, by the Jordan curve
+theorem and the above correspondence, G⇤−E⇤has exactly two com-
+ponents. So E⇤is a bond of G⇤, a minimal non-empty cut.
+Conversely, if E ✓E(G) is such that E⇤is a cut in G⇤then, by
+Proposition 4.2.4 and the above correspondence, E contains the edges
+of a cycle C ✓G. If E⇤is a bond, E cannot contain any further edges
+(by the implication shown before). Hence E = E(C).
+⇤
+
+116
+4. Planar Graphs
+Proposition 4.6.1 suggests the following generalization of plane du-
+ality to abstract multigraphs.5 Call a multigraph G⇤an abstract dual of
+abstract
+dual
+a multigraph G if E(G⇤) = E(G) and the bonds in G⇤are precisely the
+edge sets of cycles in G. (Neither G nor G⇤need be connected now.)
+This correspondence between cycles and bonds extends to the spaces
+they generate:
+Proposition 4.6.2. If G⇤is an abstract dual of G, then the cut space
+of G⇤is the cycle space of G, i.e.,
+B(G⇤) = C(G) .
+Proof. Since the cycles of G are precisely the bonds of G⇤, the subspace
+(1.9.3)
+C(G) they generate in E(G) = E(G⇤) is the same as the subspace gener-
+ated by the bonds in G⇤. By Lemma 1.9.3, this is the space B(G⇤).
+⇤
+By Theorem 1.9.4, Proposition 4.6.2 implies at once that if G⇤is
+(1.9.4)
+an abstract dual of G then G is an abstract dual of G⇤. One can show
+that if G is 3-connected, then G⇤is unique (up to isomorphism and the
+addition of isolated vertices). By Lemma 3.1.3, a non-empty subset of
+(3.1.3)
+(3.1.2)
+E(G) = E(G⇤) is the edge set of a block of G if and only if it is the edge
+set of a block of G⇤. By Lemma 3.1.2, this implies that the blocks of G⇤
+are duals of the blocks of G.
+Although the notion of abstract duality arose as a generalization
+of plane duality, it could have been otherwise. We knew already from
+Theorem 1.9.4 that the cycles and the bonds of a graph form natural
+and related sets of edges. It would not have been unthinkable to ask
+whether, for some graphs, the orthogonality between these collections of
+edge sets might give them suﬃciently similar intersection patterns that
+a collection forming the cycles in one graph could form the bonds in
+another, and vice versa. In other words, for which graphs can we move
+their entire edge set to a new set of vertices, redeﬁning incidences, so
+that precisely those sets of edges that used to form cycles now become
+bonds (and vice versa)? Put in this way, it seems surprising that this
+could ever be achieved, let alone for such a large and natural class of
+graphs as all planar graphs.
+As one of the highlights of classical planarity theory we now show
+that the planar graphs are precisely those for which this can be done.
+Admitting an abstract dual thus appears as a new planarity criterion.
+Conversely, the theorem can be read as a surprising topological charac-
+terization of the equally fundamental property of admitting an abstract
+dual:
+5 In what follows we shall use some lemmas from earlier chapters that were stated
+for graphs only. These lemmas extend to multigraphs with proofs unchanged.
+
+117
+Theorem 4.6.3. (Whitney 1932)
+A graph is planar if and only if it has an abstract dual.
+Proof.
+Let G be a planar graph, and consider any drawing.
+Every
+(1.9.2)
+(4.5.1)
+component C of this drawing has a plane dual C⇤. Consider these C⇤
+as abstract multigraphs, and let G⇤be their disjoint union. Then the
+bonds of G⇤are precisely those of the C⇤, which by Proposition 4.6.1
+correspond to the cycles in G.
+Conversely, suppose that G has an abstract dual G⇤. For a proof
+that G is planar, it suﬃces by Theorem 4.5.1 and Proposition 4.6.2 to
+show that B(G⇤) has a sparse basis. By Proposition 1.9.2, it does.
+⇤
+The duality theory for both abstract and plane graphs can be ex-
+tended to inﬁnite graphs. As these can have inﬁnite bonds, their duals
+must then have ‘inﬁnite cycles’. Such things do indeed exist, and are
+fascinating: they arise as topological circles in a space formed by the
+graph and its ends; see Chapter 8.6.
+Exercises
+1.
+Show that every graph can be embedded in R3 with all edges straight.
+2.−Show directly by Lemma 4.1.2 that K3,3 is not planar.
+3.
+Here is an inductive ‘proof’ that every maximal plane graph of order > 4
+is a plane triangulation of minimum degree 3.
+The induction starts
+with K4. For the induction step, consider an arbitrary maximal plane
+graph G of order n > 4, and consider all possible ways of extending it to
+a maximal plane graph G0 of order n + 1 by adding a new vertex v. No
+matter how this is done, v will come to sit in a face of G, which by the
+inductive assumption is bounded by a triangle. Since G0 is maximally
+planar, v must be joined to all three vertices of that triangle. Clearly,
+G0 is another plane triangulation, and δ(G0) = d(v) = 3.
+(i)−Find the ﬂaw in this ‘proof’.
+(ii) Find a counterexample, and explain why the ‘proof’ overlooks it.
+4.
+Show that every planar graph is a union of three forests.
+5.
+The ancient Greeks loved regular plane graphs whose faces were bounded
+by cycles of the same length.
+(i) Show that such graphs exist for only ﬁnitely many pairs (d, `) of
+degree d > 3 and cycle length `. Can you give an upper bound?
+(ii)+Show that there are only ﬁnitely many such plane graphs, up
+to topological isomorphism.
+6.
+A fullerene is a molecule that is made up entirely of carbon atoms
+forming a cubic plane graph all whose faces are pentagons or hexagons.
+Show that, since carbon atoms can form double bonds, every such graph
+can be realized in principle by (4-valent) carbon atoms.
+Exercises

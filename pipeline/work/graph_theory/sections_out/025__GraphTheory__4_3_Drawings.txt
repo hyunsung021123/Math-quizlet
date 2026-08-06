@@ -1,0 +1,276 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 4. Planar Graphs
+현재 소단원: 4.3 Drawings
+직전 소단원: 「4.2 Plane graphs」
+[본문]
+102
+4. Planar Graphs
+equivalent there, so G has a face f containing f 0. By Lemma 4.2.1 (i),
+however, f lies inside a face f 00 of G0. Thus f 0 ✓f ✓f 00 and hence
+f 0 = f = f 00, since both f 0 and f 00 are faces of G0.
+⇤
+Corollary 4.2.10. A plane graph with n > 3 vertices has at most 3n−6
+[4.4.1]
+[5.1.2]
+[7.3.5]
+edges. Every plane triangulation with n vertices has 3n −6 edges.
+Proof. By Proposition 4.2.8 it suﬃces to prove the second assertion. In a
+plane triangulation G, every face boundary contains exactly three edges,
+and every edge lies on the boundary of exactly two faces (Lemma 4.2.2).
+The bipartite graph on E(G)[F(G) with edge set { ef | e ✓G[f] } thus
+has exactly 2 |E(G)| = 3 |F(G)| edges. According to this identity we may
+replace ` with 2m/3 in Euler’s formula, and obtain m = 3n −6.
+⇤
+Euler’s formula can be useful for showing that certain graphs cannot
+occur as plane graphs. The graph K5, for example, has 10 > 3 · 5 −6
+edges, more than allowed by Corollary 4.2.10. Similarly, K3,3 cannot be
+a plane graph. For since K3,3 is 2-connected but contains no triangle,
+every face of a plane K3,3 would be bounded by a cycle of length > 4
+(Proposition 4.2.6).
+As in the proof of Corollary 4.2.10 this implies
+2m > 4`, which yields m 6 2n −4 when substituted in Euler’s formula.
+But K3,3 has 9 > 2 · 6 −4 edges.
+Clearly, along with K5 and K3,3 themselves, their subdivisions can-
+not occur as plane graphs either:
+Corollary 4.2.11. A plane graph contains neither K5 nor K3,3 as a
+[4.4.5]
+[4.4.6]
+[5.1.2]
+topological minor.
+⇤
+Surprisingly, it turns out that this simple property of plane graphs iden-
+tiﬁes them among all other graphs: as Section 4.4 will show, an arbitrary
+graph can be drawn in the plane if and only if it has no (topological) K5
+or K3,3 minor.
+4.3 Drawings
+An embedding in the plane, or planar embedding, of an (abstract) graph
+planar
+embedding
+G is an isomorphism between G and a plane graph H. The latter will be
+called a drawing of G. We shall not always distinguish notationally be-
+drawing
+tween the vertices and edges of G and of H. In this section we investigate
+how two planar embeddings of a graph can di↵er.
+How should we measure the likeness of two embeddings %: G ! H
+and %0: G ! H0 of a planar graph G? An obvious way to do this is to
+consider the canonical isomorphism σ := %0 ◦%−1 between H and H0
+as abstract graphs, and ask how much of their position in the plane
+
+4.3 Drawings
+103
+this isomorphism respects or preserves. For example, if σ is induced by
+a simple rotation of the plane, we would hardly consider % and %0 as
+genuinely di↵erent ways of drawing G.
+So let us begin by considering any abstract isomorphism σ: V ! V 0
+σ
+between two plane graphs H = (V, E) and H0 = (V 0, E0), with face sets
+H; V, E, F
+F(H) =: F and F(H0) =: F 0 say, and try to measure to what degree
+H0; V 0, E0, F 0
+σ respects or preserves the features of H and H0 as plane graphs. In
+what follows we shall propose three criteria for this in decreasing order
+of strictness (and increasing order of ease of handling), and then prove
+that for most graphs these three criteria turn out to agree. In particular,
+applied to the isomorphism σ = %0 ◦%−1 considered earlier, all three cri-
+teria will say that there is essentially only one way to draw a 3-connected
+graph.
+Our ﬁrst criterion for measuring how well our abstract isomorphism
+σ preserves the plane features of H and H0 is perhaps the most natural
+one. Intuitively, we would like to call σ ‘topological’ if it is induced by a
+homeomorphism from the plane R2 to itself. To avoid having to grant the
+outer faces of H and H0 a special status, however, we take a detour via
+the homeomorphism ⇡: S2 r {(0, 0, 1)} ! R2 chosen in Section 4.1: we
+⇡
+call σ a topological isomorphism between the plane graphs H and H0 if
+there exists a homeomorphism ': S2 ! S2 such that := ⇡◦' ◦⇡−1
+topological
+isomorphism
+induces σ on V [ E.
+(More formally: we ask that agree with σ
+on V , and that it map every plane edge xy 2 H onto the plane edge
+σ(x)σ(y) 2 H0.
+Unless ' ﬁxes the point (0, 0, 1), the map will be
+undeﬁned at ⇡('−1(0, 0, 1)).)
+Fig. 4.3.1. Two drawings of a graph that are not topologically
+isomorphic – why not?
+It can be shown that, up to topological isomorphism, inner and
+outer faces are indeed no longer di↵erent: if we choose as ' a rotation
+of S2 mapping the ⇡−1-image of a point of some inner face of H to the
+north pole (0, 0, 1) of S2, then maps the rest of this face to the outer
+face of (H). (To ensure that the edges of (H) are again piecewise
+linear, however, one may have to adjust ' a little.)
+If σ is a topological isomorphism as above, then – except possibly
+for a pair of missing points where or −1 is undeﬁned – maps the
+faces of H onto those of H0 (proof?). In this way, σ extends naturally
+
+104
+4. Planar Graphs
+to a bijection σ: V [ E [ F ! V 0 [ E0 [ F 0 which preserves incidence of
+vertices, edges and faces.
+Let us single out this last property of a topological isomorphism as
+the second criterion for how well an abstract isomorphism between plane
+graphs respects their position in the plane: let us call σ a combinatorial
+isomorphism of the plane graphs H and H0 if it can be extended to a
+combinatorial
+isomorphism
+bijection σ: V [E [F !V 0 [E0 [F 0 that preserves incidence not only of
+vertices with edges but also of vertices and edges with faces. (Formally:
+we require that a vertex or edge x 2 H shall lie on the boundary of a
+face f 2 F if and only if σ(x) lies on the boundary of the face σ(f).)
+H0
+H
+Fig. 4.3.2. Two drawings of a graph that are combinatorially
+isomorphic but not topologically – why not?
+If σ is a combinatorial isomorphism of the plane graphs H and H0, it
+maps the face boundaries of H to those of H0. Let us pick out this prop-
+erty as our third criterion, and call σ a graph-theoretical isomorphism of
+graph-
+theoretical
+isomorphism the plane graphs H and H0 if
+*
+σ(H[f]) : f 2 F
+ 
+=
+*
+H0[f 0] : f 0 2 F 0 
+.
+Thus, we no longer keep track of which face is bounded by a given
+subgraph: the only information we keep is whether a subgraph bounds
+some face or not, and we require that σ map the subgraphs that do onto
+each other. At ﬁrst glance, this third criterion may appear a little less
+natural than the previous two. However, it has the practical advantage
+of being formally weaker and hence easier to verify, and moreover, it will
+turn out to be equivalent to the other two in most cases.
+As we have seen, every topological isomorphism between two plane
+graphs is also combinatorial, and every combinatorial isomorphism is also
+graph-theoretical. The following theorem shows that, for most graphs,
+the converse is true as well:
+Theorem 4.3.1.
+(i) Every graph-theoretical isomorphism between two plane graphs is
+combinatorial. Its extension to a face bijection is unique if and
+only if the graph is not a cycle.
+(ii) Every combinatorial isomorphism between two 2-connected plane
+graphs is topological.
+
+4.3 Drawings
+105
+Proof.
+Let H = (V, E) and H0 = (V 0, E0) be two plane graphs,
+(4.1.1)
+(4.1.4)
+(4.2.5)
+(4.2.6)
+put F(H) =: F and F(H0) =: F 0, and let σ: V ! V 0 be an isomor-
+phism between the underlying abstract graphs.
+Extend σ to a map
+V [ E ! V 0 [ E0 by letting σ(xy) := σ(x)σ(y).
+(i) If H is a cycle, the assertion follows from the Jordan curve theo-
+rem. We now assume that H is not a cycle. Let B and B0 be the sets of
+all face boundaries in H and H0, respectively. If σ is a graph-theoretical
+isomorphism, then the map B 7! σ(B) is a bijection between B and B0.
+By Lemma 4.2.5, the map f 7! H[f] is a bijection between F and B,
+and likewise for F 0 and B0. The composition of these three bijections is
+a bijection between F and F 0, which we choose as σ: F ! F 0. By con-
+struction, this extension of σ to V [ E [ F preserves incidences (and is
+unique with this property), so σ is indeed a combinatorial isomorphism.
+(ii) Let us assume that H is 2-connected, and that σ is a combina-
+σ
+torial isomorphism. We have to construct a homeomorphism ': S2 ! S2
+which, for every vertex or plane edge x 2 H, maps ⇡−1(x) to ⇡−1(σ(x)).
+Since σ is a combinatorial isomorphism, ˜σ : ⇡−1 ◦σ ◦⇡is an incidence
+˜σ
+preserving bijection from the vertices, edges and faces4 of ˜H := ⇡−1(H)
+to the vertices, edges and faces of ˜H0 := ⇡−1(H0).
+˜H, ˜H0
+S2 ◆
+◆
+˜
+H
+˜
+H
+H
+H
+0
+S2
+R2 ◆
+◆
+0
+R2
+??y
+??y
+??y
+??y
+˜σ
+σ
+⇡
+⇡
+Fig. 4.3.3. Deﬁning ˜σ via σ
+We construct ' in three steps. Let us ﬁrst deﬁne ' on the vertex
+set of ˜H, setting '(x) := ˜σ(x) for all x 2 V ( ˜H).
+This is trivially a
+homeomorphism between V ( ˜H) and V ( ˜H0).
+As the second step, we now extend ' to a homeomorphism between
+˜H and ˜H0 that induces ˜σ on V ( ˜H) [ E( ˜H). We may do this edge by
+edge, as follows.
+Every edge xy of ˜H is homeomorphic to the edge
+˜σ(xy) = '(x)'(y) of ˜H0, by a homeomorphism mapping x to '(x) and
+y to '(y). Then the union of all these homeomorphisms, one for every
+edge of ˜H, is indeed a homeomorphism between ˜H and ˜H0 – our desired
+extension of ' to ˜H: all we have to check is continuity at the vertices
+(where the edge homeomorphisms overlap), and this follows at once from
+our assumption that the two graphs and their individual edges all carry
+the subspace topology in R3.
+4 By the ‘vertices, edges and faces’ of ˜H and ˜H0 we mean the images under ⇡−1
+of the vertices, edges and faces of H and H0 (plus (0, 0, 1) in the case of the outer
+face). Their sets will be denoted by V ( ˜H), E( ˜H), F( ˜H) and V ( ˜H0), E( ˜H0), F( ˜H0),
+and incidence is deﬁned as inherited from H and H0.
+
+106
+4. Planar Graphs
+In the third step we now extend our homeomorphism ': ˜H ! ˜H0 to
+all of S2. This can be done analogously to the second step, face by face.
+By Proposition 4.2.6, all face boundaries in ˜H and ˜H0 are cycles. Now if
+f is a face of ˜H and C its boundary, then ˜σ(C) := S{ ˜σ(e) | e 2 E(C) }
+bounds the face ˜σ(f) of ˜H0. By Theorem 4.1.4, we may therefore extend
+the homeomorphism ': C ! ˜σ(C) deﬁned so far to a homeomorphism
+from C [f to ˜σ(C)[ ˜σ(f). We ﬁnally take the union of all these homeo-
+morphisms, one for every face f of ˜H, as our desired homeomorphism
+': S2 ! S2; as before, continuity is easily checked.
+⇤
+Let us return now to our original goal, the deﬁnition of equivalence
+for planar embeddings. Let us call two planar embeddings %, %0 of a graph
+G topologically (respectively, combinatorially) equivalent if %0 ◦%−1 is a
+equivalent
+embeddings
+topological (respectively, combinatorial) isomorphism between %(G) and
+%0(G). If G is 2-connected, the two deﬁnitions coincide by Theorem 4.3.1,
+and we simply speak of equivalent embeddings. Clearly, this is indeed an
+equivalence relation on the set of planar embeddings of any given graph.
+Note that two drawings of G resulting from inequivalent embeddings
+may well be topologically isomorphic (exercise): for the equivalence of
+two embeddings we ask not only that some (topological or combinato-
+rial) isomorphism exist between the their images, but that the canonical
+isomorphism %0 ◦%−1 be a topological or combinatorial one.
+Even in this strong sense, 3-connected graphs have only one embed-
+ding up to equivalence:
+Theorem 4.3.2. (Whitney 1933)
+[12.7.4]
+Any two planar embeddings of a 3-connected graph are equivalent.
+Proof. Let G be a 3-connected graph with planar embeddings %: G ! H
+(4.2.7)
+and %0: G ! H0. By Theorem 4.3.1 it suﬃces to show that %0 ◦%−1 is
+a graph-theoretical isomorphism, i.e. that %(C) bounds a face of H if
+and only if %0(C) bounds a face of H0, for every subgraph C ✓G. This
+follows at once from Proposition 4.2.7.
+⇤
+4.4 Planar graphs: Kuratowski’s theorem
+A graph is called planar if it can be embedded in the plane: if it is
+planar
+isomorphic to a plane graph. A planar graph is maximal, or maximally
+planar, if it is planar but cannot be extended to a larger planar graph
+by adding an edge (but no vertex).
+Drawings of maximal planar graphs are clearly maximally plane.
+The converse, however, is not obvious: when we start to draw a planar
+graph, could it happen that we get stuck half-way with a proper sub-
+graph that is already maximally plane? Our ﬁrst proposition says that

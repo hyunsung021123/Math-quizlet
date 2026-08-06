@@ -1,0 +1,466 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 3. Connectivity
+현재 소단원: 3.5 Linking pairs of vertices
+직전 소단원: 「3.4 A-paths and Mader's theorem」
+[본문]
+3.5 Linking pairs of vertices
+79
+3.5 Linking pairs of vertices
+Let G be a graph, and let X ✓V (G) be a set of vertices. We call X
+linked in G if whenever we pick distinct vertices s1, . . . , s`, t1, . . . , t` in
+linked
+X we can ﬁnd disjoint paths P1, . . . , P` in G such that each Pi links si to
+ti and has no inner vertex in X. Thus, unlike in Menger’s theorem, we
+are not merely asking for disjoint paths between two sets of vertices: we
+insist that each of these paths shall link a speciﬁed pair of endvertices.
+If |G| > 2k and every set X of at most 2k vertices is linked in G,
+then G is k-linked. Clearly, this is equivalent to requiring merely that
+k-linked
+|G| > 2k and disjoint paths Pi = si . . . ti exist for every choice of exactly
+2k distinct vertices s1, . . . , sk, t1, . . . , tk: just add dummy vertices to X
+to bring it up to size 2k. In practice, the latter is easier to prove, because
+we need not worry about inner vertices in X.
+Clearly, every k-linked graph is k-connected. The converse, however,
+seems far from true: being k-linked is clearly a much stronger property
+than k-connectedness. Still, we shall prove in this section that we can
+force a graph to be k-linked by assuming that it is f(k)-connected, for
+some function f: N ! N. We ﬁrst borrow a lemma from Chapter 7 to
+give a nice and simple proof that such a function f exists at all. In the
+remainder of the section we then prove that f can even be chosen linear.
+The basic idea in the simple proof is as follows. If we can prove
+that G contains a subdivision K of a large complete graph, we can use
+Menger’s theorem to link the vertices of X disjointly to branch vertices
+of K, and then hope to pair them up as desired through the subdivided
+edges of K. This requires, of course, that our paths do not hit too many
+of the subdivided edges before reaching the branch vertices of K.
+The lemma saying that large enough connectivity does indeed force
+the existence of such a complete topological minor K will be proved in
+Chapter 7.2, where we consider several results of this type. By Theo-
+rem 1.4.3 it suﬃces to assume that G has large average degree:
+Lemma 3.5.1. There is a function h: N ! N such that, for every r 2 N,
+every graph of average degree at least h(r) contains Kr as a topological
+minor.
+Theorem 3.5.2. (Jung 1970; Larman & Mani 1970)
+There is a function f: N ! N such that every f(k)-connected graph is k-
+linked, for all k 2 N.
+Proof.
+We prove the assertion for f(k) = h(3k) + 2k, where h is a
+(3.3.1)
+function as in Lemma 3.5.1. Let G be an f(k)-connected graph. Then
+G
+d(G) > δ(G) > (G) > h(3k); let K be a TK3k in G as provided by
+K
+Lemma 3.5.1, and let U denote its set of branch vertices.
+U
+For the proof that G is k-linked, let distinct vertices s1, . . . , sk
+si, ti
+and t1, . . . , tk be given.
+By deﬁnition of f(k), we have (G) > 2k.
+
+80
+3. Connectivity
+Hence by Menger’s theorem (3.3.1), G contains disjoint paths P1, . . . , Pk,
+Q1, . . . , Qk, such that each Pi starts in si, each Qi starts in ti, and all
+Pi, Qi
+these paths end in U but have no inner vertices in U. Let the set P of
+P
+these paths be chosen so that their total number of edges outside E(K)
+is as small as possible.
+si
+Pi
+P
+Li
+vi
+ui
+Mi
+Qi
+ti
+wi
+Fig. 3.5.1. Constructing an si–ti path via ui
+Let u1, . . . , uk be those k vertices in U that are not an end of a
+path in P. For each i = 1, . . . , k, let Li be the U-path in K (i.e., the
+subdivided edge of the K3k) from ui to the end of Pi in U, and let vi be
+the ﬁrst vertex of Li on any path P 2 P. By deﬁnition of P, P has no
+more edges outside E(K) than PviLiui does, so viP = viLi and hence
+P = Pi (Fig. 3.5.1). Similarly, if Mi denotes the U-path in K from ui
+to the end of Qi in U, and wi denotes the ﬁrst vertex of Mi on any
+path in P, then this path is Qi. Then the paths siPiviLiuiMiwiQiti are
+disjoint for di↵erent i and show that G is k-linked.
+⇤
+The function h of Lemma 3.5.1 which our proof in Chapter 7.2
+will yield will be exponential in r, and will therefore give only an ex-
+ponential upper bound for the function f(k) in Theorem 3.5.2.
+As
+2"(G) > δ(G) > (G), the following result implies the linear bound of
+f(k) = 16k:
+Theorem 3.5.3. (Thomas & Wollan 2005)
+[7.2.3]
+Let G be a graph and k 2 N. If G is 2k-connected and "(G) > 8k, then
+G is k-linked.
+We begin our proof of Theorem 3.5.3 with a lemma.
+Lemma 3.5.4. Any graph H with δ(H) > 8k > |H|/2 has a k-linked
+subgraph.
+Proof. If H itself is k-linked there is nothing to show, so suppose not.
+Then we can ﬁnd a set X of 2k vertices s1, . . . , sk, t1, . . . , tk that cannot
+X
+be linked in H by disjoint paths Pi = si . . . ti. Let P be a set of as many
+P
+such paths as possible, without inner vertices in X and all of length
+at most 7. If there are several such sets P, we choose one with | S P|
+minimum. We may assume that P contains no path from s1 to t1. Let
+s1, t1
+
+3.5 Linking pairs of vertices
+81
+J be the subgraph of H induced by X and all the vertices on the paths
+in P, and let K := H −J.
+J, K
+Note that each vertex v 2 K has at most three neighbours on any
+given Pi 2 P: if it had four, then replacing the segment uPiw between
+its ﬁrst and its last neighbour on Pi by the path uvw would reduce | S P|
+and thus contradict our choice of P. So v has at most 3 neighbours in J
+for every i = 1, . . . , k, at most 3k in total. As δ(H) > 8k by assumption,
+as well as |H| 6 16k and |X| = 2k, we deduce that
+δ(K) > 5k
+and
+|K| 6 14k .
+(1)
+Our next aim is to show that K is disconnected. Since each of the
+paths in P has at most eight vertices, we have |J −{s1, t1}| 6 8(k −1).
+Therefore s1 has a neighbour s in K, and t1 has a neighbour t in K. Put
+S := { s0 2 K | dK(s, s0) 6 2 } and T := { t0 2 K | dK(t, t0) 6 2 }. Since
+H −S P contains no s1–t1 path of length at most 7, we have S \ T = ;,
+and there is no S–T edge in K. To prove that K is disconnected, it thus
+suﬃces to show that V (K) = S [ T. But for any vertex v 2 K −(S [ T)
+the sets NK(s), NK(t) and NK(v) are disjoint and each have size at
+least 5k, contradicting (1).
+So K is disconnected; let C be its smaller component. By (1),
+2δ(C) > 2δ(K) > 7k + 3k > 1
+2 |K| + 3k > |C| + 3k .
+(2)
+We complete the proof by showing that C is k-linked. As δ(C) > 5k,
+we have |C| > 2k. Let Y be a set of at most 2k vertices in C. By (2),
+every two vertices in Y have at least 3k common neighbours, at least k
+of which lie outside Y . We can therefore link any desired ` 6 k pairs
+of vertices in Y inductively by paths of length 2 whose inner vertex lies
+outside Y .
+⇤
+Before we launch into the proof of Theorem 3.5.3, let us look at its
+main ideas. To prove that G is k-linked, we have to consider a given set
+X of up to 2k vertices and show that X is linked in G. Ideally, we would
+like to use Lemma 3.5.4 to ﬁnd a linked subgraph L somewhere in G,
+and then use our assumption of (G) > 2k to obtain a set of |X| disjoint
+X–L paths by Menger’s theorem (3.3.1). Then X could be linked via
+these paths and L, completing the proof.
+Unfortunately, we cannot expect to ﬁnd a subgraph H such that
+δ(H) > 8k and |H| 6 16k (in which L could be found by Lemma 3.5.4);
+cf. Corollary 11.2.3. However, it is not too diﬃcult to ﬁnd a minor H 4 G
+that has such a subgraph (Ex. 21, Ch. 7), even so that the vertices of X
+come to lie in distinct branch sets of H. We may then regard X as a
+subset of V (H), and Lemma 3.5.4 provides us with a linked subgraph L
+of H. The only problem now is that H need no longer be 2k-connected,
+
+82
+3. Connectivity
+that is, our assumption of (G) > 2k will not ensure that we can link X
+to L by |X| disjoint paths in H.
+And here comes the clever bit of the proof: it relaxes the assumption
+of > 2k to a weaker assumption that does get passed on to H. This
+weaker assumption is that if we can separate X from another part of G
+(or H) by fewer than |X| vertices, then this other part must be ‘light’:
+roughly, its own value of " must not exceed 8k. If X then fails to link
+to L by |X| disjoint paths, and hence H has a separation {A, B} with
+X ✓A and L ✓B and |A \ B| < |X|, we know that " is still at least 8k
+on H[A], because the B-part of H was light.
+The idea now is to continue the proof inside H0 := H[A] by induc-
+tion. This still needs some ingenuity, since it is not enough that " is
+large on H0: we also need that for every low-order separation (A0, B0) of
+H0 with X ✓A0 the B0-part is light. That need not be true. But when
+it fails, we shall be able to use induction on H0[B0] to show that A0 \ B0
+is linked in H0[B0], and use this for our proof that X is linked in H.
+Given k 2 N, a graph G, and A, B, X ✓V (G), call the ordered
+X-
+separation
+pair (A, B) an X- separation of G if {A, B} is a proper separation of G
+of order at most |X| and X ✓A. An X- separation (A, B) is small if
+small/linked
+|A \ B| < |X|, and linked if A \ B is linked in G[B].
+Call a set U ✓V (G) light in G if kUk+6 8k |U|, where kUk+denotes
+k k+
+the number of edges of G with at least one end in U. A set of vertices
+light
+is heavy if it is not light.
+heavy
+Proof of Theorem 3.5.3. We shall prove the following, for ﬁxed k 2 N:
+k
+G = (V, E)
+X
+Let G = (V, E) be a graph and X ✓V a set of at most 2k
+vertices. If V r X is heavy and for every small X- separ-
+ation (A, B) the set B r A is light, then X is linked in G.
+(⇤)
+To see that (⇤) implies the theorem, assume that (G) > 2k and
+"(G) > 8k, and let X be a set of exactly 2k vertices. Then G has no
+small X- separation. And V r X is heavy, since
+kV r Xk+ > kGk −
+✓2k
+2
+◆
+> 8k |V | −16k2 = 8k |V r X| .
+By (⇤), X is linked in G, completing the proof that G is k-linked.
+We prove (⇤) by induction on |G|, and for each value of |G| by induc-
+tion on kV r Xk+. If |G| = 1 then X is linked in G. For the induction
+step, let G and X be given as in (⇤). We ﬁrst prove the following:
+We may assume that G has no linked X- separation.
+(1)
+For our proof of (1), suppose that G has a linked X- separation
+(A, B)
+(A, B). Let us choose one with A minimal, and put S := A \ B.
+S
+
+3.5 Linking pairs of vertices
+83
+We ﬁrst consider the case that |S| = |X|.
+If G[A] contains |X|
+disjoint X–S paths, then X is linked in G because (A, B) is linked,
+completing the proof of (⇤). If not, then by Menger’s theorem (3.3.1)
+G[A] has a small X- separation (A0, B0) such that B0 ◆S. If we choose
+this of minimum order, i.e. with |A0 \ B0| minimum, we can link A0 \ B0
+to S in G[B0] by |A0 \ B0| disjoint paths, again by Menger’s theorem.
+But then (A0, B0 [B) is a linked X- separation of G that contradicts the
+choice of (A, B).
+So |S| < |X|. Let G0 be obtained from G[A] by adding any missing
+G0
+edges on S, so that G0[S] is a complete subgraph of G0. As (A, B) is now
+a small X- separation, our assumption in (⇤) says that B r A is light
+in G. Thus, G0 arises from G by deleting |B rA| vertices outside X and
+at most 8k |B r A| edges, and possibly adding some edges. As V r X is
+heavy in G, this implies that
+A r X is heavy in G0.
+In order to be able to apply the induction hypothesis to G0, let
+us show next that for every small X- separation (A0, B0) of G0 the set
+B0 rA0 is light in G0. Suppose not, and choose a counterexample (A0, B0)
+(A0, B0)
+with B0 minimal. As G0[S] is complete, we have S ✓A0 or S ✓B0.
+If S ✓A0 then B \ B0 ✓S ✓A0, so (A0 [ B, B0) is a small X- sep-
+aration of G. Moreover,
+B0 r (A0 [ B) = B0 r A0,
+and no edge of G0 −E on S is incident with this set (Fig 3.5.2). Our as-
+sumption that this set is heavy in G0, by the choice of (A0, B0), therefore
+implies that it is heavy also in G. As (A0 [B, B0) is a small X- separation
+of G, this contradicts our assumptions in (⇤).
+B
+A
+A0
+B0
+X
+G0
+S
+Fig. 3.5.2. If S ✓A0, then (A0 [ B, B0) is an X- separation of G
+Hence S ✓B0. By our choice of (A0, B0), the graph G00 := G0[B0]
+satisﬁes the premise of (⇤) for X00 := A0 \B0. Indeed, B0 rX00 = B0 rA0
+
+84
+3. Connectivity
+is heavy, and by the minimality of B0 any small X00- separation (A00, B00)
+of G00 will be such that B00 r A00 is light, because (A0 [ A00, B00) will be a
+small X- separation of G0, and B00 r A00 = B00 r (A0 [ A00).
+By the induction hypothesis, therefore, X00 is linked in G00. But
+then X00 is also linked in G[B0 [ B]: as S was linked in G[B], we simply
+replace any edges added on S in the deﬁnition of G0 by disjoint paths
+through B (Fig. 3.5.3). But now (A0, B0 [ B) is a linked X- separation
+of G that violates the minimality of A in the choice of (A, B).
+B
+A
+S
+A0
+B0
+X00
+G 00
+X
+Fig. 3.5.3. If S ✓B0, then (A0, B0 [ B) is linked in G
+We have thus shown that G0 satisﬁes the premise of (⇤) with respect
+to X. Since {A, B} is a proper separation, G0 has fewer vertices than G.
+By the induction hypothesis, therefore, X is linked in G0. Replacing
+edges of G0 −E on S by paths through B as before, we can turn any
+linkage of X in G0 into one in G, completing the proof of (⇤).
+This
+completes the proof of (1).
+Our next goal is to show that, by the induction hypothesis, we may
+assume that G has not only large average degree but even large mini-
+mum degree. For our proof that X is linked in G, let s1, . . . , s`, t1, . . . , t`
+be the distinct vertices in X which we wish to link by disjoint paths
+Pi = si . . . ti. Let us add to G any missing edges on X except those of
+the form siti; as the paths Pi are not allowed to have inner vertices in X,
+G[X]
+these new edges a↵ect neither the premise nor the conclusion in (⇤).
+After this modiﬁcation, we can now prove the following:
+We may assume that any two adjacent vertices u, v which
+do not both lie in X have at least 8k −1 common neighbours.
+(2)
+To prove (2), let e = uv be such an edge, let n denote the number of
+e = uv
+common neighbours of u and v, and let G0 := G/e be the graph obtained
+n
+by contracting e. Since u, v are not both in X we may view X as a subset
+G0
+also of V 0 := V (G0), replacing u or v in X with the contracted vertex ve
+V 0
+if X \ {u, v} 6= ;. Our aim is to show that unless n > 8k −1 as desired
+in (2), G0 satisﬁes the premise of (⇤). Then X will be linked in G0 by
+
+3.5 Linking pairs of vertices
+85
+the induction hypothesis, so the desired paths P1, . . . , P` exist in G0. If
+one of them contains ve, replacing ve by u or v or uv turns it into a path
+in G, completing the proof of (⇤).
+In order to show that G0 satisﬁes the premise of (⇤) with respect
+to X, let us show ﬁrst that V 0 r X is heavy. Since V r X was heavy
+and |V 0 r X| = |V r X| −1, it suﬃces to show that the contraction of e
+resulted in the loss of at most 8k edges incident with a vertex outside X.
+If u and v are both outside X, then the number of such edges lost is
+only n + 1: one edge at every common neighbour of u and v, as well
+as e. But if u 2 X, then v /2 X, and we lost all the X– v edges xv of G
+with x 6= u, too: while xv counted towards kV r Xk+, the edge xve lies
+in G0[X] and does not count towards kV 0 r Xk+. If x is not a common
+neighbour of u and v, then this is an additional loss. But u is adjacent to
+every x 2 X r {u} except at most one (by our assumption about G[X]),
+so every such x except at most one is in fact a common neighbour of u
+and v. Thus in total, we lost at most n + 2 edges. Unless n > 8k −1
+(which would prove (2) directly for u and v), this means that we lost at
+most 8k edges, as desired for our proof that V 0 r X is heavy.
+It remains to show that for every small X- separation (A0, B0) of G0
+the set B0 r A0 is light. Let (A0, B0) be a counterexample, chosen with
+(A0, B0)
+B0 minimal. Then G0[B0], as in the proof of (1), satisﬁes the premise
+of (⇤) with respect to X0 := A0 \ B0. Hence X0 is linked in G0[B0] by
+X0
+induction. Let A and B be obtained from A0 and B0 by replacing ve,
+where applicable, with both u and v, and put X00 := A \ B. We shall
+(A, B), X00
+prove that the separation (A, B) of G contradicts our assumption (1).
+Let us consider two possible positions of ve in turn.
+If ve lies
+in B0 r A0, then u, v 2 B r A. Then X00 = X0 is linked in G[B], because
+it is linked in G0[B0]: if ve occurs on one of the linking paths for X0,
+just replace it by u or v or uv as earlier. This contradicts (1). The
+other case is that ve lies in A0, possibly in X0.
+We show that G[B]
+satisﬁes the premise of (⇤) with respect to X00; then X00 will be linked
+in G[B] by induction, again contradicting (1). Since (A0, B0) is a small
+X- separation, we have
+|X00| 6 |X0| + 1 6 |X| 6 2k ,
+even if ve lies in X0. Moreover, B rX00 = B0 rA0 is heavy in G, because
+it is heavy in G0 by the choice of (A0, B0). Now consider a small X00-
+separation (A00, B00) of G[B]. Then (A[A00, B00) is a small X- separation
+of G, because |X00| 6 |X|. Therefore B00 r A00 = B00 r (A [ A00) is light
+by the assumption in (⇤). Hence G[B] does satisfy the premise of (⇤)
+for X00, completing the proof of (2).
+Using induction by contracting an edge, we have just shown that the
+vertices in V rX may be assumed to have large degree. Using induction
+by deleting an edge, we now show that their degrees cannot be too large.
+
+86
+3. Connectivity
+Since (⇤) holds if V = X, we may assume that V r X 6= ;; let d⇤denote
+d⇤
+the smallest degree in G of a vertex in V rX. Let us prove the following:
+We may assume that 8k 6 d⇤6 16k −1.
+(3)
+The lower bound in (3) follows from (2) if we assume that G has no
+isolated vertex outside X, which we may clearly assume by induction.
+For the upper bound, let us see what happens if we delete an edge e
+e = uv
+whose ends u, v are not both in X. If G −e satisﬁes the premise of (⇤)
+with respect to X, then X is linked in G −e by induction, and hence
+in G. If not, then either V r X is light in G −e, or G −e has a small
+X- separation (A, B) such that B r A is heavy. If the latter happens
+then e must be an (A r B)–(B r A) edge: otherwise, (A, B) would be a
+small X- separation also of G, and B r A would be heavy also in G, in
+contradiction to our assumptions in (⇤). But if e is such an edge then
+any common neighbours of u and v lie in A \ B, so there are fewer than
+|X| 6 2k such neighbours. This contradicts (2).
+So V r X must be light in G −e. For G, this yields
+kV r Xk+ 6 8k |V r X| + 1 .
+(4)
+In order to show that this implies the desired upper bound for d⇤, let us
+estimate the number f(x) of edges that a vertex x 2 X sends to V r X.
+f(x)
+There must be at least one such edge, xy say, as otherwise (X, V r {x})
+would be a small X- separation of G that contradicts our assumptions
+in (⇤). But then, by (2), x and y have at least 8k −1 common neighbours,
+at most 2k −1 of which lie in X. Hence f(x) > 6k. As
+2 kV r Xk+ =
+X
+v 2V rX
+dG(v) +
+X
+x2X
+f(x) ,
+an assumption of d⇤> 16k would thus imply that
+2 (8k |V r X| + 1) >
+(4)
+2 kV r Xk+ > 16k |V r X| + 6k |X| ,
+yielding the contradiction of 2 > 6k |X|. This completes the proof of (3).
+To complete our proof of (⇤), pick a vertex v0 2 V rX of degree d⇤,
+and consider the subgraph H induced in G by v0 and its neighbours.
+By (2) we have δ(H) > 8k, and by (3) and the choice of v0 we have
+|H| 6 16k. By Lemma 3.5.4, then, H has a k-linked subgraph; let L be
+its vertex set. By deﬁnition of ‘k-linked’, we have |L| > 2k > |X|. If G
+contains |X| disjoint X–L paths, then X is linked in G, as desired. If not,
+then G has a small X- separation (A, B) with L ✓B. If we choose (A, B)
+of minimum order, then G[B] contains |A \ B| disjoint (A \ B)–L paths
+by Menger’s theorem (3.3.1). But then (A, B) is a linked X- separation
+that contradicts (1).
+⇤
+
+Exercises
+87
+Exercises
+For the ﬁrst three exercises let G be a graph with vertices a and b, and let
+X ✓V (G) r {a, b} be an a–b separator in G.
+1.−Show that X is minimal as an a–b separator if and only if every vertex
+in X has a neighbour in the component Ca of G −X containing a, and
+another in the component Cb of G −X containing b.
+2.−(continued)
+Let X0 ✓V (G) r {a, b} be another a–b separator, and deﬁne C0
+a and
+C0
+b correspondingly. Show that both
+Ya := (X \ C0
+a) [ (X \ X0) [ (X0 \ Ca)
+and
+Yb := (X \ C0
+b) [ (X \ X0) [ (X0 \ Cb)
+separate a from b (see ﬁgure).
+X0
+X
+X0
+a
+b
+Ya
+X
+3.
+(continued)
+Are Ya and Yb minimal a–b separators if X and X0 are? Are |Ya| and
+|Yb| minimum for a–b separators if |X| and |X0| are?
+4.
+Let X and X0 be minimal separators in G. Show that if X meets at
+least two components of G −X0, then X0 meets all the components of
+G −X and X meets all the components of G −X0.
+5.−Deduce the k = 2 case of Menger’s theorem (3.3.1) from Proposi-
+tion 3.1.1.
+6.−Prove the elementary properties of blocks mentioned after their formal
+deﬁnition.
+7.
+Show that the block graph of any connected graph is a tree.
+8.−Let G be a k-connected graph, and let xy be an edge of G. Show that
+G/xy is k-connected if and only if G −{x, y} is (k −1)-connected.
+9.
+(i) Let e be an edge in a 2-connected graph G 6= K3. Show that either
+G −e or G/e is again 2-connected.
+(ii) Does every 2-connected graph G 6= K3 have an edge e such that
+G/e is still 2-connected?
+10.+ Let e be an edge in a 3-connected graph G 6= K4. Show that either
+G .−e or G/e is again 3-connected.

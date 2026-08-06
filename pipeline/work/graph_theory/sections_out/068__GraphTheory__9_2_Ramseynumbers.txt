@@ -1,0 +1,250 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 9. Ramsey Theory for Graphs
+현재 소단원: 9.2 Ramsey numbers
+직전 소단원: 「9.1 Ramsey's original theorems」
+[본문]
+307
+Theorem 9.1.3. For all k, c, r > 1 there exists an n > k such that every
+[9.3.3]
+n-set X has a monochromatic r-subset with respect to any c-colouring
+of [X]k.
+Proof. As is customary in set theory, we denote by n 2 N (also) the
+(8.1.2)
+set {0, . . . , n −1}. Suppose the assertion fails for some k, c, r. Then for
+k, c, r
+every n > k there exist an n-set, without loss of generality the set n, and
+a c-colouring [n]k ! c such that n contains no monochromatic r-set. Let
+us call such colourings bad; we are thus assuming that for every n > k
+bad
+colouring
+there exists a bad colouring of [n]k. Our aim is to combine these into a
+bad colouring of [N]k, which will contradict Theorem 9.1.2.
+For every n > k let Vn 6= ; be the set of bad colourings of [n]k. For
+n > k, the restriction f(g) of any g 2 Vn to [n−1]k is still bad, and hence
+lies in Vn−1. By the inﬁnity lemma (8.1.2), there is an inﬁnite sequence
+gk, gk+1, . . . of bad colourings gn 2 Vn such that f(gn) = gn−1 for all
+n > k. For every m > k, all colourings gn with n > m agree on [m]k, so
+for each Y
+2 [N]k the value of gn(Y ) coincides for all n > max Y . Let
+us deﬁne g(Y ) as this common value gn(Y ). Then g is a bad colouring
+of [N]k: every r-set S ✓N is contained in some suﬃciently large n,
+so S cannot be monochromatic since g coincides on [n]k with the bad
+colouring gn.
+⇤
+The least integer n associated with k, c, r as in Theorem 9.1.3 is the
+Ramsey number for these parameters; we denote it by R(k, c, r).
+Ramsey
+number
+R(k, c, r)
+9.2 Ramsey numbers
+Ramsey’s theorem may be rephrased as follows: if H = Kr and G is a
+graph with suﬃciently many vertices, then either G itself or its comple-
+ment G contains a copy of H as a subgraph. Clearly, the same is true
+for any graph H, simply because H ✓Kh for h := |H|.
+However, if we ask for the least n such that every graph G of order n
+has the above property – this is the Ramsey number R(H) of H – then
+Ramsey
+number
+R(H)
+the above question makes sense: if H has only few edges, it should embed
+more easily in G or G, and we would expect R(H) to be smaller than
+the Ramsey number R(h) = R(Kh).
+A little more generally, let R(H1, H2) denote the least n 2 N such
+R(H1, H2)
+that H1 ✓G or H2 ✓G for every graph G of order n. For most graphs
+H1, H2, only very rough estimates are known for R(H1, H2). Interest-
+ingly, lower bounds given by random graphs (as in Theorem 11.1.3) are
+often sharper than even the best bounds provided by explicit construc-
+tions.
+The following proposition describes one of the few cases where exact
+Ramsey numbers are known for a relatively large class of graphs:
+9.2 Ramsey numbers
+
+308
+9. Ramsey Theory
+Proposition 9.2.1. Let s, t be positive integers, and let T be a tree of
+order t. Then R(T, Ks) = (s −1)(t −1) + 1.
+Proof. The disjoint union of s −1 graphs Kt−1 contains no copy of T,
+(1.5.3)
+(5.2.3)
+while the complement of this graph, the complete (s −1)-partite graph
+Ks−1
+t−1 , does not contain Ks. This proves R(T, Ks) > (s −1)(t −1) + 1.
+Conversely, let G be any graph of order n = (s−1)(t−1)+1 whose
+complement contains no Ks. Then s > 1, and in any vertex colouring
+of G (in the sense of Chapter 5) at most s −1 vertices can have the
+same colour. Hence, χ(G) > dn/(s −1)e = t. By Lemma 5.2.3, G has
+a subgraph H with δ(H) > t −1, which by Corollary 1.5.3 contains a
+copy of T.
+⇤
+As the main result of this section, we shall now prove one of those
+rare general theorems providing a relatively good upper bound for the
+Ramsey numbers of a large class of graphs, a class deﬁned in terms
+of a standard graph invariant.
+The theorem deals with the Ramsey
+numbers of sparse graphs: it says that the Ramsey number of graphs H
+with bounded maximum degree grows only linearly in |H| – an enormous
+improvement on the exponential bound from the proof of Theorem 9.1.1.
+Theorem 9.2.2. (Chv´atal, R¨odl, Szemer´edi & Trotter 1983)
+For every positive integer ∆there is a constant c such that
+R(H) 6 c |H|
+for all graphs H with ∆(H) 6 ∆.
+Proof. The basic idea of the proof is as follows. We wish to show that
+(7.1.1)
+(7.4.1)
+(7.5.2)
+(9.1.1)
+H ✓G or H ✓G if |G| is large enough (though not too large). Consider
+an ✏-regular partition of G, as provided by the regularity lemma.
+If
+enough of the ✏-regular pairs in this partition have high density, we may
+hope to ﬁnd a copy of H in G. If most pairs have low density, we try
+to ﬁnd H in G. Let R, R0 and R00 be the regularity graphs of G whose
+edges correspond to the pairs of density > 0; > 1/2; < 1/2 respectively.3
+Then R is the edge-disjoint union of R0 and R00.
+Now to obtain H ✓G or H ✓G, it suﬃces by the blow-up lemma,
+Lemma 7.5.2, to ensure that H is contained in a suitable ‘inﬂated regu-
+larity graph’ R0
+s or R00
+s. Since χ(H) 6 ∆(H)+1 6 ∆+1, this will be the
+case if s > ↵(H) and we can ﬁnd a K∆+1 in R0 or in R00. But that is easy
+to ensure: we just need that Kr ✓R, where r is the Ramsey number
+of ∆+ 1, which will follow from Tur´an’s theorem because R is dense.
+For the formal proof let now ∆> 1 be given. On input d := 1/2
+∆, d
+and ∆, Lemma 7.5.2 returns an ✏0. Let m := R(∆+ 1) be the Ramsey
+✏0, m
+✏
+number of ∆+1. Let ✏6 ✏0 be positive but small enough that for k = m
+3 In our formal proof later we shall deﬁne R00 a little di↵erently, so that it complies
+properly with our deﬁnition of a regularity graph.
+
+9.2 Ramsey numbers
+309
+(and hence for all k > m)
+2✏<
+1
+m −1 −1
+k ;
+(1)
+then in particular ✏< 1. Finally, let M be the integer returned by the
+M
+regularity lemma (Theorem 7.4.1) on input ✏and m.
+All the quantities deﬁned so far depend only on ∆. We shall prove
+the theorem with
+c := 2∆+1M
+1 −✏
+.
+c
+Let H with ∆(H) 6 ∆be given, and let s := |H|. Let G be an arbitrary
+s
+graph of order n > c |H|; we show that H ✓G or H ✓G.
+G, n
+By Theorem 7.4.1, G has an ✏-regular partition {V0, V1, . . . , Vk} with
+k
+exceptional set V0 and |V1| = . . . = |Vk| =: `, where m 6 k 6 M. Then
+`
+` = n −|V0|
+k
+> n 1 −✏
+M
+> cs 1 −✏
+M
+> 2∆+1s = 2s/d∆.
+(2)
+Let R be the regularity graph with parameters ✏, `, 0 corresponding to
+R
+this partition. By deﬁnition, R has k vertices and
+kRk >
+✓k
+2
+◆
+−✏k2
+= 1
+2k2⇣
+1 −1
+k −2✏
+⌘
+>
+(1)
+1
+2k2⇣
+1 −1
+k −
+1
+m −1 + 1
+k
+⌘
+= 1
+2k2 m −2
+m −1
+> tm−1(k)
+edges. By Theorem 7.1.1, therefore, R has a subgraph K = Km.
+K
+We now colour the edges ij of R with two colours: red if the pair
+(Vi, Vj) has density at least 1/2, and green otherwise. Let R0 be the
+spanning subgraph of R formed by the red edges, and R00 the spanning
+subgraph of R formed by the green edges and those whose corresponding
+pair has density exactly 1/2. Then R0 is a regularity graph of G with
+parameters ✏, ` and 1/2. And R00 is a regularity graph of G, with the
+same parameters: as one easily checks, every pair (Vi, Vj) that is ✏-regular
+for G is also ✏-regular for G.
+By deﬁnition of m, our graph K contains a red or a green Kr, for
+r := χ(H) 6 ∆+ 1.
+Correspondingly, H ✓R0
+s or H ✓R00
+s.
+Since
+✏6 ✏0 and ` > 2s/d∆by (2), both R0 and R00 satisfy the requirements
+of Lemma 7.5.2, so H ✓G or H ✓G as desired.
+⇤
+
+310
+9. Ramsey Theory
+So far in this section, we have been asking what is the least order of a
+complete graph G such that every 2-colouring of its edges yields a mono-
+chromatic copy of some given graph H. Rather than keeping G complete
+and focusing on its order, let us now consider its structure too, i.e., min-
+imize G with respect to the subgraph relation. Given a graph H, let us
+call a graph G Ramsey-minimal for H if G is minimal with the property
+Ramsey-
+minimal
+that every 2-colouring of its edges yields a monochromatic copy of H.
+What do such Ramsey-minimal graphs look like? Are they unique?
+The following result, which we include for its pretty proof, answers the
+second question for some H:
+Proposition 9.2.3. If T is a tree but not a star, then inﬁnitely many
+graphs are Ramsey-minimal for T.
+Proof. Let |T| =: r. We show that for every n 2 N there is a graph of
+(1.5.3)
+(5.2.3)
+(5.2.5)
+(=11.2.2)
+order at least n that is Ramsey-minimal for T.
+By Theorem 5.2.5, there exists a graph G with chromatic number
+χ(G) > r2 and girth g(G) > n. If we colour the edges of G red and
+green, then the red and the green subgraph cannot both have an r-
+(vertex-)colouring in the sense of Chapter 5: otherwise we could colour
+the vertices of G with the pairs of colours from those colourings and
+obtain a contradiction to χ(G) > r2. So let G0 ✓G be monochromatic
+with χ(G0) > r. By Lemma 5.2.3, G0 has a subgraph of minimum degree
+at least r, which contains a copy of T by Corollary 1.5.3.
+Let G⇤✓G be Ramsey-minimal for T. Clearly, G⇤is not a for-
+est: the edges of any forest can be 2-coloured (partitioned) so that no
+monochromatic subforest contains a path of length 3, let alone a copy
+of T. (Here we use that T is not a star, and hence contains a P 3.) So G⇤
+contains a cycle, which has length g(G) > n since G⇤✓G. In particular,
+|G⇤| > n as desired.
+⇤
+9.3 Induced Ramsey theorems
+Ramsey’s theorem can be rephrased as follows. For every graph H = Kr
+there exists a graph G such that every 2-colouring of the edges of G
+yields a monochromatic H ✓G. This is witnessed by any large enough
+complete graph as G. Let us now change the problem slightly and ask
+for a graph G in which every 2-edge-colouring yields a monochromatic
+induced H ✓G, where H is now an arbitrary given graph.
+This slight modiﬁcation changes the character of the problem. What
+is needed now is no longer a simple proof that G is ‘big enough’ (as for
+Theorem 9.1.1), but a careful construction: the construction of a graph
+that, however we bipartition its edge set, contains an induced copy of H

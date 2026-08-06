@@ -1,0 +1,462 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.7 The graph minor theorem (분할 part 1)
+직전 소단원: 「12.6 Tree-decompositions and forbidden minors」
+[본문]
+396
+12. Graph Minors
+a bounded number of vertices makes H planar except for a subgraph
+of bounded linear width sewn on to the unique cu↵of S2 −1.) A tree-
+decomposition (T, (Vt)t2T ) of a graph G has ﬁnite adhesion if all its
+ﬁnite
+adhesion
+adhesion sets are ﬁnite and for every inﬁnite path t1t2 . . . in T the value
+of lim infi!1 |Vti \ Vti+1| is ﬁnite.
+Unlike its counterpart for Kn, the excluded-K@0 structure theorem
+has a direct converse. It thus characterizes the graphs without a K@0
+minor, as follows:
+Theorem 12.6.8. A graph G has no K@0 minor if and only if G has a
+tree-decomposition of ﬁnite adhesion whose torsos are nearly planar.
+Finally, a structure theorem for excluding K@0 as a topological minor.
+Let us say that G has ﬁnite tree-width if G admits a tree-decomposition
+ﬁnite
+tree-width
+(T, (Vt)t2T ) into ﬁnite parts such that for every inﬁnite path t1t2 . . . in
+T the set S
+j>1
+T
+i>j Vti is ﬁnite.
+Theorem 12.6.9. The following assertions are equivalent for connected
+graphs G:
+(i) G does not contain K@0 as a topological minor;
+(ii) G has ﬁnite tree-width;
+(iii) G has a normal spanning tree T such that for every ray R in T
+there are only ﬁnitely many vertices v such that G contains an
+inﬁnite v–(R −v) fan.
+12.7 The graph minor theorem
+Graph properties that are closed under taking minors occur frequently
+in graph theory. Among the most natural examples are the properties
+of being embeddable in some ﬁxed surface, such as planarity.
+By Kuratowski’s theorem, planarity can be expressed by forbidding
+the minors K5 and K3,3. This is a good characterization of planarity in
+the following sense. Suppose we wish to persuade someone that a certain
+graph is planar: this is easy (at least intuitively) if we can produce a
+drawing of the graph. But how do we persuade someone that a graph is
+non-planar? By Kuratowski’s theorem, there is also an easy way to do
+that: we just have to exhibit an IK5 or IK3,3 in our graph, as an easily
+checked ‘certiﬁcate’ for non-planarity. Our simple Proposition 12.6.2 is
+another example of a good characterization: if a graph has tree width
+< 3, we can prove this by exhibiting a suitable tree-decomposition; if
+not, we can produce an IK4 as evidence.
+
+12.7 The graph minor theorem
+397
+Theorems that characterize a property P by a set of forbidden mi-
+nors are doubtless among the most attractive results in graph theory.
+As we saw in Lemma 12.6.1, such a characterization exists whenever P
+(12.6.1)
+is minor-closed: then P = Forb4(P), where P is the complement of P.
+However, one naturally seeks to make the set of forbidden minors as
+small as possible. And there is indeed a unique smallest such set: the
+set
+KP := { H | H is 4-minimal in P }
+Kuratowski
+set KP
+satisﬁes P = Forb4(KP) and is contained in every other set H such that
+P = Forb4(H). We call KP the Kuratowski set for P.
+Clearly, the elements of KP are incomparable under the minor re-
+lation 4. Now the graph minor theorem of Robertson & Seymour says
+that any set of 4-incomparable graphs must be ﬁnite:
+Theorem 12.7.1. (Robertson & Seymour 1986–2004)
+graph minor
+theorem
+The ﬁnite graphs are well-quasi-ordered by the minor relation 4.
+We shall give a sketch of the proof of the graph minor theorem at the
+end of this section.
+Corollary 12.7.2. The Kuratowski set for any minor-closed graph
+property is ﬁnite.
+⇤
+As a special case of Corollary 12.7.2 we have, at least in principle,
+a Kuratowski-type theorem for every surface S: the property P(S) of
+P(S)
+embeddability in S is characterized by the ﬁnite set KP(S) of forbidden
+minors.
+Corollary 12.7.3. For every surface S there exists a ﬁnite set of graphs
+H1, . . . , Hn such that a graph is embeddable in S if and only if it contains
+none of H1, . . . , Hn as a minor.
+⇤
+While Corollary 12.7.3 is immediate from the graph minor theorem,
+it can also be proved more directly. It is our next goal to do this. The
+main step is to prove that the graphs in KP(S) do not contain arbitrarily
+large grids as minors (Lemma 12.7.4). Then their tree-width is bounded
+(Theorem 12.6.3), so KP(S) is well-quasi-ordered (Theorem 12.4.2) and
+therefore ﬁnite.
+The proof of Lemma 12.7.4 gives a good impression of the inter-
+play between graph minors and surface topology, which – by way of
+Theorem 12.6.6, which we could not prove here – is also one of the
+key ingredients of the proof of the graph minor theorem. Appendix B
+summarizes the necessary background on surfaces, including a lemma
+
+398
+12. Graph Minors
+R2
+R5
+f
+Fig. 12.7.1. The hexagonal grid H6 with central face f and
+rings R2 and R5
+used in the proof. For convenience (cf. Proposition 1.7.3 (ii)), we shall
+work with hexagonal rather than square grids.
+Denote by Hr the plane hexagonal grid whose dual has radius r
+Hr
+(Figure 12.7.1). The face corresponding to the central vertex of its dual
+is its central face. (Generally, when we speak of the faces of Hr, we
+faces
+mean its hexagonal faces, not its outer face.) Call a subgrid Hk of Hr
+standard if their central faces coincide. We write Sk for the perimeter
+standard
+cycle of the standard subgrid Hk in Hr; for example, S1 is the hexagon
+S1, . . . , Sr
+bounding the central face of Hr. The ring Rk is the subgraph of Hr
+ring Rk
+formed by Sk and Sk+1 and the edges between them.
+Lemma 12.7.4. For every surface S there exists an integer r such that
+no graph that is minimal with the property of not being embeddable
+in S contains Hr as a topological minor.
+Proof. Let G be a graph that cannot be embedded in S and is minimal
+(4.1.2)
+(4.2.2)
+(4.3.2)
+(App. B)
+with this property.
+Our proof will run roughly as follows.
+Since G
+is minimally not embeddable in S, we can embed it in an only slightly
+larger surface S0. If G contains a very large Hr grid, then by Lemma B.6
+some large Hm subgrid will be ﬂat in S0, that is, the union of its faces
+in S0 will be a disc D0. We then pick an edge e from the middle of this
+Hm grid and embed G −e in S. Again by Lemma B.6, one of the rings
+of our Hm will be ﬂat in S. In this ring we can embed the (planar)
+subgraph of G which our ﬁrst embedding had placed in D0; note that
+this subgraph contains the edge e. The rest of G can then be embedded
+in S outside this ring much as before, yielding an embedding of all of G
+in S (a contradiction).
+More formally, let " := "(S) denote the Euler genus of S. Let r
+be large enough that Hr contains " + 3 disjoint copies of Hm+1, where
+"
+m := 3" + 4. We show that G has no THr subgraph.
+r, m
+Let e0 = u0v0 be any edge of G, and choose an embedding σ0 of
+G −e0 in S. Choose a face with u0 on its boundary, and another with v0
+
+12.7 The graph minor theorem
+399
+on its boundary. Cut a disc out of each face and add a handle between
+the two holes, to obtain a surface S0 of Euler genus " + 2 (Lemma B.3).
+Embedding e0 along this handle, extend σ0 to an embedding of G in S0.
+σ0: G ,! S0
+Suppose G has a subgraph H = THr. Let f: Hr ! H map the
+H
+vertices of Hr to the corresponding branch vertices of H, and its edges
+f
+to the corresponding paths in H between those vertices. Let us show
+that Hr has a subgrid Hm (not necessarily standard) whose hexagonal
+face boundaries correspond (by σ0 ◦f) to circles in S0 that bound disjoint
+open discs there.
+By the choice of r, we can ﬁnd " + 3 disjoint copies of Hm+1 in Hr.
+The standard subgrids Hm of these Hm+1 are not only disjoint, but
+suﬃciently spaced out in Hr that their deletion leaves a tree T ✓Hr
+that sends an edge to each of them (Figure 12.7.2). Hence whenever
+we pick one hexagon from each of these Hm and delete the images C
+of those hexagons in S0, the component D0 of the remainder of S0 that
+contains (σ0 ◦f)(T) meets all those C in its boundary. By Lemma B.6
+and "(S0) = " + 2, therefore, it cannot be true that none of our circles C
+bounds a disc in S0 that is disjoint from (σ0 ◦f)(T).
+Fig. 12.7.2. Disjoint copies of Hm (m = 3) linked up by a tree
+in the rest of Hr
+Hence for one of our copies of Hm in Hr, the image of every hexagon
+in S0 bounds an open disc that is disjoint from (σ0 ◦f)(T). Let us show
+that these discs are disjoint. If not, then one of them, D say, contains
+a point x from the boundary of another such disc.
+But then D also
+contains (σ0 ◦f)(T), contrary to assumption, because we can walk from
+x to (σ0 ◦f)(T) in (σ0 ◦f)(Hr) ✓S0 avoiding the boundary of D.
+From now on, we shall work with this ﬁxed Hm and will no longer
+consider its supergraph Hr. We write Ci := f(Si) for the images in G
+Ci
+of the concentric cycles Si of this Hm (i = 1, . . . , m).
+Pick an edge e = uv of C1, and choose an embedding σ of G−e in S.
+e
+σ: G −e ,! S
+As before, Lemma B.6 implies that one of the " + 1 disjoint rings R3i+2
+in our Hm (i = 0, . . . , "), Rk say, has the property that its hexagons
+k
+
+400
+12. Graph Minors
+correspond (by σ ◦f) to circles in S that bound disjoint open discs there
+(Figure 12.7.3). Let R ◆(σ ◦f)(Rk) be the closure in S of the union
+R
+of those discs, which is a cylinder in S. One of its two boundary circles
+is the image under σ of the cycle C := Ck+1 in G to which f maps the
+C
+perimeter cycle Sk+1 of our special ring Rk ✓Hm.
+Fig. 12.7.3. A tree linking up hexagons selected from the rings
+R2, R5, R8 . . .
+Let H0 := f(Hk+1) ✓G, where Hk+1 is standard in our Hm. Recall
+H0
+that σ0 ◦f maps the hexagons of Hk+1 to circles in S0 bounding disjoint
+open discs there. The closure in S0 of the union of these discs is a disc
+D0 in S0, bounded by σ0(C). Deleting a small open disc inside D0 that
+D0
+does not meet σ0(G), we obtain a cylinder R0 ✓S0 that contains σ0(H0).
+R0
+We shall now combine the embeddings σ: G−e ,! S and σ0: G ,! S0
+to an embedding σ00: G ,! S, which will contradict the choice of G.
+σ00
+Let ': σ0(C) ! σ(C) be a homeomorphism between the images of C in
+S0 and in S that commutes with these embeddings, i.e., is such that
+σ|C = (' ◦σ0)|C. Then extend this to a homeomorphism ': R0 ! R.
+'
+The idea now is to deﬁne σ00 as ' ◦σ0 on the part of G which σ0 maps
+to D0 (which includes the edge e on which σ is undeﬁned), and as σ on
+the rest of G (Fig. 12.7.4).
+To make these two partial maps compatible, we start by deﬁning
+σ00 on C as σ|C = (' ◦σ0)|C.
+Next, we deﬁne σ00 separately on the
+components of G −C. Since σ0(C) bounds the disc D0 in S0, we know
+that σ0 maps each component J of G−C either entirely to D0 or entirely
+to S0 r D0. On all the components J such that σ0(J) ✓D0, and on all
+the edges they send to G, we deﬁne σ00 as ' ◦σ0.
+Thus, σ00 embeds
+these components in R. Since e 2 f(Hk) = H0 −C, this includes the
+component of G −C that contains e.
+It remains to deﬁne σ00 on the components of G −C which σ0 maps
+to S0 r D0. As σ0(Ck) ✓D0, these do not meet Ck. Since σ(C [ Ck) is
+
+12.7 The graph minor theorem
+401
+S
+S0
+R
+R0
+D0
+σ(u0)
+σ0(v0)
+σ0(e0)
+σ0(e)
+σ0(C)
+σ0(G)
+'
+σ(u)
+σ(v)
+σ(G −e)
+σ(C)
+σ(Ck+2)
+Fig. 12.7.4. Combining σ0: G ,! S0 and σ: G−e ,! S to σ00: G ,! S
+the frontier of R in S, this means that σ(J) ✓S r R or σ(J) ✓R for
+every such component J.
+For the component J0 of G −C that contains Ck+2 we cannot have
+J0
+σ(J0) ✓R: as Sk+2 \ Rk = ;, this would mean that σ(Ck+2) lies in
+a disc D ✓R corresponding to a face of Rk, which is impossible since
+Sk+2 sends edges to vertices of Sk+1 outside the boundary of that face.
+We thus have σ(J0) ✓S r R, and deﬁne σ00 as σ on J0 and on all the
+J0–C edges of G.
+Next, consider any remaining component J of G −C that sends no
+edge to C. If σ(J) ✓S r R, we deﬁne σ00 on J as σ. If σ(J) ✓R, then
+J is planar. Since J sends no edge to C, we can have σ00 map J to any
+open disc in R that has not so far been used by σ00.
+It remains to deﬁne σ00 on the components J 6= J0 of G −C which
+σ0 maps to S0 r D0 and for which G contains a J–C edge. Let J be the
+J
+set of all those components J. We shall group them by the way they
+attach to C, and deﬁne σ00 for these groups in turn.
+. . .
+D00
+J0
+J0
+J0
+fi
+w
+Q
+Ck+2
+C = Ck+1
+vi+1
+vn
+R0
+J0
+J
+Pi
+D0
+v1
+vi
+. . .
+Fig. 12.7.5. Deﬁne σ00 jointly for the components J, J0 2 J
+that attach to the same Pi ✓C
+
+402
+12. Graph Minors
+Since m > k + 2, the disc D0 lies inside a larger disc in S0, which is
+the union of D0 and closed discs D00 bounded by the images under σ0 ◦f
+D00
+of the hexagons in Rk+1. By deﬁnition of J , the embedding σ0 maps
+every J 2 J to such a disc D00 (Fig. 12.7.5). On the path P in C such
+that σ0(P) = σ0(C) \ D00 (which is the image under f of one or two con-
+secutive edges on Sk+1), let v1, . . . , vn be the vertices with a neighbour
+in J0, in their natural order along P, and write Pi for the segment of P
+Pi
+from vi to vi+1. For any vi with 1 < i < n, pick a vi–J0 edge and extend
+it through J0 to a path Q from vi to Ck+2 (which exists by deﬁnition
+of J0); let w be its ﬁrst vertex that σ0 maps to the boundary circle of D00.
+By Lemma 4.1.2 applied to σ0(viQw) and the two arcs joining σ0(vi) to
+σ0(w) along the boundary circle of D00, there is no arc through D00 that
+links σ0(Pi−1) to σ0(Pi) but avoids σ0(viQw). Hence, every J 2 J with
+σ0(J) ✓D00 has all its neighbours on C in the same Pi, and σ0 maps
+J to the face fi of the plane graph σ0(G[J0 [ C]) \ D00 whose boundary
+fi
+contains Pi. We shall deﬁne σ00 jointly on all those J 2 J which σ0 maps
+to this fi, for i = 1, . . . , n −1 in turn.
+To do so, we choose an open disc Di in S r R that has a boundary
+circle containing σ(Pi) and avoids the image of σ00 as deﬁned until now.
+Such Di exists in a strip neighbourhood of σ(C) in S, because compo-
+nents J0 2 J attaching to a segment Pj 6= Pi of C send no edge to ˚
+Pi.
+Choose a homeomorphism 'i from the boundary circle of fi to that of
+Di so that σ|Pi = ('i ◦σ0)|Pi, and extend this to a homeomorphism 'i
+from the closure of fi in S0 to the closure of Di in S. For every J 2 J
+with σ0(J) ✓fi, and for all J–C edges of G, deﬁne σ00 as 'i ◦σ0.
+⇤
+Proof of Corollary 12.7.3.
+By their minimality, the graphs in
+(1.7.3)
+(12.4.2)
+(12.6.3)
+KP(S) are incomparable under the minor-relation. If their tree-width is
+bounded, then KP(S) is well-quasi-ordered by the minor relation (The-
+orem 12.4.2), and hence must be ﬁnite. So assume their tree-width is
+unbounded, and let r be as in Lemma 12.7.4. By Theorem 12.6.3, some
+H 2 KP(S) has a grid minor large enough to contain Hr. By Proposition
+1.7.3, Hr is a topological minor of H, contrary to the choice of r.
+⇤
+We ﬁnally come to the proof of the graph minor theorem itself. The
+complete proof would still ﬁll a book or two, but we are well equipped
+now to get a good understanding of its main ideas and overall structure.
+For background on surfaces, we once more refer to Appendix B.
+Proof of the graph minor theorem (sketch). We have to show that
+(12.1.3)
+(12.2.1)
+(12.4.2)
+(12.6.3)
+every inﬁnite sequence
+G0, G1, G2, . . .
+of ﬁnite graphs contains a good pair: two graphs Gi 4 Gj with i < j.
+We may assume that G0 64 Gi for all i > 1, since G0 forms a good pair
+
+12.7 The graph minor theorem
+403
+with any graph Gi of which it is a minor. Thus all the graphs G1, G2, . . .
+lie in Forb4(G0), and we may use the structure common to these graphs
+in our search for a good pair.
+We have already seen how this works when G0 is planar: then the
+graphs in Forb4(G0) have bounded tree-width (Corollary 12.6.4) and
+are therefore well-quasi-ordered by Theorem 12.4.2. In general, we need
+only consider the cases of G0 = Kn: since G0 4 Kn for n := |G0|, we
+may assume that Kn 64 Gi for all i > 1.
+The proof now follows the same lines as above: again the graphs
+in Forb4(Kn) can be characterized by their tree-decompositions, and
+again their tree structure helps, as in Kruskal’s theorem, with the proof
+that they are well-quasi-ordered. But as in Wagner’s theorem (7.3.4) for
+n = 5, the parts in these tree-decompositions are no longer constrained in
+terms of order now but in more subtle structural terms. Roughly speak-
+ing, for every n there exists a ﬁnite set S of surfaces such that every graph
+without a Kn minor has a tree-decomposition into parts each ‘nearly’
+embeddable in one of the surfaces S 2 S; see Theorem 12.6.6. By a
+generalization of Theorem 12.4.2 – and hence of Kruskal’s theorem – it
+now suﬃces, essentially, to prove that the set of all the parts in these tree-
+decompositions is well-quasi-ordered: then the graphs decomposing into
+these parts are well-quasi-ordered, too. Since S is ﬁnite, every inﬁnite
+sequence of such parts has an inﬁnite subsequence whose members are
+all (nearly) embeddable in the same surface S 2 S. Thus all we have to
+show is that, given any surface S, all the graphs embeddable in S are
+well-quasi-ordered by the minor relation.
+This is shown by induction on the Euler genus of S, using the same
+approach as before: if H0, H1, H2, . . . is an inﬁnite sequence of graphs
+embeddable in S, we may assume that none of the graphs H1, H2, . . .
+contains H0 as a minor. If S = S2 we are back in the case that H0 is
+planar, so the induction starts. For the induction step we now assume
+that S 6= S2.
+Again, the exclusion of H0 as a minor constrains the
+structure of the graphs H1, H2, . . ., this time topologically: each Hi with
+i > 1 has an embedding in S which meets some circle Ci ✓S that does
+not bound a disc in S in no more than a bounded number of vertices
+(and no edges), say in Xi ✓V (Hi). (The bound on |Xi| depends on H0,
+but not on Hi.) Cutting along Ci and capping the hole(s), we obtain one
+or two new surfaces of smaller Euler genus. If the cut produces only one
+new surface Si, then our embedding of Hi −Xi still counts as a near-
+embedding of Hi in Si (since Xi is small). If this happens for inﬁnitely
+many i, then inﬁnitely many of the surfaces Si are also the same, and
+the induction hypothesis gives us a good pair among the corresponding
+graphs Hi. On the other hand, if we get two surfaces S0
+i and S00
+i for
+inﬁnitely many i (without loss of generality the same two surfaces), then
+Hi decomposes accordingly into subgraphs H0
+i and H00
+i embedded in these
+surfaces, with V (H0
+i \ H00
+i ) = Xi. The set of all these subgraphs taken
+
+404
+12. Graph Minors
+together is again well-quasi-ordered by the induction hypothesis, and
+hence so are the pairs (H0
+i, H00
+i ) by Lemma 12.1.3. Using a sharpening
+of the lemma that takes into account not only the graphs H0
+i and H00
+i
+themselves but also how Xi lies inside them, we ﬁnally obtain indices
+i, j not only with H0
+i 4 H0
+j and H00
+i 4 H00
+j , but also such that these
+minor embeddings extend to the desired minor embedding of Hi in Hj –
+completing the proof of the graph minor theorem.
+The graph minor theorem does not extend to graphs of arbitrary
+cardinality, but it might extend to countable graphs. Whether or not it
+does appears to be a diﬃcult problem. It may be related to the following
+intriguing conjecture, which easily implies the graph minor theorem for
+ﬁnite graphs (Exercise 68). Call a graph H a proper minor of G if there
+is a contraction from a subgraph of G onto H that is not an isomorphism
+from G to H.
+Self-minor conjecture. (Seymour 1980s)
+Every countably inﬁnite graph is a proper minor of itself.
+In addition to its impact on ‘pure’ graph theory, the graph mi-
+nor theorem has had far-reaching algorithmic consequences. Using their
+structure theorem for the graphs in Forb4(Kn), Theorem 12.6.6, Robert-
+son and Seymour have shown that testing for any ﬁxed minor is ‘fast’:
+for every graph H there is a polynomial-time algorithm14 that decides
+whether or not the input graph contains H as a minor. By the minor
+theorem, then, every minor-closed graph property P can be decided in
+polynomial (even cubic) time: if KP = {H1, . . . , Hk} is the correspond-
+ing set of forbidden minors, then testing a graph G for membership in
+P reduces to testing the k assertions Hi 4 G.
+The following example gives an indication of how deeply this algo-
+rithmic corollary a↵ects the complexity theory of graph algorithms. Let
+us call a graph knotless if it can be embedded in R3 so that none of its
+cycles forms a non-trivial knot. Before the graph minor theorem, it was
+an open problem whether knotlessness is decidable, that is, whether any
+algorithm exists (no matter how slow) that decides for any given graph
+whether or not that graph is knotless. To this day, no such algorithm
+is known. The property of knotlessness, however, is easily ‘seen’ to be
+closed under taking minors: contracting an edge of a graph embedded
+in 3-space will not create a knot where none had been before. Hence, by
+the minor theorem, there exists an algorithm that decides knotlessness –
+even in polynomial (cubic) time!
+However spectacular such unexpected solutions to long-standing
+problems may be, viewing the graph minor theorem merely in terms
+of its corollaries will not do it justice. At least as important are the
+14 indeed a cubic one – although with an enormous constant depending on H

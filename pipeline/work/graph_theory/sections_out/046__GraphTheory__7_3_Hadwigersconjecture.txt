@@ -1,0 +1,172 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 7. Extremal Graph Theory
+현재 소단원: 7.3 Hadwiger's conjecture
+직전 소단원: 「7.2 Minors」
+[본문]
+189
+Large girth can also be used to force a topological Kr minor. We
+now need some vertices of degree at least r−1 to serve as branch vertices,
+but if we assume a minimum degree of r −1 to secure these, we can even
+get by with a girth bound that is independent of r:
+Theorem 7.2.7. (K¨uhn & Osthus 2002)
+[7.3.9]
+There exists a constant g such that G ◆TKr for every graph G satisfying
+δ(G) > r −1 and g(G) > g.
+7.3 Hadwiger’s conjecture
+As we saw in Section 7.2, an average degree of c rplog r suﬃces to force
+an arbitrary graph to have a Kr minor, and an average degree of cr2
+forces it to have a topological Kr minor.
+If we replace ‘average de-
+gree’ above with ‘chromatic number’ then, with almost the same con-
+stants c, the two assertions remain true: this is because every graph
+with chromatic number k has a subgraph of average degree at least k −1
+(Lemma 5.2.3).
+Although both functions above, c rplog r and cr2, are best possible
+(up to the constant c) for the said implications with ‘average degree’,
+the question arises whether they are still best possible with ‘chromatic
+number’ – or whether some slower-growing function would do in that
+case. What lies hidden behind this problem about growth rates is a fun-
+damental question about the nature of the invariant χ: can this invariant
+have some direct structural e↵ect on a graph in terms of forcing concrete
+substructures, or is its e↵ect no greater than that of the ‘unstructural’
+property of having lots of edges somewhere, which it implies trivially?
+Neither for general nor for topological minors is the answer to this
+question known. For general minors, however, the following conjecture
+of Hadwiger suggests a positive answer:
+Conjecture. (Hadwiger 1943)
+The following implication holds for every integer r > 0 and every
+graph G:
+χ(G) > r
+)
+G < Kr.
+Hadwiger’s conjecture is trivial for r 6 2, easy for r = 3 and r = 4
+(exercises), and equivalent to the four colour theorem for r = 5 and
+r = 6. For r > 7 the conjecture is open, but it is true for line graphs
+(Exercise 34) and for graphs of large girth (Exercise 32; see also Corol-
+lary 7.3.9). Rephrased as G < Kχ(G), it is true for almost all graphs.3
+In general, the conjecture for r + 1 implies it for r (exercise).
+3 See Chapter 11 for the notion of ‘almost all’.
+7.3 Hadwiger’s conjecture
+
+190
+7. Extremal Graph Theory
+The Hadwiger conjecture for any ﬁxed r is equivalent to the asser-
+tion that every graph without a Kr minor has an (r −1)-colouring. In
+this reformulation, the conjecture raises the question of what the graphs
+without a Kr minor look like: any suﬃciently detailed structural de-
+scription of those graphs should enable us to decide whether or not they
+can be (r −1)-coloured.
+For r = 3, for example, the graphs without a Kr minor are precisely
+the forests (why?), and these are indeed 2-colourable. For r = 4, there
+is also a simple structural characterization of the graphs without a Kr
+minor:
+Proposition 7.3.1. A graph with at least three vertices is edge-maximal
+[12.6.2]
+without a K4 minor if and only if it can be constructed recursively from
+triangles by pasting4 along K2s.
+Proof. Recall ﬁrst that every IK4 contains a TK4, because ∆(K4) = 3
+(1.7.3)
+(4.4.4)
+(Proposition 1.7.3); the graphs without a K4 minor thus coincide with
+those without a topological K4 minor. The forward implication is left
+as an easy exercise. To prove Hadwiger’s conjecture for r = 4 we only
+need the backward implication, which we prove by induction on |G|.
+Let G be edge-maximal without a TK4. Then (G) 6 2, as at the
+start of the proof of Lemma 3.2.2. Hence either G is a triangle, or the
+assertion follows from the induction hypothesis by Lemma 4.4.4.5
+⇤
+One of the interesting consequences of Proposition 7.3.1 is that all
+the edge-maximal graphs without a K4 minor have the same number of
+edges, and are thus all ‘extremal’:
+Corollary 7.3.2. Every edge-maximal graph G without a K4 minor
+has 2 |G| −3 edges.
+Proof. Induction on |G|.
+⇤
+Corollary 7.3.3. Hadwiger’s conjecture holds for r = 4.
+Proof. If G arises from G1 and G2 by pasting along a complete graph,
+then χ(G) = max {χ(G1), χ(G2)} (see the proof of Proposition 5.5.2).
+Hence, Proposition 7.3.1 implies by induction on |G| that all edge-maxi-
+mal (and hence all) graphs without a K4 minor can be 3-coloured.
+⇤
+It is also possible to prove Corollary 7.3.3 by a simple direct argument
+(Exercise 33).
+4 This was deﬁned formally in Chapter 5.5.
+5 The proof of this lemma is elementary and can be read independently of the
+rest of Chapter 4.
+
+7.3 Hadwiger’s conjecture
+191
+By the four colour theorem, Hadwiger’s conjecture for r = 5 follows
+from the following structure theorem for the graphs without a K5 minor,
+just as it follows from Proposition 7.3.1 for r = 4. The proof of Theorem
+7.3.4 is similar to that of Proposition 7.3.1, but considerably longer. We
+therefore state the theorem without proof:
+Theorem 7.3.4. (Wagner 1937)
+Let G be an edge-maximal graph without a K5 minor. If |G| > 4 then
+G can be constructed recursively, by pasting along triangles and K2s,
+from plane triangulations and copies of the graph W (Fig. 7.3.1).
+=
+=
+Fig. 7.3.1. Three representations of the Wagner graph W
+Using Corollary 4.2.10, one can easily compute which of the graphs
+(4.2.10)
+constructed as in Theorem 7.3.4 have the most edges. It turns out that
+these extremal graphs without a K5 minor have no more edges than
+those that are extremal with respect to {IK5, IK3,3}, i.e. the maximal
+planar graphs:
+Corollary 7.3.5. A graph with n vertices and no K5 minor has at most
+3n −6 edges.
+⇤
+Since χ(W) = 3, Theorem 7.3.4 and the four colour theorem imply
+Hadwiger’s conjecture for r = 5:
+Corollary 7.3.6. Hadwiger’s conjecture holds for r = 5.
+⇤
+The Hadwiger conjecture for r = 6 is again substantially more dif-
+ﬁcult than the case r = 5, and again it relies on the four colour theo-
+rem. The proof shows (without using the four colour theorem) that any
+minimal-order counterexample arises from a planar graph by adding one
+vertex – so by the four colour theorem it is not a counterexample after all.
+Theorem 7.3.7. (Robertson, Seymour & Thomas 1993)
+Hadwiger’s conjecture holds for r = 6.
+
+192
+7. Extremal Graph Theory
+As mentioned earlier, the challenge posed by Hadwiger’s conjecture
+is to devise a proof technique that makes better use of the assumption of
+χ > r than just using its consequence of δ > r −1 in a suitable subgraph,
+which we know cannot force a Kr minor (Theorem 7.2.4). See the notes
+for some recent advances in this direction.
+If we resign ourselves to using just δ > r −1, we can still ask what
+additional assumptions might help in making this force a Kr minor.
+Theorem 7.2.7 says that an assumption of large girth has this e↵ect;
+see also Exercise 32. In fact, a much weaker assumption suﬃces: for
+any ﬁxed s 2 N and all large enough d depending only on s, the graphs
+G 6◆Ks,s of average degree at least d can be shown to have Kr minors
+for r considerably larger than d. For Hadwiger’s conjecture, this implies
+the following:
+Theorem 7.3.8. (K¨uhn & Osthus 2005)
+For every integer s there is an integer rs such that Hadwiger’s conjecture
+holds for all graphs G 6◆Ks,s and r > rs.
+The strengthening of Hadwiger’s conjecture that graphs of chro-
+matic number at least r contain Kr as a topological minor has become
+known as Haj´os’s conjecture. It is false in general, but Theorem 7.2.7
+implies it for graphs of large girth:
+Corollary 7.3.9. There is a constant g such that all graphs G of girth
+at least g satisfy the implication χ(G) > r ) G ◆TKr for all r.
+Proof. Let g be the constant from Theorem 7.2.7. If χ(G) > r then, by
+(5.2.3)
+(7.2.7)
+Lemma 5.2.3, G has a subgraph H of minimum degree δ(H) > r −1. As
+g(H) > g(G) > g, Theorem 7.2.7 implies that G ◆H ◆TKr.
+⇤
+7.4 Szemer´edi’s regularity lemma
+Some 50 years ago, in the course of the proof of a theorem about arith-
+metic progressions of integers, Szemer´edi developed a graph-theoretical
+tool that has since come to dominate methods in extremal graph theory
+like none other: his regularity lemma. Very roughly, the lemma says
+that all graphs can be approximated by random graphs in the following
+sense: every graph can be partitioned, into a bounded number of equal
+parts, so that most of its edges run between di↵erent parts and the edges
+between any two parts are distributed fairly uniformly – just as we would
+expect it if they had been generated at random.

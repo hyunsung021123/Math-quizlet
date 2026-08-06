@@ -1,0 +1,275 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.ex Exercises (분할 part 2)
+직전 소단원: 「8.8 Infinite graphs as limits of finite ones」
+[연습문제]
+Exercises
+289
+90.+ (for topologists) In a locally compact, connected, and locally connected
+Hausdor↵space X, consider sequences U1 ◆U2 ◆. . . of open, non-
+empty, connected subsets with compact frontiers such that T
+i2N Ui = ;.
+Call such a sequence equivalent to another such sequence if every set
+of one sequence contains some set of the other sequence and vice versa.
+Note that this is indeed an equivalence relation, and call its classes the
+Freudenthal ends of X. Now add these to the space X, and deﬁne a
+natural topology on the extended space ˆ
+X that makes it homeomorphic
+to |X| if X is a graph, by a homeomorphism that is the identity on X.
+91.+ Let G be a connected countable graph that is not locally ﬁnite. Show
+that |G| is not compact, but that ⌦(G) is compact if and only if for
+every ﬁnite set S ✓V (G) only ﬁnitely many components of G −S
+contain a ray.
+92.+ Let G be a connected graph. Assuming that G has a normal spanning
+tree, deﬁne a metric on |G| that induces its usual topology. Conversely,
+use Exercise 43 to show that if V [ ⌦✓|G| is metrizable then G has a
+normal spanning tree.
+93.
+Find a graph G for which |G| is not metrizable.
+(Hint. Rather than thinking of metrics directly, recall some properties
+of metric spaces, and construct a graph G without such a property.)
+A topological space X is locally connected if for every x 2 X and every neigh-
+bourhood U of x there is an open connected neighbourhood U 0 ✓U of x.
+A continuum is a compact, connected Hausdor↵space. By a theorem of gen-
+eral topology, every locally connected metric continuum is arc-connected.
+94.+ Show that, for G connected and locally ﬁnite, every connected standard
+subspace of |G| is locally connected. Using the theorem cited above,
+deduce Lemma 8.6.5.
+95.+ Prove Lemma 8.6.6 directly, without relying on Lemma 8.6.5.
+96.
+Let G be a locally ﬁnite graph, and X a standard subspace of |G|
+spanned by a set of at least two edges. Show that X is a circle if and
+only if, for every two distinct edges e, e0 2 E(X), the subspace X r˚e is
+connected but X r (˚e [˚e0) is disconnected.
+97.
+Does every inﬁnite locally ﬁnite 2-connected graph contain an inﬁnite
+circuit? Does it contain an inﬁnite bond?
+98.
+Consider a locally ﬁnite graph.
+(i) Show that every inﬁnite circuit meets some inﬁnite bond in ex-
+actly one edge.
+(ii) Show that every inﬁnite bond meets some inﬁnite circuit in ex-
+actly one edge.
+99.
+Show that the union of all the edges contained in an arc or circle C in
+|G| is dense in C.
+100.+ Prove that the circle shown in Figure 8.6.1 is really a circle, by exhibit-
+ing a homeomorphism with S1.
+
+290
+8. Inﬁnite Graphs
+101.
+Every arc induces on its points a linear ordering inherited from [0, 1].
+Call an arc in |G| wild if it induces on some subset of its vertices the
+ordering of the rationals: between every two there lies another. Show
+that every arc containing uncountably many ends is wild.
+102.
+Find a locally ﬁnite graph G with a connected standard subspace of
+|G| that is the closure of a union of disjoint circles.
+103.
+Show that, for G locally ﬁnite, a closed standard subspace C of |G| is a
+circle in |G| if and only if C is connected, every vertex in C is incident
+with exactly two edges in C, and every end in C has topological degree 2.
+104.
+Let T be a locally ﬁnite tree. Construct a continuous map σ: [0, 1]!|T|
+that maps 0 and 1 to the root and traverses every edge exactly twice,
+once in each direction. (Formally: deﬁne σ so that every inner point of
+an edge is the image of exactly two points in [0, 1].)
+(Hint. Deﬁne σ as a limit of similar maps σn for ﬁnite subtrees Tn.)
+105.
+Let G be a connected locally ﬁnite graph.
+Show that the following
+assertions are equivalent for a spanning subgraph T of G:
+(i) T is a topological spanning tree of |G|;
+(ii) T is edge-maximal with T containing no circle;
+(iii) T is edge-minimal with T a connected subspace of |G|.
+106.−(i) Observe that a topological spanning tree need not be homeomorphic
+to a tree. Is it homeomorphic to the space |T| for a suitable tree T?
+(ii) Find a graph G with an ordinary spanning tree T whose closure
+in |G| is not arc-connected.
+107.
+Let T be an end-faithful spanning tree of a locally ﬁnite graph G. (Such
+trees are deﬁned in Exercise 84.) Is T a topological spanning tree of |G|?
+108.
+Let G be locally ﬁnite and connected, with vertices v0, v1, . . . say. Let
+Gn be the minor of G obtained by contracting every component of
+G −{v0, . . . , vn} to a vertex. Construct spanning trees Tn of Gn so
+that S
+n E(Tn) is the edge set of a topological spanning tree of G.
+109.
+Let F be a set of edges in a locally ﬁnite connected graph G = (V, E).
+(i) Show that F is a circuit if and only if F is not contained in the
+edge set of any topological spanning tree of G and is minimal
+with this property.
+(ii) Show that F is a ﬁnite bond if and only if F meets the edge set
+of every topological spanning tree of G and is minimal with this
+property.
+110.
+Extend Exercise 51 of Chapter 1 to characterizations of the bonds, and
+of the ﬁnite bonds, in a locally ﬁnite connected graph.
+111.+ Prove a topological tree-packing theorem for standard subspaces X of
+locally ﬁnite graphs. Here, a topological spanning tree of X is a con-
+nected closed subspace of X that contains all its vertices but no circle.
+
+Exercises
+291
+112.
+To show that Theorem 3.2.6 does not generalize to inﬁnite graphs with
+its ﬁnitary cycle space, construct a 3-connected locally ﬁnite planar
+graph with a separating cycle that is not a ﬁnite sum of non-separating
+induced cycles. Can you ﬁnd an example where even inﬁnite thin sums
+of ﬁnite non-separating induced cycles do not generate all separating
+cycles?
+113.−As a converse to Theorem 8.7.1 (iii), show that the fundamental cir-
+cuits of an ordinary spanning tree T of a locally ﬁnite graph G do not
+generate C(G) unless T is a topological spanning tree.
+114.−Explain why Theorem 8.7.3 is needed in the proof of Corollary 8.7.4:
+can’t we just combine the constituent sums of circuits for the Di (from
+our assumption that Di 2 C(G)) into one big family?
+115.
+Deduce Corollary 8.7.4 from Theorem 8.7.1, not using Theorem 8.7.3.
+116.
+If a ﬁnite set D of edges meets every ﬁnite cut of G evenly, must it also
+meet every inﬁnite cut evenly?
+117.
+Prove Theorem 8.7.3 by the method used to prove Theorem 8.6.9.
+118.
+Prove Lemma 8.6.5 by the method used to prove Theorem 8.7.3.
+For the next ten exercises, let G be a locally ﬁnite connected graph.
+Let
+C = C(G), and deﬁne the cut space B = B(G) of G as in Chapter 1.9. Note
+that cuts may now be inﬁnite. Deﬁne ‘generate’ for cuts as for circuits, allowing
+inﬁnite thin sums. Given a set F ✓E(G), write Fﬁn := { F 2 F : |F| < 1 },
+F ? := { D 2 E(G) : |D \ F| 2 2N 8F 2 F } and (Fﬁn)? =: F ?
+ﬁn.
+119.
+Show that C and B are closed in the edge space E = {0, 1}E of G if
+{0, 1} carries the discrete topology and {0, 1}E the product topology.
+120.
+Show that the deﬁnition of Cﬁn given above coincides with that given in
+the text: that the ﬁnite elements of C are ﬁnite sums of ﬁnite circuits.
+121.
+(i) Show that the fundamental circuits of any ordinary spanning tree
+of G generate Cﬁn by ﬁnite sums, but that they need not generate C.
+(ii) Show that the fundamental cuts of any topological spanning tree
+of G generate Bﬁn by ﬁnite sums, but that they need not generate B.
+122.
+(i)−Show that B is a subspace of E(G) generated by ﬁnite cuts.
+(ii) Show that every cut is a disjoint union of bonds.
+(iii)+ Show that the fundamental cuts of any ordinary spanning tree
+of G generate B.
+(iv)+ Show that B is closed under inﬁnite thin sums.
+123.
+(i)−Find in this book a proof, or sketch of a proof, for each of the
+following two statements: C = B?
+ﬁn and B = C?
+ﬁn.
+(ii)+ Show that B? = Cﬁn and, if G is 2-edge-connected, C? = Bﬁn.
+
+292
+8. Inﬁnite Graphs
+124.+ Write ˆC for the set of circuits in G, and ˆB for the set of bonds.
+(i) Show that ˆC?
+ﬁn = C?
+ﬁn and ˆB?
+ﬁn = B?
+ﬁn.
+(ii) Show that every element of ˆC? is a disjoint union of ﬁnite bonds,
+and that every element of ˆB? is a disjoint union of ﬁnite circuits.
+(iii) Construct 2-connected graphs with C? ( ˆC? or B? ( ˆB?.
+125.
+Extending Gallai’s partition theorem of Exercise 55 (ii), Chapter 1,
+show that E(G) can be partitioned into a set C 2 C and a set D 2 B.
+(This strengthens Exercise 25.)
+126.
+Let F ✓E(G) be a set of edges.
+(i)−Show that F extends to a cut if it contains no odd circuit.
+(ii)+ Show that F extends to some D 2 C if it contains no odd bond.
+127.+ Let H be an abelian group. The group CH of H-circulations on |G|
+consists of the maps :
+!
+E ! H that satisfy (F1) and (X, Y ) = 0 for
+any ﬁnite cut E(X, Y ) of G. (See Chapter 6.1 for notation.) Extend
+Exercise 8 of Chapter 6 to CH, with EH and DH as deﬁned there.
+128.
+Let X be a connected standard subspace of |G|. Call a continuous map
+σ: S1 ! X a topological Euler tour of X if it traverses every edge in
+E(X) exactly once. (Formally: every inner point of an edge in E(X)
+must be the image of exactly one point in S1.) Show that X admits a
+topological Euler tour if and only if E(X) 2 C(G).
+129.+ An open Euler tour in an inﬁnite connected graph G is a 2-way inﬁnite
+walk . . . e−1v0e0 . . . that contains every edge of G exactly once. Show
+that G contains an open Euler tour if and only if G is countable, every
+vertex has even or inﬁnite degree, and any ﬁnite cut F = E(V1, V2)
+with both V1 and V2 inﬁnite is odd.
+130.
+By Exercise 23 of Chapter 4, every ﬁnite 2-connected graph without
+a K4 or K2,3 minor contains a Hamilton cycle, one that contains all
+its vertices. Show that every locally ﬁnite such graph has a Hamilton
+circle, a circle in |G| containing all the vertices (and ends) of G.
+131.+ Extend Theorem 2.4.4 to packings and coverings of locally ﬁnite graphs
+with topological spanning trees in appropriate spaces obtained from |G|.
+132.
+Where in the proof of Theorem 8.8.2 do we use that G is connected?
+133.
+Use the techniques from Section 8.8 to prove that the wild circle is
+indeed a circle. Your proof may be informal in its handling of the wild
+circle graph G – use a picture rather than its formal deﬁnition.
+134.+ Use the methods from Section 8.8 to prove that connected standard
+subspaces of |G|, for G locally ﬁnite, have topological spanning trees:
+closed connected subspaces containing all their vertices.
+135.+ Consider the space kGk for the edgeless countably inﬁnite graph G.
+Have you met this space before in another guise?
+
+Notes
+293
+Notes
+There is no comprehensive monograph on inﬁnite graph theory, but over time
+several surveys have been published. A relatively wide-ranging collection of
+survey articles can be found in R. Diestel (ed.), Directions in Inﬁnite Graph
+Theory and Combinatorics, North-Holland 1992. (This has been reprinted as
+Volume 95 of the journal Discrete Mathematics.) Some of the articles there
+address purely graph-theoretic aspects of inﬁnite graphs, while others point to
+connections with other ﬁelds in mathematics such as di↵erential geometry, to-
+pological groups, or logic. A similar collection, edited by R. Diestel, B. Mohar
+and G. Hahn, appeared in 2011 as a special issue of Discrete Mathematics
+(vol. 311). It includes a survey of everything to do with |G|, the topological
+space consisting of an inﬁnite graph G and its ends: R. Diestel, Locally ﬁnite
+graphs with ends: a topological approach, arXiv:0912.4213.
+Another very
+instructive survey in this volume is by L. Soukup, Elementary submodels in
+inﬁnite combinatorics, arXiv:1007.4309.
+A survey of inﬁnite graph theory as a whole was given by C. Thomas-
+sen, Inﬁnite graphs, in (L.W. Beineke & R.J. Wilson, eds.) Selected Topics in
+Graph Theory 2, Academic Press 1983. This also treats a number of aspects
+of inﬁnite graph theory not considered in our chapter here, including problems
+of Erd˝os concerning inﬁnite chromatic number, inﬁnite Ramsey theory (also
+known as partition calculus), and reconstruction. The ﬁrst two of these topics
+receive much attention also in A. Hajnal’s chapter of the Handbook of Combi-
+natorics (R.L. Graham, M. Gr¨otschel & L. Lov´asz, eds.), North-Holland 1995,
+which has a strong set-theoretical ﬂavour. P´eter Komj´ath is currently prepar-
+ing a monograph about this kind of inﬁnite graph theory. A speciﬁc survey on
+reconstruction by Nash-Williams can be found in the Directions volume cited
+above. R. Halin, Miscellaneous problems on inﬁnite graphs, J. Graph Theory
+35 (2000), 128–151, contains his legacy of unsolved inﬁnite graph problems.
+Halin’s book, Graphentheorie (2nd ed.), Wissenschaftliche Buchgesell-
+schaft 1989, is also good general reference for inﬁnite graphs. A more speciﬁc
+monograph about simplicial decompositions of inﬁnite graphs (see Chapter 12)
+is R. Diestel, Graph Decompositions, Oxford University Press 1990. Our Chap-
+ter 12.6 closes with two theorems about forbidden minors in inﬁnite graphs.
+When sets get bigger than countable, combinatorial set theory o↵ers some
+interesting ways other than cardinality to distinguish ‘small’ from ‘large’ sets.
+Among these are the use of clubs and stationary sets, of ultraﬁlters, and of
+measure and category. See P. Erd˝os, A. Hajnal, A. M´at´e & R. Rado, Combi-
+natorial Set Theory: partition relations for cardinals, North-Holland 1984;
+W.W. Comfort & S. Negropontis, The Theory of Ultraﬁlters, Springer 1974;
+J.C. Oxtoby, Measure and Category: a survey of the analogies between topo-
+logical and measure spaces (2nd ed.), Springer 1980.
+Inﬁnite matroids, whose study long lay dormant for want of a clear
+idea of what exactly they should be, were ﬁnally axiomatized in H. Bruhn,
+R. Diestel, M. Kriesell & P. Wollan, Axioms for inﬁnite matroids, Adv. Math.
+239 (2013), 18–46, arXiv:1003.3919. Since that paper, the theory of inﬁnite
+matroids has ﬂourished. It draws much inspiration from topological inﬁnite
+graph theory as presented in Sections 8.6–8.7, but also has its own prob-
+lems and agenda. Regular updates can be found in Nathan Bowler’s blog at

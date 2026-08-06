@@ -1,0 +1,144 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 12. Graph Minors
+현재 소단원: 12.2 The graph minor theorem for trees
+직전 소단원: 「12.1 Well-quasi-ordering」
+[본문]
+365
+segment.) Choose An 2 [X]<! so that some bad sequence in [X]<! starts
+with A0, . . . , An and |An| is as small as possible.
+Clearly, (An)n2N is a bad sequence in [X]<!; in particular, An 6= ;
+for all n. For each n pick an element an 2 An and set Bn := An r {an}.
+By Corollary 12.1.2, the sequence (an)n2N has an inﬁnite increasing
+subsequence (ani)i2N. By the minimal choice of An0, the sequence
+A0, . . . , An0−1, Bn0, Bn1, Bn2, . . .
+is good; consider a good pair. Since (An)n2N is bad, this pair cannot
+have the form (Ai, Aj) or (Ai, Bj), as Bj 6 Aj.
+So it has the form
+(Bi, Bj). Extending the injection Bi ! Bj by ai 7! aj, we deduce again
+that (Ai, Aj) is good, a contradiction.
+⇤
+12.2 The graph minor theorem for trees
+The graph minor theorem can be expressed by saying that the ﬁnite
+graphs are well-quasi-ordered by the minor relation 4. Indeed, by Pro-
+position 12.1.1 and the obvious fact that no strictly descending sequence
+of minors can be inﬁnite, being well-quasi-ordered is equivalent to the
+non-existence of an inﬁnite antichain, the formulation used earlier.
+In this section, we prove a strong version of the graph minor theorem
+for trees:
+Theorem 12.2.1. (Kruskal 1960)
+[12.7.1]
+The ﬁnite trees are well-quasi-ordered by the topological minor relation.
+We shall base the proof of Theorem 12.2.1 on the following notion
+of an embedding between rooted trees, which strengthens the usual em-
+bedding as a topological minor. Consider two trees T and T 0, with roots
+r and r0 say. Let us write T 6 T 0 if there exists an isomorphism ', from
+T 6 T 0
+some subdivision of T to a subtree T 00 of T 0, that preserves the tree-order
+on V (T) associated with T and r. (Thus if x < y in T then '(x) < '(y)
+in T 0; see Fig. 12.2.1.) As one easily checks, this is a quasi-ordering on
+the class of all rooted trees.
+Proof of Theorem 12.2.1. We show that the rooted trees are well-quasi-
+(12.1.3)
+ordered by the relation 6 deﬁned above; this clearly implies the theorem.
+Suppose not. To derive a contradiction, we proceed as in the proof
+of Lemma 12.1.3. Given n 2 N, assume inductively that we have chosen
+a sequence T0, . . . , Tn−1 of rooted trees such that some bad sequence of
+rooted trees starts with this sequence. Choose as Tn a minimum-order
+Tn
+12.2 The graph minor theorem for trees
+
+366
+12. Graph Minors
+r
+T
+r0
+'
+'
+(r)
+T 0
+Fig. 12.2.1. An embedding of T in T 0 showing that T 6 T 0
+rooted tree such that some bad sequence starts with T0, . . . , Tn. For each
+n 2 N, denote the root of Tn by rn.
+rn
+Clearly, (Tn)n2N is a bad sequence. For each n, let An denote the
+An
+set of components of Tn −rn, made into rooted trees by choosing the
+neighbours of rn as their roots. Note that the tree-order of these trees
+is that induced by Tn. Let us prove that the set A := S
+n2N An of all
+A
+these trees is well-quasi-ordered.
+Let (T k)k2N be any sequence of trees in A. For every k 2 N choose
+T k
+an n = n(k) such that T k 2 An. Pick a k with smallest n(k). Then
+n(k)
+T0, . . . , Tn(k)−1, T k, T k+1, . . .
+is a good sequence, by the minimal choice of Tn(k) and T k ( Tn(k). Let
+(T, T 0) be a good pair of this sequence. Since (Tn)n2N is bad, T cannot
+be among the ﬁrst n(k) members T0, . . . , Tn(k)−1 of our sequence: then
+T 0 would be some T i with i > k, i.e.
+T 6 T 0 = T i 6 Tn(i) ;
+since n(k) 6 n(i) by the choice of k, this would make (T, Tn(i)) a good
+pair in the bad sequence (Tn)n2N. Hence (T, T 0) is a good pair also in
+(T k)k2N, completing the proof that A is well-quasi-ordered.
+By Lemma 12.1.3,1 the sequence (An)n2N in [A]<! has a good pair
+(Ai, Aj); let f: Ai ! Aj be injective with T 6 f(T) for all T 2 Ai. Now
+i, j
+extend the union of the embeddings T ! f(T) to a map ' from V (Ti)
+to V (Tj) by letting '(ri) := rj. This map ' preserves the tree-order
+of Ti, and it deﬁnes an embedding to show that Ti 6 Tj, since the edges
+rir 2 Ti map naturally to the paths rjTj'(r). Hence (Ti, Tj) is a good
+pair in our original bad sequence of rooted trees, a contradiction.
+⇤
+1 Any readers worried that we might need the lemma for sequences or multisets
+rather than just sets here, note that isomorphic elements of An are not identiﬁed: we
+always have |An| = d(rn).
+
+367
+12.3 Tree-decompositions
+Trees are graphs with some very distinctive and fundamental properties;
+consider Theorem 1.5.1, or the more sophisticated example of Kruskal’s
+theorem. It is therefore legitimate to ask to what degree those prop-
+erties can be transferred to more general graphs, graphs that are not
+themselves trees but tree-like in some sense.2 In this section, we study
+a concept of tree-likeness that permits generalizations of all the tree
+properties referred to above (including Kruskal’s theorem), and which
+plays a crucial role in the proof of the graph minor theorem.
+Let G be a graph, T a tree, and let V = (Vt)t2T be a family of
+bags Vt ✓V (G) indexed by the nodes t of T. The pair (T, V) is called a
+bags
+tree-decomposition of G if it satisﬁes the following three conditions:
+tree-
+decomposition
+(T1) V (G) = S
+t2T Vt;
+(T2) for every edge e 2 G there exists a t 2 T such that both ends of e
+lie in Vt;
+(T3) Vt1 \ Vt3 ✓Vt2 whenever t1, t2, t3 2 T satisfy t2 2 t1Tt3.
+Conditions (T1) and (T2) together say that G is the union of the sub-
+graphs G[Vt]. We call these subgraphs the parts of (T, V), and say that
+parts
+(T, V) is a tree-decomposition of G into the bags Vt or the parts G[Vt].
+Condition (T3) implies that the bags of (T, V) are organized roughly like
+a tree (Fig. 12.3.1).
+T
+G
+t1
+t2
+t3
+t?
+?
+e?
+?
+Vt3
+Fig. 12.3.1. Edges and bags ruled out by (T2) and (T3)
+Before we discuss the role that tree-decompositions play in the proof
+of the minor theorem, let us note some of their basic properties. Consider
+a ﬁxed tree-decomposition (T, V) of G, with V = (Vt)t2T as above.
+(T, V), Vt
+Perhaps the most important feature of a tree-decomposition is that
+it transfers the separation properties of its tree to the graph decomposed:
+2 What exactly this ‘sense’ should be will depend both on the property considered
+and on its intended application.
+12.3 Tree-decompositions

@@ -1,0 +1,413 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 8. Infinite Graphs
+현재 소단원: 8.6 Graphs with ends: the complete picture (분할 part 1)
+직전 소단원: 「8.5 Recursive structures」
+[본문]
+263
+site class under ⇡as in its own.8 To see that a vertex v 2 G−U is happy
+with ⇡, let i be minimal such that v 2 Gni and recall that v was happy
+with ⇡ni. As both v and its neighbours in G lie in U [ V (Gni −Gni−1),
+and ⇡agrees with ⇡ni on this set, v is happy also with ⇡. Vertices in U0
+are happy with ⇡, because they were happy with ⇡n0, and ⇡agrees with
+⇡n0 on U0 and all its neighbours. Vertices in U1 are also happy. Indeed,
+every u 2 U1 has inﬁnitely many neighbours in some Cn, and hence in
+some Gni; let i be minimal with this property. Then u has inﬁnitely
+many opposite neighbours under ⇡ni in Gni, and hence in Gni −Gni−1.
+Since ⇡ni agrees with ⇡on both U and Gni −Gni−1, our vertex u has
+inﬁnitely many opposite neighbours also under ⇡. Vertices in U2, ﬁnally,
+are happy with every ⇡ni.
+By our choice of ni, at least one of their
+opposite neighbours under ⇡ni must lie in Gni −Gni−1. Since ⇡ni agrees
+with ⇡on both U2 and Gni −Gni−1, this gives every u 2 U2 at least one
+opposite neighbour under ⇡in every Gni −Gni−1. Hence u has inﬁnitely
+many opposite neighbours under ⇡, which clearly makes it happy.
+⇤
+8.6 Graphs with ends: the complete picture
+In this section we shall develop a deeper understanding of the global
+structure of inﬁnite graphs, especially locally ﬁnite ones, that can be
+attained only by studying their ends. This structure is intrinsically topo-
+logical, because topology best captures our intuition about convergence.9
+Our ﬁrst goal will be to make precise our intuitive idea that the
+ends of a graph are the ‘points at inﬁnity’ to which its rays converge.
+To do so, we shall deﬁne a topological space |G| associated with a graph
+G = (V, E, ⌦) and its ends.10
+By considering topological versions of
+V, E, ⌦
+paths, cycles and spanning trees in this space, we shall then be able to
+extend to inﬁnite graphs some parts of ﬁnite graph theory that would
+not otherwise have inﬁnite counterparts; see the notes for more examples.
+Thus, the ends of an inﬁnite graph turn out to be more than a curious
+phenomenon: they form an integral part of the picture, without which
+it cannot be properly understood.
+To build the space |G| formally, we start with the set V [ ⌦. For
+every edge e = uv we add a set˚e = (u, v) of continuum many points, mak-
+(u, v)
+ing these sets ˚e disjoint from each other and from V [⌦. We then choose
+for each e some ﬁxed bijection between ˚e and the real interval (0, 1), and
+8 It is only by tradition that such partitions are called ‘unfriendly’; our vertices
+love them.
+9 Only point-set topology is needed for the text. See the exercises for more.
+10 The notation of |G| comes from topology and clashes with our notation for the
+order of G. But there is little danger of confusion, so we keep both.
+8.6 Graphs with ends: the complete picture
+
+264
+8. Inﬁnite Graphs
+extend this bijection to one between [u, v] := {u}[˚e[{v} and [0, 1]. This
+[u, v]
+bijection deﬁnes a metric on [u, v]; we call [u, v] a topological edge with
+inner points x 2 ˚e. Given any F ✓E we write ˚
+F := S{˚e | e 2 F }. When
+˚
+F
+we speak of a ‘graph’ H ✓G, we shall often also mean its corresponding
+point set V (H) [ ˚
+E(H).
+Having thus deﬁned the point set of |G|, let us choose a basis of open
+sets to deﬁne its topology. For every edge uv, declare as open all subsets
+of (u, v) that correspond, by our ﬁxed bijection between (u, v) and (0, 1),
+to an open set in (0, 1). For every vertex u and ✏> 0, declare as open
+the ‘open star around u of radius ✏’, that is, the set of all points on edges
+[u, v] at distance less than ✏from u, measured individually for each edge
+in its metric inherited from [0, 1]. Finally, for every end ! and every ﬁnite
+set S ✓V, there is a unique component C(S, !) of G −S that contains
+C(S, !)
+rays from !. Let ⌦(S, !) := { !0 2 ⌦| C(S, !0) = C(S, !) }. For every
+✏> 0, write ˚
+E✏(S, !) for the set of all inner points of S–C(S, !) edges
+at distance less than ✏from their endpoint in C(S, !). Then declare as
+open all sets of the form
+ˆC✏(S, !) := C(S, !) [ ⌦(S, !) [ ˚
+E✏(S, !) .
+ˆC✏(S, !)
+This completes the deﬁnition of |G|, whose open sets are the unions of
+|G|
+the sets we explicitly chose as open above.
+The closure of a set X ✓|G| will be denoted by X. For example,
+closure X
+V = V [ ⌦(because every neighbourhood of an end contains a vertex),
+and the closure of a ray is obtained by adding its end. More generally,
+the closure of the set of teeth of a comb contains a unique end, the end
+of its spine. Conversely, if U ✓V and R 2 ! 2 ⌦\ U, there is a comb
+with spine R and teeth in U (Exercise 83). In particular, the closure of
+the subgraph C(S, !) considered above is the set C(S, !) [ ⌦(S, !).
+The subspaces X of |G| we shall be interested in are usually the clo-
+sure of a subgraph H of G, i.e., of the form X = U [ ˚
+D for H = (U, D).
+standard
+subspace
+We write V (X) for U and E(X) for D, and call such subspaces standard.
+We also refer to such X as H, or even as D if H has no isolated vertices,
+V (X), E(X)
+and then say that X is spanned by D. Note that the ends in X are
+always ends of G, not of H; in particular, they need not have a ray in H.
+By deﬁnition, |G| is always Hausdor↵; indeed one can show that it is
+normal. When G is connected and locally ﬁnite, then |G| is compact:11
+Proposition 8.6.1. If G is connected and locally ﬁnite, then |G| is a
+compact Hausdor↵space.
+Proof.
+Let O be an open cover of |G|; we show that O has a ﬁnite
+(8.1.2)
+subcover. Pick a vertex v0 2 G, write Dn for the (ﬁnite) set of vertices
+at distance n from v0, and put Sn := D0 [. . .[Dn−1. For every v 2 Dn,
+11 Topologists call |G| the Freudenthal compactiﬁcation of G.
+
+8.6 Graphs with ends: the complete picture
+265
+let C(v) denote the component of G −Sn containing v, and let ˆC(v) be
+its closure together with all inner points of C(v)–Sn edges. Then G[Sn]
+ˆC(v)
+and these ˆC(v) together partition |G|.
+We wish to prove that, for some n, each of the sets ˆC(v) with v 2 Dn
+is contained in some O(v) 2 O. For then we can take a ﬁnite subcover of
+O for G[Sn] (which is compact, being a ﬁnite union of edges and vertices),
+and add to it these ﬁnitely many sets O(v) to obtain the desired ﬁnite
+subcover for |G|.
+Suppose there is no such n. Then for each n the set Vn of vertices
+v 2 Dn such that no set from O contains ˆC(v) is non-empty. Moreover,
+for every neighbour u 2 Dn−1 of v 2 Vn we have C(v) ✓C(u) because
+Sn−1 ✓Sn , and hence u 2 Vn−1; let f(v) be such a vertex u. By the
+inﬁnity lemma (8.1.2) there is a ray R = v0v1 . . . with vn 2 Vn for all n.
+Let ! be its end, and let O 2 O contain !. Since O is open, it contains a
+basic open neighbourhood of !: there exist a ﬁnite set S ✓V and ✏> 0
+such that ˆC✏(S, !) ✓O. Now choose n large enough that Sn contains S
+and all its neighbours. Then C(vn) lies inside a component of G−S. As
+C(vn) contains the ray vnR 2 !, this component must be C(S, !). Thus
+ˆC(vn) ✓ˆC✏(S, !) ✓O 2 O ,
+contradicting the fact that vn 2 Vn.
+⇤
+If G has a vertex of inﬁnite degree then |G| cannot be compact.
+(Why not?) But ⌦✓|G| can be compact; see Exercise 91 for when it is.
+What else can we say about the space |G| in general? For example,
+is it metrizable? Using a normal spanning tree T of G, it is indeed not
+diﬃcult to deﬁne a metric on |G| that induces its topology. But not
+every connected graph has a normal spanning tree, and it is not easy
+to determine in graph-theoretical terms which graphs do. Surprisingly,
+though, it is possible to deduce the existence of a normal spanning tree
+from that of a deﬁning metric on |G|. Thus whenever |G| is metrizable,
+a metric can be made visible in a natural and structural way.
+Theorem 8.6.2. (Diestel 2006; Pitz 2020)
+For a connected graph G, the following assertions are equivalent:
+(i) The space |G| is metrizable.
+(ii) G has a normal spanning tree.
+(iii) All minors of G have countable colouring number.
+The proof of the equivalence of (i) and (ii) in Theorem 8.6.2 is indicated
+in Exercises 43 and 92. More on (iii) can be found in the notes.
+
+266
+8. Inﬁnite Graphs
+Our next aim is to review, or newly deﬁne, some topological no-
+tions of paths and connectedness, of cycles, and of spanning trees. By
+substituting these topological notions with respect to |G| for the corre-
+sponding graph-theoretical notions with respect to G one can extend to
+locally ﬁnite inﬁnite graphs a number of theorems about paths, cycles
+and spanning trees in ﬁnite graphs whose ordinary inﬁnite versions are
+false. We shall do this, as a case in point, for the tree packing theorem
+of Nash-Williams and Tutte, Theorem 2.4.1; see the notes for more.
+Let X be an arbitrary Hausdor↵space. (Later, this will be a sub-
+X
+space of |G|.) X is (topologically) connected if it is not a union of two
+connected
+disjoint non-empty open subsets.12 Note that continuous images of con-
+nected spaces are connected. For example, since the real interval [0, 1]
+is connected,13 so are its continuous images in X.
+A homeomorphic image of [0, 1] in X is an arc in X; it links the
+arc
+images of 0 and 1, which are its endpoints. Every ﬁnite path in G deﬁnes
+an arc in |G| in an obvious way. Similarly, every ray deﬁnes an arc linking
+its starting vertex to its end, and a double ray in G forms an arc with
+the two ends of its tails if these ends are distinct.
+The (topological) degree of an end ! of G in a standard subspace X
+end degrees
+in subspaces
+of |G| is the supremum, in fact maximum, of all integers k such that X
+contains k arcs that end in ! and are otherwise disjoint.
+For the remainder of this section let, unless otherwise mentioned,
+G = (V, E, ⌦) be a ﬁxed connected locally ﬁnite graph.
+G; V, E, ⌦
+Unlike ordinary paths, arcs in |G| can jump across a cut without
+containing an edge from it – but only if the cut is inﬁnite:
+Lemma 8.6.3. (Jumping Arc Lemma)
+[8.7.1]
+Let F ✓E be a cut of G with sides V1, V2.
+(i) If F is ﬁnite, then V1 \V2 = ;, and there is no arc in |G|r ˚
+F with
+one endpoint in V1 and the other in V2.
+(ii) If F is inﬁnite, then V1 \ V2 6= ;, and there will be such an arc if
+both V1 and V2 are connected in G.
+Proof. (i) Suppose that F is ﬁnite. Let S be the set of vertices incident
+(8.2.2)
+with edges in F. Then S is ﬁnite and separates V1 from V2, so for every
+! 2 ⌦the connected graph C(S, !) misses either V1 or V2. But then so
+does every basic open set of the form ˆC✏(S, !). Therefore no end ! lies
+in the closure of both V1 and V2.
+As |G| r ˚
+F = G[V1] [ G[V2] and this union is disjoint, no connected
+subset of |G| r ˚
+F can meet both V1 and V2. Since arcs are continuous
+images of [0, 1] and hence connected, there is no V1–V2 arc in |G| r ˚
+F.
+12 These subsets would be complements of each other, and hence also be closed.
+Note that ‘open’ and ‘closed’ means open and closed in X: when X is a subspace of
+|G| with the subspace topology, the two sets need not be open or closed in |G|.
+13 This takes a few lines to prove – can you prove it?
+
+8.6 Graphs with ends: the complete picture
+267
+(ii) Suppose now that F is inﬁnite. Since G is locally ﬁnite, the set U
+of endvertices of F in V1 is also inﬁnite. By the star-comb lemma (8.2.2),
+there is a comb in G with teeth in U; let ! be the end of its spine. Then
+every basic open neighbourhood ˆC✏(S, !) of ! meets U ✓V1 inﬁnitely
+and hence also meets V2, giving ! 2 V1 \ V2.
+To obtain a V1–V2 arc in |G| r ˚
+F, all we need now is an arc in
+G[V1] and another in G[V2], both ending in !. Such arcs exist if the
+graphs G[Vi] are connected: we can then pick a sequence of vertices in
+Vi converging to !, and apply the star-comb lemma in G[Vi] to obtain
+a comb whose spine is a ray in G[Vi] converging to !. Concatenating
+these two rays yields the desired jumping arc.
+⇤
+To some extent, arcs in |G| assume the role that paths play in ﬁ-
+nite graphs.
+So arcs are important – but how do we ﬁnd them?
+It
+is not always possible to construct arcs as explicitly as in the proof
+of Lemma 8.6.3 (ii). Figure 8.6.1, for example, shows an arc that goes
+through continuum many ends; such arcs cannot be constructed greedily
+by following a ray into its end and emerging from that end on another
+ray, etc.
+There are two basic methods to obtain an arc between two given
+points, say two vertices x and y. One is to use compactness to obtain,
+as a limit of ﬁnite x–y paths, a topologial x–y path, a continuous map
+⇡: [0, 1]!|G| sending 0 to x and 1 to y. A lemma from general topology
+then tells us that this path can be made injective:
+Lemma 8.6.4. The image of a topological x–y path in a Hausdor↵space
+[8.7.3]
+contains an x–y arc.
+To illustrate this method, we will use it in the proof of Theorem 8.7.3.
+Another method is to prove that the subspace in which we wish to
+ﬁnd our x–y arc is topologically connected, and use this to deduce that
+it contains the desired arc. Our next three lemmas provide the tools
+needed to implement this approach in practice; we shall then illustrate
+its use in the proof of Theorem 8.6.9.
+Being linked by an arc is an equivalence relation on the points of
+our Hausdor↵space X: every x–y arc A has a ﬁrst point p on any y–z
+arc A0 (because A0 is closed), and the obvious segments Ap and pA0
+together form an x–z arc in X. The corresponding equivalence classes
+arc-
+component
+are the arc-components of X. If X has only one arc-component, then X
+is arc-connected.
+arc-
+connected
+Since [0, 1] is connected, arc-connectedness implies connectedness.
+The converse implication is false in general, even for spaces X ✓|G|
+with G locally ﬁnite. But it holds in all the cases that matter:
+Lemma 8.6.5. Connected standard subspaces of |G| are arc-connected.
+[8.7]
+
+268
+8. Inﬁnite Graphs
+Our proof of Theorem 8.7.3 will show how one can prove Lemma 8.6.5.
+Two further proofs are indicated in Exercises 94 and 134.
+Lemma 8.6.6. Arc-components of standard subspaces of |G| are closed.
+[8.7]
+Proof. Let A be an arc-component of a standard subspace of |G|. Since
+A is connected, so is its closure A. If A r A 6= ; then its points are
+limits of vertices in A (why?), so A is again standard. Hence A is arc-
+connected, either because A = A or by Lemma 8.6.5. But then A = A,
+by deﬁnition of A. Hence A is closed, as claimed.
+⇤
+Connected standard subspaces of |G| containing two given points
+are much easier to construct than an arc between two points. This has
+to do with the fact that they can be described in purely graph-theoretical
+terms, with reference only to ﬁnite subgraphs of G rather than to |G|.
+The description can be viewed as a topological analogue of the fact that
+a subgraph H of G is connected if and only if it contains an edge from
+every cut of G that separates two of its vertices:
+Lemma 8.6.7. A standard subspace of |G| is connected if and only if it
+[8.7.1]
+contains an edge from every ﬁnite cut of G of which it meets both sides.
+Proof. Let X ✓|G| be a standard subspace. For the forward implication,
+suppose that G has a ﬁnite cut F = E(V1, V2) such that X meets both
+V1 and V2 but has no edge in F. Then
+X ✓|G| r ˚
+F = G[V1] [ G[V2] ,
+and this union is disjoint by Lemma 8.6.3 (i). The induced partition of
+X into non-empty closed subsets of X shows that X is not connected.
+The backward implication holds vacuously if X meets more than
+one component of G; we may therefore assume that G is connected. If
+X is not connected, we can partition it into disjoint non-empty open
+subsets O1 and O2. As X is standard, Ui := Oi \ V (X) 6= ; for both i.
+Let P be a maximal set of edge-disjoint U1–U2 paths in G, and put
+F :=
+[
+{ E(P) | P 2 P } .
+Then E(X)\F = ;, and no component of G−F meets both U1 and U2.
+Extending {U1, U2} to a partition of V in such a way that each compo-
+nent of G −F has all its vertices in one class, we obtain a cut F 0 ✓F
+of G of which X meets both sides. As E(X) \ F = ;, it thus suﬃces to
+show that F is ﬁnite.
+If F is inﬁnite, then so is P. As G is locally ﬁnite, the vertices of
+each P
+2 P are incident with only ﬁnitely many edges of G. We can
+thus inductively ﬁnd an inﬁnite subset of P consisting of paths that are
+
+8.6 Graphs with ends: the complete picture
+269
+not only edge-disjoint but disjoint. As G is connected, the endvertices in
+U1 of these paths have a limit point ! in |G| (Proposition 8.6.1), which
+is also a limit point of their endvertices in U2. Since both O1 and O2
+are closed in |G|, we thus have ! 2 O1 \ O2, contradicting the choice of
+the Oi.
+⇤
+A circle in a topological space is a homeomorphic image of the unit
+circle
+circle S1 ✓R2. For example, if G is the 2-way inﬁnite ladder shown in
+Figure 8.1.3, and we delete all its rungs (the vertical edges), what re-
+mains is a disjoint union of two double rays; its closure in |G|, obtained
+by adding the two ends of G, is a circle. Similarly, the double ray ‘round
+the outside’ of the 1-way ladder forms a circle together with the unique
+end of that ladder.
+It is not hard to show that no arc in |G| can consist entirely of ends.
+This implies that every circle in |G| is a standard subspace; the set of
+edges spanning it will be called its circuit.
+circuit
+A more adventurous example of a circle is shown in Figure 8.6.1.
+Suppose G is the graph obtained from the binary tree T2 by joining for
+every ﬁnite 0–1 sequence ` the vertices `01 and `10 by a new edge e`.
+Together with all the (uncountably many) ends of G, the double rays
+D` 3 e` shown in the ﬁgure form an arc A in |G|, whose union with the
+bottom double ray D is a circle in |G| (Exercise 100). Note that no two
+of the double rays in A are consecutive: between any two there lies a
+third (cf. Exercise 101).
+01
+10
+11
+00
+1
+;
+e ;
+D
+D
+D ;
+`
+01
+`
+10
+`
+D`
+e`
+ 
+Fig. 8.6.1. The Wild Circle
+A topological spanning tree of G is a connected standard subspace T
+of |G| that contains every vertex but contains no circle. Since standard
+subspaces are closed, T also contains every end, and by Lemma 8.6.5 it
+topological
+spanning
+tree
+
+270
+8. Inﬁnite Graphs
+is even arc-connected. With respect to the deletion or addition of edges,
+it is both minimally connected and maximally ‘acirclic’ (Exercise 105).
+One might expect that the closure T of an ordinary spanning tree
+T of G is always a topological spanning tree of |G|, but this is not the
+case: T may well contain a circle (Figure 8.6.2). Conversely, a subgraph
+whose closure is a topological spanning tree may well be disconnected:
+the ‘vertical’ rays in the N ⇥N grid, for example, form a topological
+spanning tree together with the unique end.
+T2
+T1
+Fig. 8.6.2. T1 is a topological spanning tree, but T2 contains
+three circles.
+Topological spanning trees can be constructed much as spanning
+trees of ﬁnite graphs: Lemma 8.6.11 will ﬁnd one by iteratively deleting
+edges from |G|, but they can also be built up ‘from below’ (Exercise 108).
+Their mere existence even comes as a corollary of Theorem 8.2.4:
+(8.2.4)
+Lemma 8.6.8. The closure in |G| of any normal spanning tree of G is
+[8.7]
+a topological spanning tree of G.
+Proof. Let T be a normal spanning tree of G. By Lemma 8.2.3, every
+(1.5.4)
+(8.2.3)
+end ! of G contains a normal ray R of T. Then R[{!} is an arc linking
+! to the root of T, so T is arc-connected.
+It remains to check that T contains no circle. Suppose it does, and
+let A be the u–v arc obtained from that circle by deleting the inner
+points of an edge f = uv it contains. Clearly, f 2 T. Assume that u < v
+f
+in the tree-order of T, let Tu and Tv denote the components of T −f
+containing u and v, and notice that V (Tv) is the up-closure bvc of v in T.
+Now let S := due. By Lemma 1.5.4 (ii), bvc is the vertex set of a com-
+ponent C of G−S. Thus, V (C) = V (Tv) and V (G−C) = V (Tu), so the
+set E(C, S) of edges between these sets meets E(T) precisely in f. Thus,
+C and G −C partition |G|r ˚
+E(C, S) ◆A into two open sets both meet-
+ing A. This contradicts the fact that A is topologically connected.
+⇤
+Note that the proof of Lemma 8.6.8 did not use our assumption that
+G is locally ﬁnite: whenever a graph G has a normal spanning tree T, the
+closure of T in |G| is an arc-connected subspace that contains no circle.

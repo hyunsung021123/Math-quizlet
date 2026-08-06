@@ -1,0 +1,240 @@
+[문서 맥락]
+책: Graph Theory / 저자: Reinhard Diestel
+챕터: 10. Hamilton Cycles
+현재 소단원: 10.1 Sufficient conditions
+직전 소단원: 「9.ex Exercises」
+[본문]
+10
+Hamilton Cycles
+In Chapter 1.8 we brieﬂy discussed the problem of when a graph con-
+tains an Euler tour, a closed walk traversing every edge exactly once.
+The simple Theorem 1.8.1 solved that problem quite satisfactorily. Let
+us now ask the analogous question for vertices: when does a graph G
+contain a closed walk that contains every vertex of G exactly once? If
+|G| > 3, then any such walk is a cycle: a Hamilton cycle of G. If G
+Hamilton
+cycle
+has a Hamilton cycle, it is called hamiltonian. Similarly, a path in G
+containing every vertex of G is a Hamilton path.
+Hamilton
+path
+To determine whether or not a given graph has a Hamilton cycle is
+much harder than deciding whether it is Eulerian, and no good charac-
+terization is known1 of the graphs that do. In the ﬁrst two sections of
+this chapter we present the standard suﬃcient conditions for the exist-
+ence of a Hamilton cycle, as well as a more recent non-standard one.
+The third section is devoted to the proof of another classic: Fleischner’s
+theorem that the ‘square’ of every 2-connected graph has a Hamilton
+cycle. We shall present this theorem with an ingenious short proof due
+to Georgakopoulos.
+10.1 Suﬃcient conditions
+What kind of condition might be suﬃcient for the existence of a Hamilton
+cycle in a graph G? Purely global assumptions, like high edge density,
+will not be enough: we cannot do without the local property that every
+vertex has at least two neighbours. But neither is any large (but con-
+stant) minimum degree suﬃcient: it is easy to ﬁnd graphs without a Ha-
+milton cycle whose minimum degree exceeds any given constant bound.
+The following classic result derives its signiﬁcance from this back-
+ground:
+1 . . . or indeed expected to exist; see the notes for details.
+323
+R. Diestel, Graph Theory, Graduate Texts in Mathematics 173,  
+© Reinhard Diestel, under licence (exclusive for the print edition) 2025
+https://doi.org/10.1007/978-3-662-70107-2_10
+
+324
+10. Hamilton Cycles
+Theorem 10.1.1. (Dirac 1952)
+Every graph with n > 3 vertices and minimum degree at least n/2 has
+a Hamilton cycle.
+Proof. Let G = (V, E) be a graph with |G| = n > 3 and δ(G) > n/2.
+Then G is connected: otherwise, the degree of any vertex in the smallest
+component C of G would be less than |C| 6 n/2.
+Let P = v0 . . . vk be a longest path in G. Let us call vi the left end
+of the edge vivi+1, and vi+1 its right end. By the maximality of P, each
+of the d(v0) > n/2 neighbours of v0 is the right end of an edge of P, and
+these d(v0) edges are distinct. Similarly, at least n/2 edges of P are such
+that their left end is adjacent to vk. Since P has fewer than n edges, it
+has an edge vivi+1 with both properties (Fig. 10.1.1).
+v0
+vi
+vi+1
+vk
+P
+. . .
+. . .
+Fig. 10.1.1. Finding a Hamilton cycle in the proof Theorem 10.1.1
+We claim that the cycle C := v0vi+1PvkviPv0 is a Hamilton cycle
+of G. Indeed, since G is connected, C would otherwise have a neighbour
+in G −C, which could be combined with a spanning path of C into a
+path longer than P.
+⇤
+Theorem 10.1.1 is best possible in that we cannot replace the bound
+of n/2 with bn/2c: if n is odd and G is the union of two copies of Kdn/2e
+meeting in one vertex, then δ(G) = bn/2c but (G) = 1, so G cannot
+have a Hamilton cycle. In other words, the high level of the bound of
+δ > n/2 is needed to ensure, if nothing else, that G is 2-connected:
+a condition just as trivially necessary for hamiltonicity as a minimum
+degree of at least 2. It would seem, therefore, that prescribing some
+high (constant) value for rather than for δ stands a better chance of
+implying hamiltonicity. However, this is not so: although every large
+enough k-connected graph contains a cycle of length at least 2k (Ex. 22,
+Ch. 3), the graphs Kk,n show that this is already best possible.
+Slightly more generally, a graph G with a separating set S of k
+vertices such that G −S has more than k components is clearly not
+hamiltonian.
+Could it be true that all non-hamiltonian graphs have
+such a separating set, one that leaves many components compared with
+its size? We shall return to this question at the end of this section.
+For now, just note that such graphs as above also have relatively
+large independent sets: pick one vertex from each component of G−S to
+obtain one of order at least k + 1. Might we be able to force a Hamilton
+cycle by forbidding large independent sets?
+
+10.1 Suﬃcient conditions
+325
+By itself, the assumption of ↵(G) 6 k guarantees a cycle of length at
+least |G|/k (Ex. 15, Ch. 5). But a Hamilton cycle cannot be forced even
+by assuming ↵6 2. (Example?) Yet making ↵small compared with ,
+even just small enough to kill our earlier Kk,n counterexample (where
+n > k and hence Kk,n = K,↵), it does indeed imply hamiltonicity:
+Proposition 10.1.2. Every graph G with |G| > 3 and ↵(G) 6 (G)
+has a Hamilton cycle.
+Proof.
+Let C be a longest cycle in G.
+Enumerate the vertices of C
+C
+cyclically, say as V (C) = { vi | i 2 Zn } with vivi+1 2 E(C) for all i 2 Zn.
+Suppose C is not a Hamilton cycle. Let { vi | i 2 I } be the set of
+I
+neighbours on C of a component D of G−C. No two of these neighbours
+D
+are adjacent on C, since we could then extend C through D to form a
+longer cycle (Fig. 10.1.2, left). Similarly, the maximality of |C| implies
+that { vi+1 | i 2 I } is independent (Fig. 10.1.2, right).
+D
+D
+Fig. 10.1.2. Two cycles longer than C
+Pick a vertex v 2 D; then { vi+1 | i 2 I } [ {v} is still independent
+and has size |I| + 1. But { vi | i 2 I } separates G, so |I| > (G). This
+contradicts our assumption that ↵(G) 6 (G).
+⇤
+Our next result uses the ideas from the proof of Proposition 10.1.2
+to establish a local degree condition for hamiltonicity, considerably
+strengthening Dirac’s theorem and several similar results proved later
+in its wake:
+Theorem 10.1.3. (Asratian & Khachatrian 1990)
+A connected graph G of order at least 3 is hamiltonian if
+d(u) + d(w) > |N(u) [ N(v) [ N(w)|
+for every induced path uvw.
+
+326
+10. Hamilton Cycles
+Proof. Suppose G is not hamiltonian. Consider any induced path uvw.
+Since d(u)+d(w) = |N(u)[N(w)|+|N(u)\N(w)|, our degree assump-
+tion implies that
+|N(u) \ N(w)| > |N(u) [ N(v) [ N(w)| −|N(u) [ N(w)|
+= |N(v) r N({u, w})| > |{u, w}| > 2 .
+(1)
+In particular, G contains a cycle.
+Let C be a longest cycle in G. Since G is not hamiltonian, there
+C
+is a vertex u /2 C that has a neighbour on C; let V := N(u) \ V (C).
+u
+For vertices v 2 V let v+ denote the successor of v on C in some ﬁxed
+V
+orientation of C, and put V + := { v+ | v 2 V }.
+V +
+Since C is a longest cycle, we have V \ V + = ;, and
+no two vertices of V + [{u} are adjacent or have a common
+neighbour outside C
+(2)
+(compare Fig. 10.1.2). In particular, the paths uvv+ are induced. Hence
+every v 2 V satisﬁes
+|N(u) \ N(v+)| >
+(1)
+|N(v) r N({u, v+})| >
+(2)
+|N(v) \ V +| + 1 ;
+the second inequality comes from the fact that N({u, v+})\V + = ; and
+u lies in neither of these sets. The number kV, V +k = kV +, V k of edges
+between V and V + therefore satisﬁes
+kV, V +k =
+X
+v 2V
+|N(v)\V +| 6
+X
+v 2V
+$
+|N(u)\N(v+)|−1
+%
+6
+(2)
+kV +, V k−|V |
+(a contradiction); for the last inequality note that, by (2), every v+ 2 V +
+has all its common neighbours with u on C, and hence in V.
+⇤
+Let us return to the question of whether an assumption that no
+small separator leaves many components can guarantee a Hamilton cycle.
+A graph G is called t-tough, where t > 0 is any real number, if for every
+t-tough
+separator S of G the graph G−S has at most |S|/t components. Clearly,
+hamiltonian graphs must be 1-tough – so what about the converse?
+Unfortunately, it is not diﬃcult to ﬁnd even small graphs that are
+1-tough but have no Hamilton cycle (Exercise 6), so toughness does not
+provide a characterization of hamiltonian graphs in the spirit of Menger’s
+theorem or Tutte’s 1-factor theorem. However, a famous conjecture as-
+serts that t-toughness for some t will force hamiltonicity:
+Toughness Conjecture. (Chv´atal 1973)
+There exists t > 0 such that every t-tough graph has a Hamilton cycle.
+
+327
+The toughness conjecture was long expected to hold with t as small
+as t = 2. This was disproved after many years, but the general conjecture
+remains open. See the exercises for how the conjecture ties in with the
+results given in the remainder of this chapter.
+It may come as a surprise to learn that hamiltonicity is also related
+to the four colour problem. As we noted in Chapter 6.6, the four colour
+theorem is equivalent to the non-existence of a planar snark, i.e. to the
+assertion that every bridgeless planar cubic graph has a 4-ﬂow. It is
+easily checked that ‘bridgeless’ can be replaced with ‘3-connected’ in
+this assertion, and that every hamiltonian graph has a 4-ﬂow (Ex. 16,
+Ch. 6). For a proof of the four colour theorem, therefore, it would suﬃce
+to show that every 3-connected planar cubic graph has a Hamilton cycle!
+Unfortunately, this is not the case: the ﬁrst counterexample was
+found by Tutte in 1946.
+Ten years later, Tutte proved the following
+deep theorem as a best possible weakening:
+Theorem 10.1.4. (Tutte 1956)
+Every 4-connected planar graph has a Hamilton cycle.
+Although, at ﬁrst glance, it appears that the study of Hamilton
+cycles is a part of graph theory that cannot possibly extend to inﬁnite
+graphs, there is a fascinating conjecture that does just that. Recall that a
+circle in an inﬁnite graph G is a homeomorphic copy of the unit circle S1
+in the topological space |G| formed by G and its ends (see Chapter 8.6).
+A Hamilton circle of G is a circle that contains every vertex of G.
+Hamilton
+circle
+Conjecture. (Bruhn 2003)
+Every locally ﬁnite 4-connected planar graph has a Hamilton circle.
+10.2 Hamilton cycles and degree sequences
+Historically, Dirac’s theorem formed the point of departure for the dis-
+covery of a series of weaker and weaker degree conditions, all suﬃcient
+for hamiltonicity. The development culminated in a single theorem that
+encompasses all the earlier results: the theorem we shall prove in this
+section.
+If G is a graph with n vertices and degrees d1 6 . . . 6 dn, then the
+n-tuple (d1, . . . , dn) is called the degree sequence of G. Note that this
+degree
+sequence
+sequence is unique, even though G has several vertex enumerations giv-
+ing rise to its degree sequence. Let us call an arbitrary integer sequence
+(a1, . . . , an) hamiltonian if every graph with n vertices and a degree se-
+hamiltonian
+sequence
+quence pointwise greater than (a1, . . . , an) is hamiltonian. (A sequence
+(d1, . . . , dn) is pointwise greater than (a1, . . . , an) if di > ai for all i.)
+pointwise
+greater
+The following theorem characterizes all hamiltonian sequences:
+10.2 Hamilton cycles and degree sequences
