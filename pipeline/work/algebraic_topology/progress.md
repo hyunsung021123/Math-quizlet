@@ -128,7 +128,7 @@
 
 | 054 | [x] | 2.C Simplicial Approximation (분할 part 2) _(원본 #054)_ | section | `054__AlgebraicTopol__2_C_SimplicialApproximation__p2.txt` |
 
-| 055 | [ ] | 2.C.ex Exercises | exercises | `055__AlgebraicTopol__2_C_ex_Exercises__EX.txt` |
+| 055 | [x] | 2.C.ex Exercises | exercises | `055__AlgebraicTopol__2_C_ex_Exercises__EX.txt` |
 
 
 ## 3. Cohomology
