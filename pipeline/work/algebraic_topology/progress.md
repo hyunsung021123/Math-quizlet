@@ -135,7 +135,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 056 | [ ] | 3.intro 개관 (도입부) | intro | `056__AlgebraicTopol__3_intro_개관도입부.txt` |
+| 056 | [x] | 3.intro 개관 (도입부) | intro | `056__AlgebraicTopol__3_intro_개관도입부.txt` |
 
 | 057 | [ ] | 3.1 Cohomology Groups | section | `057__AlgebraicTopol__3_1_CohomologyGroups.txt` |
 

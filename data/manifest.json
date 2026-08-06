@@ -83,6 +83,12 @@
       "title": "1. The Basics",
       "file": "1_the_basics.json",
       "book": "Diestel — Graph Theory"
+    },
+    {
+      "id": "chapter_3_cohomology",
+      "title": "Chapter 3. Cohomology",
+      "file": "chapter_3_cohomology.json",
+      "book": "Hatcher — Algebraic Topology"
     }
   ]
 }
