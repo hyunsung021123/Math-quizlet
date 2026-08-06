@@ -27,7 +27,7 @@
 | 011 | [x] | 2.1 Matching in bipartite graphs | section | `011__GraphTheory__2_1_Matchinginbipartitegraphs.txt` |
 | 012 | [x] | 2.2 Matching in general graphs | section | `012__GraphTheory__2_2_Matchingingeneralgraphs.txt` |
 | 013 | [x] | 2.3 The Erdős-Pósa theorem | section | `013__GraphTheory__2_3_TheErds-Psatheorem.txt` |
-| 014 | [ ] | 2.4 Tree packing and arboricity | section | `014__GraphTheory__2_4_Treepackingandarboricity.txt` |
+| 014 | [x] | 2.4 Tree packing and arboricity | section | `014__GraphTheory__2_4_Treepackingandarboricity.txt` |
 | 015 | [ ] | 2.5 Path covers | section | `015__GraphTheory__2_5_Pathcovers.txt` |
 | 016 | [ ] | 2.ex Exercises | exercises | `016__GraphTheory__2_ex_Exercises__EX.txt` |
 
