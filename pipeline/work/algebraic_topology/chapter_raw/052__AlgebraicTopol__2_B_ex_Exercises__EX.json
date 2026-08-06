@@ -1,0 +1,155 @@
+{
+  "chapter_info": {
+    "title": "Chapter 2. Homology",
+    "source": "Hatcher, Algebraic Topology, Ch. 2",
+    "overall_goal": "구멍(hole)의 존재를 대수적으로 포착하는 계산 가능한 위상불변량인 호몰로지군 $H_n(X)$의 아이디어를 이해한다. 사슬(chain)·순환(cycle)·경계(boundary)의 언어로 '순환을 경계로 나눈 몫'이 왜 구멍을 세는지 직관적으로 파악하고, 이를 임의의 공간으로 확장하기 위해 단체(simplicial)·특이(singular) 호몰로지로 나아가는 큰 흐름을 잡는다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.B.ex 연습문제 — 여집합·이동열·나눗셈 대수",
+      "step1_big_picture": {
+        "context": "2.B에서 세운 세 무기를 손으로 굴려 보는 문제 모음이다. (i) 매장된 구·원판의 여집합 호몰로지(명제 2B.1)와 그 MV 기반 논법 — 문제 1~5는 이를 쐐기합·서로소 합집합·유한 그래프·부분원판 같은 변형 상황으로 확장하며, 특히 문제 2의 $\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X)$은 §3.3의 알렉산더 쌍대성(Alexander duality)을 미리 맛보게 한다. (ii) 알렉산더 뿔 달린 구의 구성을 변형해 '양쪽 성분이 모두 단연결이 아닌' 매장을 만들거나(문제 6) 손잡이 수를 두 배로 늘려 보는 문제(문제 7). (iii) $\\mathbb{Z}_2$ 계수 이동열(transfer sequence) — 자명한 피복에서 명시화(문제 9), $S^\\infty\\to\\mathbb{RP}^\\infty$로 $H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)$ 계산(문제 10), 곱 공간으로 확장(문제 11). 그리고 차수(degree)로 홀수차원 나눗셈 대수를 배제하는 문제 8.",
+        "hidden_intuition": "이 문제들이 몸에 새기는 감각은 '여집합의 호몰로지는 원래 공간의 호몰로지를 차원을 뒤집어 되비춘다'는 쌍대성이다. 문제 2의 공식 $\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X)$에서 지수의 합 $i+(n-i-1)=n-1$이 고정된다 — 명제 2B.1(b)가 바로 $X=S^k$인 특수 경우($\\widetilde{H}_{n-k-1}$)였음을 되짚어 보라. 증명 전략도 일관된다: 공간을 조각으로 쪼개 MV를 걸고, 조각들에서 이미 아는 결과(트리는 축약가능, 원판 여집합은 자명)를 귀납의 씨앗으로 삼는다. 이동열 문제들은 '왜 $\\mathbb{Z}_2$ 계수인가'를 손으로 확인하게 한다 — 자명한 피복 $X\\times S^0$에서는 $\\tau$가 대각선 $x\\mapsto(x,x)$이 되어 완전열이 $0\\to H_n(X)\\to H_n(X)^2\\to H_n(X)\\to0$으로 분열하고, $S^\\infty\\to\\mathbb{RP}^\\infty$에서는 $S^\\infty$가 축약가능해 완전열이 '차원을 한 칸씩 올리는 사다리'로 붕괴하며 $H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)=\\mathbb{Z}_2$를 모든 $n$에서 뽑아낸다. 문제 8은 차수의 패리티 $(-1)^{n+1}$가 대수 구조를 옭아매는 또 하나의 사례다."
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 2: 여집합의 쌍대성 — 그래프의 경우)",
+          "formal_statement": "$X\\subset S^n$이 유한 연결 그래프와 위상동형이면 모든 $i$에서 $$\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X).$$",
+          "idea_behind_proof": "트리에서 시작하는 귀납이 열쇠다. 트리는 원판(정확히는 여러 원판을 이어 붙여도 여전히 축약가능한 콤팩트 집합)처럼 행동해 여집합의 축소 호몰로지가 자명 — 이는 명제 2B.1(a)의 정신 그대로다. 일반 그래프는 트리에 변을 하나씩 붙여 만들 수 있고, 변 하나를 붙이면 $\\widetilde{H}_1(X)$의 계수가 $1$ 늘어나는 대신 여집합에서 MV의 연결 사상이 $\\widetilde{H}_{n-2}(S^n-X)$에 $\\mathbb{Z}$를 하나 더 만든다. 지수 합 $i+(n-i-1)=n-1$이 보존되는 이 되비침이 알렉산더 쌍대성의 씨앗이다.",
+          "proof_steps": [
+            "1단계 (트리): 트리 $T$는 매장된 원판들의 합집합처럼 다룰 수 있어 명제 2B.1(a)의 논법으로 $\\widetilde{H}_i(S^n-T)=0$ (모든 $i$). 한편 $T$는 축약가능해 $\\widetilde{H}_{n-i-1}(T)=0$ — 양변이 일치.",
+            "2단계 (변 추가): 그래프 $X'=X\\cup e$($e$는 변)에 대해, $A=S^n-X$와 $B=S^n-(\\text{}e\\text{의 내부에 붙은 원판})$ 꼴로 쪼개 MV를 적용한다. 변 하나를 붙이는 것은 $\\widetilde{H}_1$을 $\\mathbb{Z}$ 하나 늘리고, MV의 연결 사상이 여집합의 $\\widetilde{H}_{n-2}$를 $\\mathbb{Z}$ 하나 늘린다.",
+            "3단계: 변의 개수에 대한 귀납으로 $\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X)$가 모든 유한 연결 그래프에서 성립. (명제 2B.1(b)는 $X=S^k$인 특수 경우.) $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "complex_2d",
+            "vertices": [
+              [
+                -1.4,
+                0.8
+              ],
+              [
+                0,
+                1.2
+              ],
+              [
+                1.4,
+                0.8
+              ],
+              [
+                0,
+                -0.4
+              ],
+              [
+                -1.2,
+                -1.0
+              ],
+              [
+                1.2,
+                -1.0
+              ]
+            ],
+            "vertex_labels": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "edges": [
+              {
+                "from": 0,
+                "to": 1
+              },
+              {
+                "from": 1,
+                "to": 2
+              },
+              {
+                "from": 1,
+                "to": 3
+              },
+              {
+                "from": 3,
+                "to": 4
+              },
+              {
+                "from": 3,
+                "to": 5
+              },
+              {
+                "from": 0,
+                "to": 4
+              }
+            ],
+            "caption": "유한 연결 그래프 $X$(여기서는 트리에 변 하나를 더해 고리 하나가 생긴 그래프). 여집합의 호몰로지는 $\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X)$로 차원이 뒤집혀 되비친다."
+          }
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 8: 홀수차원은 나눗셈 대수가 아니다)",
+          "formal_statement": "$n>0$이면 $\\mathbb{R}^{2n+1}$은 $\\mathbb{R}$ 위의 나눗셈 대수가 될 수 없다.",
+          "idea_behind_proof": "차수의 패리티가 무기다. 나눗셈 대수라면 $0\\ne a$에 대해 $x\\mapsto ax/|ax|$가 $S^{2n}\\to S^{2n}$의 잘 정의된 사상이 되고, $a$를 지나는 경로로 $\\pm$를 이어 붙일 수 있어 $x\\mapsto ax/|ax|$와 $x\\mapsto-ax/|ax|$가 호모토피해야 한다. 그런데 뒤쪽은 앞쪽에 대척사상을 합성한 것이고, 짝수 구 $S^{2n}$에서 대척사상의 차수는 $(-1)^{2n+1}=-1$이므로 두 사상의 차수가 부호로 갈린다 — 호모토피하다면 차수가 같아야 하니 모순.",
+          "proof_steps": [
+            "$\\mathbb{R}^{2n+1}$이 나눗셈 대수라 가정하면 $a\\ne0$에 대해 $x\\mapsto ax\\ne0$이므로 $f_a(x)=ax/|ax|$는 잘 정의된 연속사상 $S^{2n}\\to S^{2n}$.",
+            "$a$와 $-a$를 잇는 (원점을 지나지 않는) 경로로 $f_a\\simeq f_{-a}=-f_a$를 얻는다. 즉 $f_a$가 대척사상과의 합성과 호모토피.",
+            "그러나 $\\deg(-f_a)=\\deg(-\\mathbb{1})\\cdot\\deg f_a=(-1)^{2n+1}\\deg f_a=-\\deg f_a$. 호모토피하면 $\\deg f_a=-\\deg f_a$, 곧 $\\deg f_a=0$.",
+            "한편 $f_a$는 (나눗셈 대수라 $x\\mapsto ax$가 가역 선형사상) 위상동형이므로 $\\deg f_a=\\pm1\\ne0$ — 모순. 따라서 $\\mathbb{R}^{2n+1}$($n>0$)은 나눗셈 대수가 아니다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 (문제 9·10: 이동열의 두 극단)",
+          "formal_statement": "(문제 9) 자명한 $2$겹 피복 $\\widetilde{X}=X\\times S^0\\to X$의 이동열은 $$0\\to H_n(X;\\mathbb{Z}_2)\\xrightarrow{\\ \\tau_*\\ }H_n(X;\\mathbb{Z}_2)^2\\xrightarrow{\\ p_*\\ }H_n(X;\\mathbb{Z}_2)\\to0$$ 으로 분해된다($\\tau_*$는 대각선 $\\alpha\\mapsto(\\alpha,\\alpha)$, $p_*$는 합 $(\\alpha,\\beta)\\mapsto\\alpha+\\beta$). (문제 10) 피복 $S^\\infty\\to\\mathbb{RP}^\\infty$의 이동열에서 $S^\\infty$가 축약가능하므로 $$H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)\\cong\\mathbb{Z}_2\\quad(\\forall n\\ge0).$$ (문제 11) 피복 $X\\times S^\\infty\\to X\\times\\mathbb{RP}^\\infty$의 이동열은 $$H_n(X\\times\\mathbb{RP}^\\infty;\\mathbb{Z}_2)\\cong\\bigoplus_{i\\le n}H_i(X;\\mathbb{Z}_2)$$ 를 준다.",
+          "idea_behind_proof": "이동열의 정체가 두 극단에서 선명해진다. 자명한 피복에서는 각 단체의 두 올림이 서로 다른 사본에 있으므로 $\\tau$가 문자 그대로 대각선이고 $p_\\#$이 합이라, 완전열이 $\\mathbb{Z}_2$-벡터공간의 짧은 완전열로 쪼개져 아무 새 정보가 없다. 반대로 $S^\\infty\\to\\mathbb{RP}^\\infty$에서는 위쪽 항 $H_n(S^\\infty;\\mathbb{Z}_2)$이 ($n>0$에서) 모두 사라져, 완전열이 '$H_n(\\mathbb{RP}^\\infty)\\cong H_{n-1}(\\mathbb{RP}^\\infty)$'라는 사다리로 붕괴한다 — 차원을 한 칸씩 내리는 동형이 모든 차원에서 $\\mathbb{Z}_2$를 복제한다.",
+          "proof_steps": [
+            "(문제 9) $\\widetilde{X}=X\\times S^0$은 $X$의 두 사본이라 $H_n(\\widetilde{X};\\mathbb{Z}_2)\\cong H_n(X;\\mathbb{Z}_2)^2$. 각 단체 $\\sigma$의 두 올림은 두 사본의 사본이므로 $\\tau(\\sigma)=(\\sigma,\\sigma)$(대각선), $p_\\#(\\alpha,\\beta)=\\alpha+\\beta$. 이 짧은 완전열이 차원마다 분열하므로 이동열의 연결 사상은 모두 $0$.",
+            "(문제 10) $S^\\infty$는 축약가능하므로 $H_n(S^\\infty;\\mathbb{Z}_2)=0\\ (n>0)$, $=\\mathbb{Z}_2\\ (n=0)$. 이동열의 토막 $0=H_n(S^\\infty)\\to H_n(\\mathbb{RP}^\\infty)\\to H_{n-1}(\\mathbb{RP}^\\infty)\\to H_{n-1}(S^\\infty)=0$ ($n\\ge2$)에서 $H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)\\cong H_{n-1}(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)$.",
+            "$H_0(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)=\\mathbb{Z}_2$에서 시작해 사다리를 올리면 모든 $n$에서 $H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)=\\mathbb{Z}_2$. (셀 사슬 복합체로도 같은 답: 각 차원에 $\\mathbb{Z}_2$ 하나, 경계는 $\\times2=0$.)",
+            "(문제 11) 같은 논법을 $X\\times S^\\infty\\to X\\times\\mathbb{RP}^\\infty$에 적용하면 $H_n(X\\times S^\\infty;\\mathbb{Z}_2)\\cong H_n(X;\\mathbb{Z}_2)$($S^\\infty$ 축약가능)이라, 이동열이 차원을 한 칸 내리는 관계를 반복해 $\\bigoplus_{i\\le n}H_i(X;\\mathbb{Z}_2)$을 쌓는다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 1) $X\\subset S^n$이 (a) $S^k\\sqcup S^\\ell$(서로소 합집합), (b) $S^k\\vee S^\\ell$(쐐기합)과 위상동형일 때 $\\widetilde{H}_i(S^n-X)$를 구하라($k,\\ell<n$).",
+          "hint": "(a) 두 구가 서로소이면 하나를 뺀 여집합에서 나머지를 다시 빼는 식으로 MV를 두 번 걸어라 — 각 구가 독립적으로 $\\widetilde{H}_{n-k-1}$과 $\\widetilde{H}_{n-\\ell-1}$을 기여하고, 성분이 하나 더 늘어나는 효과가 $\\widetilde{H}_0$에 남는다. (b) 쐐기합은 한 점에서 붙었으므로 $\\widetilde{H}_0$의 여분이 없다. 명제 2B.1(a)(원판 여집합은 자명)를 접착점 근방에 활용하라.",
+          "solution": "명제 2B.1(b)에서 한 구 $S^k$의 여집합은 $\\widetilde{H}_{n-k-1}=\\mathbb{Z}$, 그 외 $0$이다. (b) 쐐기합 $S^k\\vee S^\\ell$: 접착점 근방을 원판으로 보아 MV를 걸면 두 구의 기여가 독립적으로 더해져 $$\\widetilde{H}_i(S^n-X)\\cong\\begin{cases}\\mathbb{Z}&i=n-k-1\\ \\text{또는}\\ i=n-\\ell-1\\\\ \\mathbb{Z}^2&\\text{두 값이 같을 때 그 차수}\\\\0&\\text{그 외.}\\end{cases}$$ 즉 $k\\ne\\ell$이면 두 차수 $n-k-1,\\ n-\\ell-1$에 각각 $\\mathbb{Z}$, $k=\\ell$이면 그 한 차수에 $\\mathbb{Z}^2$. (a) 서로소 합집합 $S^k\\sqcup S^\\ell$: 두 구가 떨어져 있어 여집합이 한 조각 더 갈라지는 효과가 생긴다. 두 구를 각각 뺀 기여 $\\mathbb{Z}$(차수 $n-k-1$), $\\mathbb{Z}$(차수 $n-\\ell-1$)에 더해, 서로소 배치가 만드는 여분의 $\\mathbb{Z}$가 $\\widetilde{H}_0$에 (즉 여집합 성분이 하나 더) 나타난다 — 예컨대 $k=\\ell=n-1$이면 두 개의 동심 $S^{n-1}$이 $S^n$을 세 조각으로 나누어 $\\widetilde{H}_0=\\mathbb{Z}^2$. 일반화: 쐐기합은 '점에서 붙어' 성분을 늘리지 않고, 서로소 합집합은 성분을 하나 더 늘린다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 10) 피복 $S^\\infty\\to\\mathbb{RP}^\\infty$의 $\\mathbb{Z}_2$ 계수 이동열을 이용해 모든 $n\\ge0$에서 $H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)$를 계산하라.",
+          "hint": "$S^\\infty$는 축약가능하다($H_n(S^\\infty;\\mathbb{Z}_2)=0$ for $n>0$). 이동열 $\\cdots\\to H_n(\\mathbb{RP}^\\infty)\\xrightarrow{\\tau_*}H_n(S^\\infty)\\xrightarrow{p_*}H_n(\\mathbb{RP}^\\infty)\\to H_{n-1}(\\mathbb{RP}^\\infty)\\to\\cdots$에서 $H_n(S^\\infty)=0$인 자리를 지워라.",
+          "solution": "$S^\\infty$가 축약가능하므로 $H_n(S^\\infty;\\mathbb{Z}_2)=0$ ($n>0$), $H_0=\\mathbb{Z}_2$. $n\\ge2$에서 이동열의 토막은 $$0=H_n(S^\\infty)\\to H_n(\\mathbb{RP}^\\infty)\\xrightarrow{\\ \\partial\\ }H_{n-1}(\\mathbb{RP}^\\infty)\\to H_{n-1}(S^\\infty)=0$$ 이므로 $\\partial$이 동형: $H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)\\cong H_{n-1}(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)$. $\\mathbb{RP}^\\infty$는 경로연결이라 $H_0(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)=\\mathbb{Z}_2$이고, $n=1$의 자리도 같은 논법(또는 $H_1(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)=\\mathbb{Z}_2$)으로 확인된다. 사다리를 올리면 $$H_n(\\mathbb{RP}^\\infty;\\mathbb{Z}_2)\\cong\\mathbb{Z}_2\\quad(\\forall n\\ge0).$$ 검산: $\\mathbb{RP}^\\infty$는 각 차원에 셀 하나씩인 CW 복합체이고 셀 경계가 $1+(-1)^k$이라 $\\mathbb{Z}_2$ 계수에서 모두 $0$ → 사슬군 그대로 $\\mathbb{Z}_2$가 모든 차원에 남는다. ($\\mathbb{RP}^\\infty=K(\\mathbb{Z}_2,1)$이므로 이는 $H_n(\\mathbb{Z}_2;\\mathbb{Z}_2)$의 계산이기도 하다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "(연습문제 8) $\\mathbb{R}^3$이 $\\mathbb{R}$ 위의 나눗셈 대수가 아님을 차수를 이용해 보여라(즉 $n=1$인 $\\mathbb{R}^{2n+1}=\\mathbb{R}^3$의 경우).",
+          "hint": "나눗셈 대수라면 $a\\ne0$에 대해 $f_a(x)=ax/|ax|$가 $S^2\\to S^2$로 잘 정의된다. $f_a$와 $-f_a$가 왜 호모토피해야 하는지($a$와 $-a$를 잇는 경로), 그리고 $S^2$에서 대척사상의 차수가 얼마인지 비교하라.",
+          "solution": "$\\mathbb{R}^3$이 나눗셈 대수라 하면 $a\\ne0$에 대해 $x\\mapsto ax$는 영인자가 없어 가역 선형사상이므로 $f_a(x)=ax/|ax|$는 잘 정의된 위상동형 $S^2\\to S^2$이고 $\\deg f_a=\\pm1$. 한편 $\\mathbb{R}^3-\\{0\\}$은 경로연결이므로 $a$에서 $-a$로 가는 경로 $a_t$($a_t\\ne0$)가 있고, 이는 호모토피 $f_{a_t}$를 주어 $f_a\\simeq f_{-a}=-f_a$. 따라서 차수가 같아야 하는데, $$\\deg(-f_a)=\\deg(-\\mathbb{1})\\cdot\\deg f_a=(-1)^{2+1}\\deg f_a=-\\deg f_a$$ 이므로 $\\deg f_a=-\\deg f_a$, 곧 $\\deg f_a=0$. 이는 $\\deg f_a=\\pm1$과 모순이다. 따라서 $\\mathbb{R}^3$은 나눗셈 대수가 아니다. 같은 논법이 모든 $\\mathbb{R}^{2n+1}$($n>0$)에 적용된다 — 핵심은 짝수 구 $S^{2n}$에서 대척사상의 차수가 $-1$이라는 패리티. (정리 2B.5가 '가환+항등원'을 가정해 $n\\le2$를 얻었던 것과 달리, 여기서는 가환성 없이도 홀수 차원을 배제한다.)"
+        },
+        {
+          "type": "ox",
+          "question": "$S^n$ 안에 매장된 유한 연결 그래프 $X$에 대해 $\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X)$가 성립하므로, 특히 트리 $T$의 여집합은 모든 차원에서 자명한 축소 호몰로지를 갖는다.",
+          "answer": "O",
+          "explanation": "트리는 축약가능하므로 $\\widetilde{H}_{n-i-1}(T)=0$(모든 $i$)이고, 문제 2의 쌍대성 공식에 의해 $\\widetilde{H}_i(S^n-T)=0$이 된다. 이는 명제 2B.1(a)(매장된 원판의 여집합은 축소 호몰로지가 자명)의 자연스러운 확장이며, 실제로 문제 2의 증명은 '트리의 경우'를 귀납의 출발점으로 삼는다. 지수 합 $i+(n-i-1)=n-1$이 고정되는 이 되비침은 §3.3의 알렉산더 쌍대성의 특수 경우다."
+        },
+        {
+          "type": "ox",
+          "question": "자명한 $2$겹 피복 $X\\times S^0\\to X$의 이동열은 새로운 정보를 담고 있어, 이를 통해 $H_n(X;\\mathbb{Z}_2)$를 다른 군으로부터 계산할 수 있다.",
+          "answer": "X",
+          "explanation": "자명한 피복에서는 $\\widetilde{X}=X\\times S^0$이 $X$의 두 사본이라 $H_n(\\widetilde{X};\\mathbb{Z}_2)\\cong H_n(X;\\mathbb{Z}_2)^2$이고, $\\tau_*$는 대각선 $\\alpha\\mapsto(\\alpha,\\alpha)$, $p_*$는 합 $(\\alpha,\\beta)\\mapsto\\alpha+\\beta$가 된다. 이 짧은 완전열 $0\\to H_n\\to H_n^2\\to H_n\\to0$은 차원마다 분열하므로 연결 사상이 모두 $0$이고, 이동열은 아무 새 정보도 주지 않는다. 이동열이 위력을 발휘하는 것은 $S^\\infty\\to\\mathbb{RP}^\\infty$나 $S^n\\to\\mathbb{RP}^n$처럼 피복 공간의 호몰로지가 대부분 소멸하는 비자명한 경우다."
+        },
+        {
+          "type": "conceptual",
+          "question": "이 절의 문제들에서 반복되는 두 전략 — 'MV로 쪼개 귀납하기'와 '$\\mathbb{Z}_2$ 계수 이동열' — 은 각각 어떤 상황에 쓰이며 왜 효과적인가? 문제 2와 문제 10을 예로 들어 설명하라.",
+          "hint": "문제 2에서 무엇을 귀납의 출발점으로 삼고 무엇을 한 단계씩 늘리는지, 문제 10에서 이동열의 어느 항이 사라져 무엇이 동형으로 붕괴하는지 짚어라. 두 전략이 공통적으로 기대는 것(이미 아는 조각의 호몰로지)도 생각하라.",
+          "answer": "두 전략은 모두 '이미 아는 조각으로 모르는 전체를 조립한다'는 같은 정신의 다른 구현이다. 첫째, MV 귀납은 공간(또는 여집합)을 두 조각으로 쪼갤 수 있을 때 쓴다. 문제 2에서는 매장된 그래프의 여집합을 다루는데, 귀납의 씨앗은 '트리의 여집합은 축소 호몰로지가 자명'(명제 2B.1(a)의 정신)이고, 그다음 변을 하나씩 붙일 때마다 MV의 연결 사상이 $X$의 $\\widetilde{H}_1$ 증가를 여집합의 $\\widetilde{H}_{n-2}$ 증가로 정확히 번역해 준다. 그래서 지수 합이 $n-1$로 고정되는 쌍대성 $\\widetilde{H}_i(S^n-X)\\cong\\widetilde{H}_{n-i-1}(X)$이 귀납으로 쌓인다 — 명제 2B.1(b)는 $X=S^k$인 특수 경우일 뿐이다. 효과적인 이유는 MV가 '조각·겹침·합집합'의 네 항을 완전열로 묶어, 셋을 알면 넷째를 강제하기 때문이다. 둘째, $\\mathbb{Z}_2$ 계수 이동열은 $2$겹 피복이 있을 때 쓴다. 그 존재 이유가 계수에 있다: $\\Delta^n$이 단연결이라 각 단체가 정확히 두 올림을 갖고, $\\mathbb{Z}_2$ 계수에서 '두 올림의 합'이 $p_\\#$의 핵을 정확히 채워 짧은 완전열이 성립한다(부호가 있으면 이 대칭이 깨진다). 문제 10에서는 피복 공간 $S^\\infty$가 축약가능해 이동열의 $H_n(S^\\infty;\\mathbb{Z}_2)$ 항이 전부 사라지고, 완전열이 $H_n(\\mathbb{RP}^\\infty)\\cong H_{n-1}(\\mathbb{RP}^\\infty)$라는 사다리로 붕괴해 $H_0=\\mathbb{Z}_2$ 하나에서 모든 차원의 답이 복제된다. 즉 '위층이 자명할수록 아래층의 정보가 완전열에 남는다'는 것이 이동열 활용의 핵심이며, 이것이 2.B에서 보르숙–울람을 증명한 바로 그 메커니즘이다."
+        }
+      ]
+    }
+  ]
+}

@@ -122,7 +122,7 @@
 
 | 051 | [x] | 2.B Classical Applications | section | `051__AlgebraicTopol__2_B_ClassicalApplications.txt` |
 
-| 052 | [ ] | 2.B.ex Exercises | exercises | `052__AlgebraicTopol__2_B_ex_Exercises__EX.txt` |
+| 052 | [x] | 2.B.ex Exercises | exercises | `052__AlgebraicTopol__2_B_ex_Exercises__EX.txt` |
 
 | 053 | [ ] | 2.C Simplicial Approximation (분할 part 1) _(원본 #053)_ | section | `053__AlgebraicTopol__2_C_SimplicialApproximation__p1.txt` |
 
