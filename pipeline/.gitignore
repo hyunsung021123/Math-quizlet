@@ -1,6 +1,12 @@
-# 분할 PDF는 백업을 위해 git 에 커밋한다(샌드박스가 휘발성이라 유일한 백업처).
-# 전달용 zip 은 같은 PDF의 중복 압축본이라 계속 제외.
+# 분할 PDF는 커밋하지 않는다. 한때 "샌드박스가 휘발성이라 유일한 백업처"라는 이유로 커밋했지만,
+# 399개 103MB까지 불어나면서 GitHub Pages 배포(deploy 단계)가 10분 제한을 넘겨 dev 브랜치의
+# 사이트 빌드가 통째로 실패하기 시작했다(2026-08-06). Pages는 이 저장소 루트를 통째로 올리므로
+# 서빙에 필요 없는 파일이 곧 배포 시간이다 — 사이트가 실제로 읽는 건 index.html + data/ 뿐이다.
+# 백업은 잃지 않는다: 이미 커밋됐던 PDF blob들은 git 히스토리에 그대로 남아 있고
+# (`git show <옛 커밋>:<경로>`로 복구 가능), 애초에 program1_split.py가 원본 책 PDF +
+# toc_data.json + state.json(오프셋·override 포함, 전부 커밋됨)으로 언제든 재생성한다.
 # work/<책 슬러그>/... 구조(여러 책 지원)라 */ 로 책 폴더 하나를 건너뛰고 매칭한다.
+work/*/sections_out/*.pdf
 work/*/_delivery/
 work/*/_review_input_*.txt
 
