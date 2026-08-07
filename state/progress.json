@@ -76,12 +76,12 @@
     }
   },
   "lastPos": {
-    "topicId": "chapter_1_polytopes_polyhedra_and_cones",
+    "topicId": "1_the_basics",
     "view": {
       "type": "section",
-      "index": 5
+      "index": 0
     },
-    "cardIndex": 1
+    "cardIndex": 0
   },
-  "updatedAt": "2026-08-07T00:44:01.634Z"
+  "updatedAt": "2026-08-07T00:49:23.475Z"
 }
