@@ -73,6 +73,9 @@
       "section:0": true,
       "section:1": true,
       "section:2": true
+    },
+    "1_the_basics": {
+      "section:0": true
     }
   },
   "lastPos": {
@@ -81,7 +84,7 @@
       "type": "section",
       "index": 0
     },
-    "cardIndex": 0
+    "cardIndex": 11
   },
-  "updatedAt": "2026-08-07T07:50:39.526Z"
+  "updatedAt": "2026-08-07T07:52:39.217Z"
 }
