@@ -95,6 +95,12 @@
       "title": "2. Matching, Covering and Packing",
       "file": "2_matching_covering_and_packing.json",
       "book": "Diestel — Graph Theory"
+    },
+    {
+      "id": "3_connectivity",
+      "title": "3. Connectivity",
+      "file": "3_connectivity.json",
+      "book": "Diestel — Graph Theory"
     }
   ]
 }

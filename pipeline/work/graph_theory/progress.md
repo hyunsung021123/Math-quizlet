@@ -35,12 +35,12 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 017 | [ ] | 3.1 2-Connected graphs and subgraphs | section | `017__GraphTheory__3_1_2-Connectedgraphsandsubgra.txt` |
-| 018 | [ ] | 3.2 The structure of 3-connected graphs | section | `018__GraphTheory__3_2_Thestructureof3-connectedg.txt` |
-| 019 | [ ] | 3.3 Menger's theorem | section | `019__GraphTheory__3_3_Mengerstheorem.txt` |
-| 020 | [ ] | 3.4 A-paths and Mader's theorem | section | `020__GraphTheory__3_4_A-pathsandMaderstheorem.txt` |
-| 021 | [ ] | 3.5 Linking pairs of vertices | section | `021__GraphTheory__3_5_Linkingpairsofvertices.txt` |
-| 022 | [ ] | 3.ex Exercises | exercises | `022__GraphTheory__3_ex_Exercises__EX.txt` |
+| 017 | [x] | 3.1 2-Connected graphs and subgraphs | section | `017__GraphTheory__3_1_2-Connectedgraphsandsubgra.txt` |
+| 018 | [x] | 3.2 The structure of 3-connected graphs | section | `018__GraphTheory__3_2_Thestructureof3-connectedg.txt` |
+| 019 | [x] | 3.3 Menger's theorem | section | `019__GraphTheory__3_3_Mengerstheorem.txt` |
+| 020 | [x] | 3.4 A-paths and Mader's theorem | section | `020__GraphTheory__3_4_A-pathsandMaderstheorem.txt` |
+| 021 | [x] | 3.5 Linking pairs of vertices | section | `021__GraphTheory__3_5_Linkingpairsofvertices.txt` |
+| 022 | [x] | 3.ex Exercises | exercises | `022__GraphTheory__3_ex_Exercises__EX.txt` |
 
 ## 4. Planar Graphs
 
