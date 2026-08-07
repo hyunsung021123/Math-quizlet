@@ -29,7 +29,7 @@
 | 013 | [x] | 2.3 The Erdős-Pósa theorem | section | `013__GraphTheory__2_3_TheErds-Psatheorem.txt` |
 | 014 | [x] | 2.4 Tree packing and arboricity | section | `014__GraphTheory__2_4_Treepackingandarboricity.txt` |
 | 015 | [x] | 2.5 Path covers | section | `015__GraphTheory__2_5_Pathcovers.txt` |
-| 016 | [ ] | 2.ex Exercises | exercises | `016__GraphTheory__2_ex_Exercises__EX.txt` |
+| 016 | [x] | 2.ex Exercises | exercises | `016__GraphTheory__2_ex_Exercises__EX.txt` |
 
 ## 3. Connectivity
 
