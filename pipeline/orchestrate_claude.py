@@ -67,6 +67,18 @@ EXIT_ERROR = 1       # validation/submit error or unexplained bad output -- need
 EXIT_QUOTA = 2       # hit the subscription's own session-limit message -- safe to retry later
 EXIT_PAUSED = 3      # PAUSE_FILE was present -- user wants the chain to back off, not an error
 
+# Commits still happen after every piece (cheap, and keeps history/rollback
+# granular); only the *push* is batched. Each push re-triggers GitHub Pages'
+# build+deployment, and a new push cancels whatever deploy the previous push
+# is still mid-flight on -- pushing every single piece meant the site could
+# never finish a deploy during an active run (see 2026-08-06 outage: dev's
+# deploy queue was starved for ~6h by back-to-back pushes, compounded by an
+# oversized deployed tree that made each attempt slow enough to guarantee the
+# next piece's push would preempt it before it finished). flush_push() below
+# still pushes immediately if the run ends for *any* reason before reaching
+# this many commits, so nothing is ever left stranded only-local.
+PUSH_BATCH_SIZE = 5
+
 PIPE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(PIPE)
 sys.path.insert(0, PIPE)
@@ -278,15 +290,29 @@ def main():
                      help="stop once the next piece leaves this chapter number")
     ap.add_argument("--max", type=int, default=None,
                      help="max number of pieces to generate this run")
+    ap.add_argument("--push-every", type=int, default=PUSH_BATCH_SIZE,
+                     help="git push only after this many pieces are committed locally "
+                          "(default: PUSH_BATCH_SIZE). Always flushed before this run "
+                          "exits, for any reason, so nothing is left only-local.")
     args = ap.parse_args()
     args.book = resolve_book(args.book)
 
     log(f"===== orchestrator start (book={args.book}) =====")
     done = 0
+    unpushed = 0
     current_chapter = None
     sid = None
     sid_established = False
-    while args.max is None or done < args.max:
+
+    def flush_push():
+        nonlocal unpushed
+        if unpushed:
+            git("push", "origin", "dev")
+            log(f"pushed {unpushed} pending commit(s).")
+            unpushed = 0
+
+    try:
+      while args.max is None or done < args.max:
         if os.path.exists(PAUSE_FILE):
             log(f"pause file found ({PAUSE_FILE}) -- stopping before the next piece "
                 f"({done} piece(s) done this run). Delete it and rerun to resume.")
@@ -376,10 +402,17 @@ def main():
             os.path.join(REPO, "data"),
             os.path.join(PIPE, "work", args.book, "progress.md"),
             os.path.join(PIPE, "work", args.book, "state.json"))
-        git("push", "origin", "dev")
-        log(f"seq {seq} submitted + committed + pushed. ({sect})")
+        unpushed += 1
+        if unpushed >= args.push_every:
+            flush_push()
+            log(f"seq {seq} submitted + committed + pushed. ({sect})")
+        else:
+            log(f"seq {seq} submitted + committed (push batched, "
+                f"{unpushed}/{args.push_every}). ({sect})")
         done += 1
-    log(f"===== orchestrator done: {done} piece(s) this run =====")
+      log(f"===== orchestrator done: {done} piece(s) this run =====")
+    finally:
+        flush_push()
     sys.exit(EXIT_OK)
 
 
