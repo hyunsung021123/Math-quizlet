@@ -73,15 +73,18 @@
       "section:0": true,
       "section:1": true,
       "section:2": true
+    },
+    "1_the_basics": {
+      "section:0": true
     }
   },
   "lastPos": {
     "topicId": "1_the_basics",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 1
     },
-    "cardIndex": 6
+    "cardIndex": 8
   },
-  "updatedAt": "2026-08-07T08:32:50.702Z"
+  "updatedAt": "2026-08-07T08:33:57.784Z"
 }
