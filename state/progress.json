@@ -21,15 +21,19 @@
       "section:0": true,
       "section:1": true,
       "section:2": true
+    },
+    "1_the_basics": {
+      "section:0": true,
+      "section:1": true
     }
   },
   "lastPos": {
-    "topicId": "3_connectivity",
+    "topicId": "1_the_basics",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 2
     },
-    "cardIndex": 0
+    "cardIndex": 7
   },
-  "updatedAt": "2026-08-10T05:36:34.699Z"
+  "updatedAt": "2026-08-10T05:36:52.990Z"
 }
