@@ -26,9 +26,9 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 008 | [ ] | 3.1 Projective spaces and projective varieties | section | `008__Introductionto__3_1_Projectivespacesandproject.txt` |
-| 009 | [ ] | 3.2 Homogeneous coordinate rings | section | `009__Introductionto__3_2_Homogeneouscoordinaterings.txt` |
-| 010 | [ ] | 3.3 Quasi-projective varieties | section | `010__Introductionto__3_3_Quasi-projectivevarieties.txt` |
+| 008 | [x] | 3.1 Projective spaces and projective varieties | section | `008__Introductionto__3_1_Projectivespacesandproject.txt` |
+| 009 | [x] | 3.2 Homogeneous coordinate rings | section | `009__Introductionto__3_2_Homogeneouscoordinaterings.txt` |
+| 010 | [x] | 3.3 Quasi-projective varieties | section | `010__Introductionto__3_3_Quasi-projectivevarieties.txt` |
 
 ## 4. Classical Projective Embeddings
 

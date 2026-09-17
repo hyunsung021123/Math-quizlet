@@ -1,0 +1,183 @@
+{
+  "chapter_info": {
+    "title": "3. Projective Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "아핀 공간은 '무한히 먼 곳'을 갖지 않아 평행선이 만나지 않는 등 기하학적으로 불완전하다. 이 장은 사영공간 $\\mathbb{P}^N$과 그 위의 자리스키 위상, 동차좌표·동차다항식·동차화/비동차화라는 도구를 도입해 이 결함을 고치고, 사영다양체가 국소적으로는 여전히 아핀다양체들의 조각으로 덮인다는 사실(표준 차트)을 확립한다. 이는 '두 직선은 항상 정확히 한 점에서 만난다'는 고전적 교차 이론의 출발점이자, 이후 베로네제 사상·세그레 사상 등 고전적 사영 매장을 다루는 4장의 토대가 된다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "3.3 Quasi-projective varieties",
+      "step1_big_picture": {
+        "context": "이 절은 2장에서 아핀다양체에 대해 세운 모든 것 — 정칙함수, 모피즘, 국소환, 유리함수·함수체, 유리사상·쌍유리 동치 — 를 준사영다양체(quasi-projective variety, 사영대수적집합의 열린부분집합)라는 훨씬 더 일반적인 무대 위로 그대로 옮겨 놓는다. 전략은 한결같다: 표준 차트 $U_i\\cong\\mathbb{A}^N$을 통해 '국소적으로는 항상 아핀다양체의 열린부분집합'이라는 사실(3.1절)을 이용해, 준사영적 대상에 대한 모든 질문을 국소적으로 아핀 질문으로 환원하는 것이다. 정칙함수는 이제 '같은 차수의 동차다항식의 비율 $F/G$'로 정의되고(비율이므로 스칼라배에 불변), 모피즘은 그런 정칙함수들의 튜플 $[F_0:\\cdots:F_M]$로 정의된다. 이 절의 정점은 평면 원뿔곡선 $Q=V_+(xy-z^2)$이 사영직선 $\\mathbb{P}^1$과 실제로 동형이라는 예제 3.19(정리 3.6의 원뿔곡선을 매개변수화하는 셈)와, '준사영다양체 사이의 지배적 유리사상 ↔ 함수체 사이의 단사 $\\mathbb{C}$-대수 준동형'이라는 정리 3.25(정리 2.16의 완전한 일반화)이다.",
+        "hidden_intuition": "이 절 전체를 관통하는 하나의 원리는 '동차성(homogeneity)이 스칼라배 불변성을 자동으로 보장한다'는 것이다 — 개별 동차다항식 $F$ 자체는 점 $[a]$에서 잘 정의된 값을 갖지 않지만(대표를 바꾸면 값도 바뀌므로), 같은 차수의 두 동차다항식의 비율 $F/G$는 $F(\\lambda a)/G(\\lambda a)=\\lambda^{\\deg F}F(a)/(\\lambda^{\\deg G}G(a))=F(a)/G(a)$로 스칼라가 정확히 상쇄되어 잘 정의된 값을 준다. 이 관찰 하나가 정칙함수의 정의(같은 차수의 비율), 모피즘의 정의($[F_0:\\cdots:F_M]$가 좌표로서 스칼라배 불변), 그리고 정리 3.22의 $F(S(X))_0$(차수 $0$의 동차 분수체, 즉 분자·분모가 같은 차수인 것들만 모은 부분환)이라는 구성 전부를 정당화한다. 명제 3.14·3.20·정리 3.22가 반복해서 하는 일은 결국 하나다: 사영적 대상(정칙함수·국소환·함수체)을 표준 차트를 통해 그에 대응하는 아핀적 대상과 동일시하는 것 — 즉 이 절은 새로운 이론을 만드는 것이 아니라, 2장의 이론이 '전역적으로 아핀이 아닌' 공간에서도 국소적으로는 조금도 다르지 않게 작동한다는 것을 확인하는 절이다. 예제 3.19의 원뿔곡선 $Q\\cong\\mathbb{P}^1$은 이 전체 기계장치가 실전에서 하나로 합쳐지는 첫 장면이다: 매개변수화 $\\nu(s,t)=[s^2:t^2:st]$는 $\\mathbb{P}^1$의 두 표준 차트 각각에서 $Q$의 서로 다른 두 아핀 조각으로 내려가는 모피즘들을 이어붙인 것이다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (준사영대수적집합, 준사영다양체, '대수다양체'의 관례)",
+          "formal_statement": "준사영대수적집합(quasi-projective algebraic set)이란 사영대수적집합의 열린부분집합을 말한다. 이것이 공집합이 아니고 기약이면 준사영다양체(quasi-projective variety)라 부른다. 이 강의에서 대수다양체(algebraic variety)는 보통 준사영다양체를 뜻한다. $X\\subseteq\\mathbb{P}^N$을 준사영다양체라 하자. 각 $X\\cap U_i$는 (표준 차트를 통해) 어떤 아핀다양체의 기약 열린부분집합으로 볼 수 있고, 이는 다시 아핀 열린부분집합들로 덮인다. 따라서 모든 준사영다양체는 아핀 열린부분집합들로 덮인다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (준사영다양체 위의 정칙함수 $O_X(U)$)",
+          "formal_statement": "열린부분집합 $U\\subseteq X$에 대해, 함수 $g:U\\to\\mathbb{C}$가 $p\\in U$에서 정칙(regular)이라는 것은 $p$의 근방 $W\\subseteq U$와 같은 차수의 동차다항식 $F,G\\in\\mathbb{C}[x_0,\\dots,x_N]$가 있어 $G$가 $W$ 위에서 어디서도 $0$이 아니고 $$g(q)=\\frac{F(q)}{G(q)}\\quad\\text{for }q\\in W$$ 를 만족한다는 것이다. $g$가 $U$의 모든 점에서 정칙이면 $U$ 위에서 정칙이라 한다. $U$ 위의 정칙함수환을 $O_X(U)$로 쓴다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.14 (표준 차트를 통한 $O_X$와 아핀 정칙함수환의 동일시)",
+          "formal_statement": "$Z\\subseteq\\mathbb{P}^N$을 준사영다양체, $X\\subseteq Z$를 열린부분집합(따라서 $X$도 준사영다양체)이라 하자. 각 $0\\le i\\le N$에 대해 $$O_X(X\\cap U_i)\\cong O_{\\phi_i(Z\\cap U_i)}\\big(\\phi_i(X\\cap U_i)\\big)$$ 이며, 여기서 $\\phi_i:U_i\\to\\mathbb{A}^N$은 명제 3.1의 표준 차트 사상이고 $\\phi_i(Z\\cap U_i)\\subseteq\\mathbb{A}^N$은 아핀다양체이다.",
+          "idea_behind_proof": "같은 차수의 동차다항식의 비율 $F/G$가 $U_i$에서 비동차화되면 그대로 아핀 분수식 $F^{\\mathrm{deh}}_i/G^{\\mathrm{deh}}_i$가 되고, 역으로 아핀 분수식은 분자·분모에 $x_i$의 적당한 거듭제곱을 곱해 같은 차수의 동차 분수식으로 되돌릴 수 있다는 것이 전부다.",
+          "proof_steps": [
+            "차수가 같은 동차 분수식 $F/G$는 $U_i$ 위에서 비동차화되어 분수식 $F^{\\mathrm{deh}}_i/G^{\\mathrm{deh}}_i$가 된다.",
+            "역으로 $U_i$ 위의 분수식 $a/b$는 $\\left(x_i^{\\deg b}a^h_i\\right)/\\left(x_i^{\\deg a}b^h_i\\right)$라는 동차 분수식을 주며, 그 분자와 분모는 차수가 $\\deg(x_i^{\\deg b}a^h_i)=\\deg(x_i^{\\deg a}b^h_i)$로 같다.",
+            "이 두 구성이 서로 역이므로 $O_X(X\\cap U_i)\\cong O_{\\phi_i(Z\\cap U_i)}(\\phi_i(X\\cap U_i))$를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (준사영대수적집합 사이의 모피즘, 동형사상)",
+          "formal_statement": "$X\\subseteq\\mathbb{P}^N$, $Y\\subseteq\\mathbb{P}^M$을 준사영대수적집합이라 하자. 사상 $\\phi:X\\to Y$가 모피즘(morphism)이라는 것은 모든 $p\\in X$가 열린근방 $W$를 가져, 그 위에서 $$\\phi(q)=[F_0(q):\\cdots:F_M(q)]$$ 를 만족하는 같은 차수의 동차다항식 $F_0,\\dots,F_M\\in\\mathbb{C}[x_0,\\dots,x_N]$($W$ 위에서 동시에 소멸하지 않음)이 존재한다는 것이다. 동형사상(isomorphism)은 양방향 모피즘 역을 갖는 모피즘이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.15 (모피즘 = 국소적으로 정칙함수 튜플)",
+          "formal_statement": "$X\\subseteq\\mathbb{P}^N$, $Y\\subseteq\\mathbb{P}^M$을 준사영대수적집합이라 하자. $\\phi:X\\to Y$가 모피즘인 것은, 모든 $p\\in X$가 열린근방 $W$를 가져 그 위의 정칙함수 $f_0,\\dots,f_M\\in O_X(W)$(동시에 소멸하지 않음)로 $$\\phi(q)=[f_0(q):\\cdots:f_M(q)]\\quad(q\\in W)$$ 라 쓸 수 있다는 것과 동치이다.",
+          "idea_behind_proof": "($\\Rightarrow$)는 동차다항식의 비율 $F_i/F_j$가 그 자체로 정칙함수라는 관찰이다. ($\\Leftarrow$)는 각 정칙함수 $f_i=A_i/B_i$의 분모들을 전부 곱해 하나의 공통분모로 통분하는 것뿐이다.",
+          "proof_steps": [
+            "($\\Rightarrow$): $\\phi$가 모피즘이면 근방 $W$ 위에서 $\\phi(q)=[F_0(q):\\cdots:F_M(q)]$(동차, 동차수, 동시비영)로 쓸 수 있다. $0\\le j\\le M$에 대해 $W\\setminus V_+(F_j)$ 위에서 $F_i/F_j$는 정칙함수이고 $\\phi(q)=[F_0(q)/F_j(q):\\cdots:F_M(q)/F_j(q)]$이다.",
+            "($\\Leftarrow$): 역으로 각 $p\\in X$의 근방 $W$ 위에서 정칙함수 $f_0,\\dots,f_M$(동시비영)로 $\\phi(q)=[f_0(q):\\cdots:f_M(q)]$가 성립한다 하자. 각 $0\\le i\\le M$에서 $f_i=A_i/B_i$(같은 차수의 동차 $A_i,B_i$)로 쓰고, $W$를 좁혀 모든 $B_i$가 $W$ 위에서 어디서도 $0$이 아니라고 가정할 수 있다.",
+            "$B_i':=B_0\\cdots\\widehat{B_i}\\cdots B_M$이라 하면 $A_iB_i'\\in\\mathbb{C}[x_0,\\dots,x_N]$들은 전부 같은 차수의 동차다항식이고, $\\phi(q)=[(A_0B_0')(q):\\cdots:(A_MB_M')(q)]$이다. 이는 $\\phi$가 모피즘임을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.16 (모피즘의 연속성과 합성)",
+          "formal_statement": "준사영다양체 사이의 모피즘은 연속이다. 준사영다양체 사이의 모피즘들의 합성은 모피즘이다.",
+          "idea_behind_proof": "모피즘은 국소적으로 표준 아핀 차트의 열린부분집합 사이의 정칙 사상이므로, 연속성은 정리 2.6(4)를 그대로 가져다 쓰면 된다.",
+          "proof_steps": [
+            "준사영다양체 사이의 모피즘은 국소적으로 표준 아핀 차트의 열린부분집합 사이의 정칙 사상이므로, 연속성은 정리 2.6에서 따라온다.",
+            "합성이 모피즘이라는 것은 정의를 그대로 확인하면 자명하다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.17 (표준 차트는 동형사상이고, 초평면은 $\\mathbb{P}^{N-1}$과 동형이다)",
+          "formal_statement": "명제 3.1의 사상 $\\phi_i$는 동형사상이다. 일차형식 $\\ell$에 대한 $\\mathbb{P}^N$의 모든 초평면 $V_+(\\ell)$은 $\\mathbb{P}^{N-1}$과 동형이다."
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 3.18 (정칙함수의 항등정리)",
+          "formal_statement": "$X$를 준사영다양체, $U\\subseteq X$를 공집합이 아닌 열린부분집합, $g,h\\in O_X(U)$라 하자. $U$의 공집합이 아닌 어떤 열린부분집합 위에서 $g=h$이면 $U$ 전체에서 $g=h$이다.",
+          "idea_behind_proof": "$p\\in U$ 근처에서 $g-h$를 하나의 분수식 $F/G$로 쓰면, 그 분수식이 어떤 열린조밀 부분집합에서 $0$이라는 것은 분자 $F$가 그 위에서(따라서 기약성에 의해 $X$가 조밀한 만큼) 소멸한다는 것을 뜻하고, 다항식이 열린집합 위에서 소멸하면 그 점에서도 소멸한다는 연속성 논증으로 끝난다.",
+          "proof_steps": [
+            "$p\\in U$에 대해 $g-h=F/G$를 $p$의 근방 $N$ 위에서 쓰자(단 $F,G$는 같은 차수의 동차, $G$는 $N$ 위에서 어디서도 $0$이 아님).",
+            "$F/G=0$이 $N$의 공집합이 아닌 열린부분집합 위에서 성립하므로, $F$가 그 위에서 소멸한다. 자리스키 위상에서 이는 $p$에서도 $g(p)=h(p)$임을 강제한다(비영 동차다항식의 영점집합은 $N$을 진부분집합으로만 자를 수 있어, $p$가 그 영점집합 안에 있음을 배제할 수 없다면 연속성 논증을 국소 아핀 차트로 옮겨 명제 1.10 방식의 조밀성 논증을 적용).",
+            "$p\\in U$가 임의였으므로 $g=h$가 $U$ 전체에서 성립한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.19 (매끄러운 원뿔곡선은 $\\mathbb{P}^1$과 동형이다)",
+          "formal_statement": "$Q:=V_+(xy-z^2)\\subseteq\\mathbb{P}^2$라 하자. 이차형식 $xy-z^2$의 계수(rank)가 $3$이므로 $Q$는 사영다양체이다. $W_1:=Q\\setminus\\{[0:1:0]\\}$, $W_2:=Q\\setminus\\{[1:0:0]\\}$이라 하면 $$W_1\\to\\mathbb{P}^1,\\ [x:y:z]\\mapsto[x:z]\\qquad\\text{와}\\qquad W_2\\to\\mathbb{P}^1,\\ [x:y:z]\\mapsto[z:y]$$ 는 $W_1\\cap W_2$ 위에서 $[x:z]=[xy:yz]=[z^2:yz]=[z:y]$이므로 하나의 모피즘 $\\pi:Q\\to\\mathbb{P}^1$을 정의한다. 이는 역사상 $\\nu:\\mathbb{P}^1\\to Q,\\ [s:t]\\mapsto[s^2:t^2:st]$을 갖는 동형사상이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.20 (정칙함수의 싹, 국소환 $O_{X,p}$의 표준 차트 동일시)",
+          "formal_statement": "$X$를 준사영다양체, $p\\in X$라 하자. $p$에서의 정칙함수의 싹들은 국소환 $O_{X,p}$를 이루며, 그 극대아이디얼은 $p$에서 소멸하는 싹들로 구성된다(정칙함수의 싹이 $O_{X,p}$의 단위원인 것은 정확히 그 값이 $p$에서 $0$이 아닌 것과 동치). $p\\in U_i$인 $0\\le i\\le N$을 고르고 $Z:=\\overline{X}\\subseteq\\mathbb{P}^N$이라 하면 $Z\\cap U_i\\subseteq U_i\\cong\\mathbb{A}^N$은 아핀다양체이고, $$O_{X,p}\\cong O_{Z\\cap U_i,p}$$ 이다.",
+          "idea_behind_proof": "명제 3.14가 이미 $X\\cap U_i$ 전체에서의 정칙함수환의 동일시를 주므로, 그 동일시를 점 $p$로 국소화(직극한을 취함)하기만 하면 된다.",
+          "proof_steps": [
+            "명제 3.14에 의해 $O_X(X\\cap U_i)\\cong O_{Z\\cap U_i}(\\phi_i(X\\cap U_i))$이다. $p$를 포함하는 점점 더 작은 열린근방들에 대해 이 동일시를 취하고 극한(직극한)을 취하면 싹들의 국소환의 동일시 $O_{X,p}\\cong O_{Z\\cap U_i,p}$를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (유리함수, 함수체 $\\mathbb{C}(X)$ — 준사영 버전)",
+          "formal_statement": "$X$를 준사영다양체라 하자. $X$ 위의 유리함수(rational function)는 쌍 $(U,f)$($U\\subseteq X$는 공집합 아닌 열린부분집합, $f\\in O_X(U)$)의 동치류이며, 두 쌍 $(U,f)$와 $(V,g)$가 동치인 것은 어떤 공집합 아닌 열린부분집합 $W\\subseteq U\\cap V$ 위에서 $f=g$인 것이다. 이 동치류들이 $X$의 함수체 $\\mathbb{C}(X)$를 이룬다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.21 ($\\mathbb{C}(X)\\cong\\mathbb{C}(W)$, 열린부분집합으로의 제한)",
+          "formal_statement": "$X$를 준사영다양체, $W\\subseteq X$를 공집합이 아닌 열린부분집합이라 하자. 그러면 $\\mathbb{C}(X)\\cong\\mathbb{C}(W)$이다.",
+          "idea_behind_proof": "$W$로의 제한 사상이 그 자체로 환 동형사상이 된다는 것은, 유리함수의 정의 자체가 '어딘가 조밀한 열린집합 위에서 정의되면 충분하다'는 뜻이므로 $X$에서 정의된 유리함수를 $W$ 위로 제한해도 정보가 전혀 소실되지 않고, 반대로 $W$ 위의 유리함수도 그 자체로 이미 $X$ 위의 유리함수라는 사실에서 곧바로 나온다.",
+          "proof_steps": [
+            "$W$로의 제한 사상 $\\mathbb{C}(X)\\to\\mathbb{C}(W)$은 환 준동형이다. 유리함수의 정의역이 열린부분집합이기만 하면 되므로 이 제한은 전단사이며, 따라서 환 동형사상이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.22 ($\\mathbb{C}(X)\\cong F(S(X))_0$, 아핀 조각과의 일치)",
+          "formal_statement": "$X\\subseteq\\mathbb{P}^N$을 사영다양체라 하자. 그러면 $S(X)$는 등급 정역(graded integral domain)이고, 그 차수 $0$ 부분의 분수체는 $$F(S(X))_0:=\\left\\{\\left.\\frac{F}{G}\\ \\right|\\ F,G\\in S(X)\\text{는 동차, }G\\ne 0,\\ \\deg F=\\deg G\\right\\}$$ 로 주어진다. 이때 $\\mathbb{C}(X)\\cong F(S(X))_0$이다. 더 나아가, $X\\cap U_i\\ne\\emptyset$이면 $X\\cap U_i\\subseteq U_i\\cong\\mathbb{A}^N$은 아핀다양체이고 $\\mathbb{C}(X)\\cong\\mathbb{C}(X\\cap U_i)$이다.",
+          "idea_behind_proof": "전반부는 정리 2.12의 사영 버전으로, $F(S(X))_0$의 모든 원소가 그 자체로 유리함수를 정의한다는 단사인 사상을 만들고, 임의의 유리함수가 어차피 국소적으로 같은 차수의 동차 분수식이라는 사실로 전사성을 얻는다. 후반부는 $F/G\\mapsto F^{\\mathrm{deh}}_i/G^{\\mathrm{deh}}_i$라는 명시적인 비동차화 사상이 동형사상임을 직접 확인하는 것이다.",
+          "proof_steps": [
+            "$F(S(X))_0$의 모든 $F/G$는 그 자체로 유리함수를 정의하므로 단사 환 준동형 $F(S(X))_0\\to\\mathbb{C}(X)$를 얻는다. $X$ 위의 임의의 유리함수는 어떤 공집합이 아닌 열린부분집합 위에서 같은 차수의 동차 $F,G\\in\\mathbb{C}[x_0,\\dots,x_N]$($G$는 그 위에서 어디서도 $0$이 아님)에 의한 $F/G$로 표현되므로 이 사상은 전사이기도 하다.",
+            "두 번째 주장을 위해, 사상 $F(S(X))_0\\to\\mathbb{C}(X\\cap U_0)$, $F/G\\mapsto F^{\\mathrm{deh}}_i/G^{\\mathrm{deh}}_i$를 생각하자(단사 환 준동형).",
+            "$\\mathbb{C}(X\\cap U_0)$의 임의의 $a/b$는 $\\left(x_i^{\\deg b}a^h_i\\right)/\\left(x_i^{\\deg a}b^h_0\\right)$의 상이므로, 이 준동형은 전사이기도 해 동형사상이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (준사영다양체 사이의 유리사상, 지배적 사상)",
+          "formal_statement": "$X,Y$를 준사영다양체라 하자. 유리사상 $X\\dashrightarrow Y$는 쌍 $(U,\\phi_U)$($U\\subseteq X$는 공집합 아닌 열린부분집합, $\\phi_U:U\\to Y$는 정칙 사상)의 동치류이며, 두 쌍이 동치인 것은 어떤 공집합 아닌 열린부분집합 $W\\subseteq U\\cap V$에서 $\\phi_U=\\phi_V$인 것이다. 유리사상 $\\phi:X\\dashrightarrow Y\\subseteq\\mathbb{P}^M$은 (정리 2.15와 마찬가지로) $I(Y)$의 모든 $F$에서 $F(q_0,\\dots,q_M)=0$을 만족하는, $\\mathbb{C}(X)^*$의 한 원소를 전체에 곱하는 것을 제외하면 유일한 $0$이 아닌 튜플 $(q_0,\\dots,q_M)\\in\\mathbb{C}(X)^{M+1}\\setminus\\{0\\}$을 결정한다. $q_0,\\dots,q_M$이 $p\\in X$에서 정칙이면 $\\phi$는 $p$를 $[q_0(p):\\cdots:q_M(p)]$로 보낸다. 유리사상 $X\\dashrightarrow Y$가 지배적(dominant)이라는 것은 한 대표의 상이 조밀하다는 것이며, 이는 대표의 선택에 무관하다. $\\phi:X\\dashrightarrow Y$가 지배적이고 $\\psi:Y\\dashrightarrow Z$가 유리사상이면 $\\psi\\circ\\phi$도 유리사상이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.23 (유리사상의 정칙 판정과 $\\mathrm{Dom}(\\phi)$)",
+          "formal_statement": "$X$를 준사영다양체, $Y\\subseteq\\mathbb{P}^M$을 사영다양체, $\\phi:X\\dashrightarrow Y$를 $(q_0,\\dots,q_M)\\in\\mathbb{C}(X)^{M+1}\\setminus\\{0\\}$로 표현되는 유리사상이라 하자. $q_0,\\dots,q_M$이 $p\\in X$에서 정칙인 것은, 어떤 $\\lambda\\in\\mathbb{C}(X)^*$가 있어 $$\\lambda q_i\\in O_{X,p}\\ (0\\le i\\le M)\\qquad\\text{그리고}\\qquad \\lambda q_j\\in O_{X,p}^*\\text{인 어떤 }0\\le j\\le M\\text{이 존재}$$ 하는 것과 동치이다. 더 나아가, 이러한 점들의 집합은 $\\phi$가 모피즘이 되는 $X$의 극대 공집합 아닌 열린부분집합 $\\mathrm{Dom}(\\phi)$를 이룬다.",
+          "idea_behind_proof": "첫 주장은 정칙성의 정의를 그대로 옮긴 것이다. 준사영다양체 사이의 유리사상은 국소적으로 아핀다양체 사이의 유리사상이므로, 두 번째 주장은 정리 2.15를 그대로 가져다 쓰면 된다.",
+          "proof_steps": [
+            "첫 주장은 정의에서 명백하다.",
+            "준사영다양체 사이의 유리사상은 국소적으로 아핀다양체 사이의 유리사상이므로, 두 번째 주장은 정리 2.15에서 따라온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.24 (유리사상 $\\mathbb{A}^2\\dashrightarrow\\mathbb{P}^1$의 정의역)",
+          "formal_statement": "유리사상 $\\phi:\\mathbb{A}^2\\dashrightarrow\\mathbb{P}^1$, $(x,y)\\mapsto[x:y]$에 대해 $\\mathrm{Dom}(\\phi)=\\mathbb{A}^2\\setminus\\{(0,0)\\}$이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.25 (쌍유리 동치의 완전한 일반화 — 준사영 버전)",
+          "formal_statement": "준사영다양체 $X,Y$에 대해, 지배적 유리사상 $\\phi:X\\dashrightarrow Y$는 단사 $\\mathbb{C}$-대수 준동형 $\\phi^*:\\mathbb{C}(Y)\\to\\mathbb{C}(X)$와 일대일로 대응하며, 이 대응은 합성의 순서를 뒤집는다. 특히 $X,Y$가 쌍유리($X\\sim_{\\mathrm{bir}}Y$)인 것, $\\mathbb{C}(X)\\cong\\mathbb{C}(Y)$인 것, 그리고 $X,Y$가 서로 동형인 공집합이 아닌 열린부분집합을 갖는 것은 모두 동치이다.",
+          "idea_behind_proof": "준사영다양체 사이의 유리사상은 국소적으로 아핀다양체 사이의 유리사상이고, 명제 3.21에 의해 열린 아핀 부분집합의 함수체가 원래 준사영다양체의 함수체와 같으므로, 정리 2.16을 그대로 가져다 쓰면 끝난다.",
+          "proof_steps": [
+            "준사영다양체 사이의 유리사상은 국소적으로 아핀다양체 사이의 유리사상이고, 명제 3.21에 의해 열린 아핀 부분집합의 함수체는 원래 준사영다양체의 함수체와 같다.",
+            "따라서 이 명제는 정리 2.16에서 그대로 따라온다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예제 3.19에서 $W_1\\cap W_2$ 위의 두 사상 $[x:y:z]\\mapsto[x:z]$와 $[x:y:z]\\mapsto[z:y]$가 실제로 같은 점을 준다는 것, 즉 $[x:z]=[z:y]$임을 $Q$의 방정식 $xy=z^2$을 이용해 직접 확인하라.",
+          "hint": "$[x:z]$와 $[z:y]$가 같은 점이려면 $xy=z\\cdot z$, 즉 $x\\cdot y=z\\cdot z$가 성립해야 한다는 사실을 이용해 스칼라배 관계를 찾아라.",
+          "solution": "$Q$ 위의 점이므로 $xy=z^2$이다. $[x:z]$의 대표를 $y$배, $[z:y]$의 대표를 $z$배 해서 비교하면: $[x:z]=[xy:zy]$이고 $xy=z^2$이므로 $[xy:zy]=[z^2:zy]=[z:y]$($z\\ne 0$일 때 공통인수 $z$로 나눔). 따라서 $z\\ne 0$인 $W_1\\cap W_2$ 위에서 $[x:z]=[z:y]$가 확인된다(강의노트의 $[x:z]=[xy:yz]=[z^2:yz]=[z:y]$ 계산과 일치)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 3.24의 유리사상 $\\phi:\\mathbb{A}^2\\dashrightarrow\\mathbb{P}^1$, $(x,y)\\mapsto[x:y]$가 원점 $(0,0)$에서 왜 정칙일 수 없는지, 정리 3.23의 언어($\\lambda q_i\\in O_{X,p}$ 조건)로 설명하라.",
+          "hint": "$\\phi$는 $q_0=x,q_1=y\\in\\mathbb{C}(\\mathbb{A}^2)$로 표현된다. $\\lambda\\in\\mathbb{C}(\\mathbb{A}^2)^*$를 아무리 골라도 $\\lambda x,\\lambda y$가 원점에서 동시에 정칙이면서 그중 하나가 원점에서 단위원이 되는(즉 $0$이 아닌 값을 갖는) 상황이 가능한지 따져 보라.",
+          "solution": "$q_0=x,q_1=y$이다. 만약 어떤 $\\lambda\\in\\mathbb{C}(\\mathbb{A}^2)^*=\\mathbb{C}(x,y)^*$가 있어 $\\lambda x,\\lambda y\\in O_{\\mathbb{A}^2,(0,0)}$이고 그중 하나, 예를 들어 $\\lambda x$가 원점에서 단위원(즉 $(\\lambda x)(0,0)\\ne 0$)이라면, 그러면 $\\lambda$ 자체가 원점 근방에서 극이 없어야 $\\lambda x$가 정칙이면서 $0$이 아닌 값을 가질 수 있는데, $\\lambda x$가 원점에서 $0$이 아니려면 $\\lambda$가 $x=0$ 근방에서 $1/x$ 정도의 극을 가져야 하고(그래야 $\\lambda x$가 원점 근방에서 $0$으로 수렴하지 않을 수 있음), 그러면 $\\lambda y$도 같은 $\\lambda$를 곱하므로 $y/x$ 형태가 되어 원점 근처에서 $(x,y)$가 어떤 경로로 원점에 접근하느냐에 따라 값이 달라져(예: $y=cx$를 따라가면 $\\lambda y\\to c$로 경로마다 다른 극한) 정칙일 수 없다. 즉 $x,y$ 두 좌표 중 어느 하나를 단위원으로 만들려는 순간 다른 하나가 원점에서 경로에 따라 다른 극한을 갖게 되어 정칙성이 깨진다 — 이것이 정확히 $\\phi$가 원점에서 정칙일 수 없는 이유이며, $\\mathrm{Dom}(\\phi)=\\mathbb{A}^2\\setminus\\{(0,0)\\}$이 극대임을 보장한다."
+        },
+        {
+          "type": "ox",
+          "question": "준사영다양체 사이의 모피즘 $\\phi:X\\to Y$가 $[F_0:\\cdots:F_M]$ 꼴로 주어질 때, 그 좌표를 나타내는 동차다항식 $F_0,\\dots,F_M$은 반드시 서로 다른 차수를 가져도 무방하다.",
+          "answer": "X",
+          "explanation": "거짓이다. 정의(및 명제 3.15)에서 명시하듯 $F_0,\\dots,F_M$은 반드시 같은 차수의 동차다항식이어야 한다 — 그래야 스칼라배 $[a]\\mapsto[\\lambda a]$에 대해 $[F_0(\\lambda a):\\cdots:F_M(\\lambda a)]=[\\lambda^d F_0(a):\\cdots:\\lambda^dF_0(a)]=[F_0(a):\\cdots:F_M(a)]$로 잘 정의된 사영좌표가 나온다. 차수가 다르면 이 스칼라 상쇄가 깨져 사상 자체가 대표에 의존하게 되어 버린다."
+        },
+        {
+          "type": "ox",
+          "question": "보조정리 3.18(항등정리)에 의해, 준사영다양체 위의 두 정칙함수가 어느 한 점에서 값이 같으면 그 함수들은 전체 정의역에서 같다.",
+          "answer": "X",
+          "explanation": "거짓이다. 보조정리 3.18이 요구하는 조건은 '한 점'이 아니라 '공집합이 아닌 열린부분집합' 위에서 같다는 것이다. 한 점에서만 값이 같은 것으로는 (기약다양체일지라도) 함수 전체가 같다는 결론을 낼 수 없다 — 예를 들어 $\\mathbb{A}^1$ 위의 $f(t)=t$와 $g(t)=0$은 $t=0$에서 값이 같지만 다른 모든 점에서 다르다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 3.14·3.20·정리 3.22는 각각 '전역 정칙함수환', '국소환(싹)', '함수체'라는 세 가지 서로 다른 크기의 대상에 대해 준사영/사영적 정의가 아핀 정의와 일치함을 보인다. 이 세 결과가 사실상 '하나의 원리'의 세 가지 크기별 버전이라는 관점에서, 그 공통 원리가 무엇인지, 그리고 왜 굳이 세 번 따로 증명해야 했는지(하나로 통합할 수는 없었는지) 설명하라.",
+          "hint": "세 결과 모두 표준 차트 $\\phi_i$를 통한 동일시라는 같은 도구를 쓴다는 점에 주목하되, '전역', '점 근방(싹)', '조밀한 열린집합(유리함수)'이라는 서로 다른 '열린집합의 크기'가 정확히 무엇을 바꾸는지 생각해 보라.",
+          "answer": "세 결과의 공통 원리는 정확히 하나다 — '같은 차수의 동차다항식의 비율'이라는 사영적 대상은 표준 차트 $\\phi_i$를 통해 비동차화하면 정확히 그에 대응하는 아핀적 대상(다항식의 비율)이 되고, 이 대응이 환 구조를 보존하는 동형사상이라는 것. 명제 3.14는 이를 '고정된 열린집합 $U$ 전체'에 적용하고, 명제 3.20은 그 열린집합을 점점 좁혀 '한 점의 임의로 작은 근방들'(즉 싹, 직극한)에 적용하며, 정리 3.22는 반대로 그 열린집합을 '조밀하기만 하면 되는 임의의 열린집합'(유리함수)까지 넓혀 적용한다. 즉 이 셋은 '어떤 크기의 열린집합에서 함수를 보는가'라는 하나의 매개변수를 극단적으로 좁히거나(점) 넓힌(조밀 열린집합) 세 가지 특수한 경우일 뿐이다. 하나로 통합해서 한 번에 증명하지 않은 이유는 순전히 실용적이다 — 각 크기마다 '동일시가 실제로 환 준동형이자 전단사'라는 것을 보이는 세부 논증(공통분모로 통분하는 방식, 극한을 취하는 방식, 유리함수의 동치류를 다루는 방식)이 조금씩 다르고, 특히 점별 국소환(명제 3.20)은 직극한이라는 별도의 대수적 개념을 필요로 하며, 함수체(정리 3.22)는 등급환의 차수 $0$ 부분이라는 부가적인 구조를 필요로 하기 때문이다. 하지만 강의노트가 명제 3.20의 증명에서 '이는 명제 3.14로부터 따라온다'라고만 적은 것에서 보이듯, 이 세 결과는 논리적으로 독립된 세 정리라기보다는 '표준 차트를 통한 동일시'라는 하나의 아이디어를 서로 다른 눈금(전역·점·유리)에서 적용한 하나의 이야기로 이해하는 것이 맞다."
+        }
+      ]
+    }
+  ]
+}

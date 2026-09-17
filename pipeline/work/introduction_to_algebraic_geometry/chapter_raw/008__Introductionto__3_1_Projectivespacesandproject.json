@@ -1,0 +1,210 @@
+{
+  "chapter_info": {
+    "title": "3. Projective Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "아핀 공간은 '무한히 먼 곳'을 갖지 않아 평행선이 만나지 않는 등 기하학적으로 불완전하다. 이 장은 사영공간 $\\mathbb{P}^N$과 그 위의 자리스키 위상, 동차좌표·동차다항식·동차화/비동차화라는 도구를 도입해 이 결함을 고치고, 사영다양체가 국소적으로는 여전히 아핀다양체들의 조각으로 덮인다는 사실(표준 차트)을 확립한다. 이는 '두 직선은 항상 정확히 한 점에서 만난다'는 고전적 교차 이론의 출발점이자, 이후 베로네제 사상·세그레 사상 등 고전적 사영 매장을 다루는 4장의 토대가 된다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "3.1 Projective spaces and projective varieties",
+      "step1_big_picture": {
+        "context": "이 소단원은 사영공간 $\\mathbb{P}^N$을 '원점을 지나는 직선들의 집합'으로 정의하는 것에서 시작해, 동차좌표 $[a_0:\\cdots:a_N]$이라는 표기와 그 스칼라배 불변성을 익힌다. 동차다항식만이 $\\mathbb{P}^N$의 점에서 '$0$인지 아닌지'를 잘 정의할 수 있다는 관찰로부터 동차이데알과 $V_+(\\mathcal{F})$를 정의하고, 이것이 실제로 $\\mathbb{P}^N$ 위의 자리스키 위상을 이룸을 확인한다. 이어 각 좌표 $x_i\\ne 0$인 표준 차트 $U_i$가 아핀공간 $\\mathbb{A}^N$과 위상동형임을(명제 3.1) 보이고, 동차화·비동차화라는 서로 역인 두 연산으로 아핀다양체와 사영다양체 사이를 오가는 사전을 완성한다(명제 3.2). 마지막으로 이 기계장치의 첫 결실로 사영공간에서 평행선이 무한원점에서 만난다는 사실(예제 3.3), 사영뿔(projective cone)이라는 구성(명제 3.4), 그리고 '일반위치의 다섯 점을 지나는 원뿔곡선은 유일하다'는 고전적 결과(정리 3.6)를 살펴본다.",
+        "hidden_intuition": "사영공간의 핵심 아이디어는 '방향'만 기억하고 '크기'는 잊는 것이다 — $\\mathbb{P}(V)$의 한 점은 $V$ 안의 1차원 부분공간, 즉 원점을 지나는 하나의 직선 전체이므로, 그 직선 위의 어떤 벡터를 대표로 뽑든 (영벡터만 아니면) 같은 점을 나타낸다. 이 '스칼라배 무시'라는 단 하나의 규칙이 개별 좌표함수 $x_i$ 자체는 $\\mathbb{P}^N$ 위에서 값이 정해지지 않게 만들지만(같은 점을 $\\lambda$배 하면 값도 $\\lambda^d$배가 되므로), 그 비율 $x_j/x_i$나 동차다항식의 영점 집합은 대표에 무관하게 잘 정의된다는 절묘한 균형을 만든다. 표준 차트 $U_i\\cong\\mathbb{A}^N$이 말해주는 것은 사영공간이 '아핀공간에 무한원점들을 덧붙인 것'이라는 그림이다 — $U_0\\cong\\mathbb{A}^N$은 '유한한 점들'이고, $V_+(x_0)\\cong\\mathbb{P}^{N-1}$은 그 무한원점들의 집합이다. 동차화 $f\\mapsto f^h_0$는 정확히 이 그림을 대수적으로 실행한다: 아핀다항식 $f$의 각 항에 적당한 $x_0$의 거듭제곱을 곱해 동차로 만드는 것은, 기하학적으로는 아핀다양체 $V(f)$의 폐포를 사영공간에서 취해 무한원점들을 이어붙이는 것과 정확히 같다. 예제 3.3의 평행선이 무한원점에서 만난다는 사실은 이 그림의 가장 직관적인 확인이며, 정리 3.6은 이 사영공간의 완전성(모든 두 곡선이 교차한다는 성질, 추후 교차 이론에서 정밀화됨)이 어떻게 고전적인 조합적 계산(원뿔곡선의 매개변수 공간이 $\\mathbb{P}^5$라는 사실)과 결합해 놀랍도록 강력한 결과를 내는지 보여주는 첫 사례다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "사영직선 $\\mathbb{P}^1$의 표준 차트: $U_0=\\{[1:a]\\}\\cong\\mathbb{A}^1$과 무한원점 $[0:1]$.",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.4,
+                0
+              ],
+              "to": [
+                2.4,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.1,
+                0.3
+              ],
+              "text": "$U_0=\\{[1:a]\\}\\cong\\mathbb{A}^1$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -0.35,
+                0.3
+              ],
+              "text": "$[1:0]$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1,
+                0.3
+              ],
+              "text": "$[1:1]$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1.8,
+                1.2
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.8,
+                1.55
+              ],
+              "text": "$[0:1]$ (무한원점)"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (사영공간 $\\mathbb{P}(V)$, $\\mathbb{P}^N$, 동차좌표, 표준 차트)",
+          "formal_statement": "유한차원 복소벡터공간 $V$에 대해 $$\\mathbb{P}(V):=\\{L\\mid L\\subseteq V\\text{는 }\\dim L=1\\text{인 선형부분공간}\\}$$ 로 정의한다. $V=\\mathbb{C}^{N+1}$일 때 $\\mathbb{P}^N:=\\mathbb{P}(\\mathbb{C}^{N+1})$로 쓴다. $0$이 아닌 벡터 $(a_0,\\dots,a_N)$이 나타내는 점을 $[a_0:\\cdots:a_N]$으로 쓰며 이를 동차좌표(homogeneous coordinates)라 부른다. $\\lambda\\in\\mathbb{C}^*$에 대해 $[a_0:\\cdots:a_N]=[\\lambda a_0:\\cdots:\\lambda a_N]$이다. $0\\le i\\le N$에 대해 표준 차트(standard chart)는 $$U_i:=\\{[a_0:\\cdots:a_N]\\in\\mathbb{P}^N\\mid a_i\\ne 0\\}$$ 이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (동차다항식, 동차이데알, 여분이데알 $\\mathfrak{m}_{\\mathrm{irr}}$)",
+          "formal_statement": "$F\\in\\mathbb{C}[x_0,\\dots,x_N]=:S$가 차수 $d$의 동차다항식(homogeneous)이라는 것은 $F$에 나타나는 모든 단항식이 전체차수 $d$를 갖는다는 것이다. 이때 모든 $\\lambda\\in\\mathbb{C}$에서 $F(\\lambda a)=\\lambda^dF(a)$이므로 $F(a)=0$이라는 주장은 $[a]$의 대표에 무관하다. 개별 $x_i$ 자체는 $\\mathbb{P}^N$ 위의 함수가 아니지만, 비율 $x_j/x_i$는 $U_i$ 위의 함수이다. $S$의 이데알이 동차다항식들로 생성되면 동차이데알(homogeneous ideal)이라 부르며, 동차이데알에 속한 다항식의 모든 동차성분도 그 이데알에 속한다. 힐베르트 기저정리에 의해 모든 동차이데알은 유한 개의 동차다항식으로 생성된다. 모든 동차이데알은 여분이데알(irrelevant ideal) $\\mathfrak{m}_{\\mathrm{irr}}:=(x_0,\\dots,x_N)\\subseteq S$에 포함된다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (동차화 $f^h_i$, $I^h_i$와 비동차화 $F^{\\mathrm{deh}}_i$, $J^{\\mathrm{deh}}_i$)",
+          "formal_statement": "$R:=\\mathbb{C}[u_1,\\dots,u_N]$이라 하자. 차수 $d$인 $0\\ne f\\in R$의 $x_0$에 대한 동차화(homogenization)는 $$f^h_0(x_0,\\dots,x_N):=x_0^d\\,f\\!\\left(\\frac{x_1}{x_0},\\dots,\\frac{x_N}{x_0}\\right)\\in S$$ 이다. 이데알 $I\\subseteq R$의 $x_0$에 대한 동차화는 동차이데알 $I^h_0:=(f^h_0\\mid f\\in I)\\subseteq S$이다. $1\\le i\\le N$에 대해서도 마찬가지로 $f^h_i$, $I^h_i$를 정의할 수 있다. 동차다항식 $F\\in S$의 $U_0$에서의 비동차화(dehomogenization)는 $$F^{\\mathrm{deh}}_0(u_1,\\dots,u_N):=F(1,u_1,\\dots,u_N)$$ 이다. 동차이데알 $J\\subseteq S$의 $U_0$에서의 비동차화는 $J^{\\mathrm{deh}}_0:=(F^{\\mathrm{deh}}_0\\mid F\\in J)\\subseteq R$이다. $U_i$에서의 $F^{\\mathrm{deh}}_i$, $J^{\\mathrm{deh}}_i$도 마찬가지로 정의된다. $0^h_0:=0$으로 두면 $(f^h_0)^{\\mathrm{deh}}_0=f$이고, $0$이 아닌 임의의 동차 $F$에 대해 $F=x_0^{\\deg F-\\deg F^{\\mathrm{deh}}_0}\\big(F^{\\mathrm{deh}}_0\\big)^h_0$이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 ($V_+(\\mathcal{F})$, 사영대수적집합, $\\mathbb{P}^N$의 자리스키 위상, 사영다양체)",
+          "formal_statement": "동차다항식들의 부분집합 $\\mathcal{F}\\subseteq S$에 대해 $$V_+(\\mathcal{F}):=\\{[a]\\in\\mathbb{P}^N\\mid F(a)=0\\text{ for every }F\\in\\mathcal{F}\\}$$ 로 정의한다. $(\\mathcal{F})\\subseteq S$는 동차이데알이고 $V_+(\\mathcal{F})=V_+((\\mathcal{F}))$이다. 부분집합 $X\\subseteq\\mathbb{P}^N$이 사영대수적집합(projective algebraic set)이라는 것은 어떤 동차이데알 $J\\subseteq S$에 대해 $X=V_+(J)$라는 것이다. $\\mathbb{P}^N$의 자리스키 위상(Zariski topology)은 사영대수적집합들을 닫힌집합으로 갖는 위상이다(아핀의 경우와 마찬가지로 이는 실제로 위상을 이룬다). 이 위상을 갖춘 $\\mathbb{P}^N$을 사영 $N$-공간(projective $N$-space)이라 부른다. $0\\le i\\le N$에 대해 $U_i=\\mathbb{P}^N\\setminus V_+(x_i)$는 $\\mathbb{P}^N$의 열린부분집합임에 유의하라. 공집합이 아닌 기약 사영대수적집합을 사영다양체(projective variety)라 부른다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.1 (표준 차트 $U_i\\cong\\mathbb{A}^N$)",
+          "formal_statement": "각 $0\\le i\\le N$에 대해 사상 $$\\phi_i:U_i\\longrightarrow\\mathbb{A}^N,\\quad [a_0:\\cdots:a_N]\\longmapsto\\left(\\frac{a_0}{a_i},\\dots,\\widehat{\\frac{a_i}{a_i}},\\dots,\\frac{a_N}{a_i}\\right)$$ (모자 $\\widehat{\\ \\cdot\\ }$은 그 항을 생략한다는 뜻)은 자리스키 위상에 대한 위상동형이다.",
+          "idea_behind_proof": "$\\phi_i$가 전단사임은 직접 확인되고, 위상동형임은 아핀 쪽 닫힌집합의 원상이 사영 쪽 닫힌집합과 $U_i$의 교집합으로, 또 그 역방향도 마찬가지로 대응됨을 동차화·비동차화를 이용해 보이는 것으로 끝난다.",
+          "proof_steps": [
+            "$\\phi_i$가 전단사임은 쉽게 확인된다(동차좌표를 $a_i=1$로 정규화하는 것이 정확히 역사상이다).",
+            "$f\\in\\mathbb{C}[u_1,\\dots,u_N]$에 대해 $\\phi_i^{-1}(V(f))=V_+(f^h_i)\\cap U_i$이다.",
+            "역으로 동차다항식 $F\\in\\mathbb{C}[x_0,\\dots,x_N]$에 대해 $\\phi_i(U_i\\cap V_+(F))=V(F^{\\mathrm{deh}}_i)$이다.",
+            "이는 $\\phi_i$가 닫힌집합을 닫힌집합으로, 그 역도 마찬가지로 보내므로 위상동형임을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.2 (아핀 매장 $j:\\mathbb{A}^N\\to U_0$과 $V$, $V_+$의 대응)",
+          "formal_statement": "$j:\\mathbb{A}^N\\to U_0\\subseteq\\mathbb{P}^N$을 $(a_1,\\dots,a_N)\\mapsto[1:a_1:\\cdots:a_N]$로 주어지는 사상이라 하자. 다음이 성립한다: (1) $f\\in\\mathbb{C}[u_1,\\dots,u_N]$이 상수가 아니면 $j(V(f))=V_+(f^h_0)$. (2) $F\\in\\mathbb{C}[x_0,\\dots,x_N]$이 동차다항식이면 $j^{-1}(V_+(F)\\cap U_0)=V(F^{\\mathrm{deh}}_0)$.",
+          "idea_behind_proof": "(2)는 정의를 그대로 풀면 되는 계산이다. (1)의 핵심은 $j(V(f))=V_+(f^h_0)\\cap U_0$이 항상 성립한다는 쉬운 관찰을, 강한 Nullstellensatz를 써서 '$U_0$ 안에서만'이 아니라 사영공간 전체에서의 등식으로 끌어올리는 것이다 — $V(f)$를 포함하는 임의의 사영 닫힌집합 $Z=V_+(I)$에 대해 $I$의 모든 원소가 $V_+(f^h_0)$ 위에서도 소멸함을 강한 Nullstellensatz와 유일 인수분해로 보이면, $V_+(f^h_0)$가 그러한 $Z$ 중 가장 작은 것, 즉 $j(V(f))$의 폐포 자체임이 나온다.",
+          "proof_steps": [
+            "$j(V(f))=V_+(f^h_0)\\cap U_0$임에 유의하라. $Z=V_+(I)$($I\\subseteq\\mathbb{C}[x_0,\\dots,x_N]$는 동차이데알)를 $j(V(f))$를 포함하는 임의의 사영 닫힌집합이라 하자.",
+            "임의의 $F\\in I$에 대해 비동차화 $F^{\\mathrm{deh}}_0$은 $V(f)$ 위에서 소멸하므로, 강한 Nullstellensatz에 의해 어떤 $r\\ge 1$과 $h\\in\\mathbb{C}[u_0,\\dots,u_N]$에서 $(F^{\\mathrm{deh}}_0)^r=fh$이다.",
+            "그러면 어떤 $a\\ge 0$과 동차 $H\\in\\mathbb{C}[x_0,\\dots,x_N]$에서 $x_0^aF^r=f^h_0H$이다. 유일 인수분해에 의해 $f^h_0$의 모든 기약인수는 $F^r$을 나눈다.",
+            "따라서 $F$는 $V_+(f^h_0)$ 위에서 소멸하므로 $V_+(f^h_0)\\subseteq V_+(I)=Z$. 이는 $j(V(f))=V_+(f^h_0)$임을 보인다(즉 $Z$로 임의로 잡은 것이 결국 $V_+(f^h_0)$ 자체를 포함해야 하므로, $V_+(f^h_0)$가 $j(V(f))$를 포함하는 가장 작은 사영 닫힌집합, 즉 등식이 된다). 이것으로 (1)이 증명된다. (2)는 자명하다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.3 (평행선은 무한원점에서 만난다)",
+          "formal_statement": "좌표 $u=x_1/x_0$, $v=x_2/x_0$을 갖는 아핀 차트 $U_0\\subseteq\\mathbb{P}^2$ 안에서, 평행선 $V(v)$와 $V(v-1)$의 사영 폐포는 각각 $V_+(x_2)$와 $V_+(x_2-x_0)$이다. 이들의 유일한 교점은 $[0:1:0]$이며, 이는 무한원 초평면 $V_+(x_0)$ 위의 점이다. 일반적으로 $\\mathbb{P}^2$의 서로 다른 두 직선은 항상 한 점에서 만난다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (사영뿔 $\\mathrm{Cone}_p(X)$)",
+          "formal_statement": "$\\mathbb{P}^{N-1}$을 $V_+(x_N)\\subseteq\\mathbb{P}^N$과 자연스럽게 동일시할 수 있음에 유의하라. $X\\subseteq\\mathbb{P}^{N-1}$을 사영대수적집합, $p=[0:\\cdots:0:1]\\in\\mathbb{P}^N$이라 하자. 꼭짓점 $p$를 갖는 $X$ 위의 사영뿔(projective cone) $\\mathrm{Cone}_p(X)$는 $p$와, $p$를 $X$의 점들과 잇는 모든 직선들의 합집합이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.4 (사영뿔은 사영대수적집합이다)",
+          "formal_statement": "$X=V_+(J)\\subseteq\\mathbb{P}^{N-1}$이 동차이데알 $J\\subseteq\\mathbb{C}[x_0,\\dots,x_{N-1}]$에 대한 공집합이 아닌 사영대수적집합이면, 꼭짓점 $p=[0:\\cdots:0:1]$을 갖는 사영뿔 $\\mathrm{Cone}_p(X)=V_+(JS)\\subseteq\\mathbb{P}^N$은 사영대수적집합이다.",
+          "idea_behind_proof": "$[a_0:\\cdots:a_{N-1}:0]\\in X$와 $p$를 잇는 직선 위의 점들이 정확히 $[\\lambda a_0:\\cdots:\\lambda a_{N-1}:\\mu]$ 꼴이라는 사실을 이용해, $JS$의 원소가 이런 점들에서 소멸함(순방향)과 $V_+(JS)$의 임의의 점이 $p$이거나 이런 꼴로 쓰임(역방향)을 각각 확인한다.",
+          "proof_steps": [
+            "$X$의 점 $[a_0:\\cdots:a_{N-1}:0]$과 $p$를 잇는 직선 $\\ell$ 위의 점은 어떤 $\\lambda,\\mu\\in\\mathbb{C}$에 대해 $[\\lambda a_0:\\cdots:\\lambda a_{N-1}:\\mu]$로 쓸 수 있다. $J$가 $x_0,\\dots,x_{N-1}$의 동차다항식들로 생성되므로 $JS$의 모든 원소는 $x_N$의 값과 무관하게 $x_0,\\dots,x_{N-1}$ 부분만으로 소멸 여부가 결정되어, $\\ell$ 위에서 소멸한다.",
+            "역으로 $b:=[b_0:\\cdots:b_N]\\in V_+(JS)$라 하자. $b_0=\\cdots=b_{N-1}=0$이면 $b=p\\in\\mathrm{Cone}_p(X)$이다.",
+            "그렇지 않으면 $[b_0:\\cdots:b_{N-1}]\\in X$이므로($JS$의 생성원이 $x_0,\\dots,x_{N-1}$만의 동차다항식이라 $b$에서의 소멸이 그 절단된 좌표에서의 $J$ 소멸과 같다) $b$는 이 점과 $p$를 잇는 직선 위에 있다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.5 (이차초곡면은 낮은 차원 이차초곡면의 뿔이다)",
+          "formal_statement": "$0$이 아닌 이차형식 $Q\\in\\mathbb{C}[x_0,\\dots,x_N]$에 대한 이차초곡면 $V_+(Q)\\subseteq\\mathbb{P}^N$을 생각하자. 스펙트럼 정리에 의해 적당한 일차 좌표변환 후 $$Q=x_0^2+\\cdots+x_r^2$$ 로 쓸 수 있다(단 $r$은 $Q$의 계수(rank)). $r\\le N-1$이면 $V_+(Q)\\subseteq\\mathbb{P}^N$은 이차초곡면 $V_+(Q)\\subseteq\\mathbb{P}^{N-1}$ 위의 사영뿔이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.6 (일반위치의 다섯 점을 지나는 원뿔곡선의 유일성)",
+          "formal_statement": "$\\mathbb{P}^2$의 임의의 세 점도 한 직선 위에 있지 않은 다섯 점은 유일한 평면 원뿔곡선(plane conic) 위에 놓인다.",
+          "idea_behind_proof": "평면 원뿔곡선 전체의 공간을 그 계수들의 사영공간 $\\mathbb{P}^5$로 동일시하고, '한 점 $p$를 지난다'는 조건이 이 $\\mathbb{P}^5$ 안의 초평면 $V_+(L_p)$가 된다는 쌍대성 관찰이 핵심이다. 다섯 점을 지난다는 것은 $\\mathbb{P}^5$ 안의 다섯 초평면이 만나는 것인데, 만약 그 다섯 초평면이 하나의 점에서 만나지 않는다면 그 사이에 선형 종속 관계식이 생기고, 이 관계식에 특별히 선택한 두 직선 쌍 $L_{12}L_{34}$(네 점은 지나지만 다섯 번째는 지나지 않는 퇴화 원뿔곡선)을 대입하면 모순이 도출된다.",
+          "proof_steps": [
+            "평면 원뿔곡선은 $V_+(Q)\\subseteq\\mathbb{P}^2$($Q:=a_0x^2+a_1y^2+a_2z^2+a_3xy+a_4yz+a_5zx$는 $0$이 아닌 이차형식)의 꼴이다. $V_+(Q)=V_+(\\lambda Q)$($\\lambda\\in\\mathbb{C}^*$)이므로 원뿔곡선들의 공간은 동차좌표 $[a_0:\\cdots:a_5]$를 갖는 $\\mathbb{P}^5$와 자연스럽게 동일시된다.",
+            "점 $p:=[x_0:y_0:z_0]\\in\\mathbb{P}^2$에 대해 일차형식 $L_p:=x_0^2a_0+y_0^2a_1+z_0^2a_2+x_0y_0a_3+y_0z_0a_4+z_0x_0a_5\\in\\mathbb{C}[a_0,\\dots,a_5]$를 생각하자. $p$가 원뿔곡선 $V_+(Q)$ 위에 있는 것은 $[V_+(Q)]\\in V_+(L_p)$인 것과 동치이다.",
+            "세 점씩 공선이 아닌 다섯 점 $p_1,\\dots,p_5\\in\\mathbb{P}^2$가 주어지면, 이 다섯 점이 $V_+(Q)$ 위에 있다는 것은 $[V_+(Q)]\\in V_+(L_{p_1})\\cap\\cdots\\cap V_+(L_{p_5})$인 것과 동치이다.",
+            "모순을 끌어내기 위해 다섯 초평면 $V_+(L_{p_1}),\\dots,V_+(L_{p_5})$이 한 점에서 만나지 않는다고 가정하자. 이는 어떤 $c_1,\\dots,c_5\\in\\mathbb{C}$(전부 $0$은 아님)에서 $c_1L_{p_1}+\\cdots+c_5L_{p_5}=0$을 뜻한다.",
+            "$1\\le i<j\\le 5$에 대해, 직선 $V_+(L_{ij})$가 $p_i,p_j$를 지나도록 일차형식 $L_{ij}\\in\\mathbb{C}[x,y,z]$를 잡자. 원뿔곡선 $V_+(L_{12}L_{34})$는 $p_1,p_2,p_3,p_4$를 지나지만 $p_5$는 지나지 않는다(일반위치 가정에 의해).",
+            "그러면 $c_5Q(p_5)=c_1Q(p_1)+\\cdots+c_5Q(p_5)=(c_1L_{p_1}+\\cdots+c_5L_{p_5})([V_+(Q)])=0$인데, $Q=L_{12}L_{34}$로 두면 $Q(p_5)\\ne 0$이므로 $c_5=0$이다.",
+            "같은 방법(각 $p_i$를 지나지 않는 퇴화 원뿔곡선을 골라 대입)으로 $c_1=\\cdots=c_5=0$을 얻어 가정에 모순된다. 따라서 다섯 초평면은 정확히 한 점에서 만나고, 이는 다섯 점을 지나는 원뿔곡선이 유일함을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (고차원 유리정규곡선과 콘체비치 공식)",
+          "formal_statement": "정리 3.6은 두 가지 자연스러운 일반화를 갖는다. 첫째, 평면 원뿔곡선을 차수 $2$의 유리정규곡선(rational normal curve)으로 보면, 대응하는 고차원 명제는 '$d+3$개의 일반위치 점을 지나는 차수 $d$의 유리정규곡선이 $\\mathbb{P}^d$ 안에 유일하게 존재한다'는 것이며, 이는 4장의 정리 4.9에서 증명된다. 둘째, $\\mathbb{P}^2$의 일반위치 $3d-1$개의 점을 지나는 평면 유리곡선의 개수 $N_d$를 세는 문제가 있다. 1994년 콘체비치(Kontsevich)는 다음 점화식을 증명했다: $$N_d=\\sum_{k=1}^{d-1}N_kN_{d-k}k^2(d-k)\\left[(d-k)\\binom{3d-4}{3k-2}-k\\binom{3d-4}{3k-1}\\right].$$ 이 결과의 증명은 끈이론의 영향으로 발전한 매우 깊은 이론(그로모프-비텐 이론)에 의존하며, 이 강의의 범위를 훨씬 벗어난다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "명제 3.1의 증명에서 $\\phi_0:U_0\\to\\mathbb{A}^N$, $[a_0:\\cdots:a_N]\\mapsto(a_1/a_0,\\dots,a_N/a_0)$의 역사상을 직접 써 보고, 그것이 정확히 사상 $j:\\mathbb{A}^N\\to U_0$(명제 3.2)과 같음을 확인하라.",
+          "hint": "$\\phi_0$의 정의를 그대로 뒤집어 보라 — $(u_1,\\dots,u_N)\\in\\mathbb{A}^N$이 주어졌을 때 어떤 동차좌표가 $a_1/a_0=u_1,\\dots$를 만족하는지 생각하라.",
+          "solution": "$\\phi_0^{-1}:\\mathbb{A}^N\\to U_0$, $(u_1,\\dots,u_N)\\mapsto[1:u_1:\\cdots:u_N]$이다. 실제로 $\\phi_0([1:u_1:\\cdots:u_N])=(u_1/1,\\dots,u_N/1)=(u_1,\\dots,u_N)$이므로 이는 $\\phi_0$의 역이 맞다. 그리고 이는 정확히 명제 3.2의 $j(a_1,\\dots,a_N):=[1:a_1:\\cdots:a_N]$과 같은 사상이다 — 즉 $j=\\phi_0^{-1}$이며, $j$는 단순히 $U_0$을 아핀공간 $\\mathbb{A}^N$과 동일시하는 명제 3.1의 위상동형의 역방향일 뿐이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{P}^2$에서 $u=x_1/x_0,v=x_2/x_0$인 아핀 차트 $U_0$ 안의 직선 $V(v-mu-c)$($m,c\\in\\mathbb{C}$, 기울기 $m$)의 동차화 $f^h_0$를 구하고, 이 직선의 사영 폐포가 무한원 직선 $V_+(x_0)$과 만나는 점을 구하라. 서로 다른 기울기 $m\\ne m'$을 갖는 두 직선의 사영 폐포가 서로 다른 무한원점에서 만남을 확인하라.",
+          "hint": "$f(u,v)=v-mu-c$는 차수 $1$이므로 $f^h_0(x_0,x_1,x_2)=x_0\\cdot f(x_1/x_0,x_2/x_0)$를 그대로 계산하면 된다. 무한원점은 $x_0=0$을 대입해서 찾아라.",
+          "solution": "$f(u,v)=v-mu-c$는 차수 $1$이므로 $f^h_0(x_0,x_1,x_2)=x_0\\left(\\frac{x_2}{x_0}-m\\frac{x_1}{x_0}-c\\right)=x_2-mx_1-cx_0$이다. $V_+(x_2-mx_1-cx_0)$가 무한원 직선 $V_+(x_0)$과 만나는 점은 $x_0=0$을 대입해 $x_2=mx_1$, 즉 $[0:1:m]$이다(단 $m$을 포함해 스칼라배로 나타낸 것). 기울기가 다른 두 직선 $m\\ne m'$의 무한원점은 각각 $[0:1:m]$, $[0:1:m']$이며, 이 둘은 $m\\ne m'$이므로 서로 다른 점이다 — 즉 사영평면에서는 '평행선들의 다발'마다 고유한 무한원점 하나가 할당되고, 그 무한원점들 전체가 무한원 직선 $V_+(x_0)\\cong\\mathbb{P}^1$을 이룬다."
+        },
+        {
+          "type": "ox",
+          "question": "동차다항식 $F\\in\\mathbb{C}[x_0,\\dots,x_N]$에 대해, $F(a)$의 값 자체는 점 $[a]\\in\\mathbb{P}^N$의 대표 벡터 $a$의 선택에 무관하게 정해진다.",
+          "answer": "X",
+          "explanation": "거짓이다. $F$가 차수 $d$의 동차다항식이면 $F(\\lambda a)=\\lambda^dF(a)$이므로 대표를 $\\lambda$배 바꾸면 값 자체는 $\\lambda^d$배로 바뀐다(단 $d=0$, 즉 $F$가 상수인 경우는 제외). 무관하게 정해지는 것은 값이 아니라 '$F(a)=0$인가'라는 소멸 여부뿐이다."
+        },
+        {
+          "type": "ox",
+          "question": "$\\mathbb{P}^N$의 표준 차트 $U_i$는 자리스키 위상에 대해 $\\mathbb{A}^N$과 위상동형이다.",
+          "answer": "O",
+          "explanation": "참이다. 명제 3.1의 내용 그대로다. 동차화·비동차화 연산이 $U_i$의 사영 닫힌집합과 $\\mathbb{A}^N$의 아핀 닫힌집합을 서로 정확히 대응시키므로, $\\phi_i$는 (연속인) 전단사일 뿐 아니라 위상동형이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 3.2(1)의 증명은 왜 $j(V(f))=V_+(f^h_0)\\cap U_0$이라는 '쉬운 방향'만으로는 부족하고 강한 Nullstellensatz까지 동원해야 했는가? $j(V(f))$의 사영공간에서의 폐포(closure)라는 관점에서 이 증명이 실제로 보이는 것이 무엇인지 설명하라.",
+          "hint": "$j(V(f))$ 자체는 $U_0$ 안의 집합이지 $\\mathbb{P}^N$ 전체의 닫힌집합이 아닐 수 있다는 점에 주목하라. $V_+(f^h_0)$가 $U_0$ 바깥, 즉 무한원 초평면 위에도 점을 가질 수 있는지 생각해 보라.",
+          "answer": "$j(V(f))=V_+(f^h_0)\\cap U_0$이라는 등식은 정의를 그대로 풀면 나오는 쉬운 사실이지만, 이것만으로는 $V_+(f^h_0)$가 $U_0$ 바깥(무한원 초평면 $V_+(x_0)$ 위)에 여분의 점들을 갖고 있는지, 즉 $j(V(f))$와 $V_+(f^h_0)$가 정확히 같은 사영대수적집합인지(단순히 $U_0$ 안에서 일치하는 것을 넘어) 알려주지 못한다. 실제로 명제가 증명하는 것은 $V_+(f^h_0)$가 $j(V(f))$를 포함하는 '가장 작은' 사영 닫힌집합이라는 것, 즉 $V_+(f^h_0)$는 정확히 $j(V(f))$의 사영공간에서의 자리스키 폐포(Zariski closure)라는 사실이다. 강한 Nullstellensatz는 바로 이 최소성을 보장하는 도구다 — $j(V(f))$를 포함하는 임의의 사영 닫힌집합 $Z=V_+(I)$를 잡았을 때, $I$의 원소들이 $V(f)$ 위에서 소멸한다는 (아핀 차트 안에서의) 정보를, 강한 Nullstellensatz를 통해 '$f^h_0$가 실제로 그 원소들을 나눈다'는 전역적인 대수적 사실로 승격시킴으로써 $V_+(f^h_0)\\subseteq Z$를 강제한다. 즉 $Z$를 얼마나 크게 잡든 결국 $V_+(f^h_0)$를 포함해야 하므로, $V_+(f^h_0)$ 자신이 그 최소 폐포일 수밖에 없다 — 다시 말해 동차화 $f\\mapsto f^h_0$는 대수적 연산이지만, 그 기하학적 의미는 정확히 '아핀다양체의 사영 폐포를 취하는 것'이라는 사실이 이 증명의 진짜 내용이다."
+        }
+      ]
+    }
+  ]
+}

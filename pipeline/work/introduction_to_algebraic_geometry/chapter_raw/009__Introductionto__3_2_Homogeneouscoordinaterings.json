@@ -1,0 +1,211 @@
+{
+  "chapter_info": {
+    "title": "3. Projective Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "아핀 공간은 '무한히 먼 곳'을 갖지 않아 평행선이 만나지 않는 등 기하학적으로 불완전하다. 이 장은 사영공간 $\\mathbb{P}^N$과 그 위의 자리스키 위상, 동차좌표·동차다항식·동차화/비동차화라는 도구를 도입해 이 결함을 고치고, 사영다양체가 국소적으로는 여전히 아핀다양체들의 조각으로 덮인다는 사실(표준 차트)을 확립한다. 이는 '두 직선은 항상 정확히 한 점에서 만난다'는 고전적 교차 이론의 출발점이자, 이후 베로네제 사상·세그레 사상 등 고전적 사영 매장을 다루는 4장의 토대가 된다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "3.2 Homogeneous coordinate rings",
+      "step1_big_picture": {
+        "context": "3.1절에서 $V_+$가 동차이데알로부터 사영대수적집합을 만드는 연산이었다면, 이 절은 그 반대 방향인 $I$(사영대수적집합으로부터 동차이데알을 만드는 연산)를 정확히 세우고, 아핀의 경우처럼 $V_+$와 $I$가 서로 역에 가까운 대응을 이룸(사영 Nullstellensatz, 정리 3.11)을 확립한다. 핵심 도구는 사영대수적집합 $X\\subseteq\\mathbb{P}^N$에 그 '아핀 그림자'인 아핀뿔 $\\widehat{X}\\subseteq\\mathbb{A}^{N+1}$을 대응시키는 것이다 — $X$의 동차좌표 대표들을 전부 모으면 정확히 원점을 지나는 아핀 대수적집합이 되고(명제 3.8), 이 대응을 통해 아핀에서 이미 증명한 강한 Nullstellensatz를 그대로 재사용해 사영 Nullstellensatz를 얻는다. 다만 사영의 경우 공집합에 대응하는 이데알이 '여분이데알(irrelevant ideal) $\\mathfrak{m}_{\\mathrm{irr}}$을 포함하는 이데알들'이라는 예외 하나가 생긴다(예제 3.12) — 이는 원점 하나가 항상 아핀뿔에 포함되어 있어 '완전히 텅 빈' 아핀대수적집합과 '원점만 있는' 아핀대수적집합을 사영 쪽에서 구별할 수 없기 때문이다.",
+        "hidden_intuition": "아핀뿔 $\\widehat{X}$이라는 발상은 '사영공간의 점 = 원점을 지나는 직선'이라는 정의(3.1절)를 그대로 되짚는 것이다 — $X\\subseteq\\mathbb{P}^N$의 각 점 $[a]$는 $\\mathbb{A}^{N+1}$ 안의 원점을 지나는 직선 전체(그 대표 벡터들의 스칼라배 전체)에 대응하므로, $X$의 모든 점을 이렇게 '펼치면' 원점을 꼭짓점으로 갖는 뿔 모양의 아핀 집합이 된다. 이 대응의 위력은 사영 쪽의 대상(동차이데알, 사영대수적집합)에 대한 질문을 전부 아핀 쪽(이미 완전히 이해된 이론)의 질문으로 되돌려 놓을 수 있다는 데 있다 — 강한 Nullstellensatz는 아핀에서 이미 증명되었으므로, '사영 Nullstellensatz'는 사실 새로운 정리가 아니라 아핀 Nullstellensatz를 아핀뿔이라는 사전을 통해 다시 읽은 것뿐이다. 다만 이 사전에는 '원점'이라는 하나의 군더더기가 항상 따라붙는다 — $\\widehat{\\emptyset}$과 $\\widehat{V_+(\\mathfrak{m}_{\\mathrm{irr}})}$가 똑같이 $\\{0\\}$이 되어버리므로(공집합의 사영대수적집합이든 원점만 있는 사영대수적집합이든 아핀뿔에서는 구별이 안 됨), $I(\\emptyset)=S$와 $\\sqrt{\\mathfrak{m}_{\\mathrm{irr}}}=\\mathfrak{m}_{\\mathrm{irr}}$이 서로 다른데도 둘 다 $V_+(\\cdot)=\\emptyset$을 준다는 예외가 생긴다. 동차좌표환 $S(X)=S/I(X)$이 매장 $X\\subseteq\\mathbb{P}^N$ 자체에 의존한다는 사실(아핀 좌표환 $A(X)$가 매장과 무관하게 내재적이었던 것과 대조적으로)은, 사영공간에서는 좌표 자체가 함수가 아니라는 근본적인 차이에서 비롯된다 — 즉 $S(X)$는 $X$ 위의 함수들의 환이 아니라 $X$를 둘러싼 매장의 대수적 그림자일 뿐이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "아핀뿔 $\\widehat{X}\\subseteq\\mathbb{A}^{N+1}$의 개념도: $\\mathbb{P}^N$의 두 점 $[a],[b]\\in X$가 각각 원점을 지나는 직선(뿔의 모선)에 대응한다.",
+          "primitives": [
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.25,
+                -0.35
+              ],
+              "text": "원점 (뿔의 꼭짓점)"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                0
+              ],
+              "to": [
+                2.2,
+                1.8
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1.4,
+                1.15
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.75,
+                1.35
+              ],
+              "text": "$[a]$의 대표들"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                0
+              ],
+              "to": [
+                -1.8,
+                2.0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                -1.15,
+                1.3
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.85,
+                1.55
+              ],
+              "text": "$[b]$의 대표들"
+            },
+            {
+              "shape": "arc",
+              "from": [
+                1.4,
+                1.15
+              ],
+              "to": [
+                -1.15,
+                1.3
+              ],
+              "bulge": 0.35
+            },
+            {
+              "shape": "label",
+              "at": [
+                0,
+                2.15
+              ],
+              "text": "$X\\subseteq\\mathbb{P}^N$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (등급환 $S$, 동차이데알의 등급 성분)",
+          "formal_statement": "$S:=\\mathbb{C}[x_0,\\dots,x_N]$이라 하고, $S_d$를 차수 $d$인 동차다항식 전체에 $0$을 더한 집합이라 하자($d\\ge 0$). 복소벡터공간으로서 $S=\\bigoplus_{d\\ge 0}S_d$로 쓸 수 있다. 이때 $S$는 등급환(graded ring)이다 — 즉 모든 $F\\in S_d$, $G\\in S_e$에서 $FG\\in S_{d+e}$이다. $J\\subseteq S$가 동차이데알이면 $J=\\bigoplus_{d\\ge 0}J_d$ (단 $J_d:=J\\cap S_d$)로 쓸 수 있다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (동차 소멸이데알 $I(X)$, 동차좌표환 $S(X)$)",
+          "formal_statement": "$X\\subseteq\\mathbb{P}^N$에 대해 그 동차 소멸이데알(homogeneous vanishing ideal)은 $$I(X):=\\bigoplus_{d\\ge 0}\\{F\\in S_d\\mid F(p)=0\\text{ for every }p\\in X\\}$$ 이며, 이는 $S$의 동차이데알이다. $X\\subseteq\\mathbb{P}^N$이 사영대수적집합이면 그 동차좌표환(homogeneous coordinate ring)은 $$S(X):=S/I(X)$$ 이다. $S(X)$는 아핀의 경우와 달리 매장 $X\\subseteq\\mathbb{P}^N$의 선택에 크게 의존함에 유의하라."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (아핀뿔 $\\widehat{X}$)",
+          "formal_statement": "동차이데알 $J\\subseteq S$에 대해 $X=V_+(J)\\subseteq\\mathbb{P}^N$이 공집합이 아닌 사영대수적집합이라 하자. 그 아핀뿔(affine cone)은 $$\\widehat{X}:=\\{\\lambda a\\in\\mathbb{A}^{N+1}\\mid [a]\\in X,\\ \\lambda\\in\\mathbb{C}\\}=V(J)\\subseteq\\mathbb{A}^{N+1}$$ 이다. $\\widehat{X}$는 $\\mathbb{A}^{N+1}$의 원점을 포함하며, 그 $0$이 아닌 점들은 정확히 $X$의 점들의 동차좌표 대표들이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.8 ($I(X)$는 근기이데알; $\\widehat{X}=V(I(X))$; 기약성 ↔ 소이데알)",
+          "formal_statement": "모든 사영대수적집합 $X$에 대해 $I(X)$는 근기이데알(radical ideal)이다. $X$가 공집합이 아니면 $$\\widehat{X}=V(I(X))\\subseteq\\mathbb{A}^{N+1}\\qquad\\text{이고}\\qquad I(\\widehat{X})=I(X)$$ 이다. 더 나아가, $X$가 기약인 것과 $I(X)$가 소이데알인 것은 동치이다.",
+          "idea_behind_proof": "전반부는 강한 Nullstellensatz를 아핀뿔에 그대로 적용하는 것이고, 마지막 동치는 아핀에서의 명제 1.5(기약성 ↔ 소이데알)를 아핀뿔 쪽에서 재활용하되, $X$가 기약일 때 $FG\\in I(X)$가 $F\\in I(X)$ 또는 $G\\in I(X)$를 강제한다는 것을 $X$를 두 닫힌부분집합의 합집합으로 쪼개는 방식으로 직접 보이는 것이 핵심이다(비동차 다항식까지 다루려면 최저차 동차성분을 뽑아내는 추가 논증이 필요하다).",
+          "proof_steps": [
+            "$X=\\emptyset$이면 $I(X)=S$이므로 자명하다. 이제 $X\\ne\\emptyset$이라 하자. 정의에서 바로 $\\widehat{X}=V(I(X))\\subseteq\\mathbb{A}^{N+1}$이고 $I(\\widehat{X})=I(X)$임이 나온다.",
+            "강한 Nullstellensatz에 의해 $I(X)=I(\\widehat{X})=I(V(I(X)))=\\sqrt{I(X)}$이므로 $I(X)$는 근기이데알이다.",
+            "$X$가 가약이면 $\\widehat{X}$도 가약이므로(원뿔 구성이 합집합을 보존) 명제 1.5에 의해 $I(X)=I(\\widehat{X})$는 소이데알이 아니다.",
+            "역으로 $X$가 기약이라 하고, 동차 $F,G\\in S$에서 $FG\\in I(X)$라 하자. $X=(X\\cap V_+(F))\\cup(X\\cap V_+(G))$이고 $X$가 기약이므로 $X=X\\cap V_+(F)$ 또는 $X=X\\cap V_+(G)$, 즉 $F\\in I(X)$ 또는 $G\\in I(X)$이다.",
+            "이제 (반드시 동차는 아닌) 일반적인 $F,G\\in S$에서 $FG\\in I(X)$라 하자. $F,G$의 최저차 동차성분들의 곱도 $I(X)$에 속함을 보일 수 있고(동차성분별로 소멸조건을 분리), 앞 단계에 의해 그 두 최저차 성분 중 하나가 $I(X)$에 속한다. 그 성분을 빼고 같은 논증을 반복하면 결국 $F$ 또는 $G$ 전체가 $I(X)$에 속함을 얻는다. 따라서 $I(X)$는 소이데알이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.9 (사영공간 자체는 사영다양체이다)",
+          "formal_statement": "모든 사영공간 $\\mathbb{P}^N$은 사영다양체이다 (즉 $I(\\mathbb{P}^N)=(0)$은 소이데알이고 $\\mathbb{P}^N=V_+((0))$은 기약이다)."
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.10 (이차초곡면이 사영다양체가 되는 조건)",
+          "formal_statement": "$Q=x_0^2+\\cdots+x_r^2\\in\\mathbb{C}[x_0,\\dots,x_N]$이 (동차환 $\\mathbb{C}[x_0,\\dots,x_N]$에서) 기약인 것, 즉 이차초곡면 $V_+(Q)\\subseteq\\mathbb{P}^N$이 사영다양체인 것은 $r\\ge 3$인 것과 동치이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 3.11 (사영 Nullstellensatz)",
+          "formal_statement": "$J\\subsetneq S$를 진부분 동차이데알이라 하자. 다음은 동치이다: $$V_+(J)=\\emptyset\\quad\\Longleftrightarrow\\quad \\sqrt{J}=\\mathfrak{m}_{\\mathrm{irr}}\\quad\\Longleftrightarrow\\quad \\mathfrak{m}_{\\mathrm{irr}}^r\\subseteq J\\text{인 어떤 }r\\ge 1\\text{이 존재}.$$ $V_+(J)$가 공집합이 아니면 $I(V_+(J))=\\sqrt{J}$이다. 따라서 $X\\mapsto I(X)$와 $J\\mapsto V_+(J)$는 $\\mathbb{P}^N$의 사영대수적집합(각각 사영다양체)과 $S$의 동차 근기이데알(각각 동차 소이데알) 사이에 포함관계를 뒤집는 대응을 준다.",
+          "idea_behind_proof": "$V(J)\\subseteq\\mathbb{A}^{N+1}$가 원점을 포함하는 뿔이라는 관찰이 전부다: 이 뿔이 원점 말고 다른 점을 갖지 않는다는 것이 정확히 $V_+(J)=\\emptyset$이라는 조건이고, '원점만 있는 아핀 대수적집합'이라는 조건은 아핀 강한 Nullstellensatz에 의해 정확히 $\\sqrt{J}=\\mathfrak{m}_{\\mathrm{irr}}$(원점의 소멸이데알)과 동치가 된다.",
+          "proof_steps": [
+            "$V(J)\\subseteq\\mathbb{A}^{N+1}$이 원점을 포함하는 뿔임에 유의하라. 이것이 원점 외의 다른 점을 갖지 않는 것과 $V_+(J)=\\emptyset$인 것은 동치이다.",
+            "따라서 아핀 강한 Nullstellensatz(정리 1.32/1.33 계열)에 의해 왼쪽 동치를 얻는다: $V(J)=\\{0\\}$인 것은 $\\sqrt{J}=I(\\{0\\})=\\mathfrak{m}_{\\mathrm{irr}}$인 것과 동치이다.",
+            "오른쪽 동치($\\sqrt J=\\mathfrak m_{\\mathrm{irr}}\\Leftrightarrow \\mathfrak m_{\\mathrm{irr}}^r\\subseteq J$인 $r$이 존재)는 자명하다(힐베르트 기저정리로 $\\mathfrak m_{\\mathrm{irr}}$이 유한생성이므로 근기의 정의를 유한 개의 생성원에 대해서만 확인하면 되기 때문).",
+            "이제 $X:=V_+(J)\\ne\\emptyset$이라 하자. 명제 3.8과 아핀 강한 Nullstellensatz에 의해 $I(V_+(J))=I(V(J))=\\sqrt{J}$를 얻는다.",
+            "마지막 주장(포함관계를 뒤집는 대응)은 아핀의 경우(따름정리 1.35 참고)와 완전히 같은 방식으로 따라온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 3.12 (공집합에 대한 예외)",
+          "formal_statement": "$S$와 $\\mathfrak{m}_{\\mathrm{irr}}$은 둘 다 공집합인 사영 영점궤적을 갖지만($V_+(S)=V_+(\\mathfrak{m}_{\\mathrm{irr}})=\\emptyset$), $I(\\emptyset)=S\\ne\\mathfrak{m}_{\\mathrm{irr}}$이다. 따라서 정리 3.11의 '공집합이 아닌' 경우의 대응은 여분이데알을 공집합의 소멸이데알로 선언하는 방식으로는 문자 그대로 확장될 수 없다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 3.13 ($j$를 통한 $I$와 동차화/비동차화의 대응)",
+          "formal_statement": "$j:\\mathbb{A}^N\\to U_0\\subseteq\\mathbb{P}^N$을 $(a_1,\\dots,a_N)\\mapsto[1:a_1:\\cdots:a_N]$로 주어지는 사상이라 하자. 다음이 성립한다: (1) $X\\subseteq\\mathbb{A}^N$이 아핀대수적집합이면 $I(j(X))=I(X)^h_0$. (2) $Z\\subseteq\\mathbb{P}^N$이 사영대수적집합이면 $I(j^{-1}(U_0\\cap Z))=I(Z)^{\\mathrm{deh}}_0$.",
+          "idea_behind_proof": "양쪽 다 '한쪽 포함은 정의에서 바로, 반대쪽 포함은 동차화/비동차화의 상호 역 성질($({f^h_0})^{\\mathrm{deh}}_0=f$ 등)을 이용해 대표원을 다시 만들어내는' 같은 패턴을 따른다. (2)에서는 $j(U_0\\cap Z)\\subseteq Z\\subseteq j(U_0\\cap Z)\\cup V_+(x_0)$라는 끼임 관계가 여분의 $x_0$ 인수를 곱해 주는 역할을 한다.",
+          "proof_steps": [
+            "(1): $I(X)^h_0$의 모든 원소는 $j(X)$ 위에서 소멸하므로 $I(X)^h_0\\subseteq I(j(X))$이다.",
+            "역으로 동차 $F\\in I(j(X))$에 대해 그 비동차화 $F^{\\mathrm{deh}}_0$은 $X$ 위에서 소멸하므로 $F^{\\mathrm{deh}}_0\\in I(X)$이다. 그러면 $F=x_0^{\\deg F-\\deg F^{\\mathrm{deh}}_0}(F^{\\mathrm{deh}}_0)^h_0\\in I(X)^h_0$이므로 $I(j(X))\\subseteq I(X)^h_0$이다. 이것으로 (1)이 증명된다.",
+            "(2): $I(Z)^{\\mathrm{deh}}_0$의 모든 원소는 $j^{-1}(U_0\\cap Z)$ 위에서 소멸하므로 $I(Z)^{\\mathrm{deh}}_0\\subseteq I(j^{-1}(U_0\\cap Z))$이다.",
+            "역으로 $f\\in I(j^{-1}(U_0\\cap Z))$에 대해 그 동차화 $f^h_0$은 $j(U_0\\cap Z)$ 위에서 소멸한다. $j(U_0\\cap Z)\\subseteq Z\\subseteq j(U_0\\cap Z)\\cup V_+(x_0)$이므로 $x_0f^h_0$은 $Z$ 전체에서 소멸해 $x_0f^h_0\\in I(Z)$이다. 그러면 $f=(x_0f^h_0)^{\\mathrm{deh}}_0\\in I(Z)^{\\mathrm{deh}}_0$이므로 $I(j^{-1}(U_0\\cap Z))\\subseteq I(Z)^{\\mathrm{deh}}_0$이다. 이것으로 (2)가 증명된다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$X=\\{[1:0]\\}\\subseteq\\mathbb{P}^1$(한 점)에 대해 $I(X)\\subseteq\\mathbb{C}[x_0,x_1]$과 아핀뿔 $\\widehat{X}\\subseteq\\mathbb{A}^2$을 각각 구하라.",
+          "hint": "동차좌표 $[1:0]$의 대표는 $\\{(\\lambda,0)\\mid\\lambda\\in\\mathbb{C}^*\\}\\cup\\{(0,0)\\}$임을 이용해, 이 점들에서 소멸하는 동차다항식이 어떤 조건을 만족하는지 생각하라.",
+          "solution": "$X$의 대표 벡터는 $(\\lambda,0)$ ($\\lambda\\in\\mathbb{C}$) 꼴이므로 $\\widehat{X}=\\{(\\lambda,0)\\mid\\lambda\\in\\mathbb{C}\\}=V(x_1)\\subseteq\\mathbb{A}^2$, 즉 $x_1$축이다. $I(X)$는 $(\\lambda,0)$ 꼴의 모든 점에서 소멸하는 동차다항식들의 이데알인데, $F(x_0,x_1)$이 이 축 위에서 소멸하려면 $x_1=0$을 대입했을 때 항등적으로 $0$이어야 하고, 이는 정확히 $F$의 모든 항이 $x_1$을 인수로 가짐, 즉 $F\\in(x_1)$인 것과 동치이다. 따라서 $I(X)=(x_1)$이며, 실제로 $\\sqrt{(x_1)}=(x_1)$이므로 명제 3.8과 정합적이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "명제 3.8의 증명에서 '$X$가 가약이면 $\\widehat{X}$도 가약이다'라는 단계를 직접 확인하라. 즉 $X=X_1\\cup X_2$($X_1,X_2$는 $X$의 진부분 닫힌집합)이면 $\\widehat{X}=\\widehat{X_1}\\cup\\widehat{X_2}$이고 이 각각이 $\\widehat{X}$의 진부분 닫힌집합임을 보여라.",
+          "hint": "아핀뿔이 '대표 벡터 전체를 모으는' 연산이라는 정의를 그대로 집합의 합집합에 적용해 보라. $\\widehat{X_1}\\subsetneq\\widehat{X}$임을 보이려면 $X_1\\subsetneq X$로부터 어떻게 점을 하나 골라야 할지 생각하라.",
+          "solution": "$\\widehat{X}=\\{\\lambda a\\mid[a]\\in X,\\lambda\\in\\mathbb{C}\\}$이고 $X=X_1\\cup X_2$이므로, $[a]\\in X$는 $[a]\\in X_1$ 또는 $[a]\\in X_2$를 뜻하고 따라서 $\\widehat{X}=\\widehat{X_1}\\cup\\widehat{X_2}$이다. $X_1\\subsetneq X$이므로 어떤 $p\\in X\\setminus X_1$이 있고, $\\widehat{X_1}$은 $p$의 동차좌표 대표(가 $0$이 아닌 것)를 포함하지 않으므로 $\\widehat{X_1}\\subsetneq\\widehat{X}$이다(원점은 둘 다에 포함되므로 진부분 관계가 원점 때문에 깨지지 않는다). 같은 논증이 $X_2$에도 적용되므로, $\\widehat{X}=\\widehat{X_1}\\cup\\widehat{X_2}$은 $\\widehat{X}$ 자신의 두 진부분 닫힌집합의 합집합, 즉 $\\widehat{X}$는 가약이다."
+        },
+        {
+          "type": "ox",
+          "question": "아핀다양체의 좌표환 $A(X)$와 마찬가지로, 사영대수적집합의 동차좌표환 $S(X)$도 매장 $X\\subseteq\\mathbb{P}^N$의 선택과 무관한 내재적(intrinsic) 불변량이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 정의 직후에 명시된 대로 $S(X)$는 매장 $X\\subseteq\\mathbb{P}^N$의 선택에 크게 의존한다 — 사영공간에서는 좌표 $x_i$ 자체가 함수가 아니므로, $S(X)$는 $X$ 위의 함수들의 환이 아니라 그 매장이 결정하는 대수적 그림자일 뿐이다. 아핀의 경우 $A(X)\\cong O_X(X)$(전역 정칙함수환)로서 내재적이었던 것과 대조적이다."
+        },
+        {
+          "type": "ox",
+          "question": "$J\\subsetneq S$가 진부분 동차이데알일 때 $V_+(J)=\\emptyset$인 것과 $J=\\mathfrak{m}_{\\mathrm{irr}}$인 것은 동치이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 정리 3.11에서 동치인 조건은 $\\sqrt{J}=\\mathfrak{m}_{\\mathrm{irr}}$이지 $J=\\mathfrak{m}_{\\mathrm{irr}}$이 아니다. 예를 들어 $J=\\mathfrak{m}_{\\mathrm{irr}}^2$이면 $V_+(J)=\\emptyset$이고 $\\sqrt J=\\mathfrak m_{\\mathrm{irr}}$이지만 $J\\ne\\mathfrak m_{\\mathrm{irr}}$이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 3.12의 '예외'(공집합에 대응하는 이데알이 유일하지 않음)는 아핀뿔 $\\widehat{X}$이라는 사전 자체의 어떤 구조적 특징에서 비롯되는가? 만약 $\\mathbb{A}^{N+1}$에서 원점을 통째로 제거하고 논의를 진행했다면 이 예외가 사라졌을지 논하라.",
+          "hint": "$\\widehat{\\emptyset}$과 $\\widehat{V_+(\\mathfrak{m}_{\\mathrm{irr}})}$이 아핀공간 $\\mathbb{A}^{N+1}$에서 정확히 같은 집합인지 확인해 보라. 원점을 제거하면 $V+$의 정의(원점을 지나는 직선 자체의 집합인 $\\mathbb{P}^N$의 정의)에 어떤 영향이 있는지 생각하라.",
+          "answer": "아핀뿔의 정의상 원점은 $J$가 무엇이든(동차이데알이기만 하면) 항상 $V(J)$에 포함된다 — $0$은 모든 동차다항식의 자명한 공통 영점이기 때문이다. 그 결과 '사영적으로 텅 빈'($V_+(J)=\\emptyset$) 상황과 '아핀뿔이 원점 하나만 갖는' 상황이 정확히 같은 것으로 겹쳐지는데, 이 조건 자체는 여러 다른 이데알($S$ 자신부터 $\\mathfrak{m}_{\\mathrm{irr}}$을 포함하는 $\\sqrt{J}=\\mathfrak m_{\\mathrm{irr}}$인 모든 $J$까지)이 공유할 수 있으므로, '$V_+(J)=\\emptyset$'이라는 사영적 조건 하나만으로는 이데알 $J$(더 정확히는 그 근기)를 유일하게 복원할 수 없는 것이 아니라, 오히려 그 근기는 유일하게 $\\mathfrak m_{\\mathrm{irr}}$로 복원되지만 '$I(\\emptyset)$'이라는 표기 자체가 이 $\\sqrt J=\\mathfrak m_{\\mathrm{irr}}$과 다른 값($S$ 전체)을 가리키는 두 갈래 해석 중 어느 쪽인지 모호해진다는 것이 진짜 문제다. 만약 $\\mathbb{A}^{N+1}$에서 원점을 미리 제거하고 논의했다면(즉 $\\mathbb{P}^N$을 애초에 '원점을 지나는 직선들'이 아니라 '$\\mathbb{A}^{N+1}\\setminus\\{0\\}$을 스칼라배로 나눈 몫공간'으로 다루되 원점이 없는 공간에서 시작했다면), $\\widehat{\\emptyset}$은 진짜로 공집합이 되고 $\\widehat{V_+(\\mathfrak m_{\\mathrm{irr}})}$도 공집합이 되어 이 둘을 구별하는 문제 자체는 형식적으로 사라지지만, 대신 $\\mathbb{A}^{N+1}\\setminus\\{0\\}$이 더 이상 아핀 대수적집합이 아니라는 훨씬 더 근본적인 문제(자리스키 위상의 틀 자체가 깨짐, $V(\\cdot)$이 닫힌집합을 만드는 연산인데 그 정의역이 아핀 공간이 아니게 됨)가 생긴다. 즉 이 예외는 원점을 포함시켜 $\\mathbb{A}^{N+1}$ 전체를 아핀대수기하학의 틀 안에 유지하기 위해 지불하는 사소하지만 불가피한 대가이며, 강의노트가 '문자 그대로 확장될 수 없다'고 명시한 이유가 바로 이것이다."
+        }
+      ]
+    }
+  ]
+}
