@@ -1,0 +1,144 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 5. Dimension Theory
+현재 소단원: 5.4 Dimension of algebraic varieties
+직전 소단원: 「5.3 Noether normalization」
+[본문]
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+45
+of prime ideals of R. Note that dim A/p0 = d. Suppose that we have constructed
+a prime ideal pi of R with dim A/pi = d −i and p0 ⊆· · · ⊆pi ⊆p. If pi = p, then
+d −i = dim A/p = e so that i = d −e. Assume that pi , p. For fi ∈p \ pi, choose a prime
+ideal pi+1 of R such that pi+1/pi is minimal prime ideals of A/pi over f i and pi+1 ⊆p.
+Note that A/pi+1  (A/pi)/(pi+1/pi). Then dim A/pi+1 = dim A/pi −1 = d −i −1.
+□
+Corollary 5.13. Let A be an affine C-domain. Then all maximal strict chains of prime ideals
+of A have the same length dim A.
+Proof. We proceed by induction on n := dim A. If n = 0, then every prime ideal is
+(0) and the assertion is trivial. Assume n ≥1. Let p0 ⊊p1 ⊊· · · ⊊pr be a maximal
+chain of prime ideals of A. Note that p0 = (0) and p1 is a minimal prime ideal. Thus
+height p1 = 1, and dim A/p1 = n −1 by Theorem 5.12. As (0) ⊊p2/p1 ⊊· · · ⊊pr/p1 is a
+maximal chain of prime ideals of A/p1, we have r −1 = n −1. Thus r = n = dim A.
+□
+This corollary means that A is catenary in the sense that for prime ideals p, q of A with
+p ⊆q, every maximal chain of prime ideals between p and q have the same length.
+5.4. Dimension of algebraic varieties. Let X be a quasi-projective variety. The di-
+mension of X is
+dim X := trdegC C(X).
+If U ⊆X is an irreducible open subset with U , ∅, then dim U = dim X since C(U) =
+C(X). When X is empty, we set dim ∅:= −1. For an irreducible closed subset Y ⊆X,
+the codimension of Y in X is
+codimX Y := dim X −dim Y.
+Corollary 5.14. If X ⊆An is an affine variety and Y = V(p) ⊆X is an irreducible closed
+subset for a prime ideal p ⊆A(X), then
+dim X = dim A(X) and codimX Y = height p.
+If X ⊆PN is a projective variety and Y = V+(p) ⊆X is an irreducible closed subset for a prime
+ideal p ⊆S(X), then
+dim X = dim S(X) −1 and codimX Y = height p.
+Proof. Suppose that X is affine.
+As C(X) = F A(X), we have dim X = dim A(X)
+by Theorem 5.12. Note that A(Y) = A(X)/p. Then Theorem 5.12 also shows that
+codimX Y = height p. Suppose that X is projective. Choose a inear form ℓ∈S(X) with
+ℓ, 0. Note that F(S(X)) = C(X)(ℓ) and ℓis transcendental over C(X). By Theorem 5.12,
+dim S(X) = trdegC F(S(X)) = trdegC C(X) + 1 = dim X + 1. The remaining is clear.
+□
+Corollary 5.15. If X and Y are quasi-projective varieties, then
+dim(X × Y) = dim X + dim Y.
+Proof. Recall from Theorem 4.18 that X×Y is a quasi-projective variety. We may assume
+that X and Y are affine varieties so that X × Y is also an affine variety by Theorem 4.16.
+Noether normalization gives algebraically independent elements u1, . . . , um ∈A(X)
+and v1, . . . , vn ∈A(Y) such that A is finite over P := C[u1, . . . , um] and B is finite over
+
+46
+JINHYUNG PARK
+Q := C[v1, . . . , vn]. By the going-up theorem, dim X = dim A(X) = m and dim Y =
+dim A(Y) = n. Remark 4.17 tells us that A(X × Y)  A(X) ⊗C A(Y), which is finite
+over P ⊗C Q  C[u1, . . . , um, v1, . . . , vn]. By the going-up theorem and Corollary 5.9, we
+obtain
+dim(X × Y) = dim A(X × Y) = dim C[u1, . . . , um, v1, . . . , vn] = m + n.
+□
+Example 5.16. We have dim An = n and dim Pn = n.
+Thus dim νd(Pn) = n and
+dim Σm,n = m + n.
+Corollary 5.17. Let X, Y ⊆An be affine varieties or X, Y ⊆PN be projective varieties.
+(1) If Z is an irreducible component of V(f1, . . . , fc) for f1, . . . , fc ∈A(X) or S(X), then
+dim Z ≥dim X −c.
+(2) If Z is an irreducible component of V(f) for f ∈A(X) or S(X) with f , 0, then dim Z =
+dim X −1.
+(3) If Z is an irreducible component of X ∩Y, then dim Z ≥dim X + dim Y −n.
+Proof. We only need to consider the case that X, Y ⊆An are affine varieties. In (1),
+an irreducible component Z of V( f1, . . . , fc) corresponds to a prime p ⊆A(X) minimal
+over f1, . . . , fc. By Theorem 5.12 and Krull height theorem, we have
+dim Z = dim(A(X)/p) = dim A(X) −height p ≥dim X −c.
+Now, we assume that c = 1 and f1 , 0. Since (0) ⊊p, it follows that height p ≥1.
+Thus the equality holds, and this proves (2).
+For (3), consider the affine variety
+X × Y ⊆An × An = A2n. If x1, . . . , xn are coordinates on the first factor and y1, . . . , yn are
+coordinates on the second factor, then
+X ∩Y  (X × Y) ∩V(x1 −y1, . . . , xn −yn).
+By (1) and Corollary 5.15, dim Z ≥dim X + dim Y −n.
+□
+If X is a nonempty algebraic set, then we can write X = X1∪· · ·∪Xr, where X1, . . . , Xr
+are irreducible components of X. The dimension of X is
+dim X := max
+1≤i≤r dim Xi.
+Corollary 5.18. Let X be an algebraic set. Then dim X is the supremum of the lengths r of
+strict chains Y0 ⊊Y1 ⊊· · · ⊊Yr of irreducible closed subsets of X. If X is a quasi-projective
+variety, then all maximal strict chains of irreducible closed subsets of X has the same length
+dim X.
+Proof. Choose a nonempty affine open subset Y of an irreducible component of X
+having maximal dimension. Then dim X = dim Y. A chain of prime ideals of A(Y)
+corresponds to a chain of irreducible closed subsets of Y of the same length. Taking
+the closures of these subsets in X, we obtain a chain of irreducible closed subsets of X
+of the same length. Thus the maximal length of a chain of irreducible closed subsets of
+X is at least dim X. Conversely, consider a maximal chain of irreducible closed subsets
+of X. The smallest member of such a chain must be a point. Choose a nonempty affine
+open subset Y of X containing this point. Applying the above argument in the reverse
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+47
+direction, we see that the length of the chain is at most dim X. The second assertion
+now follows from Corollary 5.13.
+□
+This also shows that dim X = dim A(X) when X ⊆An is an affine algebraic set and
+dim X = dim S(X) −1 when X ⊆PN is a projective algebraic set (cf. Corollary 5.14).
+Let X be an algebraic set, and p ∈X. The local dimension of X at p is
+dimp X := max
+1≤i≤r dim Xi,
+where X1, . . . , Xr are the irreducible components of X containing p. When X is a quasi-
+projective variety, dim X = dimp X = dim OX,p. In general, let OX,p := A(U)mp be a
+local ring with unique maximal ideal mX,p, where U is any affine open subset of X
+containing p and mp ⊆A(U) is the maximal ideal corresponding to p. This definition
+is independent of the choice of the affine open subset U. Indeed, if U and V are two
+affine open subsets of X containing p, then A(U)mp  A(W)mp  A(V)mp for any affine
+open subset W ⊆U ∩V containing p. The elements of OX,p can be interpreted as germs
+of regular functions at p. The embedding dimension of X at p is
+embdimp X := dimC mX,p/m2
+X,p.
+Notice that mX,p/m2
+X,p is a vector space over OX,p/mX,p  C.
+Proposition 5.19. For an algebraic set X and a point p ∈X, we have
+dimp X = dim OX,p ≤embdimp X.
+Proof. Let U be an affine open subset of X containing p. A minimal prime ideal p
+of A(U) corresponds to an irreducible components of U whose coordinate ring is
+A(U)/p. After localizing at mp, precisely those p contained in mp survive, and they
+correspond to irreducible components containing p. A maximal chain of prime ideals
+of OX,p = A(U)mp arises by localizing a maximal chain of prime ideals of A(U) that starts
+at a minimal prime ideal containing in mp and ends at mp. Let p1, . . . , pr ⊆A(U) be
+minimal prime ideals contained in mp, and X1, . . . , Xr ⊆X be corresponding irreducible
+components. Then
+dim OX,p = max
+1≤i≤r A(U)/pi = max
+1≤i≤r dim Xi.
+Now, put c := dimC mX,p/m2
+X,p. There are u1, . . . , uc ∈mX,p whose residue classes form
+a basis of mX,p/m2
+X,p. Then mX,p = (u1, . . . , uc) + m2
+X,p. By Nakayama lemma, mX,p =
+(u1, . . . , uc). Then Krull height theorem shows that dim OX,p = height mX,p ≤c.
+□
+Example 5.20. Let X := V(xz, yz) ⊆A3. Then X = V(x, y) ∪V(z) with dim V(x, y) = 1
+and dim V(z) = 2, so dim X = 2. For p := (0, 0, 0) ∈X, we have dimp X = 2 and
+embdimp X = 3. For q := (1, 0, 0) ∈X, we have dimq X = 2 and embdimq X = 2.
+Example 5.21. Let X := V(y2 −x3) ⊆A2. Then X is irreducible, and dim X = 1. For
+p := (0, 0) ∈X, we have dimp X = 1 and embdimp X = 2.

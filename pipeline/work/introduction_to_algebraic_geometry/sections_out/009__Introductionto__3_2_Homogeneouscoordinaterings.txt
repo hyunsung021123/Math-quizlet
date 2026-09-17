@@ -1,0 +1,225 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 3. Projective Varieties
+현재 소단원: 3.2 Homogeneous coordinate rings
+직전 소단원: 「3.1 Projective spaces and projective varieties」
+[본문]
+26
+JINHYUNG PARK
+where r is the rank of Q. If r ≤N −1, then V+(Q) ⊆PN is the projective cone over a
+quadric hypersurface V+(Q) ⊆PN−1.
+Theorem 3.6. Five points in P2, no three of which are collinear, lie on a unique plane conic.
+Proof. A plane conic is V+(Q) ⊆P2, where
+Q := a0x2 + a1y2 + a2z2 + a3xy + a4yz + a5zx ∈C[x, y, z]
+is a nonzero quadratic form. As V+(Q) = V+(λQ) for λ ∈C∗, the space of plane conics
+can be naturally identified with P5, where its homogenous coordinates are [a0 : · · · : a5].
+For a point p := [x0 : y0 : z0] ∈P2, consider a linear form
+Lp := x2
+0a0 + y2
+0a1 + z2
+0a2 + x0y0ac + y0z0a4 + z0x0a5 ∈C[a0, . . . , a5].
+Note that p lies on a plane conic V+(Q) if and only if [V+(Q)] ∈V+(Lp). Let p1, . . . , p5 ∈P2
+be five points, no three of which are collinear. These five points lie on V+(Q) if and
+only if [V+(Q)] ∈V+(Lp1) ∩· · · ∩V+(Lp5). To derive a contradiction, suppose that five
+hyperplanes V+(Lp1), . . . , V+(Lp5) do not meet at one point. This means that
+c1Lp1 + · · · + c5Lp5 = 0 for some c1, . . . , c5 ∈C not all zero.
+Let Lij ∈C[x, y, z] be a linear form such that the line V+(Lij) passes through pi, pj for
+1 ≤i < j ≤5. Note that the plane conic V+(L12L34) passes through p1, p2, p3, p4 but not
+p5. Then
+c5Q(p5) = c1Q(p1) + · · · + c5Q(p5) = (c1Lp1 + · · · + c5Lp5)([V+(Q)]) = 0,
+so c5 = 0. By the same way, we get c1 = · · · = c5 = 0, which is a contradiction.
+□
+Remark 3.7. This theorem admits two natural generalizations. First, if we regard a
+plane conic as a rational normal curve of degree 2, then the corresponding higher
+degree statement is that there is a unique rational normal curve of degree d in Pd
+passing through d + 3 general points. We will prove this in Theorem 4.9. The second
+generalization concerns the enumeration of plane rational curves passing through
+3d −1 genera points of P2. Let Nd denote the number of such curves. In 1994, Maxim
+Kontsevich proved the following recursive formula:
+Nd =
+d−1
+X
+k=1
+NkNd−kk2(d −k)
+ 
+(d −k)
+ 
+3d −4
+3k −2
+!
+−k
+ 
+3d −4
+3k −1
+!!
+.
+The proof of this result relies on a very deep theory in algebraic geometry, developed
+under the influence of string theory. It is far beyond the scope of this course.
+3.2. Homogeneous coordinate rings. Let S := C[x0, . . . , xN], and Sd be the set of ho-
+mogenous polynomials of degree d with zero for each d ≥0. As a complex vector
+space, we may write
+S =
+M
+d≥0
+Sd.
+Then S is a graded ring, meaning that FG ∈Sd+e for all F ∈Sd and g ∈Se. If J ⊆S is a
+homogenous ideal, then
+J =
+M
+d≥0
+Jd with Jd := J ∩Sd.
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+27
+For a subset X ⊆PN, its homogeneous vanishing ideal is
+I(X) :=
+M
+d≥0
+{F ∈Sd | F(p) = 0 for every p ∈X},
+which is a homogenous ideal of S. Indeed, for G = Pk
+d=0 Gd ∈I(X) and p ∈X, we
+have G(λp) = Pk
+d=0 Gd(p)λd = 0 for all λ ∈C. Thus Gd(p) = 0 for every 0 ≤d ≤k, i.e.,
+Gd ∈I(X). If X ⊆PN is a projective algebraic set, then its homogeneous coordinate
+ring is
+S(X) := S/I(X).
+Note that S(X) heavily depends on the chosen embedding X ⊆PN in contrasts to the
+affine case.
+Let X = V+(J) ⊆PN be a nonempty projective algebraic set for a homogenous ideal
+J ⊆S. Its affine cone is
+bX := {λa ∈AN+1 | [a] ∈X, λ ∈C} = V(J) ⊆AN+1.
+It contains the origin of AN+1, and its nonzero points are precisely the homogeneous
+coordinate representatives of points of X.
+Proposition 3.8. For every projective algebraic set X, the ideal I(X) is radical.
+If X is
+nonempty, then
+bX = V(I(X)) ⊆AN+1 and I(bX) = I(X).
+Furthermore, X is irreducible if and only if I(X) is prime.
+Proof. If X = ∅, then I(X) = S. Assume henceforth that X is nonempty. It is clear that
+bX = V(I(X)) ⊆AN+1 and I(bX) = I(X). By the strong Nullstellensatz, I(X) is radical. For
+the last statement, observe first that if X is reducible, then bX is reducible so that I(X) is
+not prime by Proposition 1.5. Conversely, assume that X is irreducible. First, suppose
+that FG ∈I(X) for homogeneous F, G ∈S. Then X = (X ∩V+(F)) ∪(X ∩V+(G)), so
+X = X ∩V+(F) or X = X ∩V+(G). Thus F ∈I(X) or G ∈I(X). Suppose that FG ∈I(X)
+for F, G ∈S. Then the product of the lowest degree homogenous parts of F and G
+are contained in i(X). Then the lowest-degree homogeneous part of one of the two is
+contained in I(X). By subtracting off this part and repeating the same argument, we
+conclude that one of the two is contained in I(X). Hence I(X) is prime.
+□
+Example 3.9. Every projective space PN is a projective variety.
+Example 3.10. Notice that Q = x2
+0 + · · · + x2
+r is irreducible in C[x0, . . . , xN] (i.e., the
+quadric hypersurface V+(Q) ⊆PN is a projective variety) if and only if r ≥3.
+Theorem 3.11 (Projective Nullstellensatz). Let J ⊊S be a proper homogeneous ideal. Then
+V+(J) = ∅
+⇐⇒
+p
+J = mirr
+⇐⇒
+mr
+irr ⊆J for some r ≥1.
+If V+(J) is nonempty, then
+I(V+(J)) =
+p
+J.
+Consequently, X 7→I(X) and J 7→V+(J) give inclusion-reversing correspondences between
+projective algebraic sets (resp. projective varieties) in PN and homogenous radical ideals (resp.
+homogenous prime ideals) of S .
+
+28
+JINHYUNG PARK
+Proof. Note that V(J) ⊆AN+1 is a cone containing the origin. It contains no other point
+if and only if V+(J) is empty Then the strong Nullstellensatz therefore yields the left
+(⇐⇒). The right (⇐⇒) is trivial. Now, assume X := V+(J) , ∅. Then Proposition 3.8
+and the strong Nullstellensatz give I(V+(J)) = I(V(J)) = √J. The last statement easily
+follows just as in the affine case (see Corollary 1.35).
+□
+Example 3.12. Both S and mirr have empty projective zero locus, but I(∅) = S , mirr.
+Thus the nonempty correspondence in Theorem 3.11 cannot be extended literally by
+declaring that the irrelevant ideal is the vanishing ideal of the empty set.
+Proposition 3.13. Let j: AN →U0 ⊆PN be a map given by (a1, . . . , aN) 7→[1 : a1 : · · · : aN].
+(1) If X ⊆AN is an affine algebraic set, then I(j(X)) = I(X)h
+0.
+(2) If Z ⊆PN is a projective algebraic set, then I(j−1(U0 ∩Z)) = I(Z)deh
+0
+.
+Proof. (1) Every F ∈I(X)h
+0 vanishes on j(X), so I(X)h
+0 ⊆I(j(X)). Conversely, for ho-
+mogenous F ∈I(j(X)), the dehomogenization Fdeh
+0
+vanishes on X, so Fdeh
+0
+∈I(X). Then
+F = x
+deg F−deg Fdeh
+0
+0
+(Fdeh
+0
+)h
+0 ∈I(X)h
+0, and hence, I(j(X)) ⊆I(X)h
+0.
+(2) Every f ∈I(Z)deh
+0
+vanishes on j−1(U0 ∩Z), so I(Z)deh
+0
+⊆I(j−1(U0 ∩Z)). Conversely, for
+f ∈I(j−1(U0 ∩Z)), the homogenization f h
+0 vanishes on j(U0 ∩Z). Note that j(U0 ∩Z) ⊆
+Z ⊆j(U0 ∩Z) ∪V+(x0). Thus x0 f h
+0 ∈I(Z). Then f = (x0 f h
+0 )deh
+0
+∈I(Z)deh
+0
+, and hence,
+I(j−1(U0 ∩Z)) ⊆I(Z)deh
+0
+.
+□
+3.3. Quasi-projective varieties. A quasi-projective algebraic set is an open subset
+of a projective algebraic set. It is a quasi-projective variety if it is nonempty and
+irreducible. An algebraic variety usually means a quasi-projective variety. Let X ⊆PN
+be a quasi-projective variety. Then each X ∩Ui can be regarded as an irreducible
+open subset of an affine variety, which is covered by open affine subsets. Hence every
+quasi-projective variety is covered by open affine subsets.
+For an open subset U ⊆X, a function g: U →C is regular at p ∈U if there are a
+neighborhood W ⊆U of p and homogeneous polynomials F, G ∈C[x0, . . . , xN] of the
+same degree such that G is nowhere zero on W and
+g(q) = F(q)
+G(q) for q ∈W.
+It is regular on U if it is regular at every point of U. The ring of regular functions on
+U is denoted by OX(U).
+Proposition 3.14. Let Z ⊆PN be a quasi-projective projective variety, and X ⊆Z be an open
+subset so that X is a quasi-projective variety. For each 0 ≤i ≤N, we have
+OX(X ∩Ui)  Oφi(Z∩Ui)(φi(X ∩Ui)),
+where φi : Ui →AN is the stanarad chart map in Proposition 3.1 and φi(Z ∩Ui) ⊆AN is an
+affine variety.
+Proof. A homogeneous fraction F/G with deg F = deg G dehomogenizes on Ui to the
+fraction Fdeh
+i
+/Gdeh
+i
+.
+Conversely, a fraction a/b on Ui gives a homogenous fraction
+(x
+deg b
+i
+ah
+i )/(x
+deg a
+i
+bh
+i ) with deg(x
+deg b
+i
+ah
+i ) = deg(x
+deg a
+i
+bh
+i ).
+□

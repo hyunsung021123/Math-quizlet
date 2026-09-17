@@ -1,0 +1,109 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 2. Functions on Affine Varieties
+현재 소단원: 2.2 Localization
+직전 소단원: 「2.1 Regular functions」
+[본문]
+20
+JINHYUNG PARK
+Example 2.7. Let X ⊆An be an affine variety, and 0 , f ∈A(X). The principal open
+subset DX( f) can be naturally identified with the affine variety
+V(I(X) + (xn+1 f −1)) ⊆An+1
+whose coordinate ring is isomorphic to A(X) f. Then the inclusion map ϕ: DX(f) ,→X
+is a morphism such that ϕ∗: A(X) →A(X) f is the localization map via Theorem 2.4.
+Example 2.8. The morphism φ: A1 →P given by t 7→(t, t2) in Example 1.8, where P :=
+V(y−x2) ⊆A2 is a parabola, is an isomorphism. Next, the morphism g: H →A2 given
+by (x, y) →x in Example 1.29, where H := V(xy −1) ⊆A2 is a hyperbola, is an affine
+morphism whose image is DA1(t) = A1 \ {0}. We have A(H)  C[t, t−1]  OA1(DX(t)).
+Example 2.9. Let C := V(v2 −u3) ⊆A2, and consider the affine morphism
+ν: A1 −→C,
+t 7−→(t2, t3),
+which is bijective. Note that A(C)  C[t2, t3]. The corresponding C-algebra homo-
+morphism ν∗: C[t2, t3] →C[t] is injective but not surjective. In particular, ν is not an
+isomorphism.
+2.2. Localization. A subset U of a ring R is multiplicatively closed if 1 ∈U and st ∈U
+whenever s, t ∈U. For a, b ∈R, s, t ∈U, we define
+a
+s ∼b
+t
+def
+⇐⇒
+u(ta −sb) = 0
+for some u ∈U.
+This is an equivalence relation. Let R[U−1] be the set of all equivalence classes. We
+define addition and multiplication on R[U−1] in a usual way, which are well-defined.
+Then R[U−1] becomes a ring, and we call it the localization of R by U. Note that every
+element of U becomes a unit in R[U−1]. There is a ring homomorphism φU : R →R[U−1]
+given by a 7→a/1, which is called the localization map. As in Proposition 2.3, we can
+show that if α: R →B is a ring homomorphism such that α(u) is a unit for every u ∈U,
+then there is a unique ring homomorphism eα: R[U−1] →B such that eα(a/1) = α(a) for
+every a ∈R. When U := R \ p for a prime ideal p ⊆R, we write Rp := R[U−1] and
+φp := φU.
+Proposition 2.10. If p is a prime ideal of a ring R, then Rp is a local ring with unique maximal
+ideal pRp such that Rp/pRp  F(R/p).3
+Proof. First, we claim that in Rp, an element a/s is a unit if and only if a < p. Suppose
+that a ∈p and (a/s)(b/t) = 1. Then u(ab −st) = 0 for some u < p, so ust = uab ∈p,
+which gives a contradiction since ust < p. If a < p, then a/s is clearly a unit. Now, the
+claim shows that nonunits in Rp are precisely the ideal pRp, which is consequently the
+unique maximal ideal. Finally, the ring homomokrphism
+Rp −→F(R/p),
+a
+s 7−→a
+s
+is surjective and has kernel pRp, proving the last assertion.
+□
+3For an integral domain A, we denote by F(A) the fraction field of A. Note that F(A) = A(0).
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+21
+Let X be an affine variety. For open subsets U, V ⊆X containing a point p ∈X and
+f ∈OX(U), g ∈OX(V), we define (U, f) ∼(V, g) if and only if f = g on some open subset
+W ⊆U ∩V containing p. A germ of a regular function at p ∈X is an equivalence class
+of pairs (U, f), where p ∈U ⊆X is an open subset and f ∈OX(U). Note that the ring
+of germs is a local ring OX,p with unique maximal ideal mX,p := {f ∈OX,p | f(p) = 0}.
+Theorem 2.11. For an affine variety X and p ∈X, we have OX,p  A(X)mp and
+mX,p = mpOX,p =
+a
+b
+ a, b ∈A(X), a(p) = 0, b(p) , 0
+
+.
+Proof. The evaluation map evp : A(X) →C given by f 7→f(p) is a surjective ring
+homomorphism, and ker(evp) = mp. For a/b ∈A(X)mp, we have b(p) , 0, so a/b is a
+regular function on DX(b) and hence a germ at p. If a/b = c/d in A(X)mp, then ad = bc
+since A(X) is an integral domain. Thus a/b = c/d on DX(bd), which is a neighborhood
+of p. This shows that there is a map A(X)mp →OX,p. It is clearly a surjective ring
+homomorphism.
+If a germ of a/b is zero, then a vanishes on a nonempty open
+neighborhood of p inside DX(b). That neighborhood is dense in X by Proposition
+1.10, so a = 0 in A(X). Therefore, the map A(X)mp →OX,p is injective and hence an
+isomorphism. The last assertion follows from Proposition 2.10.
+□
+The residue field of X at p is C(p) := OX,p/mX,p  C.
+2.3. Rational functions. Let X be an affine variety. For nonempty open subsets U, V ⊆
+X and f ∈OX(U), g ∈OX(V), we define (U, f) ∼(V, g) if and only if f = g on some
+nonempty open subset W ⊆U ∩V. It is easy to check that this is an equivalence
+relation. An equivalence class of such pairs is called a rational function on X. Let
+C(X) be the set of rational functions. We define addition and multiplication on C(X)
+in a usual way. Then they are well-defined, and make C(X) a C-algebra. We call C(X)
+the function field of X.
+Theorem 2.12. For an affine variety X, we have C(X)  F(A(X)).
+Proof. For a/b ∈F(A(X)), we have a/b ∈DX(b). If a/b = 0 on a nonempty open subset
+of DX(f), then a vanishes there and hence on all of X so that a = 0. This shows that
+there is an injective map F(A(X)) →C(X), which is clearly a ring homomorphism.
+For an open subset U ⊆X and f ∈OX(U), we may write f = a/b on DX(b) for some
+a, b ∈A(X) with b , 0 by Theorem 2.4. This proves that the map is surjective and hence
+an isomorphism.
+□
+Let X be an affine variety. For q ∈C(X), its denominator ideal is
+Jq := {h ∈A(X) | hq ∈A(X)} ⊆A(X).
+Proposition 2.13. If X is an affine variety, then
+A(X) =
+\
+p∈X
+OX,p in C(X).
+Proof. The inclusion (⊆) is trivial. For q ∈OX,p, there is h ∈A(X) such that h < mp
+and hq ∈A(X). Thus Jq ⊈mp. If q ∈T
+p∈X OX,p, then X ∩V(Jq) = ∅. By the weak
+Nullstellensatz, Jq = A(X), so 1 ∈Jq. This proves that q ∈A(X).
+□

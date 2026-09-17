@@ -1,0 +1,200 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 1. Affine Varieties
+현재 소단원: 1.4 Nullstellensatz
+직전 소단원: 「1.3 Elimination」
+[본문]
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+11
+Proposition 1.30. Let I ⊆Rn be an ideal such that I contains a polynomial which is monic in
+x1. For the coordinate projection
+π: An −→An−1,
+(x1, x2, . . . , xn) 7−→(x2, . . . , xn),
+we have
+π(V(I)) = V(I ∩C[x2, . . . , xn]).
+Proof. The inclusion (⊆) is clear.
+To derive a contradiction, suppose that there is
+b ∈V(I ∩C[x2, . . . , xn]) such that no point of π−1(b) lies in V(I). Note that J := {f(x1, b) |
+f ∈I} ⊆C[x1] is an ideal with no common zero. By the fundamental theorem of
+algebra, J = (1). Choose f ∈I such that f is monic in x1 whose x1-degree is d. We can
+choose qi ∈I such that qi(x1, b) = xi
+1 for each 0 ≤i ≤d −1. We may write
+xi
+1 −qi = si f + ri for some si, ri ∈C[x2, . . . , xn][x1] with degx1 ri < d.
+Then si(x1, b) f(x1, b) + ri(x1, b) = 0. By the uniqueness of division in C[x1], we get
+ri(x1, b) = 0. Thus we can write
+ri =
+d−1
+X
+k=0
+cikxk
+1 for some cik ∈C[x2, . . . , xn] with cik(b) = 0.
+Since xi
+1 −ri = si f + qi ∈I, every entry of
+
+
+1 −c00
+−c01
+−c02
+· · ·
+−c0(d−1)
+−c10
+1 −c11
+−c12
+· · ·
+−c1(d−1)
+−c20
+−c21
+1 −c22
+· · ·
+−c2(d−1)
+...
+...
+...
+...
+...
+−c(d−1)0
+−c(d−1)1
+−c(d−1)2
+· · ·
+1 −c(d−1)(d−1)
+
+
+|                                                      {z                                                      }
+=:M
+
+
+1
+x1
+x2
+1...
+xd−1
+1
+
+
+is contained in I. Multiplication by the adjugate matrix shows that h := det(M) ∈
+I ∩C[x2, . . . , xn]. But h(b) = 1, which is a contradiction to b ∈V(I ∩C[x2, . . . , xn]). Hence
+π−1(b) ∩V(I) , ∅for all b ∈V(I ∩C[x2, . . . , xn]). This proves the inclusion (⊇).
+□
+1.4. Nullstellensatz. Here we give a generalization of the fundamental theorem of
+algebra to multivariable cases.
+Lemma 1.31. For every nonconstant f ∈Rn, one may make f monic in x1 after a linear
+triangular change of coordinates.
+Proof. Let d be the total degree of f, and fd be the highest-degree homogeneous part of
+f. Note that fd(1, x2, . . . , xn) , 0. By Lemma 1.6, we can choose (a2, . . . , an) ∈An−1 such
+that fd(1, a2, . . . , an) , 0. Then the coefficient of xd
+1 in
+f(ux1, u(x2 + a2x1), . . . , u(xn + anx1))
+is 1 for any u ∈C with ud = fd(1, a2, . . . , an).
+□
+Theorem 1.32 (Weak Nullstellensatz). For every ideal I ⊆Rn, we have
+V(I) = ∅
+⇐⇒
+I = (1).
+
+12
+JINHYUNG PARK
+Proof. It is clear that V(I) = ∅whenever I = (1). It suffices to show that every proper
+ideal I of Rn has a common zero in An. We proceed by induction on n. The case n = 1
+is the fundamental theorem of algebra. Assume n > 1. If I = (0), then every point
+of An is a zero. If I , (0), then there is a nonconstant polynomial in I. By Lemma
+1.31, we may assume that I contains a polynomial which is monic in x1. Note that the
+elimination ideal I ∩C[x2, . . . , xn] is also proper. By induction, the elimination ideal
+has a zero b ∈An−1. Proposition 1.30 yields a point (a, b) ∈V(I).
+□
+Remark 1.33 (Effective Nullstellensatz). For f1, . . . , fs ∈Rn, if V(f1, . . . , fs) = ∅, then the
+weak Nullstellensatz says that there are g1, . . . , gs ∈Rn such that g1 f1 + · · · + gs fs = 1.
+It is natural to ask if there is an effective upper bound for deg g1, . . . , deg gk in terms of
+deg f1, . . . , deg fk. A nearly sharp bound was obtained by Woodrow Dale Brownawell
+in 1987, and the following refined bound was finally established by J´anos Koll´ar in
+1988: if n ≥2 and deg f1 ≥· · · ≥deg fs, then we can choose g1, . . . , gs ∈Rn such that
+g1 f1 + · · · + gs fs = 1 and
+deg gi ≤max{deg fs, 3}
+deg fi
+min{n,s}−1
+Y
+j=1
+max{deg fj, 3} for all 1 ≤i ≤s.
+When deg fs ≥3, this bound is optimal.
+For an ideal I ⊆Rn, its radical is
+√
+I := { f ∈Rn | f N ∈I for some N ≥1}.
+The ideal I is radical if I =
+√
+I. Note that every prime ideal is radical.
+Theorem 1.34 (Strong Nullstellensatz). For every ideal I ⊆Rn, we have
+I(V(I)) =
+√
+I.
+Proof. (Rabinowitsch trick) If f N ∈I, then f vanishes on V(I) so that
+√
+I ⊆I(V(I)).
+Conversely, take f ∈I(V(I)). If f = 0, then f ∈
+√
+I. Assume that f , 0. Note that the
+ideal
+J := IC[x1, . . . , xn, y] + (y f −1) ⊆C[x1, . . . , xn, y]
+has empty zero locus. By the weak Nullstellensatz, J = (1). Choosing generators
+f1, . . . , fs of I, we may write
+1 =
+s
+X
+i=1
+ai fi + b(yf(x) −1) for some ai, b ∈C[x1, . . . , xn, y].
+Substitute y = 1/f(x) in the rational function field, the last summand vanishes, and
+multiplying by a sufficiently large power f N clears every denominator. The result
+expresses f N as an Rn-linear combination of the fi, so f N ∈I, i.e., f ∈
+√
+I.
+□
+Corollary 1.35. There is an inclusion-reversing one-to-one correspondence between radical
+ideals of Rn and affine algebraic sets in An by I 7→V(I) and X 7→I(X). Furthermore, we have
+the following:
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+13
+(1) Affine varieties in An correspond to prime ideals of Rn.
+(2) Points of An correspond to maximal ideals of Rn: the point (a1, . . . , an) corresponds to
+ma := (x1 −a1, . . . , xn −an).
+Proof. If X is an affine algebraic set in An, then V(I(X)) = X by Proposition 1.4. If I is a
+radical ideal of Rn, then the strong Nullstellensatz yields I(V(I)) = I. This proves the
+assignments I 7→V(I) and X 7→I(X) give a one-to-one correspondence. The inclusion-
+reversing property is guaranteed by Proposition 1.1. Now, for a prime ideal p of Rn,
+the weak Nullstellensatz makes V(p) nonempty, and the strong Nullstellensatz implies
+I(V(p)) = p. Proposition 1.5 then shows (1). Next, as the kernel of the evaluation map
+Rn →C given by f 7→f(a) is ma, we see that ma is maximal. Conversely, suppose
+that m is a maximal ideal of Rn. By the weak Nullstellensatz, there is a ∈V(m). Then
+m ⊆ma, and maximality forces equality. This proves (2).
+□
+1.5. Primary Decomposition. A ring1 is Noetherian if every ascending chain of ideals
+eventually stabilizes. Note that every quotient ring of a Noetherian ring is Noetherian.
+A topological space is Noetherian if every descending chain of closed subsets even-
+tually stabilizes. Note that every closed subset of a Noetherian space is Noetherian.
+Proposition 1.36. For a ring R, the following are equivalent:
+(1) Every ideal of R is finitely generated.
+(2) Every ascending chain of ideals of R eventually stabilizes.
+(3) Every nonempty family of ideals of R has a maximal member.
+Proof. Let I1 ⊆I2 ⊆I3 ⊆· · · be an ascending chain of ideals of R. As S∞
+i=1 Ii is an ideal of
+R, (1) implies that the finite generators of I lie in one Ik. Then Ik = S∞
+i=1 Ii, so Ii = Ik for
+all i ≥k. This proves (1) =⇒(2). If a nonempty family of ideals of R has no maximal
+member, then this produces a nonstationary ascending chain. Thus (2) =⇒(3). For
+any ideal I of R, we can choose a maximal finitely generated subideal J using (3). If
+f ∈I, then J + ( f) is again finitely generated and contained in I, so maximality gives
+f ∈J. Thus I = J. Hence (3) =⇒(1). The final statements follow from Hilbert basis
+theorem and Corollary 1.35.
+□
+Example 1.37. By Hilbert basis theorem, Rn and all of its quotient rings are Noetherian.
+By Corollary 1.35, An and all of its closed subsets are Noetherian.
+Proposition 1.38. Let X be a Noetherian space. Then every open subset of X is quasi-compact.2
+Proof. Let U := {Uλ}λ∈Λ be an open cover of X. Consider the set of finite unions of
+members of U . This set has a maximal member. Indeed, otherwise, there is an infinite
+ascending chain of open sets, hence an infinite descending chain of closed sets. The
+corresponding members of U form a finite subcover of X.
+□
+1Inalgebraic geometry, everyringisa commutative ringwithidentity, and everyringhomomorphism
+sends 1 to 1.
+2Quasi-compactness has the same covering property as compactness: every open cover admits a
+finite subcover. Since a Noetherian space is not Hausdorff in general, we use the term quasi-compact
+rather than compact here.

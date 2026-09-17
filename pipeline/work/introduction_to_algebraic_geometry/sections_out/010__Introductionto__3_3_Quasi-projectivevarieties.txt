@@ -1,0 +1,313 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 3. Projective Varieties
+현재 소단원: 3.3 Quasi-projective varieties
+직전 소단원: 「3.2 Homogeneous coordinate rings」
+[본문]
+28
+JINHYUNG PARK
+Proof. Note that V(J) ⊆AN+1 is a cone containing the origin. It contains no other point
+if and only if V+(J) is empty Then the strong Nullstellensatz therefore yields the left
+(⇐⇒). The right (⇐⇒) is trivial. Now, assume X := V+(J) , ∅. Then Proposition 3.8
+and the strong Nullstellensatz give I(V+(J)) = I(V(J)) = √J. The last statement easily
+follows just as in the affine case (see Corollary 1.35).
+□
+Example 3.12. Both S and mirr have empty projective zero locus, but I(∅) = S , mirr.
+Thus the nonempty correspondence in Theorem 3.11 cannot be extended literally by
+declaring that the irrelevant ideal is the vanishing ideal of the empty set.
+Proposition 3.13. Let j: AN →U0 ⊆PN be a map given by (a1, . . . , aN) 7→[1 : a1 : · · · : aN].
+(1) If X ⊆AN is an affine algebraic set, then I(j(X)) = I(X)h
+0.
+(2) If Z ⊆PN is a projective algebraic set, then I(j−1(U0 ∩Z)) = I(Z)deh
+0
+.
+Proof. (1) Every F ∈I(X)h
+0 vanishes on j(X), so I(X)h
+0 ⊆I(j(X)). Conversely, for ho-
+mogenous F ∈I(j(X)), the dehomogenization Fdeh
+0
+vanishes on X, so Fdeh
+0
+∈I(X). Then
+F = x
+deg F−deg Fdeh
+0
+0
+(Fdeh
+0
+)h
+0 ∈I(X)h
+0, and hence, I(j(X)) ⊆I(X)h
+0.
+(2) Every f ∈I(Z)deh
+0
+vanishes on j−1(U0 ∩Z), so I(Z)deh
+0
+⊆I(j−1(U0 ∩Z)). Conversely, for
+f ∈I(j−1(U0 ∩Z)), the homogenization f h
+0 vanishes on j(U0 ∩Z). Note that j(U0 ∩Z) ⊆
+Z ⊆j(U0 ∩Z) ∪V+(x0). Thus x0 f h
+0 ∈I(Z). Then f = (x0 f h
+0 )deh
+0
+∈I(Z)deh
+0
+, and hence,
+I(j−1(U0 ∩Z)) ⊆I(Z)deh
+0
+.
+□
+3.3. Quasi-projective varieties. A quasi-projective algebraic set is an open subset
+of a projective algebraic set. It is a quasi-projective variety if it is nonempty and
+irreducible. An algebraic variety usually means a quasi-projective variety. Let X ⊆PN
+be a quasi-projective variety. Then each X ∩Ui can be regarded as an irreducible
+open subset of an affine variety, which is covered by open affine subsets. Hence every
+quasi-projective variety is covered by open affine subsets.
+For an open subset U ⊆X, a function g: U →C is regular at p ∈U if there are a
+neighborhood W ⊆U of p and homogeneous polynomials F, G ∈C[x0, . . . , xN] of the
+same degree such that G is nowhere zero on W and
+g(q) = F(q)
+G(q) for q ∈W.
+It is regular on U if it is regular at every point of U. The ring of regular functions on
+U is denoted by OX(U).
+Proposition 3.14. Let Z ⊆PN be a quasi-projective projective variety, and X ⊆Z be an open
+subset so that X is a quasi-projective variety. For each 0 ≤i ≤N, we have
+OX(X ∩Ui)  Oφi(Z∩Ui)(φi(X ∩Ui)),
+where φi : Ui →AN is the stanarad chart map in Proposition 3.1 and φi(Z ∩Ui) ⊆AN is an
+affine variety.
+Proof. A homogeneous fraction F/G with deg F = deg G dehomogenizes on Ui to the
+fraction Fdeh
+i
+/Gdeh
+i
+.
+Conversely, a fraction a/b on Ui gives a homogenous fraction
+(x
+deg b
+i
+ah
+i )/(x
+deg a
+i
+bh
+i ) with deg(x
+deg b
+i
+ah
+i ) = deg(x
+deg a
+i
+bh
+i ).
+□
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+29
+Let X ⊆PN and Y ⊆PM be quasi-projective algebraic sets. A map ϕ: X →Y is a
+morphism if every p ∈X has an open neighborhood W on which
+ϕ(q) = [F0(q) : · · · : FM(q)]
+for homogeneous F0, . . . , FM ∈C[x0, . . . , xN] with same degree that do not vanish simul-
+taneously on W. An isomorphism is a morphism admitting a two-sided morphism
+inverse.
+Proposition 3.15. Let X ⊆PN and Y ⊆PM be quasi-projective algebraic sets. Then ϕ: X →Y
+is a morphism if and only if every p ∈X has on open neighborhood W such that there are regular
+functions f0, . . . , fM on W that do not vanish simultaneously with ϕ(q) = [ f0(q) : · · · : fM(q)]
+for all q ∈W.
+Proof. If ϕ is a morphism, then every p ∈X has an open neighborhood W on which
+ϕ(q) = [F0(q) : · · · : FM(q)]
+for homogeneous F0, . . . , FM ∈C[x0, . . . , xN] with same degree that do not vanish si-
+multaneously on W. On W \ V+(Fj) for 0 ≤j ≤M, the Fi/Fj are regular functions,
+and ϕ(q) = [F0(q)/Fj(q) : · · · : FM(q)/Fj(q)]. Conversely, suppose that every p ∈X has
+on open neighborhood W such that there are regular functions f0, . . . , fM on W that
+do not vanish simultaneously with ϕ(q) = [f0(q) : · · · : fM(q)] for all q ∈W. For each
+0 ≤i ≤M, we may write fi = Ai/Bi for homogeneous Ai, Bi ∈C[x0, . . . , xN] with same
+degree. After shrinking W, we may assume that all the Bi are nonzero on W. Let
+B′
+i := B0 · · ·bBi · · · BM for each 0 ≤i ≤M. Then the AiB′
+i ∈C[x0, . . . , xN] are homogeneous
+with same degree, and ϕ(q) = [(A1B′
+1)(q) : · · · : (AMB′
+M)(q)].
+□
+Proposition 3.16. A morphism between quasi-projective varieties is continuous, and the
+composition of morphisms between quasi-projective varieties is a morphism.
+Proof. A morphism between the quasi-projective varieties is locally a regular map
+between open subsets of standard affine charts. Thus the continuity follows from
+Theorem 2.6. The second assertion is trivial.
+□
+Example 3.17. The map φi in Proposition 3.1 is an isomorphism and every hyperplane
+V+(ℓ) of PN with ℓlinear form is isomorphic to PN−1.
+Lemma 3.18. Let X be a quasi-projective variety, U ⊆X be a nonempty open subset, and
+g, h ∈OX(U). If g = h on a nonempty open subset of U, then g = h on U.
+Proof. For p ∈U, write g −h = F/G on a neighborhood N of p with F, G homogeneous
+of the same degree and G nowhere zero. Then F/G = 0 on a nonempty open subset of
+N, so g(p) = h(p). Since p is arbitrary, the functions agree on all of U.
+□
+Example 3.19. Let Q := V+(xy −z2) ⊆P2. As the rank of the quadratic form xy −z2 is 3,
+we see that Q is a projective variety. Let W1 := Q \ {[0 : 1 : 0]} and W2 := Q \ {[1 : 0 : 0]}.
+Then there are maps
+W1 −→P1, [x : y : z] 7−→[x : z] and W2 −→P1, [x : y : z] 7−→[z : y]
+
+30
+JINHYUNG PARK
+such that [x : z] = [xy : yz] = [z2 : yz] = [z : y] on W1 ∩W2. Thus this defines a
+morphism π: Q →P1. It is an isomorphism with inverse
+ν: P1 −→Q,
+[s : t] 7−→[s2 : t2 : st].
+Let X be a quasi-projective variety, and p ∈X. The ring of germs of regular functions
+at p form a local ring OX,p whose maximal ideal consists of germs vanishing at p. Note
+that a germ of a regular function at p is a unit in OX,p exactly when its value at p is
+nonzero.
+Proposition 3.20. Let X ⊆PN be a quasi-projective variety, and p ∈X. Suppose that p ∈Ui
+for some 0 ≤i ≤N. Set Z := X ⊆PN so that Z ∩Ui ⊆Ui  AN is an affine variety. Then
+OX,p  OZ∩Ui,p.
+Proof. This follows from Proposition 3.14.
+□
+Let X be a quasi-projective variety. A rational function on X is an equivalence class
+of pairs (U, f), where U ⊆X is a nonempty open subset and f ∈OX(U). Here two
+such pairs (U, f) and (V, g) are equivalent if f = g on some nonempty open subset
+W ⊆U ∩V. These classes form the function field C(X) of X.
+Proposition 3.21. Let X be a quasi-projective variety, and W ⊆X be a nonempty open subset.
+Then C(X)  C(W).
+Proof. Restriction to W gives a ring isomorphism C(X) →C(W).
+□
+If X ⊆PN is a projective variety, then the homogeneous coordinate ring S(X) is a
+graded integral domain and the degree-zero fraction field is
+F(S(X))0 :=
+ F
+G
+ F, G ∈S(X) homogeneous, G , 0, deg F = deg G
+
+.
+Theorem 3.22. If X ⊆PN is a projective variety, then C(X)  F(S(X))0. Furthermore, if
+X ∩Ui , ∅, then X ∩Ui ⊆Ui  AN is an affine variety and C(X)  C(X ∩Ui).
+Proof. Every F/G ∈F(S(X))0 is a rational function.
+Thus there is an injective ring
+homomorphism F(S(X))0 →C(X). This is surjective since every rational function on
+X can be represented by F/G on a nonempty open subset, where F, G ∈C[x0, . . . , xN]
+are homogenous with deg F = deg G and G is nowhere zero on the open subset. For
+the second assertion, consider the injective ring homomorphism
+F(S(X))0 −→C(X ∩U0),
+F
+G 7−→
+Fdeh
+i
+Gdeh
+i
+.
+As every a/b ∈C(X ∩U0) is mapped from (x
+deg b
+i
+ah
+i )/(x
+deg a
+i
+bh
+0), the ring homomorphism
+is an isomorphism.
+□
+Let X and Y be quasi-projective varieties. A rational map X d Y is an equivalence
+class of pairs (U, ϕU), where U ⊆X is a nonempty open subset and ϕU : U →Y is
+a regular map. Here two such pairs (U, ϕU) and (V, ϕV) are equivalent if ϕU = ϕV
+for some nonempty open subset W ⊆U ∩V. Every rational map ϕ: X d Y ⊆PM
+determines a unique nonzero tuple (q0, . . . , qM) ∈C(X)M+1 \ {0} up to multiplication
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+31
+of all entries by one element of C(X)∗such that F(q0, . . . , qM) = 0 for all F ∈I(Y) (cf.
+Theorem 2.15). If q0, . . . , qM are regular at p ∈X, then p is sent to [q0(p) : · · · : qM(p)] by
+ϕ. A rational map X d Y is dominant if a representative has dense image. It is easy to
+check that dominance is independent of the representative. Furthermore, if ϕ: X d Y
+is a dominant rational map and ψ: Y d Z is a rational map, then ψ ◦ϕ is a rational
+map (cf. Theorem 2.16).
+Theorem 3.23. Let X be a quasi-projective variety, Y ⊆PM be a projective variety, and
+ϕ: X d Y be a rational map represented by (q0, . . . , qM) ∈C(X)M+1 \ {0}. Then q0, . . . , qM are
+regular at p ∈X if and only if there is λ ∈C(X)∗such that
+λqi ∈OX,p for all 0 ≤i ≤M and λqj ∈O∗
+X,p for some 0 ≤j ≤M.
+Furthermore, these points of X form a maximal nonempty open subset Dom(ϕ) on which ϕ is
+a morphism.
+Proof. The first assertion is clear. A rational map between quasi-projective varieties
+is locally a rational map between affine varieties. Thus the second assertion follows
+form Theorem 2.15.
+□
+Example 3.24. For the rational map ϕ: A2 d P1 given by (x, y) 7→[x : y], we have
+Dom(ϕ) = A2 \ {(0, 0)}.
+The varieties X and Y are birational, written X ∼bir Y, if there are dominant rational
+maps in both directions whose compositions are the identity rational maps.
+Theorem 3.25. For quasi-projective varieties X and Y, dominant rational maps ϕ: X d
+Y correspond bijectively to injective C-algebra homomorphisms ϕ∗: C(Y) →C(X).
+The
+correspondence reverses composition. In particular, X and Y are birational if and only if
+C(X)  C(Y) if and only if they contain isomorphic nonempty open subsets.
+Proof. A rational map between quasi-projective varieties is locally a rational map
+between affine varieties, and the function fields of open affine subsets are the same
+as those of quasi-projective varieties by Proposition 3.21. Thus the assertion follows
+from Theorem 2.16.
+□
+
+32
+JINHYUNG PARK
+4. Classical Projective Embeddings
+4.1. Veronese maps. Fix integers n ≥1 and d ≥1, and put
+N :=
+ 
+n + d
+d
+!
+−1.
+For every α := (α0, . . . , αn) ∈Zn+1
+≥0 with |α| := α0 + · · · + αn = d, let Yα be a homogeneous
+coordinate on PN. The d-th Veronese map of Pn is
+νd : Pn −→PN,
+[x0 : · · · : xn] 7−→[xα]|α|=d,
+where xα := xα0
+0 · · · xαn
+n .
+The coordinates may be listed in any fixed order.
+It is a
+projective morphism by Proposition 3.16.
+Proposition 4.1. Consider the ring homomorphism
+Φd : C[Yα | |α| = d] −→C[x0, . . . , xn],
+Yα 7−→xα.
+Then
+ker(Φd) =
+
+Yα −xα | |α| = d
+
+∩C[Yα | |α| = d] ⊆C[Yα | |α| = d]
+is a homogeneous prime ideal. Furthermore,
+ker(Φd) =
+
+YαYβ −Yα′Yβ′ | |α| = |β| = |α′| = |β′| = d and α + β = α′ + β′
+.
+Proof. The equality follows from Proposition 1.27. Since the ring homomorphism Φd
+respects the grading if the image is graded by multiples of d, it follows that ker(Φd) is
+homogeneous. Note that C[Yα | |α| = d]/ ker(Φd)  C[xα | |α| = d], and C[xα | |α| = d] ⊆
+C[x0, . . . , xn] is a subring hence an integral domain. Thus ker(Φd) is prime. For the last
+statement, let J := (YαYβ −Yα′Yβ′ | α + β = α′ + β′). Clearly, J ⊆ker(Φd). For the reverse
+inclusion, observe first that F ∈ker(Φd) if and only if the sum of the coefficients of the
+monomial terms of F that are mapped to the same monomial under Φd is zero. Thus
+ker(Φd) is generated by binomials
+Yα1 · · · Yαr −Yβ1 · · · Yβr with α1 + · · · + αr = β1 + · · · + βr.
+We claim that such binomials are contained in J. We proceed by induction on r. It
+is clear when r = 0 and r = 1. Assume r ≥2. Suppose that α1 , β1. Then there
+are 0 ≤p, q ≤n such that (α1)p > (β1)p and (α1)q < (β1)q. Since Pr
+i=1(αi)q = Pr
+i=1(βi)q,
+there exists j ≥2 with (αj)q > 0. Set eα1 := α1 −ep + eq and eαj := αj + ep −eq.4 Then
+α1 + αj = eα1 + eαj, and
+Yα1 · · · Yαr −Yeα1Yα2 · · · Yαj−1YeαjYαj+1 · · · Yαr ∈J.
+Repeating it yields Yα1 · · · Yαr −Yβ1Yγ2 · · · Yγr ∈J with γ2 + · · · + γr = β2 + · · · + βr. As
+Yγ2 · · · Yγr −Yβ2 · · · Yβr ∈J, we obtain Yα1 · · · Yαr −Yβ1 · · · Yβr ∈J. This proves the claim,
+and hence, ker(Φd) ⊆J.
+□
+Theorem 4.2. The Veronese map νd induces an isomorphism
+νd : Pn −→Wd := V+
+
+ker(Φd)
+
+⊆PN.
+In particular, the Veronese map νd is an embedding of Pn into PN, and I(νd(Pn)) = ker(Φd).
+4For 0 ≤i ≤n, let ei ∈Zn+1
+≥0 denote the i-th standard basis vector.

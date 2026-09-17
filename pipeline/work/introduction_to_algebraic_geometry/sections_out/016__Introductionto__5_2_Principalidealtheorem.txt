@@ -1,0 +1,100 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 5. Dimension Theory
+현재 소단원: 5.2 Principal ideal theorem
+직전 소단원: 「5.1 Integral extensions」
+[본문]
+42
+JINHYUNG PARK
+Theorem 5.5 (Going-Up Theorem). Let R ⊆S be an integral extension.
+(1) For every prime ideal p ⊆R, there is a prime ideal q ⊆S with q ∩R = p.
+(2) If q ⊊q′ are prime ideals of S, then q ∩R ⊊q′ ∩R.
+(3) If p ⊊p′ are prime ideals of R and q is a prime ideal of S with q ∩R = p, then there is a
+prime ideal q′ of S such that q′ ⊋q and q′ ∩R = p′.
+In particular, dim R = dim S.
+Proof. (1) Note that Sp := (R \ p)−1S is a ring. Then Rp ⊆Sp, and Sp is integral over the
+local ring Rp. Let m be a maximal ideal of Sp. Then Sp/m is integral over Rp/(m ∩Rp).
+We claim that Rp/(m ∩Rp) is a field. For 0 , d ∈Rp/(m ∩Rp), multiplying a monic
+polynomial of least degree k for d−1 ∈Sp/m over Rp/(m ∩Rp) by dk−1 expresses d−1 as a
+polynomial in d over Rp/(m ∩Rp). By the claim, m ∩Rp = mp. Note that S ⊆Sp. Then
+q := m ∩S ⊆S is a prime ideal and q ∩R = mp ∩R = p.
+(2) Suppose that p := q ∩R = q′ ∩R. Note that S/q is integral over R/p. We can choose
+b ∈q′ \q such that a monic polynomial p(x) ∈R/p[x] for [b] ∈S/q has nonzero constant
+term. However, p([b]) = 0 in S/q′ shows that the constant term of p(x) lies in p. This
+gives a contradiction.
+(3) The extension R/p ⊆S/q is integral. By (1), there is a prime ideal q′ ⊆S containing
+q such that q′/q ∩R/p = p′/p. Then q′ ∩R = p′. As p ⊊p′, (2) shows that q ⊊q′.
+□
+5.2. Principal ideal theorem. Let R be a ring.
+We say that a prime ideal p ⊆R
+is minimal over a1, . . . , am ∈R if p is minimal among prime ideals of R containing
+a1, . . . , am. Such an ideal always exists by Lemma 1.45.
+Theorem 5.6 (Principal Ideal Theorem). Let R be a Noetherian ring, f ∈R, and p ⊆R be
+a minimal prime ideal over f. Then height p ≤1.
+Proof. There is an inclusion-preserving bijection between prime ideals of Rp and prime
+ideals of R contained in p. Thus height p = height mp, so we may assume that (R, p) is
+a local ring. In this case, p is the only prime ideal of R containing f. Then R/( f) has
+only one prime ideal. By Proposition 1.48, R/(f) is Artinian. Now, for a prime ideal
+q ⊊R and an integer n ≥1, consider the ideal
+q(n) := {a ∈R | sa ∈qn for some s ∈R \ q} ⊆R.
+Assume that q ⊊p. Then f < q. Since R/(f) is Artinian, the descending chain
+( f) + q(1) ⊇(f) + q(2) ⊇· · ·
+of ideals or R/(f) eventually stabilizes: there exists n ≥1 with (f) + q(n) = (f) + q(n+1).
+If r ∈q(n), then we may write r = af + b with a ∈R and b ∈q(n+1). As f is a unit in Rq
+and af = r −b ∈qnRq, we get a ∈qnRq, and hence, a ∈q(n). We obtain
+q(n) = fq(n) + q(n+1).
+Let M := q(n)/q(n+1) be a finitely generated R-module. Since M = fM ⊆pM, Nakayama
+lemma gives M = 0. Note that q(n)Rq = qnRq = (qRq)n. Thus (qRq)n = qRq(qRq)n. By
+Nakayama lemma, (qRq)n = 0.
+This means that Rq has only one prime ideal and
+dimension zero. Recall that q ⊊p. Hence height p ≤1.
+□
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+43
+Example 5.7. In the principal ideal theorem, if R is an integral domain and f is not
+a unit in R, then height p = 1 since (0) ⊆R is a prime ideal.
+By contrast, when
+R = C[x, y]/(xy), the zero divisor x lies in the minimal prime ideal (x) of R, whose
+height is zero.
+Theorem 5.8 (Krull Height Theorem). Let R be a Noetherian ring, and x1, . . . , xc ∈R, and
+p ⊆R be a minimal prime ideal over x1, . . . , xc. Then height p ≤c.
+Proof. We proceed by induction on c. The case c = 1 is covered by the principal ideal
+theorem. Assume that c ≥2. We may assume that (R, p) is a local ring and p is the only
+prime ideal of R containing x1, . . . , xc. By Proposition 1.48, R/(x1, . . . , xc) is Artinian,
+so Corollary 5.4 shows that pk ⊆(x1, . . . , xc) for some k ≥1. We may assume that
+height p ≥1. We can choose a prime ideal p1 ⊆R such that height p1 = height p −1.
+We may assume that x1 < p1. Note that p is a unique prime ideal of R containing
+p1 + (x1). By Proposition 1.48, R/(p1 + (x1)) is Artinian, so Corollary 5.4 shows that
+pn ⊆p1+(x1) for some n ≥1. Then xn
+i ∈p1+(x1) for all 2 ≤i ≤c, and hence, we can write
+xn
+i = aix1 + yi with ai ∈R, yi ∈p1. Note that p is a unique prime ideal of R containing
+x1, y2, . . . , yc. Then p/(y2, . . . , yc) is a unique prime ideal containing x1 + (y2, . . . , yc)
+in R/(y2, . . . , yc). By the principal ideal theorem, height p/(y2, . . . , yc) ≤1, and hence,
+height p1/(y2, . . . , yc) = 0. This means that p1 is minimal over y2, . . . , yc. By induction,
+height p1 ≤c −1, so height p ≤c.
+□
+Corollary 5.9. We have dim C[x1, . . . , xn] = n.
+Proof. Considering the chain (0) ⊊(x1) ⊊(x1, x2) ⊊· · · ⊊(x1, . . . , xn) of prime ideals of
+C[x1, . . . , xn], we see that dim C[x1, . . . , xn] ≥n. On the other hand, if p0 ⊊p1 ⊊· · · ⊊pr
+is a maximal chain of prime ideals of C[x1, . . . , xn], then pr is a maximal ideal. By
+Corollary 1.35, pr = (x1 −a1, . . . , xn −an) for a1, . . . , an ∈C. By Krull height theorem,
+r = height pr ≤n. Thus dim C[x1, . . . , xn] = n.
+□
+Remark 5.10. Using Krull height theorem, one can show that every Noetherian local
+ring has finite dimension. But a Noetherian ring may have infinite dimension. An
+example was first constructed by Masayoshi Nagata.
+5.3. Noether normalization. An affine C-domain is a finitely generated C-algebra
+which is an integral domain. Note that A is an affine C-domain if and only if A is the
+coordinate ring of an affine variety.
+Theorem 5.11 (Noether Normalization). Let A be an affine C-domain. Then there are alge-
+braically independent elements t1, . . . , td ∈A such that d = trdegC F(A) and C[t1, . . . , td] ⊆A
+is a finite integral extension.
+Proof. Suppose that A is generated by n elements as a C-algebra.
+We may write
+A = C[x1, . . . , xn]/P for some prime ideal P ⊆C[x1, . . . , xn]. We prove the theorem by
+induction on n. If P = (0), then the assertion is trivial. In particular, this proves the
+case n = 0. Assume that n ≥1 and there is f ∈P with f , 0. By Lemma 1.31, after
+a linear change of coordinates, we may assume that f is monic in x1. Then x1 ∈A
+is integral over the subalgebra B := C[x2, . . . , xn] ⊆A, so A = B[x1] is finite over B.

@@ -1,0 +1,253 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 1. Affine Varieties
+현재 소단원: 1.5 Primary Decomposition
+직전 소단원: 「1.4 Nullstellensatz」
+[본문]
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+13
+(1) Affine varieties in An correspond to prime ideals of Rn.
+(2) Points of An correspond to maximal ideals of Rn: the point (a1, . . . , an) corresponds to
+ma := (x1 −a1, . . . , xn −an).
+Proof. If X is an affine algebraic set in An, then V(I(X)) = X by Proposition 1.4. If I is a
+radical ideal of Rn, then the strong Nullstellensatz yields I(V(I)) = I. This proves the
+assignments I 7→V(I) and X 7→I(X) give a one-to-one correspondence. The inclusion-
+reversing property is guaranteed by Proposition 1.1. Now, for a prime ideal p of Rn,
+the weak Nullstellensatz makes V(p) nonempty, and the strong Nullstellensatz implies
+I(V(p)) = p. Proposition 1.5 then shows (1). Next, as the kernel of the evaluation map
+Rn →C given by f 7→f(a) is ma, we see that ma is maximal. Conversely, suppose
+that m is a maximal ideal of Rn. By the weak Nullstellensatz, there is a ∈V(m). Then
+m ⊆ma, and maximality forces equality. This proves (2).
+□
+1.5. Primary Decomposition. A ring1 is Noetherian if every ascending chain of ideals
+eventually stabilizes. Note that every quotient ring of a Noetherian ring is Noetherian.
+A topological space is Noetherian if every descending chain of closed subsets even-
+tually stabilizes. Note that every closed subset of a Noetherian space is Noetherian.
+Proposition 1.36. For a ring R, the following are equivalent:
+(1) Every ideal of R is finitely generated.
+(2) Every ascending chain of ideals of R eventually stabilizes.
+(3) Every nonempty family of ideals of R has a maximal member.
+Proof. Let I1 ⊆I2 ⊆I3 ⊆· · · be an ascending chain of ideals of R. As S∞
+i=1 Ii is an ideal of
+R, (1) implies that the finite generators of I lie in one Ik. Then Ik = S∞
+i=1 Ii, so Ii = Ik for
+all i ≥k. This proves (1) =⇒(2). If a nonempty family of ideals of R has no maximal
+member, then this produces a nonstationary ascending chain. Thus (2) =⇒(3). For
+any ideal I of R, we can choose a maximal finitely generated subideal J using (3). If
+f ∈I, then J + ( f) is again finitely generated and contained in I, so maximality gives
+f ∈J. Thus I = J. Hence (3) =⇒(1). The final statements follow from Hilbert basis
+theorem and Corollary 1.35.
+□
+Example 1.37. By Hilbert basis theorem, Rn and all of its quotient rings are Noetherian.
+By Corollary 1.35, An and all of its closed subsets are Noetherian.
+Proposition 1.38. Let X be a Noetherian space. Then every open subset of X is quasi-compact.2
+Proof. Let U := {Uλ}λ∈Λ be an open cover of X. Consider the set of finite unions of
+members of U . This set has a maximal member. Indeed, otherwise, there is an infinite
+ascending chain of open sets, hence an infinite descending chain of closed sets. The
+corresponding members of U form a finite subcover of X.
+□
+1Inalgebraic geometry, everyringisa commutative ringwithidentity, and everyringhomomorphism
+sends 1 to 1.
+2Quasi-compactness has the same covering property as compactness: every open cover admits a
+finite subcover. Since a Noetherian space is not Hausdorff in general, we use the term quasi-compact
+rather than compact here.
+
+14
+JINHYUNG PARK
+Proposition 1.39. Every nonempty Noetherian space X admits a decomposition
+X = X1 ∪· · · ∪Xr
+into irreducible closed subsets. It can be made irredundant, meaning Xi ⊈Xj for i , j, by
+deleting contained terms. The irredundant decomposition is unique up to reordering.
+Proof. Suppose that some nonempty closed subset of X is not a finite union of irre-
+ducible closed subsets. Every nonempty family of closed subsets in a Noetherian
+space has a minimal member. Thus the family of nonempty closed subsets of X which
+are not finite unions of irreducible closed subsets has a minimal member Y. It is
+reducible, so Y = Y1 ∪Y2 with Y1, Y2 proper closed subsets. By minimality, Y1 and
+Y2 are finite unions of irreducible closed subsets, and hence, does the same for Y. We
+get a contradiction. This proves existence. Now, let X = Sr
+i=1 Xi = Ss
+j=1 X′
+j be two
+irredundant decompositions of X. For every 1 ≤i ≤r, we have Xi ⊆X′
+j for some
+1 ≤j ≤s, and then, X′
+j ⊆Xk for some 1 ≤k ≤r. Thus i = k, and Xi = X′
+j. This proves
+uniqueness.
+□
+Example 1.40. By Propositions 1.36 and 1.39, every nonempty affine algebraic set
+X = V(I) is a finite union of affine varieties X1 = V(I1), . . . , Xr = V(Ir), i.e.,
+V(I) = X = V(I1) ∪· · · ∪V(Ir) = V(I1 · · · Ir) = V(I1 ∩· · · ∩Ir).
+Let R be a ring. A proper ideal Q ⊊R is primary if
+f g ∈Q and f < Q
+=⇒
+gN ∈Q for some N ≥1.
+A primary ideal Q ⊆R is p-primary if √Q = p.
+Proposition 1.41. The radical of a primary ideal is prime.
+Proof. Let Q be a primary ideal of a ring R, and suppose f g ∈√Q and f < √Q. Some
+power (f g)r lies in Q, but no power of f lies in Q. Thus grs = (gr)s ∈Q for some s ≥1,
+so g ∈√Q. Hence √Q is prime.
+□
+Let R be a ring. For ideals I, J ⊆R, we define the ideal quotient
+I : J := {b ∈R | bJ ⊆i} ⊆R,
+which is an ideal. When J = (gm) is a principal ideal for g ∈R and m ≥1, we write
+I : gm := I : (gm) = {b ∈R | bgm ∈I} ⊆R.
+We have I : gm ⊆I : gm+1. A proper ideal J ⊊R is irreducible if J = J1 ∩J2 implies J = J1
+or J = J2.
+Lemma 1.42. Every irreducible ideal of a Noetherian ring is primary.
+Proof. Let J be an irreducible ideal of a Noetherian ring R. Suppose f g ∈J and f < J.
+Since R is Noetherian, the ascending chain J : g ⊆J : g2 ⊆· · · of ideals eventually
+stabilizes: we can choose m ≥0 such that J : gm = J : gm+r for every r ≥0. We
+claim that J = (J : gm) ∩(J + (gm)). The inclusion (⊆) is clear. For the other, choose
+a + bgm ∈(J : gm) ∩(J + (gm)) with a ∈J, b ∈R. Since (a + bgm)gm ∈J, we find bg2m ∈J.
+Thus b ∈J : g2m = J : gm, so bgm ∈J. Hence a + bgm ∈J. Now, observe that f ∈J : gm
+but f < J. As J is irreducible, the claim shows that J + (gm) = J. Therefore, gm ∈J.
+□
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+15
+Theorem 1.43 (Lasker–Noether). Every proper ideal in a Noetherian ring is a finite inter-
+section of primary ideals.
+Proof. In view of Lemma 1.42, it is enough to show that every proper ideal of a
+Noetherian ring R is a finite intersection of irreducible ideals.
+If not, Proposition
+1.36 gives a maximal member J among the family of ideals of R which are not finite
+intersections of irreducible ideals. It is not irreducible, so J = J1 ∩J2 with J ⊊J1, J2. By
+maximality, J1 and J2 are finite intersections of irreducible ideals, and hence, does the
+same for J. We get a contradiction.
+□
+As in the theorem, an expression of an ideal as a finite intersection of primary ideals
+is called a primary decomposition. This decomposition may not be unique.
+Example 1.44. In C[x, y], we have
+(x2, xy) = (x) ∩(x2, y) = (x) ∩(x, y)2.
+Here (x) ⊆C[x, y] is a prime ideal, and (x2, y), (x, y)2 ⊆C[x, y] are (x, y)-primary ideals.
+Lemma 1.45. Let R be a ring, and I ⊆R. Then there exists a minimal prime ideal q ⊆R
+containing I.
+Proof. Let S := {p | p ⊆R is a prime ideal containing I}. As there exists a maximal ideal
+of R containing I, we have S , ∅. For p, p′ ∈S, we define p ≤p′ if p ⊇p′. If Λ is a totally
+ordered subset of S, then T
+p∈Λ p ∈S is an upper bound for Λ. By Zorn’s lemma, S has
+a maximal element p, which is minimal among prime ideals of R containing I.
+□
+Corollary 1.46. Let R be a Noetherian ring, and I ⊆R be a radical ideal. Then there are only
+finitely many minimal prime ideals of R containing I, and I is the finite intersection of minimal
+prime ideals of R containing I.
+Proof. By Lasker–Noether theorem, we may write I = Tk
+i=1 Qi, where each Qi ⊆R is a
+primary ideal. Then I =
+√
+I = Tk
+i=1
+√Qi, but each √Qi is a prime ideal by Proposition
+1.41. Now, let p ⊆R be a minimal prime ideal containing I. As Tk
+i=1 Qi ⊆p, we
+get Qi ⊆p for some 1 ≤i ≤k.
+By minimality, Qi = p.
+This means that every
+minimal prime ideal of R containing I occurs in a primary decomposition of I. This
+proves the finiteness of minimal prime ideals. Furthermore, after removing the non-
+minimal primes in a primary decomposition of I, we obtain the unique irredundant
+decomposition of I as the intersection of minimal prime ideals containing I.
+□
+Proposition 1.47. A finite intersection of p-primary ideals of a Noetherian ring is p-primary
+for a prime ideal p.
+Proof. Consider an ideal Q = Tk
+i=1 Qi, where each Qi is a p-primary ideal. Then √Q = p.
+If ab ∈Q and b < p, then a ∈Qi for every 1 ≤i ≤k so that a ∈Q. Suppose that ab ∈Q
+and a < Q. If b < p, then a ∈Q, which is a contradiction. Thus b ∈√Q = p, i.e., some
+power of b lies in Q. Therefore Q is p-primary.
+□
+A ring is Artinian if every descending chain of ideals eventually stabilizes. Note
+that every quotient ring of an Artinian ring is Artinian. Recall that a local ring is a
+ring with a unique maximal ideal. It is equivalent to that for every element a, either
+
+16
+JINHYUNG PARK
+a or 1 −a is a unit. In a local ring, all the nonunit elements form the unique maximal
+ideal.
+Proposition 1.48. Let (B, m) be a nonzero Noetherian local ring. Then B is Artinian if and
+only if every prime ideal of B is maximal.
+Proof. (=⇒) If p ⊆B is a prime ideal, then B/p is an Artinian integral domain. For any
+nonzero a ∈B/p, the descending chain (a) ⊇(a2) ⊇· · · of ideals eventually stabilizes:
+(am) = (am+1) for some m ≥1. Then am = am+1b for some b ∈B/p, so am(1 −ab) = 0. Thus
+ab = 1. This means that B/p is a field so that p ⊆B is a maximal ideal.
+(⇐=) Take a primary decomposition (0) = Q1 ∩· · · ∩Qr. As each √Qi is prime by
+Proposition 1.41, we have √Qi = m. We write m = (u1, . . . , us). For each 1 ≤i ≤r and
+1 ≤j ≤s, we can choose eij ≥1 with u
+eij
+j ∈Qi. If
+Ni := 1 +
+s
+X
+j=1
+(eij −1) for each 1 ≤i ≤r,
+then mNi ⊆Qi. Let N := max{N1, . . . , Nr}. Then mN = (0). Now, notice that each
+mj/mj+1 for j ≥0 is a finite dimensional vector space over B/m. For a descending chain
+J1 ⊇J2 ⊇· · · of ideals of B, consider the descending chain
+(J1 ∩mj) + mj+1
+mj+1
+⊇(J2 ∩mj) + mj+1
+mj+1
+⊇· · ·
+of subspaces of mj/mj+1 for each 0 ≤j ≤N −1. All the descending chain of subspaces
+eventually stabilize. We can choose one index T ≥1 that works for every 0 ≤j ≤N−1.
+As mN = 0, we have JT ∩mN−1 = Jt ∩mN−1 for t ≥T. For 0 ≤j ≤N −2, suppose
+that JT ∩mj+1 = Jt ∩mj+1 for t ≥T. For any a ∈JT ∩mj, there is a′ ∈Jt ∩mj such that
+a −a′ ∈mj+1. Then a −a′ ∈JT ∩mj+1 = Jt ∩mj+1, so a ∈Jt ∩mj. Thus JT ∩mj = Jt ∩mj
+for t ≥T. By the descending induction on j, we obtain JT = Jt for t ≥T.
+□
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+17
+2. Functions on Affine Varieties
+2.1. Regular functions. For a ring R, an R-algebra is a ring A equipped with a ring
+homomorphism φ: R →A. A subalgebra of A is a subring S such that φ(R) ⊆S. An
+R-algebras homomorphism f : A →B is a ring homomorphism between R-algebras
+A and B such that f(ra) = rf(a) for all r ∈R and a ∈A. If furthermore f is bijective, we
+call f an isomorphism and we write A  B. In this case, f −1 is also an isomorphism.
+An R-algebra A is said to be finitely generated over R if there is a surjective R-algebra
+homomorphism f : R[x1, . . . , xn] →A. In this case, A is generated by f(x1), . . . , f(xn).
+Let X ⊆An be an affine algebraic set. Its coordinate ring is
+A(X) := C[x1, . . . , xn]/I(X)
+which is a finitely generated C-algebra. Proposition 1.5 says that X is an affine variety
+if and only if A(X) is an integral domain. The class [ f] ∈A(X) defines the polynomial
+function X →C given by p 7→f(p). This is independent of the representative. We
+usually write f for both a class and its polynomial function. For an ideal I ⊆A(X),
+there is an ideal J ⊆C[x1, . . . , xn] with J/I(X) = I. We define V(I) := V(J) ∩X. By
+Corollary 1.35, there is a one-to-one correspondence between primes ideals of A(X)
+and irreducible closed subsets of X. For f ∈A(X), the principal open subset DX(f) is
+likewise independent of a polynomial representative.
+Example 2.1. For the parabola P := V(y −x2) ⊆A2 from Example 1.8, we have
+A(P)  C[t]. For the hyperbola H := V(xy −1) ⊆A2 from Example 1.29, we have
+A(H)  C[t, t−1].
+Let U ⊆X be a nonempty open subset. A function g: U →C is regular at p ∈U if
+there are a neighborhood W ⊆U of p and elements a, b ∈A(X) such that b is nowhere
+zero on W and
+g(q) = a(q)
+b(q)
+for any q ∈W.
+It is regular on U if it is regular at every point of U. The regular functions form a ring
+(more generally a C-algebra) under pointwise operations, which is denoted by OX(U).
+When U = ∅, we simply set OX(∅) = 0 (the zero ring). For open subsets U ⊆V ⊆X,
+there is a natural C-algebra homomorphism OX(V) →OX(U) given by g 7→g|U.
+Example 2.2. For the open subset U := A1 \ {0} ⊆A1, we have OX(U)  C[t, t−1].
+Let A be a ring, and f ∈A with f , 0. For a, b ∈A and r, s ≥0, we define
+a
+f r ∼b
+f s
+def
+⇐⇒
+f N(f sa −f rb) = 0
+for some N ≥0.
+One can easily check that this is an equivalence relation.
+Let A f be the set of all
+equivalence classes. We define addition and multiplication on Af in a usual way:
+a
+f r + b
+f s := f sa + f rb
+f r+s
+and
+a
+f r · b
+f s := ab
+f r+s.

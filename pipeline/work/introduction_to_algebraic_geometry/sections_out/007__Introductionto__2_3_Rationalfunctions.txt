@@ -1,0 +1,231 @@
+[문서 맥락]
+책: Introduction to Algebraic Geometry / 저자: Jinhyung Park
+챕터: 2. Functions on Affine Varieties
+현재 소단원: 2.3 Rational functions
+직전 소단원: 「2.2 Localization」
+[본문]
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+21
+Let X be an affine variety. For open subsets U, V ⊆X containing a point p ∈X and
+f ∈OX(U), g ∈OX(V), we define (U, f) ∼(V, g) if and only if f = g on some open subset
+W ⊆U ∩V containing p. A germ of a regular function at p ∈X is an equivalence class
+of pairs (U, f), where p ∈U ⊆X is an open subset and f ∈OX(U). Note that the ring
+of germs is a local ring OX,p with unique maximal ideal mX,p := {f ∈OX,p | f(p) = 0}.
+Theorem 2.11. For an affine variety X and p ∈X, we have OX,p  A(X)mp and
+mX,p = mpOX,p =
+a
+b
+ a, b ∈A(X), a(p) = 0, b(p) , 0
+
+.
+Proof. The evaluation map evp : A(X) →C given by f 7→f(p) is a surjective ring
+homomorphism, and ker(evp) = mp. For a/b ∈A(X)mp, we have b(p) , 0, so a/b is a
+regular function on DX(b) and hence a germ at p. If a/b = c/d in A(X)mp, then ad = bc
+since A(X) is an integral domain. Thus a/b = c/d on DX(bd), which is a neighborhood
+of p. This shows that there is a map A(X)mp →OX,p. It is clearly a surjective ring
+homomorphism.
+If a germ of a/b is zero, then a vanishes on a nonempty open
+neighborhood of p inside DX(b). That neighborhood is dense in X by Proposition
+1.10, so a = 0 in A(X). Therefore, the map A(X)mp →OX,p is injective and hence an
+isomorphism. The last assertion follows from Proposition 2.10.
+□
+The residue field of X at p is C(p) := OX,p/mX,p  C.
+2.3. Rational functions. Let X be an affine variety. For nonempty open subsets U, V ⊆
+X and f ∈OX(U), g ∈OX(V), we define (U, f) ∼(V, g) if and only if f = g on some
+nonempty open subset W ⊆U ∩V. It is easy to check that this is an equivalence
+relation. An equivalence class of such pairs is called a rational function on X. Let
+C(X) be the set of rational functions. We define addition and multiplication on C(X)
+in a usual way. Then they are well-defined, and make C(X) a C-algebra. We call C(X)
+the function field of X.
+Theorem 2.12. For an affine variety X, we have C(X)  F(A(X)).
+Proof. For a/b ∈F(A(X)), we have a/b ∈DX(b). If a/b = 0 on a nonempty open subset
+of DX(f), then a vanishes there and hence on all of X so that a = 0. This shows that
+there is an injective map F(A(X)) →C(X), which is clearly a ring homomorphism.
+For an open subset U ⊆X and f ∈OX(U), we may write f = a/b on DX(b) for some
+a, b ∈A(X) with b , 0 by Theorem 2.4. This proves that the map is surjective and hence
+an isomorphism.
+□
+Let X be an affine variety. For q ∈C(X), its denominator ideal is
+Jq := {h ∈A(X) | hq ∈A(X)} ⊆A(X).
+Proposition 2.13. If X is an affine variety, then
+A(X) =
+\
+p∈X
+OX,p in C(X).
+Proof. The inclusion (⊆) is trivial. For q ∈OX,p, there is h ∈A(X) such that h < mp
+and hq ∈A(X). Thus Jq ⊈mp. If q ∈T
+p∈X OX,p, then X ∩V(Jq) = ∅. By the weak
+Nullstellensatz, Jq = A(X), so 1 ∈Jq. This proves that q ∈A(X).
+□
+
+22
+JINHYUNG PARK
+Proposition 2.14. Let X be an affine variety, p ∈X, and q ∈C(X). Then q is regular at p if
+and only if h(p) , 0 for some h ∈Jq. Consequently, the union of all open subsets of X on which
+q is regular is the nonempty dense open subset X \ V(Jq).
+Proof. If q = a/b near p with b(p) , 0, then q = a/b in C(X) so that bq = a ∈A(X). Thus
+b ∈Jq. Conversely, if h ∈Jq and h(p) , 0, then q = (hq)/h is regular at p.
+□
+Let X and Y be affine varieties.
+For open subsets U, V ⊆X and regular maps
+ϕU : U →Y and ϕV : V →Y, we define
+(U, ϕU) ∼(V, ϕV)
+def
+⇐⇒
+ϕU|W = ϕV|W for some nonempty open subset W ⊆U ∩V.
+It is easy to check that this is an equivalence relation. A rational map is an equivalence
+class, written X d Y. Every affine morphism is a rational map, and every rational
+function f : X d A1 is a rational map.
+Theorem 2.15. Let X be an affine variety, and Y ⊆Am be an affine variety. Every rational
+map ϕ: X d Y determines a unique tuple (q1, . . . , qm) ∈C(X)m such that F(q1, . . . , qm) = 0
+for all F ∈I(Y). Conversely, every tuple (q1, . . . , qm) ∈C(X)m with F(q1, . . . , qm) = 0 for all
+F ∈I(Y) determines a unique rational map ϕ: X d Y. In this case,
+Dom(ϕ) :=
+m
+\
+i=1
+(X \ V(Jqi)) ⊆X
+is the maximal nonempty open subset of X on which ϕ is a morphism.
+Proof. A rational map ϕ: X d Y has a representative ϕU : U →Y such that U ⊆X
+is a nonempty open subset and ϕU = (q1, . . . , qm) with qi ∈C(X) by Theorem 2.12.
+As F(q1, . . . , qm) = ϕU ◦F for F ∈C[x1, . . . , xm], we get F(q1, . . . , qm) = 0 for all F ∈
+I(Y).
+Equivalent representatives clearly give the same tuple (q1, . . . , qm) ∈C(X)m.
+Conversely, (q1, . . . , qm) ∈C(X)m induces a regular map ϕU : U →Y, where U :=
+Dom(ϕ) is a nonempty open subset by Proposition 2.14. This gives a rational map
+ϕ: X d Y, and it is clear that U is the maximal nonempty open subset of X on which
+ϕ is a morphism.
+□
+In Theorem 2.15,the indeterminancy locus of a rational ϕ: X d Y is the closed subset
+X \ Dom(ϕ) =
+m
+[
+i=1
+V(Jqi) ⊆X.
+Let X, Y, Z be affine varieties. A rational map ϕ: X d Y is dominant if the image
+of one representative is dense in Y. In this case, the image of every representative
+is dense in Y. If ϕ: X d Y is dominant and ψ: Y d Z is a rational map, then their
+composition ψ ◦ϕ is also a rational map.
+Theorem 2.16. Let X, Y, Z be affine varieties. Then we have the following:
+(1) Dominant rational maps ϕ: X d Y correspond bijectively to injective C-algebra homo-
+morphisms ϕ∗: C(Y) →C(X).
+(2) If ϕ: X d Y and ψ: Y d Z are dominant rational maps, then (ψ ◦ϕ)∗= ϕ∗◦ψ∗.
+
+MAS40011 INTRODUCTION TO ALGEBRAIC GEOMETRY
+23
+Proof. For a dominant rational map ϕ: X d Y, the map ϕ∗: C(Y) →C(X) given by
+q 7→q ◦ϕ is a C-algebra homomorphism. If q ◦ϕ = 0 in C(X), then q = 0. Thus ϕ∗is
+injective. Conversely, let α: C(Y) →C(X) be an injective C-algebra homomorphism,
+and write Y ⊆Am with coordinate classes y1, . . . , ym. Put qi := α(yi) for each 1 ≤i ≤m.
+For every F ∈I(Y), we have F(q1, . . . , qm) = α(F(y1, . . . , ym)) = 0, so Theorem 2.15 gives
+a rational map ϕ: X d Y. If the closure Z of its image is a proper closed subset of
+Y, then the strict ideal inclusion I(Y) ⊊I(Z) yields a nonzero element F ∈A(Y) such
+that F vanishes on Z. Thus α(F) = 0, which gives a contradiction to the injectivity
+of α. Hence ϕ is dominant. The coordinate classes generate A(Y) as a C-algebra,
+and C(Y) = F(A(Y)). Therefore, the constructions are inverse. This proves (1). The
+assertion (2) is clear.
+□
+Affine varieties X and Y are birational, written X ∼bir Y, if there are dominant
+rational maps ϕ: X d Y and ψ: Y d X such that ψ ◦ϕ = idX and ϕ ◦ψ = idY as
+rational maps. In this case, ϕ is called a birational map.
+Corollary 2.17. For affine varieties X and Y, the following are equivalent:
+(1) X ∼bir Y.
+(2) The function fields C(X) and C(Y) are isomorphic as C-algebras.
+(3) There are nonempty open subsets U ⊆X and V ⊆Y that are isomorphic by mutually
+inverse regular maps.
+Proof. Theorem 2.16 shows (1) ⇐⇒(2), and (1) ⇐⇒(3) is clear.
+□
+Example 2.18. The affine morphism ν: A1 →C = V(v2 −u3) ⊆A2 given by t 7→(t2, t3)
+in Example 2.9 induces an isomorphism DA1(t) −→DC(u) with the inverse map given
+by (u, v) 7→v/u. Thus C ∼bir A1. However, C  A1. Indeed, A(C)  C[t2, t3] and
+A(A1)  C[t] are not isomorphic since the maximal ideal (t2, t3) of C[t2, t3] is not
+principal.
+Example 2.19. Let Q := V(x2 + y2 −1) ⊆A2. Note that Q is an affine variety. Indeed,
+after the invertible linear change r := x + iy, s := x −iy, the polynomial x2 + y2 −1
+becomes rs −1, and C[r, s]/(rs −1)  C[r, r−1] is an integral domain. Let
+ϕ: A1 d Q, t 7→
+ 
+2t
+t2 + 1, t2 −1
+t2 + 1
+!
+and ψ: Q d A1, (x, y) 7→
+x
+1 −y
+be rational maps with ψ◦ϕ = idA1 and ϕ◦ψ = idQ. In fact, they induce the isomorphism
+DA1(t2 + 1)  DQ(1 −y). We can conclude that Q ∼bir A1.
+
+24
+JINHYUNG PARK
+3. Projective Varieties
+3.1. Projective spaces and projective varieties. For a finite dimensional complex
+vector space V, we define
+P(V) := {L | L ⊆V is a linear subspace with dim L = 1}.
+When V = CN+1, we write PN := P(CN+1). The point represented by a nonzero vector
+(a0, . . . , aN) is written [a0 : · · · : aN]. These are the homogeneous coordinates. We have
+[a0 : · · · : aN] = [λa0 : · · · : λaN] for λ ∈C∗.
+For 0 ≤i ≤N, the standard chart
+Ui := {[a0 : · · · : aN] ∈PN | ai , 0}.
+A polynomial F ∈C[x0, . . . , xN] =: S is homogeneous of degree d if every monomial
+occurring in F has total degree d. Then F(λa) = λdF(a) for λ ∈C, so the assertion
+F(a) = 0 is independent of the representative of [a]. The individual xi are not functions
+on PN, but the ratios xj/xi are functions on Ui. An ideal of S generated by homogenous
+polynomials is called a homogeneous ideal.
+Every homogenous component of a
+polynomial in a homogeneous ideal belongs to the homogeneous ideal. By Hilbert
+basis theorem, every homogeneous ideal is generated by finitely many homogenous
+polynomials. Note that every homogenous ideal is contained in the irrelevant ideal
+mirr := (x0, . . . , xN) ⊆S
+Now, let R := C[u1, . . . , uN]. For 0 , f ∈R of degree d, the homogenization of f with
+respect to x0 is
+f h
+0 (x0, . . . , xN) := xd
+0 f
+x1
+x0
+, . . . , xN
+x0
+
+∈S.
+For an ideal I ⊆R, the homogenization of I with respect to x0 is the homogenous ideal
+Ih
+0 := (f h
+0 | f ∈I) ⊆S.
+We can define the homogenization f h
+i and Ih
+i with respect to xi for 1 ≤i ≤N. For a
+homogeneous polynomial F ∈S, the dehomogenization of F in U0 is
+Fdeh
+0
+(u1, . . . , uN) := F(1, u1, . . . , uN).
+For a homogeneous ideal J ⊆S, the dehomogenization of F in U0 is the ideal
+Jdeh
+0
+:= (Fdeh
+0
+| F ∈J) ⊆R.
+We can also define the dehomogenization Fdeh
+i
+and Jdeh
+0
+in Ui for 1 ≤i ≤N.
+We
+set 0h
+0 := 0. Then ( f h
+0 )deh
+0
+= f, while for every nonzero homogeneous F, we have
+F = x
+deg F−deg Fdeh
+0
+0
+
+Fdeh
+0
+h
+0.
+For a subset F of homogeneous polynomials in S, we define
+V+(F) := {[a] ∈PN | F(a) = 0 for every F ∈F}.
+Note that (F) ⊆S is a homogenous ideal and V+(F) = V+((F)). A subset X ⊆PN is a
+projective algebraic set if X = V+(J) for some homogeneous ideal J ⊆S. The Zariski
+topology on PN is the topology whose closed subsets are the projective algebraic sets.
