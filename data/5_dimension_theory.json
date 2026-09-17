@@ -1,0 +1,614 @@
+{
+  "chapter_info": {
+    "title": "5. Dimension Theory",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "대수다양체의 '차원(dimension)'이라는 가장 기본적인 기하학적 불변량을 순수하게 대수적으로(환의 크룰 차원으로) 정의하고 계산하는 도구를 세운다. 이를 위해 정수확장(integral extension)이라는 대수적 개념 — 다항식환을 유한생성 가군으로 다루는 정수성(integrality)의 언어 — 을 도입하고, 나카야마 보조정리와 주이데알 정리(Principal Ideal Theorem)라는 가환대수의 핵심 도구를 거쳐, 최종적으로 뇌터 정규화(Noether normalization)를 이용해 대수다양체의 차원을 그 좌표환의 크룰 차원으로, 나아가 초월차수(transcendence degree)로 완전히 특징짓는다. 이 장은 순수 가환대수(1~2절: 정수확장, 주이데알 정리)와 그것을 기하학에 적용하는 부분(3~4절: 뇌터 정규화, 차원)으로 나뉘며, 이 강의노트의 이론적 정점에 해당한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.1 Integral extensions",
+      "step1_big_picture": {
+        "context": "이 절은 차원 이론 전체의 대수적 기반을 놓는다. 정수확장(integral extension) $R\\subseteq S$란 $S$의 모든 원소가 $R$-계수 모닉다항식의 근이 되는 확장이며, 이는 '유한생성 $R$-가군'이라는 훨씬 다루기 쉬운 조건(유한확장, finite extension)과 정확히 '유한생성 대수이면서 정수'라는 조건으로 특징지어진다(명제 5.1). 이 절의 두 핵심 도구는 나카야마 보조정리(국소환 위의 유한생성 가군에 대한 근본 보조정리)와 그로부터 얻는 아르틴 국소환의 특징짓기(따름정리 5.4)이며, 이 모든 것이 모여 상승정리(Going-Up Theorem, 정리 5.5)로 완성된다 — 정수확장 $R\\subseteq S$ 아래에서는 $R$의 소이데알 사슬이 항상 $S$의 소이데알 사슬로 '들어올려질' 수 있고, 특히 $\\dim R=\\dim S$라는 결과다. 이는 차원이 정수확장 아래 불변량이라는 뜻이며, 다음 절의 뇌터 정규화(다양체의 좌표환을 다항식환 위의 정수확장으로 만드는 정리)를 통해 임의의 대수다양체의 차원을 순수한 다항식환의 차원(변수의 개수)으로 계산할 수 있게 해 주는 핵심 다리다.",
+        "hidden_intuition": "'정수(integral)'라는 이름은 정수론에서 온 것이다 — $\\mathbb{Z}\\subseteq\\mathbb{Q}$에서 '정수'는 정확히 모닉정수계수다항식의 근인 유리수(사실 정수 자체)를 말하며, 예제 5.2가 보여주듯 이 그림은 임의의 UFD(유일인수분해정역) $R$과 그 분수체 $F(R)$ 사이의 정수성으로 일반화된다: $R$이 UFD이면 $R$은 $F(R)$ 안에서 '정수적으로 닫혀 있다(integrally closed)' — 이는 정확히 $\\mathbb{Z}$가 $\\mathbb{Q}$ 안에서 정수적으로 닫혀 있다는(유리수 중 정수계수 모닉다항식의 근은 그 자체로 정수라는) 고전적 사실의 일반화다. 명제 5.1(1)의 증명에서 '수반행렬(adjugate matrix) 트릭'은 이 이론 전체에서 반복해서 등장하는 핵심 기법이다 — 유한생성 가군의 생성원들이 만족하는 선형관계식을 행렬로 모으면, 그 행렬의 수반행렬을 곱하는 것만으로 '행렬식이 만족하는 모닉다항식'이 저절로 튀어나온다(케일리-해밀턴 정리의 가군 버전). 이 같은 트릭이 나카야마 보조정리의 증명에서도 그대로 재사용된다는 점에 주목하라 — 사실 나카야마 보조정리는 '$M/N$을 생성원으로 갖는 선형관계식에서 항등행렬에 가까운 행렬의 행렬식이 단위원이 됨'을 보이는 것으로, 정수성 논증과 정확히 같은 골격을 공유한다. 상승정리의 증명에서 국소화 $R_p\\subseteq S_p$로 문제를 축소하는 것은, 크룰 차원과 소이데알의 사슬이라는 전역적 문제를 '한 소이데알 근방'이라는 국소적 문제로 항상 환원할 수 있다는 가환대수의 일반적 전략의 한 예다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 ($R$-가군, 부분가군, $R$-선형사상, 유한생성)",
+          "formal_statement": "환 $R$에 대해, $R$-가군($R$-module)이란 스칼라곱 $R\\times M\\to M$을 갖춘 아벨군 $M$으로서, 모든 $r,s\\in R$, $m,n\\in M$에서 다음을 만족하는 것이다: $$(r+s)m=rm+sm,\\quad r(m+n)=rm+rn,\\quad (rs)m=r(sm),\\quad 1m=m.$$ 스칼라곱에 대해 닫힌 $M$의 부분군을 $R$-부분가군($R$-submodule)이라 한다. $R$-선형사상 $\\varphi:M\\to N$은 모든 $r\\in R$, $m\\in M$에서 $\\varphi(rm)=r\\varphi(m)$을 만족하는 군 준동형이다. $R$-가군 $M$이 유한생성(finitely generated)이라는 것은 $M=Rm_1+\\cdots+Rm_t$인 $m_1,\\dots,m_t\\in M$이 존재한다는 것이다. $R\\subseteq S$가 환 $S$의 부분환이면 $S$는 $R$-가군이다. $R[x_1,\\dots,x_r]$은 유한생성 $R$-대수이지만 유한생성 $R$-가군은 아님에 유의하라."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정수원소, 정수확장, 유한확장, 유한형확장)",
+          "formal_statement": "$R\\subseteq S$를 환 $S$의 부분환이라 하자. $s\\in S$가 $R$ 위에서 정수(integral)라는 것은 $R$-계수 모닉다항식의 근이 된다는 것이다. 확장 $R\\subseteq S$가 정수(integral)라는 것은 $S$의 모든 원소가 $R$ 위에서 정수라는 것이다. 이 확장이 유한(finite)이라는 것은 $S$가 유한생성 $R$-가군이라는 것이다. 이 확장이 유한형(of finite type)이라는 것은 $S$가 유한생성 $R$-대수라는 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 5.1 (유한 = 유한형 + 정수; 추이성; 정수원소들은 부분환을 이룬다)",
+          "formal_statement": "$R\\subseteq S\\subseteq T$를 환이라 하자. (1) $S$가 $R$ 위에서 유한인 것은 $S$가 $R$ 위에서 유한형이면서 정수인 것과 동치이다. (2) $T$가 $S$ 위에서 정수(각각 유한, 유한형)이고 $S$가 $R$ 위에서 정수(각각 유한, 유한형)이면, $T$는 $R$ 위에서 정수(각각 유한, 유한형)이다. (3) $a,b\\in S$가 $R$ 위에서 정수이면 $a+b,a-b,ab$도 $R$ 위에서 정수이다. 특히 $\\overline{R}:=\\{a\\in S\\mid a\\text{는 }R\\text{ 위에서 정수}\\}\\subseteq T$는 부분환이다.",
+          "idea_behind_proof": "(1)의 핵심은 수반행렬 트릭이다: 생성원들 사이의 선형관계식을 행렬로 모으면 그 행렬식이 만족하는 모닉다항식이 자동으로 나온다. (2)는 생성원들을 단순히 이어붙이는 것이고, (3)은 $a,b$가 만드는 부분대수 $R[a,b]$가 유한하다는 것을 (1),(2)로 연쇄적으로 확인하는 것이다.",
+          "proof_steps": [
+            "(1) [⇒] $S$가 $R$-가군으로서 $u_1,\\dots,u_m$에 의해 생성된다고 하자. $S$가 $R$ 위에서 유한형임은 명백하다. $s\\in S$에 대해 $su_i=\\sum_{j=1}^ma_{ij}u_j$($a_{ij}\\in R$)로 쓰자. 행렬 $A(s):=(s\\delta_{ij}-a_{ij})_{ij}$의 수반행렬을 곱하면 모든 $i$에서 $\\det(A(s))u_i=0$을 얻는다.",
+            "$1\\in S$가 $u_i$들의 $R$-선형결합이므로 $\\det(A(s))\\cdot 1=0$, 즉 모닉다항식 $\\det(A(x))\\in R[x]$가 $s$에서 소멸한다. 따라서 $S$는 $R$ 위에서 정수이다.",
+            "(1) [⇐] 역으로 $S$가 $R$-대수로서 $s_1,\\dots,s_m$으로 생성된다고 하자. $S$가 $R$ 위에서 정수이면 각 $s_i$는 차수 $e_i$인 $R[x]$의 모닉다항식을 만족한다. 그러면 $S$는 $R$-가군으로서 $1,s_1,\\dots,s_1^{e_1-1},\\dots,s_m,\\dots,s_m^{e_m-1}$에 의해 생성된다.",
+            "(2): $T$가 $S$-대수로서 $t_1,\\dots,t_m$, $S$가 $R$-대수로서 $s_1,\\dots,s_n$으로 생성되면 $T$는 $R$-대수로서 $t_1,\\dots,t_m,s_1,\\dots,s_n$으로 생성된다.",
+            "$T$가 $S$-가군으로서 $u_1,\\dots,u_k$, $S$가 $R$-가군으로서 $v_1,\\dots,v_\\ell$로 생성되면 $T$는 $R$-가군으로서 $u_iv_j$($1\\le i\\le k,1\\le j\\le\\ell$)들로 생성된다. 이제 (1)이 (2)의 나머지 주장(정수 전이성)을 준다.",
+            "(3): $R[a,b]\\subseteq S$를 $a,b$를 포함하는 가장 작은 $R$-부분대수라 하자. $R[a]$는 $R$ 위에서 유한이고 $R[a,b]$는 $R[a]$ 위에서 유한이다. 따라서 (2)에 의해 $R[a,b]$는 $R$ 위에서 유한이고, 그러므로 (1)에 의해 $R$ 위에서 정수이다. 따라서 $a+b,a-b,ab\\in R[a,b]$는 모두 $R$ 위에서 정수이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.2 (UFD는 그 분수체 안에서 정수적으로 닫혀 있다)",
+          "formal_statement": "$R$을 유일인수분해정역(UFD)이라 하자. $a,b\\in R$이 서로소이고 $b\\ne 0$이며 $a/b\\in F(R)$이 $R$ 위에서 정수라면, $R=\\{\\alpha\\in F(R)\\mid\\alpha\\text{는 }R\\text{ 위에서 정수}\\}$이다.",
+          "idea_behind_proof": "$a/b$가 만족하는 모닉다항식의 관계식을 정리하면 $b$가 $a^n$을 나눈다는 결론이 나오는데, $a,b$가 서로소이므로 이는 $b$가 단위원이어야만 함을 강제한다 — 즉 애초에 진짜 분수(비단위원 분모)는 정수일 수 없다.",
+          "proof_steps": [
+            "$(a/b)^n+c_{n-1}(a/b)^{n-1}+\\cdots+c_1(a/b)+c_0=0$인 $c_{n-1},\\dots,c_0\\in R$이 존재한다고 하자.",
+            "양변에 $b^n$을 곱해 정리하면 $a^n=-b(c_{n-1}a^{n-1}+\\cdots+c_1ab^{n-2}+c_0b^{n-1})$을 얻으므로 $b\\mid a^n$이다.",
+            "$a,b$가 서로소이므로 이는 $b$가 단위원이 아니라면 모순이다. 따라서 $b$는 단위원이고 $a/b\\in R$이다. 이는 $R=\\{\\alpha\\in F(R)\\mid\\alpha\\text{는 }R\\text{ 위에서 정수}\\}$임을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 5.3 (나카야마 보조정리)",
+          "formal_statement": "$(R,\\mathfrak{m})$을 국소환, $M$을 유한생성 $R$-가군, $N\\subseteq M$을 부분가군이라 하자. 그러면 $$N+\\mathfrak{m}M=M\\quad\\Longleftrightarrow\\quad N=M$$ 이다. 특히 $\\mathfrak{m}M=M$이면 $M=0$이다.",
+          "idea_behind_proof": "명제 5.1(1)의 수반행렬 트릭을 $M/N$에 그대로 적용한다: $\\mathfrak m M=M$이라는 조건에서 나오는 선형관계식의 행렬 $A$에 대해 $\\det(A)$가 $\\mathfrak m$ 밖에 있으므로 단위원이 되고, 이는 곧 $M/N$의 생성원들이 전부 $0$이라는 것을 강제한다.",
+          "proof_steps": [
+            "($\\Leftarrow$)는 자명하므로 ($\\Rightarrow$)만 보이면 된다. $\\mathfrak mM/N=M/N$이다. $M/N$이 $m_1,\\dots,m_r$로 생성된다고 하면 $m_i=\\sum_{j=1}^ma_{ij}m_j$($a_{ij}\\in\\mathfrak m$)로 쓸 수 있다.",
+            "행렬 $A:=(\\delta_{ij}-a_{ij})_{ij}$의 수반행렬을 곱하면 모든 $1\\le i\\le r$에서 $\\det(A)m_i=0$을 얻는다.",
+            "$\\det(A)\\equiv 1\\pmod{\\mathfrak m}$이므로 $\\det(A)\\notin\\mathfrak m$이고, $(R,\\mathfrak m)$이 국소환이므로 $\\det(A)$는 단위원이다. 따라서 $m_1=\\cdots=m_r=0$이고 $M/N=0$, 즉 $M=N$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.4 (아르틴 국소환의 특징 — $\\mathfrak{m}^n=(0)$)",
+          "formal_statement": "$(R,\\mathfrak{m})$을 $0$이 아닌 뇌터 국소환이라 하자. $R$이 아르틴(Artinian)인 것은 어떤 $n\\ge 1$에서 $\\mathfrak{m}^n=(0)$인 것과 동치이다.",
+          "idea_behind_proof": "아르틴 환은 강하강조건을 만족하므로 $\\mathfrak m$의 거듭제곱 사슬이 안정화되고, 그 안정화된 지점에서 나카야마 보조정리가 곧바로 $\\mathfrak m^n=0$을 준다. 역방향은 명제 1.48(뇌터 + 유일한 소이데알 ⟹ 아르틴)을 그대로 가져다 쓴다.",
+          "proof_steps": [
+            "$R$이 아르틴이면 $\\mathfrak m\\supseteq\\mathfrak m^2\\supseteq\\cdots$가 결국 안정화되어 어떤 $n\\ge 1$에서 $\\mathfrak m^n=\\mathfrak m^{n+1}$이다. 나카야마 보조정리($M=\\mathfrak m^n$, $N=0$에 적용하면 $\\mathfrak m\\cdot\\mathfrak m^n=\\mathfrak m^n$이므로)에 의해 $\\mathfrak m^n=(0)$이다.",
+            "역으로 어떤 $n\\ge 1$에서 $\\mathfrak m^n=(0)$이고 $\\mathfrak p\\subseteq R$가 소이데알이라 하자. $\\mathfrak m^n\\subseteq\\mathfrak p$이므로 $\\mathfrak m=\\mathfrak p$이다(뇌터환에서 소이데알은 항상 어떤 극대아이디얼의 거듭제곱근을 포함하고, $\\mathfrak m$이 유일한 극대아이디얼이므로). 명제 1.48에 의해 $R$은 아르틴이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (크룰 차원, 높이)",
+          "formal_statement": "환 $R$의 크룰 차원(Krull dimension)은 $R$의 소이데알들의 강한 사슬 $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$의 길이 $r$의 상한이다. 소이데알 $\\mathfrak p\\subseteq R$의 높이(height)는 $$\\mathrm{height}\\,\\mathfrak p:=\\dim R_{\\mathfrak p}$$ 이다. 동치로, $\\mathrm{height}\\,\\mathfrak p$는 $\\mathfrak p$에서 끝나는 소이데알 사슬들의 길이의 상한이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.5 (상승정리, Going-Up Theorem)",
+          "formal_statement": "$R\\subseteq S$를 정수확장이라 하자. (1) $R$의 모든 소이데알 $\\mathfrak p$에 대해 $\\mathfrak q\\cap R=\\mathfrak p$인 $S$의 소이데알 $\\mathfrak q$가 존재한다. (2) $\\mathfrak q\\subsetneq\\mathfrak q'$가 $S$의 소이데알이면 $\\mathfrak q\\cap R\\subsetneq\\mathfrak q'\\cap R$이다. (3) $\\mathfrak p\\subsetneq\\mathfrak p'$가 $R$의 소이데알이고 $\\mathfrak q$가 $\\mathfrak q\\cap R=\\mathfrak p$인 $S$의 소이데알이면, $\\mathfrak q'\\supsetneq\\mathfrak q$이고 $\\mathfrak q'\\cap R=\\mathfrak p'$인 $S$의 소이데알 $\\mathfrak q'$가 존재한다. 특히 $\\dim R=\\dim S$이다.",
+          "idea_behind_proof": "(1)은 문제를 국소화 $R_{\\mathfrak p}\\subseteq S_{\\mathfrak p}$로 축소한 뒤, $S_{\\mathfrak p}$의 극대아이디얼과 $R_{\\mathfrak p}$의 극대아이디얼(즉 $R_{\\mathfrak p}$ 자신의 유일한 극대아이디얼)이 정수확장 아래에서 잔여체까지 정수관계로 대응함을 보이는 것이다. (2)는 만약 $\\mathfrak q\\cap R=\\mathfrak q'\\cap R$이라면 몫환 $S/\\mathfrak q\\subseteq S/\\mathfrak q'$에서 모순되는 원소를 찾아내는 것이다. (3)은 (1)을 몫환 $R/\\mathfrak p\\subseteq S/\\mathfrak q$에 적용하는 것뿐이다.",
+          "proof_steps": [
+            "(1): $S_{\\mathfrak p}:=(R\\setminus\\mathfrak p)^{-1}S$라 하면 $R_{\\mathfrak p}\\subseteq S_{\\mathfrak p}$이고 $S_{\\mathfrak p}$는 국소환 $R_{\\mathfrak p}$ 위에서 정수이다. $\\mathfrak m$을 $S_{\\mathfrak p}$의 극대아이디얼이라 하면 $S_{\\mathfrak p}/\\mathfrak m$은 $R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$ 위에서 정수이다.",
+            "$R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$가 체임을 보이자: $0\\ne d\\in R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$에 대해, $d^{-1}\\in S_{\\mathfrak p}/\\mathfrak m$이 만족하는 최소차수 $k$의 모닉다항식(계수는 $R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$)에 $d^k$를 곱하면 $d^{-1}$을 $d$에 대한 $R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$ 위의 다항식으로 표현할 수 있다.",
+            "이 주장에 의해 $\\mathfrak m\\cap R_{\\mathfrak p}=\\mathfrak p R_{\\mathfrak p}$이다. $S\\subseteq S_{\\mathfrak p}$임에 유의하고, $\\mathfrak q:=\\mathfrak m\\cap S\\subseteq S$는 소이데알이며 $\\mathfrak q\\cap R=\\mathfrak pR_{\\mathfrak p}\\cap R=\\mathfrak p$이다.",
+            "(2): $\\mathfrak p:=\\mathfrak q\\cap R=\\mathfrak q'\\cap R$이라 가정하자. $S/\\mathfrak q$는 $R/\\mathfrak p$ 위에서 정수이다. $[b]\\in S/\\mathfrak q$에 대한 모닉다항식 $p(x)\\in(R/\\mathfrak p)[x]$가 상수항이 $0$이 아니게 되도록 $b\\in\\mathfrak q'\\setminus\\mathfrak q$를 고를 수 있다.",
+            "그러나 $S/\\mathfrak q'$에서 $p([b])=0$이므로 $p(x)$의 상수항이 $\\mathfrak p$에 속해야 한다. 이는 모순이다.",
+            "(3): $R/\\mathfrak p\\subseteq S/\\mathfrak q$는 정수확장이다. (1)에 의해 $\\mathfrak q'/\\mathfrak q\\cap R/\\mathfrak p=\\mathfrak p'/\\mathfrak p$를 만족하는, $\\mathfrak q$를 포함하는 $S$의 소이데알 $\\mathfrak q'$가 존재한다. 그러면 $\\mathfrak q'\\cap R=\\mathfrak p'$이고, $\\mathfrak p\\subsetneq\\mathfrak p'$이므로 (2)에 의해 $\\mathfrak q\\subsetneq\\mathfrak q'$이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$R=\\mathbb{Z}$, $S=\\mathbb{Z}[i]$(가우스 정수)일 때, $\\alpha=\\frac{1+i\\sqrt{3}}{2}\\in\\mathbb{C}$가 $\\mathbb{Z}$ 위에서 정수인지 직접 모닉다항식을 찾아 확인하라(단 $S$가 아니라 $\\mathbb{C}$ 안에서 생각하라).",
+          "hint": "$\\alpha$가 만족하는 이차방정식을 켤레 $\\bar\\alpha=\\frac{1-i\\sqrt3}{2}$와의 합과 곱을 이용해 구성해 보라.",
+          "solution": "$\\alpha+\\bar\\alpha=1$이고 $\\alpha\\bar\\alpha=\\frac{1+3}{4}=1$이므로 $\\alpha,\\bar\\alpha$는 $x^2-(\\alpha+\\bar\\alpha)x+\\alpha\\bar\\alpha=x^2-x+1$의 두 근이다. 이는 $\\mathbb{Z}$ 계수 모닉다항식이므로 $\\alpha$는 $\\mathbb{Z}$ 위에서 정수이다(실제로 $\\alpha$는 $1$의 원시 6제곱근이다)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 5.2를 이용해 $\\sqrt{2}\\in\\mathbb{Q}=F(\\mathbb{Z})$가 $\\mathbb{Z}$ 위에서 정수이지만 $\\frac{1}{2}\\in\\mathbb{Q}$는 그렇지 않음을 각각 확인하라.",
+          "hint": "$\\sqrt2$는 어떤 모닉정수계수다항식의 근인지 직접 찾아보고, $1/2$가 예제 5.2의 논증(서로소인 분자·분모, 분모가 단위원이 아니면 모순)에 걸리는지 확인하라.",
+          "solution": "$\\sqrt2$는 $x^2-2=0$을 만족하는 $\\mathbb{Z}$ 계수 모닉다항식의 근이므로 $\\mathbb{Z}$ 위에서 정수이다. 한편 $1/2=a/b$($a=1,b=2$, 서로소)에 대해 예제 5.2의 논증을 적용하면, $1/2$가 정수라면 $b=2$가 단위원이어야 하는데 $\\mathbb{Z}$에서 $2$는 단위원이 아니므로 모순이다. 따라서 $1/2$는 $\\mathbb{Z}$ 위에서 정수가 아니다 — 이는 $\\mathbb{Z}$가 $\\mathbb{Q}$ 안에서 정수적으로 닫혀 있다는 사실(예제 5.2, $\\mathbb{Z}$는 UFD이므로)과 정확히 일치한다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 5.1(1)에 의해, $R\\subseteq S$가 정수확장이기만 하면(유한형이라는 조건 없이) $S$는 항상 $R$ 위에서 유한이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 5.1(1)이 요구하는 것은 '유한형이면서 정수'라는 두 조건의 결합이다. 예를 들어 무한히 많은 변수의 다항식환처럼 유한형이 아닌 정수확장에서는 유한(유한생성 가군)이 실패할 수 있다 — 유한형이라는 조건이 빠지면 '무한히 많은 생성원'이 필요할 수 있기 때문이다."
+        },
+        {
+          "type": "ox",
+          "question": "나카야마 보조정리에 의해, 국소환 $(R,\\mathfrak m)$ 위의 (유한생성이 아닌) 임의의 $R$-가군 $M$에 대해서도 $\\mathfrak mM=M$이면 $M=0$이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 나카야마 보조정리는 $M$이 유한생성일 것을 명시적으로 요구한다. 유한생성이 아닌 가군에서는 $\\mathfrak mM=M$이면서 $M\\ne 0$인 반례가 존재한다(예: $R$이 이산 값매김환일 때 그 분수체 $F(R)$을 $R$-가군으로 보면 $\\mathfrak mF(R)=F(R)$이지만 $F(R)\\ne 0$)."
+        },
+        {
+          "type": "conceptual",
+          "question": "상승정리(정리 5.5)의 결론 '$\\dim R=\\dim S$'는 정수확장이 크룰 차원을 보존한다는 뜻이다. 이 사실이 다음 절 이후 '뇌터 정규화'를 통해 임의의 대수다양체의 차원을 계산하는 전략에서 어떤 역할을 하게 될지, 그리고 이 정리의 증명에서 국소화로 축소하는 단계가 왜 정당한지 설명하라.",
+          "hint": "뇌터 정규화가 좌표환 $A(X)$를 어떤 다항식환 $\\mathbb{C}[y_1,\\dots,y_d]$ 위의 정수확장(유한확장)으로 만든다는 사실을 상승정리와 결합해 보라. 그리고 국소화 $R_{\\mathfrak p}\\subseteq S_{\\mathfrak p}$가 원래 문제(임의의 소이데알 사슬)와 같은 정보를 담는 이유를 생각하라.",
+          "answer": "상승정리가 여는 전략은 이렇다 — 만약 임의의 대수다양체 $X$의 좌표환 $A(X)$가 어떤 다항식환 $\\mathbb{C}[y_1,\\dots,y_d]$ 위의 정수확장(실제로 뇌터 정규화가 이를 보장한다)이라면, $\\dim A(X)=\\dim\\mathbb{C}[y_1,\\dots,y_d]=d$가 상승정리에 의해 자동으로 나온다 — 즉 복잡한 좌표환의 크룰 차원 계산 문제가, 이미 완전히 알려진 다항식환의 차원(변수의 개수) 계산 문제로 환원된다. 이것이 '차원'이라는 순수 기하학적 직관(자유도의 개수)이 순수 대수적 불변량(크룰 차원)과 정확히 일치하게 되는 다리다. 국소화로 축소하는 단계가 정당한 이유는, 소이데알 $\\mathfrak p$에서 끝나는 사슬들의 정보(즉 $\\mathrm{height}\\,\\mathfrak p$)가 정의상 이미 $R_{\\mathfrak p}$의 크룰 차원으로 정의되어 있고, $\\mathfrak p$를 포함하는 소이데알들과 $R_{\\mathfrak p}$의 소이데알들 사이에 순서를 보존하는 전단사가 있기 때문이다(소이데알의 국소화에 대한 표준적인 대응) — 즉 '$\\mathfrak p$ 근방에서 사슬이 어떻게 생겼는가'라는 질문은 전역적인 $R$ 대신 국소환 $R_{\\mathfrak p}$ 안에서 물어도 정확히 같은 답을 준다. 이 국소화 축소는 이 장 전체(나카야마 보조정리, 주이데알 정리)에서 반복되는 전략으로, '전역적인 사슬 조건'을 '국소환의 유일한 극대아이디얼에 대한 조건'으로 바꾸어 훨씬 다루기 쉽게 만든다."
+        }
+      ]
+    },
+    {
+      "section_title": "5.2 Principal ideal theorem",
+      "step1_big_picture": {
+        "context": "이 절은 크룰 차원 이론에서 가장 유명한 결과인 주이데알 정리(Principal Ideal Theorem, 정리 5.6)와 그 일반화인 크룰 높이 정리(정리 5.8)를 다룬다. 주이데알 정리는 '하나의 원소 $f$ 위에서 극소인 소이데알의 높이는 많아야 $1$이다'라는, 얼핏 사소해 보이지만 매우 강력한 사실이다 — 직관적으로 이는 '방정식 하나를 추가하면 차원이 많아야 하나 줄어든다'는 기하학적 직관(초곡면을 자르면 차원이 하나 줄어든다는 사실)의 정확한 대수적 대응물이다. 이를 $c$개의 원소로 일반화한 크룰 높이 정리는 곧바로 $\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$이라는, 다항식환의 차원이 정확히 변수의 개수라는 근본적인 사실(따름정리 5.9)을 낳는다 — 이는 뇌터 정규화(다음 절)를 통해 임의의 대수다양체의 차원을 계산하는 데 핵심적인 '기준점'이 된다.",
+        "hidden_intuition": "주이데알 정리의 증명에서 핵심 대상은 기호적 거듭제곱(symbolic power) $\\mathfrak q^{(n)}:=\\{a\\in R\\mid sa\\in\\mathfrak q^n\\text{인 어떤 }s\\in R\\setminus\\mathfrak q\\text{가 존재}\\}$이다 — 이는 일반적인 이데알 거듭제곱 $\\mathfrak q^n$을 국소화 $R_{\\mathfrak q}$에서 '되돌린' 것으로, $\\mathfrak q^n$보다 다루기 쉬운 성질(예: $\\mathfrak q$-원시적, primary)을 갖는다. 증명은 아르틴환(뇌터 + 유일 소이데알)에서 강한 하강조건이 성립한다는 사실을 이용해 $\\mathfrak q^{(n)}$의 사슬이 안정화됨을 보이고, 그 안정화 지점에서 나카야마 보조정리를 두 번 적용해 $(\\mathfrak qR_{\\mathfrak q})^n=0$이라는 강력한 결론(즉 $\\mathfrak q$ 아래에 소이데알이 더 이상 없다는 것)을 끌어낸다 — 이는 5.1절에서 세운 나카야마 보조정리가 이 정리의 진짜 엔진임을 보여준다. 예제 5.7의 대조(정역에서는 높이가 정확히 $1$이지만, 영인자가 있는 환 $\\mathbb{C}[x,y]/(xy)$에서는 높이가 $0$일 수 있음)는 '주이데알 정리가 주는 것은 상한 $\\le 1$일 뿐, 실제 값이 항상 $1$이라는 보장은 아니다'라는 중요한 뉘앙스를 정확히 짚어준다 — 기하학적으로 이는 $V(xy)$가 두 개의 서로 다른 (이미 극소 차원, 즉 $0$차원의 差) 기약성분(두 좌표축)의 합집합이라는 사실과 대응된다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (원소들 위에서 극소인 소이데알)",
+          "formal_statement": "환 $R$에 대해, 소이데알 $\\mathfrak p\\subseteq R$가 $a_1,\\dots,a_m\\in R$ 위에서 극소(minimal)라는 것은 $\\mathfrak p$가 $a_1,\\dots,a_m$을 포함하는 $R$의 소이데알들 중 극소라는 것이다. 이러한 이데알은 보조정리 1.45에 의해 항상 존재한다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.6 (주이데알 정리, Principal Ideal Theorem)",
+          "formal_statement": "$R$을 뇌터 환, $f\\in R$, $\\mathfrak p\\subseteq R$을 $f$ 위에서 극소인 소이데알이라 하자. 그러면 $\\mathrm{height}\\,\\mathfrak p\\le 1$이다.",
+          "idea_behind_proof": "먼저 국소화 $R_{\\mathfrak p}$로 문제를 축소해 $(R,\\mathfrak p)$가 국소환이고 $\\mathfrak p$가 $f$를 포함하는 유일한 소이데알이라고 가정한다. 임의의 $\\mathfrak q\\subsetneq\\mathfrak p$에 대해, 기호적 거듭제곱 $\\mathfrak q^{(n)}$들의 사슬이 $R/(f)$가 아르틴이라는 사실 덕분에 안정화됨을 보이고, 그 안정화 지점에서 나카야마 보조정리를 거듭 적용해 국소환 $R_{\\mathfrak q}$가 유일한 소이데알(즉 차원 $0$)을 가짐을 끌어낸다 — 이는 $\\mathfrak q$ 아래로는 더 이상 진부분 소이데알이 없다는 뜻이므로 $\\mathfrak p$의 높이가 $1$을 넘을 수 없다.",
+          "proof_steps": [
+            "$R_{\\mathfrak p}$의 소이데알과 $\\mathfrak p$에 포함되는 $R$의 소이데알 사이에는 포함관계를 보존하는 전단사가 있으므로 $\\mathrm{height}\\,\\mathfrak p=\\mathrm{height}\\,\\mathfrak p R_{\\mathfrak p}$이다. 따라서 $(R,\\mathfrak p)$가 국소환이라고 가정할 수 있다.",
+            "이 경우 $\\mathfrak p$는 $f$를 포함하는 $R$의 유일한 소이데알이다. 따라서 $R/(f)$는 유일한 소이데알을 갖고, 명제 1.48에 의해 $R/(f)$는 아르틴이다.",
+            "소이데알 $\\mathfrak q\\subsetneq R$과 정수 $n\\ge 1$에 대해 이데알 $\\mathfrak q^{(n)}:=\\{a\\in R\\mid sa\\in\\mathfrak q^n\\text{인 어떤 }s\\in R\\setminus\\mathfrak q\\text{가 존재}\\}\\subseteq R$을 생각하자.",
+            "$\\mathfrak q\\subsetneq\\mathfrak p$라 가정하자. 그러면 $f\\notin\\mathfrak q$이다. $R/(f)$가 아르틴이므로 $R/(f)$의 이데알들의 하강사슬 $(f)+\\mathfrak q^{(1)}\\supseteq(f)+\\mathfrak q^{(2)}\\supseteq\\cdots$는 결국 안정화되어, 어떤 $n\\ge 1$에서 $(f)+\\mathfrak q^{(n)}=(f)+\\mathfrak q^{(n+1)}$이다.",
+            "$r\\in\\mathfrak q^{(n)}$이면 $r=af+b$($a\\in R$, $b\\in\\mathfrak q^{(n+1)}$)로 쓸 수 있다. $f$가 $R_{\\mathfrak q}$에서 단위원이고 $af=r-b\\in\\mathfrak q^nR_{\\mathfrak q}$이므로 $a\\in\\mathfrak q^nR_{\\mathfrak q}$, 따라서 $a\\in\\mathfrak q^{(n)}$을 얻는다. 이는 $\\mathfrak q^{(n)}=f\\mathfrak q^{(n)}+\\mathfrak q^{(n+1)}$을 보인다.",
+            "$M:=\\mathfrak q^{(n)}/\\mathfrak q^{(n+1)}$을 유한생성 $R$-가군이라 하자. $M=fM\\subseteq\\mathfrak pM$이므로 나카야마 보조정리에 의해 $M=0$이다.",
+            "$\\mathfrak q^{(n)}R_{\\mathfrak q}=\\mathfrak q^nR_{\\mathfrak q}=(\\mathfrak qR_{\\mathfrak q})^n$임에 유의하라. 따라서 $(\\mathfrak qR_{\\mathfrak q})^n=\\mathfrak qR_{\\mathfrak q}\\cdot(\\mathfrak qR_{\\mathfrak q})^n$이고, 나카야마 보조정리에 의해 $(\\mathfrak qR_{\\mathfrak q})^n=0$이다.",
+            "이는 $R_{\\mathfrak q}$가 유일한 소이데알을 갖고 차원이 $0$임을 뜻한다. $\\mathfrak q\\subsetneq\\mathfrak p$였음을 기억하면, 이는 $\\mathfrak p$ 아래에 소이데알들의 사슬이 길이 $1$을 넘을 수 없음을 뜻하므로 $\\mathrm{height}\\,\\mathfrak p\\le 1$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.7 (정역에서는 높이가 정확히 $1$; 영인자가 있으면 높이 $0$도 가능)",
+          "formal_statement": "주이데알 정리의 상황에서, $R$이 정역이고 $f$가 $R$의 단위원이 아니면 $(0)\\subseteq R$이 소이데알이므로 $\\mathrm{height}\\,\\mathfrak p=1$이다. 이와 대조적으로 $R=\\mathbb{C}[x,y]/(xy)$일 때, 영인자 $x$는 $R$의 극소소이데알 $(x)$ 안에 있으며 그 높이는 $0$이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.8 (크룰 높이 정리, Krull Height Theorem)",
+          "formal_statement": "$R$을 뇌터 환, $x_1,\\dots,x_c\\in R$, $\\mathfrak p\\subseteq R$을 $x_1,\\dots,x_c$ 위에서 극소인 소이데알이라 하자. 그러면 $\\mathrm{height}\\,\\mathfrak p\\le c$이다.",
+          "idea_behind_proof": "$c$에 대한 귀납법이며 $c=1$은 주이데알 정리 자체다. 귀납 단계의 핵심 트릭은, $\\mathfrak p$ 바로 아래의 높이 $\\mathrm{height}\\,\\mathfrak p-1$인 소이데알 $\\mathfrak p_1$을 골라 $x_1\\notin\\mathfrak p_1$이 되도록 조정한 뒤, 나머지 생성원 $x_2,\\dots,x_c$를 '$x_1$의 배수를 빼서' $\\mathfrak p_1$ 안으로 밀어 넣는 것이다 — 이렇게 하면 몫환 $R/(y_2,\\dots,y_c)$ 안에서 $\\mathfrak p$가 단 하나의 원소 $x_1$ 위에서 극소가 되어 주이데알 정리를 다시 적용할 수 있고, 그 결과 $\\mathfrak p_1$이 $c-1$개의 원소 위에서 극소가 됨을 보여 귀납가정을 적용할 수 있게 된다.",
+          "proof_steps": [
+            "$c$에 대한 귀납법을 쓴다. $c=1$인 경우는 주이데알 정리(정리 5.6)에서 다루어졌다. $c\\ge 2$라 하자.",
+            "$(R,\\mathfrak p)$가 국소환이고 $\\mathfrak p$가 $x_1,\\dots,x_c$를 포함하는 유일한 소이데알이라고 가정할 수 있다. 명제 1.48에 의해 $R/(x_1,\\dots,x_c)$는 아르틴이므로, 따름정리 5.4에 의해 어떤 $k\\ge 1$에서 $\\mathfrak p^k\\subseteq(x_1,\\dots,x_c)$이다.",
+            "$\\mathrm{height}\\,\\mathfrak p\\ge 1$이라 가정할 수 있다. $\\mathrm{height}\\,\\mathfrak p_1=\\mathrm{height}\\,\\mathfrak p-1$인 소이데알 $\\mathfrak p_1\\subseteq R$을 고를 수 있고, $x_1\\notin\\mathfrak p_1$이라고 가정할 수 있다.",
+            "$\\mathfrak p$는 $\\mathfrak p_1+(x_1)$을 포함하는 유일한 소이데알이다. 명제 1.48에 의해 $R/(\\mathfrak p_1+(x_1))$은 아르틴이므로, 따름정리 5.4에 의해 어떤 $n\\ge 1$에서 $\\mathfrak p^n\\subseteq\\mathfrak p_1+(x_1)$이다.",
+            "그러면 $2\\le i\\le c$인 모든 $i$에서 $x_i^n\\in\\mathfrak p_1+(x_1)$이므로 $x_i^n=a_ix_1+y_i$($a_i\\in R$, $y_i\\in\\mathfrak p_1$)로 쓸 수 있다.",
+            "$\\mathfrak p$는 $x_1,y_2,\\dots,y_c$를 포함하는 유일한 소이데알이다. 그러면 $\\mathfrak p/(y_2,\\dots,y_c)$는 $R/(y_2,\\dots,y_c)$에서 $x_1+(y_2,\\dots,y_c)$를 포함하는 유일한 소이데알이다.",
+            "주이데알 정리에 의해 $\\mathrm{height}\\,\\mathfrak p/(y_2,\\dots,y_c)\\le 1$이고, 따라서 $\\mathrm{height}\\,\\mathfrak p_1/(y_2,\\dots,y_c)=0$이다. 이는 $\\mathfrak p_1$이 $y_2,\\dots,y_c$ 위에서 극소임을 뜻한다.",
+            "귀납가정에 의해 $\\mathrm{height}\\,\\mathfrak p_1\\le c-1$이므로 $\\mathrm{height}\\,\\mathfrak p=\\mathrm{height}\\,\\mathfrak p_1+1\\le c$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.9 ($\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$)",
+          "formal_statement": "$\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$이다.",
+          "idea_behind_proof": "아래 부등식은 표준적인 소이데알 사슬 $(0)\\subsetneq(x_1)\\subsetneq\\cdots\\subsetneq(x_1,\\dots,x_n)$에서 바로 나오고, 위 부등식은 극대인 사슬의 맨 끝이 극대아이디얼이라는 사실(약한 Nullstellensatz의 형태)과 크룰 높이 정리를 결합해서 얻는다.",
+          "proof_steps": [
+            "$\\mathbb{C}[x_1,\\dots,x_n]$의 소이데알 사슬 $(0)\\subsetneq(x_1)\\subsetneq(x_1,x_2)\\subsetneq\\cdots\\subsetneq(x_1,\\dots,x_n)$을 생각하면 $\\dim\\mathbb{C}[x_1,\\dots,x_n]\\ge n$을 얻는다.",
+            "역으로 $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$을 $\\mathbb{C}[x_1,\\dots,x_n]$의 극대인 소이데알 사슬이라 하면 $\\mathfrak p_r$은 극대아이디얼이다. 따름정리 1.35에 의해 $\\mathfrak p_r=(x_1-a_1,\\dots,x_n-a_n)$($a_1,\\dots,a_n\\in\\mathbb{C}$)이다.",
+            "크룰 높이 정리에 의해 $r=\\mathrm{height}\\,\\mathfrak p_r\\le n$이다. 따라서 $\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (뇌터 국소환의 유한차원성과 나가타의 예)",
+          "formal_statement": "크룰 높이 정리를 이용하면 모든 뇌터 국소환이 유한 차원을 가짐을 보일 수 있다. 그러나 뇌터 환은 (국소환이 아니면) 무한 차원을 가질 수도 있다 — 그러한 예는 마사요시 나가타(Masayoshi Nagata)가 처음 구성했다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$R=\\mathbb{C}[x,y]/(xy)$에서 극소소이데알 $(x)$의 높이가 실제로 $0$임을, $R$의 소이데알들을 직접 나열해 확인하라(즉 $(x)$ 아래에 다른 소이데알이 없음을 보여라).",
+          "hint": "$R$의 소이데알은 $\\mathbb{C}[x,y]$의 소이데알 중 $(xy)$를 포함하는 것들에 대응한다. $(x)$에 포함되는 $R$의 소이데알을 직접 찾아보라.",
+          "solution": "$R=\\mathbb{C}[x,y]/(xy)$의 소이데알은 $(xy)$를 포함하는 $\\mathbb{C}[x,y]$의 소이데알들에 대응한다. $(x)\\supseteq(xy)$이므로 $(x)$는 $R$의 소이데알(실제로 $R/(x)\\cong\\mathbb{C}[y]$는 정역이므로)이다. $(x)$에 진부분으로 포함되는 소이데알 $\\mathfrak q\\subsetneq(x)$가 있다면 $\\mathfrak q$도 $(xy)$를 포함하는 $\\mathbb{C}[x,y]$의 소이데알이면서 $(x)$의 진부분이어야 하는데, $(x)$ 자체가 $\\mathbb{C}[x,y]$에서 높이 $1$인 소이데알(정역 $\\mathbb{C}[x,y]$에서 $(0)\\subsetneq(x)$가 전부)이므로 $\\mathbb{C}[x,y]$ 안에서 $(x)$ 진부분의 유일한 소이데알은 $(0)$뿐인데 $(0)\\not\\supseteq(xy)$(왜냐하면 $xy\\ne 0$)이므로 $(0)$은 $R$의 소이데알로 대응되지 않는다. 따라서 $(x)$ 아래에는 $R$의 다른 소이데알이 없으므로 $\\mathrm{height}(x)=0$이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "따름정리 5.9의 증명 방식을 그대로 따라, $\\mathbb{C}[x,y,z]$에서 소이데알 사슬 $(0)\\subsetneq(x)\\subsetneq(x,y)\\subsetneq(x,y,z)$의 길이가 $3$임을 확인하고, 이로부터 $\\dim\\mathbb{C}[x,y,z]\\ge 3$을 얻으라. 그리고 $(x,y,z)$가 실제로 극대아이디얼임을 확인하라.",
+          "hint": "각 포함이 진부분인지($x\\notin(0)$, $y\\notin(x)$, $z\\notin(x,y)$) 확인하고, $\\mathbb{C}[x,y,z]/(x,y,z)\\cong\\mathbb{C}$가 체인지 확인하라.",
+          "solution": "$x\\ne 0$이므로 $(0)\\subsetneq(x)$. $y\\notin(x)=\\{xf\\mid f\\in\\mathbb{C}[x,y,z]\\}$이므로(만약 $y=xf$라면 차수 비교에서 모순) $(x)\\subsetneq(x,y)$. 같은 이유로 $z\\notin(x,y)$이므로 $(x,y)\\subsetneq(x,y,z)$. 따라서 사슬의 길이는 $3$이고 $\\dim\\mathbb{C}[x,y,z]\\ge 3$이다. $\\mathbb{C}[x,y,z]/(x,y,z)\\cong\\mathbb{C}$는 체이므로 $(x,y,z)$는 극대아이디얼이다(따름정리 1.35의 $a_1=a_2=a_3=0$인 경우). 크룰 높이 정리에 의해 이 사슬의 길이는 이 극대아이디얼의 높이의 상한($3$)과 일치하므로, 실제로 $\\dim\\mathbb{C}[x,y,z]=3$임이 확인된다."
+        },
+        {
+          "type": "ox",
+          "question": "주이데알 정리에 의해, 뇌터 환 $R$에서 하나의 원소 $f$ 위에서 극소인 소이데알의 높이는 항상 정확히 $1$이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 주이데알 정리가 보장하는 것은 높이가 '많아야' $1$이라는 상한($\\le 1$)이지, 항상 정확히 $1$이라는 것이 아니다. 예제 5.7이 보여주듯 $R=\\mathbb{C}[x,y]/(xy)$의 극소소이데알 $(x)$는 높이가 $0$이다(영인자가 있는 환에서는 이런 일이 일어날 수 있다)."
+        },
+        {
+          "type": "ox",
+          "question": "크룰 높이 정리에 의해, 뇌터 환의 모든 극대아이디얼의 높이는 유한하다.",
+          "answer": "O",
+          "explanation": "참이다. 극대아이디얼은 항상 그 뇌터 환의 어떤 유한 개의 생성원 $x_1,\\dots,x_c$(뇌터 환이므로 이데알 자체가 유한생성) 위에서 극소이므로, 크룰 높이 정리에 의해 그 높이는 $c$ 이하로 유한하다. 이는 참고 5.10에서 언급된 '모든 뇌터 국소환은 유한 차원을 갖는다'는 사실의 근거이기도 하다."
+        },
+        {
+          "type": "conceptual",
+          "question": "주이데알 정리의 증명에서 기호적 거듭제곱 $\\mathfrak q^{(n)}$을 이데알의 일반적인 거듭제곱 $\\mathfrak q^n$ 대신 사용한 이유가 무엇일지 생각해 보라. 만약 증명 전체에서 $\\mathfrak q^{(n)}$ 대신 그냥 $\\mathfrak q^n$을 사용했다면 어느 단계가 문제가 되었을지 논하라.",
+          "hint": "$\\mathfrak q^{(n)}R_{\\mathfrak q}=\\mathfrak q^nR_{\\mathfrak q}$라는 사실이 증명의 어느 단계(나카야마 보조정리를 적용하는 지점)에서 정확히 사용되는지 되짚어 보라. $R/(f)$의 하강사슬이 $\\mathfrak q^{(n)}$들에 대해 안정화된다는 것과 $\\mathfrak q^n$들에 대해 안정화된다는 것이 같은 말인지 생각해 보라.",
+          "answer": "기호적 거듭제곱 $\\mathfrak q^{(n)}$을 쓴 핵심적인 이유는, 증명의 마지막 단계에서 $R_{\\mathfrak q}$ 안에서 $\\mathfrak q^nR_{\\mathfrak q}$에 대한 정보(구체적으로 $(\\mathfrak qR_{\\mathfrak q})^n=0$이라는 결론)를 끌어내야 하는데, 일반적인 이데알 거듭제곱 $\\mathfrak q^n$은 국소화했을 때 $\\mathfrak q^{(n)}$과 정확히 일치하지만($\\mathfrak q^{(n)}R_{\\mathfrak q}=\\mathfrak q^nR_{\\mathfrak q}=(\\mathfrak qR_{\\mathfrak q})^n$이라는 등식이 증명에 명시되어 있다), $R$ 자체 안에서는 $\\mathfrak q^{(n)}\\supseteq\\mathfrak q^n$일 뿐 등식이 보장되지 않기 때문이다 — $\\mathfrak q^{(n)}$은 '$\\mathfrak q$ 바깥의 어떤 원소를 곱해서라도 $\\mathfrak q^n$ 안에 들어갈 수 있으면 포함시킨다'는 방식으로 $\\mathfrak q^n$을 국소화 관점에서 '포화시킨' 것이다. 만약 증명 전체에서 $\\mathfrak q^{(n)}$ 대신 그냥 $\\mathfrak q^n$을 사용했다면, $R/(f)$의 하강사슬 $(f)+\\mathfrak q^1\\supseteq(f)+\\mathfrak q^2\\supseteq\\cdots$가 안정화된다는 것까지는 (똑같이 아르틴성에서) 얻을 수 있지만, 그다음 단계인 '$r=af+b$, $b\\in\\mathfrak q^{n+1}$에서 $af=r-b\\in\\mathfrak q^nR_{\\mathfrak q}$이므로 $a\\in\\mathfrak q^n$'이라는 추론이 깨진다 — $af\\in\\mathfrak q^nR_{\\mathfrak q}$라는 것은 $R_{\\mathfrak q}$ 안에서의 소속일 뿐이고, 이를 $R$ 자체 안에서 '$a\\in\\mathfrak q^n$'으로 되돌리려면 정확히 기호적 거듭제곱의 정의(어떤 $s\\notin\\mathfrak q$에서 $sa\\in\\mathfrak q^n$이면 충분)가 필요하다 — 일반적인 $\\mathfrak q^n$으로는 이 '국소화에서 전역으로 되돌리는' 단계가 보장되지 않는다. 즉 $\\mathfrak q^{(n)}$은 '국소화 후에도 정보가 그대로 보존되는, $\\mathfrak q^n$의 올바른 대체물'이며, 이것이 증명 전체를 국소환 $R_{\\mathfrak q}$ 안에서의 나카야마 보조정리 적용으로 매끄럽게 이어지게 하는 핵심 장치다."
+        }
+      ]
+    },
+    {
+      "section_title": "5.3 Noether normalization",
+      "step1_big_picture": {
+        "context": "이 절은 지금까지 쌓아온 모든 도구(정수확장, 상승정리, 주이데알 정리, 크룰 높이 정리)를 동원해 이 장의 핵심 정리인 뇌터 정규화(정리 5.11)와 그 직접적인 귀결인 정리 5.12에 도달한다. 뇌터 정규화는 '임의의 아핀 $\\mathbb{C}$-정역 $A$ 안에는 대수적으로 독립인 원소 $t_1,\\dots,t_d\\in A$가 있어, $A$가 다항식환 $\\mathbb{C}[t_1,\\dots,t_d]$ 위의 유한 정수확장이 된다'는 놀랍도록 강력한 구조 정리다 — 이는 임의로 복잡해 보이는 좌표환도 '숨겨진 다항식환'을 하나 포함하고 있으며, 그 위에서 유한하게 지배된다는 것을 말한다. 이 정리가 곧바로 정리 5.12로 이어진다: $\\dim A=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$, 즉 크룰 차원이라는 순수 대수적 불변량이 함수체의 초월차수라는 훨씬 다루기 쉬운 불변량과 정확히 일치한다는 것이다. 따름정리 5.13(사슬 조건, catenary)은 이 모든 것의 자연스러운 마무리로, 모든 극대 소이데알 사슬의 길이가 $\\dim A$로 항상 같다는 것을 보인다 — 즉 차원이라는 개념에 '어느 사슬을 고르든 상관없다'는 안정성을 부여한다.",
+        "hidden_intuition": "뇌터 정규화의 증명 전략은 귀납의 정수(精髓)를 보여준다 — $n$개의 생성원을 가진 대수 $A=\\mathbb{C}[x_1,\\dots,x_n]/P$에서 시작해, $P$의 0이 아닌 원소 $f$를 하나 찾아 좌표를 적당히 바꿔 $f$가 $x_1$에 대해 모닉이 되게 만들면, $x_1$이 나머지 변수들의 부분대수 $B=\\mathbb{C}[x_2,\\dots,x_n]$ 위에서 정수가 되어 $A=B[x_1]$이 $B$ 위에서 유한하게 된다 — 즉 변수 하나를 '소거'하는 셈이다. 이를 반복하면 결국 변수의 개수가 하나씩 줄어들며 $n\\to n-1\\to\\cdots$로 귀납이 진행되고, 최종적으로 대수적으로 독립인 '진짜 좌표' $t_1,\\dots,t_d$만 남는다. 정리 5.12의 증명에서 가장 심오한 부분은 '노름(norm)/특성다항식' 논증이다 — 원소 $\\alpha\\in A$가 $K=F(B)$ 위의 벡터공간 $L=F(A)$에 곱셈으로 작용하는 선형작용소로 볼 때, 그 특성다항식의 계수들이 (가우스 보조정리와 정수원소들의 합·곱이 다시 정수라는 명제 5.1(3) 덕분에) 실제로 $B$ 안에 놓인다는 것을 보이고, 이로부터 '$q\\cap B$가 $B$의 한 원소 $f_0$의 근기와 같다'는 결정적 사실을 끌어낸다 — 이는 정확히 주이데알 정리를 적용할 수 있는 형태로 문제를 되돌리는 다리 역할을 한다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (아핀 $\\mathbb{C}$-정역)",
+          "formal_statement": "아핀 $\\mathbb{C}$-정역(affine $\\mathbb{C}$-domain)이란 정역인 유한생성 $\\mathbb{C}$-대수를 말한다. $A$가 아핀 $\\mathbb{C}$-정역인 것은 $A$가 어떤 아핀다양체의 좌표환인 것과 동치이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.11 (뇌터 정규화, Noether Normalization)",
+          "formal_statement": "$A$를 아핀 $\\mathbb{C}$-정역이라 하자. 그러면 대수적으로 독립인 원소 $t_1,\\dots,t_d\\in A$가 존재하여 $d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$이고 $\\mathbb{C}[t_1,\\dots,t_d]\\subseteq A$는 유한 정수확장이다.",
+          "idea_behind_proof": "$A$의 생성원 개수 $n$에 대한 귀납법이다. $A=\\mathbb{C}[x_1,\\dots,x_n]/P$로 쓰고, $P\\ne 0$이면 그 안의 $0$이 아닌 원소 $f$를 좌표변환으로 $x_1$에 대해 모닉이 되도록 만들어 $x_1$을 나머지 변수들의 부분대수 위에서 정수로 만든다 — 이렇게 변수 하나를 줄인 뒤 귀납가정을 적용하고, 명제 5.1(2)의 추이성으로 전체 확장이 유한임을 얻는다.",
+          "proof_steps": [
+            "$A$가 $\\mathbb{C}$-대수로서 $n$개의 원소로 생성된다고 하자. $A=\\mathbb{C}[x_1,\\dots,x_n]/P$($P\\subseteq\\mathbb{C}[x_1,\\dots,x_n]$는 소이데알)로 쓸 수 있다. $n$에 대한 귀납법으로 증명한다.",
+            "$P=(0)$이면 주장은 자명하다(특히 $n=0$인 경우가 이렇게 처리된다).",
+            "$n\\ge 1$이고 $0\\ne f\\in P$가 있다고 하자. 보조정리 1.31에 의해, 일차 좌표변환 후 $f$가 $x_1$에 대해 모닉이라고 가정할 수 있다.",
+            "그러면 $x_1\\in A$는 부분대수 $B:=\\mathbb{C}[x_2,\\dots,x_n]\\subseteq A$ 위에서 정수이므로, $A=B[x_1]$은 $B$ 위에서 유한하다.",
+            "$B$는 아핀 $\\mathbb{C}$-정역이다. 귀납가정에 의해 대수적으로 독립인 $t_1,\\dots,t_d\\in B$가 존재해 $d=\\mathrm{trdeg}_{\\mathbb{C}}F(B)$이고 $B$는 $\\mathbb{C}[t_1,\\dots,t_d]$ 위에서 유한하다.",
+            "명제 5.1에 의해 $A$는 $\\mathbb{C}[t_1,\\dots,t_d]$ 위에서 유한하다(추이성). $F(A)$는 $\\mathbb{C}(t_1,\\dots,t_d)$ 위에서 대수적이므로 $d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.12 ($\\dim A=\\mathrm{trdeg}_{\\mathbb{C}}F(A)=\\mathrm{height}\\,\\mathfrak p+\\dim(A/\\mathfrak p)$)",
+          "formal_statement": "$A$를 아핀 $\\mathbb{C}$-정역, $\\mathfrak p\\subseteq A$를 소이데알이라 하자. 그러면 $$\\dim A=\\mathrm{trdeg}_{\\mathbb{C}}F(A)=\\mathrm{height}\\,\\mathfrak p+\\dim(A/\\mathfrak p)$$ 이다.",
+          "idea_behind_proof": "첫 등식은 뇌터 정규화와 상승정리를 결합해 $\\dim A=\\dim\\mathbb{C}[t_1,\\dots,t_d]=d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$로 바로 얻는다. 둘째 등식의 핵심 보조결과는 '$0$이 아닌 비단위원 $f$ 위에서 극소인 소이데알 $\\mathfrak q$에 대해 $\\dim(A/\\mathfrak q)=d-1$'이라는 사실이며, 이는 뇌터 정규화된 $B:=\\mathbb{C}[t_1,\\dots,t_d]$ 위에서 원소의 특성다항식(노름)을 이용해 $\\mathfrak q\\cap B$가 $B$의 한 기약원소의 근기임을 보이는 정교한 논증에서 나온다. 이 보조결과를 얻은 뒤에는, $\\mathfrak p$에 이르는 소이데알 사슬을 매 단계 차원을 정확히 하나씩 줄이며 직접 구성해 등식을 완성한다.",
+          "proof_steps": [
+            "$d:=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$라 하자. 뇌터 정규화에 의해 $A$가 정수인 대수적으로 독립인 $t_1,\\dots,t_d\\in A$가 존재한다. 상승정리와 따름정리 5.9에 의해 $\\dim A=\\dim\\mathbb{C}[t_1,\\dots,t_d]=d$이다. 이것으로 첫 등식이 증명된다.",
+            "[핵심 보조결과] $0\\ne f\\in A$가 단위원이 아니고 $\\mathfrak q\\subseteq A$가 $f$ 위에서 극소인 소이데알이면 $\\dim(A/\\mathfrak q)=d-1$임을 보인다. 따름정리 1.46에 의해 $\\sqrt{(f)}=\\mathfrak q\\cap\\mathfrak q_2\\cap\\cdots\\cap\\mathfrak q_r$($\\mathfrak q,\\mathfrak q_2,\\dots,\\mathfrak q_r$은 $f$ 위에서 극소인 소이데알들)이다.",
+            "$r\\ge 2$이면 $h_i\\in\\mathfrak q_i\\setminus\\mathfrak q$($2\\le i\\le r$)를 골라 $h:=h_2\\cdots h_r$로 두면 $\\sqrt{(f)}A_h=\\mathfrak qA_h$이다. $A_h\\cong A[T]/(hT-1)$도 아핀 $\\mathbb{C}$-정역이고 $F(A_h)\\cong F(A)$이므로 $\\dim A_h=\\dim A=d$이다. $A$를 $A_h$로 바꾸어 $\\sqrt{(f)}=\\mathfrak q$라 가정할 수 있다.",
+            "뇌터 정규화에 의해 $A$가 유한한 $B:=\\mathbb{C}[t_1,\\dots,t_d]$가 존재한다. $K:=F(B)$, $L:=F(A)$로 두면 $L$은 $K$ 위에서 유한하다. $\\alpha\\in A$에 대해 $\\alpha$를 곱하는 것은 $K$-벡터공간 $L$ 위의 선형작용소를 정의한다.",
+            "$\\alpha$가 $B$ 위에서 정수이므로 가우스 보조정리에 의해 $\\alpha$의 $K$ 위 최소다항식은 $B$ 계수를 갖는다. $\\alpha$의 대수적 켤레들도 모두 $B$ 위에서 정수이므로, 명제 5.1에 의해 $\\alpha$의 특성다항식의 계수들도 $B$ 위에서 정수이다.",
+            "$B$가 UFD이므로 예제 5.2에 의해 이 계수들은 실제로 $B$ 안에 놓인다. 특히 $\\det\\alpha\\in B$이고, $\\alpha=f$로 두면 $f\\mid\\det f$가 $A$ 안에서 성립한다. $f_0:=\\det f$라 하면 $\\sqrt{(f_0)}\\subseteq\\mathfrak q\\cap B$임을 확인할 수 있다.",
+            "역으로 $g\\in\\mathfrak q\\cap B$이면 $g^m=af$인 $m\\ge 1$, $a\\in A$가 있다. $g^{[L:K]}=\\det g$이므로 $g^{m[L:K]}=\\det(g^m)=\\det a\\det f=f_0\\det a$를 얻어 $g\\in\\sqrt{(f_0)}$이다. 따라서 $\\sqrt{(f_0)}=\\mathfrak q\\cap B$이며, 이는 $B$의 소이데알이다.",
+            "$r_0$을 $f_0$의 기약인수라 하면 $\\mathrm{trdeg}_{\\mathbb{C}}F(B/(r_0))=d-1$이다. 단사 환 준동형 $B/(r_0)\\hookrightarrow A/\\mathfrak q$가 있고, $A/\\mathfrak q$는 그 상 위에서 유한(따라서 정수)이므로 상승정리에 의해 $$\\dim(A/\\mathfrak q)=\\mathrm{trdeg}_{\\mathbb{C}}F(A/\\mathfrak q)=\\mathrm{trdeg}_{\\mathbb{C}}F(B/(r_0))=d-1.$$ 이것으로 핵심 보조결과가 증명된다.",
+            "[전체 증명 완성] $d=\\dim A\\ge\\mathrm{height}\\,\\mathfrak p+\\dim(A/\\mathfrak p)$는 명백하다. $e:=\\dim(A/\\mathfrak p)$로 두고 $\\mathrm{height}\\,\\mathfrak p=d-e$임을 보이면 된다. $\\mathrm{height}\\,\\mathfrak p\\le d-e$는 이미 알고 있으므로, 소이데알 사슬 $(0)=\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_{d-e}=\\mathfrak p$을 구성하면 충분하다.",
+            "$\\dim(A/\\mathfrak p_0)=d$임에 유의하고, $\\dim(A/\\mathfrak p_i)=d-i$이고 $\\mathfrak p_0\\subseteq\\cdots\\subseteq\\mathfrak p_i\\subseteq\\mathfrak p$인 소이데알 $\\mathfrak p_i$가 구성되었다고 하자. $\\mathfrak p_i=\\mathfrak p$이면 $d-i=\\dim(A/\\mathfrak p)=e$이므로 $i=d-e$이다.",
+            "$\\mathfrak p_i\\ne\\mathfrak p$라 하자. $\\overline{f_i}\\in\\mathfrak p/\\mathfrak p_i\\subseteq A/\\mathfrak p_i$를 골라, $\\mathfrak p_{i+1}/\\mathfrak p_i$가 $A/\\mathfrak p_i$에서 $\\overline{f_i}$ 위에서 극소이고 $\\mathfrak p_{i+1}\\subseteq\\mathfrak p$가 되도록 $\\mathfrak p_{i+1}$을 고를 수 있다. 핵심 보조결과에 의해 $\\dim(A/\\mathfrak p_{i+1})=\\dim(A/\\mathfrak p_i)-1=d-i-1$이다.",
+            "이를 반복하면 원하는 사슬을 얻어 $\\mathrm{height}\\,\\mathfrak p=d-e$가 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.13 (사슬 조건, catenary)",
+          "formal_statement": "$A$를 아핀 $\\mathbb{C}$-정역이라 하자. $A$의 모든 극대인 소이데알 강한 사슬은 길이가 $\\dim A$로 같다.",
+          "idea_behind_proof": "$n:=\\dim A$에 대한 귀납법이며, 정리 5.12를 이용해 사슬의 첫 항을 지운 몫환 $A/\\mathfrak p_1$이 차원 $n-1$을 갖는다는 것을 보이고, 그 몫환에서의 귀납가정을 원래 사슬에 그대로 이어붙이는 것이다.",
+          "proof_steps": [
+            "$n:=\\dim A$에 대한 귀납법을 쓴다. $n=0$이면 모든 소이데알이 $(0)$이므로 주장은 자명하다. $n\\ge 1$이라 하자.",
+            "$\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$을 $A$의 극대인 소이데알 사슬이라 하자. $\\mathfrak p_0=(0)$이고 $\\mathfrak p_1$은 극소소이데알이다. 따라서 $\\mathrm{height}\\,\\mathfrak p_1=1$이고, 정리 5.12에 의해 $\\dim(A/\\mathfrak p_1)=n-1$이다.",
+            "$(0)\\subsetneq\\mathfrak p_2/\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r/\\mathfrak p_1$은 $A/\\mathfrak p_1$의 극대인 소이데알 사슬이므로, 귀납가정에 의해 $r-1=n-1$, 즉 $r=n=\\dim A$이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$A=\\mathbb{C}[x,y]/(y-x^2)$($\\cong\\mathbb{C}[x]$인 포물선의 좌표환)에 뇌터 정규화를 직접 적용해 보라. 즉 대수적으로 독립인 $t_1\\in A$와 유한 정수확장 $\\mathbb{C}[t_1]\\subseteq A$를 명시적으로 찾아라.",
+          "hint": "$A\\cong\\mathbb{C}[x]$이므로 $t_1=x$ 자체가 이미 답이 될 수 있음을 확인하라 — 이 경우 확장이 '자명하게' 유한(사실 동형)임을 보여라.",
+          "solution": "$A=\\mathbb{C}[x,y]/(y-x^2)$에서 $y=x^2$이므로 $A\\cong\\mathbb{C}[x]$(대응 $x\\mapsto x$, $y\\mapsto x^2$)이다. $t_1:=x$로 두면 $t_1$은 그 자체로 대수적으로 독립(초월적)이고, $\\mathbb{C}[t_1]=\\mathbb{C}[x]\\subseteq A$는 사실 등식(즉 확장 차수 $1$인 자명한 유한 정수확장)이다. $d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(x)=1$과 일치한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "정리 5.12를 이용해 $\\dim\\mathbb{C}[x,y]/(xy)$의 각 기약성분에서의 국소적 차원을 계산하라. 구체적으로 $A=\\mathbb{C}[x,y]/(xy)$, $\\mathfrak p=(x)$(기약성분 $y$축에 대응)일 때 $\\mathrm{height}(\\mathfrak p)$와 $\\dim(A/\\mathfrak p)$를 각각 구하고, 정리 5.12의 등식이 이 경우 어떻게 되는지 논하라(단 $A$ 자체는 정역이 아니므로 정리 5.12를 $A/\\mathfrak p$나 각 기약성분에 적용해야 함에 유의).",
+          "hint": "$A/\\mathfrak p=A/(x)\\cong\\mathbb{C}[y]$가 아핀 정역임에 주목하고, 여기에 정리 5.12를 적용하라. $\\mathrm{height}(\\mathfrak p)$는 예제 5.7/따름정리 5.13 논의에서 이미 계산한 값을 재활용하라.",
+          "solution": "$A/\\mathfrak p=A/(x)\\cong\\mathbb{C}[y]$는 아핀 $\\mathbb{C}$-정역이고 $\\dim(A/\\mathfrak p)=\\dim\\mathbb{C}[y]=1$(따름정리 5.9). $\\mathrm{height}(\\mathfrak p)$는 예제 5.7에서 확인했듯 $0$이다(영인자 $x$가 극소소이데알 $(x)$ 안에 있으므로). 정리 5.12는 $A$ 자체가 정역일 때의 등식이므로 $A=\\mathbb{C}[x,y]/(xy)$(정역이 아님)에 직접 적용할 수는 없지만, 그 몫환 $A/\\mathfrak p\\cong\\mathbb{C}[y]$는 그 자체로 아핀 정역이며 여기서 정리 5.12(자명한 경우, $\\mathfrak p'=(0)$)를 적용하면 $\\dim(A/\\mathfrak p)=\\mathrm{trdeg}_{\\mathbb{C}}F(\\mathbb{C}[y])=1+\\mathrm{height}(0)+\\dim(\\mathbb{C}[y]/(0))$가 아니라 단순히 $\\dim\\mathbb{C}[y]=1=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(y)$로 확인된다. $\\mathrm{height}(\\mathfrak p)+\\dim(A/\\mathfrak p)=0+1=1=\\dim\\mathbb{C}[x]$(다른 기약성분 $x$축의 차원)와 우연히 일치하지만, 이는 $A$가 정역이 아니므로 정리 5.12가 직접 보장하는 등식이 아니라 각 기약성분에 개별적으로 정리를 적용한 결과들의 우연한 합치임에 유의해야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "뇌터 정규화(정리 5.11)에 의해, 모든 아핀 $\\mathbb{C}$-정역 $A$는 어떤 다항식환 $\\mathbb{C}[t_1,\\dots,t_d]$와 동형이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 뇌터 정규화가 보장하는 것은 $\\mathbb{C}[t_1,\\dots,t_d]\\subseteq A$가 유한 정수확장이라는 것이지, $A$ 자체가 다항식환과 동형이라는 것이 아니다. 예를 들어 $A=\\mathbb{C}[t^2,t^3]$은 $\\mathbb{C}[t^2]$ 위의 유한 정수확장이지만 $A$ 자체는 다항식환이 아니다(예제 2.18에서 이미 확인한 뾰족한 삼차곡선의 좌표환)."
+        },
+        {
+          "type": "ox",
+          "question": "따름정리 5.13(사슬 조건)에 의해, 아핀 $\\mathbb{C}$-정역의 소이데알 사슬은 극대(더 이상 늘릴 수 없음)이기만 하면 항상 길이가 $\\dim A$이다.",
+          "answer": "O",
+          "explanation": "참이다. 이것이 정확히 '사슬 조건(catenary)'의 정의다 — 극대인 소이데알 사슬은 어느 것을 고르든 길이가 $\\dim A$로 동일하다. 이는 일반적인 뇌터 환에서는 성립하지 않을 수 있는 특별한 성질이며, 아핀 $\\mathbb{C}$-정역(즉 대수다양체의 좌표환)이 갖는 좋은 성질 중 하나다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 5.12의 증명에서 노름/특성다항식 논증은 '$f$ 위에서 극소인 소이데알 $\\mathfrak q$에 대해 $\\mathfrak q\\cap B$가 $B$의 한 원소의 근기와 같다'는 것을 보이기 위한 것이었다. 이 사실이 왜 중요한지(즉 이것이 없다면 증명의 어느 부분이 막히는지) 설명하고, 이 논증이 '뇌터 정규화가 $B$를 다항식환으로, 즉 UFD로 만들어 준다'는 사실에 어떻게 결정적으로 의존하는지 논하라.",
+          "hint": "$\\mathfrak q\\cap B$가 $B$의 한 원소 $f_0$의 근기와 같다는 것을 알면, 주이데알 정리(정리 5.6)를 $B$ 위에서 적용할 길이 열린다는 점에 주목하라. 만약 $B$가 UFD가 아니었다면 예제 5.2의 논증이 어디서 실패하는지 생각해 보라.",
+          "answer": "이 논증이 결정적인 이유는, $A$ 자체가 아니라 $B=\\mathbb{C}[t_1,\\dots,t_d]$(뇌터 정규화가 준 다항식환) 안에서 극소소이데알의 높이를 계산할 수 있게 해주기 때문이다 — $B$는 UFD이자 이미 차원이 완전히 알려진 다항식환(따름정리 5.9에 의해 $\\dim B=d$)이므로, '$\\mathfrak q\\cap B=\\sqrt{(f_0)}$'라는 사실을 얻으면 $B/(r_0)$($r_0$은 $f_0$의 기약인수)의 초월차수를 $d-1$로 즉시 계산할 수 있다(다항식환에서 기약다항식 하나로 자른 몫환의 차원은 항상 하나 줄어든다는, $\\mathbb{C}[t_1,\\dots,t_d]$의 구조에서 나오는 사실). 이것이 없다면, $A/\\mathfrak q$의 차원을 직접 계산해야 하는데 $A$ 자체는 (다항식환이 아니라) 임의로 복잡한 아핀 정역이므로 그 차원을 직접 다룰 표준적인 방법이 없다 — 즉 노름 논증은 '복잡한 $A/\\mathfrak q$의 차원 계산'을 '단순한 $B/(r_0)$의 차원 계산(다항식환에서는 자명함)'으로 되돌리는 다리다. 이 다리를 놓을 수 있는 이유는 정확히 $B$가 UFD라는 사실 때문이다 — $\\alpha\\in A$의 특성다항식 계수들이 $B$ 위에서 정수라는 것까지는 일반적인 정수확장 이론(명제 5.1)만으로 나오지만, 그 계수들이 실제로 $B$ 안에(즉 분수가 아니라) 놓인다는 마지막 단계는 예제 5.2(UFD는 그 분수체 안에서 정수적으로 닫혀 있다)에 전적으로 의존한다. 만약 $B$가 UFD가 아니었다면(즉 뇌터 정규화가 임의의 정역 위의 유한확장만 주었다면) 이 마지막 단계가 무너져, $f_0=\\det f$가 $F(B)$ 안의 원소로만 남고 $B$ 자체의 원소라는 보장이 없어 주이데알 정리를 적용할 발판 자체가 사라진다 — 즉 뇌터 정규화가 굳이 '다항식환'(따라서 UFD) 위의 확장을 주는 형태로 진술된 것은, 바로 이 지점에서 예제 5.2를 쓸 수 있게 하기 위함이다."
+        }
+      ]
+    },
+    {
+      "section_title": "5.4 Dimension of algebraic varieties",
+      "step1_big_picture": {
+        "context": "이 절은 이 강의노트 전체의 정점이다 — 지금까지 쌓아온 모든 가환대수 도구(정수확장, 상승정리, 뇌터 정규화, 정리 5.12)를 동원해, 마침내 대수다양체의 차원을 그 함수체의 초월차수로 정의하고($\\dim X:=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)$), 이 정의가 좌표환의 크룰 차원(아핀의 경우), 곱의 차원의 가법성(따름정리 5.15), 초곡면 절단에 의한 차원 감소(따름정리 5.17) 등 우리의 모든 기하학적 직관과 정확히 들어맞음을 확인한다. 이 절의 마지막 부분은 국소 차원(local dimension)과 매장차원(embedding dimension)이라는 두 섬세한 불변량을 도입해, '한 점에서 본' 차원(국소환의 크룰 차원)과 '그 점에서의 접공간의 차원'(매장차원)을 구별한다 — 명제 5.19의 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$과, 그 등호가 깨지는 예제 5.20·5.21(원점에서의 특이점)은 '특이점(singularity)'이라는 개념의 첫 정밀한 대수적 정의를 준다.",
+        "hidden_intuition": "차원을 함수체의 초월차수로 정의하는 것의 아름다움은, 이것이 '독립적인 좌표가 몇 개 필요한가'라는 순수하게 기하학적인 직관을 그대로 옮긴 것이라는 데 있다 — $\\mathbb{C}(X)$ 안에 대수적으로 독립인 원소가 $d$개 있다는 것은 정확히 $X$ 위에서 서로 독립으로 움직일 수 있는 '좌표' $d$개가 있다는 뜻이다. 매장차원 $\\mathrm{embdim}_p X:=\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$은 코탄젠트 공간(cotangent space)의 차원으로, 직관적으로 '점 $p$ 근방에서 $X$를 매끄러운 다양체로 그리려면 몇 차원의 주변 공간이 필요한가'를 잰다. 명제 5.19의 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$이 항상 성립하는 이유는 나카야마 보조정리에서 나온다 — $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$의 기저를 극대아이디얼의 생성원으로 들어올리면(나카야마 보조정리에 의해 이것으로 충분히 $\\mathfrak m_{X,p}$ 전체를 생성함), 크룰 높이 정리가 곧바로 '그 생성원 개수 이하로 차원이 제한된다'는 결론을 준다. 매끄러운 점에서는 이 부등식이 등식이 되지만(접공간의 차원이 정확히 다양체의 차원과 같음), 예제 5.20·5.21의 특이점에서는 진짜 부등식($<$)이 성립한다 — 즉 '접공간이 실제 차원보다 커진다'는 것이 정확히 특이점의 대수적 특징이며, 이는 이후 미분기하학적 매끄러움(smoothness) 개념의 순수 대수적 전조다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "예제 5.21: 뾰족한 삼차곡선 $X=V(y^2-x^3)\\subseteq\\mathbb{A}^2$. $\\dim X=1$이지만 원점(특이점)에서는 $\\mathrm{embdim}_0X=2>\\dim_0X=1$이다.",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  2.25,
+                  -3.375
+                ],
+                [
+                  1.96,
+                  -2.744
+                ],
+                [
+                  1.69,
+                  -2.197
+                ],
+                [
+                  1.44,
+                  -1.728
+                ],
+                [
+                  1.21,
+                  -1.331
+                ],
+                [
+                  1.0,
+                  -1.0
+                ],
+                [
+                  0.81,
+                  -0.729
+                ],
+                [
+                  0.64,
+                  -0.512
+                ],
+                [
+                  0.49,
+                  -0.343
+                ],
+                [
+                  0.36,
+                  -0.216
+                ],
+                [
+                  0.25,
+                  -0.125
+                ],
+                [
+                  0.16,
+                  -0.064
+                ],
+                [
+                  0.09,
+                  -0.027
+                ],
+                [
+                  0.04,
+                  -0.008
+                ],
+                [
+                  0.01,
+                  -0.001
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.01,
+                  0.001
+                ],
+                [
+                  0.04,
+                  0.008
+                ],
+                [
+                  0.09,
+                  0.027
+                ],
+                [
+                  0.16,
+                  0.064
+                ],
+                [
+                  0.25,
+                  0.125
+                ],
+                [
+                  0.36,
+                  0.216
+                ],
+                [
+                  0.49,
+                  0.343
+                ],
+                [
+                  0.64,
+                  0.512
+                ],
+                [
+                  0.81,
+                  0.729
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.21,
+                  1.331
+                ],
+                [
+                  1.44,
+                  1.728
+                ],
+                [
+                  1.69,
+                  2.197
+                ],
+                [
+                  1.96,
+                  2.744
+                ],
+                [
+                  2.25,
+                  3.375
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.3,
+                -0.4
+              ],
+              "text": "$p=(0,0)$: $\\dim_pX=1<\\mathrm{embdim}_pX=2$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.3,
+                1.2
+              ],
+              "text": "매끄러운 점: $\\dim=\\mathrm{embdim}=1$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (준사영다양체의 차원, 여차원)",
+          "formal_statement": "$X$를 준사영다양체라 하자. $X$의 차원(dimension)은 $$\\dim X:=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)$$ 이다. $U\\subseteq X$가 공집합이 아닌 기약 열린부분집합이면 $\\mathbb{C}(U)=\\mathbb{C}(X)$이므로 $\\dim U=\\dim X$이다. $X=\\emptyset$일 때는 $\\dim\\emptyset:=-1$로 둔다. 기약 닫힌부분집합 $Y\\subseteq X$에 대해, $X$ 안에서 $Y$의 여차원(codimension)은 $$\\mathrm{codim}_XY:=\\dim X-\\dim Y$$ 이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.14 (아핀/사영다양체의 차원 공식)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$이 아핀다양체이고 소이데알 $\\mathfrak p\\subseteq A(X)$에 대해 $Y=V(\\mathfrak p)\\subseteq X$가 기약 닫힌부분집합이면 $$\\dim X=\\dim A(X)\\qquad\\text{와}\\qquad \\mathrm{codim}_XY=\\mathrm{height}\\,\\mathfrak p$$ 이다. $X\\subseteq\\mathbb{P}^N$이 사영다양체이고 소이데알 $\\mathfrak p\\subseteq S(X)$에 대해 $Y=V_+(\\mathfrak p)\\subseteq X$가 기약 닫힌부분집합이면 $$\\dim X=\\dim S(X)-1\\qquad\\text{와}\\qquad \\mathrm{codim}_XY=\\mathrm{height}\\,\\mathfrak p$$ 이다.",
+          "idea_behind_proof": "아핀의 경우는 정리 5.12를 $\\mathbb{C}(X)=F(A(X))$에 그대로 적용하면 끝난다. 사영의 경우 핵심 트릭은 동차좌표환 $S(X)$의 분수체가 함수체 $\\mathbb{C}(X)$ 위에 초월적인 일차형식 $\\ell$ 하나를 덧붙인 것과 같다는 관찰이다 — 이는 사영좌표환이 '아핀 좌표환보다 정확히 차원 하나가 많다'는 사실(스칼라배의 자유도 하나)의 정확한 대수적 반영이다.",
+          "proof_steps": [
+            "[아핀] $\\mathbb{C}(X)=F(A(X))$(정리 2.12)이므로 정리 5.12에 의해 $\\dim X=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)=\\dim A(X)$이다. $A(Y)=A(X)/\\mathfrak p$이므로 정리 5.12는 또한 $\\mathrm{codim}_XY=\\dim A(X)-\\dim(A(X)/\\mathfrak p)=\\mathrm{height}\\,\\mathfrak p$를 준다.",
+            "[사영] $0\\ne\\ell\\in S(X)$을 일차형식이라 하자. $F(S(X))=\\mathbb{C}(X)(\\ell)$이고 $\\ell$은 $\\mathbb{C}(X)$ 위에서 초월적임에 유의하라.",
+            "정리 5.12에 의해 $\\dim S(X)=\\mathrm{trdeg}_{\\mathbb{C}}F(S(X))=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)+1=\\dim X+1$이다. 나머지 주장(여차원 공식)은 아핀의 경우와 같은 논증으로 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.15 (곱의 차원은 차원의 합이다)",
+          "formal_statement": "$X,Y$가 준사영다양체이면 $$\\dim(X\\times Y)=\\dim X+\\dim Y$$ 이다.",
+          "idea_behind_proof": "$X,Y$가 아핀인 경우로 축소한 뒤, 뇌터 정규화를 각각 적용해 $A(X)$, $A(Y)$를 다항식환 $P,Q$ 위의 유한확장으로 만들고, 그 텐서곱 $A(X)\\otimes A(Y)$가 $P\\otimes Q$ 위에서 유한하다는 사실(참고 4.17)과 상승정리를 결합해 곱 다항식환의 차원(변수 개수의 합)으로 되돌린다.",
+          "proof_steps": [
+            "정리 4.18에 의해 $X\\times Y$는 준사영다양체이다. $X,Y$가 아핀이라고 가정할 수 있고(정리 4.16에 의해 $X\\times Y$도 아핀이 됨), 뇌터 정규화에 의해 $A(X)$가 유한한 대수적으로 독립인 $u_1,\\dots,u_m\\in A(X)$와 $A(Y)$가 유한한 $v_1,\\dots,v_n\\in A(Y)$를 얻는다.",
+            "상승정리에 의해 $\\dim X=\\dim A(X)=m$이고 $\\dim Y=\\dim A(Y)=n$이다.",
+            "참고 4.17에 의해 $A(X\\times Y)\\cong A(X)\\otimes_{\\mathbb{C}}A(Y)$이며, 이는 $P\\otimes_{\\mathbb{C}}Q\\cong\\mathbb{C}[u_1,\\dots,u_m,v_1,\\dots,v_n]$ 위에서 유한하다(단 $P:=\\mathbb{C}[u_1,\\dots,u_m]$, $Q:=\\mathbb{C}[v_1,\\dots,v_n]$).",
+            "상승정리와 따름정리 5.9에 의해 $$\\dim(X\\times Y)=\\dim A(X\\times Y)=\\dim\\mathbb{C}[u_1,\\dots,u_m,v_1,\\dots,v_n]=m+n.\\qquad\\blacksquare$$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.16 (기본 차원 계산)",
+          "formal_statement": "$\\dim\\mathbb{A}^n=n$이고 $\\dim\\mathbb{P}^n=n$이다. 따라서 $\\dim\\nu_d(\\mathbb{P}^n)=n$이고 $\\dim\\Sigma_{m,n}=m+n$이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.17 (방정식 하나당 차원 감소, 교집합의 차원 하한)",
+          "formal_statement": "$X,Y\\subseteq\\mathbb{A}^n$을 아핀다양체이거나 $X,Y\\subseteq\\mathbb{P}^N$을 사영다양체라 하자. (1) $f_1,\\dots,f_c\\in A(X)$ 또는 $S(X)$에 대해 $Z$가 $V(f_1,\\dots,f_c)$의 기약성분이면 $\\dim Z\\ge\\dim X-c$이다. (2) $0\\ne f\\in A(X)$ 또는 $S(X)$에 대해 $Z$가 $V(f)$의 기약성분이면 $\\dim Z=\\dim X-1$이다. (3) $Z$가 $X\\cap Y$의 기약성분이면 $\\dim Z\\ge\\dim X+\\dim Y-n$이다.",
+          "idea_behind_proof": "(1)은 크룰 높이 정리를 정리 5.12와 결합하는 것뿐이다. (2)는 (1)의 특수한 경우($c=1$)에서, $f\\ne 0$이므로 $(0)\\subsetneq\\mathfrak p$가 강제되어 부등식이 등식으로 좁혀진다는 관찰이다. (3)은 교집합 $X\\cap Y$를 곱 $X\\times Y$ 안의 대각선형 절단($x_i=y_i$라는 $n$개의 방정식)으로 다시 쓰는 트릭으로, (1)과 곱의 차원 공식(따름정리 5.15)을 결합한다.",
+          "proof_steps": [
+            "아핀인 경우만 다루면 충분하다. (1): $V(f_1,\\dots,f_c)$의 기약성분 $Z$는 $f_1,\\dots,f_c$ 위에서 극소인 소이데알 $\\mathfrak p\\subseteq A(X)$에 대응한다. 정리 5.12와 크룰 높이 정리에 의해 $$\\dim Z=\\dim(A(X)/\\mathfrak p)=\\dim A(X)-\\mathrm{height}\\,\\mathfrak p\\ge\\dim X-c.$$",
+            "(2): $c=1$, $f_1\\ne 0$이라 하자. $(0)\\subsetneq\\mathfrak p$이므로 $\\mathrm{height}\\,\\mathfrak p\\ge 1$이다. 따라서 (1)의 부등식에서 등호가 성립하고, 이는 (2)를 증명한다.",
+            "(3): $X\\times Y\\subseteq\\mathbb{A}^n\\times\\mathbb{A}^n=\\mathbb{A}^{2n}$을 생각하자. 첫 번째 인자의 좌표를 $x_1,\\dots,x_n$, 두 번째 인자의 좌표를 $y_1,\\dots,y_n$이라 하면 $$X\\cap Y\\cong(X\\times Y)\\cap V(x_1-y_1,\\dots,x_n-y_n)$$ 이다.",
+            "(1)과 따름정리 5.15에 의해 $\\dim Z\\ge\\dim(X\\times Y)-n=\\dim X+\\dim Y-n$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (일반 대수적집합의 차원)",
+          "formal_statement": "$X$가 공집합이 아닌 대수적집합이면 $X=X_1\\cup\\cdots\\cup X_r$($X_1,\\dots,X_r$은 $X$의 기약성분들)로 쓸 수 있다. $X$의 차원은 $$\\dim X:=\\max_{1\\le i\\le r}\\dim X_i$$ 이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.18 (차원 = 기약 닫힌부분집합 사슬 길이의 상한; 극대사슬은 모두 같은 길이)",
+          "formal_statement": "$X$를 대수적집합이라 하자. $\\dim X$는 $X$의 기약 닫힌부분집합들의 강한 사슬 $Y_0\\subsetneq Y_1\\subsetneq\\cdots\\subsetneq Y_r$의 길이 $r$의 상한이다. $X$가 준사영다양체이면, $X$의 기약 닫힌부분집합들의 모든 극대인 강한 사슬은 길이가 $\\dim X$로 같다.",
+          "idea_behind_proof": "핵심은 아핀 열린부분집합 $Y$를 잡으면 $A(Y)$의 소이데알 사슬과 $Y$(따라서 그 폐포를 통해 $X$)의 기약 닫힌부분집합 사슬이 정확히 같은 길이로 대응한다는 것이다. 이 대응을 최대차원의 기약성분에서 시작해 상한을 얻고, 반대로 임의의 극대사슬의 가장 작은 원소(한 점)를 포함하는 아핀 열린집합으로 되돌려 상한이 상계이기도 함을 보인다.",
+          "proof_steps": [
+            "최대 차원을 갖는 $X$의 기약성분의 공집합이 아닌 아핀 열린부분집합 $Y$를 고르면 $\\dim X=\\dim Y$이다. $A(Y)$의 소이데알 사슬은 $Y$의 같은 길이의 기약 닫힌부분집합 사슬에 대응한다.",
+            "이 부분집합들의 $X$ 안에서의 폐포를 취하면, $X$의 같은 길이의 기약 닫힌부분집합 사슬을 얻는다. 따라서 $X$의 기약 닫힌부분집합 사슬의 최대 길이는 적어도 $\\dim X$이다.",
+            "역으로 $X$의 기약 닫힌부분집합들의 극대인 사슬을 생각하자. 그러한 사슬의 가장 작은 원소는 반드시 한 점이어야 한다. 이 점을 포함하는 $X$의 공집합이 아닌 아핀 열린부분집합 $Y$를 고르자.",
+            "위 논증을 반대 방향으로 적용하면, 그 사슬의 길이가 많아야 $\\dim X$임을 알 수 있다. 두 번째 주장은 이제 따름정리 5.13에서 따라온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (국소 차원, 점에서의 국소환, 매장차원)",
+          "formal_statement": "$X$를 대수적집합, $p\\in X$라 하자. $p$에서의 $X$의 국소 차원(local dimension)은 $$\\dim_pX:=\\max_{1\\le i\\le r}\\dim X_i$$ 이며, 여기서 $X_1,\\dots,X_r$은 $p$를 포함하는 $X$의 기약성분들이다. $X$가 준사영다양체이면 $\\dim X=\\dim_pX=\\dim O_{X,p}$이다. 일반적으로, $p$를 포함하는 $X$의 임의의 아핀 열린부분집합 $U$에 대해 $O_{X,p}:=A(U)_{\\mathfrak m_p}$를 극대아이디얼 $\\mathfrak m_{X,p}$를 갖는 국소환으로 정의한다(단 $\\mathfrak m_p\\subseteq A(U)$는 $p$에 대응하는 극대아이디얼). 이 정의는 아핀 열린부분집합 $U$의 선택에 무관하다 — $U,V$가 $p$를 포함하는 두 아핀 열린부분집합이면, $p$를 포함하는 임의의 아핀 열린부분집합 $W\\subseteq U\\cap V$에서 $A(U)_{\\mathfrak m_p}\\cong A(W)_{\\mathfrak m_p}\\cong A(V)_{\\mathfrak m_p}$이기 때문이다. $O_{X,p}$의 원소들은 $p$에서의 정칙함수의 싹으로 해석할 수 있다. $p$에서 $X$의 매장차원(embedding dimension)은 $$\\mathrm{embdim}_pX:=\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$$ 이다. $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$은 $O_{X,p}/\\mathfrak m_{X,p}\\cong\\mathbb{C}$ 위의 벡터공간임에 유의하라."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 5.19 ($\\dim_pX=\\dim O_{X,p}\\le\\mathrm{embdim}_pX$)",
+          "formal_statement": "대수적집합 $X$와 점 $p\\in X$에 대해 $$\\dim_pX=\\dim O_{X,p}\\le\\mathrm{embdim}_pX$$ 이다.",
+          "idea_behind_proof": "첫 등식은 $\\mathfrak m_p$에 포함되는 극소소이데알들이 정확히 $p$를 지나는 기약성분들에 대응한다는 관찰에서, 국소화가 사슬의 길이를 보존한다는 사실로 나온다. 부등식은 나카야마 보조정리로 매장차원만큼의 원소가 $\\mathfrak m_{X,p}$ 전체를 생성함을 보인 뒤, 크룰 높이 정리를 그 생성원 개수에 적용하는 것이다.",
+          "proof_steps": [
+            "$p$를 포함하는 아핀 열린부분집합 $U$를 고르자. $A(U)$의 극소소이데알 $\\mathfrak p$는 좌표환이 $A(U)/\\mathfrak p$인 $U$의 기약성분에 대응한다. $\\mathfrak m_p$에서 국소화하면 정확히 $\\mathfrak m_p$에 포함되는 $\\mathfrak p$들만 살아남고, 이들은 $p$를 포함하는 기약성분에 대응한다.",
+            "$O_{X,p}=A(U)_{\\mathfrak m_p}$의 극대인 소이데알 사슬은, $\\mathfrak m_p$에 포함되는 극소소이데알에서 시작해 $\\mathfrak m_p$에서 끝나는 $A(U)$의 극대인 소이데알 사슬을 국소화해서 얻는다.",
+            "$\\mathfrak p_1,\\dots,\\mathfrak p_r\\subseteq A(U)$를 $\\mathfrak m_p$에 포함되는 극소소이데알들이라 하고 $X_1,\\dots,X_r\\subseteq X$를 대응하는 기약성분이라 하면 $$\\dim O_{X,p}=\\max_{1\\le i\\le r}\\dim(A(U)/\\mathfrak p_i)=\\max_{1\\le i\\le r}\\dim X_i=\\dim_pX.$$ 이것으로 첫 등식이 증명된다.",
+            "$c:=\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$이라 하자. $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$의 기저를 이루는 잉여류를 갖는 $u_1,\\dots,u_c\\in\\mathfrak m_{X,p}$를 고를 수 있다. 그러면 $\\mathfrak m_{X,p}=(u_1,\\dots,u_c)+\\mathfrak m_{X,p}^2$이다.",
+            "나카야마 보조정리에 의해 $\\mathfrak m_{X,p}=(u_1,\\dots,u_c)$이다. 크룰 높이 정리는 $\\dim O_{X,p}=\\mathrm{height}\\,\\mathfrak m_{X,p}\\le c$를 준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.20 (두 기약성분에서 국소 차원과 매장차원이 다르게 나타나는 예)",
+          "formal_statement": "$X:=V(xz,yz)\\subseteq\\mathbb{A}^3$이라 하자. $X=V(x,y)\\cup V(z)$이고 $\\dim V(x,y)=1$, $\\dim V(z)=2$이므로 $\\dim X=2$이다. $p:=(0,0,0)\\in X$에서는 $\\dim_pX=2$이고 $\\mathrm{embdim}_pX=3$이다. $q:=(1,0,0)\\in X$에서는 $\\dim_qX=2$이고 $\\mathrm{embdim}_qX=2$."
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.21 (뾰족한 삼차곡선의 특이점에서 매장차원)",
+          "formal_statement": "$X:=V(y^2-x^3)\\subseteq\\mathbb{A}^2$이라 하자. $X$는 기약이고 $\\dim X=1$이다. $p:=(0,0)\\in X$에서는 $\\dim_pX=1$이고 $\\mathrm{embdim}_pX=2$이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예제 5.21에서 $X=V(y^2-x^3)$의 원점 $p=(0,0)$에서 $\\mathrm{embdim}_pX=2$임을, $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$의 차원을 직접 계산해 확인하라(직관적으로: $I(X)=(y^2-x^3)$의 원점에서의 '일차 근사'가 무엇인지 생각하라).",
+          "hint": "$O_{X,p}\\cong A(X)_{\\mathfrak m_p}$이고 $A(X)=\\mathbb{C}[x,y]/(y^2-x^3)$이다. $\\mathfrak m_{X,p}$는 $x,y$로 생성되는데, $y^2-x^3$의 최저차 동차성분(즉 접원뿔, tangent cone을 결정하는 부분)이 무엇인지 확인하라.",
+          "solution": "$A(X)=\\mathbb{C}[x,y]/(y^2-x^3)$이고 $\\mathfrak m_{X,p}=(x,y)/(y^2-x^3)$이다. $y^2-x^3$의 최저차 항은 $2$차항인 $y^2$이 아니라... 실제로 $y^2$은 차수 $2$, $x^3$은 차수 $3$이므로 최저차 동차성분은 $y^2$ 하나뿐이다(즉 $y^2-x^3$의 '$2$차 이하 부분'은 $y^2$). 하지만 이는 관계식 자체가 이차식을 포함하므로, $\\mathfrak m_{X,p}^2$를 법으로 한 $\\mathfrak m_{X,p}$에서 $y^2\\equiv x^3\\equiv 0\\pmod{\\mathfrak m_{X,p}^2}$가 되어 $x,y$의 잉여류 사이에 새로운 이차관계식이 생기지 않는다 — 즉 $x,y$의 잉여류가 $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$에서 선형독립으로 남아 $\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2=2$이다(만약 방정식이 $y-x^2$처럼 일차항을 포함했다면 $y\\equiv x^2\\equiv 0\\pmod{\\mathfrak m^2}$가 되어 실제로 차원이 $1$로 줄었을 것 — 이것이 매끄러운 점의 경우다). 따라서 $\\mathrm{embdim}_pX=2$이며 이는 $\\dim_pX=1$보다 크다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 5.20에서 $q=(1,0,0)\\in X=V(xz,yz)$에서 $\\dim_qX=2$이고 $\\mathrm{embdim}_qX=2$임을(즉 $q$는 매끄러운 점임을) 확인하라. $q$가 어느 기약성분에 속하는지부터 밝혀라.",
+          "hint": "$q=(1,0,0)$이 $V(x,y)$(직선)와 $V(z)$(평면) 중 어디에 속하는지 좌표를 대입해 확인하고, 그 점 근방에서 $X$가 실제로 몇 개의 기약성분과 만나는지 따져 보라.",
+          "solution": "$q=(1,0,0)$은 $x=1\\ne 0$이므로 $V(x,y)$(즉 $z$축)에는 속하지 않고, $z=0$이므로 $V(z)$($xy$평면)에는 속한다. 즉 $q$는 오직 하나의 기약성분 $V(z)$에만 속한다. 따라서 $\\dim_qX=\\dim V(z)=2$이다. $q$ 근방(예를 들어 $x\\ne 0$인 열린집합)에서는 $X=V(xz,yz)$가 실제로 $V(z)$ 하나로 국한된다(그 근방에서 $x\\ne0$이므로 $xz=0\\Rightarrow z=0$이고 $yz=0$은 자동으로 만족됨). $V(z)\\subseteq\\mathbb{A}^3$은 그 자체로 매끄러운 초평면(아핀공간과 동형)이므로 그 접공간의 차원은 $2$이며, 따라서 $\\mathrm{embdim}_qX=2=\\dim_qX$ — 즉 $q$는 매끄러운 점이다."
+        },
+        {
+          "type": "ox",
+          "question": "따름정리 5.17(2)에 의해, $0$이 아닌 임의의 $f\\in A(X)$에 대해 $V(f)$의 모든 기약성분은 항상 $\\dim X-1$의 차원을 갖는다.",
+          "answer": "O",
+          "explanation": "참이다. 따름정리 5.17(2)의 내용 그대로다 — $f\\ne 0$이기만 하면(단위원일 필요는 없다, 단위원이면 $V(f)=\\emptyset$이 되어 자명하게 처리됨) 그 초곡면 절단의 모든 기약성분은 정확히 차원이 하나 줄어든다. 이는 (1)의 부등식이 $c=1$일 때 $\\mathrm{height}\\,\\mathfrak p\\ge 1$이 강제되어 등식으로 좁혀지기 때문이다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 5.19에 의해, 대수적집합 $X$와 점 $p\\in X$에서 $\\dim_pX=\\mathrm{embdim}_pX$가 항상 성립한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 5.19가 실제로 보장하는 것은 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$뿐이며, 등호가 항상 성립하는 것은 아니다. 예제 5.20의 원점($\\dim_pX=2<\\mathrm{embdim}_pX=3$)과 예제 5.21의 원점($\\dim_pX=1<\\mathrm{embdim}_pX=2$)이 정확히 진짜 부등식이 성립하는 경우이며, 이런 점들이 바로 특이점(singular point)이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 5.20과 예제 5.21은 모두 '원점에서 $\\mathrm{embdim}_p X>\\dim_pX$'라는 같은 현상을 보이지만, 그 기하학적 원인은 서로 다르다. 두 예제에서 원점이 특이점이 되는 이유를 각각 설명하고, 이 둘을 구별하는 것이 왜 중요한지(즉 '특이점'이라는 하나의 딱지 아래 실제로는 몇 가지 서로 다른 현상이 있는지) 논하라.",
+          "hint": "예제 5.20의 원점은 서로 다른 기약성분(차원이 다른 $V(x,y)$와 $V(z)$)이 만나는 점이라는 사실에 주목하고, 예제 5.21의 원점은 단 하나의 기약(매끄러운 다양체가 아닌) 곡선 위의 점이라는 점에서 어떻게 다른지 비교하라.",
+          "answer": "예제 5.20의 원점이 특이한 이유는 순전히 '두 개의 서로 다른 기약성분이 만난다'는 사실에서 온다 — $X=V(x,y)\\cup V(z)$는 원점에서 직선 $V(x,y)$와 평면 $V(z)$가 교차하므로, 그 국소환 $O_{X,p}$는 두 개의 극소소이데알을 가지며(즉 $A(U)_{\\mathfrak m_p}$가 정역이 아님), 접공간은 이 두 성분 각각의 접공간을 모두 담아야 하므로 $3$차원(전체 주변 공간 $\\mathbb{A}^3$ 전체)이 되어버린다. 반면 예제 5.21의 원점은 $X=V(y^2-x^3)$ 자체가 (단 하나의) 기약다양체이고 원점 역시 그 유일한 성분 위에 있음에도 불구하고, 방정식 $y^2-x^3$이 원점에서 '이차항으로 시작하지 않는' 특별한 구조(뾰족점, cusp) 때문에 접공간이 커진다 — 이는 성분들의 교차가 아니라 하나의 기약다양체 자체의 '뾰족함(비매끄러움)'에서 오는 특이성이다. 이 둘을 구별하는 것이 중요한 이유는, 대수기하학에서 '특이점을 해소한다(resolve)'는 것이 이 두 경우에 근본적으로 다른 기하학적 조작을 요구하기 때문이다 — 예제 5.20 같은 '성분들의 교차에 의한 특이점'은 (예를 들어) 각 성분을 분리해서 보면 그 자체로는 매끄러운 반면, 예제 5.21 같은 '뾰족점에 의한 특이점'은 아무리 국소적으로 들여다봐도(어떤 열린집합을 잡아도) 매끄러운 다양체로 볼 수 없다 — 실제로 이는 예제 2.9/2.18에서 이미 만난, 뾰족한 삼차곡선이 $\\mathbb{A}^1$과 전단사이지만 동형이 아니었던 바로 그 현상의 국소적 원인이다. 즉 '특이점'이라는 용어가 가리키는 현상은 (적어도) '기약성분들의 교차로 인한 특이성'과 '기약다양체 자체의 매끄럽지 않음'이라는 서로 다른 두 종류를 아우르며, 명제 5.19의 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$는 이 둘 모두를 하나의 대수적 기준(접공간이 실제 차원보다 큰가)으로 통합해서 포착한다."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "chapter_info": {
+    "title": "5. Dimension Theory",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "대수다양체의 '차원(dimension)'이라는 가장 기본적인 기하학적 불변량을 순수하게 대수적으로(환의 크룰 차원으로) 정의하고 계산하는 도구를 세운다. 이를 위해 정수확장(integral extension)이라는 대수적 개념 — 다항식환을 유한생성 가군으로 다루는 정수성(integrality)의 언어 — 을 도입하고, 나카야마 보조정리와 주이데알 정리(Principal Ideal Theorem)라는 가환대수의 핵심 도구를 거쳐, 최종적으로 뇌터 정규화(Noether normalization)를 이용해 대수다양체의 차원을 그 좌표환의 크룰 차원으로, 나아가 초월차수(transcendence degree)로 완전히 특징짓는다. 이 장은 순수 가환대수(1~2절: 정수확장, 주이데알 정리)와 그것을 기하학에 적용하는 부분(3~4절: 뇌터 정규화, 차원)으로 나뉘며, 이 강의노트의 이론적 정점에 해당한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.3 Noether normalization",
+      "step1_big_picture": {
+        "context": "이 절은 지금까지 쌓아온 모든 도구(정수확장, 상승정리, 주이데알 정리, 크룰 높이 정리)를 동원해 이 장의 핵심 정리인 뇌터 정규화(정리 5.11)와 그 직접적인 귀결인 정리 5.12에 도달한다. 뇌터 정규화는 '임의의 아핀 $\\mathbb{C}$-정역 $A$ 안에는 대수적으로 독립인 원소 $t_1,\\dots,t_d\\in A$가 있어, $A$가 다항식환 $\\mathbb{C}[t_1,\\dots,t_d]$ 위의 유한 정수확장이 된다'는 놀랍도록 강력한 구조 정리다 — 이는 임의로 복잡해 보이는 좌표환도 '숨겨진 다항식환'을 하나 포함하고 있으며, 그 위에서 유한하게 지배된다는 것을 말한다. 이 정리가 곧바로 정리 5.12로 이어진다: $\\dim A=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$, 즉 크룰 차원이라는 순수 대수적 불변량이 함수체의 초월차수라는 훨씬 다루기 쉬운 불변량과 정확히 일치한다는 것이다. 따름정리 5.13(사슬 조건, catenary)은 이 모든 것의 자연스러운 마무리로, 모든 극대 소이데알 사슬의 길이가 $\\dim A$로 항상 같다는 것을 보인다 — 즉 차원이라는 개념에 '어느 사슬을 고르든 상관없다'는 안정성을 부여한다.",
+        "hidden_intuition": "뇌터 정규화의 증명 전략은 귀납의 정수(精髓)를 보여준다 — $n$개의 생성원을 가진 대수 $A=\\mathbb{C}[x_1,\\dots,x_n]/P$에서 시작해, $P$의 0이 아닌 원소 $f$를 하나 찾아 좌표를 적당히 바꿔 $f$가 $x_1$에 대해 모닉이 되게 만들면, $x_1$이 나머지 변수들의 부분대수 $B=\\mathbb{C}[x_2,\\dots,x_n]$ 위에서 정수가 되어 $A=B[x_1]$이 $B$ 위에서 유한하게 된다 — 즉 변수 하나를 '소거'하는 셈이다. 이를 반복하면 결국 변수의 개수가 하나씩 줄어들며 $n\\to n-1\\to\\cdots$로 귀납이 진행되고, 최종적으로 대수적으로 독립인 '진짜 좌표' $t_1,\\dots,t_d$만 남는다. 정리 5.12의 증명에서 가장 심오한 부분은 '노름(norm)/특성다항식' 논증이다 — 원소 $\\alpha\\in A$가 $K=F(B)$ 위의 벡터공간 $L=F(A)$에 곱셈으로 작용하는 선형작용소로 볼 때, 그 특성다항식의 계수들이 (가우스 보조정리와 정수원소들의 합·곱이 다시 정수라는 명제 5.1(3) 덕분에) 실제로 $B$ 안에 놓인다는 것을 보이고, 이로부터 '$q\\cap B$가 $B$의 한 원소 $f_0$의 근기와 같다'는 결정적 사실을 끌어낸다 — 이는 정확히 주이데알 정리를 적용할 수 있는 형태로 문제를 되돌리는 다리 역할을 한다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (아핀 $\\mathbb{C}$-정역)",
+          "formal_statement": "아핀 $\\mathbb{C}$-정역(affine $\\mathbb{C}$-domain)이란 정역인 유한생성 $\\mathbb{C}$-대수를 말한다. $A$가 아핀 $\\mathbb{C}$-정역인 것은 $A$가 어떤 아핀다양체의 좌표환인 것과 동치이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.11 (뇌터 정규화, Noether Normalization)",
+          "formal_statement": "$A$를 아핀 $\\mathbb{C}$-정역이라 하자. 그러면 대수적으로 독립인 원소 $t_1,\\dots,t_d\\in A$가 존재하여 $d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$이고 $\\mathbb{C}[t_1,\\dots,t_d]\\subseteq A$는 유한 정수확장이다.",
+          "idea_behind_proof": "$A$의 생성원 개수 $n$에 대한 귀납법이다. $A=\\mathbb{C}[x_1,\\dots,x_n]/P$로 쓰고, $P\\ne 0$이면 그 안의 $0$이 아닌 원소 $f$를 좌표변환으로 $x_1$에 대해 모닉이 되도록 만들어 $x_1$을 나머지 변수들의 부분대수 위에서 정수로 만든다 — 이렇게 변수 하나를 줄인 뒤 귀납가정을 적용하고, 명제 5.1(2)의 추이성으로 전체 확장이 유한임을 얻는다.",
+          "proof_steps": [
+            "$A$가 $\\mathbb{C}$-대수로서 $n$개의 원소로 생성된다고 하자. $A=\\mathbb{C}[x_1,\\dots,x_n]/P$($P\\subseteq\\mathbb{C}[x_1,\\dots,x_n]$는 소이데알)로 쓸 수 있다. $n$에 대한 귀납법으로 증명한다.",
+            "$P=(0)$이면 주장은 자명하다(특히 $n=0$인 경우가 이렇게 처리된다).",
+            "$n\\ge 1$이고 $0\\ne f\\in P$가 있다고 하자. 보조정리 1.31에 의해, 일차 좌표변환 후 $f$가 $x_1$에 대해 모닉이라고 가정할 수 있다.",
+            "그러면 $x_1\\in A$는 부분대수 $B:=\\mathbb{C}[x_2,\\dots,x_n]\\subseteq A$ 위에서 정수이므로, $A=B[x_1]$은 $B$ 위에서 유한하다.",
+            "$B$는 아핀 $\\mathbb{C}$-정역이다. 귀납가정에 의해 대수적으로 독립인 $t_1,\\dots,t_d\\in B$가 존재해 $d=\\mathrm{trdeg}_{\\mathbb{C}}F(B)$이고 $B$는 $\\mathbb{C}[t_1,\\dots,t_d]$ 위에서 유한하다.",
+            "명제 5.1에 의해 $A$는 $\\mathbb{C}[t_1,\\dots,t_d]$ 위에서 유한하다(추이성). $F(A)$는 $\\mathbb{C}(t_1,\\dots,t_d)$ 위에서 대수적이므로 $d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.12 ($\\dim A=\\mathrm{trdeg}_{\\mathbb{C}}F(A)=\\mathrm{height}\\,\\mathfrak p+\\dim(A/\\mathfrak p)$)",
+          "formal_statement": "$A$를 아핀 $\\mathbb{C}$-정역, $\\mathfrak p\\subseteq A$를 소이데알이라 하자. 그러면 $$\\dim A=\\mathrm{trdeg}_{\\mathbb{C}}F(A)=\\mathrm{height}\\,\\mathfrak p+\\dim(A/\\mathfrak p)$$ 이다.",
+          "idea_behind_proof": "첫 등식은 뇌터 정규화와 상승정리를 결합해 $\\dim A=\\dim\\mathbb{C}[t_1,\\dots,t_d]=d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$로 바로 얻는다. 둘째 등식의 핵심 보조결과는 '$0$이 아닌 비단위원 $f$ 위에서 극소인 소이데알 $\\mathfrak q$에 대해 $\\dim(A/\\mathfrak q)=d-1$'이라는 사실이며, 이는 뇌터 정규화된 $B:=\\mathbb{C}[t_1,\\dots,t_d]$ 위에서 원소의 특성다항식(노름)을 이용해 $\\mathfrak q\\cap B$가 $B$의 한 기약원소의 근기임을 보이는 정교한 논증에서 나온다. 이 보조결과를 얻은 뒤에는, $\\mathfrak p$에 이르는 소이데알 사슬을 매 단계 차원을 정확히 하나씩 줄이며 직접 구성해 등식을 완성한다.",
+          "proof_steps": [
+            "$d:=\\mathrm{trdeg}_{\\mathbb{C}}F(A)$라 하자. 뇌터 정규화에 의해 $A$가 정수인 대수적으로 독립인 $t_1,\\dots,t_d\\in A$가 존재한다. 상승정리와 따름정리 5.9에 의해 $\\dim A=\\dim\\mathbb{C}[t_1,\\dots,t_d]=d$이다. 이것으로 첫 등식이 증명된다.",
+            "[핵심 보조결과] $0\\ne f\\in A$가 단위원이 아니고 $\\mathfrak q\\subseteq A$가 $f$ 위에서 극소인 소이데알이면 $\\dim(A/\\mathfrak q)=d-1$임을 보인다. 따름정리 1.46에 의해 $\\sqrt{(f)}=\\mathfrak q\\cap\\mathfrak q_2\\cap\\cdots\\cap\\mathfrak q_r$($\\mathfrak q,\\mathfrak q_2,\\dots,\\mathfrak q_r$은 $f$ 위에서 극소인 소이데알들)이다.",
+            "$r\\ge 2$이면 $h_i\\in\\mathfrak q_i\\setminus\\mathfrak q$($2\\le i\\le r$)를 골라 $h:=h_2\\cdots h_r$로 두면 $\\sqrt{(f)}A_h=\\mathfrak qA_h$이다. $A_h\\cong A[T]/(hT-1)$도 아핀 $\\mathbb{C}$-정역이고 $F(A_h)\\cong F(A)$이므로 $\\dim A_h=\\dim A=d$이다. $A$를 $A_h$로 바꾸어 $\\sqrt{(f)}=\\mathfrak q$라 가정할 수 있다.",
+            "뇌터 정규화에 의해 $A$가 유한한 $B:=\\mathbb{C}[t_1,\\dots,t_d]$가 존재한다. $K:=F(B)$, $L:=F(A)$로 두면 $L$은 $K$ 위에서 유한하다. $\\alpha\\in A$에 대해 $\\alpha$를 곱하는 것은 $K$-벡터공간 $L$ 위의 선형작용소를 정의한다.",
+            "$\\alpha$가 $B$ 위에서 정수이므로 가우스 보조정리에 의해 $\\alpha$의 $K$ 위 최소다항식은 $B$ 계수를 갖는다. $\\alpha$의 대수적 켤레들도 모두 $B$ 위에서 정수이므로, 명제 5.1에 의해 $\\alpha$의 특성다항식의 계수들도 $B$ 위에서 정수이다.",
+            "$B$가 UFD이므로 예제 5.2에 의해 이 계수들은 실제로 $B$ 안에 놓인다. 특히 $\\det\\alpha\\in B$이고, $\\alpha=f$로 두면 $f\\mid\\det f$가 $A$ 안에서 성립한다. $f_0:=\\det f$라 하면 $\\sqrt{(f_0)}\\subseteq\\mathfrak q\\cap B$임을 확인할 수 있다.",
+            "역으로 $g\\in\\mathfrak q\\cap B$이면 $g^m=af$인 $m\\ge 1$, $a\\in A$가 있다. $g^{[L:K]}=\\det g$이므로 $g^{m[L:K]}=\\det(g^m)=\\det a\\det f=f_0\\det a$를 얻어 $g\\in\\sqrt{(f_0)}$이다. 따라서 $\\sqrt{(f_0)}=\\mathfrak q\\cap B$이며, 이는 $B$의 소이데알이다.",
+            "$r_0$을 $f_0$의 기약인수라 하면 $\\mathrm{trdeg}_{\\mathbb{C}}F(B/(r_0))=d-1$이다. 단사 환 준동형 $B/(r_0)\\hookrightarrow A/\\mathfrak q$가 있고, $A/\\mathfrak q$는 그 상 위에서 유한(따라서 정수)이므로 상승정리에 의해 $$\\dim(A/\\mathfrak q)=\\mathrm{trdeg}_{\\mathbb{C}}F(A/\\mathfrak q)=\\mathrm{trdeg}_{\\mathbb{C}}F(B/(r_0))=d-1.$$ 이것으로 핵심 보조결과가 증명된다.",
+            "[전체 증명 완성] $d=\\dim A\\ge\\mathrm{height}\\,\\mathfrak p+\\dim(A/\\mathfrak p)$는 명백하다. $e:=\\dim(A/\\mathfrak p)$로 두고 $\\mathrm{height}\\,\\mathfrak p=d-e$임을 보이면 된다. $\\mathrm{height}\\,\\mathfrak p\\le d-e$는 이미 알고 있으므로, 소이데알 사슬 $(0)=\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_{d-e}=\\mathfrak p$을 구성하면 충분하다.",
+            "$\\dim(A/\\mathfrak p_0)=d$임에 유의하고, $\\dim(A/\\mathfrak p_i)=d-i$이고 $\\mathfrak p_0\\subseteq\\cdots\\subseteq\\mathfrak p_i\\subseteq\\mathfrak p$인 소이데알 $\\mathfrak p_i$가 구성되었다고 하자. $\\mathfrak p_i=\\mathfrak p$이면 $d-i=\\dim(A/\\mathfrak p)=e$이므로 $i=d-e$이다.",
+            "$\\mathfrak p_i\\ne\\mathfrak p$라 하자. $\\overline{f_i}\\in\\mathfrak p/\\mathfrak p_i\\subseteq A/\\mathfrak p_i$를 골라, $\\mathfrak p_{i+1}/\\mathfrak p_i$가 $A/\\mathfrak p_i$에서 $\\overline{f_i}$ 위에서 극소이고 $\\mathfrak p_{i+1}\\subseteq\\mathfrak p$가 되도록 $\\mathfrak p_{i+1}$을 고를 수 있다. 핵심 보조결과에 의해 $\\dim(A/\\mathfrak p_{i+1})=\\dim(A/\\mathfrak p_i)-1=d-i-1$이다.",
+            "이를 반복하면 원하는 사슬을 얻어 $\\mathrm{height}\\,\\mathfrak p=d-e$가 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.13 (사슬 조건, catenary)",
+          "formal_statement": "$A$를 아핀 $\\mathbb{C}$-정역이라 하자. $A$의 모든 극대인 소이데알 강한 사슬은 길이가 $\\dim A$로 같다.",
+          "idea_behind_proof": "$n:=\\dim A$에 대한 귀납법이며, 정리 5.12를 이용해 사슬의 첫 항을 지운 몫환 $A/\\mathfrak p_1$이 차원 $n-1$을 갖는다는 것을 보이고, 그 몫환에서의 귀납가정을 원래 사슬에 그대로 이어붙이는 것이다.",
+          "proof_steps": [
+            "$n:=\\dim A$에 대한 귀납법을 쓴다. $n=0$이면 모든 소이데알이 $(0)$이므로 주장은 자명하다. $n\\ge 1$이라 하자.",
+            "$\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$을 $A$의 극대인 소이데알 사슬이라 하자. $\\mathfrak p_0=(0)$이고 $\\mathfrak p_1$은 극소소이데알이다. 따라서 $\\mathrm{height}\\,\\mathfrak p_1=1$이고, 정리 5.12에 의해 $\\dim(A/\\mathfrak p_1)=n-1$이다.",
+            "$(0)\\subsetneq\\mathfrak p_2/\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r/\\mathfrak p_1$은 $A/\\mathfrak p_1$의 극대인 소이데알 사슬이므로, 귀납가정에 의해 $r-1=n-1$, 즉 $r=n=\\dim A$이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$A=\\mathbb{C}[x,y]/(y-x^2)$($\\cong\\mathbb{C}[x]$인 포물선의 좌표환)에 뇌터 정규화를 직접 적용해 보라. 즉 대수적으로 독립인 $t_1\\in A$와 유한 정수확장 $\\mathbb{C}[t_1]\\subseteq A$를 명시적으로 찾아라.",
+          "hint": "$A\\cong\\mathbb{C}[x]$이므로 $t_1=x$ 자체가 이미 답이 될 수 있음을 확인하라 — 이 경우 확장이 '자명하게' 유한(사실 동형)임을 보여라.",
+          "solution": "$A=\\mathbb{C}[x,y]/(y-x^2)$에서 $y=x^2$이므로 $A\\cong\\mathbb{C}[x]$(대응 $x\\mapsto x$, $y\\mapsto x^2$)이다. $t_1:=x$로 두면 $t_1$은 그 자체로 대수적으로 독립(초월적)이고, $\\mathbb{C}[t_1]=\\mathbb{C}[x]\\subseteq A$는 사실 등식(즉 확장 차수 $1$인 자명한 유한 정수확장)이다. $d=\\mathrm{trdeg}_{\\mathbb{C}}F(A)=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(x)=1$과 일치한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "정리 5.12를 이용해 $\\dim\\mathbb{C}[x,y]/(xy)$의 각 기약성분에서의 국소적 차원을 계산하라. 구체적으로 $A=\\mathbb{C}[x,y]/(xy)$, $\\mathfrak p=(x)$(기약성분 $y$축에 대응)일 때 $\\mathrm{height}(\\mathfrak p)$와 $\\dim(A/\\mathfrak p)$를 각각 구하고, 정리 5.12의 등식이 이 경우 어떻게 되는지 논하라(단 $A$ 자체는 정역이 아니므로 정리 5.12를 $A/\\mathfrak p$나 각 기약성분에 적용해야 함에 유의).",
+          "hint": "$A/\\mathfrak p=A/(x)\\cong\\mathbb{C}[y]$가 아핀 정역임에 주목하고, 여기에 정리 5.12를 적용하라. $\\mathrm{height}(\\mathfrak p)$는 예제 5.7/따름정리 5.13 논의에서 이미 계산한 값을 재활용하라.",
+          "solution": "$A/\\mathfrak p=A/(x)\\cong\\mathbb{C}[y]$는 아핀 $\\mathbb{C}$-정역이고 $\\dim(A/\\mathfrak p)=\\dim\\mathbb{C}[y]=1$(따름정리 5.9). $\\mathrm{height}(\\mathfrak p)$는 예제 5.7에서 확인했듯 $0$이다(영인자 $x$가 극소소이데알 $(x)$ 안에 있으므로). 정리 5.12는 $A$ 자체가 정역일 때의 등식이므로 $A=\\mathbb{C}[x,y]/(xy)$(정역이 아님)에 직접 적용할 수는 없지만, 그 몫환 $A/\\mathfrak p\\cong\\mathbb{C}[y]$는 그 자체로 아핀 정역이며 여기서 정리 5.12(자명한 경우, $\\mathfrak p'=(0)$)를 적용하면 $\\dim(A/\\mathfrak p)=\\mathrm{trdeg}_{\\mathbb{C}}F(\\mathbb{C}[y])=1+\\mathrm{height}(0)+\\dim(\\mathbb{C}[y]/(0))$가 아니라 단순히 $\\dim\\mathbb{C}[y]=1=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(y)$로 확인된다. $\\mathrm{height}(\\mathfrak p)+\\dim(A/\\mathfrak p)=0+1=1=\\dim\\mathbb{C}[x]$(다른 기약성분 $x$축의 차원)와 우연히 일치하지만, 이는 $A$가 정역이 아니므로 정리 5.12가 직접 보장하는 등식이 아니라 각 기약성분에 개별적으로 정리를 적용한 결과들의 우연한 합치임에 유의해야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "뇌터 정규화(정리 5.11)에 의해, 모든 아핀 $\\mathbb{C}$-정역 $A$는 어떤 다항식환 $\\mathbb{C}[t_1,\\dots,t_d]$와 동형이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 뇌터 정규화가 보장하는 것은 $\\mathbb{C}[t_1,\\dots,t_d]\\subseteq A$가 유한 정수확장이라는 것이지, $A$ 자체가 다항식환과 동형이라는 것이 아니다. 예를 들어 $A=\\mathbb{C}[t^2,t^3]$은 $\\mathbb{C}[t^2]$ 위의 유한 정수확장이지만 $A$ 자체는 다항식환이 아니다(예제 2.18에서 이미 확인한 뾰족한 삼차곡선의 좌표환)."
+        },
+        {
+          "type": "ox",
+          "question": "따름정리 5.13(사슬 조건)에 의해, 아핀 $\\mathbb{C}$-정역의 소이데알 사슬은 극대(더 이상 늘릴 수 없음)이기만 하면 항상 길이가 $\\dim A$이다.",
+          "answer": "O",
+          "explanation": "참이다. 이것이 정확히 '사슬 조건(catenary)'의 정의다 — 극대인 소이데알 사슬은 어느 것을 고르든 길이가 $\\dim A$로 동일하다. 이는 일반적인 뇌터 환에서는 성립하지 않을 수 있는 특별한 성질이며, 아핀 $\\mathbb{C}$-정역(즉 대수다양체의 좌표환)이 갖는 좋은 성질 중 하나다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 5.12의 증명에서 노름/특성다항식 논증은 '$f$ 위에서 극소인 소이데알 $\\mathfrak q$에 대해 $\\mathfrak q\\cap B$가 $B$의 한 원소의 근기와 같다'는 것을 보이기 위한 것이었다. 이 사실이 왜 중요한지(즉 이것이 없다면 증명의 어느 부분이 막히는지) 설명하고, 이 논증이 '뇌터 정규화가 $B$를 다항식환으로, 즉 UFD로 만들어 준다'는 사실에 어떻게 결정적으로 의존하는지 논하라.",
+          "hint": "$\\mathfrak q\\cap B$가 $B$의 한 원소 $f_0$의 근기와 같다는 것을 알면, 주이데알 정리(정리 5.6)를 $B$ 위에서 적용할 길이 열린다는 점에 주목하라. 만약 $B$가 UFD가 아니었다면 예제 5.2의 논증이 어디서 실패하는지 생각해 보라.",
+          "answer": "이 논증이 결정적인 이유는, $A$ 자체가 아니라 $B=\\mathbb{C}[t_1,\\dots,t_d]$(뇌터 정규화가 준 다항식환) 안에서 극소소이데알의 높이를 계산할 수 있게 해주기 때문이다 — $B$는 UFD이자 이미 차원이 완전히 알려진 다항식환(따름정리 5.9에 의해 $\\dim B=d$)이므로, '$\\mathfrak q\\cap B=\\sqrt{(f_0)}$'라는 사실을 얻으면 $B/(r_0)$($r_0$은 $f_0$의 기약인수)의 초월차수를 $d-1$로 즉시 계산할 수 있다(다항식환에서 기약다항식 하나로 자른 몫환의 차원은 항상 하나 줄어든다는, $\\mathbb{C}[t_1,\\dots,t_d]$의 구조에서 나오는 사실). 이것이 없다면, $A/\\mathfrak q$의 차원을 직접 계산해야 하는데 $A$ 자체는 (다항식환이 아니라) 임의로 복잡한 아핀 정역이므로 그 차원을 직접 다룰 표준적인 방법이 없다 — 즉 노름 논증은 '복잡한 $A/\\mathfrak q$의 차원 계산'을 '단순한 $B/(r_0)$의 차원 계산(다항식환에서는 자명함)'으로 되돌리는 다리다. 이 다리를 놓을 수 있는 이유는 정확히 $B$가 UFD라는 사실 때문이다 — $\\alpha\\in A$의 특성다항식 계수들이 $B$ 위에서 정수라는 것까지는 일반적인 정수확장 이론(명제 5.1)만으로 나오지만, 그 계수들이 실제로 $B$ 안에(즉 분수가 아니라) 놓인다는 마지막 단계는 예제 5.2(UFD는 그 분수체 안에서 정수적으로 닫혀 있다)에 전적으로 의존한다. 만약 $B$가 UFD가 아니었다면(즉 뇌터 정규화가 임의의 정역 위의 유한확장만 주었다면) 이 마지막 단계가 무너져, $f_0=\\det f$가 $F(B)$ 안의 원소로만 남고 $B$ 자체의 원소라는 보장이 없어 주이데알 정리를 적용할 발판 자체가 사라진다 — 즉 뇌터 정규화가 굳이 '다항식환'(따라서 UFD) 위의 확장을 주는 형태로 진술된 것은, 바로 이 지점에서 예제 5.2를 쓸 수 있게 하기 위함이다."
+        }
+      ]
+    }
+  ]
+}

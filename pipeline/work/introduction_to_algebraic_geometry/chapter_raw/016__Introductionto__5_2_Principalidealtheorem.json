@@ -1,0 +1,109 @@
+{
+  "chapter_info": {
+    "title": "5. Dimension Theory",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "대수다양체의 '차원(dimension)'이라는 가장 기본적인 기하학적 불변량을 순수하게 대수적으로(환의 크룰 차원으로) 정의하고 계산하는 도구를 세운다. 이를 위해 정수확장(integral extension)이라는 대수적 개념 — 다항식환을 유한생성 가군으로 다루는 정수성(integrality)의 언어 — 을 도입하고, 나카야마 보조정리와 주이데알 정리(Principal Ideal Theorem)라는 가환대수의 핵심 도구를 거쳐, 최종적으로 뇌터 정규화(Noether normalization)를 이용해 대수다양체의 차원을 그 좌표환의 크룰 차원으로, 나아가 초월차수(transcendence degree)로 완전히 특징짓는다. 이 장은 순수 가환대수(1~2절: 정수확장, 주이데알 정리)와 그것을 기하학에 적용하는 부분(3~4절: 뇌터 정규화, 차원)으로 나뉘며, 이 강의노트의 이론적 정점에 해당한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.2 Principal ideal theorem",
+      "step1_big_picture": {
+        "context": "이 절은 크룰 차원 이론에서 가장 유명한 결과인 주이데알 정리(Principal Ideal Theorem, 정리 5.6)와 그 일반화인 크룰 높이 정리(정리 5.8)를 다룬다. 주이데알 정리는 '하나의 원소 $f$ 위에서 극소인 소이데알의 높이는 많아야 $1$이다'라는, 얼핏 사소해 보이지만 매우 강력한 사실이다 — 직관적으로 이는 '방정식 하나를 추가하면 차원이 많아야 하나 줄어든다'는 기하학적 직관(초곡면을 자르면 차원이 하나 줄어든다는 사실)의 정확한 대수적 대응물이다. 이를 $c$개의 원소로 일반화한 크룰 높이 정리는 곧바로 $\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$이라는, 다항식환의 차원이 정확히 변수의 개수라는 근본적인 사실(따름정리 5.9)을 낳는다 — 이는 뇌터 정규화(다음 절)를 통해 임의의 대수다양체의 차원을 계산하는 데 핵심적인 '기준점'이 된다.",
+        "hidden_intuition": "주이데알 정리의 증명에서 핵심 대상은 기호적 거듭제곱(symbolic power) $\\mathfrak q^{(n)}:=\\{a\\in R\\mid sa\\in\\mathfrak q^n\\text{인 어떤 }s\\in R\\setminus\\mathfrak q\\text{가 존재}\\}$이다 — 이는 일반적인 이데알 거듭제곱 $\\mathfrak q^n$을 국소화 $R_{\\mathfrak q}$에서 '되돌린' 것으로, $\\mathfrak q^n$보다 다루기 쉬운 성질(예: $\\mathfrak q$-원시적, primary)을 갖는다. 증명은 아르틴환(뇌터 + 유일 소이데알)에서 강한 하강조건이 성립한다는 사실을 이용해 $\\mathfrak q^{(n)}$의 사슬이 안정화됨을 보이고, 그 안정화 지점에서 나카야마 보조정리를 두 번 적용해 $(\\mathfrak qR_{\\mathfrak q})^n=0$이라는 강력한 결론(즉 $\\mathfrak q$ 아래에 소이데알이 더 이상 없다는 것)을 끌어낸다 — 이는 5.1절에서 세운 나카야마 보조정리가 이 정리의 진짜 엔진임을 보여준다. 예제 5.7의 대조(정역에서는 높이가 정확히 $1$이지만, 영인자가 있는 환 $\\mathbb{C}[x,y]/(xy)$에서는 높이가 $0$일 수 있음)는 '주이데알 정리가 주는 것은 상한 $\\le 1$일 뿐, 실제 값이 항상 $1$이라는 보장은 아니다'라는 중요한 뉘앙스를 정확히 짚어준다 — 기하학적으로 이는 $V(xy)$가 두 개의 서로 다른 (이미 극소 차원, 즉 $0$차원의 差) 기약성분(두 좌표축)의 합집합이라는 사실과 대응된다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (원소들 위에서 극소인 소이데알)",
+          "formal_statement": "환 $R$에 대해, 소이데알 $\\mathfrak p\\subseteq R$가 $a_1,\\dots,a_m\\in R$ 위에서 극소(minimal)라는 것은 $\\mathfrak p$가 $a_1,\\dots,a_m$을 포함하는 $R$의 소이데알들 중 극소라는 것이다. 이러한 이데알은 보조정리 1.45에 의해 항상 존재한다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.6 (주이데알 정리, Principal Ideal Theorem)",
+          "formal_statement": "$R$을 뇌터 환, $f\\in R$, $\\mathfrak p\\subseteq R$을 $f$ 위에서 극소인 소이데알이라 하자. 그러면 $\\mathrm{height}\\,\\mathfrak p\\le 1$이다.",
+          "idea_behind_proof": "먼저 국소화 $R_{\\mathfrak p}$로 문제를 축소해 $(R,\\mathfrak p)$가 국소환이고 $\\mathfrak p$가 $f$를 포함하는 유일한 소이데알이라고 가정한다. 임의의 $\\mathfrak q\\subsetneq\\mathfrak p$에 대해, 기호적 거듭제곱 $\\mathfrak q^{(n)}$들의 사슬이 $R/(f)$가 아르틴이라는 사실 덕분에 안정화됨을 보이고, 그 안정화 지점에서 나카야마 보조정리를 거듭 적용해 국소환 $R_{\\mathfrak q}$가 유일한 소이데알(즉 차원 $0$)을 가짐을 끌어낸다 — 이는 $\\mathfrak q$ 아래로는 더 이상 진부분 소이데알이 없다는 뜻이므로 $\\mathfrak p$의 높이가 $1$을 넘을 수 없다.",
+          "proof_steps": [
+            "$R_{\\mathfrak p}$의 소이데알과 $\\mathfrak p$에 포함되는 $R$의 소이데알 사이에는 포함관계를 보존하는 전단사가 있으므로 $\\mathrm{height}\\,\\mathfrak p=\\mathrm{height}\\,\\mathfrak p R_{\\mathfrak p}$이다. 따라서 $(R,\\mathfrak p)$가 국소환이라고 가정할 수 있다.",
+            "이 경우 $\\mathfrak p$는 $f$를 포함하는 $R$의 유일한 소이데알이다. 따라서 $R/(f)$는 유일한 소이데알을 갖고, 명제 1.48에 의해 $R/(f)$는 아르틴이다.",
+            "소이데알 $\\mathfrak q\\subsetneq R$과 정수 $n\\ge 1$에 대해 이데알 $\\mathfrak q^{(n)}:=\\{a\\in R\\mid sa\\in\\mathfrak q^n\\text{인 어떤 }s\\in R\\setminus\\mathfrak q\\text{가 존재}\\}\\subseteq R$을 생각하자.",
+            "$\\mathfrak q\\subsetneq\\mathfrak p$라 가정하자. 그러면 $f\\notin\\mathfrak q$이다. $R/(f)$가 아르틴이므로 $R/(f)$의 이데알들의 하강사슬 $(f)+\\mathfrak q^{(1)}\\supseteq(f)+\\mathfrak q^{(2)}\\supseteq\\cdots$는 결국 안정화되어, 어떤 $n\\ge 1$에서 $(f)+\\mathfrak q^{(n)}=(f)+\\mathfrak q^{(n+1)}$이다.",
+            "$r\\in\\mathfrak q^{(n)}$이면 $r=af+b$($a\\in R$, $b\\in\\mathfrak q^{(n+1)}$)로 쓸 수 있다. $f$가 $R_{\\mathfrak q}$에서 단위원이고 $af=r-b\\in\\mathfrak q^nR_{\\mathfrak q}$이므로 $a\\in\\mathfrak q^nR_{\\mathfrak q}$, 따라서 $a\\in\\mathfrak q^{(n)}$을 얻는다. 이는 $\\mathfrak q^{(n)}=f\\mathfrak q^{(n)}+\\mathfrak q^{(n+1)}$을 보인다.",
+            "$M:=\\mathfrak q^{(n)}/\\mathfrak q^{(n+1)}$을 유한생성 $R$-가군이라 하자. $M=fM\\subseteq\\mathfrak pM$이므로 나카야마 보조정리에 의해 $M=0$이다.",
+            "$\\mathfrak q^{(n)}R_{\\mathfrak q}=\\mathfrak q^nR_{\\mathfrak q}=(\\mathfrak qR_{\\mathfrak q})^n$임에 유의하라. 따라서 $(\\mathfrak qR_{\\mathfrak q})^n=\\mathfrak qR_{\\mathfrak q}\\cdot(\\mathfrak qR_{\\mathfrak q})^n$이고, 나카야마 보조정리에 의해 $(\\mathfrak qR_{\\mathfrak q})^n=0$이다.",
+            "이는 $R_{\\mathfrak q}$가 유일한 소이데알을 갖고 차원이 $0$임을 뜻한다. $\\mathfrak q\\subsetneq\\mathfrak p$였음을 기억하면, 이는 $\\mathfrak p$ 아래에 소이데알들의 사슬이 길이 $1$을 넘을 수 없음을 뜻하므로 $\\mathrm{height}\\,\\mathfrak p\\le 1$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.7 (정역에서는 높이가 정확히 $1$; 영인자가 있으면 높이 $0$도 가능)",
+          "formal_statement": "주이데알 정리의 상황에서, $R$이 정역이고 $f$가 $R$의 단위원이 아니면 $(0)\\subseteq R$이 소이데알이므로 $\\mathrm{height}\\,\\mathfrak p=1$이다. 이와 대조적으로 $R=\\mathbb{C}[x,y]/(xy)$일 때, 영인자 $x$는 $R$의 극소소이데알 $(x)$ 안에 있으며 그 높이는 $0$이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.8 (크룰 높이 정리, Krull Height Theorem)",
+          "formal_statement": "$R$을 뇌터 환, $x_1,\\dots,x_c\\in R$, $\\mathfrak p\\subseteq R$을 $x_1,\\dots,x_c$ 위에서 극소인 소이데알이라 하자. 그러면 $\\mathrm{height}\\,\\mathfrak p\\le c$이다.",
+          "idea_behind_proof": "$c$에 대한 귀납법이며 $c=1$은 주이데알 정리 자체다. 귀납 단계의 핵심 트릭은, $\\mathfrak p$ 바로 아래의 높이 $\\mathrm{height}\\,\\mathfrak p-1$인 소이데알 $\\mathfrak p_1$을 골라 $x_1\\notin\\mathfrak p_1$이 되도록 조정한 뒤, 나머지 생성원 $x_2,\\dots,x_c$를 '$x_1$의 배수를 빼서' $\\mathfrak p_1$ 안으로 밀어 넣는 것이다 — 이렇게 하면 몫환 $R/(y_2,\\dots,y_c)$ 안에서 $\\mathfrak p$가 단 하나의 원소 $x_1$ 위에서 극소가 되어 주이데알 정리를 다시 적용할 수 있고, 그 결과 $\\mathfrak p_1$이 $c-1$개의 원소 위에서 극소가 됨을 보여 귀납가정을 적용할 수 있게 된다.",
+          "proof_steps": [
+            "$c$에 대한 귀납법을 쓴다. $c=1$인 경우는 주이데알 정리(정리 5.6)에서 다루어졌다. $c\\ge 2$라 하자.",
+            "$(R,\\mathfrak p)$가 국소환이고 $\\mathfrak p$가 $x_1,\\dots,x_c$를 포함하는 유일한 소이데알이라고 가정할 수 있다. 명제 1.48에 의해 $R/(x_1,\\dots,x_c)$는 아르틴이므로, 따름정리 5.4에 의해 어떤 $k\\ge 1$에서 $\\mathfrak p^k\\subseteq(x_1,\\dots,x_c)$이다.",
+            "$\\mathrm{height}\\,\\mathfrak p\\ge 1$이라 가정할 수 있다. $\\mathrm{height}\\,\\mathfrak p_1=\\mathrm{height}\\,\\mathfrak p-1$인 소이데알 $\\mathfrak p_1\\subseteq R$을 고를 수 있고, $x_1\\notin\\mathfrak p_1$이라고 가정할 수 있다.",
+            "$\\mathfrak p$는 $\\mathfrak p_1+(x_1)$을 포함하는 유일한 소이데알이다. 명제 1.48에 의해 $R/(\\mathfrak p_1+(x_1))$은 아르틴이므로, 따름정리 5.4에 의해 어떤 $n\\ge 1$에서 $\\mathfrak p^n\\subseteq\\mathfrak p_1+(x_1)$이다.",
+            "그러면 $2\\le i\\le c$인 모든 $i$에서 $x_i^n\\in\\mathfrak p_1+(x_1)$이므로 $x_i^n=a_ix_1+y_i$($a_i\\in R$, $y_i\\in\\mathfrak p_1$)로 쓸 수 있다.",
+            "$\\mathfrak p$는 $x_1,y_2,\\dots,y_c$를 포함하는 유일한 소이데알이다. 그러면 $\\mathfrak p/(y_2,\\dots,y_c)$는 $R/(y_2,\\dots,y_c)$에서 $x_1+(y_2,\\dots,y_c)$를 포함하는 유일한 소이데알이다.",
+            "주이데알 정리에 의해 $\\mathrm{height}\\,\\mathfrak p/(y_2,\\dots,y_c)\\le 1$이고, 따라서 $\\mathrm{height}\\,\\mathfrak p_1/(y_2,\\dots,y_c)=0$이다. 이는 $\\mathfrak p_1$이 $y_2,\\dots,y_c$ 위에서 극소임을 뜻한다.",
+            "귀납가정에 의해 $\\mathrm{height}\\,\\mathfrak p_1\\le c-1$이므로 $\\mathrm{height}\\,\\mathfrak p=\\mathrm{height}\\,\\mathfrak p_1+1\\le c$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.9 ($\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$)",
+          "formal_statement": "$\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$이다.",
+          "idea_behind_proof": "아래 부등식은 표준적인 소이데알 사슬 $(0)\\subsetneq(x_1)\\subsetneq\\cdots\\subsetneq(x_1,\\dots,x_n)$에서 바로 나오고, 위 부등식은 극대인 사슬의 맨 끝이 극대아이디얼이라는 사실(약한 Nullstellensatz의 형태)과 크룰 높이 정리를 결합해서 얻는다.",
+          "proof_steps": [
+            "$\\mathbb{C}[x_1,\\dots,x_n]$의 소이데알 사슬 $(0)\\subsetneq(x_1)\\subsetneq(x_1,x_2)\\subsetneq\\cdots\\subsetneq(x_1,\\dots,x_n)$을 생각하면 $\\dim\\mathbb{C}[x_1,\\dots,x_n]\\ge n$을 얻는다.",
+            "역으로 $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$을 $\\mathbb{C}[x_1,\\dots,x_n]$의 극대인 소이데알 사슬이라 하면 $\\mathfrak p_r$은 극대아이디얼이다. 따름정리 1.35에 의해 $\\mathfrak p_r=(x_1-a_1,\\dots,x_n-a_n)$($a_1,\\dots,a_n\\in\\mathbb{C}$)이다.",
+            "크룰 높이 정리에 의해 $r=\\mathrm{height}\\,\\mathfrak p_r\\le n$이다. 따라서 $\\dim\\mathbb{C}[x_1,\\dots,x_n]=n$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (뇌터 국소환의 유한차원성과 나가타의 예)",
+          "formal_statement": "크룰 높이 정리를 이용하면 모든 뇌터 국소환이 유한 차원을 가짐을 보일 수 있다. 그러나 뇌터 환은 (국소환이 아니면) 무한 차원을 가질 수도 있다 — 그러한 예는 마사요시 나가타(Masayoshi Nagata)가 처음 구성했다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$R=\\mathbb{C}[x,y]/(xy)$에서 극소소이데알 $(x)$의 높이가 실제로 $0$임을, $R$의 소이데알들을 직접 나열해 확인하라(즉 $(x)$ 아래에 다른 소이데알이 없음을 보여라).",
+          "hint": "$R$의 소이데알은 $\\mathbb{C}[x,y]$의 소이데알 중 $(xy)$를 포함하는 것들에 대응한다. $(x)$에 포함되는 $R$의 소이데알을 직접 찾아보라.",
+          "solution": "$R=\\mathbb{C}[x,y]/(xy)$의 소이데알은 $(xy)$를 포함하는 $\\mathbb{C}[x,y]$의 소이데알들에 대응한다. $(x)\\supseteq(xy)$이므로 $(x)$는 $R$의 소이데알(실제로 $R/(x)\\cong\\mathbb{C}[y]$는 정역이므로)이다. $(x)$에 진부분으로 포함되는 소이데알 $\\mathfrak q\\subsetneq(x)$가 있다면 $\\mathfrak q$도 $(xy)$를 포함하는 $\\mathbb{C}[x,y]$의 소이데알이면서 $(x)$의 진부분이어야 하는데, $(x)$ 자체가 $\\mathbb{C}[x,y]$에서 높이 $1$인 소이데알(정역 $\\mathbb{C}[x,y]$에서 $(0)\\subsetneq(x)$가 전부)이므로 $\\mathbb{C}[x,y]$ 안에서 $(x)$ 진부분의 유일한 소이데알은 $(0)$뿐인데 $(0)\\not\\supseteq(xy)$(왜냐하면 $xy\\ne 0$)이므로 $(0)$은 $R$의 소이데알로 대응되지 않는다. 따라서 $(x)$ 아래에는 $R$의 다른 소이데알이 없으므로 $\\mathrm{height}(x)=0$이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "따름정리 5.9의 증명 방식을 그대로 따라, $\\mathbb{C}[x,y,z]$에서 소이데알 사슬 $(0)\\subsetneq(x)\\subsetneq(x,y)\\subsetneq(x,y,z)$의 길이가 $3$임을 확인하고, 이로부터 $\\dim\\mathbb{C}[x,y,z]\\ge 3$을 얻으라. 그리고 $(x,y,z)$가 실제로 극대아이디얼임을 확인하라.",
+          "hint": "각 포함이 진부분인지($x\\notin(0)$, $y\\notin(x)$, $z\\notin(x,y)$) 확인하고, $\\mathbb{C}[x,y,z]/(x,y,z)\\cong\\mathbb{C}$가 체인지 확인하라.",
+          "solution": "$x\\ne 0$이므로 $(0)\\subsetneq(x)$. $y\\notin(x)=\\{xf\\mid f\\in\\mathbb{C}[x,y,z]\\}$이므로(만약 $y=xf$라면 차수 비교에서 모순) $(x)\\subsetneq(x,y)$. 같은 이유로 $z\\notin(x,y)$이므로 $(x,y)\\subsetneq(x,y,z)$. 따라서 사슬의 길이는 $3$이고 $\\dim\\mathbb{C}[x,y,z]\\ge 3$이다. $\\mathbb{C}[x,y,z]/(x,y,z)\\cong\\mathbb{C}$는 체이므로 $(x,y,z)$는 극대아이디얼이다(따름정리 1.35의 $a_1=a_2=a_3=0$인 경우). 크룰 높이 정리에 의해 이 사슬의 길이는 이 극대아이디얼의 높이의 상한($3$)과 일치하므로, 실제로 $\\dim\\mathbb{C}[x,y,z]=3$임이 확인된다."
+        },
+        {
+          "type": "ox",
+          "question": "주이데알 정리에 의해, 뇌터 환 $R$에서 하나의 원소 $f$ 위에서 극소인 소이데알의 높이는 항상 정확히 $1$이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 주이데알 정리가 보장하는 것은 높이가 '많아야' $1$이라는 상한($\\le 1$)이지, 항상 정확히 $1$이라는 것이 아니다. 예제 5.7이 보여주듯 $R=\\mathbb{C}[x,y]/(xy)$의 극소소이데알 $(x)$는 높이가 $0$이다(영인자가 있는 환에서는 이런 일이 일어날 수 있다)."
+        },
+        {
+          "type": "ox",
+          "question": "크룰 높이 정리에 의해, 뇌터 환의 모든 극대아이디얼의 높이는 유한하다.",
+          "answer": "O",
+          "explanation": "참이다. 극대아이디얼은 항상 그 뇌터 환의 어떤 유한 개의 생성원 $x_1,\\dots,x_c$(뇌터 환이므로 이데알 자체가 유한생성) 위에서 극소이므로, 크룰 높이 정리에 의해 그 높이는 $c$ 이하로 유한하다. 이는 참고 5.10에서 언급된 '모든 뇌터 국소환은 유한 차원을 갖는다'는 사실의 근거이기도 하다."
+        },
+        {
+          "type": "conceptual",
+          "question": "주이데알 정리의 증명에서 기호적 거듭제곱 $\\mathfrak q^{(n)}$을 이데알의 일반적인 거듭제곱 $\\mathfrak q^n$ 대신 사용한 이유가 무엇일지 생각해 보라. 만약 증명 전체에서 $\\mathfrak q^{(n)}$ 대신 그냥 $\\mathfrak q^n$을 사용했다면 어느 단계가 문제가 되었을지 논하라.",
+          "hint": "$\\mathfrak q^{(n)}R_{\\mathfrak q}=\\mathfrak q^nR_{\\mathfrak q}$라는 사실이 증명의 어느 단계(나카야마 보조정리를 적용하는 지점)에서 정확히 사용되는지 되짚어 보라. $R/(f)$의 하강사슬이 $\\mathfrak q^{(n)}$들에 대해 안정화된다는 것과 $\\mathfrak q^n$들에 대해 안정화된다는 것이 같은 말인지 생각해 보라.",
+          "answer": "기호적 거듭제곱 $\\mathfrak q^{(n)}$을 쓴 핵심적인 이유는, 증명의 마지막 단계에서 $R_{\\mathfrak q}$ 안에서 $\\mathfrak q^nR_{\\mathfrak q}$에 대한 정보(구체적으로 $(\\mathfrak qR_{\\mathfrak q})^n=0$이라는 결론)를 끌어내야 하는데, 일반적인 이데알 거듭제곱 $\\mathfrak q^n$은 국소화했을 때 $\\mathfrak q^{(n)}$과 정확히 일치하지만($\\mathfrak q^{(n)}R_{\\mathfrak q}=\\mathfrak q^nR_{\\mathfrak q}=(\\mathfrak qR_{\\mathfrak q})^n$이라는 등식이 증명에 명시되어 있다), $R$ 자체 안에서는 $\\mathfrak q^{(n)}\\supseteq\\mathfrak q^n$일 뿐 등식이 보장되지 않기 때문이다 — $\\mathfrak q^{(n)}$은 '$\\mathfrak q$ 바깥의 어떤 원소를 곱해서라도 $\\mathfrak q^n$ 안에 들어갈 수 있으면 포함시킨다'는 방식으로 $\\mathfrak q^n$을 국소화 관점에서 '포화시킨' 것이다. 만약 증명 전체에서 $\\mathfrak q^{(n)}$ 대신 그냥 $\\mathfrak q^n$을 사용했다면, $R/(f)$의 하강사슬 $(f)+\\mathfrak q^1\\supseteq(f)+\\mathfrak q^2\\supseteq\\cdots$가 안정화된다는 것까지는 (똑같이 아르틴성에서) 얻을 수 있지만, 그다음 단계인 '$r=af+b$, $b\\in\\mathfrak q^{n+1}$에서 $af=r-b\\in\\mathfrak q^nR_{\\mathfrak q}$이므로 $a\\in\\mathfrak q^n$'이라는 추론이 깨진다 — $af\\in\\mathfrak q^nR_{\\mathfrak q}$라는 것은 $R_{\\mathfrak q}$ 안에서의 소속일 뿐이고, 이를 $R$ 자체 안에서 '$a\\in\\mathfrak q^n$'으로 되돌리려면 정확히 기호적 거듭제곱의 정의(어떤 $s\\notin\\mathfrak q$에서 $sa\\in\\mathfrak q^n$이면 충분)가 필요하다 — 일반적인 $\\mathfrak q^n$으로는 이 '국소화에서 전역으로 되돌리는' 단계가 보장되지 않는다. 즉 $\\mathfrak q^{(n)}$은 '국소화 후에도 정보가 그대로 보존되는, $\\mathfrak q^n$의 올바른 대체물'이며, 이것이 증명 전체를 국소환 $R_{\\mathfrak q}$ 안에서의 나카야마 보조정리 적용으로 매끄럽게 이어지게 하는 핵심 장치다."
+        }
+      ]
+    }
+  ]
+}

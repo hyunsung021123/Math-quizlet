@@ -43,7 +43,7 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 015 | [ ] | 5.1 Integral extensions | section | `015__Introductionto__5_1_Integralextensions.txt` |
-| 016 | [ ] | 5.2 Principal ideal theorem | section | `016__Introductionto__5_2_Principalidealtheorem.txt` |
-| 017 | [ ] | 5.3 Noether normalization | section | `017__Introductionto__5_3_Noethernormalization.txt` |
-| 018 | [ ] | 5.4 Dimension of algebraic varieties | section | `018__Introductionto__5_4_Dimensionofalgebraicvariet.txt` |
+| 015 | [x] | 5.1 Integral extensions | section | `015__Introductionto__5_1_Integralextensions.txt` |
+| 016 | [x] | 5.2 Principal ideal theorem | section | `016__Introductionto__5_2_Principalidealtheorem.txt` |
+| 017 | [x] | 5.3 Noether normalization | section | `017__Introductionto__5_3_Noethernormalization.txt` |
+| 018 | [x] | 5.4 Dimension of algebraic varieties | section | `018__Introductionto__5_4_Dimensionofalgebraicvariet.txt` |

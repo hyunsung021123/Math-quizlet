@@ -125,6 +125,12 @@
       "title": "4. Classical Projective Embeddings",
       "file": "4_classical_projective_embeddings.json",
       "book": "Park — Introduction to Algebraic Geometry"
+    },
+    {
+      "id": "5_dimension_theory",
+      "title": "5. Dimension Theory",
+      "file": "5_dimension_theory.json",
+      "book": "Park — Introduction to Algebraic Geometry"
     }
   ]
 }

@@ -1,0 +1,305 @@
+{
+  "chapter_info": {
+    "title": "5. Dimension Theory",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "대수다양체의 '차원(dimension)'이라는 가장 기본적인 기하학적 불변량을 순수하게 대수적으로(환의 크룰 차원으로) 정의하고 계산하는 도구를 세운다. 이를 위해 정수확장(integral extension)이라는 대수적 개념 — 다항식환을 유한생성 가군으로 다루는 정수성(integrality)의 언어 — 을 도입하고, 나카야마 보조정리와 주이데알 정리(Principal Ideal Theorem)라는 가환대수의 핵심 도구를 거쳐, 최종적으로 뇌터 정규화(Noether normalization)를 이용해 대수다양체의 차원을 그 좌표환의 크룰 차원으로, 나아가 초월차수(transcendence degree)로 완전히 특징짓는다. 이 장은 순수 가환대수(1~2절: 정수확장, 주이데알 정리)와 그것을 기하학에 적용하는 부분(3~4절: 뇌터 정규화, 차원)으로 나뉘며, 이 강의노트의 이론적 정점에 해당한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.4 Dimension of algebraic varieties",
+      "step1_big_picture": {
+        "context": "이 절은 이 강의노트 전체의 정점이다 — 지금까지 쌓아온 모든 가환대수 도구(정수확장, 상승정리, 뇌터 정규화, 정리 5.12)를 동원해, 마침내 대수다양체의 차원을 그 함수체의 초월차수로 정의하고($\\dim X:=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)$), 이 정의가 좌표환의 크룰 차원(아핀의 경우), 곱의 차원의 가법성(따름정리 5.15), 초곡면 절단에 의한 차원 감소(따름정리 5.17) 등 우리의 모든 기하학적 직관과 정확히 들어맞음을 확인한다. 이 절의 마지막 부분은 국소 차원(local dimension)과 매장차원(embedding dimension)이라는 두 섬세한 불변량을 도입해, '한 점에서 본' 차원(국소환의 크룰 차원)과 '그 점에서의 접공간의 차원'(매장차원)을 구별한다 — 명제 5.19의 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$과, 그 등호가 깨지는 예제 5.20·5.21(원점에서의 특이점)은 '특이점(singularity)'이라는 개념의 첫 정밀한 대수적 정의를 준다.",
+        "hidden_intuition": "차원을 함수체의 초월차수로 정의하는 것의 아름다움은, 이것이 '독립적인 좌표가 몇 개 필요한가'라는 순수하게 기하학적인 직관을 그대로 옮긴 것이라는 데 있다 — $\\mathbb{C}(X)$ 안에 대수적으로 독립인 원소가 $d$개 있다는 것은 정확히 $X$ 위에서 서로 독립으로 움직일 수 있는 '좌표' $d$개가 있다는 뜻이다. 매장차원 $\\mathrm{embdim}_p X:=\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$은 코탄젠트 공간(cotangent space)의 차원으로, 직관적으로 '점 $p$ 근방에서 $X$를 매끄러운 다양체로 그리려면 몇 차원의 주변 공간이 필요한가'를 잰다. 명제 5.19의 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$이 항상 성립하는 이유는 나카야마 보조정리에서 나온다 — $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$의 기저를 극대아이디얼의 생성원으로 들어올리면(나카야마 보조정리에 의해 이것으로 충분히 $\\mathfrak m_{X,p}$ 전체를 생성함), 크룰 높이 정리가 곧바로 '그 생성원 개수 이하로 차원이 제한된다'는 결론을 준다. 매끄러운 점에서는 이 부등식이 등식이 되지만(접공간의 차원이 정확히 다양체의 차원과 같음), 예제 5.20·5.21의 특이점에서는 진짜 부등식($<$)이 성립한다 — 즉 '접공간이 실제 차원보다 커진다'는 것이 정확히 특이점의 대수적 특징이며, 이는 이후 미분기하학적 매끄러움(smoothness) 개념의 순수 대수적 전조다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "예제 5.21: 뾰족한 삼차곡선 $X=V(y^2-x^3)\\subseteq\\mathbb{A}^2$. $\\dim X=1$이지만 원점(특이점)에서는 $\\mathrm{embdim}_0X=2>\\dim_0X=1$이다.",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  2.25,
+                  -3.375
+                ],
+                [
+                  1.96,
+                  -2.744
+                ],
+                [
+                  1.69,
+                  -2.197
+                ],
+                [
+                  1.44,
+                  -1.728
+                ],
+                [
+                  1.21,
+                  -1.331
+                ],
+                [
+                  1.0,
+                  -1.0
+                ],
+                [
+                  0.81,
+                  -0.729
+                ],
+                [
+                  0.64,
+                  -0.512
+                ],
+                [
+                  0.49,
+                  -0.343
+                ],
+                [
+                  0.36,
+                  -0.216
+                ],
+                [
+                  0.25,
+                  -0.125
+                ],
+                [
+                  0.16,
+                  -0.064
+                ],
+                [
+                  0.09,
+                  -0.027
+                ],
+                [
+                  0.04,
+                  -0.008
+                ],
+                [
+                  0.01,
+                  -0.001
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.01,
+                  0.001
+                ],
+                [
+                  0.04,
+                  0.008
+                ],
+                [
+                  0.09,
+                  0.027
+                ],
+                [
+                  0.16,
+                  0.064
+                ],
+                [
+                  0.25,
+                  0.125
+                ],
+                [
+                  0.36,
+                  0.216
+                ],
+                [
+                  0.49,
+                  0.343
+                ],
+                [
+                  0.64,
+                  0.512
+                ],
+                [
+                  0.81,
+                  0.729
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.21,
+                  1.331
+                ],
+                [
+                  1.44,
+                  1.728
+                ],
+                [
+                  1.69,
+                  2.197
+                ],
+                [
+                  1.96,
+                  2.744
+                ],
+                [
+                  2.25,
+                  3.375
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.3,
+                -0.4
+              ],
+              "text": "$p=(0,0)$: $\\dim_pX=1<\\mathrm{embdim}_pX=2$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.3,
+                1.2
+              ],
+              "text": "매끄러운 점: $\\dim=\\mathrm{embdim}=1$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (준사영다양체의 차원, 여차원)",
+          "formal_statement": "$X$를 준사영다양체라 하자. $X$의 차원(dimension)은 $$\\dim X:=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)$$ 이다. $U\\subseteq X$가 공집합이 아닌 기약 열린부분집합이면 $\\mathbb{C}(U)=\\mathbb{C}(X)$이므로 $\\dim U=\\dim X$이다. $X=\\emptyset$일 때는 $\\dim\\emptyset:=-1$로 둔다. 기약 닫힌부분집합 $Y\\subseteq X$에 대해, $X$ 안에서 $Y$의 여차원(codimension)은 $$\\mathrm{codim}_XY:=\\dim X-\\dim Y$$ 이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.14 (아핀/사영다양체의 차원 공식)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$이 아핀다양체이고 소이데알 $\\mathfrak p\\subseteq A(X)$에 대해 $Y=V(\\mathfrak p)\\subseteq X$가 기약 닫힌부분집합이면 $$\\dim X=\\dim A(X)\\qquad\\text{와}\\qquad \\mathrm{codim}_XY=\\mathrm{height}\\,\\mathfrak p$$ 이다. $X\\subseteq\\mathbb{P}^N$이 사영다양체이고 소이데알 $\\mathfrak p\\subseteq S(X)$에 대해 $Y=V_+(\\mathfrak p)\\subseteq X$가 기약 닫힌부분집합이면 $$\\dim X=\\dim S(X)-1\\qquad\\text{와}\\qquad \\mathrm{codim}_XY=\\mathrm{height}\\,\\mathfrak p$$ 이다.",
+          "idea_behind_proof": "아핀의 경우는 정리 5.12를 $\\mathbb{C}(X)=F(A(X))$에 그대로 적용하면 끝난다. 사영의 경우 핵심 트릭은 동차좌표환 $S(X)$의 분수체가 함수체 $\\mathbb{C}(X)$ 위에 초월적인 일차형식 $\\ell$ 하나를 덧붙인 것과 같다는 관찰이다 — 이는 사영좌표환이 '아핀 좌표환보다 정확히 차원 하나가 많다'는 사실(스칼라배의 자유도 하나)의 정확한 대수적 반영이다.",
+          "proof_steps": [
+            "[아핀] $\\mathbb{C}(X)=F(A(X))$(정리 2.12)이므로 정리 5.12에 의해 $\\dim X=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)=\\dim A(X)$이다. $A(Y)=A(X)/\\mathfrak p$이므로 정리 5.12는 또한 $\\mathrm{codim}_XY=\\dim A(X)-\\dim(A(X)/\\mathfrak p)=\\mathrm{height}\\,\\mathfrak p$를 준다.",
+            "[사영] $0\\ne\\ell\\in S(X)$을 일차형식이라 하자. $F(S(X))=\\mathbb{C}(X)(\\ell)$이고 $\\ell$은 $\\mathbb{C}(X)$ 위에서 초월적임에 유의하라.",
+            "정리 5.12에 의해 $\\dim S(X)=\\mathrm{trdeg}_{\\mathbb{C}}F(S(X))=\\mathrm{trdeg}_{\\mathbb{C}}\\mathbb{C}(X)+1=\\dim X+1$이다. 나머지 주장(여차원 공식)은 아핀의 경우와 같은 논증으로 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.15 (곱의 차원은 차원의 합이다)",
+          "formal_statement": "$X,Y$가 준사영다양체이면 $$\\dim(X\\times Y)=\\dim X+\\dim Y$$ 이다.",
+          "idea_behind_proof": "$X,Y$가 아핀인 경우로 축소한 뒤, 뇌터 정규화를 각각 적용해 $A(X)$, $A(Y)$를 다항식환 $P,Q$ 위의 유한확장으로 만들고, 그 텐서곱 $A(X)\\otimes A(Y)$가 $P\\otimes Q$ 위에서 유한하다는 사실(참고 4.17)과 상승정리를 결합해 곱 다항식환의 차원(변수 개수의 합)으로 되돌린다.",
+          "proof_steps": [
+            "정리 4.18에 의해 $X\\times Y$는 준사영다양체이다. $X,Y$가 아핀이라고 가정할 수 있고(정리 4.16에 의해 $X\\times Y$도 아핀이 됨), 뇌터 정규화에 의해 $A(X)$가 유한한 대수적으로 독립인 $u_1,\\dots,u_m\\in A(X)$와 $A(Y)$가 유한한 $v_1,\\dots,v_n\\in A(Y)$를 얻는다.",
+            "상승정리에 의해 $\\dim X=\\dim A(X)=m$이고 $\\dim Y=\\dim A(Y)=n$이다.",
+            "참고 4.17에 의해 $A(X\\times Y)\\cong A(X)\\otimes_{\\mathbb{C}}A(Y)$이며, 이는 $P\\otimes_{\\mathbb{C}}Q\\cong\\mathbb{C}[u_1,\\dots,u_m,v_1,\\dots,v_n]$ 위에서 유한하다(단 $P:=\\mathbb{C}[u_1,\\dots,u_m]$, $Q:=\\mathbb{C}[v_1,\\dots,v_n]$).",
+            "상승정리와 따름정리 5.9에 의해 $$\\dim(X\\times Y)=\\dim A(X\\times Y)=\\dim\\mathbb{C}[u_1,\\dots,u_m,v_1,\\dots,v_n]=m+n.\\qquad\\blacksquare$$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.16 (기본 차원 계산)",
+          "formal_statement": "$\\dim\\mathbb{A}^n=n$이고 $\\dim\\mathbb{P}^n=n$이다. 따라서 $\\dim\\nu_d(\\mathbb{P}^n)=n$이고 $\\dim\\Sigma_{m,n}=m+n$이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.17 (방정식 하나당 차원 감소, 교집합의 차원 하한)",
+          "formal_statement": "$X,Y\\subseteq\\mathbb{A}^n$을 아핀다양체이거나 $X,Y\\subseteq\\mathbb{P}^N$을 사영다양체라 하자. (1) $f_1,\\dots,f_c\\in A(X)$ 또는 $S(X)$에 대해 $Z$가 $V(f_1,\\dots,f_c)$의 기약성분이면 $\\dim Z\\ge\\dim X-c$이다. (2) $0\\ne f\\in A(X)$ 또는 $S(X)$에 대해 $Z$가 $V(f)$의 기약성분이면 $\\dim Z=\\dim X-1$이다. (3) $Z$가 $X\\cap Y$의 기약성분이면 $\\dim Z\\ge\\dim X+\\dim Y-n$이다.",
+          "idea_behind_proof": "(1)은 크룰 높이 정리를 정리 5.12와 결합하는 것뿐이다. (2)는 (1)의 특수한 경우($c=1$)에서, $f\\ne 0$이므로 $(0)\\subsetneq\\mathfrak p$가 강제되어 부등식이 등식으로 좁혀진다는 관찰이다. (3)은 교집합 $X\\cap Y$를 곱 $X\\times Y$ 안의 대각선형 절단($x_i=y_i$라는 $n$개의 방정식)으로 다시 쓰는 트릭으로, (1)과 곱의 차원 공식(따름정리 5.15)을 결합한다.",
+          "proof_steps": [
+            "아핀인 경우만 다루면 충분하다. (1): $V(f_1,\\dots,f_c)$의 기약성분 $Z$는 $f_1,\\dots,f_c$ 위에서 극소인 소이데알 $\\mathfrak p\\subseteq A(X)$에 대응한다. 정리 5.12와 크룰 높이 정리에 의해 $$\\dim Z=\\dim(A(X)/\\mathfrak p)=\\dim A(X)-\\mathrm{height}\\,\\mathfrak p\\ge\\dim X-c.$$",
+            "(2): $c=1$, $f_1\\ne 0$이라 하자. $(0)\\subsetneq\\mathfrak p$이므로 $\\mathrm{height}\\,\\mathfrak p\\ge 1$이다. 따라서 (1)의 부등식에서 등호가 성립하고, 이는 (2)를 증명한다.",
+            "(3): $X\\times Y\\subseteq\\mathbb{A}^n\\times\\mathbb{A}^n=\\mathbb{A}^{2n}$을 생각하자. 첫 번째 인자의 좌표를 $x_1,\\dots,x_n$, 두 번째 인자의 좌표를 $y_1,\\dots,y_n$이라 하면 $$X\\cap Y\\cong(X\\times Y)\\cap V(x_1-y_1,\\dots,x_n-y_n)$$ 이다.",
+            "(1)과 따름정리 5.15에 의해 $\\dim Z\\ge\\dim(X\\times Y)-n=\\dim X+\\dim Y-n$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (일반 대수적집합의 차원)",
+          "formal_statement": "$X$가 공집합이 아닌 대수적집합이면 $X=X_1\\cup\\cdots\\cup X_r$($X_1,\\dots,X_r$은 $X$의 기약성분들)로 쓸 수 있다. $X$의 차원은 $$\\dim X:=\\max_{1\\le i\\le r}\\dim X_i$$ 이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.18 (차원 = 기약 닫힌부분집합 사슬 길이의 상한; 극대사슬은 모두 같은 길이)",
+          "formal_statement": "$X$를 대수적집합이라 하자. $\\dim X$는 $X$의 기약 닫힌부분집합들의 강한 사슬 $Y_0\\subsetneq Y_1\\subsetneq\\cdots\\subsetneq Y_r$의 길이 $r$의 상한이다. $X$가 준사영다양체이면, $X$의 기약 닫힌부분집합들의 모든 극대인 강한 사슬은 길이가 $\\dim X$로 같다.",
+          "idea_behind_proof": "핵심은 아핀 열린부분집합 $Y$를 잡으면 $A(Y)$의 소이데알 사슬과 $Y$(따라서 그 폐포를 통해 $X$)의 기약 닫힌부분집합 사슬이 정확히 같은 길이로 대응한다는 것이다. 이 대응을 최대차원의 기약성분에서 시작해 상한을 얻고, 반대로 임의의 극대사슬의 가장 작은 원소(한 점)를 포함하는 아핀 열린집합으로 되돌려 상한이 상계이기도 함을 보인다.",
+          "proof_steps": [
+            "최대 차원을 갖는 $X$의 기약성분의 공집합이 아닌 아핀 열린부분집합 $Y$를 고르면 $\\dim X=\\dim Y$이다. $A(Y)$의 소이데알 사슬은 $Y$의 같은 길이의 기약 닫힌부분집합 사슬에 대응한다.",
+            "이 부분집합들의 $X$ 안에서의 폐포를 취하면, $X$의 같은 길이의 기약 닫힌부분집합 사슬을 얻는다. 따라서 $X$의 기약 닫힌부분집합 사슬의 최대 길이는 적어도 $\\dim X$이다.",
+            "역으로 $X$의 기약 닫힌부분집합들의 극대인 사슬을 생각하자. 그러한 사슬의 가장 작은 원소는 반드시 한 점이어야 한다. 이 점을 포함하는 $X$의 공집합이 아닌 아핀 열린부분집합 $Y$를 고르자.",
+            "위 논증을 반대 방향으로 적용하면, 그 사슬의 길이가 많아야 $\\dim X$임을 알 수 있다. 두 번째 주장은 이제 따름정리 5.13에서 따라온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (국소 차원, 점에서의 국소환, 매장차원)",
+          "formal_statement": "$X$를 대수적집합, $p\\in X$라 하자. $p$에서의 $X$의 국소 차원(local dimension)은 $$\\dim_pX:=\\max_{1\\le i\\le r}\\dim X_i$$ 이며, 여기서 $X_1,\\dots,X_r$은 $p$를 포함하는 $X$의 기약성분들이다. $X$가 준사영다양체이면 $\\dim X=\\dim_pX=\\dim O_{X,p}$이다. 일반적으로, $p$를 포함하는 $X$의 임의의 아핀 열린부분집합 $U$에 대해 $O_{X,p}:=A(U)_{\\mathfrak m_p}$를 극대아이디얼 $\\mathfrak m_{X,p}$를 갖는 국소환으로 정의한다(단 $\\mathfrak m_p\\subseteq A(U)$는 $p$에 대응하는 극대아이디얼). 이 정의는 아핀 열린부분집합 $U$의 선택에 무관하다 — $U,V$가 $p$를 포함하는 두 아핀 열린부분집합이면, $p$를 포함하는 임의의 아핀 열린부분집합 $W\\subseteq U\\cap V$에서 $A(U)_{\\mathfrak m_p}\\cong A(W)_{\\mathfrak m_p}\\cong A(V)_{\\mathfrak m_p}$이기 때문이다. $O_{X,p}$의 원소들은 $p$에서의 정칙함수의 싹으로 해석할 수 있다. $p$에서 $X$의 매장차원(embedding dimension)은 $$\\mathrm{embdim}_pX:=\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$$ 이다. $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$은 $O_{X,p}/\\mathfrak m_{X,p}\\cong\\mathbb{C}$ 위의 벡터공간임에 유의하라."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 5.19 ($\\dim_pX=\\dim O_{X,p}\\le\\mathrm{embdim}_pX$)",
+          "formal_statement": "대수적집합 $X$와 점 $p\\in X$에 대해 $$\\dim_pX=\\dim O_{X,p}\\le\\mathrm{embdim}_pX$$ 이다.",
+          "idea_behind_proof": "첫 등식은 $\\mathfrak m_p$에 포함되는 극소소이데알들이 정확히 $p$를 지나는 기약성분들에 대응한다는 관찰에서, 국소화가 사슬의 길이를 보존한다는 사실로 나온다. 부등식은 나카야마 보조정리로 매장차원만큼의 원소가 $\\mathfrak m_{X,p}$ 전체를 생성함을 보인 뒤, 크룰 높이 정리를 그 생성원 개수에 적용하는 것이다.",
+          "proof_steps": [
+            "$p$를 포함하는 아핀 열린부분집합 $U$를 고르자. $A(U)$의 극소소이데알 $\\mathfrak p$는 좌표환이 $A(U)/\\mathfrak p$인 $U$의 기약성분에 대응한다. $\\mathfrak m_p$에서 국소화하면 정확히 $\\mathfrak m_p$에 포함되는 $\\mathfrak p$들만 살아남고, 이들은 $p$를 포함하는 기약성분에 대응한다.",
+            "$O_{X,p}=A(U)_{\\mathfrak m_p}$의 극대인 소이데알 사슬은, $\\mathfrak m_p$에 포함되는 극소소이데알에서 시작해 $\\mathfrak m_p$에서 끝나는 $A(U)$의 극대인 소이데알 사슬을 국소화해서 얻는다.",
+            "$\\mathfrak p_1,\\dots,\\mathfrak p_r\\subseteq A(U)$를 $\\mathfrak m_p$에 포함되는 극소소이데알들이라 하고 $X_1,\\dots,X_r\\subseteq X$를 대응하는 기약성분이라 하면 $$\\dim O_{X,p}=\\max_{1\\le i\\le r}\\dim(A(U)/\\mathfrak p_i)=\\max_{1\\le i\\le r}\\dim X_i=\\dim_pX.$$ 이것으로 첫 등식이 증명된다.",
+            "$c:=\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$이라 하자. $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$의 기저를 이루는 잉여류를 갖는 $u_1,\\dots,u_c\\in\\mathfrak m_{X,p}$를 고를 수 있다. 그러면 $\\mathfrak m_{X,p}=(u_1,\\dots,u_c)+\\mathfrak m_{X,p}^2$이다.",
+            "나카야마 보조정리에 의해 $\\mathfrak m_{X,p}=(u_1,\\dots,u_c)$이다. 크룰 높이 정리는 $\\dim O_{X,p}=\\mathrm{height}\\,\\mathfrak m_{X,p}\\le c$를 준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.20 (두 기약성분에서 국소 차원과 매장차원이 다르게 나타나는 예)",
+          "formal_statement": "$X:=V(xz,yz)\\subseteq\\mathbb{A}^3$이라 하자. $X=V(x,y)\\cup V(z)$이고 $\\dim V(x,y)=1$, $\\dim V(z)=2$이므로 $\\dim X=2$이다. $p:=(0,0,0)\\in X$에서는 $\\dim_pX=2$이고 $\\mathrm{embdim}_pX=3$이다. $q:=(1,0,0)\\in X$에서는 $\\dim_qX=2$이고 $\\mathrm{embdim}_qX=2$."
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.21 (뾰족한 삼차곡선의 특이점에서 매장차원)",
+          "formal_statement": "$X:=V(y^2-x^3)\\subseteq\\mathbb{A}^2$이라 하자. $X$는 기약이고 $\\dim X=1$이다. $p:=(0,0)\\in X$에서는 $\\dim_pX=1$이고 $\\mathrm{embdim}_pX=2$이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예제 5.21에서 $X=V(y^2-x^3)$의 원점 $p=(0,0)$에서 $\\mathrm{embdim}_pX=2$임을, $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$의 차원을 직접 계산해 확인하라(직관적으로: $I(X)=(y^2-x^3)$의 원점에서의 '일차 근사'가 무엇인지 생각하라).",
+          "hint": "$O_{X,p}\\cong A(X)_{\\mathfrak m_p}$이고 $A(X)=\\mathbb{C}[x,y]/(y^2-x^3)$이다. $\\mathfrak m_{X,p}$는 $x,y$로 생성되는데, $y^2-x^3$의 최저차 동차성분(즉 접원뿔, tangent cone을 결정하는 부분)이 무엇인지 확인하라.",
+          "solution": "$A(X)=\\mathbb{C}[x,y]/(y^2-x^3)$이고 $\\mathfrak m_{X,p}=(x,y)/(y^2-x^3)$이다. $y^2-x^3$의 최저차 항은 $2$차항인 $y^2$이 아니라... 실제로 $y^2$은 차수 $2$, $x^3$은 차수 $3$이므로 최저차 동차성분은 $y^2$ 하나뿐이다(즉 $y^2-x^3$의 '$2$차 이하 부분'은 $y^2$). 하지만 이는 관계식 자체가 이차식을 포함하므로, $\\mathfrak m_{X,p}^2$를 법으로 한 $\\mathfrak m_{X,p}$에서 $y^2\\equiv x^3\\equiv 0\\pmod{\\mathfrak m_{X,p}^2}$가 되어 $x,y$의 잉여류 사이에 새로운 이차관계식이 생기지 않는다 — 즉 $x,y$의 잉여류가 $\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2$에서 선형독립으로 남아 $\\dim_{\\mathbb{C}}\\mathfrak m_{X,p}/\\mathfrak m_{X,p}^2=2$이다(만약 방정식이 $y-x^2$처럼 일차항을 포함했다면 $y\\equiv x^2\\equiv 0\\pmod{\\mathfrak m^2}$가 되어 실제로 차원이 $1$로 줄었을 것 — 이것이 매끄러운 점의 경우다). 따라서 $\\mathrm{embdim}_pX=2$이며 이는 $\\dim_pX=1$보다 크다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 5.20에서 $q=(1,0,0)\\in X=V(xz,yz)$에서 $\\dim_qX=2$이고 $\\mathrm{embdim}_qX=2$임을(즉 $q$는 매끄러운 점임을) 확인하라. $q$가 어느 기약성분에 속하는지부터 밝혀라.",
+          "hint": "$q=(1,0,0)$이 $V(x,y)$(직선)와 $V(z)$(평면) 중 어디에 속하는지 좌표를 대입해 확인하고, 그 점 근방에서 $X$가 실제로 몇 개의 기약성분과 만나는지 따져 보라.",
+          "solution": "$q=(1,0,0)$은 $x=1\\ne 0$이므로 $V(x,y)$(즉 $z$축)에는 속하지 않고, $z=0$이므로 $V(z)$($xy$평면)에는 속한다. 즉 $q$는 오직 하나의 기약성분 $V(z)$에만 속한다. 따라서 $\\dim_qX=\\dim V(z)=2$이다. $q$ 근방(예를 들어 $x\\ne 0$인 열린집합)에서는 $X=V(xz,yz)$가 실제로 $V(z)$ 하나로 국한된다(그 근방에서 $x\\ne0$이므로 $xz=0\\Rightarrow z=0$이고 $yz=0$은 자동으로 만족됨). $V(z)\\subseteq\\mathbb{A}^3$은 그 자체로 매끄러운 초평면(아핀공간과 동형)이므로 그 접공간의 차원은 $2$이며, 따라서 $\\mathrm{embdim}_qX=2=\\dim_qX$ — 즉 $q$는 매끄러운 점이다."
+        },
+        {
+          "type": "ox",
+          "question": "따름정리 5.17(2)에 의해, $0$이 아닌 임의의 $f\\in A(X)$에 대해 $V(f)$의 모든 기약성분은 항상 $\\dim X-1$의 차원을 갖는다.",
+          "answer": "O",
+          "explanation": "참이다. 따름정리 5.17(2)의 내용 그대로다 — $f\\ne 0$이기만 하면(단위원일 필요는 없다, 단위원이면 $V(f)=\\emptyset$이 되어 자명하게 처리됨) 그 초곡면 절단의 모든 기약성분은 정확히 차원이 하나 줄어든다. 이는 (1)의 부등식이 $c=1$일 때 $\\mathrm{height}\\,\\mathfrak p\\ge 1$이 강제되어 등식으로 좁혀지기 때문이다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 5.19에 의해, 대수적집합 $X$와 점 $p\\in X$에서 $\\dim_pX=\\mathrm{embdim}_pX$가 항상 성립한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 5.19가 실제로 보장하는 것은 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$뿐이며, 등호가 항상 성립하는 것은 아니다. 예제 5.20의 원점($\\dim_pX=2<\\mathrm{embdim}_pX=3$)과 예제 5.21의 원점($\\dim_pX=1<\\mathrm{embdim}_pX=2$)이 정확히 진짜 부등식이 성립하는 경우이며, 이런 점들이 바로 특이점(singular point)이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 5.20과 예제 5.21은 모두 '원점에서 $\\mathrm{embdim}_p X>\\dim_pX$'라는 같은 현상을 보이지만, 그 기하학적 원인은 서로 다르다. 두 예제에서 원점이 특이점이 되는 이유를 각각 설명하고, 이 둘을 구별하는 것이 왜 중요한지(즉 '특이점'이라는 하나의 딱지 아래 실제로는 몇 가지 서로 다른 현상이 있는지) 논하라.",
+          "hint": "예제 5.20의 원점은 서로 다른 기약성분(차원이 다른 $V(x,y)$와 $V(z)$)이 만나는 점이라는 사실에 주목하고, 예제 5.21의 원점은 단 하나의 기약(매끄러운 다양체가 아닌) 곡선 위의 점이라는 점에서 어떻게 다른지 비교하라.",
+          "answer": "예제 5.20의 원점이 특이한 이유는 순전히 '두 개의 서로 다른 기약성분이 만난다'는 사실에서 온다 — $X=V(x,y)\\cup V(z)$는 원점에서 직선 $V(x,y)$와 평면 $V(z)$가 교차하므로, 그 국소환 $O_{X,p}$는 두 개의 극소소이데알을 가지며(즉 $A(U)_{\\mathfrak m_p}$가 정역이 아님), 접공간은 이 두 성분 각각의 접공간을 모두 담아야 하므로 $3$차원(전체 주변 공간 $\\mathbb{A}^3$ 전체)이 되어버린다. 반면 예제 5.21의 원점은 $X=V(y^2-x^3)$ 자체가 (단 하나의) 기약다양체이고 원점 역시 그 유일한 성분 위에 있음에도 불구하고, 방정식 $y^2-x^3$이 원점에서 '이차항으로 시작하지 않는' 특별한 구조(뾰족점, cusp) 때문에 접공간이 커진다 — 이는 성분들의 교차가 아니라 하나의 기약다양체 자체의 '뾰족함(비매끄러움)'에서 오는 특이성이다. 이 둘을 구별하는 것이 중요한 이유는, 대수기하학에서 '특이점을 해소한다(resolve)'는 것이 이 두 경우에 근본적으로 다른 기하학적 조작을 요구하기 때문이다 — 예제 5.20 같은 '성분들의 교차에 의한 특이점'은 (예를 들어) 각 성분을 분리해서 보면 그 자체로는 매끄러운 반면, 예제 5.21 같은 '뾰족점에 의한 특이점'은 아무리 국소적으로 들여다봐도(어떤 열린집합을 잡아도) 매끄러운 다양체로 볼 수 없다 — 실제로 이는 예제 2.9/2.18에서 이미 만난, 뾰족한 삼차곡선이 $\\mathbb{A}^1$과 전단사이지만 동형이 아니었던 바로 그 현상의 국소적 원인이다. 즉 '특이점'이라는 용어가 가리키는 현상은 (적어도) '기약성분들의 교차로 인한 특이성'과 '기약다양체 자체의 매끄럽지 않음'이라는 서로 다른 두 종류를 아우르며, 명제 5.19의 부등식 $\\dim_pX\\le\\mathrm{embdim}_pX$는 이 둘 모두를 하나의 대수적 기준(접공간이 실제 차원보다 큰가)으로 통합해서 포착한다."
+        }
+      ]
+    }
+  ]
+}

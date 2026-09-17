@@ -1,0 +1,126 @@
+{
+  "chapter_info": {
+    "title": "5. Dimension Theory",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "대수다양체의 '차원(dimension)'이라는 가장 기본적인 기하학적 불변량을 순수하게 대수적으로(환의 크룰 차원으로) 정의하고 계산하는 도구를 세운다. 이를 위해 정수확장(integral extension)이라는 대수적 개념 — 다항식환을 유한생성 가군으로 다루는 정수성(integrality)의 언어 — 을 도입하고, 나카야마 보조정리와 주이데알 정리(Principal Ideal Theorem)라는 가환대수의 핵심 도구를 거쳐, 최종적으로 뇌터 정규화(Noether normalization)를 이용해 대수다양체의 차원을 그 좌표환의 크룰 차원으로, 나아가 초월차수(transcendence degree)로 완전히 특징짓는다. 이 장은 순수 가환대수(1~2절: 정수확장, 주이데알 정리)와 그것을 기하학에 적용하는 부분(3~4절: 뇌터 정규화, 차원)으로 나뉘며, 이 강의노트의 이론적 정점에 해당한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "5.1 Integral extensions",
+      "step1_big_picture": {
+        "context": "이 절은 차원 이론 전체의 대수적 기반을 놓는다. 정수확장(integral extension) $R\\subseteq S$란 $S$의 모든 원소가 $R$-계수 모닉다항식의 근이 되는 확장이며, 이는 '유한생성 $R$-가군'이라는 훨씬 다루기 쉬운 조건(유한확장, finite extension)과 정확히 '유한생성 대수이면서 정수'라는 조건으로 특징지어진다(명제 5.1). 이 절의 두 핵심 도구는 나카야마 보조정리(국소환 위의 유한생성 가군에 대한 근본 보조정리)와 그로부터 얻는 아르틴 국소환의 특징짓기(따름정리 5.4)이며, 이 모든 것이 모여 상승정리(Going-Up Theorem, 정리 5.5)로 완성된다 — 정수확장 $R\\subseteq S$ 아래에서는 $R$의 소이데알 사슬이 항상 $S$의 소이데알 사슬로 '들어올려질' 수 있고, 특히 $\\dim R=\\dim S$라는 결과다. 이는 차원이 정수확장 아래 불변량이라는 뜻이며, 다음 절의 뇌터 정규화(다양체의 좌표환을 다항식환 위의 정수확장으로 만드는 정리)를 통해 임의의 대수다양체의 차원을 순수한 다항식환의 차원(변수의 개수)으로 계산할 수 있게 해 주는 핵심 다리다.",
+        "hidden_intuition": "'정수(integral)'라는 이름은 정수론에서 온 것이다 — $\\mathbb{Z}\\subseteq\\mathbb{Q}$에서 '정수'는 정확히 모닉정수계수다항식의 근인 유리수(사실 정수 자체)를 말하며, 예제 5.2가 보여주듯 이 그림은 임의의 UFD(유일인수분해정역) $R$과 그 분수체 $F(R)$ 사이의 정수성으로 일반화된다: $R$이 UFD이면 $R$은 $F(R)$ 안에서 '정수적으로 닫혀 있다(integrally closed)' — 이는 정확히 $\\mathbb{Z}$가 $\\mathbb{Q}$ 안에서 정수적으로 닫혀 있다는(유리수 중 정수계수 모닉다항식의 근은 그 자체로 정수라는) 고전적 사실의 일반화다. 명제 5.1(1)의 증명에서 '수반행렬(adjugate matrix) 트릭'은 이 이론 전체에서 반복해서 등장하는 핵심 기법이다 — 유한생성 가군의 생성원들이 만족하는 선형관계식을 행렬로 모으면, 그 행렬의 수반행렬을 곱하는 것만으로 '행렬식이 만족하는 모닉다항식'이 저절로 튀어나온다(케일리-해밀턴 정리의 가군 버전). 이 같은 트릭이 나카야마 보조정리의 증명에서도 그대로 재사용된다는 점에 주목하라 — 사실 나카야마 보조정리는 '$M/N$을 생성원으로 갖는 선형관계식에서 항등행렬에 가까운 행렬의 행렬식이 단위원이 됨'을 보이는 것으로, 정수성 논증과 정확히 같은 골격을 공유한다. 상승정리의 증명에서 국소화 $R_p\\subseteq S_p$로 문제를 축소하는 것은, 크룰 차원과 소이데알의 사슬이라는 전역적 문제를 '한 소이데알 근방'이라는 국소적 문제로 항상 환원할 수 있다는 가환대수의 일반적 전략의 한 예다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 ($R$-가군, 부분가군, $R$-선형사상, 유한생성)",
+          "formal_statement": "환 $R$에 대해, $R$-가군($R$-module)이란 스칼라곱 $R\\times M\\to M$을 갖춘 아벨군 $M$으로서, 모든 $r,s\\in R$, $m,n\\in M$에서 다음을 만족하는 것이다: $$(r+s)m=rm+sm,\\quad r(m+n)=rm+rn,\\quad (rs)m=r(sm),\\quad 1m=m.$$ 스칼라곱에 대해 닫힌 $M$의 부분군을 $R$-부분가군($R$-submodule)이라 한다. $R$-선형사상 $\\varphi:M\\to N$은 모든 $r\\in R$, $m\\in M$에서 $\\varphi(rm)=r\\varphi(m)$을 만족하는 군 준동형이다. $R$-가군 $M$이 유한생성(finitely generated)이라는 것은 $M=Rm_1+\\cdots+Rm_t$인 $m_1,\\dots,m_t\\in M$이 존재한다는 것이다. $R\\subseteq S$가 환 $S$의 부분환이면 $S$는 $R$-가군이다. $R[x_1,\\dots,x_r]$은 유한생성 $R$-대수이지만 유한생성 $R$-가군은 아님에 유의하라."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정수원소, 정수확장, 유한확장, 유한형확장)",
+          "formal_statement": "$R\\subseteq S$를 환 $S$의 부분환이라 하자. $s\\in S$가 $R$ 위에서 정수(integral)라는 것은 $R$-계수 모닉다항식의 근이 된다는 것이다. 확장 $R\\subseteq S$가 정수(integral)라는 것은 $S$의 모든 원소가 $R$ 위에서 정수라는 것이다. 이 확장이 유한(finite)이라는 것은 $S$가 유한생성 $R$-가군이라는 것이다. 이 확장이 유한형(of finite type)이라는 것은 $S$가 유한생성 $R$-대수라는 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 5.1 (유한 = 유한형 + 정수; 추이성; 정수원소들은 부분환을 이룬다)",
+          "formal_statement": "$R\\subseteq S\\subseteq T$를 환이라 하자. (1) $S$가 $R$ 위에서 유한인 것은 $S$가 $R$ 위에서 유한형이면서 정수인 것과 동치이다. (2) $T$가 $S$ 위에서 정수(각각 유한, 유한형)이고 $S$가 $R$ 위에서 정수(각각 유한, 유한형)이면, $T$는 $R$ 위에서 정수(각각 유한, 유한형)이다. (3) $a,b\\in S$가 $R$ 위에서 정수이면 $a+b,a-b,ab$도 $R$ 위에서 정수이다. 특히 $\\overline{R}:=\\{a\\in S\\mid a\\text{는 }R\\text{ 위에서 정수}\\}\\subseteq T$는 부분환이다.",
+          "idea_behind_proof": "(1)의 핵심은 수반행렬 트릭이다: 생성원들 사이의 선형관계식을 행렬로 모으면 그 행렬식이 만족하는 모닉다항식이 자동으로 나온다. (2)는 생성원들을 단순히 이어붙이는 것이고, (3)은 $a,b$가 만드는 부분대수 $R[a,b]$가 유한하다는 것을 (1),(2)로 연쇄적으로 확인하는 것이다.",
+          "proof_steps": [
+            "(1) [⇒] $S$가 $R$-가군으로서 $u_1,\\dots,u_m$에 의해 생성된다고 하자. $S$가 $R$ 위에서 유한형임은 명백하다. $s\\in S$에 대해 $su_i=\\sum_{j=1}^ma_{ij}u_j$($a_{ij}\\in R$)로 쓰자. 행렬 $A(s):=(s\\delta_{ij}-a_{ij})_{ij}$의 수반행렬을 곱하면 모든 $i$에서 $\\det(A(s))u_i=0$을 얻는다.",
+            "$1\\in S$가 $u_i$들의 $R$-선형결합이므로 $\\det(A(s))\\cdot 1=0$, 즉 모닉다항식 $\\det(A(x))\\in R[x]$가 $s$에서 소멸한다. 따라서 $S$는 $R$ 위에서 정수이다.",
+            "(1) [⇐] 역으로 $S$가 $R$-대수로서 $s_1,\\dots,s_m$으로 생성된다고 하자. $S$가 $R$ 위에서 정수이면 각 $s_i$는 차수 $e_i$인 $R[x]$의 모닉다항식을 만족한다. 그러면 $S$는 $R$-가군으로서 $1,s_1,\\dots,s_1^{e_1-1},\\dots,s_m,\\dots,s_m^{e_m-1}$에 의해 생성된다.",
+            "(2): $T$가 $S$-대수로서 $t_1,\\dots,t_m$, $S$가 $R$-대수로서 $s_1,\\dots,s_n$으로 생성되면 $T$는 $R$-대수로서 $t_1,\\dots,t_m,s_1,\\dots,s_n$으로 생성된다.",
+            "$T$가 $S$-가군으로서 $u_1,\\dots,u_k$, $S$가 $R$-가군으로서 $v_1,\\dots,v_\\ell$로 생성되면 $T$는 $R$-가군으로서 $u_iv_j$($1\\le i\\le k,1\\le j\\le\\ell$)들로 생성된다. 이제 (1)이 (2)의 나머지 주장(정수 전이성)을 준다.",
+            "(3): $R[a,b]\\subseteq S$를 $a,b$를 포함하는 가장 작은 $R$-부분대수라 하자. $R[a]$는 $R$ 위에서 유한이고 $R[a,b]$는 $R[a]$ 위에서 유한이다. 따라서 (2)에 의해 $R[a,b]$는 $R$ 위에서 유한이고, 그러므로 (1)에 의해 $R$ 위에서 정수이다. 따라서 $a+b,a-b,ab\\in R[a,b]$는 모두 $R$ 위에서 정수이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 5.2 (UFD는 그 분수체 안에서 정수적으로 닫혀 있다)",
+          "formal_statement": "$R$을 유일인수분해정역(UFD)이라 하자. $a,b\\in R$이 서로소이고 $b\\ne 0$이며 $a/b\\in F(R)$이 $R$ 위에서 정수라면, $R=\\{\\alpha\\in F(R)\\mid\\alpha\\text{는 }R\\text{ 위에서 정수}\\}$이다.",
+          "idea_behind_proof": "$a/b$가 만족하는 모닉다항식의 관계식을 정리하면 $b$가 $a^n$을 나눈다는 결론이 나오는데, $a,b$가 서로소이므로 이는 $b$가 단위원이어야만 함을 강제한다 — 즉 애초에 진짜 분수(비단위원 분모)는 정수일 수 없다.",
+          "proof_steps": [
+            "$(a/b)^n+c_{n-1}(a/b)^{n-1}+\\cdots+c_1(a/b)+c_0=0$인 $c_{n-1},\\dots,c_0\\in R$이 존재한다고 하자.",
+            "양변에 $b^n$을 곱해 정리하면 $a^n=-b(c_{n-1}a^{n-1}+\\cdots+c_1ab^{n-2}+c_0b^{n-1})$을 얻으므로 $b\\mid a^n$이다.",
+            "$a,b$가 서로소이므로 이는 $b$가 단위원이 아니라면 모순이다. 따라서 $b$는 단위원이고 $a/b\\in R$이다. 이는 $R=\\{\\alpha\\in F(R)\\mid\\alpha\\text{는 }R\\text{ 위에서 정수}\\}$임을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 5.3 (나카야마 보조정리)",
+          "formal_statement": "$(R,\\mathfrak{m})$을 국소환, $M$을 유한생성 $R$-가군, $N\\subseteq M$을 부분가군이라 하자. 그러면 $$N+\\mathfrak{m}M=M\\quad\\Longleftrightarrow\\quad N=M$$ 이다. 특히 $\\mathfrak{m}M=M$이면 $M=0$이다.",
+          "idea_behind_proof": "명제 5.1(1)의 수반행렬 트릭을 $M/N$에 그대로 적용한다: $\\mathfrak m M=M$이라는 조건에서 나오는 선형관계식의 행렬 $A$에 대해 $\\det(A)$가 $\\mathfrak m$ 밖에 있으므로 단위원이 되고, 이는 곧 $M/N$의 생성원들이 전부 $0$이라는 것을 강제한다.",
+          "proof_steps": [
+            "($\\Leftarrow$)는 자명하므로 ($\\Rightarrow$)만 보이면 된다. $\\mathfrak mM/N=M/N$이다. $M/N$이 $m_1,\\dots,m_r$로 생성된다고 하면 $m_i=\\sum_{j=1}^ma_{ij}m_j$($a_{ij}\\in\\mathfrak m$)로 쓸 수 있다.",
+            "행렬 $A:=(\\delta_{ij}-a_{ij})_{ij}$의 수반행렬을 곱하면 모든 $1\\le i\\le r$에서 $\\det(A)m_i=0$을 얻는다.",
+            "$\\det(A)\\equiv 1\\pmod{\\mathfrak m}$이므로 $\\det(A)\\notin\\mathfrak m$이고, $(R,\\mathfrak m)$이 국소환이므로 $\\det(A)$는 단위원이다. 따라서 $m_1=\\cdots=m_r=0$이고 $M/N=0$, 즉 $M=N$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 5.4 (아르틴 국소환의 특징 — $\\mathfrak{m}^n=(0)$)",
+          "formal_statement": "$(R,\\mathfrak{m})$을 $0$이 아닌 뇌터 국소환이라 하자. $R$이 아르틴(Artinian)인 것은 어떤 $n\\ge 1$에서 $\\mathfrak{m}^n=(0)$인 것과 동치이다.",
+          "idea_behind_proof": "아르틴 환은 강하강조건을 만족하므로 $\\mathfrak m$의 거듭제곱 사슬이 안정화되고, 그 안정화된 지점에서 나카야마 보조정리가 곧바로 $\\mathfrak m^n=0$을 준다. 역방향은 명제 1.48(뇌터 + 유일한 소이데알 ⟹ 아르틴)을 그대로 가져다 쓴다.",
+          "proof_steps": [
+            "$R$이 아르틴이면 $\\mathfrak m\\supseteq\\mathfrak m^2\\supseteq\\cdots$가 결국 안정화되어 어떤 $n\\ge 1$에서 $\\mathfrak m^n=\\mathfrak m^{n+1}$이다. 나카야마 보조정리($M=\\mathfrak m^n$, $N=0$에 적용하면 $\\mathfrak m\\cdot\\mathfrak m^n=\\mathfrak m^n$이므로)에 의해 $\\mathfrak m^n=(0)$이다.",
+            "역으로 어떤 $n\\ge 1$에서 $\\mathfrak m^n=(0)$이고 $\\mathfrak p\\subseteq R$가 소이데알이라 하자. $\\mathfrak m^n\\subseteq\\mathfrak p$이므로 $\\mathfrak m=\\mathfrak p$이다(뇌터환에서 소이데알은 항상 어떤 극대아이디얼의 거듭제곱근을 포함하고, $\\mathfrak m$이 유일한 극대아이디얼이므로). 명제 1.48에 의해 $R$은 아르틴이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (크룰 차원, 높이)",
+          "formal_statement": "환 $R$의 크룰 차원(Krull dimension)은 $R$의 소이데알들의 강한 사슬 $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_r$의 길이 $r$의 상한이다. 소이데알 $\\mathfrak p\\subseteq R$의 높이(height)는 $$\\mathrm{height}\\,\\mathfrak p:=\\dim R_{\\mathfrak p}$$ 이다. 동치로, $\\mathrm{height}\\,\\mathfrak p$는 $\\mathfrak p$에서 끝나는 소이데알 사슬들의 길이의 상한이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 5.5 (상승정리, Going-Up Theorem)",
+          "formal_statement": "$R\\subseteq S$를 정수확장이라 하자. (1) $R$의 모든 소이데알 $\\mathfrak p$에 대해 $\\mathfrak q\\cap R=\\mathfrak p$인 $S$의 소이데알 $\\mathfrak q$가 존재한다. (2) $\\mathfrak q\\subsetneq\\mathfrak q'$가 $S$의 소이데알이면 $\\mathfrak q\\cap R\\subsetneq\\mathfrak q'\\cap R$이다. (3) $\\mathfrak p\\subsetneq\\mathfrak p'$가 $R$의 소이데알이고 $\\mathfrak q$가 $\\mathfrak q\\cap R=\\mathfrak p$인 $S$의 소이데알이면, $\\mathfrak q'\\supsetneq\\mathfrak q$이고 $\\mathfrak q'\\cap R=\\mathfrak p'$인 $S$의 소이데알 $\\mathfrak q'$가 존재한다. 특히 $\\dim R=\\dim S$이다.",
+          "idea_behind_proof": "(1)은 문제를 국소화 $R_{\\mathfrak p}\\subseteq S_{\\mathfrak p}$로 축소한 뒤, $S_{\\mathfrak p}$의 극대아이디얼과 $R_{\\mathfrak p}$의 극대아이디얼(즉 $R_{\\mathfrak p}$ 자신의 유일한 극대아이디얼)이 정수확장 아래에서 잔여체까지 정수관계로 대응함을 보이는 것이다. (2)는 만약 $\\mathfrak q\\cap R=\\mathfrak q'\\cap R$이라면 몫환 $S/\\mathfrak q\\subseteq S/\\mathfrak q'$에서 모순되는 원소를 찾아내는 것이다. (3)은 (1)을 몫환 $R/\\mathfrak p\\subseteq S/\\mathfrak q$에 적용하는 것뿐이다.",
+          "proof_steps": [
+            "(1): $S_{\\mathfrak p}:=(R\\setminus\\mathfrak p)^{-1}S$라 하면 $R_{\\mathfrak p}\\subseteq S_{\\mathfrak p}$이고 $S_{\\mathfrak p}$는 국소환 $R_{\\mathfrak p}$ 위에서 정수이다. $\\mathfrak m$을 $S_{\\mathfrak p}$의 극대아이디얼이라 하면 $S_{\\mathfrak p}/\\mathfrak m$은 $R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$ 위에서 정수이다.",
+            "$R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$가 체임을 보이자: $0\\ne d\\in R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$에 대해, $d^{-1}\\in S_{\\mathfrak p}/\\mathfrak m$이 만족하는 최소차수 $k$의 모닉다항식(계수는 $R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$)에 $d^k$를 곱하면 $d^{-1}$을 $d$에 대한 $R_{\\mathfrak p}/(\\mathfrak m\\cap R_{\\mathfrak p})$ 위의 다항식으로 표현할 수 있다.",
+            "이 주장에 의해 $\\mathfrak m\\cap R_{\\mathfrak p}=\\mathfrak p R_{\\mathfrak p}$이다. $S\\subseteq S_{\\mathfrak p}$임에 유의하고, $\\mathfrak q:=\\mathfrak m\\cap S\\subseteq S$는 소이데알이며 $\\mathfrak q\\cap R=\\mathfrak pR_{\\mathfrak p}\\cap R=\\mathfrak p$이다.",
+            "(2): $\\mathfrak p:=\\mathfrak q\\cap R=\\mathfrak q'\\cap R$이라 가정하자. $S/\\mathfrak q$는 $R/\\mathfrak p$ 위에서 정수이다. $[b]\\in S/\\mathfrak q$에 대한 모닉다항식 $p(x)\\in(R/\\mathfrak p)[x]$가 상수항이 $0$이 아니게 되도록 $b\\in\\mathfrak q'\\setminus\\mathfrak q$를 고를 수 있다.",
+            "그러나 $S/\\mathfrak q'$에서 $p([b])=0$이므로 $p(x)$의 상수항이 $\\mathfrak p$에 속해야 한다. 이는 모순이다.",
+            "(3): $R/\\mathfrak p\\subseteq S/\\mathfrak q$는 정수확장이다. (1)에 의해 $\\mathfrak q'/\\mathfrak q\\cap R/\\mathfrak p=\\mathfrak p'/\\mathfrak p$를 만족하는, $\\mathfrak q$를 포함하는 $S$의 소이데알 $\\mathfrak q'$가 존재한다. 그러면 $\\mathfrak q'\\cap R=\\mathfrak p'$이고, $\\mathfrak p\\subsetneq\\mathfrak p'$이므로 (2)에 의해 $\\mathfrak q\\subsetneq\\mathfrak q'$이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$R=\\mathbb{Z}$, $S=\\mathbb{Z}[i]$(가우스 정수)일 때, $\\alpha=\\frac{1+i\\sqrt{3}}{2}\\in\\mathbb{C}$가 $\\mathbb{Z}$ 위에서 정수인지 직접 모닉다항식을 찾아 확인하라(단 $S$가 아니라 $\\mathbb{C}$ 안에서 생각하라).",
+          "hint": "$\\alpha$가 만족하는 이차방정식을 켤레 $\\bar\\alpha=\\frac{1-i\\sqrt3}{2}$와의 합과 곱을 이용해 구성해 보라.",
+          "solution": "$\\alpha+\\bar\\alpha=1$이고 $\\alpha\\bar\\alpha=\\frac{1+3}{4}=1$이므로 $\\alpha,\\bar\\alpha$는 $x^2-(\\alpha+\\bar\\alpha)x+\\alpha\\bar\\alpha=x^2-x+1$의 두 근이다. 이는 $\\mathbb{Z}$ 계수 모닉다항식이므로 $\\alpha$는 $\\mathbb{Z}$ 위에서 정수이다(실제로 $\\alpha$는 $1$의 원시 6제곱근이다)."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 5.2를 이용해 $\\sqrt{2}\\in\\mathbb{Q}=F(\\mathbb{Z})$가 $\\mathbb{Z}$ 위에서 정수이지만 $\\frac{1}{2}\\in\\mathbb{Q}$는 그렇지 않음을 각각 확인하라.",
+          "hint": "$\\sqrt2$는 어떤 모닉정수계수다항식의 근인지 직접 찾아보고, $1/2$가 예제 5.2의 논증(서로소인 분자·분모, 분모가 단위원이 아니면 모순)에 걸리는지 확인하라.",
+          "solution": "$\\sqrt2$는 $x^2-2=0$을 만족하는 $\\mathbb{Z}$ 계수 모닉다항식의 근이므로 $\\mathbb{Z}$ 위에서 정수이다. 한편 $1/2=a/b$($a=1,b=2$, 서로소)에 대해 예제 5.2의 논증을 적용하면, $1/2$가 정수라면 $b=2$가 단위원이어야 하는데 $\\mathbb{Z}$에서 $2$는 단위원이 아니므로 모순이다. 따라서 $1/2$는 $\\mathbb{Z}$ 위에서 정수가 아니다 — 이는 $\\mathbb{Z}$가 $\\mathbb{Q}$ 안에서 정수적으로 닫혀 있다는 사실(예제 5.2, $\\mathbb{Z}$는 UFD이므로)과 정확히 일치한다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 5.1(1)에 의해, $R\\subseteq S$가 정수확장이기만 하면(유한형이라는 조건 없이) $S$는 항상 $R$ 위에서 유한이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 5.1(1)이 요구하는 것은 '유한형이면서 정수'라는 두 조건의 결합이다. 예를 들어 무한히 많은 변수의 다항식환처럼 유한형이 아닌 정수확장에서는 유한(유한생성 가군)이 실패할 수 있다 — 유한형이라는 조건이 빠지면 '무한히 많은 생성원'이 필요할 수 있기 때문이다."
+        },
+        {
+          "type": "ox",
+          "question": "나카야마 보조정리에 의해, 국소환 $(R,\\mathfrak m)$ 위의 (유한생성이 아닌) 임의의 $R$-가군 $M$에 대해서도 $\\mathfrak mM=M$이면 $M=0$이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 나카야마 보조정리는 $M$이 유한생성일 것을 명시적으로 요구한다. 유한생성이 아닌 가군에서는 $\\mathfrak mM=M$이면서 $M\\ne 0$인 반례가 존재한다(예: $R$이 이산 값매김환일 때 그 분수체 $F(R)$을 $R$-가군으로 보면 $\\mathfrak mF(R)=F(R)$이지만 $F(R)\\ne 0$)."
+        },
+        {
+          "type": "conceptual",
+          "question": "상승정리(정리 5.5)의 결론 '$\\dim R=\\dim S$'는 정수확장이 크룰 차원을 보존한다는 뜻이다. 이 사실이 다음 절 이후 '뇌터 정규화'를 통해 임의의 대수다양체의 차원을 계산하는 전략에서 어떤 역할을 하게 될지, 그리고 이 정리의 증명에서 국소화로 축소하는 단계가 왜 정당한지 설명하라.",
+          "hint": "뇌터 정규화가 좌표환 $A(X)$를 어떤 다항식환 $\\mathbb{C}[y_1,\\dots,y_d]$ 위의 정수확장(유한확장)으로 만든다는 사실을 상승정리와 결합해 보라. 그리고 국소화 $R_{\\mathfrak p}\\subseteq S_{\\mathfrak p}$가 원래 문제(임의의 소이데알 사슬)와 같은 정보를 담는 이유를 생각하라.",
+          "answer": "상승정리가 여는 전략은 이렇다 — 만약 임의의 대수다양체 $X$의 좌표환 $A(X)$가 어떤 다항식환 $\\mathbb{C}[y_1,\\dots,y_d]$ 위의 정수확장(실제로 뇌터 정규화가 이를 보장한다)이라면, $\\dim A(X)=\\dim\\mathbb{C}[y_1,\\dots,y_d]=d$가 상승정리에 의해 자동으로 나온다 — 즉 복잡한 좌표환의 크룰 차원 계산 문제가, 이미 완전히 알려진 다항식환의 차원(변수의 개수) 계산 문제로 환원된다. 이것이 '차원'이라는 순수 기하학적 직관(자유도의 개수)이 순수 대수적 불변량(크룰 차원)과 정확히 일치하게 되는 다리다. 국소화로 축소하는 단계가 정당한 이유는, 소이데알 $\\mathfrak p$에서 끝나는 사슬들의 정보(즉 $\\mathrm{height}\\,\\mathfrak p$)가 정의상 이미 $R_{\\mathfrak p}$의 크룰 차원으로 정의되어 있고, $\\mathfrak p$를 포함하는 소이데알들과 $R_{\\mathfrak p}$의 소이데알들 사이에 순서를 보존하는 전단사가 있기 때문이다(소이데알의 국소화에 대한 표준적인 대응) — 즉 '$\\mathfrak p$ 근방에서 사슬이 어떻게 생겼는가'라는 질문은 전역적인 $R$ 대신 국소환 $R_{\\mathfrak p}$ 안에서 물어도 정확히 같은 답을 준다. 이 국소화 축소는 이 장 전체(나카야마 보조정리, 주이데알 정리)에서 반복되는 전략으로, '전역적인 사슬 조건'을 '국소환의 유일한 극대아이디얼에 대한 조건'으로 바꾸어 훨씬 다루기 쉽게 만든다."
+        }
+      ]
+    }
+  ]
+}
