@@ -1,0 +1,83 @@
+{
+  "chapter_info": {
+    "title": "2. Functions on Affine Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "아핀 대수다양체 위에 실제로 사는 함수(정칙함수, 유리함수)의 개념을 국소화(localization)라는 대수적 도구로 정확히 세우고, 이를 통해 다양체 사이의 사상(morphism)을 좌표환 사이의 $\\mathbb{C}$-대수 준동형으로 완전히 번역한다. 이렇게 얻는 '아핀다양체의 범주 = 정역인 유한생성 $\\mathbb{C}$-대수의 반대범주'라는 사전은 이후 모든 기하학적 구성(사영다양체, 곱, 유리사상)의 대수적 토대가 된다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.2 Localization",
+      "step1_big_picture": {
+        "context": "2.1절의 한원소 국소화 $A_f$(하나의 원소 $f$만 뒤집기)는 사실 훨씬 일반적인 구성의 특수한 경우다. 이 절은 그 일반적인 국소화 $R[U^{-1}]$(곱셈에 닫힌 임의의 집합 $U$ 전체를 한꺼번에 뒤집기)를 정의하고, 특히 소이데알의 여집합으로 국소화하는 $R_\\mathfrak{p}$가 '그 소이데알이 유일한 극대이데알이 되는 국소환'을 만든다는 사실(명제 2.10)을 확인한다. 이를 곧바로 기하학에 적용해, 다양체의 한 점 $p$에서의 함수의 '싹(germ)'이라는 개념을 정의하고, 그 싹들의 국소환 $O_{X,p}$가 정확히 $A(X)$를 점 $p$에서 국소화한 것과 같음(정리 2.11)을 보인다 — 이는 '점 근방에서만 본 함수'라는 극히 지역적인 개념을 순수 대수 연산 하나로 포착하는 것이다.",
+        "hidden_intuition": "일반적인 국소화 $R[U^{-1}]$은 $\\mathbb{Z}$에서 $\\mathbb{Q}$를 만드는 방식(0이 아닌 정수 전부를 분모로 허용)을 임의의 환과 임의의 곱셈에 닫힌 집합으로 일반화한 것뿐이다 — $U=\\{f^r\\mid r\\ge 0\\}$으로 두면 정확히 2.1절의 $A_f$가 나온다. 정말 흥미로운 특수한 선택은 $U=R\\setminus\\mathfrak{p}$($\\mathfrak{p}$가 소이데알)인데, 이렇게 만든 $R_\\mathfrak{p}$는 '소이데알 $\\mathfrak{p}$ 안에 있지 않은 모든 원소를 뒤집는다'는 뜻이고, 그 결과로 $\\mathfrak{p}$ 자체는 여전히 이데알로 남으면서(뒤집지 않았으므로) 그것이 유일한 극대이데알이 되어버린다(명제 2.10) — 소이데알 주변만 남기고 그 바깥은 전부 '단위원'으로 무시해버리는 것이 국소화의 본질이다. 이를 기하학에 옮기면, 한 점 $p\\in X$에서의 함수의 싹은 '$p$ 근방에서만 같으면 같은 것으로 친다'는 관점이고, 그 싹들의 환 $O_{X,p}$는 정확히 좌표환 $A(X)$를 극대이데알 $\\mathfrak{m}_p$에서 국소화한 것과 같다(정리 2.11) — 즉 '점 $p$ 주변에서의 국소적 대수 구조'라는 기하학적 개념이 '$\\mathfrak{m}_p$ 밖의 원소를 전부 뒤집는다'는 순수 대수 연산으로 완전히 번역된다. 이 국소환의 유일한 극대이데알 $\\mathfrak{m}_{X,p}$(그 점에서 소멸하는 싹들)가 '그 점에서 함숫값이 $0$인가'라는 조건을 정확히 포착하고, 몫체 $O_{X,p}/\\mathfrak{m}_{X,p}\\cong\\mathbb{C}$가 바로 그 점에서의 '값매김'이다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (곱셈에 닫힌 집합, 일반 국소화 $R[U^{-1}]$)",
+          "formal_statement": "환 $R$의 부분집합 $U$가 곱셈에 닫혀 있다(multiplicatively closed) 함은 $1\\in U$이고 $s,t\\in U$이면 $st\\in U$인 것이다. $a,b\\in R$, $s,t\\in U$에 대해 $$\\frac{a}{s}\\sim\\frac{b}{t} \\iff u(ta-sb)=0 \\text{ for some } u\\in U$$ 로 정의하면 이는 동치관계이다. $R[U^{-1}]$을 이 동치류들의 모임이라 하고, 통상적인 방식으로 덧셈·곱셈을 정의하면 잘 정의되어 환이 되며, 이를 $U$에 의한 $R$의 국소화(localization)라 한다. $U$의 모든 원소는 $R[U^{-1}]$에서 단위원이 된다. 환 준동형 $\\varphi_U:R\\to R[U^{-1}],\\ a\\mapsto a/1$을 국소화 사상이라 한다. 명제 2.3에서와 같이, $\\alpha:R\\to B$가 모든 $u\\in U$에서 $\\alpha(u)$가 단위원이 되는 환 준동형이면 $\\widetilde{\\alpha}(a/1)=\\alpha(a)$인 유일한 환 준동형 $\\widetilde{\\alpha}:R[U^{-1}]\\to B$가 존재함을 보일 수 있다. $U:=R\\setminus\\mathfrak{p}$ ($\\mathfrak{p}\\subseteq R$는 소이데알)일 때 $R_\\mathfrak{p}:=R[U^{-1}]$, $\\varphi_\\mathfrak{p}:=\\varphi_U$로 쓴다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.10 ($R_{\\mathfrak{p}}$는 국소환이다)",
+          "formal_statement": "$\\mathfrak{p}$가 환 $R$의 소이데알이면, $R_\\mathfrak{p}$는 유일한 극대이데알 $\\mathfrak{p}R_\\mathfrak{p}$를 갖는 국소환이고 $R_\\mathfrak{p}/\\mathfrak{p}R_\\mathfrak{p}\\cong F(R/\\mathfrak{p})$이다.",
+          "idea_behind_proof": "핵심은 $R_\\mathfrak{p}$에서 '단위원인 것'과 '분자가 $\\mathfrak{p}$ 밖에 있는 것'이 정확히 같다는 관찰이다 — 그러면 비단위원들이 저절로 이데알 하나($\\mathfrak{p}R_\\mathfrak{p}$)를 이루게 되어 국소환의 정의를 즉시 만족한다.",
+          "proof_steps": [
+            "$R_\\mathfrak{p}$에서 $a/s$가 단위원인 것과 $a\\notin\\mathfrak{p}$인 것이 동치임을 보인다: $a\\in\\mathfrak{p}$이고 $(a/s)(b/t)=1$이라 하면 어떤 $u\\notin\\mathfrak{p}$에서 $u(ab-st)=0$이므로 $ust=uab\\in\\mathfrak{p}$인데 $ust\\notin\\mathfrak{p}$(각 인자가 $\\mathfrak{p}$ 밖에 있고 $\\mathfrak{p}$가 소이데알이므로)라 모순. $a\\notin\\mathfrak{p}$이면 $a/s$가 단위원임은 명백하다($s/a$가 역원).",
+            "이 사실에 의해 $R_\\mathfrak{p}$의 비단위원들은 정확히 이데알 $\\mathfrak{p}R_\\mathfrak{p}$를 이루고, 따라서 이는 유일한 극대이데알이다.",
+            "마지막으로 환 준동형 $R_\\mathfrak{p}\\to F(R/\\mathfrak{p}),\\ a/s\\mapsto\\overline{a}/\\overline{s}$는 전사이고 그 핵이 $\\mathfrak{p}R_\\mathfrak{p}$이므로 마지막 주장이 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정칙함수의 싹, 국소환 $O_{X,p}$)",
+          "formal_statement": "$X$를 아핀 대수다양체라 하자. 점 $p\\in X$를 포함하는 열린부분집합 $U,V\\subseteq X$와 $f\\in O_X(U),\\ g\\in O_X(V)$에 대해, $p$를 포함하는 어떤 열린부분집합 $W\\subseteq U\\cap V$에서 $f=g$이면 $(U,f)\\sim(V,g)$로 정의한다. $p\\in X$에서의 정칙함수의 싹(germ)은 이런 쌍 $(U,f)$($p\\in U\\subseteq X$는 열린부분집합, $f\\in O_X(U)$)들의 동치류이다. 싹들의 환은 유일한 극대이데알 $\\mathfrak{m}_{X,p}:=\\{f\\in O_{X,p}\\mid f(p)=0\\}$를 갖는 국소환 $O_{X,p}$를 이룬다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.11 ($O_{X,p}\\cong A(X)_{\\mathfrak{m}_p}$)",
+          "formal_statement": "아핀 대수다양체 $X$와 $p\\in X$에 대해 $$O_{X,p}\\cong A(X)_{\\mathfrak{m}_p} \\quad\\text{그리고}\\quad \\mathfrak{m}_{X,p}=\\mathfrak{m}_pO_{X,p}=\\left\\{\\frac{a}{b}\\ \\middle|\\ a,b\\in A(X),\\ a(p)=0,\\ b(p)\\ne 0\\right\\}$$ 이다.",
+          "idea_behind_proof": "값매김 사상 $\\mathrm{ev}_p:A(X)\\to\\mathbb{C}$의 핵이 정확히 $\\mathfrak{m}_p$라는 사실로부터 $A(X)_{\\mathfrak{m}_p}$의 원소 $a/b$($b(p)\\ne 0$)가 항상 $D_X(b)$ 위의 실제 정칙함수를 준다는 자연스러운 사상을 얻고, 이 사상이 전사임은 정칙함수의 싹의 정의(어떤 근방에서의 $a/b$ 표현) 그 자체에서, 단사임은 다시 한 번 조밀성 논증(명제 1.10)에서 나온다.",
+          "proof_steps": [
+            "값매김 사상 $\\mathrm{ev}_p:A(X)\\to\\mathbb{C},\\ f\\mapsto f(p)$는 전사인 환 준동형이고 $\\ker(\\mathrm{ev}_p)=\\mathfrak{m}_p$이다.",
+            "$a/b\\in A(X)_{\\mathfrak{m}_p}$에 대해 $b(p)\\ne 0$이므로 $a/b$는 $D_X(b)$ 위의 정칙함수이고, 따라서 $p$에서의 싹을 정의한다. $a/b=c/d$가 $A(X)_{\\mathfrak{m}_p}$에서 성립하면 $A(X)$가 정역이므로 $ad=bc$이고, 따라서 $a/b=c/d$는 $p$의 근방 $D_X(bd)$ 위에서 (다항식으로서) 성립한다. 이는 $A(X)_{\\mathfrak{m}_p}\\to O_{X,p}$라는 사상이 잘 정의됨을 보이며, 이는 명백히 전사인 환 준동형이다.",
+            "$a/b$의 싹이 $0$이라면 $a$가 $D_X(b)$ 안의 $p$의 어떤 공집합이 아닌 열린근방 위에서 소멸한다. 그 근방은 명제 1.10에 의해 $X$에서 조밀하므로 $a=0$이 $A(X)$에서 성립한다. 따라서 $A(X)_{\\mathfrak{m}_p}\\to O_{X,p}$는 단사이고, 그러므로 동형사상이다.",
+            "마지막 주장은 명제 2.10을 그대로 옮긴 것이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (잉여체)",
+          "formal_statement": "$X$의 $p$에서의 잉여체(residue field)는 $\\mathbb{C}(p):=O_{X,p}/\\mathfrak{m}_{X,p}\\cong\\mathbb{C}$이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$X:=\\mathbb{A}^1$, $p:=0$이라 하자. $O_{X,0}\\cong A(\\mathbb{A}^1)_{(t)}=\\mathbb{C}[t]_{(t)}$의 원소로서 $\\mathfrak{m}_{X,0}$에 속하는 구체적인 싹 두 개와, $\\mathfrak{m}_{X,0}$에 속하지 않지만 $O_{X,0}$의 단위원인 싹 하나를 각각 제시하라.",
+          "hint": "정리 2.11의 마지막 서술 $\\mathfrak{m}_{X,p}=\\{a/b\\mid a(p)=0,\\ b(p)\\ne 0\\}$을 그대로 적용해 보라.",
+          "solution": "$\\mathfrak{m}_{X,0}$에 속하는 원소는 분자가 $0$에서 소멸해야 하므로, 예를 들어 $t/1$과 $t^2/(t+1)$(분모 $t+1$은 $0$에서 값이 $1\\ne 0$)이 그렇다. 반면 $2/(t+1)$은 분자 $2$가 $0$에서 소멸하지 않으므로 $\\mathfrak{m}_{X,0}$ 밖에 있고, 명제 2.10의 논증(분자가 극대이데알 밖에 있으면 단위원)에 의해 $O_{X,0}$에서 실제로 단위원이다 — 그 역원은 $(t+1)/2$이다."
+        },
+        {
+          "type": "ox",
+          "question": "$O_{X,p}$의 극대이데알 $\\mathfrak{m}_{X,p}$는 $p$에서 값이 $0$이 아닌 싹들의 모임이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 정의상 $\\mathfrak{m}_{X,p}=\\{f\\in O_{X,p}\\mid f(p)=0\\}$이며, 이는 정확히 $p$에서 값이 $0$인 싹들의 모임이다. 값이 $0$이 아닌 싹들은 오히려 국소환 $O_{X,p}$에서 전부 단위원이 된다(명제 2.10의 논증과 정확히 같은 이유)."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 곱셈에 닫힌 집합 $U\\subseteq R$에 대한 국소화 $R[U^{-1}]$은 $U$가 소이데알의 여집합일 때만 국소환이 된다.",
+          "answer": "O",
+          "explanation": "참이다(적어도 이 절에서 다룬 형태로는). 명제 2.10의 증명은 결정적으로 '$\\mathfrak{p}=R\\setminus U$가 소이데알'이라는 사실을 사용해 $R_\\mathfrak{p}$의 비단위원들이 정확히 하나의 이데알 $\\mathfrak{p}R_\\mathfrak{p}$을 이룬다는 것을 보장한다. 일반적인 곱셈에 닫힌 집합 $U$에 대해서는 $R[U^{-1}]$이 여러 개의 극대이데알을 가질 수 있어 국소환이 아닐 수 있다(예: $U=\\{1\\}$이면 $R[U^{-1}]=R$이고, $R$ 자체가 국소환이 아닐 수 있다)."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 2.11은 '점 $p$에서의 함수의 싹'이라는 매우 지역적이고 위상적인 개념을, '좌표환 $A(X)$를 극대이데알 $\\mathfrak{m}_p$에서 국소화한다'는 순전히 대수적인 연산으로 바꾼다. 이 번역에서 '조밀성'(명제 1.10, $X$가 기약이라는 사실)이 왜 필수적인 역할을 하는지, 그리고 만약 두 서로 다른 점 $p\\ne q$에서의 싹의 환 $O_{X,p}$와 $O_{X,q}$가 서로 다른 극대이데알 $\\mathfrak{m}_p\\ne\\mathfrak{m}_q$에서의 국소화라는 사실이 기하학적으로 무엇을 의미하는지 논하라.",
+          "hint": "조밀성이 어디서 쓰였는지는 정리 2.11의 증명의 단사성 부분을 다시 보라. 서로 다른 점에서의 국소화가 서로 다르다는 것은 '지역적 정보가 점마다 진짜로 다른 것을 담고 있다'는 뜻인지 생각해 보라.",
+          "answer": "조밀성은 정리 2.11의 단사성 증명에서 결정적이다: '싹이 $0$이다'라는 조건은 원래 '$p$의 어떤 (아무리 작아도 되는) 열린근방에서 $a=0$'이라는 국소적 조건일 뿐인데, $X$가 기약이라 그 국소적 열린집합이 자동으로 $X$ 전체에서 조밀하므로 '국소적으로 $0$'이 곧바로 '전역적으로 $0$'($a=0$ in $A(X)$)을 강제한다. 만약 $X$가 기약이 아니었다면, $p$가 속한 성분에서만 $0$이고 다른 성분에서는 $0$이 아닌 다항식이 존재할 수 있어 이 논증이 무너진다 — 즉 국소화가 '싹'을 정확히 포착하지 못하게 된다. 한편 서로 다른 점 $p\\ne q$에서 $\\mathfrak{m}_p\\ne\\mathfrak{m}_q$이므로 $O_{X,p}=A(X)_{\\mathfrak{m}_p}$와 $O_{X,q}=A(X)_{\\mathfrak{m}_q}$는 (같은 큰 환 $A(X)$ 안에서) 서로 다른 소이데알 주변만을 남기고 국소화한 결과이며, 이는 '점마다 국소적 대수 구조가 진짜로 독립적인 정보를 담고 있다'는 사실 — 예컨대 나중에 다룰 매끄러움(smoothness)이나 특이점 여부 같은 성질은 정확히 각 점의 국소환 $O_{X,p}$의 구조(예: 극대이데알의 거듭제곱들의 차원)로 판별된다 — 를 대수적으로 미리 보여주는 것이다."
+        }
+      ]
+    }
+  ]
+}

@@ -18,9 +18,9 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 005 | [ ] | 2.1 Regular functions | section | `005__Introductionto__2_1_Regularfunctions.txt` |
-| 006 | [ ] | 2.2 Localization | section | `006__Introductionto__2_2_Localization.txt` |
-| 007 | [ ] | 2.3 Rational functions | section | `007__Introductionto__2_3_Rationalfunctions.txt` |
+| 005 | [x] | 2.1 Regular functions | section | `005__Introductionto__2_1_Regularfunctions.txt` |
+| 006 | [x] | 2.2 Localization | section | `006__Introductionto__2_2_Localization.txt` |
+| 007 | [x] | 2.3 Rational functions | section | `007__Introductionto__2_3_Rationalfunctions.txt` |
 
 ## 3. Projective Varieties
 

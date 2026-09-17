@@ -107,6 +107,12 @@
       "title": "1. Affine Varieties",
       "file": "1_affine_varieties.json",
       "book": "Park — Introduction to Algebraic Geometry"
+    },
+    {
+      "id": "2_functions_on_affine_varieties",
+      "title": "2. Functions on Affine Varieties",
+      "file": "2_functions_on_affine_varieties.json",
+      "book": "Park — Introduction to Algebraic Geometry"
     }
   ]
 }

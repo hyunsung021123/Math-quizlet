@@ -1,0 +1,809 @@
+{
+  "chapter_info": {
+    "title": "2. Functions on Affine Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "아핀 대수다양체 위에 실제로 사는 함수(정칙함수, 유리함수)의 개념을 국소화(localization)라는 대수적 도구로 정확히 세우고, 이를 통해 다양체 사이의 사상(morphism)을 좌표환 사이의 $\\mathbb{C}$-대수 준동형으로 완전히 번역한다. 이렇게 얻는 '아핀다양체의 범주 = 정역인 유한생성 $\\mathbb{C}$-대수의 반대범주'라는 사전은 이후 모든 기하학적 구성(사영다양체, 곱, 유리사상)의 대수적 토대가 된다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "2.1 Regular functions",
+      "step1_big_picture": {
+        "context": "1장은 오로지 대수적집합과 이데알 사이의 사전($V,I$)만 다뤘다 — 도형이 '무엇인지'는 알았지만 그 위에서 '함수가 무엇인지'는 아직 정의하지 않았다. 이 절은 정확히 그 함수 개념(정칙함수, regular function)을 국소적으로 '다항식의 비율'로 세우고, 이 정의가 실제로는 좌표환 $A(X)$ 자체와 다르지 않음(정리 2.4)을 보인 뒤, 다양체 사이의 사상을 좌표환 사이의 준동형으로 완전히 번역한다(정리 2.6) — 이 대수-기하 사전이 앞으로 이 강의 전체의 문법이 된다.",
+        "hidden_intuition": "정칙함수의 정의($p$ 근방에서 $a/b$ 꼴, $b$가 그 근방에서 안 사라짐)는 마치 유리함수가 극(pole)만 피하면 '거의 다항식처럼' 행동한다는 감각을 정확하게 격식화한 것이다. 그런데 정리 2.4는 놀라운 사실을 준다: $X$ 전체에서 정의된 정칙함수들의 모임 $O_X(X)$은 국소적으로 조각조각 이어붙인 것처럼 보이지만, 사실 처음부터 $A(X)$와 정확히 같다 — 국소적으로 허용한 '분모'가 전체 $X$ 위에서는 결코 진짜 새로운 함수를 만들어내지 못한다는 뜻이다(그 증명의 핵심은 강한 Nullstellensatz를 이용해 국소적인 분모들의 공통 영점이 없다는 사실로부터 전역적인 통분을 얻어내는 것). 반면 진부분 열린집합 $D_X(f)$ 위에서는 새로운 함수(예: $1/f$ 자체)가 실제로 생기고, 그 정칙함수환이 정확히 국소화 $A(X)_f$다 — 국소화는 '분모에 $f$를 허락한다'는 순수 대수 연산이 '정의역을 $D_X(f)$로 줄인다'는 기하 연산과 정확히 같다는 것을 보여준다. 정리 2.6은 이 모든 것의 정점이다: 아핀다양체 사이의 사상은 정확히 좌표환 사이의 $\\mathbb{C}$-대수 준동형(반대 방향으로)과 같다 — 기하학적 질문이 순수 대수 문제로 완전히 바뀐다. 그런데 예제 2.9(뾰족한 삼차곡선 $t\\mapsto(t^2,t^3)$)는 이 사전의 예리한 경고다: 사상이 집합으로서는 완벽하게 전단사이지만, 좌표환 사이의 준동형 $\\mathbb{C}[t^2,t^3]\\hookrightarrow\\mathbb{C}[t]$이 전사가 아니므로(원소 $t$ 자체가 상에 없음) 동형사상이 아니다 — '전단사'라는 집합론적 조건과 '동형사상'이라는 대수기하학적 조건이 갈라지는 첫 순간이며, 이 간극이 바로 원점의 '뾰족함(cusp)'이라는 기하학적 병리를 대수적으로 포착한 것이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  2.56,
+                  -4.096
+                ],
+                [
+                  2.25,
+                  -3.375
+                ],
+                [
+                  1.96,
+                  -2.744
+                ],
+                [
+                  1.69,
+                  -2.197
+                ],
+                [
+                  1.44,
+                  -1.728
+                ],
+                [
+                  1.21,
+                  -1.331
+                ],
+                [
+                  1.0,
+                  -1.0
+                ],
+                [
+                  0.81,
+                  -0.729
+                ],
+                [
+                  0.64,
+                  -0.512
+                ],
+                [
+                  0.49,
+                  -0.343
+                ],
+                [
+                  0.36,
+                  -0.216
+                ],
+                [
+                  0.25,
+                  -0.125
+                ],
+                [
+                  0.16,
+                  -0.064
+                ],
+                [
+                  0.09,
+                  -0.027
+                ],
+                [
+                  0.04,
+                  -0.008
+                ],
+                [
+                  0.01,
+                  -0.001
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.01,
+                  0.001
+                ],
+                [
+                  0.04,
+                  0.008
+                ],
+                [
+                  0.09,
+                  0.027
+                ],
+                [
+                  0.16,
+                  0.064
+                ],
+                [
+                  0.25,
+                  0.125
+                ],
+                [
+                  0.36,
+                  0.216
+                ],
+                [
+                  0.49,
+                  0.343
+                ],
+                [
+                  0.64,
+                  0.512
+                ],
+                [
+                  0.81,
+                  0.729
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.21,
+                  1.331
+                ],
+                [
+                  1.44,
+                  1.728
+                ],
+                [
+                  1.69,
+                  2.197
+                ],
+                [
+                  1.96,
+                  2.744
+                ],
+                [
+                  2.25,
+                  3.375
+                ],
+                [
+                  2.56,
+                  4.096
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.25,
+                -0.25
+              ],
+              "text": "cusp (0,0)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.3,
+                3.5
+              ],
+              "text": "C = V(v^2-u^3)"
+            }
+          ],
+          "caption": "뾰족한 삼차곡선 C=V(v^2-u^3) (예제 2.9). t↦(t^2,t^3)은 원점을 포함해 전단사이지만, 원점에서 곡선이 '뾰족(cusp)'해지고 좌표환 준동형이 전사가 아니게 되어 동형사상이 아니다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 ($R$-대수, 유한생성 $R$-대수)",
+          "formal_statement": "환 $R$에 대해 $R$-대수(algebra)는 환 준동형 $\\varphi:R\\to A$가 갖춰진 환 $A$이다. $A$의 부분대수(subalgebra)는 $\\varphi(R)\\subseteq S$인 부분환 $S$이다. $R$-대수 준동형 $f:A\\to B$는 모든 $r\\in R,a\\in A$에서 $f(ra)=rf(a)$를 만족하는 환 준동형이다. $f$가 전단사이면 동형사상(isomorphism)이라 하고 $A\\cong B$라 쓴다(이때 $f^{-1}$도 동형사상). $R$-대수 $A$가 $R$ 위에서 유한생성(finitely generated)이라 함은 전사인 $R$-대수 준동형 $f:R[x_1,\\dots,x_n]\\to A$가 존재하는 것이며, 이때 $A$는 $f(x_1),\\dots,f(x_n)$으로 생성된다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (좌표환, 다항함수)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$을 아핀 대수적집합이라 하자. 그 좌표환(coordinate ring)은 $$A(X):=\\mathbb{C}[x_1,\\dots,x_n]/I(X)$$ 이며, 이는 유한생성 $\\mathbb{C}$-대수이다. 명제 1.5에 의해 $X$가 아핀 대수다양체인 것과 $A(X)$가 정역인 것은 동치이다. 잉여류 $[f]\\in A(X)$는 $p\\mapsto f(p)$로 주어지는 다항함수 $X\\to\\mathbb{C}$를 정의하며, 이는 대표원의 선택과 무관하다. 잉여류와 그 다항함수 둘 다를 보통 $f$로 쓴다. $A(X)$의 이데알 $\\mathcal{I}$에 대해 $J/I(X)=\\mathcal{I}$인 이데알 $J\\subseteq\\mathbb{C}[x_1,\\dots,x_n]$이 있고, $V(\\mathcal{I}):=V(J)\\cap X$로 정의한다. 따름정리 1.35에 의해 $A(X)$의 소이데알과 $X$의 기약 닫힌부분집합 사이에 일대일 대응이 있다. $f\\in A(X)$에 대해 주 열린집합 $D_X(f)$ 역시 다항식 대표원의 선택과 무관하다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.1 (포물선과 쌍곡선의 좌표환)",
+          "formal_statement": "예제 1.8의 포물선 $P:=V(y-x^2)\\subseteq\\mathbb{A}^2$에 대해 $A(P)\\cong\\mathbb{C}[t]$이다. 예제 1.29의 쌍곡선 $H:=V(xy-1)\\subseteq\\mathbb{A}^2$에 대해 $A(H)\\cong\\mathbb{C}[t,t^{-1}]$이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정칙함수, $O_X(U)$)",
+          "formal_statement": "$U\\subseteq X$를 공집합이 아닌 열린부분집합이라 하자. 함수 $g:U\\to\\mathbb{C}$가 $p\\in U$에서 정칙(regular)이라 함은, $p$의 근방 $W\\subseteq U$와 $a,b\\in A(X)$가 있어 $b$가 $W$ 위에서 어디서도 $0$이 아니고 $$g(q)=\\frac{a(q)}{b(q)} \\quad \\text{for any } q\\in W$$ 인 것이다. $U$의 모든 점에서 정칙이면 $U$ 위에서 정칙이라 한다. 정칙함수들은 점별 연산 아래 환(더 일반적으로는 $\\mathbb{C}$-대수)을 이루며, 이를 $O_X(U)$로 쓴다. $U=\\varnothing$이면 $O_X(\\varnothing)=0$(영환)으로 둔다. 열린부분집합 $U\\subseteq V\\subseteq X$에 대해 $g\\mapsto g|_U$로 주어지는 자연스러운 $\\mathbb{C}$-대수 준동형 $O_X(V)\\to O_X(U)$가 있다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.2 ($\\mathbb{A}^1\\setminus\\{0\\}$ 위의 정칙함수환)",
+          "formal_statement": "열린부분집합 $U:=\\mathbb{A}^1\\setminus\\{0\\}\\subseteq\\mathbb{A}^1$에 대해 $O_X(U)\\cong\\mathbb{C}[t,t^{-1}]$이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (한원소 국소화 $A_f$)",
+          "formal_statement": "$A$를 환, $f\\in A$, $f\\ne 0$이라 하자. $a,b\\in A$, $r,s\\ge 0$에 대해 $$\\frac{a}{f^r}\\sim\\frac{b}{f^s} \\iff f^N(f^sa-f^rb)=0 \\text{ for some } N\\ge 0$$ 로 정의하면 이는 동치관계이다. $A_f$를 이 동치류들의 모임이라 하고, 통상적인 방식(통분)으로 덧셈·곱셈을 정의하면 이는 잘 정의되어 $A_f$를 유한생성 $\\mathbb{C}$-대수로 만들며, 이를 $A$의 $f$에 의한 한원소 국소화(one-element localization)라 한다. $f/1$은 $A_f$에서 단위원이다. $\\mathbb{C}$-대수 준동형 $\\varphi_f:A\\to A_f,\\ a\\mapsto a/1$을 국소화 사상(localization map)이라 한다. $A$가 정역이면 $\\varphi_f$는 단사이다. $f=0$일 때는 $A_0:=0$(영환)으로 둔다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.3 (국소화의 보편성질)",
+          "formal_statement": "$A,B$를 환, $f\\in A$, $f\\ne 0$이라 하자. $\\alpha:A\\to B$가 $\\alpha(f)$가 $B$에서 단위원이 되는 환 준동형이면, $\\widetilde{\\alpha}(a/1)=\\alpha(a)$ (모든 $a\\in A$)를 만족하는 유일한 환 준동형 $\\widetilde{\\alpha}:A_f\\to B$가 존재한다.",
+          "idea_behind_proof": "$\\alpha(f)$가 이미 $B$에서 뒤집을 수 있으므로, $A_f$에서 $f$를 뒤집는 연산을 그대로 $\\alpha(f)^{-1}$을 곱하는 연산으로 옮기기만 하면 된다는 것이 핵심 착상이다 — $A_f$가 '$f$를 뒤집는 데 필요한 최소한의 확장'이라는 보편성질을 그대로 보여준다.",
+          "proof_steps": [
+            "$\\widetilde{\\alpha}(a/f^r):=\\alpha(a)\\alpha(f)^{-r}$로 정의한다. $a/f^r=b/f^s$이면 $f^N(f^sa-f^rb)=0$인 $N$이 있고, $\\alpha$를 적용해 단위원 $\\alpha(f)^{N+r+s}$을 소거하면 $\\alpha(a)\\alpha(f)^{-r}=\\alpha(b)\\alpha(f)^{-s}$를 얻어 $\\widetilde{\\alpha}$가 잘 정의됨을 보인다. 이것이 환 준동형임은 쉽게 확인된다.",
+            "유일성: $\\widetilde{\\alpha}:A_f\\to B$가 모든 $a\\in A$에서 $\\widetilde{\\alpha}(a/1)=\\alpha(a)$를 만족하는 환 준동형이라면, $\\widetilde{\\alpha}(f/1)=\\alpha(f)$이므로 $\\widetilde{\\alpha}(1/f)=\\alpha(f)^{-1}$이 강제되고, 따라서 $\\widetilde{\\alpha}(a/f^r)=\\alpha(a)\\alpha(f)^{-r}$이 유일하게 결정된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.4 (국소화 = 정칙함수환, 그리고 $A(X)\\cong O_X(X)$)",
+          "formal_statement": "$X$를 아핀 대수다양체, $f\\in A(X)$라 하자. 자연스러운 동형사상 $$A(X)_f\\xrightarrow{\\ \\simeq\\ }O_X(D_X(f)),\\qquad \\frac{a}{f^r}\\mapsto\\left(p\\mapsto\\frac{a(p)}{f(p)^r}\\right)$$ 이 존재한다. 특히 $A(X)\\cong O_X(X)$이다.",
+          "idea_behind_proof": "단사성은 조밀성(명제 1.10)을 이용한 표준적인 논증이다: 국소화된 원소가 $0$으로 보내지면 그 분자가 $D_X(f)$라는 조밀한 열린집합 위에서 소멸하므로 $X$ 전체에서 소멸한다. 전사성이 진짜 핵심인데, 국소적으로 주어진 정칙함수 $g$의 여러 개의 지역적 표현 $a_i/b_i$들을 '분모들의 공통 영점이 없다'는 사실(강한 Nullstellensatz가 열쇠)로 전역적인 통분 $g=(\\sum \\ell_i t_i)/f^N$ 하나로 이어붙인다.",
+          "proof_steps": [
+            "$f=0$이면 양변이 영환이다. $f\\ne 0$이라 하자. $D_X(f)$는 명제 1.10에 의해 $X$에서 조밀한 열린집합이다. 주어진 사상은 명백히 환 준동형이고, $a/f^r$이 $0$으로 가면 $a$가 조밀한 열린집합 $D_X(f)$ 위에서 소멸해 $X$ 전체에서 소멸하므로 $a=0$ — 단사성이 증명된다.",
+            "이제 $g\\in O_X(D_X(f))$를 고르자. 각 $p\\in D_X(f)$에서 $g=a_i/b_i$ ($a_i,b_i\\in A(X)$, $b_i$는 $p$의 열린근방 $W_i\\subseteq D_X(f)$에서 어디서도 $0$이 아님)로 지역적으로 쓴다. 명제 1.4에 의해 $p\\in D_X(fk_i)=D_X(f)\\cap D_X(k_i)\\subseteq W_i$인 $k_i\\in A(X)$를 고를 수 있다.",
+            "명제 1.38(준콤팩트성)에 의해 이런 $D_X(fk_i)$들 중 유한 개만으로 $D_X(f)$를 덮을 수 있다. $s_i:=k_ib_i,\\ t_i:=k_ia_i$로 두면 $D_X(f)$ 위에서 $s_ig=t_i$이다(($k_i$가 $0$이 아닌 곳에서는 정의가 그대로 성립하고, $k_i=0$인 곳에서는 양변이 $0$).",
+            "$b_i$가 $D_X(fk_i)$ 위에서 $0$이 아니므로 열린집합 $D_X(s_i)$들이 $D_X(f)$를 덮는다. 따라서 $V(s_1,\\dots,s_r)\\subseteq V(f)$이고, 강한 Nullstellensatz에 의해 $f^N=\\sum_i\\ell_is_i$ ($\\ell_i\\in A(X)$)인 $N\\ge 0$이 있다.",
+            "그러면 $D_X(f)$ 위에서 $g=\\dfrac{\\sum_i\\ell_it_i}{f^N}$이 성립함을 확인할 수 있어, 주어진 사상이 전사임이 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 2.5 (조밀한 열린집합에서 같으면 전체에서 같다)",
+          "formal_statement": "$X$를 아핀 대수다양체, $U\\subseteq X$를 공집합이 아닌 열린부분집합, $g,h\\in O_X(U)$라 하자. $g=h$가 $U$의 공집합이 아닌 열린부분집합 위에서 성립하면 $g=h$는 $U$ 전체에서 성립한다.",
+          "idea_behind_proof": "$g-h$의 지역적 표현 $a/b$에서, 그 분자 $a$가 조밀한 부분집합에서 $0$이면 다항식으로서 $X$ 전체에서 $0$이 되어야 한다는 사실(강한 Nullstellensatz의 정역 버전, 정확히는 조밀 열린집합 위 소멸이 전체 소멸을 강제한다는 명제 1.10 계열의 사실)을 국소적으로 적용하는 것이다.",
+          "proof_steps": [
+            "$g-h=0$인 $U$의 공집합이 아닌 열린부분집합 $W$를 고르고 $p\\in U$를 고정하자. $p$의 어떤 열린근방 $N\\subseteq U$에서 $g-h=a/b$ ($a,b\\in A(X)$, $b$는 어디서도 $0$이 아님)로 쓸 수 있다.",
+            "$W\\cap N\\subseteq X$는 조밀한 열린집합이다(명제 1.10, $X$가 기약이므로 두 공집합이 아닌 열린집합은 반드시 교차하고 그 교집합도 다시 조밀). $a=0$이 $W\\cap N$ 위에서 성립하므로 $a=0$이 $X$ 전체에서 성립한다(다항함수가 조밀한 집합에서 소멸하면 전체에서 소멸). 따라서 $g(p)=h(p)$이고, $p$가 임의였으므로 $g=h$가 $U$ 전체에서 성립한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정칙 사상, 아핀 모피즘, 동형사상)",
+          "formal_statement": "$U$를 아핀 대수다양체 $X$의 열린부분집합, $Y\\subseteq\\mathbb{A}^m$을 아핀 대수적집합이라 하자. $U$ 위의 정칙 사상(regular map)은 $$\\phi:U\\to Y,\\quad p\\mapsto(f_1(p),\\dots,f_m(p))$$ 꼴의 함수이며, 여기서 $f_i\\in O_X(U)$이고 모든 $p\\in U$에서 $(f_1(p),\\dots,f_m(p))\\in Y$이다. $U=X$일 때 이를 아핀 모피즘(affine morphism)이라 한다. 모든 정칙함수 $f:U\\to\\mathbb{A}^1$은 정칙 사상이다. 동형사상(isomorphism)은 양쪽 역시 아핀 모피즘인 양방향 역을 갖는 아핀 모피즘이다. $V\\subseteq Y$가 열린부분집합이면, 정칙 사상 $U\\to V$란 상이 $V$ 안에 있는 정칙 사상 $U\\to Y$를 뜻한다. 열린부분집합 사이의 동형사상이란 서로 역인 정칙 사상들의 쌍을 뜻한다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.6 (아핀 모피즘 = 좌표환 준동형, 그리고 연속성)",
+          "formal_statement": "다음이 성립한다: (1) 아핀 대수다양체 $X,Y$에 대해, 아핀 모피즘 $\\phi:X\\to Y$는 $\\mathbb{C}$-대수 준동형 $\\phi^*:A(Y)\\to A(X)$와 일대일로 대응한다. (2) $\\phi:X\\to Y$와 $\\psi:Y\\to Z$가 아핀 대수다양체 사이의 아핀 모피즘이면 $\\psi\\circ\\phi$도 아핀 모피즘이고 $(\\psi\\circ\\phi)^*=\\phi^*\\circ\\psi^*$. (3) 아핀 모피즘 $\\phi:X\\to Y$가 동형사상인 것과 $\\phi^*$가 동형사상인 것은 동치이다. (4) 아핀다양체의 열린부분집합에서 아핀 대수적집합으로 가는 모든 정칙 사상은 연속이다.",
+          "idea_behind_proof": "핵심은 (1): 사상 $\\phi$가 좌표함수 $f_1,\\dots,f_m\\in A(X)$의 튜플로 완전히 결정되고, 반대로 $Y$의 좌표류 $[y_1],\\dots,[y_m]$이 $A(Y)$를 대수로서 생성하므로 $A(Y)$에서 $A(X)$로 가는 준동형 하나가 그 좌표류들을 어디로 보낼지 정하는 것과 정확히 같다는 '생성원 하나만 정하면 끝'이라는 관찰이다. (4)는 $D_Y(H)$의 원상이 $D_X(H\\circ\\phi)$라는 계산만으로 끝난다.",
+          "proof_steps": [
+            "(1): $\\phi:X\\to Y$($Y\\subseteq\\mathbb{A}^m$, 좌표류 $[y_1],\\dots,[y_m]$)를 아핀 모피즘이라 하고 $\\phi(p)=(f_1(p),\\dots,f_m(p))$ ($f_i\\in A(X)$)로 쓰자. $G\\in A(Y)$에 대해 $\\phi^*(G):=G\\circ\\phi=[G(f_1,\\dots,f_m)]$로 정의하면 $\\phi^*$는 $\\mathbb{C}$-대수 준동형이다.",
+            "역으로 $\\mathbb{C}$-대수 준동형 $\\alpha:A(Y)\\to A(X)$가 주어지면 $f_j:=\\alpha([y_j])$로 두자. 모든 $G\\in I(Y)$에서 $G(f_1,\\dots,f_m)=\\alpha([G])=0$이므로($G\\in I(Y)$는 $A(Y)$에서 $[G]=0$을 뜻함), $Y=V(I(Y))$이기에 모든 $p\\in X$에서 $(f_1(p),\\dots,f_m(p))\\in Y$이다. 즉 $p\\mapsto(f_1(p),\\dots,f_m(p))$가 아핀 모피즘 $X\\to Y$를 정의한다.",
+            "$[y_1],\\dots,[y_m]$이 $\\mathbb{C}$-대수로서 $A(Y)$를 생성하므로 이 두 구성은 서로 역이다. (2),(3)은 명백하다.",
+            "(4): $\\phi:U\\to Y$가 정칙 사상($U$는 아핀 대수다양체 $X$의 열린부분집합, $Y$는 아핀 대수적집합)이라 하자. $H\\in A(Y)$에 대해 $\\phi^{-1}(D_Y(H))=D_X(H\\circ\\phi)=D_X(\\phi^*(H))$이므로 $\\phi$는 연속이다(주 열린집합들이 기저를 이루므로 이것으로 충분). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($\\mathfrak{m}_a$ 표기)",
+          "formal_statement": "아핀 대수다양체 사이의 아핀 모피즘 $\\phi:X\\to Y$가 $\\phi(a)=b$를 만족하면, 따름정리 1.35에 의해 $(\\phi^*)^{-1}(\\mathfrak{m}_a)=\\mathfrak{m}_b$이다. 표기를 남용해 보통 $$\\mathfrak{m}_a:=\\{f\\in A(X)\\mid f(a)=0\\}\\subseteq A(X)$$ 로 쓴다. $a=(a_1,\\dots,a_n)\\in\\mathbb{A}^n$이면 $\\mathfrak{m}_a=(x_1-a_1,\\dots,x_n-a_n)/I(X)$이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.7 (주 열린집합은 아핀다양체이다 — 그래프 트릭의 재사용)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$을 아핀 대수다양체, $0\\ne f\\in A(X)$라 하자. 주 열린집합 $D_X(f)$는 아핀 대수다양체 $$V(I(X)+(x_{n+1}f-1))\\subseteq\\mathbb{A}^{n+1}$$ 과 자연스럽게 동일시되며, 그 좌표환은 $A(X)_f$와 동형이다. 이때 포함사상 $\\phi:D_X(f)\\hookrightarrow X$는 $\\phi^*:A(X)\\to A(X)_f$가 국소화 사상이 되는 모피즘이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.8 (포물선의 동형, 쌍곡선의 모피즘)",
+          "formal_statement": "예제 1.8의 모피즘 $\\varphi:\\mathbb{A}^1\\to P,\\ t\\mapsto(t,t^2)$ ($P:=V(y-x^2)\\subseteq\\mathbb{A}^2$)는 동형사상이다. 예제 1.29의 모피즘 $g:H\\to\\mathbb{A}^2,\\ (x,y)\\mapsto x$ ($H:=V(xy-1)\\subseteq\\mathbb{A}^2$)는 상이 $D_{\\mathbb{A}^1}(t)=\\mathbb{A}^1\\setminus\\{0\\}$인 아핀 모피즘이다. $A(H)\\cong\\mathbb{C}[t,t^{-1}]\\cong O_{\\mathbb{A}^1}(D_X(t))$이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.9 (뾰족한 삼차곡선 — 전단사이지만 동형사상이 아니다)",
+          "formal_statement": "$C:=V(v^2-u^3)\\subseteq\\mathbb{A}^2$라 하고 아핀 모피즘 $$\\nu:\\mathbb{A}^1\\to C,\\quad t\\mapsto(t^2,t^3)$$ 을 생각하면 이는 전단사이다. $A(C)\\cong\\mathbb{C}[t^2,t^3]$임에 유의하라. 대응하는 $\\mathbb{C}$-대수 준동형 $\\nu^*:\\mathbb{C}[t^2,t^3]\\to\\mathbb{C}[t]$는 단사이지만 전사는 아니다. 특히 $\\nu$는 동형사상이 아니다.",
+          "idea_behind_proof": "전단사임은 직접 확인할 수 있고($t\\ne 0$이면 $t=v/u$로 복원 가능, $t=0$이면 원점), 문제는 좌표환 준동형의 전사성이다 — $\\mathbb{C}[t^2,t^3]$은 $t$ 자체를 원소로 갖지 않는 $\\mathbb{C}[t]$의 진부분환이므로, $t\\in\\mathbb{C}[t]$가 상에 없어 전사가 실패한다. 정리 2.6(3)에 의해 이는 곧바로 $\\nu$가 동형사상이 아님을 보장한다.",
+          "proof_steps": [
+            "전단사성: $(a,b)\\in C$이면 $b^2=a^3$이다. $a=0$이면 $b=0=\\nu(0)$. $a\\ne 0$이면 $t:=b/a$가 $t^2=a,\\ t^3=b$를 만족함을 확인할 수 있어(체크포인트 문항 참고) $\\nu(t)=(a,b)$. 서로 다른 $t\\ne t'$이 같은 상을 준다면 $t^2=t'^2$이고 $t\\ne 0$인 한 $t=t^3/t^2=t'^3/t'^2=t'$이 강제되므로 단사이기도 하다.",
+            "$\\nu^*:\\mathbb{C}[t^2,t^3]\\to\\mathbb{C}[t]$는 포함사상이므로 명백히 단사이다. 그러나 $\\mathbb{C}[t^2,t^3]$의 모든 원소는 $1,t^2,t^3,t^4,\\dots$의 $\\mathbb{C}$-선형결합, 즉 $t^1$항이 없는 다항식들뿐이므로 $t\\notin\\mathbb{C}[t^2,t^3]$이다. 따라서 $\\nu^*$는 전사가 아니다.",
+            "정리 2.6(3)에 의해 아핀 모피즘이 동형사상인 것은 그 유도 준동형이 동형사상인 것과 동치이므로, $\\nu^*$가 전사가 아니라는 사실은 $\\nu$가 동형사상이 아님을 보인다 — 집합으로서는 전단사이지만 대수기하학적으로는 동형이 아닌 첫 예다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예제 2.9에서, $(a,b)\\in C=V(v^2-u^3)$이고 $a\\ne 0$일 때 $t:=b/a$가 정확히 $t^2=a,\\ t^3=b$를 만족함을 직접 계산으로 확인하라.",
+          "hint": "$b^2=a^3$이라는 관계식을 이용해 $t^2=(b/a)^2$을 $a$로, $t^3=(b/a)^3$을 $b$로 정리하라.",
+          "solution": "$t=b/a$라 하면 $t^2=b^2/a^2$인데 $b^2=a^3$이므로 $t^2=a^3/a^2=a$이다. 또한 $t^3=b^3/a^3=b^3/b^2=b$(여기서 $a^3=b^2$을 다시 사용). 따라서 $\\nu(t)=(t^2,t^3)=(a,b)$가 확인된다. 일반적으로 $a=0$이면 $b^2=0$이라 $b=0$이므로 $(a,b)=(0,0)=\\nu(0)$이다. 즉 $\\nu$는 정확히 전단사다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$X:=\\mathbb{A}^1$이라 하자. $U:=\\mathbb{A}^1\\setminus\\{0\\}$ 위에서 정칙함수 $g(t):=1/t$가 실제로 $O_X(U)$에 속함을(즉 국소적으로, 사실은 전역적으로 다항식의 비율로 표현됨을) 보이고, $g$가 $\\mathbb{A}^1$ 전체로는 확장되지 않는 이유를 정리 2.4의 언어로 설명하라.",
+          "hint": "$g=t^{-1}$을 $a/b$ 꼴로 쓰려면 $a=1,b=t$로 두면 되는데, $b=t$가 $U$ 전체에서 어디서도 $0$이 아닌지 확인하라. 그리고 $D_X(t)=U$임을 이용해 정리 2.4를 직접 적용해 보라.",
+          "solution": "$a=1,b=t\\in A(\\mathbb{A}^1)=\\mathbb{C}[t]$로 두면, $b=t$는 $U=\\mathbb{A}^1\\setminus\\{0\\}=D_{\\mathbb{A}^1}(t)$ 위에서 어디서도 $0$이 아니므로 $g(q)=1/q$는 $U$의 모든 점에서 정칙함수의 정의를 만족한다. 실제로 $D_{\\mathbb{A}^1}(t)=U$이므로 정리 2.4에 의해 $O_X(U)\\cong A(\\mathbb{A}^1)_t=\\mathbb{C}[t]_t=\\mathbb{C}[t,t^{-1}]$이고, $g=1/t$는 정확히 이 국소화의 원소다. 만약 $g$가 $\\mathbb{A}^1$ 전체($X$ 자체)에서 정칙이라면 정리 2.4의 특수한 경우($O_X(X)\\cong A(X)=\\mathbb{C}[t]$)에 의해 $g$는 다항식이어야 하는데, $1/t$는 다항식이 아니므로 $g$는 $\\mathbb{A}^1$ 전체로 확장될 수 없다 — $t=0$이 진짜 극이다."
+        },
+        {
+          "type": "ox",
+          "question": "두 아핀 대수다양체 사이의 아핀 모피즘이 집합으로서 전단사이면 그것은 항상 동형사상이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 2.9가 정확히 반례다 — $\\nu:\\mathbb{A}^1\\to C,\\ t\\mapsto(t^2,t^3)$은 전단사이지만 유도된 좌표환 준동형 $\\nu^*$가 전사가 아니므로(정리 2.6(3)) 동형사상이 아니다. 동형사상이려면 좌표환 준동형까지 동형이어야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "아핀 대수다양체 $X$에 대해 $O_X(X)$(전역 정칙함수환)는 항상 $A(X)$와 동형이다.",
+          "answer": "O",
+          "explanation": "참이다. 정리 2.4의 특수한 경우($f=1$, 즉 $D_X(1)=X$)로, $A(X)_1\\cong A(X)$이고 이는 $O_X(D_X(1))=O_X(X)$와 동형이다. 즉 전역적으로는 '국소적으로 허용한 분모'가 새로운 함수를 전혀 만들어내지 못한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 2.4의 증명에서 강한 Nullstellensatz가 정확히 어느 단계에서 왜 필요한지 설명하고, 만약 $X$가 아핀 대수다양체가 아니라 그냥 일반적인(가약일 수도 있는) 아핀 대수적집합이었다면 이 증명의 어느 부분이 문제가 될지 논하라.",
+          "hint": "강한 Nullstellensatz가 쓰이는 대목은 '$V(s_1,\\dots,s_r)\\subseteq V(f)$이면 $f^N$이 $s_i$들의 결합으로 쓰인다'는 단계다. 그리고 조밀성(명제 1.10)은 어디서 기약성에 의존하는지 되짚어 보라.",
+          "answer": "정리 2.4의 증명에서 강한 Nullstellensatz는 국소적 표현들을 전역적으로 통분하는 마지막 결정적 단계에서 쓰인다: 국소적 분모들이 만드는 열린집합 $D_X(s_i)$들이 $D_X(f)$ 전체를 덮는다는 사실, 즉 $V(s_1,\\dots,s_r)\\subseteq V(f)$라는 집합론적 사실을, $f^N=\\sum_i\\ell_is_i$라는 실제 대수적 등식(전역적으로 하나의 분수식 $g=(\\sum\\ell_it_i)/f^N$을 만드는 데 필요한 등식)으로 바꾸는 것이 정확히 강한 Nullstellensatz(그리고 그 특수한 형태인 $I(V(J))=\\sqrt J$)의 역할이다. 만약 $X$가 기약이 아니었다면, 증명의 앞부분에서 쓰인 '$D_X(f)$는 조밀하다'(명제 1.10)는 사실 자체가 깨진다 — 기약이 아닌 공간에서는 서로 다른 성분에 속하는 두 열린집합이 만나지 않을 수 있어 조밀성이 실패하고, 그러면 단사성의 증명('국소화된 원소가 조밀한 열린집합 위에서 소멸하면 전체에서 소멸')부터 무너진다. 즉 이 정리는 본질적으로 '기약'이라는 가정(대수다양체)에 의존하며, 가약인 경우로 확장하려면 각 기약 성분에서 따로 다뤄야 한다."
+        }
+      ]
+    },
+    {
+      "section_title": "2.2 Localization",
+      "step1_big_picture": {
+        "context": "2.1절의 한원소 국소화 $A_f$(하나의 원소 $f$만 뒤집기)는 사실 훨씬 일반적인 구성의 특수한 경우다. 이 절은 그 일반적인 국소화 $R[U^{-1}]$(곱셈에 닫힌 임의의 집합 $U$ 전체를 한꺼번에 뒤집기)를 정의하고, 특히 소이데알의 여집합으로 국소화하는 $R_\\mathfrak{p}$가 '그 소이데알이 유일한 극대이데알이 되는 국소환'을 만든다는 사실(명제 2.10)을 확인한다. 이를 곧바로 기하학에 적용해, 다양체의 한 점 $p$에서의 함수의 '싹(germ)'이라는 개념을 정의하고, 그 싹들의 국소환 $O_{X,p}$가 정확히 $A(X)$를 점 $p$에서 국소화한 것과 같음(정리 2.11)을 보인다 — 이는 '점 근방에서만 본 함수'라는 극히 지역적인 개념을 순수 대수 연산 하나로 포착하는 것이다.",
+        "hidden_intuition": "일반적인 국소화 $R[U^{-1}]$은 $\\mathbb{Z}$에서 $\\mathbb{Q}$를 만드는 방식(0이 아닌 정수 전부를 분모로 허용)을 임의의 환과 임의의 곱셈에 닫힌 집합으로 일반화한 것뿐이다 — $U=\\{f^r\\mid r\\ge 0\\}$으로 두면 정확히 2.1절의 $A_f$가 나온다. 정말 흥미로운 특수한 선택은 $U=R\\setminus\\mathfrak{p}$($\\mathfrak{p}$가 소이데알)인데, 이렇게 만든 $R_\\mathfrak{p}$는 '소이데알 $\\mathfrak{p}$ 안에 있지 않은 모든 원소를 뒤집는다'는 뜻이고, 그 결과로 $\\mathfrak{p}$ 자체는 여전히 이데알로 남으면서(뒤집지 않았으므로) 그것이 유일한 극대이데알이 되어버린다(명제 2.10) — 소이데알 주변만 남기고 그 바깥은 전부 '단위원'으로 무시해버리는 것이 국소화의 본질이다. 이를 기하학에 옮기면, 한 점 $p\\in X$에서의 함수의 싹은 '$p$ 근방에서만 같으면 같은 것으로 친다'는 관점이고, 그 싹들의 환 $O_{X,p}$는 정확히 좌표환 $A(X)$를 극대이데알 $\\mathfrak{m}_p$에서 국소화한 것과 같다(정리 2.11) — 즉 '점 $p$ 주변에서의 국소적 대수 구조'라는 기하학적 개념이 '$\\mathfrak{m}_p$ 밖의 원소를 전부 뒤집는다'는 순수 대수 연산으로 완전히 번역된다. 이 국소환의 유일한 극대이데알 $\\mathfrak{m}_{X,p}$(그 점에서 소멸하는 싹들)가 '그 점에서 함숫값이 $0$인가'라는 조건을 정확히 포착하고, 몫체 $O_{X,p}/\\mathfrak{m}_{X,p}\\cong\\mathbb{C}$가 바로 그 점에서의 '값매김'이다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (곱셈에 닫힌 집합, 일반 국소화 $R[U^{-1}]$)",
+          "formal_statement": "환 $R$의 부분집합 $U$가 곱셈에 닫혀 있다(multiplicatively closed) 함은 $1\\in U$이고 $s,t\\in U$이면 $st\\in U$인 것이다. $a,b\\in R$, $s,t\\in U$에 대해 $$\\frac{a}{s}\\sim\\frac{b}{t} \\iff u(ta-sb)=0 \\text{ for some } u\\in U$$ 로 정의하면 이는 동치관계이다. $R[U^{-1}]$을 이 동치류들의 모임이라 하고, 통상적인 방식으로 덧셈·곱셈을 정의하면 잘 정의되어 환이 되며, 이를 $U$에 의한 $R$의 국소화(localization)라 한다. $U$의 모든 원소는 $R[U^{-1}]$에서 단위원이 된다. 환 준동형 $\\varphi_U:R\\to R[U^{-1}],\\ a\\mapsto a/1$을 국소화 사상이라 한다. 명제 2.3에서와 같이, $\\alpha:R\\to B$가 모든 $u\\in U$에서 $\\alpha(u)$가 단위원이 되는 환 준동형이면 $\\widetilde{\\alpha}(a/1)=\\alpha(a)$인 유일한 환 준동형 $\\widetilde{\\alpha}:R[U^{-1}]\\to B$가 존재함을 보일 수 있다. $U:=R\\setminus\\mathfrak{p}$ ($\\mathfrak{p}\\subseteq R$는 소이데알)일 때 $R_\\mathfrak{p}:=R[U^{-1}]$, $\\varphi_\\mathfrak{p}:=\\varphi_U$로 쓴다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.10 ($R_{\\mathfrak{p}}$는 국소환이다)",
+          "formal_statement": "$\\mathfrak{p}$가 환 $R$의 소이데알이면, $R_\\mathfrak{p}$는 유일한 극대이데알 $\\mathfrak{p}R_\\mathfrak{p}$를 갖는 국소환이고 $R_\\mathfrak{p}/\\mathfrak{p}R_\\mathfrak{p}\\cong F(R/\\mathfrak{p})$이다.",
+          "idea_behind_proof": "핵심은 $R_\\mathfrak{p}$에서 '단위원인 것'과 '분자가 $\\mathfrak{p}$ 밖에 있는 것'이 정확히 같다는 관찰이다 — 그러면 비단위원들이 저절로 이데알 하나($\\mathfrak{p}R_\\mathfrak{p}$)를 이루게 되어 국소환의 정의를 즉시 만족한다.",
+          "proof_steps": [
+            "$R_\\mathfrak{p}$에서 $a/s$가 단위원인 것과 $a\\notin\\mathfrak{p}$인 것이 동치임을 보인다: $a\\in\\mathfrak{p}$이고 $(a/s)(b/t)=1$이라 하면 어떤 $u\\notin\\mathfrak{p}$에서 $u(ab-st)=0$이므로 $ust=uab\\in\\mathfrak{p}$인데 $ust\\notin\\mathfrak{p}$(각 인자가 $\\mathfrak{p}$ 밖에 있고 $\\mathfrak{p}$가 소이데알이므로)라 모순. $a\\notin\\mathfrak{p}$이면 $a/s$가 단위원임은 명백하다($s/a$가 역원).",
+            "이 사실에 의해 $R_\\mathfrak{p}$의 비단위원들은 정확히 이데알 $\\mathfrak{p}R_\\mathfrak{p}$를 이루고, 따라서 이는 유일한 극대이데알이다.",
+            "마지막으로 환 준동형 $R_\\mathfrak{p}\\to F(R/\\mathfrak{p}),\\ a/s\\mapsto\\overline{a}/\\overline{s}$는 전사이고 그 핵이 $\\mathfrak{p}R_\\mathfrak{p}$이므로 마지막 주장이 증명된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (정칙함수의 싹, 국소환 $O_{X,p}$)",
+          "formal_statement": "$X$를 아핀 대수다양체라 하자. 점 $p\\in X$를 포함하는 열린부분집합 $U,V\\subseteq X$와 $f\\in O_X(U),\\ g\\in O_X(V)$에 대해, $p$를 포함하는 어떤 열린부분집합 $W\\subseteq U\\cap V$에서 $f=g$이면 $(U,f)\\sim(V,g)$로 정의한다. $p\\in X$에서의 정칙함수의 싹(germ)은 이런 쌍 $(U,f)$($p\\in U\\subseteq X$는 열린부분집합, $f\\in O_X(U)$)들의 동치류이다. 싹들의 환은 유일한 극대이데알 $\\mathfrak{m}_{X,p}:=\\{f\\in O_{X,p}\\mid f(p)=0\\}$를 갖는 국소환 $O_{X,p}$를 이룬다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.11 ($O_{X,p}\\cong A(X)_{\\mathfrak{m}_p}$)",
+          "formal_statement": "아핀 대수다양체 $X$와 $p\\in X$에 대해 $$O_{X,p}\\cong A(X)_{\\mathfrak{m}_p} \\quad\\text{그리고}\\quad \\mathfrak{m}_{X,p}=\\mathfrak{m}_pO_{X,p}=\\left\\{\\frac{a}{b}\\ \\middle|\\ a,b\\in A(X),\\ a(p)=0,\\ b(p)\\ne 0\\right\\}$$ 이다.",
+          "idea_behind_proof": "값매김 사상 $\\mathrm{ev}_p:A(X)\\to\\mathbb{C}$의 핵이 정확히 $\\mathfrak{m}_p$라는 사실로부터 $A(X)_{\\mathfrak{m}_p}$의 원소 $a/b$($b(p)\\ne 0$)가 항상 $D_X(b)$ 위의 실제 정칙함수를 준다는 자연스러운 사상을 얻고, 이 사상이 전사임은 정칙함수의 싹의 정의(어떤 근방에서의 $a/b$ 표현) 그 자체에서, 단사임은 다시 한 번 조밀성 논증(명제 1.10)에서 나온다.",
+          "proof_steps": [
+            "값매김 사상 $\\mathrm{ev}_p:A(X)\\to\\mathbb{C},\\ f\\mapsto f(p)$는 전사인 환 준동형이고 $\\ker(\\mathrm{ev}_p)=\\mathfrak{m}_p$이다.",
+            "$a/b\\in A(X)_{\\mathfrak{m}_p}$에 대해 $b(p)\\ne 0$이므로 $a/b$는 $D_X(b)$ 위의 정칙함수이고, 따라서 $p$에서의 싹을 정의한다. $a/b=c/d$가 $A(X)_{\\mathfrak{m}_p}$에서 성립하면 $A(X)$가 정역이므로 $ad=bc$이고, 따라서 $a/b=c/d$는 $p$의 근방 $D_X(bd)$ 위에서 (다항식으로서) 성립한다. 이는 $A(X)_{\\mathfrak{m}_p}\\to O_{X,p}$라는 사상이 잘 정의됨을 보이며, 이는 명백히 전사인 환 준동형이다.",
+            "$a/b$의 싹이 $0$이라면 $a$가 $D_X(b)$ 안의 $p$의 어떤 공집합이 아닌 열린근방 위에서 소멸한다. 그 근방은 명제 1.10에 의해 $X$에서 조밀하므로 $a=0$이 $A(X)$에서 성립한다. 따라서 $A(X)_{\\mathfrak{m}_p}\\to O_{X,p}$는 단사이고, 그러므로 동형사상이다.",
+            "마지막 주장은 명제 2.10을 그대로 옮긴 것이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (잉여체)",
+          "formal_statement": "$X$의 $p$에서의 잉여체(residue field)는 $\\mathbb{C}(p):=O_{X,p}/\\mathfrak{m}_{X,p}\\cong\\mathbb{C}$이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$X:=\\mathbb{A}^1$, $p:=0$이라 하자. $O_{X,0}\\cong A(\\mathbb{A}^1)_{(t)}=\\mathbb{C}[t]_{(t)}$의 원소로서 $\\mathfrak{m}_{X,0}$에 속하는 구체적인 싹 두 개와, $\\mathfrak{m}_{X,0}$에 속하지 않지만 $O_{X,0}$의 단위원인 싹 하나를 각각 제시하라.",
+          "hint": "정리 2.11의 마지막 서술 $\\mathfrak{m}_{X,p}=\\{a/b\\mid a(p)=0,\\ b(p)\\ne 0\\}$을 그대로 적용해 보라.",
+          "solution": "$\\mathfrak{m}_{X,0}$에 속하는 원소는 분자가 $0$에서 소멸해야 하므로, 예를 들어 $t/1$과 $t^2/(t+1)$(분모 $t+1$은 $0$에서 값이 $1\\ne 0$)이 그렇다. 반면 $2/(t+1)$은 분자 $2$가 $0$에서 소멸하지 않으므로 $\\mathfrak{m}_{X,0}$ 밖에 있고, 명제 2.10의 논증(분자가 극대이데알 밖에 있으면 단위원)에 의해 $O_{X,0}$에서 실제로 단위원이다 — 그 역원은 $(t+1)/2$이다."
+        },
+        {
+          "type": "ox",
+          "question": "$O_{X,p}$의 극대이데알 $\\mathfrak{m}_{X,p}$는 $p$에서 값이 $0$이 아닌 싹들의 모임이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 정의상 $\\mathfrak{m}_{X,p}=\\{f\\in O_{X,p}\\mid f(p)=0\\}$이며, 이는 정확히 $p$에서 값이 $0$인 싹들의 모임이다. 값이 $0$이 아닌 싹들은 오히려 국소환 $O_{X,p}$에서 전부 단위원이 된다(명제 2.10의 논증과 정확히 같은 이유)."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 곱셈에 닫힌 집합 $U\\subseteq R$에 대한 국소화 $R[U^{-1}]$은 $U$가 소이데알의 여집합일 때만 국소환이 된다.",
+          "answer": "O",
+          "explanation": "참이다(적어도 이 절에서 다룬 형태로는). 명제 2.10의 증명은 결정적으로 '$\\mathfrak{p}=R\\setminus U$가 소이데알'이라는 사실을 사용해 $R_\\mathfrak{p}$의 비단위원들이 정확히 하나의 이데알 $\\mathfrak{p}R_\\mathfrak{p}$을 이룬다는 것을 보장한다. 일반적인 곱셈에 닫힌 집합 $U$에 대해서는 $R[U^{-1}]$이 여러 개의 극대이데알을 가질 수 있어 국소환이 아닐 수 있다(예: $U=\\{1\\}$이면 $R[U^{-1}]=R$이고, $R$ 자체가 국소환이 아닐 수 있다)."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 2.11은 '점 $p$에서의 함수의 싹'이라는 매우 지역적이고 위상적인 개념을, '좌표환 $A(X)$를 극대이데알 $\\mathfrak{m}_p$에서 국소화한다'는 순전히 대수적인 연산으로 바꾼다. 이 번역에서 '조밀성'(명제 1.10, $X$가 기약이라는 사실)이 왜 필수적인 역할을 하는지, 그리고 만약 두 서로 다른 점 $p\\ne q$에서의 싹의 환 $O_{X,p}$와 $O_{X,q}$가 서로 다른 극대이데알 $\\mathfrak{m}_p\\ne\\mathfrak{m}_q$에서의 국소화라는 사실이 기하학적으로 무엇을 의미하는지 논하라.",
+          "hint": "조밀성이 어디서 쓰였는지는 정리 2.11의 증명의 단사성 부분을 다시 보라. 서로 다른 점에서의 국소화가 서로 다르다는 것은 '지역적 정보가 점마다 진짜로 다른 것을 담고 있다'는 뜻인지 생각해 보라.",
+          "answer": "조밀성은 정리 2.11의 단사성 증명에서 결정적이다: '싹이 $0$이다'라는 조건은 원래 '$p$의 어떤 (아무리 작아도 되는) 열린근방에서 $a=0$'이라는 국소적 조건일 뿐인데, $X$가 기약이라 그 국소적 열린집합이 자동으로 $X$ 전체에서 조밀하므로 '국소적으로 $0$'이 곧바로 '전역적으로 $0$'($a=0$ in $A(X)$)을 강제한다. 만약 $X$가 기약이 아니었다면, $p$가 속한 성분에서만 $0$이고 다른 성분에서는 $0$이 아닌 다항식이 존재할 수 있어 이 논증이 무너진다 — 즉 국소화가 '싹'을 정확히 포착하지 못하게 된다. 한편 서로 다른 점 $p\\ne q$에서 $\\mathfrak{m}_p\\ne\\mathfrak{m}_q$이므로 $O_{X,p}=A(X)_{\\mathfrak{m}_p}$와 $O_{X,q}=A(X)_{\\mathfrak{m}_q}$는 (같은 큰 환 $A(X)$ 안에서) 서로 다른 소이데알 주변만을 남기고 국소화한 결과이며, 이는 '점마다 국소적 대수 구조가 진짜로 독립적인 정보를 담고 있다'는 사실 — 예컨대 나중에 다룰 매끄러움(smoothness)이나 특이점 여부 같은 성질은 정확히 각 점의 국소환 $O_{X,p}$의 구조(예: 극대이데알의 거듭제곱들의 차원)로 판별된다 — 를 대수적으로 미리 보여주는 것이다."
+        }
+      ]
+    },
+    {
+      "section_title": "2.3 Rational functions",
+      "step1_big_picture": {
+        "context": "지금까지 다룬 정칙함수 $O_X(U)$는 '어떤 고정된 열린집합 $U$ 위에서' 정의된 함수였다. 이 절은 그 열린집합 자체를 잊고 '어딘가 조밀한 열린집합 위에서만 정의되어 있으면 충분하다'는 유리함수(rational function)의 개념으로 넘어간다 — 아핀다양체가 기약이라는 사실 덕분에 서로 다른 두 조밀 열린집합의 교집합도 항상 조밀 열린집합이라, '어디서 정의됐는지'를 잊고 '값들이 결국 일치하는지'만 남겨도 동치관계가 잘 작동한다. 이렇게 얻는 함수체 $\\mathbb{C}(X)$(정리 2.12에 의해 $F(A(X))$, 즉 좌표환의 분수체와 동일)는 $X$의 '국소적 정보를 전부 잊고 얼마나 커다란 유리함수들의 장(場)을 갖는가'만을 포착하는 불변량이다. 이어서 유리함수를 다양체 사이의 사상으로 일반화한 유리사상(rational map)을 정의하고, 그 특별한 경우인 쌍유리 동치(birational equivalence)를 통해 '동형은 아니지만 거의 같다'는, 동형사상보다 훨씬 성긴 동치관계를 도입한다. 이 절의 두 예제(뾰족한 삼차곡선, 원)는 각각 '전단사이지만 동형이 아닌' 정칙 모피즘과 '쌍유리적이지만 동형이 아닌' 경우를 보여 주며, 차원 이론의 도입부(5장)에서 다시 핵심적으로 쓰인다.",
+        "hidden_intuition": "유리함수를 '분수식 $a/b$'로 생각하는 대신 '정의역을 얼마든지 좁혀도 되는 정칙함수'로 정의하는 이유는, 서로 다른 분수식 표현이 우연히 같은 함수를 나타낼 수 있기 때문이 아니라(그런 문제는 정수환에서도 있다) 애초에 '어느 열린집합 위에서 정의되었는가'라는 정보 자체가 유리함수의 본질이 아니라는 관점 전환에 있다. 정칙함수의 싹(germ) $O_{X,p}$이 '한 점 근방에서 본 함수'였다면, 유리함수는 '어딘가 조밀한 열린집합에서 본 함수'다 — 점 하나를 조밀한 열린집합으로 바꾼 것뿐인데, 그 결과 $\\mathbb{C}(X)=F(A(X))$가 되어 모든 국소환 $O_{X,p}$($p\\in X$ 전체)가 이 하나의 큰 체 $\\mathbb{C}(X)$ 안에서 서로 다른 부분환으로 나타난다(명제 2.13: $A(X)=\\bigcap_p O_{X,p}$). 즉 $\\mathbb{C}(X)$는 모든 점에서의 국소적 정보를 동시에 담을 수 있는 '가장 큰 그릇'이고, $A(X)$는 '모든 점에서 동시에 정칙인 원소들의 교집합'으로 다시 복원된다 — 대수기하학에서 자주 나오는 '전역 = 모든 국소의 교집합'이라는 패턴의 첫 등장이다. 유리사상과 쌍유리 동치는 이 관점을 사상으로 확장한 것으로, '전역적으로 어디서나 정의될 필요는 없고 조밀한 열린집합에서만 잘 작동하면 충분하다'는 대수기하학 특유의 관대함을 담고 있다 — 이는 자리스키 위상에서 열린집합이 극도로 크다는(조밀하다는) 사실이 있기에 가능한 일이다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (유리함수, 함수체 $\\mathbb{C}(X)$)",
+          "formal_statement": "$X$를 아핀 대수다양체라 하자. 공집합이 아닌 열린부분집합 $U,V\\subseteq X$와 $f\\in O_X(U)$, $g\\in O_X(V)$에 대해, $(U,f)\\sim(V,g)$를 어떤 공집합이 아닌 열린부분집합 $W\\subseteq U\\cap V$ 위에서 $f=g$인 것으로 정의하면 이는 동치관계이다. 이러한 쌍의 동치류를 $X$ 위의 유리함수(rational function)라 부른다. $X$ 위의 유리함수 전체의 집합을 $\\mathbb{C}(X)$로 쓴다. $\\mathbb{C}(X)$ 위에 통상적인 방법으로 덧셈과 곱셈을 정의하면 이들은 잘 정의되고 $\\mathbb{C}(X)$를 $\\mathbb{C}$-대수로 만든다. $\\mathbb{C}(X)$를 $X$의 함수체(function field)라 부른다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.12 ($\\mathbb{C}(X)\\cong F(A(X))$)",
+          "formal_statement": "아핀 대수다양체 $X$에 대해 $\\mathbb{C}(X)\\cong F(A(X))$이다(단, $F(A(X))$는 정역 $A(X)$의 분수체).",
+          "idea_behind_proof": "핵심은 정리 2.4가 이미 해 놓은 일을 재활용하는 것이다: $F(A(X))$의 원소 $a/b$는 $D_X(b)$ 위의 정칙함수를 주므로 자연스럽게 유리함수를 정의하고(단사성은 조밀성에서), $X$의 임의의 열린집합 위의 정칙함수는 정리 2.4에 의해 어차피 국소적으로 $a/b$ 꼴이므로(전사성) 이 대응은 전단사다.",
+          "proof_steps": [
+            "$a/b\\in F(A(X))$에 대해 $a/b\\in D_X(b)$ 위의 정칙함수를 정의하므로 유리함수를 하나 결정한다. 만약 $a/b$가 $D_X(f)$의 공집합이 아닌 열린부분집합 위에서 $0$이라면, $a$는 그 위에서 소멸하고 따라서(명제 1.10의 조밀성에 의해) $X$ 전체에서 소멸하므로 $A(X)$가 정역임에서 $a=0$이다.",
+            "이는 사상 $F(A(X))\\to\\mathbb{C}(X)$가 단사인 환 준동형임을 보인다.",
+            "전사성: 열린부분집합 $U\\subseteq X$와 $f\\in O_X(U)$가 주어지면, 정리 2.4에 의해 어떤 $a,b\\in A(X)$ ($b\\ne 0$)에 대해 $D_X(b)\\subseteq U$ 위에서 $f=a/b$로 쓸 수 있다. 이는 사상이 전사임을 보이고, 따라서 동형사상이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (분모 아이디얼 $J_q$)",
+          "formal_statement": "$X$를 아핀 대수다양체라 하자. $q\\in\\mathbb{C}(X)$에 대해 그 분모 아이디얼(denominator ideal)은 $$J_q:=\\{h\\in A(X)\\mid hq\\in A(X)\\}\\subseteq A(X)$$ 이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.13 ($A(X)=\\bigcap_p O_{X,p}$)",
+          "formal_statement": "$X$가 아핀 대수다양체이면 $$A(X)=\\bigcap_{p\\in X}O_{X,p}\\quad\\text{(모두 }\\mathbb{C}(X)\\text{ 안에서)}$$ 이다.",
+          "idea_behind_proof": "포함 관계 ($\\subseteq$)는 자명하고, 핵심은 반대 포함이다: 모든 점에서 정칙인 유리함수 $q$가 있으면 그 분모 아이디얼 $J_q$가 모든 극대아이디얼 $\\mathfrak{m}_p$에 포함되지 않는다는 것을, 약한 Nullstellensatz로 $J_q$가 전체 환이라는 결론으로 끌어올린다.",
+          "proof_steps": [
+            "($\\subseteq$): $f\\in A(X)$이면 모든 $p\\in X$에서 $f=f/1\\in O_{X,p}$이므로 자명하다.",
+            "($\\supseteq$): $q\\in O_{X,p}$인 임의의 $p\\in X$에 대해, $O_{X,p}\\cong A(X)_{\\mathfrak{m}_p}$(정리 2.11)이므로 어떤 $h\\in A(X)\\setminus\\mathfrak{m}_p$가 있어 $hq\\in A(X)$, 즉 $h\\in J_q$이다. 따라서 $J_q\\not\\subseteq\\mathfrak{m}_p$.",
+            "이제 $q\\in\\bigcap_{p\\in X}O_{X,p}$라 하면, 모든 $p\\in X$에서 $J_q\\not\\subseteq\\mathfrak{m}_p$이므로 특히 $J_q$가 어떤 점에서도 소멸하지 않아 $X\\cap V(J_q)=\\emptyset$이다.",
+            "약한 Nullstellensatz(정리 1.32)에 의해 $J_q=A(X)$, 즉 $1\\in J_q$이다. 정의에 의해 $1\\cdot q=q\\in A(X)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 2.14 (유리함수의 정칙점, $\\mathrm{Dom}$)",
+          "formal_statement": "$X$를 아핀 대수다양체, $p\\in X$, $q\\in\\mathbb{C}(X)$라 하자. $q$가 $p$에서 정칙인 것과 어떤 $h\\in J_q$에 대해 $h(p)\\ne 0$인 것은 동치이다. 따라서 $q$가 정칙인 모든 열린부분집합들의 합집합은 공집합이 아닌 조밀 열린부분집합 $X\\setminus V(J_q)$이다.",
+          "idea_behind_proof": "($\\Rightarrow$)는 정칙이라는 조건을 그대로 분모 아이디얼의 언어로 번역하는 것이고, ($\\Leftarrow$)는 $q=(hq)/h$라는 뻔한 재표현이 정확히 $p$ 근방에서의 정칙성을 보여 준다는 관찰이다.",
+          "proof_steps": [
+            "($\\Rightarrow$): $q=a/b$가 $p$ 근방에서 $b(p)\\ne 0$으로 성립하면, $\\mathbb{C}(X)$ 안에서 $q=a/b$이므로 $bq=a\\in A(X)$, 즉 $b\\in J_q$이고 $b(p)\\ne 0$이다.",
+            "($\\Leftarrow$): $h\\in J_q$이고 $h(p)\\ne 0$이면 $hq\\in A(X)$이므로 $q=(hq)/h$이며, 이는 $D_X(h)\\ni p$ 위에서 정칙함수의 표현이다.",
+            "마지막 주장: $q$가 정칙인 점들의 집합은 정의에 의해 $\\{p\\in X\\mid h(p)\\ne 0\\text{인 어떤 }h\\in J_q\\text{가 존재}\\}=X\\setminus V(J_q)$이며, $J_q\\ne 0$이므로(명제 2.13의 논증에서 $J_q$가 모든 $\\mathfrak m_p$에 포함되지 않아 $0$일 수 없음) 이는 진부분 자리스키 닫힌집합의 여집합, 즉 공집합이 아닌 조밀 열린집합이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (유리사상)",
+          "formal_statement": "$X,Y$를 아핀 대수다양체라 하자. 열린부분집합 $U,V\\subseteq X$와 정칙 사상 $\\phi_U:U\\to Y$, $\\phi_V:V\\to Y$에 대해 $$(U,\\phi_U)\\sim(V,\\phi_V)\\quad:\\Longleftrightarrow\\quad \\phi_U|_W=\\phi_V|_W\\text{인 공집합이 아닌 열린부분집합 }W\\subseteq U\\cap V\\text{가 존재}$$ 로 정의하면 이는 동치관계이다. 그 동치류를 유리사상(rational map)이라 하며 $\\phi:X\\dashrightarrow Y$로 쓴다. 모든 아핀 모피즘은 유리사상이고, 모든 유리함수 $f:X\\dashrightarrow\\mathbb{A}^1$은 유리사상이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.15 (유리사상 = 유리함수 튜플, $\\mathrm{Dom}(\\phi)$)",
+          "formal_statement": "$X$를 아핀 대수다양체, $Y\\subseteq\\mathbb{A}^m$을 아핀 대수다양체라 하자. 모든 유리사상 $\\phi:X\\dashrightarrow Y$는 $I(Y)$의 모든 $F$에서 $F(q_1,\\dots,q_m)=0$을 만족하는 유일한 튜플 $(q_1,\\dots,q_m)\\in\\mathbb{C}(X)^m$을 결정한다. 역으로 그러한 조건을 만족하는 모든 튜플 $(q_1,\\dots,q_m)\\in\\mathbb{C}(X)^m$은 유일한 유리사상 $\\phi:X\\dashrightarrow Y$를 결정한다. 이 경우 $$\\mathrm{Dom}(\\phi):=\\bigcap_{i=1}^m\\big(X\\setminus V(J_{q_i})\\big)\\subseteq X$$ 는 $\\phi$가 모피즘이 되는 $X$의 극대 공집합 아닌 열린부분집합이다.",
+          "idea_behind_proof": "유리사상의 대표 $\\phi_U:U\\to Y$는 정리 2.6에 의해 좌표함수 $q_i\\in O_X(U)\\subseteq\\mathbb{C}(X)$의 튜플로 완전히 결정되며, $F\\circ\\phi_U=0$이 $I(Y)$의 원소 전체에서 성립한다는 것은 좌표환 수준의 관계식을 그대로 유리함수 수준으로 옮긴 것뿐이다. 역방향은 명제 2.14를 각 좌표마다 적용해 공통 정칙 영역을 잡는 것이다.",
+          "proof_steps": [
+            "유리사상 $\\phi:X\\dashrightarrow Y$는 대표 $\\phi_U:U\\to Y$($U\\subseteq X$ 공집합 아닌 열린부분집합)를 가지며, 정리 2.12에 의해 $\\phi_U=(q_1,\\dots,q_m)$ ($q_i\\in\\mathbb{C}(X)$)로 쓸 수 있다. $\\mathbb{C}[x_1,\\dots,x_m]$의 $F$에 대해 $F(q_1,\\dots,q_m)=\\phi_U\\circ F$이므로 $I(Y)$의 모든 $F$에서 $F(q_1,\\dots,q_m)=0$을 얻는다.",
+            "동치인 대표들은 분명히 같은 튜플 $(q_1,\\dots,q_m)\\in\\mathbb{C}(X)^m$을 준다(공통 정의역에서 일치하므로).",
+            "역으로 $(q_1,\\dots,q_m)\\in\\mathbb{C}(X)^m$이 그 조건을 만족하면, $U:=\\mathrm{Dom}(\\phi):=\\bigcap_i(X\\setminus V(J_{q_i}))$가 명제 2.14에 의해 공집합이 아닌 열린부분집합이고, 이 위에서 각 $q_i$가 정칙이므로 정칙 사상 $\\phi_U:U\\to Y$를 유도한다.",
+            "이는 유리사상 $\\phi:X\\dashrightarrow Y$를 주며, $U$가 $\\phi$가 모피즘인 $X$의 극대 열린부분집합임은 구성으로부터 명백하다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (부정 궤적)",
+          "formal_statement": "정리 2.15의 상황에서, 유리사상 $\\phi:X\\dashrightarrow Y$의 부정 궤적(indeterminancy locus)은 닫힌부분집합 $$X\\setminus\\mathrm{Dom}(\\phi)=\\bigcup_{i=1}^m V(J_{q_i})\\subseteq X$$ 이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (지배적 유리사상, 합성)",
+          "formal_statement": "$X,Y,Z$를 아핀 대수다양체라 하자. 유리사상 $\\phi:X\\dashrightarrow Y$가 지배적(dominant)이라는 것은 한 대표의 상이 $Y$에서 조밀하다는 것이다. 이 경우 모든 대표의 상이 $Y$에서 조밀하다. $\\phi:X\\dashrightarrow Y$가 지배적이고 $\\psi:Y\\dashrightarrow Z$가 유리사상이면, 그 합성 $\\psi\\circ\\phi$도 유리사상이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 2.16 (지배적 유리사상 = 함수체의 단사 $\\mathbb{C}$-대수 준동형)",
+          "formal_statement": "$X,Y,Z$를 아핀 대수다양체라 하자. 다음이 성립한다: (1) 지배적 유리사상 $\\phi:X\\dashrightarrow Y$는 단사 $\\mathbb{C}$-대수 준동형 $\\phi^*:\\mathbb{C}(Y)\\to\\mathbb{C}(X)$와 일대일로 대응한다. (2) $\\phi:X\\dashrightarrow Y$와 $\\psi:Y\\dashrightarrow Z$가 지배적 유리사상이면 $(\\psi\\circ\\phi)^*=\\phi^*\\circ\\psi^*$.",
+          "idea_behind_proof": "정리 2.6의 지배적 버전이다: 정칙 모피즘 대신 유리사상을, 좌표환 대신 함수체를 쓰면 같은 논증이 그대로 작동하되, '지배적'이라는 조건이 정확히 유도 준동형의 '단사성'으로 번역된다는 것이 핵심 관찰이다 — 상이 조밀하지 않다면 그 상의 자리스키 폐포를 잘라내는 0이 아닌 함수가 준동형의 핵에 들어가기 때문이다.",
+          "proof_steps": [
+            "지배적 유리사상 $\\phi:X\\dashrightarrow Y$에 대해 $\\phi^*:\\mathbb{C}(Y)\\to\\mathbb{C}(X)$, $q\\mapsto q\\circ\\phi$는 $\\mathbb{C}$-대수 준동형이다. $q\\circ\\phi=0$이면(상이 조밀하므로 $q$가 상의 조밀한 부분집합에서 소멸하고, 유리함수의 정칙 영역은 열린조밀이므로 결국) $q=0$이다. 따라서 $\\phi^*$는 단사이다.",
+            "역으로 단사 $\\mathbb{C}$-대수 준동형 $\\alpha:\\mathbb{C}(Y)\\to\\mathbb{C}(X)$가 주어졌다 하고, $Y\\subseteq\\mathbb{A}^m$의 좌표류를 $y_1,\\dots,y_m$이라 하자. $1\\le i\\le m$에 대해 $q_i:=\\alpha(y_i)$로 두면, $I(Y)$의 모든 $F$에서 $F(q_1,\\dots,q_m)=\\alpha(F(y_1,\\dots,y_m))=0$이므로 정리 2.15에 의해 유리사상 $\\phi:X\\dashrightarrow Y$를 얻는다.",
+            "$\\phi$의 상의 폐포 $Z$가 $Y$의 진부분 닫힌집합이라면, 아이디얼의 진부분 포함 $I(Y)\\subsetneq I(Z)$에 의해 $Z$ 위에서 소멸하되 $A(Y)$에서는 $0$이 아닌 원소 $F$가 존재한다. 그러면 $\\alpha(F)=0$인데, 이는 $\\alpha$의 단사성에 모순이다. 따라서 $\\phi$는 지배적이다.",
+            "$Y$의 좌표류들이 $\\mathbb{C}$-대수로서 $A(Y)$를 생성하고 $\\mathbb{C}(Y)=F(A(Y))$(정리 2.12)이므로, 이 두 구성은 서로 역이다. 이것으로 (1)이 증명된다. (2)는 정의에서 명백하다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (쌍유리 동치, 쌍유리 사상)",
+          "formal_statement": "아핀 대수다양체 $X,Y$가 쌍유리(birational)라는 것은 $\\psi\\circ\\phi=\\mathrm{id}_X$와 $\\phi\\circ\\psi=\\mathrm{id}_Y$가 유리사상으로서 성립하는 지배적 유리사상 $\\phi:X\\dashrightarrow Y$, $\\psi:Y\\dashrightarrow X$가 존재한다는 것이며, 이때 $X\\sim_{\\mathrm{bir}}Y$라 쓴다. 이 경우 $\\phi$를 쌍유리 사상(birational map)이라 부른다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 2.17 (쌍유리 동치의 세 가지 동치 조건)",
+          "formal_statement": "아핀 대수다양체 $X,Y$에 대해 다음은 동치이다: (1) $X\\sim_{\\mathrm{bir}}Y$. (2) 함수체 $\\mathbb{C}(X)$와 $\\mathbb{C}(Y)$가 $\\mathbb{C}$-대수로서 동형이다. (3) 서로 역인 정칙 사상으로 동형인 공집합이 아닌 열린부분집합 $U\\subseteq X$, $V\\subseteq Y$가 존재한다.",
+          "idea_behind_proof": "정리 2.16이 (1)과 (2)의 동치를 바로 주고, (1)과 (3)의 동치는 유리사상과 그 역이 정의상 이미 각자의 정의역 위에서 정칙 모피즘 쌍으로 실현되므로 자명하다.",
+          "proof_steps": [
+            "정리 2.16을 $\\phi,\\psi$에 적용하면 $\\phi^*,\\psi^*$가 서로 역인 $\\mathbb{C}$-대수 동형사상이 되므로 (1) $\\Leftrightarrow$ (2)이다.",
+            "(1) $\\Leftrightarrow$ (3)은, 쌍유리 사상 $\\phi,\\psi$가 서로 역인 유리사상이라는 조건을 정의역들을 적절히 좁혀 실제 정칙 사상의 상호 역 쌍으로 만들면 바로 얻어지고(정리 2.15의 $\\mathrm{Dom}$ 논의), 역으로 그러한 $U,V$의 동형사상은 그 자체로 지배적 유리사상이자 서로 역이므로 명백하다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.18 (뾰족한 삼차곡선은 $\\mathbb{A}^1$과 쌍유리이지만 동형은 아니다)",
+          "formal_statement": "예제 2.9의 아핀 모피즘 $\\nu:\\mathbb{A}^1\\to C=V(v^2-u^3)\\subseteq\\mathbb{A}^2$, $t\\mapsto(t^2,t^3)$은 $D_{\\mathbb{A}^1}(t)\\xrightarrow{\\sim}D_C(u)$인 동형사상을 유도하며 그 역은 $(u,v)\\mapsto v/u$로 주어진다. 따라서 $C\\sim_{\\mathrm{bir}}\\mathbb{A}^1$이다. 그러나 $C\\not\\cong\\mathbb{A}^1$이다 — 실제로 $A(C)\\cong\\mathbb{C}[t^2,t^3]$과 $A(\\mathbb{A}^1)\\cong\\mathbb{C}[t]$는 동형이 아닌데, $\\mathbb{C}[t^2,t^3]$의 극대아이디얼 $(t^2,t^3)$이 주 아이디얼(principal)이 아니기 때문이다.",
+          "idea_behind_proof": "$D_{\\mathbb{A}^1}(t)=\\mathbb{A}^1\\setminus\\{0\\}$에서는 $t\\ne 0$이므로 $u=t^2,v=t^3$으로부터 $t=v/u$를 되찾을 수 있어 국소적으로 동형이지만, 원점 하나($t=0$, 즉 $C$의 뾰족점 $(0,0)$)에서 이 역행이 깨진다 — 그 점 근방에서 좌표환의 극대아이디얼 $(t^2,t^3)$이 주 아이디얼이 아니라는 순수 대수적 사실이 기하학적 특이점(뾰족함)의 정확한 대수적 반영이다.",
+          "proof_steps": [
+            "$D_{\\mathbb{A}^1}(t)\\to D_C(u)$: $t\\mapsto(t^2,t^3)$이고 $t\\ne 0$이면 $u=t^2\\ne 0$이므로 상이 $D_C(u)$에 들어간다. 역으로 $(u,v)\\mapsto v/u$는 $u\\ne 0$인 $C$의 점에서 정의되고, $v/u=t^3/t^2=t$를 복원하므로 두 사상은 서로 역이다. 이는 $D_{\\mathbb{A}^1}(t)\\cong D_C(u)$를 보이고, $\\nu,(v/u)$가 지배적 유리사상으로서 서로 역이므로 $C\\sim_{\\mathrm{bir}}\\mathbb{A}^1$이다.",
+            "$C\\not\\cong\\mathbb{A}^1$: 만약 $C\\cong\\mathbb{A}^1$이라면 정리 2.6(3)에 의해 $A(C)\\cong\\mathbb{C}[t^2,t^3]$과 $A(\\mathbb{A}^1)=\\mathbb{C}[t]$가 $\\mathbb{C}$-대수로서 동형이어야 한다.",
+            "그러나 $\\mathbb{C}[t]$의 모든 극대아이디얼은 $(t-a)$ 꼴로 주 아이디얼인 반면, $\\mathbb{C}[t^2,t^3]$의 원점에 대응하는 극대아이디얼 $\\mathfrak{m}=(t^2,t^3)$은 주 아이디얼이 아니다 — 만약 $\\mathfrak{m}=(g)$라면 $g$가 $t^2,t^3$ 둘 다를 나누어야 하는데 $\\mathbb{C}[t^2,t^3]$ 안에서 최고차항 비교로 이는 불가능함을 보일 수 있다(체크포인트 문항 참고).",
+            "동형사상은 극대아이디얼이 주 아이디얼인지 여부와 같은 환론적 성질을 보존해야 하므로, 이는 $\\mathbb{C}[t^2,t^3]\\not\\cong\\mathbb{C}[t]$를 보이고 따라서 $C\\not\\cong\\mathbb{A}^1$이다. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "caption": "$C=V(v^2-u^3)\\subseteq\\mathbb{A}^2$: 원점에서 뾰족한(cuspidal) 삼차곡선. $\\mathbb{A}^1$과 전단사·쌍유리이지만 원점에서 매끄럽지 않아 동형은 아니다.",
+            "xRange": [
+              -2.7,
+              2.7
+            ],
+            "yRange": [
+              -2.3,
+              2.3
+            ],
+            "elements": [
+              {
+                "kind": "curve",
+                "points": [
+                  [
+                    2.5600000000000005,
+                    -4.096000000000001
+                  ],
+                  [
+                    2.25,
+                    -3.375
+                  ],
+                  [
+                    1.9599999999999997,
+                    -2.7439999999999993
+                  ],
+                  [
+                    1.6900000000000002,
+                    -2.1970000000000005
+                  ],
+                  [
+                    1.44,
+                    -1.728
+                  ],
+                  [
+                    1.2100000000000002,
+                    -1.3310000000000004
+                  ],
+                  [
+                    1.0,
+                    -1.0
+                  ],
+                  [
+                    0.81,
+                    -0.7290000000000001
+                  ],
+                  [
+                    0.6400000000000001,
+                    -0.5120000000000001
+                  ],
+                  [
+                    0.48999999999999994,
+                    -0.3429999999999999
+                  ],
+                  [
+                    0.36,
+                    -0.216
+                  ],
+                  [
+                    0.25,
+                    -0.125
+                  ],
+                  [
+                    0.16000000000000003,
+                    -0.06400000000000002
+                  ],
+                  [
+                    0.09,
+                    -0.027
+                  ],
+                  [
+                    0.04000000000000001,
+                    -0.008000000000000002
+                  ],
+                  [
+                    0.010000000000000002,
+                    -0.0010000000000000002
+                  ],
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    0.010000000000000002,
+                    0.0010000000000000002
+                  ],
+                  [
+                    0.04000000000000001,
+                    0.008000000000000002
+                  ],
+                  [
+                    0.09,
+                    0.027
+                  ],
+                  [
+                    0.16000000000000003,
+                    0.06400000000000002
+                  ],
+                  [
+                    0.25,
+                    0.125
+                  ],
+                  [
+                    0.36,
+                    0.216
+                  ],
+                  [
+                    0.48999999999999994,
+                    0.3429999999999999
+                  ],
+                  [
+                    0.6400000000000001,
+                    0.5120000000000001
+                  ],
+                  [
+                    0.81,
+                    0.7290000000000001
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    1.2100000000000002,
+                    1.3310000000000004
+                  ],
+                  [
+                    1.44,
+                    1.728
+                  ],
+                  [
+                    1.6900000000000002,
+                    2.1970000000000005
+                  ],
+                  [
+                    1.9599999999999997,
+                    2.7439999999999993
+                  ],
+                  [
+                    2.25,
+                    3.375
+                  ],
+                  [
+                    2.5600000000000005,
+                    4.096000000000001
+                  ]
+                ],
+                "style": "solid",
+                "label": "$v^2=u^3$"
+              },
+              {
+                "kind": "point",
+                "at": [
+                  0,
+                  0
+                ],
+                "label": "뾰족점 $(0,0)$"
+              },
+              {
+                "kind": "point",
+                "at": [
+                  1,
+                  1
+                ],
+                "label": "$t=1$"
+              },
+              {
+                "kind": "point",
+                "at": [
+                  1,
+                  -1
+                ],
+                "label": "$t=-1$"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Example",
+          "name": "예제 2.19 (원은 $\\mathbb{A}^1$과 쌍유리이다 — 입체 사영)",
+          "formal_statement": "$Q:=V(x^2+y^2-1)\\subseteq\\mathbb{A}^2$라 하자($Q$는 아핀 대수다양체이다 — 가역 일차변환 $r:=x+iy,\\ s:=x-iy$로 $x^2+y^2-1$이 $rs-1$이 되고 $\\mathbb{C}[r,s]/(rs-1)\\cong\\mathbb{C}[r,r^{-1}]$은 정역이다). $$\\phi:\\mathbb{A}^1\\dashrightarrow Q,\\quad t\\mapsto\\left(\\frac{2t}{t^2+1},\\frac{t^2-1}{t^2+1}\\right)\\qquad\\text{그리고}\\qquad \\psi:Q\\dashrightarrow\\mathbb{A}^1,\\quad (x,y)\\mapsto\\frac{x}{1-y}$$ 는 $\\psi\\circ\\phi=\\mathrm{id}_{\\mathbb{A}^1}$, $\\phi\\circ\\psi=\\mathrm{id}_Q$인 유리사상이며, 실제로 $D_{\\mathbb{A}^1}(t^2+1)\\cong D_Q(1-y)$를 유도한다. 따라서 $Q\\sim_{\\mathrm{bir}}\\mathbb{A}^1$이다.",
+          "idea_behind_proof": "이는 고전적인 입체 사영(stereographic projection)이다: 원 위의 점 $(0,1)$('북극')에서 $x$축으로 직선을 그어 그 직선이 원과 만나는 두 번째 점을 대응시키는 것이 $\\psi$의 역인 $\\phi$이고, $\\psi$는 그 직선의 기울기(혹은 $x$축 절편)를 읽어내는 것이다. 대수적으로는 $t\\mapsto(2t/(t^2+1),(t^2-1)/(t^2+1))$이 파라미터 $t$에 대한 원의 유리 매개화이며, 피타고라스 삼조 공식과 정확히 같은 구조다.",
+          "proof_steps": [
+            "$\\phi(t)$가 $Q$ 위에 있음: $\\left(\\frac{2t}{t^2+1}\\right)^2+\\left(\\frac{t^2-1}{t^2+1}\\right)^2=\\frac{4t^2+(t^2-1)^2}{(t^2+1)^2}=\\frac{(t^2+1)^2}{(t^2+1)^2}=1$.",
+            "$\\psi\\circ\\phi=\\mathrm{id}$: $\\psi(\\phi(t))=\\dfrac{2t/(t^2+1)}{1-(t^2-1)/(t^2+1)}=\\dfrac{2t/(t^2+1)}{2/(t^2+1)}=t$ (단, $t^2+1\\ne 0$).",
+            "$\\phi\\circ\\psi=\\mathrm{id}$: $(x,y)\\in Q$이고 $y\\ne 1$일 때 $t:=x/(1-y)$로 두면 $x^2=1-y^2=(1-y)(1+y)$이므로 $t=x/(1-y)$는 $t^2=(1+y)/(1-y)$를 만족하고, 이로부터 직접 계산으로 $\\phi(t)=(x,y)$가 확인된다(체크포인트 문항 참고).",
+            "정의역이 겹치는 곳에서 두 합성이 항등사상이므로 $\\phi,\\psi$는 서로 역인 지배적 유리사상이고, 실제로 $t^2+1\\ne 0$이고 $y\\ne 1$인 영역에서 정칙 사상으로서 서로 역이 되어 $D_{\\mathbb{A}^1}(t^2+1)\\cong D_Q(1-y)$를 준다. 따라서 $Q\\sim_{\\mathrm{bir}}\\mathbb{A}^1$. $\\qquad\\blacksquare$"
+          ],
+          "visualization": {
+            "type": "custom_2d",
+            "caption": "입체 사영: 북극 $(0,1)$에서 그은 직선이 원 $Q$와 만나는 점 $\\phi(t)$가 $x$축 위의 매개변수 $t$에 대응한다.",
+            "xRange": [
+              -2.6,
+              2.6
+            ],
+            "yRange": [
+              -1.6,
+              1.7
+            ],
+            "elements": [
+              {
+                "kind": "circle",
+                "center": [
+                  0,
+                  0
+                ],
+                "radius": 1,
+                "label": "$Q:x^2+y^2=1$"
+              },
+              {
+                "kind": "point",
+                "at": [
+                  0,
+                  1
+                ],
+                "label": "북극 $(0,1)$"
+              },
+              {
+                "kind": "point",
+                "at": [
+                  0.8,
+                  0.6
+                ],
+                "label": "$\\phi(t)$"
+              },
+              {
+                "kind": "segment",
+                "from": [
+                  0,
+                  1
+                ],
+                "to": [
+                  2.4,
+                  -1.4
+                ],
+                "style": "dashed"
+              },
+              {
+                "kind": "point",
+                "at": [
+                  1.2,
+                  0
+                ],
+                "label": "$t$"
+              },
+              {
+                "kind": "segment",
+                "from": [
+                  -2.4,
+                  0
+                ],
+                "to": [
+                  2.4,
+                  0
+                ],
+                "style": "dashed",
+                "label": "$x$축 ($\\mathbb{A}^1$)"
+              }
+            ]
+          }
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "예제 2.18에서 $\\mathbb{C}[t^2,t^3]$의 극대아이디얼 $\\mathfrak{m}=(t^2,t^3)$이 주 아이디얼(principal ideal)이 아님을 보여라.",
+          "hint": "$\\mathfrak{m}=(g)$라 가정하고 $t^2,t^3$이 모두 $g$의 배수여야 한다는 조건에서 $g$의 차수를 좁혀 보라. $\\mathbb{C}[t^2,t^3]$의 원소들은 $t^1$항이 없는 다항식임을 이용하라.",
+          "solution": "$\\mathfrak{m}=(g)$라 가정하자. $t^2\\in\\mathfrak{m}$이므로 $t^2=gh_1$인 $h_1\\in\\mathbb{C}[t^2,t^3]$이 있고, $t^3\\in\\mathfrak{m}$이므로 $t^3=gh_2$인 $h_2$가 있다. $\\mathbb{C}[t^2,t^3]$이 정역이고 $\\mathbb{C}[t]$ 안에 있으므로 차수(as a polynomial in $t$)를 비교하면 $\\deg g\\le 2$. $g\\in\\mathbb{C}[t^2,t^3]$이므로 $g$는 상수항과 $t^2,t^3,\\dots$항만 가질 수 있어 $\\deg g\\in\\{0,2,3,\\dots\\}$인데 $\\deg g\\le 2$이므로 $\\deg g\\in\\{0,2\\}$. $g$가 상수(단위원)이면 $\\mathfrak{m}=\\mathbb{C}[t^2,t^3]$이 되어 극대아이디얼(진부분)이라는 데 모순. $\\deg g=2$이면 $g=ct^2$($c\\ne 0$, $\\mathbb{C}[t^2,t^3]$ 안에서 차수 $2$인 원소는 상수배의 $t^2$뿐)이고, 그러면 $t^3=gh_2=ct^2h_2$에서 $h_2=t/c\\cdot(\\text{상수})$가 되어야 하는데 이는 $t^1$항을 포함하므로 $\\mathbb{C}[t^2,t^3]$에 속하지 않는다. 모순이므로 $\\mathfrak{m}$은 주 아이디얼이 아니다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 2.19에서 $(x,y)\\in Q$, $y\\ne 1$, $t:=x/(1-y)$일 때 $\\phi(t)=(x,y)$임을 직접 계산으로 확인하라. 즉 $\\frac{2t}{t^2+1}=x$이고 $\\frac{t^2-1}{t^2+1}=y$임을 보여라.",
+          "hint": "$x^2+y^2=1$로부터 $x^2=(1-y)(1+y)$를 얻고, 이를 이용해 $t^2=(1+y)/(1-y)$를 유도한 뒤 $t^2+1$과 $t^2-1$을 $y$로, $2t$를 $x$로 정리하라.",
+          "solution": "$x^2+y^2=1$이므로 $x^2=1-y^2=(1-y)(1+y)$. $t=x/(1-y)$이므로 $t^2=x^2/(1-y)^2=(1-y)(1+y)/(1-y)^2=(1+y)/(1-y)$. 이제 $t^2+1=\\frac{1+y}{1-y}+1=\\frac{(1+y)+(1-y)}{1-y}=\\frac{2}{1-y}$이고 $t^2-1=\\frac{1+y}{1-y}-1=\\frac{(1+y)-(1-y)}{1-y}=\\frac{2y}{1-y}$. 따라서 $\\frac{t^2-1}{t^2+1}=\\frac{2y/(1-y)}{2/(1-y)}=y$가 확인된다. 또한 $2t=2x/(1-y)$이므로 $\\frac{2t}{t^2+1}=\\frac{2x/(1-y)}{2/(1-y)}=x$도 확인된다. 즉 $\\phi(t)=(x,y)$."
+        },
+        {
+          "type": "ox",
+          "question": "아핀 대수다양체 $X,Y$가 쌍유리($X\\sim_{\\mathrm{bir}}Y$)이면 항상 동형($X\\cong Y$)이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 2.18이 정확한 반례다 — $C=V(v^2-u^3)$과 $\\mathbb{A}^1$은 쌍유리이지만($D_{\\mathbb{A}^1}(t)\\cong D_C(u)$를 통해) 좌표환의 극대아이디얼 구조 차이(주 아이디얼 여부)로 인해 동형은 아니다. 쌍유리 동치는 동형사상보다 훨씬 성긴 동치관계다."
+        },
+        {
+          "type": "ox",
+          "question": "아핀 대수다양체 $X$에 대해 $A(X)$는 $\\mathbb{C}(X)$ 안에서 모든 국소환 $O_{X,p}$($p\\in X$)의 교집합과 같다.",
+          "answer": "O",
+          "explanation": "참이다. 명제 2.13의 내용 그대로다. 약한 Nullstellensatz 덕분에, 분모 아이디얼 $J_q$가 모든 극대아이디얼을 피해 가면(즉 모든 점에서 정칙이면) $J_q$는 전체 좌표환이어야 하고, 따라서 $q$ 자체가 $A(X)$에 속하게 된다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 2.14는 $q\\in\\mathbb{C}(X)$가 정칙인 점들의 집합이 '공집합이 아닌 조밀 열린집합'이라고 말한다. 만약 $q$가 애초에 $X$ 전체에서 정칙이지 않은 유리함수라면(즉 $\\mathrm{Dom}(q)\\ne X$), 정리 2.12($\\mathbb{C}(X)\\cong F(A(X))$)와 명제 2.13($A(X)=\\bigcap_p O_{X,p}$)이 이 사실과 어떻게 정합적으로 들어맞는지 설명하라.",
+          "hint": "$q\\in F(A(X))$가 다항식이 아닌 진짜 분수 $a/b$($b$가 상수가 아님)라면, $J_q$가 전체 좌표환이 될 수 없는 이유를 명제 2.13의 증명 논리로 되짚어 보라.",
+          "answer": "정리 2.12에 의해 $q=a/b\\in F(A(X))$($a,b\\in A(X)$, $b\\ne 0$)로 쓸 수 있고, $q$가 $X$ 전체에서 정칙이지 않다는 것은 정확히 $b$가 단위원의 배수가 아니라는 것, 즉 $V(b)\\ne\\emptyset$이라는 뜻이다(만약 $b$가 어디서도 소멸하지 않는다면 약한 Nullstellensatz에 의해 $b$는 사실 $A(X)$의 단위원이 되어 $q\\in A(X)$가 되고 어디서나 정칙이 된다). $V(b)$는 $X$의 진부분 닫힌집합(기약이므로 진부분이면 자리스키 위상에서 조밀할 수 없다)이고, 명제 2.14에 의해 $q$가 정칙인 집합 $X\\setminus V(J_q)$는 $V(b)\\subseteq V(J_q)$이므로 $X\\setminus V(b)$를 포함하는 열린집합이다 — 즉 $q$가 정칙이 아닌 점들은 딱 이 '나쁜' 닫힌집합 $V(J_q)$ 위로 국한되고, 이는 여전히 진부분 닫힌집합이라 그 여집합은 여전히 조밀 열린집합이다. 명제 2.13은 이와 모순되지 않는다 — 그 명제는 '모든 점에서 동시에 정칙인 유리함수들만'이 $A(X)$를 이룬다고 말할 뿐, $q$처럼 일부 점(전체가 아닌)에서만 정칙인 유리함수가 존재한다는 사실 자체를 부정하지 않는다. 오히려 이 둘은 함께 '$\\mathbb{C}(X)$는 $A(X)$보다 훨씬 크고, 그 차이는 정확히 각 유리함수마다 다른 극(pole)의 위치, 즉 $V(J_q)$들의 다양함에서 온다'는 그림을 완성한다."
+        }
+      ]
+    }
+  ]
+}
