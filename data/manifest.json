@@ -101,6 +101,12 @@
       "title": "3. Connectivity",
       "file": "3_connectivity.json",
       "book": "Diestel — Graph Theory"
+    },
+    {
+      "id": "1_affine_varieties",
+      "title": "1. Affine Varieties",
+      "file": "1_affine_varieties.json",
+      "book": "Park — Introduction to Algebraic Geometry"
     }
   ]
 }

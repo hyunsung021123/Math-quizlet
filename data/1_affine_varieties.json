@@ -1,0 +1,1203 @@
+{
+  "chapter_info": {
+    "title": "1. Affine Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "다항식환의 이데알과 그 영점집합(affine algebraic set) 사이를 오가는 $V$-$I$ 사전을 세우고, 이 사전이 정확히 들어맞는 범위(Nullstellensatz)를 규명한다. 그뢰브너 기저라는 계산 도구로 소거(elimination)를 실질적으로 수행하는 법을 익히고, 힐베르트 기저 정리와 1차 분해(primary decomposition)를 통해 임의의 대수적집합이 유한 개의 기약 조각으로 쪼개짐을 확인한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.1 Affine varieties and Zariski topology",
+      "step1_big_picture": {
+        "context": "이 책은 '다항식 방정식들의 해집합'이라는 순수한 기하 대상을 대수(다항식환의 이데알)의 언어로 정확히 옮겨 적는 사전을 만드는 데서 출발한다. 이 소단원은 그 사전의 첫 항목 두 개 — 방정식으로부터 해집합을 잡아내는 연산 $V$와, 점들의 집합으로부터 그 위에서 항상 소멸하는 다항식들을 잡아내는 연산 $I$ — 를 정의한다. 이어서 $V$가 만드는 닫힌집합들이 실제로 위상(자리스키 위상, Zariski topology)을 이룸을 확인하고, '기약(irreducible)'이라는 개념으로 처음으로 '하나의 응집된 덩어리로 된 도형'인 대수다양체(affine variety)를 정의한다.",
+        "hidden_intuition": "$V$와 $I$는 서로 반대 방향을 보는 두 렌즈다: 다항식들의 모임 $F$를 주면 $V(F)$는 '그 방정식을 만족하는 점들의 모임'이고, 점들의 모임 $Y$를 주면 $I(Y)$는 '그 점들 위에서 항상 $0$인 다항식들의 모임'이다. 둘 다 포함관계를 뒤집는다는 것(Proposition 1.1의 (1)(2))이 핵심이다 — 방정식을 더 많이 요구할수록($F \\subseteq G$) 해는 더 줄어들고($V(G)\\subseteq V(F)$), 점을 더 많이 요구할수록 그 위에서 $0$이어야 하는 다항식은 더 줄어든다. 이 '반변(反變, contravariant)' 대응이 대수와 기하를 잇는 다리 전체의 기본 문법이다. 한편 $V(x^2)=V(x)$인데 $(x^2)\\neq(x)$라는 Example 1.3은 $I(V(\\,\\cdot\\,))$이 원래 이데알을 그대로 복원하지 못할 수 있음을 미리 경고한다 — 이 결함은 근기(radical) 이데알만 다루면 정확히 고쳐진다는 사실이 1.4절 강한 Nullstellensatz에서 밝혀진다. 자리스키 위상 자체는 아주 '엉성한(coarse)' 위상이다: 닫힌집합이 오직 다항식 방정식 유한 개의 해집합뿐이라 보통의 위상보다 열린집합이 훨씬 적다(예: $\\mathbb{A}^1$에서 진부분 닫힌집합은 유한집합뿐). 그래서 '기약'이라는 개념이 의미를 갖는다 — 두 개의 진부분 닫힌집합의 합집합으로는 못 쪼개지는 도형, 즉 그 자체로 하나의 대수적 대상이라는 뜻이며, 이것이 바로 대수다양체의 정의다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.2,
+                0
+              ],
+              "to": [
+                2.2,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -2.2
+              ],
+              "to": [
+                0,
+                2.2
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.0,
+                0.3
+              ],
+              "text": "V(x)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.35,
+                2.0
+              ],
+              "text": "V(y)"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            }
+          ],
+          "caption": "V(xy) = V(x) \\cup V(y)는 두 좌표축의 합집합이다 — 두 개의 진부분 닫힌집합으로 쪼개지므로 기약이 아니다(대수다양체가 아니다). 반면 A^n 자체나 포물선 V(y-x^2)처럼 '한 붓 그리기'로 매개변수화되는 도형은 기약이다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (영점집합 $V$, 소멸 이데알 $I$, 아핀 대수적집합)",
+          "formal_statement": "바탕체는 언제나 $\\mathbb{C}$이고 $R_n := \\mathbb{C}[x_1,\\dots,x_n]$이라 쓴다. $\\mathbb{A}^n := \\mathbb{C}^n$이라 하자. 부분집합 $F\\subseteq R_n$에 대해 그 아핀 영점집합은 $$V(F) := \\{\\, p\\in\\mathbb{A}^n \\mid f(p)=0 \\text{ for every } f\\in F \\,\\} \\subseteq \\mathbb{A}^n$$ 이다. $V(F)=V((F))$이며(여기서 $(F)$는 $F$가 생성하는 $R_n$의 이데알), $V(0)=\\mathbb{A}^n$, $V(1)=\\varnothing$이다. $X\\subseteq\\mathbb{A}^n$이 아핀 대수적집합(affine algebraic set)이라 함은 $X=V(F)$인 $F\\subseteq R_n$이 존재하는 것이다. 부분집합 $Y\\subseteq\\mathbb{A}^n$에 대해 그 소멸 이데알(vanishing ideal)은 $$I(Y) := \\{\\, f\\in R_n \\mid f(p)=0 \\text{ for every } p\\in Y \\,\\} \\subseteq R_n$$ 이며, 이는 실제로 이데알이고 $Y\\subseteq V(I(Y))$가 성립한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.1 ($V,I$의 기본 성질 — 포함관계 역전과 합·교집합의 거동)",
+          "formal_statement": "$F,G\\subseteq R_n$, $Y,Z\\subseteq\\mathbb{A}^n$, $J_1,\\dots,J_k\\subseteq R_n$이 이데알, $\\{J_\\lambda\\}_{\\lambda\\in\\Lambda}$가 $R_n$의 이데알들의 모임이라 하자. 그러면 다음이 성립한다: (1) $F\\subseteq G$이면 $V(G)\\subseteq V(F)$. (2) $Y\\subseteq Z$이면 $I(Z)\\subseteq I(Y)$. (3) $\\bigcup_{i=1}^k V(J_i) = V\\!\\big(\\prod_{i=1}^k J_i\\big)$. (4) $\\bigcap_{\\lambda\\in\\Lambda} V(J_\\lambda) = V\\!\\big(\\sum_{\\lambda\\in\\Lambda} J_\\lambda\\big)$.",
+          "idea_behind_proof": "(1)(2)는 정의를 그대로 풀면 보인다. (3)(4)의 핵심은 '유한 곱의 영점 = 각 인자의 영점들의 합집합', '합의 영점 = 교집합'이라는 이데알 연산과 집합 연산 사이의 정확한 대응이다 — 곱은 '적어도 하나가 0'이라는 논리합(OR)을, 합은 '모두가 0'이라는 논리곱(AND)의 반대를 그대로 반영한다.",
+          "proof_steps": [
+            "(1),(2): $F\\subseteq G$이고 $p\\in V(G)$이면 모든 $g\\in G\\supseteq F$에서 $g(p)=0$이므로 $p\\in V(F)$. $Y\\subseteq Z$이고 $f\\in I(Z)$이면 $f$는 $Z\\supseteq Y$ 위에서 $0$이므로 $f\\in I(Y)$.",
+            "(3) ($\\subseteq$): $p\\in\\bigcup_{i=1}^k V(J_i)$이면 어떤 $1\\le i\\le k$에서 $p\\in V(J_i)$, 즉 모든 $f\\in J_i$에서 $f(p)=0$이다. 이때 $\\prod_{i=1}^k J_i$의 임의의 원소는 $J_1\\cdots J_k$의 생성원(각 $J_i$에서 하나씩 뽑은 곱)들의 $R_n$-선형결합이고, 그 생성원에는 $J_i$의 원소가 인자로 들어 있어 $p$에서 $0$이 된다. 따라서 $p\\in V(\\prod_{i=1}^k J_i)$.",
+            "(3) ($\\supseteq$, 대우): $p\\notin\\bigcup_{i=1}^k V(J_i)$이면 각 $1\\le i\\le k$마다 $f_i\\in J_i$가 있어 $f_i(p)\\ne 0$이다. 그러면 $f_1\\cdots f_k\\in\\prod_{i=1}^k J_i$이고 $(f_1\\cdots f_k)(p)=f_1(p)\\cdots f_k(p)\\ne 0$이므로 $p\\notin V(\\prod_{i=1}^k J_i)$.",
+            "(4) ($\\subseteq$): $p\\in\\bigcap_{\\lambda\\in\\Lambda} V(J_\\lambda)$이면 모든 $\\lambda$와 모든 $f\\in J_\\lambda$에서 $f(p)=0$, 즉 $f(p)=0$ for all $f\\in\\bigcup_\\lambda J_\\lambda$이므로 $p\\in V(\\bigcup_\\lambda J_\\lambda)=V(\\sum_\\lambda J_\\lambda)$ (합으로 생성되는 이데알의 영점은 합집합의 영점과 같다).",
+            "(4) ($\\supseteq$, 대우): $p\\notin\\bigcap_{\\lambda\\in\\Lambda} V(J_\\lambda)$이면 어떤 $\\lambda$에서 $p\\notin V(J_\\lambda)$, 즉 어떤 $f\\in J_\\lambda$에서 $f(p)\\ne 0$이다. 이 $f$는 $\\sum_\\lambda J_\\lambda$에도 속하므로 $p\\notin V(\\sum_\\lambda J_\\lambda)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.2 (대수학의 기본정리 = $\\mathbb{A}^1$에서의 $V(I)\\ne\\varnothing$)",
+          "formal_statement": "$\\mathbb{C}[x]$는 주 이데알 정역(PID)이므로 $\\mathbb{C}[x]$의 모든 진 이데알은 어떤 상수가 아닌 $f\\in\\mathbb{C}[x]$에 대해 $(f)$ 꼴이다. 대수학의 기본정리는 정확히 '$\\mathbb{C}[x]$의 모든 진 이데알 $I$는 $\\mathbb{A}^1$에 공통 영점을 갖는다', 즉 $V(I)\\ne\\varnothing$인 것과 동치이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.3 ($V$는 되돌릴 수 없다 — $V(x^2)=V(x)$이지만 $(x^2)\\ne(x)$)",
+          "formal_statement": "$\\mathbb{A}^1$에서 $V(x^2)=V(x)=\\{0\\}$이지만 $(x^2)\\ne(x)$이다. 그리고 $I(V(x^2))=I(V(x))=(x)$이다. 이 예는 명제 1.1의 (1),(2)의 역이 성립하지 않음을 보여준다.",
+          "idea_behind_proof": "영점집합 $V$는 이데알의 '몇 제곱' 정보를 완전히 잊어버린다 — $x^2$이든 $x$든 해는 원점 하나로 똑같다. 즉 $V$는 근기(radical)를 씌운 정보만 본다는 사실의 가장 작은 예다.",
+          "proof_steps": [
+            "$x^2(p)=0 \\iff p=0 \\iff x(p)=0$이므로 두 방정식은 정확히 같은 해를 가져 $V(x^2)=V(x)=\\{0\\}$이다.",
+            "그러나 $(x^2)$의 원소는 모두 $x^2$의 배수라 $x\\notin(x^2)$이므로 $(x^2)\\subsetneq(x)$, 즉 두 이데알은 다르다.",
+            "$0$에서 소멸하는 다항식은 정확히 $x$의 배수들이므로 $I(\\{0\\})=(x)$이고, 이는 $I(V(x^2))=I(V(x))=(x)$를 보여준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (자리스키 위상, 아핀 $n$-공간)",
+          "formal_statement": "$\\mathbb{A}^n$ 위의 자리스키 위상(Zariski topology)은 닫힌부분집합이 정확히 아핀 대수적집합들인 위상이다. $\\varnothing=V(1)$과 $\\mathbb{A}^n=V(0)$은 닫혀 있고, 닫힌집합의 유한 합집합과 임의의 교집합이 다시 닫혀 있음은 명제 1.1의 (3),(4)로 보장되므로 이것은 실제로 위상을 이룬다. 아핀 $n$-공간은 $\\mathbb{A}^n$에 자리스키 위상을 준 것이다. $X\\subseteq\\mathbb{A}^n$이 대수적집합이면 $X$는 유도된 자리스키 위상을 갖는다: 그 닫힌부분집합은 $X\\cap V(J)$ ($J\\subseteq R_n$은 이데알) 꼴의 집합들이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.4 (닫힘, 조밀성, 주 열린집합이 기저를 이룸)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$을 아핀 대수적집합, $Y\\subseteq\\mathbb{A}^n$을 부분집합이라 하자. 그러면: (1) $\\overline{Y}=V(I(Y))$. (2) $Y\\subseteq X$이면, $Y$가 $X$에서 조밀함 $\\iff$ $I(Y)=I(X)$. (3) $f\\in R_n$에 대해 $D_X(f):=\\{p\\in X\\mid f(p)\\ne 0\\}=X\\setminus V(f)$. (4) $f\\in R_n$에 대한 열린집합 $D_X(f)$들은 $X$의 자리스키 위상의 기저를 이룬다.",
+          "idea_behind_proof": "(1)은 $V(I(Y))$가 $Y$를 포함하는 가장 작은 닫힌집합임을 이데알의 극대성으로 보이는 것이고, (4)는 임의의 닫힌집합의 여집합(열린집합)을 '유한 개가 아니라 이데알 전체'로 정의된 것을 '이데알의 생성원 하나짜리 principal open의 합집합'으로 다시 쓸 수 있다는 관찰이다.",
+          "proof_steps": [
+            "(1): $Y\\subseteq V(I(Y))$는 정의상 자명. $Y\\subseteq V(J)$인 임의의 이데알 $J$에 대해 $J\\subseteq I(Y)$이므로 $V(I(Y))\\subseteq V(J)$. 즉 $V(I(Y))$는 $Y$를 포함하는 모든 닫힌집합에 포함되는, $Y$를 포함하는 가장 작은 닫힌집합이므로 $\\overline{Y}=V(I(Y))$.",
+            "(2): $Y\\subseteq X$라 하자. $\\overline{Y}=X$이면 $Y$ 위에서 소멸하는 다항식은 그 폐포 $\\overline{Y}=X$ 위에서도 소멸하므로 $I(Y)=I(\\overline{Y})=I(X)$. 역으로 $I(Y)=I(X)$이면 (1)에 의해 $\\overline{Y}=V(I(Y))=V(I(X))=\\overline{X}=X$ (마지막 등호는 $X$가 이미 닫혀 있으므로).",
+            "(3)은 정의를 그대로 옮긴 것이다.",
+            "(4): $X$의 임의의 열린부분집합은 어떤 이데알 $J\\subseteq R_n$에 대해 $X\\setminus V(J)$ 꼴이다. 이 열린집합의 점 $p$를 잡으면 어떤 $f\\in J$에서 $f(p)\\ne 0$이고, 그러면 $p\\in D_X(f)=X\\setminus V(f)\\subseteq X\\setminus V(J)$. 즉 $p$를 포함하는 더 작은 principal open $D_X(f)$가 원래 열린집합 안에 들어가므로, $D_X(f)$들이 기저를 이룬다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (주 열린집합, 기약, 아핀 대수다양체)",
+          "formal_statement": "열린집합 $D_X(f)$를 $X$의 주 열린집합(principal open subset)이라 부른다. 공집합이 아닌 위상공간 $X$가 기약(irreducible)이라 함은 $X=X_1\\cup X_2$ ($X_1,X_2$는 $X$의 진부분 닫힌집합)로 쓸 수 없는 것이다. 그렇지 않으면 가약(reducible)이라 한다. 아핀 대수다양체(affine variety)는 자리스키 위상을 갖춘 기약 아핀 대수적집합이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.5 ($X$가 기약 $\\iff$ $I(X)$가 소이데알)",
+          "formal_statement": "공집합이 아닌 아핀 대수적집합 $X$가 기약인 것과 $I(X)$가 소이데알(prime ideal)인 것은 동치이다.",
+          "idea_behind_proof": "'기약'(두 진부분으로 못 쪼갠다)과 '소이데알'($fg\\in I(X)\\Rightarrow f\\in I(X)$ 또는 $g\\in I(X)$)은 사실 같은 말을 두 언어로 쓴 것이다 — $X$를 $f,g$ 각각의 영점집합으로 쪼개는 시도가 곧 $fg\\in I(X)$를 이용하는 시도와 일치한다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $X$가 기약이고 $fg\\in I(X)$라 하자. $f,g$ 둘 다 $I(X)$에 속하지 않는다면 $X\\cap V(f)$와 $X\\cap V(g)$는 둘 다 $X$의 진부분 닫힌집합이다(각각 $f,g$가 $I(X)$ 밖에 있으므로 $X$ 전체는 아님). 그런데 $fg$가 $X$ 위에서 소멸하므로 $X$의 모든 점에서 $f=0$ 또는 $g=0$, 즉 그 합집합이 $X$ 전체 — $X$가 기약이라는 데 모순. 따라서 $f\\in I(X)$ 또는 $g\\in I(X)$이고, $I(X)$는 소이데알이다.",
+            "($\\Leftarrow$) $I(X)$가 소이데알이고 $X=X_1\\cup X_2$ ($X_1,X_2$는 $X$에서 닫혀 있음)라 하자. $X_i$가 진부분이면 $V(I(X_i))=X_i\\ne X=V(I(X))$이므로 $I(X)\\subsetneq I(X_i)$. $X_1,X_2$가 둘 다 $X$의 진부분이라면 $f\\in I(X_1)\\setminus I(X)$, $g\\in I(X_2)\\setminus I(X)$를 고를 수 있다. 그런데 $fg$는 $X=X_1\\cup X_2$ 전체에서 소멸하므로 $fg\\in I(X)$ — $I(X)$가 소이데알이라는 데 모순. 따라서 $X_1,X_2$ 중 하나는 $X$ 전체이고, $X$는 기약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.6 (0이 아닌 다항식은 어딘가에서 0이 아니다)",
+          "formal_statement": "$0$이 아닌 다항식 $F\\in\\mathbb{C}[x_1,\\dots,x_n]$에 대해, $F(p)\\ne 0$인 점 $p\\in\\mathbb{A}^n$이 존재한다.",
+          "idea_behind_proof": "$n=1$일 때는 다항식의 근이 유한 개라는 사실 그 자체이고, 일반적인 $n$은 $x_n$에 대한 최고차항의 계수(그 자체가 $n-1$변수 다항식)가 귀납가정에 의해 어딘가에서 0이 아니라는 점을 이용해 차원을 하나씩 줄이는 귀납법으로 처리한다.",
+          "proof_steps": [
+            "$n$에 대한 귀납법. $n=1$이면 $\\mathbb{C}[x]$의 $0$이 아닌 다항식은 근이 유한 개뿐이므로 근이 아닌 점이 반드시 존재한다.",
+            "$n>1$이라 하고 $F=F_0(x_1,\\dots,x_{n-1})+F_1(x_1,\\dots,x_{n-1})x_n+\\cdots+F_e(x_1,\\dots,x_{n-1})x_n^e$ ($F_e\\ne 0$)으로 쓴다.",
+            "귀납가정을 $F_e$($n-1$변수, $0$이 아님)에 적용해 $F_e(a')\\ne 0$인 $a'\\in\\mathbb{A}^{n-1}$을 고른다.",
+            "그러면 $F(a',x_n)$은 $x_n$에 대한 $0$이 아닌 일변수 다항식($x_n^e$의 계수가 $F_e(a')\\ne 0$)이므로, $n=1$인 경우에 의해 어떤 $x_n$값에서 $0$이 아니다. 그 점이 원하는 $p$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.7 ($\\mathbb{A}^n$은 기약이다)",
+          "formal_statement": "보조정리 1.6은 $I(\\mathbb{A}^n)=(0)$을 의미한다. $(0)$은 $R_n$의 소이데알이므로, 명제 1.5에 의해 $\\mathbb{A}^n$은 기약이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.8 (포물선은 대수다양체이다)",
+          "formal_statement": "포물선 $P:=V(y-x^2)\\subseteq\\mathbb{A}^2$을 생각하자. $P$는 다항식 사상 $\\varphi:\\mathbb{A}^1\\to\\mathbb{A}^2,\\ t\\mapsto(t,t^2)$의 상이다. $P$의 모든 점 $(a,b)$는 $(a,a^2)$과 같으므로 이 매개변수화 $\\varphi$는 전단사이다. $f\\in\\mathbb{C}[x,y]$에 대해 $\\varphi^{-1}(D_P(f))=D_{\\mathbb{A}^1}(f(t,t^2))$이므로 $\\varphi$는 연속이다. $\\mathbb{A}^1$이 기약이므로 $P$도 기약이며, 특히 $P$는 아핀 대수다양체이다.",
+          "idea_behind_proof": "핵심 아이디어는 '기약성은 연속인 전사 사상을 타고 전달된다'는 것이다. $\\mathbb{A}^1$이 기약임(예제 1.7)을 이미 알고, $\\varphi$가 연속인 전단사(따라서 전사)이면, $P$를 두 개의 진부분 닫힌집합으로 쪼개려는 시도는 $\\varphi^{-1}$을 통해 $\\mathbb{A}^1$을 쪼개려는 시도로 되돌아가 모순에 부딪힌다.",
+          "proof_steps": [
+            "$\\varphi$가 전단사임은 $P$의 모든 점이 $(a,a^2)$ 꼴이라는 사실에서 바로 나온다.",
+            "$\\varphi$의 연속성은 principal open의 원상이 다시 principal open이라는 계산 $\\varphi^{-1}(D_P(f))=D_{\\mathbb{A}^1}(f(t,t^2))$으로 확인된다(명제 1.4(4)에 의해 principal open들이 기저를 이루므로 이것으로 충분).",
+            "$P=P_1\\cup P_2$가 진부분 닫힌집합들의 합집합이라면, $\\varphi$가 연속이고 전사이므로 $\\mathbb{A}^1=\\varphi^{-1}(P_1)\\cup\\varphi^{-1}(P_2)$이고 각 $\\varphi^{-1}(P_i)$는 닫혀 있다. $\\varphi$가 전단사이므로 $\\varphi^{-1}(P_i)$ 역시 $\\mathbb{A}^1$의 진부분이어야 하는데, 이는 $\\mathbb{A}^1$이 기약이라는 예제 1.7에 모순된다. 따라서 $P$는 기약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.9 (두 좌표축의 합집합은 가약이다)",
+          "formal_statement": "$V(xy)=V(x)\\cup V(y)\\subseteq\\mathbb{A}^2$은 두 좌표축의 합집합이다. 두 축은 각각 $V(xy)$의 진부분 닫힌집합이므로 $V(xy)$는 가약인 아핀 대수적집합이며, 대수다양체가 아니다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.10 (기약성의 세 가지 동치 서술)",
+          "formal_statement": "공집합이 아닌 위상공간 $X$에 대해 다음은 동치이다: (1) $X$는 기약이다. (2) $X$의 모든 공집합이 아닌 열린부분집합은 조밀하다. (3) $X$의 임의의 두 공집합이 아닌 열린부분집합은 반드시 교차한다.",
+          "idea_behind_proof": "세 진술은 모두 '기약'이라는 하나의 사실을 여집합을 취해 바꿔 말한 것에 불과하다 — 닫힌집합의 언어를 열린집합의 언어로 옮기면 '쪼갤 수 없다'가 '조밀하다'로, '조밀하다'가 '항상 만난다'로 자연스럽게 번역된다.",
+          "proof_steps": [
+            "(1)$\\Rightarrow$(2): 공집합이 아닌 열린집합 $U\\subseteq X$가 조밀하지 않다면 $X\\setminus U$와 $\\overline{U}$가 둘 다 $X$의 진부분 닫힌집합이면서 $X$를 덮으므로 $X$가 가약이 되어 모순.",
+            "(2)$\\Rightarrow$(3): $U,W$가 $X$의 공집합이 아닌 열린집합이고 $U$가 $X$에서 조밀하다면, 조밀성의 정의(모든 공집합이 아닌 열린집합과 만남)에 의해 $U$는 $W$와 만난다.",
+            "(3)$\\Rightarrow$(1): $X=X_1\\cup X_2$이고 $X_1,X_2$가 진부분 닫힌집합이면, $X\\setminus X_1$과 $X\\setminus X_2$는 공집합이 아닌 서로소 열린집합이 되어 (3)에 모순. 따라서 그런 분할이 불가능하므로 $X$는 기약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (일반점, 일반 대상, 매우 일반적인 대상)",
+          "formal_statement": "$X$를 기약 위상공간, $\\mathsf{P}$를 $X$의 점에 관한 성질이라 하자. $\\mathsf{P}$가 $X$의 일반점(general point)에서 성립한다 함은 $X_{\\mathsf{P}}:=\\{x\\in X\\mid x\\text{가 성질 }\\mathsf{P}\\text{를 가짐}\\}$이 $X$의 공집합이 아닌 열린부분집합을 포함하는 것이다(동치로, $\\mathsf{P}$가 실패하는 자리는 $X$의 진부분 닫힌집합에 담긴다). $X_{\\mathsf{P}}$ 자체가 열려 있을 필요는 없다. 명제 1.10에 의해 여기 등장하는 모든 공집합이 아닌 열린집합은 조밀하다. 더 나아가, 각각 일반점에서 성립하는 유한 개의 성질은 동시에 일반점에서 성립한다: 대응하는 공집합이 아닌 열린집합 $U_1,\\dots,U_s$에 대해 명제 1.10을 반복 적용하면 $U_1\\cap\\cdots\\cap U_s$가 다시 공집합이 아닌 열린집합이기 때문이다. 이 강의에서 '일반적인 대상(general object)'은 언제나 지정된 기약 매개변수공간에 대해 이런 열린집합의 의미를 갖는다 — 즉 그 기약 매개변수공간 안의 조밀한 열린부분집합에 속한다는 뜻이다. '매우 일반적인(very general) 대상'은 그 기약 매개변수공간 안의 가산 개의 조밀한 열린부분집합들의 교집합에 속한다는 뜻이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{A}^1$에서 공집합이 아닌 임의의 두 자리스키 열린집합은 반드시 교차함을 보여라.",
+          "hint": "$\\mathbb{A}^1$의 진부분 닫힌집합이 어떤 모습인지(어떤 이데알의 영점집합인지) 먼저 생각하고, 명제 1.10의 (3)을 직접 확인해 보라.",
+          "solution": "$\\mathbb{A}^1=\\mathbb{C}$의 진부분 닫힌집합은 $\\mathbb{C}[x]$의 $0$이 아닌 이데알 $(f)$의 영점집합, 즉 $f$의 근들로 이루어진 유한집합뿐이다(전체 이데알 $(1)$은 $\\varnothing$을 주고 $(0)$은 전체를 준다). 그러므로 공집합이 아닌 열린집합 $U,W\\subseteq\\mathbb{A}^1$의 여집합 $\\mathbb{A}^1\\setminus U$, $\\mathbb{A}^1\\setminus W$는 둘 다 유한집합이다. 만약 $U\\cap W=\\varnothing$이라면 $\\mathbb{A}^1=(\\mathbb{A}^1\\setminus U)\\cup(\\mathbb{A}^1\\setminus W)$가 되어 $\\mathbb{A}^1=\\mathbb{C}$가 두 유한집합의 합집합, 즉 유한집합이 되는데 이는 모순이다. 따라서 $U\\cap W\\ne\\varnothing$이다. 일반적으로 이는 $\\mathbb{A}^1$이 기약(예제 1.7)이라는 사실을 명제 1.10을 통해 직접 눈으로 확인한 것과 같다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "뾰족한 삼차곡선 $C:=V(y^2-x^3)\\subseteq\\mathbb{A}^2$가 기약임을 보여라(즉 $C$가 대수다양체임을 보여라).",
+          "hint": "예제 1.8의 포물선과 완전히 같은 전략을 써 보라: $t\\mapsto(t^2,t^3)$이 $\\mathbb{A}^1$에서 $C$로 가는 전단사 연속사상임을 확인하라.",
+          "solution": "사상 $\\nu:\\mathbb{A}^1\\to C,\\ t\\mapsto(t^2,t^3)$을 생각하자. $C$의 임의의 점 $(a,b)$는 $b^2=a^3$을 만족하므로, $a=0$이면 $b=0=\\nu(0)$이고, $a\\ne 0$이면 $t:=b/a$가 $t^2=b^2/a^2=a^3/a^2=a$와 $t^3=b^3/a^3\\cdot a^0$... 더 직접적으로는 $t=b/a$로 두면 $t^2=a$(양변에 $a^2$을 곱해 $b^2=a\\cdot a^2=a^3$과 일치 확인)와 $t^3=b$가 성립함을 계산으로 확인할 수 있어 $(a,b)=\\nu(t)$이다. 즉 $\\nu$는 전사이며, 서로 다른 $t\\ne t'$이 같은 상을 주면 $t^2=t'^2,t^3=t'^3$에서 $t=t'$이 강제되므로($t\\ne 0$이면 $t=t^3/t^2=t'^3/t'^2=t'$) 전단사이다. $f\\in\\mathbb{C}[x,y]$에 대해 $\\nu^{-1}(D_C(f))=D_{\\mathbb{A}^1}(f(t^2,t^3))$이므로 $\\nu$는 연속이다. 예제 1.8과 정확히 같은 논증(전단사 연속사상은 기약성을 보존한다)으로, $\\mathbb{A}^1$이 기약이므로 $C$도 기약이다. (참고: $\\nu$는 전단사이지만 나중에 예제 2.9에서 이 사상 자체는 동형사상이 아님이 밝혀진다 — 원점에서 좌표환이 '뾰족해지는' 병리가 남아 있기 때문이다.)"
+        },
+        {
+          "type": "ox",
+          "question": "$V(F)=V(G)$이면 반드시 $F=G$(생성하는 이데알이 같음)이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.3에서 $V(x^2)=V(x)=\\{0\\}$이지만 $(x^2)\\ne(x)$이다. $V$는 이데알을 있는 그대로 복원하지 못하고, 몇 제곱 정보 등을 잊어버린다 — 이 결함은 근기 이데알만 놓고 보면 정확히 사라진다(1.4절 예고)."
+        },
+        {
+          "type": "ox",
+          "question": "기약인 아핀 대수적집합은 반드시 무한집합이어야 한다(단일 점은 기약일 수 없다).",
+          "answer": "X",
+          "explanation": "거짓이다. 단일 점 $\\{a\\}\\subseteq\\mathbb{A}^n$의 유일한 진부분 닫힌집합은 $\\varnothing$뿐이고 $\\varnothing\\cup\\varnothing=\\varnothing\\ne\\{a\\}$이므로, $\\{a\\}$는 (공허하게) 두 진부분 닫힌집합의 합집합으로 쓸 수 없다 — 즉 $\\{a\\}$는 기약이며 $0$차원 대수다양체이다. 실제로 $I(\\{a\\})=\\mathfrak{m}_a=(x_1-a_1,\\dots,x_n-a_n)$은 극대이데알이라 소이데알이므로 명제 1.5와도 일치한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 1.3과 예제 1.9는 각각 어떤 방식으로 '$V$와 $I$가 서로 완전한 역함수가 아니다'라는 사실을 보여주는가? 그리고 그 두 가지 결함은 앞으로 어떤 개념으로 각각 정확히 해소되는가?",
+          "hint": "예제 1.3의 결함은 이데알의 '몇 제곱' 정보와 관련이 있고, 예제 1.9의 결함은 '하나의 덩어리인가 여러 조각인가'와 관련이 있다. 각각 어떤 종류의 이데알 조건과 대응되는지 생각해 보라.",
+          "answer": "예제 1.3($V(x^2)=V(x)$이지만 $(x^2)\\ne(x)$)은 $V$가 이데알의 거듭제곱 정보를 잊어버린다는 결함을 보여준다 — $I(V(I))$는 원래 이데알 $I$가 아니라 그보다 큰(또는 같은) 근기 $\\sqrt{I}$가 되어야 정확히 맞아떨어진다. 이 결함은 1.4절의 강한 Nullstellensatz($I(V(I))=\\sqrt{I}$)로 정확히 해소된다. 반면 예제 1.9($V(xy)=V(x)\\cup V(y)$가 가약)는 애초에 그 대수적집합 자체가 '하나의 응집된 대상'이 아니라 여러 조각의 합집합이라는 결함이며, 이는 이데알의 거듭제곱과 무관하게 그 이데알이 소이데알인지 아닌지(명제 1.5)의 문제다. 즉 하나는 '근기 이데알'로, 다른 하나는 '소이데알'로 해소되며, 두 조건을 합친 것이 정확히 '기약 근기 이데알' — 대수다양체에 대응하는 이데알의 조건이다."
+        }
+      ]
+    },
+    {
+      "section_title": "1.2 Grobner bases",
+      "step1_big_picture": {
+        "context": "1.1절은 $V$와 $I$로 대수와 기하를 오가는 정성적인 사전(그리고 그 사전을 지탱하는 자리스키 위상)을 세웠다. 하지만 주어진 이데알이 실제로 무엇을 담고 있는지(어떤 다항식이 그 이데알에 속하는지, 이데알이 유한 생성인지, 몫환의 차원이 얼마인지) 손으로 계산하려면 순수한 대수적 알고리즘이 필요하다. 이 절은 정확히 그 계산 엔진 — 그뢰브너 기저(Gröbner basis) — 를 구축한다. 이는 다음 절(소거 이론, Nullstellensatz)과 이후 전체 강의에서 '이데알을 손으로 다루는' 표준 도구로 반복해서 쓰인다.",
+        "hidden_intuition": "한 변수 다항식의 나눗셈 $f=qg+r$을 여러 변수, 여러 나누는 다항식으로 일반화하고 싶다고 하자. 그러려면 먼저 '어떤 항이 가장 크다'를 정하는 규칙(monomial order)이 있어야 나눗셈에서 무엇을 먼저 소거할지 정할 수 있다. 그런데 나누는 다항식들의 집합 $G=\\{g_1,\\dots,g_s\\}$이 아무렇게나 주어지면, 나눗셈의 나머지 $R_G(f)$가 $G$ 원소들의 순서에 따라 달라질 수 있다(예제 1.15). 그뢰브너 기저란 정확히 이 '나머지의 비유일성' 병리를 고치는 $G$의 조건이다: $G$의 선행항들이 이데알 $I$의 모든 선행항(선행항 이데알 $\\text{in}_\\prec(I)$)을 빠짐없이 생성하도록 만든 생성집합. 이 조건 아래서는 나눗셈이 순서와 무관하게 유일한 나머지를 준다(따름정리 1.16). 이 모든 이야기의 뿌리에는 딕슨 보조정리가 있다 — 무한히 많은 지수벡터들의 세계에서도 '단항 이데알은 유한 개의 생성원으로 충분하다'는 놀라운 유한성이며, 이것이 그뢰브너 기저의 존재(정리 1.18), 힐베르트 기저 정리(따름정리 1.19), 부흐버거 알고리즘의 정지(따름정리 1.22)를 모두 떠받친다. 그림으로 보면, 선행항 이데알 $\\text{in}_\\prec(I)$은 지수벡터 격자 위에서 계단 모양의 영역이고, 그 여집합(표준 단항식들)이 몫환 $R_n/I$의 기저를 이룬다(따름정리 1.20) — 이데알의 '대수적 크기'를 격자점을 세는 순수한 조합론 문제로 바꿔주는 그림이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  0,
+                  4
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  0,
+                  5
+                ]
+              ],
+              "fill": "rgba(176,72,60,0.18)",
+              "color": "#B0483C"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                1
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                2
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                3
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                1
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                0
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                2,
+                1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.15,
+                0.35
+              ],
+              "text": "1"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.15,
+                1.35
+              ],
+              "text": "y"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.15,
+                0.35
+              ],
+              "text": "x"
+            },
+            {
+              "shape": "label",
+              "at": [
+                5.3,
+                -0.3
+              ],
+              "text": "i (x의 지수)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.1,
+                5.1
+              ],
+              "text": "j (y의 지수)"
+            }
+          ],
+          "caption": "어떤 단항 이데알 in_\\prec(I)=(x^3, xy^2, y^4)의 지수벡터 (i,j) 그림: 붉은 계단 영역이 이데알에 속하는 단항식 x^i y^j들이고, 흰 격자점 8개가 이데알 밖의 '표준 단항식'들 — 이들이 몫환 R_n/I의 C-벡터공간 기저를 이룬다(따름정리 1.20)."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (단항식, 단항 이데알, 단항순서, 선행항)",
+          "formal_statement": "$R_n$의 단항식(monomial)은 $x^\\alpha=x_1^{\\alpha_1}\\cdots x_n^{\\alpha_n}$ ($\\alpha=(\\alpha_1,\\dots,\\alpha_n)\\in\\mathbb{Z}_{\\ge 0}^n$) 꼴이다. $R_n$의 단항 이데알(monomial ideal)은 단항식들로 생성되는 이데알이다. 단항 이데알에 속하는 다항식의 모든 단항항은 그 단항 이데알에 속한다. $R_n$ 위의 단항순서(monomial order) $\\prec$는 다음을 만족하는 단항식들 위의 전순서이다: (1) 모든 $\\alpha\\in\\mathbb{Z}_{\\ge0}^n$에 대해 $1\\preceq x^\\alpha$. (2) 모든 $\\alpha,\\beta,\\gamma\\in\\mathbb{Z}_{\\ge0}^n$에 대해 $x^\\alpha\\prec x^\\beta \\Rightarrow x^{\\alpha+\\gamma}\\prec x^{\\beta+\\gamma}$. 이 절 전체에서 단항순서 $\\prec$를 하나 고정한다. $0\\ne f\\in R_n$에 대해 그 가장 큰 단항식, 그 계수, 그 둘의 곱을 각각 $\\mathrm{LM}_\\prec(f),\\ \\mathrm{LC}_\\prec(f),\\ \\mathrm{LT}_\\prec(f)$로 쓴다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.11 (사전식 순서와 차수역순 사전식 순서)",
+          "formal_statement": "$x_1\\succ x_2\\succ\\cdots\\succ x_n$에 대한 사전식 순서(lexicographic order)는 지수벡터를 처음 다른 자리에서 비교한다. 차수역순 사전식 순서(degree reverse lexicographic order)는 먼저 전체 차수를 비교하고, 차수가 같으면 마지막으로 다른 자리의 지수가 더 작은 쪽을 더 크다고 선언한다. 둘 다 단항순서이지만 서로 다른 선행단항식을 줄 수 있다."
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.12 (딕슨 보조정리)",
+          "formal_statement": "$R_n$의 모든 단항 이데알은 유한 개의 단항식으로 생성된다. 더 나아가, $R_n$의 단항 이데알이 무한히 많은 단항식 생성원을 가지고 있다면, 그중 유한 개만으로도 여전히 그 이데알을 생성할 수 있다.",
+          "idea_behind_proof": "$n$에 대한 귀납법으로, 한 변수 $x_j$의 지수를 고정할 때마다 나머지 변수들에 대한 단항 이데알로 문제를 한 차원 낮춘다는 것이 핵심 착상이다 — 유한성이 차원을 타고 내려가며 재귀적으로 상속된다.",
+          "proof_steps": [
+            "$n$에 대한 귀납법. $n=0$이면 자명하다. $n\\ge 1$이라 하자. 영이데알은 공집합으로 생성되므로 문제없다. $M\\ne(0)$을 $R_n$의 단항 이데알이라 하고 $x^\\alpha=x_1^{\\alpha_1}\\cdots x_n^{\\alpha_n}\\in M$을 고른다.",
+            "각 $1\\le j\\le n$과 $0\\le e<\\alpha_j$에 대해, $M_{j,e}$를 '$x_j^e u\\in M$을 만족하는 단항식 $u$'들로 생성되는(변수 $x_j$를 제외한 나머지 변수들에 대한) 단항 이데알이라 하자. 귀납가정에 의해 각 $M_{j,e}$는 유한 개의 단항식 생성원을 갖는다.",
+            "$x^\\alpha$와 이 유한한 목록들에서 얻은 모든 $x_j^e u$가 $M$을 생성함을 보인다: 단항식 $x^\\beta\\in M$이 $x^\\alpha$로 나누어떨어지는 경우는 모든 $j$에서 $\\beta_j\\ge\\alpha_j$일 때이다. 그렇지 않으면 어떤 $j$에서 $\\beta_j<\\alpha_j$이고, $x^\\beta=x_j^{\\beta_j}u$로 다시 쓰면 $u\\in M_{j,\\beta_j}$에 속하므로 그 유한 생성원 중 하나로 표현된다. 이로써 제1 주장이 증명된다.",
+            "제2 주장: 주어진 무한 생성원 집합에 대해, 먼저 (제1 주장으로 얻은) 유한 생성원을 하나 고른다. 이 유한 생성원 각각을 무한 생성원 중 하나가 나눈다. 이렇게 골라낸 유한 개의 무한 생성원 원소들이 다시 그 이데알을 생성한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.13 (단항식의 감소열은 유한, 단항 이데알의 증가열은 정지)",
+          "formal_statement": "$R_n$에서 단항식들의 임의의 순감소열은 유한하고, $R_n$의 단항 이데알들의 임의의 오름 사슬은 결국 정지한다.",
+          "idea_behind_proof": "딕슨 보조정리가 주는 '유한 생성'을 곧바로 '무한히 계속되는 과정은 없다'는 정지성으로 번역하는 것이 핵심이다.",
+          "proof_steps": [
+            "단항식들의 순감소열 $m_1\\succ m_2\\succ\\cdots$에 대해, 모든 $m_i$가 생성하는 단항 이데알은 딕슨 보조정리에 의해 유한 개 $m_1,\\dots,m_k$로 생성된다.",
+            "어떤 $i>k$에서 $m_i$가 그 수열에 다시 등장한다면, 어떤 $1\\le j\\le k$에서 $m_j$가 $m_i$를 나누므로 $m_j\\preceq m_i$가 되어 $m_j\\succ m_i$(수열이 순감소이므로 $j<i$에서 $m_j\\succ m_i$)라는 사실과 모순.",
+            "한편 $M_1\\subseteq M_2\\subseteq\\cdots$가 $R_n$의 단항 이데알들의 오름 사슬이면 $\\bigcup_{i=1}^\\infty M_i$도 단항 이데알이고, 딕슨 보조정리에 의해 어떤 $M_k$ 안의 유한 개 단항식으로 생성된다. 그러면 $\\bigcup_{i=1}^\\infty M_i=M_k$이고 $i\\ge k$에서 $M_i=M_k$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.14 (일반화된 나눗셈 알고리즘)",
+          "formal_statement": "$R_n$의 $0$이 아닌 다항식들의 집합 $G:=\\{g_1,\\dots,g_s\\}$를 고정하자. 모든 $f\\in R_n$은 $$f=g_1q_1+\\cdots+g_sq_s+R_G(f) \\quad (q_1,\\dots,q_s,R_G(f)\\in R_n)$$ 로 유일하게 쓸 수 있으며, 이때 $\\mathrm{LM}_\\prec(g_i)q_i$의 어떤 단항항도 $i>j$에 대해 $\\mathrm{LM}_\\prec(g_j)$로 나누어떨어지지 않고, $R_G(f)$의 어떤 단항항도 어떤 $1\\le i\\le s$에 대해서도 $\\mathrm{LM}_\\prec(g_i)$로 나누어떨어지지 않는다.",
+          "idea_behind_proof": "한 변수 나눗셈을 그대로 반복하되, '가장 먼저 나누어떨어지는 $g_i$로 선행항을 소거하고, 아무도 못 나누면 그 항을 나머지 쪽으로 넘긴다'는 규칙만 지키면 된다. 선행단항식이 매번 순감소하므로 따름정리 1.13이 정지를 보장한다.",
+          "proof_steps": [
+            "$p=f$, 모든 $q_i=0$, $R_G(f)=0$에서 시작한다. $\\mathrm{LM}_\\prec(g_i)$가 $\\mathrm{LM}_\\prec(p)$를 나누는 가장 앞선 $i$가 있으면, $p\\leftarrow p-\\frac{\\mathrm{LT}_\\prec(p)}{\\mathrm{LT}_\\prec(g_i)}g_i$, $q_i\\leftarrow q_i+\\frac{\\mathrm{LT}_\\prec(p)}{\\mathrm{LT}_\\prec(g_i)}$로 갱신한다. 그런 $i$가 없으면 $\\mathrm{LT}_\\prec(p)$를 $R_G(f)$ 쪽으로 옮긴다.",
+            "이 선택 방식(가장 앞선 $i$)에 의해 $\\mathrm{LM}_\\prec(g_i)q_i$의 단항항이 $i>j$인 $\\mathrm{LM}_\\prec(g_j)$로 나누어떨어지는 일은 없다. 어느 경우든 $p$의 선행단항식이 엄격히 감소하므로 따름정리 1.13이 유한 단계 정지를 보장한다.",
+            "매 단계 $f=\\sum_i q_ig_i+p+R_G(f)$라는 항등식이 보존되고, 끝나면 $p=0$이 남아 존재성이 증명된다. $R_G(f)$에 옮겨진 항들은 모두 어떤 $\\mathrm{LM}_\\prec(g_i)$로도 나누어떨어지지 않는 항들뿐이다.",
+            "유일성: 차를 취해 $f=0$인 경우만 보면 충분하다. $0=g_1q_1+\\cdots+g_sq_s+R_G(0)$에서 $q_1,\\dots,q_s$가 모두 $0$이 아니라면, 마지막으로 $0$이 아닌 $g_jq_j$의 선행항 $\\mathrm{LM}_\\prec(g_jq_j)$은 다른 어떤 항과도 상쇄될 수 없다(그보다 뒤의 $g_kq_k$들의 항은 정의상 그 선행항으로 나누어떨어지지 않으므로). 따라서 $q_1=\\cdots=q_s=R_G(0)=0$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.15 (나머지는 $G$의 순서에 의존한다)",
+          "formal_statement": "$\\mathbb{C}[x,y]$에서 $x\\succ y$인 사전식 순서를 쓰자. $g_1:=xy-y,\\ g_2:=-x+y^2,\\ f:=xy^2-x$라 하면 $$f=yg_1+g_2=(-y^2+1)g_2+(y^4-y^2)$$ 이다. 이는 명제 1.14의 $R_G(f)$가 $G$의 원소들을 나열하는 순서에 의존함을 보여준다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (선행항 이데알, 그뢰브너 기저)",
+          "formal_statement": "이데알 $I\\subseteq R_n$에 대해 그 선행항 이데알(initial ideal)은 $$\\mathrm{in}_\\prec(I):=(\\mathrm{LM}_\\prec(f)\\mid 0\\ne f\\in I)$$ 로 정의되는 $R_n$의 단항 이데알이다. 유한집합 $G=\\{g_1,\\dots,g_s\\}\\subseteq I$가 $I$의 그뢰브너 기저(Gröbner basis)라 함은 $$\\mathrm{in}_\\prec(I)=(\\mathrm{LM}_\\prec(g_1),\\dots,\\mathrm{LM}_\\prec(g_s))$$ 인 것이다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.16 (그뢰브너 기저에서는 나머지가 유일하다)",
+          "formal_statement": "$f\\in R_n$, $G:=\\{g_1,\\dots,g_s\\}$를 이데알 $I\\subseteq R_n$의 그뢰브너 기저라 하자. 그러면 $f-r\\in I$이고 $r$의 어떤 단항항도 어떤 $\\mathrm{LM}_\\prec(g_i)$로도 나누어떨어지지 않는 다항식 $r\\in R_n$이 유일하게 존재한다. 특히 $R_G(f)=r$은 $G$ 원소들의 나열 순서와 무관하다.",
+          "idea_behind_proof": "예제 1.15의 병리가 그뢰브너 기저 조건 아래서는 왜 사라지는지가 핵심이다: 만약 순서를 바꿔 두 개의 서로 다른 나머지 $r,r'$이 나온다면 $r-r'\\in I$인데, $r,r'$ 둘 다 어떤 $\\mathrm{LM}_\\prec(g_i)$로도 안 나누어떨어진다는 조건이 $\\mathrm{in}_\\prec(I)$의 정의(그뢰브너 기저이므로 $\\mathrm{LM}_\\prec(g_1),\\dots,\\mathrm{LM}_\\prec(g_s)$가 생성)와 정면으로 충돌한다.",
+          "proof_steps": [
+            "존재성은 명제 1.14가 이미 준다.",
+            "유일성: $f-r,f-r'\\in I$이고 $r,r'$의 어떤 단항항도 어떤 $\\mathrm{LM}_\\prec(g_i)$로 나누어떨어지지 않는다고 하자. $r-r'\\in I$이고 $G$가 $I$의 그뢰브너 기저이므로 $\\mathrm{LM}_\\prec(r-r')\\in\\mathrm{in}_\\prec(I)=(\\mathrm{LM}_\\prec(g_1),\\dots,\\mathrm{LM}_\\prec(g_s))$여야 한다. 그런데 $r-r'$의 모든 단항항이 어떤 $\\mathrm{LM}_\\prec(g_i)$로도 나누어떨어지지 않으므로, $r-r'\\ne 0$이면 $\\mathrm{LM}_\\prec(r-r')$도 나누어떨어지지 않아 모순이다. 따라서 $r=r'$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.17 (그뢰브너 기저로 이데알 소속 판정)",
+          "formal_statement": "$I\\subseteq R_n$을 이데알이라 하자. $G$가 $I$의 그뢰브너 기저이면 $$f\\in I \\iff R_G(f)=0.$$ 특히 이데알 $I$는 $G$로 생성된다.",
+          "idea_behind_proof": "($\\Rightarrow$)는 따름정리 1.16의 유일성(나머지 $0$이 그 자체로 그 조건을 만족하는 후보)을, ($\\Leftarrow$)는 명제 1.14의 항등식 자체를 그대로 쓴다.",
+          "proof_steps": [
+            "($\\Rightarrow$)는 따름정리 1.16에서 바로 나온다: $f\\in I$이면 $f-0=f\\in I$이고 $0$은 (공허하게) 어떤 단항항도 없으므로 나누어떨어지지 않는다는 조건을 만족해, 유일한 나머지가 $0$이어야 한다.",
+            "($\\Leftarrow$)는 자명하다: $R_G(f)=0$이면 명제 1.14의 표현식이 $f=\\sum_i q_ig_i\\in I$가 되므로 $f\\in I$이고, 동시에 이는 $I$의 모든 원소가 $G$로 생성됨(즉 $I=(g_1,\\dots,g_s)$)도 보여준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.18 (모든 이데알은 유한 그뢰브너 기저를 갖는다)",
+          "formal_statement": "모든 이데알 $I\\subseteq R_n$은 유한 그뢰브너 기저를 갖는다.",
+          "idea_behind_proof": "딕슨 보조정리를 $\\mathrm{in}_\\prec(I)$ 자체에 바로 적용하면 끝난다 — 유한 개의 단항식 생성원을 고르고, 각 생성원을 실현하는 $I$의 원소를 하나씩 뽑으면 그것이 곧 그뢰브너 기저다.",
+          "proof_steps": [
+            "딕슨 보조정리에 의해 단항 이데알 $\\mathrm{in}_\\prec(I)$는 유한 개의 단항식 생성원 $m_1,\\dots,m_s$를 갖는다.",
+            "각 $m_i$에 대해 $\\mathrm{LM}_\\prec(g_i)=m_i$인 $g_i\\in I$를 하나씩 고른다. 그러면 $G:=\\{g_1,\\dots,g_s\\}$는 정의상 $I$의 그뢰브너 기저이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.19 (힐베르트 기저 정리)",
+          "formal_statement": "$R_n$의 모든 이데알은 유한 생성이다.",
+          "idea_behind_proof": "정리 1.18(유한 그뢰브너 기저의 존재)과 따름정리 1.17(그뢰브너 기저는 그 이데알을 생성)을 이어붙이면 바로 나온다. 이는 아핀 대수적집합의 언어로는 '어떤 대수적집합이든 유한 개의 다항식 방정식만으로 정의된다'는 뜻이다: $X\\subseteq\\mathbb{A}^n$이 대수적집합이면 $X=V(f_1,\\dots,f_s)$인 $f_1,\\dots,f_s\\in R_n$이 존재한다.",
+          "proof_steps": [
+            "정리 1.18에 의해 $I$는 유한 그뢰브너 기저 $G$를 갖고, 따름정리 1.17에 의해 $I$는 $G$로 생성된다. $G$가 유한집합이므로 $I$는 유한 생성이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.20 (표준 단항식들이 $R_n/I$의 기저를 이룬다)",
+          "formal_statement": "이데알 $I\\subseteq R_n$에 대해, $\\mathrm{in}_\\prec(I)$ 밖에 있는 단항식들의 잉여류가 $R_n/I$의 $\\mathbb{C}$-벡터공간 기저를 이룬다.",
+          "idea_behind_proof": "명제 1.14의 나눗셈이 정확히 '임의의 다항식을 표준 단항식들의 선형결합 + $I$의 원소'로 분해해 주므로 생성성(스팬)은 거저 나온다. 일차독립성은 만약 $0$이 아닌 선형결합이 $I$에 속한다면 그 선행항이 $\\mathrm{in}_\\prec(I)$에 들어가야 하는데, 표준 단항식은 정의상 그럴 수 없다는 모순으로 나온다.",
+          "proof_steps": [
+            "$I$의 그뢰브너 기저 $G$를 고른다. 명제 1.14에 의해 $\\mathrm{in}_\\prec(I)$ 밖의 단항식들은 $R_n/I$를 생성(span)한다 — 모든 $f$가 $G$에 대한 나머지 $R_G(f)$(표준 단항식들의 결합)와 $I$의 원소의 합으로 쓰이기 때문이다.",
+            "만약 표준 단항식들의 $0$이 아닌 선형결합이 $I$에 속한다면, 그 선행단항식은 $\\mathrm{in}_\\prec(I)$에 속하면서 동시에 (선택한) 표준 단항식들 중 하나이므로, 표준 단항식은 $\\mathrm{in}_\\prec(I)$ 밖에 있다는 정의와 모순이다. 따라서 잉여류들은 일차독립이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (S-다항식)",
+          "formal_statement": "$0$이 아닌 다항식 $f,g\\in R_n$에 대해 그 S-다항식은 $$S_\\prec(f,g):=\\frac{\\mathrm{lcm}(\\mathrm{LM}_\\prec(f),\\mathrm{LM}_\\prec(g))}{\\mathrm{LT}_\\prec(f)}f-\\frac{\\mathrm{lcm}(\\mathrm{LM}_\\prec(f),\\mathrm{LM}_\\prec(g))}{\\mathrm{LT}_\\prec(g)}g$$ 이다. 우변의 두 항은 같은 선행항을 가지므로 그 선행항은 서로 상쇄된다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.21 (부흐버거 판정법)",
+          "formal_statement": "$G:=\\{g_1,\\dots,g_s\\}$가 이데알 $I\\subseteq R_n$을 생성한다고 하자. 그러면 $G$가 $I$의 그뢰브너 기저인 것과, 모든 $1\\le i<j\\le s$에서 $R_G(S_\\prec(g_i,g_j))=0$인 것은 동치이다.",
+          "idea_behind_proof": "그뢰브너 기저이면 S-다항식은 이미 $I$의 원소이므로 나머지가 $0$인 것은 자명하다. 어려운 쪽은 역방향인데, 핵심 착상은 '만약 $\\mathrm{LM}_\\prec(f)$가 그 최소 표현의 선행항 $M$과 다르다면, $M$을 만드는 항들의 상쇄가 반드시 몇 개의 S-다항식들의 조합으로 설명되고, 그 S-다항식들이 나머지 $0$을 갖는다는 가정 덕분에 그 조합을 항상 더 작은 단항식들로만 다시 쓸 수 있어 최소성에 모순된다'는 것이다 — 즉 상쇄는 결국 S-다항식이라는 '기본 상쇄 단위'로 전부 분해된다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $G$가 그뢰브너 기저이면 각 S-다항식은 $I$에 속하므로 따름정리 1.17에 의해 나머지가 $0$이다.",
+            "($\\Leftarrow$) 모든 S-다항식의 나머지가 $0$이라 가정하자. 명제 1.14에 의해 $S_\\prec(g_i,g_j)=\\sum_k a_{ijk}g_k$로 쓸 수 있고, $a_{ijk}\\ne 0$인 모든 $k$에서 $\\mathrm{LM}_\\prec(a_{ijk})\\mathrm{LM}_\\prec(g_k)\\prec\\mathrm{lcm}(\\mathrm{LM}_\\prec(g_i),\\mathrm{LM}_\\prec(g_j))$이다.",
+            "$0\\ne f\\in I$를 고르고, $f=\\sum_i h_ig_i$인 모든 표현 중 $M:=\\max_{h_i\\ne 0}\\{\\mathrm{LM}_\\prec(h_i)\\mathrm{LM}_\\prec(g_i)\\}$가 최소인 것을 고른다. $\\mathrm{LM}_\\prec(f)\\ne M$이라 가정하고 모순을 유도한다.",
+            "$\\mathcal{I}:=\\{i\\mid M=\\mathrm{LM}_\\prec(h_i)\\mathrm{LM}_\\prec(g_i)\\}$라 하고 $\\mathrm{LT}_\\prec(h_i)\\mathrm{LT}_\\prec(g_i)=c_iM$ ($c_i\\in\\mathbb{C}$)이라 쓰면, $M$이 실제로 상쇄되어야 하므로($\\mathrm{LM}_\\prec(f)\\ne M$) $\\sum_{i\\in\\mathcal{I}}c_i=0$이다.",
+            "각 $i\\in\\mathcal{I}$에 대해 $F_i:=\\frac{M}{\\mathrm{LT}_\\prec(g_i)}g_i$라 하면 모든 $F_i$의 선행항은 $M$이다. $i_0\\in\\mathcal{I}$를 하나 고정하면 $\\sum_{i\\in\\mathcal{I}}c_iF_i=\\sum_{i_0\\ne i\\in\\mathcal{I}}c_i(F_i-F_{i_0})$이고, $F_i-F_{i_0}=\\frac{M}{\\mathrm{lcm}(\\mathrm{LM}_\\prec(g_i),\\mathrm{LM}_\\prec(g_{i_0}))}S_\\prec(g_i,g_{i_0})=\\frac{M}{\\mathrm{lcm}(\\cdots)}\\sum_k a_{ii_0k}g_k$인데, 이 마지막 표현에 나타나는 모든 단항항은 $M$보다 엄격히 작다.",
+            "따라서 $\\sum_i h_ig_i$라는 표현에서 $\\sum_{i\\in\\mathcal{I}}c_iF_i$에 해당하는 부분을, $h_i$들을 적절히 고쳐 $M$보다 작은 단항항들만 남도록 다시 쓸 수 있다. 이는 새로운 표현이 $M$보다 작은 최댓값을 갖는다는 뜻이 되어 $M$의 최소성에 모순된다.",
+            "따라서 $\\mathrm{LM}_\\prec(f)=M$이고, 이는 어떤 $\\mathrm{LM}_\\prec(g_i)$로 나누어떨어진다. 즉 $G$는 $I$의 그뢰브너 기저이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (부흐버거 알고리즘)",
+          "formal_statement": "부흐버거 알고리즘(Buchberger algorithm)은 이데알 $I$의 임의의 생성집합 $G$에서 출발해 그뢰브너 기저를 실제로 찾는 절차이다: $G$의 임의의 두 원소 $p,q$를 골라 $R_G(S_\\prec(p,q))$를 계산한다. 만약 이 값이 $0$이 아니면 그것을 $G$에 추가한다. 이 과정을 모든 $p,q\\in G$에서 $R_G(S_\\prec(p,q))=0$이 될 때까지 반복한다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.22 (부흐버거 알고리즘은 유한 단계에서 정지한다)",
+          "formal_statement": "부흐버거 알고리즘은 유한 단계 후 정지하며, 그 결과로 얻어지는 집합은 그뢰브너 기저이다.",
+          "idea_behind_proof": "추가되는 나머지가 매번 현재 선행단항식들의 이데알을 엄격히 키운다는 관찰이 핵심이다 — 따름정리 1.13(오름 사슬 정지)이 이 과정이 무한히 계속될 수 없음을 보장한다.",
+          "proof_steps": [
+            "추가되는 나머지는 언제나 현재 원소들의 조합이므로 생성되는 이데알 $I$ 자체는 변하지 않는다.",
+            "현재 선행단항식들이 생성하는 단항 이데알은 새로 추가되는 나머지의 선행단항식을 포함하지 않는다(그 나머지가 정의상 어떤 현재 선행단항식으로도 안 나누어떨어지므로). 따라서 매 추가마다 이 단항 이데알이 엄격히 커진다.",
+            "따름정리 1.13(단항 이데알의 오름 사슬은 정지)에 의해 이 과정은 유한 단계에서 멈춘다. 멈춘 시점에서는 모든 $p,q$쌍의 S-다항식 나머지가 $0$이므로, 부흐버거 판정법(정리 1.21)에 의해 그 결과는 그뢰브너 기저이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.23 (부흐버거 알고리즘 실행 예)",
+          "formal_statement": "$\\mathbb{C}[x,y]$에서 $x\\succ y$인 사전식 순서를 쓰고, 예제 1.15에서와 같이 $G:=\\{g_1:=xy-y,\\ g_2:=-x+y^2\\}$을 생각하자. $g_3:=S_\\prec(g_1,g_2)=y^3-y$라 하면, 부흐버거 판정법에 의해 $G:=\\{g_1,g_2,g_3\\}$는 이데알 $I=(g_1,g_2)$의 그뢰브너 기저이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (축약 그뢰브너 기저)",
+          "formal_statement": "이데알 $I\\subseteq R_n$의 그뢰브너 기저 $G$가 축약(reduced)되었다 함은, $G$의 모든 원소가 모닉(monic)이고 $G$의 어떤 원소 $g$의 어떤 단항항도 $G\\setminus\\{g\\}$의 다른 원소 $h$의 $\\mathrm{LM}_\\prec(h)$로 나누어떨어지지 않는 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.24 (축약 그뢰브너 기저의 유일성)",
+          "formal_statement": "$0$이 아닌 모든 이데알 $I\\subseteq R_n$은 유일한 축약 그뢰브너 기저를 갖는다.",
+          "idea_behind_proof": "존재는 여분의(다른 선행단항식이 이미 나누는) 원소를 제거하고 각 원소를 나머지들로 '더 축약'해 나가면 얻어진다. 유일성은 단항 이데알의 최소 생성원 자체가 유일하다는 사실(따름정리 1.20의 논의와 같은 정신)에서 시작해, 같은 선행항을 갖는 두 후보의 차가 $0$일 수밖에 없음을 보이는 방식으로 간다.",
+          "proof_steps": [
+            "존재성: $I$의 유한 그뢰브너 기저 $G$에서 시작해, 선행단항식이 다른 원소의 선행단항식으로 나누어떨어지는 원소를 남은 선행단항식들이 $\\mathrm{in}_\\prec(I)$의 최소 생성원이 될 때까지 제거한다. 원소들을 모닉으로 만들고, 각 $g\\in G$를 $\\mathrm{LM}_\\prec(g)+R_{G\\setminus\\{g\\}}(g-\\mathrm{LM}_\\prec(g))$로 대체한다. 이 대체는 여전히 $I$ 안에 있고 생성하는 이데알을 바꾸지 않으며, 최소성 덕분에 선행단항식은 그대로 살아남는다. 이렇게 얻은 $G$가 $I$의 축약 그뢰브너 기저이다.",
+            "유일성: $G,H$가 $I$의 두 축약 그뢰브너 기저라 하자. 단항 이데알의 최소 단항식 생성원은 유일하므로, $G$의 각 $g$에 대해 같은 선행단항식을 갖는 $h\\in H$가 유일하게 존재한다. 둘 다 모닉이므로 $g-h\\in I$에서 선행항이 상쇄되고, 축약성에 의해 $g-h$에 남은 모든 단항항은 $\\mathrm{in}_\\prec(I)$ 밖에 있다. 따름정리 1.20에 의해 $g-h=0$. 이를 반복하면 $G=H$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.25 (축약 그뢰브너 기저 계산)",
+          "formal_statement": "예제 1.23에서 $G=\\{x-y^2,\\ y^3-y\\}$가 $I$의 축약 그뢰브너 기저이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{C}[x,y]$에서 $x\\succ y$인 사전식 순서를 쓰자. $g:=x^2-y$에 대해 $f:=x^3+xy$를 $G=\\{g\\}$로 나누어 $f=gq+R_G(f)$ 꼴로 쓰고, $R_G(f)$가 $\\mathrm{LM}_\\prec(g)=x^2$으로 나누어떨어지지 않음을 확인하라.",
+          "hint": "명제 1.14의 절차를 그대로 손으로 따라가라: $f$의 선행항이 $\\mathrm{LM}_\\prec(g)=x^2$으로 나누어떨어지는 동안 계속 빼 나간다.",
+          "solution": "$f=x^3+xy$의 선행항 $x^3$은 $x^2$으로 나누어떨어지므로 $q_1$항으로 $x$를 얻어 $f-xg=x^3+xy-x(x^2-y)=xy+xy=2xy$를 얻는다(계산: $xg=x^3-xy$이므로 $f-xg=(x^3+xy)-(x^3-xy)=2xy$). 이제 $2xy$의 선행항은 $2xy$인데, $x^2$으로 나누어떨어지지 않으므로(지수 $x^1$은 $x^2$의 배수가 아님) 그대로 나머지로 넘어간다. 따라서 $f=g\\cdot x+2xy$, 즉 $q=x,\\ R_G(f)=2xy$이다. 실제로 $2xy$는 $x^2$으로 나누어떨어지지 않아 명제 1.14의 조건을 만족한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{C}[x,y]$에서 $x\\succ y$인 사전식 순서로, $g_1:=x^2-y,\\ g_2:=xy-1$의 S-다항식 $S_\\prec(g_1,g_2)$를 계산하라.",
+          "hint": "$\\mathrm{LM}_\\prec(g_1)=x^2,\\ \\mathrm{LM}_\\prec(g_2)=xy$이므로 최소공배수는 $x^2y$이다. 정의의 공식에 그대로 대입하라.",
+          "solution": "$\\mathrm{lcm}(x^2,xy)=x^2y$이다. $S_\\prec(g_1,g_2)=\\frac{x^2y}{x^2}g_1-\\frac{x^2y}{xy}g_2=y(x^2-y)-x(xy-1)=(x^2y-y^2)-(x^2y-x)=x-y^2$. 즉 $S_\\prec(g_1,g_2)=x-y^2$이며, 이는 $0$이 아니므로(그리고 $x-y^2$이 $g_1,g_2$로 나누어 $0$이 되는지 계속 확인해야 부흐버거 판정법을 완결할 수 있다) 아직 $\\{g_1,g_2\\}$가 그뢰브너 기저인지 판정이 끝나지 않았음을 보여준다 — 실제로 $R_{\\{g_1,g_2\\}}(x-y^2)=x-y^2\\ne 0$이므로 이 다항식을 새 생성원으로 추가해야 한다."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 생성집합 $G=\\{g_1,\\dots,g_s\\}$에 대해 명제 1.14의 나머지 $R_G(f)$는 $G$ 원소들의 나열 순서와 무관하게 항상 유일하다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.15가 정확히 이 반례다 — $R_G(f)$는 일반적인 생성집합에서는 순서에 의존할 수 있다. 순서와 무관한 유일한 나머지를 보장하려면 $G$가 반드시 그뢰브너 기저여야 한다(따름정리 1.16)."
+        },
+        {
+          "type": "ox",
+          "question": "이데알 $I\\subseteq R_n$의 그뢰브너 기저는 항상 유일하다.",
+          "answer": "X",
+          "explanation": "거짓이다. 그뢰브너 기저 자체(정의 1.16 이전의 정의)는 유일하지 않다 — 예를 들어 그뢰브너 기저에 $I$의 아무 원소나 추가해도 여전히 그뢰브너 기저다. 유일성이 보장되는 것은 '축약(reduced)' 그뢰브너 기저뿐이다(명제 1.24)."
+        },
+        {
+          "type": "conceptual",
+          "question": "딕슨 보조정리(보조정리 1.12)가 어떻게 이 절의 나머지 결과들 — 그뢰브너 기저의 존재(정리 1.18), 힐베르트 기저 정리(따름정리 1.19), 부흐버거 알고리즘의 정지(따름정리 1.22) — 를 전부 떠받치는지 하나의 줄기로 설명하라.",
+          "hint": "각 결과가 '유한 개의 생성원으로 충분하다' 또는 '어떤 과정이 무한히 계속될 수 없다'는 형태의 주장임을 확인하고, 그것이 어디서 유래하는 유한성인지 짚어보라.",
+          "answer": "딕슨 보조정리는 순수하게 단항 이데알의 세계(지수벡터들의 조합론)에서 '무한 생성원이 있어도 유한 개로 충분하다'는 유한성을 준다. 정리 1.18은 이 유한성을 곧바로 $\\mathrm{in}_\\prec(I)$에 적용해 유한 그뢰브너 기저의 존재를 얻고, 힐베르트 기저 정리(따름정리 1.19)는 그 그뢰브너 기저가 실제로 $I$ 전체를 생성한다는 따름정리 1.17과 결합해 '모든 이데알은 유한 생성'이라는 결론으로 이어진다. 한편 따름정리 1.13(단항 이데알의 오름 사슬 정지)은 딕슨 보조정리의 직접적인 재서술이며, 이것이 부흐버거 알고리즘(따름정리 1.22)에서 '매 단계 선행단항식들의 이데알이 엄격히 커진다'는 과정이 무한히 계속될 수 없는 이유다. 즉 딕슨 보조정리 하나가 '유한 생성'과 '과정의 정지'라는 이 절 전체의 두 가지 유한성 논증 패턴을 동시에 공급하는 뿌리다."
+        }
+      ]
+    },
+    {
+      "section_title": "1.3 Elimination",
+      "step1_big_picture": {
+        "context": "1.2절은 그뢰브너 기저라는 순수 대수적 계산 도구를 만들었다. 이 절은 그 도구를 기하학적 질문에 처음으로 실전 배치한다: '다항식 사상의 상(image)은 어떤 집합인가?', '몇 개의 변수를 지우고 남은 변수들만의 방정식을 어떻게 구하는가?' 같은 질문이 전부 '변수 소거(elimination)'라는 하나의 대수 연산으로 환원되고, 그 소거를 그뢰브너 기저로 실질적으로 계산할 수 있음을 보인다.",
+        "hidden_intuition": "소거 정리(정리 1.26)의 놀라운 점은 계산이 '거저' 나온다는 것이다: 변수들을 $x_1\\succ\\cdots\\succ x_n$처럼 순서를 매겨(지우고 싶은 변수를 가장 크게 두고) 그뢰브너 기저 $G$를 한 번 계산해 두면, $G$의 원소들 중 처음 몇 변수를 아예 포함하지 않는 것들만 골라내면 그것이 곧 '그 변수들을 소거한 이데알'의 그뢰브너 기저가 된다 — 별도의 소거 알고리즘이 필요 없다. 다항식 사상 $g:X\\to\\mathbb{A}^m,\\ x\\mapsto(g_1(x),\\dots,g_m(x))$의 상을 구하는 문제(명제 1.27)는 이 소거를 쓰는 표준적인 트릭으로 환원된다: 새 변수 $y_i$를 도입해 '그래프' $y_i=g_i(x)$를 이데알 $J$로 표현하고, $x$변수들을 전부 소거하면 남는 $y$변수들만의 이데알이 정확히 상의 자리스키 폐포를 정의하는 이데알 $I(\\overline{g(X)})$가 된다. 하지만 예제 1.29(쌍곡선에서 $x$좌표로의 사영)가 보여주듯, 이 소거로 얻는 것은 '상의 폐포'이지 '상 자체'가 아닐 수 있다 — $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$인데 소거는 $\\overline{g(X)}=\\mathbb{A}^1$을 준다. 명제 1.30은 이 간극을 언제 없앨 수 있는지 알려준다: 만약 이데알 $I$ 안에 소거할 변수 $x_1$에 대해 모닉인 다항식이 하나라도 있다면(즉 '$x_1$에 대해 유한 차수의 방정식으로 갇혀 있다'는 일종의 유계성·고유성 조건), 사영의 상은 정확히 소거된 이데알의 영점집합과 같아져 폐포를 취할 필요가 없다. 이 조건('모닉인 원소의 존재')은 사실 5장에서 다시 만나는 '정수적 확장(integral extension)'이라는 대수적 조건의 기하학적 그림자다 — 그때는 '사영이 항상 닫힌 사상(closed map)'이라는 훨씬 강력한 사실(Going-Up 정리)로 다시 등장한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -2.2,
+                  -0.9
+                ],
+                [
+                  -1.2,
+                  -1.6
+                ],
+                [
+                  -0.5,
+                  -2.0
+                ],
+                [
+                  0.5,
+                  2.0
+                ],
+                [
+                  1.2,
+                  1.6
+                ],
+                [
+                  2.2,
+                  0.9
+                ]
+              ]
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -0.9,
+                  -2.2
+                ],
+                [
+                  -1.6,
+                  -1.2
+                ],
+                [
+                  -2.0,
+                  -0.5
+                ],
+                [
+                  2.0,
+                  0.5
+                ],
+                [
+                  1.6,
+                  1.2
+                ],
+                [
+                  0.9,
+                  2.2
+                ]
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.4,
+                -2.4
+              ],
+              "to": [
+                2.4,
+                2.4
+              ],
+              "dash": "3,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                -2.4
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.15,
+                -2.35
+              ],
+              "text": "0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.35,
+                1.9
+              ],
+              "text": "V(xy-1)"
+            }
+          ],
+          "caption": "쌍곡선 H=V(xy-1)을 x좌표로 사영하면 상은 A^1\\setminus\\{0\\}이지만(원점을 절대 못 지나감), 이데알 소거로 얻는 폐포는 전체 A^1 = V(0)이다 — 소거는 '폐포'를 주지 '상 자체'를 주지 않을 수 있다(예제 1.29)."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Theorem",
+          "name": "정리 1.26 (소거 정리)",
+          "formal_statement": "$R_n$에서 사전식 순서 $x_1\\succ x_2\\succ\\cdots\\succ x_n$을 쓰자. $I\\subseteq R_n$을 이데알이라 하고, $1\\le j\\le n-1$마다 $$I_j:=I\\cap\\mathbb{C}[x_{j+1},\\dots,x_n]$$ 이라 하자. $G$가 $I$의 그뢰브너 기저이면, 모든 $1\\le j\\le n-1$에서 $$G_j:=G\\cap\\mathbb{C}[x_{j+1},\\dots,x_n]$$ 은 $I_j$의 그뢰브너 기저이다.",
+          "idea_behind_proof": "핵심 관찰은 사전식 순서에서 '$x_1,\\dots,x_j$를 전혀 포함하지 않는다'는 조건이 다항식 자체에서도 그 선행단항식에서도 똑같이 판별된다는 것이다. 그러면 $I_j$의 원소의 선행항을 나누는 그뢰브너 기저 원소는 자동으로 그 변수들을 포함하지 않을 수밖에 없어 $G_j$에 속하게 된다.",
+          "proof_steps": [
+            "$f\\in R_n$에 대해 $f\\in\\mathbb{C}[x_{j+1},\\dots,x_n]$인 것과 $\\mathrm{LM}_\\prec(f)\\in\\mathbb{C}[x_{j+1},\\dots,x_n]$인 것은 동치이다(사전식 순서가 $x_1,\\dots,x_j$를 포함하는 항을 항상 더 크게 매기므로, $f$에 그런 항이 있으면 선행항도 그런 항이다).",
+            "$0\\ne f\\in I_j$를 고르자. $G$가 $I$의 그뢰브너 기저이므로 $\\mathrm{LM}_\\prec(g)$가 $\\mathrm{LM}_\\prec(f)$를 나누는 $g\\in G$가 있다. $\\mathrm{LM}_\\prec(f)$는 $x_1,\\dots,x_j$ 중 어느 것도 포함하지 않으므로(첫 단계에 의해), 그것을 나누는 $\\mathrm{LM}_\\prec(g)$ 역시 그 변수들을 포함하지 않는다. 첫 단계를 $g$에 다시 적용하면 $g\\in\\mathbb{C}[x_{j+1},\\dots,x_n]$, 즉 $g\\in G_j$이다.",
+            "이는 $G_j$의 선행단항식들이 $\\mathrm{in}_\\prec(I_j)$를 생성함을 보이므로, $G_j$는 $I_j$의 그뢰브너 기저이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.27 (그래프 트릭 — 다항식 사상의 상을 소거로 계산한다)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$을 대수적집합이라 하자. $g_1,\\dots,g_m\\in R_n$에 대해 다항식 사상 $$g:X\\to\\mathbb{A}^m,\\quad x\\mapsto(g_1(x),\\dots,g_m(x))$$ 와 환 준동형 $$\\varphi:\\mathbb{C}[y_1,\\dots,y_m]\\to R_n/I(X),\\quad y_i\\mapsto g_i+I(X)$$ 을 생각하자. 이데알 $$J:=I(X)R_n[y_1,\\dots,y_m]+(y_1-g_1,\\dots,y_m-g_m)\\subseteq R_n[y_1,\\dots,y_m]$$ 을 정의하면 $$\\ker(\\varphi)=J\\cap\\mathbb{C}[y_1,\\dots,y_m]=I(g(X)) \\quad\\text{그리고}\\quad \\overline{g(X)}=V(\\ker(\\varphi))$$ 이다.",
+          "idea_behind_proof": "'그래프'를 이데알로 표현($y_i-g_i$를 방정식으로 강제)한 뒤 $x$변수 전부를 소거하면 정확히 $y$변수들만으로 이루어진 관계식들이 남고, 그것이 곧 $y_i=g_i(x)$라는 관계를 만족하는 다항식들 — 즉 상 위에서 소멸하는 다항식들의 이데알이라는 것이 핵심 관찰이다. 몫환의 동형사상 하나로 이 대응을 정확히 증명한다.",
+          "proof_steps": [
+            "환 준동형 $R_n[y_1,\\dots,y_m]/J\\to R_n/I(X),\\ [F(x,y)]\\mapsto[F(x,g_1,\\dots,g_m)]$이 동형사상임을 확인한다(정의역에서 $y_i$를 $g_i$로 대입하는 것이 정확히 $J$를 몫으로 나누는 것과 같다).",
+            "이 동형을 $F\\in\\mathbb{C}[y_1,\\dots,y_m]$에 제한하면 $F\\in J\\cap\\mathbb{C}[y_1,\\dots,y_m] \\iff F(g_1,\\dots,g_m)\\in I(X)$를 얻는다. 즉 $\\ker(\\varphi)=J\\cap\\mathbb{C}[y_1,\\dots,y_m]$.",
+            "한편 $F(g_1,\\dots,g_m)\\in I(X)$인 것은 $X$의 모든 점 $x$에서 $F(g_1(x),\\dots,g_m(x))=0$, 즉 $g(X)$의 모든 점 $y$에서 $F(y)=0$인 것과 같으므로 $\\ker(\\varphi)=I(g(X))$이다.",
+            "명제 1.4의 (1)($\\overline{Y}=V(I(Y))$)을 $Y=g(X)$에 적용하면 $\\overline{g(X)}=V(I(g(X)))=V(\\ker(\\varphi))$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (소거 이데알의 실제 계산)",
+          "formal_statement": "$x_1\\succ\\cdots\\succ x_n\\succ y_1\\succ\\cdots\\succ y_m$인 사전식 순서를 쓰면, 소거 이데알 $J\\cap\\mathbb{C}[y_1,\\dots,y_m]$을 정리 1.26으로 계산할 수 있다: $J$의 그뢰브너 기저를 구한 뒤 $x$변수를 전혀 포함하지 않는 원소들만 골라내면 된다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.28 (뒤틀린 삼차곡선의 상)",
+          "formal_statement": "다항식 사상 $g:\\mathbb{A}^1\\to\\mathbb{A}^3,\\ t\\mapsto(t^3,t^2,t)$와 환 준동형 $\\varphi:\\mathbb{C}[x,y,z]\\to\\mathbb{C}[t],\\ x\\mapsto t^3,\\ y\\mapsto t^2,\\ z\\mapsto t$를 생각하자. $J:=(x-t^3,y-t^2,z-t)\\subseteq\\mathbb{C}[t,x,y,z]$의 사전식 순서 $t>x>y>z$에 대한 축약 그뢰브너 기저는 $\\{t-z,\\ x-z^3,\\ y-z^2\\}$이다. 따라서 $\\ker(\\varphi)=(x-z^3,y-z^2)$이고, $g(\\mathbb{A}^1)=V(x-z^3,y-z^2)$이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.29 (쌍곡선의 사영 — 소거는 폐포만 준다)",
+          "formal_statement": "$H:=V(xy-1)\\subseteq\\mathbb{A}^2$을 쌍곡선이라 하고, 다항식 사상 $g:X\\to\\mathbb{A}^1,\\ (x,y)\\mapsto x$와 환 준동형 $\\varphi:\\mathbb{C}[t]\\to\\mathbb{C}[x,y]/(xy-1),\\ t\\mapsto x+(xy-1)$를 생각하자. $J:=(xy-1,t-x)\\subseteq\\mathbb{C}[x,y,t]$의 사전식 순서 $x>y>t$에 대한 축약 그뢰브너 기저는 $\\{x-t,\\ yt-1\\}$이다. 그러면 $\\ker(\\varphi)=0$이다. 한편 $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$이지만 $\\overline{g(X)}=\\mathbb{A}^1=V(0)$이다.",
+          "idea_behind_proof": "$g(X)$ 자체는 상 안에 $0$이 결코 나올 수 없다는 사실(만약 $x=0$이면 $xy=0\\ne 1$이라 애초에 $H$의 점이 아니다) 때문에 $\\mathbb{A}^1$ 전체가 아니지만, 소거로 얻는 이데알 $\\ker(\\varphi)=0$은 오직 $V(0)=\\mathbb{A}^1$이라는 폐포 정보만 담고 있다 — 이는 '상 자체'와 '상의 자리스키 폐포'가 다를 수 있음을 보여주는 결정적인 예다.",
+          "proof_steps": [
+            "$(x,y)\\in H$이면 $xy=1$이므로 $x\\ne 0$. 따라서 $g(X)\\subseteq\\mathbb{A}^1\\setminus\\{0\\}$.",
+            "역으로 임의의 $a\\ne 0$에 대해 $(a,1/a)\\in H$이고 $g(a,1/a)=a$이므로 $g(X)\\supseteq\\mathbb{A}^1\\setminus\\{0\\}$. 따라서 $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$.",
+            "명제 1.27에 의해 $\\overline{g(X)}=V(\\ker(\\varphi))=V(0)=\\mathbb{A}^1$이다. 즉 $g(X)\\subsetneq\\overline{g(X)}$ — 상 자체는 자리스키 닫힌집합이 아니다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.30 (좌표 사영의 상 — 모닉 원소가 있으면 폐포 없이 정확하다)",
+          "formal_statement": "$I\\subseteq R_n$을 $x_1$에 대해 모닉인 다항식을 포함하는 이데알이라 하자. 좌표 사영 $\\pi:\\mathbb{A}^n\\to\\mathbb{A}^{n-1},\\ (x_1,x_2,\\dots,x_n)\\mapsto(x_2,\\dots,x_n)$에 대해 $$\\pi(V(I))=V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$$ 이다.",
+          "idea_behind_proof": "포함관계 $\\subseteq$는 자명하다. 어려운 방향은 소거된 이데알의 영점 $b$가 항상 실제로 $V(I)$의 어떤 점 위로 끌어올려짐(들어올림)을 보이는 것인데, 핵심 트릭은 '$I$ 안의 모닉 다항식 $f$ 덕분에 $x_1^0,\\dots,x_1^{d-1}$이 $I$를 법으로 $b$ 위에서 선형독립적으로 움직인다는 것을 행렬식으로 포착'하는 것이다 — 만약 끌어올림이 실패한다면 그 행렬식이 $b$에서 $1$이 되는 모순되는 원소가 $I\\cap\\mathbb{C}[x_2,\\dots,x_n]$ 안에 생겨버린다.",
+          "proof_steps": [
+            "포함 ($\\subseteq$)은 명백하다. 역을 보이기 위해, $b\\in V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$인데 $\\pi^{-1}(b)$의 어떤 점도 $V(I)$에 있지 않다고 가정하고 모순을 유도한다.",
+            "$J:=\\{f(x_1,b)\\mid f\\in I\\}\\subseteq\\mathbb{C}[x_1]$은 공통 영점이 없는 이데알이므로 대수학의 기본정리에 의해 $J=(1)$이다.",
+            "$I$ 안에서 $x_1$에 대해 모닉이고 $x_1$-차수가 $d$인 $f$를 고른다. $0\\le i\\le d-1$마다 $q_i(x_1,b)=x_1^i$을 만족하는 $q_i\\in I$를 고를 수 있다(어차피 $J=(1)$이므로 임의의 값을 만드는 원소가 존재).",
+            "$x_1^i-q_i=s_if+r_i$ ($s_i,r_i\\in\\mathbb{C}[x_2,\\dots,x_n][x_1]$, $\\deg_{x_1}r_i<d$)로 쓴다. $s_i(x_1,b)f(x_1,b)+r_i(x_1,b)=0$이고, $\\mathbb{C}[x_1]$에서 나눗셈의 유일성에 의해 $r_i(x_1,b)=0$이다.",
+            "$r_i=\\sum_{k=0}^{d-1}c_{ik}x_1^k$ ($c_{ik}\\in\\mathbb{C}[x_2,\\dots,x_n]$, $c_{ik}(b)=0$)로 쓴다. $x_1^i-r_i=s_if+q_i\\in I$이므로, 행렬 $M:=(\\delta_{ik}-c_{ik})_{0\\le i,k\\le d-1}$과 벡터 $(1,x_1,\\dots,x_1^{d-1})^{\\mathsf T}$의 곱의 모든 성분이 $I$에 속한다.",
+            "수반행렬(adjugate)을 곱하면 $h:=\\det(M)\\in I\\cap\\mathbb{C}[x_2,\\dots,x_n]$을 얻는다. 그런데 $c_{ik}(b)=0$이므로 $M(b)$는 단위행렬이 되어 $h(b)=\\det(M(b))=1$인데, 이는 $b\\in V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$, 즉 $h(b)=0$이어야 한다는 것과 모순이다.",
+            "따라서 모든 $b\\in V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$에 대해 $\\pi^{-1}(b)\\cap V(I)\\ne\\varnothing$이고, 이는 포함 ($\\supseteq$)을 증명한다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "명제 1.27의 방법을 이용해, 사상 $g:\\mathbb{A}^1\\to\\mathbb{A}^2,\\ t\\mapsto(t^2,t^3)$의 상의 자리스키 폐포가 $V(x^3-y^2)$임을 (계산 절차를 서술하는 방식으로) 설명하라.",
+          "hint": "이데알 $J=(x-t^2,\\ y-t^3)\\subseteq\\mathbb{C}[t,x,y]$를 사전식 순서 $t\\succ x\\succ y$로 잡고, $t$를 소거한 그뢰브너 기저 원소들을 생각하라.",
+          "solution": "$J=(x-t^2,y-t^3)$에서 $t\\succ x\\succ y$인 사전식 순서로 그뢰브너 기저를 구하면(예제 1.28과 완전히 같은 방식) $t$를 포함하지 않는 원소로 $x^3-y^2$을 얻는다(직접 확인: $y^2=(t^3)^2=t^6=(t^2)^3=x^3$이므로 $x^3-y^2\\in J\\cap\\mathbb{C}[x,y]$이고, 이 관계식 하나가 소거된 이데알 전체를 생성함을 그뢰브너 기저 계산이 보장한다). 정리 1.26에 의해 이렇게 $t$를 포함하지 않는 그뢰브너 기저 원소들이 $J\\cap\\mathbb{C}[x,y]$의 그뢰브너 기저이므로, 명제 1.27에 의해 $\\overline{g(\\mathbb{A}^1)}=V(J\\cap\\mathbb{C}[x,y])=V(x^3-y^2)$이다. (이 곡선은 예제 1.15의 체크포인트에서 이미 기약임을 확인한 뾰족한 삼차곡선과 같은 것이다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "명제 1.30의 가정('$I$가 $x_1$에 대해 모닉인 원소를 포함')이 왜 필요한지, 예제 1.29의 쌍곡선 상황에 명제 1.30을 (가정을 무시하고) 억지로 적용하면 무엇이 잘못되는지 설명하라.",
+          "hint": "$H=V(xy-1)$에서 $x$를 소거하려는(즉 $y$변수를 사영해 없애려는) 상황이 아니라, $y$를 소거해서 $x$만 남기려는 상황임을 주의하고, $I=(xy-1)$이 $y$에 대해 모닉인 원소를 갖는지 확인해 보라.",
+          "solution": "예제 1.29는 $H=V(xy-1)\\subseteq\\mathbb{A}^2$을 $x$좌표로 사영하는 상황이므로, 명제 1.30의 언어로는 좌표 $y$를 소거하는 것에 해당한다. 이때 필요한 가정은 '$I=(xy-1)$이 $y$에 대해 모닉인 원소를 포함하는가'이다. $xy-1$은 $y$에 대해 최고차항의 계수가 $x$이지 $1$이 아니므로(모닉이 되려면 계수가 $1$이어야 하는데 $x$가 $0$일 수도 있는 변수이다) 모닉이 아니고, $I$ 안에 $y$에 대해 모닉인 다른 원소도 없다. 이 가정이 실패하기 때문에 명제 1.30의 결론(사영의 상이 소거된 이데알의 영점집합과 정확히 같다)이 성립하지 않고, 실제로 상 $\\mathbb{A}^1\\setminus\\{0\\}$은 소거된 이데알의 영점집합 $V(0)=\\mathbb{A}^1$보다 진짜로 작다 — 이는 가정이 결론에 필수적임을 보여주는 반례다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 1.27에서 $\\ker(\\varphi)$의 영점집합 $V(\\ker(\\varphi))$는 항상 다항식 사상 $g$의 상 $g(X)$ 그 자체와 같다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 1.27은 $V(\\ker(\\varphi))=\\overline{g(X)}$(상의 자리스키 폐포)라고만 말한다. 예제 1.29가 정확히 $g(X)\\subsetneq\\overline{g(X)}$인 반례다 — $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$인데 $V(\\ker(\\varphi))=\\mathbb{A}^1$."
+        },
+        {
+          "type": "ox",
+          "question": "소거 정리(정리 1.26)를 적용하려면 반드시 사전식 순서를 써야 하며, 다른 단항순서로는 성립하지 않는다.",
+          "answer": "O",
+          "explanation": "참이다. 정리 1.26의 증명은 '$x_1,\\dots,x_j$를 포함하지 않는다'는 조건이 다항식과 그 선행단항식에서 동시에 판별된다는 사실에 결정적으로 의존하는데, 이는 사전식 순서($x_1\\succ\\cdots\\succ x_n$, 앞쪽 변수가 조금이라도 나타나면 무조건 더 크게 매김)의 고유한 성질이다. 예제 1.11의 차수역순 사전식 순서 같은 다른 단항순서에서는 이 성질이 일반적으로 성립하지 않는다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.30의 가정('$I$가 소거하려는 변수에 대해 모닉인 원소를 포함')은 기하학적으로 어떤 직관을 대수적으로 포착한 것인가? (5장의 정수적 확장 개념을 미리 엿본다면 어떤 대응이 자연스러운가?)",
+          "hint": "모닉 다항식 $f(x_1)=x_1^d+\\cdots$가 있다는 것은 $x_1$이 나머지 변수들 위에서 '유계인 방정식'을 만족한다는 뜻이다 — 즉 $x_1$이 임의로 크게 발산하며 도망갈 수 없다.",
+          "answer": "$I$가 $x_1$에 대해 모닉인 다항식을 포함한다는 것은, $V(I)$ 위의 모든 점에서 $x_1$-좌표가 나머지 좌표들이 만족하는 어떤 유한 차수 다항식 방정식에 갇혀 있다는 뜻이다 — 직관적으로 $x_1$이 나머지 변수들에 대해 '무한히 멀리 도망갈 수 없다'는 일종의 유계성·고유성(properness) 조건이다. 이 조건이 있어야 사영 $\\pi$가 각 점 $b\\in\\mathbb{A}^{n-1}$ 위에서 $\\pi^{-1}(b)\\cap V(I)$가 (공집합이 아니라면) '유한 개의 후보 $x_1$값'으로 제한되어 실제로 실현되고, 따라서 상이 소거 이데알의 영점집합 전체를 정확히 채운다. 이는 정확히 5장에서 다시 등장하는 '정수적 확장(integral extension)' — 원소가 모닉 다항식(정수 계수 다항식, 여기서는 계수환이 $\\mathbb{C}[x_2,\\dots,x_n]$)을 만족한다는 조건 — 의 기하학적 그림자이며, 그때는 이 아이디어가 Going-Up 정리를 통해 '정수적 확장에 대응하는 사상은 항상 닫힌 사상이다'라는 훨씬 일반적인 사실로 다시 나타난다."
+        }
+      ]
+    },
+    {
+      "section_title": "1.4 Nullstellensatz",
+      "step1_big_picture": {
+        "context": "1.1절의 예제 1.3은 $I(V(I))$가 원래 이데알 $I$를 그대로 복원하지 못할 수 있음을 보여줬고, 1.3절의 명제 1.30은 '모닉인 원소가 있으면 사영이 정확하다'는 조건을 제시했다. 이 절은 이 두 실마리를 하나로 모아 힐베르트의 영점정리(Nullstellensatz)를 증명한다 — 대수학의 기본정리($\\mathbb{A}^1$에서 진 이데알은 항상 공통 영점을 가짐)를 임의의 차원으로 일반화하는, 이 챕터 전체의 정점이다.",
+        "hidden_intuition": "약한 영점정리($V(I)=\\varnothing\\iff I=(1)$)의 증명은 순전히 귀납법과 명제 1.30의 재활용이다: $n$변수 이데알 $I$에 $0$이 아닌 다항식이 있으면(보조정리 1.31로 좌표를 살짝 비틀어) $x_1$에 대해 모닉인 원소를 갖게 만들 수 있고, 그러면 명제 1.30에 의해 '$I\\cap\\mathbb{C}[x_2,\\dots,x_n]$의 영점을 $n-1$변수에서 하나 찾으면($n$에 대한 귀납가정) 그 영점이 반드시 $n$변수에서도 들어올려진다'. 즉 소거 이론(1.3절)이 없었다면 이 증명은 성립하지 않았을 것이다. 강한 영점정리($I(V(I))=\\sqrt{I}$)는 여기서 한 걸음 더 나아가 '라비노비치 트릭(Rabinowitsch trick)'이라는 우아한 술수를 쓴다: $f$가 $V(I)$ 위에서 소멸한다는 조건을, 새 변수 $y$를 도입해 $yf=1$이라는 방정식을 억지로 강제한 이데알 $J:=I+(yf-1)$의 영점이 공집합이라는 조건으로 바꾼다(만약 $f(p)=0$이라면 $y$값에 관계없이 $y f(p)-1=-1\\ne0$이라 어차피 해가 없고, $f(p)\\ne 0$인 점이 있었다면 그 점에서 $y=1/f(p)$로 두면 해가 생겨버리므로 애초에 $f$가 $V(I)$ 위에서 소멸한다는 가정과 모순된다). 이렇게 한 변수를 늘려 약한 영점정리를 다시 쓸 수 있게 만들고, 대수적 계산(분모를 통분하는 것)으로 $f^N\\in I$를 뽑아낸다 — '몇 제곱을 해야 정확히 들어맞는가'라는 예제 1.3의 결함이 정확히 근기 $\\sqrt{I}$로 메워지는 순간이다. 따름정리 1.35는 이 모든 것을 하나의 사전으로 정리한다: 근기 이데알 $\\leftrightarrow$ 대수적집합, 소이데알 $\\leftrightarrow$ 대수다양체, 극대이데알 $\\leftrightarrow$ 점. 이제 대수(이데알의 언어)와 기하(도형의 언어)가 완전히 같은 것을 보는 두 가지 방식이 되었다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "ellipse",
+              "center": [
+                0,
+                0
+              ],
+              "rx": 2.4,
+              "ry": 1.7,
+              "color": "#2E4374"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.6,
+                1.3
+              ],
+              "text": "근기 이데알"
+            },
+            {
+              "shape": "ellipse",
+              "center": [
+                -0.5,
+                0
+              ],
+              "rx": 1.5,
+              "ry": 1.05,
+              "color": "#B77F27"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -1.2,
+                0.7
+              ],
+              "text": "소이데알"
+            },
+            {
+              "shape": "point",
+              "at": [
+                -0.5,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -0.15,
+                0.05
+              ],
+              "text": "극대이데알"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.5,
+                -1.4
+              ],
+              "text": "대수적집합"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.6,
+                -0.75
+              ],
+              "text": "대수다양체"
+            },
+            {
+              "shape": "label",
+              "at": [
+                -0.5,
+                -0.35
+              ],
+              "text": "점"
+            }
+          ],
+          "caption": "강한 영점정리(정리 1.34)와 따름정리 1.35가 완성하는 사전: 근기 이데알 = 대수적집합 전체, 그 안에서 소이데알 = 기약인 것(대수다양체), 그 안에서 극대이데알 = 한 점."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.31 (좌표를 비틀면 모닉으로 만들 수 있다)",
+          "formal_statement": "$0$이 아닌 상수가 아닌 다항식 $f\\in R_n$에 대해, 선형 삼각(linear triangular) 좌표변환을 가하면 $f$를 $x_1$에 대해 모닉으로 만들 수 있다.",
+          "idea_behind_proof": "$f$의 최고차 동차부분 $f_d$가 $x_1$ 방향에서 $0$이 아니게 만들 수 있다는 사실(보조정리 1.6, 즉 $0$이 아닌 다항식은 어딘가에서 $0$이 아님)을 이용해, 그 방향으로 좌표축을 살짝 기울이면 $x_1^d$의 계수가 원하는 값이 되도록 스케일을 맞출 수 있다.",
+          "proof_steps": [
+            "$d:=\\deg f$, $f_d$를 $f$의 최고차 동차부분이라 하자. $f_d(1,x_2,\\dots,x_n)\\ne 0$이다(그렇지 않으면 $f_d$가 $x_1$을 인수로 가져야 하는데 동차 최고차부분의 성질과 맞지 않는다).",
+            "보조정리 1.6에 의해 $f_d(1,a_2,\\dots,a_n)\\ne 0$인 $(a_2,\\dots,a_n)\\in\\mathbb{A}^{n-1}$을 고를 수 있다.",
+            "그러면 $f(ux_1,\\,u(x_2+a_2x_1),\\dots,u(x_n+a_nx_1))$에서 $x_1^d$의 계수는 $u^d f_d(1,a_2,\\dots,a_n)$이고, $u^d=f_d(1,a_2,\\dots,a_n)^{-1}$이 되도록 $u\\in\\mathbb{C}$를 고르면 이 계수가 정확히 $1$이 되어 $x_1$에 대해 모닉이 된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.32 (약한 영점정리)",
+          "formal_statement": "모든 이데알 $I\\subseteq R_n$에 대해 $$V(I)=\\varnothing \\iff I=(1).$$",
+          "idea_behind_proof": "$I=(1)$이면 $V(I)=\\varnothing$은 자명하다. 어려운 방향은 '모든 진 이데알은 공통 영점을 갖는다'는 것인데, $n$에 대한 귀납법으로 처리한다: $n=1$은 대수학의 기본정리 그 자체이고, $n>1$일 때는 보조정리 1.31로 모닉 원소를 확보한 뒤 명제 1.30(소거 이데알의 영점이 항상 들어올려짐)을 정확히 활용해 귀납가정을 적용한다.",
+          "proof_steps": [
+            "$I=(1)$이면 $V(I)=\\varnothing$은 명백하다. 모든 진 이데알 $I$가 $\\mathbb{A}^n$에 공통 영점을 가짐을 $n$에 대한 귀납법으로 보이면 충분하다.",
+            "$n=1$이면 이는 대수학의 기본정리이다. $n>1$이라 하자.",
+            "$I=(0)$이면 $\\mathbb{A}^n$의 모든 점이 영점이다. $I\\ne(0)$이면 $I$에 상수가 아닌 다항식이 있고, 보조정리 1.31에 의해 $I$가 $x_1$에 대해 모닉인 다항식을 포함한다고 가정할 수 있다.",
+            "소거 이데알 $I\\cap\\mathbb{C}[x_2,\\dots,x_n]$ 역시 진 이데알이다(그렇지 않으면 $I$ 자체가 $1$을 포함하게 된다). 귀납가정에 의해 이 소거 이데알은 $\\mathbb{A}^{n-1}$에서 영점 $b$를 갖는다.",
+            "명제 1.30(모닉 원소가 있으므로 사영이 폐포 없이 정확함)에 의해 $\\pi^{-1}(b)\\cap V(I)\\ne\\varnothing$, 즉 $(a,b)\\in V(I)$인 $a$가 존재한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 1.33 (유효 영점정리)",
+          "formal_statement": "$f_1,\\dots,f_s\\in R_n$에 대해 $V(f_1,\\dots,f_s)=\\varnothing$이면, 약한 영점정리는 $g_1f_1+\\cdots+g_sf_s=1$인 $g_1,\\dots,g_s\\in R_n$이 존재한다고 말한다. $\\deg g_1,\\dots,\\deg g_s$의 효과적인 상한을 $\\deg f_1,\\dots,\\deg f_s$로 물을 수 있는데, Woodrow Dale Brownawell이 1987년 거의 최적인 상한을 얻었고, János Kollár가 1988년 다음과 같은 정교한 상한을 확립했다: $n\\ge 2$이고 $\\deg f_1\\ge\\cdots\\ge\\deg f_s$이면 $g_1f_1+\\cdots+g_sf_s=1$이면서 $$\\deg g_i\\le\\frac{\\max\\{\\deg f_s,3\\}}{\\deg f_i}\\prod_{j=1}^{\\min\\{n,s\\}-1}\\max\\{\\deg f_j,3\\}$$ 을 만족하는 $g_1,\\dots,g_s\\in R_n$을 고를 수 있다. $\\deg f_s\\ge 3$이면 이 상한은 최적이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (근기 이데알)",
+          "formal_statement": "이데알 $I\\subseteq R_n$에 대해 그 근기(radical)는 $$\\sqrt{I}:=\\{f\\in R_n \\mid f^N\\in I \\text{ for some } N\\ge 1\\}$$ 이다. $I=\\sqrt{I}$이면 $I$를 근기(radical) 이데알이라 한다. 모든 소이데알은 근기이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.34 (강한 영점정리)",
+          "formal_statement": "모든 이데알 $I\\subseteq R_n$에 대해 $$I(V(I))=\\sqrt{I}.$$",
+          "idea_behind_proof": "라비노비치 트릭(Rabinowitsch trick): $f\\in I(V(I))$가 $\\sqrt{I}$에 속함을 보이려면, $y$라는 새 변수를 도입해 '$f$가 $0$이 아닌 곳에서 $1/f$가 존재한다'는 사실을 $yf-1$이라는 방정식으로 대수화한다. 그러면 $I+(yf-1)$의 영점집합이 공집합이 됨을 확인하고 약한 영점정리를 적용해, 유리함수체에서 $y=1/f$를 대입하고 분모를 통분하는 순수 계산으로 $f^N\\in I$를 뽑아낸다.",
+          "proof_steps": [
+            "$f^N\\in I$이면 $f$는 $V(I)$ 위에서 소멸하므로 $\\sqrt{I}\\subseteq I(V(I))$는 자명하다.",
+            "역으로 $f\\in I(V(I))$를 고르자. $f=0$이면 $f\\in\\sqrt{I}$이다. $f\\ne 0$이라 하자.",
+            "$J:=IC[x_1,\\dots,x_n,y]+(yf-1)\\subseteq\\mathbb{C}[x_1,\\dots,x_n,y]$의 영점집합이 공집합임을 확인한다: $(p,c)\\in V(J)$라면 $p\\in V(I)$이므로 $f(p)=0$인데, 그러면 $c\\cdot 0-1=-1\\ne 0$이 되어 $yf-1=0$이라는 조건과 모순된다.",
+            "약한 영점정리에 의해 $J=(1)$이다. $I$의 생성원 $f_1,\\dots,f_s$를 고르면 $$1=\\sum_{i=1}^s a_if_i+b(yf(x)-1) \\quad (a_i,b\\in\\mathbb{C}[x_1,\\dots,x_n,y])$$ 로 쓸 수 있다.",
+            "유리함수체에서 $y=1/f(x)$를 대입하면 마지막 항이 소멸하고, 충분히 큰 $f^N$을 양변에 곱해 모든 분모를 통분하면 $f^N$이 $f_i$들의 $R_n$-선형결합으로 표현된다. 즉 $f^N\\in I$, 다시 말해 $f\\in\\sqrt{I}$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.35 ($V$-$I$ 사전의 완성 — 근기·소·극대 이데알과 대수적집합·다양체·점의 대응)",
+          "formal_statement": "$R_n$의 근기 이데알들과 $\\mathbb{A}^n$의 아핀 대수적집합들 사이에 $I\\mapsto V(I)$, $X\\mapsto I(X)$로 주어지는 포함관계를 뒤집는 일대일 대응이 있다. 더 나아가: (1) $\\mathbb{A}^n$의 대수다양체는 $R_n$의 소이데알에 대응한다. (2) $\\mathbb{A}^n$의 점은 $R_n$의 극대이데알에 대응한다: 점 $(a_1,\\dots,a_n)$은 $\\mathfrak{m}_a:=(x_1-a_1,\\dots,x_n-a_n)$에 대응한다.",
+          "idea_behind_proof": "강한 영점정리($I(V(I))=\\sqrt I$)가 근기 이데알에서는 $I(V(I))=I$로 정확히 맞아떨어짐을 보장하므로 일대일 대응이 성립하고, (1)은 명제 1.5(기약 $\\iff$ 소이데알)를, (2)는 극대이데알이 정확히 '한 점에서의 값매김'의 핵이라는 사실과 약한 영점정리(극대이데알도 영점을 가져야 함)를 결합해서 얻는다.",
+          "proof_steps": [
+            "$X$가 $\\mathbb{A}^n$의 아핀 대수적집합이면 명제 1.4에 의해 $V(I(X))=X$이다. $I$가 $R_n$의 근기 이데알이면 강한 영점정리에 의해 $I(V(I))=\\sqrt{I}=I$이다. 이는 $I\\mapsto V(I)$, $X\\mapsto I(X)$가 서로 역인 대응임을 보인다. 포함관계 역전은 명제 1.1이 보장한다.",
+            "(1): $R_n$의 소이데알 $\\mathfrak{p}$에 대해, 약한 영점정리는 $V(\\mathfrak{p})\\ne\\varnothing$을 주고(소이데알은 진 이데알이므로), 강한 영점정리는 $I(V(\\mathfrak{p}))=\\mathfrak{p}$를 준다. 명제 1.5에 의해 이는 $V(\\mathfrak{p})$가 기약(대수다양체)임을 보인다.",
+            "(2): 값매김 사상(evaluation map) $R_n\\to\\mathbb{C},\\ f\\mapsto f(a)$의 핵이 $\\mathfrak{m}_a$이므로 $\\mathfrak{m}_a$는 극대이데알이다. 역으로 $\\mathfrak{m}$이 $R_n$의 극대이데알이면 약한 영점정리에 의해 $a\\in V(\\mathfrak{m})$인 $a$가 존재하고, 그러면 $\\mathfrak{m}\\subseteq\\mathfrak{m}_a$인데 $\\mathfrak{m}$의 극대성이 등호를 강제한다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "이데알 $I=(x^2,xy)\\subseteq\\mathbb{C}[x,y]$에 대해 $\\sqrt{I}$를 구하고, $I(V(I))$가 강한 영점정리와 일치하는지 확인하라.",
+          "hint": "먼저 $V(I)$를 직접 구하고(1.1절의 예제 1.3, 1.9와 같은 방식), $I(V(I))$를 계산한 뒤 근기의 정의(어떤 거듭제곱이 $I$에 들어가는 원소들의 모임)와 비교하라.",
+          "solution": "$x^2=0$과 $xy=0$을 동시에 만족하려면 $x=0$이어야 하고(만약 $x\\ne 0$이면 $x^2\\ne 0$), $x=0$이면 $xy=0$이 자동으로 성립한다. 따라서 $V(I)=\\{(0,b)\\mid b\\in\\mathbb{C}\\}=V(x)$, 즉 $y$축이다. 그러면 $I(V(I))=I(V(x))=(x)$이다. 한편 $y\\in\\sqrt{I}$인가? $y^N=cx^2+dxy$ 꼴로 쓸 수 있는 $y^N$은 없으므로(우변은 항상 $x$를 인수로 갖지만 $y^N$은 그렇지 않다) $y\\notin\\sqrt{I}$이고, 실제로 $\\sqrt{I}=(x)$임을 확인할 수 있다(어떤 $f\\in(x)$든 $f=xg$이고 $f^2=x^2g^2\\in I$이므로 $(x)\\subseteq\\sqrt{I}$; 반대 포함은 $I(V(I))=(x)\\supseteq\\sqrt I$와 $\\sqrt I \\supseteq I(V(I))$ 방향... 실제로는 강한 영점정리 자체가 $\\sqrt I = I(V(I))=(x)$임을 즉시 보장한다). 따라서 $\\sqrt{I}=(x)=I(V(I))$로 강한 영점정리와 정확히 일치한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "$I=(x^2+1)\\subseteq\\mathbb{C}[x]$(일변수)에 대해 약한 영점정리를 직접 확인하라: $I$가 진 이데알임을 이용해 $V(I)\\ne\\varnothing$임을 보이고, 실제 영점을 구하라.",
+          "hint": "$\\mathbb{C}[x]$는 대수적으로 닫힌 체 $\\mathbb{C}$ 위의 다항식환이므로 $x^2+1$은 반드시 $\\mathbb{C}$ 안에 근을 갖는다.",
+          "solution": "$x^2+1$은 $\\mathbb{C}[x]$에서 상수가 아니므로 $(x^2+1)\\ne(1)$(진 이데알)이고, 약한 영점정리(이 경우는 사실 대수학의 기본정리 그 자체)에 의해 $V(x^2+1)\\ne\\varnothing$이어야 한다. 실제로 $x^2+1=(x-i)(x+i)$이므로 $V(x^2+1)=\\{i,-i\\}\\ne\\varnothing$이다. 이는 만약 바탕체가 $\\mathbb{R}$이었다면($x^2+1$이 실근이 없으므로) 약한 영점정리가 실패했을 것임을 보여준다 — 대수적으로 닫힌 체라는 가정이 본질적이다."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 이데알 $I\\subseteq R_n$에 대해 $I(V(I))=I$이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 강한 영점정리는 $I(V(I))=\\sqrt{I}$라고만 말하며, $I$가 근기 이데알일 때만($I=\\sqrt I$) $I(V(I))=I$가 된다. 예제 1.3의 $I=(x^2)$처럼 근기가 아닌 이데알에서는 $I(V(I))=(x)\\ne(x^2)=I$이다."
+        },
+        {
+          "type": "ox",
+          "question": "약한 영점정리는 바탕체가 대수적으로 닫혀 있지 않아도(예: $\\mathbb{R}$ 위에서도) 성립한다.",
+          "answer": "X",
+          "explanation": "거짓이다. 약한 영점정리의 증명은 $n=1$ 경우인 대수학의 기본정리에 결정적으로 의존하는데, 이는 $\\mathbb{C}$가 대수적으로 닫혀 있다는 사실 그 자체다. $\\mathbb{R}[x]$에서는 $I=(x^2+1)$이 진 이데알이지만 $V(I)=\\varnothing$이므로(실근이 없음) 약한 영점정리가 실패한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "약한 영점정리(정리 1.32)의 증명이 1.3절의 명제 1.30(좌표 사영)과 보조정리 1.31(모닉으로 만들기)을 각각 어떤 역할로 사용하는지 설명하고, 이 증명 전체가 귀납법의 어느 지점에서 멈추는지 서술하라.",
+          "hint": "귀납법의 기초 단계(base case)가 무엇인지, 그리고 귀납 단계에서 차원을 하나 줄이는 데 정확히 어떤 두 도구가 순서대로 쓰이는지 짚어보라.",
+          "answer": "귀납법의 기초 단계는 $n=1$이고, 이는 대수학의 기본정리 그 자체다. 귀납 단계($n>1$)에서는 먼저 보조정리 1.31로 $I$ 안의 임의의 (상수가 아닌) 다항식을 좌표변환을 통해 $x_1$에 대해 모닉인 형태로 바꿔, 명제 1.30의 가정(모닉인 원소의 존재)을 충족시킨다. 그다음 소거 이데알 $I\\cap\\mathbb{C}[x_2,\\dots,x_n]$이 $n-1$변수의 진 이데알이라는 사실에 귀납가정을 적용해 그 소거 이데알의 영점 $b$를 하나 확보한다. 마지막으로 명제 1.30(모닉 원소 덕분에 사영이 정확히 소거 이데알의 영점집합과 같음)을 사용해, $b$가 반드시 $V(I)$의 어떤 점 $(a,b)$로 들어올려짐을 보장받는다. 즉 보조정리 1.31은 '적용 조건을 만족시키는 준비'를, 명제 1.30은 '차원을 하나 줄인 뒤 얻은 정보를 다시 원래 차원으로 끌어올리는 다리' 역할을 한다."
+        }
+      ]
+    },
+    {
+      "section_title": "1.5 Primary Decomposition",
+      "step1_big_picture": {
+        "context": "따름정리 1.35는 소이데알이 대수다양체(기약 대수적집합)에 대응한다는 사전을 완성했다. 그런데 일반적인(기약이 아닌) 대수적집합은 여러 기약 조각으로 쪼개질 텐데, 그 쪼개짐이 정말로 유한하고 유일한지는 아직 확인하지 않았다. 이 절은 힐베르트 기저 정리가 준 '유한 생성성'을 '뇌터(Noetherian)'라는 순수한 사슬 조건으로 일반화하고, 이 조건 하나로 (i) 모든 대수적집합이 유한 개의 대수다양체로 유일하게 분해됨(기하학적 사실)과 (ii) 모든 이데알이 유한 개의 1차 이데알(primary ideal)의 교집합으로 분해됨(대수적 사실, 이 절의 이름 그대로 Lasker–Noether 정리)을 동시에 얻는다. 이 두 분해는 서로의 대수/기하 번역이다.",
+        "hidden_intuition": "뇌터성(Noetherian)은 '오름 사슬이 항상 멈춘다'는 조건인데, 힐베르트 기저 정리 덕분에 $R_n$은 자동으로 뇌터 환이고, 이는 그대로 $\\mathbb{A}^n$이 뇌터 공간(닫힌집합의 내림 사슬이 항상 멈춤)이라는 사실로 번역된다(따름정리 1.35를 통해 이데알의 오름 사슬 $\\leftrightarrow$ 닫힌집합의 내림 사슬이 서로 뒤집혀 대응하므로). 명제 1.39의 기약 분해는 '더 이상 쪼갤 수 없는 최소 반례가 있다면 모순'이라는 뇌터성의 전형적인 논증 패턴(극소 원소를 잡아 모순을 이끔)으로 증명된다. 대수 쪽에서는 소이데알의 유한 교집합 대신 그보다 조금 더 일반적인 '1차 이데알(primary ideal)'의 교집합을 쓰는데, 그 이유는 기하학적으로 '숨은 다중도(multiplicity)'를 기록하기 위해서다 — 예제 1.44의 $(x^2,xy)=(x)\\cap(x^2,y)=(x)\\cap(x,y)^2$처럼, 영점집합은 $V(x)$($y$축) 하나뿐이지만 원점 근방에서 '$x^2$만큼 납작하게 접해 있다'는 다중도 정보가 이데알 자체에는 남아 있고, 이는 서로 다른 두 가지 1차 분해로 나타날 수 있다(1차 분해는 유일하지 않다!). 아르티니안 환(Artinian ring)은 이 절의 마지막에 등장하는 '내림 사슬도 멈추는' 훨씬 강한 유한성 조건인데, 명제 1.48은 놀랍게도 이것이 순수하게 '모든 소이데알이 극대이데알'이라는 국소적 조건과 동치임을 보여준다 — 차원이 $0$인 뇌터 국소환이 바로 아르티니안 환이라는, 나중에 '점 근방에서의 국소적 구조'를 다룰 때 계속 마주치게 될 사실이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.2,
+                0
+              ],
+              "to": [
+                2.2,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -2.2
+              ],
+              "to": [
+                0,
+                2.2
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.7,
+                -1.7
+              ],
+              "to": [
+                1.7,
+                1.7
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.0,
+                0.35
+              ],
+              "text": "V(x)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.35,
+                2.0
+              ],
+              "text": "V(y)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.55,
+                1.9
+              ],
+              "text": "V(x-y)"
+            }
+          ],
+          "caption": "V(xy(x-y)) \\subseteq A^2은 원점을 지나는 세 직선의 합집합 — 명제 1.39에 의해 이 대수적집합은 기약인 성분 V(x), V(y), V(x-y) 세 개로 유일하게(순서를 빼고) 분해된다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (뇌터 환, 뇌터 공간)",
+          "formal_statement": "환 $R$이 뇌터(Noetherian)라 함은 $R$의 모든 이데알의 오름 사슬이 결국 정지하는 것이다. 뇌터 환의 모든 몫환은 다시 뇌터이다. 위상공간이 뇌터라 함은 모든 닫힌부분집합의 내림 사슬이 결국 정지하는 것이다. 뇌터 공간의 모든 닫힌부분집합은 다시 뇌터이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.36 (뇌터성의 세 가지 동치 서술)",
+          "formal_statement": "환 $R$에 대해 다음은 동치이다: (1) $R$의 모든 이데알은 유한 생성이다. (2) $R$의 모든 이데알의 오름 사슬은 결국 정지한다. (3) $R$의 이데알들의 임의의 공집합이 아닌 모임은 극대 원소를 갖는다.",
+          "idea_behind_proof": "오름 사슬의 합집합이 다시 이데알이라는 사실이 (1)$\\Rightarrow$(2)의 핵심이고, (2)$\\Rightarrow$(3)은 극대 원소가 없다는 가정이 곧바로 무한히 계속되는 사슬을 만들어낸다는 대우 논법이며, (3)$\\Rightarrow$(1)은 '극대인 유한생성 부분이데알'을 잡아 그것이 사실 전체와 같음을 강제하는 방식이다.",
+          "proof_steps": [
+            "(1)$\\Rightarrow$(2): $I_1\\subseteq I_2\\subseteq\\cdots$가 $R$의 이데알들의 오름 사슬이라 하자. $I:=\\bigcup_{i=1}^\\infty I_i$는 이데알이고, (1)에 의해 $I$의 유한 생성원들은 어떤 $I_k$ 하나에 다 들어 있다. 그러면 $I_k=\\bigcup_{i=1}^\\infty I_i=I$이므로 $i\\ge k$에서 $I_i=I_k$이다.",
+            "(2)$\\Rightarrow$(3): 이데알들의 공집합이 아닌 모임이 극대 원소를 갖지 않는다면, 이는 정지하지 않는 오름 사슬을 만들어낸다.",
+            "(3)$\\Rightarrow$(1): $R$의 임의의 이데알 $I$에 대해, (3)을 이용해 $I$ 안에 포함된 유한생성 부분이데알들의 모임에서 극대인 것 $J$를 고른다. $f\\in I$라면 $J+(f)$도 유한생성이고 $I$에 포함되므로, $J$의 극대성에 의해 $f\\in J$가 강제된다. 따라서 $I=J$는 유한생성이다.",
+            "마지막 진술들은 힐베르트 기저 정리와 따름정리 1.35에서 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.37 ($R_n$과 $\\mathbb{A}^n$은 뇌터이다)",
+          "formal_statement": "힐베르트 기저 정리에 의해 $R_n$과 그 모든 몫환은 뇌터이다. 따름정리 1.35에 의해 $\\mathbb{A}^n$과 그 모든 닫힌부분집합은 뇌터 공간이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.38 (뇌터 공간의 열린부분집합은 준콤팩트하다)",
+          "formal_statement": "$X$가 뇌터 공간이면 $X$의 모든 열린부분집합은 준콤팩트(quasi-compact)이다(임의의 열린 덮개가 유한 부분덮개를 갖는다는 콤팩트성의 피복 성질을 그대로 가지되, 뇌터 공간이 일반적으로 하우스도르프가 아니므로 '콤팩트' 대신 '준콤팩트'라는 용어를 쓴다).",
+          "idea_behind_proof": "유한 합집합들의 모임에서 극대 원소를 잡는 방식으로, 극대 원소가 없다면 무한히 늘어나는 열린집합들의 사슬(즉 무한히 줄어드는 닫힌집합들의 사슬)이 생겨 뇌터성에 모순된다는 논법이다.",
+          "proof_steps": [
+            "$\\mathcal{U}:=\\{U_\\lambda\\}_{\\lambda\\in\\Lambda}$를 $X$의 열린 덮개라 하자. $\\mathcal{U}$의 원소들의 유한 합집합들의 모임을 생각하면, 이 모임은 극대 원소를 갖는다(그렇지 않으면 무한히 커지는 열린집합들의 오름 사슬, 즉 무한히 작아지는 닫힌집합들의 내림 사슬이 생겨 뇌터성에 모순).",
+            "이 극대 원소에 대응하는 $\\mathcal{U}$의 원소들이 $X$의 유한 부분덮개를 이룬다(그렇지 않다면 그 극대 합집합에 또 다른 $U_\\lambda$를 더해 더 큰 합집합을 만들 수 있어 극대성에 모순). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.39 (기약 분해의 존재와 유일성)",
+          "formal_statement": "공집합이 아닌 모든 뇌터 공간 $X$는 기약 닫힌부분집합들로의 분해 $X=X_1\\cup\\cdots\\cup X_r$을 허용한다. 포함되는 항을 지워 $i\\ne j$에서 $X_i\\not\\subseteq X_j$가 되도록(중복없음, irredundant) 만들 수 있고, 이 중복없는 분해는 순서를 제외하면 유일하다.",
+          "idea_behind_proof": "존재성은 '분해가 안 되는 최소 반례'를 극소 원소로 잡아, 그것이 가약이라면 두 진부분으로 쪼개고 각 부분은 (극소성 덕분에) 이미 분해가 되어 있어야 한다는 모순을 이끄는 뇌터성의 전형적 논증이다. 유일성은 한 분해의 각 조각이 다른 분해의 어떤 조각에 갇히고, 그 조각이 다시 원래 조각에 갇혀야 하므로 결국 같아진다는 '샌드위치' 논법이다.",
+          "proof_steps": [
+            "존재성: $X$의 어떤 공집합이 아닌 닫힌부분집합이 유한 개의 기약 닫힌부분집합의 합집합이 아니라고 가정하자. 뇌터 공간에서 닫힌부분집합들의 공집합이 아닌 모임은 항상 극소 원소를 가지므로, '유한 개의 기약 성분의 합집합이 아닌' 닫힌부분집합들의 모임에서 극소 원소 $Y$를 고른다.",
+            "$Y$는 가약이므로 $Y=Y_1\\cup Y_2$ ($Y_1,Y_2$는 진부분 닫힌집합)로 쓸 수 있다. $Y$의 극소성에 의해 $Y_1,Y_2$는 각각 유한 개의 기약 성분의 합집합이고, 따라서 $Y$도 그렇다 — 이는 $Y$의 선택에 모순이다.",
+            "유일성: $X=\\bigcup_{i=1}^r X_i=\\bigcup_{j=1}^s X_j'$가 $X$의 두 중복없는 분해라 하자. 각 $1\\le i\\le r$에서 $X_i\\subseteq X_j'$인 $j$가 있고, 다시 $X_j'\\subseteq X_k$인 $k$가 있다. 그러면 $X_i\\subseteq X_k$인데 중복없음에 의해 $i=k$가 강제되고, 따라서 $X_i=X_j'$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.40 (대수적집합의 기약 분해와 이데알의 인수분해)",
+          "formal_statement": "명제 1.36과 명제 1.39에 의해, 공집합이 아닌 모든 아핀 대수적집합 $X=V(I)$는 유한 개의 대수다양체 $X_1=V(I_1),\\dots,X_r=V(I_r)$의 합집합이다: $$V(I)=X=V(I_1)\\cup\\cdots\\cup V(I_r)=V(I_1\\cdots I_r)=V(I_1\\cap\\cdots\\cap I_r).$$"
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (1차 이데알, $\\mathfrak{p}$-primary)",
+          "formal_statement": "환 $R$의 진 이데알 $Q\\subsetneq R$이 1차(primary)라 함은 $$fg\\in Q \\text{ 그리고 } f\\notin Q \\implies g^N\\in Q \\text{ for some } N\\ge 1$$ 인 것이다. 1차 이데알 $Q\\subseteq R$이 $\\mathfrak{p}$-1차($\\mathfrak{p}$-primary)라 함은 $\\sqrt{Q}=\\mathfrak{p}$인 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.41 (1차 이데알의 근기는 소이데알이다)",
+          "formal_statement": "1차 이데알의 근기는 소이데알이다.",
+          "idea_behind_proof": "1차 이데알의 정의를 근기까지 늘리는 것뿐이다: $fg$의 어떤 거듭제곱이 $Q$에 들어가는데 $f$의 거듭제곱은 안 들어간다면, $g$ 자체의 거듭제곱이 $Q$에 들어가야 한다는 것을 정의를 직접 적용해 확인한다.",
+          "proof_steps": [
+            "$Q$를 환 $R$의 1차 이데알이라 하고 $fg\\in\\sqrt{Q}$이면서 $f\\notin\\sqrt{Q}$라 하자. 어떤 $r$에서 $(fg)^r\\in Q$이지만 $f$의 어떤 거듭제곱도 $Q$에 속하지 않는다.",
+            "$(fg)^r=f^rg^r\\in Q$이고 $f^r\\notin Q$이므로($f\\notin\\sqrt Q$이면 $f$의 모든 거듭제곱이 $Q$ 밖에 있음), $Q$가 1차이므로 $(g^r)^s=g^{rs}\\in Q$인 $s\\ge 1$이 존재한다. 따라서 $g\\in\\sqrt{Q}$. 이는 $\\sqrt{Q}$가 소이데알임을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (이데알 몫, 기약 이데알)",
+          "formal_statement": "환 $R$과 이데알 $I,J\\subseteq R$에 대해 이데알 몫(ideal quotient)은 $$I:J:=\\{b\\in R\\mid bJ\\subseteq I\\}\\subseteq R$$ 이다. $J=(g^m)$이 원소 $g\\in R$, $m\\ge 1$에 대한 주 이데알이면 $I:g^m:=I:(g^m)=\\{b\\in R\\mid bg^m\\in I\\}$로 쓴다. $I:g^m\\subseteq I:g^{m+1}$이 성립한다. $R$의 진 이데알 $J\\subsetneq R$이 기약(irreducible)이라 함은 $J=J_1\\cap J_2$이면 $J=J_1$ 또는 $J=J_2$인 것이다."
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.42 (뇌터 환에서 기약 이데알은 1차이다)",
+          "formal_statement": "뇌터 환의 모든 기약 이데알은 1차이다.",
+          "idea_behind_proof": "이데알 몫들의 오름 사슬 $J:g\\subseteq J:g^2\\subseteq\\cdots$이 뇌터성에 의해 정지한다는 사실을 이용해 $J$를 $(J:g^m)\\cap(J+(g^m))$으로 정확히 인수분해하고, $J$의 기약성이 이 두 인수 중 하나가 $J$ 전체와 같음을 강제한다는 점을 이용한다.",
+          "proof_steps": [
+            "$J$를 뇌터 환 $R$의 기약 이데알이라 하자. $fg\\in J$이고 $f\\notin J$라 가정한다. $R$이 뇌터이므로 오름 사슬 $J:g\\subseteq J:g^2\\subseteq\\cdots$은 정지한다: 모든 $r\\ge 0$에서 $J:g^m=J:g^{m+r}$인 $m\\ge 0$을 고를 수 있다.",
+            "$J=(J:g^m)\\cap(J+(g^m))$임을 보인다. ($\\subseteq$)는 명백하다. 역으로 $a+bg^m\\in(J:g^m)\\cap(J+(g^m))$ ($a\\in J,\\ b\\in R$)를 고르면, $(a+bg^m)g^m\\in J$에서 $bg^{2m}\\in J$를 얻는다. 따라서 $b\\in J:g^{2m}=J:g^m$이므로 $bg^m\\in J$이고, 결국 $a+bg^m\\in J$이다.",
+            "이제 $f\\in J:g^m$이지만 $f\\notin J$임을 관찰한다($fg\\in J$에서 $fg^m\\in J$가 따라 나옴). $J$가 기약이므로 앞의 인수분해가 주는 대안은 $J+(g^m)=J$뿐이다. 따라서 $g^m\\in J$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.43 (Lasker–Noether 정리)",
+          "formal_statement": "뇌터 환의 모든 진 이데알은 유한 개의 1차 이데알의 교집합이다.",
+          "idea_behind_proof": "보조정리 1.42 덕분에 '기약 이데알의 유한 교집합'만 보이면 충분하고, 이는 명제 1.39의 기약 닫힌집합 분해와 완전히 평행한 뇌터성 논증(반례들 중 극대 원소를 잡아 모순)으로 처리된다.",
+          "proof_steps": [
+            "보조정리 1.42에 의해, 뇌터 환 $R$의 모든 진 이데알이 유한 개의 기약 이데알의 교집합임을 보이면 충분하다.",
+            "그렇지 않다면, 명제 1.36에 의해 '기약 이데알들의 유한 교집합이 아닌' 이데알들의 모임에서 극대 원소 $J$를 고른다. $J$는 기약이 아니므로 $J=J_1\\cap J_2$ ($J\\subsetneq J_1,J_2$)로 쓸 수 있다. $J$의 극대성에 의해 $J_1,J_2$는 유한 개의 기약 이데알의 교집합이고, 따라서 $J$도 그렇다 — 모순. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.44 (1차 분해는 유일하지 않다)",
+          "formal_statement": "$\\mathbb{C}[x,y]$에서 $$(x^2,xy)=(x)\\cap(x^2,y)=(x)\\cap(x,y)^2$$ 이다. 여기서 $(x)\\subseteq\\mathbb{C}[x,y]$는 소이데알이고, $(x^2,y),(x,y)^2\\subseteq\\mathbb{C}[x,y]$는 각각 $(x,y)$-1차 이데알이다."
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.45 (극소 소이데알의 존재)",
+          "formal_statement": "$R$을 환, $I\\subseteq R$이라 하자. 그러면 $I$를 포함하는 극소 소이데알 $\\mathfrak{q}\\subseteq R$이 존재한다.",
+          "idea_behind_proof": "체르멜로의 초른 보조정리(Zorn's Lemma)를 '포함관계를 뒤집은' 순서에 적용하는 표준적인 논법이다 — 전순서 부분집합의 교집합이 다시 그 모임에 속함을 확인하기만 하면 된다.",
+          "proof_steps": [
+            "$S:=\\{\\mathfrak{p}\\mid \\mathfrak{p}\\subseteq R\\text{는 } I\\text{를 포함하는 소이데알}\\}$이라 하자. $I$를 포함하는 극대이데알이 존재하므로 $S\\ne\\varnothing$이다.",
+            "$\\mathfrak{p},\\mathfrak{p}'\\in S$에 대해 $\\mathfrak{p}\\le\\mathfrak{p}'$을 $\\mathfrak{p}\\supseteq\\mathfrak{p}'$로 정의한다. $\\Lambda\\subseteq S$가 전순서 부분집합이면 $\\bigcap_{\\mathfrak{p}\\in\\Lambda}\\mathfrak{p}\\in S$가 $\\Lambda$의 상계이다(전순서 부분집합의 교집합이 소이데알임은 표준적인 확인이다).",
+            "초른 보조정리에 의해 $S$는 극대 원소 $\\mathfrak{p}$를 갖고, 이는 $I$를 포함하는 소이데알들 중 (역순으로 정의된 극대이므로 원래 포함관계로는) 극소이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.46 (근기 이데알은 극소 소이데알들의 유한 교집합)",
+          "formal_statement": "$R$을 뇌터 환, $I\\subseteq R$을 근기 이데알이라 하자. 그러면 $I$를 포함하는 극소 소이데알은 유한 개뿐이고, $I$는 그 극소 소이데알들의 유한 교집합이다.",
+          "idea_behind_proof": "Lasker–Noether 분해에서 각 1차 성분의 근기를 취하면 소이데알들의 교집합을 얻고, 극소성을 가진 소이데알은 반드시 그 1차 분해의 어느 성분의 근기로 나타나야 한다는 점이 유한성과 존재성을 동시에 준다.",
+          "proof_steps": [
+            "Lasker–Noether 정리에 의해 $I=\\bigcap_{i=1}^k Q_i$ ($Q_i\\subseteq R$는 1차 이데알)로 쓸 수 있다. $I=\\sqrt{I}=\\bigcap_{i=1}^k\\sqrt{Q_i}$인데, 명제 1.41에 의해 각 $\\sqrt{Q_i}$는 소이데알이다.",
+            "$\\mathfrak{p}\\subseteq R$을 $I$를 포함하는 극소 소이데알이라 하자. $\\bigcap_{i=1}^k Q_i\\subseteq\\mathfrak{p}$이므로 어떤 $1\\le i\\le k$에서 $Q_i\\subseteq\\mathfrak{p}$이고, 극소성에 의해 $Q_i=\\mathfrak{p}$이다. 즉 $I$를 포함하는 모든 극소 소이데알은 $I$의 어떤 1차 분해에 반드시 등장한다 — 이는 극소 소이데알의 유한성을 증명한다.",
+            "1차 분해에서 극소가 아닌 소이데알들을 제거하면, $I$를 포함하는 극소 소이데알들의 교집합으로서의 유일한 중복없는 분해를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.47 ($\\mathfrak{p}$-1차 이데알들의 유한 교집합은 다시 $\\mathfrak{p}$-1차이다)",
+          "formal_statement": "뇌터 환의 $\\mathfrak{p}$-1차 이데알들의 유한 교집합은 (같은 소이데알 $\\mathfrak{p}$에 대해) 다시 $\\mathfrak{p}$-1차이다.",
+          "idea_behind_proof": "교집합의 근기가 각 성분의 근기의 교집합, 즉 전부 $\\mathfrak{p}$ 하나이므로 $\\sqrt{Q}=\\mathfrak{p}$는 거저 나온다. 1차성 자체는 '$b\\notin\\mathfrak{p}$이면 $a$가 곧바로 모든 성분에 들어감'과 '$b\\in\\mathfrak{p}$이면 어차피 정의가 요구하는 것이 $b$의 거듭제곱이 $Q$에 들어가는 것'이라는 두 경우를 나누어 확인한다.",
+          "proof_steps": [
+            "$Q=\\bigcap_{i=1}^k Q_i$ ($Q_i$는 $\\mathfrak{p}$-1차)라 하자. $\\sqrt{Q}=\\bigcap_i\\sqrt{Q_i}=\\mathfrak{p}$이다.",
+            "$ab\\in Q$이고 $b\\notin\\mathfrak{p}$라 하자. 각 $i$에서 $Q_i$가 $\\mathfrak{p}$-1차이고 $b\\notin\\mathfrak{p}=\\sqrt{Q_i}$이므로 $b$의 어떤 거듭제곱도 $Q_i$에 없고, 1차성의 정의에 의해 $a\\in Q_i$가 강제된다. 모든 $i$에서 성립하므로 $a\\in Q=\\bigcap_i Q_i$.",
+            "$ab\\in Q$이고 $a\\notin Q$라 하자. $b\\notin\\mathfrak{p}$이면 방금 단계에 의해 $a\\in Q$가 되어 모순이다. 따라서 $b\\in\\mathfrak{p}=\\sqrt{Q}$, 즉 $b$의 어떤 거듭제곱이 $Q$에 속한다. 이는 $Q$가 1차임을 보이고, 앞서 확인한 $\\sqrt{Q}=\\mathfrak{p}$와 합쳐 $Q$가 $\\mathfrak{p}$-1차임을 완성한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (아르티니안 환, 국소환)",
+          "formal_statement": "환이 아르티니안(Artinian)이라 함은 모든 이데알의 내림 사슬이 결국 정지하는 것이다. 아르티니안 환의 모든 몫환은 다시 아르티니안이다. 국소환(local ring)은 유일한 극대이데알을 갖는 환이다. 이는 모든 원소 $a$에 대해 $a$ 또는 $1-a$가 단위원인 것과 동치이다. 국소환에서 모든 비단위원들은 유일한 극대이데알을 이룬다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.48 (뇌터 국소환이 아르티니안 $\\iff$ 모든 소이데알이 극대)",
+          "formal_statement": "$(B,\\mathfrak{m})$을 $0$이 아닌 뇌터 국소환이라 하자. $B$가 아르티니안인 것과 $B$의 모든 소이데알이 극대인 것은 동치이다.",
+          "idea_behind_proof": "($\\Rightarrow$)는 정역이면서 아르티니안이면 자동으로 체가 된다는 관찰(내림 사슬이 어차피 $0$에서 멈추니 역원을 강제로 얻는다)을 몫환 $B/\\mathfrak{p}$에 적용한다. ($\\Leftarrow$)는 훨씬 길다: 1차 분해로 $\\mathfrak{m}^N=(0)$이 됨을 먼저 확보한 뒤(모든 소이데알이 극대이므로 모든 1차 성분의 근기가 같은 $\\mathfrak{m}$이라는 점을 이용), $\\mathfrak{m}^j/\\mathfrak{m}^{j+1}$들이 유한차원 벡터공간이라는 사실로 임의의 내림 사슬을 '유한 개의 유한차원 벡터공간에서의 내림 사슬들'로 잘게 쪼개 각각의 정지를 유한 번만 확인하면 되도록 만든다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $\\mathfrak{p}\\subseteq B$가 소이데알이면 $B/\\mathfrak{p}$는 아르티니안 정역이다. $0$이 아닌 $a\\in B/\\mathfrak{p}$에 대해 내림 사슬 $(a)\\supseteq(a^2)\\supseteq\\cdots$는 정지한다: 어떤 $m\\ge 1$에서 $(a^m)=(a^{m+1})$. 그러면 $a^m=a^{m+1}b$인 $b$가 있어 $a^m(1-ab)=0$이고, 정역이므로 $ab=1$이다. 즉 $B/\\mathfrak{p}$는 체이므로 $\\mathfrak{p}$는 극대이데알이다.",
+            "($\\Leftarrow$) $(0)=Q_1\\cap\\cdots\\cap Q_r$을 $1$차 분해라 하자. 명제 1.41에 의해 각 $\\sqrt{Q_i}$는 소이데알이고, 가정에 의해 $\\sqrt{Q_i}=\\mathfrak{m}$이다. $\\mathfrak{m}=(u_1,\\dots,u_s)$로 쓰고, 각 $i,j$에서 $u_j^{e_{ij}}\\in Q_i$인 $e_{ij}\\ge 1$을 고른다.",
+            "$N_i:=1+\\sum_{j=1}^s(e_{ij}-1)$이라 하면 이항전개(다중 지수 버전)에 의해 $\\mathfrak{m}^{N_i}\\subseteq Q_i$임을 확인할 수 있다. $N:=\\max\\{N_1,\\dots,N_r\\}$이라 하면 $\\mathfrak{m}^N\\subseteq\\bigcap_i Q_i=(0)$, 즉 $\\mathfrak{m}^N=(0)$이다.",
+            "각 $\\mathfrak{m}^j/\\mathfrak{m}^{j+1}$은 체 $B/\\mathfrak{m}$ 위의 유한차원 벡터공간이다. $B$의 이데알들의 내림 사슬 $J_1\\supseteq J_2\\supseteq\\cdots$가 주어지면, 각 $0\\le j\\le N-1$에서 $\\big((J_t\\cap\\mathfrak{m}^j)+\\mathfrak{m}^{j+1}\\big)/\\mathfrak{m}^{j+1}$은 $\\mathfrak{m}^j/\\mathfrak{m}^{j+1}$의 부분공간들의 내림 사슬을 이루고, 유한차원이므로 정지한다.",
+            "유한 개($N$개)의 $j$ 각각에 대해 정지하는 지점이 있으므로, 모든 $j$에서 동시에 작동하는 지점 $T$를 하나 고를 수 있다. $\\mathfrak{m}^N=(0)$이므로 $J_T\\cap\\mathfrak{m}^{N-1}=J_t\\cap\\mathfrak{m}^{N-1}$ ($t\\ge T$)에서 시작해, $j$에 대한 내림 귀납법으로 $J_T\\cap\\mathfrak{m}^j=J_t\\cap\\mathfrak{m}^j$ ($t\\ge T$)를 차례로 얻는다: $a\\in J_T\\cap\\mathfrak{m}^j$이면 $a-a'\\in\\mathfrak{m}^{j+1}$인 $a'\\in J_t\\cap\\mathfrak{m}^j$가 있고, 귀납가정에 의해 $a-a'\\in J_T\\cap\\mathfrak{m}^{j+1}=J_t\\cap\\mathfrak{m}^{j+1}$이므로 $a\\in J_t\\cap\\mathfrak{m}^j$.",
+            "$j=0$까지 내려오면 $J_T=J_t$ ($t\\ge T$)를 얻어, 임의의 내림 사슬이 정지함이 증명된다. 즉 $B$는 아르티니안이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "명제 1.39를 이용해, $X:=V(xy(x-y))\\subseteq\\mathbb{A}^2$의 기약 분해를 구하라(대수다양체 성분들을 구체적으로 밝혀라).",
+          "hint": "명제 1.1(3)($\\bigcup V(J_i)=V(\\prod J_i)$)을 거꾸로 읽어, $xy(x-y)$가 세 개의 기약인수의 곱임을 이용하라.",
+          "solution": "$xy(x-y)=x\\cdot y\\cdot(x-y)$는 서로 다른 세 개의 (동반원소를 제외하면 서로소인) 기약 인수의 곱이므로, $X=V(x)\\cup V(y)\\cup V(x-y)$이다. $V(x),V(y),V(x-y)$는 각각 원점을 지나는 직선(1차원 아핀 공간과 동형이므로 기약, 예제 1.7·1.8과 같은 논증)이고, 서로 다른 직선이라 어느 것도 다른 것에 포함되지 않으므로 이것이 명제 1.39가 말하는 중복없는 기약 분해이며, 순서를 빼면 유일하다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 1.44의 $(x^2,xy)=(x)\\cap(x^2,y)$에서, $(x)$와 $(x^2,y)$가 각각 어떤 소이데알에 대해 1차인지 밝히고, 두 이데알의 영점집합을 구해 왜 이 분해가 '기하학적으로는' 정보를 하나만 주는 것처럼 보이는지 설명하라.",
+          "hint": "$V(x)$와 $V(x^2,y)$를 각각 계산해 보라 — 둘 다 집합으로는 같은 것을 줄 것이다.",
+          "solution": "$(x)$는 그 자체로 소이데알이므로 $(x)$-1차이고, $V(x)$는 $y$축이다. $(x^2,y)$는 $\\sqrt{(x^2,y)}=(x,y)$인 $(x,y)$-1차 이데알이며, $V(x^2,y)=\\{(0,0)\\}$처럼 보이지만 실제로 $x^2=0,y=0$을 동시에 만족하는 점은 $(0,0)$뿐이다. 그런데 교집합 $V(x)\\cap V(x^2,y)$을 생각하는 게 아니라 애초에 $(x)\\cap(x^2,y)=(x^2,xy)$이므로 $V((x)\\cap(x^2,y))=V(x)\\cup V(x^2,y)=V(x)\\cup\\{(0,0)\\}=V(x)$($\\{(0,0)\\}\\subseteq V(x)$이므로)이다. 즉 집합으로서는 $V((x^2,xy))=V(x)$ 하나뿐이라 기하학적 정보(영점집합)만 보면 $(x^2,y)$가 주는 정보는 '이미 $V(x)$ 안에 있는 여분의 성분'처럼 보인다. 하지만 이데알 수준에서는 $(x^2,y)$가 원점에서 $y$축에 얼마나 '납작하게' 접해 있는지(다중도)를 기록하고 있어, 순수한 집합론적 정보($V(\\cdot)$)보다 이데알이 더 많은 것을 담고 있음을 보여준다."
+        },
+        {
+          "type": "ox",
+          "question": "모든 진 이데알의 1차 분해(primary decomposition)는 유일하다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.44가 정확히 $(x^2,xy)=(x)\\cap(x^2,y)=(x)\\cap(x,y)^2$라는 두 가지 서로 다른 1차 분해를 보여준다. (다만 따름정리 1.46이 보장하듯, 극소 소이데알들만 남긴 '중복없는' 부분은 유일하다 — 여기서는 두 분해 모두 소성분 $(x)$는 공유하고 있다.)"
+        },
+        {
+          "type": "ox",
+          "question": "1차 이데알(primary ideal)은 항상 소이데알이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.44의 $(x^2,y)$는 $(x,y)$-1차 이데알이지만 소이데알은 아니다(예: $x\\cdot x=x^2\\in(x^2,y)$인데 $x\\notin(x^2,y)$이므로 소이데알의 정의를 만족하지 않는다 — 다만 1차 이데알의 정의는 $x\\cdot x\\in Q,\\ x\\notin Q\\Rightarrow x^N\\in Q$만 요구하고, 실제로 $x^2\\in Q$이므로 이는 만족된다). 명제 1.41이 보장하는 것은 '1차 이데알의 근기'가 소이데알이라는 것이지, 1차 이데알 자체가 소이데알이라는 것이 아니다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.39(기약 분해)와 정리 1.43(Lasker–Noether, 1차 분해)은 각각 '기하'와 '대수' 언어로 같은 유한성 현상을 서술한다. 두 정리의 증명 전략이 왜 똑같은 모양(뇌터 조건에서 극단 원소를 잡아 모순을 이끄는 방식)을 하고 있는지, 그리고 두 분해가 정확히 어떻게 대응하는지 설명하라.",
+          "hint": "뇌터 환의 오름 사슬 조건과 뇌터 공간의 내림 사슬 조건이 따름정리 1.35의 $V$-$I$ 대응 아래서 정확히 서로 뒤집힌 것임을 상기하라.",
+          "answer": "따름정리 1.35의 $V$-$I$ 사전은 포함관계를 뒤집으므로, $R_n$의 이데알들의 오름 사슬은 $\\mathbb{A}^n$의 닫힌집합들의 내림 사슬로 정확히 번역된다 — 그래서 '$R_n$이 뇌터 환'(힐베르트 기저 정리)이라는 사실이 그대로 '$\\mathbb{A}^n$이 뇌터 공간'이라는 사실이 된다(예제 1.37). 두 증명이 똑같은 모양인 이유는 이 대응이 논증 자체까지 그대로 옮기기 때문이다: 명제 1.39는 '분해가 안 되는 닫힌집합들 중 극소 원소'를 잡아 모순을 이끌고, 정리 1.43은(보조정리 1.42를 거쳐) '기약 이데알의 유한 교집합이 아닌 이데알들 중 극대 원소'를 잡아 모순을 이끈다 — 포함관계가 뒤집혀 있으니 '극소'와 '극대'도 뒤집혀 있을 뿐, 같은 논법이다. 그리고 두 분해는 예제 1.40이 보여주듯 서로 정확히 대응한다: 대수적집합 $X=V(I)$의 기약 성분 분해 $X=V(I_1)\\cup\\cdots\\cup V(I_r)$은 이데알 쪽에서 $I=I_1\\cap\\cdots\\cap I_r$(각 $I_i$는 소이데알로 골랐을 때)에 대응하며, 이는 정리 1.43이 주는 1차 분해의 특수한 경우(모든 성분이 이미 소이데알인 경우, 즉 근기 이데알에 대한 분해)다 — 근기가 아닌 일반 이데알에서는 1차 분해가 그보다 더 미세한(다중도까지 기록하는) 정보를 담는다."
+        }
+      ]
+    }
+  ]
+}

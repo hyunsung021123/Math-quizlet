@@ -1,0 +1,216 @@
+{
+  "chapter_info": {
+    "title": "1. Affine Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "다항식환의 이데알과 그 영점집합(affine algebraic set) 사이를 오가는 $V$-$I$ 사전을 세우고, 이 사전이 정확히 들어맞는 범위(Nullstellensatz)를 규명한다. 그뢰브너 기저라는 계산 도구로 소거(elimination)를 실질적으로 수행하는 법을 익히고, 힐베르트 기저 정리와 1차 분해(primary decomposition)를 통해 임의의 대수적집합이 유한 개의 기약 조각으로 쪼개짐을 확인한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.1 Affine varieties and Zariski topology",
+      "step1_big_picture": {
+        "context": "이 책은 '다항식 방정식들의 해집합'이라는 순수한 기하 대상을 대수(다항식환의 이데알)의 언어로 정확히 옮겨 적는 사전을 만드는 데서 출발한다. 이 소단원은 그 사전의 첫 항목 두 개 — 방정식으로부터 해집합을 잡아내는 연산 $V$와, 점들의 집합으로부터 그 위에서 항상 소멸하는 다항식들을 잡아내는 연산 $I$ — 를 정의한다. 이어서 $V$가 만드는 닫힌집합들이 실제로 위상(자리스키 위상, Zariski topology)을 이룸을 확인하고, '기약(irreducible)'이라는 개념으로 처음으로 '하나의 응집된 덩어리로 된 도형'인 대수다양체(affine variety)를 정의한다.",
+        "hidden_intuition": "$V$와 $I$는 서로 반대 방향을 보는 두 렌즈다: 다항식들의 모임 $F$를 주면 $V(F)$는 '그 방정식을 만족하는 점들의 모임'이고, 점들의 모임 $Y$를 주면 $I(Y)$는 '그 점들 위에서 항상 $0$인 다항식들의 모임'이다. 둘 다 포함관계를 뒤집는다는 것(Proposition 1.1의 (1)(2))이 핵심이다 — 방정식을 더 많이 요구할수록($F \\subseteq G$) 해는 더 줄어들고($V(G)\\subseteq V(F)$), 점을 더 많이 요구할수록 그 위에서 $0$이어야 하는 다항식은 더 줄어든다. 이 '반변(反變, contravariant)' 대응이 대수와 기하를 잇는 다리 전체의 기본 문법이다. 한편 $V(x^2)=V(x)$인데 $(x^2)\\neq(x)$라는 Example 1.3은 $I(V(\\,\\cdot\\,))$이 원래 이데알을 그대로 복원하지 못할 수 있음을 미리 경고한다 — 이 결함은 근기(radical) 이데알만 다루면 정확히 고쳐진다는 사실이 1.4절 강한 Nullstellensatz에서 밝혀진다. 자리스키 위상 자체는 아주 '엉성한(coarse)' 위상이다: 닫힌집합이 오직 다항식 방정식 유한 개의 해집합뿐이라 보통의 위상보다 열린집합이 훨씬 적다(예: $\\mathbb{A}^1$에서 진부분 닫힌집합은 유한집합뿐). 그래서 '기약'이라는 개념이 의미를 갖는다 — 두 개의 진부분 닫힌집합의 합집합으로는 못 쪼개지는 도형, 즉 그 자체로 하나의 대수적 대상이라는 뜻이며, 이것이 바로 대수다양체의 정의다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.2,
+                0
+              ],
+              "to": [
+                2.2,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -2.2
+              ],
+              "to": [
+                0,
+                2.2
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.0,
+                0.3
+              ],
+              "text": "V(x)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.35,
+                2.0
+              ],
+              "text": "V(y)"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            }
+          ],
+          "caption": "V(xy) = V(x) \\cup V(y)는 두 좌표축의 합집합이다 — 두 개의 진부분 닫힌집합으로 쪼개지므로 기약이 아니다(대수다양체가 아니다). 반면 A^n 자체나 포물선 V(y-x^2)처럼 '한 붓 그리기'로 매개변수화되는 도형은 기약이다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (영점집합 $V$, 소멸 이데알 $I$, 아핀 대수적집합)",
+          "formal_statement": "바탕체는 언제나 $\\mathbb{C}$이고 $R_n := \\mathbb{C}[x_1,\\dots,x_n]$이라 쓴다. $\\mathbb{A}^n := \\mathbb{C}^n$이라 하자. 부분집합 $F\\subseteq R_n$에 대해 그 아핀 영점집합은 $$V(F) := \\{\\, p\\in\\mathbb{A}^n \\mid f(p)=0 \\text{ for every } f\\in F \\,\\} \\subseteq \\mathbb{A}^n$$ 이다. $V(F)=V((F))$이며(여기서 $(F)$는 $F$가 생성하는 $R_n$의 이데알), $V(0)=\\mathbb{A}^n$, $V(1)=\\varnothing$이다. $X\\subseteq\\mathbb{A}^n$이 아핀 대수적집합(affine algebraic set)이라 함은 $X=V(F)$인 $F\\subseteq R_n$이 존재하는 것이다. 부분집합 $Y\\subseteq\\mathbb{A}^n$에 대해 그 소멸 이데알(vanishing ideal)은 $$I(Y) := \\{\\, f\\in R_n \\mid f(p)=0 \\text{ for every } p\\in Y \\,\\} \\subseteq R_n$$ 이며, 이는 실제로 이데알이고 $Y\\subseteq V(I(Y))$가 성립한다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.1 ($V,I$의 기본 성질 — 포함관계 역전과 합·교집합의 거동)",
+          "formal_statement": "$F,G\\subseteq R_n$, $Y,Z\\subseteq\\mathbb{A}^n$, $J_1,\\dots,J_k\\subseteq R_n$이 이데알, $\\{J_\\lambda\\}_{\\lambda\\in\\Lambda}$가 $R_n$의 이데알들의 모임이라 하자. 그러면 다음이 성립한다: (1) $F\\subseteq G$이면 $V(G)\\subseteq V(F)$. (2) $Y\\subseteq Z$이면 $I(Z)\\subseteq I(Y)$. (3) $\\bigcup_{i=1}^k V(J_i) = V\\!\\big(\\prod_{i=1}^k J_i\\big)$. (4) $\\bigcap_{\\lambda\\in\\Lambda} V(J_\\lambda) = V\\!\\big(\\sum_{\\lambda\\in\\Lambda} J_\\lambda\\big)$.",
+          "idea_behind_proof": "(1)(2)는 정의를 그대로 풀면 보인다. (3)(4)의 핵심은 '유한 곱의 영점 = 각 인자의 영점들의 합집합', '합의 영점 = 교집합'이라는 이데알 연산과 집합 연산 사이의 정확한 대응이다 — 곱은 '적어도 하나가 0'이라는 논리합(OR)을, 합은 '모두가 0'이라는 논리곱(AND)의 반대를 그대로 반영한다.",
+          "proof_steps": [
+            "(1),(2): $F\\subseteq G$이고 $p\\in V(G)$이면 모든 $g\\in G\\supseteq F$에서 $g(p)=0$이므로 $p\\in V(F)$. $Y\\subseteq Z$이고 $f\\in I(Z)$이면 $f$는 $Z\\supseteq Y$ 위에서 $0$이므로 $f\\in I(Y)$.",
+            "(3) ($\\subseteq$): $p\\in\\bigcup_{i=1}^k V(J_i)$이면 어떤 $1\\le i\\le k$에서 $p\\in V(J_i)$, 즉 모든 $f\\in J_i$에서 $f(p)=0$이다. 이때 $\\prod_{i=1}^k J_i$의 임의의 원소는 $J_1\\cdots J_k$의 생성원(각 $J_i$에서 하나씩 뽑은 곱)들의 $R_n$-선형결합이고, 그 생성원에는 $J_i$의 원소가 인자로 들어 있어 $p$에서 $0$이 된다. 따라서 $p\\in V(\\prod_{i=1}^k J_i)$.",
+            "(3) ($\\supseteq$, 대우): $p\\notin\\bigcup_{i=1}^k V(J_i)$이면 각 $1\\le i\\le k$마다 $f_i\\in J_i$가 있어 $f_i(p)\\ne 0$이다. 그러면 $f_1\\cdots f_k\\in\\prod_{i=1}^k J_i$이고 $(f_1\\cdots f_k)(p)=f_1(p)\\cdots f_k(p)\\ne 0$이므로 $p\\notin V(\\prod_{i=1}^k J_i)$.",
+            "(4) ($\\subseteq$): $p\\in\\bigcap_{\\lambda\\in\\Lambda} V(J_\\lambda)$이면 모든 $\\lambda$와 모든 $f\\in J_\\lambda$에서 $f(p)=0$, 즉 $f(p)=0$ for all $f\\in\\bigcup_\\lambda J_\\lambda$이므로 $p\\in V(\\bigcup_\\lambda J_\\lambda)=V(\\sum_\\lambda J_\\lambda)$ (합으로 생성되는 이데알의 영점은 합집합의 영점과 같다).",
+            "(4) ($\\supseteq$, 대우): $p\\notin\\bigcap_{\\lambda\\in\\Lambda} V(J_\\lambda)$이면 어떤 $\\lambda$에서 $p\\notin V(J_\\lambda)$, 즉 어떤 $f\\in J_\\lambda$에서 $f(p)\\ne 0$이다. 이 $f$는 $\\sum_\\lambda J_\\lambda$에도 속하므로 $p\\notin V(\\sum_\\lambda J_\\lambda)$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.2 (대수학의 기본정리 = $\\mathbb{A}^1$에서의 $V(I)\\ne\\varnothing$)",
+          "formal_statement": "$\\mathbb{C}[x]$는 주 이데알 정역(PID)이므로 $\\mathbb{C}[x]$의 모든 진 이데알은 어떤 상수가 아닌 $f\\in\\mathbb{C}[x]$에 대해 $(f)$ 꼴이다. 대수학의 기본정리는 정확히 '$\\mathbb{C}[x]$의 모든 진 이데알 $I$는 $\\mathbb{A}^1$에 공통 영점을 갖는다', 즉 $V(I)\\ne\\varnothing$인 것과 동치이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.3 ($V$는 되돌릴 수 없다 — $V(x^2)=V(x)$이지만 $(x^2)\\ne(x)$)",
+          "formal_statement": "$\\mathbb{A}^1$에서 $V(x^2)=V(x)=\\{0\\}$이지만 $(x^2)\\ne(x)$이다. 그리고 $I(V(x^2))=I(V(x))=(x)$이다. 이 예는 명제 1.1의 (1),(2)의 역이 성립하지 않음을 보여준다.",
+          "idea_behind_proof": "영점집합 $V$는 이데알의 '몇 제곱' 정보를 완전히 잊어버린다 — $x^2$이든 $x$든 해는 원점 하나로 똑같다. 즉 $V$는 근기(radical)를 씌운 정보만 본다는 사실의 가장 작은 예다.",
+          "proof_steps": [
+            "$x^2(p)=0 \\iff p=0 \\iff x(p)=0$이므로 두 방정식은 정확히 같은 해를 가져 $V(x^2)=V(x)=\\{0\\}$이다.",
+            "그러나 $(x^2)$의 원소는 모두 $x^2$의 배수라 $x\\notin(x^2)$이므로 $(x^2)\\subsetneq(x)$, 즉 두 이데알은 다르다.",
+            "$0$에서 소멸하는 다항식은 정확히 $x$의 배수들이므로 $I(\\{0\\})=(x)$이고, 이는 $I(V(x^2))=I(V(x))=(x)$를 보여준다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (자리스키 위상, 아핀 $n$-공간)",
+          "formal_statement": "$\\mathbb{A}^n$ 위의 자리스키 위상(Zariski topology)은 닫힌부분집합이 정확히 아핀 대수적집합들인 위상이다. $\\varnothing=V(1)$과 $\\mathbb{A}^n=V(0)$은 닫혀 있고, 닫힌집합의 유한 합집합과 임의의 교집합이 다시 닫혀 있음은 명제 1.1의 (3),(4)로 보장되므로 이것은 실제로 위상을 이룬다. 아핀 $n$-공간은 $\\mathbb{A}^n$에 자리스키 위상을 준 것이다. $X\\subseteq\\mathbb{A}^n$이 대수적집합이면 $X$는 유도된 자리스키 위상을 갖는다: 그 닫힌부분집합은 $X\\cap V(J)$ ($J\\subseteq R_n$은 이데알) 꼴의 집합들이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.4 (닫힘, 조밀성, 주 열린집합이 기저를 이룸)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$을 아핀 대수적집합, $Y\\subseteq\\mathbb{A}^n$을 부분집합이라 하자. 그러면: (1) $\\overline{Y}=V(I(Y))$. (2) $Y\\subseteq X$이면, $Y$가 $X$에서 조밀함 $\\iff$ $I(Y)=I(X)$. (3) $f\\in R_n$에 대해 $D_X(f):=\\{p\\in X\\mid f(p)\\ne 0\\}=X\\setminus V(f)$. (4) $f\\in R_n$에 대한 열린집합 $D_X(f)$들은 $X$의 자리스키 위상의 기저를 이룬다.",
+          "idea_behind_proof": "(1)은 $V(I(Y))$가 $Y$를 포함하는 가장 작은 닫힌집합임을 이데알의 극대성으로 보이는 것이고, (4)는 임의의 닫힌집합의 여집합(열린집합)을 '유한 개가 아니라 이데알 전체'로 정의된 것을 '이데알의 생성원 하나짜리 principal open의 합집합'으로 다시 쓸 수 있다는 관찰이다.",
+          "proof_steps": [
+            "(1): $Y\\subseteq V(I(Y))$는 정의상 자명. $Y\\subseteq V(J)$인 임의의 이데알 $J$에 대해 $J\\subseteq I(Y)$이므로 $V(I(Y))\\subseteq V(J)$. 즉 $V(I(Y))$는 $Y$를 포함하는 모든 닫힌집합에 포함되는, $Y$를 포함하는 가장 작은 닫힌집합이므로 $\\overline{Y}=V(I(Y))$.",
+            "(2): $Y\\subseteq X$라 하자. $\\overline{Y}=X$이면 $Y$ 위에서 소멸하는 다항식은 그 폐포 $\\overline{Y}=X$ 위에서도 소멸하므로 $I(Y)=I(\\overline{Y})=I(X)$. 역으로 $I(Y)=I(X)$이면 (1)에 의해 $\\overline{Y}=V(I(Y))=V(I(X))=\\overline{X}=X$ (마지막 등호는 $X$가 이미 닫혀 있으므로).",
+            "(3)은 정의를 그대로 옮긴 것이다.",
+            "(4): $X$의 임의의 열린부분집합은 어떤 이데알 $J\\subseteq R_n$에 대해 $X\\setminus V(J)$ 꼴이다. 이 열린집합의 점 $p$를 잡으면 어떤 $f\\in J$에서 $f(p)\\ne 0$이고, 그러면 $p\\in D_X(f)=X\\setminus V(f)\\subseteq X\\setminus V(J)$. 즉 $p$를 포함하는 더 작은 principal open $D_X(f)$가 원래 열린집합 안에 들어가므로, $D_X(f)$들이 기저를 이룬다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (주 열린집합, 기약, 아핀 대수다양체)",
+          "formal_statement": "열린집합 $D_X(f)$를 $X$의 주 열린집합(principal open subset)이라 부른다. 공집합이 아닌 위상공간 $X$가 기약(irreducible)이라 함은 $X=X_1\\cup X_2$ ($X_1,X_2$는 $X$의 진부분 닫힌집합)로 쓸 수 없는 것이다. 그렇지 않으면 가약(reducible)이라 한다. 아핀 대수다양체(affine variety)는 자리스키 위상을 갖춘 기약 아핀 대수적집합이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.5 ($X$가 기약 $\\iff$ $I(X)$가 소이데알)",
+          "formal_statement": "공집합이 아닌 아핀 대수적집합 $X$가 기약인 것과 $I(X)$가 소이데알(prime ideal)인 것은 동치이다.",
+          "idea_behind_proof": "'기약'(두 진부분으로 못 쪼갠다)과 '소이데알'($fg\\in I(X)\\Rightarrow f\\in I(X)$ 또는 $g\\in I(X)$)은 사실 같은 말을 두 언어로 쓴 것이다 — $X$를 $f,g$ 각각의 영점집합으로 쪼개는 시도가 곧 $fg\\in I(X)$를 이용하는 시도와 일치한다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $X$가 기약이고 $fg\\in I(X)$라 하자. $f,g$ 둘 다 $I(X)$에 속하지 않는다면 $X\\cap V(f)$와 $X\\cap V(g)$는 둘 다 $X$의 진부분 닫힌집합이다(각각 $f,g$가 $I(X)$ 밖에 있으므로 $X$ 전체는 아님). 그런데 $fg$가 $X$ 위에서 소멸하므로 $X$의 모든 점에서 $f=0$ 또는 $g=0$, 즉 그 합집합이 $X$ 전체 — $X$가 기약이라는 데 모순. 따라서 $f\\in I(X)$ 또는 $g\\in I(X)$이고, $I(X)$는 소이데알이다.",
+            "($\\Leftarrow$) $I(X)$가 소이데알이고 $X=X_1\\cup X_2$ ($X_1,X_2$는 $X$에서 닫혀 있음)라 하자. $X_i$가 진부분이면 $V(I(X_i))=X_i\\ne X=V(I(X))$이므로 $I(X)\\subsetneq I(X_i)$. $X_1,X_2$가 둘 다 $X$의 진부분이라면 $f\\in I(X_1)\\setminus I(X)$, $g\\in I(X_2)\\setminus I(X)$를 고를 수 있다. 그런데 $fg$는 $X=X_1\\cup X_2$ 전체에서 소멸하므로 $fg\\in I(X)$ — $I(X)$가 소이데알이라는 데 모순. 따라서 $X_1,X_2$ 중 하나는 $X$ 전체이고, $X$는 기약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.6 (0이 아닌 다항식은 어딘가에서 0이 아니다)",
+          "formal_statement": "$0$이 아닌 다항식 $F\\in\\mathbb{C}[x_1,\\dots,x_n]$에 대해, $F(p)\\ne 0$인 점 $p\\in\\mathbb{A}^n$이 존재한다.",
+          "idea_behind_proof": "$n=1$일 때는 다항식의 근이 유한 개라는 사실 그 자체이고, 일반적인 $n$은 $x_n$에 대한 최고차항의 계수(그 자체가 $n-1$변수 다항식)가 귀납가정에 의해 어딘가에서 0이 아니라는 점을 이용해 차원을 하나씩 줄이는 귀납법으로 처리한다.",
+          "proof_steps": [
+            "$n$에 대한 귀납법. $n=1$이면 $\\mathbb{C}[x]$의 $0$이 아닌 다항식은 근이 유한 개뿐이므로 근이 아닌 점이 반드시 존재한다.",
+            "$n>1$이라 하고 $F=F_0(x_1,\\dots,x_{n-1})+F_1(x_1,\\dots,x_{n-1})x_n+\\cdots+F_e(x_1,\\dots,x_{n-1})x_n^e$ ($F_e\\ne 0$)으로 쓴다.",
+            "귀납가정을 $F_e$($n-1$변수, $0$이 아님)에 적용해 $F_e(a')\\ne 0$인 $a'\\in\\mathbb{A}^{n-1}$을 고른다.",
+            "그러면 $F(a',x_n)$은 $x_n$에 대한 $0$이 아닌 일변수 다항식($x_n^e$의 계수가 $F_e(a')\\ne 0$)이므로, $n=1$인 경우에 의해 어떤 $x_n$값에서 $0$이 아니다. 그 점이 원하는 $p$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.7 ($\\mathbb{A}^n$은 기약이다)",
+          "formal_statement": "보조정리 1.6은 $I(\\mathbb{A}^n)=(0)$을 의미한다. $(0)$은 $R_n$의 소이데알이므로, 명제 1.5에 의해 $\\mathbb{A}^n$은 기약이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.8 (포물선은 대수다양체이다)",
+          "formal_statement": "포물선 $P:=V(y-x^2)\\subseteq\\mathbb{A}^2$을 생각하자. $P$는 다항식 사상 $\\varphi:\\mathbb{A}^1\\to\\mathbb{A}^2,\\ t\\mapsto(t,t^2)$의 상이다. $P$의 모든 점 $(a,b)$는 $(a,a^2)$과 같으므로 이 매개변수화 $\\varphi$는 전단사이다. $f\\in\\mathbb{C}[x,y]$에 대해 $\\varphi^{-1}(D_P(f))=D_{\\mathbb{A}^1}(f(t,t^2))$이므로 $\\varphi$는 연속이다. $\\mathbb{A}^1$이 기약이므로 $P$도 기약이며, 특히 $P$는 아핀 대수다양체이다.",
+          "idea_behind_proof": "핵심 아이디어는 '기약성은 연속인 전사 사상을 타고 전달된다'는 것이다. $\\mathbb{A}^1$이 기약임(예제 1.7)을 이미 알고, $\\varphi$가 연속인 전단사(따라서 전사)이면, $P$를 두 개의 진부분 닫힌집합으로 쪼개려는 시도는 $\\varphi^{-1}$을 통해 $\\mathbb{A}^1$을 쪼개려는 시도로 되돌아가 모순에 부딪힌다.",
+          "proof_steps": [
+            "$\\varphi$가 전단사임은 $P$의 모든 점이 $(a,a^2)$ 꼴이라는 사실에서 바로 나온다.",
+            "$\\varphi$의 연속성은 principal open의 원상이 다시 principal open이라는 계산 $\\varphi^{-1}(D_P(f))=D_{\\mathbb{A}^1}(f(t,t^2))$으로 확인된다(명제 1.4(4)에 의해 principal open들이 기저를 이루므로 이것으로 충분).",
+            "$P=P_1\\cup P_2$가 진부분 닫힌집합들의 합집합이라면, $\\varphi$가 연속이고 전사이므로 $\\mathbb{A}^1=\\varphi^{-1}(P_1)\\cup\\varphi^{-1}(P_2)$이고 각 $\\varphi^{-1}(P_i)$는 닫혀 있다. $\\varphi$가 전단사이므로 $\\varphi^{-1}(P_i)$ 역시 $\\mathbb{A}^1$의 진부분이어야 하는데, 이는 $\\mathbb{A}^1$이 기약이라는 예제 1.7에 모순된다. 따라서 $P$는 기약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.9 (두 좌표축의 합집합은 가약이다)",
+          "formal_statement": "$V(xy)=V(x)\\cup V(y)\\subseteq\\mathbb{A}^2$은 두 좌표축의 합집합이다. 두 축은 각각 $V(xy)$의 진부분 닫힌집합이므로 $V(xy)$는 가약인 아핀 대수적집합이며, 대수다양체가 아니다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.10 (기약성의 세 가지 동치 서술)",
+          "formal_statement": "공집합이 아닌 위상공간 $X$에 대해 다음은 동치이다: (1) $X$는 기약이다. (2) $X$의 모든 공집합이 아닌 열린부분집합은 조밀하다. (3) $X$의 임의의 두 공집합이 아닌 열린부분집합은 반드시 교차한다.",
+          "idea_behind_proof": "세 진술은 모두 '기약'이라는 하나의 사실을 여집합을 취해 바꿔 말한 것에 불과하다 — 닫힌집합의 언어를 열린집합의 언어로 옮기면 '쪼갤 수 없다'가 '조밀하다'로, '조밀하다'가 '항상 만난다'로 자연스럽게 번역된다.",
+          "proof_steps": [
+            "(1)$\\Rightarrow$(2): 공집합이 아닌 열린집합 $U\\subseteq X$가 조밀하지 않다면 $X\\setminus U$와 $\\overline{U}$가 둘 다 $X$의 진부분 닫힌집합이면서 $X$를 덮으므로 $X$가 가약이 되어 모순.",
+            "(2)$\\Rightarrow$(3): $U,W$가 $X$의 공집합이 아닌 열린집합이고 $U$가 $X$에서 조밀하다면, 조밀성의 정의(모든 공집합이 아닌 열린집합과 만남)에 의해 $U$는 $W$와 만난다.",
+            "(3)$\\Rightarrow$(1): $X=X_1\\cup X_2$이고 $X_1,X_2$가 진부분 닫힌집합이면, $X\\setminus X_1$과 $X\\setminus X_2$는 공집합이 아닌 서로소 열린집합이 되어 (3)에 모순. 따라서 그런 분할이 불가능하므로 $X$는 기약이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (일반점, 일반 대상, 매우 일반적인 대상)",
+          "formal_statement": "$X$를 기약 위상공간, $\\mathsf{P}$를 $X$의 점에 관한 성질이라 하자. $\\mathsf{P}$가 $X$의 일반점(general point)에서 성립한다 함은 $X_{\\mathsf{P}}:=\\{x\\in X\\mid x\\text{가 성질 }\\mathsf{P}\\text{를 가짐}\\}$이 $X$의 공집합이 아닌 열린부분집합을 포함하는 것이다(동치로, $\\mathsf{P}$가 실패하는 자리는 $X$의 진부분 닫힌집합에 담긴다). $X_{\\mathsf{P}}$ 자체가 열려 있을 필요는 없다. 명제 1.10에 의해 여기 등장하는 모든 공집합이 아닌 열린집합은 조밀하다. 더 나아가, 각각 일반점에서 성립하는 유한 개의 성질은 동시에 일반점에서 성립한다: 대응하는 공집합이 아닌 열린집합 $U_1,\\dots,U_s$에 대해 명제 1.10을 반복 적용하면 $U_1\\cap\\cdots\\cap U_s$가 다시 공집합이 아닌 열린집합이기 때문이다. 이 강의에서 '일반적인 대상(general object)'은 언제나 지정된 기약 매개변수공간에 대해 이런 열린집합의 의미를 갖는다 — 즉 그 기약 매개변수공간 안의 조밀한 열린부분집합에 속한다는 뜻이다. '매우 일반적인(very general) 대상'은 그 기약 매개변수공간 안의 가산 개의 조밀한 열린부분집합들의 교집합에 속한다는 뜻이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\mathbb{A}^1$에서 공집합이 아닌 임의의 두 자리스키 열린집합은 반드시 교차함을 보여라.",
+          "hint": "$\\mathbb{A}^1$의 진부분 닫힌집합이 어떤 모습인지(어떤 이데알의 영점집합인지) 먼저 생각하고, 명제 1.10의 (3)을 직접 확인해 보라.",
+          "solution": "$\\mathbb{A}^1=\\mathbb{C}$의 진부분 닫힌집합은 $\\mathbb{C}[x]$의 $0$이 아닌 이데알 $(f)$의 영점집합, 즉 $f$의 근들로 이루어진 유한집합뿐이다(전체 이데알 $(1)$은 $\\varnothing$을 주고 $(0)$은 전체를 준다). 그러므로 공집합이 아닌 열린집합 $U,W\\subseteq\\mathbb{A}^1$의 여집합 $\\mathbb{A}^1\\setminus U$, $\\mathbb{A}^1\\setminus W$는 둘 다 유한집합이다. 만약 $U\\cap W=\\varnothing$이라면 $\\mathbb{A}^1=(\\mathbb{A}^1\\setminus U)\\cup(\\mathbb{A}^1\\setminus W)$가 되어 $\\mathbb{A}^1=\\mathbb{C}$가 두 유한집합의 합집합, 즉 유한집합이 되는데 이는 모순이다. 따라서 $U\\cap W\\ne\\varnothing$이다. 일반적으로 이는 $\\mathbb{A}^1$이 기약(예제 1.7)이라는 사실을 명제 1.10을 통해 직접 눈으로 확인한 것과 같다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "뾰족한 삼차곡선 $C:=V(y^2-x^3)\\subseteq\\mathbb{A}^2$가 기약임을 보여라(즉 $C$가 대수다양체임을 보여라).",
+          "hint": "예제 1.8의 포물선과 완전히 같은 전략을 써 보라: $t\\mapsto(t^2,t^3)$이 $\\mathbb{A}^1$에서 $C$로 가는 전단사 연속사상임을 확인하라.",
+          "solution": "사상 $\\nu:\\mathbb{A}^1\\to C,\\ t\\mapsto(t^2,t^3)$을 생각하자. $C$의 임의의 점 $(a,b)$는 $b^2=a^3$을 만족하므로, $a=0$이면 $b=0=\\nu(0)$이고, $a\\ne 0$이면 $t:=b/a$가 $t^2=b^2/a^2=a^3/a^2=a$와 $t^3=b^3/a^3\\cdot a^0$... 더 직접적으로는 $t=b/a$로 두면 $t^2=a$(양변에 $a^2$을 곱해 $b^2=a\\cdot a^2=a^3$과 일치 확인)와 $t^3=b$가 성립함을 계산으로 확인할 수 있어 $(a,b)=\\nu(t)$이다. 즉 $\\nu$는 전사이며, 서로 다른 $t\\ne t'$이 같은 상을 주면 $t^2=t'^2,t^3=t'^3$에서 $t=t'$이 강제되므로($t\\ne 0$이면 $t=t^3/t^2=t'^3/t'^2=t'$) 전단사이다. $f\\in\\mathbb{C}[x,y]$에 대해 $\\nu^{-1}(D_C(f))=D_{\\mathbb{A}^1}(f(t^2,t^3))$이므로 $\\nu$는 연속이다. 예제 1.8과 정확히 같은 논증(전단사 연속사상은 기약성을 보존한다)으로, $\\mathbb{A}^1$이 기약이므로 $C$도 기약이다. (참고: $\\nu$는 전단사이지만 나중에 예제 2.9에서 이 사상 자체는 동형사상이 아님이 밝혀진다 — 원점에서 좌표환이 '뾰족해지는' 병리가 남아 있기 때문이다.)"
+        },
+        {
+          "type": "ox",
+          "question": "$V(F)=V(G)$이면 반드시 $F=G$(생성하는 이데알이 같음)이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.3에서 $V(x^2)=V(x)=\\{0\\}$이지만 $(x^2)\\ne(x)$이다. $V$는 이데알을 있는 그대로 복원하지 못하고, 몇 제곱 정보 등을 잊어버린다 — 이 결함은 근기 이데알만 놓고 보면 정확히 사라진다(1.4절 예고)."
+        },
+        {
+          "type": "ox",
+          "question": "기약인 아핀 대수적집합은 반드시 무한집합이어야 한다(단일 점은 기약일 수 없다).",
+          "answer": "X",
+          "explanation": "거짓이다. 단일 점 $\\{a\\}\\subseteq\\mathbb{A}^n$의 유일한 진부분 닫힌집합은 $\\varnothing$뿐이고 $\\varnothing\\cup\\varnothing=\\varnothing\\ne\\{a\\}$이므로, $\\{a\\}$는 (공허하게) 두 진부분 닫힌집합의 합집합으로 쓸 수 없다 — 즉 $\\{a\\}$는 기약이며 $0$차원 대수다양체이다. 실제로 $I(\\{a\\})=\\mathfrak{m}_a=(x_1-a_1,\\dots,x_n-a_n)$은 극대이데알이라 소이데알이므로 명제 1.5와도 일치한다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 1.3과 예제 1.9는 각각 어떤 방식으로 '$V$와 $I$가 서로 완전한 역함수가 아니다'라는 사실을 보여주는가? 그리고 그 두 가지 결함은 앞으로 어떤 개념으로 각각 정확히 해소되는가?",
+          "hint": "예제 1.3의 결함은 이데알의 '몇 제곱' 정보와 관련이 있고, 예제 1.9의 결함은 '하나의 덩어리인가 여러 조각인가'와 관련이 있다. 각각 어떤 종류의 이데알 조건과 대응되는지 생각해 보라.",
+          "answer": "예제 1.3($V(x^2)=V(x)$이지만 $(x^2)\\ne(x)$)은 $V$가 이데알의 거듭제곱 정보를 잊어버린다는 결함을 보여준다 — $I(V(I))$는 원래 이데알 $I$가 아니라 그보다 큰(또는 같은) 근기 $\\sqrt{I}$가 되어야 정확히 맞아떨어진다. 이 결함은 1.4절의 강한 Nullstellensatz($I(V(I))=\\sqrt{I}$)로 정확히 해소된다. 반면 예제 1.9($V(xy)=V(x)\\cup V(y)$가 가약)는 애초에 그 대수적집합 자체가 '하나의 응집된 대상'이 아니라 여러 조각의 합집합이라는 결함이며, 이는 이데알의 거듭제곱과 무관하게 그 이데알이 소이데알인지 아닌지(명제 1.5)의 문제다. 즉 하나는 '근기 이데알'로, 다른 하나는 '소이데알'로 해소되며, 두 조건을 합친 것이 정확히 '기약 근기 이데알' — 대수다양체에 대응하는 이데알의 조건이다."
+        }
+      ]
+    }
+  ]
+}

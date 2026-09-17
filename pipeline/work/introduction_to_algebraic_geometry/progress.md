@@ -8,11 +8,11 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 000 | [ ] | 1.1 Affine varieties and Zariski topology | section | `000__Introductionto__1_1_AffinevarietiesandZariskit.txt` |
-| 001 | [ ] | 1.2 Grobner bases | section | `001__Introductionto__1_2_Grobnerbases.txt` |
-| 002 | [ ] | 1.3 Elimination | section | `002__Introductionto__1_3_Elimination.txt` |
-| 003 | [ ] | 1.4 Nullstellensatz | section | `003__Introductionto__1_4_Nullstellensatz.txt` |
-| 004 | [ ] | 1.5 Primary Decomposition | section | `004__Introductionto__1_5_PrimaryDecomposition.txt` |
+| 000 | [x] | 1.1 Affine varieties and Zariski topology | section | `000__Introductionto__1_1_AffinevarietiesandZariskit.txt` |
+| 001 | [x] | 1.2 Grobner bases | section | `001__Introductionto__1_2_Grobnerbases.txt` |
+| 002 | [x] | 1.3 Elimination | section | `002__Introductionto__1_3_Elimination.txt` |
+| 003 | [x] | 1.4 Nullstellensatz | section | `003__Introductionto__1_4_Nullstellensatz.txt` |
+| 004 | [x] | 1.5 Primary Decomposition | section | `004__Introductionto__1_5_PrimaryDecomposition.txt` |
 
 ## 2. Functions on Affine Varieties
 

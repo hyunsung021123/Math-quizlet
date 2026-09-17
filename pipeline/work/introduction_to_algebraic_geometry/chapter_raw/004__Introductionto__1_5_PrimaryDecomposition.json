@@ -1,0 +1,266 @@
+{
+  "chapter_info": {
+    "title": "1. Affine Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "다항식환의 이데알과 그 영점집합(affine algebraic set) 사이를 오가는 $V$-$I$ 사전을 세우고, 이 사전이 정확히 들어맞는 범위(Nullstellensatz)를 규명한다. 그뢰브너 기저라는 계산 도구로 소거(elimination)를 실질적으로 수행하는 법을 익히고, 힐베르트 기저 정리와 1차 분해(primary decomposition)를 통해 임의의 대수적집합이 유한 개의 기약 조각으로 쪼개짐을 확인한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.5 Primary Decomposition",
+      "step1_big_picture": {
+        "context": "따름정리 1.35는 소이데알이 대수다양체(기약 대수적집합)에 대응한다는 사전을 완성했다. 그런데 일반적인(기약이 아닌) 대수적집합은 여러 기약 조각으로 쪼개질 텐데, 그 쪼개짐이 정말로 유한하고 유일한지는 아직 확인하지 않았다. 이 절은 힐베르트 기저 정리가 준 '유한 생성성'을 '뇌터(Noetherian)'라는 순수한 사슬 조건으로 일반화하고, 이 조건 하나로 (i) 모든 대수적집합이 유한 개의 대수다양체로 유일하게 분해됨(기하학적 사실)과 (ii) 모든 이데알이 유한 개의 1차 이데알(primary ideal)의 교집합으로 분해됨(대수적 사실, 이 절의 이름 그대로 Lasker–Noether 정리)을 동시에 얻는다. 이 두 분해는 서로의 대수/기하 번역이다.",
+        "hidden_intuition": "뇌터성(Noetherian)은 '오름 사슬이 항상 멈춘다'는 조건인데, 힐베르트 기저 정리 덕분에 $R_n$은 자동으로 뇌터 환이고, 이는 그대로 $\\mathbb{A}^n$이 뇌터 공간(닫힌집합의 내림 사슬이 항상 멈춤)이라는 사실로 번역된다(따름정리 1.35를 통해 이데알의 오름 사슬 $\\leftrightarrow$ 닫힌집합의 내림 사슬이 서로 뒤집혀 대응하므로). 명제 1.39의 기약 분해는 '더 이상 쪼갤 수 없는 최소 반례가 있다면 모순'이라는 뇌터성의 전형적인 논증 패턴(극소 원소를 잡아 모순을 이끔)으로 증명된다. 대수 쪽에서는 소이데알의 유한 교집합 대신 그보다 조금 더 일반적인 '1차 이데알(primary ideal)'의 교집합을 쓰는데, 그 이유는 기하학적으로 '숨은 다중도(multiplicity)'를 기록하기 위해서다 — 예제 1.44의 $(x^2,xy)=(x)\\cap(x^2,y)=(x)\\cap(x,y)^2$처럼, 영점집합은 $V(x)$($y$축) 하나뿐이지만 원점 근방에서 '$x^2$만큼 납작하게 접해 있다'는 다중도 정보가 이데알 자체에는 남아 있고, 이는 서로 다른 두 가지 1차 분해로 나타날 수 있다(1차 분해는 유일하지 않다!). 아르티니안 환(Artinian ring)은 이 절의 마지막에 등장하는 '내림 사슬도 멈추는' 훨씬 강한 유한성 조건인데, 명제 1.48은 놀랍게도 이것이 순수하게 '모든 소이데알이 극대이데알'이라는 국소적 조건과 동치임을 보여준다 — 차원이 $0$인 뇌터 국소환이 바로 아르티니안 환이라는, 나중에 '점 근방에서의 국소적 구조'를 다룰 때 계속 마주치게 될 사실이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.2,
+                0
+              ],
+              "to": [
+                2.2,
+                0
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0,
+                -2.2
+              ],
+              "to": [
+                0,
+                2.2
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.7,
+                -1.7
+              ],
+              "to": [
+                1.7,
+                1.7
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.0,
+                0.35
+              ],
+              "text": "V(x)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.35,
+                2.0
+              ],
+              "text": "V(y)"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.55,
+                1.9
+              ],
+              "text": "V(x-y)"
+            }
+          ],
+          "caption": "V(xy(x-y)) \\subseteq A^2은 원점을 지나는 세 직선의 합집합 — 명제 1.39에 의해 이 대수적집합은 기약인 성분 V(x), V(y), V(x-y) 세 개로 유일하게(순서를 빼고) 분해된다."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (뇌터 환, 뇌터 공간)",
+          "formal_statement": "환 $R$이 뇌터(Noetherian)라 함은 $R$의 모든 이데알의 오름 사슬이 결국 정지하는 것이다. 뇌터 환의 모든 몫환은 다시 뇌터이다. 위상공간이 뇌터라 함은 모든 닫힌부분집합의 내림 사슬이 결국 정지하는 것이다. 뇌터 공간의 모든 닫힌부분집합은 다시 뇌터이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.36 (뇌터성의 세 가지 동치 서술)",
+          "formal_statement": "환 $R$에 대해 다음은 동치이다: (1) $R$의 모든 이데알은 유한 생성이다. (2) $R$의 모든 이데알의 오름 사슬은 결국 정지한다. (3) $R$의 이데알들의 임의의 공집합이 아닌 모임은 극대 원소를 갖는다.",
+          "idea_behind_proof": "오름 사슬의 합집합이 다시 이데알이라는 사실이 (1)$\\Rightarrow$(2)의 핵심이고, (2)$\\Rightarrow$(3)은 극대 원소가 없다는 가정이 곧바로 무한히 계속되는 사슬을 만들어낸다는 대우 논법이며, (3)$\\Rightarrow$(1)은 '극대인 유한생성 부분이데알'을 잡아 그것이 사실 전체와 같음을 강제하는 방식이다.",
+          "proof_steps": [
+            "(1)$\\Rightarrow$(2): $I_1\\subseteq I_2\\subseteq\\cdots$가 $R$의 이데알들의 오름 사슬이라 하자. $I:=\\bigcup_{i=1}^\\infty I_i$는 이데알이고, (1)에 의해 $I$의 유한 생성원들은 어떤 $I_k$ 하나에 다 들어 있다. 그러면 $I_k=\\bigcup_{i=1}^\\infty I_i=I$이므로 $i\\ge k$에서 $I_i=I_k$이다.",
+            "(2)$\\Rightarrow$(3): 이데알들의 공집합이 아닌 모임이 극대 원소를 갖지 않는다면, 이는 정지하지 않는 오름 사슬을 만들어낸다.",
+            "(3)$\\Rightarrow$(1): $R$의 임의의 이데알 $I$에 대해, (3)을 이용해 $I$ 안에 포함된 유한생성 부분이데알들의 모임에서 극대인 것 $J$를 고른다. $f\\in I$라면 $J+(f)$도 유한생성이고 $I$에 포함되므로, $J$의 극대성에 의해 $f\\in J$가 강제된다. 따라서 $I=J$는 유한생성이다.",
+            "마지막 진술들은 힐베르트 기저 정리와 따름정리 1.35에서 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.37 ($R_n$과 $\\mathbb{A}^n$은 뇌터이다)",
+          "formal_statement": "힐베르트 기저 정리에 의해 $R_n$과 그 모든 몫환은 뇌터이다. 따름정리 1.35에 의해 $\\mathbb{A}^n$과 그 모든 닫힌부분집합은 뇌터 공간이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.38 (뇌터 공간의 열린부분집합은 준콤팩트하다)",
+          "formal_statement": "$X$가 뇌터 공간이면 $X$의 모든 열린부분집합은 준콤팩트(quasi-compact)이다(임의의 열린 덮개가 유한 부분덮개를 갖는다는 콤팩트성의 피복 성질을 그대로 가지되, 뇌터 공간이 일반적으로 하우스도르프가 아니므로 '콤팩트' 대신 '준콤팩트'라는 용어를 쓴다).",
+          "idea_behind_proof": "유한 합집합들의 모임에서 극대 원소를 잡는 방식으로, 극대 원소가 없다면 무한히 늘어나는 열린집합들의 사슬(즉 무한히 줄어드는 닫힌집합들의 사슬)이 생겨 뇌터성에 모순된다는 논법이다.",
+          "proof_steps": [
+            "$\\mathcal{U}:=\\{U_\\lambda\\}_{\\lambda\\in\\Lambda}$를 $X$의 열린 덮개라 하자. $\\mathcal{U}$의 원소들의 유한 합집합들의 모임을 생각하면, 이 모임은 극대 원소를 갖는다(그렇지 않으면 무한히 커지는 열린집합들의 오름 사슬, 즉 무한히 작아지는 닫힌집합들의 내림 사슬이 생겨 뇌터성에 모순).",
+            "이 극대 원소에 대응하는 $\\mathcal{U}$의 원소들이 $X$의 유한 부분덮개를 이룬다(그렇지 않다면 그 극대 합집합에 또 다른 $U_\\lambda$를 더해 더 큰 합집합을 만들 수 있어 극대성에 모순). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.39 (기약 분해의 존재와 유일성)",
+          "formal_statement": "공집합이 아닌 모든 뇌터 공간 $X$는 기약 닫힌부분집합들로의 분해 $X=X_1\\cup\\cdots\\cup X_r$을 허용한다. 포함되는 항을 지워 $i\\ne j$에서 $X_i\\not\\subseteq X_j$가 되도록(중복없음, irredundant) 만들 수 있고, 이 중복없는 분해는 순서를 제외하면 유일하다.",
+          "idea_behind_proof": "존재성은 '분해가 안 되는 최소 반례'를 극소 원소로 잡아, 그것이 가약이라면 두 진부분으로 쪼개고 각 부분은 (극소성 덕분에) 이미 분해가 되어 있어야 한다는 모순을 이끄는 뇌터성의 전형적 논증이다. 유일성은 한 분해의 각 조각이 다른 분해의 어떤 조각에 갇히고, 그 조각이 다시 원래 조각에 갇혀야 하므로 결국 같아진다는 '샌드위치' 논법이다.",
+          "proof_steps": [
+            "존재성: $X$의 어떤 공집합이 아닌 닫힌부분집합이 유한 개의 기약 닫힌부분집합의 합집합이 아니라고 가정하자. 뇌터 공간에서 닫힌부분집합들의 공집합이 아닌 모임은 항상 극소 원소를 가지므로, '유한 개의 기약 성분의 합집합이 아닌' 닫힌부분집합들의 모임에서 극소 원소 $Y$를 고른다.",
+            "$Y$는 가약이므로 $Y=Y_1\\cup Y_2$ ($Y_1,Y_2$는 진부분 닫힌집합)로 쓸 수 있다. $Y$의 극소성에 의해 $Y_1,Y_2$는 각각 유한 개의 기약 성분의 합집합이고, 따라서 $Y$도 그렇다 — 이는 $Y$의 선택에 모순이다.",
+            "유일성: $X=\\bigcup_{i=1}^r X_i=\\bigcup_{j=1}^s X_j'$가 $X$의 두 중복없는 분해라 하자. 각 $1\\le i\\le r$에서 $X_i\\subseteq X_j'$인 $j$가 있고, 다시 $X_j'\\subseteq X_k$인 $k$가 있다. 그러면 $X_i\\subseteq X_k$인데 중복없음에 의해 $i=k$가 강제되고, 따라서 $X_i=X_j'$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.40 (대수적집합의 기약 분해와 이데알의 인수분해)",
+          "formal_statement": "명제 1.36과 명제 1.39에 의해, 공집합이 아닌 모든 아핀 대수적집합 $X=V(I)$는 유한 개의 대수다양체 $X_1=V(I_1),\\dots,X_r=V(I_r)$의 합집합이다: $$V(I)=X=V(I_1)\\cup\\cdots\\cup V(I_r)=V(I_1\\cdots I_r)=V(I_1\\cap\\cdots\\cap I_r).$$"
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (1차 이데알, $\\mathfrak{p}$-primary)",
+          "formal_statement": "환 $R$의 진 이데알 $Q\\subsetneq R$이 1차(primary)라 함은 $$fg\\in Q \\text{ 그리고 } f\\notin Q \\implies g^N\\in Q \\text{ for some } N\\ge 1$$ 인 것이다. 1차 이데알 $Q\\subseteq R$이 $\\mathfrak{p}$-1차($\\mathfrak{p}$-primary)라 함은 $\\sqrt{Q}=\\mathfrak{p}$인 것이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.41 (1차 이데알의 근기는 소이데알이다)",
+          "formal_statement": "1차 이데알의 근기는 소이데알이다.",
+          "idea_behind_proof": "1차 이데알의 정의를 근기까지 늘리는 것뿐이다: $fg$의 어떤 거듭제곱이 $Q$에 들어가는데 $f$의 거듭제곱은 안 들어간다면, $g$ 자체의 거듭제곱이 $Q$에 들어가야 한다는 것을 정의를 직접 적용해 확인한다.",
+          "proof_steps": [
+            "$Q$를 환 $R$의 1차 이데알이라 하고 $fg\\in\\sqrt{Q}$이면서 $f\\notin\\sqrt{Q}$라 하자. 어떤 $r$에서 $(fg)^r\\in Q$이지만 $f$의 어떤 거듭제곱도 $Q$에 속하지 않는다.",
+            "$(fg)^r=f^rg^r\\in Q$이고 $f^r\\notin Q$이므로($f\\notin\\sqrt Q$이면 $f$의 모든 거듭제곱이 $Q$ 밖에 있음), $Q$가 1차이므로 $(g^r)^s=g^{rs}\\in Q$인 $s\\ge 1$이 존재한다. 따라서 $g\\in\\sqrt{Q}$. 이는 $\\sqrt{Q}$가 소이데알임을 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (이데알 몫, 기약 이데알)",
+          "formal_statement": "환 $R$과 이데알 $I,J\\subseteq R$에 대해 이데알 몫(ideal quotient)은 $$I:J:=\\{b\\in R\\mid bJ\\subseteq I\\}\\subseteq R$$ 이다. $J=(g^m)$이 원소 $g\\in R$, $m\\ge 1$에 대한 주 이데알이면 $I:g^m:=I:(g^m)=\\{b\\in R\\mid bg^m\\in I\\}$로 쓴다. $I:g^m\\subseteq I:g^{m+1}$이 성립한다. $R$의 진 이데알 $J\\subsetneq R$이 기약(irreducible)이라 함은 $J=J_1\\cap J_2$이면 $J=J_1$ 또는 $J=J_2$인 것이다."
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.42 (뇌터 환에서 기약 이데알은 1차이다)",
+          "formal_statement": "뇌터 환의 모든 기약 이데알은 1차이다.",
+          "idea_behind_proof": "이데알 몫들의 오름 사슬 $J:g\\subseteq J:g^2\\subseteq\\cdots$이 뇌터성에 의해 정지한다는 사실을 이용해 $J$를 $(J:g^m)\\cap(J+(g^m))$으로 정확히 인수분해하고, $J$의 기약성이 이 두 인수 중 하나가 $J$ 전체와 같음을 강제한다는 점을 이용한다.",
+          "proof_steps": [
+            "$J$를 뇌터 환 $R$의 기약 이데알이라 하자. $fg\\in J$이고 $f\\notin J$라 가정한다. $R$이 뇌터이므로 오름 사슬 $J:g\\subseteq J:g^2\\subseteq\\cdots$은 정지한다: 모든 $r\\ge 0$에서 $J:g^m=J:g^{m+r}$인 $m\\ge 0$을 고를 수 있다.",
+            "$J=(J:g^m)\\cap(J+(g^m))$임을 보인다. ($\\subseteq$)는 명백하다. 역으로 $a+bg^m\\in(J:g^m)\\cap(J+(g^m))$ ($a\\in J,\\ b\\in R$)를 고르면, $(a+bg^m)g^m\\in J$에서 $bg^{2m}\\in J$를 얻는다. 따라서 $b\\in J:g^{2m}=J:g^m$이므로 $bg^m\\in J$이고, 결국 $a+bg^m\\in J$이다.",
+            "이제 $f\\in J:g^m$이지만 $f\\notin J$임을 관찰한다($fg\\in J$에서 $fg^m\\in J$가 따라 나옴). $J$가 기약이므로 앞의 인수분해가 주는 대안은 $J+(g^m)=J$뿐이다. 따라서 $g^m\\in J$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 1.43 (Lasker–Noether 정리)",
+          "formal_statement": "뇌터 환의 모든 진 이데알은 유한 개의 1차 이데알의 교집합이다.",
+          "idea_behind_proof": "보조정리 1.42 덕분에 '기약 이데알의 유한 교집합'만 보이면 충분하고, 이는 명제 1.39의 기약 닫힌집합 분해와 완전히 평행한 뇌터성 논증(반례들 중 극대 원소를 잡아 모순)으로 처리된다.",
+          "proof_steps": [
+            "보조정리 1.42에 의해, 뇌터 환 $R$의 모든 진 이데알이 유한 개의 기약 이데알의 교집합임을 보이면 충분하다.",
+            "그렇지 않다면, 명제 1.36에 의해 '기약 이데알들의 유한 교집합이 아닌' 이데알들의 모임에서 극대 원소 $J$를 고른다. $J$는 기약이 아니므로 $J=J_1\\cap J_2$ ($J\\subsetneq J_1,J_2$)로 쓸 수 있다. $J$의 극대성에 의해 $J_1,J_2$는 유한 개의 기약 이데알의 교집합이고, 따라서 $J$도 그렇다 — 모순. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.44 (1차 분해는 유일하지 않다)",
+          "formal_statement": "$\\mathbb{C}[x,y]$에서 $$(x^2,xy)=(x)\\cap(x^2,y)=(x)\\cap(x,y)^2$$ 이다. 여기서 $(x)\\subseteq\\mathbb{C}[x,y]$는 소이데알이고, $(x^2,y),(x,y)^2\\subseteq\\mathbb{C}[x,y]$는 각각 $(x,y)$-1차 이데알이다."
+        },
+        {
+          "type": "Lemma",
+          "name": "보조정리 1.45 (극소 소이데알의 존재)",
+          "formal_statement": "$R$을 환, $I\\subseteq R$이라 하자. 그러면 $I$를 포함하는 극소 소이데알 $\\mathfrak{q}\\subseteq R$이 존재한다.",
+          "idea_behind_proof": "체르멜로의 초른 보조정리(Zorn's Lemma)를 '포함관계를 뒤집은' 순서에 적용하는 표준적인 논법이다 — 전순서 부분집합의 교집합이 다시 그 모임에 속함을 확인하기만 하면 된다.",
+          "proof_steps": [
+            "$S:=\\{\\mathfrak{p}\\mid \\mathfrak{p}\\subseteq R\\text{는 } I\\text{를 포함하는 소이데알}\\}$이라 하자. $I$를 포함하는 극대이데알이 존재하므로 $S\\ne\\varnothing$이다.",
+            "$\\mathfrak{p},\\mathfrak{p}'\\in S$에 대해 $\\mathfrak{p}\\le\\mathfrak{p}'$을 $\\mathfrak{p}\\supseteq\\mathfrak{p}'$로 정의한다. $\\Lambda\\subseteq S$가 전순서 부분집합이면 $\\bigcap_{\\mathfrak{p}\\in\\Lambda}\\mathfrak{p}\\in S$가 $\\Lambda$의 상계이다(전순서 부분집합의 교집합이 소이데알임은 표준적인 확인이다).",
+            "초른 보조정리에 의해 $S$는 극대 원소 $\\mathfrak{p}$를 갖고, 이는 $I$를 포함하는 소이데알들 중 (역순으로 정의된 극대이므로 원래 포함관계로는) 극소이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 1.46 (근기 이데알은 극소 소이데알들의 유한 교집합)",
+          "formal_statement": "$R$을 뇌터 환, $I\\subseteq R$을 근기 이데알이라 하자. 그러면 $I$를 포함하는 극소 소이데알은 유한 개뿐이고, $I$는 그 극소 소이데알들의 유한 교집합이다.",
+          "idea_behind_proof": "Lasker–Noether 분해에서 각 1차 성분의 근기를 취하면 소이데알들의 교집합을 얻고, 극소성을 가진 소이데알은 반드시 그 1차 분해의 어느 성분의 근기로 나타나야 한다는 점이 유한성과 존재성을 동시에 준다.",
+          "proof_steps": [
+            "Lasker–Noether 정리에 의해 $I=\\bigcap_{i=1}^k Q_i$ ($Q_i\\subseteq R$는 1차 이데알)로 쓸 수 있다. $I=\\sqrt{I}=\\bigcap_{i=1}^k\\sqrt{Q_i}$인데, 명제 1.41에 의해 각 $\\sqrt{Q_i}$는 소이데알이다.",
+            "$\\mathfrak{p}\\subseteq R$을 $I$를 포함하는 극소 소이데알이라 하자. $\\bigcap_{i=1}^k Q_i\\subseteq\\mathfrak{p}$이므로 어떤 $1\\le i\\le k$에서 $Q_i\\subseteq\\mathfrak{p}$이고, 극소성에 의해 $Q_i=\\mathfrak{p}$이다. 즉 $I$를 포함하는 모든 극소 소이데알은 $I$의 어떤 1차 분해에 반드시 등장한다 — 이는 극소 소이데알의 유한성을 증명한다.",
+            "1차 분해에서 극소가 아닌 소이데알들을 제거하면, $I$를 포함하는 극소 소이데알들의 교집합으로서의 유일한 중복없는 분해를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.47 ($\\mathfrak{p}$-1차 이데알들의 유한 교집합은 다시 $\\mathfrak{p}$-1차이다)",
+          "formal_statement": "뇌터 환의 $\\mathfrak{p}$-1차 이데알들의 유한 교집합은 (같은 소이데알 $\\mathfrak{p}$에 대해) 다시 $\\mathfrak{p}$-1차이다.",
+          "idea_behind_proof": "교집합의 근기가 각 성분의 근기의 교집합, 즉 전부 $\\mathfrak{p}$ 하나이므로 $\\sqrt{Q}=\\mathfrak{p}$는 거저 나온다. 1차성 자체는 '$b\\notin\\mathfrak{p}$이면 $a$가 곧바로 모든 성분에 들어감'과 '$b\\in\\mathfrak{p}$이면 어차피 정의가 요구하는 것이 $b$의 거듭제곱이 $Q$에 들어가는 것'이라는 두 경우를 나누어 확인한다.",
+          "proof_steps": [
+            "$Q=\\bigcap_{i=1}^k Q_i$ ($Q_i$는 $\\mathfrak{p}$-1차)라 하자. $\\sqrt{Q}=\\bigcap_i\\sqrt{Q_i}=\\mathfrak{p}$이다.",
+            "$ab\\in Q$이고 $b\\notin\\mathfrak{p}$라 하자. 각 $i$에서 $Q_i$가 $\\mathfrak{p}$-1차이고 $b\\notin\\mathfrak{p}=\\sqrt{Q_i}$이므로 $b$의 어떤 거듭제곱도 $Q_i$에 없고, 1차성의 정의에 의해 $a\\in Q_i$가 강제된다. 모든 $i$에서 성립하므로 $a\\in Q=\\bigcap_i Q_i$.",
+            "$ab\\in Q$이고 $a\\notin Q$라 하자. $b\\notin\\mathfrak{p}$이면 방금 단계에 의해 $a\\in Q$가 되어 모순이다. 따라서 $b\\in\\mathfrak{p}=\\sqrt{Q}$, 즉 $b$의 어떤 거듭제곱이 $Q$에 속한다. 이는 $Q$가 1차임을 보이고, 앞서 확인한 $\\sqrt{Q}=\\mathfrak{p}$와 합쳐 $Q$가 $\\mathfrak{p}$-1차임을 완성한다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (아르티니안 환, 국소환)",
+          "formal_statement": "환이 아르티니안(Artinian)이라 함은 모든 이데알의 내림 사슬이 결국 정지하는 것이다. 아르티니안 환의 모든 몫환은 다시 아르티니안이다. 국소환(local ring)은 유일한 극대이데알을 갖는 환이다. 이는 모든 원소 $a$에 대해 $a$ 또는 $1-a$가 단위원인 것과 동치이다. 국소환에서 모든 비단위원들은 유일한 극대이데알을 이룬다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.48 (뇌터 국소환이 아르티니안 $\\iff$ 모든 소이데알이 극대)",
+          "formal_statement": "$(B,\\mathfrak{m})$을 $0$이 아닌 뇌터 국소환이라 하자. $B$가 아르티니안인 것과 $B$의 모든 소이데알이 극대인 것은 동치이다.",
+          "idea_behind_proof": "($\\Rightarrow$)는 정역이면서 아르티니안이면 자동으로 체가 된다는 관찰(내림 사슬이 어차피 $0$에서 멈추니 역원을 강제로 얻는다)을 몫환 $B/\\mathfrak{p}$에 적용한다. ($\\Leftarrow$)는 훨씬 길다: 1차 분해로 $\\mathfrak{m}^N=(0)$이 됨을 먼저 확보한 뒤(모든 소이데알이 극대이므로 모든 1차 성분의 근기가 같은 $\\mathfrak{m}$이라는 점을 이용), $\\mathfrak{m}^j/\\mathfrak{m}^{j+1}$들이 유한차원 벡터공간이라는 사실로 임의의 내림 사슬을 '유한 개의 유한차원 벡터공간에서의 내림 사슬들'로 잘게 쪼개 각각의 정지를 유한 번만 확인하면 되도록 만든다.",
+          "proof_steps": [
+            "($\\Rightarrow$) $\\mathfrak{p}\\subseteq B$가 소이데알이면 $B/\\mathfrak{p}$는 아르티니안 정역이다. $0$이 아닌 $a\\in B/\\mathfrak{p}$에 대해 내림 사슬 $(a)\\supseteq(a^2)\\supseteq\\cdots$는 정지한다: 어떤 $m\\ge 1$에서 $(a^m)=(a^{m+1})$. 그러면 $a^m=a^{m+1}b$인 $b$가 있어 $a^m(1-ab)=0$이고, 정역이므로 $ab=1$이다. 즉 $B/\\mathfrak{p}$는 체이므로 $\\mathfrak{p}$는 극대이데알이다.",
+            "($\\Leftarrow$) $(0)=Q_1\\cap\\cdots\\cap Q_r$을 $1$차 분해라 하자. 명제 1.41에 의해 각 $\\sqrt{Q_i}$는 소이데알이고, 가정에 의해 $\\sqrt{Q_i}=\\mathfrak{m}$이다. $\\mathfrak{m}=(u_1,\\dots,u_s)$로 쓰고, 각 $i,j$에서 $u_j^{e_{ij}}\\in Q_i$인 $e_{ij}\\ge 1$을 고른다.",
+            "$N_i:=1+\\sum_{j=1}^s(e_{ij}-1)$이라 하면 이항전개(다중 지수 버전)에 의해 $\\mathfrak{m}^{N_i}\\subseteq Q_i$임을 확인할 수 있다. $N:=\\max\\{N_1,\\dots,N_r\\}$이라 하면 $\\mathfrak{m}^N\\subseteq\\bigcap_i Q_i=(0)$, 즉 $\\mathfrak{m}^N=(0)$이다.",
+            "각 $\\mathfrak{m}^j/\\mathfrak{m}^{j+1}$은 체 $B/\\mathfrak{m}$ 위의 유한차원 벡터공간이다. $B$의 이데알들의 내림 사슬 $J_1\\supseteq J_2\\supseteq\\cdots$가 주어지면, 각 $0\\le j\\le N-1$에서 $\\big((J_t\\cap\\mathfrak{m}^j)+\\mathfrak{m}^{j+1}\\big)/\\mathfrak{m}^{j+1}$은 $\\mathfrak{m}^j/\\mathfrak{m}^{j+1}$의 부분공간들의 내림 사슬을 이루고, 유한차원이므로 정지한다.",
+            "유한 개($N$개)의 $j$ 각각에 대해 정지하는 지점이 있으므로, 모든 $j$에서 동시에 작동하는 지점 $T$를 하나 고를 수 있다. $\\mathfrak{m}^N=(0)$이므로 $J_T\\cap\\mathfrak{m}^{N-1}=J_t\\cap\\mathfrak{m}^{N-1}$ ($t\\ge T$)에서 시작해, $j$에 대한 내림 귀납법으로 $J_T\\cap\\mathfrak{m}^j=J_t\\cap\\mathfrak{m}^j$ ($t\\ge T$)를 차례로 얻는다: $a\\in J_T\\cap\\mathfrak{m}^j$이면 $a-a'\\in\\mathfrak{m}^{j+1}$인 $a'\\in J_t\\cap\\mathfrak{m}^j$가 있고, 귀납가정에 의해 $a-a'\\in J_T\\cap\\mathfrak{m}^{j+1}=J_t\\cap\\mathfrak{m}^{j+1}$이므로 $a\\in J_t\\cap\\mathfrak{m}^j$.",
+            "$j=0$까지 내려오면 $J_T=J_t$ ($t\\ge T$)를 얻어, 임의의 내림 사슬이 정지함이 증명된다. 즉 $B$는 아르티니안이다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "명제 1.39를 이용해, $X:=V(xy(x-y))\\subseteq\\mathbb{A}^2$의 기약 분해를 구하라(대수다양체 성분들을 구체적으로 밝혀라).",
+          "hint": "명제 1.1(3)($\\bigcup V(J_i)=V(\\prod J_i)$)을 거꾸로 읽어, $xy(x-y)$가 세 개의 기약인수의 곱임을 이용하라.",
+          "solution": "$xy(x-y)=x\\cdot y\\cdot(x-y)$는 서로 다른 세 개의 (동반원소를 제외하면 서로소인) 기약 인수의 곱이므로, $X=V(x)\\cup V(y)\\cup V(x-y)$이다. $V(x),V(y),V(x-y)$는 각각 원점을 지나는 직선(1차원 아핀 공간과 동형이므로 기약, 예제 1.7·1.8과 같은 논증)이고, 서로 다른 직선이라 어느 것도 다른 것에 포함되지 않으므로 이것이 명제 1.39가 말하는 중복없는 기약 분해이며, 순서를 빼면 유일하다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 1.44의 $(x^2,xy)=(x)\\cap(x^2,y)$에서, $(x)$와 $(x^2,y)$가 각각 어떤 소이데알에 대해 1차인지 밝히고, 두 이데알의 영점집합을 구해 왜 이 분해가 '기하학적으로는' 정보를 하나만 주는 것처럼 보이는지 설명하라.",
+          "hint": "$V(x)$와 $V(x^2,y)$를 각각 계산해 보라 — 둘 다 집합으로는 같은 것을 줄 것이다.",
+          "solution": "$(x)$는 그 자체로 소이데알이므로 $(x)$-1차이고, $V(x)$는 $y$축이다. $(x^2,y)$는 $\\sqrt{(x^2,y)}=(x,y)$인 $(x,y)$-1차 이데알이며, $V(x^2,y)=\\{(0,0)\\}$처럼 보이지만 실제로 $x^2=0,y=0$을 동시에 만족하는 점은 $(0,0)$뿐이다. 그런데 교집합 $V(x)\\cap V(x^2,y)$을 생각하는 게 아니라 애초에 $(x)\\cap(x^2,y)=(x^2,xy)$이므로 $V((x)\\cap(x^2,y))=V(x)\\cup V(x^2,y)=V(x)\\cup\\{(0,0)\\}=V(x)$($\\{(0,0)\\}\\subseteq V(x)$이므로)이다. 즉 집합으로서는 $V((x^2,xy))=V(x)$ 하나뿐이라 기하학적 정보(영점집합)만 보면 $(x^2,y)$가 주는 정보는 '이미 $V(x)$ 안에 있는 여분의 성분'처럼 보인다. 하지만 이데알 수준에서는 $(x^2,y)$가 원점에서 $y$축에 얼마나 '납작하게' 접해 있는지(다중도)를 기록하고 있어, 순수한 집합론적 정보($V(\\cdot)$)보다 이데알이 더 많은 것을 담고 있음을 보여준다."
+        },
+        {
+          "type": "ox",
+          "question": "모든 진 이데알의 1차 분해(primary decomposition)는 유일하다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.44가 정확히 $(x^2,xy)=(x)\\cap(x^2,y)=(x)\\cap(x,y)^2$라는 두 가지 서로 다른 1차 분해를 보여준다. (다만 따름정리 1.46이 보장하듯, 극소 소이데알들만 남긴 '중복없는' 부분은 유일하다 — 여기서는 두 분해 모두 소성분 $(x)$는 공유하고 있다.)"
+        },
+        {
+          "type": "ox",
+          "question": "1차 이데알(primary ideal)은 항상 소이데알이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 예제 1.44의 $(x^2,y)$는 $(x,y)$-1차 이데알이지만 소이데알은 아니다(예: $x\\cdot x=x^2\\in(x^2,y)$인데 $x\\notin(x^2,y)$이므로 소이데알의 정의를 만족하지 않는다 — 다만 1차 이데알의 정의는 $x\\cdot x\\in Q,\\ x\\notin Q\\Rightarrow x^N\\in Q$만 요구하고, 실제로 $x^2\\in Q$이므로 이는 만족된다). 명제 1.41이 보장하는 것은 '1차 이데알의 근기'가 소이데알이라는 것이지, 1차 이데알 자체가 소이데알이라는 것이 아니다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.39(기약 분해)와 정리 1.43(Lasker–Noether, 1차 분해)은 각각 '기하'와 '대수' 언어로 같은 유한성 현상을 서술한다. 두 정리의 증명 전략이 왜 똑같은 모양(뇌터 조건에서 극단 원소를 잡아 모순을 이끄는 방식)을 하고 있는지, 그리고 두 분해가 정확히 어떻게 대응하는지 설명하라.",
+          "hint": "뇌터 환의 오름 사슬 조건과 뇌터 공간의 내림 사슬 조건이 따름정리 1.35의 $V$-$I$ 대응 아래서 정확히 서로 뒤집힌 것임을 상기하라.",
+          "answer": "따름정리 1.35의 $V$-$I$ 사전은 포함관계를 뒤집으므로, $R_n$의 이데알들의 오름 사슬은 $\\mathbb{A}^n$의 닫힌집합들의 내림 사슬로 정확히 번역된다 — 그래서 '$R_n$이 뇌터 환'(힐베르트 기저 정리)이라는 사실이 그대로 '$\\mathbb{A}^n$이 뇌터 공간'이라는 사실이 된다(예제 1.37). 두 증명이 똑같은 모양인 이유는 이 대응이 논증 자체까지 그대로 옮기기 때문이다: 명제 1.39는 '분해가 안 되는 닫힌집합들 중 극소 원소'를 잡아 모순을 이끌고, 정리 1.43은(보조정리 1.42를 거쳐) '기약 이데알의 유한 교집합이 아닌 이데알들 중 극대 원소'를 잡아 모순을 이끈다 — 포함관계가 뒤집혀 있으니 '극소'와 '극대'도 뒤집혀 있을 뿐, 같은 논법이다. 그리고 두 분해는 예제 1.40이 보여주듯 서로 정확히 대응한다: 대수적집합 $X=V(I)$의 기약 성분 분해 $X=V(I_1)\\cup\\cdots\\cup V(I_r)$은 이데알 쪽에서 $I=I_1\\cap\\cdots\\cap I_r$(각 $I_i$는 소이데알로 골랐을 때)에 대응하며, 이는 정리 1.43이 주는 1차 분해의 특수한 경우(모든 성분이 이미 소이데알인 경우, 즉 근기 이데알에 대한 분해)다 — 근기가 아닌 일반 이데알에서는 1차 분해가 그보다 더 미세한(다중도까지 기록하는) 정보를 담는다."
+        }
+      ]
+    }
+  ]
+}

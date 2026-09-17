@@ -1,0 +1,208 @@
+{
+  "chapter_info": {
+    "title": "1. Affine Varieties",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "다항식환의 이데알과 그 영점집합(affine algebraic set) 사이를 오가는 $V$-$I$ 사전을 세우고, 이 사전이 정확히 들어맞는 범위(Nullstellensatz)를 규명한다. 그뢰브너 기저라는 계산 도구로 소거(elimination)를 실질적으로 수행하는 법을 익히고, 힐베르트 기저 정리와 1차 분해(primary decomposition)를 통해 임의의 대수적집합이 유한 개의 기약 조각으로 쪼개짐을 확인한다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "1.3 Elimination",
+      "step1_big_picture": {
+        "context": "1.2절은 그뢰브너 기저라는 순수 대수적 계산 도구를 만들었다. 이 절은 그 도구를 기하학적 질문에 처음으로 실전 배치한다: '다항식 사상의 상(image)은 어떤 집합인가?', '몇 개의 변수를 지우고 남은 변수들만의 방정식을 어떻게 구하는가?' 같은 질문이 전부 '변수 소거(elimination)'라는 하나의 대수 연산으로 환원되고, 그 소거를 그뢰브너 기저로 실질적으로 계산할 수 있음을 보인다.",
+        "hidden_intuition": "소거 정리(정리 1.26)의 놀라운 점은 계산이 '거저' 나온다는 것이다: 변수들을 $x_1\\succ\\cdots\\succ x_n$처럼 순서를 매겨(지우고 싶은 변수를 가장 크게 두고) 그뢰브너 기저 $G$를 한 번 계산해 두면, $G$의 원소들 중 처음 몇 변수를 아예 포함하지 않는 것들만 골라내면 그것이 곧 '그 변수들을 소거한 이데알'의 그뢰브너 기저가 된다 — 별도의 소거 알고리즘이 필요 없다. 다항식 사상 $g:X\\to\\mathbb{A}^m,\\ x\\mapsto(g_1(x),\\dots,g_m(x))$의 상을 구하는 문제(명제 1.27)는 이 소거를 쓰는 표준적인 트릭으로 환원된다: 새 변수 $y_i$를 도입해 '그래프' $y_i=g_i(x)$를 이데알 $J$로 표현하고, $x$변수들을 전부 소거하면 남는 $y$변수들만의 이데알이 정확히 상의 자리스키 폐포를 정의하는 이데알 $I(\\overline{g(X)})$가 된다. 하지만 예제 1.29(쌍곡선에서 $x$좌표로의 사영)가 보여주듯, 이 소거로 얻는 것은 '상의 폐포'이지 '상 자체'가 아닐 수 있다 — $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$인데 소거는 $\\overline{g(X)}=\\mathbb{A}^1$을 준다. 명제 1.30은 이 간극을 언제 없앨 수 있는지 알려준다: 만약 이데알 $I$ 안에 소거할 변수 $x_1$에 대해 모닉인 다항식이 하나라도 있다면(즉 '$x_1$에 대해 유한 차수의 방정식으로 갇혀 있다'는 일종의 유계성·고유성 조건), 사영의 상은 정확히 소거된 이데알의 영점집합과 같아져 폐포를 취할 필요가 없다. 이 조건('모닉인 원소의 존재')은 사실 5장에서 다시 만나는 '정수적 확장(integral extension)'이라는 대수적 조건의 기하학적 그림자다 — 그때는 '사영이 항상 닫힌 사상(closed map)'이라는 훨씬 강력한 사실(Going-Up 정리)로 다시 등장한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -2.2,
+                  -0.9
+                ],
+                [
+                  -1.2,
+                  -1.6
+                ],
+                [
+                  -0.5,
+                  -2.0
+                ],
+                [
+                  0.5,
+                  2.0
+                ],
+                [
+                  1.2,
+                  1.6
+                ],
+                [
+                  2.2,
+                  0.9
+                ]
+              ]
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -0.9,
+                  -2.2
+                ],
+                [
+                  -1.6,
+                  -1.2
+                ],
+                [
+                  -2.0,
+                  -0.5
+                ],
+                [
+                  2.0,
+                  0.5
+                ],
+                [
+                  1.6,
+                  1.2
+                ],
+                [
+                  0.9,
+                  2.2
+                ]
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.4,
+                -2.4
+              ],
+              "to": [
+                2.4,
+                2.4
+              ],
+              "dash": "3,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                -2.4
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.15,
+                -2.35
+              ],
+              "text": "0"
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.35,
+                1.9
+              ],
+              "text": "V(xy-1)"
+            }
+          ],
+          "caption": "쌍곡선 H=V(xy-1)을 x좌표로 사영하면 상은 A^1\\setminus\\{0\\}이지만(원점을 절대 못 지나감), 이데알 소거로 얻는 폐포는 전체 A^1 = V(0)이다 — 소거는 '폐포'를 주지 '상 자체'를 주지 않을 수 있다(예제 1.29)."
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Theorem",
+          "name": "정리 1.26 (소거 정리)",
+          "formal_statement": "$R_n$에서 사전식 순서 $x_1\\succ x_2\\succ\\cdots\\succ x_n$을 쓰자. $I\\subseteq R_n$을 이데알이라 하고, $1\\le j\\le n-1$마다 $$I_j:=I\\cap\\mathbb{C}[x_{j+1},\\dots,x_n]$$ 이라 하자. $G$가 $I$의 그뢰브너 기저이면, 모든 $1\\le j\\le n-1$에서 $$G_j:=G\\cap\\mathbb{C}[x_{j+1},\\dots,x_n]$$ 은 $I_j$의 그뢰브너 기저이다.",
+          "idea_behind_proof": "핵심 관찰은 사전식 순서에서 '$x_1,\\dots,x_j$를 전혀 포함하지 않는다'는 조건이 다항식 자체에서도 그 선행단항식에서도 똑같이 판별된다는 것이다. 그러면 $I_j$의 원소의 선행항을 나누는 그뢰브너 기저 원소는 자동으로 그 변수들을 포함하지 않을 수밖에 없어 $G_j$에 속하게 된다.",
+          "proof_steps": [
+            "$f\\in R_n$에 대해 $f\\in\\mathbb{C}[x_{j+1},\\dots,x_n]$인 것과 $\\mathrm{LM}_\\prec(f)\\in\\mathbb{C}[x_{j+1},\\dots,x_n]$인 것은 동치이다(사전식 순서가 $x_1,\\dots,x_j$를 포함하는 항을 항상 더 크게 매기므로, $f$에 그런 항이 있으면 선행항도 그런 항이다).",
+            "$0\\ne f\\in I_j$를 고르자. $G$가 $I$의 그뢰브너 기저이므로 $\\mathrm{LM}_\\prec(g)$가 $\\mathrm{LM}_\\prec(f)$를 나누는 $g\\in G$가 있다. $\\mathrm{LM}_\\prec(f)$는 $x_1,\\dots,x_j$ 중 어느 것도 포함하지 않으므로(첫 단계에 의해), 그것을 나누는 $\\mathrm{LM}_\\prec(g)$ 역시 그 변수들을 포함하지 않는다. 첫 단계를 $g$에 다시 적용하면 $g\\in\\mathbb{C}[x_{j+1},\\dots,x_n]$, 즉 $g\\in G_j$이다.",
+            "이는 $G_j$의 선행단항식들이 $\\mathrm{in}_\\prec(I_j)$를 생성함을 보이므로, $G_j$는 $I_j$의 그뢰브너 기저이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.27 (그래프 트릭 — 다항식 사상의 상을 소거로 계산한다)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^n$을 대수적집합이라 하자. $g_1,\\dots,g_m\\in R_n$에 대해 다항식 사상 $$g:X\\to\\mathbb{A}^m,\\quad x\\mapsto(g_1(x),\\dots,g_m(x))$$ 와 환 준동형 $$\\varphi:\\mathbb{C}[y_1,\\dots,y_m]\\to R_n/I(X),\\quad y_i\\mapsto g_i+I(X)$$ 을 생각하자. 이데알 $$J:=I(X)R_n[y_1,\\dots,y_m]+(y_1-g_1,\\dots,y_m-g_m)\\subseteq R_n[y_1,\\dots,y_m]$$ 을 정의하면 $$\\ker(\\varphi)=J\\cap\\mathbb{C}[y_1,\\dots,y_m]=I(g(X)) \\quad\\text{그리고}\\quad \\overline{g(X)}=V(\\ker(\\varphi))$$ 이다.",
+          "idea_behind_proof": "'그래프'를 이데알로 표현($y_i-g_i$를 방정식으로 강제)한 뒤 $x$변수 전부를 소거하면 정확히 $y$변수들만으로 이루어진 관계식들이 남고, 그것이 곧 $y_i=g_i(x)$라는 관계를 만족하는 다항식들 — 즉 상 위에서 소멸하는 다항식들의 이데알이라는 것이 핵심 관찰이다. 몫환의 동형사상 하나로 이 대응을 정확히 증명한다.",
+          "proof_steps": [
+            "환 준동형 $R_n[y_1,\\dots,y_m]/J\\to R_n/I(X),\\ [F(x,y)]\\mapsto[F(x,g_1,\\dots,g_m)]$이 동형사상임을 확인한다(정의역에서 $y_i$를 $g_i$로 대입하는 것이 정확히 $J$를 몫으로 나누는 것과 같다).",
+            "이 동형을 $F\\in\\mathbb{C}[y_1,\\dots,y_m]$에 제한하면 $F\\in J\\cap\\mathbb{C}[y_1,\\dots,y_m] \\iff F(g_1,\\dots,g_m)\\in I(X)$를 얻는다. 즉 $\\ker(\\varphi)=J\\cap\\mathbb{C}[y_1,\\dots,y_m]$.",
+            "한편 $F(g_1,\\dots,g_m)\\in I(X)$인 것은 $X$의 모든 점 $x$에서 $F(g_1(x),\\dots,g_m(x))=0$, 즉 $g(X)$의 모든 점 $y$에서 $F(y)=0$인 것과 같으므로 $\\ker(\\varphi)=I(g(X))$이다.",
+            "명제 1.4의 (1)($\\overline{Y}=V(I(Y))$)을 $Y=g(X)$에 적용하면 $\\overline{g(X)}=V(I(g(X)))=V(\\ker(\\varphi))$. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (소거 이데알의 실제 계산)",
+          "formal_statement": "$x_1\\succ\\cdots\\succ x_n\\succ y_1\\succ\\cdots\\succ y_m$인 사전식 순서를 쓰면, 소거 이데알 $J\\cap\\mathbb{C}[y_1,\\dots,y_m]$을 정리 1.26으로 계산할 수 있다: $J$의 그뢰브너 기저를 구한 뒤 $x$변수를 전혀 포함하지 않는 원소들만 골라내면 된다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.28 (뒤틀린 삼차곡선의 상)",
+          "formal_statement": "다항식 사상 $g:\\mathbb{A}^1\\to\\mathbb{A}^3,\\ t\\mapsto(t^3,t^2,t)$와 환 준동형 $\\varphi:\\mathbb{C}[x,y,z]\\to\\mathbb{C}[t],\\ x\\mapsto t^3,\\ y\\mapsto t^2,\\ z\\mapsto t$를 생각하자. $J:=(x-t^3,y-t^2,z-t)\\subseteq\\mathbb{C}[t,x,y,z]$의 사전식 순서 $t>x>y>z$에 대한 축약 그뢰브너 기저는 $\\{t-z,\\ x-z^3,\\ y-z^2\\}$이다. 따라서 $\\ker(\\varphi)=(x-z^3,y-z^2)$이고, $g(\\mathbb{A}^1)=V(x-z^3,y-z^2)$이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 1.29 (쌍곡선의 사영 — 소거는 폐포만 준다)",
+          "formal_statement": "$H:=V(xy-1)\\subseteq\\mathbb{A}^2$을 쌍곡선이라 하고, 다항식 사상 $g:X\\to\\mathbb{A}^1,\\ (x,y)\\mapsto x$와 환 준동형 $\\varphi:\\mathbb{C}[t]\\to\\mathbb{C}[x,y]/(xy-1),\\ t\\mapsto x+(xy-1)$를 생각하자. $J:=(xy-1,t-x)\\subseteq\\mathbb{C}[x,y,t]$의 사전식 순서 $x>y>t$에 대한 축약 그뢰브너 기저는 $\\{x-t,\\ yt-1\\}$이다. 그러면 $\\ker(\\varphi)=0$이다. 한편 $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$이지만 $\\overline{g(X)}=\\mathbb{A}^1=V(0)$이다.",
+          "idea_behind_proof": "$g(X)$ 자체는 상 안에 $0$이 결코 나올 수 없다는 사실(만약 $x=0$이면 $xy=0\\ne 1$이라 애초에 $H$의 점이 아니다) 때문에 $\\mathbb{A}^1$ 전체가 아니지만, 소거로 얻는 이데알 $\\ker(\\varphi)=0$은 오직 $V(0)=\\mathbb{A}^1$이라는 폐포 정보만 담고 있다 — 이는 '상 자체'와 '상의 자리스키 폐포'가 다를 수 있음을 보여주는 결정적인 예다.",
+          "proof_steps": [
+            "$(x,y)\\in H$이면 $xy=1$이므로 $x\\ne 0$. 따라서 $g(X)\\subseteq\\mathbb{A}^1\\setminus\\{0\\}$.",
+            "역으로 임의의 $a\\ne 0$에 대해 $(a,1/a)\\in H$이고 $g(a,1/a)=a$이므로 $g(X)\\supseteq\\mathbb{A}^1\\setminus\\{0\\}$. 따라서 $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$.",
+            "명제 1.27에 의해 $\\overline{g(X)}=V(\\ker(\\varphi))=V(0)=\\mathbb{A}^1$이다. 즉 $g(X)\\subsetneq\\overline{g(X)}$ — 상 자체는 자리스키 닫힌집합이 아니다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 1.30 (좌표 사영의 상 — 모닉 원소가 있으면 폐포 없이 정확하다)",
+          "formal_statement": "$I\\subseteq R_n$을 $x_1$에 대해 모닉인 다항식을 포함하는 이데알이라 하자. 좌표 사영 $\\pi:\\mathbb{A}^n\\to\\mathbb{A}^{n-1},\\ (x_1,x_2,\\dots,x_n)\\mapsto(x_2,\\dots,x_n)$에 대해 $$\\pi(V(I))=V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$$ 이다.",
+          "idea_behind_proof": "포함관계 $\\subseteq$는 자명하다. 어려운 방향은 소거된 이데알의 영점 $b$가 항상 실제로 $V(I)$의 어떤 점 위로 끌어올려짐(들어올림)을 보이는 것인데, 핵심 트릭은 '$I$ 안의 모닉 다항식 $f$ 덕분에 $x_1^0,\\dots,x_1^{d-1}$이 $I$를 법으로 $b$ 위에서 선형독립적으로 움직인다는 것을 행렬식으로 포착'하는 것이다 — 만약 끌어올림이 실패한다면 그 행렬식이 $b$에서 $1$이 되는 모순되는 원소가 $I\\cap\\mathbb{C}[x_2,\\dots,x_n]$ 안에 생겨버린다.",
+          "proof_steps": [
+            "포함 ($\\subseteq$)은 명백하다. 역을 보이기 위해, $b\\in V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$인데 $\\pi^{-1}(b)$의 어떤 점도 $V(I)$에 있지 않다고 가정하고 모순을 유도한다.",
+            "$J:=\\{f(x_1,b)\\mid f\\in I\\}\\subseteq\\mathbb{C}[x_1]$은 공통 영점이 없는 이데알이므로 대수학의 기본정리에 의해 $J=(1)$이다.",
+            "$I$ 안에서 $x_1$에 대해 모닉이고 $x_1$-차수가 $d$인 $f$를 고른다. $0\\le i\\le d-1$마다 $q_i(x_1,b)=x_1^i$을 만족하는 $q_i\\in I$를 고를 수 있다(어차피 $J=(1)$이므로 임의의 값을 만드는 원소가 존재).",
+            "$x_1^i-q_i=s_if+r_i$ ($s_i,r_i\\in\\mathbb{C}[x_2,\\dots,x_n][x_1]$, $\\deg_{x_1}r_i<d$)로 쓴다. $s_i(x_1,b)f(x_1,b)+r_i(x_1,b)=0$이고, $\\mathbb{C}[x_1]$에서 나눗셈의 유일성에 의해 $r_i(x_1,b)=0$이다.",
+            "$r_i=\\sum_{k=0}^{d-1}c_{ik}x_1^k$ ($c_{ik}\\in\\mathbb{C}[x_2,\\dots,x_n]$, $c_{ik}(b)=0$)로 쓴다. $x_1^i-r_i=s_if+q_i\\in I$이므로, 행렬 $M:=(\\delta_{ik}-c_{ik})_{0\\le i,k\\le d-1}$과 벡터 $(1,x_1,\\dots,x_1^{d-1})^{\\mathsf T}$의 곱의 모든 성분이 $I$에 속한다.",
+            "수반행렬(adjugate)을 곱하면 $h:=\\det(M)\\in I\\cap\\mathbb{C}[x_2,\\dots,x_n]$을 얻는다. 그런데 $c_{ik}(b)=0$이므로 $M(b)$는 단위행렬이 되어 $h(b)=\\det(M(b))=1$인데, 이는 $b\\in V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$, 즉 $h(b)=0$이어야 한다는 것과 모순이다.",
+            "따라서 모든 $b\\in V(I\\cap\\mathbb{C}[x_2,\\dots,x_n])$에 대해 $\\pi^{-1}(b)\\cap V(I)\\ne\\varnothing$이고, 이는 포함 ($\\supseteq$)을 증명한다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "명제 1.27의 방법을 이용해, 사상 $g:\\mathbb{A}^1\\to\\mathbb{A}^2,\\ t\\mapsto(t^2,t^3)$의 상의 자리스키 폐포가 $V(x^3-y^2)$임을 (계산 절차를 서술하는 방식으로) 설명하라.",
+          "hint": "이데알 $J=(x-t^2,\\ y-t^3)\\subseteq\\mathbb{C}[t,x,y]$를 사전식 순서 $t\\succ x\\succ y$로 잡고, $t$를 소거한 그뢰브너 기저 원소들을 생각하라.",
+          "solution": "$J=(x-t^2,y-t^3)$에서 $t\\succ x\\succ y$인 사전식 순서로 그뢰브너 기저를 구하면(예제 1.28과 완전히 같은 방식) $t$를 포함하지 않는 원소로 $x^3-y^2$을 얻는다(직접 확인: $y^2=(t^3)^2=t^6=(t^2)^3=x^3$이므로 $x^3-y^2\\in J\\cap\\mathbb{C}[x,y]$이고, 이 관계식 하나가 소거된 이데알 전체를 생성함을 그뢰브너 기저 계산이 보장한다). 정리 1.26에 의해 이렇게 $t$를 포함하지 않는 그뢰브너 기저 원소들이 $J\\cap\\mathbb{C}[x,y]$의 그뢰브너 기저이므로, 명제 1.27에 의해 $\\overline{g(\\mathbb{A}^1)}=V(J\\cap\\mathbb{C}[x,y])=V(x^3-y^2)$이다. (이 곡선은 예제 1.15의 체크포인트에서 이미 기약임을 확인한 뾰족한 삼차곡선과 같은 것이다.)"
+        },
+        {
+          "type": "checkpoint",
+          "problem": "명제 1.30의 가정('$I$가 $x_1$에 대해 모닉인 원소를 포함')이 왜 필요한지, 예제 1.29의 쌍곡선 상황에 명제 1.30을 (가정을 무시하고) 억지로 적용하면 무엇이 잘못되는지 설명하라.",
+          "hint": "$H=V(xy-1)$에서 $x$를 소거하려는(즉 $y$변수를 사영해 없애려는) 상황이 아니라, $y$를 소거해서 $x$만 남기려는 상황임을 주의하고, $I=(xy-1)$이 $y$에 대해 모닉인 원소를 갖는지 확인해 보라.",
+          "solution": "예제 1.29는 $H=V(xy-1)\\subseteq\\mathbb{A}^2$을 $x$좌표로 사영하는 상황이므로, 명제 1.30의 언어로는 좌표 $y$를 소거하는 것에 해당한다. 이때 필요한 가정은 '$I=(xy-1)$이 $y$에 대해 모닉인 원소를 포함하는가'이다. $xy-1$은 $y$에 대해 최고차항의 계수가 $x$이지 $1$이 아니므로(모닉이 되려면 계수가 $1$이어야 하는데 $x$가 $0$일 수도 있는 변수이다) 모닉이 아니고, $I$ 안에 $y$에 대해 모닉인 다른 원소도 없다. 이 가정이 실패하기 때문에 명제 1.30의 결론(사영의 상이 소거된 이데알의 영점집합과 정확히 같다)이 성립하지 않고, 실제로 상 $\\mathbb{A}^1\\setminus\\{0\\}$은 소거된 이데알의 영점집합 $V(0)=\\mathbb{A}^1$보다 진짜로 작다 — 이는 가정이 결론에 필수적임을 보여주는 반례다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 1.27에서 $\\ker(\\varphi)$의 영점집합 $V(\\ker(\\varphi))$는 항상 다항식 사상 $g$의 상 $g(X)$ 그 자체와 같다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 1.27은 $V(\\ker(\\varphi))=\\overline{g(X)}$(상의 자리스키 폐포)라고만 말한다. 예제 1.29가 정확히 $g(X)\\subsetneq\\overline{g(X)}$인 반례다 — $g(X)=\\mathbb{A}^1\\setminus\\{0\\}$인데 $V(\\ker(\\varphi))=\\mathbb{A}^1$."
+        },
+        {
+          "type": "ox",
+          "question": "소거 정리(정리 1.26)를 적용하려면 반드시 사전식 순서를 써야 하며, 다른 단항순서로는 성립하지 않는다.",
+          "answer": "O",
+          "explanation": "참이다. 정리 1.26의 증명은 '$x_1,\\dots,x_j$를 포함하지 않는다'는 조건이 다항식과 그 선행단항식에서 동시에 판별된다는 사실에 결정적으로 의존하는데, 이는 사전식 순서($x_1\\succ\\cdots\\succ x_n$, 앞쪽 변수가 조금이라도 나타나면 무조건 더 크게 매김)의 고유한 성질이다. 예제 1.11의 차수역순 사전식 순서 같은 다른 단항순서에서는 이 성질이 일반적으로 성립하지 않는다."
+        },
+        {
+          "type": "conceptual",
+          "question": "명제 1.30의 가정('$I$가 소거하려는 변수에 대해 모닉인 원소를 포함')은 기하학적으로 어떤 직관을 대수적으로 포착한 것인가? (5장의 정수적 확장 개념을 미리 엿본다면 어떤 대응이 자연스러운가?)",
+          "hint": "모닉 다항식 $f(x_1)=x_1^d+\\cdots$가 있다는 것은 $x_1$이 나머지 변수들 위에서 '유계인 방정식'을 만족한다는 뜻이다 — 즉 $x_1$이 임의로 크게 발산하며 도망갈 수 없다.",
+          "answer": "$I$가 $x_1$에 대해 모닉인 다항식을 포함한다는 것은, $V(I)$ 위의 모든 점에서 $x_1$-좌표가 나머지 좌표들이 만족하는 어떤 유한 차수 다항식 방정식에 갇혀 있다는 뜻이다 — 직관적으로 $x_1$이 나머지 변수들에 대해 '무한히 멀리 도망갈 수 없다'는 일종의 유계성·고유성(properness) 조건이다. 이 조건이 있어야 사영 $\\pi$가 각 점 $b\\in\\mathbb{A}^{n-1}$ 위에서 $\\pi^{-1}(b)\\cap V(I)$가 (공집합이 아니라면) '유한 개의 후보 $x_1$값'으로 제한되어 실제로 실현되고, 따라서 상이 소거 이데알의 영점집합 전체를 정확히 채운다. 이는 정확히 5장에서 다시 등장하는 '정수적 확장(integral extension)' — 원소가 모닉 다항식(정수 계수 다항식, 여기서는 계수환이 $\\mathbb{C}[x_2,\\dots,x_n]$)을 만족한다는 조건 — 의 기하학적 그림자이며, 그때는 이 아이디어가 Going-Up 정리를 통해 '정수적 확장에 대응하는 사상은 항상 닫힌 사상이다'라는 훨씬 일반적인 사실로 다시 나타난다."
+        }
+      ]
+    }
+  ]
+}
