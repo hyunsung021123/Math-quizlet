@@ -34,10 +34,10 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 011 | [ ] | 4.1 Veronese maps | section | `011__Introductionto__4_1_Veronesemaps.txt` |
-| 012 | [ ] | 4.2 Rational normal curves | section | `012__Introductionto__4_2_Rationalnormalcurves.txt` |
-| 013 | [ ] | 4.3 Segre maps | section | `013__Introductionto__4_3_Segremaps.txt` |
-| 014 | [ ] | 4.4 Products of algebraic varieties | section | `014__Introductionto__4_4_Productsofalgebraicvarieti.txt` |
+| 011 | [x] | 4.1 Veronese maps | section | `011__Introductionto__4_1_Veronesemaps.txt` |
+| 012 | [x] | 4.2 Rational normal curves | section | `012__Introductionto__4_2_Rationalnormalcurves.txt` |
+| 013 | [x] | 4.3 Segre maps | section | `013__Introductionto__4_3_Segremaps.txt` |
+| 014 | [x] | 4.4 Products of algebraic varieties | section | `014__Introductionto__4_4_Productsofalgebraicvarieti.txt` |
 
 ## 5. Dimension Theory
 

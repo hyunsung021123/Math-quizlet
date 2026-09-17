@@ -1,0 +1,281 @@
+{
+  "chapter_info": {
+    "title": "4. Classical Projective Embeddings",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "사영다양체를 다루는 가장 강력한 방법 중 하나는 그것을 더 큰 사영공간 안으로 구체적인 다항식 사상을 통해 '매장(embed)'하는 것이다. 이 장은 그런 매장의 고전적인 세 가지 예 — 베로네제 사상(모든 차수 $d$의 단항식을 좌표로 삼는 매장), 유리정규곡선(베로네제 매장의 $n=1$ 특수한 경우), 세그레 사상(두 사영공간의 곱을 하나의 사영공간에 매장) — 을 다루고, 마지막으로 두 사영다양체의 곱이라는 개념 자체를 정의한다. 이 구성들은 모두 '동차좌표를 이용해 직접 매장 사상을 쓰고, 그 상의 동차이데알을 명시적으로 계산한다'는 같은 패턴을 따르며, 사영기하학에서 구체적인 다양체를 손으로 다루는 표준 도구상자를 이룬다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.1 Veronese maps",
+      "step1_big_picture": {
+        "context": "베로네제 사상(Veronese map) $\\nu_d:\\mathbb{P}^n\\to\\mathbb{P}^N$은 차수 $d$인 모든 단항식 $x^\\alpha$($|\\alpha|=d$)를 좌표로 삼아 $\\mathbb{P}^n$을 훨씬 더 큰 사영공간 $\\mathbb{P}^N$ 안으로 밀어 넣는 사상이다. 이 절의 핵심은 이 사상이 실제로 동형사상 $\\mathbb{P}^n\\xrightarrow{\\sim}W_d:=V_+(\\ker\\Phi_d)\\subseteq\\mathbb{P}^N$을 준다는 것(정리 4.2)이며, 여기서 $\\Phi_d$는 새 좌표 $Y_\\alpha$를 단항식 $x^\\alpha$로 보내는 환 준동형이다. $\\ker\\Phi_d$가 특정한 이차 이항식(binomial) $Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}$($\\alpha+\\beta=\\alpha'+\\beta'$)들로 생성된다는 명제 4.1의 계산은 베로네제 다양체의 방정식을 완전히 명시적으로 만들어 준다. 따름정리 4.4는 이 매장이 초평면들을 정확히 원래 공간의 차수 $d$ 형식들로 되돌린다는 사실을 보이고, 멈퍼드의 정리 4.5는 이 도구를 이용해 '충분히 큰 사영공간에 매장하면 임의의 사영다양체의 방정식을 전부 이차식(quadric)으로 만들 수 있다'는 놀라운 결과를 낸다.",
+        "hidden_intuition": "베로네제 사상을 이해하는 가장 좋은 방법은 '차수 $d$ 단항식이라는 좌표계를 명시적으로 실체화한다'는 것이다 — 원래 $\\mathbb{P}^n$의 좌표 $x_0,\\dots,x_n$ 자체는 함수가 아니었지만(3.1절), 차수 $d$ 단항식들의 비율은 $U_i$ 위에서 함수였다. 베로네제 사상은 이 '차수 $d$짜리 함수들의 모임'을 아예 새로운 사영공간의 좌표로 승격시켜, 원래는 사영좌표로 표현할 수 없었던 차수 $d$ 초곡면(hypersurface)들을 새로운 공간에서는 '초평면(hyperplane)', 즉 일차식으로 표현할 수 있게 만든다 — 이것이 정확히 따름정리 4.4의 내용이다: $\\mathbb{P}^N$의 초평면을 당겨오면(pullback) 원래 공간의 차수 $d$ 형식이 나온다. 즉 베로네제 사상은 '고차 방정식을 일차 방정식으로 바꾸는' 좌표 변환의 극단적인 형태이며, 이는 대수기하학에서 반복해서 등장하는 전략이다: 복잡한 것을 더 큰 공간에서 단순한 것으로 만들기. 명제 4.1의 증명에서 $\\ker\\Phi_d$가 이항식들로 생성된다는 사실의 배후에는 단항식 사이의 순수한 조합적 사실이 있다 — 두 단항식의 곱이 같은 지수 벡터를 준다는 것은 그 지수들이 같은 합을 갖는다는 것과 같고, 이런 '지수 벡터의 재배열'은 유한 번의 '기본 교환'(한 단항식에서 다른 단항식으로 지수 하나씩 옮기는 것)으로 항상 실현될 수 있다는 조합론적 사실이 정확히 그 귀납 논증의 핵심이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "$d=2,n=1$의 경우: 베로네제 곡선(유리정규곡선) $C_2=\\nu_2(\\mathbb{P}^1)\\subseteq\\mathbb{P}^2$은 아핀 차트에서 포물선 $y=t^2$으로 나타난다 — $[s:t]=[1:t]\\mapsto[1:t:t^2]$.",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -1.5,
+                  2.25
+                ],
+                [
+                  -1.4,
+                  1.96
+                ],
+                [
+                  -1.3,
+                  1.69
+                ],
+                [
+                  -1.2,
+                  1.44
+                ],
+                [
+                  -1.1,
+                  1.21
+                ],
+                [
+                  -1.0,
+                  1.0
+                ],
+                [
+                  -0.9,
+                  0.81
+                ],
+                [
+                  -0.8,
+                  0.64
+                ],
+                [
+                  -0.7,
+                  0.49
+                ],
+                [
+                  -0.6,
+                  0.36
+                ],
+                [
+                  -0.5,
+                  0.25
+                ],
+                [
+                  -0.4,
+                  0.16
+                ],
+                [
+                  -0.3,
+                  0.09
+                ],
+                [
+                  -0.2,
+                  0.04
+                ],
+                [
+                  -0.1,
+                  0.01
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.1,
+                  0.01
+                ],
+                [
+                  0.2,
+                  0.04
+                ],
+                [
+                  0.3,
+                  0.09
+                ],
+                [
+                  0.4,
+                  0.16
+                ],
+                [
+                  0.5,
+                  0.25
+                ],
+                [
+                  0.6,
+                  0.36
+                ],
+                [
+                  0.7,
+                  0.49
+                ],
+                [
+                  0.8,
+                  0.64
+                ],
+                [
+                  0.9,
+                  0.81
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.1,
+                  1.21
+                ],
+                [
+                  1.2,
+                  1.44
+                ],
+                [
+                  1.3,
+                  1.69
+                ],
+                [
+                  1.4,
+                  1.96
+                ],
+                [
+                  1.5,
+                  2.25
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.3,
+                -0.35
+              ],
+              "text": "$t=0$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.3,
+                1.2
+              ],
+              "text": "$t=1$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 ($d$차 베로네제 사상 $\\nu_d$)",
+          "formal_statement": "정수 $n\\ge 1$, $d\\ge 1$을 고정하고 $$N:=\\binom{n+d}{d}-1$$ 로 두자. $|\\alpha|:=\\alpha_0+\\cdots+\\alpha_n=d$인 모든 $\\alpha:=(\\alpha_0,\\dots,\\alpha_n)\\in\\mathbb{Z}_{\\ge 0}^{n+1}$에 대해 $Y_\\alpha$를 $\\mathbb{P}^N$의 동차좌표라 하자. $\\mathbb{P}^n$의 $d$차 베로네제 사상(Veronese map)은 $$\\nu_d:\\mathbb{P}^n\\longrightarrow\\mathbb{P}^N,\\qquad [x_0:\\cdots:x_n]\\longmapsto[x^\\alpha]_{|\\alpha|=d}$$ 이며, 여기서 $x^\\alpha:=x_0^{\\alpha_0}\\cdots x_n^{\\alpha_n}$이다(좌표들은 어떤 고정된 순서로 나열해도 무방하다). 명제 3.16에 의해 이는 사영 모피즘이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.1 ($\\ker\\Phi_d$는 동차 소이데알이며 이항식들로 생성된다)",
+          "formal_statement": "환 준동형 $$\\Phi_d:\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]\\longrightarrow\\mathbb{C}[x_0,\\dots,x_n],\\qquad Y_\\alpha\\longmapsto x^\\alpha$$ 을 생각하자. 그러면 $$\\ker(\\Phi_d)=\\big(Y_\\alpha-x^\\alpha\\mid|\\alpha|=d\\big)\\cap\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]$$ 는 동차 소이데알이다. 더 나아가, $$\\ker(\\Phi_d)=\\big(Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}\\mid|\\alpha|=|\\beta|=|\\alpha'|=|\\beta'|=d,\\ \\alpha+\\beta=\\alpha'+\\beta'\\big).$$",
+          "idea_behind_proof": "동차성과 소이데알임은 $\\Phi_d$의 상 $\\mathbb{C}[x^\\alpha\\mid|\\alpha|=d]$가 $\\mathbb{C}[x_0,\\dots,x_n]$의 부분환(따라서 정역)이라는 관찰에서 즉시 나온다. 어려운 부분은 이항식 생성 주장인데, 핵심 아이디어는 $\\ker\\Phi_d$가 '같은 단항식으로 가는 항들의 계수합이 $0$'인 다항식들로 생성된다는 사실을 이용해, 그런 이항식 관계를 유한 번의 '지수 하나씩 교환하는 기본 조작'으로 분해하는 귀납 논증이다.",
+          "proof_steps": [
+            "등식 $\\ker(\\Phi_d)=(Y_\\alpha-x^\\alpha\\mid|\\alpha|=d)\\cap\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]$은 명제 1.27에서 따라온다.",
+            "$\\Phi_d$가 등급을 ($d$의 배수로 재등급화하면) 보존하므로 $\\ker(\\Phi_d)$는 동차이데알이다. $\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]/\\ker(\\Phi_d)\\cong\\mathbb{C}[x^\\alpha\\mid|\\alpha|=d]$이고 이는 $\\mathbb{C}[x_0,\\dots,x_n]$의 부분환이므로 정역이다. 따라서 $\\ker(\\Phi_d)$는 소이데알이다.",
+            "$J:=(Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}\\mid\\alpha+\\beta=\\alpha'+\\beta')$라 하면 $J\\subseteq\\ker(\\Phi_d)$는 명백하다.",
+            "역포함을 위해, $F\\in\\ker(\\Phi_d)$인 것은 $\\Phi_d$ 아래 같은 단항식으로 가는 $F$의 항들의 계수합이 $0$인 것과 동치임에 유의하라. 따라서 $\\ker(\\Phi_d)$는 이항식 $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\beta_1}\\cdots Y_{\\beta_r}$($\\alpha_1+\\cdots+\\alpha_r=\\beta_1+\\cdots+\\beta_r$) 꼴로 생성된다.",
+            "이러한 이항식이 $J$에 속함을 $r$에 대한 귀납법으로 보인다. $r=0,1$일 때는 자명하다. $r\\ge 2$이고 $\\alpha_1\\ne\\beta_1$이라 하자. 그러면 $(\\alpha_1)_p>(\\beta_1)_p$, $(\\alpha_1)_q<(\\beta_1)_q$인 $0\\le p,q\\le n$이 있다. $\\sum_i(\\alpha_i)_q=\\sum_i(\\beta_i)_q$이므로 $(\\alpha_j)_q>0$인 $j\\ge 2$가 존재한다.",
+            "$\\tilde\\alpha_1:=\\alpha_1-e_p+e_q$, $\\tilde\\alpha_j:=\\alpha_j+e_p-e_q$로 두면 $\\alpha_1+\\alpha_j=\\tilde\\alpha_1+\\tilde\\alpha_j$이고, $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\tilde\\alpha_1}Y_{\\alpha_2}\\cdots Y_{\\tilde\\alpha_j}\\cdots Y_{\\alpha_r}\\in J$(이는 $r=2$ 경우의 이항식 생성원 자체이거나, 나머지 인수를 공통으로 곱한 것).",
+            "이를 반복하면 $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\beta_1}Y_{\\gamma_2}\\cdots Y_{\\gamma_r}\\in J$(단 $\\gamma_2+\\cdots+\\gamma_r=\\beta_2+\\cdots+\\beta_r$)를 얻는다. 귀납가정에 의해 $Y_{\\gamma_2}\\cdots Y_{\\gamma_r}-Y_{\\beta_2}\\cdots Y_{\\beta_r}\\in J$이므로 $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\beta_1}\\cdots Y_{\\beta_r}\\in J$를 얻는다. 이는 $\\ker(\\Phi_d)\\subseteq J$를 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.2 (베로네제 사상은 동형매장이다)",
+          "formal_statement": "베로네제 사상 $\\nu_d$는 동형사상 $$\\nu_d:\\mathbb{P}^n\\longrightarrow W_d:=V_+\\big(\\ker(\\Phi_d)\\big)\\subseteq\\mathbb{P}^N$$ 을 유도한다. 특히 베로네제 사상 $\\nu_d$는 $\\mathbb{P}^n$을 $\\mathbb{P}^N$ 안으로 매장하며, $I(\\nu_d(\\mathbb{P}^n))=\\ker(\\Phi_d)$이다.",
+          "idea_behind_proof": "$\\nu_d(\\mathbb{P}^n)\\subseteq W_d$는 정의에서 바로 나온다. 역방향의 모피즘 $\\psi_i$를 구성하는 핵심 아이디어는, $W_d$의 각 점에서 '순수한 거듭제곱' 좌표 $Y_i:=Y_{de_i}$ 중 적어도 하나는 $0$이 아니어야 한다는 것(그렇지 않으면 모든 $Y_\\alpha$가 $0$이 되어 사영점이 될 수 없으므로)이고, 그 좌표가 $0$이 아닌 열린집합 위에서 '한 단계 낮춘' 비율 $Y_{ij}/Y_i$들이 정확히 원래 좌표 $x_j/x_i$의 상을 복원한다는 것이다.",
+          "proof_steps": [
+            "$\\ker(\\Phi_d)$의 모든 다항식은 상 $\\nu_d(\\mathbb{P}^n)$ 위에서 소멸하므로 $\\nu_d(\\mathbb{P}^n)\\subseteq W_d$이다.",
+            "$0\\le i,j\\le n$에 대해 $Y_i:=Y_{de_i}$, $Y_{ij}:=Y_{(d-1)e_i+e_j}$로 두자. $|\\alpha|=d$인 각 $\\alpha$에서 $Y_\\alpha^d-\\prod_{j=0}^nY_j^{\\alpha_j}\\in\\ker(\\Phi_d)$를 확인할 수 있다.",
+            "따라서 만약 $W_d$의 한 점에서 모든 $Y_i$가 $0$이라면 모든 $Y_\\alpha$가 그 점에서 $0$이 되어야 하는데, 이는 사영공간의 점이 될 수 없어 불가능하다. 즉 열린집합들 $W_d\\setminus V_+(Y_i)$이 $W_d$를 덮는다.",
+            "$W_d\\setminus V_+(Y_i)$ 위에서 튜플 $(Y_{i0},\\dots,Y_{in})$은 $0$이 아닌 성분 $Y_{ii}=Y_i$를 가지므로, $$\\psi_i:W_d\\setminus V_+(Y_i)\\to\\mathbb{P}^n,\\quad [Y_\\alpha]\\mapsto[Y_{i0}:\\cdots:Y_{in}]$$ 은 모피즘이다.",
+            "$x_i\\ne 0$이면 $\\psi_i\\nu_d([x_0:\\cdots:x_n])=[x_i^{d-1}x_0:\\cdots:x_i^{d-1}x_n]=[x_0:\\cdots:x_n]$이므로 $\\psi_i\\circ\\nu_d=\\mathrm{id}$이다.",
+            "역으로 $|\\alpha|=d$인 각 $\\alpha$에서 $Y_i^{d-1}Y_\\alpha-\\prod_{j=0}^nY_{ij}^{\\alpha_j}\\in\\ker(\\Phi_d)$를 확인할 수 있다. 이는 $W_d\\setminus V_+(Y_i)$의 한 점에서 $\\nu_d\\psi_i$의 $\\alpha$번째 좌표가 공통인 $0$이 아닌 스칼라 $Y_i^{d-1}$ 곱하기 $Y_\\alpha$와 같다는 뜻이므로, $\\nu_d\\circ\\psi_i=\\mathrm{id}$이기도 하다.",
+            "국소적 역사상 $\\psi_i$들은 각각 같은 사상의 역이므로 공통 교집합에서 서로 일치한다. 따라서 $\\nu_d$는 $W_d$ 위로의 동형사상이다. 사영 Nullstellensatz와 명제 4.1에 의해 $I(\\nu_d(\\mathbb{P}^n))=\\ker(\\Phi_d)$를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.3 (2차 베로네제 곡면과 $2\\times 2$ 소행렬식)",
+          "formal_statement": "두 번째 베로네제 곡면 $\\nu_2(\\mathbb{P}^2)\\subseteq\\mathbb{P}^5$을 생각하자. $\\mathbb{P}^5$의 좌표를 $$[Z_0:Z_1:Z_2:Z_3:Z_4:Z_5]=[x_0^2:x_1^2:x_2^2:x_0x_1:x_0x_2:x_1x_2]$$ 로 정렬하면, $I(\\nu_2(\\mathbb{P}^2))$는 다음 여섯 개의 이차식으로 생성된다: $$Z_3^2-Z_0Z_1,\\ Z_4^2-Z_0Z_2,\\ Z_5^2-Z_1Z_2,\\ Z_3Z_4-Z_0Z_5,\\ Z_3Z_5-Z_1Z_4,\\ Z_4Z_5-Z_2Z_3,$$ 이는 다음 일차형식 행렬의 (부호를 무시한) 서로 다른 $2\\times 2$ 소행렬식들이다: $$\\begin{pmatrix}Z_0&Z_3&Z_4\\\\Z_3&Z_1&Z_5\\\\Z_4&Z_5&Z_2\\end{pmatrix}.$$ 더 일반적으로, 임의의 베로네제 다양체의 동차이데알은 일차형식들의 행렬의 $2\\times 2$ 소행렬식들로 생성됨을 보일 수 있다(따름정리 4.7에서 특수한 경우를 다룬다)."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 4.4 (초평면의 당김 = 원래 공간의 차수 $d$ 형식)",
+          "formal_statement": "$\\nu_d$에 의한 당김(pullback)은 $\\mathbb{P}^N$의 초평면들과 $x_0,\\dots,x_n$의 $0$이 아닌 차수 $d$ 동차형식들(영이 아닌 스칼라배까지 동일시)을 전단사로 대응시킨다. 명시적으로, $$\\nu_d^{-1}\\left(V_+\\left(\\sum_{|\\alpha|=d}c_\\alpha Y_\\alpha\\right)\\right)=V_+\\left(\\sum_{|\\alpha|=d}c_\\alpha x^\\alpha\\right).$$",
+          "idea_behind_proof": "$Y_\\alpha=x^\\alpha$를 대입하면 등식이 그대로 나오고, 전단사성은 단항식 $x^\\alpha$($|\\alpha|=d$)들이 차수 $d$ 동차형식들의 벡터공간의 기저를 이룬다는 순수 선형대수 사실에서 나온다.",
+          "proof_steps": [
+            "$Y_\\alpha=x^\\alpha$의 대입이 그 등식을 준다.",
+            "$|\\alpha|=d$인 단항식 $x^\\alpha$들은 차수 $d$ 동차형식들의 벡터공간의 기저를 이루므로, 그런 모든 형식은 이 대응(초평면 방정식)으로부터 $0$이 아닌 스칼라배까지 유일하게 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.5 (멈퍼드: 이차식으로 생성되는 매장)",
+          "formal_statement": "$X$를 사영다양체라 하자. 그러면 $I(X)$가 이차식(quadric)들로 생성되는 매장 $X\\subseteq\\mathbb{P}^M$이 존재한다.",
+          "idea_behind_proof": "임의의 매장 $X\\subseteq\\mathbb{P}^n$에서 출발해, $I(X)$가 차수 $d$에서 생성될 만큼 $d$를 충분히 크게 잡고, $d$차 베로네제 매장 $\\nu_d$를 적용한다. 따름정리 4.4에 의해 $X$를 잘라내는 차수 $d$ 형식들이 정확히 $\\nu_d(\\mathbb{P}^n)$을 자르는 일차형식(초평면)들에 대응하므로, $\\nu_d(X)$의 방정식은 $\\ker(\\Phi_d)$(명제 4.1에 의해 이차식으로 생성)와 그 일차식들의 합으로 주어져, 결국 이차식만으로 기술된다.",
+          "proof_steps": [
+            "임의의 매장 $X\\subseteq\\mathbb{P}^n$에서 시작하자. $\\mathbb{P}^n$에서 $X$의 동차이데알이 차수 $d$에서 생성되는 정수 $d\\ge 1$이 존재한다. $d$차 베로네제 매장 $\\nu_d:\\mathbb{P}^n\\hookrightarrow\\mathbb{P}^N$을 생각하자.",
+            "따름정리 4.4에 의해, $X$ 위에서 소멸하는 $\\mathbb{P}^n$의 차수 $d$ 동차형식들에 대응하는 일차형식들로 생성되는 $S(\\mathbb{P}^N)$의 동차이데알 $L$이 존재한다. $\\Phi_d$를 통한 $X$의 (사영)이데알의 원상은 $\\ker(\\Phi_d)+L$임에 유의하라. 따라서 $\\ker(\\Phi_d)+L=I(\\nu_d(X))$이다.",
+            "$\\nu_d(X)=\\nu_d(\\mathbb{P}^n)\\cap V_+(L)\\subseteq V_+(L)\\cong\\mathbb{P}^M$이고 $S(V_+(L))=S(\\mathbb{P}^N)/L$이다. 이제 $X\\subseteq\\mathbb{P}^M$으로 생각할 수 있다. 이 경우 $I(X)$는 $\\ker(\\Phi_d)$의 이차 생성원들로부터 이차식들에 의해 생성된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (시드먼-스미스의 정련)",
+          "formal_statement": "대략적으로 말해, 멈퍼드의 정리는 사영다양체를 충분히 큰 사영공간에 매장하면 그 동차이데알이 이차식들로 생성됨을 말한다. 2011년 제시카 시드먼(Jessica Sidman)과 그레고리 스미스(Gregory Smith)는 비슷한 상황에서 사영다양체의 동차이데알이 일차형식들의 행렬의 $2\\times 2$ 소행렬식들로 생성됨을 증명했다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$n=1,d=2$의 경우 $N=\\binom{1+2}{2}-1=2$이므로 $\\nu_2:\\mathbb{P}^1\\to\\mathbb{P}^2$이다. $\\ker(\\Phi_2)\\subseteq\\mathbb{C}[Y_{20},Y_{11},Y_{02}]$(지수 $\\alpha=(2,0),(1,1),(0,2)$에 대응)를 명제 4.1의 이항식 생성원 공식으로 직접 구하고, 이것이 정확히 매끄러운 원뿔곡선(정리 3.6, 예제 3.19)의 방정식임을 확인하라.",
+          "hint": "$\\alpha+\\beta=\\alpha'+\\beta'$를 만족하는 $|\\alpha|=|\\beta|=|\\alpha'|=|\\beta'|=2$의 조합을 직접 나열해 보라. $\\alpha=(2,0),\\beta=(0,2)$이면 $\\alpha+\\beta=(2,2)$인데, 이를 $\\alpha'=\\beta'=(1,1)$로도 쓸 수 있음에 주목하라.",
+          "solution": "$Y_{(2,0)}=:Z_0$, $Y_{(1,1)}=:Z_1$, $Y_{(0,2)}=:Z_2$로 쓰자. $\\alpha=(2,0),\\beta=(0,2)$이면 $\\alpha+\\beta=(2,2)=(1,1)+(1,1)$이므로 $\\alpha'=\\beta'=(1,1)$을 얻어 $Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}=Z_0Z_2-Z_1^2$이 생성원이 된다(다른 조합은 지수가 중복되거나 자명한 관계만 준다). 따라서 $\\ker(\\Phi_2)=(Z_0Z_2-Z_1^2)$이다. 이는 정확히 예제 3.19의 원뿔곡선 $Q=V_+(xy-z^2)$의 방정식과 같은 꼴(좌표 이름만 다름)이며, 실제로 정리 4.2가 주는 동형사상 $\\nu_2:\\mathbb{P}^1\\xrightarrow{\\sim}V_+(Z_0Z_2-Z_1^2)$은 예제 3.19에서 본 원뿔곡선과 $\\mathbb{P}^1$ 사이의 동형사상과 정확히 일치한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "따름정리 4.4를 이용해, $n=1,d=2$인 경우($\\nu_2:\\mathbb{P}^1\\to\\mathbb{P}^2$, 좌표 $Z_0=x_0^2,Z_1=x_0x_1,Z_2=x_1^2$) 초평면 $V_+(Z_0-Z_2)\\subseteq\\mathbb{P}^2$의 당김 $\\nu_2^{-1}(V_+(Z_0-Z_2))$을 구하라.",
+          "hint": "$Z_0-Z_2$에 $Z_0=x_0^2,Z_2=x_1^2$을 대입하면 어떤 차수 $2$ 형식이 나오는지 계산하고, 그 형식의 영점을 $\\mathbb{P}^1$에서 구하라.",
+          "solution": "따름정리 4.4에 의해 $\\nu_2^{-1}(V_+(Z_0-Z_2))=V_+(x_0^2-x_1^2)=V_+((x_0-x_1)(x_0+x_1))$이다. $\\mathbb{P}^1$에서 이는 $x_0=x_1$ 또는 $x_0=-x_1$인 점들, 즉 $[1:1]$과 $[1:-1]$ 두 점으로 이루어진다. 이는 정확히 차수 $2$인 동차형식 $x_0^2-x_1^2$의 영점집합(중복 없는 두 개의 서로 다른 일차인수)과 일치한다."
+        },
+        {
+          "type": "ox",
+          "question": "베로네제 사상 $\\nu_d:\\mathbb{P}^n\\to\\mathbb{P}^N$은 그 상 $W_d=\\nu_d(\\mathbb{P}^n)$ 위로의 동형사상이다.",
+          "answer": "O",
+          "explanation": "참이다. 정리 4.2의 내용 그대로다. $\\nu_d$ 자신이 모피즘이고, 국소적으로 정의된 역사상 $\\psi_i$들이 서로 호환되어 전역적인 모피즘 역을 이루므로 $\\nu_d:\\mathbb{P}^n\\to W_d$는 동형사상이다."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 사영다양체 $X$에 대해, 원래 매장 $X\\subseteq\\mathbb{P}^n$ 자체에서 이미 $I(X)$가 항상 이차식들로 생성된다.",
+          "answer": "X",
+          "explanation": "거짓이다. 멈퍼드의 정리(정리 4.5)가 보장하는 것은 '적당히 큰 사영공간으로 다시 매장하면' $I(X)$가 이차식들로 생성되게 만들 수 있다는 것이지, 원래 매장에서부터 항상 그렇다는 것이 아니다. 실제로 일반적인 매장에서는 $I(X)$가 훨씬 높은 차수의 생성원을 필요로 할 수 있다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 4.5(멈퍼드)의 증명은 '동차이데알이 차수 $d$에서 생성되도록 $d$를 충분히 크게 잡는다'는 단계에서 출발한다. 이 단계가 왜 정당화되는지(즉 그런 $d$가 항상 존재하는 이유가 무엇인지), 그리고 이 정리가 '방정식의 차수를 낮추는 대가로 무엇을 지불하는지'를 설명하라.",
+          "hint": "힐베르트 기저정리가 어디서 이 존재성을 보장하는지 생각해 보라. 그리고 $\\mathbb{P}^n$에서 $\\mathbb{P}^N$($N\\gg n$)으로 옮겨가면서 '늘어나는 것'이 무엇인지 따져 보라.",
+          "answer": "'$I(X)$가 차수 $d$에서 생성된다'는 것을 보장하는 것은 힐베르트 기저정리다 — $I(X)\\subseteq\\mathbb{C}[x_0,\\dots,x_n]$은 뇌터 환의 이데알이므로 유한개의 동차 생성원을 가지며, 그 유한 개 생성원들의 차수 중 최댓값을 $d$로 잡으면(또는 충분히 큰 임의의 $d$로 잡으면, 낮은 차수 생성원에 변수를 곱해 차수 $d$로 만들 수 있으므로) $I(X)$는 차수 $d$에서 생성된다고 말할 수 있다. 이 정리가 지불하는 대가는 명확하다 — 방정식의 '차수'를 이차식으로 낮추는 대신, 매장하는 공간의 '차원'을 극적으로 늘린다. 원래 $\\mathbb{P}^n$ 안에서 $X$를 자르던 소수의 고차(차수 $d$) 방정식들이, $\\mathbb{P}^N$($N=\\binom{n+d}{d}-1$, $n,d$가 커지면 기하급수적으로 커짐)에서는 $\\ker(\\Phi_d)$(베로네제 다양체 자체의 방정식, 이차식이지만 개수가 많음)와 $L$(원래 방정식에 대응하는 일차식들)을 합친, 개수는 훨씬 많지만 차수는 전부 $2$ 이하인 방정식들로 대체된다. 즉 '방정식이 단순해지는 대신 그 개수와 매장 공간의 차원이 커진다'는 전형적인 트레이드오프이며, 이는 대수기하학에서 '더 높은 차원, 더 단순한 방정식'이라는 반복되는 주제의 한 사례다."
+        }
+      ]
+    }
+  ]
+}

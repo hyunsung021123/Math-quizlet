@@ -1,0 +1,311 @@
+{
+  "chapter_info": {
+    "title": "4. Classical Projective Embeddings",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "사영다양체를 다루는 가장 강력한 방법 중 하나는 그것을 더 큰 사영공간 안으로 구체적인 다항식 사상을 통해 '매장(embed)'하는 것이다. 이 장은 그런 매장의 고전적인 세 가지 예 — 베로네제 사상(모든 차수 $d$의 단항식을 좌표로 삼는 매장), 유리정규곡선(베로네제 매장의 $n=1$ 특수한 경우), 세그레 사상(두 사영공간의 곱을 하나의 사영공간에 매장) — 을 다루고, 마지막으로 두 사영다양체의 곱이라는 개념 자체를 정의한다. 이 구성들은 모두 '동차좌표를 이용해 직접 매장 사상을 쓰고, 그 상의 동차이데알을 명시적으로 계산한다'는 같은 패턴을 따르며, 사영기하학에서 구체적인 다양체를 손으로 다루는 표준 도구상자를 이룬다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.4 Products of algebraic varieties",
+      "step1_big_picture": {
+        "context": "세그레 사상이 준 진짜 선물은 '두 대수다양체의 곱'이라는 개념 자체를 엄밀하게 정의할 수 있게 되었다는 것이다: 준사영다양체 $X\\subseteq\\mathbb{P}^m$, $Y\\subseteq\\mathbb{P}^n$에 대해 $X\\times Y:=\\sigma_{m,n}(X\\times Y)\\subseteq\\Sigma_{m,n}$으로 정의하면, 이는 $\\Sigma_{m,n}$의 (준)사영다양체 구조를 그대로 물려받는다. 이 절은 이 정의 아래에서 곱이 실제로 다시 대수다양체가 됨을(기약성까지 포함해서) 확인하고(정리 4.16, 4.18), 그 좌표환이 아핀의 경우 텐서곱 $A(X)\\otimes_{\\mathbb{C}}A(Y)$과 동형임을(참고 4.17), 그리고 사영(fiber-wise) 구조와 그래프(graph)라는 두 가지 파생 개념(예제 4.19, 명제 4.20)을 확립한다. 명제 4.20('모피즘의 그래프는 닫혀 있고 정의역과 동형이다')은 특히 중요한데, 이는 이후 대수기하학 전반에서 '함수의 그래프'라는 직관을 엄밀한 도구로 만들어 주는 결과다.",
+        "hidden_intuition": "정리 4.16의 증명에서 가장 비직관적인 부분은 '$X\\times Y$가 기약이다'라는 것을 보이는 방법이다 — $X\\times Y=Z_1\\cup Z_2$로 쪼개졌다고 가정했을 때, 각 '수직 조각' $\\{p\\}\\times Y$($p\\in X$ 고정)는 그 자체로 $Y$와 동형인 기약공간이므로 통째로 $Z_1$ 또는 $Z_2$ 중 하나에 들어가야 한다. 이렇게 각 점 $p$를 '어느 쪽에 속하는 수직 조각을 갖는가'로 분류하면 $X$ 자체가 두 조각 $S_1,S_2$로 쪼개지고, $X$가 기약이므로 그중 하나가 전부를 차지해야 한다 — 이 논증은 '기약성이 곱셈적으로 전파된다'는 사실을 현미경으로 들여다보는 것과 같다: 두 조각(가로 방향과 세로 방향)이 각자 기약이면, 그 곱도 '조각으로 쪼개려는 시도'가 반드시 한쪽 방향 전체를 삼켜야만 하므로 결국 기약으로 남을 수밖에 없다. 명제 4.20의 그래프 논증에서 핵심 트릭은 그래프의 방정식 $y_iF_j-y_jF_i=0$이 정확히 '$y=[F_0(x):\\cdots:F_N(x)]$'라는 등식을 좌표별 비율의 형태로 다시 쓴 것뿐이라는 관찰이다 — 이는 두 점 $[y_0:\\cdots:y_N]$과 $[F_0(x):\\cdots:F_N(x)]$가 사영공간에서 '같은 점'이라는 조건을 교차비($y_iF_j=y_jF_i$)로 표현한 것과 정확히 같다. 이 절 전체가 말해주는 것은, 세그레 사상이라는 하나의 구체적 구성만으로 '곱', '그래프', '텐서곱과의 관계'까지 대수기하학의 표준 도구상자 전체를 무료로 얻는다는 사실이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "모피즘 $f:X\\to Y$의 그래프 $\\mathrm{Graph}(f)\\subseteq X\\times Y$: 제1사영 $\\mathrm{pr}_1$은 그래프를 $X$ 위로 동형사상으로 되돌린다.",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.3,
+                -1.6
+              ],
+              "to": [
+                2.3,
+                -1.6
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.5,
+                -1.6
+              ],
+              "text": "$X$"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.3,
+                -1.6
+              ],
+              "to": [
+                -2.3,
+                1.8
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.3,
+                2.05
+              ],
+              "text": "$Y$"
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -1.8,
+                  -0.6
+                ],
+                [
+                  -1.65,
+                  -0.58
+                ],
+                [
+                  -1.5,
+                  -0.56
+                ],
+                [
+                  -1.35,
+                  -0.54
+                ],
+                [
+                  -1.2,
+                  -0.52
+                ],
+                [
+                  -1.05,
+                  -0.5
+                ],
+                [
+                  -0.9,
+                  -0.47
+                ],
+                [
+                  -0.75,
+                  -0.45
+                ],
+                [
+                  -0.6,
+                  -0.43
+                ],
+                [
+                  -0.45,
+                  -0.41
+                ],
+                [
+                  -0.3,
+                  -0.39
+                ],
+                [
+                  -0.15,
+                  -0.37
+                ],
+                [
+                  -0.0,
+                  -0.35
+                ],
+                [
+                  0.15,
+                  -0.33
+                ],
+                [
+                  0.3,
+                  -0.31
+                ],
+                [
+                  0.45,
+                  -0.29
+                ],
+                [
+                  0.6,
+                  -0.27
+                ],
+                [
+                  0.75,
+                  -0.25
+                ],
+                [
+                  0.9,
+                  -0.23
+                ],
+                [
+                  1.05,
+                  -0.2
+                ],
+                [
+                  1.2,
+                  -0.18
+                ],
+                [
+                  1.35,
+                  -0.16
+                ],
+                [
+                  1.5,
+                  -0.14
+                ],
+                [
+                  1.65,
+                  -0.12
+                ],
+                [
+                  1.8,
+                  -0.1
+                ]
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.6,
+                0.15
+              ],
+              "text": "$\\mathrm{Graph}(f)$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.5,
+                -1.6
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.5,
+                -1.9
+              ],
+              "text": "$p$"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0.5,
+                -1.6
+              ],
+              "to": [
+                0.5,
+                -0.35
+              ],
+              "dash": "3,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.5,
+                -0.35
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.85,
+                -0.35
+              ],
+              "text": "$(p,f(p))$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (준사영다양체의 곱 $X\\times Y$, $\\mathbb{A}^m\\times\\mathbb{A}^n=\\mathbb{A}^{m+n}$의 동일시)",
+          "formal_statement": "준사영다양체 $X\\subseteq\\mathbb{P}^m$, $Y\\subseteq\\mathbb{P}^n$에 대해 $$X\\times Y:=\\sigma_{m,n}(X\\times Y)\\subseteq\\Sigma_{m,n}$$ 로 정의한다. 명제 4.13에 의해 $\\mathbb{A}^m\\times\\mathbb{A}^n$을 $\\mathbb{A}^{m+n}$과 자연스럽게 동일시할 수 있다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.16 (아핀다양체의 곱은 아핀다양체이다)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^m$, $Y\\subseteq\\mathbb{A}^n$을 아핀다양체라 하자. 그러면 $X\\times Y\\subseteq\\mathbb{A}^m\\times\\mathbb{A}^n=\\mathbb{A}^{m+n}$은 아핀다양체이며 $$I(X\\times Y)=I(X)R_{m,n}+I(Y)R_{m,n}\\subseteq R_{m,n},\\qquad R_{m,n}:=\\mathbb{C}[x_1,\\dots,x_m,y_1,\\dots,y_n].$$",
+          "idea_behind_proof": "기약성 증명의 핵심은 '수직 조각 $\\{p\\}\\times Y$가 통째로 $Z_1$ 또는 $Z_2$에 속해야 한다'는 관찰을 이용해 문제를 $X$ 자체의 기약성으로 되돌리는 것이다. 이데알 등식의 어려운 포함 방향은 $f\\in R_{m,n}$을 $y$-단항식들에 대한 $\\mathbb{C}[x]$-계수의 조합으로 분해한 뒤 강한 Nullstellensatz를 적용하는 것이다.",
+          "proof_steps": [
+            "[준비 관찰] $f\\in R_{m,n}$에 대해, $\\mathbb{C}[y_1,\\dots,y_n]/I(Y)$ 안에서 $f$에 나타나는 $y$-단항식들이 생성하는 부분공간의 기저를 이루는 $q_1,\\dots,q_r\\in\\mathbb{C}[y_1,\\dots,y_n]$을 고를 수 있다. 그러면 $\\mathbb{C}[y]/I(Y)$ 안에서 $[f]=\\sum_{i=1}^r a_iq_i$인 $a_1,\\dots,a_r\\in\\mathbb{C}[x_1,\\dots,x_m]$이 존재한다. $p\\in X$에 대해, 모든 $y\\in Y$에서 $f(p,y)=0$인 것은 강한 Nullstellensatz에 의해 모든 $1\\le i\\le r$에서 $a_i(p)=0$인 것과 동치이다.",
+            "[기약성] $X\\times Y=Z_1\\cup Z_2$($Z_1,Z_2\\subseteq X\\times Y$는 닫힌부분집합)라 하자. 준비 관찰에 의해 $S_i:=\\{p\\in X\\mid\\{p\\}\\times Y\\subseteq Z_i\\}\\subseteq X$가 $i=1,2$에서 닫힌집합임을 보일 수 있다.",
+            "$\\{p\\}\\times Y\\cong Y$가 기약이므로 $\\{p\\}\\times Y$는 $Z_1$ 또는 $Z_2$에 포함된다. 따라서 $X=S_1\\cup S_2$이고, $X$가 기약이므로 $X=S_1$ 또는 $X=S_2$이다.",
+            "$X=S_1$이면 모든 $p\\in X$에서 $\\{p\\}\\times Y\\subseteq Z_1$이므로 $X\\times Y=Z_1$이다(마찬가지로 $X=S_2$이면 $X\\times Y=Z_2$). 따라서 $X\\times Y$는 기약이다.",
+            "[이데알 등식] $I(X)R_{m,n}+I(Y)R_{m,n}\\subseteq I(X\\times Y)$는 명백하다. 역포함은 준비 관찰과 강한 Nullstellensatz로부터 나온다: $f\\in I(X\\times Y)$이면 모든 $p\\in X$에서 모든 $a_i(p)=0$이므로 $a_i\\in I(X)$이고, 따라서 $[f]=\\sum a_iq_i\\equiv 0$을 $I(X)R_{m,n}+I(Y)R_{m,n}$을 법으로 얻어 $f\\in I(X)R_{m,n}+I(Y)R_{m,n}$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (텐서곱과 $A(X\\times Y)\\cong A(X)\\otimes_{\\mathbb{C}}A(Y)$)",
+          "formal_statement": "$\\mathbb{C}$-대수 $A,B$에 대해 $\\mathbb{C}$ 위의 텐서곱 $A\\otimes_{\\mathbb{C}}B$는 기호 $a\\otimes b$들로 생성되고 쌍선형성을 만족하며, 곱셈이 $(a\\otimes b)(a'\\otimes b'):=aa'\\otimes bb'$로 주어지는 $\\mathbb{C}$-벡터공간이다. 정리 4.16의 상황에서 $$A(X\\times Y)=R_{m,n}/(I(X)R_{m,n}+I(Y)R_{m,n})\\cong A(X)\\otimes_{\\mathbb{C}}A(Y)$$ 이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.18 (사영/준사영다양체의 곱은 다시 사영/준사영다양체이다)",
+          "formal_statement": "두 사영다양체의 곱은 사영다양체이고, 두 준사영다양체의 곱은 준사영다양체이다.",
+          "idea_behind_proof": "정리 4.16의 아핀적 계산을, 세그레 사상을 통한 원상 $\\Psi_{m,n}^{-1}$을 취해 사영적 언어로 옮기기만 하면 된다.",
+          "proof_steps": [
+            "$X\\subseteq\\mathbb{P}^m$, $Y\\subseteq\\mathbb{P}^n$을 사영다양체라 하자. 명제 4.13에 의해 $X\\times Y$는 사영대수적집합이다.",
+            "사영 Nullstellensatz와 정리 4.16(동차 버전, $R_{m,n}:=\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n]$)에 의해 $I(X)R_{m,n}+I(Y)R_{m,n}\\subseteq R_{m,n}$은 쌍동차다항식들로 생성되는 소이데알이다.",
+            "그러면 $\\Psi_{m,n}^{-1}(I(X)R_{m,n}+I(Y)R_{m,n})\\subseteq S_{m,n}$은 동차 소이데알이고, $\\sigma_{m,n}(X\\times Y)=V_+(\\Psi_{m,n}^{-1}(I(X)R_{m,n}+I(Y)R_{m,n}))$은 사영다양체이다.",
+            "두 번째 주장(준사영의 경우)은 명백하다 — 준사영다양체는 사영다양체의 열린부분집합이고, 곱 위상에서 열린집합들의 곱은 다시 곱공간의 열린집합이기 때문이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.19 (사영 사상은 모피즘이다)",
+          "formal_statement": "$X,Y$가 준사영다양체일 때, 사영 사상 $$\\mathrm{pr}_1:X\\times Y\\to X\\qquad\\text{와}\\qquad \\mathrm{pr}_2:X\\times Y\\to Y$$ 는 모피즘이다. 실제로 세그레 차트 $\\Sigma_{m,n}\\setminus V_+(Z_{ij})$ 위에서 이들은 $$\\mathrm{pr}_1([Z_{ab}])=[Z_{0j}:\\cdots:Z_{mj}]\\qquad\\text{와}\\qquad \\mathrm{pr}_2([Z_{ab}])=[Z_{i0}:\\cdots:Z_{in}]$$ 로 주어진다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (모피즘의 그래프)",
+          "formal_statement": "준사영다양체 사이의 모피즘 $f:X\\to Y$에 대해 그 그래프(graph)는 $$\\mathrm{Graph}(f):=\\{(x,f(x))\\mid x\\in X\\}\\subseteq X\\times Y$$ 이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.20 (모피즘의 그래프는 닫혀 있고, 정의역과 동형이다)",
+          "formal_statement": "준사영다양체 사이의 모든 모피즘 $f:X\\to Y$에 대해 $\\mathrm{Graph}(f)$는 $X\\times Y$ 안에서 닫혀 있고, 제한 사상 $$\\mathrm{pr}_1|_{\\mathrm{Graph}(f)}:\\mathrm{Graph}(f)\\to X$$ 는 동형사상이다. 특히 $\\mathrm{Graph}(f)$는 준사영다양체이다.",
+          "idea_behind_proof": "핵심 트릭은 그래프의 방정식이 '$y=[F_0(x):\\cdots:F_N(x)]$'라는 등식을 좌표별 교차곱 $y_iF_j-y_jF_i=0$으로 다시 쓴 것뿐이라는 관찰이다. 이는 명제 4.13에 의해 쌍동차다항식들의 공통 영점궤적이므로 자동으로 닫힌집합이 되고, 역사상 $x\\mapsto(x,f(x))$가 세그레 매장을 통해 모피즘임을 직접 확인하면 끝난다.",
+          "proof_steps": [
+            "$X\\subseteq\\mathbb{P}^M$, $Y\\subseteq\\mathbb{P}^N$로 매장하자. $p\\in X$에 대해, $f$가 $p$의 근방 $W$ 위에서 같은 차수의 동차다항식 $F_0,\\dots,F_N\\in\\mathbb{C}[x_0,\\dots,x_M]$(공통 영점 없음)로 $(F_0,\\dots,F_N)$로 표현된다고 하자. $W$를 좁혀 어떤 $0\\le j\\le N$에서 $F_j$가 $W$ 위에서 어디서도 $0$이 아니라고 가정할 수 있다.",
+            "그러면 $f(W)$는 $\\mathbb{P}^N$의 아핀 차트 $U_j$ 안에 놓인다. $\\mathrm{Graph}(f)$는 $W\\times Y$ 안에서 $0\\le i\\le M$에 대한 쌍동차 방정식 $y_iF_j-y_jF_i=0$으로 잘려 나온다는 사실에 유의하라.",
+            "명제 4.13에 의해 이 방정식들의 공통 영점궤적은 $W\\times Y$ 안에서 닫혀 있다. 따라서 $\\mathrm{Graph}(f)$는 $X\\times Y$ 전역에서 닫혀 있다.",
+            "이제 제한 사상 $\\mathrm{pr}_1|_{\\mathrm{Graph}(f)}:\\mathrm{Graph}(f)\\to X$가 모피즘임에 유의하고, 그 역사상은 $$X\\to\\mathrm{Graph}(f),\\qquad x\\mapsto(x,f(x))$$ 이다. 이 역사상이 모피즘임은 세그레 매장을 이용해 쉽게 보일 수 있다(각 좌표가 $x$의 좌표와 $f$를 정의하는 동차다항식들의 곱으로 쓰이므로). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.21 (항등사상의 그래프는 대각선이다)",
+          "formal_statement": "$f=\\mathrm{id}_{\\mathbb{P}^n}$일 때 $\\mathrm{Graph}(f)$는 $\\mathbb{P}^n\\times\\mathbb{P}^n$의 대각선 $\\Delta_{\\mathbb{P}^n}$이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "정리 4.16의 '준비 관찰'을 아주 간단한 예로 확인하라: $X=\\mathbb{A}^1$(좌표 $x$), $Y=V(y)\\subseteq\\mathbb{A}^1$(좌표 $y$, 즉 원점 한 점)일 때, $f(x,y)=xy+x^2\\in R_{1,1}=\\mathbb{C}[x,y]$에 대해 $q_1,\\dots,q_r$과 $a_1,\\dots,a_r$을 구체적으로 찾아라. 그리고 $p\\in X$에서 $f(p,y)=0$($y\\in Y=\\{0\\}$에서)이 되는 조건을 $a_i(p)=0$의 조건과 비교하라.",
+          "hint": "$I(Y)=(y)$이므로 $\\mathbb{C}[y]/I(Y)\\cong\\mathbb{C}$이고, 그 안에서 $y$의 잉여류는 $0$이다. $f=xy+x^2$을 $y$에 대해 나누어 몫과 나머지($y$가 없는 부분)를 분리해 보라.",
+          "solution": "$\\mathbb{C}[y]/(y)\\cong\\mathbb{C}$이며 이 몫환에서 기저는 $q_1=1$ 하나뿐이다($y$ 자신은 $0$과 같으므로). $f=xy+x^2$을 $\\mathbb{C}[y]/(y)$에서 보면 $[f]=[xy]+[x^2]=x\\cdot[y]+x^2\\cdot[1]=x\\cdot 0+x^2\\cdot 1=x^2$이므로, $a_1=x^2$이다(즉 $[f]=a_1q_1$). 이제 $p=x_0\\in X=\\mathbb{A}^1$에서 $f(p,y)=0$이 $Y=\\{0\\}$의 유일한 점 $y=0$에서 성립하는지 확인하면 $f(x_0,0)=x_0\\cdot 0+x_0^2=x_0^2$이므로 $f(p,0)=0\\iff x_0^2=0\\iff x_0=0$이다. 이는 정확히 $a_1(p)=p^2=0\\iff p=0$이라는 조건과 일치한다 — 준비 관찰이 이 간단한 예에서 정확히 확인된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 4.21에서 $f=\\mathrm{id}_{\\mathbb{P}^1}$일 때, 명제 4.20의 그래프 방정식 $y_iF_j-y_jF_i=0$이 실제로 대각선의 방정식 $x_i-y_i$(예제 4.14)와 (스칼라 인수 차이를 제외하면) 같은 영점궤적을 정의함을 확인하라.",
+          "hint": "$f=\\mathrm{id}$이므로 $F_i=x_i$로 둘 수 있다(즉 $(F_0,F_1)=(x_0,x_1)$). $y_iF_j-y_jF_i$에 이를 대입해 보라.",
+          "solution": "$f=\\mathrm{id}_{\\mathbb{P}^1}$이므로 $F_0=x_0,F_1=x_1$로 둘 수 있다. 그러면 $y_iF_j-y_jF_i=y_ix_j-y_jx_i$이다. $i=0,j=1$일 때 $y_0x_1-y_1x_0=0$은 $[x_0:x_1]=[y_0:y_1]$(사영좌표가 같다는 것, 즉 교차곱이 같다는 것)과 동치이며, 이는 정확히 $x_0=y_0,x_1=y_1$(스칼라배까지)과 같은 영점궤적, 즉 대각선 $\\Delta_{\\mathbb{P}^1}=V_+(x_0-y_0,x_1-y_1)$(예제 4.14의 방정식 $x_i-y_i$)이 정의하는 것과 정확히 일치하는 자리스키 닫힌집합이다."
+        },
+        {
+          "type": "ox",
+          "question": "정리 4.16에 의해, 두 아핀다양체 $X,Y$의 곱의 좌표환 $A(X\\times Y)$는 항상 $A(X)$와 $A(Y)$의 텐서곱 $A(X)\\otimes_{\\mathbb{C}}A(Y)$와 동형이다.",
+          "answer": "O",
+          "explanation": "참이다. 참고 4.17의 내용 그대로다. $A(X\\times Y)=R_{m,n}/(I(X)R_{m,n}+I(Y)R_{m,n})$이고, 이는 정확히 $A(X)\\otimes_{\\mathbb{C}}A(Y)$와 동형이다 — 즉 곱 다양체의 좌표환은 각 좌표환의 텐서곱이라는, 대수기하학에서 자주 쓰이는 표준 사실이다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 4.20에 의해, 모피즘 $f:X\\to Y$의 그래프 $\\mathrm{Graph}(f)$는 $X\\times Y$의 부분집합으로서 항상 $Y$와 동형이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 4.20이 실제로 보이는 것은 $\\mathrm{Graph}(f)$가 $\\mathrm{pr}_1$(제1사영, $X$로 가는 사영)을 통해 정의역 $X$와 동형이라는 것이지, 공역 $Y$와 동형이라는 것이 아니다. 예를 들어 $f$가 상수사상이면 $\\mathrm{Graph}(f)\\cong X$이지만 $Y$와는 (차원이 다르면) 전혀 동형이 아닐 수 있다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 4.16의 기약성 증명은 '수직 조각 $\\{p\\}\\times Y$가 통째로 $Z_1$ 또는 $Z_2$에 속해야 한다'는 사실에 의존한다. 만약 $Y$가 기약이 아니라 두 기약성분 $Y_1,Y_2$로 쪼개지는 대수적집합이었다면, 이 증명의 논증이 정확히 어느 단계에서 깨지는지 설명하고, $X\\times Y$가 그 경우 몇 개의 기약성분을 가질지 논하라.",
+          "hint": "'$\\{p\\}\\times Y\\cong Y$가 기약이므로 $Z_1$ 또는 $Z_2$에 통째로 포함된다'는 문장이 $Y$가 기약이 아니면 어떻게 실패하는지 생각해 보라. $\\{p\\}\\times Y$ 자체를 $Y_1,Y_2$에 대응하는 두 조각으로 쪼갤 수 있다면 어떻게 되는가?",
+          "answer": "증명이 깨지는 정확한 지점은 '$\\{p\\}\\times Y\\cong Y$가 기약이므로 $Z_1$ 또는 $Z_2$에 포함된다'는 단계다. $Y$가 기약이 아니라 $Y=Y_1\\cup Y_2$(두 기약성분)라면, $\\{p\\}\\times Y=(\\{p\\}\\times Y_1)\\cup(\\{p\\}\\times Y_2)$ 자체가 이미 두 조각으로 쪼개져 있으므로, $Z_1:=X\\times Y_1$, $Z_2:=X\\times Y_2$로 두면 각 수직 조각 $\\{p\\}\\times Y$는 온전히 $Z_1$이나 $Z_2$ 중 하나에만 속하는 것이 아니라 그 자체로 $Z_1$과 $Z_2$ 양쪽에 걸쳐 있게 되어(즉 $\\{p\\}\\times Y_1\\subseteq Z_1$이면서 $\\{p\\}\\times Y_2\\subseteq Z_2$), '통째로 한쪽에 속한다'는 전제 자체가 무너진다. 실제로 이 경우 $X\\times Y=X\\times(Y_1\\cup Y_2)=(X\\times Y_1)\\cup(X\\times Y_2)$이고, $X$가 기약이라면(각 $X\\times Y_i$가 정리 4.16에 의해 기약이므로) $X\\times Y$는 정확히 두 개의 기약성분 $X\\times Y_1$, $X\\times Y_2$를 갖는다 — 일반적으로 $X$가 $k$개, $Y$가 $\\ell$개의 기약성분을 가지면 $X\\times Y$는 (자명한 상황 가정 아래) 최대 $k\\ell$개의 기약성분 $X_i\\times Y_j$들로 쪼개진다. 즉 곱의 기약성분의 개수는 각 인자의 기약성분 개수의 곱으로 늘어나며, 이것이 정리 4.16이 '기약'이라는 가정을 반드시 명시적으로 요구하는 이유다."
+        }
+      ]
+    }
+  ]
+}

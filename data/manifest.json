@@ -119,6 +119,12 @@
       "title": "3. Projective Varieties",
       "file": "3_projective_varieties.json",
       "book": "Park — Introduction to Algebraic Geometry"
+    },
+    {
+      "id": "4_classical_projective_embeddings",
+      "title": "4. Classical Projective Embeddings",
+      "file": "4_classical_projective_embeddings.json",
+      "book": "Park — Introduction to Algebraic Geometry"
     }
   ]
 }

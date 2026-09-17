@@ -1,0 +1,236 @@
+{
+  "chapter_info": {
+    "title": "4. Classical Projective Embeddings",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "사영다양체를 다루는 가장 강력한 방법 중 하나는 그것을 더 큰 사영공간 안으로 구체적인 다항식 사상을 통해 '매장(embed)'하는 것이다. 이 장은 그런 매장의 고전적인 세 가지 예 — 베로네제 사상(모든 차수 $d$의 단항식을 좌표로 삼는 매장), 유리정규곡선(베로네제 매장의 $n=1$ 특수한 경우), 세그레 사상(두 사영공간의 곱을 하나의 사영공간에 매장) — 을 다루고, 마지막으로 두 사영다양체의 곱이라는 개념 자체를 정의한다. 이 구성들은 모두 '동차좌표를 이용해 직접 매장 사상을 쓰고, 그 상의 동차이데알을 명시적으로 계산한다'는 같은 패턴을 따르며, 사영기하학에서 구체적인 다양체를 손으로 다루는 표준 도구상자를 이룬다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.3 Segre maps",
+      "step1_big_picture": {
+        "context": "두 준사영다양체 $X,Y$의 곱 $X\\times Y$에 준사영적 구조를 주는 일은 얼핏 보기와 달리 자명하지 않다 — $\\mathbb{P}^n\\times\\mathbb{P}^n$에 순진하게 상자위상(box topology, 두 자리스키 위상의 곱위상)을 주면 대각선 $\\Delta_{\\mathbb{P}^n}=\\{(x,x)\\}$가 닫힌집합조차 되지 않는다(사실 $\\Delta_{\\mathbb{P}^n}$이 전체 공간만큼 조밀해져 버린다). 이 절은 이 문제를 세그레 사상(Segre map) $\\sigma_{m,n}:\\mathbb{P}^m\\times\\mathbb{P}^n\\to\\mathbb{P}^{(m+1)(n+1)-1}$이라는 구체적인 매장으로 해결한다 — 좌표의 곱 $x_iy_j$ 전체를 새로운 좌표로 삼는 것이다. 이는 베로네제 사상과 완전히 같은 정신의 구성이다: 두 사영공간의 곱이라는, 그 자체로는 사영공간이 아닌 대상을, 그 좌표들의 '쌍선형 조합'을 명시적인 사영좌표로 승격시켜 하나의 사영공간 안으로 실현하는 것. 그 상 $\\Sigma_{m,n}$이 실제로 사영다양체이고 그 방정식이 정확히 $2\\times 2$ 소행렬식들(명제 4.10, 정리 4.11)이라는 사실은 예제 4.3(베로네제 곡면)과 따름정리 4.7(유리정규곡선)에서 본 패턴의 세 번째 반복이다.",
+        "hidden_intuition": "세그레 사상의 방정식 $Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}=0$의 배후에는 아주 단순한 선형대수적 사실이 있다 — $Z_{ij}=x_iy_j$로 두면 $Z_{ij}Z_{k\\ell}=x_iy_jx_ky_\\ell=x_iy_\\ell x_ky_j=Z_{i\\ell}Z_{kj}$가 항등식으로 성립하는데, 이는 $x_iy_j$라는 좌표들이 실제로는 $(m+1)\\times(n+1)$ 행렬(랭크 $1$ 행렬, 즉 벡터 $x$와 $y$의 외적 $xy^T$)의 성분들이라는 사실의 직접적인 반영이다 — 랭크 $1$ 행렬의 특징이 바로 모든 $2\\times 2$ 소행렬식이 $0$이라는 것이다! 즉 $\\Sigma_{m,n}$은 기하학적으로 '랭크 $1$인 $(m+1)\\times(n+1)$ 행렬들의 사영화'이며, 이것이 정확히 두 벡터의 외적으로 쓰이는 행렬들의 공간이라는 사실이 $\\sigma_{m,n}$이 $\\mathbb{P}^m\\times\\mathbb{P}^n$과 전단사가 되는 이유다(랭크 $1$ 행렬을 외적으로 분해하는 방법이 스칼라배를 제외하면 유일하므로). $m=n=1$인 예제 4.12의 이차곡면 $\\Sigma_{1,1}$이 두 족의 직선들로 완전히 덮인다는 사실(선직면, ruled surface)은 이 '랭크 $1$ 행렬'이라는 그림의 직접적인 결과다 — 한 좌표 $[a:b]\\in\\mathbb{P}^1$을 고정하고 다른 좌표를 움직이면 $\\mathbb{P}^1\\times\\{[a:b]\\}$ 또는 $\\{[a:b]\\}\\times\\mathbb{P}^1$이 세그레 매장 아래에서 각각 하나의 직선이 되는데, 이는 랭크 $1$ 행렬의 행(또는 열) 하나를 고정하고 나머지를 스칼라배하는 것에 해당한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "세그레 이차곡면 $\\Sigma_{1,1}\\subseteq\\mathbb{P}^3$의 두 직선족 개념도: 한 족($L^1$)과 다른 족($L^2$)이 서로 교차하며 곡면을 뒤덮는다(선직면, ruled surface).",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  -2,
+                  -1.2
+                ],
+                [
+                  2,
+                  -1.2
+                ],
+                [
+                  1.3,
+                  1.4
+                ],
+                [
+                  -2.7,
+                  1.4
+                ]
+              ],
+              "fill": "none"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.8,
+                -1.1
+              ],
+              "to": [
+                -2.5,
+                1.3
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -0.7,
+                -1.15
+              ],
+              "to": [
+                -1.5,
+                1.35
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0.6,
+                -1.18
+              ],
+              "to": [
+                -0.3,
+                1.38
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                1.8,
+                -1.2
+              ],
+              "to": [
+                0.9,
+                1.4
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.9,
+                -0.6
+              ],
+              "to": [
+                1.5,
+                0.1
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.2,
+                0.1
+              ],
+              "to": [
+                1.1,
+                0.7
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.5,
+                0.6
+              ],
+              "to": [
+                0.7,
+                1.15
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.9,
+                -0.5
+              ],
+              "text": "$L^1$족"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.6,
+                1.0
+              ],
+              "text": "$L^2$족"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (쌍동차다항식, 세그레 사상 $\\sigma_{m,n}$)",
+          "formal_statement": "변수 $x_0,\\dots,x_m$과 $y_0,\\dots,y_n$의 다항식이 쌍차수(bidegree) $(a,b)$의 쌍동차(bihomogeneous)라는 것은 $x$-변수들에 대해 차수 $a$, $y$-변수들에 대해 차수 $b$인 동차식이라는 것이다. 그 영점궤적은 $\\mathbb{P}^m\\times\\mathbb{P}^n$ 위에서 잘 정의된다. $\\mathbb{P}^{(m+1)(n+1)-1}$에 $0\\le i\\le m$, $0\\le j\\le n$인 좌표 $Z_{ij}$를 부여하자. 세그레 사상(Segre map)은 $$\\sigma_{m,n}:\\mathbb{P}^m\\times\\mathbb{P}^n\\longrightarrow\\mathbb{P}^{(m+1)(n+1)-1},\\qquad ([x_i],[y_j])\\longmapsto[x_iy_j]_{i,j}$$ 이다. 이 사상은 잘 정의되어 있고 단사임을 쉽게 확인할 수 있다. $\\Sigma_{m,n}:=\\sigma_{m,n}(\\mathbb{P}^m\\times\\mathbb{P}^n)\\subseteq\\mathbb{P}^{(m+1)(n+1)-1}$이라 쓴다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.10 ($\\ker(\\Psi_{m,n})$은 동차 소이데알이며 그뢰브너 기저를 이룬다)",
+          "formal_statement": "$\\mathbb{C}[Z_{ij}\\mid 0\\le i\\le m,0\\le j\\le n]=:S_{m,n}$ 위에 사전식 순서 $Z_{0n}\\succ\\cdots\\succ Z_{00}\\succ Z_{1n}\\succ\\cdots\\succ Z_{10}\\succ\\cdots$를 쓰자. 환 준동형 $$\\Psi_{m,n}:S_{m,n}\\longrightarrow\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n],\\qquad Z_{ij}\\longmapsto x_iy_j$$ 를 생각하면, $$\\ker(\\Psi_{m,n})=\\big(Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}\\mid 0\\le i<k\\le m,\\ 0\\le j<\\ell\\le n\\big)\\subseteq\\mathbb{C}[Z_{ij}]$$ 는 동차 소이데알이며, 이 생성원들은 $\\ker(\\Psi_{m,n})$의 그뢰브너 기저를 이룬다.",
+          "idea_behind_proof": "핵심은 각 생성원 $Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}$의 선도항이 $Z_{i\\ell}Z_{kj}$라는 것을 확인한 뒤, 이 생성원들로 임의의 다항식을 나눈 나머지가 '지수가 각 성분별로 정렬된' 단항식들의 선형결합이 된다는 사실(명제 1.14)과, 그런 정렬된 단항식들이 $\\Psi_{m,n}$ 아래에서 서로 다른 상을 가지면 자기 자신도 서로 다르다는 단사성 논증을 결합하는 것이다.",
+          "proof_steps": [
+            "$J_{m,n}:=(Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}\\mid 0\\le i<k\\le m,\\ 0\\le j<\\ell\\le n)\\subseteq\\ker(\\Psi_{m,n})$은 명백하다.",
+            "역포함을 위해, $0\\le i<k\\le m$, $0\\le j<\\ell\\le n$에서 $\\mathrm{LM}_\\prec(Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj})=Z_{i\\ell}Z_{kj}$임에 유의하라.",
+            "명제 1.14에 의해 임의의 $F\\in S_{m,n}$을 $J_{m,n}$의 생성원들로 나눈 나머지는 $0\\le i_1\\le\\cdots\\le i_r\\le m$, $0\\le j_1\\le\\cdots\\le j_r\\le n$인 단항식 $Z_{i_1j_1}\\cdots Z_{i_rj_r}$들의 선형결합으로 남는다.",
+            "이러한 두 단항식이 $\\Psi_{m,n}$ 아래 같은 상을 갖는다면, 즉 $x_{i_1}\\cdots x_{i_r}y_{j_1}\\cdots y_{j_r}=x_{i_1'}\\cdots x_{i_r'}y_{j_1'}\\cdots y_{j_r'}$라면 (지수가 정렬되어 있으므로) $Z_{i_1j_1}\\cdots Z_{i_rj_r}=Z_{i_1'j_1'}\\cdots Z_{i_r'j_r'}$ 자체가 성립한다.",
+            "따라서 $\\ker(\\Psi_{m,n})$의 모든 다항식은 이 나눗셈에서 나머지가 $0$이 되므로 $J_{m,n}=\\ker(\\Psi_{m,n})$이며, 이는 동차이데알이다. 부흐베르거 판정법(Buchberger criterion)에 의해 나열된 생성원들은 $\\ker(\\Psi_{m,n})$의 그뢰브너 기저를 이룬다.",
+            "$\\Psi_{m,n}$이 전사이고 그 상이 정역이므로 $\\ker(\\Psi_{m,n})$은 소이데알이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.11 (세그레 사상의 상은 사영다양체이다)",
+          "formal_statement": "세그레 사상 $\\sigma_{m,n}$의 상은 사영다양체 $$\\Sigma_{m,n}=V_+(\\ker(\\Psi_{m,n}))\\subseteq\\mathbb{P}^{(m+1)(n+1)-1}$$ 이며, $I(\\Sigma_{m,n})=\\ker(\\Psi_{m,n})$이다.",
+          "idea_behind_proof": "베로네제의 경우(정리 4.2)와 완전히 같은 패턴이다: 상이 $V_+(\\ker\\Psi_{m,n})$에 포함됨은 자명하고, 반대 포함은 각 열린조각 $\\Sigma_{m,n}\\setminus V_+(Z_{ab})$ 위에서 명시적인 국소 역사상을 구성해 보인다.",
+          "proof_steps": [
+            "$\\Sigma_{m,n}\\subseteq V_+(\\ker(\\Psi_{m,n}))$은 명백하다.",
+            "열린집합 $\\Sigma_{m,n}\\setminus V_+(Z_{ab})$ 위에서 $$[Z_{ij}]\\mapsto\\big([Z_{0b}:\\cdots:Z_{mb}],[Z_{a0}:\\cdots:Z_{an}]\\big)$$ 가 $\\Psi_{m,n}$의 국소 역사상임을 쉽게 확인할 수 있다.",
+            "이 국소 역사상들은 공통 교집합에서 같은 사상의 역이므로 서로 일치한다. 따라서 $\\Sigma_{m,n}\\supseteq V_+(\\ker(\\Psi_{m,n}))$을 얻어 등식이 성립한다.",
+            "사영 Nullstellensatz와 명제 4.10에 의해 $I(\\Sigma_{m,n})=\\ker(\\Psi_{m,n})$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($\\mathbb{P}^m\\times\\mathbb{P}^n$에 사영다양체 구조를 부여)",
+          "formal_statement": "세그레 사상 $\\sigma_{m,n}:\\mathbb{P}^m\\times\\mathbb{P}^n\\to\\Sigma_{m,n}$을 통해 $\\Sigma_{m,n}$의 사영다양체 구조를 곱 $\\mathbb{P}^m\\times\\mathbb{P}^n$으로 옮겨 놓으면, $\\sigma_{m,n}$은 동형사상이 된다. 따라서 세그레 사상 $\\sigma_{m,n}$은 $\\mathbb{P}^m\\times\\mathbb{P}^n$을 $\\mathbb{P}^{(m+1)(n+1)-1}$ 안으로 매장하는 매장사상이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.12 ($m=n=1$: 세그레 이차곡면과 두 직선족)",
+          "formal_statement": "$m=n=1$이면 $\\Sigma_{1,1}=V_+(Z_{00}Z_{11}-Z_{01}Z_{10})\\subseteq\\mathbb{P}^3$이다. $[a:b]\\in\\mathbb{P}^1$에 대해 $\\Sigma_{1,1}$ 위에 다음 두 족의 직선이 있다: $$L^1_{[a:b]}:=\\{[sa:sb:ta:tb]\\mid[s:t]\\in\\mathbb{P}^1\\}\\qquad\\text{와}\\qquad L^2_{[a:b]}:=\\{[as:at:bs:bt]\\mid[s:t]\\in\\mathbb{P}^1\\}.$$ 이차곡면 $\\Sigma_{1,1}\\subseteq\\mathbb{P}^3$ 위의 모든 점은 각 족의 직선 정확히 하나 위에 놓인다. 한편 $Z_{00}Z_{11}-Z_{01}Z_{10}$은 일차형식들의 행렬 $\\begin{pmatrix}Z_{00}&Z_{01}\\\\Z_{10}&Z_{11}\\end{pmatrix}$의 행렬식이다. 더 일반적으로, 동차이데알 $\\ker(\\Psi_{m,n})$은 항상 일차형식들의 행렬의 $2\\times 2$ 소행렬식들로 생성됨을 보일 수 있다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.13 ($\\mathbb{P}^m\\times\\mathbb{P}^n$의 사영대수적집합 = 쌍동차다항식들의 공통 영점궤적)",
+          "formal_statement": "$\\mathbb{P}^m\\times\\mathbb{P}^n$의 모든 사영대수적집합은 정확히 $\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n]$의 쌍동차다항식들의 공통 영점궤적이다.",
+          "idea_behind_proof": "한 방향은 $\\Sigma_{m,n}$의 닫힌집합을 세그레 사상으로 되당겨(pull back) $\\Psi_{m,n}$의 상이 쌍동차임을 확인하는 것뿐이다. 다른 방향(쌍동차다항식들의 공통 영점궤적이 실제로 닫힌집합이라는 것)은 쌍차수 $(a,b)$의 다항식을 최대차수 $e=\\max(a,b)$까지 인위적으로 끌어올려 완전히 $(e,e)$쌍동차로 만든 뒤, 그 단항식들을 세그레 좌표 $Z_{ij}=x_iy_j$로 치환해 $\\Sigma_{m,n}$ 안의 진짜 동차다항식으로 바꾸는 트릭이다.",
+          "proof_steps": [
+            "$\\Sigma_{m,n}$의 모든 닫힌부분집합은 어떤 동차이데알 $I\\subseteq S_{m,n}$에 대해 $\\Sigma_{m,n}\\cap V_+(I)$의 꼴이다. 그러면 $(\\Psi_{m,n}(I))\\subseteq\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n]$은 쌍동차다항식들로 생성되고, 그 공통 영점궤적이 정확히 $\\sigma_{m,n}(\\Sigma_{m,n}\\cap V_+(I))$이다.",
+            "역으로, 쌍동차다항식 $F_1,\\dots,F_r$의 공통 영점궤적이 $\\mathbb{P}^m\\times\\mathbb{P}^n$의 닫힌집합임을 보이면 충분하다. 이는 쌍차수 $(a,b)$인 $0$이 아닌 쌍동차다항식 $F$ 하나의 영점궤적이 닫힌집합임을 보이는 것으로 환원된다.",
+            "$e:=\\max\\{a,b\\}$로 두고, $F$에 차수 $e-a$인 모든 $x$-단항식과 차수 $e-b$인 모든 $y$-단항식을 곱하자. 그 결과 얻는 다항식들은 전부 쌍차수 $(e,e)$이고, 그 공통 영점궤적은 $F$의 영점궤적과 같다.",
+            "$e=0$이면 $F$는 $0$이 아닌 상수이므로 그 영점궤적은 공집합(닫힌집합)이다. $e>0$이라 하자. 쌍차수 $(e,e)$의 모든 단항식은 $e$개의 항 $x_iy_j$의 곱이다.",
+            "$Z_{ij}=x_iy_j$를 대입하면 각 결과 다항식은 세그레 좌표에서 차수 $e$의 동차다항식이 되고, 그 영점궤적은 $\\Sigma_{m,n}$ 안에서 닫혀 있으므로 $\\mathbb{P}^m\\times\\mathbb{P}^n$ 안에서도 닫혀 있다.",
+            "$F$의 영점궤적은 이렇게 얻은 유한 개의 닫힌집합들의 교집합이므로 그 자체로 닫혀 있다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.14 (대각선 $\\Delta_{\\mathbb{P}^n}$의 방정식)",
+          "formal_statement": "$\\mathbb{P}^n\\times\\mathbb{P}^n$의 대각선 $\\Delta_{\\mathbb{P}^n}$은 쌍동차다항식 $x_i-y_i$ ($0\\le i\\le n$)들의 공통 영점궤적이다(명제 4.13에 의해 이는 실제로 닫힌집합이다). $\\Delta_{\\mathbb{P}^n}\\cong\\mathbb{P}^n$임에 유의하라."
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.15 (공선성의 삼중동차 판정식과 일반위치의 일반화)",
+          "formal_statement": "$\\mathbb{P}^2$의 세 점 $p_1,p_2,p_3$이 공선(collinear)인 것은 $\\mathbb{P}^2\\times\\mathbb{P}^2\\times\\mathbb{P}^2$ 위의 삼중동차다항식 $$\\det\\begin{pmatrix}x_0&x_1&x_2\\\\y_0&y_1&y_2\\\\z_0&z_1&z_2\\end{pmatrix}=x_0y_1z_2+x_1y_2z_0+x_2y_0z_1-x_2y_1z_0-x_1y_0z_2-x_0y_2z_1$$ 이 $(p_1,p_2,p_3)$에서 소멸하는 것과 동치이다. 따라서 기약공간 $\\mathbb{P}^2\\times\\mathbb{P}^2\\times\\mathbb{P}^2$의 한 열린부분집합이 $\\mathbb{P}^2$ 위의 (순서 있는) 공선이 아닌 세 점들을 매개변수화한다 — 즉 '$\\mathbb{P}^2$의 일반적인 세 점은 공선이 아니다'라고 말할 수 있다. 더 일반적으로, $\\mathbb{P}^d$의 일반적인 $d+3$개의 점은 일반위치에 있음을 보일 수 있다. 따라서 $\\mathbb{P}^d$의 일반적인 $d+3$개의 점을 지나는 유리정규곡선이 유일하게 존재한다고 말할 수 있다(정리 4.9 참고)."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\sigma_{1,1}([1:0],[1:0])$과 $\\sigma_{1,1}([1:0],[0:1])$을 세그레 사상의 정의($Z_{00}=x_0y_0,Z_{01}=x_0y_1,Z_{10}=x_1y_0,Z_{11}=x_1y_1$)로 직접 계산하고, 두 점이 모두 예제 4.12의 직선 $L^2_{[1:0]}$ 위에 있음을 확인하라(첫 번째 인자 $x=[1:0]$을 고정하고 두 번째 인자 $y$만 움직인 것임에 유의).",
+          "hint": "$x=(1,0)$을 고정하고 $y=(1,0)$과 $y=(0,1)$을 각각 대입해 $(Z_{00},Z_{01},Z_{10},Z_{11})$을 계산하라. $L^2_{[a:b]}=\\{[as:at:bs:bt]\\mid[s:t]\\in\\mathbb{P}^1\\}$에 $[a:b]=[1:0]$을 대입한 꼴과 비교하라.",
+          "solution": "$\\sigma_{1,1}([1:0],[1:0])=[1\\cdot1:1\\cdot0:0\\cdot1:0\\cdot0]=[1:0:0:0]$이고, $\\sigma_{1,1}([1:0],[0:1])=[1\\cdot0:1\\cdot1:0\\cdot0:0\\cdot1]=[0:1:0:0]$이다. $L^2_{[1:0]}=\\{[s:t:0:0]\\mid[s:t]\\in\\mathbb{P}^1\\}$(정의에서 $[a:b]=[1:0]$을 대입)이며, $[s:t]=[1:0]$일 때 $[1:0:0:0]$, $[s:t]=[0:1]$일 때 $[0:1:0:0]$을 주므로 두 점 모두 정확히 $L^2_{[1:0]}$ 위에 있다. 이는 '첫 번째 인자를 고정하면 세그레 매장 아래 $L^2$족의 직선을 따라간다'는 사실의 직접 확인이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 4.15의 공선성 판정식을, $p_1=[1:0:0],p_2=[0:1:0],p_3=[1:1:0]$(모두 $z=0$인 직선 $V_+(x_2)$ 위의 점들이므로 공선이어야 함)에 대해 실제로 대입해 $0$이 됨을 확인하라.",
+          "hint": "$x=(1,0,0),y=(0,1,0),z=(1,1,0)$을 행렬식 공식에 그대로 대입해 계산하라.",
+          "solution": "$\\det\\begin{pmatrix}1&0&0\\\\0&1&0\\\\1&1&0\\end{pmatrix}$을 마지막 열을 따라 전개하면 세 성분이 모두 $0$이므로 행렬식 자체가 $0$이다(마지막 열 전체가 $0$이기 때문). 실제로 $p_1,p_2,p_3$은 모두 $x_2=0$인 직선 $V_+(x_2)\\subseteq\\mathbb{P}^2$ 위에 있으므로 공선이고, 이는 판정식이 $0$이 된다는 것과 정확히 일치한다."
+        },
+        {
+          "type": "ox",
+          "question": "$\\mathbb{P}^n\\times\\mathbb{P}^n$에 상자위상(두 자리스키 위상의 곱위상)을 그대로 주면, 대각선 $\\Delta_{\\mathbb{P}^n}$은 그 위상에서 닫힌집합이 된다.",
+          "answer": "X",
+          "explanation": "거짓이다. 강의노트가 명시하듯, $\\mathbb{P}^n\\times\\mathbb{P}^n$의 모든 점의 모든 열린근방이 $\\Delta_{\\mathbb{P}^n}$과 교차하므로 $\\Delta_{\\mathbb{P}^n}$의 (상자위상에서의) 폐포는 전체 공간 $\\mathbb{P}^n\\times\\mathbb{P}^n$과 같다 — 즉 대각선은 전혀 닫혀 있지 않고 오히려 조밀하다. 이것이 정확히 상자위상을 버리고 세그레 매장을 통한 위상을 도입해야 하는 이유다."
+        },
+        {
+          "type": "ox",
+          "question": "세그레 사상 $\\sigma_{m,n}$의 상 $\\Sigma_{m,n}\\subseteq\\mathbb{P}^{(m+1)(n+1)-1}$의 동차이데알은 $2\\times 2$ 소행렬식들로 생성된다.",
+          "answer": "O",
+          "explanation": "참이다. 명제 4.10과 정리 4.11의 내용 그대로다. $\\ker(\\Psi_{m,n})$은 $Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}$ 꼴의 생성원들로 주어지며, 이는 $(Z_{ij})$를 $(m+1)\\times(n+1)$ 행렬로 배열했을 때의 $2\\times 2$ 소행렬식들과 정확히 같다 — 이는 $\\Sigma_{m,n}$이 랭크 $1$ 행렬들의 사영화라는 사실의 대수적 반영이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 4.12에서 세그레 이차곡면 $\\Sigma_{1,1}\\subseteq\\mathbb{P}^3$의 모든 점이 각 직선족의 직선 정확히 하나 위에 놓인다는 사실을, '랭크 $1$ 행렬'이라는 관점에서 설명하라. 그리고 이 사실이 $\\Sigma_{1,1}\\cong\\mathbb{P}^1\\times\\mathbb{P}^1$이라는 것과 어떻게 정합적으로 들어맞는지 논하라.",
+          "hint": "세그레 좌표를 $2\\times 2$ 행렬 $M=\\begin{pmatrix}Z_{00}&Z_{01}\\\\Z_{10}&Z_{11}\\end{pmatrix}$로 배열하면 $\\Sigma_{1,1}$의 점들이 정확히 어떤 행렬들에 대응하는지, 그리고 그 행렬을 두 벡터의 외적으로 분해하는 방법이 몇 가지인지 생각해 보라.",
+          "answer": "$\\Sigma_{1,1}$의 점은 $Z_{ij}=x_iy_j$ 꼴, 즉 행렬 $M=\\begin{pmatrix}x_0\\\\x_1\\end{pmatrix}\\begin{pmatrix}y_0&y_1\\end{pmatrix}=\\begin{pmatrix}x_0y_0&x_0y_1\\\\x_1y_0&x_1y_1\\end{pmatrix}$로 쓰이는 랭크 $1$(또는 영) 행렬들의 사영화다. 랭크 $1$ 행렬을 열벡터와 행벡터의 외적으로 분해하는 방법은 (스칼라배 $x\\mapsto\\lambda x, y\\mapsto\\lambda^{-1}y$를 제외하면) 유일하다 — 이것이 정확히 $\\sigma_{1,1}$이 단사라는 사실의 선형대수적 근거다. 한 점 $M\\in\\Sigma_{1,1}$이 주어지면 그 열공간(column space)이 정확히 $[x_0:x_1]$을 결정하는 $1$차원 부분공간이고, 행공간(row space)이 $[y_0:y_1]$을 결정하는 $1$차원 부분공간이다. $L^1_{[a:b]}$(첫 번째 인자를 $[a:b]$로 고정하고 두 번째 인자를 움직임)는 정확히 '열공간이 $[a:b]$ 방향으로 고정된' 랭크 $1$ 행렬들의 모임이고, $L^2_{[a:b]}$는 '행공간이 고정된' 행렬들의 모임이다 — 주어진 랭크 $1$ 행렬은 유일한 열공간과 유일한 행공간을 가지므로, 각 점은 각 족의 직선 정확히 하나 위에 있다. 이는 $\\Sigma_{1,1}\\cong\\mathbb{P}^1\\times\\mathbb{P}^1$이라는 사실과 완벽하게 들어맞는다 — $L^1$족은 정확히 $\\{[a:b]\\}\\times\\mathbb{P}^1$(첫 번째 좌표 고정)들의 모임이고 $L^2$족은 $\\mathbb{P}^1\\times\\{[a:b]\\}$(두 번째 좌표 고정)들의 모임이므로, 두 직선족은 정확히 곱공간 $\\mathbb{P}^1\\times\\mathbb{P}^1$의 두 '좌표축 방향'을 세그레 매장을 통해 구체적인 직선들로 실현한 것이다."
+        }
+      ]
+    }
+  ]
+}

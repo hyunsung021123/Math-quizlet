@@ -1,0 +1,897 @@
+{
+  "chapter_info": {
+    "title": "4. Classical Projective Embeddings",
+    "source": "Jinhyung Park, Introduction to Algebraic Geometry (MAS40011 강의노트)",
+    "overall_goal": "사영다양체를 다루는 가장 강력한 방법 중 하나는 그것을 더 큰 사영공간 안으로 구체적인 다항식 사상을 통해 '매장(embed)'하는 것이다. 이 장은 그런 매장의 고전적인 세 가지 예 — 베로네제 사상(모든 차수 $d$의 단항식을 좌표로 삼는 매장), 유리정규곡선(베로네제 매장의 $n=1$ 특수한 경우), 세그레 사상(두 사영공간의 곱을 하나의 사영공간에 매장) — 을 다루고, 마지막으로 두 사영다양체의 곱이라는 개념 자체를 정의한다. 이 구성들은 모두 '동차좌표를 이용해 직접 매장 사상을 쓰고, 그 상의 동차이데알을 명시적으로 계산한다'는 같은 패턴을 따르며, 사영기하학에서 구체적인 다양체를 손으로 다루는 표준 도구상자를 이룬다."
+  },
+  "learning_flow": [
+    {
+      "section_title": "4.1 Veronese maps",
+      "step1_big_picture": {
+        "context": "베로네제 사상(Veronese map) $\\nu_d:\\mathbb{P}^n\\to\\mathbb{P}^N$은 차수 $d$인 모든 단항식 $x^\\alpha$($|\\alpha|=d$)를 좌표로 삼아 $\\mathbb{P}^n$을 훨씬 더 큰 사영공간 $\\mathbb{P}^N$ 안으로 밀어 넣는 사상이다. 이 절의 핵심은 이 사상이 실제로 동형사상 $\\mathbb{P}^n\\xrightarrow{\\sim}W_d:=V_+(\\ker\\Phi_d)\\subseteq\\mathbb{P}^N$을 준다는 것(정리 4.2)이며, 여기서 $\\Phi_d$는 새 좌표 $Y_\\alpha$를 단항식 $x^\\alpha$로 보내는 환 준동형이다. $\\ker\\Phi_d$가 특정한 이차 이항식(binomial) $Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}$($\\alpha+\\beta=\\alpha'+\\beta'$)들로 생성된다는 명제 4.1의 계산은 베로네제 다양체의 방정식을 완전히 명시적으로 만들어 준다. 따름정리 4.4는 이 매장이 초평면들을 정확히 원래 공간의 차수 $d$ 형식들로 되돌린다는 사실을 보이고, 멈퍼드의 정리 4.5는 이 도구를 이용해 '충분히 큰 사영공간에 매장하면 임의의 사영다양체의 방정식을 전부 이차식(quadric)으로 만들 수 있다'는 놀라운 결과를 낸다.",
+        "hidden_intuition": "베로네제 사상을 이해하는 가장 좋은 방법은 '차수 $d$ 단항식이라는 좌표계를 명시적으로 실체화한다'는 것이다 — 원래 $\\mathbb{P}^n$의 좌표 $x_0,\\dots,x_n$ 자체는 함수가 아니었지만(3.1절), 차수 $d$ 단항식들의 비율은 $U_i$ 위에서 함수였다. 베로네제 사상은 이 '차수 $d$짜리 함수들의 모임'을 아예 새로운 사영공간의 좌표로 승격시켜, 원래는 사영좌표로 표현할 수 없었던 차수 $d$ 초곡면(hypersurface)들을 새로운 공간에서는 '초평면(hyperplane)', 즉 일차식으로 표현할 수 있게 만든다 — 이것이 정확히 따름정리 4.4의 내용이다: $\\mathbb{P}^N$의 초평면을 당겨오면(pullback) 원래 공간의 차수 $d$ 형식이 나온다. 즉 베로네제 사상은 '고차 방정식을 일차 방정식으로 바꾸는' 좌표 변환의 극단적인 형태이며, 이는 대수기하학에서 반복해서 등장하는 전략이다: 복잡한 것을 더 큰 공간에서 단순한 것으로 만들기. 명제 4.1의 증명에서 $\\ker\\Phi_d$가 이항식들로 생성된다는 사실의 배후에는 단항식 사이의 순수한 조합적 사실이 있다 — 두 단항식의 곱이 같은 지수 벡터를 준다는 것은 그 지수들이 같은 합을 갖는다는 것과 같고, 이런 '지수 벡터의 재배열'은 유한 번의 '기본 교환'(한 단항식에서 다른 단항식으로 지수 하나씩 옮기는 것)으로 항상 실현될 수 있다는 조합론적 사실이 정확히 그 귀납 논증의 핵심이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "$d=2,n=1$의 경우: 베로네제 곡선(유리정규곡선) $C_2=\\nu_2(\\mathbb{P}^1)\\subseteq\\mathbb{P}^2$은 아핀 차트에서 포물선 $y=t^2$으로 나타난다 — $[s:t]=[1:t]\\mapsto[1:t:t^2]$.",
+          "primitives": [
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -1.5,
+                  2.25
+                ],
+                [
+                  -1.4,
+                  1.96
+                ],
+                [
+                  -1.3,
+                  1.69
+                ],
+                [
+                  -1.2,
+                  1.44
+                ],
+                [
+                  -1.1,
+                  1.21
+                ],
+                [
+                  -1.0,
+                  1.0
+                ],
+                [
+                  -0.9,
+                  0.81
+                ],
+                [
+                  -0.8,
+                  0.64
+                ],
+                [
+                  -0.7,
+                  0.49
+                ],
+                [
+                  -0.6,
+                  0.36
+                ],
+                [
+                  -0.5,
+                  0.25
+                ],
+                [
+                  -0.4,
+                  0.16
+                ],
+                [
+                  -0.3,
+                  0.09
+                ],
+                [
+                  -0.2,
+                  0.04
+                ],
+                [
+                  -0.1,
+                  0.01
+                ],
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.1,
+                  0.01
+                ],
+                [
+                  0.2,
+                  0.04
+                ],
+                [
+                  0.3,
+                  0.09
+                ],
+                [
+                  0.4,
+                  0.16
+                ],
+                [
+                  0.5,
+                  0.25
+                ],
+                [
+                  0.6,
+                  0.36
+                ],
+                [
+                  0.7,
+                  0.49
+                ],
+                [
+                  0.8,
+                  0.64
+                ],
+                [
+                  0.9,
+                  0.81
+                ],
+                [
+                  1.0,
+                  1.0
+                ],
+                [
+                  1.1,
+                  1.21
+                ],
+                [
+                  1.2,
+                  1.44
+                ],
+                [
+                  1.3,
+                  1.69
+                ],
+                [
+                  1.4,
+                  1.96
+                ],
+                [
+                  1.5,
+                  2.25
+                ]
+              ]
+            },
+            {
+              "shape": "point",
+              "at": [
+                0,
+                0
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.3,
+                -0.35
+              ],
+              "text": "$t=0$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                1,
+                1
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.3,
+                1.2
+              ],
+              "text": "$t=1$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 ($d$차 베로네제 사상 $\\nu_d$)",
+          "formal_statement": "정수 $n\\ge 1$, $d\\ge 1$을 고정하고 $$N:=\\binom{n+d}{d}-1$$ 로 두자. $|\\alpha|:=\\alpha_0+\\cdots+\\alpha_n=d$인 모든 $\\alpha:=(\\alpha_0,\\dots,\\alpha_n)\\in\\mathbb{Z}_{\\ge 0}^{n+1}$에 대해 $Y_\\alpha$를 $\\mathbb{P}^N$의 동차좌표라 하자. $\\mathbb{P}^n$의 $d$차 베로네제 사상(Veronese map)은 $$\\nu_d:\\mathbb{P}^n\\longrightarrow\\mathbb{P}^N,\\qquad [x_0:\\cdots:x_n]\\longmapsto[x^\\alpha]_{|\\alpha|=d}$$ 이며, 여기서 $x^\\alpha:=x_0^{\\alpha_0}\\cdots x_n^{\\alpha_n}$이다(좌표들은 어떤 고정된 순서로 나열해도 무방하다). 명제 3.16에 의해 이는 사영 모피즘이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.1 ($\\ker\\Phi_d$는 동차 소이데알이며 이항식들로 생성된다)",
+          "formal_statement": "환 준동형 $$\\Phi_d:\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]\\longrightarrow\\mathbb{C}[x_0,\\dots,x_n],\\qquad Y_\\alpha\\longmapsto x^\\alpha$$ 을 생각하자. 그러면 $$\\ker(\\Phi_d)=\\big(Y_\\alpha-x^\\alpha\\mid|\\alpha|=d\\big)\\cap\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]$$ 는 동차 소이데알이다. 더 나아가, $$\\ker(\\Phi_d)=\\big(Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}\\mid|\\alpha|=|\\beta|=|\\alpha'|=|\\beta'|=d,\\ \\alpha+\\beta=\\alpha'+\\beta'\\big).$$",
+          "idea_behind_proof": "동차성과 소이데알임은 $\\Phi_d$의 상 $\\mathbb{C}[x^\\alpha\\mid|\\alpha|=d]$가 $\\mathbb{C}[x_0,\\dots,x_n]$의 부분환(따라서 정역)이라는 관찰에서 즉시 나온다. 어려운 부분은 이항식 생성 주장인데, 핵심 아이디어는 $\\ker\\Phi_d$가 '같은 단항식으로 가는 항들의 계수합이 $0$'인 다항식들로 생성된다는 사실을 이용해, 그런 이항식 관계를 유한 번의 '지수 하나씩 교환하는 기본 조작'으로 분해하는 귀납 논증이다.",
+          "proof_steps": [
+            "등식 $\\ker(\\Phi_d)=(Y_\\alpha-x^\\alpha\\mid|\\alpha|=d)\\cap\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]$은 명제 1.27에서 따라온다.",
+            "$\\Phi_d$가 등급을 ($d$의 배수로 재등급화하면) 보존하므로 $\\ker(\\Phi_d)$는 동차이데알이다. $\\mathbb{C}[Y_\\alpha\\mid|\\alpha|=d]/\\ker(\\Phi_d)\\cong\\mathbb{C}[x^\\alpha\\mid|\\alpha|=d]$이고 이는 $\\mathbb{C}[x_0,\\dots,x_n]$의 부분환이므로 정역이다. 따라서 $\\ker(\\Phi_d)$는 소이데알이다.",
+            "$J:=(Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}\\mid\\alpha+\\beta=\\alpha'+\\beta')$라 하면 $J\\subseteq\\ker(\\Phi_d)$는 명백하다.",
+            "역포함을 위해, $F\\in\\ker(\\Phi_d)$인 것은 $\\Phi_d$ 아래 같은 단항식으로 가는 $F$의 항들의 계수합이 $0$인 것과 동치임에 유의하라. 따라서 $\\ker(\\Phi_d)$는 이항식 $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\beta_1}\\cdots Y_{\\beta_r}$($\\alpha_1+\\cdots+\\alpha_r=\\beta_1+\\cdots+\\beta_r$) 꼴로 생성된다.",
+            "이러한 이항식이 $J$에 속함을 $r$에 대한 귀납법으로 보인다. $r=0,1$일 때는 자명하다. $r\\ge 2$이고 $\\alpha_1\\ne\\beta_1$이라 하자. 그러면 $(\\alpha_1)_p>(\\beta_1)_p$, $(\\alpha_1)_q<(\\beta_1)_q$인 $0\\le p,q\\le n$이 있다. $\\sum_i(\\alpha_i)_q=\\sum_i(\\beta_i)_q$이므로 $(\\alpha_j)_q>0$인 $j\\ge 2$가 존재한다.",
+            "$\\tilde\\alpha_1:=\\alpha_1-e_p+e_q$, $\\tilde\\alpha_j:=\\alpha_j+e_p-e_q$로 두면 $\\alpha_1+\\alpha_j=\\tilde\\alpha_1+\\tilde\\alpha_j$이고, $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\tilde\\alpha_1}Y_{\\alpha_2}\\cdots Y_{\\tilde\\alpha_j}\\cdots Y_{\\alpha_r}\\in J$(이는 $r=2$ 경우의 이항식 생성원 자체이거나, 나머지 인수를 공통으로 곱한 것).",
+            "이를 반복하면 $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\beta_1}Y_{\\gamma_2}\\cdots Y_{\\gamma_r}\\in J$(단 $\\gamma_2+\\cdots+\\gamma_r=\\beta_2+\\cdots+\\beta_r$)를 얻는다. 귀납가정에 의해 $Y_{\\gamma_2}\\cdots Y_{\\gamma_r}-Y_{\\beta_2}\\cdots Y_{\\beta_r}\\in J$이므로 $Y_{\\alpha_1}\\cdots Y_{\\alpha_r}-Y_{\\beta_1}\\cdots Y_{\\beta_r}\\in J$를 얻는다. 이는 $\\ker(\\Phi_d)\\subseteq J$를 보인다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.2 (베로네제 사상은 동형매장이다)",
+          "formal_statement": "베로네제 사상 $\\nu_d$는 동형사상 $$\\nu_d:\\mathbb{P}^n\\longrightarrow W_d:=V_+\\big(\\ker(\\Phi_d)\\big)\\subseteq\\mathbb{P}^N$$ 을 유도한다. 특히 베로네제 사상 $\\nu_d$는 $\\mathbb{P}^n$을 $\\mathbb{P}^N$ 안으로 매장하며, $I(\\nu_d(\\mathbb{P}^n))=\\ker(\\Phi_d)$이다.",
+          "idea_behind_proof": "$\\nu_d(\\mathbb{P}^n)\\subseteq W_d$는 정의에서 바로 나온다. 역방향의 모피즘 $\\psi_i$를 구성하는 핵심 아이디어는, $W_d$의 각 점에서 '순수한 거듭제곱' 좌표 $Y_i:=Y_{de_i}$ 중 적어도 하나는 $0$이 아니어야 한다는 것(그렇지 않으면 모든 $Y_\\alpha$가 $0$이 되어 사영점이 될 수 없으므로)이고, 그 좌표가 $0$이 아닌 열린집합 위에서 '한 단계 낮춘' 비율 $Y_{ij}/Y_i$들이 정확히 원래 좌표 $x_j/x_i$의 상을 복원한다는 것이다.",
+          "proof_steps": [
+            "$\\ker(\\Phi_d)$의 모든 다항식은 상 $\\nu_d(\\mathbb{P}^n)$ 위에서 소멸하므로 $\\nu_d(\\mathbb{P}^n)\\subseteq W_d$이다.",
+            "$0\\le i,j\\le n$에 대해 $Y_i:=Y_{de_i}$, $Y_{ij}:=Y_{(d-1)e_i+e_j}$로 두자. $|\\alpha|=d$인 각 $\\alpha$에서 $Y_\\alpha^d-\\prod_{j=0}^nY_j^{\\alpha_j}\\in\\ker(\\Phi_d)$를 확인할 수 있다.",
+            "따라서 만약 $W_d$의 한 점에서 모든 $Y_i$가 $0$이라면 모든 $Y_\\alpha$가 그 점에서 $0$이 되어야 하는데, 이는 사영공간의 점이 될 수 없어 불가능하다. 즉 열린집합들 $W_d\\setminus V_+(Y_i)$이 $W_d$를 덮는다.",
+            "$W_d\\setminus V_+(Y_i)$ 위에서 튜플 $(Y_{i0},\\dots,Y_{in})$은 $0$이 아닌 성분 $Y_{ii}=Y_i$를 가지므로, $$\\psi_i:W_d\\setminus V_+(Y_i)\\to\\mathbb{P}^n,\\quad [Y_\\alpha]\\mapsto[Y_{i0}:\\cdots:Y_{in}]$$ 은 모피즘이다.",
+            "$x_i\\ne 0$이면 $\\psi_i\\nu_d([x_0:\\cdots:x_n])=[x_i^{d-1}x_0:\\cdots:x_i^{d-1}x_n]=[x_0:\\cdots:x_n]$이므로 $\\psi_i\\circ\\nu_d=\\mathrm{id}$이다.",
+            "역으로 $|\\alpha|=d$인 각 $\\alpha$에서 $Y_i^{d-1}Y_\\alpha-\\prod_{j=0}^nY_{ij}^{\\alpha_j}\\in\\ker(\\Phi_d)$를 확인할 수 있다. 이는 $W_d\\setminus V_+(Y_i)$의 한 점에서 $\\nu_d\\psi_i$의 $\\alpha$번째 좌표가 공통인 $0$이 아닌 스칼라 $Y_i^{d-1}$ 곱하기 $Y_\\alpha$와 같다는 뜻이므로, $\\nu_d\\circ\\psi_i=\\mathrm{id}$이기도 하다.",
+            "국소적 역사상 $\\psi_i$들은 각각 같은 사상의 역이므로 공통 교집합에서 서로 일치한다. 따라서 $\\nu_d$는 $W_d$ 위로의 동형사상이다. 사영 Nullstellensatz와 명제 4.1에 의해 $I(\\nu_d(\\mathbb{P}^n))=\\ker(\\Phi_d)$를 얻는다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.3 (2차 베로네제 곡면과 $2\\times 2$ 소행렬식)",
+          "formal_statement": "두 번째 베로네제 곡면 $\\nu_2(\\mathbb{P}^2)\\subseteq\\mathbb{P}^5$을 생각하자. $\\mathbb{P}^5$의 좌표를 $$[Z_0:Z_1:Z_2:Z_3:Z_4:Z_5]=[x_0^2:x_1^2:x_2^2:x_0x_1:x_0x_2:x_1x_2]$$ 로 정렬하면, $I(\\nu_2(\\mathbb{P}^2))$는 다음 여섯 개의 이차식으로 생성된다: $$Z_3^2-Z_0Z_1,\\ Z_4^2-Z_0Z_2,\\ Z_5^2-Z_1Z_2,\\ Z_3Z_4-Z_0Z_5,\\ Z_3Z_5-Z_1Z_4,\\ Z_4Z_5-Z_2Z_3,$$ 이는 다음 일차형식 행렬의 (부호를 무시한) 서로 다른 $2\\times 2$ 소행렬식들이다: $$\\begin{pmatrix}Z_0&Z_3&Z_4\\\\Z_3&Z_1&Z_5\\\\Z_4&Z_5&Z_2\\end{pmatrix}.$$ 더 일반적으로, 임의의 베로네제 다양체의 동차이데알은 일차형식들의 행렬의 $2\\times 2$ 소행렬식들로 생성됨을 보일 수 있다(따름정리 4.7에서 특수한 경우를 다룬다)."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 4.4 (초평면의 당김 = 원래 공간의 차수 $d$ 형식)",
+          "formal_statement": "$\\nu_d$에 의한 당김(pullback)은 $\\mathbb{P}^N$의 초평면들과 $x_0,\\dots,x_n$의 $0$이 아닌 차수 $d$ 동차형식들(영이 아닌 스칼라배까지 동일시)을 전단사로 대응시킨다. 명시적으로, $$\\nu_d^{-1}\\left(V_+\\left(\\sum_{|\\alpha|=d}c_\\alpha Y_\\alpha\\right)\\right)=V_+\\left(\\sum_{|\\alpha|=d}c_\\alpha x^\\alpha\\right).$$",
+          "idea_behind_proof": "$Y_\\alpha=x^\\alpha$를 대입하면 등식이 그대로 나오고, 전단사성은 단항식 $x^\\alpha$($|\\alpha|=d$)들이 차수 $d$ 동차형식들의 벡터공간의 기저를 이룬다는 순수 선형대수 사실에서 나온다.",
+          "proof_steps": [
+            "$Y_\\alpha=x^\\alpha$의 대입이 그 등식을 준다.",
+            "$|\\alpha|=d$인 단항식 $x^\\alpha$들은 차수 $d$ 동차형식들의 벡터공간의 기저를 이루므로, 그런 모든 형식은 이 대응(초평면 방정식)으로부터 $0$이 아닌 스칼라배까지 유일하게 나온다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.5 (멈퍼드: 이차식으로 생성되는 매장)",
+          "formal_statement": "$X$를 사영다양체라 하자. 그러면 $I(X)$가 이차식(quadric)들로 생성되는 매장 $X\\subseteq\\mathbb{P}^M$이 존재한다.",
+          "idea_behind_proof": "임의의 매장 $X\\subseteq\\mathbb{P}^n$에서 출발해, $I(X)$가 차수 $d$에서 생성될 만큼 $d$를 충분히 크게 잡고, $d$차 베로네제 매장 $\\nu_d$를 적용한다. 따름정리 4.4에 의해 $X$를 잘라내는 차수 $d$ 형식들이 정확히 $\\nu_d(\\mathbb{P}^n)$을 자르는 일차형식(초평면)들에 대응하므로, $\\nu_d(X)$의 방정식은 $\\ker(\\Phi_d)$(명제 4.1에 의해 이차식으로 생성)와 그 일차식들의 합으로 주어져, 결국 이차식만으로 기술된다.",
+          "proof_steps": [
+            "임의의 매장 $X\\subseteq\\mathbb{P}^n$에서 시작하자. $\\mathbb{P}^n$에서 $X$의 동차이데알이 차수 $d$에서 생성되는 정수 $d\\ge 1$이 존재한다. $d$차 베로네제 매장 $\\nu_d:\\mathbb{P}^n\\hookrightarrow\\mathbb{P}^N$을 생각하자.",
+            "따름정리 4.4에 의해, $X$ 위에서 소멸하는 $\\mathbb{P}^n$의 차수 $d$ 동차형식들에 대응하는 일차형식들로 생성되는 $S(\\mathbb{P}^N)$의 동차이데알 $L$이 존재한다. $\\Phi_d$를 통한 $X$의 (사영)이데알의 원상은 $\\ker(\\Phi_d)+L$임에 유의하라. 따라서 $\\ker(\\Phi_d)+L=I(\\nu_d(X))$이다.",
+            "$\\nu_d(X)=\\nu_d(\\mathbb{P}^n)\\cap V_+(L)\\subseteq V_+(L)\\cong\\mathbb{P}^M$이고 $S(V_+(L))=S(\\mathbb{P}^N)/L$이다. 이제 $X\\subseteq\\mathbb{P}^M$으로 생각할 수 있다. 이 경우 $I(X)$는 $\\ker(\\Phi_d)$의 이차 생성원들로부터 이차식들에 의해 생성된다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (시드먼-스미스의 정련)",
+          "formal_statement": "대략적으로 말해, 멈퍼드의 정리는 사영다양체를 충분히 큰 사영공간에 매장하면 그 동차이데알이 이차식들로 생성됨을 말한다. 2011년 제시카 시드먼(Jessica Sidman)과 그레고리 스미스(Gregory Smith)는 비슷한 상황에서 사영다양체의 동차이데알이 일차형식들의 행렬의 $2\\times 2$ 소행렬식들로 생성됨을 증명했다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$n=1,d=2$의 경우 $N=\\binom{1+2}{2}-1=2$이므로 $\\nu_2:\\mathbb{P}^1\\to\\mathbb{P}^2$이다. $\\ker(\\Phi_2)\\subseteq\\mathbb{C}[Y_{20},Y_{11},Y_{02}]$(지수 $\\alpha=(2,0),(1,1),(0,2)$에 대응)를 명제 4.1의 이항식 생성원 공식으로 직접 구하고, 이것이 정확히 매끄러운 원뿔곡선(정리 3.6, 예제 3.19)의 방정식임을 확인하라.",
+          "hint": "$\\alpha+\\beta=\\alpha'+\\beta'$를 만족하는 $|\\alpha|=|\\beta|=|\\alpha'|=|\\beta'|=2$의 조합을 직접 나열해 보라. $\\alpha=(2,0),\\beta=(0,2)$이면 $\\alpha+\\beta=(2,2)$인데, 이를 $\\alpha'=\\beta'=(1,1)$로도 쓸 수 있음에 주목하라.",
+          "solution": "$Y_{(2,0)}=:Z_0$, $Y_{(1,1)}=:Z_1$, $Y_{(0,2)}=:Z_2$로 쓰자. $\\alpha=(2,0),\\beta=(0,2)$이면 $\\alpha+\\beta=(2,2)=(1,1)+(1,1)$이므로 $\\alpha'=\\beta'=(1,1)$을 얻어 $Y_\\alpha Y_\\beta-Y_{\\alpha'}Y_{\\beta'}=Z_0Z_2-Z_1^2$이 생성원이 된다(다른 조합은 지수가 중복되거나 자명한 관계만 준다). 따라서 $\\ker(\\Phi_2)=(Z_0Z_2-Z_1^2)$이다. 이는 정확히 예제 3.19의 원뿔곡선 $Q=V_+(xy-z^2)$의 방정식과 같은 꼴(좌표 이름만 다름)이며, 실제로 정리 4.2가 주는 동형사상 $\\nu_2:\\mathbb{P}^1\\xrightarrow{\\sim}V_+(Z_0Z_2-Z_1^2)$은 예제 3.19에서 본 원뿔곡선과 $\\mathbb{P}^1$ 사이의 동형사상과 정확히 일치한다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "따름정리 4.4를 이용해, $n=1,d=2$인 경우($\\nu_2:\\mathbb{P}^1\\to\\mathbb{P}^2$, 좌표 $Z_0=x_0^2,Z_1=x_0x_1,Z_2=x_1^2$) 초평면 $V_+(Z_0-Z_2)\\subseteq\\mathbb{P}^2$의 당김 $\\nu_2^{-1}(V_+(Z_0-Z_2))$을 구하라.",
+          "hint": "$Z_0-Z_2$에 $Z_0=x_0^2,Z_2=x_1^2$을 대입하면 어떤 차수 $2$ 형식이 나오는지 계산하고, 그 형식의 영점을 $\\mathbb{P}^1$에서 구하라.",
+          "solution": "따름정리 4.4에 의해 $\\nu_2^{-1}(V_+(Z_0-Z_2))=V_+(x_0^2-x_1^2)=V_+((x_0-x_1)(x_0+x_1))$이다. $\\mathbb{P}^1$에서 이는 $x_0=x_1$ 또는 $x_0=-x_1$인 점들, 즉 $[1:1]$과 $[1:-1]$ 두 점으로 이루어진다. 이는 정확히 차수 $2$인 동차형식 $x_0^2-x_1^2$의 영점집합(중복 없는 두 개의 서로 다른 일차인수)과 일치한다."
+        },
+        {
+          "type": "ox",
+          "question": "베로네제 사상 $\\nu_d:\\mathbb{P}^n\\to\\mathbb{P}^N$은 그 상 $W_d=\\nu_d(\\mathbb{P}^n)$ 위로의 동형사상이다.",
+          "answer": "O",
+          "explanation": "참이다. 정리 4.2의 내용 그대로다. $\\nu_d$ 자신이 모피즘이고, 국소적으로 정의된 역사상 $\\psi_i$들이 서로 호환되어 전역적인 모피즘 역을 이루므로 $\\nu_d:\\mathbb{P}^n\\to W_d$는 동형사상이다."
+        },
+        {
+          "type": "ox",
+          "question": "임의의 사영다양체 $X$에 대해, 원래 매장 $X\\subseteq\\mathbb{P}^n$ 자체에서 이미 $I(X)$가 항상 이차식들로 생성된다.",
+          "answer": "X",
+          "explanation": "거짓이다. 멈퍼드의 정리(정리 4.5)가 보장하는 것은 '적당히 큰 사영공간으로 다시 매장하면' $I(X)$가 이차식들로 생성되게 만들 수 있다는 것이지, 원래 매장에서부터 항상 그렇다는 것이 아니다. 실제로 일반적인 매장에서는 $I(X)$가 훨씬 높은 차수의 생성원을 필요로 할 수 있다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 4.5(멈퍼드)의 증명은 '동차이데알이 차수 $d$에서 생성되도록 $d$를 충분히 크게 잡는다'는 단계에서 출발한다. 이 단계가 왜 정당화되는지(즉 그런 $d$가 항상 존재하는 이유가 무엇인지), 그리고 이 정리가 '방정식의 차수를 낮추는 대가로 무엇을 지불하는지'를 설명하라.",
+          "hint": "힐베르트 기저정리가 어디서 이 존재성을 보장하는지 생각해 보라. 그리고 $\\mathbb{P}^n$에서 $\\mathbb{P}^N$($N\\gg n$)으로 옮겨가면서 '늘어나는 것'이 무엇인지 따져 보라.",
+          "answer": "'$I(X)$가 차수 $d$에서 생성된다'는 것을 보장하는 것은 힐베르트 기저정리다 — $I(X)\\subseteq\\mathbb{C}[x_0,\\dots,x_n]$은 뇌터 환의 이데알이므로 유한개의 동차 생성원을 가지며, 그 유한 개 생성원들의 차수 중 최댓값을 $d$로 잡으면(또는 충분히 큰 임의의 $d$로 잡으면, 낮은 차수 생성원에 변수를 곱해 차수 $d$로 만들 수 있으므로) $I(X)$는 차수 $d$에서 생성된다고 말할 수 있다. 이 정리가 지불하는 대가는 명확하다 — 방정식의 '차수'를 이차식으로 낮추는 대신, 매장하는 공간의 '차원'을 극적으로 늘린다. 원래 $\\mathbb{P}^n$ 안에서 $X$를 자르던 소수의 고차(차수 $d$) 방정식들이, $\\mathbb{P}^N$($N=\\binom{n+d}{d}-1$, $n,d$가 커지면 기하급수적으로 커짐)에서는 $\\ker(\\Phi_d)$(베로네제 다양체 자체의 방정식, 이차식이지만 개수가 많음)와 $L$(원래 방정식에 대응하는 일차식들)을 합친, 개수는 훨씬 많지만 차수는 전부 $2$ 이하인 방정식들로 대체된다. 즉 '방정식이 단순해지는 대신 그 개수와 매장 공간의 차원이 커진다'는 전형적인 트레이드오프이며, 이는 대수기하학에서 '더 높은 차원, 더 단순한 방정식'이라는 반복되는 주제의 한 사례다."
+        }
+      ]
+    },
+    {
+      "section_title": "4.2 Rational normal curves",
+      "step1_big_picture": {
+        "context": "베로네제 사상을 $n=1$(사영직선)에 특수화하면 $\\mathbb{P}^1$을 $\\mathbb{P}^d$ 안으로 매장하는 곡선 $C_d:=\\nu_d(\\mathbb{P}^1)$을 얻는다 — 이를 (그리고 그 좌표변환에 의한 상들을) 유리정규곡선(rational normal curve)이라 부른다. 이 절의 첫 결과인 따름정리 4.7은 이 곡선의 방정식이 정확히 한켈 행렬(Hankel matrix)의 $2\\times 2$ 소행렬식들로 주어짐을 보여, 예제 4.3(2차 베로네제 곡면)에서 본 '행렬의 소행렬식'이라는 패턴이 여기서도 반복됨을 확인시켜 준다. 이 절의 정점은 정리 4.9로, 정리 3.6('일반위치의 다섯 점을 지나는 평면 원뿔곡선은 유일하다')의 완전한 고차원 일반화다 — $\\mathbb{P}^d$ 안의 '일반위치'에 있는 $d+3$개의 점을 지나는 유리정규곡선이 존재하고 유일하다는 것이다. $d=2$일 때 이는 정확히 정리 3.6으로 되돌아온다(원뿔곡선이 곧 $2$차 유리정규곡선이므로).",
+        "hidden_intuition": "정리 4.9의 증명 전략은 '좌표를 최대한 단순하게 정규화한 뒤, 그 정규화된 좌표에서 필요한 이항식(binomial degree $d$ form) $A_i(s,t)$를 직접 손으로 쓴다'는 고전적인 구성적 방법이다 — $d+3$개의 점 중 처음 $d+1$개를 표준기저 $e_i$로, 그다음 하나를 $[1:\\cdots:1]$로 정규화하는 것은 사영 좌표변환의 자유도를 최대한 활용해 문제를 '가장 대칭적인' 배치로 되돌리는 것이다. 이렇게 정규화된 후에는, 각 $A_i(s,t)=a_i\\prod_{j\\ne i}(t-a_js)$라는 명시적인 이항식이 정확히 $i$번째 점에서만 $0$이 아닌 값을 갖도록(다른 표준기저점에서는 $0$이 되도록) '설계'된다 — 이는 라그랑주 보간(Lagrange interpolation)과 본질적으로 같은 아이디어다: 여러 지점에서 지정된 값(여기서는 '0 또는 0 아님')을 갖는 다항식을 그 지점들의 인수분해로 직접 구성하는 것. 유일성 증명은 이 구성이 본질적으로 유일한 선택이었음을, 임의의 다른 유리정규곡선이 지나야 하는 제약 조건들을 하나씩 따라가며(재매개변수화의 자유도, 즉 $\\mathbb{P}^1$의 사영변환군 전체)을 소진시켜 보인다 — 즉 '자유도의 개수를 세는' 논증이 실질적으로 유일성의 증명 배후에 있다.",
+        "visualization": null
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (유리정규곡선 $C_d$)",
+          "formal_statement": "$n=1$일 때 $d$차 베로네제 매장은 $$\\nu_d:\\mathbb{P}^1\\longrightarrow\\mathbb{P}^d,\\qquad [s:t]\\longmapsto[s^d:s^{d-1}t:\\cdots:st^{d-1}:t^d]$$ 이다. $C_d:=\\nu_d(\\mathbb{P}^1)\\subseteq\\mathbb{P}^d$라 쓴다. $\\mathbb{P}^d$의 동차좌표에 대한 가역 일차변환 아래에서 $C_d$의 상을 유리정규곡선(rational normal curve)이라 부른다."
+        },
+        {
+          "type": "Corollary",
+          "name": "따름정리 4.7 ($I(C_d)$는 한켈 행렬의 $2\\times 2$ 소행렬식들로 생성된다)",
+          "formal_statement": "$I(C_d)$는 한켈 행렬(Hankel matrix) $$H_d:=\\begin{pmatrix}Z_0&Z_1&\\cdots&Z_{d-1}\\\\Z_1&Z_2&\\cdots&Z_d\\end{pmatrix}$$ 의 $2\\times 2$ 소행렬식들로 생성된다.",
+          "idea_behind_proof": "명제 4.1과 정리 4.2에 의해 $I(C_d)$가 이미 이항식 $Z_iZ_j-Z_{i'}Z_{j'}$($i+j=i'+j'$) 전체로 생성됨을 알고 있으므로, 이 이항식들이 전부 '인접한 지수만 하나씩 옮기는' 한켈 소행렬식들의 $\\mathbb{Z}$-선형결합으로 표현됨을(즉 $J\\subseteq I(C_d)$뿐 아니라 $I(C_d)\\subseteq J$까지) 망원급수(telescoping)식으로 보이는 것이 핵심이다.",
+          "proof_steps": [
+            "명제 4.1과 정리 4.2에 의해 $I(C_d)=(Z_iZ_j-Z_{i'}Z_{j'}\\mid 0\\le i,j,i',j'\\le d,\\ i+j=i'+j')$이다.",
+            "$J$를 $H_d$의 $2\\times 2$ 소행렬식들로 생성되는 이데알이라 하면 $J=(Z_iZ_j-Z_{i+1}Z_{j-1}\\mid 0\\le i<j\\le d,\\ j\\ge i+2)$이다. $J\\subseteq I(C_d)$는 명백하다.",
+            "역포함을 위해 다음 망원 등식을 관찰하자: $$Z_iZ_j-Z_{i+2}Z_{j-2}=(Z_iZ_j-Z_{i+1}Z_{j-1})+(Z_{i+1}Z_{j-1}-Z_{i+2}Z_{j-2})\\in J.$$",
+            "이를 반복하면 지수 차이 $j-i$가 임의로 큰 이항식 $Z_iZ_j-Z_{i'}Z_{j'}$도 인접한 소행렬식들의 합으로 $J$ 안에 있음을 보일 수 있어, $I(C_d)\\subseteq J$를 얻는다. 따라서 $I(C_d)=J$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.8 ($d=2$: 평면 원뿔곡선으로의 환원)",
+          "formal_statement": "$d=2$이면 $I(C_2)=(Z_0Z_2-Z_1^2)$이다. 따라서 $C_2\\subseteq\\mathbb{P}^2$은 평면 원뿔곡선이다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (일반위치, linearly general position)",
+          "formal_statement": "$\\mathbb{P}^d$의 $m$개의 점이 일반위치(linearly general position)에 있다는 것은, $1\\le k\\le d+1$인 모든 $k$에 대해 그중 임의의 $k$개가 $\\mathbb{C}^{d+1}$ 안에서 선형독립인 $0$이 아닌 대표 벡터를 갖는다는 것이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.9 ($d+3$개의 일반위치 점을 지나는 유리정규곡선의 존재성과 유일성)",
+          "formal_statement": "$d\\ge 2$에 대해, $\\mathbb{P}^d$ 안의 일반위치에 있는 $d+3$개의 점을 지나는 유리정규곡선이 유일하게 존재한다.",
+          "idea_behind_proof": "존재성은 좌표를 표준기저 $e_0,\\dots,e_d$와 $[1:\\cdots:1]$로 정규화한 뒤, 각 $i$번째 표준기저점에서만 값을 갖는 이항식 $A_i(s,t)=a_i\\prod_{j\\ne i}(t-a_js)$를 라그랑주 보간처럼 직접 구성하는 것이다. 유일성은 임의의 유리정규곡선을 매개변수화하는 기저 $B_0,\\dots,B_d$가 같은 점들을 지나야 한다는 제약으로부터, 그 기저가 (재매개변수화까지 감안하면) $A_i$들과 스칼라배 및 좌표변환의 차이밖에 없음을 보이는 것이다.",
+          "proof_steps": [
+            "[존재성] $p_0,\\dots,p_{d+2}\\in\\mathbb{P}^d$를 일반위치의 점들이라 하자. 가역 일차좌표변환 후 $p_i=e_i$ ($0\\le i\\le d$), $p_{d+1}=[1:\\cdots:1]$, $p_{d+2}=[a_0:\\cdots:a_d]$로 둘 수 있다. 일반위치 조건에 의해 $a_0,\\dots,a_d$는 모두 $0$이 아니고 서로 다르다(그렇지 않으면 일반위치가 깨짐).",
+            "$0\\le i\\le d$에 대해 차수 $d$인 이항형식 $A_i(s,t):=a_i\\prod_{0\\le j\\le d,\\,j\\ne i}(t-a_js)\\in\\mathbb{C}[s,t]$를 정의하자. $r_i:=[1:a_i]\\in\\mathbb{P}^1$에서 $A_i(r_i)=a_i\\prod_{j\\ne i}(a_i-a_j)\\ne 0$이고 $k\\ne i$인 $A_k(r_i)=0$이다.",
+            "따라서 $A_0,\\dots,A_d$는 선형독립이고(서로 다른 $d+1$개의 점에서 서로 다른 하나씩만 비영이므로), 차수 $d$인 이항형식 공간(차원 $d+1$)의 기저를 이룬다.",
+            "$\\phi:\\mathbb{P}^1\\to\\mathbb{P}^d$, $[s:t]\\mapsto[A_0(s,t):\\cdots:A_d(s,t)]$는 $d$차 베로네제 사상에 가역 좌표변환을 합성한 것이므로 $\\phi(\\mathbb{P}^1)\\subseteq\\mathbb{P}^d$는 유리정규곡선이다.",
+            "$\\phi(r_i)=p_i$ ($0\\le i\\le d$), $\\phi([1:0])=p_{d+1}$, $\\phi([0:1])=p_{d+2}$임을 직접 확인할 수 있다(체크포인트 문항 참고). 이는 존재성을 증명한다.",
+            "[유일성] $C\\subseteq\\mathbb{P}^d$를 $p_0,\\dots,p_{d+2}$를 지나는 유리정규곡선이라 하자. 동형사상 $\\psi:\\mathbb{P}^1\\to C\\subseteq\\mathbb{P}^d$, $[s:t]\\mapsto[B_0(s,t):\\cdots:B_d(s,t)]$가 존재하며 $B_0,\\dots,B_d$는 차수 $d$ 이항형식 공간의 기저다. $\\mathbb{P}^1$을 재매개변수화해 $\\psi^{-1}(p_{d+1})=[1:0]$, $\\psi^{-1}(p_{d+2})=[0:1]$로 가정할 수 있다.",
+            "$0\\le i\\le d$에서 $[1:b_i]:=\\psi^{-1}(p_i)$로 두면 $b_i$들은 모두 $0$이 아니고 서로 다르다. $\\psi([1:b_i])=p_i$이므로 $k\\ne i$인 $0\\le k\\le d$에서 $B_k(1,b_i)=0$이다.",
+            "즉 $B_i$는 $j\\ne i$인 $d$개의 서로 다른 근 $[1:b_j]$를 가지므로 $B_i(s,t)=c_i\\prod_{j\\ne i}(t-b_js)$($c_i\\ne 0$)로 쓸 수 있다.",
+            "$\\psi([0:1])=[a_0:\\cdots:a_d]$이므로 어떤 $\\gamma\\ne 0$에서 모든 $i$에 대해 $c_i=\\gamma a_i$이다. $\\psi([1:0])=[1:\\cdots:1]$이므로 $c_i\\prod_{j\\ne i}b_j$들이 전부 같은 값을 갖고, $b_j$가 모두 $0$이 아니므로 $c_i/b_i$들도 전부 같은 값을 갖는다.",
+            "따라서 어떤 $\\rho\\ne 0$에서 모든 $i$에 대해 $b_i=\\rho a_i$이고, $B_i(s,t)=\\gamma A_i(\\rho s,t)$이다. $[s:t]\\mapsto[\\rho s:t]$는 $\\mathbb{P}^1$의 자기동형사상이므로 $\\psi$와 $\\phi$는 같은 상을 갖는다. 이는 유일성을 증명한다. $\\qquad\\blacksquare$"
+          ]
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "정리 4.9의 존재성 증명에서 $\\phi([1:0])=p_{d+1}$과 $\\phi([0:1])=p_{d+2}$를 직접 계산으로 확인하라.",
+          "hint": "$A_i(1,0)$과 $A_i(0,1)$을 $A_i(s,t)=a_i\\prod_{j\\ne i}(t-a_js)$의 정의에 그대로 대입해 보라.",
+          "solution": "$A_i(1,0)=a_i\\prod_{j\\ne i}(0-a_j\\cdot 1)=a_i\\prod_{j\\ne i}(-a_j)$인데, 이는 $i$와 무관하게(부호와 $a_i\\prod_{j\\ne i}a_j=\\prod_j a_j$ 꼴로 정리되어) 모든 $i$에서 같은 값 $(-1)^d\\prod_{j=0}^d a_j$를 준다(각 항에 $a_i$가 곱해지고 $j\\ne i$인 것들의 곱과 결합하면 전체 곱 $\\prod_j a_j$가 부호까지 포함해 재현됨). 따라서 $\\phi([1:0])=[A_0(1,0):\\cdots:A_d(1,0)]=[1:\\cdots:1]=p_{d+1}$이다. 한편 $A_i(0,1)=a_i\\prod_{j\\ne i}(1-a_j\\cdot 0)=a_i\\prod_{j\\ne i}1=a_i$이므로 $\\phi([0:1])=[a_0:\\cdots:a_d]=p_{d+2}$이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "따름정리 4.7을 $d=3$(꼬인 삼차곡선, twisted cubic)에 적용해 한켈 행렬 $H_3=\\begin{pmatrix}Z_0&Z_1&Z_2\\\\Z_1&Z_2&Z_3\\end{pmatrix}$의 세 개의 $2\\times 2$ 소행렬식을 모두 써라.",
+          "hint": "$2\\times 2$ 소행렬식은 인접한 두 열을 골라 행렬식을 계산하면 된다 — 열 $(0,1)$, $(0,2)$, $(1,2)$ 세 가지 조합이 있다.",
+          "solution": "열 $0,1$: $Z_0Z_2-Z_1^2$. 열 $0,2$: $Z_0Z_3-Z_1Z_2$. 열 $1,2$: $Z_1Z_3-Z_2^2$. 따라서 $I(C_3)=(Z_0Z_2-Z_1^2,\\ Z_0Z_3-Z_1Z_2,\\ Z_1Z_3-Z_2^2)$이며, 이는 꼬인 삼차곡선(twisted cubic) $C_3\\subseteq\\mathbb{P}^3$의 잘 알려진 방정식이다."
+        },
+        {
+          "type": "ox",
+          "question": "정리 4.9는 $\\mathbb{P}^d$ 안의 아무 $d+3$개의 점을 지나는 유리정규곡선이 항상 유일하게 존재한다고 말한다(일반위치 조건 없이).",
+          "answer": "X",
+          "explanation": "거짓이다. 정리 4.9는 반드시 그 $d+3$개의 점이 일반위치(linearly general position)에 있어야 한다는 가정을 명시한다. 점들이 일반위치에 있지 않으면(예를 들어 $k$개가 선형종속인 경우) 존재성이나 유일성이 깨질 수 있다."
+        },
+        {
+          "type": "ox",
+          "question": "$d=2$일 때 정리 4.9는 정리 3.6('일반위치의 다섯 점을 지나는 평면 원뿔곡선은 유일하다')과 동일한 내용이다.",
+          "answer": "O",
+          "explanation": "참이다. $d=2$이면 정리 4.9는 '$\\mathbb{P}^2$ 안의 일반위치에 있는 $5=2+3$개의 점을 지나는 유리정규곡선(=예제 4.8에 의해 평면 원뿔곡선)이 유일하게 존재한다'는 것을 말하며, 이는 정리 3.6과 정확히 같은 내용이다(단 정리 3.6의 '세 점도 공선이 아니다'라는 조건이 $d=2$인 경우의 일반위치 조건과 같음을 확인할 수 있다)."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 4.9의 존재성 증명에서 이항형식 $A_i(s,t)=a_i\\prod_{j\\ne i}(t-a_js)$를 구성하는 방식은 라그랑주 보간(Lagrange interpolation)과 본질적으로 같다고 언급했다. 이 유비를 구체적으로 설명하고, '$d+3$개의 점'이라는 개수가 정확히 어디서 나오는지(왜 $d+1$개도 $d+2$개도 아니고 $d+3$개인지)를 자유도 계산으로 설명하라.",
+          "hint": "차수 $d$인 이항형식들의 공간의 차원이 $d+1$이라는 사실과, $\\mathbb{P}^1$ 자체의 사영변환군 $\\mathrm{PGL}_2$의 차원이 $3$이라는 사실을 결합해 보라.",
+          "answer": "라그랑주 보간에서는 $d+1$개의 서로 다른 점 각각에서 지정된 값을 갖는 차수 $d$ 이하의 다항식을 유일하게 구성한다(차수 $d$ 다항식 공간의 차원이 $d+1$이므로, 값을 지정하는 조건 $d+1$개가 정확히 해를 유일하게 결정). $A_i$의 구성은 이를 '이항형식(두 변수 $s,t$의 동차형식)의 공간'으로 옮긴 것으로, $A_i$는 $d+1$개의 점 $r_0,\\dots,r_d\\in\\mathbb{P}^1$ 중 $r_i$에서만 비영이고 나머지에서는 $0$이 되도록 지정된, 차수 $d$ 이항형식 공간(차원 $d+1$)의 '지시함수에 가까운' 기저 원소다. 이제 $d+3$이라는 개수의 출처를 세어 보자: 유리정규곡선 자체를 매개변수화하는 사상 $[s:t]\\mapsto[B_0:\\cdots:B_d]$는 차수 $d$ 이항형식 공간의 기저 선택(즉 $\\mathrm{GL}_{d+1}$의 원소, 사영적으로는 $\\mathbb{P}^d$의 좌표변환군)에 해당하지만, 서로 다른 기저 선택이라도 $\\mathbb{P}^1$ 자체의 재매개변수화(사영변환군 $\\mathrm{PGL}_2$, 차원 $3$)로 흡수될 수 있는 중복이 있다. $\\mathbb{P}^d$ 안에서 '$d+1$개의 표준기저점'을 지정하는 것은 좌표계 자체를 고정하는 것과 같아 새로운 정보를 주지 않고(사영좌표변환군 $\\mathrm{PGL}_{d+1}$의 차원 $=(d+1)^2-1$을 거의 다 써버림), 그다음 '기준점' $[1:\\cdots:1]$ 하나를 추가로 지정하면 좌표변환의 나머지 자유도(스칼라들의 비율)까지 전부 고정된다 — 이것이 $d+1$번째 점. 이렇게 좌표계를 완전히 고정한 후에도 $\\mathbb{P}^1$ 자체의 재매개변수화 자유도 $\\dim\\mathrm{PGL}_2=3$이 남아 있는데, 이 중 $2$차원은 이미 '어느 두 점이 $[1:0]$과 $[0:1]$로 가는지'를 정하는 데 쓰이므로($d+1$번째, $d+2$번째 점), 남은 자유도를 마저 소진시켜 사상을 완전히 결정하려면 점이 하나 더 필요하다 — 이것이 $d+2$개가 아니라 $d+3$개가 필요한 이유이며, 정확히 그 마지막 점이 유일성 증명에서 $a_i$들(즉 곡선의 '모양')을 실제로 결정하는 역할을 한다."
+        }
+      ]
+    },
+    {
+      "section_title": "4.3 Segre maps",
+      "step1_big_picture": {
+        "context": "두 준사영다양체 $X,Y$의 곱 $X\\times Y$에 준사영적 구조를 주는 일은 얼핏 보기와 달리 자명하지 않다 — $\\mathbb{P}^n\\times\\mathbb{P}^n$에 순진하게 상자위상(box topology, 두 자리스키 위상의 곱위상)을 주면 대각선 $\\Delta_{\\mathbb{P}^n}=\\{(x,x)\\}$가 닫힌집합조차 되지 않는다(사실 $\\Delta_{\\mathbb{P}^n}$이 전체 공간만큼 조밀해져 버린다). 이 절은 이 문제를 세그레 사상(Segre map) $\\sigma_{m,n}:\\mathbb{P}^m\\times\\mathbb{P}^n\\to\\mathbb{P}^{(m+1)(n+1)-1}$이라는 구체적인 매장으로 해결한다 — 좌표의 곱 $x_iy_j$ 전체를 새로운 좌표로 삼는 것이다. 이는 베로네제 사상과 완전히 같은 정신의 구성이다: 두 사영공간의 곱이라는, 그 자체로는 사영공간이 아닌 대상을, 그 좌표들의 '쌍선형 조합'을 명시적인 사영좌표로 승격시켜 하나의 사영공간 안으로 실현하는 것. 그 상 $\\Sigma_{m,n}$이 실제로 사영다양체이고 그 방정식이 정확히 $2\\times 2$ 소행렬식들(명제 4.10, 정리 4.11)이라는 사실은 예제 4.3(베로네제 곡면)과 따름정리 4.7(유리정규곡선)에서 본 패턴의 세 번째 반복이다.",
+        "hidden_intuition": "세그레 사상의 방정식 $Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}=0$의 배후에는 아주 단순한 선형대수적 사실이 있다 — $Z_{ij}=x_iy_j$로 두면 $Z_{ij}Z_{k\\ell}=x_iy_jx_ky_\\ell=x_iy_\\ell x_ky_j=Z_{i\\ell}Z_{kj}$가 항등식으로 성립하는데, 이는 $x_iy_j$라는 좌표들이 실제로는 $(m+1)\\times(n+1)$ 행렬(랭크 $1$ 행렬, 즉 벡터 $x$와 $y$의 외적 $xy^T$)의 성분들이라는 사실의 직접적인 반영이다 — 랭크 $1$ 행렬의 특징이 바로 모든 $2\\times 2$ 소행렬식이 $0$이라는 것이다! 즉 $\\Sigma_{m,n}$은 기하학적으로 '랭크 $1$인 $(m+1)\\times(n+1)$ 행렬들의 사영화'이며, 이것이 정확히 두 벡터의 외적으로 쓰이는 행렬들의 공간이라는 사실이 $\\sigma_{m,n}$이 $\\mathbb{P}^m\\times\\mathbb{P}^n$과 전단사가 되는 이유다(랭크 $1$ 행렬을 외적으로 분해하는 방법이 스칼라배를 제외하면 유일하므로). $m=n=1$인 예제 4.12의 이차곡면 $\\Sigma_{1,1}$이 두 족의 직선들로 완전히 덮인다는 사실(선직면, ruled surface)은 이 '랭크 $1$ 행렬'이라는 그림의 직접적인 결과다 — 한 좌표 $[a:b]\\in\\mathbb{P}^1$을 고정하고 다른 좌표를 움직이면 $\\mathbb{P}^1\\times\\{[a:b]\\}$ 또는 $\\{[a:b]\\}\\times\\mathbb{P}^1$이 세그레 매장 아래에서 각각 하나의 직선이 되는데, 이는 랭크 $1$ 행렬의 행(또는 열) 하나를 고정하고 나머지를 스칼라배하는 것에 해당한다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "세그레 이차곡면 $\\Sigma_{1,1}\\subseteq\\mathbb{P}^3$의 두 직선족 개념도: 한 족($L^1$)과 다른 족($L^2$)이 서로 교차하며 곡면을 뒤덮는다(선직면, ruled surface).",
+          "primitives": [
+            {
+              "shape": "polygon",
+              "points": [
+                [
+                  -2,
+                  -1.2
+                ],
+                [
+                  2,
+                  -1.2
+                ],
+                [
+                  1.3,
+                  1.4
+                ],
+                [
+                  -2.7,
+                  1.4
+                ]
+              ],
+              "fill": "none"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.8,
+                -1.1
+              ],
+              "to": [
+                -2.5,
+                1.3
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -0.7,
+                -1.15
+              ],
+              "to": [
+                -1.5,
+                1.35
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0.6,
+                -1.18
+              ],
+              "to": [
+                -0.3,
+                1.38
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                1.8,
+                -1.2
+              ],
+              "to": [
+                0.9,
+                1.4
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -1.9,
+                -0.6
+              ],
+              "to": [
+                1.5,
+                0.1
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.2,
+                0.1
+              ],
+              "to": [
+                1.1,
+                0.7
+              ]
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.5,
+                0.6
+              ],
+              "to": [
+                0.7,
+                1.15
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.9,
+                -0.5
+              ],
+              "text": "$L^1$족"
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.6,
+                1.0
+              ],
+              "text": "$L^2$족"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (쌍동차다항식, 세그레 사상 $\\sigma_{m,n}$)",
+          "formal_statement": "변수 $x_0,\\dots,x_m$과 $y_0,\\dots,y_n$의 다항식이 쌍차수(bidegree) $(a,b)$의 쌍동차(bihomogeneous)라는 것은 $x$-변수들에 대해 차수 $a$, $y$-변수들에 대해 차수 $b$인 동차식이라는 것이다. 그 영점궤적은 $\\mathbb{P}^m\\times\\mathbb{P}^n$ 위에서 잘 정의된다. $\\mathbb{P}^{(m+1)(n+1)-1}$에 $0\\le i\\le m$, $0\\le j\\le n$인 좌표 $Z_{ij}$를 부여하자. 세그레 사상(Segre map)은 $$\\sigma_{m,n}:\\mathbb{P}^m\\times\\mathbb{P}^n\\longrightarrow\\mathbb{P}^{(m+1)(n+1)-1},\\qquad ([x_i],[y_j])\\longmapsto[x_iy_j]_{i,j}$$ 이다. 이 사상은 잘 정의되어 있고 단사임을 쉽게 확인할 수 있다. $\\Sigma_{m,n}:=\\sigma_{m,n}(\\mathbb{P}^m\\times\\mathbb{P}^n)\\subseteq\\mathbb{P}^{(m+1)(n+1)-1}$이라 쓴다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.10 ($\\ker(\\Psi_{m,n})$은 동차 소이데알이며 그뢰브너 기저를 이룬다)",
+          "formal_statement": "$\\mathbb{C}[Z_{ij}\\mid 0\\le i\\le m,0\\le j\\le n]=:S_{m,n}$ 위에 사전식 순서 $Z_{0n}\\succ\\cdots\\succ Z_{00}\\succ Z_{1n}\\succ\\cdots\\succ Z_{10}\\succ\\cdots$를 쓰자. 환 준동형 $$\\Psi_{m,n}:S_{m,n}\\longrightarrow\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n],\\qquad Z_{ij}\\longmapsto x_iy_j$$ 를 생각하면, $$\\ker(\\Psi_{m,n})=\\big(Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}\\mid 0\\le i<k\\le m,\\ 0\\le j<\\ell\\le n\\big)\\subseteq\\mathbb{C}[Z_{ij}]$$ 는 동차 소이데알이며, 이 생성원들은 $\\ker(\\Psi_{m,n})$의 그뢰브너 기저를 이룬다.",
+          "idea_behind_proof": "핵심은 각 생성원 $Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}$의 선도항이 $Z_{i\\ell}Z_{kj}$라는 것을 확인한 뒤, 이 생성원들로 임의의 다항식을 나눈 나머지가 '지수가 각 성분별로 정렬된' 단항식들의 선형결합이 된다는 사실(명제 1.14)과, 그런 정렬된 단항식들이 $\\Psi_{m,n}$ 아래에서 서로 다른 상을 가지면 자기 자신도 서로 다르다는 단사성 논증을 결합하는 것이다.",
+          "proof_steps": [
+            "$J_{m,n}:=(Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}\\mid 0\\le i<k\\le m,\\ 0\\le j<\\ell\\le n)\\subseteq\\ker(\\Psi_{m,n})$은 명백하다.",
+            "역포함을 위해, $0\\le i<k\\le m$, $0\\le j<\\ell\\le n$에서 $\\mathrm{LM}_\\prec(Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj})=Z_{i\\ell}Z_{kj}$임에 유의하라.",
+            "명제 1.14에 의해 임의의 $F\\in S_{m,n}$을 $J_{m,n}$의 생성원들로 나눈 나머지는 $0\\le i_1\\le\\cdots\\le i_r\\le m$, $0\\le j_1\\le\\cdots\\le j_r\\le n$인 단항식 $Z_{i_1j_1}\\cdots Z_{i_rj_r}$들의 선형결합으로 남는다.",
+            "이러한 두 단항식이 $\\Psi_{m,n}$ 아래 같은 상을 갖는다면, 즉 $x_{i_1}\\cdots x_{i_r}y_{j_1}\\cdots y_{j_r}=x_{i_1'}\\cdots x_{i_r'}y_{j_1'}\\cdots y_{j_r'}$라면 (지수가 정렬되어 있으므로) $Z_{i_1j_1}\\cdots Z_{i_rj_r}=Z_{i_1'j_1'}\\cdots Z_{i_r'j_r'}$ 자체가 성립한다.",
+            "따라서 $\\ker(\\Psi_{m,n})$의 모든 다항식은 이 나눗셈에서 나머지가 $0$이 되므로 $J_{m,n}=\\ker(\\Psi_{m,n})$이며, 이는 동차이데알이다. 부흐베르거 판정법(Buchberger criterion)에 의해 나열된 생성원들은 $\\ker(\\Psi_{m,n})$의 그뢰브너 기저를 이룬다.",
+            "$\\Psi_{m,n}$이 전사이고 그 상이 정역이므로 $\\ker(\\Psi_{m,n})$은 소이데알이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.11 (세그레 사상의 상은 사영다양체이다)",
+          "formal_statement": "세그레 사상 $\\sigma_{m,n}$의 상은 사영다양체 $$\\Sigma_{m,n}=V_+(\\ker(\\Psi_{m,n}))\\subseteq\\mathbb{P}^{(m+1)(n+1)-1}$$ 이며, $I(\\Sigma_{m,n})=\\ker(\\Psi_{m,n})$이다.",
+          "idea_behind_proof": "베로네제의 경우(정리 4.2)와 완전히 같은 패턴이다: 상이 $V_+(\\ker\\Psi_{m,n})$에 포함됨은 자명하고, 반대 포함은 각 열린조각 $\\Sigma_{m,n}\\setminus V_+(Z_{ab})$ 위에서 명시적인 국소 역사상을 구성해 보인다.",
+          "proof_steps": [
+            "$\\Sigma_{m,n}\\subseteq V_+(\\ker(\\Psi_{m,n}))$은 명백하다.",
+            "열린집합 $\\Sigma_{m,n}\\setminus V_+(Z_{ab})$ 위에서 $$[Z_{ij}]\\mapsto\\big([Z_{0b}:\\cdots:Z_{mb}],[Z_{a0}:\\cdots:Z_{an}]\\big)$$ 가 $\\Psi_{m,n}$의 국소 역사상임을 쉽게 확인할 수 있다.",
+            "이 국소 역사상들은 공통 교집합에서 같은 사상의 역이므로 서로 일치한다. 따라서 $\\Sigma_{m,n}\\supseteq V_+(\\ker(\\Psi_{m,n}))$을 얻어 등식이 성립한다.",
+            "사영 Nullstellensatz와 명제 4.10에 의해 $I(\\Sigma_{m,n})=\\ker(\\Psi_{m,n})$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 ($\\mathbb{P}^m\\times\\mathbb{P}^n$에 사영다양체 구조를 부여)",
+          "formal_statement": "세그레 사상 $\\sigma_{m,n}:\\mathbb{P}^m\\times\\mathbb{P}^n\\to\\Sigma_{m,n}$을 통해 $\\Sigma_{m,n}$의 사영다양체 구조를 곱 $\\mathbb{P}^m\\times\\mathbb{P}^n$으로 옮겨 놓으면, $\\sigma_{m,n}$은 동형사상이 된다. 따라서 세그레 사상 $\\sigma_{m,n}$은 $\\mathbb{P}^m\\times\\mathbb{P}^n$을 $\\mathbb{P}^{(m+1)(n+1)-1}$ 안으로 매장하는 매장사상이다."
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.12 ($m=n=1$: 세그레 이차곡면과 두 직선족)",
+          "formal_statement": "$m=n=1$이면 $\\Sigma_{1,1}=V_+(Z_{00}Z_{11}-Z_{01}Z_{10})\\subseteq\\mathbb{P}^3$이다. $[a:b]\\in\\mathbb{P}^1$에 대해 $\\Sigma_{1,1}$ 위에 다음 두 족의 직선이 있다: $$L^1_{[a:b]}:=\\{[sa:sb:ta:tb]\\mid[s:t]\\in\\mathbb{P}^1\\}\\qquad\\text{와}\\qquad L^2_{[a:b]}:=\\{[as:at:bs:bt]\\mid[s:t]\\in\\mathbb{P}^1\\}.$$ 이차곡면 $\\Sigma_{1,1}\\subseteq\\mathbb{P}^3$ 위의 모든 점은 각 족의 직선 정확히 하나 위에 놓인다. 한편 $Z_{00}Z_{11}-Z_{01}Z_{10}$은 일차형식들의 행렬 $\\begin{pmatrix}Z_{00}&Z_{01}\\\\Z_{10}&Z_{11}\\end{pmatrix}$의 행렬식이다. 더 일반적으로, 동차이데알 $\\ker(\\Psi_{m,n})$은 항상 일차형식들의 행렬의 $2\\times 2$ 소행렬식들로 생성됨을 보일 수 있다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.13 ($\\mathbb{P}^m\\times\\mathbb{P}^n$의 사영대수적집합 = 쌍동차다항식들의 공통 영점궤적)",
+          "formal_statement": "$\\mathbb{P}^m\\times\\mathbb{P}^n$의 모든 사영대수적집합은 정확히 $\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n]$의 쌍동차다항식들의 공통 영점궤적이다.",
+          "idea_behind_proof": "한 방향은 $\\Sigma_{m,n}$의 닫힌집합을 세그레 사상으로 되당겨(pull back) $\\Psi_{m,n}$의 상이 쌍동차임을 확인하는 것뿐이다. 다른 방향(쌍동차다항식들의 공통 영점궤적이 실제로 닫힌집합이라는 것)은 쌍차수 $(a,b)$의 다항식을 최대차수 $e=\\max(a,b)$까지 인위적으로 끌어올려 완전히 $(e,e)$쌍동차로 만든 뒤, 그 단항식들을 세그레 좌표 $Z_{ij}=x_iy_j$로 치환해 $\\Sigma_{m,n}$ 안의 진짜 동차다항식으로 바꾸는 트릭이다.",
+          "proof_steps": [
+            "$\\Sigma_{m,n}$의 모든 닫힌부분집합은 어떤 동차이데알 $I\\subseteq S_{m,n}$에 대해 $\\Sigma_{m,n}\\cap V_+(I)$의 꼴이다. 그러면 $(\\Psi_{m,n}(I))\\subseteq\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n]$은 쌍동차다항식들로 생성되고, 그 공통 영점궤적이 정확히 $\\sigma_{m,n}(\\Sigma_{m,n}\\cap V_+(I))$이다.",
+            "역으로, 쌍동차다항식 $F_1,\\dots,F_r$의 공통 영점궤적이 $\\mathbb{P}^m\\times\\mathbb{P}^n$의 닫힌집합임을 보이면 충분하다. 이는 쌍차수 $(a,b)$인 $0$이 아닌 쌍동차다항식 $F$ 하나의 영점궤적이 닫힌집합임을 보이는 것으로 환원된다.",
+            "$e:=\\max\\{a,b\\}$로 두고, $F$에 차수 $e-a$인 모든 $x$-단항식과 차수 $e-b$인 모든 $y$-단항식을 곱하자. 그 결과 얻는 다항식들은 전부 쌍차수 $(e,e)$이고, 그 공통 영점궤적은 $F$의 영점궤적과 같다.",
+            "$e=0$이면 $F$는 $0$이 아닌 상수이므로 그 영점궤적은 공집합(닫힌집합)이다. $e>0$이라 하자. 쌍차수 $(e,e)$의 모든 단항식은 $e$개의 항 $x_iy_j$의 곱이다.",
+            "$Z_{ij}=x_iy_j$를 대입하면 각 결과 다항식은 세그레 좌표에서 차수 $e$의 동차다항식이 되고, 그 영점궤적은 $\\Sigma_{m,n}$ 안에서 닫혀 있으므로 $\\mathbb{P}^m\\times\\mathbb{P}^n$ 안에서도 닫혀 있다.",
+            "$F$의 영점궤적은 이렇게 얻은 유한 개의 닫힌집합들의 교집합이므로 그 자체로 닫혀 있다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.14 (대각선 $\\Delta_{\\mathbb{P}^n}$의 방정식)",
+          "formal_statement": "$\\mathbb{P}^n\\times\\mathbb{P}^n$의 대각선 $\\Delta_{\\mathbb{P}^n}$은 쌍동차다항식 $x_i-y_i$ ($0\\le i\\le n$)들의 공통 영점궤적이다(명제 4.13에 의해 이는 실제로 닫힌집합이다). $\\Delta_{\\mathbb{P}^n}\\cong\\mathbb{P}^n$임에 유의하라."
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.15 (공선성의 삼중동차 판정식과 일반위치의 일반화)",
+          "formal_statement": "$\\mathbb{P}^2$의 세 점 $p_1,p_2,p_3$이 공선(collinear)인 것은 $\\mathbb{P}^2\\times\\mathbb{P}^2\\times\\mathbb{P}^2$ 위의 삼중동차다항식 $$\\det\\begin{pmatrix}x_0&x_1&x_2\\\\y_0&y_1&y_2\\\\z_0&z_1&z_2\\end{pmatrix}=x_0y_1z_2+x_1y_2z_0+x_2y_0z_1-x_2y_1z_0-x_1y_0z_2-x_0y_2z_1$$ 이 $(p_1,p_2,p_3)$에서 소멸하는 것과 동치이다. 따라서 기약공간 $\\mathbb{P}^2\\times\\mathbb{P}^2\\times\\mathbb{P}^2$의 한 열린부분집합이 $\\mathbb{P}^2$ 위의 (순서 있는) 공선이 아닌 세 점들을 매개변수화한다 — 즉 '$\\mathbb{P}^2$의 일반적인 세 점은 공선이 아니다'라고 말할 수 있다. 더 일반적으로, $\\mathbb{P}^d$의 일반적인 $d+3$개의 점은 일반위치에 있음을 보일 수 있다. 따라서 $\\mathbb{P}^d$의 일반적인 $d+3$개의 점을 지나는 유리정규곡선이 유일하게 존재한다고 말할 수 있다(정리 4.9 참고)."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "$\\sigma_{1,1}([1:0],[1:0])$과 $\\sigma_{1,1}([1:0],[0:1])$을 세그레 사상의 정의($Z_{00}=x_0y_0,Z_{01}=x_0y_1,Z_{10}=x_1y_0,Z_{11}=x_1y_1$)로 직접 계산하고, 두 점이 모두 예제 4.12의 직선 $L^2_{[1:0]}$ 위에 있음을 확인하라(첫 번째 인자 $x=[1:0]$을 고정하고 두 번째 인자 $y$만 움직인 것임에 유의).",
+          "hint": "$x=(1,0)$을 고정하고 $y=(1,0)$과 $y=(0,1)$을 각각 대입해 $(Z_{00},Z_{01},Z_{10},Z_{11})$을 계산하라. $L^2_{[a:b]}=\\{[as:at:bs:bt]\\mid[s:t]\\in\\mathbb{P}^1\\}$에 $[a:b]=[1:0]$을 대입한 꼴과 비교하라.",
+          "solution": "$\\sigma_{1,1}([1:0],[1:0])=[1\\cdot1:1\\cdot0:0\\cdot1:0\\cdot0]=[1:0:0:0]$이고, $\\sigma_{1,1}([1:0],[0:1])=[1\\cdot0:1\\cdot1:0\\cdot0:0\\cdot1]=[0:1:0:0]$이다. $L^2_{[1:0]}=\\{[s:t:0:0]\\mid[s:t]\\in\\mathbb{P}^1\\}$(정의에서 $[a:b]=[1:0]$을 대입)이며, $[s:t]=[1:0]$일 때 $[1:0:0:0]$, $[s:t]=[0:1]$일 때 $[0:1:0:0]$을 주므로 두 점 모두 정확히 $L^2_{[1:0]}$ 위에 있다. 이는 '첫 번째 인자를 고정하면 세그레 매장 아래 $L^2$족의 직선을 따라간다'는 사실의 직접 확인이다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 4.15의 공선성 판정식을, $p_1=[1:0:0],p_2=[0:1:0],p_3=[1:1:0]$(모두 $z=0$인 직선 $V_+(x_2)$ 위의 점들이므로 공선이어야 함)에 대해 실제로 대입해 $0$이 됨을 확인하라.",
+          "hint": "$x=(1,0,0),y=(0,1,0),z=(1,1,0)$을 행렬식 공식에 그대로 대입해 계산하라.",
+          "solution": "$\\det\\begin{pmatrix}1&0&0\\\\0&1&0\\\\1&1&0\\end{pmatrix}$을 마지막 열을 따라 전개하면 세 성분이 모두 $0$이므로 행렬식 자체가 $0$이다(마지막 열 전체가 $0$이기 때문). 실제로 $p_1,p_2,p_3$은 모두 $x_2=0$인 직선 $V_+(x_2)\\subseteq\\mathbb{P}^2$ 위에 있으므로 공선이고, 이는 판정식이 $0$이 된다는 것과 정확히 일치한다."
+        },
+        {
+          "type": "ox",
+          "question": "$\\mathbb{P}^n\\times\\mathbb{P}^n$에 상자위상(두 자리스키 위상의 곱위상)을 그대로 주면, 대각선 $\\Delta_{\\mathbb{P}^n}$은 그 위상에서 닫힌집합이 된다.",
+          "answer": "X",
+          "explanation": "거짓이다. 강의노트가 명시하듯, $\\mathbb{P}^n\\times\\mathbb{P}^n$의 모든 점의 모든 열린근방이 $\\Delta_{\\mathbb{P}^n}$과 교차하므로 $\\Delta_{\\mathbb{P}^n}$의 (상자위상에서의) 폐포는 전체 공간 $\\mathbb{P}^n\\times\\mathbb{P}^n$과 같다 — 즉 대각선은 전혀 닫혀 있지 않고 오히려 조밀하다. 이것이 정확히 상자위상을 버리고 세그레 매장을 통한 위상을 도입해야 하는 이유다."
+        },
+        {
+          "type": "ox",
+          "question": "세그레 사상 $\\sigma_{m,n}$의 상 $\\Sigma_{m,n}\\subseteq\\mathbb{P}^{(m+1)(n+1)-1}$의 동차이데알은 $2\\times 2$ 소행렬식들로 생성된다.",
+          "answer": "O",
+          "explanation": "참이다. 명제 4.10과 정리 4.11의 내용 그대로다. $\\ker(\\Psi_{m,n})$은 $Z_{ij}Z_{k\\ell}-Z_{i\\ell}Z_{kj}$ 꼴의 생성원들로 주어지며, 이는 $(Z_{ij})$를 $(m+1)\\times(n+1)$ 행렬로 배열했을 때의 $2\\times 2$ 소행렬식들과 정확히 같다 — 이는 $\\Sigma_{m,n}$이 랭크 $1$ 행렬들의 사영화라는 사실의 대수적 반영이다."
+        },
+        {
+          "type": "conceptual",
+          "question": "예제 4.12에서 세그레 이차곡면 $\\Sigma_{1,1}\\subseteq\\mathbb{P}^3$의 모든 점이 각 직선족의 직선 정확히 하나 위에 놓인다는 사실을, '랭크 $1$ 행렬'이라는 관점에서 설명하라. 그리고 이 사실이 $\\Sigma_{1,1}\\cong\\mathbb{P}^1\\times\\mathbb{P}^1$이라는 것과 어떻게 정합적으로 들어맞는지 논하라.",
+          "hint": "세그레 좌표를 $2\\times 2$ 행렬 $M=\\begin{pmatrix}Z_{00}&Z_{01}\\\\Z_{10}&Z_{11}\\end{pmatrix}$로 배열하면 $\\Sigma_{1,1}$의 점들이 정확히 어떤 행렬들에 대응하는지, 그리고 그 행렬을 두 벡터의 외적으로 분해하는 방법이 몇 가지인지 생각해 보라.",
+          "answer": "$\\Sigma_{1,1}$의 점은 $Z_{ij}=x_iy_j$ 꼴, 즉 행렬 $M=\\begin{pmatrix}x_0\\\\x_1\\end{pmatrix}\\begin{pmatrix}y_0&y_1\\end{pmatrix}=\\begin{pmatrix}x_0y_0&x_0y_1\\\\x_1y_0&x_1y_1\\end{pmatrix}$로 쓰이는 랭크 $1$(또는 영) 행렬들의 사영화다. 랭크 $1$ 행렬을 열벡터와 행벡터의 외적으로 분해하는 방법은 (스칼라배 $x\\mapsto\\lambda x, y\\mapsto\\lambda^{-1}y$를 제외하면) 유일하다 — 이것이 정확히 $\\sigma_{1,1}$이 단사라는 사실의 선형대수적 근거다. 한 점 $M\\in\\Sigma_{1,1}$이 주어지면 그 열공간(column space)이 정확히 $[x_0:x_1]$을 결정하는 $1$차원 부분공간이고, 행공간(row space)이 $[y_0:y_1]$을 결정하는 $1$차원 부분공간이다. $L^1_{[a:b]}$(첫 번째 인자를 $[a:b]$로 고정하고 두 번째 인자를 움직임)는 정확히 '열공간이 $[a:b]$ 방향으로 고정된' 랭크 $1$ 행렬들의 모임이고, $L^2_{[a:b]}$는 '행공간이 고정된' 행렬들의 모임이다 — 주어진 랭크 $1$ 행렬은 유일한 열공간과 유일한 행공간을 가지므로, 각 점은 각 족의 직선 정확히 하나 위에 있다. 이는 $\\Sigma_{1,1}\\cong\\mathbb{P}^1\\times\\mathbb{P}^1$이라는 사실과 완벽하게 들어맞는다 — $L^1$족은 정확히 $\\{[a:b]\\}\\times\\mathbb{P}^1$(첫 번째 좌표 고정)들의 모임이고 $L^2$족은 $\\mathbb{P}^1\\times\\{[a:b]\\}$(두 번째 좌표 고정)들의 모임이므로, 두 직선족은 정확히 곱공간 $\\mathbb{P}^1\\times\\mathbb{P}^1$의 두 '좌표축 방향'을 세그레 매장을 통해 구체적인 직선들로 실현한 것이다."
+        }
+      ]
+    },
+    {
+      "section_title": "4.4 Products of algebraic varieties",
+      "step1_big_picture": {
+        "context": "세그레 사상이 준 진짜 선물은 '두 대수다양체의 곱'이라는 개념 자체를 엄밀하게 정의할 수 있게 되었다는 것이다: 준사영다양체 $X\\subseteq\\mathbb{P}^m$, $Y\\subseteq\\mathbb{P}^n$에 대해 $X\\times Y:=\\sigma_{m,n}(X\\times Y)\\subseteq\\Sigma_{m,n}$으로 정의하면, 이는 $\\Sigma_{m,n}$의 (준)사영다양체 구조를 그대로 물려받는다. 이 절은 이 정의 아래에서 곱이 실제로 다시 대수다양체가 됨을(기약성까지 포함해서) 확인하고(정리 4.16, 4.18), 그 좌표환이 아핀의 경우 텐서곱 $A(X)\\otimes_{\\mathbb{C}}A(Y)$과 동형임을(참고 4.17), 그리고 사영(fiber-wise) 구조와 그래프(graph)라는 두 가지 파생 개념(예제 4.19, 명제 4.20)을 확립한다. 명제 4.20('모피즘의 그래프는 닫혀 있고 정의역과 동형이다')은 특히 중요한데, 이는 이후 대수기하학 전반에서 '함수의 그래프'라는 직관을 엄밀한 도구로 만들어 주는 결과다.",
+        "hidden_intuition": "정리 4.16의 증명에서 가장 비직관적인 부분은 '$X\\times Y$가 기약이다'라는 것을 보이는 방법이다 — $X\\times Y=Z_1\\cup Z_2$로 쪼개졌다고 가정했을 때, 각 '수직 조각' $\\{p\\}\\times Y$($p\\in X$ 고정)는 그 자체로 $Y$와 동형인 기약공간이므로 통째로 $Z_1$ 또는 $Z_2$ 중 하나에 들어가야 한다. 이렇게 각 점 $p$를 '어느 쪽에 속하는 수직 조각을 갖는가'로 분류하면 $X$ 자체가 두 조각 $S_1,S_2$로 쪼개지고, $X$가 기약이므로 그중 하나가 전부를 차지해야 한다 — 이 논증은 '기약성이 곱셈적으로 전파된다'는 사실을 현미경으로 들여다보는 것과 같다: 두 조각(가로 방향과 세로 방향)이 각자 기약이면, 그 곱도 '조각으로 쪼개려는 시도'가 반드시 한쪽 방향 전체를 삼켜야만 하므로 결국 기약으로 남을 수밖에 없다. 명제 4.20의 그래프 논증에서 핵심 트릭은 그래프의 방정식 $y_iF_j-y_jF_i=0$이 정확히 '$y=[F_0(x):\\cdots:F_N(x)]$'라는 등식을 좌표별 비율의 형태로 다시 쓴 것뿐이라는 관찰이다 — 이는 두 점 $[y_0:\\cdots:y_N]$과 $[F_0(x):\\cdots:F_N(x)]$가 사영공간에서 '같은 점'이라는 조건을 교차비($y_iF_j=y_jF_i$)로 표현한 것과 정확히 같다. 이 절 전체가 말해주는 것은, 세그레 사상이라는 하나의 구체적 구성만으로 '곱', '그래프', '텐서곱과의 관계'까지 대수기하학의 표준 도구상자 전체를 무료로 얻는다는 사실이다.",
+        "visualization": {
+          "type": "custom_2d",
+          "caption": "모피즘 $f:X\\to Y$의 그래프 $\\mathrm{Graph}(f)\\subseteq X\\times Y$: 제1사영 $\\mathrm{pr}_1$은 그래프를 $X$ 위로 동형사상으로 되돌린다.",
+          "primitives": [
+            {
+              "shape": "segment",
+              "from": [
+                -2.3,
+                -1.6
+              ],
+              "to": [
+                2.3,
+                -1.6
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                2.5,
+                -1.6
+              ],
+              "text": "$X$"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                -2.3,
+                -1.6
+              ],
+              "to": [
+                -2.3,
+                1.8
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                -2.3,
+                2.05
+              ],
+              "text": "$Y$"
+            },
+            {
+              "shape": "curve",
+              "points": [
+                [
+                  -1.8,
+                  -0.6
+                ],
+                [
+                  -1.65,
+                  -0.58
+                ],
+                [
+                  -1.5,
+                  -0.56
+                ],
+                [
+                  -1.35,
+                  -0.54
+                ],
+                [
+                  -1.2,
+                  -0.52
+                ],
+                [
+                  -1.05,
+                  -0.5
+                ],
+                [
+                  -0.9,
+                  -0.47
+                ],
+                [
+                  -0.75,
+                  -0.45
+                ],
+                [
+                  -0.6,
+                  -0.43
+                ],
+                [
+                  -0.45,
+                  -0.41
+                ],
+                [
+                  -0.3,
+                  -0.39
+                ],
+                [
+                  -0.15,
+                  -0.37
+                ],
+                [
+                  -0.0,
+                  -0.35
+                ],
+                [
+                  0.15,
+                  -0.33
+                ],
+                [
+                  0.3,
+                  -0.31
+                ],
+                [
+                  0.45,
+                  -0.29
+                ],
+                [
+                  0.6,
+                  -0.27
+                ],
+                [
+                  0.75,
+                  -0.25
+                ],
+                [
+                  0.9,
+                  -0.23
+                ],
+                [
+                  1.05,
+                  -0.2
+                ],
+                [
+                  1.2,
+                  -0.18
+                ],
+                [
+                  1.35,
+                  -0.16
+                ],
+                [
+                  1.5,
+                  -0.14
+                ],
+                [
+                  1.65,
+                  -0.12
+                ],
+                [
+                  1.8,
+                  -0.1
+                ]
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                1.6,
+                0.15
+              ],
+              "text": "$\\mathrm{Graph}(f)$"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.5,
+                -1.6
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.5,
+                -1.9
+              ],
+              "text": "$p$"
+            },
+            {
+              "shape": "segment",
+              "from": [
+                0.5,
+                -1.6
+              ],
+              "to": [
+                0.5,
+                -0.35
+              ],
+              "dash": "3,3"
+            },
+            {
+              "shape": "point",
+              "at": [
+                0.5,
+                -0.35
+              ]
+            },
+            {
+              "shape": "label",
+              "at": [
+                0.85,
+                -0.35
+              ],
+              "text": "$(p,f(p))$"
+            }
+          ]
+        }
+      },
+      "step2_rigorous_logic": [
+        {
+          "type": "Definition",
+          "name": "정의 (준사영다양체의 곱 $X\\times Y$, $\\mathbb{A}^m\\times\\mathbb{A}^n=\\mathbb{A}^{m+n}$의 동일시)",
+          "formal_statement": "준사영다양체 $X\\subseteq\\mathbb{P}^m$, $Y\\subseteq\\mathbb{P}^n$에 대해 $$X\\times Y:=\\sigma_{m,n}(X\\times Y)\\subseteq\\Sigma_{m,n}$$ 로 정의한다. 명제 4.13에 의해 $\\mathbb{A}^m\\times\\mathbb{A}^n$을 $\\mathbb{A}^{m+n}$과 자연스럽게 동일시할 수 있다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.16 (아핀다양체의 곱은 아핀다양체이다)",
+          "formal_statement": "$X\\subseteq\\mathbb{A}^m$, $Y\\subseteq\\mathbb{A}^n$을 아핀다양체라 하자. 그러면 $X\\times Y\\subseteq\\mathbb{A}^m\\times\\mathbb{A}^n=\\mathbb{A}^{m+n}$은 아핀다양체이며 $$I(X\\times Y)=I(X)R_{m,n}+I(Y)R_{m,n}\\subseteq R_{m,n},\\qquad R_{m,n}:=\\mathbb{C}[x_1,\\dots,x_m,y_1,\\dots,y_n].$$",
+          "idea_behind_proof": "기약성 증명의 핵심은 '수직 조각 $\\{p\\}\\times Y$가 통째로 $Z_1$ 또는 $Z_2$에 속해야 한다'는 관찰을 이용해 문제를 $X$ 자체의 기약성으로 되돌리는 것이다. 이데알 등식의 어려운 포함 방향은 $f\\in R_{m,n}$을 $y$-단항식들에 대한 $\\mathbb{C}[x]$-계수의 조합으로 분해한 뒤 강한 Nullstellensatz를 적용하는 것이다.",
+          "proof_steps": [
+            "[준비 관찰] $f\\in R_{m,n}$에 대해, $\\mathbb{C}[y_1,\\dots,y_n]/I(Y)$ 안에서 $f$에 나타나는 $y$-단항식들이 생성하는 부분공간의 기저를 이루는 $q_1,\\dots,q_r\\in\\mathbb{C}[y_1,\\dots,y_n]$을 고를 수 있다. 그러면 $\\mathbb{C}[y]/I(Y)$ 안에서 $[f]=\\sum_{i=1}^r a_iq_i$인 $a_1,\\dots,a_r\\in\\mathbb{C}[x_1,\\dots,x_m]$이 존재한다. $p\\in X$에 대해, 모든 $y\\in Y$에서 $f(p,y)=0$인 것은 강한 Nullstellensatz에 의해 모든 $1\\le i\\le r$에서 $a_i(p)=0$인 것과 동치이다.",
+            "[기약성] $X\\times Y=Z_1\\cup Z_2$($Z_1,Z_2\\subseteq X\\times Y$는 닫힌부분집합)라 하자. 준비 관찰에 의해 $S_i:=\\{p\\in X\\mid\\{p\\}\\times Y\\subseteq Z_i\\}\\subseteq X$가 $i=1,2$에서 닫힌집합임을 보일 수 있다.",
+            "$\\{p\\}\\times Y\\cong Y$가 기약이므로 $\\{p\\}\\times Y$는 $Z_1$ 또는 $Z_2$에 포함된다. 따라서 $X=S_1\\cup S_2$이고, $X$가 기약이므로 $X=S_1$ 또는 $X=S_2$이다.",
+            "$X=S_1$이면 모든 $p\\in X$에서 $\\{p\\}\\times Y\\subseteq Z_1$이므로 $X\\times Y=Z_1$이다(마찬가지로 $X=S_2$이면 $X\\times Y=Z_2$). 따라서 $X\\times Y$는 기약이다.",
+            "[이데알 등식] $I(X)R_{m,n}+I(Y)R_{m,n}\\subseteq I(X\\times Y)$는 명백하다. 역포함은 준비 관찰과 강한 Nullstellensatz로부터 나온다: $f\\in I(X\\times Y)$이면 모든 $p\\in X$에서 모든 $a_i(p)=0$이므로 $a_i\\in I(X)$이고, 따라서 $[f]=\\sum a_iq_i\\equiv 0$을 $I(X)R_{m,n}+I(Y)R_{m,n}$을 법으로 얻어 $f\\in I(X)R_{m,n}+I(Y)R_{m,n}$이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Remark",
+          "name": "참고 (텐서곱과 $A(X\\times Y)\\cong A(X)\\otimes_{\\mathbb{C}}A(Y)$)",
+          "formal_statement": "$\\mathbb{C}$-대수 $A,B$에 대해 $\\mathbb{C}$ 위의 텐서곱 $A\\otimes_{\\mathbb{C}}B$는 기호 $a\\otimes b$들로 생성되고 쌍선형성을 만족하며, 곱셈이 $(a\\otimes b)(a'\\otimes b'):=aa'\\otimes bb'$로 주어지는 $\\mathbb{C}$-벡터공간이다. 정리 4.16의 상황에서 $$A(X\\times Y)=R_{m,n}/(I(X)R_{m,n}+I(Y)R_{m,n})\\cong A(X)\\otimes_{\\mathbb{C}}A(Y)$$ 이다."
+        },
+        {
+          "type": "Theorem",
+          "name": "정리 4.18 (사영/준사영다양체의 곱은 다시 사영/준사영다양체이다)",
+          "formal_statement": "두 사영다양체의 곱은 사영다양체이고, 두 준사영다양체의 곱은 준사영다양체이다.",
+          "idea_behind_proof": "정리 4.16의 아핀적 계산을, 세그레 사상을 통한 원상 $\\Psi_{m,n}^{-1}$을 취해 사영적 언어로 옮기기만 하면 된다.",
+          "proof_steps": [
+            "$X\\subseteq\\mathbb{P}^m$, $Y\\subseteq\\mathbb{P}^n$을 사영다양체라 하자. 명제 4.13에 의해 $X\\times Y$는 사영대수적집합이다.",
+            "사영 Nullstellensatz와 정리 4.16(동차 버전, $R_{m,n}:=\\mathbb{C}[x_0,\\dots,x_m,y_0,\\dots,y_n]$)에 의해 $I(X)R_{m,n}+I(Y)R_{m,n}\\subseteq R_{m,n}$은 쌍동차다항식들로 생성되는 소이데알이다.",
+            "그러면 $\\Psi_{m,n}^{-1}(I(X)R_{m,n}+I(Y)R_{m,n})\\subseteq S_{m,n}$은 동차 소이데알이고, $\\sigma_{m,n}(X\\times Y)=V_+(\\Psi_{m,n}^{-1}(I(X)R_{m,n}+I(Y)R_{m,n}))$은 사영다양체이다.",
+            "두 번째 주장(준사영의 경우)은 명백하다 — 준사영다양체는 사영다양체의 열린부분집합이고, 곱 위상에서 열린집합들의 곱은 다시 곱공간의 열린집합이기 때문이다. $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.19 (사영 사상은 모피즘이다)",
+          "formal_statement": "$X,Y$가 준사영다양체일 때, 사영 사상 $$\\mathrm{pr}_1:X\\times Y\\to X\\qquad\\text{와}\\qquad \\mathrm{pr}_2:X\\times Y\\to Y$$ 는 모피즘이다. 실제로 세그레 차트 $\\Sigma_{m,n}\\setminus V_+(Z_{ij})$ 위에서 이들은 $$\\mathrm{pr}_1([Z_{ab}])=[Z_{0j}:\\cdots:Z_{mj}]\\qquad\\text{와}\\qquad \\mathrm{pr}_2([Z_{ab}])=[Z_{i0}:\\cdots:Z_{in}]$$ 로 주어진다."
+        },
+        {
+          "type": "Definition",
+          "name": "정의 (모피즘의 그래프)",
+          "formal_statement": "준사영다양체 사이의 모피즘 $f:X\\to Y$에 대해 그 그래프(graph)는 $$\\mathrm{Graph}(f):=\\{(x,f(x))\\mid x\\in X\\}\\subseteq X\\times Y$$ 이다."
+        },
+        {
+          "type": "Proposition",
+          "name": "명제 4.20 (모피즘의 그래프는 닫혀 있고, 정의역과 동형이다)",
+          "formal_statement": "준사영다양체 사이의 모든 모피즘 $f:X\\to Y$에 대해 $\\mathrm{Graph}(f)$는 $X\\times Y$ 안에서 닫혀 있고, 제한 사상 $$\\mathrm{pr}_1|_{\\mathrm{Graph}(f)}:\\mathrm{Graph}(f)\\to X$$ 는 동형사상이다. 특히 $\\mathrm{Graph}(f)$는 준사영다양체이다.",
+          "idea_behind_proof": "핵심 트릭은 그래프의 방정식이 '$y=[F_0(x):\\cdots:F_N(x)]$'라는 등식을 좌표별 교차곱 $y_iF_j-y_jF_i=0$으로 다시 쓴 것뿐이라는 관찰이다. 이는 명제 4.13에 의해 쌍동차다항식들의 공통 영점궤적이므로 자동으로 닫힌집합이 되고, 역사상 $x\\mapsto(x,f(x))$가 세그레 매장을 통해 모피즘임을 직접 확인하면 끝난다.",
+          "proof_steps": [
+            "$X\\subseteq\\mathbb{P}^M$, $Y\\subseteq\\mathbb{P}^N$로 매장하자. $p\\in X$에 대해, $f$가 $p$의 근방 $W$ 위에서 같은 차수의 동차다항식 $F_0,\\dots,F_N\\in\\mathbb{C}[x_0,\\dots,x_M]$(공통 영점 없음)로 $(F_0,\\dots,F_N)$로 표현된다고 하자. $W$를 좁혀 어떤 $0\\le j\\le N$에서 $F_j$가 $W$ 위에서 어디서도 $0$이 아니라고 가정할 수 있다.",
+            "그러면 $f(W)$는 $\\mathbb{P}^N$의 아핀 차트 $U_j$ 안에 놓인다. $\\mathrm{Graph}(f)$는 $W\\times Y$ 안에서 $0\\le i\\le M$에 대한 쌍동차 방정식 $y_iF_j-y_jF_i=0$으로 잘려 나온다는 사실에 유의하라.",
+            "명제 4.13에 의해 이 방정식들의 공통 영점궤적은 $W\\times Y$ 안에서 닫혀 있다. 따라서 $\\mathrm{Graph}(f)$는 $X\\times Y$ 전역에서 닫혀 있다.",
+            "이제 제한 사상 $\\mathrm{pr}_1|_{\\mathrm{Graph}(f)}:\\mathrm{Graph}(f)\\to X$가 모피즘임에 유의하고, 그 역사상은 $$X\\to\\mathrm{Graph}(f),\\qquad x\\mapsto(x,f(x))$$ 이다. 이 역사상이 모피즘임은 세그레 매장을 이용해 쉽게 보일 수 있다(각 좌표가 $x$의 좌표와 $f$를 정의하는 동차다항식들의 곱으로 쓰이므로). $\\qquad\\blacksquare$"
+          ]
+        },
+        {
+          "type": "Example",
+          "name": "예제 4.21 (항등사상의 그래프는 대각선이다)",
+          "formal_statement": "$f=\\mathrm{id}_{\\mathbb{P}^n}$일 때 $\\mathrm{Graph}(f)$는 $\\mathbb{P}^n\\times\\mathbb{P}^n$의 대각선 $\\Delta_{\\mathbb{P}^n}$이다."
+        }
+      ],
+      "step3_checkpoint": [
+        {
+          "type": "checkpoint",
+          "problem": "정리 4.16의 '준비 관찰'을 아주 간단한 예로 확인하라: $X=\\mathbb{A}^1$(좌표 $x$), $Y=V(y)\\subseteq\\mathbb{A}^1$(좌표 $y$, 즉 원점 한 점)일 때, $f(x,y)=xy+x^2\\in R_{1,1}=\\mathbb{C}[x,y]$에 대해 $q_1,\\dots,q_r$과 $a_1,\\dots,a_r$을 구체적으로 찾아라. 그리고 $p\\in X$에서 $f(p,y)=0$($y\\in Y=\\{0\\}$에서)이 되는 조건을 $a_i(p)=0$의 조건과 비교하라.",
+          "hint": "$I(Y)=(y)$이므로 $\\mathbb{C}[y]/I(Y)\\cong\\mathbb{C}$이고, 그 안에서 $y$의 잉여류는 $0$이다. $f=xy+x^2$을 $y$에 대해 나누어 몫과 나머지($y$가 없는 부분)를 분리해 보라.",
+          "solution": "$\\mathbb{C}[y]/(y)\\cong\\mathbb{C}$이며 이 몫환에서 기저는 $q_1=1$ 하나뿐이다($y$ 자신은 $0$과 같으므로). $f=xy+x^2$을 $\\mathbb{C}[y]/(y)$에서 보면 $[f]=[xy]+[x^2]=x\\cdot[y]+x^2\\cdot[1]=x\\cdot 0+x^2\\cdot 1=x^2$이므로, $a_1=x^2$이다(즉 $[f]=a_1q_1$). 이제 $p=x_0\\in X=\\mathbb{A}^1$에서 $f(p,y)=0$이 $Y=\\{0\\}$의 유일한 점 $y=0$에서 성립하는지 확인하면 $f(x_0,0)=x_0\\cdot 0+x_0^2=x_0^2$이므로 $f(p,0)=0\\iff x_0^2=0\\iff x_0=0$이다. 이는 정확히 $a_1(p)=p^2=0\\iff p=0$이라는 조건과 일치한다 — 준비 관찰이 이 간단한 예에서 정확히 확인된다."
+        },
+        {
+          "type": "checkpoint",
+          "problem": "예제 4.21에서 $f=\\mathrm{id}_{\\mathbb{P}^1}$일 때, 명제 4.20의 그래프 방정식 $y_iF_j-y_jF_i=0$이 실제로 대각선의 방정식 $x_i-y_i$(예제 4.14)와 (스칼라 인수 차이를 제외하면) 같은 영점궤적을 정의함을 확인하라.",
+          "hint": "$f=\\mathrm{id}$이므로 $F_i=x_i$로 둘 수 있다(즉 $(F_0,F_1)=(x_0,x_1)$). $y_iF_j-y_jF_i$에 이를 대입해 보라.",
+          "solution": "$f=\\mathrm{id}_{\\mathbb{P}^1}$이므로 $F_0=x_0,F_1=x_1$로 둘 수 있다. 그러면 $y_iF_j-y_jF_i=y_ix_j-y_jx_i$이다. $i=0,j=1$일 때 $y_0x_1-y_1x_0=0$은 $[x_0:x_1]=[y_0:y_1]$(사영좌표가 같다는 것, 즉 교차곱이 같다는 것)과 동치이며, 이는 정확히 $x_0=y_0,x_1=y_1$(스칼라배까지)과 같은 영점궤적, 즉 대각선 $\\Delta_{\\mathbb{P}^1}=V_+(x_0-y_0,x_1-y_1)$(예제 4.14의 방정식 $x_i-y_i$)이 정의하는 것과 정확히 일치하는 자리스키 닫힌집합이다."
+        },
+        {
+          "type": "ox",
+          "question": "정리 4.16에 의해, 두 아핀다양체 $X,Y$의 곱의 좌표환 $A(X\\times Y)$는 항상 $A(X)$와 $A(Y)$의 텐서곱 $A(X)\\otimes_{\\mathbb{C}}A(Y)$와 동형이다.",
+          "answer": "O",
+          "explanation": "참이다. 참고 4.17의 내용 그대로다. $A(X\\times Y)=R_{m,n}/(I(X)R_{m,n}+I(Y)R_{m,n})$이고, 이는 정확히 $A(X)\\otimes_{\\mathbb{C}}A(Y)$와 동형이다 — 즉 곱 다양체의 좌표환은 각 좌표환의 텐서곱이라는, 대수기하학에서 자주 쓰이는 표준 사실이다."
+        },
+        {
+          "type": "ox",
+          "question": "명제 4.20에 의해, 모피즘 $f:X\\to Y$의 그래프 $\\mathrm{Graph}(f)$는 $X\\times Y$의 부분집합으로서 항상 $Y$와 동형이다.",
+          "answer": "X",
+          "explanation": "거짓이다. 명제 4.20이 실제로 보이는 것은 $\\mathrm{Graph}(f)$가 $\\mathrm{pr}_1$(제1사영, $X$로 가는 사영)을 통해 정의역 $X$와 동형이라는 것이지, 공역 $Y$와 동형이라는 것이 아니다. 예를 들어 $f$가 상수사상이면 $\\mathrm{Graph}(f)\\cong X$이지만 $Y$와는 (차원이 다르면) 전혀 동형이 아닐 수 있다."
+        },
+        {
+          "type": "conceptual",
+          "question": "정리 4.16의 기약성 증명은 '수직 조각 $\\{p\\}\\times Y$가 통째로 $Z_1$ 또는 $Z_2$에 속해야 한다'는 사실에 의존한다. 만약 $Y$가 기약이 아니라 두 기약성분 $Y_1,Y_2$로 쪼개지는 대수적집합이었다면, 이 증명의 논증이 정확히 어느 단계에서 깨지는지 설명하고, $X\\times Y$가 그 경우 몇 개의 기약성분을 가질지 논하라.",
+          "hint": "'$\\{p\\}\\times Y\\cong Y$가 기약이므로 $Z_1$ 또는 $Z_2$에 통째로 포함된다'는 문장이 $Y$가 기약이 아니면 어떻게 실패하는지 생각해 보라. $\\{p\\}\\times Y$ 자체를 $Y_1,Y_2$에 대응하는 두 조각으로 쪼갤 수 있다면 어떻게 되는가?",
+          "answer": "증명이 깨지는 정확한 지점은 '$\\{p\\}\\times Y\\cong Y$가 기약이므로 $Z_1$ 또는 $Z_2$에 포함된다'는 단계다. $Y$가 기약이 아니라 $Y=Y_1\\cup Y_2$(두 기약성분)라면, $\\{p\\}\\times Y=(\\{p\\}\\times Y_1)\\cup(\\{p\\}\\times Y_2)$ 자체가 이미 두 조각으로 쪼개져 있으므로, $Z_1:=X\\times Y_1$, $Z_2:=X\\times Y_2$로 두면 각 수직 조각 $\\{p\\}\\times Y$는 온전히 $Z_1$이나 $Z_2$ 중 하나에만 속하는 것이 아니라 그 자체로 $Z_1$과 $Z_2$ 양쪽에 걸쳐 있게 되어(즉 $\\{p\\}\\times Y_1\\subseteq Z_1$이면서 $\\{p\\}\\times Y_2\\subseteq Z_2$), '통째로 한쪽에 속한다'는 전제 자체가 무너진다. 실제로 이 경우 $X\\times Y=X\\times(Y_1\\cup Y_2)=(X\\times Y_1)\\cup(X\\times Y_2)$이고, $X$가 기약이라면(각 $X\\times Y_i$가 정리 4.16에 의해 기약이므로) $X\\times Y$는 정확히 두 개의 기약성분 $X\\times Y_1$, $X\\times Y_2$를 갖는다 — 일반적으로 $X$가 $k$개, $Y$가 $\\ell$개의 기약성분을 가지면 $X\\times Y$는 (자명한 상황 가정 아래) 최대 $k\\ell$개의 기약성분 $X_i\\times Y_j$들로 쪼개진다. 즉 곱의 기약성분의 개수는 각 인자의 기약성분 개수의 곱으로 늘어나며, 이것이 정리 4.16이 '기약'이라는 가정을 반드시 명시적으로 요구하는 이유다."
+        }
+      ]
+    }
+  ]
+}
