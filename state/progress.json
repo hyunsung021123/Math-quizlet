@@ -31,7 +31,8 @@
     "1_affine_varieties": {
       "section:0": true,
       "section:1": true,
-      "section:2": true
+      "section:2": true,
+      "section:3": true
     }
   },
   "lastPos": {
@@ -40,7 +41,7 @@
       "type": "section",
       "index": 3
     },
-    "cardIndex": 8
+    "cardIndex": 10
   },
-  "updatedAt": "2026-09-22T15:14:07.191Z"
+  "updatedAt": "2026-09-22T15:14:50.148Z"
 }
