@@ -29,16 +29,17 @@
       "section:3": true
     },
     "1_affine_varieties": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true
     }
   },
   "lastPos": {
     "topicId": "1_affine_varieties",
     "view": {
       "type": "section",
-      "index": 1
+      "index": 2
     },
-    "cardIndex": 19
+    "cardIndex": 0
   },
-  "updatedAt": "2026-09-22T11:00:49.392Z"
+  "updatedAt": "2026-09-22T11:01:14.076Z"
 }
