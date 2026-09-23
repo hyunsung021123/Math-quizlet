@@ -1,0 +1,52 @@
+{
+  "completed": {
+    "chapter_0_introduction_and_examples": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
+    },
+    "chapter_1_polytopes_polyhedra_and_cones": {
+      "section:0": true,
+      "section:1": true
+    },
+    "chapter_0_some_underlying_geometric_noti": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true,
+      "section:5": true
+    },
+    "chapter_1_the_fundamental_group": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
+    },
+    "1_the_basics": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true
+    },
+    "1_affine_varieties": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true
+    },
+    "2_functions_on_affine_varieties": {
+      "section:0": true,
+      "section:1": true
+    }
+  },
+  "lastPos": {
+    "topicId": "2_functions_on_affine_varieties",
+    "view": {
+      "type": "section",
+      "index": 2
+    },
+    "cardIndex": 2
+  },
+  "updatedAt": "2026-09-23T13:31:57.274Z"
+}
