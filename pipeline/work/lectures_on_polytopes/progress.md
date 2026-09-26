@@ -108,11 +108,11 @@
 | 057 | [x] | 8.2 Shelling Polytopes | section | `057__LecturesonPoly__8_2_ShellingPolytopes.txt` |
 | 058 | [x] | 8.3 h-Vectors and Dehn-Sommerville Equations | section | `058__LecturesonPoly__8_3_h-VectorsandDehn-Sommervil.txt` |
 | 059 | [x] | 8.4 The Upper Bound Theorem | section | `059__LecturesonPoly__8_4_TheUpperBoundTheorem.txt` |
-| 060 | [ ] | 8.5 Some Extremal Set Theory (분할 part 1) _(원본 #060)_ | section | `060__LecturesonPoly__8_5_SomeExtremalSetTheory__p1.txt` |
-| 061 | [ ] | 8.5 Some Extremal Set Theory (분할 part 2) _(원본 #061)_ | section | `061__LecturesonPoly__8_5_SomeExtremalSetTheory__p2.txt` |
-| 062 | [ ] | 8.6 The g-Theorem and Its Consequences | section | `062__LecturesonPoly__8_6_Theg-TheoremandItsConseque.txt` |
-| 063 | [ ] | 8.ex Problems and Exercises (분할 part 1) _(원본 #063)_ | exercises | `063__LecturesonPoly__8_ex_ProblemsandExercises__p1__EX.txt` |
-| 064 | [ ] | 8.ex Problems and Exercises (분할 part 2) _(원본 #064)_ | exercises | `064__LecturesonPoly__8_ex_ProblemsandExercises__p2__EX.txt` |
+| 060 | [x] | 8.5 Some Extremal Set Theory (분할 part 1) _(원본 #060)_ | section | `060__LecturesonPoly__8_5_SomeExtremalSetTheory__p1.txt` |
+| 061 | [x] | 8.5 Some Extremal Set Theory (분할 part 2) _(원본 #061)_ | section | `061__LecturesonPoly__8_5_SomeExtremalSetTheory__p2.txt` |
+| 062 | [x] | 8.6 The g-Theorem and Its Consequences | section | `062__LecturesonPoly__8_6_Theg-TheoremandItsConseque.txt` |
+| 063 | [x] | 8.ex Problems and Exercises (분할 part 1) _(원본 #063)_ | exercises | `063__LecturesonPoly__8_ex_ProblemsandExercises__p1__EX.txt` |
+| 064 | [x] | 8.ex Problems and Exercises (분할 part 2) _(원본 #064)_ | exercises | `064__LecturesonPoly__8_ex_ProblemsandExercises__p2__EX.txt` |
 
 ## 9. Fiber Polytopes, and Beyond
 
