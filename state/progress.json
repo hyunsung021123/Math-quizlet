@@ -27,17 +27,6 @@
       "section:1": true,
       "section:2": true,
       "section:3": true
-    },
-    "1_affine_varieties": {
-      "section:0": true,
-      "section:1": true,
-      "section:2": true,
-      "section:3": true,
-      "section:4": true
-    },
-    "2_functions_on_affine_varieties": {
-      "section:0": true,
-      "section:1": true
     }
   },
   "lastPos": {
@@ -48,5 +37,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-09-23T13:51:12.471Z"
+  "updatedAt": "2026-09-26T14:54:12.709Z"
 }
