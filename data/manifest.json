@@ -131,6 +131,12 @@
       "title": "5. Dimension Theory",
       "file": "5_dimension_theory.json",
       "book": "Park — Introduction to Algebraic Geometry"
+    },
+    {
+      "id": "chapter_8_shellability_and_the_upper_bou",
+      "title": "Chapter 8. Shellability and the Upper Bound Theorem",
+      "file": "chapter_8_shellability_and_the_upper_bou.json",
+      "book": "Ziegler — Lectures on Polytopes"
     }
   ]
 }
