@@ -104,9 +104,9 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 056 | [ ] | 8.1 Shellable and Nonshellable Complexes | section | `056__LecturesonPoly__8_1_ShellableandNonshellableCo.txt` |
-| 057 | [ ] | 8.2 Shelling Polytopes | section | `057__LecturesonPoly__8_2_ShellingPolytopes.txt` |
-| 058 | [ ] | 8.3 h-Vectors and Dehn-Sommerville Equations | section | `058__LecturesonPoly__8_3_h-VectorsandDehn-Sommervil.txt` |
+| 056 | [x] | 8.1 Shellable and Nonshellable Complexes | section | `056__LecturesonPoly__8_1_ShellableandNonshellableCo.txt` |
+| 057 | [x] | 8.2 Shelling Polytopes | section | `057__LecturesonPoly__8_2_ShellingPolytopes.txt` |
+| 058 | [x] | 8.3 h-Vectors and Dehn-Sommerville Equations | section | `058__LecturesonPoly__8_3_h-VectorsandDehn-Sommervil.txt` |
 | 059 | [x] | 8.4 The Upper Bound Theorem | section | `059__LecturesonPoly__8_4_TheUpperBoundTheorem.txt` |
 | 060 | [ ] | 8.5 Some Extremal Set Theory (분할 part 1) _(원본 #060)_ | section | `060__LecturesonPoly__8_5_SomeExtremalSetTheory__p1.txt` |
 | 061 | [ ] | 8.5 Some Extremal Set Theory (분할 part 2) _(원본 #061)_ | section | `061__LecturesonPoly__8_5_SomeExtremalSetTheory__p2.txt` |
