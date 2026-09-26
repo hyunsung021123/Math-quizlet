@@ -31,7 +31,7 @@
                 2.5,
                 -1.6
               ],
-              "text": "$X$"
+              "text": "X"
             },
             {
               "shape": "segment",
@@ -50,7 +50,7 @@
                 -2.3,
                 2.05
               ],
-              "text": "$Y$"
+              "text": "Y"
             },
             {
               "shape": "curve",
@@ -163,7 +163,7 @@
                 1.6,
                 0.15
               ],
-              "text": "$\\mathrm{Graph}(f)$"
+              "text": "Graph(f)"
             },
             {
               "shape": "point",
@@ -178,7 +178,7 @@
                 0.5,
                 -1.9
               ],
-              "text": "$p$"
+              "text": "p"
             },
             {
               "shape": "segment",
@@ -205,7 +205,7 @@
                 0.85,
                 -0.35
               ],
-              "text": "$(p,f(p))$"
+              "text": "(p, f(p))"
             }
           ]
         }
