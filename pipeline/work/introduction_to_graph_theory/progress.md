@@ -46,10 +46,10 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 013 | [ ] | 6.1 Connectivity | section | `013__Introductionto__6_1_Connectivity.txt` |
-| 014 | [ ] | 6.2 2-connected graphs | section | `014__Introductionto__6_2_2-connectedgraphs.txt` |
-| 015 | [ ] | 6.3 3-connected graphs by contraction | section | `015__Introductionto__6_3_3-connectedgraphsbycontrac.txt` |
-| 016 | [ ] | 6.4 Connectivity and independent paths | section | `016__Introductionto__6_4_Connectivityandindependent.txt` |
-| 017 | [ ] | 6.5 Menger's theorem and separator certificates | section | `017__Introductionto__6_5_Mengerstheoremandseparator.txt` |
-| 018 | [ ] | 6.6 [A] Closure and Chvátal's degree-sequence theorem | section | `018__Introductionto__6_6_AClosureandChvtalsdegree-s.txt` |
-| 019 | [ ] | 6.7 [A] A flow interpretation of matching and Menger | section | `019__Introductionto__6_7_AAflowinterpretationofmatc.txt` |
+| 013 | [x] | 6.1 Connectivity | section | `013__Introductionto__6_1_Connectivity.txt` |
+| 014 | [x] | 6.2 2-connected graphs | section | `014__Introductionto__6_2_2-connectedgraphs.txt` |
+| 015 | [x] | 6.3 3-connected graphs by contraction | section | `015__Introductionto__6_3_3-connectedgraphsbycontrac.txt` |
+| 016 | [x] | 6.4 Connectivity and independent paths | section | `016__Introductionto__6_4_Connectivityandindependent.txt` |
+| 017 | [x] | 6.5 Menger's theorem and separator certificates | section | `017__Introductionto__6_5_Mengerstheoremandseparator.txt` |
+| 018 | [x] | 6.6 [A] Closure and Chvátal's degree-sequence theorem | section | `018__Introductionto__6_6_AClosureandChvtalsdegree-s.txt` |
+| 019 | [x] | 6.7 [A] A flow interpretation of matching and Menger | section | `019__Introductionto__6_7_AAflowinterpretationofmatc.txt` |
