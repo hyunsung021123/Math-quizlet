@@ -30,12 +30,12 @@
     }
   },
   "lastPos": {
-    "topicId": "1_course_overview",
+    "topicId": "2_basic_concepts",
     "view": {
       "type": "section",
       "index": 0
     },
-    "cardIndex": 4
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-01T10:28:10.175Z"
+  "updatedAt": "2026-10-01T10:28:14.437Z"
 }
