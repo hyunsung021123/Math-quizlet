@@ -79,28 +79,10 @@
       "book": "Shakarchi — Complex Analysis"
     },
     {
-      "id": "1_the_basics",
-      "title": "1. The Basics",
-      "file": "1_the_basics.json",
-      "book": "Diestel — Graph Theory"
-    },
-    {
       "id": "chapter_3_cohomology",
       "title": "Chapter 3. Cohomology",
       "file": "chapter_3_cohomology.json",
       "book": "Hatcher — Algebraic Topology"
-    },
-    {
-      "id": "2_matching_covering_and_packing",
-      "title": "2. Matching, Covering and Packing",
-      "file": "2_matching_covering_and_packing.json",
-      "book": "Diestel — Graph Theory"
-    },
-    {
-      "id": "3_connectivity",
-      "title": "3. Connectivity",
-      "file": "3_connectivity.json",
-      "book": "Diestel — Graph Theory"
     },
     {
       "id": "1_affine_varieties",

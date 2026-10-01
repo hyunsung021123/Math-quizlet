@@ -172,7 +172,8 @@ don't rely on any progress numbers written here, they go stale):
 |---|---|---|
 | `algebraic_topology` | Algebraic Topology | Allen Hatcher |
 | `complex_analysis` | Complex Analysis | Elias M. Stein & Rami Shakarchi |
-| `graph_theory` | Graph Theory | Reinhard Diestel |
+| `introduction_to_algebraic_geometry` | Introduction to Algebraic Geometry | Jinhyung Park |
+| `introduction_to_graph_theory` | Introduction to Graph Theory | Jaehoon Kim (KAIST lecture notes) |
 | `lectures_on_polytopes` | Lectures on Polytopes | Günter M. Ziegler |
 
 `--book` does not need to be that exact slug: `orchestrate_claude.py`'s `resolve_book()` also accepts the
