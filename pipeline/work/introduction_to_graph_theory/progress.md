@@ -23,15 +23,15 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 005 | [ ] | 3.intro Walks, paths, cycles, and trees | intro | `005__Introductionto__3_intro_Walkspathscyclesandtrees.txt` |
-| 006 | [ ] | 3.1 [A] Cycle space and cut space | section | `006__Introductionto__3_1_ACyclespaceandcutspace.txt` |
+| 005 | [x] | 3.intro Walks, paths, cycles, and trees | intro | `005__Introductionto__3_intro_Walkspathscyclesandtrees.txt` |
+| 006 | [x] | 3.1 [A] Cycle space and cut space | section | `006__Introductionto__3_1_ACyclespaceandcutspace.txt` |
 
 ## 4. Graph search algorithms
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 007 | [ ] | 4.1 Breadth-first and depth-first forests | section | `007__Introductionto__4_1_Breadth-firstanddepth-firs.txt` |
-| 008 | [ ] | 4.2 [A] Low-link values, bridges, and cut-vertices | section | `008__Introductionto__4_2_ALow-linkvaluesbridgesandc.txt` |
+| 007 | [x] | 4.1 Breadth-first and depth-first forests | section | `007__Introductionto__4_1_Breadth-firstanddepth-firs.txt` |
+| 008 | [x] | 4.2 [A] Low-link values, bridges, and cut-vertices | section | `008__Introductionto__4_2_ALow-linkvaluesbridgesandc.txt` |
 
 ## 5. Matchings
 

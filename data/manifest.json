@@ -131,6 +131,18 @@
       "title": "2. Basic concepts",
       "file": "2_basic_concepts.json",
       "book": "Kim — Introduction to Graph Theory"
+    },
+    {
+      "id": "3_connections_in_graphs",
+      "title": "3. Connections in graphs",
+      "file": "3_connections_in_graphs.json",
+      "book": "Kim — Introduction to Graph Theory"
+    },
+    {
+      "id": "4_graph_search_algorithms",
+      "title": "4. Graph search algorithms",
+      "file": "4_graph_search_algorithms.json",
+      "book": "Kim — Introduction to Graph Theory"
     }
   ]
 }
