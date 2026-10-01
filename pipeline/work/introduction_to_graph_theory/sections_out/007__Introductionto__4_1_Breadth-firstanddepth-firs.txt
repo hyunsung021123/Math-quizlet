@@ -1,0 +1,238 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 4. Graph search algorithms
+현재 소단원: 4.1 Breadth-first and depth-first forests
+직전 소단원: 「3.1 [A] Cycle space and cut space」
+[본문]
+CHAPTER 4
+
+Graph search algorithms
+
+The preceding chapters describe paths and components as mathematical objects. We now ask
+how to ﬁnd them. Write n ⇤|V(G)| and m ⇤|E(G)|. The graph is stored by adjacency lists: for
+each vertex, a list of its incident edges and their other endpoints.
+
+Asymptotic notation.. For nonnegative functions f and g of the input size, we write f ⇤O(g)
+if f is at most a constant multiple of g for every suﬃciently large input. We write f ⇤⌦(g) if
+
+g ⇤O( f ), and f ⇤⇥(g) if both relations hold. The constants do not depend on the input graph.
+Thus an O(n + m) algorithm uses at most a constant multiple of n + m elementary operations
+once the input is large enough. An adjacency-list representation has n vertex records and two
+entries for each edge, so merely reading the input takes ⇥(n + m) time.
+
+4.1Breadth-ﬁrst and depth-ﬁrst forests
+
+Example 4.1(Two systematic ways to explore a graph). Consider the graph below, whose
+edge set is {ab, ac, bd, be, ce, d f , e f }. Start at a and use alphabetical order whenever there
+is a choice. We can explore one route as far as possible before retreating, or visit the
+neighbors of a ﬁrst, then the next layer, and so on. These rules lead to depth-ﬁrst search
+(DFS) and breadth-ﬁrst search (BFS), respectively.
+
+BFS
+
+a 1
+
+b
+
+2
+c
+
+3
+
+d
+
+4
+e
+
+5
+
+f
+6
+
+DFS
+
+a 1
+
+b
+
+2
+c 6
+
+d
+
+3
+e
+
+5
+
+f
+
+4
+
+Gold edges are the edges used to reach new vertices; the small numbers give the discovery order.
+
+DFS discovers vertices in the order a, b, d, f , e, c. BFS gives a, b, c, d, e, f , in the layers
+{a}, {b, c}, {d, e}, { f }.
+
+For both algorithms, initially mark every vertex undiscovered. Fix an order of the vertices and
+scan each adjacency list in its given order; in the example, both orders are alphabetical. A vertex
+is discovered when ﬁrst reached. If this happens along e ⇤vw from v, record parent(w) ⇤v,
+call w a child of v, and put that particular edge e in the search tree.
+
+Start at a chosen root r, which has no parent. To search all components, start again at
+the ﬁrst undiscovered vertex whenever the current search ends. The recorded edges form a
+search forest, with one rooted tree per component. The orders only break ties and do not aﬀect
+correctness.
+
+14
+
+4.1. Breadth-ﬁrst and depth-ﬁrst forests
+•
+15
+
+Algorithm 4.2(Breadth-ﬁrst search). Use the common initialization above and an empty
+ﬁrst-in–ﬁrst-out queue.
+
+(i) Mark r discovered, set dist(r) ⇤0, and put r in the queue.
+
+(ii) Remove the vertex v at the front and scan its adjacency list. For each undiscovered
+
+neighbor w, discover w from v, set dist(w) ⇤dist(v) + 1, and append w at the back.
+
+(iii) Repeat (ii) until the queue is empty.
+
+The queue keeps discovered vertices waiting for their adjacency lists to be scanned.
+Processing them in arrival order makes BFS explore one layer at a time.
+
+Theorem 4.3(BFS certiﬁcate). After BFS from r, a vertex v is discovered if and only if it lies in the
+component of r, and dist(v) is the length of a shortest r, v-path. With adjacency lists, a complete
+BFS forest is found in O(n + m) time.
+
+Proof. The path in the search tree from r to a discovered vertex v has length dist(v). Thus the
+label is at least the true distance.
+
+The ﬁrst-in–ﬁrst-out rule processes distance labels in nondecreasing order. We now induct
+on the true distance i from r. The root has label 0. If v has true distance i > 0, choose a
+neighbor u of v at distance i −1. By induction, u receives label i −1. When u is removed from
+the queue, v either already has a label at most i, or it is discovered then and receives label i.
+The reverse inequality was proved above, so dist(v) ⇤i. This also shows that every vertex in
+the component is reached.
+
+Each vertex enters and leaves the queue once. Each adjacency-list entry is inspected once;
+each edge contributes two such entries. The total running time is therefore O(n + m).
+⇤
+
+DFS explores a newly discovered vertex immediately, before continuing the scan at the
+vertex from which it was reached.
+
+Algorithm 4.4(Depth-ﬁrst search). Use the common initialization above, set t :⇤0, and
+explore r by the following recursive procedure. To explore v:
+
+(i) Mark v discovered and active. Set t :⇤t + 1 and disc(v) :⇤t; successive discoveries
+
+receive 1, 2, 3, . . ..
+
+(ii) Scan the edges e ⇤vw incident with v. If w is undiscovered, record v and e as above
+
+and explore w recursively before continuing the scan at v.
+
+(iii) Mark v ﬁnished and return to the call that explored it, if there is one.
+
+A vertex is active while its exploration is unﬁnished, including while it waits for a recursive
+call to return. Keep the same counter when starting a new component.
+
+In a rooted tree, a vertex x is an ancestor of y if x lies on the path from the root to y; then y is
+a descendant of x. Every vertex counts as its own ancestor and descendant. The adjective strict
+means that the two vertices are distinct, and two vertices are comparable if one is an ancestor of
+the other.
+
+16•
+INTRODUCTION TO GRAPH THEORY
+
+Proposition 4.5(DFS forest invariant). In a graph, the endpoints of every edge outside the DFS
+forest are comparable in the ancestor order. A complete DFS forest is found in O(n + m) time.
+
+Proof. Let uv be an edge outside the DFS forest, and assume that u is discovered before v. The
+vertex u cannot already be ﬁnished when v is discovered. Indeed, before ﬁnishing, u would
+have inspected uv while v was still undiscovered; that edge would then have discovered v and
+would belong to the DFS forest. Hence u is active when v is discovered. The active vertices
+form the current root-to-vertex path of recursive calls, so v is a descendant of u. Thus the
+endpoints are comparable.
+
+As in BFS, each vertex is processed once and each adjacency-list entry is inspected once.
+All other work takes constant time per entry, giving total running time O(n + m).
+⇤
+
+An edge outside the DFS tree can join a vertex of a subtree to an ancestor of its root. We
+next use these connections to ﬁnd bridges and cut-vertices.
+
+4.2[A] Low-link values, bridges, and cut-vertices
+
+Fix a DFS forest T of a graph. For a vertex v, let Tv be the subtree rooted at v. Deﬁne
+
+low(v) :⇤min
+
+⇣
+
+{disc(v)} [
+
+(
+
+disc(z) : x 2 V(Tv), z is an ancestor of v,
+
+xz 2 E(G) \ E(T)
+
+ ⌘
+
+.
+
+Here x may equal v. Thus low(v) is the minimum of disc(v) and the discovery times of ancestors
+joined to a vertex of Tv by an edge outside the DFS forest. In particular, low(v) < disc(v)
+precisely when some vertex of Tv has such an edge to a strict ancestor of v.
+
+The values can be computed during the same DFS. When v is discovered, initialize
+
+low(v) :⇤disc(v).
+
+After recursively processing a child w of v, update
+
+low(v) min{low(v), low(w)}.
+
+When an edge vz outside the DFS forest is inspected and z has already been discovered, also
+
+update low(v) with disc(z). If z is a descendant, this larger value changes nothing; if z is an
+ancestor, it records the additional upward connection.
+
+There is one small point for multigraphs. Suppose that w was ﬁrst discovered from v along
+one particular copy e of the edge vw. That copy e belongs to the DFS tree, so it is not treated
+as an edge outside the DFS tree in the last update. A second parallel copy e0 is a diﬀerent edge
+outside the DFS tree: it joins w, which lies in Tw, to v and must be included. This is also what
+the bridge test should record, since deleting e leaves e0 in place.
+
+Example 4.6(Reading low-link values). The ﬁgure consists of the triangle abca, the edge cd,
+and the triangle de f d. Starting at a and using alphabetical order gives the DFS discovery
+order a, b, c, d, e, f .
+
+a
+
+1
+
+b
+
+2
+
+c
+
+3
+
+d
+
+4
+
+e
+
+5
+
+f
+
+6

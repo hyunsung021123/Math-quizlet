@@ -1,0 +1,249 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 4. Graph search algorithms
+현재 소단원: 4.2 [A] Low-link values, bridges, and cut-vertices
+직전 소단원: 「4.1 Breadth-first and depth-first forests」
+[본문]
+16•
+INTRODUCTION TO GRAPH THEORY
+
+Proposition 4.5(DFS forest invariant). In a graph, the endpoints of every edge outside the DFS
+forest are comparable in the ancestor order. A complete DFS forest is found in O(n + m) time.
+
+Proof. Let uv be an edge outside the DFS forest, and assume that u is discovered before v. The
+vertex u cannot already be ﬁnished when v is discovered. Indeed, before ﬁnishing, u would
+have inspected uv while v was still undiscovered; that edge would then have discovered v and
+would belong to the DFS forest. Hence u is active when v is discovered. The active vertices
+form the current root-to-vertex path of recursive calls, so v is a descendant of u. Thus the
+endpoints are comparable.
+
+As in BFS, each vertex is processed once and each adjacency-list entry is inspected once.
+All other work takes constant time per entry, giving total running time O(n + m).
+⇤
+
+An edge outside the DFS tree can join a vertex of a subtree to an ancestor of its root. We
+next use these connections to ﬁnd bridges and cut-vertices.
+
+4.2[A] Low-link values, bridges, and cut-vertices
+
+Fix a DFS forest T of a graph. For a vertex v, let Tv be the subtree rooted at v. Deﬁne
+
+low(v) :⇤min
+
+⇣
+
+{disc(v)} [
+
+(
+
+disc(z) : x 2 V(Tv), z is an ancestor of v,
+
+xz 2 E(G) \ E(T)
+
+ ⌘
+
+.
+
+Here x may equal v. Thus low(v) is the minimum of disc(v) and the discovery times of ancestors
+joined to a vertex of Tv by an edge outside the DFS forest. In particular, low(v) < disc(v)
+precisely when some vertex of Tv has such an edge to a strict ancestor of v.
+
+The values can be computed during the same DFS. When v is discovered, initialize
+
+low(v) :⇤disc(v).
+
+After recursively processing a child w of v, update
+
+low(v) min{low(v), low(w)}.
+
+When an edge vz outside the DFS forest is inspected and z has already been discovered, also
+
+update low(v) with disc(z). If z is a descendant, this larger value changes nothing; if z is an
+ancestor, it records the additional upward connection.
+
+There is one small point for multigraphs. Suppose that w was ﬁrst discovered from v along
+one particular copy e of the edge vw. That copy e belongs to the DFS tree, so it is not treated
+as an edge outside the DFS tree in the last update. A second parallel copy e0 is a diﬀerent edge
+outside the DFS tree: it joins w, which lies in Tw, to v and must be included. This is also what
+the bridge test should record, since deleting e leaves e0 in place.
+
+Example 4.6(Reading low-link values). The ﬁgure consists of the triangle abca, the edge cd,
+and the triangle de f d. Starting at a and using alphabetical order gives the DFS discovery
+order a, b, c, d, e, f .
+
+a
+
+1
+
+b
+
+2
+
+c
+
+3
+
+d
+
+4
+
+e
+
+5
+
+f
+
+6
+
+4.2. [A] Low-link values, bridges, and cut-vertices
+•
+17
+
+Solid edges belong to the DFS tree; dashed teal edges lie outside it. The gold edge cd, which also
+
+belongs to the DFS tree, is a bridge. Small numbers are discovery times.
+
+The edge ca lies outside the DFS tree and joins c to its strict ancestor a, so disc(a) ⇤1
+propagates from c to b. Similarly, the edge f d gives low-link value 4 at f , and this value
+propagates to e and d. Thus
+
+v
+a
+b
+c
+d
+e
+f
+disc(v)
+1
+2
+3
+4
+5
+6
+low(v)
+1
+1
+1
+4
+4
+4
+
+No edge outside the DFS tree joins a vertex of the subtree at d to c or to a strict ancestor of
+c. Hence cd is the only connection between the two triangles. It is a bridge, and c and d
+are cut-vertices.
+
+Theorem 4.7(Low-link certiﬁcate; Tarjan). Let vw be an edge of the DFS tree that ﬁrst discovered
+
+w while v was being explored.
+
+1. The edge vw is a bridge if and only if low(w) > disc(v).
+
+2. A non-root vertex v is a cut-vertex if and only if some child w in the DFS tree satisﬁes
+low(w) ≥disc(v).
+
+3. A root is a cut-vertex if and only if it has at least two children in the DFS tree.
+
+All bridges and cut-vertices can therefore be found in O(n + m) time.
+
+Proof. First consider the edge vw. By the DFS ancestor property, every edge other than vw
+that joins a vertex of Tw to a vertex outside Tw must join it to v or to a strict ancestor of v. Such
+an edge exists exactly when low(w) disc(v). In that case the subtree can reach the rest of the
+graph without using vw, so vw is not a bridge. If no such edge exists, deleting vw separates
+Tw from the rest of its component. This proves the ﬁrst assertion.
+
+Now let v be a non-root vertex. Deleting v separates the subtree Tw of a child w from the
+component of G −v containing the vertex from which v was ﬁrst discovered exactly when no
+vertex of Tw has an edge outside the DFS tree to a strict ancestor of v. By the deﬁnition of the
+low-link value, this is exactly the inequality low(w) ≥disc(v).
+
+Conversely, suppose that low(w) < disc(v) for every child w of v. For each such w, some
+vertex in Tw—possibly w itself—is joined by an edge outside the DFS tree to a strict ancestor
+of v. After v is deleted, this edge and the remaining edges of the DFS tree connect the whole
+subtree Tw to the component of G −v containing the vertex from which v was ﬁrst discovered.
+Hence all child subtrees remain connected to that component, and v is not a cut-vertex. This
+proves the second assertion.
+
+Finally, distinct DFS subtrees rooted at children of a root have no edge between them.
+Otherwise the later child would have been discovered while the earlier subtree was being
+explored and would belong to that subtree. Deleting the root therefore separates its component
+exactly when it has at least two children.
+
+The strict and non-strict inequalities have a useful interpretation. An edge outside the DFS
+tree joining a vertex of Tw to v is enough to prevent vw from being a bridge, but it disappears
+when v itself is deleted. To prevent v from being a cut-vertex, the subtree must instead reach a
+strict ancestor of v. The discovery and low-link values are computed during one DFS, so the
+running time remains O(n + m).
+⇤
+
+18
+•
+INTRODUCTION TO GRAPH THEORY
+
+This linear-time DFS framework is due to Tarjan [Tar72]. Its main lesson here is that a search
+tree is more than a traversal order: together with discovery and low-link values, it exposes the
+cut structure of the graph.
+
+CHAPTER 5
+
+Matchings
+
+Suppose that jobs are indexed by [n] and Ai is the set of applicants qualiﬁed for job i. Assigning
+a diﬀerent qualiﬁed applicant to each job is the same as ﬁnding a system of distinct representatives
+(SDR): distinct elements x1, . . . , xn with xi 2 Ai.
+
+The incidence graph of A1, . . . , An is the bipartite graph with parts [n] and –
+
+i Ai, taken as
+disjoint copies, where i is adjacent to x exactly when x 2 Ai. An SDR is a collection of pairwise
+nonincident edges covering the part [n].
+
+Deﬁnition 5.1. A matching in a graph G is a set of pairwise nonincident edges. A vertex
+incident with a matching edge is covered; otherwise it is uncovered. A matching covering
+every vertex is perfect. The matching number ↵0(G) is the maximum size of a matching in G.
+
+jobs
+applicants
+
+1
+
+2
+
+3
+
+a
+
+b
+
+c
+
+d
+
+Figure 5.1. An incidence graph. The highlighted matching represents the SDR (a, b, c).
+
+5.1Matchings in bipartite graphs
+
+Because an incidence graph is bipartite, we ﬁrst study matchings in a bipartite graph. For a
+vertex set S, write N(S) :⇤–
+
+v2S N(v).
+When does an X, Y-bigraph have a matching covering X? Necessarily every S ✓X has at
+least |S| available neighbors. Hall’s theorem says that these are the only obstructions.
+
+Theorem 5.2(Hall’s theorem, 1935). In an X, Y-bigraph, there exists a matching covering X if
+and only if |N(S)| ≥|S| for all S ✓X.
+
+Proof. If a matching covers X, its edges inject every S ✓X into N(S), so |N(S)| ≥|S|.
+
+We use induction to prove suﬃciency. When |X| 1, the claim is immediate. Assume
+|X| > 1 and consider two cases.
+
+If |N(S)| > |S| for every nonempty proper subset S of X, choose x 2 X and y 2 N(x). The
+graph G −{x, y} satisﬁes Hall’s condition: the neighborhood of a proper subset of X loses at
+most the vertex y. Induction gives a matching covering X \ {x}, and adding xy completes the
+matching.
+
+If |N(S)| ⇤|S| for some nonempty proper set S ✓X, let G1 be the graph induced by S[N(S)
+and let G2 be the graph induced by V(G) \ (S [ N(S)).
+
+19

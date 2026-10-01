@@ -1,0 +1,235 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 3. Connections in graphs
+현재 소단원: 3.intro Walks, paths, cycles, and trees
+직전 소단원: 「2.4 Directed graphs」
+[본문]
+CHAPTER 3
+
+Connections in graphs
+
+In a network, a sequence of incident edges records a possible route. Several closely related
+notions distinguish whether vertices or edges may be repeated.
+
+Deﬁnition 3.1. A walk in a multigraph G is an alternating sequence
+
+v0, e1, v1, e2, . . . , e`, v`,
+
+where ei has endpoints vi−1 and vi. Its length is `, the number of edge occurrences in the
+sequence. The same convention deﬁnes the length of a trail, path, circuit, or cycle. A walk,
+and likewise each of these more restricted objects, is even or odd according as its length is
+even or odd. The walk is closed if v0 ⇤v`, a trail if its edges are distinct, and a path if its
+vertices are distinct. A closed trail is a circuit; a nonempty closed trail whose only repeated
+vertex is v0 ⇤v` is a cycle.
+
+The explicit edge sequence matters in a multigraph because two consecutive vertices may
+be joined by parallel edges. It also allows vi−1 ⇤vi when ei is a loop. In a simple graph we
+usually suppress the edge symbols and write only v0v1 . . . v`.
+
+We also regard a path or cycle as the subgraph formed by its vertices and edges. We write
+Pn for the path on n ≥1 vertices and Cn for the cycle on n ≥3 vertices. Thus Pn has length
+n −1, whereas Cn has length n.
+
+Returning to connectivity in networks, the following deﬁnition formalizes the notion of a
+connection.
+
+Deﬁnition 3.2. A graph G is connected if it is nonempty and every pair u, v 2 V(G) is joined
+by a path. A component of G is a maximal connected subgraph.
+
+For sets or subgraphs with a given property, minimal and maximal mean inclusion-minimal
+and inclusion-maximal: no proper subset or subgraph, respectively no proper superset or
+supergraph among those under consideration, has the property. In contrast, minimum and
+maximum compare sizes, or another speciﬁed quantity such as length or weight, among all
+eligible objects. Thus a component need not be a largest connected subgraph.
+
+The single vertex u is a path of length 0 from u to itself. Thus G is connected if and only if
+it has exactly one component.
+
+Deﬁnition 3.3. For graphs G ⇤(V, E) and H ⇤(V0, E0), their disjoint union is (V tV0, EtE0),
+where disjoint copies of V and V0 are understood.
+
+Every graph is the disjoint union of its components. Consequently, many structural questions
+reduce to connected graphs.
+
+8
+
+•
+9
+
+Example 3.4(Deleting repetitions from a walk). Suppose that a, b, c, d, e, f are distinct ver-
+tices and that a graph contains the walk
+
+W ⇤a b c b d e d f.
+
+The vertices b and d repeat, so W is not a path. Delete the closed portion b c b, and then
+delete d e d. This produces an a, f -path using only edges of the original walk:
+
+a b c b d e d f −! a b d e d f −! a b d f.
+
+a
+b
+d
+f
+
+c
+e
+
+The edges used by W; the remaining path is highlighted.
+
+Proposition 3.5. Every walk from u to v contains a path from u to v.
+
+Proof. Starting from a u, v-walk W, repeatedly delete the closed portion between two occur-
+rences of the same vertex. The endpoints remain u and v, and the length strictly decreases at
+each deletion. The process terminates with a walk having no repeated vertex, which is the
+required path.
+⇤
+
+The same deletion argument works for directed walks and directed paths.
+
+Lemma 3.6. Every odd closed walk contains an odd cycle.
+
+Proof. If the walk is not a cycle, split it at two occurrences of a repeated vertex other than the
+initial/ﬁnal pair. The portion between these occurrences and the remaining portion, read
+cyclically, are shorter closed walks. Their lengths sum to an odd number, so one is odd. Repeat
+with that walk. The length strictly decreases, so the process ends with an odd cycle.
+⇤
+
+This yields the fundamental characterization of bipartite graphs.
+
+Theorem 3.7(Odd-cycle characterization). A graph is bipartite if and only if it has no odd cycles.
+
+Proof. A walk in a bipartite graph alternates between the two parts, so every closed walk, and
+in particular every cycle, has even length.
+
+Conversely, suppose that G has no odd cycle. In each component C, choose a root u 2 V(C)
+and partition the vertices according to the parity of the length of a shortest u, v-path. A vertex
+cannot admit both an even and an odd u, v-walk, because following one and then the other
+in reverse would give an odd closed walk and Lemma 3.6 would give an odd cycle. The
+endpoints of every edge have opposite parities, so the two parity classes form a bipartition of
+C. Taking their unions over all components gives a bipartition of G.
+⇤
+
+Graph parameters and structural properties often constrain one another. The next elementary
+result relates minimum degree to long paths and cycles.
+
+10
+•
+INTRODUCTION TO GRAPH THEORY
+
+Proposition 3.8. Every graph G with minimum degree δ(G) ⇤δ ≥2 contains a path of length δ
+and a cycle of length at least δ + 1.
+
+Proof. Let v1 . . . vk be a longest path of G. Every neighbor of vk lies in {v1, . . . , vk−1}; otherwise
+the path could be extended. Hence k −1 ≥d(vk) ≥δ, and the path has length at least δ.
+
+Let i be the least index for which vivk 2 E(G). All neighbors of vk lie in {vi, . . . , vk−1}, so
+k −i ≥δ. Therefore vivi+1 . . . vkvi is a cycle of length k −i + 1 ≥δ + 1.
+⇤
+
+Both bounds are sharp: Kδ+1 has minimum degree δ, longest path length δ, and longest
+cycle length δ + 1.
+
+These two results are elementary examples of two broad styles of graph-theoretic questions.
+In structural graph theory, one seeks exact descriptions of graph classes: the odd-cycle theorem
+characterizes bipartite graphs by the obstructions they exclude. In extremal graph theory,
+one asks how a numerical hypothesis forces a prescribed structure: the minimum-degree
+proposition gives sharp guarantees for a long path and a long cycle.
+
+The following notions record single points of failure.
+
+Deﬁnition 3.9. A cut-vertex or cut-edge of G is a vertex or edge whose deletion increases the
+number of components. A cut-edge is also called a bridge.
+
+The following proposition relates connectivity to cycles.
+
+Proposition 3.10. If e is an edge of a connected graph G, then G −e is connected if and only if e
+belongs to a cycle in G. Equivalently, adding an edge e to a graph H creates no cycle if and only if
+the endpoints of e lie in distinct components of H.
+
+Proof. Suppose that e ⇤xy 2 E(G). If G −e is connected, then an x, y-path in G −e, together
+with e, forms a cycle.
+
+Conversely, suppose that e belongs to a cycle C. Choose u, v 2 V(G) and a u, v-path P in
+G. If P avoids e, then P ✓G −e. Otherwise, assume that u, x, y, v occur in this order on P.
+Concatenating the u, x-subpath of P, the x, y-path C −e, and the y, v-subpath of P gives a
+u, v-walk in G −e. Hence G −e is connected.
+⇤
+
+Proposition 3.11. A graph with n vertices and m edges has at least n −m components.
+
+Proof. Start with the empty graph on the same vertex set and add the m edges one at a time.
+Initially there are n components, and each added edge decreases the number of components
+by at most one. At least n −m components remain.
+⇤
+
+Thus every connected n-vertex graph has at least n −1 edges. Equality is attained by the
+path Pn and by the star K1,n−1. We now characterize all equality cases.
+
+Deﬁnition 3.12. A forest is an acyclic graph, and a tree is a connected forest. A spanning tree
+of a graph is a spanning subgraph that is a tree.
+
+A vertex of degree 1 is a leaf; a vertex of degree 0 is isolated.
+
+3.1. [A] Cycle space and cut space
+•
+11
+
+Proposition 3.13.
+1. Every nontrivial tree has at least two leaves.
+
+2. Deletion of a leaf from a tree yields a tree with one fewer vertex.
+
+3. Every n-vertex tree has n −1 edges.
+
+Proof. Let G be a nontrivial tree. Since G is connected, it has no isolated vertices.
+
+Let P be a maximal path. If an endpoint u of P had degree at least two, then an edge
+incident with u other than the edge of P would join u to another vertex of P; this would create
+a cycle. Thus both endpoints of P are leaves.
+
+A leaf cannot be a cut-vertex: deleting it leaves every path between the other vertices intact.
+Deleting a vertex cannot create a cycle, so deleting a leaf from a tree leaves a connected acyclic
+graph, hence a tree.
+
+Build the tree from n isolated vertices by adding its edges. No added edge creates a cycle,
+so each one reduces the number of components by exactly one. Reducing n components to
+one takes n −1 edges.
+⇤
+
+Proposition 3.14. If G is an n-vertex graph with n −1 edges, then G is connected if and only if G
+is acyclic.
+
+Proof. If G is acyclic, every component is a tree. If its k components have orders n1, . . . , nk,
+then n −1 ⇤e(G) ⇤Õk
+
+i⇤1(ni −1) ⇤n −k, so k ⇤1.
+Conversely, assume G is connected. As every n-vertex graph with at most n −2 edges is
+disconnected, every edge of G is a cut-edge, so no edge lies in a cycle. Therefore G is acyclic.
+⇤
+
+We have proved that any two of “connected,” “acyclic,” and “having n −1 edges” imply
+the third. Trees are therefore the minimal connected graphs on a ﬁxed vertex set.
+
+Theorem 3.15. Every connected graph contains a spanning tree.
+
+Proof. By the preceding proposition, deleting an edge from a cycle does not disconnect a graph.
+Repeatedly deleting cycle edges therefore leaves a connected, acyclic, spanning subgraph.
+⇤
+
+3.1[A] Cycle space and cut space
+
+Adding an edge to a spanning tree creates one cycle. This simple observation also gives a way
+to describe all even-degree subgraphs at once. The useful addition operation is symmetric
+diﬀerence: an edge appearing twice cancels.
+
+Let F2 ⇤{0, 1} be the ﬁeld with addition and multiplication modulo two. A subset F ✓E(G)
+is represented by its characteristic vector 1F 2 FE(G)
+
+2
+. Thus 1F + 1F0 ⇤1F4F0. The dot product
+counts the parity of an intersection:
+
+1F · 1F0 ⇤|F \ F0|
+(mod 2).
+
+All vector spaces and dimensions in this section are over F2.

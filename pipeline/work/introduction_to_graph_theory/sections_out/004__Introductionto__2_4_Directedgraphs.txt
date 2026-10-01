@@ -1,0 +1,96 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 2. Basic concepts
+현재 소단원: 2.4 Directed graphs
+직전 소단원: 「2.3 Special graphs」
+[본문]
+2.4. Directed graphs
+•
+7
+
+2.4Directed graphs
+
+Some relations are directional: a web page links to another page, or a road may carry traﬃc in
+only one direction.
+
+Deﬁnition 2.9. A directed graph or digraph is a pair D ⇤(V, E) with E ✓V ⇥V. An element
+(u, v), also written −!
+uv, is an arc with tail u and head v. An oriented graph has no loops and
+never contains both −!
+uv and −!
+vu.
+
+The underlying graph of an oriented graph is obtained by forgetting the directions. An
+orientation of a graph G assigns one direction to each edge of G, and a tournament is an
+orientation of a complete graph.
+
+For a vertex v of a digraph D, set
+
+N+
+
+D(v) :⇤{w : −!
+vw 2 E(D)},
+N−
+
+D(v) :⇤{u : −!
+uv 2 E(D)}.
+
+The numbers d+
+
+D(v) :⇤|N+
+
+D(v)| and d−
+
+D(v) :⇤|N−
+
+D(v)| are its out-degree and in-degree. A source
+has in-degree 0; a sink has out-degree 0.
+
+CHAPTER 3
+
+Connections in graphs
+
+In a network, a sequence of incident edges records a possible route. Several closely related
+notions distinguish whether vertices or edges may be repeated.
+
+Deﬁnition 3.1. A walk in a multigraph G is an alternating sequence
+
+v0, e1, v1, e2, . . . , e`, v`,
+
+where ei has endpoints vi−1 and vi. Its length is `, the number of edge occurrences in the
+sequence. The same convention deﬁnes the length of a trail, path, circuit, or cycle. A walk,
+and likewise each of these more restricted objects, is even or odd according as its length is
+even or odd. The walk is closed if v0 ⇤v`, a trail if its edges are distinct, and a path if its
+vertices are distinct. A closed trail is a circuit; a nonempty closed trail whose only repeated
+vertex is v0 ⇤v` is a cycle.
+
+The explicit edge sequence matters in a multigraph because two consecutive vertices may
+be joined by parallel edges. It also allows vi−1 ⇤vi when ei is a loop. In a simple graph we
+usually suppress the edge symbols and write only v0v1 . . . v`.
+
+We also regard a path or cycle as the subgraph formed by its vertices and edges. We write
+Pn for the path on n ≥1 vertices and Cn for the cycle on n ≥3 vertices. Thus Pn has length
+n −1, whereas Cn has length n.
+
+Returning to connectivity in networks, the following deﬁnition formalizes the notion of a
+connection.
+
+Deﬁnition 3.2. A graph G is connected if it is nonempty and every pair u, v 2 V(G) is joined
+by a path. A component of G is a maximal connected subgraph.
+
+For sets or subgraphs with a given property, minimal and maximal mean inclusion-minimal
+and inclusion-maximal: no proper subset or subgraph, respectively no proper superset or
+supergraph among those under consideration, has the property. In contrast, minimum and
+maximum compare sizes, or another speciﬁed quantity such as length or weight, among all
+eligible objects. Thus a component need not be a largest connected subgraph.
+
+The single vertex u is a path of length 0 from u to itself. Thus G is connected if and only if
+it has exactly one component.
+
+Deﬁnition 3.3. For graphs G ⇤(V, E) and H ⇤(V0, E0), their disjoint union is (V tV0, EtE0),
+where disjoint copies of V and V0 are understood.
+
+Every graph is the disjoint union of its components. Consequently, many structural questions
+reduce to connected graphs.
+
+8

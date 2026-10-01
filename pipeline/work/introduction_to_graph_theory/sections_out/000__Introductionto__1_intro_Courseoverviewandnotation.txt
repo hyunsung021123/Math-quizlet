@@ -1,0 +1,307 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 1. Course overview
+현재 소단원: 1.intro Course overview and notation
+[본문]
+Notation guide
+
+Unless a chapter explicitly says otherwise, graphs are ﬁnite and simple. Subscripts such
+as dG, NG, or eG are omitted when the ambient graph is clear. Primes distinguish edge
+parameters from their vertex analogues.
+
+Symbol
+Meaning
+
+Graphs and subgraphs
+
+V(G), E(G)
+vertex and edge sets of G
+
+|G|, e(G)
+order |V(G)| and size |E(G)|
+
+dG(v)
+degree of v; loops count twice in a multigraph
+
+dav(G)
+average degree 2e(G)/|V(G)|
+
+δ(G), ∆(G)
+minimum and maximum degree
+
+NG(v), NG[S]
+open neighborhood of v and closed neighborhood of a set S
+
+G[S]
+subgraph of G induced by S ✓V(G)
+
+G −S, G −e
+deletion of vertices in S, or deletion of the edge e
+
+G
+complement of a simple graph G
+
+eG(A, B)
+number of edges between disjoint vertex sets A and B
+
+[A, B]
+the corresponding edge cut when A, B partition V(G)
+
+d+
+
+D(v), d−
+
+D(v)
+out-degree and in-degree in a digraph D
+
+Matchings, covers, and colorings
+
+↵(G)
+maximum size of an independent vertex set
+
+↵0(G)
+maximum size of a matching
+
+β(G)
+minimum size of a vertex cover
+
+β0(G)
+minimum size of an edge cover; deﬁned when G has no isolated
+vertex
+
+!(G)
+maximum size of a clique
+
+✓(G)
+minimum number of cliques whose vertex sets partition V(G)
+
+χ(G)
+chromatic number
+
+χ`(G)
+list chromatic number
+
+χ0(G)
+edge-chromatic number
+
+Connectivity and paths
+
+(G), 0(G)
+vertex-connectivity and edge-connectivity
+
+G(x, y)
+minimum size of an x, y vertex separator, when no edge or arc
+goes directly from x to y
+
+λG(x, y)
+maximum number of internally vertex-disjoint x, y-paths
+
+0
+
+G(x, y), λ0
+
+G(x, y)
+edge-separator and edge-disjoint-path analogues
+
+vi
+
+INTRODUCTION TO GRAPH THEORY
+
+Symbol
+Meaning
+
+Probabilistic and extremal notation
+
+G(n, p)
+binomial random graph on [n]; each edge is present independently
+with probability p
+P, E
+probability and expectation
+
+X ⇠Bin(n, p)
+binomial random variable
+
+ex(n, F)
+maximum number of edges in an n-vertex F-free graph
+
+Tr(n)
+balanced complete r-partite Turán graph
+
+R(p, q; r)
+least order forcing a red p-set or blue q-set in an r-uniform two-
+coloring
+
+Matrices, spectra, and flows
+
+AG, DG, LG
+adjacency, degree, and Laplacian matrices; LG ⇤DG −AG
+µ1 ≥· · · ≥µn
+adjacency eigenvalues
+
+0 ⇤λ1 · · · 
+λn
+
+Laplacian eigenvalues
+
+⌧(G)
+number of spanning trees
+
+f ⇤(v)
+net outﬂow of an oriented edge function f at v
+Zk
+cyclic group of integers modulo k
+
+A deliberate overload. The letter λ denotes a local path-packing number in the connectivity
+chapter and Laplacian eigenvalues in the spectral chapter. The subscripted forms λG(x, y)
+and λi keep the two uses distinguishable.
+
+vii
+
+
+PART I
+
+Foundations and Structure
+
+CHAPTER 1
+
+Course overview
+
+BRIDGE SCHEMATIC
+
+A
+
+B
+
+C
+
+D
+
+1
+2
+
+3
+4
+
+5
+
+6
+
+7
+
+ABSTRACT MULTIGRAPH
+
+A
+
+B
+
+C
+
+D
+
+Figure 1.1. The seven bridges join four land masses A, B, C, D. Replacing each land mass by a vertex
+and each numbered bridge by an edge preserves exactly the incidence information relevant to Euler’s
+question. Parallel bridges become parallel edges.
+
+In the eighteenth century, the city of Königsberg inspired a celebrated puzzle: can one take
+a walk that crosses each of its seven bridges exactly once? The geometry of the islands and the
+lengths of the bridges do not matter. What matters is only which land masses are joined by
+which bridges. Replacing each land mass by a vertex and each bridge by an edge produces the
+graph in Figure 1.1.
+
+This act of abstraction is typical. A transit map suppresses geographic detail while preserving
+which stations are connected. A communication network records which devices can exchange
+data. A social network records a chosen relation between people. A graph is a mathematical
+model for precisely this kind of pairwise relational information.
+
+The main themes of the course arise from the questions we ask about such models.
+
+Connectivity.. Can information, traﬃc, or ﬂow travel between two speciﬁed vertices? How
+many vertices or edges must fail before the network disconnects? Paths, cycles, cuts, and
+Menger’s theorem make these questions precise.
+
+Matching.. Can jobs be assigned to qualiﬁed applicants, students to projects, or donors to
+compatible recipients without conﬂicts? A matching selects pairwise disjoint feasible pairs.
+Hall’s and Tutte’s theorems reveal the obstructions to perfect assignments.
+
+Coloring.. How can conﬂicting objects be assigned diﬀerent resources? Examples include exam
+scheduling and frequency allocation. A color represents a resource, and adjacent vertices must
+receive diﬀerent colors.
+
+Planarity and topology.. The four-color problem asks for a coloring of a map in which neighbor-
+ing regions receive diﬀerent colors. Translating maps into graphs leads to planar embeddings,
+Euler’s formula, graph minors, and the interaction between graph theory and topology.
+
+Probabilistic and extremal methods.. Random choices can prove that an object exists even when
+no explicit construction is apparent. Extremal graph theory asks how many edges force a
+
+2
+
+•
+3
+
+prescribed subgraph. Together these viewpoints explain many striking threshold and Ramsey
+phenomena.
+
+Spectral methods and flows.. The adjacency relation can be encoded by a 0–1 matrix, bringing
+linear algebra into graph theory. Orientations and nowhere-zero ﬂows provide a second
+language for conservation and reveal a duality with coloring in plane graphs.
+
+CHAPTER 2
+
+Basic concepts
+
+2.1Graphs and multigraphs
+
+We begin with a deﬁnition broad enough to model the seven bridges in Figure 1.1.
+
+Deﬁnition 2.1. A multigraph G consists of a ﬁnite vertex set V(G) and a ﬁnite multiset E(G)
+whose members are one- or two-element subsets of V(G). A one-element edge is a loop,
+and repeated two-element edges are parallel edges. The order and size of G are |G| :⇤|V(G)|
+and e(G) :⇤|E(G)|, respectively.
+
+A multigraph is simple if it has no loops or parallel edges. Unless stated otherwise, the
+word graph means a ﬁnite simple graph.
+
+We write [n] :⇤{1, 2, . . . , n} and abbreviate the edge {u, v} as uv. For a loop at u we write
+uu. For example, the multigraph
+
+G ⇤!
+
+[5], {{11, 12, 12, 23, 34, 45, 15}}"
+
+has order 5 and size 7. The two copies of 12 are distinct edge occurrences.
+
+1
+
+2
+
+3
+
+4
+5
+
+loop
+
+parallel pair
+
+Figure 2.1. A multigraph with a loop and a pair of parallel edges. A loop contributes two to the degree of
+its vertex.
+
+The following terminology will be used throughout.
+
+• Distinct vertices u and v are adjacent if uv 2 E(G).
+
+• A vertex v and an edge e are incident if v is an endpoint of e. Two distinct edges are
+adjacent if they share an endpoint.
+
+• A vertex adjacent to v is a neighbor of v; the set of all such vertices is NG(v), or simply
+N(v).
+
+• The degree dG(v) is the number of edge-ends incident with v, counted with multiplicity.
+Thus a loop contributes two. For a simple graph, dG(v) ⇤|NG(v)|.
+
+Parallel edges do not change vertex coloring or the existence of a matching, but they do
+matter in questions about edge cuts. We will therefore state explicitly whenever multigraphs
+are allowed.
+
+4

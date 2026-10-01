@@ -1,0 +1,116 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.1 Connectivity
+직전 소단원: 「5.4 [A] Algorithmic aspects of matchings」
+[본문]
+CHAPTER 6
+
+Connectivity and cycles
+
+6.1Connectivity
+
+We saw that trees are minimally connected graphs. We now ask how to quantify higher levels
+
+of connectivity. The following deﬁnitions measure how resistant a graph is to the deletion of
+vertices or edges.
+
+Deﬁnition 6.1. A separating set or vertex cut of a graph G is a set S ✓V(G) such that G −S
+has more than one component. A graph G is k-connected if it has more than k vertices
+and every separating set has size at least k. The connectivity of G, written (G), is the
+maximum k such that G is k-connected.
+
+The convention for complete graphs deserves mention. Since Kn has no separating set,
+the condition on its order is decisive: Kn is k-connected precisely when k n −1, and
+hence (Kn) ⇤n −1. Although this convention may initially seem artiﬁcial, it makes general
+statements about connectivity work uniformly; for example, deleting one edge reduces
+vertex-connectivity by at most one.
+
+Deﬁnition 6.2. Let G be a multigraph with at least two vertices. We say that G is k-edge-
+connected if G −F is connected for every F ✓E(G) with |F| < k. Its edge-connectivity
+is
+
+0(G) :⇤max{k : G is k-edge-connected}.
+
+For vertex sets S, T ✓V(G), let [S, T] denote the set of edges with one endpoint in S and
+the other in T. For ú , S ( V(G), the set
+
+[S, S],
+S :⇤V(G) \ S,
+
+is an edge cut.
+
+Vertex-connectivity and edge-connectivity are both natural measures of robustness. For
+edge-connectivity, it suﬃces to consider edge cuts, as the next proposition shows.
+
+Proposition 6.3. Every minimal set of edges whose deletion disconnects a graph is an edge cut.
+
+Proof. Let F be minimal such that G −F is disconnected, and let S be the vertex set of a
+component of G −F. Every edge between S and S belongs to F, so [S, S] ✓F. Since deleting
+[S, S] already disconnects G, the minimality of F gives F ⇤[S, S].
+⇤
+
+Minimal here means that no proper subset of F disconnects the graph; F need not have the
+smallest size among all disconnecting edge sets.
+
+One way to disconnect a graph is to isolate a vertex, either by deleting its neighbors or by
+deleting its incident edges. This observation relates vertex-connectivity, edge-connectivity,
+and minimum degree.
+
+29
+
+30
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 6.4(Whitney, 1932). For every graph G with at least two vertices,
+
+(G) 0(G) δ(G).
+
+Proof. If G is disconnected, then (G) ⇤0(G) ⇤0, and the ﬁrst inequality is immediate. Hence
+assume that G is connected.
+
+Deleting the edges incident with a vertex v of minimum degree disconnects G, so 0(G) 
+δ(G).
+
+To prove (G) 0(G), let [S, S] be a smallest edge cut of size k0 ⇤0(G). If all vertices of S
+are adjacent to all of S, then k0 ≥|S||S| ≥|V(G)| −1 ≥(G).
+
+Otherwise, choose x 2 S and y 2 S with xy < E(G). For each edge e 2 [S, S], choose an
+endpoint outside {x, y}, and let T be the set of chosen endpoints. Now |T| k0 ⇤|[S, S]|, and
+x, y lie in diﬀerent components of G −T. Hence (G) 0(G).
+⇤
+
+For trees, sequentially adding leaves—or, equivalently, adding edges without creating
+a cycle—gives a constructive description. We seek analogous operations that generate all
+k-connected graphs while preserving k-connectivity. Vertex splitting is one such operation.
+
+Deﬁnition 6.5. A vertex k-split forms a graph H from a graph G by replacing one vertex
+x with adjacent vertices x1 and x2 such that NH(x1) [ NH(x2) ⇤NG(x) [ {x1, x2} and
+dH(xi) ≥k.
+
+This operation preserves k-connectivity.
+
+Lemma 6.6. If a graph H is obtained from a k-connected graph G by a vertex k-split, then H is
+k-connected.
+
+Proof. Consider a k-split with x1, x2 replacing x. Let S be a vertex cut of H. If {x1, x2} ✓S,
+then replacing x1 and x2 by x in S yields a vertex cut of G, hence |S| ≥k + 1. If H −S has x1
+or x2 or the edge x1x2 as a component, then S contains NH(x1) or NH(x2) or NG(x), in each
+case |S| ≥k. Otherwise, whatever remains of {x1, x2} augments a component of G −S. If
+S \ {x1, x2} ⇤ú, then S is a vertex cut of G; if |S \ {x1, x2}| ⇤1, then (S \ {x1, x2}) [ {x} is a
+vertex cut of G. In either case, |S| ≥k, so H is k-connected.
+⇤
+
+6.22-connected graphs
+
+We ﬁrst focus on the simpler cases of 2-connected and 2-edge-connected graphs. Edge
+
+subdivision is an important operation in both settings.
+
+Deﬁnition 6.7. In a graph G, a subdivision of an edge uv is the operation of replacing uv
+with a path u, w, v through a new vertex w.
+
+In fact, if d(v) ≥2 or d(u) ≥2, a subdivision is a special type of vertex 2-split. Hence, edge
+subdivisions preserve 2-connectedness. Moreover, the following lemma shows that it even
+preserves 2-edge-connectedness.

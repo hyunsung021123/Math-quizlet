@@ -1,0 +1,148 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 5. Matchings
+현재 소단원: 5.3 [A] Factors beyond perfect matchings
+직전 소단원: 「5.2 Matchings in general graphs」
+[본문]
+5.3. [A] Factors beyond perfect matchings
+•
+25
+
+5.3[A] Factors beyond perfect matchings
+
+Using Tutte’s 1-factor theorem, we can deduce a theorem regarding more general factors. The
+following deﬁnition provides a concept more general than k-factors.
+
+Deﬁnition 5.19. Given a graph G and f : V(G) ! N0, an f -factor of G is a spanning
+subgraph H such that dH(v) ⇤f (v) for all v 2 V(G).
+
+We can reduce the f -factor problem to a perfect-matching problem. Assume f (v) dG(v)
+for every vertex and set r(v) :⇤dG(v) −f (v). Replace each vertex v by a copy of KdG(v),r(v) with
+parts A(v) and B(v). Index the vertices of A(v) by the edge incidences at v. For every edge,
+join the two vertices corresponding to its two incidences. (A loop has two distinct incidences
+at the same vertex.) Call the resulting graph H.
+
+For example, take G ⇤K3 with f (a) ⇤f (b) ⇤1 and f (c) ⇤2. Then r(a) ⇤r(b) ⇤1 and
+r(c) ⇤0. The construction is shown below; ve denotes the vertex of A(v) corresponding to the
+incidence of edge e at v.
+
+G
+
+a
+b
+
+c
+
+f (a) ⇤f (b) ⇤1
+
+f (c) ⇤2
+
+H
+
+aab
+
+aac
+
+bab
+
+bbc
+
+cac
+cbc
+
+A(a)
+A(b)
+
+A(c)
+
+B(a)
+B(b)
+
+B(c) ⇤ú
+
+Blue edges join A(v) to B(v) inside each replacement. Gold dashed edges join the two incidences of
+
+each original edge.
+
+Here a and b are each replaced by K2,1, while c is replaced by K2,0, consisting of two vertices
+and no edges. For instance, the edge ac becomes aaccac. Thus H has eight vertices; it is an
+auxiliary graph, not an f -factor of G.
+
+Theorem 5.20. A multigraph G has an f -factor if and only if the graph H constructed from G as
+above has a 1-factor.
+
+Proof. If G has an f -factor, select the corresponding edges in H. They leave exactly r(v) vertices
+of A(v) unmatched, which can be matched bĳectively to B(v).
+
+Conversely, in a perfect matching of H, exactly r(v) vertices of A(v) are matched into B(v).
+The remaining f (v) vertices are matched through edges corresponding to edges of G. Taking
+precisely those original edges gives degree f (v) at every vertex v, hence an f -factor.
+⇤
+
+Thus any algorithm for perfect matching can also test for an f -factor. With further work,
+this reduction leads to Tutte’s f -factor theorem, whose proof we omit. For f : V(G) ! N0, let
+
+f (S) ⇤Õ
+
+v2S f (v). Let q(S, T) denote the number of components C of G −(S [ T) such that
+eG(C, T) + f (V(C)) is odd.
+
+26
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 5.21(Tutte’s f -factor theorem). G has an f -factor if and only if
+
+q(S, T) −
+
+’
+
+v2T
+
+dG−S(v) f (S) −f (T)
+
+holds for all disjoint subsets S, T ✓V(G).
+
+When f (v) ⇤1 for every v and T ⇤;, these inequalities are exactly Tutte’s condition
+
+o(G −S) |S| for a perfect matching.
+
+5.4[A] Algorithmic aspects of matchings
+
+Brute force examines all 2m edge subsets of an m-edge graph. A greedy algorithm is faster
+but may stop at a maximal matching that is not maximum: on P6, for example, the second and
+fourth edges form a maximal matching of size two, although a matching of size three exists.
+
+Deﬁnition 5.22. Given a matching M, an M-alternating path alternates between edges in M
+and edges outside M. An M-augmenting path is a positive-length alternating path whose
+two endpoints are uncovered by M.
+
+If P is M-augmenting, then
+
+M0 :⇤(M \ E(P)) [ (E(P) \ M)
+
+is a matching with |M0| ⇤|M| + 1.
+
+M
+M
+uncovered
+uncovered
+
+Figure 5.2. An augmenting path. Replacing the two highlighted matching edges by the other three path
+edges increases the matching size by one.
+
+For two edge sets A and B, their symmetric diﬀerence is A4B :⇤(A \ B) [ (B \ A).
+
+Theorem 5.23(Berge, 1957). A matching M in a graph G is maximum if and only if G has no
+
+M-augmenting path.
+
+Proof. An augmenting path immediately produces a larger matching, as observed above.
+Conversely, suppose that G has a matching M0 with |M0| > |M|, and consider the spanning
+subgraph with edge set M4M0. Every component is a path, an even cycle, or an isolated
+vertex, and its edges alternate between M and M0. Since M0 has more edges in total, some
+path component has one more edge of M0 than of M. It begins and ends with edges of M0 and
+is therefore an M-augmenting path.
+⇤
+
+The theorem leads to a concrete search algorithm in bipartite graphs.

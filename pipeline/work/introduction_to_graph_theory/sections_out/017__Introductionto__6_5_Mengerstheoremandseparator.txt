@@ -1,0 +1,471 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.5 Menger's theorem and separator certificates
+직전 소단원: 「6.4 Connectivity and independent paths」
+[본문]
+6.4. Connectivity and independent paths
+•
+35
+
+required in the deﬁnition of a split. Conversely, K4 is 3-connected, and vertex 3-splits preserve
+3-connectivity.
+⇤
+
+For k ≥4, the contraction argument above no longer works in general. We now turn to
+consequences of connectivity, especially the existence of multiple internally disjoint paths.
+
+6.4Connectivity and independent paths
+
+Just as a connected graph contains an x, y-path for every pair x, y, a highly connected graph
+contains many internally disjoint paths. The analogous statement also holds for digraphs, so
+we introduce both settings together.
+
+Deﬁnition 6.18. A digraph D is k-connected if |V(D)| > k and D −S is strongly connected
+for every S ✓V(D) with |S| < k. Its connectivity (D) is the maximum such k.
+
+For ú , S ( V(D), let
+
+δ+
+
+D(S) :⇤{−!
+uv 2 E(D) : u 2 S, v < S},
+δ−
+
+D(S) :⇤{−!
+uv 2 E(D) : u < S, v 2 S}.
+
+The digraph D is k-edge-connected if |δ+
+
+D(S)| ≥k for every nonempty proper subset
+S ⇢V(D).
+
+The vertex-connectivity statements below are for graphs and for digraphs without parallel
+arcs. In the edge-connectivity statements, parallel edges or arcs may be allowed and are
+counted separately.
+
+Deﬁnition 6.19. Let x and y be distinct vertices. Two x, y-paths are independent if they
+have no common internal vertex. Let λG(x, y) denote the maximum number of pairwise
+independent x, y-paths.
+
+If xy < E(G) in an undirected graph, or −!
+xy < E(G) in a digraph, an x, y-separating set is
+a set
+
+S ✓V(G) \ {x, y}
+
+such that G −S has no x, y-path. Let G(x, y) be the minimum size of such a set.
+
+Every x, y-separating set meets pairwise independent x, y-paths in distinct internal vertices,
+so
+
+λG(x, y) G(x, y).
+
+If an undirected graph G is not complete, then
+
+(G) ⇤min{G(x, y) : x , y, xy < E(G)};
+
+whereas (Kn) ⇤n −1.
+
+6.5Menger’s theorem and separator certiﬁcates
+
+To state the edge version of Menger’s theorem, we need the following deﬁnitions.
+
+36
+•
+INTRODUCTION TO GRAPH THEORY
+
+Deﬁnition 6.20. For distinct vertices x, y, let 0
+
+G(x, y) be the minimum number of edges
+whose deletion destroys all x, y-paths, and let λ0
+
+G(x, y) be the maximum number of
+pairwise edge-disjoint x, y-paths.
+
+The line graph L(G) of a multigraph G has vertex set E(G); two distinct vertices of L(G)
+are adjacent exactly when the corresponding edges of G share an endpoint. The line
+digraph L(D) of a digraph D has vertex set E(D) and an arc from e ⇤(u, v) to f ⇤(v, w)
+whenever e and f are distinct arcs of D.
+
+Theorem 6.21(Menger’s theorem, 1927). Let x and y be distinct vertices of a graph or digraph G.
+If xy < E(G) in the undirected case, or −!
+xy < E(G) in the directed case, then
+
+G(x, y) ⇤λG(x, y).
+
+For all distinct x, y,
+
+0
+
+G(x, y) ⇤λ0
+
+G(x, y).
+
+Example 6.22(A minimum separator certiﬁed by disjoint paths). Let G be the graph below,
+with precisely the displayed edges. The gold edges mark three selected x, y-paths, and
+the dashed box marks S :⇤{s1, s2, s3}.
+
+x
+
+a
+
+b
+
+c
+
+s1
+
+s2
+
+s3
+
+d
+
+e
+
+f
+
+y
+
+S ⇤{s1, s2, s3}
+
+The three paths
+
+P1 ⇤x −a −s1 −d −y,
+P2 ⇤x −b −s2 −e −y,
+P3 ⇤x −c −s3 −f −y
+
+have pairwise disjoint sets of internal vertices. Hence λG(x, y) ≥3. On the other hand,
+every x, y-path must pass from {x, a, b, c} to {d, e, f , y} through S, so G −S has no
+x, y-path. Thus S is an x, y-separating set and G(x, y) 3. Moreover, any separating set
+must meet each of P1, P2, P3 in a diﬀerent internal vertex, and therefore has size at least 3.
+Consequently
+
+G(x, y) ⇤λG(x, y) ⇤3,
+
+and the picture exhibits both sides of Menger’s theorem.
+
+We prove the theorem by ﬁrst allowing the endpoints to range over two vertex sets. The
+advantage is that a minimum separator can then divide the problem into two smaller ones.
+
+6.5. Menger’s theorem and separator certiﬁcates
+•
+37
+
+Deﬁnition 6.23. For X, Y ✓V(G), an X, Y-path meets X only at its ﬁrst vertex and Y only
+at its last vertex. In a digraph it is directed from X to Y. A path of length zero at a
+vertex of X \ Y is allowed. An X, Y-separator is a set Z ✓V(G) meeting every X, Y-path.
+Unlike an x, y-separating set, it may contain endpoints; in particular, both X and Y are
+X, Y-separators.
+
+Theorem 6.24(Menger’s theorem, set form). In a graph or digraph G, the minimum size of an
+X, Y-separator equals the maximum number of pairwise vertex-disjoint X, Y-paths.
+
+Proof. Every separator meets the disjoint paths in distinct vertices, so only the existence of
+enough paths needs proof. We use induction on |V(G)| + |E(G)|. Let k be the minimum size of
+an X, Y-separator. For k ⇤0 there is no X, Y-path, and the assertion is immediate. Assume
+that k ≥1.
+
+Case 1. There is a minimum X, Y-separator Z diﬀerent from both X and Y. Let G1 be induced
+by Z and all vertices on X, Z-paths, and let G2 be induced by Z and all vertices on Z, Y-paths.
+These graphs meet only in Z: an intersection outside Z would give a walk from X to Y avoiding
+
+Z, and hence an X, Y-path avoiding Z. Moreover, no vertex of Y \ Z belongs to G1, and no
+vertex of X \ Z belongs to G2. Both diﬀerences are nonempty, since |Z| ⇤k min{|X|, |Y|}
+and Z , X, Y. Thus both graphs have fewer vertices than G.
+
+Every X, Y-path contains an X, Z-path before its ﬁrst vertex in Z, and a Z, Y-path after its last
+vertex in Z. Consequently, any separator between X \ V(G1) and Z in G1 is an X, Y-separator
+in G. Its minimum size is therefore k, since Z itself is one such separator. Induction supplies k
+disjoint X, Z-paths in G1. Likewise, it supplies k disjoint Z, Y-paths in G2. Each family uses
+every vertex of Z exactly once. Join the two paths at each vertex of Z; since the graphs meet
+only in Z, this gives k disjoint X, Y-paths.
+
+Case 2. Every minimum X, Y-separator equals X or Y. We may assume that |X| ⇤k; if
+necessary, interchange X, Y and, in a digraph, reverse all arcs. If X ✓Y, the k paths of length
+zero at the vertices of X suﬃce. Otherwise, choose x 2 X \ Y. Since X \ {x} is not a separator,
+there is an x, Y-path avoiding X \ {x}. Its ﬁrst edge or arc is e ⇤xw with w < X.
+
+Let Z0 be a minimum X, Y-separator in G −e. If |Z0| ⇤k, induction gives the required paths
+in G −e. Otherwise |Z0| < k, and every X, Y-path avoiding Z0 in G must use e. Hence both
+Z0 [ {x} and Z0 [ {w} are separators in G. Their sizes are at most k, so they are minimum
+separators. Since x < Y and w < X, Case 2 forces
+
+Z0 [ {x} ⇤X,
+Z0 [ {w} ⇤Y.
+
+These equalities give |Z0| ⇤k −1 and x, w < Z0. The length-zero paths at the vertices of Z0,
+together with the single edge or arc xw, are the required k disjoint paths.
+⇤
+
+Proof of Theorem 6.21. For the vertex form, delete x, y and put
+
+X ⇤NG(x),
+Y ⇤NG(y)
+
+in the undirected case. In a digraph use the outneighbors of x and the inneighbors of y,
+omitting x, y themselves. Since there is no edge or arc from x to y, every x, y-path has an
+internal vertex. After its endpoints are deleted, it contains an X, Y-path; conversely, adjoining
+x, y to any X, Y-path gives an x, y-path. Thus separators correspond, and vertex-disjoint
+X, Y-paths correspond to independent x, y-paths. The set form proves the claimed equality.
+
+38
+•
+INTRODUCTION TO GRAPH THEORY
+
+For the edge form, apply the set form to L(G), taking X to be the edges incident with x and
+Y those incident with y. An x, y-path in G gives an X, Y-path in L(G). Conversely, the edges
+represented by an X, Y-path in L(G) form a connected subgraph containing x, y, so contain
+an x, y-path. Disjoint vertex sets in L(G) give disjoint edge sets in G. Deleting vertices of L(G)
+means deleting the corresponding edges of G, so separators also correspond.
+
+For a digraph, use L(G) with X the arcs leaving x and Y the arcs entering y. A directed
+X, Y-path in the line digraph gives a directed x, y-walk, from which repetitions may be
+removed. The same correspondence proves the directed edge form. Parallel edges or arcs are
+distinct vertices of the line graph or digraph, so they cause no change in this argument.
+⇤
+
+Menger’s theorem now yields global characterizations of vertex- and edge-connectivity.
+
+Theorem 6.25(Global forms of Menger’s theorem). Let G have at least two vertices.
+
+1. A graph or digraph G is k-connected if and only if λG(x, y) ≥k for every ordered pair of
+distinct vertices x, y (with the order ignored for an undirected graph).
+
+2. A multigraph or digraph G is k-edge-connected if and only if λ0
+G(x, y) ≥k for every ordered
+pair of distinct vertices x, y. Here parallel arcs are allowed in a digraph.
+
+To prove this theorem, we need the following lemma.
+
+Lemma 6.26. In a graph, or a digraph without parallel arcs, deleting one edge or arc reduces
+vertex-connectivity by at most one.
+
+Proof. Let H ⇤G −e, where e ⇤xy is an edge or an arc directed from x to y, and let S be
+a smallest separating set of H. If |S| ≥(G), there is nothing to prove. Otherwise G −S is
+connected, or strongly connected in the directed case, while H −S is not.
+
+There are nonempty sets A, B partitioning V(G) \ S, with x 2 A and y 2 B, such that e is
+the only edge between A and B in the undirected case, or the only arc from A to B in the
+directed case. If |A| ≥2, then S [ {x} separates G; if |B| ≥2, then S [ {y} separates G. Thus in
+either case |S| + 1 ≥(G). If |A| ⇤|B| ⇤1, then |S| ⇤|V(G)| −2 ≥(G) −1.
+⇤
+
+Proof of the global forms. For edge-connectivity, the local edge form of Menger’s theorem gives
+the result immediately.
+
+Suppose ﬁrst that λG(x, y) ≥k for every ordered pair of distinct vertices. Since at most one
+such path is an edge and all the others use distinct internal vertices, k |V(G)| −1. If a set S
+of fewer than k vertices disconnected G, or made a digraph non-strong, choose x, y < S such
+that G −S has no x, y-path. Every independent x, y-path must meet S, so λG(x, y) |S| < k,
+a contradiction.
+
+Conversely, suppose that G is k-connected. If xy < E(G) in the undirected case, or −!
+xy < E(G)
+in the directed case, the local form of Menger’s theorem gives λG(x, y) ⇤G(x, y) ≥k.
+Otherwise, let e ⇤xy be the relevant edge, or let e ⇤−!
+xy be the relevant arc. Then
+
+λG(x, y) ⇤1 + λG−e(x, y) ⇤1 + G−e(x, y) ≥1 + (G −e) ≥(G) ≥k.
+
+⇤
+
+So far we have connected two speciﬁed vertices by independent paths. It is also useful to
+connect one vertex to a set.
+
+6.5. Menger’s theorem and separator certiﬁcates
+•
+39
+
+Deﬁnition 6.27. For x 2 V(G) and U ✓V(G) \ {x}, an x, U-fan of size k is a family of k
+paths from x to U that pairwise meet only at x and meet U only at their other endpoints.
+
+Connectivity guarantees the existence of such fans. We ﬁrst record a simple consequence of
+the deﬁnition of k-connectedness; its proof is left as an exercise.
+
+Lemma 6.28(Expansion lemma). If G is a k-connected graph and G0 is formed from G by adding
+a vertex y with at least k neighbors in G, then G0 is k-connected.
+
+Lemma 6.29(Fan lemma; Dirac 1960). A graph with more than k vertices is k-connected if and
+only if, for every x 2 V(G) and every U ✓V(G) \ {x} with |U| ≥k, it has an x, U-fan of size k.
+
+Proof. Suppose ﬁrst that G is k-connected. Add a new vertex y adjacent to every vertex of U.
+By the expansion lemma the resulting graph is k-connected, so Menger’s theorem gives k
+independent x, y-paths. Truncate each path at its ﬁrst vertex in U.
+
+Conversely, suppose that G is not k-connected. Choose a separating set S with |S| < k and
+vertices x, y in distinct components of G −S. Since |V(G)| > k, we may enlarge S, without
+using x or y, so that |S| ⇤k −1. Set U :⇤S [ {y}. An x, U-fan of size k would have to use
+every vertex of U as an endpoint. In particular, its path ending at y would have to avoid S
+internally, contradicting that every x, y-path meets S.
+⇤
+
+Cycles are closely related to several notions introduced above: cut-edges are precisely the
+edges lying on no cycle, and minimum degree forces long cycles. We now study further
+connections among cycles, connectivity, and minimum degree.
+
+Theorem 6.30(Dirac, 1960). For k ≥2, every set of k vertices in a k-connected graph lies on a
+common cycle.
+
+Example: putting one more vertex on a cycle. Consider the wheel whose rim is C ⇤apqbra
+and whose hub x is adjacent to every vertex of C. As in the earlier wheel example, this
+graph is 3-connected. Suppose that the prescribed vertices are a, b, x. The cycle C already
+contains a, b, and the three edges xp, xq, xr form an x, V(C)-fan.
+
+C and a 3-fan
+
+a
+
+p
+q
+
+b
+
+r
+
+x
+
+replace pq
+
+A cycle through a, b, x
+
+a
+
+p
+q
+
+b
+
+r
+
+x
+
+The fan endpoints p, q lie on the same segment a, p, q, b of C. Replacing pq by p, x, q
+gives the gold cycle apxqbra, which contains all three prescribed vertices. The right panel
+omits edges not used in this replacement. The proof below uses the same idea with fan
+paths in place of single edges.
+
+40
+•
+INTRODUCTION TO GRAPH THEORY
+
+Proof. We use induction on k. For k ⇤2, two independent paths between the two prescribed
+vertices form a cycle.
+
+Let k > 2, let S be a set of k vertices, and choose x 2 S. By induction, G has a cycle C
+containing S \ {x}. If x 2 V(C), we are done.
+
+If |V(C)| ⇤k −1, apply the fan lemma using (k −1)-connectivity to obtain an x, V(C)-fan of
+size k −1. Its endpoints are all the vertices of C. Two consecutive endpoints on C, together
+with their two fan paths, replace the edge between them by a path through x, producing a
+cycle containing S.
+
+If |V(C)| ≥k, take an x, V(C)-fan of size k. The vertices of S \ {x} divide C into k −1 cyclic
+segments, each containing one prescribed vertex at its beginning and none in its interior.
+Two fan paths end in the same segment. Replace the subpath of that segment between their
+endpoints—which contains no prescribed vertex internally—by the path through x. The
+resulting cycle contains all of S.
+⇤
+
+A cycle in an n-vertex graph has length at most n. A cycle of length n is spanning, which
+motivates the following deﬁnition.
+
+Deﬁnition 6.31. A spanning cycle is called a Hamiltonian cycle. A graph is Hamiltonian if it
+contains a Hamiltonian cycle.
+
+The earlier minimum-degree bound guarantees a cycle of length at least δ(G) + 1. It yields
+a Hamiltonian cycle when δ(G) ⇤n −1, but this covers only the complete graph. Dirac’s
+theorem gives the much stronger threshold δ(G) ≥n/2.
+
+Corollary 6.32(Dirac’s theorem, 1952). Let G be an n-vertex graph. If n ≥3 and δ(G) ≥n/2,
+then G is Hamiltonian.
+
+We prove the following stronger result.
+
+Corollary 6.33(Ore’s theorem, 1960). Let G be an n-vertex graph. If n ≥3 and d(u) + d(v) ≥n
+for all distinct nonadjacent vertices u, v, then G is Hamiltonian.
+
+Both bounds are sharp. The complete bipartite graph Kb(n−1)/2c,d(n+1)/2e shows that Dirac’s
+minimum-degree threshold cannot be lowered. For Ore’s threshold, identify one vertex of
+Ka+1 with one vertex of Kb+1, where a, b ≥1 and a + b ⇤n −1. Every nonadjacent pair in the
+resulting graph has degree sum n −1, but the common vertex is a cut-vertex, so the graph is
+not Hamiltonian.
+
+To prove Ore’s theorem, we ﬁrst establish the following lemma.
+
+Lemma 6.34(Ore’s lemma, 1960). Let u and v be distinct nonadjacent vertices of an n-vertex
+graph G. If d(u) + d(v) ≥n, then G is Hamiltonian if and only if G + uv is Hamiltonian.
+
+Proof. If G is Hamiltonian, then so is G+uv. Conversely, suppose that G+uv is Hamiltonian but
+G is not. Every Hamiltonian cycle of G + uv then uses uv. Deleting uv from such a cycle leaves
+a spanning path v1 . . . vn with u ⇤v1 and v ⇤vn. If, for some i, we have uvi+1, vvi 2 E(G),
+then deleting vivi+1 from the path and adding these two edges yields a Hamiltonian cycle of
+G.
+
+Set
+
+S :⇤{i : uvi+1 2 E(G)},
+T :⇤{i : vvi 2 E(G)}.
+
+6.6. [A] Closure and Chvátal’s degree-sequence theorem
+•
+41
+
+Then |S| + |T| ⇤d(u) + d(v) ≥n, whereas S, T ✓[n −1]. Thus S \ T , ú, and any i 2 S \ T
+yields a Hamiltonian cycle of G.
+⇤
+
+Proof of Ore’s theorem. Add the missing edges of G one at a time until the graph is complete.
+Degrees never decrease, so the endpoints of each added edge have degree sum at least n.
+By Ore’s lemma, each addition preserves whether the graph is Hamiltonian. Since Kn is
+Hamiltonian for n ≥3, so is G.
+⇤
+
+6.6[A] Closure and Chvátal’s degree-sequence theorem
+
+We now deﬁne the closure operation used to apply Ore’s lemma repeatedly.
+
+Deﬁnition 6.35. A (Hamiltonian) closure of an n-vertex graph G is obtained by repeatedly
+joining nonadjacent vertices whose current degree sum is at least n, until no such pair
+remains. A graph is closed if no such pair exists.
+
+Theorem 6.36(Bondy–Chvátal, 1976). The closure of a graph is unique; that is, it does not depend
+on the order of edge additions. Denote it by C(G). A graph is Hamiltonian if and only if its closure
+is Hamiltonian.
+
+Proof. From an n-vertex graph G, form a closure G1 by adding e1, . . . , er in order and a closure
+G2 by adding f1, . . . , fs in order. Each addition joins vertices whose degree sum is at least n
+at that time. Once a pair becomes addable, it remains addable and therefore must be joined
+before the process terminates.
+
+If G2 * G1, let fi be the ﬁrst edge in the second sequence that is absent from G1. Since
+f1, . . . , fi−1 2 E(G1), the edge fi is addable to G1 and therefore must also belong to G1, a
+contradiction. Hence G2 ✓G1; by symmetry, G1 ✓G2.
+
+The second assertion follows from Ore’s lemma.
+⇤
+
+The closure theorem yields the following degree-sequence criterion, which strengthens
+Dirac’s theorem.
+
+Theorem 6.37(Chvátal, 1972). Let n ≥3, and let
+
+d1 d2 · · · dn
+
+be the degree sequence of an n-vertex graph G. If, for every integer i with 1 i < n/2,
+
+di > i
+or
+dn−i ≥n −i,
+
+then G is Hamiltonian.
+
+Proof. Adding edges cannot decrease any entry of the nondecreasing degree sequence, so the
+closure of G also satisﬁes Chvátal’s condition. By the closure theorem, it is enough to prove
+that every closed graph satisfying the condition is complete.
+
+Suppose that a closed graph G is not complete. Choose a nonadjacent pair u, v with
+maximum degree sum, and assume d(u) d(v). Since G is closed,
+
+d(u) + d(v) n −1.

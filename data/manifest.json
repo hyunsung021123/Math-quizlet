@@ -119,6 +119,18 @@
       "title": "Chapter 8. Shellability and the Upper Bound Theorem",
       "file": "chapter_8_shellability_and_the_upper_bou.json",
       "book": "Ziegler — Lectures on Polytopes"
+    },
+    {
+      "id": "1_course_overview",
+      "title": "1. Course overview",
+      "file": "1_course_overview.json",
+      "book": "Kim — Introduction to Graph Theory"
+    },
+    {
+      "id": "2_basic_concepts",
+      "title": "2. Basic concepts",
+      "file": "2_basic_concepts.json",
+      "book": "Kim — Introduction to Graph Theory"
     }
   ]
 }

@@ -1,0 +1,194 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.7 [A] A flow interpretation of matching and Menger
+직전 소단원: 「6.6 [A] Closure and Chvátal's degree-sequence theorem」
+[본문]
+42
+•
+INTRODUCTION TO GRAPH THEORY
+
+If d(u) ⇤0, then d1 ⇤0 1, while the isolated vertex u implies dn−1 n −2 < n −1. Thus
+the condition fails at i ⇤1.
+
+Hence let i :⇤d(u) ≥1. Since 2d(u) d(u) + d(v) n −1, we have i < n/2. By the choice
+of u, v, every nonneighbor of v has degree at most d(u) ⇤i. There are
+
+n −1 −d(v) ≥d(u) ⇤i
+
+such vertices, so di i.
+
+Similarly, every nonneighbor of u has degree at most d(v). Together with u, these give
+n −d(u) ⇤n −i vertices of degree at most d(v). Since
+
+d(v) n −1 −d(u) < n −i,
+
+we obtain dn−i < n −i. Thus Chvátal’s condition fails at i, a contradiction.
+⇤
+
+6.7[A] A flow interpretation of matching and Menger
+
+Matching and Menger’s theorem both equate the size of a largest family with the size of
+a smallest obstruction. Network ﬂows put these equalities into a common framework. We
+develop this viewpoint here; the proofs above do not depend on it.
+
+Deﬁnition 6.38. A network is a ﬁnite directed multigraph D with distinct vertices s, t and
+nonnegative real capacities c(e) on its arcs. An s, t-ﬂow assigns numbers 0 f (e) c(e)
+such that the total entering each vertex other than s, t equals the total leaving it. Its value
+is the net amount leaving s:
+
+| f | :⇤
+
+’
+
+e2δ+
+
+D({s})
+
+f (e) −
+
+’
+
+e2δ−
+
+D({s})
+
+f (e).
+
+For s 2 S ✓V(D) \ {t}, the capacity of the s, t-cut (S, S) is c(S, S) :⇤Õ
+
+e2δ+
+
+D(S) c(e).
+
+Summing conservation over S \ {s} cancels the contributions of arcs within S, giving
+
+| f | ⇤
+
+’
+
+e2δ+
+
+D(S)
+
+f (e) −
+
+’
+
+e2δ−
+
+D(S)
+
+f (e) c(S, S).
+(6.1)
+
+Thus a cut bounds the value of every ﬂow.
+
+For an arc e ⇤uv, we may increase f (e) by up to c(e) −f (e), or cancel up to f (e) units by
+moving in the reverse direction. The residual network records these two choices as arcs uv
+and vu of capacities c(e) −f (e) and f (e), respectively; copies of capacity zero are omitted. A
+directed s, t-path in this network increases the ﬂow value by its smallest residual capacity,
+adding on forward copies and subtracting on reverse copies. Conservation is preserved at
+every internal vertex.
+
+6.7. [A] A flow interpretation of matching and Menger
+•
+43
+
+Example 6.39(Changing an earlier choice). Give all ﬁve arcs in the following network capacity
+one.
+
+s
+
+a
+
+b
+
+t
+
+1
+
+1
+
+1
+
+1
+
+1
+
+Sending one unit along sabt leaves no unused directed s, t-path in the original network.
+However, the residual path sbat cancels the ﬂow on ab, leaving one unit on each of sat
+and sbt. The resulting value is two. The cut S ⇤{s} has capacity two, so this ﬂow is
+maximum by (6.1).
+
+Theorem 6.40(Max-flow–min-cut; Ford–Fulkerson). The maximum value of an s, t-ﬂow equals
+the minimum capacity of an s, t-cut. If all capacities are integers, a maximum ﬂow can be chosen
+to be integral.
+
+Proof. The feasible ﬂows form a nonempty closed bounded subset of a ﬁnite-dimensional
+space, so the continuous function | f | attains a maximum. A maximum ﬂow has no residual
+s, t-path. Let S be the vertices reachable from s in its residual network. Then t < S. Every
+original arc leaving S is saturated, and every original arc entering S carries zero ﬂow; otherwise
+a residual arc would lead from S to a vertex outside it. Consequently,
+
+| f | ⇤
+
+’
+
+e2δ+
+
+D(S)
+
+f (e) −
+
+’
+
+e2δ−
+
+D(S)
+
+f (e) ⇤c(S, S).
+
+Together with (6.1), this proves the equality.
+
+For integral capacities, start with zero ﬂow and repeatedly augment along a residual
+s, t-path. All residual capacities remain integral, so each step increases the value by at least
+one. The cut bound forces termination, and the same reachable-set argument proves that the
+resulting integral ﬂow is maximum.
+⇤
+
+For arbitrary real capacities, arbitrary choices of residual paths need not terminate; the
+compactness argument avoids this issue. See [LRFF56] for the original ﬂow framework.
+
+Bipartite matching. For an X, Y-bigraph G, direct its edges from X to Y, add arcs sx and
+
+yt, and give these new arcs capacity one. Give the arcs from X to Y capacity |V(G)| + 1. An
+integral ﬂow is a sum of unit ﬂows along paths sxyt and hence corresponds to a matching.
+A minimum cut has capacity at most |X|, so it contains no arc from X to Y. Its source side S
+therefore gives the vertex cover (X \ S) [ (Y \ S), whose size equals its capacity. Conversely,
+a cover C gives the cut with source side {s} [ (X \ C) [ (Y \ C) and capacity |C|. The ﬂow
+theorem recovers the König–Egerváry equality, and hence Hall’s theorem.
+
+Disjoint paths. Give each arc of a digraph capacity one. Delete arcs entering s or leaving t,
+since they lie on no directed s, t-path. An integral ﬂow of value k gives k arc-disjoint s, t-paths:
+ﬁrst subtract ﬂow around directed cycles, then follow positive-ﬂow arcs from s to t, subtracting
+one unit each time. Conservation prevents a path from stopping at an internal vertex. After
+deleting any set of arcs meeting all s, t-paths, the vertices still reachable from s determine a
+cut using only deleted arcs. Thus a minimum cut is a smallest such set, recovering the edge
+
+44
+•
+INTRODUCTION TO GRAPH THEORY
+
+form of Menger’s theorem. For undirected graphs, replace edges by opposite arcs and cancel
+any opposing ﬂow before extracting paths.
+
+To obtain internally vertex-disjoint paths, suppose that there is no edge or arc from s to t.
+Replace each other vertex v by v−, v+ and an arc v−v+ of capacity one. Redirect every original
+arc from the copy u+ to the copy v−, keeping s, t unsplit, and give it capacity n ⇤|V(G)|. For
+an undirected graph, ﬁrst replace its edges by opposite arcs. Deleting the n −2 arcs v−v+
+
+destroys every s, t-path, so a minimum cut has capacity at most n −2 and uses only arcs v−v+.
+These arcs specify a vertex separator, while their unit capacities force the extracted paths to be
+internally disjoint. This is the vertex form of Menger’s theorem, now seen as another instance
+of max-ﬂow–min-cut.

@@ -1,0 +1,257 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.2 2-connected graphs
+직전 소단원: 「6.1 Connectivity」
+[본문]
+30
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 6.4(Whitney, 1932). For every graph G with at least two vertices,
+
+(G) 0(G) δ(G).
+
+Proof. If G is disconnected, then (G) ⇤0(G) ⇤0, and the ﬁrst inequality is immediate. Hence
+assume that G is connected.
+
+Deleting the edges incident with a vertex v of minimum degree disconnects G, so 0(G) 
+δ(G).
+
+To prove (G) 0(G), let [S, S] be a smallest edge cut of size k0 ⇤0(G). If all vertices of S
+are adjacent to all of S, then k0 ≥|S||S| ≥|V(G)| −1 ≥(G).
+
+Otherwise, choose x 2 S and y 2 S with xy < E(G). For each edge e 2 [S, S], choose an
+endpoint outside {x, y}, and let T be the set of chosen endpoints. Now |T| k0 ⇤|[S, S]|, and
+x, y lie in diﬀerent components of G −T. Hence (G) 0(G).
+⇤
+
+For trees, sequentially adding leaves—or, equivalently, adding edges without creating
+a cycle—gives a constructive description. We seek analogous operations that generate all
+k-connected graphs while preserving k-connectivity. Vertex splitting is one such operation.
+
+Deﬁnition 6.5. A vertex k-split forms a graph H from a graph G by replacing one vertex
+x with adjacent vertices x1 and x2 such that NH(x1) [ NH(x2) ⇤NG(x) [ {x1, x2} and
+dH(xi) ≥k.
+
+This operation preserves k-connectivity.
+
+Lemma 6.6. If a graph H is obtained from a k-connected graph G by a vertex k-split, then H is
+k-connected.
+
+Proof. Consider a k-split with x1, x2 replacing x. Let S be a vertex cut of H. If {x1, x2} ✓S,
+then replacing x1 and x2 by x in S yields a vertex cut of G, hence |S| ≥k + 1. If H −S has x1
+or x2 or the edge x1x2 as a component, then S contains NH(x1) or NH(x2) or NG(x), in each
+case |S| ≥k. Otherwise, whatever remains of {x1, x2} augments a component of G −S. If
+S \ {x1, x2} ⇤ú, then S is a vertex cut of G; if |S \ {x1, x2}| ⇤1, then (S \ {x1, x2}) [ {x} is a
+vertex cut of G. In either case, |S| ≥k, so H is k-connected.
+⇤
+
+6.22-connected graphs
+
+We ﬁrst focus on the simpler cases of 2-connected and 2-edge-connected graphs. Edge
+
+subdivision is an important operation in both settings.
+
+Deﬁnition 6.7. In a graph G, a subdivision of an edge uv is the operation of replacing uv
+with a path u, w, v through a new vertex w.
+
+In fact, if d(v) ≥2 or d(u) ≥2, a subdivision is a special type of vertex 2-split. Hence, edge
+subdivisions preserve 2-connectedness. Moreover, the following lemma shows that it even
+preserves 2-edge-connectedness.
+
+6.2. 2-connected graphs •
+31
+
+Lemma 6.8. Edge-subdivision preserves 2-edge-connectedness.
+
+Proof. Let G be a 2-edge-connected graph, and let H be obtained from G by adding w to
+subdivide uv. Since cut-edges are precisely the edges lying on no cycle, every edge of G lies on
+a cycle. The corresponding edge of H lies on the same cycle, with uv replaced by the path uwv
+when necessary. Replacing uv by uwv also shows that H is connected. Thus H is connected
+and has no cut-edge, so it is 2-edge-connected.
+⇤
+
+Components are the maximal connected subgraphs, and every graph is the disjoint union
+of its components. We seek an analogous decomposition of a connected graph into maximal
+2-connected pieces joined in a tree-like fashion. The following deﬁnition, phrased in terms of
+the absence of a cut-vertex, also accommodates isolated vertices and cut-edges.
+
+Deﬁnition 6.9. A block of a graph G is a maximal connected subgraph of G that has no
+cut-vertex.
+
+Under this deﬁnition, a block is either an isolated vertex, a cut-edge, or a maximal
+2-connected subgraph. In particular, every block with more than two vertices is 2-connected.
+Two blocks in a graph share at most one vertex, as otherwise their union belongs to a larger
+block. Hence, the blocks of a graph partition its edge set. A vertex shared by two blocks must
+be a cut-vertex of G. The block-cutpoint graph of G is the bipartite graph whose parts are the
+cut-vertices and the blocks of G, with a cut-vertex adjacent to precisely the blocks containing
+it. This graph is a forest. A block corresponding to a leaf is called a leaf block; it contains exactly
+one cut-vertex of G.
+
+Example: blocks and cut-vertices. Let G consist of the triangles abca and cdec, together
+with the edge e f . Its blocks are the two triangles B1, B2 and the single edge B3 ⇤e f .
+
+a
+
+b
+
+c
+
+d
+
+e
+f
+B1
+B2
+B3
+
+G
+
+B1
+c
+B2
+e
+B3
+
+The block-cutpoint graph of G
+
+The cut-vertices are c, e, and the block-cutpoint graph is the path B1 −c −B2 −e −B3.
+Thus B1 and B3 are leaf blocks. Notice that the blocks partition the edges of G, but not its
+vertices: c and e each belong to two blocks.
+
+This motivates the study of blocks and hence of 2-connected graphs. (We have already
+described cut-vertices and cut-edges.) Ear addition both preserves 2-connectivity or 2-edge-
+connectivity, as appropriate, and generates every graph of the corresponding type.
+
+32
+•
+INTRODUCTION TO GRAPH THEORY
+
+Deﬁnition 6.10. Let H be a graph. An ear on H is a positive-length path whose two endpoints
+lie in H and whose internal vertices lie outside H.
+
+An ear decomposition of a graph G is a sequence of edge-disjoint subgraphs Q0, . . . , Qr
+whose union is G, such that Q0 is a cycle and, for each i ≥1, Qi is an ear on Q0 [ · · · [ Qi−1.
+
+A closed ear on H is a cycle that meets H in exactly one vertex. A weak ear decomposition
+is deﬁned in the same way, except that each Qi, for i ≥1, may be either an ear or a closed
+ear on Q0 [ · · · [ Qi−1.
+
+Example 6.11(A graph built ear by ear). Let G be the union of the following cycle and two
+paths, written as vertex sequences:
+
+Q0 ⇤a b c d a,
+Q1 ⇤a x c,
+Q2 ⇤b y z d.
+
+Starting with the cycle H0 :⇤Q0, form H1 :⇤H0 [ Q1 and then H2 :⇤H1 [ Q2 ⇤G. In
+each panel, the new ear is highlighted in gold.
+
+H0 ⇤Q0
+
+a
+b
+
+c
+d
+
++Q1
+
+H1
+
+a
+b
+
+c
+d
+
+x
+
++Q2
+
+H2 ⇤G
+
+a
+b
+
+c
+d
+
+x
+y
+
+z
+
+Indeed, Q1 has endpoints a, c 2 V(H0) and new internal vertex x, while Q2 has
+endpoints b, d 2 V(H1) and new internal vertices y, z. The cycle and the two paths are
+edge-disjoint and their union is G, so (Q0, Q1, Q2) is an ear decomposition of G. One can
+also check 2-connectedness directly: after deleting any one vertex, the remaining part of
+the original cycle is connected, and every surviving piece of either ear is still attached to
+at least one of its endpoints.
+
+Ear decompositions characterize 2-connected and 2-edge-connected graphs.
+
+Theorem 6.12(Whitney, 1932). A graph is 2-connected if and only if it has an ear decomposition.
+A multigraph with at least two vertices is 2-edge-connected if and only if it has a weak ear
+decomposition.
+
+Proof. (() A cycle is 2-connected. Adding an ear preserves 2-connectedness. Likewise, adding
+an ear or a closed ear preserves 2-edge-connectivity.
+
+()) First suppose that G is 2-connected. Let H be maximal among the subgraphs of G
+having an ear decomposition. Such an H exists because G contains a cycle. If H , G, choose
+uv 2 E(G)\E(H) with u 2 V(H). Since G −u is connected, there is a path from v to V(H)\ {u}
+in G −u. Choose such a path P with minimum length. Then the internal vertices of P lie
+outside H, and uv [ P is an ear on H, contradicting maximality.
+
+Now suppose that G is 2-edge-connected. Again choose a maximal subgraph H having a
+weak ear decomposition. If H , G, choose uv 2 E(G) \ E(H) with u 2 V(H). Since uv is not a
+cut-edge, G −uv contains a path P from v to V(H); choose one whose ﬁrst vertex in H occurs
+
+6.3. 3-connected graphs by contraction
+•
+33
+
+at its end. If that end is u, then uv [ P is a closed ear, and otherwise it is an ear. Either case
+contradicts maximality.
+⇤
+
+Weak ear decompositions are useful for understanding 2-edge-connected graphs. As an
+application, imagine turning every street of a city into a one-way street while preserving the
+ability to travel from every location to every other. This motivates the following deﬁnition.
+
+Deﬁnition 6.13. A digraph D is strongly connected, or strong, if for every ordered pair
+u, v 2 V(D) there is a directed path from u to v.
+
+The question is which graphs admit a strong orientation. Robbins’ theorem gives a complete
+characterization.
+
+Corollary 6.14(Robbins, 1939). A multigraph with at least two vertices has a strong orientation if
+and only if it is 2-edge-connected.
+
+Proof. ()) A strong orientation has a connected underlying multigraph. If there were a
+cut-edge, one could not travel both ways across its cut.
+
+(() Use a weak ear decomposition of G. Orient the initial cycle consistently. Orient every
+new open ear from one endpoint to the other, and orient every new closed ear consistently
+around its cycle. In either case, each new vertex can be reached from the old strong digraph
+and can reach it, so the enlarged digraph remains strong. After all ears have been added, the
+resulting orientation of G is strong.
+
+⇤
+
+6.33-connected graphs by contraction
+
+A vertex k-split replaces one vertex by two adjacent vertices. We now consider the inverse
+operation, which contracts two adjacent vertices into one.
+
+Deﬁnition 6.15. Given an edge e in a graph G, the contraction G/e is the graph obtained
+from G by replacing the endpoints of e with a single vertex whose neighbors are their
+neighbors in G outside e. We say that G/e is obtained from G by contracting e. A
+k-contractible edge is an edge whose contraction leaves a k-connected graph.
+
+Depending on the application, a diﬀerent convention for contraction may be preferable. In
+a multigraph, one may retain parallel edges by making the new vertex incident with every
+edge other than e that was incident with an endpoint of e. Here we work only with simple
+graphs and use the preceding deﬁnition.

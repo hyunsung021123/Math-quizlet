@@ -1,0 +1,155 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 2. Basic concepts
+현재 소단원: 2.1 Graphs and multigraphs
+직전 소단원: 「1.intro Course overview and notation」
+[본문]
+CHAPTER 2
+
+Basic concepts
+
+2.1Graphs and multigraphs
+
+We begin with a deﬁnition broad enough to model the seven bridges in Figure 1.1.
+
+Deﬁnition 2.1. A multigraph G consists of a ﬁnite vertex set V(G) and a ﬁnite multiset E(G)
+whose members are one- or two-element subsets of V(G). A one-element edge is a loop,
+and repeated two-element edges are parallel edges. The order and size of G are |G| :⇤|V(G)|
+and e(G) :⇤|E(G)|, respectively.
+
+A multigraph is simple if it has no loops or parallel edges. Unless stated otherwise, the
+word graph means a ﬁnite simple graph.
+
+We write [n] :⇤{1, 2, . . . , n} and abbreviate the edge {u, v} as uv. For a loop at u we write
+uu. For example, the multigraph
+
+G ⇤!
+
+[5], {{11, 12, 12, 23, 34, 45, 15}}"
+
+has order 5 and size 7. The two copies of 12 are distinct edge occurrences.
+
+1
+
+2
+
+3
+
+4
+5
+
+loop
+
+parallel pair
+
+Figure 2.1. A multigraph with a loop and a pair of parallel edges. A loop contributes two to the degree of
+its vertex.
+
+The following terminology will be used throughout.
+
+• Distinct vertices u and v are adjacent if uv 2 E(G).
+
+• A vertex v and an edge e are incident if v is an endpoint of e. Two distinct edges are
+adjacent if they share an endpoint.
+
+• A vertex adjacent to v is a neighbor of v; the set of all such vertices is NG(v), or simply
+N(v).
+
+• The degree dG(v) is the number of edge-ends incident with v, counted with multiplicity.
+Thus a loop contributes two. For a simple graph, dG(v) ⇤|NG(v)|.
+
+Parallel edges do not change vertex coloring or the existence of a matching, but they do
+matter in questions about edge cuts. We will therefore state explicitly whenever multigraphs
+are allowed.
+
+4
+
+2.2. Isomorphism and subgraphs
+•
+5
+
+2.2Isomorphism and subgraphs
+
+Vertex names carry no structural information. For example,
+
+G ⇤([5], {12, 23, 34, 45, 51})
+and
+G0 ⇤({a, b, c, d, e}, {ab, bc, cd, de, ea})
+
+describe the same ﬁve-cycle after relabeling the vertices.
+
+Deﬁnition 2.2. An isomorphism from a graph G to a graph H is a bĳection f : V(G) ! V(H)
+such that
+
+uv 2 E(G)
+()
+f (u) f (v) 2 E(H).
+
+If such a map exists, then G and H are isomorphic, written G ' H. An unlabeled graph is an
+isomorphism class of graphs.
+
+Graph isomorphism is an equivalence relation. In informal statements we usually identify
+isomorphic graphs.
+
+Deﬁnition 2.3. A graph H is a subgraph of G if V(H) ✓V(G) and E(H) ✓E(G). It is spanning
+if V(H) ⇤V(G). For U ✓V(G), the induced subgraph G[U] has vertex set U and contains
+every edge of G with both endpoints in U.
+
+We write G −U :⇤G[V(G) \ U] for vertex deletion and G −F for the spanning subgraph
+obtained by deleting an edge set F. For a single vertex or edge, we abbreviate these as G −v
+and G −e. If u, v are distinct nonadjacent vertices, G + uv is obtained by adding the edge uv.
+For disjoint vertex sets S, T, let eG(S, T) be the number of edges between them; a subgraph in
+either argument stands for its vertex set.
+
+Let G ⇤([4], {12, 23, 34, 41, 13}). The four-cycle with edge set {12, 23, 34, 41} is spanning
+but not induced, because it omits the edge 13. In contrast, G[{1, 2, 4}] has edge set {12, 14}, so
+it is induced but not spanning.
+
+G
+spanning, not induced
+induced, not spanning
+
+1
+2
+
+3
+4
+
+1
+2
+
+3
+4
+
+1
+2
+
+4
+
+Figure 2.2. A graph, a spanning subgraph, and an induced subgraph.
+
+2.3Special graphs
+
+For a simple graph G ⇤(V, E), its complement is
+
+G ⇤
+
+✓
+
+V,
+
+✓
+
+V
+
+2
+
+◆
+
+\ E
+
+◆
+
+.
+
+Thus two distinct vertices are adjacent in exactly one of G and G.

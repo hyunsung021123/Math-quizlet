@@ -1,0 +1,198 @@
+{
+  "book": "Introduction to Graph Theory",
+  "author": "Jaehoon Kim",
+  "chapters": [
+    {
+      "chapter_no": "1",
+      "chapter_title": "Course overview",
+      "printed_page": 2
+    },
+    {
+      "chapter_no": "2",
+      "chapter_title": "Basic concepts",
+      "printed_page": 4
+    },
+    {
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 8
+    },
+    {
+      "chapter_no": "4",
+      "chapter_title": "Graph search algorithms",
+      "printed_page": 14
+    },
+    {
+      "chapter_no": "5",
+      "chapter_title": "Matchings",
+      "printed_page": 19
+    },
+    {
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 29
+    }
+  ],
+  "sections": [
+    {
+      "number": "1.intro",
+      "title": "Course overview and notation",
+      "chapter_no": "1",
+      "chapter_title": "Course overview",
+      "printed_page": -2,
+      "role": "section"
+    },
+    {
+      "number": "2.1",
+      "title": "Graphs and multigraphs",
+      "chapter_no": "2",
+      "chapter_title": "Basic concepts",
+      "printed_page": 4,
+      "role": "section"
+    },
+    {
+      "number": "2.2",
+      "title": "Isomorphism and subgraphs",
+      "chapter_no": "2",
+      "chapter_title": "Basic concepts",
+      "printed_page": 5,
+      "role": "section"
+    },
+    {
+      "number": "2.3",
+      "title": "Special graphs",
+      "chapter_no": "2",
+      "chapter_title": "Basic concepts",
+      "printed_page": 5,
+      "role": "section"
+    },
+    {
+      "number": "2.4",
+      "title": "Directed graphs",
+      "chapter_no": "2",
+      "chapter_title": "Basic concepts",
+      "printed_page": 7,
+      "role": "section"
+    },
+    {
+      "number": "3.intro",
+      "title": "Walks, paths, cycles, and trees",
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 8,
+      "role": "section"
+    },
+    {
+      "number": "3.1",
+      "title": "[A] Cycle space and cut space",
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 11,
+      "role": "section"
+    },
+    {
+      "number": "4.1",
+      "title": "Breadth-first and depth-first forests",
+      "chapter_no": "4",
+      "chapter_title": "Graph search algorithms",
+      "printed_page": 14,
+      "role": "section"
+    },
+    {
+      "number": "4.2",
+      "title": "[A] Low-link values, bridges, and cut-vertices",
+      "chapter_no": "4",
+      "chapter_title": "Graph search algorithms",
+      "printed_page": 16,
+      "role": "section"
+    },
+    {
+      "number": "5.1",
+      "title": "Matchings in bipartite graphs",
+      "chapter_no": "5",
+      "chapter_title": "Matchings",
+      "printed_page": 19,
+      "role": "section"
+    },
+    {
+      "number": "5.2",
+      "title": "Matchings in general graphs",
+      "chapter_no": "5",
+      "chapter_title": "Matchings",
+      "printed_page": 22,
+      "role": "section"
+    },
+    {
+      "number": "5.3",
+      "title": "[A] Factors beyond perfect matchings",
+      "chapter_no": "5",
+      "chapter_title": "Matchings",
+      "printed_page": 25,
+      "role": "section"
+    },
+    {
+      "number": "5.4",
+      "title": "[A] Algorithmic aspects of matchings",
+      "chapter_no": "5",
+      "chapter_title": "Matchings",
+      "printed_page": 26,
+      "role": "section"
+    },
+    {
+      "number": "6.1",
+      "title": "Connectivity",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 29,
+      "role": "section"
+    },
+    {
+      "number": "6.2",
+      "title": "2-connected graphs",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 30,
+      "role": "section"
+    },
+    {
+      "number": "6.3",
+      "title": "3-connected graphs by contraction",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 33,
+      "role": "section"
+    },
+    {
+      "number": "6.4",
+      "title": "Connectivity and independent paths",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 35,
+      "role": "section"
+    },
+    {
+      "number": "6.5",
+      "title": "Menger's theorem and separator certificates",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 35,
+      "role": "section"
+    },
+    {
+      "number": "6.6",
+      "title": "[A] Closure and Chvátal's degree-sequence theorem",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 41,
+      "role": "section"
+    },
+    {
+      "number": "6.7",
+      "title": "[A] A flow interpretation of matching and Menger",
+      "chapter_no": "6",
+      "chapter_title": "Connectivity and cycles",
+      "printed_page": 42,
+      "role": "section"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.4 Connectivity and independent paths
+직전 소단원: 「6.3 3-connected graphs by contraction」
+[본문]
+6.4. Connectivity and independent paths
+•
+35
+
+required in the deﬁnition of a split. Conversely, K4 is 3-connected, and vertex 3-splits preserve
+3-connectivity.
+⇤
+
+For k ≥4, the contraction argument above no longer works in general. We now turn to
+consequences of connectivity, especially the existence of multiple internally disjoint paths.
+
+6.4Connectivity and independent paths
+
+Just as a connected graph contains an x, y-path for every pair x, y, a highly connected graph
+contains many internally disjoint paths. The analogous statement also holds for digraphs, so
+we introduce both settings together.
+
+Deﬁnition 6.18. A digraph D is k-connected if |V(D)| > k and D −S is strongly connected
+for every S ✓V(D) with |S| < k. Its connectivity (D) is the maximum such k.
+
+For ú , S ( V(D), let
+
+δ+
+
+D(S) :⇤{−!
+uv 2 E(D) : u 2 S, v < S},
+δ−
+
+D(S) :⇤{−!
+uv 2 E(D) : u < S, v 2 S}.
+
+The digraph D is k-edge-connected if |δ+
+
+D(S)| ≥k for every nonempty proper subset
+S ⇢V(D).
+
+The vertex-connectivity statements below are for graphs and for digraphs without parallel
+arcs. In the edge-connectivity statements, parallel edges or arcs may be allowed and are
+counted separately.
+
+Deﬁnition 6.19. Let x and y be distinct vertices. Two x, y-paths are independent if they
+have no common internal vertex. Let λG(x, y) denote the maximum number of pairwise
+independent x, y-paths.
+
+If xy < E(G) in an undirected graph, or −!
+xy < E(G) in a digraph, an x, y-separating set is
+a set
+
+S ✓V(G) \ {x, y}
+
+such that G −S has no x, y-path. Let G(x, y) be the minimum size of such a set.
+
+Every x, y-separating set meets pairwise independent x, y-paths in distinct internal vertices,
+so
+
+λG(x, y) G(x, y).
+
+If an undirected graph G is not complete, then
+
+(G) ⇤min{G(x, y) : x , y, xy < E(G)};
+
+whereas (Kn) ⇤n −1.
+
+6.5Menger’s theorem and separator certiﬁcates
+
+To state the edge version of Menger’s theorem, we need the following deﬁnitions.

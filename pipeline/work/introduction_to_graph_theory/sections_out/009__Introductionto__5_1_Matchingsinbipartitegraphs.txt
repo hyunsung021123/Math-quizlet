@@ -1,0 +1,260 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 5. Matchings
+현재 소단원: 5.1 Matchings in bipartite graphs
+직전 소단원: 「4.2 [A] Low-link values, bridges, and cut-vertices」
+[본문]
+CHAPTER 5
+
+Matchings
+
+Suppose that jobs are indexed by [n] and Ai is the set of applicants qualiﬁed for job i. Assigning
+a diﬀerent qualiﬁed applicant to each job is the same as ﬁnding a system of distinct representatives
+(SDR): distinct elements x1, . . . , xn with xi 2 Ai.
+
+The incidence graph of A1, . . . , An is the bipartite graph with parts [n] and –
+
+i Ai, taken as
+disjoint copies, where i is adjacent to x exactly when x 2 Ai. An SDR is a collection of pairwise
+nonincident edges covering the part [n].
+
+Deﬁnition 5.1. A matching in a graph G is a set of pairwise nonincident edges. A vertex
+incident with a matching edge is covered; otherwise it is uncovered. A matching covering
+every vertex is perfect. The matching number ↵0(G) is the maximum size of a matching in G.
+
+jobs
+applicants
+
+1
+
+2
+
+3
+
+a
+
+b
+
+c
+
+d
+
+Figure 5.1. An incidence graph. The highlighted matching represents the SDR (a, b, c).
+
+5.1Matchings in bipartite graphs
+
+Because an incidence graph is bipartite, we ﬁrst study matchings in a bipartite graph. For a
+vertex set S, write N(S) :⇤–
+
+v2S N(v).
+When does an X, Y-bigraph have a matching covering X? Necessarily every S ✓X has at
+least |S| available neighbors. Hall’s theorem says that these are the only obstructions.
+
+Theorem 5.2(Hall’s theorem, 1935). In an X, Y-bigraph, there exists a matching covering X if
+and only if |N(S)| ≥|S| for all S ✓X.
+
+Proof. If a matching covers X, its edges inject every S ✓X into N(S), so |N(S)| ≥|S|.
+
+We use induction to prove suﬃciency. When |X| 1, the claim is immediate. Assume
+|X| > 1 and consider two cases.
+
+If |N(S)| > |S| for every nonempty proper subset S of X, choose x 2 X and y 2 N(x). The
+graph G −{x, y} satisﬁes Hall’s condition: the neighborhood of a proper subset of X loses at
+most the vertex y. Induction gives a matching covering X \ {x}, and adding xy completes the
+matching.
+
+If |N(S)| ⇤|S| for some nonempty proper set S ✓X, let G1 be the graph induced by S[N(S)
+and let G2 be the graph induced by V(G) \ (S [ N(S)).
+
+19
+
+20
+•
+INTRODUCTION TO GRAPH THEORY
+
+Hall’s condition holds for G1. To check Hall’s condition for G2, for each T ✓X \ S, we have
+
+NG2(T) ⇤NG(T [ S) \ NG(S)
+
+so,
+
+|NG2(T)| ⇤|NG(T [ S)| −|NG(S)| ≥|T [ S| −|S| ⇤|T|.
+
+By induction, G1 has a matching covering S, and G2 has one covering X \ S; their union is the
+desired matching in G.
+⇤
+
+Corollary 5.3(Regular bipartite matching theorem; Kőnig 1916, Frobenius 1917). Every k-regular
+bipartite multigraph with k ≥1 has a perfect matching.
+
+Proof. Let G be a k-regular X, Y-bipartite multigraph, where k ≥1. Counting all edges from
+either part gives k|X| ⇤e(G) ⇤k|Y|, so |X| ⇤|Y|. For every S ✓X, counting edges from S to
+N(S) gives k|S| k|N(S)|. Hall’s theorem gives a matching covering X, and since |X| ⇤|Y|,
+the matching is perfect.
+⇤
+
+Hall’s theorem also determines the maximum matching size when no matching covers X.
+
+Example 5.4(A Hall obstruction that determines the answer). Let X ⇤{1, 2, 3, 4, 5} and Y ⇤
+{a, b, c, d}, and prescribe
+
+N(1) ⇤N(2) ⇤N(3) ⇤{a, b},
+
+N(4) ⇤{b, c},
+N(5) ⇤{c, d}.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+a
+
+b
+
+c
+
+d
+
+S
+
+The highlighted matching leaves only vertex 3 uncovered in X.
+
+For S ⇤{1, 2, 3} we have
+
+|S| −|N(S)| ⇤3 −2 ⇤1.
+
+Thus every matching misses at least one vertex of X, so its size is at most 4. On the other
+hand,
+
+{1a, 2b, 4c, 5d}
+
+is a matching of size 4. Therefore ↵0(G) ⇤4: the Hall deﬁcit not only detects failure, but
+gives the exact answer here. The next corollary generalizes this calculation.
+
+5.1. Matchings in bipartite graphs
+•
+21
+
+Corollary 5.5. In an X, Y-bigraph G, the maximum size of a matching satisﬁes
+
+↵0(G) ⇤min
+
+S✓X {|X| −(|S| −|N(S)|)}.
+
+Proof. Every matching misses at least |S|−|N(S)| vertices of S, so ↵0(G) is at most the expression
+above. Set d :⇤maxS✓X(|S| −|N(S)|). Add d new vertices to Y and make them adjacent to all
+vertices of X, obtaining G0. For every nonempty S ✓X, we have |NG0(S)| ⇤|NG(S)| + d ≥|S|,
+so Hall’s theorem gives a matching covering X. Deleting its edges incident with the new
+vertices leaves a matching in G of size at least |X| −d. Together with the upper bound, this
+proves equality.
+⇤
+
+The size of a matching is bounded by another natural concept.
+
+Deﬁnition 5.6. A vertex cover is a set of vertices containing at least one endpoint of every
+edge. The minimum size of a vertex cover is denoted by β(G).
+
+Theorem 5.7(König-Egerváry Theorem, König 1931). If G is bipartite, then ↵0(G) ⇤β(G).
+
+Proof. Let G be an X, Y-bigraph. Every vertex covers at most one edge in a matching, so β(G) ≥
+↵0(G). By the above corollary, there exists a subset T of X such that ↵0(G) ⇤|X| −|T| + |N(T)|.
+Since N(T) [ (X −T) is a vertex cover, β(G) |N(T)| + |X −T| ⇤↵0(G).
+⇤
+
+Deﬁnition 5.8. An edge cover of G is a set of edges that cover all vertices of G. We use β0(G)
+to denote the minimum size of an edge cover.
+
+The parameter β0(G) is deﬁned only when G has no isolated vertices.
+Since ↵0 ⇤β for bipartite graphs, one may ask whether ↵⇤β0 also holds.
+The following lemma is left as an exercise.
+
+Lemma 5.9. In an n-vertex graph G, a vertex subset S is an independent set if and only if V(G)\ S
+is a vertex cover. Hence ↵(G) + β(G) ⇤n.
+
+The other two parameters, ↵0 and β0, satisfy a similar identity.
+
+Theorem 5.10(Gallai, 1959). If G is an n-vertex graph with no isolated vertices, then ↵0(G) +
+
+β0(G) ⇤n.
+
+Proof. We ﬁrst prove β0(G) n −↵0(G). It is enough to construct an edge cover of size n −↵0(G).
+Let M be a maximum matching in G. For each vertex uncovered by M, add one incident edge.
+This uses one edge for each vertex uncovered by M, while each edge in M covers two vertices,
+so the resulting edge cover has size n −|M|. This proves β0(G) n −↵0(G).
+
+We now prove ↵0(G) ≥n −β0(G). Let L be a smallest edge cover. If both endpoints of an
+edge e lie in other edges in L, then L −e is a smaller edge cover, a contradiction. Hence, each
+component of L has at most one vertex with degree larger than 1, hence a star. If there are
+k such stars, then |L| ⇤n −k, since L has one edge for each vertex except the centers of the
+
+22
+•
+INTRODUCTION TO GRAPH THEORY
+
+stars. Hence k ⇤n −|L|, and choosing one edge from each star yields a matching of size
+k ⇤n −|L| ⇤n −β0(G). Hence ↵0(G) ≥n −β0(G). This proves the theorem.
+⇤
+
+Combining the two identities with the Kőnig–Egerváry theorem gives ↵(G) ⇤β0(G) for
+every bipartite graph G with no isolated vertices.
+
+5.2Matchings in general graphs
+
+Hall’s condition does not extend directly to general graphs. For example, K2n+1 has the
+largest possible neighborhoods but cannot have a perfect matching because its order is odd.
+More generally, disjoint unions of odd cliques illustrate the parity obstruction. The following
+deﬁnitions capture the relationship between matching number and this obstruction.
+
+Deﬁnition 5.11. For k 2 N, a k-factor in a graph G is a k-regular spanning subgraph of G.
+An odd component is a component of odd order. We write o(G) for the number of odd
+components of G.
+
+Hall’s theorem gives a set S ✓X such that ↵0(G) ⇤|X| −|S| + |N(S)|. If we delete T :⇤N(S),
+every vertex of S becomes isolated. Thus, when |S| > |T|, every matching leaves at least
+|S| −|T| vertices of S uncovered.
+
+The same idea extends to general graphs. For any T ✓V(G), every matching leaves at least
+o(G −T) −|T| vertices uncovered (a vacuous bound when this quantity is negative). As in
+Hall’s theorem, this turns out to be the correct obstruction. First consider a small example.
+
+Example 5.12(Three odd components and one available vertex). Take three disjoint triangles
+aibiciai, for i ⇤1, 2, 3, and add a vertex v adjacent to a1, a2, a3.
+
+v
+
+a1
+
+b1
+c1
+
+a2
+
+b2
+c2
+
+a3
+
+b3
+c3
+
+The four gold edges form a maximum matching.
+
+Deleting S ⇤{v} leaves three odd components. Each triangle must either send a matching
+edge to v or have an uncovered vertex. Since v can be used only once, every matching
+leaves at least two vertices uncovered, and hence has size at most (10 −2)/2 ⇤4. The
+matching
+
+{va1, b1c1, b2c2, b3c3}
+
+attains this bound. Thus G has no perfect matching, even though G is connected and has
+even order. The obstruction is o(G −S) −|S| ⇤3 −1 ⇤2.
+
+Theorem 5.13(Tutte’s 1-factor theorem, Tutte 1947). A graph G has a 1-factor if and only if
+
+o(G −S) |S| for all S ✓V(G).

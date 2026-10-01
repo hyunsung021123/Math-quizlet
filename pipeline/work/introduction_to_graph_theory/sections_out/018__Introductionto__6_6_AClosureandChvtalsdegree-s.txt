@@ -1,0 +1,154 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.6 [A] Closure and Chvátal's degree-sequence theorem
+직전 소단원: 「6.5 Menger's theorem and separator certificates」
+[본문]
+6.6. [A] Closure and Chvátal’s degree-sequence theorem
+•
+41
+
+Then |S| + |T| ⇤d(u) + d(v) ≥n, whereas S, T ✓[n −1]. Thus S \ T , ú, and any i 2 S \ T
+yields a Hamiltonian cycle of G.
+⇤
+
+Proof of Ore’s theorem. Add the missing edges of G one at a time until the graph is complete.
+Degrees never decrease, so the endpoints of each added edge have degree sum at least n.
+By Ore’s lemma, each addition preserves whether the graph is Hamiltonian. Since Kn is
+Hamiltonian for n ≥3, so is G.
+⇤
+
+6.6[A] Closure and Chvátal’s degree-sequence theorem
+
+We now deﬁne the closure operation used to apply Ore’s lemma repeatedly.
+
+Deﬁnition 6.35. A (Hamiltonian) closure of an n-vertex graph G is obtained by repeatedly
+joining nonadjacent vertices whose current degree sum is at least n, until no such pair
+remains. A graph is closed if no such pair exists.
+
+Theorem 6.36(Bondy–Chvátal, 1976). The closure of a graph is unique; that is, it does not depend
+on the order of edge additions. Denote it by C(G). A graph is Hamiltonian if and only if its closure
+is Hamiltonian.
+
+Proof. From an n-vertex graph G, form a closure G1 by adding e1, . . . , er in order and a closure
+G2 by adding f1, . . . , fs in order. Each addition joins vertices whose degree sum is at least n
+at that time. Once a pair becomes addable, it remains addable and therefore must be joined
+before the process terminates.
+
+If G2 * G1, let fi be the ﬁrst edge in the second sequence that is absent from G1. Since
+f1, . . . , fi−1 2 E(G1), the edge fi is addable to G1 and therefore must also belong to G1, a
+contradiction. Hence G2 ✓G1; by symmetry, G1 ✓G2.
+
+The second assertion follows from Ore’s lemma.
+⇤
+
+The closure theorem yields the following degree-sequence criterion, which strengthens
+Dirac’s theorem.
+
+Theorem 6.37(Chvátal, 1972). Let n ≥3, and let
+
+d1 d2 · · · dn
+
+be the degree sequence of an n-vertex graph G. If, for every integer i with 1 i < n/2,
+
+di > i
+or
+dn−i ≥n −i,
+
+then G is Hamiltonian.
+
+Proof. Adding edges cannot decrease any entry of the nondecreasing degree sequence, so the
+closure of G also satisﬁes Chvátal’s condition. By the closure theorem, it is enough to prove
+that every closed graph satisfying the condition is complete.
+
+Suppose that a closed graph G is not complete. Choose a nonadjacent pair u, v with
+maximum degree sum, and assume d(u) d(v). Since G is closed,
+
+d(u) + d(v) n −1.
+
+42
+•
+INTRODUCTION TO GRAPH THEORY
+
+If d(u) ⇤0, then d1 ⇤0 1, while the isolated vertex u implies dn−1 n −2 < n −1. Thus
+the condition fails at i ⇤1.
+
+Hence let i :⇤d(u) ≥1. Since 2d(u) d(u) + d(v) n −1, we have i < n/2. By the choice
+of u, v, every nonneighbor of v has degree at most d(u) ⇤i. There are
+
+n −1 −d(v) ≥d(u) ⇤i
+
+such vertices, so di i.
+
+Similarly, every nonneighbor of u has degree at most d(v). Together with u, these give
+n −d(u) ⇤n −i vertices of degree at most d(v). Since
+
+d(v) n −1 −d(u) < n −i,
+
+we obtain dn−i < n −i. Thus Chvátal’s condition fails at i, a contradiction.
+⇤
+
+6.7[A] A flow interpretation of matching and Menger
+
+Matching and Menger’s theorem both equate the size of a largest family with the size of
+a smallest obstruction. Network ﬂows put these equalities into a common framework. We
+develop this viewpoint here; the proofs above do not depend on it.
+
+Deﬁnition 6.38. A network is a ﬁnite directed multigraph D with distinct vertices s, t and
+nonnegative real capacities c(e) on its arcs. An s, t-ﬂow assigns numbers 0 f (e) c(e)
+such that the total entering each vertex other than s, t equals the total leaving it. Its value
+is the net amount leaving s:
+
+| f | :⇤
+
+’
+
+e2δ+
+
+D({s})
+
+f (e) −
+
+’
+
+e2δ−
+
+D({s})
+
+f (e).
+
+For s 2 S ✓V(D) \ {t}, the capacity of the s, t-cut (S, S) is c(S, S) :⇤Õ
+
+e2δ+
+
+D(S) c(e).
+
+Summing conservation over S \ {s} cancels the contributions of arcs within S, giving
+
+| f | ⇤
+
+’
+
+e2δ+
+
+D(S)
+
+f (e) −
+
+’
+
+e2δ−
+
+D(S)
+
+f (e) c(S, S).
+(6.1)
+
+Thus a cut bounds the value of every ﬂow.
+
+For an arc e ⇤uv, we may increase f (e) by up to c(e) −f (e), or cancel up to f (e) units by
+moving in the reverse direction. The residual network records these two choices as arcs uv
+and vu of capacities c(e) −f (e) and f (e), respectively; copies of capacity zero are omitted. A
+directed s, t-path in this network increases the ﬂow value by its smallest residual capacity,
+adding on forward copies and subtracting on reverse copies. Conservation is preserved at
+every internal vertex.

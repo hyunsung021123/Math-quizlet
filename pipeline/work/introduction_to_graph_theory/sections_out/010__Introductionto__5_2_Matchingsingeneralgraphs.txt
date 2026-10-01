@@ -1,0 +1,297 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 5. Matchings
+현재 소단원: 5.2 Matchings in general graphs
+직전 소단원: 「5.1 Matchings in bipartite graphs」
+[본문]
+22
+•
+INTRODUCTION TO GRAPH THEORY
+
+stars. Hence k ⇤n −|L|, and choosing one edge from each star yields a matching of size
+k ⇤n −|L| ⇤n −β0(G). Hence ↵0(G) ≥n −β0(G). This proves the theorem.
+⇤
+
+Combining the two identities with the Kőnig–Egerváry theorem gives ↵(G) ⇤β0(G) for
+every bipartite graph G with no isolated vertices.
+
+5.2Matchings in general graphs
+
+Hall’s condition does not extend directly to general graphs. For example, K2n+1 has the
+largest possible neighborhoods but cannot have a perfect matching because its order is odd.
+More generally, disjoint unions of odd cliques illustrate the parity obstruction. The following
+deﬁnitions capture the relationship between matching number and this obstruction.
+
+Deﬁnition 5.11. For k 2 N, a k-factor in a graph G is a k-regular spanning subgraph of G.
+An odd component is a component of odd order. We write o(G) for the number of odd
+components of G.
+
+Hall’s theorem gives a set S ✓X such that ↵0(G) ⇤|X| −|S| + |N(S)|. If we delete T :⇤N(S),
+every vertex of S becomes isolated. Thus, when |S| > |T|, every matching leaves at least
+|S| −|T| vertices of S uncovered.
+
+The same idea extends to general graphs. For any T ✓V(G), every matching leaves at least
+o(G −T) −|T| vertices uncovered (a vacuous bound when this quantity is negative). As in
+Hall’s theorem, this turns out to be the correct obstruction. First consider a small example.
+
+Example 5.12(Three odd components and one available vertex). Take three disjoint triangles
+aibiciai, for i ⇤1, 2, 3, and add a vertex v adjacent to a1, a2, a3.
+
+v
+
+a1
+
+b1
+c1
+
+a2
+
+b2
+c2
+
+a3
+
+b3
+c3
+
+The four gold edges form a maximum matching.
+
+Deleting S ⇤{v} leaves three odd components. Each triangle must either send a matching
+edge to v or have an uncovered vertex. Since v can be used only once, every matching
+leaves at least two vertices uncovered, and hence has size at most (10 −2)/2 ⇤4. The
+matching
+
+{va1, b1c1, b2c2, b3c3}
+
+attains this bound. Thus G has no perfect matching, even though G is connected and has
+even order. The obstruction is o(G −S) −|S| ⇤3 −1 ⇤2.
+
+Theorem 5.13(Tutte’s 1-factor theorem, Tutte 1947). A graph G has a 1-factor if and only if
+
+o(G −S) |S| for all S ✓V(G).
+
+5.2. Matchings in general graphs
+•
+23
+
+Deﬁnition 5.14. The deﬁciency of a vertex set S ✓V(G) is
+
+defG(S) :⇤o(G −S) −|S|,
+
+and the deﬁciency of G is def(G) :⇤maxS✓V(G) defG(S).
+
+In Example 5.12, the set {v} has deﬁciency two, and the displayed matching shows that no
+set can have larger deﬁciency. Thus def(G) ⇤2.
+
+This deﬁciency determines the maximum matching size through the following Berge–Tutte
+formula.
+
+Theorem 5.15(Berge–Tutte formula). For every n-vertex graph G,
+
+↵0(G) ⇤n −def(G)
+
+2
+⇤min
+
+S✓V(G)
+
+n −defG(S)
+
+2
+.
+
+The Berge–Tutte formula implies Tutte’s 1-factor theorem, so it suﬃces to prove the formula.
+
+Lemma 5.16. If S is a set of vertices in an n-vertex graph G, then
+
+o(G −S) −|S| ⌘n
+(mod 2).
+
+Proof. Indeed, o(G −S) −|S| ⌘o(G −S) + |S| ⌘n (mod 2).
+⇤
+
+This parity observation will let us strengthen a strict inequality by one.
+
+Lemma 5.17. Let T be maximal among the vertex sets satisfying defG(T) ⇤def(G). If u belongs
+to an odd component C of G −T, then C −u satisﬁes Tutte’s condition. Moreover, G −T has no
+even component.
+
+Proof. For S ✓V(C −u), the odd components of C −u −S are in C −u. Thus,
+
+defG(T [ {u} [ S) ⇤o(G −T −u −S) −(|T| + 1 + |S|)
+
+⇤o(G −T) −1 + o(C −u −S) −|T| −1 −|S|
+
+⇤defG(T) −2 + defC−u(S).
+
+Since C −u has even order, defC−u(S) is even by the parity lemma. If it were positive, it would
+be at least two, so the displayed identity would contradict the maximal choice of T. Hence
+defC−u(S) 0 for all S ✓V(C −u), which is Tutte’s condition.
+
+If G −T had an even component C, choose a leaf v of a spanning tree of C. Then C −v
+is connected and has odd order. Passing from T to T [ {v} increases both the number of
+odd components and the size of the deleted set by one, so the deﬁciency is unchanged. This
+contradicts the maximality of T.
+⇤
+
+Proof of Berge-Tutte formula. Every matching leaves at least defG(S) vertices uncovered for each
+S ✓V(G). It remains to construct a matching of size 1
+
+2(n −def(G)).
+We use induction on n, the case n ⇤0 being immediate. Let n > 0, set d :⇤def(G), and
+choose T as in the previous lemma. The graph G −T has no even components, and C −u
+satisﬁes Tutte’s condition whenever u lies in a component C of G −T. Since C −u has fewer
+
+24
+•
+INTRODUCTION TO GRAPH THEORY
+
+than n vertices, the induction hypothesis gives it a perfect matching. It remains to match the
+vertices of T into |T| distinct components of G −T.
+
+Let Y be the set of all |T| + d (odd) components of G −T. To obtain the desired matching
+covering T, we consider an auxiliary T, Y-bigraph H. Let H have an edge ty for t 2 T, y 2 Y if
+and only if t is adjacent in G to some vertex of the component of G −T corresponding to y.
+
+For S ✓T, all vertices of Y other than those in NH(S) form odd components of G −(T −S).
+By the deﬁnition of d ⇤def(G), we have defG(T −S) d, and hence
+
+(|Y| −|NH(S)|) −|T −S| d.
+
+Since |Y| ⇤|T| + d, the inequality becomes |S| |NH(S)|. By Hall’s theorem, H has a matching
+covering T.
+
+For each matched pair tC, choose an edge tuC with uC 2 V(C) and a perfect matching of
+C −uC. In every unmatched odd component C, choose any vertex uC and a perfect matching
+of C −uC. The union is a matching that leaves exactly |Y| −|T| ⇤d vertices uncovered, and
+therefore has size (n −d)/2.
+⇤
+
+The Berge–Tutte formula has a useful consequence for regular graphs.
+
+Corollary 5.18(Petersen, 1891). Every 3-regular graph with no cut-edge has a 1-factor.
+
+Proof. Let S ✓V(G), and let C be an odd component of G −S. Counting the degrees of the
+vertices of C gives
+
+3|V(C)| ⇤2e(C) + eG(S, V(C)).
+
+Thus eG(S, V(C)) is odd. It cannot equal one, since that one edge would be a cut-edge of G.
+Hence every odd component sends at least three edges to S, and
+
+3o(G −S) eG(S, V(G) \ S) 3|S|.
+
+Therefore defG(S) 0 for every S. Since defG(ú) ⇤o(G) ≥0, we have def(G) ⇤0. The
+Berge–Tutte formula gives ↵0(G) ⇤|V(G)|/2, so G has a perfect matching.
+⇤
+
+The assumption that there is no cut-edge is necessary. For example, take three copies
+C1, C2, C3 of K5 −(P3 + K2). Each copy has a unique degree-two vertex, say ai in Ci, and all its
+other vertices have degree three. Add a new vertex v and the edges va1, va2, va3.
+
+v
+
+a1
+
+C1
+
+a2
+
+C2
+
+a3
+
+C3
+
+Each dotted group has ﬁve vertices. The three gold edges are cut-edges.
+
+The resulting graph is 3-regular, but deleting v leaves the three odd components C1, C2, C3.
+Thus
+
+defG({v}) ⇤o(G −v) −1 ⇤3 −1 ⇤2,
+
+so every matching leaves at least two vertices uncovered. In particular, the graph has no
+1-factor.
+
+5.3. [A] Factors beyond perfect matchings
+•
+25
+
+5.3[A] Factors beyond perfect matchings
+
+Using Tutte’s 1-factor theorem, we can deduce a theorem regarding more general factors. The
+following deﬁnition provides a concept more general than k-factors.
+
+Deﬁnition 5.19. Given a graph G and f : V(G) ! N0, an f -factor of G is a spanning
+subgraph H such that dH(v) ⇤f (v) for all v 2 V(G).
+
+We can reduce the f -factor problem to a perfect-matching problem. Assume f (v) dG(v)
+for every vertex and set r(v) :⇤dG(v) −f (v). Replace each vertex v by a copy of KdG(v),r(v) with
+parts A(v) and B(v). Index the vertices of A(v) by the edge incidences at v. For every edge,
+join the two vertices corresponding to its two incidences. (A loop has two distinct incidences
+at the same vertex.) Call the resulting graph H.
+
+For example, take G ⇤K3 with f (a) ⇤f (b) ⇤1 and f (c) ⇤2. Then r(a) ⇤r(b) ⇤1 and
+r(c) ⇤0. The construction is shown below; ve denotes the vertex of A(v) corresponding to the
+incidence of edge e at v.
+
+G
+
+a
+b
+
+c
+
+f (a) ⇤f (b) ⇤1
+
+f (c) ⇤2
+
+H
+
+aab
+
+aac
+
+bab
+
+bbc
+
+cac
+cbc
+
+A(a)
+A(b)
+
+A(c)
+
+B(a)
+B(b)
+
+B(c) ⇤ú
+
+Blue edges join A(v) to B(v) inside each replacement. Gold dashed edges join the two incidences of
+
+each original edge.
+
+Here a and b are each replaced by K2,1, while c is replaced by K2,0, consisting of two vertices
+and no edges. For instance, the edge ac becomes aaccac. Thus H has eight vertices; it is an
+auxiliary graph, not an f -factor of G.
+
+Theorem 5.20. A multigraph G has an f -factor if and only if the graph H constructed from G as
+above has a 1-factor.
+
+Proof. If G has an f -factor, select the corresponding edges in H. They leave exactly r(v) vertices
+of A(v) unmatched, which can be matched bĳectively to B(v).
+
+Conversely, in a perfect matching of H, exactly r(v) vertices of A(v) are matched into B(v).
+The remaining f (v) vertices are matched through edges corresponding to edges of G. Taking
+precisely those original edges gives degree f (v) at every vertex v, hence an f -factor.
+⇤
+
+Thus any algorithm for perfect matching can also test for an f -factor. With further work,
+this reduction leads to Tutte’s f -factor theorem, whose proof we omit. For f : V(G) ! N0, let
+
+f (S) ⇤Õ
+
+v2S f (v). Let q(S, T) denote the number of components C of G −(S [ T) such that
+eG(C, T) + f (V(C)) is odd.

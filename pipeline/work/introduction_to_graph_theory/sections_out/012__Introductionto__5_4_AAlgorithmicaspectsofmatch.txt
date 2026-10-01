@@ -1,0 +1,218 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 5. Matchings
+현재 소단원: 5.4 [A] Algorithmic aspects of matchings
+직전 소단원: 「5.3 [A] Factors beyond perfect matchings」
+[본문]
+26
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 5.21(Tutte’s f -factor theorem). G has an f -factor if and only if
+
+q(S, T) −
+
+’
+
+v2T
+
+dG−S(v) f (S) −f (T)
+
+holds for all disjoint subsets S, T ✓V(G).
+
+When f (v) ⇤1 for every v and T ⇤;, these inequalities are exactly Tutte’s condition
+
+o(G −S) |S| for a perfect matching.
+
+5.4[A] Algorithmic aspects of matchings
+
+Brute force examines all 2m edge subsets of an m-edge graph. A greedy algorithm is faster
+but may stop at a maximal matching that is not maximum: on P6, for example, the second and
+fourth edges form a maximal matching of size two, although a matching of size three exists.
+
+Deﬁnition 5.22. Given a matching M, an M-alternating path alternates between edges in M
+and edges outside M. An M-augmenting path is a positive-length alternating path whose
+two endpoints are uncovered by M.
+
+If P is M-augmenting, then
+
+M0 :⇤(M \ E(P)) [ (E(P) \ M)
+
+is a matching with |M0| ⇤|M| + 1.
+
+M
+M
+uncovered
+uncovered
+
+Figure 5.2. An augmenting path. Replacing the two highlighted matching edges by the other three path
+edges increases the matching size by one.
+
+For two edge sets A and B, their symmetric diﬀerence is A4B :⇤(A \ B) [ (B \ A).
+
+Theorem 5.23(Berge, 1957). A matching M in a graph G is maximum if and only if G has no
+
+M-augmenting path.
+
+Proof. An augmenting path immediately produces a larger matching, as observed above.
+Conversely, suppose that G has a matching M0 with |M0| > |M|, and consider the spanning
+subgraph with edge set M4M0. Every component is a path, an even cycle, or an isolated
+vertex, and its edges alternate between M and M0. Since M0 has more edges in total, some
+path component has one more edge of M0 than of M. It begins and ends with edges of M0 and
+is therefore an M-augmenting path.
+⇤
+
+The theorem leads to a concrete search algorithm in bipartite graphs.
+
+5.4. [A] Algorithmic aspects of matchings
+•
+27
+
+Algorithm 5.24(Bipartite augmenting-path search). Let G have bipartition (X, Y) and current
+matching M. Let U ✓X be the uncovered vertices. Initialize S :⇤U and T :⇤ú, and mark
+every vertex of X as unscanned.
+
+While some vertex x 2 S is unscanned, scan every edge xy < M with y < T. Add y to
+T and record x as its predecessor. If y is uncovered, follow the predecessor pointers back
+to U to recover an augmenting path, augment M, and restart the search. If y is matched
+to w 2 X, add w to S and record y as its predecessor. After all such edges at x have been
+considered, mark x as scanned.
+
+If every vertex of S is scanned without reaching an uncovered vertex of Y, stop: no
+augmenting path exists, and (X \ S) [ T is a minimum vertex cover.
+
+Theorem 5.25. Repeated application of Algorithm 5.24 produces a maximum matching M and a
+vertex cover of size |M|.
+
+Proof. At an unsuccessful search, every nonmatching edge from S ends in T, and every
+matching edge from S also ends in T. Thus no edge joins S to Y \ T, so (X \ S) [ T is a vertex
+cover.
+
+Every vertex of S \ U is the mate of a unique vertex of T, and every vertex of T is matched;
+otherwise the search would have found an augmenting path. Hence |T| ⇤|S| −|U|. Since M
+covers precisely X \ U,
+
+|(X \ S) [ T| ⇤|X| −|S| + |T| ⇤|X| −|U| ⇤|M|.
+
+A matching cannot be larger than a vertex cover, so both are optimal.
+⇤
+
+After isolated vertices are set aside, each search takes O(m) time, and each successful
+search increases |M| by one. There are at most n/2 successful searches, giving an O(n + mn)
+implementation, where n ⇤|V(G)| and m ⇤e(G). Hopcroft and Karp (1973) ﬁnd many
+shortest augmenting paths simultaneously and run in O((m + n)pn) time.
+
+Odd cycles complicate the same search in nonbipartite graphs. Edmonds’ blossom algorithm
+contracts certain odd alternating cycles, called blossoms, while preserving the existence of
+augmenting paths; the contracted graph need not be bipartite. Micali and Vazirani (1980) later
+gave an O(mpn) algorithm for general graphs after isolated vertices are set aside.
+
+Sometimes feasibility is not enough: preferences also matter. Consider two sets X and Y of
+equal size n, with each vertex having a strict preference order over the vertices in the other set.
+
+Deﬁnition 5.26. A perfect matching is stable if it has no blocking pair: an unmatched pair
+(x, y) 2 X ⇥Y such that both x and y prefer one another to their assigned partners.
+
+Algorithm 5.27(Gale–Shapley deferred-acceptance algorithm). Initially every vertex is free.
+While some free x 2 X has not proposed to every vertex of Y, let x propose to the
+
+highest-ranked y to whom it has not yet proposed. If y is free, y tentatively accepts x.
+Otherwise, y keeps the preferred of the current partner and x, rejecting the other. Stop
+when no proposer in X is free.
+
+28
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 5.28(Gale–Shapley, 1962). The deferred-acceptance algorithm terminates after at most
+
+n2 proposals and produces a stable perfect matching.
+
+Proof. No ordered pair (x, y) is considered twice, so at most n2 proposals occur. Once a vertex
+of Y receives a proposal, it remains tentatively matched and can only exchange its partner
+for a more preferred one. Because the two parts have equal size and every preference list is
+complete, termination leaves no vertex free, so the matching is perfect.
+
+Suppose that (x, y) blocks the ﬁnal matching. Since x prefers y to its ﬁnal partner, x
+proposed to y earlier. The vertex y rejected x (at that moment or later) only in favor of someone
+it preferred to x, and its tentative partner could only improve thereafter. Thus y cannot prefer
+x to its ﬁnal partner, a contradiction.
+⇤
+
+The proposing side receives a stronger guarantee. Write M(x) for the partner of x in a
+perfect matching M. A stable matching M is X-optimal if, for every stable matching N and
+every x 2 X, either M(x) ⇤N(x) or x prefers M(x) to N(x). Thus each vertex of X gets its best
+partner among all stable matchings, not necessarily among all perfect matchings.
+
+Corollary 5.29(X-optimality). With X proposing, the deferred-acceptance algorithm produces the
+unique X-optimal stable matching. In particular, its output does not depend on the order in which
+free vertices of X propose.
+
+Proof. We ﬁrst show that no pair belonging to a stable matching is ever rejected. Otherwise,
+consider the ﬁrst such rejection: y rejects x in favor of x0, and let N be a stable matching
+containing xy. Write y0 ⇤N(x0); then y0 , y. If x0 preferred y0 to y, it would have proposed to
+
+y0 and been rejected before proposing to y. Since x0y0 2 N, this contradicts the choice of the
+ﬁrst rejection. Hence x0 prefers y to y0. But y prefers x0 to x, so (x0, y) blocks N, a contradiction.
+
+Now let M be the output. Every vertex that x prefers to M(x) has already rejected x, and
+therefore cannot be its partner in any stable matching. Thus M is X-optimal. Strict preferences
+make each vertex’s best possible stable partner unique, so the matching is unique as well.
+⇤
+
+This proposer-optimality is also part of the original Gale–Shapley theorem [GS62].
+
+CHAPTER 6
+
+Connectivity and cycles
+
+6.1Connectivity
+
+We saw that trees are minimally connected graphs. We now ask how to quantify higher levels
+
+of connectivity. The following deﬁnitions measure how resistant a graph is to the deletion of
+vertices or edges.
+
+Deﬁnition 6.1. A separating set or vertex cut of a graph G is a set S ✓V(G) such that G −S
+has more than one component. A graph G is k-connected if it has more than k vertices
+and every separating set has size at least k. The connectivity of G, written (G), is the
+maximum k such that G is k-connected.
+
+The convention for complete graphs deserves mention. Since Kn has no separating set,
+the condition on its order is decisive: Kn is k-connected precisely when k n −1, and
+hence (Kn) ⇤n −1. Although this convention may initially seem artiﬁcial, it makes general
+statements about connectivity work uniformly; for example, deleting one edge reduces
+vertex-connectivity by at most one.
+
+Deﬁnition 6.2. Let G be a multigraph with at least two vertices. We say that G is k-edge-
+connected if G −F is connected for every F ✓E(G) with |F| < k. Its edge-connectivity
+is
+
+0(G) :⇤max{k : G is k-edge-connected}.
+
+For vertex sets S, T ✓V(G), let [S, T] denote the set of edges with one endpoint in S and
+the other in T. For ú , S ( V(G), the set
+
+[S, S],
+S :⇤V(G) \ S,
+
+is an edge cut.
+
+Vertex-connectivity and edge-connectivity are both natural measures of robustness. For
+edge-connectivity, it suﬃces to consider edge cuts, as the next proposition shows.
+
+Proposition 6.3. Every minimal set of edges whose deletion disconnects a graph is an edge cut.
+
+Proof. Let F be minimal such that G −F is disconnected, and let S be the vertex set of a
+component of G −F. Every edge between S and S belongs to F, so [S, S] ✓F. Since deleting
+[S, S] already disconnects G, the minimality of F gives F ⇤[S, S].
+⇤
+
+Minimal here means that no proper subset of F disconnects the graph; F need not have the
+smallest size among all disconnecting edge sets.
+
+One way to disconnect a graph is to isolate a vertex, either by deleting its neighbors or by
+deleting its incident edges. This observation relates vertex-connectivity, edge-connectivity,
+and minimum degree.
+
+29

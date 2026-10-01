@@ -1,0 +1,199 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.3 3-connected graphs by contraction
+직전 소단원: 「6.2 2-connected graphs」
+[본문]
+6.3. 3-connected graphs by contraction
+•
+33
+
+at its end. If that end is u, then uv [ P is a closed ear, and otherwise it is an ear. Either case
+contradicts maximality.
+⇤
+
+Weak ear decompositions are useful for understanding 2-edge-connected graphs. As an
+application, imagine turning every street of a city into a one-way street while preserving the
+ability to travel from every location to every other. This motivates the following deﬁnition.
+
+Deﬁnition 6.13. A digraph D is strongly connected, or strong, if for every ordered pair
+u, v 2 V(D) there is a directed path from u to v.
+
+The question is which graphs admit a strong orientation. Robbins’ theorem gives a complete
+characterization.
+
+Corollary 6.14(Robbins, 1939). A multigraph with at least two vertices has a strong orientation if
+and only if it is 2-edge-connected.
+
+Proof. ()) A strong orientation has a connected underlying multigraph. If there were a
+cut-edge, one could not travel both ways across its cut.
+
+(() Use a weak ear decomposition of G. Orient the initial cycle consistently. Orient every
+new open ear from one endpoint to the other, and orient every new closed ear consistently
+around its cycle. In either case, each new vertex can be reached from the old strong digraph
+and can reach it, so the enlarged digraph remains strong. After all ears have been added, the
+resulting orientation of G is strong.
+
+⇤
+
+6.33-connected graphs by contraction
+
+A vertex k-split replaces one vertex by two adjacent vertices. We now consider the inverse
+operation, which contracts two adjacent vertices into one.
+
+Deﬁnition 6.15. Given an edge e in a graph G, the contraction G/e is the graph obtained
+from G by replacing the endpoints of e with a single vertex whose neighbors are their
+neighbors in G outside e. We say that G/e is obtained from G by contracting e. A
+k-contractible edge is an edge whose contraction leaves a k-connected graph.
+
+Depending on the application, a diﬀerent convention for contraction may be preferable. In
+a multigraph, one may retain parallel edges by making the new vertex incident with every
+edge other than e that was incident with an endpoint of e. Here we work only with simple
+graphs and use the preceding deﬁnition.
+
+34
+•
+INTRODUCTION TO GRAPH THEORY
+
+Example: which edge should we contract? Let G be the wheel consisting of the cycle abcda
+and a vertex h adjacent to all four vertices of the cycle. This graph is 3-connected: if h
+survives the deletion of at most two vertices, it joins all remaining vertices; if h is deleted,
+the remaining cycle has lost at most one vertex and is still connected.
+
+G
+a
+b
+
+c
+d
+
+h
+
+(G) ⇤3
+
+G/ab ⇤K4
+
+z
+
+c
+d
+
+h
+
+z ⇤{a, b}
+
+G/ha
+
+z
+b
+
+c
+d
+
+z ⇤{h, a}
+
+Contracting the solid gold edge ab gives K4, so ab is 3-contractible. In contrast,
+contracting the dashed gold edge ha gives K4 with the edge bd missing. The highlighted
+vertices z, c form a separating set in this graph, so ha is not 3-contractible. In both
+contractions, edges to a common neighbor become a single edge. The next lemma
+guarantees a suitable edge, not that every edge is suitable.
+
+The following lemma will be useful for understanding 3-connected graphs.
+
+Lemma 6.16(Contraction lemma, Tutte 1961). Every 3-connected graph other than K4 has a
+3-contractible edge.
+
+Proof. The following argument is due to Thomassen (1980).
+
+Let G be a 3-connected graph with at least ﬁve vertices. If G has no contractible edge, then
+each G/e has a separating 2-set, which consists of the vertex obtained by contracting e and
+some other vertex z. If e ⇤xy, then {x, y, z} is a separating set in G.
+
+Among all the edges of G, choose an adjacent pair {x, y} and their ‘companion’ z so that
+the resulting disconnected graph G −{x, y, z} has a component H with largest possible order.
+Let H0 be another component of this graph. Since {x, y, z} is a minimal separating set, each
+element of {x, y, z} has neighbors in both H and H0. Let u be a neighbor of z in H0. As zu is
+an edge, there exists v such that {z, u, v} is a separating set.
+
+The subgraph of G induced by V(H) [ {x, y} is connected. Moreover, deleting v from
+this subgraph (if v lies in it) cannot disconnect it, since otherwise {z, v} would separate G.
+Hence G[V(H) [ {x, y}] −v lies in a component of G −{z, u, v} with more vertices than H,
+contradicting the choice of {x, y, z}. Therefore G has a contractible edge.
+⇤
+
+This lemma provides a way to construct every 3-connected graph.
+
+Theorem 6.17. A graph is 3-connected if and only if it can be obtained from K4 by a sequence of
+vertex 3-splits.
+
+Proof. Starting from a 3-connected graph, repeatedly contract a 3-contractible edge while
+more than four vertices remain. The lemma allows every step, and the ﬁnal graph is K4, the
+only 3-connected graph on four vertices. Reversing these contractions gives vertex 3-splits:
+each restored vertex has degree at least 3, and the neighborhoods have exactly the union
+
+6.4. Connectivity and independent paths
+•
+35
+
+required in the deﬁnition of a split. Conversely, K4 is 3-connected, and vertex 3-splits preserve
+3-connectivity.
+⇤
+
+For k ≥4, the contraction argument above no longer works in general. We now turn to
+consequences of connectivity, especially the existence of multiple internally disjoint paths.
+
+6.4Connectivity and independent paths
+
+Just as a connected graph contains an x, y-path for every pair x, y, a highly connected graph
+contains many internally disjoint paths. The analogous statement also holds for digraphs, so
+we introduce both settings together.
+
+Deﬁnition 6.18. A digraph D is k-connected if |V(D)| > k and D −S is strongly connected
+for every S ✓V(D) with |S| < k. Its connectivity (D) is the maximum such k.
+
+For ú , S ( V(D), let
+
+δ+
+
+D(S) :⇤{−!
+uv 2 E(D) : u 2 S, v < S},
+δ−
+
+D(S) :⇤{−!
+uv 2 E(D) : u < S, v 2 S}.
+
+The digraph D is k-edge-connected if |δ+
+
+D(S)| ≥k for every nonempty proper subset
+S ⇢V(D).
+
+The vertex-connectivity statements below are for graphs and for digraphs without parallel
+arcs. In the edge-connectivity statements, parallel edges or arcs may be allowed and are
+counted separately.
+
+Deﬁnition 6.19. Let x and y be distinct vertices. Two x, y-paths are independent if they
+have no common internal vertex. Let λG(x, y) denote the maximum number of pairwise
+independent x, y-paths.
+
+If xy < E(G) in an undirected graph, or −!
+xy < E(G) in a digraph, an x, y-separating set is
+a set
+
+S ✓V(G) \ {x, y}
+
+such that G −S has no x, y-path. Let G(x, y) be the minimum size of such a set.
+
+Every x, y-separating set meets pairwise independent x, y-paths in distinct internal vertices,
+so
+
+λG(x, y) G(x, y).
+
+If an undirected graph G is not complete, then
+
+(G) ⇤min{G(x, y) : x , y, xy < E(G)};
+
+whereas (Kn) ⇤n −1.
+
+6.5Menger’s theorem and separator certiﬁcates
+
+To state the edge version of Menger’s theorem, we need the following deﬁnitions.

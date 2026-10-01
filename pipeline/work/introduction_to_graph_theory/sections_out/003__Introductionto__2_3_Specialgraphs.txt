@@ -1,0 +1,212 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 2. Basic concepts
+현재 소단원: 2.3 Special graphs
+직전 소단원: 「2.2 Isomorphism and subgraphs」
+[본문]
+2.2. Isomorphism and subgraphs
+•
+5
+
+2.2Isomorphism and subgraphs
+
+Vertex names carry no structural information. For example,
+
+G ⇤([5], {12, 23, 34, 45, 51})
+and
+G0 ⇤({a, b, c, d, e}, {ab, bc, cd, de, ea})
+
+describe the same ﬁve-cycle after relabeling the vertices.
+
+Deﬁnition 2.2. An isomorphism from a graph G to a graph H is a bĳection f : V(G) ! V(H)
+such that
+
+uv 2 E(G)
+()
+f (u) f (v) 2 E(H).
+
+If such a map exists, then G and H are isomorphic, written G ' H. An unlabeled graph is an
+isomorphism class of graphs.
+
+Graph isomorphism is an equivalence relation. In informal statements we usually identify
+isomorphic graphs.
+
+Deﬁnition 2.3. A graph H is a subgraph of G if V(H) ✓V(G) and E(H) ✓E(G). It is spanning
+if V(H) ⇤V(G). For U ✓V(G), the induced subgraph G[U] has vertex set U and contains
+every edge of G with both endpoints in U.
+
+We write G −U :⇤G[V(G) \ U] for vertex deletion and G −F for the spanning subgraph
+obtained by deleting an edge set F. For a single vertex or edge, we abbreviate these as G −v
+and G −e. If u, v are distinct nonadjacent vertices, G + uv is obtained by adding the edge uv.
+For disjoint vertex sets S, T, let eG(S, T) be the number of edges between them; a subgraph in
+either argument stands for its vertex set.
+
+Let G ⇤([4], {12, 23, 34, 41, 13}). The four-cycle with edge set {12, 23, 34, 41} is spanning
+but not induced, because it omits the edge 13. In contrast, G[{1, 2, 4}] has edge set {12, 14}, so
+it is induced but not spanning.
+
+G
+spanning, not induced
+induced, not spanning
+
+1
+2
+
+3
+4
+
+1
+2
+
+3
+4
+
+1
+2
+
+4
+
+Figure 2.2. A graph, a spanning subgraph, and an induced subgraph.
+
+2.3Special graphs
+
+For a simple graph G ⇤(V, E), its complement is
+
+G ⇤
+
+✓
+
+V,
+
+✓
+
+V
+
+2
+
+◆
+
+\ E
+
+◆
+
+.
+
+Thus two distinct vertices are adjacent in exactly one of G and G.
+
+6
+•
+INTRODUCTION TO GRAPH THEORY
+
+Deﬁnition 2.4. The complete graph Kn has n vertices and all !n
+
+2
+" possible edges. The empty
+graph Kn has n vertices and no edges.
+
+A clique is a set of pairwise adjacent vertices, and an independent set (or stable set) is a
+set of pairwise nonadjacent vertices. Their maximum possible sizes are the clique number
+!(G) and the independence number ↵(G).
+
+Deﬁnition 2.5. A graph is r-partite if its vertex set can be partitioned into r independent sets,
+some of which may be empty. A 2-partite graph is bipartite. If V(G) ⇤X t Y is a partition
+into independent sets, then (X, Y) is a bipartition, and we may call G an X, Y-bigraph.
+
+For nonnegative integers a and b, the complete bipartite graph Ka,b has a bipartition
+(X, Y) with |X| ⇤a and |Y| ⇤b, and it contains all ab possible edges between X and Y.
+The graph K1,b is called a star; the vertex in its singleton part is its center, and the b vertices
+in the other part are its leaves.
+
+Deﬁnition 2.6. A graph is regular if all its vertices have the same degree, and it is k-regular
+if that common degree is k. For a nonempty graph, we write
+
+∆(G) :⇤max
+
+v2V(G) dG(v)
+and
+δ(G) :⇤min
+
+v2V(G) dG(v).
+
+Example 2.7(Degree bookkeeping in a multigraph). Return to the multigraph in Figure 2.1,
+whose edge multiset is
+
+{{11, 12, 12, 23, 34, 45, 15}}.
+
+The loop contributes two to dG(1), and the two copies of 12 are counted separately. Hence
+
+!
+
+dG(1), dG(2), dG(3), dG(4), dG(5)"
+
+⇤(5, 3, 2, 2, 2).
+
+In particular,
+’
+
+v2V(G)
+
+dG(v) ⇤14 ⇤2e(G),
+
+and the odd-degree vertices are precisely 1 and 2. This calculation illustrates the degree-
+sum identity used in the next lemma.
+
+Can a graph on seven vertices be 3-regular? The next lemma answers this immediately.
+
+Lemma 2.8(Handshake lemma). Every graph has an even number of vertices of odd degree.
+
+Proof. Each edge contributes two to the degree sum (a loop contributes two at the same vertex),
+so
+’
+
+v2V(G)
+
+dG(v) ⇤2e(G).
+(2.1)
+
+The sum is even, and therefore an even number of its odd summands occur.
+⇤
+
+A 3-regular graph on seven vertices would have degree sum 21, contradicting (2.1).
+
+2.4. Directed graphs
+•
+7
+
+2.4Directed graphs
+
+Some relations are directional: a web page links to another page, or a road may carry traﬃc in
+only one direction.
+
+Deﬁnition 2.9. A directed graph or digraph is a pair D ⇤(V, E) with E ✓V ⇥V. An element
+(u, v), also written −!
+uv, is an arc with tail u and head v. An oriented graph has no loops and
+never contains both −!
+uv and −!
+vu.
+
+The underlying graph of an oriented graph is obtained by forgetting the directions. An
+orientation of a graph G assigns one direction to each edge of G, and a tournament is an
+orientation of a complete graph.
+
+For a vertex v of a digraph D, set
+
+N+
+
+D(v) :⇤{w : −!
+vw 2 E(D)},
+N−
+
+D(v) :⇤{u : −!
+uv 2 E(D)}.
+
+The numbers d+
+
+D(v) :⇤|N+
+
+D(v)| and d−
+
+D(v) :⇤|N−
+
+D(v)| are its out-degree and in-degree. A source
+has in-degree 0; a sink has out-degree 0.
