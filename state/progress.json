@@ -27,15 +27,16 @@
       "section:1": true,
       "section:2": true,
       "section:3": true
-    }
+    },
+    "2_basic_concepts": {}
   },
   "lastPos": {
-    "topicId": "2_basic_concepts",
+    "topicId": "3_connections_in_graphs",
     "view": {
       "type": "section",
       "index": 0
     },
-    "cardIndex": 0
+    "cardIndex": 1
   },
-  "updatedAt": "2026-10-01T10:28:14.437Z"
+  "updatedAt": "2026-10-01T10:28:45.036Z"
 }
