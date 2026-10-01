@@ -143,6 +143,12 @@
       "title": "4. Graph search algorithms",
       "file": "4_graph_search_algorithms.json",
       "book": "Kim — Introduction to Graph Theory"
+    },
+    {
+      "id": "5_matchings",
+      "title": "5. Matchings",
+      "file": "5_matchings.json",
+      "book": "Kim — Introduction to Graph Theory"
     }
   ]
 }

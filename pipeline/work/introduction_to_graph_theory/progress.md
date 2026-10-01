@@ -37,10 +37,10 @@
 
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
-| 009 | [ ] | 5.1 Matchings in bipartite graphs | section | `009__Introductionto__5_1_Matchingsinbipartitegraphs.txt` |
-| 010 | [ ] | 5.2 Matchings in general graphs | section | `010__Introductionto__5_2_Matchingsingeneralgraphs.txt` |
-| 011 | [ ] | 5.3 [A] Factors beyond perfect matchings | section | `011__Introductionto__5_3_AFactorsbeyondperfectmatch.txt` |
-| 012 | [ ] | 5.4 [A] Algorithmic aspects of matchings | section | `012__Introductionto__5_4_AAlgorithmicaspectsofmatch.txt` |
+| 009 | [x] | 5.1 Matchings in bipartite graphs | section | `009__Introductionto__5_1_Matchingsinbipartitegraphs.txt` |
+| 010 | [x] | 5.2 Matchings in general graphs | section | `010__Introductionto__5_2_Matchingsingeneralgraphs.txt` |
+| 011 | [x] | 5.3 [A] Factors beyond perfect matchings | section | `011__Introductionto__5_3_AFactorsbeyondperfectmatch.txt` |
+| 012 | [x] | 5.4 [A] Algorithmic aspects of matchings | section | `012__Introductionto__5_4_AAlgorithmicaspectsofmatch.txt` |
 
 ## 6. Connectivity and cycles
 
