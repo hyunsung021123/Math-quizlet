@@ -1,0 +1,42 @@
+{
+  "completed": {
+    "chapter_0_introduction_and_examples": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
+    },
+    "chapter_1_polytopes_polyhedra_and_cones": {
+      "section:0": true,
+      "section:1": true
+    },
+    "chapter_0_some_underlying_geometric_noti": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true,
+      "section:4": true,
+      "section:5": true
+    },
+    "chapter_1_the_fundamental_group": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
+    },
+    "1_the_basics": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true
+    },
+    "2_basic_concepts": {}
+  },
+  "lastPos": {
+    "topicId": "3_connections_in_graphs",
+    "view": {
+      "type": "section",
+      "index": 0
+    },
+    "cardIndex": 1
+  },
+  "updatedAt": "2026-10-03T02:36:27.746Z"
+}
