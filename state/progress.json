@@ -61,16 +61,18 @@
       "section:4": true
     },
     "2_functions_on_affine_varieties": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
     }
   },
   "lastPos": {
     "topicId": "2_functions_on_affine_varieties",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 1
     },
-    "cardIndex": 16
+    "cardIndex": 4
   },
-  "updatedAt": "2026-10-08T14:21:44.683Z"
+  "updatedAt": "2026-10-08T14:21:56.929Z"
 }
