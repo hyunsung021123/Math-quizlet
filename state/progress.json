@@ -66,16 +66,18 @@
       "section:2": true
     },
     "3_projective_varieties": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true,
+      "section:2": true
     }
   },
   "lastPos": {
-    "topicId": "3_projective_varieties",
+    "topicId": "4_classical_projective_embeddings",
     "view": {
       "type": "section",
-      "index": 1
+      "index": 0
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-10-08T16:50:17.621Z"
+  "updatedAt": "2026-10-08T16:50:47.479Z"
 }
