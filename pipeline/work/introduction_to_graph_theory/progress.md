@@ -65,9 +65,9 @@
 | 024 | [x] | 7.4 Chromatic number and clique number | section | `024__Introductionto__7_4_Chromaticnumberandcliquenu.txt` |
 | 025 | [x] | 7.5 [A] Triangle-free graphs with large chromatic number | section | `025__Introductionto__7_5_ATriangle-freegraphswithla.txt` |
 | 026 | [x] | 7.6 Chromatic polynomials | section | `026__Introductionto__7_6_Chromaticpolynomials.txt` |
-| 027 | [ ] | 7.7 [A] Acyclic orientations and broken circuits | section | `027__Introductionto__7_7_AAcyclicorientationsandbro.txt` |
-| 028 | [ ] | 7.8 List coloring and Brooks' theorem | section | `028__Introductionto__7_8_ListcoloringandBrookstheor.txt` |
-| 029 | [ ] | 7.9 [A] Degree-choosability and the list version of Brooks' theorem | section | `029__Introductionto__7_9_ADegree-choosabilityandthe.txt` |
-| 030 | [ ] | 7.10 Edge-coloring of graphs | section | `030__Introductionto__7_10_Edge-coloringofgraphs.txt` |
-| 031 | [ ] | 7.11 [A] Perfect graphs | section | `031__Introductionto__7_11_APerfectgraphs.txt` |
-| 032 | [ ] | 7.12 [O] Homomorphisms, cores, and refined colorings | section | `032__Introductionto__7_12_OHomomorphismscoresandrefi.txt` |
+| 027 | [x] | 7.7 [A] Acyclic orientations and broken circuits | section | `027__Introductionto__7_7_AAcyclicorientationsandbro.txt` |
+| 028 | [x] | 7.8 List coloring and Brooks' theorem | section | `028__Introductionto__7_8_ListcoloringandBrookstheor.txt` |
+| 029 | [x] | 7.9 [A] Degree-choosability and the list version of Brooks' theorem | section | `029__Introductionto__7_9_ADegree-choosabilityandthe.txt` |
+| 030 | [x] | 7.10 Edge-coloring of graphs | section | `030__Introductionto__7_10_Edge-coloringofgraphs.txt` |
+| 031 | [x] | 7.11 [A] Perfect graphs | section | `031__Introductionto__7_11_APerfectgraphs.txt` |
+| 032 | [x] | 7.12 [O] Homomorphisms, cores, and refined colorings | section | `032__Introductionto__7_12_OHomomorphismscoresandrefi.txt` |
