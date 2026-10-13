@@ -27,15 +27,21 @@
       "section:1": true,
       "section:2": true,
       "section:3": true
+    },
+    "1_course_overview": {
+      "section:0": true
+    },
+    "2_basic_concepts": {
+      "section:0": true
     }
   },
   "lastPos": {
-    "topicId": "5_matchings",
+    "topicId": "2_basic_concepts",
     "view": {
       "type": "section",
       "index": 0
     },
-    "cardIndex": 4
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-13T15:42:35.804Z"
+  "updatedAt": "2026-10-13T15:42:49.157Z"
 }
