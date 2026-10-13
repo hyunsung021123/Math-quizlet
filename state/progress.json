@@ -30,12 +30,12 @@
     }
   },
   "lastPos": {
-    "topicId": "2_basic_concepts",
+    "topicId": "3_connections_in_graphs",
     "view": {
       "type": "section",
-      "index": 3
+      "index": 0
     },
-    "cardIndex": 1
+    "cardIndex": 2
   },
-  "updatedAt": "2026-10-13T10:59:20.407Z"
+  "updatedAt": "2026-10-13T10:59:44.613Z"
 }
