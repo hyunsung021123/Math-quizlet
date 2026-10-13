@@ -1,0 +1,192 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.6 Chromatic polynomials
+직전 소단원: 「7.5 [A] Triangle-free graphs with large chromatic number」
+[본문]
+65
+•
+INTRODUCTION TO GRAPH THEORY
+
+7.6Chromatic polynomials
+
+The chromatic number asks whether a proper coloring exists. We now count all of them. For a
+positive integer k, let PG(k) be the number of proper vertex colorings of G with colors in [k].
+The same deﬁnition extends to multigraphs. Parallel edges impose the same inequality twice
+and do not aﬀect this number. A loop makes a proper coloring impossible, so PG(k) ⇤0 when
+G has a loop.
+
+Example 7.12(The recurrence on a four-cycle). Let e be an edge of C4. Colorings in which the
+endpoints of e receive diﬀerent colors are precisely the proper colorings of C4. Colorings
+of C4 −e ⇤P4 in which those endpoints receive the same color become proper colorings
+of the triangle C4/e.
+
+e
+C4
+C4 −e ⇤P4
+C4/e ⇤K3
+
+Hence
+
+PC4(k) ⇤PP4(k) −PK3(k) ⇤k(k −1)3 −k(k −1)(k −2).
+
+After simpliﬁcation this is
+
+PC4(k) ⇤(k −1)4 + (k −1),
+
+which already suggests the general cycle formula proved below.
+
+Theorem 7.13(Deletion–contraction). If e is an edge of a graph G, then
+
+PG(k) ⇤PG−e(k) −PG/e(k).
+
+Consequently PG(k) agrees, on positive integers, with a polynomial in k of degree |V(G)| and
+leading coeﬃcient one.
+
+Here G/e is a graph: after identifying the endpoints of e and removing e, replace any resulting
+parallel edges by a single edge. This does not aﬀect proper vertex colorings.
+
+Proof. Every proper coloring of G −e belongs to exactly one of two classes. If the endpoints of
+e have diﬀerent colors, it is a proper coloring of G. If they have the same color, identifying
+the endpoints gives a proper coloring of G/e, and this operation is reversible. Thus PG−e(k) ⇤
+PG(k) + PG/e(k).
+
+Induct on the number of edges. The edgeless graph on n vertices has PG(k) ⇤kn. Deletion
+preserves the number of vertices, while contraction reduces it by one. Both G −e and G/e have
+fewer edges than G, so induction applies to both. Hence the recurrence gives a polynomial of
+degree n whose leading term comes only from the deletion term and is kn.
+⇤
+
+For the Tutte polynomial we will instead retain all edges other than the contracted edge,
+including any resulting parallel edges or loops. The deletion–contraction identity above also
+holds for a non-loop edge of a multigraph under that convention: parallel edges do not aﬀect
+the chromatic polynomial, while a loop makes it zero. The degree and leading-coeﬃcient
+conclusion requires the multigraph to be loopless.
+
+8.7. Chromatic polynomials
+•
+66
+
+Corollary 7.14(Three basic families). For n ≥1,
+
+PKn(k) ⇤k(k −1) · · · (k −n + 1),
+
+PT(k) ⇤k(k −1)n−1
+for every n-vertex tree T,
+
+PCn(k) ⇤(k −1)n + (−1)n(k −1)
+for n ≥3.
+
+Proof. For Kn, choose distinct colors successively. For a rooted tree, choose the root color and
+then give each non-root vertex any color diﬀerent from its parent’s color.
+
+For cycles with n ≥4, deletion–contraction gives PCn ⇤PPn −PCn−1. The stated formula
+follows by induction from PC3(k) ⇤k(k −1)(k −2).
+⇤
+
+Example 7.15(Di-1erent graphs with the same polynomial). The path P4 and the star K1,3 are
+not isomorphic: their maximum degrees are two and three, respectively. Nevertheless,
+both are trees on four vertices, so both have chromatic polynomial k(k −1)3.
+
+P4
+K1,3
+
+Graphs with the same chromatic polynomial are called chromatically equivalent. Thus the
+chromatic polynomial does not determine a graph up to isomorphism.
+
+Inclusion–exclusion and the coeﬃcients
+
+Deletion–contraction computes the polynomial recursively. The next formula expresses it
+directly as a sum over edge sets. For A ✓E(G), write c(A) for the number of components of
+the spanning subgraph (V(G), A), including its isolated vertices.
+
+Theorem 7.16(The subgraph expansion). For every graph G,
+
+PG(k) ⇤
+
+’
+
+A✓E(G)
+
+(−1)|A|kc(A).
+
+Proof. Start with all maps V(G) ! [k]. For each edge uv, exclude the maps giving u and v the
+same color. If these equalities are imposed for every edge in A, all vertices in each component
+of (V(G), A) must have the same color. Conversely, each component can be assigned a color
+independently, giving exactly kc(A) maps. Inclusion–exclusion gives the formula for every
+positive integer k, and hence as a polynomial identity.
+⇤
+
+Corollary 7.17(The ﬁrst three coe-1icients). Let G be an n-vertex graph with m edges and t
+triangles, where n ≥3. The coeﬃcients of kn, kn−1, and kn−2 in PG(k) are, respectively,
+
+1,
+−m,
+
+✓
+
+m
+
+2
+
+◆
+
+−t.
+
+67
+•
+INTRODUCTION TO GRAPH THEORY
+
+Proof. Only A ⇤; has c(A) ⇤n, and exactly the single-edge sets have c(A) ⇤n −1. To have
+c(A) ⇤n −2, the nontrivial components must be either two single edges or one connected
+graph on three vertices. Thus A consists of two edges, or of the three edges of a triangle. Each
+of the !m
+
+2
+"
+
+two-edge sets contributes +kn−2, and each triangle contributes −kn−2.
+⇤
+
+Example 7.18(Detecting a triangle). Let H be a triangle with one pendant vertex, as shown
+on the right. Both C4 and H have four vertices and four edges, but H has one triangle and
+C4 has none.
+
+C4
+H
+
+The triangle has k(k −1)(k −2) colorings, and its pendant vertex has k −1 choices once its
+neighbor is colored. Therefore
+
+PC4(k) ⇤k4 −4k3 + 6k2 −3k,
+
+PH(k) ⇤k(k −1)2(k −2) ⇤k4 −4k3 + 5k2 −2k.
+
+The diﬀerent coeﬃcients of k2 record the diﬀerent triangle counts.
+
+7.7[A] Acyclic orientations and broken circuits
+
+This section gives two combinatorial interpretations of the chromatic polynomial beyond
+counting colorings: its value at −1 counts acyclic orientations, and its coeﬃcients count edge
+sets that contain no broken circuit. The two results meet at the end of the section.
+
+Acyclic orientations
+
+An orientation of G is acyclic if it has no directed cycle. The polynomial also contains information
+at values that are not numbers of colors. For example, PC4(−1) ⇤24 −2 ⇤14. Of the 24 ⇤16
+orientations of C4, exactly two are directed cycles, leaving fourteen acyclic orientations. This is
+an instance of the following theorem.
+
+Theorem 7.19(Stanley’s acyclic-orientation interpretation). For an n-vertex graph G,
+
+(−1)nPG(−1)
+
+is the number of acyclic orientations of G.
+
+Proof. Write a(G) for the number of acyclic orientations of G. Fix an edge e ⇤uv, and let
+H ⇤G/e, with parallel edges replaced by a single edge as above. We will show that
+
+a(G) ⇤a(G −e) + a(H).
+
+Consider an acyclic orientation D of G −e. If D contains a directed path from u to v, only the
+direction u ! v can be assigned to e without creating a directed cycle. The reverse case is the

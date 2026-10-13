@@ -1,0 +1,66 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.2 Chromatic number and orientations
+직전 소단원: 「7.1 Chromatic number and bounds on it」
+[본문]
+61
+•
+INTRODUCTION TO GRAPH THEORY
+
+Deﬁnition 7.4. A graph G is k-degenerate if every nonempty subgraph has a vertex of
+degree at most k. The degeneracy of G is maxú,H✓G δ(H); that is, the minimum k such that
+G is k-degenerate. A smallest-last ordering of an n-vertex graph G is constructed iteratively
+from index n to 1 by letting vi be a vertex of minimum degree in G −{vi+1, . . . , vn}.
+
+For example, a k-regular graph has degeneracy k, and any tree with at least one edge is
+1-degenerate. Using this concept, the proof of Proposition 7.3 yields the following better
+bound.
+
+Proposition 7.5. If G is k-degenerate, then G is (k + 1)-colorable.
+
+Proof. In a smallest-last ordering, vi has at most k neighbors among v1, . . . , vi−1. Greedy
+coloring in this order therefore uses at most k + 1 colors.
+⇤
+
+The degeneracy plus one is called the coloring number. It need not equal the chromatic
+number. For example, a complete bipartite graph Kn,n has degeneracy n, but it is 2-colorable:
+color all vertices in one part with one color and all vertices in the other part with another color.
+
+7.2Chromatic number and orientations
+
+What other concepts are relevant to the chromatic number? If a graph G is colored with a
+
+coloring f using colors 1, . . . , k, then we can orient each edge uv with f (u) < f (v) from u to
+v. In this orientation, every directed path has length at most k −1. This shows that the lengths
+of directed paths in an orientation of the graph are relevant to the chromatic number. In fact,
+the following theorem provides an upper bound on χ(G) in terms of the orientations of G.
+
+Theorem 7.6(Gallai–Hasse–Roy–Vitaver theorem). For every orientation D of G,
+
+χ(G) 1 + `(D),
+
+where `(D) is the maximum length of a directed path in D. Equality holds for some orientation of
+G.
+
+Proof. It suﬃces to work component by component. Choose a maximal spanning acyclic
+subdigraph D0 of D. Label each vertex v by the number of vertices in a longest directed path
+of D0 ending at v.
+
+If −!
+uv 2 E(D0), then the label of v is larger than that of u. If −!
+uv 2 E(D) \ E(D0), maximality
+implies that D0 + −!
+uv contains a directed cycle, so D0 has a directed path from v to u; again the
+labels diﬀer. Thus the labels give a proper coloring. Every directed path in D0 is also one in D,
+so at most 1 + `(D) labels are used.
+
+Conversely, take a proper coloring with colors 1, . . . , χ(G) and orient every edge from its
+lower-colored endpoint to its higher-colored endpoint. This orientation is acyclic, and every
+directed path has at most χ(G) −1 edges. Hence equality holds for this orientation.
+⇤
+
+7.3Minty’s cycle-ratio characterization
+
+The preceding theorem relates coloring to directed paths. We now give a diﬀerent charac-
+terization using cycles of the underlying graph. In an acyclic orientation, traversing a cycle

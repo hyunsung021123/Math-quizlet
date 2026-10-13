@@ -1,0 +1,177 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.12 [O] Homomorphisms, cores, and refined colorings
+직전 소단원: 「7.11 [A] Perfect graphs」
+[본문]
+8.23. [O] Homomorphisms, cores, and reﬁned colorings
+•
+82
+
+Theorem 7.57(Lovász, 21083). A graph G is perfect if and only if !(H)↵(H) ≥|V(H)| for every
+induced subgraph H.
+
+Proof. We only need to show ((). Since every imperfect graph has a p-critical induced
+subgraph, it suﬃces to show that !(G)↵(G) < n when G is a p-critical graph of order n. Let
+↵⇤↵(G) and ! ⇤!(G).
+
+Let S0 be a maximum independent set in G with S0 ⇤{x1, . . . , x↵}. By the previous lemma,
+each G −xr is !-colorable. Let {S(r−1)!+1, . . . , Sr!} be the color classes in an optimal coloring
+of G −xr. For 0 j ↵!, the previous lemma yields that !(G −Sj) ⇤!, so a maximum
+clique Qj in G −Sj is an !-clique in G that avoids Sj.
+
+We claim that Qj intersects Si when i , j. The sets S(r−1)!+1, . . . , Sr! partition V(G −xr)
+into ! independent sets, and Qj contains at most one vertex of each (since Qj is a clique).
+
+If xr < Qj, then Qj must have exactly one vertex from each. If xr 2 Qj, then Qj has only
+! −1 vertices other than xr and hence misses exactly one of the sets in the coloring of G −xr.
+Since Qj can only have one vertex in S0, there is at most one independent set in the entire list
+that is missed by Qj. On the other hand, we know Qj misses Sj, since Qj was chosen as a
+maximum clique in G −Sj.
+
+Let A and B be the n ⇥(↵! + 1) incidence matrices for {S0, . . . , S↵!} and {Q0, . . . , Q↵!}.
+Since |Si \ Qj| ⇤1 when i , j and |Sj \ Qj| ⇤0, we have ATB ⇤J −I, where J is the all-1
+square matrix of order ↵! + 1. Since J −I is nonsingular, both A and B must have rank at least
+↵! + 1. Hence n ≥↵! + 1. We conclude that !(G)↵(G) < n.
+⇤
+
+Corollary 7.58(Perfect Graph Theorem; Lovász, 21083). A graph is perfect if and only if its comple-
+ment is perfect.
+
+Proof. Induced subgraphs of G are the complements of induced subgraphs of G, and ↵(H) ⇤
+!(H) and !(H) ⇤↵(H). Hence the condition in Theorem 7.57 holds for G if and only if it
+holds for G.
+⇤
+
+An odd hole is an induced odd cycle of length at least 5, and an odd antihole is the complement
+of an odd hole. Berge also conjectured the Strong Perfect Graph Theorem: a graph is perfect if
+and only if it contains neither an odd hole nor an odd antihole. Equivalently, the minimally
+imperfect graphs are precisely the odd holes and odd antiholes. The self-complementary
+formulation implies the Perfect Graph Theorem. Chudnovsky, Robertson, Seymour, and
+Thomas announced a proof in 2002; the full paper appeared in 2006 [CRST06].
+
+7.12[O] Homomorphisms, cores, and reﬁned colorings
+
+A proper k-coloring records only which vertices receive the same color. It can therefore be
+viewed as a map into a complete graph.
+
+Deﬁnition 7.59. A graph homomorphism ' : G ! H is a map ' : V(G) ! V(H) such that
+
+uv 2 E(G)
+⇤)
+'(u)'(v) 2 E(H).
+
+Graphs G and H are homomorphically equivalent if homomorphisms exist in both directions.
+
+83
+•
+INTRODUCTION TO GRAPH THEORY
+
+Since adjacent vertices of Kk are precisely the distinct ones,
+
+G is k-colorable
+()
+G ! Kk.
+
+Thus graph homomorphisms replace a palette of unrelated colors by a target graph that
+prescribes which pairs of labels are compatible.
+
+Deﬁnition 7.60. An endomorphism is a homomorphism G ! G. A graph H is a core if
+every endomorphism of H is an automorphism. If H is an induced subgraph of G, a
+homomorphism r : G ! H that ﬁxes H pointwise is a retraction.
+
+Example 7.61(The core is the irreducible target). Every connected bipartite graph with an
+edge maps to K2, and K2 maps back along any edge. Its core is therefore K2. In contrast, an
+odd cycle C2r+1 is a core. Indeed, an endomorphism maps its closed walk of odd length to
+an odd closed walk in the same cycle. A proper image would be a path, which is bipartite
+and contains no odd closed walk. Hence the image is the entire cycle, and a surjective
+endomorphism of a ﬁnite cycle is an automorphism.
+
+Proposition 7.62. Every ﬁnite graph is homomorphically equivalent to a core, unique up to
+isomorphism.
+
+Proof. Choose an endomorphism f : G ! G whose vertex image has minimum size, and
+let H :⇤G[ f (V(G))]. The choice of f implies that f |H is bĳective; otherwise f 2 would have
+a smaller image. A bĳective endomorphism of a ﬁnite graph is an automorphism, so some
+positive power of f |H is the identity. The same power of f is therefore a retraction onto H.
+Any nonautomorphic endomorphism of H, composed with f , would give an endomorphism
+of G with a smaller image. Hence H is a core.
+
+If cores H and H0 admit homomorphisms a : H ! H0 and b : H0 ! H, then ba and ab are
+automorphisms. Thus a is bĳective, and a−1 ⇤(ba)−1b is also a homomorphism. Hence a is an
+isomorphism.
+⇤
+
+For the following reﬁnements, assume that G has at least one edge. To reﬁne ordinary
+coloring around a circle, take positive integers p ≥2q and deﬁne the circular clique Kp/q on
+{0, . . . , p −1} by joining i and j when
+
+q |i −j| p −q.
+
+Equivalently, both arcs between i and j around the circle have length at least q. The circular
+chromatic number is
+
+χc(G) :⇤inf{p/q : G ! Kp/q}.
+
+When q ⇤1, the target is Kp, so χc(G) χ(G). One also has the sharper relation χ(G)−1 < χc(G);
+we state this without proof, since it is not needed for the example below.
+
+8.23. [O] Homomorphisms, cores, and reﬁned colorings
+•
+84
+
+Example 7.63(The ﬁve-cycle). The target K5/2 is itself a ﬁve-cycle: every residue is adjacent
+to the two residues at circular distance two. Hence C5 ! K5/2 and χc(C5) 5/2. We
+obtain the matching lower bound below from a fractional-coloring certiﬁcate.
+
+There is a diﬀerent reﬁnement obtained by allowing a color to be an independent set used
+for a fraction of the time.
+
+Deﬁnition 7.64. A fractional coloring assigns a nonnegative weight wI to every independent
+set I so that
+’
+
+I3v
+
+wI ≥1
+for every v 2 V(G).
+
+Its cost is Õ
+
+I wI, and the minimum cost is the fractional chromatic number χ f (G).
+
+Summing the covering inequalities gives
+
+|V(G)| 
+
+’
+
+I
+
+wI|I| ↵(G)
+
+’
+
+I
+
+wI,
+
+and therefore χ f (G) ≥|V(G)|/↵(G). For C5, give weight 1/2 to each of its ﬁve independent
+pairs. Every vertex lies in two such pairs, so this is a fractional coloring of cost 5/2. The lower
+bound is also 5/2, and hence
+
+χ f (C5) ⇤5
+
+2.
+
+In general a homomorphism G ! H transports a fractional coloring of H back to one of G.
+Moreover, Kp/q has a fractional coloring of cost p/q: give weight 1/q to each of the p cyclic
+intervals of q consecutive residues, which are independent. Thus χ f (G) χc(G). Combining
+this inequality with the circular map above yields
+
+χ f (C5) ⇤χc(C5) ⇤5
+
+2.
+
+The equality is special to this example; in general !(G) χ f (G) χc(G) χ(G), and each
+inequality can be strict.

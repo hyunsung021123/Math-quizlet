@@ -1,0 +1,431 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.10 Edge-coloring of graphs
+직전 소단원: 「7.9 [A] Degree-choosability and the list version of Brooks' theorem」
+[본문]
+8.21. Edge-coloring of graphs
+•
+74
+
+one chord in B. Since blocks are induced subgraphs, every edge of G joining two vertices
+of C lies in B. Thus H :⇤G[V(C)] is an even cycle with at most one chord, and hence, by
+Lemma 7.33, is a degree-choosable induced subgraph of G. Lemma 7.32 now implies that G is
+degree-choosable, a contradiction.
+⇤
+
+Proof of Theorem 7.29. Suppose χ`(G) > ∆(G). By Proposition 7.25, G is not (∆(G) −1)-
+degenerate. Hence G has a subgraph H with δ(H) ≥∆(G). Thus H is ∆(G)-regular. Since G is
+connected and vertices with degree ∆(G) in H have no neighbors outside H, we have H ⇤G.
+
+Thus G is ∆(G)-regular. Since χ`(G) > ∆(G), some list assignment L with |L(v)| ≥∆(G) ⇤
+d(v) for every vertex v admits no L-coloring, so G is not degree-choosable. Theorem 7.36 now
+implies that every block of G is a complete graph or an odd cycle. Since G is regular, G has
+only one block: if there were two or more, the cut-vertex of a leaf block B would have larger
+degree in G than the other vertices of B, since B is complete or a cycle, hence regular, while
+the cut-vertex also has neighbors outside B. Hence G is a complete graph or an odd cycle.
+⇤
+
+Since χ(G) χ`(G), this also gives a second proof of Theorem 7.28.
+
+7.10Edge-coloring of graphs
+
+For some problems, the pairwise relationships between objects are the main concern. For
+example, let vertices represent people and let an edge join each pair that must meet. If colors
+represent time slots, then two meetings involving the same person cannot receive the same
+color. This motivates edge-coloring.
+
+Deﬁnition 7.37. A k-edge-coloring of a loopless multigraph G is a labeling of its edges
+from a set of k colors; it is proper if incident edges receive distinct colors. We call G
+k-edge-colorable if it has a proper k-edge-coloring, and the edge-chromatic number or
+chromatic index χ0(G) is the minimum such k.
+
+Every color class of a proper edge-coloring is a matching. A loop cannot belong to a
+matching, which is why edge-coloring is restricted to loopless multigraphs. Because parallel
+edges must receive distinct colors, edge-coloring behaves diﬀerently for multigraphs and
+simple graphs.
+
+For loopless multigraphs, it is not diﬃcult to see that χ0(G) ⇤χ(L(G)), where L(G) is the
+line graph of Deﬁnition 6.20.
+
+Example 7.38(Reading the same edges as vertices). Let G be the square with diagonal 13,
+with edges a ⇤12, b ⇤23, c ⇤34, d ⇤41, and e ⇤13. The graph on the right is L(G): two
+of its vertices are adjacent exactly when the corresponding edges on the left meet.
+
+1
+2
+
+3
+4
+
+a
+
+c
+
+b
+d
+e
+
+G
+
+a
+b
+
+c
+d
+
+e
+
+L(G)
+
+75
+•
+INTRODUCTION TO GRAPH THEORY
+
+The matching {a, c} in G is an independent set in L(G). More generally, matchings in G
+and independent sets in L(G) are the same subsets of E(G). The colors in the drawing
+give a proper three-edge-coloring of G, or equivalently a proper three-coloring of L(G).
+Since three edges meet at vertex 1, fewer colors do not suﬃce.
+
+This is the graph used in Example 6.25 to illustrate the edge form of Menger’s theorem:
+there, L(G) turned edge-disjoint paths into vertex-disjoint paths; here, it turns proper
+edge-colorings into proper vertex colorings.
+
+When G has an edge, greedy coloring of the line graph yields χ0(G) 2∆(G) −1, since
+every edge of G is incident with at most 2∆(G) −2 other edges. However, line graphs have
+additional structure; for instance, they contain no induced K1,3. Can this structure yield a
+better bound?
+
+For loopless multigraphs, Shannon proved χ0(G) b3∆(G)/2c, and the “fat triangle” in
+Figure 7.1 shows that the coeﬃcient 3/2 cannot be improved. Vizing (1964) and Gupta (1966)
+proved χ0(G) ∆(G) + µ(G), where µ(G) is the largest edge multiplicity. For a simple graph
+this gives χ0(G) ∆(G) + 1. In this section, µ always denotes an edge multiplicity; it is
+unrelated to the adjacency eigenvalues µi of the spectral chapter.
+
+a
+
+b
+c
+
+Figure 7.1. A fat triangle with two parallel edges on each side has ∆⇤4 and χ0 ⇤6 ⇤3∆/2: every pair
+of edges is incident.
+
+On the other hand, χ0(G) ≥∆(G), since all edges incident with a ﬁxed vertex must receive
+distinct colors.
+
+Deﬁnition 7.39. A graph G is Class 1 if it is ∆(G)-edge-colorable, and Class 2 otherwise. A
+decomposition of the edge set of a multigraph into perfect matchings is a 1-factorization.
+A multigraph that has such a decomposition is 1-factorable.
+
+With this deﬁnition, a regular graph is Class 1 if and only if it is 1-factorable. A regular
+graph of odd order has no 1-factor, so it is Class 2 when its degree is positive. By contrast, the
+complete graph K2n and the d-dimensional hypercube Qd are Class 1. The Petersen graph in
+Figure 7.2 is cubic and Class 2: it has no 3-edge-coloring.
+
+Here is a short reason that the Petersen graph is Class 2. A Hamiltonian cycle would use an
+even, positive number of spokes, hence either two or four. With two spokes, their labels would
+have to be consecutive on both the outer pentagon and the inner pentagram, requiring their
+diﬀerence modulo 5 to be both ±1 and ±2. With four spokes, the missing spoke forces the
+selected outer and inner edges to close into two disjoint 5-cycles, not one spanning cycle. Thus
+the Petersen graph is non-Hamiltonian. Since it has girth 5, every spanning 2-factor therefore
+consists of two 5-cycles. But in a 3-edge-coloring of a cubic graph, the union of any two color
+classes is a spanning 2-factor all of whose cycles alternate between the two colors and hence
+have even length. This contradiction proves that no 3-edge-coloring exists.
+
+8.21. Edge-coloring of graphs
+•
+76
+
+0
+
+00
+1
+10
+
+2
+
+20
+
+3
+
+30
+
+4
+40
+
+Figure 7.2. The Petersen graph is a cubic Class 3graph. Solid edges form the outer pentagon, dashed
+edges are the spokes, and dotted edges form the inner pentagram; the line styles make the construction
+readable without color.
+
+Theorem 7.40(König, 21027). Every bipartite multigraph G is ∆(G)-edge-colorable.
+
+Proof. Take an X, Y-bigraph G, and let ∆⇤∆(G). We add vertices to the smaller partite set
+until both have the same size. We then add edges arbitrarily joining vertices of X and Y with
+degree less than ∆until all vertices have degree ∆. Multi-edges may arise in this process.
+
+Hence we have a bipartite ∆-regular supergraph H of G. Every regular bipartite multigraph
+of positive degree has a 1-factor (Corollary 5.3). Remove such a 1-factor from H and repeat
+on the remaining regular bipartite multigraph. Thus H decomposes into ∆1-factors, and
+restricting this edge-coloring to G proves that G is ∆-edge-colorable.
+⇤
+
+Now we turn our attention to Vizing’s theorem. Ore observed that the edge-chromatic
+number is large only when the degree and multiplicity are both large at the same vertex.
+Let µ(x, y) be the multiplicity of xy and let µ(y) ⇤maxx2N(y) µ(x, y), taking µ(y) ⇤0 at an
+isolated vertex. Ore proved χ0(G) maxv2V(G){d(v) + µ(v)}. Several further generalizations
+follow from the next theorem.
+
+Theorem 7.41(Andersen, 21088; Goldberg, 21088, 21095). For a loopless multigraph G, the edge-
+chromatic number satisﬁes
+
+χ0(G) max
+
+n
+
+∆(G), max
+
+xyz2P
+
+d(x) + µ(x, y) + µ(y, z) + d(z)
+
+2
+
+o
+
+,
+
+where µ(x, y) is the multiplicity of the edge xy and P is the set of 3-vertex paths in G. The inner
+maximum is taken to be zero when P is empty.
+
+We do not prove the Andersen–Goldberg theorem, but we now give the complete fan
+argument for the simple-graph case.
+
+Deﬁnition 7.42. Let f be a proper edge-coloring of G −xy1, leaving only xy1 uncolored. A
+color is missing at a vertex if it appears on no colored edge incident with that vertex. A fan
+at x rooted at xy1 is a sequence of distinct neighbors
+
+y1, y2, . . . , yk
+
+such that, for every 2 i k, the color f (xyi) is missing at yi−1.
+
+77
+•
+INTRODUCTION TO GRAPH THEORY
+
+Example 7.43(Rotating a three-vertex fan). Using the palette {1, 2, 3}, consider a star with
+center x and leaves y1, y2, y3. Leave xy1 uncolored and suppose that
+
+f (xy2) ⇤1,
+f (xy3) ⇤2.
+
+Then (y1, y2, y3) is a fan: color 1 is missing at y1, and color 2 is missing at y2. Color 3 is
+missing at both x and y3. Shift the colors 1, 2 one place toward xy1, then use 3 on xy3, as
+shown below. A dashed edge is uncolored; the labels 1, 2, 3 specify the colors.
+
+Before
+
+x
+
+y1
+y2
+y3
+
+A-2er rotation
+
+x
+
+y1
+y2
+y3
+
+A-2er completion
+
+x
+
+y1
+y2
+y3
+
+1
+2
+1
+2
+1
+2
+3
+
+1 missing at y1; 2 at y2
+3 missing at x, y3
+3 still missing at x, y3
+all three edges colored
+
+The uncolored edge has moved from xy1 to xy3, where a common missing color completes
+the coloring.
+
+The point of the deﬁnition is that colors can be shifted toward the uncolored edge. The
+next elementary step is called a fan rotation.
+
+Lemma 7.44(Fan rotation). Let y1, . . . , yk be a fan at x. For 1 r k, recolor
+
+xyi with f (xyi+1)
+(1 i < r)
+
+and leave xyr uncolored. This is again a proper partial edge-coloring. Consequently, if one color is
+missing at both x and yr, then the coloring extends to xy1.
+
+Proof. At yi, the new color on xyi is f (xyi+1), which is missing at yi by the fan condition. At x,
+the recoloring only shifts a list of pairwise distinct colors already present at x, so it creates no
+repetition there. All other incidences are unchanged. If a color γ is missing at both x and yr,
+use γ on the ﬁnal uncolored edge xyr.
+⇤
+
+For two colors ↵, β, the edges having those colors form a graph of maximum degree at
+most two. Its components are alternating paths and even cycles. Interchanging ↵and β on one
+component therefore preserves properness; this is the edge-coloring version of a Kempe-chain
+interchange.
+
+Theorem 7.45(Vizing, 21075). Every simple graph G satisﬁes
+
+∆(G) χ0(G) ∆(G) + 1.
+
+Proof. The lower bound was noted above. Put ∆⇤∆(G) and let S be a set of ∆+ 1 colors. We
+prove the upper bound by induction on |E(G)|. Delete an edge xy1 and, by induction, color
+
+G −xy1 from S.
+
+Starting with y1, build a maximal fan at x as follows. If a color γ missing at the current
+last vertex yk appears on an edge xz with z < {y1, . . . , yk}, append z to the fan. This process
+
+8.21. Edge-coloring of graphs
+•
+78
+
+stops because there are only ﬁnitely many neighbors. Simplicity ensures that each neighbor
+represents just one edge at x.
+
+Choose a color ↵missing at x and a color β missing at yk. Such colors exist because at most
+∆colored edges meet either vertex. If β is also missing at x, rotate through yk and ﬁnish by
+Lemma 7.44. Hence suppose that the unique edge of color β at x is xyi. Maximality of the fan
+implies that yi already belongs to the fan; also i ≥2 because xy1 is uncolored. Since k ≥i ≥2,
+the edge xyk is colored, and f (xyk) is present at yk while β is missing there; hence i , k, so
+i < k. By the fan condition, β is missing at yi−1.
+
+Let K be the ↵, β-component containing yk. If x < V(K), interchange ↵and β on K. The
+color ↵is then missing at yk and is still missing at x. If yi−1 < V(K), the entire fan remains a
+fan: no edge at x was recolored, and the only fan condition involving ↵or β is the condition
+that β ⇤f (xyi) is missing at yi−1. We may therefore rotate through yk and ﬁnish.
+
+If instead yi−1 2 V(K), the interchange makes ↵missing at yi−1. The preﬁx y1, . . . , yi−1
+remains a fan. Indeed, no edge at x was recolored; no edge at x has color ↵, and the unique
+edge at x of color β is xyi, whose fan condition is not needed in this shorter preﬁx. Rotate
+through yi−1 and color the resulting uncolored edge with ↵.
+
+It remains to consider x 2 V(K). Since ↵is missing at x and β is missing at yk, the component
+K is an alternating path with endpoints x and yk. Its ﬁrst edge at x is the β-colored edge xyi.
+The vertex yi−1 is distinct from both endpoints and is missing β, so it cannot lie on K: an
+internal vertex of an alternating path is incident with one edge of each color. Interchange ↵
+and β on the component containing yi−1. This component avoids x, so afterward ↵is missing
+at both x and yi−1. As above, the preﬁx y1, . . . , yi−1 remains a fan: the interchange changes
+no edge at x, and its only possible eﬀect on a required missing color would involve ↵or β,
+neither of which occurs among the edges xy2, . . . , xyi−1. Rotate this preﬁx through yi−1 and
+use ↵on the resulting uncolored edge.
+
+In every case the coloring of G −xy1 extends to G, completing the induction.
+⇤
+
+Thus every simple graph satisﬁes χ0(G) 2 {∆(G), ∆(G) + 1}: it is Class 1 exactly when the
+lower bound is attained, and Class 2 exactly when the upper bound is needed. Nevertheless,
+Holyer (1981) showed that deciding which case occurs is NP-complete, even for cubic
+graphs [Hol81].
+
+For loopless multigraphs, a second unavoidable lower bound comes from odd vertex sets.
+Deﬁne
+
+Γ(G) :⇤
+max
+U✓V(G)
+|U|≥3 odd
+
+2|E(G[U])|
+|U| −1
+.
+
+Take Γ(G) ⇤0 when |V(G)| < 3. Every color class uses at most (|U| −1)/2 edges inside U,
+so χ0(G) ≥dΓ(G)e. Goldberg and Seymour conjectured that these lower bounds determine
+the chromatic index to within one. More precisely, their conjecture was the following result,
+proved by Chen, Jing, and Zang [CJZ25].
+
+Theorem 7.46(Chen–Jing–Zang, 3136). Every loopless multigraph G satisﬁes
+
+χ0(G) max
+
+)
+
+∆(G) + 1, dΓ(G)e
+
+ 
+
+.
+
+We state this theorem without proof. For the fat triangle in Figure 7.1, taking all three
+vertices gives Γ(G) ⇤6, so the lower and upper bounds both give χ0(G) ⇤6. In general, if
+
+dΓ(G)e ≥∆(G) + 1, the theorem determines χ0(G) exactly.
+
+79
+•
+INTRODUCTION TO GRAPH THEORY
+
+7.11[A] Perfect graphs
+
+Proper vertex coloring and edge-coloring both have the following form: partition a set S into
+the fewest classes such that no class contains two elements from any of the sets Q1, . . . , Qt
+contained in S. For vertex coloring, S is the vertex set and the Qi are cliques (or simply edges).
+For edge-coloring, S is the edge set and the Qi are sets of edges having a common endpoint.
+
+From this viewpoint, the coloring problem is a covering problem rather than a partition
+problem. It is enough to ﬁnd suitable classes whose union covers all the elements, because we
+can arbitrarily delete repeated elements from the classes to obtain a partition.
+
+The corresponding packing problem asks for the largest set of elements no two of which
+can belong to the same color class. For vertex coloring, such sets are cliques. For edge-coloring
+of a graph, they are sets of pairwise incident edges, which form a star or a triangle. Each color
+class covers at most one element of such a set, so the size of every packing is a lower bound
+for the number of color classes.
+
+For the paired optimization problems considered here, this comparison is called weak
+duality: every feasible solution of the minimization problem has value at least that of every
+feasible solution of the maximization problem.
+
+A min-max relation is a statement that equality holds for the answers to two dual integer
+optimization problems for some family of instances. For example, the equality ↵0(G) ⇤β(G) for
+bipartite graphs is a min-max relation. Often, such a relation leads to eﬃcient algorithms for
+the corresponding optimization problems. Min-max relations do not always hold for coloring
+and edge-coloring, but they do hold for some special graph classes.
+
+Deﬁnition 7.47. A clique covering of a graph G is a partition of V(G) into cliques; we view
+a coloring of G as a partition of V(G) into independent sets. We consider four parameters,
+
+↵(G),
+!(G),
+χ(G),
+✓(G),
+
+where the last one is the minimum size of a clique covering.
+
+Naturally, χ(G) ≥!(G) and ✓(G) ≥↵(G). Note that ✓(G) ⇤χ(G) and ↵(G) ⇤!(G) for the
+complement G of G. These parameters are dual to each other, so we deﬁne the following
+class of graphs. To avoid masking local bad structure with good global properties, we require
+equality for all induced subgraphs.
+
+Deﬁnition 7.48. A graph is perfect if χ(H) ⇤!(H) for every induced subgraph H of G.
+
+For a simple graph G with an edge, Vizing’s theorem gives χ(L(G)) ⇤χ0(G) ∆(G) + 1 
+!(L(G)) + 1. In this sense, line graphs of simple graphs are ‘almost perfect’. Since we want to
+discuss a property inherited by all induced subgraphs, the following deﬁnition is convenient.
+
+Deﬁnition 7.49. A graph class G is hereditary if every induced subgraph of a graph in G is
+also in G.
+
+What graphs are perfect? To ﬁnd some classes of perfect graphs, we introduce the following
+deﬁnitions.

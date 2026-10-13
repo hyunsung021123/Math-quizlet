@@ -1,0 +1,288 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.8 List coloring and Brooks' theorem
+직전 소단원: 「7.7 [A] Acyclic orientations and broken circuits」
+[본문]
+69
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 7.22(Whitney [Whi43]). Let G be an n-vertex graph with a ﬁxed total order on its edges.
+Then
+
+PG(k) ⇤
+
+’
+
+A✓E(G)
+A is NBC
+
+(−1)|A|kn−|A|.
+
+In particular, the coeﬃcient of kn−i is (−1)i times the number of NBC sets of size i. These numbers
+do not depend on the chosen edge order, although the sets themselves may change.
+
+Proof. Start from Theorem 7.16. Suppose A contains a broken circuit. Choose the greatest edge
+e whose endpoints are joined by a path of edges in A all greater than e. Such an edge exists
+exactly when A contains a broken circuit: add e to the path to recover the cycle whose smallest
+edge was removed.
+
+Pair A with the set A0 obtained by removing e if e 2 A, and adding e otherwise. The choice
+of e stays the same. Its qualifying path uses only edges greater than e, so it is unaﬀected;
+whether a greater edge qualiﬁes also depends only on edges greater than that edge, and is
+therefore unaﬀected. Applying the same rule to A0 returns A.
+
+The endpoints of e are already connected without e, so c(A0) ⇤c(A). Since the sizes diﬀer
+by one, the contributions of A and A0 to the subgraph expansion cancel. All sets containing a
+broken circuit are paired in this way. Every remaining set A is a forest, since a cycle would
+contain a broken circuit. Hence c(A) ⇤n −|A| for each remaining set, giving the stated
+formula.
+⇤
+
+Thus the coeﬃcients have alternating signs, with zero coeﬃcients allowed. Evaluating at
+
+k ⇤−1 and applying Theorem 7.19 also shows that the total number of NBC sets equals the
+number of acyclic orientations of G.
+
+In Section 13.4, chromatic polynomials will reappear alongside ﬂow polynomials as
+specializations of the Tutte polynomial, which also counts spanning trees at (1, 1).
+
+7.8List coloring and Brooks’ theorem
+
+Returning to the frequency-assignment problem, some frequency channels might not be
+available at a certain location. In other words, when we seek a proper coloring, some colors
+may not be available at certain vertices. This leads to the more general concept of list coloring.
+
+Deﬁnition 7.23. For a graph G, a list assignment L is a function on V(G) such that L(v)
+is a set of colors ‘acceptable’ for v. An L-coloring is a proper coloring f of G such that
+
+f (v) 2 L(v) for all v. A graph G is k-choosable or list k-colorable if it has an L-coloring
+whenever |L(v)| ≥k for all v. The list chromatic number (also called the choice number or
+choosability), denoted χ`(G), is the minimum k such that G is k-choosable.
+
+From this deﬁnition, it is easy to see that χ(G) χ`(G) holds. However, the gap between
+these two parameters can be large as the list chromatic number behaves quite diﬀerently
+from the chromatic number. For example, consider the complete bipartite graph Km,m with
+m ⇤!2k−1
+
+k
+
+"
+
+. In each partite set, assign the k-subsets of [2k −1] bĳectively to the vertices as their
+color lists. In a proper coloring from the lists, each color is used on vertices in only one partite
+set. Hence, by the pigeonhole principle, one partite set X receives at most k −1 colors. Hence
+some k colors in [2k −1] are not used on vertices of X. However, some vertex in X has this k-set
+as its list and hence is uncolored, a contradiction. This shows that Km,m is not k-choosable.
+
+8.9. List coloring and Brooks’ theorem
+•
+610
+
+How large is χ`(Kn,n)? The construction above has m ⇤!2k−1
+
+k
+
+"
+
+< 4k vertices in each part, so
+the list chromatic number of Kn,n tends to inﬁnity. A counting argument shows that it grows
+only logarithmically.
+
+Proposition 7.24(Erdős–Rubin–Taylor, 210810). If n < 2k−1, then Kn,n is k-choosable. Consequently,
+
+1
+2 log2 n < χ`(Kn,n) log2 n + 2.
+
+Proof. Let X and Y be the parts, and let L be a list assignment with |L(v)| ⇤k for all v; larger
+lists only help. Let C be the union of all lists. For each of the 2|C| ways to split C into two
+classes CX and CY, call x 2 X bad if L(x) ✓CY, and call y 2 Y bad if L(y) ✓CX. A ﬁxed vertex
+is bad for exactly 2|C|−k splits, so at most 2n · 2|C|−k < 2|C| splits have a bad vertex. Choose a
+split with no bad vertex, and give each x 2 X a color from L(x) \ CX and each y 2 Y a color
+from L(y) \ CY. Since CX \ CY ⇤ú, this is a proper L-coloring.
+
+For the upper bound on χ`(Kn,n), take the least k with n < 2k−1; then k log2 n + 2.
+For the lower bound, note that χ`(K1,1) ⇤2, and for n ≥2 let k ⇤b 1
+
+2 log2(2n)c ≥1. Then
+!2k−1
+
+k
+
+"
+
+⇤1
+
+2
+!2k
+
+k
+
+"
+
+1
+
+24k n, so Kn,n contains the graph Km,m above and is not k-choosable. Hence
+χ`(Kn,n) ≥k + 1 > 1
+
+2 log2(2n) ⇤1
+2(1 + log2 n).
+⇤
+
+Choosing the split at random turns this counting into a ﬁrst example of the probabilistic
+method, developed in a later chapter.
+
+However, some bounds on the chromatic number still hold for the list chromatic number.
+For example, the greedy algorithm still works for list coloring and yields the following
+proposition.
+
+Proposition 7.25. Every k-degenerate graph is (k + 1)-choosable. Thus χ`(G) ∆(G) + 1.
+
+Thus, we have χ(G) χ`(G) ∆(G) + 1. As we have seen before, this bound is tight for
+complete graphs and odd cycles. Brooks’ theorem shows that these are the only connected
+graphs with χ(G) ⇤∆(G) + 1. Its short proof uses the following list-coloring lemma, which
+improves the greedy bound when one vertex has a spare color.
+
+Lemma 7.26. Let G be a connected graph, and let L be a list assignment such that |L(v)| ≥d(v)
+for all vertices v. If |L(y)| > d(y) for some vertex y, then G is L-colorable.
+
+Proof. Root a spanning tree at y and order the vertices by repeatedly deleting a leaf distinct
+from y, placing y last. Color in the order in which vertices were deleted. Every vertex other
+than y has an uncolored parent when it is colored, so fewer than dG(v) colors are forbidden.
+At the last step, |L(y)| > dG(y) guarantees an available color for y.
+⇤
+
+A ﬁrst application shows that, unlike complete bipartite graphs, even cycles are as easy to
+list-color as to color.
+
+Proposition 7.27. For n ≥3, χ`(Cn) ⇤2 if n is even and χ`(Cn) ⇤3 if n is odd.
+
+Proof. Every cycle is 2-degenerate, hence 3-choosable by Proposition 7.25, and odd cycles have
+χ` ≥χ ⇤3. Now let n be even and let L assign lists of size two. If all lists are equal, alternate
+their two colors around the cycle. Otherwise some adjacent vertices u, v have L(v) , L(u);
+
+71
+•
+INTRODUCTION TO GRAPH THEORY
+
+choose c 2 L(v) \ L(u) and color v with c. On the path P ⇤Cn −v, remove c from the list of
+each neighbor of v. Every vertex w of P still has |L(w)| ≥dP(w), and the endpoint u keeps both
+colors while dP(u) ⇤1. Lemma 7.26 colors P, and together with c on v this is an L-coloring of
+Cn.
+⇤
+
+Theorem 7.28(Brooks, 21052). If a connected graph G is neither a complete graph nor an odd cycle,
+then χ(G) ∆(G).
+
+Proof (Lovász, 1975). Let ∆⇤∆(G). If ∆2, then G is a path or an even cycle, since K1, K2,
+and odd cycles are excluded; hence χ(G) 2 ⇤∆. Assume that ∆≥3, and give every vertex
+the list [∆].
+
+If G is not regular, some vertex y has d(y) < ∆⇤|L(y)|, and Lemma 7.26 gives a ∆-coloring
+of G.
+
+Suppose that G is regular and has a cut-vertex v. For each component C of G −v, the graph
+GC ⇤G[V(C) [ {v}] is connected and dGC(v) < ∆, while every other vertex of GC has degree
+at most ∆. Lemma 7.26 gives a ∆-coloring of each GC. After permuting colors, all of them give
+v the same color, and together they form a ∆-coloring of G.
+
+Finally, suppose that G is regular and 2-connected. We claim that G has vertices x, y, z
+such that xy, xz 2 E(G), yz < E(G), and G −{y, z} is connected. Given the claim, color both
+
+y and z with color 1. On G0 ⇤G −{y, z}, let L0(v) ⇤[∆] \ {1} if v is adjacent to y or z,
+and L0(v) ⇤[∆] otherwise. A vertex that loses a color also loses at least one neighbor, so
+|L0(v)| ≥dG0(v) for all v 2 V(G0). The vertex x loses two neighbors but only one color, so
+|L0(x)| ⇤∆−1 > ∆−2 ⇤dG0(x). Lemma 7.26 gives an L0-coloring of G0, and together with
+color 1 on y and z this is a ∆-coloring of G. The point is that x has two neighbors of the same
+color.
+
+It remains to prove the claim. If G is 3-connected, note that some vertex x has two nonadjacent
+neighbors y, z: otherwise every neighborhood would be a clique, and the connected graph G
+would be complete. Then G −{y, z} is connected because G is 3-connected.
+
+Otherwise G is not 3-connected but has at least ∆+ 1 ≥4 vertices, so it has a separating set
+of size at most two; by 2-connectivity, this set has the form {x, w}. Then G −x is connected
+and w is a cut-vertex of G −x, so the block-cutpoint graph of G −x is a tree with at least
+two leaf blocks B1, B2. For i ⇤1, 2, let ci be the cut-vertex of G −x in Bi. The vertex x has a
+neighbor yi 2 V(Bi)\ {ci}; otherwise ci would separate Bi −ci from the rest of G, contradicting
+2-connectivity. Put y ⇤y1 and z ⇤y2. They are nonadjacent, because each lies in only one
+block of G −x. Each Bi −yi is connected and still contains ci. Since yi lies only in the block Bi,
+deleting y and z leaves every other block of G −x intact, so G −{x, y, z} is connected. Finally,
+d(x) ⇤∆≥3, so x has a neighbor other than y and z, and G −{y, z} is connected.
+⇤
+
+The list version of Brooks’ theorem is also true, but the proof above does not carry over: in
+the last two cases we permuted colors or gave y and z the same color, which lists need not
+allow.
+
+Theorem 7.29(List version of Brooks’ theorem). If a connected graph G is neither a complete
+graph nor an odd cycle, then χ`(G) ∆(G).
+
+This was proved independently by Vizing (1976) and by Erdős, Rubin, and Taylor (1979). We
+prove it in Section 7.9.
+
+8.10. [A] Degree-choosability and the list version of Brooks’ theorem
+•
+72
+
+7.9[A] Degree-choosability and the list version of Brooks’ theorem
+
+The proof of Theorem 7.29 shows that every block of a connected graph that is not degree-
+choosable is complete or an odd cycle; degree-choosability is Lemma 7.26 without a spare
+color.
+
+Deﬁnition 7.30. A graph is degree-choosable if it is L-colorable whenever |L(v)| ≥d(v) for
+each vertex v.
+
+Lemma 7.31. Let G be a 2-connected graph, and let L be a list assignment such that |L(v)| ≥d(v)
+for all vertices v. If some two lists diﬀer, then G is L-colorable.
+
+Proof. Since the lists are not identical, two vertices have distinct lists. Along a path joining
+them, we ﬁnd adjacent vertices x, y such that L(x) \ L(y) , ú. Let c 2 L(x) \ L(y).
+
+Deﬁne L0 on V(G −x) by
+
+L0(v) ⇤
+
+(
+
+L(v)
+if v < N(x),
+
+L(v) \ {c}
+otherwise.
+
+We have |L0(v)| ≥dG−x(v) for all v 2 V(G −x), and |L0(y)| > dG−x(y) since c < L(y). Also
+
+G −x is connected. Hence Lemma 7.26 yields an L0-coloring of G −x and this extends to an
+L-coloring of G by using color c on x.
+⇤
+
+Lemma 7.32. If a connected graph G has a nonempty degree-choosable induced subgraph H, then
+G is degree-choosable.
+
+Proof. Let L be a list assignment for G with |L(v)| ≥dG(v) for all v. For each component F of
+G −V(H), connectedness of G gives a vertex yF 2 V(F) having a neighbor in H. Hence
+
+|L(yF)| ≥dG(yF) > dF(yF).
+
+By Lemma 7.26, each component F has an L|V(F)-coloring. Combining these colorings gives an
+L-coloring f of G −V(H).
+
+Now form a list assignment L0 for H by deleting from L(v) the colors used by f on neighbors
+of v. We lose at most one color for each neighbor not in V(H). Since |L(v)| ≥dG(v), we have
+|L0(v)| ≥dH(v) for v 2 V(H). Since H is degree-choosable, H has an L0-coloring f 0. Together,
+
+f and f 0 form an L-coloring of G.
+⇤
+
+This reduces our problem to ﬁnding a degree-choosable induced subgraph. To state the
+next lemma we need, we deﬁne a chord of a cycle to be an edge not in the cycle whose endpoints
+are in the cycle.
+
+Lemma 7.33. An even cycle with at most one chord is degree-choosable.
+
+Proof. Let H be an even cycle with at most one chord. Then H is 2-connected. Let L be a list
+assignment such that |L(v)| ≥dH(v) for all v. If the lists are not identical, then Lemma 7.31
+implies that H is L-colorable. If all lists are identical, alternate two colors around the cycle.

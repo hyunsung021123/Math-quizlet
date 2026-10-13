@@ -1,0 +1,240 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.11 [A] Perfect graphs
+직전 소단원: 「7.10 Edge-coloring of graphs」
+[본문]
+79
+•
+INTRODUCTION TO GRAPH THEORY
+
+7.11[A] Perfect graphs
+
+Proper vertex coloring and edge-coloring both have the following form: partition a set S into
+the fewest classes such that no class contains two elements from any of the sets Q1, . . . , Qt
+contained in S. For vertex coloring, S is the vertex set and the Qi are cliques (or simply edges).
+For edge-coloring, S is the edge set and the Qi are sets of edges having a common endpoint.
+
+From this viewpoint, the coloring problem is a covering problem rather than a partition
+problem. It is enough to ﬁnd suitable classes whose union covers all the elements, because we
+can arbitrarily delete repeated elements from the classes to obtain a partition.
+
+The corresponding packing problem asks for the largest set of elements no two of which
+can belong to the same color class. For vertex coloring, such sets are cliques. For edge-coloring
+of a graph, they are sets of pairwise incident edges, which form a star or a triangle. Each color
+class covers at most one element of such a set, so the size of every packing is a lower bound
+for the number of color classes.
+
+For the paired optimization problems considered here, this comparison is called weak
+duality: every feasible solution of the minimization problem has value at least that of every
+feasible solution of the maximization problem.
+
+A min-max relation is a statement that equality holds for the answers to two dual integer
+optimization problems for some family of instances. For example, the equality ↵0(G) ⇤β(G) for
+bipartite graphs is a min-max relation. Often, such a relation leads to eﬃcient algorithms for
+the corresponding optimization problems. Min-max relations do not always hold for coloring
+and edge-coloring, but they do hold for some special graph classes.
+
+Deﬁnition 7.47. A clique covering of a graph G is a partition of V(G) into cliques; we view
+a coloring of G as a partition of V(G) into independent sets. We consider four parameters,
+
+↵(G),
+!(G),
+χ(G),
+✓(G),
+
+where the last one is the minimum size of a clique covering.
+
+Naturally, χ(G) ≥!(G) and ✓(G) ≥↵(G). Note that ✓(G) ⇤χ(G) and ↵(G) ⇤!(G) for the
+complement G of G. These parameters are dual to each other, so we deﬁne the following
+class of graphs. To avoid masking local bad structure with good global properties, we require
+equality for all induced subgraphs.
+
+Deﬁnition 7.48. A graph is perfect if χ(H) ⇤!(H) for every induced subgraph H of G.
+
+For a simple graph G with an edge, Vizing’s theorem gives χ(L(G)) ⇤χ0(G) ∆(G) + 1 
+!(L(G)) + 1. In this sense, line graphs of simple graphs are ‘almost perfect’. Since we want to
+discuss a property inherited by all induced subgraphs, the following deﬁnition is convenient.
+
+Deﬁnition 7.49. A graph class G is hereditary if every induced subgraph of a graph in G is
+also in G.
+
+What graphs are perfect? To ﬁnd some classes of perfect graphs, we introduce the following
+deﬁnitions.
+
+8.22. [A] Perfect graphs
+•
+710
+
+Deﬁnition 7.50. A hole or chordless cycle in a graph G is a cycle of length at least four
+having no chord, i.e. it is an induced subgraph which is a cycle of length at least four. A
+graph is a chordal graph if it has no hole.
+
+Deﬁnition 7.51. A vertex is simplicial if its neighborhood is a clique. A simplicial (or perfect)
+elimination ordering is an ordering vn, . . . , v1 in which vertices can be deleted so that
+each vertex vi is a simplicial vertex of the graph induced by {v1, . . . , vi}.
+
+These two concepts of chordal graphs and simplicial elimination ordering are closely related
+as follows.
+
+Theorem 7.52. A graph G is chordal if and only if it has a simplicial elimination ordering.
+
+Proof. If G has a chordless cycle C, then the ﬁrst vertex deleted from C in an elimination ordering
+has nonadjacent remaining neighbors. Hence such a graph has no simplicial elimination
+ordering.
+
+Since the family of chordal graphs is hereditary, it suﬃces to prove by induction that every
+chordal graph has a simplicial vertex. To facilitate the induction, we prove the following
+stronger statement: if a chordal graph is not a complete graph, then it has two nonadjacent
+simplicial vertices.
+
+Let x and y be nonadjacent vertices in G. Let S be a minimal set of vertices whose deletion
+separates x and y.
+
+We ﬁrst prove that S is a clique. Let u and v be distinct vertices of S. By the minimality of S,
+both u and v have neighbors in the components A and B of G −S containing x and y. The
+union of shortest u, v-paths through A and B is a cycle of length at least 4. By the choice of the
+paths and the absence of edges from A to B, this cycle has no chord other than uv. Since G has
+no chordless cycle, uv 2 E(G). Since u, v 2 S were chosen arbitrarily, S is a clique.
+
+Now consider the graphs G1 ⇤G[S [ A], and G2 ⇤G[S [ B]. Each is a chordal graph. If
+one of them is complete, then any vertex outside of S is simplicial. Otherwise, Gi has two
+nonadjacent simplicial vertices by induction hypothesis. Since S is a clique, at least one of them
+is outside S. However, a vertex in V(Gi) −S has no neighbors in G outside V(Gi). Therefore,
+vertices u1 and u2 outside S that are simplicial in G1, G2 are nonadjacent and simplicial in
+
+G.
+⇤
+
+The reverse of an elimination ordering is a ‘construction’ ordering. Every chordal graph can be
+obtained from K1 by iteratively adding a new vertex whose neighborhood is a clique. Using
+this, we can show that all chordal graphs are perfect.
+
+Theorem 7.53. Chordal graphs are perfect.
+
+Proof. Since the chordal graphs form a hereditary family, we need only prove that χ(G) ⇤!(G).
+
+Every chordal graph has a simplicial elimination ordering. We apply greedy coloring
+relative to the reverse of such an ordering. If v receives color k, then the colors 1, . . . , k −1
+appear on the earlier neighbors of v. Since they form a clique, together with v they form a
+clique of size k. Thus we obtain a clique whose size equals the number of colors used.
+⇤
+
+What other graphs are perfect? There are many families of graphs known to be perfect. To
+list a few, we have the following.
+
+81•
+INTRODUCTION TO GRAPH THEORY
+
+Proposition 7.54. The following classes of graphs are perfect.
+
+(a) Bipartite graphs.
+
+(b) Line graphs of bipartite graphs.
+
+(c) The complements of line graphs of bipartite graphs.
+
+(d) The complements of bipartite graphs.
+
+Proof. (a) The graph with no vertices has χ(H) ⇤!(H) ⇤0. Every nonempty induced subgraph
+H of a bipartite graph satisﬁes χ(H) ⇤!(H): both values are 1 when H has no edge, and both
+are 2 otherwise.
+
+(b) Line graphs of bipartite graphs also form a hereditary class. A coloring of L(G) is an
+edge-coloring of G, and when G is bipartite and has an edge, the cliques of L(G) come from
+stars, so !(L(G)) ⇤∆(G). Thus König’s line-coloring theorem (Theorem 7.40), χ0(G) ⇤∆(G)
+for bipartite G, implies that line graphs of bipartite graphs are perfect.
+
+(c) An independent set in L(G) is a matching in G. Every clique of L(G) is a star or
+comes from a triangle, and a bipartite graph has no triangle. Thus a clique cover of L(G)
+corresponds to a vertex cover of G. The König–Egerváry theorem (Theorem 5.7) gives
+↵(L(G)) ⇤↵0(G) ⇤β(G) ⇤✓(L(G)), so the complement of the line graph is perfect.
+
+(d) In a bipartite graph G, a minimum clique partition consists of edges from a maximum
+matching and singleton vertices, so ✓(G) ⇤|V(G)| −↵0(G). By the König–Egerváry theorem
+this equals |V(G)| −β(G) ⇤↵(G). Hence G is perfect; the same argument applies to every
+induced subgraph.
+⇤
+
+This proposition suggests that the complement of a perfect graph should also be perfect.
+Berge conjectured this statement, and Lovász proved it in 1972; it is now called the Perfect
+Graph Theorem.
+
+If an n-vertex graph H is !(H)-colorable, then by the pigeonhole principle, some inde-
+pendent set has at least n/!(H) vertices, and hence !(H)↵(H) ≥n. Thus perfection of a
+graph G or its complement implies that !(H)↵(H) ≥|V(H)| for all induced subgraphs H of
+G. Lovász proved the converse. A short linear-algebraic proof was later found by Gasparian.
+The following deﬁnition and lemma are useful for presenting it.
+
+Deﬁnition 7.55. A graph G is p-critical, or minimally imperfect, if G is not perfect but every
+proper induced subgraph of G is perfect.
+
+Lemma 7.56. If S is an independent set in a p-critical graph G, then !(G) ⇤!(G −S).
+
+Proof. If S ⇤ú, the conclusion is immediate. Otherwise, since G is p-critical, we have
+χ(G) > !(G) and χ(G −S) ⇤!(G −S). Since G can be properly colored by adding S as one
+color class to an optimal coloring of G −S, we have
+
+χ(G −S) + 1 ≥χ(G) > !(G) ≥!(G −S) ⇤χ(G −S).
+
+Since all quantities are integers, χ(G) −1 ⇤!(G) ⇤!(G −S).
+⇤
+
+8.23. [O] Homomorphisms, cores, and reﬁned colorings
+•
+82
+
+Theorem 7.57(Lovász, 21083). A graph G is perfect if and only if !(H)↵(H) ≥|V(H)| for every
+induced subgraph H.
+
+Proof. We only need to show ((). Since every imperfect graph has a p-critical induced
+subgraph, it suﬃces to show that !(G)↵(G) < n when G is a p-critical graph of order n. Let
+↵⇤↵(G) and ! ⇤!(G).
+
+Let S0 be a maximum independent set in G with S0 ⇤{x1, . . . , x↵}. By the previous lemma,
+each G −xr is !-colorable. Let {S(r−1)!+1, . . . , Sr!} be the color classes in an optimal coloring
+of G −xr. For 0 j ↵!, the previous lemma yields that !(G −Sj) ⇤!, so a maximum
+clique Qj in G −Sj is an !-clique in G that avoids Sj.
+
+We claim that Qj intersects Si when i , j. The sets S(r−1)!+1, . . . , Sr! partition V(G −xr)
+into ! independent sets, and Qj contains at most one vertex of each (since Qj is a clique).
+
+If xr < Qj, then Qj must have exactly one vertex from each. If xr 2 Qj, then Qj has only
+! −1 vertices other than xr and hence misses exactly one of the sets in the coloring of G −xr.
+Since Qj can only have one vertex in S0, there is at most one independent set in the entire list
+that is missed by Qj. On the other hand, we know Qj misses Sj, since Qj was chosen as a
+maximum clique in G −Sj.
+
+Let A and B be the n ⇥(↵! + 1) incidence matrices for {S0, . . . , S↵!} and {Q0, . . . , Q↵!}.
+Since |Si \ Qj| ⇤1 when i , j and |Sj \ Qj| ⇤0, we have ATB ⇤J −I, where J is the all-1
+square matrix of order ↵! + 1. Since J −I is nonsingular, both A and B must have rank at least
+↵! + 1. Hence n ≥↵! + 1. We conclude that !(G)↵(G) < n.
+⇤
+
+Corollary 7.58(Perfect Graph Theorem; Lovász, 21083). A graph is perfect if and only if its comple-
+ment is perfect.
+
+Proof. Induced subgraphs of G are the complements of induced subgraphs of G, and ↵(H) ⇤
+!(H) and !(H) ⇤↵(H). Hence the condition in Theorem 7.57 holds for G if and only if it
+holds for G.
+⇤
+
+An odd hole is an induced odd cycle of length at least 5, and an odd antihole is the complement
+of an odd hole. Berge also conjectured the Strong Perfect Graph Theorem: a graph is perfect if
+and only if it contains neither an odd hole nor an odd antihole. Equivalently, the minimally
+imperfect graphs are precisely the odd holes and odd antiholes. The self-complementary
+formulation implies the Perfect Graph Theorem. Chudnovsky, Robertson, Seymour, and
+Thomas announced a proof in 2002; the full paper appeared in 2006 [CRST06].
+
+7.12[O] Homomorphisms, cores, and reﬁned colorings
+
+A proper k-coloring records only which vertices receive the same color. It can therefore be
+viewed as a map into a complete graph.
+
+Deﬁnition 7.59. A graph homomorphism ' : G ! H is a map ' : V(G) ! V(H) such that
+
+uv 2 E(G)
+⇤)
+'(u)'(v) 2 E(H).
+
+Graphs G and H are homomorphically equivalent if homomorphisms exist in both directions.

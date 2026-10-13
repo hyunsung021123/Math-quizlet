@@ -155,6 +155,12 @@
       "title": "6. Connectivity and cycles",
       "file": "6_connectivity_and_cycles.json",
       "book": "Kim — Introduction to Graph Theory"
+    },
+    {
+      "id": "7_colorings",
+      "title": "7. Colorings",
+      "file": "7_colorings.json",
+      "book": "Kim — Introduction to Graph Theory"
     }
   ]
 }

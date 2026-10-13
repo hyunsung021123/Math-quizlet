@@ -1,0 +1,122 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.1 Chromatic number and bounds on it
+직전 소단원: 「6.7 [A] A flow interpretation of matching and Menger」
+[본문]
+CHAPTER 7
+
+Colorings
+
+7.1Chromatic number and bounds on it
+
+Recall the frequency assignment problem. In this problem, we used graphs so that the edges
+represent ‘conﬂicts’. To use as few frequency channels as possible, we seek the minimum
+number of conﬂict-free classes. This can be formalized using the following concepts.
+
+Deﬁnition 7.1. A k-coloring of G is a vertex labeling f : V(G) ! S where |S| ⇤k. A
+k-coloring f is proper if f (x) , f (y) when xy 2 E(G). A graph G is k-colorable if it
+has a proper k-coloring. The chromatic number χ(G) is the minimum k such that G is
+k-colorable. If χ(G) ⇤k, then G is a k-chromatic graph.
+
+We want to explore possible bounds on the chromatic number using other graph parameters.
+The chromatic number has several natural properties. First, χ(G0) χ(G) whenever G0 ✓G,
+since a proper coloring restricts to every subgraph. Together with χ(Kn) ⇤n, this gives
+!(G) χ(G).
+
+Another property is that a proper k-coloring partitions V(G) into at most k independent
+sets. As each has size at most ↵(G), we have |V(G)| χ(G)↵(G), and hence
+n
+↵(G) χ(G) for
+every nonempty n-vertex graph G. These two lower bounds were easy to obtain. What upper
+bounds do we have?
+
+In order to obtain an upper bound on the chromatic number, we need to come up with a
+way to color the vertices to ﬁnd a proper coloring. One obvious way is the greedy choice of
+colors.
+
+Algorithm 7.2. The greedy coloring with respect to a vertex ordering v1, . . . , vn of V(G)
+colors vertices in the order v1, . . . , vn, giving vi the least indexed color not already used
+on its earlier neighbors.
+
+In fact, using this greedy coloring algorithm, we obtain the following upper bound on χ(G).
+
+Proposition 7.3. χ(G) ∆(G) + 1.
+
+Proof. In any vertex ordering, each vertex has at most ∆(G) earlier neighbors, so the greedy
+coloring will not use more than ∆(G) + 1 colors.
+⇤
+
+This bound is attained by complete graphs and odd cycles. However, if we explore other
+graphs, we often see that the inequality is not tight for them. Indeed, we will later characterize
+the connected graphs satisfying equality (Theorem 7.28).
+
+In this greedy algorithm, we consider an arbitrary vertex ordering. In particular, in the
+proof of Proposition 7.3, we used no special property of the vertex ordering. What if we take
+a ‘good’ vertex ordering? Can we obtain a better upper bound? What vertex orderings are
+good? In order to obtain a better bound using the same proof as Proposition 7.3, the important
+thing is to minimize the number of ‘earlier neighbors’ in the ordering. For this purpose, the
+following concept naturally arises.
+
+510
+
+61
+•
+INTRODUCTION TO GRAPH THEORY
+
+Deﬁnition 7.4. A graph G is k-degenerate if every nonempty subgraph has a vertex of
+degree at most k. The degeneracy of G is maxú,H✓G δ(H); that is, the minimum k such that
+G is k-degenerate. A smallest-last ordering of an n-vertex graph G is constructed iteratively
+from index n to 1 by letting vi be a vertex of minimum degree in G −{vi+1, . . . , vn}.
+
+For example, a k-regular graph has degeneracy k, and any tree with at least one edge is
+1-degenerate. Using this concept, the proof of Proposition 7.3 yields the following better
+bound.
+
+Proposition 7.5. If G is k-degenerate, then G is (k + 1)-colorable.
+
+Proof. In a smallest-last ordering, vi has at most k neighbors among v1, . . . , vi−1. Greedy
+coloring in this order therefore uses at most k + 1 colors.
+⇤
+
+The degeneracy plus one is called the coloring number. It need not equal the chromatic
+number. For example, a complete bipartite graph Kn,n has degeneracy n, but it is 2-colorable:
+color all vertices in one part with one color and all vertices in the other part with another color.
+
+7.2Chromatic number and orientations
+
+What other concepts are relevant to the chromatic number? If a graph G is colored with a
+
+coloring f using colors 1, . . . , k, then we can orient each edge uv with f (u) < f (v) from u to
+v. In this orientation, every directed path has length at most k −1. This shows that the lengths
+of directed paths in an orientation of the graph are relevant to the chromatic number. In fact,
+the following theorem provides an upper bound on χ(G) in terms of the orientations of G.
+
+Theorem 7.6(Gallai–Hasse–Roy–Vitaver theorem). For every orientation D of G,
+
+χ(G) 1 + `(D),
+
+where `(D) is the maximum length of a directed path in D. Equality holds for some orientation of
+G.
+
+Proof. It suﬃces to work component by component. Choose a maximal spanning acyclic
+subdigraph D0 of D. Label each vertex v by the number of vertices in a longest directed path
+of D0 ending at v.
+
+If −!
+uv 2 E(D0), then the label of v is larger than that of u. If −!
+uv 2 E(D) \ E(D0), maximality
+implies that D0 + −!
+uv contains a directed cycle, so D0 has a directed path from v to u; again the
+labels diﬀer. Thus the labels give a proper coloring. Every directed path in D0 is also one in D,
+so at most 1 + `(D) labels are used.
+
+Conversely, take a proper coloring with colors 1, . . . , χ(G) and orient every edge from its
+lower-colored endpoint to its higher-colored endpoint. This orientation is acyclic, and every
+directed path has at most χ(G) −1 edges. Hence equality holds for this orientation.
+⇤
+
+7.3Minty’s cycle-ratio characterization
+
+The preceding theorem relates coloring to directed paths. We now give a diﬀerent charac-
+terization using cycles of the underlying graph. In an acyclic orientation, traversing a cycle

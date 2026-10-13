@@ -1,0 +1,131 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.5 [A] Triangle-free graphs with large chromatic number
+직전 소단원: 「7.4 Chromatic number and clique number」
+[본문]
+8.6. [A] Triangle-free graphs with large chromatic number
+•
+64
+
+A proper k-coloring f of G extends to a proper (k + 1)-coloring of G0 by f (ui) ⇤f (vi) for
+each i and f (w) ⇤k + 1, thus χ(G0) χ(G) + 1.
+
+We now prove χ(G0) > χ(G). Suppose that G0 has a proper k-coloring g. After relabeling
+the colors, assume that g(w) ⇤k. Then g(U) ✓[k −1]. Let A ⇤{vi : g(vi) ⇤k}. We change
+the coloring on A to obtain a proper (k −1)-coloring of G. For each vi 2 A, change the color
+of vi to g(ui). Because A lies in one color class of g, it is an independent set. For an edge
+viv0 2 E(G) with vi 2 A and v0 2 V(G) −A, the construction gives v0ui 2 E(G0), and hence
+
+g(v0) , g(ui). Thus the alteration creates no monochromatic edge in G. Deleting U [ {w} now
+leaves a proper (k −1)-coloring of G, a contradiction. Therefore χ(G0) ⇤χ(G) + 1.
+⇤
+
+Repetition of this theorem gives a triangle-free k-chromatic graph on 3 · 2k−2 −1 vertices.
+Thus these triangle-free graphs satisfy χ(G) ⇤⌦(log |V(G)|).
+
+The existence of triangle-free graphs with arbitrarily large chromatic number shows that the
+chromatic number is not a ‘local’ parameter, in the sense that forbidding small local structures
+places little restriction on the chromatic number. Later we will conﬁrm this again by showing
+that there are graphs with arbitrarily large girth and arbitrarily large chromatic number. If G
+has girth greater than g, then every set of at most g vertices induces a forest, whose chromatic
+number is at most two, although the chromatic number of G can be large. Thus the chromatic
+number is more of a ‘global’ parameter.
+
+7.5[A] Triangle-free graphs with large chromatic number
+
+The triangle-free k-chromatic graphs produced by Mycielski’s construction have exponentially
+many vertices in k. Although forbidding a triangle does not bound the chromatic number, we
+can still quantify its eﬀect. How large can the chromatic number of an n-vertex triangle-free
+graph be? The following proposition provides an upper bound.
+
+Proposition 7.11. If G is a triangle-free n-vertex graph, then χ(G) 2pn. Equivalently, every
+triangle-free k-chromatic graph has at least k2/4 vertices.
+
+Proof. Note that the neighborhood of a vertex is an independent set. As long as G has a vertex
+with at least pn neighbors not yet colored, use one color on those vertices. We repeat this until
+we are left with an n0-vertex induced subgraph G0 of G with maximum degree less than pn.
+Because G has only n vertices, we used at most n−n0
+pn colors so far.
+
+If n0 pn, then coloring vertices of G0 using n0 additional colors yields a proper coloring
+of G using at most n−n0
+pn + n0 2pn colors.
+
+If n0 > pn, then the greedy coloring produces a proper coloring of G0 using less than pn +1
+additional colors. This yields a proper coloring of G using at most n−n0
+pn + pn + 1 2pn colors.
+
+Hence, χ(G) 2pn, equivalently n ≥χ(G)2/4.
+⇤
+
+In fact, this proposition is quite close to being tight. Letting f (k) be the smallest order of a
+triangle-free k-chromatic graph, Erdős used a probabilistic method to show f (k) ⇤O(k2 log2 k).
+The true value is known to be f (k) ⇤⇥(k2 log k): the lower bound was proved by Ajtai–Komlós–
+Szemerédi in 1980, and the upper bound by Kim in 1995. This implies that every triangle-free
+
+n-vertex graph satisﬁes χ(G) O(
+
+q
+
+n
+log n).
+
+65
+•
+INTRODUCTION TO GRAPH THEORY
+
+7.6Chromatic polynomials
+
+The chromatic number asks whether a proper coloring exists. We now count all of them. For a
+positive integer k, let PG(k) be the number of proper vertex colorings of G with colors in [k].
+The same deﬁnition extends to multigraphs. Parallel edges impose the same inequality twice
+and do not aﬀect this number. A loop makes a proper coloring impossible, so PG(k) ⇤0 when
+G has a loop.
+
+Example 7.12(The recurrence on a four-cycle). Let e be an edge of C4. Colorings in which the
+endpoints of e receive diﬀerent colors are precisely the proper colorings of C4. Colorings
+of C4 −e ⇤P4 in which those endpoints receive the same color become proper colorings
+of the triangle C4/e.
+
+e
+C4
+C4 −e ⇤P4
+C4/e ⇤K3
+
+Hence
+
+PC4(k) ⇤PP4(k) −PK3(k) ⇤k(k −1)3 −k(k −1)(k −2).
+
+After simpliﬁcation this is
+
+PC4(k) ⇤(k −1)4 + (k −1),
+
+which already suggests the general cycle formula proved below.
+
+Theorem 7.13(Deletion–contraction). If e is an edge of a graph G, then
+
+PG(k) ⇤PG−e(k) −PG/e(k).
+
+Consequently PG(k) agrees, on positive integers, with a polynomial in k of degree |V(G)| and
+leading coeﬃcient one.
+
+Here G/e is a graph: after identifying the endpoints of e and removing e, replace any resulting
+parallel edges by a single edge. This does not aﬀect proper vertex colorings.
+
+Proof. Every proper coloring of G −e belongs to exactly one of two classes. If the endpoints of
+e have diﬀerent colors, it is a proper coloring of G. If they have the same color, identifying
+the endpoints gives a proper coloring of G/e, and this operation is reversible. Thus PG−e(k) ⇤
+PG(k) + PG/e(k).
+
+Induct on the number of edges. The edgeless graph on n vertices has PG(k) ⇤kn. Deletion
+preserves the number of vertices, while contraction reduces it by one. Both G −e and G/e have
+fewer edges than G, so induction applies to both. Hence the recurrence gives a polynomial of
+degree n whose leading term comes only from the deletion term and is kn.
+⇤
+
+For the Tutte polynomial we will instead retain all edges other than the contracted edge,
+including any resulting parallel edges or loops. The deletion–contraction identity above also
+holds for a non-loop edge of a multigraph under that convention: parallel edges do not aﬀect
+the chromatic polynomial, while a loop makes it zero. The degree and leading-coeﬃcient
+conclusion requires the multigraph to be loopless.

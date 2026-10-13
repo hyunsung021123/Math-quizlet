@@ -31,6 +31,11 @@
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
       "printed_page": 29
+    },
+    {
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 49
     }
   ],
   "sections": [
@@ -83,7 +88,15 @@
       "role": "section"
     },
     {
-      "number": "3.1",
+      "number": "3.5",
+      "title": "Eulerian circuits",
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 12,
+      "role": "section"
+    },
+    {
+      "number": "3.6",
       "title": "[A] Cycle space and cut space",
       "chapter_no": "3",
       "chapter_title": "Connections in graphs",
@@ -192,6 +205,102 @@
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
       "printed_page": 42,
+      "role": "section"
+    },
+    {
+      "number": "7.1",
+      "title": "Chromatic number and bounds on it",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 49,
+      "role": "section"
+    },
+    {
+      "number": "7.2",
+      "title": "Chromatic number and orientations",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 50,
+      "role": "section"
+    },
+    {
+      "number": "7.3",
+      "title": "Minty's cycle-ratio characterization",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 50,
+      "role": "section"
+    },
+    {
+      "number": "7.4",
+      "title": "Chromatic number and clique number",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 51,
+      "role": "section"
+    },
+    {
+      "number": "7.5",
+      "title": "[A] Triangle-free graphs with large chromatic number",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 53,
+      "role": "section"
+    },
+    {
+      "number": "7.6",
+      "title": "Chromatic polynomials",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 54,
+      "role": "section"
+    },
+    {
+      "number": "7.7",
+      "title": "[A] Acyclic orientations and broken circuits",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 56,
+      "role": "section"
+    },
+    {
+      "number": "7.8",
+      "title": "List coloring and Brooks' theorem",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 58,
+      "role": "section"
+    },
+    {
+      "number": "7.9",
+      "title": "[A] Degree-choosability and the list version of Brooks' theorem",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 61,
+      "role": "section"
+    },
+    {
+      "number": "7.10",
+      "title": "Edge-coloring of graphs",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 63,
+      "role": "section"
+    },
+    {
+      "number": "7.11",
+      "title": "[A] Perfect graphs",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 68,
+      "role": "section"
+    },
+    {
+      "number": "7.12",
+      "title": "[O] Homomorphisms, cores, and refined colorings",
+      "chapter_no": "7",
+      "chapter_title": "Colorings",
+      "printed_page": 71,
       "role": "section"
     }
   ]

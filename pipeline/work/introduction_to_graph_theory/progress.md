@@ -24,7 +24,8 @@
 | 순번 | 상태 | 소단원 | 역할 | 파일 |
 |---|---|---|---|---|
 | 005 | [x] | 3.intro Walks, paths, cycles, and trees | intro | `005__Introductionto__3_intro_Walkspathscyclesandtrees.txt` |
-| 006 | [x] | 3.1 [A] Cycle space and cut space | section | `006__Introductionto__3_1_ACyclespaceandcutspace.txt` |
+| 020 | [x] | 3.5 Eulerian circuits | section | `020__Introductionto__3_5_Euleriancircuits.txt` |
+| 006 | [x] | 3.6 [A] Cycle space and cut space | section | `006__Introductionto__3_1_ACyclespaceandcutspace.txt` |
 
 ## 4. Graph search algorithms
 
@@ -53,3 +54,20 @@
 | 017 | [x] | 6.5 Menger's theorem and separator certificates | section | `017__Introductionto__6_5_Mengerstheoremandseparator.txt` |
 | 018 | [x] | 6.6 [A] Closure and Chvátal's degree-sequence theorem | section | `018__Introductionto__6_6_AClosureandChvtalsdegree-s.txt` |
 | 019 | [x] | 6.7 [A] A flow interpretation of matching and Menger | section | `019__Introductionto__6_7_AAflowinterpretationofmatc.txt` |
+
+## 7. Colorings
+
+| 순번 | 상태 | 소단원 | 역할 | 파일 |
+|---|---|---|---|---|
+| 021 | [x] | 7.1 Chromatic number and bounds on it | section | `021__Introductionto__7_1_Chromaticnumberandboundson.txt` |
+| 022 | [x] | 7.2 Chromatic number and orientations | section | `022__Introductionto__7_2_Chromaticnumberandorientat.txt` |
+| 023 | [x] | 7.3 Minty's cycle-ratio characterization | section | `023__Introductionto__7_3_Mintyscycle-ratiocharacter.txt` |
+| 024 | [x] | 7.4 Chromatic number and clique number | section | `024__Introductionto__7_4_Chromaticnumberandcliquenu.txt` |
+| 025 | [x] | 7.5 [A] Triangle-free graphs with large chromatic number | section | `025__Introductionto__7_5_ATriangle-freegraphswithla.txt` |
+| 026 | [x] | 7.6 Chromatic polynomials | section | `026__Introductionto__7_6_Chromaticpolynomials.txt` |
+| 027 | [ ] | 7.7 [A] Acyclic orientations and broken circuits | section | `027__Introductionto__7_7_AAcyclicorientationsandbro.txt` |
+| 028 | [ ] | 7.8 List coloring and Brooks' theorem | section | `028__Introductionto__7_8_ListcoloringandBrookstheor.txt` |
+| 029 | [ ] | 7.9 [A] Degree-choosability and the list version of Brooks' theorem | section | `029__Introductionto__7_9_ADegree-choosabilityandthe.txt` |
+| 030 | [ ] | 7.10 Edge-coloring of graphs | section | `030__Introductionto__7_10_Edge-coloringofgraphs.txt` |
+| 031 | [ ] | 7.11 [A] Perfect graphs | section | `031__Introductionto__7_11_APerfectgraphs.txt` |
+| 032 | [ ] | 7.12 [O] Homomorphisms, cores, and refined colorings | section | `032__Introductionto__7_12_OHomomorphismscoresandrefi.txt` |

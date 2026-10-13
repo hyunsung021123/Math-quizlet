@@ -1,0 +1,203 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.9 [A] Degree-choosability and the list version of Brooks' theorem
+직전 소단원: 「7.8 List coloring and Brooks' theorem」
+[본문]
+8.10. [A] Degree-choosability and the list version of Brooks’ theorem
+•
+72
+
+7.9[A] Degree-choosability and the list version of Brooks’ theorem
+
+The proof of Theorem 7.29 shows that every block of a connected graph that is not degree-
+choosable is complete or an odd cycle; degree-choosability is Lemma 7.26 without a spare
+color.
+
+Deﬁnition 7.30. A graph is degree-choosable if it is L-colorable whenever |L(v)| ≥d(v) for
+each vertex v.
+
+Lemma 7.31. Let G be a 2-connected graph, and let L be a list assignment such that |L(v)| ≥d(v)
+for all vertices v. If some two lists diﬀer, then G is L-colorable.
+
+Proof. Since the lists are not identical, two vertices have distinct lists. Along a path joining
+them, we ﬁnd adjacent vertices x, y such that L(x) \ L(y) , ú. Let c 2 L(x) \ L(y).
+
+Deﬁne L0 on V(G −x) by
+
+L0(v) ⇤
+
+(
+
+L(v)
+if v < N(x),
+
+L(v) \ {c}
+otherwise.
+
+We have |L0(v)| ≥dG−x(v) for all v 2 V(G −x), and |L0(y)| > dG−x(y) since c < L(y). Also
+
+G −x is connected. Hence Lemma 7.26 yields an L0-coloring of G −x and this extends to an
+L-coloring of G by using color c on x.
+⇤
+
+Lemma 7.32. If a connected graph G has a nonempty degree-choosable induced subgraph H, then
+G is degree-choosable.
+
+Proof. Let L be a list assignment for G with |L(v)| ≥dG(v) for all v. For each component F of
+G −V(H), connectedness of G gives a vertex yF 2 V(F) having a neighbor in H. Hence
+
+|L(yF)| ≥dG(yF) > dF(yF).
+
+By Lemma 7.26, each component F has an L|V(F)-coloring. Combining these colorings gives an
+L-coloring f of G −V(H).
+
+Now form a list assignment L0 for H by deleting from L(v) the colors used by f on neighbors
+of v. We lose at most one color for each neighbor not in V(H). Since |L(v)| ≥dG(v), we have
+|L0(v)| ≥dH(v) for v 2 V(H). Since H is degree-choosable, H has an L0-coloring f 0. Together,
+
+f and f 0 form an L-coloring of G.
+⇤
+
+This reduces our problem to ﬁnding a degree-choosable induced subgraph. To state the
+next lemma we need, we deﬁne a chord of a cycle to be an edge not in the cycle whose endpoints
+are in the cycle.
+
+Lemma 7.33. An even cycle with at most one chord is degree-choosable.
+
+Proof. Let H be an even cycle with at most one chord. Then H is 2-connected. Let L be a list
+assignment such that |L(v)| ≥dH(v) for all v. If the lists are not identical, then Lemma 7.31
+implies that H is L-colorable. If all lists are identical, alternate two colors around the cycle.
+
+73
+•
+INTRODUCTION TO GRAPH THEORY
+
+If there is a chord and its endpoints have the same color, recolor one endpoint with a third
+color, which belongs to the common list because that endpoint has degree three. Thus H is
+L-colorable in either case, and hence is degree-choosable.
+⇤
+
+Lemma 7.34. In a triangle-free graph with at least one even cycle, the shortest even cycle has at
+most one chord.
+
+Proof. Let C be a shortest even cycle in G. A chord of C must join two vertices at even distance
+on C; otherwise the chord together with one of the two paths on C would form a shorter even
+cycle. Moreover, triangle-freeness implies that each of the two paths between the endpoints of
+a chord has length at least 4.
+
+Suppose that C has two chords. If their endpoints do not alternate on C, the two chords
+together with the two intervening paths form a shorter even cycle. If their endpoints alternate,
+the two cycles formed using both chords are even and their lengths sum to |C| + 4; since
+|C| ≥8, one is shorter than C. Both cases contradict the choice of C. Hence C has at most one
+chord.
+⇤
+
+Lemma 7.35(Erdős–Rubin–Taylor, 210810). Every 2-connected graph G that is not a complete graph
+or an odd cycle has an even cycle with at most one chord.
+
+Proof. Let Q be a largest clique in G. Since G is not complete, it has a vertex outside Q. By
+the fan lemma (Lemma 6.30), there are two paths from this vertex to distinct vertices of Q
+whose interiors avoid Q and which meet only at their starting vertex. Hence we may choose a
+shortest path P with distinct endpoints u, v 2 Q and a nonempty set of internal vertices, all
+outside Q. Let ` be its length.
+
+If ` ⇤2, write P ⇤uxv. Then u, x, v, y, u forms a 4-cycle with the single chord uv, where
+y 2 Q is a nonneighbor of x guaranteed by the maximality of Q. Hence we may assume
+that every vertex outside Q has at most one neighbor in Q. Since P has minimum length, its
+internal vertices have no neighbors in Q except through the end edges of P.
+
+If ` is odd, then adding uv completes a chordless even cycle with P. If ` is even and there
+exists y 2 Q −{u, v}, then adding the path uyv completes an even cycle whose only chord is
+uv.
+
+The only remaining case is when G is triangle-free and we have obtained a chordless odd
+cycle C. By hypothesis, C , G. Since C has no chord, G has a vertex z outside C. Lemma 6.30
+gives two paths from z to distinct vertices a, b 2 V(C), meeting only at z and otherwise
+avoiding C. Their union is an a, b-path whose internal vertices lie outside C. Including the
+a, b-paths along C, we have three independent a, b-paths in G. Two of these have lengths of
+the same parity and form an even cycle. Hence Lemma 7.34 implies that G has an even cycle
+with at most one chord.
+⇤
+
+These lemmas yield the following theorem.
+
+Theorem 7.36. If a connected graph G is not degree-choosable, then every block of G is a complete
+graph or an odd cycle.
+
+Proof. Let B be a block of G that is neither a complete graph nor an odd cycle. A single vertex
+or edge is complete, so B is 2-connected. By Lemma 7.35, B has an even cycle C with at most
+
+8.21. Edge-coloring of graphs
+•
+74
+
+one chord in B. Since blocks are induced subgraphs, every edge of G joining two vertices
+of C lies in B. Thus H :⇤G[V(C)] is an even cycle with at most one chord, and hence, by
+Lemma 7.33, is a degree-choosable induced subgraph of G. Lemma 7.32 now implies that G is
+degree-choosable, a contradiction.
+⇤
+
+Proof of Theorem 7.29. Suppose χ`(G) > ∆(G). By Proposition 7.25, G is not (∆(G) −1)-
+degenerate. Hence G has a subgraph H with δ(H) ≥∆(G). Thus H is ∆(G)-regular. Since G is
+connected and vertices with degree ∆(G) in H have no neighbors outside H, we have H ⇤G.
+
+Thus G is ∆(G)-regular. Since χ`(G) > ∆(G), some list assignment L with |L(v)| ≥∆(G) ⇤
+d(v) for every vertex v admits no L-coloring, so G is not degree-choosable. Theorem 7.36 now
+implies that every block of G is a complete graph or an odd cycle. Since G is regular, G has
+only one block: if there were two or more, the cut-vertex of a leaf block B would have larger
+degree in G than the other vertices of B, since B is complete or a cycle, hence regular, while
+the cut-vertex also has neighbors outside B. Hence G is a complete graph or an odd cycle.
+⇤
+
+Since χ(G) χ`(G), this also gives a second proof of Theorem 7.28.
+
+7.10Edge-coloring of graphs
+
+For some problems, the pairwise relationships between objects are the main concern. For
+example, let vertices represent people and let an edge join each pair that must meet. If colors
+represent time slots, then two meetings involving the same person cannot receive the same
+color. This motivates edge-coloring.
+
+Deﬁnition 7.37. A k-edge-coloring of a loopless multigraph G is a labeling of its edges
+from a set of k colors; it is proper if incident edges receive distinct colors. We call G
+k-edge-colorable if it has a proper k-edge-coloring, and the edge-chromatic number or
+chromatic index χ0(G) is the minimum such k.
+
+Every color class of a proper edge-coloring is a matching. A loop cannot belong to a
+matching, which is why edge-coloring is restricted to loopless multigraphs. Because parallel
+edges must receive distinct colors, edge-coloring behaves diﬀerently for multigraphs and
+simple graphs.
+
+For loopless multigraphs, it is not diﬃcult to see that χ0(G) ⇤χ(L(G)), where L(G) is the
+line graph of Deﬁnition 6.20.
+
+Example 7.38(Reading the same edges as vertices). Let G be the square with diagonal 13,
+with edges a ⇤12, b ⇤23, c ⇤34, d ⇤41, and e ⇤13. The graph on the right is L(G): two
+of its vertices are adjacent exactly when the corresponding edges on the left meet.
+
+1
+2
+
+3
+4
+
+a
+
+c
+
+b
+d
+e
+
+G
+
+a
+b
+
+c
+d
+
+e
+
+L(G)

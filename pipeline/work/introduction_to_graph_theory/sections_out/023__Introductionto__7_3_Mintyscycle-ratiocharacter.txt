@@ -1,0 +1,137 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 7. Colorings
+현재 소단원: 7.3 Minty's cycle-ratio characterization
+직전 소단원: 「7.2 Chromatic number and orientations」
+[본문]
+61
+•
+INTRODUCTION TO GRAPH THEORY
+
+Deﬁnition 7.4. A graph G is k-degenerate if every nonempty subgraph has a vertex of
+degree at most k. The degeneracy of G is maxú,H✓G δ(H); that is, the minimum k such that
+G is k-degenerate. A smallest-last ordering of an n-vertex graph G is constructed iteratively
+from index n to 1 by letting vi be a vertex of minimum degree in G −{vi+1, . . . , vn}.
+
+For example, a k-regular graph has degeneracy k, and any tree with at least one edge is
+1-degenerate. Using this concept, the proof of Proposition 7.3 yields the following better
+bound.
+
+Proposition 7.5. If G is k-degenerate, then G is (k + 1)-colorable.
+
+Proof. In a smallest-last ordering, vi has at most k neighbors among v1, . . . , vi−1. Greedy
+coloring in this order therefore uses at most k + 1 colors.
+⇤
+
+The degeneracy plus one is called the coloring number. It need not equal the chromatic
+number. For example, a complete bipartite graph Kn,n has degeneracy n, but it is 2-colorable:
+color all vertices in one part with one color and all vertices in the other part with another color.
+
+7.2Chromatic number and orientations
+
+What other concepts are relevant to the chromatic number? If a graph G is colored with a
+
+coloring f using colors 1, . . . , k, then we can orient each edge uv with f (u) < f (v) from u to
+v. In this orientation, every directed path has length at most k −1. This shows that the lengths
+of directed paths in an orientation of the graph are relevant to the chromatic number. In fact,
+the following theorem provides an upper bound on χ(G) in terms of the orientations of G.
+
+Theorem 7.6(Gallai–Hasse–Roy–Vitaver theorem). For every orientation D of G,
+
+χ(G) 1 + `(D),
+
+where `(D) is the maximum length of a directed path in D. Equality holds for some orientation of
+G.
+
+Proof. It suﬃces to work component by component. Choose a maximal spanning acyclic
+subdigraph D0 of D. Label each vertex v by the number of vertices in a longest directed path
+of D0 ending at v.
+
+If −!
+uv 2 E(D0), then the label of v is larger than that of u. If −!
+uv 2 E(D) \ E(D0), maximality
+implies that D0 + −!
+uv contains a directed cycle, so D0 has a directed path from v to u; again the
+labels diﬀer. Thus the labels give a proper coloring. Every directed path in D0 is also one in D,
+so at most 1 + `(D) labels are used.
+
+Conversely, take a proper coloring with colors 1, . . . , χ(G) and orient every edge from its
+lower-colored endpoint to its higher-colored endpoint. This orientation is acyclic, and every
+directed path has at most χ(G) −1 edges. Hence equality holds for this orientation.
+⇤
+
+7.3Minty’s cycle-ratio characterization
+
+The preceding theorem relates coloring to directed paths. We now give a diﬀerent charac-
+terization using cycles of the underlying graph. In an acyclic orientation, traversing a cycle
+
+8.5. Chromatic number and clique number
+•
+62
+
+must follow some edges forward and others backward. The following theorem relates the
+imbalance between these two numbers to the chromatic number.
+
+Theorem 7.7(Minty, 21073). Let G be a graph containing a cycle, and let C contain each cycle
+traversed in both directions. For an acyclic orientation D, deﬁne
+
+r(D) ⇤max
+
+C2C
+
+⇠a(C)
+
+b(C)
+
+⇡
+
+,
+
+where a(C) and b(C) count the edges followed forward and backward in D, respectively. Both
+counts are positive because D is acyclic. Then
+
+χ(G) ⇤1 + min
+
+D
+r(D),
+
+where the minimum is over all acyclic orientations of G.
+
+Proof. The cycle ratio of each cyclic component is at most r(D), while forest components need
+at most two colors. Also r(D) ≥1, because each cycle is considered in both directions. Since
+components can be colored separately, it suﬃces to give the upper-bound argument for a
+connected graph containing a cycle. From an acyclic orientation D, we produce a proper
+coloring of G with 1 + r(D) colors. Fix a vertex x 2 V(G), and let W be a walk in G starting at
+x. Let g(W) ⇤a −b · r(D), where a and b are the numbers of steps along W that follow edges
+forward or backward in D, respectively. For each y 2 V(G), let g(y) ⇤max{g(W), W is an
+x, y-walk}.
+
+By the deﬁnition of r(D), traversing a cycle makes no positive contribution to g(W).
+Traversing an edge and immediately returning also has contribution 1 −r(D) 0. Splitting
+a closed walk at repeated vertices therefore shows that every closed walk has nonpositive
+contribution. Deleting closed portions of W leaves an x, y-path with at least the same value.
+There are ﬁnitely many such paths, so g(y) is well-deﬁned.
+
+If −!
+uv 2 E(D), then an x, u-walk attaining g(u) extends along uv to yield g(v) ≥g(u) + 1.
+An x, v-walk attaining g(v) extends backward along uv to yield g(u) ≥g(v) −r(D). Hence
+we have
+
+g(u) + 1 g(v) g(u) + r(D).
+
+This implies that coloring each vertex y by the congruence class of g(y) modulo r(D) + 1
+produces a proper coloring.
+
+Conversely, let f be a proper χ(G)-coloring of G. Let D⇤be the orientation obtained by
+directing each edge from the smaller label to the larger label. Labels increase along every
+directed path, so D⇤is acyclic and every directed path has length at most χ(G) −1. If C is any
+cycle in G, then each run of forward edges along C has length at most χ(G) −1. Each forward
+run is followed by at least one backward edge, so a b(χ(G) −1). Since χ(G) is an integer,
+this gives da/be χ(G) −1. Thus χ(G) ≥1 + r(D⇤) ≥1 + minD r(D).
+⇤
+
+7.4Chromatic number and clique number
+
+As we have seen before, one obvious lower bound of χ(G) is !(G). How good a lower bound
+is this? It turns out that the chromatic number is not bounded by any function of !(G), so this
+lower bound may be arbitrarily far from the actual value of χ(G).
