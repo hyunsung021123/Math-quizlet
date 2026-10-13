@@ -32,16 +32,22 @@
       "section:0": true
     },
     "2_basic_concepts": {
+      "section:0": true,
+      "section:1": true,
+      "section:2": true,
+      "section:3": true
+    },
+    "3_connections_in_graphs": {
       "section:0": true
     }
   },
   "lastPos": {
-    "topicId": "2_basic_concepts",
+    "topicId": "3_connections_in_graphs",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 1
     },
-    "cardIndex": 0
+    "cardIndex": 7
   },
-  "updatedAt": "2026-10-13T15:42:49.157Z"
+  "updatedAt": "2026-10-13T15:43:27.855Z"
 }
