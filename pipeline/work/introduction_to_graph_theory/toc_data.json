@@ -20,17 +20,17 @@
     {
       "chapter_no": "4",
       "chapter_title": "Graph search algorithms",
-      "printed_page": 14
+      "printed_page": 16
     },
     {
       "chapter_no": "5",
       "chapter_title": "Matchings",
-      "printed_page": 19
+      "printed_page": 21
     },
     {
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 29
+      "printed_page": 32
     },
     {
       "chapter_no": "7",
@@ -45,7 +45,7 @@
       "chapter_no": "1",
       "chapter_title": "Course overview",
       "printed_page": -2,
-      "role": "section"
+      "role": "intro"
     },
     {
       "number": "2.1",
@@ -80,11 +80,35 @@
       "role": "section"
     },
     {
-      "number": "3.intro",
-      "title": "Walks, paths, cycles, and trees",
+      "number": "3.1",
+      "title": "Walks, paths, and cycles",
       "chapter_no": "3",
       "chapter_title": "Connections in graphs",
       "printed_page": 8,
+      "role": "section"
+    },
+    {
+      "number": "3.2",
+      "title": "Bipartite graphs",
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 9,
+      "role": "section"
+    },
+    {
+      "number": "3.3",
+      "title": "Cut-edges and cut-vertices",
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 10,
+      "role": "section"
+    },
+    {
+      "number": "3.4",
+      "title": "Trees and forests",
+      "chapter_no": "3",
+      "chapter_title": "Connections in graphs",
+      "printed_page": 11,
       "role": "section"
     },
     {
@@ -100,7 +124,7 @@
       "title": "[A] Cycle space and cut space",
       "chapter_no": "3",
       "chapter_title": "Connections in graphs",
-      "printed_page": 11,
+      "printed_page": 13,
       "role": "section"
     },
     {
@@ -108,7 +132,7 @@
       "title": "Breadth-first and depth-first forests",
       "chapter_no": "4",
       "chapter_title": "Graph search algorithms",
-      "printed_page": 14,
+      "printed_page": 16,
       "role": "section"
     },
     {
@@ -116,7 +140,7 @@
       "title": "[A] Low-link values, bridges, and cut-vertices",
       "chapter_no": "4",
       "chapter_title": "Graph search algorithms",
-      "printed_page": 16,
+      "printed_page": 18,
       "role": "section"
     },
     {
@@ -124,7 +148,7 @@
       "title": "Matchings in bipartite graphs",
       "chapter_no": "5",
       "chapter_title": "Matchings",
-      "printed_page": 19,
+      "printed_page": 21,
       "role": "section"
     },
     {
@@ -132,23 +156,31 @@
       "title": "Matchings in general graphs",
       "chapter_no": "5",
       "chapter_title": "Matchings",
-      "printed_page": 22,
+      "printed_page": 24,
       "role": "section"
     },
     {
       "number": "5.3",
-      "title": "[A] Factors beyond perfect matchings",
+      "title": "Augmenting paths",
       "chapter_no": "5",
       "chapter_title": "Matchings",
-      "printed_page": 25,
+      "printed_page": 27,
       "role": "section"
     },
     {
       "number": "5.4",
+      "title": "[A] Factors beyond perfect matchings",
+      "chapter_no": "5",
+      "chapter_title": "Matchings",
+      "printed_page": 28,
+      "role": "section"
+    },
+    {
+      "number": "5.5",
       "title": "[A] Algorithmic aspects of matchings",
       "chapter_no": "5",
       "chapter_title": "Matchings",
-      "printed_page": 26,
+      "printed_page": 29,
       "role": "section"
     },
     {
@@ -156,7 +188,7 @@
       "title": "Connectivity",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 29,
+      "printed_page": 32,
       "role": "section"
     },
     {
@@ -164,7 +196,7 @@
       "title": "2-connected graphs",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 30,
+      "printed_page": 33,
       "role": "section"
     },
     {
@@ -172,23 +204,23 @@
       "title": "3-connected graphs by contraction",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 33,
+      "printed_page": 36,
       "role": "section"
     },
     {
       "number": "6.4",
-      "title": "Connectivity and independent paths",
+      "title": "Menger's theorem and separator certificates",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 35,
+      "printed_page": 38,
       "role": "section"
     },
     {
       "number": "6.5",
-      "title": "Menger's theorem and separator certificates",
+      "title": "Cycles through prescribed vertices and Hamiltonian cycles",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 35,
+      "printed_page": 42,
       "role": "section"
     },
     {
@@ -196,7 +228,7 @@
       "title": "[A] Closure and Chvátal's degree-sequence theorem",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 41,
+      "printed_page": 45,
       "role": "section"
     },
     {
@@ -204,7 +236,7 @@
       "title": "[A] A flow interpretation of matching and Menger",
       "chapter_no": "6",
       "chapter_title": "Connectivity and cycles",
-      "printed_page": 42,
+      "printed_page": 46,
       "role": "section"
     },
     {

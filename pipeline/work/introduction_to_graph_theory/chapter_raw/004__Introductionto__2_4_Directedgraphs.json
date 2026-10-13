@@ -150,7 +150,7 @@
       "step2_rigorous_logic": [
         {
           "type": "Definition",
-          "name": "정의 2.9 (방향그래프, 호, 방향 그래프)",
+          "name": "정의 2.10 (방향그래프, 호, 방향 그래프)",
           "formal_statement": "방향그래프(directed graph, digraph)는 $E\\subseteq V\\times V$인 쌍 $D=(V,E)$이다. 원소 $(u,v)$를 $\\overrightarrow{uv}$로도 쓰며, 꼬리(tail) $u$와 머리(head) $v$를 갖는 호(arc)라 한다. 고리가 없고 $\\overrightarrow{uv}$와 $\\overrightarrow{vu}$를 동시에 포함하는 일이 없는 방향그래프를 방향 그래프(oriented graph)라 한다."
         },
         {
@@ -161,7 +161,7 @@
         {
           "type": "Definition",
           "name": "정의 (나가는·들어오는 이웃과 차수, 원천과 우물)",
-          "formal_statement": "방향그래프 $D$의 꼭짓점 $v$에 대해 $$N_D^+(v):=\\{w:\\overrightarrow{vw}\\in E(D)\\},\\qquad N_D^-(v):=\\{u:\\overrightarrow{uv}\\in E(D)\\}$$ 로 두고, $d_D^+(v):=|N_D^+(v)|$와 $d_D^-(v):=|N_D^-(v)|$를 각각 나가는 차수(out-degree)와 들어오는 차수(in-degree)라 한다. 들어오는 차수가 $0$인 꼭짓점을 원천(source), 나가는 차수가 $0$인 꼭짓점을 우물(sink)이라 한다."
+          "formal_statement": "방향그래프 $D$의 꼭짓점 $v$에 대해 $$N_D^+(v):=\\{w:\\overrightarrow{vw}\\in E(D)\\},\\qquad N_D^-(v):=\\{u:\\overrightarrow{uv}\\in E(D)\\}$$ 로 두고, $d_D^+(v):=|N_D^+(v)|$와 $d_D^-(v):=|N_D^-(v)|$를 각각 나가는 차수(out-degree)와 들어오는 차수(in-degree)라 한다. 들어오는 차수가 $0$인 꼭짓점을 원천(source), 나가는 차수가 $0$인 꼭짓점을 우물(sink)이라 한다. 모든 호는 꼬리와 머리를 정확히 하나씩 가지므로 (2.1)의 방향 판본은 $$\\sum_{v\\in V(D)}d^+_D(v)=\\sum_{v\\in V(D)}d^-_D(v)=|E(D)|$$이다."
         }
       ],
       "step3_checkpoint": [
@@ -181,7 +181,7 @@
           "type": "ox",
           "question": "방향 그래프(oriented graph)는 $\\overrightarrow{uv}$와 $\\overrightarrow{vu}$를 동시에 포함할 수 있다.",
           "answer": "X",
-          "explanation": "거짓이다. 정의 2.9에 의해 방향 그래프는 고리가 없고 $\\overrightarrow{uv}$와 $\\overrightarrow{vu}$를 동시에 포함하지 않는다. 그래서 방향 그래프의 밑그래프는 단순그래프가 되며, 방향 그래프는 정확히 '단순그래프의 방향 부여'와 같은 것이다."
+          "explanation": "거짓이다. 정의 2.10에 의해 방향 그래프는 고리가 없고 $\\overrightarrow{uv}$와 $\\overrightarrow{vu}$를 동시에 포함하지 않는다. 그래서 방향 그래프의 밑그래프는 단순그래프가 되며, 방향 그래프는 정확히 '단순그래프의 방향 부여'와 같은 것이다."
         },
         {
           "type": "ox",

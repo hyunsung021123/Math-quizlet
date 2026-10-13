@@ -1,0 +1,332 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.4 Menger's theorem and separator certificates
+직전 소단원: 「6.3 3-connected graphs by contraction」
+[본문]
+49
+•
+INTRODUCTION TO GRAPH THEORY
+
+with companion v, this contradicts the choice of {x, y, z}. Therefore G has a 3-contractible
+edge.
+⇤
+
+This lemma provides a way to construct every 3-connected graph.
+
+Theorem 6.17. A graph is 3-connected if and only if it can be obtained from K4 by a sequence of
+vertex 3-splits.
+
+Proof. Starting from a 3-connected graph, repeatedly contract a 3-contractible edge while
+more than four vertices remain. The lemma allows every step, and the ﬁnal graph is K4, the
+only 3-connected graph on four vertices. Reversing these contractions gives vertex 3-splits:
+each restored vertex has degree at least 3, and the neighborhoods have exactly the union
+required in the deﬁnition of a split. Conversely, K4 is 3-connected, and vertex 3-splits preserve
+3-connectivity.
+⇤
+
+For k ≥4, the contraction argument above no longer works in general. We now turn to
+consequences of connectivity, especially the existence of multiple internally disjoint paths.
+
+6.4Menger’s theorem and separator certiﬁcates
+
+Just as a connected graph contains an x, y-path for every pair x, y, a highly connected graph
+contains many internally disjoint paths. The analogous statement also holds for digraphs, so
+we introduce both settings together.
+
+Deﬁnition 6.18. A digraph D is k-connected if |V(D)| > k and D −S is strongly connected
+for every S ✓V(D) with |S| < k. Its connectivity (D) is the maximum such k.
+
+For ú , S ( V(D), let
+
+δ+
+
+D(S) :⇤{−!
+uv 2 E(D) : u 2 S, v < S},
+δ−
+
+D(S) :⇤{−!
+uv 2 E(D) : u < S, v 2 S}.
+
+The digraph D is k-edge-connected if |δ+
+
+D(S)| ≥k for every nonempty proper subset
+S ⇢V(D).
+
+The vertex-connectivity statements below are for graphs and for digraphs without parallel
+arcs. In the edge-connectivity statements, parallel edges or arcs may be allowed and are
+counted separately.
+
+Deﬁnition 6.19. Let x and y be distinct vertices. Two x, y-paths are independent if they
+have no common internal vertex. Let λG(x, y) denote the maximum number of pairwise
+independent x, y-paths.
+
+If xy < E(G) in an undirected graph, or −!
+xy < E(G) in a digraph, an x, y-separating set is
+a set
+
+S ✓V(G) \ {x, y}
+
+such that G −S has no x, y-path. Let G(x, y) be the minimum size of such a set.
+
+Every x, y-separating set meets pairwise independent x, y-paths in distinct internal vertices,
+so
+
+λG(x, y) G(x, y).
+
+7.5. Menger’s theorem and separator certiﬁcates
+•
+410
+
+If an undirected graph G is not complete, then
+
+(G) ⇤min{G(x, y) : x , y, xy < E(G)};
+
+whereas (Kn) ⇤n −1.
+
+To state the edge version of Menger’s theorem, we need the following deﬁnitions.
+
+Deﬁnition 6.20. For distinct vertices x, y, let 0
+
+G(x, y) be the minimum number of edges
+whose deletion destroys all x, y-paths, and let λ0
+
+G(x, y) be the maximum number of
+pairwise edge-disjoint x, y-paths.
+
+The line graph L(G) of a multigraph G has vertex set E(G); two distinct vertices of L(G)
+are adjacent exactly when the corresponding edges of G share an endpoint. The line
+digraph L(D) of a digraph D has vertex set E(D) and an arc from e ⇤(u, v) to f ⇤(v, w)
+whenever e and f are distinct arcs of D.
+
+Theorem 6.21(Menger’s theorem, 21038). Let x and y be distinct vertices of a graph or digraph G.
+If xy < E(G) in the undirected case, or −!
+xy < E(G) in the directed case, then
+
+G(x, y) ⇤λG(x, y).
+
+For all distinct x, y,
+
+0
+
+G(x, y) ⇤λ0
+
+G(x, y).
+
+Example 6.22(A minimum separator certiﬁed by disjoint paths). Let G be the graph below,
+with precisely the displayed edges. The gold edges mark three selected x, y-paths, and
+the dashed box marks S :⇤{s1, s2, s3}.
+
+x
+
+a
+
+b
+
+c
+
+s1
+
+s2
+
+s3
+
+d
+
+e
+
+f
+
+y
+
+S ⇤{s1, s2, s3}
+
+The three paths
+
+P1 ⇤x −a −s1 −d −y,
+P2 ⇤x −b −s2 −e −y,
+P3 ⇤x −c −s3 −f −y
+
+have pairwise disjoint sets of internal vertices. Hence λG(x, y) ≥3. On the other hand,
+every x, y-path must pass from {x, a, b, c} to {d, e, f , y} through S, so G −S has no
+x, y-path. Thus S is an x, y-separating set and G(x, y) 3. Moreover, any separating set
+must meet each of P1, P2, P3 in a diﬀerent internal vertex, and therefore has size at least 3.
+Consequently
+
+G(x, y) ⇤λG(x, y) ⇤3,
+
+51
+•
+INTRODUCTION TO GRAPH THEORY
+
+and the picture exhibits both sides of Menger’s theorem.
+
+We prove the theorem by ﬁrst allowing the endpoints to range over two vertex sets. The
+advantage is that a minimum separator can then divide the problem into two smaller ones.
+
+Deﬁnition 6.23. For X, Y ✓V(G), an X, Y-path meets X only at its ﬁrst vertex and Y only
+at its last vertex. In a digraph it is directed from X to Y. A path of length zero at a
+vertex of X \ Y is allowed. An X, Y-separator is a set Z ✓V(G) meeting every X, Y-path.
+Unlike an x, y-separating set, it may contain endpoints; in particular, both X and Y are
+X, Y-separators.
+
+Theorem 6.24(Menger’s theorem, set form). In a graph or digraph G, the minimum size of an
+X, Y-separator equals the maximum number of pairwise vertex-disjoint X, Y-paths.
+
+Proof. Every separator meets the disjoint paths in distinct vertices, so only the existence of
+enough paths needs proof. We use induction on |V(G)| + |E(G)|. Let k be the minimum size of
+an X, Y-separator. For k ⇤0 there is no X, Y-path, and the assertion is immediate. Assume
+that k ≥1.
+
+Case 1. There is a minimum X, Y-separator Z diﬀerent from both X and Y. Let G1 be induced
+by Z and all vertices on X, Z-paths, and let G2 be induced by Z and all vertices on Z, Y-paths.
+These graphs meet only in Z: an intersection outside Z would give a walk from X to Y avoiding
+
+Z, and hence an X, Y-path avoiding Z. Moreover, no vertex of Y \ Z belongs to G1, and no
+vertex of X \ Z belongs to G2. Both diﬀerences are nonempty, since |Z| ⇤k min{|X|, |Y|}
+and Z , X, Y. Thus both graphs have fewer vertices than G.
+
+Every X, Y-path contains an X, Z-path before its ﬁrst vertex in Z, and a Z, Y-path after its last
+vertex in Z. Consequently, any separator between X \ V(G1) and Z in G1 is an X, Y-separator
+in G. Its minimum size is therefore k, since Z itself is one such separator. Induction supplies k
+disjoint X, Z-paths in G1. Likewise, it supplies k disjoint Z, Y-paths in G2. Each family uses
+every vertex of Z exactly once. Join the two paths at each vertex of Z; since the graphs meet
+only in Z, this gives k disjoint X, Y-paths.
+
+Case 2. Every minimum X, Y-separator equals X or Y. We may assume that |X| ⇤k; if
+necessary, interchange X, Y and, in a digraph, reverse all arcs. If X ✓Y, the k paths of length
+zero at the vertices of X suﬃce. Otherwise, choose x 2 X \ Y. Since X \ {x} is not a separator,
+there is an x, Y-path avoiding X \ {x}. Its ﬁrst edge or arc is e ⇤xw with w < X.
+
+Let Z0 be a minimum X, Y-separator in G −e. If |Z0| ⇤k, induction gives the required paths
+in G −e. Otherwise |Z0| < k, and every X, Y-path avoiding Z0 in G must use e. Hence both
+Z0 [ {x} and Z0 [ {w} are separators in G. Their sizes are at most k, so they are minimum
+separators. Since x < Y and w < X, Case 2 forces
+
+Z0 [ {x} ⇤X,
+Z0 [ {w} ⇤Y.
+
+These equalities give |Z0| ⇤k −1 and x, w < Z0. The length-zero paths at the vertices of Z0,
+together with the single edge or arc xw, are the required k disjoint paths.
+⇤
+
+7.5. Menger’s theorem and separator certiﬁcates
+•
+52
+
+Example 6.25(Edge-disjoint paths in the line graph). Let G be the 4-cycle 1 2 3 4 1 together
+with the diagonal 13, and name its edges a ⇤12, b ⇤23, c ⇤34, d ⇤41, and e ⇤13. In L(G),
+the vertices a, b, c, d form the 4-cycle abcda, and e is adjacent to all four of them. The three
+edge-disjoint 1, 3-paths 123, 143, and 13 of G are recorded in L(G) by the vertex-disjoint
+paths ab, dc, and the single vertex e.
+
+In general, recording the edges of a path produces a path in the line graph, and disjoint
+edge sets become disjoint vertex sets. The reverse translation is not a bĳection between
+arbitrary paths: the three edges of a star K1,3 form a three-vertex path in its line graph K3,
+but they cannot be traversed consecutively as a trail in the star. For this reason the proof
+below prescribes the endpoint sets in L(G) and extracts an x, y-path from the connected
+subgraph formed by the recorded edges.
+
+Proof of Theorem 6.21. For the vertex form, delete x, y and put
+
+X ⇤NG(x),
+Y ⇤NG(y)
+
+in the undirected case. In a digraph use the outneighbors of x and the inneighbors of y,
+omitting x, y themselves. Since there is no edge or arc from x to y, every x, y-path has an
+internal vertex. After its endpoints are deleted, it contains an X, Y-path; conversely, adjoining
+x, y to any X, Y-path gives an x, y-path. Thus separators correspond, and vertex-disjoint
+X, Y-paths correspond to independent x, y-paths. The set form proves the claimed equality.
+
+For the edge form, apply the set form to L(G), taking X to be the edges incident with x and
+Y those incident with y. An x, y-path in G gives an X, Y-path in L(G). Conversely, the edges
+represented by an X, Y-path in L(G) form a connected subgraph containing x, y, so contain
+an x, y-path. Disjoint vertex sets in L(G) give disjoint edge sets in G. Deleting vertices of L(G)
+means deleting the corresponding edges of G, so separators also correspond.
+
+For a digraph, use L(G) with X the arcs leaving x and Y the arcs entering y. A directed
+X, Y-path in the line digraph gives a directed x, y-walk, from which repetitions may be
+removed. The same correspondence proves the directed edge form. Parallel edges or arcs are
+distinct vertices of the line graph or digraph, so they cause no change in this argument.
+⇤
+
+Menger’s theorem now yields global characterizations of vertex- and edge-connectivity.
+
+Theorem 6.26(Global forms of Menger’s theorem). Let G have at least two vertices.
+
+1. A graph or digraph G is k-connected if and only if λG(x, y) ≥k for every ordered pair of
+distinct vertices x, y (with the order ignored for an undirected graph).
+
+2. A multigraph or digraph G is k-edge-connected if and only if λ0
+G(x, y) ≥k for every ordered
+pair of distinct vertices x, y. Here parallel arcs are allowed in a digraph.
+
+To prove this theorem, we need the following lemma.
+
+Lemma 6.27. In a graph, or a digraph without parallel arcs, deleting one edge or arc reduces
+vertex-connectivity by at most one.
+
+Proof. Let H ⇤G −e, where e ⇤xy is an edge or an arc directed from x to y, and let S be
+a smallest separating set of H. If |S| ≥(G), there is nothing to prove. Otherwise G −S is
+connected, or strongly connected in the directed case, while H −S is not.
+
+53
+•
+INTRODUCTION TO GRAPH THEORY
+
+There are nonempty sets A, B partitioning V(G) \ S, with x 2 A and y 2 B, such that e is
+the only edge between A and B in the undirected case, or the only arc from A to B in the
+directed case. If |A| ≥2, then S [ {x} separates G; if |B| ≥2, then S [ {y} separates G. Thus in
+either case |S| + 1 ≥(G). If |A| ⇤|B| ⇤1, then |S| ⇤|V(G)| −2 ≥(G) −1.
+⇤
+
+Proof of the global forms. For edge-connectivity, the local edge form of Menger’s theorem gives
+the result immediately.
+
+Suppose ﬁrst that λG(x, y) ≥k for every ordered pair of distinct vertices. Since at most one
+such path is an edge and all the others use distinct internal vertices, k |V(G)| −1. If a set S
+of fewer than k vertices disconnected G, or made a digraph non-strong, choose x, y < S such
+that G −S has no x, y-path. Every independent x, y-path must meet S, so λG(x, y) |S| < k,
+a contradiction.
+
+Conversely, suppose that G is k-connected. If xy < E(G) in the undirected case, or −!
+xy < E(G)
+in the directed case, the local form of Menger’s theorem gives λG(x, y) ⇤G(x, y) ≥k.
+Otherwise, let e ⇤xy be the relevant edge, or let e ⇤−!
+xy be the relevant arc. Then
+
+λG(x, y) ⇤1 + λG−e(x, y) ⇤1 + G−e(x, y) ≥1 + (G −e) ≥(G) ≥k.
+
+⇤
+
+So far we have connected two speciﬁed vertices by independent paths. It is also useful to
+connect one vertex to a set.
+
+Deﬁnition 6.28. For x 2 V(G) and U ✓V(G) \ {x}, an x, U-fan of size k is a family of k
+paths from x to U that pairwise meet only at x and meet U only at their other endpoints.
+
+Connectivity guarantees the existence of such fans. We ﬁrst record a simple consequence of
+the deﬁnition of k-connectedness; its proof is left as an exercise.
+
+Lemma 6.29(Expansion lemma). If G is a k-connected graph and G0 is formed from G by adding
+a vertex y with at least k neighbors in G, then G0 is k-connected.
+
+Lemma 6.30(Fan lemma; Dirac 21071). A graph with more than k vertices is k-connected if and
+only if, for every x 2 V(G) and every U ✓V(G) \ {x} with |U| ≥k, it has an x, U-fan of size k.
+
+Proof. Suppose ﬁrst that G is k-connected. Add a new vertex y adjacent to every vertex of
+U. By Lemma 6.29 the resulting graph is k-connected, so Theorem 6.26 gives k independent
+x, y-paths. Truncate each path at its ﬁrst vertex in U.
+
+Conversely, suppose that G is not k-connected. Choose a separating set S with |S| < k and
+vertices x, y in distinct components of G −S. Since |V(G)| > k, we may enlarge S, without
+using x or y, so that |S| ⇤k −1. Set U :⇤S [ {y}. An x, U-fan of size k would have to use
+every vertex of U as an endpoint. In particular, its path ending at y would have to avoid S
+internally, contradicting that every x, y-path meets S.
+⇤
+
+6.5Cycles through prescribed vertices and Hamiltonian cycles
+
+Cycles are closely related to several notions introduced above: cut-edges are precisely the
+edges lying on no cycle, and minimum degree forces long cycles. We now study further
+connections among cycles, connectivity, and minimum degree.

@@ -4,9 +4,9 @@
 현재 소단원: 2.3 Special graphs
 직전 소단원: 「2.2 Isomorphism and subgraphs」
 [본문]
-2.2. Isomorphism and subgraphs
+3.3. Isomorphism and subgraphs
 •
-5
+6
 
 2.2Isomorphism and subgraphs
 
@@ -94,14 +94,16 @@ V
 
 Thus two distinct vertices are adjacent in exactly one of G and G.
 
-6
+7
 •
 INTRODUCTION TO GRAPH THEORY
 
 Deﬁnition 2.4. The complete graph Kn has n vertices and all !n
 
 2
-" possible edges. The empty
+"
+
+possible edges. The edgeless
 graph Kn has n vertices and no edges.
 
 A clique is a set of pairwise adjacent vertices, and an independent set (or stable set) is a
@@ -118,7 +120,7 @@ The graph K1,b is called a star; the vertex in its singleton part is its center,
 in the other part are its leaves.
 
 Deﬁnition 2.6. A graph is regular if all its vertices have the same degree, and it is k-regular
-if that common degree is k. For a nonempty graph, we write
+if that common degree is k. For a graph with at least one vertex, we write
 
 ∆(G) :⇤max
 
@@ -149,14 +151,12 @@ v2V(G)
 dG(v) ⇤14 ⇤2e(G),
 
 and the odd-degree vertices are precisely 1 and 2. This calculation illustrates the degree-
-sum identity used in the next lemma.
+sum formula proved next.
 
 Can a graph on seven vertices be 3-regular? The next lemma answers this immediately.
 
-Lemma 2.8(Handshake lemma). Every graph has an even number of vertices of odd degree.
+Lemma 2.8(Degree-sum formula). Every multigraph G satisﬁes
 
-Proof. Each edge contributes two to the degree sum (a loop contributes two at the same vertex),
-so
 ’
 
 v2V(G)
@@ -164,21 +164,27 @@ v2V(G)
 dG(v) ⇤2e(G).
 (2.1)
 
-The sum is even, and therefore an even number of its odd summands occur.
+Proof. Each edge contributes two to the degree sum: one at each endpoint, or two at the same
+vertex if it is a loop.
+⇤
+
+3.5. Directed graphs
+•
+8
+
+Corollary 2.9(Handshake lemma). Every multigraph has an even number of vertices of odd degree.
+
+Proof. The sum in (2.1) is even, and therefore an even number of its odd summands occur.
 ⇤
 
 A 3-regular graph on seven vertices would have degree sum 21, contradicting (2.1).
-
-2.4. Directed graphs
-•
-7
 
 2.4Directed graphs
 
 Some relations are directional: a web page links to another page, or a road may carry traﬃc in
 only one direction.
 
-Deﬁnition 2.9. A directed graph or digraph is a pair D ⇤(V, E) with E ✓V ⇥V. An element
+Deﬁnition 2.10. A directed graph or digraph is a pair D ⇤(V, E) with E ✓V ⇥V. An element
 (u, v), also written −!
 uv, is an arc with tail u and head v. An oriented graph has no loops and
 never contains both −!
@@ -209,4 +215,21 @@ D(v)| and d−
 D(v) :⇤|N−
 
 D(v)| are its out-degree and in-degree. A source
-has in-degree 0; a sink has out-degree 0.
+has in-degree 0; a sink has out-degree 0. Every arc has exactly one tail and one head, so the
+directed analogue of (2.1) is
+
+’
+
+v2V(D)
+
+d+
+
+D(v) ⇤
+
+’
+
+v2V(D)
+
+d−
+
+D(v) ⇤|E(D)|.

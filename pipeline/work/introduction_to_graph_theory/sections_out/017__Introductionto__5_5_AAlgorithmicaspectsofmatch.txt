@@ -1,0 +1,160 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 5. Matchings
+현재 소단원: 5.5 [A] Algorithmic aspects of matchings
+직전 소단원: 「5.4 [A] Factors beyond perfect matchings」
+[본문]
+6.6. [A] Algorithmic aspects of matchings
+•
+310
+
+Here a and b are each replaced by K2,1, while c is replaced by K2,0, consisting of two vertices
+and no edges. For instance, the edge ac becomes aaccac. Thus H has eight vertices; it is an
+auxiliary graph, not an f -factor of G.
+
+Theorem 5.22. Let G be a multigraph and let f : V(G) ! N0 satisfy f (v) dG(v) for every
+
+v 2 V(G). Then G has an f -factor if and only if the graph H constructed from G as above has a
+1-factor.
+
+Proof. If G has an f -factor, select the corresponding edges in H. They leave exactly r(v) vertices
+of A(v) unmatched, which can be matched bĳectively to B(v).
+
+Conversely, in a perfect matching of H, exactly r(v) vertices of A(v) are matched into B(v).
+The remaining f (v) vertices are matched through edges corresponding to edges of G. Taking
+precisely those original edges gives degree f (v) at every vertex v, hence an f -factor.
+⇤
+
+Thus any algorithm for perfect matching can also test for an f -factor. With further work,
+this reduction leads to Tutte’s f -factor theorem, whose proof we omit. For f : V(G) ! N0, let
+
+f (S) ⇤Õ
+
+v2S f (v). Let q(S, T) denote the number of components C of G −(S [ T) such that
+eG(C, T) + f (V(C)) is odd.
+
+Theorem 5.23(Tutte’s f -factor theorem). G has an f -factor if and only if
+
+q(S, T) −
+
+’
+
+v2T
+
+dG−S(v) f (S) −f (T)
+
+holds for all disjoint subsets S, T ✓V(G).
+
+When f (v) ⇤1 for every v and T ⇤;, these inequalities are exactly Tutte’s condition
+
+o(G −S) |S| for a perfect matching.
+
+5.5[A] Algorithmic aspects of matchings
+
+Brute force examines all 2m edge subsets of an m-edge graph. A greedy algorithm is faster but
+may stop at a maximal matching that is not maximum, as on P6 in Section 5.3. Theorem 5.20
+tells us what to search for instead: an augmenting path.
+
+Berge’s theorem leads to a concrete search algorithm in bipartite graphs.
+
+Algorithm 5.24(Bipartite augmenting-path search). Let G have bipartition (X, Y) and current
+matching M. Let U ✓X be the set of vertices of X uncovered by M. Initialize S :⇤U and
+T :⇤ú, and mark every vertex of X as unscanned.
+
+While some vertex x 2 S is unscanned, scan every edge xy < M with y < T. Add y to
+T and record x as its predecessor. If y is uncovered, follow the predecessor pointers back
+to U to recover an augmenting path, augment M, and restart the search. If y is matched
+to w 2 X, add w to S and record y as its predecessor. After all such edges at x have been
+considered, mark x as scanned.
+
+If every vertex of S is scanned without reaching an uncovered vertex of Y, stop: no
+augmenting path exists, and (X \ S) [ T is a minimum vertex cover.
+
+41
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 5.25. Repeated application of Algorithm 5.24 produces a maximum matching M and a
+vertex cover of size |M|.
+
+Proof. At an unsuccessful search, every nonmatching edge from S ends in T, and every
+matching edge from S also ends in T. Thus no edge joins S to Y \ T, so (X \ S) [ T is a vertex
+cover.
+
+Every vertex of S \ U is the mate of a unique vertex of T, and every vertex of T is matched;
+otherwise the search would have found an augmenting path. Hence |T| ⇤|S| −|U|. Since M
+covers precisely X \ U,
+
+|(X \ S) [ T| ⇤|X| −|S| + |T| ⇤|X| −|U| ⇤|M|.
+
+A matching cannot be larger than a vertex cover, so both are optimal.
+⇤
+
+After isolated vertices are set aside, each search takes O(m) time, and each successful
+search increases |M| by one. There are at most n/2 successful searches, giving an O(n + mn)
+implementation, where n ⇤|V(G)| and m ⇤e(G). Hopcroft and Karp (1973) ﬁnd many
+shortest augmenting paths simultaneously and run in O((m + n)pn) time.
+
+Odd cycles complicate the same search in nonbipartite graphs. Edmonds’ blossom algorithm
+contracts certain odd alternating cycles, called blossoms, while preserving the existence of
+augmenting paths; the contracted graph need not be bipartite. Micali and Vazirani (1980) later
+gave an O(mpn) algorithm for general graphs after isolated vertices are set aside.
+
+Sometimes feasibility is not enough: preferences also matter. Consider two sets X and Y of
+equal size n, with each vertex having a strict preference order over the vertices in the other set.
+
+Deﬁnition 5.26. A perfect matching is stable if it has no blocking pair: an unmatched pair
+(x, y) 2 X ⇥Y such that both x and y prefer one another to their assigned partners.
+
+Algorithm 5.27(Gale–Shapley deferred-acceptance algorithm). Initially every vertex is free.
+While some free x 2 X has not proposed to every vertex of Y, let x propose to the
+
+highest-ranked y to whom it has not yet proposed. If y is free, y tentatively accepts x.
+Otherwise, y keeps the preferred of the current partner and x, rejecting the other. Stop
+when every free vertex of X has proposed to every vertex of Y; the next theorem shows
+that no vertex is free at that point.
+
+Theorem 5.28(Gale–Shapley, 21073). The deferred-acceptance algorithm terminates after at most
+
+n2 proposals and produces a stable perfect matching.
+
+Proof. No ordered pair (x, y) is considered twice, so at most n2 proposals occur. Once a vertex
+of Y receives a proposal, it remains tentatively matched and can only exchange its partner for
+a more preferred one. Suppose that some x 2 X is free at termination. Then x has proposed to
+all n vertices of Y, so all of them are tentatively matched, to n distinct vertices of X other than
+x. This is impossible because |X| ⇤n. Hence no vertex of X is free, and since |X| ⇤|Y|, no
+vertex of Y is free either; the matching is perfect.
+
+Suppose that (x, y) blocks the ﬁnal matching. Since x prefers y to its ﬁnal partner, x
+proposed to y earlier. The vertex y rejected x (at that moment or later) only in favor of someone
+
+6.6. [A] Algorithmic aspects of matchings
+•
+42
+
+it preferred to x, and its tentative partner could only improve thereafter. Thus y cannot prefer
+x to its ﬁnal partner, a contradiction.
+⇤
+
+The proposing side receives a stronger guarantee. Write M(x) for the partner of x in a
+perfect matching M. A stable matching M is X-optimal if, for every stable matching N and
+every x 2 X, either M(x) ⇤N(x) or x prefers M(x) to N(x). Thus each vertex of X gets its best
+partner among all stable matchings, not necessarily among all perfect matchings.
+
+Corollary 5.29(X-optimality). With X proposing, the deferred-acceptance algorithm produces the
+unique X-optimal stable matching. In particular, its output does not depend on the order in which
+free vertices of X propose.
+
+Proof. We ﬁrst show that no pair belonging to a stable matching is ever rejected. Otherwise,
+consider the ﬁrst such rejection: y rejects x in favor of x0, and let N be a stable matching
+containing xy. Write y0 ⇤N(x0); then y0 , y. If x0 preferred y0 to y, it would have proposed to
+
+y0 and been rejected before proposing to y. Since x0y0 2 N, this contradicts the choice of the
+ﬁrst rejection. Hence x0 prefers y to y0. But y prefers x0 to x, so (x0, y) blocks N, a contradiction.
+
+Now let M be the output. Every vertex that x prefers to M(x) has already rejected x, and
+therefore cannot be its partner in any stable matching. Thus M is X-optimal. Strict preferences
+make each vertex’s best possible stable partner unique, so the matching is unique as well.
+⇤
+
+This proposer-optimality is also part of the original Gale–Shapley theorem [GS62].

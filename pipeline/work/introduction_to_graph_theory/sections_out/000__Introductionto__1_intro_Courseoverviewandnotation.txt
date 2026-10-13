@@ -29,8 +29,14 @@ average degree 2e(G)/|V(G)|
 δ(G), ∆(G)
 minimum and maximum degree
 
-NG(v), NG[S]
-open neighborhood of v and closed neighborhood of a set S
+NG(v), NG(S)
+neighborhood of v; union of the neighborhoods of the vertices in S
+
+distG(u, v)
+distance: the length of a shortest u, v-path
+
+c(G)
+number of components, isolated vertices included
 
 G[S]
 subgraph of G induced by S ✓V(G)
@@ -44,8 +50,17 @@ complement of a simple graph G
 eG(A, B)
 number of edges between disjoint vertex sets A and B
 
-[A, B]
-the corresponding edge cut when A, B partition V(G)
+[S, S]
+edge cut between S and S ⇤V(G) \ S
+
+G/e
+contraction of the edge e
+
+G⇤
+dual of a plane multigraph G
+
+L(G)
+line graph of G
 
 d+
 
@@ -69,6 +84,12 @@ minimum size of a vertex cover
 minimum size of an edge cover; deﬁned when G has no isolated
 vertex
 
+o(G)
+number of odd components of G
+
+defG(S)
+deﬁciency o(G −S) −|S| of a vertex set S
+
 !(G)
 maximum size of a clique
 
@@ -81,8 +102,18 @@ chromatic number
 χ`(G)
 list chromatic number
 
+vi
+
+INTRODUCTION TO GRAPH THEORY
+
+Symbol
+Meaning
+
 χ0(G)
 edge-chromatic number
+
+PG(k)
+chromatic polynomial: the number of proper colorings from [k]
 
 Connectivity and paths
 
@@ -103,19 +134,13 @@ G(x, y), λ0
 G(x, y)
 edge-separator and edge-disjoint-path analogues
 
-vi
-
-INTRODUCTION TO GRAPH THEORY
-
-Symbol
-Meaning
-
 Probabilistic and extremal notation
 
 G(n, p)
 binomial random graph on [n]; each edge is present independently
 with probability p
-P, E
+
+Pr, E
 probability and expectation
 
 X ⇠Bin(n, p)
@@ -127,6 +152,9 @@ maximum number of edges in an n-vertex F-free graph
 Tr(n)
 balanced complete r-partite Turán graph
 
+R(p, q)
+Ramsey number: the least N such that every red/blue coloring of
+E(KN) has a red Kp or a blue Kq
 R(p, q; r)
 least order forcing a red p-set or blue q-set in an r-uniform two-
 coloring
@@ -151,16 +179,14 @@ net outﬂow of an oriented edge function f at v
 Zk
 cyclic group of integers modulo k
 
+FG(q), TG(x, y)
+ﬂow polynomial and Tutte polynomial (Advanced)
+
 A deliberate overload. The letter λ denotes a local path-packing number in the connectivity
 chapter and Laplacian eigenvalues in the spectral chapter. The subscripted forms λG(x, y)
 and λi keep the two uses distinguishable.
 
 vii
-
-
-PART I
-
-Foundations and Structure
 
 CHAPTER 1
 
@@ -176,17 +202,17 @@ C
 
 D
 
-1
 2
-
 3
-4
 
+4
 5
 
 6
 
 7
+
+8
 
 ABSTRACT MULTIGRAPH
 
@@ -206,7 +232,8 @@ In the eighteenth century, the city of Königsberg inspired a celebrated puzzle:
 a walk that crosses each of its seven bridges exactly once? The geometry of the islands and the
 lengths of the bridges do not matter. What matters is only which land masses are joined by
 which bridges. Replacing each land mass by a vertex and each bridge by an edge produces the
-graph in Figure 1.1.
+graph in Figure 1.1. Euler’s answer, which depends only on the degrees of this multigraph,
+appears in Section 3.5.
 
 This act of abstraction is typical. A transit map suppresses geographic detail while preserving
 which stations are connected. A communication network records which devices can exchange
@@ -231,77 +258,16 @@ Planarity and topology.. The four-color problem asks for a coloring of a map in 
 ing regions receive diﬀerent colors. Translating maps into graphs leads to planar embeddings,
 Euler’s formula, graph minors, and the interaction between graph theory and topology.
 
-Probabilistic and extremal methods.. Random choices can prove that an object exists even when
-no explicit construction is apparent. Extremal graph theory asks how many edges force a
-
-2
-
-•
 3
 
+•
+4
+
+Probabilistic and extremal methods.. Random choices can prove that an object exists even when
+no explicit construction is apparent. Extremal graph theory asks how many edges force a
 prescribed subgraph. Together these viewpoints explain many striking threshold and Ramsey
 phenomena.
 
 Spectral methods and flows.. The adjacency relation can be encoded by a 0–1 matrix, bringing
 linear algebra into graph theory. Orientations and nowhere-zero ﬂows provide a second
 language for conservation and reveal a duality with coloring in plane graphs.
-
-CHAPTER 2
-
-Basic concepts
-
-2.1Graphs and multigraphs
-
-We begin with a deﬁnition broad enough to model the seven bridges in Figure 1.1.
-
-Deﬁnition 2.1. A multigraph G consists of a ﬁnite vertex set V(G) and a ﬁnite multiset E(G)
-whose members are one- or two-element subsets of V(G). A one-element edge is a loop,
-and repeated two-element edges are parallel edges. The order and size of G are |G| :⇤|V(G)|
-and e(G) :⇤|E(G)|, respectively.
-
-A multigraph is simple if it has no loops or parallel edges. Unless stated otherwise, the
-word graph means a ﬁnite simple graph.
-
-We write [n] :⇤{1, 2, . . . , n} and abbreviate the edge {u, v} as uv. For a loop at u we write
-uu. For example, the multigraph
-
-G ⇤!
-
-[5], {{11, 12, 12, 23, 34, 45, 15}}"
-
-has order 5 and size 7. The two copies of 12 are distinct edge occurrences.
-
-1
-
-2
-
-3
-
-4
-5
-
-loop
-
-parallel pair
-
-Figure 2.1. A multigraph with a loop and a pair of parallel edges. A loop contributes two to the degree of
-its vertex.
-
-The following terminology will be used throughout.
-
-• Distinct vertices u and v are adjacent if uv 2 E(G).
-
-• A vertex v and an edge e are incident if v is an endpoint of e. Two distinct edges are
-adjacent if they share an endpoint.
-
-• A vertex adjacent to v is a neighbor of v; the set of all such vertices is NG(v), or simply
-N(v).
-
-• The degree dG(v) is the number of edge-ends incident with v, counted with multiplicity.
-Thus a loop contributes two. For a simple graph, dG(v) ⇤|NG(v)|.
-
-Parallel edges do not change vertex coloring or the existence of a matching, but they do
-matter in questions about edge cuts. We will therefore state explicitly whenever multigraphs
-are allowed.
-
-4

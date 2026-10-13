@@ -4,9 +4,9 @@
 현재 소단원: 2.2 Isomorphism and subgraphs
 직전 소단원: 「2.1 Graphs and multigraphs」
 [본문]
-2.2. Isomorphism and subgraphs
+3.3. Isomorphism and subgraphs
 •
-5
+6
 
 2.2Isomorphism and subgraphs
 

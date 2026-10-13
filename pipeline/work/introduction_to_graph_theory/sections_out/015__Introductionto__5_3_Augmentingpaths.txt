@@ -1,0 +1,138 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 5. Matchings
+현재 소단원: 5.3 Augmenting paths
+직전 소단원: 「5.2 Matchings in general graphs」
+[본문]
+6.4. Augmenting paths
+•
+38
+
+v
+
+a1
+
+C1
+
+a2
+
+C2
+
+a3
+
+C3
+
+Each dotted group has ﬁve vertices. The three gold edges are cut-edges.
+
+The resulting graph is 3-regular, but deleting v leaves the three odd components C1, C2, C3.
+Thus
+
+defG({v}) ⇤o(G −v) −1 ⇤3 −1 ⇤2,
+
+so every matching leaves at least two vertices uncovered. In particular, the graph has no
+1-factor.
+
+5.3Augmenting paths
+
+A matching is maximal if no edge can be added to it, and maximum if it has size ↵0(G). These
+notions diﬀer: on P6, the second and fourth edges form a maximal matching of size two,
+although a matching of size three exists. The following notion explains how a matching that is
+not maximum can be improved.
+
+Deﬁnition 5.19. Given a matching M, an M-alternating path alternates between edges in M
+and edges outside M. An M-augmenting path is a positive-length alternating path whose
+two endpoints are uncovered by M.
+
+For two edge sets A and B, their symmetric diﬀerence is A4B :⇤(A \ B) [ (B \ A). If P is
+M-augmenting, then
+
+M0 :⇤M4E(P) ⇤(M \ E(P)) [ (E(P) \ M)
+
+is a matching with |M0| ⇤|M| + 1. Indeed, the ends of P are uncovered by M, so the ﬁrst and
+last edges of P lie outside M, and P has one more edge outside M than in M. An internal
+vertex of P is covered by exactly one edge of M, and that edge lies on P; hence in M0 it is
+covered only by its other edge on P. The two ends of P are covered only by their edges on P.
+
+M
+M
+uncovered
+uncovered
+
+Figure 5.2. An augmenting path. Replacing the two highlighted matching edges by the other three path
+edges increases the matching size by one.
+
+39
+•
+INTRODUCTION TO GRAPH THEORY
+
+Theorem 5.20(Berge, 21068). A matching M in a graph G is maximum if and only if G has no
+
+M-augmenting path.
+
+Proof. An augmenting path immediately produces a larger matching, as observed above.
+Conversely, suppose that G has a matching N with |N| > |M|, and consider the spanning
+subgraph with edge set M4N. Every vertex meets at most one edge of each matching, so every
+component is a path, an even cycle, or an isolated vertex, and its edges alternate between M
+and N. Since N has more edges in total, some path component has one more edge of N than
+of M. It begins and ends with edges of N. Its two ends are uncovered by M: an edge of M at
+an end would lie in M4N, because the end’s only N-edge is on the path and is not in M, so
+the end would have degree two there. Hence this component is an M-augmenting path.
+⇤
+
+5.4[A] Factors beyond perfect matchings
+
+Using Tutte’s 1-factor theorem, we can deduce a theorem regarding more general factors. The
+following deﬁnition provides a concept more general than k-factors.
+
+Deﬁnition 5.21. Given a multigraph G and f : V(G) ! N0, an f -factor of G is a spanning
+subgraph H such that dH(v) ⇤f (v) for all v 2 V(G); as usual, a loop contributes two to
+dH(v).
+
+We can reduce the f -factor problem to a perfect-matching problem. If f (v) > dG(v)
+for some v, there is clearly no f -factor, so assume f (v) dG(v) for every vertex and set
+r(v) :⇤dG(v) −f (v). Replace each vertex v by a copy of KdG(v),r(v) with parts A(v) and B(v).
+Index the vertices of A(v) by the edge incidences at v. For every edge, join the two vertices
+corresponding to its two incidences. (A loop has two distinct incidences at the same vertex.)
+Call the resulting graph H.
+
+For example, take G ⇤K3 with f (a) ⇤f (b) ⇤1 and f (c) ⇤2. Then r(a) ⇤r(b) ⇤1 and
+r(c) ⇤0. The construction is shown below; ve denotes the vertex of A(v) corresponding to the
+incidence of edge e at v.
+
+G
+
+a
+b
+
+c
+
+f (a) ⇤f (b) ⇤1
+
+f (c) ⇤2
+
+H
+
+aab
+
+aac
+
+bab
+
+bbc
+
+cac
+cbc
+
+A(a)
+A(b)
+
+A(c)
+
+B(a)
+B(b)
+
+B(c) ⇤ú
+
+Blue edges join A(v) to B(v) inside each replacement. Gold dashed edges join the two incidences of
+
+each original edge.

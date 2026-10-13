@@ -1,0 +1,174 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 3. Connections in graphs
+현재 소단원: 3.6 [A] Cycle space and cut space
+직전 소단원: 「3.5 Eulerian circuits」
+[본문]
+4.7. [A] Cycle space and cut space
+•
+24
+
+Theorem 3.20(Veblen). The edge set of a multigraph G can be partitioned into the edge sets of
+cycles if and only if G is even. Here loops and pairs of parallel edges count as cycles of lengths 1
+and 2.
+
+Proof. Each cycle contributes 0 or 2 to the degree of every vertex, so a multigraph partitioned
+into cycles is even.
+
+Conversely, we use induction on e(G); there is nothing to prove if e(G) ⇤0. Let G be even
+with e(G) > 0, and let G0 be obtained by deleting the isolated vertices. Every vertex of G0 has
+positive even degree, hence degree at least 2. If G0 has a loop or a pair of parallel edges, these
+form a cycle. Otherwise G0 is a simple graph with δ(G0) ≥2, and Proposition 3.6 gives a cycle.
+In either case G contains a cycle C. The multigraph G −E(C) is even and has fewer edges, so
+by induction its edge set is partitioned into cycles. Adding C gives a partition for G.
+⇤
+
+Theorem 3.21(Euler). A connected multigraph with at least one edge has an Eulerian circuit if
+and only if it is even.
+
+Proof. Let W be a closed trail. Each time W passes through a vertex v, it enters along one
+edge-end at v and leaves along another; the start and the ﬁnish at v0 ⇤v` likewise pair the
+ends of e` and e1. Since the edges of W are distinct, W uses an even number of edge-ends at
+every vertex. If W is Eulerian, it uses all edge-ends, so G is even.
+
+Conversely, let G be connected and even with at least one edge. By Theorem 3.20, G contains
+a cycle, so it has closed trails of positive length. Let W be a longest one, and suppose that W
+misses an edge. Some edge f < E(W) has an endpoint v on W: otherwise no edge would join
+V(W) to its complement, so V(W) ⇤V(G) by connectivity, and then every edge would belong
+to W. By the ﬁrst paragraph, G −E(W) is even, so by Theorem 3.20 the edge f lies in a cycle C
+of G −E(W), and C passes through v. Read W cyclically from v back to v, and then traverse C
+from v back to v. This is a closed trail longer than W, a contradiction.
+⇤
+
+Corollary 3.22. A connected multigraph has an Eulerian trail that is not closed if and only if it has
+exactly two vertices of odd degree. Such a trail starts and ends at these two vertices.
+
+Proof. If x and y are the two odd vertices, add a new edge f ⇤xy. The result is connected and
+even, so it has an Eulerian circuit; starting it just after f and deleting f leaves an Eulerian trail
+of G joining x and y. Conversely, an Eulerian x, y-trail with x , y, followed by a new edge
+
+f ⇤yx, is an Eulerian circuit of G + f . By Theorem 3.21, G + f is even, so x and y are exactly
+the odd vertices of G.
+⇤
+
+In the multigraph of Figure 1.1, the land masses A, B, C, D have degrees 5, 3, 3, 3. All four
+are odd, so by Theorem 3.21 and Corollary 3.22 there is no walk that crosses each bridge
+exactly once.
+
+3.6[A] Cycle space and cut space
+
+Adding an edge to a spanning tree creates one cycle. This simple observation also gives a way
+to describe all even-degree subgraphs at once. The useful addition operation is symmetric
+diﬀerence: an edge appearing twice cancels.
+
+25
+•
+INTRODUCTION TO GRAPH THEORY
+
+Let F2 ⇤{0, 1} be the ﬁeld with addition and multiplication modulo two. A subset F ✓E(G)
+is represented by its characteristic vector 1F 2 FE(G)
+
+2
+. Thus 1F + 1F0 ⇤1F4F0. The dot product
+counts the parity of an intersection:
+
+1F · 1F0 ⇤|F \ F0|
+(mod 2).
+
+All vector spaces and dimensions in this section are over F2.
+
+Deﬁnition 3.23. The cycle space Z(G) consists of the vectors 1F of the edge sets F for which
+the spanning subgraph (V(G), F) is even (Deﬁnition 3.19). For S ✓V(G) and S :⇤V(G)\S,
+the edge set [S, S] is the set of edges with exactly one endpoint in S. The cut space is
+
+B(G) ⇤{1[S,S] : S ✓V(G)}.
+
+Both are vector spaces. Adding two even degrees modulo two gives an even degree, and
+[S, S] 4 [S0, S0] ⇤[S 4 S0, S 4 S0]. In particular, a cycle-space element need not itself be a single
+cycle, and a cut-space element need not be a minimal edge cut.
+
+Example 3.24(Two cycles generate a third). Consider the square with a diagonal below.
+Take the spanning tree T ⇤{12, 23, 34}. The remaining edges 41 and 13 create the cycles
+
+C41 ⇤12341 and C13 ⇤1231.
+
+1
+2
+
+3
+4
+
+In the coordinate order (12, 23, 34, 41, 13), their vectors are
+
+(1, 1, 1, 1, 0),
+(1, 1, 0, 0, 1).
+
+Their sum is (0, 0, 1, 1, 1), the triangle 1341. Together with the empty edge set, these are
+all four elements of Z(G). The cut [{1}, {2, 3, 4}] ⇤{12, 41, 13} has vector (1, 0, 0, 1, 1). It
+meets each of these three cycles in two edges.
+
+For a graph with several components, choose a spanning tree in each component; their
+union T is a spanning forest. For e < E(T), the ends of e lie in the same tree of T and are not
+adjacent in T. By Proposition 3.15, they are joined by a unique path in T, and that path together
+with e is the only cycle in T + e. It is the fundamental cycle Ce.
+
+Theorem 3.25. If G has n vertices, m edges, and c components, then
+
+dim Z(G) ⇤m −n + c,
+dim B(G) ⇤n −c,
+B(G) ⇤Z(G)?.
+
+The fundamental cycles of any spanning forest form a basis of Z(G).
+
+Proof. Each Ce contains precisely one edge outside T, namely e. Therefore their vectors are
+linearly independent. Given an even-degree edge set F, add Ce for every e 2 F \ E(T). The
+resulting edge set lies in T and still has even degrees. A nonempty subgraph of a forest
+
+4.7. [A] Cycle space and cut space
+•
+26
+
+containing an edge has a vertex of degree one, so this resulting edge set is empty. The
+fundamental cycles consequently span the cycle space. Since T has n −c edges, the ﬁrst
+dimension formula follows.
+
+The map FV(G)
+
+2
+! FE(G)
+
+2
+sending 1S to 1[S,S] is linear. Its kernel consists of vectors constant
+on each component: a cut is empty precisely when no edge has endpoints with diﬀerent
+coordinates. This kernel has dimension c, so the image has dimension n −c.
+
+Finally, for an even-degree edge set F and a vertex set S,
+
+’
+
+v2S
+
+dF(v) ⇤2
+
+''F \ E(G[S])
+
+'' +
+
+''F \ [S, S]
+
+'',
+
+because an edge of F with both ends in S is counted twice and an edge of F with exactly
+one end in S is counted once. The left side is even. Hence every vector in the cut space is
+orthogonal to every vector in the cycle space. The two dimension formulas show that the cut
+space has the full dimension of Z(G)?, proving equality.
+⇤
+
+There is a corresponding basis of cuts. For f 2 E(T), deleting f splits its tree into two parts.
+Let D f be the cut separating these parts in G, with all other components kept on either side.
+Its only edge in T is f . Thus the n −c vectors 1D f are independent and form a basis of B(G).
+In Example 3.24, they are
+
+(1, 0, 0, 1, 1),
+(0, 1, 0, 1, 1),
+(0, 0, 1, 1, 0).

@@ -1,0 +1,260 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 6. Connectivity and cycles
+현재 소단원: 6.5 Cycles through prescribed vertices and Hamiltonian cycles
+직전 소단원: 「6.4 Menger's theorem and separator certificates」
+[본문]
+53
+•
+INTRODUCTION TO GRAPH THEORY
+
+There are nonempty sets A, B partitioning V(G) \ S, with x 2 A and y 2 B, such that e is
+the only edge between A and B in the undirected case, or the only arc from A to B in the
+directed case. If |A| ≥2, then S [ {x} separates G; if |B| ≥2, then S [ {y} separates G. Thus in
+either case |S| + 1 ≥(G). If |A| ⇤|B| ⇤1, then |S| ⇤|V(G)| −2 ≥(G) −1.
+⇤
+
+Proof of the global forms. For edge-connectivity, the local edge form of Menger’s theorem gives
+the result immediately.
+
+Suppose ﬁrst that λG(x, y) ≥k for every ordered pair of distinct vertices. Since at most one
+such path is an edge and all the others use distinct internal vertices, k |V(G)| −1. If a set S
+of fewer than k vertices disconnected G, or made a digraph non-strong, choose x, y < S such
+that G −S has no x, y-path. Every independent x, y-path must meet S, so λG(x, y) |S| < k,
+a contradiction.
+
+Conversely, suppose that G is k-connected. If xy < E(G) in the undirected case, or −!
+xy < E(G)
+in the directed case, the local form of Menger’s theorem gives λG(x, y) ⇤G(x, y) ≥k.
+Otherwise, let e ⇤xy be the relevant edge, or let e ⇤−!
+xy be the relevant arc. Then
+
+λG(x, y) ⇤1 + λG−e(x, y) ⇤1 + G−e(x, y) ≥1 + (G −e) ≥(G) ≥k.
+
+⇤
+
+So far we have connected two speciﬁed vertices by independent paths. It is also useful to
+connect one vertex to a set.
+
+Deﬁnition 6.28. For x 2 V(G) and U ✓V(G) \ {x}, an x, U-fan of size k is a family of k
+paths from x to U that pairwise meet only at x and meet U only at their other endpoints.
+
+Connectivity guarantees the existence of such fans. We ﬁrst record a simple consequence of
+the deﬁnition of k-connectedness; its proof is left as an exercise.
+
+Lemma 6.29(Expansion lemma). If G is a k-connected graph and G0 is formed from G by adding
+a vertex y with at least k neighbors in G, then G0 is k-connected.
+
+Lemma 6.30(Fan lemma; Dirac 21071). A graph with more than k vertices is k-connected if and
+only if, for every x 2 V(G) and every U ✓V(G) \ {x} with |U| ≥k, it has an x, U-fan of size k.
+
+Proof. Suppose ﬁrst that G is k-connected. Add a new vertex y adjacent to every vertex of
+U. By Lemma 6.29 the resulting graph is k-connected, so Theorem 6.26 gives k independent
+x, y-paths. Truncate each path at its ﬁrst vertex in U.
+
+Conversely, suppose that G is not k-connected. Choose a separating set S with |S| < k and
+vertices x, y in distinct components of G −S. Since |V(G)| > k, we may enlarge S, without
+using x or y, so that |S| ⇤k −1. Set U :⇤S [ {y}. An x, U-fan of size k would have to use
+every vertex of U as an endpoint. In particular, its path ending at y would have to avoid S
+internally, contradicting that every x, y-path meets S.
+⇤
+
+6.5Cycles through prescribed vertices and Hamiltonian cycles
+
+Cycles are closely related to several notions introduced above: cut-edges are precisely the
+edges lying on no cycle, and minimum degree forces long cycles. We now study further
+connections among cycles, connectivity, and minimum degree.
+
+7.6. Cycles through prescribed vertices and Hamiltonian cycles
+•
+54
+
+Theorem 6.31(Dirac, 21071). For k ≥2, every set of k vertices in a k-connected graph lies on a
+common cycle.
+
+Example: putting one more vertex on a cycle. Consider the wheel whose rim is C ⇤apqbra
+and whose hub x is adjacent to every vertex of C. As in the earlier wheel example, this
+graph is 3-connected. Suppose that the prescribed vertices are a, b, x. The cycle C already
+contains a, b, and the three edges xp, xq, xr form an x, V(C)-fan.
+
+C and a 3-fan
+
+a
+
+p
+q
+
+b
+
+r
+
+x
+
+replace pq
+
+A cycle through a, b, x
+
+a
+
+p
+q
+
+b
+
+r
+
+x
+
+The fan endpoints p, q lie on the same segment a, p, q, b of C. Replacing pq by p, x, q
+gives the gold cycle apxqbra, which contains all three prescribed vertices. The right panel
+omits edges not used in this replacement. The proof below uses the same idea with fan
+paths in place of single edges.
+
+Proof. We use induction on k. For k ⇤2, two independent paths between the two prescribed
+vertices form a cycle.
+
+Let k > 2, let S be a set of k vertices, and choose x 2 S. By induction, G has a cycle C
+containing S \ {x}. If x 2 V(C), we are done.
+
+If |V(C)| ⇤k −1, apply the fan lemma (Lemma 6.30) using (k −1)-connectivity to obtain an
+x, V(C)-fan of size k −1. Its endpoints are all the vertices of C. Two consecutive endpoints
+on C, together with their two fan paths, replace the edge between them by a path through x,
+producing a cycle containing S.
+
+If |V(C)| ≥k, take an x, V(C)-fan of size k. The vertices of S \ {x} divide C into k −1 cyclic
+segments, each containing one prescribed vertex at its beginning and none in its interior.
+Two fan paths end in the same segment. Replace the subpath of that segment between their
+endpoints—which contains no prescribed vertex internally—by the path through x. The
+resulting cycle contains all of S.
+⇤
+
+A cycle in an n-vertex graph has length at most n. A cycle of length n is spanning, which
+motivates the following deﬁnition.
+
+Deﬁnition 6.32. A spanning cycle is called a Hamiltonian cycle. A graph is Hamiltonian if it
+contains a Hamiltonian cycle.
+
+The minimum-degree bound of Proposition 3.6 guarantees a cycle of length at least δ(G)+1.
+It yields a Hamiltonian cycle when δ(G) ⇤n −1, but this covers only the complete graph. We
+ﬁrst record a simple obstruction to Hamiltonicity, which explains why the thresholds below
+cannot be lowered.
+
+55
+•
+INTRODUCTION TO GRAPH THEORY
+
+Proposition 6.33. If G is Hamiltonian, then G −S has at most |S| components for every nonempty
+set S ( V(G).
+
+Proof. Let C be a Hamiltonian cycle of G. Deleting the |S| vertices of S from C cuts it into at
+most |S| paths. These paths together cover V(G) \ S and lie in G −S, so G −S has at most |S|
+components.
+⇤
+
+For example, if 1 a < b, then Ka,b is not Hamiltonian: deleting its part of size a leaves
+b > a isolated vertices. Similarly, a graph with a cut-vertex w is not Hamiltonian, since G −w
+has at least two components.
+
+Theorem 6.34(Ore’s theorem, 21071). Let G be an n-vertex graph. If n ≥3 and d(u) + d(v) ≥n
+for all distinct nonadjacent vertices u, v, then G is Hamiltonian.
+
+Corollary 6.35(Dirac’s theorem, 21063). Let G be an n-vertex graph. If n ≥3 and δ(G) ≥n/2,
+then G is Hamiltonian.
+
+Proof. Every two vertices u, v satisfy d(u)+ d(v) ≥n/2+ n/2 ⇤n, so Theorem 6.34 applies.
+⇤
+
+Both bounds are sharp. The complete bipartite graph Kb(n−1)/2c,d(n+1)/2e has minimum
+degree b(n −1)/2c < n/2, and by Proposition 6.33 it is not Hamiltonian, because its parts
+have diﬀerent sizes. Thus Dirac’s minimum-degree threshold cannot be lowered. For Ore’s
+threshold, identify one vertex of Ka+1 with one vertex of Kb+1, where a, b ≥1 and a + b ⇤n −1.
+Every nonadjacent pair in the resulting graph has degree sum n −1, but the common vertex is
+a cut-vertex, so the graph is not Hamiltonian by Proposition 6.33.
+
+To prove Ore’s theorem, we ﬁrst establish the following lemma.
+
+Lemma 6.36(Ore’s lemma, 21071). Let u and v be distinct nonadjacent vertices of an n-vertex
+graph G. If d(u) + d(v) ≥n, then G is Hamiltonian if and only if G + uv is Hamiltonian.
+
+Proof. If G is Hamiltonian, then so is G+uv. Conversely, suppose that G+uv is Hamiltonian but
+G is not. Every Hamiltonian cycle of G + uv then uses uv. Deleting uv from such a cycle leaves
+a spanning path v1 . . . vn with u ⇤v1 and v ⇤vn. If, for some i, we have uvi+1, vvi 2 E(G),
+then deleting vivi+1 from the path and adding these two edges yields a Hamiltonian cycle of
+G.
+
+Set
+
+S :⇤{i : uvi+1 2 E(G)},
+T :⇤{i : vvi 2 E(G)}.
+
+Then |S| + |T| ⇤d(u) + d(v) ≥n, whereas S, T ✓[n −1]. Thus S \ T , ú, and any i 2 S \ T
+yields a Hamiltonian cycle of G.
+⇤
+
+Proof of Ore’s theorem. Add the missing edges of G one at a time until the graph is complete.
+Degrees never decrease, so the endpoints of each added edge have degree sum at least n. By
+Ore’s lemma (Lemma 6.36), each addition preserves whether the graph is Hamiltonian. Since
+Kn is Hamiltonian for n ≥3, so is G.
+⇤
+
+7.7. [A] Closure and Chvátal’s degree-sequence theorem
+•
+56
+
+6.6[A] Closure and Chvátal’s degree-sequence theorem
+
+We now deﬁne the closure operation used to apply Ore’s lemma repeatedly.
+
+Deﬁnition 6.37. A (Hamiltonian) closure of an n-vertex graph G is obtained by repeatedly
+joining nonadjacent vertices whose current degree sum is at least n, until no such pair
+remains. A graph is closed if no such pair exists.
+
+Theorem 6.38(Bondy–Chvátal, 21087). The closure of a graph is unique; that is, it does not depend
+on the order of edge additions. Denote it by C(G). A graph is Hamiltonian if and only if its closure
+is Hamiltonian.
+
+Proof. From an n-vertex graph G, form a closure G1 by adding e1, . . . , er in order and a closure
+G2 by adding f1, . . . , fs in order. Each addition joins vertices whose degree sum is at least n
+at that time. Once a pair becomes addable, it remains addable and therefore must be joined
+before the process terminates.
+
+If G2 * G1, let fi be the ﬁrst edge in the second sequence that is absent from G1. Since
+f1, . . . , fi−1 2 E(G1), the edge fi is addable to G1 and therefore must also belong to G1, a
+contradiction. Hence G2 ✓G1; by symmetry, G1 ✓G2.
+
+The second assertion follows from Lemma 6.36.
+⇤
+
+The closure theorem yields the following degree-sequence criterion, which strengthens
+Dirac’s theorem.
+
+Theorem 6.39(Chvátal, 21083). Let n ≥3, and let
+
+d1 d2 · · · dn
+
+be the degree sequence of an n-vertex graph G. If, for every integer i with 1 i < n/2,
+
+di > i
+or
+dn−i ≥n −i,
+
+then G is Hamiltonian.
+
+Proof. Adding edges cannot decrease any entry of the nondecreasing degree sequence, so the
+closure of G also satisﬁes Chvátal’s condition. By the closure theorem, it is enough to prove
+that every closed graph satisfying the condition is complete.
+
+Suppose that a closed graph G is not complete. Choose a nonadjacent pair u, v with
+maximum degree sum, and assume d(u) d(v). Since G is closed,
+
+d(u) + d(v) n −1.
+
+If d(u) ⇤0, then d1 ⇤0 1, while the isolated vertex u implies dn−1 n −2 < n −1. Thus
+the condition fails at i ⇤1.
+
+Hence let i :⇤d(u) ≥1. Since 2d(u) d(u) + d(v) n −1, we have i < n/2. By the choice
+of u, v, every nonneighbor of v has degree at most d(u) ⇤i. There are
+
+n −1 −d(v) ≥d(u) ⇤i
+
+such vertices, so di i.

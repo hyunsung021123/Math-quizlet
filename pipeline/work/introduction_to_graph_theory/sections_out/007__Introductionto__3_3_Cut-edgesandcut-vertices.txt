@@ -1,0 +1,118 @@
+[문서 맥락]
+책: Introduction to Graph Theory / 저자: Jaehoon Kim
+챕터: 3. Connections in graphs
+현재 소단원: 3.3 Cut-edges and cut-vertices
+직전 소단원: 「3.2 Bipartite graphs」
+[본문]
+21
+•
+INTRODUCTION TO GRAPH THEORY
+
+Otherwise, split the walk at two occurrences of a repeated vertex other than the initial/ﬁnal
+pair. The portion between these occurrences and the remaining portion, read cyclically, are
+shorter closed walks. Their lengths sum to an odd number, so one is odd. Repeat with that
+walk. The length strictly decreases, so the process ends with an odd cycle.
+⇤
+
+This yields the fundamental characterization of bipartite graphs.
+
+Theorem 3.8(Odd-cycle characterization). A graph is bipartite if and only if it has no odd cycles.
+
+Proof. A walk in a bipartite graph alternates between the two parts, so every closed walk, and
+in particular every cycle, has even length.
+
+Conversely, suppose that G has no odd cycle. In each component C, choose a root u 2 V(C)
+and partition the vertices according to the parity of distC(u, v). A vertex cannot admit both
+an even and an odd u, v-walk, because following one and then the other in reverse would
+give an odd closed walk and Lemma 3.7 would give an odd cycle. If xy is an edge, then a
+shortest u, x-path followed by xy is a u, y-walk whose length has the parity opposite to that of
+distC(u, x). Hence the endpoints of every edge have opposite parities, so the two parity classes
+form a bipartition of C. Taking their unions over all components gives a bipartition of G.
+⇤
+
+The odd-cycle theorem and Proposition 3.6 are elementary examples of two broad styles
+of graph-theoretic questions. In structural graph theory, one seeks exact descriptions of graph
+classes: the odd-cycle theorem characterizes bipartite graphs by the obstructions they exclude.
+In extremal graph theory, one asks how a numerical hypothesis forces a prescribed structure:
+the minimum-degree proposition gives sharp guarantees for a long path and a long cycle.
+
+3.3Cut-edges and cut-vertices
+
+The following notions record single points of failure.
+
+Deﬁnition 3.9. A cut-vertex or cut-edge of G is a vertex or edge whose deletion increases the
+number of components. A cut-edge is also called a bridge.
+
+The following proposition relates connectivity to cycles.
+
+Proposition 3.10. If e is an edge of a connected graph G, then G −e is connected if and only if e
+belongs to a cycle in G.
+
+Proof. Suppose that e ⇤xy 2 E(G). If G −e is connected, then an x, y-path in G −e, together
+with e, forms a cycle.
+
+Conversely, suppose that e belongs to a cycle C. Choose u, v 2 V(G) and a u, v-path P in
+G. If P avoids e, then P ✓G −e. Otherwise, assume that u, x, y, v occur in this order on P.
+Concatenating the u, x-subpath of P, the x, y-path C −e, and the y, v-subpath of P gives a
+u, v-walk in G −e. Hence G −e is connected.
+⇤
+
+The same idea describes what happens when an edge is added to a graph that need not be
+connected.
+
+4.5. Trees and forests
+•
+22
+
+Proposition 3.11. Let x and y be distinct nonadjacent vertices of a graph H. Then H + xy has
+a cycle through xy if and only if x and y lie in the same component of H. Consequently, if x
+and y lie in diﬀerent components, then adding xy creates no cycle and decreases the number of
+components by one; otherwise the number of components is unchanged.
+
+Proof. Deleting xy from a cycle through xy leaves an x, y-path in H. Conversely, an x, y-path
+in H together with xy is such a cycle. Every other cycle of H + xy is already a cycle of H. If x
+and y lie in diﬀerent components Cx and Cy, then the components of H + xy are Cx [ Cy + xy
+and the other components of H; otherwise the new edge lies inside one component and the
+vertex sets of the components do not change.
+⇤
+
+3.4Trees and forests
+
+Proposition 3.12. A graph with n vertices and m edges has at least n −m components.
+
+Proof. Start with the edgeless graph on the same vertex set and add the m edges one at a
+time. Initially there are n components, and by Proposition 3.11 each added edge decreases the
+number of components by at most one. At least n −m components remain.
+⇤
+
+Thus every connected n-vertex graph has at least n −1 edges. Equality is attained by the
+path Pn and by the star K1,n−1. We now characterize all equality cases.
+
+Deﬁnition 3.13. A forest is an acyclic graph, and a tree is a connected forest. A spanning tree
+of a graph is a spanning subgraph that is a tree.
+
+A vertex of degree 1 is a leaf; a vertex of degree 0 is isolated. A tree is nontrivial if it has at
+least two vertices.
+
+Proposition 3.14.
+1. Every nontrivial tree has at least two leaves.
+
+2. Deletion of a leaf from a tree yields a tree with one fewer vertex.
+
+3. Every n-vertex tree has n −1 edges.
+
+Proof. Let G be a nontrivial tree. Since G is connected, it has no isolated vertices.
+
+Let P be a maximal path. If an endpoint u of P had degree at least two, then an edge
+incident with u other than the edge of P would join u to another vertex of P; this would create
+a cycle. Thus both endpoints of P are leaves.
+
+A leaf cannot be a cut-vertex: deleting it leaves every path between the other vertices intact.
+Deleting a vertex cannot create a cycle, so deleting a leaf from a tree leaves a connected acyclic
+graph, hence a tree.
+
+Build the tree from n isolated vertices by adding its edges. No added edge lies in a cycle,
+so by Proposition 3.11 its endpoints lie in diﬀerent components when it is added, and each
+added edge reduces the number of components by exactly one. Reducing n components to
+one takes n −1 edges.
+⇤
