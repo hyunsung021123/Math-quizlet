@@ -27,48 +27,6 @@
       "section:1": true,
       "section:2": true,
       "section:3": true
-    },
-    "2_basic_concepts": {
-      "section:0": true,
-      "section:1": true,
-      "section:2": true,
-      "section:3": true
-    },
-    "1_course_overview": {
-      "section:0": true
-    },
-    "3_connections_in_graphs": {
-      "section:0": true
-    },
-    "4_graph_search_algorithms": {
-      "section:0": true
-    },
-    "5_matchings": {
-      "section:0": true,
-      "section:1": true
-    },
-    "6_connectivity_and_cycles": {
-      "section:0": true,
-      "section:1": true,
-      "section:2": true,
-      "section:3": true
-    },
-    "1_affine_varieties": {
-      "section:0": true,
-      "section:1": true,
-      "section:3": true,
-      "section:2": true,
-      "section:4": true
-    },
-    "2_functions_on_affine_varieties": {
-      "section:0": true,
-      "section:1": true,
-      "section:2": true
-    },
-    "3_projective_varieties": {
-      "section:0": true,
-      "section:1": true,
-      "section:2": true
     }
   },
   "lastPos": {
@@ -79,5 +37,5 @@
     },
     "cardIndex": 0
   },
-  "updatedAt": "2026-10-11T10:45:58.902Z"
+  "updatedAt": "2026-10-13T10:09:44.024Z"
 }
