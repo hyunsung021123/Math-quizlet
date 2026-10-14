@@ -41,16 +41,17 @@
       "section:0": true,
       "section:1": true,
       "section:2": true,
-      "section:3": true
+      "section:3": true,
+      "section:4": true
     }
   },
   "lastPos": {
     "topicId": "3_connections_in_graphs",
     "view": {
       "type": "section",
-      "index": 4
+      "index": 5
     },
-    "cardIndex": 10
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-14T14:36:29.329Z"
+  "updatedAt": "2026-10-14T14:40:12.362Z"
 }
