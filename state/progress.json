@@ -42,16 +42,17 @@
       "section:1": true,
       "section:2": true,
       "section:3": true,
-      "section:4": true
+      "section:4": true,
+      "section:5": true
     }
   },
   "lastPos": {
-    "topicId": "3_connections_in_graphs",
+    "topicId": "4_graph_search_algorithms",
     "view": {
       "type": "section",
-      "index": 5
+      "index": 0
     },
-    "cardIndex": 10
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-14T16:05:46.612Z"
+  "updatedAt": "2026-10-14T16:13:54.482Z"
 }
