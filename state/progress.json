@@ -47,15 +47,18 @@
     },
     "4_graph_search_algorithms": {
       "section:0": true
+    },
+    "5_matchings": {
+      "section:0": true
     }
   },
   "lastPos": {
     "topicId": "5_matchings",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 1
     },
-    "cardIndex": 17
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-14T19:45:56.806Z"
+  "updatedAt": "2026-10-14T19:46:12.760Z"
 }
