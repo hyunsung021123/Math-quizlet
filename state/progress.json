@@ -44,15 +44,18 @@
       "section:3": true,
       "section:4": true,
       "section:5": true
+    },
+    "4_graph_search_algorithms": {
+      "section:0": true
     }
   },
   "lastPos": {
     "topicId": "4_graph_search_algorithms",
     "view": {
       "type": "section",
-      "index": 0
+      "index": 1
     },
-    "cardIndex": 11
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-14T16:43:05.061Z"
+  "updatedAt": "2026-10-14T16:43:25.336Z"
 }
