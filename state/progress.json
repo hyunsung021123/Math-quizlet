@@ -60,12 +60,12 @@
     }
   },
   "lastPos": {
-    "topicId": "6_connectivity_and_cycles",
+    "topicId": "7_colorings",
     "view": {
       "type": "section",
-      "index": 4
+      "index": 0
     },
-    "cardIndex": 0
+    "cardIndex": 1
   },
-  "updatedAt": "2026-10-15T06:19:55.258Z"
+  "updatedAt": "2026-10-15T06:20:06.432Z"
 }
