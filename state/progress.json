@@ -54,16 +54,17 @@
       "section:2": true
     },
     "6_connectivity_and_cycles": {
-      "section:0": true
+      "section:0": true,
+      "section:1": true
     }
   },
   "lastPos": {
     "topicId": "6_connectivity_and_cycles",
     "view": {
       "type": "section",
-      "index": 1
+      "index": 2
     },
-    "cardIndex": 14
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-15T06:02:14.173Z"
+  "updatedAt": "2026-10-15T06:02:23.408Z"
 }
