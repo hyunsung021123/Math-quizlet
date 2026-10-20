@@ -57,7 +57,8 @@
       "section:0": true,
       "section:1": true,
       "section:2": true,
-      "section:3": true
+      "section:3": true,
+      "section:4": true
     },
     "7_colorings": {
       "section:0": true,
@@ -74,9 +75,9 @@
     "topicId": "6_connectivity_and_cycles",
     "view": {
       "type": "section",
-      "index": 4
+      "index": 5
     },
-    "cardIndex": 6
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-20T18:56:40.405Z"
+  "updatedAt": "2026-10-20T18:56:57.082Z"
 }
