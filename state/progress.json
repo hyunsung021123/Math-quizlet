@@ -68,16 +68,17 @@
       "section:5": true,
       "section:6": true,
       "section:7": true,
-      "section:8": true
+      "section:8": true,
+      "section:9": true
     }
   },
   "lastPos": {
     "topicId": "7_colorings",
     "view": {
       "type": "section",
-      "index": 9
+      "index": 4
     },
-    "cardIndex": 12
+    "cardIndex": 0
   },
-  "updatedAt": "2026-10-20T19:30:45.261Z"
+  "updatedAt": "2026-10-20T19:31:37.054Z"
 }
